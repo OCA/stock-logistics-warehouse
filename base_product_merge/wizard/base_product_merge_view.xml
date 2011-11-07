@@ -25,7 +25,7 @@
             <field name="target">new</field>
         </record>
 
-        <record id="action_base_product_merge_form" model="ir.values">
+        <record id="ir_val_base_product_merge_form" model="ir.values">
             <field name="model_id" ref="product.model_product_product" />
             <field name="object" eval="1" />
             <field name="name">Merge Products</field>
