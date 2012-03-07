@@ -1,0 +1,143 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_move_location
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-12-19 10:48+0000\n"
+"PO-Revision-Date: 2011-12-19 10:48+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_move_location
+#: field:stock.inventory,location_id:0
+msgid "Location"
+msgstr "Stockage"
+
+#. module: stock_move_location
+#: view:stock.inventory:0
+msgid "Start Acquisition"
+msgstr "Demarrer la saisie"
+
+#. module: stock_move_location
+#: view:stock.inventory:0
+msgid "Get Stock"
+msgstr "Remplir"
+
+#. module: stock_move_location
+#: view:stock.inventory:0
+msgid "Validate Move"
+msgstr "Valider le transfert"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_fill_inventory
+msgid "Import Inventory"
+msgstr "Importer un inventaire"
+
+#. module: stock_move_location
+#: code:addons/stock_move_location/stock.py:54
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: stock_move_location
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'affecter un lot qui n'est pas pour le bon produit."
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_move
+msgid "Stock Move"
+msgstr "Transfert de Stock à Stock"
+
+#. module: stock_move_location
+#: model:ir.module.module,description:stock_move_location.module_meta_information
+msgid " This module allows to move all stock in a stock location to an other one "
+msgstr " Ce module permet de déplacer tout le stock situé dans un ou plusieurs emplacement vers un autre emplacement "
+
+#. module: stock_move_location
+#: field:stock.inventory,location_dest_id:0
+msgid "Destination Location"
+msgstr "Emplacement de destination"
+
+#. module: stock_move_location
+#: model:ir.actions.act_window,name:stock_move_location.action_move_stock_form
+#: model:ir.ui.menu,name:stock_move_location.menu_action_move_stock_form
+msgid "Move stock"
+msgstr "Transfert de Stock à Stock"
+
+#. module: stock_move_location
+#: code:addons/stock_move_location/stock.py:70
+#, python-format
+msgid "Move"
+msgstr "Transfert"
+
+#. module: stock_move_location
+#: view:stock.inventory:0
+msgid "Confirm Inventory"
+msgstr "Confirmer l'inventaire"
+
+#. module: stock_move_location
+#: field:stock.inventory,comments:0
+msgid "Comments"
+msgstr "Commentaires"
+
+#. module: stock_move_location
+#: constraint:stock.move:0
+msgid "You must assign a production lot for this product"
+msgstr "Vous devez affecter un lot de fabrication pour ce produit."
+
+#. module: stock_move_location
+#: selection:stock.inventory,type:0
+msgid "Location Move"
+msgstr "Transfert de Stock à Stock"
+
+#. module: stock_move_location
+#: view:stock.inventory:0
+msgid "Move Stock"
+msgstr "Transfert de Stock à Stock"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_inventory
+#: selection:stock.inventory,type:0
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: stock_move_location
+#: code:addons/stock_move_location/stock.py:54
+#, python-format
+msgid "Please inform the destination of your move"
+msgstr "S'il vous plaît informer la destination de votre transfert"
+
+#. module: stock_move_location
+#: code:addons/stock_move_location/stock.py:70
+#, python-format
+msgid "is done."
+msgstr "est fait."
+
+#. module: stock_move_location
+#: field:stock.inventory,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: stock_move_location
+#: model:ir.module.module,shortdesc:stock_move_location.module_meta_information
+msgid "Move Stock Location"
+msgstr "Tranfert de stock à stock"
+
+#. module: stock_move_location
+#: model:ir.actions.act_window,help:stock_move_location.action_move_stock_form
+msgid "You can use this to move a stock from a location to an other one."
+msgstr "Vous pouvez l'utiliser pour passer d'un stockage vers un autre."
+
+#. module: stock_move_location
+#: field:stock.move,pack_history_id:0
+msgid "History pack"
+msgstr "Historique du colis"
+
