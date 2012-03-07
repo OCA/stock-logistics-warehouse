@@ -1,0 +1,279 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_tracking_extended
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-12-19 10:42+0000\n"
+"PO-Revision-Date: 2011-12-19 10:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_stock_production_lot
+msgid "Production lot"
+msgstr "Numéro de série"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_product_stock_tracking
+msgid "product.stock.tracking"
+msgstr "product.stock.tracking"
+
+#. module: stock_tracking_extended
+#: field:product.ul,capacity_index:0
+msgid "Capacity index"
+msgstr "Indice de capacité"
+
+#. module: stock_tracking_extended
+#: constraint:stock.move:0
+msgid "You must assign a production lot for this product"
+msgstr "Vous devez affecter un numéro de série pour ce produit."
+
+#. module: stock_tracking_extended
+#: field:stock.tracking,state:0
+msgid "State"
+msgstr "Etat"
+
+#. module: stock_tracking_extended
+#: field:stock.production.lot,tracking_id:0
+msgid "pack"
+msgstr "Pack"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking,location_id:0
+msgid "Location"
+msgstr "Emplacement"
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+msgid "Serial Code"
+msgstr "Numéro de série"
+
+#. module: stock_tracking_extended
+#: sql_constraint:stock.production.lot:0
+msgid "The combination of serial number and internal reference must be unique !"
+msgstr "La combinaison du numéro de série et de la référence interne doit être unique !"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking.history,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: stock_tracking_extended
+#: code:addons/stock_tracking_extended/stock_tracking.py:118
+#, python-format
+msgid "You can't re-open this pack because there is at least one not closed child"
+msgstr "Vous ne pouvez pas rouvrir ce pack parce qu'il y a au moins un pack enfant non fermé"
+
+#. module: stock_tracking_extended
+#: field:product.stock.tracking,product_id:0
+#: field:serial.stock.tracking,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_product_category
+msgid "Product Category"
+msgstr "Catégorie de produits"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking,parent_id:0
+msgid "Parent"
+msgstr "Parent"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_stock_tracking
+msgid "Packs"
+msgstr "Packs"
+
+#. module: stock_tracking_extended
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'affecter un lot qui appartient à une autre référence."
+
+#. module: stock_tracking_extended
+#: constraint:stock.tracking:0
+msgid "Bad parent type selection. Please try again."
+msgstr "Mauvais choix du type parent. Veuillez ressayez à nouveau."
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+msgid "Reset Open"
+msgstr "Réouvrir"
+
+#. module: stock_tracking_extended
+#: field:product.stock.tracking,quantity:0
+#: field:serial.stock.tracking,quantity:0
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: stock_tracking_extended
+#: code:addons/stock_tracking_extended/stock_tracking.py:113
+#: code:addons/stock_tracking_extended/stock_tracking.py:118
+#: code:addons/stock_tracking_extended/stock_tracking.py:131
+#, python-format
+msgid "Not allowed !"
+msgstr "Non autorisé !"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking,current_move_ids:0
+msgid "Current moves"
+msgstr "Mouvements actuels"
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+#: field:stock.tracking,history_ids:0
+#: view:stock.tracking.history:0
+msgid "History"
+msgstr "Historique"
+
+#. module: stock_tracking_extended
+#: model:ir.module.module,description:stock_tracking_extended.module_meta_information
+msgid " This Module allows to have parent/child packaging "
+msgstr " Ce module permet d'avoir des packs parent/enfant "
+
+#. module: stock_tracking_extended
+#: field:product.category,tracked:0
+msgid "Need a serial code ?"
+msgstr "Suivre les numéros de série ?"
+
+#. module: stock_tracking_extended
+#: field:product.stock.tracking,tracking_id:0
+#: field:serial.stock.tracking,tracking_id:0
+msgid "Tracking"
+msgstr "Suivi"
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+msgid "Downstream traceability"
+msgstr "Traçabilité aval"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking,ul_id:0
+msgid "Logistic unit"
+msgstr "Unité logistique"
+
+#. module: stock_tracking_extended
+#: model:ir.actions.act_window,name:stock_tracking_extended.action_stock_tracking_tree
+#: model:ir.ui.menu,name:stock_tracking_extended.menu_action_stock_tracking_tree
+msgid "Packs Structure"
+msgstr "Structure de Packs"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking,child_serial_ids:0
+msgid "Child Serials"
+msgstr "Numéros de séries enfant"
+
+#. module: stock_tracking_extended
+#: code:addons/stock_tracking_extended/stock_tracking.py:131
+#, python-format
+msgid "You can't close this pack because there is at least one not closed child"
+msgstr "Vous ne pouvez pas fermer ce pack parce qu'il y a au moins un enfant non fermé"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_stock_tracking_history
+msgid "stock.tracking.history"
+msgstr "stock.tracking.history"
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+msgid "Update product list"
+msgstr "MàJ de la liste de produit"
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+msgid "Child Packs"
+msgstr "Packs enfants"
+
+#. module: stock_tracking_extended
+#: view:product.stock.tracking:0
+#: view:serial.stock.tracking:0
+#: view:stock.tracking:0
+#: field:stock.tracking,product_ids:0
+#: field:stock.tracking,serial_ids:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+msgid "Update Serial list"
+msgstr "MàJ de la liste des NS"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking.history,tracking_id:0
+msgid "Pack"
+msgstr "Pack"
+
+#. module: stock_tracking_extended
+#: model:ir.module.module,shortdesc:stock_tracking_extended.module_meta_information
+msgid "Stock Packaging extended"
+msgstr "Gestion des packs étendu"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking,child_product_ids:0
+msgid "Child Products"
+msgstr "Produits enfants"
+
+#. module: stock_tracking_extended
+#: constraint:product.category:0
+msgid "Error ! You can not create recursive categories."
+msgstr "Erreur ! Vous ne pouvez pas créer de catégories récursives"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_product_ul
+msgid "Shipping Unit"
+msgstr "Unité de livraison"
+
+#. module: stock_tracking_extended
+#: code:addons/stock_tracking_extended/stock_tracking.py:113
+#, python-format
+msgid "You can't re-open this pack because the parent pack is close"
+msgstr "Vous ne pouvez pas ré-ouvrir ce pack, car le pack parent est fermé"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_serial_stock_tracking
+msgid "serial.stock.tracking"
+msgstr "serial.stock.tracking"
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+#: selection:stock.tracking,state:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: stock_tracking_extended
+#: field:serial.stock.tracking,serial_id:0
+msgid "Serial"
+msgstr "Série"
+
+#. module: stock_tracking_extended
+#: view:stock.tracking:0
+msgid "Stock Moves"
+msgstr "Mouvements de stocks"
+
+#. module: stock_tracking_extended
+#: selection:stock.tracking,state:0
+msgid "Open"
+msgstr "Ouvert"
+
+#. module: stock_tracking_extended
+#: field:stock.tracking,child_ids:0
+msgid "Children"
+msgstr "Enfant"
+
+#. module: stock_tracking_extended
+#: model:ir.model,name:stock_tracking_extended.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventaire"
+

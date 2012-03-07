@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="stock.act_hold" model="workflow.activity">
+            <field name="wkf_id" ref="stock.wkf_picking"/>
+            <field name="name">on_hold</field>
+            <field name="kind">function</field>
+            <field name="action">action_on_hold()</field>
+        </record>
+
+        <record id="stock.trans_draft_hold" model="workflow.transition">
+            <field name="act_from" ref="stock.act_draft"/>
+            <field name="act_to" ref="stock.act_hold"/>
+            <field name="signal">button_on_hold</field>
+        </record>
+        <record id="stock.trans_confirmed_hold" model="workflow.transition">
+            <field name="act_from" ref="stock.act_confirmed"/>
+            <field name="act_to" ref="stock.act_hold"/>
+            <field name="signal">button_on_hold</field>
+        </record>
+        <record id="stock.trans_assigned_hold" model="workflow.transition">
+            <field name="act_from" ref="stock.act_assigned"/>
+            <field name="act_to" ref="stock.act_hold"/>
+            <field name="signal">button_on_hold</field>
+        </record>
+
+        <record id="stock.act_unhold" model="workflow.activity">
+            <field name="wkf_id" ref="stock.wkf_picking"/>
+            <field name="name">unhold</field>
+            <field name="kind">function</field>
+            <field name="action">action_hold_to_confirm()</field>
+        </record>
+
+        <record id="stock.act_wait_bill" model="workflow.activity">
+            <field name="wkf_id" ref="stock.wkf_picking"/>
+            <field name="name">unbilled</field>
+            <field name="kind">function</field>
+            <field name="action">action_confirm_waiting_bill()</field>
+        </record>
+
+        <record id="stock.act_wait_bill_paid" model="workflow.activity">
+            <field name="wkf_id" ref="stock.wkf_picking"/>
+            <field name="name">unpaid</field>
+            <field name="kind">function</field>
+            <field name="action">action_waiting_bill_to_unpaid()</field>
+        </record>
+        
+        <record id="stock.trans_hold_confirm" model="workflow.transition">
+            <field name="act_from" ref="stock.act_hold"/>
+            <field name="act_to" ref="stock.act_unhold"/>
+            <field name="signal">button_unhold</field>
+        </record>
+        
+        <record id="stock.trans_unhold_assigned" model="workflow.transition">
+            <field name="act_from" ref="stock.act_unhold"/>
+            <field name="act_to" ref="stock.act_assigned"/>
+            <field name="condition">test_assigned()</field>
+        </record>
+        
+        <record id="stock.trans_unhold_confirmed" model="workflow.transition">
+            <field name="act_from" ref="stock.act_unhold"/>
+            <field name="act_to" ref="stock.act_confirmed"/>
+        </record>
+        
+        <record id="stock.trans_confirmed_wait_bill" model="workflow.transition">
+            <field name="act_from" ref="stock.act_confirmed"/>
+            <field name="act_to" ref="stock.act_wait_bill"/>
+            <field name="condition">test_billed()</field>
+        </record>
+        
+        <record id="stock.trans_confirmed_wait_bill_paid" model="workflow.transition">
+            <field name="act_from" ref="stock.act_wait_bill"/>
+            <field name="act_to" ref="stock.act_wait_bill_paid"/>
+            <field name="condition">test_bill_and_paid()</field>
+        </record>
+        
+        <record id="stock.trans_wait_bill_paid_wait_bill" model="workflow.transition">
+            <field name="act_from" ref="stock.act_wait_bill_paid"/>
+            <field name="act_to" ref="stock.act_wait_bill"/>
+            <field name="condition">not test_bill_and_paid()</field>
+        </record>
+        
+        <record id="stock.trans_paid_assigned" model="workflow.transition">
+            <field name="act_from" ref="stock.act_wait_bill_paid"/>
+            <field name="act_to" ref="stock.act_assigned"/>
+            <field name="condition">test_paid()</field>
+        </record>
+        
+        <record id="stock.trans_unhold_cancel" model="workflow.transition">
+            <field name="act_from" ref="stock.act_unhold"/>
+            <field name="act_to" ref="stock.act_cancel"/>
+            <field name="condition">allow_cancel()</field>
+            <field name="signal">button_cancel</field>
+        </record>
+        <record id="stock.trans_unhold_cancel_auto" model="workflow.transition">
+            <field name="act_from" ref="stock.act_unhold"/>
+            <field name="act_to" ref="stock.act_cancel"/>
+            <field name="condition">test_cancel()</field>
+        </record>
+        
+    </data>
+</openerp>

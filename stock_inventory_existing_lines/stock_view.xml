@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<record id="stock_inventory_line2_tree" model="ir.ui.view">
+			<field name="name">stock.inventory.line2.tree</field>
+			<field name="model">stock.inventory.line2</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Stock Inventory Lines">
+					<field name="product_id"/>
+					<field name="product_qty"/>
+					<field name="product_uom"/>
+					<field name="prod_lot_id" groups="base.group_extended"/>
+					<field name="location_id"/>
+				</tree>
+			</field>
+		</record>
+		<record id="view_inventory_line2_form" model="ir.ui.view">
+			<field name="name">stock.inventory.line2.form</field>
+			<field name="model">stock.inventory.line2</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Stock Inventory Lines">
+					<field context="location=location_id,uom=product_uom,to_date=parent.date" name="product_id" on_change="on_change_product_id(location_id,product_id,product_uom,parent.date)" select="1" domain="[('type','&lt;&gt;','service')]"/>
+					<field name="product_qty"/>
+					<field name="product_uom"/>
+					<field name="prod_lot_id" groups="base.group_extended"/>
+					<field colspan="4" domain="[('usage','=','internal')]" name="location_id" select="1"/>
+				</form>
+			</field>
+		</record>
+        
+		<record id="view_inventory_form" model="ir.ui.view">
+			<field name="name">stock.inventory.form</field>
+			<field name="model">stock.inventory</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_inventory_form"/>
+			<field name="arch" type="xml">
+				<page string="General Informations" position="after">
+					<page string="Lines">
+						<group colspan="4" col="4">
+							<separator string="Correct lines" colspan="4"/>
+							<field name="inventory_line_id2" colspan="4" nolabel="1"/>
+						</group>
+					</page>
+				</page>
+			</field>
+		</record>
+    </data>
+</openerp>

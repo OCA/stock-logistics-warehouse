@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_move_pack" model="ir.ui.view">
+			<field name="name">Move Pack</field>
+			<field name="model">stock.move.packaging</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Move Pack">
+					<group width="660" height="275">
+						<group colspan="4">
+							<field name="pack_id" colspan="2"/>
+							<field name="location_dest_id" colspan="2"/>
+							<button icon='gtk-cancel' special="cancel"
+								string="Cancel" />
+							<button name="move_pack" string="Move it"
+								type="object" icon="gtk-ok"/>
+						</group>
+					</group>
+				</form>
+			</field>
+		</record>
+
+	    <record id="move_pack" model="ir.actions.act_window">
+            <field name="name">Move Pack</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.move.packaging</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+	    </record>
+	    
+	    <record id="view_tracking_form_move_inherit" model="ir.ui.view">
+			<field name="name">stock.tracking.form.inherit</field>
+			<field name="model">stock.tracking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_form_inherit"/>
+			<field name="arch" type="xml">
+				<button name="set_close" position="after">
+					<button name="%(move_pack)d" states="close" string="Move pack" colspan="2" type="action" icon="gtk-ok"/>
+				</button>
+			</field>
+		</record>
+	    
+    </data>
+</openerp>

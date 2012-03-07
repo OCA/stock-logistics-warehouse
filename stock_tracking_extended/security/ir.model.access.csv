@@ -1,0 +1,10 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_product_stock_tracking_user","product.stock.tracking user","model_product_stock_tracking","stock.group_stock_user",1,1,1,1
+"access_product_stock_tracking_manager","product.stock.tracking manager","model_product_stock_tracking","stock.group_stock_manager",1,1,1,1
+"access_product_stock_tracking_all","product.stock.tracking all","model_product_stock_tracking",,1,0,0,0
+"access_serial_stock_tracking_user","serial.stock.tracking user","model_serial_stock_tracking","stock.group_stock_user",1,1,1,1
+"access_serial_stock_tracking_manager","serial.stock.tracking manager","model_serial_stock_tracking","stock.group_stock_manager",1,1,1,1
+"access_serial_stock_tracking_all","serial.stock.tracking all","model_serial_stock_tracking",,1,0,0,0
+"access_stock_tracking_history_user","serial.stock.tracking user","model_stock_tracking_history","stock.group_stock_user",1,1,1,1
+"access_stock_tracking_history_manager","serial.stock.tracking manager","model_stock_tracking_history","stock.group_stock_manager",1,1,1,1
+"access_stock_tracking_history_all","serial.stock.tracking all","model_stock_tracking_history",,1,0,0,0

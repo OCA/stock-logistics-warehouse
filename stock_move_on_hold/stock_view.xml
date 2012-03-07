@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--<record id="stock_move_tree_on_hold_inherit" model="ir.ui.view">
+            <field name="name">Stock Moves inherit</field>
+            <field name="model">stock.move</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="stock.stock_move_tree"/>
+            <field name="arch" type="xml">
+	            <button name="action_done" position="before">
+					<button name="action_hold_to_confirm" states="on_hold" string="Set to confirm" type="object" icon="gtk-media-play"/>
+	            	<button name="action_on_hold" states="confirmed,assigned" string="Hold it" type="object" icon="gtk-media-pause"/>
+	            	<button name="action_bill_available" states="on_hold_billing" string="Bill available products" type="object" icon="terp-dolar"/>
+	            </button>
+            </field>
+        </record>
+
+        <record id="view_move_search_on_hold" model="ir.ui.view">
+            <field name="name">stock.move.search.inherit</field>
+            <field name="model">stock.move</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="stock.view_move_search"/>
+            <field name="arch" type="xml">
+                <filter name="done" position="after">
+                	<filter icon="gtk-media-pause" name="on_hold" string="On Hold" domain="[('state','in',['on_hold','on_hold_billing','on_hold_paym'])]"/>
+                </filter>
+            </field>
+        </record>
+
+        <record id="view_move_tree_reception_picking_on_hold" model="ir.ui.view">
+            <field name="name">stock.move.tree2.inherit</field>
+            <field name="model">stock.move</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="stock.view_move_tree_reception_picking"/>
+            <field name="arch" type="xml">
+	            <button name="action_done" position="before">
+					<button name="action_hold_to_confirm" states="on_hold" string="Set to confirm" type="object" icon="gtk-media-play"/>
+	            	<button name="action_on_hold" states="confirmed,assigned" string="Hold it" type="object" icon="gtk-media-pause"/>
+	            	<button name="action_bill_available" states="on_hold_billing" string="Bill available products" type="object" icon="terp-dolar"/>
+	            </button>
+            </field>
+        </record>
+        
+       <record id="view_move_tree_reception_picking_board_on_hold" model="ir.ui.view">
+            <field name="name">stock.move.tree3</field>
+            <field name="model">stock.move</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="stock.view_move_tree_reception_picking_board"/>
+            <field name="arch" type="xml">
+	            <button name="action_done" position="before">
+					<button name="action_hold_to_confirm" states="on_hold" string="Set to confirm" type="object" icon="gtk-media-play"/>
+	            	<button name="action_on_hold" states="confirmed,assigned" string="Hold it" type="object" icon="gtk-media-pause"/>
+	            	<button name="action_bill_available" states="on_hold_billing" string="Bill available products" type="object" icon="terp-dolar"/>
+	            </button>
+            </field>
+        </record>
+
+		<record id="view_move_form_reception_picking_on_hold" model="ir.ui.view">
+			<field name="name">stock.move.form2.inherit</field>
+			<field name="model">stock.move</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_move_form_reception_picking"/>
+			<field name="arch" type="xml">
+				<button name="action_done" position="before">
+					<button name="action_hold_to_confirm" states="on_hold" string="Set to confirm" type="object" icon="gtk-media-play"/>
+					<button name="action_on_hold" states="confirmed,assigned" string="Hold it" type="object" icon="gtk-media-pause"/>
+	            	<button name="action_bill_available" states="on_hold_billing" string="Bill available products" type="object" icon="terp-dolar"/>
+				</button>
+			</field>
+		</record>-->
+
+        <record id="view_move_search_reception_outcoming_picking_on_hold" model="ir.ui.view">
+            <field name="name">stock.move.outgoing.search2.inherit</field>
+            <field name="model">stock.move</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="stock.view_move_search_reception_outcoming_picking"/>
+            <field name="arch" type="xml">
+                <filter name="available" position="after">
+                	<filter icon="gtk-media-pause" name="on_hold" string="On Hold" domain="[('state','in',['on_hold','on_hold_billing','on_hold_paym'])]"/>
+                </filter>
+            </field>
+        </record>
+        
+        <record id="view_picking_out_form_on_hold" model="ir.ui.view">
+            <field name="name">stock.picking.out.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="stock.view_picking_out_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/form/notebook/page[@string='Products']/field[@name='move_lines']/tree/button[@name='action_done']" position="before">
+					<button name="action_cancel" states="assigned,on_hold" string="Cancel" type="object" icon="gtk-cancel"/>
+					<!--<button name="action_on_hold" states="confirmed,assigned" string="Hold it" type="object" icon="gtk-media-pause"/>
+					<button name="action_hold_to_confirm" states="on_hold" string="Set to confirm" type="object" icon="gtk-media-play"/>-->
+	            	<!--<button name="action_bill_available" states="on_hold_billing" string="Bill available products" type="object" icon="terp-dolar"/>-->
+				</xpath>
+            	<xpath expr="/form/notebook/page[@string='Products']/field[@name='move_lines']/form/group/button[@name='action_cancel']" position="replace">
+					<!--<button name="action_cancel" states="assigned,on_hold" string="Cancel" type="object" icon="gtk-cancel"/>
+					<button name="action_hold_to_confirm" states="on_hold" string="Set to confirm" type="object" icon="gtk-media-play"/>-->
+	            	<!--<button name="action_bill_available" states="on_hold_billing" string="Bill available products" type="object" icon="terp-dolar"/>-->
+				</xpath>
+                <button name="button_cancel" position="replace">
+                    <button name="button_cancel" states="assigned,confirmed,draft,on_hold,on_hold_billing,on_hold_paym" string="_Cancel" icon="gtk-cancel"/>
+					<button name="action_hold_to_confirm" states="on_hold" string="Set to confirm" type="object" icon="gtk-media-play"/>
+					<button name="action_on_hold" states="confirmed,assigned" string="Hold it" type="object" icon="gtk-media-pause"/>
+                    <button name="%(stock.action_stock_invoice_before_shipping)d" states="on_hold_billing" string="Bill Available Products" type="action" icon="terp-dolar" context="{'before_shipping':True}"/>
+                </button>
+                <button name="action_assign" position="replace">
+					<button name="action_assign" states="confirmed,on_hold_billing,on_hold_paym,assigned" string="Check Availability" type="object" icon="gtk-find"/>
+                </button>
+			</field>
+        </record>
+        
+        <record id="view_stock_picking_filter_on_hold" model="ir.ui.view">
+            <field name="name">stock.picking.list.select.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="stock.view_stock_picking_filter"/>
+            <field name="arch" type="xml">
+            	<filter name="available" position="after">
+            		<filter icon="gtk-media-pause" name="on_hold" string="On Hold" domain="[('state','in',['on_hold','on_hold_billing','on_hold_paym'])]" help="On Hold Pickings"/>
+            	</filter>
+            </field>
+        </record>
+        
+        <record id="view_picking_out_search_on_hold" model="ir.ui.view">
+            <field name="name">stock.picking.out.search.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="stock.view_picking_out_search"/>
+            <field name="arch" type="xml">
+            	<filter name="available" position="after">
+            		<filter icon="gtk-media-pause" name="on_hold" string="On Hold" domain="[('state','in',['on_hold','on_hold_billing','on_hold_paym'])]" help="On Hold Pickings"/>
+            	</filter>
+            </field>
+        </record>
+
+    </data>
+</openerp>

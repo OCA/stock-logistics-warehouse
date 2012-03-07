@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_pack_add_move" model="ir.ui.view">
+			<field name="name">Add object</field>
+			<field name="model">stock.packaging.move</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Add Move">
+					<group width="400" height="100">
+						<group colspan="4">
+							<field name="reference" colspan="2"/>
+							<field name="pack_id" colspan="2" invisible="1"/>
+							<newline/>
+							<separator string="Add Move" colspan="4"/>
+							<button icon='gtk-cancel' special="cancel"
+								string="Cancel" />
+							<button name="add_move" string="Add Move"
+								type="object" icon="gtk-ok"/>
+						</group>
+					</group>
+				</form>
+			</field>
+		</record>
+
+	    <record id="pack_add_move" model="ir.actions.act_window">
+            <field name="name">Add object</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.packaging.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pack_add_move"/>
+            <field name="target">new</field>
+	    </record>
+	    
+		<record id="view_pack_remove_move" model="ir.ui.view">
+			<field name="name">Remove object</field>
+			<field name="model">stock.packaging.move</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Remove Move">
+					<group width="400" height="100">
+						<group colspan="4">
+							<field name="reference" colspan="2"/>
+							<newline/>
+							<separator string="Remove Move" colspan="4"/>
+							<button icon='gtk-cancel' special="cancel"
+								string="Cancel" />
+							<button name="remove_move" string="Remove Move"
+								type="object" icon="gtk-ok"/>
+						</group>
+					</group>
+				</form>
+			</field>
+		</record>
+
+	    <record id="pack_remove_move" model="ir.actions.act_window">
+            <field name="name">Remove object</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.packaging.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pack_remove_move"/>
+            <field name="target">new</field>
+	    </record>
+	    
+	    <record id="view_tracking_form_inherit" model="ir.ui.view">
+			<field name="name">stock.tracking.form.inherit</field>
+			<field name="model">stock.tracking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock_tracking_extended.view_tracking_form_inherit"/>
+			<field name="arch" type="xml">
+				<button name="reset_open" position="after">
+					<button name="%(pack_add_move)d" states="open" string="Add object" colspan="2" type="action" icon="gtk-ok"/>
+					<button name="%(pack_remove_move)d" states="open" string="Remove object" colspan="2" type="action" icon="gtk-ok"/>
+				</button>
+			</field>
+		</record>
+	    
+    </data>
+</openerp>
