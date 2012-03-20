@@ -298,6 +298,7 @@ class stock_move(osv.osv):
         return super(stock_move,self).create(cr, uid, vals, context)
     
 stock_move()
+
 class split_in_production_lot(osv.osv_memory):
     _inherit = "stock.move.split"
     _columns = {

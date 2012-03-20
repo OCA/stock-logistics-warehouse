@@ -66,33 +66,34 @@ class stock_move_packaging(osv.osv_memory):
                 pick_type = 'in'
             elif type == 'customer':
                 pick_type = 'out'
-                
+            date = time.strftime('%Y-%m-%d %H:%M:%S'),
             pick_id = picking_obj.create(cr, uid, {
-                                    'type': pick_type,
-                                    'auto_picking': 'draft',
-                                    'company_id': self.pool.get('res.company')._company_default_get(cr, uid, 'stock.company', context=context),
-                                    'address_id': obj.location_dest_id.address_id and obj.location_dest_id.address_id.id or False,
-                                    'invoice_state': 'none',
-                                    'date': time.strftime('%Y-%m-%d %H:%M:%S'),
-                                    'state': 'done',
-                                })
+                    'type': pick_type,
+                    'auto_picking': 'draft',
+                    'company_id': self.pool.get('res.company')._company_default_get(cr, uid, 'stock.company', context=context),
+                    'address_id': obj.location_dest_id.address_id and obj.location_dest_id.address_id.id or False,
+                    'invoice_state': 'none',
+                    'date': date,
+                    'state': 'done',
+                })
                         
             child_packs = tracking_obj.hierarchy_ids(pack)
             for child_pack in child_packs:
                 hist_id = history_obj.create(cr, uid, {
-                                               'tracking_id': child_pack.id,
-                                               'type': 'move',
-                                               'location_id': child_pack.location_id.id,
-                                               'location_dest_id': obj.location_dest_id.id,
-                                                       })
-                
-    
+                       'tracking_id': child_pack.id,
+                       'type': 'move',
+                       'location_id': child_pack.location_id.id,
+                       'location_dest_id': obj.location_dest_id.id,
+                   })
                 
                 for move in child_pack.current_move_ids:
                     defaults = {
                         'location_id': move.location_dest_id.id,
                         'location_dest_id': obj.location_dest_id.id,
                         'picking_id': pick_id,
+                        'state': 'done',
+                        'date': date,
+                        'date_expected': date,
                     }
                     new_id = move_obj.copy(cr, uid, move.id, default=defaults, context=context)
                     move_obj.write(cr, uid, [move.id], {'pack_history_id': hist_id, 'move_dest_id': new_id})
