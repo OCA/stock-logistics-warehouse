@@ -19,12 +19,12 @@ msgstr ""
 #: code:addons/stock_move_packaging/wizard/move_pack.py:58
 #, python-format
 msgid "You cannot move this pack because there is a none closed pack inside of it: %s."
-msgstr "Vous ne pouvez pas déplacer ce pack car il y a un pack non fermé à l'intérieur de celui-ci: %s."
+msgstr "Vous ne pouvez pas déplacer ce colis car il y a un pack non fermé à l'intérieur de celui-ci: %s."
 
 #. module: stock_move_packaging
 #: field:stock.move.packaging,pack_id:0
 msgid "Pack to move"
-msgstr "Pack à deplacer"
+msgstr "Colis à deplacer"
 
 #. module: stock_move_packaging
 #: model:ir.model,name:stock_move_packaging.model_stock_tracking_history
@@ -34,29 +34,29 @@ msgstr "stock.tracking.history"
 #. module: stock_move_packaging
 #: field:stock.tracking.history,location_id:0
 msgid "Source Location"
-msgstr "Emplacement source"
+msgstr "Stockage source"
 
 #. module: stock_move_packaging
 #: field:stock.tracking.history,location_dest_id:0
 msgid "Destination Location"
-msgstr "Emplacement de destination"
+msgstr "Stockage de destination"
 
 #. module: stock_move_packaging
 #: model:ir.module.module,description:stock_move_packaging.module_meta_information
 msgid " This module allows to move packing with a wizard "
-msgstr " Ce module permet de déplacer les packs avec un assistant "
+msgstr " Ce module permet de déplacer les colis avec un assistant "
 
 #. module: stock_move_packaging
 #: code:addons/stock_move_packaging/wizard/move_pack.py:55
 #, python-format
 msgid "You cannot move this pack because it's inside of an other pack: %s."
-msgstr "Vous ne pouvez pas déplacer ce pack, car il est à l'intérieur d'un autre pack: %s."
+msgstr "Vous ne pouvez pas déplacer ce colis, car il est à l'intérieur d'un autre colis: %s."
 
 #. module: stock_move_packaging
 #: model:ir.actions.act_window,name:stock_move_packaging.move_pack
 #: view:stock.move.packaging:0
 msgid "Move Pack"
-msgstr "Mouvement de packs"
+msgstr "Mouvement de colis"
 
 #. module: stock_move_packaging
 #: model:ir.model,name:stock_move_packaging.model_stock_move_packaging
@@ -73,7 +73,7 @@ msgstr "Attention!"
 #. module: stock_move_packaging
 #: field:stock.move.packaging,location_dest_id:0
 msgid "Destination location"
-msgstr "Emplacement de Destination"
+msgstr "Stockage de Destination"
 
 #. module: stock_move_packaging
 #: view:stock.move.packaging:0
@@ -88,10 +88,10 @@ msgstr "Déplacer"
 #. module: stock_move_packaging
 #: view:stock.tracking:0
 msgid "Move pack"
-msgstr "Déplacer le pack"
+msgstr "Déplacer le colis"
 
 #. module: stock_move_packaging
 #: model:ir.module.module,shortdesc:stock_move_packaging.module_meta_information
 msgid "Move Stock Packaging"
-msgstr "Mouvement de stocks de packs"
+msgstr "Mouvement de stocks de colis"
 

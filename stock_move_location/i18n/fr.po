@@ -18,7 +18,7 @@ msgstr ""
 #. module: stock_move_location
 #: field:stock.inventory,location_id:0
 msgid "Location"
-msgstr "Emplacement"
+msgstr "Stockage"
 
 #. module: stock_move_location
 #: view:stock.inventory:0
@@ -129,15 +129,15 @@ msgstr "Type"
 #. module: stock_move_location
 #: model:ir.module.module,shortdesc:stock_move_location.module_meta_information
 msgid "Move Stock Location"
-msgstr "Tranfert d'emplacement de stock"
+msgstr "Tranfert de stock à stock"
 
 #. module: stock_move_location
 #: model:ir.actions.act_window,help:stock_move_location.action_move_stock_form
 msgid "You can use this to move a stock from a location to an other one."
-msgstr "Vous pouvez l'utiliser pour passer d'un emplacement de stock à un autre."
+msgstr "Vous pouvez l'utiliser pour passer d'un stockage vers un autre."
 
 #. module: stock_move_location
 #: field:stock.move,pack_history_id:0
 msgid "History pack"
-msgstr "Historique du pack"
+msgstr "Historique du colis"
 

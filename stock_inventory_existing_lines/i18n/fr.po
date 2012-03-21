@@ -33,7 +33,7 @@ msgstr "stock.inventory.line2"
 #. module: stock_inventory_existing_lines
 #: field:stock.inventory.line2,state:0
 msgid "State"
-msgstr "Etat"
+msgstr "Statut"
 
 #. module: stock_inventory_existing_lines
 #: field:stock.inventory.line2,company_id:0
@@ -96,5 +96,5 @@ msgstr "Numéro de série"
 #. module: stock_inventory_existing_lines
 #: field:stock.inventory.line2,location_id:0
 msgid "Location"
-msgstr "Emplacement"
+msgstr "Stockage"
 

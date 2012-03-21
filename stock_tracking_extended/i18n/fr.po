@@ -38,17 +38,17 @@ msgstr "Vous devez affecter un numéro de série pour ce produit."
 #. module: stock_tracking_extended
 #: field:stock.tracking,state:0
 msgid "State"
-msgstr "Etat"
+msgstr "Statut"
 
 #. module: stock_tracking_extended
 #: field:stock.production.lot,tracking_id:0
 msgid "pack"
-msgstr "Pack"
+msgstr "Colis"
 
 #. module: stock_tracking_extended
 #: field:stock.tracking,location_id:0
 msgid "Location"
-msgstr "Emplacement"
+msgstr "Stockage"
 
 #. module: stock_tracking_extended
 #: view:stock.tracking:0
@@ -69,7 +69,7 @@ msgstr "Type"
 #: code:addons/stock_tracking_extended/stock_tracking.py:118
 #, python-format
 msgid "You can't re-open this pack because there is at least one not closed child"
-msgstr "Vous ne pouvez pas rouvrir ce pack parce qu'il y a au moins un pack enfant non fermé"
+msgstr "Vous ne pouvez pas ré-ouvrir ce colis parce qu'il y a au moins un colis enfant non fermé"
 
 #. module: stock_tracking_extended
 #: field:product.stock.tracking,product_id:0
@@ -90,7 +90,7 @@ msgstr "Parent"
 #. module: stock_tracking_extended
 #: model:ir.model,name:stock_tracking_extended.model_stock_tracking
 msgid "Packs"
-msgstr "Packs"
+msgstr "Colis"
 
 #. module: stock_tracking_extended
 #: constraint:stock.move:0
@@ -105,7 +105,7 @@ msgstr "Mauvais choix du type parent. Veuillez ressayez à nouveau."
 #. module: stock_tracking_extended
 #: view:stock.tracking:0
 msgid "Reset Open"
-msgstr "Réouvrir"
+msgstr "Ré-ouvrir"
 
 #. module: stock_tracking_extended
 #: field:product.stock.tracking,quantity:0
@@ -136,7 +136,7 @@ msgstr "Historique"
 #. module: stock_tracking_extended
 #: model:ir.module.module,description:stock_tracking_extended.module_meta_information
 msgid " This Module allows to have parent/child packaging "
-msgstr " Ce module permet d'avoir des packs parent/enfant "
+msgstr " Ce module permet d'avoir des colis parent/enfant "
 
 #. module: stock_tracking_extended
 #: field:product.category,tracked:0
@@ -163,18 +163,18 @@ msgstr "Unité logistique"
 #: model:ir.actions.act_window,name:stock_tracking_extended.action_stock_tracking_tree
 #: model:ir.ui.menu,name:stock_tracking_extended.menu_action_stock_tracking_tree
 msgid "Packs Structure"
-msgstr "Structure de Packs"
+msgstr "Structure de colis"
 
 #. module: stock_tracking_extended
 #: field:stock.tracking,child_serial_ids:0
 msgid "Child Serials"
-msgstr "Numéros de séries enfant"
+msgstr "Numéros de séries enfants"
 
 #. module: stock_tracking_extended
 #: code:addons/stock_tracking_extended/stock_tracking.py:131
 #, python-format
 msgid "You can't close this pack because there is at least one not closed child"
-msgstr "Vous ne pouvez pas fermer ce pack parce qu'il y a au moins un enfant non fermé"
+msgstr "Vous ne pouvez pas fermer ce colis parce qu'il y a au moins un enfant non fermé"
 
 #. module: stock_tracking_extended
 #: model:ir.model,name:stock_tracking_extended.model_stock_tracking_history
@@ -189,7 +189,7 @@ msgstr "MàJ de la liste de produit"
 #. module: stock_tracking_extended
 #: view:stock.tracking:0
 msgid "Child Packs"
-msgstr "Packs enfants"
+msgstr "Colis enfants"
 
 #. module: stock_tracking_extended
 #: view:product.stock.tracking:0
@@ -208,12 +208,12 @@ msgstr "MàJ de la liste des NS"
 #. module: stock_tracking_extended
 #: field:stock.tracking.history,tracking_id:0
 msgid "Pack"
-msgstr "Pack"
+msgstr "Colis"
 
 #. module: stock_tracking_extended
 #: model:ir.module.module,shortdesc:stock_tracking_extended.module_meta_information
 msgid "Stock Packaging extended"
-msgstr "Gestion des packs étendu"
+msgstr "Gestion des colis étendu"
 
 #. module: stock_tracking_extended
 #: model:ir.model,name:stock_tracking_extended.model_stock_move
@@ -239,7 +239,7 @@ msgstr "Unité de livraison"
 #: code:addons/stock_tracking_extended/stock_tracking.py:113
 #, python-format
 msgid "You can't re-open this pack because the parent pack is close"
-msgstr "Vous ne pouvez pas ré-ouvrir ce pack, car le pack parent est fermé"
+msgstr "Vous ne pouvez pas ré-ouvrir ce colis, car le colis parent est fermé"
 
 #. module: stock_tracking_extended
 #: model:ir.model,name:stock_tracking_extended.model_serial_stock_tracking
@@ -255,7 +255,7 @@ msgstr "Fermer"
 #. module: stock_tracking_extended
 #: field:serial.stock.tracking,serial_id:0
 msgid "Serial"
-msgstr "Série"
+msgstr "Numéro de Série"
 
 #. module: stock_tracking_extended
 #: view:stock.tracking:0

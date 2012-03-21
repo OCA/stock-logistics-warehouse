@@ -18,7 +18,7 @@ msgstr ""
 #. module: stock_tracking_reopen
 #: field:stock.tracking,previous_id:0
 msgid "Previous Pack"
-msgstr "Pack précédent"
+msgstr "Colis précédent"
 
 #. module: stock_tracking_reopen
 #: field:stock.tracking.history,previous_ref:0
@@ -28,7 +28,7 @@ msgstr "Référence précédente"
 #. module: stock_tracking_reopen
 #: model:ir.model,name:stock_tracking_reopen.model_stock_tracking
 msgid "Packs"
-msgstr "Packs"
+msgstr "Colis"
 
 #. module: stock_tracking_reopen
 #: constraint:stock.tracking:0
@@ -48,10 +48,10 @@ msgstr "Mis à jour"
 #. module: stock_tracking_reopen
 #: model:ir.module.module,shortdesc:stock_tracking_reopen.module_meta_information
 msgid "Stock tracking Re-open"
-msgstr "Réouverture de packs"
+msgstr "Réouverture de colis"
 
 #. module: stock_tracking_reopen
 #: model:ir.module.module,description:stock_tracking_reopen.module_meta_information
 msgid " This module Change reference of the packaging if it's re-open "
-msgstr " Ce module change la référence du pack si il est ré-ouvert "
+msgstr " Ce module change la référence du colis si il est ré-ouvert "
 

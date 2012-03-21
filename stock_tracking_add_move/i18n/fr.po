@@ -18,12 +18,12 @@ msgstr ""
 #. module: stock_tracking_add_move
 #: field:stock.packaging.move,pack_id:0
 msgid "Pack to move"
-msgstr "Pack à déplacer"
+msgstr "Colis à déplacer"
 
 #. module: stock_tracking_add_move
 #: model:ir.module.module,description:stock_tracking_add_move.module_meta_information
 msgid " This module add a wizard to fill in packaging "
-msgstr " Ce module ajoute un assistant pour remplir les pack "
+msgstr " Ce module ajoute un assistant pour remplir les colis "
 
 #. module: stock_tracking_add_move
 #: field:stock.scan.to.validate,type:0
@@ -48,7 +48,7 @@ msgstr "Parent"
 #. module: stock_tracking_add_move
 #: model:ir.model,name:stock_tracking_add_move.model_stock_tracking
 msgid "Packs"
-msgstr "Pack"
+msgstr "Colis"
 
 #. module: stock_tracking_add_move
 #: sql_constraint:stock.scan.to.validate:0
@@ -74,7 +74,7 @@ msgstr "A ajouter"
 #. module: stock_tracking_add_move
 #: field:stock.tracking.history,parent_id:0
 msgid "Parent pack"
-msgstr "Pack parent"
+msgstr "Colis parent"
 
 #. module: stock_tracking_add_move
 #: model:ir.actions.act_window,name:stock_tracking_add_move.pack_remove_move
