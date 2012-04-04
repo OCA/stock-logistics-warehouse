@@ -1,0 +1,2 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+stock_level_configuration,stock.level.configuration stock_manager,model_stock_level_configuration,stock.group_stock_manager,1,1,1,1

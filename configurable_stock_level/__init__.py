@@ -1,0 +1,2 @@
+from openerp.addons.configurable_stock_level import product
+from openerp.addons.configurable_stock_level import stock_level_configuration

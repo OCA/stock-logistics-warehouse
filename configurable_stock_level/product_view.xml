@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="view_normal_stock_active_qty_form">
+      <field name="name">product.normal.stock.active.qty.form.inherit.configurable</field>
+      <field name="model">product.product</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="stock.view_normal_stock_property_form"/>
+      <field name="arch" type="xml">
+        <field name="virtual_available" position="after">
+          <newline/>
+          <field name="configurable_stock_level" />
+        </field>   
+      </field>
+    </record>
+  </data>
+</openerp>
