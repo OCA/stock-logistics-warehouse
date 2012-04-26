@@ -23,7 +23,14 @@
     "name" : "Move Stock Location",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
-    "description" : """ This module allows to move all stock in a stock location to an other one """,
+    "description" : """
+
+Presentation:
+
+This module allows to move all stock in a stock location to an other one.
+And adds fields and buttons to advance in Physical Inventories.
+
+""",
     "website" : "http://www.julius.fr",
     "depends" : [
         "stock",

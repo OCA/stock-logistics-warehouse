@@ -23,7 +23,13 @@
     "name" : "Stock tracking Re-open",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
-    "description" : """ This module Change reference of the packaging if it's re-open """,
+    "description" : """
+
+Presentation:
+
+This module Change reference of the packaging if it's re-open.
+
+""",
     "website" : "http://www.julius.fr",
     "depends" : [
          "stock",
@@ -33,6 +39,7 @@
     "category" : "Customs/Stock",
     "init_xml" : [],
     "demo_xml" : [],
+    "images" : ['images/Tracking reopen.png'],
     "update_xml" : [
         'stock_view.xml',
     ],

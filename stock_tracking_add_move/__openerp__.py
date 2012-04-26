@@ -23,7 +23,15 @@
     "name" : "Stock tracking add moves",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
-    "description" : """ This module add a wizard to fill in packaging """,
+    "description" : """
+
+Presentation:
+
+This module add a wizard to fill in packaging.
+This wizard is used to add or remove an object from a package.
+Adding to the historical movements and parent objects
+
+""",
     "website" : "http://www.julius.fr",
     "depends" : [
          "stock",
@@ -33,6 +41,7 @@
     "category" : "Customs/Stock",
     "init_xml" : [],
     "demo_xml" : [],
+    "images" : ['images/Add move.png'],
     "update_xml" : [
         'wizard/add_move_view.xml',
         'stock_view.xml',

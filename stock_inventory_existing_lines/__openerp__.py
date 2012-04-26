@@ -20,11 +20,19 @@
 #################################################################################
 
 {
-    "name" : "Invetory Extended",
+    "name" : "Inventory Extended",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
-    "description" : """ This module adds a new field based on lines into the inventory
-    to know what are lines correctly in the system """,
+    "description" : """
+    
+Presentation:
+
+This module adds a new field based on lines into the inventory
+to know what are lines correctly in the system.
+
+This module adds a new tab 'Lines' in Physical Inventories with correct lines of Stock Inventory Lines.
+  
+     """,
     "website" : "http://www.julius.fr",
     "depends" : [
          "stock",
@@ -32,6 +40,7 @@
     "category" : "Customs/Stock",
     "init_xml" : [],
     "demo_xml" : [],
+    "images" : ['images/Inventory existing lines.png'],
     "update_xml" : [
         'stock_view.xml',
         "security/ir.model.access.csv",

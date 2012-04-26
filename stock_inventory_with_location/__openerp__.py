@@ -20,10 +20,16 @@
 #################################################################################
 
 {
-    "name" : "Move Invetory Extended",
+    "name" : "Move Inventory Extended",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
-    "description" : """ This module get the product real location if exists instead of inventory location """,
+    "description" : """
+
+Presentation:
+
+This module get the product real location if exists instead of inventory location.
+
+""",
     "website" : "http://www.julius.fr",
     "depends" : [
          "stock",

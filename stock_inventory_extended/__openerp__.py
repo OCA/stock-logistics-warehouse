@@ -20,11 +20,17 @@
 #################################################################################
 
 {
-    "name" : "Move Invetory Extended",
+    "name" : "Move Inventory Extended",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
-    "description" : """ This module adds a new field based on lines into the inventory
-    to get all lines pre-filled and all lines scanned """,
+    "description" : """
+
+Presentation:
+
+This module adds a new field based on lines into the inventory
+to get all lines pre-filled and all lines scanned 
+
+""",
     "website" : "http://www.julius.fr",
     "depends" : [
          "stock",
@@ -32,6 +38,7 @@
     "category" : "Customs/Stock",
     "init_xml" : [],
     "demo_xml" : [],
+    "images" : ['images/Inventory extended.png'],
     "update_xml" : [
             'stock_view.xml',
 #            'wizard/stock_fill_inventory_view.xml',

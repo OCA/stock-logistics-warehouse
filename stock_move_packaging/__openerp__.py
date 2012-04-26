@@ -23,7 +23,14 @@
     "name" : "Move Stock Packaging",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
-    "description" : """ This module allows to move packing with a wizard """,
+    "description" : """
+
+Presentation:
+
+This module allows to move packing with a wizard
+and adds fields for source location and destination location in History.
+
+""",
     "website" : "http://www.julius.fr",
     "depends" : [
                  "stock",
@@ -32,6 +39,7 @@
     "category" : "Customs/Stock",
     "init_xml" : [],
     "demo_xml" : [],
+    "images" : ['images/Move packaging.png'],
     "update_xml" : [
                     'stock_view.xml',
                     'wizard/move_pack_view.xml',
