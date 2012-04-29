@@ -280,8 +280,18 @@ stock_inventory()
 class stock_move(osv.osv):
     _inherit = 'stock.move'
     _columns = {
+         'move_ori_id': fields.many2one('stock.move', 'Origin Move', select=True),       
 #        'cancel_cascade': fields.boolean('Cancel Cascade', help='If checked, when this move is cancelled, cancel the linked move too')
     }
+    
+    def write(self, cr, uid, ids, vals, context=None):  
+        result = super(stock_move,self).write(cr, uid, ids, vals, context)
+        for id in ids:
+            state = self.browse(cr, uid, id, context).state
+            move_ori_id = self.browse(cr, uid, id, context).move_ori_id
+            if state == 'done' and move_ori_id:
+                self.write(cr, uid, [move_ori_id], {'state':'done'}, context)                 
+        return result
     
     def create(self, cr, uid, vals, context=None):     
         production_lot_obj = self.pool.get('stock.production.lot')        
