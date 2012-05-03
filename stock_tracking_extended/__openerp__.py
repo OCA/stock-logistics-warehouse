@@ -20,7 +20,7 @@
 #################################################################################
 
 {
-    "name" : "Stock Packaging extended",
+    "name" : "Stock Tracking extended",
     "version" : "1.0",
     "author" : "Julius Network Solutions",
     "description" : """
