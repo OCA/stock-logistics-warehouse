@@ -74,17 +74,17 @@ class stock_tracking(osv.osv):
 
     _columns = {
         'parent_id': fields.many2one('stock.tracking', 'Parent'),
-        'child_ids': fields.one2many('stock.tracking', 'parent_id', 'Children'),
+        'child_ids': fields.one2many('stock.tracking', 'parent_id', 'Children', readonly=True),
         'ul_id': fields.many2one('product.ul', 'Logistic unit', readonly=True, states={'open':[('readonly',False)]}),
         'location_id': fields.many2one('stock.location', 'Location', required=True, readonly=True, states={'open':[('readonly',False)]}),
         'state': fields.selection([('open','Open'),('close','Close')], 'State', readonly=True),
-        'product_ids': fields.one2many('product.stock.tracking', 'tracking_id', 'Products', readonly=True, states={'open':[('readonly',False)]}),
+        'product_ids': fields.one2many('product.stock.tracking', 'tracking_id', 'Products', readonly=True),
         'child_product_ids': fields.function(_get_child_products, method=True, type='one2many', obj='product.stock.tracking', string='Child Products'),
         'history_ids': fields.one2many('stock.tracking.history', 'tracking_id', 'History'),
         'current_move_ids': one2many_special('stock.move', 'tracking_id', 'Current moves', domain=[('pack_history_id', '=', False)], readonly=True),
         'name': fields.char('Pack Reference', size=64, required=True, readonly=True, states={'open':[('readonly',False)]}),
         'date': fields.datetime('Creation Date', required=True, readonly=True, states={'open':[('readonly',False)]}),
-        'serial_ids': fields.one2many('serial.stock.tracking', 'tracking_id', 'Products', readonly=True, states={'open':[('readonly',False)]}),
+        'serial_ids': fields.one2many('serial.stock.tracking', 'tracking_id', 'Products', readonly=True),
         'child_serial_ids': fields.function(_get_child_serials, method=True, type='one2many', obj='serial.stock.tracking', string='Child Serials'),
     }
     
