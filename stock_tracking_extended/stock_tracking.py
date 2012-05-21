@@ -286,6 +286,8 @@ class stock_move(osv.osv):
     
     def write(self, cr, uid, ids, vals, context=None):  
         result = super(stock_move,self).write(cr, uid, ids, vals, context)
+        if not isinstance(ids, list):
+            ids = [ids]
         for id in ids:
             state = self.browse(cr, uid, id, context).state
             move_ori_id = self.browse(cr, uid, id, context).move_ori_id
