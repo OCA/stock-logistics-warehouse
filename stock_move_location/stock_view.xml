@@ -41,7 +41,7 @@
 		</record>
 
 		<record id="stock.action_inventory_form" model="ir.actions.act_window">
-			<field name="context">{'full':'1', 'type':'normal'}</field>
+			<field name="context">{'full':'1', 'type':'normal', 'default_type': 'normal'}</field>
 			<field name="domain">[('type', '=', 'normal')]</field>
 		</record>
 
@@ -55,7 +55,7 @@
 			<field name="res_model">stock.inventory</field>
 			<field name="view_type">form</field>
 			<field name="view_id" ref="stock.view_inventory_tree"/>
-			<field name="context">{'full':'1', 'type':'move'}</field>
+			<field name="context">{'full':'1', 'type':'move', 'default_type': 'move'}</field>
 			<field name="domain">[('type', '=', 'move')]</field>
 			<field name="search_view_id" ref="stock.view_inventory_filter" />
 			<field name="help">You can use this to move a stock from a location to an other one.</field>

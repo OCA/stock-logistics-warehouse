@@ -100,6 +100,7 @@ class stock_tracking(osv.osv):
       
     _defaults = {
         'state': 'open',
+        'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
     }
     
     def reset_open(self, cr, uid, ids, context=None):
@@ -292,7 +293,7 @@ class stock_move(osv.osv):
             state = self.browse(cr, uid, id, context).state
             move_ori_id = self.browse(cr, uid, id, context).move_ori_id
             if state == 'done' and move_ori_id:
-                self.write(cr, uid, [move_ori_id], {'state':'done'}, context)                 
+                self.write(cr, uid, [move_ori_id.id], {'state':'done'}, context)
         return result
     
     def create(self, cr, uid, vals, context=None):     
