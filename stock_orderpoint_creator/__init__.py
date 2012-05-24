@@ -21,4 +21,4 @@
 
 from . import base_product_config_template
 from . import orderpoint_template
-from . import wizard
+import wizard

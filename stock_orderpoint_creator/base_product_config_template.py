@@ -23,11 +23,7 @@
 
 
 class BaseProductConfigTemplate():
-    """ Abstract template for product config """
-    #_name = 'stock.warehouse.orderpoint.template'
-
-    #_inherit = 'stock.warehouse.orderpoint'
-    #_table = 'stock_warehouse_orderpoint_template'
+    """ Abstract class for product config """
 
 
     def _get_model(self):
@@ -40,33 +36,33 @@ class BaseProductConfigTemplate():
         model_obj = self.pool.get(model)
         return model_obj
 
-    def _get_ids_2_clean(
-            self, cursor, uid, template_id, product_ids, context=None):
-        """ hook to select model specific objects to clean 
+    def _get_ids_2_clean(self, cursor, uid, template_br,
+                         product_ids, context=None):
+        """ hook to select model specific objects to clean
         return must return a list of id"""
         return []
 
-    def _disable_old_instances(
-            self, cursor, uid, template_id, product_ids, context=None):
+    def _disable_old_instances(self, cursor, uid, template_id,
+                               product_ids, context=None):
         """ Clean old instance by setting those inactives """
         model_obj = self._get_model()
-        ids2clean = self._get_ids_2_clean(
-                cursor, uid, template_id, product_ids, context=context)
-        model_obj.write(
-                cursor, uid, ids2clean, {'active': False}, context=context)
+        ids2clean = self._get_ids_2_clean(cursor, uid, template_id,
+                                          product_ids, context=context)
+        model_obj.write(cursor, uid, ids2clean,
+                        {'active': False}, context=context)
 
 
-    def create_instances(
-            self, cursor, uid, template_id, product_ids, context=None):
-        """ Create instances of model using template """
+    def create_instances(self, cursor, uid, template_br,
+                         product_ids, context=None):
+        """ Create instances of model using template inherited model """
 
         if not isinstance(product_ids, list):
             product_ids = [product_ids]
 
-        self._disable_old_instances(
-                cursor, uid, template_id, product_ids, context=context)
+        self._disable_old_instances(cursor, uid, template_br,
+                                    product_ids, context=context)
 
-        data = self.copy_data(cursor, uid, template_id, context=context)
+        data = self.copy_data(cursor, uid, template_br.id, context=context)
 
         model_obj = self._get_model()
 

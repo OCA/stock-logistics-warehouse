@@ -30,7 +30,7 @@
 Add a wizard to configure massively order points for multiple product""",
  'website': 'http://www.openerp.com',
  'init_xml': [],
- 'update_xml': ["wizard/orderpoint_creator_view.xml"],
+ 'update_xml': ["wizard/orderpoint_creator_view.xml", "security/ir.model.access.csv"],
  'demo_xml': [],
  'test': [],
  'installable': True,

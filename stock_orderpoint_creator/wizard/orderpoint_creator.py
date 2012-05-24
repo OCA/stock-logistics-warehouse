@@ -43,29 +43,23 @@ class OrderpointCreator(osv.osv_memory):
         return _template_register
 
 
-    def action_configure(self, cursor, uid, ids, context=None):
+    def action_configure(self, cursor, uid, wiz_id, context=None):
         """ action to retrieve wizard data and launch creation of items """
 
         product_ids = context['active_ids']
+        if isinstance(wiz_id, list):
+            wiz_id = wiz_id[0]
+        current = self.browse(cursor, uid, wiz_id, context=context)
 
-        wiz_fields_template = self._get_template_register()
-        template_ids = self.read(
-                cursor, uid, ids, wiz_fields_template, context=context)[0]
+        for template_field in  self._get_template_register():
+            template_br = current[template_field]
+            if template_br:
+                template_model = template_br._model._name
+                template_obj = self.pool.get(template_model)
+                template_obj.create_instances(cursor, uid, template_br,
+                                              product_ids, context=context)
 
-        for template_field in wiz_fields_template:
-            if template_ids[template_field]:
-                template_id = template_ids[template_field][0]
-
-                # check if for this model a template has been defined
-                if template_id:
-                    wiz_field = self.fields_get(
-                            cursor, uid, allfields=template_field)[template_field]
-                    template_model = wiz_field['relation']
-                    template_obj = self.pool.get(template_model)
-                    template_obj.create_instances(
-                            cursor, uid, template_id, product_ids, context=context)
-
-        return True
+        return {}
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
