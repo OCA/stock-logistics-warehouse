@@ -22,18 +22,18 @@
 """ Wizard defining stock.warehouse.orderpoint configurations for selected
 products. Those configs are generated using templates """
 
-from osv import osv, fields
+from openerp.osv.orm import browse_record, TransientModel, fields
 
 _template_register = ['orderpoint_template_id']
 
-class OrderpointCreator(osv.osv_memory):
+class OrderpointCreator(TransientModel):
     _name = 'stock.warehouse.orderpoint.creator'
     _description = 'Orderpoint Creator'
 
-    _columns = {
-            'orderpoint_template_id': fields.many2one(
-                'stock.warehouse.orderpoint.template',
-                "Stock rule template")
+    _columns = {'orderpoint_template_id': fields.many2many(
+                        'stock.warehouse.orderpoint.template',
+                        rel='order_point_creator_rel',
+                        string='Stock rule template')
     }
 
 
@@ -50,13 +50,17 @@ class OrderpointCreator(osv.osv_memory):
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
         current = self.browse(cursor, uid, wiz_id, context=context)
-
         for template_field in  self._get_template_register():
-            template_br = current[template_field]
-            if template_br:
-                template_model = template_br._model._name
+            template_br_list = current[template_field]
+            if template_br_list:
+                if isinstance(template_br_list, browse_record):
+                    template_br_list = [template_br_list]
+                template_model = template_br_list[0]._model._name
                 template_obj = self.pool.get(template_model)
-                template_obj.create_instances(cursor, uid, template_br,
+                template_obj._disable_old_instances(cursor, uid, template_br_list,
+                                                    product_ids, context=context)
+                for template_br in template_br_list:
+                    template_obj.create_instances(cursor, uid, template_br,
                                               product_ids, context=context)
 
         return {}

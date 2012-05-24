@@ -21,15 +21,17 @@
 
 """ Template of order point object """
 
-from openerp.osv.orm import TransientModel, fields
+from openerp.osv.orm import Model, fields
 from base_product_config_template import BaseProductConfigTemplate
 
-class OrderpointTemplate(BaseProductConfigTemplate, TransientModel):
+class OrderpointTemplate(BaseProductConfigTemplate, Model):
     """ Template for orderpoints """
     _name = 'stock.warehouse.orderpoint.template'
 
     _inherit = 'stock.warehouse.orderpoint'
     _table = 'stock_warehouse_orderpoint_template'
+    _clean_mode = 'deactivate'
+
 
     _columns = {
         'product_id': fields.many2one('product.product',
@@ -40,13 +42,11 @@ class OrderpointTemplate(BaseProductConfigTemplate, TransientModel):
     }
 
     def _get_ids_2_clean(self, cursor, uid, template_br, product_ids, context=None):
-        """ hook to select model specific objects to clean before recteating new one
-        return must return a list of id. """
+        """ hook to select model specific objects to clean
+        return must return a list of id"""
         model_obj = self._get_model()
-        search_args = [('warehouse_id', '=', template_br.warehouse_id.id),
-                       ('product_id', 'in', product_ids)]
-
-        ids2clean = model_obj.search(cursor, uid, search_args, context=context)
-        return ids2clean
+        ids_to_del = model_obj.search(cursor, uid,
+                                      [('product_id', 'in', product_ids)])
+        return ids_to_del
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
