@@ -63,17 +63,18 @@ class BaseProductConfigTemplate():
             product_ids = [product_ids]
 
         # data = self.copy_data(cursor, uid, template_br.id, context=context)
-        # copy data will not work in any case and may write erronus value
+        # copy data will not work in all case and may retrieve erronus value
 
         model_obj = self._get_model()
 
         data = {}
+        #May rais error on function fields in future
         for key in model_obj._columns.keys():
             tmp = template_br[key]
             if isinstance(tmp, browse_record):
                 tmp = tmp.id
             if isinstance(tmp, browse_record_list):
-                tmp = [0,6,tmp]
+                tmp = [(6, 0, tmp)]
             data[key] = tmp
 
         for product_id in product_ids:
