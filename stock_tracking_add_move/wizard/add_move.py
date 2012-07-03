@@ -40,13 +40,18 @@ class stock_packaging_move(osv.osv_memory):
         barcode_obj = self.pool.get('tr.barcode')
         tracking_obj = self.pool.get('stock.tracking')        
         if context == None:
-            context = {}           
+            context = {}
              
         '''Get parent id'''
         parent_id = context.get('active_id',False)        
         for obj in self.browse(cr, uid, ids):
             ref = obj.reference
             barcode_ids = barcode_obj.search(cr, uid, [('code', '=', ref)], limit=1)
+            if not barcode_ids:
+                reference2 = ref
+                while len(reference2.split('-')) > 1:
+                    reference2 = reference2.replace('-','')
+                barcode_ids = barcode_obj.search(cr, uid, [('code2', '=', reference2)], limit=1)
             ''' Call for the adding function '''
             tracking_obj.add_validation(cr, uid, [parent_id], barcode_ids, context=None) 
         return {'type': 'ir.actions.act_window_close'}
