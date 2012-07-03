@@ -118,6 +118,7 @@ class stock_inventory(osv.osv):
             act = act_obj.read(cr, uid, act_id)
             context = eval(act['context'])
             context['default_inventory_id'] = inventory_data.id
+            context['default_name'] = inventory_data.name
             act['context'] = context
         return act
             
