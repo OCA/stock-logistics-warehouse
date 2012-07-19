@@ -22,7 +22,7 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Stock Inventory Lines">
-					<field context="location=location_id,uom=product_uom,to_date=parent.date" name="product_id" on_change="on_change_product_id(location_id,product_id,product_uom,parent.date)" select="1" domain="[('type','&lt;&gt;','service')]"/>
+					<field context="{'location':location_id, 'uom':product_uom, 'to_date':parent.date}" name="product_id" on_change="on_change_product_id(location_id,product_id,product_uom,parent.date)" select="1" domain="[('type','&lt;&gt;','service')]"/>
 					<field name="product_qty"/>
 					<field name="product_uom"/>
 					<field name="prod_lot_id" groups="base.group_extended"/>
