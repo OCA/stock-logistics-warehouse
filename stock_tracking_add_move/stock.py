@@ -23,7 +23,7 @@ from osv import fields, osv
 from tools.translate import _
 
 class stock_tracking(osv.osv):
-    
+
     _inherit = 'stock.tracking'
 
     _columns = {
@@ -32,24 +32,24 @@ class stock_tracking(osv.osv):
         'to_add': fields.one2many('stock.scan.to.validate', 'tracking_id', 'To add', domain=[('type','=','in')]),
         'to_remove': fields.one2many('stock.scan.to.validate', 'tracking_id', 'To validate', domain=[('type','=','out')]),
     }
-        
+
     def add_validation(self, cr, uid, ids, barcode_ids, context=None):
-        
+
         barcode_obj = self.pool.get('tr.barcode')
         tracking_obj = self.pool.get('stock.tracking')
         move_obj = self.pool.get('stock.move')
         product_obj = self.pool.get('product.product')
         history_obj = self.pool.get('stock.tracking.history')
         validate_obj = self.pool.get('stock.scan.to.validate')
-        
+
         if context == None:
             context = {}
-        if barcode_ids:            
+        if barcode_ids:
             for obj in self.browse(cr, uid, ids):
                 barcode = barcode_obj.browse(cr, uid, barcode_ids[0])
                 model = barcode.res_model
                 res_id = barcode.res_id
-                
+
                 if model == 'stock.tracking':
                     '''Pack Case'''
                     pack = tracking_obj.browse(cr, uid, res_id)
@@ -59,7 +59,7 @@ class stock_tracking(osv.osv):
                         history_obj.create(cr, uid, {'type': 'pack_in',
                                                      'tracking_id': res_id,
                                                      'parent_id': obj.id,
-                                                    })                        
+                                                    })
                         tracking_obj.write(cr, uid, pack.id, {'location_id': obj.location_id and obj.location_id.id or False,})
                         tracking_obj.write(cr, uid, obj.id, {'modified': True})
                         for move_data in pack.move_ids:
@@ -93,15 +93,15 @@ class stock_tracking(osv.osv):
                                                                     'location_dest_id': obj.location_id.id,
                                                                     })
                             move_obj.write(cr, uid, new_move_id, {'tracking_id': obj.id})
-                            tracking_obj.write(cr, uid, obj.id, {'modified': True}) 
-                        else:    
+                            tracking_obj.write(cr, uid, obj.id, {'modified': True})
+                        else:
                             move_obj.write(cr, uid, move_ids, {'tracking_id': obj.id})
-                            tracking_obj.write(cr, uid, obj.id, {'modified': True})      
-                        
+                            tracking_obj.write(cr, uid, obj.id, {'modified': True})
+
                 elif model == 'product.product':
-                    '''Product Case'''                
-                    pack = tracking_obj.browse(cr, uid, obj.id)  
-                    product_data = product_obj.browse(cr, uid,res_id)                                 
+                    '''Product Case'''
+                    pack = tracking_obj.browse(cr, uid, obj.id)
+                    product_data = product_obj.browse(cr, uid,res_id)
                     move_id = move_obj.create(cr, uid, {
                                               'name': product_data.name,
                                               'product_id': product_data.id,
@@ -110,16 +110,16 @@ class stock_tracking(osv.osv):
                                               'location_dest_id': pack.location_id.id,
                                               'tracking_id': obj.id,
                                               'state': 'draft',
-                                            })                        
-                    tracking_obj.write(cr, uid, obj.id, {'modified': True})          
-                        
-            '''Call for a function who will display serial code list and product list in the pack layout'''                                                
+                                            })
+                    tracking_obj.write(cr, uid, obj.id, {'modified': True})
+
+            '''Call for a function who will display serial code list and product list in the pack layout'''
             tracking_obj.get_products(cr, uid, ids, context=None)
-            tracking_obj.get_serials(cr, uid, ids, context=None)   
+            tracking_obj.get_serials(cr, uid, ids, context=None)
         else:
             raise osv.except_osv(_('Warning!'),_('Barcode Not found!'))
         return {}
-    
+
     def remove_validation(self, cr, uid, ids, barcode_ids, context=None):
         barcode_obj = self.pool.get('tr.barcode')
         tracking_obj = self.pool.get('stock.tracking')
@@ -127,7 +127,7 @@ class stock_tracking(osv.osv):
         product_obj = self.pool.get('product.product')
         history_obj = self.pool.get('stock.tracking.history')
         validate_obj = self.pool.get('stock.scan.to.validate')
-        
+
         if context == None:
             context = {}
         if barcode_ids:
@@ -140,42 +140,42 @@ class stock_tracking(osv.osv):
                     pack = tracking_obj.browse(cr, uid, res_id)
                     tracking_obj.write(cr, uid, res_id, {'parent_id': False})
                     tracking_obj.write(cr, uid, obj.id, {'modified': True})
-                elif model == 'stock.production.lot':    
+                elif model == 'stock.production.lot':
                     pack = tracking_obj.browse(cr, uid, obj.id)
                     move_ids = move_obj.search(cr, uid, [
                                      ('prodlot_id', '=', res_id),
                                      ], limit=1)
                     if move_ids:
                         move_obj.write(cr, uid, move_ids, {'tracking_id': False})
-                        tracking_obj.write(cr, uid, obj.id, {'modified': True})        
+                        tracking_obj.write(cr, uid, obj.id, {'modified': True})
                 elif model == 'product.product':
-                    pack = tracking_obj.browse(cr, uid, obj.id)  
+                    pack = tracking_obj.browse(cr, uid, obj.id)
                     product_data = product_obj.browse(cr, uid,res_id)
                     move_ids = move_obj.search(cr, uid, [
                                      ('product_id', '=', product_data.id),
-                                     ], limit=1)     
+                                     ], limit=1)
                     if move_ids:
                         move_obj.write(cr, uid, move_ids, {'tracking_id': False})
-                        tracking_obj.write(cr, uid, obj.id, {'modified': True})                           
-                    
+                        tracking_obj.write(cr, uid, obj.id, {'modified': True})
+
             '''Call for a function who will display serial code list and product list in the pack layout'''
             tracking_obj.get_serials(cr, uid, ids, context=None)
-            tracking_obj.get_products(cr, uid, ids, context=None)            
+            tracking_obj.get_products(cr, uid, ids, context=None)
         else:
             raise osv.except_osv(_('Warning!'),_('Barcode Not found!'))
-        return {}     
+        return {}
 
 stock_tracking()
 
 class stock_scan_to_validate(osv.osv):
-    
+
     _name = 'stock.scan.to.validate'
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'Parent', readonly=True),
         'type': fields.selection([('in','To add'),('out','To remove')], 'Type', readonly=True),
         'barcode_id': fields.many2one('tr.barcode', 'Barcode', readonly=True),
     }
-    
+
     _sql_constraints = [
         ('tracking_barcode_unique', 'unique (tracking_id,barcode_id)', 'This barcode is already in the list to add or to remove !')
     ]
@@ -183,21 +183,21 @@ class stock_scan_to_validate(osv.osv):
 stock_scan_to_validate()
 
 class stock_tracking_history(osv.osv):
-    
+
     _inherit = "stock.tracking.history"
-    
+
     def _get_types(self, cr, uid, context={}):
         res = super(stock_tracking_history, self)._get_types(cr, uid, context)
         if not res:
             res = []
         res = res + [('pack_in','Add parent'),('pack_out','Unlink parent')]
         return res
-    
+
     _columns = {
         'type': fields.selection(_get_types, 'Type'),
         'parent_id': fields.many2one('stock.tracking', 'Parent pack'),
     }
-    
+
 stock_tracking_history()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

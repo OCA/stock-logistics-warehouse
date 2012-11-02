@@ -74,7 +74,7 @@ class stock_tracking(osv.osv):
                         new_pack_data = self.browse(cr, uid, new_pack_id, context)
                         '''loop on each move form the old pack to the new pack'''
                         for pack_move in pack.current_move_ids:
-                            ''''stock move creation'''
+                            '''stock move creation'''
                             barcode_name = pack_move.prodlot_id.name
                             barcode_data = barcode_obj.search(cr, uid,[('code', '=', barcode_name)], limit=1)
                             move_id = stock_move_obj.create(cr, uid, {

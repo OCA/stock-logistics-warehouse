@@ -41,9 +41,9 @@ class one2many_special(fields.one2many):
         return res
 
 class stock_tracking(osv.osv):
-    
+
     _inherit = 'stock.tracking'
-    
+
     def hierarchy_ids(self, tracking):
         result_list = [tracking]
         for child in tracking.child_ids:
@@ -87,22 +87,22 @@ class stock_tracking(osv.osv):
         'serial_ids': fields.one2many('serial.stock.tracking', 'tracking_id', 'Products', readonly=True),
         'child_serial_ids': fields.function(_get_child_serials, method=True, type='one2many', obj='serial.stock.tracking', string='Child Serials'),
     }
-    
+
     def _check_parent_id(self, cr, uid, ids, context=None):
         lines = self.browse(cr, uid, ids, context=context)
-        
+
         if lines[0].parent_id:
             if lines[0].ul_id.capacity_index > lines[0].parent_id.ul_id.capacity_index:
                 return False
         return True
-        
+
     _constraints = [(_check_parent_id, 'Bad parent type selection. Please try again.',['parent_id'] ),]
-      
+
     _defaults = {
         'state': 'open',
         'location_id': lambda x, y, z, c: c and c.get('location_id') or False,
     }
-    
+
     def reset_open(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         for pack in pack_ids:
@@ -121,7 +121,7 @@ class stock_tracking(osv.osv):
             if allowed:
                 self.write(cr, uid, [pack.id], {'state': 'open'})
         return True
-    
+
     def set_close(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         for pack in pack_ids:
@@ -134,7 +134,7 @@ class stock_tracking(osv.osv):
 #            if allowed:
 #                self.write(cr, uid, [pack.id], {'state': 'close'})
         return True
-    
+
     def get_products(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         stock_track = self.pool.get('product.stock.tracking')
@@ -153,7 +153,7 @@ class stock_tracking(osv.osv):
                 for product in product_list.keys():
                     stock_track.create(cr, uid, {'product_id': product, 'quantity': product_list[product], 'tracking_id': child.id})
         return True
-    
+
     def get_serials(self, cr, uid, ids, context=None):
         pack_ids = self.browse(cr, uid, ids, context)
         serial_track = self.pool.get('serial.stock.tracking')
@@ -179,7 +179,7 @@ class stock_tracking(osv.osv):
 stock_tracking()
 
 class product_ul(osv.osv):
-    _inherit = "product.ul" 
+    _inherit = "product.ul"
     _description = "Shipping Unit"
     _columns = {
          'capacity_index': fields.integer('Capacity index'),
@@ -188,7 +188,7 @@ class product_ul(osv.osv):
 product_ul()
 
 class product_stock_tracking(osv.osv):
-    
+
     _name = 'product.stock.tracking'
 
     _columns = {
@@ -197,13 +197,13 @@ class product_stock_tracking(osv.osv):
         'tracking_id': fields.many2one('stock.tracking', 'Tracking'),
 #        'tracking_history_id': fields.many2one('stock.tracking.history', 'Tracking History'),
     }
-    
+
 product_stock_tracking()
 
 class serial_stock_tracking(osv.osv):
-    
+
     _name = 'serial.stock.tracking'
-    
+
     _order = 'tracking_id,serial_id'
 
     _columns = {
@@ -213,24 +213,24 @@ class serial_stock_tracking(osv.osv):
         'tracking_id': fields.many2one('stock.tracking', 'Tracking'),
 #        'tracking_history_id': fields.many2one('stock.tracking.history', 'Tracking History'),
     }
-    
+
 serial_stock_tracking()
 
 class stock_tracking_history(osv.osv):
 
     _name = "stock.tracking.history"
-    
+
     def _get_types(self, cr, uid, context={}):
 #        res = [('pack_in','Add parent'),('pack_out','Unlink parent'),('move','Move')]
         res = []
         return res
-    
+
 #    def hierarchy_ids(self, tracking):
 #        result_list = [tracking]
 #        for child in tracking.child_ids:
 #            result_list.extend(self.hierarchy_ids(child))
 #        return result_list
-#    
+#
 #    def _get_child_products(self, cr, uid, ids, field_name, arg, context=None):
 #        packs = self.browse(cr, uid, ids)
 #        res = {}
@@ -241,7 +241,7 @@ class stock_tracking_history(osv.osv):
 #                for prod in child.product_ids:
 #                    res[pack.id].append(prod.id)
 #        return res
-    
+
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'Pack', required=True),
         'type': fields.selection(_get_types, 'Type'),
@@ -250,29 +250,29 @@ class stock_tracking_history(osv.osv):
 #        'parent_hist_id': fields.many2one('stock.tracking.history', 'Parent history pack'),
 #        'child_ids': fields.one2many('stock.tracking.history', 'parent_hist_id', 'Child history pack'),
     }
-    
+
     _rec_name = "tracking_id"
-    
+
 stock_tracking_history()
 
 '''Add a field in order to store the current pack in a production lot'''
 class stock_production_lot(osv.osv):
-    _inherit = 'stock.production.lot'    
+    _inherit = 'stock.production.lot'
     _columns = {
         'tracking_id': fields.many2one('stock.tracking', 'pack'),
     }
-    
+
 stock_production_lot()
 
-class product_category(osv.osv):   
-    _inherit = 'product.category'    
+class product_category(osv.osv):
+    _inherit = 'product.category'
     _columns = {
         'tracked': fields.boolean('Need a serial code ?'),
-    }    
+    }
 product_category()
 
 class stock_inventory(osv.osv):
-    _inherit = 'stock.inventory'    
+    _inherit = 'stock.inventory'
     _defaults = {
         'name': lambda x, y, z, c: x.pool.get('ir.sequence').get(y, z, 'stock.inventory') or '/'
     }
@@ -281,11 +281,11 @@ stock_inventory()
 class stock_move(osv.osv):
     _inherit = 'stock.move'
     _columns = {
-         'move_ori_id': fields.many2one('stock.move', 'Origin Move', select=True),       
+         'move_ori_id': fields.many2one('stock.move', 'Origin Move', select=True),
 #        'cancel_cascade': fields.boolean('Cancel Cascade', help='If checked, when this move is cancelled, cancel the linked move too')
     }
-    
-    def write(self, cr, uid, ids, vals, context=None):  
+
+    def write(self, cr, uid, ids, vals, context=None):
         result = super(stock_move,self).write(cr, uid, ids, vals, context)
         if not isinstance(ids, list):
             ids = [ids]
@@ -295,9 +295,9 @@ class stock_move(osv.osv):
             if state == 'done' and move_ori_id:
                 self.write(cr, uid, [move_ori_id.id], {'state':'done'}, context)
         return result
-    
-    def create(self, cr, uid, vals, context=None):     
-        production_lot_obj = self.pool.get('stock.production.lot')        
+
+    def create(self, cr, uid, vals, context=None):
+        production_lot_obj = self.pool.get('stock.production.lot')
         stock_tracking_obj = self.pool.get('stock.tracking')
         if vals.get('prodlot_id',False):
             production_lot_data = production_lot_obj.browse(cr, uid, vals['prodlot_id'])
@@ -307,9 +307,9 @@ class stock_move(osv.osv):
                 if last_production_lot_move.tracking_id:
                     ids = [last_production_lot_move.tracking_id.id]
                     stock_tracking_obj.reset_open(cr, uid, ids, context=None)
-        
+
         return super(stock_move,self).create(cr, uid, vals, context)
-    
+
 stock_move()
 
 class split_in_production_lot(osv.osv_memory):
@@ -320,11 +320,11 @@ class split_in_production_lot(osv.osv_memory):
     _defaults = {
         'use_exist': lambda *a: True,
     }
-    def default_get(self, cr, uid, fields, context=None):        
+    def default_get(self, cr, uid, fields, context=None):
         res = super(split_in_production_lot, self).default_get(cr, uid, fields, context)
         res.update({'use_exist': True})
         return res
-    
+
 split_in_production_lot()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
