@@ -44,7 +44,7 @@ to get all lines pre-filled and all lines scanned
 #            'wizard/stock_fill_inventory_view.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
     'certificate': '',
 }

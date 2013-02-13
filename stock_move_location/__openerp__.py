@@ -45,7 +45,7 @@ And adds fields and buttons to advance in Physical Inventories.
                     'wizard/move_location_view.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
     'certificate': '',
 }

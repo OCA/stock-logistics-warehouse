@@ -46,7 +46,7 @@ This module adds a new tab 'Lines' in Physical Inventories with correct lines of
         "security/ir.model.access.csv",
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
     'certificate': '',
 }

@@ -53,5 +53,5 @@ The selected products are deactivated and a new one is created with :
         "wizard/base_product_merge_view.xml",
     ],
     "active": False,
-    "installable": True
+    "installable": False
 }

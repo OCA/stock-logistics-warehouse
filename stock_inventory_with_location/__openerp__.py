@@ -40,7 +40,7 @@ This module get the product real location if exists instead of inventory locatio
     "demo_xml" : [],
     "update_xml" : [],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
     'certificate': '',
 }
