@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="product_normal_form_view_procurement_by_days" model="ir.ui.view">
+            <field name="name">product.normal.form_procurement_by_days</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <group name="procurement" position="after">
+                    <group name="Stock Procurement By Days">
+                    <field name="days_warehouse" string="Days of warehouse stock"/>
+                    <field name="days_stats" string="Days of sale stats"/>
+                    <field name="forecast_gap" string="Expected sales variation (percent +/-)"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+

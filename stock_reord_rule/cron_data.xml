@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        <record model="ir.cron" id="update_reordering_quantity_cron">
+            <field name="name">Update quantity for reordering rules</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"></field>
+            <field eval="'stock.warehouse.orderpoint'" name="model"/>
+            <field eval="'_qty_orderpoint_days'" name="function"/>
+            <field eval="'[[],{}]'" name="args"/>
+        </record>
+    </data>
+</openerp>
