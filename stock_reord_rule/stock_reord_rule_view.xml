@@ -9,9 +9,9 @@
             <field name="arch" type="xml">
                 <group name="procurement" position="after">
                     <group name="Stock Procurement By Days">
-                    <field name="days_warehouse" string="Days of warehouse stock"/>
-                    <field name="days_stats" string="Days of sale stats"/>
-                    <field name="forecast_gap" string="Expected sales variation (percent +/-)"/>
+                    <field name="days_warehouse"/>
+                    <field name="days_stats"/>
+                    <field name="forecast_gap"/>
                     </group>
                 </group>
             </field>

@@ -19,39 +19,38 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import orm, fields
 
-class stock_warehouse_orderpoint(osv.osv):
+class stock_warehouse_orderpoint(orm.Model):
     _inherit = "stock.warehouse.orderpoint"
 
     def _qty_orderpoint_days(self, cr, uid, ids, context=None):
         """Calculate quantity to create warehouse stock for n days of sales.
-        integer (( Qty sold in days_stats * (1+forecast_gap)) / days_stats * days_warehouse)"""
+        (( Qty sold in days_stats * (1+forecast_gap)) / days_stats * days_warehouse)"""
 
-        res = {}
         obj_product = self.pool.get('product.product')
-        product_ids = tuple(obj_product.search(cr, uid, []))
-        if len(product_ids) > 1:
-            sql= """SELECT sol.product_id AS product_id, (sum( product_uos_qty )/pp.days_stats*(1+pp.forecast_gap/100) * pp.days_warehouse) AS quantity FROM sale_order_line sol JOIN sale_order so ON so.id = sol.order_id JOIN product_product pp ON pp.id = sol.product_id WHERE sol.state in ('done','confirmed') AND sol.product_id IN {product_ids} AND date_order > (date(now()) - pp.days_stats) GROUP BY sol.product_uom, sol.product_id, pp.days_stats, pp.forecast_gap, pp.days_warehouse;""".format(product_ids=product_ids)
-            cr.execute(sql)
-            sql_res = cr.fetchall()
-            for val in sql_res:
+        product_ids = tuple(obj_product.search(cr, uid, [], context=context))
+        sql= """SELECT sol.product_id AS product_id, 
+        (sum( product_uos_qty )/pp.days_stats*(1+pp.forecast_gap/100) * pp.days_warehouse) 
+        AS quantity FROM sale_order_line sol JOIN sale_order so ON so.id = sol.order_id 
+        JOIN product_product pp ON pp.id = sol.product_id WHERE sol.state in ('done','confirmed') 
+        AND sol.product_id IN %s AND date_order > (date(now()) - pp.days_stats) 
+        GROUP BY sol.product_uom, sol.product_id, pp.days_stats, pp.forecast_gap,
+        pp.days_warehouse;"""
+        cr.execute(sql, (product_ids,))
+        sql_res = cr.fetchall()
+        for val in sql_res:
                 if val:
-                    reord_rules_ids = self.search(cr, uid, [('product_id','=', val[0])])
+                    reord_rules_ids = self.search(cr, uid, [('product_id', '=', val[0])], context=context)
                     if reord_rules_ids:
-                        res['product_max_qty'] = val[1]
-                        self.write(cr, uid, reord_rules_ids, res)
+                        self.write(cr, uid, reord_rules_ids, {'product_max_qty': val[1]}, context=context)
         return True
 
-stock_warehouse_orderpoint()
-
-class product_product(osv.osv):
+class product_product(orm.Model):
     _inherit = "product.product"
 
     _columns = {
-        'days_warehouse': fields.integer('Nr of days of warehouse stock'),
-        'days_stats':fields.integer('Nr of days on which calculate stats'),
-        'forecast_gap':fields.float('Forecast gap%', digits=(6,int(3))),
+        'days_warehouse': fields.integer('Days of needed warehouse stock'),
+        'days_stats': fields.integer('Days of sale statistics'),
+        'forecast_gap': fields.float('Expected sales variation (percent +/-)', digits=(6,3)),
         }
-
-product_product()
