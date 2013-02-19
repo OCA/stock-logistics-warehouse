@@ -33,13 +33,16 @@ class stock_warehouse_orderpoint(orm.Model):
         sql= """SELECT sol.product_id AS product_id, 
         (sum( product_uos_qty )/pp.days_stats*(1+pp.forecast_gap/100) * pp.days_warehouse) 
         AS quantity FROM sale_order_line sol JOIN sale_order so ON so.id = sol.order_id 
-        JOIN product_product pp ON pp.id = sol.product_id WHERE sol.state in ('done','confirmed') 
+        JOIN product_product pp ON pp.id = sol.product_id 
+        JOIN product_template pt ON pt.id = pp.product_tmpl_id
+        WHERE sol.state in ('done','confirmed') AND pt.type = 'product'
         AND sol.product_id IN %s AND date_order > (date(now()) - pp.days_stats) 
         GROUP BY sol.product_uom, sol.product_id, pp.days_stats, pp.forecast_gap,
         pp.days_warehouse;"""
         cr.execute(sql, (product_ids,))
         sql_res = cr.fetchall()
-        for val in sql_res:
+        if sql_res:
+            for val in sql_res:
                 if val:
                     reord_rules_ids = self.search(cr, uid, [('product_id', '=', val[0])], context=context)
                     if reord_rules_ids:
