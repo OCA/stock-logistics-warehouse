@@ -31,7 +31,15 @@
     where:
     - days_stats = days on wich calculate sales stats;
     - forecast_gap = forecast of increase/decrease on sales (%);
-    - days_warehouse = days of stock to keep in the warehouse.""",
+    - days_warehouse = days of stock to keep in the warehouse.
+
+    Usage:
+    insert days_stats, forecast_gap and days_warehouse vars in product form
+    and create a reordering rule for the same product, without inserting nothing (neither maximum or
+    minimum quantity are required). The cron job will be executed daily and will update the maximum
+    quantity in the reordering rule (you can force it to start changing the date and hour of 
+    execution).
+    This module doesn't need purchase module to work, but it's useful with that module.'""",
     'author': 'Sergio Corato',
     'website': 'http://www.icstools.it',
     'depends': ['procurement','sale',],
