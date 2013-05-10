@@ -30,9 +30,12 @@ This module extends standard stock valuation (based on products). Valuing lots a
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends" : ['stock'],
-    "init_xml" : [],
-    "update_xml" : [],
-    "demo_xml" : [],
+    "data" : [
+        "wizard/stock_change_standard_price_view.xml",
+        "product_view.xml",
+        "stock_view.xml",
+        ],
+    "demo" : [],
     "active": False,
     "installable": True
 }

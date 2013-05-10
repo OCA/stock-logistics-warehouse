@@ -18,12 +18,4 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
-
-class product_product(orm.Model):
-    _inherit = "product.product"
-
-    _columns = {
-        'lot_valuation':fields.boolean('Lot valuation', help="Use lot valuation instead of product valuation"),
-        }
+import stock_change_standard_price

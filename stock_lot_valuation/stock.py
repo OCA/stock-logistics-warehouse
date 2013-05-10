@@ -20,14 +20,15 @@
 
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
+import openerp.addons.decimal_precision as dp
 
-class stock_production_lot(osv.osv):
+class stock_production_lot(orm.Model):
     _inherit = "stock.production.lot"
     
     _columns = {
         'standard_price': fields.float('Cost', digits_compute=dp.get_precision('Lot Price'), help="Cost price (in company currency) of the lot used for standard stock valuation in accounting.", groups="base.group_user"),
         'cost_method': fields.selection([('standard','Standard Price'), ('average','Average Price')], 'Costing Method', required=True,
-            help="Standard Price: The cost price is manually updated at the end of a specific period (usually every year). \nAverage Price: The cost price is recomputed at each incoming shipment."),
+            help="Standard Price: The cost price is manually updated at the end of a specific period. \nAverage Price: The cost price is recomputed at each incoming shipment."),
         }
     
     def price_get(self, cr, uid, ids, context=None):
