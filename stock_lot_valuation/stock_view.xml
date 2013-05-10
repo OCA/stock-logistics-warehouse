@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="name">view_production_lot_form</field>
+        <field name="model">stock.production.lot</field>
+        <field name="arch" type="xml">
+            <field name="stock_available" position="after">
+                <field name="standard_price" attrs="{'readonly':[('cost_method','=','average')]}"></field>
+                <field name="cost_method"></field>
+                <button name="%(action_view_change_standard_price)d" string="- update"
+                    type="action" attrs="{'invisible':[('cost_method','&lt;&gt;','average')]}"
+                    class="oe_link" groups="product.group_costing_method"/>
+            </field>
+        </field>
+    </record>
+</data>
+</openerp>
