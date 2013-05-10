@@ -1,0 +1,193 @@
+-
+ !record {model: stock.location, id: location_refrigerator}:
+    name: Refrigerator
+    usage: internal
+-
+ !record {model: stock.location, id: location_delivery_counter}:
+    name: Delivery Counter
+    usage: internal
+-
+ !record {model: stock.location, id: location_refrigerator_small}:
+    name: Small Refrigerator
+    usage: internal
+    location_id: location_refrigerator
+-
+ !record {model: stock.location, id: location_opening}:
+    name: opening
+    usage: inventory
+-
+ !record {model: stock.location, id: location_convenience_shop}:
+    name: Convenient Store
+    usage: supplier
+-
+ !record {model: stock.warehouse, id: warehouse_icecream}:
+    name: Ice Cream Shop
+    lot_input_id: location_refrigerator
+    lot_stock_id: location_refrigerator
+    lot_output_id: location_delivery_counter
+-
+ !record {model: product.product, id: product_icecream}:
+    default_code: 001
+    name: Ice Cream
+    type: product
+    categ_id: product.product_category_1
+    list_price: 100.0
+    standard_price: 70.0
+    uom_id: product.product_uom_kgm
+    uom_po_id: product.product_uom_kgm
+    procure_method: make_to_stock
+    property_stock_inventory: location_opening
+    valuation: real_time
+    cost_method: average
+    property_stock_account_input: account.o_expense
+    property_stock_account_output: account.o_income
+    description: Ice cream can be mass-produced and thus is widely available in developed parts of the world. Ice cream can be purchased in large cartons (vats and squrounds) from supermarkets and grocery stores, in smaller quantities from ice cream shops, convenience stores, and milk bars, and in individual servings from small carts or vans at public events.
+    lot_valuation: True
+
+-
+ !record {model: stock.production.lot, id: lot_icecream_0}:
+    name: Lot0 for Ice cream
+    product_id: product_icecream
+    cost_method: average
+-
+ !record {model: stock.production.lot, id: lot_icecream_1}:
+    name: Lot1 for Ice cream
+    product_id: product_icecream
+-
+ !record {model: stock.inventory, id: stock_inventory_icecream}:
+    name: Inventory for icecream
+-
+ !record {model: stock.inventory.line, id: stock_inventory_line_icecream_lot0}:
+    product_id: product_icecream
+    product_uom: product.product_uom_kgm
+    inventory_id: stock_inventory_icecream
+    product_qty: 50.0
+    prod_lot_id: lot_icecream_0
+    location_id: location_refrigerator
+-
+ !record {model: stock.inventory.line, id: stock_inventory_line_icecream_lot1}:
+    product_id: product_icecream
+    product_uom: product.product_uom_kgm
+    inventory_id: stock_inventory_icecream
+    product_qty: 40.0
+    prod_lot_id: lot_icecream_1
+    location_id: location_refrigerator
+
+-
+ !record {model: stock.picking, id: outgoing_shipment}:
+    type: out
+    location_dest_id: location_delivery_counter
+-
+ !record {model: stock.move, id: outgoing_shipment_icecream}:
+    picking_id: outgoing_shipment
+    product_id: product_icecream
+    product_uom: product.product_uom_kgm
+    product_qty: 130.0
+    location_id: location_refrigerator
+    location_dest_id: location_delivery_counter
+-
+ !record {model: stock.picking, id: incomming_shipment}:
+    type: in
+    invoice_state: 2binvoiced
+    partner_id: base.res_partner_address_9
+    location_dest_id: location_refrigerator
+-
+ !record {model: stock.move, id: incomming_shipment_icecream}:
+    picking_id: incomming_shipment
+    product_id: product_icecream
+    product_uom: product.product_uom_kgm
+    product_qty: 50.0
+    location_id: location_convenience_shop
+    location_dest_id: location_refrigerator
+
+-
+  I update the price of the Ice-cream.
+-
+  !python {model: stock.change.standard.price}: |
+    context.update({'active_model':'product.product', 'active_id': ref('product_icecream'), 'active_ids':[ref('product_icecream')]})
+-
+  !record {model: stock.change.standard.price, id: change_price}:
+    new_price: 120
+-
+  !python {model: stock.change.standard.price}: |
+    self.change_price(cr, uid, [ref('change_price')], context=context)
+-
+  I check price of Ice-cream after update price.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_icecream'), context=context)
+    assert product.standard_price == 120, "Price is not updated."
+
+-
+  I confirm physical inventory of Ice-cream which are came in different lots.
+-
+  !python {model: stock.inventory}: |
+    self.action_confirm(cr, uid, [ref('stock_inventory_icecream')], context=context)
+-
+  I check move details after confirmed physical inventory.
+-
+  !python {model: stock.inventory}: |
+    inventory = self.browse(cr, uid, ref('stock_inventory_icecream'), context=context)
+    assert len(inventory.move_ids) == len(inventory.inventory_line_id), "moves are not correspond."
+    for move_line in inventory.move_ids:
+        for line in inventory.inventory_line_id:
+            if move_line.product_id.id == line.product_id.id and move_line.prodlot_id.id == line.prod_lot_id.id:
+                location_id = line.product_id.property_stock_inventory.id
+                assert move_line.product_qty == line.product_qty, "Qty is not correspond."
+                assert move_line.product_uom.id == line.product_uom.id, "UOM is not correspond."
+                assert move_line.date == inventory.date, "Date is not correspond."
+                assert move_line.location_id.id == location_id, "Source location is not correspond."
+                assert move_line.location_dest_id.id == line.location_id.id, "Destination location is not correspond."
+                assert move_line.state == 'confirmed', "Move is not confirmed."
+-
+  I split inventory line.
+-
+  !python {model: stock.inventory.line.split}: |
+    context.update({'active_model': 'stock.inventory.line', 'active_id': ref('stock_inventory_line_icecream_lot0'), 'active_ids': [ref('stock_inventory_line_icecream_lot0')]})
+-
+  !record {model: stock.inventory.line.split, id: split_inventory_lot0}:
+    use_exist: True
+    line_exist_ids:
+        - quantity: 6
+          prodlot_id: lot_icecream_0
+        - quantity: 4
+          prodlot_id: lot_icecream_0
+-
+  !python {model: stock.inventory.line.split }: |
+    self.split_lot(cr, uid, [ref('split_inventory_lot0')], context=context)
+-
+  I fill inventory line.
+-
+  !python {model: stock.fill.inventory}: |
+    context.update({'active_model': 'stock.inventory', 'active_id': ref('stock_inventory_icecream'), 'active_ids': [ref('stock_inventory_icecream')]})
+-
+  !record {model: stock.fill.inventory, id: fill_inventory}:
+    location_id: location_refrigerator
+    recursive: True
+-
+  !python {model: stock.fill.inventory }: |
+    self.fill_inventory(cr, uid, [ref('fill_inventory')], context=context)
+
+-
+  Now I check vitual stock of Ice-cream after confirmed physical inventory.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_icecream'), context=context)
+    assert product.virtual_available == 100, "Vitual stock is not updated."
+-
+  I update the price of the Ice-cream lot.
+-
+  !python {model: lot.change.standard.price}: |
+    context.update({'active_model':'stock.production.lot', 'active_id': ref('lot_icecream_0'), 'active_ids':[ref('lot_icecream_0')]})
+-
+  !record {model: lot.change.standard.price, id: change_price}:
+    new_price: 120
+-
+  !python {model: lot.change.standard.price}: |
+    self.change_price(cr, uid, [ref('change_price')], context=context)
+-
+  I check price of Ice-cream lot after update price.
+-
+  !python {model: stock.production.lot}: |
+    lot = self.browse(cr, uid, ref('lot_icecream_0'), context=context)
+    assert lot.standard_price == 120, "Price is not updated."
