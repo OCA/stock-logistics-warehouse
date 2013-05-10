@@ -65,9 +65,9 @@ class stock_production_lot(orm.Model):
         stock_input_acc = datas.get('stock_input_account', False)
         journal_id = datas.get('stock_journal', False)
         lot_obj=self.browse(cr, uid, ids, context=context)[0]
-        account_valuation = lot_obj.product_it.categ_id.property_stock_valuation_account_id
+        account_valuation = lot_obj.product_id.categ_id.property_stock_valuation_account_id
         account_valuation_id = account_valuation and account_valuation.id or False
-        if not account_valuation_id: raise osv.except_osv(_('Error!'), _('Specify valuation Account for Product Category: %s.') % (lot_obj.product_it.categ_id.name))
+        if not account_valuation_id: raise osv.except_osv(_('Error!'), _('Specify valuation Account for Product Category: %s.') % (lot_obj.product_id.categ_id.name))
         move_ids = []
         loc_ids = location_obj.search(cr, uid,[('usage','=','internal')])
         for rec_id in ids:
@@ -176,4 +176,87 @@ class stock_move(orm.Model):
                 amount_unit = move.prodlot_id.price_get(context=currency_ctx)[move.prodlot_id.id]
                 reference_amount = amount_unit * qty
                 res[0]  = reference_amount
+        return res
+    
+    def do_partial(self, cr, uid, ids, partial_datas, context=None):
+        if context is None:
+            context = {}
+        modified_products = []
+        prod_obj = self.pool.get('product.product')
+        for pick in self.browse(cr, uid, ids, context=context):
+            for move in pick.move_lines:
+                if move.prodlot_id and move.product_id.lot_valuation and (
+                    pick.type == 'in') and (move.prodlot_id.cost_method == 'average'):
+        
+                        # Hack to avoid Average price computation on product
+                        move.product_id.write({'cost_method': 'standard'})
+                        modified_products.append(move.product_id.id)
+                        
+                        self.pool.get('stock.picking').compute_price(
+                            cr, uid, partial_datas, move, context=context)
+                                    
+        res = super(stock_picking,self).do_partial(cr, uid, ids, partial_datas, context=context)
+        prod_obj.write(cr, uid, modified_products, {'cost_method': 'average'})
+        return res
+
+class stock_picking(orm.Model):
+    _inherit = "stock.picking"
+    
+    def compute_price(self, cr, uid, partial_datas, move, context=None):
+        if context is None:
+            context = {}
+        lot_obj = self.pool.get('stock.production.lot')
+        uom_obj = self.pool.get('product.uom')
+        move_obj = self.pool.get('stock.move')
+        currency_obj = self.pool.get('res.currency')
+        partial_data = partial_datas.get('move%s'%(move.id), {})
+        product_uom = partial_data.get('product_uom',False)
+        product_qty = partial_data.get('product_qty',0.0)
+        product_currency = partial_data.get('product_currency',False)
+        product_price = partial_data.get('product_price',0.0)
+        
+        lot = lot_obj.browse(cr, uid, move.prodlot_id.id)
+        product = lot.product_id
+        move_currency_id = move.company_id.currency_id.id
+        context['currency_id'] = move_currency_id
+        qty = uom_obj._compute_qty(cr, uid, product_uom, product_qty, product.uom_id.id)
+        if qty > 0:
+            new_price = currency_obj.compute(cr, uid, product_currency,
+                    move_currency_id, product_price)
+            new_price = uom_obj._compute_price(cr, uid, product_uom, new_price,
+                    product.uom_id.id)
+            if lot.stock_available <= 0:
+                new_std_price = new_price
+            else:
+                # Get the standard price
+                amount_unit = lot.price_get(context=context)[lot.id]
+                new_std_price = ((amount_unit * lot.stock_available)\
+                    + (new_price * qty))/(lot.stock_available + qty)
+
+            lot_obj.write(cr, uid, [lot.id],{'standard_price': new_std_price})
+
+            # Record the values that were chosen in the wizard, so they can be
+            # used for inventory valuation if real-time valuation is enabled.
+            move_obj.write(cr, uid, [move.id],
+                    {'price_unit': product_price,
+                     'price_currency_id': product_currency})
+    
+    def do_partial(self, cr, uid, ids, partial_datas, context=None):
+        if context is None:
+            context = {}
+        modified_products = []
+        prod_obj = self.pool.get('product.product')
+        for pick in self.browse(cr, uid, ids, context=context):
+            for move in pick.move_lines:
+                if move.prodlot_id and move.product_id.lot_valuation and (
+                    pick.type == 'in') and (move.prodlot_id.cost_method == 'average'):
+        
+                        # Hack to avoid Average price computation on product
+                        move.product_id.write({'cost_method': 'standard'})
+                        modified_products.append(move.product_id.id)
+                        
+                        self.compute_price(cr, uid, partial_datas, move, context=context)
+                                    
+        res = super(stock_picking,self).do_partial(cr, uid, ids, partial_datas, context=context)
+        prod_obj.write(cr, uid, modified_products, {'cost_method': 'average'})
         return res
