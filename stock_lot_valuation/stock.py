@@ -49,9 +49,14 @@ class stock_production_lot(orm.Model):
                         uom.id, res[lot.id], context['uom'])
             # Convert from price_type currency to asked one
             if 'currency_id' in context:
-                res[lot.id] = self.pool.get('res.currency').compute(cr, uid,
-                    lot.company_id.currency_id.id,
-                    context['currency_id'], res[lot.id],context=context)
+                currency_id = (lot.company_id and lot.company_id.currency_id
+                    and lot.company_id.currency_id.id) or (lot.product_id.company_id
+                    and lot.product_id.company_id.currency_id
+                    and lot.product_id.company_id.currency_id.id) or False
+                if currency_id:
+                    res[lot.id] = self.pool.get('res.currency').compute(cr, uid,
+                        currency_id,
+                        context['currency_id'], res[lot.id],context=context)
         return res
         
     def do_change_standard_price(self, cr, uid, ids, datas, context=None):
@@ -175,12 +180,16 @@ class stock_move(orm.Model):
             cr, uid, move, context=context)
         if not move.product_id.cost_method == 'average' or not move.price_unit:
             if move.product_id.lot_valuation and move.prodlot_id:
+                product_uom_obj = self.pool.get('product.uom')
+                qty = product_uom_obj._compute_qty(cr, uid, move.product_uom.id,
+                    move.product_qty, move.product_id.uom_id.id)
                 if context is None:
                     context = {}
                 currency_ctx = dict(context, currency_id = move.company_id.currency_id.id)
                 amount_unit = move.prodlot_id.price_get(context=currency_ctx)[move.prodlot_id.id]
                 reference_amount = amount_unit * qty
-                res[0]  = reference_amount
+                new_res = (reference_amount, res[1])
+                res = new_res
         return res
     
     def do_partial(self, cr, uid, ids, partial_datas, context=None):
