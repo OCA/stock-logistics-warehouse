@@ -172,3 +172,5 @@
   !python {model: stock.production.lot}: |
     lot = self.browse(cr, uid, ref('lot_icecream_0'), context=context)
     assert lot.standard_price == 120, "Price is not updated."
+    balance = self.pool.get('account.account').browse(cr, uid, ref('account.stk')).balance
+    assert balance == 6000.0, "Purchased Stocks balance is %s, not 6000 (old balance + (lot.standard_price - new_price) * lot.stock_available)" % balance

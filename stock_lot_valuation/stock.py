@@ -84,7 +84,7 @@ class stock_production_lot(orm.Model):
             for location in location_obj.browse(cr, uid, loc_ids, context=context):
                 c = context.copy()
                 c.update({
-                    'location': location.id,
+                    'location_id': location.id,
                     'compute_child': False
                 })
 
