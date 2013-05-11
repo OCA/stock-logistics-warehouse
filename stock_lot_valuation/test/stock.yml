@@ -86,6 +86,7 @@
     product_qty: 130.0
     location_id: location_refrigerator
     location_dest_id: location_delivery_counter
+    prodlot_id: lot_icecream_0
 -
  !record {model: stock.picking, id: incomming_shipment}:
     type: in
@@ -100,6 +101,7 @@
     product_qty: 50.0
     location_id: location_convenience_shop
     location_dest_id: location_refrigerator
+    prodlot_id: lot_icecream_0
 
 -
   I update the price of the Ice-cream.
@@ -174,3 +176,50 @@
     assert lot.standard_price == 120, "Price is not updated."
     balance = self.pool.get('account.account').browse(cr, uid, ref('account.stk')).balance
     assert balance == 6000.0, "Purchased Stocks balance is %s, not 6000 (old balance + (lot.standard_price - new_price) * lot.stock_available)" % balance
+
+-
+  I confirm outgoing shipment of 130 kgm Ice-cream.
+-
+  !workflow {model: stock.picking, action: button_confirm, ref: outgoing_shipment}
+-
+  I check shipment details after confirmed.
+-
+  !python {model: stock.picking}: |
+    shipment = self.browse(cr, uid, ref("outgoing_shipment"))
+    assert shipment.state == "confirmed", "Shipment should be confirmed."
+    for move_line in shipment.move_lines:
+        assert move_line.state == "confirmed", "Move should be confirmed."
+
+-
+  I confirm incoming shipment of 50 kgm Ice-cream.
+-
+  !workflow {model: stock.picking, action: button_confirm, ref: incomming_shipment}
+-
+  I receive 40kgm Ice-cream so I make backorder of incomming shipment for 40 kgm.
+-
+  !python {model: stock.partial.picking}: |
+    context.update({'active_model': 'stock.picking', 'active_id': ref('incomming_shipment'), 'active_ids': [ref('incomming_shipment')]})
+-
+  !record {model: stock.partial.picking, id: partial_incomming}:
+    move_ids:
+        - quantity: 40
+          product_id: product_icecream
+          product_uom: product.product_uom_kgm
+          move_id: incomming_shipment_icecream
+          location_id: location_convenience_shop
+          location_dest_id: location_refrigerator
+          prodlot_id: lot_icecream_0
+-
+  !python {model: stock.partial.picking }: |
+    self.do_partial(cr, uid, [ref('partial_incomming')], context=context)
+-
+  I check backorder shipment after received partial shipment.
+-
+  !python {model: stock.picking}: |
+    shipment = self.browse(cr, uid, ref("incomming_shipment"))
+    backorder = shipment.backorder_id
+    assert backorder, "Backorder should be created after partial shipment."
+    assert backorder.state == 'done', "Backorder should be close after received."
+    for move_line in backorder.move_lines:
+        assert move_line.product_qty == 40, "Qty in backorder does not correspond."
+        assert move_line.state == 'done', "Move line of backorder should be closed."

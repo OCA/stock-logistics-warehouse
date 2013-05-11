@@ -37,7 +37,7 @@ This module extends standard stock valuation (based on products). Valuing lots a
         ],
     "demo" : [],
     'test': [
-        'test/opening_stock.yml',
+        'test/stock.yml',
         ],
     "active": False,
     "installable": True

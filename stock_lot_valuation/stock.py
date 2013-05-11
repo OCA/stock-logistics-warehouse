@@ -256,21 +256,14 @@ class stock_picking(orm.Model):
                      'price_currency_id': product_currency})
     
     def do_partial(self, cr, uid, ids, partial_datas, context=None):
+        import pdb; pdb.set_trace()
         if context is None:
             context = {}
-        modified_products = []
         prod_obj = self.pool.get('product.product')
         for pick in self.browse(cr, uid, ids, context=context):
             for move in pick.move_lines:
                 if move.prodlot_id and move.product_id.lot_valuation and (
                     pick.type == 'in') and (move.prodlot_id.cost_method == 'average'):
-        
-                        # Hack to avoid Average price computation on product
-                        move.product_id.write({'cost_method': 'standard'})
-                        modified_products.append(move.product_id.id)
-                        
                         self.compute_price(cr, uid, partial_datas, move, context=context)
-                                    
         res = super(stock_picking,self).do_partial(cr, uid, ids, partial_datas, context=context)
-        prod_obj.write(cr, uid, modified_products, {'cost_method': 'average'})
         return res
