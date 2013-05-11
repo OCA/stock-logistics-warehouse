@@ -153,6 +153,8 @@
 -
   !python {model: stock.inventory}: |
     self.action_done(cr, uid, [ref('stock_inventory_icecream')], context=context)
+    balance = self.pool.get('account.account').browse(cr, uid, ref('account.stk')).balance
+    assert balance == 3500.0, "Purchased Stocks balance is %s, not 3500 (50*70)" % balance
 -
   I update the price of the Ice-cream lot.
 -
