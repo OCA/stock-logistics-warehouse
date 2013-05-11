@@ -25,6 +25,11 @@
     'description': """
 Stock valuation (standard or average price, ...) based on lots.
 This module extends standard stock valuation (based on products). Valuing lots allows to have different costs for different lots of the same product.
+
+Usage
+-----
+Set the 'Lot valuation' flag on product form (used for real time valuation).
+As for products, lots have 'cost' and 'costing method' fields. Also, a 'Change Standard Price' wizard is available.
 """,
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
