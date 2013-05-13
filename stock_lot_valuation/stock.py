@@ -257,3 +257,12 @@ class stock_picking(orm.Model):
                         self.compute_price(cr, uid, partial_datas, move, context=context)
         res = super(stock_picking,self).do_partial(cr, uid, ids, partial_datas, context=context)
         return res
+
+class stock_partial_picking(orm.TransientModel):
+    _inherit = "stock.partial.picking"
+
+    def _product_cost_for_average_update(self, cr, uid, move):
+        res = super(stock_partial_picking,self)._product_cost_for_average_update(cr, uid, move)
+        if move.prodlot_id and move.product_id.lot_valuation:
+            res['cost'] = move.prodlot_id.standard_price
+        return res
