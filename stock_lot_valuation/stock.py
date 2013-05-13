@@ -250,7 +250,6 @@ class stock_picking(orm.Model):
                      'price_currency_id': product_currency})
     
     def do_partial(self, cr, uid, ids, partial_datas, context=None):
-        import pdb; pdb.set_trace()
         if context is None:
             context = {}
         prod_obj = self.pool.get('product.product')
