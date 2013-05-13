@@ -42,7 +42,7 @@ As for products, lots have 'cost' and 'costing method' fields. Also, a 'Change S
         ],
     "demo" : [],
     'test': [
-        'test/stock.yml',
+        'test/stock.yml', # TODO cover user interface operations
         ],
     "active": False,
     "installable": True
