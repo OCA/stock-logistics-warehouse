@@ -194,11 +194,10 @@ class stock_move(orm.Model):
     def do_partial(self, cr, uid, ids, partial_datas, context=None):
         if context is None:
             context = {}
-        pick_obj = self.pool.get('atock.picking')
-        for pick in self.browse(cr, uid, ids, context=context):
-            for move in pick.move_lines:
-                pick_obj.write_lot(cr, uid, move, partial_datas, context=context)
-        res = super(stock_picking,self).do_partial(cr, uid, ids, partial_datas, context=context)
+        pick_obj = self.pool.get('stock.picking')
+        for move in self.browse(cr, uid, ids, context=context):
+            pick_obj.write_lot(cr, uid, move, partial_datas, context=context)
+        res = super(stock_move,self).do_partial(cr, uid, ids, partial_datas, context=context)
         return res
 
 class stock_picking(orm.Model):
