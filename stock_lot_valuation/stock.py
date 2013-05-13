@@ -197,10 +197,13 @@ class stock_move(orm.Model):
         prod_obj = self.pool.get('product.product')
         for pick in self.browse(cr, uid, ids, context=context):
             for move in pick.move_lines:
-                if move.prodlot_id and move.product_id.lot_valuation and (
-                    pick.type == 'in') and (move.prodlot_id.cost_method == 'average'):
-                        self.pool.get('stock.picking').compute_price(
-                            cr, uid, partial_datas, move, context=context)
+                if partial_datas.get('move%s'%(move.id)):
+                    partial_data = partial_datas.get('move%s'%(move.id), {})
+                    if partial_data.get('prodlot_id'):
+                        lot = lot_obj.browse(cr, uid, partial_data['prodlot_id'], context)
+                        if move.product_id.lot_valuation and (
+                            pick.type == 'in') and (lot.cost_method == 'average'):
+                                self.compute_price(cr, uid, partial_datas, move, context=context)
         res = super(stock_picking,self).do_partial(cr, uid, ids, partial_datas, context=context)
         return res
 
@@ -247,14 +250,20 @@ class stock_picking(orm.Model):
                      'price_currency_id': product_currency})
     
     def do_partial(self, cr, uid, ids, partial_datas, context=None):
+        import pdb; pdb.set_trace()
         if context is None:
             context = {}
         prod_obj = self.pool.get('product.product')
+        lot_obj = self.pool.get('stock.production.lot')
         for pick in self.browse(cr, uid, ids, context=context):
             for move in pick.move_lines:
-                if move.prodlot_id and move.product_id.lot_valuation and (
-                    pick.type == 'in') and (move.prodlot_id.cost_method == 'average'):
-                        self.compute_price(cr, uid, partial_datas, move, context=context)
+                if partial_datas.get('move%s'%(move.id)):
+                    partial_data = partial_datas.get('move%s'%(move.id), {})
+                    if partial_data.get('prodlot_id'):
+                        lot = lot_obj.browse(cr, uid, partial_data['prodlot_id'], context)
+                        if move.product_id.lot_valuation and (
+                            pick.type == 'in') and (lot.cost_method == 'average'):
+                                self.compute_price(cr, uid, partial_datas, move, context=context)
         res = super(stock_picking,self).do_partial(cr, uid, ids, partial_datas, context=context)
         return res
 
