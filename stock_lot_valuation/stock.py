@@ -184,7 +184,7 @@ class stock_move(orm.Model):
                 move.product_qty, move.product_id.uom_id.id)
             if context is None:
                 context = {}
-            currency_ctx = dict(context, currency_id = move.company_id.currency_id.id)
+            currency_ctx = dict(context, currency_id = res[1])
             amount_unit = move.prodlot_id.price_get(context=currency_ctx)[move.prodlot_id.id]
             reference_amount = amount_unit * qty
             new_res = (reference_amount, res[1])
@@ -244,16 +244,25 @@ class stock_picking(orm.Model):
     
     def write_lot(self, cr, uid, move, partial_datas, context=None):
         lot_obj = self.pool.get('stock.production.lot')
+        currency_obj = self.pool.get('res.currency')
+        uom_obj = self.pool.get('product.uom')
         if partial_datas.get('move%s'%(move.id)):
             partial_data = partial_datas.get('move%s'%(move.id), {})
             product_price = partial_data.get('product_price',0.0)
+            product_currency = partial_data.get('product_currency',False)
+            product_uom = partial_data.get('product_uom',False)
             if partial_data.get('prodlot_id'):
                 lot = lot_obj.browse(cr, uid, partial_data['prodlot_id'], context)
+                product = lot.product_id
                 if move.product_id.lot_valuation and (
                     move.picking_id.type == 'in') and (lot.cost_method == 'average'):
                         self.compute_price(cr, uid, partial_datas, move, context=context)
                 if move.product_id.lot_valuation and product_price and not lot.standard_price:
-                    lot.write({'standard_price': product_price})
+                    new_price = currency_obj.compute(cr, uid, product_currency,
+                            move.company_id.currency_id.id, product_price)
+                    new_price = uom_obj._compute_price(cr, uid, product_uom, new_price,
+                            product.uom_id.id)
+                    lot.write({'standard_price': new_price})
     
     def do_partial(self, cr, uid, ids, partial_datas, context=None):
         if context is None:
