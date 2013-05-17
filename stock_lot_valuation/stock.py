@@ -184,10 +184,10 @@ class stock_move(orm.Model):
                 move.product_qty, move.product_id.uom_id.id)
             if context is None:
                 context = {}
-            currency_ctx = dict(context, currency_id = res[1])
+            currency_ctx = dict(context, currency_id = move.company_id.currency_id.id)
             amount_unit = move.prodlot_id.price_get(context=currency_ctx)[move.prodlot_id.id]
             reference_amount = amount_unit * qty
-            new_res = (reference_amount, res[1])
+            new_res = (reference_amount, move.company_id.currency_id.id)
             res = new_res
         return res
     
