@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    Copyright (C) 2013 Agile Business Group sagl (<http://www.agilebg.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -28,13 +28,14 @@ You can choose which stock moves have to generate inventory valutanion accountin
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
-    "depends" : ['stock'],
-    "data" : [
+    "depends": ['stock'],
+    "data": [
         "stock_view.xml",
-        ],
-    "demo" : [],
+    ],
+    "demo": [],
     'test': [
-        ],
+        'test/stock.yml'
+    ],
     "active": False,
     "installable": True
 }
