@@ -32,12 +32,14 @@ class stock_move(orm.Model):
     _inherit = "stock.move"
     
     def _create_product_valuation_moves(self, cr, uid, move, context=None):
-        if move.location_id.company_id == move.location_dest_id.company_id:
-            if (move.location_id.usage == 'internal' or
-                move.location_id.consider_internal) and (
-                move.location_dest_id.usage == 'internal' or
-                move.location_dest_id.consider_internal):
-                return
-        res=super(stock_move,self)._create_product_valuation_moves(
+        if (move.location_id.company_id and move.location_dest_id.company_id
+            and move.location_id.company_id != move.location_dest_id.company_id):
+            return super(stock_move,self)._create_product_valuation_moves(
+                cr, uid, move, context=context)
+        if (move.location_id.usage == 'internal' or
+            move.location_id.consider_internal) and (
+            move.location_dest_id.usage == 'internal' or
+            move.location_dest_id.consider_internal):
+            return
+        return super(stock_move,self)._create_product_valuation_moves(
             cr, uid, move, context=context)
-        return res
