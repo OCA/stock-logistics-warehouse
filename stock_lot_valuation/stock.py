@@ -122,7 +122,7 @@ class stock_production_lot(orm.Model):
                     move_id = move_obj.create(cr, uid, {
                         'journal_id': journal_id,
                         'company_id': company_id
-                        })
+                        }, context=context)
 
                     move_ids.append(move_id)
 
@@ -144,13 +144,13 @@ class stock_production_lot(orm.Model):
                             'account_id': stock_input_acc,
                             'debit': amount_diff,
                             'move_id': move_id,
-                            })
+                            }, context=context)
                         move_line_obj.create(cr, uid, {
                             'name': product.categ_id.name,
                             'account_id': account_valuation_id,
                             'credit': amount_diff,
                             'move_id': move_id
-                            })
+                            }, context=context)
                     elif diff < 0:
                         if not stock_output_acc:
                             stock_output_acc = product.property_stock_account_output.id
@@ -169,13 +169,13 @@ class stock_production_lot(orm.Model):
                             'account_id': stock_output_acc,
                             'credit': amount_diff,
                             'move_id': move_id
-                            })
+                            }, context=context)
                         move_line_obj.create(cr, uid, {
                             'name': product.categ_id.name,
                             'account_id': account_valuation_id,
                             'debit': amount_diff,
                             'move_id': move_id
-                            })
+                            }, context=context)
 
             self.write(cr, uid, rec_id, {'standard_price': new_price})
 
