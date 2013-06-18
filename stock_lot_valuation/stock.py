@@ -79,7 +79,7 @@ class stock_production_lot(orm.Model):
         stock_output_acc = datas.get('stock_output_account', False)
         stock_input_acc = datas.get('stock_input_account', False)
         journal_id = datas.get('stock_journal', False)
-        lot_obj=self.browse(cr, uid, ids, context=context)[0]
+        lot_obj = self.browse(cr, uid, ids, context=context)[0]
         account_valuation = lot_obj.product_id.categ_id.property_stock_valuation_account_id
         account_valuation_id = account_valuation and account_valuation.id or False
         if not account_valuation_id:
@@ -87,7 +87,8 @@ class stock_production_lot(orm.Model):
                 _('Specify valuation Account for Product Category: %s.')
                 % (lot_obj.product_id.categ_id.name))
         move_ids = []
-        loc_ids = location_obj.search(cr, uid,[('usage','=','internal')])
+        loc_ids = location_obj.search(cr, uid, [('usage', '=', 'internal')],
+            context=context)
         for rec_id in ids:
             for location in location_obj.browse(cr, uid, loc_ids, context=context):
                 c = context.copy()
