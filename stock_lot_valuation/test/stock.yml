@@ -88,14 +88,14 @@
     location_dest_id: location_delivery_counter
     prodlot_id: lot_icecream_0
 -
- !record {model: stock.picking, id: incomming_shipment}:
+ !record {model: stock.picking, id: incoming_shipment}:
     type: in
     invoice_state: 2binvoiced
     partner_id: base.res_partner_address_9
     location_dest_id: location_refrigerator
 -
- !record {model: stock.move, id: incomming_shipment_icecream}:
-    picking_id: incomming_shipment
+ !record {model: stock.move, id: incoming_shipment_icecream}:
+    picking_id: incoming_shipment
     product_id: product_icecream
     product_uom: product.product_uom_kgm
     product_qty: 50.0
@@ -193,33 +193,33 @@
 -
   I confirm incoming shipment of 50 kgm Ice-cream.
 -
-  !workflow {model: stock.picking, action: button_confirm, ref: incomming_shipment}
+  !workflow {model: stock.picking, action: button_confirm, ref: incoming_shipment}
 -
-  I receive 40kgm Ice-cream so I make backorder of incomming shipment for 40 kgm.
+  I receive 40kgm Ice-cream so I make backorder of incoming shipment for 40 kgm.
 -
   !python {model: stock.partial.picking}: |
-    context.update({'active_model': 'stock.picking', 'active_id': ref('incomming_shipment'), 'active_ids': [ref('incomming_shipment')]})
+    context.update({'active_model': 'stock.picking', 'active_id': ref('incoming_shipment'), 'active_ids': [ref('incoming_shipment')]})
 -
-  !record {model: stock.partial.picking, id: partial_incomming}:
+  !record {model: stock.partial.picking, id: partial_incoming}:
     move_ids:
         - quantity: 40
           product_id: product_icecream
           product_uom: product.product_uom_kgm
-          move_id: incomming_shipment_icecream
+          move_id: incoming_shipment_icecream
           location_id: location_convenience_shop
           location_dest_id: location_refrigerator
           prodlot_id: lot_icecream_0
           cost: 100
 -
   !python {model: stock.partial.picking }: |
-    self.do_partial(cr, uid, [ref('partial_incomming')], context=context)
+    self.do_partial(cr, uid, [ref('partial_incoming')], context=context)
 -
   I check backorder shipment after received partial shipment.
 -
   !python {model: stock.picking}: |
     lot = self.pool.get('stock.production.lot').browse(cr, uid, ref('lot_icecream_0'), context=context)
     assert lot.standard_price == 111.11, "Price is not updated to 111.11 (((120*50)+(100*40))/(50+40))"
-    shipment = self.browse(cr, uid, ref("incomming_shipment"))
+    shipment = self.browse(cr, uid, ref("incoming_shipment"))
     backorder = shipment.backorder_id
     assert backorder, "Backorder should be created after partial shipment."
     assert backorder.state == 'done', "Backorder should be close after received."
