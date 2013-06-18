@@ -226,7 +226,7 @@ class stock_picking(orm.Model):
         product_currency = partial_data.get('product_currency',False)
         product_price = partial_data.get('product_price',0.0)
         
-        lot = lot_obj.browse(cr, uid, move.prodlot_id.id)
+        lot = lot_obj.browse(cr, uid, move.prodlot_id.id, context=context)
         product = lot.product_id
         move_currency_id = move.company_id.currency_id.id
         context['currency_id'] = move_currency_id
@@ -245,14 +245,15 @@ class stock_picking(orm.Model):
                 new_std_price = (((amount_unit * lot.stock_available)
                     + (new_price * qty))/(lot.stock_available + qty))
 
-            lot_obj.write(cr, uid, [lot.id],{'standard_price': new_std_price})
+            lot_obj.write(cr, uid, [lot.id],{'standard_price': new_std_price},
+                context=context)
 
             # Record the values that were chosen in the wizard, so they can be
             # used for inventory valuation if real-time valuation is enabled.
             move_obj.write(cr, uid, [move.id],{
                 'price_unit': product_price,
                 'price_currency_id': product_currency
-                })
+                }, context=context)
     
     def write_lot(self, cr, uid, move, partial_datas, context=None):
         lot_obj = self.pool.get('stock.production.lot')
