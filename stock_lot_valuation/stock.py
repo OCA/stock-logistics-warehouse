@@ -112,10 +112,8 @@ class stock_production_lot(orm.Model):
                     # Accounting Entries
                     #
                     product = lot.product_id
-                    if not journal_id:
-                        journal_id = (product.categ_id.property_stock_journal
-                            and product.categ_id.property_stock_journal.id
-                            or False)
+                    if not journal_id and product.categ_id.property_stock_journal:
+                        journal_id = product.categ_id.property_stock_journal.id
                     if not journal_id:
                         raise osv.except_osv(_('Error!'),
                             _("Please define journal "
