@@ -52,11 +52,12 @@ class stock_production_lot(orm.Model):
                     uom.id, res[lot.id], context['uom'])
             # Convert from price_type currency to asked one
             if 'currency_id' in context:
-                currency_id = (lot.company_id and lot.company_id.currency_id
-                    and lot.company_id.currency_id.id) or (
-                    lot.product_id.company_id
-                    and lot.product_id.company_id.currency_id
-                    and lot.product_id.company_id.currency_id.id) or False
+                currency_id = False
+                if lot.company_id and lot.company_id.currency_id:
+                    currency_id = lot.company_id.currency_id.id
+                elif (lot.product_id.company_id
+                    and lot.product_id.company_id.currency_id):
+                        currency_id = lot.product_id.company_id.currency_id.id
                 if currency_id:
                     res[lot.id] = self.pool.get('res.currency').compute(cr, uid,
                         currency_id,
