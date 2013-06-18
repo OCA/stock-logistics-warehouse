@@ -27,10 +27,13 @@ class change_standard_price(orm.TransientModel):
     _name = "lot.change.standard.price"
     _description = "Change Standard Price"
     _columns = {
-        'new_price': fields.float('Price', required=True, digits_compute=dp.get_precision('Account'),
-                                  help="If cost price is increased, stock variation account will be debited "
-                                        "and stock output account will be credited with the value = (difference of amount * quantity available).\n"
-                                        "If cost price is decreased, stock variation account will be creadited and stock input account will be debited."),
+        'new_price': fields.float('Price', required=True,
+            digits_compute=dp.get_precision('Account'),
+            help="If cost price is increased, stock variation account will be debited "
+                "and stock output account will be credited with the value = "
+                "(difference of amount * quantity available).\n"
+                "If cost price is decreased, stock variation account will be "
+                "creadited and stock input account will be debited."),
         'stock_account_input':fields.many2one('account.account', 'Stock Input Account'),
         'stock_account_output':fields.many2one('account.account', 'Stock Output Account'),
         'stock_journal':fields.many2one('account.journal', 'Stock journal', required=True),
@@ -51,9 +54,11 @@ class change_standard_price(orm.TransientModel):
         lot_pool = self.pool.get('stock.production.lot')
         product_pool = self.pool.get('product.product')
         lot_obj = lot_pool.browse(cr, uid, context.get('active_id', False))
-        res = super(change_standard_price, self).default_get(cr, uid, fields, context=context)
+        res = super(change_standard_price, self).default_get(
+            cr, uid, fields, context=context)
 
-        accounts = product_pool.get_product_accounts(cr, uid, lot_obj.product_id.id, context={})
+        accounts = product_pool.get_product_accounts(
+            cr, uid, lot_obj.product_id.id, context={})
 
         price = lot_obj.standard_price
 

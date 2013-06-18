@@ -25,5 +25,6 @@ class product_product(orm.Model):
     _inherit = "product.product"
 
     _columns = {
-        'lot_valuation':fields.boolean('Lot valuation', help="Use lot valuation instead of product valuation"),
+        'lot_valuation':fields.boolean('Lot valuation',
+            help="Use lot valuation instead of product valuation"),
         }

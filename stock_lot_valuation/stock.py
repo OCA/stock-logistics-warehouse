@@ -24,16 +24,19 @@ import openerp.addons.decimal_precision as dp
 
 class stock_production_lot(orm.Model):
     _inherit = "stock.production.lot"
-    
+
     _columns = {
         'standard_price': fields.float('Cost', digits_compute=dp.get_precision('Lot Price'),
-            help="Cost price (in company currency) of the lot used for standard stock valuation in accounting.",
+            help="Cost price (in company currency) of the lot used for standard"
+                " stock valuation in accounting.",
             groups="base.group_user"),
         'cost_method': fields.selection([
             ('standard','Standard Price'),
             ('average','Average Price')
             ], 'Costing Method',
-            help="Standard Price: The cost price is manually updated at the end of a specific period. \nAverage Price: The cost price is recomputed at each incoming shipment."),
+            help="Standard Price: The cost price is manually updated at the end"
+                " of a specific period. \nAverage Price: The cost price is "
+                "recomputed at each incoming shipment."),
         }
     
     def price_get(self, cr, uid, ids, context=None):
@@ -46,11 +49,12 @@ class stock_production_lot(orm.Model):
             if 'uom' in context:
                 uom = lot.product_id.uom_id or lot.product_id.uos_id
                 res[lot.id] = product_uom_obj._compute_price(cr, uid,
-                        uom.id, res[lot.id], context['uom'])
+                    uom.id, res[lot.id], context['uom'])
             # Convert from price_type currency to asked one
             if 'currency_id' in context:
                 currency_id = (lot.company_id and lot.company_id.currency_id
-                    and lot.company_id.currency_id.id) or (lot.product_id.company_id
+                    and lot.company_id.currency_id.id) or (
+                    lot.product_id.company_id
                     and lot.product_id.company_id.currency_id
                     and lot.product_id.company_id.currency_id.id) or False
                 if currency_id:
@@ -77,7 +81,10 @@ class stock_production_lot(orm.Model):
         lot_obj=self.browse(cr, uid, ids, context=context)[0]
         account_valuation = lot_obj.product_id.categ_id.property_stock_valuation_account_id
         account_valuation_id = account_valuation and account_valuation.id or False
-        if not account_valuation_id: raise osv.except_osv(_('Error!'), _('Specify valuation Account for Product Category: %s.') % (lot_obj.product_id.categ_id.name))
+        if not account_valuation_id:
+            raise osv.except_osv(_('Error!'),
+                _('Specify valuation Account for Product Category: %s.')
+                % (lot_obj.product_id.categ_id.name))
         move_ids = []
         loc_ids = location_obj.search(cr, uid,[('usage','=','internal')])
         for rec_id in ids:
@@ -91,82 +98,84 @@ class stock_production_lot(orm.Model):
                 lot = self.browse(cr, uid, rec_id, context=c)
                 qty = lot.stock_available
                 diff = lot.standard_price - new_price
-                if not diff: raise osv.except_osv(_('Error!'), _("No difference between standard price and new price!"))
+                if not diff:
+                    raise osv.except_osv(_('Error!'),
+                        _("No difference between standard price and new price!"))
                 if qty:
                     company_id = location.company_id and location.company_id.id or False
-                    if not company_id: raise osv.except_osv(_('Error!'), _('Please specify company in Location.'))
+                    if not company_id:
+                        raise osv.except_osv(_('Error!'),
+                            _('Please specify company in Location.'))
                     #
                     # Accounting Entries
                     #
                     product = lot.product_id
                     if not journal_id:
-                        journal_id = product.categ_id.property_stock_journal and product.categ_id.property_stock_journal.id or False
+                        journal_id = (product.categ_id.property_stock_journal
+                            and product.categ_id.property_stock_journal.id
+                            or False)
                     if not journal_id:
                         raise osv.except_osv(_('Error!'),
-                            _('Please define journal '\
-                              'on the product category: "%s" (id: %d).') % \
-                                (product.categ_id.name,
-                                    product.categ_id.id,))
+                            _("Please define journal "
+                            "on the product category: '%s' (id: %d).") %
+                            (product.categ_id.name, product.categ_id.id,))
                     move_id = move_obj.create(cr, uid, {
-                                'journal_id': journal_id,
-                                'company_id': company_id
-                                })
+                        'journal_id': journal_id,
+                        'company_id': company_id
+                        })
 
                     move_ids.append(move_id)
 
-
                     if diff > 0:
                         if not stock_input_acc:
-                            stock_input_acc = product.\
-                                property_stock_account_input.id
+                            stock_input_acc = product.property_stock_account_input.id
                         if not stock_input_acc:
-                            stock_input_acc = product.categ_id.\
-                                    property_stock_account_input_categ.id
+                            stock_input_acc = (
+                                product.categ_id.property_stock_account_input_categ.id
+                                )
                         if not stock_input_acc:
                             raise osv.except_osv(_('Error!'),
-                                    _('Please define stock input account ' \
-                                            'for this product: "%s" (id: %d).') % \
-                                            (product.name,
-                                                product.id,))
+                                _("Please define stock input account "
+                                "for this product: '%s' (id: %d).") %
+                                (product.name, product.id,))
                         amount_diff = qty * diff
                         move_line_obj.create(cr, uid, {
-                                    'name': product.name,
-                                    'account_id': stock_input_acc,
-                                    'debit': amount_diff,
-                                    'move_id': move_id,
-                                    })
+                            'name': product.name,
+                            'account_id': stock_input_acc,
+                            'debit': amount_diff,
+                            'move_id': move_id,
+                            })
                         move_line_obj.create(cr, uid, {
-                                    'name': product.categ_id.name,
-                                    'account_id': account_valuation_id,
-                                    'credit': amount_diff,
-                                    'move_id': move_id
-                                    })
+                            'name': product.categ_id.name,
+                            'account_id': account_valuation_id,
+                            'credit': amount_diff,
+                            'move_id': move_id
+                            })
                     elif diff < 0:
                         if not stock_output_acc:
-                            stock_output_acc = product.\
-                                property_stock_account_output.id
+                            stock_output_acc = product.property_stock_account_output.id
                         if not stock_output_acc:
-                            stock_output_acc = product.categ_id.\
-                                    property_stock_account_output_categ.id
+                            stock_output_acc = (
+                                product.categ_id.property_stock_account_output_categ.id
+                                )
                         if not stock_output_acc:
                             raise osv.except_osv(_('Error!'),
-                                    _('Please define stock output account ' \
-                                            'for this product: "%s" (id: %d).') % \
-                                            (product.name,
-                                                product.id,))
+                                _("Please define stock output account "
+                                "for this product: '%s' (id: %d).") %
+                                (product.name, product.id,))
                         amount_diff = qty * -diff
                         move_line_obj.create(cr, uid, {
-                                        'name': product.name,
-                                        'account_id': stock_output_acc,
-                                        'credit': amount_diff,
-                                        'move_id': move_id
-                                    })
+                            'name': product.name,
+                            'account_id': stock_output_acc,
+                            'credit': amount_diff,
+                            'move_id': move_id
+                            })
                         move_line_obj.create(cr, uid, {
-                                        'name': product.categ_id.name,
-                                        'account_id': account_valuation_id,
-                                        'debit': amount_diff,
-                                        'move_id': move_id
-                                    })
+                            'name': product.categ_id.name,
+                            'account_id': account_valuation_id,
+                            'debit': amount_diff,
+                            'move_id': move_id
+                            })
 
             self.write(cr, uid, rec_id, {'standard_price': new_price})
 
@@ -197,7 +206,8 @@ class stock_move(orm.Model):
         pick_obj = self.pool.get('stock.picking')
         for move in self.browse(cr, uid, ids, context=context):
             pick_obj.write_lot(cr, uid, move, partial_datas, context=context)
-        res = super(stock_move,self).do_partial(cr, uid, ids, partial_datas, context=context)
+        res = super(stock_move,self).do_partial(
+            cr, uid, ids, partial_datas, context=context)
         return res
 
 class stock_picking(orm.Model):
@@ -220,27 +230,29 @@ class stock_picking(orm.Model):
         product = lot.product_id
         move_currency_id = move.company_id.currency_id.id
         context['currency_id'] = move_currency_id
-        qty = uom_obj._compute_qty(cr, uid, product_uom, product_qty, product.uom_id.id)
+        qty = uom_obj._compute_qty(
+            cr, uid, product_uom, product_qty, product.uom_id.id)
         if qty > 0:
             new_price = currency_obj.compute(cr, uid, product_currency,
-                    move_currency_id, product_price)
+                move_currency_id, product_price)
             new_price = uom_obj._compute_price(cr, uid, product_uom, new_price,
-                    product.uom_id.id)
+                product.uom_id.id)
             if lot.stock_available <= 0:
                 new_std_price = new_price
             else:
                 # Get the standard price
                 amount_unit = lot.price_get(context=context)[lot.id]
-                new_std_price = ((amount_unit * lot.stock_available)\
-                    + (new_price * qty))/(lot.stock_available + qty)
+                new_std_price = (((amount_unit * lot.stock_available)
+                    + (new_price * qty))/(lot.stock_available + qty))
 
             lot_obj.write(cr, uid, [lot.id],{'standard_price': new_std_price})
 
             # Record the values that were chosen in the wizard, so they can be
             # used for inventory valuation if real-time valuation is enabled.
-            move_obj.write(cr, uid, [move.id],
-                    {'price_unit': product_price,
-                     'price_currency_id': product_currency})
+            move_obj.write(cr, uid, [move.id],{
+                'price_unit': product_price,
+                'price_currency_id': product_currency
+                })
     
     def write_lot(self, cr, uid, move, partial_datas, context=None):
         lot_obj = self.pool.get('stock.production.lot')
@@ -259,9 +271,9 @@ class stock_picking(orm.Model):
                         self.compute_price(cr, uid, partial_datas, move, context=context)
                 if move.product_id.lot_valuation and product_price and not lot.standard_price:
                     new_price = currency_obj.compute(cr, uid, product_currency,
-                            move.company_id.currency_id.id, product_price)
+                        move.company_id.currency_id.id, product_price)
                     new_price = uom_obj._compute_price(cr, uid, product_uom, new_price,
-                            product.uom_id.id)
+                        product.uom_id.id)
                     lot.write({'standard_price': new_price})
     
     def do_partial(self, cr, uid, ids, partial_datas, context=None):
@@ -270,14 +282,16 @@ class stock_picking(orm.Model):
         for pick in self.browse(cr, uid, ids, context=context):
             for move in pick.move_lines:
                 self.write_lot(cr, uid, move, partial_datas, context=context)
-        res = super(stock_picking,self).do_partial(cr, uid, ids, partial_datas, context=context)
+        res = super(stock_picking,self).do_partial(
+            cr, uid, ids, partial_datas, context=context)
         return res
 
 class stock_partial_picking(orm.TransientModel):
     _inherit = "stock.partial.picking"
 
     def _product_cost_for_average_update(self, cr, uid, move):
-        res = super(stock_partial_picking,self)._product_cost_for_average_update(cr, uid, move)
+        res = super(stock_partial_picking,self)._product_cost_for_average_update(
+            cr, uid, move)
         if move.prodlot_id and move.product_id.lot_valuation:
             res['cost'] = move.prodlot_id.standard_price
         return res
