@@ -23,7 +23,7 @@
     'version': '0.1',
     'category': 'Warehouse Management',
     'description': """
-You can choose which stock moves have to generate inventory valutanion accounting entries, by specifying it in the location form.
+You can choose which stock moves have to generate inventory valuation accounting entries, by specifying it in the location form.
 """,
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
