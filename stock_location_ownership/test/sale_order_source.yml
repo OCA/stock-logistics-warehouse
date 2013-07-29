@@ -1,0 +1,40 @@
+-
+  In order to check if the source location of a sale order line
+  becomes the source location of the delivery stock move.
+  I create a sale order.
+-
+  !record {model: sale.order, id: sale_source_01}:
+    partner_id: base.res_partner_2
+    note: Invoice after delivery
+    order_line:
+      - product_id: product.product_product_7
+        product_uom_qty: 8
+        location_id: stock.stock_location_shop1
+-
+  When I confirm the sale order
+-
+  !workflow {model: sale.order, action: order_confirm, ref: sale_source_01}
+-
+  Then a delivery order should have been generated
+-
+  !python {model: sale.order}: |
+    sale_order = self.browse(cr, uid, ref("sale_source_01"))
+    assert len(sale_order.picking_ids) == 1, (
+        "1 delivery order expected, got %d" % len(sale_order.picking_ids))
+-
+  And the source location of the stock move should be the one of
+  the sale order line
+-
+  !python {model: sale.order}: |
+    sale_order = self.browse(cr, uid, ref("sale_source_01"))
+    picking = sale_order.picking_ids[0]
+    for move in picking.move_lines:
+        expected_location_id = move.sale_line_id.location_id
+        assert move.location_id == expected_location_id, (
+            "Wrong location_id in stock.move, expected %s, got %s" %
+            (expected_location_id, move.location_id))
+        for procurement in move.procurements:
+            assert procurement.location_id == expected_location_id, (
+                "Wrong location_id in procurement.order, expected %s, got %s" %
+                (expected_location_id, procurement.location_id))
+
