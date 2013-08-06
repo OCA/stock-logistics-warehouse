@@ -28,31 +28,17 @@
  'images': [],
  'website': "http://www.camptocamp.com",
  'description': """
- Stock Location Ownership
-=========================
+Stock Location Ownership
+========================
 
-* Adds an ownership on a location
-
-* (To move/create in module: sale_sourced_by_line) Adds the possibility to source a line of sale order from a specific location instead of 
-using the location of the warehouse of the selected shop
-
- * Further on (to move/create in module: sale_ownership) will trigger under certain circonstances the creation of a PO:
-a) if customer != stock.location owner (Dispatch VCI, Dispatch PNS)
-then generate also PO and link it with picking (delivery order)
-b) if customer == stock.location owner (Dispatch PNS to NS)
-then SO should be with prices at 0 + add manually line for handling fee"
-
+Adds an ownership on the stock locations
 """,
- 'depends': ['sale_dropshipping',
-             'sale_stock',
+ 'depends': ['stock',
              ],
  'demo': [],
  'data': ['view/stock_view.xml',
-          'view/sale_view.xml',
           ],
+ 'test': [],
  'auto_install': False,
- 'test': ['test/sale_order_source.yml',
-          'test/sale_order_not_sourced.yml',
-          ],
  'installable': True,
  }
