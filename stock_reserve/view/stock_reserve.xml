@@ -128,8 +128,7 @@
 
         <menuitem action="action_stock_reservation"
             id="menu_action_stock_reservation"
-            parent="stock.menu_stock_products_moves"
-            sequence="10"
-            groups="stock.group_locations"/>
+            parent="stock.menu_stock_inventory_control"
+            sequence="30"/>
     </data>
 </openerp>

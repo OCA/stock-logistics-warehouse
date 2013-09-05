@@ -37,7 +37,7 @@ class stock_reservation(orm.Model):
                                    readonly=True,
                                    ondelete='cascade',
                                    select=1),
-        'date_validity': fields.datetime('Validity Date'),
+        'date_validity': fields.date('Validity Date'),
     }
 
     _defaults = {
@@ -75,6 +75,16 @@ class stock_reservation(orm.Model):
         move_obj = self.pool.get('stock.move')
         move_ids = [reserv['move_id'] for reserv in reservations]
         move_obj.action_cancel(cr, uid, move_ids, context=context)
+        return True
+
+    def release_validity_exceeded(self, cr, uid, ids=None, context=None):
+        """ Release all the reservation having an exceeded validity date """
+        domain = [('date_validity', '<', fields.date.today()),
+                  ('state', '=', 'done')]
+        if ids:
+            domain.append(('id', 'in', ids))
+        reserv_ids = self.search(cr, uid, domain, context=context)
+        self.release(cr, uid, reserv_ids, context=context)
         return True
 
     def unlink(self, cr, uid, ids, context=None):
