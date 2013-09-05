@@ -41,6 +41,7 @@ is automatically lifted.
              ],
  'demo': [],
  'data': ['view/stock_reserve.xml',
+          'view/product.xml',
           'data/stock_data.xml',
           'security/ir.model.access.csv',
           ],
