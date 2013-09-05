@@ -32,7 +32,7 @@ Stock Reserve
 =============
 
 Allows to create stock reservation on a product or a selection of
-products.  The reservations can be monitored and lifter on the product
+products.  The reservations can be monitored and lifted on the product
 view.  Each reservation can have a validity date, once reached, the
 reservation is automatically lifted.
 
@@ -40,7 +40,9 @@ reservation is automatically lifted.
  'depends': ['stock',
              ],
  'demo': [],
- 'data': [],
+ 'data': ['view/stock_reserve.xml',
+          'data/stock_data.xml',
+          ],
  'auto_install': False,
  'test': [],
  'installable': True,
