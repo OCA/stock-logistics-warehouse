@@ -24,7 +24,7 @@
                         <group>
                             <group name="main_grp" string="Details">
                                 <field name="product_id"
-                                    on_change="onchange_product_id(product_id, location_id, location_dest_id, False)"
+                                    on_change="onchange_product_id(product_id)"
                                     />
                                 <label for="product_qty" />
                                 <div>
