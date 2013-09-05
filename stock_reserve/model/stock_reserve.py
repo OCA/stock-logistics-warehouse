@@ -142,7 +142,6 @@ class stock_reservation(orm.Model):
         assert len(ids) == 1, "1 ID expected, got %r" % ids
         reserv = self.read(cr, uid, ids[0], ['move_id'], context=context,
                            load='_classic_write')
-
         mod_obj = self.pool.get('ir.model.data')
         act_obj = self.pool.get('ir.actions.act_window')
         get_ref = mod_obj.get_object_reference
