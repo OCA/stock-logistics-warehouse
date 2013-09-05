@@ -86,6 +86,7 @@ class stock_reservation(orm.Model):
         'type': 'internal',
         'location_id': _default_location_id,
         'location_dest_id': _default_dest_location_id,
+        'product_qty': 1.0,
     }
 
     def reserve(self, cr, uid, ids, context=None):
@@ -131,11 +132,7 @@ class stock_reservation(orm.Model):
         return super(stock_reservation, self).unlink(cr, uid, ids,
                                                      context=context)
 
-    def onchange_product_id(self, cr, uid, ids, prod_id=False, loc_id=False,
-                            loc_dest_id=False, partner_id=False, context=None):
-        """ On change of product id, if finds UoM, UoS,
-        quantity and UoS quantity.
-        """
+    def onchange_product_id(self, cr, uid, ids, product_id=False, context=None):
         move_obj = self.pool.get('stock.move')
         if ids:
             reserv = self.read(cr, uid, ids, ['move_id'], context=context,
@@ -143,9 +140,11 @@ class stock_reservation(orm.Model):
             move_ids = [rv['move_id'] for rv in reserv]
         else:
             move_ids = []
-        return move_obj.onchange_product_id(
-            cr, uid, move_ids, prod_id=prod_id, loc_id=loc_id,
-            loc_dest_id=loc_dest_id, partner_id=partner_id)
+        result = move_obj.onchange_product_id(
+            cr, uid, move_ids, prod_id=product_id, loc_id=False,
+            loc_dest_id=False, partner_id=False)
+        del result['value']['product_qty']  # keeps the current value
+        return result
 
     def onchange_quantity(self, cr, uid, ids, product_id, product_qty, context=None):
         """ On change of product quantity avoid negative quantities """
