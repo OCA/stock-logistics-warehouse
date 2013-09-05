@@ -149,5 +149,8 @@ class stock_reservation(orm.Model):
         __, action_id = get_ref(cr, uid, 'stock', 'action_move_form2')
         action = act_obj.read(cr, uid, action_id, context=context)
         action['name'] = _('Reservation Move')
-        action['domain'] = str([('id', '=', reserv['move_id'])])
+        # open directly in the form view
+        __, view_id = get_ref(cr, uid, 'stock', 'view_move_form')
+        action['views'] = [(view_id, 'form')]
+        action['res_id'] = reserv['move_id']
         return action
