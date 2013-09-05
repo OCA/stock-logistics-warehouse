@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="view_order_form_reserve" model="ir.ui.view">
+            <field name="name">sale.order.form.reserve</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit"/>
+            <field name="arch" type="xml">
+                <button name="action_quotation_send" position="before">
+                    <button name="button_stock_reserve" type="object"
+                        states="draft,sent"
+                        string="Reserve Stock"
+                        help="Pre-book products from stock"
+                        />
+                </button>
+
+                <field name="order_line" position="attributes">
+                    <attribute name="options">{"reload_on_button": 1}</attribute>
+                </field>
+
+                <xpath expr="//field[@name='order_line']/form//field[@name='state']" position="before">
+                    <button name="%(action_sale_stock_reserve)d"
+                        type="action"
+                        states="draft"
+                        string="Reserve Stock"
+                        attrs="{'invisible': [('reservation_id', '!=', False)]}" />
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                    <field name="reservation_id" readonly="1"/>
+                    <button name="%(action_sale_stock_reserve)d"
+                        type="action"
+                        states="draft"
+                        string="Reserve Stock"
+                        icon="terp-locked"
+                        attrs="{'invisible': [('reservation_id', '!=', False)]}" />
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/form//field[@name='type']" position="after">
+                    <label for="reservation_id" />
+                    <div attrs="{'invisible': [('type', '=', 'make_to_order')]}">
+                        <field name="reservation_id" readonly="1"
+                            class="oe_inline"/>
+                        <button name="button_stock_reserve_update"
+                            string="update"
+                            type="object"
+                            class="oe_link"
+                            attrs="{'invisible': [('reservation_id', '=', False)]}"/>
+                        -
+                        <button name="button_stock_reserve_cancel"
+                            string="cancel"
+                            type="object"
+                            class="oe_link"
+                            attrs="{'invisible': [('reservation_id', '=', False)]}"/>
+                    </div>
+                </xpath>
+
+                <field name="invoiced" position="before">
+                    <label for="has_stock_reservation"/>
+                    <div>
+                        <field name="has_stock_reservation"/>
+                        <button name="button_stock_reserve_cancel"
+                            string="cancel all"
+                            type="object" class="oe_link"
+                            attrs="{'invisible': [('has_stock_reservation', '=', False)]}"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
