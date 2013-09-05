@@ -42,6 +42,7 @@ reservation is automatically lifted.
  'demo': [],
  'data': ['view/stock_reserve.xml',
           'data/stock_data.xml',
+          'security/ir.model.access.csv',
           ],
  'auto_install': False,
  'test': [],
