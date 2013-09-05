@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-
 from openerp.osv import orm, fields
+from openerp.tools.translate import _
 
 
 class stock_reservation(orm.Model):
@@ -137,3 +137,17 @@ class stock_reservation(orm.Model):
         if not product_id or product_qty <= 0.0:
             return {'value': {'product_qty': 0.0}}
         return {}
+
+    def open_move(self, cr, uid, ids, context=None):
+        assert len(ids) == 1, "1 ID expected, got %r" % ids
+        reserv = self.read(cr, uid, ids[0], ['move_id'], context=context,
+                           load='_classic_write')
+
+        mod_obj = self.pool.get('ir.model.data')
+        act_obj = self.pool.get('ir.actions.act_window')
+        get_ref = mod_obj.get_object_reference
+        __, action_id = get_ref(cr, uid, 'stock', 'action_move_form2')
+        action = act_obj.read(cr, uid, action_id, context=context)
+        action['name'] = _('Reservation Move')
+        action['domain'] = str([('id', '=', reserv['move_id'])])
+        return action
