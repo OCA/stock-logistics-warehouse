@@ -19,5 +19,22 @@
 #
 ##############################################################################
 
-from . import stock_reserve
-from . import product
+from openerp.osv import orm, fields
+
+
+class product_product(orm.Model):
+    _inherit = 'product.product'
+
+    def open_stock_reservation(self, cr, uid, ids, context=None):
+        assert len(ids) == 1, "Expected 1 ID, got %r" % ids
+        mod_obj = self.pool.get('ir.model.data')
+        act_obj = self.pool.get('ir.actions.act_window')
+        get_ref = mod_obj.get_object_reference
+        __, action_id = get_ref(cr, uid, 'stock_reserve',
+                                'action_stock_reservation')
+        action = act_obj.read(cr, uid, action_id, context=context)
+        action['context'] = {'search_default_draft': 1,
+                             'search_default_reserved': 1,
+                             'default_product_id': ids[0],
+                             'search_default_product_id': ids[0]}
+        return action
