@@ -1,0 +1,65 @@
+-
+  I create a product to test the stock reservation
+-
+ !record {model: product.product, id: product_gelato}:
+    default_code: 001GELATO
+    name: Gelato
+    type: product
+    categ_id: product.product_category_1
+    list_price: 100.0
+    standard_price: 70.0
+    uom_id: product.product_uom_kgm
+    uom_po_id: product.product_uom_kgm
+    procure_method: make_to_stock
+    valuation: real_time
+    cost_method: average
+    property_stock_account_input: account.o_expense
+    property_stock_account_output: account.o_income
+-
+  I update the current stock of the Gelato with 10 kgm
+-
+  !record {model: stock.change.product.qty, id: change_qty}:
+    new_quantity: 10
+    product_id: product_gelato
+-
+  !python {model: stock.change.product.qty}: |
+    context['active_id'] = ref('product_gelato')
+    self.change_product_qty(cr, uid, [ref('change_qty')], context=context)
+-
+  In order to test reservation of the sales order, I create a sales order
+-
+  !record {model: sale.order, id: sale_reserve_01}:
+    partner_id: base.res_partner_2
+    payment_term: account.account_payment_term
+    order_line:
+      - product_id: product_gelato
+        product_uom_qty: 4
+-
+  I call the wizard to reserve the products of the sales order
+-
+  !record {model: sale.stock.reserve, id: wizard_reserve_01}:
+    note: Reservation for the sales order
+-
+  !python {model: sale.stock.reserve}: |
+    active_id = ref('sale_reserve_01')
+    context['active_id'] = active_id
+    context['active_ids'] = [active_id]
+    context['active_model'] = 'sale.order'
+    self.button_reserve(cr, uid, [ref('wizard_reserve_01')], context=context)
+-
+  I check Virtual stock of Gelato after update reservation
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_gelato'), context=context)
+    assert product.virtual_available == 6, "Stock is not updated."
+-
+  I release the sales order's reservations
+-
+  !python {model: sale.order}: |
+    self.release_all_stock_reservation(cr, uid, [ref('sale_reserve_01')], context=context)
+-
+  I check Virtual stock of Gelato after release of reservations
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_gelato'), context=context)
+    assert product.virtual_available == 10, "Stock is not updated."
