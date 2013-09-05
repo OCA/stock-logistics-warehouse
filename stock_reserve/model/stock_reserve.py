@@ -59,21 +59,15 @@ class stock_reservation(orm.Model):
         move_obj = self.pool.get('stock.move')
         reservations = self.browse(cr, uid, ids, context=context)
         move_ids = [reserv.move_id.id for reserv in reservations]
+        move_obj.write(cr, uid, move_ids,
+                       {'date_expected': fields.datetime.now()},
+                       context=context)
         move_obj.action_confirm(cr, uid, move_ids, context=context)
         move_obj.force_assign(cr, uid, move_ids, context=context)
         move_obj.action_done(cr, uid, move_ids, context=context)
         return True
 
     def release(self, cr, uid, ids, context=None):
-        return self.unlink(cr, uid, ids, context=context)
-
-    def create(self, cr, uid, vals, context=None):
-        # TODO
-        return super(stock_reservation, self).create(cr, uid, vals,
-                                                     context=context)
-
-    def unlink(self, cr, uid, ids, context=None):
-        """ Release the reservation """
         if isinstance(ids, (int, long)):
             ids = [ids]
         reservations = self.read(cr, uid, ids, ['move_id'],
@@ -81,17 +75,23 @@ class stock_reservation(orm.Model):
         move_obj = self.pool.get('stock.move')
         move_ids = [reserv['move_id'] for reserv in reservations]
         move_obj.action_cancel(cr, uid, move_ids, context=context)
+        return True
+
+    def unlink(self, cr, uid, ids, context=None):
+        """ Release the reservation before the unlink """
+        self.release(cr, uid, ids, context=context)
         return super(stock_reservation, self).unlink(cr, uid, ids,
                                                      context=context)
 
     def onchange_product_id(self, cr, uid, ids, prod_id=False, loc_id=False,
-                            loc_dest_id=False, partner_id=False):
+                            loc_dest_id=False, partner_id=False, context=None):
         """ On change of product id, if finds UoM, UoS,
         quantity and UoS quantity.
         """
         move_obj = self.pool.get('stock.move')
         if ids:
-            reserv = self.read(cr, uid, ids, ['move_id'], load='_classic_write')
+            reserv = self.read(cr, uid, ids, ['move_id'], context=context,
+                               load='_classic_write')
             move_ids = [rv['move_id'] for rv in reserv]
         else:
             move_ids = []
@@ -99,14 +99,9 @@ class stock_reservation(orm.Model):
             cr, uid, move_ids, prod_id=prod_id, loc_id=loc_id,
             loc_dest_id=loc_dest_id, partner_id=partner_id)
 
-    def onchange_move_type(self, cr, uid, ids, type, context=None):
-        """ On change of move type gives source and destination location.
-        """
-        move_obj = self.pool.get('stock.move')
+    def _get_reservation_location(self, cr, uid, context=None):
         location_obj = self.pool.get('stock.location')
         data_obj = self.pool.get('ir.model.data')
-        result = move_obj.onchange_move_type(cr, uid, ids, type,
-                                             context=context)
         get_ref = data_obj.get_object_reference
         try:
             __, dest_location_id = get_ref(cr, uid, 'stock_reserve',
@@ -115,5 +110,20 @@ class stock_reservation(orm.Model):
                                            'read', context=context)
         except (orm.except_orm, ValueError):
             dest_location_id = False
+        return dest_location_id
+
+    def onchange_move_type(self, cr, uid, ids, type, context=None):
+        """ On change of move type gives source and destination location.
+        """
+        move_obj = self.pool.get('stock.move')
+        result = move_obj.onchange_move_type(cr, uid, ids, type,
+                                             context=context)
+        dest_location_id = self._get_reservation_location(cr, uid, context=context)
         result['value']['location_dest_id'] = dest_location_id
         return result
+
+    def onchange_quantity(self, cr, uid, ids, product_id, product_qty, context=None):
+        """ On change of product quantity avoid negative quantities """
+        if not product_id or product_qty <= 0.0:
+            return {'value': {'product_qty': 0.0}}
+        return {}
