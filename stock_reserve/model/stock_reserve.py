@@ -25,6 +25,25 @@ from openerp.tools.translate import _
 
 class stock_reservation(orm.Model):
     """ Allow to reserve products.
+
+    The fields mandatory for the creation of a reservation are:
+
+    * product_id
+    * product_qty
+    * product_uom
+    * name
+
+    The following fields are required but have default values that you may
+    want to override:
+
+    * company_id
+    * location_id
+    * dest_location_id
+
+    Optionally, you may be interested to define:
+
+    * date_validity  (once passed, the reservation will be released)
+    * note
     """
     _name = 'stock.reservation'
     _description = 'Stock Reservation'
@@ -40,15 +59,34 @@ class stock_reservation(orm.Model):
         'date_validity': fields.date('Validity Date'),
     }
 
+    def _get_location_from_ref(self, cr, uid, ref, context=None):
+        """ Get a location from a xmlid if allowed
+        :param ref: tuple (module, xmlid)
+        """
+        location_obj = self.pool.get('stock.location')
+        data_obj = self.pool.get('ir.model.data')
+        get_ref = data_obj.get_object_reference
+        try:
+            __, location_id = get_ref(cr, uid, *ref)
+            location_obj.check_access_rule(cr, uid, [location_id],
+                                           'read', context=context)
+        except (orm.except_orm, ValueError):
+            location_id = False
+        return location_id
+
+    def _default_location_id(self, cr, uid, context=None):
+        ref = ('stock', 'stock_location_stock')
+        return self._get_location_from_ref(cr, uid, ref, context=context)
+
+    def _default_dest_location_id(self, cr, uid, context=None):
+        ref = ('stock_reserve', 'stock_location_reservation')
+        return self._get_location_from_ref(cr, uid, ref, context=context)
+
     _defaults = {
         'type': 'internal',
+        'location_id': _default_location_id,
+        'location_dest_id': _default_dest_location_id,
     }
-
-    def _get_reservation_location(self, cr, uid, product_id, context=None):
-        """ Returns the appropriate destination location to
-        reserve a product
-        """
-        return 1
 
     def reserve(self, cr, uid, ids, context=None):
         """ Confirm a reservation
@@ -108,29 +146,6 @@ class stock_reservation(orm.Model):
         return move_obj.onchange_product_id(
             cr, uid, move_ids, prod_id=prod_id, loc_id=loc_id,
             loc_dest_id=loc_dest_id, partner_id=partner_id)
-
-    def _get_reservation_location(self, cr, uid, context=None):
-        location_obj = self.pool.get('stock.location')
-        data_obj = self.pool.get('ir.model.data')
-        get_ref = data_obj.get_object_reference
-        try:
-            __, dest_location_id = get_ref(cr, uid, 'stock_reserve',
-                                           'stock_location_reservation')
-            location_obj.check_access_rule(cr, uid, [dest_location_id],
-                                           'read', context=context)
-        except (orm.except_orm, ValueError):
-            dest_location_id = False
-        return dest_location_id
-
-    def onchange_move_type(self, cr, uid, ids, type, context=None):
-        """ On change of move type gives source and destination location.
-        """
-        move_obj = self.pool.get('stock.move')
-        result = move_obj.onchange_move_type(cr, uid, ids, type,
-                                             context=context)
-        dest_location_id = self._get_reservation_location(cr, uid, context=context)
-        result['value']['location_dest_id'] = dest_location_id
-        return result
 
     def onchange_quantity(self, cr, uid, ids, product_id, product_qty, context=None):
         """ On change of product quantity avoid negative quantities """

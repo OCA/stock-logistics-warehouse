@@ -43,8 +43,6 @@
                             </group>
                             <group name="location" string="Locations"
                                 groups="stock.group_locations">
-                                <field name="type" readonly="1" invisible="1"
-                                    on_change="onchange_move_type(type)"/>
                                 <field name="location_id"/>
                                 <field name="location_dest_id"/>
                             </group>
