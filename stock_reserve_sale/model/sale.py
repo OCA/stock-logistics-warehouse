@@ -55,6 +55,13 @@ class sale_order(orm.Model):
             string='Can Have Stock Reservations'),
     }
 
+    def release_all_stock_reservation(self, cr, uid, ids, context=None):
+        sales = self.browse(cr, uid, ids, context=context)
+        line_ids = [line.id for sale in sales for line in sale.order_line]
+        line_obj = self.pool.get('sale.order.line')
+        line_obj.release_stock_reservation(cr, uid, line_ids, context=context)
+        return True
+
 
 class sale_order_line(orm.Model):
     _inherit = 'sale.order.line'
@@ -89,3 +96,20 @@ class sale_order_line(orm.Model):
         default['reservation_id'] = False
         return super(sale_order_line, self).copy_data(
             cr, uid, id, default=default, context=context)
+
+    def release_stock_reservation(self, cr, uid, ids, context=None):
+        lines = self.browse(cr, uid, ids, context=context)
+        reserv_ids = [line.reservation_id.id for line in lines
+                      if line.reservation_id]
+        reserv_obj = self.pool.get('stock.reservation')
+        reserv_obj.release(cr, uid, reserv_ids, context=context)
+        self.write(cr, uid, ids, {'reservation_id': False}, context=context)
+        return True
+
+    def update_stock_reservation(self, cr, uid, ids, context=None):
+        for line in self.browse(cr, uid, ids, context=context):
+            if not line.reservation_id:
+                continue
+            line.reservation_id.write({'product_qty': line.product_uom_qty,
+                                       'product_uom': line.product_uom.id})
+        return True
