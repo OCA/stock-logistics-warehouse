@@ -13,7 +13,12 @@
                         the reservation will be released once the date has passed.
                     </p>
                     <group>
+                        <field name="location_id"/>
+                        <field name="location_dest_id"/>
                         <field name="date_validity"/>
+                    </group>
+                    <group name="note" string="Notes">
+                        <field name="note" nolabel="1"/>
                     </group>
                     <footer>
                         <button string="Reserve"
