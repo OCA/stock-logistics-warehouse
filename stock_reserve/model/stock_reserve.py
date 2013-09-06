@@ -59,7 +59,7 @@ class stock_reservation(orm.Model):
         'date_validity': fields.date('Validity Date'),
     }
 
-    def _get_location_from_ref(self, cr, uid, ref, context=None):
+    def get_location_from_ref(self, cr, uid, ref, context=None):
         """ Get a location from a xmlid if allowed
         :param ref: tuple (module, xmlid)
         """
@@ -75,17 +75,20 @@ class stock_reservation(orm.Model):
         return location_id
 
     def _default_location_id(self, cr, uid, context=None):
-        ref = ('stock', 'stock_location_stock')
-        return self._get_location_from_ref(cr, uid, ref, context=context)
+        if context is None:
+            context = {}
+        move_obj = self.pool.get('stock.move')
+        context['picking_type'] = 'internal'
+        return move_obj._default_location_source(cr, uid, context=context)
 
-    def _default_dest_location_id(self, cr, uid, context=None):
+    def _default_location_dest_id(self, cr, uid, context=None):
         ref = ('stock_reserve', 'stock_location_reservation')
-        return self._get_location_from_ref(cr, uid, ref, context=context)
+        return self.get_location_from_ref(cr, uid, ref, context=context)
 
     _defaults = {
         'type': 'internal',
         'location_id': _default_location_id,
-        'location_dest_id': _default_dest_location_id,
+        'location_dest_id': _default_location_dest_id,
         'product_qty': 1.0,
     }
 
@@ -118,7 +121,7 @@ class stock_reservation(orm.Model):
     def release_validity_exceeded(self, cr, uid, ids=None, context=None):
         """ Release all the reservation having an exceeded validity date """
         domain = [('date_validity', '<', fields.date.today()),
-                  ('state', '=', 'done')]
+                  ('state', '=', 'assigned')]
         if ids:
             domain.append(('id', 'in', ids))
         reserv_ids = self.search(cr, uid, domain, context=context)
