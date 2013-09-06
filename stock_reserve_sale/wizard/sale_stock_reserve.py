@@ -57,6 +57,7 @@ class sale_stock_reserve(orm.TransientModel):
     }
 
     def _prepare_stock_reservation(self, cr, uid, form, line, context=None):
+        product_uos = line.product_uos.id if line.product_uos else False
         return {'product_id': line.product_id.id,
                 'product_uom': line.product_uom.id,
                 'product_qty': line.product_uom_qty,
@@ -65,6 +66,9 @@ class sale_stock_reserve(orm.TransientModel):
                 'location_id': form.location_id.id,
                 'location_dest_id': form.location_dest_id.id,
                 'note': form.note,
+                'product_uos_qty': line.product_uos_qty,
+                'product_uos': product_uos,
+                'price_unit': line.price_unit,
                 }
 
     def stock_reserve(self, cr, uid, ids, line_ids, context=None):
