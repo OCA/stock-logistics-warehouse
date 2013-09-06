@@ -54,12 +54,12 @@
                     <div attrs="{'invisible': [('reservation_id', '=', False)]}">
                         <field name="reservation_id" readonly="1"
                             class="oe_inline"/>
-                        <button name="button_stock_reserve_update"
+                        <button name="update_stock_reservation"
                             string="update"
                             type="object"
                             class="oe_link" />
                         -
-                        <button name="button_stock_reserve_cancel"
+                        <button name="release_stock_reservation"
                             string="cancel"
                             type="object"
                             class="oe_link" />
