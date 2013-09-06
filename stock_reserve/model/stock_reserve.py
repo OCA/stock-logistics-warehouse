@@ -103,7 +103,6 @@ class stock_reservation(orm.Model):
                        context=context)
         move_obj.action_confirm(cr, uid, move_ids, context=context)
         move_obj.force_assign(cr, uid, move_ids, context=context)
-        move_obj.action_done(cr, uid, move_ids, context=context)
         return True
 
     def release(self, cr, uid, ids, context=None):
