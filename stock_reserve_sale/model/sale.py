@@ -20,6 +20,7 @@
 ##############################################################################
 
 from openerp.osv import orm, fields
+from openerp.tools.translate import _
 
 
 class sale_order(orm.Model):
@@ -113,3 +114,48 @@ class sale_order_line(orm.Model):
             line.reservation_id.write({'product_qty': line.product_uom_qty,
                                        'product_uom': line.product_uom.id})
         return True
+
+    def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
+                          uom=False, qty_uos=0, uos=False, name='', partner_id=False,
+                          lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False, context=None):
+        result = super(sale_order_line, self).product_id_change(
+            cr, uid, ids, pricelist, product, qty=qty, uom=uom,
+            qty_uos=qty_uos, uos=uos, name=name, partner_id=partner_id,
+            lang=lang, update_tax=update_tax, date_order=date_order,
+            packaging=packaging, fiscal_position=fiscal_position,
+            flag=flag, context=context)
+        if not ids:  # warn only if we change an existing line
+            return result
+        assert len(ids) == 1, "Expected 1 ID, got %r" % ids
+        line = self.browse(cr, uid, ids[0], context=context)
+        if qty != line.product_uom_qty:
+            # TODO append to the other warnings
+            result['warning'] = {
+                'title': _('Configuration Error!'),
+                'message' : 'bla bla',
+            }
+
+        return result
+
+    def write(self, cr, uid, ids, vals, context=None):
+        # TODO: 'product_qty', 'product_uos_qty': warn on onchange
+        block_on_reserve = ('product_id',  'product_uom', 'product_uos')
+        update_on_reserve = 'price_unit',
+        keys = set(vals.keys())
+        test_block = keys.intersection(block_on_reserve)
+        test_update = keys.intersection(update_on_reserve)
+        if test_block or test_update:
+            for line in self.browse(cr, uid, ids, context=context):
+                if not line.reservation_id:
+                    continue
+                if test_block:
+                    raise orm.except_orm(
+                        _('Error'),
+                        _('You cannot change the product or unit of measure '
+                          'of lines with a stock reservation. '
+                          'Release the reservation '
+                          'before changing the product.'))
+                if test_update:
+                    line.reservation_id.write({'price_unit': vals['price_unit']})
+
+        return super(sale_order_line, self).write(cr, uid, ids, vals, context=context)
