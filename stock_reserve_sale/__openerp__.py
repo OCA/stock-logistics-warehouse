@@ -31,10 +31,23 @@
 Stock Reserve Sale
 ==================
 
-Allows to create stock reservation for a quotation before it is
-confirmed.  The reservation might have a validity date and in any
-case the reservations are lifted when the quotation is canceled or
-confirmed.
+Allows to create stock reservation for quotation lines before the
+quotation is confirmed.  The reservation might have a validity date and
+in any case the reservations are lifted when the quotation is canceled
+or confirmed.
+
+Reservations can be done only on make to stock stockable products.
+
+The reserved products are substracted from the virtual stock. It means
+that if you reserved too many products and the virtual stock goes below
+the minimum, the orderpoint will be trigged and new purchase orders will
+be generated. It also implies that the max may be exceeded if the
+reservations are canceled.
+
+If you want to prevent sales orders to be confirmed when the stock is
+insufficient at the order date, you may want to install the
+'sale_exception_nostock' module.
+
 """,
  'depends': ['sale_stock',
              'stock_reserve',

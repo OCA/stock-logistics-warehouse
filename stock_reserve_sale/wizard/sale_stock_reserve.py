@@ -26,10 +26,34 @@ class sale_stock_reserve(orm.TransientModel):
     _name = 'sale.stock.reserve'
 
     _columns = {
+        'location_id': fields.many2one(
+            'stock.location',
+            'Source Location',
+            required=True),
+        'location_dest_id': fields.many2one(
+            'stock.location',
+            'Reservation Location',
+            required=True,
+            help="Location where the system will reserve the "
+                 "products."),
         'date_validity': fields.date(
             "Validity Date",
             help="If a date is given, the reservations will be released "
                  "at the end of the validity."),
+        'note': fields.text('Notes'),
+    }
+
+    def _default_location_id(self, cr, uid, context=None):
+        reserv_obj = self.pool.get('stock.reservation')
+        return reserv_obj._default_location_id(cr, uid, context=context)
+
+    def _default_location_dest_id(self, cr, uid, context=None):
+        reserv_obj = self.pool.get('stock.reservation')
+        return reserv_obj._default_location_dest_id(cr, uid, context=context)
+
+    _defaults = {
+        'location_id': _default_location_id,
+        'location_dest_id': _default_location_dest_id,
     }
 
     def _prepare_stock_reservation(self, cr, uid, form, line, context=None):
@@ -38,6 +62,9 @@ class sale_stock_reserve(orm.TransientModel):
                 'product_qty': line.product_uom_qty,
                 'validity_date': form.date_validity,
                 'name': "{} ({})".format(line.order_id.name, line.name),
+                'location_id': form.location_id.id,
+                'location_dest_id': form.location_dest_id.id,
+                'note': form.note,
                 }
 
     def stock_reserve(self, cr, uid, ids, line_ids, context=None):
@@ -48,9 +75,7 @@ class sale_stock_reserve(orm.TransientModel):
         form = self.browse(cr, uid, ids[0], context=context)
         lines = line_obj.browse(cr, uid, line_ids, context=context)
         for line in lines:
-            if line.reservation_id:
-                continue
-            if not line.product_id:
+            if not line.is_stock_reservable:
                 continue
             vals = self._prepare_stock_reservation(cr, uid, form, line,
                                                    context=context)
