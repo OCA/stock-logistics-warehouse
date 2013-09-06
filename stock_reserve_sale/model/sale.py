@@ -25,16 +25,67 @@ from openerp.osv import orm, fields
 class sale_order(orm.Model):
     _inherit = 'sale.order'
 
+    def _stock_reservation(self, cr, uid, ids, fields, args, context=None):
+        result = {}
+        for order_id in ids:
+            result[order_id] = {'has_stock_reservation': False,
+                                'is_stock_reservable': False}
+        for sale in self.browse(cr, uid, ids, context=context):
+            for line in sale.order_line:
+                if line.reservation_id:
+                    result[sale.id]['has_stock_reservation'] = True
+                if line.is_stock_reservable:
+                    result[sale.id]['is_stock_reservable'] = True
+            if sale.state not in ('draft', 'sent'):
+                result[sale.id]['is_stock_reservable'] = False
+        return result
+
     _columns = {
-        'has_stock_reservation': fields.boolean('Has Stock Reservations'),
+        'has_stock_reservation': fields.function(
+            _stock_reservation,
+            type='boolean',
+            readonly=True,
+            multi='stock_reservation',
+            string='Has Stock Reservations'),
+        'is_stock_reservable': fields.function(
+            _stock_reservation,
+            type='boolean',
+            readonly=True,
+            multi='stock_reservation',
+            string='Can Have Stock Reservations'),
     }
 
 
 class sale_order_line(orm.Model):
     _inherit = 'sale.order.line'
 
+    def _is_stock_reservable(self, cr, uid, ids, fields, args, context=None):
+        result = {}.fromkeys(ids, False)
+        for line in self.browse(cr, uid, ids, context=context):
+            if line.state != 'draft':
+                continue
+            if line.type == 'make_to_order':
+                continue
+            if (not line.product_id or line.product_id.type == 'service'):
+                continue
+            if not line.reservation_id:
+                result[line.id] = True
+        return result
+
     _columns = {
         'reservation_id': fields.many2one(
             'stock.reservation',
-            string='Stock Reservation')
+            string='Stock Reservation'),
+        'is_stock_reservable': fields.function(
+            _is_stock_reservable,
+            type='boolean',
+            readonly=True,
+            string='Can be reserved'),
     }
+
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        default['reservation_id'] = False
+        return super(sale_order_line, self).copy_data(
+            cr, uid, id, default=default, context=context)

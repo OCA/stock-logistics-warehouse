@@ -18,7 +18,7 @@
                         <button name="open_move" type="object"
                             string="View Reservation Move"/>
                         <field name="state" widget="statusbar"
-                            statusbar_visible="draft,done"/>
+                            statusbar_visible="draft,assigned"/>
                     </header>
                     <sheet>
                         <group>
@@ -61,8 +61,9 @@
             <field name="arch" type="xml">
                 <tree string="Stock Reservations" version="7.0"
                     colors="blue:state == 'draft';grey:state == 'cancel'" >
-                    <field name="move_id" />
+                    <field name="name" />
                     <field name="product_id" />
+                    <field name="move_id" />
                     <field name="product_qty" sum="Total" />
                     <field name="product_uom" />
                     <field name="date_validity" />
@@ -88,11 +89,12 @@
                         domain="[('state', '=', 'draft')]"
                         help="Not already reserved"/>
                     <filter name="reserved" string="Reserved"
-                        domain="[('state', '=', 'done')]"
+                        domain="[('state', '=', 'assigned')]"
                         help="Moves are reserved."/>
                     <filter name="cancel" string="Released"
                         domain="[('state', '=', 'cancel')]"
                         help="Reservations have been released."/>
+                    <field name="name" />
                     <field name="product_id" />
                     <field name="move_id" />
                     <group expand="0" string="Group By...">
