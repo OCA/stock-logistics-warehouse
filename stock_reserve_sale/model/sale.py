@@ -63,6 +63,11 @@ class sale_order(orm.Model):
         line_obj.release_stock_reservation(cr, uid, line_ids, context=context)
         return True
 
+    def action_button_confirm(self, cr, uid, ids, context=None):
+        self.release_all_stock_reservation(cr, uid, ids, context=context)
+        return super(sale_order, self).action_button_confirm(
+            cr, uid, ids, context=context)
+
 
 class sale_order_line(orm.Model):
     _inherit = 'sale.order.line'
