@@ -25,17 +25,17 @@
                     <button name="%(action_sale_stock_reserve)d"
                         type="action"
                         string="Reserve Stock"
-                        attrs="{'invisible': ['|', ('reservation_id', '!=', False),
+                        attrs="{'invisible': ['|', ('reservation_ids', '!=', []),
                                                    ('state', '!=', 'draft')]}" />
                     <button name="release_stock_reservation"
                         type="object"
                         string="Release Reservation"
-                        attrs="{'invisible': ['|', ('reservation_id', '=', False),
+                        attrs="{'invisible': ['|', ('reservation_ids', '=', []),
                                                    ('state', '!=', 'draft')]}" />
                 </xpath>
 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
-                    <field name="reservation_id" invisible="1"/>
+                    <field name="reservation_ids" invisible="1"/>
                     <field name="is_stock_reservable" invisible="1"/>
                     <button name="%(action_sale_stock_reserve)d"
                         type="action"
@@ -46,13 +46,13 @@
                         type="object"
                         string="Release Reservation"
                         icon="gtk-undo"
-                        attrs="{'invisible': [('reservation_id', '=', False)]}" />
+                        attrs="{'invisible': [('reservation_ids', '=', [])]}" />
                 </xpath>
 
                 <xpath expr="//field[@name='order_line']/form//field[@name='type']" position="after">
-                    <label for="reservation_id" />
-                    <div attrs="{'invisible': [('reservation_id', '=', False)]}">
-                        <field name="reservation_id" readonly="1"
+                    <label for="reservation_ids" />
+                    <div attrs="{'invisible': [('reservation_ids', '=', False)]}">
+                        <field name="reservation_ids" readonly="1"
                             class="oe_inline"/>
                         <button name="update_stock_reservation"
                             string="update"

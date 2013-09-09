@@ -69,6 +69,7 @@ class sale_stock_reserve(orm.TransientModel):
                 'product_uos_qty': line.product_uos_qty,
                 'product_uos': product_uos,
                 'price_unit': line.price_unit,
+                'sale_line_id': line.id,
                 }
 
     def stock_reserve(self, cr, uid, ids, line_ids, context=None):
@@ -85,7 +86,6 @@ class sale_stock_reserve(orm.TransientModel):
                                                    context=context)
             reserv_id = reserv_obj.create(cr, uid, vals, context=context)
             reserv_obj.reserve(cr, uid, [reserv_id], context=context)
-            line.write({'reservation_id': reserv_id})
         return True
 
     def button_reserve(self, cr, uid, ids, context=None):

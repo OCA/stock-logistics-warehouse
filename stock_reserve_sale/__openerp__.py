@@ -55,6 +55,7 @@ insufficient at the order date, you may want to install the
  'demo': [],
  'data': ['wizard/sale_stock_reserve_view.xml',
           'view/sale.xml',
+          'view/stock_reserve.xml',
           ],
  'auto_install': False,
  'test': [],
