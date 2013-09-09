@@ -33,7 +33,7 @@ class sale_order(orm.Model):
                                 'is_stock_reservable': False}
         for sale in self.browse(cr, uid, ids, context=context):
             for line in sale.order_line:
-                if line.reservation_id:
+                if line.reservation_ids:
                     result[sale.id]['has_stock_reservation'] = True
                 if line.is_stock_reservable:
                     result[sale.id]['is_stock_reservable'] = True
@@ -81,13 +81,14 @@ class sale_order_line(orm.Model):
                 continue
             if (not line.product_id or line.product_id.type == 'service'):
                 continue
-            if not line.reservation_id:
+            if not line.reservation_ids:
                 result[line.id] = True
         return result
 
     _columns = {
-        'reservation_id': fields.many2one(
+        'reservation_ids': fields.one2many(
             'stock.reservation',
+            'sale_line_id',
             string='Stock Reservation'),
         'is_stock_reservable': fields.function(
             _is_stock_reservable,
@@ -99,25 +100,27 @@ class sale_order_line(orm.Model):
     def copy_data(self, cr, uid, id, default=None, context=None):
         if default is None:
             default = {}
-        default['reservation_id'] = False
+        default['reservation_ids'] = False
         return super(sale_order_line, self).copy_data(
             cr, uid, id, default=default, context=context)
 
     def release_stock_reservation(self, cr, uid, ids, context=None):
         lines = self.browse(cr, uid, ids, context=context)
-        reserv_ids = [line.reservation_id.id for line in lines
-                      if line.reservation_id]
+        reserv_ids = [reserv.id for line in lines
+                      for reserv in line.reservation_ids]
         reserv_obj = self.pool.get('stock.reservation')
         reserv_obj.release(cr, uid, reserv_ids, context=context)
-        self.write(cr, uid, ids, {'reservation_id': False}, context=context)
         return True
 
     def update_stock_reservation(self, cr, uid, ids, context=None):
+        reserv_obj = self.pool.get('stock.reservation')
         for line in self.browse(cr, uid, ids, context=context):
-            if not line.reservation_id:
+            if not line.reservation_ids:
                 continue
-            line.reservation_id.write({'product_qty': line.product_uom_qty,
-                                       'product_uom': line.product_uom.id})
+            reserv_ids = [reserv.id for reserv in line.reservation_ids]
+            vals = {'product_qty': line.product_uom_qty,
+                    'product_uom': line.product_uom.id}
+            reserv_obj.write(cr, uid, reserv_ids, vals, context=context)
         return True
 
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
@@ -133,7 +136,7 @@ class sale_order_line(orm.Model):
             return result
         assert len(ids) == 1, "Expected 1 ID, got %r" % ids
         line = self.browse(cr, uid, ids[0], context=context)
-        if qty != line.product_uom_qty and line.reservation_id:
+        if qty != line.product_uom_qty and line.reservation_ids:
             msg = _("As you changed the quantity of the line, "
                     "the quantity of the stock reservation will "
                     "be automatically adjusted to %.2f.") % qty
@@ -157,7 +160,7 @@ class sale_order_line(orm.Model):
         test_update = keys.intersection(update_on_reserve)
         if test_block:
             for line in self.browse(cr, uid, ids, context=context):
-                if not line.reservation_id:
+                if not line.reservation_ids:
                     continue
                 raise orm.except_orm(
                     _('Error'),
@@ -168,9 +171,17 @@ class sale_order_line(orm.Model):
         res = super(sale_order_line, self).write(cr, uid, ids, vals, context=context)
         if test_update:
             for line in self.browse(cr, uid, ids, context=context):
-                if not line.reservation_id:
+                if not line.reservation_ids:
                     continue
-                line.reservation_id.write(
+                if len(line.reservation_ids) > 1:
+                    raise orm.except_orm(
+                        _('Error'),
+                        _('Several stock reservations are linked with the '
+                          'line. Impossible to adjust their quantity. '
+                          'Please release the reservation '
+                          'before changing the quantity.'))
+
+                line.reservation_ids[0].write(
                     {'price_unit': line.price_unit,
                      'product_qty': line.product_uom_qty,
                      'product_uos_qty': line.product_uos_qty,
