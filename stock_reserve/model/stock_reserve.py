@@ -145,7 +145,13 @@ class stock_reservation(orm.Model):
         result = move_obj.onchange_product_id(
             cr, uid, move_ids, prod_id=product_id, loc_id=False,
             loc_dest_id=False, partner_id=False)
-        del result['value']['product_qty']  # keeps the current value
+        if result.get('value'):
+            vals = result['value']
+            # only keep the existing fields on the view
+            keep = ('product_uom', 'name')
+            result['value'] = dict((key, value) for key, value in
+                                   result['value'].iteritems() if
+                                   key in keep)
         return result
 
     def onchange_quantity(self, cr, uid, ids, product_id, product_qty, context=None):
