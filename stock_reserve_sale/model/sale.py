@@ -144,7 +144,8 @@ class sale_order_line(orm.Model):
         return result
 
     def write(self, cr, uid, ids, vals, context=None):
-        block_on_reserve = ('product_id',  'product_uom', 'product_uos')
+        block_on_reserve = ('product_id',  'product_uom', 'product_uos',
+                            'type')
         update_on_reserve = ('price_unit', 'product_uom_qty', 'product_uos_qty')
         keys = set(vals.keys())
         test_block = keys.intersection(block_on_reserve)
