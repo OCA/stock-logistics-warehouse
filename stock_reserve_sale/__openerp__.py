@@ -59,6 +59,7 @@ insufficient at the order date, you may want to install the
           ],
  'auto_install': False,
  'test': ['test/sale_reserve.yml',
+          'test/sale_line_reserve.yml',
           ],
  'installable': True,
  }
