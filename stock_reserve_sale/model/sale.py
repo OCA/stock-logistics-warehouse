@@ -117,17 +117,6 @@ class sale_order_line(orm.Model):
         reserv_obj.release(cr, uid, reserv_ids, context=context)
         return True
 
-    def update_stock_reservation(self, cr, uid, ids, context=None):
-        reserv_obj = self.pool.get('stock.reservation')
-        for line in self.browse(cr, uid, ids, context=context):
-            if not line.reservation_ids:
-                continue
-            reserv_ids = [reserv.id for reserv in line.reservation_ids]
-            vals = {'product_qty': line.product_uom_qty,
-                    'product_uom': line.product_uom.id}
-            reserv_obj.write(cr, uid, reserv_ids, vals, context=context)
-        return True
-
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
                           uom=False, qty_uos=0, uos=False, name='', partner_id=False,
                           lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False, context=None):
