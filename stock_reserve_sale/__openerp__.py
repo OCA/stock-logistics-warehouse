@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-{'name': 'Stock Reserve Sale',
+{'name': 'Stock Reserve Sales',
  'version': '0.1',
  'author': 'Camptocamp',
  'category': 'Warehouse',
@@ -28,25 +28,25 @@
  'images': [],
  'website': "http://www.camptocamp.com",
  'description': """
-Stock Reserve Sale
-==================
+Stock Reserve Sales
+===================
 
-Allows to create stock reservation for quotation lines before the
-quotation is confirmed.  The reservation might have a validity date and
-in any case the reservations are lifted when the quotation is canceled
-or confirmed.
+Allows to create stock reservations for quotation lines before the
+confirmation of the quotation.  The reservations might have a validity
+date and in any case they are lifted when the quotation is canceled or
+confirmed.
 
-Reservations can be done only on make to stock stockable products.
+Reservations can be done only on "make to stock" and stockable products.
 
 The reserved products are substracted from the virtual stock. It means
-that if you reserved too many products and the virtual stock goes below
-the minimum, the orderpoint will be trigged and new purchase orders will
-be generated. It also implies that the max may be exceeded if the
-reservations are canceled.
+that if you reserved a quantity of products which bring the virtual
+stock below the minimum, the orderpoint will be triggered and new
+purchase orders will be generated. It also implies that the max may be
+exceeded if the reservations are canceled.
 
 If you want to prevent sales orders to be confirmed when the stock is
 insufficient at the order date, you may want to install the
-'sale_exception_nostock' module.
+`sale_exception_nostock` module.
 
 """,
  'depends': ['sale_stock',
