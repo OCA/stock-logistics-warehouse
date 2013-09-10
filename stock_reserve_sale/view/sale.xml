@@ -22,6 +22,7 @@
                 </field>
 
                 <xpath expr="//field[@name='order_line']/form//field[@name='state']" position="before">
+                    <field name="reservation_ids" invisible="1"/>
                     <button name="%(action_sale_stock_reserve)d"
                         type="action"
                         string="Reserve Stock"
@@ -47,23 +48,6 @@
                         string="Release Reservation"
                         icon="gtk-undo"
                         attrs="{'invisible': [('reservation_ids', '=', [])]}" />
-                </xpath>
-
-                <xpath expr="//field[@name='order_line']/form//field[@name='type']" position="after">
-                    <label for="reservation_ids" />
-                    <div attrs="{'invisible': [('reservation_ids', '=', False)]}">
-                        <field name="reservation_ids" invisible="1"
-                            class="oe_inline"/>
-                        <button name="update_stock_reservation"
-                            string="update"
-                            type="object"
-                            class="oe_link" />
-                        -
-                        <button name="release_stock_reservation"
-                            string="cancel"
-                            type="object"
-                            class="oe_link" />
-                    </div>
                 </xpath>
 
                 <field name="invoiced" position="before">
