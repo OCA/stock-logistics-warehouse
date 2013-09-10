@@ -52,7 +52,7 @@
                 <xpath expr="//field[@name='order_line']/form//field[@name='type']" position="after">
                     <label for="reservation_ids" />
                     <div attrs="{'invisible': [('reservation_ids', '=', False)]}">
-                        <field name="reservation_ids" readonly="1"
+                        <field name="reservation_ids" invisible="1"
                             class="oe_inline"/>
                         <button name="update_stock_reservation"
                             string="update"
