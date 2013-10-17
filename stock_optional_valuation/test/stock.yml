@@ -1,0 +1,95 @@
+-
+ I need a product with real time valuation.
+-
+ !record {model: product.product, id: product.product_product_24}:
+    valuation: real_time
+    property_stock_account_input: account.o_expense
+    property_stock_account_output: account.o_income
+-
+ !record {model: stock.picking, id: outgoing_shipment}:
+    type: out
+-
+ !record {model: stock.move, id: outgoing_shipment_card}:
+    picking_id: outgoing_shipment
+    product_id: product.product_product_24
+    product_qty: 2.0
+    location_id: stock.stock_location_stock
+    location_dest_id: stock.location_inventory
+-
+  I confirm outgoing shipment of 2 Graphics Cards from Stock to Inventory Loss
+-
+  !workflow {model: stock.picking, action: button_confirm, ref: outgoing_shipment}
+-
+ I process the picking
+-
+  !python {model: stock.partial.picking}: |
+    context.update({'active_model': 'stock.picking', 'active_id': ref('outgoing_shipment'), 'active_ids': [ref('outgoing_shipment')]})
+-
+  !record {model: stock.partial.picking, id: partial_outgoing}:
+    move_ids:
+        - quantity: 2.0
+          product_id: product.product_product_24
+          product_uom: product.product_uom_unit
+          move_id: outgoing_shipment_card
+          location_id: stock.stock_location_stock
+          location_dest_id: stock.location_inventory
+-
+  !python {model: stock.partial.picking }: |
+    self.do_partial(cr, uid, [ref('partial_outgoing')], context=context)
+-
+  My picking should have generated a Journal Entry with the same name
+-
+  !python {model: stock.picking}: |
+    picking_name = self.browse(cr, uid, ref('outgoing_shipment'), context=context).name
+    a_move_obj = self.pool.get('account.move')
+    # count those
+    a_move_ids = a_move_obj.search(cr, uid, [('ref', '=', picking_name)])
+    assert len(a_move_ids) == 1, "An outgoing picking should generate a Journal Entry"
+-
+  Now I will consider the location to be Internal
+-
+  !record {model: stock.location, id: stock.location_inventory}:
+    consider_internal: True
+-
+  I repeate the process above. Now no Journal Entry should be generated.
+-
+ !record {model: stock.picking, id: outgoing_shipment_as_internal}:
+    type: out
+-
+ !record {model: stock.move, id: outgoing_shipment_as_internal_card}:
+    picking_id: outgoing_shipment_as_internal
+    product_id: product.product_product_24
+    product_qty: 2.0
+    location_id: stock.stock_location_stock
+    location_dest_id: stock.location_inventory
+
+-
+  I confirm outgoing shipment of 2 Graphics Cards from Stock to Inventory Loss
+-
+  !workflow {model: stock.picking, action: button_confirm, ref: outgoing_shipment_as_internal}
+-
+ I process the picking
+-
+  !python {model: stock.partial.picking}: |
+    context.update({'active_model': 'stock.picking', 'active_id': ref('outgoing_shipment_as_internal'), 'active_ids': [ref('outgoing_shipment_as_internal')]})
+-
+  !record {model: stock.partial.picking, id: partial_outgoing}:
+    move_ids:
+        - quantity: 2.0
+          product_id: product.product_product_24
+          product_uom: product.product_uom_unit
+          move_id: outgoing_shipment_as_internal_card
+          location_id: stock.stock_location_stock
+          location_dest_id: stock.location_inventory
+-
+  !python {model: stock.partial.picking }: |
+    self.do_partial(cr, uid, [ref('partial_outgoing')], context=context)
+-
+  Now there should be no Journal Entries with the same name
+-
+  !python {model: stock.picking }: |
+    picking_name = self.browse(cr, uid, ref('outgoing_shipment_as_internal'), context=context).name
+    a_move_obj = self.pool.get('account.move')
+    # count those
+    a_move_ids = a_move_obj.search(cr, uid, [('ref', '=', picking_name)])
+    assert len(a_move_ids) == 0, "Locations treater as internal should generate no Journal Entries"
