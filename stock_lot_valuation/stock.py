@@ -96,7 +96,7 @@ class stock_production_lot(orm.Model):
         account_valuation_id = (
             account_valuation and account_valuation.id or False)
         if not account_valuation_id:
-            raise osv.except_osv(
+            raise orm.except_orm(
                 _('Error!'),
                 _('Specify valuation Account for Product Category: %s.')
                 % (lot_obj.product_id.categ_id.name))
@@ -118,7 +118,7 @@ class stock_production_lot(orm.Model):
                 qty = lot.stock_available
                 diff = lot.standard_price - new_price
                 if not diff:
-                    raise osv.except_osv(
+                    raise orm.except_orm(
                         _('Error!'),
                         _("No difference between standard price!"
                             " and new price"))
@@ -127,7 +127,7 @@ class stock_production_lot(orm.Model):
                         location.company_id and location.company_id.id or False
                     )
                     if not company_id:
-                        raise osv.except_osv(
+                        raise orm.except_orm(
                             _('Error!'),
                             _('Please specify company in Location.'))
                     #
@@ -140,7 +140,7 @@ class stock_production_lot(orm.Model):
                     ):
                         journal_id = product.categ_id.property_stock_journal.id
                     if not journal_id:
-                        raise osv.except_osv(
+                        raise orm.except_orm(
                             _('Error!'),
                             _("Please define journal "
                                 "on the product category: '%s' (id: %d).") %
@@ -163,7 +163,7 @@ class stock_production_lot(orm.Model):
                                 property_stock_account_input_categ.id
                             )
                         if not stock_input_acc:
-                            raise osv.except_osv(
+                            raise orm.except_orm(
                                 _('Error!'),
                                 _("Please define stock input account "
                                     "for this product: '%s' (id: %d).") %
@@ -192,7 +192,7 @@ class stock_production_lot(orm.Model):
                                 property_stock_account_output_categ.id
                             )
                         if not stock_output_acc:
-                            raise osv.except_osv(
+                            raise orm.except_orm(
                                 _('Error!'),
                                 _("Please define stock output account "
                                     "for this product: '%s' (id: %d).") %
