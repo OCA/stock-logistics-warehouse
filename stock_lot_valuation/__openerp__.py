@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    Copyright (C) 2013 Agile Business Group sagl (<http://www.agilebg.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -24,26 +24,29 @@
     'category': 'Warehouse Management',
     'description': """
 Stock valuation (standard or average price, ...) based on lots.
-This module extends standard stock valuation (based on products). Valuing lots allows to have different costs for different lots of the same product.
+This module extends standard stock valuation (based on products).
+Valuing lots allows to have different costs for different lots of the same
+product.
 
 Usage
 -----
 Set the 'Lot valuation' flag on product form (used for real time valuation).
-As for products, lots have 'cost' and 'costing method' fields. Also, a 'Change Standard Price' wizard is available.
+As for products, lots have 'cost' and 'costing method' fields. Also, a
+'Change Standard Price' wizard is available.
 """,
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
-    "depends" : ['stock'],
-    "data" : [
+    "depends": ['stock'],
+    "data": [
         "wizard/stock_change_standard_price_view.xml",
         "product_view.xml",
         "stock_view.xml",
-        ],
-    "demo" : [],
+    ],
+    "demo": [],
     'test': [
-        'test/stock.yml', # TODO cover user interface operations
-        ],
+        'test/stock.yml',  # TODO cover user interface operations
+    ],
     "active": False,
     "installable": True
 }

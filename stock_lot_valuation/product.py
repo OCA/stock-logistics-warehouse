@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    Copyright (C) 2013 Agile Business Group sagl (<http://www.agilebg.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,10 +21,12 @@
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
+
 class product_product(orm.Model):
     _inherit = "product.product"
 
     _columns = {
-        'lot_valuation':fields.boolean('Lot valuation',
+        'lot_valuation': fields.boolean(
+            'Lot valuation',
             help="Use lot valuation instead of product valuation"),
-        }
+    }
