@@ -24,21 +24,27 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 
+
 class change_standard_price(orm.TransientModel):
     _name = "lot.change.standard.price"
     _description = "Change Standard Price"
     _columns = {
-        'new_price': fields.float('Price', required=True,
+        'new_price': fields.float(
+            'Price', required=True,
             digits_compute=dp.get_precision('Account'),
-            help="If cost price is increased, stock variation account will be debited "
-                "and stock output account will be credited with the value = "
-                "(difference of amount * quantity available).\n"
-                "If cost price is decreased, stock variation account will be "
-                "creadited and stock input account will be debited."),
-        'stock_account_input':fields.many2one('account.account', 'Stock Input Account'),
-        'stock_account_output':fields.many2one('account.account', 'Stock Output Account'),
-        'stock_journal':fields.many2one('account.journal', 'Stock journal', required=True),
-        'enable_stock_in_out_acc':fields.boolean('Enable Related Account',),
+            help="If cost price is increased, stock variation account will be "
+            "debited and stock output account will be credited with the "
+            "value = (difference of amount * quantity available).\n"
+            "If cost price is decreased, stock variation account will be "
+            "creadited and stock input account will be debited."
+        ),
+        'stock_account_input': fields.many2one(
+            'account.account', 'Stock Input Account'),
+        'stock_account_output': fields.many2one(
+            'account.account', 'Stock Output Account'),
+        'stock_journal': fields.many2one(
+            'account.journal', 'Stock journal', required=True),
+        'enable_stock_in_out_acc': fields.boolean('Enable Related Account',),
     }
 
     def default_get(self, cr, uid, fields, context=None):
@@ -66,9 +72,11 @@ class change_standard_price(orm.TransientModel):
         if 'new_price' in fields:
             res.update({'new_price': price})
         if 'stock_account_input' in fields:
-            res.update({'stock_account_input': accounts['stock_account_input']})
+            res.update(
+                {'stock_account_input': accounts['stock_account_input']})
         if 'stock_account_output' in fields:
-            res.update({'stock_account_output': accounts['stock_account_output']})
+            res.update(
+                {'stock_account_output': accounts['stock_account_output']})
         if 'stock_journal' in fields:
             res.update({'stock_journal': accounts['stock_journal']})
         if 'enable_stock_in_out_acc' in fields:
@@ -93,10 +101,10 @@ class change_standard_price(orm.TransientModel):
         lot_pool = self.pool.get('stock.production.lot')
         res = self.browse(cr, uid, ids, context=context)
         datas = {
-            'new_price' : res[0].new_price,
-            'stock_output_account' : res[0].stock_account_output.id,
-            'stock_input_account' : res[0].stock_account_input.id,
-            'stock_journal' : res[0].stock_journal.id
+            'new_price': res[0].new_price,
+            'stock_output_account': res[0].stock_account_output.id,
+            'stock_input_account': res[0].stock_account_input.id,
+            'stock_journal': res[0].stock_journal.id
         }
         lot_pool.do_change_standard_price(cr, uid, [rec_id], datas, context)
         return {'type': 'ir.actions.act_window_close'}
