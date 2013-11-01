@@ -1,0 +1,230 @@
+-
+ !record {model: stock.location, id: location_refrigerator}:
+    name: Refrigerator
+    usage: internal
+-
+ !record {model: stock.location, id: location_delivery_counter}:
+    name: Delivery Counter
+    usage: internal
+-
+ !record {model: stock.location, id: location_refrigerator_small}:
+    name: Small Refrigerator
+    usage: internal
+    location_id: location_refrigerator
+-
+ !record {model: stock.location, id: location_opening}:
+    name: opening
+    usage: inventory
+-
+ !record {model: stock.location, id: location_convenience_shop}:
+    name: Convenient Store
+    usage: supplier
+-
+ !record {model: stock.warehouse, id: warehouse_icecream}:
+    name: Ice Cream Shop
+    lot_input_id: location_refrigerator
+    lot_stock_id: location_refrigerator
+    lot_output_id: location_delivery_counter
+-
+ !record {model: product.product, id: product_icecream}:
+    default_code: 001
+    name: Ice Cream
+    type: product
+    categ_id: product.product_category_1
+    list_price: 100.0
+    standard_price: 70.0
+    uom_id: product.product_uom_kgm
+    uom_po_id: product.product_uom_kgm
+    procure_method: make_to_stock
+    property_stock_inventory: location_opening
+    valuation: real_time
+    cost_method: average
+    property_stock_account_input: account.o_expense
+    property_stock_account_output: account.o_income
+    description: Ice cream can be mass-produced and thus is widely available in developed parts of the world. Ice cream can be purchased in large cartons (vats and squrounds) from supermarkets and grocery stores, in smaller quantities from ice cream shops, convenience stores, and milk bars, and in individual servings from small carts or vans at public events.
+    lot_valuation: True
+
+-
+ !record {model: stock.production.lot, id: lot_icecream_0}:
+    name: Lot0 for Ice cream
+    product_id: product_icecream
+    cost_method: average
+    standard_price: 70.0
+-
+ !record {model: stock.production.lot, id: lot_icecream_1}:
+    name: Lot1 for Ice cream
+    product_id: product_icecream
+-
+ !record {model: stock.inventory, id: stock_inventory_icecream}:
+    name: Inventory for icecream
+-
+ !record {model: stock.inventory.line, id: stock_inventory_line_icecream_lot0}:
+    product_id: product_icecream
+    product_uom: product.product_uom_kgm
+    inventory_id: stock_inventory_icecream
+    product_qty: 50.0
+    prod_lot_id: lot_icecream_0
+    location_id: location_refrigerator
+-
+ !record {model: stock.inventory.line, id: stock_inventory_line_icecream_lot1}:
+    product_id: product_icecream
+    product_uom: product.product_uom_kgm
+    inventory_id: stock_inventory_icecream
+    product_qty: 40.0
+    prod_lot_id: lot_icecream_1
+    location_id: location_refrigerator
+
+-
+ !record {model: stock.picking, id: outgoing_shipment}:
+    type: out
+    location_dest_id: location_delivery_counter
+-
+ !record {model: stock.move, id: outgoing_shipment_icecream}:
+    picking_id: outgoing_shipment
+    product_id: product_icecream
+    product_uom: product.product_uom_kgm
+    product_qty: 130.0
+    location_id: location_refrigerator
+    location_dest_id: location_delivery_counter
+    prodlot_id: lot_icecream_0
+-
+ !record {model: stock.picking, id: incoming_shipment}:
+    type: in
+    invoice_state: 2binvoiced
+    partner_id: base.res_partner_address_9
+    location_dest_id: location_refrigerator
+-
+ !record {model: stock.move, id: incoming_shipment_icecream}:
+    picking_id: incoming_shipment
+    product_id: product_icecream
+    product_uom: product.product_uom_kgm
+    product_qty: 50.0
+    location_id: location_convenience_shop
+    location_dest_id: location_refrigerator
+    prodlot_id: lot_icecream_0
+
+-
+  I update the price of the Ice-cream.
+-
+  !python {model: stock.change.standard.price}: |
+    context.update({'active_model':'product.product', 'active_id': ref('product_icecream'), 'active_ids':[ref('product_icecream')]})
+-
+  !record {model: stock.change.standard.price, id: change_price}:
+    new_price: 120
+-
+  !python {model: stock.change.standard.price}: |
+    self.change_price(cr, uid, [ref('change_price')], context=context)
+-
+  I check price of Ice-cream after update price.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_icecream'), context=context)
+    assert product.standard_price == 120, "Price is not updated."
+
+-
+  I confirm physical inventory of Ice-cream which are came in different lots.
+-
+  !python {model: stock.inventory}: |
+    self.action_confirm(cr, uid, [ref('stock_inventory_icecream')], context=context)
+-
+  I check move details after confirmed physical inventory.
+-
+  !python {model: stock.inventory}: |
+    inventory = self.browse(cr, uid, ref('stock_inventory_icecream'), context=context)
+    assert len(inventory.move_ids) == len(inventory.inventory_line_id), "moves are not correspond."
+    for move_line in inventory.move_ids:
+        for line in inventory.inventory_line_id:
+            if move_line.product_id.id == line.product_id.id and move_line.prodlot_id.id == line.prod_lot_id.id:
+                location_id = line.product_id.property_stock_inventory.id
+                assert move_line.product_qty == line.product_qty, "Qty is not correspond."
+                assert move_line.product_uom.id == line.product_uom.id, "UOM is not correspond."
+                assert move_line.date == inventory.date, "Date is not correspond."
+                assert move_line.location_id.id == location_id, "Source location is not correspond."
+                assert move_line.location_dest_id.id == line.location_id.id, "Destination location is not correspond."
+                assert move_line.state == 'confirmed', "Move is not confirmed."
+
+-
+  Now I check vitual stock of Ice-cream after confirmed physical inventory.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_icecream'), context=context)
+    assert product.virtual_available == 90, "Vitual stock is not updated."
+
+-
+  I complete physical inventory of Ice-cream.
+-
+  !python {model: stock.inventory}: |
+    self.action_done(cr, uid, [ref('stock_inventory_icecream')], context=context)
+    balance = self.pool.get('account.account').browse(cr, uid, ref('account.stk')).balance
+    assert balance == 3500.0, "Purchased Stocks balance is %s, not 3500 (50*70)" % balance
+-
+  I update the price of the Ice-cream lot.
+-
+  !python {model: lot.change.standard.price}: |
+    context.update({'active_model':'stock.production.lot', 'active_id': ref('lot_icecream_0'), 'active_ids':[ref('lot_icecream_0')]})
+-
+  !record {model: lot.change.standard.price, id: change_price}:
+    new_price: 120
+-
+  !python {model: lot.change.standard.price}: |
+    self.change_price(cr, uid, [ref('change_price')], context=context)
+-
+  I check price of Ice-cream lot after update price.
+-
+  !python {model: stock.production.lot}: |
+    lot = self.browse(cr, uid, ref('lot_icecream_0'), context=context)
+    assert lot.standard_price == 120, "Price is not updated."
+    balance = self.pool.get('account.account').browse(cr, uid, ref('account.stk')).balance
+    assert balance == 6000.0, "Purchased Stocks balance is %s, not 6000 (old balance + (lot.standard_price - new_price) * lot.stock_available)" % balance
+
+-
+  I confirm outgoing shipment of 130 kgm Ice-cream.
+-
+  !workflow {model: stock.picking, action: button_confirm, ref: outgoing_shipment}
+-
+  I check shipment details after confirmed.
+-
+  !python {model: stock.picking}: |
+    shipment = self.browse(cr, uid, ref("outgoing_shipment"))
+    assert shipment.state == "confirmed", "Shipment should be confirmed."
+    for move_line in shipment.move_lines:
+        assert move_line.state == "confirmed", "Move should be confirmed."
+
+-
+  I confirm incoming shipment of 50 kgm Ice-cream.
+-
+  !workflow {model: stock.picking, action: button_confirm, ref: incoming_shipment}
+-
+  I receive 40kgm Ice-cream so I make backorder of incoming shipment for 40 kgm.
+-
+  !python {model: stock.partial.picking}: |
+    context.update({'active_model': 'stock.picking', 'active_id': ref('incoming_shipment'), 'active_ids': [ref('incoming_shipment')]})
+-
+  !record {model: stock.partial.picking, id: partial_incoming}:
+    move_ids:
+        - quantity: 40
+          product_id: product_icecream
+          product_uom: product.product_uom_kgm
+          move_id: incoming_shipment_icecream
+          location_id: location_convenience_shop
+          location_dest_id: location_refrigerator
+          prodlot_id: lot_icecream_0
+          cost: 100
+-
+  !python {model: stock.partial.picking }: |
+    self.do_partial(cr, uid, [ref('partial_incoming')], context=context)
+-
+  I check backorder shipment after received partial shipment.
+-
+  !python {model: stock.picking}: |
+    lot = self.pool.get('stock.production.lot').browse(cr, uid, ref('lot_icecream_0'), context=context)
+    assert lot.standard_price == 111.11, "Price is not updated to 111.11 (((120*50)+(100*40))/(50+40))"
+    shipment = self.browse(cr, uid, ref("incoming_shipment"))
+    backorder = shipment.backorder_id
+    assert backorder, "Backorder should be created after partial shipment."
+    assert backorder.state == 'done', "Backorder should be close after received."
+    for move_line in backorder.move_lines:
+        assert move_line.product_qty == 40, "Qty in backorder does not correspond."
+        assert move_line.state == 'done', "Move line of backorder should be closed."
+    balance = self.pool.get('account.account').browse(cr, uid, ref('account.stk')).balance
+    assert balance == 10444.4, "Purchased Stocks balance is %s, not 10444.4 (old balance + 111.11×40)" % balance
