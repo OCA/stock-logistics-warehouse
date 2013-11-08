@@ -33,12 +33,14 @@ class sale_order(orm.Model):
             values['location_id'] = line.location_id.id
         return values
 
-    def _prepare_order_line_procurement(self, cr, uid, order, line, move_id, date_planned, context=None):
+    def _prepare_order_line_procurement(self, cr, uid, order, line, move_id, date_planned,
+                                        context=None):
         values = super(sale_order, self)._prepare_order_line_procurement(
             cr, uid, order, line, move_id, date_planned, context=context)
         if line.location_id:
             values['location_id'] = line.location_id.id
         return values
+
 
 class sale_order_line(orm.Model):
     _inherit = 'sale.order.line'
