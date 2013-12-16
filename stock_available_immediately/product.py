@@ -19,12 +19,12 @@
 #
 ##############################################################################
 
-import decimal_precision as dp
+from openerp.addons import decimal_precision as dp
 
-from osv import fields, osv
+from openerp.osv import orm, fields
 
 
-class ProductImmediatelyUsable(osv.osv):
+class product_immediately_usable(orm.Model):
     """
     Inherit Product in order to add an "immediately usable quantity"
     stock field
@@ -49,7 +49,7 @@ class ProductImmediatelyUsable(osv.osv):
             field_names.append('qty_available')
             field_names.append('outgoing_qty')
 
-        res = super(ProductImmediatelyUsable, self)._product_available(
+        res = super(product_immediately_usable, self)._product_available(
             cr, uid, ids, field_names, arg, context)
 
         if 'immediately_usable_qty' in field_names:
@@ -140,5 +140,3 @@ class ProductImmediatelyUsable(osv.osv):
             help="Quantity of products really available for sale." \
                  "Computed as: Quantity On Hand - Outgoing."),
     }
-
-ProductImmediatelyUsable()
