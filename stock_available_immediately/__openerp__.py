@@ -33,9 +33,8 @@ Immediately usable is computed : Quantity on Hand - Outgoing Stock.
 """,
     "website": "http://tinyerp.com/module_account.html",
     "category": "Generic Modules/Stock",
-    "init_xml": [],
-    "demo_xml": [],
-    "update_xml": ["product_view.xml", ],
+    "data": ["product_view.xml", 
+             ],
     "active": False,
     "installable": True
 }
