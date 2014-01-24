@@ -140,5 +140,3 @@ class product_immediately_usable(orm.Model):
             help="Quantity of products really available for sale." \
                  "Computed as: Quantity On Hand - Outgoing."),
     }
-
-product_immediately_usable()
