@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-import decimal_precision as dp
+from openerp.addons import decimal_precision as dp
 
 from openerp.osv import orm, fields
 
