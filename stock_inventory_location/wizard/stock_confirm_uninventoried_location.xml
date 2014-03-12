@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- The view definition is similar with stock_inventory_hierarchical_location/wizard/stock_inventory_missing_locations_view.xml,
+        but the code is different.
+        This wizard compare declared locations with locations on inventory lines to present the uninventoried (empty) locations to user. -->
+        <record id="view_confirm_uninventoried_location" model="ir.ui.view">
+            <field name="name">stock.inventory.uninventoried.locations.form</field>
+            <field name="model">stock.inventory.uninventoried.locations</field>
+            <field name="arch" type="xml">
+                <form string="Confirm empty locations" version="7.0">
+                    <group colspan="4" col="1">
+                        <separator string="The following Locations are empty"/>
+                        <label string="The following Stock Locations are part of the current Physical Inventory, but no Inventory Line has been recorded for them."/>
+                        <label string="It could either mean that the Locations are empty, or that the Inventory is not yet complete."/>
+                        <label string="If you confirm the Inventory, these Locations will be considered empty and their content will be purged."/>
+                        <field name="location_ids" nolabel="1">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                        <separator string=""/>
+                    </group>
+                  <footer>
+                      <button name="confirm_uninventoried_locations" string="Purge contents and confirm Inventory" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" default_focus="1"/>
+                  </footer>
+                </form>
+            </field>
+        </record>
+	</data>
+</openerp>

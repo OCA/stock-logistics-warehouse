@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="stock_inventory_location_form_view">
+            <field name="name">stock.inventory.location.form</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <!-- Show the state 'done' in the statusbar -->
+                <xpath expr="/form//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">draft,open,confirm,done</attribute>
+                </xpath>
+                
+                <!-- TODO v8 place "exhaustive" next to "location_id" -->
+                <!-- Add type of inventory: standard or exhaustive. -->
+                <xpath expr="/form//field[@name='name']" position="after">
+                    <field name="exhaustive"/>
+                    <field name="location_id" groups="stock.group_locations"
+                           domain="[('usage','in',('view', 'internal'))]"
+                           attrs="{'invisible':[('exhaustive','!=',True)], 'required':[('exhaustive','=',True)]}"/>
+                </xpath>
+
+                <!-- Enable Fill Inventory button when state is open -->
+                <xpath expr="//button[@string='Fill Inventory']" position="attributes">
+                    <attribute name="states">open</attribute>
+                    <attribute name="context">{'default_exhaustive': exhaustive}</attribute>
+                </xpath>
+
+                <!-- Control locations added by user on inventory line -->
+                <xpath expr="/form//field[@name='inventory_line_id']"
+                       position="attributes">
+                    <attribute name="context">{'location_id': location_id}</attribute>
+                </xpath>
+                <xpath expr="/form//field[@name='inventory_line_id']/tree//field[@name='location_id']"
+                       position="attributes">
+                    <attribute name="on_change">onchange_location_id(parent.location_id, parent.exhaustive, location_id)</attribute>
+                </xpath>
+                <xpath expr="/form//field[@name='inventory_line_id']/form//field[@name='location_id']"
+                       position="attributes">
+                    <attribute name="on_change">onchange_location_id(parent.location_id, parent.exhaustive, location_id)</attribute>
+                </xpath>
+
+                <!-- Add button to open an inventory. Call wizard on confirm inventory -->
+                <xpath expr="/form//button[@name='action_cancel_inventory']" position="before">
+                    <button name="action_open" states="draft" string="Open Inventory" type="object" class="oe_highlight" groups="stock.group_stock_user"/>
+                </xpath>
+                <!-- Show the "cancel" button in state "open" -->
+                <xpath expr="/form//button[@name='action_cancel_inventory']" position="attributes">
+                    <attribute name="states">draft,open,confirm,done</attribute>
+                </xpath>
+                <!-- hijack the "confirm" button -->
+                <xpath expr="/form//button[@name='action_confirm']" position="attributes">
+                      <attribute name="states">open</attribute>
+                      <attribute name="name">confirm_missing_locations</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add filter for complete or partial inventory -->
+        <record model="ir.ui.view" id="view_inventory_complete_filter">
+            <field name="name">complete.inventory.filter</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <filter icon="terp-check" name="exhaustive" string="Exhaustive" domain="[('exhaustive', '=', True)]"
+                            help="Only select exhaustive Inventories." />
+                    <separator orientation="vertical"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Show exhaustive inventories by default -->
+        <record id="stock.action_inventory_form" model="ir.actions.act_window">
+            <field name="context">{'full':'1', 'search_default_exhaustive':1}</field>
+        </record>
+
+	</data>
+</openerp>
