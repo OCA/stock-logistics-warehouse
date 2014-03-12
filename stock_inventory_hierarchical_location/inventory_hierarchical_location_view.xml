@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="stock_inventory_hierarchical_location_form_view">
+            <field name="name">hierarchical.inventory.location.form</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form" />
+            <field name="arch" type="xml">
+
+                 <xpath expr="/form//field[@name='exhaustive']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('parent_id', '!=', False)]}</attribute>
+                </xpath>
+
+                <xpath expr="/form//field[@name='location_id']" position="attributes">
+                    <attribute name="on_change">onchange_location_id(location_id)</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_ihl_exhautive_form_view">
+            <field name="name">hierarchical.inventory.location.exhautive.form</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock_inventory_hierarchical.stock_inventory_hierarchical_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='inventory_ids']" position="attributes">
+                    <attribute name="context">{'default_parent_id': active_id, 'default_exhaustive': exhaustive}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Show hierarchical exhaustive inventories by default -->
+        <record id="stock.action_inventory_form" model="ir.actions.act_window">
+            <field name="context">{'full':'1', 'search_default_exhaustive':1, 'search_default_main_inventories':1}</field>
+        </record>
+    </data>
+</openerp>

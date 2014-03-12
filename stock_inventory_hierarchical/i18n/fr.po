@@ -1,0 +1,116 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_hierarchical
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-01 11:15+0000\n"
+"PO-Revision-Date: 2014-07-01 11:15+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,complete_name:0
+msgid "Complete reference"
+msgstr "Réference complète"
+
+#. module: stock_inventory_hierarchical
+#: constraint:stock.inventory:0
+msgid "Error: You can not create recursive inventories."
+msgstr "Erreur : Vous ne pouvez pas créer d'inventaire récursifs."
+
+#. module: stock_inventory_hierarchical
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_hierarchical.model_stock_inventory
+#, python-format
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,inventory_ids:0
+msgid "List of Sub-inventories"
+msgstr "Liste des sous-inventaires"
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:0
+msgid "Main inventories"
+msgstr "Inventaires principaux"
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/hierarchical_inventory.py:174
+#, python-format
+msgid "One of the parent Inventories is not canceled."
+msgstr "Un des inventaires pères n'est pas annulé."
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:0
+msgid "Only select inventories that have no parents."
+msgstr "Sélectionne uniquement les inventaires qui n'ont pas de père."
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,parent_id:0
+msgid "Parent Inventory"
+msgstr "Inventaire père"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,parent_left:0
+msgid "Parent Left"
+msgstr "Parent gauche"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,parent_right:0
+msgid "Parent Right"
+msgstr "Parent droit"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,progress_rate:0
+msgid "Progress"
+msgstr "Avancement"
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/hierarchical_inventory.py:188
+#, python-format
+msgid "Some Sub-inventories are not confirmed."
+msgstr "Certains sous-inventaires ne sont pas confirmés."
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/hierarchical_inventory.py:200
+#, python-format
+msgid "Some Sub-inventories are not validated."
+msgstr "Certains sous-inventaires ne sont pas terminés."
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:0
+msgid "Sub-inventories"
+msgstr "Sous-inventaires"
+
+#. module: stock_inventory_hierarchical
+#: model:ir.actions.act_window,name:stock_inventory_hierarchical.action_view_sub_inventory
+#: view:stock.inventory:0
+msgid "View Sub-inventories"
+msgstr "Voir les sous-inventaires"
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/hierarchical_inventory.py:173
+#: code:addons/stock_inventory_hierarchical/hierarchical_inventory.py:187
+#: code:addons/stock_inventory_hierarchical/hierarchical_inventory.py:199
+#, python-format
+msgid "Warning"
+msgstr "Attention"
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:0
+msgid "{'readonly':[('parent_id', '!=', False)]}"
+msgstr "{'readonly':[('parent_id', '!=', False)]}"
+
