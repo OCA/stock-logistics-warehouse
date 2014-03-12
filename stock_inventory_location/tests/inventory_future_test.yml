@@ -1,0 +1,13 @@
+-
+  Check that an inventory with a date in the future cannot be opened.
+-
+  !python {model: stock.inventory}: |
+    # TODO v8: maybe this is already part of the new WMS
+    from osv.osv import except_osv
+    self.action_open(cr, uid, [ref('inventory_future')])
+    try:
+      self.action_done(cr, uid, [ref('inventory_future')])
+    except except_osv as e:
+      log("Good! The Inventory could not be opened: %s" % e)
+    inventory_state = self.read(cr, uid, [ref('inventory_future')], ['state'])[0]['state']
+    assert inventory_state != 'done', "Future inventory is done."
