@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <!-- Record inventories we can use in the tests. -->
+        <!-- We need them in the demo data because test data is rolled back
+            whenever an exception is raised. -->
+
+        <!-- Record a hierarchical exhaustive inventory -->
+        <record id="parent_inventory" model="stock.inventory">
+            <field name="name">Hierarchical exhaustive inventory</field>
+            <field name="state">draft</field>
+            <field name="date">2020-04-15 00:00:00</field>
+            <field name="exhaustive">True</field>
+            <field name="location_id" model="stock.location" ref="stock.stock_location_stock"/>
+        </record>
+        <record id="child_1_id" model="stock.inventory">
+            <field name="name">Team A</field>
+            <field name="parent_id" ref="parent_inventory"/>
+            <field name="location_id" model="stock.location" ref="stock.stock_location_14"/>
+        </record>
+        <record id="child_2_id" model="stock.inventory">
+            <field name="name">Team B</field>
+            <field name="parent_id" ref="parent_inventory"/>
+            <field name="location_id" model="stock.location" ref="stock.stock_location_components"/>
+        </record>
+    </data>
+</openerp>

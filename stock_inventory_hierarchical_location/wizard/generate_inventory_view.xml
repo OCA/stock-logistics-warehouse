@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+           <record id="view_stock_generate_inventory" model="ir.ui.view">
+            <field name="name">Generate Inventory</field>
+            <field name="model">stock.generate.inventory</field>
+            <field name="arch" type="xml">
+              <form string="Generate Inventory" version="7.0">
+                  <separator string="Generate Inventory"/>
+                  <group>
+                      <field name="prefix_inv_name"/>
+                      <field name="location_id"/>
+                      <field name="only_view"/>
+                      <field name="level"/>
+                  </group>
+                  <footer>
+                      <button name="generate_inventory" string="Generate Inventory" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+              </form>
+            </field>
+        </record>
+
+        <record id="action_view_stock_generate_inventory" model="ir.actions.act_window">
+            <field name="name">Generate Inventory</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.generate.inventory</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_stock_generate_inventory"/>
+            <field name="target">new</field>
+        </record>
+
+    <menuitem action="action_view_stock_generate_inventory"
+              id="menu_action_stock_generate_inventory_form"
+              parent="stock.menu_stock_inventory_control"
+              sequence="20"
+              groups="stock.group_locations"/>
+
+    </data>
+</openerp>
