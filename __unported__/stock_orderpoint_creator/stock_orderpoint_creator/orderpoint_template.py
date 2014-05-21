@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Yannick Vaucher (Camptocamp)
-#    Copyright 2012 Camptocamp SA
+#    Author: Yannick Vaucher, Matthieu Dietrich (Camptocamp)
+#    Copyright 2012-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -31,15 +31,6 @@ class OrderpointTemplate(BaseProductConfigTemplate, Model):
     _inherit = 'stock.warehouse.orderpoint'
     _table = 'stock_warehouse_orderpoint_template'
     _clean_mode = 'deactivate'
-
-
-    _columns = {
-        'product_id': fields.many2one('product.product',
-                                      'Product',
-                                      required=False,
-                                      ondelete='cascade',
-                                      domain=[('type','=','product')]),
-    }
 
     def _get_ids_2_clean(self, cursor, uid, template_br, product_ids, context=None):
         """ hook to select model specific objects to clean

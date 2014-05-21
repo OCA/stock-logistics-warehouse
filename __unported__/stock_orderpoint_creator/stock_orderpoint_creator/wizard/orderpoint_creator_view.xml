@@ -7,7 +7,7 @@
             <field name="model">stock.warehouse.orderpoint.creator</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form>
+                <form string="Product warehouse config">
                     <group string="templates" colspan="4">
                         <field name="orderpoint_template_id" colspan="4"/>
                     </group>

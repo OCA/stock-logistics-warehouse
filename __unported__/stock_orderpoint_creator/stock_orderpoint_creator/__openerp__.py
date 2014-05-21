@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Yannick Vaucher (Camptocamp)
-#    Copyright 2012 Camptocamp SA
+#    Author: Yannick Vaucher, Matthieu Dietrich (Camptocamp)
+#    Copyright 2012-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,22 +22,19 @@
 {'name': 'Configuration of order point in mass',
  'version': '1.0',
  'author': 'Camptocamp',
- 'maintainer': 'Camptocamp',
  'category': 'Warehouse',
+ 'license': 'AGPL-3',
  'complexity': 'easy', #easy, normal, expert
+ 'website': "http://www.camptocamp.com",
  'depends': ['procurement'],
  'description': """
 Add a wizard to configure massively order points for multiple product""",
  'website': 'http://www.openerp.com',
- 'init_xml': [],
- 'update_xml': ["wizard/orderpoint_creator_view.xml", "security/ir.model.access.csv"],
- 'demo_xml': [],
+ 'demo': [],
+ 'data': ["wizard/orderpoint_creator_view.xml", "security/ir.model.access.csv"],
  'test': [],
- 'installable': False,
- 'images': [],
+ 'installable': True,
  'auto_install': False,
- 'license': 'AGPL-3',
- 'active': False,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
