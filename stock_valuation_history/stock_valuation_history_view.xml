@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <!-- Inventory Valuation views -->
+    <record model="ir.ui.view" id="view_inventory_valuation_filter">
+        <field name="name">inventory.valuation.filter</field>
+        <field name="model">stock.valuation.history</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Stock Valuation">
+                <group col="6" colspan="4">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <separator/>
+                    <field name="product_id"/>
+                    <field name="category_id"/>
+                    <field name="label_ids"/>
+                </group>
+                <newline/>
+                <group expand="0" string="Group By...">
+                    <filter name="group_by_name" string="Title" icon="terp-go-month" domain="[]" context="{'group_by' : 'name'}"/>
+                    <filter name="group_by_category" string="Product Category" icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'category_id'}"/>
+                    <filter name="group_by_uom" string="Unit of Measure" icon="terp-mrp" domain="[]" context="{'group_by':'product_uom'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="stock_valuation_history_tree_view">
+        <field name="name">stock.valuation.history.tree</field>
+        <field name="model">stock.valuation.history</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Valuations">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="category_id"/>
+                <field name="product_id"/>
+                <field name="product_qty"/>
+                <field name="product_uom"/>
+                <field name="standard_price"/>
+                <field name="total_valuation"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="stock_valuation_history_line_form_view">
+        <field name="name">stock.valuation.history.detail.form</field>
+        <field name="model">stock.valuation.history</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Details" version="7.0">
+                <group col="6" colspan="4">
+                    <field name="name"/>
+                    <field name="date"/>
+                </group>
+                <separator colspan="4"/>
+                <group col="4" colspan="4">
+                    <field name="product_id"/>
+                    <field name="category_id"/>
+                    <label string="Labels" colspan="4"/>
+                    <field name="label_ids" nolabel="1" colspan="4"/>
+                </group>
+                <separator colspan="4"/>
+                <group col="4" colspan="4">
+                    <field name="product_qty"/>
+                    <field name="product_uom"/>
+                    <field name="standard_price"/>
+                    <field name="total_valuation"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Action to open the valuation from the menu -->
+    <act_window id="action_inventory_valuation_all"
+        name="Stock Valuations"
+        res_model="stock.valuation.history"
+        view_mode="tree,form"
+        view_type="form"
+        context="{'search_default_group_by_name':1}" />
+    
+    <menuitem id="menu_inventory_valuation_all" name="Stock Valuations"
+        parent="stock.menu_stock_inventory_control" action="action_inventory_valuation_all" sequence="50"/>
+    </data>
+</openerp>

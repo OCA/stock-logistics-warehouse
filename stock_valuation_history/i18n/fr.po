@@ -1,0 +1,177 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_valuation_history
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2014-01-17 10:16+0000\n"
+"PO-Revision-Date: 2014-01-17 10:16+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_valuation_history
+#: field:stock.valuation.history,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history:0
+msgid "Group By..."
+msgstr "Grouper par..."
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history:0
+msgid "Labels"
+msgstr "Labels"
+
+#. module: stock_valuation_history
+#: field:stock.valuation.history.wizard,location_id:0
+msgid "Location"
+msgstr "Emplacement"
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history.wizard:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: stock_valuation_history
+#: field:stock.valuation.history,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history:0
+#: field:stock.valuation.history,category_id:0
+msgid "Product Category"
+msgstr "Catégorie de produit"
+
+#. module: stock_valuation_history
+#: field:stock.valuation.history,label_ids:0
+msgid "Product Labels"
+msgstr "Labels produit"
+
+#. module: stock_valuation_history
+#: model:ir.model,name:stock_valuation_history.model_product_product
+msgid "Produit"
+msgstr "Produit"
+
+#. module: stock_valuation_history
+#: field:stock.valuation.history,product_qty:0
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: stock_valuation_history
+#: model:ir.actions.act_window,name:stock_valuation_history.action_compute_stock_valuation
+#: model:ir.ui.menu,name:stock_valuation_history.menu_compute_stock_valuation
+msgid "Record current Stock Valuation"
+msgstr "Enregistrer la valorisation actuelle"
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history.wizard:0
+msgid "Record stock valuation"
+msgstr "Enregistrer la valorisation"
+
+#. module: stock_valuation_history
+#: code:addons/stock_valuation_history/wizard/compute_stock_valuation_wizard.py:64
+#: view:stock.valuation.history:0
+#, python-format
+msgid "Stock Valuation"
+msgstr "Valorisation de stock"
+
+#. module: stock_valuation_history
+#: model:ir.model,name:stock_valuation_history.model_stock_valuation_history_wizard
+msgid "Stock Valuation wizard"
+msgstr "Stock Valuation wizard"
+
+#. module: stock_valuation_history
+#: model:ir.actions.act_window,name:stock_valuation_history.action_inventory_valuation_all
+#: model:ir.ui.menu,name:stock_valuation_history.menu_inventory_valuation_all
+#: view:stock.valuation.history:0
+msgid "Stock Valuations"
+msgstr "Valorisations de stock"
+
+#. module: stock_valuation_history
+#: model:ir.model,name:stock_valuation_history.model_stock_valuation_history
+msgid "Stock inventory valuation"
+msgstr "Valorisation du stock"
+
+#. module: stock_valuation_history
+#: help:stock.valuation.history,product_qty:0
+msgid "The Quantity of Product of this Stock Valuation."
+msgstr "La quantité de produit de cette valorisation de stock."
+
+#. module: stock_valuation_history
+#: help:stock.valuation.history,product_uom:0
+msgid "The Unit of Measure of this Stock Valuation."
+msgstr "L'unité de mesure de cette valorisation de stock."
+
+#. module: stock_valuation_history
+#: help:stock.valuation.history,date:0
+msgid "The date on which this Stock Valuation was recorded."
+msgstr "La date à laquelle cette valorisation de stock a été enregistrée."
+
+#. module: stock_valuation_history
+#: help:stock.valuation.history,name:0
+msgid "The title of the Stock Valuations. Use the same title for all Stock Valuations that form a logical set: for example if you record the Valuation of all products after a Physical Inventory, you should set the title of all those Stock Valuations to the name of the Physical Inventory."
+msgstr "Le titre de cette valorisation de stock. Utilisez le même titre pour toutes les valorisations qui forment un ensemble logique : par exemple si vous enregistrez la valorisation après un inventaire physique, choisissez le nom de l'inventaire comme titre des valorisations."
+
+#. module: stock_valuation_history
+#: help:stock.valuation.history,label_ids:0
+msgid "These are the labels currently attached to this Product."
+msgstr "Ce sont les labels actuellement attachés à ce produit."
+
+#. module: stock_valuation_history
+#: help:stock.valuation.history,category_id:0
+msgid "This is the current Category of the Product."
+msgstr "C'est la catégorie dans laquelle se trouve actuellement le produit."
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history.wizard:0
+msgid "This wizard will record the stock valuation for all products at a location"
+msgstr "Cet assistant enregistrera la valorisation du stock de tous les produits dans un emplacement."
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history:0
+#: field:stock.valuation.history,name:0
+#: field:stock.valuation.history.wizard,name:0
+msgid "Title"
+msgstr "Titre"
+
+#. module: stock_valuation_history
+#: field:stock.valuation.history,total_valuation:0
+msgid "Total Valuation"
+msgstr "Valorisation totale"
+
+#. module: stock_valuation_history
+#: help:stock.valuation.history,standard_price:0
+msgid "Unit Valuation Price of the Product at the date the Stock Valuation was recorded. You can change this price after it was recorded if you need to."
+msgstr "Prix de valorisation unitaire du produit à la date à laquelle la valorisation a été enregistrée. Vous pouvez corriger ce prix après son enregistrement si nécessaire."
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history:0
+#: field:stock.valuation.history,product_uom:0
+msgid "Unit of Measure"
+msgstr "Unité de mesure"
+
+#. module: stock_valuation_history
+#: field:stock.valuation.history,standard_price:0
+msgid "Valuation Price"
+msgstr "Prix de valorisation"
+
+#. module: stock_valuation_history
+#: code:addons/stock_valuation_history/product.py:52
+#, python-format
+msgid "Valuation as of %s"
+msgstr "Valorisation du %s"
+
+#. module: stock_valuation_history
+#: view:stock.valuation.history.wizard:0
+msgid "_Cancel"
+msgstr "_Annuler"
+

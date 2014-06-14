@@ -1,0 +1,28 @@
+-
+  Test recording of the valuation
+-
+  Confirm the inventory
+-
+  !python {model: stock.inventory}: |
+    self.action_confirm(cr, uid, [ref('stock_valuation_history0')])    
+    state = self.read(cr, uid, [ref('stock_valuation_history0')], ['state'])[0]['state']
+    assert state=='confirm', "The Inventory is '%s'. It should be confirmed" % state
+-
+  Record the valuation
+-
+  !python {model: product.product}: |
+    self.search_create_valuation(cr, uid, [('qty_available', '>', '0')],
+      context={
+        'date': '2020-06-01',
+        'location_id': ref('stock.stock_location_components')
+      }
+-
+  Check the valuation is correct
+-
+  !python {model: stock.valuation.history}: |
+    valuation_ids = self.search(cr, uid, [('date', '=', '2020-06-01 00:00:00'])
+    valuation_infos = self.read(cr, uid, valuation_ids, ['name', 'product_qty', 'product_id', 'total_valuation'])
+    
+    assert valuation_infos != False, "Valuation is not done !"
+    assert valuation_infos[0]['product_qty'] == 25.0, "Product quantity is '%s', should be '25.0'" % valuation_infos[0]['product_qty']
+    assert valuation_infos[0]['total_valuation'] == 7500.0, "Product valuation is '%s', should be '7500.0'"

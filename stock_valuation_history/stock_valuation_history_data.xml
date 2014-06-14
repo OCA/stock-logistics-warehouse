@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!-- Pre-record an inactive scheduled task to record the product valuation once a week -->
+        <record id="ir_cron_record_valuation" model="ir.cron">
+            <field name="name">Record the product valuation</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">weeks</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="False" name="active"/>
+            <field name="model">product.product</field>
+            <field name="function">search_create_valuation</field>
+            <field name="args">([('active', '=', True)], {'location': 1})</field>
+        </record>
+
+
+        <!-- Export template to make it easy to export the valuations to Excel -->
+        <record id="export_template" model="ir.exports">
+            <field name="name">Valuation template</field>
+            <field name="resource">stock.valuation.history</field>
+        </record>
+        <record id="export_template_product_id_default_code" model="ir.exports.line">
+            <field name="name">product_id/default_code</field>
+            <field name="export_id" ref="export_template"/>
+        </record>
+        <record id="export_template_product_id_name" model="ir.exports.line">
+            <field name="name">product_id/name</field>
+            <field name="export_id" ref="export_template"/>
+        </record>
+        <record id="export_template_standard_price" model="ir.exports.line">
+            <field name="name">standard_price</field>
+            <field name="export_id" ref="export_template"/>
+        </record>
+        <record id="export_template_product_qty" model="ir.exports.line">
+            <field name="name">product_qty</field>
+            <field name="export_id" ref="export_template"/>
+        </record>
+        <record id="export_template_product_uom_name" model="ir.exports.line">
+            <field name="name">product_uom/name</field>
+            <field name="export_id" ref="export_template"/>
+        </record>
+    </data>
+</openerp>
