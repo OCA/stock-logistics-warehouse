@@ -64,7 +64,7 @@ class product_immediately_usable(orm.Model):
             _product_available,
             multi='qty_available',
             type='float',
-            digits_compute=dp.get_precision('Product UoM'),
+            digits_compute=dp.get_precision('Product Unit of Measure'),
             string='Quantity On Hand',
             help="Current quantity of products.\n"
                  "In a context with a single Stock Location, this includes "
@@ -82,7 +82,7 @@ class product_immediately_usable(orm.Model):
             _product_available,
             multi='qty_available',
             type='float',
-            digits_compute=dp.get_precision('Product UoM'),
+            digits_compute=dp.get_precision('Product Unit of Measure'),
             string='Quantity Available',
             help="Forecast quantity (computed as Quantity On Hand "
                  "- Outgoing + Incoming)\n"
@@ -101,7 +101,7 @@ class product_immediately_usable(orm.Model):
             _product_available,
             multi='qty_available',
             type='float',
-            digits_compute=dp.get_precision('Product UoM'),
+            digits_compute=dp.get_precision('Product Unit of Measure'),
             string='Incoming',
             help="Quantity of products that are planned to arrive.\n"
                  "In a context with a single Stock Location, this includes "
@@ -118,7 +118,7 @@ class product_immediately_usable(orm.Model):
             _product_available,
             multi='qty_available',
             type='float',
-            digits_compute=dp.get_precision('Product UoM'),
+            digits_compute=dp.get_precision('Product Unit of Measure'),
             string='Outgoing',
             help="Quantity of products that are planned to leave.\n"
                  "In a context with a single Stock Location, this includes "
@@ -133,7 +133,7 @@ class product_immediately_usable(orm.Model):
                  "Location typed as 'internal'."),
         'immediately_usable_qty': fields.function(
             _product_available,
-            digits_compute=dp.get_precision('Product UoM'),
+            digits_compute=dp.get_precision('Product Unit of Measure'),
             type='float',
             string='Immediately Usable',
             multi='qty_available',

@@ -48,7 +48,7 @@ class product_product(Model):
     
     _columns = {'configurable_stock_level': fields.function(_compute_configurable_level,
                                                             type='float',
-                                                            digits_compute=dp.get_precision('Product UoM'),
+                                                            digits_compute=dp.get_precision('Product Unit of Measure'),
                                                             string='Custom level')}
 
                 
