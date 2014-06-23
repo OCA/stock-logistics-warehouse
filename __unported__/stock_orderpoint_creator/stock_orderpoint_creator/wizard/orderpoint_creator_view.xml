@@ -7,6 +7,7 @@
       <field name="model">stock.warehouse.orderpoint.creator</field>
       <field name="arch" type="xml">
         <form string="Product warehouse config" version="7.0">
+          <label string="This wizard will apply the following orderpoint to selected product(s)"/>
           <group string="Templates" colspan="4">
             <field name="orderpoint_template_id" colspan="4"/>
           </group>
