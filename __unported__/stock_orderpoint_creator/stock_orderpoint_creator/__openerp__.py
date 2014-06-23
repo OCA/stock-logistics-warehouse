@@ -19,7 +19,8 @@
 #
 ##############################################################################
 
-{'name': 'Configuration of order point in mass',
+{'name': 'Order point creator',
+ 'summary': 'Configuration of order point in mass',
  'version': '1.0',
  'author': 'Camptocamp',
  'category': 'Warehouse',
@@ -28,10 +29,23 @@
  'website': "http://www.camptocamp.com",
  'depends': ['procurement'],
  'description': """
-Add a wizard to configure massively order points for multiple product""",
+Order point creator
+===================
+
+Add a wizard to configure massively order points for multiple product
+
+Contributors
+------------
+
+ * Yannick Vaucher <yannick.vaucher@camptocamp.com>
+ * Matthieu Dietrich <matthieu.dietrich@camptocamp.com>
+
+""",
  'website': 'http://www.openerp.com',
  'demo': [],
- 'data': ["wizard/orderpoint_creator_view.xml", "security/ir.model.access.csv"],
+ 'data': ["wizard/orderpoint_creator_view.xml",
+          "security/ir.model.access.csv",
+          ],
  'test': [],
  'installable': True,
  'auto_install': False,
