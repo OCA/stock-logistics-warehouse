@@ -21,17 +21,35 @@
 
 """ Template of order point object """
 
-from openerp.osv.orm import Model
+from openerp.osv.orm import Model, fields
 from base_product_config_template import BaseProductConfigTemplate
 
 
 class OrderpointTemplate(BaseProductConfigTemplate, Model):
-    """ Template for orderpoints """
+    """ Template for orderpoints
+
+    Here we use same model as stock.warhouse.orderpoint but set product_id
+    as non mandatory as we cannot remove it. This field will be ignored.
+
+    This has the advantage to ensure orderpoint and orderpoint template have
+    same fields.
+
+    _table is redifined to separate templates from orderpoints
+    """
     _name = 'stock.warehouse.orderpoint.template'
 
     _inherit = 'stock.warehouse.orderpoint'
     _table = 'stock_warehouse_orderpoint_template'
     _clean_mode = 'deactivate'
+
+    _columns = {
+        'product_id': fields.many2one(
+            'product.product',
+            'Product',
+            required=False,
+            ondelete='cascade',
+            domain=[('type','=','product')]),
+     }
 
     def _get_ids_2_clean(self, cr, uid, template_br, product_ids,
                          context=None):
