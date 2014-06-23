@@ -24,6 +24,7 @@
 from openerp.osv.orm import Model
 from base_product_config_template import BaseProductConfigTemplate
 
+
 class OrderpointTemplate(BaseProductConfigTemplate, Model):
     """ Template for orderpoints """
     _name = 'stock.warehouse.orderpoint.template'
@@ -32,12 +33,12 @@ class OrderpointTemplate(BaseProductConfigTemplate, Model):
     _table = 'stock_warehouse_orderpoint_template'
     _clean_mode = 'deactivate'
 
-    def _get_ids_2_clean(self, cursor, uid, template_br, product_ids, context=None):
+    def _get_ids_2_clean(self, cr, uid, template_br, product_ids,
+                         context=None):
         """ hook to select model specific objects to clean
         return must return a list of id"""
         model_obj = self._get_model()
-        ids_to_del = model_obj.search(cursor, uid,
-                                      [('product_id', 'in', product_ids)])
+        ids_to_del = model_obj.search(cr, uid,
+                                      [('product_id', 'in', product_ids)],
+                                      context=context)
         return ids_to_del
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

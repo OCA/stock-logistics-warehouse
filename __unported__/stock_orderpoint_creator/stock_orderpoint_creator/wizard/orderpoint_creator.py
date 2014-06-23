@@ -26,44 +26,44 @@ from openerp.osv.orm import browse_record, TransientModel, fields
 
 _template_register = ['orderpoint_template_id']
 
+
 class OrderpointCreator(TransientModel):
     _name = 'stock.warehouse.orderpoint.creator'
     _description = 'Orderpoint Creator'
 
-    _columns = {'orderpoint_template_id': fields.many2many(
-                        'stock.warehouse.orderpoint.template',
-                        rel='order_point_creator_rel',
-                        string='Stock rule template')
+    _columns = {
+        'orderpoint_template_id': fields.many2many(
+            'stock.warehouse.orderpoint.template',
+            rel='order_point_creator_rel',
+            string='Stock rule template')
     }
-
 
     def _get_template_register(self):
         """return a list of the field names which defines a template
         This is a hook to allow expending the list of template"""
         return _template_register
 
-
-    def action_configure(self, cursor, uid, wiz_id, context=None):
+    def action_configure(self, cr, uid, wiz_id, context=None):
         """ action to retrieve wizard data and launch creation of items """
 
-        product_ids = context['active_ids']
+        product_ids = context.get('active_ids')
+        assert product_ids
+
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
-        current = self.browse(cursor, uid, wiz_id, context=context)
-        for template_field in  self._get_template_register():
-            template_br_list = current[template_field]
+        this = self.browse(cr, uid, wiz_id, context=context)
+        for template_field in self._get_template_register():
+            template_br_list = this[template_field]
             if template_br_list:
                 if isinstance(template_br_list, browse_record):
                     template_br_list = [template_br_list]
                 template_model = template_br_list[0]._model._name
                 template_obj = self.pool.get(template_model)
-                template_obj._disable_old_instances(cursor, uid, template_br_list,
-                                                    product_ids, context=context)
+                template_obj._disable_old_instances(cr, uid, template_br_list,
+                                                    product_ids,
+                                                    context=context)
                 for template_br in template_br_list:
-                    template_obj.create_instances(cursor, uid, template_br,
-                                              product_ids, context=context)
+                    template_obj.create_instances(cr, uid, template_br,
+                                                  product_ids, context=context)
 
         return {}
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
