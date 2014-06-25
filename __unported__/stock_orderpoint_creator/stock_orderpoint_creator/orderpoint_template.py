@@ -60,3 +60,13 @@ class OrderpointTemplate(BaseProductConfigTemplate, Model):
                                       [('product_id', 'in', product_ids)],
                                       context=context)
         return ids_to_del
+
+    def _check_product_uom(self, cr, uid, ids, context=None):
+        '''
+        Overwrite constraint _check_product_uom
+        '''
+        return True
+
+    _constraints = [
+        (_check_product_uom, 'Overriding constraint', ['product_id', 'product_uom']),
+    ]
