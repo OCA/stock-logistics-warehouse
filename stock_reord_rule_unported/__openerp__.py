@@ -47,5 +47,5 @@
     'data': ['stock_reord_rule_view.xml','cron_data.xml',],
     'images': [],
     'active': False,
-    'installable': True,
+    'installable': False,
 }

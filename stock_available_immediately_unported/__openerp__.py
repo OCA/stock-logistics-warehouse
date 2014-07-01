@@ -36,5 +36,5 @@ Immediately usable is computed : Quantity on Hand - Outgoing Stock.
     "data": ["product_view.xml", 
              ],
     "active": False,
-    "installable": True
+    'installable': False
 }

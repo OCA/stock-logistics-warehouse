@@ -37,5 +37,5 @@ You can choose which stock moves have to generate inventory valuation accounting
         'test/stock.yml'
     ],
     "active": False,
-    "installable": True
+    'installable': False
 }

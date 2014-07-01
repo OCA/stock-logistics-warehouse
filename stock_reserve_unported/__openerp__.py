@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-{'name': 'Stock Reserve Sales',
+{'name': 'Stock Reserve',
  'version': '0.1',
  'author': 'Camptocamp',
  'category': 'Warehouse',
@@ -28,15 +28,13 @@
  'images': [],
  'website': "http://www.camptocamp.com",
  'description': """
-Stock Reserve Sales
-===================
+Stock Reserve
+=============
 
-Allows to create stock reservations for quotation lines before the
-confirmation of the quotation.  The reservations might have a validity
-date and in any case they are lifted when the quotation is canceled or
-confirmed.
+Allows to create stock reservations on products.
 
-Reservations can be done only on "make to stock" and stockable products.
+Each reservation can have a validity date, once passed, the reservation
+is automatically lifted.
 
 The reserved products are substracted from the virtual stock. It means
 that if you reserved a quantity of products which bring the virtual
@@ -44,22 +42,17 @@ stock below the minimum, the orderpoint will be triggered and new
 purchase orders will be generated. It also implies that the max may be
 exceeded if the reservations are canceled.
 
-If you want to prevent sales orders to be confirmed when the stock is
-insufficient at the order date, you may want to install the
-`sale_exception_nostock` module.
-
 """,
- 'depends': ['sale_stock',
-             'stock_reserve',
+ 'depends': ['stock',
              ],
  'demo': [],
- 'data': ['wizard/sale_stock_reserve_view.xml',
-          'view/sale.xml',
-          'view/stock_reserve.xml',
+ 'data': ['view/stock_reserve.xml',
+          'view/product.xml',
+          'data/stock_data.xml',
+          'security/ir.model.access.csv',
           ],
  'auto_install': False,
- 'test': ['test/sale_reserve.yml',
-          'test/sale_line_reserve.yml',
+ 'test': ['test/stock_reserve.yml',
           ],
- 'installable': True,
+ 'installable': False,
  }
