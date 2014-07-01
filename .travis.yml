@@ -15,7 +15,6 @@ services:
   - postgresql
 
 before_script:
-    - psql -c "CREATE USER openerp WITH PASSWORD 'admin';" -U postgres
 
 install:
     - $HOME/maintainer-quality-tools/travis/travis_install_nightly.sh 7.0
