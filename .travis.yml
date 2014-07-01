@@ -8,8 +8,8 @@ virtualenv:
 before_install:
  - sudo apt-get install -qq graphviz
  - git clone https://github.com/gurneyalex/maintainer-quality-tools.git $HOME/maintainer-quality-tools
- - git clone https://github.com/OCA/stock-logistics-tracking.git $HOME/stock-logistics-tracking
- - git clone https://github.com/OCA/stock-logistics-barcode.git $HOME/stock-logistics-barcode
+ - git clone https://github.com/OCA/stock-logistics-tracking.git -b 7.0 $HOME/stock-logistics-tracking
+ - git clone https://github.com/OCA/stock-logistics-barcode.git -b 7.0 $HOME/stock-logistics-barcode
 
 services:
   - postgresql
