@@ -17,7 +17,7 @@ services:
 
 script:
     - travis_run_flake8
-    - travis_run_tests 6.1 openerp_test $HOME/stock-logistics-tracking $HOME/stock-logistics-barcode
+    - travis_run_tests 6.1 openerp_test $HOME/OCA/stock-logistics-tracking $HOME/OCA/stock-logistics-barcode
 
 after_success:
   coveralls
