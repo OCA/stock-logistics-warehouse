@@ -3,7 +3,7 @@
 
 [report]
 include =
-    */OCA/stock-logistic-warehouse/*
+    */OCA/stock-logistics-warehouse/*
 
 omit =
     */tests/*
