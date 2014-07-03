@@ -5,20 +5,14 @@ python:
 virtualenv:
   system_site_packages: true
 
-before_install:
- - git clone https://github.com/gurneyalex/maintainer-quality-tools.git $HOME/maintainer-quality-tools
- - git clone https://github.com/OCA/stock-logistics-tracking.git -b 7.0 $HOME/stock-logistics-tracking
- - git clone https://github.com/OCA/stock-logistics-barcode.git -b 7.0 $HOME/stock-logistics-barcode
+install:
+  - git clone https://github.com/OCA/maintainer-quality-tools.git $HOME/maintainer-quality-tools
+  - export PATH=$HOME/maintainer-quality-tools/travis:$PATH
+  - $HOME/maintainer-quality-tools/travis/travis_install_nightly 7.0
+  - pip install coveralls flake8
 
 services:
   - postgresql
-
-env:
- - PATH=$HOME/maintainer-quality-tools/travis:$PATH
-
-install:
-    - $HOME/maintainer-quality-tools/travis/travis_install_nightly 7.0
-    - pip install coveralls flake8
 
 script:
     - travis_run_flake8
@@ -26,7 +20,3 @@ script:
 
 after_success:
   coveralls
-
-notifications:
-  email:
-    - alexandre.fayolle@camptocamp.com
