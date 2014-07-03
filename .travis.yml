@@ -10,14 +10,14 @@ install:
   - export PATH=$HOME/maintainer-quality-tools/travis:$PATH
   - $HOME/maintainer-quality-tools/travis/travis_install_nightly 6.1
   - pip install coveralls flake8
-  - git clone https://github.com/OCA/stock-logistics-tracking -b 6.1
-  - git clone https://github.com/OCA/stock-logistics-barcode -b 6.1
+  - git clone https://github.com/OCA/stock-logistics-tracking -b 6.1 $HOME/stock-logistics-tracking
+  - git clone https://github.com/OCA/stock-logistics-barcode -b 6.1 $HOME/stock-logistics-barcode
 services:
   - postgresql
 
 script:
     - travis_run_flake8
-    - travis_run_tests 6.1 openerp_test $HOME/OCA/stock-logistics-tracking $HOME/OCA/stock-logistics-barcode
+    - travis_run_tests 6.1 openerp_test $HOME/stock-logistics-tracking $HOME/stock-logistics-barcode
 
 after_success:
   coveralls
