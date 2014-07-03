@@ -10,7 +10,8 @@ install:
   - export PATH=$HOME/maintainer-quality-tools/travis:$PATH
   - $HOME/maintainer-quality-tools/travis/travis_install_nightly 6.1
   - pip install coveralls flake8
-
+  - git clone https://github.com/OCA/stock-logistics-tracking -b 6.1
+  - git clone https://github.com/OCA/stock-logistics-barcode -b 6.1
 services:
   - postgresql
 
