@@ -1,12 +1,11 @@
 # Config file .coveragerc
+# adapt the include for your project
 
 [report]
+include =
+    */OCA/stock-logistic-warehouse/*
+
 omit =
-    /usr/*
-    */bin/*
-    */lib/*
-    */odoo/*
-    */openerp/*
     */tests/*
     *__init__.py
 
