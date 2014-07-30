@@ -111,8 +111,3 @@ msgstr ""
 msgid "stock.inventory.line.empty"
 msgstr ""
 
-#. module: stock_inventory_preparation_filters
-#: view:stock.inventory:0
-msgid "{'invisible':[('state','=','draft')]}"
-msgstr ""
-

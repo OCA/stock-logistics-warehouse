@@ -40,7 +40,7 @@ msgstr "Creado el"
 #: code:addons/stock_inventory_preparation_filters/models/stock_inventory.py:66
 #, python-format
 msgid "Empty list"
-msgstr "Lista Vacia"
+msgstr "Lista vacía"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,id:0
@@ -56,7 +56,7 @@ msgstr "Inventario"
 #. module: stock_inventory_preparation_filters
 #: view:stock.inventory:0
 msgid "Inventory Details"
-msgstr "Detalles del Inventario"
+msgstr "Detalles del inventario"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,write_uid:0
@@ -76,7 +76,7 @@ msgstr "Lotes"
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,product_code:0
 msgid "Product Code"
-msgstr "Codigo de Producto"
+msgstr "Codigo de producto"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory,product_ids:0
@@ -92,27 +92,22 @@ msgstr "Cantidad"
 #: code:addons/stock_inventory_preparation_filters/models/stock_inventory.py:61
 #, python-format
 msgid "Selected Categories"
-msgstr "Categorias Seleccionadas"
+msgstr "Categorias seleccionadas"
 
 #. module: stock_inventory_preparation_filters
 #: code:addons/stock_inventory_preparation_filters/models/stock_inventory.py:65
 #, python-format
 msgid "Selected Lots"
-msgstr "Lotes Seleccionados"
+msgstr "Lotes seleccionados"
 
 #. module: stock_inventory_preparation_filters
 #: code:addons/stock_inventory_preparation_filters/models/stock_inventory.py:62
 #, python-format
 msgid "Selected Products"
-msgstr "Productos Seleccionados"
+msgstr "Productos seleccionados"
 
 #. module: stock_inventory_preparation_filters
 #: model:ir.model,name:stock_inventory_preparation_filters.model_stock_inventory_line_empty
 msgid "stock.inventory.line.empty"
 msgstr "stock.inventory.line.empty"
-
-#. module: stock_inventory_preparation_filters
-#: view:stock.inventory:0
-msgid "{'invisible':[('state','=','draft')]}"
-msgstr "{'invisible':[('state','=','draft')]}"
 

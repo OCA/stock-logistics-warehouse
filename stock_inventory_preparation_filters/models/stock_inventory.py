@@ -123,32 +123,34 @@ class StockInventory(orm.Model):
             tmp_lines = {}
             empty_line_obj = self.pool['stock.inventory.line.empty']
 
-            for empty_line in inventory.empty_line_ids:
-                if empty_line.product_code in tmp_lines:
-                    tmp_lines[empty_line.product_code] += empty_line.product_qty
+            for line in inventory.empty_line_ids:
+                if line.product_code in tmp_lines:
+                    tmp_lines[line.product_code] += line.product_qty
                 else:
-                    tmp_lines[empty_line.product_code] = empty_line.product_qty
-                empty_line_obj.unlink(cr, uid, empty_line.id, context=context)
+                    tmp_lines[line.product_code] = line.product_qty
+            empty_line_obj.unlink(cr, uid, inventory.empty_line_ids.ids,
+                                  context=context)
 
             for product_code in tmp_lines.keys():
-                product_id = product_obj.search(
+                product_ids = product_obj.search(
                     cr, uid, [('default_code', '=', product_code)],
-                    context=context)[0]
-                product = product_obj.browse(cr, uid, product_id,
-                                             context=context)
-                fake_inventory = StockInventoryFake(inventory, product=product)
-                values = super(StockInventory, self)._get_inventory_lines(
-                    cr, uid, fake_inventory, context=context)
-                if values:
-                    values[0]['product_qty'] = tmp_lines[product_code]
-                    tmp_lines.pop(product_code)
-                else:
-                    empty_line_obj.create(
-                        cr, uid, {
-                            'product_code': product_code,
-                            'product_qty': tmp_lines[product_code],
-                            'inventory_id': inventory.id,
-                            }, context=context)
-                vals += values
+                    context=context)
+                if product_ids:
+                    product = product_obj.browse(cr, uid, product_ids[0],
+                                                 context=context)
+                    fake_inventory = StockInventoryFake(inventory,
+                                                        product=product)
+                    values = super(StockInventory, self)._get_inventory_lines(
+                        cr, uid, fake_inventory, context=context)
+                    if values:
+                        values[0]['product_qty'] = tmp_lines[product_code]
+                    else:
+                        empty_line_obj.create(
+                            cr, uid, {
+                                'product_code': product_code,
+                                'product_qty': tmp_lines[product_code],
+                                'inventory_id': inventory.id,
+                                }, context=context)
+                    vals += values
 
         return vals

@@ -28,10 +28,19 @@
     ],
     "category": "Custom Module",
     "website": "http://www.odoomrp.com",
-    "complexity": "normal",
     "summary": "More filters for inventory adjustments",
     "description": """
-    This module adds more filters to the inventory adjustments
+    More preparation filters for inventories
+    ========================================
+
+    Includes more options for making an inventory out of:
+
+        * Multiple products.
+        * Products of a category.
+        * Multiple lots
+
+        It also allows to make an inventory based on scanned products, adding a
+        line with product code and quantity
     """,
     "data": [
         "views/stock_inventory_view.xml",
