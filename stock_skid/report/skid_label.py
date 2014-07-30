@@ -98,7 +98,6 @@ class SkidLabelParser(report_sxw.rml_parse):
         })
 
     def get_all_labels(self, objects):
-        import pdb; pdb.set_trace()
         return [
             SkidLabel(o, l)
             for o, l in zip(objects, self.label_data)

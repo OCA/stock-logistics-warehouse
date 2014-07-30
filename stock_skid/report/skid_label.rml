@@ -68,7 +68,7 @@
   <story>
     <para fontName="Times-Roman" fontSize="8" alignment="CENTER">[[ repeatIn(get_all_labels(objects), 'label') ]]</para>
     <section>
-      <para fontName="Helvetica-Bold" fontSize="8" alignment="CENTER">[[ repeatIn([label], 'label') ]]</para>
+      <para fontName="Helvetica-Bold" fontSize="8" alignment="CENTER"> </para>
       <blockTable colWidths="5.1in">
         <tr>
           <td>
