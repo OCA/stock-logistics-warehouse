@@ -1,8 +1,6 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -62,7 +60,9 @@ class StockInventory(orm.Model):
                                                         context=context)
         res_filter.append(('categories', _('Selected Categories')))
         res_filter.append(('products', _('Selected Products')))
-        res_filter.append(('lots', _('Selected Lots')))
+        for filter in res_filter:
+            if filter[0] == 'lot':
+                res_filter.append(('lots', _('Selected Lots')))
         res_filter.append(('empty', _('Empty list')))
         return res_filter
 
@@ -86,12 +86,14 @@ class StockInventory(orm.Model):
 
     def _get_inventory_lines(self, cr, uid, inventory, context=None):
         vals = []
+        product_tmpl_obj = self.pool['product.template']
+        product_obj = self.pool['product.product']
+
         if not inventory.filter in ('categories', 'products', 'lots', 'empty'):
             vals = super(StockInventory, self)._get_inventory_lines(
                 cr, uid, inventory, context=context)
+
         elif inventory.filter in ('categories', 'products'):
-            product_tmpl_obj = self.pool['product.template']
-            product_obj = self.pool['product.product']
             product_ids = []
 
             if inventory.filter == 'categories':
@@ -115,9 +117,38 @@ class StockInventory(orm.Model):
                 fake_inventory = StockInventoryFake(inventory, lot=lot)
                 vals += super(StockInventory, self)._get_inventory_lines(
                     cr, uid, fake_inventory, context=context)
+
         elif inventory.filter == 'empty':
-            print "EMPTY LIST"
-            # TODO: además de calcular por linea y por producto actualizar
-            # la cantidad real
+            values = []
+            tmp_lines = {}
+            empty_line_obj = self.pool['stock.inventory.line.empty']
+
+            for empty_line in inventory.empty_line_ids:
+                if empty_line.product_code in tmp_lines:
+                    tmp_lines[empty_line.product_code] += empty_line.product_qty
+                else:
+                    tmp_lines[empty_line.product_code] = empty_line.product_qty
+                empty_line_obj.unlink(cr, uid, empty_line.id, context=context)
+
+            for product_code in tmp_lines.keys():
+                product_id = product_obj.search(
+                    cr, uid, [('default_code', '=', product_code)],
+                    context=context)[0]
+                product = product_obj.browse(cr, uid, product_id,
+                                             context=context)
+                fake_inventory = StockInventoryFake(inventory, product=product)
+                values = super(StockInventory, self)._get_inventory_lines(
+                    cr, uid, fake_inventory, context=context)
+                if values:
+                    values[0]['product_qty'] = tmp_lines[product_code]
+                    tmp_lines.pop(product_code)
+                else:
+                    empty_line_obj.create(
+                        cr, uid, {
+                            'product_code': product_code,
+                            'product_qty': tmp_lines[product_code],
+                            'inventory_id': inventory.id,
+                            }, context=context)
+                vals += values
 
         return vals
