@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<document filename="Skid_Label.pdf">
+  <template pageSize="(6in,4in)" title="Skid_Label" author="Vincent Vinet (vincent.vinet@savoirfairelinux.com)" allowSplitting="1" rightMargin="0.1in" topMargin="0.1cm" bottomMargin="0.1cm">
+    <pageTemplate id="first">
+      <frame id="first" x1="5.0" y1="0.0" width="5.8in" height="4in"/>
+      <pageGraphics>
+        <rotate degrees="40"/>
+        <place x="2.0in" y="-2.0in" width="4in" height="2in">
+          <blockTable colWidths="9.5cm">
+            <tr alignment="CENTER">
+              <td alignment="CENTER">
+                <para fontName="Times-Roman" fontSize="18" alignment="CENTER" textColor="#C8C8C8">
+                  <strong>REPRINTED BY [[ user.name ]] </strong>
+                </para>
+              </td>
+            </tr>
+          </blockTable>
+        </place>
+        <rotate degrees="40"/>
+      </pageGraphics>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Table">
+      <blockAlignment value="CENTER"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="black" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="black" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="black" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="black" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="black" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="black" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="black" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="black" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBELOW" colorName="black" start="3,-1" stop="3,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table1">
+      <blockBackground colorName="black"/>
+      <blockAlignment value="CENTER"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="black" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="black" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="black" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="black" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="black" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="black" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="black" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="black" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBELOW" colorName="black" start="3,-1" stop="3,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table2">
+      <blockAlignment value="CENTER"/>
+      <blockValign value="TOP"/>
+      <blockFont name="Helvetica-Bold" size="30"/>
+    </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+  </stylesheet>
+  <story>
+    <para fontName="Times-Roman" fontSize="8" alignment="CENTER">[[ repeatIn(get_all_labels(objects), 'label') ]]</para>
+    <section>
+      <para fontName="Helvetica-Bold" fontSize="8" alignment="CENTER"> </para>
+      <blockTable colWidths="5.1in">
+        <tr>
+          <td>
+            <blockTable colWidths="5.1in" style="Table1">
+              <tr>
+                <td>
+                  <para fontName="Helvetica-Bold" fontSize="12" alignment="CENTER" textColor="white">
+                    <strong>[[ label.company_name ]]</strong>
+                  </para>
+                </td>
+              </tr>
+            </blockTable>
+            <blockTable colWidths="5.1in" style="Table">
+              <tr alignment="CENTER">
+                <td alignment="CENTER">
+                  <barCode code="code128" quiet="9" fontName="Times-Roman" fontSize="100" alignment="CENTER" barHeight="30.0" barWidth="2.0">[[ label.production_lot_id ]]</barCode>
+                </td>
+              </tr>
+            </blockTable>
+            <blockTable colWidths="5.1in" style="Table">
+              <tr alignment="CENTER">
+                <td alignment="CENTER">
+                  <!--<para fontName="Times-Roman" fontSize="8"><strong>Product</strong> </para>-->
+                  <para fontName="Helvetica-Bold" fontSize="27" leading="22" leftIndent="0mm" rightIndent="0mm" topIndent="0mm" bottomIndent="0mm" firstLineIndent="0mm" alignment="CENTER">
+                    <strong>[[ " ".join([i for i in (label.product_code, label.product_name) if i])[:50] ]]</strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="2">
+                    <strong> </strong>
+                  </para>
+                </td>
+              </tr>
+            </blockTable>
+            <blockTable colWidths="0.75in,1.80in,2.55in" style="Table">
+              <tr>
+                <td>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>MO Ref </strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>Machine </strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>Shift   </strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>Operator</strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>Supervisor</strong>
+                  </para>
+                </td>
+                <td>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>[[ (label.production_name or '---')[:24] ]]</strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>[[ (label.machine or '---')[:24] ]]</strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>[[ (label.shift or '---')[:24] ]]</strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>[[ (label.packer_name or '---')[:24] ]]</strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong>[[ (label.supervisor  or '---')[:24] ]]</strong>
+                  </para>
+                </td>
+                <td>
+                  <para fontName="Helvetica-Bold" fontSize="12" alignment="CENTER">
+                    <strong>Serial No : [[ label.production_lot_id ]]</strong>
+                  </para>
+                  <!--<para fontName="Times-Roman" fontSize="8" alignment="LEFT"><strong>Quantity</strong> </para>-->
+                  <para fontName="Helvetica-Bold" fontSize="30" alignment="LEFT">
+                    <strong>[[ formatLang(round(label.quantity, 1))]]</strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
+                    <strong> </strong>
+                  </para>
+                  <para fontName="Helvetica-Bold" fontSize="12" alignment="RIGHT">
+                    <strong>[[ label.uom ]]</strong>
+                  </para>
+                </td>
+              </tr>
+            </blockTable>
+            <blockTable colWidths="5.1in" style="Table">
+              <tr alignment="CENTER">
+                <td alignment="CENTER">
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="CENTER" leading="0">
+                    <strong>Created</strong>
+                  </para>
+                </td>
+              </tr>
+              <tr alignment="CENTER">
+                <td alignment="CENTER">
+                  <para fontName="Helvetica-Bold" fontSize="27" alignment="CENTER" spaceAfter="0.2in">
+                    <strong>[[ formatLang(label.date, date_time=True) or ' ']]</strong>
+                  </para>
+                  <para>
+                    <strong> </strong>
+                  </para>
+                </td>
+              </tr>
+            </blockTable>
+          </td>
+        </tr>
+      </blockTable>
+    </section>
+  </story>
+</document>
