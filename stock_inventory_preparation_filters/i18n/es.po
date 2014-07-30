@@ -7,40 +7,40 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-30 08:59+0000\n"
-"PO-Revision-Date: 2014-07-30 08:59+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2014-07-30 11:01+0100\n"
+"Last-Translator: Oihane <oihanecruce@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 
 #. module: stock_inventory_preparation_filters
 #: view:stock.inventory:0
 #: field:stock.inventory,empty_line_ids:0
 msgid "Capture Lines"
-msgstr "Capture Lines"
+msgstr "Líneas capturadas"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory,categ_ids:0
 msgid "Categories"
-msgstr "Categories"
+msgstr "Categorias"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,create_uid:0
 msgid "Created by"
-msgstr "Created by"
+msgstr "Creado por"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,create_date:0
 msgid "Created on"
-msgstr "Created on"
+msgstr "Creado el"
 
 #. module: stock_inventory_preparation_filters
 #: code:addons/stock_inventory_preparation_filters/models/stock_inventory.py:66
 #, python-format
 msgid "Empty list"
-msgstr "Empty list"
+msgstr "Lista Vacia"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,id:0
@@ -56,55 +56,55 @@ msgstr "Inventario"
 #. module: stock_inventory_preparation_filters
 #: view:stock.inventory:0
 msgid "Inventory Details"
-msgstr "Inventory Details"
+msgstr "Detalles del Inventario"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Actualizado por"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Actualizado el"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory,lot_ids:0
 msgid "Lots"
-msgstr "Lots"
+msgstr "Lotes"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,product_code:0
 msgid "Product Code"
-msgstr "Product Code"
+msgstr "Codigo de Producto"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory,product_ids:0
 msgid "Products"
-msgstr "Products"
+msgstr "Productos"
 
 #. module: stock_inventory_preparation_filters
 #: field:stock.inventory.line.empty,product_qty:0
 msgid "Quantity"
-msgstr "Quantity"
+msgstr "Cantidad"
 
 #. module: stock_inventory_preparation_filters
 #: code:addons/stock_inventory_preparation_filters/models/stock_inventory.py:61
 #, python-format
 msgid "Selected Categories"
-msgstr "Selected Categories"
+msgstr "Categorias Seleccionadas"
 
 #. module: stock_inventory_preparation_filters
 #: code:addons/stock_inventory_preparation_filters/models/stock_inventory.py:65
 #, python-format
 msgid "Selected Lots"
-msgstr "Selected Lots"
+msgstr "Lotes Seleccionados"
 
 #. module: stock_inventory_preparation_filters
 #: code:addons/stock_inventory_preparation_filters/models/stock_inventory.py:62
 #, python-format
 msgid "Selected Products"
-msgstr "Selected Products"
+msgstr "Productos Seleccionados"
 
 #. module: stock_inventory_preparation_filters
 #: model:ir.model,name:stock_inventory_preparation_filters.model_stock_inventory_line_empty
