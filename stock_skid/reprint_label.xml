@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="skid_reprint_wizard">
+      <field name="name">stock.skid.reprint.wizard</field>
+      <field name="model">stock.skid.reprint.wizard</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Print Skid Label" version="7.0">
+          <group string="Select Skid">
+            <field name="prodlot_id" />
+            <field name="location_id" />
+          </group>
+          <footer>
+            <button name="do_print" type="object" string="Confirm" class="oe_highlight" />
+            or
+            <button string="Cancel" class="oe_link" special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_skid_reprint_wizard">
+      <field name="name">Reprint Label</field>
+      <field name="res_model">stock.skid.reprint.wizard</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+
+    <menuitem id="open_skid_reprint_wizard"
+      name="Reprint Label"
+      parent="stock.menu_traceability"
+      action="act_skid_reprint_wizard"
+      />
+  </data>
+</openerp>
