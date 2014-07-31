@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<document filename="Large_Label.pdf">
-  <template pageSize="(6in,4in)" rightMargin="0.1in" topMargin="0.1cm" bottomMargin="0.1cm" title="Large_Label" author="Savoir-faire Linux" allowSplitting="20">
+<document filename="Skid_Label.pdf">
+  <template pageSize="(6in,4in)" title="Skid_Label" author="Vincent Vinet (vincent.vinet@savoirfairelinux.com)" allowSplitting="1" rightMargin="0.1in" topMargin="0.1cm" bottomMargin="0.1cm">
     <pageTemplate id="first">
       <frame id="first" x1="5.0" y1="0.0" width="5.8in" height="4in"/>
       <pageGraphics>

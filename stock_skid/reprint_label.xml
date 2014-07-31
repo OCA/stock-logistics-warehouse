@@ -9,7 +9,7 @@
         <form string="Print Skid Label" version="7.0">
           <group string="Select Skid">
             <field name="prodlot_id" />
-            <field name="location_id" />
+            <field name="location_id" domain="[('usage', '=', 'internal')]" />
             <field name="packer_name" />
           </group>
           <footer>
@@ -25,8 +25,8 @@
       string="Skid Label"
       model="stock.skid.reprint.wizard"
       name="report.stock_skid.report.skid_label"
-      rml="addons/stock_skid/report/skid_label.rml"
-      header="False"
+      rml="stock_skid/report/skid_label.rml"
+      header="True"
       auto="False" />
 
     <record model="ir.actions.act_window" id="act_skid_reprint_wizard">

@@ -108,4 +108,4 @@ report_sxw.report_sxw('report.stock_skid.report.skid_label',
                       'stock.skid.reprint.wizard',
                       'addons/stock_skid/report/skid_label.rml',
                       parser=SkidLabelParser,
-                      header='internal')
+                      header=False)

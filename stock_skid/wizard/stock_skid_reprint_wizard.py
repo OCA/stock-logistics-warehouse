@@ -63,7 +63,7 @@ class SkidReprintWizard(orm.TransientModel):
              }
             for lot in lot_info
         ]
-        ctx = context.copy()
+        ctx = {}
         ctx["label_data"] = label_data
 
         return {
