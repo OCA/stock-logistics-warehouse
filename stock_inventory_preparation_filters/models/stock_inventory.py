@@ -88,14 +88,11 @@ class StockInventory(orm.Model):
         vals = []
         product_tmpl_obj = self.pool['product.template']
         product_obj = self.pool['product.product']
-
         if not inventory.filter in ('categories', 'products', 'lots', 'empty'):
             vals = super(StockInventory, self)._get_inventory_lines(
                 cr, uid, inventory, context=context)
-
         elif inventory.filter in ('categories', 'products'):
             product_ids = []
-
             if inventory.filter == 'categories':
                 product_tmpl_ids = product_tmpl_obj.search(
                     cr, uid, [('categ_id', 'in', inventory.categ_ids.ids)],
@@ -103,7 +100,6 @@ class StockInventory(orm.Model):
                 product_ids = product_obj.search(
                     cr, uid, [('product_tmpl_id', 'in', product_tmpl_ids)],
                     context=context)
-
             elif inventory.filter == 'products':
                 product_ids = inventory.product_ids.ids
             for product in product_obj.browse(cr, uid, product_ids,
@@ -111,18 +107,15 @@ class StockInventory(orm.Model):
                 fake_inventory = StockInventoryFake(inventory, product=product)
                 vals += super(StockInventory, self)._get_inventory_lines(
                     cr, uid, fake_inventory, context=context)
-
         elif inventory.filter == 'lots':
             for lot in inventory.lot_ids:
                 fake_inventory = StockInventoryFake(inventory, lot=lot)
                 vals += super(StockInventory, self)._get_inventory_lines(
                     cr, uid, fake_inventory, context=context)
-
         elif inventory.filter == 'empty':
             values = []
             tmp_lines = {}
             empty_line_obj = self.pool['stock.inventory.line.empty']
-
             for line in inventory.empty_line_ids:
                 if line.product_code in tmp_lines:
                     tmp_lines[line.product_code] += line.product_qty
@@ -130,7 +123,6 @@ class StockInventory(orm.Model):
                     tmp_lines[line.product_code] = line.product_qty
             empty_line_obj.unlink(cr, uid, inventory.empty_line_ids.ids,
                                   context=context)
-
             for product_code in tmp_lines.keys():
                 product_ids = product_obj.search(
                     cr, uid, [('default_code', '=', product_code)],
@@ -152,5 +144,4 @@ class StockInventory(orm.Model):
                                 'inventory_id': inventory.id,
                                 }, context=context)
                     vals += values
-
         return vals
