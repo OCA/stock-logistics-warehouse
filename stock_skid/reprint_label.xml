@@ -6,11 +6,12 @@
       <field name="model">stock.skid.reprint.wizard</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form string="Print Skid Label" version="7.0">
+        <form string="Adjust &amp; Print" version="7.0">
           <group string="Select Skid">
             <field name="prodlot_id" />
             <field name="location_id" domain="[('usage', '=', 'internal')]" />
-            <field name="packer_name" />
+            <field name="new_quantity" />
+            <field name="packer_name" string="Operator" />
           </group>
           <footer>
             <button name="do_print" type="object" string="Confirm" class="oe_highlight" />
@@ -30,7 +31,7 @@
       auto="False" />
 
     <record model="ir.actions.act_window" id="act_skid_reprint_wizard">
-      <field name="name">Reprint Label</field>
+      <field name="name">Adjust &amp; Print</field>
       <field name="res_model">stock.skid.reprint.wizard</field>
       <field name="view_type">form</field>
       <field name="view_mode">form</field>
@@ -38,7 +39,7 @@
     </record>
 
     <menuitem id="open_skid_reprint_wizard"
-      name="Reprint Label"
+      name="Adjust &amp; Print"
       parent="stock.menu_traceability"
       action="act_skid_reprint_wizard"
       />
