@@ -8,13 +8,18 @@
       <field name="arch" type="xml">
         <form string="Adjust &amp; Print" version="7.0">
           <group string="Select Skid">
-            <field name="prodlot_id" />
-            <field name="location_id" domain="[('usage', '=', 'internal')]" />
+            <field name="prodlot_id"
+              on_change="onchange_prodlot_id(prodlot_id, location_id, context)" />
+            <field name="product_id" readonly="1" />
+            <field name="location_id"
+              domain="[('usage', '=', 'internal')]"
+              on_change="onchange_location_id(prodlot_id, location_id, context)" />
+            <field name="cur_quantity" readonly="1"/>
             <field name="new_quantity" />
             <field name="packer_name" string="Operator" />
           </group>
           <footer>
-            <button name="do_print" type="object" string="Confirm" class="oe_highlight" />
+            <button name="do_print" type="object" string="Adjust quantity &amp; Print label" class="oe_highlight" />
             or
             <button string="Cancel" class="oe_link" special="cancel" />
           </footer>

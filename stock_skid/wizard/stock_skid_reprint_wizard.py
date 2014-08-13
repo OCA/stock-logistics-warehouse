@@ -26,14 +26,69 @@ class SkidReprintWizard(orm.TransientModel):
     _name = "stock.skid.reprint.wizard"
     _description = "Skid Reprint Wizard"
     _columns = {
-        "prodlot_id": fields.many2one("stock.production.lot", "Production Lot"),
-        "location_id": fields.many2one("stock.location", "Location"),
-        "packer_name": fields.char('Packer', size=64),
-        "new_quantity": fields.integer("New Quantity"),
+        "prodlot_id": fields.many2one(
+            "stock.production.lot", "Production Lot",
+            required=True,
+        ),
+        "product_id": fields.related(
+            'prodlot_id', 'product_id',
+            type="many2one", relation="product.product",
+            string="Product",
+            store=False,
+        ),
+        "location_id": fields.many2one(
+            "stock.location", "Location",
+            required=True,
+        ),
+        "packer_name": fields.char('Packer', size=64, required=True),
+        "cur_quantity": fields.integer("Current Quantity", readonly=True),
+        "new_quantity": fields.integer("New Quantity", required=True),
     }
 
-    def do_print(self, cr, uid, ids, context=None):
+    def _get_stock_at_location(self, cr, uid, prodlot_id, location_id,
+                               context=None):
         inv_obj = self.pool["report.stock.inventory"]
+        lot_info = [
+            lot for lot in inv_obj.read_group(
+                cr, uid, [
+                    # Do NOT filter on location_id, it messes up counts
+                    ('prodlot_id', '=', prodlot_id),
+                ],
+                fields=["product_qty", "location_id"],
+                groupby=["location_id"],
+                context=context,
+            )
+            if lot["location_id"][0] == location_id
+        ]
+
+        current_qty = lot_info[0]["product_qty"] if lot_info else 0
+        return current_qty
+
+    def onchange_prodlot_id(self, cr, uid, ids, prodlot_id, location_id,
+                            context=None):
+        lot_obj = self.pool["stock.production.lot"]
+        lot = lot_obj.browse(cr, uid, prodlot_id, context=context)
+        values = {
+            'product_id': lot.product_id.id,
+        }
+        if location_id:
+            qty = self._get_stock_at_location(cr, uid, prodlot_id, location_id,
+                                              context=context)
+            values["cur_quantity"] = qty
+            values["new_quantity"] = qty
+
+        return {'value': values}
+
+    def onchange_location_id(self, cr, uid, ids, prodlot_id, location_id,
+                             context=None):
+        qty = self._get_stock_at_location(cr, uid, prodlot_id, location_id,
+                                          context=context)
+        return {'value': {
+            'cur_quantity': qty,
+            'new_quantity': qty,
+        }}
+
+    def do_print(self, cr, uid, ids, context=None):
         location_obj = self.pool["stock.location"]
         move_obj = self.pool["stock.move"]
         user_obj = self.pool["res.users"]
@@ -42,20 +97,10 @@ class SkidReprintWizard(orm.TransientModel):
         form = self.browse(cr, uid, ids[0], context=context)
         supervisor = user_obj.browse(cr, uid, uid, context=context)
 
-        lot_info = [
-            lot for lot in inv_obj.read_group(
-                cr, uid, [
-                    # Do NOT filter on location_id, it messes up counts
-                    ('prodlot_id', '=', form.prodlot_id.id),
-                ],
-                fields=["product_qty", "location_id"],
-                groupby=["location_id"],
-                context=context,
-            )
-            if lot["location_id"][0] == form.location_id.id
-        ]
-
-        current_qty = lot_info[0]["product_qty"] if lot_info else 0
+        current_qty = self._get_stock_at_location(cr, uid,
+                                                  form.prodlot_id.id,
+                                                  form.location_id.id,
+                                                  context=context)
         new_quantity = form.new_quantity
 
         product = form.prodlot_id.product_id
@@ -122,3 +167,11 @@ class SkidReprintWizard(orm.TransientModel):
             },
             'nodestroy': True
         }
+
+    def create(self, cr, uid, values, context=None):
+        if values.get("prodlot_id") and values.get("location_id"):
+            values["cur_quantity"] = self._get_stock_at_location(
+                cr, uid, values["prodlot_id"], values["location_id"],
+                context=context)
+        return super(SkidReprintWizard, self).create(cr, uid, values,
+                                                     context=context)

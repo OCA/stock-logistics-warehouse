@@ -117,7 +117,7 @@
                     <strong>Shift   </strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>Operator  </strong>
+                    <strong>Operator</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
                     <strong>Supervisor</strong>
@@ -128,19 +128,19 @@
                     <strong>[[formatLang(label.date, date_time=True) or ' ' ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.production_name or ' ' ]]</strong>
+                    <strong>[[ label.production_name or '---' ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.machine or ' ' ]]</strong>
+                    <strong>[[ label.machine or '---' ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.shift or ' ' ]]</strong>
+                    <strong>[[ label.shift or '---' ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.packer_name or ' ' ]]</strong>
+                    <strong>[[ label.packer_name or '---' ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.supervisor  or ' ' ]]</strong>
+                    <strong>[[ label.supervisor  or '---' ]]</strong>
                   </para>
                 </td>
                 <td>
