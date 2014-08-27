@@ -18,6 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import base_product_config_template  # noqa
-from . import orderpoint_template  # noqa
-import wizard  # noqa
+from . import base_product_config_template
+from . import orderpoint_template
+from . import wizard

@@ -67,7 +67,7 @@ class BaseProductConfigTemplate():
         model_obj = self._get_model()
 
         data = {}
-        #May raise error on function fields in future
+        # May raise error on function fields in future
         for key in model_obj._columns.keys():
             tmp = template_br[key]
             if isinstance(tmp, browse_record):

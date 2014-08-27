@@ -48,8 +48,8 @@ class OrderpointTemplate(BaseProductConfigTemplate, Model):
             'Product',
             required=False,
             ondelete='cascade',
-            domain=[('type','=','product')]),
-     }
+            domain=[('type', '=', 'product')]),
+    }
 
     def _get_ids_2_clean(self, cr, uid, template_br, product_ids,
                          context=None):
@@ -68,5 +68,7 @@ class OrderpointTemplate(BaseProductConfigTemplate, Model):
         return True
 
     _constraints = [
-        (_check_product_uom, 'Overriding constraint', ['product_id', 'product_uom']),
+        (_check_product_uom,
+         'Overriding constraint',
+         ['product_id', 'product_uom']),
     ]

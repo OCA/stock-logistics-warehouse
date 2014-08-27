@@ -25,7 +25,7 @@
  'author': 'Camptocamp',
  'category': 'Warehouse',
  'license': 'AGPL-3',
- 'complexity': 'easy', #easy, normal, expert
+ 'complexity': 'easy',
  'website': "http://www.camptocamp.com",
  'depends': ['procurement'],
  'description': """
@@ -49,6 +49,6 @@ Contributors
  'test': [],
  'installable': True,
  'auto_install': False,
-}
+ }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
