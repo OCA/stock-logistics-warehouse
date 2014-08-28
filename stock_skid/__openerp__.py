@@ -28,6 +28,7 @@
     'depends': [
         'product',
         'stock',
+        'mrp',
     ],
     'category': 'Warehouse',
     'description': """
