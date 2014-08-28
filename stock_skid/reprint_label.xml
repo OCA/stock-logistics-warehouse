@@ -44,8 +44,8 @@
     </record>
 
     <menuitem id="open_skid_reprint_wizard"
-      name="Adjust &amp; Print"
-      parent="stock.menu_traceability"
+      name="Partial Label Reprint"
+      parent="mrp.menu_mrp_manufacturing"
       action="act_skid_reprint_wizard"
       />
   </data>

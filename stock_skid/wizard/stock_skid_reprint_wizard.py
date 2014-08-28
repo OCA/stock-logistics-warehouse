@@ -27,7 +27,7 @@ class SkidReprintWizard(orm.TransientModel):
     _description = "Skid Reprint Wizard"
     _columns = {
         "prodlot_id": fields.many2one(
-            "stock.production.lot", "Production Lot",
+            "stock.production.lot", "Serial Number",
             required=True,
         ),
         "product_id": fields.related(
