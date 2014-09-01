@@ -19,11 +19,12 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields, api
+from openerp.exceptions import except_orm
 from openerp.tools.translate import _
 
 
-class stock_reservation(orm.Model):
+class StockReservation(models.Model):
     """ Allow to reserve products.
 
     The fields mandatory for the creation of a reservation are:
@@ -49,41 +50,40 @@ class stock_reservation(orm.Model):
     _description = 'Stock Reservation'
     _inherits = {'stock.move': 'move_id'}
 
-    _columns = {
-        'move_id': fields.many2one('stock.move',
-                                   'Reservation Move',
-                                   required=True,
-                                   readonly=True,
-                                   ondelete='cascade',
-                                   select=1),
-        'date_validity': fields.date('Validity Date'),
-    }
+    move_id = fields.Many2one(
+        'stock.move',
+        'Reservation Move',
+        required=True,
+        readonly=True,
+        ondelete='cascade',
+        select=1)
+    date_validity = fields.Date('Validity Date')
 
-    def get_location_from_ref(self, cr, uid, ref, context=None):
+    @api.model
+    def get_location_from_ref(self, ref):
         """ Get a location from a xmlid if allowed
         :param ref: tuple (module, xmlid)
         """
-        location_obj = self.pool.get('stock.location')
-        data_obj = self.pool.get('ir.model.data')
-        get_ref = data_obj.get_object_reference
+        data_obj = self.env['ir.model.data']
         try:
-            __, location_id = get_ref(cr, uid, *ref)
-            location_obj.check_access_rule(cr, uid, [location_id],
-                                           'read', context=context)
-        except (orm.except_orm, ValueError):
+            location = data_obj.xmlid_to_object(ref, raise_if_not_found=True)
+            location.check_access_rule('read')
+            location_id = location.id
+        except (except_orm, ValueError):
             location_id = False
         return location_id
 
-    def _default_location_id(self, cr, uid, context=None):
-        if context is None:
-            context = {}
-        move_obj = self.pool.get('stock.move')
-        context['picking_type'] = 'internal'
-        return move_obj._default_location_source(cr, uid, context=context)
+    @api.model
+    def _default_location_id(self):
+        move_obj = self.env['stock.move']
+        return (move_obj
+                .with_context(picking_type='internal')
+                ._default_location_source())
 
-    def _default_location_dest_id(self, cr, uid, context=None):
-        ref = ('stock_reserve', 'stock_location_reservation')
-        return self.get_location_from_ref(cr, uid, ref, context=context)
+    @api.model
+    def _default_location_dest_id(self):
+        ref = 'stock_reserve.stock_location_reservation'
+        return self.get_location_from_ref(ref)
 
     _defaults = {
         'type': 'internal',
@@ -92,90 +92,87 @@ class stock_reservation(orm.Model):
         'product_qty': 1.0,
     }
 
-    def reserve(self, cr, uid, ids, context=None):
+    @api.multi
+    def reserve(self):
         """ Confirm a reservation
 
         The reservation is done using the default UOM of the product.
         A date until which the product is reserved can be specified.
         """
-        move_obj = self.pool.get('stock.move')
-        reservations = self.browse(cr, uid, ids, context=context)
-        move_ids = [reserv.move_id.id for reserv in reservations]
-        move_obj.write(cr, uid, move_ids,
-                       {'date_expected': fields.datetime.now()},
-                       context=context)
-        move_obj.action_confirm(cr, uid, move_ids, context=context)
-        move_obj.force_assign(cr, uid, move_ids, context=context)
+        move_recs = self.move_id
+        move_recs.date_expected = fields.Datetime.now()
+        move_recs.action_confirm()
+        move_recs.force_assign()
         return True
 
-    def release(self, cr, uid, ids, context=None):
-        if isinstance(ids, (int, long)):
-            ids = [ids]
-        reservations = self.read(cr, uid, ids, ['move_id'],
-                                 context=context, load='_classic_write')
-        move_obj = self.pool.get('stock.move')
-        move_ids = [reserv['move_id'] for reserv in reservations]
-        move_obj.action_cancel(cr, uid, move_ids, context=context)
+    @api.multi
+    def release(self):
+        """
+        Releas moves from reservation
+        """
+        move_recs = self.move_id
+        move_recs.action_cancel()
         return True
 
-    def release_validity_exceeded(self, cr, uid, ids=None, context=None):
+    @api.model
+    def release_validity_exceeded(self, ids=None):
         """ Release all the reservation having an exceeded validity date """
         domain = [('date_validity', '<', fields.date.today()),
                   ('state', '=', 'assigned')]
         if ids:
             domain.append(('id', 'in', ids))
-        reserv_ids = self.search(cr, uid, domain, context=context)
-        self.release(cr, uid, reserv_ids, context=context)
+        reserv_ids = self.search(domain)
+        self.release(reserv_ids)
         return True
 
-    def unlink(self, cr, uid, ids, context=None):
+    @api.multi
+    def unlink(self):
         """ Release the reservation before the unlink """
-        self.release(cr, uid, ids, context=context)
-        return super(stock_reservation, self).unlink(cr, uid, ids,
-                                                     context=context)
+        self.release()
+        return super(StockReservation, self).unlink()
 
-    def onchange_product_id(self, cr, uid, ids,
-                            product_id=False,
-                            context=None):
-        move_obj = self.pool.get('stock.move')
-        if ids:
-            reserv = self.read(cr, uid, ids, ['move_id'], context=context,
-                               load='_classic_write')
-            move_ids = [rv['move_id'] for rv in reserv]
-        else:
-            move_ids = []
-        result = move_obj.onchange_product_id(
-            cr, uid, move_ids, prod_id=product_id, loc_id=False,
-            loc_dest_id=False, partner_id=False)
-        if result.get('value'):
-            # only keep the existing fields on the view
-            keep = ('product_uom', 'name')
-            result['value'] = dict((key, value) for key, value in
-                                   result['value'].iteritems() if
-                                   key in keep)
-        return result
+    # XXX
+    #def onchange_product_id(self, cr, uid, ids, product_id=False, context=None
+    #):
+        #move_obj = self.pool.get('stock.move')
+        #if ids:
+            #reserv = self.read(cr, uid, ids, ['move_id'], context=context,
+                               #load='_classic_write')
+            #move_ids = [rv['move_id'] for rv in reserv]
+        #else:
+            #move_ids = []
+        #result = move_obj.onchange_product_id(
+            #cr, uid, move_ids, prod_id=product_id, loc_id=False,
+            #loc_dest_id=False, partner_id=False)
+        #if result.get('value'):
+            #vals = result['value']
+            ## only keep the existing fields on the view
+            #keep = ('product_uom', 'name')
+            #result['value'] = dict((key, value) for key, value in
+                                   #result['value'].iteritems() if
+                                   #key in keep)
+        #return result
 
-    def onchange_quantity(self, cr, uid, ids,
-                          product_id,
-                          product_qty,
-                          context=None):
-        """ On change of product quantity avoid negative quantities """
-        if not product_id or product_qty <= 0.0:
-            return {'value': {'product_qty': 0.0}}
-        return {}
+    # XXX
+    #def onchange_quantity(self, cr, uid, ids, product_id, product_qty,
+                           #context=None):
+        #""" On change of product quantity avoid negative quantities """
+        #if not product_id or product_qty <= 0.0:
+            #return {'value': {'product_qty': 0.0}}
+        #return {}
 
-    def open_move(self, cr, uid, ids, context=None):
-        assert len(ids) == 1, "1 ID expected, got %r" % ids
-        reserv = self.read(cr, uid, ids[0], ['move_id'], context=context,
-                           load='_classic_write')
-        mod_obj = self.pool.get('ir.model.data')
-        act_obj = self.pool.get('ir.actions.act_window')
-        get_ref = mod_obj.get_object_reference
-        __, action_id = get_ref(cr, uid, 'stock', 'action_move_form2')
-        action = act_obj.read(cr, uid, action_id, context=context)
-        action['name'] = _('Reservation Move')
+    @api.multi
+    def open_move(self):
+        assert len(self._ids) == 1, "1 ID expected, got %r" % self._ids
+        reserv = self[0].move_id
+        data_obj = self.env['ir.model.data']
+        ref_form2 = 'stock.action_move_form2'
+        action = data_obj.xmlid_to_object(ref_form2)
+        action_dict = action.read()
+        action_dict['name'] = _('Reservation Move')
         # open directly in the form view
-        __, view_id = get_ref(cr, uid, 'stock', 'view_move_form')
+        ref_form = 'stock.view_move_form'
+        view_id = data_obj.xmlid_to_res_id(ref_form)
         action['views'] = [(view_id, 'form')]
         action['res_id'] = reserv['move_id']
         return action
