@@ -54,5 +54,5 @@ exceeded if the reservations are canceled.
  'auto_install': False,
  'test': ['test/stock_reserve.yml',
           ],
- 'installable': False,
+ 'installable': True,
  }
