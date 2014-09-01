@@ -30,7 +30,7 @@ class StockReservation(models.Model):
     The fields mandatory for the creation of a reservation are:
 
     * product_id
-    * product_qty
+    * product_uom_qty
     * product_uom
     * name
 
@@ -102,7 +102,7 @@ class StockReservation(models.Model):
         'picking_type_id': _default_picking_type_id,
         'location_id': _default_location_id,
         'location_dest_id': _default_location_dest_id,
-        'product_qty': 1.0,
+        'product_uom_qty': 1.0,
     }
 
     @api.multi
@@ -166,8 +166,8 @@ class StockReservation(models.Model):
     @api.onchange('product_uom_qty')
     def _onchange_quantity(self):
         """ On change of product quantity avoid negative quantities """
-        if not self.product_id or self.product_qty <= 0.0:
-            self.product_qty = 0.0
+        if not self.product_id or self.product_uom_qty <= 0.0:
+            self.product_uom_qty = 0.0
 
     @api.multi
     def open_move(self):

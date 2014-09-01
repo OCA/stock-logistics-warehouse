@@ -24,9 +24,9 @@
                         <group>
                             <group name="main_grp" string="Details">
                                 <field name="product_id" />
-                                <label for="product_qty" />
+                                <label for="product_uom_qty" />
                                 <div>
-                                    <field name="product_qty" class="oe_inline"/>
+                                    <field name="product_uom_qty" class="oe_inline"/>
                                     <field name="product_uom"
                                         groups="product.group_uom" class="oe_inline"/>
                                 </div>
@@ -60,7 +60,7 @@
                     <field name="name" />
                     <field name="product_id" />
                     <field name="move_id" />
-                    <field name="product_qty" sum="Total" />
+                    <field name="product_uom_qty" sum="Total" />
                     <field name="product_uom" />
                     <field name="date_validity" />
                     <field name="state"/>
