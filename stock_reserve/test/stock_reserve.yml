@@ -1,0 +1,58 @@
+-
+  I create a product to test the stock reservation
+-
+ !record {model: product.product, id: product_sorbet}:
+    default_code: 001SORBET
+    name: Sorbet
+    type: product
+    categ_id: product.product_category_1
+    list_price: 100.0
+    standard_price: 70.0
+    uom_id: product.product_uom_kgm
+    uom_po_id: product.product_uom_kgm
+-
+  I update the current stock of the Sorbet with 10 kgm
+-
+  !record {model: stock.change.product.qty, id: change_qty}:
+    new_quantity: 10
+    product_id: product_sorbet
+-
+  !python {model: stock.change.product.qty}: |
+    context['active_id'] = ref('stock_reserve.product_sorbet')
+    self.change_product_qty(cr, uid, [ref('change_qty')], context=context)
+-
+  I check Virtual stock of Sorbet after update stock.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('stock_reserve.product_sorbet'), context=context)
+    assert product.virtual_available == 10, "Stock is not updated."
+-
+  I create a stock reservation for 5 kgm
+-
+ !record {model: stock.reservation, id: reserv_sorbet1}:
+    product_id: product_sorbet
+    product_uom_qty: 5.0
+    product_uom: product.product_uom_kgm
+    name: reserve 5 kgm of sorbet for test
+-
+  I confirm the reservation
+-
+  !python {model: stock.reservation}: |
+    self.reserve(cr, uid, [ref('reserv_sorbet1')], context=context)
+-
+  I check Virtual stock of Sorbet after update reservation
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('stock_reserve.product_sorbet'), context=context)
+    assert product.virtual_available == 5, "Stock is not updated."
+-
+  I release the reservation
+-
+  !python {model: stock.reservation}: |
+    self.release(cr, uid, [ref('reserv_sorbet1')], context=context)
+-
+  I check Virtual stock of Sorbet after update reservation
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('stock_reserve.product_sorbet'), context=context)
+    assert product.virtual_available == 10, "Stock is not updated."
