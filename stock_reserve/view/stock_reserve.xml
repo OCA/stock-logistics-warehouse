@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <record id="view_stock_reservation_form" model="ir.ui.view">
+            <field name="name">stock.reservation.form</field>
+            <field name="model">stock.reservation</field>
+            <field name="arch" type="xml">
+                <form string="Stock Reservations" version="7.0">
+                    <header>
+                        <button name="reserve" type="object"
+                            string="Reserve"
+                            class="oe_highlight"
+                            states="draft"/>
+                        <button name="release" type="object"
+                            string="Release"
+                            class="oe_highlight"
+                            states="assigned,confirmed,done"/>
+                        <button name="open_move" type="object"
+                            string="View Reservation Move"/>
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,assigned"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group name="main_grp" string="Details">
+                                <field name="product_id"
+                                    on_change="onchange_product_id(product_id)"
+                                    />
+                                <label for="product_qty" />
+                                <div>
+                                    <field name="product_qty"
+                                        on_change="onchange_quantity(product_id, product_qty)"
+                                        class="oe_inline"/>
+                                    <field name="product_uom"
+                                        groups="product.group_uom" class="oe_inline"/>
+                                </div>
+                                <field name="name"/>
+                                <field name="date_validity" />
+                                <field name="create_date" groups="base.group_no_one"/>
+                                <field name="company_id"
+                                    groups="base.group_multi_company"
+                                    widget="selection"/>
+                            </group>
+                            <group name="location" string="Locations"
+                                groups="stock.group_locations">
+                                <field name="location_id"/>
+                                <field name="location_dest_id"/>
+                            </group>
+                            <group name="note" string="Notes">
+                                <field name="note" nolabel="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_stock_reservation_tree" model="ir.ui.view">
+            <field name="name">stock.reservation.tree</field>
+            <field name="model">stock.reservation</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Reservations" version="7.0"
+                    colors="blue:state == 'draft';grey:state == 'cancel'" >
+                    <field name="name" />
+                    <field name="product_id" />
+                    <field name="move_id" />
+                    <field name="product_qty" sum="Total" />
+                    <field name="product_uom" />
+                    <field name="date_validity" />
+                    <field name="state"/>
+                    <button name="reserve" type="object"
+                        string="Reserve"
+                        icon="terp-locked"
+                        states="draft"/>
+                    <button name="release" type="object"
+                        string="Release"
+                        icon="gtk-undo"
+                        states="assigned,confirmed,done"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_reservation_search" model="ir.ui.view">
+            <field name="name">stock.reservation.search</field>
+            <field name="model">stock.reservation</field>
+            <field name="arch" type="xml">
+                <search string="Stock Reservations" version="7.0">
+                    <filter name="draft" string="Draft"
+                        domain="[('state', '=', 'draft')]"
+                        help="Not already reserved"/>
+                    <filter name="reserved" string="Reserved"
+                        domain="[('state', '=', 'assigned')]"
+                        help="Moves are reserved."/>
+                    <filter name="cancel" string="Released"
+                        domain="[('state', '=', 'cancel')]"
+                        help="Reservations have been released."/>
+                    <field name="name" />
+                    <field name="product_id" />
+                    <field name="move_id" />
+                    <group expand="0" string="Group By...">
+                        <filter string="Status"
+                            name="groupby_state"
+                            domain="[]" context="{'group_by': 'state'}"/>
+                        <filter string="Product" domain="[]"
+                            name="groupby_product"
+                            context="{'group_by': 'product_id'}"/>
+                        <filter string="Product UoM" domain="[]"
+                            name="groupby_product_uom"
+                            context="{'group_by': 'product_uom'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_stock_reservation" model="ir.actions.act_window">
+            <field name="name">Stock Reservations</field>
+            <field name="res_model">stock.reservation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_stock_reservation_tree"/>
+            <field name="search_view_id" ref="view_stock_reservation_search"/>
+            <field name="context">{'search_default_draft': 1,
+                                   'search_default_reserved': 1,
+                                   'search_default_groupby_product': 1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a stock reservation.
+                    </p><p>
+                    This menu allow you to prepare and reserve some quantities
+                    of products.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_stock_reservation"
+            id="menu_action_stock_reservation"
+            parent="stock.menu_stock_inventory_control"
+            sequence="30"/>
+    </data>
+</openerp>
