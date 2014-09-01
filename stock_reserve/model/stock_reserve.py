@@ -131,35 +131,30 @@ class StockReservation(models.Model):
         self.release()
         return super(StockReservation, self).unlink()
 
-    # XXX
-    #def onchange_product_id(self, cr, uid, ids, product_id=False, context=None
-    #):
-        #move_obj = self.pool.get('stock.move')
-        #if ids:
-            #reserv = self.read(cr, uid, ids, ['move_id'], context=context,
-                               #load='_classic_write')
-            #move_ids = [rv['move_id'] for rv in reserv]
-        #else:
-            #move_ids = []
-        #result = move_obj.onchange_product_id(
-            #cr, uid, move_ids, prod_id=product_id, loc_id=False,
-            #loc_dest_id=False, partner_id=False)
-        #if result.get('value'):
-            #vals = result['value']
-            ## only keep the existing fields on the view
-            #keep = ('product_uom', 'name')
-            #result['value'] = dict((key, value) for key, value in
-                                   #result['value'].iteritems() if
-                                   #key in keep)
-        #return result
+    @api.onchange('product_id')
+    def _onchange_product_id(self):
+        """ set product_uom and name from product onchange """
+        # save value before reading of self.move_id as this last one erase
+        # product_id value
+        product = self.product_id
+        # WARNING this gettattr erase self.product_id
+        move = self.move_id
+        result = move.onchange_product_id(
+            prod_id=product.id, loc_id=False, loc_dest_id=False,
+            partner_id=False)
+        if result.get('value'):
+            vals = result['value']
+            # only keep the existing fields on the view
+            self.name = vals.get('name')
+            self.product_uom = vals.get('product_uom')
+            # repeat assignation of product_id so we don't loose it
+            self.product_id = product.id
 
-    # XXX
-    #def onchange_quantity(self, cr, uid, ids, product_id, product_qty,
-                           #context=None):
-        #""" On change of product quantity avoid negative quantities """
-        #if not product_id or product_qty <= 0.0:
-            #return {'value': {'product_qty': 0.0}}
-        #return {}
+    @api.onchange('product_uom_qty')
+    def _onchange_quantity(self):
+        """ On change of product quantity avoid negative quantities """
+        if not self.product_id or self.product_qty <= 0.0:
+            self.product_qty = 0.0
 
     @api.multi
     def open_move(self):
