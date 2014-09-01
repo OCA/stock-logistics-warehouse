@@ -108,11 +108,10 @@
             </field>
         </record>
 
-        <record id="action_stock_reservation" model="ir.actions.act_window">
+        <record id="action_stock_reservation_tree" model="ir.actions.act_window">
             <field name="name">Stock Reservations</field>
             <field name="res_model">stock.reservation</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="view_type">form</field>
             <field name="view_id" ref="view_stock_reservation_tree"/>
             <field name="search_view_id" ref="view_stock_reservation_search"/>
             <field name="context">{'search_default_draft': 1,
@@ -128,7 +127,7 @@
             </field>
         </record>
 
-        <menuitem action="action_stock_reservation"
+        <menuitem action="action_stock_reservation_tree"
             id="menu_action_stock_reservation"
             parent="stock.menu_stock_inventory_control"
             sequence="30"/>
