@@ -74,10 +74,23 @@ class StockReservation(models.Model):
         return location_id
 
     @api.model
+    def _default_picking_type_id(self):
+        """ Search for an internal picking type
+        """
+        move_obj = self.env['stock.move']
+        type_obj = self.env['stock.picking.type']
+
+        types = type_obj.search([('code', '=', 'internal')], limit=1)
+        if types:
+            return types[0].id
+        return False
+
+    @api.model
     def _default_location_id(self):
         move_obj = self.env['stock.move']
+        picking_type_id = self._default_picking_type_id()
         return (move_obj
-                .with_context(picking_type='internal')
+                .with_context(default_picking_type_id=picking_type_id)
                 ._default_location_source())
 
     @api.model
@@ -86,7 +99,7 @@ class StockReservation(models.Model):
         return self.get_location_from_ref(ref)
 
     _defaults = {
-        'type': 'internal',
+        'picking_type_id': _default_picking_type_id,
         'location_id': _default_location_id,
         'location_dest_id': _default_location_dest_id,
         'product_qty': 1.0,
