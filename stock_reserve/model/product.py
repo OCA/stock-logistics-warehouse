@@ -19,22 +19,23 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models, api
 
 
-class product_product(orm.Model):
+class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    def open_stock_reservation(self, cr, uid, ids, context=None):
-        assert len(ids) == 1, "Expected 1 ID, got %r" % ids
-        mod_obj = self.pool.get('ir.model.data')
-        act_obj = self.pool.get('ir.actions.act_window')
-        get_ref = mod_obj.get_object_reference
-        __, action_id = get_ref(cr, uid, 'stock_reserve',
-                                'action_stock_reservation')
-        action = act_obj.read(cr, uid, action_id, context=context)
-        action['context'] = {'search_default_draft': 1,
-                             'search_default_reserved': 1,
-                             'default_product_id': ids[0],
-                             'search_default_product_id': ids[0]}
+    @api.multi
+    def open_stock_reservation(self):
+        assert len(self._ids) == 1, "Expected 1 ID, got %r" % self._ids
+        data_obj = self.env['ir.model.data']
+        act_obj = self.env['ir.actions.act_window']
+        ref = 'stock_reserve.action_stock_reservation'
+        action = data_obj.xmlid_to_object(ref)
+        action_dict = action.read()
+        action_dict['context'] = {
+            'search_default_draft': 1,
+            'search_default_reserved': 1,
+            'default_product_id': self._ids[0],
+            'search_default_product_id': self._ids[0]}
         return action
