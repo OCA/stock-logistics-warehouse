@@ -60,6 +60,17 @@ class StockReservation(models.Model):
     date_validity = fields.Date('Validity Date')
 
     @api.model
+    def default_get(self, fields_list):
+        """
+        Ensure default value of computed field `product_qty` is not set
+        as it would raise an error
+        """
+        res = super(StockReservation, self).default_get(fields_list)
+        if 'product_qty' in res:
+            del res['product_qty']
+        return res
+
+    @api.model
     def get_location_from_ref(self, ref):
         """ Get a location from a xmlid if allowed
         :param ref: tuple (module, xmlid)
