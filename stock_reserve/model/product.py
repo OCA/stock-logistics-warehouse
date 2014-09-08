@@ -53,6 +53,7 @@ class ProductTemplate(models.Model):
             }
         return action_dict
 
+
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
@@ -76,7 +77,7 @@ class ProductProduct(models.Model):
         ref = 'stock_reserve.action_stock_reservation_tree'
         product_id = self._ids[0]
         action_dict = self.product_tmpl_id._get_act_window_dict(ref)
-        action_dict['domain'] = ("[('product_id','='," + str(product_id) + ")]")
+        action_dict['domain'] = "[('product_id','=', %s)]" % product_id
         action_dict['context'] = {
             'search_default_draft': 1,
             'search_default_reserved': 1
