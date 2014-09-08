@@ -45,8 +45,7 @@ class ProductTemplate(models.Model):
         ref = 'stock_reserve.action_stock_reservation_tree'
         product_ids = self._get_products()
         action_dict = self._get_act_window_dict(ref)
-        action_dict['domain'] = ("[('product_id','in',[" +
-                                 ','.join(map(str, product_ids)) + "])]")
+        action_dict['domain'] = [('product_id', 'in', product_ids)]
         action_dict['context'] = {
             'search_default_draft': 1,
             'search_default_reserved': 1
@@ -77,7 +76,7 @@ class ProductProduct(models.Model):
         ref = 'stock_reserve.action_stock_reservation_tree'
         product_id = self._ids[0]
         action_dict = self.product_tmpl_id._get_act_window_dict(ref)
-        action_dict['domain'] = "[('product_id','=', %s)]" % product_id
+        action_dict['domain'] = [('product_id', '=', product_id)]
         action_dict['context'] = {
             'search_default_draft': 1,
             'search_default_reserved': 1
