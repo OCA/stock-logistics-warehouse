@@ -88,7 +88,6 @@ class StockReservation(models.Model):
     def _default_picking_type_id(self):
         """ Search for an internal picking type
         """
-        move_obj = self.env['stock.move']
         type_obj = self.env['stock.picking.type']
 
         types = type_obj.search([('code', '=', 'internal')], limit=1)
