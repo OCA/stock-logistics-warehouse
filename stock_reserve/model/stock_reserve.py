@@ -131,7 +131,7 @@ class StockReservation(models.Model):
     @api.multi
     def release(self):
         """
-        Releas moves from reservation
+        Release moves from reservation
         """
         move_recs = self.move_id
         move_recs.action_cancel()
