@@ -137,6 +137,6 @@ class product_immediately_usable(orm.Model):
             type='float',
             string='Immediately Usable',
             multi='qty_available',
-            help="Quantity of products really available for sale." \
+            help="Quantity of products really available for sale."
                  "Computed as: Quantity On Hand - Outgoing."),
     }

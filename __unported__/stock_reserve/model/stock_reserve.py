@@ -134,7 +134,9 @@ class stock_reservation(orm.Model):
         return super(stock_reservation, self).unlink(cr, uid, ids,
                                                      context=context)
 
-    def onchange_product_id(self, cr, uid, ids, product_id=False, context=None):
+    def onchange_product_id(self, cr, uid, ids,
+                            product_id=False,
+                            context=None):
         move_obj = self.pool.get('stock.move')
         if ids:
             reserv = self.read(cr, uid, ids, ['move_id'], context=context,
@@ -146,7 +148,6 @@ class stock_reservation(orm.Model):
             cr, uid, move_ids, prod_id=product_id, loc_id=False,
             loc_dest_id=False, partner_id=False)
         if result.get('value'):
-            vals = result['value']
             # only keep the existing fields on the view
             keep = ('product_uom', 'name')
             result['value'] = dict((key, value) for key, value in
@@ -154,7 +155,10 @@ class stock_reservation(orm.Model):
                                    key in keep)
         return result
 
-    def onchange_quantity(self, cr, uid, ids, product_id, product_qty, context=None):
+    def onchange_quantity(self, cr, uid, ids,
+                          product_id,
+                          product_qty,
+                          context=None):
         """ On change of product quantity avoid negative quantities """
         if not product_id or product_qty <= 0.0:
             return {'value': {'product_qty': 0.0}}
