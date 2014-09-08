@@ -181,16 +181,18 @@ class StockReservation(models.Model):
 
     @api.multi
     def open_move(self):
-        assert len(self._ids) == 1, "1 ID expected, got %r" % self._ids
-        reserv = self[0].move_id
-        data_obj = self.env['ir.model.data']
+        assert len(self.ids) == 1, "1 ID expected, got %r" % self.ids
+        reserv = self.move_id
+        IrModelData = self.env['ir.model.data']
         ref_form2 = 'stock.action_move_form2'
-        action = data_obj.xmlid_to_object(ref_form2)
-        action_dict = action.read()
+        action = IrModelData.xmlid_to_object(ref_form2)
+        action_dict = action.read()[0]
         action_dict['name'] = _('Reservation Move')
         # open directly in the form view
         ref_form = 'stock.view_move_form'
-        view_id = data_obj.xmlid_to_res_id(ref_form)
-        action['views'] = [(view_id, 'form')]
-        action['res_id'] = reserv['move_id']
-        return action
+        view_id = IrModelData.xmlid_to_res_id(ref_form)
+        action_dict.update(
+            views=[(view_id, 'form')],
+            res_id=reserv.id,
+            )
+        return action_dict
