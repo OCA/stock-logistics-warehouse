@@ -117,9 +117,22 @@ class sale_order_line(orm.Model):
         reserv_obj.release(cr, uid, reserv_ids, context=context)
         return True
 
-    def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
-                          uom=False, qty_uos=0, uos=False, name='', partner_id=False,
-                          lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False, context=None):
+    def product_id_change(self, cr, uid, ids,
+                          pricelist,
+                          product,
+                          qty=0,
+                          uom=False,
+                          qty_uos=0,
+                          uos=False,
+                          name='',
+                          partner_id=False,
+                          lang=False,
+                          update_tax=True,
+                          date_order=False,
+                          packaging=False,
+                          fiscal_position=False,
+                          flag=False,
+                          context=None):
         result = super(sale_order_line, self).product_id_change(
             cr, uid, ids, pricelist, product, qty=qty, uom=uom,
             qty_uos=qty_uos, uos=uos, name=name, partner_id=partner_id,
@@ -146,9 +159,13 @@ class sale_order_line(orm.Model):
         return result
 
     def write(self, cr, uid, ids, vals, context=None):
-        block_on_reserve = ('product_id',  'product_uom', 'product_uos',
+        block_on_reserve = ('product_id',
+                            'product_uom',
+                            'product_uos',
                             'type')
-        update_on_reserve = ('price_unit', 'product_uom_qty', 'product_uos_qty')
+        update_on_reserve = ('price_unit',
+                             'product_uom_qty',
+                             'product_uos_qty')
         keys = set(vals.keys())
         test_block = keys.intersection(block_on_reserve)
         test_update = keys.intersection(update_on_reserve)
@@ -162,7 +179,9 @@ class sale_order_line(orm.Model):
                       'of lines with a stock reservation. '
                       'Release the reservation '
                       'before changing the product.'))
-        res = super(sale_order_line, self).write(cr, uid, ids, vals, context=context)
+        res = super(sale_order_line, self).write(cr, uid, ids,
+                                                 vals,
+                                                 context=context)
         if test_update:
             for line in self.browse(cr, uid, ids, context=context):
                 if not line.reservation_ids:
