@@ -19,13 +19,16 @@
 ##############################################################################
 
 from openerp.osv import fields, orm
-from openerp.tools.translate import _
 
 
 class stock_location(orm.Model):
     _inherit = "stock.location"
     _columns = {
-        'consider_internal': fields.boolean('Consider internal', help="Consider as internal location for inventory valuation: stock moves from internal to internal will not generate accounting entries"),
+        'consider_internal': fields.boolean(
+            'Consider internal',
+            help="Consider as internal location for inventory valuation: "
+            "stock moves from internal to internal will not generate "
+            "accounting entries"),
     }
 
 
@@ -33,14 +36,18 @@ class stock_move(orm.Model):
     _inherit = "stock.move"
 
     def _create_product_valuation_moves(self, cr, uid, move, context=None):
-        if (move.location_id.company_id and move.location_dest_id.company_id
-                and move.location_id.company_id != move.location_dest_id.company_id):
-            return super(stock_move, self)._create_product_valuation_moves(
+        _super = super(stock_move, self)
+        location = move.location_id
+        location_dest = move.location_dest_id
+        if (location.company_id
+                and location_dest.company_id
+                and location.company_id != location_dest.company_id):
+            return _super._create_product_valuation_moves(
                 cr, uid, move, context=context)
         if (move.location_id.usage == 'internal' or
             move.location_id.consider_internal) and (
             move.location_dest_id.usage == 'internal' or
                 move.location_dest_id.consider_internal):
             return
-        return super(stock_move, self)._create_product_valuation_moves(
+        return _super._create_product_valuation_moves(
             cr, uid, move, context=context)

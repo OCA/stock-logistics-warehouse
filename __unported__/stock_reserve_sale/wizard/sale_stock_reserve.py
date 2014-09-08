@@ -98,7 +98,6 @@ class sale_stock_reserve(orm.TransientModel):
         if not (active_model and active_ids):
             return close
 
-        line_obj = self.pool.get('sale.order.line')
         if active_model == 'sale.order':
             sale_obj = self.pool.get('sale.order')
             sales = sale_obj.browse(cr, uid, active_ids, context=context)
