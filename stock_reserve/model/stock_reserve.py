@@ -131,7 +131,7 @@ class StockReservation(models.Model):
     @api.multi
     def release(self):
         """
-        Releas moves from reservation
+        Release moves from reservation
         """
         move_recs = self.move_id
         move_recs.action_cancel()
@@ -145,7 +145,7 @@ class StockReservation(models.Model):
         if ids:
             domain.append(('id', 'in', ids))
         reserv_ids = self.search(domain)
-        self.release(reserv_ids)
+        reserv_ids.release()
         return True
 
     @api.multi
