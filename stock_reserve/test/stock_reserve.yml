@@ -92,3 +92,23 @@
   !python {model: product.product}: |
     product = self.browse(cr, uid, ref('stock_reserve.product_sorbet'), context=context)
     assert product.virtual_available == 9.5, "Stock is not updated."
+-
+  I set the validity of the second reservation to yesterday
+-
+  !python {model: stock.reservation}: |
+    import datetime
+    from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+    yesterday = datetime.date.today() - datetime.timedelta(days=1)
+    yesterday = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
+    self.write(cr, uid, [ref('reserv_sorbet2')], {'date_validity': yesterday})
+-
+  I call the function releasing expired reservations
+-
+  !python {model: stock.reservation}: |
+    self.release_validity_exceeded(cr, uid, [])
+-
+  I check Virtual stock of Sorbet after update reservation
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('stock_reserve.product_sorbet'), context=context)
+    assert product.virtual_available == 10.0, "Stock is not updated."

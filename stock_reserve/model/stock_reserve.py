@@ -145,7 +145,7 @@ class StockReservation(models.Model):
         if ids:
             domain.append(('id', 'in', ids))
         reserv_ids = self.search(domain)
-        self.release(reserv_ids)
+        reserv_ids.release()
         return True
 
     @api.multi
