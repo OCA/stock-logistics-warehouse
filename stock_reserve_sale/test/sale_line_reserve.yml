@@ -60,13 +60,18 @@
     product = self.browse(cr, uid, ref('product_yogurt'), context=context)
     assert product.virtual_available == 6, "Stock is not updated."
 -
+  I set product_12 to MTO
+-
+  !record {model: product.product, id: product.product_product_12}:
+    route_ids:
+      - stock.route_warehouse0_mto
+-
   And I create a MTO sales order line
 -
   !record {model: sale.order.line, id: sale_line_reserve_02_02, view: sale.view_order_line_tree}:
     order_id: sale_reserve_02
     name: Mouse, Wireless
     product_id: product.product_product_12
-    type: make_to_order
     product_uom_qty: 4
     product_uom: product.product_uom_kgm
 -
