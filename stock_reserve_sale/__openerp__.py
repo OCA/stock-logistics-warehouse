@@ -57,9 +57,9 @@ insufficient at the order date, you may want to install the
           'view/sale.xml',
           'view/stock_reserve.xml',
           ],
- 'auto_install': False,
  'test': ['test/sale_reserve.yml',
           'test/sale_line_reserve.yml',
           ],
- 'installable': False,
+ 'installable': True,
+ 'auto_install': False,
  }
