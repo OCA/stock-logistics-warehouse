@@ -73,7 +73,7 @@
     name: Mouse, Wireless
     product_id: product.product_product_12
     product_uom_qty: 4
-    product_uom: product.product_uom_kgm
+    product_uom: product.product_uom_unit
 -
   And I try to create a stock reserve for this MTO line
 -
