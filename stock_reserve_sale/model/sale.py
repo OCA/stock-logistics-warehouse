@@ -227,7 +227,7 @@ class SaleOrderLine(models.Model):
 
                 line.reservation_ids.write(
                     {'price_unit': line.price_unit,
-                     'product_qty': line.product_uom_qty,
+                     'product_uom_qty': line.product_uom_qty,
                      'product_uos_qty': line.product_uos_qty,
                      }
                 )
