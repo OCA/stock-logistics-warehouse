@@ -40,5 +40,5 @@ Adds an ownership on the stock locations
           ],
  'test': [],
  'auto_install': False,
- 'installable': False,
+ 'installable': True,
  }
