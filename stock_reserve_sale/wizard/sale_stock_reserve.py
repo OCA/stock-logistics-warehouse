@@ -19,92 +19,85 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 
 
-class sale_stock_reserve(orm.TransientModel):
+class SaleStockReserve(models.TransientModel):
     _name = 'sale.stock.reserve'
 
-    _columns = {
-        'location_id': fields.many2one(
-            'stock.location',
-            'Source Location',
-            required=True),
-        'location_dest_id': fields.many2one(
-            'stock.location',
-            'Reservation Location',
-            required=True,
-            help="Location where the system will reserve the "
-                 "products."),
-        'date_validity': fields.date(
-            "Validity Date",
-            help="If a date is given, the reservations will be released "
-                 "at the end of the validity."),
-        'note': fields.text('Notes'),
-    }
+    @api.model
+    def _default_location_id(self):
+        return self.env['stock.reservation']._default_location_id()
 
-    def _default_location_id(self, cr, uid, context=None):
-        reserv_obj = self.pool.get('stock.reservation')
-        return reserv_obj._default_location_id(cr, uid, context=context)
+    @api.model
+    def _default_location_dest_id(self):
+        return self.env['stock.reservation']._default_location_dest_id()
 
-    def _default_location_dest_id(self, cr, uid, context=None):
-        reserv_obj = self.pool.get('stock.reservation')
-        return reserv_obj._default_location_dest_id(cr, uid, context=context)
+    location_id = fields.Many2one(
+        'stock.location',
+        'Source Location',
+        required=True,
+        default=_default_location_id)
+    location_dest_id = fields.Many2one(
+        'stock.location',
+        'Reservation Location',
+        required=True,
+        help="Location where the system will reserve the "
+             "products.",
+        default=_default_location_dest_id)
+    date_validity = fields.Date(
+        "Validity Date",
+        help="If a date is given, the reservations will be released "
+             "at the end of the validity.")
+    note = fields.Text('Notes')
 
-    _defaults = {
-        'location_id': _default_location_id,
-        'location_dest_id': _default_location_dest_id,
-    }
 
-    def _prepare_stock_reservation(self, cr, uid, form, line, context=None):
+    @api.one
+    def _prepare_stock_reservation(self, line):
         product_uos = line.product_uos.id if line.product_uos else False
         return {'product_id': line.product_id.id,
                 'product_uom': line.product_uom.id,
                 'product_qty': line.product_uom_qty,
-                'date_validity': form.date_validity,
+                'date_validity': self.date_validity,
                 'name': "{} ({})".format(line.order_id.name, line.name),
-                'location_id': form.location_id.id,
-                'location_dest_id': form.location_dest_id.id,
-                'note': form.note,
+                'location_id': self.location_id.id,
+                'location_dest_id': self.location_dest_id.id,
+                'note': self.note,
                 'product_uos_qty': line.product_uos_qty,
                 'product_uos': product_uos,
                 'price_unit': line.price_unit,
                 'sale_line_id': line.id,
                 }
 
-    def stock_reserve(self, cr, uid, ids, line_ids, context=None):
-        assert len(ids) == 1, "Expected 1 ID, got %r" % ids
-        reserv_obj = self.pool.get('stock.reservation')
-        line_obj = self.pool.get('sale.order.line')
+    @api.multi
+    def stock_reserve(self, line_ids):
+        assert len(self.ids) == 1, "Expected 1 ID, got %r" % self.ids
 
-        form = self.browse(cr, uid, ids[0], context=context)
-        lines = line_obj.browse(cr, uid, line_ids, context=context)
+        lines = self.env['sale.order.line'].browse(line_ids)
         for line in lines:
             if not line.is_stock_reservable:
                 continue
-            vals = self._prepare_stock_reservation(cr, uid, form, line,
-                                                   context=context)
-            reserv_id = reserv_obj.create(cr, uid, vals, context=context)
-            reserv_obj.reserve(cr, uid, [reserv_id], context=context)
+            vals = self._prepare_stock_reservation(line)[0]
+            reserv = self.env['stock.reservation'].create(vals)
+            reserv.reserve()
         return True
 
-    def button_reserve(self, cr, uid, ids, context=None):
-        assert len(ids) == 1, "Expected 1 ID, got %r" % ids
-        if context is None:
-            context = {}
+    @api.multi
+    def button_reserve(self):
+        env = self.env
+        assert len(self.ids) == 1, "Expected 1 ID, got %r" % self.ids
         close = {'type': 'ir.actions.act_window_close'}
-        active_model = context.get('active_model')
-        active_ids = context.get('active_ids')
+        active_model = env.context.get('active_model')
+        active_ids = env.context.get('active_ids')
         if not (active_model and active_ids):
             return close
 
         if active_model == 'sale.order':
-            sale_obj = self.pool.get('sale.order')
-            sales = sale_obj.browse(cr, uid, active_ids, context=context)
+            sales = env['sale.order'].browse(active_ids)
             line_ids = [line.id for sale in sales for line in sale.order_line]
 
         if active_model == 'sale.order.line':
             line_ids = active_ids
 
-        self.stock_reserve(cr, uid, ids, line_ids, context=context)
+        self.stock_reserve(line_ids)
         return close

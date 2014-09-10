@@ -19,32 +19,24 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 
 
-class stock_reservation(orm.Model):
+class StockReservation(models.Model):
     _inherit = 'stock.reservation'
 
-    _columns = {
-        'sale_line_id': fields.many2one(
-            'sale.order.line',
-            string='Sale Order Line',
-            ondelete='cascade'),
-        'sale_id': fields.related(
-            'sale_line_id', 'order_id',
-            type='many2one',
-            relation='sale.order',
-            string='Sale Order')
-    }
+    sale_line_id = fields.Many2one(
+        'sale.order.line',
+        string='Sale Order Line',
+        ondelete='cascade',
+        copy=False)
+    sale_id = fields.Many2one(
+        'sale.order',
+        string='Sale Order',
+        related='sale_line_id.order_id')
 
-    def release(self, cr, uid, ids, context=None):
-        self.write(cr, uid, ids, {'sale_line_id': False}, context=context)
-        return super(stock_reservation, self).release(
-            cr, uid, ids, context=context)
-
-    def copy_data(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        default['sale_line_id'] = False
-        return super(stock_reservation, self).copy_data(
-            cr, uid, id, default=default, context=context)
+    @api.multi
+    def release(self):
+        for rec in self:
+            rec.sale_line_id = False
+        return super(StockReservation, self).release()
