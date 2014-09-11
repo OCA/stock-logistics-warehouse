@@ -19,7 +19,8 @@
 #
 ##############################################################################
 
-{'name': 'Stock Reserve',
+{'name': 'Stock Reservation',
+ 'summary': 'Stock reservations on products',
  'version': '0.1',
  'author': 'Camptocamp',
  'category': 'Warehouse',
@@ -28,8 +29,8 @@
  'images': [],
  'website': "http://www.camptocamp.com",
  'description': """
-Stock Reserve
-=============
+Stock Reservation
+=================
 
 Allows to create stock reservations on products.
 
@@ -41,6 +42,12 @@ that if you reserved a quantity of products which bring the virtual
 stock below the minimum, the orderpoint will be triggered and new
 purchase orders will be generated. It also implies that the max may be
 exceeded if the reservations are canceled.
+
+Contributors
+------------
+
+* Guewen Baconnier <guewen.baconnier@camptocamp.com>
+* Yannick Vaucher <yannick.vaucher@camptocamp.com>
 
 """,
  'depends': ['stock',
@@ -54,5 +61,5 @@ exceeded if the reservations are canceled.
  'auto_install': False,
  'test': ['test/stock_reserve.yml',
           ],
- 'installable': False,
+ 'installable': True,
  }

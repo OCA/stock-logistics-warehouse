@@ -23,14 +23,10 @@
                     <sheet>
                         <group>
                             <group name="main_grp" string="Details">
-                                <field name="product_id"
-                                    on_change="onchange_product_id(product_id)"
-                                    />
-                                <label for="product_qty" />
+                                <field name="product_id" />
+                                <label for="product_uom_qty" />
                                 <div>
-                                    <field name="product_qty"
-                                        on_change="onchange_quantity(product_id, product_qty)"
-                                        class="oe_inline"/>
+                                    <field name="product_uom_qty" class="oe_inline"/>
                                     <field name="product_uom"
                                         groups="product.group_uom" class="oe_inline"/>
                                 </div>
@@ -64,7 +60,7 @@
                     <field name="name" />
                     <field name="product_id" />
                     <field name="move_id" />
-                    <field name="product_qty" sum="Total" />
+                    <field name="product_uom_qty" sum="Total" />
                     <field name="product_uom" />
                     <field name="date_validity" />
                     <field name="state"/>
@@ -112,11 +108,10 @@
             </field>
         </record>
 
-        <record id="action_stock_reservation" model="ir.actions.act_window">
+        <record id="action_stock_reservation_tree" model="ir.actions.act_window">
             <field name="name">Stock Reservations</field>
             <field name="res_model">stock.reservation</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="view_type">form</field>
             <field name="view_id" ref="view_stock_reservation_tree"/>
             <field name="search_view_id" ref="view_stock_reservation_search"/>
             <field name="context">{'search_default_draft': 1,
@@ -132,7 +127,7 @@
             </field>
         </record>
 
-        <menuitem action="action_stock_reservation"
+        <menuitem action="action_stock_reservation_tree"
             id="menu_action_stock_reservation"
             parent="stock.menu_stock_inventory_control"
             sequence="30"/>
