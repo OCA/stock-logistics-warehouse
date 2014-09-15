@@ -50,4 +50,4 @@ Also, by default, a filter hides the locations without quantity at all.
           ],
  'installable': True,
  'auto_install': False,
-}
+ }
