@@ -43,12 +43,10 @@ Contributors
 """,
  'website': 'http://www.openerp.com',
  'demo': [],
- 'data': ["wizard/orderpoint_creator_view.xml",
+ 'data': ["wizard/orderpoint_generator_view.xml",
           "security/ir.model.access.csv",
           ],
  'test': [],
  'installable': True,
  'auto_install': False,
  }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

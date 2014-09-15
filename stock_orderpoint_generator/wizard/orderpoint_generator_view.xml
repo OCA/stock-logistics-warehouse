@@ -2,9 +2,9 @@
 <openerp>
   <data>
 
-    <record id="orderpoint_creator_view" model="ir.ui.view">
-      <field name="name">stock.warehouse.orderpoint.creator</field>
-      <field name="model">stock.warehouse.orderpoint.creator</field>
+    <record id="orderpoint_generator_view" model="ir.ui.view">
+      <field name="name">stock.warehouse.orderpoint.generator</field>
+      <field name="model">stock.warehouse.orderpoint.generator</field>
       <field name="arch" type="xml">
         <form string="Product warehouse config" version="7.0">
           <label string="This wizard will apply the following orderpoint to selected product(s)"/>
@@ -21,7 +21,7 @@
     </record>
 
     <act_window name="Product warehouse config"
-        res_model="stock.warehouse.orderpoint.creator"
+        res_model="stock.warehouse.orderpoint.generator"
         src_model="product.product"
         view_mode="form"
         target="new"

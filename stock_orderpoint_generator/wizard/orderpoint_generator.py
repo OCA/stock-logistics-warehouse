@@ -27,14 +27,14 @@ from openerp.osv.orm import browse_record, TransientModel, fields
 _template_register = ['orderpoint_template_id']
 
 
-class OrderpointCreator(TransientModel):
-    _name = 'stock.warehouse.orderpoint.creator'
-    _description = 'Orderpoint Creator'
+class OrderpointGenerator(TransientModel):
+    _name = 'stock.warehouse.orderpoint.generator'
+    _description = 'Orderpoint Generator'
 
     _columns = {
         'orderpoint_template_id': fields.many2many(
             'stock.warehouse.orderpoint.template',
-            rel='order_point_creator_rel',
+            rel='order_point_generator_rel',
             string='Stock rule template')
     }
 
