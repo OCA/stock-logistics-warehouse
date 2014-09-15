@@ -1,0 +1,155 @@
+-
+  I create locations
+-
+ !record {model: stock.location, id: location_watermelon}:
+    name: Watermelon
+    usage: view
+-
+ !record {model: stock.location, id: location_a}:
+    name: Box A
+    usage: internal
+    location_id: location_watermelon
+-
+ !record {model: stock.location, id: location_b}:
+    name: Box B
+    usage: internal
+    location_id: location_watermelon
+-
+ !record {model: stock.location, id: location_c}:
+    name: Box C
+    usage: internal
+    location_id: location_watermelon
+-
+  I create a product
+-
+ !record {model: product.product, id: product_watermelon}:
+    default_code: 002
+    name: Watermelon
+    type: product
+    categ_id: product.product_category_1
+    list_price: 5.0
+    standard_price: 3.0
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+-
+  I create a physical inventory with 50 units in Box A and 30 in Box B
+-
+ !record {model: stock.inventory, id: stock_inventory_watermelon}:
+    name: Inventory for Watermelons
+-
+ !record {model: stock.inventory.line, id: stock_inventory_line_watermelon_1}:
+    product_id: product_watermelon
+    product_uom: product.product_uom_unit
+    inventory_id: stock_inventory_watermelon
+    product_qty: 50.0
+    location_id: location_a
+-
+ !record {model: stock.inventory.line, id: stock_inventory_line_watermelon_2}:
+    product_id: product_watermelon
+    product_uom: product.product_uom_unit
+    inventory_id: stock_inventory_watermelon
+    product_qty: 30.0
+    location_id: location_b
+-
+  I confirm the physical inventory
+-
+  !python {model: stock.inventory}: |
+    self.action_confirm(cr, uid, [ref('stock_inventory_watermelon')], context=context)
+-
+  I confirm the move in Box A
+-
+  !python {model: stock.inventory}: |
+    inventory = self.browse(cr, uid, ref('stock_inventory_watermelon'), context=context)
+    assert len(inventory.move_ids) == len(inventory.inventory_line_id), "moves do not correspond."
+    for move in inventory.move_ids:
+      if move.location_dest_id.id == ref('location_a'):
+        move.action_done()
+-
+  I check my quantities, I should have 50 on hands and 80 forecasted in Watermelon location
+-
+  !python {model: product.product}: |
+    ctx = context.copy()
+    ctx['location'] = ref('location_watermelon')
+    product = self.browse(cr, uid, ref('product_watermelon'), context=ctx)
+    assert product.qty_available == 50
+    assert product.virtual_available == 80
+-
+  I search a real quantity different than 0
+-
+  !python {model: stock.location}: |
+    ctx = context.copy()
+    ctx['product_id'] = ref('product_watermelon')
+    location_ids = self.search(cr, uid,
+                               [('stock_real', '!=', 0.0),
+                                ('usage', '=', 'internal')],
+                               context=ctx)
+    expected = set((ref('location_a'), ))
+    assert set(location_ids) == expected
+-
+  I search a real quantity greater than 0
+-
+  !python {model: stock.location}: |
+    ctx = context.copy()
+    ctx['product_id'] = ref('product_watermelon')
+    location_ids = self.search(cr, uid,
+                               [('stock_real', '>', 0.0),
+                                ('usage', '=', 'internal')],
+                               context=ctx)
+    expected = set((ref('location_a'), ))
+    assert set(location_ids) == expected
+-
+  I search a virtual quantity greater than 0
+-
+  !python {model: stock.location}: |
+    ctx = context.copy()
+    ctx['product_id'] = ref('product_watermelon')
+    location_ids = self.search(cr, uid,
+                               [('stock_virtual', '>', 0.0),
+                                ('usage', '=', 'internal')],
+                               context=ctx)
+    expected = set((ref('location_a'), ref('location_b')))
+    assert set(location_ids) == expected
+-
+  I search a virtual quantity greater or equal than 0
+-
+  !python {model: stock.location}: |
+    ctx = context.copy()
+    ctx['product_id'] = ref('product_watermelon')
+    location_ids = self.search(cr, uid,
+                               [('stock_virtual', '>=', 0.0),
+                                ('usage', '=', 'internal')],
+                               context=ctx)
+    expected = set((ref('location_a'),
+                    ref('location_b'),
+                    ref('location_c')))
+    # we do not care about the other locations, but we check
+    # that a, b, c are found
+    assert expected.intersection(set(location_ids))
+-
+  I search a virtual quantity with an exact match of 30
+-
+  !python {model: stock.location}: |
+    ctx = context.copy()
+    ctx['product_id'] = ref('product_watermelon')
+    location_ids = self.search(cr, uid,
+                               [('stock_virtual', '=', 30.0),
+                                ('usage', '=', 'internal')],
+                               context=ctx)
+    expected = set((ref('location_b'), ))
+    assert set(location_ids) == expected
+-
+  I search a real quantity with an unsupported operator
+-
+  !python {model: stock.location}: |
+    from openerp.osv import orm
+    ctx = context.copy()
+    ctx['product_id'] = ref('product_watermelon')
+    try:
+        location_ids = self.search(cr, uid,
+                                   [('stock_real', 'like', 0.0),
+                                    ('usage', '=', 'internal')],
+                                   context=ctx)
+    except orm.except_orm:
+      pass  # success
+    else:
+      raise AssertionError('An orm.except_orm should have been raised')

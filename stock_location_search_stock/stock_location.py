@@ -21,6 +21,7 @@
 
 import operator
 from openerp.osv import orm, fields
+from openerp.tools.translate import _
 
 
 class StockLocation(orm.Model):

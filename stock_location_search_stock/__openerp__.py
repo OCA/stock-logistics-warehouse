@@ -46,7 +46,8 @@ Also, by default, a filter hides the locations without quantity at all.
  'website': 'http://www.camptocamp.com',
  'data': ['stock_location_view.xml',
           ],
- 'test': [],
+ 'test': ['test/location_search.yml',
+          ],
  'installable': True,
  'auto_install': False,
 }
