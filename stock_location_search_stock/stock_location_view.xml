@@ -8,7 +8,7 @@
       <field name="arch" type="xml">
         <filter name="supplier" position="after">
           <separator/>
-          <filter name="has_stock_real" string="Has Real Stock" domain="[('stock_real', '!=', 0.0)]" help="The location contains the product"/>
+          <filter name="has_stock_real" string="Has Real Stock" domain="[('stock_real', '>', 0.0)]" help="The location contains the product"/>
         </filter>
       </field>
     </record>
