@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-{'name': 'Order point creator',
+{'name': 'Order point generator',
  'summary': 'Configuration of order point in mass',
  'version': '1.0',
  'author': 'Camptocamp',
@@ -29,10 +29,10 @@
  'website': "http://www.camptocamp.com",
  'depends': ['procurement'],
  'description': """
-Order point creator
-===================
+Order point generator
+=====================
 
-Add a wizard to configure massively order points for multiple product
+Add a wizard to configure massively order points for multiple products.
 
 Contributors
 ------------
