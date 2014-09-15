@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+    <record id="view_location_search" model="ir.ui.view">
+      <field name="name">stock.location.search</field>
+      <field name="model">stock.location</field>
+      <field name="inherit_id" ref="stock.view_location_search"/>
+      <field name="arch" type="xml">
+        <filter name="supplier" position="after">
+          <separator/>
+          <filter name="has_stock_real" string="Has Real Stock" domain="[('stock_real', '!=', 0.0)]" help="The location contains the product"/>
+        </filter>
+      </field>
+    </record>
+
+    <record id="stock.act_stock_product_location_open" model="ir.actions.act_window">
+      <field name="context">{'product_id': active_id, 'search_default_has_stock_real': 1}</field>
+    </record>
+  </data>
+</openerp>
