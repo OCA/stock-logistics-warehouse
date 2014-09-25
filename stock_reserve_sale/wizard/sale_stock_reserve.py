@@ -51,9 +51,9 @@ class SaleStockReserve(models.TransientModel):
              "at the end of the validity.")
     note = fields.Text('Notes')
 
-
-    @api.one
+    @api.multi
     def _prepare_stock_reservation(self, line):
+        self.ensure_one()
         product_uos = line.product_uos.id if line.product_uos else False
         return {'product_id': line.product_id.id,
                 'product_uom': line.product_uom.id,
@@ -71,13 +71,13 @@ class SaleStockReserve(models.TransientModel):
 
     @api.multi
     def stock_reserve(self, line_ids):
-        assert len(self.ids) == 1, "Expected 1 ID, got %r" % self.ids
+        self.ensure_one()
 
         lines = self.env['sale.order.line'].browse(line_ids)
         for line in lines:
             if not line.is_stock_reservable:
                 continue
-            vals = self._prepare_stock_reservation(line)[0]
+            vals = self._prepare_stock_reservation(line)
             reserv = self.env['stock.reservation'].create(vals)
             reserv.reserve()
         return True
@@ -85,7 +85,7 @@ class SaleStockReserve(models.TransientModel):
     @api.multi
     def button_reserve(self):
         env = self.env
-        assert len(self.ids) == 1, "Expected 1 ID, got %r" % self.ids
+        self.ensure_one()
         close = {'type': 'ir.actions.act_window_close'}
         active_model = env.context.get('active_model')
         active_ids = env.context.get('active_ids')
