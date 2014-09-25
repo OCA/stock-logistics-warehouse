@@ -51,7 +51,6 @@ class SaleStockReserve(models.TransientModel):
              "at the end of the validity.")
     note = fields.Text('Notes')
 
-
     @api.one
     def _prepare_stock_reservation(self, line):
         product_uos = line.product_uos.id if line.product_uos else False
