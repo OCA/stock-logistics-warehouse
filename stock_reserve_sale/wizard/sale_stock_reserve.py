@@ -51,8 +51,9 @@ class SaleStockReserve(models.TransientModel):
              "at the end of the validity.")
     note = fields.Text('Notes')
 
-    @api.one
+    @api.multi
     def _prepare_stock_reservation(self, line):
+        self.ensure_one()
         product_uos = line.product_uos.id if line.product_uos else False
         return {'product_id': line.product_id.id,
                 'product_uom': line.product_uom.id,
@@ -76,7 +77,7 @@ class SaleStockReserve(models.TransientModel):
         for line in lines:
             if not line.is_stock_reservable:
                 continue
-            vals = self._prepare_stock_reservation(line)[0]
+            vals = self._prepare_stock_reservation(line)
             reserv = self.env['stock.reservation'].create(vals)
             reserv.reserve()
         return True
