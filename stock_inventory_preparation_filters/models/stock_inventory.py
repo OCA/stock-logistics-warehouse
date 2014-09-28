@@ -88,10 +88,7 @@ class StockInventory(orm.Model):
         vals = []
         product_tmpl_obj = self.pool['product.template']
         product_obj = self.pool['product.product']
-        if not inventory.filter in ('categories', 'products', 'lots', 'empty'):
-            vals = super(StockInventory, self)._get_inventory_lines(
-                cr, uid, inventory, context=context)
-        elif inventory.filter in ('categories', 'products'):
+        if inventory.filter in ('categories', 'products'):
             product_ids = []
             if inventory.filter == 'categories':
                 product_tmpl_ids = product_tmpl_obj.search(
@@ -144,4 +141,7 @@ class StockInventory(orm.Model):
                                 'inventory_id': inventory.id,
                                 }, context=context)
                     vals += values
+        else:
+            vals = super(StockInventory, self)._get_inventory_lines(
+                cr, uid, inventory, context=context)
         return vals
