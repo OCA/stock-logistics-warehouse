@@ -49,15 +49,13 @@ class StockInventory(orm.Model):
     _inherit = 'stock.inventory'
 
     def _get_available_filters(self, cr, uid, context=None):
-        """
-           This function will return the list of filter allowed according to
-           the options checked in 'Settings\Warehouse'.
+        """This function will return the list of filter allowed according to
+        the options checked in 'Settings\Warehouse'.
 
-           :rtype: list of tuple
+        :return: list of tuple
         """
-        res_filter = super(StockInventory,
-                           self)._get_available_filters(cr, uid,
-                                                        context=context)
+        res_filter = super(StockInventory, self)._get_available_filters(
+            cr, uid, context=context)
         res_filter.append(('categories', _('Selected Categories')))
         res_filter.append(('products', _('Selected Products')))
         for filter in res_filter:

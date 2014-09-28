@@ -44,6 +44,7 @@ with product code and quantity
     """,
     "data": [
         "views/stock_inventory_view.xml",
+        "security/ir.model.access.csv",
     ],
     "installable": True,
     "auto_install": False,
