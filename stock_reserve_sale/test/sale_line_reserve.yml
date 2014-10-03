@@ -10,7 +10,6 @@
     standard_price: 70.0
     uom_id: product.product_uom_kgm
     uom_po_id: product.product_uom_kgm
-    procure_method: make_to_stock
     valuation: real_time
     cost_method: average
     property_stock_account_input: account.o_expense
@@ -61,15 +60,27 @@
     product = self.browse(cr, uid, ref('product_yogurt'), context=context)
     assert product.virtual_available == 6, "Stock is not updated."
 -
+  I set product_12 to MTO (doesn't work)
+-
+  !record {model: product.product, id: product.product_product_12}:
+    route_ids:
+      - stock.route_warehouse0_mto
+-
+  I set MTO for real
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product.product_product_12'), context=context)
+    self.write(cr, uid, ref('product.product_product_12'),
+               {'route_ids': [(6, False, [ref('stock.route_warehouse0_mto')])]}, context=context)
+-
   And I create a MTO sales order line
 -
   !record {model: sale.order.line, id: sale_line_reserve_02_02, view: sale.view_order_line_tree}:
     order_id: sale_reserve_02
     name: Mouse, Wireless
     product_id: product.product_product_12
-    type: make_to_order
     product_uom_qty: 4
-    product_uom: product.product_uom_kgm
+    product_uom: product.product_uom_unit
 -
   And I try to create a stock reserve for this MTO line
 -
