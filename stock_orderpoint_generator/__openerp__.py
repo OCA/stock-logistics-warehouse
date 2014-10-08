@@ -20,7 +20,7 @@
 ##############################################################################
 
 {'name': 'Order point generator',
- 'summary': 'Configuration of order point in mass',
+ 'summary': 'Mass configuration of stock order points',
  'version': '1.0',
  'author': 'Camptocamp',
  'category': 'Warehouse',
@@ -32,7 +32,7 @@
 Order point generator
 =====================
 
-Add a wizard to configure massively order points for multiple products.
+Add a wizard to configure order points for multiple products in one go.
 
 Contributors
 ------------
@@ -41,12 +41,11 @@ Contributors
  * Matthieu Dietrich <matthieu.dietrich@camptocamp.com>
 
 """,
- 'website': 'http://www.openerp.com',
  'demo': [],
  'data': ["wizard/orderpoint_generator_view.xml",
           "security/ir.model.access.csv",
           ],
- 'test': [],
+ 'test': ['test/orderpoint_generator.yml'],
  'installable': True,
  'auto_install': False,
  }

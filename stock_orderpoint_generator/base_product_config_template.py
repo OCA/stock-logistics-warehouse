@@ -62,7 +62,7 @@ class BaseProductConfigTemplate():
             product_ids = [product_ids]
 
         # not using self.copy_data(cr, uid, template_br.id, context=context)
-        # as copy data will not work in all case and may retrieve erronus value
+        # as copy data will not work in all case and may return erroneous value
 
         model_obj = self._get_model()
 

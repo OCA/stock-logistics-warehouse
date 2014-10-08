@@ -28,13 +28,13 @@ from base_product_config_template import BaseProductConfigTemplate
 class OrderpointTemplate(BaseProductConfigTemplate, Model):
     """ Template for orderpoints
 
-    Here we use same model as stock.warhouse.orderpoint but set product_id
+    Here we use same model as stock.warehouse.orderpoint but set product_id
     as non mandatory as we cannot remove it. This field will be ignored.
 
-    This has the advantage to ensure orderpoint and orderpoint template have
-    same fields.
+    This has the advantage the advantage of ensuring that the order point
+    and the order point template have the same fields.
 
-    _table is redifined to separate templates from orderpoints
+    _table is redefined to separate templates from orderpoints
     """
     _name = 'stock.warehouse.orderpoint.template'
 
