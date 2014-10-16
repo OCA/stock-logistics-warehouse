@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Yannick Vaucher (Camptocamp)
-#    Copyright 2012 Camptocamp SA
+#    Author: Yannick Vaucher, Matthieu Dietrich (Camptocamp)
+#    Copyright 2012-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,33 @@
 #
 ##############################################################################
 
-from . import base_product_config_template
-from . import orderpoint_template
-import wizard
+{'name': 'Order point generator',
+ 'summary': 'Mass configuration of stock order points',
+ 'version': '1.0',
+ 'author': 'Camptocamp',
+ 'category': 'Warehouse',
+ 'license': 'AGPL-3',
+ 'complexity': 'easy',
+ 'website': "http://www.camptocamp.com",
+ 'depends': ['procurement'],
+ 'description': """
+Order point generator
+=====================
+
+Add a wizard to configure order points for multiple products in one go.
+
+Contributors
+------------
+
+ * Yannick Vaucher <yannick.vaucher@camptocamp.com>
+ * Matthieu Dietrich <matthieu.dietrich@camptocamp.com>
+
+""",
+ 'demo': [],
+ 'data': ["wizard/orderpoint_generator_view.xml",
+          "security/ir.model.access.csv",
+          ],
+ 'test': ['test/orderpoint_generator.yml'],
+ 'installable': True,
+ 'auto_install': False,
+ }

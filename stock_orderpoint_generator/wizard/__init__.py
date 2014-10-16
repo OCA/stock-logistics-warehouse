@@ -18,26 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{'name': 'Configuration of order point in mass',
- 'version': '1.0',
- 'author': 'Camptocamp',
- 'maintainer': 'Camptocamp',
- 'category': 'Warehouse',
- 'complexity': 'easy', #easy, normal, expert
- 'depends': ['procurement'],
- 'description': """
-Add a wizard to configure massively order points for multiple product""",
- 'website': 'http://www.openerp.com',
- 'init_xml': [],
- 'update_xml': ["wizard/orderpoint_creator_view.xml", "security/ir.model.access.csv"],
- 'demo_xml': [],
- 'test': [],
- 'installable': False,
- 'images': [],
- 'auto_install': False,
- 'license': 'AGPL-3',
- 'active': False,
-}
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+from . import orderpoint_generator

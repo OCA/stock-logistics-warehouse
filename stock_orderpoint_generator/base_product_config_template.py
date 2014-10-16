@@ -22,9 +22,9 @@
 """ Base template for product config """
 from openerp.osv.orm import browse_record, browse_record_list
 
+
 class BaseProductConfigTemplate():
     """ Abstract class for product config """
-
 
     def _get_model(self):
         """ Get the model for which this template is defined
@@ -33,42 +33,41 @@ class BaseProductConfigTemplate():
                is represented by this template
         """
         model = self._inherit
-        model_obj = self.pool.get(model)
+        model_obj = self.pool[model]
         return model_obj
 
-    def _get_ids_2_clean(self, cursor, uid, template_br,
+    def _get_ids_2_clean(self, cr, uid, template_br,
                          product_ids, context=None):
         """ hook to select model specific objects to clean
         return must return a list of id"""
         return []
 
-    def _disable_old_instances(self, cursor, uid, template_br_list,
+    def _disable_old_instances(self, cr, uid, template_br_list,
                                product_ids, context=None):
         """ Clean old instance by setting those inactives """
         model_obj = self._get_model()
         for template in template_br_list:
-            ids2clean = self._get_ids_2_clean(cursor, uid, template,
+            ids2clean = self._get_ids_2_clean(cr, uid, template,
                                               product_ids, context=context)
             if self._clean_mode == 'deactivate':
-                model_obj.write(cursor, uid, ids2clean,
+                model_obj.write(cr, uid, ids2clean,
                                 {'active': False}, context=context)
             elif self._clean_mode == 'unlink':
-                model_obj.unlink(cursor, uid, ids2clean, context=context)
+                model_obj.unlink(cr, uid, ids2clean, context=context)
 
-
-    def create_instances(self, cursor, uid, template_br,
+    def create_instances(self, cr, uid, template_br,
                          product_ids, context=None):
         """ Create instances of model using template inherited model """
         if not isinstance(product_ids, list):
             product_ids = [product_ids]
 
-        # data = self.copy_data(cursor, uid, template_br.id, context=context)
-        # copy data will not work in all case and may retrieve erronus value
+        # not using self.copy_data(cr, uid, template_br.id, context=context)
+        # as copy data will not work in all case and may return erroneous value
 
         model_obj = self._get_model()
 
         data = {}
-        #May rais error on function fields in future
+        # May raise error on function fields in future
         for key in model_obj._columns.keys():
             tmp = template_br[key]
             if isinstance(tmp, browse_record):
@@ -79,7 +78,4 @@ class BaseProductConfigTemplate():
 
         for product_id in product_ids:
             data['product_id'] = product_id
-            model_obj.create(cursor, uid, data, context=context)
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+            model_obj.create(cr, uid, data, context=context)

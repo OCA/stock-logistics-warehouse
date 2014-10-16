@@ -1,0 +1,35 @@
+-
+  To test the orderpoint generator, I first create a template to apply.
+-
+  I check that no orderpoint was created for the product
+-
+  !python {model: stock.warehouse.orderpoint}: |
+    orderpoint_ids = self.search(cr, uid, [('product_id','=', ref('product.product_product_32')),
+                                           ('name', '=', 'OP/000445')])
+    assert len(orderpoint_ids) == 0, 'Orderpoint already created for product'
+-
+  I create the template
+-
+  !record {model: stock.warehouse.orderpoint.template, id: stock_warehouse_orderpoint_template_op0}:
+    company_id: base.main_company
+    location_id: stock.stock_location_stock
+    logic: max
+    name: OP/000445
+    product_max_qty: 15.0
+    product_min_qty: 5.0
+    product_uom: product.product_uom_unit
+    qty_multiple: 1
+    warehouse_id: stock.warehouse0
+-
+  I apply the template to a product.
+-
+  !python {model: stock.warehouse.orderpoint.generator}: |
+    wizard = self.create(cr, uid, {'orderpoint_template_id': [(6, 0, [ref('stock_warehouse_orderpoint_template_op0')])]})
+    self.action_configure(cr, uid, wizard, context={'active_ids': [ref('product.product_product_32')]})
+-
+  I check that a new orderpoint was created for the product
+-
+  !python {model: stock.warehouse.orderpoint}: |
+    orderpoint_ids = self.search(cr, uid, [('product_id','=', ref('product.product_product_32')),
+                                           ('name', '=', 'OP/000445')])
+    assert len(orderpoint_ids) > 0, 'Orderpoint not created for product'

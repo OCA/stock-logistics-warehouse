@@ -18,5 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-from . import orderpoint_creator
+from . import base_product_config_template
+from . import orderpoint_template
+from . import wizard
