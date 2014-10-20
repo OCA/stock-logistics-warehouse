@@ -137,7 +137,7 @@ class StockInventory(orm.Model):
                                 'product_code': product_code,
                                 'product_qty': tmp_lines[product_code],
                                 'inventory_id': inventory.id,
-                                }, context=context)
+                            }, context=context)
                     vals += values
         else:
             vals = super(StockInventory, self)._get_inventory_lines(
