@@ -105,9 +105,6 @@
               <tr>
                 <td>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>Created </strong>
-                  </para>
-                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
                     <strong>MO Ref </strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
@@ -124,9 +121,6 @@
                   </para>
                 </td>
                 <td>
-                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[formatLang(label.date, date_time=True) or ' ' ]]</strong>
-                  </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
                     <strong>[[ label.production_name or '---' ]]</strong>
                   </para>
@@ -160,17 +154,22 @@
                 </td>
               </tr>
             </blockTable>
-          </td>
-        </tr>
-      </blockTable>
-      <blockTable colWidths="5.1in">
-        <tr>
-          <td>
             <blockTable colWidths="5.1in" style="Table">
-              <tr>
-                <td>
-                  <para fontName="Helvetica-Bold" fontSize="10" alignment="CENTER">              Bill of Material</para>
-                  <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">                                  [[ label.bom_name or ' ' ]]</para>
+              <tr alignment="CENTER">
+                <td alignment="CENTER">
+                  <para fontName="Helvetica-Bold" fontSize="8" alignment="CENTER" leading="0">
+                    <strong>Created</strong>
+                  </para>
+                </td>
+              </tr>
+              <tr alignment="CENTER">
+                <td alignment="CENTER">
+                  <para fontName="Helvetica-Bold" fontSize="27" alignment="CENTER" spaceAfter="0.2in">
+                    <strong>[[ formatLang(label.date, date_time=True) or ' ']]</strong>
+                  </para>
+                  <para>
+                    <strong> </strong>
+                  </para>
                 </td>
               </tr>
             </blockTable>
