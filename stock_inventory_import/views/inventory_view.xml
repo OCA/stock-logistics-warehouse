@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_inventory_form_inherit">
+            <field name="name">view.inventory.form.inherit</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form" />
+            <field name="arch" type="xml">
+                <button name="action_cancel_inventory" position="after">
+                    <button name="%(action_import_inventory)d"
+                        string="Load File"
+                        attrs="{'invisible':['|',('state', '!=',('draft')),('filter', '!=', 'file')]}"
+                        class="oe_highlight" type="action" />
+                    <button name="process_import_lines" string="Process File Lines"
+                        attrs="{'invisible':['|',('state', '=',('draft')),('filter', '!=', 'file')]}"
+                        class="oe_highlight" type="object" />
+                </button>
+                <xpath expr="//page[@string='Inventory Adjustments']"
+                    position="after">
+                    <page string="Imported Lines"
+                        attrs="{'invisible':[('filter', '!=', 'file')]}">
+                        <field name="import_lines">
+                            <tree colors="red:fail==True;green:fail==False"
+                                editable="bottom">
+                                <field name="product"/>
+                                <field name="code"/>
+                                <field name="quantity"/>
+                                <field name="location_id" />
+                                <field name="lot" />
+                                <field name="fail" />
+                                <field name="fail_reason" />
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

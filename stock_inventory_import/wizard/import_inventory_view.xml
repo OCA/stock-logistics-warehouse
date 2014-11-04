@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <!-- Import Inventory Wizard form -->
+        <record id="view_import_inventory" model="ir.ui.view">
+            <field name="name">import.inventory.form</field>
+            <field name="model">import.inventory</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Import Inventory">
+                <label string="The file must have 2 column keys:
+                'code' => for product referente
+                'quantity' => for product quantity" colspan="4"/>
+                    <group colspan="4" col="4">
+                        <field name="name" />
+                        <field name="delimeter"/>
+                        <field name="data" filename="name" colspan="4" />
+                        <field name="location" colspan="4"/>
+                    </group>
+                   <separator string="" colspan="4"/>
+                   <footer>
+                        <button class="oe_highlight" special="cancel" string="Cancel"/>
+                        <button name="action_import" string="Import" type="object"/>
+                   </footer>
+               </form>
+            </field>
+        </record>
+
+    <!--  Action of Import inventory wizard -->
+
+    <record id="action_import_inventory" model="ir.actions.act_window">
+        <field name="name">Import Inventory</field>
+        <field name="res_model">import.inventory</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+       <field name="view_id" ref="view_import_inventory"/>
+       <field name="target">new</field>
+    </record>
+
+<!--     <menuitem  id="menu_import_inventory" name="Import Inventory" action="action_import_inventory" parent="stock.menu_stock_inventory_control"/> -->
+    </data>
+</openerp>
