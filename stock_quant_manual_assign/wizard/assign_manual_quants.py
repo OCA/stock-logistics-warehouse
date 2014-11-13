@@ -53,7 +53,6 @@ class AssignManualQuants(models.TransientModel):
         return {}
 
     def default_get(self, cr, uid, var_fields, context=None):
-        unassign_lines = []
         move = self.pool['stock.move'].browse(
             cr, uid, context['active_id'], context=context)
         available_quants_ids = self.pool['stock.quant'].search(
