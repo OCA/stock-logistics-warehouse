@@ -50,7 +50,7 @@ class StockInventory(orm.Model):
 
     def _get_available_filters(self, cr, uid, context=None):
         """This function will return the list of filter allowed according to
-        the options checked in 'Settings\Warehouse'.
+        the options checked in 'Settings/Warehouse'.
 
         :return: list of tuple
         """
