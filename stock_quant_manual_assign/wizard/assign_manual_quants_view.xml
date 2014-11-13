@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="assign_manual_quants_form_view">
+            <field name="name">assign.manual.quants.form</field>
+            <field name="model">assign.manual.quants</field>
+            <field name="arch" type="xml">
+                <form string="Manual Quants">
+                    <group col='4' colspan="4">
+                        <field name='quants_lines' colspan="4">
+                            <tree editable="top" delete="0" create="0">
+                                <field name="quant" />
+                                <field name="selected" />
+                                <field name="qty"/>
+                            </tree>
+                            <form>
+                                <field name="quant" />
+                                <field name="selected" />
+                                <field name="qty"/>
+                            </form>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="assign_quants" type="object"
+                            string="Confirm" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link"
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Manual quants" res_model="assign.manual.quants"
+            src_model="stock.move" view_mode="form" target="new"
+            key2="client_action_multi" id="assign_manual_quants_action" />
+
+    </data>
+</openerp>
+
