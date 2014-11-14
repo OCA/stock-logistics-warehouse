@@ -22,7 +22,7 @@
 """ Template of order point object """
 
 from openerp.osv.orm import Model, fields
-from base_product_config_template import BaseProductConfigTemplate
+from .base_product_config_template import BaseProductConfigTemplate
 
 
 class OrderpointTemplate(BaseProductConfigTemplate, Model):

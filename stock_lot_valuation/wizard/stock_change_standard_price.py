@@ -47,12 +47,12 @@ class change_standard_price(orm.TransientModel):
         'enable_stock_in_out_acc': fields.boolean('Enable Related Account',),
     }
 
-    def default_get(self, cr, uid, fields, context=None):
+    def default_get(self, cr, uid, field_list, context=None):
         """ To get default values for the object.
          @param self: The object pointer.
          @param cr: A database cursor
          @param uid: ID of the user currently logged in
-         @param fields: List of fields for which we want default values
+         @param field_list: List of fields for which we want default values
          @param context: A standard dictionary
          @return: A dictionary which of fields with values.
         """
@@ -62,24 +62,24 @@ class change_standard_price(orm.TransientModel):
         product_pool = self.pool.get('product.product')
         lot_obj = lot_pool.browse(cr, uid, context.get('active_id', False))
         res = super(change_standard_price, self).default_get(
-            cr, uid, fields, context=context)
+            cr, uid, field_list, context=context)
 
         accounts = product_pool.get_product_accounts(
             cr, uid, lot_obj.product_id.id, context={})
 
         price = lot_obj.standard_price
 
-        if 'new_price' in fields:
+        if 'new_price' in field_list:
             res.update({'new_price': price})
-        if 'stock_account_input' in fields:
+        if 'stock_account_input' in field_list:
             res.update(
                 {'stock_account_input': accounts['stock_account_input']})
-        if 'stock_account_output' in fields:
+        if 'stock_account_output' in field_list:
             res.update(
                 {'stock_account_output': accounts['stock_account_output']})
-        if 'stock_journal' in fields:
+        if 'stock_journal' in field_list:
             res.update({'stock_journal': accounts['stock_journal']})
-        if 'enable_stock_in_out_acc' in fields:
+        if 'enable_stock_in_out_acc' in field_list:
             res.update({'enable_stock_in_out_acc': True})
 
         return res
