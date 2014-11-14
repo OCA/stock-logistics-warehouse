@@ -20,8 +20,7 @@
 ##############################################################################
 
 
-import stock_fill_inventory
+from . import stock_fill_inventory
 #import stock_inventory_line_split
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

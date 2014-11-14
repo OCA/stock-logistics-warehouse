@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Move Stock Location",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "name": "Move Stock Location",
+    "version": "1.0",
+    "author": "Julius Network Solutions",
     "description" : """
 
 Presentation:
@@ -31,18 +31,18 @@ This module allows to move all stock in a stock location to an other one.
 And adds fields and buttons to advance in Physical Inventories.
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
+    "website": "http://www.julius.fr",
+    "depends": [
         "stock",
         "stock_barcode_reader",
     ],
-    "category" : "Customs/Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [
-                    'stock_view.xml',
-                    'stock_move_sequence.xml',
-                    'wizard/move_location_view.xml',
+    "category": "Customs/Stock",
+    "init_xml": [],
+    "demo_xml": [],
+    "update_xml": [
+        'stock_view.xml',
+        'stock_move_sequence.xml',
+        'wizard/move_location_view.xml',
     ],
     'test': [],
     'installable': False,

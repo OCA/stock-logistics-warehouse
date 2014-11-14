@@ -18,6 +18,6 @@
 #
 ##############################################################################
 
-import product
-import stock
-import wizard
+from . import product
+from . import stock
+from . import wizard

@@ -37,6 +37,7 @@ import tools
 
 
 class base_product_merge(osv.osv_memory):
+
     """
     Merges two products
     """
@@ -45,7 +46,7 @@ class base_product_merge(osv.osv_memory):
 
     _columns = {
     }
-    
+
     _values = {}
 
     MERGE_SKIP_FIELDS = ['product_tmpl_id']
@@ -71,7 +72,8 @@ class base_product_merge(osv.osv_memory):
                 if ttype in ('many2one'):
                     update_values.update({fname: val1.id})
                 elif ttype in ('many2many'):
-                    update_values.update({fname: [(6, 0, map(lambda x: x.id, val1))]})
+                    update_values.update(
+                        {fname: [(6, 0, map(lambda x: x.id, val1))]})
                 else:
                     update_values.update({fname: val1})
 
@@ -80,25 +82,31 @@ class base_product_merge(osv.osv_memory):
                     my_selection = [(val1, val1), (val2, val2)]
                     size = max(len(val1), len(val2))
                 if ttype in ('float', 'integer'):
-                    my_selection = [(str(val1), str(val1)), (str(val2), str(val2))]
+                    my_selection = [
+                        (str(val1), str(val1)), (str(val2), str(val2))]
                 if ttype in ('many2one'):
                     my_selection = [(str(val1.id), val1.name),
                                     (str(val2.id), val2.name)]
                 if ttype in ('many2many'):
-                    update_values.update({fname: [(6, 0, list(set(map(lambda x: x.id, val1 + val2))))]})
+                    update_values.update(
+                        {fname: [(6, 0, list(set(map(lambda x: x.id, val1 + val2))))]})
                 if my_selection:
                     if not required:
                         my_selection.append((False, ''))
-                    columns.update({fname: fields.selection(my_selection, fdescription, required=required, size=size)})
-                    update_fields.update({fname: {'string': fdescription, 'type': 'selection', 'selection': my_selection, 'required': required}})
+                    columns.update({fname: fields.selection(
+                        my_selection, fdescription, required=required, size=size)})
+                    update_fields.update(
+                        {fname: {'string': fdescription, 'type': 'selection', 'selection': my_selection, 'required': required}})
                     formxml += '\n<field name="%s"/><newline/>' % (fname,)
             if (val1 and not val2) or (not val1 and val2):
                 if ttype == 'many2one':
-                    update_values.update({fname: val1 and val1.id or val2 and val2.id})
+                    update_values.update(
+                        {fname: val1 and val1.id or val2 and val2.id})
                 elif ttype == 'many2many':
-                    update_values.update({fname: [(6, 0, map(lambda x: x.id, val1 or val2))]})
+                    update_values.update(
+                        {fname: [(6, 0, map(lambda x: x.id, val1 or val2))]})
                 elif ttype == 'one2many':
-                    #skip one2many values
+                    # skip one2many values
                     pass
                 else:
                     update_values.update({fname: val1 or val2})
@@ -118,11 +126,13 @@ class base_product_merge(osv.osv_memory):
          Hook for other checks
         """
         if not len(resource_ids) == 2:
-            raise osv.except_osv(_('Error!'), _('You must select only two resources'))
+            raise osv.except_osv(
+                _('Error!'), _('You must select only two resources'))
         return True
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
-        res = super(base_product_merge, self).fields_view_get(cr, uid, view_id, view_type, context=context, toolbar=toolbar, submenu=submenu)
+        res = super(base_product_merge, self).fields_view_get(
+            cr, uid, view_id, view_type, context=context, toolbar=toolbar, submenu=submenu)
         resource_ids = context.get('active_ids') or []
 
         self.check_resources_to_merge(cr, uid, resource_ids, context)
@@ -130,11 +140,13 @@ class base_product_merge(osv.osv_memory):
         if not len(resource_ids) == 2:
             return res
         obj = self.pool.get('product.product')
-        cr.execute("SELECT id, name, field_description, ttype, required, relation, readonly from ir_model_fields where model in ('product.product', 'product.template')")
+        cr.execute(
+            "SELECT id, name, field_description, ttype, required, relation, readonly from ir_model_fields where model in ('product.product', 'product.template')")
         field_datas = cr.fetchall()
         obj1 = obj.browse(cr, uid, resource_ids[0], context=context)
         obj2 = obj.browse(cr, uid, resource_ids[1], context=context)
-        myxml, merge_fields, self._values, columns = self._build_form(cr, uid, field_datas, obj1, obj2)
+        myxml, merge_fields, self._values, columns = self._build_form(
+            cr, uid, field_datas, obj1, obj2)
         self._columns.update(columns)
         res['arch'] = myxml
         res['fields'] = merge_fields
@@ -145,7 +157,8 @@ class base_product_merge(osv.osv_memory):
         'relation,1' wher id is the id.
          As some fields are displayed as selection in the view, we cast them in integer.
         """
-        cr.execute("SELECT name from ir_model_fields where model in ('product.product', 'product.template') and ttype='many2one'")
+        cr.execute(
+            "SELECT name from ir_model_fields where model in ('product.product', 'product.template') and ttype='many2one'")
         fields = cr.fetchall()
         for field in fields:
             if data_record.get(field[0], False):
@@ -167,17 +180,18 @@ class base_product_merge(osv.osv_memory):
         pool = self.pool
         if not record_id:
             return {}
-        res = self.read(cr, uid, ids, context = context)[0]
+        res = self.read(cr, uid, ids, context=context)[0]
 
         res.update(self._values)
         resource_ids = context.get('active_ids') or []
-        
+
         self.check_resources_to_merge(cr, uid, resource_ids, context)
 
         resource1 = resource_ids[0]
         resource2 = resource_ids[1]
 
-        obj, obj_parent = pool.get('product.product'), pool.get('product.template')
+        obj, obj_parent = pool.get(
+            'product.product'), pool.get('product.template')
 
         remove_field = {}
         # for uniqueness constraint: empty the field in the old resources
@@ -186,9 +200,10 @@ class base_product_merge(osv.osv_memory):
             if hasattr(check_obj, '_sql_constraints'):
                 remove_field = {}
                 for const in check_obj._sql_constraints:
-                    c_names.append(check_obj._name.replace('.', '_') + '_' + const[0])
+                    c_names.append(
+                        check_obj._name.replace('.', '_') + '_' + const[0])
         if c_names:
-            c_names = tuple(map(lambda x: "'"+ x +"'", c_names))
+            c_names = tuple(map(lambda x: "'" + x + "'", c_names))
             cr.execute("""select column_name from \
                         information_schema.constraint_column_usage u \
                         join  pg_constraint p on (p.conname=u.constraint_name) \
@@ -198,7 +213,8 @@ class base_product_merge(osv.osv_memory):
 
         remove_field.update({'active': False})
 
-        obj.write(cr, uid, [resource1, resource2], remove_field, context=context)
+        obj.write(
+            cr, uid, [resource1, resource2], remove_field, context=context)
 
         res = self.cast_many2one_fields(cr, uid, res, context)
 
@@ -207,7 +223,8 @@ class base_product_merge(osv.osv_memory):
         self.custom_updates(cr, uid, res_id, [resource1, resource2], context)
 
         # For one2many fields on the resource
-        cr.execute("select name, model from ir_model_fields where relation in ('product.product', 'product.template') and ttype not in ('many2many', 'one2many');")
+        cr.execute(
+            "select name, model from ir_model_fields where relation in ('product.product', 'product.template') and ttype not in ('many2many', 'one2many');")
         for name, model_raw in cr.fetchall():
             if hasattr(pool.get(model_raw), '_auto'):
                 if not pool.get(model_raw)._auto:
@@ -220,7 +237,8 @@ class base_product_merge(osv.osv_memory):
                     if pool.get(model_raw)._columns.get(name, False) and isinstance(pool.get(model_raw)._columns[name], fields.many2one):
                         model = model_raw.replace('.', '_')
                         if name not in self.MERGE_SKIP_FIELDS:
-                            cr.execute("update "+model+" set "+name+"="+str(res_id)+" where "+ tools.ustr(name) +" in ("+ tools.ustr(resource1) +", "+tools.ustr(resource2)+")")
+                            cr.execute("update " + model + " set " + name + "=" + str(res_id) + " where " + tools.ustr(
+                                name) + " in (" + tools.ustr(resource1) + ", " + tools.ustr(resource2) + ")")
 
         value = {
             'domain': str([('id', '=', res_id)]),
@@ -236,7 +254,5 @@ class base_product_merge(osv.osv_memory):
     def custom_updates(self, cr, uid, resource_id, old_resources_ids, context):
         """Hook for special updates on old resources and new resource
         """
-        pass
 
 base_product_merge()
-

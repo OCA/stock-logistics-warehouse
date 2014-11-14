@@ -19,8 +19,9 @@
 #
 ##############################################################################
 
-from osv import fields, osv
+from osv import osv
 from tools.translate import _
+
 
 class stock_fill_inventory(osv.osv_memory):
     _inherit = "stock.fill.inventory"
@@ -42,13 +43,13 @@ class stock_fill_inventory(osv.osv_memory):
 #        if context is None:
 #            context = {}
 #        super(stock_fill_inventory2, self).view_init(cr, uid, fields_list, context=context)
-#        
+#
 #        if len(context.get('active_ids',[])) > 1:
 #            raise osv.except_osv(_('Error!'), _('You cannot perform this operation on more than one Stock Inventories.'))
-#        
+#
 #        if context.get('active_id', False):
 #            stock = self.pool.get('stock.inventory').browse(cr, uid, context.get('active_id', False))
-#            
+#
 #            if stock.state == 'done':
 #                raise osv.except_osv(_('Warning!'), _('Stock Inventory is already Validated.'))
 #        return True
@@ -67,63 +68,68 @@ class stock_fill_inventory(osv.osv_memory):
 
         inventory_line_obj = self.pool.get('stock.inventory.line')
         location_obj = self.pool.get('stock.location')
-        product_obj = self.pool.get('product.product')
         move_obj = self.pool.get('stock.move')
-        
+
         fill_inventory = self.browse(cr, uid, ids[0], context=context)
         res = {}
-        res_location = {}
-        
+
         if fill_inventory.recursive:
             location_ids = location_obj.search(cr, uid, [('location_id',
-                             'child_of', [fill_inventory.location_id.id])],context=context)
+                                                          'child_of', [fill_inventory.location_id.id])], context=context)
         else:
             location_ids = [fill_inventory.location_id.id]
 
         res = {}
         flag = False
-        
+
         for location in location_ids:
             datas = {}
             res[location] = {}
-            domain = [('location_dest_id','=',location),('state','=','done')]
+            domain = [
+                ('location_dest_id', '=', location), ('state', '=', 'done')]
             active_ids = context.get('active_ids', False)
             if active_ids:
-                date = self.pool.get('stock.inventory').browse(cr, uid, active_ids[0]).date
-                domain.append(('date','<=',date))
+                date = self.pool.get('stock.inventory').browse(
+                    cr, uid, active_ids[0]).date
+                domain.append(('date', '<=', date))
             move_ids = move_obj.search(cr, uid, domain, context=context)
 
             for move in move_obj.browse(cr, uid, move_ids, context=context):
                 lot_id = move.prodlot_id.id
                 prod_id = move.product_id.id
                 qty = move.product_qty
-                
+
                 if datas.get((prod_id, lot_id)):
                     qty += datas[(prod_id, lot_id)]['product_qty']
-                
-                datas[(prod_id, lot_id)] = {'product_id': prod_id, 'location_id': location, 'product_qty': qty, 'product_uom': move.product_id.uom_id.id, 'prod_lot_id': lot_id}
-            
+
+                datas[(prod_id, lot_id)] = {'product_id': prod_id, 'location_id': location,
+                                            'product_qty': qty, 'product_uom': move.product_id.uom_id.id, 'prod_lot_id': lot_id}
+
             if datas:
                 flag = True
                 res[location] = datas
 
         if not flag:
-            raise osv.except_osv(_('Warning !'), _('No product in this location.'))
+            raise osv.except_osv(
+                _('Warning !'), _('No product in this location.'))
 
         for stock_move in res.values():
             for stock_move_details in stock_move.values():
-                stock_move_details.update({'inventory_id': context['active_ids'][0]})
+                stock_move_details.update(
+                    {'inventory_id': context['active_ids'][0]})
                 domain = []
-                
+
                 if fill_inventory.set_stock_zero:
                     stock_move_details.update({'product_qty': 0})
 
                 for field, value in stock_move_details.items():
                     domain.append((field, '=', value))
-                line_ids = inventory_line_obj.search(cr, uid, domain, context=context)
+                line_ids = inventory_line_obj.search(
+                    cr, uid, domain, context=context)
 
                 if not line_ids:
-                    inventory_line_obj.create(cr, uid, stock_move_details, context=context)
+                    inventory_line_obj.create(
+                        cr, uid, stock_move_details, context=context)
 
         return {'type': 'ir.actions.act_window_close'}
 

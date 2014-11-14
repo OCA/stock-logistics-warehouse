@@ -30,11 +30,11 @@
 ##############################################################################
 
 {
-    "name" : "Base Products Merge",
-    "version" : "1.0",
-    "author" : "Camptocamp",
-    "category" : "Generic Modules/Base",
-    "description":"""
+    "name": "Base Products Merge",
+    "version": "1.0",
+    "author": "Camptocamp",
+    "category": "Generic Modules/Base",
+    "description": """
 To merge 2 products, select them in the list view and execute the Action "Merge Products".
 
 The selected products are deactivated and a new one is created with :
@@ -46,10 +46,10 @@ The selected products are deactivated and a new one is created with :
 
 """,
     "website": "http://camptocamp.com",
-    "depends" : ['product'],
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [
+    "depends": ['product'],
+    "init_xml": [],
+    "demo_xml": [],
+    "update_xml": [
         "wizard/base_product_merge_view.xml",
     ],
     "active": False,

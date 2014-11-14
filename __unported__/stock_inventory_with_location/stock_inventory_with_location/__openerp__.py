@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Move Inventory Extended",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "name": "Move Inventory Extended",
+    "version": "1.0",
+    "author": "Julius Network Solutions",
     "description" : """
 
 Presentation:
@@ -30,15 +30,15 @@ Presentation:
 This module get the product real location if exists instead of inventory location.
 
 """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock",
-         "stock_tracking_extended",
+    "website": "http://www.julius.fr",
+    "depends": [
+        "stock",
+        "stock_tracking_extended",
     ],
-    "category" : "Customs/Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [],
+    "category": "Customs/Stock",
+    "init_xml": [],
+    "demo_xml": [],
+    "update_xml": [],
     'test': [],
     'installable': False,
     'active': False,
