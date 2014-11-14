@@ -22,7 +22,6 @@ from openerp import fields, models, api, exceptions, _
 
 class AssignManualQuants(models.TransientModel):
     _name = 'assign.manual.quants'
-    _rec_name = 'quants_lines'
 
     @api.one
     @api.constrains('quants_lines')
@@ -33,13 +32,15 @@ class AssignManualQuants(models.TransientModel):
                 total_qty += line.qty
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         if total_qty > move.product_uom_qty:
-            raise exceptions.Warning(_('Error'), _('Quantity is excessive'))
+            raise exceptions.Warning(_('Error'),
+                                     _('Quantity is higher'
+                                       ' than the needed one'))
 
+    name = fields.Char(string='Name')
     quants_lines = fields.One2many('assign.manual.quants.lines',
                                    'assign_wizard', string='Quants')
 
     @api.multi
-    @api.model
     def assign_quants(self):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         quants = []
@@ -80,7 +81,8 @@ class AssignManualQuantsLines(models.TransientModel):
             if not self.selected:
                 self.qty = False
 
-    assign_wizard = fields.Many2one('assign.manual.quants', string='Move')
-    quant = fields.Many2one('stock.quant', string="Quant")
+    assign_wizard = fields.Many2one('assign.manual.quants', string='Move',
+                                    required=True)
+    quant = fields.Many2one('stock.quant', string="Quant", required=True)
     qty = fields.Float(string='QTY')
     selected = fields.Boolean(string="Select")

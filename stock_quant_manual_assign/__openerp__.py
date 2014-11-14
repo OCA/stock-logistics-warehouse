@@ -24,10 +24,6 @@
     "author": "OdooMRP team",
     "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "quant",
-    "description": """
-    This module provide :
-    With this module, user can change manualy the automatic selection of quants
-    """,
     'data': ['wizard/assign_manual_quants_view.xml',
              'views/stock_move_view.xml'],
     "installable": True,
