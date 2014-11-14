@@ -75,4 +75,4 @@ class product_product(orm.Model):
         'days_stats': fields.integer('Days of sale statistics'),
         'forecast_gap': fields.float('Expected sales variation (percent +/-)',
                                      digits=(6, 3)),
-        }
+    }

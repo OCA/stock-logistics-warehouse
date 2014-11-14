@@ -25,6 +25,7 @@ from openerp.osv import orm, fields
 
 
 class product_immediately_usable(orm.Model):
+
     """
     Inherit Product in order to add an "immediately usable quantity"
     stock field

@@ -24,6 +24,7 @@ from openerp.tools.translate import _
 
 
 class stock_reservation(orm.Model):
+
     """ Allow to reserve products.
 
     The fields mandatory for the creation of a reservation are:

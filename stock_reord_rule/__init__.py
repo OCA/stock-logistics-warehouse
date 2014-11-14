@@ -19,4 +19,4 @@
 #
 ##############################################################################
 
-import stock_reord_rule
+from . import stock_reord_rule

@@ -24,6 +24,7 @@ from openerp.osv.orm import browse_record, browse_record_list
 
 
 class BaseProductConfigTemplate():
+
     """ Abstract class for product config """
 
     def _get_model(self):

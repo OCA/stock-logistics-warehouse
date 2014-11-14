@@ -21,35 +21,36 @@
 from openerp.osv.orm import Model, fields
 import decimal_precision as dp
 
+
 class product_product(Model):
     _inherit = "product.product"
 
     def _compute_configurable_level(self, cursor, uid, pids, field_name, args, context=None):
         """We compute a custom stock level"""
         # we do not override _product_available once agin to avoid MRO troubles
-        conf_obj =  self.pool.get('stock.level.configuration')
+        conf_obj = self.pool.get('stock.level.configuration')
         prod_obj = self.pool.get('product.product')
         conf_list = []
         conf_ids = conf_obj.search(cursor, uid, [])
         for conf in conf_obj.browse(cursor, uid, conf_ids):
-            conf_list.append((conf.stock_location_id.id, conf.product_field.name))
+            conf_list.append(
+                (conf.stock_location_id.id, conf.product_field.name))
         if not isinstance(pids, list):
             pids = [pids]
-        res =  dict.fromkeys(pids, 0.0)
+        res = dict.fromkeys(pids, 0.0)
         for conf in conf_list:
             local_context = context.copy()
             local_context['location'] = [conf[0]]
-            interm = prod_obj._product_available(cursor, uid, pids, field_names=[conf[1]], arg=False, context=local_context)
+            interm = prod_obj._product_available(
+                cursor, uid, pids, field_names=[conf[1]], arg=False, context=local_context)
             for key, val in interm.items():
-                res.setdefault(key, 0.0) # this should not be usefull but we never know
+                # this should not be usefull but we never know
+                res.setdefault(key, 0.0)
                 res[key] += val.get(conf[1], 0.0)
         return res
 
-    
     _columns = {'configurable_stock_level': fields.function(_compute_configurable_level,
                                                             type='float',
-                                                            digits_compute=dp.get_precision('Product UoM'),
+                                                            digits_compute=dp.get_precision(
+                                                                'Product UoM'),
                                                             string='Custom level')}
-
-                
-

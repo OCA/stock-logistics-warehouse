@@ -18,13 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{'name' : 'name',
- 'version' : '0.1',
- 'author' : 'Camptocamp',
+{'name': 'name',
+ 'version': '0.1',
+ 'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
  'category': 'Warehouse',
  'complexity': "normal",  # easy, normal, expert
- 'depends' : ['stock', 'product'],
+ 'depends': ['stock', 'product'],
  'description': """Allows to set a stock level composed by
  a configuration using the sum of stock location + product fields""",
  'website': 'http://www.camptocamp.com',

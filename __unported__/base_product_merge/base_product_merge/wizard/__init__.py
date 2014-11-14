@@ -1,1 +1,1 @@
-import base_product_merge
+from . import base_product_merge

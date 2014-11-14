@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,10 +17,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 from osv import fields, osv
-from tools.translate import _
+
 
 class stock_fill_inventory(osv.osv_memory):
     _inherit = "stock.fill.inventory"
@@ -32,13 +32,13 @@ class stock_fill_inventory(osv.osv_memory):
             if inv.location_id:
                 res = inv.location_id.id
         return res
-        
+
     _columns = {
         'location_id': fields.many2one('stock.location', 'Location', required=True),
     }
 
     _defaults = {
-        'location_id': lambda s,cr,uid,c: s._get_location(cr, uid, c.get('active_id',False), c),
+        'location_id': lambda s, cr, uid, c: s._get_location(cr, uid, c.get('active_id', False), c),
     }
 
 stock_fill_inventory()

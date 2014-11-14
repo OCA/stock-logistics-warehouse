@@ -20,8 +20,9 @@
 ##############################################################################
 from openerp.osv.orm import Model, fields
 
+
 class StockLevelConfig(Model):
-    _name ='stock.level.configuration'
+    _name = 'stock.level.configuration'
     _columns = {'stock_location_id': fields.many2one('stock.location', 'Location to use', required=True),
                 'product_field': fields.many2one('ir.model.fields', 'Fields to use', required=True,
-                                                  help="Field of product form to sum")}
+                                                 help="Field of product form to sum")}

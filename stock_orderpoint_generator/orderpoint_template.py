@@ -22,10 +22,11 @@
 """ Template of order point object """
 
 from openerp.osv.orm import Model, fields
-from base_product_config_template import BaseProductConfigTemplate
+from .base_product_config_template import BaseProductConfigTemplate
 
 
 class OrderpointTemplate(BaseProductConfigTemplate, Model):
+
     """ Template for orderpoints
 
     Here we use same model as stock.warehouse.orderpoint but set product_id

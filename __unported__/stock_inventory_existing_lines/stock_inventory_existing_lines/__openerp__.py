@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#################################################################################
+##########################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
@@ -17,31 +17,31 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#################################################################################
+##########################################################################
 
 {
-    "name" : "Inventory Extended",
-    "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "name": "Inventory Extended",
+    "version": "1.0",
+    "author": "Julius Network Solutions",
     "description" : """
-    
+
 Presentation:
 
 This module adds a new field based on lines into the inventory
 to know what are lines correctly in the system.
 
 This module adds a new tab 'Lines' in Physical Inventories with correct lines of Stock Inventory Lines.
-  
+
      """,
-    "website" : "http://www.julius.fr",
-    "depends" : [
-         "stock",
+    "website": "http://www.julius.fr",
+    "depends": [
+        "stock",
     ],
-    "category" : "Customs/Stock",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "images" : ['images/Inventory existing lines.png'],
-    "update_xml" : [
+    "category": "Customs/Stock",
+    "init_xml": [],
+    "demo_xml": [],
+    "images": ['images/Inventory existing lines.png'],
+    "update_xml": [
         'stock_view.xml',
         "security/ir.model.access.csv",
     ],
