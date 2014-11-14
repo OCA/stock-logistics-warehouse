@@ -11,7 +11,7 @@
                             <tree editable="top" delete="0" create="0">
                                 <field name="quant" />
                                 <field name="selected" />
-                                <field name="qty"/>
+                                <field name="qty" attrs="{'readonly':[('selected', '=' ,False)]}"/>
                             </tree>
                             <form>
                                 <field name="quant" />
