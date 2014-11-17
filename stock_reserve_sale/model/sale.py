@@ -26,7 +26,7 @@ from openerp.tools.translate import _
 class sale_order(orm.Model):
     _inherit = 'sale.order'
 
-    def _stock_reservation(self, cr, uid, ids, fields, args, context=None):
+    def _stock_reservation(self, cr, uid, ids, _fields, args, context=None):
         result = {}
         for order_id in ids:
             result[order_id] = {'has_stock_reservation': False,
@@ -77,7 +77,7 @@ class sale_order(orm.Model):
 class sale_order_line(orm.Model):
     _inherit = 'sale.order.line'
 
-    def _is_stock_reservable(self, cr, uid, ids, fields, args, context=None):
+    def _is_stock_reservable(self, cr, uid, ids, _fields, args, context=None):
         result = {}.fromkeys(ids, False)
         for line in self.browse(cr, uid, ids, context=context):
             if line.state != 'draft':
