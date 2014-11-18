@@ -20,42 +20,24 @@
 ##############################################################################
 
 from openerp.addons import decimal_precision as dp
-
 from openerp.osv import orm, fields
 
 
-class product_immediately_usable(orm.Model):
+class ProductTemplate(orm.Model):
     """
-    Inherit Product in order to add an "immediately usable quantity"
-    stock field
     Immediately usable quantity is : real stock - outgoing qty
     """
-    _inherit = 'product.product'
+    _inherit = 'product.template'
 
     def _product_available(self, cr, uid, ids, field_names=None,
                            arg=False, context=None):
-        """
-        Get super() _product_available and compute immediately_usable_qty
-        """
-        # We need available and outgoing quantities to compute
-        # immediately usable quantity.
-        # When immediately_usable_qty is displayed but
-        # not qty_available and outgoing_qty,
-        # they are not computed in the super method so we cannot
-        # compute immediately_usable_qty.
-        # To avoid this issue, we add the 2 fields in
-        # field_names to compute them.
-        if 'immediately_usable_qty' in field_names:
-            field_names.append('qty_available')
-            field_names.append('outgoing_qty')
-
-        res = super(product_immediately_usable, self)._product_available(
+        res = super(ProductTemplate, self)._product_available(
             cr, uid, ids, field_names, arg, context)
 
         if 'immediately_usable_qty' in field_names:
             for product_id, stock_qty in res.iteritems():
                 res[product_id]['immediately_usable_qty'] = \
-                    stock_qty['qty_available'] + stock_qty['outgoing_qty']
+                    stock_qty['qty_available'] - stock_qty['outgoing_qty']
 
         return res
 
@@ -137,6 +119,6 @@ class product_immediately_usable(orm.Model):
             type='float',
             string='Immediately Usable',
             multi='qty_available',
-            help="Quantity of products really available for sale." \
+            help="Quantity of products really available for sale."
                  "Computed as: Quantity On Hand - Outgoing."),
     }
