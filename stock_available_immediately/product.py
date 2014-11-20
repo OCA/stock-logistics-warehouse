@@ -26,11 +26,11 @@ from openerp.osv import orm, fields
 
 class product_immediately_usable(orm.Model):
     """
-    Inherit Product in order to add an "immediately usable quantity"
+    Inherit Product template in order to add an "immediately usable quantity"
     stock field
     Immediately usable quantity is : real stock - outgoing qty
     """
-    _inherit = 'product.product'
+    _inherit = 'product.template'
 
     def _product_available(self, cr, uid, ids, field_names=None,
                            arg=False, context=None):
