@@ -22,7 +22,10 @@
     "version": "1.0",
     "depends": ["base", "stock"],
     "author": "OdooMRP team",
-    "contributors": ["Mikel Arregi <mikelarregi@avanzosc.es>"],
+    "contributors": [
+            "Ana Juaristi Olalde <ajuaristio@gmail.com>",
+            "Pedro Manuel Baeza Romero <pedro.baeza@gmail.com>"
+            "Mikel Arregi <mikelarregi@avanzosc.es>"],
     "category": "quant",
     'data': ['wizard/assign_manual_quants_view.xml',
              'views/stock_move_view.xml'],
