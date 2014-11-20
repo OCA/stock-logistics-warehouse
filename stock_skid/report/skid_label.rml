@@ -93,7 +93,7 @@
                 <td alignment="CENTER">
                   <!--<para fontName="Times-Roman" fontSize="8"><strong>Product</strong> </para>-->
                   <para fontName="Helvetica-Bold" fontSize="30" leading="28" alignment="CENTER">
-                    <strong>[[ label.product_code ]] [[ label.product_name ]]</strong>
+                    <strong>[[ " ".join(i for i in (label.product_code, label.product_name) if i)[:20] ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="6">
                     <strong> </strong>
