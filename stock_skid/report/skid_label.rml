@@ -122,19 +122,19 @@
                 </td>
                 <td>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.production_name or '---' ]]</strong>
+                    <strong>[[ (label.production_name or '---')[:24] ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.machine or '---' ]]</strong>
+                    <strong>[[ (label.machine or '---')[:24] ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.shift or '---' ]]</strong>
+                    <strong>[[ (label.shift or '---')[:24] ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.packer_name or '---' ]]</strong>
+                    <strong>[[ (label.packer_name or '---')[:24] ]]</strong>
                   </para>
                   <para fontName="Helvetica-Bold" fontSize="8" alignment="LEFT">
-                    <strong>[[ label.supervisor  or '---' ]]</strong>
+                    <strong>[[ (label.supervisor  or '---')[:24] ]]</strong>
                   </para>
                 </td>
                 <td>
