@@ -63,6 +63,14 @@
   !python {model: stock.reservation}: |
     self.reserve(cr, uid, [ref('reserv_sorbet2')], context=context)
 -
+  Then the reservation should be assigned and have reserved a quant
+-
+  !python {model: stock.reservation, id: reserv_sorbet2}: |
+    from nose.tools import *
+
+    assert_equal('assigned', self.state)
+    assert_equal(1, len(self.reserved_quant_ids))
+-
   I check Virtual stock of Sorbet after update reservation
 -
   !python {model: product.product}: |
