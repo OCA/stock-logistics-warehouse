@@ -125,7 +125,7 @@ class StockReservation(models.Model):
         move_recs = self.move_id
         move_recs.date_expected = fields.Datetime.now()
         move_recs.action_confirm()
-        move_recs.force_assign()
+        move_recs.picking_id.action_assign()
         return True
 
     @api.multi
