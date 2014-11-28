@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- Add the quantity available to promise in the product form -->
+		<record id="view_product_form_potential_qty" model="ir.ui.view">
+			<field name="name">product.form.potential_qty</field>
+			<field name="model">product.product</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_normal_procurement_locations_form" />
+			<field name="arch" type="xml">
+				<data>
+                    <xpath expr="//field[@name='virtual_available']" position="after">
+                    	<field name="potential_qty"/>
+                    </xpath>
+				</data>
+			</field>
+		</record>
+	</data>
+</openerp>
