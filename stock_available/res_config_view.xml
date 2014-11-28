@@ -16,6 +16,10 @@
                                     <label for="module_stock_available_immediately" />
                                 </div>
                                 <div>
+                                    <field name="module_stock_available_sale" class="oe_inline" />
+                                    <label for="module_stock_available_sale" />
+                                </div>
+                                <div>
                                     <field name="module_stock_available_mrp" class="oe_inline" />
                                     <label for="module_stock_available_mrp" />
                                 </div>

@@ -21,7 +21,6 @@
 
 from openerp.osv import orm
 
-from openerp.osv import orm, fields
 
 class product_immediately_usable(orm.Model):
     """Subtract incoming qty from immediately_usable_qty
