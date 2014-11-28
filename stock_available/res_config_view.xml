@@ -15,6 +15,10 @@
                                     <field name="module_stock_available_immediately" class="oe_inline" />
                                     <label for="module_stock_available_immediately" />
                                 </div>
+                                <div>
+                                    <field name="module_stock_available_mrp" class="oe_inline" />
+                                    <label for="module_stock_available_mrp" />
+                                </div>
                             </div>
                         </group>
                     </xpath>

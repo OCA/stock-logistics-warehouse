@@ -30,3 +30,12 @@ class StockConfig(models.TransientModel):
         help="This will subtract incoming quantities from the quantities "
              "available to promise.\n"
              "This installs the module stock_available_immediately.")
+
+    module_stock_available_mrp = fields.Boolean(
+        string='Include the production potential',
+        help="This will add the quantities of goods that can be "
+             "immediately manufactured, to the quantities available to "
+             "promise.\n"
+             "This installs the module stock_available_mrp.\n"
+             "If the module mrp is not installed, this will install it "
+             "too")
