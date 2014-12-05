@@ -73,10 +73,12 @@ class product_product(orm.Model):
         return res
 
     def _compute_potential_qty_from_bom(self, cr, uid, bom_id, to_uom,
-                                        context):
+                                        context=None):
         """Compute the potential qty from BoMs with components available"""
         bom_obj = self.pool['mrp.bom']
         uom_obj = self.pool['product.uom']
+        if context is None:
+            context = {}
         if 'uom' in context:
             context_wo_uom = context.copy()
             del context_wo_uom['uom']
