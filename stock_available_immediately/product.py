@@ -26,15 +26,17 @@ class product_immediately_usable(orm.Model):
     """Subtract incoming qty from immediately_usable_qty
 
     We don't need to override the function fields, the module stock_available
-    takes of it for us.
-
-    Side-effect warning: This method may change the list passed as the
-        field_names parameter, which will then alter the caller's state."""
+    takes care of it for us."""
     _inherit = 'product.product'
 
     def _product_available(self, cr, uid, ids, field_names=None,
                            arg=False, context=None):
-        """Ignore the incoming goods in the quantity available to promise"""
+        """Ignore the incoming goods in the quantity available to promise
+
+        Side-effect warning: By design, we want to change the behavior of the
+            caller (make it aware that an extra field is being computed).
+            For this, this method MAY change the list passed as the parameter
+            `field_names`."""
         # If we didn't get a field_names list, there's nothing to do
         if field_names is None or 'immediately_usable_qty' not in field_names:
             return super(product_immediately_usable, self)._product_available(

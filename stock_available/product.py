@@ -56,8 +56,10 @@ class ProductProduct(orm.Model):
         The sub-modules MUST call super()._product_available BEFORE their own
                 computations
 
-        Side-effect warning: This method may change the list passed as the
-            field_names parameter, which will then alter the caller's state."""
+        Side-effect warning: By design, we want to change the behavior of the
+            caller (make it aware that an extra field is being computed).
+            For this, this method MAY change the list passed as the parameter
+            `field_names`."""
         # If we didn't get a field_names list, there's nothing to do
         if field_names is None:
             return super(ProductProduct, self)._product_available(

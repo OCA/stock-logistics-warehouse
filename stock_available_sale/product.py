@@ -134,7 +134,7 @@ class ProductProduct(orm.Model):
         # location
         if context.get('location', False):
             # Either a single or multiple locations can be in the context
-            if not isinstance(context['location'], list):
+            if isinstance(context['location'], (int, long)):
                 location_ids = [context['location']]
             else:
                 location_ids = context['location']
