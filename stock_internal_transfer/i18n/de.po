@@ -1,0 +1,121 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* stock_internal_transfer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-12 15:19+0000\n"
+"PO-Revision-Date: 2014-12-12 16:39+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: stock_internal_transfer
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:50
+#, python-format
+msgid "Force Transfer"
+msgstr "Ausführung erzwingen"
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer.line,product_id:0
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_internal_transfer
+#: view:stock.internal.transfer:0
+msgid "or"
+msgstr "oder"
+
+#. module: stock_internal_transfer
+#: model:ir.actions.act_window,name:stock_internal_transfer.action_stock_interal_transfer_form
+#: model:ir.ui.menu,name:stock_internal_transfer.menu_stock_interal_transfer
+msgid "Create Internal Transfer"
+msgstr "Interne Lagerbewegung erstellen"
+
+#. module: stock_internal_transfer
+#: view:stock.internal.transfer:0
+msgid "Stock Internal Transfer"
+msgstr ""
+
+#. module: stock_internal_transfer
+#: model:ir.model,name:stock_internal_transfer.model_stock_internal_transfer
+msgid "stock.internal.transfer"
+msgstr ""
+
+#. module: stock_internal_transfer
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:50
+#, python-format
+msgid "Default"
+msgstr "Standard"
+
+#. module: stock_internal_transfer
+#: view:stock.internal.transfer:0
+msgid "Create Transfer"
+msgstr "Ausführen"
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer.line,wizard_id:0
+msgid "Wizard"
+msgstr ""
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer,line_ids:0
+msgid "Move Lines"
+msgstr ""
+
+#. module: stock_internal_transfer
+#: view:stock.internal.transfer:0
+msgid "Product Moves"
+msgstr ""
+
+#. module: stock_internal_transfer
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:77
+#, python-format
+msgid "Internal Transfer Wizard"
+msgstr "Interne Lagerbewegung"
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer,delivery_partner_id:0
+msgid "Delivery Address"
+msgstr "Empfängeradresse"
+
+#. module: stock_internal_transfer
+#: model:ir.model,name:stock_internal_transfer.model_stock_internal_transfer_line
+msgid "stock.internal.transfer.line"
+msgstr ""
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer,location_id:0
+msgid "Location"
+msgstr "Quelllager"
+
+#. module: stock_internal_transfer
+#: view:stock.internal.transfer:0
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer,mode:0
+msgid "Transfer Mode"
+msgstr "Transfer Modus"
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer,location_dest_id:0
+msgid "Dest. Location"
+msgstr "Ziellager"
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer.line,product_uom:0
+msgid "Unit of Measure"
+msgstr "Mengeneinheit"
+
+#. module: stock_internal_transfer
+#: field:stock.internal.transfer.line,quantity:0
+msgid "Quantity"
+msgstr "Menge"

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_stock_interal_transfer_form" model="ir.ui.view">
+            <field name="name">stock.internal.transfer.form</field>
+            <field name="model">stock.internal.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Stock Internal Transfer" version="7.0">
+                    <sheet>
+                        <group>
+                            <field name="location_id"/>
+                            <field name="location_dest_id" on_change="onchange_location_dest_id(location_dest_id)"/>
+                            <field name="delivery_partner_id"/>
+                            <field name="mode"/>
+                        </group>
+                        <field name="line_ids">
+	                        <tree editable="bottom" string="Product Moves">
+	                            <field name="product_id" on_change="onchange_product_id(product_id)"/>
+	                            <field name="quantity" />
+	                            <field name="product_uom" groups="product.group_uom"/>
+	                        </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button name="create_transfer" string="Create Transfer" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+             </field>
+         </record>
+
+         <record model="ir.actions.act_window" id="action_stock_interal_transfer_form">
+            <field name="name">Create Internal Transfer</field>
+            <field name="res_model">stock.internal.transfer</field>
+            <field name="view_mode">,form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_stock_interal_transfer_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_stock_interal_transfer"
+                  parent="stock.menu_stock_warehouse_mgmt"
+                  name="Create Internal Transfer"
+                  action="action_stock_interal_transfer_form"
+                  sequence="100"/>
+     </data>
+ </openerp>

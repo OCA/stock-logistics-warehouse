@@ -1,0 +1,27 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_internal_transfer_transit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-12 15:42+0000\n"
+"PO-Revision-Date: 2014-12-12 15:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_internal_transfer_transit
+#: model:stock.location,name:stock_internal_transfer_transit.stock_location_transit
+msgid "Transit"
+msgstr ""
+
+#. module: stock_internal_transfer_transit
+#: model:ir.model,name:stock_internal_transfer_transit.model_stock_internal_transfer
+msgid "stock.internal.transfer"
+msgstr ""
+
