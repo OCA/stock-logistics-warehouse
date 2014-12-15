@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="view_picking_pickup_date_form" model="ir.ui.view">
+      <field name="name">stock.picking.out.pickup.date</field>
+      <field name="model">stock.picking.out</field>
+      <field name="inherit_id" ref="stock.view_picking_form"/>
+      <field name="arch" type="xml">
+        <field name="date" position="after">
+          <field name="pickup_date"
+                 attrs="{'readonly':[('state', 'in', ['cancel', 'done'])]}"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="view_picking_date_picking_out_tree" model="ir.ui.view">
+      <field name="model">stock.picking.out</field>
+      <field name="inherit_id" ref="stock.view_picking_out_tree"/>
+      <field name="arch" type="xml">
+        <field name="date" position="before">
+          <field name="pickup_date"/>
+        </field>
+      </field>
+    </record>
+  </data>
+</openerp>
+
