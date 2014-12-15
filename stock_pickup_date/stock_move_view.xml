@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="stock_move_tree">
+      <field name="name">Stock Moves Tree +date_pickup</field>
+      <field name="model">stock.move</field>
+      <field name="inherit_id" ref="stock.view_move_tree_reception_picking" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='date_expected']" position="after">
+          <field name="date_pickup" />
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_move_search">
+      <field name="name">Stock Move Search +pickup intervals</field>
+      <field name="model">stock.move</field>
+      <field name="inherit_id" ref="stock.view_move_search" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='prodlot_id']" position="after">
+          <group expand="0" string="Pickup Date">
+            <filter name="pickup_today" string="Today"
+              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=1)).strftime('%%Y-%%m-%%d'))]" />
+            <filter name="pickup_2days" string="2 days"
+              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=2)).strftime('%%Y-%%m-%%d'))]" />
+            <filter name="pickup_3days" string="3 days"
+              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=3)).strftime('%%Y-%%m-%%d'))]" />
+            <filter name="pickup_4days" string="4 days"
+              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=4)).strftime('%%Y-%%m-%%d'))]" />
+            <filter name="pickup_7days" string="7 days"
+              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=7)).strftime('%%Y-%%m-%%d'))]" />
+            <filter name="pickup_14days" string="14 days"
+              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=14)).strftime('%%Y-%%m-%%d'))]" />
+          </group>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Override move tree with our search view -->
+    <record id="stock.action_out_picking_move" model="ir.actions.act_window">
+      <field name="name">Deliver Products</field>
+      <field name="res_model">stock.move</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">['|','&amp;',('picking_id','=',False),('location_dest_id.usage', 'in', ['customer','supplier']),'&amp;',('picking_id','!=',False),('picking_id.type','=','out')]</field>
+      <field name="view_id" ref="stock_move_tree"/>
+      <field name="search_view_id" ref="stock_move_search" />
+      <field name="context">{'picking_type': 'out', 'search_default_future': True}</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to register a product delivery.
+        </p>
+        <p>
+          You will find in this list all products you have to deliver to
+          your customers. You can process the deliveries directly from
+          this list using the buttons on the right of each line. You can
+          filter the products to deliver by customer, products or sale
+          order (using the Origin field).
+        </p>
+      </field>
+    </record>
+  </data>
+</openerp>
+
