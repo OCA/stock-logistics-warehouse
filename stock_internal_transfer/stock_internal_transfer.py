@@ -25,7 +25,7 @@ import openerp.addons.decimal_precision as dp
 from openerp.tools.translate import _
 
 
-class stock_internal_transfer_line(orm.TransientModel):
+class StockInternalTransferLine(orm.TransientModel):
     _name = "stock.internal.transfer.line"
     _rec_name = 'product_id'
     _columns = {
@@ -50,7 +50,7 @@ class stock_internal_transfer_line(orm.TransientModel):
         return {'value': {'product_uom': uom_id}}
 
 
-class stock_internal_transfer(orm.TransientModel):
+class StockInternalTransfer(orm.TransientModel):
     _name = 'stock.internal.transfer'
 
     def _get_transfer_mode_sel(self, cr, uid, context=None):

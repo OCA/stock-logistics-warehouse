@@ -23,7 +23,7 @@ from openerp.osv import orm
 from openerp.netsvc import LocalService
 
 
-class stock_internal_transfer(orm.TransientModel):
+class StockInternalTransfer(orm.TransientModel):
     _inherit = 'stock.internal.transfer'
 
     def _prepare_picking(self, cr, uid, ids, context=None):
