@@ -20,7 +20,7 @@
 
 {
     'name': 'Stock internal transfer',
-    'version': '0.1',
+    'version': '1.0',
     'category': '',
     'summary': 'Wizard to simplify creation of internal stock transfers',
     'description': """

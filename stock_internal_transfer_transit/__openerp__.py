@@ -20,7 +20,7 @@
 
 {
     'name': 'Stock internal transfer transit',
-    'version': '0.1',
+    'version': '1.0',
     'category': '',
     'summary': "Process internal transfers using a dedicated "
                "transfer stock location.",
