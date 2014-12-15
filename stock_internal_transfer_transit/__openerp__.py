@@ -22,13 +22,16 @@
     'name': 'Stock internal transfer transit',
     'version': '0.1',
     'category': '',
-    'summary': "Process internal transfers using a dedicated transfer stock location.",
+    'summary': "Process internal transfers using a dedicated "
+               "transfer stock location.",
     'description': """
-Customize wizard from 'stock_internal_transfer' module to process internal transfers between stock locations using a
-dedicated 'transit' stock location.
+Customize wizard from 'stock_internal_transfer' module to process internal
+transfers between stock locations using a dedicated 'transit' stock location.
 Each transfer creates two pickings and corresponding moves.
-First picking is to move goods from their source stock location into the transit stock location (truck, ship etc) for transport.
-Second picking is to move goods from transit stock location to destination stock location on arrival.
+First picking is to move goods from their source stock location into the
+transit stock location (truck, ship etc) for transport.
+Second picking is to move goods from transit stock location to
+destination stock location on arrival.
 """,
     'author': 'initOS GmbH & Co. KG',
     'website': 'http://www.initos.com',

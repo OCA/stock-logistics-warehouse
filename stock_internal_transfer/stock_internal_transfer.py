@@ -26,22 +26,29 @@ from openerp.tools.translate import _
 
 
 class stock_internal_transfer_line(orm.TransientModel):
-
     _name = "stock.internal.transfer.line"
     _rec_name = 'product_id'
     _columns = {
-        'product_id': fields.many2one('product.product', string="Product", required=True, ondelete='CASCADE'),
-        'quantity': fields.float("Quantity", digits_compute=dp.get_precision('Product Unit of Measure'), required=True),
-        'product_uom': fields.many2one('product.uom', 'Unit of Measure', required=True, ondelete='CASCADE'),
-        'wizard_id': fields.many2one('stock.internal.transfer', string="Wizard", ondelete='CASCADE'),
+        'product_id': fields.many2one('product.product', string="Product",
+                                      required=True, ondelete='CASCADE'),
+        'quantity': fields.float(
+            "Quantity",
+            digits_compute=dp.get_precision('Product Unit of Measure'),
+            required=True),
+        'product_uom': fields.many2one('product.uom', 'Unit of Measure',
+                                       required=True, ondelete='CASCADE'),
+        'wizard_id': fields.many2one('stock.internal.transfer',
+                                     string="Wizard", ondelete='CASCADE'),
     }
 
     def onchange_product_id(self, cr, uid, ids, product_id, context=None):
         uom_id = False
         if product_id:
-            product = self.pool.get('product.product').browse(cr, uid, product_id, context=context)
+            product = self.pool.get('product.product').\
+                browse(cr, uid, product_id, context=context)
             uom_id = product.uom_id.id
         return {'value': {'product_uom': uom_id}}
+
 
 class stock_internal_transfer(orm.TransientModel):
     _name = 'stock.internal.transfer'
@@ -50,26 +57,36 @@ class stock_internal_transfer(orm.TransientModel):
         return [('default', _('Default')), ('force', _('Force Transfer'))]
 
     _columns = {
-        'location_id': fields.many2one('stock.location', string="Location", required=True, ondelete='CASCADE', domain=[('usage', '<>', 'view')]),
-        'location_dest_id': fields.many2one('stock.location', string="Dest. Location", required=True, ondelete='CASCADE', domain=[('usage', '<>', 'view')]),
-        'delivery_partner_id': fields.many2one('res.partner', string="Delivery Address", required=True),
-        'line_ids': fields.one2many('stock.internal.transfer.line', 'wizard_id', 'Move Lines'),
-        'mode': fields.selection( lambda self, *a, **kw: self._get_transfer_mode_sel(*a, **kw)
-                                  , string="Transfer Mode",),
+        'location_id': fields.many2one(
+            'stock.location', string="Location", required=True,
+            ondelete='CASCADE', domain=[('usage', '<>', 'view')]),
+        'location_dest_id': fields.many2one(
+            'stock.location', string="Dest. Location", required=True,
+            ondelete='CASCADE', domain=[('usage', '<>', 'view')]),
+        'delivery_partner_id': fields.many2one(
+            'res.partner', string="Delivery Address", required=True),
+        'line_ids': fields.one2many(
+            'stock.internal.transfer.line', 'wizard_id', 'Move Lines'),
+        'mode': fields.selection(
+            lambda self, *a, **kw:
+            self._get_transfer_mode_sel(*a, **kw), string="Transfer Mode", ),
     }
 
     _defaults = {
         'mode': 'default',
     }
 
-    def onchange_location_dest_id(self, cr, uid, ids, location_dest_id, context=None):
+    def onchange_location_dest_id(self, cr, uid, ids, location_dest_id,
+                                  context=None):
         if location_dest_id:
-            location = self.pool.get('stock.location').browse(cr, uid, location_dest_id, context=context)
+            location = self.pool.get('stock.location').\
+                browse(cr, uid, location_dest_id, context=context)
             return {'value': {'delivery_partner_id': location.partner_id.id}}
         return {}
 
     def _prepare_picking(self, cr, uid, ids, context=None):
-        assert len(ids) == 1, 'This function should only be used for a single id at a time.'
+        assert len(ids) == 1, \
+            'This function should only be used for a single id at a time.'
 
         wiz = self.browse(cr, uid, ids[0], context=context)
         picking_data = {
@@ -84,7 +101,8 @@ class stock_internal_transfer(orm.TransientModel):
         return picking_data
 
     def _create_move_lines(self, cr, uid, ids, picking_id, context=None):
-        assert len(ids) == 1, 'This function should only be used for a single id at a time.'
+        assert len(ids) == 1, \
+            'This function should only be used for a single id at a time.'
         move_obj = self.pool.get('stock.move')
         picking_model = self.pool.get('stock.picking')
 
@@ -105,7 +123,8 @@ class stock_internal_transfer(orm.TransientModel):
             move_obj.create(cr, uid, move_data)
 
     def _create_transfer(self, cr, uid, ids, context=None):
-        assert len(ids) == 1, 'This function should only be used for a single id at a time.'
+        assert len(ids) == 1, \
+            'This function should only be used for a single id at a time.'
         picking_obj = self.pool.get('stock.picking')
 
         picking_data = self._prepare_picking(cr, uid, ids, context=context)
@@ -119,7 +138,8 @@ class stock_internal_transfer(orm.TransientModel):
         picking_obj.action_assign(cr, uid, picking_id)
         return picking_id
 
-    def _trigger_workflow_for_delivery(self, cr, uid, ids, picking_ids, context=None):
+    def _trigger_workflow_for_delivery(self, cr, uid, ids, picking_ids,
+                                       context=None):
         wf_service = LocalService("workflow")
         for id in picking_ids:
             wf_service.trg_validate(uid, 'stock.picking',
@@ -137,14 +157,15 @@ class stock_internal_transfer(orm.TransientModel):
         }
 
     def create_transfer(self, cr, uid, ids, context=None):
-        assert len(ids) == 1, 'This function should only be used for a single id at a time.'
+        assert len(ids) == 1, \
+            'This function should only be used for a single id at a time.'
         wiz = self.browse(cr, uid, ids[0], context=context)
         picking_obj = self.pool.get('stock.picking')
 
         picking_ids = self._create_transfer(cr, uid, ids, context=context)
         if wiz.mode in ['force']:
             picking_obj.force_assign(cr, uid, picking_ids)
-            self._trigger_workflow_for_delivery(cr, uid, ids, picking_ids, context=context)
+            self._trigger_workflow_for_delivery(cr, uid, ids,
+                                                picking_ids, context=context)
 
         return self._show_picking(picking_ids)
-

@@ -22,29 +22,36 @@
 from openerp.osv import orm
 from openerp.netsvc import LocalService
 
+
 class stock_internal_transfer(orm.TransientModel):
     _inherit = 'stock.internal.transfer'
 
     def _prepare_picking(self, cr, uid, ids, context=None):
-        assert len(ids) == 1, 'This function should only be used for a single id at a time.'
+        assert len(ids) == 1,\
+            'This function should only be used for a single id at a time.'
 
-        picking_data = super(stock_internal_transfer, self)._prepare_picking(cr, uid, ids, context=context)
+        picking_data = super(stock_internal_transfer, self).\
+            _prepare_picking(cr, uid, ids, context=context)
         wiz = self.browse(cr, uid, ids[0], context=context)
 
-        no_transit = context and context.get('stock_internal_transfer_no_transit', False)
+        no_transit = context and \
+            context.get('stock_internal_transfer_no_transit', False)
         if wiz.mode == 'force' or no_transit:
             return picking_data
 
-        # update destination location to transfer using intermediate transit stock location
+        # update destination location to transfer using
+        # intermediate transit stock location
         model_data_obj = self.pool.get('ir.model.data')
-        stock_loc_transit_id = model_data_obj.get_object_reference(cr, uid, 'stock_internal_transfer_transit',
-                                                                   'stock_location_transit')[1]
+        stock_loc_transit_id = model_data_obj.\
+            get_object_reference(cr, uid, 'stock_internal_transfer_transit',
+                                 'stock_location_transit')[1]
 
         picking_data.update({'location_dest_id': stock_loc_transit_id, })
         return picking_data
 
     def _show_picking(self, picking_ids):
-        act_data = super(stock_internal_transfer, self)._show_picking(picking_ids)
+        act_data = super(stock_internal_transfer, self).\
+            _show_picking(picking_ids)
         act_data.update({
             'domain': [('id', 'in', picking_ids)],
             'view_mode': 'tree,form',
@@ -52,13 +59,16 @@ class stock_internal_transfer(orm.TransientModel):
         return act_data
 
     def _create_transfer(self, cr, uid, ids, context=None):
-        assert len(ids) == 1, 'This function should only be used for a single id at a time.'
+        assert len(ids) == 1,\
+            'This function should only be used for a single id at a time.'
         wiz = self.browse(cr, uid, ids[0], context=context)
         picking_model = self.pool.get('stock.picking')
 
         # create 1st picking: src loc -> transit loc
-        src2transit_id = super(stock_internal_transfer, self)._create_transfer(cr, uid, ids, context=context)[0]
-        src2transit = picking_model.browse(cr, uid, src2transit_id, context=context)
+        src2transit_id = super(stock_internal_transfer, self).\
+            _create_transfer(cr, uid, ids, context=context)[0]
+        src2transit = picking_model.\
+            browse(cr, uid, src2transit_id, context=context)
 
         res_ids = [src2transit_id]
 
@@ -69,10 +79,11 @@ class stock_internal_transfer(orm.TransientModel):
             picking_data.update({
                 'location_id': src2transit.location_dest_id.id,
                 'location_dest_id': wiz.location_dest_id.id,
-                })
+            })
 
             transit2dst_id = picking_model.create(cr, uid, picking_data)
-            transit2dst = picking_model.browse(cr, uid, transit2dst_id, context=context)
+            transit2dst = picking_model.\
+                browse(cr, uid, transit2dst_id, context=context)
 
             move_obj = self.pool.get('stock.move')
 
@@ -85,7 +96,7 @@ class stock_internal_transfer(orm.TransientModel):
                     'move_history_ids': [],
                     'move_history_ids2': []}
                 )
-                ## chain moves
+                # chain moves
                 move.write({
                     'move_dest_id': new_id,
                     'move_history_ids': [(4, new_id)]
@@ -94,8 +105,7 @@ class stock_internal_transfer(orm.TransientModel):
             wf_service = LocalService("workflow")
             wf_service.trg_validate(uid, 'stock.picking',
                                     transit2dst_id, 'button_confirm', cr)
-            #picking_model.action_assign(cr, uid, [transit2dst_id])
+            # picking_model.action_assign(cr, uid, [transit2dst_id])
             res_ids.append(transit2dst_id)
 
         return res_ids
-

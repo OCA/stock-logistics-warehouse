@@ -25,7 +25,8 @@
     'summary': 'Wizard to simplify creation of internal stock transfers',
     'description': """
 Wizard to simplify creation of internal transfers between stock locations.
-Creates stock moves and pickings to transfer selected goods between two stock locations.
+Creates stock moves and pickings to transfer selected goods between two
+stock locations.
 """,
     'author': 'initOS GmbH & Co. KG',
     'website': 'http://www.initos.com',
