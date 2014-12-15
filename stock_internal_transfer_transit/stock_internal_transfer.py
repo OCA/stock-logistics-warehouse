@@ -30,7 +30,7 @@ class StockInternalTransfer(orm.TransientModel):
         assert len(ids) == 1,\
             'This function should only be used for a single id at a time.'
 
-        picking_data = super(stock_internal_transfer, self).\
+        picking_data = super(StockInternalTransfer, self).\
             _prepare_picking(cr, uid, ids, context=context)
         wiz = self.browse(cr, uid, ids[0], context=context)
 
@@ -50,7 +50,7 @@ class StockInternalTransfer(orm.TransientModel):
         return picking_data
 
     def _show_picking(self, picking_ids):
-        act_data = super(stock_internal_transfer, self).\
+        act_data = super(StockInternalTransfer, self).\
             _show_picking(picking_ids)
         act_data.update({
             'domain': [('id', 'in', picking_ids)],
@@ -65,7 +65,7 @@ class StockInternalTransfer(orm.TransientModel):
         picking_model = self.pool['stock.picking']
 
         # create 1st picking: src loc -> transit loc
-        src2transit_id = super(stock_internal_transfer, self).\
+        src2transit_id = super(StockInternalTransfer, self).\
             _create_transfer(cr, uid, ids, context=context)[0]
         src2transit = picking_model.\
             browse(cr, uid, src2transit_id, context=context)
