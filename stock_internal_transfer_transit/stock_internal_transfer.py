@@ -41,7 +41,7 @@ class stock_internal_transfer(orm.TransientModel):
 
         # update destination location to transfer using
         # intermediate transit stock location
-        model_data_obj = self.pool.get('ir.model.data')
+        model_data_obj = self.pool['ir.model.data']
         stock_loc_transit_id = model_data_obj.\
             get_object_reference(cr, uid, 'stock_internal_transfer_transit',
                                  'stock_location_transit')[1]
@@ -62,7 +62,7 @@ class stock_internal_transfer(orm.TransientModel):
         assert len(ids) == 1,\
             'This function should only be used for a single id at a time.'
         wiz = self.browse(cr, uid, ids[0], context=context)
-        picking_model = self.pool.get('stock.picking')
+        picking_model = self.pool['stock.picking']
 
         # create 1st picking: src loc -> transit loc
         src2transit_id = super(stock_internal_transfer, self).\
@@ -81,11 +81,12 @@ class stock_internal_transfer(orm.TransientModel):
                 'location_dest_id': wiz.location_dest_id.id,
             })
 
-            transit2dst_id = picking_model.create(cr, uid, picking_data)
+            transit2dst_id = picking_model.\
+                create(cr, uid, picking_data, context=context)
             transit2dst = picking_model.\
                 browse(cr, uid, transit2dst_id, context=context)
 
-            move_obj = self.pool.get('stock.move')
+            move_obj = self.pool['stock.move']
 
             for move in src2transit.move_lines:
                 new_id = move_obj.copy(cr, uid, move.id, {

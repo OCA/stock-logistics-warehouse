@@ -44,7 +44,7 @@ class stock_internal_transfer_line(orm.TransientModel):
     def onchange_product_id(self, cr, uid, ids, product_id, context=None):
         uom_id = False
         if product_id:
-            product = self.pool.get('product.product').\
+            product = self.pool['product.product'].\
                 browse(cr, uid, product_id, context=context)
             uom_id = product.uom_id.id
         return {'value': {'product_uom': uom_id}}
@@ -79,7 +79,7 @@ class stock_internal_transfer(orm.TransientModel):
     def onchange_location_dest_id(self, cr, uid, ids, location_dest_id,
                                   context=None):
         if location_dest_id:
-            location = self.pool.get('stock.location').\
+            location = self.pool['stock.location'].\
                 browse(cr, uid, location_dest_id, context=context)
             return {'value': {'delivery_partner_id': location.partner_id.id}}
         return {}
@@ -103,8 +103,8 @@ class stock_internal_transfer(orm.TransientModel):
     def _create_move_lines(self, cr, uid, ids, picking_id, context=None):
         assert len(ids) == 1, \
             'This function should only be used for a single id at a time.'
-        move_obj = self.pool.get('stock.move')
-        picking_model = self.pool.get('stock.picking')
+        move_obj = self.pool['stock.move']
+        picking_model = self.pool['stock.picking']
 
         wizard = self.browse(cr, uid, ids[0], context=context)
         picking = picking_model.browse(cr, uid, picking_id, context=context)
@@ -120,15 +120,15 @@ class stock_internal_transfer(orm.TransientModel):
                 'location_dest_id': picking.location_dest_id.id,
                 'name': line.product_id.name_get()[0][1],
             }
-            move_obj.create(cr, uid, move_data)
+            move_obj.create(cr, uid, move_data, context=context)
 
     def _create_transfer(self, cr, uid, ids, context=None):
         assert len(ids) == 1, \
             'This function should only be used for a single id at a time.'
-        picking_obj = self.pool.get('stock.picking')
+        picking_obj = self.pool['stock.picking']
 
         picking_data = self._prepare_picking(cr, uid, ids, context=context)
-        picking_id = picking_obj.create(cr, uid, picking_data)
+        picking_id = picking_obj.create(cr, uid, picking_data, context=context)
         self._create_move_lines(cr, uid, ids, picking_id, context=context)
 
         wf_service = LocalService("workflow")
@@ -160,7 +160,7 @@ class stock_internal_transfer(orm.TransientModel):
         assert len(ids) == 1, \
             'This function should only be used for a single id at a time.'
         wiz = self.browse(cr, uid, ids[0], context=context)
-        picking_obj = self.pool.get('stock.picking')
+        picking_obj = self.pool['stock.picking']
 
         picking_ids = self._create_transfer(cr, uid, ids, context=context)
         if wiz.mode in ['force']:
