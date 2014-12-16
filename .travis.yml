@@ -21,7 +21,6 @@ install:
   - git clone https://github.com/OCA/stock-logistics-barcode -b ${VERSION} $HOME/stock-logistics-barcode
 
 script:
-    - travis_run_flake8
     - travis_run_tests
 
 after_success:
