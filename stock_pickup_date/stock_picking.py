@@ -26,7 +26,7 @@ from openerp.osv import orm, fields
 class StockPicking(orm.Model):
     _inherit = 'stock.picking'
     _columns = {
-        'date_pickup': fields.datetime(
+        'pickup_date': fields.datetime(
             'Pickup Date', required=False, select=True,
             help="Date of Pickup by Carrier or client"),
     }
@@ -36,7 +36,7 @@ class StockPickingOut(orm.Model):
     _inherit = 'stock.picking.out'
     _table = 'stock_picking'
     _columns = {
-        'date_pickup': fields.datetime(
+        'pickup_date': fields.datetime(
             'Pickup Date', required=False, select=True,
             help="Date of Pickup by Carrier or client"),
     }

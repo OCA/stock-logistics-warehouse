@@ -1,13 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
     <record model="ir.ui.view" id="stock_move_tree">
-      <field name="name">Stock Moves Tree +date_pickup</field>
+      <field name="name">Stock Moves Tree +pickup_date</field>
       <field name="model">stock.move</field>
       <field name="inherit_id" ref="stock.view_move_tree_reception_picking" />
       <field name="arch" type="xml">
         <xpath expr="//field[@name='date_expected']" position="after">
-          <field name="date_pickup" />
+          <field name="pickup_date" />
         </xpath>
       </field>
     </record>
@@ -20,23 +20,23 @@
         <xpath expr="//field[@name='prodlot_id']" position="after">
           <group expand="0" string="Pickup Date">
             <filter name="pickup_today" string="Today"
-              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=1)).strftime('%%Y-%%m-%%d'))]" />
+              domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=1)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_2days" string="2 days"
-              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=2)).strftime('%%Y-%%m-%%d'))]" />
+              domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=2)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_3days" string="3 days"
-              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=3)).strftime('%%Y-%%m-%%d'))]" />
+              domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=3)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_4days" string="4 days"
-              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=4)).strftime('%%Y-%%m-%%d'))]" />
+              domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=4)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_7days" string="7 days"
-              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=7)).strftime('%%Y-%%m-%%d'))]" />
+              domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=7)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_14days" string="14 days"
-              domain="['&amp;', ('date_pickup', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('date_pickup', '&lt;', (context_today() + relativedelta(days=14)).strftime('%%Y-%%m-%%d'))]" />
+              domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=14)).strftime('%%Y-%%m-%%d'))]" />
           </group>
         </xpath>
       </field>

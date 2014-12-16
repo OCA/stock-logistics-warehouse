@@ -62,7 +62,8 @@ Products
 
 Contributors
 ------------
-* Vincent Vinet (vincent.vinet@savoirfairelinux.com)
+* Mathieu Benoit <mathieu.benoit@savoirfairelinux.com>
+* Vincent Vinet <vincent.vinet@savoirfairelinux.com>
 """,
     'depends': [
         'stock',

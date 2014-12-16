@@ -31,7 +31,7 @@ class StockMove(orm.Model):
             return {}
         cr.execute(
             """
-            SELECT sm.id, sp.date_pickup
+            SELECT sm.id, sp.pickup_date
             FROM stock_move sm
             LEFT JOIN stock_picking sp ON sm.picking_id = sp.id
             WHERE sm.id IN %s""",
@@ -42,20 +42,23 @@ class StockMove(orm.Model):
             for (id, date) in cr.fetchall()
         )
 
+    def _get_moves_from_picking(self, cr, uid, ids, context=None):
+        return self.pool['stock.move'].search(
+            cr, uid, [('picking_id', 'in', tuple(ids))], context=context)
+
     _columns = {
-        'date_pickup': fields.function(
+        'pickup_date': fields.function(
             _get_pickup_date, type="datetime", string="Pickup Date",
             store={
                 "stock.move": (
                     lambda self, cr, uid, ids, context=None: ids,
                     ['picking_id'], 10),
-                "stock.picking": (
-                    lambda self, cr, uid, ids, context=None: (
-                        self.pool["stock.move"].search(
-                            cr, uid, [('picking_id', 'in', tuple(ids))],
-                            context=context,
-                        )),
-                    ['date_pickup'], 10),
+                "stock.picking": (_get_moves_from_picking,
+                                  ['pickup_date'], 10),
+                "stock.picking.out": (_get_moves_from_picking,
+                                      ['pickup_date'], 10),
+                "stock.picking.in": (_get_moves_from_picking,
+                                     ['pickup_date'], 10),
             },
         ),
     }
