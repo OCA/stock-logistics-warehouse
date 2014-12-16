@@ -33,12 +33,13 @@ class AssignManualQuants(models.TransientModel):
     @api.one
     @api.constrains('quants_lines')
     def check_qty(self):
-        total_qty = self.lines_qty()
-        move = self.env['stock.move'].browse(self.env.context['active_id'])
-        if total_qty > move.product_uom_qty:
-            raise exceptions.Warning(_('Error'),
-                                     _('Quantity is higher'
-                                       ' than the needed one'))
+        if self.quants_lines:
+            total_qty = self.lines_qty()
+            move = self.env['stock.move'].browse(self.env.context['active_id'])
+            if total_qty > move.product_uom_qty:
+                raise exceptions.Warning(_('Error'),
+                                         _('Quantity is higher'
+                                           ' than the needed one'))
 
     @api.depends('quants_lines')
     def get_move_qty(self):
@@ -90,10 +91,15 @@ class AssignManualQuantsLines(models.TransientModel):
             if not self.selected:
                 self.qty = False
             if self.selected and self.qty == 0:
-                self.qty = self.quant.qty
+                quant_qty = self.quant.qty
+                remaining_qty = self.assign_wizard.move_qty
+                if quant_qty < remaining_qty:
+                    self.qty = quant_qty
+                else:
+                    self.qty = remaining_qty
 
     assign_wizard = fields.Many2one('assign.manual.quants', string='Move',
-                                    required=True)
+                                    required=True, ondelete="cascade")
     quant = fields.Many2one('stock.quant', string="Quant", required=True)
     qty = fields.Float(string='QTY')
     selected = fields.Boolean(string="Select")
