@@ -21,7 +21,7 @@
 ##############################################################################
 
 {
-    'name': 'Stock Pickup Date',
+    'name': 'Stock Picking Pickup Date',
     'version': '0.1',
     'author': 'Savoir-faire Linux',
     'maintainer': 'Savoir-faire Linux',
