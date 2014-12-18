@@ -21,22 +21,22 @@
           <group expand="0" string="Pickup Date">
             <filter name="pickup_today" string="Today"
               domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=1)).strftime('%%Y-%%m-%%d'))]" />
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=0)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_2days" string="2 days"
               domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=2)).strftime('%%Y-%%m-%%d'))]" />
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=1)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_3days" string="3 days"
               domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=3)).strftime('%%Y-%%m-%%d'))]" />
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=2)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_4days" string="4 days"
               domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=4)).strftime('%%Y-%%m-%%d'))]" />
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=3)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_7days" string="7 days"
               domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=7)).strftime('%%Y-%%m-%%d'))]" />
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=6)).strftime('%%Y-%%m-%%d'))]" />
             <filter name="pickup_14days" string="14 days"
               domain="['&amp;', ('pickup_date', '&gt;=', context_today().strftime('%%Y-%%m-%%d')),
-                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=14)).strftime('%%Y-%%m-%%d'))]" />
+                                ('pickup_date', '&lt;', (context_today() + relativedelta(days=13)).strftime('%%Y-%%m-%%d'))]" />
           </group>
         </xpath>
       </field>
