@@ -1,6 +1,6 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-# 	* stock_pickup_date
+# 	* stock_picking_pickup_date
 #
 msgid ""
 msgstr ""
@@ -17,63 +17,63 @@ msgstr ""
 "Language: fr_CA\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: view:stock.move:0 view:stock.picking.out:0
 msgid "14 days"
 msgstr "14 jours"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: view:stock.move:0 view:stock.picking.out:0
 msgid "2 days"
 msgstr "2 jours"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: view:stock.move:0 view:stock.picking.out:0
 msgid "3 days"
 msgstr "3 jours"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: view:stock.move:0 view:stock.picking.out:0
 msgid "4 days"
 msgstr "4 jours"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: view:stock.move:0 view:stock.picking.out:0
 msgid "7 days"
 msgstr "7 jours"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: help:stock.picking,date_pickup:0 help:stock.picking.out,date_pickup:0
 msgid "Date of Pickup by Carrier or client"
 msgstr "Date de ramassage par le transporteur ou le client"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: code:_description:0
-#: model:ir.model,name:stock_pickup_date.model_stock_picking_out
+#: model:ir.model,name:stock_picking_pickup_date.model_stock_picking_out
 #, python-format
 msgid "Delivery Orders"
 msgstr "Bons de livraison"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: code:_description:0
-#: model:ir.model,name:stock_pickup_date.model_stock_picking
+#: model:ir.model,name:stock_picking_pickup_date.model_stock_picking
 #, python-format
 msgid "Picking List"
 msgstr "Liste de prélèvement"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: view:stock.move:0 field:stock.move,date_pickup:0
 #: field:stock.picking,date_pickup:0 field:stock.picking.out,date_pickup:0
 msgid "Pickup Date"
 msgstr "Date de ramassage"
 
-#. module: stock_pickup_date
-#: code:_description:0 model:ir.model,name:stock_pickup_date.model_stock_move
+#. module: stock_picking_pickup_date
+#: code:_description:0 model:ir.model,name:stock_picking_pickup_date.model_stock_move
 #, python-format
 msgid "Stock Move"
 msgstr "Mouvement de stock"
 
-#. module: stock_pickup_date
+#. module: stock_picking_pickup_date
 #: view:stock.move:0 view:stock.picking.out:0
 msgid "Today"
 msgstr "Aujourd'hui"
