@@ -7,11 +7,7 @@ class StockInventory(models.Model):
 
     @api.model
     def _get_available_filters(self):
-        cr = self._cr
-        uid = self._uid
-        context = self._context
-        res = super(StockInventory, self)._get_available_filters(cr, uid,
-                                                                 context)
+        res = super(StockInventory, self)._get_available_filters()
         res.append(('file', _('By File')))
         return res
 
