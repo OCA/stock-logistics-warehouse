@@ -26,17 +26,14 @@ from openerp.osv import orm, fields
 
 class product_immediately_usable(orm.Model):
     """
-    Inherit Product in order to add an "immediately usable quantity"
-    stock field
     Immediately usable quantity is : real stock - outgoing qty
     """
-    _inherit = 'product.product'
+    _inherit = 'product.template'
 
     def _product_available(self, cr, uid, ids, field_names=None,
                            arg=False, context=None):
-        """
-        Get super() _product_available and compute immediately_usable_qty
-        """
+       
+        # Get super() _product_available and compute immediately_usable_qty
         # We need available and outgoing quantities to compute
         # immediately usable quantity.
         # When immediately_usable_qty is displayed but
@@ -55,7 +52,7 @@ class product_immediately_usable(orm.Model):
         if 'immediately_usable_qty' in field_names:
             for product_id, stock_qty in res.iteritems():
                 res[product_id]['immediately_usable_qty'] = \
-                    stock_qty['qty_available'] + stock_qty['outgoing_qty']
+                    stock_qty['qty_available'] - stock_qty['outgoing_qty']
 
         return res
 
