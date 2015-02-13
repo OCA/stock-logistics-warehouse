@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="stock_move_tree_inh_pickingpartner" model="ir.ui.view">
+        <field name="name">stock.move.tree.inh.pickingpartner</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.stock_move_tree" />
+        <field name="arch" type="xml">
+            <field name="picking_id" position="after">
+                <field name="picking_partner" />
+            </field>
+        </field>
+    </record>
+    <record id="view_move_tree_inh_pickingpartner" model="ir.ui.view">
+        <field name="name">view_move_tree.inh.pickingpartner</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="picking_id" position="after">
+                <field name="picking_partner" />
+            </field>
+        </field>
+    </record>
+    <record id="view_move_picking_tree_inh_pickingpartner" model="ir.ui.view">
+        <field name="name">view.move.picking.tree.inh.pickingpartner</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_tree" />
+        <field name="arch" type="xml">
+            <field name="picking_id" position="after">
+                <field name="picking_partner" invisible="1"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_move_search_inh_pickingpartner" model="ir.ui.view">
+        <field name="name">view.move.search.inh.pickingpartner</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_search" />
+        <field name="arch" type="xml">
+            <filter string="Product" position="before">
+                <filter string="Picking Partner" name="by_prod_parent_lot" domain="[]"  context="{'group_by':'prod_parent_lot'}"/>
+            </filter>
+        </field>
+    </record>
+    </data>
+</openerp>
