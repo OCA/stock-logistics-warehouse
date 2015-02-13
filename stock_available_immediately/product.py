@@ -26,17 +26,14 @@ from openerp.osv import orm, fields
 
 class product_immediately_usable(orm.Model):
     """
-    Inherit Product template in order to add an "immediately usable quantity"
-    stock field
     Immediately usable quantity is : real stock - outgoing qty
     """
     _inherit = 'product.template'
 
     def _product_available(self, cr, uid, ids, field_names=None,
                            arg=False, context=None):
-        """
-        Get super() _product_available and compute immediately_usable_qty
-        """
+       
+        # Get super() _product_available and compute immediately_usable_qty
         # We need available and outgoing quantities to compute
         # immediately usable quantity.
         # When immediately_usable_qty is displayed but
