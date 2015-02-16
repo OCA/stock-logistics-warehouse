@@ -123,11 +123,11 @@ class SaleOrderLine(models.Model):
     def _is_stock_reservable(self):
         for line in self:
             reservable = False
-            if (not (line.state != 'draft'
-                     or line._get_procure_method() == 'make_to_order'
-                     or not line.product_id
-                     or line.product_id.type == 'service')
-                    and not line.reservation_ids):
+            if (not (line.state != 'draft' or
+                     line._get_procure_method() == 'make_to_order' or
+                     not line.product_id or
+                     line.product_id.type == 'service') and
+                    not line.reservation_ids):
                 reservable = True
             line.is_stock_reservable = reservable
 
