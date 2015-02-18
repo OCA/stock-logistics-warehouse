@@ -23,7 +23,6 @@ from openerp.addons import decimal_precision as dp
 from openerp.osv import orm, fields
 
 
-<<<<<<< HEAD:stock_available_immediately/product.py
 class ProductTemplate(orm.Model):
     """
     Immediately usable quantity is : real stock - outgoing qty
@@ -32,7 +31,7 @@ class ProductTemplate(orm.Model):
 
     def _product_available(self, cr, uid, ids, field_names=None,
                            arg=False, context=None):
-        res = super(Product, self)._product_available(
+        res = super(ProductTemplate, self)._product_available(
             cr, uid, ids, field_names, arg, context)
 
         if 'immediately_usable_qty' in field_names:
