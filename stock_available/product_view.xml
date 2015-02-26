@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--
-  stock available_immediately for OpenERP
-  Author Guewen Baconnier. Copyright Camptocamp SA
-  Copyright (C) 2011 Akretion Sébastien BEAU <sebastien.beau@akretion.com>
-  The licence is in the file __openerp__.py
--->
-
 <openerp>
     <data>
-        <record model="ir.ui.view" id="view_normal_stock_active_qty_form">
-            <field name="name">product.normal.stock.active.qty.form.inherit</field>
+        <record model="ir.ui.view" id="view_stock_available_form">
+            <field name="name">Stock available to promise (form)</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="stock.view_normal_procurement_locations_form"/>
             <field name="arch" type="xml">
                 <field name="virtual_available" position="after">
                     <newline/>
                     <field name="immediately_usable_qty" />
-                </field>   
+                </field>
             </field>
         </record>
         
-        <record model="ir.ui.view" id="product_product_tree_view">
+        <record model="ir.ui.view" id="view_stock_available_tree">
             <field name="name">product_immediately_usable.product_product_tree_view</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_product_tree_view"/>
@@ -30,12 +22,22 @@
                     <tree position="attributes">
                         <attribute name="colors">red:immediately_usable_qty&lt;0;blue:immediately_usable_qty&gt;=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
                     </tree>
-                    <field name="virtual_available" position="replace">
+                    <field name="virtual_available" position="after">
                         <field name="immediately_usable_qty" />
                     </field>
                 </data>
             </field>
         </record>
 
+        <record model="ir.ui.view" id="view_stock_available_kanban">
+            <field name="name">Product Kanban Stock</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.product_kanban_stock_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='virtual_available']/.." position="replace">
+                    <li t-if="record.type.raw_value != 'service'">Available to promise: <field name="immediately_usable_qty"/> <field name="uom_id"/></li>
+                </xpath>
+            </field>
+        </record>
     </data>
 </openerp>
