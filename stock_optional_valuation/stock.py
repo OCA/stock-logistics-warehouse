@@ -39,9 +39,9 @@ class stock_move(orm.Model):
         _super = super(stock_move, self)
         location = move.location_id
         location_dest = move.location_dest_id
-        if (location.company_id
-                and location_dest.company_id
-                and location.company_id != location_dest.company_id):
+        if (location.company_id and
+                location_dest.company_id and
+                location.company_id != location_dest.company_id):
             return _super._create_product_valuation_moves(
                 cr, uid, move, context=context)
         if (move.location_id.usage == 'internal' or

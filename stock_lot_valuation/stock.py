@@ -61,10 +61,8 @@ class stock_production_lot(orm.Model):
                 currency_id = False
                 if lot.company_id and lot.company_id.currency_id:
                     currency_id = lot.company_id.currency_id.id
-                elif (
-                    lot.product_id.company_id
-                    and lot.product_id.company_id.currency_id
-                ):
+                elif (lot.product_id.company_id and
+                        lot.product_id.company_id.currency_id):
                     currency_id = lot.product_id.company_id.currency_id.id
                 if currency_id:
                     res[lot.id] = self.pool.get('res.currency').compute(
@@ -134,10 +132,8 @@ class stock_production_lot(orm.Model):
                     # Accounting Entries
                     #
                     product = lot.product_id
-                    if (
-                        not journal_id
-                        and product.categ_id.property_stock_journal
-                    ):
+                    if (not journal_id and
+                            product.categ_id.property_stock_journal):
                         journal_id = product.categ_id.property_stock_journal.id
                     if not journal_id:
                         raise orm.except_orm(
@@ -287,8 +283,8 @@ class stock_picking(orm.Model):
                 # Get the standard price
                 amount_unit = lot.price_get(context=context)[lot.id]
                 new_std_price = (
-                    ((amount_unit * lot.stock_available)
-                        + (new_price * qty)) / (lot.stock_available + qty)
+                    ((amount_unit * lot.stock_available) +
+                     (new_price * qty)) / (lot.stock_available + qty)
                 )
 
             lot_obj.write(
@@ -323,10 +319,8 @@ class stock_picking(orm.Model):
                 ):
                     self.compute_price(
                         cr, uid, partial_datas, move, context=context)
-                if (
-                    move.product_id.lot_valuation and product_price
-                    and not lot.standard_price
-                ):
+                if (move.product_id.lot_valuation and product_price and
+                        not lot.standard_price):
                     new_price = currency_obj.compute(
                         cr, uid, product_currency,
                         move.company_id.currency_id.id, product_price)
