@@ -43,8 +43,8 @@ class ProductProduct(orm.Model):
         # Doing this lets us change the function and not redefine fields
         super(ProductProduct, self).__init__(pool, cr)
         for coldef in self._columns.values():
-            if (isinstance(coldef, fields.function)
-                    and coldef._multi == 'qty_available'):
+            if (isinstance(coldef, fields.function) and
+                    coldef._multi == 'qty_available'):
                 coldef._fnct = _product_available_fnct
 
     def _product_available(self, cr, uid, ids, field_names=None, arg=False,
@@ -73,8 +73,8 @@ class ProductProduct(orm.Model):
         # We need it to compute immediately_usable_qty
         # We DO want to change the caller's list so we're NOT going to
         # work on a copy of field_names.
-        if ('virtual_available' not in field_names
-                and 'immediately_usable_qty' in field_names):
+        if ('virtual_available' not in field_names and
+                'immediately_usable_qty' in field_names):
             field_names.append('virtual_available')
 
         # Compute the core quantities
