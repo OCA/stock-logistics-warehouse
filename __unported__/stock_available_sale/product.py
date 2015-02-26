@@ -67,8 +67,8 @@ class ProductProduct(orm.Model):
                 INNER JOIN sale_order
                      ON (sale_order_line.order_id = sale_order.id)
                 WHERE product_id in %s
-                      AND sale_order_line.state = 'draft' """
-                + date_str + shop_str +
+                      AND sale_order_line.state = 'draft' """ +
+                date_str + shop_str +
                 "GROUP BY sale_order_line.product_id, product_uom",
                 (tuple(ids),) + date_args + shop_args)
             results = cr.fetchall()
