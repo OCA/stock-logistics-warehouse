@@ -28,12 +28,6 @@
         'sale_order_dates',
         'sale_stock',
     ],
-    'description': """
-This module computes the quoted quantity of the Products, and subtracts it from
-the quantities available to promise .
-
-"Quoted" is defined as the sum of the quantities of this product in Quotations,
-taking the context's shop or warehouse into account.""",
     'data': [
         'product_view.xml',
     ],
