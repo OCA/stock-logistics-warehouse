@@ -18,17 +18,15 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class StockConfig(orm.TransientModel):
+class StockConfig(models.TransientModel):
     """Add options to easily install the submodules"""
     _inherit = 'stock.config.settings'
 
-    _columns = {
-        'module_stock_available_immediately': fields.boolean(
-            'Exclude incoming goods',
-            help="This will subtract incoming quantities from the quantities "
-                 "available to promise.\n"
-                 "This installs the module stock_available_immediately."),
-    }
+    module_stock_available_immediately = fields.Boolean(
+        string='Exclude incoming goods',
+        help="This will subtract incoming quantities from the quantities "
+             "available to promise.\n"
+             "This installs the module stock_available_immediately.")
