@@ -19,106 +19,18 @@
 #
 ##############################################################################
 
-from openerp.addons import decimal_precision as dp
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 
 
-class ProductTemplate(orm.Model):
-    """
-    Immediately usable quantity is : real stock - outgoing qty
-    """
+class ProductTemplate(models.Model):
+    """Subtract incoming qty from immediately_usable_qty"""
     _inherit = 'product.template'
 
-    def _product_available(self, cr, uid, ids, field_names=None,
-                           arg=False, context=None):
-        res = super(ProductTemplate, self)._product_available(
-            cr, uid, ids, field_names, arg, context)
+    @api.depends('virtual_available')
+    def _product_available(self):
+        """Ignore the incoming goods in the quantity available to promise"""
+        super(ProductTemplate, self)._product_available()
+        for product in self:
+            product.immediately_usable_qty -= product.incoming_qty
 
-        if 'immediately_usable_qty' in field_names:
-            for product_id, stock_qty in res.iteritems():
-                res[product_id]['immediately_usable_qty'] = \
-                    stock_qty['qty_available'] - stock_qty['outgoing_qty']
-
-        return res
-
-    _columns = {
-        'qty_available': fields.function(
-            _product_available,
-            multi='qty_available',
-            type='float',
-            digits_compute=dp.get_precision('Product UoM'),
-            string='Quantity On Hand',
-            help="Current quantity of products.\n"
-                 "In a context with a single Stock Location, this includes "
-                 "goods stored at this Location, or any of its children.\n"
-                 "In a context with a single Warehouse, this includes "
-                 "goods stored in the Stock Location of this Warehouse, "
-                 "or any "
-                 "of its children.\n"
-                 "In a context with a single Shop, this includes goods "
-                 "stored in the Stock Location of the Warehouse of this Shop, "
-                 "or any of its children.\n"
-                 "Otherwise, this includes goods stored in any Stock Location "
-                 "typed as 'internal'."),
-        'virtual_available': fields.function(
-            _product_available,
-            multi='qty_available',
-            type='float',
-            digits_compute=dp.get_precision('Product UoM'),
-            string='Quantity Available',
-            help="Forecast quantity (computed as Quantity On Hand "
-                 "- Outgoing + Incoming)\n"
-                 "In a context with a single Stock Location, this includes "
-                 "goods stored at this Location, or any of its children.\n"
-                 "In a context with a single Warehouse, this includes "
-                 "goods stored in the Stock Location of this Warehouse, "
-                 "or any "
-                 "of its children.\n"
-                 "In a context with a single Shop, this includes goods "
-                 "stored in the Stock Location of the Warehouse of this Shop, "
-                 "or any of its children.\n"
-                 "Otherwise, this includes goods stored in any Stock Location "
-                 "typed as 'internal'."),
-        'incoming_qty': fields.function(
-            _product_available,
-            multi='qty_available',
-            type='float',
-            digits_compute=dp.get_precision('Product UoM'),
-            string='Incoming',
-            help="Quantity of products that are planned to arrive.\n"
-                 "In a context with a single Stock Location, this includes "
-                 "goods arriving to this Location, or any of its children.\n"
-                 "In a context with a single Warehouse, this includes "
-                 "goods arriving to the Stock Location of this Warehouse, or "
-                 "any of its children.\n"
-                 "In a context with a single Shop, this includes goods "
-                 "arriving to the Stock Location of the Warehouse of this "
-                 "Shop, or any of its children.\n"
-                 "Otherwise, this includes goods arriving to any Stock "
-                 "Location typed as 'internal'."),
-        'outgoing_qty': fields.function(
-            _product_available,
-            multi='qty_available',
-            type='float',
-            digits_compute=dp.get_precision('Product UoM'),
-            string='Outgoing',
-            help="Quantity of products that are planned to leave.\n"
-                 "In a context with a single Stock Location, this includes "
-                 "goods leaving from this Location, or any of its children.\n"
-                 "In a context with a single Warehouse, this includes "
-                 "goods leaving from the Stock Location of this Warehouse, or "
-                 "any of its children.\n"
-                 "In a context with a single Shop, this includes goods "
-                 "leaving from the Stock Location of the Warehouse of this "
-                 "Shop, or any of its children.\n"
-                 "Otherwise, this includes goods leaving from any Stock "
-                 "Location typed as 'internal'."),
-        'immediately_usable_qty': fields.function(
-            _product_available,
-            digits_compute=dp.get_precision('Product UoM'),
-            type='float',
-            string='Immediately Usable',
-            multi='qty_available',
-            help="Quantity of products really available for sale."
-                 "Computed as: Quantity On Hand - Outgoing."),
-    }
+    immediately_usable_qty = fields.Float(compute='_product_available')
