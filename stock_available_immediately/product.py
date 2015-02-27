@@ -19,41 +19,18 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models, fields, api
 
-from openerp.osv import orm, fields
 
-class product_immediately_usable(orm.Model):
-    """Subtract incoming qty from immediately_usable_qty
+class ProductTemplate(models.Model):
+    """Subtract incoming qty from immediately_usable_qty"""
+    _inherit = 'product.template'
 
-    We don't need to override the function fields, the module stock_available
-    takes of it for us.
-
-    Side-effect warning: This method may change the list passed as the
-        field_names parameter, which will then alter the caller's state."""
-    _inherit = 'product.product'
-
-    def _product_available(self, cr, uid, ids, field_names=None,
-                           arg=False, context=None):
+    @api.depends('virtual_available')
+    def _product_available(self):
         """Ignore the incoming goods in the quantity available to promise"""
-        # If we didn't get a field_names list, there's nothing to do
-        if field_names is None or 'immediately_usable_qty' not in field_names:
-            return super(product_immediately_usable, self)._product_available(
-                cr, uid, ids, field_names=field_names, arg=arg,
-                context=context)
+        super(ProductTemplate, self)._product_available()
+        for product in self:
+            product.immediately_usable_qty -= product.incoming_qty
 
-        # We need available and incoming quantities to compute
-        # immediately usable quantity.
-        # We DO want to change the caller's list so we're NOT going to
-        # work on a copy of field_names.
-        field_names.append('qty_available')
-        field_names.append('incoming_qty')
-
-        res = super(product_immediately_usable, self)._product_available(
-            cr, uid, ids, field_names=field_names, arg=arg, context=context)
-
-        for stock_qty in res.itervalues():
-            stock_qty['immediately_usable_qty'] -= \
-                stock_qty['incoming_qty']
-
-        return res
+    immediately_usable_qty = fields.Float(compute='_product_available')

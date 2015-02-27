@@ -24,16 +24,6 @@
     'author': u'Numérigraphe',
     'category': 'Warehouse',
     'depends': ['stock'],
-    'description': """
-Stock available to promise
-==========================
-This module proposes several options to compute the quantity available to
-promise for each product.
-This quantity is based on the projected stock and, depending on the
-configuration, it can account for various data such as sales quotations or
-immediate production capacity.
-This can be configured in the menu Settings > Configuration > Warehouse.
-""",
     'license': 'AGPL-3',
     'data': [
         'product_view.xml',

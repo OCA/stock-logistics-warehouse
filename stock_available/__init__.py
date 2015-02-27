@@ -20,5 +20,3 @@
 
 from . import product
 from . import res_config
-
-from .product import _product_available_fnct
