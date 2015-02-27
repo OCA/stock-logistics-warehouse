@@ -70,11 +70,21 @@ class product_product(orm.Model):
                     if 'immediately_usable_qty' in field_names:
                         res[product.id]['immediately_usable_qty'] += min_qty
 
-        return res
+        return self._update_virtual_available(
+            cr, SUPERUSER_ID, res, context=context)
 
     def _compute_potential_qty_from_bom(self, cr, uid, bom_id, to_uom,
                                         context=None):
         """Compute the potential qty from BoMs with components available"""
+        # It's important that we do NOT propagate virtual_is_immediately_usable
+        # If virtual_is_immediately_usable was True:
+        # - the potential for all levels would be computed (but we don't want
+        #   that unless we can integrate the production delays)
+        # - an endless recursion would happen because the ORM "prefetches" the
+        #   virtual stock (=available to promise) for the components (fine)
+        #   AND the final product we're already computing (bad recusion).
+        context = dict(context, virtual_is_immediately_usable=False)
+
         bom_obj = self.pool['mrp.bom']
         uom_obj = self.pool['product.uom']
         if context is None:

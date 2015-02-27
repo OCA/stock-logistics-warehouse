@@ -57,4 +57,4 @@ class product_immediately_usable(orm.Model):
             stock_qty['immediately_usable_qty'] -= \
                 stock_qty['incoming_qty']
 
-        return res
+        return self._update_virtual_available(cr, uid, res, context=context)
