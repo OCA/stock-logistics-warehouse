@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_stock_configuration" model="ir.ui.view">
+            <field name="name">Stock settings: quantity available to promise</field>
+            <field name="model">stock.config.settings</field>
+            <field name="inherit_id" ref="stock.view_stock_config_settings" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//group[last()]" position="after">
+                        <group>
+                            <label for="id" string="Stock available to promise" />
+                            <div>
+                                <div>
+                                    <field name="module_stock_available_immediately" class="oe_inline" />
+                                    <label for="module_stock_available_immediately" />
+                                </div>
+                            </div>
+                        </group>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
