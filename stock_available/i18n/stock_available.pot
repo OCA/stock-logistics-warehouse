@@ -1,0 +1,92 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_available
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-30 16:48+0000\n"
+"PO-Revision-Date: 2014-07-30 16:48+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_available
+#: field:product.product,immediately_usable_qty:0
+msgid "Available to promise"
+msgstr ""
+
+#. module: stock_available
+#: view:product.product:0
+msgid "Available to promise:"
+msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_sale:0
+msgid "Exclude goods already in sale quotations"
+msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_immediately:0
+msgid "Exclude incoming goods"
+msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_mrp:0
+msgid "Include the production potential"
+msgstr ""
+
+#. module: stock_available
+#: code:_description:0
+#: model:ir.model,name:stock_available.model_product_product
+#, python-format
+msgid "Product"
+msgstr ""
+
+#. module: stock_available
+#: view:stock.config.settings:0
+msgid "Stock available to promise"
+msgstr ""
+
+#. module: stock_available
+#: help:product.product,immediately_usable_qty:0
+msgid "Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs"
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_mrp:0
+msgid "This will add the quantities of goods that can be immediately manufactured, to the quantities available to promise.\n"
+"This installs the module stock_available_mrp.\n"
+"If the module mrp is not installed, this will install it too"
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_immediately:0
+msgid "This will subtract incoming quantities from the quantities available to promise.\n"
+"This installs the module stock_available_immediately."
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_sale:0
+msgid "This will subtract quantities from the sale quotations from the quantities available to promise.\n"
+"This installs the modules stock_available_sale.\n"
+"If the modules sale and sale_delivery_date are not installed, this will install them too"
+msgstr ""
+
+#. module: stock_available
+#: view:product.product:0
+msgid "red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not in ('draft', 'end', 'obsolete')"
+msgstr ""
+
+#. module: stock_available
+#: code:_description:0
+#: model:ir.model,name:stock_available.model_stock_config_settings
+#, python-format
+msgid "stock.config.settings"
+msgstr ""
+
