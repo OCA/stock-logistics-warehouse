@@ -20,21 +20,27 @@
 #
 #
 
-
 {
-    "name": "Immediately Usable Stock Quantity",
-    "version": "1.0",
-    "depends": ["product", "stock", ],
+    "name": "Ignore planned receptions in quantity available to promise",
+    "version": "2.0",
+    "depends": ["stock_available"],
     "author": "Camptocamp",
     "license": "AGPL-3",
-    "description": """
-Compute the immediately usable stock.
-Immediately usable is computed : Quantity on Hand - Outgoing Stock.
+    "description": u"""
+Ignore planned receptions in quantity available to promise
+----------------------------------------------------------
+
+Normally the quantity available to promise is based on the virtual stock,
+which includes both planned outgoing and incoming goods.
+This module will subtract the planned receptions from the quantity available to
+promise.
+
+Contributors
+------------
+  * Author: Guewen Baconnier (Camptocamp SA)
+  * Sébastien BEAU (Akretion) <sebastien.beau@akretion.com>
+  * Lionel Sausin (Numérigraphe) <ls@numerigraphe.com>
 """,
-    "website": "http://tinyerp.com/module_account.html",
-    "category": "Generic Modules/Stock",
-    "data": ["product_view.xml",
-             ],
-    "active": False,
+    "category": "Hidden",
     'installable': True
 }
