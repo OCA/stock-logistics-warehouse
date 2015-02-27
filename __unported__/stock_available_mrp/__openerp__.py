@@ -24,11 +24,6 @@
     'author': u'Numérigraphe',
     'category': 'Hidden',
     'depends': ['stock_available', 'mrp'],
-    'description': """
-This module takes the potential quantities available for Products in account in
-the quantity available to promise, where the "Potential quantity" is the
-quantity that can be manufactured with the components immediately at hand,
-following a single level of Bill of Materials.""",
     'data': [
         'product_view.xml',
     ],
@@ -36,4 +31,5 @@ following a single level of Bill of Materials.""",
         'test/potential_qty.yml',
     ],
     'license': 'AGPL-3',
+    'installable': False
 }
