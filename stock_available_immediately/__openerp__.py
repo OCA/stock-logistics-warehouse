@@ -26,21 +26,6 @@
     "depends": ["stock_available"],
     "author": "Camptocamp",
     "license": "AGPL-3",
-    "description": u"""
-Ignore planned receptions in quantity available to promise
-----------------------------------------------------------
-
-Normally the quantity available to promise is based on the virtual stock,
-which includes both planned outgoing and incoming goods.
-This module will subtract the planned receptions from the quantity available to
-promise.
-
-Contributors
-------------
-  * Author: Guewen Baconnier (Camptocamp SA)
-  * Sébastien BEAU (Akretion) <sebastien.beau@akretion.com>
-  * Lionel Sausin (Numérigraphe) <ls@numerigraphe.com>
-""",
     "category": "Hidden",
     'installable': True
 }
