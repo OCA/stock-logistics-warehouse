@@ -20,21 +20,12 @@
 #
 #
 
-
 {
-    "name": "Immediately Usable Stock Quantity",
-    "version": "1.0",
-    "depends": ["product", "stock", ],
+    "name": "Ignore planned receptions in quantity available to promise",
+    "version": "2.0",
+    "depends": ["stock_available"],
     "author": "Camptocamp",
     "license": "AGPL-3",
-    "description": """
-Compute the immediately usable stock.
-Immediately usable is computed : Quantity on Hand - Outgoing Stock.
-""",
-    "website": "http://tinyerp.com/module_account.html",
-    "category": "Generic Modules/Stock",
-    "data": ["product_view.xml",
-             ],
-    "active": False,
+    "category": "Hidden",
     'installable': True
 }
