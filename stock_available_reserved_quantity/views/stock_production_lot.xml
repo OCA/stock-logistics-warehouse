@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_production_lot_form" model="ir.ui.view">
+            <field name="name">stock.production.lot.form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+
+                <data>
+
+                    <xpath expr="//field[@name='stock_available']"
+                           position="after"
+                           >
+                        <field name="retained_stock" />
+                    </xpath>
+
+                </data>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>
