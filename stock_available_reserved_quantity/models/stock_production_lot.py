@@ -1,9 +1,9 @@
 from openerp.osv import orm, fields
-import openerp.addons.decimal_precision as dp
+
 
 class StockProductionLot(orm.Model):
 
-    def _validate_retained_stock(self, cr, uid, ids, context=None):   
+    def _validate_retained_stock(self, cr, uid, ids, context=None):
         for lot in self.browse(cr, uid, ids, context=context):
             if lot.retained_stock < 0:
                 return False
