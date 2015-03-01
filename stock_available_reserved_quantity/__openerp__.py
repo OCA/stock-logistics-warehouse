@@ -42,5 +42,6 @@ promote its widespread use.
 To contribute to this module, please visit http://odoo-community.org.""",
     'license': 'AGPL-3',
     'data': [
+        "views/stock_production_lot.xml",
     ]
 }
