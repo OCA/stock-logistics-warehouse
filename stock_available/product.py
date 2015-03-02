@@ -19,7 +19,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
-#from openerp.addons import decimal_precision as dp
+from openerp.addons import decimal_precision as dp
 
 
 class ProductTemplate(models.Model):
@@ -42,11 +42,10 @@ class ProductTemplate(models.Model):
             product.immediately_usable_qty = product.virtual_available
 
     immediately_usable_qty = fields.Float(
+        digits=dp.get_precision('Product Unit of Measure'),
         compute='_product_available',
         string='Available to promise',
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"
              "The definition of this value can be configured to suit "
              "your needs")
-        # XXX the standard doesn't honor the UoM decimal precision. Should we?
-        # digits=dp.get_precision('Product Unit of Measure'),
