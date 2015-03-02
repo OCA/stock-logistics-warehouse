@@ -27,3 +27,10 @@ class StockQuant(models.Model):
                 quant.unlink()
             self.cost += cost
             self.qty += qty
+
+    @api.model
+    def quants_unreserve(self, move):
+        related_quants = [x for x in move.reserved_quant_ids]
+        super(StockQuant, self).quants_unreserve(move)
+        for quant in related_quants:
+            quant.merge_stock_quants()
