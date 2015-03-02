@@ -19,11 +19,11 @@
 #    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import fields, osv
+from openerp.osv import orm
 from openerp.tools.sql import drop_view_if_exists
 
 
-class stock_report_prodlots(osv.osv):
+class stock_report_prodlots(orm.Model):
 
     """
     Override the stock.report.prodlots.
