@@ -26,7 +26,7 @@
 You can choose which stock moves have to generate inventory valuation
 accounting entries, by specifying it in the location form.
 """,
-    'author': 'Agile Business Group',
+    'author': "Agile Business Group,Odoo Community Association (OCA)",
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": ['stock'],

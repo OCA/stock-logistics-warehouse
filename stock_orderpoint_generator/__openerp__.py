@@ -22,7 +22,7 @@
 {'name': 'Order point generator',
  'summary': 'Mass configuration of stock order points',
  'version': '1.0',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
  'complexity': 'easy',
