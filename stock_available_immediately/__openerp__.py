@@ -25,7 +25,7 @@
 	"name" : "Immediately Usable Stock Quantity",
 	"version" : "1.0",
 	"depends" : ["product", "stock", ],
-	"author" : "Camptocamp",
+	"author" : "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
 	"description": """
 Compute the immediately usable stock.

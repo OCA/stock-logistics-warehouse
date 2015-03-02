@@ -21,7 +21,7 @@
 
 {'name': 'Configuration of order point in mass',
  'version': '1.0',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'Warehouse',
  'complexity': 'easy', #easy, normal, expert

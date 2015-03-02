@@ -22,7 +22,7 @@
 {
     "name" : "Move Inventory Extended",
     "version" : "1.0",
-    "author" : "Julius Network Solutions",
+    "author" : "Julius Network Solutions,Odoo Community Association (OCA)",
     "description" : """
 
 Presentation:
