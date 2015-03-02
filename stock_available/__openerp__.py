@@ -21,7 +21,7 @@
 {
     'name': 'Stock available to promise',
     'version': '2.0',
-    'author': u'Numérigraphe',
+    "author": u"Numérigraphe,Odoo Community Association (OCA)",
     'category': 'Warehouse',
     'depends': ['stock'],
     'license': 'AGPL-3',

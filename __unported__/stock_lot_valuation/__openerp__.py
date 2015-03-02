@@ -34,7 +34,7 @@ Set the 'Lot valuation' flag on product form (used for real time valuation).
 As for products, lots have 'cost' and 'costing method' fields. Also, a
 'Change Standard Price' wizard is available.
 """,
-    'author': 'Agile Business Group',
+    'author': "Agile Business Group,Odoo Community Association (OCA)",
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": ['stock'],

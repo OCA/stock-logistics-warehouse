@@ -6,8 +6,9 @@ python:
     - "2.7"
 
 env:
-  - VERSION="8.0" ODOO_REPO="odoo/odoo"
-  - VERSION="8.0" ODOO_REPO="OCA/OCB"
+  - VERSION="8.0" LINT_CHECK="1"
+  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0"
+  - VERSION="8.0" ODOO_REPO="OCA/OCB" LINT_CHECK="0"
 
 virtualenv:
   system_site_packages: true
@@ -20,7 +21,6 @@ install:
   - git clone https://github.com/OCA/stock-logistics-barcode -b ${VERSION} $HOME/stock-logistics-barcode
 
 script:
-    - travis_run_flake8
     - travis_run_tests
 
 after_success:

@@ -21,7 +21,7 @@
 {
     'name': 'Consider the production potential is available to promise',
     'version': '2.0',
-    'author': u'Numérigraphe',
+    "author": u"Numérigraphe,Odoo Community Association (OCA)",
     'category': 'Hidden',
     'depends': ['stock_available', 'mrp'],
     'data': [

@@ -24,7 +24,7 @@
     "name": "Ignore planned receptions in quantity available to promise",
     "version": "2.0",
     "depends": ["stock_available"],
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Hidden",
     'installable': True
