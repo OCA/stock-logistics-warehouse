@@ -19,12 +19,13 @@ class StockQuant(models.Model):
                  ('package_id', '=', self.package_id.id),
                  ('location_id', '=', self.location_id.id),
                  ('reservation_id', '=', False),
-                 ('propagated_from_id', '=', False)])
+                 ('propagated_from_id', '=', self.propagated_from_id.id)])
             qty = cost = 0
             for quant in quants:
-                qty += quant.qty
-                cost += quant.cost
-                quant.unlink()
+                if self._get_latest_move(self) == self._get_latest_move(quant):
+                    qty += quant.qty
+                    cost += quant.cost
+                    quant.unlink()
             self.cost += cost
             self.qty += qty
 
