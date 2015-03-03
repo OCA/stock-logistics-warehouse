@@ -1,4 +1,3 @@
-
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -18,17 +17,22 @@
 ##############################################################################
 
 {
-    "name": "Manual assignment of quants",
+    "name": "Stock - Manual assignment of quants",
     "version": "1.0",
-    "depends": ["base", "stock"],
+    "depends": [
+        "stock",
+    ],
     "author": "OdooMRP team",
+    "website": "http://www.odoomrp.com",
     "contributors": [
-            "Ana Juaristi Olalde <ajuaristio@gmail.com>",
-            "Pedro Manuel Baeza Romero <pedro.baeza@gmail.com>"
-            "Mikel Arregi <mikelarregi@avanzosc.es>"],
-    "category": "quant",
-    'data': ['wizard/assign_manual_quants_view.xml',
-             'views/stock_move_view.xml'],
+        "Ana Juaristi Olalde <ajuaristio@gmail.com>",
+        "Pedro Manuel Baeza Romero <pedro.baeza@gmail.com>"
+        "Mikel Arregi <mikelarregi@avanzosc.es>",
+    ],
+    "category": "Warehouse Management",
+    "data": [
+        "wizard/assign_manual_quants_view.xml",
+        "views/stock_move_view.xml",
+    ],
     "installable": True,
-    "auto_install": False,
 }
