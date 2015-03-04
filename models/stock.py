@@ -20,14 +20,11 @@ class StockQuant(models.Model):
                  ('location_id', '=', self.location_id.id),
                  ('reservation_id', '=', False),
                  ('propagated_from_id', '=', self.propagated_from_id.id)])
-            qty = cost = 0
             for quant in quants:
                 if self._get_latest_move(self) == self._get_latest_move(quant):
-                    qty += quant.qty
-                    cost += quant.cost
+                    self.qty += quant.qty
+                    self.cost += quant.cost
                     quant.unlink()
-            self.cost += cost
-            self.qty += qty
 
     @api.model
     def quants_unreserve(self, move):
