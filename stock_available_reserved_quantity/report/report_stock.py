@@ -52,14 +52,14 @@ class stock_report_prodlots(orm.Model):
                     location_id,
                     product_id,
                     prodlot_id,
-                    sum(qty) as qty
+                    sum(qty) - retained_stock as qty
                 from (
                     select -max(sm.id) as id,
                         sm.location_id,
                         sm.product_id,
                         sm.prodlot_id,
-                        -sum(sm.product_qty /uo.factor) +
-                        coalesce(lot.retained_stock, 0) as qty
+                        -sum(sm.product_qty /uo.factor) as qty,
+                        coalesce(lot.retained_stock, 0) as retained_stock
                     from stock_move as sm
                     left join stock_location sl
                         on (sl.id = sm.location_id)
@@ -76,8 +76,8 @@ class stock_report_prodlots(orm.Model):
                         sm.location_dest_id as location_id,
                         sm.product_id,
                         sm.prodlot_id,
-                        sum(sm.product_qty /uo.factor) -
-                        coalesce(lot.retained_stock, 0) as qty
+                        sum(sm.product_qty /uo.factor) as qty,
+                        coalesce(lot.retained_stock, 0) as retained_stock
                     from stock_move as sm
                     left join stock_location sl
                         on (sl.id = sm.location_dest_id)
@@ -90,5 +90,5 @@ class stock_report_prodlots(orm.Model):
                              sm.product_uom, sm.prodlot_id,
                              lot.retained_stock
                 ) as report
-                group by location_id, product_id, prodlot_id
+                group by location_id, product_id, prodlot_id, retained_stock
             )""")
