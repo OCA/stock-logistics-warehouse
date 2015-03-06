@@ -20,6 +20,7 @@
 #
 ##############################################################################
 from openerp.osv import orm, fields
+import openerp.addons.decimal_precision as dp
 
 
 class StockProductionLot(orm.Model):
@@ -48,7 +49,10 @@ class StockProductionLot(orm.Model):
     _inherit = "stock.production.lot"
 
     _columns = {
-        'retained_stock': fields.float(string='Retained stock'),
+        'retained_stock': fields.float(
+            string='Retained stock',
+            digits_compute=dp.get_precision('Product Unit of Measure')
+        ),
     }
 
     _constraints = [
