@@ -1,0 +1,188 @@
+-
+  In order to test Product Kits inventory.
+
+-
+  I create a product name kits product test1.
+-
+  !record {model: product.product, id: product_product_01}:
+    categ_id: product.product_category_1
+    cost_method: average
+    name: 'test1'
+    type: product
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    company_id: False
+-
+  I create a product name test2.
+-
+  !record {model: product.product, id: product_product_02}:
+    categ_id: product.product_category_1
+    cost_method: average
+    name: 'test2'
+    type: product
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    company_id: False
+-
+  I create a product name test3.
+-
+  !record {model: product.product, id: product_product_03}:
+    categ_id: product.product_category_1
+    cost_method: average
+    name: 'test3'
+    type: product
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    company_id: False
+-
+  I create a bom1 for product test1.
+-
+  !record {model: mrp.bom, id: mrp_bom_01}:
+    product_id: product_product_01
+    product_qty: 1
+    name: 'test1'
+    type: normal
+    product_uom: product.product_uom_unit
+    default_for_kit: False
+-
+  I create component1 for bom1.
+-
+  !record {model: mrp.bom, id: mrp_bom_02}:
+    product_id: product_product_02
+    product_qty: 1
+    name: 'test2'
+    product_uom: product.product_uom_unit
+    bom_id: mrp_bom_01
+-
+  I create component2 for bom1.
+-
+  !record {model: mrp.bom, id: mrp_bom_03}:
+    product_id: product_product_03
+    product_qty: 2
+    name: 'test3'
+    product_uom: product.product_uom_unit
+    bom_id: mrp_bom_01
+-
+  Check product test1 if is_kit change.
+-
+  !assert {model: product.product, id: product_product_01}:
+      - is_kit == False 
+-
+  modify bom1 for product test1.
+-
+  !record {model: mrp.bom, id: mrp_bom_01}:
+    product_id: product_product_01
+    product_qty: 1
+    name: test1
+    type: phantom
+    product_uom: product.product_uom_unit
+-
+  Check if product test1 change.
+-
+  !assert {model: product.product, id: product_product_01}:
+      - is_kit == True 
+-
+  I create a bom2 for product test1.
+-
+  !record {model: mrp.bom, id: mrp_bom_04}:
+    product_id: product_product_01
+    product_qty: 1
+    name: 'test1'
+    type: phantom
+    product_uom: product.product_uom_unit
+    default_for_kit: True
+-
+  I create component1 for bom2.
+-
+  !record {model: mrp.bom, id: mrp_bom_05}:
+    product_id: product_product_02
+    product_qty: 1
+    name: 'test2'
+    product_uom: product.product_uom_unit
+    bom_id: mrp_bom_04
+-
+  I create component2 for bom2.
+-
+  !record {model: mrp.bom, id: mrp_bom_06}:
+    product_id: product_product_03
+    product_qty: 1
+    name: 'test3'
+    product_uom: product.product_uom_unit
+    bom_id: mrp_bom_04
+-
+  update product test1 quantity at hand 100.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_product_02'))
+    change_qty = self.pool.get('stock.change.product.qty')
+    change_id = change_qty.create(cr, uid, {'location_id' : ref('stock.stock_location_stock'), 'new_quantity': 100, 'product_id': product.id})
+    change_qty.change_product_qty(cr, uid, [change_id], {'active_model':'product.product', 'active_id': product.id, 'active_ids':[product.id]})
+    assert product.qty_available == 100,"Product quantity is not updated."
+-
+  update product test2 quantity at hand 150.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_product_03'))
+    change_qty = self.pool.get('stock.change.product.qty')
+    change_id = change_qty.create(cr, uid, {'location_id' : ref('stock.stock_location_stock'), 'new_quantity': 150, 'product_id': product.id})
+    change_qty.change_product_qty(cr, uid, [change_id], {'active_model':'product.product', 'active_id': product.id, 'active_ids':[product.id]})
+    assert product.qty_available == 150,"Product quantity is not updated."
+-
+  Check kit product test1 quantity at hand 100.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_product_01'))
+    assert product.kits_qty_available == 100,"Product kits product at hand quantity is not updated."
+    assert product.kits_incoming_qty == 0,"Product kits product incoming quantity is not updated."
+-
+  Create a stock_move to update incoming_qty of product_product_02.
+-
+  !record {model: stock.move, id: stock_move_01}:
+    product_id: product_product_02
+    product_uom: product.product_uom_unit
+    product_qty: 100.0
+    location_id: stock.stock_location_suppliers
+    location_dest_id: stock.stock_location_stock
+-
+  Update and Check if incoming_qty of product_product_02 is updated.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_product_02'))
+    stock_move = self.pool.get('stock.move').browse(cr,uid,ref('stock_move_01'))
+    stock_move.action_confirm()
+    assert product.incoming_qty == 100,"Product incoming quantity is not updated."
+-
+  Create a stock_move to update incoming_qty of product_product_03.
+-
+  !record {model: stock.move, id: stock_move_02}:
+    product_id: product_product_03
+    product_uom: product.product_uom_unit
+    product_qty: 100.0
+    location_id: stock.stock_location_suppliers
+    location_dest_id: stock.stock_location_stock
+-
+  Update and Check if incoming_qty of product_product_03 is updated.
+-
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_product_03'))
+    stock_move = self.pool.get('stock.move').browse(cr,uid,ref('stock_move_02'))
+    stock_move.action_confirm()
+    assert product.incoming_qty == 100,"Product incoming quantity is not updated."
+-
+  Check if incoming_qty of kit product relavtive quantity updated.
+-
+  !assert {model: product.product,id: product_product_01}:
+    - kits_incoming_qty == 100
+-
+  Check if kits_qty_available of kit product relavtive quantity updated.
+-
+  !assert {model: product.product,id: product_product_01}:
+    - kits_qty_available == 100
+
+
+
+
+
+
+
+

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- inherit form view of product -->
+		<record id="product_kits_inventory_view_product_form_inherit" model="ir.ui.view">
+			<field name="name">product.kits.inventory.product.form.inherit</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="stock.view_normal_procurement_locations_form" />
+			<field name="arch" type="xml">
+
+				<group string="Stock and Expected Variations" position="attributes">
+					<attribute name="attrs">{'invisible': ['|', ('type', '=', 'service'), ('is_kit', '=', True)]}</attribute>				
+				</group>
+				
+				<group name="status" position="before" version="7.0">
+                        <group string="Kit Products Stock and Expected Variations" attrs="{'invisible': ['|', ('type', '=', 'service'), ('is_kit', '=', False)]}" groups="base.group_user">
+                                <label for="kits_qty_available"/>
+                                    <div>
+                                <field name="kits_qty_available" />
+                                    </div>
+                                    <field name="kits_incoming_qty" class="oe_inline"/>
+                         <!--            <field name="kits_outgoing_qty" class="oe_inline"/>
+                                    <field name="kits_virtual_available" class="oe_inline"/> -->
+                                      <!-- <field name="kits_sale_quotation_qty"  class="oe_inline"/> -->
+                            </group>
+                            <group string="Other Quantity">
+                                  <field name="kits_sale_quotation_qty" />
+                            </group>
+	                </group>
+
+	                <field name="sale_ok" position="before">
+	                	<field name="is_kit"/>
+	                	<label for="is_kit" />
+	                </field>
+			</field>
+		</record>
+		<!-- inherit kanban of product -->
+		<record model="ir.ui.view" id="product_kanban_product_kits_inventory_view">
+            <field name="name">Product Kanban Stock</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.product_kanban_stock_view"/>
+            <field name="arch" type="xml">
+            	<ul position="before">
+            		<field name="is_kit" invisible="1" />
+            		<li t-if="record.is_kit.raw_value == true">Kit Product</li>
+            	</ul>
+            	<xpath expr="//field[@name='qty_available']/.." position="attributes">
+            		<attribute name="attrs">{'invisible': ['|', ('type', '=', 'service'), ('is_kit', '=', True)]}</attribute>
+            	</xpath>
+            	<xpath expr="//field[@name='virtual_available']/.." position="attributes">
+            		<attribute name="attrs">{'invisible': ['|', ('type', '=', 'service'), ('is_kit', '=', True)]}</attribute>
+            	</xpath>
+            </field>
+        </record>
+        <!-- inherit tree view from product -->
+        <record id="tree_product_kits_inventory_product_view" model="ir.ui.view">
+        	<field name="name">Inherit product standard tree view</field>
+        	<field name="model">product.product</field>
+        	<field name="inherit_id" ref="product.product_product_tree_view" />
+        	<field name="arch" type="xml">
+        		<field name="qty_available" position="before">
+        			<field name="is_kit" />
+                     <field name="kits_sale_quotation_qty"/>
+<!--         			<field name="kits_qty_available" attrs="{'invisible': ['|', ('type', '=', 'service')]}"/>
+        			<field name="kits_virtual_available" attrs="{'invisible': ['|', ('type', '=', 'service')]}"/> -->
+        		</field>
+        	</field>
+        </record>
+
+        <record id="mrp_bom_form_view_inherit" model="ir.ui.view">
+        	<field name="name">Inherit mrp bom form view</field>
+        	<field name="model">mrp.bom</field>
+        	<field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+        	<field name="arch" type="xml">
+        		<field name="type" position="after">
+        			<field name="default_for_kit" attrs="{'invisible': [('type', '=', 'normal')]}"/>
+        		</field>
+        	</field>
+        </record>
+
+        <record id="mrp_bom_tree_view_inherit" model="ir.ui.view">
+            <field name="name">mrp.bom.tree.inherit</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_tree_view" />
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="default_for_kit"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- tree view -->
+		<record id="tree_kit_product" model="ir.ui.view">
+			<field name="name">Kit Products</field>
+			<field name="model">product.product</field>
+			<field name="arch" type="xml">
+				<!-- <tree colors="red:kits_virtual_available&lt;0;blue:kits_virtual_available&gt;=0 and state in ('draft', 'end', 'obsolete');black:kits_virtual_available&gt;=0 and state not in ('draft', 'end', 'obsolete')" string="Products"> -->
+				<tree string="Products">
+                    <field name="default_code"/>
+                    <field name="name"/>
+                    <field name="categ_id" invisible="1"/>
+                    <field name="type" invisible="1"/>
+                    <field name="variants" groups="product.group_product_variant"/>
+                    <field name="uom_id" string="Unit of Measure" groups="product.group_uom"/>
+                    <field name="kits_qty_available"/>
+                    <!-- <field name="kits_virtual_available"/> -->
+                    <field name="kits_sale_quotation_qty" />
+                    <field name="lst_price"/>
+                    <field name="price" invisible="not context.get('pricelist',False)"/>
+                    <field name="standard_price" invisible="1"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company" invisible="1"/>
+                </tree>
+			</field>
+		</record>
+		<record id="act_kit_products" model="ir.actions.act_window">
+			<field name="name">Kit Products</field>
+			<field name="res_model">product.product</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="tree_kit_product" />
+			<field name="context">{}</field>
+			<field name="domain">[('is_kit', '=', True)]</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+				Click here to create a new kit product (a kit product means one that has a bom and the type is phantom)
+				</p>
+			</field>
+		</record>
+
+<!-- add a new menu to show kit products -->
+<!-- <menuitem id="base.menu_product" name="Products" parent="base.menu_base_partner" sequence="9"/> -->
+		<menuitem
+			id="menu_kit_products"
+			name="Kit Products"
+			parent="base.menu_product"
+			sequence="71"
+			action="act_kit_products"
+			/>
+
+	</data>
+</openerp>
