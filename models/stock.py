@@ -24,7 +24,7 @@ class StockQuant(models.Model):
                 if self._get_latest_move(self) == self._get_latest_move(quant):
                     self.qty += quant.qty
                     self.cost += quant.cost
-                    quant.unlink()
+                    quant.sudo().unlink()
 
     @api.model
     def quants_unreserve(self, move):
