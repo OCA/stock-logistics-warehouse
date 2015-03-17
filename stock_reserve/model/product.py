@@ -25,19 +25,14 @@ from openerp import models, fields, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    reservation_count = fields.Integer(
+    reservation_count = fields.Float(
         compute='_reservation_count',
         string='# Sales')
 
-    @api.multi
+    @api.one
     def _reservation_count(self):
-        StockReservation = self.env['stock.reservation']
-        product_ids = self._get_products()
-        domain = [('product_id', 'in', product_ids),
-                  ('state', 'in', ['draft', 'assigned'])]
-        reservations = StockReservation.search(domain)
-        self.reservation_count = sum(reserv.product_uom_qty
-                                     for reserv in reservations)
+        self.reservation_count = sum(variant.reservation_count
+                                     for variant in self.product_variant_ids)
 
     @api.multi
     def action_view_reservations(self):
@@ -56,18 +51,16 @@ class ProductTemplate(models.Model):
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    reservation_count = fields.Integer(
+    reservation_count = fields.Float(
         compute='_reservation_count',
         string='# Sales')
 
-    @api.multi
+    @api.one
     def _reservation_count(self):
-        StockReservation = self.env['stock.reservation']
-        product_id = self._ids[0]
-        domain = [('product_id', '=', product_id),
+        domain = [('product_id', '=', self.id),
                   ('state', 'in', ['draft', 'assigned'])]
-        reservations = StockReservation.search(domain)
-        self.reservation_count = sum(reserv.product_uom_qty
+        reservations = self.env['stock.reservation'].search(domain)
+        self.reservation_count = sum(reserv.product_qty
                                      for reserv in reservations)
 
     @api.multi
