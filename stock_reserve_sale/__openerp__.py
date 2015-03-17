@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Guewen Baconnier
-#    Copyright 2013 Camptocamp SA
+#    Author: Guewen Baconnier, Leonardo Pistone
+#    Copyright 2013-2015 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,7 @@
 ##############################################################################
 
 {'name': 'Stock Reserve Sales',
- 'version': '0.1',
+ 'version': '1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
@@ -47,6 +47,13 @@ exceeded if the reservations are canceled.
 If you want to prevent sales orders to be confirmed when the stock is
 insufficient at the order date, you may want to install the
 `sale_exception_nostock` module.
+
+Additionally, if the sale_owner_stock_sourcing module is installed, the owner
+specified on the sale order line will be proposed as owner of the reservation.
+If you try to make a reservation for an order whose lines have different, you
+will get a message suggesting to reserve each line individually. There is no
+module dependency: this modules is fully functional even without ownership
+management.
 
 """,
  'depends': ['sale_stock',

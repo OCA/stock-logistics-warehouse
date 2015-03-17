@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Guewen Baconnier
-#    Copyright 2013 Camptocamp SA
+#    Author: Guewen Baconnier, Leonardo Pistone
+#    Copyright 2013-2015 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions
 
 
 class SaleStockReserve(models.TransientModel):
@@ -32,6 +32,32 @@ class SaleStockReserve(models.TransientModel):
     @api.model
     def _default_location_dest_id(self):
         return self.env['stock.reservation']._default_location_dest_id()
+
+    def _default_owner(self):
+        """If sale_owner_stock_sourcing is installed, it adds an owner field
+        on sale order lines. Use it.
+
+        """
+        model = self.env[self.env.context['active_model']]
+        if model._name == 'sale.order':
+            lines = model.browse(self.env.context['active_id']).order_line
+        else:
+            lines = model.browse(self.env.context['active_ids'])
+
+        try:
+            owners = set([l.stock_owner_id for l in lines])
+        except AttributeError:
+            return self.env['res.partner']
+            # module sale_owner_stock_sourcing not installed, fine
+
+        if len(owners) == 1:
+            return owners.pop()
+        elif len(owners) > 1:
+            raise exceptions.Warning(
+                'The lines have different owners. Please reserve them '
+                'individually with the reserve button on each one.')
+
+        return self.env['res.partner']
 
     location_id = fields.Many2one(
         'stock.location',
@@ -50,6 +76,8 @@ class SaleStockReserve(models.TransientModel):
         help="If a date is given, the reservations will be released "
              "at the end of the validity.")
     note = fields.Text('Notes')
+    owner_id = fields.Many2one('res.partner', 'Stock Owner',
+                               default=_default_owner)
 
     @api.multi
     def _prepare_stock_reservation(self, line):
@@ -67,6 +95,7 @@ class SaleStockReserve(models.TransientModel):
                 'product_uos': product_uos,
                 'price_unit': line.price_unit,
                 'sale_line_id': line.id,
+                'restrict_partner_id': self.owner_id.id,
                 }
 
     @api.multi
