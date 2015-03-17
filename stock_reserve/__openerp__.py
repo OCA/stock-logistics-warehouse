@@ -21,7 +21,7 @@
 
 {'name': 'Stock Reservation',
  'summary': 'Stock reservations on products',
- 'version': '0.1',
+ 'version': '0.2',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
@@ -43,11 +43,15 @@ stock below the minimum, the orderpoint will be triggered and new
 purchase orders will be generated. It also implies that the max may be
 exceeded if the reservations are canceled.
 
+If ownership of stock is active in the stock settings, you can specify the
+owner on the reservation.
+
 Contributors
 ------------
 
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
+* Leonardo Pistone <leonardo.pistone@camptocamp.com>
 
 """,
  'depends': ['stock',
