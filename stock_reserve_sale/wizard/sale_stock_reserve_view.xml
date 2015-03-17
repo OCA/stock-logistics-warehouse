@@ -16,6 +16,7 @@
                         <field name="location_id"/>
                         <field name="location_dest_id"/>
                         <field name="date_validity"/>
+                        <field name="owner_id" groups="stock.group_tracking_owner"/>
                     </group>
                     <group name="note" string="Notes">
                         <field name="note" nolabel="1"/>
