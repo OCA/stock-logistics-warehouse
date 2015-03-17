@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2010-2012 Camptocamp SA
-#    Copyright (C) 2011 Akretion Sébastien BEAU <sebastien.beau@akretion.com>
+#    This module is copyright (C) 2014 Numérigraphe SARL. All Rights Reserved.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,17 +19,33 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from openerp.addons import decimal_precision as dp
 
 
 class ProductTemplate(models.Model):
-    """Subtract incoming qty from immediately_usable_qty"""
+    """Add a field for the stock available to promise.
+
+    Useful implementations need to be installed through the Settings menu or by
+    installing one of the modules stock_available_*
+    """
     _inherit = 'product.template'
 
     @api.depends('virtual_available')
     def _product_available(self):
-        """Ignore the incoming goods in the quantity available to promise"""
-        super(ProductTemplate, self)._product_available()
-        for product in self:
-            product.immediately_usable_qty -= product.incoming_qty
+        """No-op implementation of the stock available to promise.
 
-    immediately_usable_qty = fields.Float(compute='_product_available')
+        By default, available to promise = forecasted quantity.
+
+        Must be overridden by another module that actually implement
+        computations."""
+        for product in self:
+            product.immediately_usable_qty = product.virtual_available
+
+    immediately_usable_qty = fields.Float(
+        digits=dp.get_precision('Product Unit of Measure'),
+        compute='_product_available',
+        string='Available to promise',
+        help="Stock for this Product that can be safely proposed "
+             "for sale to Customers.\n"
+             "The definition of this value can be configured to suit "
+             "your needs")

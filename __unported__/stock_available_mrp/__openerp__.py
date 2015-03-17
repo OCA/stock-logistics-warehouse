@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2010-2012 Camptocamp SA
-#    Copyright (C) 2011 Akretion Sébastien BEAU <sebastien.beau@akretion.com>
+#    This module is copyright (C) 2014 Numérigraphe SARL. All Rights Reserved.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,18 +18,18 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-
-
-class ProductTemplate(models.Model):
-    """Subtract incoming qty from immediately_usable_qty"""
-    _inherit = 'product.template'
-
-    @api.depends('virtual_available')
-    def _product_available(self):
-        """Ignore the incoming goods in the quantity available to promise"""
-        super(ProductTemplate, self)._product_available()
-        for product in self:
-            product.immediately_usable_qty -= product.incoming_qty
-
-    immediately_usable_qty = fields.Float(compute='_product_available')
+{
+    'name': 'Consider the production potential is available to promise',
+    'version': '2.0',
+    "author": u"Numérigraphe,Odoo Community Association (OCA)",
+    'category': 'Hidden',
+    'depends': ['stock_available', 'mrp'],
+    'data': [
+        'product_view.xml',
+    ],
+    'test': [
+        'test/potential_qty.yml',
+    ],
+    'license': 'AGPL-3',
+    'installable': False
+}

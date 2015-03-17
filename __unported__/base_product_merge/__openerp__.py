@@ -32,7 +32,7 @@
 {
     "name" : "Base Products Merge",
     "version" : "1.0",
-    "author" : "Camptocamp",
+    "author" : "Camptocamp,Odoo Community Association (OCA)",
     "category" : "Generic Modules/Base",
     "description":"""
 To merge 2 products, select them in the list view and execute the Action "Merge Products".
