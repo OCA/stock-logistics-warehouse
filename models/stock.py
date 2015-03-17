@@ -9,26 +9,32 @@ from openerp import models, api
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
-    @api.one
+    @api.multi
     def merge_stock_quants(self):
-        if not self.reservation_id:
-            quants = self.search(
-                [('id', '!=', self.id),
-                 ('product_id', '=', self.product_id.id),
-                 ('lot_id', '=', self.lot_id.id),
-                 ('package_id', '=', self.package_id.id),
-                 ('location_id', '=', self.location_id.id),
-                 ('reservation_id', '=', False),
-                 ('propagated_from_id', '=', self.propagated_from_id.id)])
-            for quant in quants:
-                if self._get_latest_move(self) == self._get_latest_move(quant):
-                    self.qty += quant.qty
-                    self.cost += quant.cost
-                    quant.sudo().unlink()
+        pending_quants_ids = self.ids
+        for quant2merge in self:
+            if (quant2merge.id in pending_quants_ids and
+                    not quant2merge.reservation_id):
+                quants = self.search(
+                    [('id', '!=', quant2merge.id),
+                     ('product_id', '=', quant2merge.product_id.id),
+                     ('lot_id', '=', quant2merge.lot_id.id),
+                     ('package_id', '=', quant2merge.package_id.id),
+                     ('location_id', '=', quant2merge.location_id.id),
+                     ('reservation_id', '=', False),
+                     ('propagated_from_id', '=',
+                      quant2merge.propagated_from_id.id)])
+                for quant in quants:
+                    if (self._get_latest_move(quant2merge) ==
+                            self._get_latest_move(quant)):
+                        quant2merge.qty += quant.qty
+                        quant2merge.cost += quant.cost
+                        if quant.id in pending_quants_ids:
+                            pending_quants_ids.remove(quant.id)
+                        quant.sudo().unlink()
 
     @api.model
     def quants_unreserve(self, move):
-        related_quants = [x for x in move.reserved_quant_ids]
+        quants = move.reserved_quant_ids
         super(StockQuant, self).quants_unreserve(move)
-        for quant in related_quants:
-            quant.merge_stock_quants()
+        quants.merge_stock_quants()
