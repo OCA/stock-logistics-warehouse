@@ -42,17 +42,13 @@
 -
   And I create a stock reserve for this line
 -
-  !record {model: sale.stock.reserve, id: wizard_reserve_02_01}:
-    note: Reservation for the sales order line
--
-  I call the wizard to reserve the products of the sales order
--
   !python {model: sale.stock.reserve}: |
     active_id = ref('sale_line_reserve_02_01')
     context['active_id'] = active_id
     context['active_ids'] = [active_id]
     context['active_model'] = 'sale.order.line'
-    self.button_reserve(cr, uid, [ref('wizard_reserve_02_01')], context=context)
+    wizard_id = self.create(cr, uid, {}, context=context)
+    self.button_reserve(cr, uid, [wizard_id], context=context)
 -
   I check Virtual stock of yogurt after update reservation
 -
@@ -84,17 +80,13 @@
 -
   And I try to create a stock reserve for this MTO line
 -
-  !record {model: sale.stock.reserve, id: wizard_reserve_02_02}:
-    note: Reservation for the sales order line
--
-  I call the wizard to reserve the products of the sales order
--
   !python {model: sale.stock.reserve}: |
     active_id = ref('sale_line_reserve_02_02')
     context['active_id'] = active_id
     context['active_ids'] = [active_id]
     context['active_model'] = 'sale.order.line'
-    self.button_reserve(cr, uid, [ref('wizard_reserve_02_02')], context=context)
+    wizard_id = self.create(cr, uid, {}, context=context)
+    self.button_reserve(cr, uid, [wizard_id], context=context)
 -
   I should not have a stock reservation for a MTO line
 -
