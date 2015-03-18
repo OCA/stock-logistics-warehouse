@@ -11,9 +11,9 @@ class StockQuant(models.Model):
 
     @api.multi
     def merge_stock_quants(self):
-        pending_quants_ids = self.ids
+        pending_quants = self.filtered(lambda x: True)
         for quant2merge in self:
-            if (quant2merge.id in pending_quants_ids and
+            if (quant2merge in pending_quants and
                     not quant2merge.reservation_id):
                 quants = self.search(
                     [('id', '!=', quant2merge.id),
@@ -29,8 +29,7 @@ class StockQuant(models.Model):
                             self._get_latest_move(quant)):
                         quant2merge.qty += quant.qty
                         quant2merge.cost += quant.cost
-                        if quant.id in pending_quants_ids:
-                            pending_quants_ids.remove(quant.id)
+                        pending_quants -= quant
                         quant.sudo().unlink()
 
     @api.model
