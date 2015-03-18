@@ -33,7 +33,7 @@
             <field name="arch" type="xml">
                 <group string="Group By" position="before">
                     <filter string="Availability under minimum"
-                        domain="[('available', '!=', False)]"
+                        domain="[('available', '=', False)]"
                         context="{}" />
                 </group>
             </field>
