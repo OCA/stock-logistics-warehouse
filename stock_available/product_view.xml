@@ -22,8 +22,8 @@
                     <tree position="attributes">
                         <attribute name="colors">red:immediately_usable_qty&lt;0;blue:immediately_usable_qty&gt;=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
                     </tree>
-                    <field name="virtual_available" position="after">
-                        <field name="immediately_usable_qty" />
+                       <field name="virtual_available" position="after">
+                       <field name="immediately_usable_qty" />
                     </field>
                 </data>
             </field>
