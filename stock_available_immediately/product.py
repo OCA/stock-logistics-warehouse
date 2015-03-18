@@ -19,18 +19,15 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models
 
 
-class ProductTemplate(models.Model):
+class Product(models.Model):
     """Subtract incoming qty from immediately_usable_qty"""
-    _inherit = 'product.template'
+    _inherit = 'product.product'
 
-    @api.depends('virtual_available')
-    def _product_available(self):
+    def _immediately_usable_qty(self):
         """Ignore the incoming goods in the quantity available to promise"""
-        super(ProductTemplate, self)._product_available()
+        super(Product, self)._immediately_usable_qty()
         for product in self:
             product.immediately_usable_qty -= product.incoming_qty
-
-    immediately_usable_qty = fields.Float(compute='_product_available')
