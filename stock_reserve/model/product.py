@@ -60,7 +60,7 @@ class ProductProduct(models.Model):
         compute='_reservation_count',
         string='# Sales')
 
-    @api.multi
+    @api.one
     def _reservation_count(self):
         StockReservation = self.env['stock.reservation']
         product_id = self._ids[0]
