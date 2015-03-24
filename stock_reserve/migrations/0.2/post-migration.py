@@ -25,18 +25,18 @@ def migrate(cr, installed_version):
                 SELECT res_id
                 FROM ir_model_data
                 WHERE name = 'stock_location_locations'
-                AND model = 'stock.location'
+                AND module = 'stock'
             )
             WHERE id = (
                 SELECT res_id
                 FROM ir_model_data
                 WHERE name = 'stock_location_reservation'
-                AND model = 'stock.location'
+                AND module = 'stock_reserve'
             )
             AND location_id = (
                 SELECT res_id
                 FROM ir_model_data
                 WHERE name = 'stock_location_company'
-                AND model = 'stock.location'
+                AND module = 'stock'
             );
         ''')
