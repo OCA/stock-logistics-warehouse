@@ -27,8 +27,8 @@ class StockQuant(models.Model):
                 for quant in quants:
                     if (self._get_latest_move(quant2merge) ==
                             self._get_latest_move(quant)):
-                        quant2merge.qty += quant.qty
-                        quant2merge.cost += quant.cost
+                        quant2merge.sudo().qty += quant.qty
+                        quant2merge.sudo().cost += quant.cost
                         pending_quants -= quant
                         quant.sudo().unlink()
 
