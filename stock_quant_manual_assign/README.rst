@@ -11,4 +11,4 @@ Contributors
 ------------
 * Mikel Arregi <mikelarregi@avanzosc.es>
 * Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
-* Ana Juaristi <ajuaristo@gmail.com>
+* Ana Juaristi <ajuaristio@gmail.com>
