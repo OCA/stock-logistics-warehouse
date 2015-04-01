@@ -61,7 +61,8 @@ class ImportInventory(models.TransientModel):
         values = {}
         actual_date = fields.Date.today()
         inv_name = self.name + ' - ' + actual_date
-        inventory.write({'name': inv_name, 'date': actual_date,
+        inventory.write({'name': inv_name,
+                         'date': fields.Datetime.now(),
                          'imported': True, 'state': 'confirm'})
         for i in range(len(reader_info)):
             val = {}
