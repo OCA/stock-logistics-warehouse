@@ -11,12 +11,26 @@ class StockInventory(models.Model):
         res.append(('file', _('By File')))
         return res
 
+    @api.depends('import_lines')
+    def _file_lines_processed(self):
+        processed = True
+        if self.import_lines:
+            processed = False
+            for line in self.import_lines:
+                if not line.fail or (line.fail and
+                                     line.fail_reason != _('No processed')):
+                    processed = True
+                    break
+        self.processed = processed
+
     imported = fields.Boolean('Imported')
     import_lines = fields.One2many('stock.inventory.import.line',
                                    'inventory_id', string='Imported Lines')
     filter = fields.Selection(_get_available_filters,
                               string='Selection Filter',
                               required=True)
+    processed = fields.Boolean(string='Has been processed at least once?',
+                               compute='_file_lines_processed')
 
     @api.one
     def process_import_lines(self):
@@ -56,3 +70,12 @@ class StockInventory(models.Model):
                                            'prod_lot_id': lot_id})
                 line.write({'fail': False, 'fail_reason': _('Processed')})
         return True
+
+    @api.multi
+    def action_done(self):
+        for inventory in self:
+            if not inventory.processed:
+                raise exceptions.Warning(
+                    _("Loaded lines must been once processed at least for "
+                      "inventory : %s") % (inventory.name))
+            super(StockInventory, inventory).action_done()
