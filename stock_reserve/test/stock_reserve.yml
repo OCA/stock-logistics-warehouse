@@ -60,8 +60,15 @@
 -
   I confirm the reservation
 -
-  !python {model: stock.reservation}: |
-    self.reserve(cr, uid, [ref('reserv_sorbet2')], context=context)
+  !python {model: stock.reservation, id: reserv_sorbet2}: |
+    self.reserve()
+-
+  I check the reserved amount of the product and the template
+-
+  !python {model: product.product, id: product_sorbet}: |
+    from nose.tools import *
+    assert_almost_equal(6.5, self.reservation_count)
+    assert_almost_equal(6.5, self.product_tmpl_id.reservation_count)
 -
   Then the reservation should be assigned and have reserved a quant
 -
@@ -73,9 +80,9 @@
 -
   I check Virtual stock of Sorbet after update reservation
 -
-  !python {model: product.product}: |
-    product = self.browse(cr, uid, ref('stock_reserve.product_sorbet'), context=context)
-    assert product.virtual_available == 3.5, "Stock is not updated."
+  !python {model: product.product, id: product_sorbet}: |
+    from nose.tools import *
+    assert_almost_equal(3.5, self.virtual_available)
 -
   I run the scheduler
 -
