@@ -15,12 +15,10 @@ class StockInventory(models.Model):
     def _file_lines_processed(self):
         processed = True
         if self.import_lines:
-            processed = False
-            for line in self.import_lines:
-                if not line.fail or (line.fail and
-                                     line.fail_reason != _('No processed')):
-                    processed = True
-                    break
+            processed = all((line.fail or
+                             (line.fail and
+                              line.fail_reason != _('No processed')))
+                            for line in self.import_lines)
         self.processed = processed
 
     imported = fields.Boolean('Imported')
@@ -76,6 +74,6 @@ class StockInventory(models.Model):
         for inventory in self:
             if not inventory.processed:
                 raise exceptions.Warning(
-                    _("Loaded lines must been once processed at least for "
+                    _("Loaded lines must be processed at least one time for "
                       "inventory : %s") % (inventory.name))
             super(StockInventory, inventory).action_done()
