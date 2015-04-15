@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from openerp.osv import orm
+from openerp.tools.translate import _
 
 
 class InvalidAmountException(Exception):
@@ -52,6 +53,14 @@ class StockMoveSplit(orm.TransientModel):
             'context': context,
         }
 
+        active_id = context.get('active_id')
+        move = self.pool['stock.move'].browse(cr, uid, active_id)
+        picking = move.picking_id
+
+        picking.message_post(
+            "Pressed correct button in the confirmation window"
+        )
+
         return res
 
     def continue_split(self, cr, uid, ids, context=None):
@@ -62,6 +71,14 @@ class StockMoveSplit(orm.TransientModel):
         # Adding continue_split to the context will silence
         # the check for amount_quantity
         context['continue_split'] = True
+
+        active_id = context.get('active_id')
+        move = self.pool['stock.move'].browse(cr, uid, active_id)
+        picking = move.picking_id
+
+        picking.message_post(
+            "Pressed continue button in the confirmation window"
+        )
 
         return self.split_lot(cr, uid, ids, context=context)
 
@@ -108,13 +125,13 @@ class StockMoveSplit(orm.TransientModel):
 
             view_id = self.get_confirm_view_id(cr, uid, context)
 
-            message = (
-                "La quantité restante de <b>%(product_name)s</b> du lot "
-                "<b>%(lot_number)s</b> du produit n'est pas suffisante. "
-                "La quantité restante dans ce numéro de lot est "
-                "<b>%(quantity)d</b> du numéro de lot en question. "
-                "Merci de corriger votre bon de livraison."
-            ).decode('utf-8')
+            message = _(
+                "The remaining amount of <b>%(product_name)s</b> in the lot "
+                "<b>%(lot_number)s</b> of the product isn't enough."
+                "The remaining amount of products in this lot number is "
+                "<b>%(quantity)d</b>."
+                "Please correct your sale order"
+            )
 
             format_dict = {
                 "product_name": exc.product_id.name,

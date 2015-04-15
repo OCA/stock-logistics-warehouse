@@ -1,0 +1,47 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* quantity_warn_on_lot
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-15 22:11+0000\n"
+"PO-Revision-Date: 2015-04-15 22:11+0000\n"
+"Last-Translator: Loïc Faure-Lacroix<loic.lacroix@savoirfairelinux.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: quantity_warn_on_lot
+#: view:stock.move.split:0
+msgid "{message}"
+msgstr ""
+
+#. module: quantity_warn_on_lot
+#: view:stock.move.split:0
+msgid "Continue"
+msgstr "Laisser tel quel"
+
+#. module: quantity_warn_on_lot
+#: code:addons/quantity_warn_on_lot/models/stock_move_split.py:133
+#, python-format
+msgid "The remaining amount of <b>%(product_name)s</b> in the lot <b>%(lot_number)s</b> isn't enough.The remaining amount of products in this lot number is <b>%(quantity)d</b>.Please correct your sale order"
+msgstr "La quantité restante de <b>%(product_name)s</b> du lot <b>%(lot_number)s</b> n'est pas suffisante. La quantité restante dans ce numéro de lot est <b>%(quantity)d</b>. Merci de corriger votre bon de livraison."
+
+#. module: quantity_warn_on_lot
+#: view:stock.move.split:0
+msgid "Confirm move split"
+msgstr "Confirmez la division du mouvement"
+
+#. module: quantity_warn_on_lot
+#: model:ir.model,name:quantity_warn_on_lot.model_stock_move_split
+msgid "Split in Serial Numbers"
+msgstr "Divisé en numéros de séries"
+
+#. module: quantity_warn_on_lot
+#: view:stock.move.split:0
+msgid "Correct"
+msgstr "Modifier"
