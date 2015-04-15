@@ -26,6 +26,18 @@ msgid "Continue"
 msgstr ""
 
 #. module: quantity_warn_on_lot
+#: code:addons/quantity_warn_on_lot/models/stock_move_split.py:80
+#, python-format
+msgid "Pressed continue button in the confirmation window"
+msgstr ""
+
+#. module: quantity_warn_on_lot
+#: code:addons/quantity_warn_on_lot/models/stock_move_split.py:61
+#, python-format
+msgid "Pressed correct button in the confirmation window"
+msgstr ""
+
+#. module: quantity_warn_on_lot
 #: code:addons/quantity_warn_on_lot/models/stock_move_split.py:133
 #, python-format
 msgid "The remaining amount of <b>%(product_name)s</b> in the lot <b>%(lot_number)s</b> of the product isn't enough.The remaining amount of products in this lot number is <b>%(quantity)d</b>.Please correct your sale order"

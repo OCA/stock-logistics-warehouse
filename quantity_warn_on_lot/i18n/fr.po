@@ -26,6 +26,18 @@ msgid "Continue"
 msgstr "Laisser tel quel"
 
 #. module: quantity_warn_on_lot
+#: code:addons/quantity_warn_on_lot/models/stock_move_split.py:80
+#, python-format
+msgid "Pressed continue button in the confirmation window"
+msgstr "A cliqué sur le bouton 'laisser tel quel' dans la fenêtre de confirmation."
+
+#. module: quantity_warn_on_lot
+#: code:addons/quantity_warn_on_lot/models/stock_move_split.py:61
+#, python-format
+msgid "Pressed correct button in the confirmation window"
+msgstr "A cliqué sur le bouton 'modifier' dans la fenêtre de confirmations."
+
+#. module: quantity_warn_on_lot
 #: code:addons/quantity_warn_on_lot/models/stock_move_split.py:133
 #, python-format
 msgid "The remaining amount of <b>%(product_name)s</b> in the lot <b>%(lot_number)s</b> isn't enough.The remaining amount of products in this lot number is <b>%(quantity)d</b>.Please correct your sale order"

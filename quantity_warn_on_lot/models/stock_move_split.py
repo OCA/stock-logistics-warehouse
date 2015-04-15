@@ -58,7 +58,7 @@ class StockMoveSplit(orm.TransientModel):
         picking = move.picking_id
 
         picking.message_post(
-            "Pressed correct button in the confirmation window"
+            _("Pressed correct button in the confirmation window")
         )
 
         return res
@@ -77,7 +77,7 @@ class StockMoveSplit(orm.TransientModel):
         picking = move.picking_id
 
         picking.message_post(
-            "Pressed continue button in the confirmation window"
+            _("Pressed continue button in the confirmation window")
         )
 
         return self.split_lot(cr, uid, ids, context=context)
@@ -169,7 +169,7 @@ class StockMoveSplit(orm.TransientModel):
                 sum_in_draft = [
                     m.product_qty
                     for m in move.prodlot_id.move_ids
-                    if m.state == 'draft' and m.id not in move_ids
+                    if m.state == 'draft'
                 ]
 
                 quantity_rest = (
