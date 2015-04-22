@@ -19,9 +19,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import logging
 
 from openerp.osv import orm
 from openerp.tools.translate import _
+
+_logger = logging.getLogger(__name__)
 
 
 class InvalidAmountException(Exception):
@@ -55,9 +58,15 @@ class StockMoveSplit(orm.TransientModel):
     def get_confirm_view_id(self, cr, uid, context=None):
         """Get the default view id for the confirm view."""
         ir_model_data = self.pool.get('ir.model.data')
-        view_ref = ir_model_data.get_object_reference(
-            cr, uid, 'quantity_warn_on_lot', 'view_confirm_split'
-        )
+
+        try:
+            view_ref = ir_model_data.get_object_reference(
+                cr, uid, 'quantity_warn_on_lot', 'view_confirm_split'
+            )
+        except ValueError as exc:
+            _logger.debug(exc)
+            view_ref = None
+
         return view_ref and view_ref[1] or False
 
     def restore_split(self, cr, uid, ids, context=None):
