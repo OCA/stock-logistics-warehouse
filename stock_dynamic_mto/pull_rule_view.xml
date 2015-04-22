@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_procurement_rule_form_dynamic_mto" model="ir.ui.view">
+            <field name="name">procurement.rule.dynamic.mto</field>
+            <field name="model">procurement.rule</field>
+            <field name="inherit_id" ref="stock.view_procurement_rule_form_stock_inherit" />
+            <field name="arch" type="xml">
+                <field name="procure_method" position="after">
+                    <field name="mts_pull_rule_id" 
+                           groups="stock.group_adv_location"
+                           attrs="{'invisible': [('procure_method', '!=', 'make_to_order')]}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
