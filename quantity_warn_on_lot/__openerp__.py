@@ -29,7 +29,8 @@
     'category': 'Others',
     'summary': 'Warnings for invalid lot quantities',
     'description': """
-Add a warning message when user is trying to book a stock move with a lot number having not enough quantity available.
+Add a warning message when user is trying to book a stock move with a lot
+number having not enough quantity available.
 """,
     'depends': [
         'stock',
@@ -41,5 +42,5 @@ Add a warning message when user is trying to book a stock move with a lot number
         'views/stock_move_split.xml',
     ],
     'installable': True,
-    'application': True,
+    'application': False,
 }
