@@ -15,7 +15,7 @@ class StockInventory(models.Model):
     def _file_lines_processed(self):
         processed = True
         if self.import_lines:
-            processed = all((line.fail or
+            processed = any((not line.fail or
                              (line.fail and
                               line.fail_reason != _('No processed')))
                             for line in self.import_lines)
