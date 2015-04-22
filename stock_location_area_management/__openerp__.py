@@ -20,7 +20,7 @@
 #
 ##############################################################################
 {
-    'name': 'Partner Area Management',
+    'name': 'Stock Location Area Management',
     'version': '0.1',
     'author': 'Savoir-faire Linux',
     'maintainer': 'Savoir-faire Linux',
@@ -30,7 +30,7 @@
     'summary': "Enter a location's area based on different units of measure",
     'depends': [
         'stock',
-        'partner_area_data'
+        'stock_location_area_data'
     ],
     'data': [
         'views/res_company.xml',

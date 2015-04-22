@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* partner_area_management
+# 	* stock_location_area_management
 #
 msgid ""
 msgstr ""
@@ -18,64 +18,64 @@ msgstr ""
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#. module: partner_area_management
-#: model:ir.model,name:partner_area_management.model_res_company
+#. module: stock_location_area_management
+#: model:ir.model,name:stock_location_area_management.model_res_company
 msgid "Companies"
 msgstr "Sociétés"
 
-#. module: partner_area_management
-#: view:stock.location:partner_area_management.partner_area_management_stock_location_search
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
 #: field:stock.location,area_dimension:0
 msgid "Dimension"
 msgstr "Dimension"
 
-#. module: partner_area_management
+#. module: stock_location_area_management
 #: field:stock.location,active_dimension:0
 msgid "Area Dimension"
 msgstr "Dimension de la surface"
 
-#. module: partner_area_management
-#: view:stock.location:partner_area_management.partner_area_management_stock_location_search
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
 msgid "Group By"
 msgstr "Grouper par"
 
-#. module: partner_area_management
-#: model:ir.model,name:partner_area_management.model_stock_location
+#. module: stock_location_area_management
+#: model:ir.model,name:stock_location_area_management.model_stock_location
 msgid "Inventory Locations"
 msgstr "Emplacements d'inventaire"
 
-#. module: partner_area_management
-#: view:res.company:partner_area_management.partner_area_management_res_company_form_view
+#. module: stock_location_area_management
+#: view:res.company:stock_location_area_management.stock_location_area_management_res_company_form_view
 msgid "Locations"
 msgstr "Emplacements"
 
-#. module: partner_area_management
-#: view:stock.location:partner_area_management.partner_area_management_stock_location_search
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
 msgid "Owner"
 msgstr "Propriétaire"
 
-#. module: partner_area_management
-#: view:stock.location:partner_area_management.partner_area_management_stock_location_search
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
 msgid "Partner"
 msgstr "Partenaire"
 
-#. module: partner_area_management
-#: view:stock.location:partner_area_management.partner_area_management_stock_location_form_view
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_form_view
 msgid "Surface"
 msgstr "Surface"
 
-#. module: partner_area_management
+#. module: stock_location_area_management
 #: help:stock.location,location_uom:0
 msgid "This field corresponds to the unit of measure of the location"
 msgstr "Ce champ correspond à l'unité de mesure de l'emplacement"
 
-#. module: partner_area_management
+#. module: stock_location_area_management
 #: help:res.company,locations_uom:0
 msgid ""
 "This field corresponds to the unit of measure of the warehouse locations"
 msgstr "Ce champ correspond à l'unité de mesure des emplacements de l'entrepôt"
 
-#. module: partner_area_management
+#. module: stock_location_area_management
 #: field:res.company,locations_uom:0 field:stock.location,location_uom:0
 msgid "Unit of Measure"
 msgstr "Unité de mesure"

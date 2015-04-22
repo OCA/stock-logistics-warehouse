@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* partner_area_data
+# 	* stock_location_area_data
 #
 msgid ""
 msgstr ""
@@ -18,17 +18,17 @@ msgstr ""
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#. module: partner_area_data
-#: model:product.uom.categ,name:partner_area_data.product_uom_categ_surface
+#. module: stock_location_area_data
+#: model:product.uom.categ,name:stock_location_area_data.product_uom_categ_surface
 msgid "Surface"
 msgstr "Surface"
 
-#. module: partner_area_data
-#: model:product.uom,name:partner_area_data.product_uom_feet2
+#. module: stock_location_area_data
+#: model:product.uom,name:stock_location_area_data.product_uom_feet2
 msgid "feet²"
 msgstr "pied²"
 
-#. module: partner_area_data
-#: model:product.uom,name:partner_area_data.product_uom_m2
+#. module: stock_location_area_data
+#: model:product.uom,name:stock_location_area_data.product_uom_m2
 msgid "m²"
 msgstr "m²"

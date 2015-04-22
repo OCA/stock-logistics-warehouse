@@ -2,9 +2,9 @@
 <openerp>
   <data>
 
-    <record id="partner_area_management_stock_location_form_view"
+    <record id="stock_location_area_management_stock_location_form_view"
             model="ir.ui.view">
-      <field name="name">partner.area.management.stock.location.form</field>
+      <field name="name">stock.location.area.management.stock.location.form</field>
       <field name="inherit_id" ref="stock.view_location_form"/>
       <field name="model">stock.location</field>
       <field name="arch" type="xml">
@@ -22,9 +22,9 @@
       </field>
     </record>
 
-    <record id="partner_area_management_stock_location_list_view"
+    <record id="stock_location_area_management_stock_location_list_view"
             model="ir.ui.view">
-      <field name="name">partner.area.management.stock.location.list</field>
+      <field name="name">stock.location.area.management.stock.location.list</field>
       <field name="inherit_id" ref="stock.view_location_tree2"/>
       <field name="model">stock.location</field>
       <field name="arch" type="xml">
@@ -35,9 +35,9 @@
       </field>
     </record>
 
-    <record id="partner_area_management_stock_location_search"
+    <record id="stock_location_area_management_stock_location_search"
             model="ir.ui.view">
-      <field name="name">partner.area.management.stock.location.search</field>
+      <field name="name">stock.location.area.management.stock.location.search</field>
       <field name="model">stock.location</field>
       <field name="inherit_id" ref="stock.view_location_search"/>
       <field name="arch" type="xml">

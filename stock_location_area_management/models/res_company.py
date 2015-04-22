@@ -35,7 +35,7 @@ class ResCompany(models.Model):
         Get the unit of measure m² (default)
         :return: Unit of measure m²
         """
-        return self.env.ref('partner_area_data.product_uom_m2')
+        return self.env.ref('stock_location_area_data.product_uom_m2')
 
     locations_uom = fields.Many2one(
         string='Unit of Measure',

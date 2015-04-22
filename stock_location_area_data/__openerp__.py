@@ -20,7 +20,7 @@
 #
 ##############################################################################
 {
-    'name': 'Partner Area Data',
+    'name': 'Stock Location Area Data',
     'version': '0.1',
     'author': 'Savoir-faire Linux',
     'maintainer': 'Savoir-faire Linux',
@@ -32,7 +32,7 @@
         'product',
     ],
     'data': [
-        'data/partner_area_data.xml',
+        'data/stock_location_area_data.xml',
     ],
     'installable': True,
     'application': False,
