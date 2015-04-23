@@ -135,7 +135,7 @@ class StockInternalTransfer(orm.TransientModel):
         wf_service.trg_validate(uid, 'stock.picking',
                                 picking_id, 'button_confirm', cr)
         picking_id = [picking_id]
-        picking_obj.action_assign(cr, uid, picking_id, context=context)
+        picking_obj.action_assign(cr, uid, picking_id)
         return picking_id
 
     def _trigger_workflow_for_delivery(self, cr, uid, ids, picking_ids,
