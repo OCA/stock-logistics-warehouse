@@ -30,23 +30,30 @@ class TestPartnerLocations(TransactionCase):
 
         self.partner_model = self.env['res.partner']
         self.location_model = self.env['stock.location']
+        self.company_model = self.env['res.company']
+
+        self.company_1 = self.company_model.create({'name': 'Test Company'})
 
         self.customer_a = self.partner_model.create({
             'name': 'Customer A',
             'customer': True,
             'supplier': False,
+            'is_company': True,
+            'company_id': self.company_1.id,
         })
 
         self.supplier_b = self.partner_model.create({
             'name': 'Supplier B',
             'customer': False,
             'supplier': True,
+            'is_company': True,
         })
 
         self.partner_c = self.partner_model.create({
             'name': 'Partner C',
             'customer': True,
             'supplier': True,
+            'is_company': True,
         })
 
     def _create_locations(self):
@@ -55,6 +62,7 @@ class TestPartnerLocations(TransactionCase):
                 'partner_id': record[0].id,
                 'name': record[1],
                 'usage': record[2],
+                'company_id': record[0].company_id.id,
             }) for record in [
                 (self.customer_a, 'Location A-1', 'customer'),
                 (self.customer_a, 'Location A-2', 'supplier'),
@@ -72,6 +80,13 @@ class TestPartnerLocations(TransactionCase):
         self.assertEqual(len(self.customer_a.location_ids), 3)
         self.assertEqual(len(self.supplier_b.location_ids), 4)
         self.assertEqual(len(self.partner_c.location_ids), 2)
+
+    def test_multi_company(self):
+        self._create_locations()
+
+        self.assertEqual(len(self.customer_a.location_ids), 3)
+        for location in self.customer_a.location_ids:
+            self.assertEqual(location.company_id, self.company_1)
 
     def check_partner_c(self):
         self.assertEqual(len(self.partner_c.location_ids), 2)

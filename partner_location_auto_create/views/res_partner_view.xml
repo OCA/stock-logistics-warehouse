@@ -23,14 +23,16 @@
 
                 <field name="property_stock_customer" position="attributes">
                     <attribute name="domain">[
-                        ('partner_id', '=', id),
+                        ('partner_id', 'in', [id, False]),
                         ('usage', '=', 'customer'),
+                        ('company_id', 'in', [company_id, False]),
                     ]</attribute>
                 </field>
                 <field name="property_stock_supplier" position="attributes">
                     <attribute name="domain">[
-                        ('partner_id', '=', id),
+                        ('partner_id', 'in', [id, False]),
                         ('usage', '=', 'supplier'),
+                        ('company_id', 'in', [company_id, False]),
                     ]</attribute>
                 </field>
             </field>

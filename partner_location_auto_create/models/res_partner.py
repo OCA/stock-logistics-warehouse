@@ -27,6 +27,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.one
+    @api.depends('location_ids')
     def count_locations(self):
         self.locations_count = len(self.location_ids)
 
@@ -59,20 +60,23 @@ class ResPartner(models.Model):
     def create(self, vals):
         partner = super(ResPartner, self).create(vals)
 
-        property_stock_customer = False
-        property_stock_supplier = False
+        if vals.get('is_company', False):
+            property_stock_customer = False
+            property_stock_supplier = False
 
-        if not vals.get('location_ids', False):
-            if partner.customer:
-                property_stock_customer = partner._create_location('customer')
+            if not vals.get('location_ids', False):
+                if partner.customer:
+                    property_stock_customer = partner._create_location(
+                        'customer')
 
-            if partner.supplier:
-                property_stock_supplier = partner._create_location('supplier')
+                if partner.supplier:
+                    property_stock_supplier = partner._create_location(
+                        'supplier')
 
-        partner.write({
-            'property_stock_customer': property_stock_customer,
-            'property_stock_supplier': property_stock_supplier,
-        })
+            partner.write({
+                'property_stock_customer': property_stock_customer,
+                'property_stock_supplier': property_stock_supplier,
+            })
 
         return partner
 
@@ -83,6 +87,7 @@ class ResPartner(models.Model):
             'name': self.name,
             'usage': usage,
             'partner_id': self.id,
+            'company_id': self.company_id.id,
         })
 
     @api.multi
@@ -96,24 +101,26 @@ class ResPartner(models.Model):
 
         if vals.get('customer'):
             for partner in self:
-                locations = partner._get_locations('customer')
+                if partner.is_company:
+                    locations = partner._get_locations('customer')
 
-                if not locations:
-                    location = partner._create_location('customer')
-                    partner.property_stock_customer = location.id
+                    if not locations:
+                        location = partner._create_location('customer')
+                        partner.property_stock_customer = location.id
 
-                if not partner.property_stock_customer:
-                    partner.property_stock_customer = locations[0].id
+                    if not partner.property_stock_customer:
+                        partner.property_stock_customer = locations[0].id
 
         if vals.get('supplier'):
             for partner in self:
-                locations = partner._get_locations('supplier')
+                if partner.is_company:
+                    locations = partner._get_locations('supplier')
 
-                if not locations:
-                    location = partner._create_location('supplier')
-                    partner.property_stock_supplier = location.id
+                    if not locations:
+                        location = partner._create_location('supplier')
+                        partner.property_stock_supplier = location.id
 
-                if not partner.property_stock_supplier:
-                    partner.property_stock_supplier = locations[0].id
+                    if not partner.property_stock_supplier:
+                        partner.property_stock_supplier = locations[0].id
 
         return res
