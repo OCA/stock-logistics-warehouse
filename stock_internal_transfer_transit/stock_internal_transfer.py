@@ -34,9 +34,7 @@ class StockInternalTransfer(orm.TransientModel):
             _prepare_picking(cr, uid, ids, context=context)
         wiz = self.browse(cr, uid, ids[0], context=context)
 
-        no_transit = context and \
-            context.get('stock_internal_transfer_no_transit', False)
-        if wiz.mode == 'force' or no_transit:
+        if wiz.mode == 'force':
             return picking_data
 
         # update destination location to transfer using
