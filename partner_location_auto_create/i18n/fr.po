@@ -28,21 +28,3 @@ msgstr "Emplacements"
 #: model:ir.model,name:partner_location_auto_create.model_res_partner
 msgid "Partner"
 msgstr "Partenaire"
-
-#. module: partner_location_auto_create
-#: view:res.partner:partner_location_auto_create.view_partner_form
-msgid ""
-"[\n"
-"                        ('partner_id', '=', id),\n"
-"                        ('usage', '=', 'customer'),\n"
-"                    ]"
-msgstr ""
-
-#. module: partner_location_auto_create
-#: view:res.partner:partner_location_auto_create.view_partner_form
-msgid ""
-"[\n"
-"                        ('partner_id', '=', id),\n"
-"                        ('usage', '=', 'supplier'),\n"
-"                    ]"
-msgstr ""
