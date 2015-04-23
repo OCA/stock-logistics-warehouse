@@ -13,11 +13,11 @@
                             <field name="mode"/>
                         </group>
                         <field name="line_ids">
-	                        <tree editable="bottom" string="Product Moves">
-	                            <field name="product_id" on_change="onchange_product_id(product_id)"/>
-	                            <field name="quantity" />
-	                            <field name="product_uom" groups="product.group_uom"/>
-	                        </tree>
+                            <tree editable="bottom" string="Product Moves">
+                                <field name="product_id" on_change="onchange_product_id(product_id)"/>
+                                <field name="quantity" />
+                                <field name="product_uom" groups="product.group_uom"/>
+                            </tree>
                         </field>
                     </sheet>
                     <footer>
