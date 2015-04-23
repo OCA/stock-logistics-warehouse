@@ -55,8 +55,6 @@ class ResPartner(models.Model):
 
         return res
 
-        return res
-
     @api.model
     def create(self, vals):
         partner = super(ResPartner, self).create(vals)
