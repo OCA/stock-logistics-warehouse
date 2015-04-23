@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-12 15:19+0000\n"
-"PO-Revision-Date: 2014-12-12 15:19+0000\n"
+"POT-Creation-Date: 2015-04-23 16:52+0000\n"
+"PO-Revision-Date: 2015-04-23 16:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_internal_transfer
-#: code:addons/stock_internal_transfer/stock_internal_transfer.py:50
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:57
 #, python-format
 msgid "Force Transfer"
 msgstr ""
@@ -48,7 +48,7 @@ msgid "stock.internal.transfer"
 msgstr ""
 
 #. module: stock_internal_transfer
-#: code:addons/stock_internal_transfer/stock_internal_transfer.py:50
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:57
 #, python-format
 msgid "Default"
 msgstr ""
@@ -74,14 +74,9 @@ msgid "Product Moves"
 msgstr ""
 
 #. module: stock_internal_transfer
-#: code:addons/stock_internal_transfer/stock_internal_transfer.py:77
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:84
 #, python-format
 msgid "Internal Transfer Wizard"
-msgstr ""
-
-#. module: stock_internal_transfer
-#: field:stock.internal.transfer,delivery_partner_id:0
-msgid "Delivery Address"
 msgstr ""
 
 #. module: stock_internal_transfer

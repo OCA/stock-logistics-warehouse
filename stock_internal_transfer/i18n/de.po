@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-12 15:19+0000\n"
-"PO-Revision-Date: 2014-12-12 16:39+0100\n"
+"POT-Creation-Date: 2015-04-23 16:52+0000\n"
+"PO-Revision-Date: 2015-04-23 18:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #. module: stock_internal_transfer
-#: code:addons/stock_internal_transfer/stock_internal_transfer.py:50
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:57
 #, python-format
 msgid "Force Transfer"
 msgstr "Ausführung erzwingen"
@@ -49,7 +49,7 @@ msgid "stock.internal.transfer"
 msgstr ""
 
 #. module: stock_internal_transfer
-#: code:addons/stock_internal_transfer/stock_internal_transfer.py:50
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:57
 #, python-format
 msgid "Default"
 msgstr "Standard"
@@ -75,15 +75,10 @@ msgid "Product Moves"
 msgstr ""
 
 #. module: stock_internal_transfer
-#: code:addons/stock_internal_transfer/stock_internal_transfer.py:77
+#: code:addons/stock_internal_transfer/stock_internal_transfer.py:84
 #, python-format
 msgid "Internal Transfer Wizard"
 msgstr "Interne Lagerbewegung"
-
-#. module: stock_internal_transfer
-#: field:stock.internal.transfer,delivery_partner_id:0
-msgid "Delivery Address"
-msgstr "Empfängeradresse"
 
 #. module: stock_internal_transfer
 #: model:ir.model,name:stock_internal_transfer.model_stock_internal_transfer_line
@@ -119,3 +114,6 @@ msgstr "Mengeneinheit"
 #: field:stock.internal.transfer.line,quantity:0
 msgid "Quantity"
 msgstr "Menge"
+
+#~ msgid "Delivery Address"
+#~ msgstr "Empfängeradresse"
