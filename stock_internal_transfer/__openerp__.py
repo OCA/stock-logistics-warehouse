@@ -29,7 +29,7 @@ Creates stock moves and pickings to transfer selected goods between two
 stock locations.
 """,
     'author': 'initOS GmbH & Co. KG',
-    'website': 'http://www.initos.com',
+    'website': 'http://www.initos.com, Odoo Community Association (OCA)',
     'depends': [
         'stock',
     ],

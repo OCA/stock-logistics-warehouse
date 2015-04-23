@@ -33,7 +33,7 @@ transit stock location (truck, ship etc) for transport.
 Second picking is to move goods from transit stock location to
 destination stock location on arrival.
 """,
-    'author': 'initOS GmbH & Co. KG',
+    'author': 'initOS GmbH & Co. KG, Odoo Community Association (OCA)',
     'website': 'http://www.initos.com',
     'depends': [
         'stock_internal_transfer',
