@@ -85,7 +85,7 @@ class StockInternalTransfer(orm.TransientModel):
             'location_id': wiz.location_id.id,
             'location_dest_id': wiz.location_dest_id.id,
             'partner_id': wiz.location_dest_id.partner_id and
-                          wiz.location_dest_id.partner_id.id or False,
+            wiz.location_dest_id.partner_id.id or False,
             # we require all products to be available for shipment
             'move_type': 'one',
         }
