@@ -105,7 +105,6 @@ class StockInternalTransfer(orm.TransientModel):
             wf_service = LocalService("workflow")
             wf_service.trg_validate(uid, 'stock.picking',
                                     transit2dst_id, 'button_confirm', cr)
-            # picking_model.action_assign(cr, uid, [transit2dst_id])
             res_ids.append(transit2dst_id)
 
         return res_ids
