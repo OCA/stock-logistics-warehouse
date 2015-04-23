@@ -50,10 +50,11 @@ class StockInternalTransfer(orm.TransientModel):
     def _show_picking(self, picking_ids):
         act_data = super(StockInternalTransfer, self).\
             _show_picking(picking_ids)
-        act_data.update({
-            'domain': [('id', 'in', picking_ids)],
-            'view_mode': 'tree,form',
-        })
+        if 1 < len(picking_ids):
+            act_data.update({
+                'domain': [('id', 'in', picking_ids)],
+                'view_mode': 'tree,form',
+            })
         return act_data
 
     def _create_transfer(self, cr, uid, ids, context=None):
