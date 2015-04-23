@@ -27,7 +27,8 @@
 Stock Dynamic MTO
 ======================
 The purpose of the module is to give the possibility to a pull rule
-make to order or make to stock depending of the virtual stock of a product.
+make to order to act like a make to stock rule depending of the virtual 
+stock of a product.
 """,
     "license": "AGPL-3",
     "author": "Akretion,Odoo Community Association (OCA)",
