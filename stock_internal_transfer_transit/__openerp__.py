@@ -22,8 +22,7 @@
     'name': 'Stock internal transfer transit',
     'version': '1.0',
     'category': '',
-    'summary': "Process internal transfers using a dedicated "
-               "transfer stock location.",
+    'summary': "Process internal transfers using a dedicated stock location.",
     'description': """
 Customize wizard from 'stock_internal_transfer' module to process internal
 transfers between stock locations using a dedicated 'transit' stock location.
