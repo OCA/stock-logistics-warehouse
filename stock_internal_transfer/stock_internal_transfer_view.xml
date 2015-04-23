@@ -9,8 +9,7 @@
                     <sheet>
                         <group>
                             <field name="location_id"/>
-                            <field name="location_dest_id" on_change="onchange_location_dest_id(location_dest_id)"/>
-                            <field name="delivery_partner_id"/>
+                            <field name="location_dest_id"/>
                             <field name="mode"/>
                         </group>
                         <field name="line_ids">

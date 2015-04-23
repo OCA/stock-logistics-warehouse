@@ -63,8 +63,6 @@ class StockInternalTransfer(orm.TransientModel):
         'location_dest_id': fields.many2one(
             'stock.location', string="Dest. Location", required=True,
             ondelete='CASCADE', domain=[('usage', '<>', 'view')]),
-        'delivery_partner_id': fields.many2one(
-            'res.partner', string="Delivery Address", required=True),
         'line_ids': fields.one2many(
             'stock.internal.transfer.line', 'wizard_id', 'Move Lines'),
         'mode': fields.selection(
@@ -76,14 +74,6 @@ class StockInternalTransfer(orm.TransientModel):
         'mode': 'default',
     }
 
-    def onchange_location_dest_id(self, cr, uid, ids, location_dest_id,
-                                  context=None):
-        if location_dest_id:
-            location = self.pool['stock.location'].\
-                browse(cr, uid, location_dest_id, context=context)
-            return {'value': {'delivery_partner_id': location.partner_id.id}}
-        return {}
-
     def _prepare_picking(self, cr, uid, ids, context=None):
         assert len(ids) == 1, \
             'This function should only be used for a single id at a time.'
@@ -94,7 +84,8 @@ class StockInternalTransfer(orm.TransientModel):
             'origin': _('Internal Transfer Wizard'),
             'location_id': wiz.location_id.id,
             'location_dest_id': wiz.location_dest_id.id,
-            'partner_id': wiz.delivery_partner_id.id,
+            'partner_id': wiz.location_dest_id.partner_id and
+                          wiz.location_dest_id.partner_id.id or False,
             # we require all products to be available for shipment
             'move_type': 'one',
         }
