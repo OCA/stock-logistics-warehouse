@@ -35,7 +35,7 @@ Partner Location Auto Create
 Create a stock location automatically for a partner when it is created
 """,
     'depends': [
-        'stock',
+        'sale_stock',
     ],
     'demo': [],
     'data': [
