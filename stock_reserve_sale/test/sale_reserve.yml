@@ -33,6 +33,8 @@
     order_line:
       - product_id: product_gelato
         product_uom_qty: 4
+      - product_id: product_gelato
+        product_uom_qty: 1
 -
   I call the wizard to reserve the products of the sales order
 -
@@ -46,9 +48,9 @@
 -
   I check Virtual stock of Gelato after update reservation
 -
-  !python {model: product.product, id: product_gelato}: |
-    from nose.tools import *
-    assert_almost_equal(self.virtual_available, 6.0)
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_gelato'), context=context)
+    assert product.virtual_available == 5, "Stock is not updated after reservation."
 -
   I release the sales order's reservations
 -
@@ -57,6 +59,6 @@
 -
   I check Virtual stock of Gelato after release of reservations
 -
-  !python {model: product.product, id: product_gelato}: |
-    from nose.tools import *
-    assert_almost_equal(self.virtual_available, 10.0)
+  !python {model: product.product}: |
+    product = self.browse(cr, uid, ref('product_gelato'), context=context)
+    assert product.virtual_available == 10, "Stock is not updated after releasing reservations."
