@@ -171,6 +171,12 @@ class TestPartnerLocations(TransactionCase):
 
         self.assertEqual(len(self.partner_d.location_ids), 0)
 
+        # If the partner becomes a company, the locations must
+        # be created
+        self.partner_d.write({'is_company': True})
+        self.partner_d.refresh()
+        self.assertEqual(len(self.partner_d.location_ids), 2)
+
     def test_location_parent(self):
         self.assertEqual(len(self.partner_c.location_ids), 2)
         for location in self.partner_c.location_ids:
@@ -206,12 +212,10 @@ class TestPartnerLocations(TransactionCase):
         location_a = self.customer_a.location_ids[0]
         self.assertEqual(self.customer_a.location_ids[0].usage, 'customer')
         self.assertEqual(self.customer_a.property_stock_customer, location_a)
-        self.assertEqual(len(self.customer_a.property_stock_supplier), 0)
 
         self.assertEqual(len(self.supplier_b.location_ids), 1)
         location_b = self.supplier_b.location_ids[0]
         self.assertEqual(location_b.usage, 'supplier')
-        self.assertEqual(len(self.supplier_b.property_stock_customer), 0)
         self.assertEqual(self.supplier_b.property_stock_supplier, location_b)
 
         self.check_partner_c()
@@ -247,11 +251,13 @@ class TestPartnerLocations(TransactionCase):
         self._create_locations()
 
         self.customer_a.write({'supplier': True})
-        self.assertEqual(len(self.customer_a.location_ids), 3)
+        self.customer_a.refresh()
+        self.assertEqual(len(self.customer_a.location_ids), 4)
         self.check_customer_a_supplier_location()
 
         self.supplier_b.write({'customer': True})
-        self.assertEqual(len(self.supplier_b.location_ids), 4)
+        self.supplier_b.refresh()
+        self.assertEqual(len(self.supplier_b.location_ids), 5)
         self.check_supplier_b_customer_location()
 
         self.partner_c.write({'supplier': True, 'customer': True})
