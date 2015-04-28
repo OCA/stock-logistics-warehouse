@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-23 13:05+0000\n"
-"PO-Revision-Date: 2015-04-23 13:05+0000\n"
+"POT-Creation-Date: 2015-04-28 13:22+0000\n"
+"PO-Revision-Date: 2015-04-28 13:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: partner_location_auto_create
-#: code:addons/partner_location_auto_create/models/res_partner.py:43
+#: model:ir.model,name:partner_location_auto_create.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: partner_location_auto_create
+#: field:res.company,default_customer_location:0
+msgid "Default Customer Location"
+msgstr ""
+
+#. module: partner_location_auto_create
+#: field:res.company,default_supplier_location:0
+msgid "Default Supplier Location"
+msgstr ""
+
+#. module: partner_location_auto_create
+#: code:addons/partner_location_auto_create/models/res_partner.py:44
 #: view:res.partner:partner_location_auto_create.view_partner_form
 #: field:res.partner,location_ids:0
 #, python-format

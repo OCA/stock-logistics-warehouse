@@ -83,11 +83,13 @@ class ResPartner(models.Model):
     @api.multi
     def _create_location(self, usage):
         self.ensure_one()
+
         return self.env['stock.location'].create({
             'name': self.name,
             'usage': usage,
             'partner_id': self.id,
             'company_id': self.company_id.id,
+            'location_id': self.company_id.get_default_location(usage).id,
         })
 
     @api.multi
@@ -97,6 +99,12 @@ class ResPartner(models.Model):
 
     @api.multi
     def write(self, vals):
+        if vals.get('name'):
+            for partner in self:
+                locations = partner.location_ids.filtered(
+                    lambda l: l.name == partner.name)
+                locations.write({'name': vals.get('name')})
+
         res = super(ResPartner, self).write(vals)
 
         if vals.get('customer'):
@@ -122,5 +130,8 @@ class ResPartner(models.Model):
 
                     if not partner.property_stock_supplier:
                         partner.property_stock_supplier = locations[0].id
+
+        if 'active' in vals:
+            self.location_ids.write({'active': vals['active']})
 
         return res

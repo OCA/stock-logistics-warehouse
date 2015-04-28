@@ -20,5 +20,24 @@
 #
 ##############################################################################
 
-from . import res_company
-from . import res_partner
+from openerp import models, fields, api
+
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    default_customer_location = fields.Many2one(
+        'stock.location', 'Default Customer Location',
+        default=lambda self: self.env.ref('stock.stock_location_customers'))
+
+    default_supplier_location = fields.Many2one(
+        'stock.location', 'Default Supplier Location',
+        default=lambda self: self.env.ref('stock.stock_location_suppliers'))
+
+    @api.multi
+    def get_default_location(self, usage):
+        self.ensure_one()
+
+        return usage == 'customer' and \
+            self.default_customer_location or \
+            self.default_supplier_location

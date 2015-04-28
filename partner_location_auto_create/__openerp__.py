@@ -40,6 +40,7 @@ Create a stock location automatically for a partner when it is created
     'demo': [],
     'data': [
         'views/res_partner_view.xml',
+        'views/res_company_view.xml',
     ],
     'test': [],
     'auto_install': False,

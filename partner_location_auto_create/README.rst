@@ -16,7 +16,8 @@ To install this module, you just need to select the module and insure yourself d
 Configuration
 =============
 
-Nothing to do.
+In the company form, select the default partner and customer locations. This will set the default parent
+location for the partner locations.
 
 
 Usage
