@@ -48,10 +48,10 @@ class ResPartner(models.Model):
         }
 
         if len(self.location_ids) == 1:
-            res['res_id'] = self.location_ids[0].id
+            res['res_id'] = self.location_ids.id
             res['view_mode'] = 'form'
         else:
-            res['domain'] = [('partner_id', '=', self[0].id)]
+            res['domain'] = [('partner_id', '=', self.id)]
             res['view_mode'] = 'tree,form'
 
         return res

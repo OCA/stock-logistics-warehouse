@@ -36,8 +36,9 @@ class ResCompany(models.Model):
 
     @api.multi
     def get_default_location(self, usage):
+        "Return the company's default location related to a usage type"
         self.ensure_one()
 
-        return usage == 'customer' and \
-            self.default_customer_location or \
-            self.default_supplier_location
+        return (
+            self.default_customer_location if usage == 'customer' else
+            self.default_supplier_location)
