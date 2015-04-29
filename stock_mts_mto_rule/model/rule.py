@@ -19,25 +19,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###############################################################################
-{
-    "name": "Stock Dynamic MTO",
-    "version": "1.0",
-    "category": "Stock",
-    "description": """
-Stock Dynamic MTO
-======================
-The purpose of the module is to give the possibility to a pull rule
-make to order to act like a make to stock rule depending of the virtual
-stock of a product.
-""",
-    "license": "AGPL-3",
-    "author": "Akretion,Odoo Community Association (OCA)",
-    "website": "http://www.akretion.com/",
-    "depends": [
-        "stock",
-        ],
-    "data": [
-        "pull_rule_view.xml",
-        ],
-    "installable": True,
-}
+from openerp import models, api, fields
+from openerp.tools.translate import _
+
+
+class ProcurementRule(models.Model):
+    _inherit = 'procurement.rule'
+
+    mts_rule_id = fields.Many2one('procurement.rule',
+                                  string="MTS Rule")
+    mto_rule_id = fields.Many2one('procurement.rule',
+                                  string="MTO Rule")
+
+    @api.model
+    def _get_action(self):
+        return [('split_procurement', _('Choose between MTS and MTO'))] + \
+            super(ProcurementRule, self)._get_action()

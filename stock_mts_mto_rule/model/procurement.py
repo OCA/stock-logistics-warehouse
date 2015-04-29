@@ -19,14 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###############################################################################
-from openerp import models, fields, api
-
-
-class ProcurementRule(models.Model):
-    _inherit = 'procurement.rule'
-
-    mts_pull_rule_id = fields.Many2one('procurement.rule',
-                                       string="MTS Rule")
+from openerp import models, api
 
 
 class ProcurementOrder(models.Model):
@@ -49,32 +42,50 @@ class ProcurementOrder(models.Model):
         return self.product_qty
 
     @api.model
+    def _get_mts_mto_procurement(self, proc, rule, qty, uos_qty):
+        return {
+            'name': rule.name,
+            'origin': proc.rule_id.name,
+            'product_qty': qty,
+            'product_uos_qty': uos_qty,
+            'rule_id': rule.id,
+        }
+
+    @api.model
     def _run(self, procurement):
-        uom_obj = self.env['product.uom']
-        rule_id = procurement.rule_id
-        rule_mts = rule_id and rule_id.mts_pull_rule_id or False
-        if rule_mts:
+        if procurement.rule_id and \
+                procurement.rule_id.action == 'split_procurement':
+            uom_obj = self.env['product.uom']
             needed_qty = procurement.get_mto_qty_to_order()
+            rule = procurement.rule_id
             if needed_qty == 0.0:
-                procurement.write({'rule_id': rule_mts.id})
-                return super(ProcurementOrder, self)._run(procurement)
+                mts_vals = self._get_mts_mto_procurement(
+                    procurement, rule.mts_rule_id, procurement.product_qty,
+                    procurement.product_uos_qty)
+                mts_proc = procurement.copy(mts_vals)
+                mts_proc.run()
+            elif needed_qty == procurement.product_qty:
+                mto_vals = self._get_mts_mto_procurement(
+                    procurement, rule.mto_rule_id, procurement.product_qty,
+                    procurement.product_uos_qty)
+                mto_proc = procurement.copy(mto_vals)
+                mto_proc.run()
             else:
-                if needed_qty != procurement.product_qty:
-                    mts_qty = procurement.product_qty - needed_qty
-                    mts_uos_qty = uom_obj._compute_qty(
-                        procurement.product_uom.id,
-                        mts_qty,
-                        procurement.product_uos.id)
-                    default_vals = {
-                        'product_qty': mts_qty,
-                        'product_uos_qty': mts_uos_qty,
-                    }
-                    uos_qty = procurement.product_uos_qty
-                    update_vals = {
-                        'product_qty': needed_qty,
-                        'product_uos_qty': uos_qty - mts_uos_qty,
-                    }
-                    mts_proc = procurement.copy(default=default_vals)
-                    mts_proc.run()
-                    procurement.write(update_vals)
+                mts_qty = procurement.product_qty - needed_qty
+                mts_uos_qty = uom_obj._compute_qty(
+                    procurement.product_uom.id,
+                    mts_qty,
+                    procurement.product_uos.id)
+                mts_vals = self._get_mts_mto_procurement(
+                    procurement, rule.mts_rule_id, mts_qty, mts_uos_qty)
+                mts_proc = procurement.copy(mts_vals)
+                mts_proc.run()
+
+                uos_qty = procurement.product_uos_qty
+                mto_vals = self._get_mts_mto_procurement(
+                    procurement, rule.mto_rule_id, needed_qty,
+                    uos_qty - mts_uos_qty)
+
+                mto_proc = procurement.copy(mto_vals)
+                mto_proc.run()
         return super(ProcurementOrder, self)._run(procurement)
