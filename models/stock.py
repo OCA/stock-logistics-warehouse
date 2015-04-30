@@ -24,13 +24,17 @@ class StockQuant(models.Model):
                      ('reservation_id', '=', False),
                      ('propagated_from_id', '=',
                       quant2merge.propagated_from_id.id)])
+                cont = 1
+                cost = quant2merge.cost
                 for quant in quants:
                     if (self._get_latest_move(quant2merge) ==
                             self._get_latest_move(quant)):
                         quant2merge.sudo().qty += quant.qty
-                        quant2merge.sudo().cost += quant.cost
+                        cost += quant.cost
+                        cont += 1
                         pending_quants -= quant
                         quant.sudo().unlink()
+                quant2merge.sudo().cost = cost / cont
 
     @api.model
     def quants_unreserve(self, move):
