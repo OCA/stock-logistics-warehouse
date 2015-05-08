@@ -39,7 +39,6 @@ number having not enough quantity available.
         'python': [],
     },
     'data': [
-        'views/stock_move_split.xml',
     ],
     'installable': True,
     'application': False,
