@@ -65,6 +65,7 @@
                     <field name="product_uom" />
                     <field name="date_validity" />
                     <field name="restrict_partner_id" groups="stock.group_tracking_owner"/>
+                    <field name="location_id" />
                     <field name="state"/>
                     <button name="reserve" type="object"
                         string="Reserve"
@@ -106,6 +107,9 @@
                         <filter string="Product UoM" domain="[]"
                             name="groupby_product_uom"
                             context="{'group_by': 'product_uom'}"/>
+                        <filter string="Source Location" domain="[]"
+                            name="groupby_location"
+                            context="{'group_by': 'location_id'}"/>
                     </group>
                 </search>
             </field>
