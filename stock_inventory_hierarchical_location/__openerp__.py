@@ -20,8 +20,9 @@
 
 {
     "name": "Exhaustive and hierarchical Stock Inventories",
+    "summary": "Extra consistency checks",
     "version": "1.1",
-    "author": u"Numérigraphe",
+    "author": u"Numérigraphe,Odoo Community Association (OCA)",
     "category": "Hidden",
     "description": """
 Make exhaustive Inventories aware of their Sub-Inventories.
