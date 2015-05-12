@@ -29,7 +29,8 @@ class ProcurementOrder(models.Model):
     def get_mto_qty_to_order(self):
         self.ensure_one()
         uom_obj = self.env['product.uom']
-        proc_warehouse = self.with_context(warehouse=self.warehouse_id.id)
+        stock_location = self.warehouse_id.lot_stock_id.id
+        proc_warehouse = self.with_context(location=stock_location)
         virtual_available = proc_warehouse.product_id.virtual_available
         qty_available = uom_obj._compute_qty(self.product_id.uom_id.id,
                                              virtual_available,
@@ -43,13 +44,32 @@ class ProcurementOrder(models.Model):
 
     @api.model
     def _get_mts_mto_procurement(self, proc, rule, qty, uos_qty):
+        origin = (proc.group_id and (proc.group_id.name + ":") or "") + \
+                 (proc.rule_id and proc.rule_id.name or proc.origin or "/")
         return {
             'name': rule.name,
-            'origin': proc.rule_id.name,
+            'origin': origin,
             'product_qty': qty,
             'product_uos_qty': uos_qty,
             'rule_id': rule.id,
         }
+
+    @api.model
+    def _check(self, procurement):
+        if procurement.rule_id and \
+                procurement.rule_id.action == 'split_procurement':
+            if procurement.state == 'running':
+                return True
+        return super(ProcurementOrder, self)._check(procurement)
+
+    @api.multi
+    def run(self, autocommit=False):
+        res = super(ProcurementOrder, self).run(autocommit=autocommit)
+        for proc in self:
+            if proc.rule_id and \
+                    proc.rule_id.action == 'split_procurement':
+                proc.check()
+        return res
 
     @api.model
     def _run(self, procurement):
