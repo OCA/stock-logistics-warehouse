@@ -23,7 +23,7 @@ msgstr "Réference complète"
 #. module: stock_inventory_hierarchical
 #: constraint:stock.inventory:0
 msgid "Error: You can not create recursive inventories."
-msgstr "Erreur : Vous ne pouvez pas créer d'inventaire récursifs."
+msgstr "Erreur : Vous ne pouvez pas créer d'inventaire récursif."
 
 #. module: stock_inventory_hierarchical
 #: code:_description:0
