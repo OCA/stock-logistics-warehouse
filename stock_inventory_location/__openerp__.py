@@ -20,9 +20,10 @@
 
 {
     "name": "Exhaustive Stock Inventories",
+    "summary": "Remove from the stock what is not in the Physical Inventory.",
     "version": "1.1",
     "depends": ["stock"],
-    "author": u"Numérigraphe",
+    "author": u"Numérigraphe,Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "description": """
 Let users make exhaustive Inventories

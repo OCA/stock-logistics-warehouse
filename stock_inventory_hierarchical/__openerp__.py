@@ -20,9 +20,10 @@
 
 {
     "name": "Hierarchical Physical Inventory",
+    "summary": "Group several Physical Inventories in a master inventory",
     "version": "1.1",
     "depends": ["stock"],
-    "author": "Numérigraphe",
+    "author": u"Numérigraphe,Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "description": """
 Hierarchical structure for Physical Inventories and sub-Inventories
