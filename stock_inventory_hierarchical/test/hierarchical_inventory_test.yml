@@ -1,5 +1,5 @@
 -
-  In this file, i check rules about hierarchical inventories.
+  In this file, I check rules about hierarchical inventories.
   Children date must be the same of parent date for each state,
   the state of parent and children can change only if conditions are correct.
 -
@@ -80,7 +80,7 @@
     assert parent_state == 'confirm', "Parent inventory have '%s' state. It should be 'confirm'" % parent_state
 
 -
-  Now, i'll validate all children inventory before validate the parent.
+  Now, I'll validate all children inventory before I validate the parent.
 -
   !python {model: stock.inventory}: |
     self.action_done(cr, uid, [ref('child_1_id')])
