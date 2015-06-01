@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <!-- Record a non exhaustive inventory -->
+        <record id="inventory_standard" model="stock.inventory">
+            <field name="name">Standard inventory</field>
+            <field name="state">draft</field>
+        </record>
+
+        <!-- Record an exhaustive inventory -->
+        <record id="inventory_exhaustive" model="stock.inventory">
+            <field name="name">Exhaustive inventory</field>
+            <field name="state">draft</field>
+            <field name="exhaustive">True</field>
+            <field name="location_id" model="stock.location" search="[('name', '=', 'Shelf 2')]" />
+        </record>
+
+        <!-- Record an inventory dated in the future -->
+        <!--  TODOv8: remove this entry, only useful for a test already in trunk-wms -->
+        <record id="inventory_future" model="stock.inventory">
+            <field name="name">Inventory in the future</field>
+            <field name="state">draft</field>
+            <field name="date">2020-03-01 00:00:00</field>
+        </record>
+    </data>
+</openerp>

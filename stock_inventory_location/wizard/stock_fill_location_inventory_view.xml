@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_stock_fill_inventory_location" model="ir.ui.view">
+            <field name="name">Import Inventory</field>
+            <field name="model">stock.fill.inventory</field>
+            <field name="inherit_id" ref="stock.view_stock_fill_inventory" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_id']" position="after">
+                    <field name="exhaustive" invisible="1" />
+                </xpath>
+                <xpath expr="//field[@name='location_id']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('exhaustive','=',True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

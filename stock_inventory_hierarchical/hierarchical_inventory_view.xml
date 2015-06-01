@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Add parent_id and number of Sub-inventories to form view -->
+        <record model="ir.ui.view" id="stock_inventory_hierarchical_tree_view">
+            <field name="name">hierarchical.inventory.tree</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_tree" />
+            <field name="field_parent">inventory_ids</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="replace">
+                    <field name="complete_name" string="Reference"/>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="progress_rate" widget="progressbar" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add the parent_id filter to search view  -->
+        <record model="ir.ui.view" id="view_inventory_subinventories_filter">
+            <field name="name">hierarchical.inventory.filter</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <filter icon="terp-check" name="main_inventories" string="Main inventories" domain="[('parent_id', '=', False)]" help="Only select inventories that have no parents." />
+                    <separator orientation="vertical"/>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="parent_id" />
+                </xpath>
+            </field>
+        </record>
+        <!-- Show main inventories by default -->
+        <record id="stock.action_inventory_form" model="ir.actions.act_window">
+            <field name="context">{'full':'1', 'search_default_main_inventories':1}</field>
+        </record>
+
+        <!-- Open the children of the current Inventory in a distinct list
+              to let users work in a normal window instead of a popup -->
+        <act_window id="action_view_sub_inventory"
+            name="View Sub-inventories"
+            res_model="stock.inventory"
+            src_model="stock.inventory"
+            view_mode="tree,form"
+            view_type="form"
+            domain="[('parent_id', 'child_of', active_id),('id', '!=', active_id)]"
+            context="{'full':1, 'search_default_main_inventories':0}"/>
+
+        <record model="ir.ui.view" id="stock_inventory_hierarchical_form_view">
+            <field name="name">hierarchical.inventory.form</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form//div[@class='oe_right oe_button_box']" position="inside">
+                    <button name="%(action_view_sub_inventory)d" string="View Sub-inventories" type="action" />
+                </xpath>
+                <xpath expr="/form//field[@name='name']" position="after">
+                    <field name="parent_id"/>
+                </xpath>
+                <xpath expr="/form//field[@name='date']" position="attributes">
+                    <attribute name="attrs">{'readonly':[('parent_id', '!=', False)]}</attribute>
+                </xpath>
+                <xpath expr="/form//field[@name='date']" position="after">
+                    <field name="progress_rate" widget="progressbar" />
+                </xpath>
+                <xpath
+                    expr="//page[@string='General Information']"
+                    position="after">
+                    <page string="Sub-inventories">
+                        <field name="inventory_ids" nolabel="1" context="{'default_parent_id': active_id}">
+                            <tree>
+                                <field name="name" />
+                                <field name="state" />
+                                <field name="progress_rate" widget="progressbar" />
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
