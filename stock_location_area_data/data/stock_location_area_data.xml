@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="product_uom_categ_surface" model="product.uom.categ">
+      <field name="name">Surface</field>
+    </record>
+
+    <record id="product_uom_m2" model="product.uom">
+      <field name="name">m²</field>
+      <field name="category_id" eval="product_uom_categ_surface"/>
+      <field name="uom_type">reference</field>
+    </record>
+
+    <record id="product_uom_feet2" model="product.uom">
+      <field name="name">feet²</field>
+      <field name="category_id" eval="product_uom_categ_surface"/>
+      <field name="uom_type">smaller</field>
+      <field name="factor">10.76391042</field>
+    </record>
+
+  </data>
+</openerp>
