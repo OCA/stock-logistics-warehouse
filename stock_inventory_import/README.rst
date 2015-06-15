@@ -5,6 +5,10 @@ Stock Inventory Import from CSV file
 ====================================
 
 Wizard to import Inventory from a CSV file
+
+Configuration
+=============
+
 The file must have at least 2 columns with "code" and "quantity" Head Keys.
 You can also add a third column with Key "location" to add product location
 (if not defined, default inventory location will be used)
