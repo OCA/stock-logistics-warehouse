@@ -31,7 +31,8 @@ class ImportInventory(models.TransientModel):
         if 'active_id' in ctx:
             inventory_obj = self.env['stock.inventory']
             inventory = inventory_obj.browse(ctx['active_id'])
-        return inventory.location_id
+            return inventory.location_id
+        return False
 
     data = fields.Binary('File', required=True)
     name = fields.Char('Filename')
