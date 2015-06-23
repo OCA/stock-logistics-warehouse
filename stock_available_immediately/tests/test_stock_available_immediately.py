@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2015 Therp BV (<http://therp.nl>)
+#    Copyright (C) 2015 Therp BV <http://therp.nl>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -24,7 +24,7 @@ class testStockLogisticsWarehouse(TransactionCase):
 
     def test01_stock_levels(self):
         """checking that immediately_usable_qty actually reflects \
-the variatins in stock, both on product and template"""
+the variations in stock, both on product and template"""
         moveObj = self.env['stock.move']
         productObj = self.env['product.product']
         templateObj = self.env['product.template']
@@ -33,7 +33,7 @@ the variatins in stock, both on product and template"""
         customer_location = self.env.ref('stock.stock_location_customers')
         uom_unit = self.env.ref('product.product_uom_unit')
 
-        # create product template
+        # Create product template
         templateAB = templateObj.create(
             {'name': 'templAB',
              'uom_id': uom_unit.id,
@@ -58,7 +58,7 @@ the variatins in stock, both on product and template"""
              'product_tmpl_id': templateAB.id,
              })
 
-        # CREATE a stock move from INCOMING to STOCK
+        # Create a stock move from INCOMING to STOCK
         stockMoveInA = moveObj.create(
             {'location_id': supplier_location.id,
              'location_dest_id': stock_location.id,
