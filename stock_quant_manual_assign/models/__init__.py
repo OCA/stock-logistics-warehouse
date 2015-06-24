@@ -2,4 +2,4 @@
 ##############################################################################
 # For copyright and license notices, see __openerp__.py file in root directory
 ##############################################################################
-from . import assign_manual_quants
+from . import stock_picking
