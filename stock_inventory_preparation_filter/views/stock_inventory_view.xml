@@ -15,12 +15,15 @@
                     </page>
                     <notebook position="before">
                         <group>
-                            <field name="categ_ids" nolabel="1"
-                                attrs="{'invisible':[('filter','!=','categories')]}" />
-                            <field name="product_ids" nolabel="1"
-                                attrs="{'invisible':[('filter','!=','products')]}" />
-                            <field name="lot_ids" nolabel="1"
-                                attrs="{'invisible':[('filter','!=','lots')]}" />
+                            <field name="categ_ids"
+                                   nolabel="1"
+                                   attrs="{'invisible':[('filter','!=','categories')]}" />
+                            <field name="product_ids"
+                                   nolabel="1"
+                                   attrs="{'invisible':[('filter','!=','products')]}" />
+                            <field name="lot_ids"
+                                   nolabel="1"
+                                   attrs="{'invisible':[('filter','!=','lots')]}" />
                         </group>
                     </notebook>
                     <notebook position="inside">

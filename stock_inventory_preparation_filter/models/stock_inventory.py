@@ -16,23 +16,19 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 
 
-class StockInventoryEmptyLines(orm.Model):
+class StockInventoryEmptyLines(models.Model):
     _name = 'stock.inventory.line.empty'
 
-    _columns = {
-        'product_code': fields.char('Product Code', size=64, required=True),
-        'product_qty': fields.float('Quantity', required=True),
-        'inventory_id': fields.many2one('stock.inventory', 'Inventory',
-                                        required=True, ondelete="cascade"),
-    }
-
-    _defaults = {
-        'product_qty': 1.0,
-    }
+    product_code = fields.Char(
+        string='Product Code', size=64, required=True)
+    product_qty = fields.Float(
+        string='Quantity', required=True, default=1.0)
+    inventory_id = fields.Many2one(
+        comodel_name='stock.inventory', string='Inventory',
+        required=True, ondelete="cascade")
 
 
 class StockInventoryFake(object):
@@ -45,17 +41,17 @@ class StockInventoryFake(object):
         self.package_id = inventory.package_id
 
 
-class StockInventory(orm.Model):
+class StockInventory(models.Model):
     _inherit = 'stock.inventory'
 
-    def _get_available_filters(self, cr, uid, context=None):
-        """This function will return the list of filter allowed according to
+    @api.model
+    def _get_available_filters(self):
+        """This function will return the list of filters allowed according to
         the options checked in 'Settings/Warehouse'.
 
         :return: list of tuple
         """
-        res_filters = super(StockInventory, self)._get_available_filters(
-            cr, uid, context=context)
+        res_filters = super(StockInventory, self)._get_available_filters()
         res_filters.append(('categories', _('Selected Categories')))
         res_filters.append(('products', _('Selected Products')))
         for res_filter in res_filters:
@@ -64,82 +60,74 @@ class StockInventory(orm.Model):
         res_filters.append(('empty', _('Empty list')))
         return res_filters
 
-    _columns = {
-        'filter': fields.selection(_get_available_filters, 'Selection Filter',
-                                   required=True),
-        'categ_ids': fields.many2many('product.category',
-                                      'rel_inventories_categories',
-                                      'inventory_id', 'category_id',
-                                      'Categories'),
-        'product_ids': fields.many2many('product.product',
-                                        'rel_inventories_products',
-                                        'inventory_id', 'product_id',
-                                        'Products'),
-        'lot_ids': fields.many2many('stock.production.lot',
-                                    'rel_inventories_lots', 'inventory_id',
-                                    'lot_id', 'Lots'),
-        'empty_line_ids': fields.one2many('stock.inventory.line.empty',
-                                          'inventory_id', 'Capture Lines'),
-    }
+    filter = fields.Selection(
+        selection=_get_available_filters, string='Selection Filter',
+        required=True)
+    categ_ids = fields.Many2many(
+        comodel_name='product.category', relation='rel_inventories_categories',
+        column1='inventory_id', column2='category_id', string='Categories')
+    product_ids = fields.Many2many(
+        comodel_name='product.product', relation='rel_inventories_products',
+        column1='inventory_id', column2='product_id', string='Products')
+    lot_ids = fields.Many2many(
+        comodel_name='stock.production.lot', relation='rel_inventories_lots',
+        column1='inventory_id', column2='lot_id', string='Lots')
+    empty_line_ids = fields.One2many(
+        comodel_name='stock.inventory.line.empty', inverse_name='inventory_id',
+        string='Capture Lines')
 
-    def _get_inventory_lines(self, cr, uid, inventory, context=None):
+    @api.model
+    def _get_inventory_lines(self, inventory):
         vals = []
-        product_tmpl_obj = self.pool['product.template']
-        product_obj = self.pool['product.product']
+        product_tmpl_obj = self.env['product.template']
+        product_obj = self.env['product.product']
         if inventory.filter in ('categories', 'products'):
-            product_ids = []
+            products = product_obj
             if inventory.filter == 'categories':
-                product_tmpl_ids = product_tmpl_obj.search(
-                    cr, uid, [('categ_id', 'in', inventory.categ_ids.ids)],
-                    context=context)
-                product_ids = product_obj.search(
-                    cr, uid, [('product_tmpl_id', 'in', product_tmpl_ids)],
-                    context=context)
+                product_tmpls = product_tmpl_obj.search(
+                    [('categ_id', 'in', inventory.categ_ids.ids)])
+                products = product_obj.search(
+                    [('product_tmpl_id', 'in', product_tmpls.ids)])
             elif inventory.filter == 'products':
-                product_ids = inventory.product_ids.ids
-            for product in product_obj.browse(cr, uid, product_ids,
-                                              context=context):
+                products = inventory.product_ids
+            for product in products:
                 fake_inventory = StockInventoryFake(inventory, product=product)
                 vals += super(StockInventory, self)._get_inventory_lines(
-                    cr, uid, fake_inventory, context=context)
+                    fake_inventory)
         elif inventory.filter == 'lots':
             for lot in inventory.lot_ids:
                 fake_inventory = StockInventoryFake(inventory, lot=lot)
                 vals += super(StockInventory, self)._get_inventory_lines(
-                    cr, uid, fake_inventory, context=context)
+                    fake_inventory)
         elif inventory.filter == 'empty':
-            values = []
             tmp_lines = {}
-            empty_line_obj = self.pool['stock.inventory.line.empty']
+            empty_line_obj = self.env['stock.inventory.line.empty']
             for line in inventory.empty_line_ids:
                 if line.product_code in tmp_lines:
                     tmp_lines[line.product_code] += line.product_qty
                 else:
                     tmp_lines[line.product_code] = line.product_qty
-            empty_line_obj.unlink(cr, uid, inventory.empty_line_ids.ids,
-                                  context=context)
+            inventory.empty_line_ids.unlink()
             for product_code in tmp_lines.keys():
-                product_ids = product_obj.search(
-                    cr, uid, [('default_code', '=', product_code)],
-                    context=context)
-                if product_ids:
-                    product = product_obj.browse(cr, uid, product_ids[0],
-                                                 context=context)
-                    fake_inventory = StockInventoryFake(inventory,
-                                                        product=product)
+                products = product_obj.search(
+                    [('default_code', '=', product_code)])
+                if products:
+                    product = products[0]
+                    fake_inventory = StockInventoryFake(
+                        inventory, product=product)
                     values = super(StockInventory, self)._get_inventory_lines(
-                        cr, uid, fake_inventory, context=context)
+                        fake_inventory)
                     if values:
                         values[0]['product_qty'] = tmp_lines[product_code]
                     else:
                         empty_line_obj.create(
-                            cr, uid, {
+                            {
                                 'product_code': product_code,
                                 'product_qty': tmp_lines[product_code],
                                 'inventory_id': inventory.id,
-                            }, context=context)
+                            })
                     vals += values
         else:
             vals = super(StockInventory, self)._get_inventory_lines(
-                cr, uid, inventory, context=context)
+                inventory)
         return vals
