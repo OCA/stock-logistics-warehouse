@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="stock_inventory_form">
+            <field name="name">stock.inventory.form</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <notebook position="attributes">
+                        <attribute name="attrs" />
+                    </notebook>
+                    <page string="Inventory Details" position="attributes">
+                        <attribute name="attrs">{'invisible':[('state','=','draft')]}</attribute>
+                    </page>
+                    <notebook position="before">
+                        <group>
+                            <field name="categ_ids"
+                                   nolabel="1"
+                                   attrs="{'invisible':[('filter','!=','categories')]}" />
+                            <field name="product_ids"
+                                   nolabel="1"
+                                   attrs="{'invisible':[('filter','!=','products')]}" />
+                            <field name="lot_ids"
+                                   nolabel="1"
+                                   attrs="{'invisible':[('filter','!=','lots')]}" />
+                        </group>
+                    </notebook>
+                    <notebook position="inside">
+                        <page string="Capture Lines"
+                            attrs="{'invisible':[('filter','!=','empty')]}">
+                            <field name="empty_line_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="product_code"/>
+                                    <field name="product_qty"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>
