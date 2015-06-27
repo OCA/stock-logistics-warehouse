@@ -24,30 +24,18 @@
     ],
     "author": "OdooMRP team,"
               "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
+              "Odoo Community Association (OCA)",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
     ],
-    "category": "Custom Module",
+    "category": "Inventory, Logistic, Storage",
     "website": "http://www.odoomrp.com",
     "summary": "More filters for inventory adjustments",
-    "description": """
-More preparation filters for inventories
-========================================
-
-Includes more options for making an inventory out of:
-
- * Multiple products.
- * Products of a category.
- * Multiple lots
-
-It also allows to make an inventory based on scanned products, adding a line
-with product code and quantity
-    """,
     "data": [
         "views/stock_inventory_view.xml",
         "security/ir.model.access.csv",
     ],
     "installable": True,
-    "auto_install": False,
 }
