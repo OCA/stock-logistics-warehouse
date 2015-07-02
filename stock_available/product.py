@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+-*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This module is copyright (C) 2014 Numérigraphe SARL. All Rights Reserved.
@@ -22,35 +22,6 @@ from openerp import models, fields, api
 from openerp.addons import decimal_precision as dp
 
 
-class Product(models.Model):
-    """Add a field for the stock available to promise.
-
-    Useful implementations need to be installed through the Settings menu or by
-    installing one of the modules stock_available_*
-    """
-    _inherit = 'product.product'
-
-    @api.depends('virtual_available')
-    def _immediately_usable_qty(self):
-        """No-op implementation of the stock available to promise.
-
-        By default, available to promise = forecasted quantity.
-
-        Must be overridden by another module that actually implement
-        computations."""
-        for product in self:
-            product.immediately_usable_qty = product.virtual_available
-
-    immediately_usable_qty = fields.Float(
-        digits=dp.get_precision('Product Unit of Measure'),
-        compute='_immediately_usable_qty',
-        string='Available to promise',
-        help="Stock for this Product that can be safely proposed "
-             "for sale to Customers.\n"
-             "The definition of this value can be configured to suit "
-             "your needs")
-
-
 class ProductTemplate(models.Model):
     """Add a field for the stock available to promise.
     Useful implementations need to be installed through the Settings menu or by
@@ -58,28 +29,36 @@ class ProductTemplate(models.Model):
     """
     _inherit = 'product.template'
 
+    # immediately usable quantity caluculated with the quant method
+    @api.multi
     @api.depends('virtual_available')
     def _immediately_usable_qty(self):
-        """No-op implementation of the stock available to promise.
-
-        By default, available to promise = forecasted quantity.
-
-        Must be overridden by another module that actually implement
-        computations."""
-        product_model = self.env['product.product']
+        stock_location_obj = self.env['stock.location']
+        internal_locations = stock_location_obj.search([
+            ('usage', '=', 'internal')])
+        sublocation_ids = []
+        for location in internal_locations:
+            sublocation_ids.append(self.env['stock.location'].search(
+                [('id', 'child_of', location.id)]).ids)
         for product_template in self:
-            products = product_model.search([(
-                'product_tmpl_id', '=', product_template.id)])
-            qty = 0
-            for product in products:
-                qty += product.immediately_usable_qty
-            product_template.immediately_usable_qty = qty
+            quant_obj = self.env['stock.quant']
+            quants = quant_obj.search([
+                ('location_id', 'in', sublocation_ids),
+                ('product_id', 'in', product_template.ids),
+                ('reservation_id', '=', False)])
+            availability = 0
+            if quants:
+                for quant in quants:
+                    availability += quant.qty
+            product_template.immediately_usable_qty = availability
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
         compute='_immediately_usable_qty',
-        string='Available to promise',
+        string='Available to promise (quant calculation)',
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"
              "The definition of this value can be configured to suit "
-             "your needs")
+             "your needs , this number is obtained by using the new odoo 8 "
+             "quants, so it gives us the actual curren quants  minus reserved"
+             "quants")
