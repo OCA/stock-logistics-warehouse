@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="stock_location_area_management_stock_location_form_view"
+            model="ir.ui.view">
+      <field name="name">stock.location.area.management.stock.location.form</field>
+      <field name="inherit_id" ref="stock.view_location_form"/>
+      <field name="model">stock.location</field>
+      <field name="arch" type="xml">
+        <xpath expr="//group[@name='localization']" position="after">
+          <group name="surface_grp" string="Surface" col="4">
+            <field name="active_dimension"/>
+            <field name="area_dimension"
+                   nolabel="1"
+                   attrs="{'invisible': [('active_dimension', '=', False)]}"/>
+            <field name="location_uom"
+                   nolabel="1"
+                   attrs="{'invisible': [('active_dimension', '=', False)]}"/>
+          </group>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="stock_location_area_management_stock_location_list_view"
+            model="ir.ui.view">
+      <field name="name">stock.location.area.management.stock.location.list</field>
+      <field name="inherit_id" ref="stock.view_location_tree2"/>
+      <field name="model">stock.location</field>
+      <field name="arch" type="xml">
+        <field name="usage" position="after">
+          <field name="area_dimension"/>
+          <field name="location_uom"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="stock_location_area_management_stock_location_search"
+            model="ir.ui.view">
+      <field name="name">stock.location.area.management.stock.location.search</field>
+      <field name="model">stock.location</field>
+      <field name="inherit_id" ref="stock.view_location_search"/>
+      <field name="arch" type="xml">
+        <field name="location_id" position="after">
+          <field name="area_dimension" string="Dimension"/>
+          <field name="partner_id" string="Owner"/>
+          <group expand="0" string="Group By">
+            <filter string="Partner"
+                    domain="[]"
+                    context="{'group_by' : 'partner_id'}"/>
+          </group>
+        </field>
+      </field>
+    </record>
+
+  </data>
+</openerp>

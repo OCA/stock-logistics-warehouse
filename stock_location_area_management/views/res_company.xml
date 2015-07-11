@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="stock_location_area_management_res_company_form_view"
+            model="ir.ui.view">
+      <field name="name">stock.location.area.management.res.company.form</field>
+      <field name="inherit_id" ref="base.view_company_form"/>
+      <field name="model">res.company</field>
+      <field name="arch" type="xml">
+        <xpath expr="//group[@name='account_grp']" position="after">
+          <group name="locations_grp" string="Locations">
+            <field name="locations_uom"/>
+          </group>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</openerp>

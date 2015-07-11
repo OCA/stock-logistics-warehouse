@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Guewen Baconnier, Leonardo Pistone
-#    Copyright 2013-2015 Camptocamp SA
+#    Odoo, Open Source Management Solution
+#    This module copyright (C) 2015 Savoir-faire Linux
+#    (<http://www.savoirfairelinux.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,26 +19,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{'name': 'Stock Reserve Sales',
- 'version': '1.0',
- 'author': "Camptocamp,Odoo Community Association (OCA)",
- 'category': 'Warehouse',
- 'license': 'AGPL-3',
- 'complexity': 'normal',
- 'images': [],
- 'website': "http://www.camptocamp.com",
- 'depends': ['sale_stock',
-             'stock_reserve',
-             ],
- 'demo': [],
- 'data': ['wizard/sale_stock_reserve_view.xml',
-          'view/sale.xml',
-          'view/stock_reserve.xml',
-          ],
- 'test': ['test/sale_reserve.yml',
-          'test/sale_line_reserve.yml',
-          ],
- 'installable': True,
- 'auto_install': False,
- }
+{
+    'name': 'Stock Location Area Management',
+    'version': '0.1',
+    'author': 'Savoir-faire Linux',
+    'maintainer': 'Savoir-faire Linux',
+    'website': 'http://www.savoirfairelinux.com',
+    'license': 'AGPL-3',
+    'category': 'Warehouse',
+    'summary': "Enter a location's area based on different units of measure",
+    'depends': [
+        'stock',
+        'stock_location_area_data'
+    ],
+    'data': [
+        'views/res_company.xml',
+        'views/stock_location.xml',
+    ],
+    'installable': True,
+    'application': False,
+}
