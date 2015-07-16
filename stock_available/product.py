@@ -41,10 +41,12 @@ class ProductTemplate(models.Model):
             sublocation_ids.append(self.env['stock.location'].search(
                 [('id', 'child_of', location.id)]).ids)
         for product_template in self:
+            products = self.env['product.product'].search([
+                ('product_tmpl_id', '=', product_template.id)])
             quant_obj = self.env['stock.quant']
             quants = quant_obj.search([
                 ('location_id', 'in', sublocation_ids),
-                ('product_id', 'in', product_template.ids),
+                ('product_id', 'in', products.ids),
                 ('reservation_id', '=', False)])
             availability = 0
             if quants:
@@ -60,5 +62,5 @@ class ProductTemplate(models.Model):
              "for sale to Customers.\n"
              "The definition of this value can be configured to suit "
              "your needs , this number is obtained by using the new odoo 8 "
-             "quants, so it gives us the actual curren quants  minus reserved"
+             "quants, so it gives us the actual current quants  minus reserved"
              "quants")
