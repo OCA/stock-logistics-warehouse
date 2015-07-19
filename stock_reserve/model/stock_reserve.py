@@ -132,9 +132,7 @@ class StockReservation(models.Model):
         """
         Release moves from reservation
         """
-        for rec in self:
-            move_recs = rec.move_id
-            move_recs.action_cancel()
+        self.mapped('move_id').action_cancel()
         return True
 
     @api.model
