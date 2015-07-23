@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="product_template_view_form_inherit_purchase_packaging" model="ir.ui.view">
+            <field name="name">product.template.common.form (purchase_packaging)</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="seller_ids" position="attributes">
+                    <attribute name="context">
+                        {'default_product_tmpl_id': id}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_supplierinfo_view_tree_inherit_purchase_packaging" model="ir.ui.view">
+            <field name="name">product.supplierinfo.tree.view" (purchase_packaging)</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="min_qty" position="after">
+                    <field name="min_qty_uom_id" groups="product.group_uom"/>
+                    <field name="packaging_id" groups="product.group_stock_packaging"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_supplierinfo_view_form_inherit_purchase_packaging" model="ir.ui.view">
+            <field name="name">product.supplierinfo.form.view (purchase_packaging)</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+            <field name="arch" type="xml">
+                <field name="min_qty" position="after">
+                    <field name="min_qty_uom_id" groups="product.group_uom"/>
+                </field>
+                <field name="product_uom" position="after">
+                    <field name="packaging_id" domain="[('product_tmpl_id', '=', product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                </field>
+                <field name="delay" position="after">
+                    <field name="product_tmpl_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
