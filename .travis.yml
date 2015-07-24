@@ -1,5 +1,8 @@
 # Config file .travis.yml
 
+sudo: false
+cache: pip
+
 addons:
   apt:
     packages:
