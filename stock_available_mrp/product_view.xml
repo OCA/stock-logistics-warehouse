@@ -5,7 +5,6 @@
 		<record id="view_product_form_potential_qty" model="ir.ui.view">
 			<field name="name">product.form.potential_qty</field>
 			<field name="model">product.product</field>
-			<field name="type">form</field>
 			<field name="inherit_id" ref="stock.view_normal_procurement_locations_form" />
 			<field name="arch" type="xml">
 				<data>
