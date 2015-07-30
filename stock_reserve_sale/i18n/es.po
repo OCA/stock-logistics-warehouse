@@ -30,7 +30,7 @@ msgstr "
 #: code:addons/stock_reserve_sale/model/sale.py:179
 #, python-format
 msgid "As you changed the quantity of the line, the quantity of the stock reservation will be automatically adjusted to %.2f."
-msgstr "Como ha cambiado la cantidad de la línea, la cantidad de la reserva de existencias será automáticamente ajustada a %.2f."
+msgstr "Como ha cambiado la cantidad de la línea, la cantidad de la reserva de existencias será ajustada automáticamente a %.2f."
 
 #. module: stock_reserve_sale
 #: field:sale.order,is_stock_reservable:0
@@ -78,7 +78,7 @@ msgstr "ID"
 #. module: stock_reserve_sale
 #: help:sale.stock.reserve,date_validity:0
 msgid "If a date is given, the reservations will be released at the end of the validity."
-msgstr "Si se da una fecha, las reservas serán lanzadas al final de la validez."
+msgstr "Si se proporciona una fecha, las reservas serán lanzadas al final de esa fecha."
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0
@@ -161,7 +161,7 @@ msgstr "Distintas reservas de existencias están enlazadas con la línea. Imposi
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,location_id:0
 msgid "Source Location"
-msgstr "Ubicación fuente"
+msgstr "Ubicación origen"
 
 #. module: stock_reserve_sale
 #: model:ir.model,name:stock_reserve_sale.model_stock_reservation
@@ -183,7 +183,7 @@ msgstr "No puede cambiar la unidad de medida de los productos de las líneas con
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "cancel all"
-msgstr "cacelar todo"
+msgstr "cancelar todo"
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
