@@ -25,7 +25,7 @@ msgid "<p class=\"oe_view_nocontent_create\">\n"
 "                </p>\n"
 "            "
 msgstr "<p class=\"oe_view_nocontent_create\">\n"
-"                    Pulse para crear una reserva de stock.\n"
+"                    Pulse para crear una reserva de existencias.\n"
 "                    </p><p>\n"
 "                    Este menú le permite preparar y reservar distintas cantidades\n"
 "                    de productos.\n"
@@ -129,7 +129,7 @@ msgstr "Movimiento de reserva"
 #. module: stock_reserve
 #: model:stock.location,name:stock_reserve.stock_location_reservation
 msgid "Reservation Stock"
-msgstr "Reserva de stock"
+msgstr "Reserva de existencias"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -155,7 +155,7 @@ msgstr "Estado"
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_stock_reservation
 msgid "Stock Reservation"
-msgstr "Reserva de stock"
+msgstr "Reserva de existencias"
 
 #. module: stock_reserve
 #: model:ir.actions.act_window,name:stock_reserve.action_stock_reservation_tree
@@ -166,7 +166,7 @@ msgstr "Reserva de stock"
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 #: view:stock.reservation:stock_reserve.view_stock_reservation_tree
 msgid "Stock Reservations"
-msgstr "Reservas de stock"
+msgstr "Reservas de existencias"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_tree
