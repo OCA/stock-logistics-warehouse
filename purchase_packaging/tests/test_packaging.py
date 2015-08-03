@@ -34,6 +34,13 @@ class TestPackaging(common.TransactionCase):
                                              ).product_tmpl_id.id,
              'uom_id': self.env.ref('product.product_uom_dozen').id})
         self.sp_30 = self.env.ref('product.product_supplierinfo_30')
+        self.product_uom_8 = self.env['product.uom'].create(
+            {'category_id': self.env.ref('product.product_uom_categ_unit').id,
+             'name': 'COL8',
+             'factor_inv': 8,
+             'uom_type': 'bigger',
+             'rounding': 1.0,
+             })
 
     def test_supplierinfo_product_uom(self):
         """ Check product_uom of product_supplierinfo_30 is product_uom_unit
@@ -61,13 +68,7 @@ class TestPackaging(common.TransactionCase):
             Check stock move product_uom is product_uom_dozen
             Check stock move product_qty is 16
         """
-        product_uom_8 = self.env['product.uom'].create(
-            {'category_id': self.env.ref('product.product_uom_categ_unit').id,
-             'name': 'COL8',
-             'factor_inv': 8,
-             'uom_type': 'bigger'
-             })
-        self.sp_30.min_qty_uom_id = product_uom_8
+        self.sp_30.min_qty_uom_id = self.product_uom_8
         self.sp_30.min_qty = 2
         self.sp_30.packaging_id = self.product_packaging_34
 
@@ -89,7 +90,8 @@ class TestPackaging(common.TransactionCase):
         po_line = self.env['purchase.order.line'].create(vals['value'])
         self.assertEqual(po_line.packaging_id.id,
                          self.product_packaging_34.id)
-        self.assertEqual(po_line.product_purchase_uom_id.id, product_uom_8.id)
+        self.assertEqual(po_line.product_purchase_uom_id.id,
+                         self.product_uom_8.id)
         self.assertAlmostEqual(po_line.product_purchase_qty, 2)
         self.assertAlmostEqual(po_line.product_qty, 16)
         self.assertAlmostEqual(po_line.price_unit, 456)
@@ -102,3 +104,218 @@ class TestPackaging(common.TransactionCase):
         self.assertEqual(sm.product_uom.id,
                          self.env.ref('product.product_uom_dozen').id)
         self.assertAlmostEqual(sm.product_uom_qty, 16)
+
+    def test_procurement(self):
+        """ On supplierinfo set min_qty as 0
+            Create procurement line with rule buy and quantity 17
+            run procurement
+            Check product_purchase_uom_id is product_uom_unit
+            Check product_purchase_qty is 17
+            Check product_qty is 17
+            Check packaging_id is False
+            Check product_uom is product_uom_unit
+            Confirm Purchase Order to avoid group
+            Create procurement line with rule buy and quantity 1 dozen
+            run procurement
+            Check product_purchase_uom_id is product_uom_unit
+            Check product_purchase_qty is 12
+            Check product_qty is 12
+            Check packaging_id is False
+            Check product_uom is product_uom_unit
+            Confirm Purchase Order to avoid group
+            On supplierinfo set product_uom_8 as min_qty_uom_id
+            Create procurement line with rule buy and quantity 17
+            run procurement
+            Check product_purchase_uom_id is product_uom_8
+            Check product_purchase_qty is 3
+            Check product_qty is 8*3 = 24
+            Check packaging_id is False
+            Check product_uom is product_uom_unit
+            Confirm Purchase Order to avoid group
+            Create procurement line with rule buy and quantity 1 dozen
+            run procurement
+            Check product_purchase_uom_id is product_uom_8
+            Check product_purchase_qty is 2
+            Check product_qty is 8*2 = 16
+            Check packaging_id is False
+            Check product_uom is product_uom_unit
+            Confirm Purchase Order to avoid group
+            On supplierinfo set packaging product_packaging_34 (dozen)
+            Create procurement line with rule buy and quantity 17
+            run procurement
+            Check product_purchase_uom_id is product_uom_8
+            Check product_purchase_qty is 1
+            Check product_qty is 8*1 = 8
+            Check packaging_id is product_packaging_34
+            Check product_uom is product_uom_dozen
+            Confirm Purchase Order to avoid group
+            Create procurement line with rule buy and quantity 1 dozen
+            run procurement
+            Check product_purchase_uom_id is product_uom_8
+            Check product_purchase_qty is 1
+            Check product_qty is 8*1 = 8
+            Check packaging_id is product_packaging_34
+            Check product_uom is product_uom_dozen
+            Confirm Purchase Order to avoid group
+            On supplierinfo set product_uom_unit as min_qty_uom_id
+            Create procurement line with rule buy and quantity 17
+            run procurement
+            Check product_purchase_uom_id is product_uom_unit
+            Check product_purchase_qty is 2
+            Check product_qty is 2
+            Check packaging_id is product_packaging_34
+            Check product_uom is product_uom_dozen
+            Confirm Purchase Order to avoid group
+            Create procurement line with rule buy and quantity 1 dozen
+            run procurement
+            Check product_purchase_uom_id is product_uom_unit
+            Check product_purchase_qty is 1
+            Check product_qty is 1
+            Check packaging_id is product_packaging_34
+            Check product_uom is product_uom_dozen
+            Confirm Purchase Order to avoid group
+        """
+        self.env.ref('product.product_product_34').route_ids = [(
+            4, self.env.ref("purchase.route_warehouse0_buy").id)]
+        self.env.ref('product.product_uom_unit').rounding = 1
+        procurement_obj = self.env['procurement.order']
+
+        self.sp_30.min_qty = 0
+
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': self.env.ref('product.product_product_34').id,
+             'product_qty': 17,
+             'product_uom': self.env.ref('product.product_uom_unit').id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(self.env.ref('product.product_uom_unit'),
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(17, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(17, proc1.purchase_line_id.product_qty)
+        self.assertFalse(proc1.purchase_line_id.packaging_id)
+        self.assertEqual(self.env.ref('product.product_uom_unit'),
+                         proc1.purchase_line_id.product_uom)
+        proc1.purchase_id.signal_workflow('purchase_confirm')
+
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': self.env.ref('product.product_product_34').id,
+             'product_qty': 1,
+             'product_uom': self.env.ref('product.product_uom_dozen').id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(self.env.ref('product.product_uom_unit'),
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(12, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(12, proc1.purchase_line_id.product_qty)
+        self.assertFalse(proc1.purchase_line_id.packaging_id)
+        self.assertEqual(self.env.ref('product.product_uom_unit'),
+                         proc1.purchase_line_id.product_uom)
+        proc1.purchase_id.signal_workflow('purchase_confirm')
+
+        self.sp_30.min_qty_uom_id = self.product_uom_8
+
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': self.env.ref('product.product_product_34').id,
+             'product_qty': 17,
+             'product_uom': self.env.ref('product.product_uom_unit').id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(self.product_uom_8,
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(3, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(24, proc1.purchase_line_id.product_qty)
+        self.assertFalse(proc1.purchase_line_id.packaging_id)
+        self.assertEqual(self.env.ref('product.product_uom_unit'),
+                         proc1.purchase_line_id.product_uom)
+        proc1.purchase_id.signal_workflow('purchase_confirm')
+
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': self.env.ref('product.product_product_34').id,
+             'product_qty': 1,
+             'product_uom': self.env.ref('product.product_uom_dozen').id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(self.product_uom_8,
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(2, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(16, proc1.purchase_line_id.product_qty)
+        self.assertFalse(proc1.purchase_line_id.packaging_id)
+        self.assertEqual(self.env.ref('product.product_uom_unit'),
+                         proc1.purchase_line_id.product_uom)
+        proc1.purchase_id.signal_workflow('purchase_confirm')
+
+        self.sp_30.packaging_id = self.product_packaging_34
+
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': self.env.ref('product.product_product_34').id,
+             'product_qty': 17,
+             'product_uom': self.env.ref('product.product_uom_unit').id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(self.product_uom_8,
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(1, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(8, proc1.purchase_line_id.product_qty)
+        self.assertEqual(self.product_packaging_34,
+                         proc1.purchase_line_id.packaging_id)
+        self.assertEqual(self.env.ref('product.product_uom_dozen'),
+                         proc1.purchase_line_id.product_uom)
+        proc1.purchase_id.signal_workflow('purchase_confirm')
+
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': self.env.ref('product.product_product_34').id,
+             'product_qty': 1,
+             'product_uom': self.env.ref('product.product_uom_dozen').id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(self.product_uom_8,
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(1, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(8, proc1.purchase_line_id.product_qty)
+        self.assertEqual(self.product_packaging_34,
+                         proc1.purchase_line_id.packaging_id)
+        self.assertEqual(self.env.ref('product.product_uom_dozen'),
+                         proc1.purchase_line_id.product_uom)
+        proc1.purchase_id.signal_workflow('purchase_confirm')
+
+        self.sp_30.min_qty_uom_id = self.env.ref('product.product_uom_unit')
+
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': self.env.ref('product.product_product_34').id,
+             'product_qty': 17,
+             'product_uom': self.env.ref('product.product_uom_unit').id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(self.env.ref('product.product_uom_unit'),
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(2, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(2, proc1.purchase_line_id.product_qty)
+        self.assertEqual(self.product_packaging_34,
+                         proc1.purchase_line_id.packaging_id)
+        self.assertEqual(self.env.ref('product.product_uom_dozen'),
+                         proc1.purchase_line_id.product_uom)
+        proc1.purchase_id.signal_workflow('purchase_confirm')
+
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': self.env.ref('product.product_product_34').id,
+             'product_qty': 1,
+             'product_uom': self.env.ref('product.product_uom_dozen').id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(self.env.ref('product.product_uom_unit'),
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(1, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(1, proc1.purchase_line_id.product_qty)
+        self.assertEqual(self.product_packaging_34,
+                         proc1.purchase_line_id.packaging_id)
+        self.assertEqual(self.env.ref('product.product_uom_dozen'),
+                         proc1.purchase_line_id.product_uom)
+        proc1.purchase_id.signal_workflow('purchase_confirm')

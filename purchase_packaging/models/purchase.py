@@ -59,7 +59,8 @@ class PurchaseOrderLine(models.Model):
         'product.uom', 'Purchase Unit of Measure', required=True,
         default=_default_product_purchase_uom_id)
     product_qty = fields.Float(
-        compute="_compute_product_qty", string='Quantity')
+        compute="_compute_product_qty", string='Quantity',
+        inverse='_inverse_product_qty',)
 
     @api.one
     @api.depends('product_purchase_uom_id', 'product_purchase_qty')
@@ -75,6 +76,28 @@ class PurchaseOrderLine(models.Model):
             self.product_purchase_uom_id.id,
             self.product_purchase_qty,
             to_uom.id)
+
+    @api.one
+    def _inverse_product_qty(self):
+        """ If product_quantity is set compute the purchase_qty
+        """
+        if self.product_id and self.order_id.partner_id:
+            for supplier in self.product_id.seller_ids:
+                if (supplier.name.id == self.order_id.partner_id.id):
+                    product_purchase_uom = supplier.min_qty_uom_id
+                    uom_obj = self.env['product.uom']
+                    from_uom = uom_obj.search(
+                        [('category_id', '=',
+                          product_purchase_uom.category_id.id),
+                         ('uom_type', '=', 'reference')], limit=1)
+                    self.product_purchase_qty = uom_obj._compute_qty(
+                        from_uom.id,
+                        self.product_qty,
+                        product_purchase_uom.id,)
+                    self.product_purchase_uom_id = product_purchase_uom.id
+                    break
+        else:
+            self.product_purchase_qty = self.product_qty
 
     @api.onchange("packaging_id")
     def _onchange_packaging_id(self):
@@ -94,6 +117,7 @@ class PurchaseOrderLine(models.Model):
         product_product = self.pool['product.product']
         product_purchase_qty = 0
         product_purchase_uom_id = False
+        category_product_purchase_uom_id = False
         packaging_id = False
         new_uom_id = False
         domain = {}
@@ -111,6 +135,8 @@ class PurchaseOrderLine(models.Model):
                     if first:
                         product_purchase_qty = supplier.min_qty
                         product_purchase_uom_id = supplier.min_qty_uom_id.id
+                        category_product_purchase_uom_id = \
+                            supplier.min_qty_uom_id.category_id.id
                         new_uom_id = supplier.product_uom.id
                         if supplier.packaging_id:
                             packaging_id = supplier.packaging_id.id
@@ -129,6 +155,14 @@ class PurchaseOrderLine(models.Model):
         if not qty:
             res['value']['product_purchase_qty'] = product_purchase_qty
             res['value']['product_purchase_uom_id'] = product_purchase_uom_id
+            uom_obj = self.pool['product.uom']
+            to_uom_id = uom_obj.search(
+                cr, uid,
+                [('category_id', '=', category_product_purchase_uom_id),
+                 ('uom_type', '=', 'reference')], limit=1, context=context)[0]
+            res['value']['product_qty'] = uom_obj._compute_qty(
+                cr, uid, product_purchase_uom_id,
+                product_purchase_qty, to_uom_id)
             res['value']['packaging_id'] = packaging_id
         if domain:
             if res.get('domain'):
@@ -155,3 +189,32 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     def write(self, vals):
         return super(PurchaseOrderLine, self).write(self.update_vals(vals))
+
+
+class ProcurementOrder(models.Model):
+    _inherit = 'procurement.order'
+
+    @api.model
+    def _get_po_line_values_from_proc(self, procurement, partner, company,
+                                      schedule_date):
+        """ add packaging and update product_uom/quantity if necessary
+        """
+        res = super(ProcurementOrder, self)._get_po_line_values_from_proc(
+            procurement, partner, company, schedule_date)
+
+        uom_obj = self.env['product.uom']
+
+        for supplier in procurement.product_id.seller_ids:
+            if (supplier.name.id == partner.id):
+                if supplier.packaging_id:
+                    res['packaging_id'] = supplier.packaging_id.id
+                    new_uom_id = supplier.product_uom.id
+                    if new_uom_id != res['product_uom']:
+                        res['product_uom'] = new_uom_id
+                        qty = uom_obj._compute_qty(procurement.product_uom.id,
+                                                   procurement.product_qty,
+                                                   new_uom_id)
+                        res['product_qty'] = max(qty, supplier.qty)
+                    break
+
+        return res
