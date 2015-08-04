@@ -19,21 +19,29 @@
 #
 ##############################################################################
 
-{
-    "name": "Purchase Packaging",
-    "version": "0.1",
-    'author': "Acsone, Odoo Community Association (OCA)",
-    "category": "Other",
-    "website": "http://www.acsone.eu",
-    'summary': "In purchase, use package",
-    "depends": ["product",
-                "purchase",
-                "packaging_uom",
-                ],
-    "data": ["views/product_views.xml",
-             "views/purchase_views.xml",
-             ],
-    "license": "AGPL-3",
-    "installable": True,
-    "application": False,
-}
+
+from openerp import api, fields, models
+
+
+class ProductPackaging(models.Model):
+    _inherit = 'product.packaging'
+
+    uom_id = fields.Many2one('product.uom', 'Unit of Measure', required=True,
+                             help="It must be in the same category than "
+                             "the default unit of measure.")
+    uom_categ_domain_id = fields.Many2one(
+        related='product_tmpl_id.uom_id.category_id',
+        comodel_name='product.uom.categ')
+    qty = fields.Float(compute="_compute_qty", store=True, readonly=True)
+
+    @api.one
+    @api.depends('uom_id', 'product_tmpl_id.uom_id')
+    def _compute_qty(self):
+        """
+        Compute the quantity by package based on uom
+        """
+        if self.uom_id and self.product_tmpl_id:
+            self.qty = self.env['product.uom']._compute_qty_obj(
+                self.uom_id, 1, self.product_tmpl_id.uom_id)
+        else:
+            self.qty = 0

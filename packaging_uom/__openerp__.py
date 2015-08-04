@@ -20,18 +20,15 @@
 ##############################################################################
 
 {
-    "name": "Purchase Packaging",
+    "name": "Packaging Extended",
     "version": "0.1",
     'author': "Acsone, Odoo Community Association (OCA)",
     "category": "Other",
     "website": "http://www.acsone.eu",
-    'summary': "In purchase, use package",
+    'summary': "Use uom in package",
     "depends": ["product",
-                "purchase",
-                "packaging_uom",
                 ],
-    "data": ["views/product_views.xml",
-             "views/purchase_views.xml",
+    "data": ["views/product_packaging_views.xml",
              ],
     "license": "AGPL-3",
     "installable": True,
