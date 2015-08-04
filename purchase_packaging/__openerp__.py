@@ -28,7 +28,7 @@
     'summary': "In purchase, use package",
     "depends": ["product",
                 "purchase",
-                "packaging_extended",
+                "packaging_uom",
                 ],
     "data": ["views/product_views.xml",
              "views/purchase_views.xml",
