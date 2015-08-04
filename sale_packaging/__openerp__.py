@@ -27,7 +27,7 @@
     "website": "http://www.acsone.eu",
     'summary': "In sale, use uom's package",
     "depends": ["sale_stock",
-                "packaging_extended",
+                "packaging_uom",
                 ],
     "data": ["views/sale_order_line_views.xml",
              ],
