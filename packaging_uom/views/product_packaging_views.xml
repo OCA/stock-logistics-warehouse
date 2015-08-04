@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="product_template_view_form_inherit_packaging_uom" model="ir.ui.view">
+            <field name="name">product.template.common.form (packaging_uom)</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="packaging_ids" position="attributes">
+                    <attribute name="context">
+                        {'default_product_tmpl_id': id,
+                         'tree_view_ref':'product.product_packaging_tree_view_product',
+                         'form_view_ref': 'product.product_packaging_form_view_without_product'}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_packaging_2_view_form_inherit_packaging_uom" model="ir.ui.view">
+            <field name="name">product.packaging.form.view.without.product (packaging_uom)</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_form_view_without_product"/>
+            <field name="arch" type="xml">
+                <field name="qty" position="before">
+                    <field name="product_tmpl_id" invisible="1"/>
+                    <field name="uom_categ_domain_id" invisible="1"/>
+                    <field name="uom_id" domain="[('category_id', '=', uom_categ_domain_id)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_packaging_view_form_inherit_packaging_uom" model="ir.ui.view">
+            <field name="name">product.packaging.form.view (packaging_uom)</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_form_view"/>
+            <field name="arch" type="xml">
+                <field name="qty" position="before">
+                    <field name="uom_categ_domain_id" invisible="1"/>
+                    <field name="uom_id" domain="[('category_id', '=', uom_categ_domain_id)]"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
