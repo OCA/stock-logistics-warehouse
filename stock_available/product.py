@@ -36,16 +36,16 @@ class ProductTemplate(models.Model):
         stock_location_obj = self.env['stock.location']
         internal_locations = stock_location_obj.search([
             ('usage', '=', 'internal')])
-        sublocation_ids = []
+        sublocations = self.env['stock.location']
         for location in internal_locations:
-            sublocation_ids.append(self.env['stock.location'].search(
-                [('id', 'child_of', location.id)]).ids)
+            sublocations += stock_location_obj.search(
+                [('id', 'child_of', location.id)])
         for product_template in self:
             products = self.env['product.product'].search([
                 ('product_tmpl_id', '=', product_template.id)])
             quant_obj = self.env['stock.quant']
             quants = quant_obj.search([
-                ('location_id', 'in', sublocation_ids),
+                ('location_id', 'in', sublocations.ids),
                 ('product_id', 'in', products.ids),
                 ('reservation_id', '=', False)])
             availability = 0
