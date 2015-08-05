@@ -152,7 +152,7 @@ class PurchaseOrderLine(models.Model):
             fiscal_position_id=fiscal_position_id, date_planned=date_planned,
             name=name, price_unit=price_unit, state=state, context=context)
 
-        if not qty:
+        if product_id and partner_id and not qty:
             res['value']['product_purchase_qty'] = product_purchase_qty
             res['value']['product_purchase_uom_id'] = product_purchase_uom_id
             uom_obj = self.pool['product.uom']
