@@ -29,11 +29,6 @@
     'complexity': 'normal',
     'images': [],
     'website': 'http://odoo-community.org',
-    'description': """
-Partner Location Auto Create
-============================
-Create a stock location automatically for a partner when it is created
-""",
     'depends': [
         'sale_stock',
     ],
