@@ -28,6 +28,7 @@
     "depends": ["stock",
                 ],
     "data": ["views/business_product_location_views.xml",
+             "views/business_product_location_templates.xml",
              "security/ir.model.access.csv",
              ],
     "license": "AGPL-3",

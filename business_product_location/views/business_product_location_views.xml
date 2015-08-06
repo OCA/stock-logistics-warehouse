@@ -89,5 +89,19 @@
             </field>
         </record>
 
+        <report 
+            string="Business Product Location"
+            id="business_product_location_report_action"
+            model="stock.location"
+            report_type="qweb-pdf"
+            name="business_product_location.report_bpl"
+            file="business_product_location.report_bpl"
+        />
+
+        <record id="business_product_location_report_action" model="ir.actions.report.xml">
+          <field name="report_name">business_product_location.report_bpl</field>
+        </record>
+
+
     </data>
 </openerp>
