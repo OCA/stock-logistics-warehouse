@@ -27,11 +27,6 @@ from openerp.exceptions import Warning
 class StockLocation(models.Model):
     _inherit = 'stock.location'
 
-    @api.onchange('partner_id', 'usage')
-    def _default_parent_location(self):
-        if self.partner_id:
-            self.location_id = self.partner_id.get_main_location(self.usage).id
-
     main_partner_location = fields.Boolean(
         'Main Partner Location',
         help="The root location for a partner's location for a specific "
@@ -46,3 +41,8 @@ class StockLocation(models.Model):
             raise Warning(
                 _('The partner %s already has a main location '
                     'of type %s.') % (partner.name, self.usage))
+
+    @api.onchange('partner_id', 'usage')
+    def _onchange_parent_location(self):
+        if self.partner_id:
+            self.location_id = self.partner_id.get_main_location(self.usage).id

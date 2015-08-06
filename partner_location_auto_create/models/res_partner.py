@@ -26,15 +26,16 @@ from openerp import models, fields, api, _
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    @api.one
-    @api.depends('location_ids')
-    def count_locations(self):
-        self.locations_count = len(self.location_ids)
-
-    locations_count = fields.Integer(compute='count_locations', store=False)
+    locations_count = fields.Integer(
+        compute='_compute_locations_count', store=False)
 
     location_ids = fields.One2many(
         'stock.location', 'partner_id', string='Locations')
+
+    @api.one
+    @api.depends('location_ids')
+    def _compute_locations_count(self):
+        self.locations_count = len(self.location_ids)
 
     @api.multi
     def button_locations(self):
@@ -56,6 +57,12 @@ class ResPartner(models.Model):
 
         return res
 
+    @api.multi
+    def get_main_location(self, usage):
+        self.ensure_one()
+        return self.location_ids.filtered(
+            lambda l: l.usage == usage and l.main_partner_location)
+
     @api.one
     def _create_main_partner_location(self):
         if self.customer and self.property_stock_customer.partner_id != self:
@@ -71,17 +78,6 @@ class ResPartner(models.Model):
                 self._create_main_location('supplier'))
 
             self.write({'property_stock_supplier': location_supplier})
-
-    @api.model
-    def create(self, vals):
-        """ The first time a partner is created, a main customer
-        and / or supplier location is created for this partner """
-        partner = super(ResPartner, self).create(vals)
-
-        if vals.get('is_company', False):
-            partner._create_main_partner_location()
-
-        return partner
 
     @api.multi
     def _create_main_location(self, usage):
@@ -101,11 +97,16 @@ class ResPartner(models.Model):
             'main_partner_location': True,
         })
 
-    @api.multi
-    def get_main_location(self, usage):
-        self.ensure_one()
-        return self.location_ids.filtered(
-            lambda l: l.usage == usage and l.main_partner_location)
+    @api.model
+    def create(self, vals):
+        """ The first time a partner is created, a main customer
+        and / or supplier location is created for this partner """
+        partner = super(ResPartner, self).create(vals)
+
+        if vals.get('is_company', False):
+            partner._create_main_partner_location()
+
+        return partner
 
     @api.multi
     def write(self, vals):
