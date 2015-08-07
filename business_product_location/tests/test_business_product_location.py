@@ -24,9 +24,6 @@ import openerp.tests.common as common
 
 class TestBusinessProductLocation(common.TransactionCase):
 
-    def setUp(self):
-        super(TestBusinessProductLocation, self).setUp()
-
     def test_business_product_location(self):
         """ Create a business_product_location bpl with :
                 * product_product_34 qty 4
@@ -36,33 +33,25 @@ class TestBusinessProductLocation(common.TransactionCase):
             Check product_product_35 as a business_product_location with bpl
             Check stock_location_stock as a business_product_location with bpl
         """
+        product_34 = self.env.ref('product.product_product_34')
+        product_35 = self.env.ref('product.product_product_35')
+        stock_loc = self.env.ref('stock.stock_location_stock')
         bpl = self.env['business.product.location'].create(
             {'name': 'Test BPL',
              'product_ids': [
-                 (0, 0, {'product_id': self.env.ref(
-                     'product.product_product_34').id, 'product_qty': 4}),
-                 (0, 0, {'product_id': self.env.ref(
-                     'product.product_product_35').id, 'product_qty': 3})],
-             'location_ids': [(4,
-                               self.env.ref('stock.stock_location_stock').id)]
+                 (0, 0, {'product_id': product_34.id, 'product_qty': 4}),
+                 (0, 0, {'product_id': product_35.id, 'product_qty': 3})],
+             'location_ids': [(4, stock_loc.id)]
              })
 
         self.assertEqual(
             1,
-            len(self.env.ref('product.product_product_34').business_usage_ids))
+            len(product_34.business_usage_ids))
         self.assertEqual(
             bpl.id,
-            self.env.ref('product.product_product_34'
-                         ).business_usage_ids[
-                0].business_product_location_id.id)
-        self.assertEqual(
-            1,
-            len(self.env.ref('product.product_product_35').business_usage_ids))
+            product_34.business_usage_ids[0].business_product_location_id.id)
+        self.assertEqual(1, len(product_35.business_usage_ids))
         self.assertEqual(
             bpl.id,
-            self.env.ref('product.product_product_35'
-                         ).business_usage_ids[
-                0].business_product_location_id.id)
-        self.assertEqual(
-            bpl.id,
-            self.env.ref('stock.stock_location_stock').business_usage_id.id)
+            product_35.business_usage_ids[0].business_product_location_id.id)
+        self.assertEqual(bpl.id, stock_loc.business_usage_id.id)

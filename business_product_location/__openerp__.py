@@ -22,8 +22,8 @@
 {
     "name": "Business Product Location",
     "version": "0.1",
-    'author': "Acsone, Odoo Community Association (OCA)",
-    "category": "Other",
+    'author': "ACSONE SA/NV, Odoo Community Association (OCA)",
+    "category": "Warehouse Management",
     "website": "http://www.acsone.eu",
     "depends": ["stock",
                 ],
