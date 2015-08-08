@@ -262,3 +262,18 @@ class TestPartnerLocations(TransactionCase):
 
         self.partner_c.write({'supplier': True, 'customer': True})
         self.check_partner_c()
+
+    def test_partner_write_is_company_false(self):
+        """
+        Test that locations related to a partner are unlinked
+        when a is_company is set to False
+        """
+        self._create_locations()
+
+        self.assertEqual(len(self.customer_a.location_ids), 3)
+        self.customer_a.write({
+            'supplier': True,
+            'is_company': False,
+        })
+        self.customer_a.refresh()
+        self.assertEqual(len(self.customer_a.location_ids), 0)

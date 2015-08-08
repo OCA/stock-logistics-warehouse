@@ -97,6 +97,26 @@ class ResPartner(models.Model):
             'main_partner_location': True,
         })
 
+    @api.one
+    def _remove_locations(self):
+        """
+        Unlink all locations related to the partner
+        where no stock have been moved.
+
+        This is required to prevent unrequired locations to
+        be created when a new partner is tagged as a company
+        by mistake.
+        """
+        move_obj = self.env['stock.move']
+        for location in self.location_ids:
+            moves = move_obj.search([
+                '|',
+                ('location_id', 'child_of', location.id),
+                ('location_dest_id', 'child_of', location.id),
+            ])
+            if not moves:
+                location.unlink()
+
     @api.model
     def create(self, vals):
         """ The first time a partner is created, a main customer
@@ -118,15 +138,17 @@ class ResPartner(models.Model):
 
         res = super(ResPartner, self).write(vals)
 
-        if vals.get('is_company'):
-            self._create_main_partner_location()
-
-        for partner in self:
-            if (
-                (vals.get('customer') or vals.get('supplier')) and
-                partner.is_company
-            ):
+        if (
+                vals.get('is_company') or
+                vals.get('customer') or
+                vals.get('supplier')
+        ):
+            for partner in self.filtered('is_company'):
                 partner._create_main_partner_location()
+
+        if 'is_company' in vals and not vals['is_company']:
+            # When False is written to field 'is_company'
+            self._remove_locations()
 
         if 'active' in vals:
             self.location_ids.write({'active': vals['active']})
