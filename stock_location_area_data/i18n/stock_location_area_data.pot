@@ -1,0 +1,31 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_location_area_data
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-21 20:06+0000\n"
+"PO-Revision-Date: 2015-04-21 20:06+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_location_area_data
+#: model:product.uom.categ,name:stock_location_area_data.product_uom_categ_surface
+msgid "Surface"
+msgstr ""
+
+#. module: stock_location_area_data
+#: model:product.uom,name:stock_location_area_data.product_uom_feet2
+msgid "feet²"
+msgstr ""
+
+#. module: stock_location_area_data
+#: model:product.uom,name:stock_location_area_data.product_uom_m2
+msgid "m²"
+msgstr ""

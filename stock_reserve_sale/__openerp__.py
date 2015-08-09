@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Guewen Baconnier
-#    Copyright 2013 Camptocamp SA
+#    Author: Guewen Baconnier, Leonardo Pistone
+#    Copyright 2013-2015 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,35 +20,13 @@
 ##############################################################################
 
 {'name': 'Stock Reserve Sales',
- 'version': '0.1',
+ 'version': '1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
  'complexity': 'normal',
  'images': [],
  'website': "http://www.camptocamp.com",
- 'description': """
-Stock Reserve Sales
-===================
-
-Allows to create stock reservations for quotation lines before the
-confirmation of the quotation.  The reservations might have a validity
-date and in any case they are lifted when the quotation is canceled or
-confirmed.
-
-Reservations can be done only on "make to stock" and stockable products.
-
-The reserved products are substracted from the virtual stock. It means
-that if you reserved a quantity of products which bring the virtual
-stock below the minimum, the orderpoint will be triggered and new
-purchase orders will be generated. It also implies that the max may be
-exceeded if the reservations are canceled.
-
-If you want to prevent sales orders to be confirmed when the stock is
-insufficient at the order date, you may want to install the
-`sale_exception_nostock` module.
-
-""",
  'depends': ['sale_stock',
              'stock_reserve',
              ],

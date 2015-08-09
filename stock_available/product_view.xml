@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_stock_available_form">
+            <field name="name">Quantity available to promise (form)</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <field name="virtual_available" position="after">
+                    <newline/>
+                    <field name="immediately_usable_qty" />
+                </field>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_stock_available_tree">
+            <field name="name">Quantity available to promise (tree)</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <tree position="attributes">
+                        <attribute name="colors">red:immediately_usable_qty&lt;0;blue:immediately_usable_qty&gt;=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
+                    </tree>
+                       <field name="virtual_available" position="after">
+                       <field name="immediately_usable_qty" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_stock_available_kanban">
+            <field name="name">Quantity available to promise (kanban)</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='virtual_available']/.." position="replace">
+                    <li t-if="record.type.raw_value != 'service'">Available to promise: <field name="immediately_usable_qty"/> <field name="uom_id"/></li>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

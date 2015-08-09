@@ -36,6 +36,7 @@
                                 <field name="company_id"
                                     groups="base.group_multi_company"
                                     widget="selection"/>
+                                <field name="restrict_partner_id" groups="stock.group_tracking_owner"/>
                             </group>
                             <group name="location" string="Locations"
                                 groups="stock.group_locations">
@@ -63,6 +64,8 @@
                     <field name="product_uom_qty" sum="Total" />
                     <field name="product_uom" />
                     <field name="date_validity" />
+                    <field name="restrict_partner_id" groups="stock.group_tracking_owner"/>
+                    <field name="location_id" />
                     <field name="state"/>
                     <button name="reserve" type="object"
                         string="Reserve"
@@ -93,6 +96,7 @@
                     <field name="name" />
                     <field name="product_id" />
                     <field name="move_id" />
+                    <field name="restrict_partner_id" groups="stock.group_tracking_owner"/>
                     <group expand="0" string="Group By...">
                         <filter string="Status"
                             name="groupby_state"
@@ -103,6 +107,9 @@
                         <filter string="Product UoM" domain="[]"
                             name="groupby_product_uom"
                             context="{'group_by': 'product_uom'}"/>
+                        <filter string="Source Location" domain="[]"
+                            name="groupby_location"
+                            context="{'group_by': 'location_id'}"/>
                     </group>
                 </search>
             </field>
