@@ -28,7 +28,7 @@
     'license': 'AGPL-3',
     'complexity': 'normal',
     'images': [],
-    'website': 'http://odoo-community.org',
+    'website': 'http://www.savoirfairelinux.com',
     'depends': [
         'sale_stock',
     ],
