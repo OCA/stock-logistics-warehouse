@@ -152,7 +152,8 @@ class PurchaseOrderLine(models.Model):
             fiscal_position_id=fiscal_position_id, date_planned=date_planned,
             name=name, price_unit=price_unit, state=state, context=context)
 
-        if product_id and partner_id and not qty:
+        if product_id and partner_id and not qty \
+                and category_product_purchase_uom_id:
             res['value']['product_purchase_qty'] = product_purchase_qty
             res['value']['product_purchase_uom_id'] = product_purchase_uom_id
             uom_obj = self.pool['product.uom']
@@ -215,6 +216,11 @@ class ProcurementOrder(models.Model):
                                                    procurement.product_qty,
                                                    new_uom_id)
                         res['product_qty'] = max(qty, supplier.qty)
+                        pricelist = partner.property_product_pricelist_purchase
+                        res['price_unit'] = pricelist.with_context(
+                            uom=new_uom_id).price_get(
+                            procurement.product_id.id, qty,
+                            partner=partner.id)[pricelist.id]
                     break
 
         return res

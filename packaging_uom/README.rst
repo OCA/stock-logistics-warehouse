@@ -1,8 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Packaging Extended
-===========
+Packaging UOM
+=============
 
 This module was written to use unit of measure instead of quantity by package
 in the definition of packaging.
