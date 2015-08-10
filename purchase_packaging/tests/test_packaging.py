@@ -106,7 +106,8 @@ class TestPackaging(common.TransactionCase):
         self.assertAlmostEqual(sm.product_uom_qty, 16)
 
     def test_procurement(self):
-        """ On supplierinfo set min_qty as 0
+        """ On product set sale_price to 3
+            On supplierinfo set min_qty as 0
             Create procurement line with rule buy and quantity 17
             run procurement
             Check product_purchase_uom_id is product_uom_unit
@@ -114,6 +115,7 @@ class TestPackaging(common.TransactionCase):
             Check product_qty is 17
             Check packaging_id is False
             Check product_uom is product_uom_unit
+            Check price_unit is 3
             Confirm Purchase Order to avoid group
             Create procurement line with rule buy and quantity 1 dozen
             run procurement
@@ -122,6 +124,7 @@ class TestPackaging(common.TransactionCase):
             Check product_qty is 12
             Check packaging_id is False
             Check product_uom is product_uom_unit
+            Check price_unit is 3
             Confirm Purchase Order to avoid group
             On supplierinfo set product_uom_8 as min_qty_uom_id
             Create procurement line with rule buy and quantity 17
@@ -131,6 +134,7 @@ class TestPackaging(common.TransactionCase):
             Check product_qty is 8*3 = 24
             Check packaging_id is False
             Check product_uom is product_uom_unit
+            Check price_unit is 3
             Confirm Purchase Order to avoid group
             Create procurement line with rule buy and quantity 1 dozen
             run procurement
@@ -139,6 +143,7 @@ class TestPackaging(common.TransactionCase):
             Check product_qty is 8*2 = 16
             Check packaging_id is False
             Check product_uom is product_uom_unit
+            Check price_unit is 3
             Confirm Purchase Order to avoid group
             On supplierinfo set packaging product_packaging_34 (dozen)
             Create procurement line with rule buy and quantity 17
@@ -148,6 +153,7 @@ class TestPackaging(common.TransactionCase):
             Check product_qty is 8*1 = 8
             Check packaging_id is product_packaging_34
             Check product_uom is product_uom_dozen
+            Check price_unit is 3*12 = 36
             Confirm Purchase Order to avoid group
             Create procurement line with rule buy and quantity 1 dozen
             run procurement
@@ -156,6 +162,7 @@ class TestPackaging(common.TransactionCase):
             Check product_qty is 8*1 = 8
             Check packaging_id is product_packaging_34
             Check product_uom is product_uom_dozen
+            Check price_unit is 3*12 = 36
             Confirm Purchase Order to avoid group
             On supplierinfo set product_uom_unit as min_qty_uom_id
             Create procurement line with rule buy and quantity 17
@@ -165,6 +172,7 @@ class TestPackaging(common.TransactionCase):
             Check product_qty is 2
             Check packaging_id is product_packaging_34
             Check product_uom is product_uom_dozen
+            Check price_unit is 3*12 = 36
             Confirm Purchase Order to avoid group
             Create procurement line with rule buy and quantity 1 dozen
             run procurement
@@ -173,10 +181,12 @@ class TestPackaging(common.TransactionCase):
             Check product_qty is 1
             Check packaging_id is product_packaging_34
             Check product_uom is product_uom_dozen
+            Check price_unit is 3*12 = 36
             Confirm Purchase Order to avoid group
         """
         self.env.ref('product.product_product_34').route_ids = [(
             4, self.env.ref("purchase.route_warehouse0_buy").id)]
+        self.env.ref('product.product_product_34').standard_price = 3
         self.env.ref('product.product_uom_unit').rounding = 1
         procurement_obj = self.env['procurement.order']
 
@@ -212,6 +222,7 @@ class TestPackaging(common.TransactionCase):
         self.assertFalse(proc1.purchase_line_id.packaging_id)
         self.assertEqual(self.env.ref('product.product_uom_unit'),
                          proc1.purchase_line_id.product_uom)
+        self.assertEqual(3, proc1.purchase_line_id.price_unit)
         proc1.purchase_id.signal_workflow('purchase_confirm')
 
         self.sp_30.min_qty_uom_id = self.product_uom_8
@@ -230,6 +241,7 @@ class TestPackaging(common.TransactionCase):
         self.assertFalse(proc1.purchase_line_id.packaging_id)
         self.assertEqual(self.env.ref('product.product_uom_unit'),
                          proc1.purchase_line_id.product_uom)
+        self.assertEqual(3, proc1.purchase_line_id.price_unit)
         proc1.purchase_id.signal_workflow('purchase_confirm')
 
         proc1 = procurement_obj.create(
@@ -246,6 +258,7 @@ class TestPackaging(common.TransactionCase):
         self.assertFalse(proc1.purchase_line_id.packaging_id)
         self.assertEqual(self.env.ref('product.product_uom_unit'),
                          proc1.purchase_line_id.product_uom)
+        self.assertEqual(3, proc1.purchase_line_id.price_unit)
         proc1.purchase_id.signal_workflow('purchase_confirm')
 
         self.sp_30.packaging_id = self.product_packaging_34
@@ -265,6 +278,7 @@ class TestPackaging(common.TransactionCase):
                          proc1.purchase_line_id.packaging_id)
         self.assertEqual(self.env.ref('product.product_uom_dozen'),
                          proc1.purchase_line_id.product_uom)
+        self.assertEqual(36, proc1.purchase_line_id.price_unit)
         proc1.purchase_id.signal_workflow('purchase_confirm')
 
         proc1 = procurement_obj.create(
@@ -282,6 +296,7 @@ class TestPackaging(common.TransactionCase):
                          proc1.purchase_line_id.packaging_id)
         self.assertEqual(self.env.ref('product.product_uom_dozen'),
                          proc1.purchase_line_id.product_uom)
+        self.assertEqual(36, proc1.purchase_line_id.price_unit)
         proc1.purchase_id.signal_workflow('purchase_confirm')
 
         self.sp_30.min_qty_uom_id = self.env.ref('product.product_uom_unit')
@@ -301,6 +316,7 @@ class TestPackaging(common.TransactionCase):
                          proc1.purchase_line_id.packaging_id)
         self.assertEqual(self.env.ref('product.product_uom_dozen'),
                          proc1.purchase_line_id.product_uom)
+        self.assertEqual(36, proc1.purchase_line_id.price_unit)
         proc1.purchase_id.signal_workflow('purchase_confirm')
 
         proc1 = procurement_obj.create(
@@ -318,4 +334,5 @@ class TestPackaging(common.TransactionCase):
                          proc1.purchase_line_id.packaging_id)
         self.assertEqual(self.env.ref('product.product_uom_dozen'),
                          proc1.purchase_line_id.product_uom)
+        self.assertEqual(36, proc1.purchase_line_id.price_unit)
         proc1.purchase_id.signal_workflow('purchase_confirm')

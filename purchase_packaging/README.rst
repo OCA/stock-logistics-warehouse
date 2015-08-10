@@ -2,7 +2,7 @@
     :alt: License: AGPL-3
 
 Purchase Packaging
-===========
+==================
 
 - Use packaging in supplierinfo
 - Use uom set in the packaging instead of purchase uom for purchase
