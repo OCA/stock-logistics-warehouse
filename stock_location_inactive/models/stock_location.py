@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
+from openerp.osv import orm
 from openerp.tools.translate import _
 from openerp.tools.float_utils import float_compare
 
@@ -76,33 +76,3 @@ class StockLocation(orm.Model):
         return super(StockLocation, self).write(
             cr, uid, ids, vals, context=context
         )
-
-
-class StockMove(orm.Model):
-
-    """
-    Subclass stock.move model.
-
-    Extend the model stock.move to add a constraint to check if
-    the location is disable
-    """
-    _name = "stock.move"
-    _inherit = "stock.move"
-
-    def action_done(self, cr, uid, ids, context=None):
-        """Override the action_done to add constraint to check if the
-        location_dest is disable"""
-
-        if context is None:
-            context = {}
-        if isinstance(ids, (int, long)):
-            ids = [ids]
-        active = self.browse(cr, uid, ids, context)[0].location_dest_id.active
-        if not active:
-            raise orm.except_orm(
-                _('Validation Error'),
-                _('You cannot disable a location that contains products '
-                  'or sub-locations')
-            )
-        return super(StockMove, self).action_done(
-            cr, uid, ids, context=context)

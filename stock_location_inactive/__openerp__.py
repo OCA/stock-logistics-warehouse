@@ -46,7 +46,7 @@ Contributors
         'stock',
     ],
     'data': [
-        "stock_view.xml",
+        "views/stock_view.xml",
     ],
     'application': False,
     'installable': True,
