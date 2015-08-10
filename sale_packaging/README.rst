@@ -2,7 +2,7 @@
     :alt: License: AGPL-3
 
 Sale Packaging
-===========
+==============
 
 In sale order use the unit of measure of the packaging
 
