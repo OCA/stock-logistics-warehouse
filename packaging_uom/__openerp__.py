@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    "name": "Packaging Extended",
+    "name": "Packaging UOM",
     "version": "0.1",
     'author': "Acsone, Odoo Community Association (OCA)",
     "category": "Other",
