@@ -61,8 +61,7 @@ class test_stock_location(TransactionCase):
 
     def test_onchange_active_field(self):
         """Test onchange_active_field method in stock location model"""
-        cr, uid, vals = self.cr, self.uid, self.vals_location
-        context = self.context
+        cr, uid, context = self.cr, self.uid, self.context
         result = self.stock_location.onchange_active_field(
             cr, uid, self.location_id, active=True, context=context)
         self.assertEqual(result, True)
@@ -109,8 +108,7 @@ class test_stock_move(TransactionCase):
 
     def test_action_done(self):
         """Test action_done method in stock move model"""
-        cr, uid, vals = self.cr, self.uid, self.vals
-        context = self.context
+        cr, uid, context = self.cr, self.uid, self.context
         self.stock_location.write(
             cr, uid, self.location_dest_id, {'active': False}, context=context)
         self.assertRaises(

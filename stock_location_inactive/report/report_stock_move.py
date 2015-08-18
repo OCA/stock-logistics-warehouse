@@ -28,8 +28,8 @@ class ReportStockMove(orm.Model):
     """
     Subclass report.stock.inventory model.
 
-    Extend the model report.stock.inventory to add a filter in location to check if
-    the stock location is disable
+    Extend the model report.stock.inventory to add a filter in
+    location to check if the stock location is disable
     """
 
     _name = "report.stock.inventory"
@@ -44,12 +44,15 @@ class ReportStockMove(orm.Model):
             to_char(m.date, 'YYYY') as year,
             to_char(m.date, 'MM') as month,
             m.partner_id as partner_id, m.location_id as location_id,
-            m.product_id as product_id, pt.categ_id as product_categ_id, l.usage as location_type, l.scrap_location as scrap_location,
+            m.product_id as product_id, pt.categ_id as product_categ_id,
+            l.usage as location_type, l.scrap_location as scrap_location,
             m.company_id,
             m.state as state, m.prodlot_id as prodlot_id,
 
-            coalesce(sum(-pt.standard_price * m.product_qty * pu.factor / pu2.factor)::decimal, 0.0) as value,
-            coalesce(sum(-m.product_qty * pu.factor / pu2.factor)::decimal, 0.0) as product_qty
+            coalesce(sum(-pt.standard_price * m.product_qty * pu.factor /
+            pu2.factor)::decimal, 0.0) as value,
+            coalesce(sum(-m.product_qty * pu.factor
+            / pu2.factor)::decimal, 0.0) as product_qty
         FROM
             stock_move m
                 LEFT JOIN stock_picking p ON (m.picking_id=p.id)
@@ -75,8 +78,10 @@ class ReportStockMove(orm.Model):
             l.usage as location_type, l.scrap_location as scrap_location,
             m.company_id,
             m.state as state, m.prodlot_id as prodlot_id,
-            coalesce(sum(pt.standard_price * m.product_qty * pu.factor / pu2.factor)::decimal, 0.0) as value,
-            coalesce(sum(m.product_qty * pu.factor / pu2.factor)::decimal, 0.0) as product_qty
+            coalesce(sum(pt.standard_price * m.product_qty * pu.factor
+            / pu2.factor)::decimal, 0.0) as value,
+            coalesce(sum(m.product_qty * pu.factor / pu2.factor)::decimal, 0.0)
+             as product_qty
         FROM
             stock_move m
                 LEFT JOIN stock_picking p ON (m.picking_id=p.id)
