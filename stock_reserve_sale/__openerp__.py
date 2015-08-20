@@ -37,6 +37,7 @@
           ],
  'test': ['test/sale_reserve.yml',
           'test/sale_line_reserve.yml',
+          'test/sale_line_reserve_delete.yml',
           ],
  'installable': True,
  'auto_install': False,
