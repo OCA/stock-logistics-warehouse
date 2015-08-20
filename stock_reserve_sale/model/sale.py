@@ -237,8 +237,8 @@ class SaleOrderLine(models.Model):
     def unlink(self):
         """
         Force remove the reservations. This is necessary because even though
-        sale_line_id of stock.reservation has ondelete=cascade, the unlink method of
-        the reservations is never called.
+        sale_line_id of stock.reservation has ondelete=cascade, the unlink 
+        method of the reservations is never called.
         """
         self.reservation_ids.unlink()
         return super(SaleOrderLine, self).unlink()
