@@ -27,4 +27,3 @@ from . import (
 checks = [
     test_stock,
 ]
-
