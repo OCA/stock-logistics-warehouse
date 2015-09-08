@@ -29,35 +29,23 @@ class ProductTemplate(models.Model):
     """
     _inherit = 'product.template'
 
-    # immediately usable quantity caluculated with the quant method
     @api.multi
     @api.depends('virtual_available')
     def _immediately_usable_qty(self):
-        stock_location_obj = self.env['stock.location']
-        internal_locations = stock_location_obj.search([
-            ('usage', '=', 'internal')])
-        sublocations = self.env['stock.location']
-        for location in internal_locations:
-            sublocations += stock_location_obj.search(
-                [('id', 'child_of', location.id)])
-        for product_template in self:
-            products = self.env['product.product'].search([
-                ('product_tmpl_id', '=', product_template.id)])
-            quant_obj = self.env['stock.quant']
-            quants = quant_obj.search([
-                ('location_id', 'in', sublocations.ids),
-                ('product_id', 'in', products.ids),
-                ('reservation_id', '=', False)])
-            availability = 0
-            if quants:
-                for quant in quants:
-                    availability += quant.qty
-            product_template.immediately_usable_qty = availability
+        """No-op implementation of the stock available to promise.
+
+        By default, available to promise = forecasted quantity.
+
+        Must be overridden by another module that actually implement
+        computations."""
+        for product in self:
+            product.immediately_usable_qty = product.virtual_available
+
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
         compute='_immediately_usable_qty',
-        string='Available to promise (quant calculation)',
+        string='Available to promise',
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"
              "The definition of this value can be configured to suit "
