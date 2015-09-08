@@ -18,16 +18,6 @@
 #
 ##############################################################################
 
-{
-    'name': 'Stock available to promise',
-    'version': '8.0.2.0.0',
-    "author": u"Numérigraphe,Odoo Community Association (OCA)",
-    'category': 'Warehouse',
-    'depends': ['stock'],
-    'license': 'AGPL-3',
-    'data': [
-        'views/product_template_view.xml',
-        'views/product_product_view.xml',
-        'views/res_config_view.xml',
-    ],
-}
+from . import product_template
+from . import product_product
+from . import res_config

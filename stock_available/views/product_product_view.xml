@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_stock_available_tree_variant">
+            <field name="name">Quantity available to promise (variant tree)</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.view_stock_product_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <tree position="attributes">
+                        <attribute name="colors">red:immediately_usable_qty&lt;0;blue:immediately_usable_qty&gt;=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
+                    </tree>
+                       <field name="virtual_available" position="after">
+                       <field name="immediately_usable_qty" />
+                    </field>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
