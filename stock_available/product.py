@@ -29,7 +29,7 @@ class ProductTemplate(models.Model):
     """
     _inherit = 'product.template'
 
-    @api.multi
+    @api.one
     @api.depends('virtual_available')
     def _immediately_usable_qty(self):
         """No-op implementation of the stock available to promise.
@@ -38,8 +38,7 @@ class ProductTemplate(models.Model):
 
         Must be overridden by another module that actually implement
         computations."""
-        for product in self:
-            product.immediately_usable_qty = product.virtual_available
+        self.immediately_usable_qty = self.virtual_available
 
 
     immediately_usable_qty = fields.Float(
