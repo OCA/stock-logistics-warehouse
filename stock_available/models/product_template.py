@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    This module is copyright (C) 2014 Numérigraphe SARL. All Rights Reserved.
@@ -23,22 +23,16 @@ from openerp.addons import decimal_precision as dp
 
 
 class ProductTemplate(models.Model):
-    """Add a field for the stock available to promise.
-    Useful implementations need to be installed through the Settings menu or by
-    installing one of the modules stock_available_*
-    """
     _inherit = 'product.template'
+
+
 
     @api.one
     @api.depends('virtual_available')
     def _immediately_usable_qty(self):
-        """No-op implementation of the stock available to promise.
-
-        By default, available to promise = forecasted quantity.
-
-        Must be overridden by another module that actually implement
-        computations."""
-        self.immediately_usable_qty = self.virtual_available
+        """Compute the quantity using all the variants"""
+        self.immediately_usable_qty = sum(
+            [v.immediately_usable_qty for v in self.product_variant_ids])
 
 
     immediately_usable_qty = fields.Float(
@@ -48,6 +42,4 @@ class ProductTemplate(models.Model):
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"
              "The definition of this value can be configured to suit "
-             "your needs , this number is obtained by using the new odoo 8 "
-             "quants, so it gives us the actual current quants  minus reserved"
-             "quants")
+             "your needs")
