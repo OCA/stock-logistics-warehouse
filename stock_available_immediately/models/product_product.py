@@ -19,15 +19,14 @@
 #
 ##############################################################################
 
-from openerp import models
+from openerp import models, api
 
 
-class Product(models.Model):
-    """Subtract incoming qty from immediately_usable_qty"""
+class ProductProduct(models.Model):
     _inherit = 'product.product'
 
+    @api.one
     def _immediately_usable_qty(self):
         """Ignore the incoming goods in the quantity available to promise"""
-        super(Product, self)._immediately_usable_qty()
-        for product in self:
-            product.immediately_usable_qty -= product.incoming_qty
+        super(ProductProduct, self)._immediately_usable_qty()
+        self.immediately_usable_qty -= self.incoming_qty
