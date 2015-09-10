@@ -40,7 +40,6 @@ class ProductProduct(models.Model):
         computations."""
         self.immediately_usable_qty = self.virtual_available
 
-
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
         compute='_immediately_usable_qty',
