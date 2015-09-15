@@ -92,7 +92,7 @@
   The procurement linked to the orderpoint must be in exception (no routes configured)
 -
   !python {model: stock.warehouse.orderpoint}: |
-    orderpoint = self.browse(cr, uid, ref('sorbet_orderpoint'))
+    orderpoint = self.browse(cr, uid, ref('stock_reserve.sorbet_orderpoint'))
     assert orderpoint.procurement_ids[0].state == 'exception', 'procurement must be in exception as there is no rule for procurement'
     import math
     assert orderpoint.procurement_ids[0].product_qty == math.ceil(15 - 3.5), 'wrong product qty ordered'
