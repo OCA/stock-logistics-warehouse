@@ -1,4 +1,13 @@
 -
+  I force recomputation of stock.location parent left/right
+-
+  !python {model: stock.location}:
+    # we need this because when running the tests at install time as is done on
+    # Travis, the hook performing this operation for the new stock reservation
+    # location is run after the test execution. This causes the stock level
+    # computation to be wrong at the time the tests are run.
+    self._parent_store_compute(cr)
+-
   I create a product to test the stock reservation
 -
   !record {model: product.product, id: product_sorbet}:
@@ -33,9 +42,8 @@
 -
   I check Virtual stock of Sorbet after update stock.
 -
-  !python {model: product.product}: |
-    product = self.browse(cr, uid, ref('stock_reserve.product_sorbet'), context=context)
-    assert product.virtual_available == 10, "Stock is not updated."
+  !python {model: product.product, id: product_sorbet}: |
+    assert self.virtual_available == 10, "Stock is not updated."
 -
   I create a stock reservation for 6 kgm
 -
