@@ -22,7 +22,7 @@
 
 {
     "name": "Ignore planned receptions in quantity available to promise",
-    "version": "2.0",
+    "version": "8.0.2.0.0",
     "depends": ["stock_available"],
     "author": "Camptocamp",
     "license": "AGPL-3",
