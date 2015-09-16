@@ -20,7 +20,7 @@
 from openerp.tests.common import TransactionCase
 
 
-class testStockLogisticsWarehouse(TransactionCase):
+class TestStockLogisticsWarehouse(TransactionCase):
 
     def test01_stock_levels(self):
         """checking that immediately_usable_qty actually reflects \
