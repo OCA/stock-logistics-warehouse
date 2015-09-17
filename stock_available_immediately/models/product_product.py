@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    This module is copyright (C) 2014 Numérigraphe SARL. All Rights Reserved.
+#    Copyright 2010-2012 Camptocamp SA
+#    Copyright (C) 2011 Akretion Sébastien BEAU <sebastien.beau@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,4 +19,14 @@
 #
 ##############################################################################
 
-from . import models
+from openerp import models, api
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    @api.one
+    def _immediately_usable_qty(self):
+        """Ignore the incoming goods in the quantity available to promise"""
+        super(ProductProduct, self)._immediately_usable_qty()
+        self.immediately_usable_qty -= self.incoming_qty
