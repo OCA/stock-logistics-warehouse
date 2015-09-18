@@ -70,10 +70,9 @@ class ImportInventory(models.TransientModel):
             values = dict(zip(keys, field))
             prod_location = location.id
             if 'location' in values and values['location']:
-                locat_lst = stloc_obj.search([('name', '=',
+                locations = stloc_obj.search([('name', '=',
                                                values['location'])])
-                if locat_lst:
-                    prod_location = locat_lst[0].id
+                prod_location = locations[:1].id
             prod_lst = product_obj.search([('default_code', '=',
                                             values['code'])])
             if prod_lst:
