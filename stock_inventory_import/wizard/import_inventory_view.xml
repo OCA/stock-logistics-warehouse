@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <form string="Import Inventory">
                 <label string="The file must have 2 column keys:
-                'code' => for product referente
+                'code' => for product reference
                 'quantity' => for product quantity" colspan="4"/>
                     <group colspan="4" col="4">
                         <field name="name" />
