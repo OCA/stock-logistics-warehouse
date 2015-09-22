@@ -35,4 +35,5 @@
         'test/quoted_qty.yml',
     ],
     'license': 'AGPL-3',
+    'installable': False,
 }
