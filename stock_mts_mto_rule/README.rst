@@ -37,6 +37,7 @@ Usage
 
 You have to choose the mts+mto route on the product form.
 You should not choose both mts+mto route and mto route.
+You have to choose 'Use MTO+MTS rules' on the company's warehouse form.
 
 Credits
 =======
