@@ -11,23 +11,24 @@ msgstr ""
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
 "PO-Revision-Date: 2018-02-27 11:37+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
-"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
-"Language: es\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, fuzzy, python-format
 msgid "All products"
-msgstr "Productos"
+msgstr "Proizvodi"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__categ_ids
 msgid "Categories"
-msgstr "Categorias"
+msgstr "Kategorije"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
@@ -38,7 +39,7 @@ msgstr ""
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, fuzzy, python-format
 msgid "Filtered Products"
-msgstr "Productos seleccionados"
+msgstr "Izbrani proizvodi"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -53,46 +54,46 @@ msgstr ""
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
 msgid "Inventory"
-msgstr "Inventario"
+msgstr "Inventar"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
 #: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
 #, fuzzy
 msgid "Inventory of"
-msgstr "Inventario"
+msgstr "Inventar"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
 msgid "Lots"
-msgstr "Lotes"
+msgstr "Loti"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Categories"
-msgstr "Categorias seleccionadas"
+msgstr "Izbrane kategorije"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Lots"
-msgstr "Lotes seleccionados"
+msgstr "Izbrani loti"
 
 #~ msgid "Capture Lines"
-#~ msgstr "Líneas capturadas"
+#~ msgstr "Zajem postavk"
 
 #~ msgid "Created by"
-#~ msgstr "Creado por"
+#~ msgstr "Ustvaril"
 
 #~ msgid "Created on"
-#~ msgstr "Creado el"
+#~ msgstr "Ustvarjeno"
 
 #~ msgid "Display Name"
-#~ msgstr "Nombre mostrado"
+#~ msgstr "Prikazni naziv"
 
 #~ msgid "Empty list"
-#~ msgstr "Lista vacía"
+#~ msgstr "Prazen seznam"
 
 #~ msgid "ID"
 #~ msgstr "ID"
@@ -100,22 +101,22 @@ msgstr "Lotes seleccionados"
 #, fuzzy
 #~| msgid "Inventory"
 #~ msgid "Inventory Line Empty"
-#~ msgstr "Inventario"
+#~ msgstr "Inventar"
 
 #~ msgid "Last Modified on"
-#~ msgstr "Última modificación en"
+#~ msgstr "Zadnjič spremenjeno"
 
 #~ msgid "Last Updated by"
-#~ msgstr "Actualizado por"
+#~ msgstr "Zadnji posodobil"
 
 #~ msgid "Last Updated on"
-#~ msgstr "Actualizado el"
+#~ msgstr "Zadnjič posodobljeno"
 
 #~ msgid "Product Code"
-#~ msgstr "Codigo de producto"
+#~ msgstr "Koda proizvoda"
 
 #~ msgid "Quantity"
-#~ msgstr "Cantidad"
+#~ msgstr "Količina"
 
 #~ msgid "Selected Products"
-#~ msgstr "Productos seleccionados"
+#~ msgstr "Izbrani proizvodi"
