@@ -3,19 +3,20 @@
 # * stock_reserve_sale
 # 
 # Translators:
+# Pierre Verkest <pverkest@anybox.fr>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-23 20:23+0000\n"
-"PO-Revision-Date: 2015-09-15 13:05+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
+"PO-Revision-Date: 2015-09-27 21:09+0000\n"
+"Last-Translator: Pierre Verkest <pverkest@anybox.fr>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
@@ -23,7 +24,7 @@ msgid ""
 "A stock reservation will be created for the products\n"
 "                        of the selected quotation lines. If a validity date is specified,\n"
 "                        the reservation will be released once the date has passed."
-msgstr ""
+msgstr "Une réservation de stock sera créée pour les produits\ndes lignes de devis sélectionnées. Si une date de validité est\nspécifiée, la réservation sera annulée une fois cette date dépassée."
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:179
@@ -31,7 +32,7 @@ msgstr ""
 msgid ""
 "As you changed the quantity of the line, the quantity of the stock "
 "reservation will be automatically adjusted to %.2f."
-msgstr ""
+msgstr "Suite au changement de quantité de la ligne, la quantité de stock réservée va être ajusté à %.2f."
 
 #. module: stock_reserve_sale
 #: field:sale.order,is_stock_reservable:0
@@ -41,30 +42,30 @@ msgstr ""
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:188
 #, python-format
 msgid "Configuration Error!"
-msgstr ""
+msgstr "Erreur de configuration!"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
 msgid "Created by"
-msgstr "Creado por"
+msgstr "Créé par"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_date:0
 msgid "Created on"
-msgstr "Creado el"
+msgstr "Créé le"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:210
 #: code:addons/stock_reserve_sale/model/sale.py:222
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #. module: stock_reserve_sale
 #: field:sale.order,has_stock_reservation:0
@@ -81,28 +82,28 @@ msgstr "ID"
 msgid ""
 "If a date is given, the reservations will be released at the end of the "
 "validity."
-msgstr ""
+msgstr "Si une date est donnée, la réservation sera annulée à la fin de cette date de validité."
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0
 msgid "Last Updated by"
-msgstr "Actualizado por última vez por"
+msgstr "Dernière màj par"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_date:0
 msgid "Last Updated on"
-msgstr "Actualizado por última vez el"
+msgstr "Dernière màj le"
 
 #. module: stock_reserve_sale
 #: help:sale.stock.reserve,location_dest_id:0
 msgid "Location where the system will reserve the products."
-msgstr ""
+msgstr "Emplacement de stock où sont réservés les produits (pour le système)."
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 #: field:sale.stock.reserve,note:0
 msgid "Notes"
-msgstr "Notas"
+msgstr "Notes"
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
@@ -122,7 +123,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Reserve"
-msgstr "Reservar"
+msgstr "Réserver"
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
@@ -166,7 +167,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,location_id:0
 msgid "Source Location"
-msgstr ""
+msgstr "Emplacement Source"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,owner_id:0
@@ -177,12 +178,12 @@ msgstr ""
 #: model:ir.model,name:stock_reserve_sale.model_stock_reservation
 #: field:sale.order.line,reservation_ids:0
 msgid "Stock Reservation"
-msgstr "Reserva de existencias"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,date_validity:0
 msgid "Validity Date"
-msgstr "Fecha de validez"
+msgstr "Date de validité"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:211
@@ -190,17 +191,17 @@ msgstr "Fecha de validez"
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "
 "reservation. Release the reservation before changing the product."
-msgstr ""
+msgstr "Vous ne pouvez pas modifier le produit ou l'unité de mesure des lignes avec une réservation en stock. Veuillez annuler les réservations avant de modifier la ligne."
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "cancel all"
-msgstr ""
+msgstr "tout annuler"
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
