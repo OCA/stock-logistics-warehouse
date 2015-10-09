@@ -1,0 +1,222 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_import
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-10-09 03:44+0000\n"
+"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/odoomrp-wip-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/models/stock_inventory.py:11
+#, python-format
+msgid "By File"
+msgstr ""
+
+#. module: stock_inventory_import
+#: view:import.inventory:stock_inventory_import.view_import_inventory
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_inventory_import
+#: field:import.inventory,create_uid:0
+#: field:stock.inventory.import.line,create_uid:0
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: stock_inventory_import
+#: field:import.inventory,create_date:0
+#: field:stock.inventory.import.line,create_date:0
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: stock_inventory_import
+#: field:import.inventory,location:0
+msgid "Default Location"
+msgstr ""
+
+#. module: stock_inventory_import
+#: help:import.inventory,delimeter:0
+msgid "Default delimeter is \",\""
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:import.inventory,delimeter:0
+msgid "Delimeter"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:stock.inventory.import.line,fail:0
+msgid "Fail"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:stock.inventory.import.line,fail_reason:0
+msgid "Fail Reason"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:import.inventory,data:0
+msgid "File"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:import.inventory,name:0
+msgid "Filename"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:stock.inventory.import.line,product:0
+msgid "Found Product"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:import.inventory,id:0 field:stock.inventory.import.line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_inventory_import
+#: view:import.inventory:stock_inventory_import.view_import_inventory
+msgid "Import"
+msgstr ""
+
+#. module: stock_inventory_import
+#: view:import.inventory:stock_inventory_import.view_import_inventory
+#: model:ir.actions.act_window,name:stock_inventory_import.action_import_inventory
+msgid "Import Inventory"
+msgstr ""
+
+#. module: stock_inventory_import
+#: model:ir.model,name:stock_inventory_import.model_import_inventory
+msgid "Import inventory"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:stock.inventory,imported:0
+msgid "Imported"
+msgstr ""
+
+#. module: stock_inventory_import
+#: view:stock.inventory:stock_inventory_import.view_inventory_form_inherit
+#: field:stock.inventory,import_lines:0
+msgid "Imported Lines"
+msgstr ""
+
+#. module: stock_inventory_import
+#: model:ir.model,name:stock_inventory_import.model_stock_inventory
+#: field:stock.inventory.import.line,inventory_id:0
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:import.inventory,write_uid:0
+#: field:stock.inventory.import.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: stock_inventory_import
+#: field:import.inventory,write_date:0
+#: field:stock.inventory.import.line,write_date:0
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: stock_inventory_import
+#: view:stock.inventory:stock_inventory_import.view_inventory_form_inherit
+msgid "Load File"
+msgstr ""
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/models/stock_inventory.py:77
+#, python-format
+msgid "Loaded lines must be processed at least one time for inventory : %s"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:stock.inventory.import.line,location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/models/stock_inventory.py:20
+#: code:addons/stock_inventory_import/wizard/import_inventory.py:88
+#, python-format
+msgid "No processed"
+msgstr ""
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/models/stock_inventory.py:50
+#, python-format
+msgid "No product code found"
+msgstr ""
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/wizard/import_inventory.py:59
+#, python-format
+msgid "Not 'code' or 'quantity' keys found"
+msgstr ""
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/wizard/import_inventory.py:53
+#, python-format
+msgid "Not a valid file!"
+msgstr ""
+
+#. module: stock_inventory_import
+#: view:stock.inventory:stock_inventory_import.view_inventory_form_inherit
+msgid "Process File Lines"
+msgstr ""
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/models/stock_inventory.py:69
+#, python-format
+msgid "Processed"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:stock.inventory.import.line,code:0
+msgid "Product Code"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:stock.inventory.import.line,lot:0
+msgid "Product Lot"
+msgstr ""
+
+#. module: stock_inventory_import
+#: field:stock.inventory.import.line,quantity:0
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_inventory_import
+#: model:ir.model,name:stock_inventory_import.model_stock_inventory_import_line
+msgid "Stock Inventory Import Line"
+msgstr ""
+
+#. module: stock_inventory_import
+#: view:import.inventory:stock_inventory_import.view_import_inventory
+msgid ""
+"The file must have 2 column keys:                 'code' => for product "
+"referente                 'quantity' => for product quantity"
+msgstr ""
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/models/stock_inventory.py:37
+#, python-format
+msgid "There must be one line at least to process"
+msgstr ""
+
+#. module: stock_inventory_import
+#: code:addons/stock_inventory_import/wizard/import_inventory.py:37
+#, python-format
+msgid "You need to select a file!"
+msgstr ""
