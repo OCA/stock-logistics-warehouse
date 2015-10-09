@@ -21,7 +21,7 @@
 
 {'name': 'Stock Reservation',
  'summary': 'Stock reservations on products',
- 'version': '0.2',
+ 'version': '8.0.0.2.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
