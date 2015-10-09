@@ -22,15 +22,15 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[stock_available](stock_available/) | 2.0 | Stock available to promise
-[stock_available_immediately](stock_available_immediately/) | 2.0 | Ignore planned receptions in quantity available to promise
-[stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 1.0 | More filters for inventory adjustments
-[stock_location_area_data](stock_location_area_data/) | 0.1 | Add surface units of measure
-[stock_location_area_management](stock_location_area_management/) | 0.1 | Enter a location's area based on different units of measure
-[stock_location_ownership](stock_location_ownership/) | 0.1 | Stock Location Ownership
-[stock_mts_mto_rule](stock_mts_mto_rule/) | 1.0 | Add a MTS+MTO route
-[stock_reserve](stock_reserve/) | 0.2 | Stock reservations on products
-[stock_reserve_sale](stock_reserve_sale/) | 1.0 | Stock Reserve Sales
+[stock_available](stock_available/) | 8.0.2.0.0 | Stock available to promise
+[stock_available_immediately](stock_available_immediately/) | 8.0.2.0.0 | Ignore planned receptions in quantity available to promise
+[stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 8.0.1.0.0 | More filters for inventory adjustments
+[stock_location_area_data](stock_location_area_data/) | 8.0.0.1.0 | Add surface units of measure
+[stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 | Enter a location's area based on different units of measure
+[stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 | Stock Location Ownership
+[stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.0 | Add a MTS+MTO route
+[stock_reserve](stock_reserve/) | 8.0.0.2.0 | Stock reservations on products
+[stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.0 | Stock Reserve Sales
 
 Unported addons
 ---------------
