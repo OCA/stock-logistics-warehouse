@@ -1,0 +1,23 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_quant_merge
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-07 10:45+0000\n"
+"PO-Revision-Date: 2015-09-20 19:06+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_quant_merge
+#: model:ir.model,name:stock_quant_merge.model_stock_quant
+msgid "Quants"
+msgstr "Kvant"
