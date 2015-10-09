@@ -10,11 +10,13 @@
                         <field name='quants_lines' colspan="4">
                             <tree editable="top" delete="0" create="0">
                                 <field name="quant" />
+                                <field name="location_id" />
                                 <field name="selected" />
                                 <field name="qty" attrs="{'readonly':[('selected', '=' ,False)]}" sum="qty"/>
                             </tree>
                             <form>
                                 <field name="quant" />
+                                <field name="location_id" />
                                 <field name="selected" />
                                 <field name="qty"/>
                             </form>

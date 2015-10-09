@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
-from openerp import models, api
+# (c) 2015 Mikel Arregi - AvanzOSC
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+
+from openerp import api, fields, models
 
 
 class StockPicking(models.Model):
@@ -12,3 +12,10 @@ class StockPicking(models.Model):
     def action_assign(self):
         self.mapped('pack_operation_ids').unlink()
         return super(StockPicking, self).action_assign()
+
+
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    picking_type_code = fields.Selection(
+        related='picking_type_id.code', store=True)
