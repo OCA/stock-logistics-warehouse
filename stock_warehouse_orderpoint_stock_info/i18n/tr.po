@@ -6,17 +6,17 @@
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2018-01-16 14:36+0000\n"
+"POT-Creation-Date: 2017-03-07 03:45+0000\n"
+"PO-Revision-Date: 2017-03-07 03:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_virtual_location_qty
@@ -31,7 +31,7 @@ msgstr ""
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model,name:stock_warehouse_orderpoint_stock_info.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr "Regla de inventario mínimo"
+msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_outgoing_location_qty
@@ -41,13 +41,13 @@ msgstr ""
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.ui.view,arch_db:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_search_view
 msgid "Product"
-msgstr "Producto"
+msgstr "Ürün"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_product_category
 #: model:ir.ui.view,arch_db:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_search_view
 msgid "Product Category"
-msgstr "Categoría de producto"
+msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_product_location_qty
