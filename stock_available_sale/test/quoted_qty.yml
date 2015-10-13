@@ -1,0 +1,66 @@
+- Test the computation of the quoted quantity on product.product_product_10
+
+- Create a UoM in the category of PCE
+- !record {model: product.uom, id: thousand}:
+    name: Thousand
+    factor: 0.001
+    rounding: 0.00
+    uom_type: bigger
+    category_id: product.product_uom_categ_unit
+
+- Cancel all the previous Quotations
+- !python {model: sale.order}: |
+    line_ids = self.pool['sale.order.line'].search(
+          cr, uid, [('product_id', '=', ref('product.product_product_10')),
+                    ('state', '=', 'draft')])
+    ids = [l.order_id.id for l in self.pool['sale.order.line'].browse(cr, uid, line_ids)]
+    if ids:
+      self.action_cancel(cr, uid, ids)
+- The quoted quantity should be 0
+- !assert {model: product.product, id: product.product_product_10, string: "Check quoted_qty"}:
+    - quoted_qty == 0.0
+  
+- Enter a Quotation
+- !record {model: sale.order, id: order1}:
+    order_line:
+      - name: Quotation 1
+        product_uom: product.product_uom_unit
+        product_uom_qty: 107.0
+        state: draft
+        product_id: product.product_product_10
+    partner_id: base.res_partner_2
+    partner_invoice_id: base.res_partner_address_8
+    partner_shipping_id: base.res_partner_address_8
+    pricelist_id: product.list0
+- The quoted qty should match the single quotation
+- !assert {model: product.product, id: product.product_product_10, string: "Check quoted_qty"}:
+    - quoted_qty == -107.0
+
+- Enter another Quotation
+- !record {model: sale.order, id: order2}:
+    order_line:
+      - name: Quotation 1
+        product_uom: thousand
+        product_uom_qty: 0.613
+        state: draft
+        product_id: product.product_product_10
+    partner_id: base.res_partner_2
+    partner_invoice_id: base.res_partner_address_9
+    partner_shipping_id: base.res_partner_address_9
+    pricelist_id: product.list0
+- The quoted qty should match the total of the quotations
+- !assert {model: product.product, id: product.product_product_10, string: "Check quoted quantity"}:
+    - quoted_qty == -720.0
+- Use the context to report in another UoM
+- !assert {model: product.product, id: product.product_product_10, string: "Check in other UoM", context: "{'uom': ref('thousand')}"}:
+  - quoted_qty == -0.72
+- Use the context to report in the default UoM
+- !assert {model: product.product, id: product.product_product_10, string: "Check in False UoM", context: "{'uom': False}"}:
+  - quoted_qty == -720.0
+
+- Confirm one of the Quotations
+- !workflow {model: sale.order, action: order_confirm, ref: order1}
+- The quoted qty should match the remaining quotation
+- !assert {model: product.product, id: product.product_product_10, string: "Check quoted quantity"}:
+    - quoted_qty == -613.0
+
