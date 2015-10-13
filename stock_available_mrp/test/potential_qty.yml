@@ -1,0 +1,70 @@
+- Test the computation of the potential quantity on product_product_16, a product with several multi-line BoMs
+
+- Create a UoM in the category of PCE
+- !record {model: product.uom, id: thousand}:
+    name: Thousand
+    factor: 0.001
+    rounding: 0.0001
+    uom_type: bigger
+    category_id: product.product_uom_categ_unit
+
+- Receive enough of the first component to run the BoM 1000x, and check that the potential is unchanged
+- !python {model: mrp.bom}: |
+    bom = self.browse(
+      cr, uid,
+      self._bom_find(
+        cr, uid, ref('product.product_product_16'),
+        ref('product.product_uom_unit')))
+    assert len(bom.bom_lines)>1, "The test BoM has a single line, two or more are needed for the test"
+    initial_qty = bom.product_id.potential_qty
+    component = bom.bom_lines[0]
+    assert component.product_uom.category_id.id == ref('product.product_uom_categ_unit'), "The first component's UoM is in the wrong category can't test"
+    self.pool['stock.move'].create(
+      cr, uid,
+      {
+        'name': 'Receive first component',
+        'product_id': component.product_id.id,
+        'product_qty': component.product_qty * 1000.0,
+        'product_uom': component.product_id.uom_id.id,
+        'location_id': ref('stock.stock_location_suppliers'),
+        'location_dest_id': ref('stock.stock_location_stock'),
+        'state': 'done',
+      })
+    # Re-read the potential quantity
+    bom.refresh()
+    new_qty = bom.product_id.potential_qty
+    assert new_qty == initial_qty, "Receiving a single component should not change the potential qty (%s instead of %s)" % (new_qty, initial_qty)
+
+- Receive enough of all the components to run the BoM 1000x and check that the potential is correct
+- !python {model: mrp.bom}: |
+    # Select a BoM for product_product_16
+    bom = self.browse(
+      cr, uid,
+      self._bom_find(
+        cr, uid, ref('product.product_product_16'),
+        ref('product.product_uom_unit')))
+    assert len(bom.bom_lines)>1, "The test BoM has a single line, two or more are needed for the test"
+    initial_qty = bom.product_id.potential_qty
+    for component in bom.bom_lines:
+      assert component.product_uom.category_id.id == ref('product.product_uom_categ_unit'), "The first component's UoM is in the wrong category, can't test"
+      self.pool['stock.move'].create(
+        cr, uid,
+        {
+          'name': 'Receive all components',
+          'product_id': component.product_id.id,
+          'product_qty': component.product_qty * 1000.0,
+          'product_uom': component.product_id.uom_id.id,
+          'location_id': ref('stock.stock_location_suppliers'),
+          'location_dest_id': ref('stock.stock_location_stock'),
+          'state': 'done',
+        })
+    # Re-read the potential quantity
+    bom.refresh()
+    new_qty = bom.product_id.potential_qty
+    right_qty = initial_qty + bom.product_qty * 1000.0
+    assert new_qty == right_qty, "The potential qty is incorrect after receiveing all the components (%s instead of %s)" % (new_qty, right_qty)
+    # Re-read the potential quantity with a different UoM in the context
+    new_qty = self.browse(
+      cr, uid, bom.id, context={'uom': ref('thousand')}).product_id.potential_qty
+    right_qty = initial_qty / 1000.0 + bom.product_qty
+    assert abs(new_qty - right_qty) < 0.0001, "The potential qty is incorrect with another UoM in the context (%s instead of %s)" % (new_qty, right_qty)
