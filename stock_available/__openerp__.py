@@ -29,5 +29,5 @@
         'views/product_template_view.xml',
         'views/product_product_view.xml',
         'views/res_config_view.xml',
-    ]
+    ],
 }
