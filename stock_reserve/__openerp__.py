@@ -39,5 +39,5 @@
  'auto_install': False,
  'test': ['test/stock_reserve.yml',
           ],
- 'installable': True,
+ 'installable': False,
  }
