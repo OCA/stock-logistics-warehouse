@@ -27,5 +27,5 @@
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Hidden",
-    'installable': True
+    'installable': False
 }

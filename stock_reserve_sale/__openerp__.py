@@ -38,6 +38,6 @@
  'test': ['test/sale_reserve.yml',
           'test/sale_line_reserve.yml',
           ],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
  }

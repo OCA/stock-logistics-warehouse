@@ -34,6 +34,6 @@
     'data': [
         'data/stock_location_area_data.xml',
     ],
-    'installable': True,
+    'installable': False,
     'application': False,
 }

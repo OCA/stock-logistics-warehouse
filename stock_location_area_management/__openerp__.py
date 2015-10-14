@@ -36,6 +36,6 @@
         'views/res_company.xml',
         'views/stock_location.xml',
     ],
-    'installable': True,
+    'installable': False,
     'application': False,
 }
