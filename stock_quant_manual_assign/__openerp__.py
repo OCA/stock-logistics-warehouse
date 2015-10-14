@@ -7,14 +7,16 @@
     "version": "8.0.1.0.0",
     "category": "Warehouse Management",
     "license": "AGPL-3",
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
+              "Odoo Community Association (OCA)",
     "website": "http://www.odoomrp.com",
     "contributors": [
-        "Ana Juaristi Olalde <ajuaristio@gmail.com>",
-        "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>"
         "Mikel Arregi <mikelarregi@avanzosc.es>",
+        "Ana Juaristi Olalde <anajuaristi@avanzosc.es>",
+        "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>"
+        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
     ],
     "depends": [
         "stock",
