@@ -34,5 +34,5 @@
           'view/pull_rule.xml',
           'view/warehouse.xml',
           ],
- 'installable': True,
+ 'installable': False,
  }
