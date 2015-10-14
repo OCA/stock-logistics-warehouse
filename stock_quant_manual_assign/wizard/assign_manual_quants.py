@@ -10,10 +10,6 @@ import openerp.addons.decimal_precision as dp
 class AssignManualQuants(models.TransientModel):
     _name = 'assign.manual.quants'
 
-    @api.depends('quants_lines')
-    def lines_qty(self):
-        self.lines_qty = sum(self.quants_lines.mapped('qty'))
-
     @api.multi
     @api.constrains('quants_lines')
     def check_qty(self):
@@ -25,16 +21,18 @@ class AssignManualQuants(models.TransientModel):
                     raise exceptions.Warning(
                         _('Quantity is higher than the needed one'))
 
-    @api.depends('quants_lines')
-    def get_move_qty(self):
+    @api.depends('quants_lines', 'quants_lines.qty')
+    def _compute_qties(self):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-        self.move_qty = move.product_uom_qty - self.lines_qty
+        lines_qty = sum(self.quants_lines.mapped('qty'))
+        self.lines_qty = lines_qty
+        self.move_qty = move.product_uom_qty - lines_qty
 
     name = fields.Char(string='Name')
     lines_qty = fields.Float(
-        string='Reserved qty', compute='lines_qty',
+        string='Reserved qty', compute='_compute_qties',
         digits=dp.get_precision('Product Unit of Measure'))
-    move_qty = fields.Float(string='Remaining qty', compute='get_move_qty',
+    move_qty = fields.Float(string='Remaining qty', compute='_compute_qties',
                             digits=dp.get_precision('Product Unit of Measure'))
     quants_lines = fields.One2many('assign.manual.quants.lines',
                                    'assign_wizard', string='Quants')
