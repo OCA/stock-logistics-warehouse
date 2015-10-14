@@ -18,4 +18,30 @@ Please don't hesitate to suggest one of your module to this project. Also, you m
  - https://github.com/OCA/stock-logistics-workflow
 
 [//]: # (addons)
+Unported addons
+---------------
+addon | version | summary
+--- | --- | ---
+[base_product_merge](base_product_merge/) | 1.0 (unported) | Base Products Merge
+[configurable_stock_level](configurable_stock_level/) | 0.1 (unported) | name
+[stock_available](stock_available/) | 8.0.2.0.0 (unported) | Stock available to promise
+[stock_available_immediately](stock_available_immediately/) | 8.0.2.0.0 (unported) | Ignore planned receptions in quantity available to promise
+[stock_available_mrp](stock_available_mrp/) | 2.0 (unported) | Consider the production potential is available to promise
+[stock_available_sale](stock_available_sale/) | 2.0 (unported) | Quotations in quantity available to promise
+[stock_inventory_existing_lines](stock_inventory_existing_lines/) | 1.0 (unported) | Inventory Extended
+[stock_inventory_extended](stock_inventory_extended/) | 1.0 (unported) | Move Inventory Extended
+[stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 8.0.1.0.0 (unported) | More filters for inventory adjustments
+[stock_inventory_with_location](stock_inventory_with_location/) | 1.0 (unported) | Move Inventory Extended
+[stock_location_area_data](stock_location_area_data/) | 8.0.0.1.0 (unported) | Add surface units of measure
+[stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 (unported) | Enter a location's area based on different units of measure
+[stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 (unported) | Stock Location Ownership
+[stock_lot_valuation](stock_lot_valuation/) | 0.1 (unported) | Lot Valuation
+[stock_move_location](stock_move_location/) | 1.0 (unported) | Move Stock Location
+[stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.0 (unported) | Add a MTS+MTO route
+[stock_optional_valuation](stock_optional_valuation/) | 0.1 (unported) | Stock optional valuation
+[stock_orderpoint_creator](stock_orderpoint_creator/) | 1.0 (unported) | Configuration of order point in mass
+[stock_reord_rule](stock_reord_rule/) | 0.2 (unported) | Improved reordering rules
+[stock_reserve](stock_reserve/) | 8.0.0.2.0 (unported) | Stock reservations on products
+[stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.0 (unported) | Stock Reserve Sales
+
 [//]: # (end addons)
