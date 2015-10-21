@@ -10,6 +10,7 @@ class StockPicking(models.Model):
 
     @api.multi
     def action_assign(self):
+        # This is to assure that stock.pack.operation are reprocessed
         self.mapped('pack_operation_ids').unlink()
         return super(StockPicking, self).action_assign()
 
