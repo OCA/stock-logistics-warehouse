@@ -12,6 +12,11 @@ With this module, user can change manually the automatic selection of quants
 Usage
 =====
 
+To use this module, you need to:
+
+* You will able to select the quants from each stock.move. There will be a
+  button that opens a wizard directly from the move or from the picking.
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/8.0
