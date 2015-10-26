@@ -29,6 +29,7 @@ addon | version | summary
 [stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 | Enter a location's area based on different units of measure
 [stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 | Stock Location Ownership
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.0 | Add a MTS+MTO route
+[stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.0.0 | Stock - Manual assignment of quants
 [stock_reserve](stock_reserve/) | 8.0.0.2.0 | Stock reservations on products
 [stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.0 | Stock Reserve Sales
 
