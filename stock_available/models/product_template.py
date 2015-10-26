@@ -9,12 +9,15 @@ from openerp.addons import decimal_precision as dp
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    @api.one
-    @api.depends('virtual_available')
+    @api.multi
+    @api.depends('product_variant_ids.immediately_usable_qty')
     def _immediately_usable_qty(self):
         """Compute the quantity using all the variants"""
-        self.immediately_usable_qty = sum(
-            [v.immediately_usable_qty for v in self.product_variant_ids])
+        for tmpl in self:
+            tmpl.immediately_usable_qty = sum(
+                v.immediately_usable_qty
+                for v in tmpl.product_variant_ids
+            )
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
