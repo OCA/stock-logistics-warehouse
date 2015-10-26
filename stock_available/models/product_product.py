@@ -29,7 +29,7 @@ class ProductProduct(models.Model):
     """
     _inherit = 'product.product'
 
-    @api.one
+    @api.multi
     @api.depends('virtual_available')
     def _immediately_usable_qty(self):
         """No-op implementation of the stock available to promise.
@@ -38,7 +38,8 @@ class ProductProduct(models.Model):
 
         Must be overridden by another module that actually implement
         computations."""
-        self.immediately_usable_qty = self.virtual_available
+        for prod in self:
+            prod.immediately_usable_qty = prod.virtual_available
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
