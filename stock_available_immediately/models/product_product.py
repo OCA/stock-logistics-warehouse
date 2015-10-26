@@ -8,8 +8,10 @@ from openerp import models, api
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    @api.one
+    @api.multi
+    @api.depends('virtual_available', 'incoming_qty')
     def _immediately_usable_qty(self):
         """Ignore the incoming goods in the quantity available to promise"""
         super(ProductProduct, self)._immediately_usable_qty()
-        self.immediately_usable_qty -= self.incoming_qty
+        for prod in self:
+            prod.immediately_usable_qty -= prod.incoming_qty
