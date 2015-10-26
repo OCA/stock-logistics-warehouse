@@ -6,12 +6,12 @@
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: odoomrp-wip (8.0)\n"
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 10:45+0000\n"
-"PO-Revision-Date: 2015-09-20 19:06+0000\n"
+"POT-Creation-Date: 2015-10-24 09:07+0000\n"
+"PO-Revision-Date: 2015-10-25 07:18+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/odoomrp-wip-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -39,12 +39,6 @@ msgstr "Ustvaril"
 #: field:assign.manual.quants.lines,create_date:0
 msgid "Created on"
 msgstr "Ustvarjeno"
-
-#. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:25
-#, python-format
-msgid "Error"
-msgstr "Napaka"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,id:0 field:assign.manual.quants.lines,id:0
@@ -101,7 +95,7 @@ msgid "Quant"
 msgstr "Kvant"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:26
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr "Količina je višja od potrebne"
@@ -115,6 +109,16 @@ msgstr "Kvant"
 #: field:assign.manual.quants.lines,selected:0
 msgid "Select"
 msgstr "Izbira"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_stock_move
+msgid "Stock Move"
+msgstr "Premik zaloge"
+
+#. module: stock_quant_manual_assign
+#: field:stock.move,picking_type_code:0
+msgid "Type of Operation"
+msgstr "Tip operacije"
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
