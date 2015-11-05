@@ -31,8 +31,6 @@ install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - git clone https://github.com/OCA/stock-logistics-tracking -b ${VERSION} $HOME/stock-logistics-tracking
-  - git clone https://github.com/OCA/stock-logistics-barcode -b ${VERSION} $HOME/stock-logistics-barcode
 
 script:
     - travis_run_tests
