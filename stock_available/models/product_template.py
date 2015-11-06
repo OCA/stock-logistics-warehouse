@@ -12,12 +12,17 @@ class ProductTemplate(models.Model):
     @api.multi
     @api.depends('product_variant_ids.immediately_usable_qty')
     def _immediately_usable_qty(self):
-        """Compute the quantity using all the variants"""
+        """No-op implementation of the stock available to promise.
+
+        By default, available to promise = forecasted quantity.
+
+        **Each** sub-module **must** override this method in **both**
+            `product.product` **and** `product.template`, because we can't
+            decide in advance how to compute the template's quantity from the
+            variants.
+        """
         for tmpl in self:
-            tmpl.immediately_usable_qty = sum(
-                v.immediately_usable_qty
-                for v in tmpl.product_variant_ids
-            )
+            tmpl.immediately_usable_qty = tmpl.virtual_available
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
