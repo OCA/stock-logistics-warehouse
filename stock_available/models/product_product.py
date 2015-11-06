@@ -21,8 +21,11 @@ class ProductProduct(models.Model):
 
         By default, available to promise = forecasted quantity.
 
-        Must be overridden by another module that actually implement
-        computations."""
+        **Each** sub-module **must** override this method in **both**
+            `product.product` **and** `product.template`, because we can't
+            decide in advance how to compute the template's quantity from the
+            variants.
+        """
         for prod in self:
             prod.immediately_usable_qty = prod.virtual_available
 
