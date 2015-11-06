@@ -96,6 +96,14 @@ class AssignManualQuantsLines(models.TransientModel):
     location_id = fields.Many2one(
         comodel_name='stock.location', string='Location',
         related='quant.location_id', readonly=True)
+    lot_id = fields.Many2one(
+        comodel_name='stock.production.lot', string='Lot',
+        related='quant.lot_id', readonly=True,
+        groups="stock.group_production_lot")
+    package_id = fields.Many2one(
+        comodel_name='stock.quant.package', string='Package',
+        related='quant.package_id', readonly=True,
+        groups="stock.group_tracking_lot")
     qty = fields.Float(
         string='QTY', digits=dp.get_precision('Product Unit of Measure'))
     selected = fields.Boolean(string='Select')

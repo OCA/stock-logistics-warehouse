@@ -11,15 +11,11 @@
                             <tree editable="top" delete="0" create="0">
                                 <field name="quant" />
                                 <field name="location_id" />
+                                <field name="lot_id" />
+                                <field name="package_id" />
                                 <field name="selected" />
                                 <field name="qty" attrs="{'readonly':[('selected', '=' ,False)]}" sum="qty"/>
                             </tree>
-                            <form>
-                                <field name="quant" />
-                                <field name="location_id" />
-                                <field name="selected" />
-                                <field name="qty"/>
-                            </form>
                         </field>
                         <field name="move_qty" colspan="2" readonly="1"/>
                         <field name="lines_qty" invisible="1" />
