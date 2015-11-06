@@ -22,7 +22,7 @@
 
 {
     "name": "Ignore planned receptions in quantity available to promise",
-    "version": "8.0.2.0.0",
+    "version": "8.0.2.0.1",
     "depends": ["stock_available"],
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",

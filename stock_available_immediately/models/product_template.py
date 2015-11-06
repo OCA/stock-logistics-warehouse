@@ -18,16 +18,18 @@
 #
 ##############################################################################
 
-{
-    'name': 'Stock available to promise',
-    'version': '8.0.3.0.0',
-    "author": u"Numérigraphe,Odoo Community Association (OCA)",
-    'category': 'Warehouse',
-    'depends': ['stock'],
-    'license': 'AGPL-3',
-    'data': [
-        'views/product_template_view.xml',
-        'views/product_product_view.xml',
-        'views/res_config_view.xml',
-    ]
-}
+from openerp import models, api
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    @api.multi
+    @api.depends('virtual_available', 'incoming_qty')
+    def _immediately_usable_qty(self):
+        """Ignore the incoming goods in the quantity available to promise
+
+        This is the same implementation as for variants."""
+        super(ProductTemplate, self)._immediately_usable_qty()
+        for tmpl in self:
+            tmpl.immediately_usable_qty -= tmpl.incoming_qty
