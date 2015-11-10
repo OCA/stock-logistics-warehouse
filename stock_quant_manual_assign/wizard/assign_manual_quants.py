@@ -64,6 +64,8 @@ class AssignManualQuants(models.TransientModel):
              ('reservation_id', '=', move.id)])
         quants_lines = [{
             'quant': x.id,
+            'lot_id': x.lot_id.id,
+            'package_id': x.package_id.id,
             'selected': x in move.reserved_quant_ids,
             'qty': x.qty if x in move.reserved_quant_ids else 0,
             'location_id': x.location_id.id,
