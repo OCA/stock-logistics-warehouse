@@ -41,9 +41,6 @@ addon | version | summary
 [configurable_stock_level](configurable_stock_level/) | 0.1 (unported) | name
 [stock_available_mrp](stock_available_mrp/) | 2.0 (unported) | Consider the production potential is available to promise
 [stock_available_sale](stock_available_sale/) | 2.0 (unported) | Quotations in quantity available to promise
-[stock_inventory_existing_lines](stock_inventory_existing_lines/) | 1.0 (unported) | Inventory Extended
-[stock_inventory_extended](stock_inventory_extended/) | 1.0 (unported) | Move Inventory Extended
-[stock_inventory_with_location](stock_inventory_with_location/) | 1.0 (unported) | Move Inventory Extended
 [stock_lot_valuation](stock_lot_valuation/) | 0.1 (unported) | Lot Valuation
 [stock_move_location](stock_move_location/) | 1.0 (unported) | Move Stock Location
 [stock_optional_valuation](stock_optional_valuation/) | 0.1 (unported) | Stock optional valuation
