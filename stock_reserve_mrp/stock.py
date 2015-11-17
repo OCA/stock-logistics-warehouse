@@ -36,21 +36,22 @@ class StockMove(models.Model):
                 restrict_partner_id=restrict_partner_id,
                 consumed_for=consumed_for)
             if 'reserve_stock' in self._context.keys() and \
-            self._context['reserve_stock'] is True and consumed_for is False:
+                    self._context['reserve_stock'] is True and \
+                    consumed_for is False:
                 vals = {
-                        'product_id': self.product_id.id,
-                        'product_uom': self.product_uom.id,
-                        'product_uom_qty': self.product_uom_qty,
-                        'name': self.name,
-                        'location_id': self.location_dest_id.id,
-                        'location_dest_id': self.location_dest_id.id,
-                        'note': self.note,
-                        'product_uos_qty': self.product_uos_qty,
-                        'product_uos': self.product_uos.id,
-                        'price_unit': self.price_unit,
-                        'restrict_partner_id': restrict_partner_id,
-                        'restrict_lot_id': restrict_lot_id
-                        }
+                    'product_id': self.product_id.id,
+                    'product_uom': self.product_uom.id,
+                    'product_uom_qty': self.product_uom_qty,
+                    'name': self.name,
+                    'location_id': self.location_dest_id.id,
+                    'location_dest_id': self.location_dest_id.id,
+                    'note': self.note,
+                    'product_uos_qty': self.product_uos_qty,
+                    'product_uos': self.product_uos.id,
+                    'price_unit': self.price_unit,
+                    'restrict_partner_id': restrict_partner_id,
+                    'restrict_lot_id': restrict_lot_id
+                }
                 reserve_stock_obj = self.env['stock.reservation'].create(vals)
                 reserve_stock_obj.reserve()
             return res
