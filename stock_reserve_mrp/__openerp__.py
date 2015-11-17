@@ -25,10 +25,11 @@
     'version': '1.0',
     'category': 'Manufacturing',
     'sequence': 10,
-    'summary': 'This module adds an additional status to handle in production orders',
+    'summary': 'This module adds an additional status to handle '
+    'in production orders',
     'author': 'ClearCorp',
     'website': 'http://clearcorp.co.cr',
-    'depends': ['mrp','stock_reserve'],
+    'depends': ['mrp', 'stock_reserve'],
     'data': ['stock_reserve_mrp_view.xml'],
     'test': [],
     'demo': [],

@@ -31,10 +31,13 @@ class StockMove(models.Model):
                 self, product_qty, location_id=False, restrict_lot_id=False,
                 restrict_partner_id=False, consumed_for=False):
             res = super(StockMove, self).action_consume(
-                product_qty, location_id=location_id, restrict_lot_id=restrict_lot_id,
-                restrict_partner_id=restrict_partner_id, consumed_for=consumed_for)
-            if 'reserve_stock' in self._context.keys() and self._context['reserve_stock'] == True and consumed_for == False:
-                vals = { 
+                product_qty, location_id=location_id,
+                restrict_lot_id=restrict_lot_id,
+                restrict_partner_id=restrict_partner_id,
+                consumed_for=consumed_for)
+            if 'reserve_stock' in self._context.keys() and \
+            self._context['reserve_stock'] is True and consumed_for is False:
+                vals = {
                         'product_id': self.product_id.id,
                         'product_uom': self.product_uom.id,
                         'product_uom_qty': self.product_uom_qty,
