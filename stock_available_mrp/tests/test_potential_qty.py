@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp.tests.common import TransactionCase
+from openerp.osv.expression import TRUE_LEAF
 
 
 class TestPotentialQty(TransactionCase):
@@ -71,6 +72,69 @@ class TestPotentialQty(TransactionCase):
         self.assertPotentialQty(
             self.product_wo_bom, 0.0,
             "The potential without a BoM should be 0")
+
+    def test_potential_qty_no_bom_for_company(self):
+        # Receive 1000x CPUa8s
+        inventory = self.env['stock.inventory'].create(
+            {'name': 'Receive CPUa8',
+             'location_id': self.wh_ch.lot_stock_id.id,
+             'filter': 'none'})
+        inventory.prepare_inventory()
+        self.env['stock.inventory.line'].create({
+            'inventory_id': inventory.id,
+            'product_id': self.ref('product.product_product_23'),
+            'location_id': self.wh_ch.lot_stock_id.id,
+            'product_qty': 1000.0})
+        inventory.action_done()
+
+        # Receive enough RAM-SR3 to make 1000x the 1st variant in main WH
+        inventory = self.env['stock.inventory'].create(
+            {'name': 'components for 1st variant',
+             'location_id': self.wh_ch.lot_stock_id.id,
+             'filter': 'none'})
+        inventory.prepare_inventory()
+        self.env['stock.inventory.line'].create({
+            'inventory_id': inventory.id,
+            'product_id': self.ref('product.product_product_15'),
+            'location_id': self.wh_ch.lot_stock_id.id,
+            'product_qty': 1000.0})
+        inventory.action_done()
+        self.assertPotentialQty(
+            self.tmpl, 1000.0,
+            "Wrong template potential after receiving components")
+
+        test_user = self.env['res.users'].create({
+            'name': 'test_demo',
+            'login': 'test_demo',
+            'company_id': self.ref('base.main_company'),
+            'company_ids': [(4, self.ref('base.main_company'))],
+            'groups_id': [(4, self.ref('stock.group_stock_user'))]})
+
+        bom = self.env['mrp.bom'].search(
+            [('product_tmpl_id', '=', self.tmpl.id)])
+
+        test_user_tmpl = self.tmpl.sudo(test_user)
+        self.assertPotentialQty(
+            test_user_tmpl, 1000.0,
+            "Simple user can access to the potential_qty")
+
+        # set the bom on the main company (visible to members of the main comp
+        # and all products without company (visible to all)
+        # and the demo user on Chicago (child of main company)
+        self.env['product.product'].search([
+            TRUE_LEAF]).write({'company_id': False})
+        chicago_id = self.ref('stock.res_company_1')
+        test_user.write({'company_id': chicago_id,
+                         'company_ids': [(4, chicago_id)]})
+        test_user = test_user.sudo(test_user)
+        bom.company_id = self.ref('base.main_company')
+        self.assertPotentialQty(
+            test_user_tmpl, 0,
+            "The bom should not be visible to non members of the bom's "
+            "company or company child of the bom's company")
+        bom.company_id = chicago_id
+        self.assertPotentialQty(
+            test_user_tmpl, 1000.0, '')
 
     def test_potential_qty(self):
         for i in [self.tmpl, self.var1, self.var2]:
