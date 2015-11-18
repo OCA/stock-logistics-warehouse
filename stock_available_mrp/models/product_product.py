@@ -32,8 +32,7 @@ class ProductProduct(models.Model):
     @api.multi
     def _get_potential_qty(self):
         """Compute the potential qty based on the available components."""
-        # Browse the BOMs as superuser to bypass access rights
-        bom_obj = self.env['mrp.bom'].sudo()
+        bom_obj = self.env['mrp.bom']
 
         for product in self:
             bom_id = bom_obj._bom_find(product_id=product.id)
