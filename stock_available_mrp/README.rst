@@ -65,6 +65,7 @@ Contributors
 * Loïc Bellier (Numérigraphe) <lb@numerigraphe.com>
 * Lionel Sausin (Numérigraphe) <ls@numerigraphe.com>
 * many thanks to Graeme Gellatly for his advice and code review
+* Laurent Mignon <laurent.mignon@acsone.eu>
 
 Maintainer
 ----------
