@@ -4,9 +4,13 @@
 {
     'name': 'Consider the production potential is available to promise',
     'version': '8.0.3.0.0',
-    "author": u"Numérigraphe,Odoo Community Association (OCA)",
+    "author": u"Numérigraphe,"
+              u"Odoo Community Association (OCA)",
     'category': 'Hidden',
-    'depends': ['stock_available', 'mrp'],
+    'depends': [
+        'stock_available',
+        'mrp'
+    ],
     'data': [
         'views/product_template_view.xml',
     ],
