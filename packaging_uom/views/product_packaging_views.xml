@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <field name="packaging_ids" position="attributes">
                     <attribute name="context">
-                        {'default_product_tmpl_id': id,
+                        {'get_uom_categ_from_uom': uom_id,
                          'tree_view_ref':'product.product_packaging_tree_view_product',
                          'form_view_ref': 'product.product_packaging_form_view_without_product'}</attribute>
                 </field>
@@ -22,7 +22,7 @@
             <field name="inherit_id" ref="product.product_packaging_form_view_without_product"/>
             <field name="arch" type="xml">
                 <field name="qty" position="before">
-                    <field name="product_tmpl_id" invisible="1"/>
+                    <field name="product_tmpl_id" invisible="1" required="False"/>
                     <field name="uom_categ_domain_id" invisible="1"/>
                     <field name="uom_id" domain="[('category_id', '=', uom_categ_domain_id)]"/>
                 </field>
