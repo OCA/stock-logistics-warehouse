@@ -29,6 +29,5 @@ msgstr "Article"
 
 #. module: stock_available_mrp
 #: help:product.product,potential_qty:0
-msgid "Quantity of this Product that could be produced using the materials already at hand, following a single level of the Bills of Materials."
-msgstr "Quantité de cet article que l'on pourrait produire en utilisant les produits déjà disponibles, en suivant un seul niveau de nomenclature."
-
+msgid "Quantity of this Product that could be produced using the materials already at hand."
+msgstr "Quantité de cet article que l'on pourrait produire en utilisant les produits déjà disponibles."
