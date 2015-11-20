@@ -1,22 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    This module is copyright (C) 2014 Numérigraphe SARL. All Rights Reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2014 Numérigraphe SARL
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, fields, api
 from openerp.addons import decimal_precision as dp
@@ -36,8 +20,11 @@ class ProductProduct(models.Model):
 
         By default, available to promise = forecasted quantity.
 
-        Must be overridden by another module that actually implement
-        computations."""
+        **Each** sub-module **must** override this method in **both**
+            `product.product` **and** `product.template`, because we can't
+            decide in advance how to compute the template's quantity from the
+            variants.
+        """
         for prod in self:
             prod.immediately_usable_qty = prod.virtual_available
 

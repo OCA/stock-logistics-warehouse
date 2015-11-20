@@ -1,22 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    This module is copyright (C) 2014 Numérigraphe SARL. All Rights Reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2014 Numérigraphe SARL
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, fields
 
@@ -31,13 +15,13 @@ class StockConfig(models.TransientModel):
              "available to promise.\n"
              "This installs the module stock_available_immediately.")
 
-#    module_stock_available_sale = fields.Boolean(
-#        string='Exclude goods already in sale quotations',
-#        help="This will subtract quantities from the sale quotations from "
-#             "the quantities available to promise.\n"
-#             "This installs the modules stock_available_sale.\n"
-#             "If the modules sale and sale_delivery_date are not "
-#             "installed, this will install them too")
+    module_stock_available_sale = fields.Boolean(
+        string='Exclude goods already in sale quotations',
+        help="This will subtract quantities from the sale quotations from "
+             "the quantities available to promise.\n"
+             "This installs the modules stock_available_sale.\n"
+             "If the modules sale and sale_delivery_date are not "
+             "installed, this will install them too")
 
 #    module_stock_available_mrp = fields.Boolean(
 #        string='Include the production potential',
