@@ -11,20 +11,24 @@ class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
     @api.multi
+    def _mergeable_domain(self):
+        """Return the quants which may be merged with the current record"""
+        self.ensure_one()
+        return [('id', '!=', self.id),
+                ('product_id', '=', self.product_id.id),
+                ('lot_id', '=', self.lot_id.id),
+                ('package_id', '=', self.package_id.id),
+                ('location_id', '=', self.location_id.id),
+                ('reservation_id', '=', False),
+                ('propagated_from_id', '=', self.propagated_from_id.id)]
+
+    @api.multi
     def merge_stock_quants(self):
         pending_quants = self.filtered(lambda x: True)
         for quant2merge in self:
             if (quant2merge in pending_quants and
                     not quant2merge.reservation_id):
-                quants = self.search(
-                    [('id', '!=', quant2merge.id),
-                     ('product_id', '=', quant2merge.product_id.id),
-                     ('lot_id', '=', quant2merge.lot_id.id),
-                     ('package_id', '=', quant2merge.package_id.id),
-                     ('location_id', '=', quant2merge.location_id.id),
-                     ('reservation_id', '=', False),
-                     ('propagated_from_id', '=',
-                      quant2merge.propagated_from_id.id)])
+                quants = self.search(self._mergeable_domain())
                 cont = 1
                 cost = quant2merge.cost
                 for quant in quants:
