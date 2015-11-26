@@ -24,10 +24,10 @@ class StockQuant(models.Model):
 
     @api.multi
     def merge_stock_quants(self):
-        pending_quants = self.filtered(lambda x: True)
-        for quant2merge in self:
-            if (quant2merge in pending_quants and
-                    not quant2merge.reservation_id):
+        # Get a copy of the recorset
+        pending_quants = self.browse(self.ids)
+        for quant2merge in self.filtered(lambda x: not x.reservation_id):
+            if quant2merge in pending_quants:
                 quants = self.search(self._mergeable_domain())
                 cont = 1
                 cost = quant2merge.cost
