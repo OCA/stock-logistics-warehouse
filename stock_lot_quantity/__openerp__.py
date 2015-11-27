@@ -9,6 +9,6 @@
     'depends': ['stock'],
     'license': 'AGPL-3',
     'data': [
-        'views/product_product_view.xml',
+        'views/stock_production_lot_view.xml',
     ]
 }
