@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-24 09:07+0000\n"
-"PO-Revision-Date: 2015-10-19 05:45+0000\n"
+"POT-Creation-Date: 2015-11-21 02:22+0000\n"
+"PO-Revision-Date: 2015-11-22 08:55+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +22,11 @@ msgstr ""
 #: view:product.template:stock_available.view_stock_available_kanban
 msgid "Available to promise:"
 msgstr "Razpoložljivo za obljubo:"
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_sale:0
+msgid "Exclude goods already in sale quotations"
+msgstr "Izključi blago, ki je že v prodajnih predračunih"
 
 #. module: stock_available
 #: field:stock.config.settings,module_stock_available_immediately:0
@@ -49,6 +54,14 @@ msgid ""
 "This will subtract incoming quantities from the quantities available to promise.\n"
 "This installs the module stock_available_immediately."
 msgstr "Prihajajoče količine odšteje od količin na voljo za obljubo.\nNamesti modul stock_available_immediately."
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_sale:0
+msgid ""
+"This will subtract quantities from the sale quotations from the quantities available to promise.\n"
+"This installs the modules stock_available_sale.\n"
+"If the modules sale and sale_delivery_date are not installed, this will install them too"
+msgstr "Prihajajoče količine odšteje od količin na voljo za obljubo.\nNamesti modul stock_available_sale.\nV kolikor modula sale in sale_delivery_date še nista nameščena, namesti tudi te."
 
 #. module: stock_available
 #: view:product.product:stock_available.view_stock_available_tree_variant

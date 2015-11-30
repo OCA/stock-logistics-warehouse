@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 20:23+0000\n"
-"PO-Revision-Date: 2015-09-17 15:40+0000\n"
+"POT-Creation-Date: 2015-11-21 02:22+0000\n"
+"PO-Revision-Date: 2015-11-20 16:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,11 @@ msgstr ""
 #: view:product.template:stock_available.view_stock_available_kanban
 msgid "Available to promise:"
 msgstr "Available to promise:"
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_sale:0
+msgid "Exclude goods already in sale quotations"
+msgstr "Exclude goods already in sale quotations"
 
 #. module: stock_available
 #: field:stock.config.settings,module_stock_available_immediately:0
@@ -48,6 +53,14 @@ msgid ""
 "This will subtract incoming quantities from the quantities available to promise.\n"
 "This installs the module stock_available_immediately."
 msgstr "This will subtract incoming quantities from the quantities available to promise.\nThis installs the module stock_available_immediately."
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_sale:0
+msgid ""
+"This will subtract quantities from the sale quotations from the quantities available to promise.\n"
+"This installs the modules stock_available_sale.\n"
+"If the modules sale and sale_delivery_date are not installed, this will install them too"
+msgstr "This will subtract quantities from the sale quotations from the quantities available to promise.\nThis installs the modules stock_available_sale.\nIf the modules sale and sale_delivery_date are not installed, this will install them too"
 
 #. module: stock_available
 #: view:product.product:stock_available.view_stock_available_tree_variant

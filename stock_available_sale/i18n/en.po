@@ -9,20 +9,20 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-21 02:22+0000\n"
 "PO-Revision-Date: 2015-11-20 16:27+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: English (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available_sale
 #: model:ir.model,name:stock_available_sale.model_product_product
 msgid "Product"
-msgstr "Article"
+msgstr "Product"
 
 #. module: stock_available_sale
 #: model:ir.model,name:stock_available_sale.model_product_template
 msgid "Product Template"
-msgstr "Modèle de produit"
+msgstr "Product Template"
