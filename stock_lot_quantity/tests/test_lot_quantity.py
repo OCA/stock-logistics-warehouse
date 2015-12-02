@@ -24,12 +24,12 @@ class TestLotQuantity(TestStockCommon):
                                         'filter': 'none'})
         inventory.prepare_inventory()
         self.InvLineObj.create({
-                    'inventory_id': inventory.id,
-                    'product_id': self.productB.id,
-                    'product_uom_id': self.productB.uom_id.id,
-                    'product_qty': 10,
-                    'location_id': stock_location_shelf_1,
-                    'prod_lot_id': lot1_productB.id
+            'inventory_id': inventory.id,
+            'product_id': self.productB.id,
+            'product_uom_id': self.productB.uom_id.id,
+            'product_qty': 10,
+            'location_id': stock_location_shelf_1,
+            'prod_lot_id': lot1_productB.id
                     })
         inventory.action_done()
         self.assertEqual(lot1_productB.qty_available, 10,
@@ -42,12 +42,12 @@ class TestLotQuantity(TestStockCommon):
                                         'filter': 'none'})
         inventory.prepare_inventory()
         self.InvLineObj.create({
-                    'inventory_id': inventory.id,
-                    'product_id': self.productB.id,
-                    'product_uom_id': self.productB.uom_id.id,
-                    'product_qty': 20,
-                    'location_id': stock_location_shelf_2,
-                    'prod_lot_id': lot1_productB.id
+            'inventory_id': inventory.id,
+            'product_id': self.productB.id,
+            'product_uom_id': self.productB.uom_id.id,
+            'product_qty': 20,
+            'location_id': stock_location_shelf_2,
+            'prod_lot_id': lot1_productB.id
                     })
         inventory.action_done()
         self.assertEqual(lot1_productB.qty_available, 30,
