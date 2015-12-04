@@ -23,14 +23,12 @@ class TestLotQuantity(TestStockCommon):
         inventory = self.InvObj.create({'name': 'Test Lot Quantity',
                                         'filter': 'none'})
         inventory.prepare_inventory()
-        self.InvLineObj.create({
-            'inventory_id': inventory.id,
-            'product_id': self.productB.id,
-            'product_uom_id': self.productB.uom_id.id,
-            'product_qty': 10,
-            'location_id': stock_location_shelf_1,
-            'prod_lot_id': lot1_productB.id
-                    })
+        self.InvLineObj.create({'inventory_id': inventory.id,
+                                'product_id': self.productB.id,
+                                'product_uom_id': self.productB.uom_id.id,
+                                'product_qty': 10,
+                                'location_id': stock_location_shelf_1,
+                                'prod_lot_id': lot1_productB.id})
         inventory.action_done()
         self.assertEqual(lot1_productB.qty_available, 10,
                          "Wrong qty available for lot")
@@ -41,14 +39,12 @@ class TestLotQuantity(TestStockCommon):
         inventory = self.InvObj.create({'name': 'Test Lot Quantity 2',
                                         'filter': 'none'})
         inventory.prepare_inventory()
-        self.InvLineObj.create({
-            'inventory_id': inventory.id,
-            'product_id': self.productB.id,
-            'product_uom_id': self.productB.uom_id.id,
-            'product_qty': 20,
-            'location_id': stock_location_shelf_2,
-            'prod_lot_id': lot1_productB.id
-                    })
+        self.InvLineObj.create({'inventory_id': inventory.id,
+                                'product_id': self.productB.id,
+                                'product_uom_id': self.productB.uom_id.id,
+                                'product_qty': 20,
+                                'location_id': stock_location_shelf_2,
+                                'prod_lot_id': lot1_productB.id})
         inventory.action_done()
         self.assertEqual(lot1_productB.qty_available, 30,
                          "Wrong qty available for lot")
