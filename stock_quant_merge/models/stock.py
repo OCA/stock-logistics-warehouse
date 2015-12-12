@@ -28,7 +28,7 @@ class StockQuant(models.Model):
         pending_quants = self.browse(self.ids)
         for quant2merge in self.filtered(lambda x: not x.reservation_id):
             if quant2merge in pending_quants:
-                quants = self.search(self._mergeable_domain())
+                quants = self.search(quant2merge._mergeable_domain())
                 cont = 1
                 cost = quant2merge.cost
                 for quant in quants:
