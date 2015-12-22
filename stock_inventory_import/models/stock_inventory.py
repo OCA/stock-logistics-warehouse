@@ -54,7 +54,7 @@ class StockInventory(models.Model):
                         product = prod_lst[0]
                     else:
                         line.fail_reason = _('No product code found')
-                    continue
+                        continue
                 else:
                     product = line.product
                 lot_id = None
