@@ -70,6 +70,26 @@ class Warehouse(models.Model):
             'picking_type_id': warehouse.mto_pull_id.picking_type_id.id,
         }
 
+    @api.model
+    def _get_push_pull_rules(self, warehouse, active, values, new_route_id):
+        pull_obj = self.env['procurement.rule']
+        res = super(Warehouse, self)._get_push_pull_rules(
+            warehouse, active, values, new_route_id)
+        customer_location = warehouse._get_partner_locations()
+        location_id = customer_location[0].id
+        if warehouse.mto_mts_management:
+            for pull in res[1]:
+                if pull['location_id'] == location_id:
+                    pull_mto_mts = pull.copy()
+                    pull_mto_mts_id = pull_obj.create(pull_mto_mts)
+                    pull.update({
+                        'action': 'split_procurement',
+                        'mto_rule_id': pull_mto_mts_id.id,
+                        'mts_rule_id': pull_mto_mts_id.id,
+                        'sequence': 10
+                        })
+        return res
+
     @api.multi
     def create_routes(self, warehouse):
         pull_model = self.env['procurement.rule']
@@ -94,7 +114,11 @@ class Warehouse(models.Model):
                 for warehouse in self:
                     if warehouse.mts_mto_rule_id:
                         warehouse.mts_mto_rule_id.unlink()
-        return super(Warehouse, self).write(vals)
+        res = super(Warehouse, self).write(vals)
+        if 'mto_mts_management' in vals:
+            self.with_context({'active_test': False}).change_route(
+                warehouse, new_delivery_step=warehouse.delivery_steps)
+        return res
 
     @api.model
     def get_all_routes_for_wh(self, warehouse):
