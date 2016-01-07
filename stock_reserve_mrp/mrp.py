@@ -14,7 +14,7 @@ class mrp_bom(models.Model):
 class mrp_production(models.Model):
     _inherit = "mrp.production"
 
-    reserve_stock = fields.Boolean('Reserve Finished Goods')
+    reserve_stock = fields.Boolean('Reserve Finished Goods', default=True)
 
     @api.multi
     def product_id_change(self, product_id, product_qty=0):
