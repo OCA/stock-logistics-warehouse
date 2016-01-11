@@ -32,20 +32,18 @@
             <field name="inherit_id" ref="purchase.purchase_order_line_form"/>
             <field name="arch" type="xml">
                 <data>
-                    <field name="product_id" postion="after">
-                        <field name="product_tmpl_id" invisible="1"/>
-                        <field name="packaging_id" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
-                    </field>
                     <field name="product_qty" position="attributes">
                         <attribute name="readonly">1</attribute>
                     </field>
                     <label for="product_qty" position="before">
+                        <field name="product_tmpl_id" invisible="1"/>
+                        <field name="packaging_id" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
                         <field name="product_purchase_qty"/>
                         <field name="product_purchase_uom_id" groups="product.group_uom"/>
-                        <field name="product_uom" position="attributes">
-                            <attribute name="attrs">{'readonly' : [('packaging_id', '!=', False)]}</attribute>
-                        </field>
                     </label>
+                    <field name="product_uom" position="attributes">
+                        <attribute name="attrs">{'readonly' : [('packaging_id', '!=', False)]}</attribute>
+                    </field>
                 </data>
             </field>
         </record>
