@@ -38,7 +38,7 @@ class StockQuant(models.Model):
                         cost += quant.cost
                         cont += 1
                         pending_quants -= quant
-                        quant.sudo().unlink()
+                        quant.with_context(force_unlink=True).sudo().unlink()
                 quant2merge.sudo().cost = cost / cont
 
     @api.model
