@@ -15,6 +15,7 @@
         'views/product_template_view.xml',
         'views/sale_order_view.xml',
     ],
+    'images': [],
     'license': 'AGPL-3',
     'installable': True,
 }
