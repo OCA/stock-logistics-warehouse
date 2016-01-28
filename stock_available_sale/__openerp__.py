@@ -13,6 +13,7 @@
     ],
     'data': [
         'views/product_template_view.xml',
+        'views/sale_order_view.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,

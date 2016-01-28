@@ -39,6 +39,7 @@ Changed features
 ----------------
 The quoted quantity is now returned as a positive value, whereas it was returned as a negative value before v8.0.
 This change was made to ensure consistency with the standard, which used to present outgoing quantities as negative numbers until v8.0, and now presents them as positive numbers instead.
+The computed field has been added on sale order form to inform the seller how many he can sell.
 
 Removed features
 ----------------
