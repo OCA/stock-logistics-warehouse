@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_mts_mto_rule
+# 
+# Translators:
+# Antonio Trueba, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-14 01:38+0000\n"
+"PO-Revision-Date: 2016-02-10 16:39+0000\n"
+"Last-Translator: Antonio Trueba\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_mts_mto_rule
+#: code:addons/stock_mts_mto_rule/model/warehouse.py:53
+#, python-format
+msgid "Can't find MTO Rule on the warehouse"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: code:addons/stock_mts_mto_rule/model/warehouse.py:60
+#, python-format
+msgid "Can't find MTS Rule on the warehouse"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: code:addons/stock_mts_mto_rule/model/warehouse.py:49
+#, python-format
+msgid "Can't find any generic MTS+MTO route."
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: code:addons/stock_mts_mto_rule/model/rule.py:36
+#, python-format
+msgid "Choose between MTS and MTO"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: help:stock.warehouse,mto_mts_management:0
+msgid ""
+"If this new route is selected on product form view, a purchase order will be"
+" created only if the virtual stock is less than 0 else, the product will be "
+"taken from stocks"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: field:procurement.rule,mto_rule_id:0
+msgid "MTO Rule"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: field:stock.warehouse,mts_mto_rule_id:0
+msgid "MTO+MTS rule"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: field:procurement.rule,mts_rule_id:0
+msgid "MTS Rule"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: code:addons/stock_mts_mto_rule/model/warehouse.py:63
+#, python-format
+msgid "MTS+MTO"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: model:stock.location.route,name:stock_mts_mto_rule.route_mto_mts
+msgid "Make To Order + Make To Stock"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: field:procurement.order,mts_mto_procurement_id:0
+msgid "Mto+Mts Procurement"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: model:ir.model,name:stock_mts_mto_rule.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: stock_mts_mto_rule
+#: model:ir.model,name:stock_mts_mto_rule.model_procurement_rule
+msgid "Procurement Rule"
+msgstr "Regla de abastecimiento"
+
+#. module: stock_mts_mto_rule
+#: field:procurement.order,mts_mto_procurement_ids:0
+msgid "Procurements"
+msgstr "Abastecimientos"
+
+#. module: stock_mts_mto_rule
+#: field:stock.warehouse,mto_mts_management:0
+msgid "Use MTO+MTS rules"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: model:ir.model,name:stock_mts_mto_rule.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Almacén"
