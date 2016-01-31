@@ -10,22 +10,22 @@ msgstr ""
 "POT-Creation-Date: 2016-01-14 01:38+0000\n"
 "PO-Revision-Date: 2016-01-13 16:35+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr/)\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available_mrp
 #: model:ir.model,name:stock_available_mrp.model_product_product
 msgid "Product"
-msgstr "Article"
+msgstr "Producto"
 
 #. module: stock_available_mrp
 #: model:ir.model,name:stock_available_mrp.model_product_template
 msgid "Product Template"
-msgstr "Modèle de produit"
+msgstr "Plantilla de producto"
 
 #. module: stock_available_mrp
 #: model:product.uom,name:stock_available_mrp.thousand
