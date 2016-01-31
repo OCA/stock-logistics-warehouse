@@ -3,13 +3,13 @@
 # * stock_available
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 02:22+0000\n"
-"PO-Revision-Date: 2015-11-22 08:55+0000\n"
+"POT-Creation-Date: 2016-01-14 01:38+0000\n"
+"PO-Revision-Date: 2016-01-14 05:17+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -34,6 +34,11 @@ msgid "Exclude incoming goods"
 msgstr "Izključi prihajajoče blago"
 
 #. module: stock_available
+#: field:stock.config.settings,module_stock_available_mrp:0
+msgid "Include the production potential"
+msgstr "Vključno proizvodni potencial"
+
+#. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
 msgid "Product"
 msgstr "Proizvod"
@@ -47,6 +52,14 @@ msgstr "Predloga proizvoda"
 #: view:stock.config.settings:stock_available.view_stock_configuration
 msgid "Stock available to promise"
 msgstr "Zaloga na voljo za obljubo"
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_mrp:0
+msgid ""
+"This will add the quantities of goods that can be immediately manufactured, to the quantities available to promise.\n"
+"This installs the module stock_available_mrp.\n"
+"If the module mrp is not installed, this will install it too"
+msgstr "Dodajanje količin blaga, ki se lahko takoj proizvede,  obljubljenim količinam.\nNamesti modul stock_available_mrp.\nČe modul mrp ni nameščen, se namesti tudi ta."
 
 #. module: stock_available
 #: help:stock.config.settings,module_stock_available_immediately:0
