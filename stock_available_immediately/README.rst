@@ -15,6 +15,7 @@ Contributors
 * Author: Guewen Baconnier (Camptocamp SA)
 * Sébastien BEAU (Akretion) <sebastien.beau@akretion.com>
 * Lionel Sausin (Numérigraphe) <ls@numerigraphe.com>
+* Sodexis <sodexis@sodexis.com>
 
 Maintainer
 ----------
