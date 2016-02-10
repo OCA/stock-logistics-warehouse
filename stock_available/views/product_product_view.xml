@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- © 2014 Numérigraphe, Sodexis
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
 <openerp>
     <data>
-        <record model="ir.ui.view" id="view_stock_available_tree_variant">
+        <record model="ir.ui.view" id="product_normal_form_view">
             <field name="name">Quantity available to promise (variant tree)</field>
             <field name="model">product.product</field>
-            <field name="inherit_id" ref="stock.view_stock_product_tree"/>
+            <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
             <field name="arch" type="xml">
-                <data>
-                    <tree position="attributes">
-                        <attribute name="colors">red:immediately_usable_qty&lt;0;blue:immediately_usable_qty&gt;=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
-                    </tree>
-                       <field name="virtual_available" position="after">
-                       <field name="immediately_usable_qty" />
-                    </field>
-                </data>
+                <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_product)d']"
+                    position="after">
+                    <button type="action" name="%(stock.product_open_quants)d"
+                        attrs="{'invisible':[('type', '!=', 'product')]}"
+                        class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_form_field o_stat_info">
+                            <field name="immediately_usable_qty"
+                                widget="statinfo" nolabel="1" />
+                            <span class="o_stat_text">Available</span>
+                        </div>
+                    </button>
+                </xpath>
             </field>
         </record>
     </data>
