@@ -36,6 +36,13 @@ class StockInventoryRevaluation(models.Model):
         string="Revaluation Type",
         readonly=True, required=True,
         default='price_change',
+        help="'Price Change': You can re-valuate inventory values by Changing "
+             "the price for a specific product. The inventory price is "
+             "changed and inventory value is recalculated according to the "
+             "new price.\n "
+             "'Inventory Debit/Credit': Changing the value of the inventory. "
+             "The quantity of inventory remains unchanged, resulting in a "
+             "change in the price",
         states={'draft': [('readonly', False)]})
 
     remarks = fields.Text('Remarks',

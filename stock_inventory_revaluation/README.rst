@@ -9,30 +9,32 @@ Stock Account Inventory Revaluation
 If your company runs a perpetual inventory system, you may need to perform
 inventory revaluation.
 
-You can revaluate inventory values by:
+You can re-valuate inventory values by:
 
 * Changing the price for a specific product. The inventory price is changed
-  and inventory value is recalculated according to the new price.
+  and inventory value is recalculated according to the new price. In case of
+  real price, you can select which quants you want to change the price on.
 
-* Changing the value of a specific quantity of inventory. The quantity of
-  inventory remains unchanged, resulting in a change in the price.
+* Changing the value of the inventory. The quantity of inventory remains
+  unchanged, resulting in a change in the price.
 
-* Changing
 
 
 Configuration
 =============
 
-To configure this module, you need to:
 
-* Assign *Multi Operating Unit* group to user.
-* Go to *Settings / Companies / Operating Units* and create Operating Units.
+* Go to *Inventory / Configuration / Products / Product Categories* and
+  define, for each category, a Valuation Increase Account and a Valuation
+  Decrease Account. These accounts will be used as contra-accounts to the
+  Stock Valuation Account during the inventory re-valuation.
+
 
 Usage
 =====
 
-This module defines the operating unit entity and the user's security rules.
-Other modules extend the standard Odoo apps with the OU.
+* Go to *Inventory / Inventory Control / Inventory Revaluation / Products*
+  to create a new Inventory Revaluation.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
