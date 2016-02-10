@@ -31,6 +31,7 @@ Contributors
 ------------
 
 * Lionel Sausin (Numérigraphe) <ls@numerigraphe.com>
+* Sodexis <sodexis@sodexis.com>
 * many others contributed to sub-modules, please refer to each sub-module's credits
 
 Maintainer
