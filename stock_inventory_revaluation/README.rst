@@ -29,6 +29,9 @@ Configuration
   Decrease Account. These accounts will be used as contra-accounts to the
   Stock Valuation Account during the inventory re-valuation.
 
+* Users willing to access to the Inventory Revaluation menu should be
+  members of the group "Manage Inventory Valuation and Costing Methods".
+
 
 Usage
 =====
