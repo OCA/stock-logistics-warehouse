@@ -83,18 +83,20 @@ class StockInventoryRevaluation(models.Model):
         return super(StockInventoryRevaluation, self).create(values)
 
     @api.one
-    def create_moves(self):
+    def post(self):
         for line in self.line_ids:
+            if self.product_tmpl_id.valuation != 'real_time':
+                continue
             if line.product_template_id.cost_method == 'real':
                 for line_quant in line.line_quant_ids:
-                    line_quant.create_move()
+                    line_quant.post()
             else:
-                line.create_move()
+                line.post()
         return True
 
     @api.multi
     def button_post(self):
-        self.create_moves()
+        self.post()
         self.write({'state': 'posted'})
         return True
 
@@ -278,13 +280,38 @@ class StockInventoryRevaluationLine(models.Model):
             'credit': amount if amount > 0 else 0
         }
 
+    @api.model
+    def _create_accounting_entry(self, amount_diff):
+        timenow = time.strftime('%Y-%m-%d')
+        move_data = self._prepare_move_data(timenow)
+        datas = self.env['product.template'].get_product_accounts(
+            self.product_template_id.id)
+        self.move_id = self.env['account.move'].create(move_data).id
+        move_line_obj = self.env['account.move.line']
+
+        for prod_variant in self.product_template_id.product_variant_ids:
+                qty = prod_variant.qty_available
+                if qty:
+                    if amount_diff > 0:
+                        debit_account_id = self.decrease_account_id.id
+                        credit_account_id = \
+                            datas['property_stock_valuation_account_id']
+                    else:
+                        debit_account_id = \
+                            datas['property_stock_valuation_account_id']
+                        credit_account_id = self.increase_account_id.id
+                    move_line_data = self._prepare_move_line_data(
+                        amount_diff, debit_account_id, prod_variant.id)
+                    move_line_obj.create(move_line_data)
+                    move_line_data = self._prepare_move_line_data(
+                        -1*amount_diff, credit_account_id, prod_variant.id)
+                    move_line_obj.create(move_line_data)
+                    if self.move_id.journal_id.entry_posted:
+                        self.move_id.post()
+
     @api.one
-    def create_move(self):
+    def post(self):
         if self.product_template_id.cost_method in ['standard', 'average']:
-            timenow = time.strftime('%Y-%m-%d')
-            move_data = self._prepare_move_data(timenow)
-            datas = self.env['product.template'].get_product_accounts(
-                self.product_template_id.id)
 
             if self.revaluation_id.revaluation_type == 'price_change':
                 diff = self.current_cost - self.new_cost
@@ -312,38 +339,17 @@ class StockInventoryRevaluationLine(models.Model):
             if amount_diff == 0.0:
                 return True
 
-            self.move_id = self.env['account.move'].create(move_data).id
-            move_line_obj = self.env['account.move.line']
-
-            for prod_variant in self.product_template_id.product_variant_ids:
-                    qty = prod_variant.qty_available
-
-                    if qty:
-                        if amount_diff > 0:
-                            debit_account_id = self.decrease_account_id.id
-                            credit_account_id = \
-                                datas['property_stock_valuation_account_id']
-                        else:
-                            debit_account_id = \
-                                datas['property_stock_valuation_account_id']
-                            credit_account_id = self.increase_account_id.id
-                        move_line_data = self._prepare_move_line_data(
-                            amount_diff, debit_account_id, prod_variant.id)
-                        move_line_obj.create(move_line_data)
-                        move_line_data = self._prepare_move_line_data(
-                            -1*amount_diff, credit_account_id, prod_variant.id)
-                        move_line_obj.create(move_line_data)
-
             if self.revaluation_id.revaluation_type == 'price_change':
                 self.product_template_id.write({'standard_price':
                                                 self.new_cost})
-            elif self.revaluation_id.revaluation_type == 'inventory_value':
+            else:
                 new_cost = \
                     self.current_value - self.new_value / self.qty_available
                 self.product_template_id.write({'standard_price': new_cost})
 
-            if self.move_id.journal_id.entry_posted:
-                self.move_id.post()
+            if self.product_id.product_tmpl_id.valuation == 'real_time':
+                self._create_accounting_entry(amount_diff)
+
 
 class StockInventoryRevaluationLineQuant(models.Model):
 
@@ -414,16 +420,41 @@ class StockInventoryRevaluationLineQuant(models.Model):
             'credit': amount if amount > 0 else 0
         }
 
+    @api.model
+    def _create_accounting_entry(self, amount_diff):
+        timenow = time.strftime('%Y-%m-%d')
+        move_line_obj = self.env['account.move.line']
+        datas = self.env['product.template'].get_product_accounts(
+            self.product_id.product_tmpl_id.id)
+        move_data = self._prepare_move_data(timenow)
+        self.move_id = self.env['account.move'].create(move_data).id
+
+        if amount_diff > 0:
+            debit_account_id = self.line_id.decrease_account_id.id
+            credit_account_id = \
+                datas['property_stock_valuation_account_id']
+        else:
+            debit_account_id = \
+                datas['property_stock_valuation_account_id']
+            credit_account_id = self.line_id.increase_account_id.id
+
+        move_line_data = self._prepare_move_line_data(
+            amount_diff, debit_account_id, self.product_id.id)
+        move_line_obj.create(move_line_data)
+        move_line_data = self._prepare_move_line_data(
+            -1*amount_diff, credit_account_id, self.product_id.id)
+        move_line_obj.create(move_line_data)
+        if self.move_id.journal_id.entry_posted:
+            self.move_id.post()
+
     @api.one
-    def create_move(self):
+    def post(self):
         if self.product_id.product_tmpl_id.cost_method == 'real':
             if self.line_id.revaluation_id.revaluation_type != 'price_change':
                 raise UserError(_("You can only post quant cost changes."))
-            timenow = time.strftime('%Y-%m-%d')
-            move_line_obj = self.env['account.move.line']
-            datas = self.env['product.template'].get_product_accounts(
-                self.product_id.product_tmpl_id.id)
+
             diff = 0.0
+
             if self.line_id.revaluation_id.revaluation_type == 'price_change':
                 diff = self.current_cost - self.new_cost
 
@@ -432,27 +463,8 @@ class StockInventoryRevaluationLineQuant(models.Model):
             if amount_diff == 0.0:
                 return True
 
-            move_data = self._prepare_move_data(timenow)
-            self.move_id = self.env['account.move'].create(move_data).id
-
-            if amount_diff > 0:
-                debit_account_id = self.line_id.decrease_account_id.id
-                credit_account_id = \
-                    datas['property_stock_valuation_account_id']
-            else:
-                debit_account_id = \
-                    datas['property_stock_valuation_account_id']
-                credit_account_id = self.line_id.increase_account_id.id
-
-            move_line_data = self._prepare_move_line_data(
-                amount_diff, debit_account_id, self.product_id.id)
-            move_line_obj.create(move_line_data)
-            move_line_data = self._prepare_move_line_data(
-                -1*amount_diff, credit_account_id, self.product_id.id)
-            move_line_obj.create(move_line_data)
-
-            self.write({'old_cost': self.current_cost})
+            self.old_cost = self.current_cost
             self.quant_id.write({'cost': self.new_cost})
 
-            if self.move_id.journal_id.entry_posted:
-                self.move_id.post()
+            if self.product_id.product_tmpl_id.valuation == 'real_time':
+                self._create_accounting_entry(amount_diff)
