@@ -17,8 +17,7 @@ You can revaluate inventory values by:
 * Changing the value of a specific quantity of inventory. The quantity of
   inventory remains unchanged, resulting in a change in the price.
 
-You cannot perform inventory revaluation if the product has negative
-inventory value.
+* Changing
 
 
 Configuration

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2015 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp import api, fields, models, _
 import openerp.addons.decimal_precision as dp
@@ -85,7 +84,7 @@ class StockInventoryRevaluation(models.Model):
     @api.one
     def post(self):
         for line in self.line_ids:
-            if self.product_tmpl_id.valuation != 'real_time':
+            if line.product_template_id.valuation != 'real_time':
                 continue
             if line.product_template_id.cost_method == 'real':
                 for line_quant in line.line_quant_ids:
@@ -114,7 +113,7 @@ class StockInventoryRevaluation(models.Model):
             for line_quant in line.line_quant_ids:
                 if line_quant.move_id:
                     moves += line_quant.move_id
-                    self.quant_id.write({'cost': self.old_cost})
+                    line_quant.quant_id.write({'cost': line_quant.old_cost})
         if moves:
             # second, invalidate the move(s)
             moves.button_cancel()

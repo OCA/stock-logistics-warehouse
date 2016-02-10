@@ -14,12 +14,22 @@ class StockInventoryRevaluationGetQuants(models.TransientModel):
 
     date_to = fields.Date('Date To')
 
+    def _get_quant_search_criteria(self, product_variant):
+        domain = [('product_id', '=', product_variant.id),
+                  ('location_id.usage', '=', 'internal')]
+        if self.date_from:
+            domain.extend([('in_date', '>=', self.date_from)])
+        if self.date_to:
+            domain.extend([('in_date', '<=', self.date_to)])
+
+        return domain
+
     def _select_quants(self, line):
         quant_l = []
         quant_obj = self.env['stock.quant']
         for prod_variant in line.product_template_id.product_variant_ids:
-            quants = quant_obj.search([('product_id', '=', prod_variant.id),
-                                  ('location_id.usage', '=', 'internal')])
+            search_domain = self._get_quant_search_criteria(prod_variant)
+            quants = quant_obj.search(search_domain)
             for quant in quants:
                 quant_l.append(quant)
         return quant_l
