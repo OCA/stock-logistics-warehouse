@@ -37,7 +37,7 @@
         <field name="inherit_id" ref="stock.view_move_search" />
         <field name="arch" type="xml">
             <filter string="Product" position="before">
-                <filter string="Picking Partner" name="by_prod_parent_lot" domain="[]"  context="{'group_by':'prod_parent_lot'}"/>
+                <filter string="Picking Partner" name="by_picking_partner" domain="[]"  context="{'group_by':'picking_partner'}"/>
             </filter>
         </field>
     </record>
