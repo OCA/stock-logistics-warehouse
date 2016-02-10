@@ -214,18 +214,16 @@ class StockInventoryRevaluationLine(models.Model):
         digits_compute=dp.get_precision('Product Unit of Measure'))
 
     increase_account_id = fields.Many2one(
-        'account.account', 'G/L Increase Acct',
-        required=True,
+        'account.account', 'Increase Account',
         help="Define the G/L accounts to be used as the balancing account in "
-             "the transaction created by the revaluation. The G/L Increase "
+             "the transaction created by the revaluation. The Increase "
              "Account is used when the inventory value is increased due to "
              "the revaluation.")
 
     decrease_account_id = fields.Many2one(
-        'account.account', 'G/L Decrease Acct',
-        required=True,
+        'account.account', 'Decrease Account',
         help="Define the G/L accounts to be used as the balancing account in "
-             "the transaction created by the revaluation. The G/L Decrease "
+             "the transaction created by the revaluation. The Decrease "
              "Account is used when the inventory value is decreased.")
 
     company_id = fields.Many2one(
@@ -294,6 +292,10 @@ class StockInventoryRevaluationLine(models.Model):
             self.product_template_id.id)
         self.move_id = self.env['account.move'].create(move_data).id
         move_line_obj = self.env['account.move.line']
+
+        if not self.decrease_account_id or not self.increase_account_id:
+            raise UserError(_("Please add a  Increase Account and "
+                              "a Decrease Account."))
 
         for prod_variant in self.product_template_id.product_variant_ids:
                 qty = prod_variant.qty_available
