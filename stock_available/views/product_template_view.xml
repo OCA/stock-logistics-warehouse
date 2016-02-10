@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- © 2014 Numérigraphe, Sodexis
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
 <openerp>
     <data>
         <record model="ir.ui.view" id="view_stock_available_form">
             <field name="name">Quantity available to promise (form)</field>
             <field name="model">product.template</field>
-            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="inherit_id" ref="stock.product_template_form_view_procurement_button" />
             <field name="arch" type="xml">
-                <field name="virtual_available" position="after">
-                    <newline/>
-                    <field name="immediately_usable_qty" />
-                </field>
+                <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_template)d']"
+                    position="after">
+                    <button type="object" name="action_open_quants"
+                        attrs="{'invisible':[('type', '!=', 'product')]}"
+                        class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_form_field o_stat_info">
+                            <field name="immediately_usable_qty"
+                                widget="statinfo" nolabel="1" />
+                            <span class="o_stat_text">Available</span>
+                        </div>
+                    </button>
+                </xpath>
             </field>
         </record>
-        
         <record model="ir.ui.view" id="view_stock_available_tree">
             <field name="name">Quantity available to promise (tree)</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
             <field name="arch" type="xml">
-                <data>
-                    <tree position="attributes">
-                        <attribute name="colors">red:immediately_usable_qty&lt;0;blue:immediately_usable_qty&gt;=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
-                    </tree>
-                       <field name="virtual_available" position="after">
-                       <field name="immediately_usable_qty" />
-                    </field>
-                </data>
+                <tree position="attributes">
+                    <attribute name="colors">red:immediately_usable_qty&lt;0;blue:immediately_usable_qty&gt;=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
+                </tree>
+                <field name="virtual_available" position="after">
+                   <field name="immediately_usable_qty" />
+                </field>
             </field>
         </record>
-
         <record model="ir.ui.view" id="view_stock_available_kanban">
             <field name="name">Quantity available to promise (kanban)</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='virtual_available']/.." position="replace">
-                    <li t-if="record.type.raw_value != 'service'">Available to promise: <field name="immediately_usable_qty"/> <field name="uom_id"/></li>
-                </xpath>
+                <ul position="inside">
+                    <li t-if="record.type.raw_value == 'product'">Available to Promise: <field name="immediately_usable_qty"/> <field name="uom_id"/></li>
+                </ul>
             </field>
         </record>
     </data>
