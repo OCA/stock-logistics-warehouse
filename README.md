@@ -22,6 +22,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[partner_location_auto_create](partner_location_auto_create/) | 0.1 | Partner Location Auto Create
 [stock_available](stock_available/) | 8.0.3.0.0 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 8.0.2.0.1 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 8.0.3.0.0 | Consider the production potential is available to promise
