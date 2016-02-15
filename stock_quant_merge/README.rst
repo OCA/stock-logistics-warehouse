@@ -19,7 +19,8 @@ Installation
 ============
 
 On installation time, a first scan is done over all your quants to see which
-ones are split, and join them.
+ones are split, and join them, which can take a while, so this may fail to
+install on big databases if the CPU limit is too low.
 
 Usage
 =====
