@@ -19,8 +19,9 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv
+from openerop.tools.translate import _
+from openerp.tools.safe_eval import safe_eval
 
 #class stock_fill_inventory(osv.osv_memory):
 #    _inherit = "stock.fill.inventory"
@@ -116,7 +117,7 @@ class stock_inventory(osv.osv):
             model_id = mod_obj.search(cr, uid, [('name', '=', 'inventory_acquisition_link_1')])[0]
             act_id = mod_obj.read(cr, uid, model_id, ['res_id'])['res_id']
             act = act_obj.read(cr, uid, act_id)
-            context = eval(act['context'])
+            context = safe_eval(act['context'])
             context['default_inventory_id'] = inventory_data.id
             context['default_name'] = inventory_data.name
             act['context'] = context
