@@ -19,14 +19,20 @@ class StockQuant(models.Model):
                 ('lot_id', '=', self.lot_id.id),
                 ('package_id', '=', self.package_id.id),
                 ('location_id', '=', self.location_id.id),
-                ('reservation_id', '=', False),
+                ('reservation_id', '=', self.reservation_id.id),
                 ('propagated_from_id', '=', self.propagated_from_id.id)]
+
+    @api.model
+    def _get_merged_vals(self, quant1, quant2):
+        return {
+            'qty': quant1.qty + quant2.qty,
+        }
 
     @api.multi
     def merge_stock_quants(self):
         # Get a copy of the recorset
         pending_quants = self.browse(self.ids)
-        for quant2merge in self.filtered(lambda x: not x.reservation_id):
+        for quant2merge in self:
             if quant2merge in pending_quants:
                 quants = self.search(quant2merge._mergeable_domain())
                 cont = 1
@@ -34,7 +40,8 @@ class StockQuant(models.Model):
                 for quant in quants:
                     if (self._get_latest_move(quant2merge) ==
                             self._get_latest_move(quant)):
-                        quant2merge.sudo().qty += quant.qty
+                        quant2merge.sudo().write(
+                            self._get_merged_vals(quant2merge, quant))
                         cost += quant.cost
                         cont += 1
                         pending_quants -= quant

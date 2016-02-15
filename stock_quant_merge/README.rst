@@ -7,12 +7,19 @@ Quant merge
 ===========
 
 Odoo splits quants each time a reservation is done: this module makes Odoo
-merge them back if they still meet the following requirements:
+merge them back when you unserve them if they still meet the following
+requirements:
 
 * same product
 * same serial number/lot
 * same location
 * same package
+
+Installation
+============
+
+On installation time, a first scan is done over all your quants to see which
+ones are split, and join them.
 
 Usage
 =====
