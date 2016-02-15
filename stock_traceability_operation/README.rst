@@ -28,8 +28,8 @@ The improved views are accessible in the following places:
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/8.0
 
-Kown issues
-===========
+Known issues
+============
 
 This module may mask the changes made by other modules in the traceability views, because it replaces the action of the traceability buttons.
 
