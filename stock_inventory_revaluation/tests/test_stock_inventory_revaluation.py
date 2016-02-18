@@ -4,7 +4,7 @@
 
 from openerp.tests.common import TransactionCase
 from datetime import datetime
-from datetime import date
+from datetime import date, timedelta
 
 
 class TestStockInventoryRevaluation(TransactionCase):
@@ -53,7 +53,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         self.updated_qty = self._update_product_qty(self.product,
                                                     self.location, quantity)
         # Create an Inventory Revaluation Line Quant
-        date_from = date(2016, 2, 15)
+        date_from = date.today() - timedelta(1)
         self.get_quant = self._get_quant(date_from, self.invent,
                                          self.invent_line)
         # Update Inventory Price for the product
@@ -115,7 +115,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         return line
 
     def _update_product_qty(self, product, location, quantity):
-        """Create a Product with inventory valuation set to auto."""
+        """Update Product quantity."""
         product_qty = self.stock_change_model.create({
             'location_id': location.id,
             'product_id': product.id,
@@ -154,4 +154,4 @@ class TestStockInventoryRevaluation(TransactionCase):
         """Test that the inventory is revaluated when the
         inventory price for any product is changed."""
         self.assertNotEqual(self.old_value, self.new_value,
-                            'Inventory Revaluated!')
+                            'Inventory is not recalculated as per new value!')
