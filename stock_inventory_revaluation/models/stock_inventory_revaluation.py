@@ -28,6 +28,7 @@ class StockInventoryRevaluation(models.Model):
                        readonly=True,
                        required=True,
                        states={'draft': [('readonly', False)]},
+                       copy=False,
                        default='/')
 
     revaluation_type = fields.Selection(
@@ -93,11 +94,7 @@ class StockInventoryRevaluation(models.Model):
         for line in self.line_ids:
             if line.product_template_id.valuation != 'real_time':
                 continue
-            if line.product_template_id.cost_method == 'real':
-                for line_quant in line.line_quant_ids:
-                    line_quant.post()
-            else:
-                line.post()
+            line.post()
         return True
 
     @api.multi
@@ -172,14 +169,25 @@ class StockInventoryRevaluationLine(models.Model):
                                      required=True,
                                      ondelete='cascade')
 
+    state = fields.Selection(selection=_STATES,
+                             string='UoM', readonly=True,
+                             related="revaluation_id.state")
+
     product_template_id = fields.Many2one('product.template', 'Product',
-                                          required=True)
+                                          required=True,
+                                          domain=[('type', '=', 'product')])
 
     cost_method = fields.Selection(string="Cost Method", readonly=True,
                                    related='product_template_id.cost_method')
 
     uom_id = fields.Many2one('product.uom', 'UoM', readonly=True,
                              related="product_template_id.uom_id")
+
+    old_cost = fields.Float('Old cost',
+                            help='Displays the previous cost of the '
+                                 'product.',
+                            digits=dp.get_precision('Product Price'),
+                            readonly=True)
 
     current_cost = fields.Float('Current cost',
                                 help='Displays the current cost of the '
@@ -188,7 +196,7 @@ class StockInventoryRevaluationLine(models.Model):
                                 compute="_calc_current_cost",
                                 readonly=True)
 
-    new_cost = fields.Float('New Cost',
+    new_cost = fields.Float('New cost',
                             help="Enter the new cost you wish to assign to "
                                  "the product. Relevant only when the "
                                  "selected revaluation type is Price Change.",
@@ -200,6 +208,11 @@ class StockInventoryRevaluationLine(models.Model):
                                  digits=dp.get_precision('Account'),
                                  compute="_calc_product_template_value",
                                  readonly=True)
+
+    old_value = fields.Float('Old value',
+                             help='Displays the current value of the product.',
+                             digits=dp.get_precision('Account'),
+                             readonly=True)
 
     new_value = fields.Float('Credit/Debit amount',
                              help="Enter the amount you wish to credit or "
@@ -242,10 +255,17 @@ class StockInventoryRevaluationLine(models.Model):
                                      string='Revaluation line quants')
 
     _sql_constraints = [
-        ('inv_valu_line_prod_temp_uniq', 'unique (revaluation_id, '
-                                    'product_template_id)',
+        ('inv_valu_line_prod_temp_uniq',
+         'unique (revaluation_id, product_template_id)',
          _('Cannot enter the same product multiple times in the same '
            'inventory valuation!'))]
+
+    @api.one
+    @api.constrains('product_template_id', 'company_id')
+    def _check_is_stockable(self):
+        if self.product_template_id.type != 'product':
+            raise UserError(_('Configuration error!\nThe product must be '
+                              'stockable.'))
 
     @api.one
     @api.onchange("product_template_id")
@@ -273,15 +293,25 @@ class StockInventoryRevaluationLine(models.Model):
         }
 
     @api.model
-    def _prepare_move_line_data(self, amount, account_id, prod_id):
+    def _prepare_debit_move_line_data(self, amount, account_id, prod_id):
         return {
             'name': self.revaluation_id.name,
             'date': self.move_id.date,
             'product_id': prod_id,
             'account_id': account_id,
             'move_id': self.move_id.id,
-            'debit': -1*amount if amount < 0 else 0,
-            'credit': amount if amount > 0 else 0
+            'debit': amount
+        }
+
+    @api.model
+    def _prepare_credit_move_line_data(self, amount, account_id, prod_id):
+        return {
+            'name': self.revaluation_id.name,
+            'date': self.move_id.date,
+            'product_id': prod_id,
+            'account_id': account_id,
+            'move_id': self.move_id.id,
+            'credit': amount
         }
 
     @api.model
@@ -308,55 +338,60 @@ class StockInventoryRevaluationLine(models.Model):
                         debit_account_id = \
                             datas['property_stock_valuation_account_id']
                         credit_account_id = self.increase_account_id.id
-                    move_line_data = self._prepare_move_line_data(
-                        amount_diff, debit_account_id, prod_variant.id)
+                    move_line_data = self._prepare_debit_move_line_data(
+                        abs(amount_diff), debit_account_id, prod_variant.id)
                     move_line_obj.create(move_line_data)
-                    move_line_data = self._prepare_move_line_data(
-                        -1*amount_diff, credit_account_id, prod_variant.id)
+                    move_line_data = self._prepare_credit_move_line_data(
+                        abs(amount_diff), credit_account_id, prod_variant.id)
                     move_line_obj.create(move_line_data)
                     if self.move_id.journal_id.entry_posted:
                         self.move_id.post()
 
     @api.one
     def post(self):
-        if self.product_template_id.cost_method in ['standard', 'average']:
 
-            if self.revaluation_id.revaluation_type == 'price_change':
-                diff = self.current_cost - self.new_cost
-                if not diff:
-                    raise UserError(_("No difference between standard price "
-                                      "and new price for product %s."
-                                      % self.product_template_id.name))
-            else:
-                diff = self.current_value - self.new_value
-                if not diff:
-                    raise UserError(_("No difference between current and new "
-                                      "valuation for product %s."
-                                      % self.product_template_id.name))
-                if self.new_value < 0:
-                    raise UserError(_("The new value for product %s cannot be "
-                                      "negative"
-                                      % self.product_template_id.name))
-                if self.qty_available <= 0.0:
-                    raise UserError(_("Cannot do an inventory value change if "
-                                      "the quantity available for product %s "
-                                      "is 0 or negative" %
-                                      self.product_template_id.name))
-
-            amount_diff = self.qty_available * diff
+        amount_diff = 0.0
+        if self.product_template_id.cost_method == 'real':
+            for line_quant in self.line_quant_ids:
+                amount_diff += line_quant.get_total_value()
+                line_quant.write_new_cost()
             if amount_diff == 0.0:
                 return True
+        else:
+            if self.product_template_id.cost_method in ['standard', 'average']:
 
-            if self.revaluation_id.revaluation_type == 'price_change':
-                self.product_template_id.write({'standard_price':
-                                                self.new_cost})
-            else:
-                new_cost = \
-                    self.current_value - self.new_value / self.qty_available
-                self.product_template_id.write({'standard_price': new_cost})
+                if self.revaluation_id.revaluation_type == 'price_change':
+                    diff = self.current_cost - self.new_cost
+                else:
+                    diff = self.current_value - self.new_value
+                    if self.new_value < 0:
+                        raise UserError(_("The new value for product %s "
+                                          "cannot be negative"
+                                          % self.product_template_id.name))
+                    if self.qty_available <= 0.0:
+                        raise UserError(
+                            _("Cannot do an inventory value change if the "
+                              "quantity available for product %s "
+                              "is 0 or negative" %
+                              self.product_template_id.name))
 
-            if self.product_id.product_tmpl_id.valuation == 'real_time':
-                self._create_accounting_entry(amount_diff)
+                amount_diff = self.qty_available * diff
+
+                if self.revaluation_id.revaluation_type == 'price_change':
+                    self.old_cost = self.current_cost
+                    self.product_template_id.write({'standard_price':
+                                                    self.new_cost})
+                else:
+                    self.old_cost = self.current_cost
+                    self.old_value = self.current_value
+                    new_cost = \
+                        self.current_value - \
+                        self.new_value / self.qty_available
+                    self.product_template_id.write({'standard_price':
+                                                    new_cost})
+
+        if self.product_template_id.valuation == 'real_time':
+            self._create_accounting_entry(amount_diff)
 
 
 class StockInventoryRevaluationLineQuant(models.Model):
@@ -369,7 +404,8 @@ class StockInventoryRevaluationLineQuant(models.Model):
                               readonly=True)
 
     quant_id = fields.Many2one('stock.quant', 'Quant', required=True,
-                               readonly=True)
+                               readonly=True,
+                               domain=[('product_id.type', '=', 'product')])
 
     product_id = fields.Many2one('product.product', 'Product',
                                  readonly=True,
@@ -400,79 +436,17 @@ class StockInventoryRevaluationLineQuant(models.Model):
                             digits=dp.get_precision('Product Price'),
                             copy=False)
 
-    move_id = fields.Many2one('account.move', 'Account move', readonly=True,
-                              copy=False)
-
-    @api.model
-    def _prepare_move_data(self, date_move):
-
-        period = self.env['account.period'].find(date_move)[0]
-
-        return {
-            'narration': self.line_id.revaluation_id.remarks,
-            'date': date_move,
-            'ref': self.line_id.revaluation_id.name,
-            'journal_id': self.line_id.revaluation_id.journal_id.id,
-            'period_id': period.id,
-        }
-
-    @api.model
-    def _prepare_move_line_data(self, amount, account_id, prod_id):
-        return {
-            'name': self.line_id.revaluation_id.name,
-            'date': self.move_id.date,
-            'product_id': prod_id,
-            'account_id': account_id,
-            'move_id': self.move_id.id,
-            'debit': -1*amount if amount < 0 else 0,
-            'credit': amount if amount > 0 else 0
-        }
-
-    @api.model
-    def _create_accounting_entry(self, amount_diff):
-        timenow = time.strftime('%Y-%m-%d')
-        move_line_obj = self.env['account.move.line']
-        datas = self.env['product.template'].get_product_accounts(
-            self.product_id.product_tmpl_id.id)
-        move_data = self._prepare_move_data(timenow)
-        self.move_id = self.env['account.move'].create(move_data).id
-
-        if amount_diff > 0:
-            debit_account_id = self.line_id.decrease_account_id.id
-            credit_account_id = \
-                datas['property_stock_valuation_account_id']
-        else:
-            debit_account_id = \
-                datas['property_stock_valuation_account_id']
-            credit_account_id = self.line_id.increase_account_id.id
-
-        move_line_data = self._prepare_move_line_data(
-            amount_diff, debit_account_id, self.product_id.id)
-        move_line_obj.create(move_line_data)
-        move_line_data = self._prepare_move_line_data(
-            -1*amount_diff, credit_account_id, self.product_id.id)
-        move_line_obj.create(move_line_data)
-        if self.move_id.journal_id.entry_posted:
-            self.move_id.post()
-
-    @api.one
-    def post(self):
+    def get_total_value(self):
+        amount_diff = 0.0
         if self.product_id.product_tmpl_id.cost_method == 'real':
             if self.line_id.revaluation_id.revaluation_type != 'price_change':
                 raise UserError(_("You can only post quant cost changes."))
-
-            diff = 0.0
-
-            if self.line_id.revaluation_id.revaluation_type == 'price_change':
+            else:
                 diff = self.current_cost - self.new_cost
-
             amount_diff = self.qty * diff
+        return amount_diff
 
-            if amount_diff == 0.0:
-                return True
-
-            self.old_cost = self.current_cost
-            self.quant_id.write({'cost': self.new_cost})
-
-            if self.product_id.product_tmpl_id.valuation == 'real_time':
-                self._create_accounting_entry(amount_diff)
+    def write_new_cost(self):
+        self.old_cost = self.current_cost
+        self.quant_id.write({'cost': self.new_cost})
+        return True

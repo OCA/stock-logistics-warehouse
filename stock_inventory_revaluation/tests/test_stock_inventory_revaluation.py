@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# © 2014 Numérigraphe SARL
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# © 2015 Eficent Business and IT Consulting Services S.L.
+# - Jordi Ballester Alomar
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp.tests.common import TransactionCase
 from datetime import datetime
@@ -18,6 +19,8 @@ class TestStockInventoryRevaluation(TransactionCase):
         self.product_ctg_model = self.env['product.category']
         self.reval_model = self.env['stock.inventory.revaluation']
         self.reval_line_model = self.env['stock.inventory.revaluation.line']
+        self.account_model = self.env['account.account']
+        self.acc_type_model = self.env['account.account.type']
         self.reval_line_quant_model = self.\
             env['stock.inventory.revaluation.line.quant']
         self.get_quant_model = self.\
@@ -25,7 +28,6 @@ class TestStockInventoryRevaluation(TransactionCase):
         self.stock_change_model = self.env['stock.change.product.qty']
         self.stock_lot_model = self.env['stock.production.lot']
         self.stock_location_model = self.env['stock.location']
-        self.stock_history_model = self.env['stock.history']
         # Get required Model data
         self.fixed_account = self.env.ref('account.xfa')
         self.purchased_stock = self.env.ref('account.stk')
@@ -33,55 +35,119 @@ class TestStockInventoryRevaluation(TransactionCase):
         self.cash_account = self.env.ref('account.cash')
         self.product_uom = self.env.ref('product.product_uom_unit')
         self.journal = self.env.ref('account.miscellaneous_journal')
+        self.company = self.env.ref('base.main_company')
 
         location = self.stock_location_model.search([('name', '=', 'WH')])
         self.location = self.stock_location_model.search([('location_id', '=',
                                                            location.id)])
-        # Create a Product
+
+        # Create account for Goods Received Not Invoiced
+        name = 'Goods Received Not Invoiced'
+        code = 'grni'
+        acc_type = 'equity'
+        self.account_grni = self._create_account(acc_type, name, code,
+                                                 self.company)
+        # Create account for Cost of Goods Sold
+        name = 'Cost of Goods Sold'
+        code = 'cogs'
+        acc_type = 'expense'
+        self.account_cogs = self._create_account(acc_type, name, code,
+                                                    self.company)
+
+        # Create account for Inventory
+        name = 'Inventory'
+        code = 'inventory'
+        acc_type = 'asset'
+        self.account_inventory = self._create_account(acc_type, name, code,
+                                                      self.company)
+
+        # Create account for Inventory Revaluation
+        name = 'Inventory Revaluation'
+        code = 'revaluation'
+        acc_type = 'expense'
+        self.account_revaluation = self._create_account(acc_type, name, code,
+                                                        self.company)
+
+        # Create product category
+        self.product_ctg = self._create_product_category()
+
+        # Create a Product with real cost
         standard_price = 10.0
         list_price = 20.0
-        self.product = self._create_product(standard_price, list_price)
+        self.product_real = self._create_product('real', standard_price,
+                                             list_price)
+        # Add default quantity
+        quantity = 20.00
+        self._update_product_qty(self.product_real, self.location, quantity)
+
+        # Create a Product with average cost
+        standard_price = 10.0
+        list_price = 20.0
+        self.product_average = self._create_product('average', standard_price,
+                                                    list_price)
+
+        # Add default quantity
+        quantity = 20.00
+        self._update_product_qty(self.product_real, self.location, quantity)
+
         # Create an Inventory Revaluation
         revaluation_type = 'price_change'
         self.invent = self._create_inventory_revaluation(self.journal,
                                                          revaluation_type)
-        # Create an Inventory Revaluation Line
-        self.invent_line = self.\
-            _create_inventory_revaluation_line(self.product.product_tmpl_id.id)
-        # Create an Inventory Revaluation Line
-        quantity = 20.00
-        self.updated_qty = self._update_product_qty(self.product,
-                                                    self.location, quantity)
+
+        # Create an Inventory Revaluation Line for real cost product
+        self.invent_line_real = self.\
+            _create_inventory_revaluation_line(
+            self.product_real.product_tmpl_id)
+
         # Create an Inventory Revaluation Line Quant
         date_from = date.today() - timedelta(1)
         self.get_quant = self._get_quant(date_from, self.invent,
-                                         self.invent_line)
-        # Update Inventory Price for the product
-        new_cost = 8.0
-        self.update_cost = self._update_cost(new_cost, self.invent,
-                                             self.invent_line, self.product)
+                                         self.invent_line_real)
 
-    def _create_product(self, standard_price, list_price):
-        """Create a Product with inventory valuation set to auto."""
+        # Create an Inventory Revaluation Line for average cost product
+        self.invent_line_average = self.\
+            _create_inventory_revaluation_line(
+            self.product_average.product_tmpl_id)
+
+        # Post the inventory revaluation
+        self.invent.button_post()
+
+    def _create_account(self, acc_type, name, code, company):
+        """Create an account."""
+        type_ids = self.acc_type_model.search([('code', '=', acc_type)])
+        account = self.account_model.create({
+            'name': name,
+            'code': code,
+            'type': 'other',
+            'user_type': type_ids.ids and type_ids.ids[0],
+            'company_id': company.id
+        })
+        return account
+
+    def _create_product_category(self):
         product_ctg = self.product_ctg_model.create({
             'name': 'test_product_ctg',
-            'property_stock_valuation_account_id': self.purchased_stock.id,
-            'property_inventory_revaluation_increase_account_categ':\
-                self.fixed_account.id,
-            'property_inventory_revaluation_decrease_account_categ':\
-                self.purchased_stock.id,
+            'property_stock_valuation_account_id': self.account_inventory.id,
+            'property_inventory_revaluation_increase_account_categ':
+                self.account_revaluation.id,
+            'property_inventory_revaluation_decrease_account_categ':
+                self.account_revaluation.id,
         })
+        return product_ctg
+
+    def _create_product(self, cost_method, standard_price, list_price):
+        """Create a Product with inventory valuation set to auto."""
         product = self.product_model.create({
             'name': 'test_product',
-            'categ_id': product_ctg.id,
+            'categ_id': self.product_ctg.id,
             'type': 'product',
-            'uom_id': self.product_uom.id,
             'standard_price': standard_price,
             'list_price': list_price,
             'valuation': 'real_time',
-            'cost_method': 'real',
-            'property_stock_account_input': self.debtors_account.id,
-            'property_stock_account_output': self.cash_account.id,
+            'cost_method': cost_method,
+            'property_stock_account_input': self.account_grni.id,
+            'property_stock_account_output': self.account_cogs.id,
         })
         return product
 
@@ -99,15 +165,15 @@ class TestStockInventoryRevaluation(TransactionCase):
     def _create_inventory_revaluation_line(self, product):
         """Create a Inventory Revaluation line by applying
          increase and decrease account to it."""
-        self.increase_account_id = self.product.categ_id and \
-            self.product.categ_id.\
+        self.increase_account_id = product.categ_id and \
+            product.categ_id.\
             property_inventory_revaluation_increase_account_categ
-        self.decrease_account_id = self.product.categ_id and \
-            self.product.categ_id.\
+        self.decrease_account_id = product.categ_id and \
+            product.categ_id.\
             property_inventory_revaluation_decrease_account_categ
 
         line = self.reval_line_model.create({
-            'product_template_id': product,
+            'product_template_id': product.id,
             'revaluation_id': self.invent.id,
             'increase_account_id': self.increase_account_id.id,
             'decrease_account_id': self.decrease_account_id.id,
@@ -141,17 +207,15 @@ class TestStockInventoryRevaluation(TransactionCase):
     def _update_cost(self, new_cost, invent, line, product):
         """Update Inventory Price for the product and
         recalculate the Inventory Value."""
-        history = self.stock_history_model.search([('product_id', 'in',
-                                                    [product.id])])
-        self.old_value = history.inventory_value
-        line.line_quant_ids.write({'new_cost': new_cost})
         invent.button_post()
-        history.refresh()
-        self.new_value = history.inventory_value
         return True
 
     def test_inventory_revaluation(self):
         """Test that the inventory is revaluated when the
         inventory price for any product is changed."""
-        self.assertNotEqual(self.old_value, self.new_value,
-                            'Inventory is not recalculated as per new value!')
+        for line in self.invent.line_ids:
+            for move_line in line.move_id.line_id:
+                if move_line.debit:
+                    self.assertEqual(line.debit, 2.0, 'Incorrect inventory '
+                                                      'revaluation')
+

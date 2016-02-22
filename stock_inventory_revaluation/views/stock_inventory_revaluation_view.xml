@@ -46,15 +46,19 @@
                             <page string="Products">
                                 <field name="line_ids" nolabel="1">
                                     <tree string="Stock Inventory Revaluation Lines">
-                                        <field
-                                                name="revaluation_type"
+                                        <field name="state" invisible="True"/>
+                                        <field name="revaluation_type"
                                                invisible="1"/>
                                         <field name="product_template_id"/>
                                         <field name="uom_id"/>
                                         <field name="cost_method"/>
                                         <field name="current_cost"/>
+                                        <field name="old_cost"
+                                               attrs="{'invisible':['|', '|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real'), ('state', '!=', 'posted')]}"/>
                                         <field name="new_cost"
                                                attrs="{'invisible':['|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real')]}"/>
+                                        <field name="old_value"
+                                               attrs="{'invisible':['|', '|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real'), ('state', '!=', 'posted')]}"/>
                                         <field name="current_value"/>
                                         <field name="new_value"
                                                attrs="{'invisible':['|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real')]}"/>
@@ -65,6 +69,7 @@
                                     </tree>
                                     <form string="Stock Inventory Revaluation Lines">
                                         <group>
+                                            <field name="state" invisible="True"/>
                                             <group name="product">
                                                 <field name="product_template_id"/>
                                                 <field name="uom_id"/>
@@ -73,12 +78,16 @@
                                                 <field name="revaluation_type" invisible="1"/>
                                             </group>
                                             <group name="unit_cost">
+                                                <field name="old_cost"
+                                                       attrs="{'invisible':['|', '|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real'), ('state', '!=', 'posted')]}"/>
                                                 <field name="current_cost"/>
                                                 <field name="new_cost"
                                                        attrs="{'invisible':['|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real')]}"/>
 
                                             </group>
                                             <group name="value">
+                                                <field name="old_value"
+                                                       attrs="{'invisible':['|', '|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real'), ('state', '!=', 'posted')]}"/>
                                                 <field name="current_value"/>
                                                 <field name="new_value"
                                                        attrs="{'invisible':['|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real')]}"/>
@@ -106,7 +115,6 @@
                                                         <field name="qty"/>
                                                         <field name="current_cost"/>
                                                         <field name="new_cost"/>
-                                                        <field name="move_id"/>
                                                     </tree>
                                                 </field>
                                             </page>
@@ -153,6 +161,7 @@
             <field name="arch" type="xml">
                 <form string="Stock Inventory Revaluation Lines">
                     <group>
+                        <field name="state" invisible="True"/>
                         <group name="product">
                             <field name="product_template_id"/>
                             <field name="uom_id"/>
@@ -160,13 +169,19 @@
                             <field name="qty_available"/>
                         </group>
                         <group name="unit_cost">
+                            <field name="old_cost"
+                                   attrs="{'invisible':['|', '|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real'), ('state', '!=', 'posted')]}"/>
                             <field name="current_cost"/>
-                            <field name="new_cost"/>
+                            <field name="new_cost"
+                                   attrs="{'invisible':['|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real')]}"/>
 
                         </group>
                         <group name="value">
+                            <field name="old_value"
+                                   attrs="{'invisible':['|', '|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real'), ('state', '!=', 'posted')]}"/>
                             <field name="current_value"/>
-                            <field name="new_value"/>
+                            <field name="new_value"
+                                   attrs="{'invisible':['|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real')]}"/>
                         </group>
                         <group name="accounting">
                             <field name="increase_account_id"/>
@@ -198,7 +213,6 @@
                     <field name="qty"/>
                     <field name="current_cost"/>
                     <field name="new_cost"/>
-                    <field name="move_id"/>
                 </tree>
             </field>
         </record>
@@ -215,7 +229,6 @@
                     <field name="qty"/>
                     <field name="current_cost"/>
                     <field name="new_cost"/>
-                    <field name="move_id"/>
                 </form>
             </field>
         </record>

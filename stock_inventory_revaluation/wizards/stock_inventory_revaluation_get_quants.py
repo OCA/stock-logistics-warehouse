@@ -57,3 +57,4 @@ class StockInventoryRevaluationGetQuants(models.TransientModel):
                 line_quant_obj.create(q_data)
 
         return {'type': 'ir.actions.act_window_close'}
+
