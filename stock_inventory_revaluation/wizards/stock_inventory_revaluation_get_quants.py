@@ -2,7 +2,7 @@
 # © 2015 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import api, fields, models, _
+from openerp import api, fields, models
 
 
 class StockInventoryRevaluationGetQuants(models.TransientModel):
@@ -57,4 +57,3 @@ class StockInventoryRevaluationGetQuants(models.TransientModel):
                 line_quant_obj.create(q_data)
 
         return {'type': 'ir.actions.act_window_close'}
-

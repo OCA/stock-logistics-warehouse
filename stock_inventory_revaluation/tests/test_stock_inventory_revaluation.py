@@ -52,7 +52,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         code = 'cogs'
         acc_type = 'expense'
         self.account_cogs = self._create_account(acc_type, name, code,
-                                                    self.company)
+                                                 self.company)
 
         # Create account for Inventory
         name = 'Inventory'
@@ -75,7 +75,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         standard_price = 10.0
         list_price = 20.0
         self.product_real = self._create_product('real', standard_price,
-                                             list_price)
+                                                 list_price)
         # Add default quantity
         quantity = 20.00
         self._update_product_qty(self.product_real, self.location, quantity)
@@ -102,12 +102,10 @@ class TestStockInventoryRevaluation(TransactionCase):
 
         # Create an Inventory Revaluation Line Quant
         date_from = date.today() - timedelta(1)
-        self.get_quant = self._get_quant(date_from, self.invent,
-                                         self.invent_line_real)
+        self.get_quant = self._get_quant(date_from, self.invent_line_real)
 
         # Create an Inventory Revaluation Line for average cost product
-        self.invent_line_average = self.\
-            _create_inventory_revaluation_line(
+        self.invent_line_average = self._create_inventory_revaluation_line(
             self.product_average.product_tmpl_id)
 
         # Post the inventory revaluation
@@ -190,10 +188,10 @@ class TestStockInventoryRevaluation(TransactionCase):
         product_qty.change_product_qty()
         return product_qty
 
-    def _get_quant(self, date, invent, line):
+    def _get_quant(self, date_from, line):
         """Get Quants for Inventory Revaluation between the date supplied."""
         quant = self.get_quant_model.create({
-            'date_from': date,
+            'date_from': date_from,
             'date_to': datetime.today(),
         })
         line_context = {
@@ -204,12 +202,6 @@ class TestStockInventoryRevaluation(TransactionCase):
         quant.with_context(line_context).process()
         return quant
 
-    def _update_cost(self, new_cost, invent, line, product):
-        """Update Inventory Price for the product and
-        recalculate the Inventory Value."""
-        invent.button_post()
-        return True
-
     def test_inventory_revaluation(self):
         """Test that the inventory is revaluated when the
         inventory price for any product is changed."""
@@ -218,4 +210,3 @@ class TestStockInventoryRevaluation(TransactionCase):
                 if move_line.debit:
                     self.assertEqual(line.debit, 2.0, 'Incorrect inventory '
                                                       'revaluation')
-
