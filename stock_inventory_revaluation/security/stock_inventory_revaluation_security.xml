@@ -10,9 +10,9 @@
             ('company_id','child_of',[user.company_id.id])]</field>
     </record>
 
-    <record model="ir.rule" id="stock_inventory_revaluation_line_comp_rule">
-        <field name="name">Stock Inventory Revaluation line multi-company</field>
-        <field name="model_id" ref="model_stock_inventory_revaluation_line"/>
+    <record model="ir.rule" id="stock_inventory_revaluation_quant_comp_rule">
+        <field name="name">Stock Inventory Revaluation quant multi-company</field>
+        <field name="model_id" ref="model_stock_inventory_revaluation_quant"/>
         <field name="global" eval="True"/>
         <field name="domain_force">['|',('company_id','=',False),
             ('company_id','child_of',[user.company_id.id])]</field>
