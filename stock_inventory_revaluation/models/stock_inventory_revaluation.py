@@ -375,7 +375,7 @@ class StockInventoryRevaluationLine(models.Model):
                               "quantity available for product %s "
                               "is 0 or negative" %
                               self.product_template_id.name))
-                
+
                 if self.revaluation_id.revaluation_type == 'price_change':
                     self.old_cost = self.current_cost
                     self.product_template_id.write({'standard_price':
