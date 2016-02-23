@@ -3,9 +3,9 @@
     <data>
 
         <record model="ir.ui.view"
-                id="stock_inventory_revaluation_line_get_quant_form">
-          <field name="name">stock.inventory.revaluation.line.get.quant.form</field>
-          <field name="model">stock.inventory.revaluation.line.get.quant</field>
+                id="stock_inventory_revaluation_get_quant_form">
+          <field name="name">stock.inventory.revaluation.get.quant.form</field>
+          <field name="model">stock.inventory.revaluation.get.quant</field>
           <field name="arch" type="xml">
             <form string="Get Quants">
               <group colspan="2" col="2">
@@ -22,15 +22,15 @@
           </field>
         </record>
 
-        <record id="action_stock_inventory_revaluation_line_get_quant"
+        <record id="action_stock_inventory_revaluation_get_quant"
                 model="ir.actions.act_window">
           <field name="name">Get Quants for Inventory Revaluation</field>
-          <field name="res_model">stock.inventory.revaluation.line.get.quant</field>
+          <field name="res_model">stock.inventory.revaluation.get.quant</field>
           <field name="type">ir.actions.act_window</field>
           <field name="view_type">form</field>
           <field name="view_mode">tree,form</field>
           <field name="view_id"
-                 ref="stock_inventory_revaluation_line_get_quant_form"/>
+                 ref="stock_inventory_revaluation_get_quant_form"/>
           <field name="target">new</field>
         </record>
 

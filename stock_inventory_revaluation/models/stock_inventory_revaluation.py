@@ -23,6 +23,31 @@ class StockInventoryRevaluation(models.Model):
         res = self.env['account.journal'].search([('type', '=', 'general')])
         return res and res[0] or False
 
+    @api.one
+    def _get_product_template_qty(self):
+        self.qty_available = 0
+        for prod_variant in self.product_template_id.product_variant_ids:
+            self.qty_available += prod_variant.qty_available
+
+    @api.one
+    def _calc_product_template_value(self):
+        qty_available = 0
+        current_value = 0.0
+        quant_obj = self.env['stock.quant']
+        for prod_variant in self.product_template_id.product_variant_ids:
+            qty_available += prod_variant.qty_available
+            if self.product_template_id.cost_method == 'real':
+                quants = quant_obj.search([('product_id', '=',
+                                            prod_variant.id),
+                                           ('location_id.usage', '=',
+                                            'internal')])
+                for quant in quants:
+                    current_value += quant.cost
+            else:
+                current_value = \
+                    self.product_template_id.standard_price * qty_available
+        self.current_value = current_value
+
     name = fields.Char('Reference',
                        help="Reference for the journal entry",
                        readonly=True,
@@ -75,103 +100,6 @@ class StockInventoryRevaluation(models.Model):
                                  default=_default_journal,
                                  readonly=True,
                                  states={'draft': [('readonly', False)]})
-
-    line_ids = fields.One2many('stock.inventory.revaluation.line',
-                               'revaluation_id',
-                               string='Revaluation lines',
-                               readonly=False,
-                               states={'posted': [('readonly', True)]})
-
-    @api.model
-    def create(self, values):
-        sequence_obj = self.env['ir.sequence']
-        if values.get('name', '/') == '/':
-            values['name'] = sequence_obj.get('stock.inventory.revaluation')
-        return super(StockInventoryRevaluation, self).create(values)
-
-    @api.one
-    def post(self):
-        for line in self.line_ids:
-            if line.product_template_id.valuation != 'real_time':
-                continue
-            line.post()
-        return True
-
-    @api.multi
-    def button_post(self):
-        self.post()
-        self.write({'state': 'posted'})
-        return True
-
-    @api.multi
-    def button_draft(self):
-        self.write({'state': 'draft'})
-        return True
-
-    @api.multi
-    def button_cancel(self):
-        moves = self.env['account.move']
-        for line in self.line_ids:
-            if line.move_id:
-                moves += line.move_id
-            for line_quant in line.line_quant_ids:
-                if line_quant.move_id:
-                    moves += line_quant.move_id
-                    line_quant.quant_id.write({'cost': line_quant.old_cost})
-        if moves:
-            # second, invalidate the move(s)
-            moves.button_cancel()
-            # delete the move this revaluation was pointing to
-            # Note that the corresponding move_lines and move_reconciles
-            # will be automatically deleted too
-            moves.unlink()
-        self.write({'state': 'cancel'})
-        return True
-
-
-class StockInventoryRevaluationLine(models.Model):
-
-    _name = 'stock.inventory.revaluation.line'
-    _description = 'Inventory revaluation line'
-
-    @api.one
-    def _get_product_template_qty(self):
-        self.qty_available = 0
-        for prod_variant in self.product_template_id.product_variant_ids:
-            self.qty_available += prod_variant.qty_available
-
-    @api.one
-    def _calc_product_template_value(self):
-        qty_available = 0
-        current_value = 0.0
-        quant_obj = self.env['stock.quant']
-        for prod_variant in self.product_template_id.product_variant_ids:
-            qty_available += prod_variant.qty_available
-            if self.product_template_id.cost_method == 'real':
-                quants = quant_obj.search([('product_id', '=',
-                                            prod_variant.id),
-                                           ('location_id.usage', '=',
-                                            'internal')])
-                for quant in quants:
-                    current_value += quant.cost
-            else:
-                current_value = \
-                    self.product_template_id.standard_price * qty_available
-        self.current_value = current_value
-
-    @api.one
-    @api.depends("product_template_id", "product_template_id.standard_price")
-    def _calc_current_cost(self):
-        self.current_cost = self.product_template_id.standard_price
-
-    revaluation_id = fields.Many2one('stock.inventory.revaluation',
-                                     'Stock Inventory Revaluation',
-                                     required=True,
-                                     ondelete='cascade')
-
-    state = fields.Selection(selection=_STATES,
-                             string='UoM', readonly=True,
-                             related="revaluation_id.state")
 
     product_template_id = fields.Many2one('product.template', 'Product',
                                           required=True,
@@ -239,26 +167,17 @@ class StockInventoryRevaluationLine(models.Model):
              "the transaction created by the revaluation. The Decrease "
              "Account is used when the inventory value is decreased.")
 
-    company_id = fields.Many2one(
-        comodel_name='res.company', string='Company', readonly=True,
-        related="revaluation_id.company_id")
+    move_id = fields.Many2one('account.move', 'Account move', readonly=True,
+                              copy=False)
 
-    move_id = fields.Many2one('account.move', 'Account move', readonly=True)
+    reval_quant_ids = fields.One2many('stock.inventory.revaluation.quant',
+                                      'revaluation_id',
+                                      string='Revaluation line quants')
 
-    revaluation_type = fields.Selection(
-        string="Revaluation Type", readonly=True,
-        related='revaluation_id.revaluation_type',
-        default='price_change')
-
-    line_quant_ids = fields.One2many('stock.inventory.revaluation.line.quant',
-                                     'line_id',
-                                     string='Revaluation line quants')
-
-    _sql_constraints = [
-        ('inv_valu_line_prod_temp_uniq',
-         'unique (revaluation_id, product_template_id)',
-         _('Cannot enter the same product multiple times in the same '
-           'inventory valuation!'))]
+    @api.one
+    @api.depends("product_template_id", "product_template_id.standard_price")
+    def _calc_current_cost(self):
+        self.current_cost = self.product_template_id.standard_price
 
     @api.one
     @api.constrains('product_template_id', 'company_id')
@@ -277,7 +196,6 @@ class StockInventoryRevaluationLine(models.Model):
             self.decrease_account_id = self.product_template_id.categ_id and \
                 self.product_template_id.categ_id.\
                 property_inventory_revaluation_decrease_account_categ
-            self.revaluation_type = self.revaluation_id.revaluation_type
 
     @api.model
     def _prepare_move_data(self, date_move):
@@ -285,17 +203,17 @@ class StockInventoryRevaluationLine(models.Model):
         period = self.env['account.period'].find(date_move)[0]
 
         return {
-            'narration': self.revaluation_id.remarks,
+            'narration': self.remarks,
             'date': date_move,
-            'ref': self.revaluation_id.name,
-            'journal_id': self.revaluation_id.journal_id.id,
+            'ref': self.name,
+            'journal_id': self.journal_id.id,
             'period_id': period.id,
         }
 
     @api.model
     def _prepare_debit_move_line_data(self, amount, account_id, prod_id):
         return {
-            'name': self.revaluation_id.name,
+            'name': self.name,
             'date': self.move_id.date,
             'product_id': prod_id,
             'account_id': account_id,
@@ -306,7 +224,7 @@ class StockInventoryRevaluationLine(models.Model):
     @api.model
     def _prepare_credit_move_line_data(self, amount, account_id, prod_id):
         return {
-            'name': self.revaluation_id.name,
+            'name': self.name,
             'date': self.move_id.date,
             'product_id': prod_id,
             'account_id': account_id,
@@ -352,15 +270,15 @@ class StockInventoryRevaluationLine(models.Model):
 
         amount_diff = 0.0
         if self.product_template_id.cost_method == 'real':
-            for line_quant in self.line_quant_ids:
-                amount_diff += line_quant.get_total_value()
-                line_quant.write_new_cost()
+            for reval_quant in self.reval_quant_ids:
+                amount_diff += reval_quant.get_total_value()
+                reval_quant.write_new_cost()
             if amount_diff == 0.0:
                 return True
         else:
             if self.product_template_id.cost_method in ['standard', 'average']:
 
-                if self.revaluation_id.revaluation_type == 'price_change':
+                if self.revaluation_type == 'price_change':
                     diff = self.current_cost - self.new_cost
                     amount_diff = self.qty_available * diff
                 else:
@@ -376,7 +294,7 @@ class StockInventoryRevaluationLine(models.Model):
                               "is 0 or negative" %
                               self.product_template_id.name))
 
-                if self.revaluation_id.revaluation_type == 'price_change':
+                if self.revaluation_type == 'price_change':
                     self.old_cost = self.current_cost
                     self.product_template_id.write({'standard_price':
                                                     self.new_cost})
@@ -391,15 +309,50 @@ class StockInventoryRevaluationLine(models.Model):
         if self.product_template_id.valuation == 'real_time':
             self._create_accounting_entry(amount_diff)
 
+    @api.model
+    def create(self, values):
+        sequence_obj = self.env['ir.sequence']
+        if values.get('name', '/') == '/':
+            values['name'] = sequence_obj.get('stock.inventory.revaluation')
+        return super(StockInventoryRevaluation, self).create(values)
 
-class StockInventoryRevaluationLineQuant(models.Model):
+    @api.multi
+    def button_post(self):
+        self.post()
+        self.write({'state': 'posted'})
+        return True
 
-    _name = 'stock.inventory.revaluation.line.quant'
-    _description = 'Inventory revaluation line quant'
+    @api.multi
+    def button_draft(self):
+        self.write({'state': 'draft'})
+        return True
 
-    line_id = fields.Many2one('stock.inventory.revaluation.line',
-                              'Revaluation Line', required=True,
-                              readonly=True)
+    @api.multi
+    def button_cancel(self):
+        moves = self.env['account.move']
+        if self.move_id:
+            moves += self.move_id
+        for reval_quant in self.reval_quant_ids:
+            reval_quant.quant_id.write({'cost': reval_quant.old_cost})
+        if moves:
+            # second, invalidate the move(s)
+            moves.button_cancel()
+            # delete the move this revaluation was pointing to
+            # Note that the corresponding move_lines and move_reconciles
+            # will be automatically deleted too
+            moves.unlink()
+        self.write({'state': 'cancel'})
+        return True
+
+
+class StockInventoryRevaluationQuant(models.Model):
+
+    _name = 'stock.inventory.revaluation.quant'
+    _description = 'Inventory revaluation quant'
+
+    revaluation_id = fields.Many2one('stock.inventory.revaluation',
+                                     'Revaluation', required=True,
+                                     readonly=True)
 
     quant_id = fields.Many2one('stock.quant', 'Quant', required=True,
                                readonly=True,
@@ -434,10 +387,14 @@ class StockInventoryRevaluationLineQuant(models.Model):
                             digits=dp.get_precision('Product Price'),
                             copy=False)
 
+    company_id = fields.Many2one(
+        comodel_name='res.company', string='Company', readonly=True,
+        related="revaluation_id.company_id")
+
     def get_total_value(self):
         amount_diff = 0.0
         if self.product_id.product_tmpl_id.cost_method == 'real':
-            if self.line_id.revaluation_id.revaluation_type != 'price_change':
+            if self.revaluation_id.revaluation_type != 'price_change':
                 raise UserError(_("You can only post quant cost changes."))
             else:
                 diff = self.current_cost - self.new_cost
