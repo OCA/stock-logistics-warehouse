@@ -7,8 +7,8 @@ from openerp import api, fields, models
 
 class StockInventoryRevaluationGetQuants(models.TransientModel):
 
-    _name = 'stock.inventory.revaluation.line.get.quant'
-    _description = 'Inventory revaluation line get Quants'
+    _name = 'stock.inventory.revaluation.get.quant'
+    _description = 'Inventory revaluation get Quants'
 
     date_from = fields.Date('Date From')
 
@@ -24,19 +24,20 @@ class StockInventoryRevaluationGetQuants(models.TransientModel):
 
         return domain
 
-    def _select_quants(self, line):
+    def _select_quants(self, revaluation):
         quant_l = []
         quant_obj = self.env['stock.quant']
-        for prod_variant in line.product_template_id.product_variant_ids:
+        for prod_variant in \
+                revaluation.product_template_id.product_variant_ids:
             search_domain = self._get_quant_search_criteria(prod_variant)
             quants = quant_obj.search(search_domain)
             for quant in quants:
                 quant_l.append(quant)
         return quant_l
 
-    def _prepare_line_quant_data(self, line, quant):
+    def _prepare_line_quant_data(self, revaluation, quant):
         return {
-            'line_id': line.id,
+            'revaluation_id': revaluation.id,
             'quant_id': quant.id,
             'new_cost': quant.cost
         }
@@ -44,16 +45,16 @@ class StockInventoryRevaluationGetQuants(models.TransientModel):
     @api.one
     def process(self):
         if self.env.context.get('active_id', False):
-            line_obj = self.env['stock.inventory.revaluation.line']
-            line_quant_obj = self.env['stock.inventory.revaluation.line.quant']
-            line = line_obj.browse(self.env.context['active_id'])
+            reval_obj = self.env['stock.inventory.revaluation']
+            reval_quant_obj = self.env['stock.inventory.revaluation.quant']
+            revaluation = reval_obj.browse(self.env.context['active_id'])
             # Delete the previous records
-            for line_quant in line.line_quant_ids:
-                line_quant.unlink()
+            for reval_quant in revaluation.reval_quant_ids:
+                reval_quant.unlink()
 
-            quants = self._select_quants(line)
+            quants = self._select_quants(revaluation)
             for q in quants:
-                q_data = self._prepare_line_quant_data(line, q)
-                line_quant_obj.create(q_data)
+                q_data = self._prepare_line_quant_data(revaluation, q)
+                reval_quant_obj.create(q_data)
 
         return {'type': 'ir.actions.act_window_close'}
