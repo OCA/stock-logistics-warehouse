@@ -88,28 +88,7 @@ class TestStockInventoryRevaluation(TransactionCase):
 
         # Add default quantity
         quantity = 20.00
-        self._update_product_qty(self.product_real, self.location, quantity)
-
-        # Create an Inventory Revaluation
-        revaluation_type = 'price_change'
-        self.invent = self._create_inventory_revaluation(self.journal,
-                                                         revaluation_type)
-
-        # Create an Inventory Revaluation Line for real cost product
-        self.invent_line_real = self.\
-            _create_inventory_revaluation_line(
-            self.product_real.product_tmpl_id)
-
-        # Create an Inventory Revaluation Line Quant
-        date_from = date.today() - timedelta(1)
-        self.get_quant = self._get_quant(date_from, self.invent_line_real)
-
-        # Create an Inventory Revaluation Line for average cost product
-        self.invent_line_average = self._create_inventory_revaluation_line(
-            self.product_average.product_tmpl_id)
-
-        # Post the inventory revaluation
-        self.invent.button_post()
+        self._update_product_qty(self.product_average, self.location, quantity)
 
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
@@ -160,7 +139,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         })
         return inventory
 
-    def _create_inventory_revaluation_line(self, product):
+    def _create_inventory_revaluation_line(self, revaluation, product):
         """Create a Inventory Revaluation line by applying
          increase and decrease account to it."""
         self.increase_account_id = product.categ_id and \
@@ -172,7 +151,7 @@ class TestStockInventoryRevaluation(TransactionCase):
 
         line = self.reval_line_model.create({
             'product_template_id': product.id,
-            'revaluation_id': self.invent.id,
+            'revaluation_id': revaluation.id,
             'increase_account_id': self.increase_account_id.id,
             'decrease_account_id': self.decrease_account_id.id,
         })
@@ -200,13 +179,62 @@ class TestStockInventoryRevaluation(TransactionCase):
             'active_model': 'stock.inventory.revaluation.line',
         }
         quant.with_context(line_context).process()
-        return quant
+        for line_quant in line.line_quant_ids:
+            line_quant.new_cost = 8.0
 
-    def test_inventory_revaluation(self):
+    def test_inventory_revaluation_price_change(self):
         """Test that the inventory is revaluated when the
         inventory price for any product is changed."""
-        for line in self.invent.line_ids:
+
+        # Create an Inventory Revaluation
+        revaluation_type = 'price_change'
+        invent_price_change = self._create_inventory_revaluation(
+            self.journal, revaluation_type)
+
+        # Create an Inventory Revaluation Line for real cost product
+        invent_line_real = \
+            self._create_inventory_revaluation_line(
+                invent_price_change, self.product_real.product_tmpl_id)
+
+        # Create an Inventory Revaluation Line Quant
+        date_from = date.today() - timedelta(1)
+        self._get_quant(date_from, invent_line_real)
+
+        # Create an Inventory Revaluation Line for average cost product
+        invent_line_avg = self._create_inventory_revaluation_line(
+            invent_price_change, self.product_average.product_tmpl_id)
+        # Post the inventory revaluation
+        invent_line_avg.new_cost = 8.00
+
+        invent_price_change.button_post()
+
+        expected_result = (10.00 - 8.00) * 20.00
+        for line in invent_price_change.line_ids:
             for move_line in line.move_id.line_id:
                 if move_line.debit:
-                    self.assertEqual(line.debit, 2.0, 'Incorrect inventory '
-                                                      'revaluation')
+                    self.assertEqual(move_line.debit, expected_result,
+                                     'Incorrect inventory revaluation for '
+                                     'type Price Change.')
+
+    def test_inventory_revaluation_value_change(self):
+        """Test that the inventory is revaluated when the
+        inventory price for any product is changed."""
+        # Create an Inventory Revaluation for value change
+        revaluation_type = 'inventory_value'
+        invent_inventory_value = self._create_inventory_revaluation(
+            self.journal, revaluation_type)
+
+        # Create an Inventory Revaluation Line for average cost product
+        invent_line_average = self._create_inventory_revaluation_line(
+            invent_inventory_value, self.product_average.product_tmpl_id)
+        invent_line_average.new_value = 100.00
+
+        # Post the inventory revaluation
+        invent_inventory_value.button_post()
+
+        for line in invent_inventory_value.line_ids:
+            for move_line in line.move_id.line_id:
+                if move_line.debit:
+                    self.assertEqual(move_line.debit, 100.0,
+                                     'Incorrect inventory revaluation for '
+                                     'type Inventory Debit/Credit.')

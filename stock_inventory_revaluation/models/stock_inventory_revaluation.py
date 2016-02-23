@@ -155,8 +155,8 @@ class StockInventoryRevaluationLine(models.Model):
                 for quant in quants:
                     current_value += quant.cost
             else:
-                current_value = self.product_template_id.standard_price * \
-                                qty_available
+                current_value = \
+                    self.product_template_id.standard_price * qty_available
         self.current_value = current_value
 
     @api.one
@@ -362,8 +362,9 @@ class StockInventoryRevaluationLine(models.Model):
 
                 if self.revaluation_id.revaluation_type == 'price_change':
                     diff = self.current_cost - self.new_cost
+                    amount_diff = self.qty_available * diff
                 else:
-                    diff = self.current_value - self.new_value
+                    amount_diff = self.current_value - self.new_value
                     if self.new_value < 0:
                         raise UserError(_("The new value for product %s "
                                           "cannot be negative"
@@ -374,9 +375,7 @@ class StockInventoryRevaluationLine(models.Model):
                               "quantity available for product %s "
                               "is 0 or negative" %
                               self.product_template_id.name))
-
-                amount_diff = self.qty_available * diff
-
+                
                 if self.revaluation_id.revaluation_type == 'price_change':
                     self.old_cost = self.current_cost
                     self.product_template_id.write({'standard_price':
@@ -384,9 +383,8 @@ class StockInventoryRevaluationLine(models.Model):
                 else:
                     self.old_cost = self.current_cost
                     self.old_value = self.current_value
-                    new_cost = \
-                        self.current_value - \
-                        self.new_value / self.qty_available
+                    value_diff = self.current_value - self.new_value
+                    new_cost = value_diff / self.qty_available
                     self.product_template_id.write({'standard_price':
                                                     new_cost})
 
