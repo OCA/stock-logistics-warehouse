@@ -55,13 +55,14 @@ class AssignManualQuants(models.TransientModel):
     def default_get(self, var_fields):
         super(AssignManualQuants, self).default_get(var_fields)
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-        available_quants = self.env['stock.quant'].search(
-            ['|', ('location_id', '=', move.location_id.id),
-             ('location_id', 'in', move.location_id.child_ids.ids),
-             ('product_id', '=', move.product_id.id),
-             ('qty', '>', 0),
-             '|', ('reservation_id', '=', False),
-             ('reservation_id', '=', move.id)])
+        available_quants = self.env['stock.quant'].search([
+            ('location_id', 'child_of', move.location_id.id),
+            ('product_id', '=', move.product_id.id),
+            ('qty', '>', 0),
+            '|',
+            ('reservation_id', '=', False),
+            ('reservation_id', '=', move.id)
+        ])
         quants_lines = [{
             'quant': x.id,
             'lot_id': x.lot_id.id,
