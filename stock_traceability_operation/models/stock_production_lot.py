@@ -18,4 +18,5 @@ class StockProductionLot(models.Model):
                 "An incompatible module returned an action for the wrong "
                 "model.")
         moves = self.env['stock.move'].search(safe_eval(action['domain']))
-        return moves.mapped('quant_ids').action_view_quant_history()
+        return moves.mapped('quant_ids').filtered(
+            lambda x: x.lot_id in self).action_view_quant_history()
