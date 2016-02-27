@@ -18,14 +18,19 @@ Please don't hesitate to suggest one of your module to this project. Also, you m
  - https://github.com/OCA/stock-logistics-workflow
 
 [//]: # (addons)
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[stock_available](stock_available/) | 9.0.1.0.0 | Stock available to promise
+[stock_available_immediately](stock_available_immediately/) | 9.0.1.0.0 | Ignore planned receptions in quantity available to promise
+
 Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
 [base_product_merge](base_product_merge/) | 1.0 (unported) | Base Products Merge
 [configurable_stock_level](configurable_stock_level/) | 0.1 (unported) | name
-[stock_available](stock_available/) | 8.0.2.0.0 (unported) | Stock available to promise
-[stock_available_immediately](stock_available_immediately/) | 8.0.2.0.0 (unported) | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 2.0 (unported) | Consider the production potential is available to promise
 [stock_available_sale](stock_available_sale/) | 2.0 (unported) | Quotations in quantity available to promise
 [stock_inventory_existing_lines](stock_inventory_existing_lines/) | 1.0 (unported) | Inventory Extended
