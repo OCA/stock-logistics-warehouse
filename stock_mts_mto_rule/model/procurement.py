@@ -56,7 +56,7 @@ class ProcurementOrder(models.Model):
         origin = (proc.group_id and (proc.group_id.name + ":") or "") + \
                  (proc.rule_id and proc.rule_id.name or proc.origin or "/")
         return {
-            'name': rule.name,
+            'name': proc.name,
             'origin': origin,
             'product_qty': qty,
             'product_uos_qty': uos_qty,
