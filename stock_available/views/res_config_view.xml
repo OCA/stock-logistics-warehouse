@@ -22,6 +22,8 @@
                                 <div>
                                     <field name="module_stock_available_mrp" class="oe_inline" />
                                     <label for="module_stock_available_mrp" />
+                                    <label for="stock_available_mrp_based_on" />
+                                    <field name="stock_available_mrp_based_on" class="oe_inline" attrs="{'required':[('module_stock_available_mrp','=',True)]}"/>
                                 </div>
                             </div>
                         </group>

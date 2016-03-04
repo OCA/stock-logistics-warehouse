@@ -6,6 +6,7 @@ from collections import Counter
 
 from openerp import models, fields, api
 from openerp.addons import decimal_precision as dp
+from openerp.tools.safe_eval import safe_eval
 
 
 class ProductProduct(models.Model):
@@ -33,6 +34,11 @@ class ProductProduct(models.Model):
     def _get_potential_qty(self):
         """Compute the potential qty based on the available components."""
         bom_obj = self.env['mrp.bom']
+        icp = self.env['ir.config_parameter']
+        stock_available_mrp_based_on = safe_eval(
+            icp.get_param('stock_available_mrp_based_on', 'False'))
+        if not stock_available_mrp_based_on:
+            stock_available_mrp_based_on = 'qty_available'
 
         for product in self:
             bom_id = bom_obj._bom_find(product_id=product.id)
@@ -53,5 +59,6 @@ class ProductProduct(models.Model):
 
             # Find the lowest quantity we can make with the stock at hand
             product.potential_qty = min(
-                [self.browse(component_id).qty_available // need
+                [getattr(self.browse(component_id),
+                         stock_available_mrp_based_on) // need
                  for component_id, need in component_needs.items()])

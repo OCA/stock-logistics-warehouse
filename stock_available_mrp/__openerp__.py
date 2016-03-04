@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Consider the production potential is available to promise',
-    'version': '8.0.3.0.0',
+    'version': '8.0.3.1.0',
     "author": u"Numérigraphe,"
               u"Odoo Community Association (OCA)",
     'category': 'Hidden',
