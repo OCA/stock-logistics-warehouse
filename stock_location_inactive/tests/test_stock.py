@@ -64,7 +64,7 @@ class test_stock_location(TransactionCase):
         cr, uid, context = self.cr, self.uid, self.context
         result = self.stock_location.onchange_active_field(
             cr, uid, self.location_id, active=True, context=context)
-        self.assertEqual(result, True)
+        self.assertEqual(result, {})
 
 
 class test_stock_move(TransactionCase):
