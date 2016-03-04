@@ -205,8 +205,8 @@ class StockInventory(orm.Model):
     def confirm_missing_locations(self, cr, uid, ids, context=None):
         """Open wizard to confirm empty locations on exhaustive inventories"""
         for inventory in self.browse(cr, uid, ids, context=context):
-            if (self.get_missing_locations(cr, uid, ids, context=context)
-                    and inventory.exhaustive):
+            if (self.get_missing_locations(cr, uid, ids, context=context) and
+                    inventory.exhaustive):
                 return {
                     'type': 'ir.actions.act_window',
                     'view_type': 'form',
@@ -338,11 +338,11 @@ class StockMove(orm.Model):
             # Nothing to verify
             return True
         for move in self.browse(cr, uid, ids, context=context):
-            if (move.location_id.usage != 'inventory'
-                    and move.location_dest_id.id in locked_location_ids):
+            if (move.location_id.usage != 'inventory' and
+                    move.location_dest_id.id in locked_location_ids):
                 message += " - %s\n" % (move.location_dest_id.name)
-            if (move.location_dest_id.usage != 'inventory'
-                    and move.location_id.id in locked_location_ids):
+            if (move.location_dest_id.usage != 'inventory' and
+                    move.location_id.id in locked_location_ids):
                 message += " - %s\n" % (move.location_id.name)
         if message:
             raise ExhaustiveInventoryException(
