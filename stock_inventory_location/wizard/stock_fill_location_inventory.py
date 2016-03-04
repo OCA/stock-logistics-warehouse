@@ -37,9 +37,8 @@ class FillInventoryWizard(orm.TransientModel):
 
         res = super(FillInventoryWizard, self).default_get(
             cr, uid, fields, context=context)
-        if (context.get('active_model') == 'stock.inventory'
-                and inv_id
-                and 'location_id' in fields):
+        if (context.get('active_model') == 'stock.inventory' and
+                inv_id and 'location_id' in fields):
             inventory = self.pool['stock.inventory'].browse(
                 cr, uid, context['active_id'], context=context)
             res.update({'location_id': inventory.location_id.id,
