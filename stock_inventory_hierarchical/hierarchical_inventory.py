@@ -23,9 +23,11 @@ from openerp.tools.translate import _
 
 from .exceptions import HierarchicalInventoryException
 
-# Add the date to the list of fields we must propagate to children inventories
-from . import PARENT_VALUES
-PARENT_VALUES.append('date')
+
+# This package-wide list keeps the names of the field that must be
+# propagated from root inventories to their children.
+# Add field names in the Model's definition.
+PARENT_VALUES = ['date']
 
 
 class HierarchicalInventory(orm.Model):
