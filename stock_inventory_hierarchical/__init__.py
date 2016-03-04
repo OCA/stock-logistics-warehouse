@@ -18,11 +18,7 @@
 #
 ##############################################################################
 
-# This package-wide list keeps the names of the field that must be
-# propagated from root inventories to their children.
-# Add field names in the Model's definition.
-PARENT_VALUES = []
-
+from .hierarchical_inventory import PARENT_VALUES
 from . import hierarchical_inventory
 # Bring the main exception into the package's scope for easier reuse
 from .exceptions import HierarchicalInventoryException
