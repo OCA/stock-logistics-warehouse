@@ -68,7 +68,7 @@ class StockLocation(orm.Model):
                         _('You cannot disable a location that contains '
                           'products or sub-locations')
                     )
-        return True
+        return {}
 
     def write(self, cr, uid, ids, vals, context=None):
         self.onchange_active_field(cr, uid, ids, active=vals.get('active'),
