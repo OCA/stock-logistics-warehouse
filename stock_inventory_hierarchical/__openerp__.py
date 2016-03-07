@@ -21,7 +21,7 @@
 {
     "name": "Hierarchical Physical Inventory",
     "summary": "Group several Physical Inventories in a master inventory",
-    "version": "1.1",
+    "version": "7.0.1.1.0",
     "depends": ["stock"],
     "author": u"Numérigraphe,Odoo Community Association (OCA)",
     "category": "Warehouse Management",
@@ -44,4 +44,5 @@ consistent.
         "inventory_form.png",
         "inventory_form_actions.png",
     ],
+    "installable": False,
 }

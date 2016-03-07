@@ -21,7 +21,7 @@
 {
     "name": "Exhaustive Stock Inventories",
     "summary": "Remove from the stock what is not in the Physical Inventory.",
-    "version": "1.1",
+    "version": "7.0.1.1.0",
     "depends": ["stock"],
     "author": u"Numérigraphe,Odoo Community Association (OCA)",
     "category": "Warehouse Management",
@@ -74,5 +74,6 @@ For an exhaustive Inventory:
         "images/location_locked.png",
         "images/future_inventory.png",
     ],
-    "demo": ["stock_inventory_location_demo.xml"]
+    "demo": ["stock_inventory_location_demo.xml"],
+    "installable": False,
 }

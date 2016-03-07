@@ -21,7 +21,7 @@
 {
     "name": "Exhaustive and hierarchical Stock Inventories",
     "summary": "Extra consistency checks",
-    "version": "1.1",
+    "version": "7.0.1.1.0",
     "author": u"Numérigraphe,Odoo Community Association (OCA)",
     "category": "Hidden",
     "description": """
@@ -47,4 +47,5 @@ You must keep this module installed to ensure proper functioning.
     "demo": ["inventory_hierarchical_location_demo.xml"],
     "depends": ["stock_inventory_hierarchical", "stock_inventory_location"],
     "auto_install": True,
+    "installable": False,
 }
