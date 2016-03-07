@@ -20,4 +20,5 @@
 #
 ##############################################################################
 
-import product, stock_move
+from . import product
+from . import stock_move
