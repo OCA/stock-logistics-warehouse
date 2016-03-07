@@ -26,8 +26,7 @@ from openerp.osv import orm, fields
 class stock_move(orm.Model):
     _inherit = 'stock.move'
 
-    def _get_product_default_loc_for_type(self, cr, uid, prod_id=False,
-                                          type=False):
+    def _get_product_default_loc_for_type(self, cr, uid, prod_id=False, type=False):
         # helper function to change the source and destination
         #  location to product default location depending on the shipment type
         update_dict = {}
@@ -45,14 +44,11 @@ class stock_move(orm.Model):
 
             return update_dict
 
-    def onchange_product_id(self, cr, uid, ids, prod_id=False, loc_id=False,
+    def onchange_product_id(self, cr, uid, ids, prod_id=False,loc_id=False,
                             loc_dest_id=False, partner_id=False, type=False):
 
-        result = super(stock_move, self).onchange_product_id(cr, uid, ids,
-                                                             prod_id=prod_id,
-                                                             loc_id=loc_id,
-                                                             loc_dest_id=loc_dest_id,
-                                                             partner_id=partner_id)
+        result = super(stock_move, self).onchange_product_id(cr, uid, ids, prod_id=prod_id,loc_id=loc_id,
+                            loc_dest_id=loc_dest_id, partner_id=partner_id)
         update_dict = self._get_product_default_loc_for_type(cr, uid, prod_id, type)
         result['value'].update(update_dict)
         return result

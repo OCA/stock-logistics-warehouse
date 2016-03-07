@@ -39,6 +39,7 @@ the picking type.
     "data": [
         'product_view.xml',
         'stock_move_view.xml',
+        'data/settings.xml',
     ],
     'installable': True,
     'active': False,
