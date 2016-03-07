@@ -11,11 +11,11 @@ class StockQuant(models.Model):
 
     @api.multi
     def action_view_quant_history(self):
-        '''Replace the action on stock moves into an action on the report
+        """Replace the action on stock moves into an action on the report
 
         We are **not calling super()**, on purpose: changing the domain string
         is too complex for the gain it brings.
-        '''
+        """
         report_obj = self.env['report.stock.traceability_operation']
         report_ids = []
         for move in self.mapped('history_ids'):
@@ -56,8 +56,7 @@ class StockQuant(models.Model):
         if not report_ids:
             return False
         return {
-            'domain': "[('id', 'in', "
-                      "  [" + ','.join(map(str, report_ids)) + "])]",
+            'domain': [('id', 'in', report_ids)],
             'name': _('Traceability'),
             'view_mode': 'tree',
             'view_type': 'form',
