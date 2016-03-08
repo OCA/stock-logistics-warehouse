@@ -43,6 +43,8 @@ Configuration
 
 You have to choose 'Use MTO+MTS rules' on the company's warehouse form.
 
+Note: In order to see this option, you must enable "Manage advanced routes for your warehouse" under Settings -> Configuration -> Warehouse.
+
 Credits
 =======
 
