@@ -16,7 +16,7 @@
             <field name="inherit_id" ref="stock.view_move_form" />
             <field name="arch" type="xml">
                 <field name="type" position="attributes">
-                    <attribute name="on_change">onchange_move_type(product_id, type)</attribute>
+                    <attribute name="on_change">onchange_move_type(type, product_id)</attribute>
                 </field>
             </field>
         </record>
