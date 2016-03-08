@@ -10,11 +10,6 @@
                  <xpath expr="/form//field[@name='exhaustive']" position="attributes">
                     <attribute name="attrs">{'readonly':[('parent_id', '!=', False)]}</attribute>
                 </xpath>
-
-                <xpath expr="/form//field[@name='location_id']" position="attributes">
-                    <attribute name="on_change">onchange_location_id(location_id)</attribute>
-                </xpath>
-
             </field>
         </record>
 

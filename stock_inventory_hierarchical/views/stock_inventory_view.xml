@@ -53,11 +53,25 @@
             <field name="model">stock.inventory</field>
             <field name="inherit_id" ref="stock.view_inventory_form" />
             <field name="arch" type="xml">
-                <xpath expr="/form//div[@class='oe_right oe_button_box']" position="inside">
+                <!-- Add confirmation warnings -->
+                <xpath expr="/form//button[@name='action_cancel_inventory']" position="attributes">
+                    <attribute name="confirm">This action will cancel all children inventories.
+                    Click 'OK' to cancel inventories.
+                    Click 'Cancel' to abort.</attribute>
+                </xpath>
+                <xpath expr="/form//button[@name='prepare_inventory']" position="attributes">
+                    <attribute name="confirm">This action will start all children inventories.
+                    Click 'OK' to start inventories.
+                    Click 'Cancel' to abort.</attribute>
+                </xpath>
+
+                <xpath expr="/form//button[@name='action_cancel_inventory']" position="after">
                     <button name="%(action_view_sub_inventory)d" string="View Sub-inventories" type="action" />
                 </xpath>
-                <xpath expr="/form//field[@name='name']" position="after">
-                    <field name="parent_id"/>
+                <xpath expr="/form//field[@name='name']/.." position="after">
+                    <group>
+                        <field name="parent_id"/>
+                     </group>
                 </xpath>
                 <xpath expr="/form//field[@name='date']" position="attributes">
                     <attribute name="attrs">{'readonly':[('parent_id', '!=', False)]}</attribute>
@@ -65,10 +79,9 @@
                 <xpath expr="/form//field[@name='date']" position="after">
                     <field name="progress_rate" widget="progressbar" />
                 </xpath>
-                <xpath
-                    expr="//page[@string='General Information']"
-                    position="after">
-                    <page string="Sub-inventories">
+                <xpath expr="//notebook" position="before">
+                    <group attrs="{'invisible': [('inventory_ids', '=', [])]}" col="1">
+                        <separator string="Sub-inventories"/>
                         <field name="inventory_ids" nolabel="1" context="{'default_parent_id': active_id}">
                             <tree>
                                 <field name="name" />
@@ -76,7 +89,8 @@
                                 <field name="progress_rate" widget="progressbar" />
                             </tree>
                         </field>
-                    </page>
+                    </group>
+                    <separator string="Inventory on location" attrs="{'invisible':[('state','=','draft')]}"/>
                 </xpath>
             </field>
         </record>

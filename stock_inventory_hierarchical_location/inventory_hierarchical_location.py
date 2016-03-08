@@ -32,17 +32,18 @@ class HierarchicalExhInventory(orm.Model):
     """Add hierarchical structure features to exhaustive Inventories"""
     _inherit = 'stock.inventory'
 
-    def action_open(self, cr, uid, ids, context=None):
-        """Open only if all the parents are Open."""
-        for inventory in self.browse(cr, uid, ids, context=context):
-            while inventory.parent_id:
-                inventory = inventory.parent_id
-                if inventory.state != 'open':
-                    raise HierarchicalInventoryException(
-                        _('Warning'),
-                        _('One of the parent inventories is not open.'))
-        return super(HierarchicalExhInventory, self).action_open(
-            cr, uid, ids, context=context)
+# FIXME states doesn't exist anymore
+#     def action_open(self, cr, uid, ids, context=None):
+#         """Open only if all the parents are Open."""
+#         for inventory in self.browse(cr, uid, ids, context=context):
+#             while inventory.parent_id:
+#                 inventory = inventory.parent_id
+#                 if inventory.state != 'open':
+#                     raise HierarchicalInventoryException(
+#                         _('Warning'),
+#                         _('One of the parent inventories is not open.'))
+#         return super(HierarchicalExhInventory, self).action_open(
+#             cr, uid, ids, context=context)
 
     def get_missing_locations(self, cr, uid, ids, context=None):
         """Extend the list of inventories with their children"""
@@ -80,23 +81,3 @@ class HierarchicalExhInventory(orm.Model):
         return super(HierarchicalExhInventory,
                      self).confirm_missing_locations(
             cr, uid, ids, context=context)
-
-    def onchange_location_id(self, cr, uid, ids, location_id, context=None):
-        """Check if location is a child of parent inventory location"""
-        loc_obj = self.pool['stock.location']
-        for inventory in self.browse(cr, uid, ids, context=context):
-            if inventory.parent_id:
-                allowed_location_ids = loc_obj.search(
-                    cr, uid, [('location_id', 'child_of',
-                               inventory.parent_id.location_id.id)],
-                    context=context)
-                if location_id not in allowed_location_ids:
-                    return {
-                        'location_id': False,
-                        'warning': {
-                            'title': _('Warning: Wrong location'),
-                            'message': _("This location is not declared on "
-                                         "the parent inventory\n"
-                                         "It cannot be added.")}
-                    }
-        return {}
