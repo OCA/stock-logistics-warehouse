@@ -27,7 +27,8 @@ class stock_move(orm.Model):
     _inherit = 'stock.move'
 
     def _get_product_default_loc_for_type(self, cr, uid,
-                                          prod_id=False, type=False):
+                                          prod_id=False, type=False,
+                                          context=None):
         # helper function to change the source and destination
         #  location to product default location depending on the shipment type
         update_dict = {}
@@ -61,7 +62,7 @@ class stock_move(orm.Model):
         res = super(stock_move, self).\
             onchange_move_type(cr, uid, ids, type, context=None)
         update_dict = self.\
-            _get_product_default_loc_for_type(cr, uid, type, prod_id)
+            _get_product_default_loc_for_type(cr, uid, prod_id, type, context)
         if update_dict is not None:
             res['value'].update(update_dict)
         return res
