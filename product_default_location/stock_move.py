@@ -34,17 +34,18 @@ class stock_move(orm.Model):
         update_dict = {}
         if prod_id:
             product = self.pool.get('product.product').browse(cr, uid, prod_id)
-            if type == "in":
-                update_dict['location_dest_id'] = \
-                    product.default_location_id.id
+            if product.default_location_id:
+                if type == "in":
+                    update_dict['location_dest_id'] = \
+                        product.default_location_id.id
 
-            elif type == "out":
-                update_dict['location_id'] = product.default_location_id.id
+                elif type == "out":
+                    update_dict['location_id'] = product.default_location_id.id
 
-            else:
-                update_dict['location_id'] = product.default_location_id.id
-                update_dict['location_dest_id'] = \
-                    product.default_location_id.id
+                else:
+                    update_dict['location_id'] = product.default_location_id.id
+                    update_dict['location_dest_id'] = \
+                        product.default_location_id.id
             return update_dict
 
     def onchange_product_id(self, cr, uid, ids, prod_id=False, loc_id=False,
