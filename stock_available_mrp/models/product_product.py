@@ -33,6 +33,7 @@ class ProductProduct(models.Model):
     def _get_potential_qty(self):
         """Compute the potential qty based on the available components."""
         bom_obj = self.env['mrp.bom']
+        uom_obj = self.env['product.uom']
 
         for product in self:
             bom_id = bom_obj._bom_find(product_id=product.id)
@@ -40,18 +41,53 @@ class ProductProduct(models.Model):
                 product.potential_qty = 0.0
                 continue
 
+            bom = bom_obj.browse(bom_id)
+
             # Need by product (same product can be in many BOM lines/levels)
-            component_needs = Counter()
-            for component in bom_obj._bom_explode(bom_obj.browse(bom_id),
-                                                  product, 1.0,)[0]:
-                component_needs += Counter(
-                    {component['product_id']: component['product_qty']})
+            component_needs = self._get_components_needs(product, bom)
+
             if not component_needs:
                 # The BoM has no line we can use
                 product.potential_qty = 0.0
-                continue
 
-            # Find the lowest quantity we can make with the stock at hand
-            product.potential_qty = min(
-                [self.browse(component_id).qty_available // need
-                 for component_id, need in component_needs.items()])
+            else:
+                # Find the lowest quantity we can make with the stock at hand
+                components_potential_qty = min(
+                    [component.qty_available // need
+                     for component, need in component_needs.items()]
+                )
+
+                # Compute with bom quantity
+                bom_qty = uom_obj._compute_qty_obj(
+                    bom.product_uom,
+                    bom.product_qty,
+                    bom.product_tmpl_id.uom_id
+                )
+                product.potential_qty = bom_qty * components_potential_qty
+
+    def _get_components_needs(self, product, bom):
+        """ Return the needed qty of each compoments in the *bom* of *product*.
+
+        :type product: product_product
+        :type bom: mrp_bom
+        :rtype: collections.Counter
+        """
+        bom_obj = self.env['mrp.bom']
+        uom_obj = self.env['product.uom']
+        product_obj = self.env['product.product']
+
+        needs = Counter()
+        for bom_component in bom_obj._bom_explode(bom, product, 1.0)[0]:
+            product_uom = uom_obj.browse(bom_component['product_uom'])
+            component = product_obj.browse(bom_component['product_id'])
+
+            component_qty = uom_obj._compute_qty_obj(
+                product_uom,
+                bom_component['product_qty'],
+                component.uom_id,
+            )
+            needs += Counter(
+                {component: component_qty}
+            )
+
+        return needs

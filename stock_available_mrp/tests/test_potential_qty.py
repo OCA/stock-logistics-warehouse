@@ -12,6 +12,14 @@ class TestPotentialQty(TransactionCase):
     def setUp(self):
         super(TestPotentialQty, self).setUp()
 
+        self.product_model = self.env["product.product"]
+        self.bom_model = self.env["mrp.bom"]
+        self.bom_line_model = self.env["mrp.bom.line"]
+        self.stock_quant_model = self.env["stock.quant"]
+
+        self.setup_demo_data()
+
+    def setup_demo_data(self):
         #  An interesting product (multi-line BoM, variants)
         self.tmpl = self.browse_ref(
             'product.product_product_4_product_template')
@@ -56,6 +64,25 @@ class TestPotentialQty(TransactionCase):
         # Get the warehouses
         self.wh_main = self.browse_ref('stock.warehouse0')
         self.wh_ch = self.browse_ref('stock.stock_warehouse_shop0')
+
+    def create_inventory(self, product_id, qty, location_id=None):
+        if location_id is None:
+            location_id = self.wh_main.lot_stock_id.id
+
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Test inventory',
+            'location_id': location_id,
+            'filter': 'partial'
+        })
+        inventory.prepare_inventory()
+
+        self.env['stock.inventory.line'].create({
+            'inventory_id': inventory.id,
+            'product_id': product_id,
+            'location_id': location_id,
+            'product_qty': qty
+        })
+        inventory.action_done()
 
     def assertPotentialQty(self, record, qty, msg):
         record.refresh()
@@ -186,7 +213,9 @@ class TestPotentialQty(TransactionCase):
             "Receiving variant 1's component should not change "
             "variant 2's potential")
 
-        # Receive enough components to make 500x the 2nd variant at Chicago
+        # Receive enough components to make 42X the 2nd variant at Chicago
+        #   need 13 dozens of HDD with 50% efficiency to build 42 RAM
+        #   So 313 HDD (with rounding) for 42 RAM
         inventory = self.env['stock.inventory'].create(
             {'name': 'components for 2nd variant',
              'location_id': self.wh_ch.lot_stock_id.id,
@@ -201,7 +230,7 @@ class TestPotentialQty(TransactionCase):
             {'inventory_id': inventory.id,
              'product_id': self.ref('product.product_product_18'),
              'location_id': self.wh_ch.lot_stock_id.id,
-             'product_qty': 310.0})
+             'product_qty': 313.0})
         inventory.action_done()
         self.assertPotentialQty(
             self.tmpl, 1000.0,
@@ -211,14 +240,14 @@ class TestPotentialQty(TransactionCase):
             "Receiving variant 2's component should not change "
             "variant 1's potential")
         self.assertPotentialQty(
-            self.var2, 500.0,
+            self.var2, 42.0,
             "Wrong variant 2 potential after receiving components")
         # Check by warehouse
         self.assertPotentialQty(
             self.tmpl.with_context(warehouse=self.wh_main.id), 1000.0,
             "Wrong potential quantity in main WH")
         self.assertPotentialQty(
-            self.tmpl.with_context(warehouse=self.wh_ch.id), 500.0,
+            self.tmpl.with_context(warehouse=self.wh_ch.id), 42.0,
             "Wrong potential quantity in Chicago WH")
         # Check by location
         self.assertPotentialQty(
@@ -228,5 +257,140 @@ class TestPotentialQty(TransactionCase):
         self.assertPotentialQty(
             self.tmpl.with_context(
                 location=self.wh_ch.lot_stock_id.id),
-            500.0,
+            42.0,
             "Wrong potential quantity in Chicago WH location")
+
+    def test_multi_unit_recursive_bom(self):
+        # Test multi-level and multi-units BOM
+
+        p1 = self.product_model.create({
+            'name': 'Test product with BOM',
+        })
+
+        p2 = self.product_model.create({
+            'name': 'Test sub product with BOM',
+        })
+
+        p3 = self.product_model.create({
+            'name': 'Test component'
+        })
+
+        bom_p1 = self.bom_model.create({
+            'product_tmpl_id': p1.product_tmpl_id.id,
+            'product_id': p1.id,
+        })
+
+        # 1 dozen of component
+        self.bom_line_model.create({
+            'bom_id': bom_p1.id,
+            'product_id': p3.id,
+            'product_qty': 1,
+            'product_uom': self.ref('product.product_uom_dozen'),
+        })
+
+        # Two p2 which have a bom
+        self.bom_line_model.create({
+            'bom_id': bom_p1.id,
+            'product_id': p2.id,
+            'product_qty': 2,
+            'product_uom': self.ref('product.product_uom_unit'),
+            'type': 'phantom',
+        })
+
+        bom_p2 = self.bom_model.create({
+            'product_tmpl_id': p2.product_tmpl_id.id,
+            'product_id': p2.id,
+        })
+
+        # p2 need 2 unit of component
+        self.bom_line_model.create({
+            'bom_id': bom_p2.id,
+            'product_id': p3.id,
+            'product_qty': 2,
+            'product_uom': self.ref('product.product_uom_unit'),
+        })
+
+        p1.refresh()
+
+        # Need a least 1 dozen + 2 * 2 = 16 units for one P1
+        self.assertEqual(0, p1.potential_qty)
+
+        self.create_inventory(p3.id, 1)
+
+        p1.refresh()
+        self.assertEqual(0, p1.potential_qty)
+
+        self.create_inventory(p3.id, 15)
+        p1.refresh()
+        self.assertEqual(0, p1.potential_qty)
+
+        self.create_inventory(p3.id, 16)
+        p1.refresh()
+        self.assertEqual(1.0, p1.potential_qty)
+
+        self.create_inventory(p3.id, 25)
+        p1.refresh()
+        self.assertEqual(1.0, p1.potential_qty)
+
+        self.create_inventory(p3.id, 32)
+        p1.refresh()
+        self.assertEqual(2.0, p1.potential_qty)
+
+    def test_bom_qty_and_efficiency(self):
+
+        p1 = self.product_model.create({
+            'name': 'Test product with BOM',
+        })
+
+        p2 = self.product_model.create({
+            'name': 'Test sub product with BOM',
+        })
+
+        p3 = self.product_model.create({
+            'name': 'Test component'
+        })
+
+        # A bom produce 2 dozen of P1
+        bom_p1 = self.bom_model.create({
+            'product_tmpl_id': p1.product_tmpl_id.id,
+            'product_id': p1.id,
+            'product_qty': 2,
+            'product_uom': self.ref('product.product_uom_dozen'),
+        })
+
+        # Need 5 p2 for that
+        self.bom_line_model.create({
+            'bom_id': bom_p1.id,
+            'product_id': p2.id,
+            'product_qty': 5,
+            'product_uom': self.ref('product.product_uom_unit'),
+            'product_efficiency': 0.8,
+        })
+
+        # Which need 1 dozen of P3
+        bom_p2 = self.bom_model.create({
+            'product_tmpl_id': p2.product_tmpl_id.id,
+            'product_id': p2.id,
+            'type': 'phantom',
+        })
+        self.bom_line_model.create({
+            'bom_id': bom_p2.id,
+            'product_id': p3.id,
+            'product_qty': 1,
+            'product_uom': self.ref('product.product_uom_dozen'),
+        })
+
+        p1.refresh()
+        self.assertEqual(0, p1.potential_qty)
+
+        self.create_inventory(p3.id, 60)
+
+        p1.refresh()
+        self.assertEqual(0, p1.potential_qty)
+
+        # Need 5 * 1 dozen => 60
+        # But 80% lost each dozen, need 3 more by dozen => 60 + 5 *3 => 75
+        self.create_inventory(p3.id, 75)
+
+        p1.refresh()
+        self.assertEqual(24, p1.potential_qty)
