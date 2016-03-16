@@ -85,6 +85,24 @@ class TestPotentialQty(TransactionCase):
         })
         inventory.action_done()
 
+    def create_simple_bom(self, product, sub_product,
+                          product_qty=1, sub_product_qty=1):
+        bom = self.bom_model.create({
+            'product_tmpl_id': product.product_tmpl_id.id,
+            'product_id': product.id,
+            'product_qty': product_qty,
+            'product_uom': self.ref('product.product_uom_unit'),
+
+        })
+        self.bom_line_model.create({
+            'bom_id': bom.id,
+            'product_id': sub_product.id,
+            'product_qty': sub_product_qty,
+            'product_uom': self.ref('product.product_uom_unit'),
+        })
+
+        return bom
+
     def assertPotentialQty(self, record, qty, msg):
         record.refresh()
         #  Check the potential
@@ -465,3 +483,33 @@ class TestPotentialQty(TransactionCase):
                               'virtual_available')
         p1.refresh()
         self.assertEqual(5.0, p1.potential_qty)
+
+    def test_potential_qty__list(self):
+        # Try to highlight a bug when _get_potential_qty is called on
+        # a recordset with multiple products
+        # Recursive compute is not working
+
+        p1 = self.product_model.create({'name': 'Test P1'})
+        p2 = self.product_model.create({'name': 'Test P2'})
+        p3 = self.product_model.create({'name': 'Test P3'})
+
+        self.config.set_param('stock_available_mrp_based_on',
+                              'immediately_usable_qty')
+
+        # P1 need one P2
+        self.create_simple_bom(p1, p2)
+        # P2 need one P3
+        self.create_simple_bom(p2, p3)
+
+        self.create_inventory(p3.id, 3)
+
+        self.product_model.invalidate_cache()
+
+        products = self.product_model.search(
+            [('id', 'in', [p1.id, p2.id, p3.id])]
+        )
+
+        self.assertEqual(
+            {p1.id: 3.0, p2.id: 3.0, p3.id: 0.0},
+            {p.id: p.potential_qty for p in products}
+        )
