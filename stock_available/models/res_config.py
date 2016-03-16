@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, models, fields
-from openerp.tools.safe_eval import safe_eval
 
 
 class StockConfig(models.TransientModel):
@@ -14,10 +13,13 @@ class StockConfig(models.TransientModel):
     @api.model
     def _get_stock_available_mrp_based_on(self):
         """Gets the available languages for the selection."""
-        fields = self.env['ir.model.fields'].search(
+        pdct_fields = self.env['ir.model.fields'].search(
             [('model', '=', 'product.product'),
              ('ttype', '=', 'float')])
-        return [(field.name, field.field_description) for field in fields]
+        return [
+            (field.name, field.field_description)
+            for field in sorted(pdct_fields, key=lambda f: f.field_description)
+        ]
 
     module_stock_available_immediately = fields.Boolean(
         string='Exclude incoming goods',
@@ -46,17 +48,17 @@ class StockConfig(models.TransientModel):
         _get_stock_available_mrp_based_on,
         string='based on',
         help="Choose the field of the product which will be used to compute "
-             "potential.\nIf empty, Quantity On Hand is used.",
+             "potential.\nIf empty, Quantity On Hand is used.\n"
+             "Only the quantity fields have meaning for computing stock",
     )
 
     @api.model
     def get_default_stock_available_mrp_based_on(self, fields):
         res = {}
         icp = self.env['ir.config_parameter']
-        res['stock_available_mrp_based_on'] = safe_eval(
-            icp.get_param('stock_available_mrp_based_on', 'False'))
-        if not res['stock_available_mrp_based_on']:
-            res['stock_available_mrp_based_on'] = 'qty_available'
+        res['stock_available_mrp_based_on'] = icp.get_param(
+            'stock_available_mrp_based_on', 'qty_available'
+        )
         return res
 
     @api.multi
@@ -64,4 +66,4 @@ class StockConfig(models.TransientModel):
         if self.stock_available_mrp_based_on:
             icp = self.env['ir.config_parameter']
             icp.set_param('stock_available_mrp_based_on',
-                          repr(self.stock_available_mrp_based_on))
+                          self.stock_available_mrp_based_on)
