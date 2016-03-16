@@ -6,7 +6,6 @@ from collections import Counter
 
 from openerp import models, fields, api
 from openerp.addons import decimal_precision as dp
-from openerp.tools.safe_eval import safe_eval
 
 
 class ProductProduct(models.Model):
@@ -20,6 +19,14 @@ class ProductProduct(models.Model):
         help="Quantity of this Product that could be produced using "
              "the materials already at hand.")
 
+    # Needed for fields dependencies
+    # When self.potential_qty is compute, we want to force the ORM
+    # to compute all the components potential_qty too.
+    component_ids = fields.Many2many(
+        comodel_name='product.product',
+        compute='_get_component_ids',
+    )
+
     @api.multi
     @api.depends('potential_qty')
     def _immediately_usable_qty(self):
@@ -31,16 +38,11 @@ class ProductProduct(models.Model):
             product.immediately_usable_qty += product.potential_qty
 
     @api.multi
+    @api.depends('component_ids.potential_qty')
     def _get_potential_qty(self):
         """Compute the potential qty based on the available components."""
         bom_obj = self.env['mrp.bom']
         uom_obj = self.env['product.uom']
-
-        icp = self.env['ir.config_parameter']
-        stock_available_mrp_based_on = safe_eval(
-            icp.get_param('stock_available_mrp_based_on', 'False'))
-        if not stock_available_mrp_based_on:
-            stock_available_mrp_based_on = 'qty_available'
 
         for product in self:
             bom_id = bom_obj._bom_find(product_id=product.id)
@@ -60,7 +62,7 @@ class ProductProduct(models.Model):
             else:
                 # Find the lowest quantity we can make with the stock at hand
                 components_potential_qty = min(
-                    [getattr(component, stock_available_mrp_based_on) // need
+                    [self._get_component_qty(component) // need
                      for component, need in component_needs.items()]
                 )
 
@@ -71,6 +73,19 @@ class ProductProduct(models.Model):
                     bom.product_tmpl_id.uom_id
                 )
                 product.potential_qty = bom_qty * components_potential_qty
+
+    def _get_component_qty(self, component):
+        """ Return the component qty to use based en company settings.
+
+        :type component: product_product
+        :rtype: float
+        """
+        icp = self.env['ir.config_parameter']
+        stock_available_mrp_based_on = icp.get_param(
+            'stock_available_mrp_based_on', 'qty_available'
+        )
+
+        return component[stock_available_mrp_based_on]
 
     def _get_components_needs(self, product, bom):
         """ Return the needed qty of each compoments in the *bom* of *product*.
@@ -98,3 +113,15 @@ class ProductProduct(models.Model):
             )
 
         return needs
+
+    def _get_component_ids(self):
+        """ Compute component_ids by getting all the components for
+        this product.
+        """
+        bom_obj = self.env['mrp.bom']
+
+        bom_id = bom_obj._bom_find(product_id=self.id)
+        if bom_id:
+            bom = bom_obj.browse(bom_id)
+            for bom_component in bom_obj._bom_explode(bom, self, 1.0)[0]:
+                self.component_ids |= self.browse(bom_component['product_id'])
