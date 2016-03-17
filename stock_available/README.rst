@@ -11,6 +11,8 @@ promise for each product.
 This quantity is based on the projected stock and, depending on the
 configuration, it can account for various data such as sales quotations or
 immediate production capacity.
+In case of immediate production capacity, it is possible to configure on which
+field the potential is computed, by default Quantity On Hand is used.
 This can be configured in the menu Settings > Configuration > Warehouse.
 
 Configuration
@@ -21,6 +23,8 @@ stock.
 To take davantage of the additional features, you must which information you
 want to base the computation, by checking one or more boxes in the settings:
 `Configuration` > `Warehouse` > `Stock available to promise`.
+In case of "Include the production potential", it is also possible to configure
+which field of product to use to compute the production potential.
 
 Usage
 =====
