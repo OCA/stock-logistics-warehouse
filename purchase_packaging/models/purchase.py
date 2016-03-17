@@ -185,7 +185,7 @@ class PurchaseOrderLine(models.Model):
 
     @api.model
     def create(self, vals):
-        if 'product_qty' not in vals:
+        if 'product_qty' not in vals and 'product_purchase_qty' in vals:
             # compute product_qty to avoid inverse computation and reset to 1
             uom_obj = self.env['product.uom']
             product_purchase_uom = uom_obj.browse(
