@@ -1,0 +1,128 @@
+-
+  This file will test an exhaustive inventory.
+  I will call open_action method and check if state of inventories are 'open'.
+-
+  !python {model: stock.inventory}: |
+    self.action_open(cr, uid, [ref('inventory_exhaustive')])
+    inventory_state = self.read(cr, uid, [ref('inventory_exhaustive')], ['state'])[0]['state']
+    assert inventory_state == 'open', "Inventory in state '%s'. It should be 'open'" % inventory_state
+-
+  I will check that the function get_missing_locations return some locations.
+-
+  !python {model: stock.inventory}: |
+    missing_loc_ids = self.get_missing_locations(cr, uid, [ref('inventory_exhaustive')], context=context)
+    assert len(missing_loc_ids), "get_missing_locations did not return any ID."
+-
+  I create a wizard record for stock_confirm_uninventoried_location to verify that it contains the uninventoried locations
+-
+  !python {model: stock.inventory.uninventoried.locations}: |
+    ctx = dict(context, active_ids=[ref('inventory_exhaustive')])
+    wizard_id = self.create(cr, uid, {}, context=ctx)
+    wizard = self.browse(cr, uid, wizard_id, context=ctx)
+    assert len(wizard.location_ids) > 0 , "The wizard does not contain any lines."
+-
+  I add products to exhaustive inventory.
+  Adding 17” LCD Monitor.
+-
+  !record {model: stock.inventory.line, id: lines_inventory_location_pc1}:
+    product_id: product.product_product_7
+    product_uom: product.product_uom_unit
+    company_id: base.main_company
+    inventory_id: inventory_exhaustive
+    product_qty: 18.0
+    location_id: stock.stock_location_14
+
+-
+  Adding USB Keyboard, QWERTY.
+-
+  !record {model: stock.inventory.line, id: lines_inventory_location_pc3}:
+    product_id: product.product_product_8
+    product_uom: product.product_uom_unit
+    company_id: base.main_company
+    inventory_id: inventory_exhaustive
+    product_qty: 5.0
+    location_id: stock.stock_location_14
+
+-
+  I will call the function _get_locations_open_inventories and check the result.
+  The function will return only the location_id of the exhaustive inventory.
+-
+  !python {model: stock.inventory}: |
+    locations = self._get_locations_open_inventories(cr, uid)
+    assert len(locations) == 1, "Function return wrong results: %s" % locations
+    assert locations[0] == ref('stock.stock_location_14'), "Function '_get_locations_open_inventories' return wrong location_id. Should be '%s': '%s'" % (stock.stock_location_14, locations[0])
+-
+  I will call the function onchange_location_id.
+  The function must return True in the first case, and return a warning dictionnary in the second test.
+-
+  !python {model: stock.inventory.line}: |
+    res = self.onchange_location_id(cr, uid, [], ref('stock.stock_location_14'), True, ref('stock.stock_location_14'))
+    assert res == True, "Exhaustive: The function 'onchange_location_id' should return True and return '%s'" % res
+    res = self.onchange_location_id(cr, uid, [], ref('stock.stock_location_14'), True, ref('stock.stock_location_components'))
+    assert res.get('warning', False) != False , "Function 'onchange_location_id': Warning not raise. ('%s)" % res
+
+-
+  I will check that the function get_missing_locations does not return any locations.
+-
+  !python {model: stock.inventory}: |
+    missing_loc_ids = self.get_missing_locations(cr, uid, [ref('inventory_exhaustive')], context=context)
+    assert not missing_loc_ids, "get_missing_locations should not return IDs but returned %s" % missing_loc_ids
+-
+  I create a wizard record for stock_confirm_uninventoried_location and validate it
+-
+  !python {model: stock.inventory.uninventoried.locations}: |
+    ctx = dict(context, active_ids=[ref('inventory_exhaustive')])
+    wizard_id = self.create(cr, uid, {}, context=ctx)
+    wizard = self.browse(cr, uid, wizard_id, context=ctx)
+    assert len(wizard.location_ids) == 0 , "The wizard should not contain any lines but contains %s." % wizard.location_ids
+    self.confirm_uninventoried_locations(cr, uid, wizard_id, context=ctx)
+-
+  Stock moves are not allowed in the locations during the inventory.
+-
+  !python {model: stock.move}: |
+    # TODOv8: remove this test, this is already part of trunk-wms
+    from stock_inventory_location import ExhaustiveInventoryException
+    try:
+      self.create(
+        cr,uid, {
+          'name': 'Bad move',
+          'location_id': ref('stock.stock_location_14'),
+          'location_dest_id': ref('stock.stock_location_3'),
+          'product_id': ref('product.product_product_8'),
+          'product_uom': ref('product.product_uom_unit'),
+          'date_expected': '2020-01-01 00:00:00'
+      })
+    except ExhaustiveInventoryException as e:
+      log("Good! The Stock Move was refused: %s" % e)
+-
+  I will confirm the exhaustive inventory
+-
+  !python {model: stock.inventory}: |
+    self.action_confirm(cr, uid, [ref('inventory_exhaustive')])
+    inventory_state = self.read(cr, uid, [ref('inventory_exhaustive')], ['state'])[0]['state']
+    assert inventory_state == 'confirm', "Exhaustive inventory is in state '%s'. It should be 'confirm'" % inventory_state
+
+-
+  I will validate the exhaustive inventory
+-
+  !python {model: stock.inventory}: |
+    self.action_done(cr, uid, [ref('inventory_exhaustive')])
+    inventory_state = self.read(cr, uid, [ref('inventory_exhaustive')], ['state'])[0]['state']
+    assert inventory_state == 'done', "Exhaustive inventory is in state '%s'. It should be 'done'" % inventory_state
+
+-
+  I will verify the quantity for each products.
+-
+  !python {model: product.product}: |
+    ctx = dict(context, location=[ref('stock.stock_location_14')])
+    prod_qty_avail = self.read(cr, uid, [ref('product.product_product_7')], ['qty_available'], context=ctx)[0]['qty_available']
+    assert prod_qty_avail == 18.0, "The stock of PC1 was not set to 18.0: %s" % prod_qty_avail
+
+    prod_qty_avail = self.read(cr, uid, [ref('product.product_product_8')], ['qty_available'], context=ctx)[0]['qty_available']
+    assert prod_qty_avail == 5.0, "The stock of PC3 was not set to 5.0: %s" % prod_qty_avail
+
+    prod_qty_avail = self.read(cr, uid, [ref('product.product_product_24')], ['qty_available'], context=ctx)[0]['qty_available']
+    assert prod_qty_avail == 0.0, "The stock of KEYA was not set to 0: %s" % prod_qty_avail
+
+    prod_qty_avail = self.read(cr, uid, [ref('product.product_product_25')], ['qty_available'], context=ctx)[0]['qty_available']
+    assert prod_qty_avail == 0.0, "The stock of MOU was not set to 0: %s" % prod_qty_avail

@@ -1,0 +1,239 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_location
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-01 11:54+0000\n"
+"PO-Revision-Date: 2014-07-01 11:54+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:345
+#: code:addons/stock_inventory_location/stock_inventory_location.py:346
+#, python-format
+msgid "A Physical Inventory is being conducted at the following location(s):\n"
+"%s"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:280
+#: code:addons/stock_inventory_location/stock_inventory_location.py:281
+#: constraint:stock.move:0
+#, python-format
+msgid "A Physical Inventory is being conducted at this location"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_inventory_location
+#: help:stock.inventory,exhaustive:0
+msgid "Check the box if you are conducting an exhaustive Inventory.\n"
+"Leave the box unchecked if you are conducting a standard Inventory (partial inventory for example).\n"
+"For an exhaustive Inventory:\n"
+" - the status \"Draft\" lets you define the list of Locations where goods must be counted\n"
+" - the status \"Open\" indicates that the list of Locations is definitive and you are now counting the goods. In that status, no Stock Moves can be recorded in/out of the Inventory's Locations\n"
+" - only the Inventory's Locations can be entered in the Inventory Lines\n"
+" - if some of the Inventory's Locations have not been entered in the Inventory Lines, OpenERP warns you when you confirm the Inventory\n"
+" - every good that is not in the Inventory Lines is considered lost, and gets moved out of the stock when you confirm the Inventory"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "Confirm empty locations"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_inventory_uninventoried_locations
+#, python-format
+msgid "Confirm the uninventoried Locations."
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:107
+#, python-format
+msgid "Error!"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:279
+#: code:addons/stock_inventory_location/stock_inventory_location.py:280
+#: code:addons/stock_inventory_location/stock_inventory_location.py:344
+#: code:addons/stock_inventory_location/stock_inventory_location.py:345
+#, python-format
+msgid "Error: Location locked down"
+msgstr ""
+
+#. module: stock_inventory_location
+#: field:stock.fill.inventory,exhaustive:0
+#: view:stock.inventory:0
+#: field:stock.inventory,exhaustive:0
+msgid "Exhaustive"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "If you confirm the Inventory, these Locations will be considered empty and their content will be purged."
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_fill_inventory
+#, python-format
+msgid "Import Inventory"
+msgstr ""
+
+#. module: stock_inventory_location
+#: field:stock.inventory,location_id:0
+msgid "Inventoried Location"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_inventory
+#, python-format
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_inventory_line
+#, python-format
+msgid "Inventory Line"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "It could either mean that the Locations are empty, or that the Inventory is not yet complete."
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:108
+#, python-format
+msgid "It's impossible to confirm an inventory in the future. Please change the inventory date to proceed further."
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_location
+#, python-format
+msgid "Location"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/wizard/stock_confirm_uninventoried_location.py:65
+#, python-format
+msgid "No product in this location. Please select a location in the product form."
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "Only select exhaustive Inventories."
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "Open Inventory"
+msgstr ""
+
+#. module: stock_inventory_location
+#: constraint:stock.inventory:0
+msgid "Other Physical inventories are being conducted using the same Locations."
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "Purge contents and confirm Inventory"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_move
+#, python-format
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "The following Locations are empty"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "The following Stock Locations are part of the current Physical Inventory, but no Inventory Line has been recorded for them."
+msgstr ""
+
+#. module: stock_inventory_location
+#: field:stock.inventory.uninventoried.locations,location_ids:0
+msgid "Uninventoried location"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:254
+#, python-format
+msgid "Warning: Wrong location"
+msgstr ""
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:255
+#, python-format
+msgid "You cannot record an Inventory Line for this Location.\n"
+"You must first add this Location to the list of affected Locations on the Inventory form."
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "confirm_missing_locations"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "draft,open,confirm"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "draft,open,confirm,done"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "onchange_location_id(parent.location_id, parent.exhaustive, location_id)"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "open"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "or"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "{'default_exhaustive': exhaustive}"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "{'location_id': location_id}"
+msgstr ""
+
+#. module: stock_inventory_location
+#: view:stock.fill.inventory:0
+msgid "{'readonly':[('exhaustive','=',True)]}"
+msgstr ""
+

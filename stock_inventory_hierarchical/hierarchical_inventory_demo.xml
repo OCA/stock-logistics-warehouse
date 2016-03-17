@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <!-- Example Inventory with Sub-Inventories. -->
+        <record id="stock_inventory_parent0" model="stock.inventory">
+            <field name="name">Main Inventory</field>
+        </record>
+        <record id="child_1_id" model="stock.inventory">
+            <field name="name">Sub-Inventory 1</field>
+            <field name="parent_id" ref="stock_inventory_parent0" />
+        </record>
+        <record id="child_2_id" model="stock.inventory">
+            <field name="name">Sub-Inventory 2</field>
+            <field name="parent_id" ref="stock_inventory_parent0" />
+        </record>
+    </data>
+</openerp>
