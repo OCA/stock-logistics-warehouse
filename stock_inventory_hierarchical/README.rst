@@ -12,16 +12,7 @@ Using several inventories, you can distribute the counting to several persons
 and still keep a clear overview of global inventory's status.
 
 The main inventory will be for a general Location, and the sub-inventories
-should contain sub-Locations.
-
-Odoo will make sure the status of the Inventory and it's Sub-Inventories are
-consistent:
-
-* sub-inventories will be prepared automatically when you prepare the main
-  inventory
-* you must finish the sub-inventories before you can finish the main inventory
-* canceling a sub-inventory is only possible is the parent inventories are
-  canceled
+should contain sub-locations.
 
 Configuration
 =============
@@ -38,16 +29,23 @@ Generating the inventories
 --------------------------
 
 The most convenient way to create a complete hierarchy of inventories is the
-wizard available in the menu
-"Warehouse > Inventory Control > Generate Inventory"
+wizard available in the menu:
+
+1. Warehouse
+#. Inventory Control
+#. Generate Inventory
 
 If that doesn't fit your warehouse, you can also create the inventories
 manually, simply indicating the parent for each one before you start them.
 
 Processing the inventories
 --------------------------
+
+Odoo will make sure the status of the inventory and it's sub-inventories are
+consistent.
+
 Preparing the main inventory will automatically prepare the sub-inventories.
-All the sub-inventories will set to the same date as the main inventory.
+All the sub-inventories will have the same date as the main inventory.
 
 You must validate the sub-inventories first, beginning with the "deepest" ones
 in the hierarchy, before you can validate the main inventories.

@@ -17,6 +17,7 @@ CONSISTANT_STATES = {
     # When confirming inventories, may contain draft children for a short time
     'confirm': ['draft', 'confirm', 'done'],
     'done': ['done'],
+    # The state "cancel" is not reachable in the standard anymore
     'cancel': ['cancel']}
 
 

@@ -34,7 +34,7 @@ msgstr "Créé le"
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:90
 #, python-format
 msgid "Error: You can not create recursive inventories."
-msgstr "Erreur: Vous ne pouvez pas créer d'inventaire récursif"
+msgstr "Erreur: Vous ne pouvez pas créer d'inventaire récursif."
 
 #. module: stock_inventory_hierarchical
 #: model:ir.actions.act_window,name:stock_inventory_hierarchical.action_view_stock_generate_inventory
