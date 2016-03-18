@@ -14,16 +14,20 @@ class ProductProduct(models.Model):
     """
     _inherit = 'product.product'
 
-    @api.one
+    @api.multi
     @api.depends('virtual_available')
     def _immediately_usable_qty(self):
         """No-op implementation of the stock available to promise.
 
         By default, available to promise = forecasted quantity.
 
-        Must be overridden by another module that actually implement
-        computations."""
-        self.immediately_usable_qty = self.virtual_available
+        **Each** sub-module **must** override this method in **both**
+            `product.product` **and** `product.template`, because we can't
+            decide in advance how to compute the template's quantity from the
+            variants.
+        """
+        for prod in self:
+            prod.immediately_usable_qty = prod.virtual_available
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),

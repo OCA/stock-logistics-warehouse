@@ -3,13 +3,14 @@
 # * stock_inventory_preparation_filter
 # 
 # Translators:
+# Antonio Trueba, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 20:23+0000\n"
-"PO-Revision-Date: 2015-09-15 13:05+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-01-14 01:38+0000\n"
+"PO-Revision-Date: 2016-02-10 16:37+0000\n"
+"Last-Translator: Antonio Trueba\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,4 +112,4 @@ msgstr "Productos seleccionados"
 #. module: stock_inventory_preparation_filter
 #: view:stock.inventory:stock_inventory_preparation_filter.stock_inventory_form
 msgid "{'invisible':[('state','=','draft')]}"
-msgstr ""
+msgstr "{'invisible':[('state','=','draft')]}"

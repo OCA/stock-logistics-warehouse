@@ -3,13 +3,14 @@
 # * stock_reserve_sale
 # 
 # Translators:
+# Antonio Trueba, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 20:23+0000\n"
-"PO-Revision-Date: 2015-09-15 13:05+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-01-14 01:38+0000\n"
+"PO-Revision-Date: 2016-02-10 16:42+0000\n"
+"Last-Translator: Antonio Trueba\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,13 +42,13 @@ msgstr ""
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:188
 #, python-format
 msgid "Configuration Error!"
-msgstr ""
+msgstr "¡Error de configuración!"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
@@ -64,7 +65,7 @@ msgstr "Creado el"
 #: code:addons/stock_reserve_sale/model/sale.py:222
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. module: stock_reserve_sale
 #: field:sale.order,has_stock_reservation:0
@@ -143,12 +144,12 @@ msgstr ""
 #. module: stock_reserve_sale
 #: view:stock.reservation:stock_reserve_sale.view_stock_reservation_form
 msgid "Sales"
-msgstr ""
+msgstr "Ventas"
 
 #. module: stock_reserve_sale
 #: model:ir.model,name:stock_reserve_sale.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Pedido de venta"
 
 #. module: stock_reserve_sale
 #: model:ir.model,name:stock_reserve_sale.model_sale_order_line
@@ -166,7 +167,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,location_id:0
 msgid "Source Location"
-msgstr ""
+msgstr "Ubicación origen"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,owner_id:0
@@ -200,9 +201,9 @@ msgstr ""
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "or"
-msgstr ""
+msgstr "o"
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "{\"reload_on_button\": 1}"
-msgstr ""
+msgstr "{\"reload_on_button\": 1}"
