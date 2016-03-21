@@ -25,5 +25,5 @@
         "wizard/assign_manual_quants_view.xml",
         "views/stock_move_view.xml",
     ],
-    "installable": True,
+    "installable": False,
 }
