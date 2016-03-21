@@ -15,7 +15,7 @@
               "Odoo Community Association (OCA)",
     "website": "http://www.odoomrp.com",
     "category": "Warehouse Management",
-    "installable": True,
+    "installable": False,
     "license": "AGPL-3",
     "images": [],
 }
