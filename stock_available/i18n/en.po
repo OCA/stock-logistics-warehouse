@@ -36,8 +36,19 @@ msgstr "Available to promise"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_stock_config_settings_module_stock_available_immediately
+#: field:stock.config.settings,module_stock_available_sale:0
+msgid "Exclude goods already in sale quotations"
+msgstr "Exclude goods already in sale quotations"
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_immediately:0
 msgid "Exclude incoming goods"
 msgstr "Exclude incoming goods"
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_mrp:0
+msgid "Include the production potential"
+msgstr "Include the production potential"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
@@ -64,6 +75,15 @@ msgstr "Stock for this Product that can be safely proposed for sale to Customers
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_stock_config_settings_module_stock_available_immediately
+#: help:stock.config.settings,module_stock_available_mrp:0
+msgid ""
+"This will add the quantities of goods that can be immediately manufactured, to the quantities available to promise.\n"
+"This installs the module stock_available_mrp.\n"
+"If the module mrp is not installed, this will install it too"
+msgstr "This will add the quantities of goods that can be immediately manufactured, to the quantities available to promise.\nThis installs the module stock_available_mrp.\nIf the module mrp is not installed, this will install it too"
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_immediately:0
 msgid ""
 "This will subtract incoming quantities from the quantities available to promise.\n"
 "This installs the module stock_available_immediately."
@@ -73,3 +93,18 @@ msgstr "This will subtract incoming quantities from the quantities available to 
 #: model:ir.model,name:stock_available.model_stock_config_settings
 msgid "stock.config.settings"
 msgstr "stock.config.settings"
+#: help:stock.config.settings,module_stock_available_sale:0
+msgid ""
+"This will subtract quantities from the sale quotations from the quantities available to promise.\n"
+"This installs the modules stock_available_sale.\n"
+"If the modules sale and sale_delivery_date are not installed, this will install them too"
+msgstr "This will subtract quantities from the sale quotations from the quantities available to promise.\nThis installs the modules stock_available_sale.\nIf the modules sale and sale_delivery_date are not installed, this will install them too"
+
+#. module: stock_available
+#: view:product.product:stock_available.view_stock_available_tree_variant
+#: view:product.template:stock_available.view_stock_available_tree
+msgid ""
+"red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in "
+"('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not "
+"in ('draft', 'end', 'obsolete')"
+msgstr "red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not in ('draft', 'end', 'obsolete')"
