@@ -34,7 +34,7 @@ class GenerateInventoryWizard(models.TransientModel):
                                help="If set, only inventory "
                                     "on view location can be created")
 
-    @api.multi
+    @api.model
     def _default_location(self):
         """Default stock location
 
@@ -44,7 +44,7 @@ class GenerateInventoryWizard(models.TransientModel):
             'stock.warehouse')
         warehouse_ids = self.env['stock.warehouse'].search(
             [('company_id', '=', company_id)], limit=1)
-        return warehouse_ids and warehouse_ids.lot_stock_id.id or False
+        return warehouse_ids.lot_stock_id.id
 
     _sql_constraints = [
         ('level', 'CHECK (level>0)', 'Level must be positive!'),
@@ -121,7 +121,7 @@ class GenerateInventoryWizard(models.TransientModel):
 
         result = self.env['ir.model.data'].get_object_reference(
             'stock', 'view_inventory_form')
-        view_id = result and result[1] or False
+        view_id = result[1] if result else False
         return {'name': _('Inventory generated'),
                 'view_mode': 'form',
                 'view_type': 'form',
