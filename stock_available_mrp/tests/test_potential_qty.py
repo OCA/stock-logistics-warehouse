@@ -86,13 +86,14 @@ class TestPotentialQty(TransactionCase):
         inventory.action_done()
 
     def create_simple_bom(self, product, sub_product,
-                          product_qty=1, sub_product_qty=1):
+                          product_qty=1, sub_product_qty=1,
+                          routing_id=False):
         bom = self.bom_model.create({
             'product_tmpl_id': product.product_tmpl_id.id,
             'product_id': product.id,
             'product_qty': product_qty,
             'product_uom': self.ref('product.product_uom_unit'),
-
+            'routing_id': routing_id,
         })
         self.bom_line_model.create({
             'bom_id': bom.id,
@@ -159,7 +160,8 @@ class TestPotentialQty(TransactionCase):
              'login': 'test_demo',
              'company_id': self.ref('base.main_company'),
              'company_ids': [(4, self.ref('base.main_company'))],
-             'groups_id': [(4, self.ref('stock.group_stock_user'))]})
+             'groups_id': [(4, self.ref('stock.group_stock_user')),
+                           (4, self.ref('mrp.group_mrp_user'))]})
 
         bom = self.env['mrp.bom'].search(
             [('product_tmpl_id', '=', self.tmpl.id)])
@@ -184,6 +186,29 @@ class TestPotentialQty(TransactionCase):
         bom.company_id = chicago_id
         self.assertPotentialQty(
             test_user_tmpl, 1000.0, '')
+
+    def test_group_mrp_missing(self):
+        test_user = self.env['res.users'].create({
+            'name': 'test_demo',
+            'login': 'test_demo',
+            'company_id': self.ref('base.main_company'),
+            'company_ids': [(4, self.ref('base.main_company'))],
+            'groups_id': [(4, self.ref('stock.group_stock_user'))],
+        })
+
+        p1 = self.product_model.create({'name': 'Test P1'})
+        p2 = self.product_model.create({'name': 'Test P2'})
+
+        self.create_simple_bom(p1, p2,
+                               routing_id=self.ref('mrp.mrp_routing_0'))
+        self.create_inventory(p2.id, 1)
+
+        test_user_p1 = p1.sudo(test_user)
+        # Test user doesn't have access to mrp_routing, can't compute potential
+        self.assertEqual(0, test_user_p1.potential_qty)
+
+        test_user.groups_id = [(4, self.ref('mrp.group_mrp_user'))]
+        self.assertEqual(1, test_user_p1.potential_qty)
 
     def test_potential_qty(self):
         for i in [self.tmpl, self.var1, self.var2]:
@@ -313,12 +338,12 @@ class TestPotentialQty(TransactionCase):
             'product_id': p2.id,
             'product_qty': 2,
             'product_uom': self.ref('product.product_uom_unit'),
-            'type': 'phantom',
         })
 
         bom_p2 = self.bom_model.create({
             'product_tmpl_id': p2.product_tmpl_id.id,
             'product_id': p2.id,
+            'type': 'phantom',
         })
 
         # p2 need 2 unit of component
@@ -435,7 +460,7 @@ class TestPotentialQty(TransactionCase):
         })
 
         # Need 1 iMac for that
-        p1_bom_line = self.bom_line_model.create({
+        self.bom_line_model.create({
             'bom_id': bom_p1.id,
             'product_id': imac.id,
             'product_qty': 1,
@@ -464,8 +489,8 @@ class TestPotentialQty(TransactionCase):
             'product_id': imac.id,
             'product_qty': 1,
             'product_uom': self.ref('product.product_uom_unit'),
+            'type': 'phantom',
         })
-        p1_bom_line.type = 'phantom'
 
         # Need 1 imac_component for iMac
         self.bom_line_model.create({
