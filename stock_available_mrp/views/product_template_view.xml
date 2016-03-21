@@ -9,8 +9,16 @@
             <field name="inherit_id" ref="stock_available.view_stock_available_form" />
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//field[@name='immediately_usable_qty']" position="before">
-                        <field name="potential_qty"/>
+                    <xpath expr="//field[@name='immediately_usable_qty']/ancestor::button" position="after">
+                        <button type="action" name="%(stock.product_open_quants)d"
+                                attrs="{'invisible':[('type', '!=', 'product')]}"
+                                class="oe_stat_button" icon="fa-building-o">
+                            <div class="o_form_field o_stat_info">
+                                <field name="potential_qty"
+                                       widget="statinfo" nolabel="1"/>
+                                <span class="o_stat_text">Potential</span>
+                            </div>
+                        </button>
                     </xpath>
                 </data>
             </field>

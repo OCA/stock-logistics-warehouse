@@ -7,6 +7,8 @@ from collections import Counter
 from openerp import models, fields, api
 from openerp.addons import decimal_precision as dp
 
+from openerp.exceptions import AccessError
+
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
@@ -53,7 +55,12 @@ class ProductProduct(models.Model):
             bom = bom_obj.browse(bom_id)
 
             # Need by product (same product can be in many BOM lines/levels)
-            component_needs = self._get_components_needs(product, bom)
+            try:
+                component_needs = self._get_components_needs(product, bom)
+            except AccessError:
+                # If user doesn't have access to BOM
+                # he can't see potential_qty
+                component_needs = None
 
             if not component_needs:
                 # The BoM has no line we can use

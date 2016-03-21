@@ -8,7 +8,6 @@
 
 - Add a BOM whereby 0.042K "RAM SR2" can be replaced with 13 dozens "HDD-SH1" + 8 CPUa8 with 50% efficiency. This lets us test UoM conversions for the finished product and the raw materials, as well as the unfolding of phantom BoMs
 - !record {model: mrp.bom, id: sr2_from_hdd}:
-    name: RAM SR2 made from HDD-SH1
     product_id: product.product_product_14
     product_tmpl_id: product.product_product_14_product_template
     product_uom: thousand
