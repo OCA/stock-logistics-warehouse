@@ -43,6 +43,9 @@ addon | version | summary
 --- | --- | ---
 [base_product_merge](base_product_merge/) | 1.0 (unported) | Base Products Merge
 [configurable_stock_level](configurable_stock_level/) | 0.1 (unported) | name
+[stock_inventory_hierarchical](stock_inventory_hierarchical/) | 7.0.1.1.0 (unported) | Group several Physical Inventories in a master inventory
+[stock_inventory_hierarchical_location](stock_inventory_hierarchical_location/) | 7.0.1.1.0 (unported) | Extra consistency checks
+[stock_inventory_location](stock_inventory_location/) | 7.0.1.1.0 (unported) | Remove from the stock what is not in the Physical Inventory.
 [stock_lot_valuation](stock_lot_valuation/) | 0.1 (unported) | Lot Valuation
 [stock_move_location](stock_move_location/) | 1.0 (unported) | Move Stock Location
 [stock_optional_valuation](stock_optional_valuation/) | 0.1 (unported) | Stock optional valuation
