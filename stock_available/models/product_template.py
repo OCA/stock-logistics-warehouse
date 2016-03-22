@@ -9,12 +9,20 @@ from openerp.addons import decimal_precision as dp
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    @api.one
-    @api.depends('virtual_available')
+    @api.multi
+    @api.depends('product_variant_ids.immediately_usable_qty')
     def _immediately_usable_qty(self):
-        """Compute the quantity using all the variants"""
-        self.immediately_usable_qty = sum(
-            [v.immediately_usable_qty for v in self.product_variant_ids])
+        """No-op implementation of the stock available to promise.
+
+        By default, available to promise = forecasted quantity.
+
+        **Each** sub-module **must** override this method in **both**
+            `product.product` **and** `product.template`, because we can't
+            decide in advance how to compute the template's quantity from the
+            variants.
+        """
+        for tmpl in self:
+            tmpl.immediately_usable_qty = tmpl.virtual_available
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
