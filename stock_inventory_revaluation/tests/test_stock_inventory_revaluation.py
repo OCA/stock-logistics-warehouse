@@ -24,6 +24,8 @@ class TestStockInventoryRevaluation(TransactionCase):
             env['stock.inventory.revaluation.quant']
         self.get_quant_model = self.\
             env['stock.inventory.revaluation.get.quant']
+        self.mass_post_model = self.\
+            env['stock.inventory.revaluation.mass.post']
         self.stock_change_model = self.env['stock.change.product.qty']
         self.stock_lot_model = self.env['stock.production.lot']
         self.stock_location_model = self.env['stock.location']
@@ -174,6 +176,21 @@ class TestStockInventoryRevaluation(TransactionCase):
         for reval_quant in revaluation.reval_quant_ids:
             reval_quant.new_cost = 8.0
 
+    def _mass_post(self, revaluations):
+        """Get Quants for Inventory Revaluation between the date supplied."""
+        context = {
+            'active_id': revaluations[0],
+            'active_ids': [rev.id for rev in revaluations],
+            'active_model': 'stock.inventory.revaluation',
+        }
+        mass_post_wiz = self.mass_post_model.with_context(context).create({})
+        mass_post_wiz.process()
+        return True
+
+    def test_defaults(self):
+        """Test default methods"""
+        self.assertNotEqual(self.reval_model._default_journal(), False)
+
     def test_inventory_revaluation_price_change_real(self):
         """Test that the inventory is revaluated when the
         inventory price for a product managed under real costing method is
@@ -194,16 +211,13 @@ class TestStockInventoryRevaluation(TransactionCase):
 
         expected_result = (10.00 - 8.00) * 20.00
 
-        for move_line in invent_price_change_real.move_id.line_id:
+        for move_line in invent_price_change_real.account_move_id.line_id:
             if move_line.debit:
                 self.assertEqual(move_line.debit, expected_result,
                                  'Incorrect inventory revaluation for '
                                  'type Price Change.')
 
-    def test_inventory_revaluation_price_change_average(self):
-        """Test that the inventory is revaluated when the
-        inventory price for a product managed under average costing method is
-        changed."""
+    def create_inventory_revaluation_price_change_average(self):
         revaluation_type = 'price_change'
         # Create an Inventory Revaluation for average cost product
         invent_price_change_average = self._create_inventory_revaluation(
@@ -211,30 +225,61 @@ class TestStockInventoryRevaluation(TransactionCase):
             self.product_average.product_tmpl_id)
         # Post the inventory revaluation
         invent_price_change_average.new_cost = 8.00
+        return invent_price_change_average
+
+    def test_inventory_revaluation_price_change_average(self):
+        """Test that the inventory is revaluated when the
+        inventory price for a product managed under average costing method is
+        changed."""
+        invent_price_change_average = \
+            self.create_inventory_revaluation_price_change_average()
         invent_price_change_average.button_post()
         expected_result = (10.00 - 8.00) * 20.00
-        for move_line in invent_price_change_average.move_id.line_id:
+        for move_line in invent_price_change_average.account_move_id.line_id:
             if move_line.debit:
                 self.assertEqual(move_line.debit, expected_result,
                                  'Incorrect inventory revaluation for '
                                  'type Price Change.')
 
-    def test_inventory_revaluation_value_change(self):
-        """Test that the inventory is revaluated when the
-        inventory price for any product is changed."""
+    def create_inventory_revaluation_value_change(self):
         # Create an Inventory Revaluation for value change for average
         # cost product
         revaluation_type = 'inventory_value'
-        invent_average = self._create_inventory_revaluation(
+        invent_value_change = self._create_inventory_revaluation(
             self.journal, revaluation_type,
             self.product_average.product_tmpl_id)
-        invent_average.new_value = 100.00
+        invent_value_change.new_value = 100.00
+        return invent_value_change
 
+    def test_inventory_revaluation_value_change(self):
+        """Test that the inventory is revaluated when the
+        inventory price for any product is changed."""
+        invent_value_change = self.create_inventory_revaluation_value_change()
         # Post the inventory revaluation
-        invent_average.button_post()
+        invent_value_change.button_post()
 
-        for move_line in invent_average.move_id.line_id:
+        for move_line in invent_value_change.account_move_id.line_id:
             if move_line.debit:
                 self.assertEqual(move_line.debit, 100.0,
                                  'Incorrect inventory revaluation for '
                                  'type Inventory Debit/Credit.')
+
+    def test_mass_post(self):
+        """Test mass post"""
+        revaluations = []
+
+        # Create an Inventory Revaluation for average cost product
+        invent_price_change_average = \
+            self.create_inventory_revaluation_price_change_average()
+        revaluations.append(invent_price_change_average)
+
+        # Create an Inventory Revaluation for real cost product
+        invent_value_change = self.create_inventory_revaluation_value_change()
+        revaluations.append(invent_value_change)
+
+        # Post the inventory revaluation using wizard
+        self._mass_post(revaluations)
+
+        # Check that both inventory valuations are now posted
+        self.assertEqual(invent_price_change_average.state, 'posted')
+        self.assertEqual(invent_value_change.state, 'posted')
