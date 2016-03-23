@@ -12,14 +12,15 @@ class ProductCategory(models.Model):
     property_inventory_revaluation_increase_account_categ = fields.Many2one(
         'account.account', string='Valuation Increase Account',
         company_dependent=True,
-        help="Define the G/L accounts to be used as the balancing account in "
-             "the transaction created by the revaluation. The G/L Increase "
-             "Account is used when the inventory value is increased due to "
-             "the revaluation.")
+        help="Define the Financial Accounts to be used as the balancing "
+             "account in the transaction created by the revaluation. "
+             "The Valuation Increase Account is used when the inventory value "
+             "is increased due to the revaluation.")
 
     property_inventory_revaluation_decrease_account_categ = fields.Many2one(
         'account.account', string='Valuation Decrease Account',
         company_dependent=True,
-        help="Define the G/L accounts to be used as the balancing account in "
-             "the transaction created by the revaluation. The G/L Decrease "
-             "Account is used when the inventory value is decreased.")
+        help="Define the Financial Accounts to be used as the balancing "
+             "account in the transaction created by the revaluation. "
+             "The Valuation Decrease Account is used when the inventory value "
+             "is decreased.")
