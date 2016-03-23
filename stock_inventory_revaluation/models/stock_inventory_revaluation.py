@@ -180,7 +180,8 @@ class StockInventoryRevaluation(models.Model):
     @api.depends("product_template_id", "product_template_id.standard_price")
     def _calc_current_cost(self):
         for revaluation in self:
-            revaluation.current_cost = revaluation.product_template_id.standard_price
+            revaluation.current_cost = \
+                revaluation.product_template_id.standard_price
 
     @api.multi
     @api.constrains('product_template_id', 'company_id')
