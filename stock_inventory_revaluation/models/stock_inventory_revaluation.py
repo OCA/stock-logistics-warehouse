@@ -7,11 +7,6 @@ import openerp.addons.decimal_precision as dp
 import time
 from openerp.exceptions import Warning as UserError
 
-_STATES = [
-    ('draft', 'Draft'),
-    ('posted', 'Posted'),
-    ('cancel', 'Cancelled')]
-
 
 class StockInventoryRevaluation(models.Model):
 
@@ -83,7 +78,9 @@ class StockInventoryRevaluation(models.Model):
                           default='Inventory Revaluation',
                           states={'draft': [('readonly', False)]})
 
-    state = fields.Selection(selection=_STATES,
+    state = fields.Selection(selection=[('draft', 'Draft'),
+                                        ('posted', 'Posted'),
+                                        ('cancel', 'Cancelled')],
                              string='Status',
                              readonly=True,
                              required=True,
