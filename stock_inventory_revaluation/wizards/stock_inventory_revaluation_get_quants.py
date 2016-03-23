@@ -42,8 +42,9 @@ class StockInventoryRevaluationGetQuants(models.TransientModel):
             'new_cost': quant.cost
         }
 
-    @api.one
+    @api.multi
     def process(self):
+        self.ensure_one()
         if self.env.context.get('active_id', False):
             reval_obj = self.env['stock.inventory.revaluation']
             reval_quant_obj = self.env['stock.inventory.revaluation.quant']
