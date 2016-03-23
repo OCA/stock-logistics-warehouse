@@ -67,7 +67,7 @@
                                 <group name="accounting">
                                     <field name="increase_account_id"/>
                                     <field name="decrease_account_id"/>
-                                    <field name="move_id"/>
+                                    <field name="account_move_id"/>
                                 </group>
                             </group>
                             <notebook>
@@ -119,7 +119,7 @@
                     <field name="qty_available"/>
                     <field name="increase_account_id"/>
                     <field name="decrease_account_id"/>
-                    <field name="move_id"/>
+                    <field name="account_move_id"/>
                     <field name="state"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                 </tree>

@@ -11,9 +11,10 @@ inventory revaluation.
 
 You can re-valuate inventory values by:
 
-* Changing the price for a specific product. The inventory price is changed
-  and inventory value is recalculated according to the new price. In case of
-  real price, you can select which quants you want to change the price on.
+* Changing the inventory valuation of a specific product. The cost price
+ is changed, and the inventory value is recalculated according to the new
+ price. In case of real price, you can select on which quants you want to
+ change the unit cost.
 
 * Changing the value of the inventory. The quantity of inventory remains
   unchanged, resulting in a change in the price.
@@ -38,6 +39,11 @@ Usage
 
 * Go to *Inventory / Inventory Control / Inventory Revaluation / Products*
   to create a new Inventory Revaluation.
+
+* In order to post the inventory revaluation for multiple items at once,
+  select the records in the tree view and go to
+  *More / Post Inventory Revaluations*.
+
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

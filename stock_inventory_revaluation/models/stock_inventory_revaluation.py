@@ -7,11 +7,6 @@ import openerp.addons.decimal_precision as dp
 import time
 from openerp.exceptions import Warning as UserError
 
-_STATES = [
-    ('draft', 'Draft'),
-    ('posted', 'Posted'),
-    ('cancel', 'Cancelled')]
-
 
 class StockInventoryRevaluation(models.Model):
 
@@ -23,30 +18,35 @@ class StockInventoryRevaluation(models.Model):
         res = self.env['account.journal'].search([('type', '=', 'general')])
         return res and res[0] or False
 
-    @api.one
+    @api.multi
     def _get_product_template_qty(self):
-        self.qty_available = 0
-        for prod_variant in self.product_template_id.product_variant_ids:
-            self.qty_available += prod_variant.qty_available
+        for revaluation in self:
+            revaluation.qty_available = 0
+            for prod_variant in \
+                    revaluation.product_template_id.product_variant_ids:
+                revaluation.qty_available += prod_variant.qty_available
 
-    @api.one
+    @api.multi
     def _calc_product_template_value(self):
-        qty_available = 0
-        current_value = 0.0
         quant_obj = self.env['stock.quant']
-        for prod_variant in self.product_template_id.product_variant_ids:
-            qty_available += prod_variant.qty_available
-            if self.product_template_id.cost_method == 'real':
-                quants = quant_obj.search([('product_id', '=',
-                                            prod_variant.id),
-                                           ('location_id.usage', '=',
-                                            'internal')])
-                for quant in quants:
-                    current_value += quant.cost
-            else:
-                current_value = \
-                    self.product_template_id.standard_price * qty_available
-        self.current_value = current_value
+        for revaluation in self:
+            qty_available = 0
+            current_value = 0.0
+            for prod_variant in \
+                    revaluation.product_template_id.product_variant_ids:
+                qty_available += prod_variant.qty_available
+                if revaluation.product_template_id.cost_method == 'real':
+                    quants = quant_obj.search([('product_id', '=',
+                                                prod_variant.id),
+                                               ('location_id.usage', '=',
+                                                'internal')])
+                    for quant in quants:
+                        current_value += quant.cost
+                else:
+                    current_value = \
+                        revaluation.product_template_id.standard_price * \
+                        qty_available
+            revaluation.current_value = current_value
 
     name = fields.Char('Reference',
                        help="Reference for the journal entry",
@@ -78,7 +78,9 @@ class StockInventoryRevaluation(models.Model):
                           default='Inventory Revaluation',
                           states={'draft': [('readonly', False)]})
 
-    state = fields.Selection(selection=_STATES,
+    state = fields.Selection(selection=[('draft', 'Draft'),
+                                        ('posted', 'Posted'),
+                                        ('cancel', 'Cancelled')],
                              string='Status',
                              readonly=True,
                              required=True,
@@ -167,26 +169,28 @@ class StockInventoryRevaluation(models.Model):
              "the transaction created by the revaluation. The Decrease "
              "Account is used when the inventory value is decreased.")
 
-    move_id = fields.Many2one('account.move', 'Account move', readonly=True,
-                              copy=False)
+    account_move_id = fields.Many2one('account.move', 'Account move',
+                                      readonly=True, copy=False)
 
     reval_quant_ids = fields.One2many('stock.inventory.revaluation.quant',
                                       'revaluation_id',
                                       string='Revaluation line quants')
 
-    @api.one
+    @api.multi
     @api.depends("product_template_id", "product_template_id.standard_price")
     def _calc_current_cost(self):
-        self.current_cost = self.product_template_id.standard_price
+        for revaluation in self:
+            revaluation.current_cost = \
+                revaluation.product_template_id.standard_price
 
-    @api.one
+    @api.multi
     @api.constrains('product_template_id', 'company_id')
     def _check_is_stockable(self):
-        if self.product_template_id.type != 'product':
-            raise UserError(_('Configuration error!\nThe product must be '
-                              'stockable.'))
+        for revaluation in self:
+            if revaluation.product_template_id.type != 'product':
+                raise UserError(_('Configuration error!\nThe product must be '
+                                  'stockable.'))
 
-    @api.one
     @api.onchange("product_template_id")
     def _onchange_product_template_id(self):
         if self.product_template_id:
@@ -214,10 +218,10 @@ class StockInventoryRevaluation(models.Model):
     def _prepare_debit_move_line_data(self, amount, account_id, prod_id):
         return {
             'name': self.name,
-            'date': self.move_id.date,
+            'date': self.account_move_id.date,
             'product_id': prod_id,
             'account_id': account_id,
-            'move_id': self.move_id.id,
+            'move_id': self.account_move_id.id,
             'debit': amount
         }
 
@@ -225,10 +229,10 @@ class StockInventoryRevaluation(models.Model):
     def _prepare_credit_move_line_data(self, amount, account_id, prod_id):
         return {
             'name': self.name,
-            'date': self.move_id.date,
+            'date': self.account_move_id.date,
             'product_id': prod_id,
             'account_id': account_id,
-            'move_id': self.move_id.id,
+            'move_id': self.account_move_id.id,
             'credit': amount
         }
 
@@ -238,11 +242,11 @@ class StockInventoryRevaluation(models.Model):
         move_data = self._prepare_move_data(timenow)
         datas = self.env['product.template'].get_product_accounts(
             self.product_template_id.id)
-        self.move_id = self.env['account.move'].create(move_data).id
+        self.account_move_id = self.env['account.move'].create(move_data).id
         move_line_obj = self.env['account.move.line']
 
         if not self.decrease_account_id or not self.increase_account_id:
-            raise UserError(_("Please add a  Increase Account and "
+            raise UserError(_("Please add an Increase Account and "
                               "a Decrease Account."))
 
         for prod_variant in self.product_template_id.product_variant_ids:
@@ -262,52 +266,56 @@ class StockInventoryRevaluation(models.Model):
                     move_line_data = self._prepare_credit_move_line_data(
                         abs(amount_diff), credit_account_id, prod_variant.id)
                     move_line_obj.create(move_line_data)
-                    if self.move_id.journal_id.entry_posted:
-                        self.move_id.post()
+                    if self.account_move_id.journal_id.entry_posted:
+                        self.account_move_id.post()
 
-    @api.one
+    @api.multi
     def post(self):
+        for revaluation in self:
+            amount_diff = 0.0
+            if revaluation.product_template_id.cost_method == 'real':
+                for reval_quant in revaluation.reval_quant_ids:
+                    amount_diff += reval_quant.get_total_value()
+                    reval_quant.write_new_cost()
+                if amount_diff == 0.0:
+                    return True
+            else:
+                if revaluation.product_template_id.cost_method \
+                        in ['standard', 'average']:
 
-        amount_diff = 0.0
-        if self.product_template_id.cost_method == 'real':
-            for reval_quant in self.reval_quant_ids:
-                amount_diff += reval_quant.get_total_value()
-                reval_quant.write_new_cost()
-            if amount_diff == 0.0:
-                return True
-        else:
-            if self.product_template_id.cost_method in ['standard', 'average']:
+                    if revaluation.revaluation_type == 'price_change':
+                        diff = revaluation.current_cost - revaluation.new_cost
+                        amount_diff = revaluation.qty_available * diff
+                    else:
+                        amount_diff = \
+                            revaluation.current_value - revaluation.new_value
+                        if revaluation.new_value < 0:
+                            raise UserError(
+                                _("The new value for product %s cannot "
+                                  "be negative" %
+                                  revaluation.product_template_id.name))
+                        if revaluation.qty_available <= 0.0:
+                            raise UserError(
+                                _("Cannot do an inventory value change if the "
+                                  "quantity available for product %s "
+                                  "is 0 or negative" %
+                                  revaluation.product_template_id.name))
 
-                if self.revaluation_type == 'price_change':
-                    diff = self.current_cost - self.new_cost
-                    amount_diff = self.qty_available * diff
-                else:
-                    amount_diff = self.current_value - self.new_value
-                    if self.new_value < 0:
-                        raise UserError(_("The new value for product %s "
-                                          "cannot be negative"
-                                          % self.product_template_id.name))
-                    if self.qty_available <= 0.0:
-                        raise UserError(
-                            _("Cannot do an inventory value change if the "
-                              "quantity available for product %s "
-                              "is 0 or negative" %
-                              self.product_template_id.name))
+                    if revaluation.revaluation_type == 'price_change':
+                        revaluation.old_cost = revaluation.current_cost
+                        revaluation.product_template_id.write(
+                            {'standard_price': revaluation.new_cost})
+                    else:
+                        revaluation.old_cost = revaluation.current_cost
+                        revaluation.old_value = revaluation.current_value
+                        value_diff = revaluation.current_value - \
+                            revaluation.new_value
+                        new_cost = value_diff / revaluation.qty_available
+                        revaluation.product_template_id.write(
+                            {'standard_price': new_cost})
 
-                if self.revaluation_type == 'price_change':
-                    self.old_cost = self.current_cost
-                    self.product_template_id.write({'standard_price':
-                                                    self.new_cost})
-                else:
-                    self.old_cost = self.current_cost
-                    self.old_value = self.current_value
-                    value_diff = self.current_value - self.new_value
-                    new_cost = value_diff / self.qty_available
-                    self.product_template_id.write({'standard_price':
-                                                    new_cost})
-
-        if self.product_template_id.valuation == 'real_time':
-            self._create_accounting_entry(amount_diff)
+            if revaluation.product_template_id.valuation == 'real_time':
+                revaluation._create_accounting_entry(amount_diff)
 
     @api.model
     def create(self, values):
@@ -330,18 +338,19 @@ class StockInventoryRevaluation(models.Model):
     @api.multi
     def button_cancel(self):
         moves = self.env['account.move']
-        if self.move_id:
-            moves += self.move_id
-        for reval_quant in self.reval_quant_ids:
-            reval_quant.quant_id.write({'cost': reval_quant.old_cost})
-        if moves:
-            # second, invalidate the move(s)
-            moves.button_cancel()
-            # delete the move this revaluation was pointing to
-            # Note that the corresponding move_lines and move_reconciles
-            # will be automatically deleted too
-            moves.unlink()
-        self.write({'state': 'cancel'})
+        for revaluation in self:
+            if revaluation.account_move_id:
+                moves += revaluation.account_move_id
+            for reval_quant in revaluation.reval_quant_ids:
+                reval_quant.quant_id.write({'cost': reval_quant.old_cost})
+            if moves:
+                # second, invalidate the move(s)
+                moves.button_cancel()
+                # delete the move this revaluation was pointing to
+                # Note that the corresponding move_lines and move_reconciles
+                # will be automatically deleted too
+                moves.unlink()
+            revaluation.state = 'cancel'
         return True
 
 
