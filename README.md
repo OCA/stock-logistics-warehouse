@@ -22,8 +22,8 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[stock_available](stock_available/) | 9.0.1.0.0 | Stock available to promise
-[stock_available_immediately](stock_available_immediately/) | 9.0.1.0.0 | Ignore planned receptions in quantity available to promise
+[stock_available](stock_available/) | 9.0.1.0.1 | Stock available to promise
+[stock_available_immediately](stock_available_immediately/) | 9.0.1.1.0 | Ignore planned receptions in quantity available to promise
 
 Unported addons
 ---------------
