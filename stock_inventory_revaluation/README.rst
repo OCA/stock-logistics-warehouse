@@ -39,6 +39,11 @@ Usage
 * Go to *Inventory / Inventory Control / Inventory Revaluation / Products*
   to create a new Inventory Revaluation.
 
+* In order to post the inventory revaluation for multiple items at once,
+  select the records in the tree view and go to 'More / Post Inventory
+  Revaluations'.
+
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/154/8.0
