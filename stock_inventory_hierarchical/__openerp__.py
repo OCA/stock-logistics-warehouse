@@ -11,9 +11,9 @@
     "category": "Warehouse Management",
     "data": ["views/stock_inventory_view.xml",
              "wizard/generate_inventory_view.xml"],
-    "images": ["inventory_form.png",
-               "inventory_form_actions.png",
-               "wizard.png"],
+    "images": ["images/inventory_form.png",
+               "images/inventory_form_actions.png",
+               "images/wizard.png"],
     'license': 'AGPL-3',
     'installable': True
 }
