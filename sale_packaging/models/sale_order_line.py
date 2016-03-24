@@ -82,6 +82,7 @@ class SaleOrderLine(models.Model):
         return vals
 
     @api.model
+    @api.returns('self', lambda rec: rec.id)
     def create(self, vals):
         return super(SaleOrderLine, self).create(self.update_vals(vals))
 
