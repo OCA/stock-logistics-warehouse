@@ -184,6 +184,7 @@ class PurchaseOrderLine(models.Model):
         return vals
 
     @api.model
+    @api.returns('self', lambda rec: rec.id)
     def create(self, vals):
         if 'product_qty' not in vals and 'product_purchase_qty' in vals:
             # compute product_qty to avoid inverse computation and reset to 1
