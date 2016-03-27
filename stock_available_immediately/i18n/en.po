@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 01:43+0000\n"
-"PO-Revision-Date: 2016-02-26 12:25+0000\n"
+"POT-Creation-Date: 2016-03-23 01:46+0000\n"
+"PO-Revision-Date: 2016-03-22 09:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -21,3 +21,8 @@ msgstr ""
 #: model:ir.model,name:stock_available_immediately.model_product_product
 msgid "Product"
 msgstr "Product"
+
+#. module: stock_available_immediately
+#: model:ir.model,name:stock_available_immediately.model_product_template
+msgid "Product Template"
+msgstr "Product Template"
