@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, api, _
+from openerp.exceptions import ValidationError
 
 
 class StockChangeProductQty(models.TransientModel):
@@ -22,7 +23,7 @@ class StockChangeProductQty(models.TransientModel):
                 ('fixed_location_id', 'child_of', location_id),
             ])
             if len(putaway_ids) > 1:
-                raise osv.except_osv(_('Error!'), _(
+                raise ValidationError(_('Error!'), _(
                     'Multiple fixed locations for this product !!'))
             new_location_id = putaway_ids.fixed_location_id.id
 
