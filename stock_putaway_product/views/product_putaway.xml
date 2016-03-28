@@ -4,7 +4,7 @@
 
         <record id="product_putaway_strategy_view_form" model="ir.ui.view">
             <field name="name">product_putaway_strategy_view_form</field>
-            <field name="model">stock.product.putaway.strat</field>
+            <field name="model">stock.product.putaway.strategy</field>
             <field name="arch" type="xml">
                 <form string="Product putaway stragegy">
                     <group>

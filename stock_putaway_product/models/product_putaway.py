@@ -18,7 +18,7 @@ class ProductPutawayStrategy(models.Model):
         return ret + [('per_product', 'Fixed per product location')]
 
     product_location_ids = fields.One2many(
-        comodel_name='stock.product.putaway.strat',
+        comodel_name='stock.product.putaway.strategy',
         inverse_name='putaway_id',
         string='Fixed per product location',
         copy=True)
@@ -28,22 +28,22 @@ class ProductPutawayStrategy(models.Model):
         required=True)
 
     @api.model
-    def putaway_apply(self, putaway_strat, product):
-        if putaway_strat.method == 'per_product':
-            strat_domain = [
-                ('putaway_id', '=', putaway_strat.id),
+    def putaway_apply(self, putaway_strategy, product):
+        if putaway_strategy.method == 'per_product':
+            strategy_domain = [
+                ('putaway_id', '=', putaway_strategy.id),
                 ('product_product_id', '=', product.id),
             ]
-            for strat in putaway_strat.product_location_ids.search(
-                    strat_domain, limit=1):
-                return strat.fixed_location_id.id
+            for strategy in putaway_strategy.product_location_ids.search(
+                    strategy_domain, limit=1):
+                return strategy.fixed_location_id.id
         else:
             return super(ProductPutawayStrategy, self).putaway_apply(
-                putaway_strat, product)
+                putaway_strategy, product)
 
 
 class FixedPutawayStrat(models.Model):
-    _name = 'stock.product.putaway.strat'
+    _name = 'stock.product.putaway.strategy'
     _rec_name = 'product_product_id'
 
     _sql_constraints = [(

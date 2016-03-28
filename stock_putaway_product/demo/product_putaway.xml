@@ -14,8 +14,8 @@
                    ref="product_putaway_per_product"/>
         </record>
 
-        <record id="product_putaway_strat_product_4"
-                model="stock.product.putaway.strat">
+        <record id="product_putaway_strategy_product_4"
+                model="stock.product.putaway.strategy">
             <field name="product_product_id"
                    ref="product.product_product_4"/>
             <field name="product_template_id"

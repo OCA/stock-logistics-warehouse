@@ -11,7 +11,7 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     product_putaway_ids = fields.One2many(
-        comodel_name='stock.product.putaway.strat',
+        comodel_name='stock.product.putaway.strategy',
         related='product_variant_ids.product_putaway_ids',
         string="Product stock locations")
 
@@ -20,6 +20,6 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     product_putaway_ids = fields.One2many(
-        comodel_name='stock.product.putaway.strat',
+        comodel_name='stock.product.putaway.strategy',
         inverse_name='product_product_id',
         string="Product stock locations")
