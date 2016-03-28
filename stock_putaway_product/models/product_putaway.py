@@ -13,7 +13,7 @@ class ProductPutawayStrategy(models.Model):
     @api.model
     def _get_putaway_options(self):
         ret = super(ProductPutawayStrategy, self)._get_putaway_options()
-        return ret + [('byproduct', 'Fixed per product location')]
+        return ret + [('per_product', 'Fixed per product location')]
 
     product_location_ids = fields.One2many(
         comodel_name='stock.product.putaway.strat',
@@ -27,7 +27,7 @@ class ProductPutawayStrategy(models.Model):
 
     @api.model
     def putaway_apply(self, putaway_strat, product):
-        if putaway_strat.method == 'byproduct':
+        if putaway_strat.method == 'per_product':
             strat_domain = [
                 ('putaway_id', '=', putaway_strat.id),
                 ('product_product_id', '=', product.id),
@@ -58,15 +58,18 @@ class FixedPutawayStrat(models.Model):
     putaway_id = fields.Many2one(
         comodel_name='product.putaway',
         sting='Put Away Method',
-        required=True)
+        required=True,
+        select=True)
     product_template_id = fields.Many2one(
         comodel_name='product.template',
         string='Product Template',
+        select=True,
         required=True)
     product_product_id = fields.Many2one(
         comodel_name='product.product',
         string='Product Variant',
         required=True,
+        select=True,
         domain=[('product_tmpl_id', '=', 'product_template_id.id')])
     fixed_location_id = fields.Many2one(
         comodel_name='stock.location',

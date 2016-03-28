@@ -18,4 +18,7 @@
         'views/product_putaway.xml',
         'security/ir.model.access.csv',
     ],
+    'demo': [
+        'demo/product_putaway.xml',
+    ]
 }
