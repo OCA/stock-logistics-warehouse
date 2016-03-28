@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# © 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
 
@@ -47,7 +49,7 @@ class FixedPutawayStrat(models.Model):
     _sql_constraints = [(
         'putaway_product_unique',
         'unique(putaway_id,product_product_id)',
-        _('There can be only one fixed location per product!')
+        _('There can only be one fixed location per product!')
     )]
 
     @api.model

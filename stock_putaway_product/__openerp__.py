@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+# © 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     'name': 'Putaway strategy per product',
-    'summary': 'Set a product location per product',
-    'version': '8.0.0.1',
+    'summary': 'Set a product location and put-away strategy per product',
+    'version': '8.0.1.0.0',
     'category': 'Inventory',
     'website': 'http://www.apertoso.be',
     'author': 'Apertoso N.V., Odoo Community Association (OCA)',

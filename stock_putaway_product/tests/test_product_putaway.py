@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# © 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp.tests import common
 
@@ -6,9 +8,9 @@ from openerp.tests import common
 class TestProductPutaway(common.TransactionCase):
     # Check if "per_product" is a valid putaway method
     def test_01_putaway_methods(self):
-        selection_field_items = [item[0] for item in self.env[
-            'product.putaway'].method.get_values()]
-        self.assertIn('per_product', selection_field_items)
+        field_method = self.env[
+            'product.putaway']._fields.get('method')
+        self.assertIn('per_product', field_method.get_values(self.env))
 
     def test_02_putway_apply(self):
         putaway_per_product = self.browse_ref(
@@ -21,7 +23,7 @@ class TestProductPutaway(common.TransactionCase):
         self.assertEqual(
             self.env['product.putaway'].putaway_apply(
                 putaway_per_product, product_ipad),
-            location_shelf1)
+            location_shelf1.id)
 
     def test_03_stock_change_product_qty_default(self):
         product_ipad = self.browse_ref(
@@ -31,13 +33,11 @@ class TestProductPutaway(common.TransactionCase):
 
         wiz_obj = self.env['stock.change.product.qty']
 
-        fields = [f[0] for f in wiz_obj._fields]
         test_context = {
             'active_model': 'product.product',
             'active_id': product_ipad.id,
         }
-
-        res = wiz_obj.with_context(test_context).default_get(fields)
+        wiz_instance = wiz_obj.with_context(test_context).create({})
         self.assertEqual(
-            res.get('location_id'),
-            location_shelf1.id)
+            wiz_instance.location_id,
+            location_shelf1)
