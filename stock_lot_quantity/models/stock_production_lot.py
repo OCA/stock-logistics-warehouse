@@ -20,7 +20,5 @@ class StockProductionLot(models.Model):
     def _get_lot_qty(self):
         """Compute the quantities for production lots."""
         for lot in self:
-            context = dict(self.env.context, lot_id=lot.id)
             lot.qty_available = lot.with_context(
-                context
-                ).product_id.qty_available
+                lot_id=lot.id).product_id.qty_available
