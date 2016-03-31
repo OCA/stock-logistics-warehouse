@@ -16,17 +16,14 @@ class StockChangeProductQty(models.TransientModel):
 
         product_product_id = res.get('product_id')
         location_id = res.get('location_id')
-        new_location_id = False
 
         if product_product_id and location_id:
             putaway_ids = self.env['stock.product.putaway.strategy'].search([
                 ('product_product_id', '=', product_product_id),
                 ('fixed_location_id', 'child_of', location_id),
             ])
-            putaway_ids.ensure_one()
-            new_location_id = putaway_ids.fixed_location_id.id
-
-        if new_location_id:
-            res.update({'location_id': new_location_id})
+            if putaway_ids:
+                putaway_ids.ensure_one()
+                res.update({'location_id': putaway_ids.fixed_location_id.id})
 
         return res
