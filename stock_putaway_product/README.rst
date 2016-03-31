@@ -16,6 +16,10 @@ specific putaway strategy and location id for the product.
 A putaway strategy can be used to ensure that incoming products will be
 stored in the location set on the product form.
 
+A recommended set-up is to create a separate putaway strategy for each
+warehouse. This will ensure that the same product will be placed in the
+appropriate location in each warehouse it is received.
+
 Installation
 ============
 
