@@ -14,7 +14,7 @@ class TestProductPutaway(common.TransactionCase):
 
     def test_02_putway_apply(self):
         putaway_per_product = self.browse_ref(
-            'stock_putaway_product.product_putaway_per_product')
+            'stock_putaway_product.product_putaway_per_product_wh')
         product_ipad = self.browse_ref(
             'product.product_product_4')
         location_shelf1 = self.browse_ref(
