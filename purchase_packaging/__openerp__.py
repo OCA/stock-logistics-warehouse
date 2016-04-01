@@ -33,6 +33,7 @@
     "data": ["views/product_views.xml",
              "views/purchase_views.xml",
              ],
+    "post_init_hook": "set_product_purchase_qty",
     "license": "AGPL-3",
     "installable": True,
     "application": False,
