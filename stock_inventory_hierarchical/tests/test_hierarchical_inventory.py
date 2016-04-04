@@ -47,7 +47,7 @@ class TestHierarchicalInventory(SavepointCase):
                 # Create sub-locations in each location
                 for n in range(NB_SUB_LOCS):
                     new_loc = defered_loc_obj.create(
-                        {'name': 'Sub location %d-%d' % (depth, n),
+                        {'name': '%s-%d' % (location.name, n),
                          'location_id': location.id,
                          'company_id': main_company_id,
                          'usage': ((depth % STRIDE_INTERNAL) and 'internal' or
@@ -79,13 +79,13 @@ class TestHierarchicalInventory(SavepointCase):
 
     def test_recursion(self):
         # Putting an inventory inside one of it's children must fail
-        main_inv = self._call_wizard(2, True)
+        main_inv = self._call_wizard(2, only_view=True)
         with self.assertRaises(ValidationError):
             main_inv.parent_id = main_inv.inventory_ids[0]
 
     def test_states(self):
         """Parent and children states must be consistent"""
-        main_inv = self._call_wizard(MAX_DEPTH + 1, True)
+        main_inv = self._call_wizard(MAX_DEPTH + 1, only_view=True)
         children = self.env['stock.inventory'].search(
             [('parent_id', 'child_of', main_inv.id),
              ('id', '!=', main_inv.id)])
@@ -116,7 +116,7 @@ class TestHierarchicalInventory(SavepointCase):
     def test_wizard(self):
         """Check the wizard makes a correct hierarchy"""
         # Check with a hierarchy based on all locations
-        main_inv = self._call_wizard(MAX_DEPTH + 1, False)
+        main_inv = self._call_wizard(MAX_DEPTH + 1, only_view=False)
         self.assertEqual(len(main_inv.inventory_ids), NB_SUB_LOCS)
         children = self.env['stock.inventory'].search(
             [('parent_id', 'child_of', main_inv.id),
@@ -126,7 +126,7 @@ class TestHierarchicalInventory(SavepointCase):
             self.nb_locations['view'] + self.nb_locations['internal'])
 
         # Check with a hierarchy based on views only
-        main_inv = self._call_wizard(MAX_DEPTH + 1, True)
+        main_inv = self._call_wizard(MAX_DEPTH + 1, only_view=True)
         children = self.env['stock.inventory'].search(
             [('parent_id', 'child_of', main_inv.id),
              ('id', '!=', main_inv.id)])
@@ -154,23 +154,30 @@ class TestHierarchicalInventory(SavepointCase):
 
     def test_prepare_hierarchy(self):
         """Preparing the parent should prepare all the children"""
-        main_inv = self._call_wizard(MAX_DEPTH + 1, True)
-        children = self.env['stock.inventory'].search(
-            [('parent_id', 'child_of', main_inv.id)])
+        main_inv = self._call_wizard(MAX_DEPTH + 1, only_view=True)
         main_inv.prepare_inventory()
+        children = self.env['stock.inventory'].search(
+            [('id', 'child_of', main_inv.id), ('id', '!=', main_inv.id)])
         for child in children:
-            self.assertEqual(child.state, 'confirm',
-                             "Child: %s" % child.name)
-        # check we can change the quantities (set to 0)
+            self.assertTrue(child.line_ids, "%s has no lines" % child.name)
+            self.assertEqual(child.state, 'confirm', "Child: %s" % child.name)
+
+    def test_action_done_hierarchy(self):
+        """Test the inventory can be done"""
+        main_inv = self._call_wizard(3, only_view=True)
+        main_inv.prepare_inventory()
         for inventories in [main_inv.inventory_ids.mapped("inventory_ids"),
                             main_inv.inventory_ids,
                             main_inv]:
-            inventories.reset_real_qty()
-            inventories.action_done()
+            for line in inventories.mapped("line_ids"):
+                line.product_qty = 24.0
+                self.assertEqual(line.product_qty, 24.0)
+            for inventory in inventories:
+                inventory.action_done()
 
     def test_children_dates(self):
         """Children should all have the same dates as their parents"""
-        main_inv = self._call_wizard(MAX_DEPTH + 1, True)
+        main_inv = self._call_wizard(MAX_DEPTH + 1, only_view=True)
         children = self.env['stock.inventory'].search(
             [('parent_id', 'child_of', main_inv.id)])
         main_inv.prepare_inventory()
@@ -180,7 +187,7 @@ class TestHierarchicalInventory(SavepointCase):
 
     def test_cancel(self):
         """Children must be canceled (draft) when the parent is canceled."""
-        main_inv = self._call_wizard(MAX_DEPTH + 1, True)
+        main_inv = self._call_wizard(MAX_DEPTH + 1, only_view=True)
         children = self.env['stock.inventory'].search(
             [('parent_id', 'child_of', main_inv.id)])
         main_inv.prepare_inventory()
