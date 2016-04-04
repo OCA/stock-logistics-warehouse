@@ -47,7 +47,7 @@ class GenerateInventoryWizard(models.TransientModel):
         return warehouse_ids.lot_stock_id.id
 
     _sql_constraints = [
-        ('level', 'CHECK (level>0)', 'Level must be positive!'),
+        ('level', 'check (level>0)', 'Level must be positive!'),
     ]
 
     @api.model
