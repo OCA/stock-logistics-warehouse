@@ -21,10 +21,10 @@
 from openerp.osv import orm
 from openerp.tools.translate import _
 
-from stock_inventory_hierarchical import HierarchicalInventoryException
+from openerp.addons.stock_inventory_hierarchical.exceptions import HierarchicalInventoryException
 
 # Add the date to the list of fields we must propagate to children inventories
-from stock_inventory_hierarchical import PARENT_VALUES
+from openerp.addons.stock_inventory_hierarchical.hierarchical_inventory import PARENT_VALUES
 PARENT_VALUES.append('exhaustive')
 
 
