@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_stock_generate_inventory_echaustive" model="ir.ui.view">
+            <field name="name">Generate Inventory: exhaustive check box</field>
+            <field name="model">stock.generate.inventory</field>
+            <field name="inherit_id"
+                ref="stock_inventory_hierarchical.view_stock_generate_inventory" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_id']" position="after">
+                    <field name="exhaustive" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
