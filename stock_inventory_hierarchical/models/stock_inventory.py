@@ -212,6 +212,8 @@ class HierarchicalInventory(models.Model):
                     [('parent_left', '>', inventory.parent_left),
                      ('parent_right', '<', inventory.parent_right),
                      ('state', '!=', 'confirm')])
+                # We made a SQL UPDATE, the cache is not up-to-date
+                children.invalidate_cache()
                 children.write({'state': 'confirm', 'date': inventory.date})
         _logger.debug("Inventory prepared")
         return result
