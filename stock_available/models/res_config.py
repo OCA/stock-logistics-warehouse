@@ -23,6 +23,14 @@ class StockConfig(models.TransientModel):
              "If the modules sale and sale_delivery_date are not "
              "installed, this will install them too")
 
+    module_stock_available_lot_locked = fields.Boolean(
+        string='Exclude blocked lots/serial numbers',
+        help="This will subtract quantities from the blocked "
+             "lots/serial numbers from the quantities available to promise.\n"
+             "This installs the modules stock_available_lot_locked.\n"
+             "If the module stock_lock_lot is not installed, this will install"
+             "it too")
+
     module_stock_available_mrp = fields.Boolean(
         string='Include the production potential',
         help="This will add the quantities of goods that can be "
