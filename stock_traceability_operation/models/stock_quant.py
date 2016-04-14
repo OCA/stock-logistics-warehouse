@@ -56,7 +56,7 @@ class StockQuant(models.Model):
         if not report_ids:
             return False
         return {
-            'domain': str([('id', 'in', report_ids)]),
+            'domain': [('id', 'in', report_ids)],
             'name': _('Traceability'),
             'view_mode': 'tree',
             'view_type': 'form',

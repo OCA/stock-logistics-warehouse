@@ -2,8 +2,6 @@
 # © 2015 Numérigraphe
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.tools.safe_eval import safe_eval
-
 from openerp.addons.stock.tests.common import TestStockCommon
 
 
@@ -77,8 +75,7 @@ class TestTraceability(TestStockCommon):
         """Test that report is correct when only the inventory is done."""
         # Check all the actions yield correct results
         for action in self._get_actions_to_test():
-            history = self.env[action['res_model']].search(
-                safe_eval(action['domain']))
+            history = self.env[action['res_model']].search(action['domain'])
             self.assertEqual(len(history), 2,
                              "There should be 2 lines reported")
             self.assertEqual(
@@ -107,8 +104,7 @@ class TestTraceability(TestStockCommon):
                          "One quant should be created")
         # Check all the actions yield correct results
         for action in self._get_actions_to_test():
-            history = self.env[action['res_model']].search(
-                safe_eval(action['domain']))
+            history = self.env[action['res_model']].search(action['domain'])
             self.assertEqual(
                 len(history), 3,
                 "There should be 3 line reported")
@@ -173,8 +169,7 @@ class TestTraceability(TestStockCommon):
 
         # Check all the actions yield correct results
         for action in self._get_actions_to_test():
-            history = self.env[action['res_model']].search(
-                safe_eval(action['domain']))
+            history = self.env[action['res_model']].search(action['domain'])
             self.assertGreaterEqual(
                 len(history), 3,
                 "There should be 3 lines or more reported:"
