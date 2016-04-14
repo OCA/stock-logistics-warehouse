@@ -1,48 +1,19 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    This module is copyright (C) 2013 Numérigraphe SARL. All Rights Reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2013-2016 Numérigraphe SARL
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Hierarchical Physical Inventory",
-    "summary": "Group several Physical Inventories in a master inventory",
-    "version": "7.0.1.1.0",
+    "name": "Hierarchical Inventory adjustments",
+    "summary": "Group several Inventory adjustments in a master inventory",
+    "version": "8.0.2.0.0",
     "depends": ["stock"],
     "author": u"Numérigraphe,Odoo Community Association (OCA)",
     "category": "Warehouse Management",
-    "description": """
-Hierarchical structure for Physical Inventories and sub-Inventories
-===================================================================
-
-This module adds a parent-child relationship between Physical Inventories, to
-help users manage complex inventories.
-Using several inventories, you can distribute the counting to several persons
-and still keep a clear overview of global Inventory's status.
-
-OpenERP will make sure the status of the Inventory and it's Sub-Inventories are
-consistent.
-""",
-    "data": ["hierarchical_inventory_view.xml"],
-    "test": ["test/hierarchical_inventory_test.yml"],
-    "demo": ["hierarchical_inventory_demo.xml"],
-    "images": [
-        "inventory_form.png",
-        "inventory_form_actions.png",
-    ],
-    "installable": False,
+    "data": ["views/stock_inventory_view.xml",
+             "wizard/generate_inventory_view.xml"],
+    "images": ["images/inventory_form.png",
+               "images/inventory_form_actions.png",
+               "images/wizard.png"],
+    'license': 'AGPL-3',
+    'installable': True
 }
