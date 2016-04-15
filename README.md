@@ -27,6 +27,8 @@ addon | version | summary
 [stock_available_immediately](stock_available_immediately/) | 8.0.2.0.1 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 8.0.3.0.0 | Consider the production potential is available to promise
 [stock_available_sale](stock_available_sale/) | 8.0.3.0 | Quotations in quantity available to promise
+[stock_inventory_hierarchical](stock_inventory_hierarchical/) | 8.0.2.0.0 | Group several Inventory adjustments in a master inventory
+[stock_inventory_lockdown](stock_inventory_lockdown/) | 8.0.1.0.0 | Lock down stock locations during inventories.
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 8.0.1.0.0 | More filters for inventory adjustments
 [stock_location_area_data](stock_location_area_data/) | 8.0.0.1.0 | Add surface units of measure
 [stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 | Enter a location's area based on different units of measure
@@ -43,7 +45,6 @@ addon | version | summary
 --- | --- | ---
 [base_product_merge](base_product_merge/) | 1.0 (unported) | Base Products Merge
 [configurable_stock_level](configurable_stock_level/) | 0.1 (unported) | name
-[stock_inventory_hierarchical](stock_inventory_hierarchical/) | 7.0.1.1.0 (unported) | Group several Physical Inventories in a master inventory
 [stock_inventory_hierarchical_location](stock_inventory_hierarchical_location/) | 7.0.1.1.0 (unported) | Extra consistency checks
 [stock_inventory_location](stock_inventory_location/) | 7.0.1.1.0 (unported) | Remove from the stock what is not in the Physical Inventory.
 [stock_lot_valuation](stock_lot_valuation/) | 0.1 (unported) | Lot Valuation
