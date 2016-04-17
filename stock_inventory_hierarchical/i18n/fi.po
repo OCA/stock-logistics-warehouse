@@ -10,27 +10,27 @@ msgstr ""
 "POT-Creation-Date: 2016-04-15 02:42+0000\n"
 "PO-Revision-Date: 2016-04-14 14:54+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr/)\n"
+"Language-Team: Finnish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Peruuta"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_uid:0
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Luonut"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_date:0
 msgid "Created on"
-msgstr "Créé le"
+msgstr "Luotu"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:91
@@ -49,7 +49,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,id:0
 msgid "ID"
-msgstr "Id."
+msgstr "ID"
 
 #. module: stock_inventory_hierarchical
 #: help:stock.generate.inventory,only_view:0
@@ -59,7 +59,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: model:ir.model,name:stock_inventory_hierarchical.model_stock_inventory
 msgid "Inventory"
-msgstr "Inventaire"
+msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/wizard/generate_inventory.py:125
@@ -80,12 +80,12 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_uid:0
 msgid "Last Updated by"
-msgstr "Mis à jour par"
+msgstr "Viimeksi päivittänyt"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_date:0
 msgid "Last Updated on"
-msgstr "Mis à jour le"
+msgstr "Viimeksi päivitetty"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,level:0
@@ -200,7 +200,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
 msgid "or"
-msgstr "ou"
+msgstr "tai"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
