@@ -63,13 +63,13 @@ class TestTraceability(TestStockCommon):
         - "traceability" button from lot form
         - "history" button from quant form
         """
-        product_action = self.productA.action_view_stock_moves()
-        tmpl_action = self.productA.product_tmpl_id.action_view_stock_moves()
+        product = self.productA
+        template = self.productA.product_tmpl_id
+        lot = self.lot
         quants = self.env['stock.quant'].search(
             [('product_id', '=', self.productA.id)])
-        lot_action = self.lot.action_traceability()
-        quant_action = quants.action_view_quant_history()
-        return [product_action, tmpl_action, lot_action, quant_action]
+        return [record.action_traceability_operation()
+                for record in [product, template, lot, quants]]
 
     def test_with_inventory_only(self):
         """Test that report is correct when only the inventory is done."""

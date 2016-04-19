@@ -19,10 +19,10 @@ Usage
 
 The improved views are accessible in the following places:
 
-* Warehouse (and most other apps) > Product > form view > button "Moves"
-* Warehouse (and most other apps) > Configuration > Product Variants > form view > button "Moves"
-* Warehouse > Traceability > Serial Number/Lot > form view > button "Traceability"
-* Warehouse > Traceability > Quants > form view > button "Quant history"
+* Warehouse (and most other apps) > Product > form view > button "Detailed traceability"
+* Warehouse (and most other apps) > Configuration > Product Variants > form view > button "Detailed traceability"
+* Warehouse > Traceability > Serial Number/Lot > form view > button "Detailed traceability"
+* Warehouse > Traceability > Quants > form view > button "Detailed traceability"
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

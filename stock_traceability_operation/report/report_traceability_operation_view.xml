@@ -6,7 +6,7 @@
 <data>
 
 <record id="report_stock_traceability_operation_search" model="ir.ui.view">
-    <field name="name">Traceability with operations: search</field>
+    <field name="name">Detailed traceability: search</field>
     <field name="model">report.stock.traceability_operation</field>
     <field name="arch" type="xml">
         <search string="Stock Moves">
@@ -37,7 +37,7 @@
 </record>
 
 <record id="report_stock_traceability_operation_tree" model="ir.ui.view">
-    <field name="name">Traceability with operations: tree</field>
+    <field name="name">Detailed traceability: tree</field>
     <field name="model">report.stock.traceability_operation</field>
     <field name="arch" type="xml">
         <tree colors="grey:state == 'cancel';red:(state not in ('cancel','done')) and date > current_date" string="Moves and operations" create="false">

@@ -8,7 +8,7 @@ from openerp.addons import decimal_precision as dp
 
 class ReportStockTraceabilityOperation(models.TransientModel):
     _name = 'report.stock.traceability_operation'
-    _description = "Traceability"
+    _description = "Detailed traceability"
     _order = 'date, move_id, operation_id'
 
     name = fields.Char('Move description')

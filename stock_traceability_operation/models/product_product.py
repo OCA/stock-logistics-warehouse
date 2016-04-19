@@ -9,9 +9,8 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     @api.multi
-    def action_view_stock_moves(self):
+    def action_traceability_operation(self):
         """Return an action on the report"""
-        # We have no super() to call, the standard opens a list of moves
-        moves = self.env['stock.move'].search(
+        quants = self.env['stock.quant'].search(
             [('product_id', 'in', self.ids)])
-        return moves.mapped('quant_ids').action_view_quant_history()
+        return quants.action_traceability_operation()

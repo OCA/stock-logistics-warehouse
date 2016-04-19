@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2015 Numérigraphe
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="stock_quant_traceability_operation">
+    <field name="name">Add operation traceability on quants</field>
+    <field name="model">stock.quant</field>
+    <field name="inherit_id" ref="stock.view_stock_quant_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//button[@name='action_view_quant_history']" position="after">
+            <button class="oe_inline oe_stat_button" string="Detailed traceability"
+                name="action_traceability_operation" type="object" icon="fa-arrows-v"/>
+        </xpath>
+    </field>
+</record>
+
+</data>
+</openerp>

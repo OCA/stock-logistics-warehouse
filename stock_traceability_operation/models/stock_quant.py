@@ -10,12 +10,8 @@ class StockQuant(models.Model):
     _inherit = "stock.quant"
 
     @api.multi
-    def action_view_quant_history(self):
-        """Replace the action on stock moves into an action on the report
-
-        We are **not calling super()**, on purpose: changing the domain string
-        is too complex for the gain it brings.
-        """
+    def action_traceability_operation(self):
+        """Return an action directing to the traceability report"""
         report_obj = self.env['report.stock.traceability_operation']
         report_ids = []
         for move in self.mapped('history_ids'):
@@ -53,11 +49,9 @@ class StockQuant(models.Model):
                      'location_id': move.location_id.id,
                      'location_dest_id': move.location_dest_id.id})
                 report_ids.append(report_obj.create(report_vals).id)
-        if not report_ids:
-            return False
         return {
             'domain': [('id', 'in', report_ids)],
-            'name': _('Traceability'),
+            'name': _('Detailed traceability'),
             'view_mode': 'tree',
             'view_type': 'form',
             'res_model': 'report.stock.traceability_operation',
