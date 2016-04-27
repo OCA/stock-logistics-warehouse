@@ -16,6 +16,7 @@ class TestPotentialQty(TransactionCase):
         self.bom_model = self.env["mrp.bom"]
         self.bom_line_model = self.env["mrp.bom.line"]
         self.stock_quant_model = self.env["stock.quant"]
+        self.config = self.env['ir.config_parameter']
 
         self.setup_demo_data()
 
@@ -394,3 +395,73 @@ class TestPotentialQty(TransactionCase):
 
         p1.refresh()
         self.assertEqual(24, p1.potential_qty)
+
+    def test_component_stock_choice(self):
+        # Test to change component stock for compute BOM stock
+
+        # Get a demo product with outgoing move (qty: 3)
+        imac = self.browse_ref('product.product_product_8')
+
+        # Set on hand qty
+        self.create_inventory(imac.id, 3)
+
+        # Create a product with BOM
+        p1 = self.product_model.create({
+            'name': 'Test product with BOM',
+        })
+        bom_p1 = self.bom_model.create({
+            'product_tmpl_id': p1.product_tmpl_id.id,
+            'product_id': p1.id,
+            'product_qty': 1,
+            'product_uom': self.ref('product.product_uom_unit'),
+        })
+
+        # Need 1 iMac for that
+        p1_bom_line = self.bom_line_model.create({
+            'bom_id': bom_p1.id,
+            'product_id': imac.id,
+            'product_qty': 1,
+            'product_uom': self.ref('product.product_uom_unit'),
+        })
+
+        # Default component is qty_available
+        p1.refresh()
+        self.assertEqual(3.0, p1.potential_qty)
+
+        # Change to immediately usable
+        self.config.set_param('stock_available_mrp_based_on',
+                              'immediately_usable_qty')
+
+        p1.refresh()
+        self.assertEqual(0.0, p1.potential_qty)
+
+        # If iMac has a Bom and can be manufactured
+        imac_component = self.product_model.create({
+            'name': 'iMac component',
+        })
+        self.create_inventory(imac_component.id, 5)
+
+        imac_bom = self.bom_model.create({
+            'product_tmpl_id': imac.product_tmpl_id.id,
+            'product_id': imac.id,
+            'product_qty': 1,
+            'product_uom': self.ref('product.product_uom_unit'),
+        })
+        p1_bom_line.type = 'phantom'
+
+        # Need 1 imac_component for iMac
+        self.bom_line_model.create({
+            'bom_id': imac_bom.id,
+            'product_id': imac_component.id,
+            'product_qty': 1,
+            'product_uom': self.ref('product.product_uom_unit'),
+        })
+
+        p1.refresh()
+        self.assertEqual(5.0, p1.potential_qty)
+
+        # Changing to virtual (same as immediately in current config)
+        self.config.set_param('stock_available_mrp_based_on',
+                              'virtual_available')
+        p1.refresh()
+        self.assertEqual(5.0, p1.potential_qty)
