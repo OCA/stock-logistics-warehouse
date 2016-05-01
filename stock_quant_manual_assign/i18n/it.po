@@ -3,81 +3,81 @@
 # * stock_quant_manual_assign
 # 
 # Translators:
-# danimaribeiro <danimaribeiro@gmail.com>, 2015
+# Paolo Valier, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 01:03+0000\n"
-"PO-Revision-Date: 2016-04-27 10:59+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/pt_BR/)\n"
+"POT-Creation-Date: 2016-05-01 15:24+0000\n"
+"PO-Revision-Date: 2016-05-13 12:57+0000\n"
+"Last-Translator: Paolo Valier\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Annulla"
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr "Conferma"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,create_uid:0
 #: field:assign.manual.quants.lines,create_uid:0
 msgid "Created by"
-msgstr "Criado por"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,create_date:0
 #: field:assign.manual.quants.lines,create_date:0
 msgid "Created on"
-msgstr "Criado em"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,display_name:0
 #: field:assign.manual.quants.lines,display_name:0
 msgid "Display Name"
-msgstr "Display Name"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,id:0 field:assign.manual.quants.lines,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,__last_update:0
 #: field:assign.manual.quants.lines,__last_update:0
 msgid "Last Modified on"
-msgstr "Last Modified on"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_uid:0
 #: field:assign.manual.quants.lines,write_uid:0
 msgid "Last Updated by"
-msgstr "Última atualização por"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_date:0
 #: field:assign.manual.quants.lines,write_date:0
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,location_id:0
 msgid "Location"
-msgstr "Location"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,lot_id:0
 msgid "Lot"
-msgstr "Lot"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -94,58 +94,58 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,assign_wizard:0
 msgid "Move"
-msgstr "Movimentações"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,name:0
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,package_id:0
 msgid "Package"
-msgstr "Package"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
 msgid "Picking List"
-msgstr "Lista de separação"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,qty:0
 msgid "QTY"
-msgstr "QTD"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,quant:0
 msgid "Quant"
-msgstr "Quant"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
 #, python-format
 msgid "Quantity is higher than the needed one"
-msgstr "Quantidade é maior que o necessário"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,quants_lines:0
 msgid "Quants"
-msgstr "Quants"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,move_qty:0
 msgid "Remaining qty"
-msgstr "Remaining qty"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,lines_qty:0
 msgid "Reserved qty"
-msgstr "Reserved qty"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,selected:0
 msgid "Select"
-msgstr "Selecione"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_move
@@ -155,7 +155,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: help:assign.manual.quants.lines,package_id:0
 msgid "The package containing this quant"
-msgstr "The package containing this quant"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:stock.move,picking_type_code:0
@@ -165,9 +165,9 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "or"
-msgstr "ou"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
-msgstr "qtd"
+msgstr ""
