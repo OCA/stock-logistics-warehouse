@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-26 14:13+0000\n"
-"PO-Revision-Date: 2016-02-27 16:56+0000\n"
+"POT-Creation-Date: 2016-04-28 01:03+0000\n"
+"PO-Revision-Date: 2016-04-27 15:28+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -45,6 +45,11 @@ msgstr "Lokacije inventarja"
 #, python-format
 msgid "Locations"
 msgstr "Lokacije"
+
+#. module: partner_location_auto_create
+#: field:res.partner,locations_count:0
+msgid "Locations count"
+msgstr "Števec lokacij"
 
 #. module: partner_location_auto_create
 #: field:stock.location,main_partner_location:0

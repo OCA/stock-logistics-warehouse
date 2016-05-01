@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 02:22+0000\n"
-"PO-Revision-Date: 2015-11-20 16:27+0000\n"
+"POT-Creation-Date: 2016-04-28 01:03+0000\n"
+"PO-Revision-Date: 2016-04-27 10:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -26,3 +26,17 @@ msgstr "Product"
 #: model:ir.model,name:stock_available_sale.model_product_template
 msgid "Product Template"
 msgstr "Product Template"
+
+#. module: stock_available_sale
+#: field:product.product,quoted_qty:0 field:product.template,quoted_qty:0
+msgid "Quoted"
+msgstr "Quoted"
+
+#. module: stock_available_sale
+#: help:product.product,quoted_qty:0 help:product.template,quoted_qty:0
+msgid ""
+"Total quantity of this Product that have been included in Quotations (Draft Sale Orders).\n"
+"In a context with a single Warehouse, this includes Quotation processed in this Warehouse.\n"
+"In a context with a single Stock Location, this includes Quotation processed at any Warehouse using this Location, or any of its children, as it's Stock Location.\n"
+"Otherwise, this includes every Quotation."
+msgstr "Total quantity of this Product that have been included in Quotations (Draft Sale Orders).\nIn a context with a single Warehouse, this includes Quotation processed in this Warehouse.\nIn a context with a single Stock Location, this includes Quotation processed at any Warehouse using this Location, or any of its children, as it's Stock Location.\nOtherwise, this includes every Quotation."

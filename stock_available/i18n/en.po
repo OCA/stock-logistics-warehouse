@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 01:38+0000\n"
-"PO-Revision-Date: 2016-01-13 16:35+0000\n"
+"POT-Creation-Date: 2016-04-28 01:03+0000\n"
+"PO-Revision-Date: 2016-04-27 10:59+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -18,9 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available
+#: field:product.product,immediately_usable_qty:0
+#: field:product.template,immediately_usable_qty:0
+msgid "Available to promise"
+msgstr "Available to promise"
+
+#. module: stock_available
 #: view:product.template:stock_available.view_stock_available_kanban
 msgid "Available to promise:"
 msgstr "Available to promise:"
+
+#. module: stock_available
+#: help:stock.config.settings,stock_available_mrp_based_on:0
+msgid ""
+"Choose the field of the product which will be used to compute potential.\n"
+"If empty, Quantity On Hand is used.\n"
+"Only the quantity fields have meaning for computing stock"
+msgstr "Choose the field of the product which will be used to compute potential.\nIf empty, Quantity On Hand is used.\nOnly the quantity fields have meaning for computing stock"
 
 #. module: stock_available
 #: field:stock.config.settings,module_stock_available_sale:0
@@ -53,6 +67,14 @@ msgid "Stock available to promise"
 msgstr "Stock available to promise"
 
 #. module: stock_available
+#: help:product.product,immediately_usable_qty:0
+#: help:product.template,immediately_usable_qty:0
+msgid ""
+"Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs"
+msgstr "Stock for this Product that can be safely proposed for sale to Customers.\nThe definition of this value can be configured to suit your needs"
+
+#. module: stock_available
 #: help:stock.config.settings,module_stock_available_mrp:0
 msgid ""
 "This will add the quantities of goods that can be immediately manufactured, to the quantities available to promise.\n"
@@ -74,6 +96,11 @@ msgid ""
 "This installs the modules stock_available_sale.\n"
 "If the modules sale and sale_delivery_date are not installed, this will install them too"
 msgstr "This will subtract quantities from the sale quotations from the quantities available to promise.\nThis installs the modules stock_available_sale.\nIf the modules sale and sale_delivery_date are not installed, this will install them too"
+
+#. module: stock_available
+#: field:stock.config.settings,stock_available_mrp_based_on:0
+msgid "based on"
+msgstr "based on"
 
 #. module: stock_available
 #: view:product.product:stock_available.view_stock_available_tree_variant

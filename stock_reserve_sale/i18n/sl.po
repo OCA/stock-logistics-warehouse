@@ -3,13 +3,13 @@
 # * stock_reserve_sale
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-24 09:07+0000\n"
-"PO-Revision-Date: 2015-10-19 05:56+0000\n"
+"POT-Creation-Date: 2016-04-28 01:03+0000\n"
+"PO-Revision-Date: 2016-04-27 15:36+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -40,6 +40,11 @@ msgid "Can Have Stock Reservations"
 msgstr "Lahko vsebuje rezervacije zaloge"
 
 #. module: stock_reserve_sale
+#: field:sale.order.line,is_stock_reservable:0
+msgid "Can be reserved"
+msgstr "Lahko se rezervira"
+
+#. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Cancel"
 msgstr "Preklic"
@@ -51,6 +56,11 @@ msgid "Configuration Error!"
 msgstr "Napaka v nastavitvah!"
 
 #. module: stock_reserve_sale
+#: field:stock.reservation,consumed_for:0
+msgid "Consumed for"
+msgstr "Potrošeno za"
+
+#. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
 msgid "Created by"
 msgstr "Ustvaril"
@@ -59,6 +69,11 @@ msgstr "Ustvaril"
 #: field:sale.stock.reserve,create_date:0
 msgid "Created on"
 msgstr "Ustvarjeno"
+
+#. module: stock_reserve_sale
+#: field:sale.stock.reserve,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:210
@@ -83,6 +98,11 @@ msgid ""
 "If a date is given, the reservations will be released at the end of the "
 "validity."
 msgstr "Če je podan datum, bodo rezervacije izdane ob koncu veljavnosti."
+
+#. module: stock_reserve_sale
+#: field:sale.stock.reserve,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0
@@ -111,6 +131,16 @@ msgid "Pre-book products from stock"
 msgstr "Pred-vpis proizvodov iz zaloge"
 
 #. module: stock_reserve_sale
+#: field:stock.reservation,production_id:0
+msgid "Production Order for Produced Products"
+msgstr "Proizvodni nalog za proizvedene izdelke"
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,raw_material_production_id:0
+msgid "Production Order for Raw Materials"
+msgstr "Proizvodni nalog za surovine"
+
+#. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "Release Reservation"
 msgstr "Izdaja rezervacije"
@@ -135,6 +165,11 @@ msgstr "Rezervna zaloga"
 #: model:ir.actions.act_window,name:stock_reserve_sale.action_sale_stock_reserve
 msgid "Reserve Stock for Quotation Lines"
 msgstr "Rezervna zaloga postavk predračuna"
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,sale_id:0
+msgid "Sale Order"
+msgstr "Prodajni nalog"
 
 #. module: stock_reserve_sale
 #: field:stock.reservation,sale_line_id:0
@@ -179,6 +214,11 @@ msgstr "Lastnik zaloge"
 #: field:sale.order.line,reservation_ids:0
 msgid "Stock Reservation"
 msgstr "Rezervacija zaloge"
+
+#. module: stock_reserve_sale
+#: help:stock.reservation,consumed_for:0
+msgid "Technical field used to make the traceability of produced products"
+msgstr "Tehnično polje za sledljivost proizvedenih izdelkov"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,date_validity:0
