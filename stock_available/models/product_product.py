@@ -28,9 +28,29 @@ class ProductProduct(models.Model):
         for prod in self:
             prod.immediately_usable_qty = prod.virtual_available
 
+    def _search_immediately_usable_quantity(self, operator, value):
+        res = []
+        assert operator in (
+            '<', '>', '=', '!=', '<=', '>='
+        ), 'Invalid domain operator'
+        assert isinstance(
+            value, (float, int)
+        ), 'Invalid domain value'
+        if operator == '=':
+            operator = '=='
+
+        ids = []
+        products = self.search([])
+        for prod in products:
+            if eval(str(prod.immediately_usable_qty) + operator + str(value)):
+                ids.append(prod.id)
+        res.append(('id', 'in', ids))
+        return res
+
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
         compute='_immediately_usable_qty',
+        search='_search_immediately_usable_quantity',
         string='Available to promise',
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"
