@@ -6,8 +6,14 @@
             <field name="model">stock.warehouse.orderpoint</field>
             <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree" />
             <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                    <field name="product_category"/>
+                </field>
                 <field name="product_max_qty" position="after">
                     <field name="product_location_qty" />
+                    <field name="incoming_location_qty" />
+                    <field name="outgoing_location_qty" />
+                    <field name="virtual_location_qty" />
                     <field name="available" invisible="1" />
                 </field>
             </field>
@@ -21,6 +27,9 @@
                 <group string="Rules" position="after">
                     <group string="Stock Info">
                         <field name="product_location_qty" />
+                        <field name="incoming_location_qty" />
+                        <field name="outgoing_location_qty" />
+                        <field name="virtual_location_qty" />
                     </group>
                 </group>
             </field>
@@ -31,6 +40,17 @@
             <field name="model">stock.warehouse.orderpoint</field>
             <field name="inherit_id" ref="stock.warehouse_orderpoint_search" />
             <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                    <field name="product_category" filter_domain="[('product_category','child_of',self)]"/>
+                </field>
+                <filter string="Warehouse" position="before">
+                    <filter string="Product" icon="terp-go-home"
+                            domain="[]"
+                            context="{'group_by':'product_id'}"/>
+                    <filter string="Product Category" icon="terp-go-home"
+                            domain="[]"
+                            context="{'group_by':'product_category'}"/>
+                </filter>
                 <group string="Group By" position="before">
                     <filter string="Availability under minimum"
                         domain="[('available', '=', False)]"
