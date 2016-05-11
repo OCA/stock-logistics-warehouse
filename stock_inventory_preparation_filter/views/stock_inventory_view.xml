@@ -29,10 +29,13 @@
                     <notebook position="inside">
                         <page string="Capture Lines"
                             attrs="{'invisible':[('filter','!=','empty')]}">
-                            <field name="empty_line_ids" nolabel="1">
-                                <tree editable="bottom">
+                            <field name="empty_line_ids" nolabel="1" attrs="{'readonly':[('state','!=','draft')]}">
+                                <tree colors="grey:added_to_inventory == True;blue:product_found == True;red:product_found == False" editable="bottom">
+                                    <field name="product_found" invisible="1"/>
+                                    <field name="added_to_inventory" invisible="1"/>
                                     <field name="product_code"/>
                                     <field name="product_qty"/>
+                                    <field name="product_id" />
                                 </tree>
                             </field>
                         </page>

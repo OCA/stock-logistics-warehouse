@@ -29,6 +29,23 @@ class StockInventoryEmptyLines(models.Model):
     inventory_id = fields.Many2one(
         comodel_name='stock.inventory', string='Inventory',
         required=True, ondelete="cascade")
+    added_to_inventory = fields.Boolean("Added in inventory", default=False)
+    product_id = fields.Many2one(comodel_name='product.product',
+                                 compute='_find_product', store=True)
+    product_found = fields.Boolean('Product Found', compute='_find_product',
+                                   store=True)
+
+    @api.depends('product_code')
+    def _find_product(self):
+        for line in self.filtered(lambda o: o.product_code):
+            product = line.env['product.product'].search([
+                '|', ('default_code', '=', line.product_code),
+                ('ean13', '=', line.product_code),
+            ], limit=1)
+            line.update({
+                'product_id': product.id,
+                'product_found': bool(product)
+            })
 
 
 class StockInventoryFake(object):
@@ -102,19 +119,20 @@ class StockInventory(models.Model):
         elif inventory.filter == 'empty':
             tmp_lines = {}
             empty_line_obj = self.env['stock.inventory.line.empty']
-            for line in inventory.empty_line_ids:
+            lines_to_process = inventory.empty_line_ids.filtered(
+                lambda l: not l.added_to_inventory and l.product_found)
+            for line in lines_to_process:
                 if line.product_code in tmp_lines:
                     tmp_lines[line.product_code] += line.product_qty
                 else:
                     tmp_lines[line.product_code] = line.product_qty
-            inventory.empty_line_ids.unlink()
+            lines_to_process.write({'added_to_inventory': True})
             for product_code in tmp_lines.keys():
-                products = product_obj.search([
+                product = product_obj.search([
                     '|', ('default_code', '=', product_code),
                     ('ean13', '=', product_code),
-                ])
-                if products:
-                    product = products[0]
+                ], limit=1)
+                if product:
                     fake_inventory = StockInventoryFake(
                         inventory, product=product)
                     values = super(StockInventory, self)._get_inventory_lines(
@@ -133,3 +151,9 @@ class StockInventory(models.Model):
             vals = super(StockInventory, self)._get_inventory_lines(
                 inventory)
         return vals
+
+    @api.multi
+    def action_cancel_draft(self):
+        ret = super(StockInventory, self).action_cancel_draft()
+        self.mapped('empty_line_ids').write({'added_to_inventory': False})
+        return ret
