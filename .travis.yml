@@ -1,5 +1,9 @@
 # Config file .travis.yml
 
+language: python
+python:
+    - "2.7"
+
 sudo: false
 cache: pip
 
@@ -9,15 +13,16 @@ addons:
       - expect-dev  # provides unbuffer utility
       - python-lxml # because pip installation is slow
 
-language: python
-
-python:
-    - "2.7"
-
 env:
-  - VERSION="8.0" LINT_CHECK="1"
-  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0"
-  - VERSION="8.0" ODOO_REPO="OCA/OCB" LINT_CHECK="0"
+  global:
+  - VERSION="8.0" TESTS="0" LINT_CHECK="0"
+  - TRANSIFEX_USER='transbot@odoo-community.org'
+  - secure: tDsvZaY3JqmnjgyRuKkgQRtlRILkkjnHtZPWWaGg+KBD+BBH4AqX5ACTyu5U/J6Kr/Yb5NIoM3+NYRuASdGXnJb9siZvh/9B58B1wKUbC2umH4Yrpw66CEvG9JY4XMOCZni9kQBwQ7iMk5GfusDWuVuydZjd6dAqkCxz6JdkIco=
+  matrix:
+  - LINT_CHECK="1"
+  - TRANSIFEX="1"
+  - TESTS=1 ODOO_REPO="odoo/odoo" LINT_CHECK="0"
+  - TESTS=1 ODOO_REPO="OCA/OCB" LINT_CHECK="0"
 
 virtualenv:
   system_site_packages: true
@@ -26,11 +31,9 @@ install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - git clone https://github.com/OCA/stock-logistics-tracking -b ${VERSION} $HOME/stock-logistics-tracking
-  - git clone https://github.com/OCA/stock-logistics-barcode -b ${VERSION} $HOME/stock-logistics-barcode
 
 script:
     - travis_run_tests
 
 after_success:
-  coveralls
+  - travis_after_tests_success

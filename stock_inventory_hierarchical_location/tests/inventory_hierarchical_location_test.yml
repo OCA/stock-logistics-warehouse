@@ -1,0 +1,57 @@
+-
+  Check that the exhaustive field of parent inventory has been propagated to children.
+-
+  !python {model: stock.inventory}: |
+    exhaustive = self.read(cr, uid, [ref("child_1_id")], ['exhaustive'])[0]['exhaustive']
+    assert exhaustive, "Exhaustive field not propagated to child inventory"
+
+-
+  Check that I can't open child inventory while parent inventory is open.
+-
+  !python {model: stock.inventory}: |
+    from stock_inventory_hierarchical import HierarchicalInventoryException
+    parent_state = self.read(cr, uid, [ref("parent_inventory")], ['state'])[0]['state']
+    assert parent_state == 'draft', "Parent inventory in state '%s'. It should be 'draft'" % parent_state
+    try:
+      self.action_open(cr, uid, [ref("child_1_id")])
+    except HierarchicalInventoryException as e:
+      log("Good ! The Inventory could not be opened: %s" % e)
+    child_1_state = self.read(cr, uid, [ref("child_1_id")], ['state'])[0]['state']
+    assert child_1_state == 'draft', "Child inventory 1 have '%s' state. It should be 'draft'" % child_1_state
+
+-
+  I will check that the function get_missing_locations return some locations.
+-
+  !python {model: stock.inventory}: |
+    missing_loc_ids = self.get_missing_locations(cr, uid, [ref('parent_inventory')], context=context)
+    # missing locations give only location that are not included in sub-inventories
+    assert len(missing_loc_ids)==1, "get_missing_locations did not return any ID."
+
+-
+  I will fill the inventory and check that the function get_missing_locations return no locations.
+  Adding 17” LCD Monitor.
+-
+  !record {model: stock.inventory.line, id: lines_inventory_location_pc1}:
+    product_id: product.product_product_7
+    product_uom: product.product_uom_unit
+    company_id: base.main_company
+    inventory_id: child_1_id
+    product_qty: 18.0
+    location_id: stock.stock_location_14
+
+-
+  Adding USB Keyboard, QWERTY.
+-
+  !record {model: stock.inventory.line, id: lines_inventory_location_pc3}:
+    product_id: product.product_product_8
+    product_uom: product.product_uom_unit
+    company_id: base.main_company
+    inventory_id: child_2_id
+    product_qty: 5.0
+    location_id: stock.stock_location_components
+
+-
+  !python {model: stock.inventory}: |
+    
+    missing_loc_ids = self.get_missing_locations(cr, uid, [ref('parent_inventory')], context=context)
+    assert set(missing_loc_ids)==set([ref('stock.stock_location_stock')]), "get_missing_locations should return only %s but returned %s" % ([ref('stock.stock_location_stock')], missing_loc_ids)

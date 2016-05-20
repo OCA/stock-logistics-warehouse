@@ -1,0 +1,617 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_reserve
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-28 01:03+0000\n"
+"PO-Revision-Date: 2016-05-01 14:28+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_reserve
+#: field:product.product,reservation_count:0
+#: field:product.template,reservation_count:0
+msgid "# Sales"
+msgstr "# prodaj"
+
+#. module: stock_reserve
+#: help:stock.reservation,state:0
+msgid ""
+"* New: When the stock move is created and not yet confirmed.\n"
+"* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
+"* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to me manufactured...\n"
+"* Available: When products are reserved, it is set to 'Available'.\n"
+"* Done: When the shipment is processed, the state is 'Done'."
+msgstr "* Novo: ob nastanku premika zaloge, ko še ni potrjen.\n* Čakanje na drug premik: to stanje se pojavi, kadar en premik čaka drugega, na primer pri verižnem procesu.\n* Čakanje razpoložljivosti: to stanje se doseže, kadar izpolnitev oskrbe ni neposredna. Lahko bi bil potreben zagon razporejevalnika, potrebno je proizvesti komponento...\n* Na voljo: ko so proizvodi rezervirani se prestavi v 'Na voljo'.\n* Opravljeno: po obdelavi odpreme stanje preide v 'Opravljeno'."
+
+#. module: stock_reserve
+#: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                    Click to create a stock reservation.\n"
+"                    </p><p>\n"
+"                    This menu allow you to prepare and reserve some quantities\n"
+"                    of products.\n"
+"                </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n                    Ustvari rezervacijo zaloge.\n                    </p><p>\n                    Ta meni omogoča pripravo in rezervacijo določenih količin\n                    proizvodov.\n                </p>\n            "
+
+#. module: stock_reserve
+#: field:stock.reservation,returned_move_ids:0
+msgid "All returned moves"
+msgstr "Vsi vrnjeni premiki"
+
+#. module: stock_reserve
+#: field:stock.reservation,string_availability_info:0
+msgid "Availability"
+msgstr "Razpoložljivost"
+
+#. module: stock_reserve
+#: field:stock.reservation,backorder_id:0
+msgid "Back Order of"
+msgstr "Zaostanek od"
+
+#. module: stock_reserve
+#: help:stock.reservation,procure_method:0
+msgid ""
+"By default, the system will take from the stock in the source location and "
+"passively wait for availability. The other possibility allows you to "
+"directly create a procurement on the source location (and thus ignore its "
+"current stock) to gather products. If we want to chain moves and have this "
+"one to wait for the previous, this second option should be chosen."
+msgstr "Privzeto sistem vzame iz zaloge na izvorni lokaciji in pasivno čaka na razpoložljivost. Druga možnost omogoči neposredno ustvariti oskrbovanje na izvorni lokaciji (in tako ignorirati trenutno zalogo) za zbiranje proizvodov. Ko želimo verižne premike in mora ta premik čakati na prejšnjega, se lahko izbere druga opcija."
+
+#. module: stock_reserve
+#: help:stock.reservation,partially_available:0
+msgid "Checks if the move has some stock reserved"
+msgstr "Preveri, če premik vsebuje kaj rezervacij zaloge"
+
+#. module: stock_reserve
+#: field:stock.reservation,company_id:0
+msgid "Company"
+msgstr "Družba"
+
+#. module: stock_reserve
+#: field:stock.reservation,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: stock_reserve
+#: field:stock.reservation,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: stock_reserve
+#: field:stock.reservation,date:0
+msgid "Date"
+msgstr "Datum"
+
+#. module: stock_reserve
+#: field:stock.reservation,name:0
+msgid "Description"
+msgstr "Opis"
+
+#. module: stock_reserve
+#: field:stock.reservation,partner_id:0
+msgid "Destination Address "
+msgstr "Ciljni naslov"
+
+#. module: stock_reserve
+#: field:stock.reservation,location_dest_id:0
+msgid "Destination Location"
+msgstr "Ciljna lokacija"
+
+#. module: stock_reserve
+#: field:stock.reservation,move_dest_id:0
+msgid "Destination Move"
+msgstr "Ciljni premik"
+
+#. module: stock_reserve
+#: field:stock.reservation,route_ids:0
+msgid "Destination route"
+msgstr "Ciljna proga"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+msgid "Details"
+msgstr "Podrobnosti"
+
+#. module: stock_reserve
+#: field:stock.reservation,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+msgid "Draft"
+msgstr "Osnutek"
+
+#. module: stock_reserve
+#: field:stock.reservation,date_expected:0
+msgid "Expected Date"
+msgstr "Pričakovani datum"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+msgid "Group By..."
+msgstr "Združi po..."
+
+#. module: stock_reserve
+#: field:stock.reservation,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_reserve
+#: help:stock.reservation,propagate:0
+msgid "If checked, when this move is cancelled, cancel the linked move too"
+msgstr "Če označeno, se ob preklicu tega premika prekliče tudi povezane premike"
+
+#. module: stock_reserve
+#: field:stock.reservation,inventory_id:0
+msgid "Inventory"
+msgstr "Inventar"
+
+#. module: stock_reserve
+#: field:stock.reservation,invoice_state:0
+msgid "Invoice Control"
+msgstr "Obračunska kontrola"
+
+#. module: stock_reserve
+#: help:stock.reservation,product_packaging:0
+msgid ""
+"It specifies attributes of packaging like type, quantity of packaging,etc."
+msgstr "Določi atribute pakiranja, kot so tip, količina pakiranj, itd."
+
+#. module: stock_reserve
+#: field:stock.reservation,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: stock_reserve
+#: field:stock.reservation,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: stock_reserve
+#: field:stock.reservation,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: stock_reserve
+#: field:stock.reservation,linked_move_operation_ids:0
+msgid "Linked Operations"
+msgstr "Povezane operacije"
+
+#. module: stock_reserve
+#: help:stock.reservation,location_dest_id:0
+msgid "Location where the system will stock the finished products."
+msgstr "Lokacija, kamor sistem skladišči dokončane proizvode."
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+msgid "Locations"
+msgstr "Lokacije"
+
+#. module: stock_reserve
+#: field:stock.reservation,restrict_lot_id:0
+msgid "Lot"
+msgstr "Lot"
+
+#. module: stock_reserve
+#: field:stock.reservation,lot_ids:0
+msgid "Lots"
+msgstr "Loti"
+
+#. module: stock_reserve
+#: field:stock.reservation,split_from:0
+msgid "Move Split From"
+msgstr "Premik razdeljen od"
+
+#. module: stock_reserve
+#: help:stock.reservation,date:0
+msgid ""
+"Move date: scheduled date until move is done, then date of actual move "
+"processing"
+msgstr "Datum premika: načrtovani datum, do katerega se premik opravi, nato datum dejanske obdelave premika"
+
+#. module: stock_reserve
+#: field:stock.reservation,quant_ids:0
+msgid "Moved Quants"
+msgstr "Premaknjeni kvanti"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+msgid "Moves are reserved."
+msgstr "Premiki so rezervirani."
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+msgid "Not already reserved"
+msgstr "Še ne rezervirano"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+#: field:stock.reservation,note:0
+msgid "Notes"
+msgstr "Opombe"
+
+#. module: stock_reserve
+#: help:stock.reservation,linked_move_operation_ids:0
+msgid ""
+"Operations that impact this move for the computation of the remaining "
+"quantities"
+msgstr "Operacije, ki vplivajo na ta premik pri izračunu preostalih količin"
+
+#. module: stock_reserve
+#: help:stock.reservation,partner_id:0
+msgid ""
+"Optional address where goods are to be delivered, specifically used for "
+"allotment"
+msgstr "Opcijski naslov kamor se bo blago dostavilo, ki se uporablja za dodeljevanje"
+
+#. module: stock_reserve
+#: help:stock.reservation,returned_move_ids:0
+msgid "Optional: all returned moves created from this move"
+msgstr "Opcijsko: vsi vračilni premiki ustvarjeni iz tega premika"
+
+#. module: stock_reserve
+#: help:stock.reservation,move_dest_id:0
+msgid "Optional: next stock move when chaining them"
+msgstr "Opcijsko: naslednji premik zaloge pri veriženju"
+
+#. module: stock_reserve
+#: help:stock.reservation,move_orig_ids:0
+msgid "Optional: previous stock move when chaining them"
+msgstr "Opcijsko: prejšnji premik zaloge pri veriženju"
+
+#. module: stock_reserve
+#: field:stock.reservation,origin_returned_move_id:0
+msgid "Origin return move"
+msgstr "Izvorni vračilni premik"
+
+#. module: stock_reserve
+#: field:stock.reservation,move_orig_ids:0
+msgid "Original Move"
+msgstr "Izvorni premik"
+
+#. module: stock_reserve
+#: field:stock.reservation,restrict_partner_id:0
+msgid "Owner "
+msgstr "Lastnik"
+
+#. module: stock_reserve
+#: field:stock.reservation,partially_available:0
+msgid "Partially Available"
+msgstr "Delno na voljo"
+
+#. module: stock_reserve
+#: field:stock.reservation,picking_type_id:0
+msgid "Picking Type"
+msgstr "Tip zbirnika"
+
+#. module: stock_reserve
+#: field:stock.reservation,product_packaging:0
+msgid "Prefered Packaging"
+msgstr "Prednostno pakiranje"
+
+#. module: stock_reserve
+#: help:stock.reservation,route_ids:0
+msgid "Preferred route to be followed by the procurement order"
+msgstr "Prednostna proga za oskrbovalni nalog"
+
+#. module: stock_reserve
+#: field:stock.reservation,priority:0
+msgid "Priority"
+msgstr "Prioriteta"
+
+#. module: stock_reserve
+#: field:stock.reservation,procurement_id:0
+msgid "Procurement"
+msgstr "Oskrbovanje"
+
+#. module: stock_reserve
+#: field:stock.reservation,group_id:0
+msgid "Procurement Group"
+msgstr "Oskrbovalna skupina"
+
+#. module: stock_reserve
+#: field:stock.reservation,rule_id:0
+msgid "Procurement Rule"
+msgstr "Oskrbovalno pravilo"
+
+#. module: stock_reserve
+#: model:ir.model,name:stock_reserve.model_product_product
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: field:stock.reservation,product_id:0
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: stock_reserve
+#: model:ir.model,name:stock_reserve.model_product_template
+#: field:stock.reservation,product_tmpl_id:0
+msgid "Product Template"
+msgstr "Predloga proizvoda"
+
+#. module: stock_reserve
+#: field:stock.reservation,product_uos:0
+msgid "Product UOS"
+msgstr "Prodajna EM proizvoda"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+msgid "Product UoM"
+msgstr "EM proizvoda"
+
+#. module: stock_reserve
+#: field:stock.reservation,propagate:0
+msgid "Propagate cancel and split"
+msgstr "Širjenje preklica in razdelitve"
+
+#. module: stock_reserve
+#: field:stock.reservation,push_rule_id:0
+msgid "Push Rule"
+msgstr "Pravilo potiska"
+
+#. module: stock_reserve
+#: field:stock.reservation,product_qty:0
+#: field:stock.reservation,product_uom_qty:0
+msgid "Quantity"
+msgstr "Količina"
+
+#. module: stock_reserve
+#: field:stock.reservation,product_uos_qty:0
+msgid "Quantity (UOS)"
+msgstr "Količina (prodajna EM)"
+
+#. module: stock_reserve
+#: field:stock.reservation,availability:0
+msgid "Quantity Available"
+msgstr "Količina na voljo"
+
+#. module: stock_reserve
+#: field:stock.reservation,reserved_availability:0
+msgid "Quantity Reserved"
+msgstr "Rezervirana količina"
+
+#. module: stock_reserve
+#: help:stock.reservation,availability:0
+msgid "Quantity in stock that can still be reserved for this move"
+msgstr "Količina na zalogi, ki se še lahko rezervira za ta premik"
+
+#. module: stock_reserve
+#: help:stock.reservation,product_qty:0
+msgid "Quantity in the default UoM of the product"
+msgstr "Količina v privzeti EM za ta proizvod"
+
+#. module: stock_reserve
+#: help:stock.reservation,reserved_availability:0
+msgid "Quantity that has already been reserved for this move"
+msgstr "Količina, ki je bila že rezervirana za ta premik"
+
+#. module: stock_reserve
+#: field:stock.reservation,picking_id:0
+msgid "Reference"
+msgstr "Sklic"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+#: view:stock.reservation:stock_reserve.view_stock_reservation_tree
+msgid "Release"
+msgstr "Izdaja"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+msgid "Released"
+msgstr "Izdano"
+
+#. module: stock_reserve
+#: field:stock.reservation,remaining_qty:0
+msgid "Remaining Quantity"
+msgstr "Preostala količina"
+
+#. module: stock_reserve
+#: help:stock.reservation,remaining_qty:0
+msgid ""
+"Remaining Quantity in default UoM according to operations matched with this "
+"move"
+msgstr "Preostala količina v privzeti EM glede na operacije, ki se ujemajo s tem premikom"
+
+#. module: stock_reserve
+#: code:addons/stock_reserve/model/stock_reserve.py:188
+#: field:stock.reservation,move_id:0
+#, python-format
+msgid "Reservation Move"
+msgstr "Premik rezervacije"
+
+#. module: stock_reserve
+#: model:stock.location,name:stock_reserve.stock_location_reservation
+msgid "Reservation Stock"
+msgstr "Rezervirana zaloga"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+msgid "Reservations have been released."
+msgstr "Rezervacije so bile izdane."
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+#: view:stock.reservation:stock_reserve.view_stock_reservation_tree
+msgid "Reserve"
+msgstr "Rezerva"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+msgid "Reserved"
+msgstr "Rezervirano"
+
+#. module: stock_reserve
+#: field:stock.reservation,reserved_quant_ids:0
+msgid "Reserved quants"
+msgstr "Rezervirani kvanti"
+
+#. module: stock_reserve
+#: help:stock.reservation,date_expected:0
+msgid "Scheduled date for the processing of this move"
+msgstr "Načrtovani datum obdelave tega premika"
+
+#. module: stock_reserve
+#: field:stock.reservation,scrapped:0
+msgid "Scrapped"
+msgstr "Odpisano"
+
+#. module: stock_reserve
+#: help:stock.reservation,location_id:0
+msgid ""
+"Sets a location if you produce at a fixed location. This can be a partner "
+"location if you subcontract the manufacturing operations."
+msgstr "Nastavitev lokacije pri proizvodnji na stalni lokaciji. Pri podizvajanju nekaterih proizvodnih operacij je to lahko partnerjeva lokacija."
+
+#. module: stock_reserve
+#: help:stock.reservation,string_availability_info:0
+msgid "Show various information on stock availability for this move"
+msgstr "Prikaz raznih informacij o razpoložljivih zalogah za ta premik"
+
+#. module: stock_reserve
+#: field:stock.reservation,origin:0
+msgid "Source"
+msgstr "Izvor"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: field:stock.reservation,location_id:0
+msgid "Source Location"
+msgstr "Izvorna lokacija"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: field:stock.reservation,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: stock_reserve
+#: model:ir.model,name:stock_reserve.model_stock_reservation
+msgid "Stock Reservation"
+msgstr "Rezervacija zaloge"
+
+#. module: stock_reserve
+#: model:ir.actions.act_window,name:stock_reserve.action_stock_reservation_tree
+#: model:ir.ui.menu,name:stock_reserve.menu_action_stock_reservation
+#: view:product.product:stock_reserve.product_product_form_view_reservation_button
+#: view:product.template:stock_reserve.product_template_form_view_reservation_button
+#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: view:stock.reservation:stock_reserve.view_stock_reservation_tree
+msgid "Stock Reservations"
+msgstr "Rezervacije zaloge"
+
+#. module: stock_reserve
+#: field:stock.reservation,procure_method:0
+msgid "Supply Method"
+msgstr "Metoda dobave"
+
+#. module: stock_reserve
+#: help:stock.reservation,warehouse_id:0
+msgid ""
+"Technical field depicting the warehouse to consider for the route selection "
+"on the next procurement (if any)."
+msgstr "Tehnično polje za določitev skladišča, ki bo upoštevano pri izbiri proge naslednjega oskrbovanja (če kakšnega)."
+
+#. module: stock_reserve
+#: help:stock.reservation,restrict_lot_id:0
+msgid ""
+"Technical field used to depict a restriction on the lot of quants to "
+"consider when marking this move as 'done'"
+msgstr "Tehnično polje za določitev omejitev na lotu kvantov, ki bodo upoštevane ob označbi premika kot 'opravljeno'"
+
+#. module: stock_reserve
+#: help:stock.reservation,restrict_partner_id:0
+msgid ""
+"Technical field used to depict a restriction on the ownership of quants to "
+"consider when marking this move as 'done'"
+msgstr "Tehnično polje za določitev omejitev na lastništvu kvantov, ki bodo upoštevani ob označbi premika kot 'opravljeno'"
+
+#. module: stock_reserve
+#: help:stock.reservation,price_unit:0
+msgid ""
+"Technical field used to record the product cost set by the user during a "
+"picking confirmation (when costing method used is 'average price' or "
+"'real'). Value given in company currency and in product uom."
+msgstr "Tehnično polje za zapis stroška proizvoda nastavljenega s strani uporabnika med potrjevanjem zbirnika (kadar se uporablja metoda vrednotenja 'povprečna cena' ali 'realno'). Vrednost je podana v valuti družbe in EM proizvoda."
+
+#. module: stock_reserve
+#: help:stock.reservation,split_from:0
+msgid ""
+"Technical field used to track the origin of a split move, which can be "
+"useful in case of debug"
+msgstr "Tehnično polje za sledenje izvora razdelitve premika, ki je lahko koristno pri odpravljanju napak."
+
+#. module: stock_reserve
+#: help:stock.reservation,rule_id:0
+msgid "The pull rule that created this stock move"
+msgstr "Vlečno pravilo, ki je ustvarilo ta premik zaloge"
+
+#. module: stock_reserve
+#: help:stock.reservation,push_rule_id:0
+msgid "The push rule that created this stock move"
+msgstr "Potisno pravilo, ki je ustvarilo ta premik zaloge"
+
+#. module: stock_reserve
+#: help:stock.reservation,product_uom_qty:0
+msgid ""
+"This is the quantity of products from an inventory point of view. For moves "
+"in the state 'done', this is the quantity of products that were actually "
+"moved. For other moves, this is the quantity of product that is planned to "
+"be moved. Lowering this quantity does not generate a backorder. Changing "
+"this quantity on assigned moves affects the product reservation, and should "
+"be done with care."
+msgstr "Količina proizvodov iz stališča inventure. Za premike v stanju 'opravljeno' je to količina proizvodov, ki so bili dejansko premaknjeni. Za druge premike je to količina proizvodov, ki je načrtovana za premik. Nižanje te količine ne ustvari zaostalega naloga. Sprememba te količine na dodeljenih premikih učinkuje na rezervacijo proizvodov, zato je v takem primeru priporočljiva pazljivost."
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_tree
+msgid "Total"
+msgstr "Skupaj"
+
+#. module: stock_reserve
+#: field:stock.reservation,picking_type_code:0
+msgid "Type of Operation"
+msgstr "Tip operacije"
+
+#. module: stock_reserve
+#: field:stock.reservation,price_unit:0
+msgid "Unit Price"
+msgstr "Cena enote"
+
+#. module: stock_reserve
+#: field:stock.reservation,product_uom:0
+msgid "Unit of Measure"
+msgstr "Enota mere"
+
+#. module: stock_reserve
+#: field:stock.reservation,date_validity:0
+msgid "Validity Date"
+msgstr "Datum veljavnosti"
+
+#. module: stock_reserve
+#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+msgid "View Reservation Move"
+msgstr "Prikaz premika rezervacije"
+
+#. module: stock_reserve
+#: field:stock.reservation,warehouse_id:0
+msgid "Warehouse"
+msgstr "Skladišče"
+
+#. module: stock_reserve
+#: help:stock.reservation,origin_returned_move_id:0
+msgid "move that created the return move"
+msgstr "premik, ki je ustvaril vračilni premik"

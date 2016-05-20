@@ -1,0 +1,164 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_hierarchical_location
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-01 11:35+0000\n"
+"PO-Revision-Date: 2014-07-01 11:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_hierarchical_location
+#: view:stock.generate.inventory:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: stock_inventory_hierarchical_location
+#: code:_description:0
+#: model:ir.actions.act_window,name:stock_inventory_hierarchical_location.action_view_stock_generate_inventory
+#: model:ir.model,name:stock_inventory_hierarchical_location.model_stock_generate_inventory
+#: model:ir.ui.menu,name:stock_inventory_hierarchical_location.menu_action_stock_generate_inventory_form
+#: view:stock.generate.inventory:0
+#, python-format
+msgid "Generate Inventory"
+msgstr "Générer l'inventaire"
+
+#. module: stock_inventory_hierarchical_location
+#: help:stock.generate.inventory,only_view:0
+msgid "If set, only inventory on view location can be created"
+msgstr "Si coché, seuls les inventaires des emplacements vues seront créés."
+
+#. module: stock_inventory_hierarchical_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_hierarchical_location.model_stock_fill_inventory
+#, python-format
+msgid "Import Inventory"
+msgstr "Importer un inventaire"
+
+#. module: stock_inventory_hierarchical_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_hierarchical_location.model_stock_inventory
+#, python-format
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: stock_inventory_hierarchical_location
+#: code:addons/stock_inventory_hierarchical_location/wizard/generate_inventory.py:124
+#, python-format
+msgid "Inventory generated"
+msgstr "Inventaire généré"
+
+#. module: stock_inventory_hierarchical_location
+#: field:stock.generate.inventory,prefix_inv_name:0
+msgid "Inventory prefix"
+msgstr "Préfixe de l'inventaire"
+
+#. module: stock_inventory_hierarchical_location
+#: field:stock.generate.inventory,level:0
+msgid "Level"
+msgstr "Profondeur"
+
+#. module: stock_inventory_hierarchical_location
+#: sql_constraint:stock.generate.inventory:0
+msgid "Level must be positive!"
+msgstr "La profondeur doit être positive!"
+
+#. module: stock_inventory_hierarchical_location
+#: field:stock.generate.inventory,location_id:0
+msgid "Location"
+msgstr "Emplacement"
+
+#. module: stock_inventory_hierarchical_location
+#: code:addons/stock_inventory_hierarchical_location/wizard/stock_fill_location_inventory.py:78
+#: code:addons/stock_inventory_hierarchical_location/wizard/stock_fill_location_inventory.py:84
+#, python-format
+msgid "No product in this location. Please select a location in the product form."
+msgstr ""
+"Aucun article dans cet emplacement. Veuillez choisir un emplacement dans le "
+"formulaire produit."
+
+#. module: stock_inventory_hierarchical_location
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:43
+#, python-format
+msgid "One of the parent inventories is not open."
+msgstr "Un des inventaires pères n'est pas ouvert."
+
+#. module: stock_inventory_hierarchical_location
+#: field:stock.generate.inventory,only_view:0
+msgid "Only view"
+msgstr "Vues seulement"
+
+#. module: stock_inventory_hierarchical_location
+#: help:stock.generate.inventory,prefix_inv_name:0
+msgid "Optional prefix for all created inventory"
+msgstr "Préfixe facultatif ajouté devant les noms des inventaires créés"
+
+#. module: stock_inventory_hierarchical_location
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:65
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:79
+#, python-format
+msgid "Some Sub-inventories are not confirmed."
+msgstr "Au moins un sous-inventaire n'est pas confirmé."
+
+#. module: stock_inventory_hierarchical_location
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:84
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:98
+#, python-format
+msgid "This location is not declared on the parent inventory\n"
+"It cannot be added."
+msgstr "Cet emplacement n'est pas déclaré dans l'inventaire parent\n"
+"Vous ne pouvez pas l'ajouter."
+
+#. module: stock_inventory_hierarchical_location
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:42
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:64
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:78
+#, python-format
+msgid "Warning"
+msgstr "Attention"
+
+#. module: stock_inventory_hierarchical_location
+#: code:addons/stock_inventory_hierarchical_location/wizard/stock_fill_location_inventory.py:84
+#, python-format
+msgid "Warning!"
+msgstr "Attention!"
+
+#. module: stock_inventory_hierarchical_location
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:83
+#: code:addons/stock_inventory_hierarchical_location/inventory_hierarchical_location.py:97
+#, python-format
+msgid "Warning: Wrong location"
+msgstr "Attention: emplacement incorrect"
+
+#. module: stock_inventory_hierarchical_location
+#: help:stock.generate.inventory,level:0
+msgid "Maximum number of intermediate sub-inventories between the main inventory and the smallest sub-inventory."
+msgstr "Nombre maximum de niveaux entre l'inventaire principal et le plus petit sous-inventaire."
+
+#. module: stock_inventory_hierarchical_location
+#: view:stock.inventory:0
+msgid "onchange_location_id(location_id)"
+msgstr "onchange_location_id(location_id)"
+
+#. module: stock_inventory_hierarchical_location
+#: view:stock.generate.inventory:0
+msgid "or"
+msgstr "ou"
+
+#. module: stock_inventory_hierarchical_location
+#: view:stock.inventory:0
+msgid "{'default_parent_id': active_id, 'default_exhaustive': exhaustive}"
+msgstr "{'default_parent_id': active_id, 'default_exhaustive': exhaustive}"
+
+#. module: stock_inventory_hierarchical_location
+#: view:stock.inventory:0
+msgid "{'readonly':[('parent_id', '!=', False)]}"
+msgstr "{'readonly':[('parent_id', '!=', False)]}"
+

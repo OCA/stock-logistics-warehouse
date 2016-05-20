@@ -1,0 +1,250 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_location
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-01 11:55+0000\n"
+"PO-Revision-Date: 2014-07-01 11:55+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:345
+#: code:addons/stock_inventory_location/stock_inventory_location.py:346
+#, python-format
+msgid "A Physical Inventory is being conducted at the following location(s):\n"
+"%s"
+msgstr "Les emplacements suivants sont en inventaire :\n"
+"%s"
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:280
+#: code:addons/stock_inventory_location/stock_inventory_location.py:281
+#: constraint:stock.move:0
+#, python-format
+msgid "A Physical Inventory is being conducted at this location"
+msgstr "Un inventaire est en cours à cet emplacement"
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: stock_inventory_location
+#: help:stock.inventory,exhaustive:0
+msgid "Check the box if you are conducting an exhaustive Inventory.\n"
+"Leave the box unchecked if you are conducting a standard Inventory (partial inventory for example).\n"
+"For an exhaustive Inventory:\n"
+" - the status \"Draft\" lets you define the list of Locations where goods must be counted\n"
+" - the status \"Open\" indicates that the list of Locations is definitive and you are now counting the goods. In that status, no Stock Moves can be recorded in/out of the Inventory's Locations\n"
+" - only the Inventory's Locations can be entered in the Inventory Lines\n"
+" - if some of the Inventory's Locations have not been entered in the Inventory Lines, OpenERP warns you when you confirm the Inventory\n"
+" - every good that is not in the Inventory Lines is considered lost, and gets moved out of the stock when you confirm the Inventory"
+msgstr "Cochez la case si vous effectuez un inventaire exhaustif.\n"
+"Laissez la case non-dochée si vous effectuez un inventaire standard (par exmple un inventaire partiel).\n"
+"Pour les inventaires exhaustifs :\n"
+" - le statut \"Brouillon\" permet d'indiquer la liste des emplacements dont la marchandise doit être comptée\n"
+" - le statut \"Ouvert\" indiqueque la liste des emplacements est définitive, et que le comptage est en cours. Dans ce statut, aucun mouvement de stock ne peut être enregistré depuis/vers les emplacements de l'inventaire\n"
+" - seuls les emplacements de l'inventaire peuvent être saisis dans les lignes d'inventaire\n"
+" - si certains emplacements sont absent des lignes d'inventaire, OpenERP vous en avertit lors de la confirmation de l'inventaire\n"
+" - toutes les marchandises qui ne sont pas dans les lignes d'inventaire sont considérées comme perdues, et sont supprimées lors de la confirmation de l'inventaire"
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "Confirm empty locations"
+msgstr "Confirmez les emplacements vides"
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_inventory_uninventoried_locations
+#, python-format
+msgid "Confirm the uninventoried Locations."
+msgstr "Confirmer les emplacements non inventoriés."
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:107
+#, python-format
+msgid "Error!"
+msgstr "Erreur!"
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:279
+#: code:addons/stock_inventory_location/stock_inventory_location.py:280
+#: code:addons/stock_inventory_location/stock_inventory_location.py:344
+#: code:addons/stock_inventory_location/stock_inventory_location.py:345
+#, python-format
+msgid "Error: Location locked down"
+msgstr "Erreur: emplacement en inventaire"
+
+#. module: stock_inventory_location
+#: field:stock.fill.inventory,exhaustive:0
+#: view:stock.inventory:0
+#: field:stock.inventory,exhaustive:0
+msgid "Exhaustive"
+msgstr "Exhaustif"
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "If you confirm the Inventory, these Locations will be considered empty and their content will be purged."
+msgstr "Si vous confirmez l'inventaire, ces emplacements seront considérés comme vides et leur contenu sera supprimé."
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_fill_inventory
+#, python-format
+msgid "Import Inventory"
+msgstr "Importer un inventaire"
+
+#. module: stock_inventory_location
+#: field:stock.inventory,location_id:0
+msgid "Inventoried Location"
+msgstr "Emplacement inventorié"
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_inventory
+#, python-format
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_inventory_line
+#, python-format
+msgid "Inventory Line"
+msgstr "Ligne d'inventaire"
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "It could either mean that the Locations are empty, or that the Inventory is not yet complete."
+msgstr "Cela peut vouloir dire soit que l'inventaire n'est pas terminé, soit que ces emplacements sont effectivement vides."
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:108
+#, python-format
+msgid "It's impossible to confirm an inventory in the future. Please change the inventory date to proceed further."
+msgstr "Il n'est pas possible de confirmer un inventaire à une date future. Veuillez changer la date de l'inventaire pour continuer."
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_location
+#, python-format
+msgid "Location"
+msgstr "Emplacement"
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/wizard/stock_confirm_uninventoried_location.py:65
+#, python-format
+msgid "No product in this location. Please select a location in the product form."
+msgstr ""
+"Aucun article dans cet emplacement. Veuillez choisir un emplacement dans le "
+"formulaire produit."
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "Only select exhaustive Inventories."
+msgstr "Ne sélectionne que les inventaires exhaustifs."
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "Open Inventory"
+msgstr "Ouvrir l'inventaire"
+
+#. module: stock_inventory_location
+#: constraint:stock.inventory:0
+msgid "Other Physical inventories are being conducted using the same Locations."
+msgstr "Certains emplacements sont déjà dans un autre inventaire."
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "Purge contents and confirm Inventory"
+msgstr "Supprimer le contenu et confirmer l'inventaire"
+
+#. module: stock_inventory_location
+#: code:_description:0
+#: model:ir.model,name:stock_inventory_location.model_stock_move
+#, python-format
+msgid "Stock Move"
+msgstr "Mouvement de stock"
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "The following Locations are empty"
+msgstr "Les emplacements suivants sont vides"
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "The following Stock Locations are part of the current Physical Inventory, but no Inventory Line has been recorded for them."
+msgstr "Les emplacements suivants font partie de l'inventaire en cours, mais aucune ligne d'inventaire les concernant n'a été enregistrée."
+
+#. module: stock_inventory_location
+#: field:stock.inventory.uninventoried.locations,location_ids:0
+msgid "Uninventoried location"
+msgstr "Emplacements non inventoriés"
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:254
+#, python-format
+msgid "Warning: Wrong location"
+msgstr "Attention: emplacement incorrect"
+
+#. module: stock_inventory_location
+#: code:addons/stock_inventory_location/stock_inventory_location.py:255
+#, python-format
+msgid "You cannot record an Inventory Line for this Location.\n"
+"You must first add this Location to the list of affected Locations on the Inventory form."
+msgstr "Vous ne pouvez pas ajouter cet emplacement.\n"
+"Il ne fait pas partie de la liste des emplacements à inventorier"
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "confirm_missing_locations"
+msgstr "confirm_missing_locations"
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "draft,open,confirm"
+msgstr "draft,open,confirm"
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "draft,open,confirm,done"
+msgstr "draft,open,confirm,done"
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "onchange_location_id(parent.location_id, parent.exhaustive, location_id)"
+msgstr "onchange_location_id(parent.location_id, parent.exhaustive, location_id)"
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "open"
+msgstr "open"
+
+#. module: stock_inventory_location
+#: view:stock.inventory.uninventoried.locations:0
+msgid "or"
+msgstr "ou"
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "{'default_exhaustive': exhaustive}"
+msgstr "{'default_exhaustive': exhaustive}"
+
+#. module: stock_inventory_location
+#: view:stock.inventory:0
+msgid "{'location_id': location_id}"
+msgstr "{'location_id': location_id}"
+
+#. module: stock_inventory_location
+#: view:stock.fill.inventory:0
+msgid "{'readonly':[('exhaustive','=',True)]}"
+msgstr "{'readonly':[('exhaustive','=',True)]}"
+
