@@ -9,6 +9,9 @@ Includes more options for making an inventory out of:
 
 It also allows to make an inventory based on scanned products, adding a line
 with product code and quantity
+Also, if "All Products" or "Selected Categories" options chosen, then you can select between importing:
+* All products
+* Only products with Stock
 
 Credits
 =======
