@@ -7,7 +7,7 @@ from openerp import models, fields, api
 class StockChangeProductQty(models.TransientModel):
     _inherit = 'stock.change.product.qty'
 
-    reason = fields.Char('Reason', required=True,
+    reason = fields.Char('Reason',
                          help='Type in a reason for the product quantity change')
 
     @api.multi
@@ -18,6 +18,3 @@ class StockChangeProductQty(models.TransientModel):
             return super(StockChangeProductQty, this).change_product_qty()
 
         return super(StockChangeProductQty, self).change_product_qty()
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
