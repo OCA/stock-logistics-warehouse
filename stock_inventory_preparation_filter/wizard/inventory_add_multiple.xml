@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="inventory_add_multiple_view">
+            <field name="name">inventory.add_multiple.form</field>
+            <field name="model">inventory.add_multiple</field>
+            <field name="arch" type="xml">
+                <form string="Add Multiple">
+                    <group>
+                        <field name="products_ids"/>
+                    </group>
+                <footer>
+                    <button name="add_multiple" type="object" class="oe_highlight" string="Add"/>
+                    or 
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_inventory_add_multiple">
+            <field name="name">Inventory Add Multiple</field>
+            <field name="res_model">inventory.add_multiple</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="inventory_add_multiple_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>
