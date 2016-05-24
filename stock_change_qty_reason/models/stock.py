@@ -18,7 +18,7 @@ class StockInventoryLine(models.Model):
             move = self.env['stock.move'].browse(move_id)
 
             if move.origin:
-                move.origin = ' ,'.join(move.origin, reason)
+                move.origin = ' ,'.join([move.origin, reason])
             else:
                 move.origin = reason
 
