@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_change_product_quantity_reason" model="ir.ui.view">
+            <field name="name">Change Product Quantity Reason</field>
+            <field name="model">stock.change.product.qty</field>
+            <field name="inherit_id" ref="stock.view_change_product_quantity"/>
+            <field name="arch" type="xml">
+                <field name="new_quantity" position="after">
+                    <field name="reason" attrs="{'required':True}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
