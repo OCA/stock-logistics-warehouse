@@ -8,7 +8,8 @@ class StockChangeProductQty(models.TransientModel):
     _inherit = 'stock.change.product.qty'
 
     reason = fields.Char('Reason',
-                         help='Type in a reason for the product quantity change')
+                         help='Type in a reason for the '
+                         'product quantity change')
 
     @api.multi
     def change_product_qty(self):
