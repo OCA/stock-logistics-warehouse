@@ -4,8 +4,8 @@
 Stock Change Quantity Reason
 ============================
 
-This module was written to extend the product stock management. It allows to set a reason
-on the wizard changing product quantity
+This module extends the product stock management and allows to set a reason
+in the wizard when changing the product quantity.
 
 Bug Tracker
 ===========
@@ -44,4 +44,4 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-To contribute to this module, please visit http://odoo-community.org.
+To contribute to this module, please visit https://odoo-community.org.
