@@ -31,16 +31,21 @@ class TestStockQuantityChangeReason(common.TransactionCase):
         self._product_change_qty(product5, 10, 'product_40_reason')
         self._product_change_qty(product6, 0, 'product_41_reason')
 
-        move2 = self.env['stock.move'].search([('product_id', '=', product2.id)]
-                                              , limit=1, order='id desc')
-        move3 = self.env['stock.move'].search([('product_id', '=', product3.id)]
-                                              , limit=1, order='id desc')
-        move4 = self.env['stock.move'].search([('product_id', '=', product4.id)]
-                                              , limit=1, order='id desc')
-        move5 = self.env['stock.move'].search([('product_id', '=', product5.id)]
-                                              , limit=1, order='id desc')
-        move6 = self.env['stock.move'].search([('product_id', '=', product6.id)]
-                                              , limit=1, order='id desc')
+        move2 = self.env['stock.move'].search([('product_id', '=',
+                                                product2.id)], limit=1,
+                                              order='id desc')
+        move3 = self.env['stock.move'].search([('product_id', '=',
+                                                product3.id)],
+                                              limit=1, order='id desc')
+        move4 = self.env['stock.move'].search([('product_id', '=',
+                                                product4.id)],
+                                              limit=1, order='id desc')
+        move5 = self.env['stock.move'].search([('product_id', '=',
+                                                product5.id)],
+                                              limit=1, order='id desc')
+        move6 = self.env['stock.move'].search([('product_id', '=',
+                                                product6.id)],
+                                              limit=1, order='id desc')
 
         self.assertEqual(move2.origin, 'product_37_reason')
         self.assertFalse(move3)
