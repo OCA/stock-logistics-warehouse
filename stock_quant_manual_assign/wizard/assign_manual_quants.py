@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) 2015 Mikel Arregi - AvanzOSC
 # (c) 2015 Oihane Crucelaegui - AvanzOSC
+# (c) 2016 Miku Laitinen - Avoin.Systems
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import api, exceptions, fields, models, _
@@ -65,11 +66,12 @@ class AssignManualQuants(models.TransientModel):
         ])
         quants_lines = [{
             'quant': x.id,
-            'lot_id': x.lot_id.id,
-            'package_id': x.package_id.id,
+            'quant_name': x.name,
+            'lot_name': x.lot_id.name,
+            'package_name': x.package_id.name,
             'selected': x in move.reserved_quant_ids,
             'qty': x.qty if x in move.reserved_quant_ids else 0,
-            'location_id': x.location_id.id,
+            'location_name': x.location_id.name,
         } for x in available_quants]
         return {'quants_lines': quants_lines}
 
@@ -96,17 +98,14 @@ class AssignManualQuantsLines(models.TransientModel):
     quant = fields.Many2one(
         comodel_name='stock.quant', string='Quant', required=True,
         ondelete='cascade')
-    location_id = fields.Many2one(
-        comodel_name='stock.location', string='Location',
-        related='quant.location_id', readonly=True)
-    lot_id = fields.Many2one(
-        comodel_name='stock.production.lot', string='Lot',
-        related='quant.lot_id', readonly=True,
+    quant_name = fields.Char(string='Quant')
+    location_name = fields.Char(string='Location')
+    lot_name = fields.Char(
+        string='Lot',
         groups="stock.group_production_lot")
-    package_id = fields.Many2one(
-        comodel_name='stock.quant.package', string='Package',
-        related='quant.package_id', readonly=True,
-        groups="stock.group_tracking_lot")
+    package_name = fields.Char(
+        string='Package',
+        groups="stock.group_production_lot")
     qty = fields.Float(
         string='QTY', digits=dp.get_precision('Product Unit of Measure'))
     selected = fields.Boolean(string='Select')
