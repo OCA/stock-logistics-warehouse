@@ -109,8 +109,10 @@ class StockInventory(models.Model):
                     tmp_lines[line.product_code] = line.product_qty
             inventory.empty_line_ids.unlink()
             for product_code in tmp_lines.keys():
-                products = product_obj.search(
-                    [('default_code', '=', product_code)])
+                products = product_obj.search([
+                    '|', ('default_code', '=', product_code),
+                    ('ean13', '=', product_code),
+                ])
                 if products:
                     product = products[0]
                     fake_inventory = StockInventoryFake(
