@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 01:03+0000\n"
-"PO-Revision-Date: 2016-04-27 10:59+0000\n"
+"POT-Creation-Date: 2016-05-27 14:19+0000\n"
+"PO-Revision-Date: 2016-05-27 13:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -128,7 +128,7 @@ msgstr "Lisätiedot"
 #. module: stock_reserve
 #: field:stock.reservation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nimi"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -174,7 +174,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Viimeksi muokattu"
 
 #. module: stock_reserve
 #: field:stock.reservation,write_uid:0
@@ -204,7 +204,7 @@ msgstr "Paikat"
 #. module: stock_reserve
 #: field:stock.reservation,restrict_lot_id:0
 msgid "Lot"
-msgstr ""
+msgstr "Erä"
 
 #. module: stock_reserve
 #: field:stock.reservation,lot_ids:0
@@ -583,7 +583,7 @@ msgstr "Yhteensä"
 #. module: stock_reserve
 #: field:stock.reservation,picking_type_code:0
 msgid "Type of Operation"
-msgstr ""
+msgstr "Operaation tyyppi"
 
 #. module: stock_reserve
 #: field:stock.reservation,price_unit:0
