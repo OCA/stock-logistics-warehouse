@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 02:42+0000\n"
-"PO-Revision-Date: 2016-04-14 14:54+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-05-27 14:19+0000\n"
+"PO-Revision-Date: 2016-05-27 13:25+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,6 +23,11 @@ msgid "Cancel"
 msgstr "Peruuta"
 
 #. module: stock_inventory_hierarchical
+#: field:stock.inventory,complete_name:0
+msgid "Complete reference"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_uid:0
 msgid "Created by"
 msgstr "Luonut"
@@ -31,6 +36,11 @@ msgstr "Luonut"
 #: field:stock.generate.inventory,create_date:0
 msgid "Created on"
 msgstr "Luotu"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,display_name:0
+msgid "Display Name"
+msgstr "Nimi"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:91
@@ -78,6 +88,11 @@ msgid "Inventory prefix"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,__last_update:0
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_uid:0
 msgid "Last Updated by"
 msgstr "Viimeksi päivittänyt"
@@ -105,7 +120,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,location_id:0
 msgid "Location"
-msgstr ""
+msgstr "Sijainti"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.view_inventory_subinventories_filter
@@ -147,6 +162,11 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,parent_right:0
 msgid "Parent Right"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,progress_rate:0
+msgid "Progress"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
