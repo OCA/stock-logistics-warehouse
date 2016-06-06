@@ -1,0 +1,233 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_orderpoint_generator
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (9.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-21 18:42+0000\n"
+"PO-Revision-Date: 2016-10-22 16:43+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Galician (Spain) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/gl_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: gl_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_active
+msgid "Active"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
+msgid "Apply"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:40
+#, python-format
+msgid "Cannot apply because some of selected products has multiple variants."
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_procurement_ids
+msgid "Created Procurements"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_create_uid
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_create_date
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: selection:stock.warehouse.orderpoint.template,lead_type:0
+msgid "Day(s) to get the products"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: selection:stock.warehouse.orderpoint.template,lead_type:0
+msgid "Day(s) to purchase"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_display_name
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_id
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_active
+msgid ""
+"If the active field is set to False, it will allow you to hide the "
+"orderpoint without removing it."
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator___last_update
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_write_uid
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_write_date
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_lead_days
+msgid "Lead Time"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_lead_type
+msgid "Lead Type"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_max_qty
+msgid "Maximum Quantity"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model,name:stock_orderpoint_generator.model_stock_warehouse_orderpoint_template
+msgid "Minimum Inventory Rule"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_min_qty
+msgid "Minimum Quantity"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_group_id
+msgid ""
+"Moves created through this orderpoint will be put in this procurement group."
+" If none is given, the moves generated by procurement rules will be grouped "
+"into one big picking."
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_name
+msgid "Name"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_lead_days
+msgid ""
+"Number of days after the orderpoint is triggered to receive the products or "
+"to order to the vendor"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model,name:stock_orderpoint_generator.model_stock_warehouse_orderpoint_generator
+msgid "Orderpoint Generator"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_group_id
+msgid "Procurement Group"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_uom
+msgid "Product Unit of Measure"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.actions.act_window,name:stock_orderpoint_generator.act_create_product_conf
+#: model:ir.actions.act_window,name:stock_orderpoint_generator.act_create_product_template_conf
+#: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
+msgid "Product warehouse config"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_qty_multiple
+msgid "Qty Multiple"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_orderpoint_template_id
+msgid "Stock rule template"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
+msgid "Templates"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_qty_multiple
+msgid ""
+"The procurement quantity will be rounded up to this multiple.  If it is 0, "
+"the exact quantity will be used.  "
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
+msgid "This wizard will apply the following orderpoint to selected product(s)"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_warehouse_id
+msgid "Warehouse"
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_min_qty
+msgid ""
+"When the virtual stock goes below the Min Quantity specified for this field,"
+" Odoo generates a procurement to bring the forecasted quantity to the Max "
+"Quantity."
+msgstr ""
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_max_qty
+msgid ""
+"When the virtual stock goes below the Min Quantity, Odoo generates a "
+"procurement to bring the forecasted quantity to the Quantity specified as "
+"Max Quantity."
+msgstr ""
