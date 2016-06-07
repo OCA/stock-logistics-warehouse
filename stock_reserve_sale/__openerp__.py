@@ -20,7 +20,7 @@
 ##############################################################################
 
 {'name': 'Stock Reserve Sales',
- 'version': '8.0.1.0.0',
+ 'version': '8.0.1.0.1',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
