@@ -119,6 +119,7 @@ class StockInventory(models.Model):
         elif inventory.filter == 'empty':
             tmp_lines = {}
             empty_line_obj = self.env['stock.inventory.line.empty']
+            inventory_line_obj = self.env['stock.inventory.line']
             lines_to_process = inventory.empty_line_ids.filtered(
                 lambda l: not l.added_to_inventory and l.product_found)
             for line in lines_to_process:
@@ -140,12 +141,13 @@ class StockInventory(models.Model):
                     if values:
                         values[0]['product_qty'] = tmp_lines[product_code]
                     else:
-                        empty_line_obj.create(
-                            {
-                                'product_code': product_code,
-                                'product_qty': tmp_lines[product_code],
-                                'inventory_id': inventory.id,
-                            })
+                        inventory_line_obj.create({
+                            'inventory_id': inventory.id,
+                            'product_qty': tmp_lines[product_code],
+                            'location_id': inventory.location_id.id,
+                            'product_id': product.id,
+                            'product_uom_id': product.uom_id.id,
+                        })
                     vals += values
         else:
             vals = super(StockInventory, self)._get_inventory_lines(
