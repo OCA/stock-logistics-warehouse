@@ -18,5 +18,5 @@
         'demo/mrp_bom.yml',
     ],
     'license': 'AGPL-3',
-    'installable': True,
+    'installable': False,
 }
