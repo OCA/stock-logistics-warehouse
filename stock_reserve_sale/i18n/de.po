@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 01:38+0000\n"
-"PO-Revision-Date: 2016-01-14 10:11+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"POT-Creation-Date: 2016-06-08 00:48+0000\n"
+"PO-Revision-Date: 2016-04-27 11:00+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgid ""
 msgstr "Eine Bestandsreservierung wird für Produkte in ausgewählten Positionen vorgenommen. Wenn ein Gültigkeitsdatum angegeben wird, wird die Reservierung nach diesem Datum aufgehoben."
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:179
+#: code:addons/stock_reserve_sale/model/sale.py:188
 #, python-format
 msgid ""
 "As you changed the quantity of the line, the quantity of the stock "
@@ -40,15 +40,25 @@ msgid "Can Have Stock Reservations"
 msgstr "Darf reserviert werden"
 
 #. module: stock_reserve_sale
+#: field:sale.order.line,is_stock_reservable:0
+msgid "Can be reserved"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Cancel"
 msgstr "Abbrechen"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:188
+#: code:addons/stock_reserve_sale/model/sale.py:197
 #, python-format
 msgid "Configuration Error!"
 msgstr "Konfigurationsfehler!"
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,consumed_for:0
+msgid "Consumed for"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
@@ -61,8 +71,13 @@ msgid "Created on"
 msgstr "Angelegt am"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:210
-#: code:addons/stock_reserve_sale/model/sale.py:222
+#: field:sale.stock.reserve,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:219
+#: code:addons/stock_reserve_sale/model/sale.py:231
 #, python-format
 msgid "Error"
 msgstr "Fehler"
@@ -83,6 +98,11 @@ msgid ""
 "If a date is given, the reservations will be released at the end of the "
 "validity."
 msgstr "Wenn ein Datum angegeben wurde, werden die zugehörigen Reservierung an diesem Tag freigegeben."
+
+#. module: stock_reserve_sale
+#: field:sale.stock.reserve,__last_update:0
+msgid "Last Modified on"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0
@@ -111,6 +131,16 @@ msgid "Pre-book products from stock"
 msgstr "Vorreservierung vom Produktbestand"
 
 #. module: stock_reserve_sale
+#: field:stock.reservation,production_id:0
+msgid "Production Order for Produced Products"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,raw_material_production_id:0
+msgid "Production Order for Raw Materials"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "Release Reservation"
 msgstr "Reservierung auflösen"
@@ -137,6 +167,11 @@ msgid "Reserve Stock for Quotation Lines"
 msgstr "Reservierter Bestand aus Angebotspositionen"
 
 #. module: stock_reserve_sale
+#: field:stock.reservation,sale_id:0
+msgid "Sale Order"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: field:stock.reservation,sale_line_id:0
 msgid "Sale Order Line"
 msgstr "Verkaufsauftragsposition"
@@ -157,7 +192,7 @@ msgid "Sales Order Line"
 msgstr "Verkaufsauftragsposition"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:223
+#: code:addons/stock_reserve_sale/model/sale.py:232
 #, python-format
 msgid ""
 "Several stock reservations are linked with the line. Impossible to adjust "
@@ -181,12 +216,17 @@ msgid "Stock Reservation"
 msgstr "Bestandsreservierung"
 
 #. module: stock_reserve_sale
+#: help:stock.reservation,consumed_for:0
+msgid "Technical field used to make the traceability of produced products"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: field:sale.stock.reserve,date_validity:0
 msgid "Validity Date"
 msgstr "Gültigkeitsdatum"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:211
+#: code:addons/stock_reserve_sale/model/sale.py:220
 #, python-format
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "
