@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 01:03+0000\n"
+"POT-Creation-Date: 2016-06-08 00:48+0000\n"
 "PO-Revision-Date: 2016-04-27 11:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/en/)\n"
@@ -26,7 +26,7 @@ msgid ""
 msgstr "A stock reservation will be created for the products\n                        of the selected quotation lines. If a validity date is specified,\n                        the reservation will be released once the date has passed."
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:179
+#: code:addons/stock_reserve_sale/model/sale.py:188
 #, python-format
 msgid ""
 "As you changed the quantity of the line, the quantity of the stock "
@@ -49,7 +49,7 @@ msgid "Cancel"
 msgstr "Cancel"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:188
+#: code:addons/stock_reserve_sale/model/sale.py:197
 #, python-format
 msgid "Configuration Error!"
 msgstr "Configuration Error!"
@@ -75,8 +75,8 @@ msgid "Display Name"
 msgstr "Display Name"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:210
-#: code:addons/stock_reserve_sale/model/sale.py:222
+#: code:addons/stock_reserve_sale/model/sale.py:219
+#: code:addons/stock_reserve_sale/model/sale.py:231
 #, python-format
 msgid "Error"
 msgstr "Error"
@@ -191,7 +191,7 @@ msgid "Sales Order Line"
 msgstr "Sales Order Line"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:223
+#: code:addons/stock_reserve_sale/model/sale.py:232
 #, python-format
 msgid ""
 "Several stock reservations are linked with the line. Impossible to adjust "
@@ -225,7 +225,7 @@ msgid "Validity Date"
 msgstr "Validity Date"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:211
+#: code:addons/stock_reserve_sale/model/sale.py:220
 #, python-format
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "
