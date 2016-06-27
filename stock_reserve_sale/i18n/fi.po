@@ -76,8 +76,13 @@ msgid "Display Name"
 msgstr "Nimi"
 
 #. module: stock_reserve_sale
+<<<<<<< HEAD
 #: code:addons/stock_reserve_sale/model/sale.py:219
 #: code:addons/stock_reserve_sale/model/sale.py:231
+=======
+#: code:addons/stock_reserve_sale/model/sale.py:210
+#: code:addons/stock_reserve_sale/model/sale.py:222
+>>>>>>> OCA Transbot updated translations from Transifex
 #, python-format
 msgid "Error"
 msgstr "Virhe"
