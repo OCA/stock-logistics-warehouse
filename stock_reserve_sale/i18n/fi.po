@@ -77,12 +77,17 @@ msgstr "Nimi"
 
 #. module: stock_reserve_sale
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: code:addons/stock_reserve_sale/model/sale.py:219
 #: code:addons/stock_reserve_sale/model/sale.py:231
 =======
 #: code:addons/stock_reserve_sale/model/sale.py:210
 #: code:addons/stock_reserve_sale/model/sale.py:222
 >>>>>>> OCA Transbot updated translations from Transifex
+=======
+#: code:addons/stock_reserve_sale/model/sale.py:219
+#: code:addons/stock_reserve_sale/model/sale.py:231
+>>>>>>> 71788343c09d68cb578f9e4f9a5e055e66c5c0aa
 #, python-format
 msgid "Error"
 msgstr "Virhe"
