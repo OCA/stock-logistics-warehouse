@@ -41,8 +41,8 @@ class StockInventoryFake(object):
         self.package_id = inventory.package_id
 
     def default_value(self):
-        value = {}
-        value.update({
+        # value = {}
+        value = {
             'theoretical_qty': 0.0,
             'product_id': self.product_id.id,
             'location_id': self.location_id.id if self.location_id else False,
@@ -52,7 +52,7 @@ class StockInventoryFake(object):
             'product_qty': 0.0,
             'product_uom_id': self.product_id.uom_id.id,
             'partner_id': False
-        })
+        }
         return [value]
 
 
@@ -99,7 +99,6 @@ class StockInventory(models.Model):
         vals = []
         product_tmpl_obj = self.env['product.template']
         product_obj = self.env['product.product']
-
         if inventory.filter in ('categories', 'products'):
             products = product_obj
             if inventory.filter == 'categories':
@@ -115,7 +114,6 @@ class StockInventory(models.Model):
                     fake_inventory)
                 if inventory.import_products == 'all' and not value:
                     value = fake_inventory.default_value()
-
                 vals += value
         elif inventory.filter == 'lots':
             for lot in inventory.lot_ids:

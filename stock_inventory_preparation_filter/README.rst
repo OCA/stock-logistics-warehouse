@@ -37,7 +37,6 @@ help us smashing it by providing a detailed and welcomed `feedback
 stock-logistics-warehouse/issues/new?body=module:%20
 stock_inventory_preparation_filter%0Aversion:%20
 8.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
->>>>>>> d6476b27e5f2c77af83fb34a3c5ff599dc90b066
 
 Credits
 =======
