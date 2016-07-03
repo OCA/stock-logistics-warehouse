@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-01 15:38+0000\n"
-"PO-Revision-Date: 2016-05-31 20:27+0000\n"
+"POT-Creation-Date: 2016-06-12 19:59+0000\n"
+"PO-Revision-Date: 2016-06-14 10:45+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Predložak proizvoda"
 msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand."
-msgstr ""
+msgstr "Količina ovog proizvoda nije mogla biti proizvedena korištenjem trenutno raspoloživih materijala."
 
 #. module: stock_available_mrp
 #: model:ir.model.fields,help:stock_available_mrp.field_product_template_potential_qty
@@ -57,9 +57,9 @@ msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand. If the product has several variants, this will be the biggest "
 "quantity that can be made for a any single variant."
-msgstr ""
+msgstr "Količina ovog proizvoda koja može biti proizvodedna raspoloživim količinama sirovina. Ako proizvod ima nekoliko varijanti, ovo će biti najveća moguća količina koja se može proizvesti za svaku pojedinu varijantu."
 
 #. module: stock_available_mrp
 #: model:product.uom,name:stock_available_mrp.thousand
 msgid "Thousand"
-msgstr ""
+msgstr "Tisuću"
