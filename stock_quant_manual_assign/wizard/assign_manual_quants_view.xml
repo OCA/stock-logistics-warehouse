@@ -22,7 +22,6 @@
                 <footer>
                     <button name="assign_quants" type="object"
                         string="Confirm" class="oe_highlight" />
-                    or
                     <button name="cancel" string="Cancel" class="oe_link"
                         special="cancel" />
                 </footer>

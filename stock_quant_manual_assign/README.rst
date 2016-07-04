@@ -6,7 +6,7 @@
 Stock - Manual Quant Assignment
 ===============================
 
-This module allow you to manually change the automatic quant selection.
+This module allows you to manually change the automatic quant selection.
 
 Usage
 =====

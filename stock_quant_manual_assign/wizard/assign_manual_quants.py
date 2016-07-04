@@ -63,17 +63,16 @@ class AssignManualQuants(models.TransientModel):
             ('reservation_id', '=', False),
             ('reservation_id', '=', move.id)
         ])
-        quants_lines = []
-        for x in available_quants:
-            quants_lines.append([0, 0, {
-                'quant': x.id,
-                'lot_id': x.lot_id.id,
-                'package_id': x.package_id.id,
-                'selected': x in move.reserved_quant_ids,
-                'qty': x.qty if x in move.reserved_quant_ids else 0,
-                'location_id': x.location_id.id,
-            }])
+        quants_lines = [{
+            'quant': x.id,
+            'lot_id': x.lot_id.id,
+            'package_id': x.package_id.id,
+            'selected': x in move.reserved_quant_ids,
+            'qty': x.qty if x in move.reserved_quant_ids else 0,
+            'location_id': x.location_id.id,
+        } for x in available_quants]
         res.update({'quants_lines': quants_lines})
+        res = self._convert_to_write(self._convert_to_cache(res))
         return res
 
 
