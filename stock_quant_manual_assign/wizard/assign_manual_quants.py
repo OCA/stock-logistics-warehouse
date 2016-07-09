@@ -17,7 +17,9 @@ class AssignManualQuants(models.TransientModel):
             if record.quants_lines:
                 move = self.env['stock.move'].browse(
                     self.env.context['active_id'])
-                if record.lines_qty > move.product_qty:
+                move_qty = self.env['product.uom']._compute_qty_obj(
+                        move.product_uom, move.product_uom_qty, move.product_id.uom_id)
+                if record.lines_qty > move_qty:
                     raise exceptions.Warning(
                         _('Quantity is higher than the needed one'))
 
@@ -26,7 +28,9 @@ class AssignManualQuants(models.TransientModel):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         lines_qty = sum(self.quants_lines.mapped('qty'))
         self.lines_qty = lines_qty
-        self.move_qty = move.product_qty - lines_qty
+        move_qty = self.env['product.uom']._compute_qty_obj(
+                move.product_uom, move.product_uom_qty, move.product_id.uom_id)
+        self.move_qty = move_qty - lines_qty
 
     name = fields.Char(string='Name')
     lines_qty = fields.Float(
