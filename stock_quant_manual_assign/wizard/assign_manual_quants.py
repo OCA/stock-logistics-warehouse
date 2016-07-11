@@ -17,7 +17,9 @@ class AssignManualQuants(models.TransientModel):
             if record.quants_lines:
                 move = self.env['stock.move'].browse(
                     self.env.context['active_id'])
-                if record.lines_qty > move.product_uom_qty:
+                move_qty = self.env['product.uom']._compute_qty_obj(
+                        move.product_uom, move.product_uom_qty, move.product_id.uom_id)
+                if record.lines_qty > move_qty:
                     raise exceptions.Warning(
                         _('Quantity is higher than the needed one'))
 
@@ -26,7 +28,9 @@ class AssignManualQuants(models.TransientModel):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         lines_qty = sum(self.quants_lines.mapped('qty'))
         self.lines_qty = lines_qty
-        self.move_qty = move.product_uom_qty - lines_qty
+        move_qty = self.env['product.uom']._compute_qty_obj(
+                move.product_uom, move.product_uom_qty, move.product_id.uom_id)
+        self.move_qty = move_qty - lines_qty
 
     name = fields.Char(string='Name')
     lines_qty = fields.Float(
@@ -52,8 +56,8 @@ class AssignManualQuants(models.TransientModel):
         return {}
 
     @api.model
-    def default_get(self, var_fields):
-        super(AssignManualQuants, self).default_get(var_fields)
+    def default_get(self, fields):
+        res = super(AssignManualQuants, self).default_get(fields)
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         available_quants = self.env['stock.quant'].search([
             ('location_id', 'child_of', move.location_id.id),
@@ -71,7 +75,9 @@ class AssignManualQuants(models.TransientModel):
             'qty': x.qty if x in move.reserved_quant_ids else 0,
             'location_id': x.location_id.id,
         } for x in available_quants]
-        return {'quants_lines': quants_lines}
+        res.update({'quants_lines': quants_lines})
+        res = self._convert_to_write(self._convert_to_cache(res))
+        return res
 
 
 class AssignManualQuantsLines(models.TransientModel):
