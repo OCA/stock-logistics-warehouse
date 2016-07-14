@@ -34,12 +34,15 @@ class TestMtoMtsRoute(TransactionCase):
 
     def test_standard_mts_route(self):
         self.procurement.run()
+        procurement_id = self.procurement_obj.search([
+            ('group_id', '=', self.procurement.group_id.id),
+            ('move_ids', '!=', False)], limit=1)
         self.assertEqual('make_to_stock',
-                         self.procurement.move_ids[0].procure_method)
+                         procurement_id.move_ids[0].procure_method)
         self.assertEqual(self.procurement.product_qty,
-                         self.procurement.move_ids[0].product_uom_qty)
+                         procurement_id.move_ids[0].product_uom_qty)
         self.assertEqual('confirmed',
-                         self.procurement.move_ids[0].state)
+                         procurement_id.move_ids[0].state)
 
     def test_mts_mto_route_split(self):
         mto_mts_route = self.env.ref('stock_mts_mto_rule.route_mto_mts')
@@ -81,6 +84,7 @@ class TestMtoMtsRoute(TransactionCase):
         self.warehouse.mto_mts_management = True
         self.product = self.env.ref('product.product_product_4')
         self.company_partner = self.env.ref('base.main_partner')
+        self.procurement_obj = self.env['procurement.order']
         self.group = self.env['procurement.group'].create({
             'name': 'test',
         })
