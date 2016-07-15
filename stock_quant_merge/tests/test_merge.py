@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 # © 2015 Numérigraphe SARL
+# © 2016 Serv. Tecnol. Avanzados - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp.tests.common import TransactionCase
+from ..hooks import post_init_hook
 
 
 class TestMerge(TransactionCase):
@@ -16,7 +18,10 @@ class TestMerge(TransactionCase):
         self.wh_ch = self.browse_ref('stock.stock_warehouse_shop0')
 
         # Get a product
-        self.product = self.browse_ref('product.product_product_4')
+        self.product = self.env['product.product'].create({
+            'name': 'Test',
+            'type': 'product',
+        })
 
         # Zero out the inventory of the product
         inventory = self.env['stock.inventory'].create(
@@ -45,10 +50,8 @@ class TestMerge(TransactionCase):
         quant_obj = self.env['stock.quant']
         domain = [('location_id', '=', self.wh_ch.lot_stock_id.id),
                   ('product_id', '=', self.product.id)]
-
         quants = quant_obj.search(domain)
         self.assertEqual(len(quants), 1, "There should be 1 quant")
-
         # Make a reservation to split the quant
         move = self.env['stock.move'].create(
             {'name': 'Test move',
@@ -59,12 +62,19 @@ class TestMerge(TransactionCase):
              'product_uom': self.product.uom_id.id})
         move.action_confirm()
         move.action_assign()
-
         quants = quant_obj.search(domain)
         self.assertEqual(len(quants), 2, "There should be 2 quants")
-
         # Cancel the move : the quants should be merged back together
         move.action_cancel()
-
         quants = quant_obj.search(domain)
         self.assertEqual(len(quants), 1, "There should be 1 quant")
+
+    def test_init_hook(self):
+        quant_obj = self.env['stock.quant']
+        quant = quant_obj.search([('product_id', '=', self.product.id)])
+        quant2 = quant.copy({'qty': 1.0})
+        quant2.history_ids = [(6, 0, quant.history_ids.ids)]
+        post_init_hook(self.cr, self.registry)
+        quants = quant_obj.search([('product_id', '=', self.product.id)])
+        self.assertEqual(len(quants), 1)
+        self.assertEqual(quants.qty, 11.0)
