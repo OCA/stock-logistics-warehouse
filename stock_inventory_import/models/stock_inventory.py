@@ -83,4 +83,4 @@ class StockInventory(models.Model):
                 raise exceptions.Warning(
                     _("Loaded lines must be processed at least one time for "
                       "inventory : %s") % (inventory.name))
-            super(StockInventory, inventory).action_done()
+        return super(StockInventory, self).action_done()
