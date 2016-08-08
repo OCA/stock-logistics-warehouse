@@ -4,7 +4,7 @@
 
 {
     "name": "Stock - Manual assignment of quants",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.1.0",
     "category": "Warehouse Management",
     "license": "AGPL-3",
     "author": "OdooMRP team, "
