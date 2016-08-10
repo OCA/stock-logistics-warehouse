@@ -38,6 +38,7 @@ addon | version | summary
 [stock_quant_merge](stock_quant_merge/) | 8.0.1.0.0 | Stock - Quant merge
 [stock_reserve](stock_reserve/) | 8.0.0.2.0 | Stock reservations on products
 [stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.1 | Stock Reserve Sales
+[stock_traceability_operation](stock_traceability_operation/) | 8.0.1.1.0 | Adds operations in traceability and quant history
 
 Unported addons
 ---------------
