@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record model="ir.actions.act_window" id="owned_quants">
+        <field name="name">Stock</field>
+        <field name="res_model">stock.quant</field>
+        <field name="context">{'search_default_locationgroup':1}</field>
+        <field name="domain">[('owner_id', '=', active_id)]</field>
+    </record>
+
+    <record id="view_res_partner_lots" model="ir.ui.view">
+        <field name="name">res.partner.type.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button o_res_partner_tip_opp" type="action"
+                    attrs="{'invisible': [('quant_count', '=', 0)]}"
+                    name="%(owned_quants)d"
+                    icon="fa-building-o">
+                    <field string="Owned Products" name="quant_count" widget="statinfo"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <record id="view_res_partner_lots_filter" model="ir.ui.view">
+        <field name="name">res.partner.select</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="quant_ids" string="Product" domain="[('quant_ids.product_id', 'ilike', self)]"/>
+                <field name="quant_ids" string="Lot name" domain="[('quant_ids.lot_id', 'ilike', self)]"/>
+            </xpath>
+        </field>
+    </record>
+
+</data>
+</openerp>
