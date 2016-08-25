@@ -25,6 +25,7 @@ addon | version | summary
 [stock_available](stock_available/) | 9.0.1.1.0 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 9.0.1.1.0 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 | Consider the production potential is available to promise
+[stock_partner_lot](stock_partner_lot/) | 9.0.1.0.0 | Show lots on the partners that own them
 
 Unported addons
 ---------------
