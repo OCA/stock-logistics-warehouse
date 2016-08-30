@@ -8,7 +8,7 @@ from openerp import api, fields, models
 class StockQuant(models.Model):
     _inherit = 'stock.quant'
 
-    partner_id = fields.Many2one(
+    dest_partner_id = fields.Many2one(
         comodel_name='res.partner', compute='_compute_partner_id',
         string='Partner', store=True)
 
@@ -18,4 +18,5 @@ class StockQuant(models.Model):
                 lambda q: q.location_id.usage in ['customer', 'supplier']):
             move = quant.history_ids.filtered(
                 lambda x: x.location_dest_id == quant.location_id)[:1]
-            quant.partner_id = move.picking_id.partner_id.commercial_partner_id
+            quant.dest_partner_id =\
+                move.picking_id.partner_id.commercial_partner_id
