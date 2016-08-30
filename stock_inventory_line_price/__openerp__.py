@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Esther Martín - AvanzOSC
+# (c) 2016 Esther Martín - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
@@ -8,9 +8,9 @@
     "category": "Generic Modules",
     "author": "OdooMRP team, "
               "AvanzOSC, "
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+              "Tecnativa - Pedro M. Baeza",
     "contributors": [
-        "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Pedro M. Baeza <pedro.baeza@tecnativa.com>",
         "Ana Juaristi <ajuaristio@gmail.com>",
         "Esther Martín <esthermartin@avanzosc.es>",
     ],
