@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) 2016 Esther Martín - AvanzOSC
-# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Standard price at inventory level",
@@ -8,7 +8,8 @@
     "category": "Generic Modules",
     "author": "OdooMRP team, "
               "AvanzOSC, "
-              "Tecnativa - Pedro M. Baeza",
+              "Tecnativa, "
+              "Odoo Community Association (OCA)",
     "contributors": [
         "Pedro M. Baeza <pedro.baeza@tecnativa.com>",
         "Ana Juaristi <ajuaristio@gmail.com>",
