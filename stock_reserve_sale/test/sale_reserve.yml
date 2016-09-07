@@ -21,8 +21,6 @@
     uom_po_id: product.product_uom_kgm
     valuation: real_time
     cost_method: average
-    property_stock_account_input: account.o_expense
-    property_stock_account_output: account.o_income
 -
   I update the current stock of the Gelato with 10 kgm
 -
@@ -38,11 +36,13 @@
 -
   !record {model: sale.order, id: sale_reserve_01}:
     partner_id: base.res_partner_2
-    payment_term: account.account_payment_term
+    payment_term_id: account.account_payment_term
     order_line:
       - product_id: product_gelato
+        name: Gelato
         product_uom_qty: 4
       - product_id: product_gelato
+        name: Gelato
         product_uom_qty: 1
 -
   I call the wizard to reserve the products of the sales order
