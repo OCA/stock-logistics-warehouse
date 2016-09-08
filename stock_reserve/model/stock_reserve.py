@@ -97,9 +97,9 @@ class StockReservation(models.Model):
 
     @api.model
     def _default_location_id(self):
-        move_obj = self.env['stock.move']
+        picking_obj = self.env['stock.picking']
         picking_type_id = self._default_picking_type_id()
-        return (move_obj
+        return (picking_obj
                 .with_context(default_picking_type_id=picking_type_id)
                 ._default_location_source())
 

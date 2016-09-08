@@ -20,6 +20,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, exceptions
+from openerp.tools.translate import _
 
 
 class SaleStockReserve(models.TransientModel):
@@ -53,9 +54,9 @@ class SaleStockReserve(models.TransientModel):
         if len(owners) == 1:
             return owners.pop()
         elif len(owners) > 1:
-            raise exceptions.Warning(
+            raise exceptions.Warning(_(
                 'The lines have different owners. Please reserve them '
-                'individually with the reserve button on each one.')
+                'individually with the reserve button on each one.'))
 
         return self.env['res.partner']
 
@@ -82,7 +83,6 @@ class SaleStockReserve(models.TransientModel):
     @api.multi
     def _prepare_stock_reservation(self, line):
         self.ensure_one()
-        product_uos = line.product_uos.id if line.product_uos else False
         return {'product_id': line.product_id.id,
                 'product_uom': line.product_uom.id,
                 'product_uom_qty': line.product_uom_qty,
@@ -91,8 +91,6 @@ class SaleStockReserve(models.TransientModel):
                 'location_id': self.location_id.id,
                 'location_dest_id': self.location_dest_id.id,
                 'note': self.note,
-                'product_uos_qty': line.product_uos_qty,
-                'product_uos': product_uos,
                 'price_unit': line.price_unit,
                 'sale_line_id': line.id,
                 'restrict_partner_id': self.owner_id.id,
@@ -107,7 +105,7 @@ class SaleStockReserve(models.TransientModel):
             if not line.is_stock_reservable:
                 continue
             vals = self._prepare_stock_reservation(line)
-            reserv = self.env['stock.reservation'].create(vals)
+            reserv = self.env['stock.reservation'].sudo().create(vals)
             reserv.reserve()
         return True
 
