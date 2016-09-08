@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
     @api.depends('state',
                  'order_line.reservation_ids',
                  'order_line.is_stock_reservable')
-    def _stock_reservation(self):
+    def _compute_stock_reservation(self):
         for sale in self:
             has_stock_reservation = False
             is_stock_reservable = False
@@ -46,13 +46,13 @@ class SaleOrder(models.Model):
             sale.has_stock_reservation = has_stock_reservation
 
     has_stock_reservation = fields.Boolean(
-        compute='_stock_reservation',
+        compute='_compute_stock_reservation',
         readonly=True,
         multi='stock_reservation',
         store=True,
         string='Has Stock Reservations')
     is_stock_reservable = fields.Boolean(
-        compute='_stock_reservation',
+        compute='_compute_stock_reservation',
         readonly=True,
         multi='stock_reservation',
         store=True,
@@ -120,7 +120,7 @@ class SaleOrderLine(models.Model):
     @api.depends('state',
                  'product_id.route_ids',
                  'product_id.type')
-    def _is_stock_reservable(self):
+    def _is_compute_stock_reservation(self):
         for line in self:
             reservable = False
             if (not (line.state != 'draft' or
@@ -137,7 +137,7 @@ class SaleOrderLine(models.Model):
         string='Stock Reservation',
         copy=False)
     is_stock_reservable = fields.Boolean(
-        compute='_is_stock_reservable',
+        compute='_is_compute_stock_reservation',
         readonly=True,
         string='Can be reserved')
 
@@ -149,56 +149,31 @@ class SaleOrderLine(models.Model):
         reservations.release()
         return True
 
-    def product_id_change(self, cr, uid, ids,
-                          pricelist,
-                          product,
-                          qty=0,
-                          uom=False,
-                          qty_uos=0,
-                          uos=False,
-                          name='',
-                          partner_id=False,
-                          lang=False,
-                          update_tax=True,
-                          date_order=False,
-                          packaging=False,
-                          fiscal_position=False,
-                          flag=False,
-                          context=None):
-        result = super(SaleOrderLine, self).product_id_change(
-            cr, uid, ids, pricelist, product, qty=qty, uom=uom,
-            qty_uos=qty_uos, uos=uos, name=name, partner_id=partner_id,
-            lang=lang, update_tax=update_tax, date_order=date_order,
-            packaging=packaging, fiscal_position=fiscal_position,
-            flag=flag, context=context)
-        if not ids:  # warn only if we change an existing line
-            return result
-        assert len(ids) == 1, "Expected 1 ID, got %r" % ids
-        line = self.browse(cr, uid, ids[0], context=context)
-        if qty != line.product_uom_qty and line.reservation_ids:
+    @api.onchange('product_id', 'product_uom_qty')
+    def onchange_product_id_qty(self):
+        reserved_qty = sum(self.reservation_ids.mapped('product_uom_qty'))
+
+        if self.product_uom_qty != reserved_qty and self.reservation_ids:
             msg = _("As you changed the quantity of the line, "
                     "the quantity of the stock reservation will "
-                    "be automatically adjusted to %.2f.") % qty
-            msg += "\n\n"
-            result.setdefault('warning', {})
-            if result['warning'].get('message'):
-                result['warning']['message'] += msg
-            else:
-                result['warning'] = {
+                    "be automatically adjusted to %.2f."
+                    "") % self.product_uom_qty
+            return {
+                'warning': {
                     'title': _('Configuration Error!'),
                     'message': msg,
-                }
-        return result
+                },
+            }
+        return {}
 
     @api.multi
     def write(self, vals):
         block_on_reserve = ('product_id',
-                            'product_uom',
-                            'product_uos',
+                            'product_uom_id',
                             'type')
         update_on_reserve = ('price_unit',
                              'product_uom_qty',
-                             'product_uos_qty')
+                             )
         keys = set(vals.keys())
         test_block = keys.intersection(block_on_reserve)
         test_update = keys.intersection(update_on_reserve)
@@ -228,7 +203,6 @@ class SaleOrderLine(models.Model):
                 line.reservation_ids.write(
                     {'price_unit': line.price_unit,
                      'product_uom_qty': line.product_uom_qty,
-                     'product_uos_qty': line.product_uos_qty,
                      }
                 )
         return res

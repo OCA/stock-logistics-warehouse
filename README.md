@@ -26,6 +26,8 @@ addon | version | summary
 [stock_available_immediately](stock_available_immediately/) | 9.0.1.1.0 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 | Consider the production potential is available to promise
 [stock_partner_lot](stock_partner_lot/) | 9.0.1.0.0 | Show lots on the partners that own them
+[stock_reserve](stock_reserve/) | 9.0.0.2.0 | Stock reservations on products
+[stock_reserve_sale](stock_reserve_sale/) | 9.0.1.0.0 | Stock Reserve Sales
 
 Unported addons
 ---------------
@@ -47,7 +49,5 @@ addon | version | summary
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.0.0 (unported) | Stock - Manual assignment of quants
 [stock_quant_merge](stock_quant_merge/) | 8.0.1.0.0 (unported) | Stock - Quant merge
 [stock_reord_rule](stock_reord_rule/) | 0.2 (unported) | Improved reordering rules
-[stock_reserve](stock_reserve/) | 8.0.0.2.0 (unported) | Stock reservations on products
-[stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.0 (unported) | Stock Reserve Sales
 
 [//]: # (end addons)
