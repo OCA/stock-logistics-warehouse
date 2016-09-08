@@ -105,7 +105,7 @@ class SaleStockReserve(models.TransientModel):
             if not line.is_stock_reservable:
                 continue
             vals = self._prepare_stock_reservation(line)
-            reserv = self.env['stock.reservation'].create(vals)
+            reserv = self.env['stock.reservation'].sudo().create(vals)
             reserv.reserve()
         return True
 

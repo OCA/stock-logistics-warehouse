@@ -146,7 +146,7 @@ class SaleOrderLine(models.Model):
         reserv_ids = [reserv.id for line in self
                       for reserv in line.reservation_ids]
         reservations = self.env['stock.reservation'].browse(reserv_ids)
-        reservations.release()
+        reservations.sudo().release()
         return True
 
     @api.onchange('product_id', 'product_uom_qty')
@@ -200,7 +200,7 @@ class SaleOrderLine(models.Model):
                           'Please release the reservation '
                           'before changing the quantity.'))
 
-                line.reservation_ids.write(
+                line.reservation_ids.sudo().write(
                     {'price_unit': line.price_unit,
                      'product_uom_qty': line.product_uom_qty,
                      }
