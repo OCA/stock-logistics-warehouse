@@ -100,12 +100,15 @@ class SaleStockReserve(models.TransientModel):
     def stock_reserve(self, line_ids):
         self.ensure_one()
 
+        reserv_obj = self.env['stock.reservation'].sudo()
         lines = self.env['sale.order.line'].browse(line_ids)
         for line in lines:
             if not line.is_stock_reservable:
                 continue
             vals = self._prepare_stock_reservation(line)
-            reserv = self.env['stock.reservation'].sudo().create(vals)
+            pick_type_id = line.order_id.warehouse_id.int_type_id.id
+            reserv = reserv_obj.with_context(
+                default_picking_type_id=pick_type_id).create(vals)
             reserv.reserve()
         return True
 
