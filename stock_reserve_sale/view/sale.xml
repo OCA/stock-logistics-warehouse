@@ -9,12 +9,17 @@
             <field name="arch" type="xml">
                 <button name="action_quotation_send" position="before">
                     <field name="is_stock_reservable" invisible="1"/>
+                    <field name="has_stock_reservation" invisible="1"/>
                     <button name="%(action_sale_stock_reserve)d"
                         type="action"
                         string="Reserve Stock"
                         help="Pre-book products from stock"
                         attrs="{'invisible': [('is_stock_reservable', '=', False)]}"
                         />
+                    <button name="release_all_stock_reservation"
+                        type="object"
+                        string="Release Reservations"
+                        attrs="{'invisible': [('has_stock_reservation', '=', False)]}"/>
                 </button>
 
                 <field name="order_line" position="attributes">
