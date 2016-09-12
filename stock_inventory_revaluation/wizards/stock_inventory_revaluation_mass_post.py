@@ -23,8 +23,9 @@ class StockInventoryRevaluationMassPost(models.TransientModel):
             'Bad context propagation'
         return res
 
-    @api.one
+    @api.multi
     def process(self):
+        self.ensure_one()
         revaluation_ids = self.env.context.get('active_ids', [])
         revaluation_obj = self.env['stock.inventory.revaluation']
         for revaluation in revaluation_obj.browse(revaluation_ids):
