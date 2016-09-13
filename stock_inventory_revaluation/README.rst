@@ -38,7 +38,9 @@ Usage
 =====
 
 * Go to *Inventory / Inventory Control / Inventory Revaluation / Products*
-  to create a new Inventory Revaluation.
+  to create a new Inventory Revaluation. For products set with average or
+  standard price and real-time valuation, go to the Product form and use the
+  link to change the standard price.
 
 * In order to post the inventory revaluation for multiple items at once,
   select the records in the tree view and go to
