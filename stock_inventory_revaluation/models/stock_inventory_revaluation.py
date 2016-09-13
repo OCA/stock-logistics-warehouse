@@ -98,6 +98,11 @@ class StockInventoryRevaluation(models.Model):
         default=lambda self: fields.Date.context_today(self),
         states={'draft': [('readonly', False)]})
 
+    user_id = fields.Many2one('res.users', 'Created by',
+                              readonly=True,
+                              states={'draft': [('readonly', False)]},
+                              default=lambda self: self.env.user)
+
     journal_id = fields.Many2one('account.journal', 'Journal',
                                  default=_default_journal,
                                  readonly=True,
