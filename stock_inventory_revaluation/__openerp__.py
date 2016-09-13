@@ -12,7 +12,7 @@
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Warehouse",
-    "depends": ["stock_account"],
+    "depends": ["stock_account", "product"],
     "license": "AGPL-3",
     "data": [
         "wizards/stock_inventory_revaluation_get_quants_view.xml",
