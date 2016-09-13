@@ -26,11 +26,11 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     reservation_count = fields.Float(
-        compute='_reservation_count',
+        compute='_compute_reservation_count',
         string='# Sales')
 
     @api.one
-    def _reservation_count(self):
+    def _compute_reservation_count(self):
         self.reservation_count = sum(variant.reservation_count
                                      for variant in self.product_variant_ids)
 
@@ -52,11 +52,11 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     reservation_count = fields.Float(
-        compute='_reservation_count',
+        compute='_compute_reservation_count',
         string='# Sales')
 
     @api.one
-    def _reservation_count(self):
+    def _compute_reservation_count(self):
         domain = [('product_id', '=', self.id),
                   ('state', 'in', ['draft', 'assigned'])]
         reservations = self.env['stock.reservation'].search(domain)
