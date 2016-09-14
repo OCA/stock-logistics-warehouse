@@ -7,12 +7,9 @@
     "version": "8.0.1.1.0",
     "category": "Warehouse Management",
     "license": "AGPL-3",
-    "author": "AvanzOSC",
+    "author": "AvanzOSC, "
+              "Odoo Community Association (OCA)",
     "website": "http://www.avanzosc.es",
-    "contributors": [
-        "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
-        "Ana Juaristi <anajuaristi@avanzosc.es>",
-    ],
     "depends": [
         "stock",
     ],
