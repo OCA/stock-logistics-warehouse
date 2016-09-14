@@ -74,8 +74,8 @@ class StockReservation(models.Model):
         # if there is 'location_id' field requested, ensure that
         # picking_type_id is also requested, because it is required
         # to compute location_id
-        if ('location_id' in fields_list
-                and 'picking_type_id' not in fields_list):
+        if ('location_id' in fields_list and
+                'picking_type_id' not in fields_list):
             fields_list = fields_list + ['picking_type_id']
 
         res = super(StockReservation, self).default_get(fields_list)
@@ -96,8 +96,8 @@ class StockReservation(models.Model):
         picking_type_id = res.get('picking_type_id', None)
         if picking_type_id and not res.get('location_id', False):
             location = (self.env['stock.picking']
-                .with_context(default_picking_type_id=picking_type_id)
-                ._default_location_source())
+                        .with_context(default_picking_type_id=picking_type_id)
+                        ._default_location_source())
             res['location_id'] = getattr(location, 'id', False)
         return res
 
@@ -200,18 +200,14 @@ class StockReservation(models.Model):
 
     @api.multi
     def open_move(self):
-        assert len(self.ids) == 1, "1 ID expected, got %r" % self.ids
-        reserv = self.move_id
-        IrModelData = self.env['ir.model.data']
-        ref_form2 = 'stock.action_move_form2'
-        action = IrModelData.xmlid_to_object(ref_form2)
+        self.ensure_one()
+        action = self.env.ref('stock.action_move_form2')
         action_dict = action.read()[0]
         action_dict['name'] = _('Reservation Move')
         # open directly in the form view
-        ref_form = 'stock.view_move_form'
-        view_id = IrModelData.xmlid_to_res_id(ref_form)
+        view_id = self.env.ref('stock.view_move_form').id
         action_dict.update(
             views=[(view_id, 'form')],
-            res_id=reserv.id,
+            res_id=self.move_id.id,
             )
         return action_dict
