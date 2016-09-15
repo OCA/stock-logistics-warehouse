@@ -138,7 +138,7 @@ class StockReservation(models.Model):
 
     @api.multi
     def reserve(self):
-        """ Confirm a reservations
+        """ Confirm reservations
 
         The reservation is done using the default UOM of the product.
         A date until which the product is reserved can be specified.
@@ -163,8 +163,7 @@ class StockReservation(models.Model):
                   ('state', '=', 'assigned')]
         if ids:
             domain.append(('id', 'in', ids))
-        reserv_ids = self.search(domain)
-        reserv_ids.release()
+        self.search(domain).release()
         return True
 
     @api.multi
