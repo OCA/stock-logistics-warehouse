@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Paolo Valier, 2016
+# Paolo Valier, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-01 15:24+0000\n"
-"PO-Revision-Date: 2016-05-13 12:57+0000\n"
+"POT-Creation-Date: 2016-09-17 02:43+0000\n"
+"PO-Revision-Date: 2016-09-09 12:25+0000\n"
 "Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -32,42 +33,42 @@ msgstr "Conferma"
 #: field:assign.manual.quants,create_uid:0
 #: field:assign.manual.quants.lines,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,create_date:0
 #: field:assign.manual.quants.lines,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,display_name:0
 #: field:assign.manual.quants.lines,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome da visualizzare"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,id:0 field:assign.manual.quants.lines,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,__last_update:0
 #: field:assign.manual.quants.lines,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_uid:0
 #: field:assign.manual.quants.lines,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_date:0
 #: field:assign.manual.quants.lines,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,location_id:0

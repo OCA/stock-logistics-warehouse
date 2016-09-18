@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-27 14:19+0000\n"
-"PO-Revision-Date: 2016-05-27 13:27+0000\n"
+"POT-Creation-Date: 2016-09-17 02:43+0000\n"
+"PO-Revision-Date: 2016-09-15 12:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -365,7 +365,7 @@ msgstr ""
 #: field:stock.reservation,product_qty:0
 #: field:stock.reservation,product_uom_qty:0
 msgid "Quantity"
-msgstr ""
+msgstr "Määrä"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_uos_qty:0
@@ -593,7 +593,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,product_uom:0
 msgid "Unit of Measure"
-msgstr ""
+msgstr "Mittayksikkö"
 
 #. module: stock_reserve
 #: field:stock.reservation,date_validity:0

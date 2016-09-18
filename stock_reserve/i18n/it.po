@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-01 15:24+0000\n"
-"PO-Revision-Date: 2016-05-13 12:56+0000\n"
+"POT-Creation-Date: 2016-09-17 02:43+0000\n"
+"PO-Revision-Date: 2016-09-09 12:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -83,12 +83,12 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_reserve
 #: field:stock.reservation,date:0
@@ -128,7 +128,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome da visualizzare"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -143,12 +143,12 @@ msgstr ""
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Group By..."
-msgstr ""
+msgstr "Raggruppa per..."
 
 #. module: stock_reserve
 #: field:stock.reservation,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_reserve
 #: help:stock.reservation,propagate:0
@@ -174,17 +174,17 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_reserve
 #: field:stock.reservation,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_reserve
 #: field:stock.reservation,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_reserve
 #: field:stock.reservation,linked_move_operation_ids:0
@@ -578,7 +578,7 @@ msgstr ""
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_tree
 msgid "Total"
-msgstr ""
+msgstr "Totale"
 
 #. module: stock_reserve
 #: field:stock.reservation,picking_type_code:0

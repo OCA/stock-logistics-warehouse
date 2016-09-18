@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-08 00:48+0000\n"
-"PO-Revision-Date: 2016-04-27 11:00+0000\n"
+"POT-Creation-Date: 2016-09-17 02:43+0000\n"
+"PO-Revision-Date: 2016-09-16 21:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "Creado el"
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:219
@@ -103,7 +103,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación el"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0
@@ -190,7 +190,7 @@ msgstr "Pedido de venta"
 #. module: stock_reserve_sale
 #: model:ir.model,name:stock_reserve_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Línea pedido de venta"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:232

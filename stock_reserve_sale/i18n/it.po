@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-01 15:24+0000\n"
-"PO-Revision-Date: 2016-05-13 12:56+0000\n"
+"POT-Creation-Date: 2016-09-17 02:43+0000\n"
+"PO-Revision-Date: 2016-09-09 12:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:179
+#: code:addons/stock_reserve_sale/model/sale.py:188
 #, python-format
 msgid ""
 "As you changed the quantity of the line, the quantity of the stock "
@@ -49,7 +49,7 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:188
+#: code:addons/stock_reserve_sale/model/sale.py:197
 #, python-format
 msgid "Configuration Error!"
 msgstr ""
@@ -62,21 +62,21 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome da visualizzare"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:210
-#: code:addons/stock_reserve_sale/model/sale.py:222
+#: code:addons/stock_reserve_sale/model/sale.py:219
+#: code:addons/stock_reserve_sale/model/sale.py:231
 #, python-format
 msgid "Error"
 msgstr ""
@@ -89,7 +89,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_reserve_sale
 #: help:sale.stock.reserve,date_validity:0
@@ -101,17 +101,17 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_reserve_sale
 #: help:sale.stock.reserve,location_dest_id:0
@@ -188,10 +188,10 @@ msgstr ""
 #. module: stock_reserve_sale
 #: model:ir.model,name:stock_reserve_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Linea d'ordine di vendita"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:223
+#: code:addons/stock_reserve_sale/model/sale.py:232
 #, python-format
 msgid ""
 "Several stock reservations are linked with the line. Impossible to adjust "
@@ -225,7 +225,7 @@ msgid "Validity Date"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:211
+#: code:addons/stock_reserve_sale/model/sale.py:220
 #, python-format
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "
