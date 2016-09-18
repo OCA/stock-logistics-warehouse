@@ -6,6 +6,7 @@ from datetime import datetime
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from odoo.addons.product.tests import common
 
+
 class TestStockPartnerLot(common.TestProductCommon):
     """Testing Session"""
     def setUp(self):
@@ -16,8 +17,9 @@ class TestStockPartnerLot(common.TestProductCommon):
         self.product_2 = self.env.ref('product.product_product_6')
 
         res_users_purchase_user = self.env.ref('purchase.group_purchase_user')
-        user = self.env['res.users'].with_context({'no_reset_password': True,
-                                                   'mail_create_nosubscribe': True})
+        user = self.env['res.users'].with_context(
+            {'no_reset_password': True, 'mail_create_nosubscribe': True}
+        )
         self.purchase_user = user.create({
             'name': 'Agung Rachmatullah',
             'login': 'agung_r',
@@ -45,18 +47,18 @@ class TestStockPartnerLot(common.TestProductCommon):
                     'product_uom': self.product_1.uom_po_id.id,
                     'price_unit': 750.0,
                     'product_qty': 10.0,
-                    'date_planned': datetime.today().strftime\
-                        (DEFAULT_SERVER_DATETIME_FORMAT),
-                }),
+                    'date_planned': datetime.today().
+                 strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+                 }),
                 (0, 0, {
                     'name': self.product_2.name,
                     'product_id': self.product_2.id,
                     'product_uom': self.product_2.uom_po_id.id,
                     'price_unit': 250.0,
                     'product_qty': 8.0,
-                    'date_planned': datetime.today().strftime\
-                        (DEFAULT_SERVER_DATETIME_FORMAT),
-                })
+                    'date_planned': datetime.today().
+                 strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+                 })
             ],
         })
 
@@ -75,6 +77,6 @@ class TestStockPartnerLot(common.TestProductCommon):
         picking.action_done()
 
         # Assert Session
-        total_product = len(self.env['stock.quant'].\
+        total_product = len(self.env['stock.quant'].
                             search([('owner_id', '=', self.partner_id.id)]))
         self.assertEqual(self.partner_id.quant_count, total_product)

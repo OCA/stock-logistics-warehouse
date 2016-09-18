@@ -4,6 +4,7 @@
 """ResPartner addintional"""
 from odoo import api, fields, models
 
+
 class ResPartner(models.Model):
     """Inherit res.partner to add some fields and create
     computation of function for quant"""
@@ -15,7 +16,8 @@ class ResPartner(models.Model):
                                  compute='_compute_quant_count')
 
     @api.multi
+    @api.depends('quant_ids')
     def _compute_quant_count(self):
-        """compute the quant each of partnet"""
+        """compute the quant each of partner"""
         for partner in self:
             partner.quant_count = len(partner.quant_ids)
