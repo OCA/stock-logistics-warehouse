@@ -49,11 +49,26 @@ class AssignManualQuants(models.TransientModel):
                 quants.append([line.quant, line.qty])
         self.pool['stock.quant'].quants_reserve(
             self.env.cr, self.env.uid, quants, move, context=self.env.context)
+        self.pool['stock.picking'].do_prepare_partial(
+            self.env.cr, self.env.uid, [move.picking_id.id],
+            context=self.env.context)
         return {}
 
     @api.model
+    def _prepare_quants_lines(self, move, available_quant):
+        return {
+            'quant': available_quant.id,
+            'lot_id': available_quant.lot_id.id,
+            'package_id': available_quant.package_id.id,
+            'selected':  available_quant in move.reserved_quant_ids,
+            'qty': available_quant.qty if available_quant
+                                          in move.reserved_quant_ids else 0,
+            'location_id': available_quant.location_id.id,
+        }
+
+    @api.model
     def default_get(self, var_fields):
-        super(AssignManualQuants, self).default_get(var_fields)
+        rec = super(AssignManualQuants, self).default_get(var_fields)
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         available_quants = self.env['stock.quant'].search([
             ('location_id', 'child_of', move.location_id.id),
@@ -63,15 +78,12 @@ class AssignManualQuants(models.TransientModel):
             ('reservation_id', '=', False),
             ('reservation_id', '=', move.id)
         ])
-        quants_lines = [{
-            'quant': x.id,
-            'lot_id': x.lot_id.id,
-            'package_id': x.package_id.id,
-            'selected': x in move.reserved_quant_ids,
-            'qty': x.qty if x in move.reserved_quant_ids else 0,
-            'location_id': x.location_id.id,
-        } for x in available_quants]
-        return {'quants_lines': quants_lines}
+        quants_lines = []
+        for available_quant in available_quants:
+            quants_lines.append([0, 0, self._prepare_quants_lines(
+                move, available_quant)])
+        rec.update({'quants_lines': quants_lines})
+        return rec
 
 
 class AssignManualQuantsLines(models.TransientModel):
