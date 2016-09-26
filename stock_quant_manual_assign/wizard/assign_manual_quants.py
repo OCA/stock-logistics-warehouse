@@ -61,8 +61,8 @@ class AssignManualQuants(models.TransientModel):
             'lot_id': available_quant.lot_id.id,
             'package_id': available_quant.package_id.id,
             'selected':  available_quant in move.reserved_quant_ids,
-            'qty': available_quant.qty if available_quant
-                                          in move.reserved_quant_ids else 0,
+            'qty': available_quant.qty if
+            available_quant in move.reserved_quant_ids else 0,
             'location_id': available_quant.location_id.id,
         }
 
