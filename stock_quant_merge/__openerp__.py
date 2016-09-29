@@ -5,7 +5,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Stock - Quant merge",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "depends": [
         "stock",
     ],
@@ -15,7 +15,7 @@
               "Odoo Community Association (OCA)",
     "website": "http://www.odoomrp.com",
     "category": "Warehouse Management",
-    "installable": False,
+    "installable": True,
     "license": "AGPL-3",
     "images": [],
 }
