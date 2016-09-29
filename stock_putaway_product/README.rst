@@ -30,10 +30,12 @@ Configuration
 
 To configure this module, you need to:
 
-#. Go to Settings -> Configuration -> Warehouse
-#. Enable "Manage multiple locations and warehouses'
-#. Enable "Manage advanced routes for your warehouse"
-#. Go to Warehouse -> Configuration -> Locations
+#. Go to Inventory > Configuration > Settings
+#. Enable "Manage several locations per warehouse" on Location & Warehouse >
+   Multi Locations
+#. Enable "Advanced routing of products using rules" on Location & Warehouse >
+   Routes
+#. Go to Inventory > Configuration > Warehouse Management > Locations
 #. On the main inventory location of your warehouse,
    set a new putaway strategy.
 #. For the new putaway strategy, select 'Fixed per product location'
@@ -55,11 +57,9 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/stock-logistics-warehouse/issues>`_. In
-case of trouble, please
-check there if your issue has already been reported. If you spotted it first,
-help us smashing it by providing a detailed and welcomed `feedback
-<https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_putaway_product%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+<https://github.com/OCA/stock-logistics-warehouse/issues>`_. In case of trouble
+, please check there if your issue has already been reported. If you spotted
+it first, help us smashing it by providing a detailed and welcomed feedback.
 
 Images
 ------
@@ -70,6 +70,7 @@ Contributors
 ------------
 
 * Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+* Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
 
 
 Maintainer

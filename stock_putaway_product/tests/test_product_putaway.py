@@ -37,7 +37,8 @@ class TestProductPutaway(common.TransactionCase):
             'active_model': 'product.product',
             'active_id': product_ipad.id,
         }
-        wiz_instance = wiz_obj.with_context(test_context).create({})
+        wiz_instance = wiz_obj.with_context(test_context).create(
+            {'product_tmpl_id': product_ipad.product_tmpl_id.id})
         self.assertEqual(
             wiz_instance.location_id,
             location_shelf1)
