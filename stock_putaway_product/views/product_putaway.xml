@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <record id="product_putaway_strategy_view_form" model="ir.ui.view">
+            <field name="name">product_putaway_strategy_view_form</field>
+            <field name="model">stock.product.putaway.strategy</field>
+            <field name="arch" type="xml">
+                <form string="Product putaway stragegy">
+                    <group>
+                        <group colspan="4">
+                            <field name="putaway_id"/>
+                        </group>
+                        <group colspan="4">
+                            <field name="product_template_id" invisible="1"/>
+                            <field name="product_product_id"
+                                   domain="[('product_tmpl_id','=',product_template_id)]"/>
+                        </group>
+                        <group>
+                            <field name="fixed_location_id"
+                                   domain="[('usage','=','internal')]"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+
+</openerp>
