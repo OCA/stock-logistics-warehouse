@@ -17,8 +17,11 @@ merge them back if they still meet the following requirements:
 * same location
 * same package
 * same unit cost
+* same incoming date
 
-
+The restriction to only merge quants that have been received in the same
+date, with the the same cost is very important when the product is defined
+with the real costing method.
 
 Usage
 =====

@@ -13,6 +13,7 @@ class StockQuant(models.Model):
         domain = super(StockQuant, self)._mergeable_domain(self)
 
         if self.product_id.cost_method == 'real':
-            domain += [('cost', '=', self.cost)]
+            domain += [('cost', '=', self.cost),
+                       ('in_date', '=', self.in_date)]
 
         return domain
