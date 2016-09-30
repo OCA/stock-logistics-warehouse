@@ -10,7 +10,7 @@ class StockQuant(models.Model):
 
     @api.multi
     def _mergeable_domain(self):
-        domain = super(StockQuant, self)._mergeable_domain(self)
+        domain = super(StockQuant, self)._mergeable_domain()
 
         if self.product_id.cost_method == 'real':
             domain += [('cost', '=', self.cost),
