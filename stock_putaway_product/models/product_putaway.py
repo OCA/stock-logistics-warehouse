@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api, _
+from openerp.addons.decimal_precision import decimal_precision as dp
 
 
 class ProductPutawayStrategy(models.Model):
@@ -29,8 +30,19 @@ class ProductPutawayStrategy(models.Model):
                 ('product_product_id', '=', product.id),
             ]
             for strategy in putaway_strategy.product_location_ids.search(
-                    strategy_domain, limit=1):
-                return strategy.fixed_location_id.id
+                    strategy_domain):
+                if not strategy.max_qty:
+                    return strategy.fixed_location_id.id
+                else:
+                    quant_data = self.env['stock.quant'].read_group(
+                        [('product_id', '=', product.id),
+                         ('location_id', '=', strategy.fixed_location_id.id)],
+                        ['product_id', 'location_id', 'qty'],
+                        ['product_id']
+                    )[:1]
+                    if not quant_data or (
+                            quant_data[0]['qty'] < strategy.max_qty):
+                        return strategy.fixed_location_id.id
         else:
             return super(ProductPutawayStrategy, self).putaway_apply(
                 putaway_strategy, product)
@@ -56,21 +68,35 @@ class StockFixedPutawayStrategy(models.Model):
         comodel_name='product.putaway',
         string='Put Away Strategy',
         required=True,
-        select=True)
+        index=True)
     product_template_id = fields.Many2one(
         comodel_name='product.template',
         string='Product Template',
-        select=True,
+        index=True,
         required=True)
     product_product_id = fields.Many2one(
         comodel_name='product.product',
         string='Product Variant',
-        required=True,
-        select=True,
-        domain=[('product_tmpl_id', '=', 'product_template_id.id')])
+        index=True)
     fixed_location_id = fields.Many2one(
         comodel_name='stock.location',
         string='Location',
         required=True,
         domain=[('usage', '=', 'internal')])
+    max_qty = fields.Float(
+        string='Max Quantity',
+        digits=dp.get_precision('Product Unit of Measure'))
     sequence = fields.Integer()
+
+    @api.onchange('product_template_id')
+    def onchange_product_template_id_(self):
+        self.product_product_id = (
+            self.product_template_id.product_variant_ids[:1])
+
+    @api.model
+    def create(self, vals):
+        if not vals.get('product_product_id'):
+            vals['product_product_id'] = self.env['product.product'].search(
+                [('product_tmpl_id', '=', vals['product_template_id'])],
+                limit=1).id
+        return super(StockFixedPutawayStrategy, self).create(vals)
