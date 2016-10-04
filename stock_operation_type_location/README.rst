@@ -9,23 +9,6 @@ Stock Operation Type Location
 This module was written to extend the functionality of the stock operations 
 which allows users to filter destination and source locations when adding products.
 
-Usage
-=====
-
-To use this module, you need to:
-
-1.  Go to menu *Warehouse -> Configuration -> Types of Operation*
-2.  Then click on one of picking type name so get into form view
-3.  Under *Default Source Location*, there will be a new field named *Allowed Source Location*
-4.  If *Allowed Source Location* is filled, then the *Source Location* when adding products in stock operation 
-    will be filtered according to the location of this field
-5.  Under *Default Destination Location*, there will be a new field named *Allowed Destination Location*
-6.  If *Allowed Destination Location* is filled, then the *Destination Location* when adding products in stock 
-    operation will be filtered according to the location of this field
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/208/8.0
 
 Installation
 ============
@@ -41,6 +24,18 @@ To install this module, you need to:
 
 Usage
 =====
+
+To use this module, you need to:
+
+1.  Go to menu *Warehouse -> Configuration -> Types of Operation*
+2.  Then click on one of picking type name so get into form view
+3.  Under *Default Source Location*, there will be a new field named *Allowed Source Location*
+4.  If *Allowed Source Location* is filled, then the *Source Location* when adding products in stock operation 
+    will be filtered according to the location of this field
+5.  Under *Default Destination Location*, there will be a new field named *Allowed Destination Location*
+6.  If *Allowed Destination Location* is filled, then the *Destination Location* when adding products in stock 
+    operation will be filtered according to the location of this field
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/8.0
