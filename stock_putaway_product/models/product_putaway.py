@@ -22,31 +22,6 @@ class ProductPutawayStrategy(models.Model):
         copy=True)
     method = fields.Selection(selection=_get_putaway_options)
 
-    @api.model
-    def putaway_apply(self, putaway_strategy, product):
-        if putaway_strategy.method == 'per_product':
-            strategy_domain = [
-                ('putaway_id', '=', putaway_strategy.id),
-                ('product_product_id', '=', product.id),
-            ]
-            for strategy in putaway_strategy.product_location_ids.search(
-                    strategy_domain):
-                if not strategy.max_qty:
-                    return strategy.fixed_location_id.id
-                else:
-                    quant_data = self.env['stock.quant'].read_group(
-                        [('product_id', '=', product.id),
-                         ('location_id', '=', strategy.fixed_location_id.id)],
-                        ['product_id', 'location_id', 'qty'],
-                        ['product_id']
-                    )[:1]
-                    if not quant_data or (
-                            quant_data[0]['qty'] < strategy.max_qty):
-                        return strategy.fixed_location_id.id
-        else:
-            return super(ProductPutawayStrategy, self).putaway_apply(
-                putaway_strategy, product)
-
 
 class StockFixedPutawayStrategy(models.Model):
     _name = 'stock.product.putaway.strategy'
