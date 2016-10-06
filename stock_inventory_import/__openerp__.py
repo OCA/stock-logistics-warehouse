@@ -17,7 +17,7 @@
 ##############################################################################
 {
     "name": "Stock Inventory Import from CSV file",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     "category": "Generic Modules",
     "author": "OdooMRP team, "
               "AvanzOSC, "
