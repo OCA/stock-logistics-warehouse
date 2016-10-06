@@ -39,6 +39,7 @@ Contributors
 ------------
 
 * Ondřej Kuzník <ondrej.kuznik@credativ.co.uk>
+* Agung Rachmatullah <agung.rachmatullah@ymail.com>
 
 Maintainer
 ----------
