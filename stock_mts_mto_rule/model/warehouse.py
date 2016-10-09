@@ -1,26 +1,8 @@
 # -*- coding: utf-8 -*-
-###############################################################################
-#
-#    Module for OpenERP
-#    Copyright (C) 2015 Akretion (http://www.akretion.com). All Rights Reserved
-#    @author Florian DA COSTA <florian.dacosta@akretion.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-###############################################################################
-from openerp import models, api, fields, exceptions
-from openerp.tools.translate import _
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import models, api, fields, exceptions
+from odoo.tools.translate import _
 
 
 class Warehouse(models.Model):
@@ -60,7 +42,7 @@ class Warehouse(models.Model):
             raise exceptions.Warning(_(
                 'Can\'t find MTS Rule on the warehouse'))
         return {
-            'name': self._format_routename(warehouse, _('MTS+MTO')),
+            'name': warehouse._format_routename(route_type='mts_mto'),
             'route_id': mts_mto_route.id,
             'action': 'split_procurement',
             'mto_rule_id': warehouse.mto_pull_id.id,
@@ -116,8 +98,7 @@ class Warehouse(models.Model):
                         warehouse.mts_mto_rule_id.unlink()
         res = super(Warehouse, self).write(vals)
         if 'mto_mts_management' in vals:
-            self.with_context({'active_test': False}).change_route(
-                warehouse, new_delivery_step=warehouse.delivery_steps)
+            self.with_context({'active_test': False})._update_routes()
         return res
 
     @api.model
@@ -141,21 +122,24 @@ class Warehouse(models.Model):
             )
         return res
 
-    @api.multi
-    def change_route(self, warehouse, new_reception_step=False,
-                     new_delivery_step=False):
-        res = super(Warehouse, self).change_route(
-            warehouse,
-            new_reception_step=new_reception_step,
-            new_delivery_step=new_delivery_step)
+    def _get_route_name(self, route_type):
+        names = {'mts_mto': _('MTS+MTO')}
+        if route_type in names:
+            return names[route_type]
 
-        mts_mto_rule_id = warehouse.mts_mto_rule_id
-        if new_delivery_step and mts_mto_rule_id:
+        return super(Warehouse, self)._get_route_name(route_type)
+
+    @api.multi
+    def _update_routes(self):
+        res = super(Warehouse, self)._update_routes()
+
+        mts_mto_rule_id = self.mts_mto_rule_id
+        if self.delivery_steps and mts_mto_rule_id:
             pull_model = self.env['procurement.rule']
-            warehouse.mts_mto_rule_id.location_id = (
-                warehouse.mto_pull_id.location_id)
-            mts_rules = pull_model.search(
-                [('location_src_id', '=', warehouse.lot_stock_id.id),
-                 ('route_id', '=', warehouse.delivery_route_id.id)])
-            warehouse.mts_mto_rule_id.mts_rule_id = mts_rules[0].id
+            self.mts_mto_rule_id.location_id = self.mto_pull_id.location_id
+            mts_rules = pull_model.search([
+                ('location_src_id', '=', self.lot_stock_id.id),
+                ('route_id', '=', self.delivery_route_id.id),
+            ])
+            self.mts_mto_rule_id.mts_rule_id = mts_rules[0].id
         return res
