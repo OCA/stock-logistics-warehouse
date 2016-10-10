@@ -11,19 +11,17 @@
             <xpath expr="//group[@name='stock_property']" position="before">
                 <group colspan="4" name="putaway" string="Put Away Locations">
                     <field name="product_putaway_ids"
-                           context="{'default_product_template_id': is_product_variant and product_tmpl_id or active_id,
+                           context="{'default_product_tmpl_id': is_product_variant and product_tmpl_id or active_id,
                                      'default_product_product_id': is_product_variant and active_id or False}"
                            nolabel="1" colspan="2">
                         <tree editable="bottom">
                             <field name="sequence" widget="handle"/>
                             <field name="putaway_id"/>
-                            <field name="product_template_id" invisible="1"/>
+                            <field name="product_tmpl_id" invisible="1"/>
                             <field name="product_product_id"
                                    invisible="context.get('default_product_product_id', True)"
-                                   domain="[('product_tmpl_id', '=', product_template_id)]"
-                            />
+                                   domain="[('product_tmpl_id', '=', product_tmpl_id)]"/>
                             <field name="fixed_location_id"/>
-                            <field name="max_qty"/>
                         </tree>
                     </field>
                 </group>

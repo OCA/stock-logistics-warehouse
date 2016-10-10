@@ -4,7 +4,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api, _
-from openerp.addons.decimal_precision import decimal_precision as dp
 
 
 class ProductPutawayStrategy(models.Model):
@@ -21,6 +20,24 @@ class ProductPutawayStrategy(models.Model):
         string='Fixed per product location',
         copy=True)
     method = fields.Selection(selection=_get_putaway_options)
+
+    @api.multi
+    def get_product_putaway_strategies(self, product):
+        self.ensure_one()
+        return self.product_location_ids.filtered(lambda x: (
+            x.product_product_id == product or
+            (not x.product_product_id and
+             x.product_tmpl_id == product.product_tmpl_id)))
+
+    @api.model
+    def putaway_apply(self, putaway_strategy, product):
+        if putaway_strategy.method == 'per_product':
+            strategies = putaway_strategy.get_product_putaway_strategies(
+                product)
+            return strategies[:1].fixed_location_id.id
+        else:
+            return super(ProductPutawayStrategy, self).putaway_apply(
+                putaway_strategy, product)
 
 
 class StockFixedPutawayStrategy(models.Model):
@@ -44,10 +61,11 @@ class StockFixedPutawayStrategy(models.Model):
         string='Put Away Strategy',
         required=True,
         index=True)
-    product_template_id = fields.Many2one(
+    product_tmpl_id = fields.Many2one(
         comodel_name='product.template',
         string='Product Template',
         index=True,
+        oldname='product_template_id',
         required=True)
     product_product_id = fields.Many2one(
         comodel_name='product.product',
@@ -58,20 +76,4 @@ class StockFixedPutawayStrategy(models.Model):
         string='Location',
         required=True,
         domain=[('usage', '=', 'internal')])
-    max_qty = fields.Float(
-        string='Max Quantity',
-        digits=dp.get_precision('Product Unit of Measure'))
     sequence = fields.Integer()
-
-    @api.onchange('product_template_id')
-    def onchange_product_template_id_(self):
-        self.product_product_id = (
-            self.product_template_id.product_variant_ids[:1])
-
-    @api.model
-    def create(self, vals):
-        if not vals.get('product_product_id'):
-            vals['product_product_id'] = self.env['product.product'].search(
-                [('product_tmpl_id', '=', vals['product_template_id'])],
-                limit=1).id
-        return super(StockFixedPutawayStrategy, self).create(vals)

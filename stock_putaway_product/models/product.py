@@ -11,7 +11,7 @@ class ProductTemplate(models.Model):
 
     product_putaway_ids = fields.One2many(
         comodel_name='stock.product.putaway.strategy',
-        inverse_name='product_template_id',
+        inverse_name='product_tmpl_id',
         string="Product stock locations")
 
 

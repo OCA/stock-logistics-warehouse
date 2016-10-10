@@ -2,4 +2,3 @@
 
 from . import product_putaway
 from . import product
-from . import stock_picking
