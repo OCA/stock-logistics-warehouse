@@ -3,7 +3,8 @@
 # Copyright 2016 Tecnativa (<http://www.tecnativa.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import fields, models, exceptions, api, _
+from openerp import fields, models, api, _
+from openerp.exceptions import Warning as UserError
 import base64
 import csv
 import cStringIO
@@ -28,9 +29,10 @@ class ImportInventory(models.TransientModel):
     location = fields.Many2one('stock.location', 'Default Location',
                                default=_get_default_location, required=True)
 
-    @api.one
+    @api.multi
     def action_import(self):
         """Load Inventory data from the CSV file."""
+        self.ensure_one()
         ctx = self._context
         stloc_obj = self.env['stock.location']
         inventory_obj = self.env['stock.inventory']
@@ -39,7 +41,7 @@ class ImportInventory(models.TransientModel):
         if 'active_id' in ctx:
             inventory = inventory_obj.browse(ctx['active_id'])
         if not self.data:
-            raise exceptions.Warning(_("You need to select a file!"))
+            raise UserError(_("You need to select a file!"))
         # Decode the file data
         data = base64.b64decode(self.data)
         file_input = cStringIO.StringIO(data)
