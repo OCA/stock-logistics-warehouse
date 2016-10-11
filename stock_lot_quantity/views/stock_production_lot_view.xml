@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Add the production lot quantity available in the lot form -->
+        <record id="view_stock_production_lot_quantity_form" model="ir.ui.view">
+            <field name="name">available quantity on production lot form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='ref']" position="after">
+                        <field name="qty_available"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- Add the production lot quantity available in the lot tree -->
+        <record id="view_stock_production_lot_quantity_tree" model="ir.ui.view">
+            <field name="name">available quantity on production lot tree</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_tree" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='create_date']" position="before">
+                        <field name="qty_available"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
