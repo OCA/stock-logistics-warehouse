@@ -5,7 +5,6 @@
         <record id="view_stock_production_lot_quantity_form" model="ir.ui.view">
             <field name="name">available quantity on production lot form</field>
             <field name="model">stock.production.lot</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="stock.view_production_lot_form" />
             <field name="arch" type="xml">
                 <data>
@@ -20,7 +19,6 @@
         <record id="view_stock_production_lot_quantity_tree" model="ir.ui.view">
             <field name="name">available quantity on production lot tree</field>
             <field name="model">stock.production.lot</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="stock.view_production_lot_tree" />
             <field name="arch" type="xml">
                 <data>
