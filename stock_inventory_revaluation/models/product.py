@@ -53,4 +53,3 @@ class ProductTemplate(models.Model):
             })
             reval.post()
         return True
-
