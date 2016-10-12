@@ -5,10 +5,10 @@
 {
     "name": "Stock Inventory Import from CSV file",
     "version": "8.0.1.0.0",
-    "category": "Generic Modules",
+    "category": "Warehouse Management",
     "author": "OdooMRP team, "
               "AvanzOSC, "
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
+              "Tecnativa, "
               "Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     "website": "http://www.odoomrp.com",
