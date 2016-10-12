@@ -57,12 +57,12 @@ class ImportInventory(models.TransientModel):
         try:
             reader_info.extend(reader)
         except Exception:
-            raise exceptions.Warning(_("Not a valid file!"))
+            raise UserError(_("Not a valid file!"))
         keys = reader_info[0]
         # check if keys exist
         if not isinstance(keys, list) or ('code' not in keys or
                                           'quantity' not in keys):
-            raise exceptions.Warning(
+            raise UserError(
                 _("Not 'code' or 'quantity' keys found"))
         del reader_info[0]
         values = {}
