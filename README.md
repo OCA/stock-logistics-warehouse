@@ -35,6 +35,7 @@ addon | version | summary
 [stock_location_area_data](stock_location_area_data/) | 8.0.0.1.0 | Add surface units of measure
 [stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 | Enter a location's area based on different units of measure
 [stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 | Stock Location Ownership
+[stock_lot_quantity](stock_lot_quantity/) | 8.0.1.0.0 | Stock quantity for serial number
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.0 | Add a MTS+MTO route
 [stock_putaway_product](stock_putaway_product/) | 8.0.1.0.0 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.1.0 | Stock - Manual assignment of quants
