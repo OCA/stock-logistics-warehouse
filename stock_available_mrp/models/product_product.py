@@ -19,6 +19,14 @@ class ProductProduct(models.Model):
         help="Quantity of this Product that could be produced using "
              "the materials already at hand.")
 
+    # Needed for fields dependencies
+    # When self.potential_qty is compute, we want to force the ORM
+    # to compute all the components potential_qty too.
+    component_ids = fields.Many2many(
+        comodel_name='product.product',
+        compute='_get_component_ids',
+    )
+
     @api.multi
     @api.depends('potential_qty')
     def _immediately_usable_qty(self):
@@ -30,6 +38,7 @@ class ProductProduct(models.Model):
             product.immediately_usable_qty += product.potential_qty
 
     @api.multi
+    @api.depends('component_ids.potential_qty')
     def _get_potential_qty(self):
         """Compute the potential qty based on the available components."""
         bom_obj = self.env['mrp.bom']
@@ -104,3 +113,15 @@ class ProductProduct(models.Model):
             )
 
         return needs
+
+    def _get_component_ids(self):
+        """ Compute component_ids by getting all the components for
+        this product.
+        """
+        bom_obj = self.env['mrp.bom']
+
+        bom_id = bom_obj._bom_find(product_id=self.id)
+        if bom_id:
+            bom = bom_obj.browse(bom_id)
+            for bom_component in bom_obj._bom_explode(bom, self, 1.0)[0]:
+                self.component_ids |= self.browse(bom_component['product_id'])
