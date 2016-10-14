@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data>
+<!-- Copyright 2015 Savoir Faire Linux, 2016 Dhinesh D
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
 
     <record id="product_uom_categ_surface" model="product.uom.categ">
       <field name="name">Surface</field>
     </record>
-
     <record id="product_uom_m2" model="product.uom">
       <field name="name">m²</field>
       <field name="category_id" eval="product_uom_categ_surface"/>
       <field name="uom_type">reference</field>
     </record>
-
     <record id="product_uom_feet2" model="product.uom">
       <field name="name">feet²</field>
       <field name="category_id" eval="product_uom_categ_surface"/>
@@ -19,5 +19,4 @@
       <field name="factor">10.76391042</field>
     </record>
 
-  </data>
-</openerp>
+</odoo>
