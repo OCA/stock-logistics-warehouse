@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='logistics_grp']" position="inside">
                     <field name="create_orderpoints" />
-                    <field name="orderpoint_product_max_qty" attrs="{'invisible': [('create_orderpoints', '=', False)]}" />
-                    <field name="orderpoint_product_min_qty" attrs="{'invisible': [('create_orderpoints', '=', False)]}" />
+                    <field name="orderpoint_product_max_qty"  />
+                    <field name="orderpoint_product_min_qty"  />
                 </xpath>
             </field>
         </record>

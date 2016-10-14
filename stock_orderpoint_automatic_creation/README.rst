@@ -7,20 +7,21 @@ Stock Orderpoint Automatic Creation
 ===================================
 
 This module generates stock orderpoints automatically for a product when is
-created taking created user company as reference.
+created taking the company of the user who created the product as reference.
+Orderpoints creation can be automate from product, product category or company.
 
 Configuration
 =============
 
 To configure this module, you need to:
 
-Go to company form, in the "Settings" tab, you can customize the default
-orderpoints data.
+Go to company form, in the "Settings" tab, you can customize the default orderpoints data.
+Also you can configure orderpoint creation in product and product_category checking 'Yes' or 'No' in the proper field.
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/manufacture/issues>`_. In case of trouble, please
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smashing it by providing a detailed and welcomed `feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_orderpoint_automatic_creation%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 

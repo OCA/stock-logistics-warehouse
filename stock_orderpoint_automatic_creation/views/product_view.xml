@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.create.orderpoint.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+            <field name="standard_price" position="after">
+                <field name="create_orderpoint"/>
+            </field>
+<!--                 <xpath expr="//group[@name='procurement']" position="after"> -->
+<!--                     <group> -->
+<!--                         <field name="create_orderpoint"/> -->
+<!--                     </group> -->
+<!--                 </xpath> -->
+            </field>
+        </record>
+        <record model="ir.ui.view" id="product_category_orderpoint_creation_form_view">
+            <field name="name">product.category.no.variant.form</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view" />
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="create_orderpoints"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

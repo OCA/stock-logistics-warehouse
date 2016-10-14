@@ -11,7 +11,8 @@
     'website': 'http://www.odoomrp.com',
     "depends": ['procurement'],
     "category": 'Inventory, Logistic, Storage',
-    "data": ['views/res_company_view.xml'],
+    "data": ['views/res_company_view.xml',
+             'views/product_view.xml'],
     "installable": True,
     "application": True
 }
