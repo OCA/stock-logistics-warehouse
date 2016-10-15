@@ -32,6 +32,7 @@ addon | version | summary
 [stock_inventory_line_price](stock_inventory_line_price/) | 8.0.1.0.0 | Standard price at inventory level
 [stock_inventory_lockdown](stock_inventory_lockdown/) | 8.0.1.0.0 | Lock down stock locations during inventories.
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 8.0.1.0.0 | More filters for inventory adjustments
+[stock_inventory_revaluation](stock_inventory_revaluation/) | 8.0.1.0.0 | Introduces inventory revaluation as single point to change the valuation of products.
 [stock_location_area_data](stock_location_area_data/) | 8.0.0.1.0 | Add surface units of measure
 [stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 | Enter a location's area based on different units of measure
 [stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 | Stock Location Ownership
