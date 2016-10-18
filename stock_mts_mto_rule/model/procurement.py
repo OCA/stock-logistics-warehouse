@@ -45,20 +45,21 @@ class ProcurementOrder(models.Model):
             'mts_mto_procurement_id': self.id,
         }
 
-    @api.model
-    def _check(self, procurement):
-        if procurement.rule_id and \
-                procurement.rule_id.action == 'split_procurement':
+    @api.multi
+    def _check(self):
+        self.ensure_one()
+        if self.rule_id and \
+                self.rule_id.action == 'split_procurement':
             cancel_proc_list = [x.state == 'cancel'
-                                for x in procurement.mts_mto_procurement_ids]
+                                for x in self.mts_mto_procurement_ids]
             done_cancel_test_list = [
                 x.state in ('done', 'cancel')
-                for x in procurement.mts_mto_procurement_ids]
+                for x in self.mts_mto_procurement_ids]
             if all(cancel_proc_list):
-                procurement.write({'state': 'cancel'})
+                self.write({'state': 'cancel'})
             elif all(done_cancel_test_list):
                 return True
-        return super(ProcurementOrder, self)._check(procurement)
+        return super(ProcurementOrder, self)._check()
 
     @api.multi
     def check(self, autocommit=False):
