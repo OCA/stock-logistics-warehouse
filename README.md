@@ -23,6 +23,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [partner_location_auto_create](partner_location_auto_create/) | 8.0.0.1.0 | Partner Location Auto Create
+[stock_account_quant_merge](stock_account_quant_merge/) | 8.0.1.0.0 | Stock Account - Quant merge
 [stock_available](stock_available/) | 8.0.3.1.0 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 8.0.2.0.1 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 8.0.3.1.1 | Consider the production potential is available to promise
