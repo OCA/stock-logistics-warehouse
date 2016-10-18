@@ -125,7 +125,7 @@ class TestMtoMtsRoute(TransactionCase):
 
     def test_create_routes(self):
         rule_obj = self.env['procurement.rule']
-        created_routes = self.warehouse.create_routes(self.warehouse)
+        created_routes = self.warehouse.create_routes()
         mts_mto_route = rule_obj.browse(created_routes['mts_mto_rule_id'])
         self.assertEqual(mts_mto_route.warehouse_id, self.warehouse)
         self.assertEqual(
@@ -145,9 +145,9 @@ class TestMtoMtsRoute(TransactionCase):
         self.assertFalse(self.warehouse.mts_mto_rule_id)
 
     def test_get_all_routes_for_wh(self):
-        routes = self.warehouse.get_all_routes_for_wh(self.warehouse)
+        routes = self.warehouse.get_all_routes_for_wh()
         self.assertTrue(self.warehouse.mts_mto_rule_id)
-        self.assertTrue(self.warehouse.mts_mto_rule_id.route_id.id in routes)
+        self.assertTrue(self.warehouse.mts_mto_rule_id.route_id in routes)
 
     def test_rename_warehouse(self):
         rule_name = self.warehouse.mts_mto_rule_id.name
