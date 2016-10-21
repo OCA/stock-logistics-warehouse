@@ -62,7 +62,7 @@ class sale_stock_reserve(orm.TransientModel):
                 'product_uom': line.product_uom.id,
                 'product_qty': line.product_uom_qty,
                 'date_validity': form.date_validity,
-                'name': "{} ({})".format(line.order_id.name, line.name),
+                'name': u"{} ({})".format(line.order_id.name, line.name),
                 'location_id': form.location_id.id,
                 'location_dest_id': form.location_dest_id.id,
                 'note': form.note,
