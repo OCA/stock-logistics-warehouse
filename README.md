@@ -26,6 +26,7 @@ addon | version | summary
 [stock_available_immediately](stock_available_immediately/) | 9.0.1.1.0 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 | Consider the production potential is available to promise
 [stock_location_area_data](stock_location_area_data/) | 9.0.1.0.0 | Add surface units of measure
+[stock_mts_mto_rule](stock_mts_mto_rule/) | 9.0.1.0.0 | Add a MTS+MTO route
 [stock_partner_lot](stock_partner_lot/) | 9.0.1.0.0 | Show lots on the partners that own them
 [stock_quant_merge](stock_quant_merge/) | 9.0.1.0.0 | Stock - Quant merge
 
@@ -42,7 +43,6 @@ addon | version | summary
 [stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 (unported) | Stock Location Ownership
 [stock_lot_valuation](stock_lot_valuation/) | 0.1 (unported) | Lot Valuation
 [stock_move_location](stock_move_location/) | 1.0 (unported) | Move Stock Location
-[stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.0 (unported) | Add a MTS+MTO route
 [stock_optional_valuation](stock_optional_valuation/) | 0.1 (unported) | Stock optional valuation
 [stock_orderpoint_creator](stock_orderpoint_creator/) | 1.0 (unported) | Configuration of order point in mass
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.0.0 (unported) | Stock - Manual assignment of quants
