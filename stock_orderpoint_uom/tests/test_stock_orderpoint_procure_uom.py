@@ -9,13 +9,11 @@ import openerp.tests.common as common
 class TestStockOrderpointProcureUom(common.TransactionCase):
 
     def test_stock_orderpoont_procure_uom(self):
-        super(TestStockOrderpointProcureUom, self).setUp()
         productObj = self.env['product.product']
         warehouse = self.env.ref('stock.warehouse0')
         location_stock = self.env.ref('stock.stock_location_stock')
         uom_unit = self.env.ref('product.product_uom_unit')
         uom_dozen = self.env.ref('product.product_uom_dozen')
-        self.company_partner = self.env.ref('base.main_partner')
 
         productA = productObj.create(
             {'name': 'product A',
