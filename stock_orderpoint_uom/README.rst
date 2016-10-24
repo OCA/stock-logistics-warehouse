@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=====================
-Stock Procurement UoM
-=====================
+====================
+Stock Orderpoint UoM
+====================
 
 This module allows users users to define what unit of measure should be used
 in procurements created from minimum stock rules.

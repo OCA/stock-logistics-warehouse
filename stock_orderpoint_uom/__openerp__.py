@@ -3,7 +3,7 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Stock Orderpoint Procure UoM",
+    "name": "Stock Orderpoint UoM",
     "summary": "Allows to create procurement orders in the UoM indicated in "
                "the orderpoint",
     "version": "8.0.1.0.0",
