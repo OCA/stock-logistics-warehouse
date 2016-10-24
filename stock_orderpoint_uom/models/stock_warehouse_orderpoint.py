@@ -13,13 +13,6 @@ class StockWarehouseOrderpoint(models.Model):
     procure_uom_id = fields.Many2one(comodel_name='product.uom',
                                      string="Procurement UoM")
 
-    @api.multi
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        for rec in self:
-            if rec.procure_uom_id:
-                rec.procure_uom_id = False
-
     @api.constrains('product_uom', 'procure_uom_id')
     def _check_procure_uom(self):
         if any(orderpoint.product_uom
