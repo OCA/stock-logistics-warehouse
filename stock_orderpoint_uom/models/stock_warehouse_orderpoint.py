@@ -16,4 +16,5 @@ class StockWarehouseOrderpoint(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self):
         for rec in self:
-            rec.procure_uom_id = rec.product_id.uom_id
+            if rec.procure_uom_id:
+                rec.procure_uom_id = False
