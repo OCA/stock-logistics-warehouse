@@ -17,7 +17,7 @@ class ProcurementOrder(models.Model):
 
     @api.model
     def _prepare_orderpoint_procurement(self, orderpoint, product_qty):
-        res = super(ProcurementOrder,self)._prepare_orderpoint_procurement(
+        res = super(ProcurementOrder, self)._prepare_orderpoint_procurement(
             orderpoint, product_qty)
         if orderpoint.procure_uom_id:
             res['product_qty'] = orderpoint.procure_uom_id._compute_qty(
