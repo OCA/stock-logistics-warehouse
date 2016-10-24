@@ -20,6 +20,9 @@ class StockWarehouseOrderpoint(models.Model):
     def _compute_procure_recommended(self):
         procurement_model = self.env['procurement.order']
         for op in self:
+            op.procure_recommended_date = \
+                procurement_model._get_orderpoint_date_planned(
+                    op, datetime.today())
             procure_recommended_qty = 0.0
             prods = procurement_model._product_virtual_get(op)
             if prods is None:
@@ -44,10 +47,6 @@ class StockWarehouseOrderpoint(models.Model):
                     qty, precision_rounding=op.product_uom.rounding)
                 if qty_rounded > 0:
                     procure_recommended_qty = qty_rounded
-                    op.procure_recommended_date = \
-                        procurement_model._get_orderpoint_date_planned(
-                            op, datetime.today())
-
                 if op.procure_uom_id:
                     product_qty = op.procure_uom_id._compute_qty(
                         op.product_id.uom_id.id, procure_recommended_qty,
