@@ -14,7 +14,9 @@
     "depends": ["stock",
                 "stock_orderpoint_uom"],
     "data": ["wizards/make_procurement_orderpoint_view.xml",
-             "views/stock_warehouse_orderpoint_view.xml"],
+             "views/procurement_order_view.xml",
+             "views/stock_warehouse_orderpoint_view.xml"
+             ],
     "license": "AGPL-3",
     'installable': True,
     'application': True,

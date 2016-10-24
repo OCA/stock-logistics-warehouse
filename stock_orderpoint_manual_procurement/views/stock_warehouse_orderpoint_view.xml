@@ -19,7 +19,8 @@
 							name="%(procurement.procurement_action)d"
                             attrs="{'invisible':[('procurement_ids', '=', False)]}"
 							icon="gtk-open" type="action"
-                            context="{'search_default_orderpoint_id': [active_id], 'search_default_to_approve': 1}"/>
+                            domain="[('orderpoint_id','=', active_id)]"
+                            context="{'search_default_orderpoint_id': [active_id]}"/>
                 </field>
             </field>
         </record>

@@ -58,6 +58,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
         for item in self.item_ids:
             data = item._prepare_procurement()
             procurement = self.env['procurement.order'].create(data)
+            procurement.signal_workflow('button_confirm')
             res.append(procurement.id)
 
         return {

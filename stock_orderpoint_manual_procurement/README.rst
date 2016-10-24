@@ -9,6 +9,7 @@ Stock Orderpoint Manual Procurement
 This module allows users to manually start procurements from the list of
 reordering rules, based on the quantity that is recommended to be procured.
 
+
 Usage
 =====
 
@@ -18,7 +19,6 @@ reordering rules.
 
 The recommended quantity to procure is adjusted to the procurement unit of
 measure indicated in the reordering rule.
-
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
