@@ -68,7 +68,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
             'view_mode': 'tree,form',
             'res_model': 'procurement.order',
             'type': 'ir.actions.act_window',
-         }
+        }
 
 
 class MakeProcurementOrderpointItem(models.TransientModel):
@@ -118,8 +118,8 @@ class MakeProcurementOrderpointItem(models.TransientModel):
     @api.onchange('uom_id')
     def onchange_uom_id(self):
         for rec in self:
-            uom = rec.orderpoint_id.procure_uom_id \
-                  or rec.orderpoint_id.product_uom
+            uom = rec.orderpoint_id.procure_uom_id or \
+                  rec.orderpoint_id.product_uom
             rec.qty = rec.uom_id._compute_qty(
                 uom.id,
                 rec.orderpoint_id.procure_recommended_qty,
