@@ -6,7 +6,8 @@
 Stock Orderpoint Demand Estimate
 ================================
 
-This module allows to create demand estimates associated to orderpoints.
+This module allows to create demand estimates associated to orderpoints. It
+does not provide in itself any specific usage of the estimates.
 
 Installation
 ============
