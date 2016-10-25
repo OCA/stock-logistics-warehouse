@@ -15,5 +15,5 @@
     "data": ["views/stock_warehouse_orderpoint_view.xml"],
     "license": "AGPL-3",
     'installable': True,
-    'application': True,
+    'application': False,
 }
