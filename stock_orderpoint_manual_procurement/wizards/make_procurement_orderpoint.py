@@ -3,7 +3,7 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models, _
+from openerp import api, fields, models
 
 
 class MakeProcurementOrderpoint(models.TransientModel):
@@ -119,7 +119,7 @@ class MakeProcurementOrderpointItem(models.TransientModel):
     def onchange_uom_id(self):
         for rec in self:
             uom = rec.orderpoint_id.procure_uom_id or \
-                  rec.orderpoint_id.product_uom
+                rec.orderpoint_id.product_uom
             rec.qty = rec.uom_id._compute_qty(
                 uom.id,
                 rec.orderpoint_id.procure_recommended_qty,
