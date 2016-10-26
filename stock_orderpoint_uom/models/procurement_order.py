@@ -9,12 +9,6 @@ from openerp import api, models
 class ProcurementOrder(models.Model):
     _inherit = "procurement.order"
 
-    @api.multi
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        for rec in self:
-            rec.procure_uom_id = rec.product_id.uom_id
-
     @api.model
     def _prepare_orderpoint_procurement(self, orderpoint, product_qty):
         res = super(ProcurementOrder, self)._prepare_orderpoint_procurement(
