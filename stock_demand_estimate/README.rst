@@ -2,12 +2,14 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================================
-Stock Orderpoint Demand Estimate
-================================
+=====================
+Stock Demand Estimate
+=====================
 
-This module allows to create demand estimates associated to orderpoints. It
-does not provide in itself any specific usage of the estimates.
+This module allows to create demand estimates for a given product and
+location, on configurable time periods.
+
+The module does not provide in itself any specific usage of the estimates.
 
 Installation
 ============

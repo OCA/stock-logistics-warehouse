@@ -13,9 +13,9 @@ _PERIOD_SELECTION = [
 ]
 
 
-class StockOrderpointDemandEstimatePeriod(models.Model):
-    _name = 'stock.orderpoint.demand.estimate.period'
-    _description = 'Stock orderpoint Demand Estimate Period'
+class StockDemandEstimatePeriod(models.Model):
+    _name = 'stock.demand.estimate.period'
+    _description = 'Stock Demand Estimate Period'
     _order = 'date_from'
 
     name = fields.Char(string="Name", required=True)
@@ -26,20 +26,20 @@ class StockOrderpointDemandEstimatePeriod(models.Model):
     date_to = fields.Date(string="Date To", required=True)
 
     estimate_ids = fields.One2many(
-        comodel_name="stock.orderpoint.demand.estimate",
+        comodel_name="stock.demand.estimate",
         inverse_name="period_id")
 
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', required=True,
         default=lambda self: self.env['res.company']._company_default_get(
-            'stock.orderpoint.demand.estimate.period'))
+            'stock.demand.estimate.period'))
 
     @api.multi
     @api.constrains('name', 'date_from', 'date_to')
     def _check_period(self):
         for period in self:
             self.env.cr.execute('SELECT id \
-                FROM stock_orderpoint_demand_estimate_period \
+                FROM stock_demand_estimate_period \
                 WHERE (date_from <= %s and %s <= date_to) \
                 AND period_type=%s \
                 AND id <> %s', (period.date_to, period.date_from,

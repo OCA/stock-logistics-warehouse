@@ -3,8 +3,8 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Stock Orderpoint Demand Estimate",
-    "summary": "Allows to create demand estimates associated to orderpoints",
+    "name": "Stock Demand Estimate",
+    "summary": "Allows to create demand estimates.",
     "version": "8.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L,"
               "Odoo Community Association (OCA)",
@@ -15,9 +15,9 @@
                 ],
     "data": ["security/ir.model.access.csv",
              "security/stock_security.xml",
-             "views/stock_orderpoint_demand_estimate_period_view.xml",
-             "views/stock_orderpoint_demand_estimate_view.xml",
-             "wizards/demand_estimate_wizard_view.xml",
+             "views/stock_demand_estimate_period_view.xml",
+             "views/stock_demand_estimate_view.xml",
+             "wizards/stock_demand_estimate_wizard_view.xml",
              ],
     "license": "AGPL-3",
     'installable': True,

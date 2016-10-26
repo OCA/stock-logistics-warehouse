@@ -3,11 +3,11 @@
     <data>
 
         <record model="ir.ui.view"
-                id="view_demand_estimate_sheet_form">
-            <field name="name">demand.estimate.sheet.form</field>
-            <field name="model">demand.estimate.sheet</field>
+                id="view_stock_demand_estimate_sheet_form">
+            <field name="name">stock.demand.estimate.sheet.form</field>
+            <field name="model">stock.demand.estimate.sheet</field>
             <field name="arch" type="xml">
-                <form string="Demand Estimate Sheet">
+                <form string="Stock Demand Estimate Sheet">
                     <group>
                         <group name="dates">
                             <label for="date_from" string="Timesheet Period"/>
@@ -42,10 +42,10 @@
 
         <record model="ir.ui.view"
                 id="view_demand_estimate_wizard_form">
-            <field name="name">demand.estimate.wizard.form</field>
-            <field name="model">demand.estimate.wizard</field>
+            <field name="name">stock.demand.estimate.wizard.form</field>
+            <field name="model">stock.demand.estimate.wizard</field>
             <field name="arch" type="xml">
-                <form string="Demand Estimate Wizard">
+                <form string="Stock Demand Estimate Wizard">
                     <group>
                         <group name="dates">
                             <label for="date_from" string="Period"/>
@@ -58,8 +58,8 @@
                         </group>
                     </group>
                     <div/>
-                    <group name="orderpoints" string="Stock orderpoints">
-                        <field name="orderpoint_ids" nolabel="1"/>
+                    <group name="products" string="Products">
+                        <field name="product_ids" nolabel="1"/>
                     </group>
                     <footer>
                         <button name="create_sheet" string="Prepare"
@@ -70,18 +70,18 @@
           </field>
         </record>
 
-        <act_window name="Create Demand Estimates"
-            res_model="demand.estimate.wizard"
-            src_model="demand.estimate.sheet"
+        <act_window name="Create Stock Demand Estimates"
+            res_model="stock.demand.estimate.wizard"
+            src_model="stock.demand.estimate.sheet"
             view_mode="form"
             target="new"
             key2="client_action_multi"
-            id="action_demand_estimate_wizard"/>
+            id="action_stock_demand_estimate_wizard"/>
 
         <menuitem
-            id="menu_demand_estimate_wizard"
+            id="menu_stock_demand_estimate_wizard"
             parent="menu_stock_demand_planning"
-            action="action_demand_estimate_wizard"/>
+            action="action_stock_demand_estimate_wizard"/>
 
     </data>
 </openerp>

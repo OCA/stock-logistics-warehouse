@@ -14,9 +14,9 @@ _PERIOD_SELECTION = [
 ]
 
 
-class DemandEstimateSheet(models.TransientModel):
-    _name = 'demand.estimate.sheet'
-    _description = 'Stock Orderpoint Demand Estimate'
+class StockDemandEstimateSheet(models.TransientModel):
+    _name = 'stock.demand.estimate.sheet'
+    _description = 'Stock Demand Estimate Sheet'
 
     def _default_date_from(self):
         return self.env.context.get('date_from', False)
@@ -38,31 +38,35 @@ class DemandEstimateSheet(models.TransientModel):
         period_type = self.env.context.get('period_type', False)
         date_from = self.env.context.get('date_from', False)
         date_to = self.env.context.get('date_to', False)
-        orderpoint_ids = self.env.context.get('orderpoint_ids', False)
+        location_id = self.env.context.get('location_id', False)
+        product_ids = self.env.context.get('product_ids', False)
         domain = [('period_type', '=', period_type),
                   ('date_from', '>=', date_from),
                   ('date_to', '<=', date_to)]
-        periods = self.env['stock.orderpoint.demand.estimate.period'].search(
+        periods = self.env['stock.demand.estimate.period'].search(
             domain)
-        orderpoints = self.env['stock.warehouse.orderpoint'].browse(orderpoint_ids)
+        products = self.env['product.product'].browse(product_ids)
 
         lines = []
-        for orderpoint in orderpoints:
+        for product in products:
             name_y = ''
-            if orderpoint.product_id.default_code:
-                name_y += '[%s] ' % orderpoint.product_id.default_code
-            name_y += orderpoint.product_id.name
-            name_y += ' - %s' % orderpoint.product_id.uom_id.name
+            if product.default_code:
+                name_y += '[%s] ' % product.default_code
+            name_y += product.name
+            name_y += ' - %s' % product.uom_id.name
             for period in periods:
-                estimates = self.env['stock.orderpoint.demand.estimate'].search(
-                    [('orderpoint_id', '=', orderpoint.id),
-                     ('period_id', '=', period.id)])
+                estimates = self.env['stock.demand.estimate'].search(
+                    [('product_id', '=', product.id),
+                     ('period_id', '=', period.id),
+                     ('location_id', '=', location_id)])
                 if estimates:
                     lines.append((0, 0, {
                         'value_x': period.name,
                         'value_y': name_y,
                         'period_id': period.id,
-                        'orderpoint_id': orderpoint.id,
+                        'product_id': product.id,
+                        'product_uom': estimates[0].product_uom.id,
+                        'location_id': location_id,
                         'estimate_id': estimates[0].id,
                         'product_uom_qty': estimates[0].product_uom_qty
                     }))
@@ -71,7 +75,9 @@ class DemandEstimateSheet(models.TransientModel):
                         'value_x': period.name,
                         'value_y': name_y,
                         'period_id': period.id,
-                        'orderpoint_id': orderpoint.id,
+                        'product_id': product.id,
+                        'product_uom': product.uom_id.id,
+                        'location_id': location_id,
                         'product_uom_qty': 0.0
                     }))
         return lines
@@ -90,15 +96,16 @@ class DemandEstimateSheet(models.TransientModel):
 
     line_ids = fields.Many2many(
         string="Estimates",
-        comodel_name='demand.estimate.sheet.line',
-        rel='demand_estimate_line_rel',
+        comodel_name='stock.demand.estimate.sheet.line',
+        rel='stock_demand_estimate_line_rel',
         default=_default_estimate_ids)
 
     @api.model
     def _prepare_estimate_data(self, line):
         return {
             'period_id': line.period_id.id,
-            'orderpoint_id': line.orderpoint_id.id,
+            'product_id': line.product_id.id,
+            'location_id': line.location_id.id,
             'product_uom_qty': line.product_uom_qty
         }
 
@@ -111,38 +118,42 @@ class DemandEstimateSheet(models.TransientModel):
                 res.append(line.estimate_id.id)
             else:
                 data = self._prepare_estimate_data(line)
-                estimate = self.env['stock.orderpoint.demand.estimate'].create(
+                estimate = self.env['stock.demand.estimate'].create(
                     data)
                 res.append(estimate.id)
         res = {
             'domain': [('id', 'in', res)],
-            'name': _('Stock orderpoint Demand Estimates'),
-            'src_model': 'stock.orderpoint.demand.estimate.wizard',
+            'name': _('Stock Demand Estimates'),
+            'src_model': 'stock.demand.estimate.wizard',
             'view_type': 'form',
             'view_mode': 'tree',
-            'res_model': 'stock.orderpoint.demand.estimate',
+            'res_model': 'stock.demand.estimate',
             'type': 'ir.actions.act_window'
         }
         return res
 
 
-class DemandEstimateSheetLine(models.TransientModel):
-    _name = 'demand.estimate.sheet.line'
-    _description = 'Demand Estimate Sheet Line'
+class StockDemandEstimateSheetLine(models.TransientModel):
+    _name = 'stock.demand.estimate.sheet.line'
+    _description = 'Stock Demand Estimate Sheet Line'
 
-    estimate_id = fields.Many2one(comodel_name='stock.orderpoint.demand.estimate')
+    estimate_id = fields.Many2one(comodel_name='stock.demand.estimate')
     period_id = fields.Many2one(
-        comodel_name='stock.orderpoint.demand.estimate.period')
-    orderpoint_id = fields.Many2one(comodel_name='stock.warehouse.orderpoint')
+        comodel_name='stock.demand.estimate.period',
+        string='Period')
+    location_id = fields.Many2one(comodel_name='stock.location',
+                                  string="Stock Location")
+    product_id = fields.Many2one(comodel_name='product.product',
+                                 string='Product')
     value_x = fields.Char(string='Period')
-    value_y = fields.Char(string='orderpoint')
+    value_y = fields.Char(string='Product')
     product_uom_qty = fields.Float(
         string="Quantity", digits_compute=dp.get_precision('Product UoM'))
 
 
 class DemandEstimateWizard(models.TransientModel):
-    _name = 'demand.estimate.wizard'
-    _description = 'Stock orderpoint Demand Estimate Wizard'
+    _name = 'stock.demand.estimate.wizard'
+    _description = 'Stock Demand Estimate Wizard'
 
     def _default_period_type(self):
         return 'monthly'
@@ -155,10 +166,9 @@ class DemandEstimateWizard(models.TransientModel):
                                    default=_default_period_type)
     location_id = fields.Many2one(comodel_name="stock.location",
                                   string="Location", required=True)
-    orderpoint_ids = fields.Many2many(comodel_name="stock.warehouse.orderpoint",
-                                  relation='demand_estimate_wiz_orderpoint_rel',
-                                  string="Stock orderpoints",
-                                  domain="[('location_id', '=', location_id)]")
+    product_ids = fields.Many2many(
+        comodel_name="product.product",
+        string="Products")
 
     @api.multi
     def _prepare_demand_estimate_sheet(self):
@@ -173,24 +183,24 @@ class DemandEstimateWizard(models.TransientModel):
     @api.multi
     def create_sheet(self):
         self.ensure_one()
-        if not self.orderpoint_ids:
-            raise UserError(_('You must select at lease one Stock orderpoint.'))
+        if not self.product_ids:
+            raise UserError(_('You must select at lease one product.'))
 
         context = {
             'date_from': self.date_from,
             'date_to': self.date_to,
             'period_type': self.period_type,
             'location_id': self.location_id.id,
-            'orderpoint_ids': self.orderpoint_ids.ids
+            'product_ids': self.product_ids.ids
         }
         res = {
             'context': context,
             'name': _('Estimate Sheet'),
-            'src_model': 'demand.estimate.wizard',
+            'src_model': 'stock.demand.estimate.wizard',
             'view_type': 'form',
             'view_mode': 'form',
             'target': 'new',
-            'res_model': 'demand.estimate.sheet',
+            'res_model': 'stock.demand.estimate.sheet',
             'type': 'ir.actions.act_window'
         }
 
