@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
-# - Jordi Ballester Alomar
+# Copyright 2016 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# © 2016 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp import api, fields, models
 
@@ -28,7 +29,7 @@ class StockInventoryRevaluationGetQuants(models.TransientModel):
         quant_l = []
         quant_obj = self.env['stock.quant']
         for prod_variant in \
-                revaluation.product_template_id.product_variant_ids:
+                revaluation.product_id:
             search_domain = self._get_quant_search_criteria(prod_variant)
             quants = quant_obj.search(search_domain)
             for quant in quants:
