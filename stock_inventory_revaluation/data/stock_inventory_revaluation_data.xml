@@ -2,12 +2,6 @@
 <openerp>
     <data noupdate="1">
 
-        <record id="sequence_stock_inventory_revaluation_type"
-                model="ir.sequence.type">
-            <field name="name">Stock Inventory Revaluation</field>
-            <field name="code">stock.inventory.revaluation</field>
-        </record>
-        
         <record id="sequence_stock_inventory_revaluation" model="ir.sequence">
             <field name="name">Stock Inventory Revaluation</field>
             <field name="code">stock.inventory.revaluation</field>
