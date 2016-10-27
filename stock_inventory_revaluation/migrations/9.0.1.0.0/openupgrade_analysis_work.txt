@@ -1,0 +1,10 @@
+---Fields in module 'stock_inventory_revaluation'---
+
+stock_inventory_revaluation / stock.inventory.revaluation / product_id (many2one)         : NEW relation: product.product, required: required
+# TODO : Create as many IR records for each product variants of the template
+# DONE : in post-migration script
+
+
+---XML records in module 'stock_inventory_revaluation'---
+DEL ir.sequence.type: stock_inventory_revaluation.sequence_stock_inventory_revaluation_type
+# NOTHING TO DO: Sequence type deprecated in v9
