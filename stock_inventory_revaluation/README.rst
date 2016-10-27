@@ -12,18 +12,16 @@ inventory revaluation.
 You can re-valuate inventory values by:
 
 * Changing the inventory valuation of a specific product. The cost price
- is changed, and the inventory value is recalculated according to the new
- price. In case of real price, you can select on which quants you want to
- change the unit cost.
+  is changed, and the inventory value is recalculated according to the new
+  price. In case of real price, you can select on which quants you want to
+  change the unit cost.
 
 * Changing the value of the inventory. The quantity of inventory remains
   unchanged, resulting in a change in the price.
 
 
-
 Configuration
 =============
-
 
 * Go to *Inventory / Configuration / Products / Product Categories* and
   define, for each category, a Valuation Increase Account and a Valuation
@@ -49,7 +47,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/154/8.0
+   :target: https://runbot.odoo-community.org/runbot/153/9.0
 
 Bug Tracker
 ===========
@@ -58,10 +56,7 @@ Bugs are tracked on `GitHub Issues
 <https://github.com/OCA/stock_account_inventory_revaluation/issues>`_. In
 case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and
-welcomed `feedback <https://github.com/OCA/154/issues/new?body=module:%20
-stock_account_inventory_revaluation%0Aversion:%20
-8.0%0A%0A**Steps%20to%20reproduce**%0A-%20..
-.%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+welcomed feedback.
 
 Credits
 =======
@@ -75,14 +70,14 @@ Contributors
 ------------
 
 * Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
-
+* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 
 Maintainer
 ----------
 
 .. image:: https://odoo-community.org/logo.png
    :alt: Odoo Community Association
-   :target: http://odoo-community.org
+   :target: https://odoo-community.org
 
 This module is maintained by the OCA.
 
@@ -90,4 +85,4 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-To contribute to this module, please visit http://odoo-community.org.
+To contribute to this module, please visit https://odoo-community.org.
