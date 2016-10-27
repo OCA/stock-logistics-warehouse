@@ -9,8 +9,8 @@
                    ref="stock_account.view_category_property_form"/>
             <field name="arch" type="xml">
                 <group name="account_property" position="inside">
-                    <field name="property_inventory_revaluation_increase_account_categ" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
-                    <field name="property_inventory_revaluation_decrease_account_categ" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                    <field name="property_inventory_revaluation_increase_account_categ"/>
+                    <field name="property_inventory_revaluation_decrease_account_categ"/>
                 </group>
             </field>
         </record>
