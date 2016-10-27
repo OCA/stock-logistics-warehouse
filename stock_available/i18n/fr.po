@@ -19,6 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_available
+#: field:product.product,immediately_usable_qty:0
+#: field:product.template,immediately_usable_qty:0
+msgid "Available to promise"
+msgstr "Disponible à la vente"
+
+#. module: stock_available
 #: view:product.template:stock_available.view_stock_available_kanban
 msgid "Available to promise:"
 msgstr "Disponible à la vente:"
