@@ -7,23 +7,25 @@
 from openerp import api, fields, models, _
 from openerp.exceptions import Warning as UserError
 
-_PERIOD_SELECTION = [
-    ('monthly', 'Monthly'),
-    ('weekly', 'Weekly')
-]
-
 
 class StockDemandEstimatePeriod(models.Model):
     _name = 'stock.demand.estimate.period'
     _description = 'Stock Demand Estimate Period'
     _order = 'date_from'
 
+    @api.multi
+    @api.depends('date_from', 'date_to')
+    def _compute_days(self):
+        for rec in self:
+            if rec.date_from and rec.date_to:
+                rec.days = (fields.Date.from_string(rec.date_to) -
+                            fields.Date.from_string(rec.date_from)).days + 1
+
     name = fields.Char(string="Name", required=True)
-    period_type = fields.Selection(string="Type",
-                                   selection=_PERIOD_SELECTION,
-                                   required=True)
     date_from = fields.Date(string="Date From", required=True)
     date_to = fields.Date(string="Date To", required=True)
+    days = fields.Float(string="Days between dates",
+                        compute='_compute_days', store=True, readonly=True)
 
     estimate_ids = fields.One2many(
         comodel_name="stock.demand.estimate",
@@ -38,12 +40,10 @@ class StockDemandEstimatePeriod(models.Model):
     @api.constrains('name', 'date_from', 'date_to')
     def _check_period(self):
         for period in self:
-            self.env.cr.execute('SELECT id \
+            self.env.cr.execute('SELECT id, date_from, date_to \
                 FROM stock_demand_estimate_period \
                 WHERE (date_from <= %s and %s <= date_to) \
-                AND period_type=%s \
-                AND id <> %s', (period.date_to, period.date_from,
-                                period.period_type, period.id))
-            if self.env.cr.fetchall():
-                raise UserError(_('Two periods of the same type '
-                                'cannot overlap.'))
+                AND id <> %s', (period.date_to, period.date_from, period.id))
+            res = self.env.cr.fetchall()
+            if res:
+                raise UserError(_('Two periods cannot overlap.'))
