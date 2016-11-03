@@ -26,10 +26,10 @@ class ProductTemplate(models.Model):
 
     @api.multi
     @api.depends('virtual_available', 'incoming_qty')
-    def _immediately_usable_qty(self):
+    def _compute_immediately_usable_qty(self):
         """Ignore the incoming goods in the quantity available to promise
 
         This is the same implementation as for variants."""
-        super(ProductTemplate, self)._immediately_usable_qty()
+        super(ProductTemplate, self)._compute_immediately_usable_qty()
         for tmpl in self:
             tmpl.immediately_usable_qty -= tmpl.incoming_qty
