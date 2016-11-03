@@ -5,14 +5,12 @@
     'name': 'Consider the production potential is available to promise',
     'version': '9.0.1.0.0',
     "author": u"Numérigraphe,"
+              u"Sodexis,"
               u"Odoo Community Association (OCA)",
     'category': 'Hidden',
     'depends': [
         'stock_available',
         'mrp'
-    ],
-    'data': [
-        'views/product_template_view.xml',
     ],
     'demo': [
         'demo/mrp_bom.yml',
