@@ -23,12 +23,6 @@ class StockWarehouseOrderpoint(models.Model):
             rec.outgoing_location_qty = product_available['outgoing_qty']
             rec.virtual_location_qty = product_available['virtual_available']
 
-    @api.multi
-    @api.depends('product_location_qty', 'product_min_qty')
-    def _compute_product_available(self):
-        for rec in self:
-            rec.available = rec.product_location_qty > rec.product_min_qty
-
     product_location_qty = fields.Float(
         string='Quantity On Location',
         compute='_compute_product_available_qty')
