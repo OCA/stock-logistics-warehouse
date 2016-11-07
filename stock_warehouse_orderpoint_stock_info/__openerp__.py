@@ -12,11 +12,13 @@
     "depends": [
         "stock",
     ],
-    "author": "OdooMRP team,"
-              "AvanzOSC,"
-              "Tecnativa",
+    "author": "OdooMRP team, "
+              "AvanzOSC, "
+              "Tecnativa, "
+              "Odoo Community Association (OCA)",
     "website": "http://www.odoomrp.com",
     "category": "Warehouse",
+    "license": "AGPL-3",
     "data": [
         "views/stock_warehouse_orderpoint_view.xml",
     ],
