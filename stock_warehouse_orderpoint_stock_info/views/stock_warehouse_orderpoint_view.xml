@@ -14,7 +14,6 @@
                     <field name="incoming_location_qty" />
                     <field name="outgoing_location_qty" />
                     <field name="virtual_location_qty" />
-                    <field name="available" invisible="1" />
                 </field>
             </field>
         </record>
@@ -51,11 +50,6 @@
                             domain="[]"
                             context="{'group_by':'product_category'}"/>
                 </filter>
-                <group string="Group By" position="before">
-                    <filter string="Availability under minimum"
-                        domain="[('available', '=', False)]"
-                        context="{}" />
-                </group>
             </field>
         </record>
 
