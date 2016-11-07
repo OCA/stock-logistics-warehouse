@@ -44,8 +44,7 @@ class StockWarehouseOrderpoint(models.Model):
 
     available = fields.Boolean(
         string='Is enough product available?',
-        compute='_compute_product_available',
-        store=True)
+        compute='_compute_product_available')
     product_category = fields.Many2one(string='Product Category',
                                        related='product_id.categ_id',
                                        store=True)
