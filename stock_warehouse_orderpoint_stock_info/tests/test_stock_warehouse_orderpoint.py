@@ -75,6 +75,10 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
 
     def test_product_qty(self):
         'Tests the product quantity in the Reordering rules'
+        # Checks the product availability
+        self.reordering_record._product_available()
+        self.assertFalse(self.reordering_record.available)
+        # Create & process moves to test the product quantity
         self.move = self.create_stock_move()
         self.reordering_record._product_available_qty()
         self.assertEqual(self.reordering_record.incoming_location_qty,
@@ -91,3 +95,6 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         self.assertEqual(self.reordering_record.virtual_location_qty,
                          self.product.virtual_available,
                          'Virtual Qty does not match')
+        # Checks the product availability after moves processed
+        self.reordering_record._product_available()
+        self.assertTrue(self.reordering_record.available)
