@@ -41,10 +41,6 @@ class StockWarehouseOrderpoint(models.Model):
     virtual_location_qty = fields.Float(
         string='Forecast On Location',
         compute='_compute_product_available_qty')
-
-    available = fields.Boolean(
-        string='Is enough product available?',
-        compute='_compute_product_available')
     product_category = fields.Many2one(string='Product Category',
                                        related='product_id.categ_id',
                                        store=True)
