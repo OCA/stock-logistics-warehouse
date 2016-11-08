@@ -29,6 +29,7 @@ addon | version | summary
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 9.0.1.0.0 | Add a MTS+MTO route
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 9.0.1.0.0 | Mass configuration of stock order points
 [stock_partner_lot](stock_partner_lot/) | 9.0.1.0.0 | Show lots on the partners that own them
+[stock_putaway_product](stock_putaway_product/) | 9.0.1.0.0 | Set a product location and put-away strategy per product
 [stock_quant_merge](stock_quant_merge/) | 9.0.1.0.0 | Stock - Quant merge
 
 Unported addons
