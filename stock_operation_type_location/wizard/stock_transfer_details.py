@@ -16,11 +16,11 @@ class StockTransferDetails(models.TransientModel):
             .fields_view_get(
                 view_id=view_id, view_type=view_type,
                 toolbar=toolbar, submenu=submenu)
-        context = self._context
+        context = self.env.context
         loc = []
         dest_loc = []
-        domain_sourceloc = ""
-        domain_destinationloc = ""
+        domain_sourceloc = "[]"
+        domain_destinationloc = "[]"
         obj_stock_picking_type = self.env['stock.picking.type']
 
         picking_type_id = context.get('default_picking_type_id')
@@ -31,14 +31,14 @@ class StockTransferDetails(models.TransientModel):
 
             allowed_location = picking_type.allowed_location_ids
             allowed_dest_location = picking_type.allowed_dest_location_ids
-            scr_id = picking_type.default_location_src_id.id
+            src_id = picking_type.default_location_src_id.id
             dest_id = picking_type.default_location_dest_id.id
 
             if allowed_location:
                 for location in allowed_location:
                     loc.append(location.id)
-                if scr_id and scr_id not in loc:
-                    loc.append(scr_id)
+                if src_id and src_id not in loc:
+                    loc.append(src_id)
 
             if allowed_dest_location:
                 for dest_location in allowed_dest_location:
@@ -46,18 +46,10 @@ class StockTransferDetails(models.TransientModel):
                 if dest_id and dest_id not in dest_loc:
                     dest_loc.append(dest_id)
 
-            if loc and dest_loc:
+            if loc:
                 domain_sourceloc = "[('id', 'in', %s)]" % loc
+            if dest_loc:
                 domain_destinationloc = "[('id', 'in', %s)]" % dest_loc
-            elif loc and not dest_loc:
-                domain_sourceloc = "[('id', 'in', %s)]" % loc
-                domain_destinationloc = "[]"
-            elif not loc and dest_loc:
-                domain_sourceloc = "[]"
-                domain_destinationloc = "[('id', 'in', %s)]" % dest_loc
-            else:
-                domain_sourceloc = "[]"
-                domain_destinationloc = "[]"
 
         if 'item_ids' in res['fields']:
             arch = res['fields']['item_ids'][
