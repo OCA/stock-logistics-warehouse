@@ -9,12 +9,12 @@
             <field name="arch" type="xml">
                 <field name="default_location_src_id" attrs="{'required': [('code', '=', 'internal')]}" position="after">
                     <field  name="allowed_location_ids" 
-                            domain="[('id', 'not in', [default_location_src_id]),('usage', '&lt;&gt;', 'view')]"
+                            domain="[('usage', '&lt;&gt;', 'view')]"
                     />
                 </field>
                 <field name="default_location_dest_id" attrs="{'required': [('code', 'in', ('internal', 'incoming'))]}" position="after">
                     <field  name="allowed_dest_location_ids" 
-                            domain="[('id', 'not in', [default_location_dest_id]),('usage', '&lt;&gt;', 'view')]"
+                            domain="[('usage', '&lt;&gt;', 'view')]"
                     />
                 </field>
             </field>
