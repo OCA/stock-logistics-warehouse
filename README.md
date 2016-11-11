@@ -39,13 +39,14 @@ addon | version | summary
 [stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 | Stock Location Ownership
 [stock_lot_quantity](stock_lot_quantity/) | 8.0.1.0.0 | Stock quantity for serial number
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.0 | Add a MTS+MTO route
-[stock_operation_type_location](stock_operation_type_location/) | 8.0.1.0.0 | Allows to filter locations on stock operations
+[stock_operation_type_location](stock_operation_type_location/) | 8.0.1.1.0 | Allows to filter locations on stock operations
 [stock_putaway_product](stock_putaway_product/) | 8.0.1.0.0 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.1.0 | Stock - Manual assignment of quants
 [stock_quant_merge](stock_quant_merge/) | 8.0.1.0.0 | Stock - Quant merge
 [stock_reserve](stock_reserve/) | 8.0.0.2.0 | Stock reservations on products
 [stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.1 | Stock Reserve Sales
 [stock_traceability_operation](stock_traceability_operation/) | 8.0.1.1.0 | Adds operations in traceability and quant history
+[stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 8.0.1.0.0 | Reordering rules stock info
 
 Unported addons
 ---------------
