@@ -51,5 +51,5 @@ class ProductTemplate(models.Model):
                 'increase_account_id': increase_account_id,
                 'decrease_account_id': decrease_account_id
             })
-            reval.post()
+            reval.button_post()
         return True
