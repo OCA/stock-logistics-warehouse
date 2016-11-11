@@ -20,6 +20,10 @@ reordering rules.
 The recommended quantity to procure is adjusted to the procurement unit of
 measure indicated in the reordering rule.
 
+If you want users to be able to change the recommended quantity to procure,
+you should assign them to the security group 'Change quantity in manual
+procurements from reordering rules', under 'Settings / Users / Users'.
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/8.0

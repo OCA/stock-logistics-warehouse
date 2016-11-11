@@ -22,7 +22,7 @@
                                 <field name="warehouse_id" groups="stock.group_locations"/>
                                 <field name="location_id" groups="stock.group_locations"/>
                                 <field name="product_id"/>
-                                 <field name="qty"/>
+                                 <field name="qty" groups="stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty"/>
                                 <field name="uom_id" groups="product.group_uom"/>
                                 <field name="date_planned"/>
                             </tree>
