@@ -31,6 +31,7 @@ addon | version | summary
 [stock_partner_lot](stock_partner_lot/) | 9.0.1.0.0 | Show lots on the partners that own them
 [stock_putaway_product](stock_putaway_product/) | 9.0.1.0.0 | Set a product location and put-away strategy per product
 [stock_quant_merge](stock_quant_merge/) | 9.0.1.0.0 | Stock - Quant merge
+[stock_reserve](stock_reserve/) | 9.0.1.0.0 | Stock reservations on products
 
 Unported addons
 ---------------
@@ -48,7 +49,6 @@ addon | version | summary
 [stock_optional_valuation](stock_optional_valuation/) | 0.1 (unported) | Stock optional valuation
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.0.0 (unported) | Stock - Manual assignment of quants
 [stock_reord_rule](stock_reord_rule/) | 0.2 (unported) | Improved reordering rules
-[stock_reserve](stock_reserve/) | 8.0.0.2.0 (unported) | Stock reservations on products
 [stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.0 (unported) | Stock Reserve Sales
 
 [//]: # (end addons)
