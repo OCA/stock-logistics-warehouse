@@ -14,11 +14,11 @@
                     <field name="procure_recommended_date"/>
                     <button string="Create Procurement"
                             name="%(stock_orderpoint_manual_procurement.act_make_procurement_from_orderpoint)d"
-							icon="gtk-execute" type="action"/>
+                            icon="gtk-execute" type="action"/>
                     <button string="Procurements"
-							name="%(procurement.procurement_action)d"
+                            name="%(procurement.procurement_action)d"
                             attrs="{'invisible':[('procurement_ids', '=', False)]}"
-							icon="gtk-open" type="action"
+                            icon="gtk-open" type="action"
                             domain="[('orderpoint_id','=', active_id)]"
                             context="{'search_default_orderpoint_id': [active_id]}"/>
                 </field>

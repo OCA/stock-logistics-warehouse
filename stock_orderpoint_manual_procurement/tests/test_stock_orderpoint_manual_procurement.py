@@ -47,7 +47,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         self._update_product_qty(self.product, self.location, quantity)
 
         # Create Reordering Rule
-        self.create_orderpoint()
+        self.reorder = self.create_orderpoint()
 
     def _create_user(self, login, groups, company):
         """ Create a user."""
@@ -94,22 +94,22 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
 
     def create_orderpoint(self):
         """Create a Reordering Rule"""
-        self.reorder = self.reordering_rule_model.sudo(self.user).create({
-                                'name': 'Order-point',
-                                'product_id': self.product.id,
-                                'product_min_qty': '100',
-                                'product_max_qty': '500',
-                                'qty_multiple': '1'
+        reorder = self.reordering_rule_model.sudo(self.user).create({
+            'name': 'Order-point',
+            'product_id': self.product.id,
+            'product_min_qty': '100',
+            'product_max_qty': '500',
+            'qty_multiple': '1'
         })
-        return self.reorder
+        return reorder
 
     def create_orderpoint_procurement(self):
         """Make Procurement from Reordering Rule"""
         context = {
-                   'active_model': 'stock.warehouse.orderpoint',
-                   'active_ids': self.reorder.ids,
-                   'active_id': self.reorder.id
-                   }
+            'active_model': 'stock.warehouse.orderpoint',
+            'active_ids': self.reorder.ids,
+            'active_id': self.reorder.id
+        }
         wizard = self.make_procurement_orderpoint_model.sudo(self.user).\
             with_context(context).create({})
         wizard.make_procurement()
