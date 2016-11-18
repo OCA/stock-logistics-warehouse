@@ -8,9 +8,9 @@ Product Stock Location
 
 This modules dramatically improves the performance on the check of the stock
 levels of each product by location, by storing the quantity on
-hand, incoming, outgoing and forecased each time a stock move or
-quant changes, instead of having to compute them each time upon request by
-the user.
+hand, incoming, outgoing and forecased for each product and at the affected
+location hierarchy, each time a stock move or quant changes, instead of
+having to compute them each time upon request by the user.
 
 The requests for stock levels will still be computed when the user wants to
 query the stock for a specific lot, owner or package.
