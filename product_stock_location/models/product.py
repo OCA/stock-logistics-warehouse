@@ -2,7 +2,7 @@
 # Copyright 2016 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api
+from openerp import models, api
 
 
 class ProductTemplate(models.Model):
@@ -24,9 +24,9 @@ class ProductProduct(models.Model):
 
     def _product_available_compute_nonstored(self):
         return self.env.context.get('compute_stored_product_stock', False) or \
-               self.env.context.get('lot_id', False) or \
-               self.env.context.get('owner_id', False) or \
-               self.env.context.get('package_id', False)
+            self.env.context.get('lot_id', False) or \
+            self.env.context.get('owner_id', False) or \
+            self.env.context.get('package_id', False)
 
     @api.model
     def _get_product_stock_location_search_domain(self, product, location_ids):
@@ -78,25 +78,25 @@ class ProductProduct(models.Model):
 
             qty_available = 0.0
             for group in self.env['product.stock.location'].read_group(
-                domain,['product_id', 'product_location_qty'],
+                domain, ['product_id', 'product_location_qty'],
                     ['product_id']):
                 qty_available = group['product_location_qty']
 
             incoming_qty = 0.0
             for group in self.env['product.stock.location'].read_group(
-                domain,['product_id', 'incoming_location_qty'],
+                domain, ['product_id', 'incoming_location_qty'],
                     ['product_id']):
                 incoming_qty = group['incoming_location_qty']
 
             outgoing_qty = 0.0
             for group in self.env['product.stock.location'].read_group(
-                domain,['product_id', 'outgoing_location_qty'],
+                domain, ['product_id', 'outgoing_location_qty'],
                     ['product_id']):
                 outgoing_qty = group['outgoing_location_qty']
 
             virtual_available = 0.0
             for group in self.env['product.stock.location'].read_group(
-                domain,['product_id', 'virtual_location_qty'],
+                domain, ['product_id', 'virtual_location_qty'],
                     ['product_id']):
                 virtual_available = group['virtual_location_qty']
 

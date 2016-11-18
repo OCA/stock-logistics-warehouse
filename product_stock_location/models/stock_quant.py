@@ -26,10 +26,10 @@ class StockQuant(models.Model):
                  ('location_id', '=', location.location_id.id)])
 
         return {
-                'product_id': self.product_id.id,
-                'location_id': location.id,
-                'parent_id': parent.id or False,
-            }
+            'product_id': self.product_id.id,
+            'location_id': location.id,
+            'parent_id': parent.id or False
+        }
 
     @api.model
     def update_product_stock_location(self):

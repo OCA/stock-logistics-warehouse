@@ -42,7 +42,8 @@ def create_product_stock_locations(cr):
 
     cr.execute(
         """
-        ALTER TABLE stock_move ADD COLUMN product_stock_location_dest_id integer;
+        ALTER TABLE stock_move ADD COLUMN product_stock_location_dest_id
+        integer;
         COMMENT ON COLUMN stock_move.product_stock_location_dest_id IS
         'Product Destination Stock Location';
         """)

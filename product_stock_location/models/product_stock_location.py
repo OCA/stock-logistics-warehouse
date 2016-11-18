@@ -121,9 +121,9 @@ class ProductStockLocation(models.Model):
     @api.model
     def prepare_parent_product_stock_location_data(self):
         return {
-                'product_id': self.product_id.id,
-                'location_id': self.location_id.location_id.id,
-            }
+            'product_id': self.product_id.id,
+            'location_id': self.location_id.location_id.id,
+        }
 
     @api.model
     def update_parent(self):

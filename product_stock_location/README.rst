@@ -19,8 +19,9 @@ Usage
 =====
 
 * From a product or product variant press the button "Stock By Location".
+
 * When the Technical Settings are activated you can display all records in
-'Warehouse / Traceability / Product Stock Location'.
+  'Warehouse / Traceability / Product Stock Location'.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

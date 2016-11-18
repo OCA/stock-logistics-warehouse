@@ -70,14 +70,14 @@ class TestProductStockLocation(common.TransactionCase):
         """Tests the product quantity in the locations"""
         # Create & process moves to test the product quantity
         picking_in_1 = self.create_picking(self.picking_in,
-                                        self.location_supplier,
-                                        self.location_shelf1)
+                                           self.location_supplier,
+                                           self.location_shelf1)
         picking_in_2 = self.create_picking(self.picking_in,
-                                        self.location_supplier,
-                                        self.location_stock)
+                                           self.location_supplier,
+                                           self.location_stock)
         picking_out_1 = self.create_picking(self.picking_out,
-                                         self.location_shelf1,
-                                         self.location_customer)
+                                            self.location_shelf1,
+                                            self.location_customer)
 
         psl_shelf1 = self.product_stock_location_model.search(
             [('product_id', '=', self.product.id),
