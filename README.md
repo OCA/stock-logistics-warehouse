@@ -28,6 +28,7 @@ addon | version | summary
 [stock_available_immediately](stock_available_immediately/) | 8.0.2.0.1 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 8.0.3.1.1 | Consider the production potential is available to promise
 [stock_available_sale](stock_available_sale/) | 8.0.3.0.0 | Quotations in quantity available to promise
+[stock_available_unreserved](stock_available_unreserved/) | 8.0.1.0.0 | Quantity of stock available for inmediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 8.0.1.0.0 | Stock Quantity Change Reason
 [stock_inventory_hierarchical](stock_inventory_hierarchical/) | 8.0.2.0.0 | Group several Inventory adjustments in a master inventory
 [stock_inventory_line_price](stock_inventory_line_price/) | 8.0.1.0.0 | Standard price at inventory level
