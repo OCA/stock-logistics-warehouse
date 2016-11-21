@@ -262,12 +262,10 @@ class TestProductStockLocation(common.TransactionCase):
         picking_in_1 = self.create_picking(self.picking_in,
                                            self.location_supplier,
                                            self.location_bin1)
-        self.create_picking(self.picking_in,
-                                           self.location_supplier,
-                                           self.location_stock)
-        self.create_picking(self.picking_out,
-                                            self.location_bin1,
-                                            self.location_customer)
+        self.create_picking(self.picking_in, self.location_supplier,
+                            self.location_stock)
+        self.create_picking(self.picking_out, self.location_bin1,
+                            self.location_customer)
 
         psl_bin1 = self.product_stock_location_model.search(
             [('product_id', '=', self.product.id),
