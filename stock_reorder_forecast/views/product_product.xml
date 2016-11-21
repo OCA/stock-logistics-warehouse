@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_product_form_stock_reorder_forecast" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="seller_ids" position="before">
+                    <group colspan="2" col="4">
+                        <separator string="Purchase parameters" colspan="4"/>
+                        <field name="stock_period_max"/>
+                        <field name="ultimate_purchase"/>
+                        <field name="turnover_average"/>
+                        <button 
+                            type="action" 
+                            attrs = "{'invisible': [('ultimate_purchase', '=', False)]}"
+                            name = "%(stock_reorder_forecast.wizard_create_purchase_act)d"
+                            string = "Create proposal-RFQ "/>
+                    </group>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_product_tree_stock_reorder_forecast" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.view_stock_product_tree" />
+            <field name="arch" type="xml">
+                <field name="virtual_available" position="after" >
+                    <field name="ultimate_purchase"/>
+                    <field name="turnover_average"/>
+                </field>
+                <field name="ultimate_purchase" position="after">
+                    <button 
+                        type="action" 
+                        attrs = "{'invisible': [('ultimate_purchase', '=', False)]}"
+                        name = "%(stock_reorder_forecast.wizard_create_purchase_act)d"
+                        string = "Create proposal-RFQ "/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

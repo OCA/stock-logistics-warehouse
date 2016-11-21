@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="product_template1" model="product.template">
+            <field name="name">TMPL1</field>
+            <field 
+                name="route_ids" 
+                eval="[(6,0,[ref('purchase.route_warehouse0_buy'), ref('stock.route_warehouse0_mto')])]"></field>
+            <field name="categ_id"  ref="product.product_category_5"></field>
+        </record>
+
+        <record id="product_template2" model="product.template">
+            <field name="name">TMPL2</field>
+            <field 
+                name="route_ids" 
+                eval="[(6,0,[ref('purchase.route_warehouse0_buy'), ref('stock.route_warehouse0_mto')])]"></field>
+            <field name="categ_id"  ref="product.product_category_2"></field>
+        </record>
+
+        <record id="product_template3" model="product.template">
+            <field name="name">TMPL3</field>
+            <field 
+                name="route_ids" 
+                eval="[(6,0,[ref('purchase.route_warehouse0_buy'), ref('stock.route_warehouse0_mto')])]"></field>
+
+            <field name="categ_id"  ref="product.product_category_3"></field>
+        </record>
+
+        <!-- product -->
+        <record id="product_noper" model="product.product">
+            <field name="name">product_noperiod</field>
+            <field name="product_tmpl_id" ref="product_template1"/>
+            <field name="type">product</field>
+        </record>
+
+       <record id="product_period90" model="product.product">
+            <field name="name">PERIOD90</field>
+            <field name="product_tmpl_id" ref="product_template2"/>
+            <field name="type">product</field>
+            <field name="turnover_period">90</field>
+
+        </record>
+
+       <record id="product_period180" model="product.product">
+           <field name="name">PERIOD180</field>
+           <field name="product_tmpl_id" ref="product_template3"/>
+            <field name="type">product</field>
+            <field name="turnover_period">180</field>
+        </record>
+
+
+        <!-- Suppliers -->
+
+        <record id="product_supplierinfo_1" model="product.supplierinfo">
+            <field name="product_tmpl_id" ref="product_template1"/>
+            <field name="product_id" ref="product_noper"/>
+            <field name="name" ref="base.res_partner_1"/>
+            <field name="delay">2</field>
+            <field name="min_qty">1</field>
+        </record>
+
+        <record id="product_supplierinfo_2" model="product.supplierinfo">
+            <field name="product_tmpl_id" ref="product_template2"/>
+            <field name="product_id" ref="product_period90"/>
+            <field name="name" ref="base.res_partner_4"/>
+            <field name="delay">1</field>
+            <field name="min_qty">1</field>
+        </record>
+
+        <record id="product_supplierinfo_3" model="product.supplierinfo">
+            <field name="product_tmpl_id" ref="product_template3"/>
+            <field name="product_id" ref="product_period180"/>
+            <field name="name" ref="base.res_partner_3"/>
+            <field name="delay">1</field>
+            <field name="min_qty">1</field>
+        </record>
+
+        <!-- new partner to be sure it isnt supplying anthing  -->
+
+        <record id="partner_new_forsupply" model="res.partner">
+            <field name="name">New partner</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="email">demo@demo.com</field>
+            <field name="street">center street</field>
+            <field name="city">belleville</field>
+            <field name="zip">5431</field>
+            <field name="country_id" ref="base.be"/>
+        </record>
+
+        <record id="product_supplierinfo_new" model="product.supplierinfo">
+            <field name="product_tmpl_id" ref="product_template3"/>
+            <field name="product_id" ref="product_period180"/>
+            <field name="name" ref="partner_new_forsupply"/>
+            <field name="delay">1</field>
+            <field name="min_qty">1</field>
+        </record>
+
+        <record id="cat_no_period" model="product.category">
+            <field name="name">NOPERIOD</field>
+        </record>
+        <record id="cat_period_30" model="product.category">
+            <field name="name">PERIOD30</field>
+            <field name="turnover_period">30</field>
+        </record>
+        <record id="cat_period_180" model="product.category">
+            <field name="name">PERIOD180</field>
+            <field name="turnover_period">180</field>
+        </record>
+        <record id="cat_period_360" model="product.category">
+            <field name="name">PERIOD360</field>
+            <field name="turnover_period">360</field>
+        </record>
+
+    </data>
+</openerp>
+
