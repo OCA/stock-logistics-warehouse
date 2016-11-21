@@ -14,6 +14,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.stock_picking_model = self.env['stock.picking']
         self.product_model = self.env['product.product']
         self.product_ctg_model = self.env['product.category']
+        self.stock_location_model = self.env['stock.location']
 
         # Get required Model data
         self.product_uom = self.env.ref('product.product_uom_unit')
@@ -21,6 +22,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.location_shelf1 = self.env.ref('stock.stock_location_components')
         self.location_customer = self.env.ref('stock.stock_location_customers')
         self.location_supplier = self.env.ref('stock.stock_location_customers')
+        self.location_chicago = self.env.ref('stock.stock_location_shop0')
 
         self.picking_in = self.env.ref('stock.picking_type_in')
         self.picking_out = self.env.ref('stock.picking_type_out')
@@ -28,6 +30,10 @@ class TestProductStockLocation(common.TransactionCase):
         # Create product category and product
         self.product_ctg = self._create_product_category()
         self.product = self._create_product()
+
+        # Create a stock location
+        self.location_bin1 = self._create_stock_location()
+        self.stock_location_model._parent_store_compute()
 
     def _create_product_category(self):
         """Create a Product Category."""
@@ -46,6 +52,15 @@ class TestProductStockLocation(common.TransactionCase):
             'uom_id': self.product_uom.id,
         })
         return product
+
+    def _create_stock_location(self):
+        """Create a Stock Location."""
+        location = self.stock_location_model.create({
+            'name': 'Test bin location',
+            'usage': 'internal',
+            'location_id': self.location_shelf1.id,
+        })
+        return location
 
     def create_picking(self, picking_type, source_location,
                        destination_location):
@@ -71,14 +86,17 @@ class TestProductStockLocation(common.TransactionCase):
         # Create & process moves to test the product quantity
         picking_in_1 = self.create_picking(self.picking_in,
                                            self.location_supplier,
-                                           self.location_shelf1)
+                                           self.location_bin1)
         picking_in_2 = self.create_picking(self.picking_in,
                                            self.location_supplier,
                                            self.location_stock)
         picking_out_1 = self.create_picking(self.picking_out,
-                                            self.location_shelf1,
+                                            self.location_bin1,
                                             self.location_customer)
 
+        psl_bin1 = self.product_stock_location_model.search(
+            [('product_id', '=', self.product.id),
+             ('location_id', '=', self.location_bin1.id)])
         psl_shelf1 = self.product_stock_location_model.search(
             [('product_id', '=', self.product.id),
              ('location_id', '=', self.location_shelf1.id)])
@@ -86,7 +104,17 @@ class TestProductStockLocation(common.TransactionCase):
             [('product_id', '=', self.product.id),
              ('location_id', '=', self.location_stock.id)])
 
-        # Check Shelf 1
+        # Check WH/Stock/Shelf 1/Bin 1
+        self.assertEqual(psl_bin1.product_location_qty,
+                         0, 'On Hand Qty does not match')
+        self.assertEqual(psl_bin1.incoming_location_qty,
+                         10, 'Incoming Qty does not match')
+        self.assertEqual(psl_bin1.outgoing_location_qty,
+                         10, 'Outgoing Qty does not match')
+        self.assertEqual(psl_bin1.virtual_location_qty,
+                         0, 'Forecasted Qty does not match')
+
+        # Check WH/Stock/Shelf 1
         self.assertEqual(psl_shelf1.product_location_qty,
                          0, 'On Hand Qty does not match')
         self.assertEqual(psl_shelf1.incoming_location_qty,
@@ -96,7 +124,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(psl_shelf1.virtual_location_qty,
                          0, 'Forecasted Qty does not match')
 
-        # Check Stock
+        # Check WH/Stock
         self.assertEqual(psl_stock.product_location_qty,
                          0, 'On Hand Qty does not match')
         self.assertEqual(psl_stock.incoming_location_qty,
@@ -115,7 +143,17 @@ class TestProductStockLocation(common.TransactionCase):
         # Move in 1
         picking_in_1.action_done()
 
-        # Check Shelf 1
+        # Check WH/Stock/Shelf 1/Bin 1
+        self.assertEqual(psl_bin1.product_location_qty,
+                         10, 'On Hand Qty does not match')
+        self.assertEqual(psl_bin1.incoming_location_qty,
+                         0, 'Incoming Qty does not match')
+        self.assertEqual(psl_bin1.outgoing_location_qty,
+                         10, 'Outgoing Qty does not match')
+        self.assertEqual(psl_bin1.virtual_location_qty,
+                         0, 'Forecasted Qty does not match')
+
+        # Check WH/Stock/Shelf 1
         self.assertEqual(psl_shelf1.product_location_qty,
                          10, 'On Hand Qty does not match')
         self.assertEqual(psl_shelf1.incoming_location_qty,
@@ -125,7 +163,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(psl_shelf1.virtual_location_qty,
                          0, 'Forecasted Qty does not match')
 
-        # Check Stock
+        # Check WH/Stock
         self.assertEqual(psl_stock.product_location_qty,
                          10, 'On Hand Qty does not match')
         self.assertEqual(psl_stock.incoming_location_qty,
@@ -144,7 +182,17 @@ class TestProductStockLocation(common.TransactionCase):
         # Move in 2
         picking_in_2.action_done()
 
-        # Check Shelf 1
+        # Check WH/Stock/Shelf 1/Bin 1
+        self.assertEqual(psl_bin1.product_location_qty,
+                         10, 'On Hand Qty does not match')
+        self.assertEqual(psl_bin1.incoming_location_qty,
+                         0, 'Incoming Qty does not match')
+        self.assertEqual(psl_bin1.outgoing_location_qty,
+                         10, 'Outgoing Qty does not match')
+        self.assertEqual(psl_bin1.virtual_location_qty,
+                         0, 'Forecasted Qty does not match')
+
+        # Check WH/Stock/Shelf 1
         self.assertEqual(psl_shelf1.product_location_qty,
                          10, 'On Hand Qty does not match')
         self.assertEqual(psl_shelf1.incoming_location_qty,
@@ -154,7 +202,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(psl_shelf1.virtual_location_qty,
                          0, 'Forecasted Qty does not match')
 
-        # Check Stock
+        # Check WH/Stock
         self.assertEqual(psl_stock.product_location_qty,
                          20, 'On Hand Qty does not match')
         self.assertEqual(psl_stock.incoming_location_qty,
@@ -173,7 +221,17 @@ class TestProductStockLocation(common.TransactionCase):
         # Move out 1
         picking_out_1.action_done()
 
-        # Check Shelf 1
+        # Check WH/Stock/Shelf 1/ Bin 1
+        self.assertEqual(psl_bin1.product_location_qty,
+                         0, 'On Hand Qty does not match')
+        self.assertEqual(psl_bin1.incoming_location_qty,
+                         0, 'Incoming Qty does not match')
+        self.assertEqual(psl_bin1.outgoing_location_qty,
+                         0, 'Outgoing Qty does not match')
+        self.assertEqual(psl_bin1.virtual_location_qty,
+                         0, 'Forecasted Qty does not match')
+
+        # Check WH/Stock/Shelf 1
         self.assertEqual(psl_shelf1.product_location_qty,
                          0, 'On Hand Qty does not match')
         self.assertEqual(psl_shelf1.incoming_location_qty,
@@ -183,7 +241,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(psl_shelf1.virtual_location_qty,
                          0, 'Forecasted Qty does not match')
 
-        # Check Stock
+        # Check WH/Stock
         self.assertEqual(psl_stock.product_location_qty,
                          10, 'On Hand Qty does not match')
         self.assertEqual(psl_stock.incoming_location_qty,
@@ -197,4 +255,87 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(self.product.qty_available, 10)
         self.assertEqual(self.product.incoming_qty, 0)
         self.assertEqual(self.product.outgoing_qty, 0)
+        self.assertEqual(self.product.virtual_available, 10)
+
+
+    def test_change_location(self):
+        # Create & process moves to test the product quantity
+        picking_in_1 = self.create_picking(self.picking_in,
+                                           self.location_supplier,
+                                           self.location_bin1)
+        picking_in_2 = self.create_picking(self.picking_in,
+                                           self.location_supplier,
+                                           self.location_stock)
+        picking_out_1 = self.create_picking(self.picking_out,
+                                            self.location_bin1,
+                                            self.location_customer)
+
+        psl_bin1 = self.product_stock_location_model.search(
+            [('product_id', '=', self.product.id),
+             ('location_id', '=', self.location_bin1.id)])
+        psl_shelf1 = self.product_stock_location_model.search(
+            [('product_id', '=', self.product.id),
+             ('location_id', '=', self.location_shelf1.id)])
+        psl_stock = self.product_stock_location_model.search(
+            [('product_id', '=', self.product.id),
+             ('location_id', '=', self.location_stock.id)])
+
+        # Move in 1
+        picking_in_1.action_done()
+
+        # Change the parent location of bin 1
+        self.location_bin1.location_id = self.location_chicago
+
+        psl_chicago = self.product_stock_location_model.search(
+            [('product_id', '=', self.product.id),
+             ('location_id', '=', self.location_chicago.id)])
+
+        self.assertEqual(psl_bin1.parent_id, psl_chicago,
+                         'The change in the parent location did not '
+                         'replicate to the product stock location.')
+
+        # Check WH/Stock/Bin 1
+        self.assertEqual(psl_bin1.product_location_qty,
+                         10, 'On Hand Qty does not match')
+        self.assertEqual(psl_bin1.incoming_location_qty,
+                         0, 'Incoming Qty does not match')
+        self.assertEqual(psl_bin1.outgoing_location_qty,
+                         10, 'Outgoing Qty does not match')
+        self.assertEqual(psl_bin1.virtual_location_qty,
+                         0, 'Forecasted Qty does not match')
+
+        # Check WH/Stock/Shelf 1
+        self.assertEqual(psl_shelf1.product_location_qty,
+                         0, 'On Hand Qty does not match')
+        self.assertEqual(psl_shelf1.incoming_location_qty,
+                         0, 'Incoming Qty does not match')
+        self.assertEqual(psl_shelf1.outgoing_location_qty,
+                         0, 'Outgoing Qty does not match')
+        self.assertEqual(psl_shelf1.virtual_location_qty,
+                         0, 'Forecasted Qty does not match')
+
+        # Check WH/Stock
+        self.assertEqual(psl_stock.product_location_qty,
+                         0, 'On Hand Qty does not match')
+        self.assertEqual(psl_stock.incoming_location_qty,
+                         10, 'Incoming Qty does not match')
+        self.assertEqual(psl_stock.outgoing_location_qty,
+                         0, 'Outgoing Qty does not match')
+        self.assertEqual(psl_stock.virtual_location_qty,
+                         10, 'Forecasted Qty does not match')
+
+        # Check Chic/Stock
+        self.assertEqual(psl_chicago.product_location_qty,
+                         10, 'On Hand Qty does not match')
+        self.assertEqual(psl_chicago.incoming_location_qty,
+                         0, 'Incoming Qty does not match')
+        self.assertEqual(psl_chicago.outgoing_location_qty,
+                         10, 'Outgoing Qty does not match')
+        self.assertEqual(psl_chicago.virtual_location_qty,
+                         0, 'Forecasted Qty does not match')
+
+        # Check product
+        self.assertEqual(self.product.qty_available, 10)
+        self.assertEqual(self.product.incoming_qty, 10)
+        self.assertEqual(self.product.outgoing_qty, 10)
         self.assertEqual(self.product.virtual_available, 10)

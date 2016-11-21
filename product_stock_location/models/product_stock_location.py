@@ -24,6 +24,8 @@ class ProductStockLocation(models.Model):
                  'outgoing_move_ids.location_id',
                  'outgoing_move_ids.product_uom_qty',
                  'child_ids',
+                 'child_ids.location_id',
+                 'child_ids.parent_id',
                  'child_ids.quant_ids',
                  'child_ids.incoming_move_ids',
                  'child_ids.outgoing_move_ids',
@@ -154,3 +156,4 @@ class ProductStockLocation(models.Model):
                 rec.sudo().update_children()
                 rec.sudo().update_parent()
         return res
+º
