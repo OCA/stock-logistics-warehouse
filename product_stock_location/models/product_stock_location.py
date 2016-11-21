@@ -156,4 +156,3 @@ class ProductStockLocation(models.Model):
                 rec.sudo().update_children()
                 rec.sudo().update_parent()
         return res
-º

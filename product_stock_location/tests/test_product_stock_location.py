@@ -257,16 +257,15 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(self.product.outgoing_qty, 0)
         self.assertEqual(self.product.virtual_available, 10)
 
-
     def test_change_location(self):
         # Create & process moves to test the product quantity
         picking_in_1 = self.create_picking(self.picking_in,
                                            self.location_supplier,
                                            self.location_bin1)
-        picking_in_2 = self.create_picking(self.picking_in,
+        self.create_picking(self.picking_in,
                                            self.location_supplier,
                                            self.location_stock)
-        picking_out_1 = self.create_picking(self.picking_out,
+        self.create_picking(self.picking_out,
                                             self.location_bin1,
                                             self.location_customer)
 
