@@ -151,8 +151,8 @@ class ProductProduct(models.Model):
 
     def _search_product_quantity_nonstored(self, cr, uid, context=None):
         return context.get('lot_id', False) or \
-               context.get('owner_id', False) or \
-               context.get('package_id', False)
+            context.get('owner_id', False) or \
+            context.get('package_id', False)
 
     def _search_product_quantity(self, cr, uid, obj, name, domain, context):
         if self._search_product_quantity_nonstored(cr, uid, context=context):
