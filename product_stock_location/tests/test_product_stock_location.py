@@ -61,12 +61,12 @@ class TestProductStockLocation(common.TransactionCase):
 
     def create_move(self, source_location, destination_location):
         move = self.env['stock.move'].create({
-                'name': 'Test move',
-                'product_id': self.product.id,
-                'product_uom': self.product_uom.id,
-                'product_uom_qty': 10,
-                'location_id': source_location.id,
-                'location_dest_id': destination_location.id}
+            'name': 'Test move',
+            'product_id': self.product.id,
+            'product_uom': self.product_uom.id,
+            'product_uom_qty': 10,
+            'location_id': source_location.id,
+            'location_dest_id': destination_location.id}
         )
 
         move.action_confirm()

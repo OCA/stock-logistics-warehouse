@@ -20,10 +20,12 @@ class ProductTemplate(models.Model):
         action_dict['context'] = "{'search_default_internal_loc': 1}"
         return action_dict
 
+    @api.v7
     def _product_available(self, cr, uid, ids, name, arg, context=None):
         return super(ProductTemplate, self)._product_available(
             cr, uid, ids, name=name, arg=arg, context=context)
 
+    @api.v7
     def _search_product_quantity(self, cr, uid, obj, name, domain, context):
         return super(ProductTemplate, self)._search_product_quantity(
             cr, uid, obj, name, domain, context)
@@ -67,6 +69,7 @@ class ProductProduct(models.Model):
         return [('product_id', '=', product.id),
                 ('location_id', 'in', location_ids)]
 
+    @api.v7
     def _get_domain_locations_product_stock_location(self, cr,
                                                      uid, context=None):
         location_obj = self.pool.get('stock.location')
@@ -104,6 +107,7 @@ class ProductProduct(models.Model):
                 location_ids.append(w.view_location_id.id)
         return location_ids
 
+    @api.v7
     def _product_available(self, cr, uid, ids, field_names=None, arg=False,
                            context=None):
         if self._product_available_compute_nonstored(cr, uid, context=context):
@@ -149,11 +153,13 @@ class ProductProduct(models.Model):
             }
         return res
 
+    @api.v7
     def _search_product_quantity_nonstored(self, cr, uid, context=None):
         return context.get('lot_id', False) or \
             context.get('owner_id', False) or \
             context.get('package_id', False)
 
+    @api.v7
     def _search_product_quantity(self, cr, uid, obj, name, domain, context):
         if self._search_product_quantity_nonstored(cr, uid, context=context):
             return super(ProductProduct, self)._search_product_quantity(
