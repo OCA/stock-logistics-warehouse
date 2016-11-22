@@ -2,7 +2,7 @@
 # Copyright 2016 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models
+from openerp import api, models
 from openerp.osv import fields as old_fields
 import openerp.addons.decimal_precision as dp
 
@@ -20,10 +20,9 @@ class ProductTemplate(models.Model):
         action_dict['context'] = "{'search_default_internal_loc': 1}"
         return action_dict
 
-    @api.multi
-    def _product_available(self, name=None, arg=False):
+    def _product_available(self, cr, uid, ids, name, arg, context=None):
         return super(ProductTemplate, self)._product_available(
-            name=name, arg=arg)
+            cr, uid, ids, name=name, arg=arg, context=context)
 
     def _search_product_quantity(self, cr, uid, obj, name, domain, context):
         return super(ProductTemplate, self)._search_product_quantity(
@@ -78,10 +77,11 @@ class ProductProduct(models.Model):
             if isinstance(context['location'], (int, long)):
                 location_ids = [context['location']]
             elif isinstance(context['location'], basestring):
-                domain = [('complete_name','ilike',context['location'])]
+                domain = [('complete_name', 'ilike', context['location'])]
                 if context.get('force_company', False):
                     domain += [('company_id', '=', context['force_company'])]
-                location_ids = location_obj.search(cr, uid, domain, context=context)
+                location_ids = location_obj.search(cr, uid, domain,
+                                                   context=context)
             else:
                 location_ids = context['location']
         else:
@@ -91,8 +91,10 @@ class ProductProduct(models.Model):
                 elif isinstance(context['warehouse'], basestring):
                     domain = [('name', 'ilike', context['warehouse'])]
                     if context.get('force_company', False):
-                        domain += [('company_id', '=', context['force_company'])]
-                    wids = warehouse_obj.search(cr, uid, domain, context=context)
+                        domain += [('company_id', '=',
+                                    context['force_company'])]
+                    wids = warehouse_obj.search(cr, uid, domain,
+                                                context=context)
                 else:
                     wids = context['warehouse']
             else:
@@ -143,7 +145,7 @@ class ProductProduct(models.Model):
                 'qty_available': qty_available,
                 'incoming_qty': incoming_qty,
                 'outgoing_qty': outgoing_qty,
-                'virtual_available': virtual_available,
+                'virtual_available': virtual_available
             }
         return res
 
