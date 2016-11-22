@@ -11,10 +11,10 @@ class TestProductStockLocation(common.TransactionCase):
         super(TestProductStockLocation, self).setUp()
         # Get required Model
         self.product_stock_location_model = self.env['product.stock.location']
-        self.stock_picking_model = self.env['stock.picking']
         self.product_model = self.env['product.product']
         self.product_ctg_model = self.env['product.category']
         self.stock_location_model = self.env['stock.location']
+        self.orderpoint_model = self.env['stock.warehouse.orderpoint']
 
         # Get required Model data
         self.product_uom = self.env.ref('product.product_uom_unit')
@@ -23,9 +23,6 @@ class TestProductStockLocation(common.TransactionCase):
         self.location_customer = self.env.ref('stock.stock_location_customers')
         self.location_supplier = self.env.ref('stock.stock_location_customers')
         self.location_chicago = self.env.ref('stock.stock_location_shop0')
-
-        self.picking_in = self.env.ref('stock.picking_type_in')
-        self.picking_out = self.env.ref('stock.picking_type_out')
 
         # Create product category and product
         self.product_ctg = self._create_product_category()
@@ -62,37 +59,38 @@ class TestProductStockLocation(common.TransactionCase):
         })
         return location
 
-    def create_picking(self, picking_type, source_location,
-                       destination_location):
-        picking = self.stock_picking_model.create({
-            'picking_type_id': picking_type.id,
-            'location_id': source_location.id,
-            'location_dest_id': destination_location.id,
-            'move_lines': [
-                (0, 0, {
-                    'name': 'Test move',
-                    'product_id': self.product.id,
-                    'product_uom': self.product_uom.id,
-                    'product_uom_qty': 10,
-                    'location_id': source_location.id,
-                    'location_dest_id': destination_location.id,
-                })]
+    def create_move(self, source_location, destination_location):
+        move = self.env['stock.move'].create({
+                'name': 'Test move',
+                'product_id': self.product.id,
+                'product_uom': self.product_uom.id,
+                'product_uom_qty': 10,
+                'location_id': source_location.id,
+                'location_dest_id': destination_location.id}
+        )
+
+        move.action_confirm()
+        return move
+
+    def create_orderpoint(self, location):
+        """Create an orderpoint."""
+        orderpoint = self.orderpoint_model.create({
+            'product_id': self.product.id,
+            'location_id': location.id,
+            'product_max_qty': 0,
+            'product_min_qty': 0,
         })
-        picking.action_confirm()
-        return picking
+        return orderpoint
 
     def test_product_qty(self):
         """Tests the product quantity in the locations"""
         # Create & process moves to test the product quantity
-        picking_in_1 = self.create_picking(self.picking_in,
-                                           self.location_supplier,
-                                           self.location_bin1)
-        picking_in_2 = self.create_picking(self.picking_in,
-                                           self.location_supplier,
-                                           self.location_stock)
-        picking_out_1 = self.create_picking(self.picking_out,
-                                            self.location_bin1,
-                                            self.location_customer)
+        move_in_1 = self.create_move(self.location_supplier,
+                                     self.location_bin1)
+        move_in2 = self.create_move(self.location_supplier,
+                                    self.location_stock)
+        move_out_1 = self.create_move(self.location_bin1,
+                                      self.location_customer)
 
         psl_bin1 = self.product_stock_location_model.search(
             [('product_id', '=', self.product.id),
@@ -141,7 +139,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(self.product.virtual_available, 10)
 
         # Move in 1
-        picking_in_1.action_done()
+        move_in_1.action_done()
 
         # Check WH/Stock/Shelf 1/Bin 1
         self.assertEqual(psl_bin1.product_location_qty,
@@ -180,7 +178,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(self.product.virtual_available, 10)
 
         # Move in 2
-        picking_in_2.action_done()
+        move_in2.action_done()
 
         # Check WH/Stock/Shelf 1/Bin 1
         self.assertEqual(psl_bin1.product_location_qty,
@@ -219,7 +217,7 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(self.product.virtual_available, 10)
 
         # Move out 1
-        picking_out_1.action_done()
+        move_out_1.action_done()
 
         # Check WH/Stock/Shelf 1/ Bin 1
         self.assertEqual(psl_bin1.product_location_qty,
@@ -259,13 +257,10 @@ class TestProductStockLocation(common.TransactionCase):
 
     def test_change_location(self):
         # Create & process moves to test the product quantity
-        picking_in_1 = self.create_picking(self.picking_in,
-                                           self.location_supplier,
-                                           self.location_bin1)
-        self.create_picking(self.picking_in, self.location_supplier,
-                            self.location_stock)
-        self.create_picking(self.picking_out, self.location_bin1,
-                            self.location_customer)
+        move_in_1 = self.create_move(self.location_supplier,
+                                     self.location_bin1)
+        self.create_move(self.location_supplier, self.location_stock)
+        self.create_move(self.location_bin1, self.location_customer)
 
         psl_bin1 = self.product_stock_location_model.search(
             [('product_id', '=', self.product.id),
@@ -278,7 +273,7 @@ class TestProductStockLocation(common.TransactionCase):
              ('location_id', '=', self.location_stock.id)])
 
         # Move in 1
-        picking_in_1.action_done()
+        move_in_1.action_done()
 
         # Change the parent location of bin 1
         self.location_bin1.location_id = self.location_chicago
@@ -336,3 +331,19 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(self.product.incoming_qty, 10)
         self.assertEqual(self.product.outgoing_qty, 10)
         self.assertEqual(self.product.virtual_available, 10)
+
+    def test_orderpoint(self):
+        # Create & process moves and check that the orderpoints are linked
+
+        orderpoint_bin1 = self.create_orderpoint(self.location_bin1)
+
+        self.create_move(self.location_supplier, self.location_bin1)
+        self.create_move(self.location_supplier, self.location_stock)
+        self.create_move(self.location_bin1, self.location_customer)
+
+        psl_bin1 = self.product_stock_location_model.search(
+            [('product_id', '=', self.product.id),
+             ('location_id', '=', self.location_bin1.id)])
+
+        self.assertEqual(psl_bin1.orderpoint_id, orderpoint_bin1,
+                         'The orderpoint does not match')

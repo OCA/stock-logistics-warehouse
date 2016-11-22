@@ -45,6 +45,16 @@ class ProductStockLocation(models.Model):
 
     @api.multi
     @api.depends('product_id', 'location_id')
+    def _compute_orderpoint_id(self):
+        for rec in self:
+            orderpoints = self.env['stock.warehouse.orderpoint'].search(
+                [('product_id', '=', rec.product_id.id),
+                 ('location_id', '=', rec.location_id.id)])
+            if orderpoints:
+                rec.orderpoint_id = orderpoints[0]
+
+    @api.multi
+    @api.depends('product_id', 'location_id')
     def _compute_name(self):
         for rec in self:
             name = '%s: ' % rec.location_id.complete_name
@@ -97,6 +107,9 @@ class ProductStockLocation(models.Model):
     company_id = fields.Many2one(comodel_name='res.company',
                                  related='location_id.company_id',
                                  store=True)
+    orderpoint_id = fields.Many2one(
+        comodel_name="stock.warehouse.orderpoint", string="Orderpoint",
+        compute='_compute_orderpoint_id', store=True)
 
     @api.model
     def search_children_product_stock_location_domain(self, location):
