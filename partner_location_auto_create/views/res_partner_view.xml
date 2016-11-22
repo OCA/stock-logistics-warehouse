@@ -11,6 +11,7 @@
                     <button
                             class="oe_inline oe_stat_button"
                             type="object"
+                            groups="stock.group_stock_manager"
                             context="{
                                 'default_partner_id': id,
                                 'default_usage': supplier and 'supplier' or 'customer',
