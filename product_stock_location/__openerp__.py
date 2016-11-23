@@ -7,6 +7,7 @@
     "version": "8.0.1.0.0",
     "depends": [
         "stock",
+        "stock_warehouse_orderpoint_stock_info"
     ],
     "author": "Eficent, "
               "Odoo Community Association (OCA)",

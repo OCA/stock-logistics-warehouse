@@ -20,42 +20,68 @@ def pre_init_hook(cr):
 
 
 def create_product_stock_locations(cr):
-    logger.info('Creating table product_stock_location')
-    cr.execute(
-        """
-        CREATE TABLE product_stock_location(
-        id SERIAL NOT NULL,
-        PRIMARY KEY(id),
-        product_id integer,
-        location_id integer,
-        company_id integer,
-        parent_id integer)
-        """)
 
-    logger.info('Extending table stock_move')
-    cr.execute(
-        """
-        ALTER TABLE stock_move ADD COLUMN product_stock_location_id integer;
-        COMMENT ON COLUMN stock_move.product_stock_location_id IS
-        'Product Source Stock Location';
-        """)
+    cr.execute("""SELECT relname FROM pg_class
+    WHERE relname = 'product_stock_location'""")
 
-    cr.execute(
-        """
-        ALTER TABLE stock_move ADD COLUMN product_stock_location_dest_id
-        integer;
-        COMMENT ON COLUMN stock_move.product_stock_location_dest_id IS
-        'Product Destination Stock Location';
-        """)
+    if not cr.fetchone():
+        logger.info('Creating table product_stock_location')
+        cr.execute(
+            """
+            CREATE TABLE product_stock_location(
+            id SERIAL NOT NULL,
+            PRIMARY KEY(id),
+            product_id integer,
+            location_id integer,
+            company_id integer,
+            parent_id integer)
+            """)
 
-    logger.info('Extending table stock_quant')
-    cr.execute(
-        """
-        ALTER TABLE stock_quant ADD COLUMN product_stock_location_id
-        integer;
-        COMMENT ON COLUMN stock_quant.product_stock_location_id IS
-        'Product Source Stock Location';
-        """)
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='stock_move' AND
+    column_name='product_stock_location_id'""")
+    if not cr.fetchone():
+        logger.info('Extending table stock_move with column '
+                    'product_stock_location_id')
+        cr.execute(
+            """
+            ALTER TABLE stock_move ADD COLUMN product_stock_location_id
+            integer;
+            COMMENT ON COLUMN stock_move.product_stock_location_id IS
+            'Product Source Stock Location';
+            """)
+
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='stock_move' AND
+    column_name='product_stock_location_dest_id'""")
+
+    if not cr.fetchone():
+        logger.info('Extending table stock_move with column '
+                    'product_stock_location_dest_id')
+        cr.execute(
+            """
+            ALTER TABLE stock_move ADD COLUMN product_stock_location_dest_id
+            integer;
+            COMMENT ON COLUMN stock_move.product_stock_location_dest_id IS
+            'Product Destination Stock Location';
+            """)
+
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='stock_quant' AND
+    column_name='product_stock_location_id'""")
+
+    if not cr.fetchone():
+        logger.info('Extending table stock_quant')
+        cr.execute(
+            """
+            ALTER TABLE stock_quant ADD COLUMN product_stock_location_id
+            integer;
+            COMMENT ON COLUMN stock_quant.product_stock_location_id IS
+            'Product Source Stock Location';
+            """)
 
     logger.info('Creating product stock locations based on all moves')
     cr.execute(

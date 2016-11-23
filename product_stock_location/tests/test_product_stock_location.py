@@ -132,12 +132,6 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(psl_stock.virtual_location_qty,
                          10, 'Forecasted Qty does not match')
 
-        # Check product
-        self.assertEqual(self.product.qty_available, 0)
-        self.assertEqual(self.product.incoming_qty, 20)
-        self.assertEqual(self.product.outgoing_qty, 10)
-        self.assertEqual(self.product.virtual_available, 10)
-
         # Move in 1
         move_in_1.action_done()
 
@@ -170,12 +164,6 @@ class TestProductStockLocation(common.TransactionCase):
                          10, 'Outgoing Qty does not match')
         self.assertEqual(psl_stock.virtual_location_qty,
                          10, 'Forecasted Qty does not match')
-
-        # Check product
-        self.assertEqual(self.product.qty_available, 10)
-        self.assertEqual(self.product.incoming_qty, 10)
-        self.assertEqual(self.product.outgoing_qty, 10)
-        self.assertEqual(self.product.virtual_available, 10)
 
         # Move in 2
         move_in2.action_done()
@@ -210,12 +198,6 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(psl_stock.virtual_location_qty,
                          10, 'Forecasted Qty does not match')
 
-        # Check product
-        self.assertEqual(self.product.qty_available, 20)
-        self.assertEqual(self.product.incoming_qty, 0)
-        self.assertEqual(self.product.outgoing_qty, 10)
-        self.assertEqual(self.product.virtual_available, 10)
-
         # Move out 1
         move_out_1.action_done()
 
@@ -248,12 +230,6 @@ class TestProductStockLocation(common.TransactionCase):
                          0, 'Outgoing Qty does not match')
         self.assertEqual(psl_stock.virtual_location_qty,
                          10, 'Forecasted Qty does not match')
-
-        # Check product
-        self.assertEqual(self.product.qty_available, 10)
-        self.assertEqual(self.product.incoming_qty, 0)
-        self.assertEqual(self.product.outgoing_qty, 0)
-        self.assertEqual(self.product.virtual_available, 10)
 
     def test_change_location(self):
         # Create & process moves to test the product quantity
@@ -326,24 +302,27 @@ class TestProductStockLocation(common.TransactionCase):
         self.assertEqual(psl_chicago.virtual_location_qty,
                          0, 'Forecasted Qty does not match')
 
-        # Check product
-        self.assertEqual(self.product.qty_available, 10)
-        self.assertEqual(self.product.incoming_qty, 10)
-        self.assertEqual(self.product.outgoing_qty, 10)
-        self.assertEqual(self.product.virtual_available, 10)
-
     def test_orderpoint(self):
         # Create & process moves and check that the orderpoints are linked
 
-        orderpoint_bin1 = self.create_orderpoint(self.location_bin1)
+        orderpoint_stock = self.create_orderpoint(self.location_stock)
 
         self.create_move(self.location_supplier, self.location_bin1)
         self.create_move(self.location_supplier, self.location_stock)
         self.create_move(self.location_bin1, self.location_customer)
 
-        psl_bin1 = self.product_stock_location_model.search(
+        psl_stock = self.product_stock_location_model.search(
             [('product_id', '=', self.product.id),
-             ('location_id', '=', self.location_bin1.id)])
+             ('location_id', '=', self.location_stock.id)])
 
-        self.assertEqual(psl_bin1.orderpoint_id, orderpoint_bin1,
+        self.assertEqual(psl_stock.orderpoint_id, orderpoint_stock,
                          'The orderpoint does not match')
+
+        self.assertEqual(orderpoint_stock.product_location_qty, 0,
+                         'On Hand Qty does not match')
+        self.assertEqual(orderpoint_stock.incoming_location_qty, 20,
+                         'Incoming Qty does not match')
+        self.assertEqual(orderpoint_stock.outgoing_location_qty, 10,
+                         'Outgoing Qty does not match')
+        self.assertEqual(orderpoint_stock.virtual_location_qty, 10,
+                         'Forecasted Qty does not match')
