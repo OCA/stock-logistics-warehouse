@@ -242,7 +242,7 @@ class StockInventoryRevaluation(models.Model):
         }
 
     @api.model
-    def _create_accounting_entry(self, amount_diff):
+    def _create_accounting_entry(self, diff, amount_diff):
         timenow = time.strftime('%Y-%m-%d')
         move_data = self._prepare_move_data(timenow)
         datas = self.env['product.template'].get_product_accounts(
@@ -258,10 +258,20 @@ class StockInventoryRevaluation(models.Model):
                 qty = prod_variant.qty_available
                 if qty:
                     if amount_diff > 0:
+                        if self.product_template_id.cost_method \
+                                in ['standard', 'average']:
+
+                            if self.revaluation_type == 'price_change':
+                                amount_diff = qty * diff
                         debit_account_id = self.decrease_account_id.id
                         credit_account_id = \
                             datas['property_stock_valuation_account_id']
                     else:
+                        if self.product_template_id.cost_method \
+                                in ['standard', 'average']:
+
+                            if self.revaluation_type == 'price_change':
+                                amount_diff = qty * -diff
                         debit_account_id = \
                             datas['property_stock_valuation_account_id']
                         credit_account_id = self.increase_account_id.id
@@ -278,6 +288,7 @@ class StockInventoryRevaluation(models.Model):
     def post(self):
         for revaluation in self:
             amount_diff = 0.0
+            diff = 0.0
             if revaluation.product_template_id.cost_method == 'real':
                 for reval_quant in revaluation.reval_quant_ids:
                     amount_diff += reval_quant.get_total_value()
@@ -320,7 +331,7 @@ class StockInventoryRevaluation(models.Model):
                             {'standard_price': new_cost})
 
             if revaluation.product_template_id.valuation == 'real_time':
-                revaluation._create_accounting_entry(amount_diff)
+                revaluation._create_accounting_entry(diff, amount_diff)
 
     @api.model
     def create(self, values):
