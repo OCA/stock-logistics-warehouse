@@ -86,60 +86,54 @@ def create_product_stock_locations(cr):
     logger.info('Creating product stock locations based on all moves')
     cr.execute(
         """
-        INSERT INTO product_stock_location(product_id, location_id,
-        company_id)
-        SELECT sm.product_id, sl2.id, sm.company_id
+        INSERT INTO product_stock_location(product_id, location_id)
+        SELECT sm.product_id, sl2.id
         FROM stock_move AS sm
         INNER JOIN stock_location AS sl1
         ON sl1.id = sm.location_id
         INNER JOIN stock_location AS sl2
         ON sl2.parent_left <= sl1.parent_left
         AND sl2.parent_right >= sl1.parent_right
-        WHERE sl2.id is not null
-        GROUP BY sm.product_id, sl2.id, sm.company_id
+        GROUP BY sm.product_id, sl2.id
         """
     )
 
     cr.execute(
         """
-        INSERT INTO product_stock_location(product_id, location_id,
-        company_id)
-        SELECT sm.product_id, sl2.id, sm.company_id
+        WITH Q1 AS (SELECT sm.product_id, sl2.id as location_id
         FROM stock_move AS sm
         INNER JOIN stock_location AS sl1
         ON sl1.id = sm.location_dest_id
         INNER JOIN stock_location AS sl2
         ON sl2.parent_left <= sl1.parent_left
         AND sl2.parent_right >= sl1.parent_right
-        WHERE NOT EXISTS (SELECT psl.id
-        FROM product_stock_location AS psl
-        WHERE psl.product_id = sm.product_id
-        AND psl.location_id = sm.location_dest_id
-        AND psl.company_id = sm.company_id)
-        AND sl2.id is not null
-        GROUP BY sm.product_id, sl2.id, sm.company_id
+        GROUP BY sm.product_id, sl2.id)
+
+        INSERT INTO product_stock_location(product_id, location_id)
+        SELECT product_id, location_id
+        FROM Q1
+        WHERE NOT EXISTS (SELECT id FROM product_stock_location
+        WHERE product_id = Q1.product_id AND location_id = Q1.location_id)
         """
     )
     logger.info('Creating product stock locations based on all quants')
 
     cr.execute(
         """
-        INSERT INTO product_stock_location(product_id, location_id,
-        company_id)
-        SELECT sq.product_id, sl2.id, sq.company_id
-        FROM stock_quant AS sq
+        WITH Q1 AS (SELECT sm.product_id, sl2.id as location_id
+        FROM stock_move AS sm
         INNER JOIN stock_location AS sl1
-        ON sl1.id = sq.location_id
+        ON sl1.id = sm.location_id
         INNER JOIN stock_location AS sl2
         ON sl2.parent_left <= sl1.parent_left
         AND sl2.parent_right >= sl1.parent_right
-        WHERE NOT EXISTS (SELECT psl.id
-        FROM product_stock_location AS psl
-        WHERE psl.product_id = sq.product_id
-        AND psl.location_id = sq.location_id
-        AND psl.company_id = sq.company_id)
-        AND sl2.id is not null
-        GROUP BY sq.product_id, sl2.id, sq.company_id
+        GROUP BY sm.product_id, sl2.id)
+
+        INSERT INTO product_stock_location(product_id, location_id)
+        SELECT product_id, location_id
+        FROM Q1
+        WHERE NOT EXISTS (SELECT id FROM product_stock_location
+        WHERE product_id = Q1.product_id AND location_id = Q1.location_id)
         """
     )
 

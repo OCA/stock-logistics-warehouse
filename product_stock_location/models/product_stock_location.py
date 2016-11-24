@@ -111,6 +111,12 @@ class ProductStockLocation(models.Model):
         comodel_name="stock.warehouse.orderpoint", string="Orderpoint",
         compute='_compute_orderpoint_id', store=True)
 
+    _sql_constraints = [
+        ('uniq_product_location',
+         'unique(product_id, location_id)',
+         'Product and Location already defined'),
+    ]
+
     @api.model
     def search_children_product_stock_location_domain(self, location):
         return [('product_id', '=', self.product_id.id),
