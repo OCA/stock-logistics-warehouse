@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_available_global
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-25 18:06+0100\n"
+"PO-Revision-Date: 2016-11-25 18:16+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"Language: es_ES\n"
+
+#. module: stock_available_global
+#: model:ir.ui.view,arch_db:stock_available_global.product_normal_form_view
+#: model:ir.ui.view,arch_db:stock_available_global.product_template_form_view_procurement_button
+msgid "<span class=\"o_stat_text\">Forecasted(All)</span>"
+msgstr "<span class=\"o_stat_text\">Previsto(Todo)</span>"
+
+#. module: stock_available_global
+#: model:ir.model.fields,help:stock_available_global.field_product_product_incoming_qty_global
+#: model:ir.model.fields,help:stock_available_global.field_product_product_outgoing_qty_global
+#: model:ir.model.fields,help:stock_available_global.field_product_product_qty_available_global
+#: model:ir.model.fields,help:stock_available_global.field_product_product_virtual_available_global
+#: model:ir.model.fields,help:stock_available_global.field_product_template_incoming_qty_global
+#: model:ir.model.fields,help:stock_available_global.field_product_template_outgoing_qty_global
+#: model:ir.model.fields,help:stock_available_global.field_product_template_qty_available_global
+#: model:ir.model.fields,help:stock_available_global.field_product_template_virtual_available_global
+msgid "Compute all companies"
+msgstr "Computa todas las compañías"
+
+#. module: stock_available_global
+#: model:ir.ui.view,arch_db:stock_available_global.product_template_kanban_stock_view
+msgid "Forecasted(All):"
+msgstr "Previsto(Todo)"
+
+#. module: stock_available_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_product_virtual_available_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_template_virtual_available_global
+msgid "Global Forecasted Quantity"
+msgstr "Cantidad prevista global"
+
+#. module: stock_available_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_product_incoming_qty_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_template_incoming_qty_global
+msgid "Global Incoming"
+msgstr "Entrante global"
+
+#. module: stock_available_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_product_outgoing_qty_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_template_outgoing_qty_global
+msgid "Global Outgoing"
+msgstr "Saliente global"
+
+#. module: stock_available_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_product_qty_available_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_template_qty_available_global
+msgid "Global Quantity On Hand"
+msgstr "A mano global"
+
+#. module: stock_available_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_product_landed_cost_ok
+msgid "Landed Costs"
+msgstr "Costes en destino"
+
+#. module: stock_available_global
+#: model:ir.ui.view,arch_db:stock_available_global.product_normal_form_view
+#: model:ir.ui.view,arch_db:stock_available_global.product_template_form_view_procurement_button
+msgid "On Hand(All)"
+msgstr "A mano(Todo)"
+
+#. module: stock_available_global
+#: model:ir.model,name:stock_available_global.model_product_product
+msgid "Product"
+msgstr "Producto"
+
+#. module: stock_available_global
+#: model:ir.model,name:stock_available_global.model_product_template
+msgid "Product Template"
+msgstr "Plantilla producto"
+
+#. module: stock_available_global
+#: model:ir.model.fields,field_description:stock_available_global.field_product_product_split_method
+msgid "Split Method"
+msgstr "Método de división"
