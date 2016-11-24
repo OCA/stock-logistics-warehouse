@@ -5,7 +5,6 @@
 from collections import Counter
 
 from openerp import models, fields, api
-from openerp.addons import decimal_precision as dp
 
 from openerp.exceptions import AccessError
 
@@ -13,36 +12,32 @@ from openerp.exceptions import AccessError
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    potential_qty = fields.Float(
-        compute='_get_potential_qty',
-        type='float',
-        digits_compute=dp.get_precision('Product Unit of Measure'),
-        string='Potential',
-        help="Quantity of this Product that could be produced using "
-             "the materials already at hand.")
-
     # Needed for fields dependencies
     # When self.potential_qty is compute, we want to force the ORM
     # to compute all the components potential_qty too.
     component_ids = fields.Many2many(
         comodel_name='product.product',
-        compute='_get_component_ids',
+        compute='_compute_component_ids',
     )
 
     @api.multi
     @api.depends('potential_qty')
-    def _immediately_usable_qty(self):
+    def _compute_immediately_usable_qty(self):
         """Add the potential quantity to the quantity available to promise.
 
         This is the same implementation as for templates."""
-        super(ProductProduct, self)._immediately_usable_qty()
+        super(ProductProduct, self)._compute_immediately_usable_qty()
         for product in self:
             product.immediately_usable_qty += product.potential_qty
 
     @api.multi
     @api.depends('component_ids.potential_qty')
-    def _get_potential_qty(self):
+    def _compute_potential_qty(self):
         """Compute the potential qty based on the available components."""
+
+        # call super method available in stock_available
+        super(ProductProduct, self)._compute_potential_qty()
+
         bom_obj = self.env['mrp.bom']
         uom_obj = self.env['product.uom']
 
@@ -121,7 +116,7 @@ class ProductProduct(models.Model):
 
         return needs
 
-    def _get_component_ids(self):
+    def _compute_component_ids(self):
         """ Compute component_ids by getting all the components for
         this product.
         """
