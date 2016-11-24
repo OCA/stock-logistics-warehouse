@@ -34,7 +34,11 @@ def create_product_stock_locations(cr):
             product_id integer,
             location_id integer,
             company_id integer,
-            parent_id integer)
+ºº            parent_id integer,
+            product_location_qty float,
+            incoming_location_qty float,
+            outgoing_location_qty float,
+            virtual_location_qty float)
             """)
 
     cr.execute("""SELECT column_name
@@ -180,3 +184,86 @@ def create_product_stock_locations(cr):
         AND psl.location_id = sq.location_id
         """
     )
+
+    logger.info('Updating product_location_qty and virtual_location_qty in '
+                'product_stock_location')
+
+    cr.execute("""
+        WITH quant_query AS (
+            SELECT psl2.id, sum(sq.qty) as quantity
+            FROM product_stock_location as psl2
+            INNER JOIN stock_quant as sq
+            ON sq.product_id = psl2.product_id
+            INNER JOIN stock_location as sl_sq
+            ON sq.location_id = sl_sq.id
+            INNER JOIN stock_location as sl_psl
+            ON psl2.location_id = sl_psl.id
+            WHERE sl_sq.parent_left >= sl_psl.parent_left
+            AND sl_sq.parent_right <= sl_psl.parent_right
+            GROUP BY psl2.id
+        )
+
+        UPDATE product_stock_location as psl1
+        SET product_location_qty = qq.quantity,
+        virtual_location_qty = qq.quantity
+        FROM product_stock_location as psl2
+        INNER JOIN quant_query AS qq
+        ON qq.id = psl2.id
+        WHERE psl1.id = psl2.id
+    """)
+
+    logger.info('Updating incoming_location_qty and virtual_location_qty in '
+                'product_stock_location')
+    cr.execute("""
+        WITH in_move_query AS (
+            SELECT psl2.id, sum(sm.product_qty) as quantity
+            FROM product_stock_location as psl2
+            INNER JOIN stock_move as sm
+            ON sm.product_id = psl2.product_id
+            INNER JOIN stock_location as sl_sm
+            ON sm.location_dest_id = sl_sm.id
+            INNER JOIN stock_location as sl_psl
+            ON psl2.location_id = sl_psl.id
+            WHERE sl_sm.parent_left >= sl_psl.parent_left
+            AND sl_sm.parent_right <= sl_psl.parent_right
+            AND sm.state NOT IN ('done', 'cancel', 'draft')
+            GROUP BY psl2.id
+        )
+
+        UPDATE product_stock_location as psl1
+        SET incoming_location_qty = qq.quantity,
+        virtual_location_qty =
+        coalesce(psl2.virtual_location_qty, 0) + qq.quantity
+        FROM product_stock_location as psl2
+        INNER JOIN in_move_query AS qq
+        ON qq.id = psl2.id
+        WHERE psl1.id = psl2.id
+    """)
+
+    logger.info('Updating outgoing_location_qty and virtual_location_qty in '
+                'product_stock_location')
+    cr.execute("""
+        WITH out_move_query AS (
+            SELECT psl2.id, sum(sm.product_qty) as quantity
+            FROM product_stock_location as psl2
+            INNER JOIN stock_move as sm
+            ON sm.product_id = psl2.product_id
+            INNER JOIN stock_location as sl_sm
+            ON sm.location_id = sl_sm.id
+            INNER JOIN stock_location as sl_psl
+            ON psl2.location_id = sl_psl.id
+            WHERE sl_sm.parent_left >= sl_psl.parent_left
+            AND sl_sm.parent_right <= sl_psl.parent_right
+            AND sm.state NOT IN ('done', 'cancel', 'draft')
+            GROUP BY psl2.id
+        )
+
+        UPDATE product_stock_location as psl1
+        SET outgoing_location_qty = qq.quantity,
+        virtual_location_qty =
+        coalesce(psl2.virtual_location_qty, 0) - qq.quantity
+        FROM product_stock_location as psl2
+        INNER JOIN out_move_query AS qq
+        ON qq.id = psl2.id
+        WHERE psl1.id = psl2.id
+    """)
