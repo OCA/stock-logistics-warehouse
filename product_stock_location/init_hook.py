@@ -34,7 +34,7 @@ def create_product_stock_locations(cr):
             product_id integer,
             location_id integer,
             company_id integer,
-ºº            parent_id integer,
+            parent_id integer,
             product_location_qty float,
             incoming_location_qty float,
             outgoing_location_qty float,
