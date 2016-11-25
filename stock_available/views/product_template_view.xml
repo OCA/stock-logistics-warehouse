@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2014 Numérigraphe, Sodexis
+<!-- Copyright 2014 Numérigraphe
+     Copyright 2016 Sodexis
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 
-<openerp>
-    <data>
+<odoo>
         <record model="ir.ui.view" id="view_stock_available_form">
             <field name="name">Quantity available to promise (form)</field>
             <field name="model">product.template</field>
@@ -12,12 +12,21 @@
                 <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_template)d']"
                     position="after">
                     <button type="object" name="action_open_quants"
-                        attrs="{'invisible':[('type', '!=', 'product')]}"
+                        attrs="{'invisible':[('type', 'not in', ['product','consu'])]}"
                         class="oe_stat_button" icon="fa-building-o">
                         <div class="o_form_field o_stat_info">
                             <field name="immediately_usable_qty"
                                 widget="statinfo" nolabel="1" />
                             <span class="o_stat_text">Available</span>
+                        </div>
+                    </button>
+                    <button type="action" name="%(stock.product_open_quants)d"
+                        attrs="{'invisible':[('type', 'not in', ['product','consu'])]}"
+                        class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_form_field o_stat_info">
+                            <field name="potential_qty"
+                                   widget="statinfo" nolabel="1"/>
+                            <span class="o_stat_text">Potential</span>
                         </div>
                     </button>
                 </xpath>
@@ -29,7 +38,8 @@
             <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
             <field name="arch" type="xml">
                 <tree position="attributes">
-                    <attribute name="colors">red:immediately_usable_qty&lt;0;blue:immediately_usable_qty&gt;=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
+                    <attribute name="decoration-danger">virtual_available&lt;0 or immediately_usable_qty&lt;0</attribute>
+                    <attribute name="decoration-info">virtual_available&gt;=0 or immediately_usable_qty&gt;0</attribute>
                 </tree>
                 <field name="virtual_available" position="after">
                    <field name="immediately_usable_qty" />
@@ -46,5 +56,4 @@
                 </ul>
             </field>
         </record>
-    </data>
-</openerp>
+</odoo>
