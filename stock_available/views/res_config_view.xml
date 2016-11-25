@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2014 Numérigraphe, Sodexis
+<!-- Copyright 2014 Numérigraphe
+     Copyright 2016 Sodexis
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 
-<openerp>
-    <data>
+<odoo>
         <record id="view_stock_configuration" model="ir.ui.view">
             <field name="name">Stock settings: quantity available to promise</field>
             <field name="model">stock.config.settings</field>
@@ -35,5 +35,4 @@
                 </data>
             </field>
         </record>
-    </data>
-</openerp>
+</odoo>
