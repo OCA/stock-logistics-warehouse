@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2014 Numérigraphe, Sodexis
+# Copyright 2014 Numérigraphe
+# Copyright 2016 Sodexis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from . import product_template, product_product, res_config
+from . import product_template
+from . import product_product
+from . import res_config
