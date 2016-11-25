@@ -1,23 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) 2015 Therp BV <http://therp.nl>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from openerp.tests.common import TransactionCase
+# Copyright 2014 Camptocamp, Akretion, Numérigraphe
+# Copyright 2016 Sodexis
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from odoo.tests.common import TransactionCase
 
 
 class TestStockLogisticsWarehouse(TransactionCase):
@@ -118,3 +104,7 @@ the variations in stock, both on product and template"""
         stockMoveOutA.action_done()
         compare_product_usable_qty(productA, 1)
         compare_product_usable_qty(templateAB, 4)
+
+        # Potential Qty is set as 0.0 by default
+        self.assertEquals(templateAB.potential_qty, 0.0)
+        self.assertEquals(productA.potential_qty, 0.0)
