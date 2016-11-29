@@ -1,0 +1,129 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_putaway_product
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-21 18:42+0000\n"
+"PO-Revision-Date: 2016-11-21 18:42+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Serbian (Latin) (https://www.transifex.com/oca/teams/23907/sr@latin/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sr@latin\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_stock_change_product_qty
+msgid "Change Product Quantity"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_create_uid
+msgid "Created by"
+msgstr "Kreirao"
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_create_date
+msgid "Created on"
+msgstr "Kreiran"
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_display_name
+msgid "Display Name"
+msgstr "Ime za prikaz"
+
+#. module: stock_putaway_product
+#: model:ir.ui.view,arch_db:stock_putaway_product.view_putaway
+msgid "Fixed Locations Per Product"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_product_putaway_product_location_ids
+msgid "Fixed per product location"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy___last_update
+msgid "Last Modified on"
+msgstr "Zadnja izmjena"
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_write_uid
+msgid "Last Updated by"
+msgstr "Zadnja izmjena"
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_write_date
+msgid "Last Updated on"
+msgstr "Zadnja izmjena"
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_fixed_location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_product_tmpl_id
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_product_product_id
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.ui.view,arch_db:stock_putaway_product.product_putaway_strategy_view_form
+msgid "Product putaway stragegy"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_product_product_product_putaway_ids
+#: model:ir.model.fields,field_description:stock_putaway_product.field_product_template_product_putaway_ids
+msgid "Product stock locations"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.ui.view,arch_db:stock_putaway_product.view_template_property_form
+msgid "Put Away Locations"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_product_putaway
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_putaway_id
+msgid "Put Away Strategy"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_sequence
+msgid "Sequence"
+msgstr "Sekvenca"
+
+#. module: stock_putaway_product
+#: code:addons/stock_putaway_product/models/product_putaway.py:51
+#: sql_constraint:stock.product.putaway.strategy:0
+#, python-format
+msgid "There is a duplicate location by put away assignment!"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_stock_product_putaway_strategy
+msgid "stock.product.putaway.strategy"
+msgstr ""
