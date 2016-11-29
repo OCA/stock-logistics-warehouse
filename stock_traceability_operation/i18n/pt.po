@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Tiago Baptista <tiago@baptista.net>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-09-17 02:43+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-18 03:44+0000\n"
+"Last-Translator: Tiago Baptista <tiago@baptista.net>, 2016\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,7 +79,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -94,7 +95,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,id:0
@@ -104,7 +105,7 @@ msgstr "ID"
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modificado a última vez por"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_uid:0
@@ -154,7 +155,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Partner"
-msgstr ""
+msgstr "Parceiro"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,picking_type_id:0

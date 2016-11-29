@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-04-27 10:59+0000\n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -31,42 +31,42 @@ msgstr ""
 #: field:assign.manual.quants,create_uid:0
 #: field:assign.manual.quants.lines,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,create_date:0
 #: field:assign.manual.quants.lines,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,display_name:0
 #: field:assign.manual.quants.lines,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "اسم العرض"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,id:0 field:assign.manual.quants.lines,id:0
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,__last_update:0
 #: field:assign.manual.quants.lines,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "آخر تعديل في"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_uid:0
 #: field:assign.manual.quants.lines,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_date:0
 #: field:assign.manual.quants.lines,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,location_id:0
@@ -98,7 +98,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,name:0
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,package_id:0
@@ -164,7 +164,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "or"
-msgstr ""
+msgstr "أو"
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view

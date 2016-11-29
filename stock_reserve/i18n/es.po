@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,7 +78,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Compañía"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
@@ -98,7 +98,7 @@ msgstr "Fecha"
 #. module: stock_reserve
 #: field:stock.reservation,name:0
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #. module: stock_reserve
 #: field:stock.reservation,partner_id:0
@@ -204,7 +204,7 @@ msgstr "Ubicaciones"
 #. module: stock_reserve
 #: field:stock.reservation,restrict_lot_id:0
 msgid "Lot"
-msgstr ""
+msgstr "Lote"
 
 #. module: stock_reserve
 #: field:stock.reservation,lot_ids:0
@@ -296,7 +296,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,picking_type_id:0
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipo de albarán"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_packaging:0
@@ -311,7 +311,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,priority:0
 msgid "Priority"
-msgstr ""
+msgstr "Prioridad"
 
 #. module: stock_reserve
 #: field:stock.reservation,procurement_id:0
@@ -400,7 +400,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,picking_id:0
 msgid "Reference"
-msgstr ""
+msgstr "Referencia"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form
@@ -483,7 +483,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,origin:0
 msgid "Source"
-msgstr ""
+msgstr "Origen"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search

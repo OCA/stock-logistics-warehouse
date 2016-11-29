@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-09-09 12:26+0000\n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_VE/)\n"
 "MIME-Version: 1.0\n"
@@ -31,42 +31,42 @@ msgstr ""
 #: field:assign.manual.quants,create_uid:0
 #: field:assign.manual.quants.lines,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,create_date:0
 #: field:assign.manual.quants.lines,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,display_name:0
 #: field:assign.manual.quants.lines,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar nombre"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,id:0 field:assign.manual.quants.lines,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,__last_update:0
 #: field:assign.manual.quants.lines,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modificada por última vez"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_uid:0
 #: field:assign.manual.quants.lines,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización realizada por"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_date:0
 #: field:assign.manual.quants.lines,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualizacion en"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,location_id:0
@@ -98,7 +98,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,package_id:0

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 23:16+0000\n"
-"PO-Revision-Date: 2016-08-15 23:16+0000\n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-18 03:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr "Annulé"
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -78,7 +78,7 @@ msgstr "Traçabilité détaillée"
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Display Name"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -104,17 +104,17 @@ msgstr "Id."
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Modifié par"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Modifié le"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -171,7 +171,7 @@ msgstr "Article"
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Modèle d'article"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uos:0

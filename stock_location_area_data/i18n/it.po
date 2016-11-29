@@ -1,0 +1,34 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_location_area_data
+# 
+# Translators:
+# Paolo Valier, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-10-11 13:44+0000\n"
+"Last-Translator: Paolo Valier\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_location_area_data
+#: model:product.uom.categ,name:stock_location_area_data.product_uom_categ_surface
+msgid "Surface"
+msgstr ""
+
+#. module: stock_location_area_data
+#: model:product.uom,name:stock_location_area_data.product_uom_feet2
+msgid "feet²"
+msgstr ""
+
+#. module: stock_location_area_data
+#: model:product.uom,name:stock_location_area_data.product_uom_m2
+msgid "m²"
+msgstr "m²"

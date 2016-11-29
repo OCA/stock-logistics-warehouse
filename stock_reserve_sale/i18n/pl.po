@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Polish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -62,17 +62,17 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Utworzone przez"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Utworzono"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Wyświetlana nazwa "
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:219
@@ -89,7 +89,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_reserve_sale
 #: help:sale.stock.reserve,date_validity:0
@@ -101,17 +101,17 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ostatnio modyfikowano"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ostatnio modyfikowane przez"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ostatnia zmiana"
 
 #. module: stock_reserve_sale
 #: help:sale.stock.reserve,location_dest_id:0
@@ -240,7 +240,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "or"
-msgstr ""
+msgstr "lub"
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve

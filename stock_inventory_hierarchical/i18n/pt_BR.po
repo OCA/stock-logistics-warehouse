@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 02:42+0000\n"
-"PO-Revision-Date: 2016-04-14 14:54+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,6 +23,11 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: stock_inventory_hierarchical
+#: field:stock.inventory,complete_name:0
+msgid "Complete reference"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_uid:0
 msgid "Created by"
 msgstr "Criado por"
@@ -31,6 +36,11 @@ msgstr "Criado por"
 #: field:stock.generate.inventory,create_date:0
 msgid "Created on"
 msgstr "Criado em"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,display_name:0
+msgid "Display Name"
+msgstr "Nome para Mostrar"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:91
@@ -76,6 +86,11 @@ msgstr ""
 #: field:stock.generate.inventory,prefix_inv_name:0
 msgid "Inventory prefix"
 msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,__last_update:0
+msgid "Last Modified on"
+msgstr "Última atualização em"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_uid:0
@@ -147,6 +162,11 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,parent_right:0
 msgid "Parent Right"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,progress_rate:0
+msgid "Progress"
 msgstr ""
 
 #. module: stock_inventory_hierarchical

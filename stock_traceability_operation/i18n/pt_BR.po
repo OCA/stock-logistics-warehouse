@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 23:16+0000\n"
-"PO-Revision-Date: 2016-08-15 23:16+0000\n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-18 03:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -47,12 +47,12 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,date:0
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Destination"
-msgstr ""
+msgstr "Destino"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,partner_id:0
@@ -78,7 +78,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nome"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -94,7 +94,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,id:0
@@ -104,7 +104,7 @@ msgstr "ID"
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificação em"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_uid:0
@@ -154,7 +154,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Partner"
-msgstr ""
+msgstr "Parceiro"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,picking_type_id:0
@@ -166,7 +166,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,product_id:0
 msgid "Product"
-msgstr ""
+msgstr "Produto"
 
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_product_template

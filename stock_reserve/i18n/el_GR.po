@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-25 14:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
@@ -93,12 +93,12 @@ msgstr "Δημιουργήθηκε στις"
 #. module: stock_reserve
 #: field:stock.reservation,date:0
 msgid "Date"
-msgstr ""
+msgstr "Ημερομηνία"
 
 #. module: stock_reserve
 #: field:stock.reservation,name:0
 msgid "Description"
-msgstr ""
+msgstr "Περιγραφή"
 
 #. module: stock_reserve
 #: field:stock.reservation,partner_id:0
@@ -123,7 +123,7 @@ msgstr ""
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form
 msgid "Details"
-msgstr ""
+msgstr "Λεπτομέρειες"
 
 #. module: stock_reserve
 #: field:stock.reservation,display_name:0
@@ -483,7 +483,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,origin:0
 msgid "Source"
-msgstr ""
+msgstr "Πηγή"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -495,7 +495,7 @@ msgstr ""
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 #: field:stock.reservation,state:0
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_stock_reservation
