@@ -10,9 +10,10 @@
     "license": "AGPL-3",
     "category": "",
     "description": """
-This module allows to set a default location for the product
+* This module allows to set a default location for the product
 and fill this location automatically in stock move according to
 the picking type.
+* The Module does not support a multi company setting
     """,
     'depends': [
         'product',
