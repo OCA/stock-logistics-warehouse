@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2016-11-29 18:42+0000\n"
+"PO-Revision-Date: 2016-12-02 13:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory,categ_ids:0
 msgid "Categories"
-msgstr ""
+msgstr "Categorias"
 
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,create_uid:0

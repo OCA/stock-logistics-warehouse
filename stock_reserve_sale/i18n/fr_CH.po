@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-11-29 18:43+0000\n"
+"PO-Revision-Date: 2016-12-01 10:10+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr_CH/)\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr "Créé le"
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:219
@@ -101,7 +101,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0

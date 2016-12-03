@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-11-29 18:43+0000\n"
+"PO-Revision-Date: 2016-12-01 10:10+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr_CH/)\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr "Créé le"
 #: field:assign.manual.quants,display_name:0
 #: field:assign.manual.quants.lines,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,id:0 field:assign.manual.quants.lines,id:0
@@ -54,7 +54,7 @@ msgstr "ID"
 #: field:assign.manual.quants,__last_update:0
 #: field:assign.manual.quants.lines,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_uid:0
