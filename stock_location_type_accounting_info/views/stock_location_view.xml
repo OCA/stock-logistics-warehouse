@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 OpenSynergy Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+    <data>
+
+        <record id="stock_location_view_form" model="ir.ui.view">
+            <field name="name">Stock Location Account Information</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock_account.view_location_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[3]" position="replace">
+                    <group
+                        string="Accounting Information"
+                        attrs="{'invisible':[('usage','not in',('inventory','production','supplier','customer','transit'))]}">
+                            <field name="valuation_in_account_id"/>
+                            <field name="valuation_out_account_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+   
+    </data>
+</openerp>
+
