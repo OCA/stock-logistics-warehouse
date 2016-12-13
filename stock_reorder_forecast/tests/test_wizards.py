@@ -22,7 +22,6 @@ class TestWizards(TransactionCase):
         self.product_noper = self.env.ref(
             'stock_reorder_forecast.product_noper')
 
-
     def test_wizards(self):
         # check calcultation of ultimate date
         # Verify PO creation  (correct date and correct stock)

@@ -235,8 +235,6 @@ class TestStockReorderForecast(TransactionCase):
             self.product_noper.ultimate_purchase
         )
 
-
-
     def test_supplier_calc(self):
         # verify supplier product_ids
         # verify supplier primary product_ids
@@ -264,7 +262,7 @@ class TestStockReorderForecast(TransactionCase):
             'name': new_supplier.name.id,
             'delay': 1,
             'min_qty': 1,
-            'sequence':1,
+            'sequence': 1,
         })
         new_supplier.name._compute_product_supplierinfo()
         self.assertEqual(
@@ -290,7 +288,7 @@ class TestStockReorderForecast(TransactionCase):
             'name': new_supplier.name.id,
             'delay': 1,
             'min_qty': 1,
-            'sequence':1,
+            'sequence': 1,
         })
 
         # supplier1 is the primary
@@ -301,7 +299,7 @@ class TestStockReorderForecast(TransactionCase):
             'name': self.supplier1.name.id,
             'delay': 1,
             'min_qty': 1,
-            'sequence':2,
+            'sequence': 2,
         })
         new_supplier.name._compute_product_supplierinfo()
         self.assertEqual(
