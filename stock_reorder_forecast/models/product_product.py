@@ -61,7 +61,9 @@ class ProductProduct(models.Model):
             stock_days = int(float_round((((
                 this.virtual_available or 0
                 ) - stock_period_min) / turnover_average) + .5, 0))
-            if stock_days < 0 or not self.has_purchase_draft():
+            if self.has_purchase_draft():
+                return False
+            if stock_days < 0:
                 return fields.Date.to_string(
                     date.today())
             return fields.Date.to_string(

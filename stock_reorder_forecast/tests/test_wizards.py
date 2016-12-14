@@ -76,7 +76,7 @@ class TestWizards(TransactionCase):
         self.product_obj.calc_purchase_date()
         # testing update_proposal
         self.assertEqual(
-            (date.today()).strftime(DEFAULT_SERVER_DATE_FORMAT),
+            False,
             self.product_period180.ultimate_purchase
         )
         self.assertEqual(True, self.product_period180.has_purchase_draft())
@@ -108,9 +108,9 @@ class TestWizards(TransactionCase):
         res = tst_primary_wiz.with_context(
             active_ids=[partner.id]).default_get([])
         self.assertEqual(
-            (date.today()).strftime(DEFAULT_SERVER_DATE_FORMAT),
+            False,
             res['ultimate_purchase'])
         # testing update_proposal
         self.assertEqual(
-            (date.today()).strftime(DEFAULT_SERVER_DATE_FORMAT),
+            False,
             partner.ultimate_purchase)

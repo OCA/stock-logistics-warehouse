@@ -244,6 +244,8 @@ class TestStockReorderForecast(TransactionCase):
         # pre-date the magic field create_date for sale order
         sql = "update sale_order set create_date=%s where id = %s"
         so4.action_confirm()
+        # clean up draft purchase order to test ultimate purchase correctly
+        self.env.cr.execute("UPDATE PURCHASE_ORDER SET STATE='cancel'")
         self.product_obj.calc_purchase_date()
         self.assertEqual(
             (date.today() + timedelta(days=10)).strftime(
