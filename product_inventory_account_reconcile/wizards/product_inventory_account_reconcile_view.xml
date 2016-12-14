@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_product_inventory_account_reconcile"
+                model="ir.ui.view">
+            <field name="name">Product Inventory Account Reconcile</field>
+            <field name="model">product.inventory.account.reconcile</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                 <form string="Reconcile Inventory Account">
+                     <group>
+                         <field name="increase_account_id"/>
+                         <field name="decrease_account_id"/>
+                         <field name="journal_id"/>
+                         <field name="remarks"/>
+                     </group>
+                     <newline/>
+                     <group colspan="2">
+                         <button name="create_accounting_entries"
+                                 string="Create accounting entries"
+                                 type="object"
+                                 class="oe_highlight"
+                                 groups="product_inventory_account_reconcile.group_product_inventory_account_reconcile"/>
+                         <button special="cancel" string="Cancel" class="oe_link"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_inventory_account_reconcile" model="ir.actions.act_window">
+            <field name="name">Reconcile Inventory Accounting Valuation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.inventory.account.reconcile</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_product_inventory_account_reconcile"/>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.values" id="product_inventory_account_reconcile">
+            <field name="model_id" ref="model_product_product" />
+            <field name="name">Reconcile Inventory Accounting Valuation</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_product_inventory_account_reconcile'))" />
+            <field name="key">action</field>
+            <field name="model">product.product</field>
+        </record>
+
+        <record model="ir.values"
+                id="product_template_inventory_account_reconcile">
+            <field name="model_id" ref="model_product_template" />
+            <field name="name">Reconcile Inventory Accounting Valuation</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_product_inventory_account_reconcile'))" />
+            <field name="key">action</field>
+            <field name="model">product.template</field>
+        </record>
+
+    </data>
+
+</openerp>
+
