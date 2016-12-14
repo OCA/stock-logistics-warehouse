@@ -213,7 +213,7 @@ class TestStockReorderForecast(TransactionCase):
             'location_dest_id': self.stock_location})
         self.move_obj.create({
             'name': self.product_noper.name,
-            'product_id': self.product_period180,
+            'product_id': self.product_period180.id,
             'product_uom_qty': 500,
             'product_uom': self.product_period180.uom_id.id,
             'picking_id': picking_in.id,
@@ -227,9 +227,26 @@ class TestStockReorderForecast(TransactionCase):
         # Transfer Incoming Shipment.
         picking_in.do_transfer()
         self.assertEqual(500, self.product_period180.qty_available)
+        # MUST DESTROY ALL PO'S GENERATED SO WE CAN GET THE RIGHT ULTIMATE
+        # DATE(NOT FALSE)
+        self.env.cr.execute("UPDATE PURCHASE_ORDER SET STATE='cancel'")
+        so4 = self.sale_order_obj.create({
+            'partner_id': self.partner_agrolite_id,
+            'partner_invoice_id': self.partner_agrolite_id,
+            'partner_shipping_id': self.partner_agrolite_id,
+            'order_line': [(0, 0, {'name': self.product_period180.name,
+                                   'product_id': self.product_period180.id,
+                                   'product_uom_qty': 20,
+                                   'product_uom':
+                                       self.product_period180.uom_id.id,
+                                   'price_unit': 33})],
+            'pricelist_id': self.env.ref('product.list0').id, })
+        # pre-date the magic field create_date for sale order
+        sql = "update sale_order set create_date=%s where id = %s"
+        so4.action_confirm()
         self.product_obj.calc_purchase_date()
         self.assertEqual(
-            (date.today() + timedelta(days=9)).strftime(
+            (date.today() + timedelta(days=10)).strftime(
                 DEFAULT_SERVER_DATE_FORMAT
             ),
             self.product_period180.ultimate_purchase
@@ -244,8 +261,6 @@ class TestStockReorderForecast(TransactionCase):
         new_supplier = self.env.ref(
             'stock_reorder_forecast.product_supplierinfo_new'
         )
-
-
         new_supplier.name._compute_product_supplierinfo()
         new_supplier.name._compute_product_supplierinfo_primary()
         # verify that the resuser associated to supplier1 has the correct prds
@@ -261,8 +276,6 @@ class TestStockReorderForecast(TransactionCase):
         # compute_product_supplierinfo
         # WE ALREADY HAVE supplier1 as primary supplier for
         # product_noper
-
-
         self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template2').id,
@@ -278,9 +291,7 @@ class TestStockReorderForecast(TransactionCase):
              self.product_period90.product_tmpl_id.id],
             new_supplier.name.product_ids.ids
         )
-
         new_supplier.name._compute_product_supplierinfo_primary()
-
         self.assertEqual(
             [self.product_period180.product_tmpl_id.id],
             new_supplier.name.primary_product_ids.ids
