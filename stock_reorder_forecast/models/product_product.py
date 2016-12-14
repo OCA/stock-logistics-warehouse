@@ -45,15 +45,23 @@ class ProductProduct(models.Model):
             buy_routes = this.product_tmpl_id._get_buy_route()
             this.is_buy = any(x in buy_routes for x in prd_routes)
 
+    def has_purchase_draft(self):
+        sql = """
+            select count(*) from purchase_order_line
+                where product_id = %s
+                and order_id in (select id from purchase_order where
+                state='draft')
+            """
+        self.env.cr.execute(sql, (self.id, ))
+        return bool(self.env.cr.fetchone()[0])
+
     def _get_ultimate_purchase(
-            self, stock_period_min, turnover_average, purchase_draft):
+            self, stock_period_min, turnover_average):
         for this in self:
             stock_days = int(float_round((((
                 this.virtual_available or 0
                 ) - stock_period_min) / turnover_average) + .5, 0))
-            if bool(purchase_draft):
-                return False
-            elif stock_days < 0:
+            if stock_days < 0 or not self.has_purchase_draft():
                 return fields.Date.to_string(
                     date.today())
             return fields.Date.to_string(
@@ -159,14 +167,7 @@ class ProductProduct(models.Model):
                     WHEN TP.prod_age > TP.turnover_period THEN TP.prod_age
                     ELSE 1 END)
                         AS turnover_average,
-                    MAX(TP.stock_period_max) AS stock_period_max,
-                COALESCE(
-                    (SELECT COUNT(*)
-                    FROM purchase_order PO JOIN purchase_order_line PL
-                    ON PO.id = PL.order_id 
-                    WHERE TP.product_id = PL.product_id  and PO.state = 'draft'
-                    ), 0)
-                AS purchase_draft
+                    MAX(TP.stock_period_max) AS stock_period_max
             FROM TP
             LEFT JOIN sale_order_line SOL on SOL.product_id = TP.product_id
             AND SOL.product_id in
@@ -196,13 +197,13 @@ class ProductProduct(models.Model):
             ))
         sqlresult = self.env.cr.fetchall()
         for product_id, stock_period_min, turnover_average, \
-                stock_period_max, purchase_draft in sqlresult:
+                stock_period_max  in sqlresult:
             turnover_average = float_round(
                 turnover_average, self._fields['turnover_average'].digits[1])
             this = self.env['product.product'].browse(product_id)
             if turnover_average != 0.0 and this.is_buy:
                 up_val = this._get_ultimate_purchase(
-                    stock_period_min, turnover_average, purchase_draft
+                    stock_period_min, turnover_average
                 )
                 values = {
                     'turnover_average': turnover_average,
