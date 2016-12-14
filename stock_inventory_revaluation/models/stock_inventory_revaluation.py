@@ -268,7 +268,7 @@ class StockInventoryRevaluation(models.Model):
                     amount_diff = prod_variant.qty_available * diff
                 else:
                     proportion = prod_variant.qty_available / \
-                                 self.product_template_id.qty_available
+                        self.product_template_id.qty_available
                     amount_diff = round(self.new_value * proportion, prec)
 
             qty = prod_variant.qty_available
