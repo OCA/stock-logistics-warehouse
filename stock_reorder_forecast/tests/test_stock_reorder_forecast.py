@@ -204,8 +204,8 @@ class TestStockReorderForecast(TransactionCase):
         # increase stock and  verify ultimate purchase
         # ============ STOCK TEST ==========
         # create an incoming shipment for 500  pieces
-        # of product_noper
-
+        # of product_period180,  period190 still has no RFQ so ultimate
+        # purchase will not be false
         picking_in = self.picking_obj.create({
             'partner_id': self.partner_delta_id,
             'picking_type_id': self.picking_type_in,
@@ -213,26 +213,26 @@ class TestStockReorderForecast(TransactionCase):
             'location_dest_id': self.stock_location})
         self.move_obj.create({
             'name': self.product_noper.name,
-            'product_id': self.product_noper.id,
+            'product_id': self.product_period180,
             'product_uom_qty': 500,
-            'product_uom': self.product_noper.uom_id.id,
+            'product_uom': self.product_period180.uom_id.id,
             'picking_id': picking_in.id,
             'location_id': self.supplier_location,
             'location_dest_id': self.stock_location})
         picking_in.action_confirm()
         picking_in.do_prepare_partial()
         self.stock_pack_obj.search(
-            [('product_id', '=', self.product_noper.id),
+            [('product_id', '=', self.product_period180.id),
              ('picking_id', '=', picking_in.id)]).write({'product_qty': 500})
         # Transfer Incoming Shipment.
         picking_in.do_transfer()
-        self.assertEqual(500, self.product_noper.qty_available)
+        self.assertEqual(500, self.product_period180.qty_available)
         self.product_obj.calc_purchase_date()
         self.assertEqual(
             (date.today() + timedelta(days=9)).strftime(
                 DEFAULT_SERVER_DATE_FORMAT
             ),
-            self.product_noper.ultimate_purchase
+            self.product_period180.ultimate_purchase
         )
 
     def test_supplier_calc(self):
@@ -324,7 +324,7 @@ class TestStockReorderForecast(TransactionCase):
             new_supplier.name.primary_product_ids.ids
         )
         # give new_supplier. name another primary product , product_noper
-        si1 = self.env['product.supplierinfo'].create({
+        self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template1').id,
             'product_id': self.product_noper.id,
