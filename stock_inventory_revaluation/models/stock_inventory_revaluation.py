@@ -19,7 +19,7 @@ class StockInventoryRevaluation(models.Model):
         return res and res[0] or False
 
     @api.multi
-    def _get_product_template_qty(self):
+    def _compute_product_template_qty(self):
         for revaluation in self:
             revaluation.qty_available = 0
             for prod_variant in \
@@ -27,7 +27,7 @@ class StockInventoryRevaluation(models.Model):
                 revaluation.qty_available += prod_variant.qty_available
 
     @api.multi
-    def _calc_product_template_value(self):
+    def _compute_product_template_value(self):
         quant_obj = self.env['stock.quant']
         for revaluation in self:
             qty_available = 0
@@ -128,7 +128,7 @@ class StockInventoryRevaluation(models.Model):
                                 help='Displays the current cost of the '
                                      'product.',
                                 digits=dp.get_precision('Product Price'),
-                                compute="_calc_current_cost",
+                                compute="_compute_current_cost",
                                 readonly=True)
 
     new_cost = fields.Float('New cost',
@@ -141,7 +141,7 @@ class StockInventoryRevaluation(models.Model):
                                  help='Displays the current value of the '
                                       'product.',
                                  digits=dp.get_precision('Account'),
-                                 compute="_calc_product_template_value",
+                                 compute="_compute_product_template_value",
                                  readonly=True)
 
     old_value = fields.Float('Old value',
@@ -158,7 +158,7 @@ class StockInventoryRevaluation(models.Model):
                              digits=dp.get_precision('Account'))
 
     qty_available = fields.Float(
-        'Quantity On Hand', compute='_get_product_template_qty',
+        'Quantity On Hand', compute='_compute_product_template_qty',
         digits_compute=dp.get_precision('Product Unit of Measure'))
 
     increase_account_id = fields.Many2one(
@@ -183,7 +183,7 @@ class StockInventoryRevaluation(models.Model):
 
     @api.multi
     @api.depends("product_template_id", "product_template_id.standard_price")
-    def _calc_current_cost(self):
+    def _compute_current_cost(self):
         for revaluation in self:
             revaluation.current_cost = \
                 revaluation.product_template_id.standard_price
