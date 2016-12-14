@@ -47,5 +47,26 @@
             </field>
         </record>
 
+        <record id="suplier_show_sequence_tree" model="ir.ui.view">
+            <field name="model">product.supplierinfo</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="sequence" position="attributes">
+                    <attribute name="widget"></attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="supplier_show_sequence_form" model="ir.ui.view">
+            <field name="model">product.supplierinfo</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+            <field name="arch" type="xml">
+                <field name="product_name" position="after">
+                    <field name="sequence" string="Sequence (lowest number is primary supplier)"> </field>
+                </field>
+            </field>
+        </record>
     </data>
 </openerp>
