@@ -289,7 +289,7 @@ class TestStockReorderForecast(TransactionCase):
         # set another suppliernfo as primary for product_period90
         # it's primary because it has the highest sequence for that product
 
-        si1 = self.env['product.supplierinfo'].create({
+        self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template2').id,
             'product_id': self.product_period180.id,
@@ -300,7 +300,7 @@ class TestStockReorderForecast(TransactionCase):
         })
 
         # supplier1 is the primary
-        si2 = self.env['product.supplierinfo'].create({
+        self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template2').id,
             'product_id': self.product_period180.id,

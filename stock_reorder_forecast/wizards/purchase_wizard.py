@@ -60,7 +60,7 @@ class PurchaseWizard(models.TransientModel):
             purchase_multiple = 1
         qty = int((qty + purchase_multiple - 1) / purchase_multiple)
         qty = qty * purchase_multiple
-        return qty
+        return abs(qty)
 
     @api.multi
     def create_rfq(self):
@@ -76,26 +76,28 @@ class PurchaseWizard(models.TransientModel):
         po_model = self.env["purchase.order"]
         pol_model = self.env["purchase.order.line"]
         date_order = date.today().strftime(DSDF)
-        order_vals = {
-            "partner_id": self.supplier.name.id,
-            "origin": "purchase proposal",
-            "date_order": date_order, }
-        purchase_order = po_model.create(order_vals)
-        line_vals = {
-            'name': 'Resupply of %s' % product.name,
-            'product_id': product.id,
-            'product_uom': product.uom_id.id,
-            'product_qty': self._get_qty(product, self.supplier,
-                                         self.stock_period_max),
-            'order_id': purchase_order.id,
-            'date_planned': ultimate_purchase_to or datetime.today(),
-            'price_unit': self.supplier.price
-        }
-        pol = pol_model.create(line_vals)
-        pol._compute_amount()
-        # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
-        product.write({"ultimate_purchase": False})
-        return purchase_order
+        qty = self._get_qty(product, self.supplier, self.stock_period_max)
+        if qty > 0:
+            order_vals = {
+                "partner_id": self.supplier.name.id,
+                "origin": "purchase proposal",
+                "date_order": date_order,}
+            purchase_order = po_model.create(order_vals)
+            line_vals = {
+                'name': 'Resupply of %s' % product.name,
+                'product_id': product.id,
+                'product_uom': product.uom_id.id,
+                'product_qty': qty,
+                'order_id': purchase_order.id,
+                'date_planned': ultimate_purchase_to or datetime.today(),
+                'price_unit': self.supplier.price
+            }
+            pol = pol_model.create(line_vals)
+            pol._compute_amount()
+            # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
+            product.write({"ultimate_purchase": False})
+            return purchase_order
+        return False
 
     product = fields.Many2one(
         "product.product",
