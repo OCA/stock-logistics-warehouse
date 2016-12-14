@@ -81,7 +81,7 @@ class PurchaseWizard(models.TransientModel):
             order_vals = {
                 "partner_id": self.supplier.name.id,
                 "origin": "purchase proposal",
-                "date_order": date_order,}
+                "date_order": date_order, }
             purchase_order = po_model.create(order_vals)
             line_vals = {
                 'name': 'Resupply of %s' % product.name,
