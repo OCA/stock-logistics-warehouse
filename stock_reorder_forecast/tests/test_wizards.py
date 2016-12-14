@@ -31,11 +31,12 @@ class TestWizards(TransactionCase):
             'partner_id': self.partner_agrolite_id,
             'partner_invoice_id': self.partner_agrolite_id,
             'partner_shipping_id': self.partner_agrolite_id,
-            'order_line': [(0, 0, {'name': self.product_period180.name,
-                                   'product_id': self.product_period180.id,
-                                   'product_uom_qty': 184,
-                                   'product_uom': self.product_period180.uom_id.id,
-                                   'price_unit': 75})],
+            'order_line': [(0, 0, {
+                'name': self.product_period180.name,
+                'product_id': self.product_period180.id,
+                'product_uom_qty': 184,
+                'product_uom': self.product_period180.uom_id.id,
+                'price_unit': 75})],
             'pricelist_id': self.env.ref('product.list0').id, })
         dateplanned = (date.today() + timedelta(days=0)).strftime(
             DEFAULT_SERVER_DATE_FORMAT)
@@ -63,7 +64,7 @@ class TestWizards(TransactionCase):
         self.product_obj.calc_purchase_date()
         self.assertEqual(False, self.product_period180.ultimate_purchase)
         purchase = tstwiz.create_rfq()
-        #Still false because no sale confirmed and therefore average still 0
+        # Still false because no sale confirmed and therefore average still 0
         self.assertEqual(False, self.product_period180.has_purchase_draft())
         self.assertEqual(False, self.product_period180.ultimate_purchase)
         res = tstwiz.with_context(

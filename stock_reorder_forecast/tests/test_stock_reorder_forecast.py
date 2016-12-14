@@ -331,7 +331,7 @@ class TestStockReorderForecast(TransactionCase):
         # Verify that the primary products for supplier new supplier
         # is still unique
         self.assertEqual(
-            [self.product_period180.product_tmpl_id.id,],
+            [self.product_period180.product_tmpl_id.id, ],
             new_supplier.name.primary_product_ids.ids
         )
         # give new_supplier. name another primary product , product_noper
@@ -347,6 +347,6 @@ class TestStockReorderForecast(TransactionCase):
         new_supplier.name._compute_product_supplierinfo_primary()
         self.assertEqual(
             [self.product_period180.product_tmpl_id.id,
-             self.product_noper.product_tmpl_id.id,],
+             self.product_noper.product_tmpl_id.id, ],
             new_supplier.name.primary_product_ids.ids
         )
