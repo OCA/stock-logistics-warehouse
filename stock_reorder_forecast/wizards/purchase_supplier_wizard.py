@@ -77,21 +77,22 @@ class PurchaseSupplierWizard(models.TransientModel):
                 lambda x: x.name.id == supplier_id
             )
             pol_model = self.env["purchase.order.line"]
-            line_vals = {
-                'name': 'Resupply of product %s from batch partner %s reorder'
-                        % (product.name, supplier.name.name),
-                'product_id': product.id,
-                'product_uom': product.uom_id.id,
-                'product_qty': self._get_qty(
-                    product, supplier, self.stock_period_max),
-                'order_id': purchase_order.id,
-                'date_planned': self.ultimate_purchase_to or datetime.today(),
-                'price_unit': supplier.price
-            }
-            pol = pol_model.create(line_vals)
-            pol._compute_amount()
-            # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
-            product.write({"ultimate_purchase": False})
+            qty = self._get_qty(product, supplier, self.stock_period_max)
+            if qty > 0:
+                line_vals = {
+                    'name': 'Resupply of product %s from batch partner %s reorder'
+                            % (product.name, supplier.name.name),
+                    'product_id': product.id,
+                    'product_uom': product.uom_id.id,
+                    'product_qty': qty,
+                    'order_id': purchase_order.id,
+                    'date_planned': self.ultimate_purchase_to or datetime.today(),
+                    'price_unit': supplier.price
+                }
+                pol = pol_model.create(line_vals)
+                pol._compute_amount()
+                # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
+                product.write({"ultimate_purchase": False})
         return purchase_order
 
     name = fields.Many2one(
