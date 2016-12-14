@@ -51,15 +51,13 @@ class ProductProduct(models.Model):
             stock_days = int(float_round((((
                 this.virtual_available or 0
                 ) - stock_period_min) / turnover_average) + .5, 0))
-            if not bool(purchase_draft):
-                up_val = False
+            if bool(purchase_draft):
+                return False
             elif stock_days < 0:
-                up_val = fields.Date.to_string(
+                return fields.Date.to_string(
                     date.today())
-            else:
-                up_val = fields.Date.to_string(
-                    date.today() + timedelta(days=stock_days))
-            return up_val
+            return fields.Date.to_string(
+                date.today() + timedelta(days=stock_days))
 
     def _get_turnover_period(self):
         if self.turnover_period:
@@ -165,9 +163,9 @@ class ProductProduct(models.Model):
                 COALESCE(
                     (SELECT COUNT(*)
                     FROM purchase_order PO JOIN purchase_order_line PL
-                    ON PO.id = PL.order_id and PO.state <> 'cancel'
-                    WHERE TP.product_id = PL.product_id AND
-                        PO.state='draft'), 0)
+                    ON PO.id = PL.order_id 
+                    WHERE TP.product_id = PL.product_id  and PO.state = 'draft'
+                    ), 0)
                 AS purchase_draft
             FROM TP
             LEFT JOIN sale_order_line SOL on SOL.product_id = TP.product_id
