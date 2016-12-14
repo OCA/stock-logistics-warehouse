@@ -66,7 +66,6 @@ class ResPartner(models.Model):
             if this.id in partner2products.keys():
                 this.product_ids = partner2products[this.id]
 
-
     stock_period_min = fields.Integer(
         'Delivery period',
         help="""Delivery time in weeks between the creation of the
