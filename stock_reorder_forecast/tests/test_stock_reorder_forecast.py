@@ -238,13 +238,17 @@ class TestStockReorderForecast(TransactionCase):
     def test_supplier_calc(self):
         # verify supplier product_ids
         # verify supplier primary product_ids
-        # create a new partner and a new supplier info, no products.
+        # create a new partner and a new supplier info,
+        # new_supplier COMES WITH A PRIMARY PRODUCT PRIMARY_PERIOD180
+
         new_supplier = self.env.ref(
             'stock_reorder_forecast.product_supplierinfo_new'
         )
+
+
         new_supplier.name._compute_product_supplierinfo()
         new_supplier.name._compute_product_supplierinfo_primary()
-        # verify that the resuser associated to supplier1 has the correct
+        # verify that the resuser associated to supplier1 has the correct prds
         self.assertEqual(
             [self.product_period180.product_tmpl_id.id],
             new_supplier.name.product_ids.ids
@@ -255,48 +259,15 @@ class TestStockReorderForecast(TransactionCase):
         )
         # add another supplier info (with product) and verify
         # compute_product_supplierinfo
+        # WE ALREADY HAVE supplier1 as primary supplier for
+        # product_noper
+
+
         self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template2').id,
             'product_id': self.product_period90.id,
             'name': new_supplier.name.id,
-            'delay': 1,
-            'min_qty': 1,
-            'sequence': 1,
-        })
-        new_supplier.name._compute_product_supplierinfo()
-        self.assertEqual(
-            [self.product_period180.product_tmpl_id.id,
-             self.product_period90.product_tmpl_id.id],
-            new_supplier.name.product_ids.ids
-        )
-
-        new_supplier.name._compute_product_supplierinfo_primary()
-        self.assertEqual(
-            [self.product_period180.product_tmpl_id.id,
-             self.product_period90.product_tmpl_id.id],
-            new_supplier.name.primary_product_ids.ids
-        )
-
-        # set another suppliernfo as primary for product_period90
-        # it's primary because it has the highest sequence for that product
-
-        self.env['product.supplierinfo'].create({
-            'product_tmpl_id': self.env.ref(
-                'stock_reorder_forecast.product_template2').id,
-            'product_id': self.product_period180.id,
-            'name': new_supplier.name.id,
-            'delay': 1,
-            'min_qty': 1,
-            'sequence': 1,
-        })
-
-        # supplier1 is the primary
-        self.env['product.supplierinfo'].create({
-            'product_tmpl_id': self.env.ref(
-                'stock_reorder_forecast.product_template2').id,
-            'product_id': self.product_period180.id,
-            'name': self.supplier1.name.id,
             'delay': 1,
             'min_qty': 1,
             'sequence': 2,
@@ -307,10 +278,64 @@ class TestStockReorderForecast(TransactionCase):
              self.product_period90.product_tmpl_id.id],
             new_supplier.name.product_ids.ids
         )
+
         new_supplier.name._compute_product_supplierinfo_primary()
 
         self.assertEqual(
+            [self.product_period180.product_tmpl_id.id],
+            new_supplier.name.primary_product_ids.ids
+        )
+
+        # set another suppliernfo as primary for product_period90
+        # it's primary because it has the highest sequence for that product
+
+        si1 = self.env['product.supplierinfo'].create({
+            'product_tmpl_id': self.env.ref(
+                'stock_reorder_forecast.product_template2').id,
+            'product_id': self.product_period180.id,
+            'name': new_supplier.name.id,
+            'delay': 1,
+            'min_qty': 1,
+            'sequence': 2,
+        })
+
+        # supplier1 is the primary
+        si2 = self.env['product.supplierinfo'].create({
+            'product_tmpl_id': self.env.ref(
+                'stock_reorder_forecast.product_template2').id,
+            'product_id': self.product_period180.id,
+            'name': self.supplier1.name.id,
+            'delay': 1,
+            'min_qty': 1,
+            'sequence': 1,
+        })
+        new_supplier.name._compute_product_supplierinfo()
+        self.assertEqual(
             [self.product_period180.product_tmpl_id.id,
              self.product_period90.product_tmpl_id.id],
+            new_supplier.name.product_ids.ids
+        )
+        new_supplier.name._compute_product_supplierinfo_primary()
+
+        # Verify that the primary products for supplier new supplier
+        # is still unique
+        self.assertEqual(
+            [self.product_period180.product_tmpl_id.id,],
+            new_supplier.name.primary_product_ids.ids
+        )
+        # give new_supplier. name another primary product , product_noper
+        si1 = self.env['product.supplierinfo'].create({
+            'product_tmpl_id': self.env.ref(
+                'stock_reorder_forecast.product_template1').id,
+            'product_id': self.product_noper.id,
+            'name': new_supplier.name.id,
+            'delay': 1,
+            'min_qty': 1,
+            'sequence': 1,
+        })
+        new_supplier.name._compute_product_supplierinfo_primary()
+        self.assertEqual(
+            [self.product_period180.product_tmpl_id.id,
+             self.product_noper.product_tmpl_id.id,],
             new_supplier.name.primary_product_ids.ids
         )

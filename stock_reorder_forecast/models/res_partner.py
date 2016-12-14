@@ -34,17 +34,17 @@ class ResPartner(models.Model):
         as primary supplier"""
         self.env.cr.execute(
             """
-            with  max_select as (
-                select product_tmpl_id, max(sequence) as max_sequence  from
+            with  min_select as (
+                select product_tmpl_id, min(sequence) as min_sequence  from
                 product_supplierinfo group by product_tmpl_id
             )
             select
                 name, array_agg(product_tmpl_id)
             from product_supplierinfo as sup_select
             where name in %s and sequence in  (
-                    select max_sequence from max_select
+                    select min_sequence from min_select
                     where
-                       max_select.product_tmpl_id = sup_select.product_tmpl_id
+                       min_select.product_tmpl_id = sup_select.product_tmpl_id
             )
             group by name
             """,
