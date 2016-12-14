@@ -7,15 +7,37 @@ Product Inventory Account Reconcile
 ===================================
 
 This module shows in the product inventory stock value and the accounting
-value, and allows to create an accounting adjustment entry to align the
+value, and allows to create accounting adjustment entries to align the
 accounting value to match with the inventory stock value.
 
+Configuration
+=============
+
+Assign the group 'Manage Reconciliation of Inventory Accounts' to the users
+that should be allowed to list the valuation discrepancies and to reconcile
+them.
 
 Usage
 =====
 
-* Go to the list of products or product varuants. You can see in the tree
+* Go to the list of products or product variants. You can see in the tree
   view the inventory value and the accounting value.
+
+* Selects the products that you wish to reconcile and press 'More /
+  Reconcile Inventory Accounting Valuation'.
+
+Known issues / Roadmap
+======================
+
+* In order to properly manage the inventory valuation from an accounting
+  perspective all journal items created for inventory accounts should
+  include the product.
+
+* The price change function of Odoo creates journal entries to the inventory
+  account without specifying the product. This is bad because you loose the
+  ability to control the inventory valuation from accounting at the level of
+  the product. In order to fix this, use the module
+  'stock_inventory_revaluation', to be found in the same OCA repository.
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
@@ -26,7 +48,8 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/{project_repo}/issues>`_. In case of trouble, please
+<https://github.com/OCA/stock-logistics-warehouse/issues>`_. In case of
+trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smashing it by providing a detailed and welcomed feedback.
 
