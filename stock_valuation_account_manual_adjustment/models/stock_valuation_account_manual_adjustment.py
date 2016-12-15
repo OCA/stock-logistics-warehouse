@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import api, exceptions, fields, models, _
+from openerp import api, fields, models
 from openerp.addons import decimal_precision as dp
 import time
 UNIT = dp.get_precision('Account')
@@ -115,7 +115,7 @@ class StockValuationAccountManualAdjustment(models.Model):
     def _prepare_debit_move_line_data(self, move, amount, account_id, prod,
                                       date_move):
         return {
-            'name': '(%s) %s' %(self.name, prod.name),
+            'name': '(%s) %s' % (self.name, prod.name),
             'date': date_move,
             'product_id': prod.id,
             'account_id': account_id,
@@ -128,7 +128,7 @@ class StockValuationAccountManualAdjustment(models.Model):
                                        prod,
                                        date_move):
         return {
-            'name': '(%s) %s' %(self.name, prod.name),
+            'name': '(%s) %s' % (self.name, prod.name),
             'date': date_move,
             'product_id': prod.id,
             'account_id': account_id,

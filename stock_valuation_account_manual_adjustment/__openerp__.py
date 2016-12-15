@@ -17,6 +17,7 @@
         "security/stock_valuation_account_manual_adjustment_security.xml",
         "security/ir.model.access.csv",
         "views/product_view.xml",
+        "views/account_move_line_view.xml",
         "views/stock_valuation_account_manual_adjustment_view.xml",
         "wizards/mass_create_view.xml"
     ],
