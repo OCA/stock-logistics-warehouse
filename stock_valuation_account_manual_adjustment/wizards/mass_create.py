@@ -52,7 +52,7 @@ class StockValuationAccountMassAdjust(models.TransientModel):
 
     @api.multi
     def process(self):
-        context = self._context or {}
+        context = dict(self._context) or {}
         active_model = self.env.context['active_model']
         if active_model == 'product.product':
             products = self.env['product.product'].browse(
@@ -91,6 +91,6 @@ class StockValuationAccountMassAdjust(models.TransientModel):
             'view_mode': 'tree,form',
             'res_model': 'stock.valuation.account.manual.adjustment',
             'view_id': False,
-            'context': self.env.context,
+            'context': False,
             'type': 'ir.actions.act_window'
         }
