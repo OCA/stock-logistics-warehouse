@@ -172,7 +172,7 @@ class TestProductInventoryAccountReconcile(TransactionCase):
         """Test that it is possible to reconcile for a product"""
         self.assertEquals(self.product_average_1.valuation_discrepancy, -100.0)
 
-        wiz = self.env['product.inventory.account.reconcile'].with_context(
+        wiz = self.env['stock.valuation.account.mass.adjust'].with_context(
             active_model="product.template",
             active_ids=[self.product_average_1.product_tmpl_id.id],
             active_id=self.product_average_1.product_tmpl_id.id).create({
@@ -181,6 +181,6 @@ class TestProductInventoryAccountReconcile(TransactionCase):
                 'journal_id': self.journal.id,
                 'remarks': 'Test'
                 })
-        wiz.create_accounting_entries()
+        wiz.process()
         self.product_average_1.refresh()
         self.assertEquals(self.product_average_1.valuation_discrepancy, 0.0)
