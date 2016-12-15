@@ -37,6 +37,15 @@ if the values are not set on supplier info it will default to values on
 partner, if not set on supplier will default to category, if not set anywhere 
 will default to Hardcoded values (ir.config.parameters period=365 days).  
 
+THe user can also trigger orders from the supplier form. There is a wizard
+that would allow to order:
+
+            * All the products provided by this partner (in required amounts
+              considering turnover_average, current stock and maximum_stock)
+            * All the products provided by this partner as primary supplier
+
+            This wizard also provides an overview of existing RFQ lines
+
 The turnover average and the ultimate purchase derived by it are calculated in
 bulk by a daily cron job.
 
@@ -95,17 +104,24 @@ partner.
 
 Known issues / Roadmap
 ======================
-Does not support Multicompany, calculatuion of stats will allways work on
-cross-company products purchases and pickings. It will only calculate outgoing
-moves , not internal moves. So the stats will be representative of all
-companies global stats (all sales from all companies/turnover period of
-product).
+* Does not support Multicompany, calculation of stats will allways work on
+  cross-company products purchases and pickings. It will only calculate outgoing
+  moves , not internal moves. So the stats will be representative of all
+  companies global stats (all sales from all companies/turnover period of
+  product).
 
-Implementing a full multicompany support will require additional support
-datastrutures.
+  Implementing a full multicompany support will require additional support
+  datastrutures.
 
-from a functional stand point, the global stats may be still usefull in some
-multicompany configurations, not all.
+  from a functional stand point, the global stats may be still usefull in some
+  multicompany configurations, not all.
+
+
+* Another useful feature would be to trigger RFQ's automatically. Currently
+  the users receive stats and can press a button to make a RFQ based on their
+  decisions. we could make options to make an automatic RFQ when ultimate
+  purchase gets up to X days from now.
+
 
 Bug Tracker
 ===========
