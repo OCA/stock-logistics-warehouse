@@ -13,4 +13,3 @@ class ProductSupplierinfo(models.Model):
     stock_period_min = fields.Integer(
         'Minimum stock', help="Minimum stock in days of turnover. Used by "
         "the purchase proposal.")
-    country_id = fields.Many2one('res.country', 'Country of origin')
