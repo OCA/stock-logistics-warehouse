@@ -20,7 +20,6 @@
                 <xpath expr="//field[@name='delay']/ancestor::div" position="after" >
                     <field name="stock_period_min"/>
                     <field name="purchase_multiple"/>
-                    <field name="country_id"/>
                 </xpath>
             </field>
         </record>
