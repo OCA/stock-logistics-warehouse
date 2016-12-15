@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Product Inventory Account Reconcile",
+    "name": "Stock Inventory Account Manual Adjustment",
     "summary": "Shows in the product inventory stock value and the accounting "
                "value and allows to reconcile them",
     "version": "8.0.1.0.0",
@@ -11,11 +11,15 @@
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": ["stock_account"],
+    "depends": ["stock_account", "account_move_line_product",
+                "stock_inventory_revaluation"],
     "data": [
-        "security/product_inventory_account_reconcile_security.xml",
+        "data/stock_valuation_account_manual_adjustment_data.xml",
+        "security/stock_valuation_account_manual_adjustment_security.xml",
+        "security/ir.model.access.csv",
         "views/product_view.xml",
-        "wizards/product_inventory_account_reconcile_view.xml"
+        "views/stock_valuation_account_manual_adjustment_view.xml",
+        "wizards/mass_create_view.xml"
     ],
     "license": "AGPL-3",
     'installable': True,

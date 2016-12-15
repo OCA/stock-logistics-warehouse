@@ -2,9 +2,9 @@
    :target: https://www.gnu.org/licenses/agpl.html
    :alt: License: AGPL-3
 
-===================================
-Product Inventory Account Reconcile
-===================================
+=========================================
+Stock Inventory Account Manual Adjustment
+=========================================
 
 This module shows in the product inventory stock value and the accounting
 value, and allows to create accounting adjustment entries to align the
@@ -13,7 +13,7 @@ accounting value to match with the inventory stock value.
 Configuration
 =============
 
-Assign the group 'Manage Reconciliation of Inventory Accounts' to the users
+Assign the group 'Stock Valuation Account Manual Adjustments' to the users
 that should be allowed to list the valuation discrepancies and to reconcile
 them.
 
@@ -24,7 +24,7 @@ Usage
   view the inventory value and the accounting value.
 
 * Selects the products that you wish to reconcile and press 'More /
-  Reconcile Inventory Accounting Valuation'.
+  Adjust Stock Valuation Account Discrepancies'.
 
 Known issues / Roadmap
 ======================

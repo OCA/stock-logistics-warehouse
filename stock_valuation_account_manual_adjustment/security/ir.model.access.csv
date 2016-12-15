@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_valuation_account_manual_adjustment,stock.inventory.revaluation,model_stock_valuation_account_manual_adjustment,stock_account.group_inventory_valuation,1,1,1,1

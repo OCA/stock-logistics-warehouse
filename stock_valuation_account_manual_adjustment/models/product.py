@@ -58,6 +58,31 @@ class ProductProduct(models.Model):
         accounting_val = {}
         for product_id, valuation in self.env.cr.fetchall():
             accounting_val[product_id] = valuation
+
+        self.env.cr.execute("""
+                    SELECT aml.product_id, sum(debit) - sum(credit)
+                    as valuation
+                    FROM account_move_line as aml
+                    INNER JOIN account_period as ap
+                    ON ap.id = aml.period_id
+                    INNER JOIN product_product as pr
+                    ON pr.id = aml.product_id
+                    INNER JOIN product_template as pt
+                    ON pt.id = pr.product_tmpl_id
+                    INNER JOIN ir_property as ip
+                    on (ip.res_id IS NULL
+                    AND ip.name = 'property_stock_valuation_account_id'
+                    AND 'account.account,' || aml.account_id = ip.value_reference)
+                    AND ip.id NOT IN (
+                        SELECT id
+                        FROM ir_property
+                        WHERE res_id = 'product.category,' || pt.categ_id
+                        AND name = 'property_stock_valuation_account_id'
+                    )
+                    GROUP BY aml.product_id
+                """)
+        for product_id, valuation in self.env.cr.fetchall():
+            accounting_val[product_id] = valuation
         for rec in self:
             rec.inventory_value = rec.get_inventory_value()
             if rec.id in accounting_val.keys():
@@ -108,6 +133,30 @@ class ProductTemplate(models.Model):
         accounting_val = {}
         for template_id, valuation in self.env.cr.fetchall():
             accounting_val[template_id] = valuation
+        self.env.cr.execute("""
+            SELECT pt.id, sum(debit) - sum(credit) as valuation
+            FROM account_move_line as aml
+            INNER JOIN account_period as ap
+            ON ap.id = aml.period_id
+            INNER JOIN product_product as pr
+            ON pr.id = aml.product_id
+            INNER JOIN product_template as pt
+            ON pt.id = pr.product_tmpl_id
+            INNER JOIN ir_property as ip
+            on (ip.res_id IS NULL
+            AND ip.name = 'property_stock_valuation_account_id'
+            AND 'account.account,' || aml.account_id = ip.value_reference)
+            AND ip.id NOT IN (
+                SELECT id
+                FROM ir_property
+                WHERE res_id = 'product.category,' || pt.categ_id
+                AND name = 'property_stock_valuation_account_id'
+            )
+            GROUP BY pt.id
+        """)
+        for template_id, valuation in self.env.cr.fetchall():
+            accounting_val[template_id] = valuation
+
         for rec in self:
             inv_value = 0.0
             if rec.id in accounting_val.keys():
@@ -136,17 +185,17 @@ class ProductTemplate(models.Model):
 
     inventory_value = fields.Float(
         string='Inventory Value', compute='_compute_inventory_account_value',
-        digits=UNIT, groups="product_inventory_account_reconcile"
-                            ".group_product_inventory_account_reconcile")
+        digits=UNIT, groups="stock_valuation_account_manual_adjustment"
+                            ".group_stock_valuation_account_manual_adjustment")
     accounting_value = fields.Float(
         string='Accounting Value', compute='_compute_inventory_account_value',
-        digits=UNIT, groups="product_inventory_account_reconcile"
-                            ".group_product_inventory_account_reconcile")
+        digits=UNIT, groups="stock_valuation_account_manual_adjustment"
+                            ".group_stock_valuation_account_manual_adjustment")
     valuation_discrepancy = fields.Float(
         string='Valuation discrepancy',
         compute='_compute_inventory_account_value',
         digits=UNIT,
         help="""Positive number means that the accounting valuation needs to
         decrease.""", search="_search_valuation_discrepancy",
-        groups="product_inventory_account_reconcile"
-               ".group_product_inventory_account_reconcile")
+        groups="stock_valuation_account_manual_adjustment"
+               ".group_stock_valuation_account_manual_adjustment")
