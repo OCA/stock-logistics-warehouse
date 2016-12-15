@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
                 <field name="quantity" position="before">
                     <field name="stock_valuation_account_manual_adjustment_id"
-                           groups="group_stock_valuation_account_manual_adjustment"/>
+                           groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment"/>
                 </field>
             </field>
         </record>
