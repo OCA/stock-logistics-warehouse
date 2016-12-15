@@ -8,12 +8,9 @@
             <field name="inherit_id" ref="product.product_template_tree_view" />
             <field name="arch" type="xml">
                 <field name="uom_id" position="after">
-                    <field name="inventory_value"
-                           groups="product_inventory_account_reconcile.group_product_inventory_account_reconcile"/>
-                    <field name="accounting_value"
-                           groups="product_inventory_account_reconcile.group_product_inventory_account_reconcile"/>
-                    <field name="valuation_discrepancy"
-                           groups="product_inventory_account_reconcile.group_product_inventory_account_reconcile"/>
+                    <field name="inventory_value"/>
+                    <field name="accounting_value"/>
+                    <field name="valuation_discrepancy"/>
                 </field>
             </field>
         </record>
@@ -25,12 +22,9 @@
             <field eval="7" name="priority"/>
             <field name="arch" type="xml">
                 <field name="product_tmpl_id" position="after">
-                    <field name="inventory_value"
-                           groups="product_inventory_account_reconcile.group_product_inventory_account_reconcile"/>
-                    <field name="accounting_value"
-                           groups="product_inventory_account_reconcile.group_product_inventory_account_reconcile"/>
-                    <field name="valuation_discrepancy"
-                           groups="product_inventory_account_reconcile.group_product_inventory_account_reconcile"/>
+                    <field name="inventory_value"/>
+                    <field name="accounting_value"/>
+                    <field name="valuation_discrepancy"/>
                 </field>
             </field>
         </record>

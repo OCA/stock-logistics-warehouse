@@ -38,28 +38,32 @@ class ProductProduct(models.Model):
         else:
             return variant_qty * self.standard_price
 
-    @api.model
-    def _get_account_move_line_inventory_domain(self):
-        return [('product_id', '=', self.id),
-                ('account_id', '=',
-                 self.categ_id.property_stock_valuation_account_id.id),
-                ('period_id.special', '=', False)]
-
-    @api.model
-    def get_accounting_value(self):
-        domain = self._get_account_move_line_inventory_domain()
-        amls = self.env['account.move.line'].read_group(
-            domain, ['product_id', 'debit', 'credit'], ['product_id'])
-        variant_value = 0.0
-        for aml in amls:
-            variant_value += aml['debit'] - aml['credit']
-        return variant_value
-
     @api.multi
     def _compute_inventory_account_value(self):
+        self.env.cr.execute("""
+            SELECT aml.product_id, sum(debit) - sum(credit) as valuation
+            FROM account_move_line as aml
+            INNER JOIN account_period as ap
+            ON ap.id = aml.period_id
+            INNER JOIN product_product as pr
+            ON pr.id = aml.product_id
+            INNER JOIN product_template as pt
+            ON pt.id = pr.product_tmpl_id
+            INNER JOIN ir_property as ip
+            on (ip.res_id = 'product.category,' || pt.categ_id
+            AND ip.name = 'property_stock_valuation_account_id'
+            AND 'account.account,' || aml.account_id = ip.value_reference)
+            GROUP BY aml.product_id
+        """)
+        accounting_val = {}
+        for product_id, valuation in self.env.cr.fetchall():
+            accounting_val[product_id] = valuation
         for rec in self:
             rec.inventory_value = rec.get_inventory_value()
-            rec.accounting_value = self.get_accounting_value()
+            if rec.id in accounting_val.keys():
+                rec.accounting_value = accounting_val[rec.id]
+            else:
+                rec.accounting_value = 0.0
             rec.valuation_discrepancy = rec.inventory_value - \
                 rec.accounting_value
 
@@ -86,12 +90,32 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def _compute_inventory_account_value(self):
+        self.env.cr.execute("""
+            SELECT pt.id, sum(debit) - sum(credit) as valuation
+            FROM account_move_line as aml
+            INNER JOIN account_period as ap
+            ON ap.id = aml.period_id
+            INNER JOIN product_product as pr
+            ON pr.id = aml.product_id
+            INNER JOIN product_template as pt
+            ON pt.id = pr.product_tmpl_id
+            INNER JOIN ir_property as ip
+            on (ip.res_id = 'product.category,' || pt.categ_id
+            AND ip.name = 'property_stock_valuation_account_id'
+            AND 'account.account,' || aml.account_id = ip.value_reference)
+            GROUP BY pt.id
+        """)
+        accounting_val = {}
+        for template_id, valuation in self.env.cr.fetchall():
+            accounting_val[template_id] = valuation
         for rec in self:
             inv_value = 0.0
-            acc_value = 0.0
+            if rec.id in accounting_val.keys():
+                acc_value = accounting_val[rec.id]
+            else:
+                acc_value = 0.0
             for variant in rec.product_variant_ids:
                 inv_value += variant.get_inventory_value()
-                acc_value += variant.get_accounting_value()
             rec.inventory_value = inv_value
             rec.accounting_value = acc_value
             rec.valuation_discrepancy = acc_value - inv_value
@@ -110,15 +134,19 @@ class ProductTemplate(models.Model):
                      if ops[operator](a.valuation_discrepancy, value)]
         return [('id', 'in', found_ids)]
 
-    inventory_value = fields.Float(string='Inventory Value',
-                                   compute='_compute_inventory_account_value',
-                                   digits=UNIT)
-    accounting_value = fields.Float(string='Accounting Value',
-                                    compute='_compute_inventory_account_value',
-                                    digits=UNIT)
+    inventory_value = fields.Float(
+        string='Inventory Value', compute='_compute_inventory_account_value',
+        digits=UNIT, groups="product_inventory_account_reconcile"
+                            ".group_product_inventory_account_reconcile")
+    accounting_value = fields.Float(
+        string='Accounting Value', compute='_compute_inventory_account_value',
+        digits=UNIT, groups="product_inventory_account_reconcile"
+                            ".group_product_inventory_account_reconcile")
     valuation_discrepancy = fields.Float(
-        string='Accounting - Inventory Value',
+        string='Valuation discrepancy',
         compute='_compute_inventory_account_value',
         digits=UNIT,
         help="""Positive number means that the accounting valuation needs to
-        decrease.""", search="_search_valuation_discrepancy")
+        decrease.""", search="_search_valuation_discrepancy",
+        groups="product_inventory_account_reconcile"
+               ".group_product_inventory_account_reconcile")
