@@ -57,23 +57,20 @@ class StockValuationAccountMassAdjust(models.TransientModel):
         if active_model == 'product.product':
             products = self.env['product.product'].browse(
                 context.get('active_ids', []))
-            for product in products:
-                if product.valuation != 'real_time':
-                    raise exceptions.Warning(
-                        _('Product %s must have real time '
-                          'valuation') % product.name)
         elif active_model == 'product.template':
             templates = self.env['product.template'].browse(
                 context.get('active_ids', []))
-            for template in templates:
-                if template.valuation != 'real_time':
-                    raise exceptions.Warning(
-                        _('Product Template %s must have real time '
-                          'valuation') % template.name)
             products = templates.mapped('product_variant_ids')
         else:
             raise exceptions.Warning(
                 _('Incorrect model.'))
+
+        for product in products:
+            if product.valuation != 'real_time':
+                raise exceptions.Warning(
+                    _('Product %s must have real time valuation') %
+                    product.name)
+
         rec_ids = []
         for product in products:
             if not product.valuation_discrepancy:

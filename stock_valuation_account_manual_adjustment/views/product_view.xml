@@ -22,14 +22,15 @@
 
         <record model="ir.actions.act_window"
                 id="action_product_inventory_valuation">
-            <field name="name">Product Inventory Valuation</field>
+            <field name="name">Real-time Inventory Valuation</field>
             <field name="res_model">product.product</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('valuation', '=', 'real_time')]</field>
             <field name="view_id" ref="view_product_inventory_valuation_tree"/>
         </record>
 
-        <menuitem name="Product Inventory Valuation"
+        <menuitem name="Real-time Inventory Valuation"
                   parent="stock.menu_stock_inventory_control"
                   action="action_product_inventory_valuation"
                   id="menu_action_product_inventory_valuation"
