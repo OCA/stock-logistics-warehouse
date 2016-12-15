@@ -11,8 +11,7 @@
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": ["stock_account", "account_move_line_product",
-                "stock_inventory_revaluation"],
+    "depends": ["stock_account", "stock_inventory_revaluation"],
     "data": [
         "data/stock_valuation_account_manual_adjustment_data.xml",
         "security/stock_valuation_account_manual_adjustment_security.xml",
