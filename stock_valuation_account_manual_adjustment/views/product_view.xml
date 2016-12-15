@@ -2,32 +2,38 @@
 <openerp>
     <data>
 
-        <record id="product_template_tree_view" model="ir.ui.view">
-            <field name="name">product.template.product.tree</field>
-            <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_tree_view" />
+        <record model="ir.ui.view"
+                id="view_product_inventory_valuation_tree">
+            <field name="name">product.product.inventory.valuation.tree</field>
+            <field name="model">product.product</field>
+            <field name="priority">50</field>
             <field name="arch" type="xml">
-                <field name="uom_id" position="after">
+                <tree string="Product Inventory Valuation">
+                    <field name="default_code"/>
+                    <field name="name"/>
+                    <field name="categ_id"/>
+                    <field name="uom_id" string="UoM"/>
                     <field name="inventory_value"/>
                     <field name="accounting_value"/>
                     <field name="valuation_discrepancy"/>
-                </field>
-            </field>
+                </tree>
+          </field>
         </record>
 
-        <record id="product_product_tree_view" model="ir.ui.view">
-            <field name="name">product.product.tree</field>
-            <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_product_tree_view" />
-            <field eval="7" name="priority"/>
-            <field name="arch" type="xml">
-                <field name="product_tmpl_id" position="after">
-                    <field name="inventory_value"/>
-                    <field name="accounting_value"/>
-                    <field name="valuation_discrepancy"/>
-                </field>
-            </field>
+        <record model="ir.actions.act_window"
+                id="action_product_inventory_valuation">
+            <field name="name">Product Inventory Valuation</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_product_inventory_valuation_tree"/>
         </record>
+
+        <menuitem name="Product Inventory Valuation"
+                  parent="stock.menu_stock_inventory_control"
+                  action="action_product_inventory_valuation"
+                  id="menu_action_product_inventory_valuation"
+                  groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment"/>
 
     </data>
 </openerp>

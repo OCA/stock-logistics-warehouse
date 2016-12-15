@@ -27,16 +27,11 @@ class ProductProduct(models.Model):
     def get_inventory_value(self):
         domain = self._get_internal_quant_domain()
         quants = self.env['stock.quant'].read_group(
-            domain, ['product_id', 'qty', 'cost'], ['product_id'])
-        variant_qty = 0.0
+            domain, ['product_id', 'inventory_value'], ['product_id'])
         variant_value = 0.0
         for quant in quants:
-            variant_qty += quant['qty']
-            variant_value += quant['qty'] * quant['cost']
-        if self.cost_method == 'real':
-            return variant_value
-        else:
-            return variant_qty * self.standard_price
+            variant_value += quant['inventory_value']
+        return variant_value
 
     @api.multi
     def _compute_inventory_account_value(self):
