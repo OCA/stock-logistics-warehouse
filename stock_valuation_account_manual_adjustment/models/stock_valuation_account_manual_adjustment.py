@@ -140,7 +140,7 @@ class StockValuationAccountManualAdjustment(models.Model):
     def post(self):
         timenow = time.strftime('%Y-%m-%d')
         for adj in self:
-            if not adj.product_id.valuation_discrepancy:
+            if not adj.amount:
                 continue
             move_data = self._prepare_move_data(timenow)
             datas = self.env['product.template'].get_product_accounts(
