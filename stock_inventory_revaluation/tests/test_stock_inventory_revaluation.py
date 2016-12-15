@@ -228,10 +228,10 @@ class TestStockInventoryRevaluation(TransactionCase):
         expected_result = (10.00 - 8.00) * 10.00
 
         self.assertEqual(len(
-            invent_price_change_real.account_move_id.line_id), 4,
+            invent_price_change_real.move_ids[0].line_id), 4,
             'Incorrect accounting entry generated')
 
-        for move_line in invent_price_change_real.account_move_id.line_id:
+        for move_line in invent_price_change_real.move_ids[0].line_id:
             if move_line.account_id == self.account_inventory:
                 self.assertEqual(move_line.credit, expected_result,
                                  'Incorrect inventory revaluation for '
@@ -257,10 +257,10 @@ class TestStockInventoryRevaluation(TransactionCase):
         expected_result = (10.00 - 8.00) * 10.00
 
         self.assertEqual(len(
-            invent_price_change_average.account_move_id.line_id), 4,
+            invent_price_change_average.move_ids[0].line_id), 4,
             'Incorrect accounting entry generated')
 
-        for move_line in invent_price_change_average.account_move_id.line_id:
+        for move_line in invent_price_change_average.move_ids[0].line_id:
             if move_line.account_id == self.account_inventory:
                 self.assertEqual(move_line.credit, expected_result,
                                  'Incorrect inventory revaluation for '
@@ -284,10 +284,10 @@ class TestStockInventoryRevaluation(TransactionCase):
         invent_value_change.button_post()
 
         self.assertEqual(len(
-            invent_value_change.account_move_id.line_id), 4,
+            invent_value_change.move_ids[0].line_id), 4,
             'Incorrect accounting entry generated')
 
-        for move_line in invent_value_change.account_move_id.line_id:
+        for move_line in invent_value_change.move_ids[0].line_id:
             if move_line.account_id == self.account_inventory:
                 self.assertEqual(move_line.credit, 50.0,
                                  'Incorrect inventory revaluation for '

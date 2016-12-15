@@ -174,12 +174,13 @@ class StockInventoryRevaluation(models.Model):
              "the transaction created by the revaluation. The Decrease "
              "Account is used when the inventory value is decreased.")
 
-    account_move_id = fields.Many2one('account.move', 'Account move',
-                                      readonly=True, copy=False)
-
     reval_quant_ids = fields.One2many('stock.inventory.revaluation.quant',
                                       'revaluation_id',
                                       string='Revaluation line quants')
+    move_ids = fields.One2many(
+        comodel_name='account.move',
+        inverse_name='stock_inventory_revaluation_id',
+        readonly=True)
 
     @api.multi
     @api.depends("product_template_id", "product_template_id.standard_price")
@@ -217,27 +218,29 @@ class StockInventoryRevaluation(models.Model):
             'ref': self.name,
             'journal_id': self.journal_id.id,
             'period_id': period.id,
+            'stock_inventory_revaluation_id': self.id
         }
 
     @api.model
-    def _prepare_debit_move_line_data(self, amount, account_id, prod_id):
+    def _prepare_debit_move_line_data(self, move, amount, account_id, prod_id):
         return {
             'name': self.name,
-            'date': self.account_move_id.date,
+            'date': move.date,
             'product_id': prod_id,
             'account_id': account_id,
-            'move_id': self.account_move_id.id,
+            'move_id': move.id,
             'debit': amount
         }
 
     @api.model
-    def _prepare_credit_move_line_data(self, amount, account_id, prod_id):
+    def _prepare_credit_move_line_data(self, move, amount, account_id,
+                                       prod_id):
         return {
             'name': self.name,
-            'date': self.account_move_id.date,
+            'date': move.date,
             'product_id': prod_id,
             'account_id': account_id,
-            'move_id': self.account_move_id.id,
+            'move_id': move.id,
             'credit': amount
         }
 
@@ -247,7 +250,7 @@ class StockInventoryRevaluation(models.Model):
         move_data = self._prepare_move_data(timenow)
         datas = self.env['product.template'].get_product_accounts(
             self.product_template_id.id)
-        self.account_move_id = self.env['account.move'].create(move_data).id
+        move = self.env['account.move'].create(move_data)
         move_line_obj = self.env['account.move.line']
 
         if not self.decrease_account_id or not self.increase_account_id:
@@ -282,13 +285,13 @@ class StockInventoryRevaluation(models.Model):
                         datas['property_stock_valuation_account_id']
                     credit_account_id = self.increase_account_id.id
                 move_line_data = self._prepare_debit_move_line_data(
-                    abs(amount_diff), debit_account_id, prod_variant.id)
+                    move, abs(amount_diff), debit_account_id, prod_variant.id)
                 move_line_obj.create(move_line_data)
                 move_line_data = self._prepare_credit_move_line_data(
-                    abs(amount_diff), credit_account_id, prod_variant.id)
+                    move, abs(amount_diff), credit_account_id, prod_variant.id)
                 move_line_obj.create(move_line_data)
-                if self.account_move_id.journal_id.entry_posted:
-                    self.account_move_id.post()
+                if move.journal_id.entry_posted:
+                    move.post()
 
     @api.multi
     def post(self):
@@ -351,19 +354,16 @@ class StockInventoryRevaluation(models.Model):
 
     @api.multi
     def button_cancel(self):
-        moves = self.env['account.move']
         for revaluation in self:
-            if revaluation.account_move_id:
-                moves += revaluation.account_move_id
             for reval_quant in revaluation.reval_quant_ids:
                 reval_quant.quant_id.write({'cost': reval_quant.old_cost})
-            if moves:
+            if revaluation.move_ids:
                 # second, invalidate the move(s)
-                moves.button_cancel()
+                revaluation.move_ids.button_cancel()
                 # delete the move this revaluation was pointing to
                 # Note that the corresponding move_lines and move_reconciles
                 # will be automatically deleted too
-                moves.unlink()
+                revaluation.move_ids.unlink()
             revaluation.state = 'cancel'
         return True
 
