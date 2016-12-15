@@ -5,7 +5,7 @@
 '''
 Additional fields for the purchase proposal
 '''
-from openerp import fields, api, models
+from openerp import api, fields, models
 
 
 class ResPartner(models.Model):
@@ -55,6 +55,7 @@ class ResPartner(models.Model):
             if this.id in partner2products.keys():
                 this.primary_product_ids = partner2products[this.id]
 
+    @api.multi
     def _compute_product_supplierinfo(self):
         """given a partner, return a list of all products it provides"""
         self.env.cr.execute(

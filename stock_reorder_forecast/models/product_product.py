@@ -32,7 +32,7 @@ class ProductProduct(models.Model):
              "purchase is less than these days away"
     )
     is_buy = fields.Boolean("Does the product have Buy Route?",
-                            compute='_compute_isbuy', stored=True)
+                            compute='_compute_isbuy', store=True)
 
     @api.multi
     @api.depends('product_tmpl_id.route_ids')
@@ -47,7 +47,7 @@ class ProductProduct(models.Model):
 
     def has_purchase_draft(self):
         sql = """
-            select count(*) from purchase_order_line
+            select count(id) from purchase_order_line
                 where product_id = %s
                 and order_id in (select id from purchase_order where
                 state='draft')
@@ -61,7 +61,7 @@ class ProductProduct(models.Model):
             stock_days = int(float_round((((
                 this.virtual_available or 0
                 ) - stock_period_min) / turnover_average) + .5, 0))
-            if self.has_purchase_draft():
+            if this.has_purchase_draft():
                 return False
             if stock_days < 0:
                 return fields.Date.to_string(

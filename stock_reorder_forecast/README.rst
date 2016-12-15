@@ -1,10 +1,11 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
 ======================
 Stock Reorder Forecast
 ======================
+
 
 Allows to predict date when stock levels will reach minimum by
 analizying sales volume in a period and therefore to trigger RFQ's ahead
@@ -39,12 +40,34 @@ will default to Hardcoded values (ir.config.parameters period=365 days).
 The turnover average and the ultimate purchase derived by it are calculated in
 bulk by a daily cron job.
 
-==========
-Usage
-==========
 
-Set on product and/or partner(supplier) and/or product category the values of turnover
-period.
+Configuration
+=============
+
+To configure this module, you need to:
+set turnover_period stock_period_max , stock_period_min on:
+            
+            * Product
+            * Supplier Infos
+            * Partners
+            * Categories
+            * Default value
+
+These values will be taken in this order of priority (highest to lowest) 
+if the values in product, Supplier Info, Partners, Categories are all not 
+set it will revert to Default Value, defined in installation data is a 
+company parameter.
+
+Also set the frequency of turnover and purchase date calculation by setting 
+in Automatic Actions the execution of cron job "Purchase Proposal Refresh"  
+(by default set at once a day).
+
+
+Usage
+=====
+
+Set on product and/or partner(supplier) and/or product category the values 
+of turnover period.
 
 Make sure the cron job  "Purchase Proposal Refresh" is activated, launch it
 manually the first time in order to have all "ultimate dates" for products
@@ -60,10 +83,28 @@ interface you can generate a RFQ to desired date.
 You can also view from the partner/supplier form all products ordered by this
 partner.
 
+#. Go to ...
+
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/{repo_id}/{branch}
+
+.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
+.. branch is "9.0" for example
 
 
-Credits
-=======
+Bug Tracker
+===========
+
+Bugs are tracked on `GitHub Issues
+<https://github.com/OCA/{project_repo}/issues>`_. In case of trouble, please
+check there if your issue has already been reported. If you spotted it first,
+help us smashing it by providing a detailed and welcomed feedback.
+
+Images
+------
+
+* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
 
 Contributors
 ------------
@@ -73,15 +114,28 @@ Contributors
 * Hans Van Dijk <hvd400@gmail.com>
 * Ronald Portier <rportier@therp.nl>
 
+Funders
+-------
+
+The development of this module has been financially supported by:
+
+* Therp B.V.
+
 Maintainer
 ----------
 
-.. image:: http://odoo-community.org/logo.png
+.. image:: https://odoo-community.org/logo.png
    :alt: Odoo Community Association
-   :target: http://odoo-community.org
+   :target: https://odoo-community.org
 
 This module is maintained by the OCA.
 
-OCA, or the Odoo Community Association, is a nonprofit organization whose mission is to support the collaborative development of Odoo features and promote its widespread use.
+OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.
 
-To contribute to this module, please visit http://odoo-community.org.
+To contribute to this module, please visit https://odoo-community.org.
+
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+    :alt: License: AGPL-3
