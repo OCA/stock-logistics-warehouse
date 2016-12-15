@@ -21,6 +21,7 @@
         "views/stock_valuation_account_manual_adjustment_view.xml",
         "wizards/mass_create_view.xml"
     ],
+    'pre_init_hook': 'pre_init_hook',
     "license": "AGPL-3",
     'installable': True,
 }
