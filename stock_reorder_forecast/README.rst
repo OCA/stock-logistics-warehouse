@@ -93,6 +93,20 @@ partner.
 .. branch is "9.0" for example
 
 
+Known issues / Roadmap
+======================
+Does not support Multicompany, calculatuion of stats will allways work on
+cross-company products purchases and pickings. It will only calculate outgoing
+moves , not internal moves. So the stats will be representative of all
+companies global stats (all sales from all companies/turnover period of
+product).
+
+Implementing a full multicompany support will require additional support
+datastrutures.
+
+from a functional stand point, the global stats may be still usefull in some
+multicompany configurations, not all.
+
 Bug Tracker
 ===========
 
