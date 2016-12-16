@@ -21,6 +21,7 @@ class ProductProduct(models.Model):
     @api.model
     def _get_internal_quant_domain(self):
         return [('product_id', '=', self.id),
+                ('product_id.type', '=', 'product'),
                 ('location_id.usage', '=', 'internal')]
 
     @api.model
@@ -88,6 +89,20 @@ class ProductProduct(models.Model):
                 rec.accounting_value
 
     @api.multi
+    def _search_valuation_discrepancy(self, operator, value):
+        """Search records with a valuation discrepancy"""
+        all_records = self.search([('active', '=', True),
+                                  ('valuation', '=', 'real_time')])
+        if operator not in ops.keys():
+            raise exceptions.Warning(
+                _('Search operator %s not implemented for value %s')
+                % (operator, value)
+            )
+        found_ids = [a.id for a in all_records
+                     if ops[operator](a.valuation_discrepancy, value)]
+        return [('id', 'in', found_ids)]
+
+    @api.multi
     def _compute_accounting_value(self):
         for rec in self:
             rec.accounting_value = self.get_accounting_value()
@@ -101,6 +116,7 @@ class ProductProduct(models.Model):
     valuation_discrepancy = fields.Float(
         string='Valuation discrepancy',
         compute='_compute_inventory_account_value',
+        search="_search_valuation_discrepancy",
         digits=UNIT)
 
 
