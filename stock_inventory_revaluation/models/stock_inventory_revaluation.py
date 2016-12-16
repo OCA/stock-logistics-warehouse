@@ -181,6 +181,9 @@ class StockInventoryRevaluation(models.Model):
         comodel_name='account.move',
         inverse_name='stock_inventory_revaluation_id',
         readonly=True)
+    post_date = fields.Datetime(
+        'Posting Date', states={'done': [('readonly', True)]},
+        help="Date of actual processing")
 
     @api.multi
     @api.depends("product_template_id", "product_template_id.standard_price")
@@ -333,7 +336,8 @@ class StockInventoryRevaluation(models.Model):
 
             if revaluation.product_template_id.valuation == 'real_time':
                 revaluation._create_accounting_entry()
-            self.write({'state': 'posted'})
+            self.post_date = fields.Datetime.now()
+            self.state = 'posted'
 
     @api.model
     def create(self, values):
