@@ -250,7 +250,6 @@ class StockInventoryRevaluation(models.Model):
         move_data = self._prepare_move_data(timenow)
         datas = self.env['product.template'].get_product_accounts(
             self.product_template_id.id)
-        move = self.env['account.move'].create(move_data)
         move_line_obj = self.env['account.move.line']
 
         if not self.decrease_account_id or not self.increase_account_id:
@@ -284,6 +283,7 @@ class StockInventoryRevaluation(models.Model):
                     debit_account_id = \
                         datas['property_stock_valuation_account_id']
                     credit_account_id = self.increase_account_id.id
+                move = self.env['account.move'].create(move_data)
                 move_line_data = self._prepare_debit_move_line_data(
                     move, abs(amount_diff), debit_account_id, prod_variant.id)
                 move_line_obj.create(move_line_data)
