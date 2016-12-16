@@ -14,6 +14,9 @@ class ProductProduct(models.Model):
     stock_period_max = fields.Integer(
         'Maximium stock', help='Maximum stock in days turnover to resupply '
         'for. Used by the purchase proposal.')
+    stock_period_min = fields.Integer(
+        'Minimium stock', help='Miminum stock in days turnover to resupply '
+        'for. Used by the purchase proposal.')
     turnover_period = fields.Integer(
         string='Turnover period',
         help='Turnover days to calculate average '
