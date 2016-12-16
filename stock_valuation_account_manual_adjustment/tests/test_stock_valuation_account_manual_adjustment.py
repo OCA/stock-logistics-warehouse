@@ -173,9 +173,9 @@ class TestProductInventoryAccountReconcile(TransactionCase):
         self.assertEquals(self.product_average_1.valuation_discrepancy, -100.0)
 
         wiz = self.env['stock.valuation.account.mass.adjust'].with_context(
-            active_model="product.template",
-            active_ids=[self.product_average_1.product_tmpl_id.id],
-            active_id=self.product_average_1.product_tmpl_id.id).create({
+            active_model="product.product",
+            active_ids=[self.product_average_1.id],
+            active_id=self.product_average_1.id).create({
                 'increase_account_id': self.account_revaluation.id,
                 'decrease_account_id': self.account_revaluation.id,
                 'journal_id': self.journal.id,

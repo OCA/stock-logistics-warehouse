@@ -40,7 +40,8 @@ class ProductProduct(models.Model):
     def _get_accounting_valuation_by_product(self):
         accounting_val = {}
         self.env.cr.execute("""
-                    SELECT aml.product_id, sum(debit) - sum(credit) as valuation
+                    SELECT aml.product_id, sum(debit) - sum(credit) AS
+                    valuation
                     FROM account_move_line as aml
                     INNER JOIN account_period as ap
                     ON ap.id = aml.period_id
@@ -51,7 +52,8 @@ class ProductProduct(models.Model):
                     INNER JOIN ir_property as ip
                     on (ip.res_id = 'product.category,' || pt.categ_id
                     AND ip.name = 'property_stock_valuation_account_id'
-                    AND 'account.account,' || aml.account_id = ip.value_reference)
+                    AND 'account.account,' || aml.account_id =
+                    ip.value_reference)
                     GROUP BY aml.product_id
                 """)
 
@@ -70,13 +72,17 @@ class ProductProduct(models.Model):
                             ON pt.id = pr.product_tmpl_id
                             INNER JOIN ir_property as ip
                             on (ip.res_id IS NULL
-                            AND ip.name = 'property_stock_valuation_account_id'
-                            AND 'account.account,' || aml.account_id = ip.value_reference)
+                            AND ip.name =
+                            'property_stock_valuation_account_id'
+                            AND 'account.account,' || aml.account_id =
+                            ip.value_reference)
                             AND ip.id NOT IN (
                                 SELECT id
                                 FROM ir_property
-                                WHERE res_id = 'product.category,' || pt.categ_id
-                                AND name = 'property_stock_valuation_account_id'
+                                WHERE res_id = 'product.category,' ||
+                                pt.categ_id
+                                AND name =
+                                'property_stock_valuation_account_id'
                             )
                             GROUP BY aml.product_id
                         """)
