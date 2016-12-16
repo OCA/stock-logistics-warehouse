@@ -88,18 +88,84 @@ class ProductProduct(models.Model):
             rec.valuation_discrepancy = rec.inventory_value - \
                 rec.accounting_value
 
+    @api.model
+    def _get_internal_quant_domain_search(self):
+        return [('product_id.type', '=', 'product'),
+                ('location_id.usage', '=', 'internal')]
+
     @api.multi
     def _search_valuation_discrepancy(self, operator, value):
-        """Search records with a valuation discrepancy"""
-        all_records = self.search([('active', '=', True),
-                                  ('valuation', '=', 'real_time')])
         if operator not in ops.keys():
             raise exceptions.Warning(
                 _('Search operator %s not implemented for value %s')
                 % (operator, value)
             )
-        found_ids = [a.id for a in all_records
-                     if ops[operator](a.valuation_discrepancy, value)]
+
+        """Search records with a valuation discrepancy"""
+        self.env.cr.execute("""
+            SELECT aml.product_id, sum(debit) - sum(credit) as valuation
+            FROM account_move_line as aml
+            INNER JOIN account_period as ap
+            ON ap.id = aml.period_id
+            INNER JOIN product_product as pr
+            ON pr.id = aml.product_id
+            INNER JOIN product_template as pt
+            ON pt.id = pr.product_tmpl_id
+            INNER JOIN ir_property as ip
+            on (ip.res_id = 'product.category,' || pt.categ_id
+            AND ip.name = 'property_stock_valuation_account_id'
+            AND 'account.account,' || aml.account_id = ip.value_reference)
+            GROUP BY aml.product_id
+        """)
+        accounting_val = {}
+        for product_id, valuation in self.env.cr.fetchall():
+            accounting_val[product_id] = valuation
+
+        self.env.cr.execute("""
+                    SELECT aml.product_id, sum(debit) - sum(credit)
+                    as valuation
+                    FROM account_move_line as aml
+                    INNER JOIN account_period as ap
+                    ON ap.id = aml.period_id
+                    INNER JOIN product_product as pr
+                    ON pr.id = aml.product_id
+                    INNER JOIN product_template as pt
+                    ON pt.id = pr.product_tmpl_id
+                    INNER JOIN ir_property as ip
+                    on (ip.res_id IS NULL
+                    AND ip.name = 'property_stock_valuation_account_id'
+                    AND 'account.account,' || aml.account_id = ip.value_reference)
+                    AND ip.id NOT IN (
+                        SELECT id
+                        FROM ir_property
+                        WHERE res_id = 'product.category,' || pt.categ_id
+                        AND name = 'property_stock_valuation_account_id'
+                    )
+                    GROUP BY aml.product_id
+                """)
+
+        inventory_val = {}
+        domain = self._get_internal_quant_domain_search()
+        quants = self.env['stock.quant'].read_group(
+            domain, ['product_id', 'inventory_value'], ['product_id'])
+        for quant in quants:
+            inventory_val[quant['product_id']] += quant['inventory_value']
+
+        products = self.search([('active', '=', True), ('valuation', '=',
+                                                        'real_time')])
+        found_ids = []
+        for product in products:
+            if product.id in inventory_val.keys():
+                inventory_v = inventory_val[product.id]
+            else:
+                inventory_v = 0.0
+            if product.id in inventory_val.keys():
+                accounting_v = accounting_val[product.id]
+            else:
+                accounting_v = 0.0
+            valuation_discrepancy = inventory_v - accounting_v
+            if ops[operator](valuation_discrepancy, value):
+                found_ids.append(product.id)
         return [('id', 'in', found_ids)]
 
     @api.multi
