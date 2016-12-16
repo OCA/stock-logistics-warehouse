@@ -16,14 +16,14 @@
                          <field name="remarks"/>
                      </group>
                      <newline/>
-                     <group colspan="2">
+                     <footer>
                          <button name="process"
                                  string="Process"
                                  type="object"
                                  class="oe_highlight"
                                  groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment"/>
                          <button special="cancel" string="Cancel" class="oe_link"/>
-                     </group>
+                     </footer>
                 </form>
             </field>
         </record>
