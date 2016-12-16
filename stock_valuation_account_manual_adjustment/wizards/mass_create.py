@@ -57,10 +57,6 @@ class StockValuationAccountMassAdjust(models.TransientModel):
         if active_model == 'product.product':
             products = self.env['product.product'].browse(
                 context.get('active_ids', []))
-        elif active_model == 'product.template':
-            templates = self.env['product.template'].browse(
-                context.get('active_ids', []))
-            products = templates.mapped('product_variant_ids')
         else:
             raise exceptions.Warning(
                 _('Incorrect model.'))

@@ -18,46 +18,29 @@ class ProductProduct(models.Model):
 
     _inherit = 'product.product'
 
-    @api.model
-    def _get_internal_quant_domain(self):
-        return [('product_id', '=', self.id),
-                ('product_id.type', '=', 'product'),
-                ('location_id.usage', '=', 'internal')]
-
-    @api.model
-    def get_inventory_value(self):
-        domain = self._get_internal_quant_domain()
-        quants = self.env['stock.quant'].read_group(
-            domain, ['product_id', 'inventory_value'], ['product_id'])
-        variant_value = 0.0
-        for quant in quants:
-            variant_value += quant['inventory_value']
-        return variant_value
-
     @api.multi
     def _compute_inventory_account_value(self):
-        self.env.cr.execute("""
-            SELECT aml.product_id, sum(debit) - sum(credit) as valuation
-            FROM account_move_line as aml
-            INNER JOIN account_period as ap
-            ON ap.id = aml.period_id
-            INNER JOIN product_product as pr
-            ON pr.id = aml.product_id
-            INNER JOIN product_template as pt
-            ON pt.id = pr.product_tmpl_id
-            INNER JOIN ir_property as ip
-            on (ip.res_id = 'product.category,' || pt.categ_id
-            AND ip.name = 'property_stock_valuation_account_id'
-            AND 'account.account,' || aml.account_id = ip.value_reference)
-            GROUP BY aml.product_id
-        """)
-        accounting_val = {}
-        for product_id, valuation in self.env.cr.fetchall():
-            accounting_val[product_id] = valuation
+        accounting_val = self._get_accounting_valuation_by_product()
+        inventory_val = self._get_inventory_valuation_by_product()
 
+        for product in self:
+            if product.id in inventory_val.keys():
+                inventory_v = inventory_val[product.id]
+            else:
+                inventory_v = 0.0
+            if product.id in accounting_val.keys():
+                accounting_v = accounting_val[product.id]
+            else:
+                accounting_v = 0.0
+            product.accounting_value = accounting_v
+            product.inventory_value = inventory_v
+            product.valuation_discrepancy = inventory_v - accounting_v
+
+    @api.multi
+    def _get_accounting_valuation_by_product(self):
+        accounting_val = {}
         self.env.cr.execute("""
-                    SELECT aml.product_id, sum(debit) - sum(credit)
-                    as valuation
+                    SELECT aml.product_id, sum(debit) - sum(credit) as valuation
                     FROM account_move_line as aml
                     INNER JOIN account_period as ap
                     ON ap.id = aml.period_id
@@ -66,32 +49,112 @@ class ProductProduct(models.Model):
                     INNER JOIN product_template as pt
                     ON pt.id = pr.product_tmpl_id
                     INNER JOIN ir_property as ip
-                    on (ip.res_id IS NULL
+                    on (ip.res_id = 'product.category,' || pt.categ_id
                     AND ip.name = 'property_stock_valuation_account_id'
                     AND 'account.account,' || aml.account_id = ip.value_reference)
-                    AND ip.id NOT IN (
-                        SELECT id
-                        FROM ir_property
-                        WHERE res_id = 'product.category,' || pt.categ_id
-                        AND name = 'property_stock_valuation_account_id'
-                    )
                     GROUP BY aml.product_id
                 """)
+
         for product_id, valuation in self.env.cr.fetchall():
             accounting_val[product_id] = valuation
-        for rec in self:
-            rec.inventory_value = rec.get_inventory_value()
-            if rec.id in accounting_val.keys():
-                rec.accounting_value = accounting_val[rec.id]
-            else:
-                rec.accounting_value = 0.0
-            rec.valuation_discrepancy = rec.inventory_value - \
-                rec.accounting_value
+
+        self.env.cr.execute("""
+                            SELECT aml.product_id, sum(debit) - sum(credit)
+                            as valuation
+                            FROM account_move_line as aml
+                            INNER JOIN account_period as ap
+                            ON ap.id = aml.period_id
+                            INNER JOIN product_product as pr
+                            ON pr.id = aml.product_id
+                            INNER JOIN product_template as pt
+                            ON pt.id = pr.product_tmpl_id
+                            INNER JOIN ir_property as ip
+                            on (ip.res_id IS NULL
+                            AND ip.name = 'property_stock_valuation_account_id'
+                            AND 'account.account,' || aml.account_id = ip.value_reference)
+                            AND ip.id NOT IN (
+                                SELECT id
+                                FROM ir_property
+                                WHERE res_id = 'product.category,' || pt.categ_id
+                                AND name = 'property_stock_valuation_account_id'
+                            )
+                            GROUP BY aml.product_id
+                        """)
+        for product_id, valuation in self.env.cr.fetchall():
+            accounting_val[product_id] = valuation
+        return accounting_val
 
     @api.model
     def _get_internal_quant_domain_search(self):
         return [('product_id.type', '=', 'product'),
                 ('location_id.usage', '=', 'internal')]
+
+    @api.multi
+    def _get_inventory_valuation_by_product(self):
+        inventory_val = {}
+        self.env.cr.execute("""
+            WITH Q1 AS (
+                SELECT pt.id, ip.value_text as cost_method
+                FROM product_template as pt
+                INNER JOIN ir_property as ip
+                ON (ip.res_id = 'product.template,' || pt.id)
+                INNER JOIN ir_model_fields imf
+                ON imf.id = ip.fields_id
+                AND imf.name = 'cost_method'),
+            Q2 AS (
+                SELECT pt.id, ip.value_text as cost_method
+                FROM product_template as pt
+                INNER JOIN ir_property as ip
+                ON (ip.res_id IS NULL)
+                INNER JOIN ir_model_fields imf
+                ON imf.id = ip.fields_id
+                AND imf.name = 'cost_method'
+                WHERE pt.id NOT IN (SELECT id FROM Q1)),
+            Q3 AS (
+                SELECT * FROM Q1
+                UNION ALL
+                SELECT * FROM Q2),
+            Q4 AS (
+                SELECT pr.id, sum(sq.qty*sq.cost) as valuation
+                FROM stock_quant as sq
+                INNER JOIN product_product as pr
+                ON pr.id = sq.product_id
+                INNER JOIN stock_location as sl
+                ON sl.id = sq.location_id
+                INNER JOIN Q3
+                ON Q3.id = pr.product_tmpl_id
+                WHERE Q3.cost_method = 'real'
+                AND sl.usage = 'internal'
+                GROUP BY pr.id),
+            Q5 AS (
+                SELECT pr.id, sum(sq.qty*ip.value_float) as valuation
+                FROM stock_quant as sq
+                INNER JOIN product_product as pr
+                ON pr.id = sq.product_id
+                INNER JOIN stock_location as sl
+                ON sl.id = sq.location_id
+                INNER JOIN Q3
+                ON (Q3.id = pr.product_tmpl_id
+                AND Q3.cost_method in ('standard', 'average'))
+                INNER JOIN ir_property as ip
+                ON (ip.res_id = 'product.template,' || pr.product_tmpl_id)
+                INNER JOIN ir_model_fields imf
+                ON (imf.id = ip.fields_id
+                AND imf.name = 'standard_price')
+                WHERE sl.usage = 'internal'
+                GROUP BY pr.id),
+            Q6 AS (
+                SELECT * FROM Q4 UNION ALL SELECT * FROM Q5),
+            Q7 AS (
+                SELECT * FROM Q6 UNION ALL SELECT pr.id, 0.0
+                FROM product_product as pr
+                WHERE pr.id NOT IN (select id from Q6))
+            SELECT *
+            FROM Q7
+        """)
+        for product_id, valuation in self.env.cr.fetchall():
+            inventory_val[product_id] = valuation
+        return inventory_val
 
     @api.multi
     def _search_valuation_discrepancy(self, operator, value):
@@ -100,56 +163,8 @@ class ProductProduct(models.Model):
                 _('Search operator %s not implemented for value %s')
                 % (operator, value)
             )
-
-        """Search records with a valuation discrepancy"""
-        self.env.cr.execute("""
-            SELECT aml.product_id, sum(debit) - sum(credit) as valuation
-            FROM account_move_line as aml
-            INNER JOIN account_period as ap
-            ON ap.id = aml.period_id
-            INNER JOIN product_product as pr
-            ON pr.id = aml.product_id
-            INNER JOIN product_template as pt
-            ON pt.id = pr.product_tmpl_id
-            INNER JOIN ir_property as ip
-            on (ip.res_id = 'product.category,' || pt.categ_id
-            AND ip.name = 'property_stock_valuation_account_id'
-            AND 'account.account,' || aml.account_id = ip.value_reference)
-            GROUP BY aml.product_id
-        """)
-        accounting_val = {}
-        for product_id, valuation in self.env.cr.fetchall():
-            accounting_val[product_id] = valuation
-
-        self.env.cr.execute("""
-                    SELECT aml.product_id, sum(debit) - sum(credit)
-                    as valuation
-                    FROM account_move_line as aml
-                    INNER JOIN account_period as ap
-                    ON ap.id = aml.period_id
-                    INNER JOIN product_product as pr
-                    ON pr.id = aml.product_id
-                    INNER JOIN product_template as pt
-                    ON pt.id = pr.product_tmpl_id
-                    INNER JOIN ir_property as ip
-                    on (ip.res_id IS NULL
-                    AND ip.name = 'property_stock_valuation_account_id'
-                    AND 'account.account,' || aml.account_id = ip.value_reference)
-                    AND ip.id NOT IN (
-                        SELECT id
-                        FROM ir_property
-                        WHERE res_id = 'product.category,' || pt.categ_id
-                        AND name = 'property_stock_valuation_account_id'
-                    )
-                    GROUP BY aml.product_id
-                """)
-
-        inventory_val = {}
-        domain = self._get_internal_quant_domain_search()
-        quants = self.env['stock.quant'].read_group(
-            domain, ['product_id', 'inventory_value'], ['product_id'])
-        for quant in quants:
-            inventory_val[quant['product_id']] += quant['inventory_value']
+        accounting_val = self._get_accounting_valuation_by_product()
+        inventory_val = self._get_inventory_valuation_by_product()
 
         products = self.search([('active', '=', True), ('valuation', '=',
                                                         'real_time')])
@@ -159,7 +174,7 @@ class ProductProduct(models.Model):
                 inventory_v = inventory_val[product.id]
             else:
                 inventory_v = 0.0
-            if product.id in inventory_val.keys():
+            if product.id in accounting_val.keys():
                 accounting_v = accounting_val[product.id]
             else:
                 accounting_v = 0.0
@@ -167,11 +182,6 @@ class ProductProduct(models.Model):
             if ops[operator](valuation_discrepancy, value):
                 found_ids.append(product.id)
         return [('id', 'in', found_ids)]
-
-    @api.multi
-    def _compute_accounting_value(self):
-        for rec in self:
-            rec.accounting_value = self.get_accounting_value()
 
     inventory_value = fields.Float(string='Inventory Value',
                                    compute='_compute_inventory_account_value',
@@ -184,95 +194,3 @@ class ProductProduct(models.Model):
         compute='_compute_inventory_account_value',
         search="_search_valuation_discrepancy",
         digits=UNIT)
-
-
-class ProductTemplate(models.Model):
-
-    _inherit = 'product.template'
-
-    @api.multi
-    def _compute_inventory_account_value(self):
-        self.env.cr.execute("""
-            SELECT pt.id, sum(debit) - sum(credit) as valuation
-            FROM account_move_line as aml
-            INNER JOIN account_period as ap
-            ON ap.id = aml.period_id
-            INNER JOIN product_product as pr
-            ON pr.id = aml.product_id
-            INNER JOIN product_template as pt
-            ON pt.id = pr.product_tmpl_id
-            INNER JOIN ir_property as ip
-            on (ip.res_id = 'product.category,' || pt.categ_id
-            AND ip.name = 'property_stock_valuation_account_id'
-            AND 'account.account,' || aml.account_id = ip.value_reference)
-            GROUP BY pt.id
-        """)
-        accounting_val = {}
-        for template_id, valuation in self.env.cr.fetchall():
-            accounting_val[template_id] = valuation
-        self.env.cr.execute("""
-            SELECT pt.id, sum(debit) - sum(credit) as valuation
-            FROM account_move_line as aml
-            INNER JOIN account_period as ap
-            ON ap.id = aml.period_id
-            INNER JOIN product_product as pr
-            ON pr.id = aml.product_id
-            INNER JOIN product_template as pt
-            ON pt.id = pr.product_tmpl_id
-            INNER JOIN ir_property as ip
-            on (ip.res_id IS NULL
-            AND ip.name = 'property_stock_valuation_account_id'
-            AND 'account.account,' || aml.account_id = ip.value_reference)
-            AND ip.id NOT IN (
-                SELECT id
-                FROM ir_property
-                WHERE res_id = 'product.category,' || pt.categ_id
-                AND name = 'property_stock_valuation_account_id'
-            )
-            GROUP BY pt.id
-        """)
-        for template_id, valuation in self.env.cr.fetchall():
-            accounting_val[template_id] = valuation
-
-        for rec in self:
-            inv_value = 0.0
-            if rec.id in accounting_val.keys():
-                acc_value = accounting_val[rec.id]
-            else:
-                acc_value = 0.0
-            for variant in rec.product_variant_ids:
-                inv_value += variant.get_inventory_value()
-            rec.inventory_value = inv_value
-            rec.accounting_value = acc_value
-            rec.valuation_discrepancy = acc_value - inv_value
-
-    @api.multi
-    def _search_valuation_discrepancy(self, operator, value):
-        """Search records with a valuation discrepancy"""
-        all_records = self.search([('active', '=', True),
-                                  ('valuation', '=', 'real_time')])
-        if operator not in ops.keys():
-            raise exceptions.Warning(
-                _('Search operator %s not implemented for value %s')
-                % (operator, value)
-            )
-        found_ids = [a.id for a in all_records
-                     if ops[operator](a.valuation_discrepancy, value)]
-        return [('id', 'in', found_ids)]
-
-    inventory_value = fields.Float(
-        string='Inventory Value', compute='_compute_inventory_account_value',
-        digits=UNIT, groups="stock_valuation_account_manual_adjustment"
-                            ".group_stock_valuation_account_manual_adjustment")
-    accounting_value = fields.Float(
-        string='Accounting Value', compute='_compute_inventory_account_value',
-        digits=UNIT, groups="stock_valuation_account_manual_adjustment"
-                            ".group_stock_valuation_account_manual_adjustment")
-    valuation_discrepancy = fields.Float(
-        string='Valuation discrepancy',
-        compute='_compute_inventory_account_value',
-        digits=UNIT,
-        help="""Positive number means that the accounting valuation needs to
-        decrease.""", search="_search_valuation_discrepancy",
-        groups="stock_valuation_account_manual_adjustment"
-               ".group_stock_valuation_account_manual_adjustment")
