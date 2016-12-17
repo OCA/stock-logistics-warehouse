@@ -23,7 +23,7 @@ class TestAccountMoveLineStockInfo(common.TransactionCase):
         self.location_supplier = self.env.ref('stock.stock_location_suppliers')
         self.location_customer = self.env.ref('stock.stock_location_customers')
         self.company = self.env.ref('base.main_company')
-        self.picking_type_in  = self.env.ref('stock.picking_type_in')
+        self.picking_type_in = self.env.ref('stock.picking_type_in')
         self.picking_type_out = self.env.ref('stock.picking_type_out')
         self.group_stock_user = self.env.ref('stock.group_stock_user')
         self.group_account_invoice = self.env.ref(
@@ -70,16 +70,16 @@ class TestAccountMoveLineStockInfo(common.TransactionCase):
         """ Create a user."""
         group_ids = [group.id for group in groups]
         user = \
-            self.res_users_model.with_context({'no_reset_password': True}). \
-                create({
-                'name': 'Test User',
-                'login': login,
-                'password': 'demo',
-                'email': 'test@yourcompany.com',
-                'company_id': company.id,
-                'company_ids': [(4, company.id)],
-                'groups_id': [(6, 0, group_ids)]
-            })
+            self.res_users_model.with_context(
+                {'no_reset_password': True}).create({
+                    'name': 'Test User',
+                    'login': login,
+                    'password': 'demo',
+                    'email': 'test@yourcompany.com',
+                    'company_id': company.id,
+                    'company_ids': [(4, company.id)],
+                    'groups_id': [(6, 0, group_ids)]
+                })
         return user.id
 
     def _create_account(self, acc_type, name, code, company):
@@ -166,9 +166,9 @@ class TestAccountMoveLineStockInfo(common.TransactionCase):
         # Test that the account user can access to the stock info
         self.assertEqual(account_move_line.sudo(
             self.account_invoice).stock_move_id.name,
-                         account_move_line.sudo(self.account_invoice).name)
+            account_move_line.sudo(self.account_invoice).name)
 
         # Test that the account manager can access to the stock info
         self.assertEqual(account_move_line.sudo(
             self.account_manager).stock_move_id.name,
-                         account_move_line.sudo(self.account_manager).name)
+            account_move_line.sudo(self.account_manager).name)

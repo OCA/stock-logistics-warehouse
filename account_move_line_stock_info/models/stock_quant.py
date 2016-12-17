@@ -12,7 +12,7 @@ class StockQuant(models.Model):
     def _prepare_account_move_line(self, move, qty, cost,
                                    credit_account_id, debit_account_id):
         res = super(StockQuant, self)._prepare_account_move_line(
-                move, qty, cost, credit_account_id, debit_account_id)
+            move, qty, cost, credit_account_id, debit_account_id)
         for line in res:
             line[2]['stock_move_id'] = move.id
         return res
