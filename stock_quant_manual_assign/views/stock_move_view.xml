@@ -6,11 +6,11 @@
             <field name="model">stock.move</field>
             <field name="inherit_id" ref="stock.view_move_form" />
             <field name="arch" type="xml">
-                <button name="action_done" position="after">
+                <field name="state" position="before">
                     <button name="%(assign_manual_quants_action)d" type="action"
                             string="Manual Quants" class="oe_highlight"
                             attrs="{'invisible':['|',('picking_type_code','=','incoming'),('state','not in',('confirmed','assigned'))]}"/>
-                </button>
+                </field>
                 <field name="picking_type_id" position="after">
                     <field name="picking_type_code" invisible="1" />
                 </field>
@@ -22,11 +22,11 @@
             <field name="model">stock.move</field>
             <field name="inherit_id" ref="stock.view_move_picking_form" />
             <field name="arch" type="xml">
-                <button name="force_assign" position="after">
+                <field name="state" position="before">
                     <button name="%(assign_manual_quants_action)d" type="action"
                             string="Manual Quants" class="oe_highlight"
                             attrs="{'invisible':['|',('picking_type_code','=','incoming'),('state','not in',('confirmed','assigned'))]}" />
-                </button>
+                </field>
                 <field name="picking_type_id" position="after">
                     <field name="picking_type_code" invisible="1" />
                 </field>
