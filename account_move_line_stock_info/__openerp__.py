@@ -17,6 +17,5 @@
         'security/ir.model.access.csv',
         'views/account_move_line_view.xml',
         'views/stock_move_view.xml',
-    ],
-    "images": [],
+    ]
 }
