@@ -33,7 +33,7 @@ class ProductTemplate(models.Model):
                                 [('product_id', '=', variant.id),
                                  ('location_id.usage', '=', 'internal')])
                             quants.write(
-                                {'standard_price': rec.standard_price})
+                                {'cost': rec.standard_price})
             elif new_method != 'real':
                 for rec in self:
                     if rec.cost_method == 'real':

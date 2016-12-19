@@ -5,12 +5,12 @@
 from openerp.tests.common import TransactionCase
 
 
-class TestStockAccountChangeProductType(TransactionCase):
+class TestStockAccountChangeProductValuation(TransactionCase):
     """Test that the Inventory is Revaluated when the
     inventory price for any product is changed."""
 
     def setUp(self):
-        super(TestStockAccountChangeProductType, self).setUp()
+        super(TestStockAccountChangeProductValuation, self).setUp()
         # Get required Model
         self.product_model = self.env['product.product']
         self.product_ctg_model = self.env['product.category']
