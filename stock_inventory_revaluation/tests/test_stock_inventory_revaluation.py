@@ -228,7 +228,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         expected_result = (10.00 - 8.00) * 10.00
 
         self.assertEqual(len(
-            invent_price_change_real.move_ids[0].line_id), 4,
+            invent_price_change_real.account_move_ids[0].line_id), 2,
             'Incorrect accounting entry generated')
 
         for move_line in invent_price_change_real.move_ids[0].line_id:
@@ -257,7 +257,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         expected_result = (10.00 - 8.00) * 10.00
 
         self.assertEqual(len(
-            invent_price_change_average.move_ids[0].line_id), 4,
+            invent_price_change_average.account_move_ids[0].line_id), 2,
             'Incorrect accounting entry generated')
 
         for move_line in invent_price_change_average.move_ids[0].line_id:
@@ -284,7 +284,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         invent_value_change.button_post()
 
         self.assertEqual(len(
-            invent_value_change.move_ids[0].line_id), 4,
+            invent_value_change.account_move_ids[0].line_id), 2,
             'Incorrect accounting entry generated')
 
         for move_line in invent_value_change.move_ids[0].line_id:

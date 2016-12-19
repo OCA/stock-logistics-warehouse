@@ -18,9 +18,11 @@ def copy_account_move_id(cr):
     if not cr.fetchone():
         cr.execute(
             """
-            ALTER TABLE stock_inventory_revaluation ADD COLUMN old_account_move_id
+            ALTER TABLE stock_inventory_revaluation
+            ADD COLUMN old_account_move_id
             integer;
-            COMMENT ON COLUMN stock_inventory_revaluation.old_account_move_id IS 'Old
+            COMMENT ON COLUMN stock_inventory_revaluation.old_account_move_id
+            IS 'Old
             Journal Entry';
             """)
     cr.execute(
