@@ -177,7 +177,7 @@ class StockInventoryRevaluation(models.Model):
     reval_quant_ids = fields.One2many('stock.inventory.revaluation.quant',
                                       'revaluation_id',
                                       string='Revaluation line quants')
-    move_ids = fields.One2many(
+    account_move_ids = fields.One2many(
         comodel_name='account.move',
         inverse_name='stock_inventory_revaluation_id',
         readonly=True)
@@ -361,13 +361,13 @@ class StockInventoryRevaluation(models.Model):
         for revaluation in self:
             for reval_quant in revaluation.reval_quant_ids:
                 reval_quant.quant_id.write({'cost': reval_quant.old_cost})
-            if revaluation.move_ids:
+            if revaluation.account_move_ids:
                 # second, invalidate the move(s)
-                revaluation.move_ids.button_cancel()
+                revaluation.account_move_ids.button_cancel()
                 # delete the move this revaluation was pointing to
                 # Note that the corresponding move_lines and move_reconciles
                 # will be automatically deleted too
-                revaluation.move_ids.unlink()
+                revaluation.account_move_ids.unlink()
             revaluation.state = 'cancel'
         return True
 

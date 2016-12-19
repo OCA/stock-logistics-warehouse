@@ -93,8 +93,9 @@
                                         </tree>
                                     </field>
                                 </page>
-                                <page name="moves" string="Journal Entries">
-                                    <field name="move_ids" nolabel="1"/>
+                                <page name="account_moves"
+                                      string="Journal Entries">
+                                    <field name="account_move_ids" nolabel="1"/>
                                 </page>
                             </notebook>
                     </sheet>
