@@ -71,7 +71,7 @@ class StockValuationAccountManualAdjustment(models.Model):
         'Posting Date', states={'done': [('readonly', True)]},
         help="Date of actual processing")
 
-    move_ids = fields.One2many(
+    account_move_ids = fields.One2many(
         comodel_name='account.move',
         inverse_name='stock_valuation_account_manual_adjustment_id',
         readonly=True)
