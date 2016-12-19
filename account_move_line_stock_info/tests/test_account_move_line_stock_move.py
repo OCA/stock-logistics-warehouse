@@ -148,11 +148,6 @@ class TestAccountMoveLineStockInfo(common.TransactionCase):
                 self.assertEqual(aml.name, move.name)
                 account_move_line = aml
 
-        for move in picking_in.move_lines:
-            self.assertEqual(len(move.account_move_line_ids), 2)
-            for aml in move.account_move_line_ids:
-                self.assertEqual(aml.name, move.name)
-
         picking_out = self._create_picking(
             self.picking_type_out, self.location_supplier, self.location_stock)
         picking_out.action_confirm()
@@ -163,7 +158,7 @@ class TestAccountMoveLineStockInfo(common.TransactionCase):
             for aml in move.account_move_line_ids:
                 self.assertEqual(aml.name, move.name)
 
-        # Test that the account user can access to the stock info
+        # Test that the account invoice user can access to the stock info
         self.assertEqual(account_move_line.sudo(
             self.account_invoice).stock_move_id.name,
             account_move_line.sudo(self.account_invoice).name)
