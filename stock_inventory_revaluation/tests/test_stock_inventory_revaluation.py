@@ -231,7 +231,7 @@ class TestStockInventoryRevaluation(TransactionCase):
             invent_price_change_real.account_move_ids[0].line_id), 2,
             'Incorrect accounting entry generated')
 
-        for move_line in invent_price_change_real.move_ids[0].line_id:
+        for move_line in invent_price_change_real.account_move_ids[0].line_id:
             if move_line.account_id == self.account_inventory:
                 self.assertEqual(move_line.credit, expected_result,
                                  'Incorrect inventory revaluation for '
@@ -260,7 +260,8 @@ class TestStockInventoryRevaluation(TransactionCase):
             invent_price_change_average.account_move_ids[0].line_id), 2,
             'Incorrect accounting entry generated')
 
-        for move_line in invent_price_change_average.move_ids[0].line_id:
+        for move_line in \
+                invent_price_change_average.account_move_ids[0].line_id:
             if move_line.account_id == self.account_inventory:
                 self.assertEqual(move_line.credit, expected_result,
                                  'Incorrect inventory revaluation for '
@@ -287,7 +288,7 @@ class TestStockInventoryRevaluation(TransactionCase):
             invent_value_change.account_move_ids[0].line_id), 2,
             'Incorrect accounting entry generated')
 
-        for move_line in invent_value_change.move_ids[0].line_id:
+        for move_line in invent_value_change.account_move_ids[0].line_id:
             if move_line.account_id == self.account_inventory:
                 self.assertEqual(move_line.credit, 50.0,
                                  'Incorrect inventory revaluation for '
