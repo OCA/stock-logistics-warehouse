@@ -10,14 +10,16 @@ If your company runs a perpetual inventory system, changing the
 product's costing method or the type of product requires proper readjustments:
 
 Changing the type of product.
+
 * From consumable to stockable: the resulting inventory value will be reset
-  to 0, since everything that was received as a  stockable was expensed out at
-  the time of entering the supplier invoice.
+  to 0, since everything that was received as a  stockable was expensed out
+  at the time of entering the supplier invoice.
 
 Changing the costing method:
 
 * From standard or average to real: the cost of all the existing quants will
   be reset to the product's standard price.
+
 * From real to standard or average: the standard price of the product
   template will be set to the average unit cost of all the internal quants.
 
