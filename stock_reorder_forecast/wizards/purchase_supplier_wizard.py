@@ -110,9 +110,6 @@ class PurchaseSupplierWizard(models.TransientModel):
     )
     ultimate_purchase = fields.Date("ultimate purchase")
     pending_rfq_lines = fields.Many2many("purchase.order.line")
-    name = fields.Char(
-        string="Name", size=256, readonly="1"
-    )
     stock_period_min = fields.Integer(
         string="Delivery period",
         readonly="1",

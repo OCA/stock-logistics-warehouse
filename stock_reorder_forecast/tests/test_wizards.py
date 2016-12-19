@@ -91,8 +91,6 @@ class TestWizards(TransactionCase):
         )
         partner = self.supplier3.name
         wiz_primary_dict = {
-            'product': self.product_period180.id,
-            'supplier': self.supplier3.id,
             'name': partner.id,
             'stock_period_min': self.supplier3.name.stock_period_min,
             'stock_period_max': self.supplier3.name.stock_period_max,
