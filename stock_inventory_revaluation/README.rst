@@ -12,9 +12,9 @@ inventory revaluation.
 You can re-valuate inventory values by:
 
 * Changing the inventory valuation of a specific product. The cost price
- is changed, and the inventory value is recalculated according to the new
- price. In case of real price, you can select on which quants you want to
- change the unit cost.
+  is changed, and the inventory value is recalculated according to the new
+  price. In case of real price, you can select on which quants you want to
+  change the unit cost.
 
 * Changing the value of the inventory. The quantity of inventory remains
   unchanged, resulting in a change in the price.
