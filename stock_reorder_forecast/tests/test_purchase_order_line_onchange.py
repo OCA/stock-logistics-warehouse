@@ -49,7 +49,6 @@ class TestOnchangeProductId(TransactionCase):
             {'name': "TESTPRDTMPL",
              'list_price': 88,
              'supplier_taxes_id': [(6, 0, [tax_include_id.id])],
-             'stock_period_max': 100,
              'categ_id': category_per30.id, }
         )
 
