@@ -20,11 +20,13 @@ them.
 Usage
 =====
 
-* Go to the list of products or product variants. You can see in the tree
-  view the inventory value and the accounting value.
+* Go to 'Warehouse / Inventory Control / Real Time Inventory Valuation'
 
-* Selects the products that you wish to reconcile and press 'More /
+* Filter on 'Valuation Discrepancy != 0.0' using the advanced filter.
+
+* Select the products that you wish to reconcile and press 'More /
   Adjust Stock Valuation Account Discrepancies'.
+
 
 Known issues / Roadmap
 ======================

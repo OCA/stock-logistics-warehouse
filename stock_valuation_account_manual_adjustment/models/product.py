@@ -163,6 +163,48 @@ class ProductProduct(models.Model):
         return inventory_val
 
     @api.multi
+    def _search_accounting_value(self, operator, value):
+        if operator not in ops.keys():
+            raise exceptions.Warning(
+                _('Search operator %s not implemented for value %s')
+                % (operator, value)
+            )
+        accounting_val = self._get_accounting_valuation_by_product()
+
+        products = self.search([('active', '=', True), ('valuation', '=',
+                                                        'real_time')])
+        found_ids = []
+        for product in products:
+            if product.id in accounting_val.keys():
+                accounting_v = accounting_val[product.id]
+            else:
+                accounting_v = 0.0
+            if ops[operator](accounting_v, value):
+                found_ids.append(product.id)
+        return [('id', 'in', found_ids)]
+
+    @api.multi
+    def _search_inventory_value(self, operator, value):
+        if operator not in ops.keys():
+            raise exceptions.Warning(
+                _('Search operator %s not implemented for value %s')
+                % (operator, value)
+            )
+        inventory_val = self._get_inventory_valuation_by_product()
+
+        products = self.search([('active', '=', True), ('valuation', '=',
+                                                        'real_time')])
+        found_ids = []
+        for product in products:
+            if product.id in inventory_val.keys():
+                inventory_v = inventory_val[product.id]
+            else:
+                inventory_v = 0.0
+            if ops[operator](inventory_v, value):
+                found_ids.append(product.id)
+        return [('id', 'in', found_ids)]
+
+    @api.multi
     def _search_valuation_discrepancy(self, operator, value):
         if operator not in ops.keys():
             raise exceptions.Warning(
@@ -189,14 +231,19 @@ class ProductProduct(models.Model):
                 found_ids.append(product.id)
         return [('id', 'in', found_ids)]
 
-    inventory_value = fields.Float(string='Inventory Value',
-                                   compute='_compute_inventory_account_value',
-                                   digits=UNIT)
-    accounting_value = fields.Float(string='Accounting Value',
-                                    compute='_compute_inventory_account_value',
-                                    digits=UNIT)
+    inventory_value = fields.Float(
+        string='Inventory Value', compute='_compute_inventory_account_value',
+        search="_search_inventory_value", digits=UNIT,
+        groups='stock_valuation_account_manual_adjustment.'
+               'group_stock_valuation_account_manual_adjustment')
+    accounting_value = fields.Float(
+        string='Accounting Value', compute='_compute_inventory_account_value',
+        search="_search_accounting_value", digits=UNIT,
+        groups='stock_valuation_account_manual_adjustment.'
+               'group_stock_valuation_account_manual_adjustment')
     valuation_discrepancy = fields.Float(
         string='Valuation discrepancy',
         compute='_compute_inventory_account_value',
-        search="_search_valuation_discrepancy",
-        digits=UNIT)
+        search="_search_valuation_discrepancy", digits=UNIT,
+        groups='stock_valuation_account_manual_adjustment.'
+               'group_stock_valuation_account_manual_adjustment')

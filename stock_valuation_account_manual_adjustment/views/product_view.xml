@@ -20,6 +20,19 @@
           </field>
         </record>
 
+        <record id="product_search_form_view" model="ir.ui.view">
+            <field name="name">product.product.search</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="inventory_value"/>
+                    <field name="accounting_value"/>
+                    <field name="valuation_discrepancy"/>
+                </field>
+            </field>
+        </record>
+
         <record model="ir.actions.act_window"
                 id="action_product_inventory_valuation">
             <field name="name">Real-time Inventory Valuation</field>
@@ -28,6 +41,7 @@
             <field name="view_mode">tree,form</field>
             <field name="domain">[('valuation', '=', 'real_time')]</field>
             <field name="view_id" ref="view_product_inventory_valuation_tree"/>
+            <field name="search_view_id" ref="product_search_form_view"/>
         </record>
 
         <menuitem name="Real-time Inventory Valuation"
