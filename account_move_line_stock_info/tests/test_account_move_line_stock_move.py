@@ -32,20 +32,20 @@ class TestAccountMoveLineStockInfo(common.TransactionCase):
             'account.group_account_manager')
 
         # Create account for Goods Received Not Invoiced
-        acc_type = 'equity'
+        acc_type = self._create_account_type('equity', 'other')
         name = 'Goods Received Not Invoiced'
         code = 'grni'
         self.account_grni = self._create_account(acc_type, name, code,
                                                  self.company)
 
         # Create account for Cost of Goods Sold
-        acc_type = 'expense'
+        acc_type = self._create_account_type('expense', 'other')
         name = 'Cost of Goods Sold'
         code = 'cogs'
         self.account_cogs = self._create_account(acc_type, name, code,
                                                  self.company)
         # Create account for Inventory
-        acc_type = 'asset'
+        acc_type = self._create_account_type('asset', 'other')
         name = 'Inventory'
         code = 'inventory'
         self.account_inventory = self._create_account(acc_type, name, code,
@@ -82,14 +82,20 @@ class TestAccountMoveLineStockInfo(common.TransactionCase):
                 })
         return user.id
 
+    def _create_account_type(self, name, type):
+        acc_type = self.acc_type_model.create({
+            'name': name,
+            'type': type
+        })
+        return acc_type
+
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
-        types = self.acc_type_model.search([('code', '=', acc_type)])
         account = self.account_model.create({
             'name': name,
             'code': code,
             'type': 'other',
-            'user_type': types and types[0].id,
+            'user_type_id': acc_type.id,
             'company_id': company.id
         })
         return account
