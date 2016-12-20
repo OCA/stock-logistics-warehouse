@@ -60,7 +60,9 @@ class PurchaseWizard(models.TransientModel):
             purchase_multiple = 1
         qty = int((qty + purchase_multiple - 1) / purchase_multiple)
         qty = qty * purchase_multiple
-        return abs(qty)
+        if qty < 0:
+            qty = 0
+        return qty
 
     @api.multi
     def create_rfq(self):
