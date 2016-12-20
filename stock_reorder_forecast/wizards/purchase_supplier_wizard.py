@@ -97,8 +97,8 @@ class PurchaseSupplierWizard(models.TransientModel):
         return purchase_order
 
     name = fields.Many2one(
+        comodel_name="res.partner",
         string='Supplier name'
-        "res.partner"
     )
     supplier_products = fields.Many2many(
         "product.template",
