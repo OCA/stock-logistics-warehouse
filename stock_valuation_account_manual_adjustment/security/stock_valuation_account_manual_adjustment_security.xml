@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+
+    <record model="ir.rule" id="stock_valuation_account_manual_adjustment_comp_rule">
+        <field name="name">Stock Inventory Revaluation multi-company</field>
+        <field name="model_id" ref="model_stock_valuation_account_manual_adjustment"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('company_id','=',False),
+            ('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+
+    <record id="group_stock_valuation_account_manual_adjustment"
+            model="res.groups">
+        <field name="name">Stock Valuation Account Manual Adjustments</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+</data>
+</openerp>
