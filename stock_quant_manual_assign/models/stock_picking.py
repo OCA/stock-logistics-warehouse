@@ -19,4 +19,4 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     picking_type_code = fields.Selection(
-        related='picking_type_id.code', store=True)
+        related='picking_type_id.code', store=True, readonly=True)
