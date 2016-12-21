@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_stock_valuation_account_mass_adjust"
+                model="ir.ui.view">
+            <field name="name">Mass Adjust Stock Valuation Account Discrepancies</field>
+            <field name="model">stock.valuation.account.mass.adjust</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                 <form string="Reconcile Inventory Account">
+                     <group>
+                         <field name="increase_account_id"/>
+                         <field name="decrease_account_id"/>
+                         <field name="journal_id"/>
+                         <field name="remarks"/>
+                     </group>
+                     <newline/>
+                     <footer>
+                         <button name="process"
+                                 string="Process"
+                                 type="object"
+                                 class="oe_highlight"
+                                 groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment"/>
+                         <button special="cancel" string="Cancel" class="oe_link"/>
+                     </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_valuation_account_mass_adjust"
+                model="ir.actions.act_window">
+            <field name="name">Adjust Stock Valuation Account Discrepancies</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.valuation.account.mass.adjust</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id"
+                   ref="view_stock_valuation_account_mass_adjust"/>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.values"
+                id="product_stock_valuation_account_mass_adjust">
+            <field name="model_id" ref="model_product_product" />
+            <field name="name">Adjust Stock Valuation Account Discrepancies</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value"
+                   eval="'ir.actions.act_window,' + str(ref('action_stock_valuation_account_mass_adjust'))" />
+            <field name="key">action</field>
+            <field name="model">product.product</field>
+        </record>
+
+    </data>
+</openerp>
+
