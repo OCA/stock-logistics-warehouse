@@ -9,13 +9,12 @@ Stock Orderpoint Manual Procurement
 This module allows users to manually start procurements from the list of
 reordering rules, based on the quantity that is recommended to be procured.
 
-
 Usage
 =====
 
-Go to 'Configuration / Reordering Rules' and review the quantity recommended
-to be procured. You can now start the procurement for a single or a list of
-reordering rules.
+Go to 'Inventory > Inventory Control > Reordering Rules' and review the
+quantity recommended to be procured. You can now start the procurement for a
+single or a list of reordering rules.
 
 The recommended quantity to procure is adjusted to the procurement unit of
 measure indicated in the reordering rule.
@@ -27,7 +26,6 @@ procurements from reordering rules', under 'Settings / Users / Users'.
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/8.0
-
 
 Bug Tracker
 ===========
@@ -49,7 +47,7 @@ Contributors
 ------------
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
-
+* Lois Rilo Antelo <lois.rilo@eficent.com>
 
 Maintainer
 ----------
