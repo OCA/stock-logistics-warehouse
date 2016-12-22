@@ -6,7 +6,7 @@
     "name": "Stock Orderpoint manual procurement",
     "summary": "Allows to create procurement orders from orderpoints instead "
                "of relying only on the scheduler",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L,"
               "Odoo Community Association (OCA)",
     "website": "https://www.odoo-community.org",
@@ -20,5 +20,5 @@
              ],
     "license": "AGPL-3",
     'installable': True,
-    'application': True,
+    'application': False,
 }
