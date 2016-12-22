@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_procurement_filter" model="ir.ui.view">
+            <field name="name">procurement.order.select</field>
+            <field name="model">procurement.order</field>
+            <field name="inherit_id"
+                   ref="procurement.view_procurement_filter"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="orderpoint_id"/>
+                </field>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>
