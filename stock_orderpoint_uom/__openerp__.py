@@ -6,7 +6,7 @@
     "name": "Stock Orderpoint UoM",
     "summary": "Allows to create procurement orders in the UoM indicated in "
                "the orderpoint",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L,"
               "Odoo Community Association (OCA)",
     "website": "https://www.odoo-community.org",
