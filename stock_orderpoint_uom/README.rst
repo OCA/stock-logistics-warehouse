@@ -15,17 +15,23 @@ created, the quantity to be transferred will be expressed in meters, making
 it easier for the people responsible for the transfers to understand the
 requirement.
 
+Configuration
+=============
+
+To configure this module, you need to 'Inventory > Configuration > Settings'
+and enable 'Some products may be sold/purchased in different unit of measures
+(advanced)' option.
 
 Usage
 =====
 
-Go to 'Configuration / Reordering Rules' and indicate a Procurement UoM.
+Go to 'Inventory > Inventory Control > Reordering Rules' and indicate a
+Procurement UoM.
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/8.0
-
 
 Bug Tracker
 ===========
