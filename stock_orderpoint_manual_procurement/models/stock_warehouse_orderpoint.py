@@ -19,12 +19,14 @@ class StockWarehouseOrderpoint(models.Model):
     @api.depends("product_min_qty", "product_id", "qty_multiple")
     def _compute_procure_recommended(self):
         procurement_model = self.env['procurement.order']
+        op_qtys = self.subtract_procurements_from_orderpoints(self.ids)
         for op in self:
             op.procure_recommended_date = \
                 procurement_model._get_orderpoint_date_planned(
                     op, datetime.today())
             procure_recommended_qty = 0.0
-            prods = procurement_model._product_virtual_get(op)
+            prods = op.with_context(
+                location=op.location_id.id).product_id.virtual_available
             if prods is None:
                 continue
             if float_compare(prods, op.product_min_qty,
@@ -41,8 +43,7 @@ class StockWarehouseOrderpoint(models.Model):
                         precision_rounding=op.product_uom.rounding) <= 0:
                     continue
 
-                qty -= op.subtract_procurements(op)
-
+                qty -= op_qtys[op.id]
                 qty_rounded = float_round(
                     qty, precision_rounding=op.product_uom.rounding)
                 if qty_rounded > 0:
