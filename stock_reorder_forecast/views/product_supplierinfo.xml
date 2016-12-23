@@ -26,7 +26,7 @@
                 <field name="delay" position="after" >
                     <field name="stock_period_min"/>
                     <field name="purchase_multiple"/>
-                </xpath>
+                </field>
             </field>
         </record>
 
