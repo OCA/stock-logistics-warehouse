@@ -32,6 +32,8 @@ class ResPartner(models.Model):
     def _compute_product_supplierinfo_primary(self):
         """given a partner, return a list of products it provides
         as primary supplier"""
+        if not self.ids:
+            return
         self.env.cr.execute(
             """
             with  min_select as (
@@ -58,6 +60,8 @@ class ResPartner(models.Model):
     @api.multi
     def _compute_product_supplierinfo(self):
         """given a partner, return a list of all products it provides"""
+        if not self.ids:
+            return
         self.env.cr.execute(
             'select name, array_agg(product_tmpl_id) from product_supplierinfo'
             ' where name in %s   group by name ', (tuple(self.ids),)
