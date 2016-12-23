@@ -4,7 +4,7 @@
         <!-- Proposal purchase -->
         <record id="wizard_create_purchase" model="ir.ui.view">
             <field name="name">Create RFQ</field>
-            <field name="model">purchase.purchase_wizard</field>
+            <field name="model">purchase.wizard</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Create proposal purchase">
@@ -36,7 +36,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="name">Create RFQ for product</field>
             <field name="view_type">form</field>
-            <field name="res_model">purchase.purchase_wizard</field>
+            <field name="res_model">purchase.wizard</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="wizard_create_purchase"/>
             <field name ="target">new</field>

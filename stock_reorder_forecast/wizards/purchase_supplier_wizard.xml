@@ -3,7 +3,7 @@
     <data>
         <record id="wizard_create_supplier_purchase" model="ir.ui.view">
             <field name="name">Create RFQ of all products of supplier</field>
-            <field name="model">purchase.purchase_supplier_wizard</field>
+            <field name="model">purchase.supplier.wizard</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Create proposal purchases for all products of supplier">
@@ -45,7 +45,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="name">Create RFQ for product</field>
             <field name="view_type">form</field>
-            <field name="res_model">purchase.purchase_supplier_wizard</field>
+            <field name="res_model">purchase.supplier.wizard</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="wizard_create_supplier_purchase"/>
             <field name ="target">new</field>

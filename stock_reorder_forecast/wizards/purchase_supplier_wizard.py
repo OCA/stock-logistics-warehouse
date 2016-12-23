@@ -9,7 +9,7 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DSDF
 
 class PurchaseSupplierWizard(models.TransientModel):
 
-    _name = "purchase.purchase_supplier_wizard"
+    _name = "purchase.supplier.wizard"
     _description = "wizard create proposal purchase from supplier"
 
     @api.model
@@ -109,7 +109,10 @@ class PurchaseSupplierWizard(models.TransientModel):
         string="Products supplied by this partner as primary",
     )
     ultimate_purchase = fields.Date("ultimate purchase")
-    pending_rfq_lines = fields.Many2many("purchase.order.line")
+    pending_rfq_lines = fields.Many2many(
+        comodel_name="purchase.order.line",
+        relation="purchase_supplier_wizard_order_lines_rel",
+    )
     stock_period_min = fields.Integer(
         string="Delivery period",
         readonly="1",
