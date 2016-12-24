@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-18 03:44+0000\n"
+"POT-Creation-Date: 2016-12-23 02:06+0000\n"
+"PO-Revision-Date: 2016-12-23 02:06+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Finnish (https://www.transifex.com/oca/teams/23907/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -181,7 +181,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uom_qty:0
 msgid "Quantity"
-msgstr ""
+msgstr "Määrä"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uos_qty:0

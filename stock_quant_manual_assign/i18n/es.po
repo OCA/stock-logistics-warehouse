@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2016-12-23 02:06+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -136,12 +136,12 @@ msgstr "Quants"
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,move_qty:0
 msgid "Remaining qty"
-msgstr ""
+msgstr "Cantidad restante"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,lines_qty:0
 msgid "Reserved qty"
-msgstr ""
+msgstr "Ctad. reservada"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,selected:0
@@ -156,7 +156,7 @@ msgstr "Movimiento de existencias"
 #. module: stock_quant_manual_assign
 #: help:assign.manual.quants.lines,package_id:0
 msgid "The package containing this quant"
-msgstr ""
+msgstr "El paquete que contiene este quant"
 
 #. module: stock_quant_manual_assign
 #: field:stock.move,picking_type_code:0

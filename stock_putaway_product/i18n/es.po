@@ -4,14 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# oihane <oihanecruce@gmail.com>, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-18 03:44+0000\n"
-"Last-Translator: oihane <oihanecruce@gmail.com>, 2016\n"
+"POT-Creation-Date: 2016-12-23 02:06+0000\n"
+"PO-Revision-Date: 2016-12-23 02:06+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2016\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. module: stock_putaway_product
 #: model:ir.model,name:stock_putaway_product.model_stock_change_product_qty
 msgid "Change Product Quantity"
-msgstr ""
+msgstr "Cambiar cantidad de producto"
 
 #. module: stock_putaway_product
 #: field:stock.product.putaway.strategy,create_uid:0
@@ -42,7 +42,7 @@ msgstr "Nombre mostrado"
 #. module: stock_putaway_product
 #: field:product.putaway,product_location_ids:0
 msgid "Fixed per product location"
-msgstr ""
+msgstr "Fija por ubicación del producto"
 
 #. module: stock_putaway_product
 #: field:stock.product.putaway.strategy,id:0
@@ -83,24 +83,24 @@ msgstr "Plantilla de producto"
 #. module: stock_putaway_product
 #: field:stock.product.putaway.strategy,product_product_id:0
 msgid "Product Variant"
-msgstr ""
+msgstr "Variante de producto"
 
 #. module: stock_putaway_product
 #: view:product.product:stock_putaway_product.product_normal_form_view
 #: view:stock.product.putaway.strategy:stock_putaway_product.product_putaway_strategy_view_form
 msgid "Product putaway stragegy"
-msgstr ""
+msgstr "Estrategia de colocación del producto"
 
 #. module: stock_putaway_product
 #: field:product.product,product_putaway_ids:0
 #: field:product.template,product_putaway_ids:0
 msgid "Product stock locations"
-msgstr ""
+msgstr "Ubicaciones de existencias del producto"
 
 #. module: stock_putaway_product
 #: model:ir.model,name:stock_putaway_product.model_product_putaway
 msgid "Put Away Strategy"
-msgstr ""
+msgstr "Estrategia de colocación"
 
 #. module: stock_putaway_product
 #: field:stock.product.putaway.strategy,putaway_id:0

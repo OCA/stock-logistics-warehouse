@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2016-12-23 02:06+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -72,12 +72,12 @@ msgstr "Última atualização em"
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,location_id:0
 msgid "Location"
-msgstr ""
+msgstr "Location"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,lot_id:0
 msgid "Lot"
-msgstr ""
+msgstr "Lot"
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -104,7 +104,7 @@ msgstr "Nome"
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,package_id:0
 msgid "Package"
-msgstr ""
+msgstr "Package"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
@@ -135,12 +135,12 @@ msgstr "Quants"
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,move_qty:0
 msgid "Remaining qty"
-msgstr ""
+msgstr "Remaining qty"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,lines_qty:0
 msgid "Reserved qty"
-msgstr ""
+msgstr "Reserved qty"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,selected:0
@@ -155,7 +155,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: help:assign.manual.quants.lines,package_id:0
 msgid "The package containing this quant"
-msgstr ""
+msgstr "The package containing this quant"
 
 #. module: stock_quant_manual_assign
 #: field:stock.move,picking_type_code:0
