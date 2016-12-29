@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-
-
+<odoo>
         <record id="view_move_line_form" model="ir.ui.view">
             <field name="name">account.move.line.form</field>
             <field name="model">account.move.line</field>
@@ -52,22 +49,11 @@
                 <field name="partner_id" position="after">
                     <field name="product_id"/>
                 </field>
-                <filter string="Partner" position="after">
+                <group position="inside">
                         <filter name="group_product_id" string="Product"
                                 domain="[]"
                                 context="{'group_by':'product_id'}"/>
-                </filter>
-            </field>
-        </record>
-
-        <record id="view_move_line_tree_reconcile" model="ir.ui.view">
-            <field name="model">account.move.line</field>
-            <field name="inherit_id" ref="account.view_move_line_tree_reconcile"/>
-            <field name="arch" type="xml">
-                <field name="partner_id" position="after">
-                    <field name="product_id"/>
-
-                </field>
+                </group>
             </field>
         </record>
 
@@ -76,18 +62,11 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
-                <xpath
-                        expr="//field[@name='line_id']/form//field[@name='quantity']" position="before">
-                    <field name="product_id"/>
-                    <field name="quantity"/>
-                </xpath>
-                <xpath
-                        expr="//field[@name='line_id']/tree//field[@name='partner_id']" position="after">
+                <xpath expr="//field[@name='line_ids']/tree//field[@name='partner_id']" position="after">
                     <field name="product_id"/>
                     <field name="quantity"/>
                 </xpath>
             </field>
         </record>
 
-    </data>
-</openerp>
+</odoo>
