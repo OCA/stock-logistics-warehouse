@@ -22,6 +22,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[account_move_line_product](account_move_line_product/) | 8.0.1.0.0 | Account Move Line Product
 [account_move_line_stock_info](account_move_line_stock_info/) | 8.0.1.0.0 | Account Move Line Stock Move
 [partner_location_auto_create](partner_location_auto_create/) | 8.0.0.1.0 | Partner Location Auto Create
 [stock_account_change_product_valuation](stock_account_change_product_valuation/) | 8.0.1.0.0 | Adjusts valuation of the products and quants when the cost method or type of a product changes
