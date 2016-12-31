@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-08 00:48+0000\n"
-"PO-Revision-Date: 2016-04-27 15:36+0000\n"
+"POT-Creation-Date: 2016-12-30 03:46+0000\n"
+"PO-Revision-Date: 2016-12-27 08:26+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -25,6 +25,11 @@ msgid ""
 "                        of the selected quotation lines. If a validity date is specified,\n"
 "                        the reservation will be released once the date has passed."
 msgstr "Za proizvode izbranih postavk predračuna bo ustvarjena\n                        rezervacija zaloge. Če se določi datum veljavnosti,\n                        bo rezervacija izdana po poteku tega datuma."
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,account_move_line_ids:0
+msgid "Account move line ids"
+msgstr "ID-ji postavk kontnih premikov"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:188

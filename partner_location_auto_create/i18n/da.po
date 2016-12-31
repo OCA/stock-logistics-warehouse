@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"POT-Creation-Date: 2016-12-30 03:45+0000\n"
 "PO-Revision-Date: 2016-10-19 12:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Danish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/da/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Virksomheder"
 
 #. module: partner_location_auto_create
 #: field:res.company,default_customer_location:0

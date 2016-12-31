@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 02:06+0000\n"
-"PO-Revision-Date: 2016-12-20 10:43+0000\n"
+"POT-Creation-Date: 2016-12-30 03:46+0000\n"
+"PO-Revision-Date: 2016-12-27 08:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Cancel"
-msgstr ""
+msgstr "Batalkan"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:197

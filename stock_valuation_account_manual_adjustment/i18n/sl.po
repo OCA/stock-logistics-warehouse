@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 02:06+0000\n"
-"PO-Revision-Date: 2016-12-23 02:06+0000\n"
+"POT-Creation-Date: 2016-12-30 03:46+0000\n"
+"PO-Revision-Date: 2016-12-30 03:46+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2016\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,10 @@ msgid ""
 "              </p>\n"
 "            "
 msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Ustvari nov ročni popravek konta vrednotenja zaloge\n"
+"              </p>\n"
+"            "
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_account_move
@@ -36,23 +40,23 @@ msgstr "Knjigovodski vnos"
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,account_move_ids:0
 msgid "Account move ids"
-msgstr ""
+msgstr "ID-ji kontnih premikov"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:product.product,accounting_value:0
 #: field:stock.valuation.account.manual.adjustment,accounting_value:0
 msgid "Accounting Value"
-msgstr ""
+msgstr "Knjigovodska vrednost"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_stock_valuation_account_mass_adjust
 msgid "Adjust Stock Valuation Account Discrepancies"
-msgstr ""
+msgstr "Popravi neskadja konta vrednotenja zalog"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,amount:0
 msgid "Adjustment amount"
-msgstr ""
+msgstr "Znesek popravka"
 
 #. module: stock_valuation_account_manual_adjustment
 #: view:stock.valuation.account.mass.adjust:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
@@ -85,7 +89,7 @@ msgstr "Datum nastanka"
 #. module: stock_valuation_account_manual_adjustment
 #: help:stock.valuation.account.manual.adjustment,post_date:0
 msgid "Date of actual processing"
-msgstr ""
+msgstr "Datum dejanske obdelave"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,display_name:0
@@ -108,7 +112,7 @@ msgstr "ID"
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:62
 #, python-format
 msgid "Incorrect model."
-msgstr ""
+msgstr "Nepravilen model."
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:product.product,inventory_value:0
@@ -153,7 +157,7 @@ msgstr "Zadnjič posodobljeno"
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_stock_valuation_account_mass_adjust
 msgid "Mass Adjust Stock Valuation Account Discrepancies"
-msgstr ""
+msgstr "Masovno popravljanje neskladij konta vrednotenja zalog"
 
 #. module: stock_valuation_account_manual_adjustment
 #: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
@@ -168,12 +172,12 @@ msgstr "Knjiženo"
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,post_date:0
 msgid "Posting Date"
-msgstr ""
+msgstr "Datum vknjižbe"
 
 #. module: stock_valuation_account_manual_adjustment
 #: view:stock.valuation.account.mass.adjust:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
 msgid "Process"
-msgstr ""
+msgstr "Obdelaj"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_product_product
@@ -185,23 +189,23 @@ msgstr "Proizvod"
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:67
 #, python-format
 msgid "Product %s must have real time valuation"
-msgstr ""
+msgstr "Proizvod %s mora biti vrednoten v realnem času"
 
 #. module: stock_valuation_account_manual_adjustment
 #: view:product.product:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
 msgid "Product Inventory Valuation"
-msgstr ""
+msgstr "Vrednotenje inventarja proizvodov"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_product_inventory_valuation
 #: model:ir.ui.menu,name:stock_valuation_account_manual_adjustment.menu_action_product_inventory_valuation
 msgid "Real-time Inventory Valuation"
-msgstr ""
+msgstr "Realno-časovno vrednotenje inventarja"
 
 #. module: stock_valuation_account_manual_adjustment
 #: view:stock.valuation.account.mass.adjust:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
 msgid "Reconcile Inventory Account"
-msgstr ""
+msgstr "Usklajevanje konta inventarja"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,name:0
@@ -225,7 +229,7 @@ msgstr "Pripombe"
 #: code:addons/stock_valuation_account_manual_adjustment/models/product.py:211
 #, python-format
 msgid "Search operator %s not implemented for value %s"
-msgstr ""
+msgstr "Iskalni operator %s ni implementiran za vrednost %s"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,state:0
@@ -242,20 +246,20 @@ msgstr "Status"
 #: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_search
 #: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_tree
 msgid "Stock Valuation Account Manual Adjustment"
-msgstr ""
+msgstr "Ročno popravljanje konta vrednotenja zalog"
 
 #. module: stock_valuation_account_manual_adjustment
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:82
 #: model:res.groups,name:stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment
 #, python-format
 msgid "Stock Valuation Account Manual Adjustments"
-msgstr ""
+msgstr "Ročni popravki konta vrednotenja zalog"
 
 #. module: stock_valuation_account_manual_adjustment
 #: help:stock.valuation.account.manual.adjustment,remarks:0
 #: help:stock.valuation.account.mass.adjust,remarks:0
 msgid "This text is copied to the journal entry."
-msgstr ""
+msgstr "To besedilo se kopira v dnevniški vnos."
 
 #. module: stock_valuation_account_manual_adjustment
 #: view:product.product:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
@@ -266,19 +270,19 @@ msgstr "EM"
 #: field:stock.valuation.account.manual.adjustment,decrease_account_id:0
 #: field:stock.valuation.account.mass.adjust,decrease_account_id:0
 msgid "Valuation Decrease Contra-Account"
-msgstr ""
+msgstr "Proti-konto znižanja vrednosti"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,increase_account_id:0
 #: field:stock.valuation.account.mass.adjust,increase_account_id:0
 msgid "Valuation Increase Contra-Account"
-msgstr ""
+msgstr "Proti-konto zvišanja vrednosti"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:product.product,valuation_discrepancy:0
 #: field:stock.valuation.account.manual.adjustment,valuation_discrepancy:0
 msgid "Valuation discrepancy"
-msgstr ""
+msgstr "Neskladja vrednotenja"
 
 #. module: stock_valuation_account_manual_adjustment
 #: code:addons/stock_valuation_account_manual_adjustment/models/account_move.py:21
@@ -287,6 +291,8 @@ msgid ""
 "You cannot remove the journal entry that is related to a Stock valuation "
 "account manual adjustment "
 msgstr ""
+"Dnevniškega vnosa povezanega z ročnim popravljanjem konta vrednotenja zalog "
+"ne morete odstraniti"
 
 #. module: stock_valuation_account_manual_adjustment
 #: code:addons/stock_valuation_account_manual_adjustment/models/account_move.py:41
@@ -295,3 +301,5 @@ msgid ""
 "You cannot remove the journal item that is related to a Stock valuation "
 "account manual adjustment "
 msgstr ""
+"Dnevniške postavke povezane z ročnim popravljanjem konta vrednotenja zalog "
+"ne morete odstraniti"

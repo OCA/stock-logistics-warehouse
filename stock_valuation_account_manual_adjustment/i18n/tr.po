@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 02:06+0000\n"
-"PO-Revision-Date: 2016-12-23 02:06+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2016-12-30 03:46+0000\n"
+"PO-Revision-Date: 2016-12-30 03:46+0000\n"
+"Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +91,7 @@ msgstr ""
 #: field:stock.valuation.account.manual.adjustment,display_name:0
 #: field:stock.valuation.account.mass.adjust,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: stock_valuation_account_manual_adjustment
 #: selection:stock.valuation.account.manual.adjustment,state:0
@@ -135,7 +136,7 @@ msgstr "Günlük Maddeleri"
 #: field:stock.valuation.account.manual.adjustment,__last_update:0
 #: field:stock.valuation.account.mass.adjust,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,write_uid:0
@@ -259,7 +260,7 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: view:product.product:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
 msgid "UoM"
-msgstr ""
+msgstr "UoM"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,decrease_account_id:0

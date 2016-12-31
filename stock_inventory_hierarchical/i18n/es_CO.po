@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"POT-Creation-Date: 2016-12-30 03:45+0000\n"
 "PO-Revision-Date: 2016-04-14 14:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (Colombia) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_CO/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,complete_name:0

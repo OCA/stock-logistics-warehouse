@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"POT-Creation-Date: 2016-12-30 03:45+0000\n"
 "PO-Revision-Date: 2016-04-14 14:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/tr/)\n"
@@ -40,7 +40,7 @@ msgstr "Oluşturuldu"
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:91
@@ -90,7 +90,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_uid:0
@@ -157,12 +157,12 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,parent_left:0
 msgid "Parent Left"
-msgstr ""
+msgstr "Sol Ebeveyn"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,parent_right:0
 msgid "Parent Right"
-msgstr ""
+msgstr "Sağ Ebeveyn"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,progress_rate:0
