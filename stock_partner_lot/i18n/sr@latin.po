@@ -11,12 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2016-12-24 06:36+0000\n"
 "PO-Revision-Date: 2016-12-24 06:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Croatian (Croatia) (https://www.transifex.com/oca/teams/23907/hr_HR/)\n"
+"Language-Team: Serbian (Latin) (https://www.transifex.com/oca/teams/23907/sr@latin/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hr_HR\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: sr@latin\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: stock_partner_lot
 #: model:ir.ui.view,arch_db:stock_partner_lot.view_res_partner_lots_filter
@@ -42,7 +42,7 @@ msgstr "Partner"
 #. module: stock_partner_lot
 #: model:ir.ui.view,arch_db:stock_partner_lot.view_res_partner_lots_filter
 msgid "Product"
-msgstr "Proizvod"
+msgstr ""
 
 #. module: stock_partner_lot
 #: model:ir.actions.act_window,name:stock_partner_lot.owned_quants
