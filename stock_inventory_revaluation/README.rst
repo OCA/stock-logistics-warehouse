@@ -51,6 +51,15 @@ Usage
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/154/8.0
 
+Known issues / Roadmap
+======================
+
+* A negative quant can be revaluated, but can also ultimately be merged with
+  a positive quant. In that case, the associated revaluation quant record
+  will be removed. In a future version a chatter could be added to the stock
+  inventory revaluation, and this kind of action would be logged for better
+  traceability.
+
 Bug Tracker
 ===========
 
