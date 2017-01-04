@@ -19,11 +19,11 @@ class TestWizards(TransactionCase):
             'base.res_partner_2'
         )
         self.supplier1 = self.env.ref(
-             'stock_reorder_forecast.product_supplierinfo_1'
+            'stock_reorder_forecast.product_supplierinfo_1'
         )
 
         self.product_noper = self.env.ref(
-             'stock_reorder_forecast.product_noper'
+            'stock_reorder_forecast.product_noper'
         )
         self.supplier3 = self.env.ref(
             'stock_reorder_forecast.product_supplierinfo_3'
@@ -108,8 +108,6 @@ class TestWizards(TransactionCase):
         move_obj = self.env['stock.move']
         picking_type_in = self.model_data_obj.xmlid_to_res_id(
             'stock.picking_type_in')
-        picking_type_out = self.model_data_obj.xmlid_to_res_id(
-            'stock.picking_type_out')
         supplier_location = self.model_data_obj.xmlid_to_res_id(
             'stock.stock_location_suppliers')
         stock_location = self.model_data_obj.xmlid_to_res_id(
