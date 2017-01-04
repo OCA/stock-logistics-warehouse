@@ -18,6 +18,13 @@ class TestWizards(TransactionCase):
         self.partner_agrolite_id = self.model_data_obj.xmlid_to_res_id(
             'base.res_partner_2'
         )
+        self.supplier1 = self.env.ref(
+             'stock_reorder_forecast.product_supplierinfo_1'
+        )
+
+        self.product_noper = self.env.ref(
+             'stock_reorder_forecast.product_noper'
+        )
         self.supplier3 = self.env.ref(
             'stock_reorder_forecast.product_supplierinfo_3'
         )
@@ -88,6 +95,52 @@ class TestWizards(TransactionCase):
             tstwiz._get_qty(self.product_period180, self.supplier3,
                             self.supplier3.name.stock_period_max),
             purchase.order_line[0].product_qty
+        )
+        # ==== testing qty less than 0
+        # make stock available > 0 so quantity to order will be <  0
+        # create an incoming shipment for 5  pieces of product_noper
+        # noper will have stock 5, therefore qty calculated for purchase will
+        # be -5, the calc_qty function will return 0.0. this check allows us
+        # not to generate POL's for products we don't need _get_qty <0 means do
+        # not order.
+        stock_pack_obj = self.env['stock.pack.operation']
+        picking_obj = self.env['stock.picking']
+        move_obj = self.env['stock.move']
+        picking_type_in = self.model_data_obj.xmlid_to_res_id(
+            'stock.picking_type_in')
+        picking_type_out = self.model_data_obj.xmlid_to_res_id(
+            'stock.picking_type_out')
+        supplier_location = self.model_data_obj.xmlid_to_res_id(
+            'stock.stock_location_suppliers')
+        stock_location = self.model_data_obj.xmlid_to_res_id(
+            'stock.stock_location_stock')
+        partner_delta_id = self.model_data_obj.xmlid_to_res_id(
+            'base.res_partner_4')
+        picking_in = picking_obj.create({
+            'partner_id': partner_delta_id,
+            'picking_type_id': picking_type_in,
+            'location_id': supplier_location,
+            'location_dest_id': stock_location})
+        move_obj.create({
+            'name': self.product_noper.name,
+            'product_id': self.product_noper.id,
+            'product_uom_qty': 5,
+            'product_uom': self.product_noper.uom_id.id,
+            'picking_id': picking_in.id,
+            'location_id': supplier_location,
+            'location_dest_id': stock_location})
+        picking_in.action_confirm()
+        picking_in.do_prepare_partial()
+        stock_pack_obj.search(
+            [('product_id', '=', self.product_noper.id),
+             ('picking_id', '=', picking_in.id)]).write({'product_qty': 5})
+        # Transfer Incoming Shipment.
+        picking_in.do_transfer()
+        self.assertEqual(5, self.product_noper.qty_available)
+        self.assertEqual(
+            tstwiz._get_qty(self.product_noper, self.supplier1,
+                            self.supplier1.name.stock_period_max),
+            0
         )
         partner = self.supplier3.name
         wiz_primary_dict = {
