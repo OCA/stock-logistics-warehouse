@@ -21,7 +21,7 @@
 
 {'name': 'Stock Reservation',
  'summary': 'Stock reservations on products',
- 'version': '8.0.0.2.0',
+ 'version': '10.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
@@ -39,5 +39,5 @@
  'auto_install': False,
  'test': ['test/stock_reserve.yml',
           ],
- 'installable': False,
+ 'installable': True,
  }

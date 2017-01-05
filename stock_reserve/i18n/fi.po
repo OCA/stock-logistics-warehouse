@@ -3,14 +3,15 @@
 # * stock_reserve
 # 
 # Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 20:23+0000\n"
-"PO-Revision-Date: 2015-09-15 13:05+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Finnish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fi/)\n"
+"POT-Creation-Date: 2017-07-28 02:58+0000\n"
+"PO-Revision-Date: 2017-07-28 02:58+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Finnish (https://www.transifex.com/oca/teams/23907/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,107 +19,416 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_reserve
-#: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
-msgid ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"                    Click to create a stock reservation.\n"
-"                    </p><p>\n"
-"                    This menu allow you to prepare and reserve some quantities\n"
-"                    of products.\n"
-"                </p>\n"
-"            "
-msgstr "<p class=\"oe_view_nocontent_create\">\n                    Klikkaa tästä luodaksesi tuotevarauksen.\n                    </p><p>\n                    Tuotevarauksella voit varata varastossa olevia tuote-eriä.\n                    Varattuja tuotteita ei voi siirtää varastosta pois, vaan ne on vapautettava ennen siirtoa.\n                </p>\n            "
+#: model:ir.model.fields,field_description:stock_reserve.field_product_product_reservation_count
+#: model:ir.model.fields,field_description:stock_reserve.field_product_template_reservation_count
+msgid "# Sales"
+msgstr ""
 
 #. module: stock_reserve
-#: field:stock.reservation,create_uid:0
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_state
+msgid ""
+"* New: When the stock move is created and not yet confirmed.\n"
+"* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
+"* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to be manufactured...\n"
+"* Available: When products are reserved, it is set to 'Available'.\n"
+"* Done: When the shipment is processed, the state is 'Done'."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_returned_move_ids
+msgid "All returned moves"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_string_availability_info
+msgid "Availability"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_backorder_id
+msgid "Back Order of"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_procure_method
+msgid ""
+"By default, the system will take from the stock in the source location and "
+"passively wait for availability.The other possibility allows you to directly"
+" create a procurement on the source location (and thus ignore its current "
+"stock) to gather products. If we want to chain moves and have this one to "
+"wait for the previous,this second option should be chosen."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_scrapped
+msgid ""
+"Check this box to allow using this location to put scrapped/damaged goods."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_partially_available
+msgid "Checks if the move has some stock reserved"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
+msgid "Click to create a stock reservation."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_company_id
+msgid "Company"
+msgstr "Yritys"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_create_uid
 msgid "Created by"
 msgstr "Luonut"
 
 #. module: stock_reserve
-#: field:stock.reservation,create_date:0
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_create_date
 msgid "Created on"
 msgstr "Luotu"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date
+msgid "Date"
+msgstr "Päivämäärä"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_name
+msgid "Description"
+msgstr "Kuvaus"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_partner_id
+msgid "Destination Address "
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_location_dest_id
+msgid "Destination Location"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_dest_id
+msgid "Destination Move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_route_ids
+msgid "Destination route"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Details"
 msgstr "Lisätiedot"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_display_name
+msgid "Display Name"
+msgstr "Nimi"
+
+#. module: stock_reserve
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Draft"
 msgstr "Luonnos"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date_expected
+msgid "Expected Date"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_availability
+msgid "Forecasted Quantity"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Group By..."
 msgstr "Ryhmittele..."
 
 #. module: stock_reserve
-#: field:stock.reservation,id:0
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_id
 msgid "ID"
 msgstr "ID"
 
 #. module: stock_reserve
-#: field:stock.reservation,write_uid:0
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_propagate
+msgid "If checked, when this move is cancelled, cancel the linked move too"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_backorder_id
+msgid ""
+"If this shipment was split, then this field links to the shipment which "
+"contains the already processed part."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_inventory_id
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_product_packaging
+msgid ""
+"It specifies attributes of packaging like type, quantity of packaging,etc."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation___last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_write_uid
 msgid "Last Updated by"
 msgstr "Viimeksi päivittänyt"
 
 #. module: stock_reserve
-#: field:stock.reservation,write_date:0
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_write_date
 msgid "Last Updated on"
 msgstr "Viimeksi päivitetty"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_linked_move_operation_ids
+msgid "Linked Operations"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_location_dest_id
+msgid "Location where the system will stock the finished products."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Locations"
 msgstr "Paikat"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_restrict_lot_id
+msgid "Lot/Serial Number"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_lot_ids
+msgid "Lots/Serial Numbers"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_split_from
+msgid "Move Split From"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_date
+msgid ""
+"Move date: scheduled date until move is done, then date of actual move "
+"processing"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_origin_returned_move_id
+msgid "Move that created the return move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_quant_ids
+msgid "Moved Quants"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Moves are reserved."
 msgstr "Siirrot on varattu."
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Not already reserved"
 msgstr "Ei vielä varattu"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_note
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Notes"
 msgstr "Huomautukset"
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_linked_move_operation_ids
+msgid ""
+"Operations that impact this move for the computation of the remaining "
+"quantities"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_partner_id
+msgid ""
+"Optional address where goods are to be delivered, specifically used for "
+"allotment"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_returned_move_ids
+msgid "Optional: all returned moves created from this move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_move_dest_id
+msgid "Optional: next stock move when chaining them"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_move_orig_ids
+msgid "Optional: previous stock move when chaining them"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_ordered_qty
+msgid "Ordered Quantity"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_origin_returned_move_id
+msgid "Origin return move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_orig_ids
+msgid "Original Move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_restrict_partner_id
+msgid "Owner "
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_partially_available
+msgid "Partially Available"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_type_id
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_packaging
+msgid "Preferred Packaging"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_route_ids
+msgid "Preferred route to be followed by the procurement order"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_priority
+msgid "Priority"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_procurement_id
+msgid "Procurement"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_group_id
+msgid "Procurement Group"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_rule_id
+msgid "Procurement Rule"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_product
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_id
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Product"
 msgstr "Tuote"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_template
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_tmpl_id
 msgid "Product Template"
 msgstr "Tuotteen malli"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Product UoM"
 msgstr "Tuotteen yksikkö"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_form
-#: view:stock.reservation:stock_reserve.view_stock_reservation_tree
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_propagate
+msgid "Propagate cancel and split"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_push_rule_id
+msgid "Push Rule"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_uom_qty
+msgid "Quantity"
+msgstr "Määrä"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_reserved_availability
+msgid "Quantity Reserved"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_availability
+msgid "Quantity in stock that can still be reserved for this move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_product_qty
+msgid "Quantity in the default UoM of the product"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_reserved_availability
+msgid "Quantity that has already been reserved for this move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_qty
+msgid "Real Quantity"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Release"
 msgstr "Vapauta"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Released"
 msgstr "Vapautettu"
 
 #. module: stock_reserve
-#: code:addons/stock_reserve/model/stock_reserve.py:188
-#: field:stock.reservation,move_id:0
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_remaining_qty
+msgid "Remaining Quantity"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_remaining_qty
+msgid ""
+"Remaining Quantity in default UoM according to operations matched with this "
+"move"
+msgstr ""
+
+#. module: stock_reserve
+#: code:addons/stock_reserve/model/stock_reserve.py:192
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_id
 #, python-format
 msgid "Reservation Move"
 msgstr "Varaussiirto"
@@ -129,28 +439,67 @@ msgid "Reservation Stock"
 msgstr "Varattu"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Reservations have been released."
 msgstr "Varaukset vapautettu."
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_form
-#: view:stock.reservation:stock_reserve.view_stock_reservation_tree
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Reserve"
 msgstr "Varaa"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Reserved"
 msgstr "Varattu"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_reserved_quant_ids
+msgid "Reserved quants"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_date_expected
+msgid "Scheduled date for the processing of this move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_scrapped
+msgid "Scrapped"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_sequence
+msgid "Sequence"
+msgstr "Järjestysluku"
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_location_id
+msgid ""
+"Sets a location if you produce at a fixed location. This can be a partner "
+"location if you subcontract the manufacturing operations."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_string_availability_info
+msgid "Show various information on stock availability for this move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_origin
+msgid "Source Document"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_location_id
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Source Location"
 msgstr "Lähtöpaikka"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_state
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Status"
 msgstr "Tila"
 
@@ -162,25 +511,124 @@ msgstr "Tuotevaraus"
 #. module: stock_reserve
 #: model:ir.actions.act_window,name:stock_reserve.action_stock_reservation_tree
 #: model:ir.ui.menu,name:stock_reserve.menu_action_stock_reservation
-#: view:product.product:stock_reserve.product_product_form_view_reservation_button
-#: view:product.template:stock_reserve.product_template_form_view_reservation_button
-#: view:stock.reservation:stock_reserve.view_stock_reservation_form
-#: view:stock.reservation:stock_reserve.view_stock_reservation_search
-#: view:stock.reservation:stock_reserve.view_stock_reservation_tree
+#: model:ir.ui.view,arch_db:stock_reserve.product_product_form_view_reservation_button
+#: model:ir.ui.view,arch_db:stock_reserve.product_template_form_view_reservation_button
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Stock Reservations"
 msgstr "Tuotevaraukset"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_tree
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_procure_method
+msgid "Supply Method"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_warehouse_id
+msgid ""
+"Technical field depicting the warehouse to consider for the route selection "
+"on the next procurement (if any)."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_restrict_lot_id
+msgid ""
+"Technical field used to depict a restriction on the lot/serial number of "
+"quants to consider when marking this move as 'done'"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_restrict_partner_id
+msgid ""
+"Technical field used to depict a restriction on the ownership of quants to "
+"consider when marking this move as 'done'"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_price_unit
+msgid ""
+"Technical field used to record the product cost set by the user during a "
+"picking confirmation (when costing method used is 'average price' or "
+"'real'). Value given in company currency and in product uom."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_split_from
+msgid ""
+"Technical field used to track the origin of a split move, which can be "
+"useful in case of debug"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_product_tmpl_id
+msgid "Technical: used in views"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_rule_id
+msgid "The procurement rule that created this stock move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_push_rule_id
+msgid "The push rule that created this stock move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_product_uom_qty
+msgid ""
+"This is the quantity of products from an inventory point of view. For moves "
+"in the state 'done', this is the quantity of products that were actually "
+"moved. For other moves, this is the quantity of product that is planned to "
+"be moved. Lowering this quantity does not generate a backorder. Changing "
+"this quantity on assigned moves affects the product reservation, and should "
+"be done with care."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
+msgid ""
+"This menu allow you to prepare and reserve some quantities\n"
+"            of products."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Total"
 msgstr "Yhteensä"
 
 #. module: stock_reserve
-#: field:stock.reservation,date_validity:0
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_partner_id
+msgid "Transfer Destination Address"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_id
+msgid "Transfer Reference"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_price_unit
+msgid "Unit Price"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_uom
+msgid "Unit of Measure"
+msgstr "Mittayksikkö"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date_validity
 msgid "Validity Date"
 msgstr "Vapautuspäivä"
 
 #. module: stock_reserve
-#: view:stock.reservation:stock_reserve.view_stock_reservation_form
+#: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "View Reservation Move"
 msgstr "Näytä varaussiirto"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_warehouse_id
+msgid "Warehouse"
+msgstr ""

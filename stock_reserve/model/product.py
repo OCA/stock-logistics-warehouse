@@ -19,27 +19,28 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     reservation_count = fields.Float(
-        compute='_reservation_count',
+        compute='_compute_reservation_count',
         string='# Sales')
 
-    @api.one
-    def _reservation_count(self):
-        self.reservation_count = sum(variant.reservation_count
-                                     for variant in self.product_variant_ids)
+    @api.multi
+    def _compute_reservation_count(self):
+        for product in self:
+            product.reservation_count = sum(
+                product.product_variant_ids.mapped('reservation_count'))
 
     @api.multi
     def action_view_reservations(self):
-        assert len(self._ids) == 1, "Expected 1 ID, got %r" % self._ids
+        self.ensure_one()
         ref = 'stock_reserve.action_stock_reservation_tree'
-        product_ids = self._get_products()
-        action_dict = self._get_act_window_dict(ref)
+        product_ids = self.mapped('product_variant_ids.id')
+        action_dict = self.env.ref(ref).read()[0]
         action_dict['domain'] = [('product_id', 'in', product_ids)]
         action_dict['context'] = {
             'search_default_draft': 1,
@@ -52,24 +53,23 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     reservation_count = fields.Float(
-        compute='_reservation_count',
+        compute='_compute_reservation_count',
         string='# Sales')
 
-    @api.one
-    def _reservation_count(self):
-        domain = [('product_id', '=', self.id),
-                  ('state', 'in', ['draft', 'assigned'])]
-        reservations = self.env['stock.reservation'].search(domain)
-        self.reservation_count = sum(reserv.product_qty
-                                     for reserv in reservations)
+    @api.multi
+    def _compute_reservation_count(self):
+        for product in self:
+            domain = [('product_id', '=', product.id),
+                      ('state', 'in', ['draft', 'assigned'])]
+            reservations = self.env['stock.reservation'].search(domain)
+            product.reservation_count = sum(reservations.mapped('product_qty'))
 
     @api.multi
     def action_view_reservations(self):
-        assert len(self._ids) == 1, "Expected 1 ID, got %r" % self._ids
+        self.ensure_one()
         ref = 'stock_reserve.action_stock_reservation_tree'
-        product_id = self._ids[0]
-        action_dict = self.product_tmpl_id._get_act_window_dict(ref)
-        action_dict['domain'] = [('product_id', '=', product_id)]
+        action_dict = self.env.ref(ref).read()[0]
+        action_dict['domain'] = [('product_id', '=', self.id)]
         action_dict['context'] = {
             'search_default_draft': 1,
             'search_default_reserved': 1
