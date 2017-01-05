@@ -19,9 +19,9 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-from openerp.exceptions import except_orm
-from openerp.tools.translate import _
+from odoo import models, fields, api
+from odoo.exceptions import except_orm
+from odoo.tools.translate import _
 
 
 class StockReservation(models.Model):
@@ -39,7 +39,7 @@ class StockReservation(models.Model):
 
     * company_id
     * location_id
-    * dest_location_id
+    * location_dest_id
 
     Optionally, you may be interested to define:
 
@@ -56,18 +56,56 @@ class StockReservation(models.Model):
         required=True,
         readonly=True,
         ondelete='cascade',
-        select=1)
+        index=True)
     date_validity = fields.Date('Validity Date')
 
     @api.model
     def default_get(self, fields_list):
+        """ Fix default values
+
+            - Ensure default value of computed field `product_qty` is not set
+              as it would raise an error
+            - Compute default `location_id` based on default `picking_type_id`.
+              Note: `default_picking_type_id` may be present in context,
+              so code that looks for default `location_id` is implemented here,
+              because it relies on already calculated default
+              `picking_type_id`.
         """
-        Ensure default value of computed field `product_qty` is not set
-        as it would raise an error
-        """
+        # if there is 'location_id' field requested, ensure that
+        # picking_type_id is also requested, because it is required
+        # to compute location_id
+        if ('location_id' in fields_list and
+                'picking_type_id' not in fields_list):
+            fields_list = fields_list + ['picking_type_id']
+
         res = super(StockReservation, self).default_get(fields_list)
+
         if 'product_qty' in res:
             del res['product_qty']
+
+        # At this point picking_type_id and location_id
+        # should be computed in default way:
+        #     1. look up context
+        #     2. look up ir_values
+        #     3. look up property fields
+        #     4. look up field.default
+        #     5. delegate to parent model
+        #
+        # If picking_type_id is present and location_id is not, try to find
+        # default value for location_id
+        if not res.get('picking_type_id', None):
+            res['picking_type_id'] = self._default_picking_type_id()
+
+        picking_type_id = res.get('picking_type_id')
+        if picking_type_id and not res.get('location_id', False):
+            picking = self.env['stock.picking'].new(
+                {'picking_type_id': picking_type_id})
+            picking.onchange_picking_type()
+            res['location_id'] = picking.location_id.id
+        if 'location_dest_id' in fields_list:
+            res['location_dest_id'] = self._default_location_dest_id()
+        if 'product_uom_qty' in fields_list:
+            res['product_uom_qty'] = 1.0
         return res
 
     @api.model
@@ -75,9 +113,8 @@ class StockReservation(models.Model):
         """ Get a location from a xmlid if allowed
         :param ref: tuple (module, xmlid)
         """
-        data_obj = self.env['ir.model.data']
         try:
-            location = data_obj.xmlid_to_object(ref, raise_if_not_found=True)
+            location = self.env.ref(ref, raise_if_not_found=True)
             location.check_access_rule('read')
             location_id = location.id
         except (except_orm, ValueError):
@@ -86,45 +123,24 @@ class StockReservation(models.Model):
 
     @api.model
     def _default_picking_type_id(self):
-        """ Search for an internal picking type
-        """
-        type_obj = self.env['stock.picking.type']
-
-        types = type_obj.search([('code', '=', 'internal')], limit=1)
-        if types:
-            return types[0].id
-        return False
-
-    @api.model
-    def _default_location_id(self):
-        move_obj = self.env['stock.move']
-        picking_type_id = self._default_picking_type_id()
-        return (move_obj
-                .with_context(default_picking_type_id=picking_type_id)
-                ._default_location_source())
+        ref = 'stock.picking_type_out'
+        return self.env.ref(ref, raise_if_not_found=False).id
 
     @api.model
     def _default_location_dest_id(self):
         ref = 'stock_reserve.stock_location_reservation'
         return self.get_location_from_ref(ref)
 
-    _defaults = {
-        'picking_type_id': _default_picking_type_id,
-        'location_id': _default_location_id,
-        'location_dest_id': _default_location_dest_id,
-        'product_uom_qty': 1.0,
-    }
-
     @api.multi
     def reserve(self):
-        """ Confirm a reservation
+        """ Confirm reservations
 
         The reservation is done using the default UOM of the product.
         A date until which the product is reserved can be specified.
         """
-        self.date_expected = fields.Datetime.now()
-        self.move_id.action_confirm()
-        self.move_id.picking_id.action_assign()
+        self.write({'date_expected': fields.Datetime.now()})
+        self.mapped('move_id').action_confirm()
+        self.mapped('move_id.picking_id').action_assign()
         return True
 
     @api.multi
@@ -142,8 +158,7 @@ class StockReservation(models.Model):
                   ('state', '=', 'assigned')]
         if ids:
             domain.append(('id', 'in', ids))
-        reserv_ids = self.search(domain)
-        reserv_ids.release()
+        self.search(domain).release()
         return True
 
     @api.multi
@@ -157,19 +172,11 @@ class StockReservation(models.Model):
         """ set product_uom and name from product onchange """
         # save value before reading of self.move_id as this last one erase
         # product_id value
-        product = self.product_id
-        # WARNING this gettattr erase self.product_id
-        move = self.move_id
-        result = move.onchange_product_id(
-            prod_id=product.id, loc_id=False, loc_dest_id=False,
-            partner_id=False)
-        if result.get('value'):
-            vals = result['value']
-            # only keep the existing fields on the view
-            self.name = vals.get('name')
-            self.product_uom = vals.get('product_uom')
-            # repeat assignation of product_id so we don't loose it
-            self.product_id = product.id
+        move = self.move_id or self.env['stock.move'].new(
+            {'product_id': self.product_id})
+        move.onchange_product_id()
+        self.name = move.name
+        self.product_uom = move.product_uom
 
     @api.onchange('product_uom_qty')
     def _onchange_quantity(self):
@@ -179,18 +186,14 @@ class StockReservation(models.Model):
 
     @api.multi
     def open_move(self):
-        assert len(self.ids) == 1, "1 ID expected, got %r" % self.ids
-        reserv = self.move_id
-        IrModelData = self.env['ir.model.data']
-        ref_form2 = 'stock.action_move_form2'
-        action = IrModelData.xmlid_to_object(ref_form2)
+        self.ensure_one()
+        action = self.env.ref('stock.stock_move_action')
         action_dict = action.read()[0]
         action_dict['name'] = _('Reservation Move')
         # open directly in the form view
-        ref_form = 'stock.view_move_form'
-        view_id = IrModelData.xmlid_to_res_id(ref_form)
+        view_id = self.env.ref('stock.view_move_form').id
         action_dict.update(
             views=[(view_id, 'form')],
-            res_id=reserv.id,
+            res_id=self.move_id.id,
             )
         return action_dict
