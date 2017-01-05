@@ -135,3 +135,70 @@
   !python {model: product.product}: |
     product = self.browse(cr, uid, ref('stock_reserve.product_sorbet'), context=context)
     assert product.virtual_available == 10.0, "Stock is not updated."
+
+-
+  I create a stock reservation for 3 kgm
+-
+ !record {model: stock.reservation, id: reserv_sorbet3}:
+    product_id: product_sorbet
+    product_uom_qty: 3.0
+    product_uom: product.product_uom_kgm
+    name: reserve 3 kg of sorbet for test (release on unlink)
+-
+  I confirm the reservation
+-
+  !python {model: stock.reservation}: |
+    self.reserve(cr, uid, [ref('reserv_sorbet3')], context=context)
+
+-
+  I press the open_move button on reservation and test result
+-
+  !python {model: stock.reservation}: |
+    reserv = self.browse(cr ,uid, ref('reserv_sorbet3'), context=context)
+    move = reserv.move_id
+    action_dict = reserv.open_move()
+    assert action_dict['res_model'] == 'stock.move', "action model is not 'stock.move'"
+    assert action_dict['res_id'] == move.id, "action res_id is not correct"
+    assert action_dict['id'] == ref('stock.action_move_form2'), "action not correct"
+    assert action_dict['views'][0][0] == ref('stock.view_move_form'), "action view not correct"
+
+-
+  I press button 'action_view_reservations' on product variant and test result
+-
+  !python {model: product.product}: |
+    product = self.browse(cr ,uid, ref('product_sorbet'), context=context)
+    action_dict = product.action_view_reservations()
+    assert action_dict['res_model'] == 'stock.reservation', "action model is not 'stock.move'"
+    assert len(action_dict['domain']) == 1, "wrong domain"
+    assert action_dict['domain'][0] == ('product_id', '=', product.id), "action domain is not correct"
+    assert action_dict['id'] == ref('stock_reserve.action_stock_reservation_tree'), "action not correct"
+    assert action_dict['context']['search_default_draft'] == 1, "wrong context"
+    assert action_dict['context']['search_default_reserved'] == 1, "wrong context"
+
+-
+  I press button 'action_view_reservations' on product template and test result
+-
+  !python {model: product.template}: |
+    from nose.tools import *
+
+    product = self.pool.get('product.product').browse(cr ,uid, ref('product_sorbet'), context=context)
+    product_tmpl = product.product_tmpl_id
+    product_ids = product_tmpl._get_products()
+
+    action_dict = product_tmpl.action_view_reservations()
+    assert action_dict['res_model'] == 'stock.reservation', "action model is not 'stock.move'"
+    assert len(action_dict['domain']) == 1, "wrong domain"
+    assert action_dict['domain'][0][:2] == ('product_id', 'in'), "action domain is not correct"
+    assert_items_equal(action_dict['domain'][0][-1],product_ids)
+    assert action_dict['id'] == ref('stock_reserve.action_stock_reservation_tree'), "action not correct"
+    assert action_dict['context']['search_default_draft'] == 1, "wrong context"
+    assert action_dict['context']['search_default_reserved'] == 1, "wrong context"
+
+-
+  I unlink the reservation
+-
+  !python {model: stock.reservation}: |
+    reserv = self.browse(cr ,uid, ref('reserv_sorbet3'), context=context)
+    move = reserv.move_id
+    reserv.unlink()
+    assert move.state == 'cancel', "Stock move not canceled."
