@@ -11,18 +11,18 @@ msgstr ""
 "POT-Creation-Date: 2017-07-28 02:58+0000\n"
 "PO-Revision-Date: 2017-07-28 02:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_product_product_reservation_count
 #: model:ir.model.fields,field_description:stock_reserve.field_product_template_reservation_count
 msgid "# Sales"
-msgstr ""
+msgstr "Anz. Verkäufe"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_state
@@ -47,7 +47,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_backorder_id
 msgid "Back Order of"
-msgstr ""
+msgstr "Rückstand aus"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_procure_method
@@ -78,27 +78,27 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_company_id
 msgid "Company"
-msgstr "Compañia"
+msgstr "Unternehmen"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_create_uid
 msgid "Created by"
-msgstr "Creado por"
+msgstr "Angelegt durch"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_create_date
 msgid "Created on"
-msgstr "Creado el"
+msgstr "Angelegt am"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date
 msgid "Date"
-msgstr "Fecha"
+msgstr "Datum"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_name
 msgid "Description"
-msgstr "Descripción"
+msgstr "Beschreibung"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_partner_id
@@ -108,7 +108,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_location_dest_id
 msgid "Destination Location"
-msgstr ""
+msgstr "Zielort"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_dest_id
@@ -123,17 +123,17 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Details"
-msgstr "Detalles"
+msgstr "Details"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr "Anzeigename"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Draft"
-msgstr "Borrador"
+msgstr "Entwurf"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date_expected
@@ -143,12 +143,12 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_availability
 msgid "Forecasted Quantity"
-msgstr ""
+msgstr "Planmenge"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Group By..."
-msgstr "Agrupar por..."
+msgstr "Gruppiere"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_id
@@ -170,7 +170,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_inventory_id
 msgid "Inventory"
-msgstr "Inventario"
+msgstr "Bestand"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_product_packaging
@@ -181,17 +181,17 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation___last_update
 msgid "Last Modified on"
-msgstr "Última modificación el"
+msgstr "Zuletzt geändert am"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_write_uid
 msgid "Last Updated by"
-msgstr "Actualizado por última vez por"
+msgstr "Zuletzt aktualisiert durch"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_write_date
 msgid "Last Updated on"
-msgstr "Actualizado por última vez el"
+msgstr "Zuletzt aktualisiert am"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_linked_move_operation_ids
@@ -206,7 +206,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Locations"
-msgstr "Ubicaciones"
+msgstr "Lagerorte"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_restrict_lot_id
@@ -243,18 +243,18 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Moves are reserved."
-msgstr "Los movimientos están reservados"
+msgstr "Reservierte Buchung."
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Not already reserved"
-msgstr "Aún no reservados"
+msgstr "Nicht bereits reserviert"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_note
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Notes"
-msgstr "Notas"
+msgstr "Hinweise"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_linked_move_operation_ids
@@ -313,7 +313,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_type_id
 msgid "Picking Type"
-msgstr "Tipo de albarán"
+msgstr "Kommissionsart"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_packaging
@@ -328,12 +328,12 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_priority
 msgid "Priority"
-msgstr "Prioridad"
+msgstr "Priorität"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_procurement_id
 msgid "Procurement"
-msgstr "Abastecimiento"
+msgstr "Beschaffung"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_group_id
@@ -343,25 +343,25 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_rule_id
 msgid "Procurement Rule"
-msgstr "Regla de abastecimiento"
+msgstr "Beschaffungsregel"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_product
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_id
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Product"
-msgstr "Producto"
+msgstr "Produkt"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_template
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_tmpl_id
 msgid "Product Template"
-msgstr "Plantilla de producto"
+msgstr "Produktvorlage"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Product UoM"
-msgstr "UdM de producto"
+msgstr "Produktmaßeinheit"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_propagate
@@ -376,7 +376,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_uom_qty
 msgid "Quantity"
-msgstr "Cantidad"
+msgstr "Menge"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_reserved_availability
@@ -407,12 +407,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Release"
-msgstr "Lanzar"
+msgstr "Freigeben"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Released"
-msgstr "Lanzado"
+msgstr "Freigegeben"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_remaining_qty
@@ -431,28 +431,28 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_id
 #, python-format
 msgid "Reservation Move"
-msgstr "Movimiento de reserva"
+msgstr "Reservierungsbuchung"
 
 #. module: stock_reserve
 #: model:stock.location,name:stock_reserve.stock_location_reservation
 msgid "Reservation Stock"
-msgstr "Reserva de existencias"
+msgstr "Reservierter Bestand"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Reservations have been released."
-msgstr "Las reservas han sido lanzadas."
+msgstr "Reservierungen wurden freigegeben."
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Reserve"
-msgstr "Reservar"
+msgstr "Reservieren"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Reserved"
-msgstr "Reservado"
+msgstr "Reserviert"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_reserved_quant_ids
@@ -472,7 +472,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_sequence
 msgid "Sequence"
-msgstr "Secuencia"
+msgstr "Reihenfolge"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_location_id
@@ -489,24 +489,24 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_origin
 msgid "Source Document"
-msgstr "Documento origen"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_location_id
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Source Location"
-msgstr "Ubicación origen"
+msgstr "Herkunftslagerort"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_state
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Status"
-msgstr "Estado"
+msgstr "Status"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_stock_reservation
 msgid "Stock Reservation"
-msgstr "Reserva de existencias"
+msgstr "Bestandsreservierung"
 
 #. module: stock_reserve
 #: model:ir.actions.act_window,name:stock_reserve.action_stock_reservation_tree
@@ -517,7 +517,7 @@ msgstr "Reserva de existencias"
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Stock Reservations"
-msgstr "Reservas de existencias"
+msgstr "Bestandsreservierungen"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_procure_method
@@ -552,10 +552,6 @@ msgid ""
 "picking confirmation (when costing method used is 'average price' or "
 "'real'). Value given in company currency and in product uom."
 msgstr ""
-"Campo técnico usado para guardar el coste de producto establecido por el "
-"usuario durante la confirmación del albarán (Cuando el método de coste usado"
-" es 'precio medio' o 'real'). Valor dado en la moneda de la compañía y en la"
-" UdM del producto."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_split_from
@@ -615,24 +611,24 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_price_unit
 msgid "Unit Price"
-msgstr "Precio unidad"
+msgstr "Einzelpreis"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_uom
 msgid "Unit of Measure"
-msgstr "Unidad de medida"
+msgstr "Maßeinheit"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date_validity
 msgid "Validity Date"
-msgstr "Fecha de validez"
+msgstr "Gültigkeitsdatum"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "View Reservation Move"
-msgstr "Ver movimiento de reserva"
+msgstr "Reservierung ansehen"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_warehouse_id
 msgid "Warehouse"
-msgstr "Almacén"
+msgstr "Lager"
