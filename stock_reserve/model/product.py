@@ -68,7 +68,7 @@ class ProductProduct(models.Model):
     def action_view_reservations(self):
         self.ensure_one()
         ref = 'stock_reserve.action_stock_reservation_tree'
-        action_dict = self.product_tmpl_id._get_act_window_dict(ref)
+        action_dict = self.env.ref(ref).read()[0]
         action_dict['domain'] = [('product_id', '=', self.id)]
         action_dict['context'] = {
             'search_default_draft': 1,
