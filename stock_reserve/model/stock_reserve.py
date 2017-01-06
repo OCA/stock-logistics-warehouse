@@ -123,14 +123,8 @@ class StockReservation(models.Model):
 
     @api.model
     def _default_picking_type_id(self):
-        """ Search for an internal picking type
-        """
-        type_obj = self.env['stock.picking.type']
-
-        types = type_obj.search([('code', '=', 'internal')], limit=1)
-        if types:
-            return types[0].id
-        return False
+        ref = 'stock.picking_type_out'
+        return self.env.ref(ref, raise_if_not_found=False).id
 
     @api.model
     def _default_location_dest_id(self):
