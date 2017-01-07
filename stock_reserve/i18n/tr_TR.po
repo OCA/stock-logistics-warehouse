@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-04 11:45+0000\n"
-"PO-Revision-Date: 2017-01-05 20:42+0000\n"
+"PO-Revision-Date: 2017-01-05 11:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Turkish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/tr/)\n"
+"Language-Team: Turkish (Turkey) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: tr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: tr_TR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: stock_reserve
 #: field:product.product,reservation_count:0
@@ -78,7 +78,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,company_id:0
 msgid "Company"
-msgstr "Şirket"
+msgstr "Firma"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
@@ -88,12 +88,12 @@ msgstr "Oluşturan"
 #. module: stock_reserve
 #: field:stock.reservation,create_date:0
 msgid "Created on"
-msgstr "Oluşturuldu"
+msgstr "Oluşturulma tarihi"
 
 #. module: stock_reserve
 #: field:stock.reservation,date:0
 msgid "Date"
-msgstr "Tarih"
+msgstr ""
 
 #. module: stock_reserve
 #: field:stock.reservation,name:0
@@ -128,7 +128,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,display_name:0
 msgid "Display Name"
-msgstr "Görünen İsim"
+msgstr "Görünen ad"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -143,12 +143,12 @@ msgstr ""
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Group By..."
-msgstr "Grupla..."
+msgstr ""
 
 #. module: stock_reserve
 #: field:stock.reservation,id:0
 msgid "ID"
-msgstr "ID"
+msgstr "Kimlik"
 
 #. module: stock_reserve
 #: help:stock.reservation,propagate:0
@@ -163,7 +163,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,invoice_state:0
 msgid "Invoice Control"
-msgstr ""
+msgstr "Fatura kontrol"
 
 #. module: stock_reserve
 #: help:stock.reservation,product_packaging:0
@@ -174,17 +174,17 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,__last_update:0
 msgid "Last Modified on"
-msgstr "Son değişiklik"
+msgstr "En son güncelleme tarihi"
 
 #. module: stock_reserve
 #: field:stock.reservation,write_uid:0
 msgid "Last Updated by"
-msgstr "Son güncelleyen"
+msgstr "En son güncelleyen "
 
 #. module: stock_reserve
 #: field:stock.reservation,write_date:0
 msgid "Last Updated on"
-msgstr "Son güncelleme"
+msgstr "En son güncelleme tarihi"
 
 #. module: stock_reserve
 #: field:stock.reservation,linked_move_operation_ids:0
@@ -316,7 +316,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,procurement_id:0
 msgid "Procurement"
-msgstr ""
+msgstr "Satın alma"
 
 #. module: stock_reserve
 #: field:stock.reservation,group_id:0
@@ -333,13 +333,13 @@ msgstr ""
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 #: field:stock.reservation,product_id:0
 msgid "Product"
-msgstr ""
+msgstr "Ürün"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_template
 #: field:stock.reservation,product_tmpl_id:0
 msgid "Product Template"
-msgstr ""
+msgstr "Ürün şablonu"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_uos:0
@@ -365,7 +365,7 @@ msgstr ""
 #: field:stock.reservation,product_qty:0
 #: field:stock.reservation,product_uom_qty:0
 msgid "Quantity"
-msgstr ""
+msgstr "Miktar"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_uos_qty:0
@@ -495,7 +495,7 @@ msgstr ""
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 #: field:stock.reservation,state:0
 msgid "Status"
-msgstr ""
+msgstr "Durum"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_stock_reservation
@@ -588,7 +588,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,price_unit:0
 msgid "Unit Price"
-msgstr ""
+msgstr "Birim fiyat"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_uom:0
@@ -608,7 +608,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,warehouse_id:0
 msgid "Warehouse"
-msgstr ""
+msgstr "Depo"
 
 #. module: stock_reserve
 #: help:stock.reservation,origin_returned_move_id:0
