@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 18:42+0000\n"
+"POT-Creation-Date: 2016-12-31 09:42+0000\n"
 "PO-Revision-Date: 2016-10-22 16:43+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/tr_TR/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_active
 msgid "Active"
-msgstr ""
+msgstr "Etkin"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
@@ -30,7 +30,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
 msgid "Cancel"
-msgstr ""
+msgstr "İptal et"
 
 #. module: stock_orderpoint_generator
 #: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:40
@@ -52,13 +52,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_create_uid
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Oluşturan"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_create_date
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Oluşturulma tarihi"
 
 #. module: stock_orderpoint_generator
 #: selection:stock.warehouse.orderpoint.template,lead_type:0
@@ -74,13 +74,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_display_name
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen ad"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_id
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_id
 msgid "ID"
-msgstr ""
+msgstr "Kimlik"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_active
@@ -93,19 +93,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator___last_update
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "En son güncelleme tarihi"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_write_uid
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "En son güncelleyen "
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_write_date
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "En son güncelleme tarihi"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_lead_days
@@ -120,7 +120,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_location_id
 msgid "Location"
-msgstr ""
+msgstr "Konum"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_max_qty
@@ -148,7 +148,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_name
 msgid "Name"
-msgstr ""
+msgstr "Ad"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_lead_days
@@ -170,7 +170,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_id
 msgid "Product"
-msgstr ""
+msgstr "Ürün"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_uom
@@ -214,7 +214,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_warehouse_id
 msgid "Warehouse"
-msgstr ""
+msgstr "Depo"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_min_qty
