@@ -59,7 +59,10 @@ class StockInventory(models.Model):
                     product = line.product
                 lot_id = None
                 if line.lot:
-                    lot_lst = stk_lot_obj.search([('name', '=', line.lot)])
+                    lot_lst = stk_lot_obj.search([
+                        ('name', '=', line.lot),
+                        ('product_id', '=', product.id),
+                    ])
                     if lot_lst:
                         lot_id = lot_lst[0].id
                     else:
