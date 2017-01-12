@@ -32,13 +32,13 @@ class StockInventory(models.Model):
                 args += (inventory.package_id.id,)
 
             self.env.cr.execute('''
-               SELECT product_id, sum(qty) as product_qty, location_id, lot_id as prod_lot_id, package_id, owner_id as partner_id
+               SELECT product_id, sum(qty) as product_qty, location_id, lot_id
+               as prod_lot_id, package_id, owner_id as partner_id
                FROM stock_quant WHERE''' + domain + '''
                GROUP BY product_id, location_id, lot_id, package_id, partner_id
             ''', args)
             vals = []
             for product_line in self.env.cr.dictfetchall():
-                #replace the None the dictionary by False, because falsy values are tested later on
                 for key, value in product_line.items():
                     if not value:
                         product_line[key] = False
