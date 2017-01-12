@@ -7,9 +7,9 @@
     "summary": "Allow to perform inventories of a location without including "
                "its child locations.",
     "version": "9.0.1.0.0",
-    "author": "Eficent Business and IT Consulting Services S.L,"
+    "author": "Eficent,"
               "Odoo Community Association (OCA)",
-    "website": "https://www.odoo-community.org",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "depends": ["stock"],
     "data": [

@@ -13,18 +13,11 @@ class StockInventory(models.Model):
                                          default=False)
 
     @api.model
-    def _get_location_ids(self, inventory):
-        location_obj = self.env['stock.location']
-        return location_obj.search([('id', '=',
-                                     [inventory.location_id.id])]).ids
-
-    @api.model
     def _get_inventory_lines(self, inventory):
         if inventory.exclude_sublocation:
             product_obj = self.env['product.product']
-            location_ids = self._get_location_ids(inventory)
-            domain = ' location_id in %s'
-            args = (tuple(location_ids),)
+            domain = ' location_id = %s'
+            args = (tuple(inventory.location_id.ids))
             if inventory.partner_id:
                 domain += ' and owner_id = %s'
                 args += (inventory.partner_id.id,)
