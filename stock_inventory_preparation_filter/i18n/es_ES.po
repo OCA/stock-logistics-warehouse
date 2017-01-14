@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2017-01-07 07:40+0000\n"
+"PO-Revision-Date: 2017-01-13 09:28+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr "ID"
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
 #: field:stock.inventory.line.empty,inventory_id:0
 msgid "Inventory"
-msgstr ""
+msgstr "Inventario"
 
 #. module: stock_inventory_preparation_filter
 #: view:stock.inventory:stock_inventory_preparation_filter.stock_inventory_form
