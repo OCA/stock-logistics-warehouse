@@ -4,14 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Pedro Castro Silva <pedrocs@sossia.pt>, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 06:04+0000\n"
-"PO-Revision-Date: 2016-12-03 06:04+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@sossia.pt>, 2016\n"
+"POT-Creation-Date: 2017-01-07 07:42+0000\n"
+"PO-Revision-Date: 2017-01-07 07:42+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@sossia.pt>, 2017\n"
 "Language-Team: Portuguese (Portugal) (https://www.transifex.com/oca/teams/23907/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -306,7 +306,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_procurement_id
 msgid "Procurement"
-msgstr ""
+msgstr "Aquisições"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_group_id
@@ -570,6 +570,11 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_id
 msgid "Transfer Reference"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_type_code
+msgid "Type of Operation"
 msgstr ""
 
 #. module: stock_reserve
