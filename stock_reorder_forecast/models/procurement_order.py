@@ -4,7 +4,6 @@
 
 from openerp import api, models
 
-@api.multi()
 class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
