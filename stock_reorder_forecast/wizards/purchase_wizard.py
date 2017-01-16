@@ -52,8 +52,6 @@ class PurchaseWizard(models.TransientModel):
         return result
 
     def _get_qty(self, product, supplier, stock_period_max):    
-        import pudb
-        pudb.set_trace()
         qty = float_round(
             product.turnover_average * product.stock_period_max -
             product.virtual_available, 0)
