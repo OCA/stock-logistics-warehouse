@@ -66,12 +66,13 @@ class PurchaseSupplierWizard(models.TransientModel):
         supplier_id = int(self.name)
         order_vals = {
             "partner_id": supplier_id,
-            "origin": "purchase proposal",
+            "origin": "Batch resupply from supplier form",
             "date_order": date_order, }
         purchase_order = po_model.create(order_vals)
         products = self.supplier_products
         if self.primary_supplier_only:
             products = self.supplier_products_primary
+        empty_po = True
         for product in products:
             supplier = product.seller_ids.filtered(
                 lambda x: x.name.id == supplier_id
@@ -79,6 +80,7 @@ class PurchaseSupplierWizard(models.TransientModel):
             pol_model = self.env["purchase.order.line"]
             qty = self._get_qty(product, supplier, self.stock_period_max)
             if qty > 0:
+                empty_po = False
                 line_vals = {
                     'name': 'Batch resupply of product %s from partner %s '
                             % (product.name, supplier.name.name),
@@ -94,7 +96,10 @@ class PurchaseSupplierWizard(models.TransientModel):
                 pol._compute_amount()
                 # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
                 product.write({"ultimate_purchase": False})
-        return purchase_order
+        if empty_po:
+            return None
+        else:
+            return purchase_order
 
     name = fields.Many2one(
         comodel_name="res.partner",
