@@ -51,9 +51,11 @@ class PurchaseWizard(models.TransientModel):
         # TODO CHECK RFQ/PO MANAGMENT FROM PARTNER.
         return result
 
-    def _get_qty(self, product, supplier, stock_period_max):
+    def _get_qty(self, product, supplier, stock_period_max):    
+        import pudb
+        pudb.set_trace()
         qty = float_round(
-            product.turnover_average * stock_period_max -
+            product.turnover_average * product.stock_period_max -
             product.virtual_available, 0)
         purchase_multiple = supplier.purchase_multiple
         if purchase_multiple == 0:
