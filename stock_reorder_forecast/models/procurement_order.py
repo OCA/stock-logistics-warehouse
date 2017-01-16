@@ -9,6 +9,6 @@ class ProcurementOrder(models.Model):
 
     #disable making PO's from procurement orders
 
-    @api.multi
+    @api.model
     def _run(self, procurement):
-        return True
+        return []
