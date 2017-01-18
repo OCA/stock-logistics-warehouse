@@ -9,22 +9,14 @@ class ProcurementOrder(models.Model):
 
     #disable making PO's from procurement orders
 
-    @api.model
-    def _run(self, procurement):
+
+    @api.returns('self', lambda x: x.id)
+    def create(self, vals):
+        import pudb
+        pudb.set_trace()
         if procurement.rule_id and procurement.rule_id.action == 'buy':
-            return  super(ProcurementOrder, self.with_context(
-                skip_po=True))._run(procurement)
-        return super(ProcurementOrder, self)._run(procurement)
-
-
-    @api.multi
-    def make_po(self):
-        for procurement in self:
-            if self.context['skip_po'] == True:
-                return []
-            else:
-                return procurement.make_po()
-            
-
-
-
+            res = super(ProcurementOrder, self.with_context(
+                procurement_autorun_defer=True)).create(vals)
+            self.unlink(res)
+            return False
+        return super(ProcurementOrder, self).create(vals)
