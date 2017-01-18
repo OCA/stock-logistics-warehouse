@@ -29,12 +29,13 @@ class ProcurementOrder(models.Model):
     @api.multi
     def run(self):
         for procurement in self:
-            if procurement.rule_id and procurement.rule_id.action == 'buy':
+            if ((procurement.rule_id and procurement.rule_id.action == 'buy') 
+                    or procurement.origin[:2] == 'SO'):
                 # Skip po will trigger in make_po to skip PO creation for buy
                 # products and return the procurement.id as if they where
                 # processed, without hchanging the state though, because our
                 # query also relies on procurements to create orders.
-                res - self.with_context(skip_po=True)._run(procurement)
+                return self.with_context(skip_po=True)._run(procurement)
         return super(ProcurementOrder, self).run()
    
     # don't create PO's if in skip mode
