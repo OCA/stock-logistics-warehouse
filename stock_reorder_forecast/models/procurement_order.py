@@ -11,4 +11,20 @@ class ProcurementOrder(models.Model):
 
     @api.model
     def _run(self, procurement):
-        return []
+        if procurement.rule_id and procurement.rule_id.action == 'buy':
+            return  super(ProcurementOrder, self.with_context(
+                skip_po=True))._run(procurement)
+        return super(ProcurementOrder, self)._run(procurement)
+
+
+    @api.multi
+    def make_po(self):
+        for procurement in self:
+            if self.context['skip_po'] == True:
+                return []
+            else:
+                return procurement.make_po()
+            
+
+
+
