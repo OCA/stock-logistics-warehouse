@@ -10,13 +10,17 @@ class ProcurementOrder(models.Model):
     #disable making PO's from procurement orders
 
 
-    @api.returns('self', lambda x: x.id)
+    @api.model
     def create(self, vals):
-        import pudb
-        pudb.set_trace()
-        if procurement.rule_id and procurement.rule_id.action == 'buy':
+        if vals['origin'][:2] == 'SO':
             res = super(ProcurementOrder, self.with_context(
-                procurement_autorun_defer=True)).create(vals)
-            self.unlink(res)
-            return False
+                procurement_autorun_defer=True, 
+                tracking_disable=False,
+                mail_create_nosubscribe=True,
+                mail_create_nolog=True,
+                mail_notrack=True, 
+                )).create(vals)
+            res.write({'state':'cancel'})
+            super(ProcurementOrder, res).unlink()
+            return self
         return super(ProcurementOrder, self).create(vals)
