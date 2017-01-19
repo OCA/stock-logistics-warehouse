@@ -10,7 +10,7 @@ class ProcurementOrder(models.Model):
     #disable making PO's from procurement orders
     
     # this would defer the creation of PO but it would be triggered anyway on
-    # scheduler.
+    # scheduler we need to process run without actually creating the PO..
     """
     @api.model
     def create(self, vals):
@@ -43,7 +43,7 @@ class ProcurementOrder(models.Model):
     @api.multi
     def make_po(self):
         for procurement in self:
-            if self.context['skip_po'] == True:
+            if self.context.get('skip_po', False):
                 return procurement.id
             else:
                 return super(ProcurementOrder, self).make_po()
