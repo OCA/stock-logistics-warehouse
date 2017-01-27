@@ -41,8 +41,6 @@ class StockInventory(models.Model):
              "- Pending to Approve: Inventory have big discrepancies and "
              "it's waiting for the Control Manager approval.\n"
              "- Validated: Inventory Approved.")
-    cycle_count_id = fields.Many2one(comodel_name='stock.cycle.count',
-                                     string='Stock Cycle Count')
     over_discrepancies = fields.Integer(string='Number of Discrepancies Over '
                                                'Threshold',
                                         compute=_compute_over_discrepancies,
