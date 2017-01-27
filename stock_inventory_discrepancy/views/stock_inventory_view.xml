@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field name="name">Inventory form view - discrepancy extension </field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">
+                    draft,confirm,pending,done
+                </attribute>
+            </field>
+            <xpath expr="//button[@name='action_done']"
+                   position="after">
+                <button name="action_force_done"
+                        string="Force Validation" type="object"
+                        class="oe_highlight"
+                        groups="stock_inventory_discrepancy.group_stock_control_manager"
+                        attrs="{'invisible': ['|',('state', '!=', 'pending'),('over_discrepancies', '=', 0)]}"/>
+            </xpath>
+            <field name="name" position="after">
+                <field name="over_discrepancies" invisible="1"/>
+            </field>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='product_qty']"
+                   position="after">
+                <field name="discrepancy_qty"/>
+                <field name="discrepancy_percentage"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_warehouse_form" model="ir.ui.view">
+        <field name="name">Warehouse form - Inventory Discrepancy
+            extension</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+               <field name="discrepancy_threshold"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
