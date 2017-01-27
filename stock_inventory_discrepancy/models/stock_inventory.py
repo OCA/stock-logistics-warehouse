@@ -21,7 +21,7 @@ class StockInventory(models.Model):
                              string='Status', readonly=True,
                              select=True, copy=False)
 
-    @api.model
+    @api.one
     @api.depends('line_ids.product_qty', 'line_ids.theoretical_qty')
     def _compute_over_discrepancies(self):
         threshold = 0.0
@@ -56,8 +56,9 @@ class StockInventory(models.Model):
     def action_done(self):
         wh_id = self.location_id.get_warehouse(self.location_id)
         wh = self.env['stock.warehouse'].browse(wh_id)
-        if self.over_discrepancies and (wh.discrepancy_threshold > 0.0 or
-                self.location_id.discrepancy_threshold > 0.0):
+        if self.over_discrepancies and \
+                (wh.discrepancy_threshold > 0.0 or
+                 self.location_id.discrepancy_threshold > 0.0):
             self.action_over_discrepancies()
         else:
             return super(StockInventory, self).action_done()
