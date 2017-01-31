@@ -9,7 +9,7 @@
         <field name="inherit_id" ref="stock.view_template_property_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='stock_property']" position="before">
-                <group colspan="4" name="putaway" string="Put Away Locations">
+                <group colspan="4" name="putaway" string="Put Away Locations" groups="stock.group_stock_user">
                     <field name="product_putaway_ids"
                            context="{'default_product_tmpl_id': is_product_variant and product_tmpl_id or active_id,
                                      'default_product_product_id': is_product_variant and active_id or False}"
