@@ -4,7 +4,7 @@
 {
     'name': 'Putaway strategy per product',
     'summary': 'Set a product location and put-away strategy per product',
-    'version': '8.0.1.0.0',
+    'version': '8.0.1.0.1',
     'category': 'Inventory',
     'website': 'http://www.apertoso.be',
     'author': 'Apertoso N.V., Odoo Community Association (OCA)',
