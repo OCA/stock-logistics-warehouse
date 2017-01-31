@@ -26,7 +26,8 @@ class TestInventoryDiscrepancy(TransactionCase):
         })
         self.test_loc = self.obj_location.create({
             'name': 'Test Location',
-            'usage': 'internal'
+            'usage': 'internal',
+            'discrepancy_threshold': 0.1
         })
 
         starting_inv = self.obj_inventory.create({
@@ -79,3 +80,32 @@ class TestInventoryDiscrepancy(TransactionCase):
                          'Wrong Discrepancy qty computation.')
         self.assertEqual(inventory.line_ids[1].discrepancy_qty, - 1.0,
                          'Wrong Discrepancy qty computation.')
+
+    def test_discrepancy_validation(self):
+        """Tests the new workflow"""
+        inventory = self.obj_inventory.create({
+            'name': 'Test Forcing Validation Method',
+            'location_id': self.test_loc.id,
+            'filter': 'none',
+            'line_ids': [
+                (0, 0, {
+                    'product_id': self.product1.id,
+                    'product_uom_id': self.env.ref(
+                        "product.product_uom_unit").id,
+                    'product_qty': 3.0,
+                    'location_id': self.test_loc.id,
+                }),
+            ],
+        })
+        self.assertEqual(inventory.state, 'draft',
+                         'Testing Inventory wrongly configurated')
+        inventory.action_done()
+        self.assertEqual(inventory.over_discrepancies, 1,
+                         'Computation of over-discrepancies failed.')
+        self.assertEqual(inventory.state, 'pending',
+                         'Inventory Adjustment not changing to Pending to '
+                         'Approve.')
+        inventory.action_force_done()
+        self.assertEqual(inventory.state, 'done',
+                         'Forcing the validation of the inventory adjustment '
+                         'not working properly.')
