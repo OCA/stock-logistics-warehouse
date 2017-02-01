@@ -12,6 +12,9 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
         super(TestStockInventoryExcludeSublocation, self).setUp()
         self.inventory_model = self.env['stock.inventory']
         self.location_model = self.env['stock.location']
+        self.lot_model = self.env['stock.production.lot']
+        self.quant_model = self.env['stock.quant']
+        self.package_model = self.env['stock.quant.package']
 
         self.product1 = self.env['product.product'].create({
             'name': 'Product for parent location',
@@ -32,6 +35,13 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
             'usage': 'internal',
             'location_id': self.location.id
         })
+        self.lot_a = self.lot_model.create({
+            'name': 'Lot for product1',
+            'product_id': self.product1.id
+        })
+        self.package = self.package_model.create({'name': 'PACK00TEST1'})
+
+        self.partner = self.ref('base.res_partner_4')
         # Add a product in each location
         starting_inv = self.inventory_model.create({
             'name': 'Starting inventory',
@@ -43,6 +53,7 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
                         "product.product_uom_unit").id,
                     'product_qty': 2.0,
                     'location_id': self.location.id,
+                    'prod_lot_id': self.lot_a.id
                 }),
                 (0, 0, {
                     'product_id': self.product2.id,
@@ -50,6 +61,7 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
                         "product.product_uom_unit").id,
                     'product_qty': 4.0,
                     'location_id': self.sublocation.id,
+                    'prod_lot_id': self.lot_a.id
                 }),
             ],
         })
@@ -73,7 +85,8 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
         inventory_location.prepare_inventory()
         inventory_location.action_done()
         lines = inventory_location.line_ids
-        self.assertEqual(len(lines), 2, 'nope')
+        self.assertEqual(len(lines), 2, 'Not all expected products are '
+                                        'included')
 
     def test_excluding_sublocations(self):
         '''Check if products in sublocations are not included if the exclude
@@ -88,5 +101,65 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
         inventory_sublocation.action_done()
         lines_location = inventory_location.line_ids
         lines_sublocation = inventory_sublocation.line_ids
-        self.assertEqual(len(lines_location), 1, 'no')
-        self.assertEqual(len(lines_sublocation), 1, 'nope')
+        self.assertEqual(len(lines_location), 1,
+                         'The products in the sublocations are not excluded')
+        self.assertEqual(len(lines_sublocation), 1,
+                         'The products in the sublocations are not excluded')
+
+    def test_lot_excluding_sublocation(self):
+        '''Check if the sublocations are excluded when using lots.'''
+        inventory = self.inventory_model.create({
+            'name': 'Inventory lot',
+            'filter': 'lot',
+            'location_id': self.location.id,
+            'lot_id': self.lot_a.id,
+            'exclude_sublocation': True
+        })
+        inventory.prepare_inventory()
+        inventory.action_done()
+        lines = inventory.line_ids
+        self.assertEqual(len(lines), 1, 'The products in the sublocations are '
+                                        'not excluded with lots.')
+
+    def test_product_and_owner_excluding_sublocation(self):
+        '''Check if sublocations are excluded when filtering by owner and
+        product.'''
+        self.quant_model.create({
+            'product_id': self.product1.id,
+            'location_id': self.location.id,
+            'qty': 1,
+            'owner_id': self.partner,
+        })
+        inventory = self.inventory_model.create({
+            'name': 'Inventory lot',
+            'filter': 'product_owner',
+            'location_id': self.location.id,
+            'product_id': self.product1.id,
+            'partner_id': self.partner,
+            'exclude_sublocation': True
+        })
+        inventory.prepare_inventory()
+        lines = inventory.line_ids
+        self.assertEqual(len(lines), 1,
+                         'The products in the sublocations are '
+                         'not excluded with product and owner filter.')
+
+    def test_pack_excluding_sublocation(self):
+        '''Check if sublocations are excluded when filtering by package.'''
+        self.quant_model.create({
+            'product_id': self.product1.id,
+            'location_id': self.location.id,
+            'qty': 1,
+            'package_id': self.package.id
+        })
+        inventory = self.inventory_model.create({
+            'name': 'Inventory lot',
+            'filter': 'pack',
+            'location_id': self.location.id,
+            'package_id': self.package.id,
+            'exclude_sublocation': True
+        })
+        inventory.prepare_inventory()
+        lines = inventory.line_ids
+        self.assertEqual(len(lines), 1, 'The products in the sublocations are '
+                                        'not excluded with package filter.')
