@@ -15,6 +15,29 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
         self.lot_model = self.env['stock.production.lot']
         self.quant_model = self.env['stock.quant']
         self.package_model = self.env['stock.quant.package']
+        self.res_users_model = self.env['res.users']
+
+        self.company = self.env.ref('base.main_company')
+        self.partner = self.ref('base.res_partner_4')
+        self.grp_stock_manager = self.env.ref('stock.group_stock_manager')
+        self.grp_tracking_owner = self.env.ref('stock.group_tracking_owner')
+        self.grp_production_lot = self.env.ref('stock.group_production_lot')
+        self.grp_tracking_lot = self.env.ref('stock.group_tracking_lot')
+
+        self.user = self.res_users_model.create({
+            'name': 'Test Account User',
+            'login': 'user_1',
+            'password': 'demo',
+            'email': 'example@yourcompany.com',
+            'company_id': self.company.id,
+            'company_ids': [(4, self.company.id)],
+            'groups_id': [(6, 0, [
+                self.grp_stock_manager.id,
+                self.grp_tracking_owner.id,
+                self.grp_production_lot.id,
+                self.grp_tracking_lot.id
+            ])]
+        })
 
         self.product1 = self.env['product.product'].create({
             'name': 'Product for parent location',
@@ -41,7 +64,6 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
         })
         self.package = self.package_model.create({'name': 'PACK00TEST1'})
 
-        self.partner = self.ref('base.res_partner_4')
         # Add a product in each location
         starting_inv = self.inventory_model.create({
             'name': 'Starting inventory',
@@ -108,7 +130,7 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
 
     def test_lot_excluding_sublocation(self):
         '''Check if the sublocations are excluded when using lots.'''
-        inventory = self.inventory_model.create({
+        inventory = self.inventory_model.sudo(self.user.id).create({
             'name': 'Inventory lot',
             'filter': 'lot',
             'location_id': self.location.id,
@@ -130,7 +152,7 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
             'qty': 1,
             'owner_id': self.partner,
         })
-        inventory = self.inventory_model.create({
+        inventory = self.inventory_model.sudo(self.user.id).create({
             'name': 'Inventory lot',
             'filter': 'product_owner',
             'location_id': self.location.id,
@@ -152,7 +174,7 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
             'qty': 1,
             'package_id': self.package.id
         })
-        inventory = self.inventory_model.create({
+        inventory = self.inventory_model.sudo(self.user.id).create({
             'name': 'Inventory lot',
             'filter': 'pack',
             'location_id': self.location.id,
