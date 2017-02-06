@@ -38,8 +38,9 @@ class StockInventory(models.Model):
         help="States of the Inventory Adjustment:\n"
              "- Draft: Inventory not started.\n"
              "- In Progress: Inventory in execution.\n"
-             "- Pending to Approve: Inventory have big discrepancies and "
-             "it's waiting for the Control Manager approval.\n"
+             "- Pending to Approve: Inventory have some discrepancies "
+             "greater than the threshold and it's waiting for the Control "
+             "Manager approval.\n"
              "- Validated: Inventory Approved.")
     over_discrepancies = fields.Integer(string='Number of Discrepancies Over '
                                                'Threshold',
