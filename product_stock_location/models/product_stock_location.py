@@ -14,6 +14,7 @@ class ProductStockLocation(models.Model):
                  'quant_ids.location_id',
                  'quant_ids.product_id',
                  'quant_ids.qty',
+                 'quant_ids.reservation_id',
                  'incoming_move_ids',
                  'incoming_move_ids.product_id',
                  'incoming_move_ids.location_dest_id',
@@ -36,8 +37,8 @@ class ProductStockLocation(models.Model):
     def _compute_product_available_qty(self):
         for rec in self:
             product_available = rec.product_id.with_context(
-                location=rec.location_id.id, compute_stored_product_stock=True
-                )._product_available()[rec.product_id.id]
+                location=rec.location_id.id)._product_available()[
+                rec.product_id.id]
             rec.product_location_qty = product_available['qty_available']
             rec.incoming_location_qty = product_available['incoming_qty']
             rec.outgoing_location_qty = product_available['outgoing_qty']

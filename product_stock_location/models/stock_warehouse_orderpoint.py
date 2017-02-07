@@ -45,3 +45,36 @@ class StockWarehouseOrderpoint(models.Model):
     product_stock_location_ids = fields.One2many(
         comodel_name='product.stock.location', inverse_name='orderpoint_id',
         string='Product Stock Locations')
+
+    @api.model
+    def search_product_stock_location_domain(self, location):
+        return [('product_id', '=', self.product_id.id),
+                ('location_id', '=', location.id)]
+
+    @api.model
+    def prepare_product_stock_location_data(self):
+        return {
+            'orderpoint_id': self.id,
+        }
+
+    @api.model
+    def update_product_stock_location(self):
+        pst_model = self.env['product.stock.location']
+        product_stock_locations = pst_model.search(
+            self.search_product_stock_location_domain(self.location_id),
+            limit=1)
+        product_stock_locations.write(
+            self.prepare_product_stock_location_data())
+
+    @api.model
+    def create(self, vals):
+        op = super(StockWarehouseOrderpoint, self).create(vals)
+        op.sudo().update_product_stock_location()
+        return op
+
+    @api.multi
+    def write(self, vals):
+        res = super(StockWarehouseOrderpoint, self).write(vals)
+        for op in self:
+                op.sudo().update_product_stock_location()
+        return res
