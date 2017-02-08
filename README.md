@@ -33,7 +33,7 @@ addon | version | summary
 [stock_orderpoint_manual_procurement](stock_orderpoint_manual_procurement/) | 9.0.1.0.0 | Allows to create procurement orders from orderpoints instead of relying only on the scheduler
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 9.0.1.0.0 | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_partner_lot](stock_partner_lot/) | 9.0.1.0.0 | Show lots on the partners that own them
-[stock_putaway_product](stock_putaway_product/) | 9.0.1.0.0 | Set a product location and put-away strategy per product
+[stock_putaway_product](stock_putaway_product/) | 9.0.1.0.1 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 9.0.1.0.0 | Stock - Manual Quant Assignment
 [stock_quant_merge](stock_quant_merge/) | 9.0.1.0.0 | Stock - Quant merge
 [stock_reserve](stock_reserve/) | 9.0.1.0.0 | Stock reservations on products
