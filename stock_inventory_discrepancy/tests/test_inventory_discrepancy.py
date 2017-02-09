@@ -100,7 +100,7 @@ class TestInventoryDiscrepancy(TransactionCase):
         self.assertEqual(inventory.state, 'draft',
                          'Testing Inventory wrongly configurated')
         inventory.action_done()
-        self.assertEqual(inventory.over_discrepancies, 1,
+        self.assertEqual(inventory.over_discrepancy_line_count, 1,
                          'Computation of over-discrepancies failed.')
         self.assertEqual(inventory.state, 'pending',
                          'Inventory Adjustment not changing to Pending to '

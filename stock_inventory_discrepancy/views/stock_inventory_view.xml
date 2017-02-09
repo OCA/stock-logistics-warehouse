@@ -23,15 +23,20 @@
                         string="Force Validation" type="object"
                         class="oe_highlight"
                         groups="stock_inventory_discrepancy.group_stock_control_manager"
-                        attrs="{'invisible': ['|',('state', '!=', 'pending'),('over_discrepancies', '=', 0)]}"/>
+                        attrs="{'invisible': ['|',('state', '!=', 'pending'),('over_discrepancy_line_count', '=', 0)]}"/>
             </xpath>
             <field name="date" position="after">
-                <field name="over_discrepancies" attrs="{'invisible': [('state', '!=', 'pending')]}"/>
+                <field name="over_discrepancy_line_count" attrs="{'invisible': [('state', '!=', 'pending')]}"/>
             </field>
             <xpath expr="//field[@name='line_ids']/tree/field[@name='product_qty']"
                    position="after">
                 <field name="discrepancy_qty"/>
-                <field name="discrepancy_percentage"/>
+                <field name="discrepancy_percent"/>
+                <field name="discrepancy_threshold"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree" position="attributes">
+                <attribute name="decoration-danger">theoretical_qty &lt; 0 or
+                    discrepancy_percent &gt; 10.0</attribute>
             </xpath>
         </field>
     </record>

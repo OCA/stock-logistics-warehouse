@@ -10,7 +10,10 @@
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
-                <field name="discrepancy_threshold"/>
+                <label for="discrepancy_threshold"/>
+                <div>
+                    <field name="discrepancy_threshold" class="oe_inline"/> %
+                </div>
             </field>
         </field>
     </record>

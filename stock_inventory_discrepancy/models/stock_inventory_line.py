@@ -12,16 +12,35 @@ class StockInventoryLine(models.Model):
     @api.one
     def _compute_discrepancy(self):
         self. discrepancy_qty = self.product_qty - self.theoretical_qty
-
-    @api.one
-    def _compute_discrepancy_percentage(self):
         if self.theoretical_qty:
-            self.discrepancy_percentage = (abs(
+            self.discrepancy_percent = 100 * (abs(
                 self.product_qty - self.theoretical_qty)) \
                 / self.theoretical_qty
 
-    discrepancy_qty = fields.Float(string='Discrepancy',
-                                   compute=_compute_discrepancy)
-    discrepancy_percentage = fields.Float(
-        string='Discrepancy rate',
-        compute=_compute_discrepancy_percentage)
+    @api.one
+    def _get_discrepancy_threshold(self):
+        wh_id = self.location_id.get_warehouse(self.location_id)
+        wh = self.env['stock.warehouse'].browse(wh_id)
+        if self.location_id.discrepancy_threshold > 0.0:
+            self.discrepancy_threshold = self.location_id.discrepancy_threshold
+        elif wh.discrepancy_threshold > 0.0:
+            self.discrepancy_threshold = wh.discrepancy_threshold
+        else:
+            self.discrepancy_threshold = False
+
+    discrepancy_qty = fields.Float(
+        string='Discrepancy',
+        compute=_compute_discrepancy,
+        help="The difference between the actual qty counted and the "
+             "theoretical quantity on hand.")
+    discrepancy_percent = fields.Float(
+        string='Discrepancy percent (%)',
+        compute=_compute_discrepancy,
+        digits=(3, 2),
+        help="The discrepancy expressed in percent with theoretical quantity "
+             "as basis")
+    discrepancy_threshold = fields.Float(
+        string='Threshold (%)',
+        digits=(3, 2),
+        help="Maximum Discrepancy Rate Threshold",
+        compute=_get_discrepancy_threshold)

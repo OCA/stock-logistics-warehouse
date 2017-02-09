@@ -10,4 +10,8 @@ class StockLocation(models.Model):
     _inherit = 'stock.location'
 
     discrepancy_threshold = fields.Float(
-        string='Maximum Discrepancy Rate Threshold')
+        string='Maximum Discrepancy Rate Threshold',
+        digits=(3, 2),
+        help="Maximum Discrepancy Rate allowed for any product when doing "
+             "an Inventory Adjustment. Thresholds defined in Locations have "
+             "preference over Warehouse's ones.")
