@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2014 Numérigraphe SARL
+# Copyright 2014 Numérigraphe SARL
+# Copyright 2016-17 Sodexis, Inc. <dev@sodexis.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from collections import Counter
 
-from openerp import models, fields, api
-
-from openerp.exceptions import AccessError
+from odoo import models, fields, api
+from odoo.exceptions import AccessError
 
 
 class ProductProduct(models.Model):
@@ -39,19 +39,16 @@ class ProductProduct(models.Model):
         super(ProductProduct, self)._compute_potential_qty()
 
         bom_obj = self.env['mrp.bom']
-        uom_obj = self.env['product.uom']
 
         for product in self:
-            bom_id = bom_obj._bom_find(product_id=product.id)
-            if not bom_id:
+            bom = bom_obj._bom_find(product=product)
+            if not bom:
                 product.potential_qty = 0.0
                 continue
 
-            bom = bom_obj.browse(bom_id)
-
             # Need by product (same product can be in many BOM lines/levels)
             try:
-                component_needs = self._get_components_needs(product, bom)
+                component_needs = product._get_components_needs(product, bom)
             except AccessError:
                 # If user doesn't have access to BOM
                 # he can't see potential_qty
@@ -67,10 +64,8 @@ class ProductProduct(models.Model):
                     [self._get_component_qty(component) // need
                      for component, need in component_needs.items()]
                 )
-
                 # Compute with bom quantity
-                bom_qty = uom_obj._compute_qty_obj(
-                    bom.product_uom,
+                bom_qty = bom.product_uom_id._compute_quantity(
                     bom.product_qty,
                     bom.product_tmpl_id.uom_id
                 )
@@ -89,6 +84,7 @@ class ProductProduct(models.Model):
 
         return component[stock_available_mrp_based_on]
 
+    @api.model
     def _get_components_needs(self, product, bom):
         """ Return the needed qty of each compoments in the *bom* of *product*.
 
@@ -96,18 +92,12 @@ class ProductProduct(models.Model):
         :type bom: mrp_bom
         :rtype: collections.Counter
         """
-        bom_obj = self.env['mrp.bom']
-        uom_obj = self.env['product.uom']
-        product_obj = self.env['product.product']
-
         needs = Counter()
-        for bom_component in bom_obj._bom_explode(bom, product, 1.0)[0]:
-            product_uom = uom_obj.browse(bom_component['product_uom'])
-            component = product_obj.browse(bom_component['product_id'])
+        for line, line_data in bom.explode(product, 1.0)[1]:
+            component = line.product_id
 
-            component_qty = uom_obj._compute_qty_obj(
-                product_uom,
-                bom_component['product_qty'],
+            component_qty = component.uom_id._compute_quantity(
+                line.product_qty,
                 component.uom_id,
             )
             needs += Counter(
@@ -122,8 +112,8 @@ class ProductProduct(models.Model):
         """
         bom_obj = self.env['mrp.bom']
 
-        bom_id = bom_obj._bom_find(product_id=self.id)
-        if bom_id:
-            bom = bom_obj.browse(bom_id)
-            for bom_component in bom_obj._bom_explode(bom, self, 1.0)[0]:
-                self.component_ids |= self.browse(bom_component['product_id'])
+        for product in self:
+            bom = bom_obj._bom_find(product=product)
+            if bom:
+                for line, line_data in bom.explode(product, 1.0)[1]:
+                    product.component_ids |= line.product_id
