@@ -18,11 +18,15 @@
                 </attribute>
             </field>
             <xpath expr="//button[@name='action_done']"
+                   position="attributes">
+                <attribute name="groups">stock_inventory_discrepancy.group_stock_inventory_validation</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_done']"
                    position="after">
                 <button name="action_force_done"
                         string="Force Validation" type="object"
                         class="oe_highlight"
-                        groups="stock_inventory_discrepancy.group_stock_control_manager"
+                        groups="stock_inventory_discrepancy.group_stock_inventory_validation_always"
                         attrs="{'invisible': ['|',('state', '!=', 'pending'),('over_discrepancy_line_count', '=', 0)]}"/>
             </xpath>
             <field name="date" position="after">

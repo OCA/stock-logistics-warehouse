@@ -10,7 +10,7 @@ Adds the capability to show the discrepancy of every line in an inventory and
 to block the inventory validation (setting it as 'Pending to Approve') when the
 discrepancy is greater than a user defined threshold.
 
-Only new group "Inventory / Control Manager" will be able to force the
+Only new group "Validate All inventory Adjustments" will be able to force the
 validation of those blocked inventories.
 
 
@@ -34,8 +34,8 @@ If you configured a "Maximum Discrepancy Rate Threshold".
   and show the quantity of lines that exceed the threshold.
 * If both WH and location thresholds are configured, the location one has
   preference.
-* The warehouse control manager can force the validation of an inventory
-  pending to approve.
+* The user with "Validate All inventory Adjustments" rights can force the
+  validation of an inventory pending to approve.
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
