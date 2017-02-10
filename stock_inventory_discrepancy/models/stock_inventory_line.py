@@ -16,6 +16,8 @@ class StockInventoryLine(models.Model):
             self.discrepancy_percent = 100 * (abs(
                 self.product_qty - self.theoretical_qty)) \
                 / self.theoretical_qty
+        elif not self.theoretical_qty and self.product_qty:
+            self.discrepancy_percent = 100.0
 
     @api.one
     def _get_discrepancy_threshold(self):
