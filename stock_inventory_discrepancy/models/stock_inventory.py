@@ -19,19 +19,10 @@ class StockInventory(models.Model):
     @api.one
     @api.depends('line_ids.product_qty', 'line_ids.theoretical_qty')
     def _compute_over_discrepancy_line_count(self):
-        threshold = 0.0
-        discrepancies = self.line_ids.mapped('discrepancy_percent')
-        wh_id = self.location_id.get_warehouse(self.location_id)
-        wh = self.env['stock.warehouse'].browse(wh_id)
-        if self.location_id.discrepancy_threshold > 0.0:
-            threshold = self.location_id.discrepancy_threshold
-        elif wh.discrepancy_threshold > 0.0:
-            threshold = wh.discrepancy_threshold
-        else:
-            pass
-        if threshold:
-            self.over_discrepancy_line_count = sum(d > threshold for
-                                                   d in discrepancies)
+        lines = self.line_ids
+        self.over_discrepancy_line_count = sum(
+            abs(d.discrepancy_percent) > d.discrepancy_threshold
+            for d in lines)
 
     state = fields.Selection(
         selection=INVENTORY_STATE_SELECTION,
