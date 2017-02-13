@@ -11,7 +11,9 @@ to block the inventory validation (setting it as 'Pending to Approve') when the
 discrepancy is greater than a user defined threshold.
 
 Only new group "Validate All inventory Adjustments" will be able to force the
-validation of those blocked inventories.
+validation of those blocked inventories. By default Stock manager will belong
+to this group. In addition, Stock Users can validate inventories under the
+threshold now.
 
 
 Configuration
