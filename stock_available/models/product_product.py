@@ -14,6 +14,16 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     @api.multi
+    def _product_available(self, field_names=None, arg=False):
+        res = super(ProductProduct, self)._product_available(
+            field_names=field_names, arg=arg)
+        for prod_id in res:
+            res[prod_id]['immediately_usable_qty'] = res[prod_id][
+                'virtual_available']
+
+        return res
+
+    @api.multi
     @api.depends('virtual_available')
     def _immediately_usable_qty(self):
         """No-op implementation of the stock available to promise.
@@ -25,8 +35,9 @@ class ProductProduct(models.Model):
             decide in advance how to compute the template's quantity from the
             variants.
         """
+        res = self._product_available()
         for prod in self:
-            prod.immediately_usable_qty = prod.virtual_available
+            prod.immediately_usable_qty = res[prod.id]['immediately_usable_qty']
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),

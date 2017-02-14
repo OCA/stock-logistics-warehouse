@@ -26,8 +26,6 @@ class ProductTemplate(models.Model):
 
         This is the same implementation as for variants."""
         super(ProductTemplate, self)._immediately_usable_qty()
-        for tmpl in self:
-            tmpl.immediately_usable_qty += tmpl.potential_qty
 
     @api.multi
     @api.depends('product_variant_ids.potential_qty')

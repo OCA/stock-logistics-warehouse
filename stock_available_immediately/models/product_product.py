@@ -10,11 +10,19 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     @api.multi
+    def _product_available(self, field_names=None, arg=False):
+        res = super(ProductProduct, self)._product_available(
+            field_names=field_names, arg=arg)
+        for prod_id in res:
+            res[prod_id]['immediately_usable_qty'] = res[prod_id][
+                'immediately_usable_qty'] - res[prod_id]['incoming_qty']
+
+        return res
+
+    @api.multi
     @api.depends('virtual_available', 'incoming_qty')
     def _immediately_usable_qty(self):
         """Ignore the incoming goods in the quantity available to promise
 
         This is the same implementation as for templates."""
         super(ProductProduct, self)._immediately_usable_qty()
-        for prod in self:
-            prod.immediately_usable_qty -= prod.incoming_qty
