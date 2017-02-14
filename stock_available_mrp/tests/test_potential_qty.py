@@ -510,6 +510,6 @@ class TestPotentialQty(TransactionCase):
         )
 
         self.assertEqual(
-            {p1.id: 3.0, p2.id: 3.0, p3.id: 0.0},
+            {p1.id: 0.0, p2.id: 3.0, p3.id: 0.0},
             {p.id: p.potential_qty for p in products}
         )
