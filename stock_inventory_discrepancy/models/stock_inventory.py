@@ -21,7 +21,7 @@ class StockInventory(models.Model):
     def _compute_over_discrepancy_line_count(self):
         lines = self.line_ids
         self.over_discrepancy_line_count = sum(
-            abs(d.discrepancy_percent) > d.discrepancy_threshold
+            d.discrepancy_percent > d.discrepancy_threshold
             for d in lines)
 
     state = fields.Selection(

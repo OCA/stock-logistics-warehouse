@@ -13,9 +13,9 @@ class StockInventoryLine(models.Model):
     def _compute_discrepancy(self):
         self.discrepancy_qty = self.product_qty - self.theoretical_qty
         if self.theoretical_qty:
-            self.discrepancy_percent = 100 * (abs(
-                self.product_qty - self.theoretical_qty)) \
-                / self.theoretical_qty
+            self.discrepancy_percent = 100 * abs(
+                (self.product_qty - self.theoretical_qty) /
+                self.theoretical_qty)
         elif not self.theoretical_qty and self.product_qty:
             self.discrepancy_percent = 100.0
 
