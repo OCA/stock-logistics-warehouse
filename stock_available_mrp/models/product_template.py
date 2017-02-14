@@ -34,12 +34,12 @@ class ProductTemplate(models.Model):
             potential_qty = 0.0
             if tmpl.bom_ids:
                 for p in tmpl.product_variant_ids:
-                    if potential_qty < variant_available[p.id][
-                        "potential_qty"]:
+                    if potential_qty <\
+                            variant_available[p.id]["potential_qty"]:
                         potential_qty = variant_available[p.id][
                             "potential_qty"]
                 res[tmpl.id]['immediately_usable_qty'] = potential_qty
-	    res[tmpl.id].update({"potential_qty": potential_qty})
+            res[tmpl.id].update({"potential_qty": potential_qty})
         return res
 
     @api.multi
