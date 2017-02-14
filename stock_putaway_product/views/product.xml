@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <!-- Product Form view -->
+        <!--
+            inheriting base structure of product.template,
+            common with product.product
+         -->
+        <record id="view_template_property_form" model="ir.ui.view">
+            <field name="name">nl.product.normal.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='store']/field[@name='loc_rack']"
+                       position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='store']/field[@name='loc_row']"
+                       position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='store']/field[@name='loc_case']"
+                       position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- view specific to product.template -->
+        <record id="product_template_only_form_view" model="ir.ui.view">
+            <field name="name">product.template.product.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id"
+                   ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='store']" position="inside">
+                    <field name="product_putaway_ids"
+                           context="{'default_product_template_id': active_id }"
+                           nolabel="1" colspan="2"
+                           groups="stock.group_stock_user">
+                        <tree>
+                            <field name="putaway_id"/>
+                            <field name="product_product_id"/>
+                            <field name="fixed_location_id"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- view specific to product.product -->
+        <record id="product_normal_form_view" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='store']" position="inside">
+                    <field name="product_putaway_ids"
+                           context="{'default_product_template_id': product_tmpl_id, 'default_product_product_id': active_id}"
+                           nolabel="1" colspan="2" groups="stock.group_stock_user">
+                        <tree>
+                            <field name="putaway_id"/>
+                            <field name="fixed_location_id"/>
+                        </tree>
+                        <form string="Product putaway stragegy">
+                            <group colspan="4">
+                                <field name="putaway_id"/>
+                                <field name="product_template_id" invisible="1"/>
+                                <field name="product_product_id"  invisible="1"/>
+                                <field name="fixed_location_id"
+                                       domain="[('usage','=','internal')]"/>
+                            </group>
+                        </form>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+
+</openerp>

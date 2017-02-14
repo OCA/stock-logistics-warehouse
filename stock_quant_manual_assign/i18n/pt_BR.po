@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-24 09:07+0000\n"
-"PO-Revision-Date: 2015-10-24 09:08+0000\n"
+"POT-Creation-Date: 2017-01-07 07:40+0000\n"
+"PO-Revision-Date: 2017-01-11 15:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -41,9 +41,21 @@ msgid "Created on"
 msgstr "Criado em"
 
 #. module: stock_quant_manual_assign
+#: field:assign.manual.quants,display_name:0
+#: field:assign.manual.quants.lines,display_name:0
+msgid "Display Name"
+msgstr "Nome para Mostrar"
+
+#. module: stock_quant_manual_assign
 #: field:assign.manual.quants,id:0 field:assign.manual.quants.lines,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,__last_update:0
+#: field:assign.manual.quants.lines,__last_update:0
+msgid "Last Modified on"
+msgstr "Última atualização em"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,write_uid:0
@@ -56,6 +68,16 @@ msgstr "Última atualização por"
 #: field:assign.manual.quants.lines,write_date:0
 msgid "Last Updated on"
 msgstr "Última atualização em"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,location_id:0
+msgid "Location"
+msgstr "Location"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,lot_id:0
+msgid "Lot"
+msgstr "Lot"
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -78,6 +100,11 @@ msgstr "Movimentações"
 #: field:assign.manual.quants,name:0
 msgid "Name"
 msgstr "Nome"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,package_id:0
+msgid "Package"
+msgstr "Package"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
@@ -106,6 +133,16 @@ msgid "Quants"
 msgstr "Quants"
 
 #. module: stock_quant_manual_assign
+#: field:assign.manual.quants,move_qty:0
+msgid "Remaining qty"
+msgstr "Remaining qty"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,lines_qty:0
+msgid "Reserved qty"
+msgstr "Reserved qty"
+
+#. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,selected:0
 msgid "Select"
 msgstr "Selecione"
@@ -113,7 +150,12 @@ msgstr "Selecione"
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimentação de estoque"
+
+#. module: stock_quant_manual_assign
+#: help:assign.manual.quants.lines,package_id:0
+msgid "The package containing this quant"
+msgstr "The package containing this quant"
 
 #. module: stock_quant_manual_assign
 #: field:stock.move,picking_type_code:0

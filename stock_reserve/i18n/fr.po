@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 01:03+0000\n"
-"PO-Revision-Date: 2016-04-27 10:59+0000\n"
+"POT-Creation-Date: 2017-01-18 18:31+0000\n"
+"PO-Revision-Date: 2017-01-19 20:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Société"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
@@ -94,12 +94,12 @@ msgstr "Créé le"
 #. module: stock_reserve
 #: field:stock.reservation,date:0
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #. module: stock_reserve
 #: field:stock.reservation,name:0
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #. module: stock_reserve
 #: field:stock.reservation,partner_id:0
@@ -109,7 +109,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,location_dest_id:0
 msgid "Destination Location"
-msgstr ""
+msgstr "Emplacement destination"
 
 #. module: stock_reserve
 #: field:stock.reservation,move_dest_id:0
@@ -129,7 +129,7 @@ msgstr "Détails"
 #. module: stock_reserve
 #: field:stock.reservation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom à afficher"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -139,7 +139,7 @@ msgstr "Brouillon"
 #. module: stock_reserve
 #: field:stock.reservation,date_expected:0
 msgid "Expected Date"
-msgstr ""
+msgstr "Date prévue"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -175,7 +175,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: stock_reserve
 #: field:stock.reservation,write_uid:0
@@ -297,7 +297,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,picking_type_id:0
 msgid "Picking Type"
-msgstr ""
+msgstr "Type de préparation"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_packaging:0
@@ -312,12 +312,12 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,priority:0
 msgid "Priority"
-msgstr ""
+msgstr "Priorité"
 
 #. module: stock_reserve
 #: field:stock.reservation,procurement_id:0
 msgid "Procurement"
-msgstr ""
+msgstr "Procurement"
 
 #. module: stock_reserve
 #: field:stock.reservation,group_id:0
@@ -345,7 +345,7 @@ msgstr "Modèle de produit"
 #. module: stock_reserve
 #: field:stock.reservation,product_uos:0
 msgid "Product UOS"
-msgstr ""
+msgstr "UdV de l'article"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -371,7 +371,7 @@ msgstr "Quantité"
 #. module: stock_reserve
 #: field:stock.reservation,product_uos_qty:0
 msgid "Quantity (UOS)"
-msgstr ""
+msgstr "Quantité (UdV)"
 
 #. module: stock_reserve
 #: field:stock.reservation,availability:0
@@ -401,7 +401,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,picking_id:0
 msgid "Reference"
-msgstr ""
+msgstr "Référence"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form
@@ -484,7 +484,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,origin:0
 msgid "Source"
-msgstr ""
+msgstr "Source"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -579,7 +579,7 @@ msgstr ""
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_tree
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #. module: stock_reserve
 #: field:stock.reservation,picking_type_code:0

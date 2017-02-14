@@ -1,0 +1,172 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_quant_manual_assign
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Amharic (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/am/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: am\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_quant_manual_assign
+#: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_quant_manual_assign
+#: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
+msgid "Confirm"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,create_uid:0
+#: field:assign.manual.quants.lines,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,create_date:0
+#: field:assign.manual.quants.lines,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,display_name:0
+#: field:assign.manual.quants.lines,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,id:0 field:assign.manual.quants.lines,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,__last_update:0
+#: field:assign.manual.quants.lines,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,write_uid:0
+#: field:assign.manual.quants.lines,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,write_date:0
+#: field:assign.manual.quants.lines,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,lot_id:0
+msgid "Lot"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
+#: view:stock.move:stock_quant_manual_assign.stock_move_manual_quants_form_view
+#: view:stock.move:stock_quant_manual_assign.stock_move_manual_quants_picking_form_view
+msgid "Manual Quants"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.actions.act_window,name:stock_quant_manual_assign.assign_manual_quants_action
+msgid "Manual quants"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,assign_wizard:0
+msgid "Move"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,name:0
+msgid "Name"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,package_id:0
+msgid "Package"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
+msgid "Picking List"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,qty:0
+msgid "QTY"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,quant:0
+msgid "Quant"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
+#, python-format
+msgid "Quantity is higher than the needed one"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,quants_lines:0
+msgid "Quants"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,move_qty:0
+msgid "Remaining qty"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,lines_qty:0
+msgid "Reserved qty"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,selected:0
+msgid "Select"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: help:assign.manual.quants.lines,package_id:0
+msgid "The package containing this quant"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:stock.move,picking_type_code:0
+msgid "Type of Operation"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
+msgid "or"
+msgstr "o"
+
+#. module: stock_quant_manual_assign
+#: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
+msgid "qty"
+msgstr ""

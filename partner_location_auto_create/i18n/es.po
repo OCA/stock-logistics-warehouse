@@ -3,13 +3,14 @@
 # * partner_location_auto_create
 # 
 # Translators:
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-26 14:13+0000\n"
-"PO-Revision-Date: 2016-02-26 14:13+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"PO-Revision-Date: 2016-11-25 14:56+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,12 +26,12 @@ msgstr "Compañías"
 #. module: partner_location_auto_create
 #: field:res.company,default_customer_location:0
 msgid "Default Customer Location"
-msgstr ""
+msgstr "Ubicación de cliente por defecto"
 
 #. module: partner_location_auto_create
 #: field:res.company,default_supplier_location:0
 msgid "Default Supplier Location"
-msgstr ""
+msgstr "Ubicación de proveedor por defecto"
 
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_stock_location
@@ -46,25 +47,30 @@ msgid "Locations"
 msgstr "Ubicaciones"
 
 #. module: partner_location_auto_create
+#: field:res.partner,locations_count:0
+msgid "Locations count"
+msgstr "Nº de ubicaciones"
+
+#. module: partner_location_auto_create
 #: field:stock.location,main_partner_location:0
 msgid "Main Partner Location"
-msgstr ""
+msgstr "Ubicación de la empresa principal"
 
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Empresa"
 
 #. module: partner_location_auto_create
 #: code:addons/partner_location_auto_create/models/stock_location.py:42
 #, python-format
 msgid "The partner %s already has a main location of type %s."
-msgstr ""
+msgstr "El cliente %s ya tiene una ubicación principal de tipo %s."
 
 #. module: partner_location_auto_create
 #: help:stock.location,main_partner_location:0
 msgid "The root location for a partner's location for a specific type."
-msgstr ""
+msgstr "La ubicación raíz para las ubicaciones de empresa para un tipo específico."
 
 #. module: partner_location_auto_create
 #: view:res.partner:partner_location_auto_create.view_partner_form
@@ -74,7 +80,7 @@ msgid ""
 "                        ('usage', '=', 'customer'),\n"
 "                        ('company_id', 'in', [company_id, False]),\n"
 "                    ]"
-msgstr ""
+msgstr "[\n                        ('partner_id', 'in', [id, False]),\n                        ('usage', '=', 'customer'),\n                        ('company_id', 'in', [company_id, False]),\n                    ]"
 
 #. module: partner_location_auto_create
 #: view:res.partner:partner_location_auto_create.view_partner_form
@@ -84,4 +90,4 @@ msgid ""
 "                        ('usage', '=', 'supplier'),\n"
 "                        ('company_id', 'in', [company_id, False]),\n"
 "                    ]"
-msgstr ""
+msgstr "[\n                        ('partner_id', 'in', [id, False]),\n                        ('usage', '=', 'supplier'),\n                        ('company_id', 'in', [company_id, False]),\n                    ]"

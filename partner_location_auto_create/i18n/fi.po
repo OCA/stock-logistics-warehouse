@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-26 14:13+0000\n"
-"PO-Revision-Date: 2016-02-26 14:13+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-12-30 03:45+0000\n"
+"PO-Revision-Date: 2016-12-27 08:25+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Yritykset"
 
 #. module: partner_location_auto_create
 #: field:res.company,default_customer_location:0
@@ -46,6 +46,11 @@ msgid "Locations"
 msgstr "Paikat"
 
 #. module: partner_location_auto_create
+#: field:res.partner,locations_count:0
+msgid "Locations count"
+msgstr ""
+
+#. module: partner_location_auto_create
 #: field:stock.location,main_partner_location:0
 msgid "Main Partner Location"
 msgstr ""
@@ -53,7 +58,7 @@ msgstr ""
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Kumppani"
 
 #. module: partner_location_auto_create
 #: code:addons/partner_location_auto_create/models/stock_location.py:42

@@ -1,0 +1,75 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_warehouse_orderpoint_stock_info
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-23 02:06+0000\n"
+"PO-Revision-Date: 2016-12-23 02:06+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: field:stock.warehouse.orderpoint,virtual_location_qty:0
+msgid "Forecast On Location"
+msgstr ""
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: field:stock.warehouse.orderpoint,incoming_location_qty:0
+msgid "Incoming On Location"
+msgstr ""
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: model:ir.model,name:stock_warehouse_orderpoint_stock_info.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Regra minima de inventário"
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: field:stock.warehouse.orderpoint,outgoing_location_qty:0
+msgid "Outgoing On Location"
+msgstr ""
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: view:stock.warehouse.orderpoint:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_search_view
+msgid "Product"
+msgstr "Produto"
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: view:stock.warehouse.orderpoint:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_search_view
+#: field:stock.warehouse.orderpoint,product_category:0
+msgid "Product Category"
+msgstr ""
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: field:stock.warehouse.orderpoint,product_location_qty:0
+msgid "Quantity On Location"
+msgstr ""
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: view:stock.warehouse.orderpoint:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_form_view
+msgid "Rules"
+msgstr "Regras"
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: help:stock.warehouse.orderpoint,product_category:0
+msgid "Select category for the current product"
+msgstr ""
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: view:stock.warehouse.orderpoint:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_form_view
+msgid "Stock Info"
+msgstr "Informação de estoque"
+
+#. module: stock_warehouse_orderpoint_stock_info
+#: view:stock.warehouse.orderpoint:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_search_view
+msgid "Warehouse"
+msgstr ""

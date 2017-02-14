@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_inventory_revaluation,stock.inventory.revaluation,model_stock_inventory_revaluation,stock_account.group_inventory_valuation,1,1,1,1
+access_stock_inventory_revaluation_quant,stock.inventory.revaluation.quant,model_stock_inventory_revaluation_quant,stock_account.group_inventory_valuation,1,1,1,1
+access_stock_inventory_revaluation_account_user,stock.inventory.revaluation account user,model_stock_inventory_revaluation,account.group_account_user,1,0,0,0
+access_stock_quant_inventory_valuation,stock.quant inventory valuation,stock.model_stock_quant,stock_account.group_inventory_valuation,1,1,0,0

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 02:42+0000\n"
-"PO-Revision-Date: 2016-04-14 14:54+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,6 +23,11 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: stock_inventory_hierarchical
+#: field:stock.inventory,complete_name:0
+msgid "Complete reference"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_uid:0
 msgid "Created by"
 msgstr "Créé par"
@@ -31,6 +36,11 @@ msgstr "Créé par"
 #: field:stock.generate.inventory,create_date:0
 msgid "Created on"
 msgstr "Créé le"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,display_name:0
+msgid "Display Name"
+msgstr "Nom à afficher"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:91
@@ -78,6 +88,11 @@ msgid "Inventory prefix"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_uid:0
 msgid "Last Updated by"
 msgstr "Mis à jour par"
@@ -105,7 +120,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,location_id:0
 msgid "Location"
-msgstr ""
+msgstr "Emplacement"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.view_inventory_subinventories_filter
@@ -142,17 +157,22 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,parent_left:0
 msgid "Parent Left"
-msgstr ""
+msgstr "Parent Left"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,parent_right:0
 msgid "Parent Right"
+msgstr "Parent Right"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,progress_rate:0
+msgid "Progress"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_tree_view
 msgid "Reference"
-msgstr ""
+msgstr "Référence"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view

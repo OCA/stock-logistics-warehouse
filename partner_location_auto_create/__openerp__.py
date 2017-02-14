@@ -22,7 +22,7 @@
 
 {
     'name': 'Partner Location Auto Create',
-    'version': '0.1',
+    'version': '8.0.0.1.0',
     'author': 'Savoir-faire Linux,Odoo Community Association (OCA)',
     'category': 'Warehouse',
     'license': 'AGPL-3',

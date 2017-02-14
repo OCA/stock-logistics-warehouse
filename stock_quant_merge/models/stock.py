@@ -19,6 +19,7 @@ class StockQuant(models.Model):
                 ('lot_id', '=', self.lot_id.id),
                 ('package_id', '=', self.package_id.id),
                 ('location_id', '=', self.location_id.id),
+                ('company_id', '=', self.company_id.id),
                 ('reservation_id', '=', False),
                 ('propagated_from_id', '=', self.propagated_from_id.id)]
 
@@ -29,17 +30,21 @@ class StockQuant(models.Model):
         for quant2merge in self.filtered(lambda x: not x.reservation_id):
             if quant2merge in pending_quants:
                 quants = self.search(quant2merge._mergeable_domain())
-                cont = 1
-                cost = quant2merge.cost
+                qty = quant2merge.qty
+                unitcost_qty = quant2merge.cost * qty
+                merge = False
                 for quant in quants:
                     if (self._get_latest_move(quant2merge) ==
                             self._get_latest_move(quant)):
-                        quant2merge.sudo().qty += quant.qty
-                        cost += quant.cost
-                        cont += 1
+                        merge = True
+                        qty += quant.qty
+                        unitcost_qty += quant.cost * quant.qty
                         pending_quants -= quant
                         quant.with_context(force_unlink=True).sudo().unlink()
-                quant2merge.sudo().cost = cost / cont
+                if merge:
+                    quant2merge.sudo().write({
+                        'qty': qty,
+                        'cost': qty and unitcost_qty / float(qty) or 0})
 
     @api.model
     def quants_unreserve(self, move):

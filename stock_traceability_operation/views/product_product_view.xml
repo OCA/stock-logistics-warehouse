@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2015 Numérigraphe
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="product_product_traceability_operation">
+    <field name="name">Add operation traceability on product variants</field>
+    <field name="model">product.product</field>
+    <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+    <field name="arch" type="xml">
+        <xpath expr="//button[@name='%(stock.act_product_stock_move_open)d']" position="after">
+            <button class="oe_inline oe_stat_button" string="Detailed traceability"
+                name="action_traceability_operation" type="object"
+                attrs="{'invisible':[('type', '=', 'service')]}"
+                groups="stock.group_stock_user" icon="fa-arrows-v"/>
+        </xpath>
+    </field>
+</record>
+
+</data>
+</openerp>

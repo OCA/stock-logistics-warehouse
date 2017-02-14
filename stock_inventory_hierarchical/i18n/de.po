@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 02:42+0000\n"
-"PO-Revision-Date: 2016-04-14 14:54+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-01-07 07:40+0000\n"
+"PO-Revision-Date: 2017-01-10 00:36+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,6 +23,11 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #. module: stock_inventory_hierarchical
+#: field:stock.inventory,complete_name:0
+msgid "Complete reference"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_uid:0
 msgid "Created by"
 msgstr "Angelegt durch"
@@ -31,6 +36,11 @@ msgstr "Angelegt durch"
 #: field:stock.generate.inventory,create_date:0
 msgid "Created on"
 msgstr "Angelegt am"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,display_name:0
+msgid "Display Name"
+msgstr "Anzeigename"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:91
@@ -76,6 +86,11 @@ msgstr ""
 #: field:stock.generate.inventory,prefix_inv_name:0
 msgid "Inventory prefix"
 msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_uid:0
@@ -150,9 +165,14 @@ msgid "Parent Right"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
+#: field:stock.inventory,progress_rate:0
+msgid "Progress"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_tree_view
 msgid "Reference"
-msgstr ""
+msgstr "Referenz"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 01:03+0000\n"
-"PO-Revision-Date: 2016-04-27 10:59+0000\n"
+"POT-Creation-Date: 2017-01-07 07:41+0000\n"
+"PO-Revision-Date: 2017-01-10 08:59+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Unternehmen"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
@@ -94,12 +94,12 @@ msgstr "Angelegt am"
 #. module: stock_reserve
 #: field:stock.reservation,date:0
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. module: stock_reserve
 #: field:stock.reservation,name:0
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #. module: stock_reserve
 #: field:stock.reservation,partner_id:0
@@ -129,7 +129,7 @@ msgstr "Details"
 #. module: stock_reserve
 #: field:stock.reservation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -175,7 +175,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: stock_reserve
 #: field:stock.reservation,write_uid:0
@@ -401,7 +401,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,picking_id:0
 msgid "Reference"
-msgstr ""
+msgstr "Referenz"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form

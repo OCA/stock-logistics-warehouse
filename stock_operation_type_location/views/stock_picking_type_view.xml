@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="stock_picking_type_form_view">
+            <field name="name">Picking Types</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <field name="default_location_src_id" attrs="{'required': [('code', '=', 'internal')]}" position="after">
+                    <field  name="allowed_location_ids" 
+                            domain="[('usage', '&lt;&gt;', 'view')]"
+                    />
+                </field>
+                <field name="default_location_dest_id" attrs="{'required': [('code', 'in', ('internal', 'incoming'))]}" position="after">
+                    <field  name="allowed_dest_location_ids" 
+                            domain="[('usage', '&lt;&gt;', 'view')]"
+                    />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

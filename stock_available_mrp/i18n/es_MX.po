@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_available_mrp
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-29 18:42+0000\n"
+"PO-Revision-Date: 2016-12-05 09:28+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (Mexico) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_MX/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_MX\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_available_mrp
+#: field:product.product,component_ids:0
+msgid "Component ids"
+msgstr ""
+
+#. module: stock_available_mrp
+#: field:product.product,potential_qty:0
+#: field:product.template,potential_qty:0
+msgid "Potential"
+msgstr ""
+
+#. module: stock_available_mrp
+#: model:ir.model,name:stock_available_mrp.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: stock_available_mrp
+#: model:ir.model,name:stock_available_mrp.model_product_template
+msgid "Product Template"
+msgstr "Plantilla del producto"
+
+#. module: stock_available_mrp
+#: help:product.product,potential_qty:0
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand."
+msgstr ""
+
+#. module: stock_available_mrp
+#: help:product.template,potential_qty:0
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand. If the product has several variants, this will be the biggest "
+"quantity that can be made for a any single variant."
+msgstr ""
+
+#. module: stock_available_mrp
+#: model:product.uom,name:stock_available_mrp.thousand
+msgid "Thousand"
+msgstr ""

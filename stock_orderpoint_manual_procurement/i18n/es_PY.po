@@ -1,0 +1,181 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_orderpoint_manual_procurement
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-23 02:06+0000\n"
+"PO-Revision-Date: 2016-12-23 02:06+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Spanish (Paraguay) (https://www.transifex.com/oca/teams/23907/es_PY/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_PY\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_orderpoint_manual_procurement
+#: view:make.procurement.orderpoint:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_orderpoint_manual_procurement
+#: model:res.groups,name:stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty
+msgid "Change quantity in manual procurements from reordering rules"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: view:stock.warehouse.orderpoint:stock_orderpoint_manual_procurement.view_warehouse_orderpoint_tree
+msgid "Create Procurement"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint,create_uid:0
+#: field:make.procurement.orderpoint.item,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint,create_date:0
+#: field:make.procurement.orderpoint.item,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint,display_name:0
+#: field:make.procurement.orderpoint.item,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: view:make.procurement.orderpoint:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid "Execute"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint,id:0
+#: field:make.procurement.orderpoint.item,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_orderpoint_manual_procurement
+#: view:make.procurement.orderpoint:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+#: field:make.procurement.orderpoint,item_ids:0
+msgid "Items"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint,__last_update:0
+#: field:make.procurement.orderpoint.item,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint,write_uid:0
+#: field:make.procurement.orderpoint.item,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima actualización por"
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint,write_date:0
+#: field:make.procurement.orderpoint.item,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint.item,location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model,name:stock_orderpoint_manual_procurement.model_make_procurement_orderpoint_item
+msgid "Make Procurements from Orderpoint Item"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model,name:stock_orderpoint_manual_procurement.model_make_procurement_orderpoint
+msgid "Make Procurements from Orderpoints"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model,name:stock_orderpoint_manual_procurement.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint.item,date_planned:0
+msgid "Planned Date"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:stock.warehouse.orderpoint,procure_recommended_qty:0
+msgid "Procure recommendation"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: view:make.procurement.orderpoint:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid "Procurement Request"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: view:stock.warehouse.orderpoint:stock_orderpoint_manual_procurement.view_warehouse_orderpoint_tree
+msgid "Procurements"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint.item,product_id:0
+msgid "Product"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint.item,qty:0
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint.item,orderpoint_id:0
+msgid "Reordering rule"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:stock.warehouse.orderpoint,procure_recommended_date:0
+msgid "Request Date"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.actions.act_window,name:stock_orderpoint_manual_procurement.act_make_procurement_from_orderpoint
+msgid "Request Procurement"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint.item,uom_id:0
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: view:make.procurement.orderpoint:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid ""
+"Use this assistant to generate a procurement request for this\n"
+"                        stock buffer. According to the product configuration,\n"
+"                        this may trigger a draft purchase order, a manufacturing\n"
+"                        order or a transfer picking."
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint.item,warehouse_id:0
+msgid "Warehouse"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: field:make.procurement.orderpoint.item,wiz_id:0
+msgid "Wizard"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: view:make.procurement.orderpoint:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid "or"
+msgstr ""

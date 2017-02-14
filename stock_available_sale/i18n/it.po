@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Paolo Valier, 2016
+# Paolo Valier, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-01 15:24+0000\n"
-"PO-Revision-Date: 2016-05-13 12:56+0000\n"
+"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"PO-Revision-Date: 2016-11-08 16:59+0000\n"
 "Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +27,7 @@ msgstr "Prodotto"
 #. module: stock_available_sale
 #: model:ir.model,name:stock_available_sale.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Template Prodotto"
 
 #. module: stock_available_sale
 #: field:product.product,quoted_qty:0 field:product.template,quoted_qty:0

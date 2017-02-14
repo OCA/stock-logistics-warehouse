@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 01:03+0000\n"
-"PO-Revision-Date: 2016-04-27 15:33+0000\n"
+"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"PO-Revision-Date: 2016-11-16 15:32+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_available_mrp
+#: field:product.product,component_ids:0
+msgid "Component ids"
+msgstr "ID-ji komponent"
 
 #. module: stock_available_mrp
 #: field:product.product,potential_qty:0
