@@ -26,7 +26,7 @@ class StockInventory(models.Model):
 
     state = fields.Selection(
         selection=INVENTORY_STATE_SELECTION,
-        string='Status', readonly=True, select=True, copy=False,
+        string='Status', readonly=True, index=True, copy=False,
         help="States of the Inventory Adjustment:\n"
              "- Draft: Inventory not started.\n"
              "- In Progress: Inventory in execution.\n"
