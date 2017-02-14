@@ -63,7 +63,7 @@ class ProductProduct(models.Model):
                     bom.product_tmpl_id.uom_id
                 )
                 res[prod_id]['potential_qty'] = bom_qty * \
-                                                components_potential_qty
+                    components_potential_qty
             res[prod_id]['immediately_usable_qty'] =\
                 res[prod_id]['potential_qty']
         return res

@@ -45,7 +45,8 @@ class ProductTemplate(models.Model):
         res = self._product_available()
         for tmpl in self.filtered(lambda x: not isinstance(
                 x.id, models.NewId)):
-            tmpl.immediately_usable_qty = res[tmpl.id]['immediately_usable_qty']
+            tmpl.immediately_usable_qty = \
+                res[tmpl.id]['immediately_usable_qty']
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),

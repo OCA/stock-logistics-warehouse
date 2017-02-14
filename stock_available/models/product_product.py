@@ -37,7 +37,8 @@ class ProductProduct(models.Model):
         """
         res = self._product_available()
         for prod in self:
-            prod.immediately_usable_qty = res[prod.id]['immediately_usable_qty']
+            prod.immediately_usable_qty = \
+                res[prod.id]['immediately_usable_qty']
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
