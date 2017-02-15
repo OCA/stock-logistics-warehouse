@@ -103,7 +103,7 @@ class PurchaseWizard(models.TransientModel):
 
     product = fields.Many2one(
         "product.product",
-        string="product",
+        string="Product",
         readonly=1
     )
     location = fields.Many2one(
@@ -115,7 +115,7 @@ class PurchaseWizard(models.TransientModel):
         "product.supplierinfo"
     )
     stock_avl = fields.Float("Currently available overall")
-    ultimate_purchase = fields.Date("ultimate purchase")
+    ultimate_purchase = fields.Date("Ultimate purchase")
     pending_rfq_lines = fields.Many2many(
         "purchase.order.line", string="Pending requests")
     name = fields.Char(

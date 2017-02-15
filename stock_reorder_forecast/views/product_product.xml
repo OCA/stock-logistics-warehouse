@@ -5,19 +5,18 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
-                <field name="seller_ids" position="before">
-                    <group colspan="2" col="4">
-                        <separator string="Purchase parameters" colspan="4"/>
+                <xpath expr="//field[@name='seller_ids']/preceding-sibling::separator[1]" position="before">
+                    <group string="Purchase parameters">
                         <field name="stock_period_max"/>
                         <field name="ultimate_purchase"/>
                         <field name="turnover_average"/>
                         <button 
                             type="action" 
-                            attrs = "{'invisible': [('ultimate_purchase', '=', False)]}"
-                            name = "%(stock_reorder_forecast.wizard_create_purchase_act)d"
-                            string = "Create proposal-RFQ "/>
+                            attrs="{'invisible': [('ultimate_purchase', '=', False)]}"
+                            name="%(stock_reorder_forecast.wizard_create_purchase_act)d"
+                            string="Create proposal-RFQ "/>
                     </group>
-                </field>
+                </xpath>
             </field>
         </record>
 
@@ -28,13 +27,13 @@
                 <field name="virtual_available" position="after" >
                     <field name="ultimate_purchase"/>
                     <field name="turnover_average"/>
-                </field>
-                <field name="ultimate_purchase" position="after">
                     <button 
                         type="action" 
-                        attrs = "{'invisible': [('ultimate_purchase', '=', False)]}"
-                        name = "%(stock_reorder_forecast.wizard_create_purchase_act)d"
-                        string = "Create proposal-RFQ "/>
+                        attrs="{'invisible': [('ultimate_purchase', '=', False)]}"
+                        name="%(stock_reorder_forecast.wizard_create_purchase_act)d"
+                        string="Create proposal-RFQ "
+                        icon="terp-dolar_ok!"
+                    />
                 </field>
             </field>
         </record>

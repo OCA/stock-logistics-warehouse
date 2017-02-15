@@ -22,6 +22,7 @@
         'wizards/purchase_wizard.xml',
         'wizards/purchase_supplier_wizard.xml',
         'views/product_product.xml',
+        "views/product_template.xml",
         'views/product_supplierinfo.xml',
         'views/product_category.xml',
         'views/partner_view.xml',
