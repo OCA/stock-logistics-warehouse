@@ -51,7 +51,7 @@ class PurchaseWizard(models.TransientModel):
         # TODO CHECK RFQ/PO MANAGMENT FROM PARTNER.
         return result
 
-    def _get_qty(self, product, supplier, stock_period_max):    
+    def _get_qty(self, product, supplier, stock_period_max):
         qty = float_round(
             product.turnover_average * product.stock_period_max -
             product.virtual_available, 0)
