@@ -43,13 +43,10 @@ class StockInventory(models.Model):
     def action_over_discrepancies(self):
         self.state = 'pending'
 
-    @api.multi
+    @api.one
     def action_done(self):
-        wh_id = self.location_id.get_warehouse(self.location_id)
-        wh = self.env['stock.warehouse'].browse(wh_id)
-        if self.over_discrepancy_line_count and \
-                (wh.discrepancy_threshold > 0.0 or
-                 self.location_id.discrepancy_threshold > 0.0):
+        if self.over_discrepancy_line_count and self.line_ids.filtered(
+                lambda t: t.discrepancy_threshold > 0.0):
             self.action_over_discrepancies()
         else:
             return super(StockInventory, self).action_done()

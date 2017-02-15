@@ -69,7 +69,7 @@ class TestInventoryDiscrepancy(TransactionCase):
                 }),
             ],
         })
-        starting_inv.action_done()
+        starting_inv.action_force_done()
 
     def test_compute_discrepancy(self):
         """Tests if the discrepancy is correctly computed.
