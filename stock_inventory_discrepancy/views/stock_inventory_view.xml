@@ -20,6 +20,7 @@
             <xpath expr="//button[@name='action_done']"
                    position="attributes">
                 <attribute name="groups">stock_inventory_discrepancy.group_stock_inventory_validation</attribute>
+                <attribute name="context">{'normal_view': True}</attribute>
             </xpath>
             <xpath expr="//button[@name='action_done']"
                    position="after">

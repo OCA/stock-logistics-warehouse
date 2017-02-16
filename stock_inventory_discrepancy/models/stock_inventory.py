@@ -3,7 +3,8 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 
 class StockInventory(models.Model):
@@ -43,13 +44,29 @@ class StockInventory(models.Model):
     def action_over_discrepancies(self):
         self.state = 'pending'
 
+    def _check_group_inventory_validation_always(self):
+        grp_inv_val = self.env.ref(
+            'stock_inventory_discrepancy.group_'
+            'stock_inventory_validation_always')
+        if grp_inv_val in self.env.user.groups_id:
+            return True
+        else:
+            raise UserError(
+                _('The Qty Update is over the Discrepancy Threshold.\n '
+                  'Please, contact a user with rights to perform '
+                  'this action.')
+            )
+
     @api.one
     def action_done(self):
         if self.over_discrepancy_line_count and self.line_ids.filtered(
                 lambda t: t.discrepancy_threshold > 0.0):
-            self.action_over_discrepancies()
-        else:
-            return super(StockInventory, self).action_done()
+            if self.env.context.get('normal_view', False):
+                self.action_over_discrepancies()
+                return True
+            else:
+                self._check_group_inventory_validation_always()
+        return super(StockInventory, self).action_done()
 
     @api.multi
     def action_force_done(self):
