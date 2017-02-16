@@ -9,3 +9,4 @@ from . import purchase_order
 from . import purchase_order_line
 from . import res_partner
 from . import procurement_order
+from . import product_template

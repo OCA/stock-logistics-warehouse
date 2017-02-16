@@ -166,33 +166,22 @@ class ProductProduct(models.Model):
                 TP.product_id AS id,
                 MAX(TP.stock_period_min) AS stock_period_min,
                 COALESCE(
-                    SUM(SOL.product_uom_qty), 0) /
-                    MAX(CASE WHEN TP.turnover_period < TP.prod_age
-                        THEN TP.turnover_period
-                    WHEN TP.prod_age > TP.turnover_period THEN TP.prod_age
-                    ELSE 1 END)
-                        AS turnover_average,
-                    MAX(TP.stock_period_max) AS stock_period_max
+                    SUM(SOL.product_uom_qty), 0
+                ) /
+                GREATEST(
+                    LEAST(MAX(TP.turnover_period), MAX(TP.prod_age)), 1
+                )
+                AS turnover_average,
+                MAX(TP.stock_period_max) AS stock_period_max
             FROM TP
             LEFT JOIN sale_order_line SOL on SOL.product_id = TP.product_id
-            AND SOL.product_id in
-                        (select product_id from procurement_order  where
-                            rule_id in
-                                (select id from procurement_rule where
-                                    procure_method='make_to_stock'
-                                )
-                        )
             AND NOT state IN ('draft', 'cancel')
-            and SOL.order_id in
-                (
-                    select id from sale_order where DATE(create_date) >
-                    (DATE(now()) - TP.turnover_period)
-                )
-            AND DATE(SOL.create_date) BETWEEN DATE(NOW()) - CAST(
-            CASE WHEN TP.turnover_period < TP.prod_age THEN TP.turnover_period
-            WHEN
-            TP.prod_age > 1 THEN TP.prod_age ELSE 1 END AS INTEGER)
-            AND DATE(NOW())
+            JOIN sale_order SO
+            ON SOL.order_id=SO.id
+            AND SO.date_order
+            BETWEEN now() - (
+                GREATEST(LEAST(TP.turnover_period, TP.prod_age), 1)||'days'
+            )::interval AND now()
             GROUP BY TP.product_id
         """
         self.env.cr.execute(sql, (

@@ -51,7 +51,7 @@ class PurchaseWizard(models.TransientModel):
         # TODO CHECK RFQ/PO MANAGMENT FROM PARTNER.
         return result
 
-    def _get_qty(self, product, supplier, stock_period_max):    
+    def _get_qty(self, product, supplier, stock_period_max):
         qty = float_round(
             product.turnover_average * product.stock_period_max -
             product.virtual_available, 0)
@@ -103,7 +103,7 @@ class PurchaseWizard(models.TransientModel):
 
     product = fields.Many2one(
         "product.product",
-        string="product",
+        string="Product",
         readonly=1
     )
     location = fields.Many2one(
@@ -115,7 +115,7 @@ class PurchaseWizard(models.TransientModel):
         "product.supplierinfo"
     )
     stock_avl = fields.Float("Currently available overall")
-    ultimate_purchase = fields.Date("ultimate purchase")
+    ultimate_purchase = fields.Date("Ultimate purchase")
     pending_rfq_lines = fields.Many2many(
         "purchase.order.line", string="Pending requests")
     name = fields.Char(
