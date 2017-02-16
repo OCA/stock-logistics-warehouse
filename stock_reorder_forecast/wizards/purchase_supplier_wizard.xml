@@ -7,18 +7,18 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Create proposal purchases for all products of supplier">
-                    <group col="4" colspan="1">
+                    <group>
                         <field name="name"/>
                         <field name="stock_period_min"/>
                     </group>
-                    <group col="4" colspan="1">
+                    <group>
                         <field name="ultimate_purchase" readonly="1"/>
                         <field name="ultimate_purchase_to" />
                     </group>
-                    <group col="4" colspan="1">
+                    <group>
                         <field name="primary_supplier_only"/>
                     </group> 
-                    <group col="4" colspan="1">
+                    <group>
                         <field 
                             name="supplier_products_primary" 
                             readonly="1" 
@@ -32,9 +32,9 @@
                         <field name="pending_rfq_lines" readonly="1"/>
                     </group>
                     <footer>
-                        <button special="cancel" string="Cancel" icon="gtk-cancel"/>
                         <button name="create_partner_rfq" string="Create RFQ of all products for this supplier" 
-                            type="object"/>
+                            type="object" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
                     </footer>
                 </form>
             </field>
