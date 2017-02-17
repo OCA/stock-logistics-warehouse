@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_cycle_count_user,stock.cycle.count user,model_stock_cycle_count,stock.group_stock_user,1,1,1,0
+access_stock_cycle_count_manager,stock.cycle.count manager,model_stock_cycle_count,stock.group_stock_manager,1,1,1,1
+access_stock_cycle_count_rule_user,stock.cycle.count.rule user,model_stock_cycle_count_rule,stock.group_stock_user,1,0,0,0
+access_stock_cycle_count_rule_manager,stock.cycle.count.rule manager,model_stock_cycle_count_rule,stock.group_stock_manager,1,1,1,1

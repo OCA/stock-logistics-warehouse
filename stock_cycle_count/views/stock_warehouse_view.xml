@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_warehouse_form" model="ir.ui.view">
+        <field name="name">Warehouse form - cycle count extension</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <notebook position="before">
+                <group string="Cycle Counting">
+                    <group >
+                        <field name="cycle_count_planning_horizon"/>
+                        <field name="counts_for_accuracy_qty"/>
+                    </group>
+                    <group>
+                        <field name="cycle_count_rule_ids" nolabel="1">Cycle
+                            count rules</field>
+                    </group>
+                </group>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="action_server_warehouse_execute_cycle_count"
+            model="ir.actions.server">
+        <field name="name">Compute Cycle Count Rules</field>
+        <field name="condition">True</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_stock_warehouse" />
+        <field name="state">code</field>
+        <field name="code">self.action_compute_cycle_count_rules(cr, uid, context.get('active_ids', []), context=context)</field>
+    </record>
+
+    <record model="ir.values" id="action_warehouse_execute_cycle_count">
+        <field name="name">action_warehouse_execute_cycle_count</field>
+        <field name="action_id"
+               ref="action_server_warehouse_execute_cycle_count" />
+        <field name="value" eval="'ir.actions.server,' + str(ref('action_server_warehouse_execute_cycle_count'))" />
+        <field name="key">action</field>
+        <field name="model_id" ref="model_stock_warehouse" />
+        <field name="model">stock.warehouse</field>
+        <field name="key2">client_action_multi</field>
+    </record>
+
+</odoo>
