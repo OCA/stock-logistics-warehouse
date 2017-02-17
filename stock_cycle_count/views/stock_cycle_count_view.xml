@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <!-- Stock Cycle Count List view -->
+    <record id="stock_cycle_count_tree_view" model="ir.ui.view">
+        <field name="name">stock.cycle.count.tree</field>
+        <field name="model">stock.cycle.count</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Cycle Count">
+                <field name="name"/>
+                <field name="location_id"/>
+                <field name="cycle_count_rule_id"/>
+                <field name="responsible_id"/>
+                <field name="date_deadline"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_cycle_count_form_view" model="ir.ui.view">
+        <field name="name">stock.cycle.count.form</field>
+        <field name="model">stock.cycle.count</field>
+        <field name="arch" type="xml">
+            <form string="cycle counts test:">
+                <header>
+                    <button name="action_create_inventory_adjustment"
+                    type="object" states="draft"
+                    string="Confirm" class="oe_highlight" />
+                    <button name="do_cancel" type="object"
+                    string="Cancel" states="draft"/>
+                    <field name="state" widget="statusbar"
+                    statusbar_visible="draft,open,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"
+                         attrs="{'invisible':
+                         [('state', 'not in', ('draft', 'open', 'done'))]}">
+                          <button name="action_view_inventory"
+                                  type="object" class="oe_stat_button"
+                                  icon="fa-building-o">
+                              <field name="inventory_adj_count"
+                                     widget="statinfo"
+                                     help="Inventory adjustments associated"
+                                     modifiers="{'readonly': true}"
+                                     string="Inventory Adjustments"/>
+                          </button>
+                    </div>
+                    <div class="oe_title">
+                        <label string="Cycle Count"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+
+                    <group name="top">
+                        <group name="left">
+                            <field name="location_id">Location</field>
+                            <field name="cycle_count_rule_id"/>
+                        </group>
+                        <group name="right">
+                            <field name="responsible_id">Assigned to</field>
+                            <field name="date_deadline">Deadline Date</field>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open Stock Cycle Count -->
+    <act_window id="action_stock_cycle_count"
+                 name="Stock Cycle Count"
+                 res_model="stock.cycle.count"
+                 view_mode="tree,form" />
+    <menuitem id="menu_stock_cycle_count"
+              name="Cycle Counts" parent="stock.menu_stock_inventory_control"
+              action="action_stock_cycle_count" />
+
+</odoo>
