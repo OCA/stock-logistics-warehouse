@@ -30,6 +30,7 @@ class ProductTemplate(models.Model):
 
         for tmpl in self:
             if isinstance(tmpl.id, models.NewId):
+                # useless computation when product only exists in cache
                 continue
             potential_qty = 0.0
             if tmpl.bom_ids:
@@ -49,7 +50,8 @@ class ProductTemplate(models.Model):
 
         This is the same implementation as for variants."""
         res = self._product_available()
-        for tmpl in self:
+        for tmpl in self.filtered(lambda x: not isinstance(
+                x.id, models.NewId)):
             tmpl.immediately_usable_qty = res[tmpl.id][
                 'immediately_usable_qty']
 
@@ -64,5 +66,6 @@ class ProductTemplate(models.Model):
         variant's potential.
         """
         res = self._product_available()
-        for tmpl in self:
+        for tmpl in self.filtered(lambda x: not isinstance(
+                x.id, models.NewId)):
             tmpl.potential_qty = res[tmpl.id]['potential_qty']
