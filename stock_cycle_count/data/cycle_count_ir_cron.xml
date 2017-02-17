@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+    <data noupdate="1">
+        <record forcecreate="True"
+                id="ir_cron_compute_cycle_count_action" model="ir.cron">
+            <field name="name">Cycle Count Planner Computation</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'stock.warehouse'"/>
+            <field name="function" eval="'cron_cycle_count'"/>
+            <field name="args" eval="'()'" />
+        </record>
+    </data>
+</openerp>
