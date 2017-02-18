@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-22 16:27+0000\n"
+"POT-Creation-Date: 2017-02-04 07:36+0000\n"
+"PO-Revision-Date: 2017-02-16 15:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -23,6 +23,11 @@ msgid ""
 "A stock reservation will be created for the products\n"
 "                        of the selected quotation lines. If a validity date is specified,\n"
 "                        the reservation will be released once the date has passed."
+msgstr ""
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,account_move_line_ids:0
+msgid "Account move line ids"
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -72,7 +77,7 @@ msgstr "Creado en"
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:219
@@ -101,7 +106,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,write_uid:0
