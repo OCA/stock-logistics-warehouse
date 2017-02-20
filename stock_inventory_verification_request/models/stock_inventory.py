@@ -32,8 +32,8 @@ class StockInventory(models.Model):
 
 class StockInventoryLine(models.Model):
     _inherit = 'stock.inventory.line'
+    _rec_name = 'product_id'
 
-    # TODO: make this work
     slot_verification_ids = fields.One2many(
         comodel_name='stock.slot.verification.request',
         inverse_name='inventory_line_id',
