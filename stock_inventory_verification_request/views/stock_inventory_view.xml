@@ -15,7 +15,7 @@
                         string="Request Verification" type="object"
                         class="oe_highlight"
                         attrs="{'invisible': ['|',('state', '!=', 'pending'),('requested_verification', '=', True)]}"
-                        groups="stock.group_stock_manager"/>
+                        groups="stock.group_stock_user"/>
             </xpath>
             <field name="name" position="after">
                 <field name="requested_verification" invisible="1"/>
