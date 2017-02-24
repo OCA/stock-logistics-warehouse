@@ -82,8 +82,7 @@ class PurchaseSupplierWizard(models.TransientModel):
             if qty > 0:
                 empty_po = False
                 line_vals = {
-                    'name': 'Batch resupply of product %s from partner %s '
-                            % (product.name, supplier.name.name),
+                    'name': product.name,
                     'product_id': product.id,
                     'product_uom': product.uom_id.id,
                     'product_qty': qty,
