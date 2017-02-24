@@ -97,6 +97,7 @@ class PurchaseSupplierWizard(models.TransientModel):
                 # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
                 product.write({"ultimate_purchase": False})
         if empty_po:
+            purchase_order.button_cancel()
             purchase_order.unlink()
             return None
         else:
