@@ -4,14 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Lionel Sausin <ls@numerigraphe.com>, 2016
+# Hosni Hadj Taher <hajhasni@hotmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-18 03:44+0000\n"
-"Last-Translator: Lionel Sausin <ls@numerigraphe.com>, 2016\n"
+"POT-Creation-Date: 2017-02-18 08:39+0000\n"
+"PO-Revision-Date: 2017-02-18 08:39+0000\n"
+"Last-Translator: Hosni Hadj Taher <hajhasni@hotmail.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr ""
 #. module: stock_operation_type_location
 #: model:ir.model,name:stock_operation_type_location.model_stock_transfer_details
 msgid "Picking wizard"
-msgstr ""
+msgstr "Assistant de sélection"
 
 #. module: stock_operation_type_location
 #: model:ir.model,name:stock_operation_type_location.model_stock_move

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:40+0000\n"
-"PO-Revision-Date: 2017-01-10 00:36+0000\n"
+"POT-Creation-Date: 2017-02-18 08:38+0000\n"
+"PO-Revision-Date: 2017-02-25 00:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -105,7 +105,7 @@ msgstr "Zuletzt aktualisiert am"
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,level:0
 msgid "Level"
-msgstr ""
+msgstr "Ebene"
 
 #. module: stock_inventory_hierarchical
 #: sql_constraint:stock.generate.inventory:0
@@ -157,12 +157,12 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,parent_left:0
 msgid "Parent Left"
-msgstr ""
+msgstr "Übergeordnet links"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,parent_right:0
 msgid "Parent Right"
-msgstr ""
+msgstr "Übergeordnet rechts"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,progress_rate:0
