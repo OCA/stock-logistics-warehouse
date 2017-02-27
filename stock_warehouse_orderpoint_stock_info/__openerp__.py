@@ -3,12 +3,12 @@
 # Copyright 2016 AvanzOSC
 # Copyright 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
-# Copyright 2016 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Reordering rules stock info",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "depends": [
         "stock",
     ],
