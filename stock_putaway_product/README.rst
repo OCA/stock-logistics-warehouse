@@ -51,7 +51,7 @@ To use this module, you need to:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/8.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 Bug Tracker
 ===========
@@ -71,6 +71,7 @@ Contributors
 
 * Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
 * Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
+* Denis Roussel - ACSONE SA/NV <denis.roussel@acsone.eu>
 
 
 Maintainer
