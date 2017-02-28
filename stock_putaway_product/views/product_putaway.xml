@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+     © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+
 <odoo>
     <record id="view_putaway" model="ir.ui.view">
         <field name="name">product.putaway.form.byproduct</field>
@@ -12,7 +16,7 @@
                        <tree editable="top">
                            <field name="sequence" widget='handle'/>
                             <field name="product_tmpl_id"/>
-                            <field name="product_product_id"/>
+                            <field name="product_product_id" groups="product.group_product_variant"/>
                             <field name="fixed_location_id"/>
                        </tree>
                    </field>
@@ -33,7 +37,8 @@
                     <group colspan="4">
                         <field name="product_tmpl_id" invisible="1"/>
                         <field name="product_product_id"
-                               domain="[('product_tmpl_id','=',product_tmpl_id)]"/>
+                               domain="[('product_tmpl_id','=',product_tmpl_id)]"
+                               groups="product.group_product_variant"/>
                     </group>
                     <group>
                         <field name="fixed_location_id"
@@ -43,5 +48,4 @@
             </form>
         </field>
     </record>
-
 </odoo>

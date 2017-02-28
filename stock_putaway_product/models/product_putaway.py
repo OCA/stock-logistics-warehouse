@@ -3,15 +3,15 @@
 # © 2016 Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, _
+from odoo import _, api, fields, models
 
 
-class ProductPutawayStrategy(models.Model):
+class ProductPutaway(models.Model):
     _inherit = 'product.putaway'
 
     @api.model
     def _get_putaway_options(self):
-        ret = super(ProductPutawayStrategy, self)._get_putaway_options()
+        ret = super(ProductPutaway, self)._get_putaway_options()
         return ret + [('per_product', 'Fixed per product location')]
 
     product_location_ids = fields.One2many(
@@ -29,15 +29,13 @@ class ProductPutawayStrategy(models.Model):
             (not x.product_product_id and
              x.product_tmpl_id == product.product_tmpl_id)))
 
-    @api.model
-    def putaway_apply(self, putaway_strategy, product):
-        if putaway_strategy.method == 'per_product':
-            strategies = putaway_strategy.get_product_putaway_strategies(
+    def putaway_apply(self, product):
+        if self.method == 'per_product':
+            strategies = self.get_product_putaway_strategies(
                 product)
             return strategies[:1].fixed_location_id.id
         else:
-            return super(ProductPutawayStrategy, self).putaway_apply(
-                putaway_strategy, product)
+            return super(ProductPutaway, self).putaway_apply(product)
 
 
 class StockFixedPutawayStrategy(models.Model):
@@ -50,12 +48,6 @@ class StockFixedPutawayStrategy(models.Model):
         'unique(putaway_id,product_product_id,fixed_location_id)',
         _('There is a duplicate location by put away assignment!')
     )]
-
-    @api.model
-    def get_default_inventory_id(self):
-        return self.env['stock.inventory'].search(
-            [('id', '=', self.env.context.get('active_id', False))])
-
     putaway_id = fields.Many2one(
         comodel_name='product.putaway',
         string='Put Away Strategy',
