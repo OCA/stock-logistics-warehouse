@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016-17 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp.addons.stock.tests.common import TestStockCommon
@@ -34,7 +34,10 @@ class TestMerge(TestStockCommon):
         self.product.cost_method = 'real'
 
         self.picking_1 = self.picking_obj.create(
-            {'picking_type_id': self.picking_type.id})
+            {'picking_type_id': self.picking_type.id,
+             'location_id': loc_supplier_id.id,
+             'location_dest_id': self.loc_stock.id
+             })
         move_obj.create({'name': '/',
                          'picking_id': self.picking_1.id,
                          'product_uom': self.product.uom_id.id,
@@ -44,10 +47,14 @@ class TestMerge(TestStockCommon):
                          'price_unit': 10,
                          'product_uom_qty': 10})
         self.picking_1.action_confirm()
-        self._process_picking(self.picking_1)
+        self.picking_1.action_assign()
+        self.picking_1.action_done()
 
         self.picking_2 = self.picking_obj.create(
-            {'picking_type_id': self.picking_type.id})
+            {'picking_type_id': self.picking_type.id,
+             'location_id': loc_supplier_id.id,
+             'location_dest_id': self.loc_stock.id
+             })
         move_obj.create({'name': '/',
                          'picking_id': self.picking_2.id,
                          'product_uom': self.product.uom_id.id,
@@ -57,18 +64,8 @@ class TestMerge(TestStockCommon):
                          'price_unit': 20,
                          'product_uom_qty': 10})
         self.picking_2.action_confirm()
-        self._process_picking(self.picking_2)
-
-    def _process_picking(self, picking):
-        """ Receive the picking
-        """
-        wiz_detail_obj = self.env['stock.transfer_details']
-        wiz_detail = wiz_detail_obj.with_context(
-            active_model='stock.picking',
-            active_ids=[picking.id],
-            active_id=picking.id).create({'picking_id': picking.id})
-        wiz_detail.item_ids[0].quantity = 10
-        wiz_detail.do_detailed_transfer()
+        self.picking_2.action_assign()
+        self.picking_2.action_done()
 
     def test_merge(self):
         quant_obj = self.env['stock.quant']
