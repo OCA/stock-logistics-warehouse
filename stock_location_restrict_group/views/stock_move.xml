@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='qty_done']" position="after">
+                <field name="restricted" invisible="1"/>
+                <button name="restricted_op" string="Restricted" type="object" icon="fa-exclamation-circle"
+                attrs="{'invisible': [('restricted', '=', False)]}"
+                help="The destination location is restricted to another operation!"/>
+            </xpath>
+        </field>
+    </record>
+         
+    <record id="view_move_picking_tree" model="ir.ui.view">
+        <field name="name">stock.move.tree (in stock_location_restrict_group)</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="restricted" invisible="1"/>
+                <button name="restricted_move" string="Restricted" type="object" icon="fa-exclamation-circle"
+                attrs="{'invisible': [('restricted', '=', False)]}"
+                help="The destination location is restricted to another move!"/>
+            </field>
+        </field>
+    </record>
+</odoo>
