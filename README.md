@@ -24,6 +24,7 @@ addon | version | summary
 --- | --- | ---
 [account_move_line_product](account_move_line_product/) | 9.0.1.0.0 | Displays the product in the journal entries and items
 [account_move_line_stock_info](account_move_line_stock_info/) | 9.0.1.0.0 | Account Move Line Stock Move
+[stock_account_quant_merge](stock_account_quant_merge/) | 9.0.1.0.0 | Stock Account - Quant merge
 [stock_available](stock_available/) | 9.0.1.1.0 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 9.0.1.1.0 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 | Consider the production potential is available to promise
