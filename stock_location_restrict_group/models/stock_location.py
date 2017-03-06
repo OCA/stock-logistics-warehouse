@@ -9,23 +9,23 @@ class StockLocation(models.Model):
 
     _inherit = 'stock.location'
 
-    usage = fields.Selection(
-        selection_add=[('group', 'Procurement Group')])
-
+    group_restricted = fields.Boolean(
+        'Group Restricted',
+        help="Check this if you want to restrict transfers to one procurement"
+        " group only")
     restricted_group = fields.Many2one(
         'procurement.group',
         compute='_compute_restricted_group')
-    retricted_group_name = fields.Char(
+    restricted_group_name = fields.Char(
         related='restricted_group.name')
 
     @api.multi
     def _compute_restricted_group(self):
         # Looking for quants located in locations of 'group' type
         # And then look into linked moves or pack operations
-        for location in self.filtered(lambda l: l.usage == 'group'):
+        for location in self.filtered(lambda l: l.group_restricted):
             quants = self.env['stock.quant'].search(
                 [('location_id', '=', location.id)])
-            location.restricted_group = False
             rest_group = quants.mapped('history_ids').filtered(
                 lambda m: m.location_dest_id == location).mapped('group_id')
             if not rest_group:

@@ -14,11 +14,17 @@ class StockMove(models.Model):
         compute='_compute_restricted')
 
     @api.multi
+    def restricted_move(self):
+        return False
+
+    @api.multi
     def _compute_restricted(self):
         for move in self:
             if move.location_dest_id and\
-                    move.location_dest_id.usage == 'group' and\
-                    move.location_dest_id.restricted_group:
+                    move.location_dest_id.group_restricted and\
+                    move.location_dest_id.restricted_group and\
+                    move.location_dest_id.restricted_group !=\
+                    move.picking_id.group_id:
                 move.restricted = True
             else:
                 move.restricted = False

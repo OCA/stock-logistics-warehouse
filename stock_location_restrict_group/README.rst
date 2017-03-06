@@ -16,19 +16,15 @@ To configure this module, you need to:
 
 #. Go to Inventory > Configuration > Warehouse Management
 #. Create locations with Output as Parent
-#. For theses locations, set type to 'Procurement Group'
+#. For theses locations, check Group Restricted box
 
 Usage
 =====
 
-
-#. Create a picking with a procurement group that take product from
-stock to output location
+#. Create a picking with a procurement group that take product from stock to output location
 #. Confirm it
-#. In Operations tab, modify destination location to one of these you've
-just created and transfer
-#. Create another picking with another procurement group and try to
-change operation destination to the same location.
+#. In Operations tab, modify destination location to one of these you've just created and transfer
+#. Create another picking with another procurement group and try to change operation destination to the same location.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

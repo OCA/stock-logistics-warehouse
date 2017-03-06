@@ -47,15 +47,18 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
+            <field name="usage" position="after">
+                <field name="group_restricted"/>
+            </field>
             <button name="toggle_active" position="after">
                 <field name="restricted_group" invisible="1"/>
                 <button
                             attrs="{'invisible':[('restricted_group', '=', False)]}"
                             class="oe_stat_button"
                             icon="fa-cubes" name="%(do_view_procurement_groups)d" type="action"
-                            context="{'search_default_name': retricted_group_name}">
+                            context="{'search_default_name': restricted_group_name}">
                     <div class="o_form_field o_stat_info">
-                        <span class="o_stat_text"><field name="retricted_group_name"/></span>
+                        <span class="o_stat_text"><field name="restricted_group_name"/></span>
                     </div>
                 </button>
             </button>
