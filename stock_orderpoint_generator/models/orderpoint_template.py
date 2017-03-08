@@ -18,6 +18,7 @@ class OrderpointTemplate(models.Model):
     _table is redefined to separate templates from orderpoints
     """
     _name = 'stock.warehouse.orderpoint.template'
+    _description = 'Reordering Rule Templates'
 
     _inherit = 'stock.warehouse.orderpoint'
     _table = 'stock_warehouse_orderpoint_template'
