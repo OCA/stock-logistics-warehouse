@@ -13,7 +13,9 @@
     'depends': ['stock'],
     'data': [
         'views/orderpoint_template_views.xml',
+        'views/product_views.xml',
         "wizard/orderpoint_generator_view.xml",
+        "data/ir_cron.xml",
         "security/ir.model.access.csv",
     ],
     'installable': True,

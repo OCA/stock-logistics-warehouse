@@ -10,6 +10,9 @@
       <xpath expr="//tree" position="attributes">
         <attribute name="name">Reordering Rule Templates</attribute>
       </xpath>
+      <field name="product_max_qty" position="after">
+        <field name="auto_generate"/>
+      </field>
       <field name="product_id" position="replace"></field>
       <field name="product_uom" position="replace"></field>
     </field>
@@ -38,6 +41,22 @@
         <attribute name="name">Reordering Rule Templates</attribute>
       </xpath>
       <field name="product_id" position="replace"></field>
+      <field name="active" position="after">
+        <field name="auto_generate"/>
+      </field>
+
+      <sheet position="before">
+        <header>
+          <button name="create_auto_orderpoints" type="object" string="Generate Automatic Rules"
+            help="Reordering rules will be created for the selected products. This is equivalent to the Scheduled Action action."
+            attrs="{'invisible': [('auto_generate', '=', False)]}"/>
+        </header>
+      </sheet>
+      <xpath expr="//sheet/group[2]" position="inside">
+        <group string="Automatic Rules" name="auto_rules" attrs="{'invisible': [('auto_generate', '=', False)]}">
+          <field name="auto_product_ids"/>
+        </group>
+      </xpath>
     </field>
   </record>
 

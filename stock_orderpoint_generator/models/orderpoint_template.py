@@ -29,6 +29,20 @@ class OrderpointTemplate(models.Model):
     product_id = fields.Many2one(required=False)
     product_uom = fields.Many2one(required=False)
 
+    auto_generate = fields.Boolean(
+        string='Create Rules Automatically',
+        help="When checked, the 'Reordering Rule Templates Generator' "
+             "scheduled action will automatically update the rules of a "
+             "selection of products."
+    )
+    auto_product_ids = fields.Many2many(
+        comodel_name='product.product',
+        string='Products',
+        help="A reordering rule will be automatically created by the "
+             "scheduled action for every product in this list."
+    )
+    auto_last_generation = fields.Datetime(string='Last Automatic Generation')
+
     def _disable_old_instances(self, product_ids):
         """ Clean old instance by setting those inactives
         """
@@ -54,3 +68,17 @@ class OrderpointTemplate(models.Model):
         """
         self._disable_old_instances(product_ids)
         self._create_instances(product_ids)
+
+    @api.multi
+    def create_auto_orderpoints(self):
+        for template in self:
+            if not template.auto_generate:
+                continue
+            if (not template.auto_last_generation or
+                    template.write_date > template.auto_last_generation):
+                template.auto_last_generation = fields.Datetime.now()
+                template.create_orderpoints(template.auto_product_ids.ids)
+
+    @api.model
+    def _cron_create_auto_orderpoints(self):
+        self.search([('auto_generate', '=', True)]).create_auto_orderpoints()
