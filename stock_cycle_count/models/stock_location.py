@@ -6,6 +6,7 @@
 import logging
 
 from openerp import api, fields, models, tools
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
 _logger = logging.getLogger(__name__)
 
@@ -71,10 +72,11 @@ class StockLocation(models.Model):
                     self.create_zero_confirmation_cycle_count()
 
     def create_zero_confirmation_cycle_count(self):
-        date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        date = datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         wh_id = self.get_warehouse(self)
         date_horizon = self.env['stock.warehouse'].browse(
-            wh_id).get_horizon_date()[0].strftime('%Y-%m-%d %H:%M:%S')
+            wh_id).get_horizon_date()[0].strftime(
+            DEFAULT_SERVER_DATETIME_FORMAT)
         counts_planned = self.env['stock.cycle.count'].search([
             ('date_deadline', '<', date_horizon), ('state', '=', 'draft'),
             ('location_id', '=', self.id)])

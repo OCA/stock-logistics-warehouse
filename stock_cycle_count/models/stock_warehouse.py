@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, fields, models
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime, timedelta
 
 
@@ -92,7 +93,7 @@ class StockWarehouse(models.Model):
                     existing_cycle_counts.state = 'cancelled'
                 delta = datetime.strptime(
                     cycle_count_proposed['date'],
-                    '%Y-%m-%d %H:%M:%S') - datetime.today()
+                    DEFAULT_SERVER_DATETIME_FORMAT) - datetime.today()
                 if not existing_cycle_counts and \
                         delta.days < self.cycle_count_planning_horizon:
                     self.env['stock.cycle.count'].create({

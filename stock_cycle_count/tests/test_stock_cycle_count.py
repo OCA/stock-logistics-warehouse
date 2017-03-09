@@ -67,7 +67,7 @@ class TestStockCycleCount(common.TransactionCase):
         self.stock_cycle_count1.action_view_inventory()
 
         self.inventory1 = self.stock_inventory_model.search([
-                ('cycle_count_id', '=', self.stock_cycle_count1.id)])
+            ('cycle_count_id', '=', self.stock_cycle_count1.id)])
         self.inventory1.prepare_inventory()
 
         self.inventory1.action_done()
@@ -167,4 +167,5 @@ class TestStockCycleCount(common.TransactionCase):
         # constrain: can only have one warehouse assigned
         self.stock_cycle_count_rule4.warehouse_ids = [(4, self.big_wh.id)]
         with self.assertRaises(ValidationError):
-            self.stock_cycle_count_rule4.warehouse_ids = [(4, self.small_wh.id)]
+            self.stock_cycle_count_rule4.warehouse_ids = [
+                (4, self.small_wh.id)]
