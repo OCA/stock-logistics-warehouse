@@ -5,6 +5,8 @@
 
 from openerp import api, fields, models
 
+PERCENT = 100.0
+
 
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
@@ -15,8 +17,8 @@ class StockInventory(models.Model):
         abs_discrepancy = sum(self.line_ids.mapped(
             lambda x: abs(x.discrepancy_qty)))
         if total_qty:
-            self.inventory_accuracy = 100 * (total_qty - abs_discrepancy) / \
-                total_qty
+            self.inventory_accuracy = PERCENT * (
+                total_qty - abs_discrepancy) / total_qty
         if not self.line_ids and self.state == 'done':
             self.inventory_accuracy = 100.0
 
