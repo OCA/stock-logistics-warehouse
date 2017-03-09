@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="purchase_order_view_form_inherit_purchase_packaging" model="ir.ui.view">
+        <field name="name">purchase.order.form (purchase_packaging)</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <!-- order_line tree -->
+                <xpath expr="//page//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                    <field name="product_tmpl_id" invisible="1"/>
+                    <field name="packaging_id" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                </xpath>
+                <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_qty']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+                <xpath expr="//page//field[@name='order_line']/tree/field[@name='product_qty']" position="before">
+                    <field name="product_purchase_qty"/>
+                    <field name="product_purchase_uom_id" groups="product.group_uom"/>
+                </xpath>
+                <xpath expr="//page//field[@name='order_line']/tree/field[@name='product_uom']" position="attributes">
+                    <attribute name="attrs">{'readonly' : [('packaging_id', '!=', False)]}</attribute>
+                </xpath>
+                <!-- order_line form -->
+                <xpath expr="//page//field[@name='order_line']/form//field[@name='product_id']" position="after">
+                    <field name="product_tmpl_id" invisible="1"/>
+                    <field name="packaging_id" domain="[('product_tmpl_id','=',product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                </xpath>
+                <xpath expr="//page/field[@name='order_line']/form//field[@name='product_qty']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+                <xpath expr="//page//field[@name='order_line']/form//field[@name='product_qty']" position="before">
+                    <field name="product_purchase_qty"/>
+                    <field name="product_purchase_uom_id" groups="product.group_uom"/>
+                </xpath>
+                <xpath expr="//page//field[@name='order_line']/form//field[@name='product_uom']" position="attributes">
+                    <attribute name="attrs">{'readonly' : [('packaging_id', '!=', False)]}</attribute>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>
