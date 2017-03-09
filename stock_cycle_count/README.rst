@@ -6,9 +6,22 @@
 Stock Cycle Count
 =================
 
-This module adds the capability to execute a cycle count strategy in a
-warehouse through different rules defined by the user.
+This module provides the capability to execute a cycle count strategy in a
+warehouse through different rules defined by the user. Cycle count is an
+alternative to full wall-to-wall physical inventories in which little
+portions (stock locations) of the stock are selected to count on a regular
+basis.
 
+The system propose locations in which to perform a inventory adjustment every
+day based on a set of rules defined for the warehouse. In addition the system
+can propose Zero-Confirmations which are simply and opportunistic counts to
+check whether a locations has actually became empty or not.
+
+With this strategy it is possible to:
+* Remove the need to perform full physical inventories and to stop the
+  production in the warehouse.
+* Measure the accuracy of the inventory records and improve it.
+* Correct inventory errors earlier and prevent them to become bigger.
 
 Installation
 ============
@@ -60,9 +73,9 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/{project_repo}/issues>`_. In case of trouble, please
-check there if your issue has already been reported. If you spotted it first,
-help us smash it by providing detailed and welcomed feedback.
+<https://github.com/OCA/stock-logistics-warehouse/issues>`_. In case of
+trouble, please check there if your issue has already been reported. If you
+spotted it first, help us smash it by providing detailed and welcomed feedback.
 
 
 Images
