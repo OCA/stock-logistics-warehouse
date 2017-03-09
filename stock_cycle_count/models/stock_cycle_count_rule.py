@@ -5,6 +5,7 @@
 
 from openerp import api, fields, models, _
 from openerp.exceptions import UserError
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import timedelta, datetime
 
 
@@ -111,7 +112,7 @@ class StockCycleCountRule(models.Model):
     @api.model
     def _propose_cycle_count(self, date, location):
         cycle_count = {
-            'date': date.strftime('%Y-%m-%d %H:%M:%S'),
+            'date': date.strftime(DEFAULT_SERVER_DATETIME_FORMAT),
             'location': location,
             'rule_type': self
         }
@@ -130,7 +131,8 @@ class StockCycleCountRule(models.Model):
                     period = self.periodic_count_period / \
                         self.periodic_qty_per_period
                     next_date = datetime.strptime(
-                        latest_inventory, '%Y-%m-%d %H:%M:%S') + timedelta(
+                        latest_inventory,
+                        DEFAULT_SERVER_DATETIME_FORMAT) + timedelta(
                         days=period)
                 except Exception as e:
                     raise UserError(
@@ -153,7 +155,8 @@ class StockCycleCountRule(models.Model):
 
     @api.model
     def _compute_turnover(self, move):
-        turnover = move.product_uom_qty * move.product_id.standard_price
+        price = move.get_price_unit(move)
+        turnover = move.product_uom_qty * price
         return turnover
 
     @api.model
