@@ -15,9 +15,21 @@ class StockLocation(models.Model):
         " group only")
     restricted_group = fields.Many2one(
         'procurement.group',
-        compute='_compute_restricted_group')
+        compute='_compute_restricted_group',
+        search='_search_restricted_group')
     restricted_group_name = fields.Char(
         related='restricted_group.name')
+
+    def _search_restricted_group(self, operator, value):
+        domain = []
+        if value:
+            quants = self.env['stock.quant'].search(
+                [('history_ids.group_id', operator, value)])
+            domain = [('id', 'in', quants.mapped('location_id.id')),
+                      ('group_restricted', '=', True)]
+            locations = self.search(domain)
+            domain = [('id', 'in', locations._ids)]
+        return domain
 
     @api.multi
     def _compute_restricted_group(self):
@@ -27,7 +39,8 @@ class StockLocation(models.Model):
             quants = self.env['stock.quant'].search(
                 [('location_id', '=', location.id)])
             rest_group = quants.mapped('history_ids').filtered(
-                lambda m: m.location_dest_id == location).mapped('group_id')
+                lambda m: m.location_dest_id == location).\
+                mapped('group_id')
             if not rest_group:
                 rest_group = quants.mapped('history_ids').mapped(
                     'picking_id').filtered(

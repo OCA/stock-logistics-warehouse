@@ -131,6 +131,9 @@ class TestStockLocationRestrictGroup(common.TransactionCase):
             self.picking_2.pack_operation_ids[0].restricted)
         with self.assertRaises(UserError):
             self.picking_2.do_new_transfer()
+        location = self.env['stock.location'].search(
+            [('restricted_group', '=', 'PROC1')])
+        self.assertEqual(1, len(location))
 
     def test_01_no_restrict_location(self):
         # Check normal process
