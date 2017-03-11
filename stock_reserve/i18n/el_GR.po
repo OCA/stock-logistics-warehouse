@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-25 14:56+0000\n"
+"POT-Creation-Date: 2017-03-04 08:31+0000\n"
+"PO-Revision-Date: 2017-03-06 09:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
@@ -333,7 +333,7 @@ msgstr ""
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 #: field:stock.reservation,product_id:0
 msgid "Product"
-msgstr ""
+msgstr "Προϊόν"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_template

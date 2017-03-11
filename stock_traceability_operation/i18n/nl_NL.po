@@ -3,26 +3,25 @@
 # * stock_traceability_operation
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-04 08:32+0000\n"
 "PO-Revision-Date: 2017-03-04 08:32+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
-"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
+"Language: nl_NL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Available"
-msgstr "Verfügbar"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
@@ -32,7 +31,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_uid:0
 msgid "Created by"
-msgstr "Angelegt durch"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -42,13 +41,13 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_date:0
 msgid "Creation Date"
-msgstr "Erstellungsdatum"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,date:0
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -79,13 +78,13 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,display_name:0
 msgid "Display Name"
-msgstr "Anzeigename"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: selection:report.stock.traceability_operation,state:0
 msgid "Done"
-msgstr "Erledigt"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,date_expected:0
@@ -95,32 +94,32 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Group By"
-msgstr "Gruppiere"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,__last_update:0
 msgid "Last Modified on"
-msgstr "Zuletzt geändert am"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_uid:0
 msgid "Last Updated by"
-msgstr "Zuletzt aktualisiert durch"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_date:0
 msgid "Last Updated on"
-msgstr "Zuletzt aktualisiert am"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Location"
-msgstr "Standort"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_stock_production_lot
@@ -140,7 +139,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "New"
-msgstr "Neu"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -155,7 +154,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,picking_type_id:0
@@ -167,12 +166,12 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,product_id:0
 msgid "Product"
-msgstr "Produkt"
+msgstr "Product"
 
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_product_template
 msgid "Product Template"
-msgstr "Produktvorlage"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uos:0
@@ -182,7 +181,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uom_qty:0
 msgid "Quantity"
-msgstr "Menge"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uos_qty:0
@@ -192,7 +191,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_stock_quant
 msgid "Quants"
-msgstr "Quants"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -204,7 +203,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_tree
 #: field:report.stock.traceability_operation,picking_id:0
 msgid "Reference"
-msgstr "Referenz"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -215,29 +214,29 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,origin:0
 msgid "Source"
-msgstr "Herkunft"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,location_id:0
 msgid "Source Location"
-msgstr "Herkunftslagerort"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,state:0
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,move_id:0
 msgid "Stock Move"
-msgstr "Lagerbuchung"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Stock Moves"
-msgstr "Lagerbewegungen"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -292,7 +291,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uom:0
 msgid "Unit of Measure"
-msgstr "Maßeinheit"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
