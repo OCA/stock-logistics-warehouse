@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 06:36+0000\n"
-"PO-Revision-Date: 2016-12-24 06:36+0000\n"
+"POT-Creation-Date: 2017-03-07 03:45+0000\n"
+"PO-Revision-Date: 2017-03-07 03:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Romanian (https://www.transifex.com/oca/teams/23907/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "Partener"
 #. module: stock_partner_lot
 #: model:ir.ui.view,arch_db:stock_partner_lot.view_res_partner_lots_filter
 msgid "Product"
-msgstr ""
+msgstr "Produs"
 
 #. module: stock_partner_lot
 #: model:ir.actions.act_window,name:stock_partner_lot.owned_quants
