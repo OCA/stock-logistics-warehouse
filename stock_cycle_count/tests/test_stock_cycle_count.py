@@ -6,81 +6,84 @@ from openerp.tests import common
 from openerp.exceptions import ValidationError
 from openerp.exceptions import AccessError
 
+from datetime import datetime, timedelta
+
 
 class TestStockCycleCount(common.TransactionCase):
 
     def setUp(self):
         super(TestStockCycleCount, self).setUp()
         self.res_users_model = self.env['res.users']
-        self.stock_cycle_count_model = self.env['stock.cycle.count']
+        self.cycle_count_model = self.env['stock.cycle.count']
         self.stock_cycle_count_rule_model = self.env['stock.cycle.count.rule']
-        self.stock_inventory_model = self.env['stock.inventory']
+        self.inventory_model = self.env['stock.inventory']
         self.stock_location_model = self.env['stock.location']
         self.stock_move_model = self.env['stock.move']
         self.stock_warehouse_model = self.env['stock.warehouse']
+        self.product_model = self.env['product.product']
+        self.quant_model = self.env['stock.quant']
+        self.move_model = self.env['stock.move']
 
         self.company = self.env.ref('base.main_company')
         self.partner = self.env.ref('base.res_partner_1')
         self.g_stock_manager = self.env.ref('stock.group_stock_manager')
         self.g_stock_user = self.env.ref('stock.group_stock_user')
 
-        self.stock_location1 = self.stock_location_model.create(
-            {'name': 'Place', 'usage': 'production'})
+        # Create users:
+        self.manager = self._create_user(
+            'user_1', [self.g_stock_manager], self.company).id
+        self.user = self._create_user(
+            'user_2', [self.g_stock_user], self.company).id
 
-        self.big_wh = self.stock_warehouse_model.create(
-            {'name': 'BIG', 'code': 'B'})
-        self.small_wh = self.stock_warehouse_model.create(
-            {'name': 'SMALL', 'code': 'S'})
-
-        self.user1 = self._create_user('user_1',
-                                       [self.g_stock_manager],
-                                       self.company)
-        self.user2 = self._create_user('user_2',
-                                       [self.g_stock_user],
-                                       self.company)
-
-        # rule 1: periodic rule filled
-        self.stock_cycle_count_rule1 = \
+        # Create rules:
+        self.rule_periodic = \
             self._create_stock_cycle_count_rule_periodic(
-                self.user1.id, 'rule_1', [2, 7])
-
-        # rule 2: turnover rule filled
-        self.stock_cycle_count_rule2 = \
+                self.manager, 'rule_1', [2, 7])
+        self.rule_turnover = \
             self._create_stock_cycle_count_rule_turnover(
-                self.user1.id, 'rule_2', [100])
-
-        # rule 3: accuracy rule filled
-        self.stock_cycle_count_rule3 = \
+                self.manager, 'rule_2', [100])
+        self.rule_accuracy = \
             self._create_stock_cycle_count_rule_accuracy(
-                self.user1.id, 'rule_3', [5])
+                self.manager, 'rule_3', [5])
+        self.zero_rule = self._create_stock_cycle_count_rule_zero(
+            self.manager, 'rule_4')
 
-        # rule 4: zero rule filled
-        self.stock_cycle_count_rule4 = \
-            self._create_stock_cycle_count_rule_zero(
-                self.user1.id, 'rule_4')
+        # Create and configure warehouses:
+        self.rule_ids = [
+            self.rule_periodic.id,
+            self.rule_turnover.id,
+            self.rule_accuracy.id,
+            self.zero_rule.id]
+        self.big_wh = self.stock_warehouse_model.create({
+            'name': 'BIG',
+            'code': 'B',
+            'cycle_count_planning_horizon': 30,
+            'cycle_count_rule_ids': [(6, 0, self.rule_ids)]
+        })
+        self.small_wh = self.stock_warehouse_model.create({
+            'name': 'SMALL', 'code': 'S'})
 
-        self.stock_cycle_count1 = self._create_stock_cycle_count(
-            self.user1.id, 'cycle_count_1', self.stock_cycle_count_rule1,
-            self.stock_location1)
+        # Create a location:
+        self.count_loc = self.stock_location_model.create({
+            'name': 'Place',
+            'usage': 'production'
+        })
 
-        self.stock_cycle_count1.action_create_inventory_adjustment()
-        self.stock_cycle_count1.action_view_inventory()
+        # Create a cycle count:
+        self.cycle_count_1 = self.cycle_count_model.sudo(self.manager).create({
+            'name': 'Test cycle count',
+            'cycle_count_rule_id': self.rule_periodic.id,
+            'location_id': self.count_loc.id,
+        })
 
-        self.inventory1 = self.stock_inventory_model.search([
-            ('cycle_count_id', '=', self.stock_cycle_count1.id)])
-        self.inventory1.prepare_inventory()
-
-        self.inventory1.action_done()
-
-        self.stock_cycle_count2 = self._create_stock_cycle_count(
-            self.user1.id, 'cycle_count_2', self.stock_cycle_count_rule1,
-            self.stock_location1)
-        self.stock_cycle_count2.do_cancel()
-
-        self.big_wh.zero_confirmation_disabled = 1
+        # Create a product:
+        self.product1 = self.product_model.create({
+            'name': 'Test Product 1',
+            'type': 'product',
+            'default_code': 'PROD1',
+        })
 
     def _create_user(self, login, groups, company):
-        """Creates a user."""
         group_ids = [group.id for group in groups]
         user = self.res_users_model.create({
             'name': login,
@@ -94,7 +97,6 @@ class TestStockCycleCount(common.TransactionCase):
         return user
 
     def _create_stock_cycle_count_rule_periodic(self, uid, name, values):
-        """Creates a Cycle Count rule of periodic type."""
         rule = self.stock_cycle_count_rule_model.sudo(uid).create({
             'name': name,
             'rule_type': 'periodic',
@@ -104,7 +106,6 @@ class TestStockCycleCount(common.TransactionCase):
         return rule
 
     def _create_stock_cycle_count_rule_turnover(self, uid, name, values):
-        """Creates a Cycle Count rule of turnover type."""
         rule = self.stock_cycle_count_rule_model.sudo(uid).create({
             'name': name,
             'rule_type': 'turnover',
@@ -113,7 +114,6 @@ class TestStockCycleCount(common.TransactionCase):
         return rule
 
     def _create_stock_cycle_count_rule_accuracy(self, uid, name, values):
-        """Creates a Cycle Count rule of accuracy type."""
         rule = self.stock_cycle_count_rule_model.sudo(uid).create({
             'name': name,
             'rule_type': 'accuracy',
@@ -122,50 +122,138 @@ class TestStockCycleCount(common.TransactionCase):
         return rule
 
     def _create_stock_cycle_count_rule_zero(self, uid, name):
-        """Creates a Cycle Count rule of zero type."""
         rule = self.stock_cycle_count_rule_model.sudo(uid).create({
             'name': name,
             'rule_type': 'zero',
         })
         return rule
 
-    def _create_stock_cycle_count(self, uid, name, rule, location):
-        """Creates a Cycle Count."""
-        rule = self.stock_cycle_count_model.sudo(uid).create({
-            'name': name,
-            'cycle_count_rule_id': rule.id,
-            'location_id': location.id,
+    def test_cycle_count_planner(self):
+        """Tests creation of cycle counts."""
+        # Common rules:
+        wh = self.big_wh
+        self.stock_location_model._parent_store_compute()
+        locs = wh._search_cycle_count_locations()
+        counts = self.cycle_count_model.search([
+            ('location_id', 'in', locs.ids)])
+        self.assertFalse(
+            counts, 'Existing cycle counts before execute planner.')
+        date = datetime.today() + timedelta(days=30)
+        loc = locs[0]
+        pre_existing_count = self.cycle_count_model.create({
+            'name': 'To be cancelled when running cron job.',
+            'cycle_count_rule_id': self.rule_periodic.id,
+            'location_id': loc.id,
+            'date_deadline': date
         })
-        return rule
+        self.assertEqual(pre_existing_count.state, 'draft',
+                         'Testing data not generated properly.')
+        date = datetime.today() - timedelta(days=1)
+        self.inventory_model.create({
+            'name': 'Pre-existing inventory',
+            'location_id': loc.id,
+            'date': date
+        })
+        self.quant_model.create({
+            'product_id': self.product1.id,
+            'location_id': self.count_loc.id,
+            'qty': 1.0,
+            'cost': 15.0
+        })
+        move1 = self.stock_move_model.create({
+            'name': 'Pre-existing move',
+            'product_id': self.product1.id,
+            'product_uom_qty': 1.0,
+            'product_uom': self.product1.uom_id.id,
+            'location_id': self.count_loc.id,
+            'location_dest_id': loc.id
+        })
+        move1.action_done()
+        wh.cron_cycle_count()
+        self.assertEqual(pre_existing_count.state, 'cancelled',
+                         'Existing cycle counts not cancelled when an earlier '
+                         'cycle count is scheduled.')
+        counts = self.cycle_count_model.search([
+            ('location_id', 'in', locs.ids)])
+        self.assertTrue(counts, 'Cycle counts not planned')
+        # Zero-confirmations:
+        count = self.cycle_count_model.search([
+            ('location_id', '=', loc.id),
+            ('cycle_count_rule_id', '=', self.zero_rule.id)])
+        self.assertFalse(
+            count, 'Unexpected zero confirmation.')
+        move2 = self.move_model.create({
+            'name': 'make the locations to run out of stock.',
+            'product_id': self.product1.id,
+            'product_uom_qty': 1.0,
+            'product_uom': self.product1.uom_id.id,
+            'location_id': loc.id,
+            'location_dest_id': self.count_loc.id
+        })
+        move2.action_done()
+        count = self.cycle_count_model.search([
+            ('location_id', '=', loc.id),
+            ('cycle_count_rule_id', '=', self.zero_rule.id)])
+        self.assertTrue(
+            count, 'Zero confirmation not being created.')
+
+    def test_cycle_count_workflow(self):
+        """Tests workflow."""
+        self.cycle_count_1.action_create_inventory_adjustment()
+        inventory = self.inventory_model.search([
+            ('cycle_count_id', '=', self.cycle_count_1.id)])
+        self.assertTrue(inventory, 'Inventory not created.')
+        inventory.prepare_inventory()
+        inventory.action_done()
+        self.assertEqual(self.cycle_count_1.state, 'done',
+                         'Cycle count not set as done.')
+        self.cycle_count_1.do_cancel()
+        self.assertEqual(self.cycle_count_1.state, 'cancelled',
+                         'Cycle count not set as cancelled.')
+
+    def test_view_methods(self):
+        """Tests the methods used for handle views."""
+        self.cycle_count_1.action_create_inventory_adjustment()
+        self.cycle_count_1.action_view_inventory()
+        inv_count = self.cycle_count_1.inventory_adj_count
+        self.assertEqual(inv_count, 1,
+                         'View method failing.')
+        rules = [self.rule_periodic,
+                 self.rule_turnover,
+                 self.rule_accuracy,
+                 self.zero_rule]
+        for r in rules:
+            r._get_rule_description()
+            self.assertTrue(r.rule_description, 'No description provided')
 
     def test_user_security(self):
+        """Tests user rights."""
         with self.assertRaises(AccessError):
-            self.stock_cycle_count_rule1b = \
-                self._create_stock_cycle_count_rule_periodic(
-                    self.user2.id, 'rule_1b', [2, 7])
+            self._create_stock_cycle_count_rule_periodic(
+                self.user, 'rule_1b', [2, 7])
         with self.assertRaises(AccessError):
-            self.stock_cycle_count1.sudo(self.user2.id).unlink()
+            self.cycle_count_1.sudo(self.user).unlink()
 
-    def test_rule_periodic(self):
+    def test_rule_periodic_constrains(self):
+        """Tests the constrains for the periodic rules."""
         # constrain: periodic_qty_per_period < 1
         with self.assertRaises(ValidationError):
-            self.stock_cycle_count_rule0 = \
-                self._create_stock_cycle_count_rule_periodic(
-                    self.user1.id, 'rule_0', [0, 0])
+            self._create_stock_cycle_count_rule_periodic(
+                self.manager, 'rule_0', [0, 0])
         # constrain: periodic_count_period < 0
         with self.assertRaises(ValidationError):
-            self.stock_cycle_count_rule0 = \
-                self._create_stock_cycle_count_rule_periodic(
-                    self.user1.id, 'rule_0', [1, -1])
+            self._create_stock_cycle_count_rule_periodic(
+                self.manager, 'rule_0', [1, -1])
 
-    def test_rule_zero(self):
-        # constrain: can only have one zero confirmation rule per warehouse
+    def test_rule_zero_constrains(self):
+        """Tests the constrains for the zero-confirmation rule: it might
+        only exist one zero confirmation rule per warehouse and have just
+        one warehouse assigned.
+        """
+        zero2 = self._create_stock_cycle_count_rule_zero(
+            self.manager, 'zero_rule_2')
         with self.assertRaises(ValidationError):
-            self.stock_cycle_count_rule5 = \
-                self._create_stock_cycle_count_rule_zero(
-                    self.user1.id, 'rule_5')
-        # constrain: can only have one warehouse assigned
-        self.stock_cycle_count_rule4.warehouse_ids = [(4, self.big_wh.id)]
+            zero2.warehouse_ids = [(4, self.big_wh.id)]
         with self.assertRaises(ValidationError):
-            self.stock_cycle_count_rule4.warehouse_ids = [
+            self.zero_rule.warehouse_ids = [
                 (4, self.small_wh.id)]
