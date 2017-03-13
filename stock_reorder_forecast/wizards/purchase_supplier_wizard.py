@@ -64,14 +64,16 @@ class PurchaseSupplierWizard(models.TransientModel):
         po_model = self.env["purchase.order"]
         date_order = date.today().strftime(DSDF)
         supplier_id = int(self.name)
+
         order_vals = {
             "partner_id": supplier_id,
             "origin": "Batch resupply from supplier form",
             "date_order": date_order, }
         purchase_order = po_model.create(order_vals)
-        products = self.supplier_products
+        products = self.env['res.partner'].browse(supplier_id).product_ids
         if self.primary_supplier_only:
-            products = self.supplier_products_primary
+            products =self.env['res.partner'].browse(
+                supplier_id).primary_product_ids
         empty_po = True
         for product in products:
             supplier = product.seller_ids.filtered(
@@ -107,7 +109,7 @@ class PurchaseSupplierWizard(models.TransientModel):
         string='Supplier name'
     )
     supplier_products = fields.Many2many(
-        "product.template",
+        "product.product",
         string="Products supplied by this partner"
     )
     supplier_products_primary = fields.Many2many(

@@ -52,6 +52,10 @@ class PurchaseWizard(models.TransientModel):
         return result
 
     def _get_qty(self, product, supplier, stock_period_max):
+        # ADD A DEFAULT STOCK PERIOD MAX OF 0.01 IN CASE IT IS 0.00
+        # the reason for this is that if a product has never been sold (new) or
+        # hasn't been sold recently (in period, seasonal products) we need a
+        # minimum to have a min order.
         qty = float_round(
             product.turnover_average * product.stock_period_max -
             product.virtual_available, 0)

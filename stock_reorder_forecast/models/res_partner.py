@@ -88,12 +88,12 @@ class ResPartner(models.Model):
         purchase proposal.""")
 
     product_ids = fields.Many2many(
-        'product.template',
+        'product.product',
         compute='_compute_product_supplierinfo',
         string="Products",
     )
     primary_product_ids = fields.Many2many(
-        'product.template',
+        'product.product',
         compute='_compute_product_supplierinfo_primary',
         string="Products",
     )

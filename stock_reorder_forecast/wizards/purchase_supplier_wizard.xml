@@ -20,15 +20,18 @@
                     </group> 
                     <group>
                         <field 
-                            name="supplier_products_primary" 
+                            name="supplier_products_primary"
+
                             readonly="1" 
                             attrs="{'invisible': [('primary_supplier_only', '=', False)]}"
-                            />
+                            >
+                        </field>
                         <field 
                             name="supplier_products" 
                             readonly="1"
                             attrs="{'invisible': [('primary_supplier_only', '=', True)]}"
-                            />
+                            >
+                        </field>
                         <field name="pending_rfq_lines" readonly="1"/>
                     </group>
                     <footer>
