@@ -14,7 +14,7 @@ basis.
 
 The system propose locations in which to perform a inventory adjustment every
 day based on a set of rules defined for the warehouse. In addition the system
-can propose Zero-Confirmations which are simply and opportunistic counts to
+can propose Zero-Confirmations which are simple and opportunistic counts to
 check whether a locations has actually became empty or not.
 
 With this strategy it is possible to:
