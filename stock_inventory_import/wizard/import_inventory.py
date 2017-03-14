@@ -90,7 +90,8 @@ class ImportInventory(models.TransientModel):
             val['inventory_id'] = inventory.id
             val['fail'] = True
             val['fail_reason'] = _('No processed')
-            val['standard_price'] = values['standard_price']
+            if 'standard_price' in values and values['standard_price']:
+                val['standard_price'] = values['standard_price']
             inv_imporline_obj.create(val)
 
 
