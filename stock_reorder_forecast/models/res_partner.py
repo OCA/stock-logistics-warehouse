@@ -59,8 +59,15 @@ class ResPartner(models.Model):
     def _compute_product_supplierinfo(self):
         """given a partner, return a list of all products it provides"""
         self.env.cr.execute(
-            'select name, array_agg(product_tmpl_id) from product_supplierinfo'
-            ' where name in %s   group by name ', (tuple(self.ids),)
+            """with templates as (
+                 select name, product_tmpl_id as T from product_supplierinfo
+                 where name in %s
+               )
+               select templates.name, array_agg(id)  from product_product  
+               inner join templates on (
+                    product_product.product_tmpl_id = templates.T
+                ) group by templates.name
+            """, (tuple(self.ids),)
         )
         partner2products = dict(self.env.cr.fetchall())
         for this in self:
