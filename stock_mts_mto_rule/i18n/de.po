@@ -6,12 +6,12 @@
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 01:38+0000\n"
-"PO-Revision-Date: 2016-01-14 09:50+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
+"POT-Creation-Date: 2016-11-21 18:42+0000\n"
+"PO-Revision-Date: 2016-11-08 17:00+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -43,7 +43,7 @@ msgid "Choose between MTS and MTO"
 msgstr "Wähle aus MTO und MTS"
 
 #. module: stock_mts_mto_rule
-#: help:stock.warehouse,mto_mts_management:0
+#: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_warehouse_mto_mts_management
 msgid ""
 "If this new route is selected on product form view, a purchase order will be"
 " created only if the virtual stock is less than 0 else, the product will be "
@@ -51,17 +51,17 @@ msgid ""
 msgstr "Wird diese neue Route in der Produktdetailsicht gewählt, wird eine Beschaffung nur dann bewirkt, wenn der Planbestand unter 0 fällt, anderenfalls wird das Produkt aus dem Bestand genommen."
 
 #. module: stock_mts_mto_rule
-#: field:procurement.rule,mto_rule_id:0
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_rule_mto_rule_id
 msgid "MTO Rule"
 msgstr "MTO-Regel"
 
 #. module: stock_mts_mto_rule
-#: field:stock.warehouse,mts_mto_rule_id:0
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse_mts_mto_rule_id
 msgid "MTO+MTS rule"
 msgstr "MTO+MTS-Regel"
 
 #. module: stock_mts_mto_rule
-#: field:procurement.rule,mts_rule_id:0
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_rule_mts_rule_id
 msgid "MTS Rule"
 msgstr "MTS-Regel"
 
@@ -77,7 +77,7 @@ msgid "Make To Order + Make To Stock"
 msgstr "MTO Auftragsfertigung + MTS Lagerfertigung"
 
 #. module: stock_mts_mto_rule
-#: field:procurement.order,mts_mto_procurement_id:0
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_order_mts_mto_procurement_id
 msgid "Mto+Mts Procurement"
 msgstr "MTO+MTS-Beschaffung"
 
@@ -92,12 +92,12 @@ msgid "Procurement Rule"
 msgstr "Beschaffungsregel"
 
 #. module: stock_mts_mto_rule
-#: field:procurement.order,mts_mto_procurement_ids:0
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_order_mts_mto_procurement_ids
 msgid "Procurements"
 msgstr "Beschaffungen"
 
 #. module: stock_mts_mto_rule
-#: field:stock.warehouse,mto_mts_management:0
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse_mto_mts_management
 msgid "Use MTO+MTS rules"
 msgstr "Verwende MTO+MTS-Regeln"
 

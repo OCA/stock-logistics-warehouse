@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-30 03:10+0000\n"
-"PO-Revision-Date: 2016-04-27 11:10+0000\n"
+"POT-Creation-Date: 2016-11-21 18:42+0000\n"
+"PO-Revision-Date: 2016-11-16 15:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
 #: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Available</span>"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
+#: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
+msgid "<span class=\"o_stat_text\">Potential</span>"
 msgstr ""
 
 #. module: stock_available
@@ -53,6 +59,12 @@ msgid "Include the production potential"
 msgstr ""
 
 #. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_product_product_potential_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_template_potential_qty
+msgid "Potential"
+msgstr "Potencial"
+
+#. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
 msgid "Product"
 msgstr "Proizvod"
@@ -61,6 +73,21 @@ msgstr "Proizvod"
 #: model:ir.model,name:stock_available.model_product_template
 msgid "Product Template"
 msgstr "Predloga proizvoda"
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_product_potential_qty
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand."
+msgstr "Količina tega proizvoda, ki se jo lahko proizvede s surovinami, ki so že pri roki."
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_template_potential_qty
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand. If the product has several variants, this will be the biggest "
+"quantity that can be made for a any single variant."
+msgstr "Količina tega proizvoda, ki se jo lahko proizvede s surovinami, ki so že pri roki. Če obstaja več različic proizvoda, bo to največja količina, ki se lahko proizvede za katerokoli posamezno varianto."
 
 #. module: stock_available
 #: model:ir.ui.view,arch_db:stock_available.view_stock_configuration

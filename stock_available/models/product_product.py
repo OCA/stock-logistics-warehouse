@@ -48,7 +48,7 @@ class ProductProduct(models.Model):
              "your needs")
     potential_qty = fields.Float(
         compute='_compute_potential_qty',
-        digits_compute=dp.get_precision('Product Unit of Measure'),
+        digits=dp.get_precision('Product Unit of Measure'),
         string='Potential',
         help="Quantity of this Product that could be produced using "
              "the materials already at hand.")

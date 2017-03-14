@@ -22,16 +22,26 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[account_move_line_product](account_move_line_product/) | 9.0.1.0.0 | Displays the product in the journal entries and items
+[account_move_line_stock_info](account_move_line_stock_info/) | 9.0.1.0.0 | Account Move Line Stock Move
+[stock_account_quant_merge](stock_account_quant_merge/) | 9.0.1.0.0 | Stock Account - Quant merge
 [stock_available](stock_available/) | 9.0.1.1.0 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 9.0.1.1.0 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 | Consider the production potential is available to promise
+[stock_available_unreserved](stock_available_unreserved/) | 9.0.1.0.0 | Quantity of stock available for inmediate use
+[stock_inventory_discrepancy](stock_inventory_discrepancy/) | 9.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
+[stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 9.0.1.0.0 | Allow to perform inventories of a location without including its child locations.
 [stock_location_area_data](stock_location_area_data/) | 9.0.1.0.0 | Add surface units of measure
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 9.0.1.0.0 | Add a MTS+MTO route
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 9.0.1.0.0 | Mass configuration of stock order points
+[stock_orderpoint_manual_procurement](stock_orderpoint_manual_procurement/) | 9.0.1.0.0 | Allows to create procurement orders from orderpoints instead of relying only on the scheduler
+[stock_orderpoint_uom](stock_orderpoint_uom/) | 9.0.1.0.0 | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_partner_lot](stock_partner_lot/) | 9.0.1.0.0 | Show lots on the partners that own them
-[stock_putaway_product](stock_putaway_product/) | 9.0.1.0.0 | Set a product location and put-away strategy per product
+[stock_putaway_product](stock_putaway_product/) | 9.0.1.0.1 | Set a product location and put-away strategy per product
+[stock_quant_manual_assign](stock_quant_manual_assign/) | 9.0.1.0.0 | Stock - Manual Quant Assignment
 [stock_quant_merge](stock_quant_merge/) | 9.0.1.0.0 | Stock - Quant merge
 [stock_reserve](stock_reserve/) | 9.0.1.0.0 | Stock reservations on products
+[stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 9.0.1.0.0 | Reordering rules stock info
 
 Unported addons
 ---------------
@@ -47,7 +57,6 @@ addon | version | summary
 [stock_lot_valuation](stock_lot_valuation/) | 0.1 (unported) | Lot Valuation
 [stock_move_location](stock_move_location/) | 1.0 (unported) | Move Stock Location
 [stock_optional_valuation](stock_optional_valuation/) | 0.1 (unported) | Stock optional valuation
-[stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.0.0 (unported) | Stock - Manual assignment of quants
 [stock_reord_rule](stock_reord_rule/) | 0.2 (unported) | Improved reordering rules
 [stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.0 (unported) | Stock Reserve Sales
 

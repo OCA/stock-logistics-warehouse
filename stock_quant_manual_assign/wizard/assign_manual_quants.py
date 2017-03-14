@@ -17,16 +17,18 @@ class AssignManualQuants(models.TransientModel):
             if record.quants_lines:
                 move = self.env['stock.move'].browse(
                     self.env.context['active_id'])
-                if record.lines_qty > move.product_uom_qty:
+                if record.lines_qty > move.product_qty:
                     raise exceptions.Warning(
                         _('Quantity is higher than the needed one'))
 
     @api.depends('quants_lines', 'quants_lines.qty')
     def _compute_qties(self):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-        lines_qty = sum(self.quants_lines.mapped('qty'))
+
+        lines_qty = sum(quant_line.qty for quant_line in self.quants_lines
+                        if quant_line.selected)
         self.lines_qty = lines_qty
-        self.move_qty = move.product_uom_qty - lines_qty
+        self.move_qty = move.product_qty - lines_qty
 
     name = fields.Char(string='Name')
     lines_qty = fields.Float(
@@ -52,8 +54,8 @@ class AssignManualQuants(models.TransientModel):
         return {}
 
     @api.model
-    def default_get(self, var_fields):
-        super(AssignManualQuants, self).default_get(var_fields)
+    def default_get(self, fields):
+        res = super(AssignManualQuants, self).default_get(fields)
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         available_quants = self.env['stock.quant'].search([
             ('location_id', 'child_of', move.location_id.id),
@@ -71,7 +73,9 @@ class AssignManualQuants(models.TransientModel):
             'qty': x.qty if x in move.reserved_quant_ids else 0,
             'location_id': x.location_id.id,
         } for x in available_quants]
-        return {'quants_lines': quants_lines}
+        res.update({'quants_lines': quants_lines})
+        res = self._convert_to_write(self._convert_to_cache(res))
+        return res
 
 
 class AssignManualQuantsLines(models.TransientModel):
