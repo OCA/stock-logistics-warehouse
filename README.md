@@ -31,6 +31,7 @@ addon | version | summary
 [stock_available_unreserved](stock_available_unreserved/) | 9.0.1.0.0 | Quantity of stock available for inmediate use
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 9.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 9.0.1.0.0 | Allow to perform inventories of a location without including its child locations.
+[stock_inventory_revaluation](stock_inventory_revaluation/) | 9.0.1.0.0 | Introduces inventory revaluation as single point to change the valuation of products.
 [stock_location_area_data](stock_location_area_data/) | 9.0.1.0.0 | Add surface units of measure
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 9.0.1.0.0 | Add a MTS+MTO route
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 9.0.1.0.0 | Mass configuration of stock order points
