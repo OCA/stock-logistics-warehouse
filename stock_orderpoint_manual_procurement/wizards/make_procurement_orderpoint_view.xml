@@ -1,63 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
 
-        <!--  Make Procurement -->
+    <!--  Make Procurement -->
 
-        <record id="view_make_procurment_buffer_wizard" model="ir.ui.view">
-            <field name="name">Request Procurement</field>
-            <field name="model">make.procurement.orderpoint</field>
-            <field name="arch" type="xml">
-                <form string="Procurement Request">
-                    <p class="oe_gray">
-                        Use this assistant to generate a procurement request for this
-                        stock buffer. According to the product configuration,
-                        this may trigger a draft purchase order, a manufacturing
-                        order or a transfer picking.
-                    </p>
-                    <group name="items" string="Items">
-                        <field name="item_ids" nolabel="1">
-                            <tree string="Items" nocreate="1" editable="top">
-                                <field name="orderpoint_id" invisible="True"/>
-                                <field name="warehouse_id" groups="stock.group_locations"/>
-                                <field name="location_id" groups="stock.group_locations"/>
-                                <field name="product_id"/>
-                                 <field name="qty" groups="stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty"/>
-                                <field name="uom_id" groups="product.group_uom"/>
-                                <field name="date_planned"/>
-                            </tree>
-                        </field>
-                    </group>
-                    <footer>
-                        <button name="make_procurement" string="Execute"
-                                type="object"  class="oe_highlight"  />
-                        or
-                        <button string="Cancel" class="oe_link" special="cancel" />
-                    </footer>
-                </form>
-            </field>
-        </record>
+    <record id="view_make_procurment_buffer_wizard" model="ir.ui.view">
+        <field name="name">Request Procurement</field>
+        <field name="model">make.procurement.orderpoint</field>
+        <field name="arch" type="xml">
+            <form string="Procurement Request">
+                <p class="oe_gray">
+                    Use this assistant to generate a procurement request for this
+                    stock buffer. According to the product configuration,
+                    this may trigger a draft purchase order, a manufacturing
+                    order or a transfer picking.
+                </p>
+                <group name="items" string="Items">
+                    <field name="item_ids" nolabel="1">
+                        <tree string="Items" nocreate="1" editable="top">
+                            <field name="orderpoint_id" invisible="True"/>
+                            <field name="warehouse_id" groups="stock.group_locations"/>
+                            <field name="location_id" groups="stock.group_locations"/>
+                            <field name="product_id"/>
+                             <field name="qty" groups="stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty"/>
+                            <field name="uom_id" groups="product.group_uom"/>
+                            <field name="date_planned"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="make_procurement" string="Execute"
+                            type="object"  class="oe_highlight"  />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
 
 
-        <record model="ir.actions.act_window"
-                id="act_make_procurement_from_orderpoint">
-            <field name="name">Request Procurement</field>
-            <field name="res_model">make.procurement.orderpoint</field>
-            <field name="src_model">stock.warehouse.orderpoint</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
+    <record model="ir.actions.act_window"
+            id="act_make_procurement_from_orderpoint">
+        <field name="name">Request Procurement</field>
+        <field name="res_model">make.procurement.orderpoint</field>
+        <field name="src_model">stock.warehouse.orderpoint</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 
-        <record model="ir.values"
-                id="stock_warehouse_orderpoint_make_procurement">
-            <field name="model_id"
-                   ref="stock.model_stock_warehouse_orderpoint" />
-            <field name="name">Request Procurement</field>
-            <field name="key2">client_action_multi</field>
-            <field name="value" eval="'ir.actions.act_window,' + str(ref('act_make_procurement_from_orderpoint'))" />
-            <field name="key">action</field>
-            <field name="model">stock.warehouse.orderpoint</field>
-        </record>
+    <record model="ir.values"
+            id="stock_warehouse_orderpoint_make_procurement">
+        <field name="model_id"
+               ref="stock.model_stock_warehouse_orderpoint" />
+        <field name="name">Request Procurement</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' + str(ref('act_make_procurement_from_orderpoint'))" />
+        <field name="key">action</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+    </record>
 
-    </data>
-</openerp>
+</odoo>
