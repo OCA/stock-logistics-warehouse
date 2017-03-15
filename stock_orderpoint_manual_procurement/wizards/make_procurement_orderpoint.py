@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class MakeProcurementOrderpoint(models.TransientModel):
@@ -58,12 +59,11 @@ class MakeProcurementOrderpoint(models.TransientModel):
         for item in self.item_ids:
             data = item._prepare_procurement()
             procurement = self.env['procurement.order'].create(data)
-            procurement.signal_workflow('button_confirm')
-            procurement.run()
             res.append(procurement.id)
 
         return {
-            'domain': "[('id','in', ["+','.join(map(str, res))+"])]",
+            'name': _('Created Procurements'),
+            'domain': [('id', 'in', res)],
             'view_type': 'form',
             'view_mode': 'tree,form',
             'res_model': 'procurement.order',
@@ -100,6 +100,8 @@ class MakeProcurementOrderpointItem(models.TransientModel):
 
     @api.multi
     def _prepare_procurement(self):
+        if not self.qty:
+            raise ValidationError(_("Quantity must be positive."))
         return {
             'name': self.orderpoint_id.name,
             'date_planned': self.date_planned,
