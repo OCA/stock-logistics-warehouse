@@ -3,14 +3,13 @@
 # * account_move_line_stock_info
 # 
 # Translators:
-# Dorin Hongu <dhongu@gmail.com>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 02:12+0000\n"
-"PO-Revision-Date: 2017-01-21 02:12+0000\n"
+"POT-Creation-Date: 2017-06-03 01:23+0000\n"
+"PO-Revision-Date: 2017-06-03 01:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Romanian (https://www.transifex.com/oca/teams/23907/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -34,11 +33,6 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_move_line_stock_info.view_move_picking_form
 msgid "Journal Items"
 msgstr "Elementele Jurnalului"
-
-#. module: account_move_line_stock_info
-#: model:ir.model,name:account_move_line_stock_info.model_stock_quant
-msgid "Quants"
-msgstr "Poziții de stoc"
 
 #. module: account_move_line_stock_info
 #: model:ir.model,name:account_move_line_stock_info.model_stock_move
