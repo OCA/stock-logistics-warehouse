@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import openerp.tests.common as common
-from openerp.tools import mute_logger
-from openerp.exceptions import ValidationError
+import odoo.tests.common as common
+from odoo.tools import mute_logger
+from odoo.exceptions import ValidationError
 
 
 class TestStockOrderpointProcureUom(common.TransactionCase):
