@@ -2,9 +2,10 @@
 # © 2015 OdooMRP team
 # © 2015 AvanzOSC
 # © 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
+# © 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api
+from odoo import api, models
 
 
 class StockQuant(models.Model):
@@ -32,17 +33,11 @@ class StockQuant(models.Model):
                 cont = 1
                 cost = quant2merge.cost
                 for quant in quants:
-                    if (self._get_latest_move(quant2merge) ==
-                            self._get_latest_move(quant)):
+                    if (quant2merge._get_latest_move() ==
+                            quant._get_latest_move()):
                         quant2merge.sudo().qty += quant.qty
                         cost += quant.cost
                         cont += 1
                         pending_quants -= quant
                         quant.with_context(force_unlink=True).sudo().unlink()
                 quant2merge.sudo().cost = cost / cont
-
-    @api.model
-    def quants_unreserve(self, move):
-        quants = move.reserved_quant_ids
-        super(StockQuant, self).quants_unreserve(move)
-        quants.merge_stock_quants()
