@@ -2,24 +2,21 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
-import openerp.addons.decimal_precision as dp
+from odoo import api, fields, models
+import odoo.addons.decimal_precision as dp
 
 UNIT = dp.get_precision('Product Unit of Measure')
 
 
 class StockQuant(models.Model):
-
     _inherit = 'stock.quant'
 
     @api.multi
     @api.depends('qty', 'reservation_id')
     def _compute_reserved_qty_uom(self):
-        uom_obj = self.env['product.uom']
         for rec in self:
             if rec.reservation_id:
-                rec.reserved_qty_uom = uom_obj._compute_qty_obj(
-                    rec.product_id.uom_id,
+                rec.reserved_qty_uom = rec.product_id.uom_id._compute_quantity(
                     rec.qty,
                     rec.reservation_id.product_uom)
 
