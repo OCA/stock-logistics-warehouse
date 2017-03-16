@@ -6,6 +6,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp.tests.common import TransactionCase
+from openerp import exceptions
 from datetime import datetime
 from datetime import date, timedelta
 
@@ -294,6 +295,12 @@ class TestStockInventoryRevaluation(TransactionCase):
         self.assertEqual(len(
             invent_value_change.account_move_ids[0].line_ids), 2,
             'Incorrect accounting entry generated')
+
+        with self.assertRaises(exceptions.Warning):
+            invent_value_change.account_move_ids.unlink()
+
+        with self.assertRaises(exceptions.Warning):
+            invent_value_change.account_move_ids[0].line_ids.unlink()
 
         for move_line in invent_value_change.account_move_ids[0].line_ids:
             if move_line.account_id == self.account_inventory:
