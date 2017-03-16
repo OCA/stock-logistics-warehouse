@@ -41,6 +41,7 @@ addon | version | summary
 [stock_putaway_product](stock_putaway_product/) | 9.0.1.0.1 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 9.0.1.0.0 | Stock - Manual Quant Assignment
 [stock_quant_merge](stock_quant_merge/) | 9.0.1.0.0 | Stock - Quant merge
+[stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 9.0.1.0.0 | Stock Quant Reserved Qty UoM
 [stock_reserve](stock_reserve/) | 9.0.1.0.0 | Stock reservations on products
 [stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 9.0.1.0.0 | Reordering rules stock info
 
