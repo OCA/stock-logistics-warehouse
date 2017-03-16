@@ -2,10 +2,10 @@
 # © 2015 Eficent Business and IT Consulting Services S.L. (www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp.tests import common
+from odoo.tests.common import TransactionCase
 
 
-class TestAccountMoveLineStockInfo(common.TransactionCase):
+class TestAccountMoveLineStockInfo(TransactionCase):
 
     def setUp(self):
         super(TestAccountMoveLineStockInfo, self).setUp()
