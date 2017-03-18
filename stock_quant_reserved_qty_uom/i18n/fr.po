@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_quant_reserved_qty_uom
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-17 09:47+0000\n"
+"PO-Revision-Date: 2017-03-17 09:47+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_quant_reserved_qty_uom
+#: model:ir.model.fields,field_description:stock_quant_reserved_qty_uom.field_stock_quant_reserved_qty_uom
+msgid "Qty in reservation UoM"
+msgstr ""
+
+#. module: stock_quant_reserved_qty_uom
+#: model:ir.model.fields,help:stock_quant_reserved_qty_uom.field_stock_quant_reserved_qty_uom
+msgid "Quantity expressed in the unit of measure of the move"
+msgstr ""
+
+#. module: stock_quant_reserved_qty_uom
+#: model:ir.model,name:stock_quant_reserved_qty_uom.model_stock_quant
+msgid "Quants"
+msgstr "Quants"
+
+#. module: stock_quant_reserved_qty_uom
+#: model:ir.model.fields,field_description:stock_quant_reserved_qty_uom.field_stock_quant_reservation_uom
+msgid "Reservation UoM"
+msgstr ""
