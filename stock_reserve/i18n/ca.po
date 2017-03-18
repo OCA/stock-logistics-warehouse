@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-18 18:31+0000\n"
-"PO-Revision-Date: 2017-01-17 19:17+0000\n"
+"POT-Creation-Date: 2017-03-11 08:44+0000\n"
+"PO-Revision-Date: 2017-03-14 18:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -98,7 +98,7 @@ msgstr "Data"
 #. module: stock_reserve
 #: field:stock.reservation,name:0
 msgid "Description"
-msgstr ""
+msgstr "Descripció"
 
 #. module: stock_reserve
 #: field:stock.reservation,partner_id:0
@@ -143,7 +143,7 @@ msgstr ""
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Group By..."
-msgstr ""
+msgstr "Agrupat per..."
 
 #. module: stock_reserve
 #: field:stock.reservation,id:0
@@ -593,7 +593,7 @@ msgstr "Preu unitari"
 #. module: stock_reserve
 #: field:stock.reservation,product_uom:0
 msgid "Unit of Measure"
-msgstr ""
+msgstr "Unitat de mesura"
 
 #. module: stock_reserve
 #: field:stock.reservation,date_validity:0
