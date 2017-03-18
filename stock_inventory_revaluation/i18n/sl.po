@@ -1,0 +1,587 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_revaluation
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-17 09:47+0000\n"
+"PO-Revision-Date: 2017-03-17 09:47+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2017\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_revaluation_type
+msgid ""
+"'Price Change': You can re-valuate inventory values by Changing the price for a specific product. The inventory price is changed and inventory value is recalculated according to the new price.\n"
+" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity of inventory remains unchanged, resulting in a change in the price"
+msgstr ""
+"'Sprememba cene': vrednosti zalog lahko prevrednotite preko spremembe cene določenega proizvoda. Spremeni se cena zaloge in preračuna nova vrednost zaloge glede na to ceno.\n"
+" 'Obveznosti/terjatve zalog': spreminjanje vrednosti zalog. Količina zalog ostane nespremenjena in posledično se spremeni cena."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_account_move
+msgid "Account Entry"
+msgstr "Knjigovodski vnos"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_account_move_ids
+msgid "Account move ids"
+msgstr "ID-ji kontnih premikov"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Back to Draft"
+msgstr "Vrni v osnutek"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Cancelled"
+msgstr "Preklicano"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:333
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:380
+#, python-format
+msgid ""
+"Cannot do an inventory value change if the quantity available for product %s"
+" is 0 or negative"
+msgstr ""
+"Spremembe vrednosti zalog ni mogoče izvesti, če je razpoložljiva količina "
+"proizvoda %s enaka 0 ali celo negativna."
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,help:stock_inventory_revaluation.action_stock_inventory_revaluation_tree
+msgid "Click to start a new Stock Inventory Revaluation."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_company_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_company_id
+msgid "Company"
+msgstr "Družba"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_cost_method
+msgid "Cost Method"
+msgstr "Metoda vrednotenja stroškov"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_create_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_create_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_create_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_create_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_user_id
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_create_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_create_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_create_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_create_date
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_document_date
+msgid "Creation date"
+msgstr "Datum nastanka"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_new_value
+msgid "Credit/Debit amount"
+msgstr "Znesek terjatev/obveznosti"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_current_cost
+msgid "Current Cost"
+msgstr "Tekoči strošek"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_current_cost
+msgid "Current cost"
+msgstr "Tekoči strošek"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_current_value
+msgid "Current value"
+msgstr "Trenutna vrednost"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_date_from
+msgid "Date From"
+msgstr "Od datuma"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_date_to
+msgid "Date To"
+msgstr "Do datuma"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_post_date
+msgid "Date of actual processing"
+msgstr "Datum dejanske obdelave"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_decrease_account_id
+msgid "Decrease Account"
+msgstr "Zmanjšaj znesek"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_uom_id
+msgid "Default Unit of Measure used for all stock operation."
+msgstr "Privzeta enota mere pri operacijah z zalogami"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_product_category_property_inventory_revaluation_decrease_account_categ
+msgid ""
+"Define the Financial Accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Valuation Decrease Account is "
+"used when the inventory value is decreased."
+msgstr ""
+"Določite finančne konte, ki se bodo uporabljali kot bilančni konto za "
+"transakcije nastale iz prevrednotenja. Konto znižanja vrednosti se "
+"uporablja, ko se vrednost zalog zniža."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_product_category_property_inventory_revaluation_increase_account_categ
+msgid ""
+"Define the Financial Accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Valuation Increase Account is "
+"used when the inventory value is increased due to the revaluation."
+msgstr ""
+"Določite finančne konte, ki se bodo uporabljali kot bilančni konto za "
+"transakcije nastale iz prevrednotenja. Konto zvišanja vrednosti se "
+"uporablja, ko se vrednost zalog zviša."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_decrease_account_id
+msgid ""
+"Define the G/L accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Decrease Account is used when "
+"the inventory value is decreased."
+msgstr ""
+"Določite konte dobička/izgub, ki se bodo uporabljali kot bilančni konto za "
+"transakcije nastale iz prevrednotenja. Konto znižanja se uporablja, ko se "
+"vrednost zalog zniža."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_increase_account_id
+msgid ""
+"Define the G/L accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Increase Account is used when "
+"the inventory value is increased due to the revaluation."
+msgstr ""
+"Določite konte dobička/izgub, ki se bodo uporabljali kot bilančni konto za "
+"transakcije nastale iz prevrednotenja. Konto zvišanja se uporablja, ko se "
+"vrednost zalog zaradi prevrednotenja zviša."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_display_name
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_display_name
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_display_name
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_display_name
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_remarks
+msgid ""
+"Displays by default Inventory Revaluation. This text is copied to the "
+"journal entry."
+msgstr ""
+"Prikaz privzetega prevrednotenja zalog. To besedilo se kopira v dnevniški "
+"vnos."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_current_cost
+msgid "Displays the current cost of the product."
+msgstr "Prikaz tekočega stroška proizvoda."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_current_value
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_old_value
+msgid "Displays the current value of the product."
+msgstr "Prikaz tekoče vrednosti proizvoda."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_old_cost
+msgid "Displays the previous cost of the product."
+msgstr "Prikaz prejšnjega stroška proizvoda."
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Draft"
+msgstr "Osnutek"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_value
+msgid ""
+"Enter the amount you wish to credit or debit from the current inventory "
+"value of the item. Enter credit as a negative value.Relevant only if the "
+"selected revaluation type is Inventory Credit/Debit."
+msgstr ""
+"Vnesite znesek, ki ga želite odobriti ali terjati od trenutne vrednosti "
+"zaloge artikla. Vnesite 'v dobro' kot negativno vrednost. Relevantno je le, "
+"če je izbrani tip vrednotenja Dobro/Breme zaloge."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_new_cost
+msgid ""
+"Enter the new cost you wish to assign to the Quant. Relevant only when the "
+"selected revaluation type is Price Change."
+msgstr ""
+"Vnesite nov strošek, ki ga želite dodeliti kvantu. Relevantno je le, če je "
+"izbrani tip vrednotenja Sprememba cene."
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_cost
+msgid ""
+"Enter the new cost you wish to assign to the product. Relevant only when the"
+" selected revaluation type is Price Change."
+msgstr ""
+"Vnesite nov strošek, ki ga želite dodeliti proizvodu. Relevantno je le, če "
+"je izbrani tip vrednotenja Sprememba cene."
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Get Quants"
+msgstr "Pridobi kvante"
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_get_quant
+msgid "Get Quants for Inventory Revaluation"
+msgstr "Pridobi kvante za vrednotenje zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_in_date
+msgid "Incoming Date"
+msgstr "Datum prihoda"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_increase_account_id
+msgid "Increase Account"
+msgstr "Konto zvišanja"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,revaluation_type:0
+msgid "Inventory Debit/Credit"
+msgstr "Breme/dobro zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_tree
+#: model:ir.ui.menu,name:stock_inventory_revaluation.menu_action_stock_inventory_revaluation_tree
+msgid "Inventory Revaluation"
+msgstr "Vrednotenje zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation
+msgid "Inventory revaluation"
+msgstr "Vrednotenje zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_get_quant
+msgid "Inventory revaluation get Quants"
+msgstr "Vrednotenje zalog pridobi kvante"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_quant
+msgid "Inventory revaluation quant"
+msgstr "Kvant vrednotenja zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_journal_id
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Journal Entries"
+msgstr "Dnevniški vnosi"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_account_move_line
+msgid "Journal Item"
+msgstr "Dnevniška postavka"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation___last_update
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant___last_update
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post___last_update
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant___last_update
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_write_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_write_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_write_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_write_uid
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_write_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_write_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_write_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_write_date
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_location_id
+msgid "Location"
+msgstr "Lokacija"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_new_cost
+msgid "New Cost"
+msgstr "Nova lastna cena"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_new_cost
+msgid "New cost"
+msgstr "Nov strošek"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_old_cost
+msgid "Old cost"
+msgstr "Stara lastna cena"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_old_value
+msgid "Old value"
+msgstr "Stara vrednost"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:269
+#, python-format
+msgid "Please add Stock Valuation Account in Product Category"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:272
+#, python-format
+msgid "Please add an Increase Account and a Decrease Account."
+msgstr "Dodajte konto zvišanja in konto znižanja"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Post"
+msgstr "Objava"
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_mass_post
+msgid "Post Inventory Revaluation"
+msgstr "Knjiži vrednotenje zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_mass_post
+msgid "Post multiple inventory revaluations"
+msgstr "Knjiži več vrednotenj zalog"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Posted"
+msgstr "Knjiženo"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_post_date
+msgid "Posting Date"
+msgstr "Datum vknjižbe"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_old_cost
+msgid "Previous cost"
+msgstr "Prejšnji stroški"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,revaluation_type:0
+msgid "Price Change"
+msgstr "Sprememba cene"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_product_product
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_product_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_product_id
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_product_category
+msgid "Product Category"
+msgstr "Kategorija proizvoda"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_product_template_id
+msgid "Product Template"
+msgstr "Predloga proizvoda"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_quant_id
+msgid "Quant"
+msgstr "Kvant"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_qty
+msgid "Quantity"
+msgstr "Količina"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_qty_available
+msgid "Quantity On Hand"
+msgstr "Količina na voljo"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_qty
+msgid ""
+"Quantity of products in this quant, in the default unit of measure of the "
+"product"
+msgstr "Količina proizvodov v kvantu prikazana v privzeti EM proizvoda"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Quants"
+msgstr "Kvant"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_name
+msgid "Reference"
+msgstr "Sklic"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_name
+msgid "Reference for the journal entry"
+msgstr "Sklic dnevniškega vnosa"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_remarks
+msgid "Remarks"
+msgstr "Pripombe"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_revaluation_id
+msgid "Revaluation"
+msgstr "Vrednotenje"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/wizards/stock_inventory_revaluation_mass_post.py:25
+#, python-format
+msgid "Revaluation %s is not in Draft state"
+msgstr "Vrednotenje %s ni v stanju 'osnutek'"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_revaluation_type
+msgid "Revaluation Type"
+msgstr "Tip vrednotenja"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_reval_quant_ids
+msgid "Revaluation line quants"
+msgstr "Kvanti postavk vrednotenja"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_search
+msgid "Search Stock Inventory Revaluation"
+msgstr "Iskanje vrednotenj zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_old_cost
+msgid "Shows the previous cost of the quant"
+msgstr "Prikazuje prejšnjo lastno ceno kvanta"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_state
+msgid "Status"
+msgstr "Status"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_account_move_line_stock_inventory_revaluation_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_account_move_stock_inventory_revaluation_id
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_tree
+msgid "Stock Inventory Revaluation"
+msgstr "Vrednotenje zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_quant_tree
+msgid "Stock Inventory Revaluation Line Quants"
+msgstr "Kvanti postavk vrednotenja zaloge"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_quant_form
+msgid "Stock Inventory Revaluation Quants"
+msgstr "Kvanti vrednotenja zaloge"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:327
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:375
+#, python-format
+msgid "The new value for product %s cannot be negative"
+msgstr "Nova vrednost proizvoda %s ne sme biti negativna"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_uom_id
+msgid "UoM"
+msgstr "EM"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_product_category_property_inventory_revaluation_decrease_account_categ
+msgid "Valuation Decrease Account"
+msgstr "Konto znižanja vrednosti"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_product_category_property_inventory_revaluation_increase_account_categ
+msgid "Valuation Increase Account"
+msgstr "Konto zvišanja vrednosti"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:470
+#, python-format
+msgid "You can only post quant cost changes."
+msgstr "Knjižite lahko le spremembe lastnih cen kvantov."
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/account_move.py:24
+#: code:addons/stock_inventory_revaluation/models/account_move.py:44
+#, python-format
+msgid ""
+"You cannot remove the journal item that is related to an inventory "
+"revaluation"
+msgstr ""
+"Dnevniške postavke povezane z prevrednotenjem inventarja ne morete "
+"odstraniti"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+msgid "or"
+msgstr "ali"

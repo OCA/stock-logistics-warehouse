@@ -1,0 +1,561 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_revaluation
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2017
+# Daniel Reis <dreis.pt@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-17 09:47+0000\n"
+"PO-Revision-Date: 2017-03-17 09:47+0000\n"
+"Last-Translator: Daniel Reis <dreis.pt@gmail.com>, 2017\n"
+"Language-Team: Portuguese (Portugal) (https://www.transifex.com/oca/teams/23907/pt_PT/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_PT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_revaluation_type
+msgid ""
+"'Price Change': You can re-valuate inventory values by Changing the price for a specific product. The inventory price is changed and inventory value is recalculated according to the new price.\n"
+" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity of inventory remains unchanged, resulting in a change in the price"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_account_move
+msgid "Account Entry"
+msgstr "Movimento de Conta"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_account_move_ids
+msgid "Account move ids"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Back to Draft"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:333
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:380
+#, python-format
+msgid ""
+"Cannot do an inventory value change if the quantity available for product %s"
+" is 0 or negative"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,help:stock_inventory_revaluation.action_stock_inventory_revaluation_tree
+msgid "Click to start a new Stock Inventory Revaluation."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_company_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_cost_method
+msgid "Cost Method"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_create_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_create_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_create_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_create_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_user_id
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_create_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_create_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_create_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_document_date
+msgid "Creation date"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_new_value
+msgid "Credit/Debit amount"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_current_cost
+msgid "Current Cost"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_current_cost
+msgid "Current cost"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_current_value
+msgid "Current value"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_date_from
+msgid "Date From"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_date_to
+msgid "Date To"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_post_date
+msgid "Date of actual processing"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_decrease_account_id
+msgid "Decrease Account"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_uom_id
+msgid "Default Unit of Measure used for all stock operation."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_product_category_property_inventory_revaluation_decrease_account_categ
+msgid ""
+"Define the Financial Accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Valuation Decrease Account is "
+"used when the inventory value is decreased."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_product_category_property_inventory_revaluation_increase_account_categ
+msgid ""
+"Define the Financial Accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Valuation Increase Account is "
+"used when the inventory value is increased due to the revaluation."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_decrease_account_id
+msgid ""
+"Define the G/L accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Decrease Account is used when "
+"the inventory value is decreased."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_increase_account_id
+msgid ""
+"Define the G/L accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Increase Account is used when "
+"the inventory value is increased due to the revaluation."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_display_name
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_display_name
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_display_name
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_display_name
+msgid "Display Name"
+msgstr "Nome a Apresentar"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_remarks
+msgid ""
+"Displays by default Inventory Revaluation. This text is copied to the "
+"journal entry."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_current_cost
+msgid "Displays the current cost of the product."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_current_value
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_old_value
+msgid "Displays the current value of the product."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_old_cost
+msgid "Displays the previous cost of the product."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Draft"
+msgstr "Rascunho"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_value
+msgid ""
+"Enter the amount you wish to credit or debit from the current inventory "
+"value of the item. Enter credit as a negative value.Relevant only if the "
+"selected revaluation type is Inventory Credit/Debit."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_new_cost
+msgid ""
+"Enter the new cost you wish to assign to the Quant. Relevant only when the "
+"selected revaluation type is Price Change."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_cost
+msgid ""
+"Enter the new cost you wish to assign to the product. Relevant only when the"
+" selected revaluation type is Price Change."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Get Quants"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_get_quant
+msgid "Get Quants for Inventory Revaluation"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_in_date
+msgid "Incoming Date"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_increase_account_id
+msgid "Increase Account"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,revaluation_type:0
+msgid "Inventory Debit/Credit"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_tree
+#: model:ir.ui.menu,name:stock_inventory_revaluation.menu_action_stock_inventory_revaluation_tree
+msgid "Inventory Revaluation"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation
+msgid "Inventory revaluation"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_get_quant
+msgid "Inventory revaluation get Quants"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_quant
+msgid "Inventory revaluation quant"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_journal_id
+msgid "Journal"
+msgstr "Diário"
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Journal Entries"
+msgstr "Movs. de Diário"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_account_move_line
+msgid "Journal Item"
+msgstr "Item do Diário"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation___last_update
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant___last_update
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post___last_update
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant___last_update
+msgid "Last Modified on"
+msgstr "Última Modificação Em"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_write_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_write_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_write_uid
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_write_uid
+msgid "Last Updated by"
+msgstr "Atualizado pela última vez por"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_write_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_write_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_write_date
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_write_date
+msgid "Last Updated on"
+msgstr "Atualizado pela última vez em"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_location_id
+msgid "Location"
+msgstr "Localização"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_new_cost
+msgid "New Cost"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_new_cost
+msgid "New cost"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_old_cost
+msgid "Old cost"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_old_value
+msgid "Old value"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:269
+#, python-format
+msgid "Please add Stock Valuation Account in Product Category"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:272
+#, python-format
+msgid "Please add an Increase Account and a Decrease Account."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Post"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_mass_post
+msgid "Post Inventory Revaluation"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_mass_post
+msgid "Post multiple inventory revaluations"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Posted"
+msgstr "Publicado"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_post_date
+msgid "Posting Date"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_old_cost
+msgid "Previous cost"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,revaluation_type:0
+msgid "Price Change"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_product_product
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_product_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_product_template_id
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_quant_id
+msgid "Quant"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_qty
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_qty_available
+msgid "Quantity On Hand"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_qty
+msgid ""
+"Quantity of products in this quant, in the default unit of measure of the "
+"product"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Quants"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_name
+msgid "Reference"
+msgstr "Referência"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_name
+msgid "Reference for the journal entry"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_remarks
+msgid "Remarks"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_revaluation_id
+msgid "Revaluation"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/wizards/stock_inventory_revaluation_mass_post.py:25
+#, python-format
+msgid "Revaluation %s is not in Draft state"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_revaluation_type
+msgid "Revaluation Type"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_reval_quant_ids
+msgid "Revaluation line quants"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_search
+msgid "Search Stock Inventory Revaluation"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_old_cost
+msgid "Shows the previous cost of the quant"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_state
+msgid "Status"
+msgstr "Estado"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_account_move_line_stock_inventory_revaluation_id
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_account_move_stock_inventory_revaluation_id
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_tree
+msgid "Stock Inventory Revaluation"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_quant_tree
+msgid "Stock Inventory Revaluation Line Quants"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_quant_form
+msgid "Stock Inventory Revaluation Quants"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:327
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:375
+#, python-format
+msgid "The new value for product %s cannot be negative"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_uom_id
+msgid "UoM"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_product_category_property_inventory_revaluation_decrease_account_categ
+msgid "Valuation Decrease Account"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.model.fields,field_description:stock_inventory_revaluation.field_product_category_property_inventory_revaluation_increase_account_categ
+msgid "Valuation Increase Account"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:470
+#, python-format
+msgid "You can only post quant cost changes."
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/account_move.py:24
+#: code:addons/stock_inventory_revaluation/models/account_move.py:44
+#, python-format
+msgid ""
+"You cannot remove the journal item that is related to an inventory "
+"revaluation"
+msgstr ""
+
+#. module: stock_inventory_revaluation
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+msgid "or"
+msgstr "ou"
