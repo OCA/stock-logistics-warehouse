@@ -69,7 +69,7 @@ class ProductProduct(models.Model):
         return res
 
     @api.multi
-    @api.depends('potential_qty')
+    @api.depends('potential_qty', 'component_ids.immediately_usable_qty')
     def _immediately_usable_qty(self):
         """Add the potential quantity to the quantity available to promise.
 
