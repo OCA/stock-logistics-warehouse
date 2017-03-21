@@ -44,6 +44,9 @@ class AssignManualQuants(models.TransientModel):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         move.picking_id.mapped('pack_operation_ids').unlink()
         quants = []
+        # Mark as recompute pack needed
+        if move.picking_id:  # pragma: no cover
+            move.picking_id.recompute_pack_op = True
         for quant_id in move.reserved_quant_ids.ids:
             move.write({'reserved_quant_ids': [[3, quant_id]]})
         for line in self.quants_lines:
