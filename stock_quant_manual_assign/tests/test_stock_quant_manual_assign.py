@@ -108,6 +108,9 @@ class TestStockQuantManualAssign(common.TransactionCase):
             wizard.lines_qty)
         for quant in self.move.reserved_quant_ids:
             self.assertTrue(quant in selected_quants)
+        wizard.assign_quants()
+        self.assertEqual(len(wizard.quants_lines.filtered('selected')),
+                         len(self.move.reserved_quant_ids))
 
     def test_quant_assign_wizard_after_availability_check(self):
         self.move.action_assign()
