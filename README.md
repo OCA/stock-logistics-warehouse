@@ -56,6 +56,7 @@ addon | version | summary
 [stock_valuation_account_manual_adjustment](stock_valuation_account_manual_adjustment/) | 8.0.1.0.0 | Shows in the product inventory stock value and the accounting value and allows to reconcile them
 [stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 8.0.1.0.0 | Reordering rules stock info
 
+
 Unported addons
 ---------------
 addon | version | summary
