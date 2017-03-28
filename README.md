@@ -46,6 +46,7 @@ addon | version | summary
 [stock_reserve](stock_reserve/) | 9.0.1.0.0 | Stock reservations on products
 [stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 9.0.1.0.0 | Reordering rules stock info
 
+
 Unported addons
 ---------------
 addon | version | summary
