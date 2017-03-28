@@ -27,6 +27,7 @@ addon | version | summary
 [stock_available_immediately](stock_available_immediately/) | 10.0.1.0.0 | Ignore planned receptions in quantity available to promise
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 10.0.1.0.0 | Add a MTS+MTO route
 
+
 Unported addons
 ---------------
 addon | version | summary
