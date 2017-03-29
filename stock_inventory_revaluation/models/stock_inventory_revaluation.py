@@ -426,7 +426,7 @@ class StockInventoryRevaluationQuant(models.Model):
                                      readonly=True)
 
     quant_id = fields.Many2one('stock.quant', 'Quant', required=True,
-                               readonly=True,
+                               readonly=True, ondelete='cascade',
                                domain=[('product_id.type', '=', 'product')])
 
     product_id = fields.Many2one('product.product', 'Product',
