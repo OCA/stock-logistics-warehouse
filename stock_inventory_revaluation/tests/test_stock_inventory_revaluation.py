@@ -234,6 +234,12 @@ class TestStockInventoryRevaluation(TransactionCase):
                                  'Incorrect inventory revaluation for '
                                  'type Price Change.')
 
+        quants = self.env['stock.quant'].search([('product_id', '=',
+                                                 self.product_real_1.id)])
+
+        # We should be able to delete the quants afterwards
+        quants.with_context(force_unlink=True).unlink()
+
     def create_inventory_revaluation_price_change_average(self):
         revaluation_type = 'price_change'
         # Create an Inventory Revaluation for average cost product
