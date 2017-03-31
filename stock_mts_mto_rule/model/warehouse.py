@@ -129,13 +129,14 @@ class Warehouse(models.Model):
     @api.multi
     def _update_name_and_code(self, name, code):
         res = super(Warehouse, self)._update_name_and_code(name, code)
-
-        for warehouse in self:
-            if warehouse.mts_mto_rule_id:
-                warehouse.mts_mto_rule_id.name = (
-                    warehouse.mts_mto_rule_id.name.replace(
-                        warehouse.name, name, 1)
+        if not name:
+            return res
+        for warehouse in self.filtered('mts_mto_rule_id'):
+            warehouse.mts_mto_rule_id.name = (
+                warehouse.mts_mto_rule_id.name.replace(
+                    warehouse.name, name, 1,
                 )
+            )
         return res
 
     def _get_route_name(self, route_type):
