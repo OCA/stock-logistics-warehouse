@@ -41,12 +41,12 @@
                     <button name="%(action_sale_stock_reserve)d"
                         type="action"
                         string="Reserve Stock"
-                        icon="terp-locked"
+                        icon="fa-lock"
                         attrs="{'invisible': [('is_stock_reservable', '=', False)]}" />
                     <button name="release_stock_reservation"
                         type="object"
                         string="Release Reservation"
-                        icon="gtk-undo"
+                        icon="fa-unlock"
                         attrs="{'invisible': [('reservation_ids', '=', [])]}" />
                 </xpath>
 
