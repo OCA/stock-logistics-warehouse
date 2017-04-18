@@ -25,7 +25,7 @@
         <field name="arch" type="xml">
             <field name="qty" position="before">
                 <field name="uom_categ_domain_id" invisible="1"/>
-                <field name="uom_id" domain="[('category_id', '=', uom_categ_domain_id)]"/>
+                <field name="uom_id" domain="[('category_id', '=', uom_categ_domain_id)]" required="True"/>
             </field>
         </field>
     </record>
