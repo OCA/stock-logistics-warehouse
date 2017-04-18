@@ -20,7 +20,7 @@
 ##############################################################################
 
 {'name': 'Stock Reserve Sales',
- 'version': '8.0.1.0.0',
+ 'version': '10.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
@@ -38,6 +38,6 @@
  'test': ['test/sale_reserve.yml',
           'test/sale_line_reserve.yml',
           ],
- 'installable': False,
+ 'installable': True,
  'auto_install': False,
  }
