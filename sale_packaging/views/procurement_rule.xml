@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_procurement_rule_form_stock_inherit" model="ir.ui.view">
+        <field name="name">procurement.rule.form.stock.inherit</field>
+        <field name="model">procurement.rule</field>
+        <field name="inherit_id" ref="procurement.view_procurement_rule_form"/>
+        <field name="arch" type="xml">
+            <field name="propagate_warehouse_id" position="after">
+                <field name="propagate_product_packaging"/>
+            </field>
+        </field>
+    </record>
+</odoo>
