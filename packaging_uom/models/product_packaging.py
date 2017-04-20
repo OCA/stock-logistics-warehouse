@@ -34,42 +34,44 @@ class ProductPackaging(models.Model):
         readonly=True
     )
 
-    @api.one
+    @api.multi
     @api.depends('uom_id', 'product_tmpl_id.uom_id')
     def _compute_qty(self):
         """
         Compute the quantity by package based on uom
         """
-        if self.uom_id and self.product_tmpl_id:
-            self.qty = self.uom_id._compute_quantity(
-                1, to_unit=self.product_tmpl_id.uom_id)
-        else:
-            self.qty = 0
+        for packaging in self:
+            if packaging.uom_id and packaging.product_tmpl_id:
+                packaging.qty = packaging.uom_id._compute_quantity(
+                    1, to_unit=packaging.product_tmpl_id.uom_id)
+            else:
+                packaging.qty = 0
 
-    @api.one
+    @api.multi
     def _inverse_qty(self):
         """
         The inverse method is defined to make the code compatible with
         existing modules and to not break tests...
         :return:
         """
-        category_id = self.product_tmpl_id.uom_id.category_id
-        uom_id = self.uom_id.search([
-            ("factor", "=", 1.0 / self.qty),
-            ('category_id', '=', category_id.id)])
-        if not uom_id:
-            uom_id = self.uom_id    .create({
-                'name': "%s %s" % (category_id.name, self.qty),
-                'category_id': category_id.id,
-                'rounding': self.product_tmpl_id.uom_id.rounding,
-                'uom_type': 'bigger',
-                'factor_inv': self.qty,
-                'active': True
-            })
-        self.uom_id = uom_id
+        for packaging in self:
+            category_id = packaging.product_tmpl_id.uom_id.category_id
+            uom_id = packaging.uom_id.search([
+                ("factor", "=", 1.0 / self.qty),
+                ('category_id', '=', category_id.id)])
+            if not uom_id:
+                uom_id = packaging.uom_id.create({
+                    'name': "%s %s" % (category_id.name, packaging.qty),
+                    'category_id': category_id.id,
+                    'rounding': packaging.product_tmpl_id.uom_id.rounding,
+                    'uom_type': 'bigger',
+                    'factor_inv': packaging.qty,
+                    'active': True
+                })
+            packaging.uom_id = uom_id
 
     @api.multi
-    @api.constrains
+    @api.constrains('uom_id')
     def _check_uom_id(self):
         """ Check uom_id is not null
 
