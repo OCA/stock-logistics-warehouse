@@ -36,3 +36,12 @@ class SaleOrderLine(models.Model):
     @api.multi
     def write(self, vals):
         return super(SaleOrderLine, self).write(self.update_vals(vals))
+
+    @api.multi
+    def _prepare_order_line_procurement(self, group_id=False):
+        vals = super(SaleOrderLine, self)._prepare_order_line_procurement(
+            group_id=group_id)
+        vals.update({
+            'product_packaging': self.product_packaging.id,
+        })
+        return vals
