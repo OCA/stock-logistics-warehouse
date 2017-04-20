@@ -43,44 +43,49 @@ class PurchaseOrderLine(models.Model):
         return self.product_id._select_seller(
             partner_id=self.order_id.partner_id,
             quantity=self.product_qty,
-            date=self.order_id.date_order and self.order_id.date_order[:10],
+            date=self.order_id.date_order and
+            fields.Date.from_string(self.order_id.date_order),
             uom_id=self.product_uom)
 
-    @api.one
+    @api.multi
     @api.depends('product_purchase_uom_id', 'product_purchase_qty')
     def _compute_product_qty(self):
         """
         Compute the total quantity
         """
-        uom_obj = self.env['product.uom']
-        to_uom = uom_obj.search(
-            [('category_id', '=', self.product_purchase_uom_id.category_id.id),
-             ('uom_type', '=', 'reference')], limit=1)
-        if not self.product_purchase_uom_id:
-            return
-        self.product_qty = self.product_purchase_uom_id._compute_quantity(
-            self.product_purchase_qty,
-            to_uom)
+        for line in self:
+            uom_obj = self.env['product.uom']
+            to_uom = uom_obj.search(
+                [('category_id',
+                  '=',
+                  line.product_purchase_uom_id.category_id.id),
+                 ('uom_type', '=', 'reference')], limit=1)
+            if not line.product_purchase_uom_id:
+                return
+            line.product_qty = line.product_purchase_uom_id._compute_quantity(
+                line.product_purchase_qty,
+                to_uom)
 
-    @api.one
+    @api.multi
     def _inverse_product_qty(self):
         """ If product_quantity is set compute the purchase_qty
         """
-        if self.product_id:
-            supplier = self._get_product_seller()
-            if supplier:
-                product_purchase_uom = supplier.min_qty_uom_id
-                uom_obj = self.env['product.uom']
-                from_uom = uom_obj.search(
-                    [('category_id', '=',
-                      product_purchase_uom.category_id.id),
-                     ('uom_type', '=', 'reference')], limit=1)
-                self.product_purchase_qty = from_uom._compute_quantity(
-                    self.product_qty,
-                    product_purchase_uom)
-                self.product_purchase_uom_id = product_purchase_uom.id
-        else:
-            self.product_purchase_qty = self.product_qty
+        for line in self:
+            if line.product_id:
+                supplier = line._get_product_seller()
+                if supplier:
+                    product_purchase_uom = supplier.min_qty_uom_id
+                    uom_obj = self.env['product.uom']
+                    from_uom = uom_obj.search(
+                        [('category_id', '=',
+                          product_purchase_uom.category_id.id),
+                         ('uom_type', '=', 'reference')], limit=1)
+                    line.product_purchase_qty = from_uom._compute_quantity(
+                        line.product_qty,
+                        product_purchase_uom)
+                    line.product_purchase_uom_id = product_purchase_uom.id
+            else:
+                line.product_purchase_qty = line.product_qty
 
     @api.onchange("packaging_id")
     def _onchange_packaging_id(self):
@@ -136,7 +141,7 @@ class PurchaseOrderLine(models.Model):
             if res.get('domain'):
                 res['domain'].update(domain)
             else:
-                res['domain'] = domain
+                res['domain'] = domain  # pragma: no cover not aware of super
         return res
 
     @api.multi

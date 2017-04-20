@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, models
+from odoo import api, fields, models
 
 
 class ProcurementOrder(models.Model):
@@ -17,7 +17,7 @@ class ProcurementOrder(models.Model):
         seller = self.product_id._select_seller(
             partner_id=supplier.name,
             quantity=res['product_qty'],
-            date=po.date_order and po.date_order[:10],
+            date=po.date_order and fields.Date.from_string(po.date_order),
             uom_id=self.product_id.uom_po_id)
         if seller.packaging_id:
                 res['packaging_id'] = seller.packaging_id.id
