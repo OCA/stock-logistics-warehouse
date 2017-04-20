@@ -22,10 +22,15 @@
             <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
             <field name="arch" type="xml">
                 <field name="min_qty" position="after">
-                    <field name="min_qty_uom_id" groups="product.group_uom"/>
+                    <span> x <field name="min_qty_uom_id" groups="product.group_uom"/></span>
+                </field>
+                <field name="product_uom" position="before">
+                <span> of </span>
                 </field>
                 <field name="product_uom" position="after">
-                    <field name="packaging_id" domain="[('product_tmpl_id', '=', product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                    <div>
+                         using package <field name="packaging_id" domain="[('product_tmpl_id', '=', product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                    </div>
                 </field>
                 <field name="delay" position="after">
                     <field name="product_tmpl_id" invisible="1" required="False"/>

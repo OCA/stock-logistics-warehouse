@@ -22,6 +22,11 @@ class TestPurchaseOrderLine(common.TransactionCase):
              'uom_id': self.env.ref('product.product_uom_dozen').id,
              'name': 'Packaging Dozen'}
         )
+        self.product_packaging_unit = self.env['product.packaging'].create(
+            {'product_tmpl_id': self.product_tmpl_id.id,
+             'uom_id': self.env.ref('product.product_uom_unit').id,
+             'name': 'Packaging Unit'}
+        )
         self.product_uom_8 = self.env['product.uom'].create(
             {'category_id': self.env.ref('product.product_uom_categ_unit').id,
              'name': 'COL8',
@@ -79,3 +84,54 @@ class TestPurchaseOrderLine(common.TransactionCase):
         self.assertEqual(sm.product_uom.id,
                          self.env.ref('product.product_uom_dozen').id)
         self.assertAlmostEqual(sm.product_uom_qty, 16)
+
+    def test_po_line_no_product(self):
+        self.product_supplier_info.min_qty_uom_id = self.product_uom_8
+        self.product_supplier_info.min_qty = 2
+        self.product_supplier_info.packaging_id = self.product_packaging_dozen
+
+        po = self.env['purchase.order'].create(
+            {'partner_id': self.product_supplier_info.name.id})
+        po_line = po.order_line.new({
+            'product_id': self.product_tmpl_id.product_variant_id,
+            'product_purchase_qty': 1.0,
+            'product_purchase_uom_id':
+                po.order_line._default_product_purchase_uom_id(),
+            'order_id': po
+        })
+        po_line.onchange_product_id()
+        po_line.product_id = None
+        po_line.product_qty = 2.0
+        self.assertEqual(
+            2.0,
+            po_line.product_purchase_qty,
+            'The purchase quantity is not well set'
+        )
+
+    def test_po_line_change_packaging(self):
+        self.product_supplier_info.min_qty_uom_id = self.product_uom_8
+        self.product_supplier_info.min_qty = 2
+        self.product_supplier_info.packaging_id = self.product_packaging_dozen
+
+        po = self.env['purchase.order'].create(
+            {'partner_id': self.product_supplier_info.name.id})
+        po_line = po.order_line.new({
+            'product_id': self.product_tmpl_id.product_variant_id,
+            'product_purchase_qty': 1.0,
+            'product_purchase_uom_id':
+                po.order_line._default_product_purchase_uom_id(),
+            'order_id': po
+        })
+        po_line.onchange_product_id()
+        self.assertEquals(
+            self.product_packaging_dozen.uom_id,
+            po_line.product_uom,
+            'The UOM Unit is not well set'
+        )
+        po_line.packaging_id = self.product_packaging_unit
+        po_line._onchange_packaging_id()
+        self.assertEquals(
+            self.product_packaging_unit.uom_id,
+            po_line.product_uom,
+            'The product uom is not well set'
+        )
