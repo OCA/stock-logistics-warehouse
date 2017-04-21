@@ -9,8 +9,9 @@ from openerp import api, models
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
-    @api.one
+    @api.multi
     def action_done(self):
         super(StockMove, self).action_done()
-        self.location_id.check_zero_confirmation()
+        for move in self:
+            move.location_id.check_zero_confirmation()
         return True
