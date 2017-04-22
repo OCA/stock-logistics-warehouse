@@ -7,6 +7,10 @@ Stock Inventory Import from CSV file
 ====================================
 
 Wizard to import Inventory from a CSV file
+
+Usage
+=====
+
 The file must have at least 2 columns with "code" and "quantity" Head Keys.
 You can also add a third column with Key "location" to add product location
 (if not defined, default inventory location will be used)
@@ -15,6 +19,12 @@ You can also add a fourth column with Key "lot" to add a product lot.
 Credits
 =======
 
+Images
+------
+
+* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
+
+
 Contributors
 ------------
 * Daniel Campos <danielcampos@avanzosc.es>
@@ -22,3 +32,19 @@ Contributors
 * Ana Juaristi <ajuaristio@gmail.com>
 * Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
 * Esther Martín <esthermartin@avanzosc.es>
+* Dave Lasley <dave@laslabs.com>
+
+Maintainer
+----------
+
+.. image:: https://odoo-community.org/logo.png
+   :alt: Odoo Community Association
+   :target: https://odoo-community.org
+
+This module is maintained by the OCA.
+
+OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.
+
+To contribute to this module, please visit https://odoo-community.org.

@@ -2,7 +2,7 @@
 # (c) 2015 AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import fields, models, exceptions, api, _
+from odoo import _, api, exceptions, fields, models
 import base64
 import csv
 import cStringIO
@@ -12,7 +12,21 @@ class ImportInventory(models.TransientModel):
     _name = 'import.inventory'
     _description = 'Import inventory'
 
-    def _get_default_location(self):
+    data = fields.Binary('File', required=True)
+    name = fields.Char('Filename')
+    delimeter = fields.Char(
+        string='Delimeter',
+        default=',',
+        help='Default delimeter is ","',
+    )
+    location_id = fields.Many2one(
+        string='Default Location',
+        comodel_name='stock.location',
+        default=lambda s: s._get_default_location_id(),
+        required=True,
+    )
+
+    def _get_default_location_id(self):
         ctx = self.env.context
         if 'active_id' in ctx:
             inventory_obj = self.env['stock.inventory']
@@ -20,16 +34,10 @@ class ImportInventory(models.TransientModel):
             return inventory.location_id or self.env['stock.location']
         return False
 
-    data = fields.Binary('File', required=True)
-    name = fields.Char('Filename')
-    delimeter = fields.Char('Delimeter', default=',',
-                            help='Default delimeter is ","')
-    location = fields.Many2one('stock.location', 'Default Location',
-                               default=_get_default_location, required=True)
-
     @api.multi
     def action_import(self):
         """Load Inventory data from the CSV file."""
+        self.ensure_one()
         ctx = self.env.context
         stloc_obj = self.env['stock.location']
         inventory_obj = self.env['stock.inventory']
@@ -42,7 +50,7 @@ class ImportInventory(models.TransientModel):
         data = base64.b64decode(self.data)
         file_input = cStringIO.StringIO(data)
         file_input.seek(0)
-        location = self.location
+        location = self.location_id
         reader_info = []
         if self.delimeter:
             delimeter = str(self.delimeter)

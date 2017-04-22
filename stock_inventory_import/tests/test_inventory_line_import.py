@@ -2,9 +2,9 @@
 # © 2016 Esther Martín - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import openerp.tests.common as common
-from openerp.modules.module import get_module_resource
-from openerp import fields, exceptions
+import odoo.tests.common as common
+from odoo.modules.module import get_module_resource
+from odoo import fields, exceptions
 
 
 class TestInventoryLineImport(common.TransactionCase):
@@ -31,7 +31,7 @@ class TestInventoryLineImport(common.TransactionCase):
         )
 
     def test_import_inventory(self):
-        self.assertTrue(self.importer.location)
+        self.assertTrue(self.importer.location_id)
         self.importer.action_import()
         self.assertTrue(self.inventory.imported)
         self.assertEqual(self.inventory.state, 'confirm')

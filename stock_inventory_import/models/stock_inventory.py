@@ -2,15 +2,26 @@
 # (c) 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import models, fields, api, exceptions, _
+from odoo import _, api, exceptions, fields, models
 
 
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
+    imported = fields.Boolean('Imported')
+    import_lines = fields.One2many(
+        string='Imported Lines',
+        comodel_name='stock.inventory.import.line',
+        inverse_name='inventory_id',
+    )
+    processed = fields.Boolean(
+        string='Has been processed at least once?',
+        compute='_compute_file_lines_processed',
+    )
+
     @api.model
-    def _get_available_filters(self):
-        res = super(StockInventory, self)._get_available_filters()
+    def _selection_filter(self):
+        res = super(StockInventory, self)._selection_filter()
         res.append(('file', _('By File')))
         return res
 
@@ -25,15 +36,6 @@ class StockInventory(models.Model):
                                   line.fail_reason != _('No processed')))
                                 for line in record.import_lines)
             record.processed = processed
-
-    imported = fields.Boolean('Imported')
-    import_lines = fields.One2many('stock.inventory.import.line',
-                                   'inventory_id', string='Imported Lines')
-    filter = fields.Selection(_get_available_filters,
-                              string='Selection Filter',
-                              required=True)
-    processed = fields.Boolean(string='Has been processed at least once?',
-                               compute='_compute_file_lines_processed')
 
     @api.multi
     def process_import_lines(self):
