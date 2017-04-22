@@ -2,7 +2,7 @@
 # © 2016 Esther Martín - AvanzOSC
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import openerp.tests.common as common
+import odoo.tests.common as common
 
 
 class TestStockInventoryLinePrice(common.TransactionCase):

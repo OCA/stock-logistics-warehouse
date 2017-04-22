@@ -2,8 +2,8 @@
 # (c) 2016 Esther Martín - AvanzOSC
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models
-import openerp.addons.decimal_precision as dp
+from odoo import api, fields, models
+import odoo.addons.decimal_precision as dp
 
 
 class StockInventoryLine(models.Model):
@@ -19,21 +19,36 @@ class StockInventoryLine(models.Model):
         digits=dp.get_precision('Product Price'),
     )
 
-    @api.model
-    def _resolve_inventory_line(self, inventory_line):
+    @api.multi
+    def _get_move_values(self, qty, location_id, location_dest_id):
+        vals = super(StockInventoryLine, self)._get_move_values(
+            qty, location_id, location_dest_id,
+        )
+        vals.update({
+            'price_unit': self.standard_price,
+        })
+        return vals
 
-        super_method = super(StockInventoryLine, self)._resolve_inventory_line
-        theoretical_price = inventory_line.theoretical_std_price
-        standard_price = inventory_line.standard_price
+    @api.multi
+    def _generate_moves(self):
 
-        if theoretical_price == standard_price:
-            return super_method(inventory_line)
+        moves = self.env['stock.move']
 
-        inventory_line.product_id.standard_price = standard_price
-        move_id = super_method(inventory_line)
+        for inventory_line in self:
 
-        if move_id:
-            move = self.env['stock.move'].browse(move_id)
-            move.price_unit = standard_price
+            super_method = super(
+                StockInventoryLine, inventory_line,
+            )
+            super_method = super_method._generate_moves
 
-        return move_id
+            theoretical_price = inventory_line.theoretical_std_price
+            standard_price = inventory_line.standard_price
+
+            if theoretical_price == standard_price:
+                moves += super_method()
+                continue
+
+            inventory_line.product_id.standard_price = standard_price
+            moves += super_method()
+
+        return moves
