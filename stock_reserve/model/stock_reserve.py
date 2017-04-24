@@ -96,7 +96,7 @@ class StockReservation(models.Model):
         if not res.get('picking_type_id', None):
             res['picking_type_id'] = self._default_picking_type_id()
 
-        picking_type_id = res.get('picking_type_id', None)
+        picking_type_id = res.get('picking_type_id')
         if picking_type_id and not res.get('location_id', False):
             picking = self.env['stock.picking'].new(
                 {'picking_type_id': picking_type_id})
