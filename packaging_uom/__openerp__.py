@@ -21,7 +21,7 @@
 
 {
     "name": "Packaging UOM",
-    "version": "0.1",
+    "version": "8.0.1.0.1",
     'author': "Acsone, Odoo Community Association (OCA)",
     "category": "Other",
     "website": "http://www.acsone.eu",
