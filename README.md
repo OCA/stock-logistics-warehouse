@@ -33,6 +33,7 @@ addon | version | summary
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 9.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 9.0.1.0.0 | Allow to perform inventories of a location without including its child locations.
 [stock_inventory_revaluation](stock_inventory_revaluation/) | 9.0.1.0.0 | Introduces inventory revaluation as single point to change the valuation of products.
+[stock_inventory_verification_request](stock_inventory_verification_request/) | 9.0.1.0.0 | Adds the capability to request a Slot Verification when a inventory is Pending to Approve
 [stock_location_area_data](stock_location_area_data/) | 9.0.1.0.0 | Add surface units of measure
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 9.0.1.0.0 | Add a MTS+MTO route
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 9.0.1.0.0 | Mass configuration of stock order points
@@ -44,6 +45,7 @@ addon | version | summary
 [stock_quant_merge](stock_quant_merge/) | 9.0.1.0.0 | Stock - Quant merge
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 9.0.1.0.0 | Stock Quant Reserved Qty UoM
 [stock_reserve](stock_reserve/) | 9.0.1.0.0 | Stock reservations on products
+[stock_valuation_account_manual_adjustment](stock_valuation_account_manual_adjustment/) | 9.0.1.0.0 | Shows in the product inventory stock value and the accounting value and allows to reconcile them
 [stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 9.0.1.0.0 | Reordering rules stock info
 
 
