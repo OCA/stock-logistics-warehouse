@@ -8,8 +8,8 @@ from odoo import api, models
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
-    @api.model
     def quants_unreserve(self):
-        quants = self.reserved_quant_ids
-        super(StockMove, self).quants_unreserve()
-        quants.merge_stock_quants()
+        for move in self:
+            quants = move.reserved_quant_ids
+            super(StockMove, move).quants_unreserve()
+            quants.merge_stock_quants()
