@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 03:58+0000\n"
-"PO-Revision-Date: 2017-03-04 03:58+0000\n"
+"POT-Creation-Date: 2017-07-05 00:45+0000\n"
+"PO-Revision-Date: 2017-07-05 00:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgid "Package"
 msgstr "Packung"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_4463
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_4478
 msgid "QTY"
 msgstr "Menge"
 
@@ -117,7 +117,7 @@ msgid "Quant"
 msgstr "Quant"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr "Menge ist größer als der Bedarf"
@@ -130,12 +130,12 @@ msgstr "Quants"
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_move_qty
 msgid "Remaining qty"
-msgstr ""
+msgstr "Verbleibende Menge"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty
 msgid "Reserved qty"
-msgstr ""
+msgstr "Reservierte Menge"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_selected
@@ -150,12 +150,7 @@ msgstr "Lagerbuchung"
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
 msgid "The package containing this quant"
-msgstr ""
-
-#. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
-msgid "Transfer"
-msgstr "Transfer"
+msgstr "Die Packung, die dieses Quant beinhaltet"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_move_picking_type_code
