@@ -3,18 +3,15 @@
 # * stock_valuation_account_manual_adjustment
 # 
 # Translators:
-# Thomas A. Jaeger <tj@jamotion.ch>, 2016
-# OCA Transbot <transbot@odoo-community.org>, 2016
-# Rudolf Schnapka <rs@techno-flex.de>, 2016
-# Philipp Hug <philipp@hug.cx>, 2016
-# Tom Palan <thomas@palan.at>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 02:06+0000\n"
-"PO-Revision-Date: 2016-12-23 02:06+0000\n"
-"Last-Translator: Tom Palan <thomas@palan.at>, 2016\n"
+"POT-Creation-Date: 2017-06-29 13:13+0000\n"
+"PO-Revision-Date: 2017-06-29 13:13+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,76 +20,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_valuation_account_manual_adjustment
-#: model:ir.actions.act_window,help:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
-msgid ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"                Click to start a new Stock Valuation Account Manual Adjustment\n"
-"              </p>\n"
-"            "
-msgstr ""
-
-#. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_account_move
 msgid "Account Entry"
 msgstr "Kontobuchung"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,account_move_ids:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_account_move_ids
 msgid "Account move ids"
-msgstr ""
+msgstr "Buchungs-IDs"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:product.product,accounting_value:0
-#: field:stock.valuation.account.manual.adjustment,accounting_value:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_product_product_accounting_value
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_accounting_value
 msgid "Accounting Value"
-msgstr ""
+msgstr "Buchhaltungswert"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_stock_valuation_account_mass_adjust
 msgid "Adjust Stock Valuation Account Discrepancies"
-msgstr ""
+msgstr "Bestandsbewertungsabweichungen anpassen"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,amount:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_amount
 msgid "Adjustment amount"
-msgstr ""
+msgstr "Mengenanpassung"
 
 #. module: stock_valuation_account_manual_adjustment
-#: view:stock.valuation.account.mass.adjust:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
 msgid "Cancel"
 msgstr "Löschen"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,company_id:0
+#: model:ir.actions.act_window,help:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
+msgid "Click to start a new Stock Valuation Account Manual Adjustment"
+msgstr ""
+"Klicken Sie, um eine manuelle Korrektur auf das Bestandsbewertungskonto "
+"vorzunehmen"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_company_id
 msgid "Company"
 msgstr "Unternehmen"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,create_uid:0
-#: field:stock.valuation.account.manual.adjustment,user_id:0
-#: field:stock.valuation.account.mass.adjust,create_uid:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_create_uid
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_user_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_create_uid
 msgid "Created by"
 msgstr "Erstellt von"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,create_date:0
-#: field:stock.valuation.account.mass.adjust,create_date:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_create_date
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_create_date
 msgid "Created on"
 msgstr "Erstellt am:"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,document_date:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_document_date
 msgid "Creation date"
-msgstr ""
+msgstr "Anlagedatum"
 
 #. module: stock_valuation_account_manual_adjustment
-#: help:stock.valuation.account.manual.adjustment,post_date:0
+#: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_post_date
 msgid "Date of actual processing"
-msgstr ""
+msgstr "Datum der tatsächlichen Bearbeitung"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,display_name:0
-#: field:stock.valuation.account.mass.adjust,display_name:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_display_name
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_display_name
 msgid "Display Name"
 msgstr "Anzeigename"
 
@@ -102,8 +97,8 @@ msgid "Draft"
 msgstr "Entwurf"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,id:0
-#: field:stock.valuation.account.mass.adjust,id:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_id
 msgid "ID"
 msgstr "ID"
 
@@ -111,55 +106,61 @@ msgstr "ID"
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:62
 #, python-format
 msgid "Incorrect model."
-msgstr ""
+msgstr "Falsches Modell."
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:product.product,inventory_value:0
-#: field:stock.valuation.account.manual.adjustment,inventory_value:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_product_product_inventory_value
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_inventory_value
 msgid "Inventory Value"
 msgstr "Bestandswert"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,journal_id:0
-#: field:stock.valuation.account.mass.adjust,journal_id:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_journal_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_journal_id
 msgid "Journal"
 msgstr "Journal"
 
 #. module: stock_valuation_account_manual_adjustment
-#: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
 msgid "Journal Entries"
 msgstr "Journalbuchungen"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_account_move_line
-msgid "Journal Items"
-msgstr "Buchungsjournale"
+msgid "Journal Item"
+msgstr "Journalbuchung"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,__last_update:0
-#: field:stock.valuation.account.mass.adjust,__last_update:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment___last_update
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust___last_update
 msgid "Last Modified on"
 msgstr "Zuletzt geändert am"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,write_uid:0
-#: field:stock.valuation.account.mass.adjust,write_uid:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_uid
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_write_uid
 msgid "Last Updated by"
 msgstr "Zuletzt aktualisiert von"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,write_date:0
-#: field:stock.valuation.account.mass.adjust,write_date:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_date
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_write_date
 msgid "Last Updated on"
 msgstr "Zuletzt aktualisiert am"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_stock_valuation_account_mass_adjust
 msgid "Mass Adjust Stock Valuation Account Discrepancies"
+msgstr "Massenanpassung von Bestandwertkonto-Abweichungen"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_product_inventory_valuation
+#: model:ir.ui.menu,name:stock_valuation_account_manual_adjustment.menu_action_product_inventory_valuation
+msgid "Perpetual Inventory Valuation"
 msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
-#: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
 msgid "Post"
 msgstr "bekanntgeben"
 
@@ -169,18 +170,18 @@ msgid "Posted"
 msgstr "Gebucht"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,post_date:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_post_date
 msgid "Posting Date"
-msgstr ""
+msgstr "Buchungsdatum"
 
 #. module: stock_valuation_account_manual_adjustment
-#: view:stock.valuation.account.mass.adjust:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
 msgid "Process"
-msgstr ""
+msgstr "Vorgang"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_product_product
-#: field:stock.valuation.account.manual.adjustment,product_id:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_product_id
 msgid "Product"
 msgstr "Produkt"
 
@@ -188,100 +189,94 @@ msgstr "Produkt"
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:67
 #, python-format
 msgid "Product %s must have real time valuation"
-msgstr ""
+msgstr "Produkt %s muss Echtzeitbewertung haben"
 
 #. module: stock_valuation_account_manual_adjustment
-#: view:product.product:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
 msgid "Product Inventory Valuation"
-msgstr ""
+msgstr "Produkt Bestandsbewertung"
 
 #. module: stock_valuation_account_manual_adjustment
-#: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_product_inventory_valuation
-#: model:ir.ui.menu,name:stock_valuation_account_manual_adjustment.menu_action_product_inventory_valuation
-msgid "Real-time Inventory Valuation"
-msgstr ""
-
-#. module: stock_valuation_account_manual_adjustment
-#: view:stock.valuation.account.mass.adjust:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
 msgid "Reconcile Inventory Account"
-msgstr ""
+msgstr "Inventurkonto ausgleichen"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,name:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_name
 msgid "Reference"
 msgstr "Bezug"
 
 #. module: stock_valuation_account_manual_adjustment
-#: help:stock.valuation.account.manual.adjustment,name:0
+#: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_name
 msgid "Reference for the journal entry"
-msgstr ""
+msgstr "Referenz für den Journaleintrag"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,remarks:0
-#: field:stock.valuation.account.mass.adjust,remarks:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_remarks
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_remarks
 msgid "Remarks"
-msgstr ""
+msgstr "Bemerkungen"
 
 #. module: stock_valuation_account_manual_adjustment
-#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:169
-#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:190
-#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:211
+#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:165
+#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:187
+#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:209
 #, python-format
 msgid "Search operator %s not implemented for value %s"
-msgstr ""
+msgstr "Suchoperator %s für Wert %s nicht implementiert"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,state:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_state
 msgid "Status"
 msgstr "Status"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:account.move,stock_valuation_account_manual_adjustment_id:0
-#: field:account.move.line,stock_valuation_account_manual_adjustment_id:0
 #: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_account_move_line_stock_valuation_account_manual_adjustment_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_account_move_stock_valuation_account_manual_adjustment_id
 #: model:ir.ui.menu,name:stock_valuation_account_manual_adjustment.menu_action_stock_valuation_account_manual_adjustment_tree
-#: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
-#: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_search
-#: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_tree
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_search
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_tree
 msgid "Stock Valuation Account Manual Adjustment"
-msgstr ""
+msgstr "Konto für manuelle Bestandswertberichtigung"
 
 #. module: stock_valuation_account_manual_adjustment
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:82
 #: model:res.groups,name:stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment
 #, python-format
 msgid "Stock Valuation Account Manual Adjustments"
-msgstr ""
+msgstr "Konto für manuelle Bestandswertberichtigungen"
 
 #. module: stock_valuation_account_manual_adjustment
-#: help:stock.valuation.account.manual.adjustment,remarks:0
-#: help:stock.valuation.account.mass.adjust,remarks:0
+#: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_remarks
+#: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_remarks
 msgid "This text is copied to the journal entry."
-msgstr ""
+msgstr "Dieser Text wird in das Journal übertragen"
 
 #. module: stock_valuation_account_manual_adjustment
-#: view:product.product:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
 msgid "UoM"
 msgstr "ME"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,decrease_account_id:0
-#: field:stock.valuation.account.mass.adjust,decrease_account_id:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_decrease_account_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_decrease_account_id
 msgid "Valuation Decrease Contra-Account"
-msgstr ""
+msgstr "Bewertungsabnahme Gegenkonto"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:stock.valuation.account.manual.adjustment,increase_account_id:0
-#: field:stock.valuation.account.mass.adjust,increase_account_id:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_increase_account_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_increase_account_id
 msgid "Valuation Increase Contra-Account"
-msgstr ""
+msgstr "Bewertungszunahme Gegenkonto"
 
 #. module: stock_valuation_account_manual_adjustment
-#: field:product.product,valuation_discrepancy:0
-#: field:stock.valuation.account.manual.adjustment,valuation_discrepancy:0
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_product_product_valuation_discrepancy
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_valuation_discrepancy
 msgid "Valuation discrepancy"
-msgstr ""
+msgstr "Bewertungsabweichung"
 
 #. module: stock_valuation_account_manual_adjustment
 #: code:addons/stock_valuation_account_manual_adjustment/models/account_move.py:21
@@ -290,6 +285,8 @@ msgid ""
 "You cannot remove the journal entry that is related to a Stock valuation "
 "account manual adjustment "
 msgstr ""
+"Sie dürfen eine Journal-Buchung nicht löschen, der mit einer manuellen "
+"Bestandswertberichtigung verknüpft ist"
 
 #. module: stock_valuation_account_manual_adjustment
 #: code:addons/stock_valuation_account_manual_adjustment/models/account_move.py:41
@@ -298,3 +295,5 @@ msgid ""
 "You cannot remove the journal item that is related to a Stock valuation "
 "account manual adjustment "
 msgstr ""
+"Sie dürfen einen Journal-Posten nicht löschen, der mit einer manuellen "
+"Bestandswertberichtigung verknüpft ist"
