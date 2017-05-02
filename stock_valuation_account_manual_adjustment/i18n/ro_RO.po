@@ -3,20 +3,20 @@
 # * stock_valuation_account_manual_adjustment
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
+# Iulia Comaniciu <Julia21r@icloud.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 03:02+0000\n"
-"PO-Revision-Date: 2017-04-26 03:02+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Estonian (https://www.transifex.com/oca/teams/23907/et/)\n"
+"POT-Creation-Date: 2017-11-25 12:33+0000\n"
+"PO-Revision-Date: 2017-11-25 12:33+0000\n"
+"Last-Translator: Iulia Comaniciu <Julia21r@icloud.com>, 2017\n"
+"Language-Team: Romanian (Romania) (https://www.transifex.com/oca/teams/23907/ro_RO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: et\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ro_RO\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_account_move
@@ -47,7 +47,7 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
 msgid "Cancel"
-msgstr "Loobu"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.actions.act_window,help:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
@@ -57,20 +57,20 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_company_id
 msgid "Company"
-msgstr "Ettevõte"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_create_uid
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_user_id
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_create_uid
 msgid "Created by"
-msgstr "Loonud"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_create_date
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_create_date
 msgid "Created on"
-msgstr "Loodud"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_document_date
@@ -86,18 +86,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_display_name
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_display_name
 msgid "Display Name"
-msgstr "Näidatav nimi"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: selection:stock.valuation.account.manual.adjustment,state:0
 msgid "Draft"
-msgstr "Mustand"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_id
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:62
@@ -115,7 +115,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_journal_id
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_journal_id
 msgid "Journal"
-msgstr "Päevik"
+msgstr "jurnal"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
@@ -131,19 +131,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment___last_update
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust___last_update
 msgid "Last Modified on"
-msgstr "Viimati muudetud"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_uid
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_write_uid
 msgid "Last Updated by"
-msgstr "Viimati uuendatud"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_date
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_write_date
 msgid "Last Updated on"
-msgstr "Viimati uuendatud"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_stock_valuation_account_mass_adjust
@@ -164,7 +164,7 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: selection:stock.valuation.account.manual.adjustment,state:0
 msgid "Posted"
-msgstr "Postitatud"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_post_date
@@ -201,7 +201,7 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_name
 msgid "Reference"
-msgstr "Viide"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_name
@@ -225,7 +225,7 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_state
 msgid "Status"
-msgstr "Olek"
+msgstr ""
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
