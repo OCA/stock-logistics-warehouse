@@ -3,13 +3,13 @@
 # * stock_available
 # 
 # Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 01:38+0000\n"
-"PO-Revision-Date: 2016-01-14 10:16+0000\n"
+"POT-Creation-Date: 2017-03-29 09:21+0000\n"
+"PO-Revision-Date: 2017-04-10 12:43+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -19,9 +19,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available
+#: field:product.product,immediately_usable_qty:0
+#: field:product.template,immediately_usable_qty:0
+msgid "Available to promise"
+msgstr "Freier Bestand"
+
+#. module: stock_available
 #: view:product.template:stock_available.view_stock_available_kanban
 msgid "Available to promise:"
 msgstr "Frei für Zusage:"
+
+#. module: stock_available
+#: help:stock.config.settings,stock_available_mrp_based_on:0
+msgid ""
+"Choose the field of the product which will be used to compute potential.\n"
+"If empty, Quantity On Hand is used.\n"
+"Only the quantity fields have meaning for computing stock"
+msgstr "Wählen Sie das Feld des Produkts, welches zur Potentialermittlung dienen soll.\nWenn leer, wird die verfügbare Mange genommen.\nNur die Mengenfelder sind bei der Bestandsermittlung von Bedeutung."
 
 #. module: stock_available
 #: field:stock.config.settings,module_stock_available_sale:0
@@ -54,6 +68,14 @@ msgid "Stock available to promise"
 msgstr "Freier Bestand"
 
 #. module: stock_available
+#: help:product.product,immediately_usable_qty:0
+#: help:product.template,immediately_usable_qty:0
+msgid ""
+"Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs"
+msgstr "Bestand dieses Produkts, der sicher in Kundenverkäufen eingesetzt werden kann.\nDie Definition dieses Wertes kann Ihren Bedürfnissen gemäß angepasst werden."
+
+#. module: stock_available
 #: help:stock.config.settings,module_stock_available_mrp:0
 msgid ""
 "This will add the quantities of goods that can be immediately manufactured, to the quantities available to promise.\n"
@@ -77,10 +99,15 @@ msgid ""
 msgstr "Verfügbare Bestände aus Angeboten werden nicht als freier Bestand berücksichtigt.\nDas Modul stock_available_sale wird installiert.\nSollten die Module sale und sale_delivery_date fehlen, werden auch diese installiert."
 
 #. module: stock_available
+#: field:stock.config.settings,stock_available_mrp_based_on:0
+msgid "based on"
+msgstr "basiert auf"
+
+#. module: stock_available
 #: view:product.product:stock_available.view_stock_available_tree_variant
 #: view:product.template:stock_available.view_stock_available_tree
 msgid ""
 "red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in "
 "('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not "
 "in ('draft', 'end', 'obsolete')"
-msgstr ""
+msgstr "red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not in ('draft', 'end', 'obsolete')"

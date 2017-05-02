@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-11 08:43+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
 "PO-Revision-Date: 2015-09-15 13:04+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ca/)\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. module: stock_location_area_management
 #: model:ir.model,name:stock_location_area_management.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empreses"
 
 #. module: stock_location_area_management
 #: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
@@ -51,7 +51,7 @@ msgstr ""
 #. module: stock_location_area_management
 #: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
 msgid "Owner"
-msgstr ""
+msgstr "Propietari "
 
 #. module: stock_location_area_management
 #: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 03:46+0000\n"
-"PO-Revision-Date: 2016-12-27 08:26+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-04-25 10:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Norwegian Bokmål (Norway) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/nb_NO/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Firma"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
@@ -133,7 +133,7 @@ msgstr "Vis navn"
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Draft"
-msgstr ""
+msgstr "Drøfting"
 
 #. module: stock_reserve
 #: field:stock.reservation,date_expected:0
@@ -495,7 +495,7 @@ msgstr ""
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 #: field:stock.reservation,state:0
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_stock_reservation

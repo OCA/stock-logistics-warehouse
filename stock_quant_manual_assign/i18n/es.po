@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 02:06+0000\n"
-"PO-Revision-Date: 2016-12-23 08:32+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-04-05 15:18+0000\n"
 "Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -123,7 +123,7 @@ msgid "Quant"
 msgstr "Quant"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr "La cantidad es mayor que la requerida"

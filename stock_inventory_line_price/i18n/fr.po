@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-09-17 02:43+0000\n"
+"POT-Creation-Date: 2017-03-29 09:21+0000\n"
+"PO-Revision-Date: 2017-03-29 09:21+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #. module: stock_inventory_line_price
 #: field:stock.inventory.line,standard_price:0
 msgid "Cost Price"
-msgstr ""
+msgstr "Prix de revient"
 
 #. module: stock_inventory_line_price
 #: model:ir.model,name:stock_inventory_line_price.model_stock_inventory

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 03:45+0000\n"
-"PO-Revision-Date: 2016-12-27 08:21+0000\n"
+"POT-Creation-Date: 2017-03-29 09:21+0000\n"
+"PO-Revision-Date: 2017-03-31 05:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empreses"
 
 #. module: partner_location_auto_create
 #: field:res.company,default_customer_location:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:40+0000\n"
+"POT-Creation-Date: 2017-03-29 09:21+0000\n"
 "PO-Revision-Date: 2016-04-14 14:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ca/)\n"
@@ -120,7 +120,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,location_id:0
 msgid "Location"
-msgstr ""
+msgstr "Ubicació "
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.view_inventory_subinventories_filter

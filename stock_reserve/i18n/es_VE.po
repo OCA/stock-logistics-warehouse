@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:41+0000\n"
-"PO-Revision-Date: 2017-01-13 09:30+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-04-25 10:41+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_VE/)\n"
 "MIME-Version: 1.0\n"
@@ -133,7 +133,7 @@ msgstr "Mostrar nombre"
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #. module: stock_reserve
 #: field:stock.reservation,date_expected:0

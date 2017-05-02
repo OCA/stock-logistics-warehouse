@@ -4,14 +4,13 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Ivan BARAYEV <ivanbarayev@hotmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:41+0000\n"
-"PO-Revision-Date: 2017-01-07 07:41+0000\n"
-"Last-Translator: Ivan BARAYEV <ivanbarayev@hotmail.com>, 2017\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-03-29 09:22+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -204,7 +203,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_tree
 #: field:report.stock.traceability_operation,picking_id:0
 msgid "Reference"
-msgstr ""
+msgstr "Referans"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -226,7 +225,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,state:0
 msgid "Status"
-msgstr ""
+msgstr "Durum"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:41+0000\n"
-"PO-Revision-Date: 2017-01-13 09:23+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-04-25 11:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Bosnian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/bs/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Kompanija"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
@@ -133,7 +133,7 @@ msgstr "Prikaži naziv"
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Draft"
-msgstr ""
+msgstr "U pripremi"
 
 #. module: stock_reserve
 #: field:stock.reservation,date_expected:0
@@ -400,7 +400,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,picking_id:0
 msgid "Reference"
-msgstr ""
+msgstr "Referenca"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form
@@ -495,7 +495,7 @@ msgstr ""
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 #: field:stock.reservation,state:0
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_stock_reservation

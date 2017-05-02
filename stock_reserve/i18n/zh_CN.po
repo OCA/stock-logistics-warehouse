@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 08:31+0000\n"
-"PO-Revision-Date: 2017-03-06 09:10+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-03-23 20:10+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -133,7 +133,7 @@ msgstr "显示名称"
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Draft"
-msgstr ""
+msgstr "草稿"
 
 #. module: stock_reserve
 #: field:stock.reservation,date_expected:0
@@ -400,7 +400,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,picking_id:0
 msgid "Reference"
-msgstr ""
+msgstr "引用"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form

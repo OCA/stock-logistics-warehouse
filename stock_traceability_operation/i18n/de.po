@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 08:32+0000\n"
-"PO-Revision-Date: 2017-03-04 08:32+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-03-29 09:22+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "Verfügbar"
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Storniert"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_uid:0
@@ -37,7 +37,7 @@ msgstr "Angelegt durch"
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Creation"
-msgstr ""
+msgstr "Anlage"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_date:0
@@ -53,17 +53,17 @@ msgstr "Datum"
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Destination"
-msgstr ""
+msgstr "Ziel"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,partner_id:0
 msgid "Destination Address"
-msgstr ""
+msgstr "Zielanschrift"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,location_dest_id:0
 msgid "Destination Location"
-msgstr ""
+msgstr "Ziellager"
 
 #. module: stock_traceability_operation
 #: code:addons/stock_traceability_operation/models/stock_quant.py:54
@@ -74,7 +74,7 @@ msgstr ""
 #: view:stock.quant:stock_traceability_operation.stock_quant_traceability_operation
 #, python-format
 msgid "Detailed traceability"
-msgstr ""
+msgstr "Detaillierte Nachverfolgung"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,display_name:0
@@ -90,7 +90,7 @@ msgstr "Erledigt"
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,date_expected:0
 msgid "Expected Date"
-msgstr ""
+msgstr "Plandatum"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -125,17 +125,17 @@ msgstr "Standort"
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_stock_production_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Los/Serie"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,name:0
 msgid "Move description"
-msgstr ""
+msgstr "Umlagerungsbeschreibung"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_tree
 msgid "Moves and operations"
-msgstr ""
+msgstr "Umlagerungen und Vorgänge"
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
@@ -145,12 +145,12 @@ msgstr "Neu"
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Orders processed Today or planned for Today"
-msgstr ""
+msgstr "Heute ausgeführte oder geplante Aufträge"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,operation_id:0
 msgid "Pack Operation"
-msgstr ""
+msgstr "Packvorgang"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -160,7 +160,7 @@ msgstr "Partner"
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,picking_type_id:0
 msgid "Picking Type"
-msgstr ""
+msgstr "Kommissionierungsart"
 
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_product_product
@@ -177,7 +177,7 @@ msgstr "Produktvorlage"
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uos:0
 msgid "Product UOS"
-msgstr ""
+msgstr "Produkt-VkME"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uom_qty:0
@@ -187,7 +187,7 @@ msgstr "Menge"
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uos_qty:0
 msgid "Quantity (UOS)"
-msgstr ""
+msgstr "Menge (VkME)"
 
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_stock_quant
@@ -197,7 +197,7 @@ msgstr "Quants"
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Ready"
-msgstr ""
+msgstr "Bereit"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -209,7 +209,7 @@ msgstr "Referenz"
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Scheduled"
-msgstr ""
+msgstr "Terminiert"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -242,17 +242,17 @@ msgstr "Lagerbewegungen"
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Stock moves that are Available (Ready to process)"
-msgstr ""
+msgstr "Bereitstehende Lagerbuchungen (Bereit zur Bearbeitung)"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Stock moves that are Confirmed, Available or Waiting"
-msgstr ""
+msgstr "Umlagerungen, die Freigegeben, Bereitstehend oder Wartend sind"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Stock moves that have been processed"
-msgstr ""
+msgstr "Durchgeführte Umlagerungen"
 
 #. module: stock_traceability_operation
 #: help:report.stock.traceability_operation,operation_id:0
@@ -261,16 +261,18 @@ msgid ""
 "field is empty, this part of the traceability is directly based on the Stock"
 " Move."
 msgstr ""
+"Der Vorgang, auf den sich die Nachverfolgung stützt. Ist das Feld leer, "
+"basiert die Verfolgung direkt auf der Umlagerung."
 
 #. module: stock_traceability_operation
 #: help:report.stock.traceability_operation,move_id:0
 msgid "The stock move on which this part of the traceability is based"
-msgstr ""
+msgstr "Die Umlagerung auf die sich diese Nachverfolgung stützt"
 
 #. module: stock_traceability_operation
 #: help:report.stock.traceability_operation,product_uom:0
 msgid "The unit of measure of the product"
-msgstr ""
+msgstr "Die Mengeneinheit des Produktes"
 
 #. module: stock_traceability_operation
 #: help:report.stock.traceability_operation,product_uom_qty:0
@@ -278,16 +280,18 @@ msgid ""
 "This is the quantity of products moved in this Stock Move or in this Pack "
 "Operation"
 msgstr ""
+"Dies ist die Menge des Produkts, das in dieser Umlagerung oder diesem "
+"Packvorgang bewegt wird"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "To Do"
-msgstr ""
+msgstr "Zu erledigen"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uom:0
@@ -297,9 +301,9 @@ msgstr "Maßeinheit"
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Waiting Another Move"
-msgstr ""
+msgstr "Erwarte andere Umlagerung"
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Waiting Availability"
-msgstr ""
+msgstr "Erwarte Verfügbarkeit"

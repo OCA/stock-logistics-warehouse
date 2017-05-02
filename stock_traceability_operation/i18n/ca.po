@@ -4,14 +4,13 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Carles Antoli <carlesantoli@hotmail.com>, 2017
 # Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-11 08:44+0000\n"
-"PO-Revision-Date: 2017-03-11 08:44+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-03-29 09:22+0000\n"
 "Last-Translator: Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +27,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancel·lat "
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_uid:0
@@ -121,7 +120,7 @@ msgstr "Darrera Actualització el"
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Location"
-msgstr ""
+msgstr "Ubicació "
 
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_stock_production_lot
@@ -227,7 +226,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,state:0
 msgid "Status"
-msgstr ""
+msgstr "Estat"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search

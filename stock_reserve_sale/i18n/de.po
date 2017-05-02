@@ -3,14 +3,14 @@
 # * stock_reserve_sale
 # 
 # Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:43+0000\n"
-"PO-Revision-Date: 2016-09-18 08:13+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-04-20 12:21+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,6 +25,11 @@ msgid ""
 "                        of the selected quotation lines. If a validity date is specified,\n"
 "                        the reservation will be released once the date has passed."
 msgstr "Eine Bestandsreservierung wird für Produkte in ausgewählten Positionen vorgenommen. Wenn ein Gültigkeitsdatum angegeben wird, wird die Reservierung nach diesem Datum aufgehoben."
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,account_move_line_ids:0
+msgid "Account move line ids"
+msgstr "Buchungspositionen-IDs"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:188
@@ -42,7 +47,7 @@ msgstr "Darf reserviert werden"
 #. module: stock_reserve_sale
 #: field:sale.order.line,is_stock_reservable:0
 msgid "Can be reserved"
-msgstr ""
+msgstr "Kann reserviert werden"
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
@@ -58,7 +63,7 @@ msgstr "Konfigurationsfehler!"
 #. module: stock_reserve_sale
 #: field:stock.reservation,consumed_for:0
 msgid "Consumed for"
-msgstr ""
+msgstr "Verbraucht für"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
@@ -133,12 +138,12 @@ msgstr "Vorreservierung vom Produktbestand"
 #. module: stock_reserve_sale
 #: field:stock.reservation,production_id:0
 msgid "Production Order for Produced Products"
-msgstr ""
+msgstr "Fertigungsauftrag für gefertigte Produkte"
 
 #. module: stock_reserve_sale
 #: field:stock.reservation,raw_material_production_id:0
 msgid "Production Order for Raw Materials"
-msgstr ""
+msgstr "Fertigungsauftrag für Rohmaterialien"
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
@@ -169,7 +174,7 @@ msgstr "Reservierter Bestand aus Angebotspositionen"
 #. module: stock_reserve_sale
 #: field:stock.reservation,sale_id:0
 msgid "Sale Order"
-msgstr ""
+msgstr "Verkaufsauftrag"
 
 #. module: stock_reserve_sale
 #: field:stock.reservation,sale_line_id:0
@@ -218,7 +223,7 @@ msgstr "Bestandsreservierung"
 #. module: stock_reserve_sale
 #: help:stock.reservation,consumed_for:0
 msgid "Technical field used to make the traceability of produced products"
-msgstr ""
+msgstr "Technisches Feld, um gefertigte Produkte verfolgbar zu machen"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,date_validity:0
@@ -246,4 +251,4 @@ msgstr "oder"
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "{\"reload_on_button\": 1}"
-msgstr ""
+msgstr "{\"reload_on_button\": 1}"

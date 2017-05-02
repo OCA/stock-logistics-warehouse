@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-10-11 09:50+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-04-25 10:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Danish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Virksomhed"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
@@ -133,7 +133,7 @@ msgstr "Vist navn"
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Draft"
-msgstr ""
+msgstr "Udkast"
 
 #. module: stock_reserve
 #: field:stock.reservation,date_expected:0

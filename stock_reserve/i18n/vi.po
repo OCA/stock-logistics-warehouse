@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:41+0000\n"
-"PO-Revision-Date: 2017-01-13 09:23+0000\n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-04-25 10:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -133,7 +133,7 @@ msgstr "Tên hiển thị"
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 msgid "Draft"
-msgstr ""
+msgstr "Dự thảo"
 
 #. module: stock_reserve
 #: field:stock.reservation,date_expected:0

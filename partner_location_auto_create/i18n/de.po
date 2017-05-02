@@ -3,13 +3,14 @@
 # * partner_location_auto_create
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-26 14:13+0000\n"
-"PO-Revision-Date: 2016-02-26 14:13+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-03-29 09:21+0000\n"
+"PO-Revision-Date: 2017-04-10 12:33+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,12 +26,12 @@ msgstr "Unternehmen"
 #. module: partner_location_auto_create
 #: field:res.company,default_customer_location:0
 msgid "Default Customer Location"
-msgstr ""
+msgstr "Vorgabe Kundenlager"
 
 #. module: partner_location_auto_create
 #: field:res.company,default_supplier_location:0
 msgid "Default Supplier Location"
-msgstr ""
+msgstr "Vorgabe-Lieferantenlager"
 
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_stock_location
@@ -46,9 +47,14 @@ msgid "Locations"
 msgstr "Lagerorte"
 
 #. module: partner_location_auto_create
+#: field:res.partner,locations_count:0
+msgid "Locations count"
+msgstr "Lagermengen"
+
+#. module: partner_location_auto_create
 #: field:stock.location,main_partner_location:0
 msgid "Main Partner Location"
-msgstr ""
+msgstr "Hauptpartner-Lager"
 
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_res_partner
@@ -59,12 +65,12 @@ msgstr "Partner"
 #: code:addons/partner_location_auto_create/models/stock_location.py:42
 #, python-format
 msgid "The partner %s already has a main location of type %s."
-msgstr ""
+msgstr "Der Partner %s hat bereits ein Hauptlager vom Typ %s."
 
 #. module: partner_location_auto_create
 #: help:stock.location,main_partner_location:0
 msgid "The root location for a partner's location for a specific type."
-msgstr ""
+msgstr "Das Stammlager eines Partnerlagers bestimmter Art."
 
 #. module: partner_location_auto_create
 #: view:res.partner:partner_location_auto_create.view_partner_form
@@ -74,7 +80,7 @@ msgid ""
 "                        ('usage', '=', 'customer'),\n"
 "                        ('company_id', 'in', [company_id, False]),\n"
 "                    ]"
-msgstr ""
+msgstr "[\n                        ('partner_id', 'in', [id, False]),\n                        ('usage', '=', 'customer'),\n                        ('company_id', 'in', [company_id, False]),\n                    ]"
 
 #. module: partner_location_auto_create
 #: view:res.partner:partner_location_auto_create.view_partner_form
@@ -84,4 +90,4 @@ msgid ""
 "                        ('usage', '=', 'supplier'),\n"
 "                        ('company_id', 'in', [company_id, False]),\n"
 "                    ]"
-msgstr ""
+msgstr "[\n                        ('partner_id', 'in', [id, False]),\n                        ('usage', '=', 'supplier'),\n                        ('company_id', 'in', [company_id, False]),\n                    ]"
