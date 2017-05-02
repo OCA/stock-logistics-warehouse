@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-21 02:12+0000\n"
-"PO-Revision-Date: 2017-01-21 02:12+0000\n"
+"POT-Creation-Date: 2017-04-26 03:01+0000\n"
+"PO-Revision-Date: 2017-04-26 03:01+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -27,12 +27,12 @@ msgstr "Abbrechen"
 #. module: stock_orderpoint_manual_procurement
 #: model:res.groups,name:stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty
 msgid "Change quantity in manual procurements from reordering rules"
-msgstr ""
+msgstr "Ändere Menge in manueller Beschaffung aus Wiederbeschaffungsregeln"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_warehouse_orderpoint_tree
 msgid "Create Procurement"
-msgstr ""
+msgstr "Erstelle Beschaffung"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_create_uid
@@ -55,7 +55,7 @@ msgstr "Anzeigename"
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
 msgid "Execute"
-msgstr ""
+msgstr "Ausführen"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_id
@@ -67,7 +67,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_ids
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
 msgid "Items"
-msgstr ""
+msgstr "Posten"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint___last_update
@@ -95,12 +95,12 @@ msgstr "Standort"
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model,name:stock_orderpoint_manual_procurement.model_make_procurement_orderpoint_item
 msgid "Make Procurements from Orderpoint Item"
-msgstr ""
+msgstr "Erstelle Beschaffungen aus Bestellzeitpunktposition"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model,name:stock_orderpoint_manual_procurement.model_make_procurement_orderpoint
 msgid "Make Procurements from Orderpoints"
-msgstr ""
+msgstr "Erstelle Beschaffungen aus Bestellpunkten"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model,name:stock_orderpoint_manual_procurement.model_stock_warehouse_orderpoint
@@ -115,12 +115,12 @@ msgstr "Plandatum"
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_procure_recommended_qty
 msgid "Procure recommendation"
-msgstr ""
+msgstr "Beschaffungsempfehlung"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
 msgid "Procurement Request"
-msgstr ""
+msgstr "Beschaffungsanfrage"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_warehouse_orderpoint_tree
@@ -140,17 +140,17 @@ msgstr "Anzahl"
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_orderpoint_id
 msgid "Reordering rule"
-msgstr ""
+msgstr "Wiederbeschaffungsregel"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_procure_recommended_date
 msgid "Request Date"
-msgstr ""
+msgstr "Anforderungsdatum"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.actions.act_window,name:stock_orderpoint_manual_procurement.act_make_procurement_from_orderpoint
 msgid "Request Procurement"
-msgstr ""
+msgstr "Beschaffungsanforderung"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_uom_id
@@ -165,6 +165,9 @@ msgid ""
 "                        this may trigger a draft purchase order, a manufacturing\n"
 "                        order or a transfer picking."
 msgstr ""
+"Verwenden Sie diesen Assistenten, um eine Beschaffungsanfrage\n"
+"für dieses Pufferlager zu erstellen. Gemäß der Produkteinstellung\n"
+"mag dies einen Bestellvorschlag, einen Fertigungsauftrag oder eine Lagerumbuchung zur Folge haben."
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_warehouse_id
