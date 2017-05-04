@@ -10,15 +10,14 @@
         <field name="inherit_id" ref="stock.view_warehouse"/>
         <field name="arch" type="xml">
             <notebook position="before">
-                <group string="Cycle Counting">
-                    <group >
-                        <field name="cycle_count_planning_horizon"/>
-                        <field name="counts_for_accuracy_qty"/>
-                    </group>
-                    <group>
-                        <field name="cycle_count_rule_ids" nolabel="1">Cycle
-                            count rules</field>
-                    </group>
+                <group string="Cycle Counting" colspan="4">
+                    <field name="cycle_count_planning_horizon"/>
+                    <field name="counts_for_accuracy_qty"/>
+                    <br></br>
+                    <center colspan="4"><h3 colspan="4">Cycle Count Rules
+                    applied in this Warehouse:</h3></center>
+                    <field name="cycle_count_rule_ids" nolabel="1" colspan="4">
+                        Cycle count rules</field>
                 </group>
             </notebook>
         </field>

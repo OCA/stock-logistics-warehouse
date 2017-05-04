@@ -36,24 +36,30 @@ class StockWarehouse(models.Model):
         return date_horizon
 
     @api.model
-    def _get_cycle_count_locations_search_domain(self):
-        wh_parent_left = self.view_location_id.parent_left
-        wh_parent_right = self.view_location_id.parent_right
-        domain = [('parent_left', '>', wh_parent_left),
-                  ('parent_right', '<', wh_parent_right),
+    def _get_cycle_count_locations_search_domain(
+            self, parent):
+        domain = [('parent_left', '>=', parent.parent_left),
+                  ('parent_right', '<=', parent.parent_right),
                   ('cycle_count_disabled', '=', False)]
         return domain
 
     @api.model
-    def _search_cycle_count_locations(self):
-        locations = self.env['stock.location'].search(
-            self._get_cycle_count_locations_search_domain())
+    def _search_cycle_count_locations(self, rule):
+        locations = self.env['stock.location']
+        if rule.apply_in == 'warehouse':
+            locations = self.env['stock.location'].search(
+                self._get_cycle_count_locations_search_domain(
+                    self.view_location_id))
+        elif rule.apply_in == 'location':
+            for loc in rule.location_ids:
+                locations += self.env['stock.location'].search(
+                    self._get_cycle_count_locations_search_domain(loc))
         return locations
 
     @api.model
     def _cycle_count_rules_to_compute(self):
         rules = self.cycle_count_rule_ids.search([
-            ('rule_type', '!=', 'zero')])
+            ('rule_type', '!=', 'zero'), ('warehouse_ids', '=', self.id)])
         return rules
 
     @api.one
@@ -62,10 +68,10 @@ class StockWarehouse(models.Model):
         returns a list with required dates for the cycle count of each
         location '''
         proposed_cycle_counts = []
-        locations = self._search_cycle_count_locations()
         rules = self._cycle_count_rules_to_compute()
-        if locations:
-            for rule in rules:
+        for rule in rules:
+            locations = self._search_cycle_count_locations(rule)
+            if locations:
                 proposed_cycle_counts.extend(rule.compute_rule(locations))
         if proposed_cycle_counts:
             locations = list(set([d['location'] for d in
