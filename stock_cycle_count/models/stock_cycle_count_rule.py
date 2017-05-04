@@ -11,6 +11,7 @@ from datetime import timedelta, datetime
 
 class StockCycleCountRule(models.Model):
     _name = 'stock.cycle.count.rule'
+    _description = "Stock Cycle Counts Rules"
 
     @api.one
     def _compute_currency(self):
@@ -77,6 +78,15 @@ class StockCycleCountRule(models.Model):
                 _('You cannot define a negative period.')
             )
 
+    @api.onchange('location_ids')
+    def _get_warehouses(self):
+        """Get the warehouses for the selected locations."""
+        wh_ids = []
+        for loc in self.location_ids:
+            wh_ids.append(loc.get_warehouse(loc))
+        wh_ids = list(set(wh_ids))
+        self.warehouse_ids = self.env['stock.warehouse'].browse(wh_ids)
+
     name = fields.Char('Name', required=True)
     rule_type = fields.Selection(selection="_selection_rule_types",
                                  string='Type of rule',
@@ -94,11 +104,19 @@ class StockCycleCountRule(models.Model):
                                   compute=_compute_currency)
     accuracy_threshold = fields.Float(string='Minimum Accuracy Threshold',
                                       digits=(3, 2))
-    warehouse_ids = fields.Many2many(comodel_name='stock.warehouse',
-                                     relation='warehouse_cycle_count_rule_rel',
-                                     column1='rule_id',
-                                     column2='warehouse_id',
-                                     string='Applied in')
+    apply_in = fields.Selection(
+        string='Apply this rule in:',
+        selection=[('warehouse', 'Selected warehouses'),
+                   ('location', 'Selected Location Zones.')],
+        default='warehouse')
+    warehouse_ids = fields.Many2many(
+        comodel_name='stock.warehouse',
+        relation='warehouse_cycle_count_rule_rel', column1='rule_id',
+        column2='warehouse_id', string='Warehouses where applied')
+    location_ids = fields.Many2many(
+        comodel_name='stock.location',
+        relation='location_cycle_count_rule_rel', column1='rule_id',
+        column2='location_id', string='Zones where applied')
 
     def compute_rule(self, locs):
         if self.rule_type == 'periodic':
