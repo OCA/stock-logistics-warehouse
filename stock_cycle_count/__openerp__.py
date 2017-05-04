@@ -6,7 +6,7 @@
     "name": "Stock Cycle Count",
     "summary": "Adds the capability to schedule cycle counts in a "
                "warehouse through different rules defined by the user",
-    "version": "9.0.1.0.0",
+    "version": "9.0.1.1.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
