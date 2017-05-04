@@ -35,6 +35,14 @@ class TestStockCycleCount(common.TransactionCase):
         self.user = self._create_user(
             'user_2', [self.g_stock_user], self.company).id
 
+        # Create warehouses:
+        self.big_wh = self.stock_warehouse_model.create({
+            'name': 'BIG',
+            'code': 'B',
+            'cycle_count_planning_horizon': 30})
+        self.small_wh = self.stock_warehouse_model.create({
+            'name': 'SMALL', 'code': 'S'})
+
         # Create rules:
         self.rule_periodic = \
             self._create_stock_cycle_count_rule_periodic(
@@ -44,30 +52,26 @@ class TestStockCycleCount(common.TransactionCase):
                 self.manager, 'rule_2', [100])
         self.rule_accuracy = \
             self._create_stock_cycle_count_rule_accuracy(
-                self.manager, 'rule_3', [5])
+                self.manager, 'rule_3', [5], self.big_wh.view_location_id.ids)
         self.zero_rule = self._create_stock_cycle_count_rule_zero(
             self.manager, 'rule_4')
 
-        # Create and configure warehouses:
+        # Configure warehouses:
         self.rule_ids = [
             self.rule_periodic.id,
             self.rule_turnover.id,
             self.rule_accuracy.id,
             self.zero_rule.id]
-        self.big_wh = self.stock_warehouse_model.create({
-            'name': 'BIG',
-            'code': 'B',
-            'cycle_count_planning_horizon': 30,
+        self.big_wh.write({
             'cycle_count_rule_ids': [(6, 0, self.rule_ids)]
         })
-        self.small_wh = self.stock_warehouse_model.create({
-            'name': 'SMALL', 'code': 'S'})
 
         # Create a location:
         self.count_loc = self.stock_location_model.create({
             'name': 'Place',
             'usage': 'production'
         })
+        self.stock_location_model._parent_store_compute()
 
         # Create a cycle count:
         self.cycle_count_1 = self.cycle_count_model.sudo(self.manager).create({
@@ -113,11 +117,14 @@ class TestStockCycleCount(common.TransactionCase):
         })
         return rule
 
-    def _create_stock_cycle_count_rule_accuracy(self, uid, name, values):
+    def _create_stock_cycle_count_rule_accuracy(
+            self, uid, name, values, zone_ids):
         rule = self.stock_cycle_count_rule_model.sudo(uid).create({
             'name': name,
             'rule_type': 'accuracy',
             'accuracy_threshold': values[0],
+            'apply_in': 'location',
+            'location_ids': [(6, 0, zone_ids)],
         })
         return rule
 
@@ -132,8 +139,10 @@ class TestStockCycleCount(common.TransactionCase):
         """Tests creation of cycle counts."""
         # Common rules:
         wh = self.big_wh
-        self.stock_location_model._parent_store_compute()
-        locs = wh._search_cycle_count_locations()
+        locs = self.stock_location_model
+        for rule in self.big_wh.cycle_count_rule_ids:
+            locs += wh._search_cycle_count_locations(rule)
+        locs = locs.exists()  # remove duplicated locations.
         counts = self.cycle_count_model.search([
             ('location_id', 'in', locs.ids)])
         self.assertFalse(
@@ -225,6 +234,10 @@ class TestStockCycleCount(common.TransactionCase):
         for r in rules:
             r._get_rule_description()
             self.assertTrue(r.rule_description, 'No description provided')
+        self.rule_accuracy._get_warehouses()
+        self.assertEqual(self.rule_accuracy.warehouse_ids.ids, self.big_wh.ids,
+                         'Rules defined for zones are not getting the right '
+                         'warehouse.')
 
     def test_user_security(self):
         """Tests user rights."""
