@@ -24,15 +24,15 @@ class ProductTemplate(models.Model):
                 continue
             immediately_usable_qty = 0.0
 
+            potential_qty = 0
             for p in product.product_variant_ids:
                 qty = variant_available[p.id]["immediately_usable_qty"]
                 immediately_usable_qty += qty
-            if product.product_variant_ids:
-                potential_qty = max(
-                    [v.potential_qty for v in product.product_variant_ids])
+                if p.potential_qty > potential_qty:
+                    potential_qty = p.potential_qty
+
             res[product.id].update({
-                "immediately_usable_qty": immediately_usable_qty})
-            res[product.id].update({
+                "immediately_usable_qty": immediately_usable_qty,
                 "potential_qty": potential_qty})
 
         return res
