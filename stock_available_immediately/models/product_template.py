@@ -16,5 +16,3 @@ class ProductTemplate(models.Model):
 
         This is the same implementation as for variants."""
         super(ProductTemplate, self)._compute_immediately_usable_qty()
-        for tmpl in self:
-            tmpl.immediately_usable_qty -= tmpl.incoming_qty
