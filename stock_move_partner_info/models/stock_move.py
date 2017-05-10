@@ -11,4 +11,5 @@ class StockMove(models.Model):
 
     picking_partner = fields.Many2one(
         'res.partner', string='Picking Partner', store=True,
-        related='picking_id.partner_id', help='Partner of the picking')
+        related='picking_id.partner_id', help='Partner of the picking',
+        readonly=True)

@@ -11,6 +11,7 @@
             </field>
         </field>
     </record>
+
     <record id="view_move_tree_inh_pickingpartner" model="ir.ui.view">
         <field name="name">view_move_tree.inh.pickingpartner</field>
         <field name="model">stock.move</field>
@@ -21,6 +22,7 @@
             </field>
         </field>
     </record>
+
     <record id="view_move_picking_tree_inh_pickingpartner" model="ir.ui.view">
         <field name="name">view.move.picking.tree.inh.pickingpartner</field>
         <field name="model">stock.move</field>
@@ -31,13 +33,14 @@
             </field>
         </field>
     </record>
+
     <record id="view_move_search_inh_pickingpartner" model="ir.ui.view">
         <field name="name">view.move.search.inh.pickingpartner</field>
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_search" />
         <field name="arch" type="xml">
             <filter name="by_product" position="before">
-                <filter string="Picking Partner" name="by_picking_partner" domain="[]"  context="{'group_by':'picking_partner'}"/>
+                <filter string="Picking Partner" name="by_picking_partner" context="{'group_by':'picking_partner'}"/>
             </filter>
         </field>
     </record>

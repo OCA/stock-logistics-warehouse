@@ -8,8 +8,10 @@
     "version": "9.0.1.0.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "website": "http://www.odoomrp.com",
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
+              "Odoo Community Association (OCA)",
+    "license": "AGPL-3",
+    "website": "https://odoo-community.org/",
     "category": "Warehouse Management",
     "depends": [
         "stock",
