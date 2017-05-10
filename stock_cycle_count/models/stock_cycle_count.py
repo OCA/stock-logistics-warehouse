@@ -27,30 +27,33 @@ class StockCycleCount(models.Model):
         return company_id
 
     name = fields.Char(string='Name', readonly=True)
-    location_id = fields.Many2one(comodel_name='stock.location',
-                                  string='Location',
-                                  required=True)
-    responsible_id = fields.Many2one(comodel_name='res.users',
-                                     string='Assigned to')
-    date_deadline = fields.Date(string='Required Date')
+    location_id = fields.Many2one(
+        comodel_name='stock.location', string='Location', required=True,
+        readonly=True, states={'draft': [('readonly', False)]})
+    responsible_id = fields.Many2one(
+        comodel_name='res.users', string='Assigned to',
+        readonly=True, states={'draft': [('readonly', False)]},
+        track_visibility='onchange')
+    date_deadline = fields.Date(
+        string='Required Date', readonly=True,
+        states={'draft': [('readonly', False)]})
     cycle_count_rule_id = fields.Many2one(
-        comodel_name='stock.cycle.count.rule',
-        string='Cycle count rule',
-        required=True)
+        comodel_name='stock.cycle.count.rule', string='Cycle count rule',
+        required=True, readonly=True, states={'draft': [('readonly', False)]})
     state = fields.Selection(selection=[
         ('draft', 'Planned'),
         ('open', 'Execution'),
         ('cancelled', 'Cancelled'),
         ('done', 'Done')
-    ], string='State', default='draft')
+    ], string='State', default='draft', track_visibility='onchange')
     stock_adjustment_ids = fields.One2many(comodel_name='stock.inventory',
                                            inverse_name='cycle_count_id',
-                                           string='Inventory Adjustment')
+                                           string='Inventory Adjustment',
+                                           track_visibility='onchange')
     inventory_adj_count = fields.Integer(compute=_count_inventory_adj)
-    company_id = fields.Many2one(comodel_name='res.company',
-                                 string='Company',
-                                 required=True,
-                                 default=_company_get)
+    company_id = fields.Many2one(
+        comodel_name='res.company', string='Company', required=True,
+        default=_company_get, readonly=True)
 
     @api.one
     def do_cancel(self):
