@@ -87,16 +87,19 @@ class StockWarehouse(models.Model):
                           ('state', 'in', ['draft'])]
                 existing_cycle_counts = self.env['stock.cycle.count'].search(
                     domain)
-                if existing_cycle_counts and cycle_count_proposed['date'] <\
-                        existing_cycle_counts.date_deadline:
-                    self.env['stock.cycle.count'].create({
-                        'date_deadline': cycle_count_proposed['date'],
-                        'location_id': cycle_count_proposed['location'].id,
-                        'cycle_count_rule_id': cycle_count_proposed[
-                            'rule_type'].id,
-                        'state': 'draft'
-                    })
-                    existing_cycle_counts.state = 'cancelled'
+                if existing_cycle_counts:
+                    existing_earliest_date = sorted(
+                        existing_cycle_counts.mapped('date_deadline'))[0]
+                    if cycle_count_proposed['date'] < existing_earliest_date:
+                        self.env['stock.cycle.count'].create({
+                            'date_deadline': cycle_count_proposed['date'],
+                            'location_id': cycle_count_proposed['location'].id,
+                            'cycle_count_rule_id': cycle_count_proposed[
+                                'rule_type'].id,
+                            'state': 'draft'
+                        })
+                        # TODO: cancel all or just the closest in time?
+                        existing_cycle_counts.write({'state': 'cancelled'})
                 delta = datetime.strptime(
                     cycle_count_proposed['date'],
                     DEFAULT_SERVER_DATETIME_FORMAT) - datetime.today()
