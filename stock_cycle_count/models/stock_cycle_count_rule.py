@@ -152,6 +152,8 @@ class StockCycleCountRule(models.Model):
                         latest_inventory,
                         DEFAULT_SERVER_DATETIME_FORMAT) + timedelta(
                         days=period)
+                    if next_date < datetime.today():
+                        next_date = datetime.today()
                 except Exception as e:
                     raise UserError(
                         _('Error found determining the frequency of periodic '
