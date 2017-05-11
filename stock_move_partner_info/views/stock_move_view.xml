@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="stock.stock_move_tree" />
         <field name="arch" type="xml">
             <field name="picking_id" position="after">
-                <field name="picking_partner" readonly="1"/>
+                <field name="picking_partner_id" readonly="1"/>
             </field>
         </field>
     </record>
@@ -18,7 +18,7 @@
         <field name="inherit_id" ref="stock.view_move_tree" />
         <field name="arch" type="xml">
             <field name="picking_id" position="after">
-                <field name="picking_partner" readonly="1"/>
+                <field name="picking_partner_id" readonly="1"/>
             </field>
         </field>
     </record>
@@ -29,7 +29,7 @@
         <field name="inherit_id" ref="stock.view_move_picking_tree" />
         <field name="arch" type="xml">
             <field name="picking_type_id" position="after">
-                <field name="picking_partner" invisible="1"/>
+                <field name="picking_partner_id" invisible="1"/>
             </field>
         </field>
     </record>
@@ -40,7 +40,7 @@
         <field name="inherit_id" ref="stock.view_move_search" />
         <field name="arch" type="xml">
             <filter name="by_product" position="before">
-                <filter string="Picking Partner" name="by_picking_partner" context="{'group_by':'picking_partner'}"/>
+                <filter string="Picking Partner" name="by_picking_partner" context="{'group_by':'picking_partner_id'}"/>
             </filter>
         </field>
     </record>
