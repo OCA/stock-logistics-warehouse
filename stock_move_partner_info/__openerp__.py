@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015 Serv. Tec. Avanzados - Pedro M. Baeza (http://www.serviciosbaeza.com)
+# Copyright 2015 Tecnativa - Pedro M. Baeza
 # Copyright 2015 AvanzOsc (http://www.avanzosc.es)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -8,7 +8,7 @@
     "version": "9.0.1.0.0",
     "author": "OdooMRP team,"
               "AvanzOSC,"
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
+              "Tecnativa - Pedro M. Baeza,"
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://odoo-community.org/",

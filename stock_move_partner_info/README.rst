@@ -36,7 +36,7 @@ Images
 Contributors
 ------------
 
-* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com
+* Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Ana Juaristi <anajuaristi@avanzosc.es>
 * Alfredo de la Fuente <alfredodelafuente@avanzosc.es>
 * Eficent Business and IT Consulting Services S.L. <contact@eficent.com>

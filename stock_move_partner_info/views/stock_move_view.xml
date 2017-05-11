@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="stock.stock_move_tree" />
         <field name="arch" type="xml">
             <field name="picking_id" position="after">
-                <field name="picking_partner" />
+                <field name="picking_partner" readonly="1"/>
             </field>
         </field>
     </record>
@@ -18,7 +18,7 @@
         <field name="inherit_id" ref="stock.view_move_tree" />
         <field name="arch" type="xml">
             <field name="picking_id" position="after">
-                <field name="picking_partner" />
+                <field name="picking_partner" readonly="1"/>
             </field>
         </field>
     </record>
