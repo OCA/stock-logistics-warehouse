@@ -8,7 +8,9 @@
         <field name="name">stock.cycle.count.tree</field>
         <field name="model">stock.cycle.count</field>
         <field name="arch" type="xml">
-            <tree string="Stock Cycle Count">
+            <tree string="Stock Cycle Count"
+                  decoration-muted="state == 'cancelled'"
+                  decoration-info="state == 'draft'">
                 <field name="name"/>
                 <field name="location_id"/>
                 <field name="cycle_count_rule_id"/>
@@ -76,11 +78,51 @@
         </field>
     </record>
 
+    <record id="stock_cycle_count_search_view" model="ir.ui.view">
+            <field name="name">stock.cycle.count.search</field>
+            <field name="model">stock.cycle.count</field>
+            <field name="arch" type="xml">
+                <search string="Search Cycle Count">
+                    <field name="name" string="Cycle Count"/>
+                    <separator/>
+                    <field name="state"/>
+                    <filter name="planned" string="Planned"
+                            domain="[('state','=', 'draft')]"
+                            help="Cycle Counts Planned"/>
+                    <filter name="execution" string="Execution"
+                            domain="[('state','=', 'open')]"
+                            help="Cycle Counts in Execution"/>
+                    <filter name="done" string="Done"
+                            domain="[('state','=', 'done')]"
+                            help="Cycle Counts Done"/>
+                    <filter name="cancelled" string="Cancelled"
+                            domain="[('state','=', 'cancelled')]"
+                            help="Cycle Counts Cancelled"/>
+                    <filter name="assigned_to_user" string="Assigned to me"
+                            domain="[('responsible_id','=', uid)]"
+                            help="Cycle Counts Assigned to me"/>
+                    <field name="responsible_id" />
+                    <group expand="0" string="Group By...">
+                        <filter string="Location"
+                                domain="[]"
+                                context="{'group_by':'location_id'}"/>
+                        <filter string="State"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+                        <filter string="Assigned to"
+                                domain="[]"
+                                context="{'group_by':'responsible_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
     <!-- Action to open Stock Cycle Count -->
     <act_window id="action_stock_cycle_count"
-                 name="Stock Cycle Count"
-                 res_model="stock.cycle.count"
-                 view_mode="tree,form" />
+                name="Stock Cycle Count"
+                res_model="stock.cycle.count"
+                view_mode="tree,form"
+                context="{'search_default_planned':1,'search_default_execution':1}"/>
     <menuitem id="menu_stock_cycle_count"
               name="Cycle Counts" parent="stock.menu_stock_inventory_control"
               action="action_stock_cycle_count" />
