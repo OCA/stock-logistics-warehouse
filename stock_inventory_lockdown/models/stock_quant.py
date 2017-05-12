@@ -20,26 +20,19 @@ class StockQuant(models.Model):
         """
         if not self.env.context.get('bypass_lockdown', False):
             # Find the locked locations
-            locked_location_ids = self.env[
-                'stock.inventory']._get_locations_open_inventories()
-            if locked_location_ids and 'location_id' in vals.keys():
-                messages = set()
-                # Find the destination locations
-                location_dest_id = self.env['stock.location'].browse(
-                    vals['location_id'])
-                for quant in self:
-                    # Source locations
-                    location_id = quant.location_id
-                    # Moving to a location locked down
-                    if location_dest_id in locked_location_ids:
-                        messages.add(location_dest_id.name)
-                    # Moving from a location locked down
-                    if location_id in locked_location_ids:
-                        messages.add(location_id.name)
-                if len(messages):
-                    raise ValidationError(
-                        _('An inventory is being conducted at the following '
-                          'location(s):\n%s') % "\n - ".join(messages))
+            locked_location_ids = []
+            if 'location_id' in vals.keys():
+                locked_location_ids = self.env[
+                    'stock.inventory']._get_locations_open_inventories(
+                    self.env['stock.location'].browse(
+                        vals['location_id']).ids + self.mapped(
+                        'location_id').ids
+                )
+            if locked_location_ids:
+                location_names = locked_location_ids.mapped('name')
+                raise ValidationError(
+                    _('An inventory is being conducted at the following '
+                      'location(s):\n%s') % "\n - ".join(location_names))
         return super(StockQuant, self).write(vals)
 
     @api.model
@@ -49,9 +42,9 @@ class StockQuant(models.Model):
         """
         quant = super(StockQuant, self).create(vals)
         if not self.env.context.get('bypass_lockdown', False):
-            locked_location_ids = self.env[
-                'stock.inventory']._get_locations_open_inventories()
-            if quant.location_id in locked_location_ids:
+            locked_location_ids = self.env['stock.inventory'].\
+                _get_locations_open_inventories(quant.location_id.ids)
+            if locked_location_ids:
                 raise ValidationError(
                     _('An inventory is being conducted at the following '
                       'location(s):\n%s') % " - " + quant.location_id.name)
