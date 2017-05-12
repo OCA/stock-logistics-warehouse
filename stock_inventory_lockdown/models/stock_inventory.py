@@ -9,18 +9,24 @@ class StockInventory(models.Model):
     _inherit = 'stock.inventory'
 
     @api.model
-    def _get_locations_open_inventories(self):
-        """IDs of location in open exhaustive inventories, with children"""
-        inventories = self.search([('state', '=', 'confirm')])
+    def _get_locations_open_inventories(self, locations_ids=None):
+        """IDs of locations in open exhaustive inventories, with children"""
+        inventory_domain = [('state', '=', 'confirm')]
+        if locations_ids:
+            inventory_domain.append(('location_id', 'child_of', locations_ids))
+        inventories = self.search(inventory_domain)
         if not inventories:
             # Early exit if no match found
             return []
         location_ids = inventories.mapped('location_id')
 
         # Extend to the children Locations
-        return self.env['stock.location'].search(
-            [('location_id', 'child_of', location_ids.ids),
-             ('usage', 'in', ['internal', 'transit'])])
+        location_domain = [
+            ('location_id', 'child_of', location_ids.ids),
+            ('usage', 'in', ['internal', 'transit'])]
+        if locations_ids:
+            location_domain.append(('location_id', 'child_of', locations_ids))
+        return self.env['stock.location'].search(location_domain)
 
     @api.multi
     def action_done(self):
