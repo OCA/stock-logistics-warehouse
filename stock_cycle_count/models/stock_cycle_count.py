@@ -36,10 +36,11 @@ class StockCycleCount(models.Model):
         track_visibility='onchange')
     date_deadline = fields.Date(
         string='Required Date', readonly=True,
-        states={'draft': [('readonly', False)]})
+        states={'draft': [('readonly', False)]}, track_visibility='onchange')
     cycle_count_rule_id = fields.Many2one(
         comodel_name='stock.cycle.count.rule', string='Cycle count rule',
-        required=True, readonly=True, states={'draft': [('readonly', False)]})
+        required=True, readonly=True, states={'draft': [('readonly', False)]},
+        track_visibility='onchange')
     state = fields.Selection(selection=[
         ('draft', 'Planned'),
         ('open', 'Execution'),
