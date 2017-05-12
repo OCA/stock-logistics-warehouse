@@ -14,13 +14,12 @@ class StockLocation(models.Model):
     @api.multi
     def _check_inventory(self):
         """Error if an inventory is being conducted here"""
-        location_inventory_open_ids = self.env['stock.inventory'].sudo(
-            )._get_locations_open_inventories()
-        for location in self:
-            if location in location_inventory_open_ids:
-                raise ValidationError(
-                    _('An inventory is being conducted at this '
-                      'location'))
+        location_inventory_open_ids = self.env['stock.inventory'].sudo().\
+            _get_locations_open_inventories(self.ids)
+        if location_inventory_open_ids:
+            raise ValidationError(
+                _('An inventory is being conducted at this '
+                  'location'))
 
     @api.multi
     def write(self, vals):
