@@ -147,13 +147,13 @@ class TestStockCycleCount(common.TransactionCase):
             ('location_id', 'in', locs.ids)])
         self.assertFalse(
             counts, 'Existing cycle counts before execute planner.')
-        date = datetime.today() + timedelta(days=30)
+        date_pre_existing_cc = datetime.today() + timedelta(days=30)
         loc = locs[0]
         pre_existing_count = self.cycle_count_model.create({
             'name': 'To be cancelled when running cron job.',
             'cycle_count_rule_id': self.rule_periodic.id,
             'location_id': loc.id,
-            'date_deadline': date
+            'date_deadline': date_pre_existing_cc
         })
         self.assertEqual(pre_existing_count.state, 'draft',
                          'Testing data not generated properly.')
@@ -179,9 +179,10 @@ class TestStockCycleCount(common.TransactionCase):
         })
         move1.action_done()
         wh.cron_cycle_count()
-        self.assertEqual(pre_existing_count.state, 'cancelled',
-                         'Existing cycle counts not cancelled when an earlier '
-                         'cycle count is scheduled.')
+        self.assertNotEqual(pre_existing_count.date_deadline,
+                            date_pre_existing_cc,
+                            'Date of pre-existing cycle counts has not been '
+                            'updated.')
         counts = self.cycle_count_model.search([
             ('location_id', 'in', locs.ids)])
         self.assertTrue(counts, 'Cycle counts not planned')
@@ -221,7 +222,7 @@ class TestStockCycleCount(common.TransactionCase):
                          'Cycle count not set as cancelled.')
 
     def test_view_methods(self):
-        """Tests the methods used for handle views."""
+        """Tests the methods used to handle views."""
         self.cycle_count_1.action_create_inventory_adjustment()
         self.cycle_count_1.action_view_inventory()
         inv_count = self.cycle_count_1.inventory_adj_count
