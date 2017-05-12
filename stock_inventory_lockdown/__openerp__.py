@@ -3,11 +3,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Inventory lock down",
+    "name": "Inventory Lock Down",
     "summary": "Lock down stock locations during inventories.",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "depends": ["stock"],
-    "author": u"Numérigraphe,Odoo Community Association (OCA)",
+    "author": "Numérigraphe,Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "images": [
         "images/move_error.png",
