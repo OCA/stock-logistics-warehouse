@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 03:02+0000\n"
-"PO-Revision-Date: 2017-04-26 03:02+0000\n"
+"POT-Creation-Date: 2017-05-05 09:53+0000\n"
+"PO-Revision-Date: 2017-05-05 09:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
@@ -151,11 +151,6 @@ msgstr "Movimiento stock"
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
 msgid "The package containing this quant"
 msgstr "El paquete que contiene este quant"
-
-#. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
-msgid "Transfer"
-msgstr "Transferir"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_move_picking_type_code

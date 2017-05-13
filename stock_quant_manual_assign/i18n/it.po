@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 03:58+0000\n"
-"PO-Revision-Date: 2017-03-04 03:58+0000\n"
+"POT-Creation-Date: 2017-05-05 09:53+0000\n"
+"PO-Revision-Date: 2017-05-05 09:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +117,7 @@ msgid "Quant"
 msgstr "Quantità"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr ""
@@ -151,11 +151,6 @@ msgstr "Movimento di magazzino"
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
 msgid "The package containing this quant"
 msgstr ""
-
-#. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
-msgid "Transfer"
-msgstr "Trasferisci"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_move_picking_type_code
