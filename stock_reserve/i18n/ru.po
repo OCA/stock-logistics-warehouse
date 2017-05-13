@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 09:22+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-05-02 01:08+0000\n"
+"PO-Revision-Date: 2017-05-11 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Russian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -123,7 +123,7 @@ msgstr ""
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form
 msgid "Details"
-msgstr ""
+msgstr "Данные"
 
 #. module: stock_reserve
 #: field:stock.reservation,display_name:0
@@ -333,7 +333,7 @@ msgstr ""
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
 #: field:stock.reservation,product_id:0
 msgid "Product"
-msgstr ""
+msgstr "Товар/Услуга"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_template
@@ -365,7 +365,7 @@ msgstr ""
 #: field:stock.reservation,product_qty:0
 #: field:stock.reservation,product_uom_qty:0
 msgid "Quantity"
-msgstr ""
+msgstr "Кол-во"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_uos_qty:0
@@ -588,7 +588,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,price_unit:0
 msgid "Unit Price"
-msgstr ""
+msgstr "Цена"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_uom:0

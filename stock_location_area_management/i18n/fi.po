@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 03:46+0000\n"
+"POT-Creation-Date: 2017-05-02 01:08+0000\n"
 "PO-Revision-Date: 2015-09-15 13:04+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fi/)\n"
@@ -36,7 +36,7 @@ msgstr ""
 #. module: stock_location_area_management
 #: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
 msgid "Group By"
-msgstr ""
+msgstr "Ryhmittele"
 
 #. module: stock_location_area_management
 #: model:ir.model,name:stock_location_area_management.model_stock_location

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 03:45+0000\n"
-"PO-Revision-Date: 2016-12-27 08:22+0000\n"
+"POT-Creation-Date: 2017-05-02 01:08+0000\n"
+"PO-Revision-Date: 2017-05-11 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Russian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -98,7 +98,7 @@ msgstr ""
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,product_qty:0
 msgid "Quantity"
-msgstr ""
+msgstr "Кол-во"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:55
