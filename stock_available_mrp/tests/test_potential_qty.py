@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2014 Numérigraphe SARL
+# Copyright 2014 Numérigraphe SARL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.tests.common import TransactionCase
-from openerp.osv.expression import TRUE_LEAF
+from odoo.tests.common import TransactionCase
+from odoo.osv.expression import TRUE_LEAF
 
 
 class TestPotentialQty(TransactionCase):
@@ -510,7 +510,7 @@ class TestPotentialQty(TransactionCase):
         self.assertEqual(5.0, p1.potential_qty)
 
     def test_potential_qty__list(self):
-        # Try to highlight a bug when _get_potential_qty is called on
+        # Try to highlight a bug when _compute_potential_qty is called on
         # a recordset with multiple products
         # Recursive compute is not working
 
