@@ -5,7 +5,7 @@
 # Copyright 2016 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class TestStockLogisticsWarehouse(TransactionCase):
@@ -134,3 +134,5 @@ class TestStockLogisticsWarehouse(TransactionCase):
         pickingOutA.action_done()
         compare_qty_available_not_res(productB, 1)
         compare_qty_available_not_res(templateAB, 3)
+
+        templateAB.action_open_quants_unreserved()
