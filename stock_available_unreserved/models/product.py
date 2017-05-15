@@ -4,9 +4,9 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models, _
-from openerp.tools.float_utils import float_round
-from openerp.addons import decimal_precision as dp
+from odoo import api, fields, models, _
+from odoo.tools.float_utils import float_round
+from odoo.addons import decimal_precision as dp
 
 UNIT = dp.get_precision('Product Unit of Measure')
 
@@ -38,9 +38,7 @@ class ProductTemplate(models.Model):
         prod_available = super(ProductTemplate, self)._product_available(name,
                                                                          arg)
 
-        variants = self.env['product.product']
-        for product in self:
-            variants += product.product_variant_ids
+        variants = self.mapped('product_variant_ids')
         variant_available = variants._product_available()
 
         for product in self:
@@ -60,8 +58,8 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def action_open_quants_unreserved(self):
-        products = self._get_products()
-        result = self._get_act_window_dict('stock.product_open_quants')
+        products = self.mapped('product_variant_ids').ids
+        result = self.env.ref('stock.product_open_quants').read()[0]
         result['domain'] = "[('product_id','in',[" + ','.join(
             map(str, products)) + "]), ('reservation_id', '=', False)]"
         result[
@@ -93,7 +91,7 @@ class ProductProduct(models.Model):
     def _prepare_domain_available_not_res(self, products):
         domain_products = [('product_id', 'in', products.mapped('id'))]
         domain_quant = []
-        domain_quant_loc, _, _ = products._get_domain_locations()
+        domain_quant_loc = products._get_domain_locations()[0]
 
         domain_quant += domain_products
 
