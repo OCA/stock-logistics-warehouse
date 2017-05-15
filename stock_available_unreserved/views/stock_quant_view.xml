@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
 
         <record id="quant_search_view" model="ir.ui.view">
             <field name="name">stock.quant.search</field>
@@ -27,5 +26,4 @@
             <field name="res_model">stock.quant</field>
         </record>
 
-    </data>
-</openerp>
+</odoo>
