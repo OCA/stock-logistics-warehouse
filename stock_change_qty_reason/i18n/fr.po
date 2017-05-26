@@ -3,11 +3,11 @@
 # * stock_change_qty_reason
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-04 08:31+0000\n"
 "PO-Revision-Date: 2017-03-04 08:31+0000\n"
