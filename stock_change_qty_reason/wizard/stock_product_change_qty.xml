@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<!-- Copyright 2016-2017 ACSONE SA/NV (<http://acsone.eu
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
     <data>
         <record id="view_change_product_quantity_reason" model="ir.ui.view">
             <field name="name">Change Product Quantity Reason</field>
@@ -12,4 +15,4 @@
             </field>
         </record>
     </data>
-</openerp>
+</odoo>
