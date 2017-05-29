@@ -5,21 +5,20 @@
         <field name="name">stock.warehouse.orderpoint.generator</field>
         <field name="model">stock.warehouse.orderpoint.generator</field>
         <field name="arch" type="xml">
-            <form string="Product warehouse config">
+            <form string="Reordering Rules Generator">
                 <label string="This wizard will apply the following orderpoint to selected product(s)"/>
                 <group string="Templates" colspan="4">
                     <field name="orderpoint_template_id" colspan="4"/>
                 </group>
                 <footer>
-                    <button name="action_configure" string="Apply" type="object" class="oe_highlight"
-                            icon="gtk-execute"/>
-                    <button string="Cancel" class="oe_link" special="cancel"/>
+                    <button name="action_configure" string="Apply" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
 
-    <act_window name="Product warehouse config"
+    <act_window name="Reordering Rules Generator"
                 res_model="stock.warehouse.orderpoint.generator"
                 src_model="product.product"
                 view_mode="form"
@@ -27,7 +26,7 @@
                 key2="client_action_multi"
                 id="act_create_product_conf"/>
 
-    <act_window name="Product warehouse config"
+    <act_window name="Reordering Rules Generator"
                 res_model="stock.warehouse.orderpoint.generator"
                 src_model="product.template"
                 view_mode="form"
