@@ -189,7 +189,8 @@ class SaleOrderLine(models.Model):
                     "the quantity of the stock reservation will "
                     "be automatically adjusted to %.2f.") % qty
             msg += "\n\n"
-            result.setdefault('warning', {})
+            if 'warning' not in result or type(result['warning']) is not dict:
+                result['warning'] = {}
             if result['warning'].get('message'):
                 result['warning']['message'] += msg
             else:
