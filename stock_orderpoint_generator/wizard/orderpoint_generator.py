@@ -21,7 +21,7 @@ class OrderpointGenerator(models.TransientModel):
     orderpoint_template_id = fields.Many2many(
         'stock.warehouse.orderpoint.template',
         rel='order_point_generator_rel',
-        string='Stock rule template'
+        string='Reordering Rule Templates'
     )
 
     @api.multi
