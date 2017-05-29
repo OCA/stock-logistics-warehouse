@@ -40,6 +40,7 @@ Contributors
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Ana Juaristi <ajuaristio@gmail.com>
 * Lionel Sausin <ls@numerigraphe.com>
+* Lois Rilo <lois.rilo@eficent.com>
 
 Maintainer
 ----------

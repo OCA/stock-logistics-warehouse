@@ -11,19 +11,19 @@ msgstr ""
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
 "PO-Revision-Date: 2017-06-03 01:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_quant_merge
 #: model:ir.model,name:stock_quant_merge.model_stock_quant
 msgid "Quants"
-msgstr "Quants"
+msgstr ""
 
 #. module: stock_quant_merge
 #: model:ir.model,name:stock_quant_merge.model_stock_move
 msgid "Stock Move"
-msgstr "Mouvement de stock"
+msgstr "Movimento Stock"
