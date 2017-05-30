@@ -11,11 +11,11 @@
     "website": "https://www.odoo-community.org",
     "category": "Warehouse Management",
     "depends": ["stock",
-                "web_widget_x2many_2d_matrix"
+                "web_widget_x2many_2d_matrix",
+                "date_range"
                 ],
     "data": ["security/ir.model.access.csv",
              "security/stock_security.xml",
-             "views/stock_demand_estimate_period_view.xml",
              "views/stock_demand_estimate_view.xml",
              "wizards/stock_demand_estimate_wizard_view.xml",
              ],
