@@ -22,7 +22,7 @@ class StockDemandEstimate(models.Model):
                     rec.product_id.uom_id.id, rec.product_uom_qty,
                     rec.product_uom.id)
 
-    def _set_product_qty(self):
+    def _inverse_product_qty(self):
         raise UserError(_('The requested operation cannot be '
                           'processed because of a programming error '
                           'setting the `product_qty` field instead '
@@ -36,7 +36,7 @@ class StockDemandEstimate(models.Model):
     date_range_id = fields.Many2one(
         comodel_name="date.range",
         string="Estimating Period",
-        required=True)
+        required=True, ondelete='restrict')
     product_id = fields.Many2one(comodel_name="product.product",
                                  string="Product", required=True)
     product_uom = fields.Many2one(comodel_name="product.uom",
@@ -47,7 +47,7 @@ class StockDemandEstimate(models.Model):
         string="Quantity",
         digits_compute=dp.get_precision('Product Unit of Measure'))
     product_qty = fields.Float('Real Quantity', compute='_compute_product_qty',
-                               inverse='_set_product_qty', digits=0,
+                               inverse='_inverse_product_qty', digits=0,
                                store=True,
                                help='Quantity in the default UoM of the '
                                     'product', readonly=True)
@@ -62,8 +62,8 @@ class StockDemandEstimate(models.Model):
     def name_get(self):
         res = []
         for rec in self:
-            name = "%s - %s - %s" % (rec.date_range_id.name, rec.product_id.name,
-                                     rec.location_id.name)
+            name = "%s - %s - %s" % (rec.date_range_id.name,
+                                     rec.product_id.name, rec.location_id.name)
             res.append((rec.id, name))
         return res
 
@@ -77,11 +77,10 @@ class StockDemandEstimate(models.Model):
 
         # We need only the periods that overlap
         # the dates introduced by the user.
-        if (date_start <= period_date_start <= date_end
-            or date_start <= period_date_end <= date_end):
+        if (date_start <= period_date_start <= date_end or date_start <=
+                period_date_end <= date_end):
             overlap_date_start = max(period_date_start, date_start)
             overlap_date_end = min(period_date_end, date_end)
             days = (abs(overlap_date_end-overlap_date_start)).days + 1
             return days * self.daily_qty
         return 0.0
-
