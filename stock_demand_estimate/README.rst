@@ -28,18 +28,15 @@ Usage
 Go to 'Warehouse / Configuration / Demand Estimate Periods' and define your
 estimating periods (monthly or weekly).
 
-
 Go to 'Warehouse / Demand Planning / Create Demand Estimates' to create or
 update your demand estimates.
 
 Go to 'Warehouse / Demand Planning / Demand Estimates' to review the
 estimates created.
 
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/8.0
-
+   :target: https://runbot.odoo-community.org/runbot/153/9.0
 
 Bug Tracker
 ===========
@@ -61,7 +58,6 @@ Contributors
 ------------
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
-
 
 Maintainer
 ----------
