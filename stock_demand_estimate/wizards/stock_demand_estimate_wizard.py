@@ -136,7 +136,7 @@ class StockDemandEstimateSheetLine(models.TransientModel):
 
     estimate_id = fields.Many2one(comodel_name='stock.demand.estimate')
     date_range_id = fields.Many2one(
-        comodel_name='stock.demand.estimate.period',
+        comodel_name='date.range',
         string='Period')
     location_id = fields.Many2one(comodel_name='stock.location',
                                   string="Stock Location")
