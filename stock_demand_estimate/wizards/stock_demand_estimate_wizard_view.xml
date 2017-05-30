@@ -10,11 +10,12 @@
                 <form string="Stock Demand Estimate Sheet">
                     <group>
                         <group name="dates">
-                            <label for="date_from" string="Timesheet Period"/>
-                            <div><field name="date_from" class="oe_inline"/> to <field name="date_to" class="oe_inline"/></div>
+                            <label for="date_start" string="Timesheet Period"/>
+                            <div><field name="date_start" class="oe_inline"/> to <field name="date_end" class="oe_inline"/></div>
                         </group>
-                        <div/>
+                        <newline/>
                         <group name="attributes">
+                            <field name="date_range_type_id"/>
                             <field name="location_id"/>
                         </group>
                     </group>
@@ -47,10 +48,11 @@
                 <form string="Stock Demand Estimate Wizard">
                     <group>
                         <group name="dates">
-                            <label for="date_from" string="Period"/>
-                            <div><field name="date_from" class="oe_inline"/> to <field name="date_to" class="oe_inline"/></div>
+                            <label for="date_start" string="Period"/>
+                            <div><field name="date_start" class="oe_inline"/> to <field name="date_end" class="oe_inline"/></div>
+                            <field name="date_range_type_id"/>
                         </group>
-                        <div/>
+                        <newline/>
                         <group name="attributes">
                             <field name="location_id"/>
                         </group>
