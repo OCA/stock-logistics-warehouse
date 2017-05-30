@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view"
+                id="view_stock_demand_estimate_sheet_form">
+            <field name="name">stock.demand.estimate.sheet.form</field>
+            <field name="model">stock.demand.estimate.sheet</field>
+            <field name="arch" type="xml">
+                <form string="Stock Demand Estimate Sheet">
+                    <group>
+                        <group name="dates">
+                            <label for="date_from" string="Timesheet Period"/>
+                            <div><field name="date_from" class="oe_inline"/> to <field name="date_to" class="oe_inline"/></div>
+                        </group>
+                        <div/>
+                        <group name="attributes">
+                            <field name="location_id"/>
+                        </group>
+                    </group>
+                    <div/>
+                    <group string="Estimated quantity">
+                        <field name="line_ids" nolabel="1"
+                               widget="x2many_2d_matrix"
+                               field_x_axis="value_x"
+                               field_y_axis="value_y"
+                               field_value="product_uom_qty"/>
+                    </group>
+                    <footer>
+                    <button name="button_validate"
+                            type="object"
+                            string="Validate"
+                            class="oe_highlight"/>
+                    <button class="oe_link"
+                            special="cancel"
+                            string="Cancel"/>
+                    </footer>
+                </form>
+          </field>
+        </record>
+
+        <record model="ir.ui.view"
+                id="view_demand_estimate_wizard_form">
+            <field name="name">stock.demand.estimate.wizard.form</field>
+            <field name="model">stock.demand.estimate.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Stock Demand Estimate Wizard">
+                    <group>
+                        <group name="dates">
+                            <label for="date_from" string="Period"/>
+                            <div><field name="date_from" class="oe_inline"/> to <field name="date_to" class="oe_inline"/></div>
+                        </group>
+                        <div/>
+                        <group name="attributes">
+                            <field name="location_id"/>
+                        </group>
+                    </group>
+                    <div/>
+                    <group name="products" string="Products">
+                        <field name="product_ids" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button name="create_sheet" string="Prepare"
+                                type="object"  class="oe_highlight"  /> or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+          </field>
+        </record>
+
+        <act_window name="Create Stock Demand Estimates"
+            res_model="stock.demand.estimate.wizard"
+            src_model="stock.demand.estimate.sheet"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="action_stock_demand_estimate_wizard"/>
+
+        <menuitem
+            id="menu_stock_demand_estimate_wizard"
+            parent="menu_stock_demand_planning"
+            action="action_stock_demand_estimate_wizard"/>
+
+    </data>
+</openerp>
