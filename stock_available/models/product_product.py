@@ -4,6 +4,7 @@
 
 from openerp import models, fields, api
 from openerp.addons import decimal_precision as dp
+from openerp.tools.safe_eval import safe_eval
 
 
 class ProductProduct(models.Model):
@@ -42,7 +43,9 @@ class ProductProduct(models.Model):
         ids = []
         products = self.search([])
         for prod in products:
-            if eval(str(prod.immediately_usable_qty) + operator + str(value)):
+            expr = str(prod.immediately_usable_qty) + operator + str(value)
+            eval_dict = {'prod': prod, 'operator': operator, 'value': value}
+            if safe_eval(expr, eval_dict):
                 ids.append(prod.id)
         res.append(('id', 'in', ids))
         return res
