@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_adu_calculation_method,product.adu.calculation.method,model_product_adu_calculation_method,stock.group_stock_user,1,0,0,0
+access_product_adu_calculation_method_system,product.adu.calculation.method system,model_product_adu_calculation_method,stock.group_stock_manager,1,1,1,1
+access_stock_buffer_profile,stock.buffer.profile,model_stock_buffer_profile,stock.group_stock_user,1,0,0,0
+access_stock_buffer_profile_system,stock.buffer.profile system,model_stock_buffer_profile,stock.group_stock_manager,1,1,1,1
+access_stock_buffer_profile_lead_time,stock.buffer.profile.lead.time stock user,model_stock_buffer_profile_lead_time,stock.group_stock_user,1,0,0,0
+access_stock_buffer_profile_lead_time_manager,stock.buffer.profile.lead.time stock user,model_stock_buffer_profile_lead_time,stock.group_stock_manager,1,1,1,1
+access_stock_buffer_profile_variability,stock.buffer.profile.variability stock user,model_stock_buffer_profile_variability,stock.group_stock_user,1,0,0,0
+access_stock_buffer_profile_variability_manager,stock.buffer.profile.variability stock user,model_stock_buffer_profile_variability,stock.group_stock_manager,1,1,1,1

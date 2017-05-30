@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="adu_calculation_method_fixed"
+                model="product.adu.calculation.method">
+            <field name="name">Fixed</field>
+            <field name="method">fixed</field>
+        </record>
+
+        <record id="adu_calculation_method_past_120"
+                model="product.adu.calculation.method">
+            <field name="name">Past (120 days)</field>
+            <field name="method">past</field>
+            <field name="horizon">120</field>
+        </record>
+        <record id="adu_calculation_method_future_120"
+                model="product.adu.calculation.method">
+            <field name="name">Future (120 days)</field>
+            <field name="method">future</field>
+            <field name="use_estimates">True</field>
+            <field name="horizon">120</field>
+        </record>
+
+    </data>
+</openerp>

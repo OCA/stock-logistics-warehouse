@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="mrp_production_tree_view" model="ir.ui.view">
+            <field name="name">mrp.production.tree</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="date_planned" position="before">
+                    <field name="execution_priority_level"
+                           bg_color="red:execution_priority_level=='1_red';yellow:execution_priority_level=='2_yellow';green:execution_priority_level == '3_green'"
+                           fg_color="white:execution_priority_level=='1_red';black:execution_priority_level=='2_yellow';white:execution_priority_level == '3_green'"/>
+                    <field name="on_hand_percent"
+                           bg_color="red:execution_priority_level=='1_red';yellow:execution_priority_level=='2_yellow';green:execution_priority_level == '3_green'"
+                           fg_color="white:execution_priority_level=='1_red';black:execution_priority_level=='2_yellow';white:execution_priority_level == '3_green'"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_mrp_production_filter" model="ir.ui.view">
+            <field name="name">mrp.production.select</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="execution_priority_level"/>
+                    <group name="execution_priority"
+                           string="On Hand Alert Zones">
+                        <filter name="execution_priority_level_red"
+                                string="Red"
+                                domain="[('execution_priority_level', '=', 'red')]"/>
+                        <filter name="execution_priority_level_yellow"
+                                string="Yellow"
+                                domain="[('execution_priority_level', '=', 'yellow')]"/>
+                        <filter name="execution_priority_level_green"
+                                string="Green"
+                                domain="[('execution_priority_level', '=', 'green')]"/>
+                    </group>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

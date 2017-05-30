@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view"
+                id="view_stock_buffer_profile_form">
+            <field name="name">stock.buffer.profile.form</field>
+            <field name="model">stock.buffer.profile</field>
+            <field name="arch" type="xml">
+                <form string="Buffer Profile">
+                    <sheet>
+                        <div class="oe_edit_only">
+                            <label for="name" class="oe_inline"/>
+                        </div>
+                        <group>
+                            <group name="replenish_method">
+                                <field name="replenish_method"/>
+                            </group>
+                            <group name="item_type">
+                                <field name="item_type"/>
+                            </group>
+                            <group name="lead_time">
+                                <field name="lead_time_id"/>
+                            </group>
+                            <group name="variability">
+                                <field name="variability_id"/>
+                            </group>
+                            <group name="organization">
+                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view"
+                id="view_stock_buffer_profile_tree">
+            <field name="name">stock.buffer.profile.tree</field>
+            <field name="model">stock.buffer.profile</field>
+            <field name="arch" type="xml">
+                <tree string="Buffer Profile">
+                    <field name="name"/>
+                    <field name="replenish_method"/>
+                    <field name="item_type"/>
+                    <field name="lead_time_id"/>
+                    <field name="variability_id"/>
+                </tree>
+          </field>
+        </record>
+
+        <record id="view_stock_buffer_profile_search"
+                model="ir.ui.view">
+            <field name="name">stock.buffer.profile.search</field>
+            <field name="model">stock.buffer.profile</field>
+            <field name="arch" type="xml">
+                <search string="Search Buffer Profiles">
+                    <field name="name"/>
+                    <separator/>
+                    <field name="item_type"/>
+                    <field name="lead_time_id"/>
+                    <field name="variability_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window"
+                id="stock_buffer_profile_form_action">
+            <field name="name">Buffer Profiles</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.buffer.profile</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_stock_buffer_profile_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to start a new buffer profile
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_stock_buffer_profile_mgt"
+            parent="stock.menu_stock_config_settings"
+            action="stock_buffer_profile_form_action"/>
+
+    </data>
+</openerp>

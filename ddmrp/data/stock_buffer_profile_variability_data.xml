@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="stock_buffer_profile_variability_medium"
+                model="stock.buffer.profile.variability">
+            <field name="name">Medium</field>
+            <field name="factor">0.5</field>
+        </record>
+
+    </data>
+</openerp>
