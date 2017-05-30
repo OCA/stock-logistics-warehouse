@@ -25,6 +25,7 @@ addon | version | summary
 --- | --- | ---
 [account_move_line_product](account_move_line_product/) | 8.0.1.0.0 | Account Move Line Product
 [account_move_line_stock_info](account_move_line_stock_info/) | 8.0.1.0.0 | Account Move Line Stock Move
+[business_product_location](business_product_location/) | 0.1 | Business Product Location
 [partner_location_auto_create](partner_location_auto_create/) | 8.0.0.1.0 | Partner Location Auto Create
 [stock_account_change_product_valuation](stock_account_change_product_valuation/) | 8.0.1.0.0 | Adjusts valuation of the products and quants when the cost method or type of a product changes
 [stock_account_quant_merge](stock_account_quant_merge/) | 8.0.1.0.0 | Stock Account - Quant merge
@@ -50,6 +51,7 @@ addon | version | summary
 [stock_putaway_product](stock_putaway_product/) | 8.0.1.0.1 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.1.0 | Stock - Manual assignment of quants
 [stock_quant_merge](stock_quant_merge/) | 8.0.1.0.0 | Stock - Quant merge
+[stock_quant_partner_info](stock_quant_partner_info/) | 8.0.1.1.0 | Stock - Quant partner info
 [stock_reserve](stock_reserve/) | 8.0.0.2.0 | Stock reservations on products
 [stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.1 | Stock Reserve Sales
 [stock_traceability_operation](stock_traceability_operation/) | 8.0.1.1.0 | Adds operations in traceability and quant history
