@@ -5,8 +5,8 @@
 {
     "name": "Stock Demand Estimate",
     "summary": "Allows to create demand estimates.",
-    "version": "8.0.1.0.0",
-    "author": "Eficent Business and IT Consulting Services S.L,"
+    "version": "9.0.1.0.0",
+    "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://www.odoo-community.org",
     "category": "Warehouse Management",
@@ -21,5 +21,5 @@
              ],
     "license": "AGPL-3",
     'installable': True,
-    'application': True,
+    'application': False,
 }
