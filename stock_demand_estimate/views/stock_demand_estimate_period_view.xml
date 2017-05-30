@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view"
+                id="view_stock_demand_estimate_period_tree">
+            <field name="name">stock.demand.estimate.period.tree</field>
+            <field name="model">stock.demand.estimate.period</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Demand Estimate Period" editable="top">
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="days"/>
+                </tree>
+          </field>
+        </record>
+
+        <record id="view_stock_demand_estimate_period_search"
+                model="ir.ui.view">
+            <field name="name">stock.demand.estimate.period.search</field>
+            <field name="model">stock.demand.estimate.period</field>
+            <field name="arch" type="xml">
+                <search string="Search Stock Demand Estimates">
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window"
+                id="stock_demand_estimate_period_form_action">
+            <field name="name">Stock Demand Estimate Periods</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.demand.estimate.period</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" 
+                   ref="view_stock_demand_estimate_period_search"/>
+        </record>
+
+        <menuitem
+            id="menu_stock_demand_estimate_period"
+            parent="stock.menu_stock_config_settings"
+            action="stock_demand_estimate_period_form_action"/>
+
+    </data>
+</openerp>
