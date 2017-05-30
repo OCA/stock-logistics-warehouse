@@ -20,7 +20,8 @@
                         </group>
                     </group>
                     <div/>
-                    <group string="Estimated quantity">
+                    <group name="estimated_quantity"
+                           string="Estimated quantity">
                         <field name="line_ids" nolabel="1"
                                widget="x2many_2d_matrix"
                                field_x_axis="value_x"

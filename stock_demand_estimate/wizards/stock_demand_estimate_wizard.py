@@ -6,25 +6,12 @@
 
 from openerp import api, fields, models, _
 import openerp.addons.decimal_precision as dp
-from openerp.exceptions import Warning as UserError
+from openerp.exceptions import UserError, ValidationError
 
 
 class StockDemandEstimateSheet(models.TransientModel):
     _name = 'stock.demand.estimate.sheet'
     _description = 'Stock Demand Estimate Sheet'
-
-    def _default_date_start(self):
-        return self.env.context.get('date_start', False)
-
-    def _default_date_end(self):
-        return self.env.context.get('date_end', False)
-
-    def _default_location_id(self):
-        location_id = self.env.context.get('location_id', False)
-        if location_id:
-            return self.env['stock.location'].browse(location_id)
-        else:
-            return False
 
     def _default_estimate_ids(self):
         date_start = self.env.context.get('default_date_start', False)
@@ -32,7 +19,7 @@ class StockDemandEstimateSheet(models.TransientModel):
         date_range_type_id = self.env.context.get('default_date_range_type_id',
                                                   False)
         location_id = self.env.context.get('default_location_id', False)
-        product_ids = self.env.context.get('default_product_ids', False)
+        product_ids = self.env.context.get('product_ids', False)
         domain = [('type_id', '=', date_range_type_id), '|', '&',
                   ('date_start', '>=', date_start),
                   ('date_start', '<=', date_end),
@@ -136,7 +123,7 @@ class StockDemandEstimateSheetLine(models.TransientModel):
 
     estimate_id = fields.Many2one(comodel_name='stock.demand.estimate')
     date_range_id = fields.Many2one(
-        comodel_name='stock.demand.estimate.period',
+        comodel_name='date.range',
         string='Period')
     location_id = fields.Many2one(comodel_name='stock.location',
                                   string="Stock Location")
@@ -163,6 +150,13 @@ class DemandEstimateWizard(models.TransientModel):
         comodel_name="product.product",
         string="Products")
 
+    @api.one
+    @api.constrains('date_start', 'date_end')
+    def _check_start_end_dates(self):
+        if self.date_start > self.date_end:
+            raise ValidationError(_(
+                'The start date cannot be later than the end date.'))
+
     @api.multi
     def _prepare_demand_estimate_sheet(self):
         self.ensure_one()
@@ -177,14 +171,14 @@ class DemandEstimateWizard(models.TransientModel):
     def create_sheet(self):
         self.ensure_one()
         if not self.product_ids:
-            raise UserError(_('You must select at lease one product.'))
+            raise UserError(_('You must select at least one product.'))
 
         context = {
             'default_date_start': self.date_start,
             'default_date_end': self.date_end,
             'default_date_range_type_id': self.date_range_type_id.id,
             'default_location_id': self.location_id.id,
-            'default_product_ids': self.product_ids.ids
+            'product_ids': self.product_ids.ids
         }
         res = {
             'context': context,
