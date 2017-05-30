@@ -31,10 +31,10 @@ class StockDemandEstimate(models.Model):
     @api.multi
     def _compute_daily_qty(self):
         for rec in self:
-            rec.daily_qty = rec.product_qty / rec.period_id.days
+            rec.daily_qty = rec.product_qty / rec.date_range_id.days
 
-    period_id = fields.Many2one(
-        comodel_name="stock.demand.estimate.period",
+    date_range_id = fields.Many2one(
+        comodel_name="date.range",
         string="Estimating Period",
         required=True)
     product_id = fields.Many2one(comodel_name="product.product",
@@ -62,21 +62,26 @@ class StockDemandEstimate(models.Model):
     def name_get(self):
         res = []
         for rec in self:
-            name = "%s - %s - %s" % (rec.period_id.name, rec.product_id.name,
+            name = "%s - %s - %s" % (rec.date_range_id.name, rec.product_id.name,
                                      rec.location_id.name)
             res.append((rec.id, name))
         return res
 
     @api.model
-    def get_quantity_by_date_range(self, date_from, date_to):
+    def get_quantity_by_date_range(self, date_start, date_end):
         # Check if the dates overlap with the period
-        period_date_from = fields.Date.from_string(self.period_id.date_from)
-        period_date_to = fields.Date.from_string(self.period_id.date_to)
+        period_date_start = fields.Date.from_string(
+            self.date_range_id.date_start)
+        period_date_end = fields.Date.from_string(
+            self.date_range_id.date_end)
 
-        if date_from <= period_date_to and period_date_from <= date_to:
-            overlap_date_from = max(period_date_from, date_from)
-            overlap_date_to = min(period_date_to, date_to)
-            days = (abs(overlap_date_to-overlap_date_from)).days + 1
+        # We need only the periods that overlap
+        # the dates introduced by the user.
+        if (date_start <= period_date_start <= date_end
+            or date_start <= period_date_end <= date_end):
+            overlap_date_start = max(period_date_start, date_start)
+            overlap_date_end = min(period_date_end, date_end)
+            days = (abs(overlap_date_end-overlap_date_start)).days + 1
             return days * self.daily_qty
         return 0.0
 
