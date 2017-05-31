@@ -16,7 +16,7 @@ Usage
 While an inventory is in the state "In progress", no stock moves
 can be recorded in/out of the inventory's location: users will get an error
 message.
-Creating or modifying a locations is also forbidden.
+Creating or modifying locations is also forbidden.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Inventory lock down",
+    "name": "Inventory Lock Down",
     "summary": "Lock down stock locations during inventories.",
     "version": "9.0.1.0.0",
     "depends": ["stock"],
