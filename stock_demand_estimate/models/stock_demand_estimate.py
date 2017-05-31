@@ -62,8 +62,8 @@ class StockDemandEstimate(models.Model):
     def name_get(self):
         res = []
         for rec in self:
-            name = "%s - %s - %s" % (rec.date_range_id.name, rec.product_id.name,
-                                     rec.location_id.name)
+            name = "%s - %s - %s" % (rec.date_range_id.name,
+                                     rec.product_id.name, rec.location_id.name)
             res.append((rec.id, name))
         return res
 
@@ -77,11 +77,12 @@ class StockDemandEstimate(models.Model):
 
         # We need only the periods that overlap
         # the dates introduced by the user.
-        if (date_start <= period_date_start <= date_end
-            or date_start <= period_date_end <= date_end):
+        if (
+            date_start <= period_date_start <= date_end
+            or date_start <= period_date_end <= date_end
+        ):
             overlap_date_start = max(period_date_start, date_start)
             overlap_date_end = min(period_date_end, date_end)
             days = (abs(overlap_date_end-overlap_date_start)).days + 1
             return days * self.daily_qty
         return 0.0
-

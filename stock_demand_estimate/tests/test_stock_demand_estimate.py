@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp.tests import common
 from dateutil.rrule import MONTHLY
+from openerp.exceptions import ValidationError
 
 
 class TestStockDemandEstimate(common.TransactionCase):
@@ -78,13 +79,12 @@ class TestStockDemandEstimate(common.TransactionCase):
         sheets = self.env['stock.demand.estimate.sheet'].search([])
         for sheet in sheets:
 
-            self.assertEquals(len(sheet.line_ids), 12, 'There should be 12 '
-                                                       'lines.')
-            self.assertEquals(sheet.date_start, '1943-01-01', 'The date start '
-                                                         'should be 1943-01-01')
-            self.assertEquals(sheet.date_end, '1943-12-31', 'The date end '
-                                                            'should be '
-                                                            '1943-12-31')
+            self.assertEquals(len(sheet.line_ids), 12,
+                              'There should be 12 lines.')
+            self.assertEquals(sheet.date_start, '1943-01-01',
+                              'The date start should be 1943-01-01')
+            self.assertEquals(sheet.date_end, '1943-12-31',
+                              'The date end should be 1943-12-31')
             self.assertEquals(sheet.location_id.id, self.location.id,
                               'Wrong location')
             self.assertEquals(sheet.product_ids.ids, [self.product1.id],
@@ -120,5 +120,16 @@ class TestStockDemandEstimate(common.TransactionCase):
         sheets = self.env['stock.demand.estimate.sheet'].search([])
         for sheet in sheets:
             for line in sheet.line_ids:
-                self.assertEquals(line.product_uom_qty,1,
+                self.assertEquals(line.product_uom_qty, 1,
                                   'The quantity should be 1')
+
+    def test_invalid_dates(self):
+
+        wiz = self.env['stock.demand.estimate.wizard']
+        with self.assertRaises(ValidationError):
+            wiz.create({
+                'date_start': '1943-12-31',
+                'date_end': '1943-01-01',
+                'location_id': self.location.id,
+                'date_range_type_id': self.drt_monthly.id,
+                'product_ids': [(6, 0, [self.product1.id])]})
