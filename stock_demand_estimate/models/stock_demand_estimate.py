@@ -36,7 +36,7 @@ class StockDemandEstimate(models.Model):
     date_range_id = fields.Many2one(
         comodel_name="date.range",
         string="Estimating Period",
-        required=True)
+        required=True, ondelete='restrict')
     product_id = fields.Many2one(comodel_name="product.product",
                                  string="Product", required=True)
     product_uom = fields.Many2one(comodel_name="product.uom",
