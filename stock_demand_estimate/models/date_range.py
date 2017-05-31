@@ -17,4 +17,4 @@ class DateRange(models.Model):
                             fields.Date.from_string(rec.date_end)).days + 1
 
     days = fields.Float(string="Days between dates",
-                        compute='_compute_days', store=True, readonly=True)
+                        compute='_compute_days', readonly=True)
