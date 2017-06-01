@@ -59,7 +59,7 @@ class FixedPutawayStrat(models.Model):
 
     putaway_id = fields.Many2one(
         comodel_name='product.putaway',
-        sting='Put Away Method',
+        string='Put Away Method',
         required=True,
         select=True)
     product_template_id = fields.Many2one(
