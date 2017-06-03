@@ -3,14 +3,14 @@
 # * stock_change_qty_reason
 # 
 # Translators:
-# danimaribeiro <danimaribeiro@gmail.com>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:43+0000\n"
-"PO-Revision-Date: 2016-11-18 03:43+0000\n"
-"Last-Translator: danimaribeiro <danimaribeiro@gmail.com>, 2017\n"
+"POT-Creation-Date: 2017-06-03 01:23+0000\n"
+"PO-Revision-Date: 2017-06-03 01:23+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,11 +29,11 @@ msgid "Inventory Line"
 msgstr ""
 
 #. module: stock_change_qty_reason
-#: field:stock.change.product.qty,reason:0
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_change_product_qty_reason
 msgid "Reason"
 msgstr "Razão"
 
 #. module: stock_change_qty_reason
-#: help:stock.change.product.qty,reason:0
+#: model:ir.model.fields,help:stock_change_qty_reason.field_stock_change_product_qty_reason
 msgid "Type in a reason for the product quantity change"
 msgstr ""

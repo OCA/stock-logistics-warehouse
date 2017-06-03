@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 03:43+0000\n"
-"PO-Revision-Date: 2016-11-18 03:43+0000\n"
+"POT-Creation-Date: 2017-06-03 01:23+0000\n"
+"PO-Revision-Date: 2017-06-03 01:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: English (United Kingdom) (https://www.transifex.com/oca/teams/23907/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -29,11 +29,11 @@ msgid "Inventory Line"
 msgstr ""
 
 #. module: stock_change_qty_reason
-#: field:stock.change.product.qty,reason:0
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_change_product_qty_reason
 msgid "Reason"
 msgstr "Reason"
 
 #. module: stock_change_qty_reason
-#: help:stock.change.product.qty,reason:0
+#: model:ir.model.fields,help:stock_change_qty_reason.field_stock_change_product_qty_reason
 msgid "Type in a reason for the product quantity change"
 msgstr ""
