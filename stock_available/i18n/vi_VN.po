@@ -3,20 +3,20 @@
 # * stock_available
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
 "PO-Revision-Date: 2017-06-03 01:23+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Vietnamese (Viet Nam) (https://www.transifex.com/oca/teams/23907/vi_VN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: vi_VN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: stock_available
 #: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
@@ -68,12 +68,12 @@ msgstr ""
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
 msgid "Product"
-msgstr "Prodotto"
+msgstr "Sản phẩm"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_template
 msgid "Product Template"
-msgstr "Template Prodotto"
+msgstr "Mẫu sản phẩm"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_product_potential_qty
