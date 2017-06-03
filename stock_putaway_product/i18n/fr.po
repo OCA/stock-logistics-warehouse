@@ -4,14 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017
+# David BEAL <david.beal@akretion.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 03:45+0000\n"
-"PO-Revision-Date: 2017-03-07 03:45+0000\n"
-"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017\n"
+"POT-Creation-Date: 2017-05-31 02:38+0000\n"
+"PO-Revision-Date: 2017-05-31 02:38+0000\n"
+"Last-Translator: David BEAL <david.beal@akretion.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +47,7 @@ msgstr ""
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_product_putaway_product_location_ids
 msgid "Fixed per product location"
-msgstr ""
+msgstr "Emplacement fixe par article"
 
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_id
@@ -88,18 +88,18 @@ msgstr "Modèle d'article"
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_product_product_id
 msgid "Product Variant"
-msgstr ""
+msgstr "Variante"
 
 #. module: stock_putaway_product
 #: model:ir.ui.view,arch_db:stock_putaway_product.product_putaway_strategy_view_form
 msgid "Product putaway stragegy"
-msgstr ""
+msgstr "Stratégie de rangement article"
 
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_product_product_product_putaway_ids
 #: model:ir.model.fields,field_description:stock_putaway_product.field_product_template_product_putaway_ids
 msgid "Product stock locations"
-msgstr ""
+msgstr "Emplacements de stock d'article"
 
 #. module: stock_putaway_product
 #: model:ir.ui.view,arch_db:stock_putaway_product.view_template_property_form
@@ -110,7 +110,7 @@ msgstr ""
 #: model:ir.model,name:stock_putaway_product.model_product_putaway
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_putaway_id
 msgid "Put Away Strategy"
-msgstr ""
+msgstr "Stratégie de Rangement"
 
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_sequence
