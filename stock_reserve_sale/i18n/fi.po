@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-08 00:48+0000\n"
-"PO-Revision-Date: 2016-05-27 13:25+0000\n"
+"POT-Creation-Date: 2017-05-30 01:25+0000\n"
+"PO-Revision-Date: 2017-05-30 10:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -25,6 +25,11 @@ msgid ""
 "                        of the selected quotation lines. If a validity date is specified,\n"
 "                        the reservation will be released once the date has passed."
 msgstr "Tuotevaraus luodaan valittujen rivien tuotteille.\nJos vapautuspäivä on määritetty, varaus peruutetaan automaattisesti kyseisenä päivänä."
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,account_move_line_ids:0
+msgid "Account move line ids"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:188
@@ -50,7 +55,7 @@ msgid "Cancel"
 msgstr "Peruuta"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:197
+#: code:addons/stock_reserve_sale/model/sale.py:198
 #, python-format
 msgid "Configuration Error!"
 msgstr "Konfiguraatiovirhe."
@@ -76,8 +81,8 @@ msgid "Display Name"
 msgstr "Nimi"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:219
-#: code:addons/stock_reserve_sale/model/sale.py:231
+#: code:addons/stock_reserve_sale/model/sale.py:220
+#: code:addons/stock_reserve_sale/model/sale.py:232
 #, python-format
 msgid "Error"
 msgstr "Virhe"
@@ -192,7 +197,7 @@ msgid "Sales Order Line"
 msgstr "Myyntitilausrivi"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:232
+#: code:addons/stock_reserve_sale/model/sale.py:233
 #, python-format
 msgid ""
 "Several stock reservations are linked with the line. Impossible to adjust "
@@ -226,7 +231,7 @@ msgid "Validity Date"
 msgstr "Vapautuspäivä"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:220
+#: code:addons/stock_reserve_sale/model/sale.py:221
 #, python-format
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "

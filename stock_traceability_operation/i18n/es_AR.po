@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:41+0000\n"
-"PO-Revision-Date: 2017-01-07 07:41+0000\n"
+"POT-Creation-Date: 2017-05-30 01:25+0000\n"
+"PO-Revision-Date: 2017-05-30 01:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/23907/es_AR/)\n"
 "MIME-Version: 1.0\n"
@@ -231,7 +231,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,move_id:0
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimiento de stock"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search

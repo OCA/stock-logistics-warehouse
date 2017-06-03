@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_quant_partner_info
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-30 01:25+0000\n"
+"PO-Revision-Date: 2017-05-30 01:25+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2017\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_quant_partner_info
+#: view:stock.quant:stock_quant_partner_info.stock_quant_partner_info_search_view
+msgid "Group by..."
+msgstr "Združi po..."
+
+#. module: stock_quant_partner_info
+#: view:stock.quant:stock_quant_partner_info.stock_quant_partner_info_search_view
+#: field:stock.quant,dest_partner_id:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: stock_quant_partner_info
+#: view:stock.quant:stock_quant_partner_info.stock_quant_partner_info_search_view
+msgid "Partner Locations"
+msgstr "Lokacije partnerja"
+
+#. module: stock_quant_partner_info
+#: model:ir.model,name:stock_quant_partner_info.model_stock_quant
+msgid "Quants"
+msgstr "Kvant"

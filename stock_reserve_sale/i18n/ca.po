@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-18 18:31+0000\n"
-"PO-Revision-Date: 2017-01-17 19:25+0000\n"
+"POT-Creation-Date: 2017-05-30 01:25+0000\n"
+"PO-Revision-Date: 2017-05-30 10:12+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgid "Cancel"
 msgstr "Cancel·la"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:197
+#: code:addons/stock_reserve_sale/model/sale.py:198
 #, python-format
 msgid "Configuration Error!"
 msgstr ""
@@ -80,8 +80,8 @@ msgid "Display Name"
 msgstr "Veure el nom"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:219
-#: code:addons/stock_reserve_sale/model/sale.py:231
+#: code:addons/stock_reserve_sale/model/sale.py:220
+#: code:addons/stock_reserve_sale/model/sale.py:232
 #, python-format
 msgid "Error"
 msgstr "Error"
@@ -196,7 +196,7 @@ msgid "Sales Order Line"
 msgstr "Línia de comanda de vendes"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:232
+#: code:addons/stock_reserve_sale/model/sale.py:233
 #, python-format
 msgid ""
 "Several stock reservations are linked with the line. Impossible to adjust "
@@ -230,7 +230,7 @@ msgid "Validity Date"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:220
+#: code:addons/stock_reserve_sale/model/sale.py:221
 #, python-format
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 03:46+0000\n"
-"PO-Revision-Date: 2016-12-27 08:26+0000\n"
+"POT-Creation-Date: 2017-05-30 01:25+0000\n"
+"PO-Revision-Date: 2017-06-01 07:03+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgid "Cancel"
 msgstr "Preklic"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:197
+#: code:addons/stock_reserve_sale/model/sale.py:198
 #, python-format
 msgid "Configuration Error!"
 msgstr "Napaka v nastavitvah!"
@@ -81,8 +81,8 @@ msgid "Display Name"
 msgstr "Prikazni naziv"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:219
-#: code:addons/stock_reserve_sale/model/sale.py:231
+#: code:addons/stock_reserve_sale/model/sale.py:220
+#: code:addons/stock_reserve_sale/model/sale.py:232
 #, python-format
 msgid "Error"
 msgstr "Napaka"
@@ -197,7 +197,7 @@ msgid "Sales Order Line"
 msgstr "Postavka prodajnega naloga"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:232
+#: code:addons/stock_reserve_sale/model/sale.py:233
 #, python-format
 msgid ""
 "Several stock reservations are linked with the line. Impossible to adjust "
@@ -231,7 +231,7 @@ msgid "Validity Date"
 msgstr "Datum veljavnosti"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:220
+#: code:addons/stock_reserve_sale/model/sale.py:221
 #, python-format
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "

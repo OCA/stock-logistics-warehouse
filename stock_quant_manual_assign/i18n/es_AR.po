@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 03:46+0000\n"
-"PO-Revision-Date: 2016-12-27 08:23+0000\n"
+"POT-Creation-Date: 2017-05-30 01:24+0000\n"
+"PO-Revision-Date: 2017-05-30 00:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
 msgid "Picking List"
-msgstr ""
+msgstr "Remitos"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,qty:0
@@ -121,7 +121,7 @@ msgid "Quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr ""
@@ -149,7 +149,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimiento de stock"
 
 #. module: stock_quant_manual_assign
 #: help:assign.manual.quants.lines,package_id:0
