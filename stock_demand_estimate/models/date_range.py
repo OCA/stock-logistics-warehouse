@@ -13,8 +13,9 @@ class DateRange(models.Model):
     def _compute_days(self):
         for rec in self:
             if rec.date_start and rec.date_end:
-                rec.days = (fields.Date.from_string(rec.date_start) -
-                            fields.Date.from_string(rec.date_end)).days + 1
+                rec.days = abs((fields.Date.from_string(
+                    rec.date_end) - fields.Date.from_string(
+                    rec.date_start)).days) + 1
 
     days = fields.Float(string="Days between dates",
                         compute='_compute_days', readonly=True)

@@ -6,7 +6,7 @@
 
 from openerp import api, fields, models, _
 import openerp.addons.decimal_precision as dp
-from openerp.exceptions import ValidationError
+from openerp.exceptions import UserError, ValidationError
 
 
 class StockDemandEstimateSheet(models.TransientModel):
@@ -171,7 +171,7 @@ class DemandEstimateWizard(models.TransientModel):
     def create_sheet(self):
         self.ensure_one()
         if not self.product_ids:
-            raise UserError(_('You must select at lease one product.'))
+            raise UserError(_('You must select at least one product.'))
 
         context = {
             'default_date_start': self.date_start,
