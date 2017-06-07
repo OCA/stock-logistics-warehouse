@@ -1,0 +1,72 @@
+<openerp>
+    <data>
+        <record id="view_partner_property_form_stockforecast" model="ir.ui.view">
+            <field name="name">res.partner.purchase.property.form.technotrading</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority">36</field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[1]" position="after" >
+                    <page string="Purchase proposal"
+                        attrs="{'invisible': [('supplier','=',False)]}">
+                        <separator string="Purchase parameters for supplier" colspan="4"/>
+                        <group col="6" colspan="3">
+                            <field name="ultimate_purchase"/>
+                            <field name="stock_period_min"/>
+                            <newline/>
+                            <field name="stock_period_max"/>
+                            <field name="turnover_period"/>
+                            <button icon="gtk-go-forward" type="action" 
+                                name="%(stock_reorder_forecast.wizard_create_supplier_purchase_act)d"
+                                string="create purchase"
+                                help="create purchase order from proposal"/>
+                        </group>
+                        <separator string="Products Sold by this partner" colspan="4"/>
+                        <field colspan="4" name="product_ids" nolabel="1">
+                            <tree>
+                                <field name="name"/>
+                                <field name="price"/>
+                                <field name="description_purchase"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partners_tree_crm2" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field eval="18" name="priority"/>
+            <field name="arch" type="xml">
+                <field name="display_name" position="after">
+                    <field name="ultimate_purchase"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="suplier_show_sequence_tree" model="ir.ui.view">
+            <field name="model">product.supplierinfo</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="sequence" position="attributes">
+                    <attribute name="widget"></attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="supplier_show_sequence_form" model="ir.ui.view">
+            <field name="model">product.supplierinfo</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+            <field name="arch" type="xml">
+                <field name="product_name" position="after">
+                    <field name="sequence" string="Sequence (lowest number is primary supplier)"> </field>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

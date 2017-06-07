@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Proposal purchase -->
+        <record id="wizard_create_purchase" model="ir.ui.view">
+            <field name="name">Create RFQ</field>
+            <field name="model">purchase.purchase_wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Create proposal purchase">
+                    <group>
+                        <field name="product"/>
+                        <field name="name"/>
+                        <field name="stock_period_min"/>
+                        <field name="ultimate_purchase" readonly="1"/>
+                    </group>
+                    <group string="Select supplier">
+                        <!-- filter by only the suppliers for this product -->
+                        <field name="supplier" domain="[('product_tmpl_id' , '=', product)]"/>
+                        <field name="ultimate_purchase_to" />
+                    </group>
+                    <footer>
+                        <button name="create_rfq" string="Create RFQ" type="object" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_create_purchase_act"
+            model="ir.actions.act_window" >
+            <field name="type">ir.actions.act_window</field>
+            <field name="name">Create RFQ for product</field>
+            <field name="view_type">form</field>
+            <field name="res_model">purchase.purchase_wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_create_purchase"/>
+            <field name ="target">new</field>
+        </record>
+
+    </data>
+</openerp>
