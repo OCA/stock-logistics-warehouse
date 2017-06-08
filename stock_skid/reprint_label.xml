@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="skid_reprint_wizard">
+      <field name="name">stock.skid.reprint.wizard</field>
+      <field name="model">stock.skid.reprint.wizard</field>
+      <field name="arch" type="xml">
+        <form string="Adjust &amp; Print" version="7.0">
+          <group string="Select Skid">
+            <field name="prodlot_id"
+              on_change="onchange_prodlot_id(prodlot_id, location_id, context)" />
+            <field name="product_id" readonly="1" />
+            <field name="location_id"
+              domain="[('usage', '=', 'internal')]"
+              on_change="onchange_location_id(prodlot_id, location_id, context)" />
+            <field name="cur_quantity" readonly="1"/>
+            <field name="new_quantity" />
+            <field name="packer_name" string="Operator" />
+          </group>
+          <footer>
+            <button name="do_print" type="object" string="Adjust quantity &amp; Print label" class="oe_highlight" />
+            or
+            <button string="Cancel" class="oe_link" special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <report id="report_skid_label"
+      string="Skid Label"
+      model="stock.skid.reprint.wizard"
+      name="report.stock_skid.report.skid_label"
+      rml="stock_skid/report/skid_label.rml"
+      header="True"
+      auto="False" />
+
+    <record model="ir.actions.act_window" id="act_skid_reprint_wizard">
+      <field name="name">Adjust &amp; Print</field>
+      <field name="res_model">stock.skid.reprint.wizard</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+    </record>
+
+    <menuitem id="open_skid_reprint_wizard"
+      name="Partial Label Reprint"
+      parent="mrp.menu_mrp_manufacturing"
+      action="act_skid_reprint_wizard"
+      />
+  </data>
+</openerp>
