@@ -7,13 +7,8 @@ the quantity available to promise.
 "Quoted" is defined as the sum of the quantities of this Product in
 Sale Quotations, taking the context's shop or warehouse into account.
 
-Known issues / Roadmap
-======================
-
-This module does not warn salespersons when the quantity available to promise
+This module will also warn salespersons when the quantity available to promise
 is insufficient to deliver a sale order line.
-
-Work to add this feature is underway: https://github.com/OCA/stock-logistics-warehouse/pull/25
 
 Credits
 =======

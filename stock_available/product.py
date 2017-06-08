@@ -55,6 +55,8 @@ class ProductProduct(orm.Model):
         computations.
         The sub-modules MUST call super()._product_available BEFORE their own
                 computations
+            AND call _update_virtual_available() AFTER their own computations
+                with the context from the caller.
 
         Side-effect warning: By design, we want to change the behavior of the
             caller (make it aware that an extra field is being computed).
@@ -76,6 +78,12 @@ class ProductProduct(orm.Model):
         if ('virtual_available' not in field_names and
                 'immediately_usable_qty' in field_names):
             field_names.append('virtual_available')
+        if context.get('virtual_is_immediately_usable', False):
+            # _update_virtual_available will get/set these fields
+            if 'virtual_available' not in field_names:
+                field_names.append('virtual_available')
+            if 'immediately_usable_qty' not in field_names:
+                field_names.append('immediately_usable_qty')
 
         # Compute the core quantities
         res = super(ProductProduct, self)._product_available(
@@ -87,6 +95,27 @@ class ProductProduct(orm.Model):
                 stock_qty['immediately_usable_qty'] = \
                     stock_qty['virtual_available']
 
+        # _update_virtual_available would be useless here
+        # It's up to the submodules to call it
+        return res
+
+    def _update_virtual_available(self, cr, uid, res, context=None):
+        """Copy immediately_usable_qty to virtual_available if context asks
+
+        @param context: If the key virtual_is_immediately_usable is True,
+                        then the virtual stock is computed as the stock
+                        available to promise. This lets existing code base
+                        their computations on the new value with a minimum of
+                        change (i.e.: warn salesmen when the stock available
+                        for sale is insufficient to honor a quotation)"""
+        if (context is None
+                or not context.get('virtual_is_immediately_usable', False)):
+            return res
+        for stock_qty in res.itervalues():
+            # _product_available makes sure both fields are loaded
+            # We're changing the caller's state but it's not be a problem
+            stock_qty['virtual_available'] = \
+                stock_qty['immediately_usable_qty']
         return res
 
     _columns = {
