@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="compute_stock_valuation_wizard_form" model="ir.ui.view">
+            <field name="name">stock.valuation.history.wizard.wizard.form</field>
+            <field name="model">stock.valuation.history.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Record stock valuation" col="2">
+                    <label
+                        string="This wizard will record the stock valuation for all products at a location" colspan="2" />
+                    <separator string="" colspan="2" />
+                    <field name="name"/>
+                    <field name="location_id" />
+                    <button special="cancel" string="_Cancel" icon='gtk-cancel'/>
+                    <button name="action_ok" type="object" icon="gtk-ok" string="Ok" />
+                </form>
+            </field>
+        </record>        
+    
+    <!-- Action to open the valuation from the menu -->
+    <record id="action_compute_stock_valuation" model="ir.actions.act_window">
+        <field name="name">Record current Stock Valuation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.valuation.history.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Add menu entry -->
+    <menuitem name="Record current Stock Valuation" id="menu_compute_stock_valuation"
+        parent="stock.menu_stock_inventory_control" action="action_compute_stock_valuation" sequence="55"/>
+       
+    </data>
+</openerp>

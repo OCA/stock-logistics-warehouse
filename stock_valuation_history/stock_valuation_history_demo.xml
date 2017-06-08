@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <!-- Record a production lot we can use in the tests. -->
+        <record id="lot_test0" model="stock.production.lot">
+            <field name="product_id" ref="product.product_product_10" />
+        </record>
+
+        <!-- Record inventories we can use in the tests. -->
+        <!-- We need them in the demo data because test data is rolled back 
+            whenever an exception is raised. -->
+        
+        <!-- Record an inventory to make sure the next one will have stock moves posted. -->
+        <record id="stock_valuation_history0" model="stock.inventory">
+            <field name="name">Valuation test inventory</field>
+            <field name="state">draft</field>
+            <field name="date">2020-06-01 00:00:00</field>
+        </record>        
+        <record id="stock_inventory_line" model="stock.inventory.line">
+            <field name="inventory_id" ref="stock_valuation_history0" />
+            <field name="product_id" ref="product.product_product_10" />
+            <field name="prod_lot_id" ref="lot_test0"/>
+            <field name="product_uom" ref="product.product_uom_unit" />
+            <!-- Current stock quantity is 14.000 -->
+            <field name="product_qty">25.0</field>
+            <field name="location_id" ref="stock.stock_location_components" />
+        </record>
+    </data>
+</openerp>
