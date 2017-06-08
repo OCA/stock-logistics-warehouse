@@ -70,6 +70,11 @@ stock-logistics-warehouse/issues/new?body=module:%20
 stock_mts_mto_rule%0Aversion:%20
 8.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
+Configuration
+=============
+
+You have to choose 'Use MTO+MTS rules' on the company's warehouse form.
+
 Credits
 =======
 
