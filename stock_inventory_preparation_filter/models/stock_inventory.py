@@ -40,6 +40,21 @@ class StockInventoryFake(object):
         self.partner_id = inventory.partner_id
         self.package_id = inventory.package_id
 
+    def default_value(self):
+        value = {}
+        value.update({
+            'theoretical_qty': 0.0,
+            'product_id': self.product_id.id,
+            'location_id': self.location_id.id if self.location_id else False,
+            'prod_lot_id': self.lot_id.id if self.lot_id else False,
+            'inventory_id': self.id,
+            'package_id': self.package_id.id if self.package_id else False,
+            'product_qty': 0.0,
+            'product_uom_id': self.product_id.uom_id.id,
+            'partner_id': False
+        })
+        return [value]
+
 
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
@@ -75,12 +90,16 @@ class StockInventory(models.Model):
     empty_line_ids = fields.One2many(
         comodel_name='stock.inventory.line.empty', inverse_name='inventory_id',
         string='Capture Lines')
+    import_products = fields.Selection(
+        [('only_with_stock', 'Only With Stock'), ('all', 'All')],
+        default='only_with_stock')
 
     @api.model
     def _get_inventory_lines(self, inventory):
         vals = []
         product_tmpl_obj = self.env['product.template']
         product_obj = self.env['product.product']
+
         if inventory.filter in ('categories', 'products'):
             products = product_obj
             if inventory.filter == 'categories':
@@ -92,13 +111,22 @@ class StockInventory(models.Model):
                 products = inventory.product_ids
             for product in products:
                 fake_inventory = StockInventoryFake(inventory, product=product)
-                vals += super(StockInventory, self)._get_inventory_lines(
+                value = super(StockInventory, self)._get_inventory_lines(
                     fake_inventory)
+                if inventory.import_products == 'all' and not value:
+                    value = fake_inventory.default_value()
+
+                vals += value
         elif inventory.filter == 'lots':
             for lot in inventory.lot_ids:
                 fake_inventory = StockInventoryFake(inventory, lot=lot)
-                vals += super(StockInventory, self)._get_inventory_lines(
+
+                value = super(StockInventory, self)._get_inventory_lines(
                     fake_inventory)
+                if inventory.import_products == 'all' and not value:
+                    value = fake_inventory.default_value()
+
+                vals += value
         elif inventory.filter == 'empty':
             tmp_lines = {}
             empty_line_obj = self.env['stock.inventory.line.empty']
@@ -130,6 +158,13 @@ class StockInventory(models.Model):
                             })
                     vals += values
         else:
-            vals = super(StockInventory, self)._get_inventory_lines(
-                inventory)
+            products = product_obj.search([])
+            for product in products:
+                fake_inventory = StockInventoryFake(inventory, product=product)
+                value = super(StockInventory, self)._get_inventory_lines(
+                    fake_inventory)
+                if inventory.import_products == 'all' and not value:
+                    value = fake_inventory.default_value()
+                vals += value
+
         return vals
