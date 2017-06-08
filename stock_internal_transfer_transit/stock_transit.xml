@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="stock_location_transit" model="stock.location">
+            <field name="name">Transit</field>
+            <field name="location_id" ref="stock.stock_location_locations"/>
+            <field name="usage">internal</field>
+            <field name="company_id"></field>
+            <field name="comment">Stock location for goods in transfer between stock locations (i.e. on a truck or ship).</field>
+        </record>
+
+    </data>
+</openerp>
