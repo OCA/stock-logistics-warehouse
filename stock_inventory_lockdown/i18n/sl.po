@@ -3,15 +3,15 @@
 # * stock_inventory_lockdown
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 02:42+0000\n"
-"PO-Revision-Date: 2016-04-15 04:54+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
+"POT-Creation-Date: 2017-06-10 05:35+0000\n"
+"PO-Revision-Date: 2017-06-10 05:35+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,16 +19,18 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_quant.py:41
-#: code:addons/stock_inventory_lockdown/models/stock_quant.py:56
+#: code:addons/stock_inventory_lockdown/models/stock_quant.py:34
+#: code:addons/stock_inventory_lockdown/models/stock_quant.py:49
 #, python-format
 msgid ""
 "An inventory is being conducted at the following location(s):\n"
 "%s"
-msgstr "Na naslednji lokaciji (lokacijah) se vodi inventar:\n%s"
+msgstr ""
+"Na naslednji lokaciji (lokacijah) se vodi inventar:\n"
+"%s"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_location.py:22
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:21
 #, python-format
 msgid "An inventory is being conducted at this location"
 msgstr "Na tej lokaciji se vodi inventar"
