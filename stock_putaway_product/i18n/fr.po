@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 01:24+0000\n"
-"PO-Revision-Date: 2017-05-30 01:24+0000\n"
+"POT-Creation-Date: 2017-06-06 09:24+0000\n"
+"PO-Revision-Date: 2017-06-06 09:24+0000\n"
 "Last-Translator: David BEAL <david.beal@akretion.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -98,14 +98,14 @@ msgid "Product stock locations"
 msgstr "Emplacements de stock d'article"
 
 #. module: stock_putaway_product
+#: field:stock.product.putaway.strategy,putaway_id:0
+msgid "Put Away Method"
+msgstr "Method de rangement"
+
+#. module: stock_putaway_product
 #: model:ir.model,name:stock_putaway_product.model_product_putaway
 msgid "Put Away Strategy"
 msgstr "Stratégie de Rangement"
-
-#. module: stock_putaway_product
-#: field:stock.product.putaway.strategy,putaway_id:0
-msgid "Putaway id"
-msgstr "Rangement"
 
 #. module: stock_putaway_product
 #: code:addons/stock_putaway_product/models/product_putaway.py:52
