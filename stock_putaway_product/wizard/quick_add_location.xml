@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+<data>
+
+    <record id="view_model_form" model="ir.ui.view">
+        <field name="model">quick.add.product.location</field>
+        <field name="active" eval="True" />
+        <field name="arch" type="xml">
+            <form string="Quick Product Putaway">
+                <sheet>
+                    <div>
+                        <h2>Set default location by putaway method to products</h2>
+                    </div>
+                    <group>
+                        <field name="putaway_id" widget="radio"/>
+                        <field name="fixed_location_id"/>
+                    </group>
+                    <group col="1">
+                        <separator string="Products"/>
+                        <field name="product_ids" nolabel="1"/>
+                    </group>
+                </sheet>
+            <footer>
+                <button name="apply_location" string="Apply"
+                        type="object" class="oe_highlight"/>
+                <button special="cancel" string="Cancel" class="oe_link"/>
+            </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="quick_add_product_location_act_window" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Add Default Stock Location</field>
+        <field name="res_model">quick.add.product.location</field>
+        <field name="src_model">product.product</field>
+        <field name="view_mode">form,tree</field>
+        <field name="target">new</field>
+    </record>
+    <record id="quick_add_product_location_values" model="ir.values">
+        <field eval="'client_action_multi'" name="key2"/>
+        <field eval="'product.product'" name="model"/>
+        <field name="name">Add Default Stock Location</field>
+        <field eval="'ir.actions.act_window,'+str(quick_add_product_location_act_window)" name="value"/>
+    </record>
+
+</data>
+</openerp>
