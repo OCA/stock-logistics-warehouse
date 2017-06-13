@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_procurement_rule_form">
+        <field name="name">procurement.rule.form</field>
+        <field name="model">procurement.rule</field>
+        <field name="inherit_id"
+               ref="procurement.view_procurement_rule_form"/>
+        <field name="arch" type="xml">
+            <group name="propagation_group" position="inside">
+                <field name="auto_create_group"/>
+            </group>
+        </field>
+    </record>
+
+</odoo>
