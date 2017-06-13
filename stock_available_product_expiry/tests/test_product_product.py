@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import mock
 from odoo import fields
 from odoo.tests import common
 from datetime import timedelta
 
 
-class TestStockAvailableProductExpiry(common.TransactionCase):
+class TestProductProduct(common.TransactionCase):
 
     def setUp(self):
-        super(TestStockAvailableProductExpiry, self).setUp()
+        super(TestProductProduct, self).setUp()
         param_obj = self.env['ir.config_parameter']
         param_obj.set_param('stock_qty_available_lot_expired', True)
 
@@ -43,6 +44,7 @@ class TestStockAvailableProductExpiry(common.TransactionCase):
         })
         inventory.action_done()
         self.assertEqual(self.product_1.qty_available, 10)
+        self.assertEqual(self.product_1.qty_expired, 0)
 
         removal_date = fields.Datetime.from_string(
             fields.Datetime.now()) + timedelta(days=-5)
@@ -63,7 +65,9 @@ class TestStockAvailableProductExpiry(common.TransactionCase):
             })]
         })
         inventory.action_done()
+        self.product_1.refresh()
         self.assertEqual(self.product_1.qty_available, 10)
+        self.assertEqual(self.product_1.qty_expired, 20)
 
     def test_01_lot_product_available_tomorrow(self):
         lot_obj = self.env['stock.production.lot']
@@ -88,8 +92,9 @@ class TestStockAvailableProductExpiry(common.TransactionCase):
         inventory.action_done()
         # Unfortunately the lot expired today
         self.assertEqual(self.product_1.qty_available, 0)
+        self.assertEqual(self.product_1.qty_expired, 10)
 
-    def test_02_lot_product_available_pivot(self):
+    def test_02_lot_product_available_from_to(self):
         lot_obj = self.env['stock.production.lot']
         removal_date = fields.Datetime.from_string(fields.Datetime.now())
         # First create lot
@@ -111,12 +116,21 @@ class TestStockAvailableProductExpiry(common.TransactionCase):
         })
         inventory.action_done()
         # Get pivot date on yesterday
-        pivot_date = fields.Datetime.to_string(
+        from_date = fields.Datetime.to_string(
             fields.Datetime.from_string(
                 fields.Datetime.now()) + timedelta(days=-1))
         self.assertEqual(
-            self.product_1.with_context(pivot_date=pivot_date).qty_available,
+            self.product_1.with_context(from_date=from_date).qty_available,
             10)
+        # Get pivot date from  yesterday to today
+        from_date = fields.Datetime.to_string(
+            fields.Datetime.from_string(
+                fields.Datetime.now()) + timedelta(days=-1))
+        to_date = fields.Datetime.now()
+        self.assertEqual(
+            self.product_1.with_context(
+                from_date=from_date, to_date=to_date).qty_available,
+            0)
 
     def test_03_configuration(self):
         wizard = self.env['stock.config.settings'].create({})
@@ -135,3 +149,13 @@ class TestStockAvailableProductExpiry(common.TransactionCase):
             value,
             False,
             'The set value of stock_qty_available_lot_expired should be False')
+
+    def test_action_open_expired_quants(self):
+        with mock.patch.object(fields.Datetime, 'now') as patch_now:
+            patch_now.return_value = 'dt_now'
+            res = self.product_1.action_open_expired_quants()
+        expected_domain = [
+            ('product_id', 'in', [self.product_1.id]),
+            ('lot_id', '!=', False),
+            ('lot_id.removal_date', '<=', 'dt_now')]
+        self.assertListEqual(res.get('domain'), expected_domain)

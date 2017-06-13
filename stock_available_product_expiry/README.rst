@@ -6,7 +6,9 @@
 Stock Available Product Expiry
 ==============================
 
-Allows to get product availability taking into account lot removal date
+* Display the qty in expired production lots on the product.
+* Take into account the expired production lots into the computation of the
+available quantities.
 
 
 Usage
@@ -14,7 +16,9 @@ Usage
 
 * Define a removal time on the product you want to manage expired stock
 * Receive or inventory the product with a lot
-* When the lot removal date is passed, the lot quantity is not taken into account in Quantity On Hand 
+* When the lot removal date is passed, the lot quantity is not taken into
+account in Quantity On Hand and the expired qty is displayed on the product
+(form view / kanban view)
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

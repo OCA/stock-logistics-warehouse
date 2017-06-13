@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="product_product_form_view">
+        <field name="name">product.product.form (in stock_available_product_expiry)</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+             <field name="type" position="after">
+                <field name="check_expired_lots" invisible="1"/>
+            </field>
+            <button name="%(stock.action_stock_level_forecast_report_product)d" position="after">
+               <button type="object" name="action_open_expired_quants"
+                        attrs="{'invisible':['|', '|', ('type', 'not in', ['product','consu']), ('check_expired_lots', '=', False), ('qty_expired', '&lt;=', 0)]}"
+                        class="oe_stat_button" icon="fa-building-o">
+                    <div class="o_form_field o_stat_info stat_info_expiry_warning">
+                        <field name="qty_expired"
+                               widget="statinfo" nolabel="1"/>
+                        <span class="o_stat_text">Expired</span>
+                    </div>
+                </button>
+                <button type="object" name="action_open_expired_quants"
+                        attrs="{'invisible':['|', '|', ('type', 'not in', ['product','consu']), ('check_expired_lots', '=', False), ('outgoing_expired_qty', '&lt;=', 0) ]}"
+                        class="oe_stat_button" icon="fa-building-o">
+                    <div class="o_form_field o_stat_info stat_info_expiry_warning">
+                        <field name="outgoing_expired_qty" class="text-danger"
+                               widget="statinfo" nolabel="1"/>
+                        <span class="o_stat_text">Expired Outgoing</span>
+                    </div>
+                </button>
+            </button>
+        </field>
+    </record>
+
+</odoo>

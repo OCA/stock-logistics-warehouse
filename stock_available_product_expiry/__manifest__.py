@@ -11,11 +11,18 @@
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://acsone.eu',
-    'depends': ['stock',
-                'product_expiry'
-                ],
-    'data': ['views/res_config.xml',
-             ],
+    'depends': [
+        'stock',
+        'product_expiry',
+        'web',
+    ],
+    'data': [
+        'views/product_template.xml',
+        'views/product_product.xml',
+        'views/stock_quant.xml',
+        'views/res_config.xml',
+        'views/stock_available_product_expiry.xml',
+    ],
     'demo': [
     ],
     'installable': True,

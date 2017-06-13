@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.actions.act_window" id="stock.product_open_quants"> <!-- product_view + python -->
+        <field name="domain">[('product_id', '=', active_id), '|', ('lot_id', '=', False), '&amp;' ('lot_id', '!=', False), ('lot_id.removal_date', '>',datetime.datetime.now())]</field>
+    </record>
+
+</odoo>

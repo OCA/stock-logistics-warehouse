@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <template id="assets_backend" name="stock_available_product_expiry assets" inherit_id="web.assets_backend">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" href="/stock_available_product_expiry/static/src/less/stock_available_product_expiry.less"/>
+        </xpath>
+    </template>
+
+</odoo>
