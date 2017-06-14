@@ -29,7 +29,7 @@ class ProductProduct(models.Model):
     )
 
     def _get_domain_locations(self):
-        if self and not self[0].check_expired_lots:
+        if not self.env['product.template']._must_check_expired_lots():
             return super(ProductProduct, self)._get_domain_locations()
 
         quant_domain, move_in_domain, move_out_domain = super(
@@ -60,6 +60,11 @@ class ProductProduct(models.Model):
         quant_domain += lot_domain
 
         return quant_domain, move_in_domain, move_out_domain
+
+    def _get_expired_quants_domain(self, removal_date=None):
+        self_with_context = self.with_context(
+            compute_expired_only=True, from_date=removal_date)
+        return self_with_context._get_domain_locations()[0]
 
     @api.multi
     def _compute_expired_qty(self):

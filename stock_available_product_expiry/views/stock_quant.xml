@@ -5,7 +5,7 @@
 <odoo>
 
     <record model="ir.actions.act_window" id="stock.product_open_quants"> <!-- product_view + python -->
-        <field name="domain">[('product_id', '=', active_id), '|', ('lot_id', '=', False), '&amp;' ('lot_id', '!=', False), ('lot_id.removal_date', '>',datetime.datetime.now())]</field>
+        <field name="domain">[('product_id', '=', active_id), '|', ('lot_id', '=', False), '&amp;', ('lot_id', '!=', False), ('lot_id.removal_date', '>',datetime.datetime.now())]</field>
     </record>
 
 </odoo>

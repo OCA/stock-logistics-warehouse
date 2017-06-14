@@ -17,11 +17,16 @@
         'web',
     ],
     'data': [
+        'security/stock_scrap_expired_line.xml',
+        'security/stock_scrap_expired.xml',
+        'views/stock_scrap_expired_line.xml',
+        'views/stock_scrap_expired.xml',
         'views/product_template.xml',
         'views/product_product.xml',
         'views/stock_quant.xml',
         'views/res_config.xml',
         'views/stock_available_product_expiry.xml',
+        'data/ir_sequence_data.xml',
     ],
     'demo': [
     ],

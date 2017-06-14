@@ -39,12 +39,14 @@ class ProductTemplate(models.Model):
             product.qty_expired = res[product.id]['qty_available']
             product.outgoing_expired_qty = res[product.id]['outgoing_qty']
 
+    @api.model
+    def _must_check_expired_lots(self):
+        param_obj = self.env['ir.config_parameter']
+        return param_obj.get_param('stock_qty_available_lot_expired', False)
+
     @api.multi
     def _compute_check_expired_lots(self):
-        param_obj = self.env['ir.config_parameter']
-        check_expired_lots = param_obj.get_param(
-            'stock_qty_available_lot_expired',
-            False)
+        check_expired_lots = self._must_check_expired_lots()
         for product in self:
             product.check_expired_lots = check_expired_lots
 
