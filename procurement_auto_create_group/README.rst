@@ -7,35 +7,34 @@ Procurement Auto Create Group
 =============================
 
 This module allows the system to propose automatically new procurement groups
- in procurement orders.
+in procurement orders.
 
- This capability is important when you want to make sure that all the stock
- moves resulting from this procurement will never be mixed with moves from
- other groups in stock transfers.
+This capability is important when you want to make sure that all the stock
+moves resulting from this procurement will never be mixed with moves from
+other groups in stock transfers.
 
- The stock transfers resulting from the execution of these procurements will
- only contain stock moves created from that procurement.
+The stock transfers resulting from the execution of these procurements will
+only contain stock moves created from that procurement.
 
 
 Configuration
 =============
 
-# Go to *Inventory / Configuration / Settings* and check the option 'Advanced
-  routing of products using rules' and press the 'Apply' button.
-# Activate the developer mode.
-# Go to *Inventory / Configuration / Routes / Routes* and check the option
-  'Auto-create Procurement Group' to the pull rules where you want the
-  procurement groups to be automatically proposed.
+#. Go to *Inventory / Configuration / Settings* and check the option 'Advanced
+   routing of products using rules' and press the 'Apply' button.
+#. Activate the developer mode.
+#. Go to *Inventory / Configuration / Routes / Routes* and check the option
+   'Auto-create Procurement Group' to the pull rules where you want the
+   procurement groups to be automatically proposed.
 
 Usage
 =====
 
-# Go to *Inventory / Reports / Procurement Exceptions*.
-# Create a new procurement order and make sure that it determines a pull rule
- with the option 'Auto-create Procurement Group' set.
-# When you save the procurement order, a procurement group with format
-  'PG/000001' will be created.
-
+#. Go to *Inventory / Reports / Procurement Exceptions*.
+#. Create a new procurement order and make sure that it determines a pull rule
+   with the option 'Auto-create Procurement Group' set.
+#. When you save the procurement order, a procurement group with format
+   'PG/000001' will be created.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
