@@ -46,6 +46,18 @@ To use this module, you need to:
 
 #. Select the proper stock locations for each product on the product form
    on the "Inventory" tab
+#. If your products share some locations, you can use a wizard to make
+   encoding easier
+
+.. image:: static/description/default_loc.png
+   :alt: Set default location by putaway method to products
+
+|
+
+.. image:: stock_product_putaway/static/description/default_loc.png
+   :alt: Set default location by putaway method to products
+
+|
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

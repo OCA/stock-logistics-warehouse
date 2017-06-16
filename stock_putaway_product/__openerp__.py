@@ -18,6 +18,7 @@
     'data': [
         'views/product.xml',
         'views/product_putaway.xml',
+        'wizard/quick_add_location.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [
