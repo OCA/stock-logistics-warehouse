@@ -61,6 +61,7 @@ class StockScrapExpiredLine(models.Model):
         required=True,
         index=True,
         readonly=True,
+        ondelete='cascade',
     )
     stock_scrap_id = fields.Many2one(
         'stock.scrap',

@@ -117,7 +117,7 @@ class StockScrapExpired(models.Model):
         stock_quand_obj = self.env['stock.quant']
         line_obj = self.env['stock.scrap.expired.line']
         for rec in self:
-            rec.stock_scrap_expired_line_ids = line_obj.browse()
+            rec.stock_scrap_expired_line_ids = line_obj.browse([])
             quant_domain = rec._get_expired_quants_domain()
             for quant in stock_quand_obj.search(quant_domain):
                 vals = rec._prepare_line_value(quant)
