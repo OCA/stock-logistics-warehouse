@@ -2,7 +2,7 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class TestStockRemovalLocationByPriority(TransactionCase):
@@ -22,7 +22,8 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         self.location_supplier = self.env.ref('stock.stock_location_suppliers')
 
         self.company = self.env.ref('base.main_company')
-        self.partner = self.env.ref('base.res_partner_1')
+        self.company.removal_priority_active = True
+
         self.g_stock_user = self.env.ref('stock.group_stock_user')
 
         self.user = self._create_user(
