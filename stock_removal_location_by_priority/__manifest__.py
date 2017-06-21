@@ -5,13 +5,14 @@
 {
     "name": "Stock Removal Location by Priority",
     "summary": "Establish a removal priority on stock locations.",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "depends": ["stock"],
     "data": [
+        'views/res_config_settings_views.xml',
         'views/stock_location_view.xml'],
     "license": "AGPL-3",
     'installable': True,
