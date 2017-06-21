@@ -98,7 +98,7 @@ class StockScrapExpired(models.Model):
         product_obj = self.env['product.product']
         return product_obj.with_context(
             location=self.location_id.id)._get_expired_quants_domain(
-            removal_date=self.removal_date)
+            removal_date=self.removal_date)[0]
 
     @api.multi
     def _prepare_line_value(self, stock_quant):

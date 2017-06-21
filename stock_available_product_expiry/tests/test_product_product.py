@@ -45,6 +45,7 @@ class TestProductProduct(common.TransactionCase):
         inventory.action_done()
         self.assertEqual(self.product_1.qty_available, 10)
         self.assertEqual(self.product_1.qty_expired, 0)
+        self.assertEqual(self.product_1.outgoing_expired_qty, 0)
 
         removal_date = fields.Datetime.from_string(
             fields.Datetime.now()) + timedelta(days=-5)
@@ -68,6 +69,74 @@ class TestProductProduct(common.TransactionCase):
         self.product_1.refresh()
         self.assertEqual(self.product_1.qty_available, 10)
         self.assertEqual(self.product_1.qty_expired, 20)
+        self.assertEqual(self.product_1.outgoing_expired_qty, 0)
+
+    def test_outgoing_expired_lot(self):
+        lot_obj = self.env['stock.production.lot']
+        removal_date = fields.Datetime.from_string(
+            fields.Datetime.now()) + timedelta(days=-5)
+        stock_location = self.warehouse_1.lot_stock_id
+        # First create lot
+        vals = {'removal_date': removal_date,
+                'product_id': self.product_1.id
+                }
+        self.lot_1 = lot_obj.create(vals)
+        # Create Inventory for product
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Initial inventory',
+            'filter': 'partial',
+            'line_ids': [(0, 0, {
+                'product_id': self.product_1.id,
+                'prod_lot_id': self.lot_1.id,
+                'product_uom_id': self.product_1.uom_id.id,
+                'product_qty': 10,
+                'location_id': stock_location.id
+            })]
+        })
+        inventory.action_done()
+        self.assertEqual(self.product_1.qty_available, 0)
+        self.assertEqual(self.product_1.qty_expired, 10)
+        self.assertEqual(self.product_1.outgoing_expired_qty, 0)
+        # if we create a picking out for the expired lot, as long as the
+        # expired quant is not reserved for the picking, the qty_expired
+        # remains the same and the outgoing_expired_qty is 0 since it's
+        # impossible to predict which lot will be
+        # reserved....
+        customer_location = self.env.ref('stock.stock_location_suppliers')
+        stock_picking_obj = self.env['stock.picking']
+        picking_out = stock_picking_obj.create({
+            'picking_type_id': self.env.ref(
+                'stock.picking_type_out').id,
+            'location_id': stock_location.id,
+            'location_dest_id': customer_location.id
+        })
+        stock_move_obj = self.env['stock.move']
+        stock_move_obj.create({
+            'name': self.product_1.name,
+            'product_id': self.product_1.id,
+            'product_uom_qty': 10,
+            'product_uom': self.product_1.uom_id.id,
+            'picking_id': picking_out.id,
+            'location_id': stock_location.id,
+            'location_dest_id': customer_location.id})
+        picking_out.action_confirm()
+        self.assertEqual(self.product_1.qty_available, 0)
+        self.assertEqual(self.product_1.outgoing_qty, 10)
+        self.assertEqual(self.product_1.qty_expired, 10)
+        self.assertEqual(self.product_1.outgoing_expired_qty, 0)
+
+        for move in picking_out.move_lines:
+            self.assertEqual(move.state, 'confirmed',
+                             'Wrong state of move line.')
+        # Product assign to outgoing shipments...
+        picking_out.action_assign()
+
+        # once the expired lot is reserved for the outgoing picking it
+        # appears into the outgoing_expired_qty
+        self.assertEqual(self.product_1.qty_available, 0)
+        self.assertEqual(self.product_1.qty_expired, 0)
+        self.assertEqual(self.product_1.outgoing_qty, 0)
+        self.assertEqual(self.product_1.outgoing_expired_qty, 10)
 
     def test_01_lot_product_available_tomorrow(self):
         lot_obj = self.env['stock.production.lot']
