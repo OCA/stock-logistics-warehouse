@@ -16,13 +16,14 @@ class StockLocation(models.Model):
             name=name, args=args, operator=operator, limit=None)
         filtered_loc_list = []
         if context.get('stock_change_product_quantity', False):
-            dom = [
+            domain = [
                 ('qty', '>', 0),
                 ('product_id', '=', context.get('default_product_id', False)),
                 ('location_id.usage', '=', 'internal')
             ]
             quants = self.env['stock.quant'].read_group(
-                dom, ['location_id', 'qty'], 'location_id', orderby='qty desc')
+                domain, ['location_id', 'qty'], 'location_id',
+                orderby='qty desc')
             for elm in quants:
                 if elm['location_id'] in res:
                     filtered_loc_list.append(elm['location_id'])
