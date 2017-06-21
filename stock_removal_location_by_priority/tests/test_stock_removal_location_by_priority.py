@@ -2,7 +2,7 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class TestStockRemovalLocationByPriority(TransactionCase):
@@ -22,7 +22,8 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         self.location_supplier = self.env.ref('stock.stock_location_suppliers')
 
         self.company = self.env.ref('base.main_company')
-        self.partner = self.env.ref('base.res_partner_1')
+        self.company.removal_priority_active = True
+
         self.g_stock_user = self.env.ref('stock.group_stock_user')
 
         self.user = self._create_user(
@@ -89,8 +90,64 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         })
         return picking
 
-    def test_stock_removal_location_by_priority(self):
+    def test_stock_removal_location_by_priority_fifo(self):
         """Tests removal priority."""
+        wiz1 = self.stock_change_model.with_context(
+            active_id=self.product_templ_1.id,
+            active_model='product.template'
+        ).create({'new_quantity': 20,
+                  'location_id': self.stock.id,
+                  'product_tmpl_id': self.product_templ_1.id,
+                  })
+        wiz1.change_product_qty()
+        self.product1 = wiz1.product_id
+
+        picking_1 = self._create_picking(
+            self.picking_internal, self.stock, self.shelf_A, 5)
+        picking_1.action_confirm()
+        picking_1.action_assign()
+
+        picking_2 = self._create_picking(
+            self.picking_internal, self.stock, self.shelf_B, 10)
+        picking_2.action_confirm()
+        picking_2.action_assign()
+
+        self.assertEqual(picking_1.pack_operation_ids.
+                         linked_move_operation_ids.reserved_quant_id.in_date,
+                         picking_2.pack_operation_ids.
+                         linked_move_operation_ids.reserved_quant_id.in_date,
+                         'Testing data not generated properly.')
+
+        wiz_act = picking_1.do_new_transfer()
+        wiz2 = self.env[wiz_act['res_model']].browse(wiz_act['res_id'])
+        wiz2.process()
+
+        wiz_act = picking_2.do_new_transfer()
+        wiz3 = self.env[wiz_act['res_model']].browse(wiz_act['res_id'])
+        wiz3.process()
+
+        picking_3 = self._create_picking(
+            self.picking_out, self.stock, self.location_supplier, 5)
+        picking_3.action_confirm()
+        picking_3.action_assign()
+        wiz_act = picking_3.do_new_transfer()
+        wiz4 = self.env[wiz_act['res_model']].browse(wiz_act['res_id'])
+        wiz4.process()
+
+        records = self.quant_model.search(
+            [('product_id', '=', self.product1.id)])
+        for record in records:
+            self.assertEqual(record.qty, 5,
+                             'Removal_priority did\'nt work properly.')
+
+    def test_stock_removal_location_by_priority_lifo(self):
+        """Tests removal priority."""
+        removal_method_id = self.env['product.removal'].search(
+            [('name', '=', 'lifo')]).id
+        self.stock.removal_strategy_id = removal_method_id
+        self.shelf_A.removal_strategy_id = removal_method_id
+        self.shelf_B.removal_strategy_id = removal_method_id
+        self.location_supplier.removal_strategy_id = removal_method_id
         wiz1 = self.stock_change_model.with_context(
             active_id=self.product_templ_1.id,
             active_model='product.template'
