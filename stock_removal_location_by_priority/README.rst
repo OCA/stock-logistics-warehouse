@@ -15,13 +15,20 @@ Configuration
 
 You can configure the removal priority as follows:
 
+#. Go to "Inventory > Configuration > Settings"
+#. In 'Location & Warehouse' section, mark "Use 'Removal Priority' in Locations *"
+
+Usage
+=====
+
+To use this module, you need to:
+
 #. Go to "Inventory > Configuration > Warehouse Management > Locations"
 #. In each Location form, put a Removal Priority.
 
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/9.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 
 Bug Tracker
