@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models, _
-import openerp.addons.decimal_precision as dp
+from odoo import api, fields, models, _
+import odoo.addons.decimal_precision as dp
 import time
-from openerp.exceptions import UserError
+from odoo.exceptions import UserError
 
 
 class StockInventoryRevaluation(models.Model):
@@ -171,7 +171,7 @@ class StockInventoryRevaluation(models.Model):
 
     qty_available = fields.Float(
         'Quantity On Hand', compute='_compute_get_product_qty',
-        digits_compute=dp.get_precision('Product Unit of Measure'))
+        digits=dp.get_precision('Product Unit of Measure'))
 
     increase_account_id = fields.Many2one(
         'account.account', 'Increase Account',
@@ -386,7 +386,8 @@ class StockInventoryRevaluation(models.Model):
     def create(self, values):
         sequence_obj = self.env['ir.sequence']
         if values.get('name', '/') == '/':
-            values['name'] = sequence_obj.get('stock.inventory.revaluation')
+            values['name'] = sequence_obj.next_by_code(
+                'stock.inventory.revaluation')
         return super(StockInventoryRevaluation, self).create(values)
 
     @api.multi
