@@ -31,10 +31,18 @@ class ProductProduct(models.Model):
              "be removed from the stock since these are expired."
     )
 
+    def _get_original_domain_locations(self):
+        """ Allow to get domains without the filter on the
+        expired lots
+        """
+        return self.with_context(
+            disable_check_expired_lots=True)._get_domain_locations()
+
     def _get_domain_locations(self):
         quant_domain, move_in_domain, move_out_domain = super(
             ProductProduct, self)._get_domain_locations()
-        if self.env['product.template']._must_check_expired_lots():
+        if (not self.env.context.get('disable_check_expired_lots', False) and
+                self.env['product.template']._must_check_expired_lots()):
             quant_domain += self._get_domain_quant_lots()
         return quant_domain, move_in_domain, move_out_domain
 

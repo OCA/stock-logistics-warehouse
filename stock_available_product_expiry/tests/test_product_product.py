@@ -228,3 +228,10 @@ class TestProductProduct(common.TransactionCase):
             ('lot_id', '!=', False),
             ('lot_id.removal_date', '<=', 'dt_now')]
         self.assertListEqual(res.get('domain'), expected_domain)
+
+    def test_get_original_domain_locations(self):
+        domain = self.product_1._get_original_domain_locations()
+        self.assertNotIn(
+            'lot_id',
+            domain,
+        )
