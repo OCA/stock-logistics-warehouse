@@ -126,14 +126,6 @@ class ProductProduct(models.Model):
         return res
 
     @api.multi
-    def _compute_expired_qty(self):
-        self_with_context = self.with_context(compute_expired_only=True)
-        res = self_with_context._product_available()
-        for product in self:
-            product.qty_expired = res[product.id]['qty_available']
-            product.outgoing_expired_qty = res[product.id]['outgoing_qty']
-
-    @api.multi
     def action_open_expired_quants(self):
         action = self.env.ref('stock.product_open_quants').read()[0]
         domain = [
