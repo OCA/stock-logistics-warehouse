@@ -6,8 +6,8 @@
 from openerp.tests import common
 
 
-class TestProductOrderLocationByQty(common.TransactionCase):
-    def test_product_order_location_by_qty(self):
+class TestProductLocationSortedByQty(common.TransactionCase):
+    def test_product_location_sorted_by_qty(self):
         product_ipad = self.browse_ref(
             'product.product_product_4')
         location_shelf1 = self.browse_ref(
