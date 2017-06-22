@@ -17,9 +17,9 @@ Installation
 This module relies on:
 
 * The OCA module '2D matrix for x2many fields', and can be downloaded from
-  Github: https://github.com/OCA/web/tree/9.0/web_widget_x2many_2d_matrix
+  Github: https://github.com/OCA/web/tree/10.0/web_widget_x2many_2d_matrix
 * The OCA module 'Date Range', and can be downloaded from
-  Github: https://github.com/OCA/server-tools/tree/9.0/date_range
+  Github: https://github.com/OCA/server-tools/tree/10.0/date_range
 
 
 Usage
@@ -36,7 +36,7 @@ estimates created.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/9.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 Bug Tracker
 ===========

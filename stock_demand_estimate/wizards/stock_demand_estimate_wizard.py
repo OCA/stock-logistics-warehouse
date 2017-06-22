@@ -80,7 +80,7 @@ class StockDemandEstimateSheet(models.TransientModel):
     line_ids = fields.Many2many(
         string="Estimates",
         comodel_name='stock.demand.estimate.sheet.line',
-        rel='stock_demand_estimate_line_rel',
+        relation='stock_demand_estimate_line_rel',
         default=_default_estimate_ids)
 
     @api.model
@@ -149,6 +149,15 @@ class DemandEstimateWizard(models.TransientModel):
     product_ids = fields.Many2many(
         comodel_name="product.product",
         string="Products")
+
+    @api.onchange('date_range_type_id')
+    def _onchange_date_range_type_id(self):
+        if self.date_range_type_id.company_id:
+            return {
+                'domain': {
+                    'location_id': [('company_id', '=',
+                                     self.date_range_type_id.company_id.id)]}}
+        return {}
 
     @api.one
     @api.constrains('date_start', 'date_end')
