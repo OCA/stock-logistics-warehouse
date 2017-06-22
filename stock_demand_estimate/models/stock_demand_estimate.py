@@ -4,9 +4,9 @@
 # © 2016 Aleph Objects, Inc. (https://www.alephobjects.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models, _
-import openerp.addons.decimal_precision as dp
-from openerp.exceptions import Warning as UserError
+from odoo import api, fields, models, _
+import odoo.addons.decimal_precision as dp
+from odoo.exceptions import Warning as UserError
 
 
 class StockDemandEstimate(models.Model):
@@ -15,14 +15,14 @@ class StockDemandEstimate(models.Model):
 
     @api.multi
     @api.depends('product_id', 'product_uom', 'product_uom_qty')
-    def _compute_product_qty(self):
+    def _compute_product_quantity(self):
         for rec in self:
             if rec.product_uom:
-                rec.product_qty = rec.product_uom._compute_qty(
-                    rec.product_id.uom_id.id, rec.product_uom_qty,
-                    rec.product_uom.id)
+                rec.product_qty = rec.product_uom._compute_quantity(
+                    rec.product_uom_qty,
+                    rec.product_id.uom_id)
 
-    def _inverse_product_qty(self):
+    def _inverse_product_quantity(self):
         raise UserError(_('The requested operation cannot be '
                           'processed because of a programming error '
                           'setting the `product_qty` field instead '
@@ -45,9 +45,10 @@ class StockDemandEstimate(models.Model):
                                   string="Location", required=True)
     product_uom_qty = fields.Float(
         string="Quantity",
-        digits_compute=dp.get_precision('Product Unit of Measure'))
-    product_qty = fields.Float('Real Quantity', compute='_compute_product_qty',
-                               inverse='_inverse_product_qty', digits=0,
+        digits=dp.get_precision('Product Unit of Measure'))
+    product_qty = fields.Float('Real Quantity',
+                               compute='_compute_product_quantity',
+                               inverse='_inverse_product_quantity', digits=0,
                                store=True,
                                help='Quantity in the default UoM of the '
                                     'product', readonly=True)
