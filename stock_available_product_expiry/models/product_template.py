@@ -12,7 +12,7 @@ class ProductTemplate(models.Model):
 
     qty_expired = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_compute_expired_qty',
+        compute='_compute_quantities',
         string='Expired',
         help="Stock for this Product that must be removed from the stock. "
              "This stock is no more available for sale to Customers.\n"
@@ -22,7 +22,7 @@ class ProductTemplate(models.Model):
     )
     outgoing_expired_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_compute_expired_qty',
+        compute='_compute_quantities',
         string='Expired Outgoing',
         help="Quantity of products that are planned to leave but which should "
              "be removed from the stock since these are expired."
@@ -32,12 +32,14 @@ class ProductTemplate(models.Model):
     )
 
     @api.multi
-    def _compute_expired_qty(self):
-        self_with_context = self.with_context(compute_expired_only=True)
-        res = self_with_context._compute_quantities_dict()
-        for product in self:
-            product.qty_expired = res[product.id]['qty_available']
-            product.outgoing_expired_qty = res[product.id]['outgoing_qty']
+    def _compute_quantities(self):
+        res = super(ProductTemplate, self)._compute_quantities()
+        for template in self:
+            variants = template.product_variant_ids
+            template.qty_expired = sum(variants.mapped('qty_expired'))
+            template.outgoing_expired_qty = sum(
+                variants.mapped('outgoing_expired_qty'))
+        return res
 
     @api.model
     def _must_check_expired_lots(self):

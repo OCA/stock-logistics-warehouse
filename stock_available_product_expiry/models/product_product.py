@@ -65,13 +65,14 @@ class ProductProduct(models.Model):
 
     @api.multi
     def _get_expired_quants_domain(self, removal_date=None):
-        """ Compute the domain used to retrieved all the quants in
-        stock and reserved for an outgoing move an for an expired stock
+        """ Compute the domain used to retrieve all the quants in
+        stock and reserved for an outgoing move and for an expired stock
         production lot
         :return: quant_domain, quant_out_domain
         """
+        from_date = self.env.context.get('from_date', removal_date)
         self_with_context = self.with_context(
-            compute_expired_only=True, from_date=removal_date)
+            compute_expired_only=True, from_date=from_date)
         quant_domain, move_in_domain, move_out_domain = \
             self_with_context._get_domain_locations()
         quant_out_domain = copy.copy(quant_domain)
