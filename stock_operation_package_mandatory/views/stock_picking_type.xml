@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+<data>
+    <record model="ir.ui.view" id="stock_picking_type_form_view">
+        <field name="name">stock.picking.type.form (in stock_operation_package_mandatory)</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <field name="show_entire_packs" position="after">
+                <field name="destination_package_mandatory" groups="stock.group_tracking_lot"/>
+            </field>
+        </field>
+    </record>
+</data>
+</odoo>
