@@ -5,7 +5,7 @@
 {
     "name": "Stock Demand Estimate",
     "summary": "Allows to create demand estimates.",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://www.odoo-community.org",
