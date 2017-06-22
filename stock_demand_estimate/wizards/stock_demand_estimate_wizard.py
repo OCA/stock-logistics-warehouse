@@ -4,9 +4,9 @@
 # © 2016 Aleph Objects, Inc. (https://www.alephobjects.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models, _
-import openerp.addons.decimal_precision as dp
-from openerp.exceptions import UserError, ValidationError
+from odoo import api, fields, models, _
+import odoo.addons.decimal_precision as dp
+from odoo.exceptions import UserError, ValidationError
 
 
 class StockDemandEstimateSheet(models.TransientModel):
@@ -80,7 +80,7 @@ class StockDemandEstimateSheet(models.TransientModel):
     line_ids = fields.Many2many(
         string="Estimates",
         comodel_name='stock.demand.estimate.sheet.line',
-        rel='stock_demand_estimate_line_rel',
+        relation='stock_demand_estimate_line_rel',
         default=_default_estimate_ids)
 
     @api.model
@@ -132,7 +132,7 @@ class StockDemandEstimateSheetLine(models.TransientModel):
     value_x = fields.Char(string='Period')
     value_y = fields.Char(string='Product')
     product_uom_qty = fields.Float(
-        string="Quantity", digits_compute=dp.get_precision('Product UoM'))
+        string="Quantity", digits=dp.get_precision('Product UoM'))
 
 
 class DemandEstimateWizard(models.TransientModel):
@@ -149,6 +149,15 @@ class DemandEstimateWizard(models.TransientModel):
     product_ids = fields.Many2many(
         comodel_name="product.product",
         string="Products")
+
+    @api.onchange('date_range_type_id')
+    def _onchange_date_range_type_id(self):
+        if self.date_range_type_id.company_id:
+            return {
+                'domain': {
+                    'location_id': [('company_id', '=',
+                                     self.date_range_type_id.company_id.id)]}}
+        return {}
 
     @api.one
     @api.constrains('date_start', 'date_end')
