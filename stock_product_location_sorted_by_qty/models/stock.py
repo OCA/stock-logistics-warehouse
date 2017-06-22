@@ -13,7 +13,7 @@ class StockLocation(models.Model):
     def name_search(self, name=None, args=None, operator='ilike', limit=100):
         context = self.env.context
         res = super(StockLocation, self).name_search(
-            name=name, args=args, operator=operator, limit=None)
+            name=name, args=args, operator=operator, limit=limit)
         filtered_loc_list = []
         if context.get('stock_change_product_quantity', False):
             domain = [
@@ -25,8 +25,8 @@ class StockLocation(models.Model):
                 domain, ['location_id', 'qty'], 'location_id',
                 orderby='qty desc')
             for elm in quants:
+                filtered_loc_list.append(elm['location_id'])
                 if elm['location_id'] in res:
-                    filtered_loc_list.append(elm['location_id'])
                     index = res.index(elm['location_id'])
                     del res[index]
             res = filtered_loc_list + res
@@ -43,9 +43,7 @@ class StockLocation(models.Model):
                     ('product_id', '=', self._context.get(
                         'default_product_id', False))
                 ])
-                qty = 0
-                for quant in quants:
-                    qty += quant.qty
+                qty = sum([quant.qty for quant in quants])
                 names.append((elm[0], elm[1] + ' (%s)' % qty))
             res = names
         return res
