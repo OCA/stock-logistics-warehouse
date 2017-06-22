@@ -153,3 +153,15 @@ class TestProductProduct(common.TransactionCase):
             stock_scrap_expired.unlink()
         with self.assertRaises(UserError):
             line.unlink()
+
+    def test_unlink_draft(self):
+        stock_scrap_expired_obj = self.env['stock.scrap.expired']
+        # create a scrap for today and all the default values
+        stock_scrap_expired = stock_scrap_expired_obj.create({})
+        self.assertFalse(stock_scrap_expired.stock_scrap_expired_line_ids)
+        # The list of product to scrap is computed by the onchange
+        stock_scrap_expired._onchange_removal_date_location_id()
+        line = stock_scrap_expired.stock_scrap_expired_line_ids
+        self.assertEqual(1, len(line))
+        stock_scrap_expired.unlink()
+        self.assertFalse(stock_scrap_expired.exists())

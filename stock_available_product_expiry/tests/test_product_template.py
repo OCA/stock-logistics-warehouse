@@ -72,7 +72,10 @@ class TestProductProduct(common.TransactionCase):
         inventory.action_done()
 
     def test_product_template_expiry(self):
-        # check quantity  on tempalte
+        # Check check expired
+        self.assertTrue(self.product_template.check_expired_lots)
+
+        # check quantity  on template
         # today
         self.assertEqual(self.product_template.qty_available, 10.0)
         self.assertEqual(self.product_template.qty_expired, 20.0)
