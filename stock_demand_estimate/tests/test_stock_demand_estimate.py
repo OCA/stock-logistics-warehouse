@@ -2,9 +2,9 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp.tests import common
+from odoo.tests import common
 from dateutil.rrule import MONTHLY
-from openerp.exceptions import ValidationError
+from odoo.exceptions import ValidationError
 
 
 class TestStockDemandEstimate(common.TransactionCase):
