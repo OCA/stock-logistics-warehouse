@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_move_partner_info
+# 
+# Translators:
+# Oihane Crucelaegui <oihanecruce@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: odoomrp-utils (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-08 08:45+0000\n"
+"PO-Revision-Date: 2015-09-11 12:42+0000\n"
+"Last-Translator: Oihane Crucelaegui <oihanecruce@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/odoomrp-utils-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_move_partner_info
+#: help:stock.move,picking_partner:0
+msgid "Partner of the picking"
+msgstr "Empresa del albarán"
+
+#. module: stock_move_partner_info
+#: view:stock.move:stock_move_partner_info.view_move_search_inh_pickingpartner
+#: field:stock.move,picking_partner:0
+msgid "Picking Partner"
+msgstr "Cliente/Proveedor albarán"
+
+#. module: stock_move_partner_info
+#: view:stock.move:stock_move_partner_info.view_move_search_inh_pickingpartner
+msgid "Product"
+msgstr "Producto"
+
+#. module: stock_move_partner_info
+#: model:ir.model,name:stock_move_partner_info.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
