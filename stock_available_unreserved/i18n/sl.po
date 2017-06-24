@@ -3,14 +3,13 @@
 # * stock_available_unreserved
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 03:58+0000\n"
-"PO-Revision-Date: 2017-03-04 03:58+0000\n"
+"POT-Creation-Date: 2017-06-23 00:57+0000\n"
+"PO-Revision-Date: 2017-06-23 00:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:137
+#: code:addons/stock_available_unreserved/models/product.py:135
 #, python-format
 msgid " On Hand"
 msgstr "Na voljo"

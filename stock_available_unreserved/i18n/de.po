@@ -4,14 +4,13 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 03:01+0000\n"
-"PO-Revision-Date: 2017-04-26 03:01+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"POT-Creation-Date: 2017-06-23 00:57+0000\n"
+"PO-Revision-Date: 2017-06-23 00:57+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:137
+#: code:addons/stock_available_unreserved/models/product.py:135
 #, python-format
 msgid " On Hand"
 msgstr "Verfügbar"
