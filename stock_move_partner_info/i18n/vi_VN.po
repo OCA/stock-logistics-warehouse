@@ -11,19 +11,19 @@ msgstr ""
 "POT-Creation-Date: 2017-06-24 03:04+0000\n"
 "PO-Revision-Date: 2017-06-24 03:04+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language-Team: Vietnamese (Viet Nam) (https://www.transifex.com/oca/teams/23907/vi_VN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: vi_VN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: stock_move_partner_info
 #: model:ir.ui.view,arch_db:stock_move_partner_info.view_move_search_inh_pickingpartner
 msgid "Picking Partner"
-msgstr "Cliente/Proveedor albarán"
+msgstr ""
 
 #. module: stock_move_partner_info
 #: model:ir.model,name:stock_move_partner_info.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de existencias"
+msgstr "Dịch chuyển kho"
