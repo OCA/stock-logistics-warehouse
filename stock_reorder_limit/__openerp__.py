@@ -10,6 +10,7 @@
     "license": "AGPL-3",
     "version": "8.0.1.0.0",
     "depends": [
+        "purchase",
         "stock",
     ],
     "data": [
