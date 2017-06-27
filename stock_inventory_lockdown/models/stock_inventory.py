@@ -27,9 +27,3 @@ class StockInventory(models.Model):
         if locations_ids:
             location_domain.append(('location_id', 'child_of', locations_ids))
         return self.env['stock.location'].search(location_domain)
-
-    @api.multi
-    def action_done(self):
-        """Add value in the context to ignore the lockdown"""
-        return super(StockInventory,
-                     self.with_context(bypass_lockdown=True)).action_done()
