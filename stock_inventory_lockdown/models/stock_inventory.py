@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2013-2016 Numérigraphe SARL
+# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, api
@@ -27,9 +29,3 @@ class StockInventory(models.Model):
         if locations_ids:
             location_domain.append(('location_id', 'child_of', locations_ids))
         return self.env['stock.location'].search(location_domain)
-
-    @api.multi
-    def action_done(self):
-        """Add value in the context to ignore the lockdown"""
-        return super(StockInventory,
-                     self.with_context(bypass_lockdown=True)).action_done()
