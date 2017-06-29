@@ -16,54 +16,35 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     @api.multi
-    def _product_available(self, field_names=None, arg=False):
-        res = super(ProductProduct, self)._product_available(
-            field_names=field_names, arg=arg)
-        for prod_id in res:
-            res[prod_id]['immediately_usable_qty'] = res[prod_id][
-                'virtual_available']
-            res[prod_id]['potential_qty'] = 0.0
-
+    def _compute_available_quantities_dict(self):
+        res = {}
+        for product in self:
+            res[product.id] = {}
+            res[product.id]['immediately_usable_qty'] = \
+                product.virtual_available
+            res[product.id]['potential_qty'] = 0.0
         return res
 
     @api.multi
     @api.depends('virtual_available')
-    def _compute_immediately_usable_qty(self):
-        """No-op implementation of the stock available to promise.
-
-        By default, available to promise = forecasted quantity.
-
-        **Each** sub-module **must** override this method in **both**
-            `product.product` **and** `product.template`, because we can't
-            decide in advance how to compute the template's quantity from the
-            variants.
-        """
-        res = self._product_available()
-        for prod in self:
-            prod.immediately_usable_qty = res[prod.id][
-                'immediately_usable_qty']
-
-    @api.multi
-    @api.depends()
-    def _compute_potential_qty(self):
-        """Set potential qty to 0.0 to define the field defintion used by
-        other modules to inherit it
-        """
-        res = self._product_available()
-        for prod in self:
-            prod.immediately_usable_qty = res[prod.id][
-                'potential_qty']
+    def _compute_available_quantities(self):
+        res = self._compute_available_quantities_dict()
+        for product in self:
+            data = res[product.id]
+            for key, value in data.iteritems():
+                if hasattr(product, key):
+                    product[key] = value
 
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
-        compute='_compute_immediately_usable_qty',
+        compute='_compute_available_quantities',
         string='Available to promise',
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"
              "The definition of this value can be configured to suit "
              "your needs")
     potential_qty = fields.Float(
-        compute='_compute_potential_qty',
+        compute='_compute_available_quantities',
         digits=dp.get_precision('Product Unit of Measure'),
         string='Potential',
         help="Quantity of this Product that could be produced using "
