@@ -41,6 +41,7 @@ Contributors
 * Sébastien BEAU (Akretion) <sebastien.beau@akretion.com>
 * Lionel Sausin (Numérigraphe) <ls@numerigraphe.com>
 * Sodexis <sodexis@sodexis.com>
+* Cédric Pigeon <cedric.pigeon@acsone.eu>
 
 Maintainer
 ----------
