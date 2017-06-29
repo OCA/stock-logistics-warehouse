@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        <record id="config_turnover_period" model="ir.config_parameter">
+            <field name="key">default_turnover_period</field>
+            <field name="value">365</field>
+        </record>
+
+        <record id="config_default_period_min" model="ir.config_parameter">
+            <field name="key">default_period_min</field>
+            <field name="value">91</field>
+        </record>
+
+        <record id="config_default_period_max" model="ir.config_parameter">
+            <field name="key">default_period_max</field>
+            <field name="value">185</field>
+        </record>
+
+        <record id="config_default_purchase_multiple" model="ir.config_parameter">
+            <field name="key">default_purchase_multiple</field>
+            <field name="value">1.0</field>
+        </record>
+    </data>
+</openerp>
