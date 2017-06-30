@@ -13,7 +13,11 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
+<<<<<<< HEAD
    :target: https://runbot.odoo-community.org/runbot/153/10.0
+=======
+   :target: https://runbot.odoo-community.org/runbot/153/9.0
+>>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
 
 Bug Tracker
 ===========
@@ -35,7 +39,10 @@ Contributors
 ------------
 
 * Miquel Raïch <miquel.raich@eficent.com>
+<<<<<<< HEAD
 * Reynaldi Yosfino <reynaldiyosfino@gmail.com>
+=======
+>>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
 
 Maintainer
 ----------

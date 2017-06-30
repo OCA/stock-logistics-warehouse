@@ -61,7 +61,11 @@ msgstr ""
 
 #. module: stock_inventory_chatter
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
+<<<<<<< HEAD
 msgid "Inventory Cancelled"
+=======
+msgid "Inventory Canceled"
+>>>>>>> 02bcc47... OCA Transbot updated translations from Transifex
 msgstr ""
 
 #. module: stock_inventory_chatter

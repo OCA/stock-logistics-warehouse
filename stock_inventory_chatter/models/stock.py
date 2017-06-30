@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 """Docstring models stock."""
+=======
+# -*- coding: utf-8 -*-
+>>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+<<<<<<< HEAD
 from odoo import api, fields, models
 
 
@@ -11,11 +16,23 @@ class StockInventory(models.Model):
 
     _name = 'stock.inventory'
     _inherit = ['stock.inventory', 'mail.thread']
+=======
+from openerp import api, fields, models
+
+
+class StockInventory(models.Model):
+    _name = 'stock.inventory'
+    _inherit = ['stock.inventory', 'mail.thread', 'ir.needaction_mixin']
+>>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
 
     partner_id = fields.Many2one(track_visibility='always')
     state = fields.Selection(track_visibility='onchange')
     location_id = fields.Many2one(track_visibility='always')
+<<<<<<< HEAD
     filter = fields.Selection(track_visibility='onchange') 
+=======
+    filter = fields.Selection(track_visibility='onchange')
+>>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
 
     @api.multi
     def _track_subtype(self, init_values):
