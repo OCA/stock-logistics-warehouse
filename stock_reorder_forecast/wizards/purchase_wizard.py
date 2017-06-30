@@ -13,6 +13,14 @@ class PurchaseWizard(models.TransientModel):
     _name = "purchase.purchase_wizard"
     _description = "wizard create proposal purchase"
 
+    @staticmethod
+    def _get_supplier_price(product_qty, supplier):
+        price_unit = 0
+        for pricelist_id in supplier.pricelist_ids:
+            if product_qty >= pricelist_id.min_quantity:
+                price_unit = pricelist_id.price
+        return price_unit
+
     @api.model
     def default_get(self, fields_list):
         """At start partner_id is to be taken from active_id,
@@ -82,13 +90,22 @@ class PurchaseWizard(models.TransientModel):
         pol_model = self.env["purchase.order.line"]
         date_order = date.today().strftime(DSDF)
         qty = self._get_qty(product, self.supplier, self.stock_period_max)
+        stock_location_id = self.env['stock.location'].search(
+            [], limit=1)
+        pricelist_id = self.env['product.pricelist'].search(
+            [], limit=1)
         if qty > 0:
             order_vals = {
                 "partner_id": self.supplier.name.id,
                 "origin": "purchase proposal",
-                "date_order": date_order, }
+                "date_order": date_order,
+                "location_id": stock_location_id.id,
+                "pricelist_id": pricelist_id.id,
+                "name": "TESTPOTMPL",
+                "invoice_method": "manual",
+            }
             purchase_order = po_model.create(order_vals)
-            purchase_order.onchange_partner_id()
+            purchase_order.onchange_partner_id(self.supplier.name.id)
             line_vals = {
                 'name': 'Resupply of %s' % product.name,
                 'product_id': product.id,
@@ -96,15 +113,19 @@ class PurchaseWizard(models.TransientModel):
                 'product_qty': 1,
                 'order_id': purchase_order.id,
                 'date_planned': ultimate_purchase_to or datetime.today(),
-                'price_unit': self.supplier.price
+                'price_unit': self._get_supplier_price(1, self.supplier)
             }
             pol = pol_model.create(line_vals)
-            pol.onchange_product_id()
+            pol.onchange_product_id(pricelist_id.id, product.id, 1,
+                                    product.uom_id.id,
+                                    purchase_order.partner_id.id,
+                                    )
             pol.write({'product_qty':qty})
-            pol._compute_amount()
+            #pol._compute_amount()
+            purchase_order._amount_all(field_name=None, arg=None)
             # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
             product.write({"ultimate_purchase": False})
-            purchase_order.onchange_partner_id()
+            purchase_order.onchange_partner_id(self.supplier.name.id)
             return purchase_order
         return False
 

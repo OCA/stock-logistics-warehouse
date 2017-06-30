@@ -32,7 +32,8 @@ class PurchaseOrderLine(models.Model):
             [('key', '=', 'default_purchase_multiple')])[0].value)
 
     @api.onchange('product_id')
-    def onchange_product_id(self):
+    def onchange_product_id(self, pricelist_id, product_id, qty, uom_id,
+                            partner_id, ):
         #  This will trigger also _onchange_quantity and _suggest_quantity
         #  Because of the purchase proposal we calculate the qty when set to 0"
         if self.product_qty == 0 and self.product_id:
@@ -48,4 +49,5 @@ class PurchaseOrderLine(models.Model):
                 (qty + purchase_multiple - 1) /
                 purchase_multiple
             ) * purchase_multiple
-        super(PurchaseOrderLine, self).onchange_product_id()
+        super(PurchaseOrderLine, self).onchange_product_id(
+            pricelist_id, product_id, partner_id, qty, uom_id)

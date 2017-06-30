@@ -20,7 +20,7 @@ class ResPartner(models.Model):
             (SELECT MIN(PP.ultimate_purchase)
                  FROM product_supplierinfo PS
                  JOIN product_product PP
-                 ON PS.product_id = PP.id AND PS.sequence = 1
+                 ON PS.product_tmpl_id = PP.product_tmpl_id AND PS.sequence = 1
                  AND PP.active AND NOT PP.ultimate_purchase IS NULL
              WHERE PS.name = RP.id),
              write_date = NOW() AT TIME ZONE 'UTC', write_uid = %s
@@ -58,17 +58,18 @@ class ResPartner(models.Model):
     @api.multi
     def _compute_product_supplierinfo(self):
         """given a partner, return a list of all products it provides"""
-        self.env.cr.execute(
-            """with templates as (
-                 select name, product_tmpl_id as T from product_supplierinfo
-                 where name in %s
-               )
-               select templates.name, array_agg(id)  from product_product  
-               inner join templates on (
-                    product_product.product_tmpl_id = templates.T
-                ) group by templates.name
-            """, (tuple(self.ids),)
-        )
+        if self.ids:
+            self.env.cr.execute(
+                """with templates as (
+                     select name, product_tmpl_id as T from product_supplierinfo
+                     where name in %s
+                   )
+                   select templates.name, array_agg(id)  from product_product  
+                   inner join templates on (
+                        product_product.product_tmpl_id = templates.T
+                    ) group by templates.name
+                """, (tuple(self.ids),)
+            )
         partner2products = dict(self.env.cr.fetchall())
         for this in self:
             if this.id in partner2products.keys():

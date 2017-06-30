@@ -99,7 +99,7 @@ partner.
    :target: https://runbot.odoo-community.org/runbot/{repo_id}/{branch}
 
 .. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
-.. branch is "9.0" for example
+.. branch is "8.0" for example
 
 
 Known issues / Roadmap
@@ -143,6 +143,7 @@ Contributors
 * Holger Brunn <hbrunn@therp.nl>
 * Hans Van Dijk <hvd400@gmail.com>
 * Ronald Portier <rportier@therp.nl>
+* George Daramouskas <gdaramouskas@therp.nl>
 
 Funders
 -------

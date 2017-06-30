@@ -79,7 +79,7 @@ class TestWizards(TransactionCase):
         self.assertEqual(False, res['ultimate_purchase'])
         self.assertEqual(0.0, res['stock_avl'])
         # product ultimate purchase should be false now,
-        so1.action_confirm()
+        so1.action_button_confirm()
         self.product_obj.calc_purchase_date()
         # testing update_proposal
         self.assertEqual(

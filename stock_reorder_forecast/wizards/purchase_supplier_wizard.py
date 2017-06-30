@@ -5,6 +5,7 @@
 from datetime import date, datetime
 from openerp import api, fields, models
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DSDF
+from purchase_wizard import PurchaseWizard
 
 
 class PurchaseSupplierWizard(models.TransientModel):
@@ -65,13 +66,21 @@ class PurchaseSupplierWizard(models.TransientModel):
         po_model = self.env["purchase.order"]
         date_order = date.today().strftime(DSDF)
         supplier_id = int(self.name)
+        stock_location_id = self.env['stock.location'].search(
+            [], limit=1)
+        pricelist_id = self.env['product.pricelist'].search(
+            [], limit=1)
         order_vals = {
             "partner_id": supplier_id,
             "origin": "Batch resupply from supplier form",
-            "date_order": date_order, }
+            "date_order": date_order, 
+            "location_id": stock_location_id.id,
+            "pricelist_id": pricelist_id.id,
+            "invoice_method": "manual",
+            }
         purchase_order = po_model.create(order_vals)
         # this will give us the fiscal position automatically
-        purchase_order.onchange_partner_id()
+        purchase_order.onchange_partner_id(supplier_id)
         products = self.env['res.partner'].browse(supplier_id).product_ids
         if self.primary_supplier_only:
             products =self.env['res.partner'].browse(
@@ -98,17 +107,21 @@ class PurchaseSupplierWizard(models.TransientModel):
                     'order_id': purchase_order.id,
                     'date_planned':
                         self.ultimate_purchase_to or datetime.today(),
-                    'price_unit': supplier.price
+                    'price_unit': PurchaseWizard._get_supplier_price(
+                        qty, supplier)
                 }
                 pol = pol_model.create(line_vals)
-                pol.onchange_product_id()
-                
+                pol.onchange_product_id(pricelist_id.id, product.id, 1,
+                                        product.uom_id.id,
+                                        purchase_order.partner_id.id,
+                                        )
                 # onchange product will auto
                 # suggest a quantity we will rectify it after writing quantity.
                 # we need to do this to get all our tax calculations/ fiscal
                 # positions correct.
                 pol.write({'product_qty':qty})
-                pol._compute_amount()
+                #pol._compute_amount()
+                purchase_order._amount_all(field_name=None, arg=None)
                 # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
                 product.write({"ultimate_purchase": False})
         if empty_po:
@@ -116,7 +129,7 @@ class PurchaseSupplierWizard(models.TransientModel):
             purchase_order.unlink()
             return None
         else:
-            purchase_order.onchange_partner_id()
+            purchase_order.onchange_partner_id(supplier_id)
             return purchase_order
 
     name = fields.Many2one(
@@ -132,7 +145,9 @@ class PurchaseSupplierWizard(models.TransientModel):
         string="Products supplied by this partner as primary",
     )
     ultimate_purchase = fields.Date("ultimate purchase")
-    pending_rfq_lines = fields.Many2many("purchase.order.line")
+    pending_rfq_lines = fields.Many2many(
+        "purchase.order.line",
+        relation='purchase_supplier_wizard_purchase_order_line_rel')
     stock_period_min = fields.Integer(
         string="Delivery period",
         readonly="1",

@@ -277,7 +277,7 @@ class TestStockReorderForecast(TransactionCase):
         self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template2').id,
-            'product_id': self.product_period90.id,
+            'product_tmpl_id': self.product_period90.product_tmpl_id.id,
             'name': new_supplier.name.id,
             'delay': 1,
             'min_qty': 1,
@@ -290,7 +290,7 @@ class TestStockReorderForecast(TransactionCase):
         self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template2').id,
-            'product_id': self.product_period180.id,
+            'product_tmpl_id': self.product_period180.product_tmpl_id.id,
             'name': new_supplier.name.id,
             'delay': 1,
             'min_qty': 1,
@@ -301,7 +301,7 @@ class TestStockReorderForecast(TransactionCase):
         self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template2').id,
-            'product_id': self.product_period180.id,
+            'product_tmpl_id': self.product_period180.product_tmpl_id.id,
             'name': self.supplier1.name.id,
             'delay': 1,
             'min_qty': 1,
@@ -320,7 +320,7 @@ class TestStockReorderForecast(TransactionCase):
         self.env['product.supplierinfo'].create({
             'product_tmpl_id': self.env.ref(
                 'stock_reorder_forecast.product_template1').id,
-            'product_id': self.product_noper.id,
+            'product_tmpl_id': self.product_noper.product_tmpl_id.id,
             'name': new_supplier.name.id,
             'delay': 1,
             'min_qty': 1,

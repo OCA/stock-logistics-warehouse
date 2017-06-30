@@ -53,7 +53,6 @@
 
         <record id="product_supplierinfo_1" model="product.supplierinfo">
             <field name="product_tmpl_id" ref="product_template1"/>
-            <field name="product_id" ref="product_noper"/>
             <field name="name" ref="base.res_partner_1"/>
             <field name="delay">2</field>
             <field name="min_qty">1</field>
@@ -61,7 +60,6 @@
 
         <record id="product_supplierinfo_2" model="product.supplierinfo">
             <field name="product_tmpl_id" ref="product_template2"/>
-            <field name="product_id" ref="product_period90"/>
             <field name="name" ref="base.res_partner_4"/>
             <field name="delay">1</field>
             <field name="min_qty">1</field>
@@ -69,7 +67,6 @@
 
         <record id="product_supplierinfo_3" model="product.supplierinfo">
             <field name="product_tmpl_id" ref="product_template3"/>
-            <field name="product_id" ref="product_period180"/>
             <field name="name" ref="base.res_partner_3"/>
             <field name="delay">1</field>
             <field name="min_qty">1</field>
@@ -89,7 +86,6 @@
 
         <record id="product_supplierinfo_new" model="product.supplierinfo">
             <field name="product_tmpl_id" ref="product_template3"/>
-            <field name="product_id" ref="product_period180"/>
             <field name="name" ref="partner_new_forsupply"/>
             <field name="delay">1</field>
             <field name="min_qty">1</field>

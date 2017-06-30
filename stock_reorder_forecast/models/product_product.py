@@ -132,7 +132,7 @@ class ProductProduct(models.Model):
                 FROM product_product PP
                 JOIN product_template PT ON PP.product_tmpl_id = PT.id
                 LEFT JOIN product_supplierinfo PS
-                ON PS.product_id = PP.id
+                ON PS.product_tmpl_id = PP.product_tmpl_id
                 LEFT JOIN res_partner RP ON RP.id = PS.name AND RP.active
                 LEFT JOIN product_category PC ON PC.id = PT.categ_id
                 WHERE PP.active

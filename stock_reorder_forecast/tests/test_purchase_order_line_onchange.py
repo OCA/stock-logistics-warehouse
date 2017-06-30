@@ -20,6 +20,8 @@ class TestOnchangeProductId(TransactionCase):
         self.product_model = self.env['product.product']
         self.product_uom_model = self.env['product.uom']
         self.supplierinfo_model = self.env["product.supplierinfo"]
+        self.stock_location_model = self.env['stock.location']
+        self.product_pricelist_model = self.env['product.pricelist']
 
     def test_onchange_product_purchase_line(self):
         # get uom
@@ -54,18 +56,25 @@ class TestOnchangeProductId(TransactionCase):
 
         supplier_new = self.supplierinfo_model.create({
             'name': partner_id.id,
-            'price': 900.0,
+            'product_tmpl_id': product_tmpl_id.id,
         })
         product_id = self.product_model.create(
             {'product_tmpl_id': product_tmpl_id.id,
              'seller_ids': [(6, 0, [supplier_new.id])], }
         )
+        stock_location_id = self.stock_location_model.search(
+            [], limit=1)
+        pricelist_id = self.product_pricelist_model.search(
+            [], limit=1)
         # supplier
         # create a purchase order, quantity 0.0 to trigger main branch of
         # onchange method
         purchase_order = self.po_model.create({
             'partner_id': partner_id.id,
-            'fiscal_position_id': fp_id.id,
+            'location_id': stock_location_id.id,
+            'pricelist_id': pricelist_id.id,
+            'name': 'TESTPOTMPL',
+            'invoice_method': 'manual',
         })
         orderline = self.po_line_model.create(
             {'order_id': purchase_order.id,
@@ -99,5 +108,7 @@ class TestOnchangeProductId(TransactionCase):
         self.assertEqual(
             3, orderline._get_stock_period_max()
         )
-        orderline.onchange_product_id()
+        orderline.onchange_product_id(
+            pricelist_id.id, product_id.id,
+            orderline.product_qty, uom_id.id, partner_id.id)
         self.assertEqual(1.0, orderline.product_qty)
