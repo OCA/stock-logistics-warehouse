@@ -165,3 +165,40 @@ class TestProductProduct(common.TransactionCase):
         self.assertEqual(1, len(line))
         stock_scrap_expired.unlink()
         self.assertFalse(stock_scrap_expired.exists())
+
+    def test_stock_scrap_expired_reserved(self):
+        """ Try to scrap already reserved quants
+        """
+        stock_scrap_expired_obj = self.env['stock.scrap.expired']
+        # create a scrap for today and all the default values
+        stock_scrap_expired = stock_scrap_expired_obj.create({})
+        self.assertFalse(stock_scrap_expired.stock_scrap_expired_line_ids)
+        # The list of product to scrap is computed by the onchange
+        stock_scrap_expired._onchange_removal_date_location_id()
+        line = stock_scrap_expired.stock_scrap_expired_line_ids
+        self.assertEqual(1, len(line))
+        # The generated line must only reference product_2 since it's the only
+        # one expired
+        self.assertEqual(line.product_id, self.product_2)
+        self.assertEqual(line.lot_id, self.lot_2)
+        self.assertEqual(line.expected_scrap_qty, 20)
+        self.assertFalse(stock_scrap_expired.move_ids)
+
+        # We create the move that will reserve the quant
+        vals = {
+            'name': 'MOVE',
+            'location_id': self.warehouse_1.lot_stock_id.id,
+            'location_dest_id': self.ref('stock.stock_location_customers'),
+            'product_id': self.product_2.id,
+            'product_uom_qty': 20,
+            'product_uom': self.product_2.uom_id.id
+            }
+
+        move = self.env['stock.move'].create(vals)
+        move.action_confirm()
+        move.action_assign()
+        self.assertEquals('assigned', move.state)
+        # We fill in the qty to scrap
+        line.scrap_qty = 20
+        with self.assertRaises(UserError):
+            stock_scrap_expired.action_confirm()
