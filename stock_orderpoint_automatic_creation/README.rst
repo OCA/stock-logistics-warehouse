@@ -8,7 +8,7 @@ Stock Orderpoint Automatic Creation
 
 This module generates stock orderpoints automatically for a product when is
 created taking the company of the user who created the product as reference.
-Orderpoints creation can be automate from product, product category or company.
+Orderpoints creation can be automated from product, product category or company.
 
 Configuration
 =============

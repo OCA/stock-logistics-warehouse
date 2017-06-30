@@ -21,5 +21,4 @@
         "views/product_views.xml",
     ],
     "installable": True,
-    "application": True
 }
