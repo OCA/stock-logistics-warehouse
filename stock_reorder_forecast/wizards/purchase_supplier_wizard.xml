@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="wizard_create_supplier_purchase" model="ir.ui.view">
+            <field name="name">Create RFQ of all products of supplier</field>
+            <field name="model">purchase.supplier.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Create proposal purchases for all products of supplier">
+                    <group col="4" colspan="1">
+                        <field name="name"/>
+                        <field name="stock_period_min"/>
+                    </group>
+                    <group col="4" colspan="1">
+                        <field name="ultimate_purchase" readonly="1"/>
+                        <field name="ultimate_purchase_to" />
+                    </group>
+                    <group col="4" colspan="1">
+                        <field name="primary_supplier_only"/>
+                    </group> 
+                    <group col="4" colspan="1">
+                        <field 
+                            name="supplier_products_primary" 
+                            readonly="1" 
+                            attrs="{'invisible': [('primary_supplier_only', '=', False)]}"
+                            />
+                        <field 
+                            name="supplier_products" 
+                            readonly="1"
+                            attrs="{'invisible': [('primary_supplier_only', '=', True)]}"
+                            />
+                        <field name="pending_rfq_lines" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button special="cancel" string="Cancel" icon="gtk-cancel"/>
+                        <button name="create_partner_rfq" string="Create RFQ of all products for this supplier" 
+                            type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_create_supplier_purchase_act"
+            model="ir.actions.act_window" >
+            <field name="type">ir.actions.act_window</field>
+            <field name="name">Create RFQ for product</field>
+            <field name="view_type">form</field>
+            <field name="res_model">purchase.supplier.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_create_supplier_purchase"/>
+            <field name ="target">new</field>
+        </record>
+
+    </data>
+</openerp>
