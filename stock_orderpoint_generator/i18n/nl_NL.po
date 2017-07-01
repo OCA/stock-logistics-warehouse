@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-31 02:38+0000\n"
-"PO-Revision-Date: 2017-05-29 20:51+0000\n"
+"POT-Creation-Date: 2017-06-29 13:12+0000\n"
+"PO-Revision-Date: 2017-06-30 08:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_display_name
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
@@ -118,7 +118,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_id
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_active
@@ -136,7 +136,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator___last_update
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigd op"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_write_uid

@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 03:02+0000\n"
-"PO-Revision-Date: 2017-04-26 03:02+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-06-29 13:13+0000\n"
+"PO-Revision-Date: 2017-06-29 13:13+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,7 +87,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_display_name
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: stock_valuation_account_manual_adjustment
 #: selection:stock.valuation.account.manual.adjustment,state:0
@@ -97,7 +98,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_id
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_valuation_account_manual_adjustment
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:62
@@ -131,7 +132,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment___last_update
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigd op"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_uid

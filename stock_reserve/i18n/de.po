@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 03:05+0000\n"
-"PO-Revision-Date: 2017-06-24 03:05+0000\n"
+"POT-Creation-Date: 2017-06-29 13:13+0000\n"
+"PO-Revision-Date: 2017-06-29 13:13+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr "Prüft, ob diese Umlagerung reservierte Bestände hat"
 #. module: stock_reserve
 #: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
 msgid "Click to create a stock reservation."
-msgstr ""
+msgstr "Klicken, um eine neue Bestandsreservierung vorzunehmen."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_company_id

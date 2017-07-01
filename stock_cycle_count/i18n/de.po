@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2017-06-10 05:35+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-06-29 13:12+0000\n"
+"PO-Revision-Date: 2017-06-29 13:12+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,23 +23,23 @@ msgstr ""
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:67
 #, python-format
 msgid "(No description provided.)"
-msgstr ""
+msgstr "(Beschreibung nicht bereitgestellt.)"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_qty_variance_inventory_threshold
 msgid "Acceptable Inventory Quantity Variance Threshold"
-msgstr ""
+msgstr "Hinnehmbare Bestandsmengenabweichung"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory_inventory_accuracy
 msgid "Accuracy"
-msgstr ""
+msgstr "Genauigkeit"
 
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_location_form
 msgid "Accuracy Stats"
-msgstr ""
+msgstr "Genauigkeitsstatistiken"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_needaction
@@ -53,7 +54,7 @@ msgstr "Aktiv"
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "Applied in:"
-msgstr ""
+msgstr "Angewendet auf:"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_apply_in
@@ -65,7 +66,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Assigned to"
-msgstr ""
+msgstr "Zugewiesen an"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view

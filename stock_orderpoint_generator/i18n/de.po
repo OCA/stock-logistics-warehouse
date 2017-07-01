@@ -3,13 +3,14 @@
 # * stock_orderpoint_generator
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-31 02:38+0000\n"
-"PO-Revision-Date: 2017-05-29 20:54+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2017-06-29 13:12+0000\n"
+"PO-Revision-Date: 2017-06-29 20:54+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 msgid ""
 "A reordering rule will be automatically created by the scheduled action for "
 "every product in this list."
-msgstr ""
+msgstr "Eine Beschaffungsregel wird automatisch durch die geplante Aktion für jedes Produkt der Liste angelegt."
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_active
@@ -38,12 +39,12 @@ msgstr "Übernehmen"
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_product_product_auto_orderpoint_template_ids
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.product_normal_form_view
 msgid "Automatic Reordering Rules"
-msgstr ""
+msgstr "Automatische Wiederbeschaffungsregeln"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
 msgid "Automatic Rules"
-msgstr ""
+msgstr "Automatik-Regeln"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
@@ -54,7 +55,7 @@ msgstr "Abbrechen"
 #: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:40
 #, python-format
 msgid "Cannot apply because some of selected products has multiple variants."
-msgstr ""
+msgstr "Kann nicht angewendet werden, weil einige der ausgewählten Produkte unterschiedliche Varianten haben."
 
 #. module: stock_orderpoint_generator
 #: model:ir.actions.act_window,help:stock_orderpoint_generator.action_orderpoint_template

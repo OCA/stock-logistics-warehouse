@@ -3,15 +3,15 @@
 # * stock_reserve
 # 
 # Translators:
-# Mario Gielissen <mario@openworx.nl>, 2016
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 18:42+0000\n"
-"PO-Revision-Date: 2016-11-21 18:42+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-06-29 13:13+0000\n"
+"PO-Revision-Date: 2017-06-29 13:13+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -123,7 +123,7 @@ msgstr "Details"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
@@ -148,7 +148,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_propagate
@@ -169,7 +169,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigd op"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_write_uid
@@ -286,6 +286,16 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_partially_available
 msgid "Partially Available"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_picking_partner_id
+msgid "Partner of the picking"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_partner_id
+msgid "Picking Partner"
 msgstr ""
 
 #. module: stock_reserve
@@ -563,13 +573,13 @@ msgid "Total"
 msgstr "Totaal"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_partner_id
-msgid "Transfer Destination Address"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_id
+msgid "Transfer Reference"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_id
-msgid "Transfer Reference"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_type_code
+msgid "Type of Operation"
 msgstr ""
 
 #. module: stock_reserve

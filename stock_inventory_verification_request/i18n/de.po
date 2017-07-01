@@ -3,16 +3,15 @@
 # * stock_inventory_verification_request
 # 
 # Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Akim Juillerat <akim.juillerat@camptocamp.com>, 2017
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 03:01+0000\n"
-"PO-Revision-Date: 2017-04-26 03:01+0000\n"
-"Last-Translator: Akim Juillerat <akim.juillerat@camptocamp.com>, 2017\n"
+"POT-Creation-Date: 2017-06-29 13:12+0000\n"
+"PO-Revision-Date: 2017-06-29 13:12+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +27,7 @@ msgstr "Aktion erforderlich"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_responsible_id
 msgid "Assigned to"
-msgstr ""
+msgstr "Zugewiesen an"
 
 #. module: stock_inventory_verification_request
 #: selection:stock.slot.verification.request,state:0
