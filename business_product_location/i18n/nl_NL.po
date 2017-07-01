@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 01:24+0000\n"
-"PO-Revision-Date: 2017-05-30 01:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-06-30 01:19+0000\n"
+"PO-Revision-Date: 2017-06-30 01:19+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,7 +57,7 @@ msgstr ""
 #: field:business.product.location,display_name:0
 #: field:report.business_product_location.report_bpl,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: business_product_location
 #: view:website:business_product_location.report_bpl
@@ -72,7 +73,7 @@ msgstr ""
 #: field:business.product.line,id:0 field:business.product.location,id:0
 #: field:report.business_product_location.report_bpl,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: business_product_location
 #: model:ir.model,name:business_product_location.model_stock_location
@@ -84,7 +85,7 @@ msgstr ""
 #: field:business.product.location,__last_update:0
 #: field:report.business_product_location.report_bpl,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigd op"
 
 #. module: business_product_location
 #: field:business.product.line,write_uid:0
