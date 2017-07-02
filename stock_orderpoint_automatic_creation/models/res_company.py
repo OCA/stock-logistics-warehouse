@@ -26,7 +26,7 @@ class ResCompany(models.Model):
     @api.constrains('orderpoint_product_max_qty', 'orderpoint_product_min_qty')
     def _check_orderpoint_product_qty(self):
         for orderpoint in self:
-            if (orderpoint.orderpoint_product_max_qty < 0 or
-                        orderpoint.orderpoint_product_min_qty < 0):
+            if orderpoint.orderpoint_product_max_qty < 0 \
+                    or orderpoint.orderpoint_product_min_qty < 0:
                 raise exceptions.Warning(
                     _('Orderpoint product quantity cannot be negative'))
