@@ -30,9 +30,10 @@ class ResCompany(models.Model):
     @api.multi
     @api.constrains('orderpoint_product_max_qty', 'orderpoint_product_min_qty')
     def _check_orderpoint_product_qty(self):
+        rounding = self.env['decimal.precision'].precision_get('Product Price')
         for company in self:
             if float_compare(company.orderpoint_product_max_qty, 0.0,
-                             2) < 0 or float_compare(
-                    company.orderpoint_product_min_qty, 0.0, 2) < 0:
+                             rounding) < 0 or float_compare(
+                    company.orderpoint_product_min_qty, 0.0, rounding) < 0:
                 raise ValidationError(
                     _('Orderpoint product quantity cannot be negative'))
