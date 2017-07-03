@@ -34,7 +34,6 @@ class PurchaseOrderLine(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self, pricelist_id, product_id, qty, uom_id,
                             partner_id, ):
-        #  This will trigger also _onchange_quantity and _suggest_quantity
         #  Because of the purchase proposal we calculate the qty when set to 0"
         if self.product_qty == 0 and self.product_id:
             product = self.product_id

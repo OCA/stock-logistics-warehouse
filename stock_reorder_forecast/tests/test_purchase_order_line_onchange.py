@@ -71,6 +71,7 @@ class TestOnchangeProductId(TransactionCase):
         # onchange method
         purchase_order = self.po_model.create({
             'partner_id': partner_id.id,
+            'fiscal_position': fp_id.id,
             'location_id': stock_location_id.id,
             'pricelist_id': pricelist_id.id,
             'name': 'TESTPOTMPL',
@@ -111,4 +112,4 @@ class TestOnchangeProductId(TransactionCase):
         orderline.onchange_product_id(
             pricelist_id.id, product_id.id,
             orderline.product_qty, uom_id.id, partner_id.id)
-        self.assertEqual(1.0, orderline.product_qty)
+        self.assertEqual(0.0, orderline.product_qty)
