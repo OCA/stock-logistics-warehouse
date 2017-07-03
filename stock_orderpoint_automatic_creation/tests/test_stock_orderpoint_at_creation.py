@@ -56,8 +56,8 @@ class TestStockOderpointAutomaticCreation(SavepointCase):
                          'Error orderpoint quantity does not match')
         # Company set to create orderpoints
         self.env.user.company_id.create_orderpoints = True
-        self.env.user.company_id.orderpoint_product_min_qty = 10
-        self.env.user.company_id.orderpoint_product_max_qty = 50
+        self.env.user.company_id.orderpoint_product_min_qty = 10.0
+        self.env.user.company_id.orderpoint_product_max_qty = 50.0
         # A new warehouse is created. Now we have two in this company.
         self.warehouse = self.env['stock.warehouse'].create({
             'name': 'New WH',
@@ -89,4 +89,4 @@ class TestStockOderpointAutomaticCreation(SavepointCase):
 
         # Check constraint
         with self.assertRaises(exceptions.ValidationError):
-            self.env.user.company_id.orderpoint_product_min_qty = -2
+            self.env.user.company_id.orderpoint_product_min_qty = -2.0
