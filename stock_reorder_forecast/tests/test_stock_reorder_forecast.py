@@ -135,7 +135,7 @@ class TestStockReorderForecast(TransactionCase):
         )
         self.product_obj.calc_purchase_date()
         # sold 40 elements in 90 days
-        self.assertEqual(0.44, self.product_period90.turnover_average)
+        self.assertEqual(40, self.product_period90.turnover_average)
         so_old = self.sale_order_obj.create({
             'partner_id': self.partner_agrolite_id,
             'partner_invoice_id': self.partner_agrolite_id,
@@ -168,11 +168,8 @@ class TestStockReorderForecast(TransactionCase):
         # without turnover_period and verify it gets turnover_period default
         # verify that parnter associated to  supplier has no turnover_period
         self.assertEqual(False, self.supplier1.name.turnover_period)
-        # assign turnover_period to category and verify it gets that
-        self.product_noper.product_tmpl_id.categ_id.write(
-            {'turnover_period': 10}
-        )
-        self.assertEqual(10, self.product_noper._get_turnover_period())
+        # turnover period is allways 1 for a new product
+        self.assertEqual(1, self.product_noper._get_turnover_period())
         # sold 184 pieces , turnover period == product age == 1
         self.assertEqual(184, self.product_noper.turnover_average)
         # pre-date magic field create date for product_period90 (2 years)
@@ -184,23 +181,26 @@ class TestStockReorderForecast(TransactionCase):
                 self.product_noper.id
             )
         )
+        self.product_noper.write({'turnover_period': 10})
         self.product_obj.calc_purchase_date()
-        # test  _get_turnover_period
+        # test  _get_turnover_period this time it will remain 10 (old product)
         self.assertEqual(10, self.product_noper._get_turnover_period())
         # sold 184 pieces , period 10 days
+        self.product_obj.calc_purchase_date()
         self.assertEqual(18.4, self.product_noper.turnover_average)
 
         # assign turnover_period to supplier and verify it gets that
-        self.supplier1.name.write({'turnover_period': 5})
+        self.product_noper.write({'turnover_period': 5})
         self.product_obj.calc_purchase_date()
         # test  _get_turnover_period
         self.assertEqual(5, self.product_noper._get_turnover_period())
+        self.product_obj.calc_purchase_date()
         self.assertEqual(36.8, self.product_noper.turnover_average)
         # assign turnover period to product itself and veify it supercedes all
         self.product_noper.write({'turnover_period': 7})
-        self.product_obj.calc_purchase_date()
         # test  _get_turnover_period
         self.assertEqual(7, self.product_noper._get_turnover_period())
+        self.product_obj.calc_purchase_date()
         self.assertEqual(
             26.29, self.product_noper.turnover_average)
 
@@ -251,7 +251,7 @@ class TestStockReorderForecast(TransactionCase):
         self.env.cr.execute("UPDATE PURCHASE_ORDER SET STATE='cancel'")
         self.product_obj.calc_purchase_date()
         self.assertEqual(
-            (date.today() + timedelta(days=10)).strftime(
+            (date.today()).strftime(
                 DEFAULT_SERVER_DATE_FORMAT
             ),
             self.product_period180.ultimate_purchase
