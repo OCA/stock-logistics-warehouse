@@ -8,11 +8,11 @@ class ProductCategory(models.Model):
     _inherit = 'product.category'
 
     stock_period_min = fields.Integer(
-        'Minimum days of stock', help="Minimum stock in days of turnover. Used by the "
-        "purchase proposal.")
+        'Minimum days of stock', help="Minimum stock in days of turnover. "
+        "Used by the purchase proposal.")
     stock_period_max = fields.Integer(
-        'Maximium days of stock', help="Maximum stock in days turnover to resupply "
-        "for. Used by the purchase proposal.")
+        'Maximium days of stock', help="Maximum stock in days turnover to "
+        "resupply for. Used by the purchase proposal.")
     turnover_period = fields.Integer(
         'Turnover period', help="Turnover days to calculate average turnover "
         "per day. Used by the purchase proposal.")

@@ -120,8 +120,7 @@ class PurchaseWizard(models.TransientModel):
                                     product.uom_id.id,
                                     purchase_order.partner_id.id,
                                     )
-            pol.write({'product_qty':qty})
-            #pol._compute_amount()
+            pol.write({'product_qty': qty})
             purchase_order._amount_all(field_name=None, arg=None)
             # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
             product.write({"ultimate_purchase": False})

@@ -70,14 +70,16 @@ class ResPartner(models.Model):
                     ) group by templates.name
                 """, (tuple(self.ids),)
             )
-        partner2products = dict(self.env.cr.fetchall())
-        for this in self:
-            if this.id in partner2products.keys():
-                this.product_ids = partner2products[this.id]
+            partner2products = dict(self.env.cr.fetchall())
+            for this in self:
+                if this.id in partner2products.keys():
+                    this.product_ids = partner2products[this.id]
 
     stock_period_min = fields.Integer(
         'Minimum days stock',
-        help="""Minimum days of stock to hold. Used by the purchase proposal.""")
+        help="Minimum days of stock to hold. "
+        "Used by the purchase proposal."
+    )
     stock_period_max = fields.Integer(
         'Maximum days stock',
         help="""Period in days to resupply for.

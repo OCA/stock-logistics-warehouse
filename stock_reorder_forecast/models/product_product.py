@@ -13,11 +13,11 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     stock_period_max = fields.Integer(
-        'Maximium days stock', help='Maximum stock in days turnover to resupply '
-        'for. Used by the purchase proposal.')
+        'Maximium days stock', help='Maximum stock in days turnover to '
+        'resupply for. Used by the purchase proposal.')
     stock_period_min = fields.Integer(
-        'Minimium days stock', help='Miminum stock in days turnover to resupply '
-        'for. Used by the purchase proposal.')
+        'Minimium days stock', help='Miminum stock in days turnover to '
+        'resupply for. Used by the purchase proposal.')
     turnover_period = fields.Integer(
         string='Turnover period',
         help='Turnover days to calculate average '
@@ -74,7 +74,7 @@ class ProductProduct(models.Model):
                 date.today() + timedelta(days=stock_days))
 
     def _get_turnover_period(self):
-        product_age =  date.today() - datetime.strptime(
+        product_age = date.today() - datetime.strptime(
             self.create_date, DEFAULT_SERVER_DATETIME_FORMAT
         ).date()
         if not self.turnover_period:
@@ -89,8 +89,6 @@ class ProductProduct(models.Model):
     @api.model
     def calc_purchase_date(self):
         # Defauts if not specified
-        tp_default = self.env['ir.config_parameter'].search(
-            [('key', '=', 'default_turnover_period')])[0].value
         stock_per_min_default = self.env['ir.config_parameter'].search(
             [('key', '=', 'default_period_min')])[0].value
         stock_per_max_default = self.env['ir.config_parameter'].search(
@@ -145,7 +143,7 @@ class ProductProduct(models.Model):
             GROUP BY TP.product_id
         """
         self.env.cr.execute(
-            sql, 
+            sql,
             (
                 stock_per_min_default,
                 stock_per_max_default,
@@ -155,41 +153,41 @@ class ProductProduct(models.Model):
         for product_id, stock_period_min, stock_period_max in sqlresult:
             this = self.env['product.product'].browse(product_id)
             turnover_period = this._get_turnover_period()
-            #turnover_period may be 0 for new products
+            # turnover_period may be 0 for new products
             if turnover_period == 0:
                 turnover_period = 1
-            sales = self.env['sale.order'].search([
-	    ('date_order',
-	     '>=' ,
-	     date.strftime(
-		 date.today() - timedelta(days=turnover_period),
-		 DEFAULT_SERVER_DATE_FORMAT)
-	    )
-	    ])
+            sales = self.env['sale.order'].search([(
+                'date_order',
+                '>=',
+                date.strftime(
+                    date.today() - timedelta(days=turnover_period),
+                    DEFAULT_SERVER_DATE_FORMAT
+                 )
+            )])
             line_qty = self.env['sale.order.line'].search(
-		[
-		    ('product_id', '=', product_id),
-		    ('state', 'not in', ['draft', 'cancel', 'sent']),
-		    ('order_id' , 'in' , sales.ids)
-		]).mapped('product_uom_qty')
+                [
+                    ('product_id', '=', product_id),
+                    ('state', 'not in', ['draft', 'cancel', 'sent']),
+                    ('order_id', 'in', sales.ids)
+                ]).mapped('product_uom_qty')
             turnover_average = float_round(
-		    sum(line_qty)/turnover_period,
-	    self._fields['turnover_average'].digits[1]
-	    )
+                sum(line_qty)/turnover_period,
+                self._fields['turnover_average'].digits[1]
+            )
             if turnover_average != 0.0 and this.is_buy:
                 up_val = this._get_ultimate_purchase(
-		    stock_period_min, turnover_average
-		)
+                    stock_period_min, turnover_average
+                )
                 values = {
-		    'turnover_average': turnover_average,
-		    'ultimate_purchase': up_val,
-		    'stock_period_max': stock_period_max,
-		    'stock_period_min': stock_period_min,
-		}
+                    'turnover_average': turnover_average,
+                    'ultimate_purchase': up_val,
+                    'stock_period_max': stock_period_max,
+                    'stock_period_min': stock_period_min,
+                }
             else:  # remove data when supply method no longer = "buy"
                 values = {
-		    'turnover_average': 0,
-		    'ultimate_purchase': False,
-		}
+                    'turnover_average': 0,
+                    'ultimate_purchase': False,
+                }
             this.write(values)
         return True

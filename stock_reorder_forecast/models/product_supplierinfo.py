@@ -11,5 +11,5 @@ class ProductSupplierinfo(models.Model):
         'Purchase multiple',
         help="Purchase in multiples of. Used by the purchase proposal.")
     stock_period_min = fields.Integer(
-        'Minimum days stock', help="Minimum stock in days of turnover. Used by "
-        "the purchase proposal.")
+        'Minimum days stock', help="Minimum stock in days of turnover. Used by"
+        " the purchase proposal.")

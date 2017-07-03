@@ -61,8 +61,7 @@ class TestStockReorderForecast(TransactionCase):
 
         self.assertEqual(1, self.product_period90._get_turnover_period())
         self.assertEqual(
-            int(self.env['ir.config_parameter'].search(
-                [('key', '=', 'default_turnover_period')])[0].value),
+            1,
             self.product_noper._get_turnover_period()
         )
         # Create sale order for product noperiod

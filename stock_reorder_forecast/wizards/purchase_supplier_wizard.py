@@ -83,17 +83,17 @@ class PurchaseSupplierWizard(models.TransientModel):
         purchase_order.onchange_partner_id(supplier_id)
         products = self.env['res.partner'].browse(supplier_id).product_ids
         if self.primary_supplier_only:
-            products =self.env['res.partner'].browse(
+            products = self.env['res.partner'].browse(
                 supplier_id).primary_product_ids
         empty_po = True
         for product in products:
             supplier = product.seller_ids.filtered(
                 lambda x: x.name.id == supplier_id
             )
-            # it has occurred that the same partner has multiple supplierinfos 
+            # it has occurred that the same partner has multiple supplierinfos
             # for this product.  this is illogical, to manage this, take the
             # first, making multiple PO's wouldn't make sense in this usecase
-            if len(supplier)>1:
+            if len(supplier) > 1:
                 supplier = supplier[0]
             pol_model = self.env["purchase.order.line"]
             qty = self._get_qty(product, supplier, self.stock_period_max)
@@ -120,7 +120,6 @@ class PurchaseSupplierWizard(models.TransientModel):
                 # we need to do this to get all our tax calculations/ fiscal
                 # positions correct.
                 pol.write({'product_qty':qty})
-                #pol._compute_amount()
                 purchase_order._amount_all(field_name=None, arg=None)
                 # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
                 product.write({"ultimate_purchase": False})
