@@ -3,10 +3,10 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import openerp.tests.common as common
+from openerp.tests.common import TransactionCase
 
 
-class TestStockInventoryExcludeSublocation(common.TransactionCase):
+class TestStockInventoryExcludeSublocation(TransactionCase):
 
     def setUp(self):
         super(TestStockInventoryExcludeSublocation, self).setUp()
@@ -100,8 +100,8 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
         return inventory
 
     def test_not_excluding_sublocations(self):
-        '''Check if products in sublocations are included into the inventory
-        if the excluding sublocations option is disabled.'''
+        """Check if products in sublocations are included into the inventory
+        if the excluding sublocations option is disabled."""
         inventory_location = self._create_inventory_all_products(
             'location inventory', self.location, False)
         inventory_location.prepare_inventory()
@@ -111,8 +111,8 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
                                         'included')
 
     def test_excluding_sublocations(self):
-        '''Check if products in sublocations are not included if the exclude
-        sublocations is enabled.'''
+        """Check if products in sublocations are not included if the exclude
+        sublocations is enabled."""
         inventory_location = self._create_inventory_all_products(
             'location inventory', self.location, True)
         inventory_sublocation = self._create_inventory_all_products(
@@ -129,7 +129,7 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
                          'The products in the sublocations are not excluded')
 
     def test_lot_excluding_sublocation(self):
-        '''Check if the sublocations are excluded when using lots.'''
+        """Check if the sublocations are excluded when using lots."""
         inventory = self.inventory_model.sudo(self.user.id).create({
             'name': 'Inventory lot',
             'filter': 'lot',
@@ -144,8 +144,8 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
                                         'not excluded with lots.')
 
     def test_product_and_owner_excluding_sublocation(self):
-        '''Check if sublocations are excluded when filtering by owner and
-        product.'''
+        """Check if sublocations are excluded when filtering by owner and
+        product."""
         self.quant_model.create({
             'product_id': self.product1.id,
             'location_id': self.location.id,
@@ -167,7 +167,7 @@ class TestStockInventoryExcludeSublocation(common.TransactionCase):
                          'not excluded with product and owner filter.')
 
     def test_pack_excluding_sublocation(self):
-        '''Check if sublocations are excluded when filtering by package.'''
+        """Check if sublocations are excluded when filtering by package."""
         self.quant_model.create({
             'product_id': self.product1.id,
             'location_id': self.location.id,
