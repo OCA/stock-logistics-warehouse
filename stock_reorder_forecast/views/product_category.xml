@@ -5,13 +5,13 @@
             <field name="model">product.category</field>
             <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
-                <form position="inside">
+                <xpath expr="//sheet" position="inside">
                     <group string="Purchase parameters" col="4">
                         <field name="stock_period_min"/>
                         <field name="stock_period_max"/>
                         <field name="turnover_period"/>
                     </group>
-                </form>
+                </xpath>
             </field>
         </record>
     </data>
