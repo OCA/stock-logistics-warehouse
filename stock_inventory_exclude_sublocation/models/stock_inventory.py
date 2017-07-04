@@ -3,21 +3,26 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import fields, models, api
+from openerp import api, fields, models
 
 
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
 
-    exclude_sublocation = fields.Boolean(string='Exclude Sublocations',
-                                         default=False)
+    exclude_sublocation = fields.Boolean(
+        string='Exclude Sublocations', default=False,
+        track_visibility='onchange', readonly=True,
+        states={'draft': [('readonly', False)]})
 
     @api.model
     def _get_inventory_lines(self, inventory):
         if inventory.exclude_sublocation:
             product_obj = self.env['product.product']
             domain = ' location_id = %s'
-            args = (tuple(inventory.location_id.ids))
+            args = (tuple(inventory.location_id.ids),)
+            if inventory.company_id.id:
+                domain += ' and company_id = %s'
+                args += (inventory.company_id.id,)
             if inventory.partner_id:
                 domain += ' and owner_id = %s'
                 args += (inventory.partner_id.id,)
