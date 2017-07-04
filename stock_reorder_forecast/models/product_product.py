@@ -162,7 +162,7 @@ class ProductProduct(models.Model):
                 date.strftime(
                     date.today() - timedelta(days=turnover_period),
                     DEFAULT_SERVER_DATE_FORMAT
-                 )
+                )
             )])
             line_qty = self.env['sale.order.line'].search(
                 [
