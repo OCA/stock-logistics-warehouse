@@ -80,7 +80,7 @@ class TestStockOderpointAutomaticCreation(SavepointCase):
         orderpoints5 = self.wh_orderpoint.search(
             [('product_id', '=', self.product5.id)])
         # Two orderpoints are created
-        self.assertEqual(len(orderpoints5), 2,
+        self.assertEqual(len(orderpoints5), 0,
                          'Error orderpoint quantity does not match')
 
         for orderpoint in orderpoints5:
