@@ -27,6 +27,8 @@ class ProductProduct(models.Model):
         product = super(ProductProduct, self).create(vals)
         if not product.type == 'product' or product.create_orderpoint == 'no':
             return product
+        if product.categ_id.create_orderpoints == 'no':
+            return product
         if product.create_orderpoint == 'yes' \
             or product.categ_id.create_orderpoints == 'yes' \
                 or self.env.user.company_id.create_orderpoints:
