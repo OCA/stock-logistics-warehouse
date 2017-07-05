@@ -6,8 +6,8 @@
 Stock Orderpoint Automatic Creation
 ===================================
 
-This module generates stock orderpoints automatically for a product when is
-created taking the company of the user who created the product as reference.
+This module automatically generates stock orderpoints for a product when it is
+created, based on the information from the user's company.
 Orderpoints creation can be automated from product, product category or company.
 
 Configuration
@@ -15,8 +15,8 @@ Configuration
 
 To configure this module, you need to:
 
-#. Go to company form and, in the "Settings" tab, you can customize the default
-   orderpoints data.
+#. Go to company form, tab "settings" and customize the default orderpoints
+   data.
 #. Also you can configure orderpoint creation in product and product_category
    checking 'Yes' or 'No' in the proper field.
 
