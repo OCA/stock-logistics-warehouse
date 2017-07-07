@@ -61,10 +61,10 @@ class ResPartner(models.Model):
         if self.ids:
             self.env.cr.execute(
                 """with templates as (
-                     select name, product_tmpl_id as T from product_supplierinfo
-                     where name in %s
+                    select name, product_tmpl_id as T from product_supplierinfo
+                    where name in %s
                    )
-                   select templates.name, array_agg(id)  from product_product  
+                   select templates.name, array_agg(id)  from product_product
                    inner join templates on (
                         product_product.product_tmpl_id = templates.T
                     ) group by templates.name

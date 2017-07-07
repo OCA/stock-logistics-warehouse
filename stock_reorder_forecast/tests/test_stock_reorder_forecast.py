@@ -4,7 +4,6 @@
 from datetime import date, timedelta
 
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp.tests.common import TransactionCase
 
 
@@ -274,8 +273,6 @@ class TestStockReorderForecast(TransactionCase):
         # WE ALREADY HAVE supplier1 as primary supplier for
         # product_noper
         self.env['product.supplierinfo'].create({
-            'product_tmpl_id': self.env.ref(
-                'stock_reorder_forecast.product_template2').id,
             'product_tmpl_id': self.product_period90.product_tmpl_id.id,
             'name': new_supplier.name.id,
             'delay': 1,
@@ -287,8 +284,6 @@ class TestStockReorderForecast(TransactionCase):
         # it's primary because it has the highest sequence for that product
 
         self.env['product.supplierinfo'].create({
-            'product_tmpl_id': self.env.ref(
-                'stock_reorder_forecast.product_template2').id,
             'product_tmpl_id': self.product_period180.product_tmpl_id.id,
             'name': new_supplier.name.id,
             'delay': 1,
@@ -298,8 +293,6 @@ class TestStockReorderForecast(TransactionCase):
 
         # supplier1 is the primary
         self.env['product.supplierinfo'].create({
-            'product_tmpl_id': self.env.ref(
-                'stock_reorder_forecast.product_template2').id,
             'product_tmpl_id': self.product_period180.product_tmpl_id.id,
             'name': self.supplier1.name.id,
             'delay': 1,
@@ -317,8 +310,6 @@ class TestStockReorderForecast(TransactionCase):
         )
         # give new_supplier. name another primary product , product_noper
         self.env['product.supplierinfo'].create({
-            'product_tmpl_id': self.env.ref(
-                'stock_reorder_forecast.product_template1').id,
             'product_tmpl_id': self.product_noper.product_tmpl_id.id,
             'name': new_supplier.name.id,
             'delay': 1,

@@ -73,7 +73,7 @@ class PurchaseSupplierWizard(models.TransientModel):
         order_vals = {
             "partner_id": supplier_id,
             "origin": "Batch resupply from supplier form",
-            "date_order": date_order, 
+            "date_order": date_order,
             "location_id": stock_location_id.id,
             "pricelist_id": pricelist_id.id,
             "invoice_method": "manual",
@@ -119,7 +119,7 @@ class PurchaseSupplierWizard(models.TransientModel):
                 # suggest a quantity we will rectify it after writing quantity.
                 # we need to do this to get all our tax calculations/ fiscal
                 # positions correct.
-                pol.write({'product_qty':qty})
+                pol.write({'product_qty': qty})
                 purchase_order._amount_all(field_name=None, arg=None)
                 # ZERO IN  ULTIMATE PURCHASE WHEN  WRITE DONE
                 product.write({"ultimate_purchase": False})
