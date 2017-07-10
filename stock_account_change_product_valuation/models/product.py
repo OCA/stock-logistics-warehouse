@@ -17,17 +17,16 @@ class ProductTemplate(models.Model):
                 for rec in self:
                     if rec.type == 'consu':
                         for variant in rec.product_variant_ids:
-                            quants = self.env['stock.quant'].search(
-                                [('product_id', '=', variant.id)])
-                            for quant in quants:
-                                quant.cost = 0.0
+                            self.env['stock.quant'].search(
+                                [('product_id', '=', variant.id)]).write(
+                                {'cost': 0.0})
                         rec.standard_price = 0.0
         if values.get('cost_method', False):
             new_method = values.get('cost_method')
             if new_method == 'real':
                 for rec in self:
-                    type = values.get('type', False) or rec.type
-                    if type == 'product':
+                    rec_type = values.get('type', False) or rec.type
+                    if rec_type == 'product':
                         for variant in rec.product_variant_ids:
                             quants = self.env['stock.quant'].search(
                                 [('product_id', '=', variant.id),

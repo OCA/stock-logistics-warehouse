@@ -21,12 +21,7 @@ class TestStockAccountChangeProductValuation(TransactionCase):
         self.stock_location_model = self.env['stock.location']
         self.stock_quant_model = self.env['stock.quant']
         # Get required Model data
-        self.fixed_account = self.env.ref('account.xfa')
-        self.purchased_stock = self.env.ref('account.stk')
-        self.debtors_account = self.env.ref('account.a_recv')
-        self.cash_account = self.env.ref('account.cash')
         self.product_uom = self.env.ref('product.product_uom_unit')
-        self.journal = self.env.ref('account.miscellaneous_journal')
         self.company = self.env.ref('base.main_company')
         self.location_supplier = self.env.ref('stock.stock_location_suppliers')
 
@@ -37,20 +32,20 @@ class TestStockAccountChangeProductValuation(TransactionCase):
         # Create account for Goods Received Not Invoiced
         name = 'Goods Received Not Invoiced'
         code = 'grni'
-        acc_type = 'equity'
+        acc_type = 'Equity'
         self.account_grni = self._create_account(acc_type, name, code,
                                                  self.company)
         # Create account for Cost of Goods Sold
         name = 'Cost of Goods Sold'
         code = 'cogs'
-        acc_type = 'expense'
+        acc_type = 'Expenses'
         self.account_cogs = self._create_account(acc_type, name, code,
                                                  self.company)
 
         # Create account for Inventory
         name = 'Inventory'
         code = 'inventory'
-        acc_type = 'asset'
+        acc_type = 'Current Assets'
         self.account_inventory = self._create_account(acc_type, name, code,
                                                       self.company)
         # Create product category
@@ -58,12 +53,11 @@ class TestStockAccountChangeProductValuation(TransactionCase):
 
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
-        type_ids = self.acc_type_model.search([('code', '=', acc_type)])
+        type_ids = self.acc_type_model.search([('name', '=', acc_type)])
         account = self.account_model.create({
             'name': name,
             'code': code,
-            'type': 'other',
-            'user_type': type_ids.ids and type_ids.ids[0],
+            'user_type_id': type_ids.ids and type_ids.ids[0],
             'company_id': company.id
         })
         return account
