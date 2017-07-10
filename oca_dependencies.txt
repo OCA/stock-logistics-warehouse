@@ -1,2 +1,4 @@
+server-tools
 stock-logistics-tracking
 stock-logistics-barcode
+web
