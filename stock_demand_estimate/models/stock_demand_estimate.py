@@ -4,9 +4,9 @@
 # © 2016 Aleph Objects, Inc. (https://www.alephobjects.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models, _
-import openerp.addons.decimal_precision as dp
-from openerp.exceptions import Warning as UserError
+from odoo import api, fields, models, _
+import odoo.addons.decimal_precision as dp
+from odoo.exceptions import Warning as UserError
 
 
 class StockDemandEstimate(models.Model):
@@ -45,7 +45,7 @@ class StockDemandEstimate(models.Model):
                                   string="Location", required=True)
     product_uom_qty = fields.Float(
         string="Quantity",
-        digits_compute=dp.get_precision('Product Unit of Measure'))
+        digits=dp.get_precision('Product Unit of Measure'))
     product_qty = fields.Float('Real Quantity',
                                compute='_compute_product_quantity',
                                inverse='_inverse_product_quantity', digits=0,
