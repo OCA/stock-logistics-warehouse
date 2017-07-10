@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document" priority="9999">
+        <xpath expr="//table[@t-if='o.pack_operation_ids']" position="after">
+            <p>
+                <span t-if="o.customer_signature">
+                    <strong>Customer acceptance:</strong>
+                    <img class="image" t-att-src="'data:image/png;base64,%s' % o.customer_signature" style="border:auto;"/>
+                </span>
+            </p>
+        </xpath>
+    </template>
+
+</odoo>
