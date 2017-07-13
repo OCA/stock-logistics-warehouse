@@ -12,7 +12,7 @@ product's costing method or the type of product requires proper readjustments:
 Changing the type of product.
 
 * From consumable to stockable: the resulting inventory value will be reset
-  to 0, since everything that was received as a  stockable was expensed out
+  to 0, since everything that was received as a stockable was expensed out
   at the time of entering the supplier invoice.
 
 Changing the costing method:
