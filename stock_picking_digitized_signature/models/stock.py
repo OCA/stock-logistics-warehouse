@@ -46,3 +46,16 @@ class StockPicking(models.Model):
             'target': 'new',
             'context': ctx,
         }
+
+    @api.model
+    def create(self, values):
+        picking = super(StockPicking, self).create(values)
+        if picking.customer_signature:
+            values = {'customer_signature': picking.customer_signature}
+            picking._track_signature(values, 'customer_signature')
+        return picking
+
+    @api.multi
+    def write(self, values):
+        self._track_signature(values, 'customer_signature')
+        return super(StockPicking, self).write(values)

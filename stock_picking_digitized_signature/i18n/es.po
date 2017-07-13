@@ -121,7 +121,7 @@ msgstr "<strong>Aceptación de cliente:</strong>"
 #: code:addons/stock_picking_digitized_signature/models/stock.py:39
 #, python-format
 msgid "Compose Email"
-msgstr "Crear Email"
+msgstr "Componer correo electrónico"
 
 #. module: stock_picking_digitized_signature
 #: model:ir.model.fields,field_description:stock_picking_digitized_signature.field_stock_picking_customer_signature
@@ -141,10 +141,9 @@ msgstr "Responsable"
 #. module: stock_picking_digitized_signature
 #: model:ir.ui.view,arch_db:stock_picking_digitized_signature.view_picking_form
 msgid "Send by Email"
-msgstr "Enviar por email"
+msgstr "Enviar por correo electrónico"
 
 #. module: stock_picking_digitized_signature
 #: model:ir.model,name:stock_picking_digitized_signature.model_stock_picking
 msgid "Transfer"
 msgstr "Transferencia"
-
