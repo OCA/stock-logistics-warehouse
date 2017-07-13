@@ -335,7 +335,8 @@ class TestStockReorderForecast(TransactionCase):
         )
         self.assertEqual(
             set(new_supplier.name.primary_product_ids.ids),
-            set(self.env['product.product'].search(
-                [('name', 'in', ['PERIOD180'])]).ids
+            set(
+                self.env['product.product'].search(
+                    ('name', 'in', ['PERIOD180'])]).ids
             )
         )
