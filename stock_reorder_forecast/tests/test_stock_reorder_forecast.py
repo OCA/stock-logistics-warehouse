@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import date, timedelta
 
@@ -337,6 +336,6 @@ class TestStockReorderForecast(TransactionCase):
             set(new_supplier.name.primary_product_ids.ids),
             set(
                 self.env['product.product'].search(
-                    ('name', 'in', ['PERIOD180'])]).ids
+                   [('name', 'in', ['PERIOD180'])]).ids
             )
         )
