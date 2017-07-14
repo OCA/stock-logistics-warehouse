@@ -46,6 +46,7 @@ addon | version | summary
 [stock_lot_quantity](stock_lot_quantity/) | 8.0.1.0.0 | Stock quantity for serial number
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.0 | Add a MTS+MTO route
 [stock_operation_type_location](stock_operation_type_location/) | 8.0.1.1.0 | Allows to filter locations on stock operations
+[stock_orderpoint_generator](stock_orderpoint_generator/) | 8.0.1.0.0 | Mass configuration of stock order points
 [stock_orderpoint_manual_procurement](stock_orderpoint_manual_procurement/) | 8.0.1.0.0 | Allows to create procurement orders from orderpoints instead of relying only on the scheduler
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 8.0.1.0.0 | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_product_location_sorted_by_qty](stock_product_location_sorted_by_qty/) | 8.0.1.0.0 | In the update wizard of quantities for a product, sort the stock location by quantity
