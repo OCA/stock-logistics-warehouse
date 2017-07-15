@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 09:22+0000\n"
-"PO-Revision-Date: 2017-03-29 09:22+0000\n"
+"POT-Creation-Date: 2017-07-14 00:47+0000\n"
+"PO-Revision-Date: 2017-07-14 00:47+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_uid:0
@@ -139,7 +139,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search

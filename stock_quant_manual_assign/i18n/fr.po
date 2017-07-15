@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-25 08:29+0000\n"
-"PO-Revision-Date: 2017-02-25 18:58+0000\n"
+"POT-Creation-Date: 2017-07-14 00:46+0000\n"
+"PO-Revision-Date: 2017-07-12 16:19+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -121,7 +121,7 @@ msgid "Quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr ""
@@ -144,7 +144,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,selected:0
 msgid "Select"
-msgstr ""
+msgstr "Sélectionner"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_move
