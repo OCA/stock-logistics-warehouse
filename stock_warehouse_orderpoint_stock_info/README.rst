@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===========================
-Reordering Rules stock info
-===========================
+=====================================
+Stock Warehouse Orderpoint Stock Info
+=====================================
 
 This modules allows to know the product availability directly in the reordering
 rules.
@@ -14,7 +14,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/9.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 Bug Tracker
 ===========
@@ -31,12 +31,14 @@ Credits
 
 Contributors
 ------------
+
 * Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
 * Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 * Ana Juaristi <anajuaristi@avanzosc.es>
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Serpent Consulting Services Pvt. Ltd. <http://www.serpentcs.com>
 
+Do not contact contributors directly about support or help with technical issues.
 
 Maintainer
 ----------
