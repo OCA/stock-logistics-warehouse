@@ -3,10 +3,10 @@
 # Copyright 2016 AvanzOSC
 # Copyright 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
-# Copyright 2016 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2016-17 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api
+from odoo import api, fields, models
 
 
 class StockWarehouseOrderpoint(models.Model):
