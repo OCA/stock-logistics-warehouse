@@ -386,7 +386,8 @@ class StockInventoryRevaluation(models.Model):
     def create(self, values):
         sequence_obj = self.env['ir.sequence']
         if values.get('name', '/') == '/':
-            values['name'] = sequence_obj.get('stock.inventory.revaluation')
+            values['name'] = sequence_obj.next_by_code(
+                'stock.inventory.revaluation')
         return super(StockInventoryRevaluation, self).create(values)
 
     @api.multi
