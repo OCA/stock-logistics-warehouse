@@ -148,7 +148,7 @@ class TestStockCycleCount(common.TransactionCase):
         self.assertFalse(
             counts, 'Existing cycle counts before execute planner.')
         date_pre_existing_cc = datetime.today() + timedelta(days=30)
-        loc = locs[0]
+        loc = locs.filtered(lambda l: l.usage != 'view')[0]
         pre_existing_count = self.cycle_count_model.create({
             'name': 'To be cancelled when running cron job.',
             'cycle_count_rule_id': self.rule_periodic.id,
