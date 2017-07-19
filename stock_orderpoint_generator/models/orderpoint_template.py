@@ -56,6 +56,9 @@ class OrderpointTemplate(models.Model):
         """
         orderpoint_model = self.env['stock.warehouse.orderpoint']
         for data in self.copy_data():
+            data.pop('auto_generate', None)
+            data.pop('auto_product_ids', None)
+            data.pop('auto_last_generation', None)
             for product_id in product_ids:
                 data['product_id'] = product_id
                 orderpoint_model.create(data)
