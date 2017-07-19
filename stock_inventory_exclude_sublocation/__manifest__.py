@@ -6,7 +6,7 @@
     "name": "Stock Inventory Exclude Sublocation",
     "summary": "Allow to perform inventories of a location without including "
                "its child locations.",
-    "version": "9.0.1.0.1",
+    "version": "10.0.1.0.0",
     "author": "Eficent,"
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
