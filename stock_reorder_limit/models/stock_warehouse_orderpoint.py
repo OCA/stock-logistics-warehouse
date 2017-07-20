@@ -36,7 +36,7 @@ class StockWarehouseOrderpoint(models.Model):
         return filtered_stock_rules
 
     @api.multi
-    def _get_limit_procurement_qty(self):
+    def _compute_limit_procurement_qty(self):
         """Limit quantity that can be procured. Normally this is the
         maximum quantity. But for obsolete or inactive products it will
         just be enough to satisfy outstanding orders.
@@ -60,7 +60,7 @@ class StockWarehouseOrderpoint(models.Model):
 
     limit_procurement_qty = fields.Float(
         string='Maximum quantity still to procure',
-        compute='_get_limit_procurement_qty',
+        compute='_compute_limit_procurement_qty',
         digits=dp.get_precision('Product Unit of Measure'),
     )
     product_state = fields.Selection(

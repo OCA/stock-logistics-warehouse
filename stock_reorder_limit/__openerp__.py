@@ -4,7 +4,9 @@
 {
     "name": "Stock Reorder Limit",
     "summary": "Sensible limits on minimum stock rule processing",
-    "author": "Therp BV",
+    "author":
+        "Therp BV, "
+        "Odoo Community Association (OCA)",
     "website": "https://therp.nl",
     "category": "Warehouse",
     "license": "AGPL-3",

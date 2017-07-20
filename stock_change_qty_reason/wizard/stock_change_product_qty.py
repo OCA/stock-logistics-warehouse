@@ -15,7 +15,5 @@ class StockChangeProductQty(models.TransientModel):
     def change_product_qty(self):
         if self.reason:
             this = self.with_context(change_quantity_reason=self.reason)
-
             return super(StockChangeProductQty, this).change_product_qty()
-
         return super(StockChangeProductQty, self).change_product_qty()

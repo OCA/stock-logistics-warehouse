@@ -15,6 +15,7 @@ class TestStockQuantityChangeReason(common.TransactionCase):
             'new_quantity': 10,
             'reason': 'product_37_reason',
         })
+        wizard.change_product_qty()
         move2 = self.env['stock.move'].search(
             [('product_id', '=', product2.id)], limit=1, order='id desc'
         )
