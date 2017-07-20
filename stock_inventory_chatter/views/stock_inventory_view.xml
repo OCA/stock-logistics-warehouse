@@ -3,11 +3,15 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <odoo>
 =======
 <openerp>
   <data>
 >>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
+=======
+<odoo>
+>>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0
     <record id="view_inventory_form" model="ir.ui.view">
         <field name="name">Inventory form view - add chatter </field>
         <field name="model">stock.inventory</field>
@@ -22,8 +26,12 @@
         </field>
     </record>
 <<<<<<< HEAD
+<<<<<<< HEAD
 </odoo>
 =======
   </data>
 </openerp>
 >>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
+=======
+</odoo>
+>>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0

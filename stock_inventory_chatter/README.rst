@@ -14,10 +14,14 @@ Usage
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
 <<<<<<< HEAD
+<<<<<<< HEAD
    :target: https://runbot.odoo-community.org/runbot/153/10.0
 =======
    :target: https://runbot.odoo-community.org/runbot/153/9.0
 >>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
+=======
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
+>>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0
 
 Bug Tracker
 ===========

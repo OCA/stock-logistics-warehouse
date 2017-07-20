@@ -8,6 +8,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 from odoo import api, fields, models
 
 
@@ -18,6 +19,9 @@ class StockInventory(models.Model):
     _inherit = ['stock.inventory', 'mail.thread']
 =======
 from openerp import api, fields, models
+=======
+from odoo import api, fields, models
+>>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0
 
 
 class StockInventory(models.Model):

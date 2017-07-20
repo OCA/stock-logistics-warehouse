@@ -5,6 +5,7 @@
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 <<<<<<< HEAD
+<<<<<<< HEAD
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
@@ -14,14 +15,22 @@ msgstr ""
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 =======
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
+=======
+>>>>>>> 24c5544... OCA Transbot updated translations from Transifex
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2017-07-05 00:45+0000\n"
 "PO-Revision-Date: 2017-07-05 00:45+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2017\n"
 >>>>>>> 02bcc47... OCA Transbot updated translations from Transifex
+=======
+"POT-Creation-Date: 2017-11-30 03:53+0000\n"
+"PO-Revision-Date: 2017-11-30 03:53+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+>>>>>>> 24c5544... OCA Transbot updated translations from Transifex
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,6 +39,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: stock_inventory_chatter
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_needaction
@@ -68,6 +78,8 @@ msgstr "Če označeno, zahtevajo nova sporočila vašo pozornost."
 
 #. module: stock_inventory_chatter
 >>>>>>> 02bcc47... OCA Transbot updated translations from Transifex
+=======
+>>>>>>> 24c5544... OCA Transbot updated translations from Transifex
 #: model:ir.model,name:stock_inventory_chatter.model_stock_inventory
 msgid "Inventory"
 msgstr "Inventar"
@@ -90,6 +102,7 @@ msgstr ""
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_done
 msgid "Inventory Done"
 msgstr ""
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -133,3 +146,5 @@ msgstr "Neprebrana sporočila"
 msgid "Unread Messages Counter"
 msgstr "Števec neprebranih sporočil"
 >>>>>>> 02bcc47... OCA Transbot updated translations from Transifex
+=======
+>>>>>>> 24c5544... OCA Transbot updated translations from Transifex
