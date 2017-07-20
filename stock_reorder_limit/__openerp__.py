@@ -2,8 +2,8 @@
 # © 2017 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Sensible limits on minimum stock rule processing",
-    "summary": """Limit stock resupply to what is sensible""",
+    "name": "Stock Reorder Limit",
+    "summary": "Sensible limits on minimum stock rule processing",
     "author": "Therp BV",
     "website": "https://therp.nl",
     "category": "Warehouse",
