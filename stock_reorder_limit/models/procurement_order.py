@@ -14,3 +14,10 @@ class ProcurementOrder(models.Model):
         return super(ProcurementOrder, self)._prepare_orderpoint_procurement(
             orderpoint, sensible_quantity
         )
+
+    @api.model
+    def create(self, vals):
+        """Do not create quantity <= 0.0 procurements."""
+        if 'product_qty' not in vals or vals['product_qty'] <= 0.0:
+            return self.browse([])
+        return super(ProcurementOrder, self).create(vals)
