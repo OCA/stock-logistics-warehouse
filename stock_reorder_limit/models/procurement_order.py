@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 # © 2017 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import api, models
+import logging
+
+from openerp import api, models, _
+
+
+_logger = logging.getLogger(__name__)
 
 
 class ProcurementOrder(models.Model):
@@ -19,5 +24,9 @@ class ProcurementOrder(models.Model):
     def create(self, vals):
         """Do not create quantity <= 0.0 procurements."""
         if 'product_qty' not in vals or vals['product_qty'] <= 0.0:
+            _logger.info(_(
+                "No procurement created with quantity 0.0 for"
+                " values %s.") % str(vals)
+            )
             return self.browse([])
         return super(ProcurementOrder, self).create(vals)
