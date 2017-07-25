@@ -94,7 +94,6 @@ class TestAccountMoveLineStockInfo(common.TransactionCase):
         account = self.account_model.create({
             'name': name,
             'code': code,
-            'type': 'other',
             'user_type_id': acc_type.id,
             'company_id': company.id
         })
