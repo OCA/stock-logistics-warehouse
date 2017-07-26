@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :target: http://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
 ===============================
@@ -14,12 +14,17 @@ Usage
 To use this module, you need to:
 
 #. Select a stock move or a stock picking.
+#. Click on the tab "Initial Demand".
+#. Click on the line which you need to select quants.
 #. Open the wizard with the button "Manual Quants".
-#. Select the quants to assign (reserve).
+#. Select the quants to assign (reserve), then Confirm.
+#. Close the stock move line windows (which is popup by step 3).
+#. Click on the tab "Operations"
+#. Click on the "Recompute" to update the stock move info.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/9.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 Bug Tracker
 ===========
@@ -32,6 +37,11 @@ help us smashing it by providing a detailed and welcomed feedback.
 Credits
 =======
 
+Images
+------
+
+* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
+
 Contributors
 ------------
 
@@ -39,6 +49,7 @@ Contributors
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Ana Juaristi <anajuaristi@avanzosc.es>
 * Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
+* Fanha Giang <fanha99@hotmail.com>
 
 Maintainer
 ----------
