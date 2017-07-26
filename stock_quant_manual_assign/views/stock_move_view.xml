@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="stock_move_manual_quants_form_view">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <button name="%(assign_manual_quants_action)d" type="action"
+                        string="Manual Quants" class="oe_highlight"
+                        attrs="{'invisible':['|',('picking_type_code','=','incoming'),('state','not in',('confirmed','assigned'))]}"/>
+            </field>
+            <field name="picking_type_id" position="after">
+                <field name="picking_type_code" invisible="1" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_move_manual_quants_picking_form_view">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_form" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <button name="%(assign_manual_quants_action)d" type="action"
+                        string="Manual Quants" class="oe_highlight"
+                        attrs="{'invisible':['|',('picking_type_code','=','incoming'),('state','not in',('confirmed','assigned'))]}" />
+            </field>
+            <field name="picking_type_id" position="after">
+                <field name="picking_type_code" invisible="1" />
+            </field>
+        </field>
+    </record>
+</odoo>
