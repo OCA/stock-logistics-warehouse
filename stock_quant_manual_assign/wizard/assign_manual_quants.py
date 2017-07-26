@@ -3,9 +3,9 @@
 # (c) 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, exceptions, fields, models, _
-import openerp.addons.decimal_precision as dp
-from openerp.tools.float_utils import float_compare
+from odoo import _, api, exceptions, fields, models
+import odoo.addons.decimal_precision as dp
+from odoo.tools.float_utils import float_compare
 
 
 class AssignManualQuants(models.TransientModel):
@@ -14,13 +14,13 @@ class AssignManualQuants(models.TransientModel):
     @api.multi
     @api.constrains('quants_lines')
     def check_qty(self):
-        precision_digits = dp.get_precision('Product Unit of Measure'
-                                            )(self.env.cr)[1]
+        precision_digits = self.env[
+            'decimal.precision'].precision_get('Product Unit of Measure')
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-        for record in self.filtered(lambda x: x.quants_lines):
+        for record in self.filtered('quants_lines'):
             if float_compare(record.lines_qty, move.product_qty,
                              precision_digits=precision_digits) > 0:
-                raise exceptions.Warning(
+                raise exceptions.UserError(
                     _('Quantity is higher than the needed one'))
 
     @api.depends('quants_lines', 'quants_lines.qty')
@@ -51,11 +51,9 @@ class AssignManualQuants(models.TransientModel):
             move.picking_id.recompute_pack_op = True
         for quant_id in move.reserved_quant_ids.ids:
             move.write({'reserved_quant_ids': [[3, quant_id]]})
-        for line in self.quants_lines:
-            if line.selected:
-                quants.append([line.quant, line.qty])
-        self.pool['stock.quant'].quants_reserve(
-            self.env.cr, self.env.uid, quants, move, context=self.env.context)
+        for line in self.quants_lines.filtered('selected'):
+            quants.append([line.quant, line.qty])
+        self.env['stock.quant'].quants_reserve(quants, move)
         return {}
 
     @api.model
@@ -73,6 +71,7 @@ class AssignManualQuants(models.TransientModel):
         quants_lines = [{
             'quant': x.id,
             'lot_id': x.lot_id.id,
+            'in_date': x.in_date,
             'package_id': x.package_id.id,
             'selected': x in move.reserved_quant_ids,
             'qty': x.qty if x in move.reserved_quant_ids else 0,
@@ -112,6 +111,8 @@ class AssignManualQuantsLines(models.TransientModel):
         comodel_name='stock.production.lot', string='Lot',
         related='quant.lot_id', readonly=True,
         groups="stock.group_production_lot")
+    in_date = fields.Date(
+        string='Incoming Date', readonly=True)
     package_id = fields.Many2one(
         comodel_name='stock.quant.package', string='Package',
         related='quant.package_id', readonly=True,

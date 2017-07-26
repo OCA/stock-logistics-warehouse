@@ -10,6 +10,7 @@
                         <tree editable="top" delete="0" create="0">
                             <field name="quant" />
                             <field name="location_id" />
+                            <field name="in_date" />
                             <field name="lot_id" />
                             <field name="package_id" />
                             <field name="selected" />
