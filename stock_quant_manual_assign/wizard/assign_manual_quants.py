@@ -3,9 +3,9 @@
 # (c) 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import api, exceptions, fields, models, _
-import openerp.addons.decimal_precision as dp
-from openerp.tools.float_utils import float_compare
+from odoo import api, exceptions, fields, models, _
+import odoo.addons.decimal_precision as dp
+from odoo.tools.float_utils import float_compare
 
 
 class AssignManualQuants(models.TransientModel):
@@ -54,8 +54,7 @@ class AssignManualQuants(models.TransientModel):
         for line in self.quants_lines:
             if line.selected:
                 quants.append([line.quant, line.qty])
-        self.pool['stock.quant'].quants_reserve(
-            self.env.cr, self.env.uid, quants, move, context=self.env.context)
+        self.env['stock.quant'].quants_reserve(quants, move)
         return {}
 
     @api.model

@@ -6,12 +6,13 @@
 
 {
     "name": "Stock - Manual Quant Assignment",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "category": "Warehouse Management",
     "license": "AGPL-3",
     "author": "AvanzOSC, "
               "Tecnativa, "
               "Eficent, "
+              "Fanha Giang, "
               "Odoo Community Association (OCA)",
     "website": "http://www.odoomrp.com",
     "depends": [
