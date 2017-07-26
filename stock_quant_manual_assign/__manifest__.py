@@ -3,8 +3,8 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
-    "name": "Stock - Manual assignment of quants",
-    "version": "8.0.1.0.0",
+    "name": "Stock - Manual Quant Assignment",
+    "version": "10.0.1.0.0",
     "category": "Warehouse Management",
     "license": "AGPL-3",
     "author": "OdooMRP team, "
@@ -15,8 +15,9 @@
     "contributors": [
         "Mikel Arregi <mikelarregi@avanzosc.es>",
         "Ana Juaristi Olalde <anajuaristi@avanzosc.es>",
-        "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>"
+        "Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.com>",
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
+        "Fanha Giang <fanha99@hotmail.com>",
     ],
     "depends": [
         "stock",
@@ -25,5 +26,5 @@
         "wizard/assign_manual_quants_view.xml",
         "views/stock_move_view.xml",
     ],
-    "installable": False,
+    "installable": True,
 }
