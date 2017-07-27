@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 # © 2013-2016 Numérigraphe SARL
+# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api
+from odoo import api, models
 
 
 class StockInventory(models.Model):
