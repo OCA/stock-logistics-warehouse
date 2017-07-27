@@ -4,27 +4,25 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Jonathan Nemry (ACSONE) <jonathan.nemry@acsone.eu>, 2016
-# dglucose <eric.lemesre@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 18:42+0000\n"
-"PO-Revision-Date: 2016-11-21 18:42+0000\n"
-"Last-Translator: dglucose <eric.lemesre@gmail.com>, 2016\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"POT-Creation-Date: 2016-12-24 04:10+0000\n"
+"PO-Revision-Date: 2016-12-24 04:10+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_product_product_reservation_count
 #: model:ir.model.fields,field_description:stock_reserve.field_product_template_reservation_count
 msgid "# Sales"
-msgstr ""
+msgstr "# prodaj"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_state
@@ -35,21 +33,26 @@ msgid ""
 "* Available: When products are reserved, it is set to 'Available'.\n"
 "* Done: When the shipment is processed, the state is 'Done'."
 msgstr ""
+"* Novo: ob nastanku premika zaloge, ko še ni potrjen.\n"
+"* Čakanje na drug premik: to stanje se pojavi, kadar en premik čaka drugega, na primer pri verižnem procesu.\n"
+"* Čakanje razpoložljivosti: to stanje se doseže, kadar izpolnitev oskrbe ni neposredna. Lahko bi bil potreben zagon razporejevalnika, potrebno je proizvesti komponento...\n"
+"* Na voljo: ko so proizvodi rezervirani se prestavi v 'Na voljo'.\n"
+"* Opravljeno: po obdelavi odpreme stanje preide v 'Opravljeno'."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_returned_move_ids
 msgid "All returned moves"
-msgstr ""
+msgstr "Vsi vrnjeni premiki"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_string_availability_info
 msgid "Availability"
-msgstr "Disponibilité"
+msgstr "Razpoložljivost"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_backorder_id
 msgid "Back Order of"
-msgstr "Relicat de"
+msgstr "Zaostali nalog"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_procure_method
@@ -60,11 +63,16 @@ msgid ""
 "current stock) to gather products. If we want to chain moves and have this "
 "one to wait for the previous, this second option should be chosen."
 msgstr ""
+"Privzeto sistem vzame iz zaloge na izvorni lokaciji in pasivno čaka na "
+"razpoložljivost. Druga možnost omogoči neposredno ustvariti oskrbovanje na "
+"izvorni lokaciji (in tako ignorirati trenutno zalogo) za zbiranje "
+"proizvodov. Ko želimo verižne premike in mora ta premik čakati na "
+"prejšnjega, se lahko izbere druga opcija."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_partially_available
 msgid "Checks if the move has some stock reserved"
-msgstr ""
+msgstr "Preveri, če premik vsebuje kaj rezervacij zaloge"
 
 #. module: stock_reserve
 #: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
@@ -74,77 +82,77 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_company_id
 msgid "Company"
-msgstr "Société"
+msgstr "Družba"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Ustvaril"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr "Ustvarjeno"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date
 msgid "Date"
-msgstr "Date"
+msgstr "Datum"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_name
 msgid "Description"
-msgstr "Description"
+msgstr "Opis"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_partner_id
 msgid "Destination Address "
-msgstr ""
+msgstr "Ciljni naslov"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_location_dest_id
 msgid "Destination Location"
-msgstr "Emplacement destination"
+msgstr "Ciljna lokacija"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_dest_id
 msgid "Destination Move"
-msgstr ""
+msgstr "Ciljni premik"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_route_ids
 msgid "Destination route"
-msgstr ""
+msgstr "Ciljna proga"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Details"
-msgstr "Détails"
+msgstr "Podrobnosti"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr "Prikazni naziv"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Draft"
-msgstr "Brouillon"
+msgstr "Osnutek"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date_expected
 msgid "Expected Date"
-msgstr "Date prévue"
+msgstr "Pričakovani datum"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_availability
 msgid "Forecasted Quantity"
-msgstr "Quantité prévue"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Group By..."
-msgstr "Grouper par"
+msgstr "Združi po..."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_id
@@ -155,47 +163,48 @@ msgstr "ID"
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_propagate
 msgid "If checked, when this move is cancelled, cancel the linked move too"
 msgstr ""
+"Če označeno, se ob preklicu tega premika prekliče tudi povezane premike"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_inventory_id
 msgid "Inventory"
-msgstr "Inventaire"
+msgstr "Inventar"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_product_packaging
 msgid ""
 "It specifies attributes of packaging like type, quantity of packaging,etc."
-msgstr ""
+msgstr "Določi atribute pakiranja, kot so tip, količina pakiranj, itd."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation___last_update
 msgid "Last Modified on"
-msgstr "Modifié le"
+msgstr "Zadnjič spremenjeno"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_write_uid
 msgid "Last Updated by"
-msgstr "Dernière màj par"
+msgstr "Zadnjič posodobil"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_write_date
 msgid "Last Updated on"
-msgstr "Dernière màj le"
+msgstr "Zadnjič posodobljeno"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_linked_move_operation_ids
 msgid "Linked Operations"
-msgstr ""
+msgstr "Povezane operacije"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_location_dest_id
 msgid "Location where the system will stock the finished products."
-msgstr ""
+msgstr "Lokacija, kamor sistem skladišči dokončane proizvode."
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Locations"
-msgstr "Emplacements"
+msgstr "Lokacije"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_restrict_lot_id
@@ -205,12 +214,12 @@ msgstr "Lot"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_lot_ids
 msgid "Lots"
-msgstr "Lots"
+msgstr "Loti"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_split_from
 msgid "Move Split From"
-msgstr ""
+msgstr "Premik razdeljen od"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_date
@@ -218,34 +227,36 @@ msgid ""
 "Move date: scheduled date until move is done, then date of actual move "
 "processing"
 msgstr ""
+"Datum premika: načrtovani datum, do katerega se premik opravi, nato datum "
+"dejanske obdelave premika"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_quant_ids
 msgid "Moved Quants"
-msgstr ""
+msgstr "Premaknjeni kvanti"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Moves are reserved."
-msgstr "Mouvements reservés"
+msgstr "Premiki so rezervirani."
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Not already reserved"
-msgstr "Non réservé"
+msgstr "Še ne rezervirano"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_note
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Notes"
-msgstr "Notes"
+msgstr "Opombe"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_linked_move_operation_ids
 msgid ""
 "Operations that impact this move for the computation of the remaining "
 "quantities"
-msgstr ""
+msgstr "Operacije, ki vplivajo na ta premik pri izračunu preostalih količin"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_partner_id
@@ -253,141 +264,142 @@ msgid ""
 "Optional address where goods are to be delivered, specifically used for "
 "allotment"
 msgstr ""
+"Opcijski naslov kamor se bo blago dostavilo, ki se uporablja za dodeljevanje"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_returned_move_ids
 msgid "Optional: all returned moves created from this move"
-msgstr ""
+msgstr "Opcijsko: vsi vračilni premiki ustvarjeni iz tega premika"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_move_dest_id
 msgid "Optional: next stock move when chaining them"
-msgstr ""
+msgstr "Opcijsko: naslednji premik zaloge pri veriženju"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_move_orig_ids
 msgid "Optional: previous stock move when chaining them"
-msgstr ""
+msgstr "Opcijsko: prejšnji premik zaloge pri veriženju"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_origin_returned_move_id
 msgid "Origin return move"
-msgstr ""
+msgstr "Izvorni vračilni premik"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_orig_ids
 msgid "Original Move"
-msgstr ""
+msgstr "Izvorni premik"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_restrict_partner_id
 msgid "Owner "
-msgstr ""
+msgstr "Lastnik"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_partially_available
 msgid "Partially Available"
-msgstr ""
+msgstr "Delno na voljo"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_type_id
 msgid "Picking Type"
-msgstr "Type de préparation"
+msgstr "Tip zbirnika"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_route_ids
 msgid "Preferred route to be followed by the procurement order"
-msgstr ""
+msgstr "Prednostna proga za oskrbovalni nalog"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_priority
 msgid "Priority"
-msgstr "Priorité"
+msgstr "Prioriteta"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_procurement_id
 msgid "Procurement"
-msgstr "Procurement"
+msgstr "Oskrbovanje"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_group_id
 msgid "Procurement Group"
-msgstr ""
+msgstr "Skupina oskrbovanja"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_rule_id
 msgid "Procurement Rule"
-msgstr "Règle d'approvisionnement"
+msgstr "Oskrbovalno pravilo"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_product
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_id
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Product"
-msgstr "Article"
+msgstr "Proizvod"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_product_template
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_tmpl_id
 msgid "Product Template"
-msgstr "Modèle de produit"
+msgstr "Predloga proizvoda"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Product UoM"
-msgstr "Unité de mesure"
+msgstr "EM proizvoda"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_propagate
 msgid "Propagate cancel and split"
-msgstr ""
+msgstr "Širjenje preklica in razdelitve"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_push_rule_id
 msgid "Push Rule"
-msgstr ""
+msgstr "Pravilo potiska"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_qty
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_uom_qty
 msgid "Quantity"
-msgstr "Quantité"
+msgstr "Količina"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_reserved_availability
 msgid "Quantity Reserved"
-msgstr ""
+msgstr "Rezervirana količina"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_availability
 msgid "Quantity in stock that can still be reserved for this move"
-msgstr ""
+msgstr "Količina na zalogi, ki se še lahko rezervira za ta premik"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_product_qty
 msgid "Quantity in the default UoM of the product"
-msgstr ""
+msgstr "Količina v privzeti EM za ta proizvod"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_reserved_availability
 msgid "Quantity that has already been reserved for this move"
-msgstr ""
+msgstr "Količina, ki je bila že rezervirana za ta premik"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Release"
-msgstr ""
+msgstr "Izdaja"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Released"
-msgstr ""
+msgstr "Izdano"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_remaining_qty
 msgid "Remaining Quantity"
-msgstr ""
+msgstr "Preostala količina"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_remaining_qty
@@ -395,54 +407,56 @@ msgid ""
 "Remaining Quantity in default UoM according to operations matched with this "
 "move"
 msgstr ""
+"Preostala količina v privzeti EM glede na operacije, ki se ujemajo s tem "
+"premikom"
 
 #. module: stock_reserve
 #: code:addons/stock_reserve/model/stock_reserve.py:205
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_id
 #, python-format
 msgid "Reservation Move"
-msgstr ""
+msgstr "Premik rezervacije"
 
 #. module: stock_reserve
 #: model:stock.location,name:stock_reserve.stock_location_reservation
 msgid "Reservation Stock"
-msgstr ""
+msgstr "Rezervirana zaloga"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Reservations have been released."
-msgstr ""
+msgstr "Rezervacije so bile izdane."
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Reserve"
-msgstr "Réserver"
+msgstr "Rezerva"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Reserved"
-msgstr "Réservé"
+msgstr "Rezervirano"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_reserved_quant_ids
 msgid "Reserved quants"
-msgstr ""
+msgstr "Rezervirani kvanti"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_date_expected
 msgid "Scheduled date for the processing of this move"
-msgstr ""
+msgstr "Načrtovani datum obdelave tega premika"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_scrapped
 msgid "Scrapped"
-msgstr ""
+msgstr "Odpisano"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_sequence
 msgid "Sequence"
-msgstr "Séquence"
+msgstr "Zaporedje"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_location_id
@@ -450,33 +464,35 @@ msgid ""
 "Sets a location if you produce at a fixed location. This can be a partner "
 "location if you subcontract the manufacturing operations."
 msgstr ""
+"Nastavitev lokacije pri proizvodnji na stalni lokaciji. Pri podizvajanju "
+"nekaterih proizvodnih operacij je to lahko partnerjeva lokacija."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_string_availability_info
 msgid "Show various information on stock availability for this move"
-msgstr ""
+msgstr "Prikaz raznih informacij o razpoložljivih zalogah za ta premik"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_origin
 msgid "Source Document"
-msgstr "Document Source"
+msgstr "Izvorni dokument"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_location_id
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Source Location"
-msgstr "Emplacement Source"
+msgstr "Izvorna lokacija"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_state
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Status"
-msgstr "Statut"
+msgstr "Status"
 
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_stock_reservation
 msgid "Stock Reservation"
-msgstr ""
+msgstr "Rezervacija zaloge"
 
 #. module: stock_reserve
 #: model:ir.actions.act_window,name:stock_reserve.action_stock_reservation_tree
@@ -487,12 +503,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Stock Reservations"
-msgstr ""
+msgstr "Rezervacije zaloge"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_procure_method
 msgid "Supply Method"
-msgstr ""
+msgstr "Metoda dobave"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_warehouse_id
@@ -500,6 +516,8 @@ msgid ""
 "Technical field depicting the warehouse to consider for the route selection "
 "on the next procurement (if any)."
 msgstr ""
+"Tehnično polje za določitev skladišča, ki bo upoštevano pri izbiri proge "
+"naslednjega oskrbovanja (če kakšnega)."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_restrict_lot_id
@@ -507,6 +525,8 @@ msgid ""
 "Technical field used to depict a restriction on the lot of quants to "
 "consider when marking this move as 'done'"
 msgstr ""
+"Tehnično polje za določitev omejitev na lotu kvantov, ki bodo upoštevane ob "
+"označbi premika kot 'opravljeno'"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_restrict_partner_id
@@ -514,6 +534,8 @@ msgid ""
 "Technical field used to depict a restriction on the ownership of quants to "
 "consider when marking this move as 'done'"
 msgstr ""
+"Tehnično polje za določitev omejitev na lastništvu kvantov, ki bodo "
+"upoštevani ob označbi premika kot 'opravljeno'"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_price_unit
@@ -522,6 +544,9 @@ msgid ""
 "picking confirmation (when costing method used is 'average price' or "
 "'real'). Value given in company currency and in product uom."
 msgstr ""
+"Tehnično polje za zapis stroška proizvoda nastavljenega s strani uporabnika "
+"med potrjevanjem zbirnika (kadar se uporablja metoda vrednotenja 'povprečna "
+"cena' ali 'realno'). Vrednost je podana v valuti družbe in EM proizvoda."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_split_from
@@ -529,6 +554,8 @@ msgid ""
 "Technical field used to track the origin of a split move, which can be "
 "useful in case of debug"
 msgstr ""
+"Tehnično polje za sledenje izvora razdelitve premika, ki je lahko koristno "
+"pri odpravljanju napak."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_rule_id
@@ -538,7 +565,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_push_rule_id
 msgid "The push rule that created this stock move"
-msgstr ""
+msgstr "Potisno pravilo, ki je ustvarilo ta premik zaloge"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_product_uom_qty
@@ -550,6 +577,12 @@ msgid ""
 "this quantity on assigned moves affects the product reservation, and should "
 "be done with care."
 msgstr ""
+"Količina proizvodov iz stališča inventure. Za premike v stanju 'opravljeno' "
+"je to količina proizvodov, ki so bili dejansko premaknjeni. Za druge premike"
+" je to količina proizvodov, ki je načrtovana za premik. Nižanje te količine "
+"ne ustvari zaostalega naloga. Sprememba te količine na dodeljenih premikih "
+"učinkuje na rezervacijo proizvodov, zato je v takem primeru priporočljiva "
+"pazljivost."
 
 #. module: stock_reserve
 #: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
@@ -561,7 +594,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Total"
-msgstr "Total"
+msgstr "Skupaj"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_partner_id
@@ -574,34 +607,39 @@ msgid "Transfer Reference"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_type_code
+msgid "Type of Operation"
+msgstr "Tip operacije"
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_price_unit
 msgid "Unit Price"
-msgstr "Prix uniatire"
+msgstr "Cena enote"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_uom
 msgid "Unit of Measure"
-msgstr "Unité de mesure"
+msgstr "Enota mere"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date_validity
 msgid "Validity Date"
-msgstr "Date de validité"
+msgstr "Datum veljavnosti"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "View Reservation Move"
-msgstr ""
+msgstr "Prikaz premika rezervacije"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_warehouse_id
 msgid "Warehouse"
-msgstr "Entrepôt"
+msgstr "Skladišče"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_origin_returned_move_id
 msgid "move that created the return move"
-msgstr ""
+msgstr "premik, ki je ustvaril vračilni premik"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_packaging
