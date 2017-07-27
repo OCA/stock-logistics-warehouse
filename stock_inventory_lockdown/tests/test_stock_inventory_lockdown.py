@@ -3,8 +3,8 @@
 # © 2016 Numérigraphe SARL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.exceptions import ValidationError
-from openerp.addons.stock.tests.common import TestStockCommon
+from odoo.exceptions import ValidationError
+from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class StockInventoryLocationTest(TestStockCommon):
@@ -33,7 +33,7 @@ class StockInventoryLocationTest(TestStockCommon):
 
     def test_update_parent_location(self):
         """Updating the parent of a location is OK if no inv. in progress."""
-        self.inventory.action_cancel_inventory()
+        self.inventory.action_cancel_draft()
         self.inventory.location_id.location_id = self.env.ref(
             'stock.stock_location_4')
 
