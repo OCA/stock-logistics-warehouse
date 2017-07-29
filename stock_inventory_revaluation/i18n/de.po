@@ -4,14 +4,13 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 03:01+0000\n"
-"PO-Revision-Date: 2017-04-26 03:01+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"POT-Creation-Date: 2017-07-26 11:42+0000\n"
+"PO-Revision-Date: 2017-07-26 11:42+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -563,7 +562,7 @@ msgid "Valuation Increase Account"
 msgstr "Konto für Wertzunahme"
 
 #. module: stock_inventory_revaluation
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:470
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:471
 #, python-format
 msgid "You can only post quant cost changes."
 msgstr "Sie dürfen nur Quant-Kostenänderungen buchen."
