@@ -3,50 +3,44 @@
 # * stock_mts_mto_rule
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-28 02:58+0000\n"
 "PO-Revision-Date: 2017-07-28 02:58+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/warehouse.py:36
 #, python-format
 msgid "Can't find MTO Rule on the warehouse"
 msgstr ""
-"Ne trouve pas la règle MTO (Make To Order: Fabrication à la commande) de "
-"l'entrepôt"
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/warehouse.py:43
 #, python-format
 msgid "Can't find MTS Rule on the warehouse"
 msgstr ""
-"Ne trouve pas la règle MTS (Make To Stock: produit géré en stock) de "
-"l'entrepôt"
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/warehouse.py:32
 #, python-format
 msgid "Can't find any generic MTS+MTO route."
-msgstr "Aucune règle par défaut MTS+MTO configurée. "
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/rule.py:18
 #, python-format
 msgid "Choose between MTS and MTO"
 msgstr ""
-"Choisir entre MTS(Make To Stock: Produit géré en stock) et MTO(Make To "
-"Order: Produit fabriqué à la commande). "
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_warehouse_mto_mts_management
@@ -55,14 +49,11 @@ msgid ""
 " created only if the virtual stock is less than 0 else, the product will be "
 "taken from stocks"
 msgstr ""
-"Si cette nouvelle route est sélectionnée sur la vue formulaire du produit, "
-"une commande d'achat sera créée seulement si le stock virtuel est inférieur "
-"à 0, sinon, le produit sera pris en stock."
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_rule_mto_rule_id
 msgid "MTO Rule"
-msgstr "MTO (Fab. à la demande)"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse_mts_mto_rule_id
@@ -72,7 +63,7 @@ msgstr ""
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_rule_mts_rule_id
 msgid "MTS Rule"
-msgstr "MTS: Produit stocké"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/warehouse.py:143
@@ -93,12 +84,12 @@ msgstr ""
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_procurement_order
 msgid "Procurement"
-msgstr "Procurement"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_procurement_rule
 msgid "Procurement Rule"
-msgstr "Règle d'approvisionnement"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_order_mts_mto_procurement_ids
@@ -113,4 +104,4 @@ msgstr ""
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_warehouse
 msgid "Warehouse"
-msgstr "Entrepôt"
+msgstr "Magazijn"
