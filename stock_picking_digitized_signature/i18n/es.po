@@ -1,0 +1,149 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_picking_digitized_signature
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-10 08:54+0000\n"
+"PO-Revision-Date: 2017-07-10 08:54+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_digitized_signature
+#: model:mail.template,body_html:stock_picking_digitized_signature.email_picking_template
+msgid "\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"    <p>Hello ${object.partner_id.name},</p>\n"
+"    <p>A new picking is available for you: </p>\n"
+"\n"
+"    <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"       &nbsp;&nbsp;<strong>REFERENCES</strong><br />\n"
+"       &nbsp;&nbsp;Picking number: <strong>${object.name}</strong><br />\n"
+"       &nbsp;&nbsp;Picking date: ${object.date_done or object.date}<br />\n"
+"       % if object.origin:\n"
+"       &nbsp;&nbsp;Order reference: ${object.origin}<br />\n"
+"       % endif\n"
+"       % if object.user_id:\n"
+"       &nbsp;&nbsp;Your contact: <a href=\"mailto:${object.user_id.email or ''}?subject=Picking%20${object.name}\">${object.user_id.name}</a>\n"
+"       % endif\n"
+"    </p>\n"
+"\n"
+"    <br/>\n"
+"    <p>If you have any question, do not hesitate to contact us.</p>\n"
+"    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <br/>\n"
+"    <div style=\"width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"        <h3 style=\"margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
+"            <strong style=\"text-transform:uppercase;\">${object.company_id.name}</strong></h3>\n"
+"    </div>\n"
+"    <div style=\"width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
+"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
+"            ${object.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}\n"
+"        </span>\n"
+"        % if object.company_id.phone:\n"
+"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Phone:&nbsp; ${object.company_id.phone}\n"
+"            </div>\n"
+"        % endif\n"
+"        % if object.company_id.website:\n"
+"            <div>\n"
+"                Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            </div>\n"
+"        %endif\n"
+"        <p></p>\n"
+"    </div>\n"
+"</div>\n"
+"        "
+msgstr "\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"    <p>Hola ${object.partner_id.name},</p>\n"
+"    <p>Un nuevo albarán está disponible: </p>\n"
+"\n"
+"    <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"       &nbsp;&nbsp;<strong>REFERENCIA</strong><br />\n"
+"       &nbsp;&nbsp;Número de albarán: <strong>${object.name}</strong><br />\n"
+"       &nbsp;&nbsp;Fecha del albarán: ${object.date_done or object.date}<br />\n"
+"       % if object.origin:\n"
+"       &nbsp;&nbsp;Su referencia: ${object.origin}<br />\n"
+"       % endif\n"
+"       % if object.user_id:\n"
+"       &nbsp;&nbsp;Contacto: <a href=\"mailto:${object.user_id.email or ''}?subject=Picking%20${object.name}\">${object.user_id.name}</a>\n"
+"       % endif\n"
+"    </p>\n"
+"\n"
+"    <br/>\n"
+"    <p>Si tiene cualquier pregunta, no dude en contactar con nosotros.</p>\n"
+"    <p>Gracias por elegir ${object.company_id.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <br/>\n"
+"    <div style=\"width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"        <h3 style=\"margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
+"            <strong style=\"text-transform:uppercase;\">${object.company_id.name}</strong></h3>\n"
+"    </div>\n"
+"    <div style=\"width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
+"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
+"            ${object.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}\n"
+"        </span>\n"
+"        % if object.company_id.phone:\n"
+"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Teléfono:&nbsp; ${object.company_id.phone}\n"
+"            </div>\n"
+"        % endif\n"
+"        % if object.company_id.website:\n"
+"            <div>\n"
+"                Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            </div>\n"
+"        %endif\n"
+"        <p></p>\n"
+"    </div>\n"
+"</div>\n"
+"        "
+
+#. module: stock_picking_digitized_signature
+#: model:mail.template,subject:stock_picking_digitized_signature.email_picking_template
+msgid "${object.company_id.name} Picking (Ref ${object.name or 'n/a'})"
+msgstr "${object.company_id.name} Albarán (Ref ${object.name or 'n/a'})"
+
+#. module: stock_picking_digitized_signature
+#: model:ir.ui.view,arch_db:stock_picking_digitized_signature.report_delivery_document
+#: model:ir.ui.view,arch_db:stock_picking_digitized_signature.report_picking
+msgid "<strong>Customer acceptance:</strong>"
+msgstr "<strong>Aceptación de cliente:</strong>"
+
+#. module: stock_picking_digitized_signature
+#: code:addons/stock_picking_digitized_signature/models/stock.py:39
+#, python-format
+msgid "Compose Email"
+msgstr "Componer correo electrónico"
+
+#. module: stock_picking_digitized_signature
+#: model:ir.model.fields,field_description:stock_picking_digitized_signature.field_stock_picking_customer_signature
+msgid "Customer acceptance"
+msgstr "Aceptación de cliente"
+
+#. module: stock_picking_digitized_signature
+#: model:mail.template,report_name:stock_picking_digitized_signature.email_picking_template
+msgid "Picking_${(object.name or '').replace('/','_')}"
+msgstr "Albaran_${(object.name or '').replace('/','_')}"
+
+#. module: stock_picking_digitized_signature
+#: model:ir.model.fields,field_description:stock_picking_digitized_signature.field_stock_picking_user_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: stock_picking_digitized_signature
+#: model:ir.ui.view,arch_db:stock_picking_digitized_signature.view_picking_form
+msgid "Send by Email"
+msgstr "Enviar por correo electrónico"
+
+#. module: stock_picking_digitized_signature
+#: model:ir.model,name:stock_picking_digitized_signature.model_stock_picking
+msgid "Transfer"
+msgstr "Transferencia"
