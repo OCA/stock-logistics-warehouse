@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 09:22+0000\n"
-"PO-Revision-Date: 2017-04-25 10:42+0000\n"
+"POT-Creation-Date: 2017-07-22 10:38+0000\n"
+"PO-Revision-Date: 2017-07-24 07:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -608,7 +608,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,warehouse_id:0
 msgid "Warehouse"
-msgstr ""
+msgstr "Almacén"
 
 #. module: stock_reserve
 #: help:stock.reservation,origin_returned_move_id:0
