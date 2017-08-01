@@ -12,6 +12,7 @@
                                 <field name="quant" />
                                 <field name="location_id" />
                                 <field name="lot_id" />
+                                <field name="in_date" />
                                 <field name="package_id" />
                                 <field name="selected" />
                                 <field name="qty" attrs="{'readonly':[('selected', '=' ,False)]}" sum="qty"/>
