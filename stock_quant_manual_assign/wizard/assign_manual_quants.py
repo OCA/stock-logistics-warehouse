@@ -19,7 +19,7 @@ class AssignManualQuants(models.TransientModel):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
         for record in self.filtered('quants_lines'):
             if float_compare(record.lines_qty, move.product_qty,
-                            precision_digits=precision_digits) > 0:
+                             precision_digits=precision_digits) > 0:
                 raise exceptions.Warning(
                     _('Quantity is higher than the needed one'))
 
