@@ -2,8 +2,8 @@
 # (c) 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import openerp.tests.common as common
-from openerp import exceptions
+import odoo.tests.common as common
+from odoo import exceptions
 
 
 class TestStockQuantManualAssign(common.TransactionCase):
@@ -108,6 +108,9 @@ class TestStockQuantManualAssign(common.TransactionCase):
             wizard.lines_qty)
         for quant in self.move.reserved_quant_ids:
             self.assertTrue(quant in selected_quants)
+        wizard.assign_quants()
+        self.assertEqual(len(wizard.quants_lines.filtered('selected')),
+                         len(self.move.reserved_quant_ids))
 
     def test_quant_assign_wizard_after_availability_check(self):
         self.move.action_assign()
