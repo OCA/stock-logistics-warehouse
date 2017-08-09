@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-03 01:23+0000\n"
-"PO-Revision-Date: 2017-06-03 01:23+0000\n"
+"POT-Creation-Date: 2017-07-28 02:58+0000\n"
+"PO-Revision-Date: 2017-07-28 02:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,7 @@ msgstr ""
 
 #. module: account_move_line_stock_info
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move_account_move_line_ids
+#: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_reservation_account_move_line_ids
 msgid "Account move line ids"
 msgstr "Mover las ID´s de la cuenta"
 
