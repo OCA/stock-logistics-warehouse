@@ -3,7 +3,7 @@
 # (c) 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import api, exceptions, fields, models, _
+from odoo import _, api, exceptions, fields, models
 import odoo.addons.decimal_precision as dp
 from odoo.tools.float_utils import float_compare
 
@@ -17,9 +17,9 @@ class AssignManualQuants(models.TransientModel):
         precision_digits = dp.get_precision('Product Unit of Measure'
                                             )(self.env.cr)[1]
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-        for record in self.filtered(lambda x: x.quants_lines):
+        for record in self.filtered('quants_lines'):
             if float_compare(record.lines_qty, move.product_qty,
-                             precision_digits=precision_digits) > 0:
+                            precision_digits=precision_digits) > 0:
                 raise exceptions.Warning(
                     _('Quantity is higher than the needed one'))
 
@@ -51,9 +51,8 @@ class AssignManualQuants(models.TransientModel):
             move.picking_id.recompute_pack_op = True
         for quant_id in move.reserved_quant_ids.ids:
             move.write({'reserved_quant_ids': [[3, quant_id]]})
-        for line in self.quants_lines:
-            if line.selected:
-                quants.append([line.quant, line.qty])
+        for line in self.quants_lines.filtered('selected'):
+            quants.append([line.quant, line.qty])
         self.env['stock.quant'].quants_reserve(quants, move)
         return {}
 
