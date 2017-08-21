@@ -37,4 +37,4 @@ class StockWarehouseOrderpoint(models.Model):
         compute='_compute_product_available_qty')
     product_category = fields.Many2one(string='Product Category',
                                        related='product_id.categ_id',
-                                       store=True)
+                                       store=True, readonly=True)
