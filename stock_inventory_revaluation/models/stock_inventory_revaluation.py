@@ -404,7 +404,8 @@ class StockInventoryRevaluation(models.Model):
     def button_cancel(self):
         for revaluation in self:
             for reval_quant in revaluation.reval_quant_ids:
-                reval_quant.quant_id.write({'cost': reval_quant.old_cost})
+                reval_quant.quant_id.sudo().write(
+                    {'cost': reval_quant.old_cost})
             if revaluation.account_move_ids:
                 # second, invalidate the move(s)
                 revaluation.account_move_ids.button_cancel()
