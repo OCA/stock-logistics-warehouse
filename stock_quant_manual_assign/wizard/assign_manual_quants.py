@@ -111,7 +111,7 @@ class AssignManualQuantsLines(models.TransientModel):
         related='quant.package_id', readonly=True,
         groups="stock.group_tracking_lot")
     in_date = fields.Date(
-        string='In Date', readonly=True)
+        string='Incoming Date', readonly=True)
     qty = fields.Float(
         string='QTY', digits=dp.get_precision('Product Unit of Measure'))
     selected = fields.Boolean(string='Select')
