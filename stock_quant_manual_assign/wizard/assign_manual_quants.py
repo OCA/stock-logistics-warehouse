@@ -68,6 +68,7 @@ class AssignManualQuants(models.TransientModel):
         quants_lines = [{
             'quant': x.id,
             'lot_id': x.lot_id.id,
+            'in_date': x.in_date,
             'package_id': x.package_id.id,
             'selected': x in move.reserved_quant_ids,
             'qty': x.qty if x in move.reserved_quant_ids else 0,
@@ -109,6 +110,8 @@ class AssignManualQuantsLines(models.TransientModel):
         comodel_name='stock.quant.package', string='Package',
         related='quant.package_id', readonly=True,
         groups="stock.group_tracking_lot")
+    in_date = fields.Date(
+        string='Incoming Date', readonly=True)
     qty = fields.Float(
         string='QTY', digits=dp.get_precision('Product Unit of Measure'))
     selected = fields.Boolean(string='Select')
