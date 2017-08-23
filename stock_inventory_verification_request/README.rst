@@ -6,8 +6,8 @@
 Stock Inventory Verification Request
 ====================================
 
-Adds the capability to request a Slot Verification when a inventory is
-'Pending to Approve'. When asked from Inventory Adjustment, which have
+Adds the capability to request a Slot Verification when an inventory is
+'Pending to Approve'. When asked from an inventory adjustment, which have
 discrepancies over the threshold for the location, a Slot Verification
 Request will be created for each line that exceed the maximum discrepancy
 allowed.
@@ -15,8 +15,8 @@ allowed.
 A SVR must be created when warehouse operation (e.g. an inventory adjustment,
 a cycle count...) uncovers a count discrepancy within a slot (a small stock
 location), and the discrepancy is greater than the pre-defined acceptable
-variance threshold. A stock manager should accept the SVR and assign it to
-someone to perform it.
+variance threshold. It is a stock manager's task to confirm the SVR and
+assign it to someone to perform it.
 
 The aim of SVR is to find and fix errors before they are transferred to
 another location, so they will not be found again in similar stock operations.
@@ -38,10 +38,9 @@ In order to use this module act as follow:
 * Once you have found the problem and you have fixed it 'Mark as Solved' the
   Verification.
 
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/9.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 
 Bug Tracker
@@ -52,7 +51,6 @@ Bugs are tracked on `GitHub Issues
 check there if your issue has already been reported. If you spotted it first,
 help us smash it by providing detailed and welcomed feedback.
 
-
 Images
 ------
 
@@ -62,7 +60,6 @@ Contributors
 ------------
 
 * Lois Rilo Antelo <lois.rilo@eficent.com>
-
 
 Maintainer
 ----------
