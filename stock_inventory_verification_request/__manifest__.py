@@ -6,7 +6,7 @@
     "name": "Stock Inventory Verification Request",
     "summary": "Adds the capability to request a Slot Verification when "
                "a inventory is Pending to Approve",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
@@ -17,7 +17,7 @@
         'views/stock_slot_verification_request_view.xml',
         'views/stock_inventory_view.xml',
         'data/slot_verification_request_sequence.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
     ],
     "license": "AGPL-3",
     'installable': True,
