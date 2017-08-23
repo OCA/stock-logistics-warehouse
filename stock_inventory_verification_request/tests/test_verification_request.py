@@ -3,8 +3,8 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import openerp.tests.common as common
-from openerp.exceptions import AccessError
+import odoo.tests.common as common
+from odoo.exceptions import AccessError
 
 
 class TestStockVerificationRequest(common.TransactionCase):
