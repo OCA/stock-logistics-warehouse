@@ -8,10 +8,10 @@ Stock Inventory Discrepancy
 
 Adds the capability to show the discrepancy of every line in an inventory and
 to block the inventory validation (setting it as 'Pending to Approve') when the
-discrepancy is greater than a user defined threshold.
+discrepancy is greater than an user defined threshold.
 
 Only new group "Validate All inventory Adjustments" will be able to force the
-validation of those blocked inventories. By default Stock manager will belong
+validation of those blocked inventories. By default, Stock manager will belong
 to this group. In addition, Stock Users can validate inventories under the
 threshold now.
 
@@ -24,7 +24,7 @@ You can configure the threshold as described below:
 #. Go to "Inventory > Warehouse Management" > Warehouses" or to "Inventory >
    Warehouse Management" > Locations".
 #. Modify the "Maximum Discrepancy Rate Threshold" either in a Warehouse or
-   in a location. If set to 0.0 the threshold is disabled.
+   in a location. If set to 0.0 in both the threshold is disabled.
 
 Usage
 =====
@@ -42,7 +42,7 @@ If you configured a "Maximum Discrepancy Rate Threshold".
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/9.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 
 Bug Tracker
