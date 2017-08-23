@@ -5,7 +5,7 @@
 <odoo>
 
     <record id="view_inventory_form" model="ir.ui.view">
-        <field name="name">Inventory form view - SVR extension </field>
+        <field name="name">Inventory form view - SVR extension</field>
         <field name="model">stock.inventory</field>
         <field name="inherit_id" ref="stock.view_inventory_form"/>
         <field name="arch" type="xml">
@@ -35,7 +35,7 @@
                         attrs="{'invisible': [('slot_verification_ids', '=', [])]}"
                         name="action_open_svr"
                         type="object"
-                        icon="gtk-open"/>
+                        icon="fa-sticky-note"/>
             </xpath>
         </field>
     </record>

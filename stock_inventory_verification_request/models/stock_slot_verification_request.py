@@ -3,7 +3,7 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class SlotVerificationRequest(models.Model):
@@ -12,19 +12,24 @@ class SlotVerificationRequest(models.Model):
 
     @api.model
     def create(self, vals):
-        vals['name'] = self.env['ir.sequence'].next_by_code(
-            'stock.slot.verification.request') or ''
+        if not vals.get('name') or vals.get('name') == '/':
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+                'stock.slot.verification.request') or '/'
         return super(SlotVerificationRequest, self).create(vals)
 
-    @api.one
+    @api.multi
     def _count_involved_moves(self):
-        self.involved_move_count = len(self.involved_move_ids)
+        for rec in self:
+            rec.involved_move_count = len(rec.involved_move_ids)
 
-    @api.one
+    @api.multi
     def _count_involved_inv_lines(self):
-        self.involved_inv_line_count = len(self.involved_inv_line_ids)
+        for rec in self:
+            rec.involved_inv_line_count = len(rec.involved_inv_line_ids)
 
-    name = fields.Char(string='Name', readonly=True)
+    name = fields.Char(
+        default="/", required=True,
+        readonly=True, states={'wait': [('readonly', False)]})
     inventory_id = fields.Many2one(comodel_name='stock.inventory',
                                    string='Inventory Adjustment',
                                    readonly=True)
@@ -44,36 +49,37 @@ class SlotVerificationRequest(models.Model):
                                      string='Assigned to')
     product_id = fields.Many2one(comodel_name='product.product',
                                  string='Product', required=True)
-    notes = fields.Text('Notes')
+    notes = fields.Text(string='Notes')
     involved_move_ids = fields.Many2many(
         comodel_name='stock.move',
         relation='slot_verification_move_involved_rel',
         column1='slot_verification_request_id',
         column2='move_id',
         string='Involved Stock Moves')
-    involved_move_count = fields.Integer(compute=_count_involved_moves)
+    involved_move_count = fields.Integer(compute='_count_involved_moves')
     involved_inv_line_ids = fields.Many2many(
         comodel_name='stock.inventory.line',
         relation='slot_verification_inv_line_involved_rel',
         column1='slot_verification_request_id',
         column2='inventory_line_id',
         string='Involved Inventory Lines')
-    involved_inv_line_count = fields.Integer(compute=_count_involved_inv_lines)
+    involved_inv_line_count = fields.Integer(
+        compute='_count_involved_inv_lines')
 
-    @api.model
+    @api.multi
     def _get_involved_moves_domain(self):
         domain = [('product_id', '=', self.product_id.id), '|',
                   ('location_id', '=', self.location_id.id),
                   ('location_dest_id', '=', self.location_id.id)]
         return domain
 
-    @api.model
+    @api.multi
     def _get_involved_lines_domain(self):
         domain = [('product_id', '=', self.product_id.id),
                   ('location_id', '=', self.location_id.id)]
         return domain
 
-    @api.model
+    @api.multi
     def _get_involved_lines_and_locations(self):
         involved_moves = self.env['stock.move'].search(
             self._get_involved_moves_domain())
@@ -81,34 +87,34 @@ class SlotVerificationRequest(models.Model):
             self._get_involved_lines_domain())
         return involved_moves, involved_lines
 
-    @api.one
+    @api.multi
     def action_confirm(self):
-        self.state = 'open'
-        involved_moves, involved_lines = \
-            self._get_involved_lines_and_locations()
-        self.involved_move_ids = involved_moves
-        self.involved_inv_line_ids = involved_lines
+        self.write({'state': 'open'})
+        for rec in self:
+            involved_moves, involved_lines = \
+                rec._get_involved_lines_and_locations()
+            rec.involved_move_ids = involved_moves
+            rec.involved_inv_line_ids = involved_lines
         return True
 
-    @api.one
+    @api.multi
     def action_cancel(self):
-        self.state = 'cancelled'
+        self.write({'state': 'cancelled'})
         return True
 
-    @api.one
+    @api.multi
     def action_solved(self):
-        self.state = 'done'
+        self.write({'state': 'done'})
         return True
 
     @api.multi
     def action_view_moves(self):
-        action = self.env.ref('stock.action_move_form2')
+        action = self.env.ref('stock.stock_move_action')
         result = action.read()[0]
         result['context'] = {}
-        moves_ids = sum([svr.involved_move_ids.ids for svr in self], [])
+        moves_ids = self.mapped('involved_move_ids').ids
         if len(moves_ids) > 1:
-            result['domain'] = \
-                "[('id','in',[" + ','.join(map(str, moves_ids)) + "])]"
+            result['domain'] = [('id', 'in', moves_ids)]
         elif len(moves_ids) == 1:
             res = self.env.ref('stock.view_move_form', False)
             result['views'] = [(res and res.id or False, 'form')]
@@ -121,10 +127,9 @@ class SlotVerificationRequest(models.Model):
             'stock_inventory_verification_request.action_inv_adj_line_tree')
         result = action.read()[0]
         result['context'] = {}
-        line_ids = sum([svr.involved_inv_line_ids.ids for svr in self], [])
+        line_ids = self.mapped('involved_inv_line_ids').ids
         if len(line_ids) > 1:
-            result['domain'] = \
-                "[('id','in',[" + ','.join(map(str, line_ids)) + "])]"
+            result['domain'] = [('id', 'in', line_ids)]
         elif len(line_ids) == 1:
             res = self.env.ref('stock_inventory_verification_request.'
                                'view_inventory_line_form', False)
