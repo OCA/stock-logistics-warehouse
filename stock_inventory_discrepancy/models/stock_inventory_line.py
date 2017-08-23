@@ -3,32 +3,33 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class StockInventoryLine(models.Model):
     _inherit = 'stock.inventory.line'
 
-    @api.one
+    @api.multi
     def _compute_discrepancy(self):
-        self.discrepancy_qty = self.product_qty - self.theoretical_qty
-        if self.theoretical_qty:
-            self.discrepancy_percent = 100 * abs(
-                (self.product_qty - self.theoretical_qty) /
-                self.theoretical_qty)
-        elif not self.theoretical_qty and self.product_qty:
-            self.discrepancy_percent = 100.0
+        for l in self:
+            l.discrepancy_qty = l.product_qty - l.theoretical_qty
+            if l.theoretical_qty:
+                l.discrepancy_percent = 100 * abs(
+                    (l.product_qty - l.theoretical_qty) /
+                    l.theoretical_qty)
+            elif not l.theoretical_qty and l.product_qty:
+                l.discrepancy_percent = 100.0
 
-    @api.one
-    def _get_discrepancy_threshold(self):
-        wh_id = self.location_id.get_warehouse(self.location_id)
-        wh = self.env['stock.warehouse'].browse(wh_id)
-        if self.location_id.discrepancy_threshold > 0.0:
-            self.discrepancy_threshold = self.location_id.discrepancy_threshold
-        elif wh.discrepancy_threshold > 0.0:
-            self.discrepancy_threshold = wh.discrepancy_threshold
-        else:
-            self.discrepancy_threshold = False
+    @api.multi
+    def _compute_discrepancy_threshold(self):
+        for l in self:
+            wh = l.location_id.get_warehouse()
+            if l.location_id.discrepancy_threshold > 0.0:
+                l.discrepancy_threshold = l.location_id.discrepancy_threshold
+            elif wh.discrepancy_threshold > 0.0:
+                l.discrepancy_threshold = wh.discrepancy_threshold
+            else:
+                l.discrepancy_threshold = False
 
     discrepancy_qty = fields.Float(
         string='Discrepancy',
@@ -45,4 +46,4 @@ class StockInventoryLine(models.Model):
         string='Threshold (%)',
         digits=(3, 2),
         help="Maximum Discrepancy Rate Threshold",
-        compute=_get_discrepancy_threshold)
+        compute=_compute_discrepancy_threshold)
