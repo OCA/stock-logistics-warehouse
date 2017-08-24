@@ -135,7 +135,7 @@
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="model_stock_cycle_count" />
         <field name="state">code</field>
-        <field name="code">self.action_create_inventory_adjustment(cr, uid, context.get('active_ids', []), context=context)</field>
+        <field name="code">records.action_create_inventory_adjustment()</field>
     </record>
 
     <record model="ir.values" id="action_cycle_count_confirm">
