@@ -15,14 +15,16 @@
                         context="{'location_id': active_ids}"
                         type="object"/>
             </xpath>
-            <field name="active" position="after">
-                <field name="zero_confirmation_disabled"/>
-                <field name="cycle_count_disabled"/>
-                <label for="loc_accuracy"/>
-                <div>
-                    <field name="loc_accuracy" class="oe_inline"/> %
-                </div>
-            </field>
+            <group name="localization" position="after">
+                <group name="cycle_count" string="Cycle Count">
+                    <field name="zero_confirmation_disabled"/>
+                    <field name="cycle_count_disabled"/>
+                    <label for="loc_accuracy"/>
+                    <div>
+                        <field name="loc_accuracy" class="oe_inline"/> %
+                    </div>
+                </group>
+            </group>
         </field>
     </record>
 
