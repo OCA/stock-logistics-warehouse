@@ -3,9 +3,9 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models, _
-from openerp.exceptions import UserError
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import timedelta, datetime
 
 
@@ -83,7 +83,7 @@ class StockCycleCountRule(models.Model):
         """Get the warehouses for the selected locations."""
         wh_ids = []
         for loc in self.location_ids:
-            wh_ids.append(loc.get_warehouse(loc))
+            wh_ids.append(loc.get_warehouse().id)
         wh_ids = list(set(wh_ids))
         self.warehouse_ids = self.env['stock.warehouse'].browse(wh_ids)
 
@@ -92,7 +92,7 @@ class StockCycleCountRule(models.Model):
                                  string='Type of rule',
                                  required=True)
     rule_description = fields.Char(string='Rule Description',
-                                   compute=_get_rule_description)
+                                   compute='_get_rule_description')
     active = fields.Boolean(string='Active', default=True)
     periodic_qty_per_period = fields.Integer(string='Counts per period',
                                              default=1)
@@ -101,7 +101,7 @@ class StockCycleCountRule(models.Model):
         string='Turnover Inventory Value Threshold')
     currency_id = fields.Many2one(comodel_name='res.currency',
                                   string='Currency',
-                                  compute=_compute_currency)
+                                  compute='_compute_currency')
     accuracy_threshold = fields.Float(string='Minimum Accuracy Threshold',
                                       digits=(3, 2))
     apply_in = fields.Selection(
@@ -175,7 +175,7 @@ class StockCycleCountRule(models.Model):
 
     @api.model
     def _compute_turnover(self, move):
-        price = move.get_price_unit(move)
+        price = move.get_price_unit()
         turnover = move.product_uom_qty * price
         return turnover
 
