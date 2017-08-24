@@ -48,7 +48,7 @@
                             </div>
                         </group>
                     </group>
-                    <group name="applied_in" string="Applied in:">
+                    <group name="applied_in" string="Applied in:" col="4">
                         <p colspan="4">You can apply the cycle count rules in complete
                         warehouses or specific zones. A zone it is
                         understood as a location and all its children.</p>
@@ -57,7 +57,9 @@
                         "Exclude from Cycle Count".</p>
                         <field name="apply_in"/>
                         <field name="warehouse_ids" widget="many2many_tags"/>
-                        <field name="location_ids"
+                        <label for="location_ids"
+                               attrs="{'invisible': [('apply_in', '!=', 'location')]}"/>
+                        <field name="location_ids" colspan="3" nolabel="1"
                                attrs="{'invisible': [('apply_in', '!=', 'location')]}"/>
                     </group>
 

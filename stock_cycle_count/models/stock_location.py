@@ -5,8 +5,8 @@
 
 import logging
 
-from openerp import api, fields, models, tools
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo import api, fields, models, tools
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
 _logger = logging.getLogger(__name__)
 
@@ -26,8 +26,7 @@ class StockLocation(models.Model):
             ('location_id', '=', self.id), ('state', '=', 'done')])
         history = history.sorted(key=lambda r: r.write_date, reverse=True)
         if history:
-            wh_id = self.get_warehouse(self)
-            wh = self.env['stock.warehouse'].browse(wh_id)
+            wh = self.get_warehouse()
             if len(history) > wh.counts_for_accuracy_qty:
                 self.loc_accuracy = mean(history[:wh.counts_for_accuracy_qty].
                                          mapped('inventory_accuracy'))
@@ -47,9 +46,9 @@ class StockLocation(models.Model):
     qty_variance_inventory_threshold = fields.Float('Acceptable Inventory '
                                                     'Quantity Variance '
                                                     'Threshold')
-    loc_accuracy = fields.Float(string='Inventory Accuracy',
-                                compute=_compute_loc_accuracy,
-                                digits=(3, 2))
+    loc_accuracy = fields.Float(
+        string='Inventory Accuracy', compute='_compute_loc_accuracy',
+        digits=(3, 2))
 
     @api.model
     def _get_zero_confirmation_domain(self):
@@ -59,8 +58,7 @@ class StockLocation(models.Model):
     @api.one
     def check_zero_confirmation(self):
         if not self.zero_confirmation_disabled:
-            wh_id = self.get_warehouse(self)
-            wh = self.env['stock.warehouse'].browse(wh_id)
+            wh = self.get_warehouse()
             rule_model = self.env['stock.cycle.count.rule']
             zero_rule = rule_model.search([
                 ('rule_type', '=', 'zero'),
@@ -73,9 +71,8 @@ class StockLocation(models.Model):
 
     def create_zero_confirmation_cycle_count(self):
         date = datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        wh_id = self.get_warehouse(self)
-        date_horizon = self.env['stock.warehouse'].browse(
-            wh_id).get_horizon_date()[0].strftime(
+        wh_id = self.get_warehouse().id
+        date_horizon = self.get_warehouse().get_horizon_date()[0].strftime(
             DEFAULT_SERVER_DATETIME_FORMAT)
         counts_planned = self.env['stock.cycle.count'].search([
             ('date_deadline', '<', date_horizon), ('state', '=', 'draft'),
