@@ -37,9 +37,9 @@ Recommendations
 
 It is highly recommended to use this module in conjunction with:
 
-* `stock_inventory_verification_request`: Adds the capability to request Slot
+* ``stock_inventory_verification_request``: Adds the capability to request Slot
   Verifications.
-* `stock_inventory_lockdown`: Lock down locations during inventories.
+* ``stock_inventory_lockdown``: Lock down locations during inventories.
 
 Configuration
 =============
@@ -72,7 +72,7 @@ is described below.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/9.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 
 Bug Tracker
@@ -94,7 +94,6 @@ Contributors
 
 * Lois Rilo <lois.rilo@eficent.com>
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
-
 
 Maintainer
 ----------

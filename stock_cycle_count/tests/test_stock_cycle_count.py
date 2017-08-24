@@ -2,9 +2,9 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp.tests import common
-from openerp.exceptions import ValidationError
-from openerp.exceptions import AccessError
+from odoo.tests import common
+from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError
 
 from datetime import datetime, timedelta
 

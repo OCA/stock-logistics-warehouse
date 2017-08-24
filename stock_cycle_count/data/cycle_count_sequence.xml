@@ -2,8 +2,7 @@
 <!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="seq_cycle_count" model="ir.sequence">
             <field name="name">Cycle Count</field>
@@ -13,5 +12,4 @@
             <field name="company_id" eval="False"/>
         </record>
 
-    </data>
 </odoo>
