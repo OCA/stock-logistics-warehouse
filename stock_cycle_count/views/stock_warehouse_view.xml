@@ -30,7 +30,7 @@
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="model_stock_warehouse" />
         <field name="state">code</field>
-        <field name="code">self.action_compute_cycle_count_rules(cr, uid, context.get('active_ids', []), context=context)</field>
+        <field name="code">records.action_compute_cycle_count_rules()</field>
     </record>
 
     <record model="ir.values" id="action_warehouse_execute_cycle_count">
