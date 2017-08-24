@@ -3,9 +3,12 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo import api, fields, models
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime, timedelta
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class StockWarehouse(models.Model):
@@ -13,8 +16,7 @@ class StockWarehouse(models.Model):
 
     cycle_count_rule_ids = fields.Many2many(
         comodel_name='stock.cycle.count.rule',
-        relation='warehouse_cycle_count_'
-                 'rule_rel',
+        relation='warehouse_cycle_count_rule_rel',
         column1='warehouse_id',
         column2='rule_id',
         string='Cycle Count Rules')
@@ -113,6 +115,13 @@ class StockWarehouse(models.Model):
 
     @api.model
     def cron_cycle_count(self):
-        whs = self.search([])
-        whs.action_compute_cycle_count_rules()
+        _logger.info("stock_cycle_count cron job started.")
+        try:
+            whs = self.search([])
+            whs.action_compute_cycle_count_rules()
+        except:
+            _logger.info(
+                "An error raised while running stock_cycle_count cron job.")
+            raise
+        _logger.info("stock_cycle_count cron job ended.")
         return True
