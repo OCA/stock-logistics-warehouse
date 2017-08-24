@@ -3,8 +3,8 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models, _
-from openerp.exceptions import UserError
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class StockCycleCount(models.Model):
@@ -12,9 +12,10 @@ class StockCycleCount(models.Model):
     _description = "Stock Cycle Counts"
     _inherit = 'mail.thread'
 
-    @api.one
+    @api.multi
     def _count_inventory_adj(self):
-        self.inventory_adj_count = len(self.stock_adjustment_ids)
+        for rec in self:
+            rec.inventory_adj_count = len(rec.stock_adjustment_ids)
 
     @api.model
     def create(self, vals):
@@ -52,14 +53,14 @@ class StockCycleCount(models.Model):
                                            inverse_name='cycle_count_id',
                                            string='Inventory Adjustment',
                                            track_visibility='onchange')
-    inventory_adj_count = fields.Integer(compute=_count_inventory_adj)
+    inventory_adj_count = fields.Integer(compute='_count_inventory_adj')
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', required=True,
         default=_company_get, readonly=True)
 
-    @api.one
+    @api.multi
     def do_cancel(self):
-        self.state = 'cancelled'
+        self.write({'state': 'cancelled'})
 
     @api.model
     def _prepare_inventory_adjustment(self):
@@ -70,15 +71,16 @@ class StockCycleCount(models.Model):
             'exclude_sublocation': True
         }
 
-    @api.one
+    @api.multi
     def action_create_inventory_adjustment(self):
-        if self.state != 'draft':
+        if any([s != 'draft' for s in self.mapped('state')]):
             raise UserError(_(
                 "You can only confirm cycle counts in state 'Planned'."
             ))
-        data = self._prepare_inventory_adjustment()
-        self.env['stock.inventory'].create(data)
-        self.state = 'open'
+        for rec in self:
+            data = rec._prepare_inventory_adjustment()
+            self.env['stock.inventory'].create(data)
+        self.write({'state': 'open'})
         return True
 
     @api.multi
@@ -86,11 +88,9 @@ class StockCycleCount(models.Model):
         action = self.env.ref('stock.action_inventory_form')
         result = action.read()[0]
         result['context'] = {}
-        adjustment_ids = sum([cycle_count.stock_adjustment_ids.ids
-                              for cycle_count in self], [])
+        adjustment_ids = self.mapped('stock_adjustment_ids').ids
         if len(adjustment_ids) > 1:
-            result['domain'] = \
-                "[('id','in',[" + ','.join(map(str, adjustment_ids)) + "])]"
+            result['domain'] = [('id', 'in', adjustment_ids)]
         elif len(adjustment_ids) == 1:
             res = self.env.ref('stock.view_inventory_form', False)
             result['views'] = [(res and res.id or False, 'form')]
