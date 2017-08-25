@@ -64,7 +64,7 @@ class ProductProduct(models.Model):
         for this in self:
             stock_days = int(float_round((((
                 this.virtual_available or 0
-                ) - stock_period_min) / turnover_average) + .5, 0))
+                ) / turnover_average) - stock_period_min)  + .5, 0))
             if this.has_purchase_draft():
                 return False
             if stock_days < 0:
