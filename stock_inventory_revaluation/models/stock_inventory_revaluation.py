@@ -316,6 +316,7 @@ class StockInventoryRevaluation(models.Model):
             if revaluation.product_id.\
                     cost_method == 'real':
                 for reval_quant in revaluation.reval_quant_ids:
+                    reval_quant.old_cost = reval_quant.quant_id.cost
                     reval_quant.write_new_cost()
             else:
                 if revaluation.product_id.\
@@ -336,7 +337,9 @@ class StockInventoryRevaluation(models.Model):
                                   variant.name))
                     if revaluation.revaluation_type == 'price_change':
                         revaluation.old_cost = revaluation.current_cost
-                        revaluation.product_id.write(
+                        revaluation.product_id.with_context(
+                            force_company=revaluation.company_id.id
+                        ).sudo().write(
                             {'standard_price': revaluation.new_cost})
                     else:
                         revaluation.old_cost = revaluation.current_cost
@@ -344,16 +347,16 @@ class StockInventoryRevaluation(models.Model):
                         value_diff = revaluation.current_value - \
                             revaluation.new_value
                         new_cost = value_diff / revaluation.qty_available
-                        revaluation.product_id.write(
-                            {'standard_price': new_cost})
+                        revaluation.product_id.with_context(
+                            force_company=revaluation.company_id.id
+                        ).sudo().write({'standard_price': new_cost})
             if revaluation.product_id.categ_id.\
                     property_valuation == 'real_time':
-                revaluation._create_accounting_entry()
+                revaluation.sudo()._create_accounting_entry()
             self.post_date = fields.Datetime.now()
             self.state = 'posted'
 
             amount_diff = 0.0
-            diff = 0.0
             if revaluation.product_id.\
                     cost_method == 'real':
                 for reval_quant in revaluation.reval_quant_ids:
@@ -364,23 +367,17 @@ class StockInventoryRevaluation(models.Model):
             else:
                 if revaluation.product_id.\
                         cost_method in ['standard', 'average']:
-                    if revaluation.revaluation_type == 'price_change':
-                        diff = revaluation.current_cost - revaluation.new_cost
-                        amount_diff = revaluation.qty_available * diff
-                    else:
-                        amount_diff = \
-                            revaluation.current_value - revaluation.new_value
-                        if revaluation.new_value < 0:
-                            raise UserError(
-                                _("The new value for product %s cannot "
-                                  "be negative" %
-                                  revaluation.product_template_id.name))
-                        if revaluation.qty_available <= 0.0:
-                            raise UserError(
-                                _("Cannot do an inventory value change if the "
-                                  "quantity available for product %s "
-                                  "is 0 or negative" %
-                                  revaluation.product_template_id.name))
+                    if revaluation.new_value < 0:
+                        raise UserError(
+                            _("The new value for product %s cannot "
+                              "be negative" %
+                              revaluation.product_template_id.name))
+                    if revaluation.qty_available <= 0.0:
+                        raise UserError(
+                            _("Cannot do an inventory value change if the "
+                              "quantity available for product %s "
+                              "is 0 or negative" %
+                              revaluation.product_template_id.name))
 
     @api.model
     def create(self, values):
@@ -404,14 +401,16 @@ class StockInventoryRevaluation(models.Model):
     def button_cancel(self):
         for revaluation in self:
             for reval_quant in revaluation.reval_quant_ids:
-                reval_quant.quant_id.write({'cost': reval_quant.old_cost})
+                reval_quant.quant_id.sudo().write(
+                    {'cost': reval_quant.old_cost})
             if revaluation.account_move_ids:
                 # second, invalidate the move(s)
-                revaluation.account_move_ids.button_cancel()
+                revaluation.account_move_ids.sudo().button_cancel()
                 # delete the move this revaluation was pointing to
                 # Note that the corresponding move_lines and move_reconciles
                 # will be automatically deleted too
-                revaluation.account_move_ids.unlink()
+                revaluation.account_move_ids.sudo().with_context(
+                    revaluation=True).unlink()
             revaluation.state = 'cancel'
         return True
 
@@ -476,6 +475,5 @@ class StockInventoryRevaluationQuant(models.Model):
 
     @api.model
     def write_new_cost(self):
-        self.old_cost = self.current_cost
         self.quant_id.sudo().write({'cost': self.new_cost})
         return True
