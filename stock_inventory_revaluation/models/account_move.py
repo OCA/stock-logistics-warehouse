@@ -19,7 +19,8 @@ class AccountMove(models.Model):
     @api.multi
     def unlink(self):
         for rec in self:
-            if rec.stock_inventory_revaluation_id:
+            if rec.stock_inventory_revaluation_id and not \
+                    self.env.context.get('revaluation', False):
                 raise exceptions.Warning(
                     _("You cannot remove the journal item that is related "
                       "to an inventory revaluation"))
@@ -39,7 +40,8 @@ class AccountMoveLine(models.Model):
     @api.multi
     def unlink(self):
         for rec in self:
-            if rec.stock_inventory_revaluation_id:
+            if rec.stock_inventory_revaluation_id and 'revaluation' not in \
+                    self.env.context:
                 raise exceptions.Warning(
                     _("You cannot remove the journal item that is related "
                       "to an inventory revaluation"))
