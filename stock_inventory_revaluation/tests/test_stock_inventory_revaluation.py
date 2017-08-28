@@ -29,10 +29,17 @@ class TestStockInventoryRevaluation(TransactionCase):
             env['stock.inventory.revaluation.mass.post']
         self.stock_change_model = self.env['stock.change.product.qty']
         self.stock_location_model = self.env['stock.location']
+        self.res_users_model = self.env['res.users']
 
         # Get required Model data
         self.product_uom = self.env.ref('product.product_uom_unit')
         self.company = self.env.ref('base.main_company')
+
+        # groups
+        self.group_inventory_valuation = self.env.ref(
+            'stock_account.group_inventory_valuation')
+        self.group_stock_user = self.env.ref(
+            'stock.group_stock_user')
 
         location = self.stock_location_model.search([('name', '=', 'WH')])
         self.location = self.stock_location_model.search([('location_id', '=',
@@ -73,6 +80,12 @@ class TestStockInventoryRevaluation(TransactionCase):
         # Create product category
         self.product_ctg = self._create_product_category()
 
+        # Create users
+        self.user1 = self._create_user('user_1',
+                                       [self.group_stock_user,
+                                        self.group_inventory_valuation],
+                                       self.company)
+
         # Create a Product with real cost
         standard_price = 10.0
         list_price = 20.0
@@ -103,13 +116,29 @@ class TestStockInventoryRevaluation(TransactionCase):
         self._update_product_qty(self.product_average_2, self.location,
                                  quantity)
 
+    def _create_user(self, login, groups, company):
+        """ Create a user."""
+        group_ids = [group.id for group in groups]
+        user = \
+            self.res_users_model.with_context(
+                {'no_reset_password': True}).create(
+                {'name': 'Test User',
+                 'login': login,
+                 'password': 'demo',
+                 'email': 'test@yourcompany.com',
+                 'company_id': company.id,
+                 'company_ids': [(4, company.id)],
+                 'groups_id': [(6, 0, group_ids)]
+                 })
+        return user
+
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
         account = self.account_model.create({
             'name': name,
             'code': code,
             'user_type_id': acc_type.id,
-            'company_id': company.id
+            'company_id': company.id,
         })
         return account
 
@@ -121,7 +150,7 @@ class TestStockInventoryRevaluation(TransactionCase):
                 self.account_revaluation.id,
             'property_inventory_revaluation_decrease_account_categ':
                 self.account_revaluation.id,
-            'property_valuation': 'real_time'
+            'property_valuation': 'real_time',
         })
         return product_ctg
 
@@ -137,7 +166,7 @@ class TestStockInventoryRevaluation(TransactionCase):
                 'valuation': 'real_time',
                 'cost_method': cost_method,
                 'property_stock_account_input': self.account_grni.id,
-                'property_stock_account_output': self.account_cogs.id
+                'property_stock_account_output': self.account_cogs.id,
             })
             return template.product_variant_ids[0]
         product = self.product_model.create(
@@ -156,7 +185,7 @@ class TestStockInventoryRevaluation(TransactionCase):
             product.categ_id.\
             property_inventory_revaluation_decrease_account_categ
 
-        reval = self.reval_model.create({
+        reval = self.reval_model.sudo(self.user1).create({
             'name': 'test_inventory_revaluation',
             'document_date': datetime.today(),
             'revaluation_type': revaluation_type,
@@ -198,7 +227,8 @@ class TestStockInventoryRevaluation(TransactionCase):
             'active_ids': [rev.id for rev in revaluations],
             'active_model': 'stock.inventory.revaluation',
         }
-        mass_post_wiz = self.mass_post_model.with_context(context).create({})
+        mass_post_wiz = self.mass_post_model.sudo(self.user1).with_context(
+            context).create({})
         mass_post_wiz.process()
         return True
 
@@ -221,7 +251,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         date_from = date.today() - timedelta(1)
         self._get_quant(date_from, invent_price_change_real)
 
-        invent_price_change_real.button_post()
+        invent_price_change_real.sudo(self.user1).button_post()
 
         expected_result = (10.00 - 8.00) * 10.00
         self.assertEqual(len(
@@ -316,16 +346,16 @@ class TestStockInventoryRevaluation(TransactionCase):
 
     def test_mass_post(self):
         """Test mass post"""
-        revaluations = []
+        revaluations = self.env['stock.inventory.revaluation']
 
         # Create an Inventory Revaluation for average cost product
         invent_price_change_average = \
             self.create_inventory_revaluation_price_change_average()
-        revaluations.append(invent_price_change_average)
+        revaluations += invent_price_change_average
 
         # Create an Inventory Revaluation for real cost product
         invent_value_change = self.create_inventory_revaluation_value_change()
-        revaluations.append(invent_value_change)
+        revaluations += invent_value_change
 
         # Post the inventory revaluation using wizard
         self._mass_post(revaluations)
@@ -333,3 +363,33 @@ class TestStockInventoryRevaluation(TransactionCase):
         # Check that both inventory valuations are now posted
         self.assertEqual(invent_price_change_average.state, 'posted')
         self.assertEqual(invent_value_change.state, 'posted')
+
+    def test_cancel(self):
+        """Test cancel"""
+        # Create an Inventory Revaluation for real cost product
+        revaluation_type = 'price_change'
+        invent_price_change_real = \
+            self._create_inventory_revaluation(
+                revaluation_type,
+                self.product_real_1)
+
+        # Create an Inventory Revaluation Line Quant
+        date_from = date.today() - timedelta(1)
+        self._get_quant(date_from, invent_price_change_real)
+
+        invent_price_change_real.sudo(self.user1).button_post()
+
+        # Allow cancelling journal entries
+        invent_price_change_real.journal_id.sudo().update_posted = True
+
+        # Cancel the inventory revaluation
+        invent_price_change_real.sudo(self.user1).button_cancel()
+
+        for reval_quant in invent_price_change_real.reval_quant_ids:
+            self.assertEqual(reval_quant.quant_id.cost, 10.0,
+                             'Cancelling a revaluation does not restore the '
+                             'original quant cost.')
+
+        self.assertEqual(len(
+            invent_price_change_real.account_move_ids), 0,
+            'Accounting entries have not been removed after cancel')
