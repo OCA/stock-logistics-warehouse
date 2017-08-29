@@ -26,16 +26,18 @@ addon | version | summary
 [account_move_line_product](account_move_line_product/) | 9.0.1.0.0 | Displays the product in the journal entries and items
 [account_move_line_stock_info](account_move_line_stock_info/) | 9.0.1.0.0 | Account Move Line Stock Move
 [procurement_auto_create_group](procurement_auto_create_group/) | 9.0.1.0.0 | Procurement Auto Create Group
+[stock_account_change_product_valuation](stock_account_change_product_valuation/) | 9.0.1.0.0 | Adjusts valuation of the products and quants when the cost method or type of a product changes
 [stock_account_quant_merge](stock_account_quant_merge/) | 9.0.1.0.0 | Stock Account - Quant merge
 [stock_available](stock_available/) | 9.0.1.1.0 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 9.0.1.1.0 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 | Consider the production potential is available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 9.0.1.0.0 | Quantity of stock available for inmediate use
 [stock_cycle_count](stock_cycle_count/) | 9.0.1.1.0 | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user
+[stock_demand_estimate](stock_demand_estimate/) | 9.0.1.0.0 | Allows to create demand estimates.
 [stock_inventory_chatter](stock_inventory_chatter/) | 9.0.1.0.0 | Log changes being done in Inventory Adjustments
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 9.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 9.0.1.0.0 | Allow to perform inventories of a location without including its child locations.
-[stock_inventory_lockdown](stock_inventory_lockdown/) | 9.0.1.0.0 | Lock down stock locations during inventories.
+[stock_inventory_lockdown](stock_inventory_lockdown/) | 9.0.1.0.1 | Lock down stock locations during inventories.
 [stock_inventory_revaluation](stock_inventory_revaluation/) | 9.0.1.0.0 | Introduces inventory revaluation as single point to change the valuation of products.
 [stock_inventory_verification_request](stock_inventory_verification_request/) | 9.0.1.0.0 | Adds the capability to request a Slot Verification when a inventory is Pending to Approve
 [stock_location_area_data](stock_location_area_data/) | 9.0.1.0.0 | Add surface units of measure
