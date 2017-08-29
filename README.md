@@ -29,12 +29,15 @@ addon | version | summary
 [stock_available_immediately](stock_available_immediately/) | 10.0.1.0.0 | Ignore planned receptions in quantity available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 10.0.1.0.0 | Quantity of stock available for immediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 10.0.1.0.0 | Stock Quantity Change Reason
+[stock_inventory_chatter](stock_inventory_chatter/) | 10.0.1.0.0 | Log changes being done in Inventory Adjustments
+[stock_inventory_discrepancy](stock_inventory_discrepancy/) | 10.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 10.0.1.0.0 | Add a MTS+MTO route
 [stock_operation_package_mandatory](stock_operation_package_mandatory/) | 10.0.1.0.0 | Makes destination package mandatory on stock pack operations
 [stock_putaway_product](stock_putaway_product/) | 10.0.1.0.0 | Set a product location and put-away strategy per product
 [stock_quant_merge](stock_quant_merge/) | 10.0.1.0.0 | Stock - Quant merge
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 10.0.1.0.0 | Stock Quant Reserved Qty UoM
 [stock_reserve](stock_reserve/) | 10.0.1.0.0 | Stock reservations on products
+[stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 10.0.1.0.0 | Stock Warehouse Orderpoint Stock Info
 
 
 Unported addons
