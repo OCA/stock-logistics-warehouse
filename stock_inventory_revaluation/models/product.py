@@ -34,7 +34,7 @@ class Product(models.Model):
     _inherit = 'product.product'
 
     @api.multi
-    def do_change_standard_price(self, new_price):
+    def do_change_standard_price(self, new_price, account_id):
         """Override standard method, as it was not suitable."""
         reval_model = self.env["stock.inventory.revaluation"]
         for product in self:

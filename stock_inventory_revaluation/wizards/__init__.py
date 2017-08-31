@@ -6,3 +6,4 @@
 
 from . import stock_inventory_revaluation_get_quants
 from . import stock_inventory_revaluation_mass_post
+from . import stock_change_standard_price
