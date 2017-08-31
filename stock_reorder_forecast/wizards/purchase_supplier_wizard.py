@@ -5,7 +5,7 @@
 from datetime import date, datetime
 from openerp import api, fields, models
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DSDF
-from stock_reorder_forecast.wizards.purchase_wizard import PurchaseWizard
+from .purchase_wizard import PurchaseWizard
 
 
 class PurchaseSupplierWizard(models.TransientModel):
