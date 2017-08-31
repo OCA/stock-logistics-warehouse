@@ -306,7 +306,7 @@ class TestStockInventoryRevaluation(TransactionCase):
                    'active_id': self.product_average_1.id}
 
         self.product_average_1.with_context(context).\
-            do_change_standard_price(5.00)
+            do_change_standard_price(5.00, self.account_revaluation.id)
         if self.product_average_1:
             self.assertEqual(self.product_average_1.standard_price, 5.0,
                              'Incorrect Product Price.')
