@@ -150,13 +150,15 @@ class Warehouse(models.Model):
     def _update_routes(self):
         res = super(Warehouse, self)._update_routes()
 
-        mts_mto_rule_id = self.mts_mto_rule_id
-        if self.delivery_steps and mts_mto_rule_id:
-            pull_model = self.env['procurement.rule']
-            self.mts_mto_rule_id.location_id = self.mto_pull_id.location_id
-            mts_rules = pull_model.search([
-                ('location_src_id', '=', self.lot_stock_id.id),
-                ('route_id', '=', self.delivery_route_id.id),
-            ])
-            self.mts_mto_rule_id.mts_rule_id = mts_rules[0].id
+        for warehouse in self:
+            mts_mto_rule_id = warehouse.mts_mto_rule_id
+            if warehouse.delivery_steps and mts_mto_rule_id:
+                pull_model = self.env['procurement.rule']
+                warehouse.mts_mto_rule_id.location_id = \
+                    warehouse.mto_pull_id.location_id
+                mts_rules = pull_model.search([
+                    ('location_src_id', '=', warehouse.lot_stock_id.id),
+                    ('route_id', '=', warehouse.delivery_route_id.id),
+                ])
+                warehouse.mts_mto_rule_id.mts_rule_id = mts_rules[0].id
         return res
