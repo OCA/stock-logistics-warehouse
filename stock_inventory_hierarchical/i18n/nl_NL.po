@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-30 01:19+0000\n"
+"POT-Creation-Date: 2017-08-22 01:01+0000\n"
 "PO-Revision-Date: 2016-04-14 14:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/nl_NL/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,complete_name:0
@@ -30,12 +30,12 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,display_name:0
@@ -95,12 +95,12 @@ msgstr "Laatst gewijzigd op"
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,level:0
@@ -172,7 +172,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_tree_view
 msgid "Reference"
-msgstr ""
+msgstr "Referentie"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view

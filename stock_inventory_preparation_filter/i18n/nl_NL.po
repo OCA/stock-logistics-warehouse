@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-30 01:20+0000\n"
-"PO-Revision-Date: 2017-06-30 08:53+0000\n"
+"POT-Creation-Date: 2017-08-22 01:01+0000\n"
+"PO-Revision-Date: 2017-08-29 08:01+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -31,12 +31,12 @@ msgstr ""
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,display_name:0
@@ -73,12 +73,12 @@ msgstr "Laatst gewijzigd op"
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory,lot_ids:0

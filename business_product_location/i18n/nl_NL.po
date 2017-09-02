@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-30 01:19+0000\n"
-"PO-Revision-Date: 2017-06-30 01:19+0000\n"
+"POT-Creation-Date: 2017-08-22 01:00+0000\n"
+"PO-Revision-Date: 2017-08-22 01:00+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -44,13 +44,13 @@ msgstr ""
 #: field:business.product.line,create_uid:0
 #: field:business.product.location,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: business_product_location
 #: field:business.product.line,create_date:0
 #: field:business.product.location,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: business_product_location
 #: field:business.product.line,display_name:0
@@ -91,13 +91,13 @@ msgstr "Laatst gewijzigd op"
 #: field:business.product.line,write_uid:0
 #: field:business.product.location,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: business_product_location
 #: field:business.product.line,write_date:0
 #: field:business.product.location,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: business_product_location
 #: view:business.product.location:business_product_location.business_product_location_view_form
