@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 13:13+0000\n"
-"PO-Revision-Date: 2017-06-29 13:13+0000\n"
+"POT-Creation-Date: 2017-08-29 03:34+0000\n"
+"PO-Revision-Date: 2017-08-29 03:34+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.actions.act_window,help:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
@@ -65,13 +65,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_user_id
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_create_date
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_document_date
@@ -138,13 +138,13 @@ msgstr "Laatst gewijzigd op"
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_uid
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_date
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_stock_valuation_account_mass_adjust
@@ -202,7 +202,7 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_name
 msgid "Reference"
-msgstr ""
+msgstr "Referentie"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_name

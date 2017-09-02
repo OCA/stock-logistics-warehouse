@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 03:45+0000\n"
+"POT-Creation-Date: 2017-08-29 03:33+0000\n"
 "PO-Revision-Date: 2016-04-27 11:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Vietnamese (Viet Nam) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-9-0/language/vi_VN/)\n"
@@ -30,7 +30,7 @@ msgstr "Sản phẩm"
 #. module: stock_available_mrp
 #: model:ir.model,name:stock_available_mrp.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Mẫu sản phẩm"
 
 #. module: stock_available_mrp
 #: model:product.uom,name:stock_available_mrp.thousand
