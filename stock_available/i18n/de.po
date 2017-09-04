@@ -24,12 +24,6 @@ msgstr ""
 #: field:product.product,immediately_usable_qty:0
 #: field:product.template,immediately_usable_qty:0
 msgid "Available to promise"
-msgstr "Frei für Zusage"
-
-#. module: stock_available
-#: field:product.product,immediately_usable_qty:0
-#: field:product.template,immediately_usable_qty:0
-msgid "Available to promise"
 msgstr "Freier Bestand"
 
 #. module: stock_available
@@ -132,11 +126,14 @@ msgstr ""
 #: field:stock.config.settings,stock_available_mrp_based_on:0
 msgid "based on"
 msgstr "basierend auf"
+<<<<<<< HEAD
 
 #. module: stock_available
 #: field:stock.config.settings,stock_available_mrp_based_on:0
 msgid "based on"
 msgstr "basiert auf"
+=======
+>>>>>>> 22f2592000c8368ffcca54685d13d88e6f7c8941
 
 #. module: stock_available
 #: view:product.product:stock_available.view_stock_available_tree_variant

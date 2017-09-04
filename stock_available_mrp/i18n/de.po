@@ -32,12 +32,6 @@ msgid "Component ids"
 msgstr "Komponenten-IDs"
 
 #. module: stock_available_mrp
-#: field:product.product,potential_qty:0
-#: field:product.template,potential_qty:0
-msgid "Potential"
-msgstr "Potentiell"
-
-#. module: stock_available_mrp
 #: model:ir.model,name:stock_available_mrp.model_product_product
 msgid "Product"
 msgstr "Produkt"
