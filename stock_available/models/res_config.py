@@ -28,13 +28,13 @@ class StockConfig(models.TransientModel):
              "available to promise.\n"
              "This installs the module stock_available_immediately.")
 
-#    module_stock_available_sale = fields.Boolean(
-#        string='Exclude goods already in sale quotations',
-#        help="This will subtract quantities from the sale quotations from "
-#             "the quantities available to promise.\n"
-#             "This installs the modules stock_available_sale.\n"
-#             "If the modules sale and sale_delivery_date are not "
-#             "installed, this will install them too")
+    module_stock_available_sale = fields.Boolean(
+        string='Exclude goods already in sale quotations',
+        help="This will subtract quantities from the sale quotations from "
+             "the quantities available to promise.\n"
+             "This installs the modules stock_available_sale.\n"
+             "If the modules sale and sale_delivery_date are not "
+             "installed, this will install them too")
 
     module_stock_available_mrp = fields.Boolean(
         string='Include the production potential',
