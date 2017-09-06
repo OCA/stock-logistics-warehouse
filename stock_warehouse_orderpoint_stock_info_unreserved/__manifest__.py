@@ -4,14 +4,14 @@
 
 {
     "name": "Reordering rules stock info unreserved",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "depends": [
         "stock_warehouse_orderpoint_stock_info",
         "stock_available_unreserved"
     ],
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
-    "website": "http://www.eficent.com",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
     "license": "AGPL-3",
     "data": [
