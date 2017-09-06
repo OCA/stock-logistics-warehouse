@@ -3,10 +3,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import copy
+from contextlib import contextmanager
 from odoo import api, fields, models
 from odoo.addons import decimal_precision as dp
 from odoo.tools.float_utils import float_round
-from odoo.osv.expression import is_leaf
+from odoo.osv import expression
 
 
 class ProductProduct(models.Model):
@@ -85,12 +86,16 @@ class ProductProduct(models.Model):
             self_with_context._get_domain_locations()
         quant_out_domain = copy.copy(quant_domain)
         for element in move_out_domain:
-            if is_leaf(element):
+            if expression.is_leaf(element):
                 quant_out_domain.append(
                     ('reservation_id.' + element[0], element[1], element[2]))
             else:
                 quant_out_domain.append(element)
-
+        if self:
+            quant_domain = expression.AND([
+                [('product_id', 'in', self.ids)],
+                quant_domain
+                ])
         return quant_domain, quant_out_domain
 
     @api.multi
@@ -107,16 +112,43 @@ class ProductProduct(models.Model):
             product.qty_expired -= product.outgoing_expired_qty
         return res
 
+    @api.model
+    @contextmanager
+    def _force_auto_join(self, model_field_list):
+        """ Force  auto_join for each item (model_name, field_name)
+        in model_field_list
+        The original value are restored on exit
+        """
+        vals = {}
+        for model_name, field_name in model_field_list:
+            field = self.env[model_name]._fields[field_name]
+            vals[field] = field.auto_join
+            field.auto_join = True
+        try:
+            yield
+        finally:
+            for field, value in vals.iteritems():
+                field.auto_join = value
+
+    def _get_quants(self, quant_domain, quant_out_domain):
+        # Get auto_join value and reset them after read groups
+        # This to improve performances without breaking normal behaviour
+        stock_quant_obj = self.env['stock.quant']
+        with self._force_auto_join([
+            ('stock.quant', 'lot_id'),
+                ('stock.quant', 'reservation_id')]):
+            quants = stock_quant_obj.with_context(lang='').read_group(
+                quant_domain, ['product_id', 'qty'], ['product_id'])
+            quants_out = stock_quant_obj.with_context(lang='').read_group(
+                quant_out_domain, ['product_id', 'qty'], ['product_id'])
+            return quants, quants_out
+
     @api.multi
     def _compute_expired_quants_dict(self):
         quant_domain, quant_out_domain = self._get_expired_quants_domain()
-        stock_quant_obj = self.env['stock.quant']
-        quants = stock_quant_obj.read_group(
-            quant_domain, ['product_id', 'qty'], ['product_id'])
+        quants, quants_out = self._get_quants(quant_domain, quant_out_domain)
         quant_res = {
             item['product_id'][0]: item['qty'] for item in quants}
-        quants_out = stock_quant_obj.read_group(
-            quant_out_domain, ['product_id', 'qty'], ['product_id'])
         quant_out_res = {
             item['product_id'][0]: item['qty'] for item in quants_out}
         res = dict()
