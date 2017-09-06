@@ -2,10 +2,10 @@
 # Copyright 2016 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests import common
+from odoo.tests.common import TransactionCase
 
 
-class TestStockWarehouseOrderpoint(common.TransactionCase):
+class TestStockWarehouseOrderpoint(TransactionCase):
 
     def setUp(self):
         super(TestStockWarehouseOrderpoint, self).setUp()
