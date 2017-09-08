@@ -64,3 +64,22 @@ msgid ""
 "('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not "
 "in ('draft', 'end', 'obsolete')"
 msgstr "red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not in ('draft', 'end', 'obsolete')"
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_lot_locked:0
+msgid "Exclude blocked lots/serial numbers"
+msgstr "Exclure les lots/numéros de série bloqués"
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_lot_locked:0
+msgid "This will subtract quantities from the blocked "
+"lots/serial numbers from the quantities available to promise.\n"
+"This installs the modules stock_available_lot_locked.\n"
+"If the module stock_lock_lot is not installed, this will install"
+"it too"
+msgstr "Ceci soustrait les quantités des lots bloqués "
+"des quantitiés disponibles à la vente.\n"
+"Ceci installe le module module_stock_available_lot_locked.\n"
+"Si le module stock_lock_lot n'est pas installé, ceci l'installera "
+"également"
+
