@@ -34,11 +34,23 @@ class StockInventory(models.Model):
         string='Accuracy', compute='_compute_inventory_accuracy',
         digits=(3, 2), store=True, group_operator="avg")
 
+    def _update_cycle_state(self):
+        for inv in self:
+            if inv.cycle_count_id and inv.state == 'done':
+                inv.cycle_count_id.state = 'done'
+        return True
+
     @api.multi
     def action_done(self):
-        if self.cycle_count_id:
-            self.cycle_count_id.state = 'done'
-        return super(StockInventory, self).action_done()
+        res = super(StockInventory, self).action_done()
+        self._update_cycle_state()
+        return res
+
+    @api.multi
+    def action_force_done(self):
+        res = super(StockInventory, self).action_force_done()
+        self._update_cycle_state()
+        return res
 
     @api.multi
     def write(self, vals):
