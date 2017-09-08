@@ -49,7 +49,7 @@
                 <field name="create_date"/>
                 <field name="removal_date"/>
                 <filter name="last_week" string="Last Week" domain="[('create_date','&gt;', (context_today() - datetime.timedelta(weeks=1)).strftime('%%Y-%%m-%%d') )]"/>
-                <filter name="last_month" string="Last Month" domain="[('create_date','&gt;', (context_today() - datetime.timedelta(months=1)).strftime('%%Y-%%m-%%d') )]"/>
+                <filter name="last_month" string="Last Month" domain="[('create_date','&gt;', (context_today() - datetime.timedelta(weeks=4)).strftime('%%Y-%%m-%%d') )]"/>
             </search>
         </field>
     </record>
@@ -72,7 +72,6 @@
         <field name="res_model">stock.scrap.expired</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{"search_default_last_month":1}</field>
-        <field name="context">{}</field>
     </record>
 
     <record model="ir.ui.menu" id="stock_scrap_expired_menu">
