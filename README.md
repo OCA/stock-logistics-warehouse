@@ -31,6 +31,7 @@ addon | version | summary
 [stock_account_quant_merge](stock_account_quant_merge/) | 8.0.1.0.0 | Stock Account - Quant merge
 [stock_available](stock_available/) | 8.0.3.1.0 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 8.0.2.0.1 | Ignore planned receptions in quantity available to promise
+[stock_available_lot_locked](stock_available_lot_locked/) | 8.0.1.0.0 | Consider the blocked lots are not available to promise
 [stock_available_mrp](stock_available_mrp/) | 8.0.3.1.1 | Consider the production potential is available to promise
 [stock_available_sale](stock_available_sale/) | 8.0.3.0.0 | Quotations in quantity available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 8.0.1.0.0 | Quantity of stock available for inmediate use
