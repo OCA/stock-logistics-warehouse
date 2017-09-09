@@ -33,6 +33,7 @@ addon | version | summary
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 10.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 10.0.1.0.0 | Add a MTS+MTO route
 [stock_operation_package_mandatory](stock_operation_package_mandatory/) | 10.0.1.0.0 | Makes destination package mandatory on stock pack operations
+[stock_orderpoint_automatic_creation](stock_orderpoint_automatic_creation/) | 10.0.1.0.0 | Stock Orderpoint Automatic Creation
 [stock_putaway_product](stock_putaway_product/) | 10.0.1.0.0 | Set a product location and put-away strategy per product
 [stock_quant_merge](stock_quant_merge/) | 10.0.1.0.0 | Stock - Quant merge
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 10.0.1.0.0 | Stock Quant Reserved Qty UoM
