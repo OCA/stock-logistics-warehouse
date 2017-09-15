@@ -16,9 +16,8 @@ class ProcurementOrder(models.Model):
     def _procure_orderpoint_confirm(
             self, use_new_cursor=False, company_id=False):
         """Limit search for processing order point procurement."""
-        return self.with_context(
-            processing_minimum_stock_rules=True
-        )._procure_orderpoint_confirm(
+        this = self.with_context(processing_minimum_stock_rules=True)
+        return super(ProcurementOrder, this)._procure_orderpoint_confirm(
             use_new_cursor=use_new_cursor, company_id=company_id
         )
 
