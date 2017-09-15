@@ -13,7 +13,7 @@
     "version": "8.0.1.0.0",
     "depends": [
         "purchase",
-        "stock",
+        "stock_warehouse_orderpoint_stock_info",
     ],
     "data": [
         "views/stock_warehouse_orderpoint.xml",

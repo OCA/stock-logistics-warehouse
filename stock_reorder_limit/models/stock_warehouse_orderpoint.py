@@ -50,8 +50,8 @@ class StockWarehouseOrderpoint(models.Model):
             this.limit_procurement_qty = this.product_max_qty
             product = this.product_id
             if not product.active or product.state == 'obsolete':
-                if product.virtual_available < 0.0:
-                    this.limit_procurement_qty = - product.virtual_available
+                if this.virtual_location_qty < 0.0:
+                    this.limit_procurement_qty = - this.virtual_location_qty
                 else:
                     this.limit_procurement_qty = 0.0
             if not product.purchase_ok and \
