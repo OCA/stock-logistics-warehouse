@@ -38,7 +38,7 @@ class TestReorderLimit(TransactionCase):
         """If anything goes wrong in test, it would be nice to know what."""
         messages = self.env['mail.message'].search(
             [('model', '=', 'procurement.order'),
-             ('res_id', '=', procurement_id)],
+             ('res_id', '=', procurement.id)],
             order='create_date'
         )
         for message in messages:
@@ -114,4 +114,3 @@ class TestReorderLimit(TransactionCase):
         self.assertEqual(our_product.virtual_available, 15.0)
         # Test 2: sell 12 units amd make product obsolete
         #     In this test we just move the products to an outside location:
-
