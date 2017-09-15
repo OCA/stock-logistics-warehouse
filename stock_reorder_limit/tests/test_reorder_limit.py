@@ -58,7 +58,7 @@ class TestReorderLimit(TransactionCase):
             'purchase_ok': True,
             'seller_ids': [
                 (0, False, {
-                    'name', our_supplier.id,
+                    'name': our_supplier.id,
                     'delay': 1,
                     'min_qty': 5,
                 })],
@@ -70,7 +70,7 @@ class TestReorderLimit(TransactionCase):
             'code': 'ourwh',
         })
         orderpoint_model = self.env['stock.warehouse.orderpoint']
-        orderpoint.create({
+        orderpoint_model.create({
             'warehouse_id': our_warehouse.id,
             'location_id': our_warehouse.lot_stock_id.id,
             'product_id': our_product.id,
