@@ -56,6 +56,7 @@ class TestReorderLimit(TransactionCase):
         our_product = product_model.create({
             'name': 'Our nice little product',
             'purchase_ok': True,
+            'type': 'product',
             'seller_ids': [
                 (0, False, {
                     'name': our_supplier.id,
@@ -87,3 +88,4 @@ class TestReorderLimit(TransactionCase):
             ('warehouse_id', '=', our_warehouse.id),
         ])
         self.assertEqual(procurement.state, 'running')
+        self.assertEqual(procurement.product_qty, 15.0)
