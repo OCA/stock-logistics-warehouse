@@ -35,6 +35,7 @@ addon | version | summary
 [stock_operation_package_mandatory](stock_operation_package_mandatory/) | 10.0.1.0.0 | Makes destination package mandatory on stock pack operations
 [stock_orderpoint_automatic_creation](stock_orderpoint_automatic_creation/) | 10.0.1.0.0 | Stock Orderpoint Automatic Creation
 [stock_putaway_product](stock_putaway_product/) | 10.0.1.0.0 | Set a product location and put-away strategy per product
+[stock_quant_manual_assign](stock_quant_manual_assign/) | 10.0.1.0.0 | Stock - Manual Quant Assignment
 [stock_quant_merge](stock_quant_merge/) | 10.0.1.0.0 | Stock - Quant merge
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 10.0.1.0.0 | Stock Quant Reserved Qty UoM
 [stock_reserve](stock_reserve/) | 10.0.1.0.0 | Stock reservations on products
@@ -59,7 +60,6 @@ addon | version | summary
 [stock_optional_valuation](stock_optional_valuation/) | 0.1 (unported) | Stock optional valuation
 [stock_orderpoint_creator](stock_orderpoint_creator/) | 1.0 (unported) | Configuration of order point in mass
 [stock_partner_lot](stock_partner_lot/) | 9.0.1.0.0 (unported) | Show lots on the partners that own them
-[stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.0.0 (unported) | Stock - Manual assignment of quants
 [stock_reord_rule](stock_reord_rule/) | 0.2 (unported) | Improved reordering rules
 [stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.0 (unported) | Stock Reserve Sales
 
