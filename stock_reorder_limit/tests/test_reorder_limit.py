@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 # © 2017 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import logging
+
 from openerp.tests.common import TransactionCase
+
+
+_logger = logging.getLogger(__name__)
 
 
 class TestReorderLimit(TransactionCase):
@@ -28,6 +33,17 @@ class TestReorderLimit(TransactionCase):
     disable the purchase_ok flag. Next procurement should not procure any
     products.
     """
+
+    def print_procurement_messages(self, procurement):
+        """If anything goes wrong in test, it would be nice to know what."""
+        messages = self.env['mail.message'].search(
+            [('model', '=', 'procurement.order'),
+             ('res_id', '=', procurement_id)],
+            order='create_date'
+        )
+        for message in messages:
+            _logger.info(message.body)
+
     def test_reorder_limit(self):
         # Create basic test data:
         data_model = self.env['ir.model.data']
@@ -83,9 +99,19 @@ class TestReorderLimit(TransactionCase):
         # Test 1: initial procurement
         procurement_model = self.env['procurement.order']
         procurement_model.run_scheduler()
-        procurement = procurement_model.search([
-            ('product_id', '=', our_product.id),
-            ('warehouse_id', '=', our_warehouse.id),
-        ])
+        procurement = procurement_model.search(
+            [('product_id', '=', our_product.id),
+             ('warehouse_id', '=', our_warehouse.id)],
+            order='create_date desc',
+            limit=1
+        )
+        self.assertTrue(len(procurement) == 1)
+        if procurement.state != 'running':
+            self.print_procurement_messages(procurement)
         self.assertEqual(procurement.state, 'running')
         self.assertEqual(procurement.product_qty, 15.0)
+        procurement.purchase_line_id.order_id.wkf_confirm_order()
+        self.assertEqual(our_product.virtual_available, 15.0)
+        # Test 2: sell 12 units amd make product obsolete
+        #     In this test we just move the products to an outside location:
+
