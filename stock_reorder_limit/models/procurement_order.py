@@ -13,6 +13,16 @@ class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     @api.model
+    def _procure_orderpoint_confirm(
+            self, use_new_cursor=False, company_id=False):
+        """Limit search for processing order point procurement."""
+        return self.with_context(
+            processing_minimum_stock_rules=True
+        )._procure_orderpoint_confirm(
+            use_new_cursor=use_new_cursor, company_id=company_id
+        )
+
+    @api.model
     def _prepare_orderpoint_procurement(self, orderpoint, product_qty):
         """Limit procurement to what is sensible."""
         sensible_quantity = min(orderpoint.limit_procurement_qty, product_qty)
