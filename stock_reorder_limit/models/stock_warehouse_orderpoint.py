@@ -29,10 +29,11 @@ class StockWarehouseOrderpoint(models.Model):
         filtered_stock_rules = stock_rules.filtered(
             lambda r: r.limit_procurement_qty > 0.0
         )
-        _logger.info(_(
-            "%d Minimum stock rules are not used for creating"
-            " procurements."
-        ) % (len(stock_rules) - len(filtered_stock_rules)))
+        not_used = len(stock_rules) - len(filtered_stock_rules)
+        if not_used > 0:
+            _logger.info(
+                _("%d Minimum stock rules are not used for creating"
+                " procurements.") % not_used)
         return filtered_stock_rules
 
     @api.multi
