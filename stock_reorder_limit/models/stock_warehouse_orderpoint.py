@@ -33,7 +33,8 @@ class StockWarehouseOrderpoint(models.Model):
         if not_used > 0:
             _logger.info(
                 _("%d Minimum stock rules are not used for creating"
-                " procurements.") % not_used)
+                  " procurements.") % not_used
+            )
         return filtered_stock_rules
 
     @api.multi

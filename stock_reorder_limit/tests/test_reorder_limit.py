@@ -70,11 +70,11 @@ class TestReorderLimit(TransactionCase):
             'product_selectable': True,
         })
         rule_model = self.env['procurement.rule']
-        buy_rule = rule_model.create({
+        rule_model.create({
             'name': 'buy products for test',
             'action': 'buy',
             'procure_method': 'make_to_stock',
-            'route_id': buy_route_id,
+            'route_id': buy_route.id,
 
         })
         product_model = self.env['product.product']
