@@ -21,7 +21,7 @@
 
 {
     "name": "Business Product Location",
-    "version": "0.1",
+    "version": "8.0.1.0.0",
     'author': "ACSONE SA/NV, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "website": "http://www.acsone.eu",
