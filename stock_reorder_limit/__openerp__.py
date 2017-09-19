@@ -12,8 +12,12 @@
     "license": "AGPL-3",
     "version": "8.0.1.0.0",
     "depends": [
+        "base_manifest_extension",
         "purchase",
         "stock_warehouse_orderpoint_stock_info",
+    ],
+    "depends_if_installed": [
+        "delivery",  # here to prevent test failure
     ],
     "data": [
         "views/stock_warehouse_orderpoint.xml",
