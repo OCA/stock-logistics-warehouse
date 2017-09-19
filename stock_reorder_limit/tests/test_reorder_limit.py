@@ -63,20 +63,6 @@ class TestReorderLimit(TransactionCase):
             'name': 'Our friendly supplier',
             'supplier': True,
         })
-        route_model = self.env['stock.location.route']
-        buy_route = route_model.create({
-            'name': 'buy',
-            'sequence': 5,
-            'product_selectable': True,
-        })
-        rule_model = self.env['procurement.rule']
-        rule_model.create({
-            'name': 'buy products for test',
-            'action': 'buy',
-            'procure_method': 'make_to_stock',
-            'route_id': buy_route.id,
-
-        })
         product_model = self.env['product.product']
         our_product = product_model.create({
             'name': 'Our nice little product',
@@ -88,7 +74,6 @@ class TestReorderLimit(TransactionCase):
                     'delay': 1,
                     'min_qty': 5,
                 })],
-            'route_ids': [(4, buy_route.id)],
         })
         warehouse_model = self.env['stock.warehouse']
         our_warehouse = warehouse_model.create({
@@ -119,7 +104,9 @@ class TestReorderLimit(TransactionCase):
             self.print_procurement_messages(procurement)
         self.assertEqual(procurement.state, 'running')
         self.assertEqual(procurement.product_qty, 15.0)
-        procurement.purchase_line_id.order_id.wkf_confirm_order()
+        po = procurement.purchase_line_id.order_id
+        po.signal_workflow('purchase_confirm')
+        self.assertEqual(po.state, 'confirmed')
         self.assertEqual(our_product.virtual_available, 15.0)
         # Test 2: sell 12 units amd make product obsolete
         #     In this test we just move the products to an outside location:
