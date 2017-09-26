@@ -90,7 +90,7 @@ class ProductProduct(models.Model):
 
         domain_quant = self._prepare_domain_available_not_res(self)
 
-        quants = self.env['stock.quant'].read_group(
+        quants = self.env['stock.quant'].with_context(lang=False).read_group(
             domain_quant,
             ['product_id', 'location_id', 'qty'],
             ['product_id', 'location_id'],
@@ -100,7 +100,7 @@ class ProductProduct(models.Model):
             # create a dictionary with the total value per products
             values_prod.setdefault(quant['product_id'][0], 0)
             values_prod[quant['product_id'][0]] += quant['qty']
-        for product in self:
+        for product in self.with_context(prefetch_fields=False, lang=''):
             res[product.id] = {}
             # get total qty for the product
             qty = float_round(values_prod.get(product.id, 0.0),
