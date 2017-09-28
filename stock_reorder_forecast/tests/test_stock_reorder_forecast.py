@@ -250,7 +250,7 @@ class TestStockReorderForecast(TransactionCase):
         self.env.cr.execute("UPDATE PURCHASE_ORDER SET STATE='cancel'")
         self.product_obj.calc_purchase_date()
         self.assertEqual(
-            date.today(),
+            date.today().strftime(DEFAULT_SERVER_DATE_FORMAT),
             self.product_period180.ultimate_purchase
         )
 
