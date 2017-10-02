@@ -73,6 +73,7 @@ class AssignManualQuants(models.TransientModel):
         quants_lines = [{
             'quant': x.id,
             'lot_id': x.lot_id.id,
+            'in_date': x.in_date,
             'package_id': x.package_id.id,
             'selected': x in move.reserved_quant_ids,
             'qty': x.qty if x in move.reserved_quant_ids else 0,
@@ -112,6 +113,8 @@ class AssignManualQuantsLines(models.TransientModel):
         comodel_name='stock.production.lot', string='Lot',
         related='quant.lot_id', readonly=True,
         groups="stock.group_production_lot")
+    in_date = fields.Date(
+        string='Incoming Date', readonly=True)
     package_id = fields.Many2one(
         comodel_name='stock.quant.package', string='Package',
         related='quant.package_id', readonly=True,
