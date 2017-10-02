@@ -259,3 +259,117 @@ class TestProcurementOrder(common.TransactionCase):
                          proc1.purchase_line_id.product_uom)
         self.assertEqual(36, proc1.purchase_line_id.price_unit)
         proc1.purchase_id.button_confirm()
+
+    def test_procurement_from_orderpoint_draft_po(self):
+        # Define a multiple of 12 on supplier info
+        # Trigger a stock minimum rule of 10 PC
+        # A purchase line with 12 PC should be generated
+        # Change the stock minimum to 11 PC
+        # The purchase quantity should remains 12
+        # Change the stock minimum to 13 PC
+        # The purchase quantity should increase up to 24
+        warehouse = self.env.ref('stock.warehouse0')
+        product = self.env.ref('product.product_product_3')
+        product.route_ids = [(
+            4, self.env.ref("purchase.route_warehouse0_buy").id)]
+        self.env.ref('product.product_uom_dozen').rounding = 1
+        procurement_obj = self.env['procurement.order']
+
+        self.sp_30.min_qty = 1
+        self.sp_30.min_qty_uom_id = self.env.ref('product.product_uom_dozen')
+
+        orderpoint = self.env['stock.warehouse.orderpoint'].create({
+            'warehouse_id': warehouse.id,
+            'location_id': warehouse.lot_stock_id.id,
+            'product_id': product.id,
+            'product_min_qty': 10,
+            'product_max_qty': 10,
+        })
+        procurement_obj.run_scheduler()
+        proc = procurement_obj.search([('orderpoint_id', '=', orderpoint.id)])
+        self.assertEqual(len(proc), 1)
+        self.assertTrue(proc.purchase_line_id)
+        self.assertEqual(proc.purchase_line_id.product_qty, 12)
+
+        # change order_point level and rerun
+        orderpoint.product_min_qty = 11
+        orderpoint.product_max_qty = 11
+
+        procurement_obj.run_scheduler()
+        procs = procurement_obj.search([('orderpoint_id', '=', orderpoint.id)])
+
+        self.assertTrue(procs)
+        self.assertEqual(len(procs), 1)
+
+        # change order_point level and rerun
+        orderpoint.product_min_qty = 13
+        orderpoint.product_max_qty = 13
+
+        procurement_obj.run_scheduler()
+        procs = procurement_obj.search([('orderpoint_id', '=', orderpoint.id)])
+
+        self.assertTrue(procs)
+        self.assertEqual(len(procs), 2)
+
+        for proc in procs:
+            self.assertTrue(proc.purchase_line_id)
+            self.assertEqual(proc.purchase_line_id.product_qty, 24)
+
+    def test_procurement_from_orderpoint_confirmed_po(self):
+        # Define a multiple of 12 on supplier info
+        # Trigger a stock minimum rule of 10 PC
+        # A purchase line with 12 PC should be generated
+        # Confirm the purchase order
+        # Change the stock minimum to 11 PC
+        # No new purchase should be generated
+        # Change the stock minimum to 13 PC
+        # A new purchase should be generated
+        warehouse = self.env.ref('stock.warehouse0')
+        product = self.env.ref('product.product_product_3')
+        product.route_ids = [(
+            4, self.env.ref("purchase.route_warehouse0_buy").id)]
+        self.env.ref('product.product_uom_dozen').rounding = 1
+        procurement_obj = self.env['procurement.order']
+
+        self.sp_30.min_qty = 1
+        self.sp_30.min_qty_uom_id = self.env.ref('product.product_uom_dozen')
+
+        orderpoint = self.env['stock.warehouse.orderpoint'].create({
+            'warehouse_id': warehouse.id,
+            'location_id': warehouse.lot_stock_id.id,
+            'product_id': product.id,
+            'product_min_qty': 10,
+            'product_max_qty': 10,
+        })
+        procurement_obj.run_scheduler()
+        proc = procurement_obj.search([('orderpoint_id', '=', orderpoint.id)])
+        self.assertEqual(len(proc), 1)
+        self.assertTrue(proc.purchase_line_id)
+        self.assertEqual(proc.purchase_line_id.product_qty, 12)
+
+        proc.purchase_line_id.order_id.button_confirm()
+
+        # change order_point level and rerun
+        orderpoint.product_min_qty = 11
+        orderpoint.product_max_qty = 11
+
+        procurement_obj.run_scheduler()
+        proc = procurement_obj.search([('orderpoint_id', '=', orderpoint.id)])
+
+        self.assertTrue(proc)
+        self.assertEqual(len(proc), 1)
+        self.assertEqual(proc.purchase_line_id.product_qty, 12)
+
+        # change order_point level and rerun
+        orderpoint.product_min_qty = 13
+        orderpoint.product_max_qty = 13
+
+        procurement_obj.run_scheduler()
+        procs = procurement_obj.search([('orderpoint_id', '=', orderpoint.id)])
+
+        self.assertTrue(procs)
+        self.assertEqual(len(procs), 2)
+
+        for proc in procs:
+            self.assertTrue(proc.purchase_line_id)
+            self.assertEqual(proc.purchase_line_id.product_qty, 12)
