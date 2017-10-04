@@ -11,8 +11,12 @@ class StockInventory(models.Model):
     @api.model
     def _get_inventory_lines(self, inventory):
         vals = super(StockInventory, self)._get_inventory_lines(inventory)
+        product_ids = [l['product_id'] for l in vals]
+        product_map = {
+            p.id: p for p in self.env['product.product'].browse(product_ids)
+        }
         for line in vals:
-            product = self.env['product.product'].browse(line['product_id'])
+            product = product_map[line['product_id']]
             line.update({'theoretical_std_price': product.standard_price,
                          'standard_price': product.standard_price})
         return vals

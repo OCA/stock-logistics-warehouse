@@ -12,6 +12,13 @@ Standard price at inventory level
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/9.0
 
+Known Issues
+============
+
+* Line colorization is a known conflict and a base module is required `ref
+  <OCA/stock-logistics-warehouse#275 <https://github.com/OCA/stock-logistics-
+  warehouse/pull/275#discussion_r115679274>`_
+
 Bug Tracker
 ===========
 
