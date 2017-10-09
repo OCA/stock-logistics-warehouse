@@ -12,23 +12,27 @@ PERCENT = 100.0
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
 
-    @api.one
+    @api.multi
+    @api.depends("state", "line_ids")
     def _compute_inventory_accuracy(self):
-        total_qty = sum(self.line_ids.mapped('theoretical_qty'))
-        abs_discrepancy = sum(self.line_ids.mapped(
-            lambda x: abs(x.discrepancy_qty)))
-        if total_qty:
-            self.inventory_accuracy = PERCENT * (
-                total_qty - abs_discrepancy) / total_qty
-        if not self.line_ids and self.state == 'done':
-            self.inventory_accuracy = 100.0
+        for inv in self:
+            theoretical = sum(inv.line_ids.mapped(
+                lambda x: abs(x.theoretical_qty)))
+            abs_discrepancy = sum(inv.line_ids.mapped(
+                lambda x: abs(x.discrepancy_qty)))
+            if theoretical:
+                inv.inventory_accuracy = max(
+                    PERCENT * (theoretical - abs_discrepancy) / theoretical,
+                    0.0)
+            if not inv.line_ids and inv.state == 'done':
+                inv.inventory_accuracy = PERCENT
 
     cycle_count_id = fields.Many2one(
         comodel_name='stock.cycle.count', string='Stock Cycle Count',
         ondelete='cascade', readonly=True)
-    inventory_accuracy = fields.Float(string='Accuracy',
-                                      compute=_compute_inventory_accuracy,
-                                      digits=(3, 2))
+    inventory_accuracy = fields.Float(
+        string='Accuracy', compute=_compute_inventory_accuracy,
+        digits=(3, 2), store=True)
 
     @api.multi
     def action_done(self):
