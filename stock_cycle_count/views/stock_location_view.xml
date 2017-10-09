@@ -6,11 +6,12 @@
 
     <record model="ir.actions.act_window" id="act_accuracy_stats">
         <field name="domain">[('location_id', '=', active_ids),
+            ('exclude_sublocation', '=', True),
             ('state', '=', 'done')]</field>
         <field name="name">Accuracy Stats</field>
         <field name="res_model">stock.inventory</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,pivot</field>
     </record>
 
     <record id="view_location_form" model="ir.ui.view">
