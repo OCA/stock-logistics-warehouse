@@ -10,6 +10,7 @@
         <field name="inherit_id" ref="stock.view_inventory_tree"/>
         <field name="arch" type="xml">
             <field name="date" position="after">
+                <field name="location_id"/>
                 <field name="cycle_count_id"/>
                 <field name="inventory_accuracy"/>
             </field>
@@ -30,5 +31,53 @@
             </field>
         </field>
     </record>
+
+    <record id="view_inventory_filter" model="ir.ui.view">
+        <field name="name">stock.inventory.filter - stock_cycle_count</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_filter"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="location_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_inventory_graph" model="ir.ui.view">
+        <field name="name">stock.inventory.graph</field>
+        <field name="model">stock.inventory</field>
+        <field name="arch" type="xml">
+            <graph string="Inventory accuracy evolution" type="line">
+                <field name="cycle_count_id" type="col"/>
+                <field name="inventory_accuracy" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_inventory_pivot" model="ir.ui.view">
+        <field name="name">stock.inventory.pivot</field>
+        <field name="model">stock.inventory</field>
+        <field name="arch" type="xml">
+            <pivot string="Inventory Accuracy">
+                <field name="date" type="col"/>
+                <field name="location_id" type="row"/>
+                <field name="inventory_accuracy" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_accuracy_stats">
+        <field name="domain">[('exclude_sublocation', '=', True),
+            ('state', '=', 'done')]</field>
+        <field name="name">Accuracy Stats</field>
+        <field name="res_model">stock.inventory</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot,tree,form,graph</field>
+    </record>
+
+    <menuitem id="menu_report_accuracy_stats"
+              name="Cycle Count Accuracy"
+              parent="stock.menu_warehouse_report"
+              action="act_accuracy_stats" />
 
 </odoo>

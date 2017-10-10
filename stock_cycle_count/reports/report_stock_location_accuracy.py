@@ -3,16 +3,16 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from openerp import api, models
 
 
 class LocationAccuracyReport(models.AbstractModel):
     _name = "report.stock_location_accuracy"
 
     @api.model
-    def _get_inventory_domain(self, loc_id):
+    def _get_inventory_domain(self, loc_id, exclude_sublocation=True):
         return [('location_id', '=', loc_id),
-                ('exclude_sublocation', '=', True),
+                ('exclude_sublocation', '=', exclude_sublocation),
                 ('state', '=', 'done')]
 
     @api.model
