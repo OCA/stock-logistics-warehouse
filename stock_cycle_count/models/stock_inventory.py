@@ -32,7 +32,7 @@ class StockInventory(models.Model):
         ondelete='cascade', readonly=True)
     inventory_accuracy = fields.Float(
         string='Accuracy', compute=_compute_inventory_accuracy,
-        digits=(3, 2), store=True)
+        digits=(3, 2), store=True, group_operator="avg")
 
     @api.multi
     def action_done(self):
