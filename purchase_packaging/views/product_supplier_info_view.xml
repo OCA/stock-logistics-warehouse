@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<openerp>
+    <data>
+
+        <record id="product_supplierinfo_view_tree_inherit_purchase_packaging" model="ir.ui.view">
+            <field name="name">product.supplierinfo.tree.view" (purchase_packaging)</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="min_qty" position="after">
+                    <field name="min_qty_uom_id" groups="product.group_uom"/>
+                    <field name="packaging_id" groups="product.group_stock_packaging"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_supplierinfo_view_form_inherit_purchase_packaging" model="ir.ui.view">
+            <field name="name">product.supplierinfo.form.view (purchase_packaging)</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+            <field name="arch" type="xml">
+                <field name="min_qty" position="after">
+                    <span> x <field name="min_qty_uom_id" groups="product.group_uom"/></span>
+                </field>
+                <field name="product_uom" position="before">
+                <span> of </span>
+                </field>
+                <field name="product_uom" position="after">
+                    <div>
+                         using package <field name="packaging_id" domain="[('product_tmpl_id', '=', product_tmpl_id)]" groups="product.group_stock_packaging"/>
+                    </div>
+                </field>
+                <field name="delay" position="after">
+                    <field name="product_tmpl_id" invisible="1" required="False"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
