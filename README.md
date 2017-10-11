@@ -25,8 +25,12 @@ addon | version | summary
 --- | --- | ---
 [account_move_line_product](account_move_line_product/) | 10.0.1.0.0 | Displays the product in the journal entries and items
 [account_move_line_stock_info](account_move_line_stock_info/) | 10.0.1.0.0 | Account Move Line Stock Move
+[packaging_uom](packaging_uom/) | 10.0.1.0.0 | Use uom in package
+[purchase_packaging](purchase_packaging/) | 10.0.1.0.0 | In purchase, use package
+[sale_packaging](sale_packaging/) | 10.0.1.0.0 | In sale, use uom's package
 [stock_available](stock_available/) | 10.0.1.0.0 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 10.0.1.0.0 | Ignore planned receptions in quantity available to promise
+[stock_available_sale](stock_available_sale/) | 10.0.1.0.0 | Quotations in quantity available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 10.0.1.0.0 | Quantity of stock available for immediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 10.0.1.0.0 | Stock Quantity Change Reason
 [stock_inventory_chatter](stock_inventory_chatter/) | 10.0.1.0.0 | Log changes being done in Inventory Adjustments
@@ -52,7 +56,6 @@ addon | version | summary
 [configurable_stock_level](configurable_stock_level/) | 0.1 (unported) | name
 [partner_location_auto_create](partner_location_auto_create/) | 0.1 (unported) | Partner Location Auto Create
 [stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 (unported) | Consider the production potential is available to promise
-[stock_available_sale](stock_available_sale/) | 2.0 (unported) | Quotations in quantity available to promise
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 8.0.1.0.0 (unported) | More filters for inventory adjustments
 [stock_location_area_data](stock_location_area_data/) | 8.0.0.1.0 (unported) | Add surface units of measure
 [stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 (unported) | Enter a location's area based on different units of measure
