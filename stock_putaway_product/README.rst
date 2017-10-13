@@ -72,6 +72,7 @@ Contributors
 * Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
 * Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
 * Denis Roussel - ACSONE SA/NV <denis.roussel@acsone.eu>
+* Thomas Fossoul - WINK SA/NV <tfossoul@wink.be>
 
 
 Maintainer
