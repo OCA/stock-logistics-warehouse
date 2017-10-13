@@ -23,11 +23,17 @@ class ProductPutaway(models.Model):
 
     @api.multi
     def get_product_putaway_strategies(self, product):
+        """ Get linked product putaway strategy that contain fixed location.
+        product.product_putaway_ids is the fasted way to get strategy
+        especially when we have thousand of products.
+        """
         self.ensure_one()
-        return self.product_location_ids.filtered(lambda x: (
-            x.product_product_id == product or
-            (not x.product_product_id and
-             x.product_tmpl_id == product.product_tmpl_id)))
+        strategy = product.product_putaway_ids.filtered(
+            lambda strategy: (strategy.putaway_id == self))
+        if not strategy:
+            strategy = product.product_tmpl_id.product_putaway_ids.filtered(
+                lambda strategy: (strategy.putaway_id == self))
+        return strategy
 
     def putaway_apply(self, product):
         if self.method == 'per_product':
