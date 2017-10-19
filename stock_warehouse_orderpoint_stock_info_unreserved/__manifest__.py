@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Reordering rules stock info unreserved",
+    "name": "Stock Warehouse Orderpoint Stock Info Unreserved",
     "version": "10.0.1.0.0",
     "depends": [
         "stock_warehouse_orderpoint_stock_info",
