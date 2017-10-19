@@ -33,10 +33,9 @@ class ProductTemplate(models.Model):
             text = res[tmpl.id]['qty_available_stock_text']
             tmpl.qty_available_stock_text = text
 
-    @api.multi
-    def _product_available(self, name=None, arg=False):
-        prod_available = super(ProductTemplate, self)._product_available(name,
-                                                                         arg)
+    def _compute_quantities_dict(self):
+        prod_available = super(ProductTemplate, self).\
+            _compute_quantities_dict()
 
         variants = self.mapped('product_variant_ids')
         variant_available = variants._product_available()
@@ -107,11 +106,12 @@ class ProductProduct(models.Model):
         return False
 
     @api.multi
-    def _product_available(self, field_names=None, arg=False):
-
+    def _compute_quantities_dict(self, lot_id, owner_id, package_id,
+                                 from_date=False, to_date=False):
         res = super(ProductProduct, self).\
-            _product_available(field_names=field_names,
-                               arg=arg)
+            _compute_quantities_dict(
+            lot_id=lot_id, owner_id=owner_id, package_id=package_id,
+            from_date=from_date, to_date=to_date)
 
         domain_quant = self._prepare_domain_available_not_res(self)
 
