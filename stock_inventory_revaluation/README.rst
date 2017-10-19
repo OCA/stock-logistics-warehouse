@@ -35,14 +35,14 @@ Configuration
 Usage
 =====
 
-* Go to *Inventory / Inventory Control / Inventory Revaluation / Products*
+* Go to *Inventory / Inventory Control / Inventory Revaluation*
   to create a new Inventory Revaluation. For products set with average or
   standard price and real-time valuation, go to the Product form and use the
-  link to change the standard price.
+  "Set standard price" link to change the standard price.
 
 * In order to post the inventory revaluation for multiple items at once,
   select the records in the tree view and go to
-  *More / Post Inventory Revaluations*.
+  *Action / Post Inventory Revaluations*.
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
