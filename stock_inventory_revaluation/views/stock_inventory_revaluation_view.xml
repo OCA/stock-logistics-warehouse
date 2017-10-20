@@ -16,7 +16,8 @@
                                 class="oe_highlight"/>
                         <button name="button_cancel" states="draft,posted"
                                 string="Cancel" type="object"
-                                class="oe_highlight"/>
+                                class="oe_highlight"
+                                attrs="{'invisible':[('cost_method','in',['average','standard'])]}"/>
                         <field name="state" widget="statusbar"
                                statusbar_visible="draft,done,cancel"
                                statusbar_colors='{"done":"blue"}'/>
