@@ -52,7 +52,7 @@ addon | version | summary
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 8.0.1.0.0 | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_product_location_sorted_by_qty](stock_product_location_sorted_by_qty/) | 8.0.1.0.0 | In the update wizard of quantities for a product, sort the stock location by quantity
 [stock_putaway_product](stock_putaway_product/) | 8.0.1.0.1 | Set a product location and put-away strategy per product
-[stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.2.0 | Stock - Manual assignment of quants
+[stock_quant_manual_assign](stock_quant_manual_assign/) | 8.0.1.2.1 | Stock - Manual assignment of quants
 [stock_quant_merge](stock_quant_merge/) | 8.0.1.0.0 | Stock - Quant merge
 [stock_quant_partner_info](stock_quant_partner_info/) | 8.0.1.1.0 | Stock - Quant partner info
 [stock_reserve](stock_reserve/) | 8.0.0.2.0 | Stock reservations on products
