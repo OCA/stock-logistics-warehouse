@@ -9,7 +9,6 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     removal_priority_active = fields.Boolean(
-        default=False,
         string="Use 'Removal Priority' in Locations",
         help="Adds an extra field in Locations named 'Removal Priority'."
              "When removing stock from Locations, this priority will apply"
