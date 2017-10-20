@@ -44,10 +44,15 @@ Usage
   select the records in the tree view and go to
   *Action / Post Inventory Revaluations*.
 
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/10.0
+
+Known issues / Roadmap
+======================
+
+* It is not possible to cancel inventory revaluations for products set with
+  average or standard price.
 
 Bug Tracker
 ===========
