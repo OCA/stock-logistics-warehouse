@@ -9,5 +9,5 @@ class StockConfigSettings(models.TransientModel):
 
     removal_priority_active = fields.Boolean(
         related='company_id.removal_priority_active',
-        string="Use 'Removal Priority' in Locations",
+        string="Use 'Removal Priority' in Locations (*)",
         help="This configuration is related to the company you're logged into")

@@ -11,6 +11,16 @@
             <field name="group_warning_stock" position="after">
                 <field name="removal_priority_active"/>
             </field>
+            <header position="after">
+                <group>
+                    <field name="company_id" invisible="1"/>
+                </group>
+            </header>
+            <form position="inside">
+                <div>
+                    <span>(*) This configuration is related to the company you're logged into.</span>
+                </div>
+            </form>
         </field>
     </record>
 
