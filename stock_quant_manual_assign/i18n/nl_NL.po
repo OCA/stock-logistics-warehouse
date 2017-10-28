@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 01:01+0000\n"
-"PO-Revision-Date: 2017-08-29 08:01+0000\n"
+"POT-Creation-Date: 2017-10-20 00:50+0000\n"
+"PO-Revision-Date: 2017-09-22 16:47+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgstr "Laatst bijgewerkt op"
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,location_id:0
 msgid "Location"
-msgstr ""
+msgstr "Locatie"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,lot_id:0
@@ -103,7 +103,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,name:0
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,package_id:0

@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Jan Prokop <jprokop@creativehome.sk>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-14 00:46+0000\n"
-"PO-Revision-Date: 2017-07-14 00:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
+"PO-Revision-Date: 2017-10-20 00:49+0000\n"
+"Last-Translator: Jan Prokop <jprokop@creativehome.sk>, 2017\n"
 "Language-Team: Slovak (https://www.transifex.com/oca/teams/23907/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,7 +155,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,product_id:0
 msgid "Product"
-msgstr ""
+msgstr "Produkt"
 
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,product_uom:0
@@ -203,7 +204,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,warehouse_id:0
 msgid "Warehouse"
-msgstr ""
+msgstr "Sklad"
 
 #. module: stock_orderpoint_generator
 #: help:stock.warehouse.orderpoint.template,product_min_qty:0

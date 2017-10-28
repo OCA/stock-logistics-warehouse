@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 01:01+0000\n"
-"PO-Revision-Date: 2017-08-22 01:01+0000\n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
+"PO-Revision-Date: 2017-10-20 00:49+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgstr "Laatst bijgewerkt op"
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,location_id:0
 msgid "Location"
-msgstr ""
+msgstr "Locatie"
 
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,product_max_qty:0
@@ -135,7 +135,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,name:0
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: stock_orderpoint_generator
 #: selection:stock.warehouse.orderpoint.template,logic:0

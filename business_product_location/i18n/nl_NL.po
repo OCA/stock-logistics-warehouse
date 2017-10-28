@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 01:00+0000\n"
-"PO-Revision-Date: 2017-08-22 01:00+0000\n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
+"PO-Revision-Date: 2017-10-20 00:49+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgstr ""
 #. module: business_product_location
 #: field:business.product.location,name:0
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: business_product_location
 #: view:website:business_product_location.report_bpl

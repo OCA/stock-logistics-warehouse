@@ -1,9 +1,8 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_move_line_product
+# * stock_available_lot_locked
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 # Jan Prokop <jprokop@creativehome.sk>, 2017
 msgid ""
 msgstr ""
@@ -19,18 +18,22 @@ msgstr ""
 "Language: sk\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#. module: account_move_line_product
-#: view:account.move.line:account_move_line_product.view_move_line_form
-#: view:account.move.line:account_move_line_product.view_move_line_form2
-msgid "False"
+#. module: stock_available_lot_locked
+#: field:product.product,locked_qty:0 field:product.template,locked_qty:0
+msgid "Blocked"
 msgstr ""
 
-#. module: account_move_line_product
-#: view:account.move.line:account_move_line_product.view_account_move_line_filter
-msgid "Partner"
-msgstr "Partner"
-
-#. module: account_move_line_product
-#: view:account.move.line:account_move_line_product.view_account_move_line_filter
+#. module: stock_available_lot_locked
+#: model:ir.model,name:stock_available_lot_locked.model_product_product
 msgid "Product"
 msgstr "Produkt"
+
+#. module: stock_available_lot_locked
+#: model:ir.model,name:stock_available_lot_locked.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_available_lot_locked
+#: help:product.product,locked_qty:0 help:product.template,locked_qty:0
+msgid "Quantity of the Lots/Serial Numbers of this Product which areblocked."
+msgstr ""

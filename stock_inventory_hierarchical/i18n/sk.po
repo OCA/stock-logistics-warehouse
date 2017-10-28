@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-30 03:45+0000\n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
 "PO-Revision-Date: 2016-04-14 14:54+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovak (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sk/)\n"
@@ -69,7 +69,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: model:ir.model,name:stock_inventory_hierarchical.model_stock_inventory
 msgid "Inventory"
-msgstr ""
+msgstr "Inventár"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/wizard/generate_inventory.py:125
