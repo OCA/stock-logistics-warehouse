@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-29 03:33+0000\n"
-"PO-Revision-Date: 2017-08-29 03:33+0000\n"
+"POT-Creation-Date: 2017-10-03 01:05+0000\n"
+"PO-Revision-Date: 2017-10-03 01:05+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr "Laatst bijgewerkt op"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_location_id
 msgid "Location"
-msgstr ""
+msgstr "Locatie"
 
 #. module: stock_inventory_verification_request
 #: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
@@ -199,7 +199,7 @@ msgstr ""
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_name
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_notes

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-29 03:33+0000\n"
-"PO-Revision-Date: 2017-08-29 03:33+0000\n"
+"POT-Creation-Date: 2017-10-03 01:05+0000\n"
+"PO-Revision-Date: 2017-10-03 01:05+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -54,8 +54,8 @@ msgid "Cancelled"
 msgstr "Geannuleerd"
 
 #. module: stock_inventory_revaluation
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:333
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:380
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:334
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:377
 #, python-format
 msgid ""
 "Cannot do an inventory value change if the quantity available for product %s"
@@ -333,7 +333,7 @@ msgstr "Laatst bijgewerkt op"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_location_id
 msgid "Location"
-msgstr ""
+msgstr "Locatie"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_new_cost
@@ -517,8 +517,8 @@ msgid "Stock Inventory Revaluation Quants"
 msgstr ""
 
 #. module: stock_inventory_revaluation
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:327
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:375
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:328
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:372
 #, python-format
 msgid "The new value for product %s cannot be negative"
 msgstr ""
@@ -539,14 +539,14 @@ msgid "Valuation Increase Account"
 msgstr ""
 
 #. module: stock_inventory_revaluation
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:471
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:470
 #, python-format
 msgid "You can only post quant cost changes."
 msgstr ""
 
 #. module: stock_inventory_revaluation
-#: code:addons/stock_inventory_revaluation/models/account_move.py:24
-#: code:addons/stock_inventory_revaluation/models/account_move.py:44
+#: code:addons/stock_inventory_revaluation/models/account_move.py:25
+#: code:addons/stock_inventory_revaluation/models/account_move.py:46
 #, python-format
 msgid ""
 "You cannot remove the journal item that is related to an inventory "
