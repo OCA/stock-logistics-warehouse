@@ -22,12 +22,14 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         self.location_supplier = self.env.ref('stock.stock_location_suppliers')
 
         self.company = self.env.ref('base.main_company')
-        self.company.removal_priority_active = True
+        self.grp_rem_priority = self.env.ref(
+            'stock_removal_location_by_priority.group_removal_priority')
 
         self.g_stock_user = self.env.ref('stock.group_stock_user')
 
         self.user = self._create_user(
-            'user_1', [self.g_stock_user], self.company).id
+            'user_1', [self.g_stock_user, self.grp_rem_priority],
+            self.company).id
 
         self.wh1 = self.stock_warehouse_model.create({
             'name': 'WH1',
