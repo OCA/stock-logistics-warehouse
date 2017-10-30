@@ -1,0 +1,8 @@
+<odoo>
+    <data noupdate="0">
+        <record id="group_removal_priority" model="res.groups">
+            <field name="name">Removal Priority</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+     </data>
+</odoo>
