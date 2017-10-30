@@ -12,8 +12,10 @@
     "category": "Warehouse Management",
     "depends": ["stock"],
     "data": [
+        'security/stock_security.xml',
         'views/res_config_settings_views.xml',
-        'views/stock_location_view.xml'],
+        'views/stock_location_view.xml',
+    ],
     "license": "AGPL-3",
     'installable': True,
     'application': False,
