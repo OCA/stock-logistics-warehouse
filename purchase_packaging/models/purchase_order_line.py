@@ -47,6 +47,13 @@ class PurchaseOrderLine(models.Model):
             fields.Date.from_string(self.order_id.date_order),
             uom_id=self.product_uom)
 
+    @api.depends('product_purchase_qty',
+                 'product_qty',
+                 'price_unit',
+                 'taxes_id')
+    def _compute_amount(self):
+        return super(PurchaseOrderLine, self)._compute_amount()
+
     @api.multi
     @api.depends('product_purchase_uom_id', 'product_purchase_qty')
     def _compute_product_qty(self):

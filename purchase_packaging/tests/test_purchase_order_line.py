@@ -70,6 +70,15 @@ class TestPurchaseOrderLine(common.TransactionCase):
                          self.product_uom_8.id)
         self.assertAlmostEqual(po_line.product_purchase_qty, 2)
         self.assertAlmostEqual(po_line.product_qty, 16)
+
+        # test subtotal computation
+        subtotal = po_line.price_unit * po_line.product_qty
+        self.assertAlmostEqual(po_line.price_subtotal,
+                               subtotal)
+        po_line.product_purchase_qty = 3
+        self.assertNotEqual(po_line.price_subtotal,
+                            subtotal)
+
         self.assertTrue(po_line.price_unit)
         self.assertEqual(po_line.product_uom.id,
                          self.env.ref('product.product_uom_dozen').id)
@@ -83,7 +92,7 @@ class TestPurchaseOrderLine(common.TransactionCase):
                          self.product_packaging_dozen.id)
         self.assertEqual(sm.product_uom.id,
                          self.env.ref('product.product_uom_dozen').id)
-        self.assertAlmostEqual(sm.product_uom_qty, 16)
+        self.assertAlmostEqual(sm.product_uom_qty, 24)
 
     def test_po_line_no_product(self):
         self.product_supplier_info.min_qty_uom_id = self.product_uom_8
