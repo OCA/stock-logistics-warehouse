@@ -16,7 +16,8 @@ class Quant(models.Model):
 
     @api.model
     def _quants_removal_get_order(self, removal_strategy=None):
-        if self.env.user.company_id.removal_priority_active:
+        if self.user_has_groups(
+                'stock_removal_location_by_priority.group_removal_priority'):
             if removal_strategy == 'fifo':
                 return 'in_date, removal_priority, id'
             elif removal_strategy == 'lifo':
