@@ -7,7 +7,11 @@ from odoo import fields, models
 class StockConfigSettings(models.TransientModel):
     _inherit = 'stock.config.settings'
 
-    removal_priority_active = fields.Boolean(
-        related='company_id.removal_priority_active',
-        string="Use 'Removal Priority' in Locations (*)",
-        help="This configuration is related to the company you're logged into")
+    group_removal_priority = fields.Selection([
+        (0, 'Don\'t use \'Removal Priority\' in Locations'),
+        (1, 'Use \'Removal Priority\' in Locations'),
+    ], "Removal Priority",
+        implied_group='stock_removal_location_by_priority.'
+                      'group_removal_priority',
+        help="Removal priority that applies when the incoming dates "
+             "are equal in both locations.")
