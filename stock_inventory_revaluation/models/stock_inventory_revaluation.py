@@ -309,6 +309,9 @@ class StockInventoryRevaluation(models.Model):
 
     @api.multi
     def post(self):
+        product_prec = self.env['decimal.precision'].precision_get(
+            'Product Unit of Measure')
+        account_prec = self.env['decimal.precision'].precision_get('Account')
         for revaluation in self:
             if revaluation.product_id.cost_method == 'real':
                 for reval_quant in revaluation.reval_quant_ids:
@@ -319,13 +322,15 @@ class StockInventoryRevaluation(models.Model):
                         cost_method in ['standard', 'average']:
 
                     if revaluation.revaluation_type == 'inventory_value':
-                        if float_compare(revaluation.new_value, 0.0) < 0:
+                        if float_compare(revaluation.new_value, 0.0,
+                                         precision_rounding=account_prec) < 0:
                             raise UserError(
                                 _("The new value for product %s cannot "
                                   "be negative" %
                                   revaluation.product_template_id.name))
-                    if float_compare(revaluation.product_id.qty_available,
-                                     0.0) <= 0:
+                    if float_compare(
+                            revaluation.product_id.qty_available,
+                            0.0, precision_rounding=product_prec) <= 0:
                         raise UserError(
                             _("Cannot do an inventory value change if the "
                               "quantity available for product %s "
@@ -363,12 +368,14 @@ class StockInventoryRevaluation(models.Model):
             else:
                 if revaluation.product_id.\
                         cost_method in ['standard', 'average']:
-                    if float_compare(revaluation.new_value, 0.0) < 0:
+                    if float_compare(revaluation.new_value, 0.0,
+                                     precision_rounding=account_prec) < 0:
                         raise UserError(
                             _("The new value for product %s cannot "
                               "be negative" %
                               revaluation.product_template_id.name))
-                    if float_compare(revaluation.qty_available, 0.0) <= 0:
+                    if float_compare(revaluation.qty_available, 0.0,
+                                     precision_rounding=product_prec) <= 0:
                         raise UserError(
                             _("Cannot do an inventory value change if the "
                               "quantity available for product %s "
