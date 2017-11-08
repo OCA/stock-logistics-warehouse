@@ -304,10 +304,8 @@ class TestProcurementOrder(common.TransactionCase):
         # change order_point level and rerun
         orderpoint.product_min_qty = 13
         orderpoint.product_max_qty = 13
-
         procurement_obj.run_scheduler()
         procs = procurement_obj.search([('orderpoint_id', '=', orderpoint.id)])
-
         self.assertTrue(procs)
         self.assertEqual(len(procs), 2)
 

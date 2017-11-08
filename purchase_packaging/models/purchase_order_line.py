@@ -14,7 +14,8 @@ class PurchaseOrderLine(models.Model):
 
     product_tmpl_id = fields.Many2one(
         related='product_id.product_tmpl_id',
-        comodel_name='product.template'
+        comodel_name='product.template',
+        readonly=True
     )
     packaging_id = fields.Many2one(
         'product.packaging',
@@ -34,7 +35,8 @@ class PurchaseOrderLine(models.Model):
     product_qty = fields.Float(
         compute="_compute_product_qty",
         string='Quantity',
-        inverse='_inverse_product_qty'
+        inverse='_inverse_product_qty',
+        store=True
     )
 
     @api.multi
@@ -46,13 +48,6 @@ class PurchaseOrderLine(models.Model):
             date=self.order_id.date_order and
             fields.Date.from_string(self.order_id.date_order),
             uom_id=self.product_uom)
-
-    @api.depends('product_purchase_qty',
-                 'product_qty',
-                 'price_unit',
-                 'taxes_id')
-    def _compute_amount(self):
-        return super(PurchaseOrderLine, self)._compute_amount()
 
     @api.multi
     @api.depends('product_purchase_uom_id', 'product_purchase_qty')
@@ -165,10 +160,29 @@ class PurchaseOrderLine(models.Model):
         When packaging_id is set, uom_id is readonly,
         so we need to reset the uom value in the vals dict
         """
+        vals2 = {}
         if vals.get('packaging_id'):
-            vals['product_uom'] = self.env['product.packaging'].browse(
+            vals2['product_uom'] = self.env['product.packaging'].browse(
                 vals['packaging_id']).uom_id.id
-        return vals
+
+        if 'product_qty' in vals and 'product_purchase_qty' not in vals and \
+                self.product_purchase_qty:
+            if self.product_id:
+                supplier = self._get_product_seller()
+                if not supplier.min_qty_uom_id:
+                    return vals2
+                # We must recalculate the product_qty based on
+                #  the product_purchased_qty
+                to_uom = self.env['product.uom'].search([
+                    ('category_id', '=',
+                     supplier.min_qty_uom_id.category_id.id),
+                    ('uom_type', '=', 'reference')], limit=1)
+                to_uom = to_uom and to_uom[0]
+                vals2['product_qty'] =\
+                    supplier.min_qty_uom_id._compute_quantity(
+                        self.product_purchase_qty, to_uom
+                    )
+        return vals2
 
     @api.model
     @api.returns('self', lambda rec: rec.id)
@@ -184,8 +198,11 @@ class PurchaseOrderLine(models.Model):
             vals['product_qty'] = to_uom._compute_quantity(
                 vals['product_purchase_qty'],
                 to_uom)
-        return super(PurchaseOrderLine, self).create(self.update_vals(vals))
+        res = super(PurchaseOrderLine, self).create(vals)
+        res.write(res.update_vals(vals))
+        return res
 
     @api.multi
     def write(self, vals):
+        super(PurchaseOrderLine, self).write(vals)
         return super(PurchaseOrderLine, self).write(self.update_vals(vals))

@@ -20,14 +20,15 @@ class ProcurementOrder(models.Model):
             quantity=res['product_qty'],
             date=po.date_order and fields.Date.from_string(po.date_order),
             uom_id=self.product_id.uom_po_id)
+
         if seller.packaging_id:
-                res['packaging_id'] = seller.packaging_id.id
-                new_uom_id = seller.product_uom
-                if new_uom_id.id != res['product_uom']:
-                    res['product_uom'] = new_uom_id
-                    qty = self.product_uom._compute_quantity(
-                        self.product_qty, new_uom_id)
-                    res['product_qty'] = max(qty, seller.min_qty)
+            res['packaging_id'] = seller.packaging_id.id
+            new_uom = seller.product_uom
+            if new_uom.id != res['product_uom']:
+                res['product_uom'] = new_uom.id
+                qty = self.product_uom._compute_quantity(
+                    self.product_qty, new_uom)
+                res['product_qty'] = max(qty, seller.min_qty)
         return res
 
 

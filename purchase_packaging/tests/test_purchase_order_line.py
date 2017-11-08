@@ -56,12 +56,17 @@ class TestPurchaseOrderLine(common.TransactionCase):
 
         po = self.env['purchase.order'].create(
             {'partner_id': self.product_supplier_info.name.id})
-        po_line = po.order_line.new({
-            'product_id': self.product_tmpl_id.product_variant_id,
+        po_line = po.order_line.create({
+            'name': self.product_tmpl_id.product_variant_id.name,
+            'date_planned': po.date_order,
+            'product_id': self.product_tmpl_id.product_variant_id.id,
             'product_purchase_qty': 1.0,
             'product_purchase_uom_id':
-                po.order_line._default_product_purchase_uom_id(),
-            'order_id': po
+                po.order_line._default_product_purchase_uom_id().id,
+            'product_uom':
+                po.order_line._default_product_purchase_uom_id().id,
+            'price_unit': 0,
+            'order_id': po.id,
         })
         po_line.onchange_product_id()
         self.assertEqual(po_line.packaging_id.id,
@@ -75,6 +80,7 @@ class TestPurchaseOrderLine(common.TransactionCase):
         subtotal = po_line.price_unit * po_line.product_qty
         self.assertAlmostEqual(po_line.price_subtotal,
                                subtotal)
+        # by changing the purchase qty we expect the price to be recomputed
         po_line.product_purchase_qty = 3
         self.assertNotEqual(po_line.price_subtotal,
                             subtotal)
