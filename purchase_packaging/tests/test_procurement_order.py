@@ -2,6 +2,8 @@
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import odoo.tests.common as common
+from datetime import timedelta
+from odoo import fields
 
 
 class TestProcurementOrder(common.TransactionCase):
@@ -19,6 +21,8 @@ class TestProcurementOrder(common.TransactionCase):
         self.sp_30 = self.env.ref('product.product_supplierinfo_1')
         self.sp_30.product_tmpl_id = self.product_packaging_3.product_tmpl_id
         self.sp_30.currency_id = self.env.user.company_id.currency_id
+        self.sp_30.date_start = fields.Datetime.from_string(
+            fields.Datetime.now()) - timedelta(days=10)
         self.product_uom_8 = self.env['product.uom'].create(
             {'category_id': self.env.ref('product.product_uom_categ_unit').id,
              'name': 'COL8',

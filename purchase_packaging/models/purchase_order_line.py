@@ -43,8 +43,8 @@ class PurchaseOrderLine(models.Model):
         return self.product_id._select_seller(
             partner_id=self.order_id.partner_id,
             quantity=self.product_qty,
-            date=self.order_id.date_order and
-            fields.Date.from_string(self.order_id.date_order),
+            date=self.order_id.date_order and fields.Date.to_string(
+                fields.Date.from_string(self.order_id.date_order)) or None,
             uom_id=self.product_uom)
 
     @api.multi
