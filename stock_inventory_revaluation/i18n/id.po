@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-17 09:47+0000\n"
-"PO-Revision-Date: 2017-03-17 09:47+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-10-28 11:49+0000\n"
+"PO-Revision-Date: 2017-10-28 11:49+0000\n"
+"Last-Translator: Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017\n"
 "Language-Team: Indonesian (https://www.transifex.com/oca/teams/23907/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +39,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 msgid "Back to Draft"
-msgstr ""
+msgstr "Kembali ke Draf"
 
 #. module: stock_inventory_revaluation
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
@@ -50,11 +51,11 @@ msgstr "Batalkan"
 #. module: stock_inventory_revaluation
 #: selection:stock.inventory.revaluation,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Dibatalkan"
 
 #. module: stock_inventory_revaluation
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:333
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:380
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:334
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:377
 #, python-format
 msgid ""
 "Cannot do an inventory value change if the quantity available for product %s"
@@ -210,7 +211,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: selection:stock.inventory.revaluation,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Draf"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_value
@@ -516,8 +517,8 @@ msgid "Stock Inventory Revaluation Quants"
 msgstr ""
 
 #. module: stock_inventory_revaluation
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:327
-#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:375
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:328
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:372
 #, python-format
 msgid "The new value for product %s cannot be negative"
 msgstr ""
@@ -544,8 +545,8 @@ msgid "You can only post quant cost changes."
 msgstr ""
 
 #. module: stock_inventory_revaluation
-#: code:addons/stock_inventory_revaluation/models/account_move.py:24
-#: code:addons/stock_inventory_revaluation/models/account_move.py:44
+#: code:addons/stock_inventory_revaluation/models/account_move.py:25
+#: code:addons/stock_inventory_revaluation/models/account_move.py:46
 #, python-format
 msgid ""
 "You cannot remove the journal item that is related to an inventory "
