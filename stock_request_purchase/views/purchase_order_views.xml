@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!-- Copyright 2016 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button type="object"
+                        name="action_view_stock_request"
+                        class="oe_stat_button"
+                        icon="fa-chain"
+                        attrs="{'invisible':[('stock_request_ids', '=', [])]}">
+                    <field name="stock_request_count" widget="statinfo"
+                           string="Stock Requests"/>
+                    <field name="stock_request_ids" invisible="1"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/sheet/notebook"
+                   position="inside">
+                <page name="stock_requests" string="Stock Requests"
+                      groups="stock_request.group_stock_request_user">
+                    <field name="stock_request_ids"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_line_form2" model="ir.ui.view">
+        <field name="name">purchase.order.line.form2</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <separator string="Stock Requests"/>
+                <field name="stock_request_ids"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
