@@ -107,6 +107,10 @@ class TestReorderLimit(TransactionCase):
         po = procurement.purchase_line_id.order_id
         po.signal_workflow('purchase_confirm')
         self.assertEqual(po.state, 'approved')
-        self.assertEqual(our_product.virtual_available, 15.0)
+        our_product_in_our_warehouse = our_product.with_context(
+            location=our_warehouse.lot_stock_id.id
+        )
+        self.assertEqual(
+            our_product_in_our_warehouse.virtual_available, 15.0)
         # Test 2: sell 12 units amd make product obsolete
         #     In this test we just move the products to an outside location:

@@ -22,19 +22,16 @@ class StockWarehouseOrderpoint(models.Model):
         existing orders.
         """
         stock_rules = super(StockWarehouseOrderpoint, self).search(
-            args, offset=offset, limit=limit, order=order, count=count
-        )
+            args, offset=offset, limit=limit, order=order, count=count)
         if not self.env.context.get('processing_minimum_stock_rules', False):
             return stock_rules
         filtered_stock_rules = stock_rules.filtered(
-            lambda r: r.limit_procurement_qty > 0.0
-        )
+            lambda r: r.limit_procurement_qty > 0.0)
         not_used = len(stock_rules) - len(filtered_stock_rules)
         if not_used > 0:
             _logger.info(
                 _("%d Minimum stock rules are not used for creating"
-                  " procurements.") % not_used
-            )
+                  " procurements.") % not_used)
         return filtered_stock_rules
 
     @api.multi
@@ -61,17 +58,13 @@ class StockWarehouseOrderpoint(models.Model):
     limit_procurement_qty = fields.Float(
         string='Maximum quantity still to procure',
         compute='_compute_limit_procurement_qty',
-        digits=dp.get_precision('Product Unit of Measure'),
-    )
+        digits=dp.get_precision('Product Unit of Measure'))
     product_state = fields.Selection(
         related='product_id.product_tmpl_id.state',
-        readonly=True,
-    )
+        readonly=True)
     product_active = fields.Boolean(
         related='product_id.product_tmpl_id.active',
-        readonly=True,
-    )
+        readonly=True)
     product_purchase_ok = fields.Boolean(
         related='product_id.product_tmpl_id.purchase_ok',
-        readonly=True,
-    )
+        readonly=True)
