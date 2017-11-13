@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_move_operations" model="ir.ui.view">
+        <field name="name">stock.move.operations.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_stock_move_operations"/>
+        <field name="arch" type="xml">
+            <field name="move_line_ids" position="after">
+                <newline/>
+                <field name="allocation_ids"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form"/>
+        <field name="arch" type="xml">
+            <group name="linked_group" position="after">
+                <newline/>
+                <group name="allocations"
+                       string="Stock Request Allocations">
+                    <field name="allocation_ids"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+    <record id="view_move_picking_form" model="ir.ui.view">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_form"/>
+        <field name="arch" type="xml">
+            <group name="quants_grp" position="after">
+                <newline/>
+                <group name="allocations"
+                       string="Stock Request Allocations">
+                    <field name="allocation_ids"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>
