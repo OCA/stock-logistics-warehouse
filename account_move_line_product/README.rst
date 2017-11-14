@@ -39,6 +39,7 @@ Contributors
 ------------
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* FactorLibre - Víctor Rodrigo <victor.rodrigo@gmail.com>
 
 Maintainer
 ----------
