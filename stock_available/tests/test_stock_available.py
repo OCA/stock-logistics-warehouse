@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2014 Numérigraphe
 # Copyright 2016 Sodexis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -9,13 +8,13 @@ from odoo.tests.common import TransactionCase
 class TestStockLogisticsWarehouse(TransactionCase):
     def test_res_config(self):
         """Test the config file"""
-        stock_setting = self.env['stock.config.settings'].create({})
+        stock_setting = self.env['res.config.settings'].create({})
 
         self.assertEquals(
             stock_setting.stock_available_mrp_based_on,
             'qty_available')
         stock_setting.stock_available_mrp_based_on = 'immediately_usable_qty'
-        stock_setting.set_stock_available_mrp_based_on()
+        stock_setting.set_values()
         self.assertEquals(
             stock_setting.stock_available_mrp_based_on,
             'immediately_usable_qty')
@@ -104,20 +103,20 @@ class TestStockLogisticsWarehouse(TransactionCase):
         compare_product_usable_qty(productA, 0)
         compare_product_usable_qty(templateAB, 0)
 
-        stockMoveInA.action_confirm()
+        stockMoveInA._action_confirm()
         compare_product_usable_qty(productA, 2)
         compare_product_usable_qty(templateAB, 2)
 
-        stockMoveInA.action_assign()
+        stockMoveInA._action_assign()
         compare_product_usable_qty(productA, 2)
         compare_product_usable_qty(templateAB, 2)
 
-        stockMoveInA.action_done()
+        stockMoveInA._action_done()
         compare_product_usable_qty(productA, 2)
         compare_product_usable_qty(templateAB, 2)
 
         # will directly trigger action_done on productB
-        stockMoveInB.action_done()
+        stockMoveInB._action_done()
         compare_product_usable_qty(productA, 2)
         compare_product_usable_qty(productB, 3)
         compare_product_usable_qty(templateAB, 5)
@@ -133,7 +132,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
              'state': 'confirmed',
              })
 
-        stockMoveOutA.action_done()
+        stockMoveOutA._action_done()
         compare_product_usable_qty(productA, 1)
         compare_product_usable_qty(templateAB, 4)
 
