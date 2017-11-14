@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2014 Numérigraphe
 # Copyright 2016 Sodexis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -6,10 +5,10 @@
 from odoo import api, models, fields
 
 
-class StockConfig(models.TransientModel):
+class ResConfigSettings(models.TransientModel):
 
     """Add options to easily install the submodules"""
-    _inherit = 'stock.config.settings'
+    _inherit = 'res.config.settings'
 
     @api.model
     def _get_stock_available_mrp_based_on(self):
@@ -54,17 +53,17 @@ class StockConfig(models.TransientModel):
     )
 
     @api.model
-    def get_default_stock_available_mrp_based_on(self, fields):
-        res = {}
-        icp = self.env['ir.config_parameter']
-        res['stock_available_mrp_based_on'] = icp.get_param(
-            'stock_available_mrp_based_on', 'qty_available'
+    def get_values(self):
+        res = super(ResConfigSettings, self).get_values()
+        res.update(stock_available_mrp_based_on=self.env[
+            'ir.config_parameter'].sudo().get_param(
+                'stock_available_mrp_based_on',
+                'qty_available')
         )
         return res
 
     @api.multi
-    def set_stock_available_mrp_based_on(self):
-        if self.stock_available_mrp_based_on:
-            icp = self.env['ir.config_parameter']
-            icp.set_param('stock_available_mrp_based_on',
-                          self.stock_available_mrp_based_on)
+    def set_values(self):
+        super(ResConfigSettings, self).set_values()
+        self.env['ir.config_parameter'].sudo().set_param(
+            'stock_available_mrp_based_on', self.stock_available_mrp_based_on)
