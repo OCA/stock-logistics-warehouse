@@ -27,6 +27,7 @@
         'data/cycle_count_sequence.xml',
         'data/cycle_count_ir_cron.xml',
         'reports/stock_location_accuracy_report.xml',
+        'reports/stock_cycle_count_report.xml',
         'security/ir.model.access.csv',
     ],
     "license": "AGPL-3",
