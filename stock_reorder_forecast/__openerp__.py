@@ -9,8 +9,6 @@
     "category": "Stock",
     "summary": "Predict date stock levels will reach minimum and trigger RFQ",
     "depends": [
-        'product',
-        'stock',
         'sale',
         'purchase'
     ],
