@@ -15,7 +15,7 @@ class StockMove(models.Model):
     def _get_reserved_locations(self):
         self.ensure_one()
         return self.reserved_quant_ids.mapped('location_id') + \
-               self.split_from.reserved_quant_ids.mapped('location_id')
+            self.split_from.reserved_quant_ids.mapped('location_id')
 
     @api.constrains('location_dest_id', 'location_id', 'state')
     def _check_locked_location(self):
