@@ -26,6 +26,4 @@ class StockInventory(models.Model):
         location_domain = [
             ('location_id', 'child_of', location_ids.ids),
             ('usage', 'in', ['internal', 'transit'])]
-        if locations_ids:
-            location_domain.append(('location_id', 'child_of', locations_ids))
         return self.env['stock.location'].search(location_domain)
