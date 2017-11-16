@@ -5,13 +5,13 @@
 {
     "name": "Inventory Lock Down",
     "summary": "Lock down stock locations during inventories.",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "depends": ["stock"],
-    "author": "Numérigraphe,Eficent,Odoo Community Association (OCA)",
+    "author": "Numérigraphe, Eficent, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "images": [
         "images/move_error.png",
         "images/location_locked.png"],
-    'license': 'AGPL-3',
+    "license": "AGPL-3",
     "installable": True,
 }
