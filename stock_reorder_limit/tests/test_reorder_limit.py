@@ -60,7 +60,9 @@ class TestReorderLimit(TransactionCase):
             order='id desc',  # create_date might not be unique
             limit=1)
         if expected_quantity == 0.0:
-            self.assertTrue(len(procurement) == 0)
+            if procurement and procurement.state == 'running':
+                self._print_procurement_messages(procurement)
+                self.assertNotEqual(procurement.state, 'running')
             return
         self.assertTrue(len(procurement) == 1)
         if procurement.state != 'running':
