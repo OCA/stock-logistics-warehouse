@@ -66,7 +66,8 @@ class TestReorderLimit(TransactionCase):
                 self.assertNotEqual(procurement.state, 'running')
             return
         self.assertTrue(len(procurement) == 1)
-        if procurement.state != 'running':
+        if procurement.state != 'running' or \
+                procurement.product_qty != expected_quantity:
             self._print_procurement_messages(procurement)
         self.assertEqual(procurement.state, 'running')
         self.assertEqual(procurement.product_qty, expected_quantity)
