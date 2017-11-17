@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2017 Therp BV <http://therp.nl>
+# Copyright 2017 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 
@@ -142,7 +142,7 @@ class TestReorderLimit(TransactionCase):
             our_customer, our_warehouse, our_product, uom_unit, 12.0)
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, 3.0)
-        our_product.write({'state', 'obsolete'})
+        our_product.write({'state': 'obsolete'})
         self._procure_product(our_warehouse, our_product, 0.0)
         # Test 3: sell another 10 units. Virtual available should go back
         #     to minus 7. Now procurement should acquire 10 units:
@@ -154,7 +154,7 @@ class TestReorderLimit(TransactionCase):
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, 3.0)
         # Test 4: Do not procure anything if purchase_ok is off:
-        our_product.write({'purchase_ok', False})
+        our_product.write({'purchase_ok': False})
         self._sell_product(
             our_customer, our_warehouse, our_product, uom_unit, 10.0)
         self.assertEqual(
