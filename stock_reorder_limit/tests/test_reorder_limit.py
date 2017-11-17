@@ -33,36 +33,80 @@ class TestReorderLimit(TransactionCase):
     disable the purchase_ok flag. Next procurement should not procure any
     products.
     """
-
-    def print_procurement_messages(self, procurement):
+    def _print_procurement_messages(self, procurement):
         """If anything goes wrong in test, it would be nice to know what."""
         messages = self.env['mail.message'].search(
             [('model', '=', 'procurement.order'),
              ('res_id', '=', procurement.id)],
-            order='create_date'
-        )
+            order='create_date')
         for message in messages:
             _logger.info(message.body)
+
+    def _procure_product(self, warehouse, product, expected_quantity):
+        """Procure product and return procurement order."""
+        procurement_model = self.env['procurement.order']
+        # Make sure all previous procurements have completed:
+        running_procurements = procurement_model.search(
+            [('product_id', '=', product.id),
+             ('warehouse_id', '=', warehouse.id)])
+        for procurement in running_procurements:
+            for move in procurement.move_ids:
+                move.action_done()
+            self.assertEqual(procurement.state, 'done')
+        procurement_model.run_scheduler()
+        procurement = procurement_model.search(
+            [('product_id', '=', product.id),
+             ('warehouse_id', '=', warehouse.id)],
+            order='id desc',  # create_date might not be unique
+            limit=1)
+        if expected_quantity == 0.0:
+            self.assertTrue(len(procurement) == 0)
+            return
+        self.assertTrue(len(procurement) == 1)
+        if procurement.state != 'running':
+            self._print_procurement_messages(procurement)
+        self.assertEqual(procurement.state, 'running')
+        self.assertEqual(procurement.product_qty, expected_quantity)
+        po = procurement.purchase_line_id.order_id
+        po.signal_workflow('purchase_confirm')
+        self.assertEqual(po.state, 'approved')
+
+    def _sell_product(self, customer, warehouse, product, uom, quantity):
+        """Sell product, to bring quantity available down."""
+        sale_order_model = self.env['sale.order']
+        sale_line_model = self.env['sale.order.line']
+        sale_order = sale_order_model.create({
+            'partner_id': customer.id,
+            'warehouse_id': warehouse.id,
+            'state': 'draft'})
+        sale_line_model.create({
+            'order_id': sale_order.id,
+            'name': 'Enjoy your product',
+            'product_uom': uom.id,
+            'product_uom_qty': quantity,
+            'state': 'draft',
+            'product_id': product.id})
+        sale_order.signal_workflow('order_confirm')
 
     def test_reorder_limit(self):
         # Create basic test data:
         data_model = self.env['ir.model.data']
         categ_unit = data_model.xmlid_to_res_id(
-            'product.product_uom_categ_unit'
-        )
+            'product.product_uom_categ_unit')
         uom_model = self.env['product.uom']
         uom_unit = uom_model.create({
             'name': 'Test-Unit',
             'category_id': categ_unit,
             'factor': 1,
             'uom_type': 'reference',
-            'rounding': 1.0,
-        })
+            'rounding': 1.0})
         partner_model = self.env['res.partner']
+        our_customer = partner_model.create({
+            'name': 'Our good customer',
+            'customer': True})
         our_supplier = partner_model.create({
             'name': 'Our friendly supplier',
-            'supplier': True,
-        })
+            'supplier': True})
         product_model = self.env['product.product']
         our_product = product_model.create({
             'name': 'Our nice little product',
@@ -72,14 +116,11 @@ class TestReorderLimit(TransactionCase):
                 (0, False, {
                     'name': our_supplier.id,
                     'delay': 1,
-                    'min_qty': 5,
-                })],
-        })
+                    'min_qty': 5})]})
         warehouse_model = self.env['stock.warehouse']
         our_warehouse = warehouse_model.create({
             'name': 'Our warehouse',
-            'code': 'ourwh',
-        })
+            'code': 'ourwh'})
         orderpoint_model = self.env['stock.warehouse.orderpoint']
         orderpoint_model.create({
             'warehouse_id': our_warehouse.id,
@@ -88,29 +129,36 @@ class TestReorderLimit(TransactionCase):
             'product_min_qty': 5,
             'product_max_qty': 15,
             'qty_multiple': 5,
-            'product_uom': uom_unit.id,
-        })
-        # Test 1: initial procurement
-        procurement_model = self.env['procurement.order']
-        procurement_model.run_scheduler()
-        procurement = procurement_model.search(
-            [('product_id', '=', our_product.id),
-             ('warehouse_id', '=', our_warehouse.id)],
-            order='create_date desc',
-            limit=1
-        )
-        self.assertTrue(len(procurement) == 1)
-        if procurement.state != 'running':
-            self.print_procurement_messages(procurement)
-        self.assertEqual(procurement.state, 'running')
-        self.assertEqual(procurement.product_qty, 15.0)
-        po = procurement.purchase_line_id.order_id
-        po.signal_workflow('purchase_confirm')
-        self.assertEqual(po.state, 'approved')
+            'product_uom': uom_unit.id})
         our_product_in_our_warehouse = our_product.with_context(
-            location=our_warehouse.lot_stock_id.id
-        )
+            location=our_warehouse.lot_stock_id.id)
+        # Test 1: initial procurement
+        self._procure_product(our_warehouse, our_product, 15.0)
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, 15.0)
-        # Test 2: sell 12 units amd make product obsolete
+        # Test 2: sell 12 units and make product obsolete
         #     In this test we just move the products to an outside location:
+        self._sell_product(
+            our_customer, our_warehouse, our_product, uom_unit, 12.0)
+        self.assertEqual(
+            our_product_in_our_warehouse.virtual_available, 3.0)
+        our_product.write({'state', 'obsolete'})
+        self._procure_product(our_warehouse, our_product, 0.0)
+        # Test 3: sell another 10 units. Virtual available should go back
+        #     to minus 7. Now procurement should acquire 10 units:
+        self._sell_product(
+            our_customer, our_warehouse, our_product, uom_unit, 10.0)
+        self.assertEqual(
+            our_product_in_our_warehouse.virtual_available, -7.0)
+        self._procure_product(our_warehouse, our_product, 10.0)
+        self.assertEqual(
+            our_product_in_our_warehouse.virtual_available, 3.0)
+        # Test 4: Do not procure anything if purchase_ok is off:
+        our_product.write({'purchase_ok', False})
+        self._sell_product(
+            our_customer, our_warehouse, our_product, uom_unit, 10.0)
+        self.assertEqual(
+            our_product_in_our_warehouse.virtual_available, -7.0)
+        self._procure_product(our_warehouse, our_product, 0.0)
+        self.assertEqual(
+            our_product_in_our_warehouse.virtual_available, -7.0)
