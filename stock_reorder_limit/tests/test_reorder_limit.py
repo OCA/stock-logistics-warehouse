@@ -35,6 +35,7 @@ class TestReorderLimit(TransactionCase):
     """
     def _print_procurement_messages(self, procurement):
         """If anything goes wrong in test, it would be nice to know what."""
+        _logger.info("Messages for procurement %s:" % procurement.name)
         messages = self.env['mail.message'].search(
             [('model', '=', 'procurement.order'),
              ('res_id', '=', procurement.id)],
@@ -124,7 +125,7 @@ class TestReorderLimit(TransactionCase):
             'name': 'Our warehouse',
             'code': 'ourwh'})
         orderpoint_model = self.env['stock.warehouse.orderpoint']
-        orderpoint_model.create({
+        orderpoint = orderpoint_model.create({
             'warehouse_id': our_warehouse.id,
             'location_id': our_warehouse.lot_stock_id.id,
             'product_id': our_product.id,
@@ -135,19 +136,24 @@ class TestReorderLimit(TransactionCase):
         our_product_in_our_warehouse = our_product.with_context(
             location=our_warehouse.lot_stock_id.id)
         # Test 1: initial procurement
+        orderpoint.write('name': 'Test 01')
+        self.assertEqual(orderpoint.limit_procurement_qty, 15.0) 
         self._procure_product(our_warehouse, our_product, 15.0)
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, 15.0)
         # Test 2: sell 12 units and make product obsolete
         #     In this test we just move the products to an outside location:
+        orderpoint.write('name': 'Test 02')
         self._sell_product(
             our_customer, our_warehouse, our_product, uom_unit, 12.0)
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, 3.0)
         our_product.write({'state': 'obsolete'})
+        self.assertEqual(orderpoint.limit_procurement_qty, 5.0) 
         self._procure_product(our_warehouse, our_product, 0.0)
         # Test 3: sell another 10 units. Virtual available should go back
         #     to minus 7. Now procurement should acquire 10 units:
+        orderpoint.write('name': 'Test 03')
         self._sell_product(
             our_customer, our_warehouse, our_product, uom_unit, 10.0)
         self.assertEqual(
@@ -156,7 +162,9 @@ class TestReorderLimit(TransactionCase):
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, 3.0)
         # Test 4: Do not procure anything if purchase_ok is off:
+        orderpoint.write('name': 'Test 04')
         our_product.write({'purchase_ok': False})
+        self.assertEqual(orderpoint.limit_procurement_qty, 0.0) 
         self._sell_product(
             our_customer, our_warehouse, our_product, uom_unit, 10.0)
         self.assertEqual(
