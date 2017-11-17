@@ -52,6 +52,8 @@ class StockWarehouseOrderpoint(models.Model):
                 if this.virtual_location_qty < 0.0:
                     this.limit_procurement_qty = max(
                         this.qty_multiple, - this.virtual_location_qty)
+                else:
+                    this.limit_procurement_qty = 0.0
             if not product.purchase_ok and \
                     (not mrp_installed or product.bom_count == 0):
                 this.limit_procurement_qty = 0.0
