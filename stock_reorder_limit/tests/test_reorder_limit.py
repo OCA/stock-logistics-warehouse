@@ -149,7 +149,7 @@ class TestReorderLimit(TransactionCase):
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, 3.0)
         our_product.write({'state': 'obsolete'})
-        self.assertEqual(orderpoint.limit_procurement_qty, 5.0)
+        self.assertEqual(orderpoint.limit_procurement_qty, 0.0)
         self._procure_product(our_warehouse, our_product, 0.0)
         # Test 3: sell another 10 units. Virtual available should go back
         #     to minus 7. Now procurement should acquire 10 units:
@@ -158,6 +158,7 @@ class TestReorderLimit(TransactionCase):
             our_customer, our_warehouse, our_product, uom_unit, 10.0)
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, -7.0)
+        self.assertEqual(orderpoint.limit_procurement_qty, 10.0)
         self._procure_product(our_warehouse, our_product, 10.0)
         self.assertEqual(
             our_product_in_our_warehouse.virtual_available, 3.0)
