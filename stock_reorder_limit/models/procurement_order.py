@@ -26,11 +26,13 @@ class ProcurementOrder(models.Model):
         sensible_quantity = min(orderpoint.limit_procurement_qty, product_qty)
         if sensible_quantity < product_qty:
             _logger.info(_(
-                "Ordered %.2f of %s, instead of %.2f for orderpoint %s") %
+                "Ordered %.2f of %s, instead of %.2f for orderpoint %s"
+                " where %.2f of product virtual available") %
                 (sensible_quantity,
                  orderpoint.product_id.name,
                  product_qty,
-                 orderpoint.name))
+                 orderpoint.name,
+                 orderpoint.virtual_location_qty))
         return super(ProcurementOrder, self)._prepare_orderpoint_procurement(
             orderpoint, sensible_quantity)
 
