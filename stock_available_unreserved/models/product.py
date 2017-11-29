@@ -63,6 +63,7 @@ class ProductProduct(models.Model):
             text = res[prod.id]['qty_available_stock_text']
             prod.qty_available_not_res = qty
             prod.qty_available_stock_text = text
+        return res
 
     @api.model
     def _prepare_domain_available_not_res(self, products):
