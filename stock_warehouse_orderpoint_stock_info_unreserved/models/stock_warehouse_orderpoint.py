@@ -17,10 +17,7 @@ class StockWarehouseOrderpoint(models.Model):
             op_by_loc[order.location_id] |= order
         for location_id, order_in_loc in op_by_loc.items():
             products = order_in_loc.mapped('product_id').with_context(
-                location=location_id.id)._compute_quantities_dict(
-                lot_id=self.env.context.get('lot_id'),
-                owner_id=self.env.context.get('owner_id'),
-                package_id=self.env.context.get('package_id'))
+                location=location_id.id)._compute_qty_available_not_res()
             for order in order_in_loc:
                 product = products[order.product_id.id]
                 order.product_location_qty_available_not_res = \
