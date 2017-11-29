@@ -19,10 +19,10 @@ class ProductProduct(models.Model):
     def _compute_available_quantities_dict(self):
         res = {}
         for product in self:
-            res[product.id] = {}
-            res[product.id]['immediately_usable_qty'] = \
-                product.virtual_available
-            res[product.id]['potential_qty'] = 0.0
+            res[product.id] = {
+                'immediately_usable_qty': product.virtual_available,
+                'potential_qty': 0.0
+            }
         return res
 
     @api.multi
@@ -30,8 +30,7 @@ class ProductProduct(models.Model):
     def _compute_available_quantities(self):
         res = self._compute_available_quantities_dict()
         for product in self:
-            data = res[product.id]
-            for key, value in data.iteritems():
+            for key, value in res[product.id].iteritems():
                 if hasattr(product, key):
                     product[key] = value
 
