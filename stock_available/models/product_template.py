@@ -16,8 +16,7 @@ class ProductTemplate(models.Model):
     def _compute_available_quantities(self):
         res = self._compute_available_quantities_dict()
         for product in self:
-            data = res[product.id]
-            for key, value in data.iteritems():
+            for key, value in res[product.id].iteritems():
                 if key in product._fields:
                     product[key] = value
 
