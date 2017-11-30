@@ -25,14 +25,6 @@ class ProductTemplate(models.Model):
              "Otherwise, this includes every Quotation.",
     )
 
-    @api.depends('quoted_qty')
-    def _compute_immediately_usable_qty(self):
-        """Subtract quoted quantity from qty available to promise.
-           This is the same implementation as for variants."""
-        super(ProductTemplate, self)._compute_immediately_usable_qty()
-        for tmpl in self:
-            tmpl.immediately_usable_qty -= tmpl.quoted_qty
-
     @api.depends('product_variant_ids.quoted_qty')
     def _compute_quoted_qty(self):
         """Compute the quantity using all the variants"""

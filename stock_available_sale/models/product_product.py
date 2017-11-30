@@ -29,13 +29,13 @@ class ProductProduct(models.Model):
              "Otherwise, this includes every Quotation.",
     )
 
-    @api.depends('quoted_qty')
-    def _compute_immediately_usable_qty(self):
-        """Subtract quoted quantity from qty available to promise
-           This is the same implementation as for templates."""
-        super(ProductProduct, self)._compute_immediately_usable_qty()
+    @api.multi
+    def _compute_available_quantities_dict(self):
+        res = super(ProductProduct, self)._compute_available_quantities_dict()
         for product in self:
-            product.immediately_usable_qty -= product.quoted_qty
+            res[product.id]['immediately_usable_qty'] -= \
+                product.quoted_qty
+        return res
 
     def _compute_quoted_qty(self):
         """Compute the quantities in Quotations."""
