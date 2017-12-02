@@ -4,14 +4,13 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-20 00:49+0000\n"
-"PO-Revision-Date: 2017-10-20 00:49+0000\n"
-"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
+"POT-Creation-Date: 2017-11-25 11:58+0000\n"
+"PO-Revision-Date: 2017-11-25 11:58+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +21,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,active:0
 msgid "Active"
-msgstr ""
+msgstr "Actief"
 
 #. module: stock_orderpoint_generator
 #: view:stock.warehouse.orderpoint.generator:stock_orderpoint_generator.orderpoint_generator_view
