@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sale_packaging
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-30 03:52+0000\n"
+"PO-Revision-Date: 2017-11-30 03:52+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Romanian (https://www.transifex.com/oca/teams/23907/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: sale_packaging
+#: model:ir.model.fields,field_description:sale_packaging.field_procurement_order_product_packaging
+msgid "Packaging"
+msgstr ""
+
+#. module: sale_packaging
+#: model:ir.model,name:sale_packaging.model_procurement_order
+msgid "Procurement"
+msgstr "Aprovizionare"
+
+#. module: sale_packaging
+#: model:ir.model,name:sale_packaging.model_procurement_rule
+msgid "Procurement Rule"
+msgstr ""
+
+#. module: sale_packaging
+#: model:ir.model.fields,field_description:sale_packaging.field_procurement_rule_propagate_product_packaging
+msgid "Propagate Product Packaging"
+msgstr ""
+
+#. module: sale_packaging
+#: model:ir.model,name:sale_packaging.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: sale_packaging
+#: model:ir.model,name:sale_packaging.model_stock_move
+msgid "Stock Move"
+msgstr "Mișcare stoc"
