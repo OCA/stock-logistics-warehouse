@@ -3,14 +3,13 @@
 # * stock_quant_manual_assign
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 # Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 13:13+0000\n"
-"PO-Revision-Date: 2017-06-29 13:13+0000\n"
+"POT-Creation-Date: 2017-11-30 03:53+0000\n"
+"PO-Revision-Date: 2017-11-30 03:53+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -27,19 +26,19 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Confirm"
-msgstr "Bevestig"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_create_uid
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_create_date
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_display_name
@@ -54,27 +53,32 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_in_date
+msgid "Incoming Date"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants___last_update
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines___last_update
 msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
+msgstr "Laatst aangepast op"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_write_uid
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_write_date
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_location_id
 msgid "Location"
-msgstr ""
+msgstr "Locatie"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_lot_id
@@ -108,7 +112,7 @@ msgid "Package"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_4468
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_4809
 msgid "QTY"
 msgstr ""
 
@@ -146,7 +150,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Voorraadmutatie"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id

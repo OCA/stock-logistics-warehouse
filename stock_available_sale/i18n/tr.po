@@ -3,14 +3,16 @@
 # * stock_available_sale
 # 
 # Translators:
+# Ediz Duman <neps1192@gmail.com>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:40+0000\n"
-"PO-Revision-Date: 2017-01-12 19:41+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Turkish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/tr/)\n"
+"POT-Creation-Date: 2017-11-30 03:52+0000\n"
+"PO-Revision-Date: 2017-11-30 03:52+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -25,15 +27,17 @@ msgstr "Ürün"
 #. module: stock_available_sale
 #: model:ir.model,name:stock_available_sale.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Ürün Şablonu"
 
 #. module: stock_available_sale
-#: field:product.product,quoted_qty:0 field:product.template,quoted_qty:0
+#: model:ir.model.fields,field_description:stock_available_sale.field_product_product_quoted_qty
+#: model:ir.model.fields,field_description:stock_available_sale.field_product_template_quoted_qty
 msgid "Quoted"
 msgstr ""
 
 #. module: stock_available_sale
-#: help:product.product,quoted_qty:0 help:product.template,quoted_qty:0
+#: model:ir.model.fields,help:stock_available_sale.field_product_product_quoted_qty
+#: model:ir.model.fields,help:stock_available_sale.field_product_template_quoted_qty
 msgid ""
 "Total quantity of this Product that have been included in Quotations (Draft Sale Orders).\n"
 "In a context with a single Warehouse, this includes Quotation processed in this Warehouse.\n"

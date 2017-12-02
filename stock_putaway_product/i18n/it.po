@@ -3,16 +3,14 @@
 # * stock_putaway_product
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
-# Paolo Valier <paolo.valier@hotmail.it>, 2016
-# Massimiliano Casa <mcasa@cantiericasa.com>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 18:42+0000\n"
-"PO-Revision-Date: 2016-11-21 18:42+0000\n"
-"Last-Translator: Massimiliano Casa <mcasa@cantiericasa.com>, 2016\n"
+"POT-Creation-Date: 2017-11-30 03:53+0000\n"
+"PO-Revision-Date: 2017-11-30 03:53+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,12 +26,12 @@ msgstr "Cambia Quantità Prodotto"
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_create_uid
 msgid "Created by"
-msgstr "Created by"
+msgstr "Creato da"
 
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_create_date
 msgid "Created on"
-msgstr "reato il"
+msgstr "Creato il"
 
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_display_name
@@ -56,6 +54,12 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_product_product_is_product_variant
+#: model:ir.model.fields,field_description:stock_putaway_product.field_product_template_is_product_variant
+msgid "Is product variant"
+msgstr ""
+
+#. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy___last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
@@ -63,12 +67,12 @@ msgstr "Ultima modifica il"
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Autore ultimo aggiornamento"
 
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_write_date
 msgid "Last Updated on"
-msgstr "Ultimo aggiornamento il"
+msgstr "Data ultimo aggiornamento"
 
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_fixed_location_id
@@ -119,7 +123,7 @@ msgid "Sequence"
 msgstr "Sequenza"
 
 #. module: stock_putaway_product
-#: code:addons/stock_putaway_product/models/product_putaway.py:51
+#: code:addons/stock_putaway_product/models/product_putaway.py:55
 #: sql_constraint:stock.product.putaway.strategy:0
 #, python-format
 msgid "There is a duplicate location by put away assignment!"

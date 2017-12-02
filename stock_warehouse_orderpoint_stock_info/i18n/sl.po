@@ -6,10 +6,10 @@
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 03:45+0000\n"
-"PO-Revision-Date: 2017-03-07 03:45+0000\n"
+"POT-Creation-Date: 2017-11-30 03:53+0000\n"
+"PO-Revision-Date: 2017-11-30 03:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -21,12 +21,12 @@ msgstr ""
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_virtual_location_qty
 msgid "Forecast On Location"
-msgstr "Napoved za lokacijo"
+msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_incoming_location_qty
 msgid "Incoming On Location"
-msgstr "Prihodi na lokacijo"
+msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model,name:stock_warehouse_orderpoint_stock_info.model_stock_warehouse_orderpoint
@@ -36,7 +36,7 @@ msgstr "Pravilo minimalne zaloge"
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_outgoing_location_qty
 msgid "Outgoing On Location"
-msgstr "Izhodi iz lokacije"
+msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.ui.view,arch_db:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_search_view
@@ -47,14 +47,14 @@ msgstr "Proizvod"
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_product_category
 #: model:ir.ui.view,arch_db:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_search_view
 msgid "Product Category"
-msgstr "Kategorija proizvoda"
+msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_product_location_qty
 msgid "Quantity On Location"
-msgstr "Količina na lokaciji"
+msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,help:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_product_category
 msgid "Select category for the current product"
-msgstr "Izbira kategorije trenutnega proizvoda"
+msgstr ""
