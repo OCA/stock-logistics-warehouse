@@ -11,22 +11,22 @@ msgstr ""
 "POT-Creation-Date: 2017-11-30 03:52+0000\n"
 "PO-Revision-Date: 2017-11-30 03:52+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language-Team: Basque (https://www.transifex.com/oca/teams/23907/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
+"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available_sale
 #: model:ir.model,name:stock_available_sale.model_product_product
 msgid "Product"
-msgstr "Produkt"
+msgstr "Produktua"
 
 #. module: stock_available_sale
 #: model:ir.model,name:stock_available_sale.model_product_template
 msgid "Product Template"
-msgstr "Produktvorlage"
+msgstr ""
 
 #. module: stock_available_sale
 #: model:ir.model.fields,field_description:stock_available_sale.field_product_product_quoted_qty
