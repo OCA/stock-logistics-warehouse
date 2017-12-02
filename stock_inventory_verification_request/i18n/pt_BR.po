@@ -1,34 +1,28 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_inventory_verification_request
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Claudio Araujo Santos <inactive+CDASCSI@transifex.com>, 2017
-# Felipe Lopes <ti@trojahntoppel.com.br>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 03:01+0000\n"
-"PO-Revision-Date: 2017-04-26 03:01+0000\n"
-"Last-Translator: Felipe Lopes <ti@trojahntoppel.com.br>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
+"POT-Creation-Date: 2018-01-16 14:36+0000\n"
+"PO-Revision-Date: 2018-01-16 14:36+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_needaction
-msgid "Action Needed"
-msgstr "Ação necessária"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_responsible_id
 msgid "Assigned to"
-msgstr "Atribuído à"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: selection:stock.slot.verification.request,state:0
@@ -38,7 +32,7 @@ msgstr "Cancelada"
 #. module: stock_inventory_verification_request
 #: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_create_uid
@@ -51,54 +45,19 @@ msgid "Created on"
 msgstr "Criado em"
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request_message_last_post
-msgid "Date of the last message posted on the record."
-msgstr "Data da última mensagem postada no registro"
-
-#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_display_name
 msgid "Display Name"
-msgstr "Nome para Mostrar"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model,name:stock_inventory_verification_request.model_stock_slot_verification_request
-msgid "Email Thread"
-msgstr "Processo Email"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_follower_ids
-msgid "Followers"
-msgstr "Seguidores"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Seguidores (Canais)"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_partner_ids
-msgid "Followers (Partners)"
-msgstr "Seguidores (Parceiros)"
+msgstr "Mostrar Nome"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_id
 msgid "ID"
-msgstr "Identificação"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request_message_unread
-msgid "If checked new messages require your attention."
-msgstr "Se marcado novas mensagens requerem sua atenção."
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request_message_needaction
-msgid "If checked, new messages require your attention."
-msgstr "Se verificar novas mensagens requerem sua atenção."
+msgstr "ID"
 
 #. module: stock_inventory_verification_request
 #: selection:stock.slot.verification.request,state:0
 msgid "In Progress"
-msgstr "Em andamento"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
@@ -153,19 +112,9 @@ msgid "Involved move count"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_is_follower
-msgid "Is Follower"
-msgstr "È seguidor"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_last_post
-msgid "Last Message Date"
-msgstr "Última data de mensagem"
-
-#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request___last_update
 msgid "Last Modified on"
-msgstr "Última atualização em"
+msgstr "Última Modificação em"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_write_uid
@@ -180,7 +129,7 @@ msgstr "Última atualização em"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_location_id
 msgid "Location"
-msgstr "Location"
+msgstr "Localização"
 
 #. module: stock_inventory_verification_request
 #: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
@@ -193,34 +142,14 @@ msgid "Mark as Solved"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_ids
-msgid "Messages"
-msgstr "Mensagens"
-
-#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_name
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_notes
 msgid "Notes"
 msgstr "Notas"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_needaction_counter
-msgid "Number of Actions"
-msgstr "Número de ações"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request_message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "Número de mensagens que requer uma ação"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request_message_unread_counter
-msgid "Number of unread messages"
-msgstr "Número de mensagens não lidas"
 
 #. module: stock_inventory_verification_request
 #: model:ir.actions.act_window,name:stock_inventory_verification_request.action_inv_adj_line_tree
@@ -243,12 +172,10 @@ msgid "Requested Verification?"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: code:addons/stock_inventory_verification_request/models/stock_inventory.py:52
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory_line_slot_verification_ids
 #: model:ir.ui.menu,name:stock_inventory_verification_request.menu_slot_verification_request
 #: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 #: model:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_form
-#, python-format
 msgid "Slot Verification Request"
 msgstr ""
 
@@ -286,16 +213,11 @@ msgid "Stock Slot Verification Request"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_unread
-msgid "Unread Messages"
-msgstr "Mensagens não lidas"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "As mensagens não lidas Contador"
-
-#. module: stock_inventory_verification_request
 #: selection:stock.slot.verification.request,state:0
 msgid "Waiting Actions"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model,name:stock_inventory_verification_request.model_stock_slot_verification_request
+msgid "stock.slot.verification.request"
 msgstr ""
