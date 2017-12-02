@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Franco Tampieri <franco@tampieri.info>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 02:58+0000\n"
-"PO-Revision-Date: 2017-07-28 02:58+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-11-30 03:53+0000\n"
+"PO-Revision-Date: 2017-11-30 03:53+0000\n"
+"Last-Translator: Franco Tampieri <franco@tampieri.info>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -506,7 +507,7 @@ msgstr "Stato"
 #. module: stock_reserve
 #: model:ir.model,name:stock_reserve.model_stock_reservation
 msgid "Stock Reservation"
-msgstr ""
+msgstr "Prenotazione Magazzino"
 
 #. module: stock_reserve
 #: model:ir.actions.act_window,name:stock_reserve.action_stock_reservation_tree
@@ -517,7 +518,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Stock Reservations"
-msgstr ""
+msgstr "Magazzino Prenotazioni"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_procure_method
@@ -609,6 +610,11 @@ msgid "Transfer Reference"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_type_code
+msgid "Type of Operation"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_price_unit
 msgid "Unit Price"
 msgstr "Prezzo Unitario"
@@ -621,12 +627,12 @@ msgstr "Unità di misura"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_date_validity
 msgid "Validity Date"
-msgstr ""
+msgstr "Data Validità"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "View Reservation Move"
-msgstr ""
+msgstr "Visualizza Movimento Prenotazione"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_warehouse_id
