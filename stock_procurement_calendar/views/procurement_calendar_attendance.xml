@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record model="ir.ui.view" id="procurement_calendar_attendance_form_view">
+        <field name="name">procurement.calendar.attendance.form (in procurement_calendar)</field>
+        <field name="model">procurement.calendar.attendance</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="product_dependant" invisible="1"/>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="procurement_calendar_id"/>
+                            <field name="name"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="dayofweek"/>
+                            <label for="hour_from" string="Hours"/>
+                            <div>
+                                <field name="hour_from" widget="timepicker" class="oe_inline"/> -
+                                <field name="hour_to" widget="timepicker" class="oe_inline"/>
+                            </div>
+                            <field name="procurement_attendance_id"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group name="products" attrs="{'invisible': [('product_dependant', '=', False)]}">
+                        <field name="product_ids"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="procurement_calendar_attendance_search_view">
+        <field name="name">procurement.calendar.attendance.search (in procurement_calendar)</field>
+        <field name="model">procurement.calendar.attendance</field>
+        <field name="arch" type="xml">
+            <search>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="procurement_calendar_attendance_tree_view">
+        <field name="name">procurement.calendar.attendance.tree (in procurement_calendar)</field>
+        <field name="model">procurement.calendar.attendance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="calendar_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="procurement_calendar_attendance_act_window">
+        <field name="name">Procurement Calendar Attendances</field>
+        <field name="res_model">procurement.calendar.attendance</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="procurement_calendar_attendance_menu">
+        <field name="name">Attendances</field>
+        <field name="parent_id" ref="stock_procurement_calendar.procurement_calendar_menu"/>
+        <field name="action" ref="procurement_calendar_attendance_act_window"/>
+        <field name="sequence" eval="17"/>
+    </record>
+</odoo>

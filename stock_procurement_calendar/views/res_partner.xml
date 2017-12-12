@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record  id="res_partner_form_view" model="ir.ui.view">
+        <field name="name">res.partner.form.view (in stock_procurement_calendar)</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object" name="action_view_procurement_calendars"
+                    icon="fa-clock-o" help="Procurement Calendars"
+                    attrs="{'invisible': [('procurement_calendar_count', '=', 0)]}">
+                    <field name="procurement_calendar_count" string="Procurement Calendars" widget="statinfo"/>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

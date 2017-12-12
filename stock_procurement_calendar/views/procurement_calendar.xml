@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record model="ir.ui.view" id="procurement_calendar_calendar_form_view">
+        <field name="name">procurement.calendar.form (in procurement_calendar)</field>
+        <field name="model">procurement.calendar</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="location_id"/>
+                            <field name="warehouse_id"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="product_dependant"/>"
+                        </group>
+                    </group>
+                    <group>
+                        <field name="attendance_ids" context="{'default_procurement_calendar_id': active_id}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="dayofweek"/>
+                                <field name="procurement_attendance_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="procurement_calendar_search_view">
+        <field name="name">procurement.calendar.search (in procurement_calendar)</field>
+        <field name="model">procurement.calendar</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+                <field name="location_id"/>
+                <field name="warehouse_id"/>
+                <separator/>
+                <group expand="1" string="Group By">
+                    <filter name="product_dependant" string="Product Dependant" domain="[('product_dependant', '=', True)]"/>
+                    <filter name="groupby_partner" domain="[]" string="Partner" context="{'group_by': 'partner_id'}"/>
+                    <filter name="groupby_location" domain="[]" string="Location" context="{'group_by': 'location_id'}"/>
+                    <filter name="groupby_warehouse" domain="[]" string="Warehouse" context="{'group_by': 'warehouse_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="procurement_calendar_tree_view">
+        <field name="name">procurement.calendar.tree (in procurement_calendar)</field>
+        <field name="model">procurement.calendar</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="location_id"/>
+                <field name="warehouse_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="procurement_calendar_act_window">
+        <field name="name">Procurement Calendar</field>
+        <field name="res_model">procurement.calendar</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="procurement_calendar_menu">
+        <field name="name">Procurement Calendars</field>
+        <field name="parent_id" ref="stock.menu_stock_sched"/>
+        <field name="sequence" eval="16"/>
+    </record>
+    <record model="ir.ui.menu" id="procurement_calendar_calendar_menu">
+        <field name="name">Calendars</field>
+        <field name="parent_id" ref="stock_procurement_calendar.procurement_calendar_menu"/>
+        <field name="action" ref="procurement_calendar_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+
+</odoo>

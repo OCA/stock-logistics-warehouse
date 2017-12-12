@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="0">
+    <!-- STOCK -->
+    <record model="procurement.calendar" id="procurement_calendar_1">
+        <field name="name">Procurement Stock Calendar 1</field>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record model="procurement.calendar.attendance" id="procurement_calendar_1_attendance_mm">
+        <field name="name">Procurement Stock Calendar 1 Monday Morning</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_1"/>
+        <field name="dayofweek">0</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+    </record>
+    <record model="procurement.calendar.attendance" id="procurement_calendar_1_attendance_tm">
+        <field name="name">Procurement Stock Calendar 1 Tuesday Morning</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_1"/>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+    </record>
+    <record model="procurement.calendar.attendance" id="procurement_calendar_1_attendance_wm">
+        <field name="name">Procurement Stock Calendar 1 Wednesday Morning</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_1"/>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">12</field>
+    </record>
+
+    <!-- OUTPUT -->
+    <record model="procurement.calendar" id="procurement_calendar_output">
+        <field name="name">Procurement Output Calendar</field>
+        <field name="location_id" ref="stock.stock_location_output"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record model="procurement.calendar.attendance" id="procurement_calendar_output_attendance_m">
+        <field name="name">Procurement Output</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_output"/>
+        <field name="dayofweek">0</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">18</field>
+    </record>
+
+    <record model="procurement.calendar.attendance" id="procurement_calendar_output_attendance_t">
+        <field name="name">Procurement Output Calendar Tuesday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_output"/>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">17</field>
+    </record>
+
+    <record model="procurement.calendar.attendance" id="procurement_calendar_output_attendance_w">
+        <field name="name">Procurement Output Calendar Wednesday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_output"/>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">17</field>
+    </record>
+
+    <record model="procurement.calendar.attendance" id="procurement_calendar_output_attendance_th">
+        <field name="name">Procurement Output Calendar Thursday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_output"/>
+        <field name="dayofweek">3</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">17</field>
+    </record>
+
+    <record model="procurement.calendar.attendance" id="procurement_calendar_output_attendance_f">
+        <field name="name">Procurement Output Calendar Friday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_output"/>
+        <field name="dayofweek">4</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">17</field>
+    </record>
+
+    <!-- SUPPLIERS -->
+    <record model="procurement.calendar" id="procurement_calendar_suppliers">
+        <field name="name">Procurement Suppliers Calendar</field>
+        <field name="location_id" ref="stock.stock_location_suppliers"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record model="procurement.calendar.attendance" id="procurement_calendar_suppliers_attendance_t">
+        <field name="name">Procurement Suppliers Calendar Tuesday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_suppliers"/>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">18</field>
+    </record>
+    <record model="procurement.calendar.attendance" id="procurement_calendar_suppliers_attendance_w">
+        <field name="name">Procurement Suppliers Calendar Wednesday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_suppliers"/>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">18</field>
+    </record>
+    <record model="procurement.calendar.attendance" id="procurement_calendar_suppliers_attendance_th">
+        <field name="name">Procurement Suppliers Calendar Thursday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_suppliers"/>
+        <field name="dayofweek">3</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">18</field>
+    </record>
+
+    <!-- SUPPLIER 1 -->
+    <record model="procurement.calendar" id="procurement_calendar_supplier_1">
+        <field name="name">Procurement Supplier 1 Calendar</field>
+        <field name="location_id" ref="stock.stock_location_suppliers"/>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="partner_id" ref="base.res_partner_1"/>
+    </record>
+
+    <record model="procurement.calendar.attendance" id="procurement_calendar_supplier_1_attendance_t">
+        <field name="name">Procurement Suppliers Calendar Tuesday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_supplier_1"/>
+        <field name="dayofweek">1</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">18</field>
+    </record>
+    <record model="procurement.calendar.attendance" id="procurement_calendar_supplier_1_attendance_w">
+        <field name="name">Procurement Suppliers Calendar Wednesday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_supplier_1"/>
+        <field name="dayofweek">2</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">18</field>
+    </record>
+    <record model="procurement.calendar.attendance" id="procurement_calendar_supplier_1_attendance_th">
+        <field name="name">Procurement Suppliers Calendar Thursday</field>
+        <field name="procurement_calendar_id" ref="stock_procurement_calendar.procurement_calendar_supplier_1"/>
+        <field name="dayofweek">3</field>
+        <field name="hour_from">08</field>
+        <field name="hour_to">18</field>
+    </record>
+
+    <!-- SUPPLIER 2 -->
+    <record model="procurement.calendar" id="procurement_calendar_supplier_2">
+        <field name="name">Procurement Supplier 2 Calendar</field>
+        <field name="location_id" ref="stock.stock_location_suppliers"/>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="partner_id" ref="base.res_partner_2"/>
+    </record>
+
+    <!-- WAREHOUSE 2 -->
+    <record model="procurement.calendar" id="procurement_calendar_warehouse_shop0">
+        <field name="name">Procurement Warehouse Chicago Calendar</field>
+        <field name="warehouse_id" ref="stock.stock_warehouse_shop0"/>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="partner_id" ref="base.res_partner_2"/>
+    </record>
+</odoo>
