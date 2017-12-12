@@ -55,7 +55,7 @@ class Orderpoint(models.Model):
                  ('state', 'not in', ['cancel', 'done'])])
             if procs:
                 po_lines = procs.mapped('purchase_line_id').filtered(
-                    lambda x: x.state == 'draft')
+                    lambda x: x.state in ['draft', 'sent', 'to approve'])
                 if po_lines:
                     qty = sum([line.product_qty for line in po_lines])
                     precision = orderpoint.product_uom.rounding
