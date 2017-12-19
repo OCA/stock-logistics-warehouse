@@ -1,0 +1,228 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_hierarchical
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"PO-Revision-Date: 2016-04-14 14:54+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es_VE/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_VE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_inventory_hierarchical
+#: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,complete_name:0
+msgid "Complete reference"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,display_name:0
+msgid "Display Name"
+msgstr "Mostrar nombre"
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:91
+#, python-format
+msgid "Error: You can not create recursive inventories."
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: model:ir.actions.act_window,name:stock_inventory_hierarchical.action_view_stock_generate_inventory
+#: model:ir.model,name:stock_inventory_hierarchical.model_stock_generate_inventory
+#: model:ir.ui.menu,name:stock_inventory_hierarchical.menu_action_stock_generate_inventory_form
+#: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
+msgid "Generate Inventory"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_inventory_hierarchical
+#: help:stock.generate.inventory,only_view:0
+msgid "If set, only inventory on view location can be created"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: model:ir.model,name:stock_inventory_hierarchical.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/wizard/generate_inventory.py:125
+#, python-format
+msgid "Inventory generated"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
+msgid "Inventory on location"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,prefix_inv_name:0
+msgid "Inventory prefix"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,__last_update:0
+msgid "Last Modified on"
+msgstr "Modificada por última vez"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización realizada por"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualizacion en"
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,level:0
+msgid "Level"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: sql_constraint:stock.generate.inventory:0
+msgid "Level must be positive!"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,inventory_ids:0
+msgid "List of Sub-inventories"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.view_inventory_subinventories_filter
+msgid "Main inventories"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: help:stock.generate.inventory,level:0
+msgid ""
+"Maximum number of intermediate sub-inventories between the main inventory "
+"and the smallest sub-inventory."
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.view_inventory_subinventories_filter
+msgid "Only select inventories that have no parents."
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,only_view:0
+msgid "Only view"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: help:stock.generate.inventory,prefix_inv_name:0
+msgid "Optional prefix for all created inventory"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,parent_id:0
+msgid "Parent Inventory"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,parent_left:0
+msgid "Parent Left"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,parent_right:0
+msgid "Parent Right"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.inventory,progress_rate:0
+msgid "Progress"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_tree_view
+msgid "Reference"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
+msgid "Sub-inventories"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:120
+#, python-format
+msgid ""
+"The state of the inventory %s (%s) is not consistent with the state of the "
+"following parent inventories:\n"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:104
+#, python-format
+msgid ""
+"The state of the inventory %s (%s) is not consistent with the state of the "
+"following sub-inventories:\n"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
+msgid ""
+"This action will cancel all children inventories.\n"
+"                    Click 'OK' to cancel inventories.\n"
+"                    Click 'Cancel' to abort."
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
+msgid ""
+"This action will start all children inventories.\n"
+"                    Click 'OK' to start inventories.\n"
+"                    Click 'Cancel' to abort."
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: model:ir.actions.act_window,name:stock_inventory_hierarchical.action_view_sub_inventory
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
+msgid "View Sub-inventories"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
+msgid "or"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
+msgid "{'readonly':[('parent_id', '!=', False)]}"
+msgstr ""

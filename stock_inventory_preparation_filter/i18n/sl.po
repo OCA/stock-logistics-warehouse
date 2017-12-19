@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-24 09:07+0000\n"
-"PO-Revision-Date: 2015-10-19 05:50+0000\n"
+"POT-Creation-Date: 2016-04-28 01:03+0000\n"
+"PO-Revision-Date: 2016-04-27 15:39+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -40,6 +40,11 @@ msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:60
 #, python-format
 msgid "Empty list"
@@ -60,6 +65,11 @@ msgstr "Inventar"
 #: view:stock.inventory:stock_inventory_preparation_filter.stock_inventory_form
 msgid "Inventory Details"
 msgstr "Podrobnosti inventarja"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,write_uid:0

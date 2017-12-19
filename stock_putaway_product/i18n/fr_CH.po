@@ -1,0 +1,160 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_putaway_product
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-16 18:09+0000\n"
+"PO-Revision-Date: 2017-06-16 18:09+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: French (Switzerland) (https://www.transifex.com/oca/teams/23907/fr_CH/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr_CH\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_putaway_product
+#: model:ir.actions.act_window,name:stock_putaway_product.quick_add_product_location_act_window
+msgid "Add Default Stock Location"
+msgstr ""
+
+#. module: stock_putaway_product
+#: view:quick.add.product.location:stock_putaway_product.view_model_form
+msgid "Apply"
+msgstr ""
+
+#. module: stock_putaway_product
+#: view:quick.add.product.location:stock_putaway_product.view_model_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_stock_change_product_qty
+msgid "Change Product Quantity"
+msgstr ""
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,create_uid:0
+#: field:stock.product.putaway.strategy,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,create_date:0
+#: field:stock.product.putaway.strategy,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,display_name:0
+#: field:stock.product.putaway.strategy,display_name:0
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: stock_putaway_product
+#: field:product.putaway,product_location_ids:0
+msgid "Fixed per product location"
+msgstr ""
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,id:0
+#: field:stock.product.putaway.strategy,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,__last_update:0
+#: field:stock.product.putaway.strategy,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,write_uid:0
+#: field:stock.product.putaway.strategy,write_uid:0
+msgid "Last Updated by"
+msgstr "Modifié par"
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,write_date:0
+#: field:stock.product.putaway.strategy,write_date:0
+msgid "Last Updated on"
+msgstr "Modifié le"
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,fixed_location_id:0
+#: field:stock.product.putaway.strategy,fixed_location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_product_template
+#: field:stock.product.putaway.strategy,product_template_id:0
+msgid "Product Template"
+msgstr "Template de produit"
+
+#. module: stock_putaway_product
+#: field:stock.product.putaway.strategy,product_product_id:0
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_putaway_product
+#: view:product.product:stock_putaway_product.product_normal_form_view
+#: view:stock.product.putaway.strategy:stock_putaway_product.product_putaway_strategy_view_form
+msgid "Product putaway stragegy"
+msgstr ""
+
+#. module: stock_putaway_product
+#: field:product.product,product_putaway_ids:0
+#: field:product.template,product_putaway_ids:0
+msgid "Product stock locations"
+msgstr ""
+
+#. module: stock_putaway_product
+#: view:quick.add.product.location:stock_putaway_product.view_model_form
+#: field:quick.add.product.location,product_ids:0
+msgid "Products"
+msgstr ""
+
+#. module: stock_putaway_product
+#: field:quick.add.product.location,putaway_id:0
+#: field:stock.product.putaway.strategy,putaway_id:0
+msgid "Put Away Method"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_product_putaway
+msgid "Put Away Strategy"
+msgstr ""
+
+#. module: stock_putaway_product
+#: view:quick.add.product.location:stock_putaway_product.view_model_form
+msgid "Quick Product Putaway"
+msgstr ""
+
+#. module: stock_putaway_product
+#: view:quick.add.product.location:stock_putaway_product.view_model_form
+msgid "Set default location by putaway method to products"
+msgstr ""
+
+#. module: stock_putaway_product
+#: code:addons/stock_putaway_product/models/product_putaway.py:52
+#: sql_constraint:stock.product.putaway.strategy:0
+#, python-format
+msgid "There can only be one fixed location per product!"
+msgstr ""
+
+#. module: stock_putaway_product
+#: code:addons/stock_putaway_product/wizard/quick_add_location.py:57
+#, python-format
+msgid "Updated products putaway: %s"
+msgstr ""

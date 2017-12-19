@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 20:23+0000\n"
-"PO-Revision-Date: 2015-09-15 13:04+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-18 03:43+0000\n"
+"PO-Revision-Date: 2016-11-11 18:07+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,14 +18,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available
+#: field:product.product,immediately_usable_qty:0
+#: field:product.template,immediately_usable_qty:0
+msgid "Available to promise"
+msgstr "Disponible para reservar"
+
+#. module: stock_available
 #: view:product.template:stock_available.view_stock_available_kanban
 msgid "Available to promise:"
 msgstr ""
 
 #. module: stock_available
+#: help:stock.config.settings,stock_available_mrp_based_on:0
+msgid ""
+"Choose the field of the product which will be used to compute potential.\n"
+"If empty, Quantity On Hand is used.\n"
+"Only the quantity fields have meaning for computing stock"
+msgstr "Escoja el campo del producto que se usará para calcular las existencias potenciales.\nSi está vacío, se utilizará la cantidad a mano.\nSólo los campos de cantidad tienen sentido calculando las existencias."
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_sale:0
+msgid "Exclude goods already in sale quotations"
+msgstr ""
+
+#. module: stock_available
 #: field:stock.config.settings,module_stock_available_immediately:0
 msgid "Exclude incoming goods"
-msgstr ""
+msgstr "Excluir recepciones futuras"
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_mrp:0
+msgid "Include the production potential"
+msgstr "Incluir la producción potencial"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
@@ -40,14 +64,43 @@ msgstr "Plantilla de producto"
 #. module: stock_available
 #: view:stock.config.settings:stock_available.view_stock_configuration
 msgid "Stock available to promise"
-msgstr ""
+msgstr "Existencias disponibles para reservar"
+
+#. module: stock_available
+#: help:product.product,immediately_usable_qty:0
+#: help:product.template,immediately_usable_qty:0
+msgid ""
+"Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs"
+msgstr "Las existencias para este producto que pueden ser propuestas de manera segura para vender a los clientes.\nLa definición de este valor puede ser configurado para casar con sus necesidades"
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_mrp:0
+msgid ""
+"This will add the quantities of goods that can be immediately manufactured, to the quantities available to promise.\n"
+"This installs the module stock_available_mrp.\n"
+"If the module mrp is not installed, this will install it too"
+msgstr "Esta opción añadirá a la cantidad disponible para reservar, las cantidades de los bienes que pueden ser producidos inmediatamente.\nEsto instala el módulo stock_available_mrp.\nSi el módulo mrp no está instalado, también lo instalará."
 
 #. module: stock_available
 #: help:stock.config.settings,module_stock_available_immediately:0
 msgid ""
 "This will subtract incoming quantities from the quantities available to promise.\n"
 "This installs the module stock_available_immediately."
+msgstr "Esta opción restará las cantidades a recepcionar de las cantidades disponibles para reservar.\nEsto instalará el módulo stock_available_immediately."
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_sale:0
+msgid ""
+"This will subtract quantities from the sale quotations from the quantities available to promise.\n"
+"This installs the modules stock_available_sale.\n"
+"If the modules sale and sale_delivery_date are not installed, this will install them too"
 msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,stock_available_mrp_based_on:0
+msgid "based on"
+msgstr "basado en"
 
 #. module: stock_available
 #: view:product.product:stock_available.view_stock_available_tree_variant

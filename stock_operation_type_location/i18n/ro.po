@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_operation_type_location
+# 
+# Translators:
+# Dorin Hongu <dhongu@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-18 03:44+0000\n"
+"PO-Revision-Date: 2016-11-18 03:44+0000\n"
+"Last-Translator: Dorin Hongu <dhongu@gmail.com>, 2016\n"
+"Language-Team: Romanian (https://www.transifex.com/oca/teams/23907/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: stock_operation_type_location
+#: field:stock.picking.type,allowed_dest_location_ids:0
+msgid "Allowed Destination Location"
+msgstr ""
+
+#. module: stock_operation_type_location
+#: field:stock.picking.type,allowed_location_ids:0
+msgid "Allowed Source Location"
+msgstr ""
+
+#. module: stock_operation_type_location
+#: model:ir.model,name:stock_operation_type_location.model_stock_transfer_details
+msgid "Picking wizard"
+msgstr "Asistent ridicare"
+
+#. module: stock_operation_type_location
+#: model:ir.model,name:stock_operation_type_location.model_stock_move
+msgid "Stock Move"
+msgstr "Mișcare stoc"
+
+#. module: stock_operation_type_location
+#: model:ir.model,name:stock_operation_type_location.model_stock_picking_type
+msgid "The picking type determines the picking view"
+msgstr ""

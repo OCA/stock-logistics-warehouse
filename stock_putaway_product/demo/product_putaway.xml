@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="product_putaway_per_product_wh"
+                model="product.putaway">
+            <field name="name">WH - Putaway Per Product</field>
+            <field name="method">per_product</field>
+        </record>
+
+        <record id="stock.stock_location_stock"
+                model="stock.location">
+            <field name="putaway_strategy_id"
+                   ref="product_putaway_per_product_wh"/>
+        </record>
+
+        <record id="product_putaway_strategy_product_4"
+                model="stock.product.putaway.strategy">
+            <field name="product_product_id"
+                   ref="product.product_product_4"/>
+            <field name="product_template_id"
+                   ref="product.product_product_4_product_template"/>
+            <field name="putaway_id"
+                   ref="product_putaway_per_product_wh"/>
+            <field name="fixed_location_id"
+                   ref="stock.stock_location_components"/>
+        </record>
+    </data>
+</openerp>

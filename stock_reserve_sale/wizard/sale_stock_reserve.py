@@ -87,7 +87,7 @@ class SaleStockReserve(models.TransientModel):
                 'product_uom': line.product_uom.id,
                 'product_uom_qty': line.product_uom_qty,
                 'date_validity': self.date_validity,
-                'name': "%s (%s)" % (line.order_id.name, line.name),
+                'name': u"%s (%s)" % (line.order_id.name, line.name),
                 'location_id': self.location_id.id,
                 'location_dest_id': self.location_dest_id.id,
                 'note': self.note,

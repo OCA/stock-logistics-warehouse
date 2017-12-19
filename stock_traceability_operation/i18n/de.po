@@ -1,0 +1,309 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_traceability_operation
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-03-29 09:22+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_traceability_operation
+#: selection:report.stock.traceability_operation,state:0
+msgid "Available"
+msgstr "Verfügbar"
+
+#. module: stock_traceability_operation
+#: selection:report.stock.traceability_operation,state:0
+msgid "Cancelled"
+msgstr "Storniert"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,create_uid:0
+msgid "Created by"
+msgstr "Angelegt durch"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Creation"
+msgstr "Anlage"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,create_date:0
+msgid "Creation Date"
+msgstr "Erstellungsdatum"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+#: field:report.stock.traceability_operation,date:0
+msgid "Date"
+msgstr "Datum"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Destination"
+msgstr "Ziel"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,partner_id:0
+msgid "Destination Address"
+msgstr "Zielanschrift"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,location_dest_id:0
+msgid "Destination Location"
+msgstr "Ziellager"
+
+#. module: stock_traceability_operation
+#: code:addons/stock_traceability_operation/models/stock_quant.py:54
+#: model:ir.model,name:stock_traceability_operation.model_report_stock_traceability_operation
+#: view:product.product:stock_traceability_operation.product_product_traceability_operation
+#: view:product.template:stock_traceability_operation.product_template_traceability_operation
+#: view:stock.production.lot:stock_traceability_operation.stock_production_lot_traceability_operation
+#: view:stock.quant:stock_traceability_operation.stock_quant_traceability_operation
+#, python-format
+msgid "Detailed traceability"
+msgstr "Detaillierte Nachverfolgung"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,display_name:0
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+#: selection:report.stock.traceability_operation,state:0
+msgid "Done"
+msgstr "Erledigt"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,date_expected:0
+msgid "Expected Date"
+msgstr "Plandatum"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Group By"
+msgstr "Gruppiere"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,write_uid:0
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,write_date:0
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Location"
+msgstr "Standort"
+
+#. module: stock_traceability_operation
+#: model:ir.model,name:stock_traceability_operation.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Los/Serie"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,name:0
+msgid "Move description"
+msgstr "Umlagerungsbeschreibung"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_tree
+msgid "Moves and operations"
+msgstr "Umlagerungen und Vorgänge"
+
+#. module: stock_traceability_operation
+#: selection:report.stock.traceability_operation,state:0
+msgid "New"
+msgstr "Neu"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Orders processed Today or planned for Today"
+msgstr "Heute ausgeführte oder geplante Aufträge"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,operation_id:0
+msgid "Pack Operation"
+msgstr "Packvorgang"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Partner"
+msgstr "Partner"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,picking_type_id:0
+msgid "Picking Type"
+msgstr "Kommissionierungsart"
+
+#. module: stock_traceability_operation
+#: model:ir.model,name:stock_traceability_operation.model_product_product
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+#: field:report.stock.traceability_operation,product_id:0
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_traceability_operation
+#: model:ir.model,name:stock_traceability_operation.model_product_template
+msgid "Product Template"
+msgstr "Produktvorlage"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,product_uos:0
+msgid "Product UOS"
+msgstr "Produkt-VkME"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,product_uom_qty:0
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,product_uos_qty:0
+msgid "Quantity (UOS)"
+msgstr "Menge (VkME)"
+
+#. module: stock_traceability_operation
+#: model:ir.model,name:stock_traceability_operation.model_stock_quant
+msgid "Quants"
+msgstr "Quants"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Ready"
+msgstr "Bereit"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_tree
+#: field:report.stock.traceability_operation,picking_id:0
+msgid "Reference"
+msgstr "Referenz"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Scheduled"
+msgstr "Terminiert"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+#: field:report.stock.traceability_operation,origin:0
+msgid "Source"
+msgstr "Herkunft"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,location_id:0
+msgid "Source Location"
+msgstr "Herkunftslagerort"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+#: field:report.stock.traceability_operation,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+#: field:report.stock.traceability_operation,move_id:0
+msgid "Stock Move"
+msgstr "Lagerbuchung"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Stock Moves"
+msgstr "Lagerbewegungen"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Stock moves that are Available (Ready to process)"
+msgstr "Bereitstehende Lagerbuchungen (Bereit zur Bearbeitung)"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Stock moves that are Confirmed, Available or Waiting"
+msgstr "Umlagerungen, die Freigegeben, Bereitstehend oder Wartend sind"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Stock moves that have been processed"
+msgstr "Durchgeführte Umlagerungen"
+
+#. module: stock_traceability_operation
+#: help:report.stock.traceability_operation,operation_id:0
+msgid ""
+"The operation on which this part of the traceability is based. When this "
+"field is empty, this part of the traceability is directly based on the Stock"
+" Move."
+msgstr ""
+"Der Vorgang, auf den sich die Nachverfolgung stützt. Ist das Feld leer, "
+"basiert die Verfolgung direkt auf der Umlagerung."
+
+#. module: stock_traceability_operation
+#: help:report.stock.traceability_operation,move_id:0
+msgid "The stock move on which this part of the traceability is based"
+msgstr "Die Umlagerung auf die sich diese Nachverfolgung stützt"
+
+#. module: stock_traceability_operation
+#: help:report.stock.traceability_operation,product_uom:0
+msgid "The unit of measure of the product"
+msgstr "Die Mengeneinheit des Produktes"
+
+#. module: stock_traceability_operation
+#: help:report.stock.traceability_operation,product_uom_qty:0
+msgid ""
+"This is the quantity of products moved in this Stock Move or in this Pack "
+"Operation"
+msgstr ""
+"Dies ist die Menge des Produkts, das in dieser Umlagerung oder diesem "
+"Packvorgang bewegt wird"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "To Do"
+msgstr "Zu erledigen"
+
+#. module: stock_traceability_operation
+#: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
+msgid "Today"
+msgstr "Heute"
+
+#. module: stock_traceability_operation
+#: field:report.stock.traceability_operation,product_uom:0
+msgid "Unit of Measure"
+msgstr "Maßeinheit"
+
+#. module: stock_traceability_operation
+#: selection:report.stock.traceability_operation,state:0
+msgid "Waiting Another Move"
+msgstr "Erwarte andere Umlagerung"
+
+#. module: stock_traceability_operation
+#: selection:report.stock.traceability_operation,state:0
+msgid "Waiting Availability"
+msgstr "Erwarte Verfügbarkeit"

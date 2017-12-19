@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="stock_quant_partner_info_tree_view" model="ir.ui.view">
+            <field name="name">stock.quant.partner_info.tree</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree" />
+            <field name="arch" type="xml">
+                <field name="company_id" position="before">
+                    <field name="dest_partner_id" />
+                </field>
+            </field>
+        </record>
+
+        <record id="stock_quant_partner_info_form_view" model="ir.ui.view">
+            <field name="name">stock.quant.partner_info.form</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_form" />
+            <field name="arch" type="xml">
+                <field name="inventory_value" position="after">
+                    <field name="dest_partner_id" />
+                </field>
+            </field>
+        </record>
+
+        <record id="stock_quant_partner_info_search_view" model="ir.ui.view">
+            <field name="name">stock.quant.partner_info.search</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.quant_search_view" />
+            <field name="arch" type="xml">
+                <field name="owner_id" position="after">
+                    <field name="dest_partner_id" />
+                </field>
+                <filter name="internal_loc" position="after">
+                    <filter name="partner_loc" string="Partner Locations"
+                            domain="[('location_id.usage','in',('customer','supplier'))]"/>
+                </filter>
+                <group string="Group by..." position="inside">
+                    <filter name="partnergroup" string="Partner"
+                            domain="[]" context="{'group_by':'dest_partner_id'}" />
+                </group>
+            </field>
+        </record>
+
+    </data>
+</openerp>

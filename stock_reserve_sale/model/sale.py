@@ -75,6 +75,15 @@ class SaleOrder(models.Model):
         self.release_all_stock_reservation()
         return super(SaleOrder, self).action_cancel()
 
+    @api.multi
+    def unlink(self):
+        """
+        Force unlink of order lines to make sure that
+        all reservations are removed as well.
+        """
+        self.mapped('order_line').unlink()
+        return super(SaleOrder, self).unlink()
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -180,7 +189,8 @@ class SaleOrderLine(models.Model):
                     "the quantity of the stock reservation will "
                     "be automatically adjusted to %.2f.") % qty
             msg += "\n\n"
-            result.setdefault('warning', {})
+            if 'warning' not in result or type(result['warning']) is not dict:
+                result['warning'] = {}
             if result['warning'].get('message'):
                 result['warning']['message'] += msg
             else:
@@ -232,3 +242,13 @@ class SaleOrderLine(models.Model):
                      }
                 )
         return res
+
+    @api.multi
+    def unlink(self):
+        """
+        Force remove the reservations. This is necessary because even though
+        sale_line_id of stock.reservation has ondelete=cascade, the unlink
+        method of the reservations is never called.
+        """
+        self.mapped('reservation_ids').unlink()
+        return super(SaleOrderLine, self).unlink()

@@ -19,8 +19,8 @@
 #
 #################################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 class stock_fill_inventory(osv.osv_memory):
     _inherit = "stock.fill.inventory"
@@ -42,5 +42,3 @@ class stock_fill_inventory(osv.osv_memory):
     }
 
 stock_fill_inventory()
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

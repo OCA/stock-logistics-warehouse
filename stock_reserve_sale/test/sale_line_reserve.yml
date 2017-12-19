@@ -109,6 +109,27 @@
     product = self.browse(cr, uid, ref('product_yogurt'), context=context)
     assert product.virtual_available == 5, "Stock is not updated."
 -
+  I try to change the product quantity on the sale order line
+-
+  !python {model: sale.order.line}: |
+    line = self.browse(cr, uid, ref('sale_line_reserve_02_01'), context=context)
+    self.product_id_change(cr, uid, [line.id],
+      line.order_id.pricelist_id.id,
+      line.product_id.id,
+      qty=22,
+      uom=False,
+      qty_uos=0,
+      uos=False,
+      name='',
+      partner_id=ref('base.res_partner_2'),
+      lang=False,
+      update_tax=True,
+      date_order=False,
+      packaging=False,
+      fiscal_position=False,
+      flag=False,
+      context=None)
+-
   I release the sales order's reservations for the first line
 -
   !python {model: sale.order.line}: |

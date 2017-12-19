@@ -1,0 +1,60 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_available_mrp
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2016-2017
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-29 09:21+0000\n"
+"PO-Revision-Date: 2017-04-10 12:04+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_available_mrp
+#: field:product.product,component_ids:0
+msgid "Component ids"
+msgstr "Komponenten-IDs"
+
+#. module: stock_available_mrp
+#: field:product.product,potential_qty:0
+#: field:product.template,potential_qty:0
+msgid "Potential"
+msgstr "Potentiell"
+
+#. module: stock_available_mrp
+#: model:ir.model,name:stock_available_mrp.model_product_product
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_available_mrp
+#: model:ir.model,name:stock_available_mrp.model_product_template
+msgid "Product Template"
+msgstr "Produktvorlage"
+
+#. module: stock_available_mrp
+#: help:product.product,potential_qty:0
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand."
+msgstr "Produktmenge die mit verfügbaren Beständen gefertigt werden könnten."
+
+#. module: stock_available_mrp
+#: help:product.template,potential_qty:0
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand. If the product has several variants, this will be the biggest "
+"quantity that can be made for a any single variant."
+msgstr "Produktmenge, die mit verfügbarem Bestand gefertigt werden kann. Hat das Produkt mehrere Varianten, ist dies die größte herstellbare Menge einer Variante."
+
+#. module: stock_available_mrp
+#: model:product.uom,name:stock_available_mrp.thousand
+msgid "Thousand"
+msgstr "Tausend"

@@ -1,0 +1,605 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_revaluation
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-03-29 09:22+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,revaluation_type:0
+msgid ""
+"'Price Change': You can re-valuate inventory values by Changing the price for a specific product. The inventory price is changed and inventory value is recalculated according to the new price.\n"
+" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity of inventory remains unchanged, resulting in a change in the price"
+msgstr ""
+"'Preisänderung': Sie können den Bestand eines bestimmten Produkts durch Preisänderung neu berwerten. Der Produktpreis wird angepasst und der Bestandwert entsprechend neu errechnet.\n"
+"'Bestand Soll/Haben': Änderung des Bestandswerts. Die Bestandsmenge bleibt unverändert, es resultiert die Änderung des Preises/Werts."
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,help:stock_inventory_revaluation.action_stock_inventory_revaluation_tree
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to start a new Stock Inventory Revaluation.\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Klicken, um eine Bestandsneubewertung anzulegen.\n"
+"              </p>\n"
+"            "
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_account_move
+msgid "Account Entry"
+msgstr "Kontobuchung"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,account_move_ids:0
+msgid "Account move ids"
+msgstr "Buchungs-IDs"
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Back to Draft"
+msgstr "Zurück auf Entwurf"
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+#: view:stock.inventory.revaluation.get.quant:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: view:stock.inventory.revaluation.mass.post:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Cancelled"
+msgstr "Storniert"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:319
+#, python-format
+msgid ""
+"Cannot do an inventory value change if the quantity available for product %s"
+" is 0 or negative"
+msgstr ""
+"Kann keine Bestandswertanpassung vornehmen, wenn der verfügbare Bestand des "
+"Produkts %s 0 oder negativ ist"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,company_id:0
+#: field:stock.inventory.revaluation.quant,company_id:0
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:200
+#, python-format
+msgid ""
+"Configuration error!\n"
+"The product must be stockable."
+msgstr ""
+"Einstellungsfehler.\n"
+"Das Produkt muß ein Lagerprodukt sein."
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,cost_method:0
+msgid "Cost Method"
+msgstr "Kostenermittlung"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,create_uid:0
+#: field:stock.inventory.revaluation,user_id:0
+#: field:stock.inventory.revaluation.get.quant,create_uid:0
+#: field:stock.inventory.revaluation.mass.post,create_uid:0
+#: field:stock.inventory.revaluation.quant,create_uid:0
+msgid "Created by"
+msgstr "Angelegt durch"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,create_date:0
+#: field:stock.inventory.revaluation.get.quant,create_date:0
+#: field:stock.inventory.revaluation.mass.post,create_date:0
+#: field:stock.inventory.revaluation.quant,create_date:0
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,document_date:0
+msgid "Creation date"
+msgstr "Anlagedatum"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,new_value:0
+msgid "Credit/Debit amount"
+msgstr "Soll-/Haben-Betrag"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.quant,current_cost:0
+msgid "Current Cost"
+msgstr "Aktuelle Kosten"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,current_cost:0
+msgid "Current cost"
+msgstr "Aktuelle Kosten"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,current_value:0
+msgid "Current value"
+msgstr "Aktueller Wert"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.get.quant,date_from:0
+msgid "Date From"
+msgstr "Datum ab"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.get.quant,date_to:0
+msgid "Date To"
+msgstr "Datum bis"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,post_date:0
+msgid "Date of actual processing"
+msgstr "Datum der tatsächlichen Bearbeitung"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,decrease_account_id:0
+msgid "Decrease Account"
+msgstr "Menge verringern"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,uom_id:0
+msgid "Default Unit of Measure used for all stock operation."
+msgstr "Vorgabe Maßeinheit bei allen Lagerbuchungen."
+
+#. module: stock_inventory_revaluation
+#: help:product.category,property_inventory_revaluation_decrease_account_categ:0
+msgid ""
+"Define the Financial Accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Valuation Decrease Account is "
+"used when the inventory value is decreased."
+msgstr ""
+"Legen Sie die Finanzkonten für die Saldierung der Neubewertung hier fest. "
+"Das Bestandswertminderungskonto wird bei Verringerung des Bestandswertes "
+"verwendet."
+
+#. module: stock_inventory_revaluation
+#: help:product.category,property_inventory_revaluation_increase_account_categ:0
+msgid ""
+"Define the Financial Accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Valuation Increase Account is "
+"used when the inventory value is increased due to the revaluation."
+msgstr ""
+"Legen Sie die Finanzkonten für die Saldierung der Neubewertung hier fest. "
+"Das Bestandswertzunahmekonto wird bei Erhöhung des Bestandswertes verwendet."
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,decrease_account_id:0
+msgid ""
+"Define the G/L accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Decrease Account is used when "
+"the inventory value is decreased."
+msgstr ""
+"Legen Sie die Hauptbuchkonten für die Saldierung der Neubewertung hier fest."
+" Das Minderungskonto wird bei Verringerung des Bestandswertes verwendet."
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,increase_account_id:0
+msgid ""
+"Define the G/L accounts to be used as the balancing account in the "
+"transaction created by the revaluation. The Increase Account is used when "
+"the inventory value is increased due to the revaluation."
+msgstr ""
+"Legen Sie die Hauptbuchkonten für die Saldierung der Neubewertung hier fest."
+" Das Erhöhungskonto wird bei Erhöhung des Bestandswertes verwendet."
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,display_name:0
+#: field:stock.inventory.revaluation.get.quant,display_name:0
+#: field:stock.inventory.revaluation.mass.post,display_name:0
+#: field:stock.inventory.revaluation.quant,display_name:0
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,remarks:0
+msgid ""
+"Displays by default Inventory Revaluation. This text is copied to the "
+"journal entry."
+msgstr ""
+"Zeigt per Vorgabe Bestandsneubewertung an. Dieser Text wird in das Journal "
+"übertragen."
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,current_cost:0
+msgid "Displays the current cost of the product."
+msgstr "Weist die aktuellen Produkt-Einstandskosten aus."
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,current_value:0
+#: help:stock.inventory.revaluation,old_value:0
+msgid "Displays the current value of the product."
+msgstr "Weist den aktuellen Wert des Produktes aus."
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,old_cost:0
+msgid "Displays the previous cost of the product."
+msgstr "Weist die vorherigen Einstandkosten des Produkts aus."
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Draft"
+msgstr "Entwurf"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,new_value:0
+msgid ""
+"Enter the amount you wish to credit or debit from the current inventory "
+"value of the item. Enter credit as a negative value.Relevant only if the "
+"selected revaluation type is Inventory Credit/Debit."
+msgstr ""
+"Geben Sie den Betrag an, um den Sie den Bestandswert der Position verringern"
+" oder erhöhen wollen. Verringerung geben Sie als negativen Wert an. Dies ist"
+" nur relevant, wenn Sie Neubewertung als Soll-/Haben-Inventur angegeben "
+"haben."
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation.quant,new_cost:0
+msgid ""
+"Enter the new cost you wish to assign to the Quant. Relevant only when the "
+"selected revaluation type is Price Change."
+msgstr ""
+"Geben Sie neue Kosten an, die Sie diesem Quant zuordnen wollen. Dies ist nur"
+" relevant, wenn Sie Neubewertung als Preisänderung angegeben haben."
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,new_cost:0
+msgid ""
+"Enter the new cost you wish to assign to the product. Relevant only when the"
+" selected revaluation type is Price Change."
+msgstr ""
+"Geben Sie neue Kosten an, die Sie diesem Produkt zuordnen wollen. Dies ist "
+"nur relevant, wenn Sie Neubewertung als Preisänderung angegeben haben."
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+#: view:stock.inventory.revaluation.get.quant:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: view:stock.inventory.revaluation.mass.post:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+msgid "Get Quants"
+msgstr "Ermittele Quanten"
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_get_quant
+msgid "Get Quants for Inventory Revaluation"
+msgstr "Ermittele Quanten zur Bestandsneubewertung"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,id:0
+#: field:stock.inventory.revaluation.get.quant,id:0
+#: field:stock.inventory.revaluation.mass.post,id:0
+#: field:stock.inventory.revaluation.quant,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.quant,in_date:0
+msgid "Incoming Date"
+msgstr "Zugangsdatum"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,increase_account_id:0
+msgid "Increase Account"
+msgstr "Konto für Zunahme"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,revaluation_type:0
+msgid "Inventory Debit/Credit"
+msgstr "Soll-/Haben-Inventur"
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_tree
+#: model:ir.ui.menu,name:stock_inventory_revaluation.menu_action_stock_inventory_revaluation_tree
+msgid "Inventory Revaluation"
+msgstr "Neubewertungs-Inventur"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation
+msgid "Inventory revaluation"
+msgstr "Neubewertungs-Inventur"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_get_quant
+msgid "Inventory revaluation get Quants"
+msgstr "Ermittele Quanten bei Bestandsneubewertung"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_quant
+msgid "Inventory revaluation quant"
+msgstr "Quant der Bastandsneubewertung"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,journal_id:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Journal Entries"
+msgstr "Journalbuchungen"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_account_move_line
+msgid "Journal Items"
+msgstr "Buchungsjournale"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,__last_update:0
+#: field:stock.inventory.revaluation.get.quant,__last_update:0
+#: field:stock.inventory.revaluation.mass.post,__last_update:0
+#: field:stock.inventory.revaluation.quant,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,write_uid:0
+#: field:stock.inventory.revaluation.get.quant,write_uid:0
+#: field:stock.inventory.revaluation.mass.post,write_uid:0
+#: field:stock.inventory.revaluation.quant,write_uid:0
+msgid "Last Updated by"
+msgstr "Zuletzt akualisiert durch"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,write_date:0
+#: field:stock.inventory.revaluation.get.quant,write_date:0
+#: field:stock.inventory.revaluation.mass.post,write_date:0
+#: field:stock.inventory.revaluation.quant,write_date:0
+msgid "Last Updated on"
+msgstr "Zuletzt akualisiert am"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.quant,location_id:0
+msgid "Location"
+msgstr "Standort"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.quant,new_cost:0
+msgid "New Cost"
+msgstr "Neue Kosten"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,new_cost:0
+msgid "New cost"
+msgstr "Neue Kosten"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,old_cost:0
+msgid "Old cost"
+msgstr "Vorige Kosten"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,old_value:0
+msgid "Old value"
+msgstr "Voriger Wert"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:259
+#, python-format
+msgid "Please add an Increase Account and a Decrease Account."
+msgstr "Ergänzen Sie bitte Zunahme- und Abnahmekonten."
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+#: view:stock.inventory.revaluation.mass.post:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+msgid "Post"
+msgstr "bekanntgeben"
+
+#. module: stock_inventory_revaluation
+#: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_mass_post
+msgid "Post Inventory Revaluation"
+msgstr "Nach Bestandsneubewertung"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_mass_post
+msgid "Post multiple inventory revaluations"
+msgstr "Nach mehreren Bestandsneubewertungen"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,state:0
+msgid "Posted"
+msgstr "Gebucht"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,post_date:0
+msgid "Posting Date"
+msgstr "Buchungsdatum"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.quant,old_cost:0
+msgid "Previous cost"
+msgstr "Vorherige Kosten"
+
+#. module: stock_inventory_revaluation
+#: selection:stock.inventory.revaluation,revaluation_type:0
+msgid "Price Change"
+msgstr "Preisänderung"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,product_template_id:0
+#: field:stock.inventory.revaluation.quant,product_id:0
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_product_category
+msgid "Product Category"
+msgstr "Produktkategorie"
+
+#. module: stock_inventory_revaluation
+#: model:ir.model,name:stock_inventory_revaluation.model_product_template
+msgid "Product Template"
+msgstr "Produktvorlage"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.quant,quant_id:0
+msgid "Quant"
+msgstr "Quant"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.quant,qty:0
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,qty_available:0
+msgid "Quantity On Hand"
+msgstr "Verfügbare Menge"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation.quant,qty:0
+msgid ""
+"Quantity of products in this quant, in the default unit of measure of the "
+"product"
+msgstr ""
+"Produktmenge in diesem Quant, angegeben in Standard-Produktmengeneinheit"
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+msgid "Quants"
+msgstr "Quants"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,name:0
+msgid "Reference"
+msgstr "Bezug"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,name:0
+msgid "Reference for the journal entry"
+msgstr "Referenz für den Journaleintrag"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,remarks:0
+msgid "Remarks"
+msgstr "Bemerkungen"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation.quant,revaluation_id:0
+msgid "Revaluation"
+msgstr "Neuberwertung"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/wizards/stock_inventory_revaluation_mass_post.py:34
+#, python-format
+msgid "Revaluation %s is not in Draft state"
+msgstr "Neubewertung %s liegt nicht im Entwurf vor"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,revaluation_type:0
+msgid "Revaluation Type"
+msgstr "Neuberwertungsart"
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,reval_quant_ids:0
+msgid "Revaluation line quants"
+msgstr "Quanten der Neubewertungsposition"
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_search
+msgid "Search Stock Inventory Revaluation"
+msgstr "Suche Bestandsneubewertung"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation.quant,old_cost:0
+msgid "Shows the previous cost of the quant"
+msgstr "Weist die vorigen Kosten dieses Quants aus"
+
+#. module: stock_inventory_revaluation
+#: help:stock.inventory.revaluation,cost_method:0
+msgid ""
+"Standard Price: The cost price is manually updated at the end of a specific period (usually every year).\n"
+"                    Average Price: The cost price is recomputed at each incoming shipment and used for the product valuation.\n"
+"                    Real Price: The cost price displayed is the price of the last outgoing product (will be use in case of inventory loss for example)."
+msgstr ""
+"Standardpreis: Die Einstandskosten werden manuell, zum Ende einer Periode (üblicherweise am Jahresende) aktualisiert..\n"
+"Durchschnittspreis: Der Einstandspreis wird mit jedem Warenzugang neu ermittelt und zur Bestandsbewertung herangezogen.\n"
+"Ist-Preis: Der angezeigte Einstandspreis ist der, des letzten abgehenden Produkts (und wird z.B. bei Bestandsverlust eingesetzt)."
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: stock_inventory_revaluation
+#: field:account.move,stock_inventory_revaluation_id:0
+#: field:account.move.line,stock_inventory_revaluation_id:0
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_form
+#: view:stock.inventory.revaluation:stock_inventory_revaluation.view_stock_inventory_revaluation_tree
+msgid "Stock Inventory Revaluation"
+msgstr "Bestandsneubewertung"
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation.quant:stock_inventory_revaluation.view_stock_inventory_revaluation_quant_tree
+msgid "Stock Inventory Revaluation Line Quants"
+msgstr "Quanten zu Bestandsneubewertungsposition"
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation.quant:stock_inventory_revaluation.view_stock_inventory_revaluation_quant_form
+msgid "Stock Inventory Revaluation Quants"
+msgstr "Quanten der Bestandsneubewertung"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:312
+#, python-format
+msgid "The new value for product %s cannot be negative"
+msgstr "Der neue Wert des Produkts %s darf nicht negativ sein."
+
+#. module: stock_inventory_revaluation
+#: field:stock.inventory.revaluation,uom_id:0
+msgid "UoM"
+msgstr "ME"
+
+#. module: stock_inventory_revaluation
+#: field:product.category,property_inventory_revaluation_decrease_account_categ:0
+msgid "Valuation Decrease Account"
+msgstr "Konto für Wertminderung"
+
+#. module: stock_inventory_revaluation
+#: field:product.category,property_inventory_revaluation_increase_account_categ:0
+msgid "Valuation Increase Account"
+msgstr "Konto für Wertzunahme"
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:425
+#, python-format
+msgid "You can only post quant cost changes."
+msgstr "Sie dürfen nur Quant-Kostenänderungen buchen."
+
+#. module: stock_inventory_revaluation
+#: code:addons/stock_inventory_revaluation/models/account_move.py:21
+#: code:addons/stock_inventory_revaluation/models/account_move.py:41
+#, python-format
+msgid ""
+"You cannot remove the journal item that is related to an inventory "
+"revaluation"
+msgstr ""
+"Sie dürfen den Journalposten zu einer Bestandsneubewertung nicht löschen"
+
+#. module: stock_inventory_revaluation
+#: view:stock.inventory.revaluation.get.quant:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
+#: view:stock.inventory.revaluation.mass.post:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
+msgid "or"
+msgstr "oder"

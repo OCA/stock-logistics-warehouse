@@ -56,7 +56,7 @@ class ProcurementOrder(models.Model):
         origin = (proc.group_id and (proc.group_id.name + ":") or "") + \
                  (proc.rule_id and proc.rule_id.name or proc.origin or "/")
         return {
-            'name': rule.name,
+            'name': proc.name,
             'origin': origin,
             'product_qty': qty,
             'product_uos_qty': uos_qty,
@@ -92,6 +92,8 @@ class ProcurementOrder(models.Model):
     def _run(self, procurement):
         if procurement.rule_id and \
                 procurement.rule_id.action == 'split_procurement':
+            if procurement.mts_mto_procurement_ids:
+                return super(ProcurementOrder, self)._run(procurement)
             uom_obj = self.env['product.uom']
             needed_qty = procurement.get_mto_qty_to_order()
             rule = procurement.rule_id

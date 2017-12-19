@@ -1,0 +1,125 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_preparation_filter
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2016-2017
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-29 09:22+0000\n"
+"PO-Revision-Date: 2017-04-19 11:44+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_inventory_preparation_filter
+#: view:stock.inventory:stock_inventory_preparation_filter.stock_inventory_form
+#: field:stock.inventory,empty_line_ids:0
+msgid "Capture Lines"
+msgstr "Positionen sammeln"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory,categ_ids:0
+msgid "Categories"
+msgstr "Kategorien"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,create_uid:0
+msgid "Created by"
+msgstr "Angelegt durch"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,create_date:0
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,display_name:0
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:60
+#, python-format
+msgid "Empty list"
+msgstr "Leere Liste"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
+#: field:stock.inventory.line.empty,inventory_id:0
+msgid "Inventory"
+msgstr "Bestand"
+
+#. module: stock_inventory_preparation_filter
+#: view:stock.inventory:stock_inventory_preparation_filter.stock_inventory_form
+msgid "Inventory Details"
+msgstr "Bestandsdetails"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,write_uid:0
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,write_date:0
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory,lot_ids:0
+msgid "Lots"
+msgstr "Lose"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,product_code:0
+msgid "Product Code"
+msgstr "Produktschlüssel"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory,product_ids:0
+msgid "Products"
+msgstr "Produkte"
+
+#. module: stock_inventory_preparation_filter
+#: field:stock.inventory.line.empty,product_qty:0
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:55
+#, python-format
+msgid "Selected Categories"
+msgstr "Ausgewählte Kategorien"
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:59
+#, python-format
+msgid "Selected Lots"
+msgstr "Ausgewählte Lose"
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:56
+#, python-format
+msgid "Selected Products"
+msgstr "Ausgewählte Produkte"
+
+#. module: stock_inventory_preparation_filter
+#: view:stock.inventory:stock_inventory_preparation_filter.stock_inventory_form
+msgid "{'invisible':[('state','=','draft')]}"
+msgstr "{'invisible':[('state','=','draft')]}"

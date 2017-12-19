@@ -1,0 +1,100 @@
+-
+  This file will test a non exhaustive inventory.
+  I will call open_action method and check if state of inventories are 'open'.
+-
+  !python {model: stock.inventory}: |
+    self.action_open(cr, uid, [ref('inventory_standard')])
+    inventory_state = self.read(cr, uid, [ref('inventory_standard')], ['state'])[0]['state']
+    assert inventory_state == 'open', "Partial inventory have '%s' state. It should be 'open'" % inventory_state
+
+-
+  In order, I add products to inventory.
+  Adding Azerty Keyboard.
+-
+  !record {model: stock.inventory.line, id: lines_inventory_location_kbaz}:
+    product_id: product.product_product_9
+    product_uom: product.product_uom_unit
+    company_id: base.main_company
+    inventory_id: inventory_standard
+    product_qty: 18.0
+    location_id: stock.stock_location_components
+
+-
+  Adding Optical Mouse.
+-
+  !record {model: stock.inventory.line, id: lines_inventory_location_optm}:
+    product_id: product.product_product_10
+    product_uom: product.product_uom_unit
+    company_id: base.main_company
+    inventory_id: inventory_standard
+    product_qty: 12.0
+    location_id: stock.stock_location_components
+
+-
+  Adding Multimedia Speakers.
+-
+  !record {model: stock.inventory.line, id: lines_inventory_location_grca}:
+    product_id: product.product_template_31
+    product_uom: product.product_uom_unit
+    company_id: base.main_company
+    inventory_id: inventory_standard
+    product_qty: 32.0
+    location_id: stock.stock_location_components
+
+-
+  I will call the function _get_locations_open_inventories and check the result.
+  The function will return no locations because it's not an exhaustive inventory.
+-
+  !python {model: stock.inventory}: |
+    locations = self._get_locations_open_inventories(cr, uid)
+    assert len(locations) == 0, "Function return wrong results: %s" % locations
+
+-
+  I will call the function onchange_location_id.
+  The function must to return true in all test case.
+-
+  !python {model: stock.inventory.line}: |
+    res = self.onchange_location_id(cr, uid, [], [(6,0,[ref('stock.stock_location_components')])], False, ref('stock.stock_location_components'))
+    assert res == True, "The function 'onchange_location_id' should return True and return '%s'" % res
+    res = self.onchange_location_id(cr, uid, [], [(6,0,[ref('stock.stock_location_components')])], False, ref('stock.stock_location_14'))
+    assert res == True, "The function 'onchange_location_id' should return True and return '%s'" % res
+
+-
+  I will call the function _check_inventory.
+  The function must return True in all test cases.
+-
+  !python {model: stock.location}: |
+    res = self._check_inventory(cr, uid, ref('stock.stock_location_components'))
+    assert res == True, "The function '_check_inventory' should return True and return '%s'" % res
+    res = self._check_inventory(cr, uid, ref('stock.stock_location_14'))
+    assert res == True, "The function '_check_inventory' should return True and return '%s'" % res
+
+-
+  I will confirm inventory.
+-
+  !python {model: stock.inventory}: |
+    self.action_confirm(cr, uid, [ref('inventory_standard')])
+    inventory_state = self.read(cr, uid, [ref('inventory_standard')], ['state'])[0]['state']
+    assert inventory_state == 'confirm', "Partial inventory have '%s' state. It should be 'confirm'" % inventory_state
+
+-
+  I will validate inventory
+-
+  !python {model: stock.inventory}: |
+    self.action_done(cr, uid, [ref('inventory_standard')])
+    inventory_state = self.read(cr, uid, [ref('inventory_standard')], ['state'])[0]['state']
+    assert inventory_state == 'done', "Partial inventory have '%s' state. It should be 'done'" % inventory_state
+
+-
+  I will verify the quantity for each products.
+-
+  !python {model: product.product}: |
+    ctx={'location': [ref('stock.stock_location_components')]}
+    prod_qty_avail = self.read(cr, uid, [ref('product.product_product_9')], ['qty_available'], context=ctx)[0]['qty_available']
+    assert prod_qty_avail == 18.0, "The stock of CPU1 was not set to 18.0: %s" % prod_qty_avail
+
+    prod_qty_avail = self.read(cr, uid, [ref('product.product_product_10')], ['qty_available'], context=ctx)[0]['qty_available']
+    assert prod_qty_avail == 12.0, "The stock of CPU3 was not set to 12.0: %s" % prod_qty_avail
+
+    prod_qty_avail = self.read(cr, uid, [ref('product.product_template_31')], ['qty_available'], context=ctx)[0]['qty_available']
+    assert prod_qty_avail == 32.0, "The stock of FAN was not set to 32.0: %s" % prod_qty_avail

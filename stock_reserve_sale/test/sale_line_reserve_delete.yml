@@ -1,0 +1,34 @@
+-
+  I create a sales order line for sales order defined in sale_line_reserve.yml
+-
+  !record {model: sale.order.line, id: sale_line_reserve_02_03, view: sale.view_order_line_tree}:
+    name: Yogurt
+    product_id: product_yogurt
+    product_uom_qty: 4
+    product_uom: product.product_uom_kgm
+    order_id: sale_reserve_02
+-
+  And I create a stock reserve for this line
+-
+  !record {model: sale.stock.reserve, id: wizard_reserve_02_03, context: "{'active_model': 'sale.order.line', 'active_ids': ref('sale_line_reserve_02_03')}"}:
+    note: 'A unique note to be used in a search'
+-
+  I call the wizard to reserve the products of the sales order
+-
+  !python {model: sale.stock.reserve}: |
+    active_id = ref('sale_line_reserve_02_03')
+    context['active_id'] = active_id
+    context['active_ids'] = [active_id]
+    context['active_model'] = 'sale.order.line'
+    self.button_reserve(cr, uid, [ref('wizard_reserve_02_03')], context=context)
+-
+  I remove the order line from the order
+-
+  !python {model: sale.order}: |
+    self.write(cr, uid, ref('sale_reserve_02'), {'order_line': [(2, ref('sale_line_reserve_02_03'))]})
+-
+  I make sure that the moves related to the reservation were cancelled
+-
+  !python {model: stock.move}: |
+    move_ids = self.search(cr, uid, [('note', '=', 'A unique note to be used in a search'), ('state', '!=', 'cancel')])
+    assert len(move_ids) == 0, 'The move related to the stock reservation should have been cancelled'
