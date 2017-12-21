@@ -108,7 +108,9 @@ class ProductProduct(models.Model):
             product.qty_expired = expired_quantities['qty_expired']
             product.outgoing_expired_qty = expired_quantities[
                 'outgoing_expired_qty']
-            product.outgoing_qty -= product.outgoing_expired_qty
+            if not self.env.context.get('disable_check_expired_lots', False):
+                # We let this to have possibility to get standard quantity
+                product.outgoing_qty -= product.outgoing_expired_qty
             product.qty_expired -= product.outgoing_expired_qty
         return res
 

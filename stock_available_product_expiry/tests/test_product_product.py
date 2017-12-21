@@ -235,3 +235,45 @@ class TestProductProduct(common.TransactionCase):
             'lot_id',
             domain,
         )
+
+    def test_03_lot_product_outgoing_disable(self):
+        from dateutil.relativedelta import relativedelta
+        lot_obj = self.env['stock.production.lot']
+        removal_date = fields.Datetime.from_string(
+            fields.Datetime.now()) + relativedelta(days=-1)
+        # First create lot
+        vals = {'removal_date': removal_date,
+                'product_id': self.product_1.id
+                }
+        self.lot_1 = lot_obj.create(vals)
+        # Create Inventory for product
+        inventory = self.env['stock.inventory'].create({
+            'name': 'Initial inventory',
+            'filter': 'partial',
+            'line_ids': [(0, 0, {
+                'product_id': self.product_1.id,
+                'prod_lot_id': self.lot_1.id,
+                'product_uom_id': self.product_1.uom_id.id,
+                'product_qty': 10,
+                'location_id': self.warehouse_1.lot_stock_id.id
+            })]
+        })
+        inventory.action_done()
+        vals = {
+            'name': 'Move OUT',
+            'date': fields.Datetime.now(),
+            'location_id': self.ref('stock.stock_location_stock'),
+            'location_dest_id': self.ref('stock.stock_location_customers'),
+            'product_id': self.product_1.id,
+            'product_uom_qty': 10.0,
+            'product_uom': self.product_1.uom_id.id
+        }
+        move = self.env['stock.move'].create(vals)
+        move.action_confirm()
+        move.action_assign()
+        out_qty = self.product_1.with_context(
+            disable_check_expired_lots=True).outgoing_qty
+        self.assertEquals(
+            10.0,
+            out_qty
+        )
