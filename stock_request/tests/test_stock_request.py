@@ -112,16 +112,24 @@ class TestStockRequest(common.TransactionCase):
             stock_request.location_id, self.warehouse.lot_stock_id)
 
     def test_onchanges(self):
+        self.product.route_ids = [(6, 0, self.route.ids)]
         vals = {
-            'product_id': self.product.id,
             'product_uom_id': self.product.uom_id.id,
             'product_uom_qty': 5.0,
             'company_id': self.main_company.id,
         }
         stock_request = self.stock_request.sudo(
             self.stock_request_user).new(vals)
+        stock_request.product_id = self.product
+        vals = stock_request.default_get(['warehouse_id', 'company_id'])
+        stock_request.update(vals)
+        res = stock_request.onchange_product_id()
+        self.assertTrue(res['domain']['route_id'])
+        routes = self.env['stock.location.route'].search(
+            res['domain']['route_id'])
+        self.assertIn(self.route.id, routes.ids)
+
         self.stock_request_user.company_id = self.company_2
-        stock_request.default_get(['warehouse_id', 'company_id'])
         stock_request.company_id = self.company_2
         stock_request.onchange_company_id()
 

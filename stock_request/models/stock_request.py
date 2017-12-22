@@ -188,14 +188,44 @@ class StockRequest(models.Model):
                   'same category than the default unit '
                   'of measure of the product'))
 
+    def _get_valid_routes(self):
+        routes = self.env['stock.location.route']
+        if self.product_id:
+            routes += self.product_id.mapped(
+                'route_ids') | self.product_id.mapped(
+                'categ_id').mapped('total_route_ids')
+        if self.warehouse_id:
+            routes |= self.env['stock.location.route'].search(
+                [('warehouse_ids', 'in', self.warehouse_id.ids)])
+        routes = routes.filtered(lambda r: any(
+            p.location_id == self.location_id for p in r.pull_ids))
+        return routes
+
     @api.onchange('warehouse_id')
     def onchange_warehouse_id(self):
         """ Finds location id for changed warehouse. """
+        res = {'domain': {}}
+        routes = self._get_valid_routes()
+        res['domain']['route_id'] = [('id', 'in', routes.ids)]
         if self.warehouse_id:
-            self.location_id = self.warehouse_id.lot_stock_id.id
+            # search with sudo because the user may not have permissions
+            loc_wh = self.location_id.sudo().get_warehouse()
+            if self.warehouse_id != loc_wh:
+                self.location_id = self.warehouse_id.lot_stock_id.id
             if self.warehouse_id.company_id != self.company_id:
                 self.company_id = self.warehouse_id.company_id
-        return {}
+        return res
+
+    @api.onchange('location_id')
+    def onchange_location_id(self):
+        res = {'domain': {}}
+        routes = self._get_valid_routes()
+        res['domain']['route_id'] = [('id', 'in', routes.ids)]
+        if self.location_id:
+            loc_wh = self.location_id.get_warehouse()
+            if self.warehouse_id != loc_wh:
+                self.warehouse_id = loc_wh
+        return res
 
     @api.onchange('company_id')
     def onchange_company_id(self):
@@ -214,14 +244,16 @@ class StockRequest(models.Model):
 
     @api.onchange('product_id')
     def onchange_product_id(self):
+        res = {'domain': {}}
+        routes = self._get_valid_routes()
+        res['domain']['route_id'] = [('id', 'in', routes.ids)]
         if self.product_id:
             self.product_uom_id = self.product_id.uom_id.id
-            return {
-                'domain': {
-                    'product_uom_id':
-                        [('category_id', '=',
-                          self.product_id.uom_id.category_id.id)]}}
-        return {'domain': {'product_uom_id': []}}
+            res['domain']['product_uom_id'] = [
+                ('category_id', '=', self.product_id.uom_id.category_id.id)]
+            return res
+        res['domain']['product_uom_id'] = []
+        return res
 
     @api.multi
     def _action_confirm(self):
