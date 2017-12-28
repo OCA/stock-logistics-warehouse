@@ -3,8 +3,9 @@
 # (c) 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import _, api, exceptions, fields, models
-import odoo.addons.decimal_precision as dp
+from odoo import _, api, fields, models
+from odoo.addons import decimal_precision as dp
+from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 
 
@@ -20,7 +21,7 @@ class AssignManualQuants(models.TransientModel):
         for record in self.filtered('quants_lines'):
             if float_compare(record.lines_qty, move.product_qty,
                              precision_digits=precision_digits) > 0:
-                raise exceptions.UserError(
+                raise UserError(
                     _('Quantity is higher than the needed one'))
 
     @api.depends('quants_lines', 'quants_lines.qty')
@@ -32,7 +33,6 @@ class AssignManualQuants(models.TransientModel):
         self.lines_qty = lines_qty
         self.move_qty = move.product_qty - lines_qty
 
-    name = fields.Char(string='Name')
     lines_qty = fields.Float(
         string='Reserved qty', compute='_compute_qties',
         digits=dp.get_precision('Product Unit of Measure'))
@@ -43,17 +43,29 @@ class AssignManualQuants(models.TransientModel):
 
     @api.multi
     def assign_quants(self):
+        quant = self.env['stock.quant']
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-        move.picking_id.mapped('pack_operation_ids').unlink()
-        quants = []
-        # Mark as recompute pack needed
-        if move.picking_id:  # pragma: no cover
-            move.picking_id.recompute_pack_op = True
-        for quant_id in move.reserved_quant_ids.ids:
-            move.write({'reserved_quant_ids': [[3, quant_id]]})
-        for line in self.quants_lines.filtered('selected'):
-            quants.append([line.quant, line.qty])
-        self.env['stock.quant'].quants_reserve(quants, move)
+        move._do_unreserve()
+        precision_digits = self.env[
+            'decimal.precision'].precision_get('Product Unit of Measure')
+        for line in self.quants_lines:
+            if float_compare(line.qty, 0.0,
+                             precision_digits=precision_digits) > 0:
+                available_quantity = quant._get_available_quantity(
+                    move.product_id,
+                    move.location_id,
+                    lot_id=line.lot_id)
+                if float_compare(available_quantity, 0.0,
+                                 precision_digits=precision_digits) <= 0:
+                    continue
+                move._update_reserved_quantity(line.qty, available_quantity,
+                                               move.location_id,
+                                               lot_id=line.lot_id, strict=True)
+        if move.has_move_lines:
+            for ml in move.move_line_ids:
+                ml.qty_done = ml.product_qty
+        move._recompute_state()
+        move.mapped('picking_id')._compute_state()
         return {}
 
     @api.model
@@ -63,20 +75,29 @@ class AssignManualQuants(models.TransientModel):
         available_quants = self.env['stock.quant'].search([
             ('location_id', 'child_of', move.location_id.id),
             ('product_id', '=', move.product_id.id),
-            ('qty', '>', 0),
-            '|',
-            ('reservation_id', '=', False),
-            ('reservation_id', '=', move.id)
+            ('quantity', '>', 0)
         ])
-        quants_lines = [{
-            'quant': x.id,
-            'lot_id': x.lot_id.id,
-            'in_date': x.in_date,
-            'package_id': x.package_id.id,
-            'selected': x in move.reserved_quant_ids,
-            'qty': x.qty if x in move.reserved_quant_ids else 0,
-            'location_id': x.location_id.id,
-        } for x in available_quants]
+
+        quants_lines = []
+        for x in available_quants:
+            line = {}
+            line['quant'] = x.id
+            line['lot_id'] = x.lot_id.id
+            line['on_hand'] = x.quantity
+            line['in_date'] = x.in_date
+            line['package_id'] = x.package_id.id
+            line['selected'] = False
+            line['qty'] = 0
+            move_lines = move.move_line_ids.filtered(
+                lambda ml:
+                ml.location_id == x.location_id and ml.lot_id == x.lot_id)
+            for ml in move_lines:
+                line['qty'] = line['qty'] + ml.ordered_qty
+                line['selected'] = True
+            line['reserved'] = x.reserved_quantity - line['qty']
+            line['location_id'] = x.location_id.id
+            quants_lines.append(line)
+
         res.update({'quants_lines': quants_lines})
         res = self._convert_to_write(self._convert_to_cache(res))
         return res
@@ -93,7 +114,8 @@ class AssignManualQuantsLines(models.TransientModel):
             if not record.selected:
                 record.qty = False
             elif not record.qty:
-                quant_qty = record.quant.qty
+                quant = record.quant
+                quant_qty = quant.quantity - quant.reserved_quantity
                 remaining_qty = record.assign_wizard.move_qty
                 record.qty = (quant_qty if quant_qty < remaining_qty else
                               remaining_qty)
@@ -117,6 +139,11 @@ class AssignManualQuantsLines(models.TransientModel):
         comodel_name='stock.quant.package', string='Package',
         related='quant.package_id', readonly=True,
         groups="stock.group_tracking_lot")
+    on_hand = fields.Float(
+        string='On Hand', digits=dp.get_precision('Product Unit of Measure'))
+    reserved = fields.Float(
+        string='Others Reserved',
+        digits=dp.get_precision('Product Unit of Measure'))
+    selected = fields.Boolean(string='Select')
     qty = fields.Float(
         string='QTY', digits=dp.get_precision('Product Unit of Measure'))
-    selected = fields.Boolean(string='Select')
