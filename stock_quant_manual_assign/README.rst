@@ -13,18 +13,13 @@ Usage
 
 To use this module, you need to:
 
-#. Select a stock move or a stock picking.
-#. Click on the tab "Initial Demand".
-#. Click on the line which you need to select quants.
+#. Click on the tags icon at the end of move line.
 #. Open the wizard with the button "Manual Quants".
 #. Select the quants to assign (reserve), then Confirm.
-#. Close the stock move line windows (which is popup by step 3).
-#. Click on the tab "Operations"
-#. Click on the "Recompute" to update the stock move info.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/10.0
+   :target: https://runbot.odoo-community.org/runbot/153/11.0
 
 Bug Tracker
 ===========

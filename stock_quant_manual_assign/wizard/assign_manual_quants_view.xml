@@ -8,11 +8,11 @@
                 <group col='4' colspan="4">
                     <field name='quants_lines' colspan="4">
                         <tree editable="top" delete="0" create="0">
-                            <field name="quant" />
-                            <field name="location_id" />
-                            <field name="in_date" />
-                            <field name="lot_id" />
-                            <field name="package_id" />
+                            <field name="lot_id" readonly="1"/>
+                            <field name="on_hand" readonly="1"/>
+                            <field name="reserved" readonly="1"/>
+                            <field name="location_id" readonly="1"/>
+                            <field name="package_id" readonly="1"/>
                             <field name="selected" />
                             <field name="qty" attrs="{'readonly':[('selected', '=' ,False)]}" sum="qty"/>
                         </tree>
