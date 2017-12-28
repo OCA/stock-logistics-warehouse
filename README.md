@@ -41,6 +41,7 @@ addon | version | summary
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 10.0.1.0.0 | Add a MTS+MTO route
 [stock_operation_package_mandatory](stock_operation_package_mandatory/) | 10.0.1.0.0 | Makes destination package mandatory on stock pack operations
 [stock_orderpoint_automatic_creation](stock_orderpoint_automatic_creation/) | 10.0.1.0.0 | Stock Orderpoint Automatic Creation
+[stock_orderpoint_uom](stock_orderpoint_uom/) | 10.0.1.0.0 | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_putaway_product](stock_putaway_product/) | 10.0.1.0.1 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 10.0.1.0.0 | Stock - Manual Quant Assignment
 [stock_quant_merge](stock_quant_merge/) | 10.0.1.0.0 | Stock - Quant merge
