@@ -1,0 +1,386 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_request
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-21 21:59+0000\n"
+"PO-Revision-Date: 2017-11-21 21:59+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_move_line.py:20
+#, python-format
+msgid "<li><b>%s</b>: Transferred quantity %s %s</li>"
+msgstr "<li><b>%s</b>: Umgelagerte Menge %s %s</li>"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_kanban
+msgid ""
+"<strong>Done Qty:\n"
+"                                    </strong>"
+msgstr ""
+"<strong>Erledigte Menge:\n"
+"                                    </strong>"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_kanban
+msgid "<strong>Qty :</strong>"
+msgstr "<strong>Menge :</strong>"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_allocated_product_qty
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_requested_product_qty
+msgid "Allocated Quantity"
+msgstr "Zugeordnete Menge"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Archived"
+msgstr "Archiviert"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: stock_request
+#: selection:stock.request,state:0
+msgid "Cancelled"
+msgstr "Abgebrochen"
+
+#. module: stock_request
+#: model:ir.actions.act_window,help:stock_request.action_stock_request_form
+msgid "Click to add a Stock Request."
+msgstr "Klicken, um eine Bestandaanforderung zu stellen."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_company_id
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Confirm"
+msgstr "Freigeben"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_create_uid
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_create_uid
+msgid "Created by"
+msgstr "Angelegt durch"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_create_date
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_create_date
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_expected_date
+msgid "Date when you expect to receive the goods."
+msgstr "Datum an dem Sie die Warenlieferung erwarten."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_picking_count
+msgid "Delivery Orders"
+msgstr "Lieferscheine"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_display_name
+msgid "Display Name"
+msgstr "Anzeigebezeichnung"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
+#: selection:stock.request,state:0
+msgid "Done"
+msgstr "Erledigt"
+
+#. module: stock_request
+#: selection:stock.request,state:0
+msgid "Draft"
+msgstr "Entwurf"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_expected_date
+msgid "Expected date"
+msgstr "Erwartetes Datum"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Group By"
+msgstr "Gruppiere nach"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_request
+#: selection:stock.request,state:0
+msgid "In progress"
+msgstr "In Bearbeitung"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request___last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_write_uid
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_write_date
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_location_id
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Location"
+msgstr "Ort"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_procurement_group_id
+msgid ""
+"Moves created through this stock request will be put in this procurement "
+"group. If none is given, the moves generated by procurement rules will be "
+"grouped into one big picking."
+msgstr ""
+"Umlagerungen infolge dieser Anforderung werden in dieser Beschaffungsgruppe "
+"zusammengefasst. Ohne Angabe werden Umlagerungen aus Beschaffungsregeln in "
+"einer gemeinsamen Kommissionierung gesammelt."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_name
+msgid "Name"
+msgstr "Bezeichnung"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_move_line
+msgid "Packing Operation"
+msgstr "Packvorgang"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_picking_ids
+msgid "Pickings"
+msgstr "Kommissionierungen"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_procurement_group_id
+msgid "Procurement Group"
+msgstr "Beschaffungsgruppe"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_procurement_rule
+msgid "Procurement Rule"
+msgstr "Beschaffungsregel"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_product_id
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_product_uom_id
+msgid "Product Unit of Measure"
+msgstr "Produktmengeneinheit"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_qty_done
+msgid "Qty Done"
+msgstr "Erledigte Menge"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_qty_in_progress
+msgid "Qty In Progress"
+msgstr "Menge in Bearbeitung"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_open_product_qty
+msgid "Qty pending to allocate"
+msgstr "Menge in Zuweisung"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_product_uom_qty
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_qty_done
+msgid "Quantity completed"
+msgstr "Erledigte Menge"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_qty_in_progress
+msgid "Quantity in progress."
+msgstr "Menge in Bearbeitung."
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_product_qty
+msgid "Quantity in the default UoM of the product"
+msgstr "Menge in Vorgabe-ME des Produkts"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_allocation_allocated_product_qty
+#: model:ir.model.fields,help:stock_request.field_stock_request_allocation_requested_product_qty
+msgid ""
+"Quantity of the stock request allocated to the stock move, in the default "
+"UoM of the product"
+msgstr ""
+"Menge aus der Anforderung dieser Umlagerung, in Vorgabe-ME des Produkts"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_product_uom_qty
+msgid "Quantity, specified in the unit of measure indicated in the request."
+msgstr "Menge, angegeben in Mengeneinheit der Anforderung."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_product_qty
+msgid "Real Quantity"
+msgstr "Ist-Menge"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_move_line.py:12
+#, python-format
+msgid "Receipt confirmation %s for your Request %s"
+msgstr "Bestätigungsbeleg %s zu Ihrer Anforderung %s"
+
+#. module: stock_request
+#: selection:stock.request,picking_policy:0
+msgid "Receive all products at once"
+msgstr "Alle Produkte auf einmal erhalten"
+
+#. module: stock_request
+#: selection:stock.request,picking_policy:0
+msgid "Receive each product when available"
+msgstr "Jedes Produkt bei Verfügbarkeit erhalten"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_requested_by
+msgid "Requested by"
+msgstr "Angefordert durch"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_route_id
+msgid "Route"
+msgstr "Route"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Set to Draft"
+msgstr "Setze auf Entwurf"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_picking_policy
+msgid "Shipping Policy"
+msgstr "Versandregel"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_state
+msgid "Status"
+msgstr "Status"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_move
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_stock_move_id
+msgid "Stock Move"
+msgstr "Bestandsbuchung"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_move_ids
+msgid "Stock Moves"
+msgstr "Bestandsbuchungen"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_stock_request_id
+#: model:ir.module.category,name:stock_request.module_category_stock_request
+msgid "Stock Request"
+msgstr "Bestandsanforderung"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_request_allocation
+#: model:ir.model.fields,field_description:stock_request.field_stock_move_allocation_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_ids
+msgid "Stock Request Allocation"
+msgstr "Bestandszuweisung beantragen"
+
+#. module: stock_request
+#: model:res.groups,name:stock_request.group_stock_request_manager
+msgid "Stock Request Manager"
+msgstr "Anforderungsverwalter"
+
+#. module: stock_request
+#: model:res.groups,name:stock_request.group_stock_request_user
+msgid "Stock Request User"
+msgstr "Anforderungs-Anwender"
+
+#. module: stock_request
+#: sql_constraint:stock.request:0
+msgid "Stock Request name must be unique"
+msgstr "Bezeichner der Anforderung muss eindeutig sein"
+
+#. module: stock_request
+#: model:ir.actions.act_window,name:stock_request.action_stock_request_form
+#: model:ir.ui.menu,name:stock_request.menu_stock_request
+#: model:ir.ui.menu,name:stock_request.menu_stock_request_root
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_tree
+msgid "Stock Requests"
+msgstr "Bestandsanforderungen"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Stock Requests Search"
+msgstr "Anforderungssuche"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_move_line.py:15
+#, python-format
+msgid ""
+"The following requested items from Stock Request %s have now been received "
+"in %s using Picking %s:"
+msgstr ""
+"Die folgenden Posten aus Anforderung %s sind nun eingegangen in %s unter "
+"Kommissionierung %s:"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Transfers"
+msgstr "Umlagerungen"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_warehouse_id
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Warehouse"
+msgstr "Warenlager"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:193
+#, python-format
+msgid ""
+"You have to select a product unit of measure in the same category than the "
+"default unit of measure of the product"
+msgstr ""
+"Sie müssen eine Produktmengeneinheit aus der gleichen Kategorie, wie die "
+"Basismengeneinheit des Produkts, verwenden"
