@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_request_purchase
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-21 21:59+0000\n"
+"PO-Revision-Date: 2017-11-21 21:59+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_purchase_ids
+msgid "Pickings"
+msgstr "Kommissionierungen"
+
+#. module: stock_request_purchase
+#: model:ir.model,name:stock_request_purchase.model_procurement_rule
+msgid "Procurement Rule"
+msgstr "Beschaffungsregel"
+
+#. module: stock_request_purchase
+#: model:ir.ui.view,arch_db:stock_request_purchase.view_stock_request_form
+msgid "Purchase"
+msgstr "Einkauf"
+
+#. module: stock_request_purchase
+#: model:ir.model,name:stock_request_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Bestellposition"
+
+#. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_purchase_line_ids
+msgid "Purchase Order Lines"
+msgstr "Bestellpositionen"
+
+#. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_purchase_count
+msgid "Purchase count"
+msgstr "Bestellhäufigkeit"
+
+#. module: stock_request_purchase
+#: model:ir.model,name:stock_request_purchase.model_stock_request
+msgid "Stock Request"
+msgstr "Bestandsanforderung"
+
+#. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order_line_stock_request_ids
+msgid "Stock Requests"
+msgstr "Bestandsanforderungen"
