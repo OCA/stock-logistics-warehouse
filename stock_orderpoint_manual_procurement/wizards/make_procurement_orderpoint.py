@@ -17,15 +17,9 @@ class MakeProcurementOrderpoint(models.TransientModel):
 
     @api.model
     def _prepare_item(self, orderpoint):
-
-        if orderpoint.procure_uom_id:
-            product_uom = orderpoint.procure_uom_id
-        else:
-            product_uom = orderpoint.product_uom
-
         return {
             'qty': orderpoint.procure_recommended_qty,
-            'uom_id': product_uom.id,
+            'uom_id': orderpoint.product_uom.id,
             'date_planned': orderpoint.procure_recommended_date,
             'orderpoint_id': orderpoint.id,
             'product_id': orderpoint.product_id.id,
@@ -120,9 +114,6 @@ class MakeProcurementOrderpointItem(models.TransientModel):
     @api.onchange('uom_id')
     def onchange_uom_id(self):
         for rec in self:
-            uom = rec.orderpoint_id.procure_uom_id or \
-                rec.orderpoint_id.product_uom
-            rec.qty = rec.uom_id._compute_qty(
-                uom.id,
+            rec.qty = rec.orderpoint_id.product_uom._compute_quantity(
                 rec.orderpoint_id.procure_recommended_qty,
-                rec.uom_id.id)
+                rec.uom_id)

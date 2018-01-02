@@ -13,7 +13,6 @@
     "category": "Warehouse Management",
     "depends": [
         "stock",
-        "stock_orderpoint_uom",
     ],
     "data": [
         "security/stock_orderpoint_manual_procurement_security.xml",
