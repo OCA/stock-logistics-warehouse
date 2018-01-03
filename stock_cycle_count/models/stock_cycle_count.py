@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -13,7 +13,7 @@ class StockCycleCount(models.Model):
     _inherit = 'mail.thread'
 
     @api.multi
-    def _count_inventory_adj(self):
+    def _compute_inventory_adj_count(self):
         for rec in self:
             rec.inventory_adj_count = len(rec.stock_adjustment_ids)
 
@@ -53,7 +53,8 @@ class StockCycleCount(models.Model):
                                            inverse_name='cycle_count_id',
                                            string='Inventory Adjustment',
                                            track_visibility='onchange')
-    inventory_adj_count = fields.Integer(compute='_count_inventory_adj')
+    inventory_adj_count = fields.Integer(
+        compute='_compute_inventory_adj_count')
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', required=True,
         default=_company_get, readonly=True)
@@ -62,8 +63,9 @@ class StockCycleCount(models.Model):
     def do_cancel(self):
         self.write({'state': 'cancelled'})
 
-    @api.model
+    @api.multi
     def _prepare_inventory_adjustment(self):
+        self.ensure_one()
         return {
             'name': 'INV/{}'.format(self.name),
             'cycle_count_id': self.id,
