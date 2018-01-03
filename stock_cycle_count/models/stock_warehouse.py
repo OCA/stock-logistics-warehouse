@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -30,8 +30,9 @@ class StockWarehouse(models.Model):
         help='Number of latest inventories used to calculate location '
              'accuracy')
 
-    @api.one
+    @api.multi
     def get_horizon_date(self):
+        self.ensure_one()
         date = datetime.today()
         delta = timedelta(self.cycle_count_planning_horizon)
         date_horizon = date + delta
@@ -58,60 +59,64 @@ class StockWarehouse(models.Model):
                     self._get_cycle_count_locations_search_domain(loc))
         return locations
 
-    @api.model
+    @api.multi
     def _cycle_count_rules_to_compute(self):
-        rules = self.cycle_count_rule_ids.search([
-            ('rule_type', '!=', 'zero'), ('warehouse_ids', '=', self.id)])
+        self.ensure_one()
+        rules = self.env['stock.cycle.count.rule'].search([
+            ('rule_type', '!=', 'zero'), ('warehouse_ids', 'in', self.ids)])
         return rules
 
-    @api.one
+    @api.multi
     def action_compute_cycle_count_rules(self):
-        ''' Apply the rule in all the sublocations of a given warehouse(s) and
+        """ Apply the rule in all the sublocations of a given warehouse(s) and
         returns a list with required dates for the cycle count of each
-        location '''
-        proposed_cycle_counts = []
-        rules = self._cycle_count_rules_to_compute()
-        for rule in rules:
-            locations = self._search_cycle_count_locations(rule)
-            if locations:
-                proposed_cycle_counts.extend(rule.compute_rule(locations))
-        if proposed_cycle_counts:
-            locations = list(set([d['location'] for d in
-                                  proposed_cycle_counts]))
-            for loc in locations:
-                proposed_for_loc = filter(lambda x: x['location'] == loc,
-                                          proposed_cycle_counts)
-                earliest_date = min([d['date'] for d in proposed_for_loc])
-                cycle_count_proposed = filter(lambda x: x['date'] ==
-                                              earliest_date,
-                                              proposed_for_loc)[0]
-                domain = [('location_id', '=', loc.id),
-                          ('state', 'in', ['draft'])]
-                existing_cycle_counts = self.env['stock.cycle.count'].search(
-                    domain)
-                if existing_cycle_counts:
-                    existing_earliest_date = sorted(
-                        existing_cycle_counts.mapped('date_deadline'))[0]
-                    if cycle_count_proposed['date'] < existing_earliest_date:
-                        cc_to_update = existing_cycle_counts.search([
-                            ('date_deadline', '=', existing_earliest_date)])
-                        cc_to_update.write({
+        location """
+        for rec in self:
+            proposed_cycle_counts = []
+            rules = rec._cycle_count_rules_to_compute()
+            for rule in rules:
+                locations = rec._search_cycle_count_locations(rule)
+                if locations:
+                    proposed_cycle_counts.extend(rule.compute_rule(locations))
+            if proposed_cycle_counts:
+                locations = list(set([d['location'] for d in
+                                      proposed_cycle_counts]))
+                for loc in locations:
+                    proposed_for_loc = filter(lambda x: x['location'] == loc,
+                                              proposed_cycle_counts)
+                    earliest_date = min([d['date'] for d in proposed_for_loc])
+                    cycle_count_proposed = filter(lambda x: x['date'] ==
+                                                  earliest_date,
+                                                  proposed_for_loc)[0]
+                    domain = [('location_id', '=', loc.id),
+                              ('state', 'in', ['draft'])]
+                    existing_cycle_counts = self.env[
+                        'stock.cycle.count'].search(domain)
+                    if existing_cycle_counts:
+                        existing_earliest_date = sorted(
+                            existing_cycle_counts.mapped('date_deadline'))[0]
+                        if (cycle_count_proposed['date'] <
+                                existing_earliest_date):
+                            cc_to_update = existing_cycle_counts.search([
+                                ('date_deadline', '=', existing_earliest_date)
+                            ])
+                            cc_to_update.write({
+                                'date_deadline': cycle_count_proposed['date'],
+                                'cycle_count_rule_id': cycle_count_proposed[
+                                    'rule_type'].id,
+                            })
+                    delta = datetime.strptime(
+                        cycle_count_proposed['date'],
+                        DEFAULT_SERVER_DATETIME_FORMAT) - datetime.today()
+                    if not existing_cycle_counts and \
+                            delta.days < rec.cycle_count_planning_horizon:
+                        self.env['stock.cycle.count'].create({
                             'date_deadline': cycle_count_proposed['date'],
+                            'location_id': cycle_count_proposed['location'].id,
                             'cycle_count_rule_id': cycle_count_proposed[
                                 'rule_type'].id,
+                            'state': 'draft'
                         })
-                delta = datetime.strptime(
-                    cycle_count_proposed['date'],
-                    DEFAULT_SERVER_DATETIME_FORMAT) - datetime.today()
-                if not existing_cycle_counts and \
-                        delta.days < self.cycle_count_planning_horizon:
-                    self.env['stock.cycle.count'].create({
-                        'date_deadline': cycle_count_proposed['date'],
-                        'location_id': cycle_count_proposed['location'].id,
-                        'cycle_count_rule_id': cycle_count_proposed[
-                            'rule_type'].id,
-                        'state': 'draft'
-                    })
 
     @api.model
     def cron_cycle_count(self):
