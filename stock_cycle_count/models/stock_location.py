@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -20,59 +20,67 @@ except (ImportError, IOError) as err:
 class StockLocation(models.Model):
     _inherit = 'stock.location'
 
-    @api.one
+    @api.multi
     def _compute_loc_accuracy(self):
-        history = self.env['stock.inventory'].search([
-            ('location_id', '=', self.id), ('state', '=', 'done')])
-        history = history.sorted(key=lambda r: r.write_date, reverse=True)
-        if history:
-            wh = self.get_warehouse()
-            if len(history) > wh.counts_for_accuracy_qty:
-                self.loc_accuracy = mean(history[:wh.counts_for_accuracy_qty].
-                                         mapped('inventory_accuracy'))
-            else:
-                self.loc_accuracy = mean(history.mapped('inventory_accuracy'))
+        for rec in self:
+            history = self.env['stock.inventory'].search([
+                ('location_id', '=', rec.id), ('state', '=', 'done')])
+            history = history.sorted(key=lambda r: r.write_date, reverse=True)
+            if history:
+                wh = rec.get_warehouse()
+                if len(history) > wh.counts_for_accuracy_qty:
+                    rec.loc_accuracy = mean(
+                        history[:wh.counts_for_accuracy_qty].mapped(
+                            'inventory_accuracy'))
+                else:
+                    rec.loc_accuracy = mean(
+                        history.mapped('inventory_accuracy'))
 
     zero_confirmation_disabled = fields.Boolean(
         string='Disable Zero Confirmations',
-        default=False,
         help='Define whether this location will trigger a zero-confirmation '
              'validation when a rule for its warehouse is defined to perform '
-             'zero-confirmations.')
+             'zero-confirmations.',
+    )
     cycle_count_disabled = fields.Boolean(
         string='Exclude from Cycle Count',
-        default=False,
-        help='Define whether the location is going to be cycle counted.')
-    qty_variance_inventory_threshold = fields.Float('Acceptable Inventory '
-                                                    'Quantity Variance '
-                                                    'Threshold')
+        help='Define whether the location is going to be cycle counted.',
+    )
+    qty_variance_inventory_threshold = fields.Float(
+        string='Acceptable Inventory Quantity Variance Threshold',
+    )
     loc_accuracy = fields.Float(
         string='Inventory Accuracy', compute='_compute_loc_accuracy',
-        digits=(3, 2))
+        digits=(3, 2),
+    )
 
-    @api.model
+    @api.multi
     def _get_zero_confirmation_domain(self):
+        self.ensure_one()
         domain = [('location_id', '=', self.id)]
         return domain
 
-    @api.one
+    @api.multi
     def check_zero_confirmation(self):
-        if not self.zero_confirmation_disabled:
-            wh = self.get_warehouse()
-            rule_model = self.env['stock.cycle.count.rule']
-            zero_rule = rule_model.search([
-                ('rule_type', '=', 'zero'),
-                ('warehouse_ids', '=', wh.id)])
-            if zero_rule:
-                quants = self.env['stock.quant'].search(
-                    self._get_zero_confirmation_domain())
-                if not quants:
-                    self.create_zero_confirmation_cycle_count()
+        for rec in self:
+            if not rec.zero_confirmation_disabled:
+                wh = rec.get_warehouse()
+                rule_model = self.env['stock.cycle.count.rule']
+                zero_rule = rule_model.search([
+                    ('rule_type', '=', 'zero'),
+                    ('warehouse_ids', '=', wh.id)])
+                if zero_rule:
+                    quants = self.env['stock.quant'].search(
+                        rec._get_zero_confirmation_domain())
+                    if not quants:
+                        rec.create_zero_confirmation_cycle_count()
 
+    @api.multi
     def create_zero_confirmation_cycle_count(self):
+        self.ensure_one()
         date = datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         wh_id = self.get_warehouse().id
-        date_horizon = self.get_warehouse().get_horizon_date()[0].strftime(
+        date_horizon = self.get_warehouse().get_horizon_date().strftime(
             DEFAULT_SERVER_DATETIME_FORMAT)
         counts_planned = self.env['stock.cycle.count'].search([
             ('date_deadline', '<', date_horizon), ('state', '=', 'draft'),
