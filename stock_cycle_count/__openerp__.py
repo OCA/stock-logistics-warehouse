@@ -6,7 +6,7 @@
     "name": "Stock Cycle Count",
     "summary": "Adds the capability to schedule cycle counts in a "
                "warehouse through different rules defined by the user",
-    "version": "9.0.1.1.0",
+    "version": "9.0.1.2.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
@@ -26,7 +26,10 @@
         'views/stock_location_view.xml',
         'data/cycle_count_sequence.xml',
         'data/cycle_count_ir_cron.xml',
-        'security/ir.model.access.csv'],
+        'reports/stock_location_accuracy_report.xml',
+        'reports/stock_cycle_count_report.xml',
+        'security/ir.model.access.csv',
+    ],
     "license": "AGPL-3",
     'installable': True,
     'application': False,
