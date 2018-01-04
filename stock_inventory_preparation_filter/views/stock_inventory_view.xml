@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
+<odoo>
+
         <record model="ir.ui.view" id="stock_inventory_form">
             <field name="name">stock.inventory.form</field>
             <field name="model">stock.inventory</field>
@@ -10,9 +10,9 @@
                     <notebook position="attributes">
                         <attribute name="attrs" />
                     </notebook>
-                    <page string="Inventory Details" position="attributes">
+                    <xpath expr="//button[@name='reset_real_qty']/ancestor::*[position()=1]" position="attributes">
                         <attribute name="attrs">{'invisible':[('state','=','draft')]}</attribute>
-                    </page>
+                    </xpath>
                     <notebook position="before">
                         <group>
                             <field name="categ_ids"
@@ -41,5 +41,4 @@
             </field>
         </record>
 
-    </data>
-</openerp>
+</odoo>
