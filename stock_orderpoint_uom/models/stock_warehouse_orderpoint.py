@@ -13,8 +13,7 @@ class Orderpoint(models.Model):
     procure_uom_id = fields.Many2one(comodel_name='product.uom',
                                      string="Procurement UoM")
 
-    @api.constrains('product_id', 'product_id.product_tmpl_id.uom_id',
-                    'procure_uom_id')
+    @api.constrains('product_id', 'procure_uom_id')
     def _check_procure_uom(self):
         if any(orderpoint.product_uom and
                 orderpoint.procure_uom_id and
