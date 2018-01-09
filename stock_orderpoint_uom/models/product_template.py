@@ -16,7 +16,7 @@ class ProductTemplate(models.Model):
             orderpoint = self.env['stock.warehouse.orderpoint'].search([
                 ('procure_uom_id.category_id', '!=',
                  rec.uom_id.category_id.id),
-                ('product_id.product_tmpl_id', '=', rec.id)], limit=1)
+                ('product_id', 'in', rec.product_variant_ids.ids)], limit=1)
             if orderpoint:
                 raise UserError(
                     _("At least one reordering rule for this product has a "
