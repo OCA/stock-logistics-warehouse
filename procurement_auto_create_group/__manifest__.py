@@ -3,7 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Procurement Auto Create Group",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
+    "license": "AGPL-3",
+    "summary": "Allows to configure the system to propose automatically new "
+               "procurement groups in procurement orders.",
     "depends": [
         "procurement",
     ],
@@ -15,5 +18,4 @@
         'views/procurement_view.xml',
     ],
     "installable": True,
-    "license": "AGPL-3",
 }
