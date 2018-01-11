@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_category_property_form" model="ir.ui.view">
+            <field name="name">product.category.stock.property.form.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id"
+                   ref="stock_account.view_category_property_form"/>
+            <field name="arch" type="xml">
+                <group name="account_property" position="inside">
+                    <field name="property_inventory_revaluation_increase_account_categ"/>
+                    <field name="property_inventory_revaluation_decrease_account_categ"/>
+                </group>
+            </field>
+        </record>
+
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view"
+            id="stock_inventory_revaluation_get_quant_form">
+      <field name="name">stock.inventory.revaluation.get.quant.form</field>
+      <field name="model">stock.inventory.revaluation.get.quant</field>
+      <field name="arch" type="xml">
+        <form string="Get Quants">
+          <group colspan="2" col="2">
+            <field name="date_from"/>
+            <field name="date_to"/>
+          </group>
+          <footer>
+            <button name="process" string="Get Quants" type="object"
+                    class="oe_highlight"/>
+            or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_stock_inventory_revaluation_get_quant"
+            model="ir.actions.act_window">
+      <field name="name">Get Quants for Inventory Revaluation</field>
+      <field name="res_model">stock.inventory.revaluation.get.quant</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id"
+             ref="stock_inventory_revaluation_get_quant_form"/>
+      <field name="target">new</field>
+    </record>
+
+</odoo>

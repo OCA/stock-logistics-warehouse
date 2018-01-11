@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_stock_inventory_revaluation_form" model="ir.ui.view">
+            <field name="name">stock.inventory.revaluation.form</field>
+            <field name="model">stock.inventory.revaluation</field>
+            <field name="arch" type="xml">
+                <form string="Stock Inventory Revaluation">
+                    <header>
+                        <button name="button_draft"
+                                states="cancel"
+                                string="Back to Draft"
+                                type="object"/>
+                        <button name="button_post" states="draft"
+                                string="Post" type="object"
+                                class="oe_highlight"/>
+                        <button name="button_cancel" states="draft,posted"
+                                string="Cancel" type="object"
+                                class="oe_highlight"
+                                attrs="{'invisible':[('cost_method','in',['average','standard'])]}"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,done,cancel"
+                               statusbar_colors='{"done":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <div class="oe_edit_only">
+                            <label for="name" class="oe_inline"/>
+                        </div>
+                        <h1>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                        <group name="main">
+                            <group name="basic">
+                                <field name="document_date"/>
+                                <field name="post_date"/>
+                                <field name="user_id"/>
+                                <field name="revaluation_type"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group name="accounting">
+                                <field name="journal_id"/>
+                            </group>
+                            <group name="remarks" colspan="2">
+                                <field name="remarks"/>
+                            </group>
+                        </group>
+                            <group>
+                                <group name="product">
+                                    <field name="product_id"/>
+                                    <field name="product_template_id" readonly="1"/>
+                                    <field name="uom_id"/>
+                                    <field name="cost_method"/>
+                                    <field name="qty_available"/>
+                                </group>
+                                <group name="unit_cost">
+                                    <field name="old_cost"
+                                           attrs="{'invisible':['|', '|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real'), ('state', '!=', 'posted')]}"/>
+                                    <field name="current_cost"/>
+                                    <field name="new_cost"
+                                           attrs="{'invisible':['|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real')]}"/>
+
+                                </group>
+                                <group name="value">
+                                    <field name="old_value"
+                                           attrs="{'invisible':['|', '|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real'), ('state', '!=', 'posted')]}"/>
+                                    <field name="current_value"/>
+                                    <field name="new_value"
+                                           attrs="{'invisible':['|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real')]}"/>
+                                </group>
+                                <group name="accounting">
+                                    <field name="increase_account_id"/>
+                                    <field name="decrease_account_id"/>
+                                </group>
+                            </group>
+                            <notebook>
+                                <page name="quant" string="Quants" attrs="{'invisible':[('cost_method','!=', 'real')]}">
+                                    <button
+                                            name="%(action_stock_inventory_revaluation_get_quant)d"
+                                            string="Get Quants" type="action" class="oe_highlight"
+                                            states="draft"/>
+                                    <field name="reval_quant_ids"
+                                           nolabel="1">
+                                        <tree name="quants"
+                                              string="Quants"
+                                              create="false"
+                                              delete="false" editable="bottom">
+                                            <field name="quant_id"/>
+                                            <field name="in_date"/>
+                                            <field name="product_id"/>
+                                            <field name="location_id"/>
+                                            <field name="qty"/>
+                                            <field name="current_cost"/>
+                                            <field name="new_cost"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page name="account_moves"
+                                      string="Journal Entries">
+                                    <field name="account_move_ids" nolabel="1"/>
+                                </page>
+                            </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_stock_inventory_revaluation_tree"
+                model="ir.ui.view">
+            <field name="name">stock.inventory.revaluation.tree</field>
+            <field name="model">stock.inventory.revaluation</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Inventory Revaluation">
+                    <field name="name"/>
+                    <field name="revaluation_type"/>
+                    <field name="document_date"/>
+                    <field name="user_id"/>
+                    <field name="product_template_id"/>
+                    <field name="uom_id"/>
+                    <field name="cost_method"/>
+                    <field name="current_cost"/>
+                    <field name="new_cost"
+                           attrs="{'invisible':['|', ('revaluation_type', '!=', 'price_change'), ('cost_method','=', 'real_price')]}"/>
+                    <field name="current_value"/>
+                    <field name="new_value"
+                           attrs="{'invisible':['|', ('revaluation_type', '!=', 'inventory_value'), ('cost_method','=', 'real_price')]}"/>
+                    <field name="qty_available"/>
+                    <field name="increase_account_id"/>
+                    <field name="decrease_account_id"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_inventory_revaluation_quant_tree"
+                model="ir.ui.view">
+            <field name="name">stock.inventory.revaluation.quant.tree</field>
+            <field name="model">stock.inventory.revaluation.quant</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Inventory Revaluation Line Quants">
+                    <field name="quant_id"/>
+                    <field name="in_date"/>
+                    <field name="product_id"/>
+                    <field name="location_id"/>
+                    <field name="qty"/>
+                    <field name="current_cost"/>
+                    <field name="new_cost"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_inventory_revaluation_quant_form"
+                model="ir.ui.view">
+            <field name="name">stock.inventory.revaluation.quant.form</field>
+            <field name="model">stock.inventory.revaluation.quant</field>
+            <field name="arch" type="xml">
+                <form string="Stock Inventory Revaluation Quants">
+                    <field name="quant_id"/>
+                    <field name="product_id"/>
+                    <field name="location_id"/>
+                    <field name="qty"/>
+                    <field name="current_cost"/>
+                    <field name="new_cost"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_stock_inventory_revaluation_search" model="ir.ui.view">
+            <field name="name">stock.inventory.revaluation.search</field>
+            <field name="model">stock.inventory.revaluation</field>
+            <field name="arch" type="xml">
+                <search string="Search Stock Inventory Revaluation">
+                    <field name="name"/>
+                    <field name="product_template_id"/>
+                    <field name="revaluation_type"/>
+                    <field name="document_date"/>
+                    <field name="post_date"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_stock_inventory_revaluation_tree" model="ir.actions.act_window">
+            <field name="name">Inventory Revaluation</field>
+            <field name="res_model">stock.inventory.revaluation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to start a new Stock Inventory Revaluation.
+              </p>
+            </field>
+        </record>
+
+       <menuitem action="action_stock_inventory_revaluation_tree"
+                 id="menu_action_stock_inventory_revaluation_tree"
+                 parent="stock.menu_stock_inventory_control"
+                 groups="stock_account.group_inventory_valuation"/>
+
+</odoo>
