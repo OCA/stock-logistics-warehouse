@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2017-11-30 03:53+0000\n"
+"POT-Creation-Date: 2018-01-16 14:36+0000\n"
+"PO-Revision-Date: 2018-01-16 14:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgstr "Produto"
 #. module: stock_orderpoint_automatic_creation
 #: model:ir.model,name:stock_orderpoint_automatic_creation.model_product_category
 msgid "Product Category"
-msgstr ""
+msgstr "Categoria do produto"
 
 #. module: stock_orderpoint_automatic_creation
 #: model:ir.model,name:stock_orderpoint_automatic_creation.model_product_template

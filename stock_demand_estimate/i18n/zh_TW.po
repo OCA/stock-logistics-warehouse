@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-05 03:49+0000\n"
-"PO-Revision-Date: 2018-01-05 03:49+0000\n"
+"POT-Creation-Date: 2018-01-16 14:35+0000\n"
+"PO-Revision-Date: 2018-01-16 14:35+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/oca/teams/23907/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_demand_estimate_wizard_form
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_stock_demand_estimate_sheet_form
 msgid "Cancel"
-msgstr ""
+msgstr "刪除"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_company_id
@@ -286,7 +286,7 @@ msgstr ""
 #. module: stock_demand_estimate
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_demand_estimate_wizard_form
 msgid "or"
-msgstr ""
+msgstr "或"
 
 #. module: stock_demand_estimate
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_demand_estimate_wizard_form
