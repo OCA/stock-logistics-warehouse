@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 02:58+0000\n"
-"PO-Revision-Date: 2017-07-28 02:58+0000\n"
+"POT-Creation-Date: 2018-01-16 14:36+0000\n"
+"PO-Revision-Date: 2018-01-16 14:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -356,7 +356,7 @@ msgstr "Product"
 #: model:ir.model,name:stock_reserve.model_product_template
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_tmpl_id
 msgid "Product Template"
-msgstr ""
+msgstr "Productsjabloon"
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
@@ -606,6 +606,11 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_id
 msgid "Transfer Reference"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_type_code
+msgid "Type of Operation"
 msgstr ""
 
 #. module: stock_reserve
