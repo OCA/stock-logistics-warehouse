@@ -15,6 +15,7 @@
     'depends': [
         'procurement',
         'web_widget_timepicker',
+        'web_timeline',
         'stock',
         'resource',
         'purchase'
@@ -27,6 +28,7 @@
         'security/procurement_calendar.xml',
         'views/procurement_order.xml',
         'views/res_partner.xml',
+        'views/product_template.xml',
         'views/procurement_calendar.xml',
         'views/procurement_calendar_attendance.xml',
     ],

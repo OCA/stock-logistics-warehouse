@@ -43,24 +43,60 @@
         <field name="model">procurement.calendar.attendance</field>
         <field name="arch" type="xml">
             <search>
+                <filter name="product_dependent" string="Product Dependant" domain="[('product_dependant', '=' True)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_calendar_id" string="Calendar" context="{'group_by':'calendar_id'}"/>
+                </group>
             </search>
         </field>
     </record>
 
     <record model="ir.ui.view" id="procurement_calendar_attendance_tree_view">
-        <field name="name">procurement.calendar.attendance.tree (in procurement_calendar)</field>
+        <field name="name">procurement.calendar.attendance.tree (in stock_procurement_calendar)</field>
         <field name="model">procurement.calendar.attendance</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="calendar_id"/>
+                <field name="calendar_id" invisible="1"/>
+                <field name="display_name"/>
+                <field name="next_start_date"/>
+                <field name="next_end_date"/>
             </tree>
         </field>
     </record>
 
+    <record id="procurement_calendar_attendance_timeline_view" model="ir.ui.view">
+            <field name="model">procurement.calendar.attendance</field>
+            <field name="type">timeline</field>
+            <field name="arch" type="xml">
+                <timeline date_start="next_start_date"
+                          date_stop="next_end_date"
+                          string="attendances"
+                          default_group_by="calendar_id"
+                          event_open_popup="true"
+                          zoomKey="ctrlKey"
+                          mode="week"
+                          >
+                </timeline>
+            </field>
+        </record>
+
+    <record id="procurement_calendar_attendance_calendar_view" model="ir.ui.view">
+            <field name="name">procurement.calendar.attendance.calendar (in stock_procurement_calendar)</field>
+            <field name="model">procurement.calendar.attendance</field>
+            <field name="arch" type="xml">
+                <calendar string="Procurement Calendar Attendance" color="calendar_id"
+                          date_start="next_start_date" date_stop="next_end_date"
+                          mode="month"
+                          quick_add="False">
+                    <field name="display_name"/>
+                </calendar>
+            </field>
+        </record>
+
     <record model="ir.actions.act_window" id="procurement_calendar_attendance_act_window">
         <field name="name">Procurement Calendar Attendances</field>
         <field name="res_model">procurement.calendar.attendance</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,calendar,timeline</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

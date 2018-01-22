@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record  id="res_partner_form_view" model="ir.ui.view">
         <field name="name">res.partner.form.view (in stock_procurement_calendar)</field>
