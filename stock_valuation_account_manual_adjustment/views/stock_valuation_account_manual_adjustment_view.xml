@@ -1,114 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
 
-        <record id="view_stock_valuation_account_manual_adjustment_form" model="ir.ui.view">
-            <field name="name">stock.valuation.account.manual.adjustment.form</field>
-            <field name="model">stock.valuation.account.manual.adjustment</field>
-            <field name="arch" type="xml">
-                <form string="Stock Valuation Account Manual Adjustment">
-                    <header>
-                        <button name="button_post" states="draft"
-                                string="Post" type="object"
-                                class="oe_highlight"/>
-                        <field name="state" widget="statusbar"
-                               statusbar_visible="draft,done,cancel"
-                               statusbar_colors='{"done":"blue"}'/>
-                    </header>
-                    <sheet>
-                        <div class="oe_edit_only">
-                            <label for="name" class="oe_inline"/>
-                        </div>
-                        <h1>
-                            <field name="name" class="oe_inline"/>
-                        </h1>
-                        <group name="main">
-                            <group name="basic">
-                                <field name="document_date"/>
-                                <field name="post_date"/>
-                                <field name="user_id"/>
-                                <field name="company_id" groups="base.group_multi_company"/>
+    <record id="view_stock_valuation_account_manual_adjustment_form" model="ir.ui.view">
+        <field name="name">stock.valuation.account.manual.adjustment.form</field>
+        <field name="model">stock.valuation.account.manual.adjustment</field>
+        <field name="arch" type="xml">
+            <form string="Stock Valuation Account Manual Adjustment">
+                <header>
+                    <button name="button_post" states="draft"
+                            string="Post" type="object"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,done,cancel"
+                           statusbar_colors='{"done":"blue"}'/>
+                </header>
+                <sheet>
+                    <div class="oe_edit_only">
+                        <label for="name" class="oe_inline"/>
+                    </div>
+                    <h1>
+                        <field name="name" class="oe_inline"/>
+                    </h1>
+                    <group name="main">
+                        <group name="basic">
+                            <field name="document_date"/>
+                            <field name="post_date"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                        <group>
+                            <group name="product">
+                                <field name="product_id"/>
+                            </group>
+                            <group name="valuation">
+                                <field name="inventory_value"/>
+                                <field name="accounting_value"/>
+                                <field name="valuation_discrepancy"/>
+                                <field name="amount"/>
+                            </group>
+                            <group name="accounting">
+                                <field name="increase_account_id"/>
+                                <field name="decrease_account_id"/>
                             </group>
                         </group>
-                            <group>
-                                <group name="product">
-                                    <field name="product_id"/>
-                                </group>
-                                <group name="valuation">
-                                    <field name="inventory_value"/>
-                                    <field name="accounting_value"/>
-                                    <field name="valuation_discrepancy"/>
-                                    <field name="amount"/>
-                                </group>
-                                <group name="accounting">
-                                    <field name="increase_account_id"/>
-                                    <field name="decrease_account_id"/>
-                                </group>
-                            </group>
-                            <group name="remarks" colspan="2">
-                                <field name="remarks"/>
-                            </group>
-                            <notebook>
-                                <page name="account_moves"
-                                      string="Journal Entries">
-                                    <field name="account_move_ids"
-                                           nolabel="1"/>
-                                </page>
-                            </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                        <group name="remarks" colspan="2">
+                            <field name="remarks"/>
+                        </group>
+                        <notebook>
+                            <page name="account_moves"
+                                  string="Journal Entries">
+                                <field name="account_move_ids"
+                                       nolabel="1"/>
+                            </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <record id="view_stock_valuation_account_manual_adjustment_tree"
-                model="ir.ui.view">
-            <field name="name">stock.valuation.account.manual.adjustment.tree</field>
-            <field name="model">stock.valuation.account.manual.adjustment</field>
-            <field name="arch" type="xml">
-                <tree string="Stock Valuation Account Manual Adjustment">
-                    <field name="name"/>
-                    <field name="document_date"/>
-                    <field name="user_id"/>
-                    <field name="post_date"/>
-                    <field name="product_id"/>
-                    <field name="amount"/>
-                    <field name="increase_account_id"/>
-                    <field name="decrease_account_id"/>
-                    <field name="state"/>
-                    <field name="company_id" groups="base.group_multi_company"/>
-                </tree>
-            </field>
-        </record>
+    <record id="view_stock_valuation_account_manual_adjustment_tree"
+            model="ir.ui.view">
+        <field name="name">stock.valuation.account.manual.adjustment.tree</field>
+        <field name="model">stock.valuation.account.manual.adjustment</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Valuation Account Manual Adjustment">
+                <field name="name"/>
+                <field name="document_date"/>
+                <field name="user_id"/>
+                <field name="post_date"/>
+                <field name="product_id"/>
+                <field name="amount"/>
+                <field name="increase_account_id"/>
+                <field name="decrease_account_id"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
 
-        <record id="view_stock_valuation_account_manual_adjustment_search" model="ir.ui.view">
-            <field name="name">stock.valuation.account.manual.adjustment.search</field>
-            <field name="model">stock.valuation.account.manual.adjustment</field>
-            <field name="arch" type="xml">
-                <search string="Stock Valuation Account Manual Adjustment">
-                    <field name="name"/>
-                    <field name="product_id"/>
-                    <field name="document_date"/>
-                    <field name="post_date"/>
-                    <field name="state"/>
-                    <field name="company_id" groups="base.group_multi_company"/>
-                </search>
-            </field>
-        </record>
+    <record id="view_stock_valuation_account_manual_adjustment_search" model="ir.ui.view">
+        <field name="name">stock.valuation.account.manual.adjustment.search</field>
+        <field name="model">stock.valuation.account.manual.adjustment</field>
+        <field name="arch" type="xml">
+            <search string="Stock Valuation Account Manual Adjustment">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="document_date"/>
+                <field name="post_date"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </search>
+        </field>
+    </record>
 
-        <record id="action_stock_valuation_account_manual_adjustment_tree" model="ir.actions.act_window">
-            <field name="name">Stock Valuation Account Manual Adjustment</field>
-            <field name="res_model">stock.valuation.account.manual.adjustment</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-              <p class="oe_view_nocontent_create">
-                Click to start a new Stock Valuation Account Manual Adjustment
-              </p>
-            </field>
-        </record>
+    <record id="action_stock_valuation_account_manual_adjustment_tree" model="ir.actions.act_window">
+        <field name="name">Inventory Valuation Manual Adjustments</field>
+        <field name="res_model">stock.valuation.account.manual.adjustment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to start a new Stock Valuation Account Manual Adjustment
+          </p>
+        </field>
+    </record>
 
-       <menuitem action="action_stock_valuation_account_manual_adjustment_tree"
-                 id="menu_action_stock_valuation_account_manual_adjustment_tree"
-                 parent="stock.menu_stock_inventory_control"
-                 groups="group_stock_valuation_account_manual_adjustment"/>
+   <menuitem action="action_stock_valuation_account_manual_adjustment_tree"
+             id="menu_action_stock_valuation_account_manual_adjustment_tree"
+             parent="stock.menu_stock_inventory_control"
+             groups="group_stock_valuation_account_manual_adjustment"
+             sequence="12"/>
 
-</openerp>
+</odoo>

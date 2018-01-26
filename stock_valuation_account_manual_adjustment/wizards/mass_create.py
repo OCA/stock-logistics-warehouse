@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-18 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, exceptions, fields, models, _
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class StockValuationAccountMassAdjust(models.TransientModel):
@@ -11,22 +12,28 @@ class StockValuationAccountMassAdjust(models.TransientModel):
 
     @api.model
     def _default_journal(self):
-        res = self.env['account.journal'].search([('type', '=', 'general')])
-        return res and res[0] or False
+        return self.env['account.journal'].search(
+            [('type', '=', 'general')], limit=1)
 
     increase_account_id = fields.Many2one(
         comodel_name='account.account',
-        string='Valuation Increase Contra-Account')
+        string='Valuation Increase Contra-Account',
+    )
     decrease_account_id = fields.Many2one(
         comodel_name='account.account',
-        string='Valuation Decrease Contra-Account')
-    journal_id = fields.Many2one('account.journal', 'Journal',
-                                 default=_default_journal)
-    remarks = fields.Text('Remarks', help="This text is copied to the "
-                                          "journal entry.", required=True)
+        string='Valuation Decrease Contra-Account',
+    )
+    journal_id = fields.Many2one(
+        comodel_name='account.journal',
+        string='Journal', default=_default_journal,
+    )
+    remarks = fields.Text(
+        string='Remarks', required=True,
+        help="This text is copied to the journal entry.",
+    )
 
-    @api.model
     def _prepare_data(self, product):
+        self.ensure_one()
         if self.increase_account_id:
             increase_account = self.increase_account_id
         else:
@@ -52,18 +59,17 @@ class StockValuationAccountMassAdjust(models.TransientModel):
 
     @api.multi
     def process(self):
-        context = dict(self._context) or {}
+        context = self.env.context
         active_model = self.env.context['active_model']
         if active_model == 'product.product':
             products = self.env['product.product'].browse(
                 context.get('active_ids', []))
         else:
-            raise exceptions.Warning(
-                _('Incorrect model.'))
+            raise UserError(_('Incorrect model.'))
 
         for product in products:
             if product.valuation != 'real_time':
-                raise exceptions.Warning(
+                raise UserError(
                     _('Product %s must have real time valuation') %
                     product.name)
 
