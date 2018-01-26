@@ -2,7 +2,8 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
+from odoo import fields
 import time
 
 
@@ -136,7 +137,7 @@ class TestProductInventoryAccountReconcile(TransactionCase):
         return product_qty
 
     def _create_account_move(self, amount):
-        date_move = time.strftime('%Y-%m-%d')
+        date_move = fields.Date.today()
 
         debit_data = [(0, 0, {
             'name': self.product_average_1.name,

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data noupdate="1">
+<odoo noupdate="1">
 
     <record model="ir.rule" id="stock_valuation_account_manual_adjustment_comp_rule">
         <field name="name">Stock Inventory Revaluation multi-company</field>
@@ -16,5 +15,4 @@
         <field name="category_id" ref="base.module_category_hidden"/>
     </record>
 
-</data>
-</openerp>
+</odoo>
