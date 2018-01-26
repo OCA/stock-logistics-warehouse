@@ -1,54 +1,58 @@
 <?xml version="1.0"?>
-<openerp>
+<odoo>
 
-        <record model="ir.ui.view"
-                id="view_product_inventory_valuation_tree">
-            <field name="name">product.product.inventory.valuation.tree</field>
-            <field name="model">product.product</field>
-            <field name="priority">50</field>
-            <field name="arch" type="xml">
-                <tree string="Product Inventory Valuation">
-                    <field name="default_code"/>
-                    <field name="name"/>
-                    <field name="categ_id"/>
-                    <field name="uom_id" string="UoM"/>
-                    <field name="inventory_value"/>
-                    <field name="accounting_value"/>
-                    <field name="valuation_discrepancy"/>
-                </tree>
-          </field>
-        </record>
+    <record model="ir.ui.view"
+            id="view_product_inventory_valuation_tree">
+        <field name="name">product.product.inventory.valuation.tree</field>
+        <field name="model">product.product</field>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <tree string="Product Inventory Valuation">
+                <field name="default_code"/>
+                <field name="name"/>
+                <field name="categ_id"/>
+                <field name="uom_id" string="UoM"/>
+                <field name="inventory_value"/>
+                <field name="accounting_value"/>
+                <field name="valuation_discrepancy"/>
+            </tree>
+      </field>
+    </record>
 
-        <record id="product_search_form_view" model="ir.ui.view">
-            <field name="name">product.product.search</field>
-            <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_search_form_view"/>
-            <field name="arch" type="xml">
-                <field name="name" position="after">
-                    <field name="inventory_value"/>
-                    <field name="accounting_value"/>
-                    <field name="valuation_discrepancy"/>
-                </field>
+    <record id="product_search_form_view" model="ir.ui.view">
+        <field name="name">product.product.search</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="inventory_value"/>
+                <field name="accounting_value"/>
+                <field name="valuation_discrepancy"/>
             </field>
-        </record>
+            <filter name="inactive" position="after">
+                <separator/>
+                <filter string="Valuation Discrepancy" name="valuation_discrepancy_not_null"
+                        domain="[('valuation_discrepancy', '!=', 0.0)]"/>
+            </filter>
+        </field>
+    </record>
 
-        <record model="ir.actions.act_window"
-                id="action_product_inventory_valuation">
-            <field name="name">Perpetual Inventory Valuation</field>
-            <field name="res_model">product.product</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[('categ_id.property_valuation', '=', 'real_time')]</field>
-            <field name="view_id" ref="view_product_inventory_valuation_tree"/>
-            <field name="search_view_id" ref="product_search_form_view"/>
-        </record>
+    <record model="ir.actions.act_window"
+            id="action_product_inventory_valuation">
+        <field name="name">Perpetual Inventory Valuation</field>
+        <field name="res_model">product.product</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('categ_id.property_valuation', '=', 'real_time')]</field>
+        <field name="view_id" ref="view_product_inventory_valuation_tree"/>
+        <field name="search_view_id" ref="product_search_form_view"/>
+    </record>
 
-        <menuitem name="Perpetual Inventory Valuation"
-                  parent="stock.menu_stock_inventory_control"
-                  action="action_product_inventory_valuation"
-                  id="menu_action_product_inventory_valuation"
-                  groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment"/>
+    <menuitem name="Perpetual Inventory Valuation"
+              parent="stock.menu_stock_inventory_control"
+              action="action_product_inventory_valuation"
+              id="menu_action_product_inventory_valuation"
+              groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment"
+              sequence="11"/>
 
-
-</openerp>
-
+</odoo>

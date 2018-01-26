@@ -21,7 +21,6 @@ def pre_init_hook(cr):
 
 
 def set_stock_valuation_account_manual_adjustment_in_account_move(cr):
-
     cr.execute("""SELECT column_name
     FROM information_schema.columns
     WHERE table_name='account_move' AND
