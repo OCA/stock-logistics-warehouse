@@ -37,12 +37,13 @@ addon | version | summary
 [stock_inventory_chatter](stock_inventory_chatter/) | 10.0.1.0.0 | Log changes being done in Inventory Adjustments
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 10.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 10.0.1.0.0 | Allow to perform inventories of a location without including its child locations.
-[stock_inventory_lockdown](stock_inventory_lockdown/) | 10.0.1.0.0 | Lock down stock locations during inventories.
+[stock_inventory_lockdown](stock_inventory_lockdown/) | 10.0.1.0.1 | Lock down stock locations during inventories.
 [stock_inventory_revaluation](stock_inventory_revaluation/) | 10.0.1.0.0 | Introduces inventory revaluation as single point to change the valuation of products.
 [stock_inventory_verification_request](stock_inventory_verification_request/) | 10.0.1.0.0 | Adds the capability to request a Slot Verification when a inventory is Pending to Approve
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 10.0.1.0.0 | Add a MTS+MTO route
 [stock_operation_package_mandatory](stock_operation_package_mandatory/) | 10.0.1.0.0 | Makes destination package mandatory on stock pack operations
 [stock_orderpoint_automatic_creation](stock_orderpoint_automatic_creation/) | 10.0.1.0.0 | Stock Orderpoint Automatic Creation
+[stock_orderpoint_manual_procurement](stock_orderpoint_manual_procurement/) | 10.0.1.0.0 | Allows to create procurement orders from orderpoints instead of relying only on the scheduler.
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 10.0.1.0.0 | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_putaway_product](stock_putaway_product/) | 10.0.1.0.1 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 10.0.1.0.0 | Stock - Manual Quant Assignment
