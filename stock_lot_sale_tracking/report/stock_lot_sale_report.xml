@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="paperformat_a4_landscape" model="report.paperformat">
+        <field name="name">European A4 - Landscape</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">4</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <template id="report_lot_sale_tracking_document">
+        <t t-call="report.internal_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <h2>
+                    <span t-field="doc.name"/>
+                </h2>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Sale Order</th>
+                            <th>Shipped to</th>
+                            <th>Product</th>
+                            <th>Shipment Date</th>
+                            <th class="text-right">Quantity</th>
+                        </tr>
+                   </thead>
+                   <tbody>
+                        <t t-foreach="doc.sale_tracking_ids" t-as="l">
+                            <tr>
+                                <td><span t-field="l.order_id"/></td>
+                                <td><span t-field="l.order_id.partner_shipping_id"/></td>
+                                <td><span t-field="l.product_id"/></td>
+                                <td><span t-field="l.date"/></td>
+                                <td class="text-right">
+                                    <span t-field="l.product_uom_qty"/>
+                                    <span t-field="l.product_uom" groups="product.group_uom"/>
+                                </td>
+                            </tr>
+                        </t>
+                   </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_lot_sale_tracking">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="stock_lot_sale_tracking.report_lot_sale_tracking_document"/>
+            </t>
+        </t>
+    </template>
+
+    <report
+            id="report_stock_lot_sale_tracking"
+            string="Deliveries Tracking"
+            model="stock.production.lot"
+            report_type="qweb-html"
+            file="stock_lot_sale_tracking.report_lot_sale_tracking"
+            name="stock_lot_sale_tracking.report_lot_sale_tracking"/>
+
+    <record model="ir.actions.report.xml" id="report_stock_lot_sale_tracking">
+        <field name="paperformat_id"
+               ref="stock_lot_sale_tracking.paperformat_a4_landscape"/>
+    </record>
+</odoo>

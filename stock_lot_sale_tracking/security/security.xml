@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.model.access" id="stock_lot_tracking_access_everybody">
+        <field name="name">Stock Lot Sale Tracking report: access everybody</field>
+        <field name="model_id" ref="model_stock_lot_sale_tracking_report"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>
