@@ -1,61 +1,64 @@
-# -*- coding: utf-8 -*-
+# Copyright 2018 Camptocamp SA
 # Copyright 2016 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestStockWarehouseOrderpoint(TransactionCase):
-
-    def setUp(self):
-        super(TestStockWarehouseOrderpoint, self).setUp()
+class TestStockWarehouseOrderpoint(SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         # Get required Model
-        self.reordering_rule_model = self.env['stock.warehouse.orderpoint']
-        self.stock_move_model = self.env['stock.move']
-        self.product_model = self.env['product.product']
-        self.product_ctg_model = self.env['product.category']
+        cls.reordering_rule_model = cls.env['stock.warehouse.orderpoint']
+        cls.stock_move_model = cls.env['stock.move']
+        cls.product_model = cls.env['product.product']
+        cls.product_ctg_model = cls.env['product.category']
 
         # Get required Model data
-        self.product_uom = self.env.ref('product.product_uom_unit')
-        self.location_stock = self.env.ref('stock.stock_location_stock')
-        self.location_shelf1 = self.env.ref('stock.stock_location_components')
-        self.location_customer = self.env.ref('stock.stock_location_customers')
-        self.location_supplier = self.env.ref('stock.stock_location_suppliers')
+        cls.product_uom = cls.env.ref('product.product_uom_unit')
+        cls.location_stock = cls.env.ref('stock.stock_location_stock')
+        cls.location_shelf1 = cls.env.ref('stock.stock_location_components')
+        cls.location_customer = cls.env.ref('stock.stock_location_customers')
+        cls.location_supplier = cls.env.ref('stock.stock_location_suppliers')
 
         # Create product category and product
-        self.product_ctg = self._create_product_category()
-        self.product = self._create_product()
+        cls.product_ctg = cls._create_product_category()
+        cls.product = cls._create_product()
 
         # Create Reordering Rule
-        self.reordering_record = self.create_orderpoint()
+        cls.reordering_record = cls.create_orderpoint()
 
-    def _create_product_category(self):
+    @classmethod
+    def _create_product_category(cls):
         """Create a Product Category."""
-        product_ctg = self.product_ctg_model.create({
+        product_ctg = cls.product_ctg_model.create({
             'name': 'test_product_ctg',
             'type': 'normal',
         })
         return product_ctg
 
-    def _create_product(self):
+    @classmethod
+    def _create_product(cls):
         """Create a Stockable Product."""
-        product = self.product_model.create({
+        product = cls.product_model.create({
             'name': 'Test Product',
-            'categ_id': self.product_ctg.id,
+            'categ_id': cls.product_ctg.id,
             'type': 'product',
-            'uom_id': self.product_uom.id,
+            'uom_id': cls.product_uom.id,
         })
         return product
 
-    def create_orderpoint(self):
+    @classmethod
+    def create_orderpoint(cls):
         """Create a Reordering rule for the product."""
-        record = self.reordering_rule_model.create({
+        record = cls.reordering_rule_model.create({
             'name': 'Reordering Rule',
-            'product_id': self.product.id,
+            'product_id': cls.product.id,
             'product_min_qty': '1',
             'product_max_qty': '5',
             'qty_multiple': '1',
-            'location_id': self.location_stock.id,
+            'location_id': cls.location_stock.id,
         })
         return record
 
@@ -64,49 +67,60 @@ class TestStockWarehouseOrderpoint(TransactionCase):
             'name': 'Test move',
             'product_id': self.product.id,
             'product_uom': self.product_uom.id,
-            'product_uom_qty': 10,
+            'quantity_done': 10,
             'location_id': source_location.id,
-            'location_dest_id': destination_location.id}
-        )
+            'location_dest_id': destination_location.id
+        })
 
-        move.action_confirm()
+        move._action_confirm()
         return move
 
     def test_product_qty(self):
         """Tests the product quantity in the Reordering rules"""
         # Create & process moves to test the product quantity
-        move_in = self.create_move(self.location_supplier, self.location_stock)
-        move_out = self.create_move(self.location_stock,
-                                    self.location_customer)
+        move_in = self.create_move(
+            self.location_supplier,
+            self.location_stock,
+        )
+        move_out = self.create_move(
+            self.location_stock,
+            self.location_customer,
+        )
         self.reordering_record.refresh()
-        self.assertEqual(self.reordering_record.
-                         product_location_qty_available_not_res,
-                         0.0,
-                         'Quantity On Hand (Unreserved) does not match')
-        self.assertEqual(self.reordering_record.
-                         product_location_qty_available_not_res,
-                         self.product.qty_available_not_res,
-                         'Quantity On Hand (Unreserved) in the orderpoint '
-                         'does not match with the product.')
-        move_in.action_done()
+        self.assertEqual(
+            self.reordering_record.product_location_qty_available_not_res,
+            0.0,
+            'Quantity On Hand (Unreserved) does not match',
+        )
+        self.assertEqual(
+            self.reordering_record.product_location_qty_available_not_res,
+            self.product.qty_available_not_res,
+            'Quantity On Hand (Unreserved) in the orderpoint '
+            'does not match with the product.'
+        )
+        move_in._action_done()
         self.reordering_record.refresh()
-        self.assertEqual(self.reordering_record.
-                         product_location_qty_available_not_res,
-                         10.0,
-                         'Quantity On Hand (Unreserved) does not match')
-        self.assertEqual(self.reordering_record.
-                         product_location_qty_available_not_res,
-                         self.product.qty_available_not_res,
-                         'Quantity On Hand (Unreserved) in the orderpoint '
-                         'does not match with the product.')
-        move_out.action_assign()
+        self.assertEqual(
+            self.reordering_record.product_location_qty_available_not_res,
+            10.0,
+            'Quantity On Hand (Unreserved) does not match',
+        )
+        self.assertEqual(
+            self.reordering_record.product_location_qty_available_not_res,
+            self.product.qty_available_not_res,
+            'Quantity On Hand (Unreserved) in the orderpoint '
+            'does not match with the product.',
+        )
+        move_out._action_done()
         self.reordering_record.refresh()
-        self.assertEqual(self.reordering_record.
-                         product_location_qty_available_not_res,
-                         0.0,
-                         'Quantity On Hand (Unreserved) does not match')
-        self.assertEqual(self.reordering_record.
-                         product_location_qty_available_not_res,
-                         self.product.qty_available_not_res,
-                         'Quantity On Hand (Unreserved) in the orderpoint '
-                         'does not match with the product.')
+        self.assertEqual(
+            self.reordering_record.product_location_qty_available_not_res,
+            0.0,
+            'Quantity On Hand (Unreserved) does not match',
+        )
+        self.assertEqual(
+            self.reordering_record.product_location_qty_available_not_res,
+            self.product.qty_available_not_res,
+            'Quantity On Hand (Unreserved) in the orderpoint '
+            'does not match with the product.',
+        )
