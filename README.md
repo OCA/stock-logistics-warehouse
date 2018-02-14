@@ -39,6 +39,7 @@ addon | version | summary
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 10.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 10.0.1.0.0 | Allow to perform inventories of a location without including its child locations.
 [stock_inventory_lockdown](stock_inventory_lockdown/) | 10.0.1.0.1 | Lock down stock locations during inventories.
+[stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 10.0.1.0.0 | More filters for inventory adjustments
 [stock_inventory_revaluation](stock_inventory_revaluation/) | 10.0.1.0.0 | Introduces inventory revaluation as single point to change the valuation of products.
 [stock_inventory_verification_request](stock_inventory_verification_request/) | 10.0.1.0.0 | Adds the capability to request a Slot Verification when a inventory is Pending to Approve
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 10.0.1.0.0 | Add a MTS+MTO route
@@ -63,7 +64,6 @@ addon | version | summary
 [configurable_stock_level](configurable_stock_level/) | 0.1 (unported) | name
 [partner_location_auto_create](partner_location_auto_create/) | 0.1 (unported) | Partner Location Auto Create
 [stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 (unported) | Consider the production potential is available to promise
-[stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 8.0.1.0.0 (unported) | More filters for inventory adjustments
 [stock_location_area_data](stock_location_area_data/) | 8.0.0.1.0 (unported) | Add surface units of measure
 [stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 (unported) | Enter a location's area based on different units of measure
 [stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 (unported) | Stock Location Ownership
