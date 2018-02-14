@@ -5,6 +5,16 @@
 
 from odoo import models, fields, api
 from odoo.addons import decimal_precision as dp
+import operator as py_operator
+
+OPERATORS = {
+    '<': py_operator.lt,
+    '>': py_operator.gt,
+    '<=': py_operator.le,
+    '>=': py_operator.ge,
+    '=': py_operator.eq,
+    '!=': py_operator.ne
+}
 
 
 class ProductTemplate(models.Model):
@@ -41,6 +51,7 @@ class ProductTemplate(models.Model):
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
         compute='_compute_available_quantities',
+        search="_search_immediately_usable_qty",
         string='Available to promise',
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"
@@ -54,3 +65,22 @@ class ProductTemplate(models.Model):
              "the materials already at hand. "
              "If the product has several variants, this will be the biggest "
              "quantity that can be made for a any single variant.")
+
+    @api.model
+    def _search_immediately_usable_qty(self, operator, value):
+        """
+        Search function for the immediately_usable_qty field.
+        The search is quite similar to the Odoo search about quantity available
+        (addons/stock/models/product.py,253; _search_product_quantity function)
+        :param operator: str
+        :param value: str
+        :return: list of tuple (domain)
+        """
+        products = self.search([])
+        # Force prefetch
+        products.mapped("immediately_usable_qty")
+        product_ids = []
+        for product in products:
+            if OPERATORS[operator](product.immediately_usable_qty, value):
+                product_ids.append(product.id)
+        return [('id', 'in', product_ids)]
