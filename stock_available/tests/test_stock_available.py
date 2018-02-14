@@ -76,10 +76,30 @@ class TestStockLogisticsWarehouse(TransactionCase):
              })
 
         def compare_product_usable_qty(product, value):
+            """
+            Compare the immediately_usable_qty with the given value
+            Check also the search function for the immediately_usable_qty field
+            :param product: product (template/product) recordset
+            :param value: int
+            :return:
+            """
             # Refresh, because the function field is not recalculated between
             # transactions
             product.refresh()
             self.assertEqual(product.immediately_usable_qty, value)
+            # Now check search function
+            domain = [('immediately_usable_qty', '=', value)]
+            results = self.env[product._name].search(domain)
+            self.assertIn(product.id, results.ids)
+            domain = [('immediately_usable_qty', '!=', value)]
+            results = self.env[product._name].search(domain)
+            self.assertNotIn(product.id, results.ids)
+            domain = [('immediately_usable_qty', '>', value-1)]
+            results = self.env[product._name].search(domain)
+            self.assertIn(product.id, results.ids)
+            domain = [('immediately_usable_qty', '<', value+1)]
+            results = self.env[product._name].search(domain)
+            self.assertIn(product.id, results.ids)
 
         compare_product_usable_qty(productA, 0)
         compare_product_usable_qty(templateAB, 0)
