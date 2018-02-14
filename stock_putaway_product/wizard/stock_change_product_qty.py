@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-# © 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
-# © 2016 Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
+# Copyright 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+# Copyright 2016 Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
@@ -13,7 +12,7 @@ class StockChangeProductQty(models.TransientModel):
     # right location to update stock.
     @api.model
     def default_get(self, fields):
-        res = super(StockChangeProductQty, self).default_get(fields)
+        res = super().default_get(fields)
 
         product_product_id = res.get('product_id')
         location_id = res.get('location_id')

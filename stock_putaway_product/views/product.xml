@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
-     © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+<!-- Copyright 2018 Camptocamp SA
+     Copyright 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+     Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
 <odoo>
     <record id="view_template_property_form" model="ir.ui.view">
@@ -10,12 +11,10 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='stock_property']" position="before">
                 <group colspan="4" name="putaway" string="Put Away Locations" groups="stock.group_stock_user">
-                	<field name="product_variant_ids" invisible="1"/>
-                	<field name="is_product_variant" invisible="1"/>
-                    <field name="product_putaway_ids"
-                           context="{'default_product_tmpl_id': is_product_variant and product_tmpl_id or active_id,
-                                     'default_product_product_id': is_product_variant and active_id or False}"
-                           nolabel="1" colspan="2">
+                    <field name="product_variant_ids" invisible="1"/>
+                    <field name="product_putaway_ids" nolabel="1" colspan="2"
+                           context="{'default_product_tmpl_id': active_id,
+                                     'default_product_product_id': False}">
                         <tree editable="bottom">
                             <field name="sequence" widget="handle"/>
                             <field name="putaway_id"/>

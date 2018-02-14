@@ -31,9 +31,7 @@ Configuration
 To configure this module, you need to:
 
 #. Go to Inventory > Configuration > Settings
-#. Enable "Manage several locations per warehouse" on Location & Warehouse >
-   Multi Locations
-#. Enable "Advanced routing of products using rules" on Location & Warehouse >
+#. Check "Multi-Step Routes" in the Warehouse section
    Routes
 #. Go to Inventory > Configuration > Warehouse Management > Locations
 #. On the main inventory location of your warehouse,
@@ -51,7 +49,7 @@ To use this module, you need to:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/10.0
+   :target: https://runbot.odoo-community.org/runbot/153/11.0
 
 Bug Tracker
 ===========
@@ -73,6 +71,7 @@ Contributors
 * Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
 * Denis Roussel - ACSONE SA/NV <denis.roussel@acsone.eu>
 * Thomas Fossoul - WINK SA/NV <tfossoul@wink.be>
+* Alexandre Saunier - Camptocamp SA <alexandre.saunier@camptocamp.com>
 
 
 Maintainer

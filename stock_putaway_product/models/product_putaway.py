@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-# © 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
-# © 2016 Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
+# Copyright 2018 Camptocamp SA
+# Copyright 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+# Copyright 2016 Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -11,19 +11,22 @@ class ProductPutaway(models.Model):
 
     @api.model
     def _get_putaway_options(self):
-        ret = super(ProductPutaway, self)._get_putaway_options()
+        ret = super()._get_putaway_options()
         return ret + [('per_product', 'Fixed per product location')]
 
     product_location_ids = fields.One2many(
         comodel_name='stock.product.putaway.strategy',
         inverse_name='putaway_id',
         string='Fixed per product location',
-        copy=True)
-    method = fields.Selection(selection=_get_putaway_options)
+        copy=True,
+    )
+    method = fields.Selection(
+        selection=_get_putaway_options,
+    )
 
     @api.multi
     def get_product_putaway_strategies(self, product):
-        """ Get linked product putaway strategy that contain fixed location.
+        """ Get linked product putaway strategy that contains fixed location.
         product.product_putaway_ids is the fasted way to get strategy
         especially when we have thousand of products.
         """
@@ -37,11 +40,11 @@ class ProductPutaway(models.Model):
 
     def putaway_apply(self, product):
         if self.method == 'per_product':
-            strategies = self.get_product_putaway_strategies(
-                product)
-            return strategies[:1].fixed_location_id.id
-        else:
-            return super(ProductPutaway, self).putaway_apply(product)
+            strategies = self.get_product_putaway_strategies(product)
+            strategy = strategies[:1]
+            if strategy:
+                return strategy.fixed_location_id.id
+        return super().putaway_apply(product)
 
 
 class StockFixedPutawayStrategy(models.Model):
@@ -58,20 +61,24 @@ class StockFixedPutawayStrategy(models.Model):
         comodel_name='product.putaway',
         string='Put Away Strategy',
         required=True,
-        index=True)
+        index=True,
+    )
     product_tmpl_id = fields.Many2one(
         comodel_name='product.template',
         string='Product Template',
         index=True,
         oldname='product_template_id',
-        required=True)
+        required=True,
+    )
     product_product_id = fields.Many2one(
         comodel_name='product.product',
         string='Product Variant',
-        index=True)
+        index=True,
+    )
     fixed_location_id = fields.Many2one(
         comodel_name='stock.location',
         string='Location',
         required=True,
-        domain=[('usage', '=', 'internal')])
+        domain=[('usage', '=', 'internal')],
+    )
     sequence = fields.Integer()
