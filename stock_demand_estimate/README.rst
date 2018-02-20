@@ -1,4 +1,4 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
@@ -17,26 +17,25 @@ Installation
 This module relies on:
 
 * The OCA module '2D matrix for x2many fields', and can be downloaded from
-  Github: https://github.com/OCA/web/tree/10.0/web_widget_x2many_2d_matrix
+  Github: https://github.com/OCA/web/tree/11.0/web_widget_x2many_2d_matrix
 * The OCA module 'Date Range', and can be downloaded from
-  Github: https://github.com/OCA/server-tools/tree/10.0/date_range
+  Github: https://github.com/OCA/server-ux/tree/11.0/date_range
 
 
 Usage
 =====
 
-Go to 'Warehouse / Configuration / Demand Estimate Periods' and define your
-estimating periods (monthly or weekly).
+Go to 'Inventory / Configuration / Date Ranges' and define your estimating periods.
 
-Go to 'Warehouse / Demand Planning / Create Demand Estimates' to create or
+Go to 'Inventory / Demand Planning / Create Demand Estimates' to create or
 update your demand estimates.
 
-Go to 'Warehouse / Demand Planning / Demand Estimates' to review the
+Go to 'Inventory / Demand Planning / Demand Estimates' to review the
 estimates created.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/10.0
+   :target: https://runbot.odoo-community.org/runbot/153/11.0
 
 Bug Tracker
 ===========
