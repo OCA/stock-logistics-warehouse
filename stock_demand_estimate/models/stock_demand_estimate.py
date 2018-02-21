@@ -77,8 +77,7 @@ class StockDemandEstimate(models.Model):
 
         # We need only the periods that overlap
         # the dates introduced by the user.
-        if (date_start <= period_date_start <= date_end or date_start <=
-                period_date_end <= date_end):
+        if period_date_start <= date_end and period_date_end >= date_start:
             overlap_date_start = max(period_date_start, date_start)
             overlap_date_end = min(period_date_end, date_end)
             days = (abs(overlap_date_end-overlap_date_start)).days + 1
