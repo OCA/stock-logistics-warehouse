@@ -46,6 +46,7 @@ addon | version | summary
 [stock_operation_package_mandatory](stock_operation_package_mandatory/) | 10.0.1.0.0 | Makes destination package mandatory on stock pack operations
 [stock_orderpoint_automatic_creation](stock_orderpoint_automatic_creation/) | 10.0.1.0.0 | Stock Orderpoint Automatic Creation
 [stock_orderpoint_manual_procurement](stock_orderpoint_manual_procurement/) | 10.0.1.0.0 | Allows to create procurement orders from orderpoints instead of relying only on the scheduler.
+[stock_orderpoint_manual_procurement_uom](stock_orderpoint_manual_procurement_uom/) | 10.0.1.0.0 | Glue module for stock_orderpoint_uom and stock_orderpoint_manual_procurement
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 10.0.1.0.0 | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_putaway_product](stock_putaway_product/) | 10.0.1.0.1 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 10.0.1.0.0 | Stock - Manual Quant Assignment
