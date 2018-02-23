@@ -29,7 +29,7 @@ addon | version | summary
 [procurement_auto_create_group](procurement_auto_create_group/) | 10.0.1.0.0 | Allows to configure the system to propose automatically new procurement groups in procurement orders.
 [purchase_packaging](purchase_packaging/) | 10.0.1.0.0 | In purchase, use package
 [sale_packaging](sale_packaging/) | 10.0.1.0.0 | In sale, use uom's package
-[stock_available](stock_available/) | 10.0.1.0.0 | Stock available to promise
+[stock_available](stock_available/) | 10.0.1.0.1 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 10.0.1.0.0 | Ignore planned receptions in quantity available to promise
 [stock_available_sale](stock_available_sale/) | 10.0.1.0.0 | Quotations in quantity available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 10.0.1.0.0 | Quantity of stock available for immediate use
