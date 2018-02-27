@@ -19,19 +19,18 @@ Configuration
 =============
 
 To configure this module, you need to 'Inventory > Configuration > Settings'
-and enable 'Some products may be sold/purchased in different unit of measures
-(advanced)' option.
+and enable 'Sell and purchase products in different units of measure' option.
 
 Usage
 =====
 
-Go to 'Inventory > Inventory Control > Reordering Rules' and indicate a
-Procurement UoM.
+Go to 'Inventory > Master Data > Reordering Rules' and indicate a Procurement
+UoM.
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/10.0
+   :target: https://runbot.odoo-community.org/runbot/153/11.0
 
 Bug Tracker
 ===========
@@ -54,7 +53,7 @@ Contributors
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Lois Rilo <lois.rilo@eficent.com>
-
+* Bhavesh Odedra <bodedra@opensourceintegrators.com>
 
 Maintainer
 ----------
