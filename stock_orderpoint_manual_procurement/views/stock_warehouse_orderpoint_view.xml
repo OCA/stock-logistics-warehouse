@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <odoo>
 
     <record id="view_warehouse_orderpoint_tree" model="ir.ui.view">
@@ -8,18 +8,11 @@
                ref="stock.view_warehouse_orderpoint_tree"/>
         <field name="arch" type="xml">
             <field name="product_uom" position="after">
-                <field name="procurement_ids" invisible="1"/>
                 <field name="procure_recommended_qty"/>
                 <field name="procure_recommended_date"/>
                 <button string="Create Procurement"
                         name="%(stock_orderpoint_manual_procurement.act_make_procurement_from_orderpoint)d"
                         icon="fa fa-cogs" type="action"/>
-                <button string="Procurements"
-                        name="%(procurement.procurement_action)d"
-                        attrs="{'invisible':[('procurement_ids', '=', [])]}"
-                        icon="fa fa-folder-open" type="action"
-                        domain="[('orderpoint_id','=', active_id)]"
-                        context="{'search_default_orderpoint_id': [active_id]}"/>
             </field>
         </field>
     </record>
