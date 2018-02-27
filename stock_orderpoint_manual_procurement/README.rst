@@ -19,16 +19,16 @@ procurements from reordering rules', under 'Settings / Users / Users'.
 Usage
 =====
 
-Go to 'Inventory > Inventory Control > Reordering Rules' and review the
-quantity recommended to be procured. You can now start the procurement for a
-single or a list of reordering rules.
+Go to 'Inventory > Master Data > Reordering Rules' and review the quantity
+recommended to be procured. You can now start the procurement for a single or a
+list of reordering rules.
 
 The recommended quantity to procure is adjusted to the procurement unit of
 measure indicated in the reordering rule.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/10.0
+   :target: https://runbot.odoo-community.org/runbot/153/11.0
 
 Bug Tracker
 ===========
@@ -51,6 +51,7 @@ Contributors
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Lois Rilo Antelo <lois.rilo@eficent.com>
+* Bhavesh Odedra <bodedra@opensourceintegrators.com>
 
 Maintainer
 ----------
