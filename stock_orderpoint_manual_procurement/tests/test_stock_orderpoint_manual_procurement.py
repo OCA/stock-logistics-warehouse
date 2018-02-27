@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
@@ -14,6 +13,10 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
 
         # Refs
         self.group_stock_manager = self.env.ref('stock.group_stock_manager')
+        self.group_purchase_manager = self.env.ref(
+            'purchase.group_purchase_manager')
+        self.vendor = self.env.ref(
+            'stock_orderpoint_manual_procurement.product_supplierinfo_product_7')  # noqa
         self.group_change_procure_qty = self.env.ref(
             'stock_orderpoint_manual_procurement.'
             'group_change_orderpoint_procure_qty')
@@ -22,6 +25,8 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         # Get required Model
         self.reordering_rule_model = self.env['stock.warehouse.orderpoint']
         self.product_model = self.env['product.product']
+        self.purchase_model = self.env['purchase.order']
+        self.purchase_line_model = self.env['purchase.order.line']
         self.user_model = self.env['res.users']
         self.product_ctg_model = self.env['product.category']
         self.stock_change_model = self.env['stock.change.product.qty']
@@ -31,7 +36,8 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         # Create users
         self.user = self._create_user('user_1',
                                       [self.group_stock_manager,
-                                       self.group_change_procure_qty],
+                                       self.group_change_procure_qty,
+                                       self.group_purchase_manager],
                                       self.company1)
         # Get required Model data
         self.product_uom = self.env.ref('product.product_uom_unit')
@@ -68,7 +74,6 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         """Create a Product Category."""
         product_ctg = self.product_ctg_model.create({
             'name': 'test_product_ctg',
-            'type': 'normal',
         })
         return product_ctg
 
@@ -79,6 +84,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
             'categ_id': self.product_ctg.id,
             'type': 'product',
             'uom_id': self.product_uom.id,
+            'variant_seller_ids': [(6, 0, [self.vendor.id])],
         })
         return product
 
@@ -121,13 +127,15 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         # Create Manual Procurement from order-point procured quantity
         self.create_orderpoint_procurement()
 
+        # As per route configuration, it will create Purchase order
         # Assert that Procurement is created with the desired quantity
-        self.assertTrue(self.reorder.procurement_ids)
-        self.assertEqual(self.reorder.product_id.id,
-                         self.reorder.procurement_ids.product_id.id)
-        self.assertEqual(self.reorder.name,
-                         self.reorder.procurement_ids.origin)
+        purchase = self.purchase_model.search(
+            [('origin', 'ilike', self.reorder.name)])
+        self.assertEquals(len(purchase), 1)
+        purchase_line = self.purchase_line_model.search(
+            [('orderpoint_id', '=', self.reorder.id),
+             ('order_id', '=', purchase.id)])
+        self.assertEquals(len(purchase_line), 1)
         self.assertNotEqual(self.reorder.procure_recommended_qty,
-                            self.reorder.procurement_ids.product_qty)
-        self.assertEqual(self.reorder.procurement_ids.product_qty,
-                         480.0)
+                            purchase_line.product_qty)
+        self.assertEqual(purchase_line.product_qty, 480.0)
