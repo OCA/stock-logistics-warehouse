@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -52,13 +51,14 @@ class StockWarehouseOrderpoint(models.Model):
     @api.multi
     @api.depends("product_min_qty", "product_id", "qty_multiple")
     def _compute_procure_recommended(self):
-        op_qtys = self.subtract_procurements_from_orderpoints()
+        op_qtys = self._quantity_in_progress()
         for op in self:
-            op.procure_recommended_date = op._get_date_planned(
-                datetime.today())
+            qty = 0.0
             virtual_qty = op.with_context(
                 location=op.location_id.id).product_id.virtual_available
             if float_compare(virtual_qty, op.product_min_qty,
                              precision_rounding=op.product_uom.rounding) < 0:
-                op.procure_recommended_qty = op._get_procure_recommended_qty(
-                    virtual_qty, op_qtys)
+                qty = op._get_procure_recommended_qty(virtual_qty, op_qtys)
+            op.procure_recommended_qty = qty
+            op.procure_recommended_date = op._get_date_planned(
+                qty, datetime.today())

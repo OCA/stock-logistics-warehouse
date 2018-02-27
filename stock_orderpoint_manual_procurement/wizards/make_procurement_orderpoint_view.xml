@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <odoo>
 
     <!--  Make Procurement -->
@@ -18,12 +18,11 @@
                     <field name="item_ids" nolabel="1">
                         <tree string="Items" nocreate="1" editable="top">
                             <field name="orderpoint_id" invisible="True"/>
-                            <field name="warehouse_id" groups="stock.group_locations"/>
-                            <field name="location_id" groups="stock.group_locations"/>
+                            <field name="warehouse_id" groups="stock.group_stock_multi_locations"/>
+                            <field name="location_id" groups="stock.group_stock_multi_locations"/>
                             <field name="product_id"/>
                              <field name="qty" groups="stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty"/>
                             <field name="uom_id" groups="product.group_uom"/>
-                            <field name="date_planned"/>
                         </tree>
                     </field>
                 </group>
@@ -42,20 +41,10 @@
             id="act_make_procurement_from_orderpoint">
         <field name="name">Request Procurement</field>
         <field name="res_model">make.procurement.orderpoint</field>
-        <field name="src_model">stock.warehouse.orderpoint</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-    </record>
-
-    <record model="ir.values"
-            id="stock_warehouse_orderpoint_make_procurement">
-        <field name="model_id"
-               ref="stock.model_stock_warehouse_orderpoint" />
-        <field name="name">Request Procurement</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval="'ir.actions.act_window,' + str(ref('act_make_procurement_from_orderpoint'))" />
-        <field name="key">action</field>
-        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="binding_model_id"
+               ref="stock.model_stock_warehouse_orderpoint"/>
     </record>
 
 </odoo>
