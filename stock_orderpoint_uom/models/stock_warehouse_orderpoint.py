@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -25,14 +24,3 @@ class Orderpoint(models.Model):
                           'the procurement Unit of Measure must be in the '
                           'same category.'))
         return True
-
-    @api.model
-    def _prepare_procurement_values(self, product_qty,
-                                    date=False, group=False):
-        res = super(Orderpoint, self)._prepare_procurement_values(
-            product_qty, date, group)
-        if self.procure_uom_id:
-            res['product_qty'] = self.product_uom._compute_quantity(
-                product_qty, self.procure_uom_id)
-            res['product_uom'] = self.procure_uom_id.id
-        return res
