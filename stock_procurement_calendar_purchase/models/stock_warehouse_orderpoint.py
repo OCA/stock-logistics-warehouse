@@ -205,7 +205,7 @@ class StockWarehouseOrderpoint(models.Model):
                     partner = attendance.procurement_calendar_id.partner_id
                     seller = orderpoint.product_id._select_seller(
                         quantity=orderpoint.procure_recommended_qty,
-                        date=delivery_date,
+                        date=fields.Datetime.to_string(delivery_date),
                         uom_id=orderpoint.product_id.uom_id)
                     if seller.name == partner:
                         orderpoint.procurement_attendance_id = attendance
