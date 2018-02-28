@@ -11,9 +11,6 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
 
     def setUp(self):
         super(TestStockOrderpointProcureUom, self).setUp()
-        # Refs
-        self.vendor = self.env.ref(
-            'stock_orderpoint_uom.product_supplierinfo_product_7')
 
         # Get required Model
         productObj = self.env['product.product']
@@ -22,7 +19,9 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
         self.warehouse = self.env.ref('stock.warehouse0')
         self.location_stock = self.env.ref('stock.stock_location_stock')
         self.uom_unit = self.env.ref('product.product_uom_unit')
+        self.uom_unit.rounding = 1
         self.uom_dozen = self.env.ref('product.product_uom_dozen')
+        self.uom_dozen.rounding = 1
         self.uom_kg = self.env.ref('product.product_uom_kgm')
 
         self.productA = productObj.create(
@@ -30,8 +29,14 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
              'standard_price': 1,
              'type': 'product',
              'uom_id': self.uom_unit.id,
+             'uom_po_id': self.uom_dozen.id,
              'default_code': 'A',
-             'variant_seller_ids': [(6, 0, [self.vendor.id])],
+             'variant_seller_ids': [(0, 0, {
+                 'name': self.env.ref('base.res_partner_3').id,
+                 'delay': 3,
+                 'min_qty': 1,
+                 'price': 72,
+             })],
              })
 
     def test_stock_orderpoint_procure_uom(self):
@@ -55,6 +60,8 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
             [('orderpoint_id', '=', orderpoint.id),
              ('order_id', '=', purchase.id)])
         self.assertEquals(len(purchase_line), 1)
+        self.assertEqual(purchase_line.product_id, self.productA)
+        self.assertEqual(purchase_line.product_uom, self.uom_dozen)
         self.assertEqual(purchase_line.product_qty, 2.0)
 
     def test_stock_orderpoint_wrong_uom(self):
@@ -69,3 +76,57 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
                     'product_min_qty': 12,
                     'procure_uom_id': self.uom_kg.id,
                 })
+
+    def test_regenerate_po(self):
+
+        def _assert_purchase_generated(self, supplier, product):
+            purchase = self.purchase_model.search(
+                [('partner_id', '=', supplier.id)])
+            self.assertEquals(len(purchase), 1)
+            lines = purchase.order_line
+            self.assertEquals(len(lines), 1)
+            self.assertEquals(lines.product_id, product)
+            self.assertEquals(lines.product_uom, self.uom_dozen)
+            self.assertEquals(lines.product_qty, 9)
+            return purchase
+
+        supplier = self.env['res.partner'].create({
+            'name': 'Brewery Inc',
+            'is_company': True,
+            'supplier': True
+        })
+
+        product = self.env['product.product'].create({
+            'name': 'Beer bottle',
+            'standard_price': 1,
+            'type': 'product',
+            'uom_id': self.uom_unit.id,
+            'uom_po_id': self.uom_dozen.id,
+            'seller_ids': [(0, False, {
+                'name': supplier.id,
+                'delay': 1,
+                'min_qty': 1,
+                'price': 2
+            })]
+        })
+
+        self.env['stock.warehouse.orderpoint'].create({
+            'warehouse_id': self.warehouse.id,
+            'location_id': self.location_stock.id,
+            'product_id': product.id,
+            'product_max_qty': 100,
+            'product_min_qty': 10,
+            'qty_multiple': 10,
+            'product_uom': self.uom_unit.id,
+            'procure_uom_id': self.uom_dozen.id,
+        })
+
+        self.env['procurement.group'].run_scheduler()
+
+        purchase1 = _assert_purchase_generated(self, supplier, product)
+        purchase1.button_cancel()
+        purchase1.unlink()
+
+        self.env['procurement.group'].run_scheduler()
+
+        _assert_purchase_generated(self, supplier, product)
