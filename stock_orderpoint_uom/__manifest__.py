@@ -11,7 +11,6 @@
     "website": "https://www.odoo-community.org",
     "category": "Warehouse Management",
     "depends": ["purchase", "stock"],
-    "demo": ["demo/product.xml"],
     "data": ["views/stock_warehouse_orderpoint_view.xml"],
     "license": "AGPL-3",
     'installable': True,
