@@ -153,15 +153,10 @@ class ProcurementOrder(models.Model):
         if self.scheduled_next_attendance_id and\
                 self.scheduled_next_attendance_date:
             self.date_planned = self.scheduled_next_attendance_date
-            self._log(
+            self.message_post(
                 _('The scheduled date has been changed to : %s')
                 % self._fields['date_planned'].convert_to_display_name(
                     self.date_planned, self))
         self._assign_procurement_destination_calendar()
         self._assign_procurement_destination_attendance()
         return res
-
-    def _log(self, message):
-        self.ensure_one()
-        log = self.log or ''
-        self.log = log + '\n' + message
