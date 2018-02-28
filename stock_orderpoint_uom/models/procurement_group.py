@@ -16,5 +16,6 @@ class ProcurementGroup(models.Model):
             product_qty = orderpoint.product_uom._compute_quantity(
                 product_qty, orderpoint.procure_uom_id)
         return super(ProcurementGroup, self).run(product_id, product_qty,
-                                                 product_uom, location_id,
+                                                 orderpoint.procure_uom_id,
+                                                 location_id,
                                                  name, origin, values)
