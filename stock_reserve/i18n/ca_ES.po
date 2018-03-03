@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 09:22+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-12-09 13:43+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -83,12 +83,12 @@ msgstr "Companyia"
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: stock_reserve
 #: field:stock.reservation,date:0
@@ -98,7 +98,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,name:0
 msgid "Description"
-msgstr ""
+msgstr "Descripció"
 
 #. module: stock_reserve
 #: field:stock.reservation,partner_id:0
@@ -128,7 +128,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_search
@@ -174,17 +174,17 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: stock_reserve
 #: field:stock.reservation,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: stock_reserve
 #: field:stock.reservation,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: stock_reserve
 #: field:stock.reservation,linked_move_operation_ids:0
@@ -242,7 +242,7 @@ msgstr ""
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form
 #: field:stock.reservation,note:0
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 #. module: stock_reserve
 #: help:stock.reservation,linked_move_operation_ids:0

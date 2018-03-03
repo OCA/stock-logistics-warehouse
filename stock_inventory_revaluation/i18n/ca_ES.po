@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Carlos Hormigo, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 09:22+0000\n"
-"PO-Revision-Date: 2017-03-29 09:22+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-12-09 13:43+0000\n"
+"PO-Revision-Date: 2017-12-09 13:43+0000\n"
+"Last-Translator: Carlos Hormigo, 2018\n"
 "Language-Team: Catalan (Spain) (https://www.transifex.com/oca/teams/23907/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +96,7 @@ msgstr ""
 #: field:stock.inventory.revaluation.mass.post,create_uid:0
 #: field:stock.inventory.revaluation.quant,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: stock_inventory_revaluation
 #: field:stock.inventory.revaluation,create_date:0
@@ -103,7 +104,7 @@ msgstr ""
 #: field:stock.inventory.revaluation.mass.post,create_date:0
 #: field:stock.inventory.revaluation.quant,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: stock_inventory_revaluation
 #: field:stock.inventory.revaluation,document_date:0
@@ -193,7 +194,7 @@ msgstr ""
 #: field:stock.inventory.revaluation.mass.post,display_name:0
 #: field:stock.inventory.revaluation.quant,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: stock_inventory_revaluation
 #: help:stock.inventory.revaluation,remarks:0
@@ -322,7 +323,7 @@ msgstr ""
 #: field:stock.inventory.revaluation.mass.post,__last_update:0
 #: field:stock.inventory.revaluation.quant,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: stock_inventory_revaluation
 #: field:stock.inventory.revaluation,write_uid:0
@@ -330,7 +331,7 @@ msgstr ""
 #: field:stock.inventory.revaluation.mass.post,write_uid:0
 #: field:stock.inventory.revaluation.quant,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: stock_inventory_revaluation
 #: field:stock.inventory.revaluation,write_date:0
@@ -338,7 +339,7 @@ msgstr ""
 #: field:stock.inventory.revaluation.mass.post,write_date:0
 #: field:stock.inventory.revaluation.quant,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: stock_inventory_revaluation
 #: field:stock.inventory.revaluation.quant,location_id:0
