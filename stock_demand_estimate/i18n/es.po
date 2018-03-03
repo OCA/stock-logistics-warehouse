@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-16 14:35+0000\n"
-"PO-Revision-Date: 2018-01-16 14:35+0000\n"
+"POT-Creation-Date: 2018-02-27 11:37+0000\n"
+"PO-Revision-Date: 2018-02-27 11:37+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +175,7 @@ msgstr "Producto"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_product_ids
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_demand_estimate_wizard_form
 msgid "Products"
-msgstr ""
+msgstr "Productos"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_product_uom_qty
