@@ -3,21 +3,20 @@
 # * stock_inventory_revaluation
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2018
-# Bole <bole@dajmi5.com>, 2018
+# Lukáš Spurný <lukasspurny8@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
 "PO-Revision-Date: 2018-02-27 11:37+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>, 2018\n"
-"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
+"Last-Translator: Lukáš Spurný <lukasspurny8@gmail.com>, 2018\n"
+"Language-Team: Czech (Czech Republic) (https://www.transifex.com/oca/teams/23907/cs_CZ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hr\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: cs_CZ\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_revaluation_type
@@ -46,12 +45,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 msgid "Cancel"
-msgstr "Odustani"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: selection:stock.inventory.revaluation,state:0
 msgid "Cancelled"
-msgstr "Otkazan"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:335
@@ -76,7 +75,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_company_id
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_company_id
 msgid "Company"
-msgstr "Poduzeće"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_cost_method
@@ -90,7 +89,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_create_uid
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_user_id
 msgid "Created by"
-msgstr "Kreirao"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_create_date
@@ -98,7 +97,7 @@ msgstr "Kreirao"
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_create_date
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_create_date
 msgid "Created on"
-msgstr "Kreirano"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_document_date
@@ -188,7 +187,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_display_name
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_display_name
 msgid "Display Name"
-msgstr "Naziv "
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_remarks
@@ -216,7 +215,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: selection:stock.inventory.revaluation,state:0
 msgid "Draft"
-msgstr "Skica"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_value
@@ -258,7 +257,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_id
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_in_date
@@ -299,7 +298,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_journal_id
 msgid "Journal"
-msgstr "Temeljnica"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
@@ -309,7 +308,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_account_move_line
 msgid "Journal Item"
-msgstr "Stavka dnevnika"
+msgstr "Položka žurnálu"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation___last_update
@@ -317,7 +316,7 @@ msgstr "Stavka dnevnika"
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post___last_update
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant___last_update
 msgid "Last Modified on"
-msgstr "Zadnje modificirano"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_write_uid
@@ -325,7 +324,7 @@ msgstr "Zadnje modificirano"
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_write_uid
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_write_uid
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_quant_write_date
@@ -333,12 +332,12 @@ msgstr "Zadnji ažurirao"
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_write_date
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_location_id
 msgid "Location"
-msgstr "Lokacija"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_new_cost
@@ -376,7 +375,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 msgid "Post"
-msgstr "Objava"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_mass_post
@@ -391,7 +390,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: selection:stock.inventory.revaluation,state:0
 msgid "Posted"
-msgstr "Proknjiženo"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_post_date
@@ -413,17 +412,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_product_id
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_product_id
 msgid "Product"
-msgstr "Proizvod"
+msgstr "Produkt"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_product_category
 msgid "Product Category"
-msgstr "Kategorija proizvoda"
+msgstr "Kategorie produktů"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_product_template_id
 msgid "Product Template"
-msgstr "Predložak proizvoda"
+msgstr "Šablona produktu"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_quant_id
@@ -433,7 +432,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_qty
 msgid "Quantity"
-msgstr "Količina"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_qty_available
@@ -450,12 +449,12 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 msgid "Quants"
-msgstr ""
+msgstr "Kolik"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_name
 msgid "Reference"
-msgstr "Veza"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_name
@@ -501,7 +500,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_state
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_account_move_line_stock_inventory_revaluation_id
@@ -562,4 +561,4 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
 msgid "or"
-msgstr "ili"
+msgstr ""
