@@ -3,21 +3,20 @@
 # * purchase_packaging
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# Quentin THEURET <odoo@kerpeo.com>, 2018
+# OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
 "PO-Revision-Date: 2018-02-27 11:37+0000\n"
-"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"Language-Team: Portuguese (Portugal) (https://www.transifex.com/oca/teams/23907/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt_PT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: purchase_packaging
 #: model:ir.ui.view,arch_db:purchase_packaging.product_supplierinfo_view_form_inherit_purchase_packaging
@@ -42,7 +41,7 @@ msgstr ""
 #. module: purchase_packaging
 #: model:ir.model,name:purchase_packaging.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr "Règle d'inventaire minimum"
+msgstr ""
 
 #. module: purchase_packaging
 #: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_packaging_id
@@ -52,12 +51,12 @@ msgstr ""
 #. module: purchase_packaging
 #: model:ir.model,name:purchase_packaging.model_procurement_order
 msgid "Procurement"
-msgstr "Procurement"
+msgstr "Aquisições"
 
 #. module: purchase_packaging
 #: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_product_tmpl_id
 msgid "Product Template"
-msgstr "Modèle de produit"
+msgstr ""
 
 #. module: purchase_packaging
 #: model:ir.model,name:purchase_packaging.model_purchase_order_line
