@@ -3,51 +3,49 @@
 # * packaging_uom
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# enjolras <yo@miguelrevilla.com>, 2018
+# Lukáš Spurný <lukasspurny8@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
 "PO-Revision-Date: 2018-02-27 11:37+0000\n"
-"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
-"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Last-Translator: Lukáš Spurný <lukasspurny8@gmail.com>, 2018\n"
+"Language-Team: Czech (Czech Republic) (https://www.transifex.com/oca/teams/23907/cs_CZ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: cs_CZ\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. module: packaging_uom
 #: model:ir.ui.view,arch_db:packaging_uom.product_template_view_form_inherit_packaging_uom
 msgid "Configurations"
-msgstr "Configuraciones"
+msgstr "Konfigurace"
 
 #. module: packaging_uom
 #: model:ir.model.fields,help:packaging_uom.field_product_packaging_uom_id
 msgid "It must be in the same category than the default unit of measure."
-msgstr ""
-"Debe estar en la misma categoría que la unidad de medida predeterminada."
+msgstr "Musí být ve stejné kategorii, než je výchozí měrná jednotka."
 
 #. module: packaging_uom
 #: model:ir.model,name:packaging_uom.model_product_packaging
 #: model:ir.ui.view,arch_db:packaging_uom.product_template_view_form_inherit_packaging_uom
 msgid "Packaging"
-msgstr "Empaquetado"
+msgstr "Obal"
 
 #. module: packaging_uom
 #: code:addons/packaging_uom/models/product_packaging.py:83
 #, python-format
 msgid "The field Unit of Measure is required"
-msgstr "El campo Unidad de medida es obligatorio"
+msgstr "Je vyžadována polní jednotka měření"
 
 #. module: packaging_uom
 #: model:ir.model.fields,field_description:packaging_uom.field_product_packaging_uom_id
 msgid "Unit of Measure"
-msgstr "Unidad de medida"
+msgstr "Měrná jednotka"
 
 #. module: packaging_uom
 #: model:ir.model.fields,field_description:packaging_uom.field_product_packaging_uom_categ_domain_id
 msgid "Uom categ domain id"
-msgstr ""
+msgstr "Identifikátor domény Uom categ"
