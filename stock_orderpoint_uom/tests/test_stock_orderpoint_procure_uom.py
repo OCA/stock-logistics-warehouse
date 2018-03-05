@@ -62,7 +62,7 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
         self.assertEquals(len(purchase_line), 1)
         self.assertEqual(purchase_line.product_id, self.productA)
         self.assertEqual(purchase_line.product_uom, self.uom_dozen)
-        self.assertEqual(purchase_line.product_qty, 2.0)
+        self.assertEqual(purchase_line.product_qty, 2)
 
     def test_stock_orderpoint_wrong_uom(self):
 
