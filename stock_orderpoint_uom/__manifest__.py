@@ -8,7 +8,7 @@
     "version": "11.0.1.0.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
-    "website": "https://www.odoo-community.org",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "depends": ["purchase", "stock"],
     "data": ["views/stock_warehouse_orderpoint_view.xml"],
