@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_reserve_mrp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-20 18:35+0000\n"
+"PO-Revision-Date: 2015-10-20 18:35+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_reserve_mrp
+#: model:ir.model,name:stock_reserve_mrp.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de material"
+
+#. module: stock_reserve_mrp
+#: model:ir.model,name:stock_reserve_mrp.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Órden de producción"
+
+#. module: stock_reserve_mrp
+#: field:mrp.bom,reserve_stock:0
+#: field:mrp.production,reserve_stock:0
+msgid "Reserve Finished Goods"
+msgstr "Reservar Producto Terminado"
+
+#. module: stock_reserve_mrp
+#: model:ir.model,name:stock_reserve_mrp.model_stock_move
+msgid "Stock Move"
+msgstr "Moviemiento de stock"
+
