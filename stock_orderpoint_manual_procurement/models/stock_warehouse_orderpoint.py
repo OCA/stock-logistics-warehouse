@@ -24,6 +24,14 @@ class StockWarehouseOrderpoint(models.Model):
         compute="_compute_procure_recommended",
     )
 
+    def _prepare_procurement_values(self, product_qty, date=False,
+                                    group=False):
+        res = super(StockWarehouseOrderpoint,
+                    self)._prepare_procurement_values(product_qty, date=date,
+                                                      group=group)
+        res.update({'qty': product_qty})
+        return res
+
     @api.multi
     def _get_procure_recommended_qty(self, virtual_qty, op_qtys):
         self.ensure_one()
