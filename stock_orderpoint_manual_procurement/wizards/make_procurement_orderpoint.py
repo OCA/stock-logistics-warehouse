@@ -18,12 +18,25 @@ class MakeProcurementOrderpoint(models.TransientModel):
     def _prepare_item(self, orderpoint):
         return {
             'qty': orderpoint.procure_recommended_qty,
+            'qty_without_security': orderpoint.procure_recommended_qty,
             'uom_id': orderpoint.product_uom.id,
             'orderpoint_id': orderpoint.id,
             'product_id': orderpoint.product_id.id,
             'warehouse_id': orderpoint.warehouse_id.id,
             'location_id': orderpoint.location_id.id
         }
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
+                        submenu=False):
+        if not self.user_has_groups(
+                "stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty"): # noqa
+            # Redirect to readonly qty form view
+            view_id = self.env.ref(
+                'stock_orderpoint_manual_procurement.view_make_procure_without_security').id # noqa
+        return super(MakeProcurementOrderpoint, self).fields_view_get(
+            view_id=view_id, view_type=view_type, toolbar=toolbar,
+            submenu=submenu)
 
     @api.model
     def default_get(self, fields):
@@ -57,7 +70,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
             try:
                 self.env['procurement.group'].run(
                     item.orderpoint_id.product_id,
-                    item.qty,
+                    values.get('qty'),
                     item.orderpoint_id.product_uom,
                     item.orderpoint_id.location_id,
                     item.orderpoint_id.name,
@@ -68,7 +81,6 @@ class MakeProcurementOrderpoint(models.TransientModel):
                     errors.append(error.name)
             if errors:
                 raise UserError('\n'.join(errors))
-
         return {'type': 'ir.actions.act_window_close'}
 
 
@@ -80,7 +92,8 @@ class MakeProcurementOrderpointItem(models.TransientModel):
         'make.procurement.orderpoint', string='Wizard', required=True,
         ondelete='cascade', readonly=True)
 
-    qty = fields.Float(string='Quantity', required=True)
+    qty = fields.Float(string='Quantity')
+    qty_without_security = fields.Float(string='Quantity')
 
     uom_id = fields.Many2one(string='Unit of Measure',
                              comodel_name='product.uom')
@@ -104,5 +117,4 @@ class MakeProcurementOrderpointItem(models.TransientModel):
     def onchange_uom_id(self):
         for rec in self:
             rec.qty = rec.orderpoint_id.product_uom._compute_quantity(
-                rec.orderpoint_id.procure_recommended_qty,
-                rec.uom_id)
+                rec.orderpoint_id.procure_recommended_qty, rec.uom_id)
