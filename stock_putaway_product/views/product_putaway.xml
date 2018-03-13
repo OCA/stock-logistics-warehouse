@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Camptocamp SA
+     Copyright 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
+     Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+
+<odoo>
+    <record id="view_putaway" model="ir.ui.view">
+        <field name="name">product.putaway.form.byproduct</field>
+        <field name="model">product.putaway</field>
+        <field name="inherit_id" ref="stock_putaway_method.view_putaway"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='method']/.." position="after">
+               <div attrs="{'invisible': [('method', '!=', 'per_product')]}">
+                   <separator string="Fixed Locations Per Product"/>
+                   <field name="product_location_ids" colspan="4" nolabel="1">
+                       <tree editable="top">
+                           <field name="sequence" widget='handle'/>
+                           <field name="product_tmpl_id"/>
+                           <field name="product_product_id" groups="product.group_product_variant"/>
+                           <field name="fixed_location_id"/>
+                       </tree>
+                   </field>
+               </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_putaway_strategy_view_form" model="ir.ui.view">
+        <field name="name">product_putaway_strategy_view_form</field>
+        <field name="model">stock.product.putaway.strategy</field>
+        <field name="arch" type="xml">
+            <form string="Product putaway strategy">
+                <group>
+                    <group colspan="4">
+                        <field name="putaway_id"/>
+                    </group>
+                    <group colspan="4">
+                        <field name="product_tmpl_id" invisible="1"/>
+                        <field name="product_product_id"
+                               domain="[('product_tmpl_id','=',product_tmpl_id)]"
+                               groups="product.group_product_variant"/>
+                    </group>
+                    <group>
+                        <field name="fixed_location_id"
+                               domain="[('usage','=','internal')]"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>
