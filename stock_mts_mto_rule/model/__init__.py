@@ -1,5 +1,2 @@
-# -*- coding: utf-8 -*-
-
-from . import rule
-from . import warehouse
-from . import procurement
+from . import procurement_rule
+from . import stock_warehouse
