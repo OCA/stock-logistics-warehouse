@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, api, fields, exceptions
 from odoo.tools.translate import _
 
 
-class Warehouse(models.Model):
+class StockWarehouse(models.Model):
     _inherit = 'stock.warehouse'
 
     mto_mts_management = fields.Boolean(
@@ -57,41 +56,17 @@ class Warehouse(models.Model):
         """
         Prevent changing standard MTO rules' action from "move"
         """
-        pull_rules_list = super(Warehouse, self)._get_mto_pull_rules_values(
-            route_values)
+        pull_rules_list = super(StockWarehouse, self).\
+            _get_mto_pull_rules_values(route_values)
         for pull_rule in pull_rules_list:
             pull_rule['action'] = 'move'
 
         return pull_rules_list
 
     @api.multi
-    def _get_push_pull_rules_values(
-            self, route_values, values=None, push_values=None,
-            pull_values=None, name_suffix=''):
-        self.ensure_one()
-        pull_obj = self.env['procurement.rule']
-        res = super(Warehouse, self)._get_push_pull_rules_values(
-            route_values, values=values, push_values=push_values,
-            pull_values=pull_values, name_suffix=name_suffix)
-        customer_location = self._get_partner_locations()
-        location_id = customer_location[0].id
-        if self.mto_mts_management:
-            for pull in res[1]:
-                if pull['location_id'] == location_id:
-                    pull_mto_mts = pull.copy()
-                    pull_mto_mts_id = pull_obj.create(pull_mto_mts)
-                    pull.update({
-                        'action': 'split_procurement',
-                        'mto_rule_id': pull_mto_mts_id.id,
-                        'mts_rule_id': pull_mto_mts_id.id,
-                        'sequence': 10
-                    })
-        return res
-
-    @api.multi
     def create_routes(self):
         pull_model = self.env['procurement.rule']
-        res = super(Warehouse, self).create_routes()
+        res = super(StockWarehouse, self).create_routes()
         if self.mto_mts_management:
             mts_mto_pull_vals = self._get_mts_mto_rule()
             mts_mto_pull = pull_model.create(mts_mto_pull_vals)
@@ -112,14 +87,14 @@ class Warehouse(models.Model):
                 for warehouse in self:
                     if warehouse.mts_mto_rule_id:
                         warehouse.mts_mto_rule_id.unlink()
-        res = super(Warehouse, self).write(vals)
+        res = super(StockWarehouse, self).write(vals)
         if 'mto_mts_management' in vals:
             self.with_context({'active_test': False})._update_routes()
         return res
 
     @api.model
     def get_all_routes_for_wh(self):
-        all_routes = super(Warehouse, self).get_all_routes_for_wh()
+        all_routes = super(StockWarehouse, self).get_all_routes_for_wh()
 
         if self.mto_mts_management and self.mts_mto_rule_id.route_id:
             all_routes += self.mts_mto_rule_id.route_id
@@ -128,7 +103,7 @@ class Warehouse(models.Model):
 
     @api.multi
     def _update_name_and_code(self, name, code):
-        res = super(Warehouse, self)._update_name_and_code(name, code)
+        res = super(StockWarehouse, self)._update_name_and_code(name, code)
         if not name:
             return res
         for warehouse in self.filtered('mts_mto_rule_id'):
@@ -144,12 +119,11 @@ class Warehouse(models.Model):
         if route_type in names:
             return names[route_type]
 
-        return super(Warehouse, self)._get_route_name(route_type)
+        return super(StockWarehouse, self)._get_route_name(route_type)
 
     @api.multi
     def _update_routes(self):
-        res = super(Warehouse, self)._update_routes()
-
+        res = super(StockWarehouse, self)._update_routes()
         for warehouse in self:
             mts_mto_rule_id = warehouse.mts_mto_rule_id
             if warehouse.delivery_steps and mts_mto_rule_id:
@@ -158,6 +132,7 @@ class Warehouse(models.Model):
                     warehouse.mto_pull_id.location_id
                 mts_rules = pull_model.search([
                     ('location_src_id', '=', warehouse.lot_stock_id.id),
+                    ('location_id', '=', warehouse.mto_pull_id.location_id.id),
                     ('route_id', '=', warehouse.delivery_route_id.id),
                 ])
                 warehouse.mts_mto_rule_id.mts_rule_id = mts_rules[0].id
