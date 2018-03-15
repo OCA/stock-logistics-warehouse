@@ -177,6 +177,14 @@ class StockRequest(models.Model):
                 request.product_id.uom_id._compute_quantity(
                     open_qty, request.product_uom_id)
 
+    def get_parents(self):
+        location = self.location_id.sudo()
+        result = location
+        while location.location_id:
+            location = location.location_id
+            result |= location
+        return result
+
     @api.constrains('product_id')
     def _check_product_uom(self):
         ''' Check if the UoM has the same category as the
@@ -197,8 +205,9 @@ class StockRequest(models.Model):
         if self.warehouse_id:
             routes |= self.env['stock.location.route'].search(
                 [('warehouse_ids', 'in', self.warehouse_id.ids)])
+        parents = self.get_parents().ids
         routes = routes.filtered(lambda r: any(
-            p.location_id == self.location_id for p in r.pull_ids))
+            p.location_id.id in parents for p in r.pull_ids))
         return routes
 
     @api.onchange('warehouse_id')
