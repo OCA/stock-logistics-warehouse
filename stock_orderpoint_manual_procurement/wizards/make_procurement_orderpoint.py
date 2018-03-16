@@ -70,7 +70,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
             try:
                 self.env['procurement.group'].run(
                     item.orderpoint_id.product_id,
-                    values.get('qty'),
+                    item.qty,
                     item.orderpoint_id.product_uom,
                     item.orderpoint_id.location_id,
                     item.orderpoint_id.name,
