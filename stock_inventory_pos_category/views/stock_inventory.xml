@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+
+<record id="view_inventory_form" model="ir.ui.view">
+    <field name="name">select POS categories on inventory form</field>
+    <field name="model">stock.inventory</field>
+    <field name="inherit_id" ref="stock.view_inventory_form" />
+    <field name="arch" type="xml">
+        <field name="category_id" position="after">
+            <field name="pos_categ_ids"
+                widget="many2many_tags" options="{'no_create': True}"
+                attrs="{'invisible': [('filter', '!=', 'pos_categories')], 'required': [('filter', '=', 'pos_categories')]}" />
+        </field>
+    </field>
+</record>
+
+
+</odoo>
