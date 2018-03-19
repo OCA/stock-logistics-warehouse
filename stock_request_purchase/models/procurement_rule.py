@@ -15,13 +15,10 @@ class ProcurementRule(models.Model):
             vals['stock_request_ids'] = [(4, values['stock_request_id'])]
         return vals
 
-    def _prepare_purchase_order_line_update(self, line,
-                                            procurement_uom_po_qty,
-                                            price_unit, values):
-        vals = super(ProcurementRule,
-                     self)._prepare_purchase_order_line_update(
-            line, procurement_uom_po_qty, price_unit, values
-        )
+    def _update_purchase_order_line(self, product_id, product_qty, product_uom,
+                                    values, line, partner):
+        vals = super(ProcurementRule, self)._update_purchase_order_line(
+            product_id, product_qty, product_uom, values, line, partner)
         if 'stock_request_id' in values:
             vals['stock_request_ids'] = [(4, values['stock_request_id'])]
         return vals
