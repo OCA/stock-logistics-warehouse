@@ -11,7 +11,7 @@ class ProcurementGroup(models.Model):
     @api.model
     def run(self, product_id, product_qty, product_uom, location_id, name,
             origin, values):
-        if 'orderpoint_id' in values:
+        if 'orderpoint_id' in values and 'by_pass' not in values:
             orderpoint = values.get('orderpoint_id')
             if orderpoint.procure_uom_id and \
                     product_uom != orderpoint.procure_uom_id:
