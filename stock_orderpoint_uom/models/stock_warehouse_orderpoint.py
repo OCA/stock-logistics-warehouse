@@ -24,13 +24,3 @@ class Orderpoint(models.Model):
                           'the procurement Unit of Measure must be in the '
                           'same category.'))
         return True
-
-    def _prepare_procurement_values(self, product_qty, date=False,
-                                    group=False):
-        res = super(Orderpoint, self)._prepare_procurement_values(
-            product_qty, date=date, group=group)
-        if self.procure_uom_id and self.product_uom != self.procure_uom_id:
-            qty = self.product_uom._compute_quantity(product_qty,
-                                                     self.procure_uom_id)
-            res.update({'qty': qty})
-        return res
