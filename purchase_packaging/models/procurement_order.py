@@ -18,7 +18,8 @@ class ProcurementOrder(models.Model):
         seller = self.product_id._select_seller(
             partner_id=supplier.name,
             quantity=res['product_qty'],
-            date=po.date_order and fields.Date.from_string(po.date_order),
+            date=po.date_order and fields.Date.to_string(
+                fields.Date.from_string(po.date_order)) or None,
             uom_id=self.product_id.uom_po_id)
         if seller.packaging_id:
                 res['packaging_id'] = seller.packaging_id.id
