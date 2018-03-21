@@ -26,7 +26,6 @@
         <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree"/>
         <field name="arch" type="xml">
             <field name="product_max_qty" position="after">
-                <field name="procure_recommended_qty"/>
                 <field name="expected_seller_id"/>
             </field>
         </field>

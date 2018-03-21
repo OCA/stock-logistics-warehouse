@@ -24,31 +24,28 @@ class StockWarehouseOrderpoint(models.Model):
         'procurement.rule',
         compute='_compute_procurement_rule_id'
     )
-    involved_calendar_ids = fields.Many2many(
-        'procurement.calendar',
-        compute='_compute_involved_calendar_ids',
-        help="The possible involved calendars depending "
-        "on product configuration"
-    )
     procurement_calendar_id = fields.Many2one(
         'procurement.calendar',
-        compute='_compute_procure_recommended'
+        compute='_compute_calendar_attendance'
     )
     procurement_attendance_id = fields.Many2one(
         'procurement.calendar.attendance',
-        compute='_compute_procure_recommended'
+        compute='_compute_calendar_attendance'
     )
     location_procurement_calendar_id = fields.Many2one(
         'procurement.calendar',
         _compute='_compute_location_procurement_calendar_id'
     )
     scheduled_attendance_date = fields.Datetime(
-        compute='_compute_procure_recommended'
+        compute='_compute_calendar_attendance'
     )
     scheduled_delivery_date = fields.Datetime(
-        compute='_compute_procure_recommended'
+        compute='_compute_calendar_attendance'
     )
     procure_recommended_qty = fields.Float(
+        compute='_compute_procure_recommended'
+    )
+    substract_quantity = fields.Float(
         compute='_compute_procure_recommended'
     )
     expected_seller_id = fields.Many2one(
@@ -92,10 +89,6 @@ class StockWarehouseOrderpoint(models.Model):
             product_context = dict(self._context,
                                    location=location_orderpoints[
                                        0].location_id.id)
-            substract_quantity = location_orderpoints and not isinstance(
-                location_orderpoints.id,
-                models.NewId) and location_orderpoints.\
-                subtract_procurements_from_orderpoints() or 0.0
 
             product_quantity = location_data['products'].with_context(
                 product_context)._product_available()
@@ -122,7 +115,11 @@ class StockWarehouseOrderpoint(models.Model):
                             precision_rounding=orderpoint.product_uom.rounding
                     ) > 0:
                         qty += orderpoint.qty_multiple - remainder
-                    qty -= substract_quantity[orderpoint.id]
+
+                    qty -= orderpoint and not isinstance(
+                        orderpoint.id,
+                        models.NewId) and orderpoint.substract_quantity or 0.0
+
                     res[orderpoint.id] = float_round(
                         qty,
                         precision_rounding=orderpoint.product_uom.rounding
@@ -154,42 +151,49 @@ class StockWarehouseOrderpoint(models.Model):
                 virtual_procurement._find_suitable_rule()
 
     @api.multi
-    @api.depends('procurement_rule_id')
-    def _compute_involved_calendar_ids(self):
-        """
-        Compute the involved calendars
-        :return:
-        """
-        for orderpoint in self.filtered(
-                lambda o: o.procurement_rule_id and
-                o.procurement_rule_id.action == 'buy'):
-            calendars = self.env['procurement.calendar'].search(
-                orderpoint._get_calendar_supplier_domain())
-            orderpoint.involved_calendar_ids = calendars
-
-    @api.multi
     @api.depends('product_id', 'location_id', 'product_min_qty',
                  'product_max_qty')
-    def _compute_procure_recommended(self, limit=100):
+    def _compute_calendar_attendance(self, limit=15):
         """
-        We compute here which calendar is applying.
+        We compute here which calendar attendance and which order date
+            is applying.
         :param limit:
         :return: N/A
         """
-        for orderpoint in self:
-            procurement_date = fields.Datetime.from_string(
-                fields.Datetime.now())
-            orderpoint.scheduled_delivery_date = fields.Datetime.now()
-            i = 0
-            found = False
-            while i <= limit:
-                attendances = orderpoint.get_attendances_for_weekday(
-                    procurement_date,
-                    orderpoint.involved_calendar_ids)
-                attendances_with_partner = attendances.filtered(
+        now = fields.Datetime.now()
+        orderpoints = self
+        domain = self._get_attendances_domain()
+        orderpoint_attendances = \
+            self.env['procurement.calendar.attendance'].search(
+                domain, order="date_from asc")
+        product_dependant_calendar_products = orderpoint_attendances.mapped(
+            'product_ids')
+        i = 0
+        procurement_date = fields.Datetime.from_string(now)
+        while i <= limit:
+            daily_product_attendances, daily_no_product_attendances = \
+                self.get_attendances_for_weekday(
+                    procurement_date, orderpoint_attendances)
+            orderpoints_tmp = orderpoints
+            for orderpoint in orderpoints:
+                found = False
+                # Select only attendance where orderpoint.product is present.
+                attendances_to_look = daily_product_attendances.filtered(
+                    lambda a, ord=orderpoint: ord.product_id in a.product_ids)
+                if not attendances_to_look:
+                    attendances_to_look = daily_no_product_attendances
+                    if orderpoint.product_id in \
+                       product_dependant_calendar_products:
+                        # We must skip this day if:
+                        # if not product_dependant daily attendances found
+                        # for orderpoint BUT
+                        # the product is link to a other product_dependant
+                        # daily attendances.
+                        # That mean an attendance should be found
+                        # on the next days.
+                        continue
+                attendances_with_partner = attendances_to_look.filtered(
                     lambda a: a.procurement_calendar_id.partner_id)
-                context_date = fields.Datetime.to_string(procurement_date)
-                attendance = self.env['procurement.calendar.attendance']
                 for attendance in attendances_with_partner:
                     delivery_attendance = attendance.procurement_attendance_id
                     if delivery_attendance:
@@ -204,51 +208,83 @@ class StockWarehouseOrderpoint(models.Model):
                     # one depending on quantities
                     partner = attendance.procurement_calendar_id.partner_id
                     seller = orderpoint.product_id._select_seller(
-                        quantity=orderpoint.procure_recommended_qty,
                         date=fields.Datetime.to_string(delivery_date),
                         uom_id=orderpoint.product_id.uom_id)
                     if seller.name == partner:
                         orderpoint.procurement_attendance_id = attendance
                         orderpoint.procurement_calendar_id = \
                             attendance.procurement_calendar_id
-                        # Get expected quantity
-                        context_delivery = fields.Datetime.to_string(
-                            delivery_date)
-                        procure_recommended_qty = orderpoint.with_context(
-                            from_date=context_delivery).\
-                            _get_procure_recommended_qty(attendance)
-                        orderpoint.procure_recommended_qty = \
-                            procure_recommended_qty[orderpoint.id]
-                        found = True
-                        i = limit + 1
+                        found = attendance
+                        break
+                if not found:
+                    attendances_without_partner = attendances_to_look -\
+                        attendances_with_partner
+                    for attendance in attendances_without_partner:
+                        delivery_attendance = \
+                            attendance.procurement_attendance_id
+                        if delivery_attendance:
+                            delivery_date = \
+                                delivery_attendance.get_datetime_start(
+                                    att_date=fields.Date.to_string(
+                                        procurement_date))
+                        else:
+                            delivery_date = attendance.get_datetime_start(
+                                att_date=fields.Date.to_string(
+                                    procurement_date))
+                        found = attendance
                         break
                 if found:
                     self._set_procure_dates(
                         orderpoint,
-                        attendance,
+                        found,
                         procurement_date,
                         delivery_date
                     )
-                attendances_without_partner = attendances -\
-                    attendances_with_partner
-                for attendance in attendances_without_partner:
-                    procure_recommended_qty = orderpoint.with_context(
-                        from_date=context_date)._get_procure_recommended_qty(
-                        attendance)
-                    orderpoint.procure_recommended_qty =\
-                        procure_recommended_qty[orderpoint.id]
-                    found = True
-                    i = limit + 1
-                    break
-                procurement_date = procurement_date + relativedelta(days=1)
-                i += 1
-            if not found:
+                    orderpoints_tmp -= orderpoint
+            if not orderpoints_tmp:
+                break
+            orderpoints = orderpoints_tmp
+            procurement_date = procurement_date + relativedelta(days=1)
+            i += 1
+
+    @api.multi
+    @api.depends('product_id', 'location_id', 'product_min_qty',
+                 'product_max_qty', 'procurement_attendance_id')
+    def _compute_procure_recommended(self):
+        """
+        We compute here procure recommended to reorder.
+        :param limit:
+        :return: N/A
+        """
+        subtract_procurements = self.subtract_procurements_from_orderpoints()
+        for orderpoint in self:
+            orderpoint.substract_quantity = subtract_procurements.get(
+                orderpoint.id)
+            procurement_date = fields.Datetime.from_string(
+                orderpoint.scheduled_delivery_date)
+            attendance = orderpoint.procurement_attendance_id
+            if attendance:
+                delivery_attendance = attendance.procurement_attendance_id
+                if delivery_attendance:
+                    delivery_date = delivery_attendance.get_datetime_start(
+                        att_date=fields.Date.to_string(procurement_date))
+                else:
+                    delivery_date = attendance.get_datetime_start(
+                        att_date=fields.Date.to_string(procurement_date))
+                # Get expected quantity
+                context_delivery = fields.Datetime.to_string(
+                    delivery_date)
+                procure_recommended_qty = orderpoint.with_context(
+                    from_date=context_delivery).\
+                    _get_procure_recommended_qty(attendance)
+            else:
                 # Can't find calendar - considering now
                 procurement_date = fields.Datetime.now()
                 procure_recommended_qty = orderpoint.with_context(
-                    from_date=procurement_date)._get_procure_recommended_qty()
-                orderpoint.procure_recommended_qty =\
-                    procure_recommended_qty[orderpoint.id]
+                    from_date=procurement_date).\
+                    _get_procure_recommended_qty()
+            orderpoint.procure_recommended_qty =\
+                procure_recommended_qty[orderpoint.id]
 
     @api.model
     def _set_procure_dates(
@@ -259,43 +295,31 @@ class StockWarehouseOrderpoint(models.Model):
         orderpoint.scheduled_attendance_date = order_date
 
     @api.multi
-    def get_attendances_for_weekday(self, day_dt, calendars):
+    def get_attendances_for_weekday(self, day_dt, attendances):
         """
-        Given a day datetime, return matching attendances
+        Get daily attendance that are:
+            - linked to some products
+            - not linked to any products
         :param day_dt:
-        :param calendars:
+        :param attendances:
         :return: recordset: <procurement.calendar.attendance>
         """
-        self.ensure_one()
+        attendance_obj = self.env['procurement.calendar.attendance']
+        daily_product_attendances = attendance_obj
+        daily_no_product_attendances = attendance_obj
         weekday = day_dt.weekday()
-        attendances = self.env['procurement.calendar.attendance']
-
-        domain = self._get_attendances_domain()
-        if calendars:
-            domain = expression.AND([
-                [('procurement_calendar_id', 'in', calendars.ids)],
-                domain
-            ])
-        attendances = attendances.search(domain)
-
-        product_attendances = attendances.filtered(
-            lambda a: any(
-                product_id == self.product_id.id for product_id in
-                a.product_ids.ids))
-        filtered_attendances = product_attendances or attendances
-
-        result_attendances = self.env['procurement.calendar.attendance']
-
-        for attendance in filtered_attendances.filtered(
-                lambda att: int(att.dayofweek) == weekday and not (
-                    att.date_from and
-                    fields.Date.from_string(att.date_from) > day_dt.date()
-                ) and not (
-                    att.date_to and fields.Date.from_string(att.date_to) <
-                    day_dt.date()
-                )):
-            result_attendances |= attendance
-        return result_attendances
+        day_date = day_dt.date()
+        for att in attendances:
+            if int(att.dayofweek) == weekday and not \
+               (att.date_from and
+                fields.Date.from_string(att.date_from) > day_date) and not \
+               (att.date_to and fields.Date.from_string(att.date_to) <
+               day_date):
+                if att.product_ids:
+                    daily_product_attendances |= att
+                else:
+                    daily_no_product_attendances |= att
+        return daily_product_attendances, daily_no_product_attendances
 
     def _get_attendances_domain(self):
         """
@@ -303,30 +327,15 @@ class StockWarehouseOrderpoint(models.Model):
         if true, we check that the product corresponds
         :return: domain
         """
-        domain = []
-        product_domain = expression.OR([
-            [('product_dependant', '=', False)],
-            [('product_ids', 'in', self.product_id.ids)]
-        ])
-        domain = expression.AND([
-            product_domain, domain
-        ])
-        return domain
-
-    @api.multi
-    def _get_calendar_supplier_domain(self):
-        """
-        We get calendar domain depending on suppliers defined on product
-        supplierinfo (the right one is computed later)
-        :return:
-        """
-        sellers = self.product_id.seller_ids.mapped('name')
+        product_ids = self.mapped('product_id')
+        sellers = product_ids.mapped('seller_ids.name')
         domain = []
         if sellers:
-            domain = [('partner_id', 'in', sellers.ids)]
+            domain = [('procurement_calendar_id.partner_id', 'in',
+                       sellers.ids)]
         product_domain = expression.OR([
-            [('product_dependant', '=', False)],
-            [('attendance_ids.product_ids', 'in', self.product_id.ids)]
+            [('procurement_calendar_id.product_dependant', '=', False)],
+            [('product_ids', 'in', product_ids.ids)]
         ])
         domain = expression.AND([
             product_domain, domain
