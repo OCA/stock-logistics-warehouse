@@ -50,10 +50,18 @@ class Orderpoint(models.Model):
         # This override will return 12 and no additionnal procurement will be
         # created
         res = super(Orderpoint, self).subtract_procurements_from_orderpoints()
+        procurements = self.env['procurement.order'].search(
+            [('orderpoint_id', 'in', self.ids),
+             ('state', 'not in', ['cancel', 'done']),
+             ('purchase_line_id.state', '=', ['draft', 'sent', 'to approve'])])
+        procurements.mapped('product_uom.rounding')
+        procurements.mapped('purchase_line_id.state')
+        procs_by_orderpoint = dict.fromkeys(
+            self.ids, self.env['procurement.order'])
+        for proc in procurements:
+            procs_by_orderpoint[proc.orderpoint_id.id] |= proc
         for orderpoint in self:
-            procs = self.env['procurement.order'].search(
-                [('orderpoint_id', '=', orderpoint.id),
-                 ('state', 'not in', ['cancel', 'done'])])
+            procs = procs_by_orderpoint.get(orderpoint.id)
             if procs:
                 po_lines = procs.mapped('purchase_line_id').filtered(
                     lambda x: x.state in ['draft', 'sent', 'to approve'])
