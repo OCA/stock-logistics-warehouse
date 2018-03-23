@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="stock_inventory_location_form_view">
+            <field name="name">Exhaustive inventory</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <!-- Add type of inventory: standard or exhaustive. -->
+                <xpath expr="//field[@name='location_id']" position="after">
+                    <field name="exhaustive"/>
+                </xpath>
+                <!-- Filter becomes read_only if exhaustive is checked -->
+                <xpath expr="//field[@name='filter']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('exhaustive', '=' , True)]}</attribute>
+                </xpath>
+                <!-- Redirect the "confirm" button -->
+                <xpath expr="//button[@name='action_done']" position="attributes">
+                    <attribute name="name">confirm_missing_locations</attribute>
+                </xpath>
+
+                <!-- Replace the notes with relevant ones for exhaustive inventories -->
+                <xpath expr="//ul[preceding::h3[.='Notes']]/li[2]" position="attributes">
+                    <attribute name="attrs">{'invisible': [('exhaustive', '=' , True)]}</attribute>
+                </xpath>
+                <xpath expr="//ul[preceding::h3[.='Notes']]/li[3]" position="attributes">
+                    <attribute name="attrs">{'invisible': [('exhaustive', '=' , True)]}</attribute>
+                </xpath>
+                <xpath expr="//ul[preceding::h3[.='Notes']]/li[1]" position="after">
+                    <li attrs="{'invisible': [('exhaustive', '=' , False)]}">
+                        This inventory adjustment is set to be exhaustive: any goods you do not enter
+                        in this list will be considered inexistent and removed from the stock.
+                    </li>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_inventory_complete_filter">
+            <field name="name">Exhaustive inventory : add filter for complete or partial inventory</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <filter icon="terp-check" name="exhaustive" string="Exhaustive" domain="[('exhaustive', '=', True)]"
+                            help="Only select exhaustive inventory adjustments" />
+                    <separator orientation="vertical"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Show exhaustive inventories by default -->
+        <record id="stock.action_inventory_form" model="ir.actions.act_window">
+            <field name="context">{'search_default_exhaustive': 1}</field>
+        </record>
+	</data>
+</openerp>
