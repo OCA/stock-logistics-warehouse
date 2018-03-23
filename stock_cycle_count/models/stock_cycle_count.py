@@ -57,7 +57,7 @@ class StockCycleCount(models.Model):
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company',
         required=True,
-        default='_default_company',
+        default=_default_company,
         readonly=True,
     )
 
