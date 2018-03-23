@@ -235,7 +235,7 @@ class TestStockCycleCount(common.TransactionCase):
         for r in rules:
             r._compute_rule_description()
             self.assertTrue(r.rule_description, 'No description provided')
-        self.rule_accuracy._get_warehouses()
+        self.rule_accuracy._onchange_locaton_ids()
         self.assertEqual(self.rule_accuracy.warehouse_ids.ids, self.big_wh.ids,
                          'Rules defined for zones are not getting the right '
                          'warehouse.')
