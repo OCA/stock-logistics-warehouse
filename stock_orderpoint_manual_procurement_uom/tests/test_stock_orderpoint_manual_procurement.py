@@ -139,7 +139,13 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         self.assertEquals(len(purchase_line), 1)
         self.assertEqual(self.reorder.product_id.id,
                          purchase_line.product_id.id)
-        self.assertEqual(self.reorder.name, purchase.origin)
+        # it could be using an existing PO, thus there could be more origins.
+        self.assertTrue(self.reorder.name in purchase.origin)
         self.assertNotEqual(self.reorder.procure_recommended_qty,
                             purchase_line.product_qty)
-        self.assertEqual(purchase_line.product_qty, 40)
+        if self.reorder.procure_uom_id == self.reorder.product_id.uom_po_id:
+            # Our PO unit of measure is also dozens (procure uom)
+            self.assertEqual(purchase_line.product_qty, 40)
+        else:
+            # PO unit of measure is units, not the same as procure uom.
+            self.assertEqual(purchase_line.product_qty, 480)
