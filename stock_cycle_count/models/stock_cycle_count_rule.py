@@ -45,7 +45,7 @@ class StockCycleCountRule(models.Model):
                           'warehouse.')
                     )
 
-    @api.onchange('rule_type')
+    @api.depends('rule_type')
     def _compute_rule_description(self):
         if self.rule_type == 'periodic':
             self.rule_description = _('Ensures that at least a defined number '
@@ -153,16 +153,16 @@ class StockCycleCountRule(models.Model):
     def _compute_rule_periodic(self, locs):
         cycle_counts = []
         for loc in locs:
-            last_inventories = self.env['stock.inventory'].search([
+            latest_inventory_date = self.env['stock.inventory'].search([
                 ('location_id', '=', loc.id),
-                ('state', 'in', ['confirm', 'done', 'draft'])]).mapped('date')
-            if last_inventories:
-                latest_inventory = sorted(last_inventories, reverse=True)[0]
+                ('state', 'in', ['confirm', 'done', 'draft'])],
+                order="date desc", limit=1).date
+            if latest_inventory_date:
                 try:
                     period = self.periodic_count_period / \
                         self.periodic_qty_per_period
                     next_date = datetime.strptime(
-                        latest_inventory,
+                        latest_inventory_date,
                         DEFAULT_SERVER_DATETIME_FORMAT) + timedelta(
                         days=period)
                     if next_date < datetime.today():
