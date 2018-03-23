@@ -12,6 +12,5 @@ class StockMove(models.Model):
     @api.multi
     def action_done(self):
         super(StockMove, self).action_done()
-        for move in self:
-            move.location_id.check_zero_confirmation()
+        self.mapped("location_id").check_zero_confirmation()
         return True
