@@ -6,7 +6,7 @@
     "name": "Stock Account Change Product Valuation",
     "summary": "Adjusts valuation of the products and quants when the cost "
                "method or type of a product changes",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
