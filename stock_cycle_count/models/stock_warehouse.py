@@ -66,6 +66,16 @@ class StockWarehouse(models.Model):
             ('rule_type', '!=', 'zero'), ('warehouse_ids', 'in', self.ids)])
         return rules
 
+    @api.model
+    def _prepare_cycle_count(self, cycle_count_proposed):
+        return {
+            'date_deadline': cycle_count_proposed['date'],
+            'location_id': cycle_count_proposed['location'].id,
+            'cycle_count_rule_id': cycle_count_proposed[
+                'rule_type'].id,
+            'state': 'draft'
+        }
+
     @api.multi
     def action_compute_cycle_count_rules(self):
         """ Apply the rule in all the sublocations of a given warehouse(s) and
@@ -110,13 +120,9 @@ class StockWarehouse(models.Model):
                         DEFAULT_SERVER_DATETIME_FORMAT) - datetime.today()
                     if not existing_cycle_counts and \
                             delta.days < rec.cycle_count_planning_horizon:
-                        self.env['stock.cycle.count'].create({
-                            'date_deadline': cycle_count_proposed['date'],
-                            'location_id': cycle_count_proposed['location'].id,
-                            'cycle_count_rule_id': cycle_count_proposed[
-                                'rule_type'].id,
-                            'state': 'draft'
-                        })
+                        cc_vals = self._prepare_cycle_count(
+                            cycle_count_proposed)
+                        self.env['stock.cycle.count'].create(cc_vals)
 
     @api.model
     def cron_cycle_count(self):
