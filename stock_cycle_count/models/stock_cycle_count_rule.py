@@ -83,7 +83,7 @@ class StockCycleCountRule(models.Model):
                 )
 
     @api.onchange('location_ids')
-    def _get_warehouses(self):
+    def _onchange_locaton_ids(self):
         """Get the warehouses for the selected locations."""
         wh_ids = []
         for loc in self.location_ids:
