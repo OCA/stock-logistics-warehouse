@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record model="ir.ui.view" id="stock_warehouse_orderpoint_tree_view">
+            <field name="name">stock.warehouse.orderpoint.tree</field>
+            <field name="model">stock.warehouse.orderpoint</field>
+            <field name="inherit_id"
+                   ref="stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_tree_view" />
+            <field name="arch" type="xml">
+                <field name="product_location_qty" position="after">
+                    <field name="product_location_qty_available_not_res" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="stock_warehouse_orderpoint_form_view">
+            <field name="name">stock.warehouse.orderpoint.form</field>
+            <field name="model">stock.warehouse.orderpoint</field>
+            <field name="inherit_id"
+                   ref="stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_form_view" />
+            <field name="arch" type="xml">
+                <field name="product_location_qty" position="after">
+                    <field name="product_location_qty_available_not_res" />
+                </field>
+            </field>
+        </record>
+</odoo>
