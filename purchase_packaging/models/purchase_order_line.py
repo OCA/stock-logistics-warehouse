@@ -64,8 +64,6 @@ class PurchaseOrderLine(models.Model):
              ('uom_type', '=', 'reference')])
         uom_by_category = {to_uom.category_id: to_uom for to_uom in to_uoms}
         for line in self:
-            if not line.product_purchase_uom_id:
-                continue
             line.product_qty = line.product_purchase_uom_id._compute_quantity(
                 line.product_purchase_qty,
                 uom_by_category.get(line.product_purchase_uom_id.category_id))
