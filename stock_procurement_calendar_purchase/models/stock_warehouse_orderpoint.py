@@ -7,7 +7,6 @@ from collections import defaultdict
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
-from odoo.osv import expression
 from odoo.tools import float_compare, float_round
 
 _logger = logging.getLogger(__name__)
@@ -20,10 +19,6 @@ class StockWarehouseOrderpoint(models.Model):
 
     _location_field = 'location_id'
 
-    procurement_rule_id = fields.Many2one(
-        'procurement.rule',
-        compute='_compute_procurement_rule_id'
-    )
     procurement_calendar_id = fields.Many2one(
         'procurement.calendar',
         compute='_compute_calendar_attendance'
@@ -93,8 +88,6 @@ class StockWarehouseOrderpoint(models.Model):
             product_quantity = location_data['products'].with_context(
                 product_context)._product_available()
             for orderpoint in location_orderpoints:
-                if not orderpoint.product_id:
-                    continue
                 op_product_virtual = \
                     product_quantity[orderpoint.product_id.id][
                         'virtual_available']
@@ -135,22 +128,6 @@ class StockWarehouseOrderpoint(models.Model):
                     quantity=orderpoint.procure_recommended_qty)
 
     @api.multi
-    @api.depends('location_id', 'product_id')
-    def _compute_procurement_rule_id(self):
-        """
-        Compute the procurement rule base on suitable rules
-        :return:
-        """
-        for orderpoint in self:
-            vals = {
-                'location_id': orderpoint.location_id,
-                'product_id': orderpoint.product_id
-            }
-            virtual_procurement = self.env['procurement.order'].new(vals)
-            orderpoint.procurement_rule_id =\
-                virtual_procurement._find_suitable_rule()
-
-    @api.multi
     @api.depends('product_id', 'location_id', 'product_min_qty',
                  'product_max_qty')
     def _compute_calendar_attendance(self, limit=15):
@@ -178,10 +155,10 @@ class StockWarehouseOrderpoint(models.Model):
             for orderpoint in orderpoints:
                 found = False
                 # Select only attendance where orderpoint.product is present.
-                attendances_to_look = daily_product_attendances.filtered(
+                attendances_to_look_for = daily_product_attendances.filtered(
                     lambda a, ord=orderpoint: ord.product_id in a.product_ids)
-                if not attendances_to_look:
-                    attendances_to_look = daily_no_product_attendances
+                if not attendances_to_look_for:
+                    attendances_to_look_for = daily_no_product_attendances
                     if orderpoint.product_id in \
                        product_dependant_calendar_products:
                         # We must skip this day if:
@@ -192,7 +169,7 @@ class StockWarehouseOrderpoint(models.Model):
                         # That mean an attendance should be found
                         # on the next days.
                         continue
-                attendances_with_partner = attendances_to_look.filtered(
+                attendances_with_partner = attendances_to_look_for.filtered(
                     lambda a: a.procurement_calendar_id.partner_id)
                 for attendance in attendances_with_partner:
                     delivery_attendance = attendance.procurement_attendance_id
@@ -217,7 +194,7 @@ class StockWarehouseOrderpoint(models.Model):
                         found = attendance
                         break
                 if not found:
-                    attendances_without_partner = attendances_to_look -\
+                    attendances_without_partner = attendances_to_look_for -\
                         attendances_with_partner
                     for attendance in attendances_without_partner:
                         delivery_attendance = \
@@ -328,16 +305,8 @@ class StockWarehouseOrderpoint(models.Model):
         :return: domain
         """
         product_ids = self.mapped('product_id')
-        sellers = product_ids.mapped('seller_ids.name')
-        domain = []
-        if sellers:
-            domain = [('procurement_calendar_id.partner_id', 'in',
-                       sellers.ids)]
-        product_domain = expression.OR([
-            [('procurement_calendar_id.product_dependant', '=', False)],
-            [('product_ids', 'in', product_ids.ids)]
-        ])
-        domain = expression.AND([
-            product_domain, domain
-        ])
+        domain = [
+            ('procurement_calendar_id.product_dependant', '=', False),
+            ('product_ids', 'in', product_ids.ids)
+        ]
         return domain

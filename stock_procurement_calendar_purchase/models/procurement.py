@@ -9,6 +9,12 @@ class ProcurementOrder(models.Model):
 
     _inherit = 'procurement.order'
 
+    @api.multi
+    def run(self, autocommit=False):
+        # preload data for def check
+        self.mapped('orderpoint_id.procurement_calendar_id')
+        return super(ProcurementOrder, self).run(autocommit)
+
     def _procurement_from_orderpoint_get_groups(self, orderpoint_ids):
         orderpoint = self.env['stock.warehouse.orderpoint'].browse(
             orderpoint_ids[0])
