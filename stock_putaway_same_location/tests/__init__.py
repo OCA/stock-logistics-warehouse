@@ -1,0 +1,1 @@
+from . import test_same_location_putaway_strategy
