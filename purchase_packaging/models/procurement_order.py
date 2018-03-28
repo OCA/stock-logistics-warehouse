@@ -53,7 +53,9 @@ class Orderpoint(models.Model):
         procurements = self.env['procurement.order'].search(
             [('orderpoint_id', 'in', self.ids),
              ('state', 'not in', ['cancel', 'done']),
-             ('purchase_line_id.state', '=', ['draft', 'sent', 'to approve'])])
+             ('purchase_line_id.state', 'in', ['draft', 'sent', 'to approve'])
+             ]
+        )
         procurements.mapped('product_uom.rounding')
         procurements.mapped('purchase_line_id.state')
         procs_by_orderpoint = dict.fromkeys(
