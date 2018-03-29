@@ -6,6 +6,7 @@
 
 from odoo import api, fields, models
 from odoo.addons import decimal_precision as dp
+from odoo.tools.float_utils import float_round
 
 UNIT = dp.get_precision('Product Unit of Measure')
 
@@ -57,15 +58,9 @@ class ProductProduct(models.Model):
     )
 
     @api.multi
-    def _product_available_not_res_hook(self, quants):
-        """Hook used to introduce possible variations"""
-        return False
-
-    @api.multi
     def _prepare_domain_available_not_reserved(self):
         domain_quant = [
             ('product_id', 'in', self.ids),
-            ('contains_unreserved', '=', True),
         ]
         domain_quant_locations = self._get_domain_locations()[0]
         domain_quant.extend(domain_quant_locations)
@@ -77,23 +72,26 @@ class ProductProduct(models.Model):
         res = {}
 
         domain_quant = self._prepare_domain_available_not_reserved()
-        quants = self.env['stock.quant'].with_context(lang=False).search(
+        quants = self.env['stock.quant'].with_context(lang=False).read_group(
             domain_quant,
-        )
-        # TODO: this should probably be refactored performance-wise
-        for prod in self:
-            vals = {}
-            prod_quant = quants.filtered(lambda x: x.product_id == prod)
-            quantity = sum(prod_quant.mapped(
-                lambda x: x._get_available_quantity(
-                    x.product_id,
-                    x.location_id
-                )
-            ))
-            vals['qty_available_not_res'] = quantity
-            res[prod.id] = vals
-        self._product_available_not_res_hook(quants)
-
+            ['product_id', 'location_id', 'quantity', 'reserved_quantity'],
+            ['product_id', 'location_id'],
+            lazy=False)
+        product_sums = {}
+        for quant in quants:
+            # create a dictionary with the total value per products
+            product_sums.setdefault(quant['product_id'][0], 0.)
+            product_sums[quant['product_id'][0]] += (
+                quant['quantity'] - quant['reserved_quantity']
+            )
+        for product in self.with_context(prefetch_fields=False, lang=''):
+            available_not_res = float_round(
+                product_sums.get(product.id, 0.0),
+                precision_rounding=product.uom_id.rounding
+            )
+            res[product.id] = {
+                'qty_available_not_res': available_not_res,
+            }
         return res
 
     @api.multi

@@ -19,6 +19,23 @@ class TestStockLogisticsWarehouse(SavepointCase):
         cls.stock_location = cls.env.ref('stock.stock_location_stock')
         cls.customer_location = cls.env.ref('stock.stock_location_customers')
         cls.uom_unit = cls.env.ref('product.product_uom_unit')
+        cls.main_company = cls.env.ref('base.main_company')
+
+        cls.bin_a = cls.env['stock.location'].create({
+            'usage': 'internal',
+            'name': 'Bin A',
+            'location_id': cls.stock_location.id,
+            'company_id': cls.main_company.id
+        })
+
+        cls.bin_b = cls.env['stock.location'].create({
+            'usage': 'internal',
+            'name': 'Bin B',
+            'location_id': cls.stock_location.id,
+            'company_id': cls.main_company.id
+        })
+
+        cls.env['stock.location']._parent_store_compute()
 
         # Create product template
         cls.templateAB = cls.templateObj.create({
@@ -140,3 +157,21 @@ class TestStockLogisticsWarehouse(SavepointCase):
         self.compare_qty_available_not_res(self.templateAB, 3)
 
         self.templateAB.action_open_quants_unreserved()
+
+    def test_more_than_one_quant(self):
+        self.env['stock.quant'].create(
+            {'location_id': self.stock_location.id,
+             'company_id': self.main_company.id,
+             'product_id': self.productA.id,
+             'quantity': 10.0})
+        self.env['stock.quant'].create(
+            {'location_id': self.bin_a.id,
+             'company_id': self.main_company.id,
+             'product_id': self.productA.id,
+             'quantity': 10.0})
+        self.env['stock.quant'].create(
+            {'location_id': self.bin_b.id,
+             'company_id': self.main_company.id,
+             'product_id': self.productA.id,
+             'quantity': 60.0})
+        self.compare_qty_available_not_res(self.productA, 80)
