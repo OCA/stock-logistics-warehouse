@@ -53,9 +53,7 @@ class PurchaseSupplierWizard(models.TransientModel):
         # TODO CHECK RFQ/PO MANAGMENT FROM PARTNER.
         return result
 
-    def _get_qty(self, prd_tmpl, supplier, stock_period_max):
-        product = self.env['product.product'].search(
-            [('product_tmpl_id', '=', prd_tmpl.id)], limit=1)
+    def _get_qty(self, product, supplier, stock_period_max):
         qty = self.env['purchase.purchase_wizard']._get_qty(
             product, supplier, stock_period_max)
         return qty
