@@ -48,7 +48,8 @@ class StockWarehouseOrderpoint(models.Model):
         product_model = self.env['product.product']
         mrp_installed = hasattr(product_model, 'bom_count')
         for this in self:
-            product = this.product_id
+            product = this.product_id.with_context(
+                location=this.warehouse_id.lot_stock_id.id)
             if not product.purchase_ok and \
                     (not mrp_installed or product.bom_count == 0):
                 # Never purchase products, if that is not ok:
