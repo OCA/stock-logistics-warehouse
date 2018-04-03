@@ -5,8 +5,10 @@
 import logging
 from collections import defaultdict
 from datetime import datetime
+import pytz
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
+from odoo.osv import expression
 from odoo.tools import float_compare, float_round
 
 _logger = logging.getLogger(__name__)
@@ -138,6 +140,11 @@ class StockWarehouseOrderpoint(models.Model):
         :return: N/A
         """
         now = fields.Datetime.now()
+        tz = pytz.timezone(self.env.user.tz) if self.env.user.tz else pytz.utc
+        utc = pytz.utc
+        now_as_tz = tz.localize(fields.Datetime.from_string(now))
+        now_as_tz = now_as_tz.astimezone(utc)
+
         orderpoints = self
         domain = self._get_attendances_domain()
         orderpoint_attendances = \
@@ -154,6 +161,7 @@ class StockWarehouseOrderpoint(models.Model):
             orderpoints_tmp = orderpoints
             for orderpoint in orderpoints:
                 found = False
+                order_datetime = False
                 # Select only attendance where orderpoint.product is present.
                 attendances_to_look_for = daily_product_attendances.filtered(
                     lambda a, ord=orderpoint: ord.product_id in a.product_ids)
@@ -172,6 +180,11 @@ class StockWarehouseOrderpoint(models.Model):
                 attendances_with_partner = attendances_to_look_for.filtered(
                     lambda a: a.procurement_calendar_id.partner_id)
                 for attendance in attendances_with_partner:
+                    order_datetime = attendance.get_datetime_start(
+                        att_date=fields.Date.to_string(procurement_date))
+                    # skip attendance that have order_datetime lower than now
+                    if order_datetime < now_as_tz:
+                        continue
                     delivery_attendance = attendance.procurement_attendance_id
                     if delivery_attendance:
                         delivery_date = delivery_attendance.get_datetime_start(
@@ -197,6 +210,12 @@ class StockWarehouseOrderpoint(models.Model):
                     attendances_without_partner = attendances_to_look_for -\
                         attendances_with_partner
                     for attendance in attendances_without_partner:
+                        order_datetime = attendance.get_datetime_start(
+                            att_date=fields.Date.to_string(procurement_date))
+                        # skip attendance that have order_datetime lower
+                        # than now
+                        if order_datetime < now_as_tz:
+                            continue
                         delivery_attendance = \
                             attendance.procurement_attendance_id
                         if delivery_attendance:
@@ -211,12 +230,8 @@ class StockWarehouseOrderpoint(models.Model):
                         found = attendance
                         break
                 if found:
-                    self._set_procure_dates(
-                        orderpoint,
-                        found,
-                        procurement_date,
-                        delivery_date
-                    )
+                    orderpoint.scheduled_delivery_date = delivery_date
+                    orderpoint.scheduled_attendance_date = order_datetime
                     orderpoints_tmp -= orderpoint
             if not orderpoints_tmp:
                 break
@@ -263,14 +278,6 @@ class StockWarehouseOrderpoint(models.Model):
             orderpoint.procure_recommended_qty =\
                 procure_recommended_qty[orderpoint.id]
 
-    @api.model
-    def _set_procure_dates(
-            self, orderpoint, attendance, procurement_date, delivery_date):
-        orderpoint.scheduled_delivery_date = delivery_date
-        order_date = attendance.get_datetime_start(
-            att_date=fields.Date.to_string(procurement_date))
-        orderpoint.scheduled_attendance_date = order_date
-
     @api.multi
     def get_attendances_for_weekday(self, day_dt, attendances):
         """
@@ -305,8 +312,7 @@ class StockWarehouseOrderpoint(models.Model):
         :return: domain
         """
         product_ids = self.mapped('product_id')
-        domain = [
-            ('procurement_calendar_id.product_dependant', '=', False),
-            ('product_ids', 'in', product_ids.ids)
-        ]
-        return domain
+        return expression.OR([
+            [('procurement_calendar_id.product_dependant', '=', False)],
+            [('product_ids', 'in', product_ids.ids)]
+        ])
