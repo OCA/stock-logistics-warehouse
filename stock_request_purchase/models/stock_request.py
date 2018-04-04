@@ -1,7 +1,8 @@
 # Copyright 2017 Eficent Business and IT Consulting Services, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class StockRequest(models.Model):
@@ -16,6 +17,15 @@ class StockRequest(models.Model):
     purchase_line_ids = fields.Many2many('purchase.order.line',
                                          string='Purchase Order Lines',
                                          readonly=True, copy=False)
+
+    @api.constrains('purchase_line_ids', 'company_id')
+    def _check_purchase_company_constrains(self):
+        for rec in self:
+            for line in rec.purchase_line_ids:
+                if line.company_id != rec.company_id:
+                    raise ValidationError(
+                        _('You have linked to a purchase order line '
+                          'that belongs to another company.'))
 
     @api.depends('purchase_line_ids')
     def _compute_purchase_ids(self):

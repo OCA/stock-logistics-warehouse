@@ -37,6 +37,8 @@ class TestStockRequest(common.TransactionCase):
             [self.stock_request_manager_group.id],
             [self.main_company.id, self.company_2.id])
         self.product = self._create_product('SH', 'Shoes', False)
+        self.product_company_2 = self._create_product('SH', 'Shoes',
+                                                      self.company_2.id)
 
         self.ressuply_loc = self.env['stock.location'].create({
             'name': 'Ressuply',
@@ -211,6 +213,29 @@ class TestStockRequest(common.TransactionCase):
         # With no route found, should raise an error
         with self.assertRaises(exceptions.UserError):
             stock_request.action_confirm()
+
+    def test_stock_request_constrains(self):
+        vals = {
+            'product_id': self.product.id,
+            'product_uom_id': self.product.uom_id.id,
+            'product_uom_qty': 5.0,
+            'company_id': self.main_company.id,
+            'warehouse_id': self.warehouse.id,
+            'location_id': self.warehouse.lot_stock_id.id,
+        }
+
+        stock_request = self.stock_request.sudo(
+            self.stock_request_user).create(vals)
+
+        # Cannot assign a warehouse that belongs to another company
+        with self.assertRaises(exceptions.ValidationError):
+            stock_request.warehouse_id = self.wh2
+        # Cannot assign a product that belongs to another company
+        with self.assertRaises(exceptions.ValidationError):
+            stock_request.product_id = self.product_company_2
+        # Cannot assign a location that belongs to another company
+        with self.assertRaises(exceptions.ValidationError):
+            stock_request.location_id = self.wh2.lot_stock_id
 
     def test_create_request_01(self):
 
