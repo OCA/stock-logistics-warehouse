@@ -2,7 +2,7 @@
 # © 2016-17 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.addons.stock.tests.common import TestStockCommon
+from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class TestMerge(TestStockCommon):
@@ -13,7 +13,7 @@ class TestMerge(TestStockCommon):
         loc_supplier_id = self.env.ref('stock.stock_location_suppliers')
         self.loc_stock = self.env.ref('stock.stock_location_stock')
         self.loc_scrap = self.env.ref('stock.stock_location_scrapped')
-        self.product = self.env.ref('product.product_product_36')
+        self.product = self.env.ref('product.product_product_7')
 
         # Zero out the inventory of the product
         inventory = self.env['stock.inventory'].create(
