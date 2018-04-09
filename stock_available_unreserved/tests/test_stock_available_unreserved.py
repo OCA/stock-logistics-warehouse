@@ -43,6 +43,8 @@ class TestStockLogisticsWarehouse(SavepointCase):
             'uom_id': cls.uom_unit.id,
         })
 
+        cls.productC = cls.templateAB.product_variant_ids
+
         # Create product A and B
         cls.productA = cls.productObj.create({
             'name': 'product A',
@@ -175,3 +177,165 @@ class TestStockLogisticsWarehouse(SavepointCase):
              'product_id': self.productA.id,
              'quantity': 60.0})
         self.compare_qty_available_not_res(self.productA, 80)
+
+    def check_variants_found_correctly(self, operator, value, expected):
+        domain = [('id', 'in', self.templateAB.product_variant_ids.ids)]
+        return self.check_found_correctly(self.env['product.product'],
+                                          domain, operator, value, expected)
+
+    def check_template_found_correctly(self, operator, value, expected):
+        # There may be other products already in the system: ignore those
+        domain = [('id', 'in', self.templateAB.ids)]
+        return self.check_found_correctly(self.env['product.template'],
+                                          domain, operator, value, expected)
+
+    def check_found_correctly(self, model, domain, operator, value, expected):
+        found = model.search(domain + [
+            ('qty_available_not_res', operator, value)]
+        )
+        if found != expected:
+            self.fail(
+                "Searching for products failed: search for unreserved "
+                "quantity {operator} {value}; expected to find "
+                "{expected}, but found {found}".format(
+                    operator=operator,
+                    value=value,
+                    expected=expected or "no products",
+                    found=found,
+                )
+            )
+
+    def test_stock_search(self):
+        all_variants = self.templateAB.product_variant_ids
+        a_and_b = self.productA + self.productB
+        b_and_c = self.productB + self.productC
+        a_and_c = self.productA + self.productC
+        no_variants = self.env['product.product']
+        no_template = self.env['product.template']
+        # Start: one template with three variants.
+        # All variants have zero unreserved stock
+        self.check_variants_found_correctly('=', 0, all_variants)
+        self.check_variants_found_correctly('>=', 0, all_variants)
+        self.check_variants_found_correctly('<=', 0, all_variants)
+        self.check_variants_found_correctly('>', 0, no_variants)
+        self.check_variants_found_correctly('<', 0, no_variants)
+        self.check_variants_found_correctly('!=', 0, no_variants)
+
+        self.check_template_found_correctly('=', 0, self.templateAB)
+        self.check_template_found_correctly('>=', 0, self.templateAB)
+        self.check_template_found_correctly('<=', 0, self.templateAB)
+        self.check_template_found_correctly('>', 0, no_template)
+        self.check_template_found_correctly('<', 0, no_template)
+        self.check_template_found_correctly('!=', 0, no_template)
+
+        self.pickingInA.action_confirm()
+        # All variants still have zero unreserved stock
+        self.check_variants_found_correctly('=', 0, all_variants)
+        self.check_variants_found_correctly('>=', 0, all_variants)
+        self.check_variants_found_correctly('<=', 0, all_variants)
+        self.check_variants_found_correctly('>', 0, no_variants)
+        self.check_variants_found_correctly('<', 0, no_variants)
+        self.check_variants_found_correctly('!=', 0, no_variants)
+
+        self.check_template_found_correctly('=', 0, self.templateAB)
+        self.check_template_found_correctly('>=', 0, self.templateAB)
+        self.check_template_found_correctly('<=', 0, self.templateAB)
+        self.check_template_found_correctly('>', 0, no_template)
+        self.check_template_found_correctly('<', 0, no_template)
+        self.check_template_found_correctly('!=', 0, no_template)
+
+        self.pickingInA.action_assign()
+        # All variants still have zero unreserved stock
+        self.check_variants_found_correctly('=', 0, all_variants)
+        self.check_variants_found_correctly('>=', 0, all_variants)
+        self.check_variants_found_correctly('<=', 0, all_variants)
+        self.check_variants_found_correctly('>', 0, no_variants)
+        self.check_variants_found_correctly('<', 0, no_variants)
+        self.check_variants_found_correctly('!=', 0, no_variants)
+
+        self.check_template_found_correctly('=', 0, self.templateAB)
+        self.check_template_found_correctly('>=', 0, self.templateAB)
+        self.check_template_found_correctly('<=', 0, self.templateAB)
+        self.check_template_found_correctly('>', 0, no_template)
+        self.check_template_found_correctly('<', 0, no_template)
+        self.check_template_found_correctly('!=', 0, no_template)
+
+        self.pickingInA.button_validate()
+        # product A has 2 unreserved stock, other variants have 0
+
+        self.check_variants_found_correctly('=', 2, self.productA)
+        self.check_variants_found_correctly('=', 0, b_and_c)
+        self.check_variants_found_correctly('>', 0, self.productA)
+        self.check_variants_found_correctly('<', 0, no_variants)
+        self.check_variants_found_correctly('!=', 0, self.productA)
+        self.check_variants_found_correctly('!=', 1, all_variants)
+        self.check_variants_found_correctly('!=', 2, b_and_c)
+        self.check_variants_found_correctly('<=', 0, b_and_c)
+        self.check_variants_found_correctly('<=', 1, b_and_c)
+        self.check_variants_found_correctly('>=', 0, all_variants)
+        self.check_variants_found_correctly('>=', 1, self.productA)
+
+        self.check_template_found_correctly('=', 0, self.templateAB)
+        self.check_template_found_correctly('=', 1, no_template)
+        self.check_template_found_correctly('=', 2, self.templateAB)
+        self.check_template_found_correctly('!=', 0, self.templateAB)
+        self.check_template_found_correctly('!=', 1, self.templateAB)
+        self.check_template_found_correctly('!=', 2, self.templateAB)
+        self.check_template_found_correctly('>', -1, self.templateAB)
+        self.check_template_found_correctly('>', 0, self.templateAB)
+        self.check_template_found_correctly('>', 1, self.templateAB)
+        self.check_template_found_correctly('>', 2, no_template)
+        self.check_template_found_correctly('<', 3, self.templateAB)
+        self.check_template_found_correctly('<', 2, self.templateAB)
+        self.check_template_found_correctly('<', 1, self.templateAB)
+        self.check_template_found_correctly('<', 0, no_template)
+        self.check_template_found_correctly('>=', 0, self.templateAB)
+        self.check_template_found_correctly('>=', 1, self.templateAB)
+        self.check_template_found_correctly('>=', 2, self.templateAB)
+        self.check_template_found_correctly('>=', 3, no_template)
+        self.check_template_found_correctly('<=', 3, self.templateAB)
+        self.check_template_found_correctly('<=', 2, self.templateAB)
+        self.check_template_found_correctly('<=', 1, self.templateAB)
+        self.check_template_found_correctly('<=', 0, self.templateAB)
+        self.check_template_found_correctly('<=', -1, no_template)
+
+        self.pickingInB.action_done()
+        # product A has 2 unreserved, product B has 3 unreserved and
+        # the remaining variant has 0
+
+        self.check_variants_found_correctly('=', 2, self.productA)
+        self.check_variants_found_correctly('=', 3, self.productB)
+        self.check_variants_found_correctly('=', 0, self.productC)
+        self.check_variants_found_correctly('>', 0, a_and_b)
+        self.check_variants_found_correctly('<', 0, no_variants)
+        self.check_variants_found_correctly('!=', 0, a_and_b)
+        self.check_variants_found_correctly('!=', 1, all_variants)
+        self.check_variants_found_correctly('!=', 2, b_and_c)
+        self.check_variants_found_correctly('!=', 3, a_and_c)
+        self.check_variants_found_correctly('<=', 0, self.productC)
+        self.check_variants_found_correctly('<=', 1, self.productC)
+        self.check_variants_found_correctly('>=', 0, all_variants)
+        self.check_variants_found_correctly('>=', 1, a_and_b)
+        self.check_variants_found_correctly('>=', 2, a_and_b)
+        self.check_variants_found_correctly('>=', 3, self.productB)
+        self.check_variants_found_correctly('>=', 4, no_variants)
+
+        self.check_template_found_correctly('=', 0, self.templateAB)
+        self.check_template_found_correctly('=', 1, no_template)
+        self.check_template_found_correctly('=', 2, self.templateAB)
+        self.check_template_found_correctly('=', 3, self.templateAB)
+        self.check_template_found_correctly('!=', 0, self.templateAB)
+        self.check_template_found_correctly('!=', 2, self.templateAB)
+        self.check_template_found_correctly('!=', 3, self.templateAB)
+        self.check_template_found_correctly('>', 1, self.templateAB)
+        self.check_template_found_correctly('>', 2, self.templateAB)
+        # This part may seem a bit unintuitive, but this is the
+        # way it works in the Odoo core
+        # Searches are "deferred" to the variants, so while the template says
+        # it has a stock of 5, searching for a stock greater than 3 will not
+        # find anything because no singular variant has a higher stock
+        self.check_template_found_correctly('>', 3, no_template)
+        self.check_template_found_correctly('<', 3, self.templateAB)
+        self.check_template_found_correctly('<', 2, self.templateAB)
+        self.check_template_found_correctly('<', 1, self.templateAB)
+        self.check_template_found_correctly('<', 0, no_template)
