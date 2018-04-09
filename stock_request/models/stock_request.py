@@ -36,8 +36,9 @@ class StockRequest(models.Model):
 
     @api.depends('product_id', 'product_uom_id', 'product_uom_qty')
     def _compute_product_qty(self):
-        self.product_qty = self.product_uom_id._compute_quantity(
-            self.product_uom_qty, self.product_id.uom_id)
+        for rec in self:
+            rec.product_qty = rec.product_uom_id._compute_quantity(
+                rec.product_uom_qty, rec.product_id.uom_id)
 
     name = fields.Char(
         'Name', copy=False, required=True, readonly=True,
@@ -138,11 +139,23 @@ class StockRequest(models.Model):
     route_id = fields.Many2one('stock.location.route', string='Route',
                                readonly=True,
                                states={'draft': [('readonly', False)]},
+                               domain="[('id', 'in', route_ids)]",
                                ondelete='restrict')
+
+    route_ids = fields.Many2many(
+        'stock.location.route', string='Route',
+        compute='_compute_route_ids',
+        readonly=True,
+    )
 
     allocation_ids = fields.One2many(comodel_name='stock.request.allocation',
                                      inverse_name='stock_request_id',
                                      string='Stock Request Allocation')
+
+    order_id = fields.Many2one(
+        'stock.request.order',
+        readonly=True,
+    )
 
     _sql_constraints = [
         ('name_uniq', 'unique(name, company_id)',
@@ -177,6 +190,21 @@ class StockRequest(models.Model):
                 request.product_id.uom_id._compute_quantity(
                     open_qty, request.product_uom_id)
 
+    @api.depends('product_id', 'warehouse_id', 'location_id')
+    def _compute_route_ids(self):
+        for record in self:
+            routes = self.env['stock.location.route']
+            if record.product_id:
+                routes += record.product_id.mapped(
+                    'route_ids') | record.product_id.mapped(
+                    'categ_id').mapped('total_route_ids')
+            if record.warehouse_id:
+                routes |= self.env['stock.location.route'].search(
+                    [('warehouse_ids', 'in', record.warehouse_id.ids)])
+            parents = record.get_parents().ids
+            record.route_ids = routes.filtered(lambda r: any(
+                p.location_id.id in parents for p in r.pull_ids))
+
     def get_parents(self):
         location = self.location_id.sudo()
         result = location
@@ -196,26 +224,65 @@ class StockRequest(models.Model):
                   'same category than the default unit '
                   'of measure of the product'))
 
-    def _get_valid_routes(self):
-        routes = self.env['stock.location.route']
-        if self.product_id:
-            routes += self.product_id.mapped(
-                'route_ids') | self.product_id.mapped(
-                'categ_id').mapped('total_route_ids')
-        if self.warehouse_id:
-            routes |= self.env['stock.location.route'].search(
-                [('warehouse_ids', 'in', self.warehouse_id.ids)])
-        parents = self.get_parents().ids
-        routes = routes.filtered(lambda r: any(
-            p.location_id.id in parents for p in r.pull_ids))
-        return routes
+    @api.constrains('order_id', 'requested_by')
+    def check_order_requested_by(self):
+        if self.order_id and self.order_id.requested_by != self.requested_by:
+            raise ValidationError(_(
+                'Requested by must be equal to the order'
+            ))
+
+    @api.constrains('order_id', 'warehouse_id')
+    def check_order_warehouse_id(self):
+        if self.order_id and self.order_id.warehouse_id != self.warehouse_id:
+            raise ValidationError(_(
+                'Warehouse must be equal to the order'
+            ))
+
+    @api.constrains('order_id', 'location_id')
+    def check_order_location(self):
+        if self.order_id and self.order_id.location_id != self.location_id:
+            raise ValidationError(_(
+                'Location must be equal to the order'
+            ))
+
+    @api.constrains('order_id', 'procurement_group_id')
+    def check_order_procurement_group(self):
+        if (
+            self.order_id and
+            self.order_id.procurement_group_id != self.procurement_group_id
+        ):
+            raise ValidationError(_(
+                'Procurement group must be equal to the order'
+            ))
+
+    @api.constrains('order_id', 'company_id')
+    def check_order_company(self):
+        if self.order_id and self.order_id.company_id != self.company_id:
+            raise ValidationError(_(
+                'Company must be equal to the order'
+            ))
+
+    @api.constrains('order_id', 'expected_date')
+    def check_order_expected_date(self):
+        if self.order_id and self.order_id.expected_date != self.expected_date:
+            raise ValidationError(_(
+                'Expected date must be equal to the order'
+            ))
+
+    @api.constrains('order_id', 'picking_policy')
+    def check_order_picking_policy(self):
+        if (
+            self.order_id and
+            self.order_id.picking_policy != self.picking_policy
+        ):
+            raise ValidationError(_(
+                'The picking policy must be equal to the order'
+            ))
 
     @api.onchange('warehouse_id')
     def onchange_warehouse_id(self):
         """ Finds location id for changed warehouse. """
         res = {'domain': {}}
-        routes = self._get_valid_routes()
-        res['domain']['route_id'] = [('id', 'in', routes.ids)]
         if self.warehouse_id:
             # search with sudo because the user may not have permissions
             loc_wh = self.location_id.sudo().get_warehouse()
@@ -228,8 +295,6 @@ class StockRequest(models.Model):
     @api.onchange('location_id')
     def onchange_location_id(self):
         res = {'domain': {}}
-        routes = self._get_valid_routes()
-        res['domain']['route_id'] = [('id', 'in', routes.ids)]
         if self.location_id:
             loc_wh = self.location_id.get_warehouse()
             if self.warehouse_id != loc_wh:
@@ -254,8 +319,6 @@ class StockRequest(models.Model):
     @api.onchange('product_id')
     def onchange_product_id(self):
         res = {'domain': {}}
-        routes = self._get_valid_routes()
-        res['domain']['route_id'] = [('id', 'in', routes.ids)]
         if self.product_id:
             self.product_uom_id = self.product_id.uom_id.id
             res['domain']['product_uom_id'] = [
@@ -285,6 +348,8 @@ class StockRequest(models.Model):
 
     def action_done(self):
         self.state = 'done'
+        if self.order_id:
+            self.order_id.check_done()
         return True
 
     def check_done(self):
@@ -373,3 +438,9 @@ class StockRequest(models.Model):
                 (self.env.ref('stock.view_picking_form').id, 'form')]
             action['res_id'] = pickings.id
         return action
+
+    @api.multi
+    def unlink(self):
+        if self.filtered(lambda r: r.state != 'draft'):
+            raise UserError(_('Only requests on draft state can be unlinked'))
+        return super(StockRequest, self).unlink()
