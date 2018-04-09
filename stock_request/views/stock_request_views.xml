@@ -82,6 +82,7 @@
                     </div>
                     <group>
                         <group>
+                            <field name="order_id" readonly="1"/>
                             <field name="product_id"/>
                             <field name="expected_date"/>
                             <field name="picking_policy"/>
@@ -93,6 +94,7 @@
                             <field name="location_id" groups="stock.group_stock_multi_locations"/>
                             <field name="route_id"
                                    options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
+                            <field name="route_ids" invisible="1"/>
                             <field name="procurement_group_id"
                                    groups="stock.group_adv_location"/>
                             <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
@@ -127,17 +129,5 @@
           </p>
         </field>
     </record>
-
-    <menuitem
-        id="menu_stock_request_root"
-        name="Stock Requests"
-        groups="stock_request.group_stock_request_user,stock_request.group_stock_request_manager"
-        sequence="100"/>
-
-    <menuitem
-        id="menu_stock_request"
-        action="action_stock_request_form"
-        name="Stock Requests" parent="menu_stock_request_root"
-        sequence="10"/>
 
 </odoo>
