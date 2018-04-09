@@ -14,6 +14,17 @@
             </field>
         </record>
 
+        <record id="product_template_search_form_view_stock" model="ir.ui.view">
+            <field name="name">product.template.search.stock.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.product_template_search_form_view_stock"/>
+            <field name="arch" type="xml">
+                <filter name="real_stock_available" position="after">
+                    <filter name="real_stock_unreserved" string="Reservable Products" domain="[('qty_available_not_res','&gt;',0)]"/>
+                </filter>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="product_template_kanban_stock_view">
             <field name="name">Product Template Kanban Stock</field>
             <field name="model">product.template</field>

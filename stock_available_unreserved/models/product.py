@@ -4,9 +4,11 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.addons import decimal_precision as dp
+from odoo.addons.stock.models.product import OPERATORS
 from odoo.tools.float_utils import float_round
+from odoo.exceptions import UserError
 
 UNIT = dp.get_precision('Product Unit of Measure')
 
@@ -18,6 +20,7 @@ class ProductTemplate(models.Model):
         string='Quantity On Hand Unreserved',
         digits=UNIT,
         compute='_compute_product_available_not_res',
+        search='_search_quantity_unreserved',
     )
 
     @api.multi
@@ -47,6 +50,11 @@ class ProductTemplate(models.Model):
         }
         return result
 
+    def _search_quantity_unreserved(self, operator, value):
+        domain = [('qty_available_not_res', operator, value)]
+        product_variant_ids = self.env['product.product'].search(domain)
+        return [('product_variant_ids', 'in', product_variant_ids.ids)]
+
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
@@ -55,6 +63,7 @@ class ProductProduct(models.Model):
         string='Qty Available Not Reserved',
         digits=UNIT,
         compute='_compute_qty_available_not_reserved',
+        search="_search_quantity_unreserved",
     )
 
     @api.multi
@@ -101,3 +110,15 @@ class ProductProduct(models.Model):
             qty = res[prod.id]['qty_available_not_res']
             prod.qty_available_not_res = qty
         return res
+
+    def _search_quantity_unreserved(self, operator, value):
+        if operator not in OPERATORS:
+            raise UserError(_('Invalid domain operator %s') % operator)
+        if not isinstance(value, (float, int)):
+            raise UserError(_('Invalid domain right operand %s') % value)
+
+        ids = []
+        for product in self.search([]):
+            if OPERATORS[operator](product.qty_available_not_res, value):
+                ids.append(product.id)
+        return [('id', 'in', ids)]
