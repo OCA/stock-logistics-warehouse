@@ -46,6 +46,7 @@ Contributors
 ------------
 
 * Jordi Ballester <jordi.ballester@eficent.com>.
+* Enric Tobella <etobella@creublanca.es>
 
 Maintainer
 ----------

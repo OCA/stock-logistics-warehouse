@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="stock_request_order_form" model="ir.ui.view">
+        <field name="name">stock.request.order.form</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <field name="purchase_ids" invisible="1"/>
+                <button type="object"
+                    name="action_view_purchase"
+                    class="oe_stat_button"
+                    icon="fa-truck"
+                    attrs="{'invisible': [('purchase_count', '=', 0)]}"
+                        groups="purchase.group_purchase_user">
+                    <field name="purchase_count" widget="statinfo"
+                           string="Purchase"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>

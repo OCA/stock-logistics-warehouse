@@ -74,44 +74,54 @@ class TestStockRequestPurchase(common.TransactionCase):
     def test_create_request_01(self):
         """Single Stock request with buy rule"""
         vals = {
-            'product_id': self.product.id,
-            'product_uom_id': self.product.uom_id.id,
-            'product_uom_qty': 5.0,
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'stock_request_ids': [(0, 0, {
+                'product_id': self.product.id,
+                'product_uom_id': self.product.uom_id.id,
+                'product_uom_qty': 5.0,
+                'company_id': self.main_company.id,
+                'warehouse_id': self.warehouse.id,
+                'location_id': self.warehouse.lot_stock_id.id,
+            })]
         }
 
-        stock_request = self.stock_request.sudo(
+        order = self.env['stock.request.order'].sudo(
             self.stock_request_user).create(vals)
-        stock_request.action_confirm()
 
-        self.assertEqual(stock_request.state, 'open')
+        order.action_confirm()
+        self.assertEqual(order.state, 'open')
+        self.assertEqual(order.stock_request_ids.state, 'open')
 
-        stock_request.refresh()
+        order.refresh()
 
-        self.assertEqual(len(stock_request.sudo().purchase_ids), 1)
-        self.assertEqual(len(stock_request.picking_ids), 0)
-        self.assertEqual(len(stock_request.move_ids), 0)
-        self.assertEqual(stock_request.qty_in_progress, 0.0)
+        self.assertEqual(len(order.sudo().purchase_ids), 1)
+        self.assertEqual(len(order.picking_ids), 0)
+        self.assertEqual(len(order.move_ids), 0)
+        self.assertEqual(len(order.stock_request_ids.sudo().purchase_ids), 1)
+        self.assertEqual(len(order.stock_request_ids.picking_ids), 0)
+        self.assertEqual(len(order.stock_request_ids.move_ids), 0)
+        self.assertEqual(order.stock_request_ids.qty_in_progress, 0.0)
 
-        purchase = stock_request.sudo().purchase_ids[0]
+        purchase = order.sudo().purchase_ids[0]
         purchase.button_confirm()
         picking = purchase.picking_ids[0]
         picking.action_confirm()
 
-        self.assertEqual(stock_request.qty_in_progress, 5.0)
-        self.assertEqual(stock_request.qty_done, 0.0)
+        self.assertEqual(order.stock_request_ids.qty_in_progress, 5.0)
+        self.assertEqual(order.stock_request_ids.qty_done, 0.0)
 
         picking.action_assign()
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 5
         picking.action_done()
 
-        self.assertEqual(stock_request.qty_in_progress, 0.0)
-        self.assertEqual(stock_request.qty_done,
-                         stock_request.product_uom_qty)
-        self.assertEqual(stock_request.state, 'done')
+        self.assertEqual(order.stock_request_ids.qty_in_progress, 0.0)
+        self.assertEqual(order.stock_request_ids.qty_done,
+                         order.stock_request_ids.product_uom_qty)
+        self.assertEqual(order.stock_request_ids.state, 'done')
+        self.assertEqual(order.state, 'done')
 
     def test_create_request_02(self):
         """Multiple Stock requests with buy rule"""
@@ -176,16 +186,24 @@ class TestStockRequestPurchase(common.TransactionCase):
 
     def test_view_actions(self):
         vals = {
-            'product_id': self.product.id,
-            'product_uom_id': self.product.uom_id.id,
-            'product_uom_qty': 5.0,
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'stock_request_ids': [(0, 0, {
+                'product_id': self.product.id,
+                'product_uom_id': self.product.uom_id.id,
+                'product_uom_qty': 5.0,
+                'company_id': self.main_company.id,
+                'warehouse_id': self.warehouse.id,
+                'location_id': self.warehouse.lot_stock_id.id,
+            })]
         }
 
-        stock_request = self.stock_request.sudo().create(vals)
-        stock_request.action_confirm()
+        order = self.env['stock.request.order'].sudo().create(vals)
+
+        order.action_confirm()
+
+        stock_request = order.stock_request_ids
 
         action = stock_request.action_view_purchase()
 
@@ -197,3 +215,9 @@ class TestStockRequestPurchase(common.TransactionCase):
         action = stock_request.purchase_ids[0].action_view_stock_request()
         self.assertEqual(action['type'], 'ir.actions.act_window')
         self.assertEqual(action['res_id'], stock_request.id)
+
+        action = order.action_view_purchase()
+
+        self.assertEqual(action['domain'], '[]')
+        self.assertEqual('views' in action.keys(), True)
+        self.assertEqual(action['res_id'], order.purchase_ids[0].id)
