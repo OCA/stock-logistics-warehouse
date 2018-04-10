@@ -82,15 +82,17 @@
                     </div>
                     <group>
                         <group>
-                            <field name="product_id"/>
+                            <field name="product_id" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]" />
                             <field name="expected_date"/>
                             <field name="picking_policy"/>
                         </group>
                         <group>
-                            <field name="warehouse_id" widget="selection" groups="stock.group_stock_multi_locations"/>
+                            <field name="warehouse_id" widget="selection" groups="stock.group_stock_multi_locations"
+                                   domain="[('company_id', '=', company_id)]"/>
                             <field name="product_uom_id"
                                    options="{'no_open': True, 'no_create': True}" groups="product.group_uom"/>
-                            <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                            <field name="location_id" groups="stock.group_stock_multi_locations"
+                                   domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
                             <field name="route_id"
                                    options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
                             <field name="procurement_group_id"

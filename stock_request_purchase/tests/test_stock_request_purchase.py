@@ -96,6 +96,9 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.assertEqual(stock_request.qty_in_progress, 0.0)
 
         purchase = stock_request.sudo().purchase_ids[0]
+
+        self.assertEqual(purchase.company_id, stock_request.company_id)
+
         purchase.button_confirm()
         picking = purchase.picking_ids[0]
         picking.action_confirm()

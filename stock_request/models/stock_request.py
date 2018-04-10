@@ -196,6 +196,26 @@ class StockRequest(models.Model):
                   'same category than the default unit '
                   'of measure of the product'))
 
+    @api.constrains('company_id', 'product_id', 'warehouse_id',
+                    'location_id')
+    def _check_company_constrains(self):
+        ''' Check if the related models have the same company '''
+        for rec in self:
+            if rec.product_id.company_id and \
+                    rec.product_id.company_id != rec.company_id:
+                raise ValidationError(
+                    _('You have entered a product that is assigned '
+                      'to another company.'))
+            if rec.location_id.company_id and \
+                    rec.location_id.company_id != rec.company_id:
+                raise ValidationError(
+                    _('You have entered a location that is '
+                      'assigned to another company.'))
+            if rec.warehouse_id.company_id != rec.company_id:
+                raise ValidationError(
+                    _('You have entered a warehouse that is '
+                      'assigned to another company.'))
+
     def _get_valid_routes(self):
         routes = self.env['stock.location.route']
         if self.product_id:
@@ -315,6 +335,7 @@ class StockRequest(models.Model):
             'group_id': group_id or self.procurement_group_id.id or False,
             'route_ids': self.route_id,
             'stock_request_id': self.id,
+            'company_id': self.company_id,
         }
 
     @api.multi
