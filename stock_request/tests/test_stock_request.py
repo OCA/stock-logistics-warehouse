@@ -36,10 +36,17 @@ class TestStockRequest(common.TransactionCase):
             [self.stock_request_manager_group.id],
             [self.main_company.id, self.company_2.id])
         self.product = self._create_product('SH', 'Shoes', False)
+        self.product_company_2 = self._create_product('SH', 'Shoes',
+                                                      self.company_2.id)
 
         self.ressuply_loc = self.env['stock.location'].create({
             'name': 'Ressuply',
             'location_id': self.warehouse.view_location_id.id,
+        })
+
+        self.ressuply_loc_2 = self.env['stock.location'].create({
+            'name': 'Ressuply',
+            'location_id': self.wh2.view_location_id.id,
         })
 
         self.route = self.env['stock.location.route'].create({
@@ -47,6 +54,14 @@ class TestStockRequest(common.TransactionCase):
             'product_categ_selectable': False,
             'product_selectable': True,
             'company_id': self.main_company.id,
+            'sequence': 10,
+        })
+
+        self.route_2 = self.env['stock.location.route'].create({
+            'name': 'Transfer',
+            'product_categ_selectable': False,
+            'product_selectable': True,
+            'company_id': self.company_2.id,
             'sequence': 10,
         })
 
@@ -67,6 +82,19 @@ class TestStockRequest(common.TransactionCase):
             'procure_method': 'make_to_stock',
             'warehouse_id': self.warehouse.id,
             'company_id': self.main_company.id,
+            'propagate': 'False',
+        })
+
+        self.env['procurement.rule'].create({
+            'name': 'Transfer',
+            'route_id': self.route_2.id,
+            'location_src_id': self.ressuply_loc_2.id,
+            'location_id': self.wh2.lot_stock_id.id,
+            'action': 'move',
+            'picking_type_id': self.wh2.int_type_id.id,
+            'procure_method': 'make_to_stock',
+            'warehouse_id': self.wh2.id,
+            'company_id': self.company_2.id,
             'propagate': 'False',
         })
 
@@ -252,10 +280,14 @@ class TestStockRequest(common.TransactionCase):
             stock_request.location_id, self.warehouse.lot_stock_id)
 
     def test_stock_request_order_validations_01(self):
+        """ Testing the discrepancy in warehouse_id between
+        stock request and order"""
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.wh2.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -263,18 +295,22 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
-        # Select a UoM that is incompatible with the product's UoM
         with self.assertRaises(exceptions.ValidationError):
             self.env['stock.request.order'].sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_02(self):
+        """ Testing the discrepancy in location_id between
+        stock request and order"""
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.wh2.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -282,19 +318,23 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
-        # Select a UoM that is incompatible with the product's UoM
         with self.assertRaises(exceptions.ValidationError):
             self.env['stock.request.order'].sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_03(self):
+        """ Testing the discrepancy in requested_by between
+        stock request and order"""
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
             'requested_by': self.stock_request_user.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -303,22 +343,26 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
-        # Select a UoM that is incompatible with the product's UoM
         with self.assertRaises(exceptions.ValidationError):
             self.env['stock.request.order'].sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_04(self):
+        """ Testing the discrepancy in procurement_group_id between
+        stock request and order"""
         procurement_group = self.env['procurement.group'].create({
             'name': 'Procurement',
         })
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
             'procurement_group_id': procurement_group.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -326,19 +370,22 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
-        # Select a UoM that is incompatible with the product's UoM
         with self.assertRaises(exceptions.ValidationError):
             self.env['stock.request.order'].sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_05(self):
+        """ Testing the discrepancy in company between
+        stock request and order"""
+        expected_date = fields.Date.today()
         vals = {
-            'company_id': self.main_company.id,
-            'warehouse_id': self.warehouse.id,
-            'location_id': self.warehouse.lot_stock_id.id,
-            'expected_date': fields.Date.today(),
+            'company_id': self.company_2.id,
+            'warehouse_id': self.wh2.id,
+            'location_id': self.wh2.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -346,18 +393,23 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
-        # Select a UoM that is incompatible with the product's UoM
         with self.assertRaises(exceptions.ValidationError):
             self.env['stock.request.order'].sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_06(self):
+        """ Testing the discrepancy in expected dates between
+        stock request and order"""
+        expected_date = fields.Date.today()
+        child_expected_date = '2015-01-01'
         vals = {
             'company_id': self.company_2.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -365,18 +417,22 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': child_expected_date,
             })]
         }
-        # Select a UoM that is incompatible with the product's UoM
         with self.assertRaises(exceptions.ValidationError):
             self.env['stock.request.order'].sudo().create(vals)
 
     def test_stock_request_order_validations_07(self):
+        """ Testing the discrepancy in picking policy between
+        stock request and order"""
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
             'picking_policy': 'one',
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -384,9 +440,9 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
-        # Select a UoM that is incompatible with the product's UoM
         with self.assertRaises(exceptions.ValidationError):
             self.env['stock.request.order'].sudo(
                 self.stock_request_user).create(vals)
@@ -423,10 +479,12 @@ class TestStockRequest(common.TransactionCase):
             stock_request.action_confirm()
 
     def test_create_request_01(self):
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -434,6 +492,7 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
 
@@ -550,10 +609,12 @@ class TestStockRequest(common.TransactionCase):
         picking.action_done()
 
     def test_cancel_request(self):
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -561,6 +622,7 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
 
@@ -604,10 +666,12 @@ class TestStockRequest(common.TransactionCase):
         self.assertEqual(len(stock_request.sudo().move_ids), 2)
 
     def test_view_actions(self):
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -615,6 +679,7 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
 
@@ -644,3 +709,29 @@ class TestStockRequest(common.TransactionCase):
         action = stock_request.picking_ids[0].action_view_stock_request()
         self.assertEqual(action['type'], 'ir.actions.act_window')
         self.assertEqual(action['res_id'], stock_request.id)
+
+    def test_stock_request_constrains(self):
+        vals = {
+            'product_id': self.product.id,
+            'product_uom_id': self.product.uom_id.id,
+            'product_uom_qty': 5.0,
+            'company_id': self.main_company.id,
+            'warehouse_id': self.warehouse.id,
+            'location_id': self.warehouse.lot_stock_id.id,
+        }
+
+        stock_request = self.stock_request.sudo(
+            self.stock_request_user).create(vals)
+
+        # Cannot assign a warehouse that belongs to another company
+        with self.assertRaises(exceptions.ValidationError):
+            stock_request.warehouse_id = self.wh2
+        # Cannot assign a product that belongs to another company
+        with self.assertRaises(exceptions.ValidationError):
+            stock_request.product_id = self.product_company_2
+        # Cannot assign a location that belongs to another company
+        with self.assertRaises(exceptions.ValidationError):
+            stock_request.location_id = self.wh2.lot_stock_id
+        # Cannot assign a route that belongs to another company
+        with self.assertRaises(exceptions.ValidationError):
+            stock_request.route_id = self.route_2

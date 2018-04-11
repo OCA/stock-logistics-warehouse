@@ -1,7 +1,8 @@
 # Copyright 2017 Eficent Business and IT Consulting Services, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class StockMove(models.Model):
@@ -26,3 +27,13 @@ class StockMove(models.Model):
         res['allocation_ids'] = [(4, m.id) for m in
                                  self.mapped('allocation_ids')]
         return res
+
+    @api.constrains('company_id')
+    def _check_company_stock_request(self):
+        if any(self.env['stock.request.allocation'].search(
+                [('company_id', '!=', rec.company_id.id),
+                 ('stock_move_id', '=', rec.id)], limit=1)
+               for rec in self):
+            raise ValidationError(
+                _('The company of the stock request must match with '
+                  'that of the location.'))
