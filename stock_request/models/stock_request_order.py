@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 REQUEST_STATES = [
     ('draft', 'Draft'),
@@ -34,8 +34,7 @@ class StockRequestOrder(models.Model):
     name = fields.Char(
         'Name', copy=False, required=True, readonly=True,
         states={'draft': [('readonly', False)]},
-        default=lambda self: self.env['ir.sequence'].next_by_code(
-            'stock.request.order'))
+        default='/')
     state = fields.Selection(selection=REQUEST_STATES, string='Status',
                              copy=False, default='draft', index=True,
                              readonly=True, track_visibility='onchange',
@@ -69,7 +68,7 @@ class StockRequestOrder(models.Model):
             'stock.request.order'),
     )
     expected_date = fields.Datetime(
-        'Expected date', default=fields.Datetime.now, index=True,
+        'Expected Date', default=fields.Datetime.now, index=True,
         required=True, readonly=True,
         states={'draft': [('readonly', False)]},
         help="Date when you expect to receive the goods.",
@@ -242,8 +241,33 @@ class StockRequestOrder(models.Model):
             action['res_id'] = self.stock_request_ids.id
         return action
 
+    @api.model
+    def create(self, vals):
+        upd_vals = vals.copy()
+        if upd_vals.get('name', '/') == '/':
+            upd_vals['name'] = self.env['ir.sequence'].next_by_code(
+                'stock.request.order')
+        return super().create(upd_vals)
+
     @api.multi
     def unlink(self):
         if self.filtered(lambda r: r.state != 'draft'):
             raise UserError(_('Only orders on draft state can be unlinked'))
         return super().unlink()
+
+    @api.constrains('warehouse_id', 'company_id')
+    def _check_warehouse_company(self):
+        if any(request.warehouse_id.company_id !=
+                request.company_id for request in self):
+            raise ValidationError(
+                _('The company of the stock request must match with '
+                  'that of the warehouse.'))
+
+    @api.constrains('location_id', 'company_id')
+    def _check_location_company(self):
+        if any(request.location_id.company_id and
+               request.location_id.company_id !=
+               request.company_id for request in self):
+            raise ValidationError(
+                _('The company of the stock request must match with '
+                  'that of the location.'))
