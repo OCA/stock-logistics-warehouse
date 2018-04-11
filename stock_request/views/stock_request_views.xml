@@ -82,7 +82,7 @@
                     </div>
                     <group>
                         <group>
-                            <field name="order_id" readonly="1"/>
+                            <field name="order_id" readonly="1" groups="stock_request.group_stock_request_order"/>
                             <field name="product_id"/>
                             <field name="expected_date"/>
                             <field name="picking_policy"/>
@@ -91,7 +91,8 @@
                             <field name="warehouse_id" widget="selection" groups="stock.group_stock_multi_locations"/>
                             <field name="product_uom_id"
                                    options="{'no_open': True, 'no_create': True}" groups="product.group_uom"/>
-                            <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                            <field name="location_id" groups="stock.group_stock_multi_locations"
+                                   domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
                             <field name="route_id"
                                    options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
                             <field name="route_ids" invisible="1"/>

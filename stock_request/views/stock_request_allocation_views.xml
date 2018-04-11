@@ -17,6 +17,7 @@
                 <field name="requested_product_qty"/>
                 <field name="allocated_product_qty"/>
                 <field name="open_product_qty" />
+                <field name="company_id" groups="base.group_multi_company"/>
             </tree>
         </field>
     </record>
@@ -41,6 +42,7 @@
                             <field name="requested_product_qty"/>
                             <field name="allocated_product_qty"/>
                             <field name="open_product_qty" />
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                         </group>
                     </group>
                 </sheet>
