@@ -13,7 +13,7 @@
         sequence="20"/>
 
     <menuitem id="stock_request_order_menu"
-              name="Stock Requests orders"
+              name="Stock Requests Orders"
               parent="menu_stock_request_root"
               action="stock_request_order_action"
               groups="group_stock_request_order"
