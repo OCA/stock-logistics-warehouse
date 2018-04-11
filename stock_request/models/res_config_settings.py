@@ -11,4 +11,4 @@ class ResConfigSettings(models.TransientModel):
         implied_group='stock_request.group_stock_request_order')
 
     module_stock_request_purchase = fields.Boolean(
-        string='Stock requests for purchase')
+        string='Stock Requests for Purchases')

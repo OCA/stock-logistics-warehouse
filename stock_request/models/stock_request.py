@@ -43,8 +43,7 @@ class StockRequest(models.Model):
     name = fields.Char(
         'Name', copy=False, required=True, readonly=True,
         states={'draft': [('readonly', False)]},
-        default=lambda self: self.env['ir.sequence'].next_by_code(
-            'stock.request'))
+        default='/')
     state = fields.Selection(selection=REQUEST_STATES, string='Status',
                              copy=False, default='draft', index=True,
                              readonly=True, track_visibility='onchange',
@@ -102,7 +101,7 @@ class StockRequest(models.Model):
             'stock.request'),
     )
     expected_date = fields.Datetime(
-        'Expected date', default=fields.Datetime.now, index=True,
+        'Expected Date', default=fields.Datetime.now, index=True,
         required=True, readonly=True,
         states={'draft': [('readonly', False)]},
         help="Date when you expect to receive the goods.",
@@ -212,6 +211,31 @@ class StockRequest(models.Model):
             location = location.location_id
             result |= location
         return result
+
+    @api.constrains('company_id', 'product_id', 'warehouse_id',
+                    'location_id', 'route_id')
+    def _check_company_constrains(self):
+        """ Check if the related models have the same company """
+        for rec in self:
+            if rec.product_id.company_id and \
+                    rec.product_id.company_id != rec.company_id:
+                raise ValidationError(
+                    _('You have entered a product that is assigned '
+                      'to another company.'))
+            if rec.location_id.company_id and \
+                    rec.location_id.company_id != rec.company_id:
+                raise ValidationError(
+                    _('You have entered a location that is '
+                      'assigned to another company.'))
+            if rec.warehouse_id.company_id != rec.company_id:
+                raise ValidationError(
+                    _('You have entered a warehouse that is '
+                      'assigned to another company.'))
+            if rec.route_id and rec.route_id.company_id and \
+                    rec.route_id.company_id != rec.company_id:
+                raise ValidationError(
+                    _('You have entered a route that is '
+                      'assigned to another company.'))
 
     @api.constrains('product_id')
     def _check_product_uom(self):
@@ -438,6 +462,14 @@ class StockRequest(models.Model):
                 (self.env.ref('stock.view_picking_form').id, 'form')]
             action['res_id'] = pickings.id
         return action
+
+    @api.model
+    def create(self, vals):
+        upd_vals = vals.copy()
+        if upd_vals.get('name', '/') == '/':
+            upd_vals['name'] = self.env['ir.sequence'].next_by_code(
+                'stock.request')
+        return super().create(upd_vals)
 
     @api.multi
     def unlink(self):
