@@ -20,6 +20,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
             'qty': orderpoint.procure_recommended_qty,
             'qty_without_security': orderpoint.procure_recommended_qty,
             'uom_id': orderpoint.product_uom.id,
+            'date_planned': orderpoint.procure_recommended_date,  # string
             'orderpoint_id': orderpoint.id,
             'product_id': orderpoint.product_id.id,
             'warehouse_id': orderpoint.warehouse_id.id,
@@ -66,6 +67,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
             if not item.orderpoint_id:
                 raise ValidationError(_("No reordering rule found!"))
             values = item.orderpoint_id._prepare_procurement_values(item.qty)
+            values['date_planned'] = item.date_planned
             # Run procurement
             try:
                 self.env['procurement.group'].run(
