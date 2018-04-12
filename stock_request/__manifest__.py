@@ -4,7 +4,7 @@
 {
     "name": "Stock Request",
     "summary": "Internal request for stock",
-    "version": "11.0.2.1.0",
+    "version": "11.0.2.2.0",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Eficent, "
@@ -16,6 +16,7 @@
     "data": [
         "security/stock_request_security.xml",
         "security/ir.model.access.csv",
+        "views/product.xml",
         "views/stock_request_views.xml",
         "views/stock_request_allocation_views.xml",
         "views/stock_move_views.xml",

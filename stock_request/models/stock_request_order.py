@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError, ValidationError, AccessError
 
 REQUEST_STATES = [
     ('draft', 'Draft'),
@@ -271,3 +271,41 @@ class StockRequestOrder(models.Model):
             raise ValidationError(
                 _('The company of the stock request must match with '
                   'that of the location.'))
+
+    @api.model
+    def _create_from_product_multiselect(self, products):
+        if not products:
+            return False
+        if products._name not in ('product.product', 'product.template'):
+            raise ValidationError(
+                "This action only works in the context of products")
+        if products._name == 'product.template':
+            # search instead of mapped so we don't include archived variants
+            products = self.env['product.product'].search([
+                ('product_tmpl_id', 'in', products.ids)
+            ])
+        expected = self.default_get(['expected_date'])['expected_date']
+        try:
+            order = self.env['stock.request.order'].create(dict(
+                expected_date=expected,
+                stock_request_ids=[(0, 0, dict(
+                    product_id=product.id,
+                    product_uom_id=product.uom_id.id,
+                    product_uom_qty=0.0,
+                    expected_date=expected,
+                )) for product in products]
+            ))
+        except AccessError:
+            # TODO: if there is a nice way to hide the action from the
+            # Action-menu if the user doesn't have the necessary rights,
+            # that would be a better way of doing this
+            raise UserError(_(
+                "Unfortunately it seems you do not have the necessary rights "
+                "for creating stock requests. Please contact your "
+                "administrator."))
+        action = self.env.ref('stock_request.stock_request_order_action'
+                              ).read()[0]
+        action['views'] = [(
+            self.env.ref('stock_request.stock_request_order_form').id, 'form')]
+        action['res_id'] = order.id
+        return action
