@@ -23,6 +23,7 @@
                             <field name="qty"/>
                             <field name="qty_without_security" invisible="1"/>
                             <field name="uom_id" groups="product.group_uom"/>
+                            <field name="date_planned"/>
                         </tree>
                     </field>
                 </group>
@@ -56,6 +57,7 @@
                             <field name="qty" invisible="1"/>
                             <field name="qty_without_security" readonly="1"/>
                             <field name="uom_id" groups="product.group_uom"/>
+                            <field name="date_planned"/>
                         </tree>
                     </field>
                 </group>
