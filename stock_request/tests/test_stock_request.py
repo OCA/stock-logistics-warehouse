@@ -3,6 +3,7 @@
 
 from odoo.tests import common
 from odoo import fields, exceptions
+from collections import Counter
 
 
 class TestStockRequest(common.TransactionCase):
@@ -109,14 +110,15 @@ class TestStockRequest(common.TransactionCase):
              'company_ids': [(6, 0, company_ids)]
              })
 
-    def _create_product(self, default_code, name, company_id):
-        return self.env['product.product'].create({
-            'name': name,
-            'default_code': default_code,
-            'uom_id': self.env.ref('product.product_uom_unit').id,
-            'company_id': company_id,
-            'type': 'product',
-        })
+    def _create_product(self, default_code, name, company_id, **vals):
+        return self.env['product.product'].create(dict(
+            name=name,
+            default_code=default_code,
+            uom_id=self.env.ref('product.product_uom_unit').id,
+            company_id=company_id,
+            type='product',
+            **vals
+        ))
 
     def test_defaults(self):
         vals = {
@@ -735,3 +737,84 @@ class TestStockRequest(common.TransactionCase):
         # Cannot assign a route that belongs to another company
         with self.assertRaises(exceptions.ValidationError):
             stock_request.route_id = self.route_2
+
+    def test_stock_request_order_from_products(self):
+        product_A1 = self._create_product('CODEA1', 'Product A1',
+                                          self.main_company.id)
+        template_A = product_A1.product_tmpl_id
+        product_A2 = self._create_product(
+            'CODEA2', 'Product A2', self.main_company.id,
+            product_tmpl_id=template_A.id)
+        product_A3 = self._create_product(
+            'CODEA3', 'Product A3', self.main_company.id,
+            product_tmpl_id=template_A.id)
+        product_B1 = self._create_product('CODEB1', 'Product B1',
+                                          self.main_company.id)
+        template_B = product_B1.product_tmpl_id
+        # One archived variant of B
+        self._create_product(
+            'CODEB2', 'Product B2', self.main_company.id,
+            product_tmpl_id=template_B.id, active=False)
+        Order = self.env['stock.request.order']
+
+        # Selecting some variants and creating an order
+        preexisting = Order.search([])
+        wanted_products = product_A1 + product_A2 + product_B1
+        action = Order._create_from_product_multiselect(wanted_products)
+        new_order = Order.search([]) - preexisting
+        self.assertEqual(len(new_order), 1)
+        self.assertEqual(action['res_id'], new_order.id,
+                         msg="Returned action references the wrong record")
+        self.assertEqual(
+            Counter(wanted_products),
+            Counter(new_order.stock_request_ids.mapped('product_id')),
+            msg="Not all wanted products were ordered"
+        )
+
+        # Selecting a template and creating an order
+        preexisting = Order.search([])
+        action = Order._create_from_product_multiselect(template_A)
+        new_order = Order.search([]) - preexisting
+        self.assertEqual(len(new_order), 1)
+        self.assertEqual(action['res_id'], new_order.id,
+                         msg="Returned action references the wrong record")
+        self.assertEqual(
+            Counter(product_A1 + product_A2 + product_A3),
+            Counter(new_order.stock_request_ids.mapped('product_id')),
+            msg="Not all of the template's variants were ordered"
+        )
+
+        # Selecting a template
+        preexisting = Order.search([])
+        action = Order._create_from_product_multiselect(
+            template_A + template_B)
+        new_order = Order.search([]) - preexisting
+        self.assertEqual(len(new_order), 1)
+        self.assertEqual(action['res_id'], new_order.id,
+                         msg="Returned action references the wrong record")
+        self.assertEqual(
+            Counter(product_A1 + product_A2 + product_A3 + product_B1),
+            Counter(new_order.stock_request_ids.mapped('product_id')),
+            msg="Inactive variant was ordered though it shouldn't have been"
+        )
+
+        # If a user does not have stock request rights, they can still trigger
+        # the action from the products, so test that they get a friendlier
+        # error message.
+        self.stock_request_user.groups_id -= self.stock_request_user_group
+        with self.assertRaisesRegexp(
+                exceptions.UserError,
+                "Unfortunately it seems you do not have the necessary rights "
+                "for creating stock requests. Please contact your "
+                "administrator."):
+            Order.sudo(
+                self.stock_request_user
+            )._create_from_product_multiselect(template_A + template_B)
+
+        # Empty recordsets should just return False
+        self.assertFalse(Order._create_from_product_multiselect(
+            self.env['product.product']))
+
+        # Wrong model should just raise ValidationError
+        with self.assertRaises(exceptions.ValidationError):
+            Order._create_from_product_multiselect(self.stock_request_user)
