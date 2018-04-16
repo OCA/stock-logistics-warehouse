@@ -39,11 +39,12 @@ class ProductPutaway(models.Model):
         return strategy
 
     def putaway_apply(self, product):
+        """:return a stock.location record or the model."""
         if self.method == 'per_product':
             strategies = self.get_product_putaway_strategies(product)
             strategy = strategies[:1]
             if strategy:
-                return strategy.fixed_location_id.id
+                return strategy.fixed_location_id
         return super().putaway_apply(product)
 
 

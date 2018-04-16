@@ -41,7 +41,7 @@ class TestProductPutaway(SavepointCase):
     def test_02_putway_apply(self):
         self.assertEqual(
             self.putaway_per_product.putaway_apply(self.product_ipad),
-            self.location_shelf1.id)
+            self.location_shelf1)
 
     def test_03_stock_change_product_qty_default(self):
         wiz_obj = self.env['stock.change.product.qty']
