@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_procurement_rule_form_mto_mto" model="ir.ui.view">
+        <field name="name">procurement.rule.mts.mto</field>
+        <field name="model">procurement.rule</field>
+        <field name="inherit_id" ref="stock.view_procurement_rule_form" />
+        <field name="arch" type="xml">
+            <field name="action" position="after">
+                <field name="mts_rule_id" 
+                    groups="stock.group_adv_location"
+                    attrs="{'invisible': [('action', '!=', 'split_procurement')]}"/>
+                <field name="mto_rule_id" 
+                    groups="stock.group_adv_location"
+                    attrs="{'invisible': [('action', '!=', 'split_procurement')]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
