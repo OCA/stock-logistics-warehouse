@@ -19,7 +19,7 @@ class ProcurementOrder(models.Model):
     @api.multi
     def get_mto_qty_to_order(self):
         self.ensure_one()
-        stock_location = self.warehouse_id.lot_stock_id.id
+        stock_location = self.rule_id.mts_rule_id.location_src_id.id
         proc_warehouse = self.with_context(location=stock_location)
         virtual_available = proc_warehouse.product_id.virtual_available
         qty_available = self.product_id.uom_id._compute_quantity(
