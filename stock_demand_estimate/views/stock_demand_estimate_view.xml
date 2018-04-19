@@ -6,7 +6,7 @@
             <field name="name">stock.demand.estimate.tree</field>
             <field name="model">stock.demand.estimate</field>
             <field name="arch" type="xml">
-                <tree string="Stock Demand Estimate" editable="top">
+                <tree string="Stock Demand Estimate" editable="top" create="0">
                     <field name="date_range_id"/>
                     <field name="product_id"/>
                     <field name="location_id"/>
