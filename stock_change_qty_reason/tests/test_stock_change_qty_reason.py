@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# pylint: disable=import-error,protected-access,too-few-public-methods
 # Copyright 2016-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -23,7 +23,8 @@ class TestStockQuantityChangeReason(SavepointCase):
     def _create_product(self, name):
         return self.product_product_model.create({
             'name': name,
-            'categ_id': self.category.id})
+            'categ_id': self.category.id,
+            'type': 'product'})
 
     def _product_change_qty(self, product, new_qty, reason):
         wizard = self.wizard_model.create({'product_id': product.id,
