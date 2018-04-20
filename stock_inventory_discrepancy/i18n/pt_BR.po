@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_inventory_discrepancy
-# 
+#
 # Translators:
 # Paulo Ricardo <ti@shoppingescritorio.com.br>, 2017
 # Felipe Lopes <ti@trojahntoppel.com.br>, 2017
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2017-02-18 04:05+0000\n"
 "PO-Revision-Date: 2017-02-18 04:05+0000\n"
 "Last-Translator: Felipe Lopes <ti@trojahntoppel.com.br>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_inventory_discrepancy
@@ -67,8 +68,8 @@ msgstr ""
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location_discrepancy_threshold
 msgid ""
 "Maximum Discrepancy Rate allowed for any product when doing an Inventory "
-"Adjustment. Thresholds defined in Locations have preference over Warehouse's"
-" ones."
+"Adjustment. Thresholds defined in Locations have preference over Warehouse's "
+"ones."
 msgstr ""
 
 #. module: stock_inventory_discrepancy
@@ -77,7 +78,7 @@ msgid "Number of Discrepancies Over Threshold"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:55
+#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:56
 #, python-format
 msgid ""
 "The Qty Update is over the Discrepancy Threshold.\n"
@@ -93,8 +94,7 @@ msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line_discrepancy_percent
-msgid ""
-"The discrepancy expressed in percent with theoretical quantity as basis"
+msgid "The discrepancy expressed in percent with theoretical quantity as basis"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
