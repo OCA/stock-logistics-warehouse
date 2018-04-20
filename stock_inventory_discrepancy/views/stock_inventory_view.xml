@@ -40,8 +40,7 @@
                 <field name="discrepancy_threshold"/>
             </xpath>
             <xpath expr="//field[@name='line_ids']/tree" position="attributes">
-                <attribute name="decoration-danger">theoretical_qty &lt; 0 or
-                    discrepancy_percent &gt; discrepancy_threshold</attribute>
+                <attribute name="decoration-danger">theoretical_qty &lt; 0 or discrepancy_percent &gt; discrepancy_threshold</attribute>
             </xpath>
         </field>
     </record>
