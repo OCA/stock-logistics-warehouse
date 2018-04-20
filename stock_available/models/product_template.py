@@ -25,7 +25,7 @@ class ProductTemplate(models.Model):
     def _compute_available_quantities(self):
         res = self._compute_available_quantities_dict()
         for product in self:
-            for key, value in res[product.id].iteritems():
+            for key, value in res[product.id].items():
                 if key in product._fields:
                     product[key] = value
 
@@ -67,8 +67,7 @@ class ProductTemplate(models.Model):
 
     @api.model
     def _search_immediately_usable_qty(self, operator, value):
-        """
-        Search function for the immediately_usable_qty field.
+        """ Search function for the immediately_usable_qty field.
         The search is quite similar to the Odoo search about quantity available
         (addons/stock/models/product.py,253; _search_product_quantity function)
         :param operator: str
