@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 Numérigraphe
+     Copyright 2016 Sodexis
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<odoo>
+        <record model="ir.ui.view" id="product_normal_form_view">
+            <field name="name">Quantity available to promise (variant tree)</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_product)d']"
+                    position="after">
+                    <button type="action" name="%(stock.product_open_quants)d"
+                        attrs="{'invisible':[('type', 'not in', ['product','consu'])]}"
+                        class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_form_field o_stat_info">
+                            <field name="immediately_usable_qty"
+                                widget="statinfo" nolabel="1" />
+                            <span class="o_stat_text">Available</span>
+                        </div>
+                    </button>
+                    <button type="action" name="%(stock.product_open_quants)d"
+                        attrs="{'invisible':[('type', 'not in', ['product','consu'])]}"
+                        class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_form_field o_stat_info">
+                            <field name="potential_qty"
+                                   widget="statinfo" nolabel="1"/>
+                            <span class="o_stat_text">Potential</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+</odoo>
