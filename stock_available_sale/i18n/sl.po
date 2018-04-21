@@ -28,6 +28,11 @@ msgstr "Proizvod"
 msgid "Product Template"
 msgstr "Predloga proizvoda"
 
+#. module: stock_available
+#: field:sale.order.line,immediately_usable_qty:0
+msgid "Available to promise"
+msgstr "Razpoložljivo za obljubo"
+
 #. module: stock_available_sale
 #: field:product.product,quoted_qty:0 field:product.template,quoted_qty:0
 msgid "Quoted"

@@ -26,3 +26,8 @@ msgstr "Article"
 #: model:ir.model,name:stock_available_sale.model_product_template
 msgid "Product Template"
 msgstr "Modèle de produit"
+
+#. module: stock_available
+#: field:sale.order.line,immediately_usable_qty:0
+msgid "Available to promise"
+msgstr "Disponible à la vente"
