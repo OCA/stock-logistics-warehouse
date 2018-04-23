@@ -16,11 +16,9 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
         # Create some categories
         self.category = self.env['product.category'].create({
             'name': 'Category for inventory',
-            'type': 'normal',
         })
         self.category2 = self.env['product.category'].create({
             'name': 'Category for inventory 2',
-            'type': 'normal',
         })
         # Create some products in the category
         self.product1 = self.env['product.product'].create({
@@ -96,7 +94,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
             'location_id': self.location.id,
             'categ_ids': [(6, 0, [self.category.id])],
         })
-        inventory.prepare_inventory()
+        inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 2)
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product1)
@@ -116,7 +114,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 'product_ids': [(6, 0, [self.product1.id, self.product2.id])],
             }
         )
-        inventory.prepare_inventory()
+        inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 2)
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product1)
@@ -136,7 +134,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 'lot_ids': [(6, 0, [self.lot.id, ])],
             }
         )
-        inventory.prepare_inventory()
+        inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 1)
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product_lot)
@@ -168,20 +166,27 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 }),
             ],
         })
-        inventory.prepare_inventory()
+        print ("[[[[  NAME  ]]]]", inventory['name'])
+        print ("[[[[  FILTER  ]]]]", inventory['filter'])
+        print ("[[[[  INVENTORY  ]]]]", inventory['location_id'])
+        print ("[[[[  LINE  ]]]]", inventory['empty_line_ids'])
+        inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 3)
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product1)
         self.assertEqual(line1.theoretical_qty, 2.0)
         self.assertEqual(line1.product_qty, 3.0)
         self.assertEqual(line1.location_id, self.location)
+        print ("[[[[  LINE 1  ]]]]", line1)
         line2 = inventory.line_ids[1]
         self.assertEqual(line2.product_id, self.product2)
         self.assertEqual(line2.theoretical_qty, 4.0)
         self.assertEqual(line2.product_qty, 7.0)
         self.assertEqual(line2.location_id, self.location)
+        print ("[[[[  LINE 2  ]]]]", line2)
         line3 = inventory.line_ids[2]
         self.assertEqual(line3.product_id, self.product3)
         self.assertEqual(line3.theoretical_qty, 0.0)
         self.assertEqual(line3.product_qty, 5.0)
         self.assertEqual(line3.location_id, self.location)
+        print ("[[[[  LINE 3  ]]]]", line3)
