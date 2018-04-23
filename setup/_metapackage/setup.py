@@ -40,6 +40,7 @@ setuptools.setup(
         'odoo10-addon-stock_quant_manual_assign',
         'odoo10-addon-stock_quant_merge',
         'odoo10-addon-stock_quant_reserved_qty_uom',
+        'odoo10-addon-stock_removal_location_by_priority',
         'odoo10-addon-stock_reserve',
         'odoo10-addon-stock_warehouse_orderpoint_stock_info',
         'odoo10-addon-stock_warehouse_orderpoint_stock_info_unreserved',
