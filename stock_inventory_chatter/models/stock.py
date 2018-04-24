@@ -3,7 +3,7 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, models
 
 
 class StockInventory(models.Model):
@@ -11,11 +11,6 @@ class StockInventory(models.Model):
 
     _name = 'stock.inventory'
     _inherit = ['stock.inventory', 'mail.thread']
-
-    partner_id = fields.Many2one(track_visibility='always')
-    state = fields.Selection(track_visibility='onchange')
-    location_id = fields.Many2one(track_visibility='always')
-    filter = fields.Selection(track_visibility='onchange')
 
     @api.multi
     def _track_subtype(self, init_values):
