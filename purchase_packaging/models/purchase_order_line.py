@@ -48,38 +48,46 @@ class PurchaseOrderLine(models.Model):
             uom_id=self.product_uom)
 
     @api.multi
-    @api.depends('product_purchase_uom_id', 'product_purchase_qty')
+    @api.depends('product_purchase_uom_id',
+                 'product_purchase_qty',
+                 'product_purchase_uom_id.category_id')
     def _compute_product_qty(self):
         """
         Compute the total quantity
         """
+        uom_categories = self.mapped("product_purchase_uom_id.category_id")
+        uom_obj = self.env['product.uom']
+        to_uoms = uom_obj.search(
+            [('category_id',
+              'in',
+              uom_categories.ids),
+             ('uom_type', '=', 'reference')])
+        uom_by_category = {to_uom.category_id: to_uom for to_uom in to_uoms}
         for line in self:
-            uom_obj = self.env['product.uom']
-            to_uom = uom_obj.search(
-                [('category_id',
-                  '=',
-                  line.product_purchase_uom_id.category_id.id),
-                 ('uom_type', '=', 'reference')], limit=1)
-            if not line.product_purchase_uom_id:
-                return
             line.product_qty = line.product_purchase_uom_id._compute_quantity(
                 line.product_purchase_qty,
-                to_uom)
+                uom_by_category.get(line.product_purchase_uom_id.category_id))
 
     @api.multi
     def _inverse_product_qty(self):
         """ If product_quantity is set compute the purchase_qty
         """
+        uom_categories = self.mapped("product_purchase_uom_id.category_id")
+        uom_obj = self.env['product.uom']
+        from_uoms = uom_obj.search(
+            [('category_id',
+              'in',
+              uom_categories.ids),
+             ('uom_type', '=', 'reference')])
+        uom_by_category = {
+            from_uom.category_id: from_uom for from_uom in from_uoms}
         for line in self:
             if line.product_id:
                 supplier = line._get_product_seller()
                 if supplier:
                     product_purchase_uom = supplier.min_qty_uom_id
-                    uom_obj = self.env['product.uom']
-                    from_uom = uom_obj.search(
-                        [('category_id', '=',
-                          product_purchase_uom.category_id.id),
-                         ('uom_type', '=', 'reference')], limit=1)
+                    from_uom = uom_by_category.get(
+                        line.product_purchase_uom_id.category_id)
                     line.product_purchase_qty = from_uom._compute_quantity(
                         line.product_qty,
                         product_purchase_uom)
