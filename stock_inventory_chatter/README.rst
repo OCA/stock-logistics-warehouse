@@ -44,9 +44,13 @@ Contributors
 
 * Miquel Raïch <miquel.raich@eficent.com>
 <<<<<<< HEAD
+<<<<<<< HEAD
 * Reynaldi Yosfino <reynaldiyosfino@gmail.com>
 =======
 >>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
+=======
+* Reynaldi Yosfino <reynaldiyosfino@gmail.com>
+>>>>>>> 28b9465... [MIG] stock_inventory_chatter: Migration to 11.0
 
 Maintainer
 ----------

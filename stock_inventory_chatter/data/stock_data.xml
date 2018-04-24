@@ -5,10 +5,18 @@
         <!-- Stock-related subtypes for messaging / Chatter -->
         <record id="mt_inventory_canceled" model="mail.message.subtype">
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             <field name="name">Inventory Cancelled</field>
 =======
             <field name="name">Inventory Canceled</field>
 >>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
+=======
+            <field name="name">Inventory Cancelled</field>
+>>>>>>> 6b2b70a... [FIX] Typo and translation
+=======
+            <field name="name">Inventory Canceled</field>
+>>>>>>> cf2fd78... [FIX] Inventory Chatter
             <field name="res_model">stock.inventory</field>
             <field name="default" eval="False"/>
         </record>
