@@ -55,6 +55,7 @@ addon | version | summary
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 10.0.1.0.0 | Stock - Manual Quant Assignment
 [stock_quant_merge](stock_quant_merge/) | 10.0.1.0.0 | Stock - Quant merge
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 10.0.1.0.0 | Stock Quant Reserved Qty UoM
+[stock_removal_location_by_priority](stock_removal_location_by_priority/) | 10.0.1.0.0 | Establish a removal priority on stock locations.
 [stock_reserve](stock_reserve/) | 10.0.1.0.0 | Stock reservations on products
 [stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 10.0.1.0.0 | Stock Warehouse Orderpoint Stock Info
 [stock_warehouse_orderpoint_stock_info_unreserved](stock_warehouse_orderpoint_stock_info_unreserved/) | 10.0.1.0.0 | Stock Warehouse Orderpoint Stock Info Unreserved
