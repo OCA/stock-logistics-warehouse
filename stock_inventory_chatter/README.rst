@@ -35,6 +35,7 @@ Contributors
 ------------
 
 * Miquel Raïch <miquel.raich@eficent.com>
+* Reynaldi Yosfino <reynaldiyosfino@gmail.com>
 
 Maintainer
 ----------
