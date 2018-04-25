@@ -7,21 +7,39 @@
         sequence="100"/>
 
     <menuitem
-        id="menu_stock_request"
-        action="action_stock_request_form"
-        name="Stock Requests" parent="menu_stock_request_root"
-        sequence="20"/>
+        id="menu_stock_request_operations"
+        parent="menu_stock_request_root"
+        name="Operations"
+        sequence="10"/>
 
     <menuitem id="stock_request_order_menu"
-              name="Stock Requests Orders"
-              parent="menu_stock_request_root"
+              name="Stock Request Orders"
+              parent="menu_stock_request_operations"
               action="stock_request_order_action"
               groups="group_stock_request_order"
-              sequence="10"/>
+              sequence="20"/>
+
+    <menuitem
+        id="menu_stock_request"
+        action="action_stock_request_form"
+        name="Stock Requests" parent="menu_stock_request_operations"
+        sequence="30"/>
+
+    <menuitem
+        id="menu_stock_request_master_data"
+        parent="menu_stock_request_root"
+        name="Master Data"
+        sequence="100"/>
+
+    <menuitem
+        id="menu_stock_request_master_data"
+        parent="menu_stock_request_root"
+        name="Master Data"
+        sequence="100"/>
 
     <menuitem id="menu_stock_request_config" name="Settings"
               parent="menu_stock_request_root"
-              sequence="99" action="action_stock_request_config"
+              sequence="999" action="action_stock_request_config"
               groups="base.group_system"/>
 
 </odoo>
