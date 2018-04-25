@@ -9,26 +9,29 @@ from openerp import api, fields, models
 class StockInventoryLine(models.Model):
     _inherit = 'stock.inventory.line'
 
-    @api.one
+    @api.multi
     def _compute_discrepancy(self):
-        self.discrepancy_qty = self.product_qty - self.theoretical_qty
-        if self.theoretical_qty:
-            self.discrepancy_percent = 100 * abs(
-                (self.product_qty - self.theoretical_qty) /
-                self.theoretical_qty)
-        elif not self.theoretical_qty and self.product_qty:
-            self.discrepancy_percent = 100.0
+        for rec in self:
+            rec.discrepancy_qty = rec.product_qty - rec.theoretical_qty
+            if rec.theoretical_qty:
+                rec.discrepancy_percent = 100 * abs(
+                    (rec.product_qty - rec.theoretical_qty) /
+                    rec.theoretical_qty)
+            elif not rec.theoretical_qty and rec.product_qty:
+                rec.discrepancy_percent = 100.0
 
-    @api.one
+    @api.multi
     def _get_discrepancy_threshold(self):
-        wh_id = self.location_id.get_warehouse(self.location_id)
-        wh = self.env['stock.warehouse'].browse(wh_id)
-        if self.location_id.discrepancy_threshold > 0.0:
-            self.discrepancy_threshold = self.location_id.discrepancy_threshold
-        elif wh.discrepancy_threshold > 0.0:
-            self.discrepancy_threshold = wh.discrepancy_threshold
-        else:
-            self.discrepancy_threshold = False
+        for rec in self:
+            wh_id = rec.location_id.get_warehouse(rec.location_id)
+            wh = self.env['stock.warehouse'].browse(wh_id)
+            if rec.location_id.discrepancy_threshold > 0.0:
+                rec.discrepancy_threshold = rec.location_id \
+                    .discrepancy_threshold
+            elif wh.discrepancy_threshold > 0.0:
+                rec.discrepancy_threshold = wh.discrepancy_threshold
+            else:
+                rec.discrepancy_threshold = False
 
     discrepancy_qty = fields.Float(
         string='Discrepancy',

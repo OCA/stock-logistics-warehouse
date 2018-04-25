@@ -2,12 +2,14 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
 from openerp.tests.common import TransactionCase
-from openerp.exceptions import UserError
+from openerp.exceptions import ValidationError
 
 
 class TestInventoryDiscrepancy(TransactionCase):
+
+    post_install = True
+
     def setUp(self, *args, **kwargs):
         super(TestInventoryDiscrepancy, self).setUp(*args, **kwargs)
         self.obj_wh = self.env['stock.warehouse']
@@ -163,11 +165,10 @@ class TestInventoryDiscrepancy(TransactionCase):
         """Test if a user error raises when a stock user tries to update the
         qty for a product and the correction is a discrepancy over the
         threshold."""
-        upd_qty = self.obj_upd_qty_wizard.create({
+        upd_qty = self.obj_upd_qty_wizard.sudo(self.user).create({
             'product_id': self.product1.id,
-            'product_tmpl_id': self.product1.product_tmpl_id.id,
             'new_quantity': 10.0,
             'location_id': self.test_loc.id,
         })
-        with self.assertRaises(UserError):
-            upd_qty.sudo(self.user).change_product_qty()
+        with self.assertRaises(ValidationError):
+            upd_qty.change_product_qty()
