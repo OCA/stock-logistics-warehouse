@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem id="stock_request_kanban_menu"
+              name="Kanban cards"
+              parent="stock_request.menu_stock_request_master_data"
+              action="stock_request_kanban_action"
+              groups="stock_request.group_stock_request_manager"
+              sequence="110"/>
+
+    <menuitem id="menu_wizard_stock_request_kanban"
+              name="Request from Kanban cards"
+              parent="stock_request.menu_stock_request_operations"
+              action="wizard_stock_request_kanban_action"
+              sequence="40"/>
+</odoo>

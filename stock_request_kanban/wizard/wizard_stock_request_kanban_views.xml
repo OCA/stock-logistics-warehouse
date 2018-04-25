@@ -47,10 +47,4 @@
                 view_type="form"
                 target="new"/>
 
-    <menuitem
-        id="menu_wizard_stock_request_kanban"
-        action="wizard_stock_request_kanban_action"
-        name="Order Kanban Card" parent="stock_request.menu_stock_request_root"
-        sequence="20"/>
-
 </odoo>
