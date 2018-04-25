@@ -61,8 +61,6 @@
                         </group>
                         <group>
                             <field name="warehouse_id" widget="selection" groups="stock.group_stock_multi_locations"/>
-                            <field name="product_uom_id"
-                                   options="{'no_open': True, 'no_create': True}" groups="product.group_uom"/>
                             <field name="location_id" groups="stock.group_stock_multi_locations"/>
                             <field name="route_id"
                                    options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
@@ -72,7 +70,15 @@
                             <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                         </group>
                         <group name="quantities">
-                            <field name="product_uom_qty"/>
+                            <label for="product_uom_qty"/>
+                            <div>
+                                <field name="product_uom_qty"
+                                       class="oe_inline"/>
+                                <field name="product_uom_id"
+                                       class="oe_inline"
+                                       options="{'no_open': True, 'no_create': True}"
+                                       groups="product.group_uom"/>
+                            </div>
                         </group>
                     </group>
                 </sheet>
@@ -112,7 +118,7 @@
                                         <li t-if="record.product_id.raw_value"><field name="product_id"/></li>
                                         <li t-if="record.warehouse_id.raw_value" groups="stock.group_stock_multi_locations"><field name="warehouse_id"/></li>
                                         <li t-if="record.location_id.raw_value" groups="stock.group_stock_multi_locations"><field name="location_id"/></li>
-                                        <li t-if="record.product_qty"><field name="product_qty"/></li>
+                                        <li t-if="record.product_qty"><field name="product_qty"/> <field name="product_uom_id"/></li>
                                     </ul>
                                 </div>
                             </div>
@@ -135,12 +141,5 @@
           </p>
         </field>
     </record>
-
-    <menuitem id="stock_request_kanban_menu"
-              name="Stock Requests Kanbans"
-              parent="stock_request.menu_stock_request_root"
-              action="stock_request_kanban_action"
-              groups="stock_request.group_stock_request_manager"
-              sequence="30"/>
 
 </odoo>
