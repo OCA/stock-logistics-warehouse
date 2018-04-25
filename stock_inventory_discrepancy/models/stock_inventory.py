@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp import _, api, fields, models
-from openerp.exceptions import UserError
+from openerp.exceptions import ValidationError
 
 
 class StockInventory(models.Model):
@@ -17,13 +17,14 @@ class StockInventory(models.Model):
         ('pending', 'Pending to Approve'),
         ('done', 'Validated')]
 
-    @api.one
+    @api.multi
     @api.depends('line_ids.product_qty', 'line_ids.theoretical_qty')
     def _compute_over_discrepancy_line_count(self):
-        lines = self.line_ids
-        self.over_discrepancy_line_count = sum(
-            d.discrepancy_percent > d.discrepancy_threshold
-            for d in lines)
+        for rec in self:
+            lines = rec.line_ids
+            rec.over_discrepancy_line_count = sum(
+                d.discrepancy_percent > d.discrepancy_threshold
+                for d in lines)
 
     state = fields.Selection(
         selection=INVENTORY_STATE_SELECTION,
@@ -40,7 +41,6 @@ class StockInventory(models.Model):
         compute=_compute_over_discrepancy_line_count,
         store=True)
 
-    @api.model
     def action_over_discrepancies(self):
         self.state = 'pending'
 
@@ -51,21 +51,22 @@ class StockInventory(models.Model):
         if grp_inv_val in self.env.user.groups_id:
             return True
         else:
-            raise UserError(
+            raise ValidationError(
                 _('The Qty Update is over the Discrepancy Threshold.\n '
                   'Please, contact a user with rights to perform '
                   'this action.')
             )
 
-    @api.one
+    @api.multi
     def action_done(self):
-        if self.over_discrepancy_line_count and self.line_ids.filtered(
-                lambda t: t.discrepancy_threshold > 0.0):
-            if self.env.context.get('normal_view', False):
-                self.action_over_discrepancies()
-                return True
-            else:
-                self._check_group_inventory_validation_always()
+        for rec in self:
+            if rec.over_discrepancy_line_count and rec.line_ids.filtered(
+                    lambda t: t.discrepancy_threshold > 0.0):
+                if rec.env.context.get('normal_view', False):
+                    rec.action_over_discrepancies()
+                    return True
+                else:
+                    rec._check_group_inventory_validation_always()
         return super(StockInventory, self).action_done()
 
     @api.multi
