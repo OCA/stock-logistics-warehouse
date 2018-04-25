@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, fields, models, _
-from openerp.exceptions import UserError
+from openerp.exceptions import ValidationError
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import timedelta, datetime
 
@@ -29,7 +29,7 @@ class StockCycleCountRule(models.Model):
     @api.constrains('rule_type', 'warehouse_ids')
     def _check_zero_rule(self):
         if self.rule_type == 'zero' and len(self.warehouse_ids) > 1:
-            raise UserError(
+            raise ValidationError(
                 _('Zero confirmation rules can only have one warehouse '
                   'assigned.')
             )
@@ -38,7 +38,7 @@ class StockCycleCountRule(models.Model):
                 ('rule_type', '=', 'zero'),
                 ('warehouse_ids', '=', self.warehouse_ids.id)])
             if len(zero_rule) > 1:
-                raise UserError(
+                raise ValidationError(
                     _('You can only have one zero confirmation rule per '
                       'warehouse.')
                 )
@@ -69,12 +69,12 @@ class StockCycleCountRule(models.Model):
     @api.constrains('periodic_qty_per_period', 'periodic_count_period')
     def _check_negative_periodic(self):
         if self.periodic_qty_per_period < 1:
-            raise UserError(
+            raise ValidationError(
                 _('You cannot define a negative or null number of counts per '
                   'period.')
             )
         if self.periodic_count_period < 0:
-            raise UserError(
+            raise ValidationError(
                 _('You cannot define a negative period.')
             )
 
@@ -155,7 +155,7 @@ class StockCycleCountRule(models.Model):
                     if next_date < datetime.today():
                         next_date = datetime.today()
                 except Exception as e:
-                    raise UserError(
+                    raise ValidationError(
                         _('Error found determining the frequency of periodic '
                           'cycle count rule. %s') % e.message)
             else:
@@ -202,7 +202,7 @@ class StockCycleCountRule(models.Model):
                                                                     loc)
                             cycle_counts.append(cycle_count)
                     except Exception as e:
-                        raise UserError(_(
+                        raise ValidationError(_(
                             'Error found when comparing turnover with the '
                             'rule threshold. %s') % e.message)
             else:

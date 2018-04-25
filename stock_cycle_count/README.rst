@@ -46,11 +46,11 @@ Configuration
 
 You can configure the rules to compute the cycle count, acting as follow:
 
-#. Go to *Inventory > Configuration > Cycle Count Rules*.
+#. Go to *Warehouse > Configuration > Cycle Count Rules*.
 #. Create as much cycle count rules as you want.
 #. Assign the rules to the Warehouse or zones where you want to apply the rules
    in.
-#. Go to *Inventory > Configuration > Warehouse Management > Warehouses* and
+#. Go to *Warehouse > Configuration > Warehouse Management > Warehouses* and
    set a *Cycle Count Planning Horizon* for each warehouse.
 
 Usage
@@ -59,7 +59,7 @@ Usage
 Once you have some rules configured for your warehouses, you can proceed as
 is described below.
 
-#. Go to "Inventory > Configuration > Warehouse Management > Warehouses".
+#. Go to "Warehouse > Configuration > Warehouses".
 #. Select all the warehouses you want to compute the rules in.
 #. Click on "Action" and then in "Compute Cycle Count Rules". (**note**: A
    cron job will do this for every warehouse daily.)
@@ -94,7 +94,7 @@ Contributors
 
 * Lois Rilo <lois.rilo@eficent.com>
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
-
+* George Daramouskas <gdaramouskas@therp.nl>
 
 Maintainer
 ----------

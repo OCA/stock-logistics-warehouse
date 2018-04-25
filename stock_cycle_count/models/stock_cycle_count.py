@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, fields, models, _
-from openerp.exceptions import UserError
+from openerp.exceptions import ValidationError
 
 
 class StockCycleCount(models.Model):
@@ -73,7 +73,7 @@ class StockCycleCount(models.Model):
     @api.one
     def action_create_inventory_adjustment(self):
         if self.state != 'draft':
-            raise UserError(_(
+            raise ValidationError(_(
                 "You can only confirm cycle counts in state 'Planned'."
             ))
         data = self._prepare_inventory_adjustment()

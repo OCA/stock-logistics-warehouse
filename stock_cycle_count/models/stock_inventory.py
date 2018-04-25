@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, fields, models, _
-from openerp.exceptions import UserError
+from openerp.exceptions import ValidationError
 
 PERCENT = 100.0
 
@@ -45,7 +45,7 @@ class StockInventory(models.Model):
         for inventory in self:
             if (inventory.cycle_count_id and 'state' not in vals.keys() and
                     inventory.state == 'draft'):
-                raise UserError(
+                raise ValidationError(
                     _('You cannot modify the configuration of an Inventory '
                       'Adjustment related to a Cycle Count.'))
         return super(StockInventory, self).write(vals)
