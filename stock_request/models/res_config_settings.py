@@ -12,3 +12,6 @@ class ResConfigSettings(models.TransientModel):
 
     module_stock_request_purchase = fields.Boolean(
         string='Stock Requests for Purchases')
+
+    module_stock_request_kanban = fields.Boolean(
+        string='Stock Requests Kanban integration')
