@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<!--
+    Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+    Copyright 2017 Creu Blanca
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+-->
+
+<odoo>
+
+    <record id="wizard_stock_request_order_kanban_form" model="ir.ui.view">
+        <field name="name">wizard.stock.request.order.kanban.form</field>
+        <field name="model">wizard.stock.request.order.kanban</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="wizard_stock_request_kanban_form"/>
+        <field name="arch" type="xml">
+            <field name="kanban_id" position="after">
+                <field name="order_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+    <act_window id="wizard_stock_request_order_kanban_action"
+                name="Add Kanban"
+                res_model="wizard.stock.request.order.kanban"
+                view_mode="form"
+                view_type="form"
+                context="{'default_order_id': active_id}"
+                target="new"/>
+
+</odoo>

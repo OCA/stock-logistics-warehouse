@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="kanban_paper_format" model="report.paperformat">
+        <field name="name">Kanban format</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0.0</field>
+        <field name="margin_bottom">0.0</field>
+        <field name="margin_left">0.0</field>
+        <field name="margin_right">0.0</field>
+        <field name="header_spacing">0</field>
+        <field name="dpi">72</field>
+    </record>
+
+</odoo>
