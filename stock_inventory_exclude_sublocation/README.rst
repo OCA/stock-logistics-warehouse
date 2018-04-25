@@ -51,6 +51,7 @@ Contributors
 ------------
 
 * Lois Rilo Antelo <lois.rilo@eficent.com>
+* George Daramouskas <gdaramouskas@therp.nl>
 
 
 Maintainer

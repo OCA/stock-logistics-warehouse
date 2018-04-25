@@ -15,7 +15,7 @@ class StockInventory(models.Model):
 
     @api.model
     def _get_inventory_lines(self, inventory):
-        if inventory.exclude_sublocation:
+        if getattr(inventory, 'exclude_sublocation', None):
             product_obj = self.env['product.product']
             domain = ' location_id = %s'
             args = (tuple(inventory.location_id.ids),)

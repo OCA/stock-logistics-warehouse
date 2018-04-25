@@ -18,7 +18,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         self.res_users_model = self.env['res.users']
 
         self.company = self.env.ref('base.main_company')
-        self.partner = self.ref('base.res_partner_4')
+        self.partner = self.ref('base.partner_root')
         self.grp_stock_manager = self.env.ref('stock.group_stock_manager')
         self.grp_tracking_owner = self.env.ref('stock.group_tracking_owner')
         self.grp_production_lot = self.env.ref('stock.group_production_lot')
