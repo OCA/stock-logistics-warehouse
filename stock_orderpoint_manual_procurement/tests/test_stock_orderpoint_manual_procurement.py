@@ -4,6 +4,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests import common
+from odoo import fields
+from datetime import timedelta
 
 
 class TestStockWarehouseOrderpoint(common.TransactionCase):
@@ -15,8 +17,6 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         self.group_stock_manager = self.env.ref('stock.group_stock_manager')
         self.group_purchase_manager = self.env.ref(
             'purchase.group_purchase_manager')
-        self.vendor = self.env.ref(
-            'stock_orderpoint_manual_procurement.product_supplierinfo_product_7')  # noqa
         self.group_change_procure_qty = self.env.ref(
             'stock_orderpoint_manual_procurement.'
             'group_change_orderpoint_procure_qty')
@@ -43,6 +43,12 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         self.product_uom = self.env.ref('product.product_uom_unit')
         self.location = self.env.ref('stock.stock_location_stock')
         self.product = self.env.ref('product.product_product_7')
+
+        # Create vendor and supplier info
+        test_seller = self.env['res.partner'].create({'name': 'Test seller'})
+        self.vendor = self.env['product.supplierinfo'].create({
+            'name': test_seller.id,
+            'price': 8.0})
 
         # Create Product category and Product
         self.product_ctg = self._create_product_category()
@@ -109,7 +115,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         })
         return reorder
 
-    def create_orderpoint_procurement(self):
+    def create_orderpoint_procurement(self, manual_date=None):
         """Make Procurement from Reordering Rule"""
         context = {
             'active_model': 'stock.warehouse.orderpoint',
@@ -118,10 +124,12 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         }
         wizard = self.make_procurement_orderpoint_model.sudo(self.user).\
             with_context(context).create({})
+        if manual_date:
+            wizard.item_ids.write({'date_planned': manual_date})
         wizard.make_procurement()
         return wizard
 
-    def test_security(self):
+    def test_manual_procurement(self):
         """Test Manual Procurement created from Order-Point"""
 
         # Create Manual Procurement from order-point procured quantity
@@ -139,3 +147,18 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         self.assertNotEqual(self.reorder.procure_recommended_qty,
                             purchase_line.product_qty)
         self.assertEqual(purchase_line.product_qty, 480.0)
+
+    def test_manual_procurement_modified_date(self):
+        """Test manual procurement created from an orderpoint with
+        modified date."""
+        manual_date = fields.Date.from_string(
+            fields.Date.today()) + timedelta(days=30)
+        self.create_orderpoint_procurement(manual_date)
+        purchase = self.purchase_model.search(
+            [('origin', 'ilike', self.reorder.name)])
+        purchase_line = self.purchase_line_model.search(
+            [('orderpoint_id', '=', self.reorder.id),
+             ('order_id', '=', purchase.id)])
+        self.assertEquals(len(purchase_line), 1)
+        pol_date = fields.Date.from_string(purchase_line.date_planned)
+        self.assertEquals(pol_date, manual_date)
