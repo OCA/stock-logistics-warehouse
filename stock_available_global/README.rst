@@ -8,7 +8,7 @@ Stock available global
 
 This module adds new fields to show product stock in all companies.
 
-In product forms appear two new smarts buttons *On Hand* and *Forecast* witch
+In product forms appear two new smarts buttons *On Hand* and *Forecast* which
 computes all companies stock.
 
 
@@ -23,7 +23,7 @@ To use this module, you need:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/9.0
+   :target: https://runbot.odoo-community.org/runbot/153/11.0
 
 
 Bug Tracker
@@ -45,7 +45,9 @@ Images
 Contributors
 ------------
 
-* Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Carlos Dauden
 
 
 Maintainer
