@@ -11,3 +11,4 @@ access_procurement_rule_request_manager,procurement_rule request_manager,stock.m
 access_procurement_rule,procurement.rule.flow,stock.model_procurement_rule,group_stock_request_user,1,0,0,0
 access_stock_request_order_user,stock request user,model_stock_request_order,stock_request.group_stock_request_user,1,1,1,0
 access_stock_request_order_manager,stock request manager,model_stock_request_order,stock_request.group_stock_request_manager,1,1,1,1
+access_stock_request_user_warehouse,stock request user Warehouse,stock.model_stock_warehouse,group_stock_request_user,1,0,0,0
