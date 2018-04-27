@@ -23,11 +23,12 @@ class StockRequest(models.AbstractModel):
             res['location_id'] = warehouse.lot_stock_id.id
         return res
 
-    @api.depends('product_id', 'product_uom_id', 'product_uom_qty')
+    @api.depends('product_id', 'product_uom_id', 'product_uom_qty',
+                 'product_id.product_tmpl_id.uom_id')
     def _compute_product_qty(self):
         for rec in self:
             rec.product_qty = rec.product_uom_id._compute_quantity(
-                rec.product_uom_qty, rec.product_id.uom_id)
+                rec.product_uom_qty, rec.product_id.product_tmpl_id.uom_id)
 
     name = fields.Char(
         'Name', copy=False, required=True, readonly=True,
@@ -60,6 +61,7 @@ class StockRequest(models.AbstractModel):
     product_qty = fields.Float(
         'Real Quantity', compute='_compute_product_qty',
         store=True, copy=False,
+        digits=dp.get_precision('Product Unit of Measure'),
         help='Quantity in the default UoM of the product',
     )
     procurement_group_id = fields.Many2one(
@@ -90,21 +92,26 @@ class StockRequest(models.AbstractModel):
 
     @api.depends('product_id', 'warehouse_id', 'location_id')
     def _compute_route_ids(self):
-        for record in self:
-            routes = self.env['stock.location.route']
-            if record.product_id:
-                routes += record.product_id.mapped(
-                    'route_ids') | record.product_id.mapped(
-                    'categ_id').mapped('total_route_ids')
-            if record.warehouse_id:
-                routes |= self.env['stock.location.route'].search(
-                    [('warehouse_ids', 'in', record.warehouse_id.ids)])
-            parents = record.get_parents().ids
-            record.route_ids = routes.filtered(lambda r: any(
-                p.location_id.id in parents for p in r.pull_ids))
+        route_obj = self.env['stock.location.route']
+        for wh in self.mapped('warehouse_id'):
+            wh_routes = route_obj.search(
+                [('warehouse_ids', '=', wh.id)])
+            for record in self.filtered(lambda r: r.warehouse_id == wh):
+                routes = route_obj
+                if record.product_id:
+                    routes += record.product_id.mapped(
+                        'route_ids'
+                    ) | record.product_id.mapped(
+                        'categ_id'
+                    ).mapped('total_route_ids')
+                if record.warehouse_id:
+                    routes |= wh_routes
+                parents = record.get_parents().ids
+                record.route_ids = routes.filtered(lambda r: any(
+                    p.location_id.id in parents for p in r.pull_ids))
 
     def get_parents(self):
-        location = self.location_id.sudo()
+        location = self.location_id
         result = location
         while location.location_id:
             location = location.location_id
@@ -152,7 +159,6 @@ class StockRequest(models.AbstractModel):
         """ Finds location id for changed warehouse. """
         res = {'domain': {}}
         if self.warehouse_id:
-            # search with sudo because the user may not have permissions
             loc_wh = self.location_id.sudo().get_warehouse()
             if self.warehouse_id != loc_wh:
                 self.location_id = self.warehouse_id.lot_stock_id.id
@@ -164,7 +170,7 @@ class StockRequest(models.AbstractModel):
     def onchange_location_id(self):
         res = {'domain': {}}
         if self.location_id:
-            loc_wh = self.location_id.sudo().get_warehouse()
+            loc_wh = self.location_id.get_warehouse()
             if self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
                 self.onchange_warehouse_id()
