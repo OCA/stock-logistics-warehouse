@@ -5,14 +5,13 @@
 
 {
     "name": "Stock Orderpoint Automatic Creation",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     "author": "AvanzOSC, "
               "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "http://www.odoomrp.com",
     "depends": [
-        "procurement",
         "stock",
     ],
     "category": "Inventory, Logistic, Storage",
