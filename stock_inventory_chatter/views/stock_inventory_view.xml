@@ -2,20 +2,7 @@
 <!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 <odoo>
-=======
-<openerp>
-  <data>
->>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
-=======
-<odoo>
->>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0
-=======
-<odoo>
->>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
     <record id="view_inventory_form" model="ir.ui.view">
         <field name="name">Inventory form view - add chatter </field>
         <field name="model">stock.inventory</field>
@@ -29,17 +16,4 @@
             </sheet>
         </field>
     </record>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 </odoo>
-=======
-  </data>
-</openerp>
->>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
-=======
-</odoo>
->>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0
-=======
-</odoo>
->>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d

@@ -25,23 +25,7 @@ msgstr "Inventář"
 
 #. module: stock_inventory_chatter
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 msgid "Inventory Cancelled"
-=======
-msgid "Inventory Canceled"
->>>>>>> 256b17d... OCA Transbot updated translations from Transifex
-=======
-msgid "Inventory Cancelled"
->>>>>>> 6b2b70a... [FIX] Typo and translation
-=======
-msgid "Inventory Canceled"
->>>>>>> cf2fd78... [FIX] Inventory Chatter
-=======
-msgid "Inventory Canceled"
->>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 msgstr "Inventář byl zrušen"
 
 #. module: stock_inventory_chatter
