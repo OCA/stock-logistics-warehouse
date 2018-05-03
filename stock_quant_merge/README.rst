@@ -41,6 +41,7 @@ Contributors
 * Ana Juaristi <ajuaristio@gmail.com>
 * Lionel Sausin <ls@numerigraphe.com>
 * Lois Rilo <lois.rilo@eficent.com>
+* Reynaldi Yosfino <reynaldiyosfino@gmail.com>
 
 Maintainer
 ----------

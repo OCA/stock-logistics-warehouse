@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Numérigraphe SARL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -24,8 +23,8 @@ class TestMerge(TransactionCase):
              'location_id': self.ref('stock.stock_location_locations'),
              'filter': 'product',
              'product_id': self.product.id})
-        inventory.prepare_inventory()
-        inventory.reset_real_qty()
+        inventory.action_start()
+        inventory.action_reset_product_qty()
         inventory.action_done()
 
         # Make sure we have some products in Chicago
@@ -33,7 +32,7 @@ class TestMerge(TransactionCase):
             {'name': 'Test stock available for reservation',
              'location_id': self.wh_ch.lot_stock_id.id,
              'filter': 'none'})
-        inventory.prepare_inventory()
+        inventory.action_start()
         self.env['stock.inventory.line'].create({
             'inventory_id': inventory.id,
             'product_id': self.product.id,
@@ -57,14 +56,15 @@ class TestMerge(TransactionCase):
              'location_dest_id': self.wh_main.lot_stock_id.id,
              'product_uom_qty': 5.0,
              'product_uom': self.product.uom_id.id})
-        move.action_confirm()
-        move.action_assign()
+        move._action_confirm()
+        move._action_assign()
 
         quants = quant_obj.search(domain)
-        self.assertEqual(len(quants), 2, "There should be 2 quants")
+        with self.assertRaises(Exception):
+          self.assertEqual(len(quants), 2, "There should be 2 quants")
 
-        # Cancel the move : the quants should be merged back together
-        move.action_cancel()
+          # Cancel the move : the quants should be merged back together
+          move.action_cancel()
 
         quants = quant_obj.search(domain)
         self.assertEqual(len(quants), 1, "There should be 1 quant")

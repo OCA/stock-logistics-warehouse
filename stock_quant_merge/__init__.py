@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 OdooMRP team
 # © 2015 AvanzOSC
 # © 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
