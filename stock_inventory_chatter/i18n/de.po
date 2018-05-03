@@ -25,7 +25,7 @@ msgstr "Bestand"
 
 #. module: stock_inventory_chatter
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
-msgid "Inventory Cancelled"
+msgid "Inventory Canceled"
 msgstr ""
 
 #. module: stock_inventory_chatter
