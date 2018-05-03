@@ -15,6 +15,7 @@ Usage
    :alt: Try me on Runbot
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
    :target: https://runbot.odoo-community.org/runbot/153/10.0
 =======
    :target: https://runbot.odoo-community.org/runbot/153/9.0
@@ -22,6 +23,9 @@ Usage
 =======
    :target: https://runbot.odoo-community.org/runbot/153/10.0
 >>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0
+=======
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 
 Bug Tracker
 ===========
@@ -45,12 +49,16 @@ Contributors
 * Miquel Raïch <miquel.raich@eficent.com>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 * Reynaldi Yosfino <reynaldiyosfino@gmail.com>
 =======
 >>>>>>> e9fbf78... [9.0][ADD] stock_inventory_chatter
 =======
 * Reynaldi Yosfino <reynaldiyosfino@gmail.com>
 >>>>>>> 28b9465... [MIG] stock_inventory_chatter: Migration to 11.0
+=======
+* Reynaldi Yosfino <reynaldiyosfino@gmail.com>
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 
 Maintainer
 ----------

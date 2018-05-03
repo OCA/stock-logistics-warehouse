@@ -4,6 +4,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <odoo>
 =======
 <openerp>
@@ -12,6 +13,9 @@
 =======
 <odoo>
 >>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0
+=======
+<odoo>
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
     <record id="view_inventory_form" model="ir.ui.view">
         <field name="name">Inventory form view - add chatter </field>
         <field name="model">stock.inventory</field>
@@ -27,6 +31,7 @@
     </record>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 </odoo>
 =======
   </data>
@@ -35,3 +40,6 @@
 =======
 </odoo>
 >>>>>>> 0d35c52... [MIG] stock_inventory_chatter: Migration to 10.0
+=======
+</odoo>
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d

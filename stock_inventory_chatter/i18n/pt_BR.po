@@ -6,6 +6,9 @@
 # OCA Transbot <transbot@odoo-community.org>, 2017
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
@@ -13,6 +16,7 @@ msgstr ""
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
 "PO-Revision-Date: 2017-11-30 03:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+<<<<<<< HEAD
 =======
 # Claudio Araujo Santos <inactive+CDASCSI@transifex.com>, 2017
 # Felipe Lopes <ti@trojahntoppel.com.br>, 2017
@@ -32,6 +36,8 @@ msgstr ""
 "PO-Revision-Date: 2017-11-30 03:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 >>>>>>> 24c5544... OCA Transbot updated translations from Transifex
+=======
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,6 +46,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_inventory_chatter
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -81,12 +88,15 @@ msgstr "Se verificar novas mensagens requerem sua atenção."
 >>>>>>> 02bcc47... OCA Transbot updated translations from Transifex
 =======
 >>>>>>> 24c5544... OCA Transbot updated translations from Transifex
+=======
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 #: model:ir.model,name:stock_inventory_chatter.model_stock_inventory
 msgid "Inventory"
 msgstr "Inventário"
 
 #. module: stock_inventory_chatter
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -100,6 +110,9 @@ msgid "Inventory Cancelled"
 =======
 msgid "Inventory Canceled"
 >>>>>>> cf2fd78... [FIX] Inventory Chatter
+=======
+msgid "Inventory Canceled"
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 msgstr ""
 
 #. module: stock_inventory_chatter
@@ -111,6 +124,7 @@ msgstr ""
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_done
 msgid "Inventory Done"
 msgstr ""
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -157,3 +171,5 @@ msgstr "As mensagens não lidas Contador"
 >>>>>>> 02bcc47... OCA Transbot updated translations from Transifex
 =======
 >>>>>>> 24c5544... OCA Transbot updated translations from Transifex
+=======
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d

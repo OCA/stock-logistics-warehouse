@@ -8,10 +8,14 @@ msgid ""
 msgstr ""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
 "PO-Revision-Date: 2017-11-30 03:53+0000\n"
+<<<<<<< HEAD
 =======
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
@@ -24,6 +28,8 @@ msgstr ""
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
 "PO-Revision-Date: 2017-11-30 03:53+0000\n"
 >>>>>>> 24c5544... OCA Transbot updated translations from Transifex
+=======
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
@@ -33,6 +39,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_inventory_chatter
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -74,12 +81,15 @@ msgstr "Si se marca, los nuevos mensajes requieren su atención"
 >>>>>>> 02bcc47... OCA Transbot updated translations from Transifex
 =======
 >>>>>>> 24c5544... OCA Transbot updated translations from Transifex
+=======
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 #: model:ir.model,name:stock_inventory_chatter.model_stock_inventory
 msgid "Inventory"
 msgstr "Inventario"
 
 #. module: stock_inventory_chatter
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -93,6 +103,9 @@ msgid "Inventory Cancelled"
 =======
 msgid "Inventory Canceled"
 >>>>>>> cf2fd78... [FIX] Inventory Chatter
+=======
+msgid "Inventory Canceled"
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 msgstr ""
 
 #. module: stock_inventory_chatter
@@ -104,6 +117,7 @@ msgstr ""
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_done
 msgid "Inventory Done"
 msgstr ""
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -150,3 +164,5 @@ msgstr "Contador de mensajes no leídos"
 >>>>>>> 02bcc47... OCA Transbot updated translations from Transifex
 =======
 >>>>>>> 24c5544... OCA Transbot updated translations from Transifex
+=======
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d

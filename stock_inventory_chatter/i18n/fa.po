@@ -64,6 +64,7 @@ msgstr ""
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 msgid "Inventory Cancelled"
 =======
 msgid "Inventory Canceled"
@@ -74,6 +75,9 @@ msgid "Inventory Cancelled"
 =======
 msgid "Inventory Canceled"
 >>>>>>> cf2fd78... [FIX] Inventory Chatter
+=======
+msgid "Inventory Canceled"
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 msgstr ""
 
 #. module: stock_inventory_chatter

@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 """Docstring models stock."""
 =======
 # -*- coding: utf-8 -*-
@@ -7,10 +8,14 @@
 =======
 """Docstring models stock."""
 >>>>>>> 28b9465... [MIG] stock_inventory_chatter: Migration to 11.0
+=======
+"""Docstring models stock."""
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -22,11 +27,15 @@ from odoo import api, models
 =======
 from odoo import api, fields, models
 >>>>>>> 53e720a... [IMP] Refactoring some fields state
+=======
+from odoo import api, fields, models
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
 
 
 class StockInventory(models.Model):
     """Docstring class StockInventory."""
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     _name = 'stock.inventory'
     _inherit = ['stock.inventory', 'mail.thread']
@@ -71,6 +80,13 @@ class StockInventory(models.Model):
 >>>>>>> 1c7e7c8... [FIX] model stock python
 
 >>>>>>> 53e720a... [IMP] Refactoring some fields state
+=======
+    _name = 'stock.inventory'
+    _inherit = ['stock.inventory', 'mail.thread']
+
+    state = fields.Selection(track_visibility='onchange')
+
+>>>>>>> 3673efae755ee4c56786937bde9ef60ce5ec9f1d
     @api.multi
     def _track_subtype(self, init_values):
         self.ensure_one()
