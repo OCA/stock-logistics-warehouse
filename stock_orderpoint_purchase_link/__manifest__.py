@@ -10,7 +10,7 @@
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    "depends": ["stock", "purchase"],
+    "depends": ["stock", "purchase", "ddmrp"],
     "data": [
     ],
     "installable": True,
