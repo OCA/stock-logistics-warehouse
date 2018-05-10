@@ -62,7 +62,10 @@ class StockDemandEstimate(models.Model):
     @api.depends('product_qty', 'date_range_id.days')
     def _compute_daily_qty(self):
         for rec in self:
-            rec.daily_qty = rec.product_qty / rec.date_range_id.days
+            if rec.date_range_id.days:
+                rec.daily_qty = rec.product_qty / rec.date_range_id.days
+            else:
+                rec.daily_qty = 0.0
 
     @api.multi
     @api.depends('product_id', 'product_uom', 'product_uom_qty')
@@ -94,6 +97,7 @@ class StockDemandEstimate(models.Model):
 
     @api.model
     def get_quantity_by_date_range(self, date_start, date_end):
+        """To be used in other modules"""
         # Check if the dates overlap with the period
         period_date_start = fields.Date.from_string(
             self.date_range_id.date_start
