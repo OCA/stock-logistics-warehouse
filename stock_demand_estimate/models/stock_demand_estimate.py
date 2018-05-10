@@ -31,7 +31,10 @@ class StockDemandEstimate(models.Model):
     @api.multi
     def _compute_daily_qty(self):
         for rec in self:
-            rec.daily_qty = rec.product_qty / rec.date_range_id.days
+            if rec.date_range_id.days:
+                rec.daily_qty = rec.product_qty / rec.date_range_id.days
+            else:
+                rec.daily_qty = 0.0
 
     date_range_id = fields.Many2one(
         comodel_name="date.range",
@@ -69,6 +72,7 @@ class StockDemandEstimate(models.Model):
 
     @api.model
     def get_quantity_by_date_range(self, date_start, date_end):
+        """To be used in other modules"""
         # Check if the dates overlap with the period
         period_date_start = fields.Date.from_string(
             self.date_range_id.date_start)
