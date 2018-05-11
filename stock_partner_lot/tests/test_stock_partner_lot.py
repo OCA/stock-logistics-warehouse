@@ -17,9 +17,7 @@ class TestStockPartnerLot(common.TestProductCommon):
         self.product_2 = self.env.ref('product.product_product_6')
 
         res_users_purchase_user = self.env.ref('purchase.group_purchase_user')
-        user = self.env['res.users'].with_context(
-            {'no_reset_password': True, 'mail_create_nosubscribe': True}
-        )
+        user = self.env['res.users']
         self.purchase_user = user.create({
             'name': 'Agung Rachmatullah',
             'login': 'agung_r',
@@ -38,7 +36,7 @@ class TestStockPartnerLot(common.TestProductCommon):
         })
 
         # Create draft PO
-        po_1 = self.purchase_order.create({
+        po_1 = self.purchase_order.sudo(self.purchase_user).create({
             'partner_id': self.partner_id.id,
             'order_line': [
                 (0, 0, {
