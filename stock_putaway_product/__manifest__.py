@@ -5,7 +5,7 @@
 {
     'name': 'Putaway strategy per product',
     'summary': 'Set a product location and put-away strategy per product',
-    'version': '11.0.1.0.1',
+    'version': '11.0.1.0.2',
     'category': 'Inventory',
     'website': 'http://www.apertoso.be',
     'author': 'Apertoso N.V., '
