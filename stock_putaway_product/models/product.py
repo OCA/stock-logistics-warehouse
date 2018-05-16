@@ -39,10 +39,12 @@ class ProductProduct(models.Model):
         if view_type == 'form':
             product_xml = etree.XML(res['arch'])
             putaway_path = "//field[@name='product_putaway_ids']"
-            putaway_field = product_xml.xpath(putaway_path)[0]
-            putaway_field.attrib['context'] = \
-                "{'default_product_tmpl_id': product_tmpl_id," \
-                "'default_product_product_id': active_id}"
-            res['arch'] = etree.tostring(product_xml)
+            putaway_fields = product_xml.xpath(putaway_path)
+            if putaway_fields:
+                putaway_field = putaway_fields[0]
+                putaway_field.attrib['context'] = \
+                    "{'default_product_tmpl_id': product_tmpl_id," \
+                    "'default_product_product_id': active_id}"
+                res['arch'] = etree.tostring(product_xml)
 
         return res
