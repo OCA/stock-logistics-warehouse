@@ -1,4 +1,4 @@
-# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import fields, models
@@ -16,4 +16,10 @@ class StockMove(models.Model):
         res = super(StockMove, self)._prepare_procurement_values()
         if self.orderpoint_ids:
             res['orderpoint_ids'] = self.orderpoint_ids
+        return res
+
+    def _merge_moves_fields(self):
+        res = super(StockMove, self)._merge_moves_fields()
+        res['orderpoint_ids'] = [(4, m.id)
+                                 for m in self.mapped('orderpoint_ids')]
         return res
