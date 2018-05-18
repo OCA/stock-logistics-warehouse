@@ -14,6 +14,8 @@ setuptools.setup(
         'odoo11-addon-stock_mts_mto_rule',
         'odoo11-addon-stock_orderpoint_manual_procurement',
         'odoo11-addon-stock_orderpoint_manual_procurement_uom',
+        'odoo11-addon-stock_orderpoint_move_link',
+        'odoo11-addon-stock_orderpoint_purchase_link',
         'odoo11-addon-stock_orderpoint_uom',
         'odoo11-addon-stock_putaway_method',
         'odoo11-addon-stock_putaway_product',
