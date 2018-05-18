@@ -16,5 +16,5 @@ class ProcurementRule(models.Model):
             vals['orderpoint_ids'] = [(4, values['orderpoint_id'].id)]
         elif 'orderpoint_ids' in values:
             vals['orderpoint_ids'] = [(4, o.id)
-                                      for o in vals['orderpoint_ids']]
+                                      for o in values['orderpoint_ids']]
         return vals
