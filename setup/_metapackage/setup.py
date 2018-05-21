@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo8-addon-stock_available_sale',
         'odoo8-addon-stock_available_unreserved',
         'odoo8-addon-stock_change_qty_reason',
+        'odoo8-addon-stock_inventory_exclude_sublocation',
         'odoo8-addon-stock_inventory_exhaustive',
         'odoo8-addon-stock_inventory_hierarchical',
         'odoo8-addon-stock_inventory_hierarchical_exhaustive',
