@@ -28,4 +28,8 @@ class ProcurementRule(models.Model):
         if 'orderpoint_id' in values:
             vals['orderpoint_ids'] = [
                 (4, values['orderpoint_id'].id)]
+        # If the procurement was run by a stock move.
+        elif 'orderpoint_ids' in values:
+            vals['orderpoint_ids'] = [(4, o.id)
+                                      for o in values['orderpoint_ids']]
         return vals
