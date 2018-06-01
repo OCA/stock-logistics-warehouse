@@ -22,55 +22,55 @@ msgstr ""
 #: code:addons/stock_available_unreserved/models/product.py:137
 #, python-format
 msgid " On Hand"
-msgstr ""
+msgstr " En stock"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_product_qty_available_stock_text
 msgid "Available per stock"
-msgstr ""
+msgstr "Disponible par stock"
 
 #. module: stock_available_unreserved
 #: model:ir.ui.view,arch_db:stock_available_unreserved.quant_search_view
 msgid "Internal Unreserved"
-msgstr ""
+msgstr "Internes Non Réservés"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_product_product
 msgid "Product"
-msgstr "Produit"
+msgstr "Article"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Modèle de produit"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_product_qty_available_not_res
 msgid "Qty Available Not Reserved"
-msgstr ""
+msgstr "Qté Disponible Non Réservée"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template_qty_available_not_res
 msgid "Quantity On Hand Unreserved"
-msgstr ""
+msgstr "Quantité En stock Non Réservée"
 
 #. module: stock_available_unreserved
 #: model:ir.actions.act_window,name:stock_available_unreserved.product_open_quants_unreserved
 msgid "Stock On Hand (Unreserved)"
-msgstr ""
+msgstr "En Stock (Non Réservé)"
 
 #. module: stock_available_unreserved
 #: model:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
 #: model:ir.ui.view,arch_db:stock_available_unreserved.product_template_form_view_procurement_button
 msgid "Unreserved"
-msgstr ""
+msgstr "Non Réservé"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template_qty_available_stock_text
 msgid "Unreserved stock quantity"
-msgstr ""
+msgstr "Quantité de stock non réservée"
 
 #. module: stock_available_unreserved
 #: model:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
 msgid "Unreserved:"
-msgstr ""
+msgstr "Non réservé:"
