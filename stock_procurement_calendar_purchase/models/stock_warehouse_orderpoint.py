@@ -248,8 +248,14 @@ class StockWarehouseOrderpoint(models.Model):
         :param limit:
         :return: N/A
         """
-        subtract_procurements = self.subtract_procurements_from_orderpoints()
-        for orderpoint in self:
+        recs = self
+        for rec in recs:
+            if isinstance(rec.id, models.NewId):
+                recs -= rec
+        if not recs:
+            return
+        subtract_procurements = recs.subtract_procurements_from_orderpoints()
+        for orderpoint in recs:
             orderpoint.substract_quantity = subtract_procurements.get(
                 orderpoint.id)
             procurement_date = fields.Datetime.from_string(
