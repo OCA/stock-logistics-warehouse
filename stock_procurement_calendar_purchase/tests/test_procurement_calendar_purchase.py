@@ -400,21 +400,61 @@ class TestProcurementCalendar(common.TransactionCase):
             po_2.date_planned
         )
 
-    def test_02_expected_seller(self):
+    @patch.object(fields.Datetime, 'now', return_value='2017-11-20 09:00:00')
+    def test_03_run_orderpoint_with_no_supplier_calendar(self, fields_now):
+        self.env['procurement.order']._fields['date_planned'].default = \
+            fields.Datetime.now
+        supp_calendar_1 = self.env.ref(
+            'stock_procurement_calendar.procurement_calendar_supplier_1')
+        supp_calendar_2 = self.env.ref(
+            'stock_procurement_calendar.procurement_calendar_supplier_2')
+        wednesday_p11 = self.env.ref(
+            'stock_procurement_calendar_purchase.'
+            'procurement_calendar_supplier_1_attendance_p11_w'
+        )
+        stock_attendance_monday = self.env.ref(
+            'stock_procurement_calendar.'
+            'procurement_calendar_1_attendance_mm'
+        )
+        supp_calendar_1.partner_id = False
+        supp_calendar_2.partner_id = False
+        wednesday_p11.procurement_attendance_id = stock_attendance_monday
+
+        self._reset_inventory(self.product_11)
+        self._reset_inventory(self.product_12)
+        self._reset_inventory(self.product_13)
+
+        vals = {
+            'name': 'Move OUT 20/11/2017',
+            'date': '2017-11-20 09:00:00',
+            'location_id': self.ref('stock.stock_location_stock'),
+            'location_dest_id': self.ref('stock.stock_location_customers'),
+            'product_id': self.product_11.id,
+            'product_uom_qty': 11.0,
+            'product_uom': self.product_11.uom_id.id
+        }
+        move = self.env['stock.move'].create(vals)
+        move.action_confirm()
+        self.assertEquals(
+            23.0,
+            self.orderpoint_11.procure_recommended_qty
+        )
+
+    def test_03_expected_seller(self):
         self.assertEquals(
             self.supplier_1,
             self.orderpoint_11.expected_seller_id.name,
             'The expected seller is incorrect'
         )
 
-    def test_03_procure_recommended(self):
+    def test_04_procure_recommended(self):
         self._reset_inventory(self.product_9)
         self.assertEquals(
             20.0,
             self.orderpoint_9.procure_recommended_qty
         )
 
-    def test_04_procure_recommended_multiple(self):
+    def test_05_procure_recommended_multiple(self):
         self.orderpoint_9.qty_multiple = 3.0
         self._reset_inventory(self.product_9)
         self.assertEquals(
