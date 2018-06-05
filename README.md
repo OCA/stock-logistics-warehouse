@@ -34,7 +34,7 @@ addon | version | summary
 [stock_available](stock_available/) | 10.0.1.0.1 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 10.0.1.0.0 | Ignore planned receptions in quantity available to promise
 [stock_available_sale](stock_available_sale/) | 10.0.1.0.0 | Quotations in quantity available to promise
-[stock_available_unreserved](stock_available_unreserved/) | 10.0.1.0.0 | Quantity of stock available for immediate use
+[stock_available_unreserved](stock_available_unreserved/) | 10.0.1.0.1 | Quantity of stock available for immediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 10.0.1.0.0 | Stock Quantity Change Reason
 [stock_cycle_count](stock_cycle_count/) | 10.0.1.0.0 | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
 [stock_demand_estimate](stock_demand_estimate/) | 10.0.1.1.0 | Allows to create demand estimates.
