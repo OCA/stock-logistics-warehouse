@@ -1,24 +1,6 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    This module copyright (C) 2015 Savoir-faire Linux
-#    (<http://www.savoirfairelinux.com>).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2015 Savoir-faire Linux
+# © 2018 brain-tec AG (Kumar Aberer <kumar.aberer@braintec-group.com>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, fields, api, _
 
@@ -32,10 +14,11 @@ class ResPartner(models.Model):
     location_ids = fields.One2many(
         'stock.location', 'partner_id', string='Locations')
 
-    @api.one
+    @api.multi
     @api.depends('location_ids')
     def _compute_locations_count(self):
-        self.locations_count = len(self.location_ids)
+        for partner in self:
+            partner.locations_count = len(partner.location_ids)
 
     @api.multi
     def button_locations(self):
@@ -63,21 +46,24 @@ class ResPartner(models.Model):
         return self.location_ids.filtered(
             lambda l: l.usage == usage and l.main_partner_location)
 
-    @api.one
+    @api.multi
     def _create_main_partner_location(self):
-        if self.customer and self.property_stock_customer.partner_id != self:
-            location_customer = (
-                self.get_main_location('customer') or
-                self._create_main_location('customer'))
+        for partner in self:
+            if partner.customer and partner.property_stock_customer.\
+                    partner_id != partner:
+                location_customer = (
+                    partner.get_main_location('customer') or
+                    partner._create_main_location('customer'))
 
-            self.write({'property_stock_customer': location_customer})
+                partner.property_stock_customer = location_customer
 
-        if self.supplier and self.property_stock_supplier.partner_id != self:
-            location_supplier = (
-                self.get_main_location('supplier') or
-                self._create_main_location('supplier'))
+            if partner.supplier and partner.property_stock_supplier.\
+                    partner_id != partner:
+                location_supplier = (
+                    partner.get_main_location('supplier') or
+                    partner._create_main_location('supplier'))
 
-            self.write({'property_stock_supplier': location_supplier})
+                partner.property_stock_supplier = location_supplier
 
     @api.multi
     def _create_main_location(self, usage):
@@ -97,7 +83,7 @@ class ResPartner(models.Model):
             'main_partner_location': True,
         })
 
-    @api.one
+    @api.multi
     def _remove_locations(self):
         """
         Unlink all locations related to the partner
@@ -108,14 +94,15 @@ class ResPartner(models.Model):
         by mistake.
         """
         move_obj = self.env['stock.move']
-        for location in self.location_ids:
-            moves = move_obj.search([
-                '|',
-                ('location_id', 'child_of', location.id),
-                ('location_dest_id', 'child_of', location.id),
-            ])
-            if not moves:
-                location.unlink()
+        for partner in self:
+            for location in partner.location_ids:
+                moves = move_obj.search([
+                    '|',
+                    ('location_id', 'child_of', location.id),
+                    ('location_dest_id', 'child_of', location.id),
+                ])
+                if not moves:
+                    location.unlink()
 
     @api.model
     def create(self, vals):

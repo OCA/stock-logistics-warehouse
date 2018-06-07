@@ -5,9 +5,9 @@
         <record id="view_partner_form" model="ir.ui.view" >
             <field name="name">Partner Form Locations</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="stock.view_partner_property_form"/>
+            <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail"/>
             <field name="arch" type="xml">
-                <div name="buttons" position="inside">
+                <div name="button_box" position="inside">
                     <button
                             class="oe_inline oe_stat_button"
                             type="object"
