@@ -7,4 +7,3 @@ from odoo import models
 class ProductTemplate(models.Model):
     _inherit = ['product.template', 'product.stock.available.mixin']
     _name = 'product.template'
-
