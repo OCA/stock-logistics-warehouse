@@ -24,6 +24,8 @@ class TestProductLocationSortedByQty(TransactionCase):
         }
         # update quantity for ipad in shelf1 location
         wiz_instance1 = wiz_obj.with_context(test_context).create({
+            'product_id': product_ipad.id,
+            'product_tmpl_id': product_ipad.product_tmpl_id.id,
             'location_id': location_shelf1.id,
             'new_quantity': 12.0
         })
@@ -31,12 +33,17 @@ class TestProductLocationSortedByQty(TransactionCase):
 
         # update quantity for ipad in shelf2 location
         wiz_instance2 = wiz_obj.with_context(test_context).create({
+            'product_id': product_ipad.id,
+            'product_tmpl_id': product_ipad.product_tmpl_id.id,
             'location_id': location_shelf2.id,
             'new_quantity': 25.0
         })
         wiz_instance2.change_product_qty()
         # create a new wizard to check the order location by quantity
-        wiz_instance = wiz_obj.with_context(test_context).create({})
+        wiz_instance = wiz_obj.with_context(test_context).create({
+            'product_id': product_ipad.id,
+            'product_tmpl_id': product_ipad.product_tmpl_id.id,
+        })
         name = u''
         args = [('usage', '=', 'internal')]
         operator = 'ilike'
