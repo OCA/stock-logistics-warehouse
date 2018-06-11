@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="product_template_form_view_procurement_button" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_template)d']"
+                position="after">
+                <button type="object"
+                    name="action_open_quants"
+                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    class="oe_stat_button" icon="fa-codepen">
+                    <field name="qty_available_global" widget="statinfo" string="On Hand(All)"/>
+                </button>
+                <button type="action"
+                    name="%(stock.action_stock_level_forecast_report_template)d"
+                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    class="oe_stat_button" icon="fa-codepen">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value"><field name="virtual_available_global" widget="statinfo" nolabel="1"/>
+                            <span attrs="{'invisible':[('outgoing_qty_global', '=', 0),('incoming_qty_global','=',0)]}">
+                                (-<field name="outgoing_qty_global" widget="statinfo" nolabel="1"/>
+                                +<field name="incoming_qty_global" widget="statinfo" nolabel="1"/>)
+                            </span>
+                        </span>
+                        <span class="o_stat_text">Forecasted(All)</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_product_template_tree" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="colors">red:virtual_available_global&lt;0;blue:virtual_available_global&gt;=0 and state in ('draft', 'end', 'obsolete');black:virtual_available_global&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
+            </tree>
+            <field name="virtual_available" position="after">
+               <field name="virtual_available_global" />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_kanban_stock_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
+        <field name="arch" type="xml">
+            <ul position="inside">
+                <li t-if="record.type.raw_value == 'product'">Forecasted(All): <field name="virtual_available_global"/> <field name="uom_id"/></li>
+            </ul>
+        </field>
+    </record>
+
+</odoo>

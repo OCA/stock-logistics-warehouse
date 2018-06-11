@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- Copyright 2016-2018 Tecnativa - Carlos Dauden
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="product_normal_form_view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_product)d']"
+                position="after">
+                <button class="oe_stat_button"
+                       name="%(stock.product_open_quants)d"
+                       icon="fa-building-o"
+                       type="action" attrs="{'invisible':[('type', '!=', 'product')]}">
+                    <field name="qty_available_global" widget="statinfo" string="On Hand(All)"/>
+                </button>
+                <button type="action"
+                    name="%(stock.action_stock_level_forecast_report_product)d"
+                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    class="oe_stat_button" icon="fa-building-o">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="virtual_available_global" widget="statinfo" nolabel="1"/>
+                            <span attrs="{'invisible':[('outgoing_qty_global', '=', 0),('incoming_qty_global','=',0)]}">
+                                (-<field name="outgoing_qty_global" widget="statinfo" nolabel="1"/>
+                                +<field name="incoming_qty_global" widget="statinfo" nolabel="1"/>)
+                            </span>
+                        </span>
+                        <span class="o_stat_text">Forecasted(All)</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
