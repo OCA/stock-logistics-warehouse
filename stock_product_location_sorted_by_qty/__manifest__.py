@@ -8,7 +8,7 @@
                'sort the stock location by quantity',
     'version': '10.0.1.0.0',
     'category': 'Warehouse Management',
-    'website': 'http://akretion.com',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'author': 'Akretion, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'installable': True,
