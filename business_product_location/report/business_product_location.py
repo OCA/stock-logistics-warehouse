@@ -1,26 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Authors: Laetitia Gangloff
-#    Copyright (c) 2015 Acsone SA/NV (http://www.acsone.eu)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2015-2018 ACSONE SA/NV (<http://acsone.eu>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, models
-from openerp.tools.float_utils import float_compare
+from odoo import api, models
+from odoo.tools import float_compare
 
 
 class BusinessProductLocationReport(models.AbstractModel):
@@ -101,11 +84,11 @@ class BusinessProductLocationReport(models.AbstractModel):
         return (less_product_by_loc, more_product_by_loc)
 
     @api.multi
-    def render_html(self, data=None):
+    def render_html(self, docids, data=None):
         """ Get the list of product excepted in the location and the list of
             product in the location with the quantity
         """
-        docs = self.env['stock.location'].browse(self._ids)
+        docs = self.env['stock.location'].browse(docids)
 
         (less_product_by_loc,
          more_product_by_loc) = self._get_product_by_loc(docs)
