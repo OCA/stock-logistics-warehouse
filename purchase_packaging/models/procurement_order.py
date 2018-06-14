@@ -22,13 +22,13 @@ class ProcurementOrder(models.Model):
                 fields.Date.from_string(po.date_order)) or None,
             uom_id=self.product_id.uom_po_id)
         if seller.packaging_id:
-                res['packaging_id'] = seller.packaging_id.id
-                new_uom_id = seller.product_uom
-                if new_uom_id.id != res['product_uom']:
-                    res['product_uom'] = new_uom_id
-                    qty = self.product_uom._compute_quantity(
-                        self.product_qty, new_uom_id)
-                    res['product_qty'] = max(qty, seller.min_qty)
+            res['packaging_id'] = seller.packaging_id.id
+            new_uom_id = seller.product_uom
+            if new_uom_id.id != res['product_uom']:
+                res['product_uom'] = new_uom_id
+                qty = self.product_uom._compute_quantity(
+                    self.product_qty, new_uom_id)
+                res['product_qty'] = max(qty, seller.min_qty)
         return res
 
 
@@ -50,12 +50,11 @@ class Orderpoint(models.Model):
         # This override will return 12 and no additionnal procurement will be
         # created
         res = super(Orderpoint, self).subtract_procurements_from_orderpoints()
-        procurements = self.env['procurement.order'].search(
-            [('orderpoint_id', 'in', self.ids),
-             ('state', 'not in', ['cancel', 'done']),
-             ('purchase_line_id.state', 'in', ['draft', 'sent', 'to approve'])
-             ]
-        )
+        procurements = self.env['procurement.order'].search([
+            ('orderpoint_id', 'in', self.ids),
+            ('state', 'not in', ['cancel', 'done']),
+            ('purchase_line_id.state', 'in', ['draft', 'sent', 'to approve'])
+        ])
         procurements.mapped('product_uom.rounding')
         procurements.mapped('purchase_line_id.state')
         procs_by_orderpoint = dict.fromkeys(
