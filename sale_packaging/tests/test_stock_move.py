@@ -11,37 +11,43 @@ class TestStockMove(common.TransactionCase):
                 * product_product_3 (uom is product_uom_unit)
         """
         super(TestStockMove, self).setUp()
-        self.product_packaging_dozen = self.env['product.packaging'].create(
-            {'product_tmpl_id': self.env.ref('product.product_product_3'
-                                             ).product_tmpl_id.id,
-             'uom_id': self.env.ref('product.product_uom_dozen').id,
-             'name': 'dozen'})
+        self.product_packaging_dozen = self.env['product.packaging'].create({
+            'product_tmpl_id': self.env.ref(
+                'product.product_product_3').product_tmpl_id.id,
+            'uom_id': self.env.ref('product.product_uom_dozen').id,
+            'name': 'dozen',
+        })
         self.product_packaging_dozen.product_tmpl_id.lst_price = 45
 
-        vals = {'name': 'ROUTE 1',
-                'sequence': 1,
-                'product_selectable': True,
-                }
+        vals = {
+            'name': 'ROUTE 1',
+            'sequence': 1,
+            'product_selectable': True,
+        }
         self.route = self.env['stock.location.route'].create(vals)
 
-        vals = {'name': 'OUT => Customer',
-                'action': 'move',
-                'location_id': self.ref('stock.stock_location_customers'),
-                'location_src_id': self.ref('stock.stock_location_output'),
-                'procure_method': 'make_to_order',
-                'route_id': self.route.id,
-                'picking_type_id': self.ref('stock.picking_type_out'),
-                'propagate_product_packaging': True}
+        vals = {
+            'name': 'OUT => Customer',
+            'action': 'move',
+            'location_id': self.ref('stock.stock_location_customers'),
+            'location_src_id': self.ref('stock.stock_location_output'),
+            'procure_method': 'make_to_order',
+            'route_id': self.route.id,
+            'picking_type_id': self.ref('stock.picking_type_out'),
+            'propagate_product_packaging': True,
+        }
 
         self.rule = self.env['procurement.rule'].create(vals)
 
-        vals = {'name': 'Stock => OUT',
-                'action': 'move',
-                'location_id': self.ref('stock.stock_location_output'),
-                'location_src_id': self.ref('stock.stock_location_stock'),
-                'procure_method': 'make_to_stock',
-                'route_id': self.route.id,
-                'picking_type_id': self.ref('stock.picking_type_internal')}
+        vals = {
+            'name': 'Stock => OUT',
+            'action': 'move',
+            'location_id': self.ref('stock.stock_location_output'),
+            'location_src_id': self.ref('stock.stock_location_stock'),
+            'procure_method': 'make_to_stock',
+            'route_id': self.route.id,
+            'picking_type_id': self.ref('stock.picking_type_internal'),
+        }
 
         self.rule_pick = self.env['procurement.rule'].create(vals)
 
@@ -55,11 +61,13 @@ class TestStockMove(common.TransactionCase):
             Run Procurement
             Check Stock Moves contain product packaging
         """
-        so_line = self.env['sale.order.line'].create(
-            {'order_id': self.env['sale.order'].create(
-                {'partner_id': self.env.ref('base.res_partner_2').id}).id,
-             'product_id': self.ref('product.product_product_3'),
-             'product_uom_qty': 1.0})
+        so_line = self.env['sale.order.line'].create({
+            'order_id': self.env['sale.order'].create({
+                'partner_id': self.env.ref('base.res_partner_2').id,
+            }).id,
+            'product_id': self.ref('product.product_product_3'),
+            'product_uom_qty': 1.0,
+        })
         so_line.product_id_change()
         so_line.product_packaging = self.product_packaging_dozen
         so_line._onchange_product_packaging()

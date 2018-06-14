@@ -4,18 +4,20 @@
 
 {
     "name": "Sale Packaging",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "author": 'ACSONE SA/NV, '
               'Odoo Community Association (OCA)',
     "category": "Warehouse",
     "website": "http://www.acsone.eu",
     'summary': "In sale, use uom's package",
-    "depends": ["sale_stock",
-                "packaging_uom",
-                ],
-    "data": ["views/procurement_rule.xml",
-             "views/sale_order_line_views.xml",
-             ],
+    "depends": [
+        "sale_stock",
+        "packaging_uom",
+    ],
+    "data": [
+        "views/procurement_rule.xml",
+        "views/sale_order_line_views.xml",
+    ],
     "license": "AGPL-3",
     "installable": True,
 }
