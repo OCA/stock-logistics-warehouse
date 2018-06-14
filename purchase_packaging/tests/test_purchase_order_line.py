@@ -17,23 +17,23 @@ class TestPurchaseOrderLine(common.TransactionCase):
         self.product_supplier_info.product_tmpl_id.uom_po_id = self.env.ref(
             'product.product_uom_unit')
         self.product_supplier_info.min_qty = 1
-        self.product_packaging_dozen = self.env['product.packaging'].create(
-            {'product_tmpl_id': self.product_tmpl_id.id,
-             'uom_id': self.env.ref('product.product_uom_dozen').id,
-             'name': 'Packaging Dozen'}
-        )
-        self.product_packaging_unit = self.env['product.packaging'].create(
-            {'product_tmpl_id': self.product_tmpl_id.id,
-             'uom_id': self.env.ref('product.product_uom_unit').id,
-             'name': 'Packaging Unit'}
-        )
-        self.product_uom_8 = self.env['product.uom'].create(
-            {'category_id': self.env.ref('product.product_uom_categ_unit').id,
-             'name': 'COL8',
-             'factor_inv': 8,
-             'uom_type': 'bigger',
-             'rounding': 1.0,
-             })
+        self.product_packaging_dozen = self.env['product.packaging'].create({
+            'product_tmpl_id': self.product_tmpl_id.id,
+            'uom_id': self.env.ref('product.product_uom_dozen').id,
+            'name': 'Packaging Dozen'
+        })
+        self.product_packaging_unit = self.env['product.packaging'].create({
+            'product_tmpl_id': self.product_tmpl_id.id,
+            'uom_id': self.env.ref('product.product_uom_unit').id,
+            'name': 'Packaging Unit'
+        })
+        self.product_uom_8 = self.env['product.uom'].create({
+            'category_id': self.env.ref('product.product_uom_categ_unit').id,
+            'name': 'COL8',
+            'factor_inv': 8,
+            'uom_type': 'bigger',
+            'rounding': 1.0,
+        })
 
     def test_po_line(self):
         """ On supplierinfo set product_uom_8 as min_qty_uom_id

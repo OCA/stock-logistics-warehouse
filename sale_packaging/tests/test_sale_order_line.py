@@ -11,11 +11,12 @@ class TestSaleOrderLine(common.TransactionCase):
                 * product_product_3 (uom is product_uom_unit)
         """
         super(TestSaleOrderLine, self).setUp()
-        self.product_packaging_dozen = self.env['product.packaging'].create(
-            {'product_tmpl_id': self.env.ref('product.product_product_3'
-                                             ).product_tmpl_id.id,
-             'uom_id': self.env.ref('product.product_uom_dozen').id,
-             'name': 'dozen'})
+        self.product_packaging_dozen = self.env['product.packaging'].create({
+            'product_tmpl_id': self.env.ref(
+                'product.product_product_3').product_tmpl_id.id,
+            'uom_id': self.env.ref('product.product_uom_dozen').id,
+            'name': 'dozen',
+        })
         self.product_packaging_dozen.product_tmpl_id.lst_price = 45
 
     def test_packaging_change(self):
@@ -30,10 +31,12 @@ class TestSaleOrderLine(common.TransactionCase):
                 Check price_subtotal is 5*45*12=2700
 
         """
-        so_line = self.env['sale.order.line'].new(
-            {'order_id': self.env['sale.order'].create(
-                {'partner_id': self.env.ref('base.res_partner_2').id}),
-             'product_id': self.env.ref('product.product_product_3')})
+        so_line = self.env['sale.order.line'].new({
+            'order_id': self.env['sale.order'].create({
+                'partner_id': self.env.ref('base.res_partner_2').id
+            }),
+            'product_id': self.env.ref('product.product_product_3'),
+        })
         so_line.product_id_change()
         so_line.product_packaging = self.product_packaging_dozen
         so_line._onchange_product_packaging()

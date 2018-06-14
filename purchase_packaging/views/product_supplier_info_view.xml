@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<openerp>
-    <data>
-
+<odoo>
         <record id="product_supplierinfo_view_tree_inherit_purchase_packaging" model="ir.ui.view">
             <field name="name">product.supplierinfo.tree.view" (purchase_packaging)</field>
             <field name="model">product.supplierinfo</field>
@@ -37,6 +35,4 @@
                 </field>
             </field>
         </record>
-
-    </data>
-</openerp>
+</odoo>

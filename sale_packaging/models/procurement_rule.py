@@ -10,5 +10,5 @@ class ProcurementRule(models.Model):
     _inherit = 'procurement.rule'
 
     propagate_product_packaging = fields.Boolean(
-        string='Propagate Product Packaging',
-        default=True)
+        default=True,
+    )
