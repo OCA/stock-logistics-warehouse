@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_inventory_revaluation
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
 # Quentin THEURET <odoo@kerpeo.com>, 2018
@@ -13,20 +13,26 @@ msgstr ""
 "PO-Revision-Date: 2018-01-17 13:39+0000\n"
 "Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_revaluation_type
 msgid ""
-"'Price Change': You can re-valuate inventory values by Changing the price for a specific product. The inventory price is changed and inventory value is recalculated according to the new price.\n"
-" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity of inventory remains unchanged, resulting in a change in the price"
+"'Price Change': You can re-valuate inventory values by Changing the price "
+"for a specific product. The inventory price is changed and inventory value "
+"is recalculated according to the new price.\n"
+" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity "
+"of inventory remains unchanged, resulting in a change in the price"
 msgstr ""
-"'Changement de prix': Vous pouvez réévaluez les valeurs de l'inventaire en changeant le prix d'un produit donné. Le prix de l'inventaire est modifié et la valeur de l'inventaire est recalculée en fonction de ce nouveau prix.\n"
-"'Débit/Crédit de l'inventaire': Change la valeur de l'inventaire. La quantité de l'inventaire reste la même, résultant d'un changement de prix"
+"'Changement de prix': Vous pouvez réévaluez les valeurs de l'inventaire en "
+"changeant le prix d'un produit donné. Le prix de l'inventaire est modifié et "
+"la valeur de l'inventaire est recalculée en fonction de ce nouveau prix.\n"
+"'Débit/Crédit de l'inventaire': Change la valeur de l'inventaire. La "
+"quantité de l'inventaire reste la même, résultant d'un changement de prix"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_account_move
@@ -60,11 +66,11 @@ msgstr "Annulé"
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:380
 #, python-format
 msgid ""
-"Cannot do an inventory value change if the quantity available for product %s"
-" is 0 or negative"
+"Cannot do an inventory value change if the quantity available for product %s "
+"is 0 or negative"
 msgstr ""
-"Impossible de faire un changement de valeur d'inventaire lorsque la quantité"
-" disponible pour le produit %sest 0 ou négative"
+"Impossible de faire un changement de valeur d'inventaire lorsque la quantité "
+"disponible pour le produit %sest 0 ou négative"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_stock_change_standard_price
@@ -241,8 +247,8 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_cost
 msgid ""
-"Enter the new cost you wish to assign to the product. Relevant only when the"
-" selected revaluation type is Price Change."
+"Enter the new cost you wish to assign to the product. Relevant only when the "
+"selected revaluation type is Price Change."
 msgstr ""
 
 #. module: stock_inventory_revaluation
