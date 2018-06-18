@@ -1,23 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_cycle_count
+#	* stock_cycle_count
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2017-06-10 05:35+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Arabic (https://www.transifex.com/oca/teams/23907/ar/)\n"
-"Language: ar\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: \n"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:69
@@ -65,7 +59,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_active
 msgid "Active"
-msgstr "نشِط"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
@@ -93,7 +87,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 msgid "Cancel"
-msgstr "إلغاء"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
@@ -104,7 +98,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_company_id
 msgid "Company"
-msgstr "الشركة"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.action_server_warehouse_execute_cycle_count
@@ -114,7 +108,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 msgid "Confirm"
-msgstr "تأكييد"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.action_server_cycle_count_confirm
@@ -130,13 +124,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_create_uid
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_create_uid
 msgid "Created by"
-msgstr "أنشئ بواسطة"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_create_date
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_create_date
 msgid "Created on"
-msgstr "أنشئ في"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_currency_id
@@ -174,16 +168,13 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
-msgid ""
-"Cycle Count Rules\n"
+msgid "Cycle Count Rules\n"
 "                    applied in this Warehouse:"
 msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse_cycle_count_planning_horizon
-msgid ""
-"Cycle Count planning horizon in days. Only the counts inside the horizon "
-"will be created."
+msgid "Cycle Count planning horizon in days. Only the counts inside the horizon will be created."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -248,9 +239,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_location_zero_confirmation_disabled
-msgid ""
-"Define whether this location will trigger a zero-confirmation validation "
-"when a rule for its warehouse is defined to perform zero-confirmations."
+msgid "Define whether this location will trigger a zero-confirmation validation when a rule for its warehouse is defined to perform zero-confirmations."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -263,7 +252,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_display_name
 msgid "Display Name"
-msgstr "اسم العرض"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
@@ -274,9 +263,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:51
 #, python-format
-msgid ""
-"Ensures that at least a defined number of counts in a given period will be "
-"run."
+msgid "Ensures that at least a defined number of counts in a given period will be run."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -305,19 +292,18 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Group By..."
-msgstr "تجميع حسب..."
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy_id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_id
 msgid "ID"
-msgstr "المعرف"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
-msgid ""
-"In either case you can exclude specific locations\n"
+msgid "In either case you can exclude specific locations\n"
 "                        going to the locations form and checking the box\n"
 "                        \"Exclude from Cycle Count\"."
 msgstr ""
@@ -374,19 +360,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count___last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule___last_update
 msgid "Last Modified on"
-msgstr "آخر تعديل في"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_write_uid
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_write_uid
 msgid "Last Updated by"
-msgstr "آخر تحديث بواسطة"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_write_date
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_write_date
 msgid "Last Updated on"
-msgstr "آخر تحديث في"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_location_id
@@ -411,7 +397,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_name
 msgid "Name"
-msgstr "الاسم"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse_counts_for_accuracy_qty
@@ -421,9 +407,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:64
 #, python-format
-msgid ""
-"Perform an Inventory Adjustment every time a location in the warehouse runs "
-"out of stock in order to confirm it is truly empty."
+msgid "Perform an Inventory Adjustment every time a location in the warehouse runs out of stock in order to confirm it is truly empty."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -457,17 +441,13 @@ msgstr ""
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:60
 #, python-format
-msgid ""
-"Schedules a count every time the accuracy of a location goes under a given "
-"threshold."
+msgid "Schedules a count every time the accuracy of a location goes under a given threshold."
 msgstr ""
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:55
 #, python-format
-msgid ""
-"Schedules a count every time the total turnover of a location exceeds the "
-"threshold. This considers every product going into/out of the location"
+msgid "Schedules a count every time the total turnover of a location exceeds the threshold. This considers every product going into/out of the location"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -552,8 +532,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
-msgid ""
-"You can apply the cycle count rules in complete\n"
+msgid "You can apply the cycle count rules in complete\n"
 "                        warehouses or specific zones. A zone it is\n"
 "                        understood as a location and all its children."
 msgstr ""
@@ -585,9 +564,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_inventory.py:61
 #, python-format
-msgid ""
-"You cannot modify the configuration of an Inventory Adjustment related to a "
-"Cycle Count."
+msgid "You cannot modify the configuration of an Inventory Adjustment related to a Cycle Count."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -618,20 +595,3 @@ msgstr ""
 msgid "report.stock_location_accuracy"
 msgstr ""
 
-#~ msgid "Date of the last message posted on the record."
-#~ msgstr "تاريخ آخر رسالة في هذا السجل."
-
-#~ msgid "Followers"
-#~ msgstr "المتابعون"
-
-#~ msgid "If checked new messages require your attention."
-#~ msgstr "إذا حددته، ستتطلب الرسائل الجديدة انتباهك"
-
-#~ msgid "Last Message Date"
-#~ msgstr "تاريخ آخر رسالة"
-
-#~ msgid "Messages"
-#~ msgstr "الرسائل"
-
-#~ msgid "Unread Messages"
-#~ msgstr "رسائل غير مقروءة"
