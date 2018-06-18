@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_orderpoint_manual_procurement
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
 # Quentin THEURET <odoo@kerpeo.com>, 2018
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2018-02-27 11:38+0000\n"
 "Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_orderpoint_manual_procurement
@@ -28,8 +28,8 @@ msgstr "Annuler"
 #: model:res.groups,name:stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty
 msgid "Change quantity in manual procurements from reordering rules"
 msgstr ""
-"Modifier la quantité dans les approvisionnements manuels venant des règle de"
-" réapprovisionnement"
+"Modifier la quantité dans les approvisionnements manuels venant des règle de "
+"réapprovisionnement"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_warehouse_orderpoint_tree
@@ -178,12 +178,15 @@ msgstr "Unité de mesure"
 msgid ""
 "Use this assistant to generate a procurement request for this\n"
 "                    stock buffer. According to the product configuration,\n"
-"                    this may trigger a draft purchase order, a manufacturing\n"
+"                    this may trigger a draft purchase order, a "
+"manufacturing\n"
 "                    order or a transfer picking."
 msgstr ""
 "Utilisez cet assistant pour générer une demande d'approvisionnement pour ce\n"
-"                    tampon de stock. En fonction de la configuration du produit\n"
-"                    il peut déclencher un bon de commande en brouillon, un ordre\n"
+"                    tampon de stock. En fonction de la configuration du "
+"produit\n"
+"                    il peut déclencher un bon de commande en brouillon, un "
+"ordre\n"
 "                    de fabrication ou un mouvement de stock."
 
 #. module: stock_orderpoint_manual_procurement
