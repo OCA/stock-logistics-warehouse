@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_inventory_revaluation
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
@@ -12,20 +12,27 @@ msgstr ""
 "PO-Revision-Date: 2018-01-16 14:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_revaluation_type
 msgid ""
-"'Price Change': You can re-valuate inventory values by Changing the price for a specific product. The inventory price is changed and inventory value is recalculated according to the new price.\n"
-" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity of inventory remains unchanged, resulting in a change in the price"
+"'Price Change': You can re-valuate inventory values by Changing the price "
+"for a specific product. The inventory price is changed and inventory value "
+"is recalculated according to the new price.\n"
+" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity "
+"of inventory remains unchanged, resulting in a change in the price"
 msgstr ""
-"'Sprememba cene': vrednosti zalog lahko prevrednotite preko spremembe cene določenega proizvoda. Spremeni se cena zaloge in preračuna nova vrednost zaloge glede na to ceno.\n"
-" 'Obveznosti/terjatve zalog': spreminjanje vrednosti zalog. Količina zalog ostane nespremenjena in posledično se spremeni cena."
+"'Sprememba cene': vrednosti zalog lahko prevrednotite preko spremembe cene "
+"določenega proizvoda. Spremeni se cena zaloge in preračuna nova vrednost "
+"zaloge glede na to ceno.\n"
+" 'Obveznosti/terjatve zalog': spreminjanje vrednosti zalog. Količina zalog "
+"ostane nespremenjena in posledično se spremeni cena."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_account_move
@@ -59,8 +66,8 @@ msgstr "Preklicano"
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:380
 #, python-format
 msgid ""
-"Cannot do an inventory value change if the quantity available for product %s"
-" is 0 or negative"
+"Cannot do an inventory value change if the quantity available for product %s "
+"is 0 or negative"
 msgstr ""
 "Spremembe vrednosti zalog ni mogoče izvesti, če je razpoložljiva količina "
 "proizvoda %s enaka 0 ali celo negativna."
@@ -258,8 +265,8 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_cost
 msgid ""
-"Enter the new cost you wish to assign to the product. Relevant only when the"
-" selected revaluation type is Price Change."
+"Enter the new cost you wish to assign to the product. Relevant only when the "
+"selected revaluation type is Price Change."
 msgstr ""
 "Vnesite nov strošek, ki ga želite dodeliti proizvodu. Relevantno je le, če "
 "je izbrani tip vrednotenja Sprememba cene."
@@ -581,8 +588,7 @@ msgid ""
 "You cannot remove the journal item that is related to an inventory "
 "revaluation"
 msgstr ""
-"Dnevniške postavke povezane z prevrednotenjem inventarja ne morete "
-"odstraniti"
+"Dnevniške postavke povezane z prevrednotenjem inventarja ne morete odstraniti"
 
 #. module: stock_inventory_revaluation
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_quant_form

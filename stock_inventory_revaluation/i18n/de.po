@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_inventory_revaluation
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
@@ -12,20 +12,26 @@ msgstr ""
 "PO-Revision-Date: 2018-01-16 14:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_revaluation_type
 msgid ""
-"'Price Change': You can re-valuate inventory values by Changing the price for a specific product. The inventory price is changed and inventory value is recalculated according to the new price.\n"
-" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity of inventory remains unchanged, resulting in a change in the price"
+"'Price Change': You can re-valuate inventory values by Changing the price "
+"for a specific product. The inventory price is changed and inventory value "
+"is recalculated according to the new price.\n"
+" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity "
+"of inventory remains unchanged, resulting in a change in the price"
 msgstr ""
-"'Preisänderung': Sie können den Bestand eines bestimmten Produkts durch Preisänderung neu berwerten. Der Produktpreis wird angepasst und der Bestandwert entsprechend neu errechnet.\n"
-"'Bestand Soll/Haben': Änderung des Bestandswerts. Die Bestandsmenge bleibt unverändert, es resultiert die Änderung des Preises/Werts."
+"'Preisänderung': Sie können den Bestand eines bestimmten Produkts durch "
+"Preisänderung neu berwerten. Der Produktpreis wird angepasst und der "
+"Bestandwert entsprechend neu errechnet.\n"
+"'Bestand Soll/Haben': Änderung des Bestandswerts. Die Bestandsmenge bleibt "
+"unverändert, es resultiert die Änderung des Preises/Werts."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_account_move
@@ -59,8 +65,8 @@ msgstr "Storniert"
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:380
 #, python-format
 msgid ""
-"Cannot do an inventory value change if the quantity available for product %s"
-" is 0 or negative"
+"Cannot do an inventory value change if the quantity available for product %s "
+"is 0 or negative"
 msgstr ""
 "Kann keine Bestandswertanpassung vornehmen, wenn der verfügbare Bestand des "
 "Produkts %s kleiner als 1 ist"
@@ -181,8 +187,8 @@ msgid ""
 "transaction created by the revaluation. The Decrease Account is used when "
 "the inventory value is decreased."
 msgstr ""
-"Legen Sie die Hauptbuchkonten für die Saldierung der Neubewertung hier fest."
-" Das Minderungskonto wird bei Verringerung des Bestandswertes verwendet."
+"Legen Sie die Hauptbuchkonten für die Saldierung der Neubewertung hier fest. "
+"Das Minderungskonto wird bei Verringerung des Bestandswertes verwendet."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_increase_account_id
@@ -191,8 +197,8 @@ msgid ""
 "transaction created by the revaluation. The Increase Account is used when "
 "the inventory value is increased due to the revaluation."
 msgstr ""
-"Legen Sie die Hauptbuchkonten für die Saldierung der Neubewertung hier fest."
-" Das Erhöhungskonto wird bei Erhöhung des Bestandswertes verwendet."
+"Legen Sie die Hauptbuchkonten für die Saldierung der Neubewertung hier fest. "
+"Das Erhöhungskonto wird bei Erhöhung des Bestandswertes verwendet."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_display_name
@@ -239,10 +245,9 @@ msgid ""
 "value of the item. Enter credit as a negative value.Relevant only if the "
 "selected revaluation type is Inventory Credit/Debit."
 msgstr ""
-"Geben Sie den Betrag an, um den Sie den Bestandswert der Position verringern"
-" oder erhöhen wollen. Verringerung geben Sie als negativen Wert an. Dies ist"
-" nur relevant, wenn Sie Neubewertung als Soll-/Haben-Inventur angegeben "
-"haben."
+"Geben Sie den Betrag an, um den Sie den Bestandswert der Position verringern "
+"oder erhöhen wollen. Verringerung geben Sie als negativen Wert an. Dies ist "
+"nur relevant, wenn Sie Neubewertung als Soll-/Haben-Inventur angegeben haben."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_new_cost
@@ -250,14 +255,14 @@ msgid ""
 "Enter the new cost you wish to assign to the Quant. Relevant only when the "
 "selected revaluation type is Price Change."
 msgstr ""
-"Geben Sie neue Kosten an, die Sie diesem Quant zuordnen wollen. Dies ist nur"
-" relevant, wenn Sie Neubewertung als Preisänderung angegeben haben."
+"Geben Sie neue Kosten an, die Sie diesem Quant zuordnen wollen. Dies ist nur "
+"relevant, wenn Sie Neubewertung als Preisänderung angegeben haben."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_new_cost
 msgid ""
-"Enter the new cost you wish to assign to the product. Relevant only when the"
-" selected revaluation type is Price Change."
+"Enter the new cost you wish to assign to the product. Relevant only when the "
+"selected revaluation type is Price Change."
 msgstr ""
 "Geben Sie neue Kosten an, die Sie diesem Produkt zuordnen wollen. Dies ist "
 "nur relevant, wenn Sie Neubewertung als Preisänderung angegeben haben."
