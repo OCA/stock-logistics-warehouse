@@ -25,10 +25,10 @@ addon | version | summary
 --- | --- | ---
 [account_move_line_product](account_move_line_product/) | 10.0.1.0.0 | Displays the product in the journal entries and items
 [account_move_line_stock_info](account_move_line_stock_info/) | 10.0.1.0.0 | Account Move Line Stock Move
-[packaging_uom](packaging_uom/) | 10.0.1.0.0 | Use uom in package
+[packaging_uom](packaging_uom/) | 10.0.1.0.1 | Use uom in package
 [procurement_auto_create_group](procurement_auto_create_group/) | 10.0.1.0.0 | Allows to configure the system to propose automatically new procurement groups in procurement orders.
-[purchase_packaging](purchase_packaging/) | 10.0.1.0.3 | In purchase, use package
-[sale_packaging](sale_packaging/) | 10.0.1.0.0 | In sale, use uom's package
+[purchase_packaging](purchase_packaging/) | 10.0.1.0.4 | In purchase, use package
+[sale_packaging](sale_packaging/) | 10.0.1.0.1 | In sale, use uom's package
 [stock_account_change_product_valuation](stock_account_change_product_valuation/) | 10.0.1.0.0 | Adjusts valuation of the products and quants when the cost method or type of a product changes
 [stock_account_quant_merge](stock_account_quant_merge/) | 10.0.1.0.0 | extension of 'stock_quant_merge', and adds the cost as a criteria to merge quants.
 [stock_available](stock_available/) | 10.0.1.0.1 | Stock available to promise
