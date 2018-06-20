@@ -9,7 +9,7 @@ from odoo.addons import decimal_precision as dp
 class StockRequest(models.AbstractModel):
     _name = "stock.request.abstract"
     _description = "Stock Request Template"
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread']
 
     @api.model
     def default_get(self, fields):

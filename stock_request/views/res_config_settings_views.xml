@@ -1,19 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<!--
-    Copyright 2018 Creu Blanca
-    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
--->
-
 <odoo>
 
     <record id="res_config_settings_view_form" model="ir.ui.view">
         <field name="name">res.config.settings.view.form.inherit.stock_request</field>
-        <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="model">stock.config.settings</field>
+        <field name="inherit_id" ref="stock.view_stock_config_settings"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('settings')]" position="inside">
-                <div class="app_settings_block"
+            <xpath expr="//group[@name='traceability']" position="before">
+                <group class="app_settings_block"
                      data-string="Stock Request" data-key="stock_request"
                      groups="stock_request.group_stock_request_manager">
                     <h2>Orders</h2>
@@ -61,18 +54,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </group>
             </xpath>
         </field>
-    </record>
-
-    <record id="action_stock_request_config" model="ir.actions.act_window">
-        <field name="name">Settings</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">res.config.settings</field>
-        <field name="view_mode">form</field>
-        <field name="target">inline</field>
-        <field name="context">{'module' : 'stock_request'}</field>
     </record>
 
 </odoo>

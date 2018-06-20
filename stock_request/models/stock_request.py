@@ -119,9 +119,10 @@ class StockRequest(models.Model):
                 lambda m: m.state != 'cancel').mapped('picking_id')
             request.picking_count = len(request.picking_ids)
 
-    @api.depends('allocation_ids', 'allocation_ids.stock_move_id.state',
-                 'allocation_ids.stock_move_id.move_line_ids',
-                 'allocation_ids.stock_move_id.move_line_ids.qty_done')
+    @api.depends(
+        'allocation_ids',
+        'allocation_ids.stock_move_id.state',
+    )
     def _compute_qty(self):
         for request in self.sudo():
             done_qty = sum(request.allocation_ids.mapped(
@@ -306,7 +307,7 @@ class StockRequest(models.Model):
         if upd_vals.get('name', '/') == '/':
             upd_vals['name'] = self.env['ir.sequence'].next_by_code(
                 'stock.request')
-        return super().create(upd_vals)
+        return super(StockRequest, self).create(upd_vals)
 
     @api.multi
     def unlink(self):

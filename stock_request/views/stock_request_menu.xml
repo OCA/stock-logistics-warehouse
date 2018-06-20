@@ -37,9 +37,9 @@
         name="Master Data"
         sequence="100"/>
 
-    <menuitem id="menu_stock_request_config" name="Settings"
+    <!-- menuitem id="menu_stock_request_config" name="Settings"
               parent="menu_stock_request_root"
               sequence="999" action="action_stock_request_config"
-              groups="base.group_system"/>
+              groups="base.group_system"/ -->
 
 </odoo>

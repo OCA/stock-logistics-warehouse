@@ -14,11 +14,11 @@ REQUEST_STATES = [
 class StockRequestOrder(models.Model):
     _name = 'stock.request.order'
     _description = 'Stock Request Order'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread']
 
     @api.model
     def default_get(self, fields):
-        res = super().default_get(fields)
+        res = super(StockRequestOrder, self).default_get(fields)
         warehouse = None
         if 'warehouse_id' not in res and res.get('company_id'):
             warehouse = self.env['stock.warehouse'].search(
@@ -247,13 +247,13 @@ class StockRequestOrder(models.Model):
         if upd_vals.get('name', '/') == '/':
             upd_vals['name'] = self.env['ir.sequence'].next_by_code(
                 'stock.request.order')
-        return super().create(upd_vals)
+        return super(StockRequestOrder, self).create(upd_vals)
 
     @api.multi
     def unlink(self):
         if self.filtered(lambda r: r.state != 'draft'):
             raise UserError(_('Only orders on draft state can be unlinked'))
-        return super().unlink()
+        return super(StockRequestOrder, self).unlink()
 
     @api.constrains('warehouse_id', 'company_id')
     def _check_warehouse_company(self):
