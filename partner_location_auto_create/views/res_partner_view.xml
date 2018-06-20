@@ -23,20 +23,43 @@
 
                 <field name="property_stock_customer" position="attributes">
                     <attribute name="domain">[
-                        ('partner_id', 'in', [id, False]),
+                        ('partner_id', 'in', [commercial_partner_id, False]),
                         ('usage', '=', 'customer'),
                         ('company_id', 'in', [company_id, False]),
                     ]</attribute>
                 </field>
                 <field name="property_stock_supplier" position="attributes">
                     <attribute name="domain">[
-                        ('partner_id', 'in', [id, False]),
+                        ('partner_id', 'in', [commercial_partner_id, False]),
                         ('usage', '=', 'supplier'),
                         ('company_id', 'in', [company_id, False]),
                     ]</attribute>
                 </field>
+                <xpath
+                        expr="//field[@name='child_ids']//form/sheet/field[@name='supplier']"
+                        position="after">
+                    <field name="property_stock_supplier" invisible="1"/>
+                    <field name="property_stock_customer" invisible="1"/>
+
+
+                </xpath>
+                <field name="child_ids" position="attributes">
+                    <attribute name="context">{'default_parent_id':
+                        active_id, 'default_street': street,
+                        'default_street2': street2, 'default_city': city,
+                        'default_state_id': state_id, 'default_zip': zip,
+                        'default_country_id': country_id,
+                        'default_supplier': supplier, 'default_customer':
+                        customer, 'default_lang':
+                        lang,'default_property_stock_supplier':
+                        property_stock_supplier,
+                        'default_property_stock_customer': property_stock_customer}</attribute>
+                </field>
             </field>
         </record>
+
+
+
 
     </data>
 </openerp>
