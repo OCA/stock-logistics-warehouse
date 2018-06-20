@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-22 01:01+0000\n"
-"PO-Revision-Date: 2017-08-28 12:31+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-"
-"logistics-warehouse-8-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2018-06-20 13:36+0000\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
+"OCA-stock-logistics-warehouse-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.0.1\n"
 
 #. module: stock_available_sale
 #: model:ir.model,name:stock_available_sale.model_product_product
@@ -32,7 +33,7 @@ msgstr "Modelo Produto"
 #: model:ir.model.fields,field_description:stock_available_sale.field_product_product_quoted_qty
 #: model:ir.model.fields,field_description:stock_available_sale.field_product_template_quoted_qty
 msgid "Quoted"
-msgstr ""
+msgstr "Cotado"
 
 #. module: stock_available_sale
 #: model:ir.model.fields,help:stock_available_sale.field_product_product_quoted_qty
@@ -47,3 +48,11 @@ msgid ""
 "Location.\n"
 "Otherwise, this includes every Quotation."
 msgstr ""
+"Quantidade total deste produto que foi incluída em cotações (ordens de venda "
+"de rascunho).\n"
+"Em um contexto com um único depósito, isso inclui a cotação processada neste "
+"depósito.\n"
+"Em um contexto com um único local de estoque, isso inclui a cotação "
+"processada em qualquer depósito usando esse local ou qualquer um de seus "
+"filhos, como é o local de estoque.\n"
+"Caso contrário, isso inclui todas as cotações."
