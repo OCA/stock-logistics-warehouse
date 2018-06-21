@@ -1,34 +1,28 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_demand_estimate
+#	* stock_demand_estimate
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-16 14:35+0000\n"
-"PO-Revision-Date: 2018-01-16 14:35+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
-"Language: pt_BR\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: \n"
 
 #. module: stock_demand_estimate
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_demand_estimate_wizard_form
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_stock_demand_estimate_sheet_form
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_company_id
 msgid "Company"
-msgstr "Empresa"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.actions.act_window,name:stock_demand_estimate.action_stock_demand_estimate_wizard
@@ -42,7 +36,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_create_uid
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_create_uid
 msgid "Created by"
-msgstr "Criado por"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_create_date
@@ -50,13 +44,13 @@ msgstr "Criado por"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_create_date
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_create_date
 msgid "Created on"
-msgstr "Criado em"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_date_start
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_date_start
 msgid "Date From"
-msgstr "Data a partir"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_date_range
@@ -81,9 +75,8 @@ msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_date_end
-#, fuzzy
 msgid "Date to"
-msgstr "Data a partir"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_date_range_days
@@ -101,7 +94,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_display_name
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_display_name
 msgid "Display Name"
-msgstr "Mostrar Nome"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_estimate_id
@@ -135,7 +128,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_id
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate___last_update
@@ -143,7 +136,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line___last_update
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard___last_update
 msgid "Last Modified on"
-msgstr "Última Modificação em"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_write_uid
@@ -151,7 +144,7 @@ msgstr "Última Modificação em"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_write_uid
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_write_uid
 msgid "Last Updated by"
-msgstr "Última atualização por"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_write_date
@@ -159,14 +152,14 @@ msgstr "Última atualização por"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_write_date
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_write_date
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_location_id
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_location_id
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_location_id
 msgid "Location"
-msgstr "Localização"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_date_range_id
@@ -186,7 +179,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_product_id
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_value_y
 msgid "Product"
-msgstr "Produto"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_product_ids
@@ -199,7 +192,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_product_uom_qty
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line_product_uom_qty
 msgid "Quantity"
-msgstr "Quantidade"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_daily_qty
@@ -265,9 +258,7 @@ msgstr ""
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:80
 #, python-format
-msgid ""
-"The requested operation cannot be processed because of a programming error "
-"setting the `product_qty` field instead of the `product_uom_qty`."
+msgid "The requested operation cannot be processed because of a programming error setting the `product_qty` field instead of the `product_uom_qty`."
 msgstr ""
 
 #. module: stock_demand_estimate
@@ -301,10 +292,11 @@ msgstr ""
 #. module: stock_demand_estimate
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_demand_estimate_wizard_form
 msgid "or"
-msgstr "ou"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_demand_estimate_wizard_form
 #: model:ir.ui.view,arch_db:stock_demand_estimate.view_stock_demand_estimate_sheet_form
 msgid "to"
 msgstr ""
+
