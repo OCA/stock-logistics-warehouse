@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_orderpoint_move_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2019-10-12 16:36+0000\n"
+"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.8\n"
+
+#. module: stock_orderpoint_move_link
+#: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_move__orderpoint_ids
+msgid "Linked Reordering Rules"
+msgstr "链接的重新订购规则"
+
+#. module: stock_orderpoint_move_link
+#: model:ir.model,name:stock_orderpoint_move_link.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "最小库存规则"
+
+#. module: stock_orderpoint_move_link
+#: model:ir.model,name:stock_orderpoint_move_link.model_stock_move
+msgid "Stock Move"
+msgstr "库存移动"
+
+#. module: stock_orderpoint_move_link
+#: model:ir.model,name:stock_orderpoint_move_link.model_stock_rule
+msgid "Stock Rule"
+msgstr "库存规则"
+
+#. module: stock_orderpoint_move_link
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_move_link.view_warehouse_orderpoint_move_form
+msgid "Transfers"
+msgstr "调拨"
