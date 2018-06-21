@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_putaway_product
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2017-11-30 03:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_putaway_product
@@ -52,12 +52,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_id
 msgid "ID"
 msgstr "ID"
-
-#. module: stock_putaway_product
-#: model:ir.model.fields,field_description:stock_putaway_product.field_product_product_is_product_variant
-#: model:ir.model.fields,field_description:stock_putaway_product.field_product_template_is_product_variant
-msgid "Is product variant"
-msgstr ""
 
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy___last_update
@@ -97,7 +91,7 @@ msgstr ""
 
 #. module: stock_putaway_product
 #: model:ir.ui.view,arch_db:stock_putaway_product.product_putaway_strategy_view_form
-msgid "Product putaway stragegy"
+msgid "Product putaway strategy"
 msgstr ""
 
 #. module: stock_putaway_product
@@ -123,7 +117,7 @@ msgid "Sequence"
 msgstr "Sequência"
 
 #. module: stock_putaway_product
-#: code:addons/stock_putaway_product/models/product_putaway.py:55
+#: code:addons/stock_putaway_product/models/product_putaway.py:59
 #: sql_constraint:stock.product.putaway.strategy:0
 #, python-format
 msgid "There is a duplicate location by put away assignment!"
