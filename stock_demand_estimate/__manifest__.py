@@ -4,7 +4,7 @@
 {
     "name": "Stock Demand Estimate",
     "summary": "Allows to create demand estimates.",
-    "version": "11.0.1.1.0",
+    "version": "11.0.1.2.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
