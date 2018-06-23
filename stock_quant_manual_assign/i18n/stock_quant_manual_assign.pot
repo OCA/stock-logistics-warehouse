@@ -1,27 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_quant_manual_assign
+#	* stock_quant_manual_assign
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 04:10+0000\n"
-"PO-Revision-Date: 2016-12-24 04:10+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Japanese (https://www.transifex.com/oca/teams/23907/ja/)\n"
-"Language: ja\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: \n"
 
 #. module: stock_quant_manual_assign
 #: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Cancel"
-msgstr "キャンセル"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -32,25 +27,25 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_create_uid
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_create_uid
 msgid "Created by"
-msgstr "作成者"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_create_date
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_create_date
 msgid "Created on"
-msgstr "作成日"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_display_name
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_display_name
 msgid "Display Name"
-msgstr "表示名"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_id
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_in_date
@@ -61,19 +56,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants___last_update
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines___last_update
 msgid "Last Modified on"
-msgstr "最終更新日"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_write_uid
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_write_uid
 msgid "Last Updated by"
-msgstr "最終更新者"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_write_date
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_write_date
 msgid "Last Updated on"
-msgstr "最終更新日"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_location_id
@@ -104,7 +99,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_name
 msgid "Name"
-msgstr "名称"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
@@ -176,3 +171,4 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
 msgstr ""
+

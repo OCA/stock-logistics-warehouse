@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_quant_manual_assign
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # Fernando Lara <gennesis45@gmail.com>, 2017
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2017-02-18 04:05+0000\n"
 "PO-Revision-Date: 2017-02-18 04:05+0000\n"
 "Last-Translator: Fernando Lara <gennesis45@gmail.com>, 2017\n"
-"Language-Team: Spanish (Spain) (https://www.transifex.com/oca/teams/23907/es_ES/)\n"
+"Language-Team: Spanish (Spain) (https://www.transifex.com/oca/teams/23907/"
+"es_ES/)\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_quant_manual_assign
@@ -52,6 +53,11 @@ msgstr "Nombre para mostrar"
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_id
 msgid "ID"
 msgstr "ID"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_in_date
+msgid "Incoming Date"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants___last_update
@@ -108,7 +114,7 @@ msgid "Package"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_4459
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_4573
 msgid "QTY"
 msgstr ""
 
@@ -118,7 +124,7 @@ msgid "Quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr ""
@@ -151,11 +157,6 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
 msgid "The package containing this quant"
-msgstr ""
-
-#. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
-msgid "Transfer"
 msgstr ""
 
 #. module: stock_quant_manual_assign
