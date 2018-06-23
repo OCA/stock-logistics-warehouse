@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_available
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-18 03:43+0000\n"
 "PO-Revision-Date: 2016-11-11 18:07+0000\n"
 "Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-"
+"warehouse-8-0/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available
@@ -34,7 +35,16 @@ msgid ""
 "Choose the field of the product which will be used to compute potential.\n"
 "If empty, Quantity On Hand is used.\n"
 "Only the quantity fields have meaning for computing stock"
-msgstr "Escoja el campo del producto que se usará para calcular las existencias potenciales.\nSi está vacío, se utilizará la cantidad a mano.\nSólo los campos de cantidad tienen sentido calculando las existencias."
+msgstr ""
+"Escoja el campo del producto que se usará para calcular las existencias "
+"potenciales.\n"
+"Si está vacío, se utilizará la cantidad a mano.\n"
+"Sólo los campos de cantidad tienen sentido calculando las existencias."
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_lot_locked:0
+msgid "Exclude blocked lots/serial numbers"
+msgstr ""
 
 #. module: stock_available
 #: field:stock.config.settings,module_stock_available_sale:0
@@ -72,29 +82,58 @@ msgstr "Existencias disponibles para reservar"
 msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs"
-msgstr "Las existencias para este producto que pueden ser propuestas de manera segura para vender a los clientes.\nLa definición de este valor puede ser configurado para casar con sus necesidades"
+msgstr ""
+"Las existencias para este producto que pueden ser propuestas de manera "
+"segura para vender a los clientes.\n"
+"La definición de este valor puede ser configurado para casar con sus "
+"necesidades"
 
 #. module: stock_available
 #: help:stock.config.settings,module_stock_available_mrp:0
 msgid ""
-"This will add the quantities of goods that can be immediately manufactured, to the quantities available to promise.\n"
+"This will add the quantities of goods that can be immediately manufactured, "
+"to the quantities available to promise.\n"
 "This installs the module stock_available_mrp.\n"
 "If the module mrp is not installed, this will install it too"
-msgstr "Esta opción añadirá a la cantidad disponible para reservar, las cantidades de los bienes que pueden ser producidos inmediatamente.\nEsto instala el módulo stock_available_mrp.\nSi el módulo mrp no está instalado, también lo instalará."
+msgstr ""
+"Esta opción añadirá a la cantidad disponible para reservar, las cantidades "
+"de los bienes que pueden ser producidos inmediatamente.\n"
+"Esto instala el módulo stock_available_mrp.\n"
+"Si el módulo mrp no está instalado, también lo instalará."
 
 #. module: stock_available
 #: help:stock.config.settings,module_stock_available_immediately:0
 msgid ""
-"This will subtract incoming quantities from the quantities available to promise.\n"
+"This will subtract incoming quantities from the quantities available to "
+"promise.\n"
 "This installs the module stock_available_immediately."
-msgstr "Esta opción restará las cantidades a recepcionar de las cantidades disponibles para reservar.\nEsto instalará el módulo stock_available_immediately."
+msgstr ""
+"Esta opción restará las cantidades a recepcionar de las cantidades "
+"disponibles para reservar.\n"
+"Esto instalará el módulo stock_available_immediately."
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_lot_locked:0
+#, fuzzy
+msgid ""
+"This will subtract quantities from the blocked lots/serial numbers from the "
+"quantities available to promise.\n"
+"This installs the modules stock_available_lot_locked.\n"
+"If the module stock_lock_lot is not installed, this will installit too"
+msgstr ""
+"Esta opción añadirá a la cantidad disponible para reservar, las cantidades "
+"de los bienes que pueden ser producidos inmediatamente.\n"
+"Esto instala el módulo stock_available_mrp.\n"
+"Si el módulo mrp no está instalado, también lo instalará."
 
 #. module: stock_available
 #: help:stock.config.settings,module_stock_available_sale:0
 msgid ""
-"This will subtract quantities from the sale quotations from the quantities available to promise.\n"
+"This will subtract quantities from the sale quotations from the quantities "
+"available to promise.\n"
 "This installs the modules stock_available_sale.\n"
-"If the modules sale and sale_delivery_date are not installed, this will install them too"
+"If the modules sale and sale_delivery_date are not installed, this will "
+"install them too"
 msgstr ""
 
 #. module: stock_available
