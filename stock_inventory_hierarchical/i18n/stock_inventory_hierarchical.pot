@@ -1,28 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_inventory_hierarchical
+#	* stock_inventory_hierarchical
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:40+0000\n"
-"PO-Revision-Date: 2016-04-14 14:54+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Lithuanian (Lithuania) (http://www.transifex.com/oca/OCA-"
-"stock-logistics-warehouse-8-0/language/lt_LT/)\n"
-"Language: lt_LT\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: \n"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
 msgid "Cancel"
-msgstr "Atšaukti"
+msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,complete_name:0
@@ -32,12 +26,12 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_uid:0
 msgid "Created by"
-msgstr "Sukūrė"
+msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_date:0
 msgid "Created on"
-msgstr "Sukurta"
+msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,display_name:0
@@ -61,7 +55,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: help:stock.generate.inventory,only_view:0
@@ -97,12 +91,12 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_uid:0
 msgid "Last Updated by"
-msgstr "Paskutinį kartą atnaujino"
+msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,write_date:0
 msgid "Last Updated on"
-msgstr "Paskutinį kartą atnaujinta"
+msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,level:0
@@ -131,9 +125,7 @@ msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: help:stock.generate.inventory,level:0
-msgid ""
-"Maximum number of intermediate sub-inventories between the main inventory "
-"and the smallest sub-inventory."
+msgid "Maximum number of intermediate sub-inventories between the main inventory and the smallest sub-inventory."
 msgstr ""
 
 #. module: stock_inventory_hierarchical
@@ -184,31 +176,27 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:120
 #, python-format
-msgid ""
-"The state of the inventory %s (%s) is not consistent with the state of the "
-"following parent inventories:\n"
+msgid "The state of the inventory %s (%s) is not consistent with the state of the following parent inventories:\n"
+""
 msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:104
 #, python-format
-msgid ""
-"The state of the inventory %s (%s) is not consistent with the state of the "
-"following sub-inventories:\n"
+msgid "The state of the inventory %s (%s) is not consistent with the state of the following sub-inventories:\n"
+""
 msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
-msgid ""
-"This action will cancel all children inventories.\n"
+msgid "This action will cancel all children inventories.\n"
 "                    Click 'OK' to cancel inventories.\n"
 "                    Click 'Cancel' to abort."
 msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
-msgid ""
-"This action will start all children inventories.\n"
+msgid "This action will start all children inventories.\n"
 "                    Click 'OK' to start inventories.\n"
 "                    Click 'Cancel' to abort."
 msgstr ""
@@ -228,3 +216,4 @@ msgstr ""
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
 msgid "{'readonly':[('parent_id', '!=', False)]}"
 msgstr ""
+
