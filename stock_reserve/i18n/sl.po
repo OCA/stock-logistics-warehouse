@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_reserve
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
@@ -13,11 +13,12 @@ msgstr ""
 "PO-Revision-Date: 2017-06-24 03:05+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2017\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_product_product_reservation_count
@@ -29,14 +30,20 @@ msgstr "# prodaj"
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_state
 msgid ""
 "* New: When the stock move is created and not yet confirmed.\n"
-"* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
-"* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to me manufactured...\n"
+"* Waiting Another Move: This state can be seen when a move is waiting for "
+"another one, for example in a chained flow.\n"
+"* Waiting Availability: This state is reached when the procurement "
+"resolution is not straight forward. It may need the scheduler to run, a "
+"component to me manufactured...\n"
 "* Available: When products are reserved, it is set to 'Available'.\n"
 "* Done: When the shipment is processed, the state is 'Done'."
 msgstr ""
 "* Novo: ob nastanku premika zaloge, ko še ni potrjen.\n"
-"* Čakanje na drug premik: to stanje se pojavi, kadar en premik čaka drugega, na primer pri verižnem procesu.\n"
-"* Čakanje razpoložljivosti: to stanje se doseže, kadar izpolnitev oskrbe ni neposredna. Lahko bi bil potreben zagon razporejevalnika, potrebno je proizvesti komponento...\n"
+"* Čakanje na drug premik: to stanje se pojavi, kadar en premik čaka drugega, "
+"na primer pri verižnem procesu.\n"
+"* Čakanje razpoložljivosti: to stanje se doseže, kadar izpolnitev oskrbe ni "
+"neposredna. Lahko bi bil potreben zagon razporejevalnika, potrebno je "
+"proizvesti komponento...\n"
 "* Na voljo: ko so proizvodi rezervirani se prestavi v 'Na voljo'.\n"
 "* Opravljeno: po obdelavi odpreme stanje preide v 'Opravljeno'."
 
@@ -589,8 +596,8 @@ msgid ""
 "be done with care."
 msgstr ""
 "Količina proizvodov iz stališča inventure. Za premike v stanju 'opravljeno' "
-"je to količina proizvodov, ki so bili dejansko premaknjeni. Za druge premike"
-" je to količina proizvodov, ki je načrtovana za premik. Nižanje te količine "
+"je to količina proizvodov, ki so bili dejansko premaknjeni. Za druge premike "
+"je to količina proizvodov, ki je načrtovana za premik. Nižanje te količine "
 "ne ustvari zaostalega naloga. Sprememba te količine na dodeljenih premikih "
 "učinkuje na rezervacijo proizvodov, zato je v takem primeru priporočljiva "
 "pazljivost."

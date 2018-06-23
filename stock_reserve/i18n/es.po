@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_reserve
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # oihane <oihanecruce@gmail.com>, 2017
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2017-06-24 03:05+0000\n"
 "Last-Translator: oihane <oihanecruce@gmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_reserve
@@ -29,8 +29,11 @@ msgstr ""
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_state
 msgid ""
 "* New: When the stock move is created and not yet confirmed.\n"
-"* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
-"* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to me manufactured...\n"
+"* Waiting Another Move: This state can be seen when a move is waiting for "
+"another one, for example in a chained flow.\n"
+"* Waiting Availability: This state is reached when the procurement "
+"resolution is not straight forward. It may need the scheduler to run, a "
+"component to me manufactured...\n"
 "* Available: When products are reserved, it is set to 'Available'.\n"
 "* Done: When the shipment is processed, the state is 'Done'."
 msgstr ""
@@ -532,9 +535,9 @@ msgid ""
 "'real'). Value given in company currency and in product uom."
 msgstr ""
 "Campo técnico usado para guardar el coste de producto establecido por el "
-"usuario durante la confirmación del albarán (Cuando el método de coste usado"
-" es 'precio medio' o 'real'). Valor dado en la moneda de la compañía y en la"
-" UdM del producto."
+"usuario durante la confirmación del albarán (Cuando el método de coste usado "
+"es 'precio medio' o 'real'). Valor dado en la moneda de la compañía y en la "
+"UdM del producto."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_split_from
