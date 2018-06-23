@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_removal_location_by_priority
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2017-06-29 13:13+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_removal_location_by_priority
@@ -44,7 +44,6 @@ msgstr "Entnahmestrategie %s nicht implementiert."
 #. module: stock_removal_location_by_priority
 #: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_location_removal_priority
 #: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_quant_removal_priority
-msgid ""
-"This priority applies when removing stock and incoming dates are equal."
+msgid "This priority applies when removing stock and incoming dates are equal."
 msgstr ""
 "Diese Priorität trifft zu, wenn Entnahme- und Zugangsdatum gleich sind."
