@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_partner_lot
+#	* stock_partner_lot
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 06:36+0000\n"
-"PO-Revision-Date: 2016-12-24 06:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
-"Language: sv\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: stock_partner_lot
 #: model:ir.ui.view,arch_db:stock_partner_lot.view_res_partner_lots_filter
@@ -37,7 +32,7 @@ msgstr ""
 #. module: stock_partner_lot
 #: model:ir.model,name:stock_partner_lot.model_res_partner
 msgid "Partner"
-msgstr "Företag"
+msgstr ""
 
 #. module: stock_partner_lot
 #: model:ir.ui.view,arch_db:stock_partner_lot.view_res_partner_lots_filter
@@ -48,3 +43,4 @@ msgstr ""
 #: model:ir.actions.act_window,name:stock_partner_lot.owned_quants
 msgid "Stock"
 msgstr ""
+
