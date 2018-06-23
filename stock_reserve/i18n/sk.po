@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_reserve
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-10-20 00:50+0000\n"
 "PO-Revision-Date: 2017-10-16 18:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Slovak (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sk/)\n"
+"Language-Team: Slovak (http://www.transifex.com/oca/OCA-stock-logistics-"
+"warehouse-8-0/language/sk/)\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sk\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. module: stock_reserve
@@ -27,11 +28,20 @@ msgstr ""
 #: help:stock.reservation,state:0
 msgid ""
 "* New: When the stock move is created and not yet confirmed.\n"
-"* Waiting Another Move: This state can be seen when a move is waiting for another one, for example in a chained flow.\n"
-"* Waiting Availability: This state is reached when the procurement resolution is not straight forward. It may need the scheduler to run, a component to me manufactured...\n"
+"* Waiting Another Move: This state can be seen when a move is waiting for "
+"another one, for example in a chained flow.\n"
+"* Waiting Availability: This state is reached when the procurement "
+"resolution is not straight forward. It may need the scheduler to run, a "
+"component to me manufactured...\n"
 "* Available: When products are reserved, it is set to 'Available'.\n"
 "* Done: When the shipment is processed, the state is 'Done'."
-msgstr "* Nové: Skladový pohyb vytvorený a ešte nepotvrdený.\n* Čakanie na iný pohyb: je očakávaný iný pohyb, napr. v rámci zreťazenia.\n* Očakávanie dostupnosti: Stav keď nákupná požiadavka nie je realizovaná. Je potrebné spustiť proces alebo vyrobiť produkt...\n* Dostupné: ak je produkt rezervovaný.\n* Vybavené: dodávka zrealizovaná"
+msgstr ""
+"* Nové: Skladový pohyb vytvorený a ešte nepotvrdený.\n"
+"* Čakanie na iný pohyb: je očakávaný iný pohyb, napr. v rámci zreťazenia.\n"
+"* Očakávanie dostupnosti: Stav keď nákupná požiadavka nie je realizovaná. Je "
+"potrebné spustiť proces alebo vyrobiť produkt...\n"
+"* Dostupné: ak je produkt rezervovaný.\n"
+"* Vybavené: dodávka zrealizovaná"
 
 #. module: stock_reserve
 #: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
@@ -39,7 +49,8 @@ msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
 "                    Click to create a stock reservation.\n"
 "                    </p><p>\n"
-"                    This menu allow you to prepare and reserve some quantities\n"
+"                    This menu allow you to prepare and reserve some "
+"quantities\n"
 "                    of products.\n"
 "                </p>\n"
 "            "
