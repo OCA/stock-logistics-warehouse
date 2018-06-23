@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_traceability_operation
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-03-29 09:22+0000\n"
 "PO-Revision-Date: 2017-03-29 09:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/teams/23907/es_CR/)\n"
+"Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/"
+"teams/23907/es_CR/)\n"
+"Language: es_CR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_CR\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_traceability_operation
@@ -257,8 +258,8 @@ msgstr ""
 #: help:report.stock.traceability_operation,operation_id:0
 msgid ""
 "The operation on which this part of the traceability is based. When this "
-"field is empty, this part of the traceability is directly based on the Stock"
-" Move."
+"field is empty, this part of the traceability is directly based on the Stock "
+"Move."
 msgstr ""
 
 #. module: stock_traceability_operation

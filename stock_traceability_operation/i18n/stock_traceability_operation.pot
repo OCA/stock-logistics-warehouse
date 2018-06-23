@@ -1,23 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_traceability_operation
+#	* stock_traceability_operation
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
-# Jan Prokop <jprokop@creativehome.sk>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-20 00:50+0000\n"
-"PO-Revision-Date: 2017-10-20 00:50+0000\n"
-"Last-Translator: Jan Prokop <jprokop@creativehome.sk>, 2017\n"
-"Language-Team: Slovak (https://www.transifex.com/oca/teams/23907/sk/)\n"
-"Language: sk\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: \n"
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
@@ -27,12 +21,12 @@ msgstr ""
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Cancelled"
-msgstr "Zrušené"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_uid:0
 msgid "Created by"
-msgstr "Vytvoril"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -48,7 +42,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,date:0
 msgid "Date"
-msgstr "Dátum"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -79,13 +73,13 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,display_name:0
 msgid "Display Name"
-msgstr "Zobraziť meno"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: selection:report.stock.traceability_operation,state:0
 msgid "Done"
-msgstr "Hotovo"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,date_expected:0
@@ -95,27 +89,27 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Group By"
-msgstr "Zoskupiť podľa"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,__last_update:0
 msgid "Last Modified on"
-msgstr "Posledná modifikácia"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_uid:0
 msgid "Last Updated by"
-msgstr "Naposledy upravoval"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_date:0
 msgid "Last Updated on"
-msgstr "Naposledy upravované"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -155,7 +149,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,picking_type_id:0
@@ -167,7 +161,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,product_id:0
 msgid "Product"
-msgstr "Produkt"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: model:ir.model,name:stock_traceability_operation.model_product_template
@@ -215,7 +209,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,origin:0
 msgid "Source"
-msgstr "Zdroj"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,location_id:0
@@ -256,10 +250,7 @@ msgstr ""
 
 #. module: stock_traceability_operation
 #: help:report.stock.traceability_operation,operation_id:0
-msgid ""
-"The operation on which this part of the traceability is based. When this "
-"field is empty, this part of the traceability is directly based on the Stock "
-"Move."
+msgid "The operation on which this part of the traceability is based. When this field is empty, this part of the traceability is directly based on the Stock Move."
 msgstr ""
 
 #. module: stock_traceability_operation
@@ -274,9 +265,7 @@ msgstr ""
 
 #. module: stock_traceability_operation
 #: help:report.stock.traceability_operation,product_uom_qty:0
-msgid ""
-"This is the quantity of products moved in this Stock Move or in this Pack "
-"Operation"
+msgid "This is the quantity of products moved in this Stock Move or in this Pack Operation"
 msgstr ""
 
 #. module: stock_traceability_operation
@@ -292,7 +281,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uom:0
 msgid "Unit of Measure"
-msgstr "Merná jednotka"
+msgstr ""
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
@@ -303,3 +292,4 @@ msgstr ""
 #: selection:report.stock.traceability_operation,state:0
 msgid "Waiting Availability"
 msgstr ""
+
