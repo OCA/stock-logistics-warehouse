@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_reserve_sale
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
@@ -11,20 +11,27 @@ msgstr ""
 "POT-Creation-Date: 2017-05-30 01:25+0000\n"
 "PO-Revision-Date: 2017-06-01 07:03+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-"
+"warehouse-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid ""
 "A stock reservation will be created for the products\n"
-"                        of the selected quotation lines. If a validity date is specified,\n"
-"                        the reservation will be released once the date has passed."
-msgstr "Za proizvode izbranih postavk predračuna bo ustvarjena\n                        rezervacija zaloge. Če se določi datum veljavnosti,\n                        bo rezervacija izdana po poteku tega datuma."
+"                        of the selected quotation lines. If a validity date "
+"is specified,\n"
+"                        the reservation will be released once the date has "
+"passed."
+msgstr ""
+"Za proizvode izbranih postavk predračuna bo ustvarjena\n"
+"                        rezervacija zaloge. Če se določi datum veljavnosti,\n"
+"                        bo rezervacija izdana po poteku tega datuma."
 
 #. module: stock_reserve_sale
 #: field:stock.reservation,account_move_line_ids:0
@@ -37,7 +44,9 @@ msgstr "ID-ji postavk kontnih premikov"
 msgid ""
 "As you changed the quantity of the line, the quantity of the stock "
 "reservation will be automatically adjusted to %.2f."
-msgstr "Ker ste spremenili količino postavke, bo količina rezervacije zaloge samodejno popravljena na %.2f."
+msgstr ""
+"Ker ste spremenili količino postavke, bo količina rezervacije zaloge "
+"samodejno popravljena na %.2f."
 
 #. module: stock_reserve_sale
 #: field:sale.order,is_stock_reservable:0
@@ -202,7 +211,9 @@ msgstr "Postavka prodajnega naloga"
 msgid ""
 "Several stock reservations are linked with the line. Impossible to adjust "
 "their quantity. Please release the reservation before changing the quantity."
-msgstr "Več rezervacij zaloge je povezanih s postavko in ni mogoče prilagoditi njihove količine. Izdajte rezervacijo preden spreminjate količino."
+msgstr ""
+"Več rezervacij zaloge je povezanih s postavko in ni mogoče prilagoditi "
+"njihove količine. Izdajte rezervacijo preden spreminjate količino."
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,location_id:0
@@ -236,7 +247,9 @@ msgstr "Datum veljavnosti"
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "
 "reservation. Release the reservation before changing the product."
-msgstr "Ne morete spreminjati proizvoda ali merskih enot postavk z rezervacijo zaloge. Izdajte rezervacijo preden spreminjate proizvod."
+msgstr ""
+"Ne morete spreminjati proizvoda ali merskih enot postavk z rezervacijo "
+"zaloge. Izdajte rezervacijo preden spreminjate proizvod."
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve

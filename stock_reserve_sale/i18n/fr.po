@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_reserve_sale
-# 
+#
 # Translators:
 # Pierre Verkest <pverkest@anybox.fr>, 2015
 msgid ""
@@ -11,20 +11,26 @@ msgstr ""
 "POT-Creation-Date: 2017-05-30 01:25+0000\n"
 "PO-Revision-Date: 2017-05-31 21:52+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-"
+"warehouse-8-0/language/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid ""
 "A stock reservation will be created for the products\n"
-"                        of the selected quotation lines. If a validity date is specified,\n"
-"                        the reservation will be released once the date has passed."
-msgstr "Une réservation de stock sera créée pour les produits\ndes lignes de devis sélectionnées. Si une date de validité est\nspécifiée, la réservation sera annulée une fois cette date dépassée."
+"                        of the selected quotation lines. If a validity date "
+"is specified,\n"
+"                        the reservation will be released once the date has "
+"passed."
+msgstr ""
+"Une réservation de stock sera créée pour les produits\n"
+"des lignes de devis sélectionnées. Si une date de validité est\n"
+"spécifiée, la réservation sera annulée une fois cette date dépassée."
 
 #. module: stock_reserve_sale
 #: field:stock.reservation,account_move_line_ids:0
@@ -37,7 +43,9 @@ msgstr ""
 msgid ""
 "As you changed the quantity of the line, the quantity of the stock "
 "reservation will be automatically adjusted to %.2f."
-msgstr "Suite au changement de quantité de la ligne, la quantité de stock réservée va être ajusté à %.2f."
+msgstr ""
+"Suite au changement de quantité de la ligne, la quantité de stock réservée "
+"va être ajusté à %.2f."
 
 #. module: stock_reserve_sale
 #: field:sale.order,is_stock_reservable:0
@@ -102,7 +110,9 @@ msgstr "ID"
 msgid ""
 "If a date is given, the reservations will be released at the end of the "
 "validity."
-msgstr "Si une date est donnée, la réservation sera annulée à la fin de cette date de validité."
+msgstr ""
+"Si une date est donnée, la réservation sera annulée à la fin de cette date "
+"de validité."
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,__last_update:0
@@ -236,7 +246,10 @@ msgstr "Date de validité"
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "
 "reservation. Release the reservation before changing the product."
-msgstr "Vous ne pouvez pas modifier le produit ou l'unité de mesure des lignes avec une réservation en stock. Veuillez annuler les réservations avant de modifier la ligne."
+msgstr ""
+"Vous ne pouvez pas modifier le produit ou l'unité de mesure des lignes avec "
+"une réservation en stock. Veuillez annuler les réservations avant de "
+"modifier la ligne."
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
