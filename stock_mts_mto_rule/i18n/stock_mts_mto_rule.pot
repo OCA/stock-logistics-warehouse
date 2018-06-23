@@ -1,55 +1,45 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_mts_mto_rule
+#	* stock_mts_mto_rule
 #
-# Translators:
-# Antonio Trueba, 2016
-# Antonio Trueba, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 02:05+0000\n"
-"PO-Revision-Date: 2016-12-22 09:27+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-"
-"warehouse-8-0/language/es/)\n"
-"Language: es\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/warehouse.py:53
 #, python-format
 msgid "Can't find MTO Rule on the warehouse"
-msgstr "No se puede una regla bajo pedido en este almacén"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/warehouse.py:60
 #, python-format
 msgid "Can't find MTS Rule on the warehouse"
-msgstr "No se puede encontrar una regla bajo existencias en este almacén"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/warehouse.py:49
 #, python-format
 msgid "Can't find any generic MTS+MTO route."
-msgstr "No se puede encontrar una ruta genérica MTS+MTO."
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/model/rule.py:36
 #, python-format
 msgid "Choose between MTS and MTO"
-msgstr "Escoja entre bajo existencias y bajo pedido"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: help:stock.warehouse,mto_mts_management:0
-msgid ""
-"If this new route is selected on product form view, a purchase order will be "
-"created only if the virtual stock is less than 0 else, the product will be "
-"taken from stocks"
+msgid "If this new route is selected on product form view, a purchase order will be created only if the virtual stock is less than 0 else, the product will be taken from stocks"
 msgstr ""
 
 #. module: stock_mts_mto_rule
@@ -86,17 +76,17 @@ msgstr ""
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_procurement_order
 msgid "Procurement"
-msgstr "Abastecimiento"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_procurement_rule
 msgid "Procurement Rule"
-msgstr "Regla de abastecimiento"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: field:procurement.order,mts_mto_procurement_ids:0
 msgid "Procurements"
-msgstr "Abastecimientos"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: field:stock.warehouse,mto_mts_management:0
@@ -106,4 +96,5 @@ msgstr ""
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_warehouse
 msgid "Warehouse"
-msgstr "Almacén"
+msgstr ""
+
