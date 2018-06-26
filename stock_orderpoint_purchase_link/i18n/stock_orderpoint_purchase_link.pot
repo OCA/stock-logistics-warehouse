@@ -37,6 +37,7 @@ msgstr ""
 
 #. module: stock_orderpoint_purchase_link
 #: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint_purchase_line_ids
+#: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint_template_purchase_line_ids
 msgid "Purchase Order Lines"
 msgstr ""
 
