@@ -236,8 +236,16 @@ class StockRequest(models.Model):
         move/po creation.
         """
         return {
+
+            'name': self.name,
+            'origin': self.name,
+            'company_id': self.company_id.id,
             'date_planned': self.expected_date,
-            'warehouse_id': self.warehouse_id,
+            'product_id': self.product_id.id,
+            'product_qty': self.product_uom_qty,
+            'product_uom': self.product_uom_id.id,
+            'location_id': self.location_id.id,
+            'warehouse_id': self.warehouse_id.id,
             'stock_request_allocation_ids': self.id,
             'group_id': group_id or self.procurement_group_id.id or False,
             'route_ids': self.route_id,
@@ -255,7 +263,6 @@ class StockRequest(models.Model):
         """
         precision = self.env['decimal.precision'].precision_get(
             'Product Unit of Measure')
-        errors = []
         for request in self:
             if (
                 request.state != 'draft' or
@@ -273,19 +280,10 @@ class StockRequest(models.Model):
 
             values = request._prepare_procurement_values(
                 group_id=request.procurement_group_id)
-            try:
-                # We launch with sudo because potentially we could create
-                # objects that the user is not authorized to create, such
-                # as PO.
-                self.env['procurement.group'].sudo().run(
-                    request.product_id, request.product_uom_qty,
-                    request.product_uom_id,
-                    request.location_id, request.name,
-                    request.name, values)
-            except UserError as error:
-                errors.append(error.name)
-        if errors:
-            raise UserError('\n'.join(errors))
+
+            procurement = self.env["procurement.order"].create(values)
+            if procurement:
+                procurement.run()
         return True
 
     @api.multi

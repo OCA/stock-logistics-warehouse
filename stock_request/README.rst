@@ -53,7 +53,7 @@ also cancelled.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/11.0
+   :target: https://runbot.odoo-community.org/runbot/153/10.0
 
 
 Bug Tracker
@@ -73,6 +73,7 @@ Contributors
 * Jordi Ballester (EFICENT) <jordi.ballester@eficent.com>.
 * Enric Tobella <etobella@creublanca.es>
 * Atte Isopuro <atte.isopuro@avoin.systems>
+* Cristian Salamea <cs@prisehub.com>
 
 Maintainer
 ----------
