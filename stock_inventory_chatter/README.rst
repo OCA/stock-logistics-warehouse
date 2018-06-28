@@ -35,6 +35,7 @@ Contributors
 ------------
 
 * Miquel Raïch <miquel.raich@eficent.com>
+* Xavier Jimenez <xavier.jimenez@qubiq.es>
 
 Maintainer
 ----------

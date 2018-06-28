@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -8,7 +7,7 @@ from odoo import api, fields, models
 
 class StockInventory(models.Model):
     _name = 'stock.inventory'
-    _inherit = ['stock.inventory', 'mail.thread', 'ir.needaction_mixin']
+    _inherit = ['stock.inventory', 'mail.thread']
 
     partner_id = fields.Many2one(track_visibility='always')
     state = fields.Selection(track_visibility='onchange')
