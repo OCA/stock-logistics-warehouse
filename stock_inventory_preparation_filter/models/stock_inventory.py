@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 AvanzOSC - Oihane Crucelaegi
 # Copyright 2015 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.addons import decimal_precision as dp
 
 
 class StockInventoryEmptyLines(models.Model):
@@ -17,6 +17,7 @@ class StockInventoryEmptyLines(models.Model):
         string='Quantity',
         required=True,
         default=1.0,
+        digits=dp.get_precision('Product Unit of Measure'),
     )
     inventory_id = fields.Many2one(
         comodel_name='stock.inventory',
@@ -64,7 +65,7 @@ class StockInventory(models.Model):
         self.ensure_one()
         vals = []
         product_obj = self.env['product.product']
-        inventory = self.new(self._convert_to_write(self._cache))
+        inventory = self.new(self._convert_to_write(self.read()[0]))
         if self.filter in ('categories', 'products'):
             if self.filter == 'categories':
                 products = product_obj.search([
@@ -90,6 +91,8 @@ class StockInventory(models.Model):
                 tmp_lines[line.product_code] += line.product_qty
             self.empty_line_ids.unlink()
             inventory.filter = 'product'
+            # HACK: Make sure location is preserved
+            inventory.location_id = self.location_id
             for product_code in tmp_lines.keys():
                 product = product_obj.search([
                     '|',
@@ -111,5 +114,5 @@ class StockInventory(models.Model):
                     }]
                 vals += values
         else:
-            vals = super(StockInventory, self)._get_inventory_lines_values()
+            vals = super()._get_inventory_lines_values()
         return vals
