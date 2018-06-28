@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 AvanzOSC - Oihane Crucelaegi
 # Copyright 2015 Tecnativa - Pedro M. Baeza
 # Copyright 2017 Tecnativa - David Vidal
@@ -6,7 +5,7 @@
 
 {
     "name": "Extended Inventory Preparation Filters",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     "depends": [
         "stock",
     ],
