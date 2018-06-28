@@ -83,18 +83,18 @@ class PurchaseOrderLine(models.Model):
         uom_by_category = {
             from_uom.category_id: from_uom for from_uom in from_uoms}
         for line in self:
+            purchase_qty = line.product_qty
             if line.product_id:
                 supplier = line._get_product_seller()
                 if supplier:
                     product_purchase_uom = supplier.min_qty_uom_id
                     from_uom = uom_by_category.get(
                         line.product_purchase_uom_id.category_id)
-                    line.product_purchase_qty = from_uom._compute_quantity(
+                    purchase_qty = from_uom._compute_quantity(
                         line.product_qty,
                         product_purchase_uom)
                     line.product_purchase_uom_id = product_purchase_uom.id
-            else:
-                line.product_purchase_qty = line.product_qty
+            line.product_purchase_qty = purchase_qty
 
     @api.onchange("packaging_id")
     def _onchange_packaging_id(self):

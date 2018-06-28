@@ -135,3 +135,31 @@ class TestPurchaseOrderLine(common.TransactionCase):
             po_line.product_uom,
             'The product uom is not well set'
         )
+
+    def test_po_line_inverse_no_supplier(self):
+        self.product_supplier_info.min_qty_uom_id = self.product_uom_8
+        self.product_supplier_info.min_qty = 2
+        self.product_supplier_info.packaging_id = self.product_packaging_dozen
+
+        po = self.env['purchase.order'].create(
+            {'partner_id': self.product_supplier_info.name.id})
+        po_line = po.order_line.new({
+            'product_id': self.product_tmpl_id.product_variant_id,
+            'product_purchase_qty': 1.0,
+            'product_purchase_uom_id':
+                po.order_line._default_product_purchase_uom_id(),
+            'order_id': po
+        })
+        po_line.onchange_product_id()
+        self.assertEquals(
+            16.0,
+            po_line.product_qty,
+        )
+        # Remove Supplierinfos
+        po_line.product_id.seller_ids = self.env[
+            'product.supplierinfo'].browse()
+        po_line.product_qty = 2.0
+        self.assertEquals(
+            2.0,
+            po_line.product_qty,
+        )
