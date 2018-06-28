@@ -95,7 +95,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
             'location_id': self.location.id,
             'categ_ids': [(6, 0, [self.category.id])],
         })
-        inventory.prepare_inventory()
+        inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 2)
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product1)
@@ -115,7 +115,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 'product_ids': [(6, 0, [self.product1.id, self.product2.id])],
             }
         )
-        inventory.prepare_inventory()
+        inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 2)
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product1)
@@ -135,7 +135,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 'lot_ids': [(6, 0, [self.lot.id, ])],
             }
         )
-        inventory.prepare_inventory()
+        inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 1)
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product_lot)
@@ -167,7 +167,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 }),
             ],
         })
-        inventory.prepare_inventory()
+        inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 3)
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product1)
