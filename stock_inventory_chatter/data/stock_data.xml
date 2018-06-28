@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        
+<odoo>
+
         <!-- Stock-related subtypes for messaging / Chatter -->
         <record id="mt_inventory_canceled" model="mail.message.subtype">
             <field name="name">Inventory Canceled</field>
@@ -19,5 +18,4 @@
             <field name="default" eval="False"/>
         </record>
 
-    </data>
-</openerp>
+</odoo>
