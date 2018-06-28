@@ -39,6 +39,7 @@ Contributors
 * Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
+* Xavier Jimenez <xavier.jimenez@qubiq.es>
 
 Maintainer
 ----------

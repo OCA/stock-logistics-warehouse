@@ -10,7 +10,7 @@
                     <notebook position="attributes">
                         <attribute name="attrs" />
                     </notebook>
-                    <xpath expr="//button[@name='reset_real_qty']/ancestor::*[position()=1]" position="attributes">
+                    <xpath expr="//button[@name='action_reset_product_qty']/ancestor::*[position()=1]" position="attributes">
                         <attribute name="attrs">{'invisible':[('state','=','draft')]}</attribute>
                     </xpath>
                     <notebook position="before">
