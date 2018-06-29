@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2018-06-29 14:21+0000\n"
+"Last-Translator: Osoul <baruni@osoul.ly>\n"
 "Language-Team: none\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -14,29 +15,30 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 3.0.1\n"
 
 #. module: stock_available
 #: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
 #: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Available</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">المتوفر</span>"
 
 #. module: stock_available
 #: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
 #: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Potential</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">المتوقع</span>"
 
 #. module: stock_available
 #: model:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
 msgid "Available to Promise:"
-msgstr ""
+msgstr "القابل للبيع:"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product_immediately_usable_qty
 #: model:ir.model.fields,field_description:stock_available.field_product_template_immediately_usable_qty
 msgid "Available to promise"
-msgstr ""
+msgstr "القابل للبيع"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings_stock_available_mrp_based_on
@@ -48,33 +50,33 @@ msgstr ""
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_sale
 msgid "Exclude goods already in sale quotations"
-msgstr ""
+msgstr "تجاهل الكميات الموجودة في العروض المبدئية"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_immediately
 msgid "Exclude incoming goods"
-msgstr ""
+msgstr "تجاهل الكميات الواردة"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_mrp
 msgid "Include the production potential"
-msgstr ""
+msgstr "احتسب المتوقع من التصنيع"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product_potential_qty
 #: model:ir.model.fields,field_description:stock_available.field_product_template_potential_qty
 msgid "Potential"
-msgstr ""
+msgstr "المتوقع"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
 msgid "Product"
-msgstr ""
+msgstr "المنتج"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "قالب المنتج"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_product_potential_qty
@@ -89,7 +91,7 @@ msgstr ""
 #. module: stock_available
 #: model:ir.ui.view,arch_db:stock_available.view_stock_configuration
 msgid "Stock available to promise"
-msgstr ""
+msgstr "الكمية القابلة للبيع"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_template_immediately_usable_qty
@@ -126,9 +128,9 @@ msgstr ""
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings_stock_available_mrp_based_on
 msgid "based on"
-msgstr ""
+msgstr "مبني على"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_res_config_settings
 msgid "res.config.settings"
-msgstr ""
+msgstr "الإعدادات"
