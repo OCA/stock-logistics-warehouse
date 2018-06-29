@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <!-- Stock-related subtypes for messaging / Chatter -->
+        <record id="mt_inventory_canceled" model="mail.message.subtype">
+            <field name="name">Inventory Canceled</field>
+            <field name="res_model">stock.inventory</field>
+            <field name="default" eval="False"/>
+        </record>
+        <record id="mt_inventory_confirmed" model="mail.message.subtype">
+            <field name="name">Inventory Confirmed</field>
+            <field name="res_model">stock.inventory</field>
+            <field name="default" eval="False"/>
+        </record>
+        <record id="mt_inventory_done" model="mail.message.subtype">
+            <field name="name">Inventory Done</field>
+            <field name="res_model">stock.inventory</field>
+            <field name="default" eval="False"/>
+        </record>
+
+</odoo>

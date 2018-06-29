@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_chatter
+#
+# Translators:
+# Kostas Goutoudis <goutoudis@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-05 00:45+0000\n"
+"PO-Revision-Date: 2017-07-05 00:45+0000\n"
+"Last-Translator: Kostas Goutoudis <goutoudis@gmail.com>, 2017\n"
+"Language-Team: Greek (Greece) (https://www.transifex.com/oca/teams/23907/"
+"el_GR/)\n"
+"Language: el_GR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_inventory_chatter
+#: model:ir.model,name:stock_inventory_chatter.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
+msgid "Inventory Canceled"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_confirmed
+msgid "Inventory Confirmed"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_done
+msgid "Inventory Done"
+msgstr ""
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "Ημερομηνία του τελευταίου μηνύματος "
+
+#~ msgid "Followers"
+#~ msgstr "Ακόλουθοι"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Εάν επιλεγεί τα νέα μηνύματα χρειάζονται την προσοχή σας"
+
+#~ msgid "Last Message Date"
+#~ msgstr "Τελευταία ημερομηνία μηνύματος"
+
+#~ msgid "Messages"
+#~ msgstr "Μηνύματα"
+
+#~ msgid "Unread Messages"
+#~ msgstr "Αδιάβαστα Μυνήματα"
