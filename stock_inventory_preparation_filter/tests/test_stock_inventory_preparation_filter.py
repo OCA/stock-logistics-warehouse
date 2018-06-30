@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -52,6 +53,13 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 'usage': 'internal',
             }
         )
+
+        self.lot = self.env['stock.production.lot'].create(
+            {
+                'name': '0001',
+                'product_id': self.product1.id,
+            }
+        )
         inventory = self.inventory_model.create(
             {
                 'name': 'Product1 inventory',
@@ -75,12 +83,74 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
             })
         inventory.action_done()
 
-    def test_inventory_category_filter(self):
+    def test_inventory_none_filter_only_with_stock(self):
         inventory = self.inventory_model.create(
             {
-                'name': 'Category inventory',
+                'name': 'Only with stock inventory',
+                'filter': 'none',
+                'location_id': self.location.id,
+                'import_products': 'only_with_stock',
+            }
+        )
+        inventory.prepare_inventory()
+        self.assertEqual(len(inventory.line_ids), 2)
+        line1 = inventory.line_ids[0]
+        self.assertEqual(line1.product_id, self.product1)
+        self.assertEqual(line1.theoretical_qty, 2.0)
+        self.assertEqual(line1.location_id, self.location)
+        line2 = inventory.line_ids[1]
+        self.assertEqual(line2.product_id, self.product2)
+        self.assertEqual(line2.theoretical_qty, 4.0)
+        self.assertEqual(line2.location_id, self.location)
+
+    def test_inventory_none_filter_all(self):
+        inventory = self.inventory_model.create(
+            {
+                'name': 'All inventory',
+                'filter': 'none',
+                'location_id': self.location.id,
+                'import_products': 'only_with_stock',
+            }
+        )
+        inventory.prepare_inventory()
+        self.assertEqual(len(inventory.line_ids), 2)
+        line1 = inventory.line_ids[0]
+        self.assertEqual(line1.product_id, self.product1)
+        self.assertEqual(line1.theoretical_qty, 2.0)
+        self.assertEqual(line1.location_id, self.location)
+        line2 = inventory.line_ids[1]
+        self.assertEqual(line2.product_id, self.product2)
+        self.assertEqual(line2.theoretical_qty, 4.0)
+        self.assertEqual(line2.location_id, self.location)
+
+    def test_inventory_category_filter_only_with_stock(self):
+        inventory = self.inventory_model.create(
+            {
+                'name': 'Category inventory Only with Stock',
                 'filter': 'categories',
                 'location_id': self.location.id,
+                'import_products': 'only_with_stock',
+                'categ_ids': [(6, 0, [self.category.id])],
+            }
+        )
+        inventory.prepare_inventory()
+        self.assertEqual(len(inventory.line_ids), 2)
+        line1 = inventory.line_ids[0]
+        self.assertEqual(line1.product_id, self.product1)
+        self.assertEqual(line1.theoretical_qty, 2.0)
+        self.assertEqual(line1.location_id, self.location)
+        line2 = inventory.line_ids[1]
+        self.assertEqual(line2.product_id, self.product2)
+        self.assertEqual(line2.theoretical_qty, 4.0)
+        self.assertEqual(line2.location_id, self.location)
+
+    def test_inventory_category_filter_all(self):
+        inventory = self.inventory_model.create(
+            {
+                'name': 'Category inventory All',
+                'filter': 'categories',
+                'location_id': self.location.id,
+                'import_products': 'only_with_stock',
                 'categ_ids': [(6, 0, [self.category.id])],
             }
         )
@@ -144,4 +214,46 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
         self.assertEqual(line2.product_id, self.product2)
         self.assertEqual(line2.theoretical_qty, 4.0)
         self.assertEqual(line2.product_qty, 7.0)
+        self.assertEqual(line2.location_id, self.location)
+
+    def test_inventory_lots_filter_all(self):
+        inventory = self.inventory_model.create(
+            {
+                'name': 'Lots All inventory',
+                'filter': 'lots',
+                'location_id': self.location.id,
+                'import_products': 'only_with_stock',
+                'lot_ids': [(6, 0, [self.lot.id])],
+            }
+        )
+        inventory.prepare_inventory()
+        self.assertEqual(len(inventory.line_ids), 2)
+        line1 = inventory.line_ids[0]
+        self.assertEqual(line1.product_id, self.product1)
+        self.assertEqual(line1.theoretical_qty, 2.0)
+        self.assertEqual(line1.location_id, self.location)
+        line2 = inventory.line_ids[1]
+        self.assertEqual(line2.product_id, self.product2)
+        self.assertEqual(line2.theoretical_qty, 4.0)
+        self.assertEqual(line2.location_id, self.location)
+
+    def test_inventory_lots_filter_only_with_stock(self):
+        inventory = self.inventory_model.create(
+            {
+                'name': 'Lots inventory Only with Stock',
+                'filter': 'lots',
+                'location_id': self.location.id,
+                'import_products': 'only_with_stock',
+                'lot_ids': [(6, 0, [self.lot.id])],
+            }
+        )
+        inventory.prepare_inventory()
+        self.assertEqual(len(inventory.line_ids), 2)
+        line1 = inventory.line_ids[0]
+        self.assertEqual(line1.product_id, self.product1)
+        self.assertEqual(line1.theoretical_qty, 2.0)
+        self.assertEqual(line1.location_id, self.location)
+        line2 = inventory.line_ids[1]
+        self.assertEqual(line2.product_id, self.product2)
+        self.assertEqual(line2.theoretical_qty, 4.0)
         self.assertEqual(line2.location_id, self.location)
