@@ -76,7 +76,6 @@ class StockRequest(models.AbstractModel):
             'stock.request'),
     )
     route_id = fields.Many2one('stock.location.route', string='Route',
-                               domain="[('id', 'in', route_ids)]",
                                ondelete='restrict')
 
     route_ids = fields.Many2many(
@@ -107,8 +106,9 @@ class StockRequest(models.AbstractModel):
                 if record.warehouse_id:
                     routes |= wh_routes
                 parents = record.get_parents().ids
-                record.route_ids = routes.filtered(lambda r: any(
+                routes_to = routes.filtered(lambda r: any(
                     p.location_id.id in parents for p in r.pull_ids))
+                record.route_ids = routes_to
 
     def get_parents(self):
         location = self.location_id
