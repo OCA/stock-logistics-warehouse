@@ -98,7 +98,7 @@ msgid "Group By"
 msgstr ""
 
 #. module: stock_request_kanban
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_id_5395
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_id_5471
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_id
