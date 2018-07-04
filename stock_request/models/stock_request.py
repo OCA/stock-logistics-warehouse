@@ -105,6 +105,14 @@ class StockRequest(models.Model):
          'Stock Request name must be unique'),
     ]
 
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        res = super(StockRequest, self).onchange_product_id()
+        if self.product_id:
+            routes = [r.id for r in self.route_ids]
+            res['domain']['route_id'] = "[('id','=',{ids})]".format(ids=tuple(routes))
+        return res
+
     @api.depends('allocation_ids')
     def _compute_move_ids(self):
         for request in self.sudo():
@@ -246,10 +254,9 @@ class StockRequest(models.Model):
             'product_uom': self.product_uom_id.id,
             'location_id': self.location_id.id,
             'warehouse_id': self.warehouse_id.id,
-            'stock_request_allocation_ids': self.id,
+            'stock_request_allocation_ids': [(4, self.id)],
             'group_id': group_id or self.procurement_group_id.id or False,
-            'route_ids': self.route_id,
-            'route_id': self.route_id,
+            'route_ids': [(4, self.route_id.id)],
             'stock_request_id': self.id,
         }
 
