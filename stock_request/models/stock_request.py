@@ -212,7 +212,7 @@ class StockRequest(models.Model):
         return True
 
     def action_cancel(self):
-        self.sudo().mapped('move_ids')._action_cancel()
+        self.sudo().mapped('move_ids').action_cancel()
         self.state = 'cancel'
         return True
 
