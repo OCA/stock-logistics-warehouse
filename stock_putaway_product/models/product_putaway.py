@@ -21,7 +21,7 @@ class ProductPutaway(models.Model):
         copy=True,
     )
     method = fields.Selection(
-        selection=_get_putaway_options,
+        selection='_get_putaway_options',
     )
 
     @api.multi
