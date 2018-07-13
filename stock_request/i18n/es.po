@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2018-03-02 03:44+0000\n"
-"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
+"PO-Revision-Date: 2018-07-14 09:46+0000\n"
+"Last-Translator: Enric Tobella <etobella@creublanca.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.0.1\n"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:20
@@ -27,9 +28,8 @@ msgstr "<li><b>%s</b>: Cantidad transferida %s %s</li>"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
-#, fuzzy
 msgid "Activates Stock Request Orders"
-msgstr "Solicitudes de existencias"
+msgstr "Activa las Solicitudes de existencias"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_allocated_product_qty
@@ -70,7 +70,7 @@ msgstr "Compañía"
 #: code:addons/stock_request/models/stock_request.py:170
 #, python-format
 msgid "Company must be equal to the order"
-msgstr ""
+msgstr "La compañía debe ser la misma que la de la petición"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_order_form
@@ -125,24 +125,22 @@ msgstr "Borrador"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
-#, fuzzy
 msgid "Enable Orders"
-msgstr "Pedidos de entrega"
+msgstr "Permite usar Pedidos de entrega"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Stock Requests Kanban cards"
-msgstr ""
+msgstr "Permite usar tarjetas Kanban para las solicitudes de existencias"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Stock Requests for Purchases"
-msgstr ""
+msgstr "Permite usar las solicitudes de existencias con Compras"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_expected_date
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order_expected_date
-#, fuzzy
 msgid "Expected Date"
 msgstr "Fecha prevista"
 
@@ -150,7 +148,7 @@ msgstr "Fecha prevista"
 #: code:addons/stock_request/models/stock_request.py:177
 #, python-format
 msgid "Expected date must be equal to the order"
-msgstr ""
+msgstr "La fecha prevista debe ser la misma que la del pedido"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
@@ -179,22 +177,22 @@ msgstr "En progreso"
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Localización de inventarios"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location_route
 msgid "Inventory Routes"
-msgstr ""
+msgstr "Rutas de inventarios"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_order_form
 msgid "Items"
-msgstr ""
+msgstr "Elementos"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Kanban"
-msgstr ""
+msgstr "Kanban"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request___last_update
@@ -231,12 +229,12 @@ msgstr "Ubicación"
 #: code:addons/stock_request/models/stock_request.py:153
 #, python-format
 msgid "Location must be equal to the order"
-msgstr ""
+msgstr "La ubicación debe ser la misma que la del pedido"
 
 #. module: stock_request
 #: model:ir.ui.menu,name:stock_request.menu_stock_request_master_data
 msgid "Master Data"
-msgstr ""
+msgstr "Datos Maestros"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract_procurement_group_id
@@ -260,13 +258,13 @@ msgstr "Nombre"
 #. module: stock_request
 #: sql_constraint:stock.request:0 sql_constraint:stock.request.abstract:0
 msgid "Name must be unique"
-msgstr ""
+msgstr "El nombre debe ser único"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_order.py:255
 #, python-format
 msgid "Only orders on draft state can be unlinked"
-msgstr ""
+msgstr "Solo los pedidos en estado borrado pueden ser eliminadas"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:314
@@ -292,7 +290,7 @@ msgstr ""
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Orders"
-msgstr ""
+msgstr "Pedidos"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_move_line
