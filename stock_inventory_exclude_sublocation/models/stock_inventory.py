@@ -28,20 +28,20 @@ class Inventory(models.Model):
             products_to_filter = self.env['product.product']
 
             if self.company_id.id:
-                domain += ' and company_id = %s'
+                domain += ' AND company_id = %s'
                 args += (self.company_id.id,)
             if self.partner_id:
-                domain += ' and owner_id = %s'
+                domain += ' AND owner_id = %s'
                 args += (self.partner_id.id,)
             if self.lot_id:
-                domain += ' and lot_id = %s'
+                domain += ' AND lot_id = %s'
                 args += (self.lot_id.id,)
             if self.product_id:
-                domain += ' and product_id = %s'
+                domain += ' AND product_id = %s'
                 args += (self.product_id.id,)
                 products_to_filter |= self.product_id
             if self.package_id:
-                domain += ' and package_id = %s'
+                domain += ' AND package_id = %s'
                 args += (self.package_id.id,)
             if self.category_id:
                 categ_products = product_obj.search(
@@ -50,13 +50,16 @@ class Inventory(models.Model):
                 args += (categ_products.ids,)
                 products_to_filter |= categ_products
 
-            self.env.cr.execute("""
-                SELECT product_id, sum(qty) as product_qty, location_id, lot_id
-                    as prod_lot_id, package_id, owner_id as partner_id
-                FROM stock_quant
-                WHERE %s
-                GROUP BY product_id, location_id, lot_id, package_id,
-                    partner_id """ % domain, args)
+            # disable error about SQL injection as the code here is generating
+            # a vulnerability
+            # pylint: disable = E8103
+            self.env.cr.execute(
+                "SELECT product_id, SUM(qty) AS product_qty, location_id, "
+                " lot_id AS prod_lot_id, package_id, owner_id AS partner_id "
+                "FROM stock_quant "
+                "WHERE " + domain + " " +
+                "GROUP BY product_id, location_id, lot_id, package_id, "
+                "partner_id """, args)
 
             for product_data in self.env.cr.dictfetchall():
                 for void_field in [item[0] for item in product_data.items() if
