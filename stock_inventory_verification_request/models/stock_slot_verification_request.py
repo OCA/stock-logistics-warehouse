@@ -18,12 +18,12 @@ class SlotVerificationRequest(models.Model):
         return super(SlotVerificationRequest, self).create(vals)
 
     @api.multi
-    def _count_involved_moves(self):
+    def _compute_involved_move_count(self):
         for rec in self:
             rec.involved_move_count = len(rec.involved_move_ids)
 
     @api.multi
-    def _count_involved_inv_lines(self):
+    def _compute_involved_inv_line_count(self):
         for rec in self:
             rec.involved_inv_line_count = len(rec.involved_inv_line_ids)
 
@@ -56,7 +56,9 @@ class SlotVerificationRequest(models.Model):
         column1='slot_verification_request_id',
         column2='move_id',
         string='Involved Stock Moves')
-    involved_move_count = fields.Integer(compute='_count_involved_moves')
+    involved_move_count = fields.Integer(
+        compute='_compute_involved_move_count'
+    )
     involved_inv_line_ids = fields.Many2many(
         comodel_name='stock.inventory.line',
         relation='slot_verification_inv_line_involved_rel',
@@ -64,7 +66,7 @@ class SlotVerificationRequest(models.Model):
         column2='inventory_line_id',
         string='Involved Inventory Lines')
     involved_inv_line_count = fields.Integer(
-        compute='_count_involved_inv_lines')
+        compute='_compute_involved_inv_line_count')
 
     @api.multi
     def _get_involved_moves_domain(self):
