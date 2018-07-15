@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# coding: utf-8
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -21,7 +21,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import Warning as UserError
 
 
 class StockLocation(models.Model):
@@ -32,15 +32,15 @@ class StockLocation(models.Model):
         help="The root location for a partner's location for a specific "
         "type.")
 
-    @api.one
     @api.constrains('partner_id', 'main_partner_location', 'usage')
     def _check_main_location(self):
-        partner = self.partner_id
+        for rec in self:
+            partner = rec.partner_id
 
-        if partner and len(partner.get_main_location(self.usage)) > 1:
-            raise Warning(
-                _('The partner %s already has a main location '
-                    'of type %s.') % (partner.name, self.usage))
+            if partner and len(partner.get_main_location(rec.usage)) > 1:
+                raise UserError(
+                    _('The partner %s already has a main location '
+                        'of type %s.') % (partner.name, rec.usage))
 
     @api.onchange('partner_id', 'usage')
     def _onchange_parent_location(self):

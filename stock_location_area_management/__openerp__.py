@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# coding: utf-8
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution
@@ -22,7 +22,8 @@
 {
     'name': 'Stock Location Area Management',
     'version': '8.0.0.1.0',
-    'author': 'Savoir-faire Linux',
+    'author': 'Savoir-faire Linux,'
+              'Odoo Community Association (OCA)',
     'maintainer': 'Savoir-faire Linux',
     'website': 'http://www.savoirfairelinux.com',
     'license': 'AGPL-3',

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 #    Author: Florian da Costa
 #    Copyright 2015 Akretion
 #

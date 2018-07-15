@@ -9,14 +9,9 @@
     "website": "http://www.eficent.com",
     "category": "Generic",
     "depends": ["account"],
-    "description": """
-Account Move Line Product
-=========================
-    """,
     "license": "AGPL-3",
     "data": [
         "views/account_move_line_view.xml",
     ],
     'installable': True,
-    'active': False,
 }
