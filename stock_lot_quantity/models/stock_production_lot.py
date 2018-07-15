@@ -10,14 +10,13 @@ class StockProductionLot(models.Model):
     _inherit = 'stock.production.lot'
 
     qty_available = fields.Float(
-        compute='_get_lot_qty',
+        compute='_compute_lot_qty',
         type='float',
         digits_compute=dp.get_precision('Product Unit of Measure'),
         string='On hand')
 
-    @api.multi
     @api.depends('quant_ids')
-    def _get_lot_qty(self):
+    def _compute_lot_qty(self):
         """Compute the quantities for production lots."""
         for lot in self:
             lot.qty_available = lot.with_context(
