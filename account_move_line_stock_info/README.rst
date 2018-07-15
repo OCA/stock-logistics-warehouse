@@ -13,11 +13,11 @@ Usage
 =====
 
 * The stock manager can check the journal items by accessing to 'Inventory >
-Reports > Stock moves'.
+  Reports > Stock moves'.
 
 * A user belonging to the group 'Accounting & Finance/Adviser' can review the
- details of a move that is associated to a journal item through
- 'Invoicing > Adviser > Journal Entries (or Journal items)'.
+  details of a move that is associated to a journal item through
+  'Invoicing > Adviser > Journal Entries (or Journal items)'.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

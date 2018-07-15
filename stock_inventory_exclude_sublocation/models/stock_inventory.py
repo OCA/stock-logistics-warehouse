@@ -35,6 +35,9 @@ class StockInventory(models.Model):
                 domain += ' and package_id = %s'
                 args += (inventory.package_id.id,)
 
+            # disable error about SQL injection as the code here is generating
+            # a vulnerability
+            # pylint: disable = E8103
             self.env.cr.execute('''
                SELECT product_id, sum(qty) as product_qty, location_id, lot_id
                as prod_lot_id, package_id, owner_id as partner_id

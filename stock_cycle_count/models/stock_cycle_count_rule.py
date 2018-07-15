@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -13,9 +13,10 @@ class StockCycleCountRule(models.Model):
     _name = 'stock.cycle.count.rule'
     _description = "Stock Cycle Counts Rules"
 
-    @api.one
+    @api.multi
     def _compute_currency(self):
-        self.currency_id = self.env.user.company_id.currency_id
+        for rec in self:
+            rec.currency_id = self.env.user.company_id.currency_id
 
     @api.model
     def _selection_rule_types(self):
@@ -25,23 +26,23 @@ class StockCycleCountRule(models.Model):
             ('accuracy', _('Minimum Accuracy')),
             ('zero', _('Zero Confirmation'))]
 
-    @api.one
     @api.constrains('rule_type', 'warehouse_ids')
     def _check_zero_rule(self):
-        if self.rule_type == 'zero' and len(self.warehouse_ids) > 1:
-            raise UserError(
-                _('Zero confirmation rules can only have one warehouse '
-                  'assigned.')
-            )
-        if self.rule_type == 'zero':
-            zero_rule = self.search([
-                ('rule_type', '=', 'zero'),
-                ('warehouse_ids', '=', self.warehouse_ids.id)])
-            if len(zero_rule) > 1:
+        for rec in self:
+            if rec.rule_type == 'zero' and len(rec.warehouse_ids) > 1:
                 raise UserError(
-                    _('You can only have one zero confirmation rule per '
-                      'warehouse.')
+                    _('Zero confirmation rules can only have one warehouse '
+                      'assigned.')
                 )
+            if rec.rule_type == 'zero':
+                zero_rule = self.search([
+                    ('rule_type', '=', 'zero'),
+                    ('warehouse_ids', '=', rec.warehouse_ids.id)])
+                if len(zero_rule) > 1:
+                    err = _(
+                        'Warehouses can only have one zero-confirmation rule.'
+                    )
+                    raise UserError(err)
 
     @api.onchange('rule_type')
     def _get_rule_description(self):
