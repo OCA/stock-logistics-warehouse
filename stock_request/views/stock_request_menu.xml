@@ -4,6 +4,7 @@
         id="menu_stock_request_root"
         name="Stock Requests"
         groups="stock_request.group_stock_request_user,stock_request.group_stock_request_manager"
+        web_icon="stock_request,static/description/icon.png"
         sequence="100"/>
 
     <menuitem
