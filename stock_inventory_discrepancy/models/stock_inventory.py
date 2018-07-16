@@ -17,13 +17,14 @@ class StockInventory(models.Model):
         ('pending', 'Pending to Approve'),
         ('done', 'Validated')]
 
-    @api.one
     @api.depends('line_ids.product_qty', 'line_ids.theoretical_qty')
     def _compute_over_discrepancy_line_count(self):
-        lines = self.line_ids
-        self.over_discrepancy_line_count = sum(
-            d.discrepancy_percent > d.discrepancy_threshold
-            for d in lines)
+        for rec in self:
+            lines = rec.line_ids
+            rec.over_discrepancy_line_count = sum(
+                d.discrepancy_percent > d.discrepancy_threshold
+                for d in lines
+            )
 
     state = fields.Selection(
         selection=INVENTORY_STATE_SELECTION,
@@ -57,15 +58,16 @@ class StockInventory(models.Model):
                   'this action.')
             )
 
-    @api.one
+    @api.multi
     def action_done(self):
-        if self.over_discrepancy_line_count and self.line_ids.filtered(
-                lambda t: t.discrepancy_threshold > 0.0):
-            if self.env.context.get('normal_view', False):
-                self.action_over_discrepancies()
-                return True
-            else:
-                self._check_group_inventory_validation_always()
+        for rec in self:
+            if rec.over_discrepancy_line_count and self.line_ids.filtered(
+                    lambda t: t.discrepancy_threshold > 0.0):
+                if self.env.context.get('normal_view', False):
+                    rec.action_over_discrepancies()
+                    return True
+                else:
+                    rec._check_group_inventory_validation_always()
         return super(StockInventory, self).action_done()
 
     @api.multi
