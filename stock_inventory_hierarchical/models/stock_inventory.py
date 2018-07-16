@@ -12,7 +12,7 @@ from openerp.exceptions import ValidationError
 _logger = logging.getLogger(__name__)
 
 # What states are allowed for children depending on the parent's state
-CONSISTANT_STATES = {
+CONSISTENT_STATES = {
     'draft': ['draft'],
     # When confirming inventories, may contain draft children for a short time
     'confirm': ['draft', 'confirm', 'done'],
@@ -98,7 +98,7 @@ class HierarchicalInventory(models.Model):
                 inconsistent_children = self.search(
                     [('parent_left', '>=', rec.parent_left),
                      ('parent_right', '<=', rec.parent_right),
-                     ('state', 'not in', CONSISTANT_STATES[rec.state])])
+                     ('state', 'not in', CONSISTENT_STATES[rec.state])])
                 if inconsistent_children:
                     raise ValidationError(
                         (_("The state of the inventory %s (%s) is not "
@@ -114,7 +114,7 @@ class HierarchicalInventory(models.Model):
                      ('parent_right', '>', rec.parent_right)])
                 inconsistent_parents = []
                 for parent in parents:
-                    if rec.state not in CONSISTANT_STATES[parent.state]:
+                    if rec.state not in CONSISTENT_STATES[parent.state]:
                         inconsistent_parents.append(parent)
                 if inconsistent_parents:
                     raise ValidationError(
