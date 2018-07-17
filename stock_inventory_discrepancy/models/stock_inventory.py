@@ -20,10 +20,11 @@ class StockInventory(models.Model):
     @api.depends('line_ids.product_qty', 'line_ids.theoretical_qty')
     def _compute_over_discrepancy_line_count(self):
         for rec in self:
-            lines = rec.line_ids
-            rec.over_discrepancy_line_count = sum(
-                d.discrepancy_percent > d.discrepancy_threshold
-                for d in lines)
+            lines = rec.line_ids.filtered(
+                lambda line:
+                    line.discrepancy_percent > line.discrepancy_threshold
+            )
+            rec.over_discrepancy_line_count = len(lines)
 
     state = fields.Selection(
         selection=INVENTORY_STATE_SELECTION,
