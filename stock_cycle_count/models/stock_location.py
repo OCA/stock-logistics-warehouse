@@ -23,9 +23,12 @@ class StockLocation(models.Model):
     @api.multi
     def _compute_loc_accuracy(self):
         for rec in self:
-            history = self.env['stock.inventory'].search([
-                ('location_id', '=', rec.id), ('state', '=', 'done')])
-            history = history.sorted(key=lambda r: r.write_date, reverse=True)
+            history = self.env['stock.inventory'].search(
+                [('location_id', '=', rec.id),
+                 ('state', '=', 'done'),
+                 ],
+                order='write_date DESC'
+            )
             if history:
                 wh_id = rec.get_warehouse(rec)
                 wh = self.env['stock.warehouse'].browse(wh_id)
