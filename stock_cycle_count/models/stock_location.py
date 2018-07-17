@@ -20,19 +20,26 @@ except (ImportError, IOError) as err:
 class StockLocation(models.Model):
     _inherit = 'stock.location'
 
-    @api.one
+    @api.multi
     def _compute_loc_accuracy(self):
-        history = self.env['stock.inventory'].search([
-            ('location_id', '=', self.id), ('state', '=', 'done')])
-        history = history.sorted(key=lambda r: r.write_date, reverse=True)
-        if history:
-            wh_id = self.get_warehouse(self)
-            wh = self.env['stock.warehouse'].browse(wh_id)
-            if len(history) > wh.counts_for_accuracy_qty:
-                self.loc_accuracy = mean(history[:wh.counts_for_accuracy_qty].
-                                         mapped('inventory_accuracy'))
-            else:
-                self.loc_accuracy = mean(history.mapped('inventory_accuracy'))
+        for rec in self:
+            history = self.env['stock.inventory'].search(
+                [('location_id', '=', rec.id),
+                 ('state', '=', 'done'),
+                 ],
+                order='write_date DESC'
+            )
+            if history:
+                wh_id = rec.get_warehouse(rec)
+                wh = self.env['stock.warehouse'].browse(wh_id)
+                if len(history) > wh.counts_for_accuracy_qty:
+                    rec.loc_accuracy = mean(
+                        history[:wh.counts_for_accuracy_qty].
+                        mapped('inventory_accuracy'))
+                else:
+                    rec.loc_accuracy = mean(
+                        history.mapped('inventory_accuracy')
+                    )
 
     zero_confirmation_disabled = fields.Boolean(
         string='Disable Zero Confirmations',
@@ -56,26 +63,27 @@ class StockLocation(models.Model):
         domain = [('location_id', '=', self.id)]
         return domain
 
-    @api.one
+    @api.multi
     def check_zero_confirmation(self):
-        if not self.zero_confirmation_disabled:
-            wh_id = self.get_warehouse(self)
-            wh = self.env['stock.warehouse'].browse(wh_id)
-            rule_model = self.env['stock.cycle.count.rule']
-            zero_rule = rule_model.search([
-                ('rule_type', '=', 'zero'),
-                ('warehouse_ids', '=', wh.id)])
-            if zero_rule:
-                quants = self.env['stock.quant'].search(
-                    self._get_zero_confirmation_domain())
-                if not quants:
-                    self.create_zero_confirmation_cycle_count()
+        rule_model = self.env['stock.cycle.count.rule']
+        for rec in self:
+            if not rec.zero_confirmation_disabled:
+                wh_id = rec.get_warehouse(rec)
+                wh = self.env['stock.warehouse'].browse(wh_id)
+                zero_rule = rule_model.search([
+                    ('rule_type', '=', 'zero'),
+                    ('warehouse_ids', '=', wh.id)])
+                if zero_rule:
+                    quants = self.env['stock.quant'].search(
+                        rec._get_zero_confirmation_domain())
+                    if not quants:
+                        rec.create_zero_confirmation_cycle_count()
 
     def create_zero_confirmation_cycle_count(self):
         date = datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         wh_id = self.get_warehouse(self)
         date_horizon = self.env['stock.warehouse'].browse(
-            wh_id).get_horizon_date()[0].strftime(
+            wh_id).get_horizon_date().strftime(
             DEFAULT_SERVER_DATETIME_FORMAT)
         counts_planned = self.env['stock.cycle.count'].search([
             ('date_deadline', '<', date_horizon), ('state', '=', 'draft'),

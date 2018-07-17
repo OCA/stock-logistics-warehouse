@@ -150,12 +150,12 @@ class DemandEstimateWizard(models.TransientModel):
         comodel_name="product.product",
         string="Products")
 
-    @api.one
     @api.constrains('date_start', 'date_end')
     def _check_start_end_dates(self):
-        if self.date_start > self.date_end:
-            raise ValidationError(_(
-                'The start date cannot be later than the end date.'))
+        for rec in self:
+            if rec.date_start > rec.date_end:
+                raise ValidationError(_(
+                    'The start date cannot be later than the end date.'))
 
     @api.multi
     def _prepare_demand_estimate_sheet(self):

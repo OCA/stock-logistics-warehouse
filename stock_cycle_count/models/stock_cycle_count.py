@@ -12,9 +12,10 @@ class StockCycleCount(models.Model):
     _description = "Stock Cycle Counts"
     _inherit = 'mail.thread'
 
-    @api.one
+    @api.depends('stock_adjustment_ids')
     def _count_inventory_adj(self):
-        self.inventory_adj_count = len(self.stock_adjustment_ids)
+        for rec in self:
+            rec.inventory_adj_count = len(rec.stock_adjustment_ids)
 
     @api.model
     def create(self, vals):
@@ -57,9 +58,9 @@ class StockCycleCount(models.Model):
         comodel_name='res.company', string='Company', required=True,
         default=_company_get, readonly=True)
 
-    @api.one
+    @api.multi
     def do_cancel(self):
-        self.state = 'cancelled'
+        self.write({'state': 'cancelled'})
 
     @api.model
     def _prepare_inventory_adjustment(self):
@@ -70,15 +71,16 @@ class StockCycleCount(models.Model):
             'exclude_sublocation': True
         }
 
-    @api.one
+    @api.multi
     def action_create_inventory_adjustment(self):
-        if self.state != 'draft':
-            raise UserError(_(
-                "You can only confirm cycle counts in state 'Planned'."
-            ))
-        data = self._prepare_inventory_adjustment()
-        self.env['stock.inventory'].create(data)
-        self.state = 'open'
+        for rec in self:
+            if rec.state != 'draft':
+                raise UserError(_(
+                    "You can only confirm cycle counts in state 'Planned'."
+                ))
+            data = rec._prepare_inventory_adjustment()
+            rec.env['stock.inventory'].create(data)
+            rec.state = 'open'
         return True
 
     @api.multi

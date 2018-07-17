@@ -16,13 +16,15 @@ class SlotVerificationRequest(models.Model):
             'stock.slot.verification.request') or ''
         return super(SlotVerificationRequest, self).create(vals)
 
-    @api.one
+    @api.depends('involved_move_ids')
     def _count_involved_moves(self):
-        self.involved_move_count = len(self.involved_move_ids)
+        for rec in self:
+            rec.involved_move_count = len(rec.involved_move_ids)
 
-    @api.one
+    @api.depends('involved_inv_line_ids')
     def _count_involved_inv_lines(self):
-        self.involved_inv_line_count = len(self.involved_inv_line_ids)
+        for rec in self:
+            rec.involved_inv_line_count = len(rec.involved_inv_line_ids)
 
     name = fields.Char(string='Name', readonly=True)
     inventory_id = fields.Many2one(comodel_name='stock.inventory',
@@ -60,20 +62,17 @@ class SlotVerificationRequest(models.Model):
         string='Involved Inventory Lines')
     involved_inv_line_count = fields.Integer(compute=_count_involved_inv_lines)
 
-    @api.model
     def _get_involved_moves_domain(self):
         domain = [('product_id', '=', self.product_id.id), '|',
                   ('location_id', '=', self.location_id.id),
                   ('location_dest_id', '=', self.location_id.id)]
         return domain
 
-    @api.model
     def _get_involved_lines_domain(self):
         domain = [('product_id', '=', self.product_id.id),
                   ('location_id', '=', self.location_id.id)]
         return domain
 
-    @api.model
     def _get_involved_lines_and_locations(self):
         involved_moves = self.env['stock.move'].search(
             self._get_involved_moves_domain())
@@ -81,23 +80,24 @@ class SlotVerificationRequest(models.Model):
             self._get_involved_lines_domain())
         return involved_moves, involved_lines
 
-    @api.one
+    @api.multi
     def action_confirm(self):
-        self.state = 'open'
-        involved_moves, involved_lines = \
-            self._get_involved_lines_and_locations()
-        self.involved_move_ids = involved_moves
-        self.involved_inv_line_ids = involved_lines
+        for rec in self:
+            rec.state = 'open'
+            involved_moves, involved_lines = \
+                rec._get_involved_lines_and_locations()
+            rec.involved_move_ids = involved_moves
+            rec.involved_inv_line_ids = involved_lines
         return True
 
-    @api.one
+    @api.multi
     def action_cancel(self):
-        self.state = 'cancelled'
+        self.write({'state': 'cancelled'})
         return True
 
-    @api.one
+    @api.multi
     def action_solved(self):
-        self.state = 'done'
+        self.write({'state': 'done'})
         return True
 
     @api.multi
