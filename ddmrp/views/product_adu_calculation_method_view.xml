@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view"
+                id="view_product_adu_calculation_method_tree">
+            <field name="name">product.adu.calculation.method.tree</field>
+            <field name="model">product.adu.calculation.method</field>
+            <field name="arch" type="xml">
+                <tree string="ADU Calculation Method">
+                    <field name="name"/>
+                </tree>
+          </field>
+        </record>
+        <record model="ir.ui.view"
+                id="view_product_adu_calculation_method_form">
+            <field name="name">product.adu.calculation.method.form</field>
+            <field name="model">product.adu.calculation.method</field>
+            <field name="arch" type="xml">
+                <form string="ADU Calculation Method">
+                    <group name="name">
+                        <field name="name"/>
+                    </group>
+                    <group name="method">
+                        <field name="method"/>
+                        <field name="use_estimates"/>
+                        <label for="horizon"/>
+                        <div name="horizon">
+                            <field name="horizon" class="oe_inline"/> days
+                        </div>
+                    </group>
+                    <group name="company">
+                        <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                    </group>
+                </form>
+          </field>
+        </record>
+
+        <record id="view_product_adu_calculation_method_search"
+                model="ir.ui.view">
+            <field name="name">product.adu.calculation.method.search</field>
+            <field name="model">product.adu.calculation.method</field>
+            <field name="arch" type="xml">
+                <search string="Search ADU Calculatiion methods">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window"
+                id="product_adu_calculation_method_form_action">
+            <field name="name">ADU calculation methods</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.adu.calculation.method</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" 
+                   ref="view_product_adu_calculation_method_search"/>
+        </record>
+
+        <menuitem
+            id="menu_product_adu_calculation_method"
+            parent="stock.menu_stock_config_settings"
+            action="product_adu_calculation_method_form_action"/>
+
+    </data>
+</openerp>

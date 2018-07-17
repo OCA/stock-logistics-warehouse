@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view"
+                id="view_stock_buffer_profile_lead_time_form">
+            <field name="name">stock.buffer.profile.lead.time.form</field>
+            <field name="model">stock.buffer.profile.lead.time</field>
+            <field name="arch" type="xml">
+                <form string="Buffer Profile Lead Time Factor">
+                    <sheet>
+                        <field name="name" class="oe_inline"/>
+                        <group>
+                            <group name="factor">
+                                <field name="factor"/>
+                            </group>
+                            <group name="company" groups="base.group_multi_company">
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view"
+                id="view_stock_buffer_profile_lead_time_tree">
+            <field name="name">stock.buffer.profile.lead.time.tree</field>
+            <field name="model">stock.buffer.profile.lead.time</field>
+            <field name="arch" type="xml">
+                <tree string="Buffer Profile Lead Time Factor">
+                    <field name="name"/>
+                    <field name="factor"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+          </field>
+        </record>
+
+        <record id="view_stock_buffer_profile_lead_time_search"
+                model="ir.ui.view">
+            <field name="name">stock.buffer.profile.lead.time.search</field>
+            <field name="model">stock.buffer.profile.lead.time</field>
+            <field name="arch" type="xml">
+                <search string="Search Buffer Profile Lead Time">
+                    <field name="name"/>
+                    <field name="factor"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window"
+                id="stock_buffer_profile_lead_time_form_action">
+            <field name="name">Buffer Profile Lead Time Factor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.buffer.profile.lead.time</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_stock_buffer_profile_lead_time_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to start a new buffer profile lead time factor
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_stock_buffer_profile_lead_time"
+            parent="stock.menu_stock_config_settings"
+            action="stock_buffer_profile_lead_time_form_action"/>
+
+    </data>
+</openerp>
