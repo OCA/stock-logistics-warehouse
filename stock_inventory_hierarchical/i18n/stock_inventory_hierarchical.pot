@@ -174,16 +174,16 @@ msgid "Sub-inventories"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
-#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:120
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:104
 #, python-format
-msgid "The state of the inventory %s (%s) is not consistent with the state of the following parent inventories:\n"
+msgid "The state of the inventory %s (%s) is not  consistent with the state of the following sub-inventories:\n"
 ""
 msgstr ""
 
 #. module: stock_inventory_hierarchical
-#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:104
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:121
 #, python-format
-msgid "The state of the inventory %s (%s) is not consistent with the state of the following sub-inventories:\n"
+msgid "The state of the inventory %s (%s) is not consistent with the state of the following parent inventories:\n"
 ""
 msgstr ""
 
@@ -199,6 +199,13 @@ msgstr ""
 msgid "This action will start all children inventories.\n"
 "                    Click 'OK' to start inventories.\n"
 "                    Click 'Cancel' to abort."
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:137
+#, python-format
+msgid "This location is not declared on the parent inventory\n"
+"It cannot be added."
 msgstr ""
 
 #. module: stock_inventory_hierarchical
