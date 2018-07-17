@@ -19,7 +19,8 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, exceptions
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning as UserError
 
 
 class SaleStockReserve(models.TransientModel):
@@ -53,9 +54,9 @@ class SaleStockReserve(models.TransientModel):
         if len(owners) == 1:
             return owners.pop()
         elif len(owners) > 1:
-            raise exceptions.Warning(
-                'The lines have different owners. Please reserve them '
-                'individually with the reserve button on each one.')
+            raise UserError(
+                _('The lines have different owners. Please reserve them '
+                  'individually with the reserve button on each one.'))
 
         return self.env['res.partner']
 

@@ -26,13 +26,15 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     reservation_count = fields.Float(
-        compute='_reservation_count',
+        compute='_compute_reservation_count',
         string='# Sales')
 
-    @api.one
-    def _reservation_count(self):
-        self.reservation_count = sum(variant.reservation_count
-                                     for variant in self.product_variant_ids)
+    @api.depends('product_variant_ids.reservation_count')
+    def _compute_reservation_count(self):
+        for rec in self:
+            rec.reservation_count = sum(
+                variant.reservation_count
+                for variant in rec.product_variant_ids)
 
     @api.multi
     def action_view_reservations(self):
@@ -52,16 +54,17 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     reservation_count = fields.Float(
-        compute='_reservation_count',
+        compute='_compute_reservation_count',
         string='# Sales')
 
-    @api.one
-    def _reservation_count(self):
-        domain = [('product_id', '=', self.id),
-                  ('state', 'in', ['draft', 'assigned'])]
-        reservations = self.env['stock.reservation'].search(domain)
-        self.reservation_count = sum(reserv.product_qty
-                                     for reserv in reservations)
+    @api.multi
+    def _compute_reservation_count(self):
+        for rec in self:
+            domain = [('product_id', '=', rec.id),
+                      ('state', 'in', ['draft', 'assigned'])]
+            reservations = self.env['stock.reservation'].search(domain)
+            rec.reservation_count = sum(reserv.product_qty
+                                        for reserv in reservations)
 
     @api.multi
     def action_view_reservations(self):

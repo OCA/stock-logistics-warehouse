@@ -54,5 +54,5 @@
         <record id="stock.action_inventory_form" model="ir.actions.act_window">
             <field name="context">{'search_default_exhaustive': 1}</field>
         </record>
-	</data>
+    </data>
 </openerp>

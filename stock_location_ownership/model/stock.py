@@ -22,7 +22,7 @@
 from openerp.osv import orm, fields
 
 
-class stock_location(orm.Model):
+class StockLocation(orm.Model):
     _inherit = 'stock.location'
 
     _columns = {

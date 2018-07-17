@@ -27,11 +27,23 @@ from openerp.tools.translate import _
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    @api.multi
+    has_stock_reservation = fields.Boolean(
+        compute='_compute_stock_reservation',
+        readonly=True,
+        multi='stock_reservation',
+        store=True,
+        string='Has Stock Reservations')
+    is_stock_reservable = fields.Boolean(
+        compute='_compute_stock_reservation',
+        readonly=True,
+        multi='stock_reservation',
+        store=True,
+        string='Can Have Stock Reservations')
+
     @api.depends('state',
                  'order_line.reservation_ids',
                  'order_line.is_stock_reservable')
-    def _stock_reservation(self):
+    def _compute_stock_reservation(self):
         for sale in self:
             has_stock_reservation = False
             is_stock_reservable = False
@@ -44,19 +56,6 @@ class SaleOrder(models.Model):
                 is_stock_reservable = False
             sale.is_stock_reservable = is_stock_reservable
             sale.has_stock_reservation = has_stock_reservation
-
-    has_stock_reservation = fields.Boolean(
-        compute='_stock_reservation',
-        readonly=True,
-        multi='stock_reservation',
-        store=True,
-        string='Has Stock Reservations')
-    is_stock_reservable = fields.Boolean(
-        compute='_stock_reservation',
-        readonly=True,
-        multi='stock_reservation',
-        store=True,
-        string='Can Have Stock Reservations')
 
     @api.multi
     def release_all_stock_reservation(self):
@@ -125,11 +124,20 @@ class SaleOrderLine(models.Model):
             return rule.procure_method
         return False
 
-    @api.multi
+    reservation_ids = fields.One2many(
+        'stock.reservation',
+        'sale_line_id',
+        string='Stock Reservation',
+        copy=False)
+    is_stock_reservable = fields.Boolean(
+        compute='_compute_is_stock_reservable',
+        readonly=True,
+        string='Can be reserved')
+
     @api.depends('state',
                  'product_id.route_ids',
                  'product_id.type')
-    def _is_stock_reservable(self):
+    def _compute_is_stock_reservable(self):
         for line in self:
             reservable = False
             if (not (line.state != 'draft' or
@@ -139,16 +147,6 @@ class SaleOrderLine(models.Model):
                     not line.reservation_ids):
                 reservable = True
             line.is_stock_reservable = reservable
-
-    reservation_ids = fields.One2many(
-        'stock.reservation',
-        'sale_line_id',
-        string='Stock Reservation',
-        copy=False)
-    is_stock_reservable = fields.Boolean(
-        compute='_is_stock_reservable',
-        readonly=True,
-        string='Can be reserved')
 
     @api.multi
     def release_stock_reservation(self):

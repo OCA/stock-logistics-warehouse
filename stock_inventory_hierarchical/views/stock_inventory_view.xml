@@ -7,6 +7,7 @@
             <field name="model">stock.inventory</field>
             <field name="inherit_id" ref="stock.view_inventory_tree" />
             <field name="field_parent">inventory_ids</field>
+            <field name="priority" eval="100"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='name']" position="replace">
                     <field name="complete_name" string="Reference"/>

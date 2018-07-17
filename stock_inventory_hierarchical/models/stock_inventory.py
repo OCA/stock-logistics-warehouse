@@ -12,7 +12,7 @@ from openerp.exceptions import ValidationError
 _logger = logging.getLogger(__name__)
 
 # What states are allowed for children depending on the parent's state
-CONSISTANT_STATES = {
+CONSISTENT_STATES = {
     'draft': ['draft'],
     # When confirming inventories, may contain draft children for a short time
     'confirm': ['draft', 'confirm', 'done'],
@@ -83,58 +83,60 @@ class HierarchicalInventory(models.Model):
                                    ('state', '=', 'done')], count=True)
             inventory.progress_rate = 100 * nb_done / nb
 
-    @api.one
     @api.constrains('inventory_ids', 'parent_id')
     def _check_inventory_recursion(self):
-        if not self._check_recursion():
-            raise ValidationError(
-                _('Error: You can not create recursive inventories.'))
+        for rec in self:
+            if not rec._check_recursion():
+                raise ValidationError(
+                    _('Error: You can not create recursive inventories.'))
 
-    @api.one
     @api.constrains('state', 'inventory_ids', 'parent_id')
     def _check_state_consitency(self):
         # Check we're consistent with our children
-        if self.inventory_ids:
-            inconsistent_children = self.search(
-                [('parent_left', '>=', self.parent_left),
-                 ('parent_right', '<=', self.parent_right),
-                 ('state', 'not in', CONSISTANT_STATES[self.state])])
-            if inconsistent_children:
-                raise ValidationError(
-                    (_("The state of the inventory %s (%s) is not consistent "
-                       "with the state of the following sub-inventories:\n"
-                       ) % ((self.name, self.state)) +
-                     "\n".join(['- %s (%s)' % (i.name, i.state)
-                                for i in inconsistent_children])))
-        # Check we're consistent with our parents
-        if self.parent_id:
-            parents = self.search(
-                [('parent_left', '<', self.parent_left),
-                 ('parent_right', '>', self.parent_right)])
-            inconsistent_parents = []
-            for parent in parents:
-                if self.state not in CONSISTANT_STATES[parent.state]:
-                    inconsistent_parents.append(parent)
-            if inconsistent_parents:
-                raise ValidationError(
-                    (_("The state of the inventory %s (%s) is not consistent "
-                       "with the state of the following parent inventories:\n"
-                       ) % ((self.name, self.state)) +
-                     "\n".join(['- %s (%s)' % (i.name, i.state)
-                                for i in inconsistent_parents])))
+        for rec in self:
+            if rec.inventory_ids:
+                inconsistent_children = self.search(
+                    [('parent_left', '>=', rec.parent_left),
+                     ('parent_right', '<=', rec.parent_right),
+                     ('state', 'not in', CONSISTENT_STATES[rec.state])])
+                if inconsistent_children:
+                    raise ValidationError(
+                        (_("The state of the inventory %s (%s) is not "
+                           " consistent with the state of the following "
+                           "sub-inventories:\n"
+                           ) % ((rec.name, rec.state)) +
+                         "\n".join(['- %s (%s)' % (i.name, i.state)
+                                    for i in inconsistent_children])))
+            # Check we're consistent with our parents
+            if rec.parent_id:
+                parents = self.search(
+                    [('parent_left', '<', rec.parent_left),
+                     ('parent_right', '>', rec.parent_right)])
+                inconsistent_parents = []
+                for parent in parents:
+                    if rec.state not in CONSISTENT_STATES[parent.state]:
+                        inconsistent_parents.append(parent)
+                if inconsistent_parents:
+                    raise ValidationError(
+                        (_("The state of the inventory %s (%s) is not "
+                           "consistent with the state of the following "
+                           "parent inventories:\n"
+                           ) % ((rec.name, rec.state)) +
+                         "\n".join(['- %s (%s)' % (i.name, i.state)
+                                    for i in inconsistent_parents])))
 
-    @api.one
     @api.constrains('location_id', 'parent_id')
     def _check_location_id(self):
         """Check if location is a child of parent inventory location"""
-        if self.parent_id:
-            loc = self.location_id
-            parent_loc = self.parent_id.location_id
-            if (loc.parent_left < parent_loc.parent_left or
-                    loc.parent_right > parent_loc.parent_right):
-                raise ValidationError("This location is not declared on "
-                                      "the parent inventory\n"
-                                      "It cannot be added.")
+        for rec in self:
+            if rec.parent_id:
+                loc = rec.location_id
+                parent_loc = rec.parent_id.location_id
+                if (loc.parent_left < parent_loc.parent_left or
+                        loc.parent_right > parent_loc.parent_right):
+                    raise ValidationError(_("This location is not declared on "
+                                            "the parent inventory\n"
+                                            "It cannot be added."))
 
     @api.multi
     def action_cancel_inventory(self):
