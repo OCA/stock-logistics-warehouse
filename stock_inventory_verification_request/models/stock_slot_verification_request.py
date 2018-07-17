@@ -62,20 +62,17 @@ class SlotVerificationRequest(models.Model):
         string='Involved Inventory Lines')
     involved_inv_line_count = fields.Integer(compute=_count_involved_inv_lines)
 
-    @api.model
     def _get_involved_moves_domain(self):
         domain = [('product_id', '=', self.product_id.id), '|',
                   ('location_id', '=', self.location_id.id),
                   ('location_dest_id', '=', self.location_id.id)]
         return domain
 
-    @api.model
     def _get_involved_lines_domain(self):
         domain = [('product_id', '=', self.product_id.id),
                   ('location_id', '=', self.location_id.id)]
         return domain
 
-    @api.model
     def _get_involved_lines_and_locations(self):
         involved_moves = self.env['stock.move'].search(
             self._get_involved_moves_domain())
