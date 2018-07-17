@@ -66,7 +66,7 @@ msgid "Number of Discrepancies Over Threshold"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:55
+#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:56
 #, python-format
 msgid "The Qty Update is over the Discrepancy Threshold.\n"
 " Please, contact a user with rights to perform this action."
