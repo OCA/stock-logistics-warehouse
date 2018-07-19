@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_location_form" model="ir.ui.view">
+    <field name="name">stock.location.form</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//group[@name='localization']" position="after">
+        <group string="Internal valuation" name="internal_valuation"
+               attrs="{'invisible': [('usage', '!=', 'internal')]}">
+          <field name="force_accounting_entries"/>
+          <field name="valuation_internal_account_id"
+                 attrs="{
+                     'invisible': [('force_accounting_entries', '=', False)],
+                     'required': [('force_accounting_entries', '=', True)],
+                 }"/>
+        </group>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>
