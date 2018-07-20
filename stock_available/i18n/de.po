@@ -16,8 +16,9 @@ msgstr ""
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. module: stock_available
 #: field:product.product,immediately_usable_qty:0
@@ -37,10 +38,10 @@ msgid ""
 "If empty, Quantity On Hand is used.\n"
 "Only the quantity fields have meaning for computing stock"
 msgstr ""
-"Wählen Sie das Feld des Produkts, welches zur Potentialermittlung dienen "
-"soll.\n"
-"Wenn leer, wird die verfügbare Mange genommen.\n"
-"Nur die Mengenfelder sind bei der Bestandsermittlung von Bedeutung."
+"Wählen Sie das Feld aus dem Produkt welches als Basis für die "
+"Verfügbarkeitsberechnung verwendet werden soll.\n"
+"Standardmäßig wird das Feld \"tatsächlicher Bestand\" verwendet. Nur "
+"Mengenfelder können für die Bestandsberechnung verwendet werden. "
 
 #. module: stock_available
 #: field:stock.config.settings,module_stock_available_lot_locked:0
@@ -84,9 +85,8 @@ msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs"
 msgstr ""
-"Bestand dieses Produkts, der sicher in Kundenverkäufen eingesetzt werden "
-"kann.\n"
-"Die Definition dieses Wertes kann Ihren Bedürfnissen gemäß angepasst werden."
+"Menge dieses Produktes, die für den Verkauf sicher zur Verfügung steht.\n"
+"Die Berechnungsgrundlage ist konfigurierbar."
 
 #. module: stock_available
 #: help:stock.config.settings,module_stock_available_mrp:0
@@ -145,7 +145,7 @@ msgstr ""
 #. module: stock_available
 #: field:stock.config.settings,stock_available_mrp_based_on:0
 msgid "based on"
-msgstr "basiert auf"
+msgstr "basierend auf"
 
 #. module: stock_available
 #: view:product.product:stock_available.view_stock_available_tree_variant
