@@ -7,14 +7,12 @@
     <field name="inherit_id" ref="stock.view_location_form"/>
     <field name="arch" type="xml">
       <xpath expr="//group[@name='localization']" position="after">
-        <group string="Internal valuation" name="internal_valuation"
-               attrs="{'invisible': [('usage', '!=', 'internal')]}">
+        <group name="internal_valuation" string="Accounting Information (internal)">
           <field name="force_accounting_entries"/>
-          <field name="valuation_internal_account_id"
-                 attrs="{
-                     'invisible': [('force_accounting_entries', '=', False)],
-                     'required': [('force_accounting_entries', '=', True)],
-                 }"/>
+          <field name="valuation_in_internal_account_id"
+                 attrs="{'invisible': [('force_accounting_entries', '=', False)]}"/>
+          <field name="valuation_out_internal_account_id"
+                 attrs="{'invisible': [('force_accounting_entries', '=', False)]}"/>
         </group>
       </xpath>
     </field>
