@@ -59,7 +59,7 @@ class StockMoveConfirmationCase(common.SavepointCase):
         move._action_done()
 
     @mute_logger('odoo.sql_db')
-    def test_10_safety(self):
+    def test_10_constraint(self):
         """Test that it's impossible to force entries w/o an account."""
         with self.assertRaises(IntegrityError):
             self.location_from.write({
