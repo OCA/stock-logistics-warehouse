@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-23 15:55+0000\n"
-"PO-Revision-Date: 2015-04-23 15:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,7 +21,12 @@ msgid "A stock reservation will be created for the products\n"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:179
+#: field:stock.reservation,account_move_line_ids:0
+msgid "Account move line ids"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:186
 #, python-format
 msgid "As you changed the quantity of the line, the quantity of the stock reservation will be automatically adjusted to %.2f."
 msgstr ""
@@ -34,14 +37,24 @@ msgid "Can Have Stock Reservations"
 msgstr ""
 
 #. module: stock_reserve_sale
+#: field:sale.order.line,is_stock_reservable:0
+msgid "Can be reserved"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Cancel"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:188
+#: code:addons/stock_reserve_sale/model/sale.py:196
 #, python-format
 msgid "Configuration Error!"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,consumed_for:0
+msgid "Consumed for"
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -55,8 +68,13 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:210
-#: code:addons/stock_reserve_sale/model/sale.py:222
+#: field:sale.stock.reserve,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:218
+#: code:addons/stock_reserve_sale/model/sale.py:230
 #, python-format
 msgid "Error"
 msgstr ""
@@ -74,6 +92,11 @@ msgstr ""
 #. module: stock_reserve_sale
 #: help:sale.stock.reserve,date_validity:0
 msgid "If a date is given, the reservations will be released at the end of the validity."
+msgstr ""
+
+#. module: stock_reserve_sale
+#: field:sale.stock.reserve,__last_update:0
+msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -103,6 +126,16 @@ msgid "Pre-book products from stock"
 msgstr ""
 
 #. module: stock_reserve_sale
+#: field:stock.reservation,production_id:0
+msgid "Production Order for Produced Products"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: field:stock.reservation,raw_material_production_id:0
+msgid "Production Order for Raw Materials"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "Release Reservation"
 msgstr ""
@@ -129,6 +162,11 @@ msgid "Reserve Stock for Quotation Lines"
 msgstr ""
 
 #. module: stock_reserve_sale
+#: field:stock.reservation,sale_id:0
+msgid "Sale Order"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: field:stock.reservation,sale_line_id:0
 msgid "Sale Order Line"
 msgstr ""
@@ -149,7 +187,7 @@ msgid "Sales Order Line"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:223
+#: code:addons/stock_reserve_sale/model/sale.py:231
 #, python-format
 msgid "Several stock reservations are linked with the line. Impossible to adjust their quantity. Please release the reservation before changing the quantity."
 msgstr ""
@@ -160,9 +198,25 @@ msgid "Source Location"
 msgstr ""
 
 #. module: stock_reserve_sale
+#: field:sale.stock.reserve,owner_id:0
+msgid "Stock Owner"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: model:ir.model,name:stock_reserve_sale.model_stock_reservation
 #: field:sale.order.line,reservation_ids:0
 msgid "Stock Reservation"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: help:stock.reservation,consumed_for:0
+msgid "Technical field used to make the traceability of produced products"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/wizard/sale_stock_reserve.py:58
+#, python-format
+msgid "The lines have different owners. Please reserve them individually with the reserve button on each one."
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -171,7 +225,7 @@ msgid "Validity Date"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:211
+#: code:addons/stock_reserve_sale/model/sale.py:219
 #, python-format
 msgid "You cannot change the product or unit of measure of lines with a stock reservation. Release the reservation before changing the product."
 msgstr ""
@@ -179,6 +233,11 @@ msgstr ""
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "cancel all"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
+msgid "or"
 msgstr ""
 
 #. module: stock_reserve_sale

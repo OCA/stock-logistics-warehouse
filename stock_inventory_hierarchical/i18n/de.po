@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_inventory_hierarchical
-# 
+#
 # Translators:
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-03-29 09:21+0000\n"
 "PO-Revision-Date: 2017-04-19 11:44+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-"
+"warehouse-8-0/language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_inventory_hierarchical
@@ -133,7 +134,8 @@ msgstr "Hauptinventuren"
 msgid ""
 "Maximum number of intermediate sub-inventories between the main inventory "
 "and the smallest sub-inventory."
-msgstr "Maximale Anzahl an Ebenen zwischen Hauptinventur und unterster Teilinventur."
+msgstr ""
+"Maximale Anzahl an Ebenen zwischen Hauptinventur und unterster Teilinventur."
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.view_inventory_subinventories_filter
@@ -186,7 +188,9 @@ msgstr "Teilinventuren"
 msgid ""
 "The state of the inventory %s (%s) is not consistent with the state of the "
 "following parent inventories:\n"
-msgstr "Der Status der Inventur %s (%s) passt nicht zu den folgenden übergeordneten Inventuren:\n"
+msgstr ""
+"Der Status der Inventur %s (%s) passt nicht zu den folgenden übergeordneten "
+"Inventuren:\n"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:104
@@ -194,7 +198,9 @@ msgstr "Der Status der Inventur %s (%s) passt nicht zu den folgenden übergeordn
 msgid ""
 "The state of the inventory %s (%s) is not consistent with the state of the "
 "following sub-inventories:\n"
-msgstr "Der Status der Inventur %s (%s) passt nicht zu den folgenden Teil-Inventuren:\n"
+msgstr ""
+"Der Status der Inventur %s (%s) passt nicht zu den folgenden Teil-"
+"Inventuren:\n"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
@@ -202,7 +208,10 @@ msgid ""
 "This action will cancel all children inventories.\n"
 "                    Click 'OK' to cancel inventories.\n"
 "                    Click 'Cancel' to abort."
-msgstr "Diese Maßnahme storniert alle untergeordneten Inventuren:\nKlicken Sie 'OK' zum Stornieren aller Inventuren.\nKlicken Sie 'Abbruch' zum Abbrechen."
+msgstr ""
+"Diese Maßnahme storniert alle untergeordneten Inventuren:\n"
+"Klicken Sie 'OK' zum Stornieren aller Inventuren.\n"
+"Klicken Sie 'Abbruch' zum Abbrechen."
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
@@ -210,7 +219,10 @@ msgid ""
 "This action will start all children inventories.\n"
 "                    Click 'OK' to start inventories.\n"
 "                    Click 'Cancel' to abort."
-msgstr "Diese Maßnahme startet alle untergeordneten Inventuren:\nKlicken Sie 'OK' zum Starten aller Inventuren.\nKlicken Sie 'Abbruch' zum Abbrechen."
+msgstr ""
+"Diese Maßnahme startet alle untergeordneten Inventuren:\n"
+"Klicken Sie 'OK' zum Starten aller Inventuren.\n"
+"Klicken Sie 'Abbruch' zum Abbrechen."
 
 #. module: stock_inventory_hierarchical
 #: model:ir.actions.act_window,name:stock_inventory_hierarchical.action_view_sub_inventory

@@ -1,0 +1,81 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_location_area_management
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
+"PO-Revision-Date: 2015-09-15 13:04+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-stock-"
+"logistics-warehouse-8-0/language/nl_NL/)\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_location_area_management
+#: field:stock.location,active_dimension:0
+msgid "Area Dimension"
+msgstr ""
+
+#. module: stock_location_area_management
+#: model:ir.model,name:stock_location_area_management.model_res_company
+msgid "Companies"
+msgstr "Bedrijven"
+
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
+#: field:stock.location,area_dimension:0
+msgid "Dimension"
+msgstr ""
+
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
+msgid "Group By"
+msgstr "Groeperen op"
+
+#. module: stock_location_area_management
+#: model:ir.model,name:stock_location_area_management.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_area_management
+#: view:res.company:stock_location_area_management.stock_location_area_management_res_company_form_view
+msgid "Locations"
+msgstr ""
+
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
+msgid "Owner"
+msgstr ""
+
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_search
+msgid "Partner"
+msgstr ""
+
+#. module: stock_location_area_management
+#: view:stock.location:stock_location_area_management.stock_location_area_management_stock_location_form_view
+msgid "Surface"
+msgstr ""
+
+#. module: stock_location_area_management
+#: help:stock.location,location_uom:0
+msgid "This field corresponds to the unit of measure of the location"
+msgstr ""
+
+#. module: stock_location_area_management
+#: help:res.company,locations_uom:0
+msgid ""
+"This field corresponds to the unit of measure of the warehouse locations"
+msgstr ""
+
+#. module: stock_location_area_management
+#: field:res.company,locations_uom:0 field:stock.location,location_uom:0
+msgid "Unit of Measure"
+msgstr ""

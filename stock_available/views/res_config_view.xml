@@ -20,6 +20,10 @@
                                     <label for="module_stock_available_sale" />
                                 </div>
                                 <div>
+                                    <field name="module_stock_available_lot_locked" class="oe_inline" />
+                                    <label for="module_stock_available_lot_locked" />
+                                </div>
+                                <div>
                                     <field name="module_stock_available_mrp" class="oe_inline" />
                                     <label for="module_stock_available_mrp" />
                                     <label for="stock_available_mrp_based_on" />

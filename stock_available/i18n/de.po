@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 13:27+0000\n"
-"PO-Revision-Date: 2016-08-15 15:30+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2017-03-29 09:21+0000\n"
+"PO-Revision-Date: 2017-04-10 12:43+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-stock-logistics-"
 "warehouse-8-0/language/de/)\n"
 "Language: de\n"
@@ -42,6 +42,11 @@ msgstr ""
 "Verfügbarkeitsberechnung verwendet werden soll.\n"
 "Standardmäßig wird das Feld \"tatsächlicher Bestand\" verwendet. Nur "
 "Mengenfelder können für die Bestandsberechnung verwendet werden. "
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_lot_locked:0
+msgid "Exclude blocked lots/serial numbers"
+msgstr ""
 
 #. module: stock_available
 #: field:stock.config.settings,module_stock_available_sale:0
@@ -108,6 +113,21 @@ msgstr ""
 "Das Modul stock_available_immediately wird installiert."
 
 #. module: stock_available
+#: help:stock.config.settings,module_stock_available_lot_locked:0
+#, fuzzy
+msgid ""
+"This will subtract quantities from the blocked lots/serial numbers from the "
+"quantities available to promise.\n"
+"This installs the modules stock_available_lot_locked.\n"
+"If the module stock_lock_lot is not installed, this will installit too"
+msgstr ""
+"Verfügbare Bestände aus Angeboten werden nicht als freier Bestand "
+"berücksichtigt.\n"
+"Das Modul stock_available_sale wird installiert.\n"
+"Sollten die Module sale und sale_delivery_date fehlen, werden auch diese "
+"installiert."
+
+#. module: stock_available
 #: help:stock.config.settings,module_stock_available_sale:0
 msgid ""
 "This will subtract quantities from the sale quotations from the quantities "
@@ -126,14 +146,6 @@ msgstr ""
 #: field:stock.config.settings,stock_available_mrp_based_on:0
 msgid "based on"
 msgstr "basierend auf"
-<<<<<<< HEAD
-
-#. module: stock_available
-#: field:stock.config.settings,stock_available_mrp_based_on:0
-msgid "based on"
-msgstr "basiert auf"
-=======
->>>>>>> 22f2592000c8368ffcca54685d13d88e6f7c8941
 
 #. module: stock_available
 #: view:product.product:stock_available.view_stock_available_tree_variant
@@ -142,4 +154,7 @@ msgid ""
 "red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in "
 "('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not "
 "in ('draft', 'end', 'obsolete')"
-msgstr "red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in ('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not in ('draft', 'end', 'obsolete')"
+msgstr ""
+"red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in "
+"('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not "
+"in ('draft', 'end', 'obsolete')"

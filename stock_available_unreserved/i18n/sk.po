@@ -1,0 +1,76 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_available_unreserved
+#
+# Translators:
+# Jan Prokop <jprokop@creativehome.sk>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
+"PO-Revision-Date: 2017-10-20 00:49+0000\n"
+"Last-Translator: Jan Prokop <jprokop@creativehome.sk>, 2017\n"
+"Language-Team: Slovak (https://www.transifex.com/oca/teams/23907/sk/)\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. module: stock_available_unreserved
+#: code:addons/stock_available_unreserved/models/product.py:137
+#, python-format
+msgid " On Hand"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: field:product.product,qty_available_stock_text:0
+msgid "Available per stock"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: view:stock.quant:stock_available_unreserved.quant_search_view
+msgid "Internal Unreserved"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: model:ir.model,name:stock_available_unreserved.model_product_product
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_available_unreserved
+#: model:ir.model,name:stock_available_unreserved.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: field:product.product,qty_available_not_res:0
+msgid "Qty Available Not Reserved"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: field:product.template,qty_available_not_res:0
+msgid "Quantity On Hand Unreserved"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: model:ir.actions.act_window,name:stock_available_unreserved.product_open_quants_unreserved
+msgid "Stock On Hand (Unreserved)"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: view:product.product:stock_available_unreserved.product_form_view_procurement_button
+#: view:product.template:stock_available_unreserved.product_template_form_view_procurement_button
+msgid "Unreserved"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: field:product.template,qty_available_stock_text:0
+msgid "Unreserved stock quantity"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: view:product.template:stock_available_unreserved.product_template_kanban_stock_view
+msgid "Unreserved:"
+msgstr ""

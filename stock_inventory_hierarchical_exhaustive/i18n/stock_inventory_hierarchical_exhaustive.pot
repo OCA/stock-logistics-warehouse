@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_hierarchical_exhaustive
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_hierarchical_exhaustive
+#: field:stock.generate.inventory,exhaustive:0
+msgid "Exhaustive"
+msgstr ""
+
+#. module: stock_inventory_hierarchical_exhaustive
+#: model:ir.model,name:stock_inventory_hierarchical_exhaustive.model_stock_generate_inventory
+msgid "Generate Inventory"
+msgstr ""
+
+#. module: stock_inventory_hierarchical_exhaustive
+#: model:ir.model,name:stock_inventory_hierarchical_exhaustive.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_hierarchical_exhaustive
+#: code:addons/stock_inventory_hierarchical_exhaustive/models/stock_inventory.py:86
+#, python-format
+msgid "Some sub-inventories are not done."
+msgstr ""
+
+#. module: stock_inventory_hierarchical_exhaustive
+#: view:stock.inventory:stock_inventory_hierarchical_exhaustive.stock_inventory_hierarchical_location_form_view
+msgid "{'readonly': [('parent_id', '!=', False)]}"
+msgstr ""
+

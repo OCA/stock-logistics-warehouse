@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_line_price
+#
+# Translators:
+# Jan Prokop <jprokop@creativehome.sk>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
+"PO-Revision-Date: 2017-10-20 00:49+0000\n"
+"Last-Translator: Jan Prokop <jprokop@creativehome.sk>, 2017\n"
+"Language-Team: Slovak (https://www.transifex.com/oca/teams/23907/sk/)\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. module: stock_inventory_line_price
+#: field:stock.inventory.line,standard_price:0
+msgid "Cost Price"
+msgstr ""
+
+#. module: stock_inventory_line_price
+#: model:ir.model,name:stock_inventory_line_price.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventár"
+
+#. module: stock_inventory_line_price
+#: model:ir.model,name:stock_inventory_line_price.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr ""
+
+#. module: stock_inventory_line_price
+#: field:stock.inventory.line,theoretical_std_price:0
+msgid "Theorical Cost Price"
+msgstr ""
+
+#. module: stock_inventory_line_price
+#: view:stock.inventory:stock_inventory_line_price.view_inventory_form_inherit
+msgid ""
+"blue: product_qty != theoretical_qty or theoretical_std_price != "
+"standard_price; red: theoretical_qty < 0"
+msgstr ""

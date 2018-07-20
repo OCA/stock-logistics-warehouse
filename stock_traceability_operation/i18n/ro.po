@@ -1,22 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_traceability_operation
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 01:01+0000\n"
-"PO-Revision-Date: 2017-08-22 01:01+0000\n"
+"POT-Creation-Date: 2017-11-18 10:36+0000\n"
+"PO-Revision-Date: 2017-11-18 10:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Romanian (https://www.transifex.com/oca/teams/23907/ro/)\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
@@ -181,7 +182,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uom_qty:0
 msgid "Quantity"
-msgstr ""
+msgstr "Cantitate"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,product_uos_qty:0
@@ -257,8 +258,8 @@ msgstr ""
 #: help:report.stock.traceability_operation,operation_id:0
 msgid ""
 "The operation on which this part of the traceability is based. When this "
-"field is empty, this part of the traceability is directly based on the Stock"
-" Move."
+"field is empty, this part of the traceability is directly based on the Stock "
+"Move."
 msgstr ""
 
 #. module: stock_traceability_operation

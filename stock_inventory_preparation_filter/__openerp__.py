@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# coding: utf-8
 ##############################################################################
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -30,6 +30,7 @@
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
     ],
+    'license': 'AGPL-3',
     "category": "Inventory, Logistic, Storage",
     "website": "http://www.odoomrp.com",
     "summary": "More filters for inventory adjustments",

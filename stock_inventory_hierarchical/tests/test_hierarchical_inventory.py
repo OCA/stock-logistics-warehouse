@@ -7,7 +7,7 @@ import logging
 from openerp.tests.common import SavepointCase
 from openerp.exceptions import ValidationError
 
-from ..models.stock_inventory import CONSISTANT_STATES
+from ..models.stock_inventory import CONSISTENT_STATES
 
 _logger = logging.getLogger(__name__)
 
@@ -92,7 +92,7 @@ class TestHierarchicalInventory(SavepointCase):
         self.assertTrue(children, "No sub-inventories were created")
 
         # key: parent state, value: consistent children states
-        for parent_state, ok_states in CONSISTANT_STATES.items():
+        for parent_state, ok_states in CONSISTENT_STATES.items():
             # try to change the parent (and children) to a state
             (main_inv | children).write({'state': parent_state})
             for child_state in ['draft', 'confirm', 'done', 'cancel']:

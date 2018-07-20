@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_available_mrp
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-18 03:43+0000\n"
 "PO-Revision-Date: 2016-11-11 18:07+0000\n"
 "Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-warehouse-8-0/language/es/)\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-"
+"warehouse-8-0/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_available_mrp
@@ -43,7 +44,9 @@ msgstr "Plantilla de producto"
 msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand."
-msgstr "Cantidad de este producto que se podría fabricar usando los materiales disponibles."
+msgstr ""
+"Cantidad de este producto que se podría fabricar usando los materiales "
+"disponibles."
 
 #. module: stock_available_mrp
 #: help:product.template,potential_qty:0
@@ -51,7 +54,10 @@ msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand. If the product has several variants, this will be the biggest "
 "quantity that can be made for a any single variant."
-msgstr "Cantidad de este producto que se podría fabricar usando los materiales a mano. Si el producto tiene varias variantes, esta será la mayor cantidad que pueda ser realizada para una de las variantes."
+msgstr ""
+"Cantidad de este producto que se podría fabricar usando los materiales a "
+"mano. Si el producto tiene varias variantes, esta será la mayor cantidad que "
+"pueda ser realizada para una de las variantes."
 
 #. module: stock_available_mrp
 #: model:product.uom,name:stock_available_mrp.thousand

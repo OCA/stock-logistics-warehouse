@@ -34,6 +34,11 @@ msgid "Choose the field of the product which will be used to compute potential.\
 msgstr ""
 
 #. module: stock_available
+#: field:stock.config.settings,module_stock_available_lot_locked:0
+msgid "Exclude blocked lots/serial numbers"
+msgstr ""
+
+#. module: stock_available
 #: field:stock.config.settings,module_stock_available_sale:0
 msgid "Exclude goods already in sale quotations"
 msgstr ""
@@ -81,6 +86,13 @@ msgstr ""
 #: help:stock.config.settings,module_stock_available_immediately:0
 msgid "This will subtract incoming quantities from the quantities available to promise.\n"
 "This installs the module stock_available_immediately."
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_lot_locked:0
+msgid "This will subtract quantities from the blocked lots/serial numbers from the quantities available to promise.\n"
+"This installs the modules stock_available_lot_locked.\n"
+"If the module stock_lock_lot is not installed, this will installit too"
 msgstr ""
 
 #. module: stock_available

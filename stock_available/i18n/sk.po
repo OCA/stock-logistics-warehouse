@@ -1,0 +1,131 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_available
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
+"PO-Revision-Date: 2017-10-16 18:32+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Slovak (http://www.transifex.com/oca/OCA-stock-logistics-"
+"warehouse-8-0/language/sk/)\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. module: stock_available
+#: field:product.product,immediately_usable_qty:0
+#: field:product.template,immediately_usable_qty:0
+msgid "Available to promise"
+msgstr ""
+
+#. module: stock_available
+#: view:product.template:stock_available.view_stock_available_kanban
+msgid "Available to promise:"
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,stock_available_mrp_based_on:0
+msgid ""
+"Choose the field of the product which will be used to compute potential.\n"
+"If empty, Quantity On Hand is used.\n"
+"Only the quantity fields have meaning for computing stock"
+msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_lot_locked:0
+msgid "Exclude blocked lots/serial numbers"
+msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_sale:0
+msgid "Exclude goods already in sale quotations"
+msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_immediately:0
+msgid "Exclude incoming goods"
+msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,module_stock_available_mrp:0
+msgid "Include the production potential"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model,name:stock_available.model_product_product
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_available
+#: model:ir.model,name:stock_available.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_available
+#: view:stock.config.settings:stock_available.view_stock_configuration
+msgid "Stock available to promise"
+msgstr ""
+
+#. module: stock_available
+#: help:product.product,immediately_usable_qty:0
+#: help:product.template,immediately_usable_qty:0
+msgid ""
+"Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs"
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_mrp:0
+msgid ""
+"This will add the quantities of goods that can be immediately manufactured, "
+"to the quantities available to promise.\n"
+"This installs the module stock_available_mrp.\n"
+"If the module mrp is not installed, this will install it too"
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_immediately:0
+msgid ""
+"This will subtract incoming quantities from the quantities available to "
+"promise.\n"
+"This installs the module stock_available_immediately."
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_lot_locked:0
+msgid ""
+"This will subtract quantities from the blocked lots/serial numbers from the "
+"quantities available to promise.\n"
+"This installs the modules stock_available_lot_locked.\n"
+"If the module stock_lock_lot is not installed, this will installit too"
+msgstr ""
+
+#. module: stock_available
+#: help:stock.config.settings,module_stock_available_sale:0
+msgid ""
+"This will subtract quantities from the sale quotations from the quantities "
+"available to promise.\n"
+"This installs the modules stock_available_sale.\n"
+"If the modules sale and sale_delivery_date are not installed, this will "
+"install them too"
+msgstr ""
+
+#. module: stock_available
+#: field:stock.config.settings,stock_available_mrp_based_on:0
+msgid "based on"
+msgstr ""
+
+#. module: stock_available
+#: view:product.product:stock_available.view_stock_available_tree_variant
+#: view:product.template:stock_available.view_stock_available_tree
+msgid ""
+"red:immediately_usable_qty<0;blue:immediately_usable_qty>=0 and state in "
+"('draft', 'end', 'obsolete');black:immediately_usable_qty>=0 and state not "
+"in ('draft', 'end', 'obsolete')"
+msgstr ""

@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_available_lot_locked
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-20 00:49+0000\n"
+"PO-Revision-Date: 2017-10-20 00:49+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: French (France) (https://www.transifex.com/oca/teams/23907/"
+"fr_FR/)\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_available_lot_locked
+#: field:product.product,locked_qty:0 field:product.template,locked_qty:0
+msgid "Blocked"
+msgstr ""
+
+#. module: stock_available_lot_locked
+#: model:ir.model,name:stock_available_lot_locked.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: stock_available_lot_locked
+#: model:ir.model,name:stock_available_lot_locked.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_available_lot_locked
+#: help:product.product,locked_qty:0 help:product.template,locked_qty:0
+msgid "Quantity of the Lots/Serial Numbers of this Product which areblocked."
+msgstr ""

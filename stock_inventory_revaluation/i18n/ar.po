@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_inventory_revaluation
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
@@ -12,17 +12,21 @@ msgstr ""
 "PO-Revision-Date: 2016-12-23 02:05+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Arabic (https://www.transifex.com/oca/teams/23907/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. module: stock_inventory_revaluation
 #: help:stock.inventory.revaluation,revaluation_type:0
 msgid ""
-"'Price Change': You can re-valuate inventory values by Changing the price for a specific product. The inventory price is changed and inventory value is recalculated according to the new price.\n"
-" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity of inventory remains unchanged, resulting in a change in the price"
+"'Price Change': You can re-valuate inventory values by Changing the price "
+"for a specific product. The inventory price is changed and inventory value "
+"is recalculated according to the new price.\n"
+" 'Inventory Debit/Credit': Changing the value of the inventory. The quantity "
+"of inventory remains unchanged, resulting in a change in the price"
 msgstr ""
 
 #. module: stock_inventory_revaluation
@@ -65,8 +69,8 @@ msgstr ""
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:319
 #, python-format
 msgid ""
-"Cannot do an inventory value change if the quantity available for product %s"
-" is 0 or negative"
+"Cannot do an inventory value change if the quantity available for product %s "
+"is 0 or negative"
 msgstr ""
 
 #. module: stock_inventory_revaluation
@@ -241,8 +245,8 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: help:stock.inventory.revaluation,new_cost:0
 msgid ""
-"Enter the new cost you wish to assign to the product. Relevant only when the"
-" selected revaluation type is Price Change."
+"Enter the new cost you wish to assign to the product. Relevant only when the "
+"selected revaluation type is Price Change."
 msgstr ""
 
 #. module: stock_inventory_revaluation
@@ -499,9 +503,12 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: help:stock.inventory.revaluation,cost_method:0
 msgid ""
-"Standard Price: The cost price is manually updated at the end of a specific period (usually every year).\n"
-"                    Average Price: The cost price is recomputed at each incoming shipment and used for the product valuation.\n"
-"                    Real Price: The cost price displayed is the price of the last outgoing product (will be use in case of inventory loss for example)."
+"Standard Price: The cost price is manually updated at the end of a specific "
+"period (usually every year).\n"
+"                    Average Price: The cost price is recomputed at each "
+"incoming shipment and used for the product valuation.\n"
+"                    Real Price: The cost price displayed is the price of the "
+"last outgoing product (will be use in case of inventory loss for example)."
 msgstr ""
 
 #. module: stock_inventory_revaluation

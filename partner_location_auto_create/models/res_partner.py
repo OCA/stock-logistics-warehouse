@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# coding: utf-8
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -32,10 +32,10 @@ class ResPartner(models.Model):
     location_ids = fields.One2many(
         'stock.location', 'partner_id', string='Locations')
 
-    @api.one
     @api.depends('location_ids')
     def _compute_locations_count(self):
-        self.locations_count = len(self.location_ids)
+        for rec in self:
+            rec.locations_count = len(rec.location_ids)
 
     @api.multi
     def button_locations(self):
@@ -63,8 +63,8 @@ class ResPartner(models.Model):
         return self.location_ids.filtered(
             lambda l: l.usage == usage and l.main_partner_location)
 
-    @api.one
     def _create_main_partner_location(self):
+        self.ensure_one()
         if self.customer and self.property_stock_customer.partner_id != self:
             location_customer = (
                 self.get_main_location('customer') or
@@ -97,7 +97,6 @@ class ResPartner(models.Model):
             'main_partner_location': True,
         })
 
-    @api.one
     def _remove_locations(self):
         """
         Unlink all locations related to the partner
@@ -108,7 +107,7 @@ class ResPartner(models.Model):
         by mistake.
         """
         move_obj = self.env['stock.move']
-        for location in self.location_ids:
+        for location in self.mapped('location_ids'):
             moves = move_obj.search([
                 '|',
                 ('location_id', 'child_of', location.id),

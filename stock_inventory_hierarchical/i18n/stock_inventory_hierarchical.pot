@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-17 09:49+0000\n"
-"PO-Revision-Date: 2016-03-17 09:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +19,11 @@ msgid "Cancel"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
+#: field:stock.inventory,complete_name:0
+msgid "Complete reference"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,create_uid:0
 msgid "Created by"
 msgstr ""
@@ -31,7 +34,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
-#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:90
+#: field:stock.generate.inventory,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:91
 #, python-format
 msgid "Error: You can not create recursive inventories."
 msgstr ""
@@ -73,6 +81,11 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,prefix_inv_name:0
 msgid "Inventory prefix"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: field:stock.generate.inventory,__last_update:0
+msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
@@ -146,6 +159,11 @@ msgid "Parent Right"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
+#: field:stock.inventory,progress_rate:0
+msgid "Progress"
+msgstr ""
+
+#. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_tree_view
 msgid "Reference"
 msgstr ""
@@ -156,15 +174,17 @@ msgid "Sub-inventories"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
-#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:119
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:104
 #, python-format
-msgid "The state of the inventory %s (%s) is not consistent with the state of the following parent inventories:\n"
+msgid "The state of the inventory %s (%s) is not  consistent with the state of the following sub-inventories:\n"
+""
 msgstr ""
 
 #. module: stock_inventory_hierarchical
-#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:103
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:121
 #, python-format
-msgid "The state of the inventory %s (%s) is not consistent with the state of the following sub-inventories:\n"
+msgid "The state of the inventory %s (%s) is not consistent with the state of the following parent inventories:\n"
+""
 msgstr ""
 
 #. module: stock_inventory_hierarchical
@@ -182,7 +202,15 @@ msgid "This action will start all children inventories.\n"
 msgstr ""
 
 #. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:137
+#, python-format
+msgid "This location is not declared on the parent inventory\n"
+"It cannot be added."
+msgstr ""
+
+#. module: stock_inventory_hierarchical
 #: model:ir.actions.act_window,name:stock_inventory_hierarchical.action_view_sub_inventory
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
 msgid "View Sub-inventories"
 msgstr ""
 
@@ -190,3 +218,9 @@ msgstr ""
 #: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
 msgid "or"
 msgstr ""
+
+#. module: stock_inventory_hierarchical
+#: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
+msgid "{'readonly':[('parent_id', '!=', False)]}"
+msgstr ""
+

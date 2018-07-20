@@ -12,7 +12,7 @@
                 </field>
             </field>
         </record>
-        
+
         <record model="ir.ui.view" id="view_stock_available_tree">
             <field name="name">Quantity available to promise (tree)</field>
             <field name="model">product.template</field>
@@ -32,7 +32,9 @@
         <record model="ir.ui.view" id="view_stock_available_kanban">
             <field name="name">Quantity available to promise (kanban)</field>
             <field name="model">product.template</field>
-            <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
+            <field name="inherit_id"
+                   ref="stock.product_template_kanban_stock_view"/>
+            <field name="priority" eval="100"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='virtual_available']/.." position="replace">
                     <li t-if="record.type.raw_value != 'service'">Available to promise: <field name="immediately_usable_qty"/> <field name="uom_id"/></li>

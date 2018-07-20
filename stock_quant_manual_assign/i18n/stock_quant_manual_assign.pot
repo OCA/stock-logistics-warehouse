@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-01 12:46+0000\n"
-"PO-Revision-Date: 2015-10-01 12:46+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,16 +36,26 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:21
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
-#, python-format
-msgid "Error"
+#: field:assign.manual.quants,display_name:0
+#: field:assign.manual.quants.lines,display_name:0
+msgid "Display Name"
 msgstr ""
 
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants,id:0
 #: field:assign.manual.quants.lines,id:0
 msgid "ID"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,in_date:0
+msgid "Incoming Date"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,__last_update:0
+#: field:assign.manual.quants.lines,__last_update:0
+msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_quant_manual_assign
@@ -60,6 +68,16 @@ msgstr ""
 #: field:assign.manual.quants,write_date:0
 #: field:assign.manual.quants.lines,write_date:0
 msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,location_id:0
+msgid "Location"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,lot_id:0
+msgid "Lot"
 msgstr ""
 
 #. module: stock_quant_manual_assign
@@ -85,6 +103,11 @@ msgid "Name"
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#: field:assign.manual.quants.lines,package_id:0
+msgid "Package"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_picking
 msgid "Picking List"
 msgstr ""
@@ -100,7 +123,6 @@ msgid "Quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:22
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
 #, python-format
 msgid "Quantity is higher than the needed one"
@@ -112,8 +134,33 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#: field:assign.manual.quants,move_qty:0
+msgid "Remaining qty"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:assign.manual.quants,lines_qty:0
+msgid "Reserved qty"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,selected:0
 msgid "Select"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: help:assign.manual.quants.lines,package_id:0
+msgid "The package containing this quant"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: field:stock.move,picking_type_code:0
+msgid "Type of Operation"
 msgstr ""
 
 #. module: stock_quant_manual_assign

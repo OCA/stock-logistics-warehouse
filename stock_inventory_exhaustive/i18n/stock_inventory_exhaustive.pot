@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_inventory_exhaustive
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory.uninventoried.locations:stock_inventory_exhaustive.view_confirm_uninventoried_location
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: help:stock.inventory,exhaustive:0
+msgid "Check the box if you are conducting an exhaustive Inventory.\n"
+"Leave the box unchecked if you are conducting a standard Inventory (partial inventory for example).\n"
+"For an exhaustive Inventory:\n"
+" - if some of the Inventory's Locations have not been entered in the Inventory Lines, Odoo warns you when you confirm the Inventory\n"
+" - every good that is not in the Inventory Lines is considered lost, and gets moved out of the stock when you confirm the Inventory"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory.uninventoried.locations:stock_inventory_exhaustive.view_confirm_uninventoried_location
+msgid "Confirm empty locations"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: model:ir.model,name:stock_inventory_exhaustive.model_stock_inventory_uninventoried_locations
+msgid "Confirm the uninventoried Locations."
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: field:stock.inventory.uninventoried.locations,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: field:stock.inventory.uninventoried.locations,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: field:stock.inventory.uninventoried.locations,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory:stock_inventory_exhaustive.view_inventory_complete_filter
+#: field:stock.inventory,exhaustive:0
+msgid "Exhaustive"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: field:stock.inventory.uninventoried.locations,id:0
+msgid "ID"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory.uninventoried.locations:stock_inventory_exhaustive.view_confirm_uninventoried_location
+msgid "If you confirm the Inventory, these Locations will be considered empty and their content will be purged."
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: model:ir.model,name:stock_inventory_exhaustive.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory.uninventoried.locations:stock_inventory_exhaustive.view_confirm_uninventoried_location
+msgid "It could either mean that the Locations are empty, or that the Inventory is not yet complete."
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: field:stock.inventory.uninventoried.locations,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: field:stock.inventory.uninventoried.locations,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: field:stock.inventory.uninventoried.locations,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory:stock_inventory_exhaustive.view_inventory_complete_filter
+msgid "Only select exhaustive inventory adjustments"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory.uninventoried.locations:stock_inventory_exhaustive.view_confirm_uninventoried_location
+msgid "Purge contents and confirm Inventory"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory.uninventoried.locations:stock_inventory_exhaustive.view_confirm_uninventoried_location
+msgid "The following Locations are empty"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory.uninventoried.locations:stock_inventory_exhaustive.view_confirm_uninventoried_location
+msgid "The following Stock Locations are part of the current Physical Inventory, but no Inventory Line has been recorded for them."
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory:stock_inventory_exhaustive.stock_inventory_location_form_view
+msgid "This inventory adjustment is set to be exhaustive: any goods you do not enter\n"
+"                        in this list will be considered inexistent and removed from the stock."
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: field:stock.inventory.uninventoried.locations,location_ids:0
+msgid "Uninventoried location"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory:stock_inventory_exhaustive.stock_inventory_location_form_view
+msgid "confirm_missing_locations"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory.uninventoried.locations:stock_inventory_exhaustive.view_confirm_uninventoried_location
+msgid "or"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory:stock_inventory_exhaustive.stock_inventory_location_form_view
+msgid "{'invisible': [('exhaustive', '=' , True)]}"
+msgstr ""
+
+#. module: stock_inventory_exhaustive
+#: view:stock.inventory:stock_inventory_exhaustive.stock_inventory_location_form_view
+msgid "{'readonly': [('exhaustive', '=' , True)]}"
+msgstr ""
+

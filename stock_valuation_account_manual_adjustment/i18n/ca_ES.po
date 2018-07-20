@@ -1,28 +1,31 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_valuation_account_manual_adjustment
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Carlos Hormigo, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 09:22+0000\n"
-"PO-Revision-Date: 2017-03-29 09:22+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Catalan (Spain) (https://www.transifex.com/oca/teams/23907/ca_ES/)\n"
+"POT-Creation-Date: 2017-12-09 13:43+0000\n"
+"PO-Revision-Date: 2017-12-09 13:43+0000\n"
+"Last-Translator: Carlos Hormigo, 2018\n"
+"Language-Team: Catalan (Spain) (https://www.transifex.com/oca/teams/23907/"
+"ca_ES/)\n"
+"Language: ca_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ca_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.actions.act_window,help:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
 msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
-"                Click to start a new Stock Valuation Account Manual Adjustment\n"
+"                Click to start a new Stock Valuation Account Manual "
+"Adjustment\n"
 "              </p>\n"
 "            "
 msgstr ""
@@ -68,13 +71,13 @@ msgstr "Companyia"
 #: field:stock.valuation.account.manual.adjustment,user_id:0
 #: field:stock.valuation.account.mass.adjust,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,create_date:0
 #: field:stock.valuation.account.mass.adjust,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,document_date:0
@@ -90,7 +93,7 @@ msgstr ""
 #: field:stock.valuation.account.manual.adjustment,display_name:0
 #: field:stock.valuation.account.mass.adjust,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: stock_valuation_account_manual_adjustment
 #: selection:stock.valuation.account.manual.adjustment,state:0
@@ -135,19 +138,19 @@ msgstr ""
 #: field:stock.valuation.account.manual.adjustment,__last_update:0
 #: field:stock.valuation.account.mass.adjust,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,write_uid:0
 #: field:stock.valuation.account.mass.adjust,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,write_date:0
 #: field:stock.valuation.account.mass.adjust,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_stock_valuation_account_mass_adjust

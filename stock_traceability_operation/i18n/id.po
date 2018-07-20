@@ -1,21 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_traceability_operation
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:41+0000\n"
-"PO-Revision-Date: 2017-01-07 07:41+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-11-18 10:36+0000\n"
+"PO-Revision-Date: 2017-11-18 10:36+0000\n"
+"Last-Translator: Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017\n"
 "Language-Team: Indonesian (https://www.transifex.com/oca/teams/23907/id/)\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: stock_traceability_operation
@@ -26,7 +27,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Dibatalkan"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_uid:0
@@ -154,7 +155,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 msgid "Partner"
-msgstr ""
+msgstr "Mitra"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,picking_type_id:0
@@ -257,8 +258,8 @@ msgstr ""
 #: help:report.stock.traceability_operation,operation_id:0
 msgid ""
 "The operation on which this part of the traceability is based. When this "
-"field is empty, this part of the traceability is directly based on the Stock"
-" Move."
+"field is empty, this part of the traceability is directly based on the Stock "
+"Move."
 msgstr ""
 
 #. module: stock_traceability_operation
