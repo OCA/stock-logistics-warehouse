@@ -27,26 +27,29 @@ class StockMove(models.Model):
             # done in _get_accounting_data_for_valuation?
             product_valuation_accounts \
                 = move.product_id.product_tmpl_id.get_product_accounts()
-            stock_journal_id, __, __, __ \
-                = move._get_accounting_data_for_valuation()
+            stock_valuation = product_valuation_accounts.get('stock_valuation')
+            stock_journal = product_valuation_accounts.get('stock_journal')
 
             # calculate move cost
             # TODO: recheck if this part respects product valuation method
             move.value = float_round(
                 value=move.product_id.standard_price * move.quantity_done,
-                precision_rounding=self.company_id.currency_id.rounding,
+                precision_rounding=move.company_id.currency_id.rounding,
             )
 
-            if location_from.force_accounting_entries:
+            if location_from.force_accounting_entries \
+                    and location_to.force_accounting_entries:
                 move._create_account_move_line(
                     location_from.valuation_out_internal_account_id.id,
-                    product_valuation_accounts.get('stock_valuation').id,
-                    stock_journal_id)
-
-            if location_to.force_accounting_entries:
+                    location_to.valuation_in_internal_account_id.id,
+                    stock_journal.id)
+            elif location_from.force_accounting_entries:
+                move._create_account_move_line(
+                    location_from.valuation_out_internal_account_id.id,
+                    stock_valuation.id, stock_journal.id)
+            elif location_to.force_accounting_entries:
                 move._create_account_move_line(
                     product_valuation_accounts.get('stock_valuation').id,
-                    location_to.valuation_in_internal_account_id.id,
-                    stock_journal_id)
+                    stock_valuation.id, stock_journal.id)
 
         return res
