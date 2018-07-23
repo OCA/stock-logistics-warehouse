@@ -12,6 +12,9 @@ class StockMove(models.Model):
         res = super()._action_done()
 
         for move in res:
+            # first of all, define if we need to even valuate something
+            if move.product_id.valuation != 'real_time':
+                continue
             # we're customizing behavior on moves between internal locations
             # only, thus ensuring that we don't clash w/ account moves
             # created in `stock_account`
