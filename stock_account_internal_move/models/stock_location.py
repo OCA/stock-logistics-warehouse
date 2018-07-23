@@ -23,7 +23,8 @@ class StockLocation(models.Model):
             NOT force_accounting_entries
             OR force_accounting_entries
             AND usage = 'internal')""",
-         _('You cannot force accounting entries on a non-internal locations.')),
+         _('You cannot force accounting entries'
+           ' on a non-internal locations.')),
     ]
 
     force_accounting_entries = fields.Boolean(
