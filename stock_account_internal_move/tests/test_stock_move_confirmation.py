@@ -46,13 +46,13 @@ class StockMoveConfirmationCase(common.SavepointCase):
         })
         cls.location_from.write({
             'force_accounting_entries': True,
-            'valuation_in_internal_account_id': cls.account_from_in.id,
-            'valuation_out_internal_account_id': cls.account_from_out.id,
+            'valuation_in_account_id': cls.account_from_in.id,
+            'valuation_out_account_id': cls.account_from_out.id,
         })
         cls.location_to.write({
             'force_accounting_entries': True,
-            'valuation_in_internal_account_id': cls.account_to_in.id,
-            'valuation_out_internal_account_id': cls.account_to_out.id,
+            'valuation_in_account_id': cls.account_to_in.id,
+            'valuation_out_account_id': cls.account_to_out.id,
         })
         cls.fake_stock_journal = cls.env['account.journal'].create({
             'name': 'Stock journal (that\'s **not really true)',
@@ -124,6 +124,6 @@ class StockMoveConfirmationCase(common.SavepointCase):
         # perform a manual evaluation of teh fresh move
         # we don't really care about those numbers
         kekes._create_account_move_line(
-            self.location_from.valuation_out_internal_account_id.id,
-            self.location_to.valuation_in_internal_account_id.id,
+            self.location_from.valuation_out_account_id.id,
+            self.location_to.valuation_in_account_id.id,
             self.fake_stock_journal.id)
