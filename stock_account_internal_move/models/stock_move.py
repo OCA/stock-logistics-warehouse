@@ -46,10 +46,12 @@ class StockMove(models.Model):
             elif location_from.force_accounting_entries:
                 move._create_account_move_line(
                     location_from.valuation_out_internal_account_id.id,
-                    stock_valuation.id, stock_journal.id)
+                    stock_valuation.id,
+                    stock_journal.id)
             elif location_to.force_accounting_entries:
                 move._create_account_move_line(
-                    product_valuation_accounts.get('stock_valuation').id,
-                    stock_valuation.id, stock_journal.id)
+                    stock_valuation.id,
+                    location_to.valuation_in_internal_account_id.id,
+                    stock_journal.id)
 
         return res
