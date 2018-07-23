@@ -45,8 +45,8 @@ class StockMove(models.Model):
 
             if location_to.force_accounting_entries:
                 move._create_account_move_line(
-                    location_to.valuation_in_internal_account_id.id,
                     product_valuation_accounts.get('stock_valuation').id,
+                    location_to.valuation_in_internal_account_id.id,
                     stock_journal_id)
 
         return res
