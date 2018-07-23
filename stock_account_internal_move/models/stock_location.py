@@ -1,6 +1,6 @@
 # Copyright (C) 2018 by Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import fields, models
+from odoo import _, fields, models
 
 
 class StockLocation(models.Model):
@@ -16,8 +16,8 @@ class StockLocation(models.Model):
             AND valuation_out_internal_account_id IS NOT NULL
             AND valuation_in_internal_account_id IS NOT NULL
          )""",
-         'You must provide a valuation in/out accounts'
-         ' in order to force accounting entries.'),
+         _('You must provide a valuation in/out accounts'
+           ' in order to force accounting entries.')),
     ]
 
     force_accounting_entries = fields.Boolean(
