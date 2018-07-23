@@ -10,9 +10,9 @@
         <group name="internal_valuation" string="Accounting Information (internal)"
                attrs="{'invisible': [('usage', '!=', 'internal')]}">
           <field name="force_accounting_entries"/>
-          <field name="valuation_in_internal_account_id"
+          <field name="valuation_in_account_id"
                  attrs="{'invisible': [('force_accounting_entries', '=', False)]}"/>
-          <field name="valuation_out_internal_account_id"
+          <field name="valuation_out_account_id"
                  attrs="{'invisible': [('force_accounting_entries', '=', False)]}"/>
         </group>
       </xpath>
