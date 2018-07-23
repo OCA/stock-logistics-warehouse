@@ -20,6 +20,12 @@ class StockMove(models.Model):
                     == 'internal'):
                 continue
 
+            # treated by `super()` as a move w/ negative qty due to this hunk:
+            # quantity = self.product_qty or context.get('forced_quantity')
+            # quantity = quantity if self._is_in() else -quantity
+            # so, move qty is flipped twice and thus preserved
+            move = move.with_context(forced_quantity=-move.product_qty)
+
             location_from = move.location_id
             location_to = move.location_dest_id
 
