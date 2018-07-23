@@ -22,7 +22,7 @@ class StockMoveConfirmationCase(common.SavepointCase):
         cls.location_to = cls.env.ref('stock.location_gate_b')
         cls.location_from.usage = cls.location_to.usage = 'internal'
         account_type_revenue_id = cls.env.ref(
-                'account.data_account_type_revenue').id
+            'account.data_account_type_revenue').id
 
         cls.account_from_in = cls.env['account.account'].create({
             'name': 'From Location valuation account',
@@ -91,7 +91,7 @@ class StockMoveConfirmationCase(common.SavepointCase):
         self.location_from.force_accounting_entries = False
         self.location_to.force_accounting_entries = False
         # simple as that - we're just ensuring that we're allowed to do it.
-        move = self._create_done_move()
+        self._create_done_move()
 
     @mute_logger('odoo.sql_db')
     def test_10_constraint(self):
