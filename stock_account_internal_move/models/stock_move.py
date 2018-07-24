@@ -12,7 +12,6 @@ class StockMove(models.Model):
     def _action_done(self):
         """Call _account_entry_move for internal moves as well."""
         res = super()._action_done()
-
         for move in res:
             # first of all, define if we need to even valuate something
             if move.product_id.valuation != 'real_time':
@@ -20,9 +19,10 @@ class StockMove(models.Model):
             # we're customizing behavior on moves between internal locations
             # only, thus ensuring that we don't clash w/ account moves
             # created in `stock_account`
-            if not self._is_internal():
+            if not move._is_internal():
                 continue
             move._account_entry_move()
+        return res
 
     # @override
     @api.multi
