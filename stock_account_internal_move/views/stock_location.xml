@@ -6,16 +6,15 @@
     <field name="model">stock.location</field>
     <field name="inherit_id" ref="stock.view_location_form"/>
     <field name="arch" type="xml">
-      <xpath expr="//group[@name='localization']" position="after">
-        <group name="internal_valuation" string="Accounting Information (internal)"
-               attrs="{'invisible': [('usage', '!=', 'internal')]}">
-          <field name="force_accounting_entries"/>
-          <field name="valuation_in_account_id"
-                 attrs="{'invisible': [('force_accounting_entries', '=', False)]}"/>
-          <field name="valuation_out_account_id"
-                 attrs="{'invisible': [('force_accounting_entries', '=', False)]}"/>
-        </group>
+      <xpath expr="//group[field[@name='valuation_in_account_id']]" position="attributes">
+        <attribute name="attrs">
+          {'invisible': [('usage', 'not in', ('internal', 'inventory', 'production'))]}
+        </attribute>
       </xpath>
+      <field name="valuation_in_account_id" position="before">
+        <field name="force_accounting_entries"
+               attrs="{'invisible': [('usage', '!=', 'internal')]}"/>
+      </field>
     </field>
   </record>
 
