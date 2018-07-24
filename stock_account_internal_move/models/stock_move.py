@@ -7,8 +7,10 @@ from odoo.tools import float_round
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
+    # @override
     @api.multi
     def _action_done(self):
+        """Call _account_entry_move for internal moves as well."""
         res = super()._action_done()
 
         for move in res:
@@ -18,49 +20,71 @@ class StockMove(models.Model):
             # we're customizing behavior on moves between internal locations
             # only, thus ensuring that we don't clash w/ account moves
             # created in `stock_account`
-            if not (move.location_id.usage
-                    == move.location_dest_id.usage
-                    == 'internal'):
+            if not self._is_internal():
                 continue
+            move._account_entry_move()
 
-            # treated by `super()` as a move w/ negative qty due to this hunk:
-            # quantity = self.product_qty or context.get('forced_quantity')
-            # quantity = quantity if self._is_in() else -quantity
-            # so, move qty is flipped twice and thus preserved
-            move = move.with_context(forced_quantity=-move.product_qty)
+    # @override
+    @api.multi
+    def _run_valuation(self, quantity=None):
+        # Extend `_run_valuation` to make it work on internal moves.
+        self.ensure_one()
+        res = super()._run_valuation(quantity)
+        if self._is_internal():
+            # TODO: recheck if this part respects product valuation method
+            self.value = float_round(
+                value=self.product_id.standard_price * self.quantity_done,
+                precision_rounding=self.company_id.currency_id.rounding,
+            )
+        return res
 
-            location_from = move.location_id
-            location_to = move.location_dest_id
+    # @override
+    @api.multi
+    def _account_entry_move(self):
+        self.ensure_one()
+        res = super()._account_entry_move()
+        if res is not None and not res:
+            # `super()` tends to `return False` as an indicator that no
+            # valuation should happen in this case
+            return res
 
-            # get valuation accounts for product
-            # done in _get_accounting_data_for_valuation?
+        # treated by `super()` as a self w/ negative qty due to this hunk:
+        # quantity = self.product_qty or context.get('forced_quantity')
+        # quantity = quantity if self._is_in() else -quantity
+        # so, self qty is flipped twice and thus preserved
+        self = self.with_context(forced_quantity=-self.product_qty)
+
+        location_from = self.location_id
+        location_to = self.location_dest_id
+
+        # get valuation accounts for product
+        if self._is_internal():
             product_valuation_accounts \
-                = move.product_id.product_tmpl_id.get_product_accounts()
+                = self.product_id.product_tmpl_id.get_product_accounts()
             stock_valuation = product_valuation_accounts.get('stock_valuation')
             stock_journal = product_valuation_accounts.get('stock_journal')
 
-            # calculate move cost
-            # TODO: recheck if this part respects product valuation method
-            move.value = float_round(
-                value=move.product_id.standard_price * move.quantity_done,
-                precision_rounding=move.company_id.currency_id.rounding,
-            )
-
             if location_from.force_accounting_entries \
                     and location_to.force_accounting_entries:
-                move._create_account_move_line(
+                self._create_account_move_line(
                     location_from.valuation_out_account_id.id,
                     location_to.valuation_in_account_id.id,
                     stock_journal.id)
             elif location_from.force_accounting_entries:
-                move._create_account_move_line(
+                self._create_account_move_line(
                     location_from.valuation_out_account_id.id,
                     stock_valuation.id,
                     stock_journal.id)
             elif location_to.force_accounting_entries:
-                move._create_account_move_line(
+                self._create_account_move_line(
                     stock_valuation.id,
                     location_to.valuation_in_account_id.id,
                     stock_journal.id)
 
         return res
+
+    @api.multi
+    def _is_internal(self):
+        self.ensure_one()
+        return self.location_id.usage == 'internal' \
+            and self.location_dest_id.usage == 'internal'
