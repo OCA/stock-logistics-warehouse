@@ -88,3 +88,18 @@ class StockMove(models.Model):
         self.ensure_one()
         return self.location_id.usage == 'internal' \
             and self.location_dest_id.usage == 'internal'
+
+    @api.multi
+    def _get_accounting_data_for_valuation(self):
+        self.ensure_one()
+        journal_id, acc_src, acc_dest, acc_valuation \
+            = super()._get_accounting_data_for_valuation()
+        # intercept account valuation, use account specified on internal
+        # location as a local valuation
+        if self._is_in() and self.location_dest_id.force_accounting_entries:
+            acc_valuation \
+                = self.location_dest_id.valuation_in_account_id.id
+        if self._is_out() and self.location_id.force_accounting_entries:
+            acc_valuation \
+                = self.location_id.valuation_out_account_id.id
+        return journal_id, acc_src, acc_dest, acc_valuation
