@@ -15,7 +15,7 @@ class StockLocation(models.Model):
         'usage',
         'force_accounting_entries',
     )
-    def _check_force_accouting_entries_internal_only(self):
+    def _check_force_accounting_entries_internal_only(self):
         for loc in self:
             if loc.usage != 'internal' and loc.force_accounting_entries:
                 raise ValidationError(_(
