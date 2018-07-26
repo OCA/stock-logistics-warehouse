@@ -30,7 +30,7 @@ class StockMove(models.Model):
         # Extend `_run_valuation` to make it work on internal moves.
         self.ensure_one()
         res = super()._run_valuation(quantity)
-        if self._is_internal():
+        if self._is_internal() and not self.value:
             # TODO: recheck if this part respects product valuation method
             self.value = float_round(
                 value=self.product_id.standard_price * self.quantity_done,
@@ -97,9 +97,11 @@ class StockMove(models.Model):
         # intercept account valuation, use account specified on internal
         # location as a local valuation
         if self._is_in() and self.location_dest_id.force_accounting_entries:
+            # (acc_src if not dest.usage == 'customer') => acc_valuation
             acc_valuation \
                 = self.location_dest_id.valuation_in_account_id.id
         if self._is_out() and self.location_id.force_accounting_entries:
+            # acc_valuation => (acc_dest if not dest.usage == 'supplier')
             acc_valuation \
                 = self.location_id.valuation_out_account_id.id
         return journal_id, acc_src, acc_dest, acc_valuation
