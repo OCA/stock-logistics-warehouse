@@ -100,7 +100,7 @@ promote its widespread use.
     :target: https://github.com/max3903
     :alt: max3903
 
-Current `maintainers <https://odoo-community.org/page/maintainer-role>`_:
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-arkostyuk| |maintainer-max3903| 
 
