@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_production_lot_expiry_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_production_lot_expiry_state
+#: selection:stock.production.lot,state:0
+msgid "Alert"
+msgstr ""
+
+#. module: stock_production_lot_expiry_state
+#: selection:stock.production.lot,state:0
+msgid "Best Before"
+msgstr ""
+
+#. module: stock_production_lot_expiry_state
+#: selection:stock.production.lot,state:0
+msgid "End Of Life"
+msgstr ""
+
+#. module: stock_production_lot_expiry_state
+#: model:ir.model,name:stock_production_lot_expiry_state.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: stock_production_lot_expiry_state
+#: selection:stock.production.lot,state:0
+msgid "Removal"
+msgstr ""
+
+#. module: stock_production_lot_expiry_state
+#: model:ir.model.fields,field_description:stock_production_lot_expiry_state.field_stock_production_lot_state
+msgid "State"
+msgstr ""
+
+#. module: stock_production_lot_expiry_state
+#: selection:stock.production.lot,state:0
+msgid "Still Good"
+msgstr ""
+
+#. module: stock_production_lot_expiry_state
+#: model:ir.actions.server,name:stock_production_lot_expiry_state.cron_update_lot_state_ir_actions_server
+#: model:ir.cron,cron_name:stock_production_lot_expiry_state.cron_update_lot_state
+#: model:ir.cron,name:stock_production_lot_expiry_state.cron_update_lot_state
+msgid "Update Lot State"
+msgstr ""
+
