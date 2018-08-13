@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cron_update_lot_state" forcecreate='True' model="ir.cron">
+        <field name="name">Update Lot State</field>
+        <field eval="True" name="active"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="model_id" ref="stock.model_stock_production_lot"/>
+        <field name="state">code</field>
+        <field name="code">model._update_state()</field>
+        <field name="doall">1</field>
+    </record>
+
+</odoo>
