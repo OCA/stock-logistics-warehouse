@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo11-addon-stock_orderpoint_move_link',
         'odoo11-addon-stock_orderpoint_purchase_link',
         'odoo11-addon-stock_orderpoint_uom',
+        'odoo11-addon-stock_production_lot_expiry_state',
         'odoo11-addon-stock_putaway_method',
         'odoo11-addon-stock_putaway_product',
         'odoo11-addon-stock_putaway_same_location',
