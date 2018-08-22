@@ -76,7 +76,7 @@ class ProductProduct(models.Model):
 
         # Compute stock for product components.
         # {'productid': {field_name: qty}}
-        if stock_available_mrp_based_on in res.keys():
+        if res and stock_available_mrp_based_on in res.values()[0]:
             # If the qty is computed by the same method use it to avoid
             # stressing the cache
             component_qties = \
