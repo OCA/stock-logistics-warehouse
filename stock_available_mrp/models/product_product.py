@@ -2,8 +2,9 @@
 # © 2014 Numérigraphe SARL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from collections import Counter, defaultdict
+from collections import Counter
 from odoo import api, fields, models
+from odoo.fields import first
 
 
 class ProductProduct(models.Model):
@@ -16,40 +17,46 @@ class ProductProduct(models.Model):
         string='Bill of Materials'
     )
 
-    @api.depends('virtual_available')
+    @api.depends('virtual_available', 'bom_id', 'bom_id.product_qty')
     def _compute_available_quantities(self):
         super(ProductProduct, self)._compute_available_quantities()
 
     @api.multi
+    def _get_bom_id_domain(self):
+        """
+        Real multi domain
+        :return:
+        """
+        return [
+            '|',
+            ('product_id', 'in', self.ids),
+            '&',
+            ('product_id', '=', False),
+            ('product_tmpl_id', 'in', self.mapped('product_tmpl_id.id'))
+        ]
+
+    @api.multi
+    @api.depends('product_tmpl_id')
     def _compute_bom_id(self):
-        domain = [('product_id', 'in', self.ids)]
-        product_tmpl_ids = []
-        bom_product_ids = self.env['mrp.bom'].search(domain)
-        # find bom linked to a product
-        bom_by_product_id = {
-            b.product_id.id: b for b in bom_product_ids}
-        product_id_found = bom_by_product_id.keys()
+        bom_obj = self.env['mrp.bom']
+        boms = bom_obj.search(
+            self._get_bom_id_domain(),
+            order='sequence, product_id',
+        )
         for product in self:
-            if product.id not in product_id_found:
-                product_tmpl_ids.append(product.product_tmpl_id.id)
-        domain = [('product_id', '=', False),
-                  ('product_tmpl_id', 'in', product_tmpl_ids)]
-        # find boms linked to the product template
-        bom_product_template = self.env['mrp.bom'].search(domain)
-        bom_by_product_tmpl_id = {
-            b.product_tmpl_id.id: b for b in bom_product_template}
-        for product in self:
-            product.bom_id = bom_by_product_id.get(
-                product.id,
-                bom_by_product_tmpl_id.get(product.product_tmpl_id.id)
+            product_boms = boms.filtered(
+                lambda b: b.product_id == product or
+                (not b.product_id and
+                 b.product_tmpl_id == product.product_tmpl_id)
             )
+            if product_boms:
+                product.bom_id = first(product_boms)
 
     @api.multi
     def _compute_available_quantities_dict(self):
         res = super(ProductProduct, self)._compute_available_quantities_dict()
-
         # compute qty for product with bom
-        product_with_bom = self.filtered(lambda p: p.bom_id)
+        product_with_bom = self.filtered('bom_id')
 
         if not product_with_bom:
             return res
@@ -58,25 +65,18 @@ class ProductProduct(models.Model):
             'stock_available_mrp_based_on', 'qty_available'
         )
 
-        # from here we start the computation of bom qties in an isolated
-        # environment to avoid trouble with prefetch and cache
-        product_with_bom = product_with_bom.with_context(
-            unique=models.NewId()).with_prefetch(defaultdict(set))
-
         # explode all boms at once
         exploded_boms = product_with_bom._explode_boms()
 
         # extract the list of product used as bom component
-        product_components_ids = set()
+        component_products = self.env['product.product'].browse()
         for exploded_components in exploded_boms.values():
             for bom_component in exploded_components:
-                product_components_ids.add(bom_component[0].product_id.id)
+                component_products |= first(bom_component).product_id
 
         # Compute stock for product components.
         # {'productid': {field_name: qty}}
-        component_products = product_with_bom.browse(
-            product_components_ids)
-        if stock_available_mrp_based_on in res.keys():
+        if res and stock_available_mrp_based_on in res.values()[0]:
             # If the qty is computed by the same method use it to avoid
             # stressing the cache
             component_qties = \

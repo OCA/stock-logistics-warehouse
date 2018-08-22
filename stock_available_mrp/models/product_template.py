@@ -11,8 +11,7 @@ class ProductTemplate(models.Model):
     @api.multi
     def _compute_available_quantities_dict(self):
         res = super(ProductTemplate, self)._compute_available_quantities_dict()
-        for template in self:
-            if template.bom_ids:
-                res[template.id]['immediately_usable_qty'] =\
-                    res[template.id]['potential_qty']
+        for template in self.filtered('bom_ids'):
+            res[template.id]['immediately_usable_qty'] =\
+                res[template.id]['potential_qty']
         return res
