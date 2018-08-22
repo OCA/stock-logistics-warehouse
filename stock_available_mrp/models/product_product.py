@@ -69,15 +69,13 @@ class ProductProduct(models.Model):
         exploded_boms = product_with_bom._explode_boms()
 
         # extract the list of product used as bom component
-        product_components_ids = set()
+        component_products = self.env['product.product'].browse()
         for exploded_components in exploded_boms.values():
             for bom_component in exploded_components:
-                product_components_ids.add(bom_component[0].product_id.id)
+                component_products |= first(bom_component).product_id
 
         # Compute stock for product components.
         # {'productid': {field_name: qty}}
-        component_products = product_with_bom.browse(
-            product_components_ids)
         if stock_available_mrp_based_on in res.keys():
             # If the qty is computed by the same method use it to avoid
             # stressing the cache
