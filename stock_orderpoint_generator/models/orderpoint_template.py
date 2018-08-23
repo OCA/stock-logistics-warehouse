@@ -60,8 +60,9 @@ class OrderpointTemplate(models.Model):
             data.pop('auto_product_ids', None)
             data.pop('auto_last_generation', None)
             for product_id in product_ids:
-                data['product_id'] = product_id
-                orderpoint_model.create(data)
+                vals = data.copy()
+                vals['product_id'] = product_id
+                orderpoint_model.create(vals)
 
     @api.multi
     def create_orderpoints(self, product_ids):
