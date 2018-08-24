@@ -162,11 +162,11 @@ class TestInventoryDiscrepancy(TransactionCase):
         """Test if a user error raises when a stock user tries to update the
         qty for a product and the correction is a discrepancy over the
         threshold."""
-        upd_qty = self.obj_upd_qty_wizard.create({
+        upd_qty = self.obj_upd_qty_wizard.sudo(self.user).create({
             'product_id': self.product1.id,
             'product_tmpl_id': self.product1.product_tmpl_id.id,
             'new_quantity': 10.0,
             'location_id': self.test_loc.id,
         })
         with self.assertRaises(UserError):
-            upd_qty.sudo(self.user).change_product_qty()
+            upd_qty.change_product_qty()
