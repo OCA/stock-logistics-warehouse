@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models, _
@@ -10,10 +9,10 @@ class ProductPackaging(models.Model):
 
     @api.model
     def _default_uom_categ_domain_id(self):
-        uom_id = self.env.context.get("get_uom_categ_from_uom")
-        if not uom_id:
+        product_id = self.env.context.get("default_product_id")
+        if not product_id:
             return self.env['product.uom.categ']
-        uom = self.env['product.uom'].browse(uom_id)
+        uom = self.env['product.product'].browse(product_id).uom_id
         return uom.category_id.id
 
     uom_id = fields.Many2one(
@@ -35,17 +34,21 @@ class ProductPackaging(models.Model):
     )
 
     @api.multi
-    @api.depends('uom_id', 'product_tmpl_id.uom_id')
+    @api.depends('uom_id', 'product_id.uom_id')
     def _compute_qty(self):
         """
         Compute the quantity by package based on uom
         """
         for packaging in self:
-            if packaging.uom_id and packaging.product_tmpl_id:
+            if packaging.uom_id and packaging.product_id:
                 packaging.qty = packaging.uom_id._compute_quantity(
-                    1, to_unit=packaging.product_tmpl_id.uom_id)
+                    1, to_unit=packaging.product_id.uom_id)
             else:
                 packaging.qty = 0
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        self.uom_categ_domain_id = self.product_id.uom_id.category_id.id
 
     @api.multi
     def _inverse_qty(self):
@@ -55,7 +58,7 @@ class ProductPackaging(models.Model):
         :return:
         """
         for packaging in self:
-            category_id = packaging.product_tmpl_id.uom_id.category_id
+            category_id = packaging.product_id.uom_id.category_id
             uom_id = packaging.uom_id.search([
                 ("factor", "=", 1.0 / self.qty),
                 ('category_id', '=', category_id.id)])
@@ -63,7 +66,7 @@ class ProductPackaging(models.Model):
                 uom_id = packaging.uom_id.create({
                     'name': "%s %s" % (category_id.name, packaging.qty),
                     'category_id': category_id.id,
-                    'rounding': packaging.product_tmpl_id.uom_id.rounding,
+                    'rounding': packaging.product_id.uom_id.rounding,
                     'uom_type': 'bigger',
                     'factor_inv': packaging.qty,
                     'active': True

@@ -11,7 +11,7 @@
                 <page name="packaging" string="Packaging"  attrs="{'invisible':[('type','=','service')]}" groups="product.group_stock_packaging" >
                     <group name="packaging" string="Packaging">
                         <field name="packaging_ids" string="Configurations"
-                               context="{'get_uom_categ_from_uom': uom_id, 'tree_view_ref':'product.product_packaging_tree_view_product', 'form_view_ref': 'product.product_packaging_form_view_without_product'}"/>
+                               context="{'get_uom_categ_from_uom': parent.uom_id, 'tree_view_ref':'product.product_packaging_tree_view_product', 'form_view_ref': 'product.product_packaging_form_view_without_product'}"/>
                     </group>
                 </page>
             </page>
