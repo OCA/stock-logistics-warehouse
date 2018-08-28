@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import odoo.tests.common as common
@@ -11,31 +10,31 @@ class TestProductPackaging(common.TransactionCase):
         super(TestProductPackaging, self).setUp()
         self.uom_unit = self.env.ref('product.product_uom_unit')
         self.uom_dozen = self.env.ref('product.product_uom_dozen')
-        self.product_tmpl_dozen = self.env['product.template'].create({
+        self.product_dozen = self.env['product.product'].create({
             'name': 'PRODUCT DOZEN',
             'uom_id': self.uom_dozen.id,
         })
-        self.product_tmpl_unit = self.env['product.template'].create({
+        self.product_unit = self.env['product.product'].create({
             'name': 'PRODUCT UNIT',
             'uom_id': self.uom_unit.id,
         })
 
     def test_compute_quantity_by_package(self):
         """ Create a packagings with uom product_uom_dozen on
-                * product_tmpl_dozen (uom is product_uom_dozen)
-                * product_tmpl_unit (uom is product_uom_unit)
+                * product_dozen (uom is product_uom_dozen)
+                * product_unit (uom is product_uom_unit)
             Result should be :
-                * product_tmpl_dozen -> qty by package : 1
-                * product_tmpl_unit -> qty by package : 12
+                * product_dozen -> qty by package : 1
+                * product_unit -> qty by package : 12
             Create product_uom_24
-            Update product_tmpl_dozen to set this new uom
+            Update product_dozen to set this new uom
             Result should be :
-                * product_tmpl_dozen -> qty by package : 0.5
+                * product_dozen -> qty by package : 0.5
             Update product_package_unit to set this new uom
             Result should be :
                 * product_packaging_unit -> qty by package : 24
             Create product_uom 6
-            Update product_tmpl_dozen to set this new uom
+            Update product_dozen to set this new uom
             Result should be :
                 * product_packaging_dozen -> qty by package : 2
             Update product_packaging_unit to set this new uom
@@ -46,14 +45,14 @@ class TestProductPackaging(common.TransactionCase):
         packaging_obj = self.env['product.packaging']
         product_packaging_dozen = packaging_obj.create({
             'name': 'PACKAGING 1',
-            'product_tmpl_id': self.product_tmpl_dozen.id,
+            'product_id': self.product_dozen.id,
             'uom_id': self.uom_dozen.id,
         })
         self.assertAlmostEqual(product_packaging_dozen.qty, 1)
         product_packaging_unit = packaging_obj.with_context(
-            get_uom_categ_from_uom=self.uom_dozen.category_id.id).create({
+            default_product_id=self.product_unit.id).create({
                 'name': 'PACKAGING 2',
-                'product_tmpl_id': self.product_tmpl_unit.id,
+                'product_id': self.product_unit.id,
                 'uom_id': self.uom_dozen.id,
             })
         self.assertAlmostEqual(product_packaging_unit.qty, 12)
@@ -68,7 +67,7 @@ class TestProductPackaging(common.TransactionCase):
             'factor_inv': 24,
             'uom_type': 'bigger',
         })
-        self.product_tmpl_dozen.uom_id = product_uom_24
+        self.product_dozen.uom_id = product_uom_24
         self.assertAlmostEqual(product_packaging_dozen.qty, 0.5)
         product_packaging_unit.uom_id = product_uom_24
         self.assertAlmostEqual(product_packaging_unit.qty, 24)
@@ -78,13 +77,13 @@ class TestProductPackaging(common.TransactionCase):
             'factor_inv': 6,
             'uom_type': 'bigger',
         })
-        self.product_tmpl_dozen.uom_id = product_uom_6
+        self.product_dozen.uom_id = product_uom_6
         self.assertAlmostEqual(product_packaging_dozen.qty, 2)
         product_packaging_unit.uom_id = product_uom_6
         self.assertAlmostEqual(product_packaging_unit.qty, 6)
         # Set Packaging Quantity
         product_packaging_dozen.qty = 1
-        self.assertEquals(
+        self.assertEqual(
             self.uom_unit,
             product_packaging_dozen.uom_id
         )
@@ -95,22 +94,22 @@ class TestProductPackaging(common.TransactionCase):
         # Define a new packaging unit
         uom_524 = self.env['product.uom'].search([
             ('category_id', '=',
-             product_packaging_dozen.product_tmpl_id.uom_id.category_id.id),
+             product_packaging_dozen.product_id.uom_id.category_id.id),
             ('name',
              '=',
              '%s %s' %
-             (product_packaging_dozen.product_tmpl_id.uom_id.category_id.name,
+             (product_packaging_dozen.product_id.uom_id.category_id.name,
               float(524)))
             ])
         self.assertEqual(0, len(uom_524))
         product_packaging_dozen.qty = 524
         uom_524 = self.env['product.uom'].search([
             ('category_id', '=',
-             product_packaging_dozen.product_tmpl_id.uom_id.category_id.id),
+             product_packaging_dozen.product_id.uom_id.category_id.id),
             ('name',
              '=',
              '%s %s' %
-             (product_packaging_dozen.product_tmpl_id.uom_id.category_id.name,
+             (product_packaging_dozen.product_id.uom_id.category_id.name,
               float(524)))
             ])
         self.assertEqual(1, len(uom_524))
