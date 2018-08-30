@@ -6,7 +6,7 @@
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_form"/>
         <field name="arch" type="xml">
-            <group name="moved_quants_grp" position="after">
+            <group name="linked_group" position="after">
                 <group name="account_move_lines_grp"
                        string="Journal Items" colspan="4">
                     <field name="account_move_line_ids" readonly="1"
@@ -22,7 +22,7 @@
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_picking_form"/>
         <field name="arch" type="xml">
-            <group name="moved_quants_grp" position="after">
+            <group name="quants_grp" position="after">
                 <group name="account_move_lines_grp"
                        string="Journal Items" colspan="4">
                     <field name="account_move_line_ids" readonly="1"
