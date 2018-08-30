@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015 Eficent Business and IT Consulting Services S.L. (www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -78,14 +77,14 @@ class TestAccountMoveLineStockInfo(TransactionCase):
                     'email': 'test@yourcompany.com',
                     'company_id': company.id,
                     'company_ids': [(4, company.id)],
-                    'groups_id': [(6, 0, group_ids)]
+                    'groups_id': [(6, 0, group_ids)],
                 })
         return user.id
 
-    def _create_account_type(self, name, type):
+    def _create_account_type(self, name, a_type):
         acc_type = self.acc_type_model.create({
             'name': name,
-            'type': type
+            'type': a_type,
         })
         return acc_type
 
@@ -94,9 +93,8 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         account = self.account_model.create({
             'name': name,
             'code': code,
-            'type': 'other',
             'user_type_id': acc_type.id,
-            'company_id': company.id
+            'company_id': company.id,
         })
         return account
 
@@ -133,7 +131,7 @@ class TestAccountMoveLineStockInfo(TransactionCase):
                     'product_uom_qty': 3,
                     'location_id': location.id,
                     'location_dest_id': location_dest.id,
-                    'price_unit': 10
+                    'price_unit': 10,
                 })]
         })
         return picking
@@ -145,6 +143,7 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         picking_in = self._create_picking(
             self.picking_type_in, self.location_supplier, self.location_stock)
         picking_in.action_confirm()
+        picking_in.move_lines.quantity_done = 1
         picking_in.action_done()
 
         account_move_line = False
@@ -157,6 +156,7 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         picking_out = self._create_picking(
             self.picking_type_out, self.location_supplier, self.location_stock)
         picking_out.action_confirm()
+        picking_out.move_lines.quantity_done = 1
         picking_out.action_done()
 
         for move in picking_out.move_lines:
