@@ -54,12 +54,13 @@ class ProductProduct(models.Model):
 
     @api.multi
     def _compute_available_quantities_dict(self):
-        res = super(ProductProduct, self)._compute_available_quantities_dict()
+        res, stock_dict = super(ProductProduct,
+                                self)._compute_available_quantities_dict()
         # compute qty for product with bom
         product_with_bom = self.filtered('bom_id')
 
         if not product_with_bom:
-            return res
+            return res, stock_dict
         icp = self.env['ir.config_parameter']
         stock_available_mrp_based_on = icp.get_param(
             'stock_available_mrp_based_on', 'qty_available'
@@ -79,7 +80,7 @@ class ProductProduct(models.Model):
         if res and stock_available_mrp_based_on in res.values()[0]:
             # If the qty is computed by the same method use it to avoid
             # stressing the cache
-            component_qties = \
+            component_qties, _ = \
                 component_products._compute_available_quantities_dict()
         else:
             # The qty is a field computed by an other method than the
@@ -113,7 +114,7 @@ class ProductProduct(models.Model):
             res[product.id]['potential_qty'] = potential_qty
             res[product.id]['immediately_usable_qty'] += potential_qty
 
-        return res
+        return res, stock_dict
 
     @api.multi
     def _explode_boms(self):
