@@ -31,11 +31,12 @@ class ProductProduct(models.Model):
 
     @api.multi
     def _compute_available_quantities_dict(self):
-        res = super(ProductProduct, self)._compute_available_quantities_dict()
+        res, stock_dict = super(ProductProduct,
+                                self)._compute_available_quantities_dict()
         for product in self:
             res[product.id]['immediately_usable_qty'] -= \
                 product.quoted_qty
-        return res
+        return res, stock_dict
 
     def _compute_quoted_qty(self):
         """Compute the quantities in Quotations."""
