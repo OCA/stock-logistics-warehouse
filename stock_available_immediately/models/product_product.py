@@ -11,12 +11,13 @@ class ProductProduct(models.Model):
 
     @api.multi
     def _compute_available_quantities_dict(self):
-        res = super(ProductProduct, self)._compute_available_quantities_dict()
+        res, stock_dict = super(ProductProduct,
+                                self)._compute_available_quantities_dict()
         for product in self:
             res[product.id]['immediately_usable_qty'] -= \
-                product.incoming_qty
-        return res
+                stock_dict[product.id]['incoming_qty']
+        return res, stock_dict
 
     @api.depends('virtual_available', 'incoming_qty')
     def _compute_available_quantities(self):
-        super(ProductProduct, self)._compute_available_quantities()
+        return super(ProductProduct, self)._compute_available_quantities()
