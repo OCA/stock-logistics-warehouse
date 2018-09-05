@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-09-05 10:39+0000\n"
+"PO-Revision-Date: 2018-09-06 11:53+0000\n"
 "Last-Translator: Enric Tobella <etobella@creublanca.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -165,7 +165,7 @@ msgstr "La localización debe coincidir"
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_order_id
 msgid "Order"
-msgstr "Petición"
+msgstr "Pedido"
 
 #. module: stock_request_kanban
 #: model:ir.actions.report,name:stock_request_kanban.action_report_kanban
@@ -225,7 +225,7 @@ msgstr "Kanbans de Solicitud de Existencias"
 #: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_form
 #: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_tree
 msgid "Stock Requests"
-msgstr "Solicitudes de Existencias"
+msgstr "Solicitudes de existencias"
 
 #. module: stock_request_kanban
 #: model:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
