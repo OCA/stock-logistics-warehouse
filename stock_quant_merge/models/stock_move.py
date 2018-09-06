@@ -12,5 +12,7 @@ class StockMove(models.Model):
         for move in self:
             quants = move.reserved_quant_ids
             super(StockMove, move).quants_unreserve()
-            if quants and not self._context.get('disable_stock_quant_merge'):
+            if (
+                    quants and
+                    not self.env.context.get('disable_stock_quant_merge')):
                 quants.merge_stock_quants()
