@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 Numérigraphe SARL
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
@@ -14,14 +13,12 @@ class StockMove(models.Model):
     @api.multi
     def _get_reserved_locations(self):
         self.ensure_one()
-        return self.reserved_quant_ids.mapped('location_id') + \
-            self.split_from.reserved_quant_ids.mapped('location_id')
+        return self.move_line_ids.mapped('location_id')
 
     @api.multi
     def _get_dest_locations(self):
         self.ensure_one()
-        return self.linked_move_operation_ids.mapped(
-            'operation_id.location_dest_id')
+        return self.move_line_ids.mapped('location_dest_id')
 
     @api.constrains('location_dest_id', 'location_id', 'state')
     def _check_locked_location(self):
