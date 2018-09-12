@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -104,7 +103,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         if the excluding sublocations option is disabled."""
         inventory_location = self._create_inventory_all_products(
             'location inventory', self.location, False)
-        inventory_location.prepare_inventory()
+        inventory_location.action_start()
         inventory_location.action_done()
         lines = inventory_location.line_ids
         self.assertEqual(len(lines), 2, 'Not all expected products are '
@@ -117,9 +116,9 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
             'location inventory', self.location, True)
         inventory_sublocation = self._create_inventory_all_products(
             'sublocation inventory', self.sublocation, True)
-        inventory_location.prepare_inventory()
+        inventory_location.action_start()
         inventory_location.action_done()
-        inventory_sublocation.prepare_inventory()
+        inventory_sublocation.action_start()
         inventory_sublocation.action_done()
         lines_location = inventory_location.line_ids
         lines_sublocation = inventory_sublocation.line_ids
@@ -137,7 +136,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
             'lot_id': self.lot_a.id,
             'exclude_sublocation': True
         })
-        inventory.prepare_inventory()
+        inventory.action_start()
         inventory.action_done()
         lines = inventory.line_ids
         self.assertEqual(len(lines), 1, 'The products in the sublocations are '
@@ -149,7 +148,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         self.quant_model.create({
             'product_id': self.product1.id,
             'location_id': self.location.id,
-            'qty': 1,
+            'quantity': 1,
             'owner_id': self.partner,
         })
         inventory = self.inventory_model.sudo(self.user.id).create({
@@ -160,7 +159,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
             'partner_id': self.partner,
             'exclude_sublocation': True
         })
-        inventory.prepare_inventory()
+        inventory.action_start()
         lines = inventory.line_ids
         self.assertEqual(len(lines), 1,
                          'The products in the sublocations are '
@@ -171,7 +170,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         self.quant_model.create({
             'product_id': self.product1.id,
             'location_id': self.location.id,
-            'qty': 1,
+            'quantity': 1,
             'package_id': self.package.id
         })
         inventory = self.inventory_model.sudo(self.user.id).create({
@@ -181,7 +180,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
             'package_id': self.package.id,
             'exclude_sublocation': True
         })
-        inventory.prepare_inventory()
+        inventory.action_start()
         lines = inventory.line_ids
         self.assertEqual(len(lines), 1, 'The products in the sublocations are '
                                         'not excluded with package filter.')
