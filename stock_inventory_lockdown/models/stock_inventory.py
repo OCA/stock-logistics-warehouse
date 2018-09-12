@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2013-2016 Numérigraphe SARL
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
