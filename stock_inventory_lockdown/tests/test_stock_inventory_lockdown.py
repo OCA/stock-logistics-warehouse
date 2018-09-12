@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2014 Acsone SA/NV (http://www.acsone.eu)
 # © 2016 Numérigraphe SARL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -26,17 +25,17 @@ class StockInventoryLocationTest(TestStockCommon):
         self.env['stock.quant'].create(
             {'location_id': self.new_location.id,
              'product_id': self.productA.id,
-             'qty': 10.0})
+             'quantity': 10.0})
         self.env['stock.quant'].create(
             {'location_id': self.new_parent_location.id,
              'product_id': self.productB.id,
-             'qty': 5.0})
+             'quantity': 5.0})
         # Prepare an inventory
         self.inventory = self.env['stock.inventory'].create(
             {'name': 'Lock down location',
              'filter': 'none',
              'location_id': self.new_location.id})
-        self.inventory.prepare_inventory()
+        self.inventory.action_start()
         self.assertTrue(self.inventory.line_ids, 'The inventory is empty.')
 
     def create_stock_move(self, product, origin_id=False, dest_id=False):
@@ -79,7 +78,7 @@ class StockInventoryLocationTest(TestStockCommon):
             {'name': 'Lock down location',
              'filter': 'partial',
              'location_id': self.new_sublocation.id})
-        inventory_subloc.prepare_inventory()
+        inventory_subloc.action_start()
         line = self.env['stock.inventory.line'].create(
             {'product_id': self.productA.id,
              'product_qty': 22.0,
@@ -95,16 +94,18 @@ class StockInventoryLocationTest(TestStockCommon):
         location."""
         move1 = self.create_stock_move(
             self.productA, origin_id=self.inventory.location_id.id)
-        move1.action_confirm()
+        move1._action_confirm()
         with self.assertRaises(ValidationError):
-            move1.action_assign()
-            move1.action_done()
+            move1._action_assign()
+            move1.move_line_ids[0].qty_done = 10.0
+            move1._action_done()
         move2 = self.create_stock_move(
             self.productA, dest_id=self.inventory.location_id.id)
         with self.assertRaises(ValidationError):
-            move2.action_confirm()
-            move2.action_assign()
-            move2.action_done()
+            move2._action_confirm()
+            move2._action_assign()
+            move2.move_line_ids[0].qty_done = 10.0
+            move2._action_done()
 
     def test_move_reserved_quants(self):
         """Shipping stock should be allowed or not depending on reserved
@@ -114,14 +115,16 @@ class StockInventoryLocationTest(TestStockCommon):
         inventoried."""
         move1 = self.create_stock_move(
             self.productB, self.new_parent_location.id)
-        move1.action_confirm()
-        move1.action_assign()
-        move1.action_done()
+        move1._action_confirm()
+        move1._action_assign()
+        move1.move_line_ids[0].qty_done = 10.0
+        move1._action_done()
         self.assertEqual(
             move1.state, 'done', 'Move has not been completed')
         move2 = self.create_stock_move(
             self.productA, self.new_parent_location.id)
-        move2.action_confirm()
+        move2._action_confirm()
         with self.assertRaises(ValidationError):
-            move2.action_assign()
-            move2.action_done()
+            move2._action_assign()
+            move2.move_line_ids[0].qty_done = 10.0
+            move2._action_done()
