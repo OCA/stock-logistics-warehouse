@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -30,25 +29,30 @@ class SlotVerificationRequest(models.Model):
     name = fields.Char(
         default="/", required=True,
         readonly=True, states={'wait': [('readonly', False)]})
-    inventory_id = fields.Many2one(comodel_name='stock.inventory',
-                                   string='Inventory Adjustment',
-                                   readonly=True)
-    inventory_line_id = fields.Many2one(comodel_name='stock.inventory.line',
-                                        string='Inventory Line',
-                                        readonly=True)
-    location_id = fields.Many2one(comodel_name='stock.location',
-                                  string='Location',
-                                  required=True)
+    inventory_id = fields.Many2one(
+        comodel_name='stock.inventory',
+        string='Inventory Adjustment',
+        readonly=True)
+    inventory_line_id = fields.Many2one(
+        comodel_name='stock.inventory.line',
+        string='Inventory Line',
+        readonly=True)
+    location_id = fields.Many2one(
+        comodel_name='stock.location',
+        string='Location',
+        required=True)
     state = fields.Selection(selection=[
         ('wait', 'Waiting Actions'),
         ('open', 'In Progress'),
         ('cancelled', 'Cancelled'),
         ('done', 'Solved')
     ], string='Status', default='wait')
-    responsible_id = fields.Many2one(comodel_name='res.users',
-                                     string='Assigned to')
-    product_id = fields.Many2one(comodel_name='product.product',
-                                 string='Product', required=True)
+    responsible_id = fields.Many2one(
+        comodel_name='res.users',
+        string='Assigned to')
+    product_id = fields.Many2one(
+        comodel_name='product.product',
+        string='Product', required=True)
     notes = fields.Text(string='Notes')
     involved_move_ids = fields.Many2many(
         comodel_name='stock.move',
