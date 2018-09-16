@@ -10,19 +10,16 @@
     'category': 'Warehouse',
     'license': 'AGPL-3',
     'complexity': 'normal',
-    'images': [],
-    'website': 'http://www.savoirfairelinux.com',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'depends': [
         'sale_stock',
     ],
-    'demo': [],
     'data': [
         'views/res_partner_view.xml',
         'views/res_config_settings_view.xml',
         'views/stock_location_view.xml',
     ],
     'post_init_hook': 'post_init_hook',
-    'test': [],
     'auto_install': False,
     'installable': True,
 }
