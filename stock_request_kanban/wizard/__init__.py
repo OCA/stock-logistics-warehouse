@@ -4,3 +4,4 @@
 from . import wizard_stock_request_kanban_abstract
 from . import wizard_stock_request_kanban
 from . import wizard_stock_request_order_kanban
+from . import wizard_stock_inventory_kanban
