@@ -35,4 +35,3 @@ class WizardStockRequestOrderKanbanAbstract(models.TransientModel):
             self.status_state = 1
             return False
         return res
-

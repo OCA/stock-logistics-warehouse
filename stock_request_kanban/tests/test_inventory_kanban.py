@@ -6,7 +6,6 @@ from .base_test import TestBaseKanban
 
 
 class TestKanban(TestBaseKanban):
-
     def setUp(self):
         super().setUp()
         self.main_company = self.env.ref('base.main_company')
@@ -42,6 +41,7 @@ class TestKanban(TestBaseKanban):
             'product_uom_id': self.product.uom_id.id,
             'product_uom_qty': 1,
         })
+
     def test_inventory_warehouse(self):
         inventory = self.env['stock.inventory.kanban'].create({
             'warehouse_ids': [(4, self.kanban_1.warehouse_id.id)],
@@ -74,11 +74,11 @@ class TestKanban(TestBaseKanban):
         self.assertEqual(wizard.status_state, 1)
         self.pass_code(wizard, self.kanban_1.name)
         self.assertEqual(wizard.status_state, 0)
-        self.assertNotIn(self.kanban_1,  inventory.missing_kanban_ids)
+        self.assertNotIn(self.kanban_1, inventory.missing_kanban_ids)
         self.assertIn(self.kanban_1, inventory.scanned_kanban_ids)
         self.pass_code(wizard, self.kanban_1.name)
         self.assertEqual(wizard.status_state, 1)
-        self.assertNotIn(self.kanban_1,  inventory.missing_kanban_ids)
+        self.assertNotIn(self.kanban_1, inventory.missing_kanban_ids)
         self.assertIn(self.kanban_1, inventory.scanned_kanban_ids)
         inventory.finish_inventory()
         self.assertEqual(inventory.state, 'finished')

@@ -39,4 +39,3 @@ class StockRequestKanban(models.Model):
         return self.env['stock.request.kanban'].search([
             ('name', '=', recomputed_barcode)
         ])
-
