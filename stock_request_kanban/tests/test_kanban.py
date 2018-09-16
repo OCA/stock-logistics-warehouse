@@ -2,12 +2,11 @@
 # Copyright 2017 Eficent Business and IT Consulting Services, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests.common import TransactionCase
 from odoo.exceptions import ValidationError
-from reportlab.graphics.barcode import getCodes
+from .base_test import TestBaseKanban
 
 
-class TestKanban(TransactionCase):
+class TestKanban(TestBaseKanban):
 
     def setUp(self):
         super().setUp()
@@ -158,9 +157,3 @@ class TestKanban(TransactionCase):
         self.assertTrue(self.env['stock.request'].search(
             [('kanban_id', '=', kanban_2.id)])
         )
-
-    def pass_code(self, wizard, code):
-        bcc = getCodes()[wizard.get_barcode_format()](value=code)
-        bcc.validate()
-        bcc.encode()
-        wizard.on_barcode_scanned(bcc.encoded[1:-1])
