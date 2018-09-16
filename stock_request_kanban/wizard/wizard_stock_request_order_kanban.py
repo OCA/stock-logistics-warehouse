@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 
 class WizardStockRequestOrderKanban(models.TransientModel):
     _name = "wizard.stock.request.order.kanban"
-    _inherit = "wizard.stock.request.kanban.abstract"
+    _inherit = "wizard.stock.request.kanban"
 
     order_id = fields.Many2one(
         'stock.request.order',
@@ -47,6 +47,9 @@ class WizardStockRequestOrderKanban(models.TransientModel):
         res['order_id'] = self.order_id.id,
         res['expected_date'] = self.order_id.expected_date,
         return res
+
+    def stock_request_ending(self):
+        return
 
     def barcode_ending(self):
         super().barcode_ending()

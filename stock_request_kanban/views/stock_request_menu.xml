@@ -13,4 +13,10 @@
               parent="stock_request.menu_stock_request_operations"
               action="wizard_stock_request_kanban_action"
               sequence="40"/>
+
+    <menuitem id="menu_wizard_stock_inventory_kanban"
+              name="Inventory"
+              parent="stock_request.menu_stock_request_operations"
+              action="stock_inventory_kanban_action"
+              sequence="60"/>
 </odoo>

@@ -1,7 +1,9 @@
 # Copyright 2018 Creu Blanca
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, models, fields
+from odoo import api, models, fields, _
+from odoo.exceptions import ValidationError
+from reportlab.graphics.barcode import getCodes
 
 
 class StockRequestKanban(models.Model):
@@ -17,3 +19,23 @@ class StockRequestKanban(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code(
                 'stock.request.kanban')
         return super().create(vals)
+
+    @api.model
+    def get_barcode_format(self):
+        return 'Standard39'
+
+    @api.model
+    def _recompute_barcode(self, barcode):
+        bcc = getCodes()[self.get_barcode_format()](value=barcode[:-1])
+        bcc.validate()
+        bcc.encode()
+        if bcc.encoded[1:-1] != barcode:
+            raise ValidationError(_('CRC is not valid'))
+        return barcode[:-1]
+
+    @api.model
+    def search_barcode(self, barcode):
+        recomputed_barcode = self._recompute_barcode(barcode)
+        return self.env['stock.request.kanban'].search([
+            ('name', '=', recomputed_barcode)
+        ])
