@@ -10,14 +10,19 @@ class StockInventoryKanban(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(
-        readonly=True, states={'draft': [('readonly', False)]}
+        readonly=True, states={'draft': [('readonly', False)]}, copy=False,
     )
-    state = fields.Selection([
-        ('draft', 'Draft'),
-        ('on_progress', 'On progress'),
-        ('finished', 'Finished'),
-        ('closed', 'Closed')
-    ], required=True, default='draft', readonly=True)
+    state = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('in_progress', 'In progress'),
+            ('finished', 'Finished'),
+            ('closed', 'Closed'),
+            ('cancelled', 'Cancelled')
+        ],
+        required=True, default='draft', readonly=True, copy=False,
+        track_visibility='onchange'
+    )
     warehouse_ids = fields.Many2many(
         'stock.warehouse', string='Warehouse',
         ondelete="cascade",
@@ -38,12 +43,12 @@ class StockInventoryKanban(models.Model):
     kanban_ids = fields.Many2many(
         'stock.request.kanban',
         relation='stock_inventory_kanban_kanban',
-        readonly=True,
+        readonly=True, copy=False,
     )
     scanned_kanban_ids = fields.Many2many(
         'stock.request.kanban',
         relation='stock_inventory_kanban_scanned_kanban',
-        readonly=True,
+        readonly=True, copy=False,
     )
     missing_kanban_ids = fields.Many2many(
         'stock.request.kanban',
@@ -70,7 +75,7 @@ class StockInventoryKanban(models.Model):
 
     def _start_inventory_values(self):
         return {
-            'state': 'on_progress'
+            'state': 'in_progress'
         }
 
     def _finish_inventory_values(self):
@@ -113,3 +118,23 @@ class StockInventoryKanban(models.Model):
             'stock_request_kanban.action_report_kanban').report_action(
             self.missing_kanban_ids
         )
+
+    def _cancel_inventory_values(self):
+        return {
+            'state': 'cancelled',
+        }
+
+    @api.multi
+    def cancel(self):
+        self.write(self._cancel_inventory_values())
+
+    def _to_draft_inventory_values(self):
+        return {
+            'state': 'draft',
+            'kanban_ids': [(5, 0)],
+            'scanned_kanban_ids': [(5, 0)],
+        }
+
+    @api.multi
+    def to_draft(self):
+        self.write(self._to_draft_inventory_values())

@@ -18,16 +18,22 @@
             <form string="Stock Inventories">
                 <header>
                     <button name="start_inventory" type="object" string="Start"
-                            states="draft"
+                            states="draft" class="btn-primary"
                             />
                     <button name="finish_inventory" type="object" string="Finish"
-                            states="on_progress"
+                            states="in_progress" class="btn-primary"
                             />
                     <button name="print_missing_kanbans" type="object" string="Print missing"
                             states="finished"
                             />
                     <button name="close_inventory" type="object" string="Close"
-                            states="finished"
+                            states="finished" class="btn-primary"
+                            />
+                    <button name="cancel" type="object" string="Cancel"
+                            states="draft,in_progress,finished"
+                            />
+                    <button name="to_draft" type="object" string="Set to draft"
+                            states="cancelled"
                             />
                     <field name="state" widget="statusbar"/>
                 </header>
@@ -37,7 +43,7 @@
                                 type="action"
                                 icon="fa-barcode"
                                 string="Scan"
-                                states="on_progress"
+                                states="in_progress"
                                 class="oe_read_only"
                         />
                     </div>

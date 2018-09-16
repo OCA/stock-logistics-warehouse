@@ -66,7 +66,7 @@ class TestKanban(TestBaseKanban):
         self.assertIn(self.kanban_1, inventory.kanban_ids)
         self.assertNotIn(self.kanban_3, inventory.kanban_ids)
         self.assertIn(self.kanban_1, inventory.missing_kanban_ids)
-        self.assertEqual(inventory.state, 'on_progress')
+        self.assertEqual(inventory.state, 'in_progress')
         wizard = self.env['wizard.stock.inventory.kanban'].with_context(
             default_inventory_kanban_id=inventory.id
         ).create({})
@@ -84,3 +84,18 @@ class TestKanban(TestBaseKanban):
         self.assertEqual(inventory.state, 'finished')
         inventory.close_inventory()
         self.assertEqual(inventory.state, 'closed')
+    def test_cancel_inventory(self):
+        inventory = self.env['stock.inventory.kanban'].create({
+            'product_ids': [(4, self.product.id)],
+        })
+        inventory.start_inventory()
+        self.assertIn(self.kanban_1, inventory.kanban_ids)
+        self.assertNotIn(self.kanban_3, inventory.kanban_ids)
+        self.assertIn(self.kanban_1, inventory.missing_kanban_ids)
+        self.assertEqual(inventory.state, 'in_progress')
+        inventory.cancel()
+        self.assertEqual(inventory.state, 'cancelled')
+        inventory.to_draft()
+        self.assertEqual(inventory.state, 'draft')
+        self.assertFalse(inventory.kanban_ids)
+        self.assertFalse(inventory.scanned_kanban_ids)
