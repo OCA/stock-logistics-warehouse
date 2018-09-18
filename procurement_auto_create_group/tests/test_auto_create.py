@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -8,53 +7,89 @@ from odoo.tests.common import TransactionCase
 class TestProcurementAutoCreateGroup(TransactionCase):
     def setUp(self, *args, **kwargs):
         super(TestProcurementAutoCreateGroup, self).setUp(*args, **kwargs)
-        self.po_model = self.env['procurement.order']
-        self.pr_model = self.env['procurement.rule']
-        self.product_12 = self.env.ref('product.product_product_12')
-        # Needed to avoid the dependency with stock:
-        if self.env.registry.models.get('stock.picking'):
-            picking_type_id = self.env.ref('stock.picking_type_internal').id
-        else:
-            picking_type_id = False
+        self.group_obj = self.env['procurement.group']
+        self.rule_obj = self.env['procurement.rule']
+        self.route_obj = self.env['stock.location.route']
+        self.move_obj = self.env['stock.move']
+        self.product_obj = self.env['product.product']
 
-        # Create rules:
-        self.no_auto_create = self.pr_model.create({
-            'name': 'rule without autocreate',
-            'auto_create_group': False,
-            'action': [],
-            'picking_type_id': picking_type_id,
+        self.warehouse = self.env.ref('stock.warehouse0')
+        self.location = self.env.ref('stock.stock_location_stock')
+        loc_components = self.env.ref('stock.stock_location_components')
+        picking_type_id = self.env.ref('stock.picking_type_internal').id
+
+        # Create rules and routes:
+        route_auto = self.route_obj.create({
+            'name': 'Auto Create Group',
         })
-        self.auto_create = self.pr_model.create({
+        self.rule_1 = self.rule_obj.create({
             'name': 'rule with autocreate',
+            'route_id': route_auto.id,
             'auto_create_group': True,
-            'action': [],
+            'action': 'move',
+            'warehouse_id': self.warehouse.id,
             'picking_type_id': picking_type_id,
+            'location_id': self.location.id,
+            'location_src_id': loc_components.id,
+        })
+        route_no_auto = self.route_obj.create({
+            'name': 'Not Auto Create Group',
+        })
+        self.rule_obj.create({
+            'name': 'rule with no autocreate',
+            'route_id': route_no_auto.id,
+            'auto_create_group': False,
+            'action': 'move',
+            'warehouse_id': self.warehouse.id,
+            'picking_type_id': picking_type_id,
+            'location_id': self.location.id,
+            'location_src_id': loc_components.id,
         })
 
-    def test_auto_create_group(self):
+        # Prepare products:
+        self.prod_auto = self.product_obj.create({
+            'name': 'Test Product 1',
+            'type': 'product',
+            'route_ids': [(6, 0, [route_auto.id])],
+        })
+        self.prod_no_auto = self.product_obj.create({
+            'name': 'Test Product 2',
+            'type': 'product',
+            'route_ids': [(6, 0, [route_no_auto.id])],
+        })
+
+    def _procure(self, product):
+        values = {}
+        self.group_obj.run(
+            product, 5.0, product.uom_id, self.location,
+            'TEST', 'odoo tests', values,
+        )
+        return True
+
+    def test_01_no_auto_create_group(self):
         """Test auto creation of group."""
-        proc1 = self.po_model.create({
-            'name': 'proc01',
-            'product_id': self.product_12.id,
-            'product_qty': 1.0,
-            'product_uom': self.product_12.uom_id.id,
-            'rule_id': self.no_auto_create.id,
-        })
-        self.assertFalse(proc1.group_id,
-                         "Procurement Group should not have been assigned.")
-        proc2 = self.po_model.create({
-            'name': 'proc02',
-            'product_id': self.product_12.id,
-            'product_qty': 1.0,
-            'product_uom': self.product_12.uom_id.id,
-            'rule_id': self.auto_create.id,
-        })
-        self.assertTrue(proc2.group_id,
-                        "Procurement Group has not been assigned.")
+        move = self.move_obj.search([
+            ('product_id', '=', self.prod_no_auto.id)])
+        self.assertFalse(move)
+        self._procure(self.prod_no_auto)
+        move = self.move_obj.search([
+            ('product_id', '=', self.prod_no_auto.id)])
+        self.assertTrue(move)
+        self.assertFalse(
+            move.group_id, "Procurement Group should not have been assigned.")
 
-    def test_onchange_method(self):
+    def test_02_auto_create_group(self):
+        move = self.move_obj.search([('product_id', '=', self.prod_auto.id)])
+        self.assertFalse(move)
+        self._procure(self.prod_auto)
+        move = self.move_obj.search([('product_id', '=', self.prod_auto.id)])
+        self.assertTrue(move)
+        self.assertTrue(move.group_id, "Procurement Group not assigned.")
+
+    def test_03_onchange_method(self):
         """Test onchange method for procurement rule."""
-        proc_rule = self.auto_create
+        proc_rule = self.rule_1
+        self.assertTrue(proc_rule.auto_create_group)
         proc_rule.write({'group_propagation_option': 'none'})
         proc_rule._onchange_group_propagation_option()
         self.assertFalse(proc_rule.auto_create_group)

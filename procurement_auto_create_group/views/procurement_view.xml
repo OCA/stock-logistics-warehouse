@@ -2,10 +2,9 @@
 <odoo>
 
     <record model="ir.ui.view" id="view_procurement_rule_form">
-        <field name="name">procurement.rule.form</field>
+        <field name="name">procurement.rule.form - procurement_auto_create_group</field>
         <field name="model">procurement.rule</field>
-        <field name="inherit_id"
-               ref="procurement.view_procurement_rule_form"/>
+        <field name="inherit_id" ref="stock.view_procurement_rule_form"/>
         <field name="arch" type="xml">
             <field name="group_propagation_option" position="after">
                 <field name="auto_create_group"
