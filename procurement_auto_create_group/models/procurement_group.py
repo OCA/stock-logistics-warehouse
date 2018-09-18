@@ -6,8 +6,17 @@ from odoo import api, models, _
 from odoo.exceptions import UserError
 
 
-class ProcurementOrder(models.Model):
-    _inherit = 'procurement.order'
+class ProcurementGroup(models.Model):
+    _inherit = 'procurement.group'
+
+    @api.model
+    def _get_rule(self, product_id, location_id, values):
+        result = super()._get_rule(product_id, location_id, values)
+        if result and not values.get('group_id') and result.auto_create_group:
+            group_data = self._prepare_auto_procurement_group_data()
+            group = self.env['procurement.group'].create(group_data)
+            values['group_id'] = group
+        return result
 
     @api.model
     def _prepare_auto_procurement_group_data(self):
@@ -18,13 +27,3 @@ class ProcurementOrder(models.Model):
         return {
             'name': name
         }
-
-    @api.multi
-    def _assign(self):
-        res = super(ProcurementOrder, self)._assign()
-        if (self.rule_id and not self.group_id and
-                self.rule_id.auto_create_group):
-            group_data = self._prepare_auto_procurement_group_data()
-            group = self.env['procurement.group'].create(group_data)
-            self.group_id = group
-        return res
