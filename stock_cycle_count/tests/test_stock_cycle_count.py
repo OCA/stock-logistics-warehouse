@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -166,7 +165,7 @@ class TestStockCycleCount(common.TransactionCase):
         self.quant_model.create({
             'product_id': self.product1.id,
             'location_id': self.count_loc.id,
-            'qty': 1.0,
+            'quantity': 1.0,
             'cost': 15.0
         })
         move1 = self.stock_move_model.create({
@@ -177,7 +176,10 @@ class TestStockCycleCount(common.TransactionCase):
             'location_id': self.count_loc.id,
             'location_dest_id': loc.id
         })
-        move1.action_done()
+        move1._action_confirm()
+        move1._action_assign()
+        move1.move_line_ids[0].qty_done = 1.0
+        move1._action_done()
         wh.cron_cycle_count()
         self.assertNotEqual(pre_existing_count.date_deadline,
                             date_pre_existing_cc,
@@ -200,7 +202,10 @@ class TestStockCycleCount(common.TransactionCase):
             'location_id': loc.id,
             'location_dest_id': self.count_loc.id
         })
-        move2.action_done()
+        move2._action_confirm()
+        move2._action_assign()
+        move2.move_line_ids[0].qty_done = 1.0
+        move2._action_done()
         count = self.cycle_count_model.search([
             ('location_id', '=', loc.id),
             ('cycle_count_rule_id', '=', self.zero_rule.id)])
@@ -213,7 +218,7 @@ class TestStockCycleCount(common.TransactionCase):
         inventory = self.inventory_model.search([
             ('cycle_count_id', '=', self.cycle_count_1.id)])
         self.assertTrue(inventory, 'Inventory not created.')
-        inventory.prepare_inventory()
+        inventory.action_start()
         inventory.action_done()
         self.assertEqual(self.cycle_count_1.state, 'done',
                          'Cycle count not set as done.')

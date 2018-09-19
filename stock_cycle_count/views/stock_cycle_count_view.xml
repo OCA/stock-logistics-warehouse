@@ -124,29 +124,19 @@
                 view_mode="tree,form"
                 context="{'search_default_planned':1,'search_default_execution':1}"/>
     <menuitem id="menu_stock_cycle_count"
-              name="Cycle Counts" parent="stock.menu_stock_inventory_control"
-              action="action_stock_cycle_count" />
+              name="Cycle Counts"
+              parent="stock.menu_stock_warehouse_mgmt"
+              sequence="28"
+              action="action_stock_cycle_count"/>
 
     <!-- Action to confirm several Stock Cycle Counts -->
     <record id="action_server_cycle_count_confirm"
             model="ir.actions.server">
         <field name="name">Confirm Cycle Counts</field>
-        <field name="condition">True</field>
-        <field name="type">ir.actions.server</field>
         <field name="model_id" ref="model_stock_cycle_count" />
+        <field name="binding_model_id" ref="model_stock_cycle_count"/>
         <field name="state">code</field>
         <field name="code">records.action_create_inventory_adjustment()</field>
-    </record>
-
-    <record model="ir.values" id="action_cycle_count_confirm">
-        <field name="name">confirm several cycle counts</field>
-        <field name="action_id"
-               ref="action_server_cycle_count_confirm" />
-        <field name="value" eval="'ir.actions.server,' + str(ref('action_server_cycle_count_confirm'))" />
-        <field name="key">action</field>
-        <field name="model_id" ref="model_stock_cycle_count" />
-        <field name="model">stock.cycle.count</field>
-        <field name="key2">client_action_multi</field>
     </record>
 
 </odoo>
