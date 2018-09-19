@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -92,12 +91,12 @@ class StockWarehouse(models.Model):
                 locations = list(set([d['location'] for d in
                                       proposed_cycle_counts]))
                 for loc in locations:
-                    proposed_for_loc = filter(lambda x: x['location'] == loc,
-                                              proposed_cycle_counts)
+                    proposed_for_loc = list(filter(
+                        lambda x: x['location'] == loc, proposed_cycle_counts))
                     earliest_date = min([d['date'] for d in proposed_for_loc])
-                    cycle_count_proposed = filter(lambda x: x['date'] ==
-                                                  earliest_date,
-                                                  proposed_for_loc)[0]
+                    cycle_count_proposed = list(filter(
+                        lambda x: x['date'] == earliest_date,
+                        proposed_for_loc))[0]
                     domain = [('location_id', '=', loc.id),
                               ('state', 'in', ['draft'])]
                     existing_cycle_counts = self.env[
@@ -130,9 +129,9 @@ class StockWarehouse(models.Model):
         try:
             whs = self.search([])
             whs.action_compute_cycle_count_rules()
-        except:
+        except Exception as e:
             _logger.info(
-                "An error raised while running stock_cycle_count cron job.")
+                "Error while running stock_cycle_count cron job: %s", str(e))
             raise
         _logger.info("stock_cycle_count cron job ended.")
         return True
