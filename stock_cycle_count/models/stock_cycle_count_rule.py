@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -170,7 +169,7 @@ class StockCycleCountRule(models.Model):
                 except Exception as e:
                     raise UserError(
                         _('Error found determining the frequency of periodic '
-                          'cycle count rule. %s') % e.message)
+                          'cycle count rule. %s') % str(e))
             else:
                 next_date = datetime.today()
             cycle_count = self._propose_cycle_count(next_date, loc)
@@ -188,7 +187,7 @@ class StockCycleCountRule(models.Model):
 
     @api.model
     def _compute_turnover(self, move):
-        price = move.get_price_unit()
+        price = move._get_price_unit()
         turnover = move.product_uom_qty * price
         return turnover
 
@@ -217,7 +216,7 @@ class StockCycleCountRule(models.Model):
                     except Exception as e:
                         raise UserError(_(
                             'Error found when comparing turnover with the '
-                            'rule threshold. %s') % e.message)
+                            'rule threshold. %s') % str(e))
             else:
                 next_date = datetime.today()
                 cycle_count = self._propose_cycle_count(next_date, loc)
