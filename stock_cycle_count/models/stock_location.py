@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -11,8 +10,8 @@ from datetime import datetime
 _logger = logging.getLogger(__name__)
 
 try:
-    from numpy import mean
-    NUMPY_PATH = tools.find_in_path('numpy')
+    from statistics import mean
+    STATS_PATH = tools.find_in_path('statistics')
 except (ImportError, IOError) as err:
     _logger.debug(err)
 
