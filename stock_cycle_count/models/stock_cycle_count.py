@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -11,6 +10,7 @@ class StockCycleCount(models.Model):
     _name = 'stock.cycle.count'
     _description = "Stock Cycle Counts"
     _inherit = 'mail.thread'
+    _order = "id desc"
 
     @api.model
     def _default_company(self):
