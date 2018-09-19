@@ -55,12 +55,15 @@
                         <p colspan="4">In either case you can exclude specific locations
                         going to the locations form and checking the box
                         "Exclude from Cycle Count".</p>
-                        <field name="apply_in"/>
-                        <field name="warehouse_ids" widget="many2many_tags"/>
-                        <label for="location_ids"
-                               attrs="{'invisible': [('apply_in', '!=', 'location')]}"/>
-                        <field name="location_ids" colspan="3" nolabel="1"
-                               attrs="{'invisible': [('apply_in', '!=', 'location')]}"/>
+                        <group colspan="2">
+                            <field name="apply_in"/>
+                        </group>
+                        <group colspan="2">
+                            <field name="warehouse_ids" widget="many2many_tags"
+                                   attrs="{'readonly': [('apply_in', '!=', 'warehouse')]}"/>
+                            <field name="location_ids" widget="many2many_tags"
+                                   attrs="{'invisible': [('apply_in', '!=', 'location')]}"/>
+                        </group>
                     </group>
 
                 </sheet>
