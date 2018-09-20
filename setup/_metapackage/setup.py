@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-stock-logistics-warehouse Odoo addons",
     version=version,
     install_requires=[
+        'odoo11-addon-account_move_line_product',
         'odoo11-addon-stock_account_internal_move',
         'odoo11-addon-stock_available',
         'odoo11-addon-stock_available_global',
@@ -15,6 +16,7 @@ setuptools.setup(
         'odoo11-addon-stock_demand_estimate',
         'odoo11-addon-stock_inventory_chatter',
         'odoo11-addon-stock_inventory_discrepancy',
+        'odoo11-addon-stock_inventory_exclude_sublocation',
         'odoo11-addon-stock_mts_mto_rule',
         'odoo11-addon-stock_orderpoint_manual_procurement',
         'odoo11-addon-stock_orderpoint_manual_procurement_uom',
