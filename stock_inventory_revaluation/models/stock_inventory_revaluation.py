@@ -271,9 +271,9 @@ class StockInventoryRevaluation(models.Model):
         if self.product_id:
             amount_diff = 0.0
             if self.product_id.cost_method == 'real':
-                if self.reval_quant_ids:
-                    if self.reval_quant_ids.product_id == self.product_id:
-                        amount_diff += self.reval_quant_ids.get_total_value()
+                for reval_quant in self.reval_quant_ids:
+                    if reval_quant.product_id == self.product_id:
+                        amount_diff += reval_quant.get_total_value()
                 if amount_diff == 0.0:
                     return True
             else:
