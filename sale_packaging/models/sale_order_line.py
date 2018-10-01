@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
+# Copyright 2015-2018 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, models
 
 
 class SaleOrderLine(models.Model):
+
     _inherit = 'sale.order.line'
 
     @api.onchange('product_packaging')
