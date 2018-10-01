@@ -35,7 +35,8 @@ class PurchaseOrderLine(models.Model):
     product_qty = fields.Float(
         compute="_compute_product_qty",
         string='Quantity',
-        inverse='_inverse_product_qty'
+        inverse='_inverse_product_qty',
+        store=True,
     )
 
     @api.multi
