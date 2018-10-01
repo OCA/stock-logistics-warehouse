@@ -13,5 +13,5 @@ class ProductTemplate(models.Model):
         res = super(ProductTemplate, self)._compute_available_quantities_dict()
         for template in self.filtered('bom_ids'):
             res[template.id]['immediately_usable_qty'] =\
-                res[template.id]['potential_qty']
+                template.virtual_available + res[template.id]['potential_qty']
         return res
