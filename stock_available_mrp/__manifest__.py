@@ -11,9 +11,6 @@
         'stock_available',
         'mrp'
     ],
-    'data': [
-        'views/product_template_view.xml',
-    ],
     'demo': [
         'demo/mrp_data.xml',
     ],
