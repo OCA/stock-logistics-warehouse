@@ -5,9 +5,7 @@
 Packaging UOM
 =============
 
-This module was written to use unit of measure instead of quantity by package
-in the definition of packaging.
-The goal is to ease the use of packaging in sale and purchase.
+
 
 Installation
 ============
@@ -19,9 +17,7 @@ To install this module, you need to:
 Configuration
 =============
 
-To configure this module, you need to:
 
-* on product packaging define the unit of measure to use.
 
 Usage
 =====
@@ -49,8 +45,7 @@ Images
 Contributors
 ------------
 
-* Laetitia Gangloff <laetitia.gangloff@acsone.eu>
-* Laurent Mignon <laurent.mignon@acsone.eu>
+
 
 Maintainer
 ----------
