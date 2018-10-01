@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo11-addon-account_move_line_product',
+        'odoo11-addon-account_move_line_stock_info',
         'odoo11-addon-stock_account_internal_move',
         'odoo11-addon-stock_available',
         'odoo11-addon-stock_available_global',
