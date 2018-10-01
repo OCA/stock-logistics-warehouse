@@ -393,3 +393,35 @@ class TestStockInventoryRevaluation(TransactionCase):
         self.assertEqual(len(
             invent_price_change_real.account_move_ids), 0,
             'Accounting entries have not been removed after cancel')
+
+    def test_inventory_revaluation_price_change_real_multi_quant(self):
+        """Test that the inventory is revaluated when the
+        inventory price for a product managed under real costing method is
+        changed even if they are multple quant to revaluate"""
+        # Create an Inventory Revaluation for real cost product
+
+        location = self.env.ref('stock.stock_location_components')
+        self._update_product_qty(self.product_real_1, location, 1)
+
+        revaluation_type = 'price_change'
+        invent_price_change_real = \
+            self._create_inventory_revaluation(
+                revaluation_type,
+                self.product_real_1)
+
+        # Create an Inventory Revaluation Line Quant
+        date_from = date.today() - timedelta(1)
+        self._get_quant(date_from, invent_price_change_real)
+
+        invent_price_change_real.sudo(self.user1).button_post()
+
+        expected_result = (10.00 - 8.00) * 11.00
+        self.assertEqual(len(
+            invent_price_change_real.account_move_ids[0].line_ids), 2,
+            'Incorrect accounting entry generated')
+
+        for move_line in invent_price_change_real.account_move_ids[0].line_ids:
+            if move_line.account_id == self.account_inventory:
+                self.assertEqual(move_line.credit, expected_result,
+                                 'Incorrect inventory revaluation for '
+                                 'type Price Change.')
