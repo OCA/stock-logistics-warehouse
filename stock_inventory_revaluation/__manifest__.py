@@ -9,7 +9,7 @@
     "name": "Stock Inventory Revaluation",
     "summary": "Introduces inventory revaluation as single point to change "
                "the valuation of products.",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
