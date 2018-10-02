@@ -4,6 +4,7 @@
 
 from openerp import models, fields, api
 from openerp.addons import decimal_precision as dp
+from openerp.tools.safe_eval import safe_eval
 
 
 class ProductProduct(models.Model):
@@ -28,9 +29,31 @@ class ProductProduct(models.Model):
         for prod in self:
             prod.immediately_usable_qty = prod.virtual_available
 
+    def _search_immediately_usable_quantity(self, operator, value):
+        res = []
+        assert operator in (
+            '<', '>', '=', '!=', '<=', '>='
+        ), 'Invalid domain operator'
+        assert isinstance(
+            value, (float, int)
+        ), 'Invalid domain value'
+        if operator == '=':
+            operator = '=='
+
+        ids = []
+        products = self.search([])
+        for prod in products:
+            expr = str(prod.immediately_usable_qty) + operator + str(value)
+            eval_dict = {'prod': prod, 'operator': operator, 'value': value}
+            if safe_eval(expr, eval_dict):
+                ids.append(prod.id)
+        res.append(('id', 'in', ids))
+        return res
+
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
         compute='_immediately_usable_qty',
+        search='_search_immediately_usable_quantity',
         string='Available to promise',
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"

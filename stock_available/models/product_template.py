@@ -24,9 +24,17 @@ class ProductTemplate(models.Model):
         for tmpl in self:
             tmpl.immediately_usable_qty = tmpl.virtual_available
 
+    def _search_immediately_usable_quantity(self, operator, value):
+        prod_obj = self.env['product.product']
+        product_variants = prod_obj.search(
+            [('immediately_usable_qty', operator, value)]
+        )
+        return [('product_variant_ids', 'in', product_variants.ids)]
+
     immediately_usable_qty = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
         compute='_immediately_usable_qty',
+        search='_search_immediately_usable_quantity',
         string='Available to promise',
         help="Stock for this Product that can be safely proposed "
              "for sale to Customers.\n"
