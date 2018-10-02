@@ -48,6 +48,9 @@ class WizardStockRequestOrderKanban(models.TransientModel):
         res['expected_date'] = self.order_id.expected_date,
         return res
 
+    def stock_request_ending(self):
+        return
+
     def barcode_ending(self):
         super().barcode_ending()
         self.order_id = self.stock_request_id.order_id

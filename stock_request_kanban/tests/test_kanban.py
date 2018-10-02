@@ -20,6 +20,11 @@ class TestKanban(TestBaseKanban):
         })
         self.wh2 = self.env['stock.warehouse'].search(
             [('company_id', '=', self.company_2.id)], limit=1)
+        self.wh3 = self.env['stock.warehouse'].create({
+            'name': 'Warehouse TEst',
+            'code': 'WH-TEST',
+            'company_id': self.main_company.id,
+        })
 
         self.ressuply_loc = self.env['stock.location'].create({
             'name': 'Ressuply',
@@ -96,9 +101,9 @@ class TestKanban(TestBaseKanban):
             'product_id': self.product.id,
             'product_uom_id': self.product.uom_id.id,
             'product_uom_qty': 1,
-            'company_id': self.company_2.id,
-            'warehouse_id': self.wh2.id,
-            'location_id': self.wh2.lot_stock_id.id,
+            'company_id': self.main_company.id,
+            'warehouse_id': self.wh3.id,
+            'location_id': self.wh3.lot_stock_id.id,
         })
         order = self.env['stock.request.order'].create({
             'company_id': self.main_company.id,

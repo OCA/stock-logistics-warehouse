@@ -24,6 +24,9 @@ class WizardStockRequestOrderKanbanAbstract(models.TransientModel):
             self.stock_request_id.kanban_id.name,
             self.stock_request_id.product_id.display_name
         ))
+        self.stock_request_ending()
+
+    def stock_request_ending(self):
         self.stock_request_id.action_confirm()
 
     def stock_request_kanban_values(self):

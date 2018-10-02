@@ -34,7 +34,6 @@ class WizardStockRequestOrderKanbanAbstract(models.AbstractModel):
         if self.validate_kanban(barcode):
             self.status_state = 0
             self.barcode_ending()
-        return
 
     def barcode_ending(self):
         pass
