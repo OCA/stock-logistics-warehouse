@@ -35,7 +35,7 @@ class StockInventoryKanban(models.Model):
         readonly=True, states={'draft': [('readonly', False)]},
     )
     product_ids = fields.Many2many(
-        'product.product', string='Product',
+        'product.product', string='Products',
         domain=[('type', 'in', ['product', 'consu'])],
         ondelete='cascade',
         readonly=True, states={'draft': [('readonly', False)]},
@@ -56,12 +56,19 @@ class StockInventoryKanban(models.Model):
         compute='_compute_missing_kanban'
     )
 
+    count_missing_kanbans = fields.Integer(
+        'Missing Kanbans',
+        readonly=True,
+        compute='_compute_missing_kanban',
+    )
+
     @api.depends('kanban_ids', 'scanned_kanban_ids')
     def _compute_missing_kanban(self):
         for rec in self:
             rec.missing_kanban_ids = rec.kanban_ids.filtered(
                 lambda r: r.id not in rec.scanned_kanban_ids.ids
             )
+            rec.count_missing_kanbans = len(rec.missing_kanban_ids)
 
     def _get_inventory_kanban_domain(self):
         domain = []
@@ -87,6 +94,13 @@ class StockInventoryKanban(models.Model):
         return {
             'state': 'closed'
         }
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', '/') == '/':
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+                'stock.inventory.kanban')
+        return super().create(vals)
 
     @api.multi
     def calculate_kanbans(self):
