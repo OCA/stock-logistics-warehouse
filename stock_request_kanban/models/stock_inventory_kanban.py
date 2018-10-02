@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, models, fields
+from odoo.osv import expression
 
 
 class StockInventoryKanban(models.Model):
@@ -35,7 +36,7 @@ class StockInventoryKanban(models.Model):
         readonly=True, states={'draft': [('readonly', False)]},
     )
     product_ids = fields.Many2many(
-        'product.product', string='Product',
+        'product.product', string='Products',
         domain=[('type', 'in', ['product', 'consu'])],
         ondelete='cascade',
         readonly=True, states={'draft': [('readonly', False)]},
@@ -56,21 +57,34 @@ class StockInventoryKanban(models.Model):
         compute='_compute_missing_kanban'
     )
 
+    count_missing_kanbans = fields.Integer(
+        'Missing Kanbans',
+        readonly=True,
+        compute='_compute_missing_kanban',
+    )
+
     @api.depends('kanban_ids', 'scanned_kanban_ids')
     def _compute_missing_kanban(self):
         for rec in self:
             rec.missing_kanban_ids = rec.kanban_ids.filtered(
                 lambda r: r.id not in rec.scanned_kanban_ids.ids
             )
+            rec.count_missing_kanbans = len(rec.missing_kanban_ids)
 
     def _get_inventory_kanban_domain(self):
         domain = []
         if self.warehouse_ids:
-            domain.append(('warehouse_id', 'in', self.warehouse_ids.ids))
+            expression.AND((
+                domain, [('warehouse_id', 'in', self.warehouse_ids.ids)]
+            ))
         if self.product_ids:
-            domain.append(('product_id', 'in', self.product_ids.ids))
+            expression.AND((
+                domain, [('product_id', 'in', self.product_ids.ids)]
+            ))
         if self.location_ids:
-            domain.append(('location_id', 'in', self.location_ids.ids))
+            expression.AND((
+                domain, [('location_id', 'in', self.location_ids.ids)]
+            ))
         return domain
 
     def _start_inventory_values(self):
@@ -87,6 +101,13 @@ class StockInventoryKanban(models.Model):
         return {
             'state': 'closed'
         }
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', '/') == '/':
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+                'stock.inventory.kanban')
+        return super().create(vals)
 
     @api.multi
     def calculate_kanbans(self):

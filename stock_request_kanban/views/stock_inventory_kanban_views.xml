@@ -7,6 +7,8 @@
         <field name="arch" type="xml">
             <tree string="Stock Inventories">
                 <field name="name"/>
+                <field name="count_missing_kanbans"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
