@@ -43,7 +43,7 @@ addon | version | summary
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 10.0.1.0.0 | Allow to perform inventories of a location without including its child locations.
 [stock_inventory_lockdown](stock_inventory_lockdown/) | 10.0.1.0.1 | Lock down stock locations during inventories.
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 10.0.1.0.0 | More filters for inventory adjustments
-[stock_inventory_revaluation](stock_inventory_revaluation/) | 10.0.1.0.0 | Introduces inventory revaluation as single point to change the valuation of products.
+[stock_inventory_revaluation](stock_inventory_revaluation/) | 10.0.1.1.0 | Introduces inventory revaluation as single point to change the valuation of products.
 [stock_inventory_verification_request](stock_inventory_verification_request/) | 10.0.1.0.0 | Adds the capability to request a Slot Verification when a inventory is Pending to Approve
 [stock_lot_sale_tracking](stock_lot_sale_tracking/) | 10.0.1.0.0 | This addon allows to retrieve all customer deliveries impacted by a lot
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 10.0.1.0.1 | Add a MTS+MTO route
