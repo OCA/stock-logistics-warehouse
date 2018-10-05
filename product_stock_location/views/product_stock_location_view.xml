@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="product_stock_location_tree_view">
+            <field name="name">product.stock.location.tree</field>
+            <field name="model">product.stock.location</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id"/>
+                    <field name="location_id"/>
+                    <field name="parent_id"/>
+                    <field name="product_location_qty"/>
+                    <field name="incoming_location_qty"/>
+                    <field name="outgoing_location_qty"/>
+                    <field name="virtual_location_qty"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_stock_location_form_view">
+            <field name="name">product.stock.location.form</field>
+            <field name="model">product.stock.location</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group name="product">
+                        <field name="product_id"/>
+                    </group>
+                    <group name="location">
+                        <field name="location_id"/>
+                        <field name="parent_id"/>
+                    </group>
+                    <group name="company">
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <group name="stock">
+                        <field name="product_location_qty"/>
+                        <field name="incoming_location_qty"/>
+                        <field name="outgoing_location_qty"/>
+                        <field name="virtual_location_qty"/>
+                    </group>
+                    <notebook>
+                        <page name="quants" string="Quants">
+                            <field name="quant_ids" nolabel="1"/>
+                        </page>
+                        <page name="incoming_moves" string="Incoming Moves">
+                            <field name="incoming_move_ids" nolabel="1"/>
+                        </page>
+                        <page name="outgoing_moves" string="Outgoing Moves">
+                            <field name="outgoing_move_ids" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="product_stock_location_search_view">
+            <field name="name">product.stock.location.search</field>
+            <field name="model">product.stock.location</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="product_id"/>
+                    <field name="location_id"/>
+                    <field name="parent_id"/>
+                    <field name="product_location_qty"/>
+                    <field name="incoming_location_qty"/>
+                    <field name="outgoing_location_qty"/>
+                    <field name="virtual_location_qty"/>
+                    <group expand='0' string='Filters'>
+                        <filter name='internal_loc' string="Internal Locations" domain="[('location_id.usage','=', 'internal')]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window"
+                id="action_product_stock_location">
+            <field name="name">Product Stock Locations</field>
+            <field name="res_model">product.stock.location</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_product_stock_locations"
+                  name="Product Stock Location"
+                  parent="stock.menu_traceability" sequence="20"
+                  action="action_product_stock_location" groups="base.group_no_one"/>
+
+        <record model="ir.actions.act_window" id="product_open_product_stock_location">
+            <field name="name">Product Stock Locations</field>
+            <field name="res_model">product.stock.location</field>
+        </record>
+
+    </data>
+</openerp>
