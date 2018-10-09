@@ -14,7 +14,8 @@ class PurchaseOrderLine(models.Model):
 
     product_tmpl_id = fields.Many2one(
         related='product_id.product_tmpl_id',
-        comodel_name='product.template'
+        comodel_name='product.template',
+        readonly=True
     )
     packaging_id = fields.Many2one(
         'product.packaging',
