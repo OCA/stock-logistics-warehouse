@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2018 initOS GmbH
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     'name': 'Stock Inventory Chatter',
-    'version': '9.0.1.0.0',
+    'version': '8.0.1.0.0',
     'author': "Eficent, "
+              "initOS GmbH, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     'category': 'Warehouse',
