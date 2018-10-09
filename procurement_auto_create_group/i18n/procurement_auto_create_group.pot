@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -19,14 +19,14 @@ msgid "Auto-create Procurement Group"
 msgstr ""
 
 #. module: procurement_auto_create_group
-#: code:addons/procurement_auto_create_group/models/procurement.py:17
+#: code:addons/procurement_auto_create_group/models/procurement_group.py:26
 #, python-format
 msgid "No sequence defined for procurement group"
 msgstr ""
 
 #. module: procurement_auto_create_group
-#: model:ir.model,name:procurement_auto_create_group.model_procurement_order
-msgid "Procurement"
+#: model:ir.model,name:procurement_auto_create_group.model_procurement_group
+msgid "Procurement Requisition"
 msgstr ""
 
 #. module: procurement_auto_create_group

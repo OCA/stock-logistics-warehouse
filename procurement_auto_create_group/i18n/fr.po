@@ -25,17 +25,21 @@ msgid "Auto-create Procurement Group"
 msgstr "Groupe de l'approvisionnement auto-généré"
 
 #. module: procurement_auto_create_group
-#: code:addons/procurement_auto_create_group/models/procurement.py:17
+#: code:addons/procurement_auto_create_group/models/procurement_group.py:26
 #, python-format
 msgid "No sequence defined for procurement group"
 msgstr "Pas de séquence définie pour le groupe d'approvisionnements"
 
 #. module: procurement_auto_create_group
-#: model:ir.model,name:procurement_auto_create_group.model_procurement_order
-msgid "Procurement"
-msgstr "Procurement"
+#: model:ir.model,name:procurement_auto_create_group.model_procurement_group
+#, fuzzy
+msgid "Procurement Requisition"
+msgstr "Règle d'approvisionnement"
 
 #. module: procurement_auto_create_group
 #: model:ir.model,name:procurement_auto_create_group.model_procurement_rule
 msgid "Procurement Rule"
 msgstr "Règle d'approvisionnement"
+
+#~ msgid "Procurement"
+#~ msgstr "Procurement"

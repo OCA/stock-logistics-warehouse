@@ -25,14 +25,15 @@ msgid "Auto-create Procurement Group"
 msgstr ""
 
 #. module: procurement_auto_create_group
-#: code:addons/procurement_auto_create_group/models/procurement.py:17
+#: code:addons/procurement_auto_create_group/models/procurement_group.py:26
 #, python-format
 msgid "No sequence defined for procurement group"
 msgstr ""
 
 #. module: procurement_auto_create_group
-#: model:ir.model,name:procurement_auto_create_group.model_procurement_order
-msgid "Procurement"
+#: model:ir.model,name:procurement_auto_create_group.model_procurement_group
+#, fuzzy
+msgid "Procurement Requisition"
 msgstr "Mua sắm / Cung ứng"
 
 #. module: procurement_auto_create_group
