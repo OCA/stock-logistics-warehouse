@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_inventory_discrepancy
+#	* stock_inventory_discrepancy
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-18 04:05+0000\n"
-"PO-Revision-Date: 2017-02-18 04:05+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
-"Language: fr\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: \n"
 
 #. module: stock_inventory_discrepancy
 #: field:stock.inventory.line,discrepancy_qty:0
@@ -36,7 +31,7 @@ msgstr ""
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_inventory
 msgid "Inventory"
-msgstr "Inventaire"
+msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_inventory_line
@@ -46,7 +41,7 @@ msgstr ""
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_location
 msgid "Inventory Locations"
-msgstr "Emplacements d'inventaire"
+msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: help:stock.inventory.line,discrepancy_threshold:0
@@ -57,17 +52,12 @@ msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: help:stock.warehouse,discrepancy_threshold:0
-msgid ""
-"Maximum Discrepancy Rate allowed for any product when doing an Inventory "
-"Adjustment. Threshold defined in involved Location has preference."
+msgid "Maximum Discrepancy Rate allowed for any product when doing an Inventory Adjustment. Threshold defined in involved Location has preference."
 msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: help:stock.location,discrepancy_threshold:0
-msgid ""
-"Maximum Discrepancy Rate allowed for any product when doing an Inventory "
-"Adjustment. Thresholds defined in Locations have preference over Warehouse's "
-"ones."
+msgid "Maximum Discrepancy Rate allowed for any product when doing an Inventory Adjustment. Thresholds defined in Locations have preference over Warehouse's ones."
 msgstr ""
 
 #. module: stock_inventory_discrepancy
@@ -78,16 +68,13 @@ msgstr ""
 #. module: stock_inventory_discrepancy
 #: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:55
 #, python-format
-msgid ""
-"The Qty Update is over the Discrepancy Threshold.\n"
+msgid "The Qty Update is over the Discrepancy Threshold.\n"
 " Please, contact a user with rights to perform this action."
 msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: help:stock.inventory.line,discrepancy_qty:0
-msgid ""
-"The difference between the actual qty counted and the theoretical quantity "
-"on hand."
+msgid "The difference between the actual qty counted and the theoretical quantity on hand."
 msgstr ""
 
 #. module: stock_inventory_discrepancy
@@ -113,7 +100,7 @@ msgstr ""
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_warehouse
 msgid "Warehouse"
-msgstr "Entrepôt"
+msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: view:stock.inventory:stock_inventory_discrepancy.view_inventory_form
@@ -127,8 +114,7 @@ msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: view:stock.inventory:stock_inventory_discrepancy.view_inventory_form
-msgid ""
-"theoretical_qty < 0 or\n"
+msgid "theoretical_qty < 0 or\n"
 "                        discrepancy_percent > discrepancy_threshold"
 msgstr ""
 
@@ -141,3 +127,4 @@ msgstr ""
 #: view:stock.inventory:stock_inventory_discrepancy.view_inventory_form
 msgid "{'normal_view': True}"
 msgstr ""
+
