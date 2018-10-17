@@ -27,7 +27,8 @@ class StockLocation(models.Model):
             history = history.sorted(key=lambda r: r.write_date, reverse=True)
             if history:
                 wh = rec.get_warehouse()
-                if len(history) > wh.counts_for_accuracy_qty:
+                if wh.counts_for_accuracy_qty and \
+                        len(history) > wh.counts_for_accuracy_qty:
                     rec.loc_accuracy = mean(
                         history[:wh.counts_for_accuracy_qty].mapped(
                             'inventory_accuracy'))
