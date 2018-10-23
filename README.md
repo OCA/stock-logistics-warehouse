@@ -36,6 +36,7 @@ addon | version | summary
 [stock_available_sale](stock_available_sale/) | 8.0.3.0.0 | Quotations in quantity available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 8.0.1.0.0 | Quantity of stock available for inmediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 8.0.1.0.0 | Stock Quantity Change Reason
+[stock_cycle_count](stock_cycle_count/) | 8.0.1.2.0 | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 8.0.1.0.0 | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 8.0.1.0.0 | Allow to perform inventories of a location without including its child locations.
 [stock_inventory_exhaustive](stock_inventory_exhaustive/) | 8.0.1.0.0 | Remove from the stock what is not in the Physical Inventory.
