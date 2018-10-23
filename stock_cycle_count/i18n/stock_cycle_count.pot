@@ -1,23 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_cycle_count
+#	* stock_cycle_count
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-04 01:47+0000\n"
-"PO-Revision-Date: 2018-01-04 01:47+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Ecuador) (https://www.transifex.com/oca/teams/23907/"
-"es_EC/)\n"
-"Language: es_EC\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:67
@@ -50,7 +44,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: field:stock.cycle.count.rule,active:0
 msgid "Active"
-msgstr "Activo"
+msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_form_view
@@ -78,7 +72,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
@@ -89,7 +83,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: field:stock.cycle.count,company_id:0
 msgid "Company"
-msgstr "Compañia"
+msgstr ""
 
 #. module: stock_cycle_count
 #: view:website:stock_cycle_count.stock_location_accuracy
@@ -120,13 +114,13 @@ msgstr ""
 #: field:stock.cycle.count,create_uid:0
 #: field:stock.cycle.count.rule,create_uid:0
 msgid "Created by"
-msgstr "Creado por"
+msgstr ""
 
 #. module: stock_cycle_count
 #: field:stock.cycle.count,create_date:0
 #: field:stock.cycle.count.rule,create_date:0
 msgid "Created on"
-msgstr "Creado en"
+msgstr ""
 
 #. module: stock_cycle_count
 #: field:stock.cycle.count.rule,currency_id:0
@@ -168,16 +162,13 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.warehouse:stock_cycle_count.view_warehouse_form
-msgid ""
-"Cycle Count Rules\n"
+msgid "Cycle Count Rules\n"
 "                        applied in this Warehouse:"
 msgstr ""
 
 #. module: stock_cycle_count
 #: help:stock.warehouse,cycle_count_planning_horizon:0
-msgid ""
-"Cycle Count planning horizon in days. Only the counts inside the horizon "
-"will be created."
+msgid "Cycle Count planning horizon in days. Only the counts inside the horizon will be created."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -228,12 +219,12 @@ msgstr ""
 #. module: stock_cycle_count
 #: view:website:stock_cycle_count.stock_location_accuracy
 msgid "Date"
-msgstr "Fecha"
+msgstr ""
 
 #. module: stock_cycle_count
 #: help:stock.cycle.count,message_last_post:0
 msgid "Date of the last message posted on the record."
-msgstr "Fecha del último mensaje publicado en el registro."
+msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
@@ -247,9 +238,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: help:stock.location,zero_confirmation_disabled:0
-msgid ""
-"Define whether this location will trigger a zero-confirmation validation "
-"when a rule for its warehouse is defined to perform zero-confirmations."
+msgid "Define whether this location will trigger a zero-confirmation validation when a rule for its warehouse is defined to perform zero-confirmations."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -262,7 +251,7 @@ msgstr ""
 #: field:stock.cycle.count,display_name:0
 #: field:stock.cycle.count.rule,display_name:0
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
@@ -273,9 +262,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:49
 #, python-format
-msgid ""
-"Ensures that at least a defined number of counts in a given period will be "
-"run."
+msgid "Ensures that at least a defined number of counts in a given period will be run."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -304,37 +291,34 @@ msgstr ""
 #. module: stock_cycle_count
 #: field:stock.cycle.count,message_follower_ids:0
 msgid "Followers"
-msgstr "Seguidores"
+msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Group By..."
-msgstr "Agrupar por..."
-
-#. module: stock_cycle_count
-#: help:stock.cycle.count,message_summary:0
-msgid ""
-"Holds the Chatter summary (number of messages, ...). This summary is "
-"directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: stock_cycle_count
-#: field:report.stock_location_accuracy,id:0 field:stock.cycle.count,id:0
+#: help:stock.cycle.count,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: stock_cycle_count
+#: field:report.stock_location_accuracy,id:0
+#: field:stock.cycle.count,id:0
 #: field:stock.cycle.count.rule,id:0
 msgid "ID"
-msgstr "ID (identificación)"
+msgstr ""
 
 #. module: stock_cycle_count
 #: help:stock.cycle.count,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
+msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_form_view
-msgid ""
-"In either case you can exclude specific locations\n"
-"                            going to the locations form and checking the "
-"box\n"
+msgid "In either case you can exclude specific locations\n"
+"                            going to the locations form and checking the box\n"
 "                            \"Exclude from Cycle Count\"."
 msgstr ""
 
@@ -387,33 +371,32 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: field:stock.cycle.count,message_is_follower:0
-#, fuzzy
 msgid "Is a Follower"
-msgstr "Seguidores"
+msgstr ""
 
 #. module: stock_cycle_count
 #: field:stock.cycle.count,message_last_post:0
 msgid "Last Message Date"
-msgstr "Fecha del último mensaje"
+msgstr ""
 
 #. module: stock_cycle_count
 #: field:report.stock_location_accuracy,__last_update:0
 #: field:stock.cycle.count,__last_update:0
 #: field:stock.cycle.count.rule,__last_update:0
 msgid "Last Modified on"
-msgstr "Última modificación en"
+msgstr ""
 
 #. module: stock_cycle_count
 #: field:stock.cycle.count,write_uid:0
 #: field:stock.cycle.count.rule,write_uid:0
 msgid "Last Updated by"
-msgstr "Última actualización de"
+msgstr ""
 
 #. module: stock_cycle_count
 #: field:stock.cycle.count,write_date:0
 #: field:stock.cycle.count.rule,write_date:0
 msgid "Last Updated on"
-msgstr "Última actualización en"
+msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
@@ -431,7 +414,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: field:stock.cycle.count,message_ids:0
 msgid "Messages"
-msgstr "Mensajes"
+msgstr ""
 
 #. module: stock_cycle_count
 #: help:stock.cycle.count,message_ids:0
@@ -450,9 +433,10 @@ msgid "Minimum Accuracy Threshold"
 msgstr ""
 
 #. module: stock_cycle_count
-#: field:stock.cycle.count,name:0 field:stock.cycle.count.rule,name:0
+#: field:stock.cycle.count,name:0
+#: field:stock.cycle.count.rule,name:0
 msgid "Name"
-msgstr "Nombre"
+msgstr ""
 
 #. module: stock_cycle_count
 #: help:stock.warehouse,counts_for_accuracy_qty:0
@@ -462,9 +446,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:62
 #, python-format
-msgid ""
-"Perform an Inventory Adjustment every time a location in the warehouse runs "
-"out of stock in order to confirm it is truly empty."
+msgid "Perform an Inventory Adjustment every time a location in the warehouse runs out of stock in order to confirm it is truly empty."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -498,17 +480,13 @@ msgstr ""
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:58
 #, python-format
-msgid ""
-"Schedules a count every time the accuracy of a location goes under a given "
-"threshold."
+msgid "Schedules a count every time the accuracy of a location goes under a given threshold."
 msgstr ""
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:53
 #, python-format
-msgid ""
-"Schedules a count every time the total turnover of a location exceeds the "
-"threshold. This considers every product going into/out of the location"
+msgid "Schedules a count every time the total turnover of a location exceeds the threshold. This considers every product going into/out of the location"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -583,7 +561,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: field:stock.cycle.count,message_unread:0
 msgid "Unread Messages"
-msgstr "Mensajes sin leer"
+msgstr ""
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:24
@@ -603,8 +581,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_form_view
-msgid ""
-"You can apply the cycle count rules in complete\n"
+msgid "You can apply the cycle count rules in complete\n"
 "                            warehouses or specific zones. A zone it is\n"
 "                            understood as a location and all its children."
 msgstr ""
@@ -636,9 +613,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_inventory.py:49
 #, python-format
-msgid ""
-"You cannot modify the configuration of an Inventory Adjustment related to a "
-"Cycle Count."
+msgid "You cannot modify the configuration of an Inventory Adjustment related to a Cycle Count."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -663,3 +638,4 @@ msgstr ""
 #: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
 msgstr ""
+

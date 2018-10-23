@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_cycle_count
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2018-01-04 01:47+0000\n"
 "PO-Revision-Date: 2018-01-04 01:47+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Dominican Republic) (https://www.transifex.com/oca/teams/23907/es_DO/)\n"
+"Language-Team: Spanish (Dominican Republic) (https://www.transifex.com/oca/"
+"teams/23907/es_DO/)\n"
+"Language: es_DO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_DO\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_cycle_count
@@ -25,34 +26,19 @@ msgid "(No description provided.)"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
-msgid "<span>Location:</span>"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
-msgid "<strong>Complete name:</strong>"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
-msgid "<strong>Current Accuracy:</strong>"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_qty_variance_inventory_threshold
+#: field:stock.location,qty_variance_inventory_threshold:0
 msgid "Acceptable Inventory Quantity Variance Threshold"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory_inventory_accuracy
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+#: field:stock.inventory,inventory_accuracy:0
+#: view:website:stock_cycle_count.stock_location_accuracy
 msgid "Accuracy"
 msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
-#: model:ir.ui.view,arch_db:stock_cycle_count.view_location_form
+#: view:stock.location:stock_cycle_count.view_location_form
 msgid "Accuracy Stats"
 msgstr ""
 
@@ -62,52 +48,52 @@ msgid "Accuracy report"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_needaction
-msgid "Action Needed"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_active
+#: field:stock.cycle.count.rule,active:0
 msgid "Active"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
+#: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "Applied in:"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_apply_in
+#: field:stock.cycle.count.rule,apply_in:0
 msgid "Apply this rule in:"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_responsible_id
-#: model:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
+#: field:stock.cycle.count,responsible_id:0
+#: view:website:stock_cycle_count.report_cyclecount
 msgid "Assigned to"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Assigned to me"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 #: selection:stock.cycle.count,state:0
 msgid "Cancelled"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_company_id
+#: field:stock.cycle.count,company_id:0
 msgid "Company"
+msgstr ""
+
+#. module: stock_cycle_count
+#: view:website:stock_cycle_count.stock_location_accuracy
+msgid "Complete name:"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -116,7 +102,7 @@ msgid "Compute Cycle Count Rules"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
 msgid "Confirm"
 msgstr ""
 
@@ -126,36 +112,41 @@ msgid "Confirm Cycle Counts"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_periodic_qty_per_period
+#: field:stock.cycle.count.rule,periodic_qty_per_period:0
 msgid "Counts per period"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_create_uid
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_create_uid
+#: field:stock.cycle.count,create_uid:0
+#: field:stock.cycle.count.rule,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_create_date
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_create_date
+#: field:stock.cycle.count,create_date:0
+#: field:stock.cycle.count.rule,create_date:0
 msgid "Created on"
 msgstr "Creado en"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_currency_id
+#: field:stock.cycle.count.rule,currency_id:0
 msgid "Currency"
 msgstr ""
 
 #. module: stock_cycle_count
+#: view:website:stock_cycle_count.stock_location_accuracy
+msgid "Current Accuracy:"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.actions.report.xml,name:stock_cycle_count.action_report_stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Count"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+#: view:website:stock_cycle_count.report_cyclecount
 msgid "Cycle Count #"
 msgstr ""
 
@@ -165,32 +156,32 @@ msgid "Cycle Count Accuracy"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse_cycle_count_planning_horizon
+#: field:stock.warehouse,cycle_count_planning_horizon:0
 msgid "Cycle Count Planning Horizon (in days)"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse_cycle_count_rule_ids
 #: model:ir.ui.menu,name:stock_cycle_count.menu_stock_cycle_count_rule
+#: field:stock.warehouse,cycle_count_rule_ids:0
 msgid "Cycle Count Rules"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
+#: view:stock.warehouse:stock_cycle_count.view_warehouse_form
 msgid ""
 "Cycle Count Rules\n"
-"                    applied in this Warehouse:"
+"                        applied in this Warehouse:"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse_cycle_count_planning_horizon
+#: help:stock.warehouse,cycle_count_planning_horizon:0
 msgid ""
 "Cycle Count planning horizon in days. Only the counts inside the horizon "
 "will be created."
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
+#: view:stock.warehouse:stock_cycle_count.view_warehouse_form
 msgid "Cycle Counting"
 msgstr ""
 
@@ -200,81 +191,81 @@ msgid "Cycle Counts"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts Assigned to me"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts Cancelled"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts Done"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts Planned"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts in Execution"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_cycle_count_rule_id
+#: field:stock.cycle.count,cycle_count_rule_id:0
 msgid "Cycle count rule"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
+#: view:stock.warehouse:stock_cycle_count.view_warehouse_form
 msgid "Cycle count rules"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+#: view:website:stock_cycle_count.stock_location_accuracy
 msgid "Date"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count_message_last_post
+#: help:stock.cycle.count,message_last_post:0
 msgid "Date of the last message posted on the record."
 msgstr "Fecha del último mensaje publicado en el registro."
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
 msgid "Deadline Date"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_location_cycle_count_disabled
+#: help:stock.location,cycle_count_disabled:0
 msgid "Define whether the location is going to be cycle counted."
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_location_zero_confirmation_disabled
+#: help:stock.location,zero_confirmation_disabled:0
 msgid ""
 "Define whether this location will trigger a zero-confirmation validation "
 "when a rule for its warehouse is defined to perform zero-confirmations."
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_zero_confirmation_disabled
+#: field:stock.location,zero_confirmation_disabled:0
 msgid "Disable Zero Confirmations"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy_display_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_display_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_display_name
+#: field:report.stock_location_accuracy,display_name:0
+#: field:stock.cycle.count,display_name:0
+#: field:stock.cycle.count.rule,display_name:0
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 #: selection:stock.cycle.count,state:0
 msgid "Done"
 msgstr ""
@@ -300,85 +291,77 @@ msgid "Error found when comparing turnover with the rule threshold. %s"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_cycle_count_disabled
+#: field:stock.location,cycle_count_disabled:0
 msgid "Exclude from Cycle Count"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 #: selection:stock.cycle.count,state:0
 msgid "Execution"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_follower_ids
+#: field:stock.cycle.count,message_follower_ids:0
 msgid "Followers"
 msgstr "Seguidores"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_channel_ids
-msgid "Followers (Channels)"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_partner_ids
-msgid "Followers (Partners)"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Group By..."
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy_id
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_id
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_id
+#: help:stock.cycle.count,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: stock_cycle_count
+#: field:report.stock_location_accuracy,id:0 field:stock.cycle.count,id:0
+#: field:stock.cycle.count.rule,id:0
 msgid "ID"
 msgstr "ID"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count_message_unread
+#: help:stock.cycle.count,message_unread:0
 msgid "If checked new messages require your attention."
 msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count_message_needaction
-msgid "If checked, new messages require your attention."
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
+#: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid ""
 "In either case you can exclude specific locations\n"
-"                        going to the locations form and checking the box\n"
-"                        \"Exclude from Cycle Count\"."
+"                            going to the locations form and checking the "
+"box\n"
+"                            \"Exclude from Cycle Count\"."
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse_counts_for_accuracy_qty
+#: field:stock.warehouse,counts_for_accuracy_qty:0
 msgid "Inventories for location accuracy calculation"
 msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_inventory
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+#: view:website:stock_cycle_count.stock_location_accuracy
 msgid "Inventory"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_loc_accuracy
-#: model:ir.ui.view,arch_db:stock_cycle_count.view_inventory_pivot
+#: view:stock.inventory:stock_cycle_count.view_inventory_pivot
+#: field:stock.location,loc_accuracy:0
 msgid "Inventory Accuracy"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_stock_adjustment_ids
+#: field:stock.cycle.count,stock_adjustment_ids:0
 msgid "Inventory Adjustment"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
 msgid "Inventory Adjustments"
 msgstr ""
 
@@ -388,61 +371,72 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.view_inventory_graph
+#: view:stock.inventory:stock_cycle_count.view_inventory_graph
 msgid "Inventory accuracy evolution"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_inventory_adj_count
+#: field:stock.cycle.count,inventory_adj_count:0
 msgid "Inventory adj count"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
 msgid "Inventory adjustments associated"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_is_follower
-msgid "Is Follower"
-msgstr ""
+#: field:stock.cycle.count,message_is_follower:0
+#, fuzzy
+msgid "Is a Follower"
+msgstr "Seguidores"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_last_post
+#: field:stock.cycle.count,message_last_post:0
 msgid "Last Message Date"
 msgstr "Fecha del último mensaje"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy___last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count___last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule___last_update
+#: field:report.stock_location_accuracy,__last_update:0
+#: field:stock.cycle.count,__last_update:0
+#: field:stock.cycle.count.rule,__last_update:0
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_write_uid
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_write_uid
+#: field:stock.cycle.count,write_uid:0
+#: field:stock.cycle.count.rule,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización de"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_write_date
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_write_date
+#: field:stock.cycle.count,write_date:0
+#: field:stock.cycle.count.rule,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_location_id
-#: model:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
+#: field:stock.cycle.count,location_id:0
+#: view:website:stock_cycle_count.report_cyclecount
 msgid "Location"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_ids
+#: view:website:stock_cycle_count.stock_location_accuracy
+msgid "Location:"
+msgstr ""
+
+#. module: stock_cycle_count
+#: field:stock.cycle.count,message_ids:0
 msgid "Messages"
 msgstr "Mensajes"
+
+#. module: stock_cycle_count
+#: help:stock.cycle.count,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:25
@@ -451,34 +445,18 @@ msgid "Minimum Accuracy"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_accuracy_threshold
+#: field:stock.cycle.count.rule,accuracy_threshold:0
 msgid "Minimum Accuracy Threshold"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_name
+#: field:stock.cycle.count,name:0 field:stock.cycle.count.rule,name:0
 msgid "Name"
 msgstr "Nombre"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_needaction_counter
-msgid "Number of Actions"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse_counts_for_accuracy_qty
+#: help:stock.warehouse,counts_for_accuracy_qty:0
 msgid "Number of latest inventories used to calculate location accuracy"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count_message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count_message_unread_counter
-msgid "Number of unread messages"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -490,7 +468,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_periodic_count_period
+#: field:stock.cycle.count.rule,periodic_count_period:0
 msgid "Period in days"
 msgstr ""
 
@@ -501,19 +479,19 @@ msgid "Periodic"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 #: selection:stock.cycle.count,state:0
 msgid "Planned"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_date_deadline
-#: model:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+#: field:stock.cycle.count,date_deadline:0
+#: view:website:stock_cycle_count.report_cyclecount
 msgid "Required Date"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_rule_description
+#: field:stock.cycle.count.rule,rule_description:0
 msgid "Rule Description"
 msgstr ""
 
@@ -534,7 +512,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
 msgid "Search Cycle Count"
 msgstr ""
 
@@ -549,21 +527,21 @@ msgid "Selected warehouses"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_state
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_search_view
+#: field:stock.cycle.count,state:0
 msgid "State"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+#: view:website:stock_cycle_count.report_cyclecount
 msgid "Status"
 msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory_cycle_count_id
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_tree_view
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_tree_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_tree_view
+#: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_tree_view
+#: field:stock.inventory,cycle_count_id:0
 msgid "Stock Cycle Count"
 msgstr ""
 
@@ -588,24 +566,24 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_turnover_inventory_value_threshold
+#: field:stock.cycle.count,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: stock_cycle_count
+#: field:stock.cycle.count.rule,turnover_inventory_value_threshold:0
 msgid "Turnover Inventory Value Threshold"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_rule_type
+#: field:stock.cycle.count.rule,rule_type:0
 msgid "Type of rule"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_unread
+#: field:stock.cycle.count,message_unread:0
 msgid "Unread Messages"
 msgstr "Mensajes sin leer"
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_message_unread_counter
-msgid "Unread Messages Counter"
-msgstr ""
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:24
@@ -619,16 +597,16 @@ msgid "Warehouse"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_warehouse_ids
+#: field:stock.cycle.count.rule,warehouse_ids:0
 msgid "Warehouses where applied"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
+#: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid ""
 "You can apply the cycle count rules in complete\n"
-"                        warehouses or specific zones. A zone it is\n"
-"                        understood as a location and all its children."
+"                            warehouses or specific zones. A zone it is\n"
+"                            understood as a location and all its children."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -676,17 +654,12 @@ msgid "Zero confirmation rules can only have one warehouse assigned."
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_location_ids
+#: field:stock.cycle.count.rule,location_ids:0
 msgid "Zones where applied"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
-#: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
+#: view:stock.cycle.count:stock_cycle_count.stock_cycle_count_form_view
+#: view:stock.cycle.count.rule:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model,name:stock_cycle_count.model_report_stock_location_accuracy
-msgid "report.stock_location_accuracy"
 msgstr ""
