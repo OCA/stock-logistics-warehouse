@@ -74,15 +74,15 @@ class StockInventoryKanban(models.Model):
     def _get_inventory_kanban_domain(self):
         domain = []
         if self.warehouse_ids:
-            expression.AND((
+            domain = expression.AND((
                 domain, [('warehouse_id', 'in', self.warehouse_ids.ids)]
             ))
         if self.product_ids:
-            expression.AND((
+            domain = expression.AND((
                 domain, [('product_id', 'in', self.product_ids.ids)]
             ))
         if self.location_ids:
-            expression.AND((
+            domain = expression.AND((
                 domain, [('location_id', 'in', self.location_ids.ids)]
             ))
         return domain
