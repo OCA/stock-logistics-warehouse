@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo11-addon-stock_available',
         'odoo11-addon-stock_available_global',
         'odoo11-addon-stock_available_unreserved',
+        'odoo11-addon-stock_cycle_count',
         'odoo11-addon-stock_demand_estimate',
         'odoo11-addon-stock_inventory_chatter',
         'odoo11-addon-stock_inventory_discrepancy',
