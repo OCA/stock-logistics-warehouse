@@ -16,11 +16,13 @@ class StockLocation(models.Model):
         ordered_loc_list = []
         if self.env.context.get('stock_change_product_quantity'):
             domain = [
-                ('qty', '>', 0),
                 ('product_id', '=', self.env.context.get(
                     'default_product_id', False)),
                 ('location_id.usage', '=', 'internal')
             ]
+            if self.env.context.get('default_lot_id'):
+                domain += [('lot_id', '=', self.env.context.get(
+                    'default_lot_id'))]
             quants = self.env['stock.quant'].read_group(
                 domain, ['location_id', 'qty'], 'location_id',
                 orderby='qty desc')
@@ -38,11 +40,13 @@ class StockLocation(models.Model):
             new_res = []
             ordered_name_loc_list = []
             domain = [
-                ('qty', '>', 0),
                 ('product_id', '=', self.env.context.get(
                     'default_product_id', False)),
                 ('location_id', 'in', self.ids)
             ]
+            if self.env.context.get('default_lot_id'):
+                domain += [('lot_id', '=', self.env.context.get(
+                    'default_lot_id'))]
             quants = self.env['stock.quant'].with_context(
                 stock_change_product_quantity=False).read_group(
                     domain, ['location_id', 'qty'], 'location_id',
