@@ -1,0 +1,1 @@
+This module allows in the update wizard of quantities for a product, to sort the stock location by quantity.
