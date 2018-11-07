@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 ACSONE SA/NV (<http://acsone.eu>)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_product_supplier_inherit" model="ir.ui.view">
+        <field name="name">product.template.supplier.form (in packaging_uom_view)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="purchase.view_product_supplier_inherit"/>
+        <field name="arch" type="xml">
+            <group name="packaging" position="replace"/>
+        </field>
+    </record>
+</odoo>
