@@ -13,18 +13,18 @@ class ResCompany(models.Model):
     _inherit = 'res.company'
 
     orderpoint_product_max_qty = fields.Float(
-        string='Max. product quantity',
+        string=_('Max. product quantity'),
         digits=dp.get_precision('Product Unit of Measure'),
-        help='Default orderpoint Max. product quantity',
+        help=_('Default orderpoint Max. product quantity'),
     )
     orderpoint_product_min_qty = fields.Float(
-        string='Min. product quantity',
+        string=_('Min. product quantity'),
         digits=dp.get_precision('Product Unit of Measure'),
-        help='Default orderpoint Max. product quantity',
+        help=_('Default orderpoint Max. product quantity'),
     )
     create_orderpoints = fields.Boolean(
-        string='Create Orderpoints',
-        help='Check this for automatic orderpoints',
+        string=_('Create Orderpoints'),
+        help=_('Check this for automatic orderpoints'),
     )
 
     @api.multi

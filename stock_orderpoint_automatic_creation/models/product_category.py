@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Daniel Campos <danielcampos@avanzosc.es> - Avanzosc S.L.
 # Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields, models, _
 
 
 class ProductCategory(models.Model):
@@ -11,9 +10,9 @@ class ProductCategory(models.Model):
 
     create_orderpoints = fields.Selection(
         selection=[
-            ('yes', 'Yes'),
-            ('no', 'No'),
+            ('yes', _('Yes')),
+            ('no', _('No')),
         ],
-        string='Create Orderpoints',
+        string=_('Create Orderpoints'),
         company_dependent=True,
     )
