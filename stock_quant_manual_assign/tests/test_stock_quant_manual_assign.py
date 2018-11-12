@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# Copyright 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo.tests.common import TransactionCase
-from odoo import exceptions
+from odoo.exceptions import ValidationError
 
 
 class TestStockQuantManualAssign(TransactionCase):
@@ -58,6 +57,8 @@ class TestStockQuantManualAssign(TransactionCase):
                          'None of the quants must have been selected')
         self.assertEqual(wizard.lines_qty, 0.0,
                          'None selected must give 0')
+        self.assertEqual(sum(line.qty for line in wizard.quants_lines),
+                         self.move.reserved_availability)
         self.assertEqual(wizard.move_qty, self.move.product_uom_qty)
 
     def test_quant_assign_wizard_constraint(self):
@@ -70,7 +71,7 @@ class TestStockQuantManualAssign(TransactionCase):
                          'None of the quants must have been selected')
         self.assertEqual(wizard.lines_qty, 0.0,
                          'None selected must give 0')
-        with self.assertRaises(exceptions.ValidationError):
+        with self.assertRaises(ValidationError):
             wizard.write({'quants_lines': [(1, wizard.quants_lines[:1].id,
                                             {'selected': True, 'qty': 500})]})
 
@@ -91,6 +92,8 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertEqual(wizard.lines_qty, 150.0)
         self.assertEqual(wizard.move_qty, 250.0)
         wizard.assign_quants()
+        self.assertAlmostEqual(len(self.move.move_line_ids),
+                               len(wizard.quants_lines.filtered('selected')))
 
     def test_quant_assign_wizard_after_availability_check(self):
         self.move._action_assign()
@@ -105,3 +108,5 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertEqual(wizard.move_qty, 100.0)
         self.assertEqual(len(wizard.quants_lines.filtered('selected')),
                          len(self.move.move_line_ids))
+        self.assertEqual(sum(line.qty for line in wizard.quants_lines),
+                         self.move.reserved_availability)
