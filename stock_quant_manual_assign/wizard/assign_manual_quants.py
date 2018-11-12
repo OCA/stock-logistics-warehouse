@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-# (c) 2015 Mikel Arregi - AvanzOSC
-# (c) 2015 Oihane Crucelaegui - AvanzOSC
+# Copyright 2015 Mikel Arregi - AvanzOSC
+# Copyright 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo import _, api, fields, models
@@ -14,7 +13,7 @@ class AssignManualQuants(models.TransientModel):
 
     @api.multi
     @api.constrains('quants_lines')
-    def check_qty(self):
+    def _check_qty(self):
         precision_digits = self.env[
             'decimal.precision'].precision_get('Product Unit of Measure')
         move = self.env['stock.move'].browse(self.env.context['active_id'])
@@ -27,7 +26,6 @@ class AssignManualQuants(models.TransientModel):
     @api.depends('quants_lines', 'quants_lines.qty')
     def _compute_qties(self):
         move = self.env['stock.move'].browse(self.env.context['active_id'])
-
         lines_qty = sum(quant_line.qty for quant_line in self.quants_lines
                         if quant_line.selected)
         self.lines_qty = lines_qty
@@ -40,11 +38,15 @@ class AssignManualQuants(models.TransientModel):
                             digits=dp.get_precision('Product Unit of Measure'))
     quants_lines = fields.One2many('assign.manual.quants.lines',
                                    'assign_wizard', string='Quants')
+    move_id = fields.Many2one(
+        comodel_name='stock.move',
+        string='Move',
+    )
 
     @api.multi
     def assign_quants(self):
         quant = self.env['stock.quant']
-        move = self.env['stock.move'].browse(self.env.context['active_id'])
+        move = self.move_id
         move._do_unreserve()
         precision_digits = self.env[
             'decimal.precision'].precision_get('Product Unit of Measure')
@@ -53,14 +55,15 @@ class AssignManualQuants(models.TransientModel):
                              precision_digits=precision_digits) > 0:
                 available_quantity = quant._get_available_quantity(
                     move.product_id,
-                    move.location_id,
+                    line.location_id,
                     lot_id=line.lot_id)
                 if float_compare(available_quantity, 0.0,
                                  precision_digits=precision_digits) <= 0:
                     continue
                 move._update_reserved_quantity(line.qty, available_quantity,
-                                               move.location_id,
+                                               line.location_id,
                                                lot_id=line.lot_id, strict=True)
+
         if move.has_move_lines:
             for ml in move.move_line_ids:
                 ml.qty_done = ml.product_qty
@@ -77,28 +80,27 @@ class AssignManualQuants(models.TransientModel):
             ('product_id', '=', move.product_id.id),
             ('quantity', '>', 0)
         ])
-
         quants_lines = []
-        for x in available_quants:
+        for quant in available_quants:
             line = {}
-            line['quant'] = x.id
-            line['lot_id'] = x.lot_id.id
-            line['on_hand'] = x.quantity
-            line['in_date'] = x.in_date
-            line['package_id'] = x.package_id.id
+            line['quant'] = quant.id
+            line['lot_id'] = quant.lot_id.id
+            line['on_hand'] = quant.quantity
+            line['in_date'] = quant.in_date
+            line['package_id'] = quant.package_id.id
             line['selected'] = False
             line['qty'] = 0
             move_lines = move.move_line_ids.filtered(
                 lambda ml:
-                ml.location_id == x.location_id and ml.lot_id == x.lot_id)
+                ml.location_id == quant.location_id and
+                ml.lot_id == quant.lot_id)
             for ml in move_lines:
                 line['qty'] = line['qty'] + ml.ordered_qty
                 line['selected'] = True
-            line['reserved'] = x.reserved_quantity - line['qty']
-            line['location_id'] = x.location_id.id
+            line['reserved'] = quant.reserved_quantity - line['qty']
+            line['location_id'] = quant.location_id.id
             quants_lines.append(line)
-
-        res.update({'quants_lines': quants_lines})
+        res.update({'quants_lines': quants_lines, 'move_id': move.id})
         res = self._convert_to_write(self._convert_to_cache(res))
         return res
 
