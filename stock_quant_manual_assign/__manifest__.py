@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Mikel Arregi - AvanzOSC
 # Copyright 2016 Tecnativa - Pedro M. Baeza
 # Copyright 2017 Eficent - Jordi Ballester
