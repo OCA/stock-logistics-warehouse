@@ -8,9 +8,11 @@
         Allows to get product availability taking into account lot removal date
         """,
     'version': '10.0.1.0.2',
+    'development_status': 'Alpha',
+    'category': 'Warehouse',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
-    'website': 'https://acsone.eu',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'depends': [
         'stock',
         'stock_available',
