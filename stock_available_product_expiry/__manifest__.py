@@ -7,12 +7,13 @@
     'summary': """
         Allows to get product availability taking into account lot removal date
         """,
-    'version': '10.0.1.0.1',
+    'version': '10.0.1.0.2',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://acsone.eu',
     'depends': [
         'stock',
+        'stock_available',
         'product_expiry',
         'web',
     ],
@@ -27,8 +28,7 @@
         'views/res_config.xml',
         'views/stock_available_product_expiry.xml',
         'data/ir_sequence_data.xml',
-    ],
-    'demo': [
+        'data/ir_config_parameter.xml',
     ],
     'installable': True,
 }

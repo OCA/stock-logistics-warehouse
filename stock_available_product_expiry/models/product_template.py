@@ -4,6 +4,7 @@
 
 from odoo import api, fields, models
 from odoo.addons import decimal_precision as dp
+from odoo.osv import expression
 
 
 class ProductTemplate(models.Model):
@@ -56,13 +57,22 @@ class ProductTemplate(models.Model):
     def action_open_quants(self):
         action = super(ProductTemplate, self).action_open_quants()
         domain = action['domain']
-        domain += [
-            '|',
-            ('lot_id', '=', False),
-            '&',
-            ('lot_id', '!=', False),
-            ('lot_id.removal_date', '>', fields.Datetime.now())
-        ]
+        quants_removal_domain = expression.OR([
+            [('lot_id.removal_date', '=', False)],
+            [('lot_id.removal_date', '>', fields.Datetime.now())]
+        ])
+        lot_domain = expression.AND([
+            [('lot_id', '!=', False)],
+            quants_removal_domain,
+        ])
+        lot_domain = expression.OR([
+            [('lot_id', '=', False)],
+            lot_domain,
+        ])
+        domain = expression.AND([
+            domain,
+            lot_domain,
+        ])
         action['domain'] = domain
         return action
 
@@ -70,9 +80,17 @@ class ProductTemplate(models.Model):
     def action_open_expired_quants(self):
         action = super(ProductTemplate, self).action_open_quants()
         domain = action['domain']
-        domain += [
-            ('lot_id', '!=', False),
-            ('lot_id.removal_date', '<=', fields.Datetime.now())
-        ]
+        quants_removal_domain = expression.AND([
+            [('lot_id.removal_date', '!=', False)],
+            [('lot_id.removal_date', '<=', fields.Datetime.now())]
+        ])
+        lot_domain = expression.AND([
+            [('lot_id', '!=', False)],
+            quants_removal_domain,
+        ])
+        domain = expression.AND([
+            domain,
+            lot_domain,
+        ])
         action['domain'] = domain
         return action

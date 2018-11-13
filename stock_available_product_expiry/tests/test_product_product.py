@@ -224,8 +224,12 @@ class TestProductProduct(common.TransactionCase):
             patch_now.return_value = 'dt_now'
             res = self.product_1.action_open_expired_quants()
         expected_domain = [
+            '&',
+            '&',
             ('product_id', 'in', [self.product_1.id]),
             ('lot_id', '!=', False),
+            '|',
+            ('lot_id.removal_date', '=', False),
             ('lot_id.removal_date', '<=', 'dt_now')]
         self.assertListEqual(res.get('domain'), expected_domain)
 

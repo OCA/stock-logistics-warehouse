@@ -62,14 +62,24 @@ class ProductProduct(models.Model):
         if compute_expired_only:
             removal_op = '<='
 
-        quants_lot_domain = [
-            ('lot_id', '!=', False),
-            ('lot_id.removal_date', removal_op, max_removal_date)]
+        lot_domain = expression.AND([
+            [('lot_id', '!=', False)],
+            [('lot_id.removal_date', '!=', False)]
+        ])
+
+        quants_lot_domain = expression.AND([
+            lot_domain,
+            [('lot_id.removal_date', removal_op, max_removal_date)],
+        ])
         if not compute_expired_only:
-            quants_lot_domain = [
-                '|',
-                ('lot_id', '=', False),
-                '&'] + quants_lot_domain
+            removal_unset_domain = expression.OR([
+                [('lot_id', '=', False)],
+                [('lot_id.removal_date', '=', False)]
+            ])
+            quants_lot_domain = expression.OR([
+                removal_unset_domain,
+                quants_lot_domain,
+            ])
         return quants_lot_domain
 
     @api.multi
@@ -170,10 +180,17 @@ class ProductProduct(models.Model):
     @api.multi
     def action_open_expired_quants(self):
         action = self.env.ref('stock.product_open_quants').read()[0]
-        domain = [
-            ('product_id', 'in', self.ids),
-            ('lot_id', '!=', False),
-            ('lot_id.removal_date', '<=', fields.Datetime.now())
-        ]
+        quants_removal_domain = expression.OR([
+            [('lot_id.removal_date', '=', False)],
+            [('lot_id.removal_date', '<=', fields.Datetime.now())]
+        ])
+        lot_domain = expression.AND([
+            [('product_id', 'in', self.ids)],
+            [('lot_id', '!=', False)]
+        ])
+        domain = expression.AND([
+            lot_domain,
+            quants_removal_domain,
+        ])
         action['domain'] = domain
         return action
