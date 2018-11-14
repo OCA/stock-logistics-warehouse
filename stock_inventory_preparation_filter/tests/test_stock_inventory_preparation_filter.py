@@ -3,7 +3,7 @@
 # Copyright 2015 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from openerp.tests import common
 
 
 @common.at_install(False)
@@ -59,7 +59,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
             'name': 'Inventory tests',
             'usage': 'internal',
         })
-        inventory = self.inventory_model.create({
+        self.inventory_model.create({
             'name': 'Product1 inventory',
             'filter': 'product',
             'line_ids': [
@@ -86,8 +86,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                     'prod_lot_id': self.lot.id,
                 }),
             ],
-        })
-        inventory.action_done()
+        }).action_done()
 
     def test_inventory_category_filter(self):
         inventory = self.inventory_model.create({

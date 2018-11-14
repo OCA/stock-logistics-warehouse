@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 AvanzOSC - Oihane Crucelaegi
 # Copyright 2015 Tecnativa - Pedro M. Baeza
+# Copyright 2018 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from openerp import _, api, fields, models
 
 
 class StockInventoryEmptyLines(models.Model):
@@ -30,13 +31,13 @@ class StockInventory(models.Model):
     _inherit = 'stock.inventory'
 
     @api.model
-    def _selection_filter(self):
+    def _get_available_filters(self):
         """This function will return the list of filters allowed according to
         the options checked in 'Settings/Warehouse'.
 
         :return: list of tuple
         """
-        res_filters = super(StockInventory, self)._selection_filter()
+        res_filters = super(StockInventory, self)._get_available_filters()
         res_filters.append(('categories', _('Selected Categories')))
         res_filters.append(('products', _('Selected Products')))
         for res_filter in res_filters:
@@ -46,6 +47,11 @@ class StockInventory(models.Model):
         res_filters.append(('empty', _('Empty list')))
         return res_filters
 
+    filter = fields.Selection(
+        selection='_get_available_filters',
+        string='Selection Filter',
+        required=True,
+    )
     categ_ids = fields.Many2many(
         comodel_name='product.category', relation='rel_inventories_categories',
         column1='inventory_id', column2='category_id', string='Categories')
@@ -60,36 +66,36 @@ class StockInventory(models.Model):
         string='Capture Lines')
 
     @api.model
-    def _get_inventory_lines_values(self):
-        self.ensure_one()
+    def _get_inventory_lines(self, inventory):
         vals = []
         product_obj = self.env['product.product']
-        inventory = self.new(self._convert_to_write(self._cache))
-        if self.filter in ('categories', 'products'):
-            if self.filter == 'categories':
+        tmp_inventory = self.new(self._convert_to_write(inventory._cache))
+        # inventory = self.new(self._convert_to_write(self._cache))
+        if inventory.filter in ('categories', 'products'):
+            if inventory.filter == 'categories':
                 products = product_obj.search([
-                    ('product_tmpl_id.categ_id', 'in', self.categ_ids.ids)
+                    ('product_tmpl_id.categ_id', 'in', inventory.categ_ids.ids)
                 ])
             else:  # filter = 'products'
-                products = self.product_ids
-            inventory.filter = 'product'
+                products = inventory.product_ids
+            tmp_inventory.filter = 'product'
             for product in products:
-                inventory.product_id = product
+                tmp_inventory.product_id = product
                 vals += super(StockInventory,
-                              inventory)._get_inventory_lines_values()
-        elif self.filter == 'lots':
-            inventory.filter = 'lot'
-            for lot in self.lot_ids:
-                inventory.lot_id = lot
+                              self)._get_inventory_lines(tmp_inventory)
+        elif inventory.filter == 'lots':
+            tmp_inventory.filter = 'lot'
+            for lot in inventory.lot_ids:
+                tmp_inventory.lot_id = lot
                 vals += super(StockInventory,
-                              inventory)._get_inventory_lines_values()
-        elif self.filter == 'empty':
+                              self)._get_inventory_lines(tmp_inventory)
+        elif inventory.filter == 'empty':
             tmp_lines = {}
-            for line in self.empty_line_ids:
+            for line in inventory.empty_line_ids:
                 tmp_lines.setdefault(line.product_code, 0)
                 tmp_lines[line.product_code] += line.product_qty
-            self.empty_line_ids.unlink()
-            inventory.filter = 'product'
+            inventory.empty_line_ids.unlink()
+            tmp_inventory.filter = 'product'
             for product_code in tmp_lines.keys():
                 product = product_obj.search([
                     '|',
@@ -98,18 +104,20 @@ class StockInventory(models.Model):
                 ], limit=1)
                 if not product:
                     continue
-                inventory.product_id = product
+                tmp_inventory.product_id = product
                 values = super(StockInventory,
-                               inventory)._get_inventory_lines_values()
+                               self)._get_inventory_lines(tmp_inventory)
                 if values:
                     values[0]['product_qty'] = tmp_lines[product_code]
                 else:
                     vals += [{
                         'product_id': product.id,
                         'product_qty': tmp_lines[product_code],
-                        'location_id': self.location_id.id,
+                        'location_id': inventory.location_id.id,
                     }]
                 vals += values
         else:
-            vals = super(StockInventory, self)._get_inventory_lines_values()
+            vals = super(StockInventory, self)._get_inventory_lines(inventory)
+        for val in vals:
+            val.update({'inventory_id': inventory.id})
         return vals
