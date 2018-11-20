@@ -8,13 +8,6 @@ Stock Product Location Sorted by Quantity
 =========================================
 
 This module allows in the update wizard of quantities for a product, to sort the stock location by quantity.
-.. image:: stock_product_location_sorted_by_qty/static/description/stock_product_location_sorted_by_qty.png
-    :width: 800 px
-    :alt: Product Location Sorted by Quantity
- |
-.. image:: static/description/stock_product_location_sorted_by_qty.png
-    :width: 800 px
-    :alt: Product Location Sorted by Quantity
 
 Bug Tracker
 ===========
@@ -39,7 +32,6 @@ Maintainer
    :alt: Odoo Community Association
    :target: https://odoo-community.org
 
-This module is maintained by the OCA.
-
-OCA, or the Odoo Community Association, is a nonprofit organization whose mission is to support the collaborative development of Odoo features and promote its widespread use.
-To contribute to this module, please visit https://odoo-community.org.
+OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.
