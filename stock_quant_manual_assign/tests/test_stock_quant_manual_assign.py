@@ -84,7 +84,7 @@ class TestStockQuantManualAssign(TransactionCase):
         wizard.quants_lines[0].write({
             'selected': True,
         })
-        wizard.quants_lines[0].onchange_selected()
+        wizard.quants_lines[0]._onchange_selected()
         wizard.quants_lines[1].write({
             'selected': True,
             'qty': 50.0,
