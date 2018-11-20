@@ -4,21 +4,22 @@
         <field name="name">assign.manual.quants.form</field>
         <field name="model">assign.manual.quants</field>
         <field name="arch" type="xml">
-            <form name="Manual Quants">
+            <form>
+                <field name='quants_lines' colspan="4">
+                    <tree editable="top" delete="0" create="0">
+                        <field name="lot_id" readonly="1"/>
+                        <field name="on_hand" readonly="1"/>
+                        <field name="reserved" readonly="1"/>
+                        <field name="location_id" readonly="1"/>
+                        <field name="package_id" readonly="1"/>
+                        <field name="selected"/>
+                        <field name="qty" attrs="{'readonly':[('selected', '=', False)]}" sum="qty"/>
+                    </tree>
+                </field>
                 <group col='4' colspan="4">
-                    <field name='quants_lines' colspan="4">
-                        <tree editable="top" delete="0" create="0">
-                            <field name="lot_id" readonly="1"/>
-                            <field name="on_hand" readonly="1"/>
-                            <field name="reserved" readonly="1"/>
-                            <field name="location_id" readonly="1"/>
-                            <field name="package_id" readonly="1"/>
-                            <field name="selected"/>
-                            <field name="qty" attrs="{'readonly':[('selected', '=', False)]}" sum="qty"/>
-                        </tree>
-                    </field>
                     <field name="move_qty" colspan="2" readonly="1"/>
                     <field name="lines_qty" invisible="1" />
+                    <field name="move_id" invisible="1"/>
                 </group>
                 <footer>
                     <button name="assign_quants" type="object"
@@ -30,7 +31,7 @@
         </field>
     </record>
 
-    <act_window name="Manual quants" res_model="assign.manual.quants"
+    <act_window name="Manual assignment" res_model="assign.manual.quants"
         src_model="stock.move" view_mode="form" target="new"
         id="assign_manual_quants_action" />
 </odoo>
