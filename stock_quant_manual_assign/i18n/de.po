@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * stock_quant_manual_assign
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2017-07-05 00:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_quant_manual_assign
@@ -81,25 +81,31 @@ msgid "Lot"
 msgstr "Los"
 
 #. module: stock_quant_manual_assign
-#: model:ir.ui.view,arch_db:stock_quant_manual_assign.stock_move_manual_quants_form_view
-#: model:ir.ui.view,arch_db:stock_quant_manual_assign.stock_move_manual_quants_picking_form_view
+#: model:ir.ui.view,arch_db:stock_quant_manual_assign.stock_picking_manual_quants_form_view
 msgid "Manual Quants"
 msgstr "Manuelle Quants"
 
 #. module: stock_quant_manual_assign
 #: model:ir.actions.act_window,name:stock_quant_manual_assign.assign_manual_quants_action
-msgid "Manual quants"
+#, fuzzy
+msgid "Manual assignment"
 msgstr "Manuelle Quants"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_assign_wizard
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_move_id
 msgid "Move"
 msgstr "Umlagern"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_name
-msgid "Name"
-msgstr "Bezeichnung"
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_on_hand
+msgid "On Hand"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_reserved
+msgid "Others Reserved"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
@@ -107,17 +113,17 @@ msgid "Package"
 msgstr "Packung"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_4478
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_5187
 msgid "QTY"
 msgstr "Menge"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_quant
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_quant_id
 msgid "Quant"
 msgstr "Quant"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:26
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr "Menge ist größer als der Bedarf"
@@ -143,19 +149,18 @@ msgid "Select"
 msgstr "Auswahl"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_move
-msgid "Stock Move"
-msgstr "Lagerbuchung"
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:176
+#, python-format
+msgid ""
+"Selected line quantity is higher than the available one. Maybe an operation "
+"with this product has been done meanwhile or you have manually increased the "
+"suggested value."
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
 msgid "The package containing this quant"
 msgstr "Die Packung, die dieses Quant beinhaltet"
-
-#. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_move_picking_type_code
-msgid "Type of Operation"
-msgstr "Vorgangsart"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants
@@ -171,3 +176,15 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
 msgstr "Menge"
+
+#~ msgid "Manual quants"
+#~ msgstr "Manuelle Quants"
+
+#~ msgid "Name"
+#~ msgstr "Bezeichnung"
+
+#~ msgid "Stock Move"
+#~ msgstr "Lagerbuchung"
+
+#~ msgid "Type of Operation"
+#~ msgstr "Vorgangsart"
