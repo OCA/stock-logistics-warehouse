@@ -87,6 +87,9 @@ class AssignManualQuants(models.TransientModel):
             line = {}
             line['quant_id'] = quant.id
             line['on_hand'] = quant.quantity
+            line['location_id'] = quant.location_id.id
+            line['lot_id'] = quant.lot_id.id
+            line['package_id'] = quant.package_id.id
             line['selected'] = False
             move_lines = move.move_line_ids.filtered(
                 lambda ml: (ml.location_id == quant.location_id and
@@ -137,7 +140,6 @@ class AssignManualQuantsLines(models.TransientModel):
     qty = fields.Float(
         string='QTY', digits=dp.get_precision('Product Unit of Measure'))
 
-    @api.multi
     @api.onchange('selected')
     def _onchange_selected(self):
         for record in self:
