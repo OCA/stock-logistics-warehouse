@@ -1,0 +1,302 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_available_product_expiry
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.product_product_form_view
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.product_template_form_view
+msgid "<span class=\"o_stat_text\">Expired Outgoing</span>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.product_product_form_view
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.product_template_form_view
+msgid "<span class=\"o_stat_text\">Expired</span>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_product_product_check_expired_lots
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_product_template_check_expired_lots
+msgid "Check expired lots"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,help:stock_available_product_expiry.field_stock_config_settings_stock_qty_available_lot_expired
+msgid "Check this if you want to compute stock level minus expired product lots (based on removal date) if it is defined"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_form_view
+msgid "Confirm"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_tree_view
+msgid "Create Date"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_create_uid
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_create_date
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_display_name
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: selection:stock.scrap.expired,state:0
+#: selection:stock.scrap.expired.line,state:0
+msgid "Done"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: selection:stock.scrap.expired,state:0
+#: selection:stock.scrap.expired.line,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_expected_scrap_qty
+msgid "Expected Quantity"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_product_product_qty_expired
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_product_template_qty_expired
+msgid "Expired"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_product_product_outgoing_expired_qty
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_product_template_outgoing_expired_qty
+msgid "Expired Outgoing"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.product_template_kanban_stock_view
+msgid "Expired:"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_removal_date
+msgid "Expirity date"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_id
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_id
+msgid "ID"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_form_view
+msgid "Inventory Moves"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired___last_update
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_search_view
+msgid "Last Month"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_write_uid
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_write_date
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_search_view
+msgid "Last Week"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_location_id
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_lot_id
+msgid "Lot"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model,name:stock_available_product_expiry.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_move_ids
+msgid "Move ids"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: code:addons/stock_available_product_expiry/models/stock_scrap_expired.py:24
+#: code:addons/stock_available_product_expiry/models/stock_scrap_expired.py:83
+#: code:addons/stock_available_product_expiry/models/stock_scrap_expired.py:85
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_owner_id
+msgid "Owner"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: selection:stock.scrap.expired,state:0
+msgid "Prepared"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model,name:stock_available_product_expiry.model_product_product
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model,name:stock_available_product_expiry.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_scrap_qty
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,help:stock_available_product_expiry.field_product_product_outgoing_expired_qty
+#: model:ir.model.fields,help:stock_available_product_expiry.field_product_template_outgoing_expired_qty
+msgid "Quantity of products that are planned to leave but which should be removed from the stock since these are expired."
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_name
+msgid "Reference"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_stock_scrap_id
+msgid "Scrap"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_scrap_location_id
+msgid "Scrap Location"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_move_id
+msgid "Scrap Move"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_search_view
+msgid "Search Scrap Expired"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_origin
+msgid "Source Document"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_state
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_state
+msgid "Status"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.actions.act_window,name:stock_available_product_expiry.stock_scrap_expired_act_window
+#: model:ir.model,name:stock_available_product_expiry.model_stock_scrap_expired
+#: model:ir.ui.menu,name:stock_available_product_expiry.stock_scrap_expired_menu
+msgid "Stock Scrap Expired"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model,name:stock_available_product_expiry.model_stock_scrap_expired_line
+msgid "Stock Scrap Expired Line"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.view_stock_configuration
+msgid "Stock available lots expired"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,help:stock_available_product_expiry.field_product_product_qty_expired
+#: model:ir.model.fields,help:stock_available_product_expiry.field_product_template_qty_expired
+msgid "Stock for this Product that must be removed from the stock. This stock is no more available for sale to Customers.\n"
+"This quantity include all the production lots with a past removal date."
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_config_settings_stock_qty_available_lot_expired
+msgid "Stock level won't take into account lots expired"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_stock_scrap_expired_id
+msgid "Stock scrap expired id"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_stock_scrap_expired_line_ids
+msgid "Stock scrap expired line ids"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_product_uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: code:addons/stock_available_product_expiry/models/stock_scrap_expired.py:92
+#: code:addons/stock_available_product_expiry/models/stock_scrap_expired_line.py:82
+#, python-format
+msgid "You cannot delete a scrap which is done."
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model,name:stock_available_product_expiry.model_stock_config_settings
+msgid "stock.config.settings"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.model,name:stock_available_product_expiry.model_stock_scrap
+msgid "stock.scrap"
+msgstr ""
+
