@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+<data>
+
+    <record model="ir.model.access" id="stock_scrap_expired_line_access_stock_user">
+        <field name="name">stock.scrap.expired.line access stock user</field>
+        <field name="model_id" ref="model_stock_scrap_expired_line"/>
+        <field name="group_id" ref="stock.group_stock_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+</data>
+</odoo>

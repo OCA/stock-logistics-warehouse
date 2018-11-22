@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="stock_scrap_expired_line_tree_view">
+        <field name="name">stock.scrap.expired.line.tree (in stock_available_product_expiry)</field>
+        <field name="model">stock.scrap.expired.line</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="state" invisible="1"/>
+                <field name="product_id"/>
+                <field name="product_uom_id" groups="product.group_uom"/>
+                <field name="lot_id"/>
+                <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                <field name="expected_scrap_qty"/>
+                <field name="scrap_qty"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

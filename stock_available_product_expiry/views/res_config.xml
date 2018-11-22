@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record id="view_stock_configuration" model="ir.ui.view">
+        <field name="name">Stock settings: Take into account expired lots</field>
+        <field name="model">stock.config.settings</field>
+        <field name="inherit_id" ref="stock.view_stock_config_settings" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//group[last()]" position="after">
+                    <group>
+                        <label for="id" string="Stock available lots expired" />
+                        <div>
+                            <div>
+                                <label for="stock_qty_available_lot_expired" />
+                                <field name="stock_qty_available_lot_expired" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </group>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

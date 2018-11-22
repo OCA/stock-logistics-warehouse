@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="stock_scrap_expired_form_view">
+        <field name="name">stock.scrap.expired.form (in stock_available_product_expiry)</field>
+        <field name="model">stock.scrap.expired</field>
+        <field name="arch" type="xml">
+            <form>
+                    <header>
+                        <button string="Confirm" name="action_confirm" states="draft" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_get_stock_moves"
+                                    string="Inventory Moves" type="object"
+                                    states="done" icon="fa-arrows-v"/>
+                        </div>
+                        <div class="oe_title">
+                            <h1><field name="name" nolabel="1"/></h1>
+                        </div>
+                        <group name="info">
+                            <group name="col1">
+                                <field name="removal_date"/>
+                                <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                                <field name="scrap_location_id" groups="stock.group_stock_multi_locations"/>
+                            </group>
+                            <group name="col2">
+                                <field name="owner_id" groups="stock.group_tracking_owner"/>
+                                <field name="origin"/>
+                            </group>
+                        </group>
+                        <group name="lines" colspan="4">
+                            <field name="stock_scrap_expired_line_ids" nolabel="1"/>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_scrap_expired_search_view">
+        <field name="name">stock.scrap.expired.search (in stock_available_product_expiry)</field>
+        <field name="model">stock.scrap.expired</field>
+        <field name="arch" type="xml">
+           <search string="Search Scrap Expired">
+                <field name="create_date"/>
+                <field name="removal_date"/>
+                <filter name="last_week" string="Last Week" domain="[('create_date','&gt;', (context_today() - datetime.timedelta(weeks=1)).strftime('%%Y-%%m-%%d') )]"/>
+                <filter name="last_month" string="Last Month" domain="[('create_date','&gt;', (context_today() - datetime.timedelta(weeks=4)).strftime('%%Y-%%m-%%d') )]"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_scrap_expired_tree_view">
+        <field name="name">stock.scrap.expired.tree (in stock_available_product_expiry)</field>
+        <field name="model">stock.scrap.expired</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="state == 'draft'">
+                    <field name="name"/>
+                    <field name="create_date" string="Create Date"/>
+                    <field name="removal_date"/>
+                    <field name="state"/>
+                </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="stock_scrap_expired_act_window">
+        <field name="name">Stock Scrap Expired</field>
+        <field name="res_model">stock.scrap.expired</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_last_month":1}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="stock_scrap_expired_menu">
+        <field name="name">Stock Scrap Expired</field>
+        <field name="parent_id" ref="stock.menu_stock_inventory_control"/>
+        <field name="action" ref="stock_scrap_expired_act_window"/>
+        <field name="sequence" eval="999"/>
+    </record>
+
+</odoo>
