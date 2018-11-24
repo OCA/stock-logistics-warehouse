@@ -80,7 +80,8 @@ class ProductProduct(models.Model):
         res = {}
 
         domain_quant = self._prepare_domain_available_not_reserved()
-        quants = self.env['stock.quant'].with_context(lang=False).read_group(
+        ctx = {'lang': False, 'has_unreserved_quantity': True}
+        quants = self.env['stock.quant'].with_context(ctx).read_group(
             domain_quant,
             ['product_id', 'location_id', 'quantity', 'reserved_quantity'],
             ['product_id', 'location_id'],
@@ -111,12 +112,29 @@ class ProductProduct(models.Model):
             prod.qty_available_not_res = qty
         return res
 
+    def _get_domain_locations(self):
+        rec = super(ProductProduct, self)._get_domain_locations()
+        if self.env.context.get('has_unreserved_quantity', False):
+            domain_quant = [
+                ('unreserved_quantity', '>', 0.0),
+            ]
+            rec += (domain_quant,)
+        return rec
+
     def _search_quantity_unreserved(self, operator, value):
         if operator not in OPERATORS:
             raise UserError(_('Invalid domain operator %s') % operator)
         if not isinstance(value, (float, int)):
             raise UserError(_('Invalid domain right operand %s') % value)
-
+        if value and operator == '>' and not (
+                {'from_date', 'to_date'} & set(self.env.context.keys())):
+            product_ids = self.with_context(
+                has_unreserved_quantity=True)._search_qty_available_new(
+                operator, value, self.env.context.get('lot_id'),
+                self.env.context.get('owner_id'),
+                self.env.context.get('package_id')
+            )
+            return [('id', 'in', product_ids)]
         ids = []
         for product in self.search([]):
             if OPERATORS[operator](product.qty_available_not_res, value):
