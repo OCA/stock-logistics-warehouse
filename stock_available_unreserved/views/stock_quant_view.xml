@@ -25,7 +25,7 @@
         >{'search_default_internal_loc': 1, 'search_default_locationgroup':1}</field>
         <field
             name="domain"
-        >[('product_id', '=', active_id), ('contains_unreserved', '=', True)]</field>
+        >[('product_id', '=', active_id), ('unreserved_quantity', '>', 0)]</field>
         <field name="res_model">stock.quant</field>
     </record>
 </odoo>
