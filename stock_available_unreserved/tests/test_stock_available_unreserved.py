@@ -214,6 +214,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
         no_template = self.env['product.template']
         # Start: one template with three variants.
         # All variants have zero unreserved stock
+
         self.check_variants_found_correctly('=', 0, all_variants)
         self.check_variants_found_correctly('>=', 0, all_variants)
         self.check_variants_found_correctly('<=', 0, all_variants)
