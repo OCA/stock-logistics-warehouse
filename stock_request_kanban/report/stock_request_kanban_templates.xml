@@ -3,49 +3,64 @@
      License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <template id="report_simple_label">
-        <div class="col-xs-3" style="padding:0;height:350px;">
-            <div class="col-xs-6"
-                 style="height:30%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
-                <div style="display: table-cell; vertical-align: middle;">
-                    <strong t-field="o.product_id.default_code"
-                            t-if="o.product_id.default_code"/>
+        <div class="col-xs-3" style="padding:20;height:350px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12"
+                         style="height:15%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <strong t-field="o.location_id.name"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-6"
-                 style="height:30%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
-                <div style="display: table-cell; vertical-align: middle;">
-                    <strong t-field="o.location_id.name"/>
+                <div class="row"
+                     t-if="o.product_id.default_code">
+                    <div class="col-xs-12"
+                        style="height:15%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <strong t-field="o.product_id.default_code"
+                                    t-if="o.product_id.default_code"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 align-middle"
-                 style="height:40%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
-                <div style="display: table-cell; vertical-align: middle;">
-                    <strong t-field="o.product_id.name"/>
+                <div class="row">
+                    <div class="col-xs-12 align-middle"
+                         style="height:40%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <strong t-field="o.product_id.name"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-6"
-                 style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
-                <div style="display: table-cell; vertical-align: middle;">
-                    <span t-esc="float(o.product_qty)"/>
-                    <span t-field="o.product_id.uom_id.name"/>
+                <div class="row">
+                    <div class="col-xs-6"
+                         style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <span t-esc="float(o.product_qty)"/>
+                            <span t-field="o.product_id.uom_id.name"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6"
+                         style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <span t-esc="float(o.product_uom_qty)"/>
+                            <span t-field="o.product_uom_id.name"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-6"
-                 style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
-                <div style="display: table-cell; vertical-align: middle;">
-                    <span t-esc="float(o.product_uom_qty)"/>
-                    <span t-field="o.product_uom_id.name"/>
+                <div class="row">
+                    <div class="col-xs-12"
+                         style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <span t-field="o.name"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12"
-                 style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;display:table;">
-                <div style="display: table-cell; vertical-align: middle;">
-                    <span t-field="o.name"/>
+                <div class="row">
+                    <div class="col-xs-12" style="height:10%;">
+                        <img t-att-src="'/report/barcode/%s/%s?width=%s&amp;height=%s' % ('Standard39', o.name, 320, 20)"
+                             style="height:80%; width: 100%;"/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12" style="height:10%;">
-                <img t-att-src="'/report/barcode/%s/%s?width=%s&amp;height=%s' % ('Standard39', o.name, 320, 20)"
-                     style="height:80%; width: 100%;"/>
             </div>
         </div>
     </template>
