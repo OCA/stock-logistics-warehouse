@@ -19,6 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_line_product
-#: model:ir.ui.view,arch_db:account_move_line_product.view_account_move_line_filter
+#: model_terms:ir.ui.view,arch_db:account_move_line_product.view_account_move_line_filter
 msgid "Product"
 msgstr "Product"
