@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_request_kanban
+# 	* stock_request_kanban
 #
 msgid ""
 msgstr ""
@@ -22,14 +22,16 @@ msgid "Active"
 msgstr "Activo"
 
 #. module: stock_request_kanban
+#: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_inventory_kanban_action
 #: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_request_kanban_action
 #: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_request_order_kanban_action
+#: model:ir.ui.view,arch_db:stock_request_kanban.wizard_stock_inventory_kanban_form
 #: model:ir.ui.view,arch_db:stock_request_kanban.wizard_stock_request_kanban_form
 msgid "Add Kanban"
 msgstr "Añadir Kanban"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban_abstract.py:60
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban.py:23
 #, python-format
 msgid "Added kanban %s for product %s"
 msgstr "Se ha añadido el kanban %s para el product %s"
@@ -40,12 +42,26 @@ msgid "Archived"
 msgstr "Archivado"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban_abstract.py:49
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban_abstract.py:29
 #, python-format
-msgid "Barcode %s does not correspond to any Kanban. Try with another barcode or press Close to finish scanning."
+msgid ""
+"Barcode %s does not correspond to any Kanban. Try with another barcode or "
+"press Close to finish scanning."
 msgstr ""
 "El código de barras %s no corresponde a ningún Kanban. Prueba otro código de "
 "barras o haz click en Cerrar para acabar de escanear."
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_inventory_kanban.py:34
+#, fuzzy, python-format
+msgid "Barcode %s is already scanned"
+msgstr "El código %s ya está en la petición"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_inventory_kanban.py:28
+#, fuzzy, python-format
+msgid "Barcode %s is not in the inventory"
+msgstr "El código %s ya está en la petición"
 
 #. module: stock_request_kanban
 #: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:23
@@ -54,10 +70,26 @@ msgid "Barcode %s is on the order"
 msgstr "El código %s ya está en la petición"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban_abstract.py:39
+#: code:addons/stock_request_kanban/models/stock_request_kanban.py:33
 #, python-format
 msgid "CRC is not valid"
 msgstr "El CRC no es válido"
+
+#. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_request_kanban
+#: selection:stock.inventory.kanban,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.actions.act_window,help:stock_request_kanban.stock_inventory_kanban_action
+#, fuzzy
+msgid "Click to add a Stock Inventory Kanban."
+msgstr "Haz click para añadir un Kanban."
 
 #. module: stock_request_kanban
 #: model:ir.actions.act_window,help:stock_request_kanban.stock_request_kanban_action
@@ -65,8 +97,16 @@ msgid "Click to add a Stock Request Kanban."
 msgstr "Haz click para añadir un Kanban."
 
 #. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+#: model:ir.ui.view,arch_db:stock_request_kanban.wizard_stock_inventory_kanban_form
 #: model:ir.ui.view,arch_db:stock_request_kanban.wizard_stock_request_kanban_form
 msgid "Close"
+msgstr "Cerrar"
+
+#. module: stock_request_kanban
+#: selection:stock.inventory.kanban,state:0
+#, fuzzy
+msgid "Closed"
 msgstr "Cerrar"
 
 #. module: stock_request_kanban
@@ -76,21 +116,27 @@ msgid "Company must be the same"
 msgstr "La Compañía debe ser la misma"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_create_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_create_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_create_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_create_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_create_date
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_create_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_create_date
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_create_date
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_create_date
 msgid "Created on"
 msgstr "Creado el"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_display_name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract_display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_display_name
@@ -98,12 +144,29 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: stock_request_kanban
+#: selection:stock.inventory.kanban,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Finish"
+msgstr ""
+
+#. module: stock_request_kanban
+#: selection:stock.inventory.kanban,state:0
+msgid "Finished"
+msgstr ""
+
+#. module: stock_request_kanban
 #: model:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
 msgid "Group By"
 msgstr "Agrupar por"
 
 #. module: stock_request_kanban
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_id_5473
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_id_6240
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_id
@@ -111,10 +174,34 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_request_kanban
+#: selection:stock.inventory.kanban,state:0
+msgid "In progress"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.ui.menu,name:stock_request_kanban.menu_wizard_stock_inventory_kanban
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_inventory_kanban_id
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Inventory Kanban"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_stock_inventory_kanban
+msgid "Inventory for Kanban"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_kanban_ids
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_kanban_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract_kanban_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_kanban_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_kanban_id
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
 msgid "Kanban"
 msgstr "Kanban"
 
@@ -124,7 +211,9 @@ msgid "Kanban cards"
 msgstr "Tarjetas Kanban"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban___last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban___last_update
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban___last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban___last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract___last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban___last_update
@@ -132,14 +221,18 @@ msgid "Last Modified on"
 msgstr "Última modificación el"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_write_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_write_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_write_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_write_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_write_uid
 msgid "Last Updated by"
 msgstr "Actualizado por última vez por"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_write_date
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_write_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_write_date
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_write_date
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_write_date
 msgid "Last Updated on"
@@ -152,6 +245,7 @@ msgid "Lines only can be added on orders with draft state"
 msgstr "Sólo se pueden añadir líneas en ordenes en estado borrador"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_location_ids
 #: model:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
 msgid "Location"
 msgstr "Localización"
@@ -161,6 +255,27 @@ msgstr "Localización"
 #, python-format
 msgid "Location must be the same"
 msgstr "La localización debe coincidir"
+
+#. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Missing"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_missing_kanban_ids
+#, fuzzy
+msgid "Missing Kanban"
+msgstr "Imprimir kanban"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_count_missing_kanbans
+msgid "Missing Kanbans"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_name
+msgid "Name"
+msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_order_id
@@ -173,10 +288,20 @@ msgid "Print kanban"
 msgstr "Imprimir kanban"
 
 #. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Print missing"
+msgstr ""
+
+#. module: stock_request_kanban
 #: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:38
 #, python-format
 msgid "Procurement group must be the same"
 msgstr "El grupo de reestablecimiento debe coincidir"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_product_ids
+msgid "Products"
+msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.ui.menu,name:stock_request_kanban.menu_wizard_stock_request_kanban
@@ -185,10 +310,40 @@ msgstr "Solicitar desde tarjetas Kanban"
 
 #. module: stock_request_kanban
 #: model:ir.ui.view,arch_db:stock_request_kanban.stock_request_order_form
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
 msgid "Scan"
 msgstr "Escanear"
 
 #. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+#, fuzzy
+msgid "Scanned"
+msgstr "Escanear"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_scanned_kanban_ids
+#, fuzzy
+msgid "Scanned Kanban"
+msgstr "Añadir Kanban"
+
+#. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Set to draft"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Start"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_state
+#, fuzzy
+msgid "State"
+msgstr "Status"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_status
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract_status
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_status
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_status
@@ -196,6 +351,7 @@ msgid "Status"
 msgstr "Status"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_status_state
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract_status_state
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_status_state
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_status_state
@@ -203,8 +359,20 @@ msgid "Status State"
 msgstr "Estado del Status"
 
 #. module: stock_request_kanban
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+#: model:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_tree
+#, fuzzy
+msgid "Stock Inventories"
+msgstr "Solicitud de existencias"
+
+#. module: stock_request_kanban
+#: model:ir.actions.act_window,name:stock_request_kanban.stock_inventory_kanban_action
+#, fuzzy
+msgid "Stock Inventory Kanbans"
+msgstr "Kanbans de Solicitud de Existencias"
+
+#. module: stock_request_kanban
 #: model:ir.model,name:stock_request_kanban.model_stock_request
-#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract_stock_request_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_stock_request_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban_stock_request_id
 msgid "Stock Request"
@@ -233,6 +401,7 @@ msgid "Stock Requests Kanban"
 msgstr "Kanban de Solicitudes de Existencias"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_warehouse_ids
 #: model:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
 msgid "Warehouse"
 msgstr "Almacén"
@@ -242,6 +411,12 @@ msgstr "Almacén"
 #, python-format
 msgid "Warehouse must be the same"
 msgstr "El almacén debe coincidir"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_inventory_kanban
+#, fuzzy
+msgid "wizard.stock.inventory.kanban"
+msgstr "wizard.stock.request.kanban"
 
 #. module: stock_request_kanban
 #: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban
