@@ -93,23 +93,23 @@ msgid "Inventory Line"
 msgstr "Voorraadregel"
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_inv_line_count
+msgid "Involved Inv Line Count"
+msgstr ""
+
+#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_inv_line_ids
 msgid "Involved Inventory Lines"
 msgstr ""
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_move_count
+msgid "Involved Move Count"
+msgstr ""
+
+#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_move_ids
 msgid "Involved Stock Moves"
-msgstr ""
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_inv_line_count
-msgid "Involved inv line count"
-msgstr ""
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_move_count
-msgid "Involved move count"
 msgstr ""
 
 #. module: stock_inventory_verification_request
