@@ -8,18 +8,15 @@ from odoo.tests import common
 @common.at_install(False)
 @common.post_install(True)
 class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
-
     def setUp(self):
         super(TestStockInventoryPreparationFilterCategories, self).setUp()
         self.inventory_model = self.env['stock.inventory']
         # Create some categories
         self.category = self.env['product.category'].create({
             'name': 'Category for inventory',
-            'type': 'normal',
         })
         self.category2 = self.env['product.category'].create({
             'name': 'Category for inventory 2',
-            'type': 'normal',
         })
         # Create some products in the category
         self.product1 = self.env['product.product'].create({
@@ -107,14 +104,12 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
         self.assertEqual(line2.location_id, self.location)
 
     def test_inventory_products_filter(self):
-        inventory = self.inventory_model.create(
-            {
-                'name': 'Products inventory',
-                'filter': 'products',
-                'location_id': self.location.id,
-                'product_ids': [(6, 0, [self.product1.id, self.product2.id])],
-            }
-        )
+        inventory = self.inventory_model.create({
+            'name': 'Products inventory',
+            'filter': 'products',
+            'location_id': self.location.id,
+            'product_ids': [(6, 0, [self.product1.id, self.product2.id])],
+        })
         inventory.action_start()
         self.assertEqual(len(inventory.line_ids), 2)
         line1 = inventory.line_ids[0]
