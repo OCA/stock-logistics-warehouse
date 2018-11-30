@@ -58,6 +58,11 @@ msgid "Date From"
 msgstr "Date de"
 
 #. module: stock_demand_estimate
+#: model:ir.model,name:stock_demand_estimate.model_date_range
+msgid "Date Range"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_date_range_type_id
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard_date_range_type_id
 msgid "Date Range Type"
@@ -290,11 +295,6 @@ msgstr ""
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:241
 #, python-format
 msgid "You must select at least one product."
-msgstr ""
-
-#. module: stock_demand_estimate
-#: model:ir.model,name:stock_demand_estimate.model_date_range
-msgid "date.range"
 msgstr ""
 
 #. module: stock_demand_estimate
