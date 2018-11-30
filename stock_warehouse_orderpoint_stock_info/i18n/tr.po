@@ -19,12 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_warehouse_orderpoint_stock_info
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template_virtual_location_qty
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_virtual_location_qty
 msgid "Forecast On Location"
 msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_incoming_location_qty
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template_incoming_location_qty
 msgid "Incoming On Location"
 msgstr ""
 
@@ -35,6 +37,7 @@ msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_outgoing_location_qty
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template_outgoing_location_qty
 msgid "Outgoing On Location"
 msgstr ""
 
@@ -45,16 +48,19 @@ msgstr "Ürün"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_product_category
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template_product_category
 #: model:ir.ui.view,arch_db:stock_warehouse_orderpoint_stock_info.stock_warehouse_orderpoint_search_view
 msgid "Product Category"
 msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_product_location_qty
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template_product_location_qty
 msgid "Quantity On Location"
 msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,help:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_product_category
+#: model:ir.model.fields,help:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template_product_category
 msgid "Select category for the current product"
 msgstr ""
