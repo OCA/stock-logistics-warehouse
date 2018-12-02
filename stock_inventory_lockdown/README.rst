@@ -40,7 +40,7 @@ can be recorded in/out of the inventory's location: users will get an error
 message.
 Creating or modifying locations is also forbidden.
 
-.. image:: stock_inventory_lockdown/static/images/move_error.png
+.. image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/11.0/stock_inventory_lockdown/stock_inventory_lockdown/static/images/move_error.png
    :alt: Error message
 
 Bug Tracker
