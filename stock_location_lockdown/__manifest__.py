@@ -4,18 +4,14 @@
 
 {
     "name": "Stock Location Lockdown",
-    "summary": "Prevent to add stock in flag locations",
+    "summary": "Prevent to add stock on flagged locations",
     "author": "Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "stock",
-    ],
-    "data": [
-        "views/stock_location.xml",
-    ]
+    "depends": ["stock"],
+    "data": ["views/stock_location.xml"],
 }
