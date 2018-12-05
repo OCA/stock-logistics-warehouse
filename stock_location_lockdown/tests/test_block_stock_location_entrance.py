@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2018 Akretion France
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.exceptions import UserError
-from openerp.tests.common import TransactionCase
+from odoo.exceptions import UserError
+from odoo.tests.common import TransactionCase
 
 
 class TestStockLocationLockdown(TransactionCase):
@@ -13,7 +13,7 @@ class TestStockLocationLockdown(TransactionCase):
         self.main_stock_location = self.env.ref('stock.stock_location_stock')
         self.main_stock_location.block_stock_entrance = True
         self.supplier_location = self.env.ref('stock.stock_location_suppliers')
-        self.product = self.env.ref('product.product_product_35')
+        self.product = self.env.ref('product.product_product_27')
 
     def test_transfer_stock_in_locked_location(self):
         """
