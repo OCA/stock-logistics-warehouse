@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_move.py:42
+#: code:addons/stock_inventory_lockdown/models/stock_move.py:39
 #, python-format
 msgid ""
 "An inventory is being conducted at the following location(s):\n"
@@ -28,8 +28,8 @@ msgid ""
 msgstr "Inventář se provádí na následujících místech: %s"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_location.py:23
-#: code:addons/stock_inventory_lockdown/models/stock_location.py:32
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:22
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:31
 #, python-format
 msgid "An inventory is being conducted at this location"
 msgstr "Na tomto místě se provádí inventář"
