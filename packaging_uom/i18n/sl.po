@@ -36,7 +36,7 @@ msgid "Packaging"
 msgstr ""
 
 #. module: packaging_uom
-#: code:addons/packaging_uom/models/product_packaging.py:83
+#: code:addons/packaging_uom/models/product_packaging.py:86
 #, python-format
 msgid "The field Unit of Measure is required"
 msgstr ""
@@ -48,5 +48,5 @@ msgstr "Enota mere"
 
 #. module: packaging_uom
 #: model:ir.model.fields,field_description:packaging_uom.field_product_packaging_uom_categ_domain_id
-msgid "Uom categ domain id"
+msgid "Uom Categ Domain"
 msgstr ""
