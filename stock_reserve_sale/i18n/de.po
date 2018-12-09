@@ -38,7 +38,7 @@ msgid "Account move line ids"
 msgstr "Buchungspositionen-IDs"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:188
+#: code:addons/stock_reserve_sale/model/sale.py:186
 #, python-format
 msgid ""
 "As you changed the quantity of the line, the quantity of the stock "
@@ -63,7 +63,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:198
+#: code:addons/stock_reserve_sale/model/sale.py:196
 #, python-format
 msgid "Configuration Error!"
 msgstr "Konfigurationsfehler!"
@@ -89,8 +89,8 @@ msgid "Display Name"
 msgstr "Anzeigename"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:220
-#: code:addons/stock_reserve_sale/model/sale.py:232
+#: code:addons/stock_reserve_sale/model/sale.py:218
+#: code:addons/stock_reserve_sale/model/sale.py:230
 #, python-format
 msgid "Error"
 msgstr "Fehler"
@@ -207,7 +207,7 @@ msgid "Sales Order Line"
 msgstr "Verkaufsauftragsposition"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:233
+#: code:addons/stock_reserve_sale/model/sale.py:231
 #, python-format
 msgid ""
 "Several stock reservations are linked with the line. Impossible to adjust "
@@ -239,12 +239,20 @@ msgid "Technical field used to make the traceability of produced products"
 msgstr "Technisches Feld, um gefertigte Produkte verfolgbar zu machen"
 
 #. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/wizard/sale_stock_reserve.py:58
+#, python-format
+msgid ""
+"The lines have different owners. Please reserve them individually with the "
+"reserve button on each one."
+msgstr ""
+
+#. module: stock_reserve_sale
 #: field:sale.stock.reserve,date_validity:0
 msgid "Validity Date"
 msgstr "Gültigkeitsdatum"
 
 #. module: stock_reserve_sale
-#: code:addons/stock_reserve_sale/model/sale.py:221
+#: code:addons/stock_reserve_sale/model/sale.py:219
 #, python-format
 msgid ""
 "You cannot change the product or unit of measure of lines with a stock "
