@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:69
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:68
 #, python-format
 msgid "(No description provided.)"
 msgstr ""
@@ -58,7 +58,7 @@ msgid "Accuracy Stats"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.actions.report.xml,name:stock_cycle_count.action_report_stock_location_accuracy
+#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
 msgid "Accuracy report"
 msgstr ""
 
@@ -144,7 +144,7 @@ msgid "Currency"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.actions.report.xml,name:stock_cycle_count.action_report_stock_cycle_count
+#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_location_form
@@ -159,6 +159,13 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.ui.menu,name:stock_cycle_count.menu_report_accuracy_stats
 msgid "Cycle Count Accuracy"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.actions.server,name:stock_cycle_count.ir_cron_compute_cycle_count_action_ir_actions_server
+#: model:ir.cron,cron_name:stock_cycle_count.ir_cron_compute_cycle_count_action
+#: model:ir.cron,name:stock_cycle_count.ir_cron_compute_cycle_count_action
+msgid "Cycle Count Planner Computation"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -272,7 +279,7 @@ msgid "Done"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:51
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:50
 #, python-format
 msgid ""
 "Ensures that at least a defined number of counts in a given period will be "
@@ -280,13 +287,13 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:172
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:171
 #, python-format
 msgid "Error found determining the frequency of periodic cycle count rule. %s"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:218
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:217
 #, python-format
 msgid "Error found when comparing turnover with the rule threshold. %s"
 msgstr ""
@@ -340,6 +347,11 @@ msgid "Inventory Accuracy"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_inventory_adj_count
+msgid "Inventory Adj Count"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_stock_adjustment_ids
 msgid "Inventory Adjustment"
 msgstr ""
@@ -357,11 +369,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_inventory_graph
 msgid "Inventory accuracy evolution"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_inventory_adj_count
-msgid "Inventory adj count"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -397,7 +404,7 @@ msgid "Location"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:26
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:25
 #, python-format
 msgid "Minimum Accuracy"
 msgstr ""
@@ -419,7 +426,7 @@ msgid "Number of latest inventories used to calculate location accuracy"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:64
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:63
 #, python-format
 msgid ""
 "Perform an Inventory Adjustment every time a location in the warehouse runs "
@@ -432,7 +439,7 @@ msgid "Period in days"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:24
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:23
 #, python-format
 msgid "Periodic"
 msgstr ""
@@ -455,7 +462,7 @@ msgid "Rule Description"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:60
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:59
 #, python-format
 msgid ""
 "Schedules a count every time the accuracy of a location goes under a given "
@@ -463,7 +470,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:55
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:54
 #, python-format
 msgid ""
 "Schedules a count every time the total turnover of a location exceeds the "
@@ -535,7 +542,7 @@ msgid "Type of rule"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:25
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:24
 #, python-format
 msgid "Value Turnover"
 msgstr ""
@@ -565,25 +572,25 @@ msgid "You can only confirm cycle counts in state 'Planned'."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:44
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:43
 #, python-format
 msgid "You can only have one zero confirmation rule per warehouse."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:77
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:76
 #, python-format
 msgid "You cannot define a negative or null number of counts per period."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:82
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:81
 #, python-format
 msgid "You cannot define a negative period."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_inventory.py:61
+#: code:addons/stock_cycle_count/models/stock_inventory.py:60
 #, python-format
 msgid ""
 "You cannot modify the configuration of an Inventory Adjustment related to a "
@@ -591,13 +598,13 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:27
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:26
 #, python-format
 msgid "Zero Confirmation"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:35
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:34
 #, python-format
 msgid "Zero confirmation rules can only have one warehouse assigned."
 msgstr ""
