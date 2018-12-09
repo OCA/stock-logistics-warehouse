@@ -183,23 +183,23 @@ msgid "Sub-inventories"
 msgstr "Teilinventuren"
 
 #. module: stock_inventory_hierarchical
-#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:120
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:104
+#, fuzzy, python-format
+msgid ""
+"The state of the inventory %s (%s) is not  consistent with the state of the "
+"following sub-inventories:\n"
+msgstr ""
+"Der Status der Inventur %s (%s) passt nicht zu den folgenden Teil-"
+"Inventuren:\n"
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:121
 #, python-format
 msgid ""
 "The state of the inventory %s (%s) is not consistent with the state of the "
 "following parent inventories:\n"
 msgstr ""
 "Der Status der Inventur %s (%s) passt nicht zu den folgenden übergeordneten "
-"Inventuren:\n"
-
-#. module: stock_inventory_hierarchical
-#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:104
-#, python-format
-msgid ""
-"The state of the inventory %s (%s) is not consistent with the state of the "
-"following sub-inventories:\n"
-msgstr ""
-"Der Status der Inventur %s (%s) passt nicht zu den folgenden Teil-"
 "Inventuren:\n"
 
 #. module: stock_inventory_hierarchical
@@ -223,6 +223,14 @@ msgstr ""
 "Diese Maßnahme startet alle untergeordneten Inventuren:\n"
 "Klicken Sie 'OK' zum Starten aller Inventuren.\n"
 "Klicken Sie 'Abbruch' zum Abbrechen."
+
+#. module: stock_inventory_hierarchical
+#: code:addons/stock_inventory_hierarchical/models/stock_inventory.py:137
+#, python-format
+msgid ""
+"This location is not declared on the parent inventory\n"
+"It cannot be added."
+msgstr ""
 
 #. module: stock_inventory_hierarchical
 #: model:ir.actions.act_window,name:stock_inventory_hierarchical.action_view_sub_inventory
