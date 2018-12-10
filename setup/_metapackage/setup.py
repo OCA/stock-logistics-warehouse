@@ -31,6 +31,7 @@ setuptools.setup(
         'odoo10-addon-stock_inventory_preparation_filter',
         'odoo10-addon-stock_inventory_revaluation',
         'odoo10-addon-stock_inventory_verification_request',
+        'odoo10-addon-stock_location_lockdown',
         'odoo10-addon-stock_lot_sale_tracking',
         'odoo10-addon-stock_mts_mto_rule',
         'odoo10-addon-stock_operation_package_mandatory',
