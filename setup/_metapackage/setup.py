@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo11-addon-stock_inventory_discrepancy',
         'odoo11-addon-stock_inventory_exclude_sublocation',
         'odoo11-addon-stock_inventory_lockdown',
+        'odoo11-addon-stock_inventory_preparation_filter',
         'odoo11-addon-stock_inventory_verification_request',
         'odoo11-addon-stock_mts_mto_rule',
         'odoo11-addon-stock_orderpoint_generator',
