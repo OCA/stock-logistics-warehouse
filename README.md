@@ -41,6 +41,7 @@ addon | version | summary
 [stock_inventory_revaluation](stock_inventory_revaluation/) | 9.0.1.0.0 | Introduces inventory revaluation as single point to change the valuation of products.
 [stock_inventory_verification_request](stock_inventory_verification_request/) | 9.0.1.0.0 | Adds the capability to request a Slot Verification when a inventory is Pending to Approve
 [stock_location_area_data](stock_location_area_data/) | 9.0.1.0.0 | Add surface units of measure
+[stock_location_lockdown](stock_location_lockdown/) | 9.0.1.0.0 | Prevent to add stock in flag locations
 [stock_move_partner_info](stock_move_partner_info/) | 9.0.1.0.0 | Stock Move Partner Info
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 9.0.1.0.0 | Add a MTS+MTO route
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 9.0.1.1.0 | Mass configuration of stock order points
