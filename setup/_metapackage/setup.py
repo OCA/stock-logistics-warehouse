@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo9-addon-stock_inventory_revaluation',
         'odoo9-addon-stock_inventory_verification_request',
         'odoo9-addon-stock_location_area_data',
+        'odoo9-addon-stock_location_lockdown',
         'odoo9-addon-stock_move_partner_info',
         'odoo9-addon-stock_mts_mto_rule',
         'odoo9-addon-stock_orderpoint_generator',
