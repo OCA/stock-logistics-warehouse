@@ -69,6 +69,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
             values = item.orderpoint_id._prepare_procurement_values(item.qty)
             values['date_planned'] = fields.Datetime.to_string(
                 fields.Date.from_string(item.date_planned))
+            values['requested_uid'] = self.env.user
             # Run procurement
             try:
                 self.env['procurement.group'].run(
