@@ -51,6 +51,17 @@ msgid "Allow Virtual locations on Stock Requests"
 msgstr ""
 
 #. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Analytic"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+#, fuzzy
+msgid "Analytic accounting in Stock Requests"
+msgstr "Klicken, um eine Bestandaanforderung zu stellen."
+
+#. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Archived"
 msgstr "Archiviert"
@@ -149,6 +160,11 @@ msgstr "Erledigt"
 #: selection:stock.request,state:0 selection:stock.request.order,state:0
 msgid "Draft"
 msgstr "Entwurf"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Analytic Accounting in Stock Requests"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
@@ -613,6 +629,12 @@ msgstr "Bezeichner der Anforderung muss eindeutig sein"
 #: model:ir.ui.view,arch_db:stock_request.view_stock_request_tree
 msgid "Stock Requests"
 msgstr "Bestandsanforderungen"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings_module_stock_request_analytic
+#, fuzzy
+msgid "Stock Requests Analytic integration"
+msgstr "Anforderungsverwalter"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings_module_stock_request_kanban
