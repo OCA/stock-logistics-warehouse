@@ -52,6 +52,17 @@ msgid "Allow Virtual locations on Stock Requests"
 msgstr ""
 
 #. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Analytic"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+#, fuzzy
+msgid "Analytic accounting in Stock Requests"
+msgstr "Pulse para añadir una solicitud de existencias."
+
+#. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Archived"
 msgstr "Archivado"
@@ -150,6 +161,11 @@ msgstr "Hecho"
 #: selection:stock.request,state:0 selection:stock.request.order,state:0
 msgid "Draft"
 msgstr "Borrador"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Analytic Accounting in Stock Requests"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
@@ -606,6 +622,12 @@ msgstr "El nombre de la solicitud debe ser único"
 #: model:ir.ui.view,arch_db:stock_request.view_stock_request_tree
 msgid "Stock Requests"
 msgstr "Solicitudes de existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings_module_stock_request_analytic
+#, fuzzy
+msgid "Stock Requests Analytic integration"
+msgstr "Integración de solicitudes de existencias con tarjetas Kanbans"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings_module_stock_request_kanban
