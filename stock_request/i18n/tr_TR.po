@@ -51,6 +51,16 @@ msgid "Allow Virtual locations on Stock Requests"
 msgstr ""
 
 #. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Analytic"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Analytic accounting in Stock Requests"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Archived"
 msgstr ""
@@ -147,6 +157,11 @@ msgstr ""
 #. module: stock_request
 #: selection:stock.request,state:0 selection:stock.request.order,state:0
 msgid "Draft"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Analytic Accounting in Stock Requests"
 msgstr ""
 
 #. module: stock_request
@@ -596,6 +611,11 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
 #: model:ir.ui.view,arch_db:stock_request.view_stock_request_tree
 msgid "Stock Requests"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings_module_stock_request_analytic
+msgid "Stock Requests Analytic integration"
 msgstr ""
 
 #. module: stock_request
