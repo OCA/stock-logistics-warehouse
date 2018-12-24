@@ -3,3 +3,4 @@
 purchase-workflow
 web
 server-ux
+account-analytic
