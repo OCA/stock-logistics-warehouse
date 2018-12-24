@@ -18,3 +18,6 @@ class ResConfigSettings(models.TransientModel):
 
     stock_request_allow_virtual_loc = fields.Boolean(
         related='company_id.stock_request_allow_virtual_loc')
+
+    module_stock_request_analytic = fields.Boolean(
+        string='Stock Requests Analytic integration')
