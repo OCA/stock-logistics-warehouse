@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_stock_inventory_form_stock_move_location" model="ir.ui.view">
+    <field name="name">stock.inventory.form.stock_move_location</field>
+    <field name="model">stock.inventory</field>
+    <field name="inherit_id" ref="stock.view_inventory_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='location_id']" position="after">
+        <field name="inventory_type" invisible="1"/>
+        <field name="destination_location_id" groups="stock.group_stock_multi_locations" attrs="{'invisible': [('inventory_type', '!=', 'move')]}" />
+      </xpath>
+      <xpath expr="//tree/field[@name='location_id']" position="after">
+        <field name="inventory_type" invisible="1"/>
+        <field name="destination_location_id" attrs="{'invisible': [('inventory_type', '!=', 'move')]}"/>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>
