@@ -6,20 +6,21 @@
 Stock Request Non Internal
 ==========================
 
-Allow to request stock for non internal locations
+Allow to request stock for internal locations and no company assigned.
+Constrains make sure to not create stock_request for the same location and
+different companies.
 
 
 Configuration
 =============
 
-There must be at least a route with a procurement rule for the wanted virtual
-location.
+There must be at least a route with a procurement rule for the wanted location
 
 
 Usage
 =====
 
-Create a stock request with no warehouse and the wanted virtual location
+Create a stock request for a location without company.
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
