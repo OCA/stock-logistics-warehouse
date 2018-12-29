@@ -20,39 +20,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_needaction
-msgid "Action Needed"
-msgstr "Acció necessària "
-
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_last_post
+#: help:stock.inventory,message_last_post:0
 msgid "Date of the last message posted on the record."
 msgstr "Data del darrer missatge annexat al registre"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_follower_ids
+#: field:stock.inventory,message_follower_ids:0
 msgid "Followers"
 msgstr "Seguidors"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Seguidors (Canals) "
+#: help:stock.inventory,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_partner_ids
-msgid "Followers (Partners)"
-msgstr "Seguidors (Empreses) "
-
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_unread
+#: help:stock.inventory,message_unread:0
 msgid "If checked new messages require your attention."
 msgstr "Si està marcat, hi ha nous missatges "
-
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_needaction
-msgid "If checked, new messages require your attention."
-msgstr "Si està marcat, els nous missatges volen la vostra atenció. "
 
 #. module: stock_inventory_chatter
 #: model:ir.model,name:stock_inventory_chatter.model_stock_inventory
@@ -75,41 +62,56 @@ msgid "Inventory Done"
 msgstr ""
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_is_follower
-msgid "Is Follower"
+#: field:stock.inventory,message_is_follower:0
+#, fuzzy
+msgid "Is a Follower"
 msgstr "És seguidor"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_last_post
+#: field:stock.inventory,message_last_post:0
 msgid "Last Message Date"
 msgstr "Data darrer missatge"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_ids
+#: field:stock.inventory,message_ids:0
 msgid "Messages"
 msgstr "Missatges"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_needaction_counter
-msgid "Number of Actions"
-msgstr "Número d'accions "
+#: help:stock.inventory,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "Número de missatges que requereixen una acció "
+#: field:stock.inventory,message_summary:0
+msgid "Summary"
+msgstr ""
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_unread_counter
-msgid "Number of unread messages"
-msgstr "Número de missatges no llegits "
-
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_unread
+#: field:stock.inventory,message_unread:0
 msgid "Unread Messages"
 msgstr "Missatges sense llegir"
 
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "Comptador de missatges sense llegir"
+#~ msgid "Action Needed"
+#~ msgstr "Acció necessària "
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Seguidors (Canals) "
+
+#~ msgid "Followers (Partners)"
+#~ msgstr "Seguidors (Empreses) "
+
+#~ msgid "If checked, new messages require your attention."
+#~ msgstr "Si està marcat, els nous missatges volen la vostra atenció. "
+
+#~ msgid "Number of Actions"
+#~ msgstr "Número d'accions "
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "Número de missatges que requereixen una acció "
+
+#~ msgid "Number of unread messages"
+#~ msgstr "Número de missatges no llegits "
+
+#~ msgid "Unread Messages Counter"
+#~ msgstr "Comptador de missatges sense llegir"

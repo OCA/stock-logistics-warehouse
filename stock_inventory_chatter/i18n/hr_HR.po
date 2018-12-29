@@ -21,38 +21,25 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_needaction
-msgid "Action Needed"
-msgstr "Potrebna akcija"
-
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_last_post
+#: help:stock.inventory,message_last_post:0
 msgid "Date of the last message posted on the record."
 msgstr "Datum zadnje poruke na zapisu"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_follower_ids
+#: field:stock.inventory,message_follower_ids:0
 msgid "Followers"
 msgstr "Pratitelji"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_channel_ids
-msgid "Followers (Channels)"
+#: help:stock.inventory,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_partner_ids
-msgid "Followers (Partners)"
-msgstr ""
-
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_unread
+#: help:stock.inventory,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr ""
-
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_needaction
-msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: stock_inventory_chatter
@@ -76,41 +63,38 @@ msgid "Inventory Done"
 msgstr ""
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_is_follower
-msgid "Is Follower"
+#: field:stock.inventory,message_is_follower:0
+#, fuzzy
+msgid "Is a Follower"
 msgstr "Je pratitelj"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_last_post
+#: field:stock.inventory,message_last_post:0
 msgid "Last Message Date"
 msgstr "Datum zadnje poruke"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_ids
+#: field:stock.inventory,message_ids:0
 msgid "Messages"
 msgstr "Poruke"
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_needaction_counter
-msgid "Number of Actions"
-msgstr "Broj radnji"
-
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_needaction_counter
-msgid "Number of messages which requires an action"
+#: help:stock.inventory,message_ids:0
+msgid "Messages and communication history"
 msgstr ""
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_unread_counter
-msgid "Number of unread messages"
+#: field:stock.inventory,message_summary:0
+msgid "Summary"
 msgstr ""
 
 #. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_unread
+#: field:stock.inventory,message_unread:0
 msgid "Unread Messages"
 msgstr ""
 
-#. module: stock_inventory_chatter
-#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_unread_counter
-msgid "Unread Messages Counter"
-msgstr ""
+#~ msgid "Action Needed"
+#~ msgstr "Potrebna akcija"
+
+#~ msgid "Number of Actions"
+#~ msgstr "Broj radnji"
