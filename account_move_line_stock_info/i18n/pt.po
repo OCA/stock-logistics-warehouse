@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_line_stock_info
-#: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move_account_move_line_ids
+#: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move__account_move_line_ids
 msgid "Account Move Line"
 msgstr ""
 
@@ -30,13 +30,13 @@ msgid "Journal Item"
 msgstr "Item do Diário"
 
 #. module: account_move_line_stock_info
-#: model:ir.ui.view,arch_db:account_move_line_stock_info.view_move_form
-#: model:ir.ui.view,arch_db:account_move_line_stock_info.view_move_picking_form
+#: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_move_form
+#: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_move_picking_form
 msgid "Journal Items"
 msgstr "Items Diários"
 
 #. module: account_move_line_stock_info
 #: model:ir.model,name:account_move_line_stock_info.model_stock_move
-#: model:ir.model.fields,field_description:account_move_line_stock_info.field_account_move_line_stock_move_id
+#: model:ir.model.fields,field_description:account_move_line_stock_info.field_account_move_line__stock_move_id
 msgid "Stock Move"
 msgstr "Movimento Stock"
