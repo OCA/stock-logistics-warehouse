@@ -45,7 +45,7 @@ msgid "Display Name"
 msgstr "Дэлгэцийн Нэр"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:46
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:47
 #, python-format
 msgid "Empty list"
 msgstr ""
@@ -97,19 +97,19 @@ msgid "Quantity"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:40
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:41
 #, python-format
 msgid "Selected Categories"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:44
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:45
 #, python-format
 msgid "Selected Lots"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:41
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:42
 #, python-format
 msgid "Selected Products"
 msgstr ""
