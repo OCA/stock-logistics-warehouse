@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo9-addon-stock_inventory_discrepancy',
         'odoo9-addon-stock_inventory_exclude_sublocation',
         'odoo9-addon-stock_inventory_lockdown',
+        'odoo9-addon-stock_inventory_preparation_filter',
         'odoo9-addon-stock_inventory_revaluation',
         'odoo9-addon-stock_inventory_verification_request',
         'odoo9-addon-stock_location_area_data',
