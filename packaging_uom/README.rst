@@ -26,6 +26,10 @@ To configure this module, you need to:
 Usage
 =====
 
+* To use this module Go to Inventory -> Configuration -> Settings and activate
+ in the section Products -> Packaging Methods  -> the option "Manage available
+ packaging options per products"
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/153/10.0
