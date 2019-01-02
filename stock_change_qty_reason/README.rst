@@ -26,12 +26,34 @@ Stock Change Quantity Reason
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module extends the product stock management and allows to set a reason
-in the wizard when changing the product quantity.
+in the wizard when changing the product quantity or in inventory adjustments
+per line.
+
+It also can manage preset reasons optionally.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+To enable preset reason feature, you must:
+
+- Go to: Inventory > Settings > Inventory Adjustment
+- Enable: Preset Change Qty Reason
+- Enable: Technical Settings > Manage Stock Change Qty Preset Reasons
+
+Once is activate you will require te add a Preset reason to validate stock
+products change quantity.
+
+
+To allow an Stock Manager configure preset reasons easily, you should:
+
+- Select Stock Manager user on: Settings > Users
+- Enable: Technical Settings > Manage Stock Change Qty Preset Reasons
+- Go to Inventory > Configuration > Inventory Adjustment > Change Qty Reasons
 
 Bug Tracker
 ===========
@@ -57,6 +79,7 @@ Contributors
 * Denis Roussel <denis.roussel@acsone.eu>
 * Meyomesse Gilles <meyomesse.gilles@gmail.com>
 * Andreas Dian S.P <andreasdian777@gmail.com>
+* Héctor Villarreal <hector.villarreal@eficent.com>
 
 Maintainers
 ~~~~~~~~~~~
