@@ -9,7 +9,7 @@
         <field name="inherit_id" ref="stock_request.view_stock_request_form"/>
         <field name="arch" type="xml">
             <field name="procurement_group_id" position="after">
-                <field name="analytic_account_id"/>
+                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
             </field>
         </field>
     </record>
