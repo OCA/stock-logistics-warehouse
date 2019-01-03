@@ -1,0 +1,297 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_valuation_account_manual_adjustment
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-26 03:02+0000\n"
+"PO-Revision-Date: 2017-04-26 03:02+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2017\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model,name:stock_valuation_account_manual_adjustment.model_account_move
+msgid "Account Entry"
+msgstr "Knjigovodski vnos"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_account_move_ids
+msgid "Account move ids"
+msgstr "ID-ji kontnih premikov"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_product_product_accounting_value
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_accounting_value
+msgid "Accounting Value"
+msgstr "Knjigovodska vrednost"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_stock_valuation_account_mass_adjust
+msgid "Adjust Stock Valuation Account Discrepancies"
+msgstr "Popravi neskadja konta vrednotenja zalog"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_amount
+msgid "Adjustment amount"
+msgstr "Znesek popravka"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.actions.act_window,help:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
+msgid "Click to start a new Stock Valuation Account Manual Adjustment"
+msgstr ""
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_company_id
+msgid "Company"
+msgstr "Družba"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_create_uid
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_user_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_create_uid
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_create_date
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_create_date
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_document_date
+msgid "Creation date"
+msgstr "Datum nastanka"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_post_date
+msgid "Date of actual processing"
+msgstr "Datum dejanske obdelave"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_display_name
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_display_name
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: stock_valuation_account_manual_adjustment
+#: selection:stock.valuation.account.manual.adjustment,state:0
+msgid "Draft"
+msgstr "Osnutek"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_valuation_account_manual_adjustment
+#: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:62
+#, python-format
+msgid "Incorrect model."
+msgstr "Nepravilen model."
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_product_product_inventory_value
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_inventory_value
+msgid "Inventory Value"
+msgstr "Vrednost inventarja"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_journal_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_journal_id
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
+msgid "Journal Entries"
+msgstr "Dnevniški vnosi"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model,name:stock_valuation_account_manual_adjustment.model_account_move_line
+msgid "Journal Item"
+msgstr "Dnevniška postavka"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment___last_update
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust___last_update
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_uid
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_write_uid
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_write_date
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_write_date
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model,name:stock_valuation_account_manual_adjustment.model_stock_valuation_account_mass_adjust
+msgid "Mass Adjust Stock Valuation Account Discrepancies"
+msgstr "Masovno popravljanje neskladij konta vrednotenja zalog"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_product_inventory_valuation
+#: model:ir.ui.menu,name:stock_valuation_account_manual_adjustment.menu_action_product_inventory_valuation
+msgid "Perpetual Inventory Valuation"
+msgstr ""
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
+msgid "Post"
+msgstr "Objava"
+
+#. module: stock_valuation_account_manual_adjustment
+#: selection:stock.valuation.account.manual.adjustment,state:0
+msgid "Posted"
+msgstr "Knjiženo"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_post_date
+msgid "Posting Date"
+msgstr "Datum vknjižbe"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
+msgid "Process"
+msgstr "Obdelaj"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model,name:stock_valuation_account_manual_adjustment.model_product_product
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_product_id
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: stock_valuation_account_manual_adjustment
+#: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:67
+#, python-format
+msgid "Product %s must have real time valuation"
+msgstr "Proizvod %s mora biti vrednoten v realnem času"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
+msgid "Product Inventory Valuation"
+msgstr "Vrednotenje inventarja proizvodov"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_mass_adjust
+msgid "Reconcile Inventory Account"
+msgstr "Usklajevanje konta inventarja"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_name
+msgid "Reference"
+msgstr "Sklic"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_name
+msgid "Reference for the journal entry"
+msgstr "Sklic dnevniškega vnosa"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_remarks
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_remarks
+msgid "Remarks"
+msgstr "Pripombe"
+
+#. module: stock_valuation_account_manual_adjustment
+#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:165
+#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:187
+#: code:addons/stock_valuation_account_manual_adjustment/models/product.py:209
+#, python-format
+msgid "Search operator %s not implemented for value %s"
+msgstr "Iskalni operator %s ni implementiran za vrednost %s"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_state
+msgid "Status"
+msgstr "Status"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.actions.act_window,name:stock_valuation_account_manual_adjustment.action_stock_valuation_account_manual_adjustment_tree
+#: model:ir.model,name:stock_valuation_account_manual_adjustment.model_stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_account_move_line_stock_valuation_account_manual_adjustment_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_account_move_stock_valuation_account_manual_adjustment_id
+#: model:ir.ui.menu,name:stock_valuation_account_manual_adjustment.menu_action_stock_valuation_account_manual_adjustment_tree
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_search
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_tree
+msgid "Stock Valuation Account Manual Adjustment"
+msgstr "Ročno popravljanje konta vrednotenja zalog"
+
+#. module: stock_valuation_account_manual_adjustment
+#: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:82
+#: model:res.groups,name:stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment
+#, python-format
+msgid "Stock Valuation Account Manual Adjustments"
+msgstr "Ročni popravki konta vrednotenja zalog"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_remarks
+#: model:ir.model.fields,help:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_remarks
+msgid "This text is copied to the journal entry."
+msgstr "To besedilo se kopira v dnevniški vnos."
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
+msgid "UoM"
+msgstr "EM"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_decrease_account_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_decrease_account_id
+msgid "Valuation Decrease Contra-Account"
+msgstr "Proti-konto znižanja vrednosti"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_increase_account_id
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_mass_adjust_increase_account_id
+msgid "Valuation Increase Contra-Account"
+msgstr "Proti-konto zvišanja vrednosti"
+
+#. module: stock_valuation_account_manual_adjustment
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_product_product_valuation_discrepancy
+#: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_valuation_discrepancy
+msgid "Valuation discrepancy"
+msgstr "Neskladja vrednotenja"
+
+#. module: stock_valuation_account_manual_adjustment
+#: code:addons/stock_valuation_account_manual_adjustment/models/account_move.py:21
+#, python-format
+msgid ""
+"You cannot remove the journal entry that is related to a Stock valuation "
+"account manual adjustment "
+msgstr ""
+"Dnevniškega vnosa povezanega z ročnim popravljanjem konta vrednotenja zalog "
+"ne morete odstraniti"
+
+#. module: stock_valuation_account_manual_adjustment
+#: code:addons/stock_valuation_account_manual_adjustment/models/account_move.py:41
+#, python-format
+msgid ""
+"You cannot remove the journal item that is related to a Stock valuation "
+"account manual adjustment "
+msgstr ""
+"Dnevniške postavke povezane z ročnim popravljanjem konta vrednotenja zalog "
+"ne morete odstraniti"
