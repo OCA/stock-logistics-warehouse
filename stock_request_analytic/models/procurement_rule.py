@@ -12,7 +12,8 @@ class ProcurementRule(models.Model):
         res = super(ProcurementRule, self)._get_stock_move_values(
             product_id, product_qty, product_uom, location_id, name, origin,
             values, group_id)
-        analytic_account_id = self.env['stock.request'].browse(
-            values['stock_request_id']).analytic_account_id.id
-        res.update(analytic_account_id=analytic_account_id)
+        if values.get('stock_request_id'):
+            analytic_account_id = self.env['stock.request'].browse(
+                values['stock_request_id']).analytic_account_id.id
+            res.update(analytic_account_id=analytic_account_id)
         return res

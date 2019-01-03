@@ -13,9 +13,8 @@ class StockRequest(models.Model):
 
     @api.constrains('analytic_account_id')
     def _check_analytic_company_constrains(self):
-        if any(request.company_id and
-               request.analytic_account_id.company_id !=
-               request.company_id for request in self):
+        if any(r.company_id and r.analytic_account_id and
+               r.analytic_account_id.company_id != r.company_id for r in self):
                 raise ValidationError(
                     _('You cannot link a analytic account '
                       'to a stock request that belongs to '
