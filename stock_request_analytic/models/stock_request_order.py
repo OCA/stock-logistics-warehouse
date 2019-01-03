@@ -7,23 +7,23 @@ from odoo import api, fields, models
 class StockRequestOrder(models.Model):
     _inherit = 'stock.request.order'
 
-    analytic_count = fields.Integer(string='analytic count',
-                                    compute='_compute_analytic_ids',
-                                    readonly=True)
+    analytic_count = fields.Integer(
+        compute='_compute_analytic_ids',
+        readonly=True,
+    )
     analytic_account_ids = fields.One2many(
-        'account.analytic.account',
+        comodel_name='account.analytic.account',
         compute='_compute_analytic_ids',
         string='Analytic Accounts',
-        readonly=True, copy=False)
+        readonly=True,
+    )
 
     @api.depends('stock_request_ids')
     def _compute_analytic_ids(self):
         for req in self.sudo():
-            req.analytic_ids = req.stock_request_ids.mapped(
-                'analytic_account_id')
             req.analytic_account_ids = req.stock_request_ids.mapped(
                 'analytic_account_id')
-            req.analytic_count = len(req.analytic_ids)
+            req.analytic_count = len(req.analytic_account_ids)
 
     @api.multi
     def action_view_analytic(self):
