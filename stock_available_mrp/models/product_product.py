@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2014 Numérigraphe SARL
+# Copyright 2014 Numérigraphe SARL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from collections import Counter
@@ -62,7 +61,7 @@ class ProductProduct(models.Model):
         if not product_with_bom:
             return res, stock_dict
         icp = self.env['ir.config_parameter']
-        stock_available_mrp_based_on = icp.get_param(
+        stock_available_mrp_based_on = icp.sudo().get_param(
             'stock_available_mrp_based_on', 'qty_available'
         )
 
@@ -77,7 +76,7 @@ class ProductProduct(models.Model):
 
         # Compute stock for product components.
         # {'productid': {field_name: qty}}
-        if res and stock_available_mrp_based_on in res.values()[0]:
+        if res and stock_available_mrp_based_on in list(res.values())[0]:
             # If the qty is computed by the same method use it to avoid
             # stressing the cache
             component_qties, _ = \
@@ -104,12 +103,20 @@ class ProductProduct(models.Model):
                 # Find the lowest quantity we can make with the stock at hand
                 components_potential_qty = min(
                     [component_qties[component.id][
-                        stock_available_mrp_based_on] // need
+                        stock_available_mrp_based_on] / need
                      for component, need in component_needs.items()]
                 )
 
-                potential_qty = (product.bom_id.product_qty *
-                                 components_potential_qty)
+                bom_id = product.bom_id
+                potential_qty = (bom_id.product_qty * components_potential_qty)
+
+                # We want to respect the rounding factor of the potential_qty
+                # Rounding down as we want to be pesimistic.
+                potential_qty = bom_id.product_uom_id._compute_quantity(
+                    potential_qty,
+                    product.bom_id.product_tmpl_id.uom_id,
+                    rounding_method='DOWN'
+                )
 
             res[product.id]['potential_qty'] = potential_qty
             res[product.id]['immediately_usable_qty'] += potential_qty
