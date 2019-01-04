@@ -47,6 +47,9 @@ class StockRequest(models.AbstractModel):
         domain=[('type', 'in', ['product', 'consu'])], ondelete='cascade',
         required=True,
     )
+    allow_virtual_location = fields.Boolean(
+        related='company_id.stock_request_allow_virtual_loc',
+    )
     product_uom_id = fields.Many2one(
         'product.uom', 'Product Unit of Measure',
         required=True,
@@ -158,6 +161,12 @@ class StockRequest(models.AbstractModel):
     def onchange_warehouse_id(self):
         """ Finds location id for changed warehouse. """
         res = {'domain': {}}
+        if self._name == 'stock.request' and self.order_id:
+            # When the stock request is created from an order the wh and
+            # location are taken from the order and we rely on it to change
+            # all request associated. Thus, no need to apply
+            # the onchange, as it could lead to inconsistencies.
+            return res
         if self.warehouse_id:
             loc_wh = self.location_id.sudo().get_warehouse()
             if self.warehouse_id != loc_wh:
@@ -168,13 +177,17 @@ class StockRequest(models.AbstractModel):
 
     @api.onchange('location_id')
     def onchange_location_id(self):
-        res = {'domain': {}}
         if self.location_id:
-            loc_wh = self.location_id.get_warehouse()
-            if self.warehouse_id != loc_wh:
+            loc_wh = self.location_id.sudo().get_warehouse()
+            if loc_wh and self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
-                self.onchange_warehouse_id()
-        return res
+                self.with_context(
+                    no_change_childs=True).onchange_warehouse_id()
+
+    @api.onchange('allow_virtual_location')
+    def onchange_allow_virtual_location(self):
+        if self.allow_virtual_location:
+            return {'domain': {'location_id': []}}
 
     @api.onchange('company_id')
     def onchange_company_id(self):

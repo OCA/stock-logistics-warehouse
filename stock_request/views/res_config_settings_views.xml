@@ -16,7 +16,7 @@
                 <div class="app_settings_block"
                      data-string="Stock Request" data-key="stock_request"
                      groups="stock_request.group_stock_request_manager">
-                    <h2>Orders</h2>
+                    <h2>Orders &amp; Configuration</h2>
                     <div class="row mt16 o_settings_container" id="stock_request">
                         <div class="col-xs-12 col-md-6 o_setting_box">
                             <div class="o_setting_left_pane">
@@ -27,6 +27,17 @@
                                        for="group_stock_request_order"/>
                                 <div class="text-muted">
                                     Activates Stock Request Orders
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="stock_request_allow_virtual_loc"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Allow All Locations Types" for="stock_request_allow_virtual_loc"/>
+                                <div class="text-muted">
+                                    By default only internal and transit locations are allowed in Stock Request and Orders.
                                 </div>
                             </div>
                         </div>
