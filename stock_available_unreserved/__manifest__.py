@@ -2,11 +2,12 @@
 # Copyright 2016 ACSONE SA/NV (<http://acsone.eu>)
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
+# Copyright 2019 JARSA Sistemas S.A. de C.V.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Stock Available Unreserved",
     "summary": "Quantity of stock available for immediate use",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L,"
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
