@@ -3,6 +3,7 @@
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # Copyright 2016 Therp BV <http://therp.nl>
+# Copyright 2019 JARSA Sistemas S.A. de C.V.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import SavepointCase
@@ -18,7 +19,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
         cls.supplier_location = cls.env.ref('stock.stock_location_suppliers')
         cls.stock_location = cls.env.ref('stock.stock_location_stock')
         cls.customer_location = cls.env.ref('stock.stock_location_customers')
-        cls.uom_unit = cls.env.ref('product.product_uom_unit')
+        cls.uom_unit = cls.env.ref('uom.product_uom_unit')
         cls.main_company = cls.env.ref('base.main_company')
 
         cls.bin_a = cls.env['stock.location'].create({
