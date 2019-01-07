@@ -49,7 +49,6 @@ Contributors
 * Stefan Rijnhart <stefan@opener.amsterdam>
 * Mykhailo Panarin <m.panarin@mobilunity.com>
 * Atte Isopuro <atte.isopuro@avoin.systems>
-* Oscar Garza <oscar.garza@jarsa.com.mx>
 
 
 Maintainer
