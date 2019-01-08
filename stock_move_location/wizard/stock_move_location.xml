@@ -29,7 +29,8 @@
             </field>
           </group>
           <footer>
-            <button name="action_move_location" string="Move Location" type="object" class="btn-primary"/>
+            <button name="action_move_location" string="Immediate Transfer" type="object" class="btn-primary"/>
+            <button name="action_move_location" string="Planned Transfer" type="object" class="btn-primary" context="{'planned': True}"/>
             <button special="cancel" string="Cancel" class="btn-default"/>
           </footer>
         </sheet>
