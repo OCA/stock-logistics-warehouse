@@ -25,6 +25,10 @@ class StockMoveLocationWizard(models.TransientModel):
         comodel_name="wiz.stock.move.location.line",
         inverse_name="move_location_wizard_id",
     )
+    picking_id = fields.Many2one(
+        string="Connected Picking",
+        comodel_name="stock.picking",
+    )
 
     @api.onchange('origin_location_id', 'destination_location_id')
     def _onchange_locations(self):
@@ -43,42 +47,33 @@ class StockMoveLocationWizard(models.TransientModel):
     def _get_locations_domain(self):
         return [('usage', '=', 'internal')]
 
+    def _create_picking(self):
+        return self.env['stock.picking'].create({
+            'picking_type_id': self.env.ref('stock.picking_type_internal').id,
+            'location_id': self.origin_location_id.id,
+            'location_dest_id': self.destination_location_id.id,
+        })
+
+    def _create_moves(self, picking):
+        return self.stock_move_location_line_ids.create_move_lines(picking)
+
+    @api.multi
     def action_move_location(self):
-        inventory_obj = self.env["stock.inventory"]
-        collected_inventory = inventory_obj.create(
-            self._get_collected_inventory_values()
-        )
-        collected_inventory.action_start()
-        self.set_inventory_lines(collected_inventory)
-        collected_inventory.move_stock()
-        return self._get_inventory_action(collected_inventory.id)
+        self.ensure_one()
+        picking = self._create_picking()
+        self._create_moves(picking)
+        if not self.env.context.get("planned"):
+            picking.button_validate()
+        self.picking_id = picking
+        return self._get_picking_action(picking.id)
 
-    def _get_collected_inventory_name(self):
-        sequence = self.env['ir.sequence'].next_by_code(
-            'stock.inventory.move') or '/'
-        res = "{sequence}:{location_from}:{location_to}".format(
-            sequence=sequence,
-            location_from=self.origin_location_id.display_name,
-            location_to=self.destination_location_id.display_name,
-        )
-        return res
-
-    def _get_collected_inventory_values(self):
-        return {
-            "name": self._get_collected_inventory_name(),
-            "location_id": self.origin_location_id.id,
-            "inventory_type": "move",
-            "destination_location_id": self.destination_location_id.id,
-            "filter": "partial",
-        }
-
-    def _get_inventory_action(self, inventory_id):
-        action = self.env.ref("stock.action_inventory_form").read()[0]
-        form_view = self.env.ref("stock.view_inventory_form").id
+    def _get_picking_action(self, pickinig_id):
+        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+        form_view = self.env.ref("stock.view_picking_form").id
         action.update({
             "view_mode": "form",
             "views": [(form_view, "form")],
-            "res_id": inventory_id,
+            "res_id": pickinig_id,
         })
         return action
 
@@ -133,53 +128,3 @@ class StockMoveLocationWizard(models.TransientModel):
         return {
             "type": "ir.action.do_nothing",
         }
-
-    def _get_inventory_lines_values(self, inventory):
-        self.ensure_one()
-        lines = []
-        for wizard_line in self.stock_move_location_line_ids:
-            lines.append({
-                'product_id': wizard_line.product_id.id,
-                'product_uom_id': wizard_line.product_uom_id.id,
-                'prod_lot_id': wizard_line.lot_id.id,
-                'product_qty': self._get_available_quantity(wizard_line),
-                'inventory_id': inventory.id,
-                'location_id': self.origin_location_id.id,
-            })
-        return lines
-
-    def set_inventory_lines(self, inventory):
-        inventory_line_obj = self.env["stock.inventory.line"]
-        for line_vals in self._get_inventory_lines_values(inventory):
-            inventory_line_obj.create(line_vals)
-
-    def _get_available_quantity(self, line):
-        """We check here if the actual amount changed in the stock.
-
-        We don't care about the reservations but we do care about not moving
-        more than exists."""
-        if not line.product_id:
-            return 0
-        # switched to sql here to improve performance and lower db queries
-        self.env.cr.execute(self._get_specific_quants_sql(line))
-        available_qty = self.env.cr.fetchone()[0]
-        if available_qty < line.move_quantity:
-            return available_qty
-        return line.move_quantity
-
-    def _get_specific_quants_sql(self, line):
-        lot = "AND lot_id = {}".format(line.lot_id.id)
-        if not line.lot_id:
-            lot = "AND lot_id is null"
-        return """
-        SELECT sum(quantity)
-        FROM stock_quant
-        WHERE location_id = {location}
-        {lot}
-        AND product_id = {product}
-        GROUP BY location_id, product_id, lot_id
-        """.format(
-            location=line.origin_location_id.id,
-            product=line.product_id.id,
-            lot=lot,
-        )
