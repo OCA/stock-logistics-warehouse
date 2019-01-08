@@ -36,9 +36,31 @@ msgid "Allocated Quantity"
 msgstr "Zugeordnete Menge"
 
 #. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Allow All Locations Types"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_company_stock_request_allow_virtual_loc
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings_stock_request_allow_virtual_loc
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract_allow_virtual_location
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allow_virtual_location
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_kanban_allow_virtual_location
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_allow_virtual_location
+msgid "Allow Virtual locations on Stock Requests"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Archived"
 msgstr "Archiviert"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid ""
+"By default only internal and transit locations are allowed in Stock Request "
+"and Orders."
+msgstr ""
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_order_form
@@ -55,6 +77,12 @@ msgstr "Abgebrochen"
 #: model:ir.actions.act_window,help:stock_request.action_stock_request_form
 msgid "Click to add a Stock Request."
 msgstr "Klicken, um eine Bestandaanforderung zu stellen."
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_res_company
+#, fuzzy
+msgid "Companies"
+msgstr "Unternehmen"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract_company_id
@@ -168,7 +196,7 @@ msgstr "Anforderungs-Anwender"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_id
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5323
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5326
 msgid "ID"
 msgstr "ID"
 
@@ -268,7 +296,7 @@ msgid "Name must be unique"
 msgstr "Bezeichner der Anforderung muss eindeutig sein"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:255
+#: code:addons/stock_request/models/stock_request_order.py:263
 #, python-format
 msgid "Only orders on draft state can be unlinked"
 msgstr ""
@@ -297,7 +325,7 @@ msgstr ""
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
-msgid "Orders"
+msgid "Orders &amp; Configuration"
 msgstr ""
 
 #. module: stock_request
@@ -618,13 +646,13 @@ msgstr "Bestandsanforderungen"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move.py:38
-#: code:addons/stock_request/models/stock_request_order.py:272
+#: code:addons/stock_request/models/stock_request_order.py:280
 #, python-format
 msgid "The company of the stock request must match with that of the location."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:263
+#: code:addons/stock_request/models/stock_request_order.py:271
 #, python-format
 msgid "The company of the stock request must match with that of the warehouse."
 msgstr ""
@@ -657,7 +685,7 @@ msgid "Transfers"
 msgstr "Umlagerungen"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:302
+#: code:addons/stock_request/models/stock_request_order.py:310
 #, python-format
 msgid ""
 "Unfortunately it seems you do not have the necessary rights for creating "
@@ -736,31 +764,31 @@ msgid ""
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:134
+#: code:addons/stock_request/models/stock_request_abstract.py:137
 #, python-format
 msgid "You have entered a location that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:129
+#: code:addons/stock_request/models/stock_request_abstract.py:132
 #, python-format
 msgid "You have entered a product that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:143
+#: code:addons/stock_request/models/stock_request_abstract.py:146
 #, python-format
 msgid "You have entered a route that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:138
+#: code:addons/stock_request/models/stock_request_abstract.py:141
 #, python-format
 msgid "You have entered a warehouse that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:153
+#: code:addons/stock_request/models/stock_request_abstract.py:156
 #, python-format
 msgid ""
 "You have to select a product unit of measure in the same category than the "
