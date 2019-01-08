@@ -70,6 +70,7 @@
                                    groups="stock.group_stock_multi_locations"/>
                             <field name="location_id"
                                    groups="stock.group_stock_multi_locations"/>
+                            <field name="allow_virtual_location" invisible="1"/>
                             <field name="procurement_group_id"
                                    groups="stock.group_adv_location"/>
                             <field name="company_id"
