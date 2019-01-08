@@ -54,6 +54,9 @@ class StockRequestOrder(models.Model):
         ondelete="cascade", required=True,
         states={'draft': [('readonly', False)]},
     )
+    allow_virtual_location = fields.Boolean(
+        related='company_id.stock_request_allow_virtual_loc',
+    )
     procurement_group_id = fields.Many2one(
         'procurement.group', 'Procurement Group', readonly=True,
         states={'draft': [('readonly', False)]},
@@ -144,6 +147,11 @@ class StockRequestOrder(models.Model):
                 self.with_context(
                     no_change_childs=True).onchange_warehouse_id()
         self.change_childs()
+
+    @api.onchange('allow_virtual_location')
+    def onchange_allow_virtual_location(self):
+        if self.allow_virtual_location:
+            return {'domain': {'location_id': []}}
 
     @api.onchange('warehouse_id')
     def onchange_warehouse_id(self):

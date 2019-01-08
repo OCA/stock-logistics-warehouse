@@ -15,3 +15,6 @@ class ResConfigSettings(models.TransientModel):
 
     module_stock_request_kanban = fields.Boolean(
         string='Stock Requests Kanban integration')
+
+    stock_request_allow_virtual_loc = fields.Boolean(
+        related='company_id.stock_request_allow_virtual_loc')

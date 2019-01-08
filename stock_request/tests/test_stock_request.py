@@ -12,6 +12,7 @@ class TestStockRequest(common.TransactionCase):
 
         # common models
         self.stock_request = self.env['stock.request']
+        self.request_order = self.env['stock.request.order']
 
         # refs
         self.stock_request_user_group = \
@@ -21,6 +22,7 @@ class TestStockRequest(common.TransactionCase):
         self.main_company = self.env.ref('base.main_company')
         self.warehouse = self.env.ref('stock.warehouse0')
         self.categ_unit = self.env.ref('product.product_uom_categ_unit')
+        self.virtual_loc = self.env.ref('stock.stock_location_customers')
 
         # common data
         self.company_2 = self.env['res.company'].create({
@@ -141,7 +143,7 @@ class TestStockRequest(common.TransactionCase):
 
     def test_defaults_order(self):
         vals = {}
-        order = self.env['stock.request.order'].sudo(
+        order = self.request_order.sudo(
             self.stock_request_user.id).with_context(
             company_id=self.main_company.id).create(vals)
 
@@ -168,7 +170,7 @@ class TestStockRequest(common.TransactionCase):
                 'location_id': self.warehouse.lot_stock_id.id,
             })]
         }
-        order = self.env['stock.request.order'].sudo(
+        order = self.request_order.sudo(
             self.stock_request_user).new(vals)
         self.stock_request_user.company_id = self.company_2
         order.company_id = self.company_2
@@ -301,7 +303,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.env['stock.request.order'].sudo(
+            self.request_order.sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_02(self):
@@ -324,7 +326,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.env['stock.request.order'].sudo(
+            self.request_order.sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_03(self):
@@ -349,7 +351,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.env['stock.request.order'].sudo(
+            self.request_order.sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_04(self):
@@ -376,7 +378,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.env['stock.request.order'].sudo(
+            self.request_order.sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_05(self):
@@ -399,7 +401,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.env['stock.request.order'].sudo(
+            self.request_order.sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_06(self):
@@ -423,7 +425,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.env['stock.request.order'].sudo().create(vals)
+            self.request_order.sudo().create(vals)
 
     def test_stock_request_order_validations_07(self):
         """ Testing the discrepancy in picking policy between
@@ -446,7 +448,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.env['stock.request.order'].sudo(
+            self.request_order.sudo(
                 self.stock_request_user).create(vals)
 
     def test_stock_request_validations_01(self):
@@ -498,7 +500,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
 
-        order = self.env['stock.request.order'].sudo(
+        order = self.request_order.sudo(
             self.stock_request_user).create(vals)
 
         stock_request = order.stock_request_ids
@@ -628,7 +630,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
 
-        order = self.env['stock.request.order'].sudo(
+        order = self.request_order.sudo(
             self.stock_request_user).create(vals)
 
         self.product.route_ids = [(6, 0, self.route.ids)]
@@ -685,7 +687,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
 
-        order = self.env['stock.request.order'].sudo().create(vals)
+        order = self.request_order.sudo().create(vals)
         self.product.route_ids = [(6, 0, self.route.ids)]
 
         order.action_confirm()
@@ -755,7 +757,7 @@ class TestStockRequest(common.TransactionCase):
         self._create_product(
             'CODEB2', 'Product B2', self.main_company.id,
             product_tmpl_id=template_B.id, active=False)
-        Order = self.env['stock.request.order']
+        Order = self.request_order
 
         # Selecting some variants and creating an order
         preexisting = Order.search([])
@@ -818,3 +820,47 @@ class TestStockRequest(common.TransactionCase):
         # Wrong model should just raise ValidationError
         with self.assertRaises(exceptions.ValidationError):
             Order._create_from_product_multiselect(self.stock_request_user)
+
+    def test_allow_virtual_location(self):
+        self.main_company.stock_request_allow_virtual_loc = True
+        vals = {
+            'product_id': self.product.id,
+            'product_uom_id': self.product.uom_id.id,
+            'product_uom_qty': 5.0,
+            'company_id': self.main_company.id,
+            'warehouse_id': self.warehouse.id,
+            'location_id': self.virtual_loc.id,
+        }
+        stock_request = self.stock_request.sudo(
+            self.stock_request_user).create(vals)
+        stock_request.onchange_allow_virtual_location()
+        self.assertTrue(stock_request.allow_virtual_location)
+        vals = {
+            'company_id': self.main_company.id,
+            'warehouse_id': self.warehouse.id,
+            'location_id': self.virtual_loc.id,
+        }
+        order = self.request_order.sudo(
+            self.stock_request_user).create(vals)
+        order.onchange_allow_virtual_location()
+        self.assertTrue(order.allow_virtual_location)
+
+    def test_onchange_wh_no_effect_from_order(self):
+        vals = {
+            'company_id': self.main_company.id,
+            'warehouse_id': self.warehouse.id,
+            'location_id': self.virtual_loc.id,
+            'stock_request_ids': [(0, 0, {
+                'product_id': self.product.id,
+                'product_uom_id': self.product.uom_id.id,
+                'product_uom_qty': 5.0,
+                'company_id': self.main_company.id,
+                'warehouse_id': self.warehouse.id,
+                'location_id': self.virtual_loc.id,
+            })]
+        }
+        order = self.request_order.sudo(
+            self.stock_request_user).create(vals)
+        order.stock_request_ids.onchange_warehouse_id()
+        self.assertEqual(
+            order.stock_request_ids[0].location_id, self.virtual_loc)
