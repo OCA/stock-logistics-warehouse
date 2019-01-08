@@ -8,33 +8,16 @@ from odoo.exceptions import ValidationError
 
 class TestMoveLocation(TestsCommon):
 
+    def _create_wizard(self, origin_location, destination_location):
+        return self.wizard_obj.create({
+            "origin_location_id": origin_location.id,
+            "destination_location_id": destination_location.id,
+        })
+
     def test_move_location_wizard(self):
         """Test a simple move.
         """
-        self.set_product_amount(
-            self.product_no_lots,
-            self.internal_loc_1,
-            123,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot1,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot2,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot3,
-        )
-
+        self.setup_product_amounts()
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         wizard.action_move_location()
@@ -63,39 +46,10 @@ class TestMoveLocation(TestsCommon):
             self.product_lots, self.internal_loc_2, 1, self.lot1,
         )
 
-    def _create_wizard(self, origin_location, destination_location):
-        return self.wizard_obj.create({
-            "origin_location_id": origin_location.id,
-            "destination_location_id": destination_location.id,
-        })
-
     def test_move_location_wizard_amount(self):
         """Can't move more than exists
         """
-        self.set_product_amount(
-            self.product_no_lots,
-            self.internal_loc_1,
-            123,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot1,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot2,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot3,
-        )
-
+        self.setup_product_amounts()
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         with self.assertRaises(ValidationError):
@@ -104,29 +58,7 @@ class TestMoveLocation(TestsCommon):
     def test_move_location_wizard_ignore_reserved(self):
         """Can't move more than exists
         """
-        self.set_product_amount(
-            self.product_no_lots,
-            self.internal_loc_1,
-            123,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot1,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot2,
-        )
-        self.set_product_amount(
-            self.product_lots,
-            self.internal_loc_1,
-            1,
-            lot_id=self.lot3,
-        )
+        self.setup_product_amounts()
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         # reserve some quants
@@ -151,4 +83,29 @@ class TestMoveLocation(TestsCommon):
         )
         self.check_product_amount(
             self.product_lots, self.internal_loc_2, 1, self.lot1,
+        )
+
+    def test_wizard_clear_lines(self):
+        """Test lines getting cleared properly
+        """
+        self.setup_product_amounts()
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.add_lines()
+        self.assertEqual(len(wizard.stock_move_location_line_ids), 4)
+        wizard._onchange_locations()
+        self.assertEqual(len(wizard.stock_move_location_line_ids), 0)
+
+    def test_planned_transfer(self):
+        """Test planned transfer
+        """
+        self.setup_product_amounts()
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.add_lines()
+        wizard.with_context({'planned': True}).action_move_location()
+        picking = wizard.picking_id
+        self.assertEqual(picking.state, 'draft')
+        self.assertEqual(len(picking.move_line_ids), 4)
+        self.assertEqual(
+            sorted(picking.move_line_ids.mapped("qty_done")),
+            [1, 1, 1, 123],
         )
