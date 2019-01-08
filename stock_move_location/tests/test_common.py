@@ -9,7 +9,7 @@ class TestsCommon(common.SavepointCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestsCommon, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.location_obj = cls.env["stock.location"]
         product_obj = cls.env["product.product"]
@@ -48,6 +48,31 @@ class TestsCommon(common.SavepointCase):
         cls.lot3 = cls.env['stock.production.lot'].create({
             'product_id': cls.product_lots.id,
         })
+
+    def setup_product_amounts(self):
+        self.set_product_amount(
+            self.product_no_lots,
+            self.internal_loc_1,
+            123,
+        )
+        self.set_product_amount(
+            self.product_lots,
+            self.internal_loc_1,
+            1,
+            lot_id=self.lot1,
+        )
+        self.set_product_amount(
+            self.product_lots,
+            self.internal_loc_1,
+            1,
+            lot_id=self.lot2,
+        )
+        self.set_product_amount(
+            self.product_lots,
+            self.internal_loc_1,
+            1,
+            lot_id=self.lot3,
+        )
 
     def set_product_amount(self, product, location, amount, lot_id=None):
         self.env['stock.quant']._update_available_quantity(

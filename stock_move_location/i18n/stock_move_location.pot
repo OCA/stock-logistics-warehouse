@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-28 14:49+0000\n"
-"PO-Revision-Date: 2018-12-28 14:49+0000\n"
+"POT-Creation-Date: 2019-01-08 23:43+0000\n"
+"PO-Revision-Date: 2019-01-08 23:43+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,39 +16,47 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_move_location
-#: model:ir.ui.view,arch_db:stock_move_location.view_stock_move_location_form_stock_move_location
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Add all"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Cancel"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_inventory_comments
-msgid "Comments"
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Clear all"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_create_uid
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_create_uid
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_create_date
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_create_date
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_create_date
 msgid "Created on"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_inventory_destination_location_id
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_inventory_line_destination_location_id
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_destination_location_id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_destination_location_id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_destination_location_id
 msgid "Destination Location"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_display_name
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_display_name
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_id_9042
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_id
 msgid "ID"
 msgstr ""
 
@@ -58,60 +66,103 @@ msgid "Inventory"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Inventory Details"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_inventory_line
 msgid "Inventory Line"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location___last_update
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location___last_update
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line___last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_write_uid
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_write_uid
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_write_date
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_write_date
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.ui.view,arch_db:stock_move_location.view_stock_move_location_form_stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_lot_id
+msgid "Lot/Serial Number"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_max_quantity
+msgid "Maximum available quantity"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Move Location"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.actions.act_window,name:stock_move_location.stock_move_location_action
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_stock_move_location_line_ids
+msgid "Move Location lines"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.actions.act_window,name:stock_move_location.wiz_stock_move_location_action
 #: model:ir.ui.menu,name:stock_move_location.menuitem_move_location
 msgid "Move from location..."
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_origin_location_id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_move_location_wizard_id
+msgid "Move location Wizard"
+msgstr ""
+
+#. module: stock_move_location
+#: code:addons/stock_move_location/wizard/stock_move_location_line.py:56
+#, python-format
+msgid "Move quantity can not exceed max quantity or be negative"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_origin_location_id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_origin_location_id
 msgid "Origin Location"
 msgstr ""
 
 #. module: stock_move_location
-#: code:addons/stock_move_location/models/stock_inventory.py:40
-#, python-format
-msgid "Please select the destination of your move"
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_product_id
+msgid "Product"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model,name:stock_move_location.model_stock_move
-msgid "Stock Move"
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_product_uom_id
+msgid "Product Unit of Measure"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_inventory_inventory_type
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_inventory_line_inventory_type
-msgid "Type"
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_move_quantity
+msgid "Quantity to move"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model,name:stock_move_location.model_stock_move_location
-msgid "stock.move.location"
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "UoM"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_wiz_stock_move_location
+msgid "wiz.stock.move.location"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_wiz_stock_move_location_line
+msgid "wiz.stock.move.location.line"
 msgstr ""
 
