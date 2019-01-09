@@ -39,6 +39,7 @@ setuptools.setup(
         'odoo11-addon-stock_quant_manual_assign',
         'odoo11-addon-stock_removal_location_by_priority',
         'odoo11-addon-stock_request',
+        'odoo11-addon-stock_request_analytic',
         'odoo11-addon-stock_request_kanban',
         'odoo11-addon-stock_request_purchase',
         'odoo11-addon-stock_warehouse_calendar',
