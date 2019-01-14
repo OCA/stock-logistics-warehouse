@@ -56,6 +56,7 @@ class StockRequestOrder(models.Model):
     )
     allow_virtual_location = fields.Boolean(
         related='company_id.stock_request_allow_virtual_loc',
+        readonly=True,
     )
     procurement_group_id = fields.Many2one(
         'procurement.group', 'Procurement Group', readonly=True,
