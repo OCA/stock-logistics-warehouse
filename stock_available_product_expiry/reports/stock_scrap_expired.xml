@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="stock_scrap_expired_document">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="stock.external_layout_barcode_right">
+                    <div class="page">
+                        <br/>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div t-if="o.location_id.partner_id">
+                                    <span><strong>Location address:</strong></span>
+                                    <div t-field="o.location_id.partner_id" t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": True, "phone_icons": True}'/>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <h1 t-field="o.name" class="mt0"/>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th t-if="o.origin"><strong>Source document</strong></th>
+                                    <th><strong>State</strong></th>
+                                    <th><strong>Removal Date</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td t-if="o.origin">
+                                        <span t-field="o.origin"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.state"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.removal_date"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <table class="table table-condensed" t-if="o.stock_scrap_expired_line_ids">
+                            <t t-set="lines" t-value="o.stock_scrap_expired_line_ids"/>
+                            <t t-set="has_barcode" t-value="any([move.product_id.barcode for move in lines.mapped('move_id')])"/>
+                            <t t-set="has_serial_number" t-value="lines.filtered('lot_id')" groups="stock.group_production_lot"/>
+                            <thead>
+                                <tr>
+                                    <th><strong>Product</strong></th>
+                                    <th class="text-right"><strong>Expected qty</strong></th>
+                                    <th><strong>Source</strong></th>
+                                    <th t-if="has_barcode" class="text-center">
+                                        <strong>Barcode</strong>
+                                    </th>
+                                    <th><strong>Lot/Serial Number</strong></th>
+                                    <th><strong>Expiry date</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="lines" t-as="line">
+                                    <td><span t-field="line.product_id"/><br/>
+                                        <span t-field="line.product_id.description_picking"/>
+                                        <t t-if="not line.product_id and line.package_id"><span  t-field="line.package_id"/></t></td>
+                                    <td class="text-right">
+                                        <span t-field="line.expected_scrap_qty"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.location_id"/>
+                                    </td>
+                                    <td t-if="has_barcode">
+                                        <span t-if="line.product_id.barcode">
+                                            <img t-if="product.barcode and len(product.barcode) == 13" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', line.product_id.barcode, 600, 150)" style="width:300px;height:50px"/>
+                                            <img t-elif="product.barcode and len(product.barcode) == 8" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN8', line.product_id.barcode, 600, 150)" style="width:300px;height:50px"/>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.lot_id.name"/>
+                                        <span t-field="line.lot_id.product_qty"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.lot_id.expiry_date"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report
+            string="Scrap expired lots"
+            id="action_stock_scrap_expired"
+            model="stock.scrap.expired"
+            report_type="qweb-pdf"
+            name="stock_available_product_expiry.stock_scrap_expired_document"
+            file="stock_available_product_expiry.stock_scrap_expired_document"
+        />
+</odoo>
