@@ -49,6 +49,7 @@ class StockRequest(models.AbstractModel):
     )
     allow_virtual_location = fields.Boolean(
         related='company_id.stock_request_allow_virtual_loc',
+        readonly=True,
     )
     product_uom_id = fields.Many2one(
         'product.uom', 'Product Unit of Measure',

@@ -200,7 +200,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_id
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5326
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5327
 msgid "ID"
 msgstr ""
 
@@ -295,7 +295,7 @@ msgid "Name must be unique"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:263
+#: code:addons/stock_request/models/stock_request_order.py:264
 #, python-format
 msgid "Only orders on draft state can be unlinked"
 msgstr ""
@@ -637,13 +637,13 @@ msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move.py:38
-#: code:addons/stock_request/models/stock_request_order.py:280
+#: code:addons/stock_request/models/stock_request_order.py:281
 #, python-format
 msgid "The company of the stock request must match with that of the location."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:271
+#: code:addons/stock_request/models/stock_request_order.py:272
 #, python-format
 msgid "The company of the stock request must match with that of the warehouse."
 msgstr ""
@@ -672,7 +672,7 @@ msgid "Transfers"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:310
+#: code:addons/stock_request/models/stock_request_order.py:311
 #, python-format
 msgid "Unfortunately it seems you do not have the necessary rights for creating stock requests. Please contact your administrator."
 msgstr ""
@@ -739,31 +739,31 @@ msgid "You cannot change the company of the warehouse, as it is already assigned
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:137
+#: code:addons/stock_request/models/stock_request_abstract.py:138
 #, python-format
 msgid "You have entered a location that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:132
+#: code:addons/stock_request/models/stock_request_abstract.py:133
 #, python-format
 msgid "You have entered a product that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:146
+#: code:addons/stock_request/models/stock_request_abstract.py:147
 #, python-format
 msgid "You have entered a route that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:141
+#: code:addons/stock_request/models/stock_request_abstract.py:142
 #, python-format
 msgid "You have entered a warehouse that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:156
+#: code:addons/stock_request/models/stock_request_abstract.py:157
 #, python-format
 msgid "You have to select a product unit of measure in the same category than the default unit of measure of the product"
 msgstr ""
