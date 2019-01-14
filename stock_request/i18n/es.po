@@ -208,7 +208,7 @@ msgstr "Agrupa las solicitudes en pedidos"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_id
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5326
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5327
 msgid "ID"
 msgstr "ID"
 
@@ -307,7 +307,7 @@ msgid "Name must be unique"
 msgstr "El nombre debe ser único"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:263
+#: code:addons/stock_request/models/stock_request_order.py:264
 #, python-format
 msgid "Only orders on draft state can be unlinked"
 msgstr "Solo los pedidos en estado borrado pueden ser eliminadas"
@@ -657,13 +657,13 @@ msgstr "Solicitudes de existencias"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move.py:38
-#: code:addons/stock_request/models/stock_request_order.py:280
+#: code:addons/stock_request/models/stock_request_order.py:281
 #, python-format
 msgid "The company of the stock request must match with that of the location."
 msgstr "La compañía de la solicitud debe coincidir con la de la localización."
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:271
+#: code:addons/stock_request/models/stock_request_order.py:272
 #, python-format
 msgid "The company of the stock request must match with that of the warehouse."
 msgstr "La compañía de la solicitud debe coincidir con la del almacén."
@@ -696,7 +696,7 @@ msgid "Transfers"
 msgstr "Transferencias"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:310
+#: code:addons/stock_request/models/stock_request_order.py:311
 #, python-format
 msgid ""
 "Unfortunately it seems you do not have the necessary rights for creating "
@@ -787,31 +787,31 @@ msgstr ""
 "de existencias que pertenecen a otras compañías."
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:137
+#: code:addons/stock_request/models/stock_request_abstract.py:138
 #, python-format
 msgid "You have entered a location that is assigned to another company."
 msgstr "Ha seleccionado una localización que está asignada a otra compañía."
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:132
+#: code:addons/stock_request/models/stock_request_abstract.py:133
 #, python-format
 msgid "You have entered a product that is assigned to another company."
 msgstr "Ha seleccionado un producto que está asignado a otra compañía."
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:146
+#: code:addons/stock_request/models/stock_request_abstract.py:147
 #, python-format
 msgid "You have entered a route that is assigned to another company."
 msgstr "Ha seleccionado una ruta que está asignada a otra compañía."
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:141
+#: code:addons/stock_request/models/stock_request_abstract.py:142
 #, python-format
 msgid "You have entered a warehouse that is assigned to another company."
 msgstr "Ha seleccionado un almacén que está asignado a otra compañía."
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:156
+#: code:addons/stock_request/models/stock_request_abstract.py:157
 #, python-format
 msgid ""
 "You have to select a product unit of measure in the same category than the "
