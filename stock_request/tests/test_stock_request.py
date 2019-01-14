@@ -39,7 +39,7 @@ class TestStockRequest(common.TransactionCase):
             [self.stock_request_manager_group.id],
             [self.main_company.id, self.company_2.id])
         self.product = self._create_product('SH', 'Shoes', False)
-        self.product_company_2 = self._create_product('SH', 'Shoes',
+        self.product_company_2 = self._create_product('SH_2', 'Shoes',
                                                       self.company_2.id)
 
         self.ressuply_loc = self.env['stock.location'].create({
