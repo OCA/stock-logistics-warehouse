@@ -61,6 +61,10 @@ class MakeProcurementOrderpoint(models.TransientModel):
     def make_procurement(self):
         self.ensure_one()
         errors = []
+        # User requesting the procurement is passed by context to be able to
+        # update final MO, PO or trasfer with that information.
+        pg_obj = self.env['procurement.group'].with_context(
+            requested_uid=self.env.user)
         for item in self.item_ids:
             if not item.qty:
                 raise ValidationError(_("Quantity must be positive."))
@@ -69,10 +73,9 @@ class MakeProcurementOrderpoint(models.TransientModel):
             values = item.orderpoint_id._prepare_procurement_values(item.qty)
             values['date_planned'] = fields.Datetime.to_string(
                 fields.Date.from_string(item.date_planned))
-            values['requested_uid'] = self.env.user
             # Run procurement
             try:
-                self.env['procurement.group'].run(
+                pg_obj.run(
                     item.orderpoint_id.product_id,
                     item.qty,
                     item.uom_id,
