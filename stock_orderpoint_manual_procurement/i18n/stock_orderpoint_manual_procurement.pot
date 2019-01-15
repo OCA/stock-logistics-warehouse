@@ -105,7 +105,7 @@ msgid "Minimum Inventory Rule"
 msgstr ""
 
 #. module: stock_orderpoint_manual_procurement
-#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:68
+#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:72
 #, python-format
 msgid "No reordering rule found!"
 msgstr ""
@@ -139,7 +139,7 @@ msgid "Quantity"
 msgstr ""
 
 #. module: stock_orderpoint_manual_procurement
-#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:66
+#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:70
 #, python-format
 msgid "Quantity must be positive."
 msgstr ""
