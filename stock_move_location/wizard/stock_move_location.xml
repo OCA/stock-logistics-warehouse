@@ -22,7 +22,7 @@
                   <field name="product_uom_id" string="UoM" groups="product.group_uom"/>
                   <field name="origin_location_id"/>
                   <field name="destination_location_id"/>
-                  <field name="lot_id" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"  groups="stock.group_production_lot"/>
+                  <field name="lot_id" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"  groups="stock.group_production_lot" options="{'no_create': True}"/>
                   <field name="move_quantity"/>
                   <field name="max_quantity"/>
               </tree>
