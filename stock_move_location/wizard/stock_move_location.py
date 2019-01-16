@@ -2,6 +2,8 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+from itertools import groupby
+
 from odoo import api, fields, models
 
 
@@ -34,6 +36,19 @@ class StockMoveLocationWizard(models.TransientModel):
     def _onchange_locations(self):
         self._clear_lines()
 
+    @api.onchange("stock_move_location_line_ids")
+    def _onchange_stock_move_location_line_ids(self):
+        lines_to_update = self.stock_move_location_line_ids.filtered(
+            lambda x: x.custom is True and
+            not all([x.origin_location_id, x.destination_location_id])
+        )
+        lines_to_update.update({
+            "origin_location_id": self.origin_location_id,
+            "destination_location_id": self.destination_location_id,
+        })
+        # for an easier extension of this function
+        return lines_to_update
+
     def _clear_lines(self):
         origin = self.origin_location_id
         destination = self.destination_location_id
@@ -54,8 +69,55 @@ class StockMoveLocationWizard(models.TransientModel):
             'location_dest_id': self.destination_location_id.id,
         })
 
+    @api.multi
+    def group_lines(self):
+        sorted_lines = sorted(
+            self.stock_move_location_line_ids,
+            key=lambda x: x.product_id,
+        )
+        groups = groupby(sorted_lines, key=lambda x: x.product_id)
+        groups_dict = {}
+        for prod, lines in groups:
+            groups_dict[prod.id] = list(lines)
+        return groups_dict
+
+    @api.multi
     def _create_moves(self, picking):
-        return self.stock_move_location_line_ids.create_move_lines(picking)
+        self.ensure_one()
+        groups = self.group_lines()
+        moves = self.env["stock.move"]
+        for group, lines in groups.items():
+            move = self._create_move(picking, lines)
+            moves |= move
+        return moves
+
+    def _get_move_values(self, picking, lines):
+        # locations are same for the products
+        location_from_id = lines[0].origin_location_id.id
+        location_to_id = lines[0].destination_location_id.id
+        product_id = lines[0].product_id.id
+        product_uom_id = lines[0].product_uom_id.id
+        qty = sum([x.move_quantity for x in lines])
+        return {
+            "name": "test",
+            "location_id": location_from_id,
+            "location_dest_id": location_to_id,
+            "product_id": product_id,
+            "product_uom": product_uom_id,
+            "product_uom_qty": qty,
+            "picking_id": picking.id,
+            "location_move": True,
+        }
+
+    @api.multi
+    def _create_move(self, picking, lines):
+        self.ensure_one()
+        move = self.env["stock.move"].create(
+            self._get_move_values(picking, lines),
+        )
+        for line in lines:
+            line.create_move_lines(picking, move)
+        return move
 
     @api.multi
     def action_move_location(self):
@@ -63,6 +125,8 @@ class StockMoveLocationWizard(models.TransientModel):
         picking = self._create_picking()
         self._create_moves(picking)
         if not self.env.context.get("planned"):
+            picking.action_confirm()
+            picking.action_assign()
             picking.button_validate()
         self.picking_id = picking
         return self._get_picking_action(picking.id)
@@ -111,6 +175,7 @@ class StockMoveLocationWizard(models.TransientModel):
                 'lot_id': group.get("lot_id") or False,
                 'product_uom_id': product.uom_id.id,
                 'move_location_wizard_id': self.id,
+                'custom': False,
             })
         return product_data
 
@@ -118,7 +183,9 @@ class StockMoveLocationWizard(models.TransientModel):
         self.ensure_one()
         if not self.stock_move_location_line_ids:
             for line_val in self._get_stock_move_location_lines_values():
-                self.env["wiz.stock.move.location.line"].create(line_val).id
+                if line_val.get('max_quantity') <= 0:
+                    continue
+                self.env["wiz.stock.move.location.line"].create(line_val)
         return {
             "type": "ir.actions.do_nothing",
         }
