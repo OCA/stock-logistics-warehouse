@@ -5,6 +5,7 @@
 from odoo import _, api, fields, models
 from odoo.addons import decimal_precision as dp
 from odoo.exceptions import ValidationError
+from odoo.tools import float_compare
 
 
 class StockMoveLocationWizardLine(models.TransientModel):
@@ -53,8 +54,11 @@ class StockMoveLocationWizardLine(models.TransientModel):
     @api.constrains("max_quantity", "move_quantity")
     def _contraints_max_move_quantity(self):
         for record in self:
-            if (record.move_quantity > record.max_quantity or
-                    record.move_quantity < 0):
+            if (float_compare(
+                    record.move_quantity,
+                    record.max_quantity, 3
+                    ) == 1 or
+                    float_compare(record.move_quantity, 0.0, 3) == -1):
                 raise ValidationError(_(
                     "Move quantity can not exceed max quantity or be negative"
                 ))
@@ -88,7 +92,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
         # switched to sql here to improve performance and lower db queries
         self.env.cr.execute(self._get_specific_quants_sql())
         available_qty = self.env.cr.fetchone()[0]
-        if available_qty < self.move_quantity:
+        if float_compare(available_qty, self.move_quantity, 3) == -1:
             return available_qty
         return self.move_quantity
 
