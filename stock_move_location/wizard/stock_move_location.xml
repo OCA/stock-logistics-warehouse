@@ -16,15 +16,16 @@
             <button name="clear_lines" string="Clear all" type="object" class="btn-primary"/>
           </group>
           <group name="lines">
-            <field name="stock_move_location_line_ids" nolabel="1">
+            <field name="stock_move_location_line_ids" nolabel="1" >
               <tree string="Inventory Details" editable="bottom" decoration-info="move_quantity != max_quantity" decoration-danger="(move_quantity &lt; 0) or (move_quantity > max_quantity)">
                   <field name="product_id"  domain="[('type','=','product')]"/>
                   <field name="product_uom_id" string="UoM" groups="product.group_uom"/>
-                  <field name="origin_location_id"/>
-                  <field name="destination_location_id"/>
-                  <field name="lot_id" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"  groups="stock.group_production_lot"/>
+                  <field name="origin_location_id" readonly="1" />
+                  <field name="destination_location_id" readonly="1" />
+                  <field name="lot_id" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"  groups="stock.group_production_lot" options="{'no_create': True}"/>
                   <field name="move_quantity"/>
-                  <field name="max_quantity"/>
+                  <field name="custom" invisible="1" />
+                  <field name="max_quantity" attrs="{'readonly': [('custom', '!=', True)]}" />
               </tree>
             </field>
           </group>
@@ -48,7 +49,7 @@
   <menuitem
       id="menuitem_move_location"
       string="Move from location..."
-      parent="stock.menu_stock_root"
+      parent="stock.menu_stock_warehouse_mgmt"
       action="wiz_stock_move_location_action"
       sequence="99"/>
 
