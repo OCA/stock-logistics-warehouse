@@ -108,12 +108,17 @@ msgid "Others Reserved"
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_owner_id
+msgid "Owner"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
 msgid "Package"
 msgstr "Package"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_5187
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_5753
 msgid "QTY"
 msgstr "QTD"
 
@@ -149,7 +154,7 @@ msgid "Select"
 msgstr "Selecione"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:176
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:175
 #, python-format
 msgid ""
 "Selected line quantity is higher than the available one. Maybe an operation "
@@ -161,6 +166,11 @@ msgstr ""
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
 msgid "The package containing this quant"
 msgstr "The package containing this quant"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_owner_id
+msgid "This is the owner of the quant"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants
