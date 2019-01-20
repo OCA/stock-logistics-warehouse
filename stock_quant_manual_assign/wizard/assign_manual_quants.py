@@ -47,28 +47,13 @@ class AssignManualQuants(models.TransientModel):
 
     @api.multi
     def assign_quants(self):
-        quant = self.env['stock.quant']
         move = self.move_id
         move._do_unreserve()
-        precision_digits = self.env[
-            'decimal.precision'].precision_get('Product Unit of Measure')
         for line in self.quants_lines:
-            if float_compare(line.qty, 0.0,
-                             precision_digits=precision_digits) > 0:
-                available_quantity = quant._get_available_quantity(
-                    move.product_id,
-                    line.location_id,
-                    lot_id=line.lot_id)
-                if float_compare(available_quantity, 0.0,
-                                 precision_digits=precision_digits) <= 0:
-                    continue
-                move._update_reserved_quantity(line.qty, available_quantity,
-                                               line.location_id,
-                                               lot_id=line.lot_id, strict=True)
-
-        if move.has_move_lines:
-            for ml in move.move_line_ids:
-                ml.qty_done = ml.product_qty
+            line._assign_quant_line()
+        # Auto-fill all lines as done
+        for ml in move.move_line_ids:
+            ml.qty_done = ml.product_qty
         move._recompute_state()
         move.mapped('picking_id')._compute_state()
         return {}
@@ -90,10 +75,13 @@ class AssignManualQuants(models.TransientModel):
             line['location_id'] = quant.location_id.id
             line['lot_id'] = quant.lot_id.id
             line['package_id'] = quant.package_id.id
+            line['owner_id'] = quant.owner_id.id
             line['selected'] = False
             move_lines = move.move_line_ids.filtered(
                 lambda ml: (ml.location_id == quant.location_id and
-                            ml.lot_id == quant.lot_id)
+                            ml.lot_id == quant.lot_id and
+                            ml.owner_id == quant.owner_id and
+                            ml.package_id == quant.package_id)
             )
             line['qty'] = sum(move_lines.mapped('ordered_qty'))
             line['selected'] = bool(line['qty'])
@@ -117,8 +105,12 @@ class AssignManualQuantsLines(models.TransientModel):
         comodel_name='stock.quant', string='Quant', required=True,
         ondelete='cascade', oldname='quant')
     location_id = fields.Many2one(
-        comodel_name='stock.location', string='Location',
-        related='quant_id.location_id', readonly=True)
+        comodel_name='stock.location',
+        string='Location',
+        related='quant_id.location_id',
+        readonly=True,
+        groups="stock.group_stock_multi_locations"
+    )
     lot_id = fields.Many2one(
         comodel_name='stock.production.lot', string='Lot',
         related='quant_id.lot_id', readonly=True,
@@ -127,6 +119,13 @@ class AssignManualQuantsLines(models.TransientModel):
         comodel_name='stock.quant.package', string='Package',
         related='quant_id.package_id', readonly=True,
         groups="stock.group_tracking_lot")
+    owner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Owner',
+        related='quant_id.owner_id',
+        readonly=True,
+        groups="stock.group_tracking_owner",
+    )
     # This is not correctly shown as related or computed, so we make it regular
     on_hand = fields.Float(
         readonly=True,
@@ -178,3 +177,24 @@ class AssignManualQuantsLines(models.TransientModel):
                       'done meanwhile or you have manually increased the '
                       'suggested value.')
                 )
+
+    def _assign_quant_line(self):
+        self.ensure_one()
+        quant = self.env['stock.quant']
+        precision_digits = self.env[
+            'decimal.precision'].precision_get('Product Unit of Measure')
+        move = self.assign_wizard.move_id
+        if float_compare(self.qty, 0.0, precision_digits=precision_digits) > 0:
+            available_quantity = quant._get_available_quantity(
+                move.product_id, self.location_id, lot_id=self.lot_id,
+                package_id=self.package_id, owner_id=self.owner_id,
+            )
+            if float_compare(
+                available_quantity, 0.0, precision_digits=precision_digits
+            ) <= 0:
+                return
+            move._update_reserved_quantity(
+                self.qty, available_quantity, self.location_id,
+                lot_id=self.lot_id, package_id=self.package_id,
+                owner_id=self.owner_id, strict=True
+            )
