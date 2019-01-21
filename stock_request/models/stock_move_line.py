@@ -39,7 +39,7 @@ class StockMoveLine(models.Model):
     def _action_done(self):
         res = super(StockMoveLine, self)._action_done()
         for ml in self.filtered(
-                lambda m: m.move_id.allocation_ids):
+                lambda m: m.exists() and m.move_id.allocation_ids):
             qty_done = ml.product_uom_id._compute_quantity(
                 ml.qty_done, ml.product_id.uom_id)
 
