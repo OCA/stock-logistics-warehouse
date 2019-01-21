@@ -48,7 +48,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
     max_quantity = fields.Float(
         string="Maximum available quantity",
         digits=dp.get_precision('Product Unit of Measure'),
-        readonly=True,
+    )
+    custom = fields.Boolean(
+        string="Custom line",
+        default=True,
     )
 
     @api.constrains("max_quantity", "move_quantity")
