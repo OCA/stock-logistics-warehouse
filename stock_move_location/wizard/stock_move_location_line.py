@@ -138,11 +138,13 @@ class StockMoveLocationWizardLine(models.TransientModel):
     @api.model
     def create(self, vals):
         res = super().create(vals)
+        # update of wizard lines is extremely buggy
+        # so i have to handle this additionally in create
         if not all([res.origin_location_id, res.destination_location_id]):
             or_loc_id = res.move_location_wizard_id.origin_location_id.id
-            dest_loc_id = res.move_location_wizard_id.destination_location_id.id
+            des_loc_id = res.move_location_wizard_id.destination_location_id.id
             res.write({
                 "origin_location_id": or_loc_id,
-                "destination_location_id": dest_loc_id,
+                "destination_location_id": des_loc_id,
             })
         return res
