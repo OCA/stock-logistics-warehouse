@@ -2,6 +2,8 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+from itertools import groupby
+
 from odoo import api, fields, models
 
 
@@ -67,8 +69,55 @@ class StockMoveLocationWizard(models.TransientModel):
             'location_dest_id': self.destination_location_id.id,
         })
 
+    @api.multi
+    def group_lines(self):
+        sorted_lines = sorted(
+            self.stock_move_location_line_ids,
+            key=lambda x: x.product_id,
+        )
+        groups = groupby(sorted_lines, key=lambda x: x.product_id)
+        groups_dict = {}
+        for prod, lines in groups:
+            groups_dict[prod.id] = list(lines)
+        return groups_dict
+
+    @api.multi
     def _create_moves(self, picking):
-        return self.stock_move_location_line_ids.create_move_lines(picking)
+        self.ensure_one()
+        groups = self.group_lines()
+        moves = self.env["stock.move"]
+        for group, lines in groups.items():
+            move = self._create_move(picking, lines)
+            moves |= move
+        return moves
+
+    def _get_move_values(self, picking, lines):
+        # locations are same for the products
+        location_from_id = lines[0].origin_location_id.id
+        location_to_id = lines[0].destination_location_id.id
+        product_id = lines[0].product_id.id
+        product_uom_id = lines[0].product_uom_id.id
+        qty = sum([x.move_quantity for x in lines])
+        return {
+            "name": "test",
+            "location_id": location_from_id,
+            "location_dest_id": location_to_id,
+            "product_id": product_id,
+            "product_uom": product_uom_id,
+            "product_uom_qty": qty,
+            "picking_id": picking.id,
+            "location_move": True,
+        }
+
+    @api.multi
+    def _create_move(self, picking, lines):
+        self.ensure_one()
+        move = self.env["stock.move"].create(
+            self._get_move_values(picking, lines),
+        )
+        for line in lines:
+            line.create_move_lines(picking, move)
+        return move
 
     @api.multi
     def action_move_location(self):
@@ -76,6 +125,8 @@ class StockMoveLocationWizard(models.TransientModel):
         picking = self._create_picking()
         self._create_moves(picking)
         if not self.env.context.get("planned"):
+            picking.action_confirm()
+            picking.action_assign()
             picking.button_validate()
         self.picking_id = picking
         return self._get_picking_action(picking.id)

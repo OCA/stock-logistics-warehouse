@@ -68,9 +68,9 @@ class StockMoveLocationWizardLine(models.TransientModel):
                     "Move quantity can not exceed max quantity or be negative"
                 ))
 
-    def create_move_lines(self, picking):
+    def create_move_lines(self, picking, move):
         for line in self:
-            values = self._get_move_line_values(line, picking)
+            values = line._get_move_line_values(picking, move)
             if values.get("qty_done") <= 0:
                 continue
             self.env["stock.move.line"].create(
@@ -78,15 +78,18 @@ class StockMoveLocationWizardLine(models.TransientModel):
             )
         return True
 
-    def _get_move_line_values(self, line, picking):
+    @api.multi
+    def _get_move_line_values(self, picking, move):
+        self.ensure_one()
         return {
-            "product_id": line.product_id.id,
-            "lot_id": line.lot_id.id,
-            "location_id": line.origin_location_id.id,
-            "location_dest_id": line.destination_location_id.id,
-            "qty_done": line._get_available_quantity(),
-            "product_uom_id": line.product_uom_id.id,
+            "product_id": self.product_id.id,
+            "lot_id": self.lot_id.id,
+            "location_id": self.origin_location_id.id,
+            "location_dest_id": self.destination_location_id.id,
+            "qty_done": self._get_available_quantity(),
+            "product_uom_id": self.product_uom_id.id,
             "picking_id": picking.id,
+            "move_id": move.id,
         }
 
     def _get_available_quantity(self):
