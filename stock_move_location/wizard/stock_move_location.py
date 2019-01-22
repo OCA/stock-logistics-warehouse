@@ -134,7 +134,7 @@ class StockMoveLocationWizard(models.TransientModel):
             for line_val in self._get_stock_move_location_lines_values():
                 if line_val.get('max_quantity') <= 0:
                     continue
-                self.env["wiz.stock.move.location.line"].create(line_val).id
+                self.env["wiz.stock.move.location.line"].create(line_val)
         return {
             "type": "ir.actions.do_nothing",
         }

@@ -25,12 +25,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
     origin_location_id = fields.Many2one(
         string='Origin Location',
         comodel_name='stock.location',
-        readonly=True,
     )
     destination_location_id = fields.Many2one(
         string='Destination Location',
         comodel_name='stock.location',
-        readonly=True,
     )
     product_uom_id = fields.Many2one(
         string='Product Unit of Measure',
@@ -54,22 +52,29 @@ class StockMoveLocationWizardLine(models.TransientModel):
         default=True,
     )
 
+    @api.model
+    def get_rounding(self):
+        return self.env.ref("product.decimal_product_uom").digits or 3
+
     @api.constrains("max_quantity", "move_quantity")
-    def _contraints_max_move_quantity(self):
+    def _constraint_max_move_quantity(self):
         for record in self:
             if (float_compare(
                     record.move_quantity,
-                    record.max_quantity, 3
-                    ) == 1 or
-                    float_compare(record.move_quantity, 0.0, 3) == -1):
+                    record.max_quantity, self.get_rounding()) == 1 or
+                    float_compare(record.move_quantity, 0.0,
+                                  self.get_rounding()) == -1):
                 raise ValidationError(_(
                     "Move quantity can not exceed max quantity or be negative"
                 ))
 
     def create_move_lines(self, picking):
         for line in self:
+            values = self._get_move_line_values(line, picking)
+            if values.get("qty_done") <= 0:
+                continue
             self.env["stock.move.line"].create(
-                self._get_move_line_values(line, picking)
+                values
             )
         return True
 
@@ -92,10 +97,20 @@ class StockMoveLocationWizardLine(models.TransientModel):
         self.ensure_one()
         if not self.product_id:
             return 0
+        if self.env.context.get("planned"):
+            # for planned transfer we don't care about the amounts at all
+            return self.move_quantity
         # switched to sql here to improve performance and lower db queries
         self.env.cr.execute(self._get_specific_quants_sql())
-        available_qty = self.env.cr.fetchone()[0]
-        if float_compare(available_qty, self.move_quantity, 3) == -1:
+        available_qty = self.env.cr.fetchone()
+        if not available_qty:
+            # if it is immediate transfer and product doesn't exist in that
+            # location -> make the transfer of 0.
+            return 0
+        available_qty = available_qty[0]
+        if float_compare(
+                available_qty,
+                self.move_quantity, self.get_rounding()) == -1:
             return available_qty
         return self.move_quantity
 
@@ -116,3 +131,15 @@ class StockMoveLocationWizardLine(models.TransientModel):
             product=self.product_id.id,
             lot=lot,
         )
+
+    @api.model
+    def create(self, vals):
+        res = super().create(vals)
+        if not all([res.origin_location_id, res.destination_location_id]):
+            or_loc_id = res.move_location_wizard_id.origin_location_id.id
+            dest_loc_id = res.move_location_wizard_id.destination_location_id.id
+            res.write({
+                "origin_location_id": or_loc_id,
+                "destination_location_id": dest_loc_id,
+            })
+        return res
