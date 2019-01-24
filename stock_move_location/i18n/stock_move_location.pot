@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0+e\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 23:43+0000\n"
-"PO-Revision-Date: 2019-01-08 23:43+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,6 +29,11 @@ msgid "Clear all"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_picking_id
+msgid "Connected Picking"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_create_uid
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_create_uid
 msgid "Created by"
@@ -40,6 +43,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_create_date
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_create_date
 msgid "Created on"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_custom
+msgid "Custom line"
 msgstr ""
 
 #. module: stock_move_location
@@ -61,18 +69,13 @@ msgid "ID"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.model,name:stock_move_location.model_stock_inventory
-msgid "Inventory"
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Immediate Transfer"
 msgstr ""
 
 #. module: stock_move_location
 #: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Inventory Details"
-msgstr ""
-
-#. module: stock_move_location
-#: model:ir.model,name:stock_move_location.model_stock_inventory_line
-msgid "Inventory Line"
 msgstr ""
 
 #. module: stock_move_location
@@ -104,11 +107,6 @@ msgid "Maximum available quantity"
 msgstr ""
 
 #. module: stock_move_location
-#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
-msgid "Move Location"
-msgstr ""
-
-#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_stock_move_location_line_ids
 msgid "Move Location lines"
 msgstr ""
@@ -125,7 +123,7 @@ msgid "Move location Wizard"
 msgstr ""
 
 #. module: stock_move_location
-#: code:addons/stock_move_location/wizard/stock_move_location_line.py:56
+#: code:addons/stock_move_location/wizard/stock_move_location_line.py:70
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
 msgstr ""
@@ -134,6 +132,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_origin_location_id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_origin_location_id
 msgid "Origin Location"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_move
+msgid "Part of move location"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Planned Transfer"
 msgstr ""
 
 #. module: stock_move_location
@@ -152,8 +160,18 @@ msgid "Quantity to move"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "UoM"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_stock_move_location_move
+msgid "Whether this move is a part of stock_location moves"
 msgstr ""
 
 #. module: stock_move_location
