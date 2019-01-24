@@ -52,21 +52,42 @@ class StockMoveLocationWizardLine(models.TransientModel):
         default=True,
     )
 
-    @api.model
-    def get_rounding(self):
-        return self.env.ref("product.decimal_product_uom").digits or 3
+    @staticmethod
+    def _compare(qty1, qty2, precision_rounding):
+        return float_compare(
+            qty1, qty2,
+            precision_rounding=precision_rounding)
 
     @api.constrains("max_quantity", "move_quantity")
     def _constraint_max_move_quantity(self):
         for record in self:
-            if (float_compare(
-                    record.move_quantity,
-                    record.max_quantity, self.get_rounding()) == 1 or
-                    float_compare(record.move_quantity, 0.0,
-                                  self.get_rounding()) == -1):
+            rounding = record.product_uom_id.rounding
+            move_qty_gt_max_qty = self._compare(
+                record.move_quantity, record.max_quantity, rounding) == 1
+            move_qty_lt_0 = self._compare(
+                record.move_quantity, 0.0, rounding) == -1
+            if (move_qty_gt_max_qty or move_qty_lt_0):
                 raise ValidationError(_(
                     "Move quantity can not exceed max quantity or be negative"
                 ))
+
+    @api.onchange('product_id', 'lot_id')
+    def onchange_product_id(self):
+        self.product_uom_id = self.product_id.uom_id
+        wiz = self.move_location_wizard_id
+        search_args = [
+            ('location_id', '=', wiz.origin_location_id.id),
+            ('product_id', '=', self.product_id.id),
+        ]
+        if self.lot_id:
+            search_args.append(('lot_id', '=', self.lot_id.id))
+        else:
+            search_args.append(('lot_id', '=', False))
+        res = self.env['stock.quant'].read_group(search_args, ['quantity'], [])
+        max_quantity = res[0]['quantity']
+        self.max_quantity = max_quantity
+        self.origin_location_id = wiz.origin_location_id
+        self.destination_location_id = wiz.destination_location_id
 
     def create_move_lines(self, picking, move):
         for line in self:
@@ -103,48 +124,23 @@ class StockMoveLocationWizardLine(models.TransientModel):
         if self.env.context.get("planned"):
             # for planned transfer we don't care about the amounts at all
             return self.move_quantity
-        # switched to sql here to improve performance and lower db queries
-        self.env.cr.execute(self._get_specific_quants_sql())
-        available_qty = self.env.cr.fetchone()
+        search_args = [
+            ('location_id', '=', self.origin_location_id.id),
+            ('product_id', '=', self.product_id.id),
+        ]
+        if self.lot_id:
+            search_args.append(('lot_id', '=', self.lot_id.id))
+        else:
+            search_args.append(('lot_id', '=', False))
+        res = self.env['stock.quant'].read_group(search_args, ['quantity'], [])
+        available_qty = res[0]['quantity']
         if not available_qty:
             # if it is immediate transfer and product doesn't exist in that
             # location -> make the transfer of 0.
             return 0
-        available_qty = available_qty[0]
-        if float_compare(
-                available_qty,
-                self.move_quantity, self.get_rounding()) == -1:
+        rounding = self.product_uom_id.rounding
+        available_qty_lt_move_qty = self._compare(
+            available_qty, self.move_quantity, rounding) == -1
+        if available_qty_lt_move_qty:
             return available_qty
         return self.move_quantity
-
-    def _get_specific_quants_sql(self):
-        self.ensure_one()
-        lot = "AND lot_id = {}".format(self.lot_id.id)
-        if not self.lot_id:
-            lot = "AND lot_id is null"
-        return """
-        SELECT sum(quantity)
-        FROM stock_quant
-        WHERE location_id = {location}
-        {lot}
-        AND product_id = {product}
-        GROUP BY location_id, product_id, lot_id
-        """.format(
-            location=self.origin_location_id.id,
-            product=self.product_id.id,
-            lot=lot,
-        )
-
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
-        # update of wizard lines is extremely buggy
-        # so i have to handle this additionally in create
-        if not all([res.origin_location_id, res.destination_location_id]):
-            or_loc_id = res.move_location_wizard_id.origin_location_id.id
-            des_loc_id = res.move_location_wizard_id.destination_location_id.id
-            res.write({
-                "origin_location_id": or_loc_id,
-                "destination_location_id": des_loc_id,
-            })
-        return res
