@@ -8,6 +8,10 @@ from odoo.exceptions import ValidationError
 
 class TestMoveLocation(TestsCommon):
 
+    def setUp(self):
+        super().setUp()
+        self.setup_product_amounts()
+
     def _create_wizard(self, origin_location, destination_location):
         return self.wizard_obj.create({
             "origin_location_id": origin_location.id,
@@ -15,9 +19,7 @@ class TestMoveLocation(TestsCommon):
         })
 
     def test_move_location_wizard(self):
-        """Test a simple move.
-        """
-        self.setup_product_amounts()
+        """Test a simple move."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         wizard.action_move_location()
@@ -47,18 +49,14 @@ class TestMoveLocation(TestsCommon):
         )
 
     def test_move_location_wizard_amount(self):
-        """Can't move more than exists
-        """
-        self.setup_product_amounts()
+        """Can't move more than exists."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         with self.assertRaises(ValidationError):
             wizard.stock_move_location_line_ids[0].move_quantity += 1
 
     def test_move_location_wizard_ignore_reserved(self):
-        """Can't move more than exists
-        """
-        self.setup_product_amounts()
+        """Can't move more than exists."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         # reserve some quants
@@ -86,9 +84,7 @@ class TestMoveLocation(TestsCommon):
         )
 
     def test_wizard_clear_lines(self):
-        """Test lines getting cleared properly
-        """
-        self.setup_product_amounts()
+        """Test lines getting cleared properly."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         self.assertEqual(len(wizard.stock_move_location_line_ids), 4)
@@ -96,9 +92,7 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(len(wizard.stock_move_location_line_ids), 0)
 
     def test_planned_transfer(self):
-        """Test planned transfer
-        """
-        self.setup_product_amounts()
+        """Test planned transfer."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         wizard.with_context({'planned': True}).action_move_location()

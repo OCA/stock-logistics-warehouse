@@ -9,12 +9,11 @@ class StockMove(models.Model):
 
     location_move = fields.Boolean(
         string="Part of move location",
-        help="Wether this move is a part of stock_location moves",
+        help="Whether this move is a part of stock_location moves",
     )
 
     @api.depends("location_move")
     def _compute_show_details_visible(self):
         super()._compute_show_details_visible()
         for move in self:
-            if move.location_move:
-                move.show_details_visible = True
+            move.show_details_visible = move.location_move
