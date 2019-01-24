@@ -20,8 +20,8 @@
               <tree string="Inventory Details" editable="bottom" decoration-info="move_quantity != max_quantity" decoration-danger="(move_quantity &lt; 0) or (move_quantity > max_quantity)">
                   <field name="product_id"  domain="[('type','=','product')]"/>
                   <field name="product_uom_id" string="UoM" groups="product.group_uom"/>
-                  <field name="origin_location_id" readonly="1" />
-                  <field name="destination_location_id" readonly="1" />
+                  <field name="origin_location_id" readonly="1" force_save="1"/>
+                  <field name="destination_location_id" readonly="1" force_save="1"/>
                   <field name="lot_id" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"  groups="stock.group_production_lot" options="{'no_create': True}"/>
                   <field name="move_quantity"/>
                   <field name="custom" invisible="1" />
