@@ -21,6 +21,6 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: account_move_line_product
-#: model:ir.ui.view,arch_db:account_move_line_product.view_account_move_line_filter
+#: model_terms:ir.ui.view,arch_db:account_move_line_product.view_account_move_line_filter
 msgid "Product"
 msgstr "Proizvod"
