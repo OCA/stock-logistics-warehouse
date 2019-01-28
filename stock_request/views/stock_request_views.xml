@@ -113,6 +113,9 @@
                             <field name="qty_done" />
                         </group>
                     </group>
+                    <notebook>
+                        <!--Empty notebook to inherit pages from other related modules-->
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
