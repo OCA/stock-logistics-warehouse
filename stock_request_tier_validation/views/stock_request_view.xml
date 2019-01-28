@@ -10,6 +10,7 @@
         <field name="arch" type="xml">
             <button name="action_confirm" position="attributes">
                     <attribute name="attrs">{'invisible': ['|','&amp;',('validated', '!=', True),('need_validation', '=', True),'|',('need_validation', '=', True),('state', 'not in', ['draft'])]}</attribute>
+                    <attribute name="groups">stock_request.group_stock_request_manager</attribute>
             </button>
             <button name="action_confirm" position="before">
                 <button name="request_validation"
