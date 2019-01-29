@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record id="view_location_restrict_search" model="ir.ui.view">
+        <field name="name">stock.location.restrict.search(in stock_location_restrict_group)</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="restricted_group"/>
+            </field>
+            <filter name="supplier" position="after">
+                <filter name="group" string="Restricted Group" domain="[('group_restricted', '=', True)]" help="Restricted Procurement Group Locations"/>
+            </filter>
+        </field>
+    </record>
+    
+    <record id="view_location_restricted_tree2" model="ir.ui.view">
+        <field name="name">stock.location.restricted.tree</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2"/>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="restricted_group" class="label label-info"/>
+            </field>
+        </field>
+    </record>
+    
+    <record id="view_procurement_group_search" model="ir.ui.view">
+        <field name="name">procurement.group.search(in stock_location_restrict_group)</field>
+        <field name="model">procurement.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+    
+    <record id="do_view_procurement_groups" model="ir.actions.act_window">
+            <field name="name">Procurement Group</field>
+            <field name="res_model">procurement.group</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    
+    <record id="view_location_restricted_form" model="ir.ui.view">
+        <field name="name">stock.location.restricted_form</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <field name="usage" position="after">
+                <field name="group_restricted"/>
+            </field>
+            <button name="toggle_active" position="after">
+                <field name="restricted_group" invisible="1"/>
+                <button
+                            attrs="{'invisible':[('restricted_group', '=', False)]}"
+                            class="oe_stat_button"
+                            icon="fa-cubes" name="%(do_view_procurement_groups)d" type="action"
+                            context="{'search_default_name': restricted_group_name}">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text"><field name="restricted_group_name"/></span>
+                    </div>
+                </button>
+            </button>
+        </field>
+    </record>
+</odoo>
