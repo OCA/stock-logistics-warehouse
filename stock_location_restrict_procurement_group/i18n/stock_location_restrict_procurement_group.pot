@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_location_restrict_procurement_group
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model.fields,help:stock_location_restrict_procurement_group.field_stock_location_group_restricted
+msgid "Check this if you want to restrict transfers to one procurement group only"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model.fields,field_description:stock_location_restrict_procurement_group.field_stock_location_group_restricted
+msgid "Group Restricted"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model,name:stock_location_restrict_procurement_group.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model,name:stock_location_restrict_procurement_group.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.actions.act_window,name:stock_location_restrict_procurement_group.do_view_procurement_groups
+msgid "Procurement Group"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model.fields,field_description:stock_location_restrict_procurement_group.field_stock_location_restricted_group_name
+msgid "Reference"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model.fields,field_description:stock_location_restrict_procurement_group.field_stock_move_restricted
+#: model:ir.model.fields,field_description:stock_location_restrict_procurement_group.field_stock_pack_operation_restricted
+#: model:ir.ui.view,arch_db:stock_location_restrict_procurement_group.view_move_picking_tree
+#: model:ir.ui.view,arch_db:stock_location_restrict_procurement_group.view_picking_form
+msgid "Restricted"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.ui.view,arch_db:stock_location_restrict_procurement_group.view_location_restrict_search
+msgid "Restricted Group"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.ui.view,arch_db:stock_location_restrict_procurement_group.view_location_restrict_search
+msgid "Restricted Procurement Group Locations"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model.fields,field_description:stock_location_restrict_procurement_group.field_stock_location_restricted_group
+msgid "Restricted group"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model,name:stock_location_restrict_procurement_group.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: code:addons/stock_location_restrict_procurement_group/models/stock_picking.py:24
+#, python-format
+msgid "The destination location (%s) is restricted to operation for the procurement group %s.\n"
+"Please choose another destination."
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.ui.view,arch_db:stock_location_restrict_procurement_group.view_move_picking_tree
+msgid "The destination location is restricted to another move!"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.ui.view,arch_db:stock_location_restrict_procurement_group.view_picking_form
+msgid "The destination location is restricted to another operation!"
+msgstr ""
+
+#. module: stock_location_restrict_procurement_group
+#: model:ir.model,name:stock_location_restrict_procurement_group.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
