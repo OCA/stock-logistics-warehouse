@@ -26,6 +26,56 @@ msgid "<span class=\"o_stat_text\">Expired</span>"
 msgstr ""
 
 #. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<span><strong>Location address:</strong></span>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>Barcode</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>Expected qty</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>Expiry date</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>Lot/Serial Number</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>Product</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>Removal Date</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>Source document</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>Source</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.ui.view,arch_db:stock_available_product_expiry.stock_scrap_expired_document
+msgid "<strong>State</strong>"
+msgstr ""
+
+#. module: stock_available_product_expiry
 #: model:ir.model.fields,field_description:stock_available_product_expiry.field_product_product_check_expired_lots
 #: model:ir.model.fields,field_description:stock_available_product_expiry.field_product_template_check_expired_lots
 msgid "Check expired lots"
@@ -221,6 +271,11 @@ msgstr ""
 #. module: stock_available_product_expiry
 #: model:ir.model.fields,field_description:stock_available_product_expiry.field_stock_scrap_expired_line_move_id
 msgid "Scrap Move"
+msgstr ""
+
+#. module: stock_available_product_expiry
+#: model:ir.actions.report.xml,name:stock_available_product_expiry.action_stock_scrap_expired
+msgid "Scrap expired lots"
 msgstr ""
 
 #. module: stock_available_product_expiry
