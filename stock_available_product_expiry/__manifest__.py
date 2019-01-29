@@ -7,7 +7,7 @@
     'summary': """
         Allows to get product availability taking into account lot removal date
         """,
-    'version': '10.0.1.0.2',
+    'version': '10.0.1.0.3',
     'development_status': 'Alpha',
     'category': 'Warehouse',
     'license': 'AGPL-3',
@@ -29,6 +29,7 @@
         'views/stock_quant.xml',
         'views/res_config.xml',
         'views/stock_available_product_expiry.xml',
+        'reports/stock_scrap_expired.xml',
         'data/ir_sequence_data.xml',
         'data/ir_config_parameter.xml',
     ],
