@@ -464,6 +464,11 @@ msgid "Reserved quants"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_restricted
+msgid "Restricted"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_date_expected
 msgid "Scheduled date for the processing of this move"
 msgstr ""
