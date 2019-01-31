@@ -66,6 +66,7 @@ Authors
 ~~~~~~~
 
 * Eficent
+* Tecnativa
 
 Contributors
 ~~~~~~~~~~~~
