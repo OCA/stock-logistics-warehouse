@@ -30,10 +30,10 @@ class TestMoveLocation(TestsCommon):
             self.product_lots, self.internal_loc_1, 0, self.lot1,
         )
         self.check_product_amount(
-            self.product_lots, self.internal_loc_1, 0, self.lot1,
+            self.product_lots, self.internal_loc_1, 0, self.lot2,
         )
         self.check_product_amount(
-            self.product_lots, self.internal_loc_1, 0, self.lot1,
+            self.product_lots, self.internal_loc_1, 0, self.lot3,
         )
         self.check_product_amount(
             self.product_no_lots, self.internal_loc_2, 123,
@@ -42,10 +42,10 @@ class TestMoveLocation(TestsCommon):
             self.product_lots, self.internal_loc_2, 1, self.lot1,
         )
         self.check_product_amount(
-            self.product_lots, self.internal_loc_2, 1, self.lot1,
+            self.product_lots, self.internal_loc_2, 1, self.lot2,
         )
         self.check_product_amount(
-            self.product_lots, self.internal_loc_2, 1, self.lot1,
+            self.product_lots, self.internal_loc_2, 1, self.lot3,
         )
 
     def test_move_location_wizard_amount(self):

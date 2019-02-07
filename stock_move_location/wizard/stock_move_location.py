@@ -2,8 +2,6 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from itertools import groupby
-
 from odoo import api, fields, models
 
 
@@ -58,22 +56,21 @@ class StockMoveLocationWizard(models.TransientModel):
 
     @api.multi
     def group_lines(self):
-        sorted_lines = sorted(
-            self.stock_move_location_line_ids,
-            key=lambda x: x.product_id,
-        )
-        groups = groupby(sorted_lines, key=lambda x: x.product_id)
-        groups_dict = {}
-        for prod, lines in groups:
-            groups_dict[prod.id] = list(lines)
-        return groups_dict
+        lines_grouped = {}
+        for line in self.stock_move_location_line_ids:
+            lines_grouped.setdefault(
+                line.product_id.id,
+                self.env["wiz.stock.move.location.line"].browse(),
+            )
+            lines_grouped[line.product_id.id] |= line
+        return lines_grouped
 
     @api.multi
     def _create_moves(self, picking):
         self.ensure_one()
         groups = self.group_lines()
         moves = self.env["stock.move"]
-        for group, lines in groups.items():
+        for lines in groups.values():
             move = self._create_move(picking, lines)
             moves |= move
         return moves
@@ -82,14 +79,14 @@ class StockMoveLocationWizard(models.TransientModel):
         # locations are same for the products
         location_from_id = lines[0].origin_location_id.id
         location_to_id = lines[0].destination_location_id.id
-        product_id = lines[0].product_id.id
+        product = lines[0].product_id
         product_uom_id = lines[0].product_uom_id.id
         qty = sum([x.move_quantity for x in lines])
         return {
-            "name": "test",
+            "name": product.display_name,
             "location_id": location_from_id,
             "location_dest_id": location_to_id,
-            "product_id": product_id,
+            "product_id": product.id,
             "product_uom": product_uom_id,
             "product_uom_qty": qty,
             "picking_id": picking.id,
