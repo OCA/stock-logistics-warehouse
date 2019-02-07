@@ -28,7 +28,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
         supplier_location = self.env.ref('stock.stock_location_suppliers')
         stock_location = self.env.ref('stock.stock_location_stock')
         customer_location = self.env.ref('stock.stock_location_customers')
-        uom_unit = self.env.ref('product.product_uom_unit')
+        uom_unit = self.env.ref('uom.product_uom_unit')
 
         # Create product template
         templateAB = templateObj.create(

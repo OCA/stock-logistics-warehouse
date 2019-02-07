@@ -58,6 +58,7 @@ Contributors
 
 * Lionel Sausin (Numérigraphe) <ls@numerigraphe.com>
 * Sodexis <sodexis@sodexis.com>
+* Devang Pipaliya (Dreambits Technologies Pvt. Ltd. - https://dreambits.in) <devang@dreambits.in>
 * Factor Libre - Kiko Peiro <francisco.peiro@factorlibre.com>
 
 Maintainer
