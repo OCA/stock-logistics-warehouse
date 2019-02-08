@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo11-addon-stock_account_internal_move',
         'odoo11-addon-stock_available',
         'odoo11-addon-stock_available_global',
+        'odoo11-addon-stock_available_mrp',
         'odoo11-addon-stock_available_unreserved',
         'odoo11-addon-stock_change_qty_reason',
         'odoo11-addon-stock_cycle_count',
