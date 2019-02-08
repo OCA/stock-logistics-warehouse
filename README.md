@@ -33,6 +33,7 @@ addon | version | summary
 [stock_account_quant_merge](stock_account_quant_merge/) | 10.0.1.0.0 | extension of 'stock_quant_merge', and adds the cost as a criteria to merge quants.
 [stock_available](stock_available/) | 10.0.1.0.1 | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 10.0.1.0.0 | Ignore planned receptions in quantity available to promise
+[stock_available_mrp](stock_available_mrp/) | 10.0.1.0.0 | Consider the production potential is available to promise
 [stock_available_product_expiry](stock_available_product_expiry/) | 10.0.1.0.3 | Allows to get product availability taking into account lot removal date
 [stock_available_sale](stock_available_sale/) | 10.0.1.0.0 | Quotations in quantity available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 10.0.1.0.1 | Quantity of stock available for immediate use
@@ -74,7 +75,6 @@ addon | version | summary
 [base_product_merge](base_product_merge/) | 1.0 (unported) | Base Products Merge
 [configurable_stock_level](configurable_stock_level/) | 0.1 (unported) | name
 [partner_location_auto_create](partner_location_auto_create/) | 0.1 (unported) | Partner Location Auto Create
-[stock_available_mrp](stock_available_mrp/) | 9.0.1.0.0 (unported) | Consider the production potential is available to promise
 [stock_location_area_data](stock_location_area_data/) | 8.0.0.1.0 (unported) | Add surface units of measure
 [stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 (unported) | Enter a location's area based on different units of measure
 [stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 (unported) | Stock Location Ownership
