@@ -55,6 +55,11 @@ msgid "Back Order of"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_bom_line_id
+msgid "BoM Line"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_procure_method
 msgid ""
 "By default, the system will take from the stock in the source location and "
@@ -84,6 +89,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_company_id
 msgid "Company"
 msgstr "Poduzeće"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_consume_unbuild_id
+msgid "Consume Unbuild Order"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_create_uid
@@ -134,6 +144,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_display_name
 msgid "Display Name"
 msgstr "Naziv"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_is_done
+msgid "Done"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
@@ -219,6 +234,12 @@ msgid "Lot/Serial Number"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_active_move_lot_ids
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_move_lot_ids
+msgid "Lots"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_lot_ids
 msgid "Lots/Serial Numbers"
 msgstr ""
@@ -259,6 +280,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_note
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Notes"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_operation_id
+msgid "Operation To Consume"
 msgstr ""
 
 #. module: stock_reserve
@@ -369,6 +395,21 @@ msgid "Product UoM"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_has_tracking
+msgid "Product with Tracking"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_production_id
+msgid "Production Order for finished products"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_raw_material_production_id
+msgid "Production Order for raw materials"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_propagate
 msgid "Propagate cancel and split"
 msgstr ""
@@ -380,12 +421,24 @@ msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_uom_qty
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_quantity_done
 msgid "Quantity"
+msgstr "Količina"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_quantity_available
+#, fuzzy
+msgid "Quantity Available"
 msgstr "Količina"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_reserved_availability
 msgid "Quantity Reserved"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_quantity_done_store
+msgid "Quantity done store"
 msgstr ""
 
 #. module: stock_reserve
@@ -535,6 +588,11 @@ msgid "Supply Method"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_is_done
+msgid "Technical Field to order moves"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation_warehouse_id
 msgid ""
 "Technical field depicting the warehouse to consider for the route selection "
@@ -624,6 +682,16 @@ msgid "Type of Operation"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_unbuild_id
+msgid "Unbuild Order"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_unit_factor
+msgid "Unit Factor"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_price_unit
 msgid "Unit Price"
 msgstr "Jedinična cijena"
@@ -646,4 +714,9 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_warehouse_id
 msgid "Warehouse"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_workorder_id
+msgid "Work Order To Consume"
 msgstr ""
