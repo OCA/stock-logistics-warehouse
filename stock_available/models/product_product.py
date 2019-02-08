@@ -26,18 +26,25 @@ class ProductProduct(models.Model):
 
     @api.multi
     def _compute_available_quantities_dict(self):
+        stock_dict = self._compute_quantities_dict(
+            self._context.get('lot_id'),
+            self._context.get('owner_id'),
+            self._context.get('package_id'),
+            self._context.get('from_date'),
+            self._context.get('to_date'))
         res = {}
         for product in self:
             res[product.id] = {
-                'immediately_usable_qty': product.virtual_available,
+                'immediately_usable_qty': stock_dict[product.id][
+                    'virtual_available'],
                 'potential_qty': 0.0
             }
-        return res
+        return res, stock_dict
 
     @api.multi
     @api.depends('virtual_available')
     def _compute_available_quantities(self):
-        res = self._compute_available_quantities_dict()
+        res, _ = self._compute_available_quantities_dict()
         for product in self:
             for key, value in res[product.id].items():
                 if hasattr(product, key):
