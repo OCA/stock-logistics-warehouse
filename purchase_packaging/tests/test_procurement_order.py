@@ -13,9 +13,20 @@ class TestProcurementOrder(common.TransactionCase):
                 * product_product_3 (uom is product_uom_unit)
         """
         super(TestProcurementOrder, self).setUp()
+        product_obj = self.env['product.product']
+        # Create new product
+        vals = {
+            'name': 'Product Purchase Pack Test',
+            'categ_id': self.env.ref('product.product_category_5').id,
+            'list_price': 30.0,
+            'standard_price': 20.0,
+            'type': 'product',
+            'uom_id': self.env.ref('product.product_uom_unit').id,
+
+        }
+        self.product_test = product_obj.create(vals)
         self.product_packaging_3 = self.env['product.packaging'].create({
-            'product_tmpl_id': self.env.ref(
-                'product.product_product_3').product_tmpl_id.id,
+            'product_tmpl_id': self.product_test.product_tmpl_id.id,
             'uom_id': self.env.ref('product.product_uom_dozen').id,
             'name': 'Packaging Dozen'
         })
@@ -40,7 +51,7 @@ class TestProcurementOrder(common.TransactionCase):
         # On supplierinfo set min_qty as 0
         # Create procurement line with rule buy and quantity 17
         # run procurement
-        self.env.ref('product.product_product_3').route_ids = [(
+        self.product_test.route_ids = [(
             4, self.env.ref("purchase.route_warehouse0_buy").id)]
         self.env.ref('product.product_uom_unit').rounding = 1
         procurement_obj = self.env['procurement.order']
@@ -51,7 +62,7 @@ class TestProcurementOrder(common.TransactionCase):
         proc1 = procurement_obj.create(
             {'name': 'test_procurement',
              'location_id': self.env.ref('stock.stock_location_stock').id,
-             'product_id': self.env.ref('product.product_product_3').id,
+             'product_id': self.product_test.id,
              'product_qty': 17,
              'product_uom': self.env.ref('product.product_uom_unit').id})
         procurement_obj.run_scheduler()
@@ -77,7 +88,7 @@ class TestProcurementOrder(common.TransactionCase):
         proc1 = procurement_obj.create(
             {'name': 'test_procurement',
              'location_id': self.env.ref('stock.stock_location_stock').id,
-             'product_id': self.env.ref('product.product_product_3').id,
+             'product_id': self.product_test.id,
              'product_qty': 1,
              'product_uom': self.env.ref('product.product_uom_dozen').id})
         procurement_obj.run_scheduler()
@@ -106,7 +117,7 @@ class TestProcurementOrder(common.TransactionCase):
         proc1 = procurement_obj.create(
             {'name': 'test_procurement',
              'location_id': self.env.ref('stock.stock_location_stock').id,
-             'product_id': self.env.ref('product.product_product_3').id,
+             'product_id': self.product_test.id,
              'product_qty': 17,
              'product_uom': self.env.ref('product.product_uom_unit').id})
         procurement_obj.run_scheduler()
@@ -132,7 +143,7 @@ class TestProcurementOrder(common.TransactionCase):
         proc1 = procurement_obj.create(
             {'name': 'test_procurement',
              'location_id': self.env.ref('stock.stock_location_stock').id,
-             'product_id': self.env.ref('product.product_product_3').id,
+             'product_id': self.product_test.id,
              'product_qty': 1,
              'product_uom': self.env.ref('product.product_uom_dozen').id})
         procurement_obj.run_scheduler()
@@ -161,7 +172,7 @@ class TestProcurementOrder(common.TransactionCase):
         proc1 = procurement_obj.create(
             {'name': 'test_procurement',
              'location_id': self.env.ref('stock.stock_location_stock').id,
-             'product_id': self.env.ref('product.product_product_3').id,
+             'product_id': self.product_test.id,
              'product_qty': 17,
              'product_uom': self.env.ref('product.product_uom_unit').id})
         procurement_obj.run_scheduler()
@@ -188,7 +199,7 @@ class TestProcurementOrder(common.TransactionCase):
         proc1 = procurement_obj.create(
             {'name': 'test_procurement',
              'location_id': self.env.ref('stock.stock_location_stock').id,
-             'product_id': self.env.ref('product.product_product_3').id,
+             'product_id': self.product_test.id,
              'product_qty': 1,
              'product_uom': self.env.ref('product.product_uom_dozen').id})
         procurement_obj.run_scheduler()
@@ -217,7 +228,7 @@ class TestProcurementOrder(common.TransactionCase):
         proc1 = procurement_obj.create(
             {'name': 'test_procurement',
              'location_id': self.env.ref('stock.stock_location_stock').id,
-             'product_id': self.env.ref('product.product_product_3').id,
+             'product_id': self.product_test.id,
              'product_qty': 17,
              'product_uom': self.env.ref('product.product_uom_unit').id})
         procurement_obj.run_scheduler()
@@ -245,7 +256,7 @@ class TestProcurementOrder(common.TransactionCase):
         proc1 = procurement_obj.create(
             {'name': 'test_procurement',
              'location_id': self.env.ref('stock.stock_location_stock').id,
-             'product_id': self.env.ref('product.product_product_3').id,
+             'product_id': self.product_test.id,
              'product_qty': 1,
              'product_uom': self.env.ref('product.product_uom_dozen').id})
         procurement_obj.run_scheduler()
@@ -275,7 +286,7 @@ class TestProcurementOrder(common.TransactionCase):
         # Change the stock minimum to 13 PC
         # The purchase quantity should increase up to 24
         warehouse = self.env.ref('stock.warehouse0')
-        product = self.env.ref('product.product_product_3')
+        product = self.product_test
         product.route_ids = [(
             4, self.env.ref("purchase.route_warehouse0_buy").id)]
         self.env.ref('product.product_uom_dozen').rounding = 1
@@ -331,7 +342,7 @@ class TestProcurementOrder(common.TransactionCase):
         # Change the stock minimum to 13 PC
         # A new purchase should be generated
         warehouse = self.env.ref('stock.warehouse0')
-        product = self.env.ref('product.product_product_3')
+        product = self.product_test
         product.route_ids = [(
             4, self.env.ref("purchase.route_warehouse0_buy").id)]
         self.env.ref('product.product_uom_dozen').rounding = 1
@@ -390,7 +401,7 @@ class TestProcurementOrder(common.TransactionCase):
         # Change the stock minimum to 13 PC
         # A new purchase should be generated
         warehouse = self.env.ref('stock.warehouse0')
-        product = self.env.ref('product.product_product_3')
+        product = self.product_test
         product.route_ids = [(
             4, self.env.ref("purchase.route_warehouse0_buy").id)]
         self.env.ref('product.product_uom_dozen').rounding = 1
@@ -449,7 +460,7 @@ class TestProcurementOrder(common.TransactionCase):
         # Change the stock minimum to 13 PC
         # A new purchase should be generated
         warehouse = self.env.ref('stock.warehouse0')
-        product = self.env.ref('product.product_product_3')
+        product = self.product_test
         product.route_ids = [(
             4, self.env.ref("purchase.route_warehouse0_buy").id)]
         self.env.ref('product.product_uom_dozen').rounding = 1
