@@ -17,9 +17,6 @@
             <field name="date" position="attributes">
                 <attribute name="attrs">{'readonly': ['|', ('force_inventory_date', '!=', True), ('state', '!=', 'draft')]}</attribute>
             </field>
-            <field name="accounting_date" position="attributes">
-                <attribute name="readonly">True</attribute>
-            </field>
         </field>
     </record>
 
