@@ -260,10 +260,20 @@ class TestStockInventoryForceDate(TransactionCase):
             inventory.action_done()
 
     def test_03(self):
+        to_date = '2013-02-01 00:00:00'
+        self.env['product.price.history'].create({
+            'product_id': self.product1.id,
+            'datetime': to_date,
+            'cost': 25,
+            'company_id': self.env.user.company_id.id,
+        })
         inventory = self.obj_inventory.create({
             'name': 'Test past date',
             'location_id': self.test_loc.id,
             'filter': 'none',
+            'force_inventory_date': True,
+            'date': to_date,
+            'accounting_date': to_date,
             'line_ids': [
                 (0, 0, {
                     'product_id': self.product1.id,
@@ -306,7 +316,6 @@ class TestStockInventoryForceDate(TransactionCase):
             'cost': 50,
             'company_id': self.env.user.company_id.id,
         })
-        to_date = '2013-02-01 00:00:00'
         inventory = self.obj_inventory.create({
             'name': 'Test past date',
             'location_id': self.test_loc.id,
@@ -326,3 +335,73 @@ class TestStockInventoryForceDate(TransactionCase):
         })
         inventory.action_done()
         self.assertEqual(move.reserved_availability, 0.0)
+
+    def test_04(self):
+        # Test introducing 100 units in the past and adjusting to 0 today.
+        # If we make then an inventory adjustment again in the past the
+        # theoretical quantity should be 100.
+        to_date = '2013-02-01 00:00:00'
+        self.env['product.price.history'].create({
+            'product_id': self.product1.id,
+            'datetime': to_date,
+            'cost': 25,
+            'company_id': self.env.user.company_id.id,
+        })
+        inventory = self.obj_inventory.create({
+            'name': 'Test past date',
+            'location_id': self.test_loc.id,
+            'filter': 'none',
+            'force_inventory_date': True,
+            'date': to_date,
+            'accounting_date': to_date,
+            'line_ids': [
+                (0, 0, {
+                    'product_id': self.product1.id,
+                    'product_uom_id': self.env.ref(
+                        "product.product_uom_unit").id,
+                    'product_qty': 100.0,
+                    'location_id': self.test_loc.id,
+                }),
+            ],
+        })
+        inventory.action_done()
+        inventory = self.obj_inventory.create({
+            'name': 'Test past date',
+            'location_id': self.test_loc.id,
+            'filter': 'none',
+            'line_ids': [
+                (0, 0, {
+                    'product_id': self.product1.id,
+                    'product_uom_id': self.env.ref(
+                        "product.product_uom_unit").id,
+                    'product_qty': 0.0,
+                    'location_id': self.test_loc.id,
+                }),
+            ],
+        })
+        inventory.action_done()
+        inventory = self.obj_inventory.create({
+            'name': 'Test past date',
+            'location_id': self.test_loc.id,
+            'filter': 'none',
+            'force_inventory_date': True,
+            'date': to_date,
+            'accounting_date': to_date,
+            'line_ids': [
+                (0, 0, {
+                    'product_id': self.product1.id,
+                    'product_uom_id': self.env.ref(
+                        "product.product_uom_unit").id,
+                    'product_qty': 0.0,
+                    'location_id': self.test_loc.id,
+                }),
+            ],
+        })
+        qty_available = self.product1.with_context(
+            company_owned=True, owner_id=False, to_date=to_date).qty_available
+        inventory.action_start()
+        # Check that the quantity back then is correct
+        for line in inventory.line_ids.filtered(
+                lambda l: l.product_id == self.product1):
+            self.assertEqual(line.theoretical_qty, qty_available)
+            self.assertEqual(line.theoretical_qty, 100)
