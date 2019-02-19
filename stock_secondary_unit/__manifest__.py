@@ -12,7 +12,7 @@
     'application': False,
     'installable': True,
     'depends': [
-        'sale_stock',
+        'stock',
         'product_secondary_unit',
     ],
     'data': [
