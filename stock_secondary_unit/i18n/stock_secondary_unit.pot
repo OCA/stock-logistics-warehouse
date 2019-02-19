@@ -42,11 +42,6 @@ msgid "Packing Operation"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_procurement_rule
-msgid "Procurement Rule"
-msgstr ""
-
-#. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_product_product
 msgid "Product"
 msgstr ""
