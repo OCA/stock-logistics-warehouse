@@ -21,6 +21,8 @@ class ProcurementOrder(models.Model):
             date=po.date_order and fields.Date.to_string(
                 fields.Date.from_string(po.date_order)) or None,
             uom_id=self.product_id.uom_po_id)
+        res['product_purchase_uom_id'] = seller.min_qty_uom_id.id \
+            or self.product_id.uom_po_id.id
         if seller.packaging_id:
             res['packaging_id'] = seller.packaging_id.id
             new_uom_id = seller.product_uom
