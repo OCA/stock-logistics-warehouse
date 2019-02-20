@@ -508,3 +508,125 @@ class TestProcurementOrder(common.TransactionCase):
         for proc in procs:
             self.assertTrue(proc.purchase_line_id)
             self.assertEqual(proc.purchase_line_id.product_qty, 12)
+
+    def test_procurement_kg(self):
+        partner = self.env.ref('base.res_partner_2')
+        uom_kg = self.env.ref('product.product_uom_kgm')
+        product = self.env['product.product'].create({
+            'name': 'Orange',
+            'uom_id': uom_kg.id,
+            'uom_po_id': uom_kg.id,
+            'route_ids':
+                [(4, self.env.ref("purchase.route_warehouse0_buy").id)],
+            'seller_ids':
+                [(0,
+                  0,
+                  {'name': partner.id,
+                   'price': 20,
+                   'min_qty_uom_id': uom_kg.id})]})
+
+        procurement_obj = self.env['procurement.order']
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': product.id,
+             'product_qty': 17.3,
+             'product_uom': uom_kg.id})
+        procurement_obj.run_scheduler()
+        self.assertEqual(uom_kg,
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(17.3, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(17.3, proc1.purchase_line_id.product_qty)
+        self.assertEqual(uom_kg,
+                         proc1.purchase_line_id.product_uom)
+        self.assertEqual(20, proc1.purchase_line_id.price_unit)
+
+    def test_procurement_kg_multiple(self):
+        partner = self.env.ref('base.res_partner_2')
+        uom_kg = self.env.ref('product.product_uom_kgm')
+        uom_20_kg = self.env['product.uom'].create({
+            'category_id': self.env.ref('product.product_uom_categ_kgm').id,
+            'name': '20 KG',
+            'factor_inv': 20,
+            'uom_type': 'bigger',
+            'rounding': 1.0,
+        })
+        product = self.env['product.product'].create({
+            'name': 'Orange',
+            'uom_id': uom_kg.id,
+            'uom_po_id': uom_kg.id,
+            'route_ids':
+                [(4, self.env.ref("purchase.route_warehouse0_buy").id)],
+            'seller_ids':
+                [(0,
+                  0,
+                  {'name': partner.id,
+                   'price': 20,
+                   'min_qty': 1,
+                   'product_uom': uom_20_kg.id,
+                   'min_qty_uom_id': uom_20_kg.id})]})
+
+        procurement_obj = self.env['procurement.order']
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': product.id,
+             'product_qty': 17.3,
+             'product_uom': uom_kg.id})
+        self.assertEqual(uom_20_kg,
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(1, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(20, proc1.purchase_line_id.product_qty)
+        self.assertEqual(uom_kg,
+                         proc1.purchase_line_id.product_uom)
+        self.assertEqual(20, proc1.purchase_line_id.price_unit)
+
+    def test_procurement_kg_packaging(self):
+        partner = self.env.ref('base.res_partner_2')
+        uom_kg = self.env.ref('product.product_uom_kgm')
+
+        uom_20_kg = self.env['product.uom'].create({
+            'category_id': self.env.ref('product.product_uom_categ_kgm').id,
+            'name': '20 KG',
+            'factor_inv': 20,
+            'uom_type': 'bigger',
+            'rounding': 1.0,
+        })
+        product = self.env['product.product'].create({
+            'name': 'Orange',
+            'uom_id': uom_kg.id,
+            'uom_po_id': uom_kg.id,
+            'route_ids':
+                [(4, self.env.ref("purchase.route_warehouse0_buy").id)],
+            'seller_ids':
+                [(0,
+                  0,
+                  {'name': partner.id,
+                   'price': 20,
+                   'min_qty': 0,
+                   'min_qty_uom_id': uom_kg.id,
+                   'product_uom': uom_kg.id})]})
+
+        product_packaging_20 = self.env['product.packaging'].create({
+            'product_tmpl_id': product.product_tmpl_id.id,
+            'uom_id': uom_20_kg.id,
+            'name': 'Packaging Dozen'
+        })
+        product.seller_ids[0].packaging_id = product_packaging_20
+
+        procurement_obj = self.env['procurement.order']
+        proc1 = procurement_obj.create(
+            {'name': 'test_procurement',
+             'location_id': self.env.ref('stock.stock_location_stock').id,
+             'product_id': product.id,
+             'product_qty': 17.3,
+             'product_uom': uom_kg.id})
+        self.assertEqual(uom_kg,
+                         proc1.purchase_line_id.product_purchase_uom_id)
+        self.assertEqual(1, proc1.purchase_line_id.product_purchase_qty)
+        self.assertEqual(1, proc1.purchase_line_id.product_qty)
+        self.assertEqual(uom_20_kg,
+                         proc1.purchase_line_id.product_uom)
+        self.assertEqual(product_packaging_20,
+                         proc1.purchase_line_id.packaging_id)
+        self.assertEqual(20, proc1.purchase_line_id.price_unit)
