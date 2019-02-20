@@ -144,7 +144,7 @@ class TestPurchaseOrderLine(common.TransactionCase):
         po = self.env['purchase.order'].create(
             {'partner_id': self.product_supplier_info.name.id})
         po_line = po.order_line.new({
-            'product_id': self.product_tmpl_id.product_variant_id,
+            'product_id': self.product_tmpl_id.product_variant_ids[:1],
             'product_purchase_qty': 1.0,
             'product_purchase_uom_id':
                 po.order_line._default_product_purchase_uom_id(),
