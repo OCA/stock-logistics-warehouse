@@ -4,11 +4,10 @@
 {
     "name": "Stock Orderpoint Move Link",
     "summary": "Link Reordering rules to stock moves",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
-    "author": "Eficent, "
-              "Odoo Community Association (OCA)",
+    "author": "Eficent, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": [
         "stock",
@@ -17,5 +16,5 @@
         "views/stock_move_views.xml",
     ],
     "installable": True,
-    'auto_install': False,
+    "auto_install": False,
 }
