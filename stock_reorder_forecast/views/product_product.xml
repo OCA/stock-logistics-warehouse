@@ -13,7 +13,7 @@
                         <field name="turnover_average"/>
                         <button 
                             type="action" 
-                            attrs="{'invisible': [('ultimate_purchase', '=', False)]}"
+                            attrs="{'invisible': ['|', ('ultimate_purchase', '=', False), ('purchase_ok', '=', False)]}"
                             name="%(stock_reorder_forecast.wizard_create_purchase_act)d"
                             string="Create proposal-RFQ "/>
                     </group>

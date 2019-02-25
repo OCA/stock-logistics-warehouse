@@ -70,7 +70,9 @@ class PurchaseSupplierWizard(models.TransientModel):
         purchase_order = po_model.create(order_vals)
         # this will give us the fiscal position automatically
         purchase_order.onchange_partner_id()
-        products = self.env['res.partner'].browse(supplier_id).product_ids
+        # put in RFQ only products that can be purchased
+        products = self.env['res.partner'].browse(
+            supplier_id).product_ids.filtered('purchase_ok')
         if self.primary_supplier_only:
             products = self.env['res.partner'].browse(
                 supplier_id).primary_product_ids
