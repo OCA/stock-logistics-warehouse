@@ -34,10 +34,10 @@ class AccountMoveLine(models.Model):
         store=True, ondelete='restrict', copy=False)
 
     @api.multi
-    def unlink(self):
+    def unlink(self, check=True):
         for rec in self:
             if rec.stock_inventory_revaluation_id:
                 raise exceptions.Warning(
                     _("You cannot remove the journal item that is related "
                       "to an inventory revaluation"))
-        return super(AccountMoveLine, self).unlink()
+        return super(AccountMoveLine, self).unlink(check=check)
