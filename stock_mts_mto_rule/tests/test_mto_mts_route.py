@@ -3,6 +3,7 @@
 
 from odoo import exceptions
 from odoo.tests.common import TransactionCase
+from odoo.tools.misc import mute_logger
 
 
 class TestMtoMtsRoute(TransactionCase):
@@ -78,6 +79,7 @@ class TestMtoMtsRoute(TransactionCase):
         self.assertEqual('make_to_stock',
                          moves[0].procure_method)
 
+    @mute_logger('odoo.models')
     def test_mts_mto_rule_contrains(self):
         rule = self.env['procurement.rule'].search(
             [('action', '=', 'split_procurement')], limit=1)

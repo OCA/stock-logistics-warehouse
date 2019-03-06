@@ -64,6 +64,7 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
         self.assertEqual(purchase_line.product_uom, self.uom_dozen)
         self.assertEqual(purchase_line.product_qty, 2)
 
+    @mute_logger('odoo.models')
     def test_stock_orderpoint_wrong_uom(self):
 
         with mute_logger('openerp.sql_db'):

@@ -3,6 +3,7 @@
 
 from odoo.tests import common
 from odoo import fields, exceptions
+from odoo.tools.misc import mute_logger
 from collections import Counter
 
 
@@ -381,6 +382,7 @@ class TestStockRequest(common.TransactionCase):
             self.request_order.sudo(
                 self.stock_request_user).create(vals)
 
+    @mute_logger('odoo.models')
     def test_stock_request_order_validations_05(self):
         """ Testing the discrepancy in company between
         stock request and order"""
@@ -714,6 +716,7 @@ class TestStockRequest(common.TransactionCase):
         self.assertEqual(action['type'], 'ir.actions.act_window')
         self.assertEqual(action['res_id'], stock_request.id)
 
+    @mute_logger('odoo.models')
     def test_stock_request_constrains(self):
         vals = {
             'product_id': self.product.id,

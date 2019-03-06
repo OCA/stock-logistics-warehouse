@@ -3,6 +3,7 @@
 
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import ValidationError
+from odoo.tools.misc import mute_logger
 
 
 class TestStockQuantManualAssign(TransactionCase):
@@ -61,6 +62,7 @@ class TestStockQuantManualAssign(TransactionCase):
                          self.move.reserved_availability)
         self.assertEqual(wizard.move_qty, self.move.product_uom_qty)
 
+    @mute_logger('odoo.models')
     def test_quant_assign_wizard_constraint(self):
         wizard = self.quant_assign_wizard.with_context(
             active_id=self.move.id).create({
