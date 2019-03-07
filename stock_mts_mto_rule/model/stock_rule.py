@@ -1,8 +1,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
-from odoo.tools import float_compare, float_is_zero
+from odoo import models, api, fields, _
+from odoo.exceptions import UserError
 
 
 class StockRule(models.Model):
@@ -22,27 +21,25 @@ class StockRule(models.Model):
                 if not rule.mts_rule_id or not rule.mto_rule_id:
                     msg = _('No MTS or MTO rule configured on procurement '
                             'rule: %s!') % (rule.name, )
-                    raise ValidationError(msg)
+                    raise UserError(msg)
                 if (rule.mts_rule_id.location_src_id.id !=
                         rule.mto_rule_id.location_src_id.id):
                     msg = _('Inconsistency between the source locations of '
                             'the mts and mto rules linked to the procurement '
                             'rule: %s! It should be the same.') % (rule.name,)
-                    raise ValidationError(msg)
+                    raise UserError(msg)
 
     @api.multi
     def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
         self.ensure_one()
-        precision = self.env['decimal.precision']\
-            .precision_get('Product Unit of Measure')
         src_location_id = self.mts_rule_id.location_src_id.id
         product_location = product.with_context(location=src_location_id)
         virtual_available = product_location.virtual_available
         qty_available = product.uom_id._compute_quantity(
             virtual_available, product_uom)
-        if float_compare(qty_available, 0.0, precision_digits=precision) > 0:
-            if float_compare(qty_available, product_qty,
-                             precision_digits=precision) >= 0:
+
+        if qty_available > 0:
+            if qty_available >= product_qty:
                 return 0.0
             else:
                 return product_qty - qty_available
@@ -50,17 +47,15 @@ class StockRule(models.Model):
 
     def _run_split_procurement(self, product_id, product_qty, product_uom,
                                location_id, name, origin, values):
-        precision = self.env['decimal.precision']\
-            .precision_get('Product Unit of Measure')
+
         needed_qty = self.get_mto_qty_to_order(product_id, product_qty,
                                                product_uom, values)
 
-        if float_is_zero(needed_qty, precision_digits=precision):
+        if needed_qty == 0.0:
             getattr(self.mts_rule_id, '_run_%s' % self.mts_rule_id.action)(
                 product_id, product_qty, product_uom, location_id, name,
                 origin, values)
-        elif float_compare(needed_qty, product_qty,
-                           precision_digits=precision) == 0.0:
+        elif needed_qty == product_qty:
             getattr(self.mto_rule_id, '_run_%s' % self.mto_rule_id.action)(
                 product_id, product_qty, product_uom, location_id, name,
                 origin, values)
