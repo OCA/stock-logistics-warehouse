@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_chatter
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-05 00:45+0000\n"
+"PO-Revision-Date: 2017-07-05 00:45+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Macedonian (https://www.transifex.com/oca/teams/23907/mk/)\n"
+"Language: mk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
+
+#. module: stock_inventory_chatter
+#: model:ir.model,name:stock_inventory_chatter.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
+msgid "Inventory Canceled"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_confirmed
+msgid "Inventory Confirmed"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_done
+msgid "Inventory Done"
+msgstr ""
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "Датум на испраќање на последната порака"
+
+#~ msgid "Followers"
+#~ msgstr "Пратители"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Доколку е штиклирано, новите пораки го бараат вашето внимание."
+
+#~ msgid "Last Message Date"
+#~ msgstr "Датум на последна порака"
+
+#~ msgid "Messages"
+#~ msgstr "Пораки"
+
+#~ msgid "Unread Messages"
+#~ msgstr "Непрочитани Пораки"
