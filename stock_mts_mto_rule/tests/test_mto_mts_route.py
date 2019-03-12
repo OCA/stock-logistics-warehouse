@@ -123,18 +123,21 @@ class TestMtoMtsRoute(TransactionCase):
         with self.assertRaises(exceptions.Warning):
             self.warehouse.mto_mts_management = True
 
-    def test_create_routes(self):
-        rule_obj = self.env['procurement.rule']
-        created_routes = self.warehouse.create_routes()
-        mts_mto_route = rule_obj.browse(created_routes['mts_mto_rule_id'])
-        self.assertEqual(mts_mto_route.warehouse_id, self.warehouse)
+    def test_create_routes_new_warehouse(self):
+        new_wh = self.env['stock.warehouse'].create({
+            'name': 'New TEST WH',
+            'code': 'TST',
+            'mto_mts_management': True
+        })
+        mts_mto_rule = new_wh.mts_mto_rule_id
+        self.assertEqual(mts_mto_rule.warehouse_id, new_wh)
         self.assertEqual(
-            mts_mto_route.location_id, self.warehouse.mto_pull_id.location_id)
+            mts_mto_rule.location_id, new_wh.mto_pull_id.location_id)
         self.assertEqual(
-            mts_mto_route.picking_type_id,
-            self.warehouse.mto_pull_id.picking_type_id)
+            mts_mto_rule.picking_type_id,
+            new_wh.mto_pull_id.picking_type_id)
         self.assertEqual(
-            mts_mto_route.route_id,
+            mts_mto_rule.route_id,
             self.env.ref('stock_mts_mto_rule.route_mto_mts'))
 
     def test_remove_mts_mto_management(self):
