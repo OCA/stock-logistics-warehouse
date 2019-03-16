@@ -6,7 +6,7 @@
     "name": "Stock Orderpoint Manual Procurement",
     "summary": "Allows to create procurement orders from orderpoints instead "
                "of relying only on the scheduler.",
-    "version": "11.0.1.1.1",
+    "version": "12.0.1.0.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",

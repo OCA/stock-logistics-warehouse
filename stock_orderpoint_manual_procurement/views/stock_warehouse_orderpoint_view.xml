@@ -12,7 +12,7 @@
                 <field name="procure_recommended_date"/>
                 <button string="Create Procurement"
                         name="%(stock_orderpoint_manual_procurement.act_make_procurement_from_orderpoint)d"
-                        icon="fa fa-cogs" type="action"/>
+                        icon="fa-cogs" type="action"/>
             </field>
         </field>
     </record>
