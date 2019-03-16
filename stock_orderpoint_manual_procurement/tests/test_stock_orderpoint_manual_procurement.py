@@ -40,7 +40,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
                                        self.group_purchase_manager],
                                       self.company1)
         # Get required Model data
-        self.product_uom = self.env.ref('product.product_uom_unit')
+        self.product_uom = self.env.ref('uom.product_uom_unit')
         self.location = self.env.ref('stock.stock_location_stock')
         self.product = self.env.ref('product.product_product_7')
 
