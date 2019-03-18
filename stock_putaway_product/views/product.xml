@@ -21,8 +21,8 @@
                             <field name="putaway_id"/>
                             <field name="product_tmpl_id" invisible="1"/>
                             <field name="product_product_id"
-                                   invisible="context.get('default_product_product_id', False)"
-                                   domain="[('product_tmpl_id', '=', product_tmpl_id)]"/>
+                                domain="['|', ('product_tmpl_id', '=', product_tmpl_id),
+                                    ('id', '=', context.get('default_product_tmpl_id'))]"/>
                             <field name="fixed_location_id"/>
                         </tree>
                     </field>
