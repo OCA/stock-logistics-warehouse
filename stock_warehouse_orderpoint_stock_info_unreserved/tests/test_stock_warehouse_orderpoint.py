@@ -16,7 +16,7 @@ class TestStockWarehouseOrderpoint(SavepointCase):
         cls.product_ctg_model = cls.env['product.category']
 
         # Get required Model data
-        cls.product_uom = cls.env.ref('product.product_uom_unit')
+        cls.product_uom = cls.env.ref('uom.product_uom_unit')
         cls.location_stock = cls.env.ref('stock.stock_location_stock')
         cls.location_shelf1 = cls.env.ref('stock.stock_location_components')
         cls.location_customer = cls.env.ref('stock.stock_location_customers')
@@ -34,7 +34,6 @@ class TestStockWarehouseOrderpoint(SavepointCase):
         """Create a Product Category."""
         product_ctg = cls.product_ctg_model.create({
             'name': 'test_product_ctg',
-            'type': 'normal',
         })
         return product_ctg
 
