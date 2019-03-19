@@ -5,7 +5,7 @@
 
 from odoo import api, fields, models, _
 from odoo.osv import expression
-import odoo.addons.decimal_precision as dp
+from odoo.addons import decimal_precision as dp
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -43,39 +43,41 @@ class StockDemandEstimateSheet(models.TransientModel):
 
     @api.onchange('date_start', 'date_end', 'date_range_type_id',)
     def _onchange_dates(self):
-        if not all([self.date_start, self.date_end, self.date_range_type_id]):
-            return
-        ranges = self._get_ranges()
-        if not ranges:
-            raise UserError(_('There is no ranges created.'))
-        estimates = self.env['stock.demand.estimate'].search([
-            ('product_id', 'in', self.product_ids.ids),
-            ('date_range_id', 'in', ranges.ids),
-            ('location_id', '=', self.location_id.id),
-        ])
-        lines = []
-        for product in self.product_ids:
-            for _range in ranges:
-                estimate = estimates.filtered(
-                    lambda x: (x.date_range_id == _range and
-                               x.product_id == product)
-                )
-                if estimate:
-                    uom_id = estimate[0].product_uom.id
-                    uom_qty = estimate[0].product_uom_qty
-                    estimate_id = estimate[0].id
-                else:
-                    uom_id = product.uom_id.id
-                    uom_qty = 0.0
-                    estimate_id = None
-                lines.append((0, 0, self._get_default_estimate_line(
-                    _range,
-                    product,
-                    uom_id,
-                    uom_qty,
-                    estimate_id=estimate_id,
-                )))
-        self.line_ids = lines
+        for sheet in self:
+            if not all([sheet.date_start, sheet.date_end,
+                        sheet.date_range_type_id]):
+                return
+            ranges = sheet._get_ranges()
+            if not ranges:
+                raise UserError(_('There is no ranges created.'))
+            estimates = self.env['stock.demand.estimate'].search([
+                ('product_id', 'in', sheet.product_ids.ids),
+                ('date_range_id', 'in', ranges.ids),
+                ('location_id', '=', sheet.location_id.id),
+            ])
+            lines = []
+            for product in sheet.product_ids:
+                for _range in ranges:
+                    estimate = estimates.filtered(
+                        lambda x: (x.date_range_id == _range and
+                                   x.product_id == product)
+                    )
+                    if estimate:
+                        uom_id = estimate[0].product_uom.id
+                        uom_qty = estimate[0].product_uom_qty
+                        estimate_id = estimate[0].id
+                    else:
+                        uom_id = product.uom_id.id
+                        uom_qty = 0.0
+                        estimate_id = None
+                    lines.append((0, 0, sheet._get_default_estimate_line(
+                        _range,
+                        product,
+                        uom_id,
+                        uom_qty,
+                        estimate_id=estimate_id,
+                    )))
+            sheet.line_ids = lines
 
     def _get_ranges(self):
         domain_1 = [
@@ -168,10 +170,10 @@ class StockDemandEstimateSheetLine(models.TransientModel):
         string='Product',
     )
     value_x = fields.Char(
-        string='Period',
+        string='Period Name',
     )
     value_y = fields.Char(
-        string='Product',
+        string='Product Name',
     )
     product_uom_qty = fields.Float(
         string="Quantity",
