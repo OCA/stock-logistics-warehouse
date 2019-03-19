@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <odoo>
 
-        <record model="ir.ui.view"
-                id="view_stock_demand_estimate_sheet_form">
+        <record id="stock_demand_estimate_sheet_view_form"
+                model="ir.ui.view">
             <field name="name">stock.demand.estimate.sheet.form</field>
             <field name="model">stock.demand.estimate.sheet</field>
             <field name="arch" type="xml">
@@ -47,8 +47,8 @@
           </field>
         </record>
 
-        <record model="ir.ui.view"
-                id="view_demand_estimate_wizard_form">
+        <record id="demand_estimate_wizard_view_form"
+                model="ir.ui.view">
             <field name="name">stock.demand.estimate.wizard.form</field>
             <field name="model">stock.demand.estimate.wizard</field>
             <field name="arch" type="xml">
@@ -84,11 +84,10 @@
             view_mode="form"
             target="new"
             key2="client_action_multi"
-            id="action_stock_demand_estimate_wizard"/>
+            id="stock_demand_estimate_wizard_action"/>
 
-        <menuitem
-            id="menu_stock_demand_estimate_wizard"
-            parent="menu_stock_demand_planning"
-            action="action_stock_demand_estimate_wizard"/>
+        <menuitem id="stock_demand_estimate_wizard_menu"
+                  parent="stock_demand_planning_menu"
+                  action="stock_demand_estimate_wizard_action"/>
 
 </odoo>
