@@ -2,6 +2,7 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from dateutil.rrule import MONTHLY
+from odoo import fields
 from odoo.exceptions import ValidationError
 from odoo.tests.common import SavepointCase
 
@@ -93,12 +94,12 @@ class TestStockDemandEstimate(SavepointCase):
                 'There should be 12 lines.',
             )
             self.assertEqual(
-                sheet.date_start,
+                fields.Date.to_string(sheet.date_start),
                 '1943-01-01',
                 'The date start should be 1943-01-01',
             )
             self.assertEqual(
-                sheet.date_end,
+                fields.Date.to_string(sheet.date_end),
                 '1943-12-31',
                 'The date end should be 1943-12-31',
             )
@@ -152,7 +153,7 @@ class TestStockDemandEstimate(SavepointCase):
             'date_end': '1943-12-31',
             'location_id': self.location.id,
             'date_range_type_id': self.drt_monthly.id,
-            'product_ids': [(6, 0, [self.product1.id])]
+            'product_ids': [(6, 0, [self.product1.id])],
         })
         wiz.create_sheet()
         sheets = self.env['stock.demand.estimate.sheet'].search([])
@@ -173,5 +174,5 @@ class TestStockDemandEstimate(SavepointCase):
                 'date_end': '1943-01-01',
                 'location_id': self.location.id,
                 'date_range_type_id': self.drt_monthly.id,
-                'product_ids': [(6, 0, [self.product1.id])]
+                'product_ids': [(6, 0, [self.product1.id])],
             })
