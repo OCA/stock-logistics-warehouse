@@ -18,6 +18,6 @@ class DateRange(models.Model):
     def _compute_days(self):
         for rec in self.filtered(lambda x: x.date_start and x.date_end):
             rec.days = abs((
-                fields.Date.from_string(rec.date_end) -
-                fields.Date.from_string(rec.date_start)
+                rec.date_end -
+                rec.date_start
             ).days) + 1

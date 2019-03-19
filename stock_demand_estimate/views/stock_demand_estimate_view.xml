@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <odoo>
 
-    <record model="ir.ui.view"
-            id="view_stock_demand_estimate_tree">
+    <record id="stock_demand_estimate_view_tree"
+            model="ir.ui.view">
         <field name="name">stock.demand.estimate.tree</field>
         <field name="model">stock.demand.estimate</field>
         <field name="arch" type="xml">
@@ -18,7 +18,7 @@
         </field>
     </record>
 
-    <record id="view_stock_demand_estimate_pivot" model="ir.ui.view">
+    <record id="stock_demand_estimate_view_pivot" model="ir.ui.view">
         <field name="name">stock.demand.estimate.pivot</field>
         <field name="model">stock.demand.estimate</field>
         <field name="arch" type="xml">
@@ -30,7 +30,7 @@
         </field>
     </record>
 
-    <record id="view_stock_demand_estimate_search"
+    <record id="stock_demand_estimate_view_search"
             model="ir.ui.view">
         <field name="name">stock.demand.estimate.search</field>
         <field name="model">stock.demand.estimate</field>
@@ -43,23 +43,23 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window"
-            id="stock_demand_estimate_form_action">
+    <record id="stock_demand_estimate_action"
+            model="ir.actions.act_window">
         <field name="name">Stock Demand Estimates</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.demand.estimate</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,pivot</field>
         <field name="search_view_id"
-               ref="view_stock_demand_estimate_search"/>
+               ref="stock_demand_estimate_view_search"/>
     </record>
 
-    <menuitem id="menu_stock_demand_planning" name="Demand Planning"
+    <menuitem id="stock_demand_planning_menu" name="Demand Planning"
               parent="stock.menu_stock_root" sequence="10"/>
 
     <menuitem
-        id="menu_stock_demand_estimate"
-        parent="menu_stock_demand_planning"
-        action="stock_demand_estimate_form_action"/>
+        id="stock_demand_estimate_menu"
+        parent="stock_demand_planning_menu"
+        action="stock_demand_estimate_action"/>
 
 </odoo>
