@@ -27,7 +27,7 @@ class StockRequestAllocation(models.Model):
                                  related='stock_request_id.product_id',
                                  readonly=True,
                                  )
-    product_uom_id = fields.Many2one(string='UoM', comodel_name='product.uom',
+    product_uom_id = fields.Many2one(string='UoM', comodel_name='uom.uom',
                                      related='stock_request_id.product_uom_id',
                                      readonly=True,
                                      )
