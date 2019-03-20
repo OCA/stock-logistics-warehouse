@@ -287,7 +287,7 @@ class StockRequestOrder(models.Model):
             return False
         if products._name not in ('product.product', 'product.template'):
             raise ValidationError(
-                "This action only works in the context of products")
+                _("This action only works in the context of products"))
         if products._name == 'product.template':
             # search instead of mapped so we don't include archived variants
             products = self.env['product.product'].search([
