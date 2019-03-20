@@ -10,5 +10,5 @@
   'Multi-Step Routes option'.
 
 * Go to *Inventory > Configuration > Warehouse Management > Routes* and
-  set up the proper delays in the procurement rules where 'action'
+  set up the proper delays in the stock rules where 'action'
   is 'Move From Another Location'.
