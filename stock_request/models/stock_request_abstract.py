@@ -52,7 +52,7 @@ class StockRequest(models.AbstractModel):
         readonly=True,
     )
     product_uom_id = fields.Many2one(
-        'product.uom', 'Product Unit of Measure',
+        'uom.uom', 'Product Unit of Measure',
         required=True,
         default=lambda self: self._context.get('product_uom_id', False),
     )
@@ -84,7 +84,7 @@ class StockRequest(models.AbstractModel):
                                ondelete='restrict')
 
     route_ids = fields.Many2many(
-        'stock.location.route', string='Route',
+        'stock.location.route', string='Routes',
         compute='_compute_route_ids',
         readonly=True,
     )
@@ -112,7 +112,7 @@ class StockRequest(models.AbstractModel):
                     routes |= wh_routes
                 parents = record.get_parents().ids
                 record.route_ids = routes.filtered(lambda r: any(
-                    p.location_id.id in parents for p in r.pull_ids))
+                    p.location_id.id in parents for p in r.rule_ids))
 
     def get_parents(self):
         location = self.location_id
