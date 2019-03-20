@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import fields
 from odoo.tests.common import TransactionCase
@@ -36,7 +36,7 @@ class TestStockWarehouseCalendar(TransactionCase):
         rule_vals = {
             'location_id': self.warehouse.lot_stock_id.id,
             'location_src_id': self.warehouse_2.lot_stock_id.id,
-            'action': 'move',
+            'action': 'pull_push',
             'warehouse_id': self.warehouse.id,
             'propagate_warehouse_id': self.warehouse_2.id,
             'picking_type_id': self.env.ref('stock.picking_type_internal').id,
@@ -44,7 +44,7 @@ class TestStockWarehouseCalendar(TransactionCase):
             'route_id': self.transfer_route.id,
             'delay': 1,
         }
-        self.transfer_rule = self.env['procurement.rule'].create(rule_vals)
+        self.transfer_rule = self.env['stock.rule'].create(rule_vals)
         self.product.route_ids = [(6, 0, self.transfer_route.ids)]
 
     def test_procurement_with_calendar(self):
@@ -61,8 +61,8 @@ class TestStockWarehouseCalendar(TransactionCase):
             'Test', values)
         move = self.env['stock.move'].search(
             [('product_id', '=', self.product.id)], limit=1)
-        date_expected = fields.Datetime.from_string(move.date_expected).date()
+        date_expected = fields.Date.to_date(move.date_expected)
         # Friday 4th Jan 2017
-        friday = fields.Datetime.from_string('2097-01-04 09:00:00').date()
+        friday = fields.Date.to_date('2097-01-04 09:00:00')
 
         self.assertEquals(date_expected, friday)
