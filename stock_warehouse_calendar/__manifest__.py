@@ -4,15 +4,15 @@
 {
     "name": "Stock Warehouse Calendar",
     "summary": "Adds a calendar to the Warehouse",
-    "version": "11.0.1.0.0",
-    "license": "AGPL-3",
+    "version": "12.0.1.0.0",
+    "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": [
         "stock",
-        "resource"
+        "resource",
     ],
     "data": [
         "views/stock_warehouse_views.xml",

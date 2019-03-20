@@ -7,5 +7,7 @@ from odoo import fields, models
 class StockWarehouse(models.Model):
     _inherit = 'stock.warehouse'
 
-    calendar_id = fields.Many2one('resource.calendar',
-                                  'Working Hours')
+    calendar_id = fields.Many2one(
+        comodel_name='resource.calendar',
+        string='Working Hours',
+    )
