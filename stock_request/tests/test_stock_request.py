@@ -4,9 +4,11 @@
 from odoo.tests import common
 from odoo import fields, exceptions
 from collections import Counter
+from datetime import datetime
 
 
 class TestStockRequest(common.TransactionCase):
+
     def setUp(self):
         super(TestStockRequest, self).setUp()
 
@@ -21,12 +23,13 @@ class TestStockRequest(common.TransactionCase):
             self.env.ref('stock_request.group_stock_request_manager')
         self.main_company = self.env.ref('base.main_company')
         self.warehouse = self.env.ref('stock.warehouse0')
-        self.categ_unit = self.env.ref('product.product_uom_categ_unit')
+        self.categ_unit = self.env.ref('uom.product_uom_categ_unit')
         self.virtual_loc = self.env.ref('stock.stock_location_customers')
 
         # common data
         self.company_2 = self.env['res.company'].create({
             'name': 'Comp2',
+            'parent_id': self.main_company.id
         })
         self.wh2 = self.env['stock.warehouse'].search(
             [('company_id', '=', self.company_2.id)], limit=1)
@@ -68,19 +71,19 @@ class TestStockRequest(common.TransactionCase):
             'sequence': 10,
         })
 
-        self.uom_dozen = self.env['product.uom'].create({
+        self.uom_dozen = self.env['uom.uom'].create({
             'name': 'Test-DozenA',
             'category_id': self.categ_unit.id,
             'factor_inv': 12,
             'uom_type': 'bigger',
             'rounding': 0.001})
 
-        self.env['procurement.rule'].create({
+        self.env['stock.rule'].create({
             'name': 'Transfer',
             'route_id': self.route.id,
             'location_src_id': self.ressuply_loc.id,
             'location_id': self.warehouse.lot_stock_id.id,
-            'action': 'move',
+            'action': 'pull',
             'picking_type_id': self.warehouse.int_type_id.id,
             'procure_method': 'make_to_stock',
             'warehouse_id': self.warehouse.id,
@@ -88,12 +91,12 @@ class TestStockRequest(common.TransactionCase):
             'propagate': 'False',
         })
 
-        self.env['procurement.rule'].create({
+        self.env['stock.rule'].create({
             'name': 'Transfer',
             'route_id': self.route_2.id,
             'location_src_id': self.ressuply_loc_2.id,
             'location_id': self.wh2.lot_stock_id.id,
-            'action': 'move',
+            'action': 'pull',
             'picking_type_id': self.wh2.int_type_id.id,
             'procure_method': 'make_to_stock',
             'warehouse_id': self.wh2.id,
@@ -116,7 +119,7 @@ class TestStockRequest(common.TransactionCase):
         return self.env['product.product'].create(dict(
             name=name,
             default_code=default_code,
-            uom_id=self.env.ref('product.product_uom_unit').id,
+            uom_id=self.env.ref('uom.product_uom_unit').id,
             company_id=company_id,
             type='product',
             **vals
@@ -203,7 +206,7 @@ class TestStockRequest(common.TransactionCase):
             order.picking_policy,
             order.stock_request_ids.picking_policy)
 
-        order.expected_date = fields.Date.today()
+        order.expected_date = datetime.now()
         order.onchange_expected_date()
         self.assertEqual(
             order.expected_date,
@@ -241,8 +244,8 @@ class TestStockRequest(common.TransactionCase):
 
         product = self.env['product.product'].create({
             'name': 'Wheat',
-            'uom_id': self.env.ref('product.product_uom_kgm').id,
-            'uom_po_id': self.env.ref('product.product_uom_kgm').id,
+            'uom_id': self.env.ref('uom.product_uom_kgm').id,
+            'uom_po_id': self.env.ref('uom.product_uom_kgm').id,
         })
 
         # Test onchange_product_id
@@ -254,7 +257,7 @@ class TestStockRequest(common.TransactionCase):
                            product.uom_id.category_id.id)])
         self.assertEqual(
             stock_request.product_uom_id,
-            self.env.ref('product.product_uom_kgm'))
+            self.env.ref('uom.product_uom_kgm'))
 
         stock_request.product_id = self.env['product.product']
         res = stock_request.onchange_product_id()
@@ -394,7 +397,7 @@ class TestStockRequest(common.TransactionCase):
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
                 'product_uom_qty': 5.0,
-                'company_id': self.main_company.id,
+                'company_id': self.company_2.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
                 'expected_date': expected_date,
@@ -454,7 +457,7 @@ class TestStockRequest(common.TransactionCase):
     def test_stock_request_validations_01(self):
         vals = {
             'product_id': self.product.id,
-            'product_uom_id': self.env.ref('product.product_uom_kgm').id,
+            'product_uom_id': self.env.ref('uom.product_uom_kgm').id,
             'product_uom_qty': 5.0,
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
@@ -741,29 +744,29 @@ class TestStockRequest(common.TransactionCase):
             stock_request.route_id = self.route_2
 
     def test_stock_request_order_from_products(self):
-        product_A1 = self._create_product('CODEA1', 'Product A1',
+        product_a1 = self._create_product('CODEA1', 'Product A1',
                                           self.main_company.id)
-        template_A = product_A1.product_tmpl_id
-        product_A2 = self._create_product(
+        template_a = product_a1.product_tmpl_id
+        product_a2 = self._create_product(
             'CODEA2', 'Product A2', self.main_company.id,
-            product_tmpl_id=template_A.id)
-        product_A3 = self._create_product(
+            product_tmpl_id=template_a.id)
+        product_a3 = self._create_product(
             'CODEA3', 'Product A3', self.main_company.id,
-            product_tmpl_id=template_A.id)
-        product_B1 = self._create_product('CODEB1', 'Product B1',
+            product_tmpl_id=template_a.id)
+        product_b1 = self._create_product('CODEB1', 'Product B1',
                                           self.main_company.id)
-        template_B = product_B1.product_tmpl_id
+        template_b = product_b1.product_tmpl_id
         # One archived variant of B
         self._create_product(
             'CODEB2', 'Product B2', self.main_company.id,
-            product_tmpl_id=template_B.id, active=False)
-        Order = self.request_order
+            product_tmpl_id=template_b.id, active=False)
+        order = self.request_order
 
         # Selecting some variants and creating an order
-        preexisting = Order.search([])
-        wanted_products = product_A1 + product_A2 + product_B1
-        action = Order._create_from_product_multiselect(wanted_products)
-        new_order = Order.search([]) - preexisting
+        preexisting = order.search([])
+        wanted_products = product_a1 + product_a2 + product_b1
+        action = order._create_from_product_multiselect(wanted_products)
+        new_order = order.search([]) - preexisting
         self.assertEqual(len(new_order), 1)
         self.assertEqual(action['res_id'], new_order.id,
                          msg="Returned action references the wrong record")
@@ -774,28 +777,28 @@ class TestStockRequest(common.TransactionCase):
         )
 
         # Selecting a template and creating an order
-        preexisting = Order.search([])
-        action = Order._create_from_product_multiselect(template_A)
-        new_order = Order.search([]) - preexisting
+        preexisting = order.search([])
+        action = order._create_from_product_multiselect(template_a)
+        new_order = order.search([]) - preexisting
         self.assertEqual(len(new_order), 1)
         self.assertEqual(action['res_id'], new_order.id,
                          msg="Returned action references the wrong record")
         self.assertEqual(
-            Counter(product_A1 + product_A2 + product_A3),
+            Counter(product_a1 + product_a2 + product_a3),
             Counter(new_order.stock_request_ids.mapped('product_id')),
             msg="Not all of the template's variants were ordered"
         )
 
         # Selecting a template
-        preexisting = Order.search([])
-        action = Order._create_from_product_multiselect(
-            template_A + template_B)
-        new_order = Order.search([]) - preexisting
+        preexisting = order.search([])
+        action = order._create_from_product_multiselect(
+            template_a + template_b)
+        new_order = order.search([]) - preexisting
         self.assertEqual(len(new_order), 1)
         self.assertEqual(action['res_id'], new_order.id,
                          msg="Returned action references the wrong record")
         self.assertEqual(
-            Counter(product_A1 + product_A2 + product_A3 + product_B1),
+            Counter(product_a1 + product_a2 + product_a3 + product_b1),
             Counter(new_order.stock_request_ids.mapped('product_id')),
             msg="Inactive variant was ordered though it shouldn't have been"
         )
@@ -809,17 +812,17 @@ class TestStockRequest(common.TransactionCase):
                 "Unfortunately it seems you do not have the necessary rights "
                 "for creating stock requests. Please contact your "
                 "administrator."):
-            Order.sudo(
+            order.sudo(
                 self.stock_request_user
-            )._create_from_product_multiselect(template_A + template_B)
+            )._create_from_product_multiselect(template_a + template_b)
 
         # Empty recordsets should just return False
-        self.assertFalse(Order._create_from_product_multiselect(
+        self.assertFalse(order._create_from_product_multiselect(
             self.env['product.product']))
 
         # Wrong model should just raise ValidationError
         with self.assertRaises(exceptions.ValidationError):
-            Order._create_from_product_multiselect(self.stock_request_user)
+            order._create_from_product_multiselect(self.stock_request_user)
 
     def test_allow_virtual_location(self):
         self.main_company.stock_request_allow_virtual_loc = True

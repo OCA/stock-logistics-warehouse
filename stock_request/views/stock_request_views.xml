@@ -16,7 +16,7 @@
                 <field name="route_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
                 <field name="product_id"/>
                 <field name="product_uom_id"
-                       options="{'no_open': True, 'no_create': True}" groups="product.group_uom"/>
+                       options="{'no_open': True, 'no_create': True}" groups="uom.group_uom"/>
                 <field name="product_uom_qty"/>
                 <field name="qty_in_progress" />
                 <field name="qty_done" />
@@ -37,8 +37,8 @@
                 <field name="product_id"/>
                 <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 <group expand="0" string="Group By">
-                    <filter string="Warehouse" domain="[]"  context="{'group_by':'warehouse_id'}"/>
-                    <filter string="Location" domain="[]" context="{'group_by':'location_id'}"/>
+                    <filter name="warehouse" string="Warehouse" domain="[]"  context="{'group_by':'warehouse_id'}"/>
+                    <filter name="location" string="Location" domain="[]" context="{'group_by':'location_id'}"/>
                 </group>
             </search>
         </field>
@@ -76,7 +76,7 @@
                         </button>
                     </div>
                     <div class="oe_title">
-                        <label string="Stock Request " />
+                        <label for="name" string="Stock Request"/>
                         <h1>
                             <field name="name" readonly="1"/>
                         </h1>
@@ -107,12 +107,15 @@
                                 <field name="product_uom_id"
                                        class="oe_inline"
                                        options="{'no_open': True, 'no_create': True}"
-                                       groups="product.group_uom"/>
+                                       groups="uom.group_uom"/>
                             </div>
                             <field name="qty_in_progress" />
                             <field name="qty_done" />
                         </group>
                     </group>
+                    <notebook>
+                        <!--Empty notebook to inherit pages from other related modules-->
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>

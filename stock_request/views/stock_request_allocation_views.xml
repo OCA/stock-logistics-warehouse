@@ -13,7 +13,7 @@
                 <field name="product_id"/>
                 <field name="requested_product_uom_qty"/>
                 <field name="product_uom_id"
-                       options="{'no_open': True, 'no_create': True}" groups="product.group_uom"/>
+                       options="{'no_open': True, 'no_create': True}" groups="uom.group_uom"/>
                 <field name="requested_product_qty"/>
                 <field name="allocated_product_qty"/>
                 <field name="open_product_qty" />
@@ -38,7 +38,7 @@
                             <field name="requested_product_uom_qty"/>
                             <field name="product_uom_id"
                                    options="{'no_open': True, 'no_create': True}"
-                                   groups="product.group_uom"/>
+                                   groups="uom.group_uom"/>
                             <field name="requested_product_qty"/>
                             <field name="allocated_product_qty"/>
                             <field name="open_product_qty" />

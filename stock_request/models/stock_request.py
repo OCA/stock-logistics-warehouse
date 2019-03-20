@@ -107,12 +107,12 @@ class StockRequest(models.Model):
 
     @api.depends('allocation_ids')
     def _compute_move_ids(self):
-        for request in self.sudo():
+        for request in self:
             request.move_ids = request.allocation_ids.mapped('stock_move_id')
 
     @api.depends('allocation_ids')
     def _compute_picking_ids(self):
-        for request in self.sudo():
+        for request in self:
             request.picking_count = 0
             request.picking_ids = self.env['stock.picking']
             request.picking_ids = request.move_ids.filtered(
@@ -123,7 +123,7 @@ class StockRequest(models.Model):
                  'allocation_ids.stock_move_id.move_line_ids',
                  'allocation_ids.stock_move_id.move_line_ids.qty_done')
     def _compute_qty(self):
-        for request in self.sudo():
+        for request in self:
             done_qty = sum(request.allocation_ids.mapped(
                 'allocated_product_qty'))
             open_qty = sum(request.allocation_ids.mapped('open_product_qty'))
