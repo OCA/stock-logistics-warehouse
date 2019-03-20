@@ -53,7 +53,7 @@ also cancelled.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/11.0
+   :target: https://runbot.odoo-community.org/runbot/153/12.0
 
 
 Bug Tracker
@@ -75,6 +75,7 @@ Contributors
 * Atte Isopuro <atte.isopuro@avoin.systems>
 * Lois Rilo <lois.rilo@eficent.com>
 * Raul Martin <raul.martin@braintec-group.com>
+* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 
 Maintainer
 ----------
