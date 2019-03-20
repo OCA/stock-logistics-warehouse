@@ -204,7 +204,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_id
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5327
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5885
 msgid "ID"
 msgstr ""
 
@@ -668,6 +668,12 @@ msgstr ""
 #: code:addons/stock_request/models/stock_request.py:187
 #, python-format
 msgid "The picking policy must be equal to the order"
+msgstr ""
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:290
+#, python-format
+msgid "This action only works in the context of products"
 msgstr ""
 
 #. module: stock_request
