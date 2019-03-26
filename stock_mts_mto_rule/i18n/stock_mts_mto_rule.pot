@@ -58,7 +58,7 @@ msgid "MTS Rule"
 msgstr ""
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/model/warehouse.py:143
+#: code:addons/stock_mts_mto_rule/model/warehouse.py:148
 #, python-format
 msgid "MTS+MTO"
 msgstr ""
