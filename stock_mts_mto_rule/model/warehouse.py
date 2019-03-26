@@ -89,14 +89,19 @@ class Warehouse(models.Model):
         return res
 
     @api.multi
-    def create_routes(self):
-        pull_model = self.env['procurement.rule']
-        res = super(Warehouse, self).create_routes()
+    def _set_mts_mto_rule(self):
+        self.ensure_one()
         if self.mto_mts_management:
+            pull_model = self.env['procurement.rule']
             mts_mto_pull_vals = self._get_mts_mto_rule()
             mts_mto_pull = pull_model.create(mts_mto_pull_vals)
-            res['mts_mto_rule_id'] = mts_mto_pull.id
-        return res
+            self.mts_mto_rule_id = mts_mto_pull.id
+
+    @api.model
+    def create(self, vals):
+        wh = super(Warehouse, self).create(vals)
+        wh._set_mts_mto_rule()
+        return wh
 
     @api.multi
     def write(self, vals):
