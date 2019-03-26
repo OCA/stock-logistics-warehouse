@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 
 class Orderpoint(models.Model):
@@ -20,7 +20,7 @@ class Orderpoint(models.Model):
                 orderpoint.product_uom.category_id !=
                 orderpoint.procure_uom_id.category_id
                 for orderpoint in self):
-                    raise UserError(
+                    raise ValidationError(
                         _('Error: The product default Unit of Measure and '
                           'the procurement Unit of Measure must be in the '
                           'same category.'))

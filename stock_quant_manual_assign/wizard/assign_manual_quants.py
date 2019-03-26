@@ -20,7 +20,7 @@ class AssignManualQuants(models.TransientModel):
         for record in self.filtered('quants_lines'):
             if float_compare(record.lines_qty, move.product_qty,
                              precision_digits=precision_digits) > 0:
-                raise exceptions.UserError(
+                raise exceptions.ValidationError(
                     _('Quantity is higher than the needed one'))
 
     @api.depends('quants_lines', 'quants_lines.qty')
