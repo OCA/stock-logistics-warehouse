@@ -47,6 +47,7 @@ setuptools.setup(
         'odoo11-addon-stock_request_analytic',
         'odoo11-addon-stock_request_kanban',
         'odoo11-addon-stock_request_purchase',
+        'odoo11-addon-stock_request_purchase_analytic',
         'odoo11-addon-stock_request_tier_validation',
         'odoo11-addon-stock_secondary_unit',
         'odoo11-addon-stock_warehouse_calendar',
