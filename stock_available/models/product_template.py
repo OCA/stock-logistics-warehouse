@@ -31,7 +31,7 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def _compute_available_quantities_dict(self):
-        variants_dict = self.mapped(
+        variants_dict, _ = self.mapped(
             'product_variant_ids')._compute_available_quantities_dict()
         res = {}
         for template in self:
