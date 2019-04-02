@@ -18,11 +18,11 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
         self.purchase_line_model = self.env['purchase.order.line']
         self.warehouse = self.env.ref('stock.warehouse0')
         self.location_stock = self.env.ref('stock.stock_location_stock')
-        self.uom_unit = self.env.ref('product.product_uom_unit')
+        self.uom_unit = self.env.ref('uom.product_uom_unit')
         self.uom_unit.rounding = 1
-        self.uom_dozen = self.env.ref('product.product_uom_dozen')
+        self.uom_dozen = self.env.ref('uom.product_uom_dozen')
         self.uom_dozen.rounding = 1
-        self.uom_kg = self.env.ref('product.product_uom_kgm')
+        self.uom_kg = self.env.ref('uom.product_uom_kgm')
 
         self.productA = productObj.create(
             {'name': 'product A',

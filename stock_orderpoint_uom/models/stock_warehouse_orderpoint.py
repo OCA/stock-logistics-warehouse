@@ -9,7 +9,7 @@ from odoo.exceptions import UserError
 class Orderpoint(models.Model):
     _inherit = "stock.warehouse.orderpoint"
 
-    procure_uom_id = fields.Many2one(comodel_name='product.uom',
+    procure_uom_id = fields.Many2one(comodel_name='uom.uom',
                                      string="Procurement UoM")
 
     @api.constrains('product_id', 'procure_uom_id')
