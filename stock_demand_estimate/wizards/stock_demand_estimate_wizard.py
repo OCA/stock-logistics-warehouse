@@ -63,7 +63,7 @@ class StockDemandEstimateSheet(models.TransientModel):
                                    x.product_id == product)
                     )
                     if estimate:
-                        uom_id = estimate[0].product_uom.id
+                        uom_id = fields.first(estimate).product_uom.id
                         uom_qty = estimate[0].product_uom_qty
                         estimate_id = estimate[0].id
                     else:
