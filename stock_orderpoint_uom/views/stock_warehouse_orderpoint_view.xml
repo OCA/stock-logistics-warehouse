@@ -8,7 +8,7 @@
                ref="stock.view_warehouse_orderpoint_tree"/>
         <field name="arch" type="xml">
             <field name="product_uom" position="after">
-                <field name="procure_uom_id" groups="product.group_uom"/>
+                <field name="procure_uom_id" groups="uom.group_uom"/>
             </field>
         </field>
     </record>
@@ -21,7 +21,7 @@
         <field name="arch" type="xml">
             <field name="product_uom" position="after">
                 <field name="procure_uom_id" class="oe_inline"
-                       groups="product.group_uom"/>
+                       groups="uom.group_uom"/>
             </field>
         </field>
     </record>
