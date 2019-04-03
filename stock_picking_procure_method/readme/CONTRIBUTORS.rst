@@ -2,3 +2,5 @@
 
     * David Vidal
     * Pedro M. Baeza
+
+* Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
