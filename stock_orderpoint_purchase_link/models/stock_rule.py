@@ -4,13 +4,13 @@
 from odoo import models
 
 
-class ProcurementRule(models.Model):
-    _inherit = 'procurement.rule'
+class StockRule(models.Model):
+    _inherit = 'stock.rule'
 
     def _prepare_purchase_order_line(self, product_id, product_qty,
-                                     product_uom, values, po, supplier):
-        vals = super(ProcurementRule, self)._prepare_purchase_order_line(
-            product_id, product_qty, product_uom, values, po, supplier)
+                                     product_uom, values, po, partner):
+        vals = super()._prepare_purchase_order_line(
+            product_id, product_qty, product_uom, values, po, partner)
         # If the procurement was run directly by a reordering rule.
         if 'orderpoint_id' in values:
             vals['orderpoint_ids'] = [
@@ -23,7 +23,7 @@ class ProcurementRule(models.Model):
 
     def _update_purchase_order_line(self, product_id, product_qty, product_uom,
                                     values, line, partner):
-        vals = super(ProcurementRule, self)._update_purchase_order_line(
+        vals = super()._update_purchase_order_line(
             product_id, product_qty, product_uom, values, line, partner)
         if 'orderpoint_id' in values:
             vals['orderpoint_ids'] = [
