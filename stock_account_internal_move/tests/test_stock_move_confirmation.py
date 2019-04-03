@@ -12,8 +12,8 @@ class StockMoveConfirmationCase(common.SavepointCase):
         cls.product = cls.env['product.product'].create({
             'name': 'Whatever',
             'type': 'product',
-            'uom_id': cls.env.ref('product.product_uom_kgm').id,
-            'uom_po_id': cls.env.ref('product.product_uom_kgm').id,
+            'uom_id': cls.env.ref('uom.product_uom_kgm').id,
+            'uom_po_id': cls.env.ref('uom.product_uom_kgm').id,
             'standard_price': 100.,
             'valuation': 'real_time',
         })

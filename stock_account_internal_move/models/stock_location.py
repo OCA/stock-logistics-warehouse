@@ -20,7 +20,7 @@ class StockLocation(models.Model):
             if loc.usage != 'internal' and loc.force_accounting_entries:
                 raise ValidationError(_(
                     'You cannot force accounting entries'
-                    ' on a non-internal locations.'))
+                    ' on a non-internal location.'))
 
     @api.constrains(
         'force_accounting_entries',
@@ -35,7 +35,7 @@ class StockLocation(models.Model):
             if not loc.valuation_in_account_id \
                     or not loc.valuation_out_account_id:
                 raise ValidationError(_(
-                    'You must provide a valuation in/out accounts'
+                    'You must provide a valuation in/out account'
                     ' in order to force accounting entries.'))
 
     @api.onchange('usage')
