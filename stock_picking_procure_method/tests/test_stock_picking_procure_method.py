@@ -25,10 +25,10 @@ class TestStockPickingMTO(common.SavepointCase):
             'code': 'TSWH2',
             'resupply_wh_ids': [(6, 0, cls.wh1.ids)],
         })
-        cls.procurement_rule = cls.env['procurement.rule'].create({
+        cls.procurement_rule = cls.env['stock.rule'].create({
             'name': 'TST-WH1 -> TST-WH2 MTO',
             'route_id': cls.mto_route.id,
-            'action': 'move',
+            'action': 'pull',
             'location_src_id': cls.wh1.lot_stock_id.id,
             'procure_method': 'make_to_stock',
             'picking_type_id': cls.wh1.int_type_id.id,
