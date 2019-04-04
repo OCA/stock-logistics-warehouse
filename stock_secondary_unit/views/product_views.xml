@@ -7,7 +7,7 @@
         <field name="name">Product template Secondary Unit</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="stock.view_template_property_form"/>
-        <field name="groups_id" eval="[(4, ref('product.group_uom'))]"/>
+        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='inventory']" position="inside">
                 <group string="Secondary unit">
@@ -23,7 +23,7 @@
         <field name="model">product.template</field>
         <field name="inherit_id"
                ref="stock.product_template_form_view_procurement_button"/>
-        <field name="groups_id" eval="[(4, ref('product.group_uom'))]"/>
+        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_open_quants']" position="after">
                 <button type="object"
@@ -43,7 +43,7 @@
         <field name="model">product.product</field>
         <field name="inherit_id"
                ref="stock.product_form_view_procurement_button"/>
-        <field name="groups_id" eval="[(4, ref('product.group_uom'))]"/>
+        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='qty_available']/.." position="after">
                 <button class="oe_stat_button"
@@ -62,7 +62,7 @@
     <record id="product_template_tree_view" model="ir.ui.view">
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_tree_view"/>
-        <field name="groups_id" eval="[(4, ref('product.group_uom'))]"/>
+        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='uom_id']" position="after">
                 <field name="secondary_unit_qty_available"/>
@@ -74,7 +74,7 @@
     <record id="product_product_tree_view" model="ir.ui.view">
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_product_tree_view"/>
-        <field name="groups_id" eval="[(4, ref('product.group_uom'))]"/>
+        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='uom_id']" position="after">
                 <field name="secondary_unit_qty_available"/>
