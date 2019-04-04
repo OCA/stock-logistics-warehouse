@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo12-addon-account_move_line_stock_info',
         'odoo12-addon-stock_inventory_chatter',
         'odoo12-addon-stock_orderpoint_move_link',
+        'odoo12-addon-stock_orderpoint_uom',
     ],
     classifiers=[
         'Programming Language :: Python',
