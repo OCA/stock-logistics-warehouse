@@ -7,6 +7,7 @@ from odoo.tools.float_utils import float_round
 
 class StockSecondaryUnitMixin(models.AbstractModel):
     _name = 'stock.secondary.unit.mixin'
+    _description = 'Stock Secondary Unit Mixin'
 
     secondary_uom_id = fields.Many2one(
         comodel_name='product.secondary.unit',
@@ -36,7 +37,7 @@ class StockMoveLine(models.Model):
     def create(self, vals):
         move = self.env['stock.move'].browse(vals['move_id'])
         if move.secondary_uom_id:
-            uom = self.env['product.uom'].browse(vals['product_uom_id'])
+            uom = self.env['uom.uom'].browse(vals['product_uom_id'])
             factor = move.secondary_uom_id.factor * uom.factor
             move_line_qty = vals.get(
                 'product_uom_qty', vals.get('qty_done', 0.0))

@@ -18,37 +18,27 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #. module: stock_secondary_unit
-#: model:ir.ui.view,arch_db:stock_secondary_unit.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.report_delivery_document
 msgid "<strong>Secondary Qty</strong>"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit_display_name
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin_display_name
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__display_name
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin__display_name
 msgid "Display Name"
 msgstr "Mostrar Nombre"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit_id
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin_id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin__id
 msgid "ID"
 msgstr "ID"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit___last_update
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin___last_update
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit____last_update
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
-
-#. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_stock_move_line
-msgid "Packing Operation"
-msgstr ""
-
-#. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_procurement_rule
-msgid "Procurement Rule"
-msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_product_product
@@ -56,41 +46,46 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: stock_secondary_unit
+#: model:ir.model,name:stock_secondary_unit.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_product_template
 msgid "Product Template"
 msgstr "Plantilla de producto"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product_secondary_unit_qty_available
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template_secondary_unit_qty_available
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit_secondary_unit_qty_available
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__secondary_unit_qty_available
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__secondary_unit_qty_available
 msgid "Quantity On Hand (2Unit)"
 msgstr "Cantidad a mano (2Ud.)"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line_secondary_uom_id
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_secondary_uom_id
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin_secondary_uom_id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__secondary_uom_id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin__secondary_uom_id
 #, fuzzy
 msgid "Second unit"
 msgstr "Unidad Secundaria"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product_stock_secondary_uom_id
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template_stock_secondary_uom_id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__stock_secondary_uom_id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__stock_secondary_uom_id
 msgid "Second unit for inventory"
 msgstr "Segunda unidad de medida para inventario"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line_secondary_uom_qty
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_secondary_uom_qty
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin_secondary_uom_qty
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_qty
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__secondary_uom_qty
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin__secondary_uom_qty
 #, fuzzy
 msgid "Secondary Qty"
 msgstr "Unidad Secundaria"
 
 #. module: stock_secondary_unit
-#: model:ir.ui.view,arch_db:stock_secondary_unit.view_template_property_form
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.view_template_property_form
 msgid "Secondary unit"
 msgstr "Unidad Secundaria"
 
@@ -101,13 +96,15 @@ msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit
-msgid "stock.product.secondary.unit"
-msgstr ""
+#, fuzzy
+#| msgid "Secondary unit"
+msgid "Stock Product Secondary Unit"
+msgstr "Unidad Secundaria"
 
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_stock_secondary_unit_mixin
 #, fuzzy
-msgid "stock.secondary.unit.mixin"
+msgid "Stock Secondary Unit Mixin"
 msgstr "Unidad Secundaria"
 
 #~ msgid "On Hand (2unit)"
