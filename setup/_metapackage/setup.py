@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo12-addon-stock_inventory_chatter',
         'odoo12-addon-stock_orderpoint_manual_procurement',
         'odoo12-addon-stock_orderpoint_move_link',
+        'odoo12-addon-stock_orderpoint_purchase_link',
         'odoo12-addon-stock_orderpoint_uom',
     ],
     classifiers=[
