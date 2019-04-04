@@ -7,6 +7,7 @@ from odoo.tools.float_utils import float_round
 
 class StockProductSecondaryUnit(models.AbstractModel):
     _name = 'stock.product.secondary.unit'
+    _description = 'Stock Product Secondary Unit'
 
     secondary_unit_qty_available = fields.Float(
         string='Quantity On Hand (2Unit)',
