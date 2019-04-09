@@ -5,7 +5,7 @@
     "name": "Stock Orderpoint Manual Procurement UoM",
     "summary": "Glue module for stock_orderpoint_uom and "
                "stock_orderpoint_manual_procurement",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
@@ -14,7 +14,6 @@
         "stock_orderpoint_uom",
         "stock_orderpoint_manual_procurement",
     ],
-    "data": [],
     "license": "AGPL-3",
     'installable': True,
     'application': False,
