@@ -39,10 +39,10 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
                                        self.group_purchase_manager],
                                       self.company1)
         # Get required Model data
-        self.product_uom = self.env.ref('product.product_uom_unit')
+        self.product_uom = self.env.ref('uom.product_uom_unit')
         self.location = self.env.ref('stock.stock_location_stock')
         self.product = self.env.ref('product.product_product_7')
-        self.dozen = self.env.ref('product.product_uom_dozen')
+        self.dozen = self.env.ref('uom.product_uom_dozen')
 
         # Create Product category and Product
         self.product_ctg = self._create_product_category()
@@ -119,6 +119,8 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         }
         wizard = self.make_procurement_orderpoint_model.sudo(self.user).\
             with_context(context).create({})
+        for line in wizard.item_ids:
+            line.onchange_uom_id()
         wizard.make_procurement()
         return wizard
 
