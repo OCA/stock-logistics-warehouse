@@ -368,7 +368,8 @@ ul.auto-toc {
 !! changes will be overwritten.                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/tree/11.0/stock_move_location"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-11-0/stock-logistics-warehouse-11-0-stock_move_location"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external" href="https://runbot.odoo-community.org/runbot/153/11.0"><img alt="Try me on Runbot" src="https://img.shields.io/badge/runbot-Try%20me-875A7B.png" /></a></p>
-<p>This module allows to move entire location of products from one place to another</p>
+<p>This module allows to move entire location of products from one place to
+another and move only selected quants.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -396,6 +397,13 @@ where 2 location ca be specified.</li>
 it will move only the available quantity at the button press</li>
 <li>Products will be moved and a form view of picking that did that will show up</li>
 <li>If “PLANNED TRANSFER” is used - the picking won’t be validated automatically</li>
+</ul>
+<p>If you want to transfer a full quant:</p>
+<ul class="simple">
+<li>Go to <cite>Inventory &gt; Master Data &gt; Products</cite> and click “On hand” smart button
+or <cite>Inventory &gt; Reporting &gt; Inventory</cite>, the quants view will be
+opened.</li>
+<li>Select the quants which you want move to another location</li>
 </ul>
 </div>
 <div class="section" id="known-issues-roadmap">
@@ -429,6 +437,7 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <ul class="simple">
 <li>Mathieu Vatel &lt;<a class="reference external" href="mailto:mathieu&#64;julius.fr">mathieu&#64;julius.fr</a>&gt;</li>
 <li>Mykhailo Panarin &lt;<a class="reference external" href="mailto:m.panarin&#64;mobilunity.com">m.panarin&#64;mobilunity.com</a>&gt;</li>
+<li>Sergio Teruel &lt;<a class="reference external" href="mailto:sergio.teruel&#64;tecnativa.com">sergio.teruel&#64;tecnativa.com</a>&gt;</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
