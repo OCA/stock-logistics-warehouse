@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--  To move quants directly from qants views  -->
+    <act_window id="wiz_stock_quant_location_action"
+        name="Move to location..."
+        res_model="wiz.stock.move.location"
+        src_model="stock.quant"
+        view_mode="form"
+        context="{'origin_location_disable': True}"
+        target="new"
+        key2="client_action_multi"
+        groups="stock.group_stock_user"
+    />
+
+</odoo>
