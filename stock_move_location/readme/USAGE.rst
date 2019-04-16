@@ -8,3 +8,11 @@
   it will move only the available quantity at the button press
 * Products will be moved and a form view of picking that did that will show up
 * If "PLANNED TRANSFER" is used - the picking won't be validated automatically
+
+If you want to transfer a full quant:
+
+*  Go to `Inventory > Master Data > Products` and click "On hand" smart button
+   or `Inventory > Reporting > Inventory`, the quants view will be
+   opened.
+
+*  Select the quants which you want move to another location
