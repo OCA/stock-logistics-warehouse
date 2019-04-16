@@ -1,8 +1,10 @@
 # Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
 # Copyright 2018 Camptocamp SA
+# Copyright 2019 Sergio Teruel - Tecnativa <sergio.teruel@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import api, fields, models
+from odoo.fields import first
 
 
 class StockMoveLocationWizard(models.TransientModel):
@@ -30,19 +32,38 @@ class StockMoveLocationWizard(models.TransientModel):
         comodel_name="stock.picking",
     )
 
-    @api.onchange('origin_location_id', 'destination_location_id')
-    def _onchange_locations(self):
-        self._clear_lines()
+    @api.model
+    def default_get(self, fields):
+        res = super().default_get(fields)
+        if self.env.context.get('active_model', False) != 'stock.quant':
+            return res
+        # Load data directly from quants
+        quants = self.env['stock.quant'].browse(
+            self.env.context.get('active_ids', False))
+        res['stock_move_location_line_ids'] = [(0, 0, {
+            'product_id': quant.product_id.id,
+            'move_quantity': quant.quantity,
+            'max_quantity': quant.quantity,
+            'origin_location_id': quant.location_id.id,
+            'lot_id': quant.lot_id.id,
+            'product_uom_id': quant.product_uom_id.id,
+            'custom': False,
+        }) for quant in quants]
+        res['origin_location_id'] = first(quants).location_id.id
+        return res
+
+    @api.onchange('origin_location_id')
+    def _onchange_origin_location_id(self):
+        if not self.env.context.get('origin_location_disable', False):
+            self._clear_lines()
+
+    @api.onchange('destination_location_id')
+    def _onchange_destination_location_id(self):
+        for line in self.stock_move_location_line_ids:
+            line.destination_location_id = self.destination_location_id
 
     def _clear_lines(self):
-        origin = self.origin_location_id
-        destination = self.destination_location_id
-        # there is `invalidate_cache` call inside the unlink
-        # which will clear the wizard - not cool.
-        # we have to keep the values somehow
-        self.stock_move_location_line_ids.unlink()
-        self.origin_location_id = origin
-        self.destination_location_id = destination
+        self.stock_move_location_line_ids = False
 
     def _get_locations_domain(self):
         return [('usage', '=', 'internal')]
