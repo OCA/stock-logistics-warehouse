@@ -129,6 +129,11 @@ msgid "Move quantity can not exceed max quantity or be negative"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.actions.act_window,name:stock_move_location.wiz_stock_quant_location_action
+msgid "Move to location..."
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_origin_location_id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_origin_location_id
 msgid "Origin Location"
