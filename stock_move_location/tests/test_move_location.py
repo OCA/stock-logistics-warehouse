@@ -88,7 +88,12 @@ class TestMoveLocation(TestsCommon):
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.add_lines()
         self.assertEqual(len(wizard.stock_move_location_line_ids), 4)
-        wizard._onchange_locations()
+        wizard._onchange_destination_location_id()
+        self.assertEqual(len(wizard.stock_move_location_line_ids), 4)
+        dest_location_line = wizard.stock_move_location_line_ids.mapped(
+            'destination_location_id')
+        self.assertEqual(dest_location_line, wizard.destination_location_id)
+        wizard._onchange_origin_location_id()
         self.assertEqual(len(wizard.stock_move_location_line_ids), 0)
 
     def test_planned_transfer(self):
@@ -103,3 +108,24 @@ class TestMoveLocation(TestsCommon):
             sorted(picking.move_line_ids.mapped("qty_done")),
             [1, 1, 1, 123],
         )
+
+    def test_quant_transfer(self):
+        """Test quants transfer."""
+        quants = self.product_lots.stock_quant_ids
+        wizard = self.wizard_obj.with_context(
+            active_model='stock.quant',
+            active_ids=quants.ids,
+            origin_location_disable=True
+        ).create({
+            "origin_location_id": quants[:1].location_id.id,
+            "destination_location_id": self.internal_loc_2.id,
+        })
+        lines = wizard.stock_move_location_line_ids
+        self.assertEqual(len(lines), 3)
+        wizard.destination_location_id = self.internal_loc_1
+        wizard._onchange_destination_location_id()
+        self.assertEqual(
+            lines.mapped('destination_location_id'), self.internal_loc_1)
+        wizard.origin_location_id = self.internal_loc_2
+        wizard._onchange_destination_location_id()
+        self.assertEqual(len(lines), 3)
