@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import odoo.tests.common as common
-from odoo.exceptions import ValidationError
+import openerp.tests.common as common
+from openerp.exceptions import ValidationError
 
 
 class TestProductPackaging(common.TransactionCase):
@@ -14,10 +14,12 @@ class TestProductPackaging(common.TransactionCase):
         self.product_tmpl_dozen = self.env['product.template'].create({
             'name': 'PRODUCT DOZEN',
             'uom_id': self.uom_dozen.id,
+            'tracking': 'none',
         })
         self.product_tmpl_unit = self.env['product.template'].create({
             'name': 'PRODUCT UNIT',
             'uom_id': self.uom_unit.id,
+            'tracking': 'none',
         })
 
     def test_compute_quantity_by_package(self):

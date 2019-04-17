@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-27 11:37+0000\n"
+"POT-Creation-Date: 2019-04-17 13:12+0000\n"
 "PO-Revision-Date: 2018-02-27 11:37+0000\n"
 "Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
@@ -37,7 +37,7 @@ msgid "Packaging"
 msgstr "Empaquetado"
 
 #. module: packaging_uom
-#: code:addons/packaging_uom/models/product_packaging.py:83
+#: code:addons/packaging_uom/models/product_packaging.py:85
 #, python-format
 msgid "The field Unit of Measure is required"
 msgstr "El campo Unidad de medida es obligatorio"

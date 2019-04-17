@@ -7,14 +7,15 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
-            <page name="general_information" position="after">
+            <group name="packaging" position="replace"/>
+            <xpath expr="//notebook/page[1]" position="after">
                 <page name="packaging" string="Packaging"  attrs="{'invisible':[('type','=','service')]}" groups="product.group_stock_packaging" >
                     <group name="packaging" string="Packaging">
                         <field name="packaging_ids" string="Configurations"
                                context="{'get_uom_categ_from_uom': uom_id, 'tree_view_ref':'product.product_packaging_tree_view_product', 'form_view_ref': 'product.product_packaging_form_view_without_product'}"/>
                     </group>
                 </page>
-            </page>
+            </xpath>
         </field>
     </record>
 

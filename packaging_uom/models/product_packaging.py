@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from openerp import api, fields, models, _
+from openerp.exceptions import ValidationError
 
 
 class ProductPackaging(models.Model):
@@ -42,8 +42,10 @@ class ProductPackaging(models.Model):
         """
         for packaging in self:
             if packaging.uom_id and packaging.product_tmpl_id:
-                packaging.qty = packaging.uom_id._compute_quantity(
-                    1, to_unit=packaging.product_tmpl_id.uom_id)
+                packaging.qty = self.env['product.uom']._compute_qty_obj(
+                    packaging.uom_id,
+                    1,
+                    to_unit=packaging.product_tmpl_id.uom_id)
             else:
                 packaging.qty = 0
 
