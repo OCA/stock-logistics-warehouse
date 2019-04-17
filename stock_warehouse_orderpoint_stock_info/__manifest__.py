@@ -8,10 +8,8 @@
 
 {
     "name": "Stock Warehouse Orderpoint Stock Info",
-    "version": "11.0.1.0.0",
-    "depends": [
-        "stock",
-    ],
+    "version": "12.0.1.0.0",
+    "depends": ["stock"],
     "author": "OdooMRP team, "
               "AvanzOSC, "
               "Tecnativa, "
@@ -22,4 +20,5 @@
     "data": [
         "views/stock_warehouse_orderpoint_view.xml",
     ],
+    "installable": True
 }
