@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-stock_orderpoint_purchase_link',
         'odoo12-addon-stock_orderpoint_uom',
         'odoo12-addon-stock_request',
+        'odoo12-addon-stock_secondary_unit',
     ],
     classifiers=[
         'Programming Language :: Python',
