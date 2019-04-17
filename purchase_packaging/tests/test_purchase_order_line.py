@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import odoo.tests.common as common
+import openerp.tests.common as common
 
 
 class TestPurchaseOrderLine(common.TransactionCase):
@@ -57,7 +57,7 @@ class TestPurchaseOrderLine(common.TransactionCase):
         po = self.env['purchase.order'].create(
             {'partner_id': self.product_supplier_info.name.id})
         po_line = po.order_line.new({
-            'product_id': self.product_tmpl_id.product_variant_id,
+            'product_id': self.product_tmpl_id.product_variant_ids[:1],
             'product_purchase_qty': 1.0,
             'product_purchase_uom_id':
                 po.order_line._default_product_purchase_uom_id(),
@@ -93,7 +93,7 @@ class TestPurchaseOrderLine(common.TransactionCase):
         po = self.env['purchase.order'].create(
             {'partner_id': self.product_supplier_info.name.id})
         po_line = po.order_line.new({
-            'product_id': self.product_tmpl_id.product_variant_id,
+            'product_id': self.product_tmpl_id.product_variant_ids[:1],
             'product_purchase_qty': 1.0,
             'product_purchase_uom_id':
                 po.order_line._default_product_purchase_uom_id(),
@@ -116,7 +116,7 @@ class TestPurchaseOrderLine(common.TransactionCase):
         po = self.env['purchase.order'].create(
             {'partner_id': self.product_supplier_info.name.id})
         po_line = po.order_line.new({
-            'product_id': self.product_tmpl_id.product_variant_id,
+            'product_id': self.product_tmpl_id.product_variant_ids[:1],
             'product_purchase_qty': 1.0,
             'product_purchase_uom_id':
                 po.order_line._default_product_purchase_uom_id(),

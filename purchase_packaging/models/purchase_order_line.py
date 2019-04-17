@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
-import odoo.addons.decimal_precision as dp
+from openerp import api, fields, models
+import openerp.addons.decimal_precision as dp
 
 
 class PurchaseOrderLine(models.Model):
@@ -41,7 +41,8 @@ class PurchaseOrderLine(models.Model):
     @api.multi
     def _get_product_seller(self):
         self.ensure_one()
-        return self.product_id._select_seller(
+        return self.env['product.product']._select_seller(
+            self.product_id,
             partner_id=self.order_id.partner_id,
             quantity=self.product_qty,
             date=self.order_id.date_order and fields.Date.to_string(
@@ -65,7 +66,8 @@ class PurchaseOrderLine(models.Model):
              ('uom_type', '=', 'reference')])
         uom_by_category = {to_uom.category_id: to_uom for to_uom in to_uoms}
         for line in self:
-            line.product_qty = line.product_purchase_uom_id._compute_quantity(
+            line.product_qty = uom_obj._compute_qty_obj(
+                line.product_purchase_uom_id,
                 line.product_purchase_qty,
                 uom_by_category.get(line.product_purchase_uom_id.category_id))
 
@@ -89,7 +91,8 @@ class PurchaseOrderLine(models.Model):
                     product_purchase_uom = supplier.min_qty_uom_id
                     from_uom = uom_by_category.get(
                         line.product_purchase_uom_id.category_id)
-                    line.product_purchase_qty = from_uom._compute_quantity(
+                    line.product_purchase_qty = uom_obj._compute_qty_obj(
+                        from_uom,
                         line.product_qty,
                         product_purchase_uom)
                     line.product_purchase_uom_id = product_purchase_uom.id
@@ -142,7 +145,8 @@ class PurchaseOrderLine(models.Model):
                  supplier.min_qty_uom_id.category_id.id),
                 ('uom_type', '=', 'reference')], limit=1)
             to_uom = to_uom and to_uom[0]
-            self.product_qty = supplier.min_qty_uom_id._compute_quantity(
+            self.product_qty = self.env['product.uom']._compute_qty_obj(
+                supplier.min_qty_uom_id,
                 supplier.min_qty, to_uom
             )
         self.packaging_id = supplier.packaging_id
@@ -154,12 +158,13 @@ class PurchaseOrderLine(models.Model):
         return res
 
     @api.multi
-    def _prepare_stock_moves(self, picking):
-        self.ensure_one()
-        val = super(PurchaseOrderLine, self)._prepare_stock_moves(picking)
-        for v in val:
-            v['product_packaging'] = self.packaging_id.id
-        return val
+    def _create_stock_moves(self, picking):
+        moves = super(PurchaseOrderLine, self)._create_stock_moves(picking)
+        for move in moves:
+            move.product_packaging = self.filtered(
+                lambda order_line: order_line == move.purchase_line_id).\
+                packaging_id
+        return moves
 
     @api.model
     def update_vals(self, vals):
@@ -183,7 +188,8 @@ class PurchaseOrderLine(models.Model):
             to_uom = uom_obj.search(
                 [('category_id', '=', product_purchase_uom.category_id.id),
                  ('uom_type', '=', 'reference')], limit=1)
-            vals['product_qty'] = to_uom._compute_quantity(
+            vals['product_qty'] = uom_obj._compute_qty_obj(
+                to_uom,
                 vals['product_purchase_qty'],
                 to_uom)
         return super(PurchaseOrderLine, self).create(self.update_vals(vals))

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
-from odoo.tools import float_compare
+from openerp import api, fields, models
+from openerp.tools import float_compare
 
 
 class ProcurementOrder(models.Model):
@@ -15,7 +15,8 @@ class ProcurementOrder(models.Model):
         self.ensure_one()
         res = super(ProcurementOrder, self)._prepare_purchase_order_line(
             po, supplier)
-        seller = self.product_id._select_seller(
+        seller = self.env['product.product']._select_seller(
+            self.product_id,
             partner_id=supplier.name,
             quantity=res['product_qty'],
             date=po.date_order and fields.Date.to_string(
@@ -26,7 +27,8 @@ class ProcurementOrder(models.Model):
             new_uom_id = seller.product_uom
             if new_uom_id.id != res['product_uom']:
                 res['product_uom'] = new_uom_id
-                qty = self.product_uom._compute_quantity(
+                qty = self.env['product.uom']._compute_qty_obj(
+                    self.product_uom,
                     self.product_qty, new_uom_id)
                 res['product_qty'] = max(qty, seller.min_qty)
         return res
@@ -36,7 +38,7 @@ class Orderpoint(models.Model):
     _inherit = 'stock.warehouse.orderpoint'
 
     @api.multi
-    def subtract_procurements_from_orderpoints(self):
+    def _subtract_procurements_from_orderpoints(self, res):
         # In this method we need to access the purchase order line quantity
         # to correctly evaluate the forecast.
         # Imagine a product with a minimum rule of 4 units and a purchase
@@ -49,7 +51,6 @@ class Orderpoint(models.Model):
         # be increased to 24 units which is wrong.
         # This override will return 12 and no additionnal procurement will be
         # created
-        res = super(Orderpoint, self).subtract_procurements_from_orderpoints()
         procurements = self.env['procurement.order'].search([
             ('orderpoint_id', 'in', self.ids),
             ('state', 'not in', ['cancel', 'done']),
@@ -73,4 +74,13 @@ class Orderpoint(models.Model):
                             qty, res[orderpoint.id],
                             precision_rounding=precision) >= 0:
                         res[orderpoint.id] = qty
+        return res
+
+    def subtract_procurements_from_orderpoints(self, cr, uid, orderpoint_ids,
+                                               context=None):
+        res = super(Orderpoint, self).subtract_procurements_from_orderpoints(
+            cr, uid, orderpoint_ids, context)
+        orderpoints = self.pool.get(self._name).browse(
+            cr, uid, orderpoint_ids, context)
+        res = orderpoints._subtract_procurements_from_orderpoints(res)
         return res

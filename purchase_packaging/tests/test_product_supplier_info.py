@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import odoo.tests.common as common
+import openerp.tests.common as common
 
 
 class TestProductSupplierInfo(common.TransactionCase):

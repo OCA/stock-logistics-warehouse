@@ -2,8 +2,8 @@
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import timedelta
-import odoo.tests.common as common
-from odoo import fields
+import openerp.tests.common as common
+from openerp import fields
 
 
 class TestProcurementOrder(common.TransactionCase):
