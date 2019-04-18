@@ -33,8 +33,7 @@ class StockWarehouseOrderpoint(models.Model):
     product_category = fields.Many2one(
         string='Product Category',
         related='product_id.categ_id',
-        store=True,
-        readonly=True
+        store=True
     )
 
     @api.multi
