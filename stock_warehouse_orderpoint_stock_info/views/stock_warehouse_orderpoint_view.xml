@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-        <record model="ir.ui.view" id="stock_warehouse_orderpoint_tree_view">
+        <record id="view_warehouse_orderpoint_tree" model="ir.ui.view">
             <field name="name">stock.warehouse.orderpoint.tree</field>
             <field name="model">stock.warehouse.orderpoint</field>
             <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree" />
@@ -17,7 +17,7 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="stock_warehouse_orderpoint_form_view">
+        <record id="view_warehouse_orderpoint_form" model="ir.ui.view">
             <field name="name">stock.warehouse.orderpoint.form</field>
             <field name="model">stock.warehouse.orderpoint</field>
             <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form" />
@@ -31,8 +31,8 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="stock_warehouse_orderpoint_search_view">
-            <field name="name">stock.warehouser.orderpoint.search</field>
+        <record id="warehouse_orderpoint_search" model="ir.ui.view">
+            <field name="name">stock.warehouse.orderpoint.search</field>
             <field name="model">stock.warehouse.orderpoint</field>
             <field name="inherit_id" ref="stock.warehouse_orderpoint_search" />
             <field name="arch" type="xml">
@@ -40,10 +40,12 @@
                     <field name="product_category" filter_domain="[('product_category','child_of',self)]"/>
                 </field>
                 <xpath expr="//group[1]" position="inside">
-                    <filter string="Product"
+                    <filter name="product"
+                            string="Product"
                             domain="[]"
                             context="{'group_by':'product_id'}"/>
-                    <filter string="Product Category"
+                    <filter name="product_category"
+                            string="Product Category"
                             domain="[]"
                             context="{'group_by':'product_category'}"/>
                 </xpath>

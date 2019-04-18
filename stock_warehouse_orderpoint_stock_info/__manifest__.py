@@ -8,7 +8,7 @@
 
 {
     "name": "Stock Warehouse Orderpoint Stock Info",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "depends": [
         "stock",
     ],
@@ -22,4 +22,5 @@
     "data": [
         "views/stock_warehouse_orderpoint_view.xml",
     ],
+    "installable": True
 }
