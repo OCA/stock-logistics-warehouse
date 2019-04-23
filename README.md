@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/OCA/stock-logistics-warehouse.svg?branch=11.0)](https://travis-ci.org/OCA/stock-logistics-warehouse)
 [![Coverage Status](https://img.shields.io/coveralls/OCA/stock-logistics-warehouse/badge.png?branch=11.0)](https://coveralls.io/r/OCA/stock-logistics-warehouse?branch=11.0)
 
-Odoo Stock Logistic Warehouse
-=============================
+Odoo Stock Logistics Warehouse
+==============================
 
 
 This project aim to deal with modules related to the management of warehouses. You'll find modules that:
