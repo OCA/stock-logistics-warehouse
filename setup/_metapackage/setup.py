@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo12-addon-stock_request',
         'odoo12-addon-stock_secondary_unit',
         'odoo12-addon-stock_warehouse_calendar',
+        'odoo12-addon-stock_warehouse_orderpoint_stock_info',
     ],
     classifiers=[
         'Programming Language :: Python',
