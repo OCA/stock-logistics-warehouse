@@ -25,4 +25,20 @@
         </field>
     </record>
 
+    <record id="view_warehouse_orderpoint_move_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.move.form</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button type="object"
+                    name="action_view_stock_picking"
+                    class="oe_stat_button"
+                    string="Transfers"
+                    icon="fa-arrows-h">
+                </button>
+            </div>
+        </field>
+    </record>
+
 </odoo>
