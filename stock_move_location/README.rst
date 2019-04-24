@@ -25,7 +25,8 @@ Move Stock Location
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module allows to move entire location of products from one place to another
+This module allows to move entire location of products from one place to
+another and move only selected quants.
 
 **Table of contents**
 
@@ -45,6 +46,14 @@ Usage
   it will move only the available quantity at the button press
 * Products will be moved and a form view of picking that did that will show up
 * If "PLANNED TRANSFER" is used - the picking won't be validated automatically
+
+If you want to transfer a full quant:
+
+*  Go to `Inventory > Master Data > Products` and click "On hand" smart button
+   or `Inventory > Reporting > Inventory`, the quants view will be
+   opened.
+
+*  Select the quants which you want move to another location
 
 Known issues / Roadmap
 ======================
@@ -79,6 +88,7 @@ Contributors
 
 * Mathieu Vatel <mathieu@julius.fr>
 * Mykhailo Panarin <m.panarin@mobilunity.com>
+* Sergio Teruel <sergio.teruel@tecnativa.com>
 
 Maintainers
 ~~~~~~~~~~~
