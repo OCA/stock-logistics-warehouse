@@ -57,7 +57,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12" style="height:10%;">
-                        <img t-att-src="'/report/barcode/%s/%s?width=%s&amp;height=%s' % ('Standard39', o.name, 320, 20)"
+                        <img t-att-src="'/report/barcode/%s/%s?width=%s&amp;height=%s' % (o.get_barcode_format(), o.name, 320, 20)"
                              style="height:80%; width: 100%;"/>
                     </div>
                 </div>

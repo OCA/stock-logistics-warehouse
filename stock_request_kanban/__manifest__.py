@@ -3,7 +3,7 @@
 
 {
     'name': 'Stock Request kanban',
-    'version': '11.0.1.0.1',
+    'version': '11.0.1.2.0',
     'category': 'Reporting',
     'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'author': 'Creu Blanca, Eficent, Odoo Community Association (OCA)',
