@@ -22,10 +22,16 @@ class StockRequestKanban(models.Model):
 
     @api.model
     def get_barcode_format(self):
-        return 'Standard39'
+        return self.env['ir.config_parameter'].sudo().get_param(
+            'stock_request_kanban.barcode_format', default='Standard39'
+        )
 
     @api.model
     def _recompute_barcode(self, barcode):
+        if self.env['ir.config_parameter'].sudo().get_param(
+            'stock_request_kanban.crc', default='1'
+        ) == '0':
+            return barcode
         bcc = getCodes()[self.get_barcode_format()](value=barcode[:-1])
         bcc.validate()
         bcc.encode()

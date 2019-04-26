@@ -61,6 +61,8 @@ class TestKanban(TestBaseKanban):
             'company_id': self.main_company.id,
             'propagate': 'False',
         })
+        self.env['ir.config_parameter'].set_param(
+            'stock_request_kanban.crc', '1')
 
     def test_onchanges(self):
         kanban = self.env['stock.request.kanban'].new({})
@@ -143,6 +145,11 @@ class TestKanban(TestBaseKanban):
             'product_uom_id': self.product.uom_id.id,
             'product_uom_qty': 1,
         })
+        kanban_3 = self.env['stock.request.kanban'].create({
+            'product_id': self.product.id,
+            'product_uom_id': self.product.uom_id.id,
+            'product_uom_qty': 1,
+        })
         wizard = self.env['wizard.stock.request.kanban'].with_context(
         ).create({})
         with self.assertRaises(ValidationError):
@@ -161,4 +168,16 @@ class TestKanban(TestBaseKanban):
         self.pass_code(wizard, kanban_2.name)
         self.assertTrue(self.env['stock.request'].search(
             [('kanban_id', '=', kanban_2.id)])
+        )
+        with self.assertRaises(ValidationError):
+            wizard.on_barcode_scanned(kanban_3.name)
+        self.assertFalse(self.env['stock.request'].search(
+            [('kanban_id', '=', kanban_3.id)])
+        )
+        self.env['ir.config_parameter'].set_param(
+            'stock_request_kanban.crc', '0')
+        wizard.on_barcode_scanned(kanban_3.name)
+        self.assertEqual(wizard.status_state, 0)
+        self.assertTrue(self.env['stock.request'].search(
+            [('kanban_id', '=', kanban_3.id)])
         )
