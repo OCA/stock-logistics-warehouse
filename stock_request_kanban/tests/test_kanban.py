@@ -181,4 +181,3 @@ class TestKanban(TestBaseKanban):
         self.assertTrue(self.env['stock.request'].search(
             [('kanban_id', '=', kanban_3.id)])
         )
-
