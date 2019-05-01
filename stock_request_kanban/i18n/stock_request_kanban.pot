@@ -63,7 +63,7 @@ msgid "Barcode %s is on the order"
 msgstr ""
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/models/stock_request_kanban.py:33
+#: code:addons/stock_request_kanban/models/stock_request_kanban.py:39
 #, python-format
 msgid "CRC is not valid"
 msgstr ""
