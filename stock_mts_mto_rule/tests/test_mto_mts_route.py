@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import exceptions
@@ -79,7 +78,7 @@ class TestMtoMtsRoute(TransactionCase):
                          moves[0].procure_method)
 
     def test_mts_mto_rule_contrains(self):
-        rule = self.env['procurement.rule'].search(
+        rule = self.env['stock.rule'].search(
             [('action', '=', 'split_procurement')], limit=1)
         with self.assertRaises(exceptions.ValidationError):
             rule.write({'mts_rule_id': False})
@@ -88,30 +87,32 @@ class TestMtoMtsRoute(TransactionCase):
 
     def test_mts_mto_route_mto_removed(self):
         self.env.ref('stock_mts_mto_rule.route_mto_mts').unlink()
-        self.warehouse.mts_mto_rule_id = False
-        with self.assertRaises(exceptions.Warning):
-            self.warehouse.mto_mts_management = True
+        with self.assertRaises(exceptions.UserError):
+            # mts_mto_rule_id is checked as a global rule
+            self.warehouse.mts_mto_rule_id = False
 
     def test_mts_mto_route_mts_removed(self):
         self.warehouse.mto_mts_management = True
-        self.env['procurement.rule'].search([
+        rules = self.env['stock.rule'].search([
             ('location_src_id', '=', self.warehouse.lot_stock_id.id),
             ('route_id', '=', self.warehouse.delivery_route_id.id),
-        ]).unlink()
+        ])
+        self.env.cr.execute(
+            'UPDATE stock_move SET rule_id = NULL WHERE rule_id IN %s',
+            (tuple(rules.ids), ))
         self.warehouse.mts_mto_rule_id = False
-        with self.assertRaises(exceptions.Warning):
-            self.warehouse.mto_mts_management = True
+        self.warehouse.mto_mts_management = True
+        self.assertTrue(self.warehouse.mts_mto_rule_id)
 
     def test_mts_mto_route_mto_no_mts_rule(self):
         self.warehouse.mts_mto_rule_id = False
         self.warehouse.mto_pull_id = False
-        with self.assertRaises(exceptions.Warning):
-            self.warehouse.mto_mts_management = True
+        self.warehouse.mto_mts_management = True
+        self.assertTrue(self.warehouse.mts_mto_rule_id)
 
     def test_create_routes(self):
-        rule_obj = self.env['procurement.rule']
-        created_routes = self.warehouse.create_routes()
-        mts_mto_route = rule_obj.browse(created_routes['mts_mto_rule_id'])
+        self.warehouse._create_or_update_route()
+        mts_mto_route = self.warehouse.mts_mto_rule_id
         self.assertEqual(mts_mto_route.warehouse_id, self.warehouse)
         self.assertEqual(
             mts_mto_route.location_id, self.warehouse.mto_pull_id.location_id)
@@ -126,11 +127,10 @@ class TestMtoMtsRoute(TransactionCase):
         warehouse_rule = self.warehouse.mts_mto_rule_id
         self.assertTrue(self.warehouse.mts_mto_rule_id)
         self.warehouse.mto_mts_management = False
-        self.assertFalse(warehouse_rule.exists())
-        self.assertFalse(self.warehouse.mts_mto_rule_id)
+        self.assertFalse(warehouse_rule.active)
 
     def test_get_all_routes_for_wh(self):
-        routes = self.warehouse.get_all_routes_for_wh()
+        routes = self.warehouse._get_all_routes()
         self.assertTrue(self.warehouse.mts_mto_rule_id)
         self.assertTrue(self.warehouse.mts_mto_rule_id.route_id in routes)
 
@@ -146,7 +146,7 @@ class TestMtoMtsRoute(TransactionCase):
         super(TestMtoMtsRoute, self).setUp()
         self.move_obj = self.env['stock.move']
         self.warehouse = self.env.ref('stock.warehouse0')
-        self.uom = self.env['product.uom'].browse(1)
+        self.uom = self.env['uom.uom'].browse(1)
         self.warehouse.mto_mts_management = True
         self.customer_loc = self.env.ref('stock.stock_location_customers')
         self.product = self.env.ref('product.product_product_4')
@@ -169,11 +169,11 @@ class TestMtoMtsRoute(TransactionCase):
             'location_id': self.env.ref('stock.stock_location_stock').id,
             'location_src_id': self.env.ref(
                 'stock.stock_location_suppliers').id,
-            'action': 'move',
+            'action': 'pull',
             'warehouse_id': self.warehouse.id,
             'picking_type_id': self.env.ref('stock.picking_type_out').id,
             'name': 'dummy rule',
             'route_id': self.dummy_route.id,
         }
-        self.dummy_rule = self.env['procurement.rule'].create(rule_vals)
+        self.dummy_rule = self.env['stock.rule'].create(rule_vals)
         self.warehouse.write({'route_ids': [(4, self.dummy_route.id)]})
