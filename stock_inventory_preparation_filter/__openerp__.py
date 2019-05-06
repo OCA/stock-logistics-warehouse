@@ -25,6 +25,7 @@
     "author": "OdooMRP team,"
               "AvanzOSC,"
               "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
+              "Noviat SA,"
               "Odoo Community Association (OCA)",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
