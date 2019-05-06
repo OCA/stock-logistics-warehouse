@@ -59,11 +59,9 @@
                     <p><i class="fa fa-thumbs-down"/> Operation has been <b>rejected</b>.</p>
                 </div>
             </header>
-            <notebook position="inside">
-                <page string="Reviews" name="tier_validation">
-                    <field name="review_ids" readonly="1"/>
-                </page>
-            </notebook>
+            <div name="button_box" position="inside">
+                <field name="review_ids" widget="review_popup" attrs="{'invisible':[('review_ids', '=', [])]}"/>
+            </div>
         </field>
     </record>
 
@@ -82,6 +80,37 @@
                             help="Stock Requests validated and ready to be confirmed"/>
                 </group>
             </search>
+        </field>
+    </record>
+
+    <record id="tier_review_form_wiz" model="ir.ui.view">
+        <field name="name">stock.request.order.reviews</field>
+        <field name="model">stock.request.order</field>
+        <field name="arch" type="xml">
+            <form string="Tier Review">
+                <group>
+                    <field name="review_ids" nolabel="1" readonly="1">
+                        <tree create="false"
+                              decoration-danger="status=='rejected'"
+                              decoration-warning="status=='pending'"
+                              decoration-success="status=='approved'">
+                            <field name="sequence"/>
+                            <field name="requested_by"/>
+                            <field name="review_type"/>
+                            <field name="name"/>
+                            <field name="status"/>
+                            <field name="done_by"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="dismiss_popup"
+                            type="object"
+                            string="Dismiss"
+                            class="oe_highlight"
+                    />
+                </footer>
+            </form>
         </field>
     </record>
 
