@@ -10,20 +10,20 @@
                     <notebook position="attributes">
                         <attribute name="attrs" />
                     </notebook>
-                    <page string="Inventory Details" position="attributes">
+                    <xpath expr="//button[@name='reset_real_qty']/parent::page" position="attributes">
                         <attribute name="attrs">{'invisible':[('state','=','draft')]}</attribute>
-                    </page>
+                    </xpath>
                     <notebook position="before">
                         <group>
                             <field name="categ_ids"
                                    nolabel="1"
-                                   attrs="{'invisible':[('filter','!=','categories')]}" />
+                                   attrs="{'invisible':[('filter','!=','categories')], 'readonly':[('state', '!=', 'draft')]}" />
                             <field name="product_ids"
                                    nolabel="1"
-                                   attrs="{'invisible':[('filter','!=','products')]}" />
+                                   attrs="{'invisible':[('filter','!=','products')], 'readonly':[('state', '!=', 'draft')]}" />
                             <field name="lot_ids"
                                    nolabel="1"
-                                   attrs="{'invisible':[('filter','!=','lots')]}" />
+                                   attrs="{'invisible':[('filter','!=','lots')], 'readonly':[('state', '!=', 'draft')]}" />
                         </group>
                     </notebook>
                     <notebook position="inside">

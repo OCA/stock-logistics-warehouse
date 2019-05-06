@@ -34,6 +34,7 @@ class StockInventoryEmptyLines(models.Model):
 class StockInventoryFake(object):
     def __init__(self, inventory, product=None, lot=None):
         self.id = inventory.id
+        self.company_id = inventory.company_id
         self.location_id = inventory.location_id
         self.product_id = product
         self.lot_id = lot

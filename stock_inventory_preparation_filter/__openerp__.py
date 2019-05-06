@@ -18,7 +18,7 @@
 
 {
     "name": "Extended Inventory Preparation Filters",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "depends": [
         "stock",
     ],
@@ -29,6 +29,7 @@
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
+        "Benjamin Henquet <benjamin.henquet@gmail.com>",
     ],
     "category": "Inventory, Logistic, Storage",
     "website": "http://www.odoomrp.com",
@@ -37,5 +38,5 @@
         "views/stock_inventory_view.xml",
         "security/ir.model.access.csv",
     ],
-    'installable': False,
+    'installable': True,
 }
