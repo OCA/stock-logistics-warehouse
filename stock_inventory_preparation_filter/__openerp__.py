@@ -30,7 +30,7 @@
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
         "Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>",
-        "Benjamin Henquet <benjamin.henquet@gmail.com>",
+        "Benjamin Henquet <benjamin.henquet@noviat.com>",
     ],
     "category": "Inventory, Logistic, Storage",
     "website": "http://www.odoomrp.com",
