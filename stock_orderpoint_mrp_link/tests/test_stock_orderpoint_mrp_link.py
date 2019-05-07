@@ -1,6 +1,6 @@
 # Copyright 2019 Eficent Business and IT Consulting Services S.L.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+import ast
 from odoo.tests.common import SavepointCase
 
 
@@ -104,3 +104,11 @@ class TestStockOrderpointMRPLink(SavepointCase):
         self.assertTrue(mo2)
         self.assertEqual(mo2.orderpoint_id, self.orderpoint_secondary_loc)
         self.assertEqual(mo2.orderpoint_id, self.orderpoint_secondary_loc)
+
+    def test_03_stock_orderpoint_mrp_link_action_view(self):
+        mo_orderpoint = self.production_model.search([
+            ('orderpoint_id', '=', self.orderpoint_secondary_loc.id)])
+        result = self.orderpoint_secondary_loc.action_view_mrp_productions()
+        mo_action = self.production_model.search(
+            ast.literal_eval(result['domain']))
+        self.assertEquals(mo_orderpoint, mo_action)
