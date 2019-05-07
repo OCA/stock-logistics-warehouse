@@ -19,6 +19,16 @@ msgid "Manufacturing Order"
 msgstr ""
 
 #. module: stock_orderpoint_mrp_link
+#: model:ir.ui.view,arch_db:stock_orderpoint_mrp_link.view_warehouse_orderpoint_move_form
+msgid "Manufacturing Orders"
+msgstr ""
+
+#. module: stock_orderpoint_mrp_link
+#: model:ir.model,name:stock_orderpoint_mrp_link.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr ""
+
+#. module: stock_orderpoint_mrp_link
 #: model:ir.model,name:stock_orderpoint_mrp_link.model_procurement_rule
 msgid "Procurement Rule"
 msgstr ""
