@@ -206,7 +206,7 @@ msgstr "Agrupa las solicitudes en pedidos"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_id
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5885
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5891
 msgid "ID"
 msgstr "ID"
 
