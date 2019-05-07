@@ -33,6 +33,12 @@ msgid "<i class=\"fa fa-thumbs-up\"/> Operation has been <b>validated</b>!"
 msgstr ""
 
 #. module: stock_request_tier_validation
+#: model:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_form_wiz
+#: model:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_order_form_wiz
+msgid "Dismiss"
+msgstr ""
+
+#. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "My Purchases to review"
@@ -69,12 +75,6 @@ msgid "Restart Validation"
 msgstr ""
 
 #. module: stock_request_tier_validation
-#: model:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
-#: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid "Reviews"
-msgstr ""
-
-#. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_stock_request
 msgid "Stock Request"
 msgstr ""
@@ -88,6 +88,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Stock Requests validated and ready to be confirmed"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_form_wiz
+#: model:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_order_form_wiz
+msgid "Tier Review"
 msgstr ""
 
 #. module: stock_request_tier_validation
