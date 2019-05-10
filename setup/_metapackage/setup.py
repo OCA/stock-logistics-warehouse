@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo12-addon-stock_orderpoint_uom',
         'odoo12-addon-stock_picking_procure_method',
         'odoo12-addon-stock_request',
+        'odoo12-addon-stock_request_picking_type',
         'odoo12-addon-stock_secondary_unit',
         'odoo12-addon-stock_warehouse_calendar',
         'odoo12-addon-stock_warehouse_orderpoint_stock_info',
