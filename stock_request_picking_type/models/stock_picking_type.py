@@ -27,7 +27,8 @@ class StockPickingType(models.Model):
                               ('state', 'in', ('draft', 'open'))],
         }
         for field in domains:
-            data = self.env['stock.request'].read_group(domains[field] +
+            data = self.env['stock.request'].read_group(
+                domains[field] +
                 [('state', 'not in', ('done', 'cancel')),
                  ('picking_type_id', 'in', self.ids)],
                 ['picking_type_id'], ['picking_type_id'])
