@@ -10,13 +10,13 @@ class StockPickingType(models.Model):
     code = fields.Selection(selection_add=[('stock_request',
                                             'Stock Request')])
     count_sr_todo = fields.Integer(string="To Do",
-                                   compute='_get_sr_count')
+                                   compute='_compute_sr_count')
     count_sr_open = fields.Integer(string="In Progress",
-                                   compute='_get_sr_count')
+                                   compute='_compute_sr_count')
     count_sr_late = fields.Integer(string="Late",
-                                   compute='_get_sr_count')
+                                   compute='_compute_sr_count')
 
-    def _get_sr_count(self):
+    def _compute_sr_count(self):
         types = self.filtered(lambda picking: picking.code == 'stock_request')
         if not types:
             return
