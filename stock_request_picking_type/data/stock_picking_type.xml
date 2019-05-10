@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+    <record id="stock_request" model="stock.picking.type">
+        <field name="name">Stock Requests</field>
+        <field name="sequence_id" ref="stock_request.seq_stock_request"/>
+        <field name="code">stock_request</field>
+        <field name="sequence">0</field>
+    </record>
+
+</odoo>
