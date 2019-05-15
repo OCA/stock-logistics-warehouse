@@ -15,19 +15,6 @@ class MakeProcurementOrderpoint(models.TransientModel):
         'wiz_id', string='Items')
 
     @api.model
-    def _prepare_item(self, orderpoint):
-        return {
-            'qty': orderpoint.procure_recommended_qty,
-            'qty_without_security': orderpoint.procure_recommended_qty,
-            'uom_id': orderpoint.product_uom.id,
-            'date_planned': orderpoint.procure_recommended_date,  # string
-            'orderpoint_id': orderpoint.id,
-            'product_id': orderpoint.product_id.id,
-            'warehouse_id': orderpoint.warehouse_id.id,
-            'location_id': orderpoint.location_id.id
-        }
-
-    @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                         submenu=False):
         if not self.user_has_groups(
@@ -44,6 +31,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
         res = super(MakeProcurementOrderpoint, self).default_get(fields)
         orderpoint_obj = self.env['stock.warehouse.orderpoint']
         orderpoint_ids = self.env.context['active_ids'] or []
+        mpo_item = self.env['make.procurement.orderpoint.item']
         active_model = self.env.context['active_model']
 
         if not orderpoint_ids:
@@ -53,7 +41,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
 
         items = []
         for line in orderpoint_obj.browse(orderpoint_ids):
-            items.append([0, 0, self._prepare_item(line)])
+            items.append([0, 0, mpo_item._prepare_item(line)])
         res['item_ids'] = items
         return res
 
@@ -76,10 +64,10 @@ class MakeProcurementOrderpoint(models.TransientModel):
             # Run procurement
             try:
                 pg_obj.run(
-                    item.orderpoint_id.product_id,
+                    item.product_id,
                     item.qty,
                     item.uom_id,
-                    item.orderpoint_id.location_id,
+                    item.location_id,
                     item.orderpoint_id.name,
                     item.orderpoint_id.name,
                     values
@@ -125,3 +113,32 @@ class MakeProcurementOrderpointItem(models.TransientModel):
         for rec in self:
             rec.qty = rec.orderpoint_id.product_uom._compute_quantity(
                 rec.orderpoint_id.procure_recommended_qty, rec.uom_id)
+
+    @api.model
+    def default_get(self, fields):
+        res = super(MakeProcurementOrderpointItem, self).default_get(fields)
+        orderpoint_obj = self.env['stock.warehouse.orderpoint']
+        orderpoint_id = self.env.context['active_ids'] or []
+        active_model = self.env.context['active_model']
+
+        if not orderpoint_id:
+            return res
+        assert active_model == 'stock.warehouse.orderpoint', \
+            'Bad context propagation'
+
+        # On each item we only must find 1 orderpoint
+        res = self._prepare_item(orderpoint_obj.browse(orderpoint_id))
+        return res
+
+    @api.model
+    def _prepare_item(self, orderpoint):
+        return {
+            'qty': orderpoint.procure_recommended_qty,
+            'qty_without_security': orderpoint.procure_recommended_qty,
+            'uom_id': orderpoint.product_uom.id,
+            'date_planned': orderpoint.procure_recommended_date,  # string
+            'orderpoint_id': orderpoint.id,
+            'product_id': orderpoint.product_id.id,
+            'warehouse_id': orderpoint.warehouse_id.id,
+            'location_id': orderpoint.location_id.id
+        }

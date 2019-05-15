@@ -5,18 +5,6 @@
 from odoo import api, models
 
 
-class MakeProcurementOrderpoint(models.TransientModel):
-    _inherit = 'make.procurement.orderpoint'
-
-    @api.model
-    def _prepare_item(self, orderpoint):
-        vals = super(MakeProcurementOrderpoint, self)._prepare_item(orderpoint)
-        if orderpoint.procure_uom_id:
-            product_uom = orderpoint.procure_uom_id
-            vals['uom_id'] = product_uom.id
-        return vals
-
-
 class MakeProcurementOrderpointItem(models.TransientModel):
     _inherit = 'make.procurement.orderpoint.item'
 
@@ -29,3 +17,12 @@ class MakeProcurementOrderpointItem(models.TransientModel):
             rec.qty = uom._compute_quantity(
                 rec.orderpoint_id.procure_recommended_qty,
                 rec.uom_id)
+
+    @api.model
+    def _prepare_item(self, orderpoint):
+        vals = super(MakeProcurementOrderpointItem, self)._prepare_item(
+            orderpoint)
+        if orderpoint.procure_uom_id:
+            product_uom = orderpoint.procure_uom_id
+            vals['uom_id'] = product_uom.id
+        return vals
