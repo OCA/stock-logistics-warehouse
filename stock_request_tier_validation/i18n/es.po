@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2019-05-15 15:59+0000\n"
+"Last-Translator: Lois Rilo <lois.rilo@eficent.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
@@ -20,24 +22,26 @@ msgstr ""
 msgid "<i class=\"fa fa-info-circle\"/>This Stock Request needs to be\n"
 "                        validated."
 msgstr ""
+"<i class=\"fa fa-info-circle\"/>Esta Solicitud de existencias debe ser\n"
+"                        validada."
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "<i class=\"fa fa-thumbs-down\"/> Operation has been <b>rejected</b>."
-msgstr ""
+msgstr "<i class=\"fa fa-thumbs-down\"/>La operación ha sido <b>rechazada</b>."
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "<i class=\"fa fa-thumbs-up\"/> Operation has been <b>validated</b>!"
-msgstr ""
+msgstr "<i class=\"fa fa-thumbs-up\"/>La operación ha sido <b>validada</b>!"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_form_wiz
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_order_form_wiz
 msgid "Dismiss"
-msgstr ""
+msgstr "Descartar"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
@@ -49,67 +53,67 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Need actions"
-msgstr ""
+msgstr "Acción necesaria"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Needs my Review"
-msgstr ""
+msgstr "Necesita mi revisión"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Reject"
-msgstr ""
+msgstr "Rechazar"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Request Validation"
-msgstr ""
+msgstr "Solicitar Validación"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Restart Validation"
-msgstr ""
+msgstr "Reiniciar Validación"
 
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_stock_request
 msgid "Stock Request"
-msgstr ""
+msgstr "Solicitud de existencias"
 
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_stock_request_order
 msgid "Stock Request Order"
-msgstr ""
+msgstr "Pedido de existencias"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Stock Requests validated and ready to be confirmed"
-msgstr ""
+msgstr "Pedido de existencias validadas y preparadas para ser confirmadas"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_form_wiz
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_order_form_wiz
 msgid "Tier Review"
-msgstr ""
+msgstr "Revisión de nivel"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Validate"
-msgstr ""
+msgstr "Validar"
 
 #. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Validated"
-msgstr ""
+msgstr "Validada"
 
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_tier_definition
 msgid "tier.definition"
-msgstr ""
+msgstr "tier.definition"
