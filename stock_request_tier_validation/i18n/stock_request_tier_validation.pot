@@ -39,9 +39,13 @@ msgid "Dismiss"
 msgstr ""
 
 #. module: stock_request_tier_validation
-#: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
-msgid "My Purchases to review"
+msgid "My Stock Request Orders to review"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
+msgid "My Stock Requests to review"
 msgstr ""
 
 #. module: stock_request_tier_validation
