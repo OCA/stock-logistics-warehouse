@@ -118,16 +118,20 @@ class MakeProcurementOrderpointItem(models.TransientModel):
     def default_get(self, fields):
         res = super(MakeProcurementOrderpointItem, self).default_get(fields)
         orderpoint_obj = self.env['stock.warehouse.orderpoint']
-        orderpoint_id = self.env.context['active_ids'] or []
+        orderpoint_ids = self.env.context['active_ids'] or []
         active_model = self.env.context['active_model']
 
-        if not orderpoint_id:
+        if not orderpoint_ids:
             return res
         assert active_model == 'stock.warehouse.orderpoint', \
-            'Bad context propagation'
+            UserError('Bad context propagation')
 
-        # On each item we only must find 1 orderpoint
-        res = self._prepare_item(orderpoint_obj.browse(orderpoint_id))
+        # When active_id field is taken from context it does not change on
+        # every iteration on default_get, so the only data it can be trusted
+        # is active_ids. Poping records from active_ids is the only way I
+        # found to ensure data consistency.
+        res = self._prepare_item(orderpoint_obj.browse(orderpoint_ids[0]))
+        self.env.context['active_ids'].pop(0)
         return res
 
     @api.model
