@@ -5,6 +5,7 @@
     <data noupdate="1">
 
         <record id="stock_request_default_tier_definition" model="tier.definition">
+            <field name="name">Manager review</field>
             <field name="model_id" ref="model_stock_request"/>
             <field name="definition_type">domain</field>
             <field name="definition_domain"/>
@@ -14,6 +15,7 @@
         </record>
 
         <record id="stock_request_order_default_tier_definition" model="tier.definition">
+            <field name="name">Manager review</field>
             <field name="model_id" ref="model_stock_request_order"/>
             <field name="definition_type">domain</field>
             <field name="definition_domain"/>
