@@ -62,6 +62,7 @@ msgid "Analytic accounting in Stock Requests"
 msgstr "Contabilidad analítica para solicitudes de existencias"
 
 #. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Archived"
 msgstr "Archivado"
@@ -80,6 +81,8 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
 #: selection:stock.request,state:0 selection:stock.request.order,state:0
 msgid "Cancelled"
 msgstr "Cancelado"
@@ -156,6 +159,8 @@ msgid "Done"
 msgstr "Hecho"
 
 #. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
 #: selection:stock.request,state:0 selection:stock.request.order,state:0
 msgid "Draft"
 msgstr "Borrador"
@@ -193,6 +198,13 @@ msgid "Expected date must be equal to the order"
 msgstr "La fecha prevista debe ser la misma que la del pedido"
 
 #. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Finished"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Group By"
 msgstr "Agrupar por"
@@ -209,6 +221,14 @@ msgstr "Agrupa las solicitudes en pedidos"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_5891
 msgid "ID"
 msgstr "ID"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+#, fuzzy
+#| msgid "In progress"
+msgid "In Progress"
+msgstr "En progreso"
 
 #. module: stock_request
 #: selection:stock.request,state:0 selection:stock.request.order,state:0
@@ -262,6 +282,7 @@ msgstr "Última actualización el"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_kanban_location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order_location_id
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Location"
 msgstr "Ubicación"
@@ -589,6 +610,7 @@ msgstr "Pedido de existencias"
 #. module: stock_request
 #: model:ir.actions.act_window,name:stock_request.stock_request_order_action
 #: model:ir.ui.menu,name:stock_request.stock_request_order_menu
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
 msgid "Stock Request Orders"
 msgstr "Pedidos de existencias"
 
@@ -630,6 +652,13 @@ msgstr "Integración de solicitudes de existencias con contabilidad analítica"
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings_module_stock_request_kanban
 msgid "Stock Requests Kanban integration"
 msgstr "Integración de solicitudes de existencias con tarjetas Kanbans"
+
+#. module: stock_request
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#, fuzzy
+#| msgid "Stock Requests Search"
+msgid "Stock Requests Order Search"
+msgstr "Buscar solicitudes de existencias"
 
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
@@ -729,6 +758,7 @@ msgstr "Usar Compras con las Solicitudes de Existencias"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_kanban_warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order_warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_warehouse_id
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Warehouse"
 msgstr "Almacén"
