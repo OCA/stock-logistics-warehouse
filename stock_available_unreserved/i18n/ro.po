@@ -20,23 +20,23 @@ msgstr ""
 "2:1));\n"
 
 #. module: stock_available_unreserved
-#: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant_contains_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__contains_unreserved
 msgid "Contains unreserved products"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: model:ir.ui.view,arch_db:stock_available_unreserved.quant_search_view
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.quant_search_view
 msgid "Internal Unreserved"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:116
+#: code:addons/stock_available_unreserved/models/product.py:117
 #, python-format
 msgid "Invalid domain operator %s"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:118
+#: code:addons/stock_available_unreserved/models/product.py:119
 #, python-format
 msgid "Invalid domain right operand %s"
 msgstr ""
@@ -52,12 +52,12 @@ msgid "Product Template"
 msgstr "Produs șablon"
 
 #. module: stock_available_unreserved
-#: model:ir.model.fields,field_description:stock_available_unreserved.field_product_product_qty_available_not_res
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_product_product__qty_available_not_res
 msgid "Qty Available Not Reserved"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template_qty_available_not_res
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template__qty_available_not_res
 msgid "Quantity On Hand Unreserved"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: model:ir.ui.view,arch_db:stock_available_unreserved.product_template_search_form_view_stock
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_search_form_view_stock
 msgid "Reservable Products"
 msgstr ""
 
@@ -77,12 +77,12 @@ msgid "Stock On Hand (Unreserved)"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: model:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
-#: model:ir.ui.view,arch_db:stock_available_unreserved.product_template_form_view_procurement_button
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_form_view_procurement_button
 msgid "Unreserved"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: model:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
 msgid "Unreserved:"
 msgstr ""
