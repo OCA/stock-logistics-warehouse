@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_move_location
+# 	* stock_move_location
 #
 msgid ""
 msgstr ""
@@ -130,6 +130,13 @@ msgstr "Asistente para mover desde ubicación"
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
 msgstr "La cantidad movida no puede superar la cantidad máxima o ser negativo"
+
+#. module: stock_move_location
+#: model:ir.actions.act_window,name:stock_move_location.wiz_stock_quant_location_action
+#, fuzzy
+#| msgid "Move from location..."
+msgid "Move to location..."
+msgstr "Mover desde ubicación..."
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_origin_location_id
