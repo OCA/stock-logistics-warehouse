@@ -45,12 +45,12 @@ msgstr "Pravilo minimalne zaloge"
 #. module: stock_orderpoint_uom
 #: model:ir.model,name:stock_orderpoint_uom.model_procurement_group
 #, fuzzy
-msgid "Procurement Requisition"
+#| msgid "Procurement UoM"
+msgid "Procurement Group"
 msgstr "EM oskrbovanja"
 
 #. module: stock_orderpoint_uom
-#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint_procure_uom_id
-#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint_template_procure_uom_id
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint__procure_uom_id
 msgid "Procurement UoM"
 msgstr "EM oskrbovanja"
 
@@ -58,3 +58,7 @@ msgstr "EM oskrbovanja"
 #: model:ir.model,name:stock_orderpoint_uom.model_product_template
 msgid "Product Template"
 msgstr "Predloga proizvoda"
+
+#, fuzzy
+#~ msgid "Procurement Requisition"
+#~ msgstr "EM oskrbovanja"
