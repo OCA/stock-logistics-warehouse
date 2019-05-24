@@ -50,4 +50,10 @@
               parent="stock.menu_stock_warehouse_mgmt"
               sequence="30"/>
 
+    <menuitem id="menu_inv_stock_request"
+              name="Stock Request Orders"
+              action="stock_request.stock_request_order_action"
+              parent="stock.menu_stock_warehouse_mgmt"
+              sequence="35"/>
+
 </odoo>
