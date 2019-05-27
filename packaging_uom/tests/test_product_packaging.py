@@ -8,8 +8,8 @@ class TestProductPackaging(common.TransactionCase):
 
     def setUp(self):
         super(TestProductPackaging, self).setUp()
-        self.uom_unit = self.env.ref('product.product_uom_unit')
-        self.uom_dozen = self.env.ref('product.product_uom_dozen')
+        self.uom_unit = self.env.ref('uom.product_uom_unit')
+        self.uom_dozen = self.env.ref('uom.product_uom_dozen')
         self.product_dozen = self.env['product.product'].create({
             'name': 'PRODUCT DOZEN',
             'uom_id': self.uom_dozen.id,
@@ -61,8 +61,8 @@ class TestProductPackaging(common.TransactionCase):
             product_packaging_unit.uom_categ_domain_id,
             'The UOM domain is not well set'
         )
-        product_uom_24 = self.env['product.uom'].create({
-            'category_id': self.env.ref('product.product_uom_categ_unit').id,
+        product_uom_24 = self.env['uom.uom'].create({
+            'category_id': self.env.ref('uom.product_uom_categ_unit').id,
             'name': 'Double Dozens',
             'factor_inv': 24,
             'uom_type': 'bigger',
@@ -71,8 +71,8 @@ class TestProductPackaging(common.TransactionCase):
         self.assertAlmostEqual(product_packaging_dozen.qty, 0.5)
         product_packaging_unit.uom_id = product_uom_24
         self.assertAlmostEqual(product_packaging_unit.qty, 24)
-        product_uom_6 = self.env['product.uom'].create({
-            'category_id': self.env.ref('product.product_uom_categ_unit').id,
+        product_uom_6 = self.env['uom.uom'].create({
+            'category_id': self.env.ref('uom.product_uom_categ_unit').id,
             'name': 'Demi Dozens',
             'factor_inv': 6,
             'uom_type': 'bigger',
@@ -92,7 +92,7 @@ class TestProductPackaging(common.TransactionCase):
             product_packaging_dozen.uom_id = None
 
         # Define a new packaging unit
-        uom_524 = self.env['product.uom'].search([
+        uom_524 = self.env['uom.uom'].search([
             ('category_id', '=',
              product_packaging_dozen.product_id.uom_id.category_id.id),
             ('name',
@@ -103,7 +103,7 @@ class TestProductPackaging(common.TransactionCase):
             ])
         self.assertEqual(0, len(uom_524))
         product_packaging_dozen.qty = 524
-        uom_524 = self.env['product.uom'].search([
+        uom_524 = self.env['uom.uom'].search([
             ('category_id', '=',
              product_packaging_dozen.product_id.uom_id.category_id.id),
             ('name',

@@ -1,4 +1,4 @@
-# Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
+# Copyright 2015-2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
@@ -11,20 +11,20 @@ class ProductPackaging(models.Model):
     def _default_uom_categ_domain_id(self):
         product_id = self.env.context.get("default_product_id")
         if not product_id:
-            return self.env['product.uom.categ']
+            return self.env['uom.category']
         uom = self.env['product.product'].browse(product_id).uom_id
         return uom.category_id.id
 
     uom_id = fields.Many2one(
-        'product.uom',
-        'Unit of Measure',
+        'uom.uom',
+        'Packaging Unit of Measure',
         help="It must be in the same category than "
              "the default unit of measure.",
         required=False
     )
     uom_categ_domain_id = fields.Many2one(
-        default=_default_uom_categ_domain_id,
-        comodel_name='product.uom.categ'
+        default=lambda self: self._default_uom_categ_domain_id(),
+        comodel_name='uom.category'
     )
     qty = fields.Float(
         compute="_compute_qty",
