@@ -37,6 +37,5 @@ class StockReservation(models.Model):
 
     @api.multi
     def release(self):
-        for rec in self:
-            rec.sale_line_id = False
+        self.write({'sale_line_id': False})
         return super(StockReservation, self).release()

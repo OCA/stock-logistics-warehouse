@@ -20,7 +20,7 @@
 ##############################################################################
 
 {'name': 'Stock Reserve Sales',
- 'version': '8.0.1.0.0',
+ 'version': '9.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
@@ -31,13 +31,14 @@
              'stock_reserve',
              ],
  'demo': [],
- 'data': ['wizard/sale_stock_reserve_view.xml',
+ 'data': ['security/ir.model.access.csv',
+          'wizard/sale_stock_reserve_view.xml',
           'view/sale.xml',
           'view/stock_reserve.xml',
           ],
  'test': ['test/sale_reserve.yml',
           'test/sale_line_reserve.yml',
           ],
- 'installable': False,
+ 'installable': True,
  'auto_install': False,
  }

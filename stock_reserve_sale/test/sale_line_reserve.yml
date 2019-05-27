@@ -12,8 +12,6 @@
     uom_po_id: product.product_uom_kgm
     valuation: real_time
     cost_method: average
-    property_stock_account_input: account.o_expense
-    property_stock_account_output: account.o_income
 -
   I update the current stock of the yogurt with 10 kgm
 -
@@ -27,18 +25,18 @@
 -
   In order to test reservation of the sales order, I create a sales order
 -
-  !record {model: sale.order, id: sale_reserve_02}:
+  !record {model: sale.order, id: sale_reserve_04}:
     partner_id: base.res_partner_2
-    payment_term: account.account_payment_term
+    payment_term_id: account.account_payment_term
 -
   And I create a sales order line
 -
   !record {model: sale.order.line, id: sale_line_reserve_02_01, view: sale.view_order_line_tree}:
-    name: Yogurt
+    name: "Yogurt"
     product_id: product_yogurt
     product_uom_qty: 4
     product_uom: product.product_uom_kgm
-    order_id: sale_reserve_02
+    order_id: sale_reserve_04
 -
   And I create a stock reserve for this line
 -
@@ -54,7 +52,7 @@
 -
   !python {model: product.product}: |
     product = self.browse(cr, uid, ref('product_yogurt'), context=context)
-    assert product.virtual_available == 6, "Stock is not updated."
+    assert product.virtual_available == 6, "Stock is not updated. (%s)" % product.virtual_available
 -
   I set product_12 to MTO (doesn't work)
 -
@@ -72,8 +70,8 @@
   And I create a MTO sales order line
 -
   !record {model: sale.order.line, id: sale_line_reserve_02_02, view: sale.view_order_line_tree}:
-    order_id: sale_reserve_02
-    name: Mouse, Wireless
+    order_id: sale_reserve_04
+    name: "Mouse, Wireless"
     product_id: product.product_product_12
     product_uom_qty: 4
     product_uom: product.product_uom_unit
