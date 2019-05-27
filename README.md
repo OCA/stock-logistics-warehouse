@@ -56,6 +56,7 @@ addon | version | summary
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 9.0.1.0.0 | Stock Quant Reserved Qty UoM
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 9.0.1.0.0 | Establish a removal priority on stock locations.
 [stock_reserve](stock_reserve/) | 9.0.1.0.0 | Stock reservations on products
+[stock_reserve_sale](stock_reserve_sale/) | 9.0.1.0.0 | Stock Reserve Sales
 [stock_valuation_account_manual_adjustment](stock_valuation_account_manual_adjustment/) | 9.0.1.0.0 | Shows in the product inventory stock value and the accounting value and allows to reconcile them
 [stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 9.0.1.0.0 | Reordering rules stock info
 [stock_warehouse_orderpoint_stock_info_unreserved](stock_warehouse_orderpoint_stock_info_unreserved/) | 9.0.1.0.0 | Reordering rules stock info unreserved
@@ -75,6 +76,5 @@ addon | version | summary
 [stock_move_location](stock_move_location/) | 1.0 (unported) | Move Stock Location
 [stock_optional_valuation](stock_optional_valuation/) | 0.1 (unported) | Stock optional valuation
 [stock_reord_rule](stock_reord_rule/) | 0.2 (unported) | Improved reordering rules
-[stock_reserve_sale](stock_reserve_sale/) | 8.0.1.0.0 (unported) | Stock Reserve Sales
 
 [//]: # (end addons)
