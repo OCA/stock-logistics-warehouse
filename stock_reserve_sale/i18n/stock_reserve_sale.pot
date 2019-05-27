@@ -1,31 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_reserve_sale
+#	* stock_reserve_sale
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 20:23+0000\n"
-"PO-Revision-Date: 2015-09-15 13:05+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-"
-"warehouse-8-0/language/es/)\n"
-"Language: es\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: stock_reserve_sale
 #: model:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
-msgid ""
-"A stock reservation will be created for the products\n"
-"                        of the selected quotation lines. If a validity date "
-"is specified,\n"
-"                        the reservation will be released once the date has "
-"passed."
+msgid "A stock reservation will be created for the products\n"
+"                        of the selected quotation lines. If a validity date is specified,\n"
+"                        the reservation will be released once the date has passed."
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -36,9 +28,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:202
 #, python-format
-msgid ""
-"As you changed the quantity of the line, the quantity of the stock "
-"reservation will be automatically adjusted to %.2f."
+msgid "As you changed the quantity of the line, the quantity of the stock reservation will be automatically adjusted to %.2f."
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -70,12 +60,12 @@ msgstr ""
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_create_uid
 msgid "Created by"
-msgstr "Creado por"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_create_date
 msgid "Created on"
-msgstr "Creado el"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_display_name
@@ -90,36 +80,33 @@ msgstr ""
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,help:stock_reserve_sale.field_sale_stock_reserve_date_validity
-msgid ""
-"If a date is given, the reservations will be released at the end of the "
-"validity."
+msgid "If a date is given, the reservations will be released at the end of the validity."
 msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve___last_update
-#, fuzzy
 msgid "Last Modified on"
-msgstr "Actualizado por última vez el"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_write_uid
 msgid "Last Updated by"
-msgstr "Actualizado por última vez por"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_write_date
 msgid "Last Updated on"
-msgstr "Actualizado por última vez el"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_note
 #: model:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Notes"
-msgstr "Notas"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
@@ -143,14 +130,13 @@ msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
-#, fuzzy
 msgid "Release Reservations"
-msgstr "Reserva de existencias"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "Reserve"
-msgstr "Reservar"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
@@ -191,16 +177,14 @@ msgstr ""
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:221
 #, python-format
-msgid ""
-"Several stock reservations are linked with the line. Impossible to adjust "
-"their quantity. Please release the reservation before changing the quantity."
+msgid "Several stock reservations are linked with the line. Impossible to adjust their quantity. Please release the reservation before changing the quantity."
 msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model,name:stock_reserve_sale.model_stock_reservation
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_order_line_reservation_ids
 msgid "Stock Reservation"
-msgstr "Reserva de existencias"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,help:stock_reserve_sale.field_stock_reservation_consumed_for
@@ -210,14 +194,12 @@ msgstr ""
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_date_validity
 msgid "Validity Date"
-msgstr "Fecha de validez"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:244
 #, python-format
-msgid ""
-"You cannot change the product or unit of measure of lines with a stock "
-"reservation. Release the reservation before changing the product."
+msgid "You cannot change the product or unit of measure of lines with a stock reservation. Release the reservation before changing the product."
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -234,3 +216,4 @@ msgstr ""
 #: model:ir.model,name:stock_reserve_sale.model_sale_stock_reserve
 msgid "sale.stock.reserve"
 msgstr ""
+
