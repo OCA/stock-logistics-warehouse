@@ -6,6 +6,7 @@ from odoo import fields, models
 class StockInventoryLineReason(models.Model):
 
     _name = 'stock.inventory.line.reason'
+    _description = 'Stock Inventory Line Reason'
 
     name = fields.Char('Reason Name')
     description = fields.Text('Reason Description')
