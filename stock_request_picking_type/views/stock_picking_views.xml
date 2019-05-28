@@ -66,7 +66,7 @@
                                     <a name="%(action_picking_dashboard)d" type="action">All</a>
                                 </div>
                                 <div role="menuitem">
-                                    <a name="%(action_picking_dashboard)d" type="action" context="{'search_default_todo': 1}">Draft</a>
+                                    <a name="%(action_picking_dashboard)d" type="action" context="{'search_default_todo': 1}">To Do</a>
                                 </div>
                                 <div role="menuitem">
                                     <a name="%(action_picking_dashboard)d" type="action" context="{'search_default_open': 1}">In Progress</a>
