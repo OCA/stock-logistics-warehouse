@@ -21,10 +21,10 @@ class StockPickingType(models.Model):
         if not types:
             return
         domains = {
-            'count_sr_todo': [('state', '=', 'draft')],
+            'count_sr_todo': [('state', '=', 'submitted')],
             'count_sr_open': [('state', '=', 'open')],
             'count_sr_late': [('expected_date', '<', fields.Date.today()),
-                              ('state', 'in', ('draft', 'open'))],
+                              ('state', 'in', ('submitted', 'open'))],
         }
         for field in domains:
             data = self.env['stock.request'].read_group(
