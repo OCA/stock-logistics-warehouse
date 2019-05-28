@@ -18,6 +18,7 @@ class TestStockQuantityChangeReason(SavepointCase):
         cls.product_category_model = cls.env['product.category']
         cls.wizard_model = cls.env['stock.change.product.qty']
         cls.preset_reason_id = cls.env['stock.inventory.line.reason']
+        cls.stock_location = cls.env.ref('stock.stock_location_stock')
 
         # INSTANCES
         cls.category = cls.product_category_model.create({
@@ -104,3 +105,28 @@ class TestStockQuantityChangeReason(SavepointCase):
         self.assertEqual(move2.origin, reason.name)
         self.assertEqual(move2.preset_reason_id, reason)
         self.assertFalse(move3)
+
+    def test_inventory_adjustment_onchange_reason_preset_reason(self):
+        """ Check that adding a reason or a preset reason explode to lines
+        """
+        product2 = self._create_product('product_product_2')
+        self._product_change_qty(product2, 50, 'product_2_reason')
+        inventory = self.env['stock.inventory'].create({
+            'name': 'remove product2',
+            'filter': 'product',
+            'location_id': self.stock_location.id,
+            'product_id': product2.id,
+        })
+        inventory.preset_reason_id = self._create_reason('Test 1',
+                                                         'Description Test 1')
+        inventory.action_start()
+        self.assertEqual(len(inventory.line_ids), 1)
+        inventory.preset_reason_id = self._create_reason('Test 2',
+                                                         'Description Test 2')
+        inventory.onchange_preset_reason()
+        self.assertEquals(inventory.line_ids.preset_reason_id,
+                          inventory.preset_reason_id)
+        inventory.reason = 'Reason 2'
+        inventory.onchange_reason()
+        self.assertEquals(inventory.line_ids.reason,
+                          inventory.reason)
