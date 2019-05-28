@@ -1,6 +1,7 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
+from datetime import datetime
 from odoo.tests import common
 
 
@@ -17,6 +18,10 @@ class TestStockRequestPurchase(common.TransactionCase):
             self.env.ref('stock_request.group_stock_request_user')
         self.stock_request_manager_group = \
             self.env.ref('stock_request.group_stock_request_manager')
+        self.group_bypass_submit_request = \
+            self.env.ref('stock_request.group_bypass_submit_request')
+        self.group_purchase_manager = \
+            self.env.ref('purchase.group_purchase_manager')
         self.main_company = self.env.ref('base.main_company')
         self.warehouse = self.env.ref('stock.warehouse0')
         self.categ_unit = self.env.ref('uom.product_uom_categ_unit')
@@ -29,11 +34,14 @@ class TestStockRequestPurchase(common.TransactionCase):
             [('company_id', '=', self.company_2.id)], limit=1)
         self.stock_request_user = self._create_user(
             'stock_request_user',
-            [self.stock_request_user_group.id],
+            [self.stock_request_user_group.id,
+             self.group_bypass_submit_request.id],
             [self.main_company.id, self.company_2.id])
         self.stock_request_manager = self._create_user(
             'stock_request_manager',
-            [self.stock_request_manager_group.id],
+            [self.stock_request_manager_group.id,
+             self.group_bypass_submit_request.id,
+             self.group_purchase_manager.id],
             [self.main_company.id, self.company_2.id])
         self.route_buy = self.warehouse.buy_pull_id.route_id
         self.supplier = self.env['res.partner'].create({
@@ -67,20 +75,24 @@ class TestStockRequestPurchase(common.TransactionCase):
             'uom_id': self.env.ref('uom.product_uom_unit').id,
             'company_id': company_id,
             'type': 'product',
+            'purchase_line_warn': 'no-message',
             'route_ids': [(6, 0, self.route_buy.ids)],
             'seller_ids': [(0, 0, {'name': self.supplier.id, 'delay': 5})]
         })
 
     def test_create_request_01(self):
         """Single Stock request with buy rule"""
+        expected_date = datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
                 'product_uom_qty': 5.0,
+                'expected_date': expected_date,
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
@@ -127,11 +139,13 @@ class TestStockRequestPurchase(common.TransactionCase):
 
     def test_create_request_02(self):
         """Multiple Stock requests with buy rule"""
+        expected_date = datetime.now()
         vals = {
             'product_id': self.product.id,
             'product_uom_id': self.product.uom_id.id,
             'product_uom_qty': 5.0,
             'company_id': self.main_company.id,
+            'expected_date': expected_date,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
         }
@@ -187,21 +201,25 @@ class TestStockRequestPurchase(common.TransactionCase):
                          stock_request_2.product_uom_qty)
 
     def test_view_actions(self):
+        expected_date = datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
                 'product_uom_qty': 5.0,
                 'company_id': self.main_company.id,
+                'expected_date': expected_date,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
             })]
         }
 
-        order = self.env['stock.request.order'].sudo().create(vals)
+        order = self.env['stock.request.order'].sudo(
+            self.stock_request_manager).create(vals)
 
         order.action_confirm()
 

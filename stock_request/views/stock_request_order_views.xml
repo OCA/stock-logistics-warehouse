@@ -24,11 +24,14 @@
                 <header>
                     <button name="action_confirm"
                             string="Confirm" type="object"
-                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
-                    <button name="action_cancel" states="draft,open"
-                            type="object" string="Cancel"/>
-                    <button name="action_draft" states="cancel" type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('state', 'not in', ['draft', 'submitted'])]}"/>
+                    <button name="action_draft" states="submitted,cancel"
+                            class="oe_highlight"
+                            type="object"
                             string="Set to Draft"/>
+                    <button name="action_cancel" states="draft,submitted,open"
+                            type="object" string="Cancel"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -48,8 +51,7 @@
                                 class="oe_stat_button"
                                 icon="fa-chain"
                                 attrs="{'invisible': [('state', '=', 'draft')]}"
-                                groups="stock.group_stock_user"
-                        >
+                                groups="stock.group_stock_user">
                             <field name="stock_request_count" widget="statinfo"
                                    string="Stock Requests"/>
                         </button>
@@ -81,14 +83,14 @@
                     <notebook>
                         <page name="items" string="Items">
                             <field name="stock_request_ids" context="{
-                            'default_expected_date':expected_date,
+                            'default_expected_date': expected_date,
                             'default_picking_policy': picking_policy,
                             'default_warehouse_id': warehouse_id,
                             'default_location_id': location_id,
                             'default_procurement_group_id': procurement_group_id,
                             'default_company_id': company_id,
                             'default_state': state,
-                            }" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                            }" attrs="{'readonly': [('state', 'not in', ['draft', 'submitted'])]}">
                                 <tree editable="bottom">
                                     <field name="name" readonly="1"/>
                                     <field name="product_id"/>
@@ -97,7 +99,8 @@
                                            groups="uom.group_uom"/>
                                     <field name="route_id"
                                            options="{'no_create': True}"
-                                           groups="stock.group_stock_multi_locations"/>
+                                           groups="stock.group_stock_multi_locations"
+                                           attrs="{'readonly': [('state', 'not in', ['draft', 'submitted'])]}"/>
                                     <field name="route_ids" invisible="1"/>
                                     <field name="product_uom_qty"/>
                                     <field name="qty_in_progress"/>

@@ -21,6 +21,8 @@ class TestStockRequest(common.TransactionCase):
             self.env.ref('stock_request.group_stock_request_user')
         self.stock_request_manager_group = \
             self.env.ref('stock_request.group_stock_request_manager')
+        self.group_bypass_submit_request = \
+            self.env.ref('stock_request.group_bypass_submit_request')
         self.main_company = self.env.ref('base.main_company')
         self.warehouse = self.env.ref('stock.warehouse0')
         self.categ_unit = self.env.ref('uom.product_uom_categ_unit')
@@ -35,11 +37,13 @@ class TestStockRequest(common.TransactionCase):
             [('company_id', '=', self.company_2.id)], limit=1)
         self.stock_request_user = self._create_user(
             'stock_request_user',
-            [self.stock_request_user_group.id],
+            [self.stock_request_user_group.id,
+             self.group_bypass_submit_request.id],
             [self.main_company.id, self.company_2.id])
         self.stock_request_manager = self._create_user(
             'stock_request_manager',
-            [self.stock_request_manager_group.id],
+            [self.stock_request_manager_group.id,
+             self.group_bypass_submit_request.id],
             [self.main_company.id, self.company_2.id])
         self.product = self._create_product('SH', 'Shoes', False)
         self.product_company_2 = self._create_product('SH_2', 'Shoes',
@@ -509,7 +513,8 @@ class TestStockRequest(common.TransactionCase):
         stock_request = order.stock_request_ids
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.action_confirm()
+        order.action_confirm()  # To submit
+        order.action_confirm()  # To confirm
         self.assertEqual(order.state, 'open')
         self.assertEqual(stock_request.state, 'open')
 
@@ -556,7 +561,8 @@ class TestStockRequest(common.TransactionCase):
             self.stock_request_user).create(vals)
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        stock_request.action_confirm()
+        stock_request.action_confirm()  # To submit
+        stock_request.action_confirm()  # To confirm
         self.assertEqual(stock_request.state, 'open')
         self.assertEqual(len(stock_request.sudo().picking_ids), 1)
         self.assertEqual(len(stock_request.sudo().move_ids), 1)
@@ -598,8 +604,10 @@ class TestStockRequest(common.TransactionCase):
             self.stock_request_manager).create(vals)
         stock_request_2.product_uom_qty = 6.0
         self.product.route_ids = [(6, 0, self.route.ids)]
-        stock_request_1.action_confirm()
-        stock_request_2.action_confirm()
+        stock_request_1.action_confirm()  # To submit
+        stock_request_1.action_confirm()  # To confirm
+        stock_request_2.action_confirm()  # To submit
+        stock_request_2.action_confirm()  # To confirm
         self.assertEqual(len(stock_request_1.sudo().picking_ids), 1)
         self.assertEqual(stock_request_1.sudo().picking_ids,
                          stock_request_2.sudo().picking_ids)
@@ -638,7 +646,8 @@ class TestStockRequest(common.TransactionCase):
             self.stock_request_user).create(vals)
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.action_confirm()
+        order.action_confirm()  # To submit
+        order.action_confirm()  # To confirm
         stock_request = order.stock_request_ids
         self.assertEqual(len(order.sudo().picking_ids), 1)
         self.assertEqual(len(order.sudo().move_ids), 1)
@@ -691,10 +700,12 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
 
-        order = self.request_order.sudo().create(vals)
+        order = self.request_order.sudo(
+            self.stock_request_manager).create(vals)
         self.product.route_ids = [(6, 0, self.route.ids)]
 
-        order.action_confirm()
+        order.action_confirm()  # To submit
+        order.action_confirm()  # To confirm
         stock_request = order.stock_request_ids
         self.assertTrue(stock_request.picking_ids)
         self.assertTrue(order.picking_ids)
@@ -714,7 +725,8 @@ class TestStockRequest(common.TransactionCase):
         self.assertEqual('views' in action.keys(), True)
         self.assertEqual(action['res_id'], stock_request.picking_ids[0].id)
 
-        action = stock_request.picking_ids[0].action_view_stock_request()
+        action = stock_request.picking_ids[0].sudo().\
+            action_view_stock_request()
         self.assertEqual(action['type'], 'ir.actions.act_window')
         self.assertEqual(action['res_id'], stock_request.id)
 
@@ -804,10 +816,9 @@ class TestStockRequest(common.TransactionCase):
             msg="Inactive variant was ordered though it shouldn't have been"
         )
 
-        # If a user does not have stock request rights, they can still trigger
-        # the action from the products, so test that they get a friendlier
-        # error message.
         self.stock_request_user.groups_id -= self.stock_request_user_group
+        self.stock_request_user.groups_id -= self.stock_request_manager_group
+        self.stock_request_user.groups_id -= self.group_bypass_submit_request
         with self.assertRaisesRegexp(
                 exceptions.UserError,
                 "Unfortunately it seems you do not have the necessary rights "
@@ -850,8 +861,10 @@ class TestStockRequest(common.TransactionCase):
         self.assertTrue(order.allow_virtual_location)
 
     def test_onchange_wh_no_effect_from_order(self):
+        expected_date = datetime.now()
         vals = {
             'company_id': self.main_company.id,
+            'expected_date': expected_date,
             'warehouse_id': self.warehouse.id,
             'location_id': self.virtual_loc.id,
             'stock_request_ids': [(0, 0, {
@@ -859,6 +872,7 @@ class TestStockRequest(common.TransactionCase):
                 'product_uom_id': self.product.uom_id.id,
                 'product_uom_qty': 5.0,
                 'company_id': self.main_company.id,
+                'expected_date': expected_date,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.virtual_loc.id,
             })]

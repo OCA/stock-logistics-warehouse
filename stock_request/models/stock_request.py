@@ -1,6 +1,6 @@
 # Copyright 2017 Eficent Business and IT Consulting Services, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-
+from datetime import timedelta
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons import decimal_precision as dp
@@ -8,6 +8,7 @@ from odoo.tools import float_compare
 
 REQUEST_STATES = [
     ('draft', 'Draft'),
+    ('submitted', 'Submitted'),
     ('open', 'In progress'),
     ('done', 'Done'),
     ('cancel', 'Cancelled')]
@@ -22,6 +23,11 @@ class StockRequest(models.Model):
     def _get_default_requested_by(self):
         return self.env['res.users'].browse(self.env.uid)
 
+    def _get_default_expected_date(self):
+        # Round time to the next hour
+        t = fields.Datetime.now()
+        return t + timedelta(hours=1)
+
     name = fields.Char(
         states={'draft': [('readonly', False)]}
     )
@@ -35,8 +41,8 @@ class StockRequest(models.Model):
         default=lambda s: s._get_default_requested_by(),
     )
     expected_date = fields.Datetime(
-        'Expected Date', default=fields.Datetime.now, index=True,
-        required=True, readonly=True,
+        'Expected Date', default=lambda s: s._get_default_expected_date(),
+        index=True, required=True, readonly=True,
         states={'draft': [('readonly', False)]},
         help="Date when you expect to receive the goods.",
     )
@@ -98,7 +104,8 @@ class StockRequest(models.Model):
         states={'draft': [('readonly', False)]}, readonly=True
     )
     route_id = fields.Many2one(
-        states={'draft': [('readonly', False)]}, readonly=True
+        states={'draft': [('readonly', False)],
+                'submitted': [('readonly', False)]}, readonly=True
     )
 
     _sql_constraints = [
@@ -190,13 +197,27 @@ class StockRequest(models.Model):
             ))
 
     @api.multi
+    def _action_submit(self):
+        self.state = 'submitted'
+
+    @api.multi
     def _action_confirm(self):
         self._action_launch_procurement_rule()
         self.state = 'open'
 
     @api.multi
     def action_confirm(self):
-        self._action_confirm()
+        # Check if user allowed to skip Submit stage
+        if self.env.user.\
+                has_group('stock_request.group_bypass_submit_request'):
+            self._action_confirm()
+            return True
+        else:
+            # Move one state
+            if self.state == 'draft':
+                self._action_submit()
+            else:
+                self._action_confirm()
         return True
 
     def action_draft(self):
@@ -258,7 +279,7 @@ class StockRequest(models.Model):
         errors = []
         for request in self:
             if (
-                request.state != 'draft' or
+                request.state not in ('draft', 'submitted') or
                 request.product_id.type not in ('consu', 'product')
             ):
                 continue

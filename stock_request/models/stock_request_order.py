@@ -6,6 +6,7 @@ from odoo.exceptions import UserError, ValidationError, AccessError
 
 REQUEST_STATES = [
     ('draft', 'Draft'),
+    ('submitted', 'Submitted'),
     ('open', 'In progress'),
     ('done', 'Done'),
     ('cancel', 'Cancelled')]
@@ -199,9 +200,20 @@ class StockRequestOrder(models.Model):
 
     @api.multi
     def action_confirm(self):
-        for line in self.stock_request_ids:
-            line.action_confirm()
-        self.state = 'open'
+        # Check if user allowed to skip Submit stage
+        if self.env.user.\
+                has_group('stock_request.group_bypass_submit_request'):
+            for line in self.stock_request_ids:
+                line.action_confirm()
+            self.state = 'open'
+        else:
+            # Move one state
+            for line in self.stock_request_ids:
+                line.action_confirm()
+            if self.state == 'draft':
+                self.state = 'submitted'
+            else:
+                self.state = 'open'
         return True
 
     def action_draft(self):
