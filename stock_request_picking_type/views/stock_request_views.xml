@@ -8,11 +8,11 @@
             <search string="Search Stock Request">
                 <field name="name"/>
                 <field name="product_id"/>
-                <filter string="To Do" name="todo" domain="[('state','=', 'draft')]"
-                        help="Stock Requests in draft."/>
+                <filter string="To Do" name="todo" domain="[('state','=', 'submitted')]"
+                        help="Stock Requests To Do."/>
                 <filter string="In Progress" name="inprogress" domain="[('state', '=', 'open')]"
-                        help="Stock Requesta in Progress."/>
-                <filter string="Late" domain="['&amp;', ('expected_date', '&lt;', current_date), ('state', 'in', ('draft', 'open'))]"
+                        help="Stock Requests in Progress."/>
+                <filter string="Late" domain="['&amp;', ('expected_date', '&lt;', current_date), ('state', 'in', ('submitted', 'open'))]"
                         name="late" help="Late Stock Requests"/>
                 <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
                 <group expand="0" string="Group By...">
