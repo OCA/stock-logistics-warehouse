@@ -62,28 +62,28 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 (0, 0, {
                     'product_id': self.product1.id,
                     'product_uom_id': self.env.ref(
-                        "product.product_uom_unit").id,
+                        "uom.product_uom_unit").id,
                     'product_qty': 2.0,
                     'location_id': self.location.id,
                 }),
                 (0, 0, {
                     'product_id': self.product2.id,
                     'product_uom_id': self.env.ref(
-                        "product.product_uom_unit").id,
+                        "uom.product_uom_unit").id,
                     'product_qty': 4.0,
                     'location_id': self.location.id,
                 }),
                 (0, 0, {
                     'product_id': self.product_lot.id,
                     'product_uom_id': self.env.ref(
-                        "product.product_uom_unit").id,
+                        "uom.product_uom_unit").id,
                     'product_qty': 6.0,
                     'location_id': self.location.id,
                     'prod_lot_id': self.lot.id,
                 }),
             ],
         })
-        inventory.action_done()
+        inventory._action_done()
 
     def test_inventory_category_filter(self):
         inventory = self.inventory_model.create({

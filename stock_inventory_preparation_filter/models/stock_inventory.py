@@ -8,6 +8,7 @@ from odoo.addons import decimal_precision as dp
 
 class StockInventoryEmptyLines(models.Model):
     _name = 'stock.inventory.line.empty'
+    _description = 'Inventory Line Empty'
 
     product_code = fields.Char(
         string='Product Code',
