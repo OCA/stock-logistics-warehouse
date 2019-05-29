@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -14,13 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_account_change_qty_reason
-#: model:ir.model.fields,field_description:stock_account_change_qty_reason.field_stock_inventory_line_reason_account_reason_input_id
+#: model:ir.model.fields,field_description:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_input_id
 msgid "Input Account for Stock Valuation"
 msgstr ""
 
 #. module: stock_account_change_qty_reason
-#: model:ir.model.fields,field_description:stock_account_change_qty_reason.field_stock_inventory_line_reason_account_reason_output_id
+#: model:ir.model.fields,field_description:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_output_id
 msgid "Output Account for Stock Valuation"
+msgstr ""
+
+#. module: stock_account_change_qty_reason
+#: model:ir.model,name:stock_account_change_qty_reason.model_stock_inventory_line_reason
+msgid "Stock Inventory Line Reason"
 msgstr ""
 
 #. module: stock_account_change_qty_reason
@@ -29,17 +34,12 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_account_change_qty_reason
-#: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason_account_reason_output_id
+#: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_output_id
 msgid "When set, it will be used as offsetting account when products are issued from the company."
 msgstr ""
 
 #. module: stock_account_change_qty_reason
-#: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason_account_reason_input_id
+#: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_input_id
 msgid "When set, it will be used as offsetting account when products are received into the company."
-msgstr ""
-
-#. module: stock_account_change_qty_reason
-#: model:ir.model,name:stock_account_change_qty_reason.model_stock_inventory_line_reason
-msgid "stock.inventory.line.reason"
 msgstr ""
 
