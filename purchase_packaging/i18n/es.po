@@ -1,0 +1,80 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * purchase_packaging
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# enjolras <yo@miguelrevilla.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-27 11:37+0000\n"
+"PO-Revision-Date: 2018-02-27 11:37+0000\n"
+"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: purchase_packaging
+#: model:ir.ui.view,arch_db:purchase_packaging.product_supplierinfo_view_form_inherit_purchase_packaging
+msgid "<span> of </span>"
+msgstr "<span> de </span>"
+
+#. module: purchase_packaging
+#: model:ir.model,name:purchase_packaging.model_product_supplierinfo
+msgid "Information about a product vendor"
+msgstr "Información sobre un proveedor"
+
+#. module: purchase_packaging
+#: model:ir.model.fields,field_description:purchase_packaging.field_product_supplierinfo_packaging_id
+msgid "Logisitical Units"
+msgstr "Unidades logísticas"
+
+#. module: purchase_packaging
+#: model:ir.model.fields,field_description:purchase_packaging.field_product_supplierinfo_min_qty_uom_id
+msgid "Minimal Unit of Measure Quantity"
+msgstr "Cantidad mínima de unidad de medida"
+
+#. module: purchase_packaging
+#: model:ir.model,name:purchase_packaging.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Regla de inventario mínimo"
+
+#. module: purchase_packaging
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_packaging_id
+msgid "Packaging"
+msgstr "Empaquetado"
+
+#. module: purchase_packaging
+#: model:ir.model,name:purchase_packaging.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: purchase_packaging
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_product_tmpl_id
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: purchase_packaging
+#: model:ir.model,name:purchase_packaging.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de pedido de compra"
+
+#. module: purchase_packaging
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_product_purchase_uom_id
+msgid "Purchase Unit of Measure"
+msgstr "Unidad de medida de compra"
+
+#. module: purchase_packaging
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_product_purchase_qty
+msgid "Purchase quantity"
+msgstr "Cantidad de compra"
+
+#. module: purchase_packaging
+#: model:ir.ui.view,arch_db:purchase_packaging.product_supplierinfo_view_form_inherit_purchase_packaging
+msgid "using package"
+msgstr "utilizando paquete"
