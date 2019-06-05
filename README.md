@@ -27,6 +27,7 @@ addon | version | summary
 [account_move_line_stock_info](account_move_line_stock_info/) | 9.0.1.0.0 | Account Move Line Stock Move
 [packaging_uom](packaging_uom/) | 9.0.1.0.0 | Use uom in package
 [procurement_auto_create_group](procurement_auto_create_group/) | 9.0.1.0.0 | Procurement Auto Create Group
+[purchase_packaging](purchase_packaging/) | 9.0.1.0.0 | In purchase, use package
 [stock_account_change_product_valuation](stock_account_change_product_valuation/) | 9.0.1.0.0 | Adjusts valuation of the products and quants when the cost method or type of a product changes
 [stock_account_quant_merge](stock_account_quant_merge/) | 9.0.1.0.0 | Stock Account - Quant merge
 [stock_available](stock_available/) | 9.0.1.1.0 | Stock available to promise
