@@ -34,7 +34,7 @@ class StockMoveLine(models.Model):
 
     @api.model
     def create(self, vals):
-        move = self.env['stock.move'].browse(vals['move_id'])
+        move = self.env['stock.move'].browse(vals.get('move_id', False))
         if move.secondary_uom_id:
             uom = self.env['product.uom'].browse(vals['product_uom_id'])
             factor = move.secondary_uom_id.factor * uom.factor
