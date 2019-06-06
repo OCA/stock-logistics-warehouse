@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_cost_evaluation_history_tree" model="ir.ui.view">
+        <field name="name">Product cost evaluation history</field>
+        <field name="model">product.cost.evaluation.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_evaluation"/>
+                <field name="inventory_line_id"/>
+                <field name="product_id"/>
+                <field name="product_qty"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="location_id"/>
+                <field name="fifo_cost"/>
+                <field name="fifo_purchase_cost"/>
+                <field name="lifo_cost"/>
+                <field name="lifo_purchase_cost"/>
+                <field name="average_cost"/>
+                <field name="average_purchase_cost"/>
+                <field name="standard_cost"/>
+                <field name="list_price"/>
+                <field name="real_value"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_product_cost_evaluation">
+        <field name="name">Product cost evaluation history</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.cost.evaluation.history</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="Product cost evaluations history"
+              id="menu_product_cost_evaluation_history"
+              parent="stock.menu_stock_root"
+              sequence="100"
+              groups="stock.group_stock_manager"
+              action="action_product_cost_evaluation" />
+</odoo>

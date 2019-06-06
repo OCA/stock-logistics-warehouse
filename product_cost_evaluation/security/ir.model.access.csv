@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_cost_evaluation_history_manager,product_cost_evaluation_history_manager,model_product_cost_evaluation_history,stock.group_stock_manager,1,1,1,1
+access_product_cost_evaluation_history_user,product_cost_evaluation_history_user,model_product_cost_evaluation_history,stock.group_stock_user,1,0,0,0

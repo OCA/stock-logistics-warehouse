@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inventory_form_date_valuation" model="ir.ui.view">
+        <field name="name">view.inventory.form.date.valuation</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="product_cost_history_evaluation"
+                    icon="fa-cogs"
+                    string="Compute history vals"
+                    type="object" attrs="{'invisible': [('state', 'in', ['draft', 'cancel'])]}"/>
+            </div>
+        </field>
+    </record>
+</odoo>
