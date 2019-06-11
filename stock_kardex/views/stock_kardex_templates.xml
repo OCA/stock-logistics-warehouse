@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="stock_move_line_kardex_view_form_css" name="kardex.view.form.css" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+      <link rel="stylesheet" type="text/scss" href="/stock_kardex/static/src/scss/kardex_view.scss"/>
+      <script type="text/javascript" src="/stock_kardex/static/src/js/kardex.js"></script>
+    </xpath>
+  </template>
+
+</odoo>

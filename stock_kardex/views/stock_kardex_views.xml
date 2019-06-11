@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="stock_kardex_view_form_screen" model="ir.ui.view">
+    <field name="name">stock.kardex.view.form.screen</field>
+    <field name="model">stock.kardex</field>
+    <field name="priority">99</field>
+    <field name="arch" type="xml">
+      <form string="Operations" delete="0" create="0" class="o_kardex">
+        <!-- <field name="product_id" invisible="1"/> -->
+        <div class="o_kardex_header">
+          <div class="o_kardex_header_left o_kardex_header_content">
+          </div>
+          <div class="o_kardex_header_center o_kardex_header_content">
+            <label for="mode"/>
+            <field name="mode" readonly="1"/>
+          </div>
+          <div class="o_kardex_header_right o_kardex_header_content">
+          </div>
+        </div>
+        <div class="o_kardex_actions">
+          <div class="o_kardex_content">
+            <button name="action_menu" type="object"
+                    class="btn-secondary o_kardex_icon_btn"
+                    string="" icon="fa-bars"
+                    aria-label="Dropdown menu" title="Dropdown menu"/>
+          </div>
+          <div class="o_kardex_content o_kardex_content_right">
+            <div>
+              <button name="do_dummy"
+                      type="object"
+                      string="Save"
+                      icon="fa-check"
+                      class="btn-primary"
+                      barcode_trigger="save"/>
+              <button name="do_dummy"
+                      type="object"
+                      string="Release"
+                      class="btn-primary"
+                      barcode_trigger="release"/>
+            </div>
+          </div>
+        </div>
+        <div class="o_kardex_operation bg-primary jumbotron jumbotron-fluid">
+          <div class="container">
+            <field name="operation_descr"/>
+          </div>
+        </div>
+        <div class="o_kardex_data">
+          <!-- on the left of the screen -->
+          <div class="o_kardex_data_content o_kardex_move">
+            <div>
+              <label for="product_id"/>
+              <field name="product_id" readonly="1" options="{'no_open': True}"/>
+              <field name="qty_done" readonly="1" force_save="1"/> / 
+              <field name="product_uom_qty" readonly="1"/>
+              <label for="product_uom_id" string=" "/>
+              <field name="product_uom_id" options="{'no_open': True}" class="oe_inline"/>
+            </div>
+            <div>
+              <label for="lot_id"/>
+              <field name="lot_id"/>
+            </div>
+          </div>
+          <!-- on the right of the screen -->
+          <div class="o_kardex_data_content o_kardex_tray">
+            <group col="1">
+              <!-- These 2 fields must come from the location.
+                   Currently, the HTML mimics what Odoo generates for <field/>
+              -->
+              <tr>
+                <td class="o_td_label" style="min-width: 150px;">
+                  <span class="o_readonly_modifier" style="font-weight: bold; margin: 0 5px 0 0; font-size: 1.08333333rem; line-height: 1.5;">Tray</span>
+
+                </td>
+                <td>
+                  <span class="o_field_integer o_field_number o_field_widget o_readonly_modifier"
+                        name="kardex_tray_tray">
+                    SHU-1108
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="o_td_label" style="min-width: 150px;">
+                  <span class="o_readonly_modifier" style="font-weight: bold; margin: 0 5px 0 0; font-size: 1.08333333rem; line-height: 1.5;">Box Type</span>
+                </td>
+                <td>
+                  <span class="o_field_integer o_field_number o_field_widget o_readonly_modifier"
+                        name="kardex_tray_box_type">
+                    B30401
+                  </span>
+                </td>
+              </tr>
+              <field name="kardex_tray_y"/>
+              <field name="kardex_tray_x"/>
+            </group>
+            <div>
+              <field name="kardex_tray_matrix"
+                     widget="kardex_tray_matrix"/>
+            </div>
+          </div>
+        </div>
+        <field name="_barcode_scanned" widget="barcode_handler"/>
+      </form>
+    </field>
+  </record>
+
+  <record id="stock_kardex_form_menu" model="ir.ui.view">
+    <field name="name">stock.kardex.view.form.menu</field>
+    <field name="model">stock.kardex</field>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+      <form string="Kardex">
+        <div class="row o_kardex_menu">
+          <div class="col-6">
+            <button name="switch_pick"
+                    type="object"
+                    string="Pick"
+                    class="btn-primary btn-block btn btn-lg"/>
+            <button name="switch_put"
+                    type="object"
+                    string="Put"
+                    class="btn-primary btn-block btn btn-lg"/>
+            <button name="switch_inventory"
+                    type="object"
+                    string="Inventory"
+                    class="btn-primary btn-block btn btn-lg"/>
+          </div>
+          <div class="col-6">
+            <field name="id" string="Back to settings"
+                   widget="exit_button" readonly="1"/>
+          </div>
+        </div>
+        <footer></footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="stock_kardex_view_form" model="ir.ui.view">
+    <field name="name">stock.kardex.view.form</field>
+    <field name="model">stock.kardex</field>
+    <field name="arch" type="xml">
+      <form string="Operations">
+        <group>
+          <field name="name"/>
+          <field name="address"/>
+          <field name="mode"/>
+          <!-- visible and editable for prototyping purposes -->
+          <field name="current_move_line"/>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="stock_kardex_view_kanban">
+    <field name="name">stock.kardex.kanban</field>
+    <field name="model">stock.kardex</field>
+    <field name="arch" type="xml">
+      <kanban class="o_kanban_dashboard">
+        <field name="name"/>
+        <field name="address"/>
+        <field name="mode"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_has_icon open_kardex_screen">
+              <div class="o_kardex_kanban_main">
+
+                <div class="o_kanban_card_content">
+                  <div class="o_kanban_primary_left">
+                    <div class="o_primary">
+                      <strong class="o_kanban_record_title">
+                        <span><t t-esc="record.name.value"/></span>
+                      </strong>
+                    </div>
+                    <span>Mode: <t t-esc="record.mode.value"/></span>
+                  </div>
+                </div>
+
+                <div class="o_kanban_card_manage_pane dropdown-menu" groups="stock.group_stock_manager" role="menu">
+                  <div class="o_kanban_card_manage_section o_kanban_manage_reports">
+                    <div role="menuitem">
+                      <a type="edit">Settings</a>
+                    </div>
+                  </div>
+                </div>
+                <a class="o_kanban_manage_toggle_button o_left" href="#" groups="stock.group_stock_manager"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="stock_kardex_view_tree">
+    <field name="name">stock.kardex.tree</field>
+    <field name="model">stock.kardex</field>
+    <field name="arch" type="xml">
+      <tree string="Kardex">
+        <field name="name"/>
+        <field name="address"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- TODO: use this in method action_open_screen? -->
+  <record model="ir.actions.act_window" id="stock_kardex_action_screen">
+    <field name="name">Kardex</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">stock.kardex</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="view_ids"
+           eval="[(5, 0, 0),
+                  (0, 0, {'view_mode': 'form', 'view_id': ref('stock_kardex_view_form_screen')})]"/>
+    <field name="target">fullscreen</field>
+    <field name="domain">[]</field>
+    <field name="context">{'form_view_initial_mode': 'edit', 'no_breadcrumbs': True}</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Open the Kardex Interface.
+      </p>
+    </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="stock_kardex_action">
+    <field name="name">Kardex</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">stock.kardex</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="target">current</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Open the Kardex Interface.
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="stock_kardex"
+            name="Kardex"
+            action="stock_kardex_action"
+            parent="stock.menu_stock_warehouse_mgmt"
+            sequence="15"/>
+
+</odoo>
