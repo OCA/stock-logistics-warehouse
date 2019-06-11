@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="vertical_lift_shuttle_view_form_screen" model="ir.ui.view">
+    <field name="name">vertical.lift.shuttle.view.form.screen</field>
+    <field name="model">vertical.lift.shuttle</field>
+    <field name="priority">99</field>
+    <field name="arch" type="xml">
+      <form string="Operations" delete="0" create="0" class="o_vlift_shuttle">
+        <!-- <field name="product_id" invisible="1"/> -->
+        <div class="o_shuttle_header">
+          <div class="o_shuttle_header_left o_shuttle_header_content">
+            <field name="name" readonly="1"/>
+          </div>
+          <div class="o_shuttle_header_center o_shuttle_header_content">
+            <label for="mode"/>
+            <field name="mode" readonly="1"/>
+          </div>
+          <div class="o_shuttle_header_right o_shuttle_header_content">
+            <label for="number_of_ops"/>
+            <field name="number_of_ops" readonly="1"/> /
+            <field name="number_of_ops_all" readonly="1"/>
+          </div>
+        </div>
+        <div class="o_shuttle_actions">
+          <div class="o_shuttle_content">
+            <button name="action_menu" type="object"
+                    class="btn-secondary o_shuttle_icon_btn"
+                    string="" icon="fa-bars"
+                    aria-label="Dropdown menu" title="Dropdown menu"/>
+            <button name="action_manual_barcode" type="object"
+                    class="btn-secondary o_shuttle_icon_btn"
+                    string="" icon="fa-terminal"
+                    aria-label="Barcode Input" title="Barcode Input"/>
+          </div>
+          <div class="o_shuttle_content o_shuttle_content_right">
+            <div>
+              <!-- will react on barcode 'O-BTN.save' -->
+              <button name="button_save"
+                      type="object"
+                      string="Save"
+                      icon="fa-check"
+                      class="btn-primary"
+                      barcode_trigger="save"/>
+              <!-- will react on barcode 'O-BTN.release -->
+              <button name="button_release"
+                      type="object"
+                      string="Release"
+                      class="btn-primary"
+                      barcode_trigger="release"/>
+            </div>
+          </div>
+        </div>
+        <div class="o_shuttle_operation bg-primary jumbotron jumbotron-fluid">
+          <div class="container">
+            <field name="operation_descr"/>
+          </div>
+        </div>
+        <div class="o_shuttle_data" attrs="{'invisible': [('current_move_line_id', '=', False)]}">
+          <!-- on the left of the screen -->
+          <div class="o_shuttle_data_content o_shuttle_move">
+            <div>
+              <group>
+                <field name="current_move_line_id" invisible="1"/>
+                <label for="picking_id"/>
+                <div>
+                  <div>
+                    <field name="picking_id" options="{'no_open': True}" class="mr8"/>
+                    <span>/</span>
+                    <field name="picking_origin" class="oe_inline ml8"/>
+                  </div>
+                </div>
+                <label for="picking_partner_id"/>
+                <div>
+                  <field name="picking_partner_id" options="{'no_open': True}"/>
+                </div>
+                <label for="location_dest_id"/>
+                <div>
+                  <field name="location_dest_id"
+                         class="bg-primary o_shuttle_highlight"
+                         options="{'no_open': True}"/>
+                </div>
+                <label for="product_id"/>
+                <div colspan="2" class="oe_title">
+                  <h1>
+                    <field name="product_id" options="{'no_open': True}"/>
+                  </h1>
+                </div>
+                <div colspan="2">
+                  <field name="product_packagings"/>
+                </div>
+                <field name="lot_id"/>
+                <label for="product_uom_qty" string="Quantity" class="ml32"/>
+                <div colspan="2" class="ml32">
+                  <h1 class="bg-primary o_shuttle_highlight">
+                    <field name="product_uom_qty" class="oe_inline text-white"/>
+                    <field name="product_uom_id" options="{'no_open': True}" class="oe_inline ml8 text-white"/>
+                  </h1>
+                </div>
+              </group>
+            </div>
+          </div>
+          <!-- on the right of the screen -->
+          <div class="o_shuttle_data_content o_shuttle_tray">
+            <group col="1">
+              <field name="tray_name"/>
+              <field name="tray_type_code"/>
+              <field name="tray_y"/>
+              <field name="tray_x"/>
+              <label for="tray_qty"/>
+              <div colspan="2" class="oe_title">
+                <h1>
+                  <field name="tray_qty"/>
+                </h1>
+              </div>
+            </group>
+            <group>
+              <div>
+                <field name="tray_matrix"
+                       widget="location_tray_matrix"
+                       />
+              </div>
+            </group>
+          </div>
+        </div>
+        <field name="_barcode_scanned" widget="barcode_handler"/>
+      </form>
+    </field>
+  </record>
+
+  <record id="vertical_lift_shuttle_form_menu" model="ir.ui.view">
+    <field name="name">vertical.lift.shuttle.view.form.menu</field>
+    <field name="model">vertical.lift.shuttle</field>
+    <field name="priority">100</field>
+    <field name="arch" type="xml">
+      <form string="Shuttle">
+        <div class="row o_vlift_shuttle_menu">
+          <div class="col-6">
+            <button name="switch_pick"
+                    type="object"
+                    string="Pick"
+                    class="btn-primary btn-block btn btn-lg"/>
+            <button name="switch_put"
+                    type="object"
+                    string="Put"
+                    class="btn-primary btn-block btn btn-lg"/>
+            <button name="switch_inventory"
+                    type="object"
+                    string="Inventory"
+                    class="btn-primary btn-block btn btn-lg"/>
+          </div>
+          <div class="col-6">
+            <field name="id" string="Back to settings"
+                   widget="vlift_shuttle_exit_button" readonly="1"/>
+          </div>
+        </div>
+        <footer></footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="vertical_lift_shuttle_manual_barcode_form" model="ir.ui.view">
+    <field name="name">vertical.lift.shuttle.manual.barcode.view.form</field>
+    <field name="model">vertical.lift.shuttle.manual.barcode</field>
+    <field name="arch" type="xml">
+      <form string="Shuttle">
+        <div class="row o_vlift_shuttle_manual_barcode">
+          <div class="col-8">
+            <field name="barcode"/>
+          </div>
+          <div class="col-2">
+            <button name="button_save"
+                    string="Confirm"
+                    type="object"
+                    class="btn-primary"/>
+          </div>
+        </div>
+        <footer></footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="vertical_lift_shuttle_view_form" model="ir.ui.view">
+    <field name="name">vertical.lift.shuttle.view.form</field>
+    <field name="model">vertical.lift.shuttle</field>
+    <field name="arch" type="xml">
+      <form string="Operations">
+        <group>
+          <field name="name"/>
+          <field name="mode"/>
+          <field name="location_id"/>
+          <field name="hardware"/>
+          <!-- move line visible and editable for prototyping purposes, to
+remove later -->
+          <field name="current_move_line_id" groups="base.group_no_one"/>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="vertical_lift_shuttle_view_kanban">
+    <field name="name">vertical.lift.shuttle.kanban</field>
+    <field name="model">vertical.lift.shuttle</field>
+    <field name="arch" type="xml">
+      <kanban class="o_kanban_dashboard">
+        <field name="name"/>
+        <field name="mode"/>
+        <field name="number_of_ops"/>
+        <field name="number_of_ops_all"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_has_icon open_shuttle_screen">
+              <div class="o_vlift_kanban_main">
+
+                <div class="o_kanban_card_content">
+                  <div class="o_kanban_primary_left">
+                    <div class="o_primary">
+                      <strong class="o_kanban_record_title">
+                        <span><t t-esc="record.name.value"/></span>
+                      </strong>
+                    </div>
+                    <div class="row">
+                      <div class="col-8">
+                        Mode:
+                        <field name="mode"/>
+                      </div>
+                      <div class="col-8">
+                        Operations:
+                        <field name="number_of_ops"/>
+                      </div>
+                      <div class="col-8">
+                        All <t t-esc="record.mode.value"/> Operations: 
+                        <field name="number_of_ops_all"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="o_kanban_card_manage_pane dropdown-menu" groups="stock.group_stock_manager" role="menu">
+                  <div class="o_kanban_card_manage_section o_kanban_manage_reports">
+                    <div role="menuitem">
+                      <a type="edit">Settings</a>
+                    </div>
+                  </div>
+                </div>
+                <a class="o_kanban_manage_toggle_button o_left" href="#" groups="stock.group_stock_manager"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="vertical_lift_shuttle_view_tree">
+    <field name="name">vertical.lift.shuttle.tree</field>
+    <field name="model">vertical.lift.shuttle</field>
+    <field name="arch" type="xml">
+      <tree string="Shuttle">
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="vertical_lift_shuttle_action">
+    <field name="name">Vertical Lift Shuttles</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">vertical.lift.shuttle</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="target">current</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Open the Shuttle Interface.
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="vertical_lift_shuttle"
+            name="Vertical Lift Shuttles"
+            action="vertical_lift_shuttle_action"
+            parent="stock.menu_stock_warehouse_mgmt"
+            sequence="15"/>
+
+</odoo>
