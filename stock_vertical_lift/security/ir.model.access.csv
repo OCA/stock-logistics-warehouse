@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vertical_lift_shuttle_stock_user,access_vertical_lift_shuttle stock user,model_vertical_lift_shuttle,stock.group_stock_user,1,0,0,0
+access_vertical_lift_shuttle_manager,access_vertical_lift_shuttle stock manager,model_vertical_lift_shuttle,stock.group_stock_manager,1,1,1,1
