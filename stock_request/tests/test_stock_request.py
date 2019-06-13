@@ -688,11 +688,15 @@ class TestStockRequestBase(TestStockRequest):
         )
         stock_request_2.product_uom_qty = 6.0
         self.product.route_ids = [(6, 0, self.route.ids)]
-        stock_request_1.with_user(self.stock_request_manager).action_confirm()
-        stock_request_2.with_user(self.stock_request_manager).action_confirm()
-        self.assertEqual(len(stock_request_1.picking_ids), 1)
-        self.assertEqual(stock_request_1.picking_ids, stock_request_2.picking_ids)
-        self.assertEqual(stock_request_1.move_ids, stock_request_2.move_ids)
+        stock_request_1.action_confirm()
+        stock_request_2.action_confirm()
+        self.assertEqual(len(stock_request_1.sudo().picking_ids), 1)
+        self.assertEqual(
+            stock_request_1.sudo().picking_ids, stock_request_2.sudo().picking_ids
+        )
+        self.assertEqual(
+            stock_request_1.sudo().move_ids, stock_request_2.sudo().move_ids
+        )
         self.env["stock.quant"].create(
             {
                 "product_id": self.product.id,
@@ -700,12 +704,28 @@ class TestStockRequestBase(TestStockRequest):
                 "quantity": 10.0,
             }
         )
-        picking = stock_request_1.picking_ids[0]
-        picking.with_user(self.stock_request_manager).action_confirm()
-        picking.with_user(self.stock_request_manager).action_assign()
+        picking = stock_request_1.sudo().picking_ids[0]
+        picking.action_confirm()
+        picking.action_assign()
+        self.assertEqual(stock_request_1.qty_in_progress, 4)
+        self.assertEqual(stock_request_1.qty_done, 0)
+        self.assertEqual(stock_request_1.qty_cancelled, 0)
+        self.assertEqual(stock_request_2.qty_in_progress, 6)
+        self.assertEqual(stock_request_2.qty_done, 0)
+        self.assertEqual(stock_request_2.qty_cancelled, 0)
         packout1 = picking.move_line_ids[0]
-        packout1.qty_done = 10
-        picking.with_user(self.stock_request_manager).action_done()
+        packout1.qty_done = 4
+        self.env["stock.backorder.confirmation"].create(
+            {"pick_ids": [(4, picking.id)]}
+        ).process_cancel_backorder()
+        self.assertEqual(stock_request_1.qty_in_progress, 0)
+        self.assertEqual(stock_request_1.qty_done, 4)
+        self.assertEqual(stock_request_1.qty_cancelled, 0)
+        self.assertEqual(stock_request_1.state, "done")
+        self.assertEqual(stock_request_2.qty_in_progress, 0)
+        self.assertEqual(stock_request_2.qty_done, 0)
+        self.assertEqual(stock_request_2.qty_cancelled, 6)
+        self.assertEqual(stock_request_2.state, "done")
 
     def test_cancel_request(self):
         expected_date = fields.Datetime.now()
