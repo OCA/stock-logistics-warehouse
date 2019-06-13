@@ -30,6 +30,7 @@
                 <field name="product_uom_qty" />
                 <field name="qty_in_progress" />
                 <field name="qty_done" />
+                <field name="qty_cancelled" />
                 <field name="state" />
             </tree>
         </field>
@@ -208,8 +209,18 @@
                                     groups="uom.group_uom"
                                 />
                             </div>
-                            <field name="qty_in_progress" />
-                            <field name="qty_done" />
+                            <field
+                                name="qty_in_progress"
+                                attrs="{'invisible': [('state', '=', 'draft')]}"
+                            />
+                            <field
+                                name="qty_done"
+                                attrs="{'invisible': [('state', '=', 'draft')]}"
+                            />
+                            <field
+                                name="qty_cancelled"
+                                attrs="{'invisible': [('state', '=', 'draft')]}"
+                            />
                         </group>
                     </group>
                     <notebook>
