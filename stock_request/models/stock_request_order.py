@@ -223,30 +223,28 @@ class StockRequestOrder(models.Model):
                 line.procurement_group_id = self.procurement_group_id
 
     def action_confirm(self):
-        for line in self.stock_request_ids:
-            line.action_confirm()
-        self.state = "open"
+        self.mapped("stock_request_ids").action_confirm()
+        self.write({"state": "open"})
         return True
 
     def action_draft(self):
-        for line in self.stock_request_ids:
-            line.action_draft()
-        self.state = "draft"
+        self.mapped("stock_request_ids").action_draft()
+        self.write({"state": "draft"})
         return True
 
     def action_cancel(self):
-        for line in self.stock_request_ids:
-            line.action_cancel()
-        self.state = "cancel"
+        self.mapped("stock_request_ids").action_cancel()
+        self.write({"state": "cancel"})
         return True
 
     def action_done(self):
-        self.state = "done"
+        self.write({"state": "done"})
         return True
 
     def check_done(self):
-        if not self.stock_request_ids.filtered(lambda r: r.state != "done"):
-            self.action_done()
+        for rec in self:
+            if not rec.stock_request_ids.filtered(lambda r: r.state != "done"):
+                rec.action_done()
         return
 
     def action_view_transfer(self):
