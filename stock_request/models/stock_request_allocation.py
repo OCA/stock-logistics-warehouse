@@ -44,6 +44,7 @@ class StockRequestAllocation(models.Model):
     )
     allocated_product_qty = fields.Float(
         'Allocated Quantity',
+        copy=False,
         help='Quantity of the stock request allocated to the stock move, '
              'in the default UoM of the product',
     )
@@ -62,7 +63,7 @@ class StockRequestAllocation(models.Model):
                  'stock_move_id', 'stock_move_id.state')
     def _compute_open_product_qty(self):
         for rec in self:
-            if rec.stock_move_id.state == 'cancel':
+            if rec.stock_move_id.state in ['cancel', 'done']:
                 rec.open_product_qty = 0.0
             else:
                 rec.open_product_qty = \
