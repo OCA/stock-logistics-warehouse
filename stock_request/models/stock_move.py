@@ -48,3 +48,26 @@ class StockMove(models.Model):
                     "that of the location."
                 )
             )
+
+    def copy_data(self, default=None):
+        if not default:
+            default = {}
+        if "allocation_ids" not in default:
+            default["allocation_ids"] = []
+        for alloc in self.allocation_ids:
+            default["allocation_ids"].append(
+                (
+                    0,
+                    0,
+                    {
+                        "stock_request_id": alloc.stock_request_id.id,
+                        "requested_product_uom_qty": alloc.requested_product_uom_qty,
+                    },
+                )
+            )
+        return super(StockMove, self).copy_data(default)
+
+    def _action_cancel(self):
+        res = super()._action_cancel()
+        self.mapped("allocation_ids.stock_request_id").check_done()
+        return res
