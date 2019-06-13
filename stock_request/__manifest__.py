@@ -4,11 +4,10 @@
 {
     "name": "Stock Request",
     "summary": "Internal request for stock",
-    "version": "11.0.3.1.2",
+    "version": "11.0.3.3.0",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
-    "author": "Eficent, "
-              "Odoo Community Association (OCA)",
+    "author": "Eficent, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": [
         "stock",
@@ -26,5 +25,4 @@
         "views/stock_request_menu.xml",
         "data/stock_request_sequence_data.xml",
     ],
-    "installable": True,
 }
