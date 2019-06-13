@@ -608,9 +608,25 @@ class TestStockRequest(common.TransactionCase):
         picking = stock_request_1.sudo().picking_ids[0]
         picking.action_confirm()
         picking.action_assign()
+        self.assertEqual(stock_request_1.qty_in_progress, 4)
+        self.assertEqual(stock_request_1.qty_done, 0)
+        self.assertEqual(stock_request_1.qty_cancelled, 0)
+        self.assertEqual(stock_request_2.qty_in_progress, 6)
+        self.assertEqual(stock_request_2.qty_done, 0)
+        self.assertEqual(stock_request_2.qty_cancelled, 0)
         packout1 = picking.move_line_ids[0]
-        packout1.qty_done = 10
-        picking.action_done()
+        packout1.qty_done = 4
+        self.env['stock.backorder.confirmation'].create(
+            {'pick_ids': [(4, picking.id)]}
+        ).process_cancel_backorder()
+        self.assertEqual(stock_request_1.qty_in_progress, 0)
+        self.assertEqual(stock_request_1.qty_done, 4)
+        self.assertEqual(stock_request_1.qty_cancelled, 0)
+        self.assertEqual(stock_request_1.state, 'done')
+        self.assertEqual(stock_request_2.qty_in_progress, 0)
+        self.assertEqual(stock_request_2.qty_done, 0)
+        self.assertEqual(stock_request_2.qty_cancelled, 6)
+        self.assertEqual(stock_request_2.state, 'done')
 
     def test_cancel_request(self):
         expected_date = fields.Date.today()
