@@ -1,3 +1,8 @@
+.o_field_kardex_tray_matrix {
+    background-color: #eeeeee;
+    border: 2px #000000 solid;
+}
+
 .o_web_client.o_fullscreen {
     $o-kardex-padding: $o-horizontal-padding;
 
@@ -80,12 +85,10 @@
                     .o_group {
                         display: block;
                     }
+                }
 
-                    canvas {
-                        width: 450px;
-                        background-color: #ffffff;
-                        border: 2px #000000 solid;
-                    }
+                .o_field_kardex_tray_matrix {
+                    width: 450px;
                 }
             }
         }
