@@ -28,3 +28,5 @@ class StockKardexTrayType(models.Model):
             record.tray_matrix = {'selected': None, 'cells': cells}
 
     # TODO prevent to set active=False on a type used in a location
+    # TODO we should not be able to change cells and rows for types used
+    # in locations

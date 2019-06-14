@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_location_form_kardex" model="ir.ui.view">
+    <field name="name">stock.location.form.kardex</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_form"/>
+    <field name="arch" type="xml">
+      <group name="localization" position="after">
+        <group string="Kardex" name="kardex">
+          <field name="kardex_tray"/>
+          <field name="kardex_tray_type_id"
+                 attrs="{'required': [('kardex_tray', '=', True)]}"/>
+        </group>
+      </group>
+    </field>
+  </record>
+
+</odoo>

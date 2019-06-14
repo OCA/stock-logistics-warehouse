@@ -14,6 +14,7 @@
     ],
     'website': 'https://www.camptocamp.com',
     'data': [
+        'views/stock_location_views.xml',
         'views/stock_move_line_views.xml',
         'views/stock_picking_type_views.xml',
         'views/stock_kardex_views.xml',
