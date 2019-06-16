@@ -137,6 +137,11 @@ msgid "Production Order for Raw Materials"
 msgstr ""
 
 #. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_stock_reservation_purchase_line_id
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: model:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
 msgid "Release Reservation"
 msgstr ""

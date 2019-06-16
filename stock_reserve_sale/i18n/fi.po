@@ -143,6 +143,13 @@ msgid "Production Order for Raw Materials"
 msgstr ""
 
 #. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_stock_reservation_purchase_line_id
+#, fuzzy
+#| msgid "Sale Order Line"
+msgid "Purchase Order Line"
+msgstr "Myyntitilausrivi"
+
+#. module: stock_reserve_sale
 #: model:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
 msgid "Release Reservation"
 msgstr "Peru varaus"
