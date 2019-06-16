@@ -19,7 +19,6 @@
 ##############################################################################
 
 from odoo import models, fields, api, _
-from odoo.exceptions import except_orm
 
 
 class StockReservation(models.Model):
@@ -115,7 +114,7 @@ class StockReservation(models.Model):
             location = self.env.ref(ref, raise_if_not_found=True)
             location.check_access_rule('read')
             location_id = location.id
-        except (except_orm, ValueError):
+        except ValueError:
             location_id = False
         return location_id
 
@@ -137,7 +136,7 @@ class StockReservation(models.Model):
         A date until which the product is reserved can be specified.
         """
         self.write({'date_expected': fields.Datetime.now()})
-        self.mapped('move_id')._action_confirm()
+        self.mapped('move_id')._action_confirm(merge=False, merge_into=False)
         self.mapped('move_id.picking_id').action_assign()
         return True
 
