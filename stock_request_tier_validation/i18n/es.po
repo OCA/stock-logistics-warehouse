@@ -45,6 +45,14 @@ msgid "Dismiss"
 msgstr "Descartar"
 
 #. module: stock_request_tier_validation
+#: model:tier.definition,name:stock_request_tier_validation.stock_request_default_tier_definition
+#: model:tier.definition,name:stock_request_tier_validation.stock_request_order_default_tier_definition
+#, fuzzy
+#| msgid "Tier Review"
+msgid "Manager review"
+msgstr "Revisión de nivel"
+
+#. module: stock_request_tier_validation
 #: model:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 #, fuzzy
 #| msgid "Stock Request Order"
