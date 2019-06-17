@@ -27,8 +27,7 @@
  'images': [],
  'website': "http://www.camptocamp.com",
  'depends': ['sale_stock',
-             'stock_reserve',
-             'sale'
+             'stock_reserve'
              ],
  'demo': [],
  'data': ['security/ir.model.access.csv',
