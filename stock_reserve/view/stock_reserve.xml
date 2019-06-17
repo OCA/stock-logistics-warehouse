@@ -27,7 +27,7 @@
                         <div>
                             <field name="product_uom_qty" class="oe_inline"/>
                             <field name="product_uom"
-                                groups="product.group_uom" class="oe_inline"/>
+                                groups="stock.group_stock_user" class="oe_inline"/>
                         </div>
                         <field name="name"/>
                         <field name="date_validity" />
@@ -38,7 +38,7 @@
                         <field name="restrict_partner_id" groups="stock.group_tracking_owner"/>
                     </group>
                     <group name="location" string="Locations"
-                        groups="stock.group_locations">
+                        groups="stock.group_stock_multi_locations">
                         <field name="location_id"/>
                         <field name="location_dest_id"/>
                     </group>

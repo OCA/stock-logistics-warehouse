@@ -23,6 +23,7 @@ from odoo import models, fields, api
 
 class SaleStockReserve(models.TransientModel):
     _name = 'sale.stock.reserve'
+    _description = 'Sale Stock Reservation'
 
     date_validity = fields.Date(
         "Validity Date",
