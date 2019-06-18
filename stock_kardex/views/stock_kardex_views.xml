@@ -145,6 +145,7 @@
           <field name="name"/>
           <field name="address"/>
           <field name="mode"/>
+          <field name="location_id"/>
           <!-- visible and editable for prototyping purposes -->
           <field name="current_move_line"/>
         </group>

@@ -7,6 +7,8 @@ from odoo import _, api, fields, models
 class StockLocation(models.Model):
     _inherit = "stock.location"
 
+    kardex = fields.Boolean()
+    parent_is_kardex = fields.Boolean(compute='_compute_parent_is_kardex')
     kardex_tray = fields.Boolean()
     kardex_tray_type_id = fields.Many2one(
         comodel_name="stock.kardex.tray.type", ondelete="restrict"
@@ -19,6 +21,16 @@ class StockLocation(models.Model):
         ondelete="restrict",
         readonly=True,
     )
+
+    @api.depends('location_id.parent_is_kardex')
+    def _compute_parent_is_kardex(self):
+        for location in self:
+            parent = location.location_id
+            while parent:
+                if parent.kardex:
+                    location.parent_is_kardex = True
+                    break
+                parent = parent.location_id
 
     @api.model
     def create(self, vals):

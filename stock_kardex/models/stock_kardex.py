@@ -17,6 +17,15 @@ class StockKardex(models.Model):
         default='pick',
         required=True,
     )
+    location_id = fields.Many2one(
+        comodel_name='stock.location',
+        required=True,
+        domain="[('kardex', '=', True)]",
+        context="{'default_kardex': True}",
+        ondelete='restrict',
+        help="The Kardex source location for Pick operations "
+        "and destination location for Put operations.",
+    )
     current_move_line = fields.Many2one(comodel_name='stock.move.line')
 
     operation_descr = fields.Char(

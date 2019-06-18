@@ -8,9 +8,13 @@
     <field name="arch" type="xml">
       <group name="localization" position="after">
         <group string="Kardex" name="kardex">
-          <field name="kardex_tray"/>
+          <field name="parent_is_kardex" invisible="1"/>
+          <field name="kardex"
+                 attrs="{'invisible': [('parent_is_kardex', '=', True)]}"/>
+          <field name="kardex_tray"
+                 attrs="{'invisible': [('parent_is_kardex', '=', False)]}"/>
           <field name="kardex_tray_type_id"
-                 attrs="{'required': [('kardex_tray', '=', True)]}"/>
+                 attrs="{'invisible': [('kardex_tray', '=', False)], 'required': [('kardex_tray', '=', True)]}"/>
         </group>
       </group>
     </field>
