@@ -55,7 +55,7 @@ class StockReservation(models.Model):
         readonly=True,
         ondelete='cascade',
         index=True)
-    date_validity = fields.Date('Validity Date')
+    date_validity = fields.Date('Validity Date', default = fields.Date.today)
 
     @api.model
     def default_get(self, fields_list):
