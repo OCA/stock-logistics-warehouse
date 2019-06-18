@@ -68,32 +68,8 @@
           <!-- on the right of the screen -->
           <div class="o_kardex_data_content o_kardex_tray">
             <group col="1">
-              <!-- These 2 fields must come from the location.
-                   Currently, the HTML mimics what Odoo generates for <field/>
-              -->
-              <tr>
-                <td class="o_td_label" style="min-width: 150px;">
-                  <span class="o_readonly_modifier" style="font-weight: bold; margin: 0 5px 0 0; font-size: 1.08333333rem; line-height: 1.5;">Tray</span>
-
-                </td>
-                <td>
-                  <span class="o_field_integer o_field_number o_field_widget o_readonly_modifier"
-                        name="kardex_tray_tray">
-                    SHU-1108
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="o_td_label" style="min-width: 150px;">
-                  <span class="o_readonly_modifier" style="font-weight: bold; margin: 0 5px 0 0; font-size: 1.08333333rem; line-height: 1.5;">Box Type</span>
-                </td>
-                <td>
-                  <span class="o_field_integer o_field_number o_field_widget o_readonly_modifier"
-                        name="kardex_tray_box_type">
-                    B30401
-                  </span>
-                </td>
-              </tr>
+              <field name="kardex_tray_name"/>
+              <field name="kardex_tray_type_code"/>
               <field name="kardex_tray_y"/>
               <field name="kardex_tray_x"/>
             </group>

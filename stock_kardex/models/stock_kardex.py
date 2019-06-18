@@ -1,6 +1,5 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from random import randint
 
 from odoo import _, api, exceptions, fields, models
 
@@ -41,6 +40,22 @@ class StockKardex(models.Model):
     )
 
     # tray information (will come from stock.location or a new tray model)
+    kardex_tray_location_id = fields.Many2one(
+        comodel_name='stock.location',
+        compute='_compute_kardex_tray_matrix',
+        string='Tray Location',
+    )
+    kardex_tray_name = fields.Char(
+        compute='_compute_kardex_tray_matrix', string='Tray Name'
+    )
+    kardex_tray_type_id = fields.Many2one(
+        comodel_name='stock.kardex.tray.type',
+        compute='_compute_kardex_tray_matrix',
+        string='Tray Type',
+    )
+    kardex_tray_type_code = fields.Char(
+        compute='_compute_kardex_tray_matrix', string='Tray Type'
+    )
     kardex_tray_x = fields.Integer(
         string='X', compute='_compute_kardex_tray_matrix'
     )
@@ -91,19 +106,33 @@ class StockKardex(models.Model):
     @api.depends()
     def _compute_kardex_tray_matrix(self):
         for record in self:
-            # prototype code, random matrix
-            cols = randint(4, 8)
-            rows = randint(1, 3)
-            selected = [randint(0, cols - 1), randint(0, rows - 1)]
+            modes = {
+                'pick': 'location_id',
+                'put': 'location_dest_id',
+                # TODO what to do for inventory?
+                'inventory': 'location_id',
+            }
+            location = record.current_move_line[modes[record.mode]]
+            tray_type = location.generated_for_tray_type_id
+            cols = tray_type.cols
+            rows = tray_type.rows
+            selected = []
+            if location:
+                selected = [location.posx - 1, location.posy - 1]
             cells = []
             for __ in range(rows):
                 row = []
                 for __ in range(cols):
-                    row.append(randint(0, 1))
+                    # TODO set 1 if we have stock, else 0
+                    row.append(1)
                 cells.append(row)
 
-            record.kardex_tray_x = selected[0] + 1
-            record.kardex_tray_y = selected[1] + 1
+            record.kardex_tray_location_id = location.id
+            record.kardex_tray_name = location.name
+            record.kardex_tray_type_id = tray_type.id
+            record.kardex_tray_type_code = tray_type.code
+            record.kardex_tray_x = location.posx
+            record.kardex_tray_y = location.posy
             record.kardex_tray_matrix = {
                 # x, y: position of the selected cell
                 'selected': selected,
