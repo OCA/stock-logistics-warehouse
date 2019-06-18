@@ -28,6 +28,14 @@ class StockKardex(models.Model):
     )
     current_move_line = fields.Many2one(comodel_name='stock.move.line')
 
+    number_of_ops = fields.Integer(
+        compute='_compute_number_of_ops', string='Number of Operations'
+    )
+    number_of_ops_all = fields.Integer(
+        compute='_compute_number_of_ops_all',
+        string='Number of Operations in all Kardex',
+    )
+
     operation_descr = fields.Char(
         string="Operation", default="Scan next PID", readonly=True
     )
@@ -71,6 +79,16 @@ class StockKardex(models.Model):
         raise exceptions.UserError('Scanned barcode: {}'.format(barcode))
 
     @api.depends()
+    def _compute_number_of_ops(self):
+        for record in self:
+            record.number_of_ops = record.count_move_lines_to_do()
+
+    @api.depends()
+    def _compute_number_of_ops_all(self):
+        for record in self:
+            record.number_of_ops_all = record.count_move_lines_to_do_all()
+
+    @api.depends()
     def _compute_kardex_tray_matrix(self):
         for record in self:
             # prototype code, random matrix
@@ -93,7 +111,90 @@ class StockKardex(models.Model):
                 'cells': cells,
             }
 
+    def _domain_move_lines_to_do(self):
+        domain = [
+            # TODO check state
+            ('state', '=', 'assigned')
+        ]
+        domain_extensions = {
+            'pick': [('location_id', 'child_of', self.location_id.id)],
+            'put': [('location_dest_id', 'child_of', self.location_id.id)],
+            # TODO
+            'inventory': [('id', '=', 0)],
+        }
+        return domain + domain_extensions[self.mode]
+
+    def _domain_move_lines_to_do_all(self):
+        domain = [
+            # TODO check state
+            ('state', '=', 'assigned')
+        ]
+        kardex_locations = self.env['stock.location'].search(
+            [('kardex', '=', True)]
+        )
+        domain_extensions = {
+            'pick': [('location_id', 'child_of', kardex_locations.ids)],
+            'put': [('location_dest_id', 'child_of', kardex_locations.ids)],
+            # TODO
+            'inventory': [('id', '=', 0)],
+        }
+        return domain + domain_extensions[self.mode]
+
+    def count_move_lines_to_do(self):
+        self.ensure_one()
+        return self.env['stock.move.line'].search_count(
+            self._domain_move_lines_to_do()
+        )
+
+    def count_move_lines_to_do_all(self):
+        self.ensure_one()
+        return self.env['stock.move.line'].search_count(
+            self._domain_move_lines_to_do_all()
+        )
+
+    def button_release(self):
+        raise exceptions.UserError(_('what does this one do?'))
+
+    def process_current_pick(self):
+        # test code, TODO the smart one
+        # (scan of barcode increments qty, save calls action_done?)
+        line = self.current_move_line
+        line.qty_done = line.product_qty
+        line.move_id._action_done()
+
+    def process_current_put(self):
+        raise exceptions.UserError(_('Put workflow not implemented'))
+
+    def process_current_inventory(self):
+        raise exceptions.UserError(_('Inventory workflow not implemented'))
+
+    def button_save(self):
+        self.ensure_one()
+        method = 'process_current_{}'.format(self.mode)
+        getattr(self, method)()
+        self.select_next_move_line()
+        if not self.current_move_line:
+            # sorry not sorry
+            return {
+                'effect': {
+                    'fadeout': 'slow',
+                    'message': _('Congrats, you cleared the queue!'),
+                    'img_url': '/web/static/src/img/smile.svg',
+                    'type': 'rainbow_man',
+                }
+            }
+
+    # TODO call this each time we process a move line
+    def select_next_move_line(self):
+        self.ensure_one()
+        # TODO sort?
+        next_move_line = self.env['stock.move.line'].search(
+            self._domain_move_lines_to_do(), limit=1
+        )
+        self.current_move_line = next_move_line
+
     def action_open_screen(self):
+        self.select_next_move_line()
         self.ensure_one()
         screen_xmlid = 'stock_kardex.stock_kardex_view_form_screen'
         return {
@@ -119,10 +220,6 @@ class StockKardex(models.Model):
             'target': 'new',
             'res_id': self.id,
         }
-
-    def action_quit_screen(self):
-        action_xmlid = 'stock_kardex.stock_kardex_action'
-        return self.env.ref(action_xmlid).read()[0]
 
     # TODO: should the mode be changed on all the kardex at the same time?
     def switch_pick(self):

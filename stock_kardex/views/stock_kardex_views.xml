@@ -16,6 +16,9 @@
             <field name="mode" readonly="1"/>
           </div>
           <div class="o_kardex_header_right o_kardex_header_content">
+            <label for="number_of_ops"/>
+            <field name="number_of_ops" readonly="1"/> /
+            <field name="number_of_ops_all" readonly="1"/>
           </div>
         </div>
         <div class="o_kardex_actions">
@@ -27,13 +30,13 @@
           </div>
           <div class="o_kardex_content o_kardex_content_right">
             <div>
-              <button name="do_dummy"
+              <button name="button_save"
                       type="object"
                       string="Save"
                       icon="fa-check"
                       class="btn-primary"
                       barcode_trigger="save"/>
-              <button name="do_dummy"
+              <button name="button_release"
                       type="object"
                       string="Release"
                       class="btn-primary"
@@ -161,6 +164,8 @@
         <field name="name"/>
         <field name="address"/>
         <field name="mode"/>
+        <field name="number_of_ops"/>
+        <field name="number_of_ops_all"/>
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_global_click o_has_icon open_kardex_screen">
@@ -173,7 +178,20 @@
                         <span><t t-esc="record.name.value"/></span>
                       </strong>
                     </div>
-                    <span>Mode: <t t-esc="record.mode.value"/></span>
+                    <div class="row">
+                      <div class="col-8">
+                        Mode:
+                        <field name="mode"/>
+                      </div>
+                      <div class="col-8">
+                        Operations:
+                        <field name="number_of_ops"/>
+                      </div>
+                      <div class="col-8">
+                        All <t t-esc="record.mode.value"/> Operations: 
+                        <field name="number_of_ops_all"/>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
