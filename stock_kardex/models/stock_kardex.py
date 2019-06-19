@@ -25,6 +25,7 @@ class StockKardex(models.Model):
         help="The Kardex source location for Pick operations "
         "and destination location for Put operations.",
     )
+    # TODO add _id
     current_move_line = fields.Many2one(comodel_name='stock.move.line')
 
     number_of_ops = fields.Integer(
@@ -191,6 +192,8 @@ class StockKardex(models.Model):
         raise exceptions.UserError(_('Inventory workflow not implemented'))
 
     def button_save(self):
+        if not self:
+            return
         self.ensure_one()
         method = 'process_current_{}'.format(self.mode)
         getattr(self, method)()
@@ -206,14 +209,14 @@ class StockKardex(models.Model):
                 }
             }
 
-    # TODO call this each time we process a move line
     def select_next_move_line(self):
         self.ensure_one()
-        # TODO sort?
         next_move_line = self.env['stock.move.line'].search(
             self._domain_move_lines_to_do(), limit=1
         )
         self.current_move_line = next_move_line
+        descr = _('Scan next PID') if next_move_line else _('No operations')
+        self.operation_descr = descr
 
     def action_open_screen(self):
         self.select_next_move_line()

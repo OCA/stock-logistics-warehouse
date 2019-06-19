@@ -49,10 +49,11 @@
             <field name="operation_descr"/>
           </div>
         </div>
-        <div class="o_kardex_data">
+        <div class="o_kardex_data" attrs="{'invisible': [('current_move_line', '=', False)]}">
           <!-- on the left of the screen -->
           <div class="o_kardex_data_content o_kardex_move">
             <div>
+              <field name="current_move_line" invisible="1"/>
               <label for="product_id"/>
               <field name="product_id" readonly="1" options="{'no_open': True}"/>
               <field name="qty_done" readonly="1" force_save="1"/> / 
