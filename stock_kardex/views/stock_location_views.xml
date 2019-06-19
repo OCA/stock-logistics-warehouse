@@ -6,17 +6,20 @@
     <field name="model">stock.location</field>
     <field name="inherit_id" ref="stock.view_location_form"/>
     <field name="arch" type="xml">
+      <field name="return_location" position="after">
+        <field name="kardex_location"
+               attrs="{'invisible': [('kardex_kind', '!=', False)]}"
+               />
+      </field>
       <group name="localization" position="after">
-        <group string="Kardex" name="kardex">
-          <field name="parent_is_kardex" invisible="1"/>
-          <field name="kardex"
-                 attrs="{'invisible': [('parent_is_kardex', '=', True)]}"/>
-          <field name="kardex_tray"
-                 attrs="{'invisible': [('parent_is_kardex', '=', False)]}"/>
+        <group string="Kardex" name="kardex"
+               attrs="{'invisible': [('kardex_kind', 'not in', ('shuttle', 'tray', 'cell'))]}">
+          <field name="kardex_kind"/>
           <field name="kardex_tray_type_id"
-                 attrs="{'invisible': [('kardex_tray', '=', False)], 'required': [('kardex_tray', '=', True)]}"/>
+                 attrs="{'invisible': [('kardex_kind', '!=', 'tray')], 'required': [('kardex_kind', '=', 'tray')]}"/>
           <field name="tray_matrix"
                  widget="kardex_tray_matrix"
+                 attrs="{'invisible': [('kardex_kind', 'not in', ('tray', 'cell'))]}"
                  />
         </group>
       </group>

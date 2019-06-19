@@ -20,6 +20,7 @@
         'views/stock_kardex_views.xml',
         'views/stock_kardex_tray_type_views.xml',
         'views/stock_kardex_templates.xml',
+        'data/stock_location.xml',
         'data/stock_kardex_tray_type.xml',
         'security/ir.model.access.csv',
     ],

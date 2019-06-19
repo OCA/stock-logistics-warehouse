@@ -19,8 +19,7 @@ class StockKardex(models.Model):
     location_id = fields.Many2one(
         comodel_name='stock.location',
         required=True,
-        domain="[('kardex', '=', True)]",
-        context="{'default_kardex': True}",
+        domain="[('kardex_kind', '=', 'shuttle')]",
         ondelete='restrict',
         help="The Kardex source location for Pick operations "
         "and destination location for Put operations.",
@@ -114,7 +113,7 @@ class StockKardex(models.Model):
                 'inventory': 'location_id',
             }
             location = record.current_move_line[modes[record.mode]]
-            tray_type = location.generated_for_tray_type_id
+            tray_type = location.location_id.kardex_tray_type_id
             selected = []
             cells = []
             if location:
@@ -153,7 +152,7 @@ class StockKardex(models.Model):
             ('state', '=', 'assigned')
         ]
         kardex_locations = self.env['stock.location'].search(
-            [('kardex', '=', True)]
+            [('kardex_kind', '=', 'view')]
         )
         domain_extensions = {
             'pick': [('location_id', 'child_of', kardex_locations.ids)],

@@ -7,9 +7,21 @@ from odoo import _, api, fields, models
 class StockLocation(models.Model):
     _inherit = "stock.location"
 
-    kardex = fields.Boolean()
-    parent_is_kardex = fields.Boolean(compute='_compute_parent_is_kardex')
-    kardex_tray = fields.Boolean()
+    kardex_location = fields.Boolean(
+        'Is a Kardex View Location?',
+        default=False,
+        help="Check this box to use it as the view for Kardex shuttles.",
+    )
+    kardex_kind = fields.Selection(
+        selection=[
+            ('view', 'View'),
+            ('shuttle', 'Shuttle'),
+            ('tray', 'Tray'),
+            ('cell', 'Cell'),
+        ],
+        compute='_compute_kardex_kind',
+        store=True,
+    )
     kardex_tray_type_id = fields.Many2one(
         comodel_name="stock.kardex.tray.type", ondelete="restrict"
     )
@@ -19,75 +31,76 @@ class StockLocation(models.Model):
     )
     tray_matrix = fields.Serialized(compute='_compute_tray_matrix')
 
-    # Only for trays cells (boxes).
-    # Children of 'kardey_tray' locations, they are automatically generated
-    generated_for_tray_type_id = fields.Many2one(
-        comodel_name="stock.kardex.tray.type",
-        ondelete="restrict",
-        readonly=True,
-    )
-
-    # TODO document hierarchy + replace "parent_is_kardex" and kardex_tray
+    # TODO document hierarchy
     # by an optional selection kardex_view, shuttle, tray, cell
     # Kardex View
     #   -> Shuttle
     #     -> Tray
     #       -> Cell
 
+    @api.depends('location_id', 'location_id.kardex_kind')
+    def _compute_kardex_kind(self):
+        tree = {'view': 'shuttle', 'shuttle': 'tray', 'tray': 'cell'}
+        for location in self:
+            if location.kardex_location:
+                location.kardex_kind = 'view'
+                continue
+            kind = tree.get(location.location_id.kardex_kind)
+            if kind:
+                location.kardex_kind = kind
+
     @api.depends('quant_ids.quantity')
     def _compute_kardex_cell_contains_stock(self):
         for location in self:
-            # TODO replace by check on 'cell' only
-            if not location.parent_is_kardex:
+            if not location.kardex_kind == 'cell':
                 # we skip the others only for performance
                 continue
             quants = location.quant_ids.filtered(lambda r: r.quantity > 0)
             location.kardex_cell_contains_stock = bool(quants)
 
-    @api.depends('quant_ids.quantity', 'location_id.kardex_tray_type_id')
+    @api.depends(
+        'quant_ids.quantity',
+        'kardex_tray_type_id',
+        'location_id.kardex_tray_type_id',
+    )
     def _compute_tray_matrix(self):
         for location in self:
-            if not location.parent_is_kardex:
+            if location.kardex_kind not in ('tray', 'cell'):
                 continue
             location.tray_matrix = {
                 'selected': location._kardex_cell_coords(),
                 'cells': location._tray_cells_matrix(),
             }
 
-    @api.depends('location_id.parent_is_kardex')
-    def _compute_parent_is_kardex(self):
-        for location in self:
-            parent = location.location_id
-            while parent:
-                if parent.kardex:
-                    location.parent_is_kardex = True
-                    break
-                parent = parent.location_id
-
-    @api.model
-    def create(self, vals):
-        records = super().create(vals)
-        if vals.get('kardex_tray'):
-            records._update_tray_sublocations()
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._update_tray_sublocations()
         return records
 
     @api.multi
     def write(self, vals):
-        result = super().write(vals)
-        if vals.get('kardex_tray') or vals.get('kardex_tray_type_id'):
-            self._update_tray_sublocations()
-        return result
+        for location in self:
+            trays_to_update = False
+            if 'kardex_tray_type_id' in vals:
+                new_tray_type_id = vals.get('kardex_tray_type_id')
+                trays_to_update = (
+                    location.kardex_tray_type_id.id != new_tray_type_id
+                )
+            super(StockLocation, location).write(vals)
+            if trays_to_update:
+                self._update_tray_sublocations()
+        return True
 
     def _kardex_cell_coords(self):
-        # TODO check is a cell
-        if not self.generated_for_tray_type_id:  # is a cell
+        if not self.kardex_kind == 'cell':
             coords = []
         coords = [self.posx - 1, self.posy - 1]
         return coords
 
     def _tray_cells_matrix(self):
-        assert self.parent_is_kardex
-        if self.kardex_tray:
+        assert self.kardex_kind in ('tray', 'cell')
+        if self.kardex_kind == 'tray':
             location = self
         else:
             location = self.location_id
@@ -104,18 +117,14 @@ class StockLocation(models.Model):
         # it is empty
         values = []
         for location in self:
-            if not location.kardex_tray:
-                sublocs = location.child_ids.filtered(
-                    lambda r: r.generated_for_tray_type_id
-                )
-                sublocs.write({'active': False})
+            if not location.kardex_kind == 'tray':
                 continue
-
             tray_type = location.kardex_tray_type_id
-            sublocs = location.child_ids.filtered(
-                lambda r: r.generated_for_tray_type_id != tray_type
-            )
-            sublocs.write({'active': False})
+
+            location.child_ids.write({'active': False})
+
+            if not tray_type:
+                continue
 
             # create accepts several records now
             for row in range(1, tray_type.rows + 1):
@@ -128,7 +137,7 @@ class StockLocation(models.Model):
                         'posy': row,
                         'location_id': location.id,
                         'company_id': location.company_id.id,
-                        'generated_for_tray_type_id': tray_type.id,
                     }
                     values.append(subloc_values)
+        if values:
             self.create(values)
