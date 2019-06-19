@@ -23,9 +23,11 @@ class StockKardexTrayType(models.Model):
             # the tray, we generate a "full" tray, we'll
             # see all the boxes on the web widget.
             # (0 means empty, 1 means used)
-            cells = [[1] * record.cols for __ in range(record.rows)]
-
+            cells = self._generate_cells_matrix(default_state=1)
             record.tray_matrix = {'selected': None, 'cells': cells}
+
+    def _generate_cells_matrix(self, default_state=0):
+        return [[default_state] * self.cols for __ in range(self.rows)]
 
     # TODO prevent to set active=False on a type used in a location
     # TODO we should not be able to change cells and rows for types used

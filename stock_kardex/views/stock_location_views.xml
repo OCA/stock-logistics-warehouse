@@ -15,6 +15,9 @@
                  attrs="{'invisible': [('parent_is_kardex', '=', False)]}"/>
           <field name="kardex_tray_type_id"
                  attrs="{'invisible': [('kardex_tray', '=', False)], 'required': [('kardex_tray', '=', True)]}"/>
+          <field name="tray_matrix"
+                 widget="kardex_tray_matrix"
+                 />
         </group>
       </group>
     </field>

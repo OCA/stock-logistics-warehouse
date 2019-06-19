@@ -183,9 +183,12 @@ var KardexTrayMatrixField = DebouncedField.extend({
         var h = ((canvas.height - padding * rows) / rows);
 
         ctx.globalAlpha = this.globalAlpha;
+        // again, our matrix is top to bottom (0 is the first line)
+        // but visually, we want them bottom to top
+        var reversed_cells = cells.slice().reverse();
         for (var y = 0; y < rows; y++) {
             for (var x = 0; x < cols; x++) {
-                ctx.fillStyle = colors[cells[y][x]];
+                ctx.fillStyle = colors[reversed_cells[y][x]];
                 var fillWidth = w;
                 var fillHeight = h;
                 // cheat: remove the padding at bottom and right

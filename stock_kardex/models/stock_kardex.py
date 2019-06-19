@@ -114,18 +114,11 @@ class StockKardex(models.Model):
             }
             location = record.current_move_line[modes[record.mode]]
             tray_type = location.generated_for_tray_type_id
-            cols = tray_type.cols
-            rows = tray_type.rows
             selected = []
-            if location:
-                selected = [location.posx - 1, location.posy - 1]
             cells = []
-            for __ in range(rows):
-                row = []
-                for __ in range(cols):
-                    # TODO set 1 if we have stock, else 0
-                    row.append(1)
-                cells.append(row)
+            if location:
+                selected = location._kardex_cell_coords()
+                cells = location._tray_cells_matrix()
 
             record.kardex_tray_location_id = location.id
             record.kardex_tray_name = location.name
