@@ -21,6 +21,7 @@
 from odoo import models, fields, api, _
 from odoo.addons import decimal_precision as dp
 from odoo.tools.float_utils import float_round
+from odoo.exceptions import UserError
 
 class StockReservation(models.Model):
     """ Allow to reserve products.
