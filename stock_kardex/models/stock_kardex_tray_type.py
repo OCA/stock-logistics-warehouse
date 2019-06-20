@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, exceptions, fields, models
+from odoo.addons.base_sparse_field.models.fields import Serialized
 
 
 class StockKardexTrayType(models.Model):
@@ -13,7 +14,7 @@ class StockKardexTrayType(models.Model):
     rows = fields.Integer(required=True)
     cols = fields.Integer(required=True)
     active = fields.Boolean(default=True)
-    tray_matrix = fields.Serialized(compute='_compute_tray_matrix')
+    tray_matrix = Serialized(compute='_compute_tray_matrix')
     location_ids = fields.One2many(
         comodel_name='stock.location', inverse_name='kardex_tray_type_id'
     )

@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, exceptions, fields, models
+from odoo.addons.base_sparse_field.models.fields import Serialized
 
 
 class StockLocation(models.Model):
@@ -29,7 +30,7 @@ class StockLocation(models.Model):
         compute='_compute_kardex_cell_contains_stock',
         help="Used to know if a Kardex location is empty.",
     )
-    tray_matrix = fields.Serialized(compute='_compute_tray_matrix')
+    tray_matrix = Serialized(compute='_compute_tray_matrix')
 
     # TODO document hierarchy
     # by an optional selection kardex_view, shuttle, tray, cell

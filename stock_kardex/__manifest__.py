@@ -11,6 +11,7 @@
     'depends': [
         'stock',
         'barcodes',
+        'base_sparse_field',
     ],
     'website': 'https://www.camptocamp.com',
     'data': [

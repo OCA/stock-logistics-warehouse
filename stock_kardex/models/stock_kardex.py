@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, exceptions, fields, models
+from odoo.addons.base_sparse_field.models.fields import Serialized
 
 
 class StockKardex(models.Model):
@@ -62,9 +63,7 @@ class StockKardex(models.Model):
     kardex_tray_y = fields.Integer(
         string='Y', compute='_compute_kardex_tray_matrix'
     )
-    kardex_tray_matrix = fields.Serialized(
-        compute='_compute_kardex_tray_matrix'
-    )
+    kardex_tray_matrix = Serialized(compute='_compute_kardex_tray_matrix')
 
     # current operation information
     picking_id = fields.Many2one(
