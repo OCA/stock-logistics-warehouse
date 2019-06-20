@@ -171,3 +171,42 @@ class StockLocation(models.Model):
                     values.append(subloc_values)
         if values:
             self.create(values)
+
+    @api.multi
+    def _create_tray_xmlids(self):
+        """Create external IDs for generated cells
+
+        Called from stock/kardex/demo/stock_location_demo.xml.
+
+        If the tray has one. Used for the demo/test data. It will not handle
+        properly changing the tray format as the former cells will keep the
+        original xmlid built on x and y, the new ones will not be able to used
+        them. As these xmlids are meant for the demo data and the tests, it is
+        not a problem and should not be used for other purposes.
+        """
+        for location in self:
+            if location.kardex_kind != 'cell':
+                continue
+            tray = location.location_id
+            tray_external_id = tray.get_external_id().get(tray.id)
+            if not tray_external_id:
+                continue
+            if '.' not in tray_external_id:
+                continue
+            module, tray_name = tray_external_id.split('.')
+            tray_external = self.env['ir.model.data'].browse(
+                self.env['ir.model.data']._get_id(module, tray_name)
+            )
+            cell_external_id = "{}_x{}y{}".format(
+                tray_name, location.posx, location.posy
+            )
+            if not self.env.ref(cell_external_id, raise_if_not_found=False):
+                self.env['ir.model.data'].create(
+                    {
+                        'name': cell_external_id,
+                        'module': module,
+                        'model': self._name,
+                        'res_id': location.id,
+                        'noupdate': tray_external.noupdate,
+                    }
+                )

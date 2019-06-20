@@ -126,8 +126,10 @@
           <field name="address"/>
           <field name="mode"/>
           <field name="location_id"/>
-          <!-- visible and editable for prototyping purposes -->
-          <field name="current_move_line"/>
+          <field name="simulate" groups="base.group_no_one"/>
+          <!-- move line visible and editable for prototyping purposes, to
+remove later -->
+          <field name="current_move_line" groups="base.group_no_one"/>
         </group>
       </form>
     </field>

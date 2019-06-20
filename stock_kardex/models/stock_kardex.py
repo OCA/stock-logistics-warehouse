@@ -25,6 +25,9 @@ class StockKardex(models.Model):
         help="The Kardex source location for Pick operations "
         "and destination location for Put operations.",
     )
+    simulate = fields.Boolean(
+        help="When ticked, commands will not be sent to the Shuttle."
+    )
     # TODO add _id
     current_move_line = fields.Many2one(comodel_name='stock.move.line')
 
@@ -55,7 +58,7 @@ class StockKardex(models.Model):
         string='Tray Type',
     )
     kardex_tray_type_code = fields.Char(
-        compute='_compute_kardex_tray_matrix', string='Tray Type'
+        compute='_compute_kardex_tray_matrix', string='Tray Code'
     )
     kardex_tray_x = fields.Integer(
         string='X', compute='_compute_kardex_tray_matrix'

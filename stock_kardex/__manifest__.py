@@ -14,6 +14,13 @@
         'base_sparse_field',
     ],
     'website': 'https://www.camptocamp.com',
+    'demo': [
+        'demo/stock_location_demo.xml',
+        'demo/stock_kardex_demo.xml',
+        'demo/product_demo.xml',
+        'demo/stock_inventory_demo.xml',
+        'demo/stock_picking_demo.xml',
+    ],
     'data': [
         'views/stock_location_views.xml',
         'views/stock_move_line_views.xml',
