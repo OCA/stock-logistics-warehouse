@@ -11,7 +11,7 @@
     <field name="name">Tray 1A</field>
     <field name="barcode">T1A</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_1"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_klein_8x"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_small_8x"/>
     <field name="usage">internal</field>
   </record>
 
@@ -19,7 +19,7 @@
     <field name="name">Tray 1B</field>
     <field name="barcode">T1B</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_1"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_gross_16x"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_large_16x"/>
     <field name="usage">internal</field>
   </record>
 
@@ -27,7 +27,7 @@
     <field name="name">Tray 1C</field>
     <field name="barcode">T1C</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_1"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_gross_32x"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_large_32x"/>
     <field name="usage">internal</field>
   </record>
 
@@ -41,7 +41,7 @@
     <field name="name">Tray 2A</field>
     <field name="barcode">T2A</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_2"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_gross_8x"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_large_8x"/>
     <field name="usage">internal</field>
   </record>
 
@@ -49,7 +49,7 @@
     <field name="name">Tray 2B</field>
     <field name="barcode">T2B</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_2"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_gross_4x"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_large_4x"/>
     <field name="usage">internal</field>
   </record>
 
@@ -57,7 +57,7 @@
     <field name="name">Tray 2C</field>
     <field name="barcode">T2C</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_2"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_gross_16x_2"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_large_16x_2"/>
     <field name="usage">internal</field>
   </record>
 
@@ -65,7 +65,7 @@
     <field name="name">Tray 2D</field>
     <field name="barcode">T2D</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_2"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_klein_8x"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_small_8x"/>
     <field name="usage">internal</field>
   </record>
 
@@ -79,7 +79,7 @@
     <field name="name">Tray 3A</field>
     <field name="barcode">T3A</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_3"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_klein_32x"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_small_32x"/>
     <field name="usage">internal</field>
   </record>
 
@@ -87,7 +87,7 @@
     <field name="name">Tray 3B</field>
     <field name="barcode">T3B</field>
     <field name="location_id" ref="stock_location_kardex_demo_shuttle_3"/>
-    <field name="kardex_tray_type_id" ref="kardex_tray_type_gross_32x"/>
+    <field name="kardex_tray_type_id" ref="kardex_tray_type_large_32x"/>
     <field name="usage">internal</field>
   </record>
 

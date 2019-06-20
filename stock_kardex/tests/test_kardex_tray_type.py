@@ -11,10 +11,10 @@ class TestKardexTrayType(KardexCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.used_tray_type = cls.env.ref(
-            'stock_kardex.kardex_tray_type_gross_16x'
+            'stock_kardex.kardex_tray_type_large_16x'
         )
         cls.unused_tray_type = cls.env.ref(
-            'stock_kardex.kardex_tray_type_klein_16x_3'
+            'stock_kardex.kardex_tray_type_small_16x_3'
         )
 
     def test_kardex_tray_type(self):

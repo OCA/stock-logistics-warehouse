@@ -43,7 +43,7 @@ class TestKardexLocation(KardexCase):
         shuttle_loc = self.env.ref(
             'stock_kardex.stock_location_kardex_demo_shuttle_1'
         )
-        tray_type = self.tray_type_klein_8x
+        tray_type = self.tray_type_small_8x
         tray_loc = self.env['stock.location'].create(
             {
                 'name': 'Tray Z',
@@ -192,7 +192,7 @@ class TestKardexLocation(KardexCase):
 
     def test_change_tray_type_when_empty(self):
         tray = self.env.ref('stock_kardex.stock_location_kardex_demo_tray_1a')
-        tray_type = self.tray_type_klein_32x
+        tray_type = self.tray_type_small_32x
         tray.kardex_tray_type_id = tray_type
         self.assertEqual(
             len(tray.child_ids), tray_type.cols * tray_type.rows  # 32
@@ -203,7 +203,7 @@ class TestKardexLocation(KardexCase):
         self._update_quantity_in_cell(
             self._cell_for(tray, x=1, y=1), self.product_socks, 1
         )
-        tray_type = self.tray_type_klein_32x
+        tray_type = self.tray_type_small_32x
         message = 'cannot be modified when they contain products'
         with self.assertRaisesRegex(exceptions.UserError, message):
             tray.kardex_tray_type_id = tray_type

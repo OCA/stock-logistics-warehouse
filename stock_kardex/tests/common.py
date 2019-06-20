@@ -11,11 +11,11 @@ class KardexCase(common.SavepointCase):
         cls.kardex = cls.env.ref('stock_kardex.stock_kardex_demo_shuttle_1')
         cls.product_socks = cls.env.ref('stock_kardex.product_running_socks')
         cls.kardex_view = cls.env.ref('stock_kardex.stock_location_kardex')
-        cls.tray_type_klein_8x = cls.env.ref(
-            'stock_kardex.kardex_tray_type_klein_8x'
+        cls.tray_type_small_8x = cls.env.ref(
+            'stock_kardex.kardex_tray_type_small_8x'
         )
-        cls.tray_type_klein_32x = cls.env.ref(
-            'stock_kardex.kardex_tray_type_klein_32x'
+        cls.tray_type_small_32x = cls.env.ref(
+            'stock_kardex.kardex_tray_type_small_32x'
         )
 
     def _cell_for(self, tray, x=1, y=1):
