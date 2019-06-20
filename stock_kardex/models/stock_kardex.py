@@ -28,8 +28,7 @@ class StockKardex(models.Model):
     simulate = fields.Boolean(
         help="When ticked, commands will not be sent to the Shuttle."
     )
-    # TODO add _id
-    current_move_line = fields.Many2one(comodel_name='stock.move.line')
+    current_move_line_id = fields.Many2one(comodel_name='stock.move.line')
 
     number_of_ops = fields.Integer(
         compute='_compute_number_of_ops', string='Number of Operations'
@@ -70,21 +69,23 @@ class StockKardex(models.Model):
 
     # current operation information
     picking_id = fields.Many2one(
-        related='current_move_line.picking_id', readonly=True
+        related='current_move_line_id.picking_id', readonly=True
     )
     product_id = fields.Many2one(
-        related='current_move_line.product_id', readonly=True
+        related='current_move_line_id.product_id', readonly=True
     )
     product_uom_id = fields.Many2one(
-        related='current_move_line.product_uom_id', readonly=True
+        related='current_move_line_id.product_uom_id', readonly=True
     )
     product_uom_qty = fields.Float(
-        related='current_move_line.product_uom_qty', readonly=True
+        related='current_move_line_id.product_uom_qty', readonly=True
     )
     qty_done = fields.Float(
-        related='current_move_line.qty_done', readonly=True
+        related='current_move_line_id.qty_done', readonly=True
     )
-    lot_id = fields.Many2one(related='current_move_line.lot_id', readonly=True)
+    lot_id = fields.Many2one(
+        related='current_move_line_id.lot_id', readonly=True
+    )
 
     _barcode_scanned = fields.Char(
         "Barcode Scanned",
@@ -114,7 +115,7 @@ class StockKardex(models.Model):
                 # TODO what to do for inventory?
                 'inventory': 'location_id',
             }
-            location = record.current_move_line[modes[record.mode]]
+            location = record.current_move_line_id[modes[record.mode]]
             tray_type = location.location_id.kardex_tray_type_id
             selected = []
             cells = []
@@ -183,7 +184,7 @@ class StockKardex(models.Model):
     def process_current_pick(self):
         # test code, TODO the smart one
         # (scan of barcode increments qty, save calls action_done?)
-        line = self.current_move_line
+        line = self.current_move_line_id
         line.qty_done = line.product_qty
         line.move_id._action_done()
 
@@ -200,7 +201,7 @@ class StockKardex(models.Model):
         method = 'process_current_{}'.format(self.mode)
         getattr(self, method)()
         self.select_next_move_line()
-        if not self.current_move_line:
+        if not self.current_move_line_id:
             # sorry not sorry
             return {
                 'effect': {
@@ -216,7 +217,7 @@ class StockKardex(models.Model):
         next_move_line = self.env['stock.move.line'].search(
             self._domain_move_lines_to_do(), limit=1
         )
-        self.current_move_line = next_move_line
+        self.current_move_line_id = next_move_line
         descr = _('Scan next PID') if next_move_line else _('No operations')
         self.operation_descr = descr
 

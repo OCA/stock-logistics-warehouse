@@ -49,11 +49,11 @@
             <field name="operation_descr"/>
           </div>
         </div>
-        <div class="o_kardex_data" attrs="{'invisible': [('current_move_line', '=', False)]}">
+        <div class="o_kardex_data" attrs="{'invisible': [('current_move_line_id', '=', False)]}">
           <!-- on the left of the screen -->
           <div class="o_kardex_data_content o_kardex_move">
             <div>
-              <field name="current_move_line" invisible="1"/>
+              <field name="current_move_line_id" invisible="1"/>
               <label for="product_id"/>
               <field name="product_id" readonly="1" options="{'no_open': True}"/>
               <field name="qty_done" readonly="1" force_save="1"/> / 
@@ -129,7 +129,7 @@
           <field name="simulate" groups="base.group_no_one"/>
           <!-- move line visible and editable for prototyping purposes, to
 remove later -->
-          <field name="current_move_line" groups="base.group_no_one"/>
+          <field name="current_move_line_id" groups="base.group_no_one"/>
         </group>
       </form>
     </field>

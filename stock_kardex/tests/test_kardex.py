@@ -32,7 +32,7 @@ class TestKardexTrayType(KardexCase):
     def test_pick_action_open_screen(self):
         self.kardex.switch_pick()
         action = self.kardex.action_open_screen()
-        self.assertTrue(self.kardex.current_move_line)
+        self.assertTrue(self.kardex.current_move_line_id)
         self.assertEqual(action['type'], 'ir.actions.act_window')
         self.assertEqual(action['res_model'], 'stock.kardex')
         self.assertEqual(action['res_id'], self.kardex.id)
@@ -40,14 +40,14 @@ class TestKardexTrayType(KardexCase):
     def test_pick_select_next_move_line(self):
         self.kardex.switch_pick()
         self.kardex.select_next_move_line()
-        self.assertEqual(self.kardex.current_move_line, self.out_move_line)
+        self.assertEqual(self.kardex.current_move_line_id, self.out_move_line)
         self.assertEqual(self.kardex.operation_descr, _('Scan next PID'))
 
     def test_pick_save(self):
         self.kardex.switch_pick()
-        self.kardex.current_move_line = self.out_move_line
+        self.kardex.current_move_line_id = self.out_move_line
         result = self.kardex.button_save()
-        self.assertFalse(self.kardex.current_move_line)
+        self.assertFalse(self.kardex.current_move_line_id)
         self.assertEqual(self.kardex.operation_descr, _('No operations'))
         expected_result = {
             'effect': {
@@ -71,7 +71,7 @@ class TestKardexTrayType(KardexCase):
 
     def test_process_current_pick(self):
         self.kardex.switch_pick()
-        self.kardex.current_move_line = self.out_move_line
+        self.kardex.current_move_line_id = self.out_move_line
         qty_to_process = self.out_move_line.product_qty
         self.kardex.process_current_pick()
         self.assertEqual(self.out_move_line.state, 'done')
