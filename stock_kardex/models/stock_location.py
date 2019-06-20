@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, exceptions, fields, models
 
 
 class StockLocation(models.Model):
@@ -92,6 +92,30 @@ class StockLocation(models.Model):
                 self._update_tray_sublocations()
         return True
 
+    @api.constrains('active')
+    def _stock_kardex_check_active(self):
+        for record in self:
+            if not record.kardex_kind:
+                continue
+            if record.active:
+                continue
+            # We cannot disable any cell of a tray (entire tray)
+            # if at least one of the cell contains stock.
+            # We cannot disable a tray, a shuffle or a view if
+            # at least one of their tray contain stock.
+            if record.kardex_kind == 'cell':
+                parent = record.location_id
+            else:
+                parent = record
+            locs = self.search([('id', 'child_of', parent.id)])
+            if any(loc.kardex_cell_contains_stock for loc in locs):
+                raise exceptions.ValidationError(
+                    _(
+                        "Kardex locations cannot be archived when "
+                        "they contain products."
+                    )
+                )
+
     def _kardex_cell_coords(self):
         if not self.kardex_kind == 'cell':
             coords = []
@@ -102,7 +126,7 @@ class StockLocation(models.Model):
         assert self.kardex_kind in ('tray', 'cell')
         if self.kardex_kind == 'tray':
             location = self
-        else:
+        else:  # cell
             location = self.location_id
         cells = location.kardex_tray_type_id._generate_cells_matrix()
         for cell in location.child_ids:
@@ -112,17 +136,24 @@ class StockLocation(models.Model):
 
     @api.multi
     def _update_tray_sublocations(self):
-        # TODO: if any sublocation has stock, raise an error,
-        # we must be able to change the type of tray only when
-        # it is empty
         values = []
         for location in self:
             if not location.kardex_kind == 'tray':
                 continue
+
             tray_type = location.kardex_tray_type_id
 
-            location.child_ids.write({'active': False})
-
+            try:
+                location.child_ids.write({'active': False})
+            except exceptions.ValidationError:
+                # trap this check (_stock_kardex_check_active) to display a
+                # contextual error message
+                raise exceptions.ValidationError(
+                    _(
+                        "Kardex trays cannot be modified when "
+                        "they contain products."
+                    )
+                )
             if not tray_type:
                 continue
 
@@ -130,9 +161,7 @@ class StockLocation(models.Model):
             for row in range(1, tray_type.rows + 1):
                 for col in range(1, tray_type.cols + 1):
                     subloc_values = {
-                        'name': _('{} [x{} y{}]').format(
-                            location.name, col, row
-                        ),
+                        'name': _('x{}y{}').format(col, row),
                         'posx': col,
                         'posy': row,
                         'location_id': location.id,

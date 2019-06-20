@@ -199,26 +199,6 @@
     </field>
   </record>
 
-  <!-- TODO: use this in method action_open_screen? -->
-  <record model="ir.actions.act_window" id="stock_kardex_action_screen">
-    <field name="name">Kardex</field>
-    <field name="type">ir.actions.act_window</field>
-    <field name="res_model">stock.kardex</field>
-    <field name="view_type">form</field>
-    <field name="view_mode">form</field>
-    <field name="view_ids"
-           eval="[(5, 0, 0),
-                  (0, 0, {'view_mode': 'form', 'view_id': ref('stock_kardex_view_form_screen')})]"/>
-    <field name="target">fullscreen</field>
-    <field name="domain">[]</field>
-    <field name="context">{'form_view_initial_mode': 'edit', 'no_breadcrumbs': True}</field>
-    <field name="help" type="html">
-      <p class="o_view_nocontent_smiling_face">
-        Open the Kardex Interface.
-      </p>
-    </field>
-  </record>
-
   <record model="ir.actions.act_window" id="stock_kardex_action">
     <field name="name">Kardex</field>
     <field name="type">ir.actions.act_window</field>

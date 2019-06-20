@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<odoo noupdate="1">
 
   <record model="stock.kardex.tray.type" id="kardex_tray_type_klein_32x">
     <field name="name">Klein 32x</field>

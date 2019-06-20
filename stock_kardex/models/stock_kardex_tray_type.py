@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import _, api, exceptions, fields, models
 
 
 class StockKardexTrayType(models.Model):
@@ -14,7 +14,11 @@ class StockKardexTrayType(models.Model):
     cols = fields.Integer(required=True)
     active = fields.Boolean(default=True)
     tray_matrix = fields.Serialized(compute='_compute_tray_matrix')
+    location_ids = fields.One2many(
+        comodel_name='stock.location', inverse_name='kardex_tray_type_id'
+    )
     # TODO do we want box size, or a many2one to 'product.packaging'?
+    # TODO add the code in the name_search
 
     @api.depends('rows', 'cols')
     def _compute_tray_matrix(self):
@@ -29,6 +33,42 @@ class StockKardexTrayType(models.Model):
     def _generate_cells_matrix(self, default_state=0):
         return [[default_state] * self.cols for __ in range(self.rows)]
 
-    # TODO prevent to set active=False on a type used in a location
-    # TODO we should not be able to change cells and rows for types used
-    # in locations
+    @api.constrains('active')
+    def _stock_kardex_check_active(self):
+        for record in self:
+            if record.active:
+                continue
+            if record.location_ids:
+                location_bullets = [
+                    ' - {}'.format(location.display_name)
+                    for location in record.location_ids
+                ]
+                raise exceptions.ValidationError(
+                    _(
+                        "The tray type {} is used by the following locations "
+                        "and cannot be archived:\n\n{}"
+                    ).format(record.name, '\n'.join(location_bullets))
+                )
+
+    @api.constrains('rows', 'cols')
+    def _stock_kardex_check_rows_cols(self):
+        for record in self:
+            if record.location_ids:
+                location_bullets = [
+                    ' - {}'.format(location.display_name)
+                    for location in record.location_ids
+                ]
+                raise exceptions.ValidationError(
+                    _(
+                        "The tray type {} is used by the following locations, "
+                        "it's size cannot be changed:\n\n{}"
+                    ).format(record.name, '\n'.join(location_bullets))
+                )
+
+    @api.multi
+    def open_locations(self):
+        action = self.env.ref('stock.action_location_form').read()[0]
+        action['domain'] = [('kardex_tray_type_id', 'in', self.ids)]
+        if len(self.ids) == 1:
+            action['context'] = {'default_kardex_tray_type_id': self.id}
+        return action

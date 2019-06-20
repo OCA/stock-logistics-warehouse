@@ -23,6 +23,26 @@
                  />
         </group>
       </group>
+
+      <field name="posx" position="attributes">
+        <attribute name="attrs">{'readonly': [('kardex_kind', '=', 'cell')]}</attribute>
+      </field>
+      <field name="posy" position="attributes">
+        <attribute name="attrs">{'readonly': [('kardex_kind', '=', 'cell')]}</attribute>
+      </field>
+    </field>
+  </record>
+
+  <record id="view_location_search_kardex" model="ir.ui.view">
+    <field name="name">stock.location.search.kardex</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_search"/>
+    <field name="arch" type="xml">
+      <field name="location_id" position="after">
+        <separator/>
+        <field name="kardex_kind"/>
+        <field name="kardex_tray_type_id"/>
+      </field>
     </field>
   </record>
 
