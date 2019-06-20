@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
 
+  <!-- TODO rename xmlids in english  -->
   <record model="stock.kardex.tray.type" id="kardex_tray_type_klein_32x">
     <field name="name">Klein 32x</field>
     <field name="code">B10804</field>

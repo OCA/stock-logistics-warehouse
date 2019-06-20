@@ -39,7 +39,7 @@ class StockLocation(models.Model):
     #     -> Tray
     #       -> Cell
 
-    @api.depends('location_id', 'location_id.kardex_kind')
+    @api.depends('location_id', 'location_id.kardex_kind', 'kardex_location')
     def _compute_kardex_kind(self):
         tree = {'view': 'shuttle', 'shuttle': 'tray', 'tray': 'cell'}
         for location in self:
@@ -108,7 +108,9 @@ class StockLocation(models.Model):
                 parent = record.location_id
             else:
                 parent = record
-            locs = self.search([('id', 'child_of', parent.id)])
+            # Add the record to the search: as it has set inactive, it will not
+            # be found by the search.
+            locs = self.search([('id', 'child_of', parent.id)]) | record
             if any(loc.kardex_cell_contains_stock for loc in locs):
                 raise exceptions.ValidationError(
                     _(
@@ -118,10 +120,9 @@ class StockLocation(models.Model):
                 )
 
     def _kardex_cell_coords(self):
-        if not self.kardex_kind == 'cell':
-            coords = []
-        coords = [self.posx - 1, self.posy - 1]
-        return coords
+        if self.kardex_kind != 'cell':
+            return []
+        return [self.posx - 1, self.posy - 1]
 
     def _tray_cells_matrix(self):
         assert self.kardex_kind in ('tray', 'cell')
@@ -149,7 +150,7 @@ class StockLocation(models.Model):
             except exceptions.ValidationError:
                 # trap this check (_stock_kardex_check_active) to display a
                 # contextual error message
-                raise exceptions.ValidationError(
+                raise exceptions.UserError(
                     _(
                         "Kardex trays cannot be modified when "
                         "they contain products."

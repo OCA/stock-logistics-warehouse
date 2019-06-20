@@ -153,6 +153,7 @@ class StockKardex(models.Model):
             # TODO check state
             ('state', '=', 'assigned')
         ]
+        # TODO search only in the view being a parent of kardex's location
         kardex_locations = self.env['stock.location'].search(
             [('kardex_kind', '=', 'view')]
         )
