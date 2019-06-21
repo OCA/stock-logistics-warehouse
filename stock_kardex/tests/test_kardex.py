@@ -80,7 +80,11 @@ class TestKardexTrayType(KardexCase):
         # For pick, this is the source location, which is the cell where the
         # product is.
         self.assertEqual(self.kardex.kardex_tray_location_id, ml.location_id)
-        self.assertEqual(self.kardex.kardex_tray_name, ml.location_id.name)
+        self.assertEqual(
+            self.kardex.kardex_tray_name,
+            # parent = tray
+            ml.location_id.location_id.name,
+        )
         self.assertEqual(
             self.kardex.kardex_tray_type_id,
             # the tray type is on the parent of the cell (on the tray)
@@ -95,6 +99,10 @@ class TestKardexTrayType(KardexCase):
 
         # Move line related fields
         self.assertEqual(self.kardex.picking_id, ml.picking_id)
+        self.assertEqual(self.kardex.picking_origin, ml.picking_id.origin)
+        self.assertEqual(
+            self.kardex.picking_partner_id, ml.picking_id.partner_id
+        )
         self.assertEqual(self.kardex.product_id, ml.product_id)
         self.assertEqual(self.kardex.product_uom_id, ml.product_uom_id)
         self.assertEqual(self.kardex.product_uom_qty, ml.product_uom_qty)
@@ -215,3 +223,14 @@ class TestKardexTrayType(KardexCase):
                 # fmt: on
             },
         )
+
+    def test_kardex_tray_qty(self):
+        cell = self.env.ref(
+            'stock_kardex.stock_location_kardex_demo_tray_1a_x3y2'
+        )
+        self.out_move_line.location_id = cell
+        self.kardex.current_move_line_id = self.out_move_line
+        self._update_quantity_in_cell(cell, self.out_move_line.product_id, 50)
+        self.assertEqual(self.kardex.kardex_tray_qty, 50)
+        self._update_quantity_in_cell(cell, self.out_move_line.product_id, -20)
+        self.assertEqual(self.kardex.kardex_tray_qty, 30)

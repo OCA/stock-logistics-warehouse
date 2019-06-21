@@ -66,10 +66,19 @@ class StockKardex(models.Model):
         string='Y', compute='_compute_kardex_tray_matrix'
     )
     kardex_tray_matrix = Serialized(compute='_compute_kardex_tray_matrix')
+    kardex_tray_qty = fields.Float(
+        string='Stock Quantity', compute='_compute_kardex_tray_qty'
+    )
 
     # current operation information
     picking_id = fields.Many2one(
         related='current_move_line_id.picking_id', readonly=True
+    )
+    picking_origin = fields.Char(
+        related='current_move_line_id.picking_id.origin', readonly=True
+    )
+    picking_partner_id = fields.Many2one(
+        related='current_move_line_id.picking_id.partner_id', readonly=True
     )
     product_id = fields.Many2one(
         related='current_move_line_id.product_id', readonly=True
@@ -80,12 +89,17 @@ class StockKardex(models.Model):
     product_uom_qty = fields.Float(
         related='current_move_line_id.product_uom_qty', readonly=True
     )
+    product_packagings = fields.Html(
+        string='Packaging', compute='_compute_product_packagings'
+    )
     qty_done = fields.Float(
         related='current_move_line_id.qty_done', readonly=True
     )
     lot_id = fields.Many2one(
         related='current_move_line_id.lot_id', readonly=True
     )
+
+    # TODO add a glue addon with product_expiry to add the field
 
     _barcode_scanned = fields.Char(
         "Barcode Scanned",
@@ -96,6 +110,27 @@ class StockKardex(models.Model):
     def on_barcode_scanned(self, barcode):
         raise exceptions.UserError('Scanned barcode: {}'.format(barcode))
 
+    @api.depends('current_move_line_id.product_id.packaging_ids')
+    def _compute_product_packagings(self):
+        for record in self:
+            if not record.current_move_line_id:
+                continue
+            product = record.current_move_line_id.product_id
+            values = {
+                'packagings': [
+                    {
+                        'name': pkg.name,
+                        'qty': pkg.qty,
+                        'unit': product.uom_id.name,
+                    }
+                    for pkg in product.packaging_ids
+                ]
+            }
+            content = self.env['ir.qweb'].render(
+                'stock_kardex.packagings', values
+            )
+            record.product_packagings = content
+
     @api.depends()
     def _compute_number_of_ops(self):
         for record in self:
@@ -105,6 +140,22 @@ class StockKardex(models.Model):
     def _compute_number_of_ops_all(self):
         for record in self:
             record.number_of_ops_all = record.count_move_lines_to_do_all()
+
+    @api.depends('kardex_tray_location_id', 'current_move_line_id.product_id')
+    def _compute_kardex_tray_qty(self):
+        for record in self:
+            if not (
+                record.kardex_tray_location_id and record.current_move_line_id
+            ):
+                continue
+            product = record.current_move_line_id.product_id
+            quants = self.env['stock.quant'].search(
+                [
+                    ('location_id', '=', record.kardex_tray_location_id.id),
+                    ('product_id', '=', product.id),
+                ]
+            )
+            record.kardex_tray_qty = sum(quants.mapped('quantity'))
 
     @api.depends()
     def _compute_kardex_tray_matrix(self):
@@ -123,8 +174,10 @@ class StockKardex(models.Model):
                 selected = location._kardex_cell_coords()
                 cells = location._tray_cells_matrix()
 
+            # this is the current cell
             record.kardex_tray_location_id = location.id
-            record.kardex_tray_name = location.barcode or location.name
+            # name of the tray where the cell is
+            record.kardex_tray_name = location.location_id.name
             record.kardex_tray_type_id = tray_type.id
             record.kardex_tray_type_code = tray_type.code
             record.kardex_tray_x = location.posx
@@ -179,7 +232,7 @@ class StockKardex(models.Model):
         )
 
     def button_release(self):
-        raise exceptions.UserError(_('what does this one do?'))
+        raise exceptions.UserError(_('Not implemented'))
 
     def process_current_pick(self):
         # test code, TODO the smart one

@@ -10,6 +10,7 @@
         <!-- <field name="product_id" invisible="1"/> -->
         <div class="o_kardex_header">
           <div class="o_kardex_header_left o_kardex_header_content">
+            <field name="name" readonly="1"/>
           </div>
           <div class="o_kardex_header_center o_kardex_header_content">
             <label for="mode"/>
@@ -53,17 +54,38 @@
           <!-- on the left of the screen -->
           <div class="o_kardex_data_content o_kardex_move">
             <div>
-              <field name="current_move_line_id" invisible="1"/>
-              <label for="product_id"/>
-              <field name="product_id" readonly="1" options="{'no_open': True}"/>
-              <field name="qty_done" readonly="1" force_save="1"/> / 
-              <field name="product_uom_qty" readonly="1"/>
-              <label for="product_uom_id" string=" "/>
-              <field name="product_uom_id" options="{'no_open': True}" class="oe_inline"/>
-            </div>
-            <div>
-              <label for="lot_id"/>
-              <field name="lot_id"/>
+              <group>
+                <field name="current_move_line_id" invisible="1"/>
+                <label for="picking_id"/>
+                <div>
+                  <div>
+                    <field name="picking_id" options="{'no_open': True}" class="mr8"/>
+                    <span>/</span>
+                    <field name="picking_origin" class="oe_inline ml8"/>
+                  </div>
+                </div>
+                <label for="picking_partner_id"/>
+                <div>
+                  <field name="picking_partner_id" options="{'no_open': True}"/>
+                </div>
+                <label for="product_id"/>
+                <div colspan="2" class="oe_title">
+                  <h1>
+                    <field name="product_id" options="{'no_open': True}"/>
+                  </h1>
+                </div>
+                <div colspan="2">
+                  <field name="product_packagings"/>
+                </div>
+                <field name="lot_id"/>
+                <label for="product_uom_qty" string="Quantity" class="ml32"/>
+                <div colspan="2" class="ml32">
+                  <h1 class="bg-primary kardex_highlight">
+                    <field name="product_uom_qty" class="oe_inline text-white"/>
+                    <field name="product_uom_id" options="{'no_open': True}" class="oe_inline ml8 text-white"/>
+                  </h1>
+                </div>
+              </group>
             </div>
           </div>
           <!-- on the right of the screen -->
@@ -73,11 +95,19 @@
               <field name="kardex_tray_type_code"/>
               <field name="kardex_tray_y"/>
               <field name="kardex_tray_x"/>
+              <label for="kardex_tray_qty"/>
+              <div colspan="2" class="oe_title">
+                <h1>
+                  <field name="kardex_tray_qty"/>
+                </h1>
+              </div>
             </group>
-            <div>
-              <field name="kardex_tray_matrix"
-                     widget="kardex_tray_matrix"/>
-            </div>
+            <group>
+              <div>
+                <field name="kardex_tray_matrix"
+                      widget="kardex_tray_matrix"/>
+              </div>
+            </group>
           </div>
         </div>
         <field name="_barcode_scanned" widget="barcode_handler"/>
