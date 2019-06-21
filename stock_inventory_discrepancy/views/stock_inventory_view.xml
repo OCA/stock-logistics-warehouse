@@ -17,12 +17,12 @@
                     {"pending":"red"}
                 </attribute>
             </field>
-            <xpath expr="//button[@name='action_done']"
+            <xpath expr="//button[@name='action_validate']"
                    position="attributes">
                 <attribute name="groups">stock_inventory_discrepancy.group_stock_inventory_validation</attribute>
                 <attribute name="context">{'normal_view': True}</attribute>
             </xpath>
-            <xpath expr="//button[@name='action_done']"
+            <xpath expr="//button[@name='action_validate']"
                    position="after">
                 <button name="action_force_done"
                         string="Force Validation" type="object"
