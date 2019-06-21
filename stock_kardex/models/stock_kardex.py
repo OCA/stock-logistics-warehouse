@@ -124,7 +124,7 @@ class StockKardex(models.Model):
                 cells = location._tray_cells_matrix()
 
             record.kardex_tray_location_id = location.id
-            record.kardex_tray_name = location.name
+            record.kardex_tray_name = location.barcode or location.name
             record.kardex_tray_type_id = tray_type.id
             record.kardex_tray_type_code = tray_type.code
             record.kardex_tray_x = location.posx
@@ -252,9 +252,12 @@ class StockKardex(models.Model):
     # TODO: should the mode be changed on all the kardex at the same time?
     def switch_pick(self):
         self.mode = 'pick'
+        self.select_next_move_line()
 
     def switch_put(self):
         self.mode = 'put'
+        self.select_next_move_line()
 
     def switch_inventory(self):
         self.mode = 'inventory'
+        self.select_next_move_line()
