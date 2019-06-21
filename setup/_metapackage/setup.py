@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-stock_demand_estimate',
         'odoo12-addon-stock_inventory_chatter',
         'odoo12-addon-stock_inventory_preparation_filter',
+        'odoo12-addon-stock_mts_mto_rule',
         'odoo12-addon-stock_orderpoint_manual_procurement',
         'odoo12-addon-stock_orderpoint_manual_procurement_uom',
         'odoo12-addon-stock_orderpoint_move_link',
