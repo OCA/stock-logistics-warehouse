@@ -2,7 +2,7 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
@@ -58,17 +58,18 @@ class StockInventory(models.Model):
                   'this action.')
             )
 
-    def action_done(self):
-        self.ensure_one()
-        if self.over_discrepancy_line_count and self.line_ids.filtered(
-                lambda t: t.discrepancy_threshold > 0.0):
-            if self.env.context.get('normal_view', False):
-                self.action_over_discrepancies()
-                return True
-            else:
-                self._check_group_inventory_validation_always()
-        return super(StockInventory, self).action_done()
+    def _action_done(self):
+        for inventory in self:
+            if (inventory.over_discrepancy_line_count and
+                    inventory.line_ids.filtered(
+                        lambda t: t.discrepancy_threshold > 0.0)):
+                if inventory.env.context.get('normal_view', False):
+                    inventory.action_over_discrepancies()
+                    return True
+                else:
+                    inventory._check_group_inventory_validation_always()
+        return super(StockInventory, self)._action_done()
 
     @api.multi
     def action_force_done(self):
-        return super(StockInventory, self).action_done()
+        return super(StockInventory, self)._action_done()
