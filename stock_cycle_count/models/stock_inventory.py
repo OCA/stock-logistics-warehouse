@@ -40,8 +40,8 @@ class StockInventory(models.Model):
         return True
 
     @api.multi
-    def action_done(self):
-        res = super(StockInventory, self).action_done()
+    def action_validate(self):
+        res = super(StockInventory, self).action_validate()
         self._update_cycle_state()
         return res
 
