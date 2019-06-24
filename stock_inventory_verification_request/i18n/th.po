@@ -1,0 +1,222 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_verification_request
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-30 03:53+0000\n"
+"PO-Revision-Date: 2017-11-30 03:53+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Thai (https://www.transifex.com/oca/teams/23907/th/)\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_responsible_id
+msgid "Assigned to"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: selection:stock.slot.verification.request,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Confirm"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_create_uid
+msgid "Created by"
+msgstr "สร้างโดย"
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_create_date
+msgid "Created on"
+msgstr "สร้างเมื่อ"
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_display_name
+msgid "Display Name"
+msgstr "ชื่อที่ใช้แสดง"
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_id
+msgid "ID"
+msgstr "รหัส"
+
+#. module: stock_inventory_verification_request
+#: selection:stock.slot.verification.request,state:0
+msgid "In Progress"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Inv. Adj. Lines Involved"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model,name:stock_inventory_verification_request.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_inventory_id
+msgid "Inventory Adjustment"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_line_form
+msgid "Inventory Adjustment Line"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Inventory Adjustment Lines related to the given location and product."
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model,name:stock_inventory_verification_request.model_stock_inventory_line
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_inventory_line_id
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_line_form
+msgid "Inventory Line"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_inv_line_count
+msgid "Involved Inv Line Count"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_inv_line_ids
+msgid "Involved Inventory Lines"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_move_count
+msgid "Involved Move Count"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_move_ids
+msgid "Involved Stock Moves"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request___last_update
+msgid "Last Modified on"
+msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_write_uid
+msgid "Last Updated by"
+msgstr "อัพเดทครั้งสุดท้ายโดย"
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_write_date
+msgid "Last Updated on"
+msgstr "อัพเดทครั้งสุดท้ายเมื่อ"
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Mark as Cancelled"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Mark as Solved"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_name
+msgid "Name"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_notes
+msgid "Notes"
+msgstr "บันทึกย่อ"
+
+#. module: stock_inventory_verification_request
+#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_inv_adj_line_tree
+msgid "Open Inventory Adjustment Lines"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_form
+msgid "Request Verification"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory_requested_verification
+msgid "Requested Verification?"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory_line_slot_verification_ids
+#: model:ir.ui.menu,name:stock_inventory_verification_request.menu_slot_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_form
+msgid "Slot Verification Request"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory_slot_verification_ids
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_form
+msgid "Slot Verification Requests"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: selection:stock.slot.verification.request,state:0
+msgid "Solved"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_state
+msgid "Status"
+msgstr "สถานะ"
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Stock Moves Involved"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Stock Moves related to the given location and product."
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_slot_verification_request
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+#: model:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_tree_view
+msgid "Stock Slot Verification Request"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: selection:stock.slot.verification.request,state:0
+msgid "Waiting Actions"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model,name:stock_inventory_verification_request.model_stock_slot_verification_request
+msgid "stock.slot.verification.request"
+msgstr ""
