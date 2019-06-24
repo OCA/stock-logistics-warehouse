@@ -50,7 +50,7 @@
                           </button>
                     </div>
                     <div class="oe_title">
-                        <label string="Cycle Count"/>
+                        <label string="Cycle Count" for="name"/>
                         <h1>
                             <field name="name"/>
                         </h1>
@@ -104,12 +104,15 @@
                     <field name="responsible_id" />
                     <group expand="0" string="Group By...">
                         <filter string="Location"
+                                name="location"
                                 domain="[]"
                                 context="{'group_by':'location_id'}"/>
                         <filter string="State"
+                                name="state"
                                 domain="[]"
                                 context="{'group_by':'state'}"/>
                         <filter string="Assigned to"
+                                name="responsible"
                                 domain="[]"
                                 context="{'group_by':'responsible_id'}"/>
                     </group>
