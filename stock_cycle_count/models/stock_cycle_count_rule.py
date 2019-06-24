@@ -4,7 +4,6 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import timedelta, datetime
 
 
@@ -142,7 +141,7 @@ class StockCycleCountRule(models.Model):
     @api.model
     def _propose_cycle_count(self, date, location):
         cycle_count = {
-            'date': date.strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+            'date': fields.Datetime.from_string(date),
             'location': location,
             'rule_type': self
         }
@@ -160,10 +159,8 @@ class StockCycleCountRule(models.Model):
                 try:
                     period = self.periodic_count_period / \
                         self.periodic_qty_per_period
-                    next_date = datetime.strptime(
-                        latest_inventory_date,
-                        DEFAULT_SERVER_DATETIME_FORMAT) + timedelta(
-                        days=period)
+                    next_date = fields.Datetime.from_string(
+                        latest_inventory_date) + timedelta(days=period)
                     if next_date < datetime.today():
                         next_date = datetime.today()
                 except Exception as e:
