@@ -7,6 +7,7 @@ from odoo import api, models
 
 class LocationAccuracyReport(models.AbstractModel):
     _name = "report.stock_location_accuracy"
+    _description = "Location Accuracy Report"
 
     @api.model
     def _get_inventory_domain(self, loc_id, exclude_sublocation=True):
