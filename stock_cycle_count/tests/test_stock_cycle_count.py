@@ -166,7 +166,6 @@ class TestStockCycleCount(common.TransactionCase):
             'product_id': self.product1.id,
             'location_id': self.count_loc.id,
             'quantity': 1.0,
-            'cost': 15.0
         })
         move1 = self.stock_move_model.create({
             'name': 'Pre-existing move',
@@ -219,7 +218,7 @@ class TestStockCycleCount(common.TransactionCase):
             ('cycle_count_id', '=', self.cycle_count_1.id)])
         self.assertTrue(inventory, 'Inventory not created.')
         inventory.action_start()
-        inventory.action_done()
+        inventory.action_validate()
         self.assertEqual(self.cycle_count_1.state, 'done',
                          'Cycle count not set as done.')
         self.cycle_count_1.do_cancel()

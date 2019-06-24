@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime, timedelta
 import logging
 
@@ -40,8 +39,7 @@ class StockWarehouse(models.Model):
     @api.model
     def _get_cycle_count_locations_search_domain(
             self, parent):
-        domain = [('parent_left', '>=', parent.parent_left),
-                  ('parent_right', '<=', parent.parent_right),
+        domain = [('parent_path', '=like', parent.parent_path + '%'),
                   ('cycle_count_disabled', '=', False)]
         return domain
 
@@ -104,19 +102,22 @@ class StockWarehouse(models.Model):
                     if existing_cycle_counts:
                         existing_earliest_date = sorted(
                             existing_cycle_counts.mapped('date_deadline'))[0]
-                        if (cycle_count_proposed['date'] <
+                        existing_earliest_date = fields.Date.from_string(
+                            existing_earliest_date)
+                        cycle_count_proposed_date = fields.Date.from_string(
+                            cycle_count_proposed['date'])
+                        if (cycle_count_proposed_date <
                                 existing_earliest_date):
                             cc_to_update = existing_cycle_counts.search([
                                 ('date_deadline', '=', existing_earliest_date)
                             ])
                             cc_to_update.write({
-                                'date_deadline': cycle_count_proposed['date'],
+                                'date_deadline': cycle_count_proposed_date,
                                 'cycle_count_rule_id': cycle_count_proposed[
                                     'rule_type'].id,
                             })
-                    delta = datetime.strptime(
-                        cycle_count_proposed['date'],
-                        DEFAULT_SERVER_DATETIME_FORMAT) - datetime.today()
+                    delta = (fields.Datetime.from_string(
+                        cycle_count_proposed['date']) - datetime.today())
                     if not existing_cycle_counts and \
                             delta.days < rec.cycle_count_planning_horizon:
                         cc_vals = self._prepare_cycle_count(
