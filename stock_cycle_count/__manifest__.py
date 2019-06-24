@@ -5,7 +5,7 @@
     "name": "Stock Cycle Count",
     "summary": "Adds the capability to schedule cycle counts in a "
                "warehouse through different rules defined by the user.",
-    "version": "11.0.1.0.1",
+    "version": "12.0.1.0.1",
     "development_status": "Mature",
     "maintainers": ["lreficent"],
     "author": "Eficent, "
