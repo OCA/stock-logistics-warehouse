@@ -196,6 +196,8 @@ class StockKardex(models.Model):
         ]
         domain_extensions = {
             'pick': [('location_id', 'child_of', self.location_id.id)],
+            # TODO ensure that we cannot have the same ml in 2 kardex (cannot
+            # happen with 'pick' as they are in the kardex' location)
             'put': [('location_dest_id', 'child_of', self.location_id.id)],
             # TODO
             'inventory': [('id', '=', 0)],
