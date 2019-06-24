@@ -12,6 +12,7 @@
         'stock',
         'barcodes',
         'base_sparse_field',
+        'web_notify',
     ],
     'website': 'https://www.camptocamp.com',
     'demo': [

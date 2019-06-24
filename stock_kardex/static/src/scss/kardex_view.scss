@@ -113,4 +113,17 @@
             text-align: center;
         }
     }
+
+    .o_kardex_manual_barcode {
+        .o_field_char {
+            padding: 1em;
+            font-size: 2em;
+        }
+
+        .btn {
+            padding: 1em;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+    }
 }

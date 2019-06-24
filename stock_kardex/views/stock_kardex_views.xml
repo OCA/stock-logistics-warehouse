@@ -28,6 +28,10 @@
                     class="btn-secondary o_kardex_icon_btn"
                     string="" icon="fa-bars"
                     aria-label="Dropdown menu" title="Dropdown menu"/>
+            <button name="action_manual_barcode" type="object"
+                    class="btn-secondary o_kardex_icon_btn"
+                    string="" icon="fa-terminal"
+                    aria-label="Barcode Input" title="Barcode Input"/>
           </div>
           <div class="o_kardex_content o_kardex_content_right">
             <div>
@@ -139,6 +143,27 @@
           <div class="col-6">
             <field name="id" string="Back to settings"
                    widget="exit_button" readonly="1"/>
+          </div>
+        </div>
+        <footer></footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="stock_kardex_manual_barcode_form" model="ir.ui.view">
+    <field name="name">stock.kardex.manual.barcode.view.form</field>
+    <field name="model">stock.kardex.manual.barcode</field>
+    <field name="arch" type="xml">
+      <form string="Kardex">
+        <div class="row o_kardex_manual_barcode">
+          <div class="col-8">
+            <field name="barcode"/>
+          </div>
+          <div class="col-2">
+            <button name="button_save"
+                    string="Confirm"
+                    type="object"
+                    class="btn-primary"/>
           </div>
         </div>
         <footer></footer>

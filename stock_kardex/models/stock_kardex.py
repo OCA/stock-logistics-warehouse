@@ -108,7 +108,7 @@ class StockKardex(models.Model):
     )
 
     def on_barcode_scanned(self, barcode):
-        raise exceptions.UserError('Scanned barcode: {}'.format(barcode))
+        self.env.user.notify_info('Scanned barcode: {}'.format(barcode))
 
     @api.depends('current_move_line_id.product_id.packaging_ids')
     def _compute_product_packagings(self):
@@ -304,6 +304,15 @@ class StockKardex(models.Model):
             'res_id': self.id,
         }
 
+    def action_manual_barcode(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'stock.kardex.manual.barcode',
+            'view_mode': 'form',
+            'name': _('Barcode'),
+            'target': 'new',
+        }
+
     # TODO: should the mode be changed on all the kardex at the same time?
     def switch_pick(self):
         self.mode = 'pick'
@@ -316,3 +325,19 @@ class StockKardex(models.Model):
     def switch_inventory(self):
         self.mode = 'inventory'
         self.select_next_move_line()
+
+
+class StockKardexManualBarcode(models.TransientModel):
+    _name = 'stock.kardex.manual.barcode'
+    _description = 'Action to input a barcode'
+
+    barcode = fields.Char(string="Barcode")
+
+    @api.multi
+    def button_save(self):
+        kardex_id = self.env.context.get('active_id')
+        kardex = self.env['stock.kardex'].browse(kardex_id).exists()
+        if not kardex:
+            return
+        if self.barcode:
+            kardex.on_barcode_scanned(self.barcode)
