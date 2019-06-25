@@ -9,7 +9,7 @@
         <field name="model">stock.inventory</field>
         <field name="inherit_id" ref="stock_inventory_discrepancy.view_inventory_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_done']"
+            <xpath expr="//button[@name='action_validate']"
                    position="after">
                 <button name="action_request_verification"
                         string="Request Verification" type="object"

@@ -59,14 +59,14 @@ class TestStockVerificationRequest(common.TransactionCase):
                 (0, 0, {
                     'product_id': self.product1.id,
                     'product_uom_id': self.env.ref(
-                        "product.product_uom_unit").id,
+                        "uom.product_uom_unit").id,
                     'product_qty': 2.0,
                     'location_id': self.test_loc.id,
                 }),
                 (0, 0, {
                     'product_id': self.product2.id,
                     'product_uom_id': self.env.ref(
-                        "product.product_uom_unit").id,
+                        "uom.product_uom_unit").id,
                     'product_qty': 4.0,
                     'location_id': self.test_loc.id,
                 }),
@@ -84,20 +84,20 @@ class TestStockVerificationRequest(common.TransactionCase):
                 (0, 0, {
                     'product_id': self.product1.id,
                     'product_uom_id': self.env.ref(
-                        "product.product_uom_unit").id,
+                        "uom.product_uom_unit").id,
                     'product_qty': 3.0,
                     'location_id': self.test_loc.id,
                 }),
                 (0, 0, {
                     'product_id': self.product2.id,
                     'product_uom_id': self.env.ref(
-                        "product.product_uom_unit").id,
+                        "uom.product_uom_unit").id,
                     'product_qty': 3.0,
                     'location_id': self.test_loc.id,
                 })
             ],
         })
-        inventory.with_context({'normal_view': True}).action_done()
+        inventory.with_context({'normal_view': True}).action_validate()
         self.assertEqual(inventory.state, 'pending',
                          'Inventory Adjustment not changing to Pending to '
                          'Approve.')
