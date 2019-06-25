@@ -67,7 +67,7 @@ class StockInventoryLocationTest(TestStockCommon):
         for line in self.inventory.line_ids:
             self.assertNotEqual(line.product_id.with_context(
                 location=line.location_id.id).qty_available, 42.0)
-        self.inventory.action_done()
+        self.inventory.action_validate()
         for line in self.inventory.line_ids:
             self.assertEqual(line.product_id.with_context(
                 location=line.location_id.id).qty_available, 42.0)
@@ -85,7 +85,7 @@ class StockInventoryLocationTest(TestStockCommon):
              'location_id': self.new_sublocation.id,
              'inventory_id': inventory_subloc.id})
         self.assertTrue(inventory_subloc.line_ids)
-        inventory_subloc.action_done()
+        inventory_subloc.action_validate()
         self.assertEqual(line.product_id.with_context(
             location=line.location_id.id).qty_available, 22.0)
 
