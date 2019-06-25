@@ -5,7 +5,7 @@
     "name": "Stock Inventory Verification Request",
     "summary": "Adds the capability to request a Slot Verification when "
                "a inventory is Pending to Approve",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "development_status": "Mature",
     "maintainers": ['lreficent'],
     "author": "Eficent, "
