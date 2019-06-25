@@ -4,3 +4,5 @@
 * Laurent Mignon (Acsone) <laurent.mignon@acsone.eu>
 * Lois Rilo (Eficent) <lois.rilo@eficent.com>
 * Jordi Ballester (Eficent) <jordi.ballester@eficent.com>
+* Michael Allen <mallen@opensourceintegrators.com>
+* Bhavesh Odedra <bodedra@opensourceintegrators.com>
