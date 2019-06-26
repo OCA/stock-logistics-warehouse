@@ -14,20 +14,24 @@
                 <button type="action" name="%(stock.product_open_quants)d"
                     attrs="{'invisible':[('type', 'not in', ['product','consu'])]}"
                     class="oe_stat_button" icon="fa-building-o">
-                    <div class="o_form_field o_stat_info">
-                        <field name="immediately_usable_qty"
-                            widget="statinfo" nolabel="1" />
-                        <span class="o_stat_text">Available</span>
-                    </div>
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value" widget="statinfo">
+                                <field name="immediately_usable_qty" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="uom_name"/>
+                            </span>
+                            <span class="o_stat_text">Available</span>
+                        </div>
                 </button>
                 <button type="action" name="%(stock.product_open_quants)d"
                     attrs="{'invisible':[('type', 'not in', ['product','consu'])]}"
                     class="oe_stat_button" icon="fa-building-o">
-                    <div class="o_form_field o_stat_info">
-                        <field name="potential_qty"
-                               widget="statinfo" nolabel="1"/>
-                        <span class="o_stat_text">Potential</span>
-                    </div>
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value" widget="statinfo">
+                                <field name="potential_qty" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="uom_name"/>
+                            </span>
+                            <span class="o_stat_text">Potential</span>
+                        </div>
                 </button>
             </xpath>
         </field>
