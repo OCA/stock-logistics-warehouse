@@ -19,7 +19,7 @@ class TestStockRequestPurchase(common.TransactionCase):
             self.env.ref('stock_request.group_stock_request_manager')
         self.main_company = self.env.ref('base.main_company')
         self.warehouse = self.env.ref('stock.warehouse0')
-        self.categ_unit = self.env.ref('product.product_uom_categ_unit')
+        self.categ_unit = self.env.ref('uom.product_uom_categ_unit')
 
         # common data
         self.company_2 = self.env['res.company'].create({
@@ -42,7 +42,7 @@ class TestStockRequestPurchase(common.TransactionCase):
         })
         self.product = self._create_product('SH', 'Shoes', False)
 
-        self.uom_dozen = self.env['product.uom'].create({
+        self.uom_dozen = self.env['uom.uom'].create({
             'name': 'Test-DozenA',
             'category_id': self.categ_unit.id,
             'factor_inv': 12,
@@ -64,7 +64,7 @@ class TestStockRequestPurchase(common.TransactionCase):
         return self.env['product.product'].create({
             'name': name,
             'default_code': default_code,
-            'uom_id': self.env.ref('product.product_uom_unit').id,
+            'uom_id': self.env.ref('uom.product_uom_unit').id,
             'company_id': company_id,
             'type': 'product',
             'route_ids': [(6, 0, self.route_buy.ids)],
