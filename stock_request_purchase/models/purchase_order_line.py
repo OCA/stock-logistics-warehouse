@@ -27,7 +27,7 @@ class PurchaseOrderLine(models.Model):
     def _check_purchase_company_constrains(self):
         if any(any(req.company_id != pol.company_id for
                    req in pol.stock_request_ids) for pol in self):
-                raise ValidationError(
-                    _('You cannot link a purchase order line '
-                      'to a stock request that belongs to '
-                      'another company.'))
+            raise ValidationError(
+                _('You cannot link a purchase order line '
+                  'to a stock request that belongs to '
+                  'another company.'))
