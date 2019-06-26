@@ -5,7 +5,6 @@
     <field name="name">Shuttle 1</field>
     <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_1"/>
     <field name="address">10.0.30.1</field>
-    <field name="simulate" eval="True"/>
     <field name="mode">pick</field>
   </record>
 
@@ -13,7 +12,6 @@
     <field name="name">Shuttle 2</field>
     <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_2"/>
     <field name="address">10.0.30.2</field>
-    <field name="simulate" eval="True"/>
     <field name="mode">pick</field>
   </record>
 
@@ -21,7 +19,6 @@
     <field name="name">Shuttle 3</field>
     <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_3"/>
     <field name="address">10.0.30.3</field>
-    <field name="simulate" eval="True"/>
     <field name="mode">pick</field>
   </record>
 

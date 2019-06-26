@@ -25,8 +25,8 @@ class VerticalLiftShuttle(models.Model):
         help="The Shuttle source location for Pick operations "
         "and destination location for Put operations.",
     )
-    simulate = fields.Boolean(
-        help="When ticked, commands will not be sent to the Shuttle."
+    hardware = fields.Selection(
+        selection='_selection_hardware', default='simulation', required=True
     )
     current_move_line_id = fields.Many2one(comodel_name='stock.move.line')
 
@@ -103,6 +103,10 @@ class VerticalLiftShuttle(models.Model):
 
     def on_barcode_scanned(self, barcode):
         self.env.user.notify_info('Scanned barcode: {}'.format(barcode))
+
+    @api.model
+    def _selection_hardware(self):
+        return [('simulation', 'Simulation')]
 
     @api.depends('current_move_line_id.product_id.packaging_ids')
     def _compute_product_packagings(self):
@@ -226,7 +230,19 @@ class VerticalLiftShuttle(models.Model):
         )
 
     def button_release(self):
-        raise exceptions.UserError(_('Not implemented'))
+        self._hardware_switch_off_laser_pointer()
+        self._hardware_close_tray()
+        self.select_next_move_line()
+        if not self.current_move_line_id:
+            # sorry not sorry
+            return {
+                'effect': {
+                    'fadeout': 'slow',
+                    'message': _('Congrats, you cleared the queue!'),
+                    'img_url': '/web/static/src/img/smile.svg',
+                    'type': 'rainbow_man',
+                }
+            }
 
     def process_current_pick(self):
         # test code, TODO the smart one
@@ -247,17 +263,7 @@ class VerticalLiftShuttle(models.Model):
         self.ensure_one()
         method = 'process_current_{}'.format(self.mode)
         getattr(self, method)()
-        self.select_next_move_line()
-        if not self.current_move_line_id:
-            # sorry not sorry
-            return {
-                'effect': {
-                    'fadeout': 'slow',
-                    'message': _('Congrats, you cleared the queue!'),
-                    'img_url': '/web/static/src/img/smile.svg',
-                    'type': 'rainbow_man',
-                }
-            }
+        self.operation_descr = _('Release')
 
     def select_next_move_line(self):
         self.ensure_one()
@@ -267,6 +273,9 @@ class VerticalLiftShuttle(models.Model):
         self.current_move_line_id = next_move_line
         descr = _('Scan next PID') if next_move_line else _('No operations')
         self.operation_descr = descr
+        if next_move_line:
+            self._hardware_switch_on_laser_pointer()
+            self._hardware_open_tray()
 
     def action_open_screen(self):
         self.select_next_move_line()
@@ -319,6 +328,36 @@ class VerticalLiftShuttle(models.Model):
     def switch_inventory(self):
         self.mode = 'inventory'
         self.select_next_move_line()
+
+    def _hardware_switch_on_laser_pointer(self):
+        if self.hardware == 'simulation':
+            self.env.user.notify_info(
+                message=_('Laser pointer on x{} y{}').format(
+                    self.tray_x, self.tray_y
+                ),
+                title=_('Lift Simulation'),
+            )
+
+    def _hardware_switch_off_laser_pointer(self):
+        if self.hardware == 'simulation':
+            self.env.user.notify_info(
+                message=_('Switch off laser pointer'),
+                title=_('Lift Simulation'),
+            )
+
+    def _hardware_open_tray(self):
+        if self.hardware == 'simulation':
+            self.env.user.notify_info(
+                message=_('Opening tray {}').format(self.tray_name),
+                title=_('Lift Simulation'),
+            )
+
+    def _hardware_close_tray(self):
+        if self.hardware == 'simulation':
+            self.env.user.notify_info(
+                message=_('Closing tray {}').format(self.tray_name),
+                title=_('Lift Simulation'),
+            )
 
 
 class VerticalLiftShuttleManualBarcode(models.TransientModel):

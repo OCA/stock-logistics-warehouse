@@ -182,7 +182,7 @@
           <field name="address"/>
           <field name="mode"/>
           <field name="location_id"/>
-          <field name="simulate" groups="base.group_no_one"/>
+          <field name="hardware"/>
           <!-- move line visible and editable for prototyping purposes, to
 remove later -->
           <field name="current_move_line_id" groups="base.group_no_one"/>
