@@ -54,23 +54,20 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
         self.shuttle.switch_pick()
         self.shuttle.select_next_move_line()
         self.assertEqual(self.shuttle.current_move_line_id, self.out_move_line)
-        self.assertEqual(self.shuttle.operation_descr, _('Scan next PID'))
+        self.assertEqual(
+            self.shuttle.operation_descr,
+            _('Scan New Destination Location')
+        )
 
     def test_pick_save(self):
         self.shuttle.switch_pick()
         self.shuttle.current_move_line_id = self.out_move_line
-        result = self.shuttle.button_save()
-        self.assertFalse(self.shuttle.current_move_line_id)
-        self.assertEqual(self.shuttle.operation_descr, _('No operations'))
-        expected_result = {
-            'effect': {
-                'fadeout': 'slow',
-                'message': _('Congrats, you cleared the queue!'),
-                'img_url': '/web/static/src/img/smile.svg',
-                'type': 'rainbow_man',
-            }
-        }
-        self.assertEqual(result, expected_result)
+        self.shuttle.button_save()
+        self.assertEqual(
+            self.shuttle.current_move_line_id.state,
+            'done'
+        )
+        self.assertEqual(self.shuttle.operation_descr, _('Release'))
 
     def test_pick_related_fields(self):
         self.shuttle.switch_pick()
@@ -120,11 +117,13 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
         # ensure that we have stock in some cells, we'll put product1
         # in the first Shuttle and product2 in the second
         cell1 = self.env.ref(
-            'stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2'
+            'stock_vertical_lift.'
+            'stock_location_vertical_lift_demo_tray_1a_x3y2'
         )
         self._update_quantity_in_cell(cell1, product1, 50)
         cell2 = self.env.ref(
-            'stock_vertical_lift.stock_location_vertical_lift_demo_tray_2a_x1y1'
+            'stock_vertical_lift.'
+            'stock_location_vertical_lift_demo_tray_2a_x1y1'
         )
         self._update_quantity_in_cell(cell2, product2, 50)
 
@@ -162,7 +161,8 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
         self.assertEqual(shuttle1.number_of_ops_all, 5)
         self.assertEqual(shuttle2.number_of_ops_all, 5)
 
-        # add stock and make the last one assigned to check the number is updated
+        # add stock and make the last one assigned to check the number is
+        # updated
         self._update_quantity_in_cell(cell2, product2, 10)
         unassigned.action_assign()
         self.assertEqual(shuttle1.number_of_ops, 3)
@@ -184,9 +184,22 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
         pass
 
     def test_button_release(self):
-        # test to implement when the code is implemented
-        with self.assertRaises(exceptions.UserError):
-            self.shuttle.button_release()
+        # for the test, we'll consider our last line has been delivered
+        self.out_move_line.qty_done = self.out_move_line.product_qty
+        self.out_move_line.move_id._action_done()
+        # release, no further operation in queue
+        result = self.shuttle.button_release()
+        self.assertFalse(self.shuttle.current_move_line_id)
+        self.assertEqual(self.shuttle.operation_descr, _('No operations'))
+        expected_result = {
+            'effect': {
+                'fadeout': 'slow',
+                'message': _('Congrats, you cleared the queue!'),
+                'img_url': '/web/static/src/img/smile.svg',
+                'type': 'rainbow_man',
+            }
+        }
+        self.assertEqual(result, expected_result)
 
     def test_process_current_pick(self):
         self.shuttle.switch_pick()
@@ -228,7 +241,8 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
 
     def test_tray_qty(self):
         cell = self.env.ref(
-            'stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2'
+            'stock_vertical_lift.'
+            'stock_location_vertical_lift_demo_tray_1a_x3y2'
         )
         self.out_move_line.location_id = cell
         self.shuttle.current_move_line_id = self.out_move_line

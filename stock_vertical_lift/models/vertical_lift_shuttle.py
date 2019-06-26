@@ -39,7 +39,9 @@ class VerticalLiftShuttle(models.Model):
     )
 
     operation_descr = fields.Char(
-        string="Operation", default="Scan next PID", readonly=True
+        string="Operation",
+        default="Scan New Destination Location",
+        readonly=True,
     )
 
     # tray information (will come from stock.location or a new tray model)
@@ -92,6 +94,11 @@ class VerticalLiftShuttle(models.Model):
     lot_id = fields.Many2one(
         related='current_move_line_id.lot_id', readonly=True
     )
+    location_dest_id = fields.Many2one(
+        string="Destination",
+        related='current_move_line_id.location_dest_id',
+        readonly=True,
+    )
 
     # TODO add a glue addon with product_expiry to add the field
 
@@ -102,7 +109,29 @@ class VerticalLiftShuttle(models.Model):
     )
 
     def on_barcode_scanned(self, barcode):
+        self.ensure_one()
+        # FIXME notify_info is only for the demo
         self.env.user.notify_info('Scanned barcode: {}'.format(barcode))
+        method = 'on_barcode_scanned_{}'.format(self.mode)
+        getattr(self, method)(barcode)
+
+    def on_barcode_scanned_pick(self, barcode):
+        location = self.env['stock.location'].search(
+            [('barcode', '=', barcode)]
+        )
+        if location:
+            self.current_move_line_id.location_dest_id = location
+            self.operation_descr = _('Save')
+        else:
+            self.env.user.notify_warning(
+                _('No location found for barcode {}').format(barcode)
+            )
+
+    def on_barcode_scanned_put(self, barcode):
+        pass
+
+    def on_barcode_scanned_inventory(self, barcode):
+        pass
 
     @api.model
     def _selection_hardware(self):
@@ -230,8 +259,9 @@ class VerticalLiftShuttle(models.Model):
         )
 
     def button_release(self):
-        self._hardware_switch_off_laser_pointer()
-        self._hardware_close_tray()
+        if self.current_move_line_id:
+            self._hardware_switch_off_laser_pointer()
+            self._hardware_close_tray()
         self.select_next_move_line()
         if not self.current_move_line_id:
             # sorry not sorry
@@ -248,8 +278,9 @@ class VerticalLiftShuttle(models.Model):
         # test code, TODO the smart one
         # (scan of barcode increments qty, save calls action_done?)
         line = self.current_move_line_id
-        line.qty_done = line.product_qty
-        line.move_id._action_done()
+        if line.state != 'done':
+            line.qty_done = line.product_qty
+            line.move_id._action_done()
 
     def process_current_put(self):
         raise exceptions.UserError(_('Put workflow not implemented'))
@@ -258,7 +289,7 @@ class VerticalLiftShuttle(models.Model):
         raise exceptions.UserError(_('Inventory workflow not implemented'))
 
     def button_save(self):
-        if not self:
+        if not (self and self.current_move_line_id):
             return
         self.ensure_one()
         method = 'process_current_{}'.format(self.mode)
@@ -271,7 +302,11 @@ class VerticalLiftShuttle(models.Model):
             self._domain_move_lines_to_do(), limit=1
         )
         self.current_move_line_id = next_move_line
-        descr = _('Scan next PID') if next_move_line else _('No operations')
+        descr = (
+            _('Scan New Destination Location')
+            if next_move_line
+            else _('No operations')
+        )
         self.operation_descr = descr
         if next_move_line:
             self._hardware_switch_on_laser_pointer()

@@ -35,12 +35,14 @@
           </div>
           <div class="o_shuttle_content o_shuttle_content_right">
             <div>
+              <!-- will react on barcode 'O-BTN.save' -->
               <button name="button_save"
                       type="object"
                       string="Save"
                       icon="fa-check"
                       class="btn-primary"
                       barcode_trigger="save"/>
+              <!-- will react on barcode 'O-BTN.release -->
               <button name="button_release"
                       type="object"
                       string="Release"
@@ -71,6 +73,12 @@
                 <label for="picking_partner_id"/>
                 <div>
                   <field name="picking_partner_id" options="{'no_open': True}"/>
+                </div>
+                <label for="location_dest_id"/>
+                <div>
+                  <field name="location_dest_id"
+                         class="bg-primary o_shuttle_highlight"
+                         options="{'no_open': True}"/>
                 </div>
                 <label for="product_id"/>
                 <div colspan="2" class="oe_title">

@@ -193,8 +193,8 @@ var LocationTrayMatrixField = DebouncedField.extend({
      */
     resizeCanvasToDisplaySize: function(canvas) {
         // look up the size the canvas is being displayed
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
+        var width = canvas.clientWidth;
+        var height = canvas.clientHeight;
 
         // If it's resolution does not match change it
         if (canvas.width !== width || canvas.height !== height) {

@@ -63,7 +63,8 @@ class TestVerticalLiftLocation(VerticalLiftCase):
 
     def test_tray_has_stock(self):
         cell = self.env.ref(
-            'stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2'
+            'stock_vertical_lift.'
+            'stock_location_vertical_lift_demo_tray_1a_x3y2'
         )
         self.assertFalse(cell.quant_ids)
         self.assertFalse(cell.tray_cell_contains_stock)
@@ -168,7 +169,8 @@ class TestVerticalLiftLocation(VerticalLiftCase):
     def test_check_active_empty(self):
         # this type used by tray T1B, we should not be able to disable it
         cell = self.env.ref(
-            'stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2'
+            'stock_vertical_lift.'
+            'stock_location_vertical_lift_demo_tray_1a_x3y2'
         )
         self.assertFalse(cell.tray_cell_contains_stock)
         # allowed to archive empty cell
@@ -176,7 +178,8 @@ class TestVerticalLiftLocation(VerticalLiftCase):
 
     def test_check_active_not_empty(self):
         cell = self.env.ref(
-            'stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2'
+            'stock_vertical_lift.'
+            'stock_location_vertical_lift_demo_tray_1a_x3y2'
         )
         self._update_quantity_in_cell(cell, self.product_socks, 1)
         self.assertTrue(cell.tray_cell_contains_stock)
