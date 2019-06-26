@@ -19,8 +19,8 @@ KanbanRecord.include({
                 method: 'action_open_screen',
                 model: self.modelName,
                 args: [self.id],
-            }).then(function (result) {
-                self.do_action(result);
+            }).then(function (action) {
+                self.trigger_up('do_action', {action: action});
             });
         } else {
             this._super.apply(this, arguments);
@@ -48,10 +48,27 @@ var ExitButton = FieldInteger.extend({
     },
 });
 
+/**
+* Shows a canvas with the Tray's cells
+*
+* An action can be configured which is called when a cell is clicked.
+* The action must be an action.multi, it will receive the x and y positions
+* of the cell clicked (starting from 0). The action must be configured in
+* the options of the field and be on the same model:
+*
+* <field name="tray_matrix"
+*        widget="kardex_tray_matrix"
+*        options="{'click_action': 'action_tray_matrix_click'}"
+*        />
+*
+*/
 var KardexTrayMatrixField = DebouncedField.extend({
     className: 'o_field_kardex_tray_matrix',
     tagName: 'canvas',
     supportedFieldTypes: ['serialized'],
+    events: {
+        'click': '_onClick',
+    },
 
     cellColorEmpty: '#ffffff',
     cellColorNotEmpty: '#4e6bfd',
@@ -59,6 +76,12 @@ var KardexTrayMatrixField = DebouncedField.extend({
     selectedLineWidth: 5,
     globalAlpha: 0.8,
     cellPadding: 2,
+
+    init: function (parent, name, record, options) {
+        this._super.apply(this, arguments);
+        this.nodeOptions = _.defaults(this.nodeOptions, {});
+        this.clickAction = 'clickAction' in (options || {}) ? options.clickAction : this.nodeOptions.click_action;
+    },
 
     isSet: function () {
         if (Object.keys(this.value).length === 0) {
@@ -78,6 +101,9 @@ var KardexTrayMatrixField = DebouncedField.extend({
 
         var self = this;
         return this._super.apply(this, arguments).then(function () {
+            if (self.clickAction) {
+                self.$el.css('cursor', 'pointer');
+            }
             // _super calls _render(), but the function
             // resizeCanvasToDisplaySize would resize the canvas
             // to 0 because the actual canvas would still be unknown.
@@ -85,6 +111,48 @@ var KardexTrayMatrixField = DebouncedField.extend({
             // let the js renderer thread catch up.
             self._ready = true;
             return self._resizeDebounce();
+        });
+    },
+
+    _onClick: function (ev) {
+        if (!this.isSet()) {
+            return;
+        }
+        if (!this.clickAction) {
+            return;
+        }
+        var width = this.canvas.width,
+            height = this.canvas.height,
+            rect = this.canvas.getBoundingClientRect();
+
+        var clickX = ev.clientX - rect.left,
+            clickY = ev.clientY - rect.top;
+
+        var cells = this.value.cells,
+            cols = cells[0].length,
+            rows = cells.length;
+
+        // we remove 1 to start counting from 0
+        var coordX = Math.ceil(clickX * cols / width) - 1,
+            coordY = Math.ceil(clickY * rows / height) - 1;
+        // if we click on the last pixel on the bottom or the right
+        // we would get an offset index
+        if (coordX >= cols) { coordX = cols - 1; }
+        if (coordY >= rows) { coordY = rows - 1; }
+
+        // the coordinate we get when we click is from top,
+        // but we are looking for the coordinate from the bottom
+        // to match the user's expectations, invert Y
+        coordY = Math.abs(coordY - rows + 1);
+
+        var self = this;
+        this._rpc({
+            model: this.model,
+            method: this.clickAction,
+            args: [[this.res_id], coordX, coordY]
+        })
+        .then(function (action) {
+            self.trigger_up('do_action', {action: action});
         });
     },
 

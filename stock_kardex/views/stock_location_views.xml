@@ -8,7 +8,7 @@
     <field name="arch" type="xml">
       <field name="return_location" position="after">
         <field name="kardex_location"
-               attrs="{'invisible': [('kardex_kind', '!=', False)]}"
+               attrs="{'invisible': [('kardex_kind', '!=', False), ('kardex_kind', '!=', 'view')]}"
                />
       </field>
       <group name="localization" position="after">
@@ -20,6 +20,7 @@
           <field name="tray_matrix"
                  widget="kardex_tray_matrix"
                  attrs="{'invisible': [('kardex_kind', 'not in', ('tray', 'cell'))]}"
+                 options="{'click_action': 'action_tray_matrix_click'}"
                  />
         </group>
       </group>

@@ -73,6 +73,35 @@ class StockLocation(models.Model):
                 'cells': location._tray_cells_matrix(),
             }
 
+    @api.multi
+    def action_tray_matrix_click(self, coordX, coordY):
+        self.ensure_one()
+        if self.kardex_kind == 'cell':
+            tray = self.location_id
+        else:
+            tray = self
+        location = self.search(
+            [
+                ('id', 'child_of', tray.ids),
+                # we receive positions counting from 0 but they are stored
+                # in the "human" format starting from 1
+                ('posx', '=', coordX + 1),
+                ('posy', '=', coordY + 1),
+            ]
+        )
+        view = self.env.ref('stock.view_location_form')
+        action = self.env.ref('stock.action_location_form').read()[0]
+        action.update(
+            {
+                'res_id': location.id,
+                'view_mode': 'form',
+                'view_type': 'form',
+                'view_id': view.id,
+                'views': [(view.id, 'form')],
+            }
+        )
+        return action
+
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
