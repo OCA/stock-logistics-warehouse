@@ -4,16 +4,7 @@
 
 from odoo import api, fields, models
 from odoo.addons import decimal_precision as dp
-import operator as py_operator
-
-OPERATORS = {
-    '<': py_operator.lt,
-    '>': py_operator.gt,
-    '<=': py_operator.le,
-    '>=': py_operator.ge,
-    '=': py_operator.eq,
-    '!=': py_operator.ne
-}
+from odoo.addons.stock.models.product import OPERATORS
 
 
 class ProductProduct(models.Model):
