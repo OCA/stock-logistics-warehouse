@@ -20,3 +20,21 @@ class StockMove(models.Model):
 
     picking_type_code = fields.Selection(
         related='picking_type_id.code', store=True, readonly=True)
+
+
+class StockQuant(models.Model):
+    _inherit = 'stock.quant'
+
+    @api.model
+    def quants_unreserve(self, move):
+        param = self.env['stock.config.settings']._get_parameter(
+            'stock.backorder.manual_quants', False)
+        if param and param.value != 'False':
+            related_moves = self.env['stock.move'].search([
+                ('split_from', '=', move.id)])
+            related_quants = move.reserved_quant_ids
+            super(StockQuant, self).quants_unreserve(move)
+            related_quants.sudo().write({
+                'reservation_id': related_moves[:1].id})
+        else:
+            super(StockQuant, self).quants_unreserve(move)
