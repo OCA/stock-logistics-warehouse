@@ -45,7 +45,8 @@ class WizardStockRequestOrderKanban(models.TransientModel):
     def stock_request_kanban_values(self):
         res = super().stock_request_kanban_values()
         res['order_id'] = self.order_id.id,
-        res['expected_date'] = self.order_id.expected_date,
+        res['expected_date'] = \
+            fields.Datetime.to_string(self.order_id.expected_date),
         return res
 
     def stock_request_ending(self):
