@@ -11,7 +11,7 @@ class StockQuant(models.Model):
 
     removal_priority = fields.Integer(
         related='location_id.removal_priority',
-        readonly=True, store=True,
+        store=True,
     )
 
     @api.model
