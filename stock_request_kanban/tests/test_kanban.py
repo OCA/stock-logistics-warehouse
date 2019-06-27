@@ -12,7 +12,7 @@ class TestKanban(TestBaseKanban):
         super().setUp()
         self.main_company = self.env.ref('base.main_company')
         self.warehouse = self.env.ref('stock.warehouse0')
-        self.categ_unit = self.env.ref('product.product_uom_categ_unit')
+        self.categ_unit = self.env.ref('uom.product_uom_categ_unit')
 
         # common data
         self.company_2 = self.env['res.company'].create({
@@ -42,19 +42,19 @@ class TestKanban(TestBaseKanban):
             'route_ids': [(4, self.route.id)],
             'company_id': False,
         })
-        self.uom_dozen = self.env['product.uom'].create({
+        self.uom_dozen = self.env['uom.uom'].create({
             'name': 'Test-DozenA',
             'category_id': self.categ_unit.id,
             'factor_inv': 12,
             'uom_type': 'bigger',
             'rounding': 0.001})
 
-        self.env['procurement.rule'].create({
+        self.env['stock.rule'].create({
             'name': 'Transfer',
             'route_id': self.route.id,
             'location_src_id': self.ressuply_loc.id,
             'location_id': self.warehouse.lot_stock_id.id,
-            'action': 'move',
+            'action': 'pull_push',
             'picking_type_id': self.warehouse.int_type_id.id,
             'procure_method': 'make_to_stock',
             'warehouse_id': self.warehouse.id,
