@@ -1,4 +1,13 @@
 -
+  I force recomputation of stock.location parent left/right
+-
+  !python {model: stock.location}:
+    # we need this because when running the tests at install time as is done on
+    # Travis, the hook performing this operation for the new stock reservation
+    # location is run after the test execution. This causes the stock level
+    # computation to be wrong at the time the tests are run.
+    self._parent_store_compute(cr)
+-
   I create a product to test the stock reservation
 -
  !record {model: product.product, id: product_gelato}:
@@ -12,8 +21,6 @@
     uom_po_id: product.product_uom_kgm
     valuation: real_time
     cost_method: average
-    property_stock_account_input: account.o_expense
-    property_stock_account_output: account.o_income
 -
   I update the current stock of the Gelato with 10 kgm
 -
@@ -29,10 +36,14 @@
 -
   !record {model: sale.order, id: sale_reserve_01}:
     partner_id: base.res_partner_2
-    payment_term: account.account_payment_term
+    payment_term_id: account.account_payment_term
     order_line:
       - product_id: product_gelato
+        name: Gelato
         product_uom_qty: 4
+      - product_id: product_gelato
+        name: Gelato
+        product_uom_qty: 1
 -
   I call the wizard to reserve the products of the sales order
 -
@@ -48,7 +59,7 @@
 -
   !python {model: product.product, id: product_gelato}: |
     from nose.tools import *
-    assert_almost_equal(self.virtual_available, 6.0)
+    assert_almost_equal(self.virtual_available, 5.0)
 -
   I release the sales order's reservations
 -
@@ -60,3 +71,79 @@
   !python {model: product.product, id: product_gelato}: |
     from nose.tools import *
     assert_almost_equal(self.virtual_available, 10.0)
+
+
+-
+  In order to test reservation of the sales order, I create a sales order
+-
+  !record {model: sale.order, id: sale_reserve_02_test_confirm}:
+    partner_id: base.res_partner_2
+    payment_term_id: account.account_payment_term
+    order_line:
+      - product_id: product_gelato
+        name: Gelato
+        product_uom_qty: 4
+-
+  I call the wizard to reserve the products of the sales order
+-
+  !python {model: sale.stock.reserve}: |
+    active_id = ref('sale_reserve_02_test_confirm')
+    context['active_id'] = active_id
+    context['active_ids'] = [active_id]
+    context['active_model'] = 'sale.order'
+    wizard_id = self.create(cr, uid, {}, context=context)
+    self.button_reserve(cr, uid, [wizard_id], context=context)
+
+-
+  I confirm sale order and test that reservations are released
+-
+  !python {model: sale.order}: |
+    active_id = ref('sale_reserve_02_test_confirm')
+    order = self.browse(cr, uid, active_id, context=context)
+    reservations = order.mapped('order_line.reservation_ids')
+    assert reservations.mapped('state') == ['assigned'], "wrong reservations state"
+    order.action_confirm()
+    assert reservations.mapped('state') == ['cancel'], "wrong reservations state"
+    assert len(reservations.mapped('sale_line_id')) == 0, "bindings to sale lines are cleaned"
+
+-
+  I cancel sale order (2)
+-
+  !python {model: sale.order}: |
+    active_id = ref('sale_reserve_02_test_confirm')
+    self.action_cancel(cr, uid, active_id, context=context)
+
+
+-
+  In order to test reservation of the sales order, I create a sales order
+-
+  !record {model: sale.order, id: sale_reserve_03_cancel}:
+    partner_id: base.res_partner_2
+    payment_term_id: account.account_payment_term
+    order_line:
+      - product_id: product_gelato
+        name: Gelato
+        product_uom_qty: 4
+-
+  I call the wizard to reserve the products of the sales order
+-
+  !python {model: sale.stock.reserve}: |
+    active_id = ref('sale_reserve_03_cancel')
+    context['active_id'] = active_id
+    context['active_ids'] = [active_id]
+    context['active_model'] = 'sale.order'
+    wizard_id = self.create(cr, uid, {}, context=context)
+    self.button_reserve(cr, uid, [wizard_id], context=context)
+
+-
+  I cancel sale order and tet that reservations are released
+-
+  !python {model: sale.order}: |
+    active_id = ref('sale_reserve_03_cancel')
+    order = self.browse(cr, uid, active_id, context=context)
+    reservations = order.mapped('order_line.reservation_ids')
+    assert reservations.mapped('state') == ['assigned'], "wrong reservations state"
+    order.action_cancel()
+    assert reservations.mapped('state') == ['cancel'], "wrong reservations state"
+    assert len(reservations.mapped('sale_line_id')) == 0, "bindings to sale lines are cleaned"
+

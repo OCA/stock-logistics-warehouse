@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data noupdate="0">
 
         <record id="view_order_form_reserve" model="ir.ui.view">
             <field name="name">sale.order.form.reserve</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale_stock.view_order_form_inherit"/>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
             <field name="arch" type="xml">
                 <button name="action_quotation_send" position="before">
                     <field name="is_stock_reservable" invisible="1"/>
+                    <field name="has_stock_reservation" invisible="1"/>
                     <button name="%(action_sale_stock_reserve)d"
                         type="action"
                         string="Reserve Stock"
                         help="Pre-book products from stock"
                         attrs="{'invisible': [('is_stock_reservable', '=', False)]}"
                         />
+                    <button name="release_all_stock_reservation"
+                        type="object"
+                        string="Release Reservations"
+                        attrs="{'invisible': [('has_stock_reservation', '=', False)]}"/>
                 </button>
 
                 <field name="order_line" position="attributes">
@@ -23,6 +28,7 @@
 
                 <xpath expr="//field[@name='order_line']/form//field[@name='state']" position="before">
                     <field name="reservation_ids" invisible="1"/>
+                    <field name="is_stock_reservable" invisible="1"/>
                     <button name="%(action_sale_stock_reserve)d"
                         type="action"
                         string="Reserve Stock"
@@ -41,16 +47,16 @@
                     <button name="%(action_sale_stock_reserve)d"
                         type="action"
                         string="Reserve Stock"
-                        icon="terp-locked"
+                        icon="fa-lock"
                         attrs="{'invisible': [('is_stock_reservable', '=', False)]}" />
                     <button name="release_stock_reservation"
                         type="object"
                         string="Release Reservation"
-                        icon="gtk-undo"
+                        icon="fa-unlock"
                         attrs="{'invisible': [('reservation_ids', '=', [])]}" />
                 </xpath>
 
-                <field name="invoiced" position="before">
+                <xpath expr="//group[@name='sales_person']" position="inside">
                     <label for="has_stock_reservation"/>
                     <div>
                         <field name="has_stock_reservation"/>
@@ -59,9 +65,9 @@
                             type="object" class="oe_link"
                             attrs="{'invisible': [('has_stock_reservation', '=', False)]}"/>
                     </div>
-                </field>
+                </xpath>
             </field>
         </record>
 
     </data>
-</openerp>
+</odoo>

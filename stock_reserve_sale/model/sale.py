@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Guewen Baconnier
@@ -19,9 +18,10 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-from openerp.exceptions import except_orm
-from openerp.tools.translate import _
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
+from odoo.tools.float_utils import float_compare
+import odoo.addons.decimal_precision as dp
 
 
 class SaleOrder(models.Model):
@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
     @api.depends('state',
                  'order_line.reservation_ids',
                  'order_line.is_stock_reservable')
-    def _stock_reservation(self):
+    def _compute_stock_reservation(self):
         for sale in self:
             has_stock_reservation = False
             is_stock_reservable = False
@@ -46,29 +46,26 @@ class SaleOrder(models.Model):
             sale.has_stock_reservation = has_stock_reservation
 
     has_stock_reservation = fields.Boolean(
-        compute='_stock_reservation',
+        compute='_compute_stock_reservation',
         readonly=True,
-        multi='stock_reservation',
         store=True,
         string='Has Stock Reservations')
     is_stock_reservable = fields.Boolean(
-        compute='_stock_reservation',
+        compute='_compute_stock_reservation',
         readonly=True,
-        multi='stock_reservation',
         store=True,
         string='Can Have Stock Reservations')
 
     @api.multi
     def release_all_stock_reservation(self):
-        line_ids = [line.id for order in self for line in order.order_line]
-        lines = self.env['sale.order.line'].browse(line_ids)
+        lines = self.mapped('order_line')
         lines.release_stock_reservation()
         return True
 
     @api.multi
-    def action_button_confirm(self):
+    def action_confirm(self):
         self.release_all_stock_reservation()
-        return super(SaleOrder, self).action_button_confirm()
+        return super(SaleOrder, self).action_confirm()
 
     @api.multi
     def action_cancel(self):
@@ -85,24 +82,24 @@ class SaleOrderLine(models.Model):
 
         Reproduce get suitable rule from procurement
         to predict source location """
-        ProcurementRule = self.env['procurement.rule']
+        ProcurementRule = self.env['stock.rule']
         product = self.product_id
-        product_route_ids = [x.id for x in product.route_ids +
-                             product.categ_id.total_route_ids]
+        product_route_ids = (product.route_ids.mapped('id') +
+                             product.categ_id.total_route_ids.mapped('id'))
         rules = ProcurementRule.search([('route_id', 'in', product_route_ids)],
                                        order='route_sequence, sequence',
                                        limit=1)
 
         if not rules:
             warehouse = self.order_id.warehouse_id
-            wh_routes = warehouse.route_ids
-            wh_route_ids = [route.id for route in wh_routes]
+            wh_route_ids = warehouse.route_ids.mapped('id')
             domain = ['|', ('warehouse_id', '=', warehouse.id),
                       ('warehouse_id', '=', False),
                       ('route_id', 'in', wh_route_ids)]
 
             rules = ProcurementRule.search(domain,
-                                           order='route_sequence, sequence')
+                                           order='route_sequence, sequence',
+                                           limit=1)
 
         if rules:
             return rules[0]
@@ -120,7 +117,7 @@ class SaleOrderLine(models.Model):
     @api.depends('state',
                  'product_id.route_ids',
                  'product_id.type')
-    def _is_stock_reservable(self):
+    def _compute_is_stock_reservation(self):
         for line in self:
             reservable = False
             if (not (line.state != 'draft' or
@@ -137,98 +134,116 @@ class SaleOrderLine(models.Model):
         string='Stock Reservation',
         copy=False)
     is_stock_reservable = fields.Boolean(
-        compute='_is_stock_reservable',
+        compute='_compute_is_stock_reservation',
         readonly=True,
         string='Can be reserved')
 
     @api.multi
-    def release_stock_reservation(self):
-        reserv_ids = [reserv.id for line in self
-                      for reserv in line.reservation_ids]
-        reservations = self.env['stock.reservation'].browse(reserv_ids)
-        reservations.release()
+    def _prepare_stock_reservation(self, date_validity=False, note=False):
+        self.ensure_one()
+
+        try:
+            owner_id = self.stock_owner_id and self.stock_owner_id.id or False
+        except AttributeError:
+            owner_id = False
+            # module sale_owner_stock_sourcing not installed, fine
+
+        return {'product_id': self.product_id.id,
+                'product_uom': self.product_uom.id,
+                'product_uom_qty': self.product_uom_qty,
+                'date_validity': date_validity,
+                'name': "%s (%s)" % (self.order_id.name, self.name),
+                'note': note,
+                'price_unit': self.price_unit,
+                'sale_line_id': self.id,
+                'restrict_partner_id': owner_id,
+                }
+
+    @api.multi
+    def acquire_stock_reservation(self, date_validity=False, note=False):
+        reserv_obj = self.env['stock.reservation'].sudo()
+
+        reservations = reserv_obj.browse()
+        for line in self:
+            if not line.is_stock_reservable:
+                continue
+
+            vals = line._prepare_stock_reservation(
+                date_validity=date_validity, note=note)
+
+            # Place picking_type_id in context. This is required
+            # to make reserve automaticaly find location_id and
+            # location_dest_id
+            pick_type_id = line.order_id.warehouse_id.int_type_id.id
+            reserv_obj_ctx = reserv_obj.with_context(
+                default_picking_type_id=pick_type_id)
+
+            reservations |= reserv_obj_ctx.create(vals)
+        reservations.reserve()
         return True
 
-    def product_id_change(self, cr, uid, ids,
-                          pricelist,
-                          product,
-                          qty=0,
-                          uom=False,
-                          qty_uos=0,
-                          uos=False,
-                          name='',
-                          partner_id=False,
-                          lang=False,
-                          update_tax=True,
-                          date_order=False,
-                          packaging=False,
-                          fiscal_position=False,
-                          flag=False,
-                          context=None):
-        result = super(SaleOrderLine, self).product_id_change(
-            cr, uid, ids, pricelist, product, qty=qty, uom=uom,
-            qty_uos=qty_uos, uos=uos, name=name, partner_id=partner_id,
-            lang=lang, update_tax=update_tax, date_order=date_order,
-            packaging=packaging, fiscal_position=fiscal_position,
-            flag=flag, context=context)
-        if not ids:  # warn only if we change an existing line
-            return result
-        assert len(ids) == 1, "Expected 1 ID, got %r" % ids
-        line = self.browse(cr, uid, ids[0], context=context)
-        if qty != line.product_uom_qty and line.reservation_ids:
+    @api.multi
+    def release_stock_reservation(self):
+        self.mapped('reservation_ids').sudo().release()
+        return True
+
+    @api.onchange('product_id', 'product_uom_qty')
+    def onchange_product_id_qty(self):
+        reserved_qty = sum(self.reservation_ids.mapped('product_uom_qty'))
+
+        precision_digits = dp.get_precision(
+            'Product Unit of Measure')(self.env.cr)[1]
+        qty_equal = float_compare(
+            self.product_uom_qty, reserved_qty,
+            precision_digits=precision_digits) == 0.0
+        if not qty_equal and self.reservation_ids:
             msg = _("As you changed the quantity of the line, "
                     "the quantity of the stock reservation will "
-                    "be automatically adjusted to %.2f.") % qty
-            msg += "\n\n"
-            result.setdefault('warning', {})
-            if result['warning'].get('message'):
-                result['warning']['message'] += msg
-            else:
-                result['warning'] = {
+                    "be automatically adjusted to %.2f."
+                    "") % self.product_uom_qty
+            return {
+                'warning': {
                     'title': _('Configuration Error!'),
                     'message': msg,
-                }
-        return result
+                },
+            }
+        return {}
+
+    @api.multi
+    def _update_reservation_price_qty(self):
+        for line in self:
+            if not line.reservation_ids:
+                continue
+            if len(line.reservation_ids) > 1:
+                raise UserError(
+                    _('Several stock reservations are linked with the '
+                      'line. Impossible to adjust their quantity. '
+                      'Please release the reservation '
+                      'before changing the quantity.'))
+
+            line.reservation_ids.sudo().write({
+                'price_unit': line.price_unit,
+                'product_uom_qty': line.product_uom_qty,
+            })
 
     @api.multi
     def write(self, vals):
         block_on_reserve = ('product_id',
-                            'product_uom',
-                            'product_uos',
+                            'product_uom_id',
                             'type')
         update_on_reserve = ('price_unit',
                              'product_uom_qty',
-                             'product_uos_qty')
+                             )
         keys = set(vals.keys())
         test_block = keys.intersection(block_on_reserve)
         test_update = keys.intersection(update_on_reserve)
-        if test_block:
-            for line in self:
-                if not line.reservation_ids:
-                    continue
-                raise except_orm(
-                    _('Error'),
-                    _('You cannot change the product or unit of measure '
-                      'of lines with a stock reservation. '
-                      'Release the reservation '
-                      'before changing the product.'))
+        if test_block and len(self.mapped('reservation_ids')) > 0:
+            raise UserError(
+                _('You cannot change the product or unit of measure '
+                  'of lines with a stock reservation. '
+                  'Release the reservation '
+                  'before changing the product.'))
         res = super(SaleOrderLine, self).write(vals)
         if test_update:
-            for line in self:
-                if not line.reservation_ids:
-                    continue
-                if len(line.reservation_ids) > 1:
-                    raise except_orm(
-                        _('Error'),
-                        _('Several stock reservations are linked with the '
-                          'line. Impossible to adjust their quantity. '
-                          'Please release the reservation '
-                          'before changing the quantity.'))
-
-                line.reservation_ids.write(
-                    {'price_unit': line.price_unit,
-                     'product_uom_qty': line.product_uom_qty,
-                     'product_uos_qty': line.product_uos_qty,
-                     }
-                )
+            self._update_reservation_price_qty()
         return res
