@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Guewen Baconnier
@@ -19,10 +18,10 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api
-from odoo.exceptions import except_orm
-from odoo.tools.translate import _
-
+from odoo import models, fields, api, _
+from odoo.addons import decimal_precision as dp
+from odoo.tools.float_utils import float_round
+from odoo.exceptions import UserError
 
 class StockReservation(models.Model):
     """ Allow to reserve products.
@@ -117,7 +116,7 @@ class StockReservation(models.Model):
             location = self.env.ref(ref, raise_if_not_found=True)
             location.check_access_rule('read')
             location_id = location.id
-        except (except_orm, ValueError):
+        except ValueError:
             location_id = False
         return location_id
 
@@ -139,7 +138,7 @@ class StockReservation(models.Model):
         A date until which the product is reserved can be specified.
         """
         self.write({'date_expected': fields.Datetime.now()})
-        self.mapped('move_id').action_confirm()
+        self.mapped('move_id')._action_confirm(merge=False, merge_into=False)
         self.mapped('move_id.picking_id').action_assign()
         return True
 
@@ -148,7 +147,65 @@ class StockReservation(models.Model):
         """
         Release moves from reservation
         """
-        self.mapped('move_id').action_cancel()
+        # First we cancel all reserved moves.
+        self.mapped('move_id').filtered(
+            lambda x: x.state not in ('done', 'draft', 'cancel')
+        )._action_cancel()
+        # If the move is done, we need to reverse it.
+        done_moves = self.mapped('move_id').filtered(lambda x: x.state == 'done')
+        # We group them by picking to have one revesed picking for all moves.
+        for picking in done_moves.mapped('picking_id'):
+            return_obj = self.env['stock.return.picking']
+            product_return_moves = []
+
+            if picking.state != 'done':
+                raise UserError(_("You may only return Done pickings."))
+
+            for move in done_moves.filtered(lambda x: x.picking_id == picking):
+                if move.scrapped:
+                    continue
+
+                move_dest_exists = False
+                if move.move_dest_ids:
+                    move_dest_exists = True
+
+                quantity = move.product_qty - sum(move.move_dest_ids.filtered(
+                    lambda m: m.state in [
+                        'partially_available', 'assigned', 'done'
+                    ]).mapped('move_line_ids').mapped('product_qty')
+                )
+                quantity = float_round(
+                    quantity,
+                    precision_rounding=move.product_uom.rounding
+                )
+                product_return_moves.append(
+                    (0, 0, {
+                        'product_id': move.product_id.id,
+                        'quantity': quantity,
+                        'move_id': move.id,
+                        'uom_id': move.product_id.uom_id.id
+                    }))
+
+            location_id = picking.location_id.id
+            if picking.picking_type_id.return_picking_type_id \
+                    .default_location_dest_id.return_location:
+
+                location_id = picking.picking_type_id.return_picking_type_id \
+                    .default_location_dest_id.id
+
+            parent_location_id = picking.picking_type_id.warehouse_id \
+                and picking.picking_type_id.warehouse_id.view_location_id.id \
+                or picking.location_id.location_id.id
+
+            wizard = return_obj.create({
+                'picking_id': picking.id,
+                'location_id': location_id,
+                'product_return_moves': product_return_moves,
+                'move_dest_exists': move_dest_exists,
+                'parent_location_id': parent_location_id,
+                'original_location_id': picking.location_id.id,
+            })
+            wizard._create_returns()
         return True
 
     @api.model

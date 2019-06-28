@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Guewen Baconnier
@@ -21,7 +20,7 @@
 
 {'name': 'Stock Reservation',
  'summary': 'Stock reservations on products',
- 'version': '10.0.1.0.0',
+ 'version': '12.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',

@@ -7,7 +7,7 @@
     <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
         <xpath expr="//div[@name='button_box']" position="inside">
-            <button class="oe_inline oe_stat_button" name="action_view_reservations"
+            <button class="oe_stat_button" name="action_view_reservations"
                 type="object" attrs="{'invisible':[('type', '!=', 'product')]}" icon="fa-lock">
                 <field string="Stock Reservations" name="reservation_count" widget="statinfo" />
             </button>
@@ -21,7 +21,7 @@
     <field name="inherit_id" ref="product.product_normal_form_view"/>
     <field name="arch" type="xml">
         <xpath expr="//div[@name='button_box']" position="inside">
-            <button class="oe_inline oe_stat_button" name="action_view_reservations"
+            <button class="oe_stat_button" name="action_view_reservations"
                 type="object" attrs="{'invisible':[('type', '!=', 'product')]}" icon="fa-lock">
                 <field string="Stock Reservations" name="reservation_count" widget="statinfo" />
             </button>

@@ -4,7 +4,7 @@
     <field name="name">stock.reservation.form</field>
     <field name="model">stock.reservation</field>
     <field name="arch" type="xml">
-        <form string="Stock Reservations" version="7.0">
+        <form string="Stock Reservations">
             <header>
                 <button name="reserve" type="object"
                     string="Reserve"
@@ -27,7 +27,7 @@
                         <div>
                             <field name="product_uom_qty" class="oe_inline"/>
                             <field name="product_uom"
-                                groups="product.group_uom" class="oe_inline"/>
+                                groups="stock.group_stock_user" class="oe_inline"/>
                         </div>
                         <field name="name"/>
                         <field name="date_validity" />
@@ -38,7 +38,7 @@
                         <field name="restrict_partner_id" groups="stock.group_tracking_owner"/>
                     </group>
                     <group name="location" string="Locations"
-                        groups="stock.group_locations">
+                        groups="stock.group_stock_multi_locations">
                         <field name="location_id"/>
                         <field name="location_dest_id"/>
                     </group>
@@ -55,8 +55,10 @@
     <field name="name">stock.reservation.tree</field>
     <field name="model">stock.reservation</field>
     <field name="arch" type="xml">
-        <tree string="Stock Reservations" version="7.0"
-            colors="blue:state == 'draft';grey:state == 'cancel'" >
+        <tree string="Stock Reservations"
+            decoration-info="state == 'draft'"
+            decoration-muted="state == 'cancel'"
+            decoration-success="state == 'assigned'" >
             <field name="name" />
             <field name="product_id" />
             <field name="move_id" />
@@ -68,11 +70,11 @@
             <field name="state"/>
             <button name="reserve" type="object"
                 string="Reserve"
-                icon="terp-locked"
+                icon="fa-lock"
                 states="draft"/>
             <button name="release" type="object"
                 string="Release"
-                icon="gtk-undo"
+                icon="fa-unlock"
                 states="assigned,confirmed,done"/>
         </tree>
     </field>
@@ -82,7 +84,7 @@
     <field name="name">stock.reservation.search</field>
     <field name="model">stock.reservation</field>
     <field name="arch" type="xml">
-        <search string="Stock Reservations" version="7.0">
+        <search string="Stock Reservations">
             <filter name="draft" string="Draft"
                 domain="[('state', '=', 'draft')]"
                 help="Not already reserved"/>
