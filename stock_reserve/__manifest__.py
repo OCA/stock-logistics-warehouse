@@ -14,7 +14,7 @@
           'security/ir.model.access.csv',
           ],
  'auto_install': False,
- 'test': ['test/stock_reserve.yml',
+ 'test': ['tests/stock_reserve.yml',
           ],
  'installable': True,
  }
