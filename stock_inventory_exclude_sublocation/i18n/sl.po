@@ -20,7 +20,7 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: stock_inventory_exclude_sublocation
-#: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory_exclude_sublocation
+#: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory__exclude_sublocation
 msgid "Exclude Sublocations"
 msgstr ""
 
