@@ -1,0 +1,193 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_reserve_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-29 01:55+0000\n"
+"PO-Revision-Date: 2019-06-29 01:55+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
+msgid "A stock reservation will be created for the products\n"
+"                        of the selected quotation lines. If a validity date is specified,\n"
+"                        the reservation will be released once the date has passed."
+msgstr "將為選擇的報價訂單行的產品創建庫存預留。\n"
+"如果指定了有效期，那麼當超過有效期時，庫存預留就會被釋放。"
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/models/sale.py:180
+#, python-format
+msgid "As you changed the quantity of the line, the quantity of the stock reservation will be automatically adjusted to %.2f."
+msgstr "由於訂單行的數量發生改變，庫存預留的數量自動變更為 %.2f。"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_order__is_stock_reservable
+msgid "Can Have Stock Reservations"
+msgstr "能否預留庫存"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_order_line__is_stock_reservable
+msgid "Can be reserved"
+msgstr "可被預留"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
+msgid "Cancel"
+msgstr "取消"
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/models/sale.py:186
+#, python-format
+msgid "Configuration Error!"
+msgstr "配置錯誤！"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__create_uid
+msgid "Created by"
+msgstr "創建人"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__create_date
+msgid "Created on"
+msgstr "創建時間"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__display_name
+msgid "Display Name"
+msgstr "顯示名稱"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_order__has_stock_reservation
+msgid "Has Stock Reservations"
+msgstr "預留了庫存"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,help:stock_reserve_sale.field_sale_stock_reserve__date_validity
+msgid "If a date is given, the reservations will be released at the end of the validity."
+msgstr "如果給定一個日期，過了這個時間預留就會被釋放。"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve____last_update
+msgid "Last Modified on"
+msgstr "最後修改日"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__write_uid
+msgid "Last Updated by"
+msgstr "最後更新者"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__write_date
+msgid "Last Updated on"
+msgstr "最後更新時間"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__note
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
+msgid "Notes"
+msgstr "備註"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Pre-book products from stock"
+msgstr "從倉庫預留產品"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Release Reservation"
+msgstr "釋放預留"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Release Reservations"
+msgstr "釋放預留"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
+msgid "Reserve"
+msgstr "預留"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
+msgid "Reserve Stock"
+msgstr "預留庫存"
+
+#. module: stock_reserve_sale
+#: model:ir.actions.act_window,name:stock_reserve_sale.action_sale_stock_reserve
+msgid "Reserve Stock for Quotation Lines"
+msgstr "為報價訂單行預留庫存"
+
+#. module: stock_reserve_sale
+#: model:ir.model,name:stock_reserve_sale.model_sale_order
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_stock_reservation__sale_id
+msgid "Sale Order"
+msgstr "報價單"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_stock_reservation__sale_line_id
+msgid "Sale Order Line"
+msgstr "報價訂單行"
+
+#. module: stock_reserve_sale
+#: model:ir.model,name:stock_reserve_sale.model_sale_stock_reserve
+msgid "Sale Stock Reservation"
+msgstr "報價單庫存預留"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_stock_reservation_form
+msgid "Sales"
+msgstr "銷售"
+
+#. module: stock_reserve_sale
+#: model:ir.model,name:stock_reserve_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "銷售訂單行"
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/models/sale.py:199
+#, python-format
+msgid "Several stock reservations are linked with the line. Impossible to adjust their quantity. Please release the reservation before changing the quantity."
+msgstr "多個庫存預留與這條記錄相關聯，不能調整他們的數量，請在改變數量前先釋放預留的庫存。"
+
+#. module: stock_reserve_sale
+#: model:ir.model,name:stock_reserve_sale.model_stock_reservation
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_order_line__reservation_ids
+msgid "Stock Reservation"
+msgstr "庫存預留"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__date_validity
+msgid "Validity Date"
+msgstr "有效期"
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/models/sale.py:222
+#, python-format
+msgid "You cannot change the product or unit of measure of lines with a stock reservation. Release the reservation before changing the product."
+msgstr "無法變更有庫存預留訂單行的產品單位，請先釋放預留的庫存。"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "cancel all"
+msgstr "全部取消"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
+msgid "or"
+msgstr "或"
+
