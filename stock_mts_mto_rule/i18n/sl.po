@@ -20,25 +20,22 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/model/stock_warehouse.py:35
-#, python-format
-msgid "Can't find MTO Rule on the warehouse"
-msgstr "Za skladišče ni pravila 'po naročilu'"
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__action
+msgid "Action"
+msgstr ""
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/model/stock_warehouse.py:42
-#, python-format
-msgid "Can't find MTS Rule on the warehouse"
-msgstr "Za skladišče ni pravila 'na zalogo'"
+#: selection:stock.rule,action:0
+msgid "Buy"
+msgstr ""
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/model/stock_warehouse.py:31
-#, python-format
-msgid "Can't find any generic MTS+MTO route."
-msgstr "Ni generične proge 'na zalogo' + 'po naročilu'"
+#: selection:stock.rule,action:0
+msgid "Choose between MTS and MTO"
+msgstr "Izbira med 'Na zalogo' in 'Po naročilu'"
 
 #. module: stock_mts_mto_rule
-#: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_warehouse_mto_mts_management
+#: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_warehouse__mto_mts_management
 msgid ""
 "If this new route is selected on product form view, a purchase order will be "
 "created only if the virtual stock is less than 0 else, the product will be "
@@ -49,7 +46,7 @@ msgstr ""
 "proizvod vzame iz zaloge."
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/model/procurement_rule.py:27
+#: code:addons/stock_mts_mto_rule/models/stock_rule.py:28
 #, python-format
 msgid ""
 "Inconsistency between the source locations of the mts and mto rules linked "
@@ -57,44 +54,63 @@ msgid ""
 msgstr ""
 
 #. module: stock_mts_mto_rule
-#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_rule_mto_rule_id
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mto_rule_id
 msgid "MTO Rule"
 msgstr "Pravilo 'Po naročilu'"
 
 #. module: stock_mts_mto_rule
-#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse_mts_mto_rule_id
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__mts_mto_rule_id
 msgid "MTO+MTS rule"
 msgstr "Pravilo 'Po naročilu' + 'Na zalogo'"
 
 #. module: stock_mts_mto_rule
-#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_procurement_rule_mts_rule_id
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mts_rule_id
 msgid "MTS Rule"
 msgstr "Pravilo 'Na zalogo'"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/model/stock_warehouse.py:118
+#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:36
 #, python-format
 msgid "MTS+MTO"
 msgstr "Na zalogo + Po naročilu"
 
 #. module: stock_mts_mto_rule
+#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:57
 #: model:stock.location.route,name:stock_mts_mto_rule.route_mto_mts
+#, python-format
 msgid "Make To Order + Make To Stock"
 msgstr "Naredi po naročilu + Naredi na zalogo"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/model/procurement_rule.py:22
+#: code:addons/stock_mts_mto_rule/models/stock_rule.py:23
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
 msgstr ""
 
 #. module: stock_mts_mto_rule
-#: model:ir.model,name:stock_mts_mto_rule.model_procurement_rule
-msgid "Procurement Rule"
-msgstr "Oskrbovalno pravilo"
+#: selection:stock.rule,action:0
+msgid "Pull & Push"
+msgstr ""
 
 #. module: stock_mts_mto_rule
-#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse_mto_mts_management
+#: selection:stock.rule,action:0
+msgid "Pull From"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: selection:stock.rule,action:0
+msgid "Push To"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: model:ir.model,name:stock_mts_mto_rule.model_stock_rule
+#, fuzzy
+#| msgid "MTS Rule"
+msgid "Stock Rule"
+msgstr "Pravilo 'Na zalogo'"
+
+#. module: stock_mts_mto_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__mto_mts_management
 msgid "Use MTO+MTS rules"
 msgstr "Uporabi pravila Po naročilu + Na zalogo"
 
@@ -103,8 +119,17 @@ msgstr "Uporabi pravila Po naročilu + Na zalogo"
 msgid "Warehouse"
 msgstr "Skladišče"
 
-#~ msgid "Choose between MTS and MTO"
-#~ msgstr "Izbira med 'Na zalogo' in 'Po naročilu'"
+#~ msgid "Can't find MTO Rule on the warehouse"
+#~ msgstr "Za skladišče ni pravila 'po naročilu'"
+
+#~ msgid "Can't find MTS Rule on the warehouse"
+#~ msgstr "Za skladišče ni pravila 'na zalogo'"
+
+#~ msgid "Can't find any generic MTS+MTO route."
+#~ msgstr "Ni generične proge 'na zalogo' + 'po naročilu'"
+
+#~ msgid "Procurement Rule"
+#~ msgstr "Oskrbovalno pravilo"
 
 #~ msgid "Mto+Mts Procurement"
 #~ msgstr "Oskrbovanja 'po naročilu'+'na zalogo'"
