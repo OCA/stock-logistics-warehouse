@@ -82,6 +82,11 @@ msgid "Make To Order + Make To Stock"
 msgstr "Bajo pedido + bajo existencias"
 
 #. module: stock_mts_mto_rule
+#: selection:stock.rule,action:0
+msgid "Manufacture"
+msgstr ""
+
+#. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/models/stock_rule.py:23
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
