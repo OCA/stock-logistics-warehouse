@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-28 02:58+0000\n"
-"PO-Revision-Date: 2017-07-28 02:58+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2019-07-02 10:43+0000\n"
+"Last-Translator: Julien Thomazeau <julien.thomazeau@protonmail.com>\n"
 "Language-Team: French (France) (https://www.transifex.com/oca/teams/23907/"
 "fr_FR/)\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__action
@@ -76,6 +77,11 @@ msgstr ""
 #: model:stock.location.route,name:stock_mts_mto_rule.route_mto_mts
 #, python-format
 msgid "Make To Order + Make To Stock"
+msgstr "Production à la demande + Production sur stock"
+
+#. module: stock_mts_mto_rule
+#: selection:stock.rule,action:0
+msgid "Manufacture"
 msgstr ""
 
 #. module: stock_mts_mto_rule
