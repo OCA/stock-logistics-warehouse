@@ -14,26 +14,26 @@ Procurement Auto Create Group
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/11.0/procurement_auto_create_group
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/12.0/procurement_auto_create_group
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-11-0/stock-logistics-warehouse-11-0-procurement_auto_create_group
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-12-0/stock-logistics-warehouse-12-0-procurement_auto_create_group
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/153/11.0
+    :target: https://runbot.odoo-community.org/runbot/153/12.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module allows the system to propose automatically new procurement groups
-when procuring.
+during the procurement run.
 
 This capability is important when you want to make sure that all the stock
-moves resulting from this procurement will never be mixed with moves from
+moves resulting from a procurement run will never be mixed with moves from
 other groups in stock transfers.
 
-The stock transfers resulting from the execution of these procurements will
-only contain stock moves created from that procurement.
+The stock transfers resulting from the procurement run will
+only contain stock moves created in that run.
 
 **Table of contents**
 
@@ -55,7 +55,7 @@ Configuration
 Usage
 =====
 
-#. Create a new procurement and make sure that it determines a pull rule
+#. Run a new procurement and make sure that it determines a pull rule
    with the option 'Auto-create Procurement Group' set.
 #. When the procurement rule is executed, a procurement group with
    format 'PG/000001' will be created.
@@ -66,7 +66,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20procurement_auto_create_group%0Aversion:%2011.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20procurement_auto_create_group%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -97,6 +97,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/11.0/procurement_auto_create_group>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/12.0/procurement_auto_create_group>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
