@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Eficent Business and IT Consulting Services, S.L.
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, models, _
 from odoo.exceptions import UserError
@@ -26,7 +25,7 @@ class ProcurementGroup(models.Model):
         name = self.env['ir.sequence'].next_by_code(
             'procurement.group') or False
         if not name:
-            raise UserError(_('No sequence defined for procurement group'))
+            raise UserError(_('No sequence defined for procurement group.'))
         return {
-            'name': name
+            'name': name,
         }
