@@ -1,14 +1,15 @@
-# © 2017 Eficent Business and IT Consulting Services S.L.
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
 
 
 class TestProcurementAutoCreateGroup(TransactionCase):
-    def setUp(self, *args, **kwargs):
-        super(TestProcurementAutoCreateGroup, self).setUp(*args, **kwargs)
+
+    def setUp(self):
+        super(TestProcurementAutoCreateGroup, self).setUp()
         self.group_obj = self.env['procurement.group']
-        self.rule_obj = self.env['procurement.rule']
+        self.rule_obj = self.env['stock.rule']
         self.route_obj = self.env['stock.location.route']
         self.move_obj = self.env['stock.move']
         self.product_obj = self.env['product.product']
@@ -26,7 +27,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             'name': 'rule with autocreate',
             'route_id': route_auto.id,
             'auto_create_group': True,
-            'action': 'move',
+            'action': 'pull_push',
             'warehouse_id': self.warehouse.id,
             'picking_type_id': picking_type_id,
             'location_id': self.location.id,
@@ -39,7 +40,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             'name': 'rule with no autocreate',
             'route_id': route_no_auto.id,
             'auto_create_group': False,
-            'action': 'move',
+            'action': 'pull_push',
             'warehouse_id': self.warehouse.id,
             'picking_type_id': picking_type_id,
             'location_id': self.location.id,
@@ -87,7 +88,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         self.assertTrue(move.group_id, "Procurement Group not assigned.")
 
     def test_03_onchange_method(self):
-        """Test onchange method for procurement rule."""
+        """Test onchange method for stock rule."""
         proc_rule = self.rule_1
         self.assertTrue(proc_rule.auto_create_group)
         proc_rule.write({'group_propagation_option': 'none'})
