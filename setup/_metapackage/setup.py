@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo12-addon-stock_inventory_exclude_sublocation',
         'odoo12-addon-stock_inventory_lockdown',
         'odoo12-addon-stock_inventory_preparation_filter',
+        'odoo12-addon-stock_inventory_verification_request',
         'odoo12-addon-stock_mts_mto_rule',
         'odoo12-addon-stock_orderpoint_manual_procurement',
         'odoo12-addon-stock_orderpoint_manual_procurement_uom',

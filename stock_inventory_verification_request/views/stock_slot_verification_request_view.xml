@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="stock_slot_verification_request_tree_view" model="ir.ui.view">
+        <field name="name">stock.slot.verification.request.tree</field>
+        <field name="model">stock.slot.verification.request</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Slot Verification Request">
+                <field name="name"/>
+                <field name="location_id"/>
+                <field name="product_id"/>
+                <field name="create_uid" readonly="1"/>
+                <field name="create_date" readonly="1"/>
+                <field name="responsible_id"/>
+                <field name="inventory_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_slot_verification_request_form_view" model="ir.ui.view">
+        <field name="name">stock.slot.verification.request.form</field>
+        <field name="model">stock.slot.verification.request</field>
+        <field name="arch" type="xml">
+            <form string="Stock Slot Verification Request">
+                <header>
+                    <button name="action_confirm"
+                            type="object" states="wait" string="Confirm"
+                            class="oe_highlight" />
+                    <button name="action_solved"
+                            type="object" states="open" string="Mark as Solved"/>
+                    <button name="action_cancel"
+                            type="object" states="open"
+                            string="Mark as Cancelled"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="wait,open,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"
+                         attrs="{'invisible':
+                         [('state', 'not in', ('open'))]}">
+                          <button name="action_view_moves"
+                                  type="object" class="oe_stat_button"
+                                  icon="fa-building-o">
+                              <field name="involved_move_count"
+                                     widget="statinfo"
+                                     help="Stock Moves related to the given location and product."
+                                     modifiers="{'readonly': true}"
+                                     string="Stock Moves Involved"/>
+                          </button>
+                          <button name="action_view_inv_lines"
+                                  type="object" class="oe_stat_button"
+                                  icon="fa-building-o">
+                              <field name="involved_inv_line_count"
+                                     widget="statinfo"
+                                     help="Inventory Adjustment Lines related to the given location and product."
+                                     modifiers="{'readonly': true}"
+                                     string="Inv. Adj. Lines Involved"/>
+                          </button>
+                    </div>
+                    <div class="oe_title">
+                        <label string="Slot Verification Request" for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="location_id"/>
+                            <field name="product_id"/>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="create_date" readonly="1"/>
+                            <field name="responsible_id"/>
+                            <field name="inventory_id"/>
+                            <field name="inventory_line_id"/>
+                        </group>
+                        <group>
+                            <field name="notes"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_slot_verification_request"
+                name="Stock Slot Verification Request"
+                res_model="stock.slot.verification.request"
+                view_mode="tree,form" />
+    <menuitem id="menu_slot_verification_request"
+              name="Slot Verification Request"
+              parent="stock.menu_stock_inventory_control"
+              sequence="40"
+              action="action_slot_verification_request" />
+
+</odoo>

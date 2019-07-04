@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field name="name">Inventory form view - SVR extension</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_inventory_discrepancy.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_validate']"
+                   position="after">
+                <button name="action_request_verification"
+                        string="Request Verification" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|',('state', '!=', 'pending'),('requested_verification', '=', True)]}"
+                        groups="stock.group_stock_user"/>
+            </xpath>
+            <field name="name" position="after">
+                <field name="requested_verification" invisible="1"/>
+            </field>
+            <notebook position="inside">
+                <page string="Slot Verification Requests"
+                      groups="stock.group_stock_manager">
+                    <group>
+                        <field name="slot_verification_ids" nolabel="1"/>
+                    </group>
+                </page>
+            </notebook>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='discrepancy_threshold']"
+                   position="after">
+                <field name="slot_verification_ids" invisible="1"/>
+                <button string="Slot Verification Request"
+                        attrs="{'invisible': [('slot_verification_ids', '=', [])]}"
+                        name="action_open_svr"
+                        type="object"
+                        icon="fa-sticky-note"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_inventory_line_form" model="ir.ui.view">
+        <field name="name">Inventory Adjustment Line Form View</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="arch" type="xml">
+            <form string="Inventory Line">
+                <sheet>
+                <div class="oe_title">
+                    <h3>Inventory Adjustment Line <field name="id"/></h3>
+                </div>
+                <group>
+                    <group col="2">
+                        <field name="product_id" readonly="1"/>
+                        <field name="inventory_id" readonly="1"/>
+                        <field name="state"/>
+                        <field name="create_date" readonly="1"/>
+                        <field name="location_id" readonly="1"/>
+                        <field name="package_id" readonly="1"/>
+                        <field name="partner_id" readonly="1"/>
+                        <field name="prod_lot_id" readonly="1"/>
+                        <field name="company_id"/>
+                    </group>
+                    <group col="2">
+                        <field name="theoretical_qty"/>
+                        <field name="product_qty" readonly="1"/>
+                        <field name="product_uom_id" readonly="1"/>
+                        <field name="discrepancy_qty"/>
+                        <label for="discrepancy_percent"/>
+                        <div>
+                            <field name="discrepancy_percent" class="oe_inline"/> %
+                        </div>
+                        <label for="discrepancy_threshold"/>
+                        <div>
+                            <field name="discrepancy_threshold" class="oe_inline"/> %
+                        </div>
+                    </group>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_inventory_line_tree" model="ir.ui.view">
+        <field name="name">Inventory Line tree view - discrepancy extension</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="create_date" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_inv_adj_line_tree" model="ir.actions.act_window">
+        <field name="name">Open Inventory Adjustment Lines</field>
+        <field name="res_model">stock.inventory.line</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="stock.stock_inventory_line_tree"/>
+    </record>
+
+</odoo>
