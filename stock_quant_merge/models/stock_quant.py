@@ -30,14 +30,12 @@ class StockQuant(models.Model):
         for quant2merge in self.filtered(lambda x: not x.reservation_id):
             if quant2merge in pending_quants:
                 quants = self.search(quant2merge._mergeable_domain())
-                cont = 1
-                cost = quant2merge.cost
+                total_value = quant2merge.inventory_value
                 for quant in quants:
                     if (quant2merge._get_latest_move() ==
                             quant._get_latest_move()):
                         quant2merge.sudo().qty += quant.qty
-                        cost += quant.cost
-                        cont += 1
+                        total_value += quant.inventory_value
                         pending_quants -= quant
                         quant.with_context(force_unlink=True).sudo().unlink()
-                quant2merge.sudo().cost = cost / cont
+                quant2merge.sudo().cost = total_value / quant2merge.qty
