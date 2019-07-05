@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_available
+#
+# Translators:
+# Lukáš Spurný <lukasspurny8@gmail.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-27 11:37+0000\n"
+"PO-Revision-Date: 2018-02-27 11:37+0000\n"
+"Last-Translator: Lukáš Spurný <lukasspurny8@gmail.com>, 2018\n"
+"Language-Team: Czech (Czech Republic) (https://www.transifex.com/oca/"
+"teams/23907/cs_CZ/)\n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
+#: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
+msgid "<span class=\"o_stat_text\">Available</span>"
+msgstr "K dispozici 1"
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
+#: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
+msgid "<span class=\"o_stat_text\">Potential</span>"
+msgstr "Potenciál 1"
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
+msgid "Available to Promise:"
+msgstr "K dispozici pro slib:"
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_product_product_immediately_usable_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_template_immediately_usable_qty
+msgid "Available to promise"
+msgstr "K dispozici na slib"
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_res_config_settings_stock_available_mrp_based_on
+msgid ""
+"Choose the field of the product which will be used to compute potential.\n"
+"If empty, Quantity On Hand is used.\n"
+"Only the quantity fields have meaning for computing stock"
+msgstr ""
+"Zvolit pole produktu, který bude použit pro výpočet potenciálu. • Pokud je "
+"prázdný, použije se množství On Hand. • Pouze množství polí má význam pro "
+"výpočet zásob"
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_sale
+msgid "Exclude goods already in sale quotations"
+msgstr "Vyloučení zboží již v nabídkách prodeje"
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_immediately
+msgid "Exclude incoming goods"
+msgstr "Vylučte příchozí zboží"
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_mrp
+msgid "Include the production potential"
+msgstr "Zahrnout výrobní potenciál"
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_product_product_potential_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_template_potential_qty
+msgid "Potential"
+msgstr "Potenciál"
+
+#. module: stock_available
+#: model:ir.model,name:stock_available.model_product_product
+msgid "Product"
+msgstr "Produkt"
+
+#. module: stock_available
+#: model:ir.model,name:stock_available.model_product_template
+msgid "Product Template"
+msgstr "Šablona produktu"
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_product_potential_qty
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand."
+msgstr ""
+"Množství tohoto výrobku, které by mohlo být vyrobeno z materiálů, které jsou "
+"již k dispozici."
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_template_potential_qty
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand. If the product has several variants, this will be the biggest "
+"quantity that can be made for a any single variant."
+msgstr ""
+"Množství tohoto výrobku, které by mohlo být vyrobeno z materiálů, které jsou "
+"již k dispozici. Pokud má produkt několik variant, bude to největší "
+"množství, které lze vyrobit pro libovolnou variantu."
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.view_stock_configuration
+msgid "Stock available to promise"
+msgstr "Zásoby k dispozici"
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_template_immediately_usable_qty
+msgid ""
+"Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs"
+msgstr ""
+"Sklad pro tento produkt, který může být bezpečně navržen k prodeji "
+"zákazníkům. Definice této hodnoty může být konfigurována tak, aby vyhovovala "
+"vašim potřebám"
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_product_immediately_usable_qty
+#, fuzzy
+msgid ""
+"Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs."
+msgstr ""
+"Sklad pro tento produkt, který může být bezpečně navržen k prodeji "
+"zákazníkům. Definice této hodnoty může být konfigurována tak, aby vyhovovala "
+"vašim potřebám"
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_mrp
+msgid ""
+"This will add the quantities of goods that can be immediately manufactured, "
+"to the quantities available to promise.\n"
+"This installs the module stock_available_mrp.\n"
+"If the module mrp is not installed, this will install it too"
+msgstr ""
+"Tím se přidá množství zboží, které lze okamžitě vyrobit, na množství, která "
+"je k dispozici pro slib. \"Instaluje modul stock_available_mrp.\" Pokud "
+"modul mrp není nainstalován, instaluje se taky"
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_immediately
+msgid ""
+"This will subtract incoming quantities from the quantities available to "
+"promise.\n"
+"This installs the module stock_available_immediately."
+msgstr ""
+"Tím se odečtou příchozí veličiny z množství, která je k dispozici pro slib. "
+"\"Instaluje modul stock_available_immediately."
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_sale
+msgid ""
+"This will subtract quantities from the sale quotations from the quantities "
+"available to promise.\n"
+"This installs the modules stock_available_sale.\n"
+"If the modules sale and sale_delivery_date are not installed, this will "
+"install them too"
+msgstr ""
+"Tím se odečtou množství z prodejních kotací z množství, která je k dispozici "
+"pro slib. \"Instaluje moduly stock_available_sale.\" Pokud nejsou "
+"nainstalovány moduly prodeje a sales_delivery_date, nainstalují se je také"
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_stock_available_mrp_based_on
+msgid "based on"
+msgstr "na základě"
+
+#. module: stock_available
+#: model:ir.model,name:stock_available.model_res_config_settings
+#, fuzzy
+msgid "res.config.settings"
+msgstr "stock.config.settings"

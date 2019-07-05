@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo12-addon-account_move_line_product',
         'odoo12-addon-account_move_line_stock_info',
         'odoo12-addon-stock_account_change_qty_reason',
+        'odoo12-addon-stock_available',
         'odoo12-addon-stock_available_unreserved',
         'odoo12-addon-stock_change_qty_reason',
         'odoo12-addon-stock_demand_estimate',

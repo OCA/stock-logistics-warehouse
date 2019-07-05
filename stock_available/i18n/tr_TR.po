@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_available
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-03 01:23+0000\n"
+"PO-Revision-Date: 2017-06-03 01:23+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Turkish (Turkey) (https://www.transifex.com/oca/teams/23907/"
+"tr_TR/)\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
+#: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
+msgid "<span class=\"o_stat_text\">Available</span>"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
+#: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
+msgid "<span class=\"o_stat_text\">Potential</span>"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
+msgid "Available to Promise:"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_product_product_immediately_usable_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_template_immediately_usable_qty
+msgid "Available to promise"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_res_config_settings_stock_available_mrp_based_on
+msgid ""
+"Choose the field of the product which will be used to compute potential.\n"
+"If empty, Quantity On Hand is used.\n"
+"Only the quantity fields have meaning for computing stock"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_sale
+msgid "Exclude goods already in sale quotations"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_immediately
+msgid "Exclude incoming goods"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_mrp
+msgid "Include the production potential"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_product_product_potential_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_template_potential_qty
+msgid "Potential"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model,name:stock_available.model_product_product
+msgid "Product"
+msgstr "Ürün"
+
+#. module: stock_available
+#: model:ir.model,name:stock_available.model_product_template
+msgid "Product Template"
+msgstr "Ürün şablonu"
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_product_potential_qty
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand."
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_template_potential_qty
+msgid ""
+"Quantity of this Product that could be produced using the materials already "
+"at hand. If the product has several variants, this will be the biggest "
+"quantity that can be made for a any single variant."
+msgstr ""
+
+#. module: stock_available
+#: model:ir.ui.view,arch_db:stock_available.view_stock_configuration
+msgid "Stock available to promise"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_template_immediately_usable_qty
+msgid ""
+"Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_product_product_immediately_usable_qty
+msgid ""
+"Stock for this Product that can be safely proposed for sale to Customers.\n"
+"The definition of this value can be configured to suit your needs."
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_mrp
+msgid ""
+"This will add the quantities of goods that can be immediately manufactured, "
+"to the quantities available to promise.\n"
+"This installs the module stock_available_mrp.\n"
+"If the module mrp is not installed, this will install it too"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_immediately
+msgid ""
+"This will subtract incoming quantities from the quantities available to "
+"promise.\n"
+"This installs the module stock_available_immediately."
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_sale
+msgid ""
+"This will subtract quantities from the sale quotations from the quantities "
+"available to promise.\n"
+"This installs the modules stock_available_sale.\n"
+"If the modules sale and sale_delivery_date are not installed, this will "
+"install them too"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_stock_available_mrp_based_on
+msgid "based on"
+msgstr ""
+
+#. module: stock_available
+#: model:ir.model,name:stock_available.model_res_config_settings
+msgid "res.config.settings"
+msgstr ""
