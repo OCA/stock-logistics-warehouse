@@ -62,12 +62,12 @@ class StockMove(models.Model):
             self.write({
                 'move_dest_ids': [(3, dest_move.id), (4, middle_move.id)],
             })
-            middle_move._action_confirm()
+            middle_move._action_confirm(merge=False)
 
     def _prepare_middle_move_values(self, destination):
         return {
             'picking_id': False,
-            'location_id': self.location_dest_id.id,
+            'location_id': self.location_id.id,
             'location_dest_id': destination.id,
             'state': 'waiting',
             'picking_type_id': self.picking_id.picking_type_id.id,
