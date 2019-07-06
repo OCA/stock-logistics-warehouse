@@ -109,6 +109,7 @@ class ProductProduct(models.Model):
 
                 bom_id = product.bom_id
                 potential_qty = (bom_id.product_qty * components_potential_qty)
+                potential_qty = potential_qty > 0.0 and potential_qty or 0.0
 
                 # We want to respect the rounding factor of the potential_qty
                 # Rounding down as we want to be pesimistic.
