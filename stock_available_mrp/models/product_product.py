@@ -13,7 +13,7 @@ class ProductProduct(models.Model):
     bom_id = fields.Many2one(
         'mrp.bom',
         compute='_compute_bom_id',
-        string='Bill of Materials'
+        string='BOM'
     )
 
     @api.depends('virtual_available', 'bom_id', 'bom_id.product_qty')
