@@ -57,7 +57,10 @@ class StockLocation(models.Model):
     @api.multi
     def _get_zero_confirmation_domain(self):
         self.ensure_one()
-        domain = [('location_id', '=', self.id)]
+        domain = [
+            ('location_id', '=', self.id),
+            ('quantity', '>', 0.0),
+        ]
         return domain
 
     @api.multi
