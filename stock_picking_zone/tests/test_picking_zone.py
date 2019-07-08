@@ -149,6 +149,11 @@ class TestPickingZone(common.SavepointCase):
     def assert_dest_customer(self, record):
         self.assertEqual(record.location_dest_id, self.customer_loc)
 
+    def process_operations(self, move):
+        qty = move.move_line_ids.product_uom_qty
+        move.move_line_ids.qty_done = qty
+        move.picking_id.action_done()
+
     def test_change_location_to_zone(self):
         pick_picking, customer_picking = self._create_pick_ship(
             self.wh, [(self.product1, 10)]
@@ -191,8 +196,7 @@ class TestPickingZone(common.SavepointCase):
 
         # we deliver move A to check that our middle move line properly takes
         # goods from the handover
-        move_a.move_line_ids.qty_done = move_a.move_line_ids.product_uom_qty
-        move_a._action_done()
+        self.process_operations(move_a)
         self.assertEqual(move_a.state, 'done')
         self.assertEqual(move_middle.state, 'assigned')
         self.assertEqual(move_b.state, 'waiting')
@@ -202,7 +206,7 @@ class TestPickingZone(common.SavepointCase):
         self.assert_src_handover(move_line_middle)
         self.assert_dest_output(move_line_middle)
 
-    def test_several_move_lines(self):
+    def test_several_moves(self):
         pick_picking, customer_picking = self._create_pick_ship(
             self.wh, [(self.product1, 10), (self.product2, 10)]
         )
@@ -287,9 +291,7 @@ class TestPickingZone(common.SavepointCase):
         self.assert_src_stock(move_middle.picking_id)
         # we deliver move A to check that our middle move line properly takes
         # goods from the handover
-        qty = move_a_p1.move_line_ids.product_uom_qty
-        move_a_p1.move_line_ids.qty_done = qty
-        move_a_p1.picking_id.action_done()
+        self.process_operations(move_a_p1)
 
         self.assertEqual(move_a_p1.state, 'done')
         self.assertEqual(move_a_p2.state, 'assigned')
@@ -304,11 +306,8 @@ class TestPickingZone(common.SavepointCase):
         # Output
         self.assert_dest_output(move_line_middle)
 
-        qty = move_middle.move_line_ids.product_uom_qty
-        move_middle.move_line_ids.qty_done = qty
-        qty = move_a_p2.move_line_ids.product_uom_qty
-        move_a_p2.move_line_ids.qty_done = qty
-        pick_picking.action_done()
+        self.process_operations(move_middle)
+        self.process_operations(move_a_p2)
 
         self.assertEqual(move_a_p1.state, 'done')
         self.assertEqual(move_a_p2.state, 'done')
@@ -316,14 +315,117 @@ class TestPickingZone(common.SavepointCase):
         self.assertEqual(move_b_p1.state, 'assigned')
         self.assertEqual(move_b_p2.state, 'assigned')
 
-        qty = move_b_p1.move_line_ids.product_uom_qty
-        move_b_p1.move_line_ids.qty_done = qty
-        qty = move_b_p2.move_line_ids.product_uom_qty
-        move_b_p2.move_line_ids.qty_done = qty
-        customer_picking.action_done()
+        self.process_operations(move_b_p1)
+        self.process_operations(move_b_p2)
 
         self.assertEqual(move_a_p1.state, 'done')
         self.assertEqual(move_a_p2.state, 'done')
         self.assertEqual(move_middle.state, 'done')
         self.assertEqual(move_b_p1.state, 'done')
         self.assertEqual(move_b_p2.state, 'done')
+
+    def test_several_move_lines(self):
+        pick_picking, customer_picking = self._create_pick_ship(
+            self.wh, [(self.product1, 10)]
+        )
+        move_a = pick_picking.move_lines
+        move_b = customer_picking.move_lines
+        # in Highbay → should generate a new operation in Highbay picking type
+        self._update_product_qty_in_location(
+            self.location_hb_1_2, move_a.product_id, 6
+        )
+        # same product in a shelf, we should have a second move line directly
+        # picked from the shelf without additional operation for the Highbay
+        self._update_product_qty_in_location(
+            self.location_shelf_1, move_a.product_id, 4
+        )
+
+        pick_picking.action_assign()
+        # it splits the stock move to be able to chain the quantities from
+        # the Highbay
+        self.assertEqual(len(pick_picking.move_lines), 2)
+        move_a1 = pick_picking.move_lines.filtered(
+            lambda move: move.product_uom_qty == 4
+        )
+        move_a2 = pick_picking.move_lines.filtered(
+            lambda move: move.product_uom_qty == 6
+        )
+        move_ho = move_a2.move_orig_ids
+        self.assertTrue(move_ho)
+
+        # At this point, we should have 3 stock.picking:
+        #
+        # +-------------------------------------------------------------------+
+        # | HO/xxxx  Assigned                                                 |
+        # | Stock → Stock/Handover                                            |
+        # | 6x Product Highbay/Bay1/Bin1 → Stock/Handover (available) move_ho |
+        # +-------------------------------------------------------------------+
+        #
+        # +-------------------------------------------------------------------+
+        # | PICK/xxxx Waiting                                                 |
+        # | Stock → Output                                                    |
+        # | 6x Product Stock/Handover → Output (waiting)   move_a2 (split)    |
+        # | 4x Product Stock/Shelf1   → Output (available) move_a1            |
+        # +-------------------------------------------------------------------+
+        #
+        # +-------------------------------------------------+
+        # | OUT/xxxx Waiting                                |
+        # | Output → Customer                               |
+        # | 10x Product Output → Customer (waiting) move_b  |
+        # +-------------------------------------------------+
+
+        self.assertFalse(move_a1.move_orig_ids)
+        self.assertEqual(move_ho.move_dest_ids, move_a2)
+
+        ml = move_a1.move_line_ids
+        self.assertEqual(len(ml), 1)
+        self.assert_src_shelf1(ml)
+        self.assert_dest_output(ml)
+        self.assertEqual(ml.picking_id.picking_type_id, self.wh.pick_type_id)
+        self.assertEqual(ml.state, 'assigned')
+
+        ml = move_ho.move_line_ids
+        self.assertEqual(len(ml), 1)
+        self.assert_src_highbay_1_2(ml)
+        self.assert_dest_handover(ml)
+        # this is a new HO picking
+        self.assertEqual(ml.picking_id.picking_type_id, self.pick_type_zone)
+        self.assertEqual(ml.state, 'assigned')
+
+        # the split move is waiting for 'move_ho'
+        self.assertEqual(len(ml), 1)
+        self.assert_src_stock(move_a2)
+        self.assert_dest_output(move_a2)
+        self.assertEqual(
+            move_a2.picking_id.picking_type_id,
+            self.wh.pick_type_id
+        )
+        self.assertEqual(move_a2.state, 'waiting')
+
+        # the move stays B stays identical
+        self.assert_src_output(move_b)
+        self.assert_dest_customer(move_b)
+        self.assertEqual(move_b.state, 'waiting')
+
+        # we deliver HO picking to check that our middle move line properly
+        # takes goods from the handover
+        self.process_operations(move_ho)
+
+        self.assertEqual(move_ho.state, 'done')
+        self.assertEqual(move_a1.state, 'assigned')
+        self.assertEqual(move_a2.state, 'assigned')
+        self.assertEqual(move_b.state, 'waiting')
+
+        self.process_operations(move_a1)
+        self.process_operations(move_a2)
+
+        self.assertEqual(move_ho.state, 'done')
+        self.assertEqual(move_a1.state, 'done')
+        self.assertEqual(move_a2.state, 'done')
+        self.assertEqual(move_b.state, 'assigned')
+
+        self.process_operations(move_b)
+        self.assertEqual(move_ho.state, 'done')
+        self.assertEqual(move_a1.state, 'done')
+        self.assertEqual(move_a2.state, 'done')
+        self.assertEqual(move_b.state, 'done')
