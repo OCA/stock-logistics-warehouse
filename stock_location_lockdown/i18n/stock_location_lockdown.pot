@@ -29,9 +29,9 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_location_lockdown
-#: code:addons/stock_location_lockdown/models/stock_quant.py:20
+#: code:addons/stock_location_lockdown/models/stock_quant.py:17
 #, python-format
-msgid "The location '%s' is not configured to receive stock."
+msgid "The location %s is blocked and can not be used for moving the product %s"
 msgstr ""
 
 #. module: stock_location_lockdown
