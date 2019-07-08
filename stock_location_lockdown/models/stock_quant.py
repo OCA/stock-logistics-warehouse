@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 
 class StockQuant(models.Model):
@@ -13,7 +13,7 @@ class StockQuant(models.Model):
     def _check_location_blocked(self):
         for record in self:
             if record.location_id.block_stock_entrance:
-                raise UserError(
+                raise ValidationError(
                     _('The location %s is blocked and can '
                       'not be used for moving the product %s')
                     % (record.location_id.name, record.product_id.name)
