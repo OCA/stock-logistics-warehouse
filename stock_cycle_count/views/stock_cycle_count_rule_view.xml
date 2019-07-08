@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <!-- Stock Cycle Count Rule List view -->
+    <record id="stock_cycle_count_rule_tree_view" model="ir.ui.view">
+        <field name="name">stock.cycle.count.rule.tree</field>
+        <field name="model">stock.cycle.count.rule</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Cycle Count">
+                <field name="name"/>
+                <field name="warehouse_ids"/>
+                <field name="location_ids"/>
+                <field name="rule_type"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Stock Cycle Count Rule Form view -->
+    <record id="stock_cycle_count_rule_form_view" model="ir.ui.view">
+        <field name="name">stock.cycle.count.rule.form</field>
+        <field name="model">stock.cycle.count.rule</field>
+        <field name="arch" type="xml">
+            <form string="cycle counts test:">
+
+                <sheet>
+                    <group name="top">
+                        <group>
+                            <field name="name"/>
+                            <field name="rule_type"/>
+                            <field name="rule_description"/>
+                            <field name="active"/>
+                        </group>
+                        <group name="specific rule fields">
+                            <field name="periodic_qty_per_period"
+                                   attrs="{'invisible': [('rule_type', '!=', 'periodic')]}"/>
+                            <field name="periodic_count_period"
+                                   attrs="{'invisible': [('rule_type', '!=', 'periodic')]}"/>
+                            <field name="turnover_inventory_value_threshold"
+                                   attrs="{'invisible': [('rule_type', '!=', 'turnover')]}"
+                                   widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id"
+                                   invisible="True"/>
+                            <label for="accuracy_threshold"
+                                   attrs="{'invisible': [('rule_type', '!=', 'accuracy')]}"/>
+                            <div attrs="{'invisible': [('rule_type', '!=', 'accuracy')]}">
+                                <field name="accuracy_threshold" class="oe_inline"/> %
+                            </div>
+                        </group>
+                    </group>
+                    <group name="applied_in" string="Applied in:" col="4">
+                        <p colspan="4">You can apply the cycle count rules in complete
+                        warehouses or specific zones. A zone it is
+                        understood as a location and all its children.</p>
+                        <p colspan="4">In either case you can exclude specific locations
+                        going to the locations form and checking the box
+                        "Exclude from Cycle Count".</p>
+                        <group colspan="2">
+                            <field name="apply_in"/>
+                        </group>
+                        <group colspan="2">
+                            <field name="warehouse_ids" widget="many2many_tags"
+                                   attrs="{'readonly': [('apply_in', '!=', 'warehouse')]}"/>
+                            <field name="location_ids" widget="many2many_tags"
+                                   attrs="{'invisible': [('apply_in', '!=', 'location')]}"/>
+                        </group>
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open Stock Cycle Count Rule -->
+    <act_window id="action_stock_cycle_count_rules"
+                name="Stock Cycle Count Rules"
+                res_model="stock.cycle.count.rule"
+                view_mode="tree,form" />
+
+    <menuitem id="menu_stock_cycle_count_rule"
+              name="Cycle Count Rules"
+              parent="stock.menu_stock_config_settings"
+              action="action_stock_cycle_count_rules" />
+
+</odoo>
