@@ -28,6 +28,9 @@ Stock Request
 This module was written to allow users to request products that are
 frequently stocked by the company, to be transferred to their chosen location.
 
+Also, this module allows to use stock request orders, a set of stock requests
+for the same location.
+
 **Table of contents**
 
 .. contents::
@@ -52,6 +55,11 @@ Group Stock Request / Manager
 
 * Can fully manage all Stock Requests
 
+Orders
+~~~~~~
+
+Managers can configure to use orders on 'Stock Requests / Configuration'
+
 Usage
 =====
 
@@ -73,6 +81,18 @@ Cancel
 
 When the user cancels a Stock Request, the related pending stock moves will be
 also cancelled.
+
+Orders usage
+~~~~~~~~~~~~
+
+* Go to 'Stock Requests / Stock Request Orders' and create a new Order.
+* Indicate a location
+* Create several stock requests selecting a product and quantity
+* Press Confirm
+
+Upon confirmation, the requests will be evaluated using the procurement rules.
+
+Cancellation of an order will cancel all the related stock requests.
 
 Bug Tracker
 ===========

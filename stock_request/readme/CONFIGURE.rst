@@ -13,3 +13,8 @@ Group Stock Request / Manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Can fully manage all Stock Requests
+
+Orders
+~~~~~~
+
+Managers can configure to use orders on 'Stock Requests / Configuration'

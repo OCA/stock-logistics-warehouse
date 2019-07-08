@@ -16,3 +16,15 @@ Cancel
 
 When the user cancels a Stock Request, the related pending stock moves will be
 also cancelled.
+
+Orders usage
+~~~~~~~~~~~~
+
+* Go to 'Stock Requests / Stock Request Orders' and create a new Order.
+* Indicate a location
+* Create several stock requests selecting a product and quantity
+* Press Confirm
+
+Upon confirmation, the requests will be evaluated using the procurement rules.
+
+Cancellation of an order will cancel all the related stock requests.
