@@ -13,11 +13,11 @@
             </field>
 
             <xpath expr='//div[@name="stock_picking"]' position="after">
-                <div t-if="record.code.raw_value == 'stock_request'" t-attf-class="#{kanban_color(record.color.raw_value)}">
+                <div t-if="record.code.raw_value == 'stock_request_order'" t-attf-class="#{kanban_color(record.color.raw_value)}">
                     <div>
                         <div t-attf-class="o_kanban_card_header">
                             <div class="o_kanban_card_header_title">
-                                <a type="object" name="get_stock_request_picking_type_action" class="o_primary">
+                                <a type="object" name="get_stock_request_order_picking_type_action" class="o_primary">
                                     <field name="name"/>
                                 </a>
                                 <div class="o_secondary"><field class="o_secondary"  name="warehouse_id"/></div>
@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-6 o_kanban_primary_left">
                                     <button class="btn btn-primary" name="%(action_picking_dashboard)d" type="action" context="{'search_default_todo': 1}">
-                                        <span t-if="record.code.raw_value =='stock_request'"><t t-esc="record.count_sr_todo.value"/> To Process</span>
+                                        <span t-if="record.code.raw_value =='stock_request_order'"><t t-esc="record.count_sr_todo.value"/> To Process</span>
                                     </button>
                                 </div>
                                 <div class="col-6 o_kanban_primary_right">
@@ -80,7 +80,7 @@
                                     <span>New</span>
                                 </div>
                                 <div role="menuitem">
-                                    <a name="%(action_stock_request_form)d" type="action">Stock Request</a>
+                                    <a name="%(action_stock_request_order_form)d" type="action">Stock Request Order</a>
                                 </div>
                             </div>
                         </div>
@@ -100,16 +100,16 @@
         </field>
     </record>
 
-    <record id="view_picking_type_form_inherit_sr" model="ir.ui.view">
+    <record id="view_picking_type_form_inherit_sro" model="ir.ui.view">
         <field name="name">Operation Types</field>
         <field name="model">stock.picking.type</field>
         <field name="inherit_id" ref="stock.view_picking_type_form"/>
         <field name="arch" type="xml">
             <field name="show_operations" position="attributes">
-                <attribute name="attrs">{"invisible": [("code", "=", "stock_request")]}</attribute>
+                <attribute name="attrs">{"invisible": [("code", "=", "stock_request_order")]}</attribute>
             </field>
             <field name="show_reserved" position="attributes">
-                <attribute name="attrs">{"invisible": [("code", "=", "stock_request")]}</attribute>
+                <attribute name="attrs">{"invisible": [("code", "=", "stock_request_order")]}</attribute>
             </field>
         </field>
     </record>

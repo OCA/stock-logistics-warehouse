@@ -4,7 +4,7 @@
 {
     'name': 'Stock Request Picking Type',
     'summary': 'Add Stock Requests to the Inventory App',
-    'version': '12.0.1.1.0',
+    'version': '12.0.2.0.0',
     'license': 'LGPL-3',
     'website': 'https://github.com/stock-logistics-warehouse',
     'author': 'Open Source Integrators, '
@@ -15,7 +15,7 @@
     ],
     'data': [
         'data/stock_picking_type.xml',
-        'views/stock_request_views.xml',
+        'views/stock_request_order_views.xml',
         'views/stock_picking_views.xml',
     ],
     'development_status': 'Beta',
