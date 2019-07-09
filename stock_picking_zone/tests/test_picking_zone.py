@@ -67,12 +67,14 @@ class TestPickingZone(common.SavepointCase):
             'sequence_id': picking_type_sequence.id,
         })
 
-    def _create_pick_ship(self, wh, products=[]):
+    def _create_pick_ship(self, wh, products=None):
         """Create pick+ship pickings
 
         Products must be a list of tuples (product, quantity).
         One stock move will be create for each tuple.
         """
+        if products is None:
+            products = []
         customer_picking = self.env['stock.picking'].create({
             'location_id': wh.wh_output_stock_loc_id.id,
             'location_dest_id': self.customer_loc.id,
