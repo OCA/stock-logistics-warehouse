@@ -7,8 +7,8 @@ from odoo import fields, models
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
-    code = fields.Selection(selection_add=[('stock_request',
-                                            'Stock Request')])
+    code = fields.Selection(selection_add=[('stock_request_order',
+                                            'Stock Request Order')])
     count_sr_todo = fields.Integer(string="To Do",
                                    compute='_compute_sr_count')
     count_sr_open = fields.Integer(string="In Progress",
@@ -17,7 +17,8 @@ class StockPickingType(models.Model):
                                    compute='_compute_sr_count')
 
     def _compute_sr_count(self):
-        types = self.filtered(lambda picking: picking.code == 'stock_request')
+        types = self.filtered(
+            lambda picking: picking.code == 'stock_request_order')
         if not types:
             return
         domains = {
@@ -27,7 +28,7 @@ class StockPickingType(models.Model):
                               ('state', 'in', ('submitted', 'open'))],
         }
         for field in domains:
-            data = self.env['stock.request'].read_group(
+            data = self.env['stock.request.order'].read_group(
                 domains[field] +
                 [('state', 'not in', ('done', 'cancel')),
                  ('picking_type_id', 'in', self.ids)],
@@ -38,6 +39,6 @@ class StockPickingType(models.Model):
             for record in types:
                 record[field] = count.get(record.id, 0)
 
-    def get_stock_request_picking_type_action(self):
+    def get_stock_request_order_picking_type_action(self):
         return self._get_action(
             'stock_request_picking_type.action_picking_dashboard')
