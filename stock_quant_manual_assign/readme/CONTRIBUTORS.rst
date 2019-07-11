@@ -4,5 +4,10 @@
 * Fanha Giang <fanha99@hotmail.com>
 * `Tecnativa <https://www.tecnativa.com>`_:
 
-  * Pedro M. Baeza
+  * Pedro M. Baeza <pedro.baeza@tecnativa.com>
   * Vicent Cubells <vicent.cubells@tecnativa.com>
+
+* `Eficent <https://www.eficent.com>`_:
+
+  * Jordi Ballester <jordi.ballester@eficent.com>
+  * Lois Rilo <lois.rilo@eficent.com>
