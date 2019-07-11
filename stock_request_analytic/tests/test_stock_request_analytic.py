@@ -11,13 +11,15 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
         super(TestStockRequestAnalytic, self).setUp()
         self.analytic_model = self.env['account.analytic.account']
         self.analytic = self.analytic_model.create({'name': 'Pizza'})
-        self.analytic2 = self.analytic_model.create(
-            {'name': 'Pizza',
-             'company_id': self.company_2.id})
-        self.demand_loc = self.env['stock.location'].create(
-            {'name': 'demand_loc',
-             'location_id': self.warehouse.lot_stock_id.id,
-             'usage': 'internal'})
+        self.analytic2 = self.analytic_model.create({
+            'name': 'Pizza',
+            'company_id': self.company_2.id,
+        })
+        self.demand_loc = self.env['stock.location'].create({
+            'name': 'demand_loc',
+            'location_id': self.warehouse.lot_stock_id.id,
+            'usage': 'internal',
+        })
         self.demand_route = self.env['stock.location.route'].create({
             'name': 'Transfer',
             'product_categ_selectable': False,
@@ -26,12 +28,12 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
             'sequence': 10,
         })
         self.pizza = self._create_product('PZ', 'Pizza', False)
-        self.demand_rule = self.env['procurement.rule'].create({
+        self.demand_rule = self.env['stock.rule'].create({
             'name': 'Transfer',
             'route_id': self.demand_route.id,
             'location_src_id': self.warehouse.lot_stock_id.id,
             'location_id': self.demand_loc.id,
-            'action': 'move',
+            'action': 'pull',
             'picking_type_id': self.warehouse.int_type_id.id,
             'procure_method': 'make_to_stock',
             'warehouse_id': self.warehouse.id,
