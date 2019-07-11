@@ -7,12 +7,13 @@
 
 from odoo import _, api, fields, models
 from odoo.addons import decimal_precision as dp
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 from odoo.tools.float_utils import float_compare
 
 
 class AssignManualQuants(models.TransientModel):
     _name = 'assign.manual.quants'
+    _description = "Assign Manual Quants"
 
     @api.multi
     @api.constrains('quants_lines')
@@ -22,7 +23,7 @@ class AssignManualQuants(models.TransientModel):
         for record in self.filtered('quants_lines'):
             if float_compare(record.lines_qty, record.move_id.product_qty,
                              precision_digits=precision_digits) > 0:
-                raise UserError(
+                raise ValidationError(
                     _('Quantity is higher than the needed one'))
 
     @api.depends('move_id', 'quants_lines', 'quants_lines.qty')
@@ -83,7 +84,7 @@ class AssignManualQuants(models.TransientModel):
                             ml.owner_id == quant.owner_id and
                             ml.package_id == quant.package_id)
             )
-            line['qty'] = sum(move_lines.mapped('ordered_qty'))
+            line['qty'] = sum(move_lines.mapped('product_uom_qty'))
             line['selected'] = bool(line['qty'])
             line['reserved'] = quant.reserved_quantity - line['qty']
             quants_lines.append(line)
@@ -96,6 +97,7 @@ class AssignManualQuants(models.TransientModel):
 
 class AssignManualQuantsLines(models.TransientModel):
     _name = 'assign.manual.quants.lines'
+    _description = "Assign Manual Quants Lines"
     _rec_name = 'quant_id'
 
     assign_wizard = fields.Many2one(
@@ -108,22 +110,20 @@ class AssignManualQuantsLines(models.TransientModel):
         comodel_name='stock.location',
         string='Location',
         related='quant_id.location_id',
-        readonly=True,
         groups="stock.group_stock_multi_locations"
     )
     lot_id = fields.Many2one(
         comodel_name='stock.production.lot', string='Lot',
-        related='quant_id.lot_id', readonly=True,
+        related='quant_id.lot_id',
         groups="stock.group_production_lot")
     package_id = fields.Many2one(
         comodel_name='stock.quant.package', string='Package',
-        related='quant_id.package_id', readonly=True,
+        related='quant_id.package_id',
         groups="stock.group_tracking_lot")
     owner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Owner',
         related='quant_id.owner_id',
-        readonly=True,
         groups="stock.group_tracking_owner",
     )
     # This is not correctly shown as related or computed, so we make it regular
@@ -167,11 +167,12 @@ class AssignManualQuantsLines(models.TransientModel):
                             ml.lot_id == quant.lot_id)
             )
             reserved = (
-                quant.reserved_quantity - sum(move_lines.mapped('ordered_qty'))
+                quant.reserved_quantity - sum(
+                    move_lines.mapped('product_uom_qty'))
             )
             if float_compare(record.qty, record.quant_id.quantity - reserved,
                              precision_digits=precision_digits) > 0:
-                raise UserError(
+                raise ValidationError(
                     _('Selected line quantity is higher than the available '
                       'one. Maybe an operation with this product has been '
                       'done meanwhile or you have manually increased the '
