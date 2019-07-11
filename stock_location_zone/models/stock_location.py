@@ -37,5 +37,5 @@ class StockLocation(models.Model):
         for location in self:
             if not location.picking_zone_id.location_name_format:
                 continue
-            location.name = location.picking_zone_id.location_name_format.format(
-                self=location)
+            location.name = location.picking_zone_id.location_name_format\
+                .format(self=location)

@@ -17,7 +17,8 @@ class PickingZone(models.Model):
         'Location Name Format',
         help="Format string that will compute the name of the location. "
              "Use 'self' to access location object. Example: "
-             "'{self.area}-{self.corridor:0>2}.{self.rack:0>3}.{self.level:0>2}'")
+             "'{self.area}-{self.corridor:0>2}.{self.rack:0>3}"
+             ".{self.level:0>2}'")
 
     _sql_constraints = [
         (
