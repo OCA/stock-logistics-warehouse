@@ -32,6 +32,7 @@ setuptools.setup(
         'odoo12-addon-stock_picking_procure_method',
         'odoo12-addon-stock_removal_location_by_priority',
         'odoo12-addon-stock_request',
+        'odoo12-addon-stock_request_kanban',
         'odoo12-addon-stock_request_picking_type',
         'odoo12-addon-stock_request_purchase',
         'odoo12-addon-stock_request_tier_validation',
