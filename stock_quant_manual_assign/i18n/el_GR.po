@@ -21,69 +21,79 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_quant_manual_assign
-#: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
+#: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants
+msgid "Assign Manual Quants"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants_lines
+msgid "Assign Manual Quants Lines"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Cancel"
 msgstr "Άκυρο"
 
 #. module: stock_quant_manual_assign
-#: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Confirm"
 msgstr "Επιβεβαίωση"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_create_uid
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_create_uid
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__create_uid
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__create_uid
 msgid "Created by"
 msgstr "Δημιουργήθηκε από "
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_create_date
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_create_date
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__create_date
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__create_date
 msgid "Created on"
 msgstr "Δημιουργήθηκε στις"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_display_name
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_display_name
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__display_name
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_id
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__id
 msgid "ID"
 msgstr "Κωδικός"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants___last_update
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines___last_update
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants____last_update
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_write_uid
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_write_uid
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__write_uid
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__write_uid
 msgid "Last Updated by"
 msgstr "Τελευταία ενημέρωση από"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_write_date
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_write_date
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__write_date
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__write_date
 msgid "Last Updated on"
 msgstr "Τελευταία ενημέρωση στις"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_location_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__location_id
 msgid "Location"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_lot_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__lot_id
 msgid "Lot"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.ui.view,arch_db:stock_quant_manual_assign.stock_picking_manual_quants_form_view
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.stock_picking_manual_quants_form_view
 msgid "Manual Quants"
 msgstr ""
 
@@ -93,69 +103,69 @@ msgid "Manual assignment"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_assign_wizard
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_move_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__assign_wizard
 msgid "Move"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_on_hand
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__on_hand
 msgid "On Hand"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_reserved
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__reserved
 msgid "Others Reserved"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_owner_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__owner_id
 msgid "Owner"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id
 msgid "Package"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_5753
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_quant_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__quant_id
 msgid "Quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:26
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:27
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_quants_lines
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__quants_lines
 msgid "Quants"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_move_qty
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_qty
 msgid "Remaining qty"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__lines_qty
 msgid "Reserved qty"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_selected
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__selected
 msgid "Select"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:175
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:176
 #, python-format
 msgid ""
 "Selected line quantity is higher than the available one. Maybe an operation "
@@ -164,27 +174,17 @@ msgid ""
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_package_id
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id
 msgid "The package containing this quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines_owner_id
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__owner_id
 msgid "This is the owner of the quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants
-msgid "assign.manual.quants"
-msgstr ""
-
-#. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants_lines
-msgid "assign.manual.quants.lines"
-msgstr ""
-
-#. module: stock_quant_manual_assign
-#: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
 msgstr ""
 
