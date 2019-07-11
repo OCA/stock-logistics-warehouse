@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="stock_location_form_inherit" model="ir.ui.view">
+        <field name="name">stock.location.zone</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+
+            <field name="usage" position="after">
+                <field name="kind" />
+                <field name="location_name_format" attrs="{'invisible': [('kind', '=', 'bin')]}" />
+                <field name="picking_type_id" options="{'no_create': True}" attrs="{'readonly': [('kind', '!=', 'zone')]}" />
+            </field>
+
+            <field name="posx" position="before">
+                <field name="picking_zone_id" />
+                <field name="area" />
+                <field name="corridor" />
+                <field name="row" />
+                <field name="rack" />
+                <field name="level" />
+            </field>
+
+        </field>
+    </record>
+
+    <record id="view_location_search" model="ir.ui.view">
+        <field name="name">view.location.search.inherit</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//search" position="inside">
+                <field name="kind"/>
+                <field name="picking_zone_id"/>
+                <field name="area" />
+                <field name="corridor" />
+                <field name="row" />
+                <field name="rack" />
+                <field name="level" />
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
