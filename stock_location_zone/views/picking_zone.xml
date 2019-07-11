@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="picking_zone_view_tree" model="ir.ui.view">
+        <field name="name">picking.zone.view.tree</field>
+        <field name="model">picking.zone</field>
+        <field name="arch" type="xml">
+            <tree string="Picking zone" editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <act_window id="picking_zone_action"
+                name="Picking Zones"
+                res_model="picking.zone"
+                view_type="form"
+                view_mode="tree" />
+
+    <menuitem id="picking_zone_menu"
+              action="picking_zone_action"
+              parent="stock.menu_warehouse_config"
+              sequence="3"/>
+</odoo>
