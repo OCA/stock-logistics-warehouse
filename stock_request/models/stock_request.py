@@ -199,7 +199,7 @@ class StockRequest(models.Model):
         return True
 
     def action_draft(self):
-        self.state = 'draft'
+        self.write({'state': 'draft'})
         return True
 
     def action_cancel(self):
