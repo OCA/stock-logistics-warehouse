@@ -10,10 +10,12 @@
     'depends': [
         'stock',
     ],
-    'data': [
-        'views/stock_picking_type_views.xml',
+    'demo': [
         'demo/stock_location_demo.xml',
         'demo/stock_picking_type_demo.xml',
+    ],
+    'data': [
+        'views/stock_picking_type_views.xml',
     ],
     'installable': True,
 }
