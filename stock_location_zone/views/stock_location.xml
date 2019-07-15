@@ -9,10 +9,12 @@
 
             <field name="usage" position="after">
                 <field name="kind" />
-                <field name="picking_zone_id" options="{'no_create': True, 'no_open': True}" />
+                <field name="location_name_format" attrs="{'invisible': [('kind', '=', 'bin')]}" />
+                <field name="picking_type_id" options="{'no_create': True}" attrs="{'readonly': [('kind', '!=', 'zone')]}" />
             </field>
 
             <field name="posx" position="before">
+                <field name="picking_zone_id" />
                 <field name="area" />
                 <field name="corridor" />
                 <field name="row" />

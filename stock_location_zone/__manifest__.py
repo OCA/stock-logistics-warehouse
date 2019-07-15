@@ -14,8 +14,7 @@
         'stock',
     ],
     'data': [
-        'views/picking_zone.xml',
-        'views/picking_type.xml',
+        'views/stock_picking_zone.xml',
         'views/stock_location.xml',
         'security/ir.model.access.csv',
     ],

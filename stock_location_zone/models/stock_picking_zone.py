@@ -6,19 +6,15 @@ from odoo import fields, models
 
 
 class PickingZone(models.Model):
-    _name = 'picking.zone'
+    _name = 'stock.picking.zone'
 
     name = fields.Char('Name', required=True, translate=True)
     code = fields.Char('Code', required=True)
-    picking_type_ids = fields.One2many(
-        'stock.picking.type', 'picking_zone_id',
-        string='Picking Types')
-    location_name_format = fields.Char(
-        'Location Name Format',
-        help="Format string that will compute the name of the location. "
-             "Use 'self' to access location object. Example: "
-             "'{self.area}-{self.corridor:0>2}.{self.rack:0>3}"
-             ".{self.level:0>2}'")
+    pick_type_id = fields.Many2one(
+        'stock.picking.type',
+        string='Pick Type',
+        help="Picking type for operations from this location",
+        )
 
     _sql_constraints = [
         (
