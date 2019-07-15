@@ -1,0 +1,1 @@
+This module adds a field named `Quantity available` on the serial number tree and form.
