@@ -6,6 +6,7 @@
         <field name="name">purchase.order.form</field>
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="groups_id" eval="[(4, ref('stock_request.group_stock_request_user'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button type="object"
@@ -20,8 +21,7 @@
             </xpath>
             <xpath expr="//field[@name='order_line']/form/sheet/notebook"
                    position="inside">
-                <page name="stock_requests" string="Stock Requests"
-                      groups="stock_request.group_stock_request_user">
+                <page name="stock_requests" string="Stock Requests">
                     <field name="stock_request_ids"/>
                 </page>
             </xpath>
@@ -32,6 +32,7 @@
         <field name="name">purchase.order.line.form2</field>
         <field name="model">purchase.order.line</field>
         <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>
+        <field name="groups_id" eval="[(4, ref('stock_request.group_stock_request_user'))]"/>
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <separator string="Stock Requests"/>

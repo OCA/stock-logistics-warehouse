@@ -20,7 +20,7 @@ class StockRequestOrder(models.Model):
 
     @api.depends('stock_request_ids')
     def _compute_purchase_ids(self):
-        for req in self.sudo():
+        for req in self:
             req.purchase_ids = req.stock_request_ids.mapped('purchase_ids')
             req.purchase_line_ids = req.stock_request_ids.mapped(
                 'purchase_line_ids')
