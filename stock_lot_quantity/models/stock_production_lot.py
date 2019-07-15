@@ -12,7 +12,9 @@ class StockProductionLot(models.Model):
         compute='_compute_lot_qty',
         type='float',
         digits_compute=dp.get_precision('Product Unit of Measure'),
-        string='On hand')
+        string='On hand',
+        store=True
+    )
 
     @api.depends('quant_ids')
     def _compute_lot_qty(self):
