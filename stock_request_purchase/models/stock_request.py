@@ -20,7 +20,7 @@ class StockRequest(models.Model):
 
     @api.depends('purchase_line_ids')
     def _compute_purchase_ids(self):
-        for request in self.sudo():
+        for request in self:
             request.purchase_ids = request.purchase_line_ids.mapped('order_id')
             request.purchase_count = len(request.purchase_ids)
 
