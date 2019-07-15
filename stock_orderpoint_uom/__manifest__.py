@@ -10,7 +10,7 @@
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "depends": ["purchase", "stock"],
+    "depends": ["purchase_stock"],
     "data": ["views/stock_warehouse_orderpoint_view.xml"],
     "license": "AGPL-3",
     'installable': True,
