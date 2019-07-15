@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from openerp.addons.stock.tests.common import TestStockCommon
+from odoo.addons.stock.tests.common import TestStockCommon
 
 class TestLotQuantity(TestStockCommon):
 

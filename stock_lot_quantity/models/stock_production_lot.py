@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # © 2015 Numérigraphe SARL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import models, api, fields
-import openerp.addons.decimal_precision as dp
+from odoo import models, api, fields
+import odoo.addons.decimal_precision as dp
 
 
 class StockProductionLot(models.Model):
