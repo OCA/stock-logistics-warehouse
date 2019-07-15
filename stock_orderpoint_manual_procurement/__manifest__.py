@@ -12,8 +12,7 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "depends": [
-        "stock",
-        "purchase",
+        "purchase_stock",
     ],
     "demo": [
         "demo/product.xml",
