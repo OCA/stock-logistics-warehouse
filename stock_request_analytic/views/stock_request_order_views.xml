@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="stock_request_order_form" model="ir.ui.view">
+        <field name="name">stock.request.order.form - stock_request_analytic</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <field name="analytic_account_ids" invisible="1"/>
+                <button type="object"
+                    name="action_view_analytic"
+                    class="oe_stat_button"
+                    icon="fa-list"
+                    attrs="{'invisible': [('analytic_count', '=', 0)]}"
+                        groups="analytic.group_analytic_accounting">
+                    <field name="analytic_count" widget="statinfo"
+                           string="Analytic Accounts"/>
+                </button>
+            </div>
+            <xpath expr="//field[@name='stock_request_ids']/tree//field[@name='route_id']" position="after">
+                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
