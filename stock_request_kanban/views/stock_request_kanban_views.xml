@@ -15,7 +15,7 @@
                 <field name="route_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
                 <field name="product_id"/>
                 <field name="product_uom_id"
-                       options="{'no_open': True, 'no_create': True}" groups="product.group_uom"/>
+                       options="{'no_open': True, 'no_create': True}" groups="uom.group_uom"/>
                 <field name="product_uom_qty"/>
                 <field name="active" invisible="1"/>
             </tree>
@@ -77,7 +77,7 @@
                                 <field name="product_uom_id"
                                        class="oe_inline"
                                        options="{'no_open': True, 'no_create': True}"
-                                       groups="product.group_uom"/>
+                                       groups="uom.group_uom"/>
                             </div>
                         </group>
                     </group>
