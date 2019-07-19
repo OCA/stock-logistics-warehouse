@@ -52,3 +52,27 @@ class MrpProduction(models.Model):
             elif not pull:  # If there is no make_to_stock rule either
                 if mto_route and mto_route.id in [x.id for x in routes]:
                     move.procure_method = 'make_to_order'
+
+    @api.multi
+    def _update_unit_factor(self):
+        self.ensure_one()
+        for product in self.move_raw_ids.mapped('product_id'):
+            moves = self.move_raw_ids.filtered(
+                lambda m: m.product_id == product)
+            if len(moves) > 1:
+                for move in moves:
+                    # We change the unit factor in onder to compute correctly
+                    # the quantity to be processed for each stock.move
+                    move.unit_factor = move.product_qty / self.product_qty
+
+    @api.model
+    def create(self, values):
+        res = super().create(values)
+        res._update_unit_factor()
+        return res
+
+    @api.multi
+    def _update_raw_move(self, bom_line, line_data):
+        res = super()._update_raw_move(bom_line, line_data)
+        self._update_unit_factor()
+        return res
