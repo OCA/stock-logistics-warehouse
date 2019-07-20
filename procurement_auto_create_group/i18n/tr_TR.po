@@ -20,23 +20,23 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: procurement_auto_create_group
-#: model:ir.model.fields,field_description:procurement_auto_create_group.field_procurement_rule_auto_create_group
+#: model:ir.model.fields,field_description:procurement_auto_create_group.field_stock_rule__auto_create_group
 msgid "Auto-create Procurement Group"
 msgstr ""
 
 #. module: procurement_auto_create_group
-#: code:addons/procurement_auto_create_group/models/procurement_group.py:26
+#: code:addons/procurement_auto_create_group/models/procurement_group.py:28
 #, python-format
-msgid "No sequence defined for procurement group"
+msgid "No sequence defined for procurement group."
 msgstr ""
 
 #. module: procurement_auto_create_group
 #: model:ir.model,name:procurement_auto_create_group.model_procurement_group
 #, fuzzy
-msgid "Procurement Requisition"
+msgid "Procurement Group"
 msgstr "Satın alma"
 
 #. module: procurement_auto_create_group
-#: model:ir.model,name:procurement_auto_create_group.model_procurement_rule
-msgid "Procurement Rule"
+#: model:ir.model,name:procurement_auto_create_group.model_stock_rule
+msgid "Stock Rule"
 msgstr ""
