@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_location_lockdown
+# 	* stock_location_lockdown
 #
 msgid ""
 msgstr ""
@@ -32,15 +32,21 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_location_lockdown
-#: code:addons/stock_location_lockdown/models/stock_quant.py:20
+#: code:addons/stock_location_lockdown/models/stock_quant.py:17
 #, python-format
-msgid "The location '%s' is not configured to receive stock."
-msgstr "A localização '%s' não está configurada para receber stock."
+msgid ""
+"The location %s is blocked and can not be used for moving the product %s"
+msgstr ""
 
 #. module: stock_location_lockdown
 #: model:ir.model.fields,help:stock_location_lockdown.field_stock_location_block_stock_entrance
-msgid "if this box is checked, putting stock on this location won't be allowed. Usually used for a virtual location that has childrens."
+msgid ""
+"if this box is checked, putting stock on this location won't be allowed. "
+"Usually used for a virtual location that has childrens."
 msgstr ""
 "Se esta caixa estiver selecionada, não será permitido colocar stock nesta "
 "localização. É geralmente utilizada em localizações virtuais com "
 "descendentes."
+
+#~ msgid "The location '%s' is not configured to receive stock."
+#~ msgstr "A localização '%s' não está configurada para receber stock."
