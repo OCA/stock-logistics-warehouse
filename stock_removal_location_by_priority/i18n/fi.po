@@ -19,6 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_removal_location_by_priority
+#: model:ir.model,name:stock_removal_location_by_priority.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: stock_removal_location_by_priority
 #: model:ir.model,name:stock_removal_location_by_priority.model_stock_location
 msgid "Inventory Locations"
 msgstr ""
@@ -29,15 +34,15 @@ msgid "Quants"
 msgstr "Määrät"
 
 #. module: stock_removal_location_by_priority
-#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_res_config_settings_group_removal_priority
-#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_stock_location_removal_priority
-#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_stock_quant_removal_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_res_config_settings__group_removal_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_stock_location__removal_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_stock_quant__removal_priority
 #: model:res.groups,name:stock_removal_location_by_priority.group_removal_priority
 msgid "Removal Priority"
 msgstr ""
 
 #. module: stock_removal_location_by_priority
-#: model:ir.model.fields,help:stock_removal_location_by_priority.field_res_config_settings_group_removal_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_res_config_settings__group_removal_priority
 msgid ""
 "Removal priority that applies when the incoming dates are equal in both "
 "locations."
@@ -50,17 +55,12 @@ msgid "Removal strategy %s not implemented."
 msgstr ""
 
 #. module: stock_removal_location_by_priority
-#: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_location_removal_priority
-#: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_quant_removal_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_location__removal_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_quant__removal_priority
 msgid "This priority applies when removing stock and incoming dates are equal."
 msgstr ""
 
 #. module: stock_removal_location_by_priority
-#: model:ir.ui.view,arch_db:stock_removal_location_by_priority.view_stock_config_settings
+#: model_terms:ir.ui.view,arch_db:stock_removal_location_by_priority.view_stock_config_settings
 msgid "Use <i>Removal Priority</i> in Locations"
-msgstr ""
-
-#. module: stock_removal_location_by_priority
-#: model:ir.model,name:stock_removal_location_by_priority.model_res_config_settings
-msgid "res.config.settings"
 msgstr ""
