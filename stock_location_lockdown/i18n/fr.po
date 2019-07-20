@@ -32,10 +32,11 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_location_lockdown
-#: code:addons/stock_location_lockdown/models/stock_quant.py:20
-#, fuzzy, python-format
-msgid "The location '%s' is not configured to receive stock."
-msgstr "L'emplacement %s n'est pas configuré pour recevoir du stock."
+#: code:addons/stock_location_lockdown/models/stock_quant.py:17
+#, python-format
+msgid ""
+"The location %s is blocked and can not be used for moving the product %s"
+msgstr ""
 
 #. module: stock_location_lockdown
 #: model:ir.model.fields,help:stock_location_lockdown.field_stock_location_block_stock_entrance
@@ -47,6 +48,10 @@ msgstr ""
 "Si cette case est cochée, il ne sera pas possible d'ajouter du stock dans "
 "cette emplacement. Habituellement utilisée pour les emplacements virtuels "
 "ayant des enfants."
+
+#, fuzzy
+#~ msgid "The location '%s' is not configured to receive stock."
+#~ msgstr "L'emplacement %s n'est pas configuré pour recevoir du stock."
 
 #~ msgid "Location"
 #~ msgstr "Emplacement"
