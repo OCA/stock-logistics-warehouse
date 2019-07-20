@@ -25,7 +25,7 @@ msgid "Auto-create Procurement Group"
 msgstr "Crear grupo de abastecimiento automáticamene"
 
 #. module: procurement_auto_create_group
-#: code:addons/procurement_auto_create_group/models/procurement_group.py:26
+#: code:addons/procurement_auto_create_group/models/procurement_group.py:29
 #, python-format
 msgid "No sequence defined for procurement group"
 msgstr "No se ha definido una secuencia para el grupo de abastecimiento"
