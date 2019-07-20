@@ -80,8 +80,24 @@ msgid "Inventory of"
 msgstr ""
 
 #. module: stock_inventory_chatter
+#: selection:stock.inventory,state:0
+msgid "Pending to Approve"
+msgstr ""
+
+#. module: stock_inventory_chatter
 #: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory__partner_id
 msgid "Specify Owner to focus your inventory on a particular Owner."
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory__state
+msgid ""
+"States of the Inventory Adjustment:\n"
+"- Draft: Inventory not started.\n"
+"- In Progress: Inventory in execution.\n"
+"- Pending to Approve: Inventory have some discrepancies greater than the "
+"predefined threshold and it's waiting for the Control Manager approval.\n"
+"- Validated: Inventory Approved."
 msgstr ""
 
 #. module: stock_inventory_chatter
