@@ -21,30 +21,30 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: stock_available
-#: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
-#: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
+#: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
+#: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Available</span>"
 msgstr "<span class=\"o_stat_text\">Raspoloživo</span>"
 
 #. module: stock_available
-#: model:ir.ui.view,arch_db:stock_available.product_normal_form_view
-#: model:ir.ui.view,arch_db:stock_available.view_stock_available_form
+#: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
+#: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Potential</span>"
 msgstr "<span class=\"o_stat_text\">Potencijalno</span>"
 
 #. module: stock_available
-#: model:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
+#: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
 msgid "Available to Promise:"
 msgstr "Raspoloživo za obećati:"
 
 #. module: stock_available
-#: model:ir.model.fields,field_description:stock_available.field_product_product_immediately_usable_qty
-#: model:ir.model.fields,field_description:stock_available.field_product_template_immediately_usable_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_product__immediately_usable_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_template__immediately_usable_qty
 msgid "Available to promise"
 msgstr "Raspoloživo za obećati"
 
 #. module: stock_available
-#: model:ir.model.fields,help:stock_available.field_res_config_settings_stock_available_mrp_based_on
+#: model:ir.model.fields,help:stock_available.field_res_config_settings__stock_available_mrp_based_on
 msgid ""
 "Choose the field of the product which will be used to compute potential.\n"
 "If empty, Quantity On Hand is used.\n"
@@ -52,23 +52,29 @@ msgid ""
 msgstr ""
 
 #. module: stock_available
-#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_sale
+#: model:ir.model,name:stock_available.model_res_config_settings
+#, fuzzy
+msgid "Config Settings"
+msgstr "stock.config.settings"
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_sale
 msgid "Exclude goods already in sale quotations"
 msgstr "Isključi dobra već u prodajnim nalozima"
 
 #. module: stock_available
-#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_immediately
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_immediately
 msgid "Exclude incoming goods"
 msgstr "Isključi robu u dolasku"
 
 #. module: stock_available
-#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_module_stock_available_mrp
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_mrp
 msgid "Include the production potential"
 msgstr "Isključi potencijal proizvodnje"
 
 #. module: stock_available
-#: model:ir.model.fields,field_description:stock_available.field_product_product_potential_qty
-#: model:ir.model.fields,field_description:stock_available.field_product_template_potential_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_product__potential_qty
+#: model:ir.model.fields,field_description:stock_available.field_product_template__potential_qty
 msgid "Potential"
 msgstr "Potencijal"
 
@@ -83,14 +89,14 @@ msgid "Product Template"
 msgstr "Predložak proizvoda"
 
 #. module: stock_available
-#: model:ir.model.fields,help:stock_available.field_product_product_potential_qty
+#: model:ir.model.fields,help:stock_available.field_product_product__potential_qty
 msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand."
 msgstr ""
 
 #. module: stock_available
-#: model:ir.model.fields,help:stock_available.field_product_template_potential_qty
+#: model:ir.model.fields,help:stock_available.field_product_template__potential_qty
 msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand. If the product has several variants, this will be the biggest "
@@ -98,26 +104,26 @@ msgid ""
 msgstr ""
 
 #. module: stock_available
-#: model:ir.ui.view,arch_db:stock_available.view_stock_configuration
+#: model_terms:ir.ui.view,arch_db:stock_available.view_stock_configuration
 msgid "Stock available to promise"
 msgstr "Zaliha raspoloživa za obećati"
 
 #. module: stock_available
-#: model:ir.model.fields,help:stock_available.field_product_template_immediately_usable_qty
+#: model:ir.model.fields,help:stock_available.field_product_template__immediately_usable_qty
 msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs"
 msgstr ""
 
 #. module: stock_available
-#: model:ir.model.fields,help:stock_available.field_product_product_immediately_usable_qty
+#: model:ir.model.fields,help:stock_available.field_product_product__immediately_usable_qty
 msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs."
 msgstr ""
 
 #. module: stock_available
-#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_mrp
+#: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_mrp
 msgid ""
 "This will add the quantities of goods that can be immediately manufactured, "
 "to the quantities available to promise.\n"
@@ -126,7 +132,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_available
-#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_immediately
+#: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_immediately
 msgid ""
 "This will subtract incoming quantities from the quantities available to "
 "promise.\n"
@@ -134,7 +140,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_available
-#: model:ir.model.fields,help:stock_available.field_res_config_settings_module_stock_available_sale
+#: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_sale
 msgid ""
 "This will subtract quantities from the sale quotations from the quantities "
 "available to promise.\n"
@@ -144,12 +150,6 @@ msgid ""
 msgstr ""
 
 #. module: stock_available
-#: model:ir.model.fields,field_description:stock_available.field_res_config_settings_stock_available_mrp_based_on
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings__stock_available_mrp_based_on
 msgid "based on"
 msgstr "bazirano na"
-
-#. module: stock_available
-#: model:ir.model,name:stock_available.model_res_config_settings
-#, fuzzy
-msgid "res.config.settings"
-msgstr "stock.config.settings"
