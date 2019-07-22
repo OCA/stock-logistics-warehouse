@@ -530,6 +530,7 @@ class TestStockRequest(common.TransactionCase):
         self.assertEqual(stock_request.qty_in_progress, 5.0)
         self.assertEqual(stock_request.qty_done, 0.0)
         picking.action_assign()
+        self.assertEqual(picking.origin, order.name)
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 5
         picking.action_done()
