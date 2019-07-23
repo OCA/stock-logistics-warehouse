@@ -890,11 +890,13 @@ class TestStockRequest(common.TransactionCase):
         self.product.type = 'consu'
         product2.type = 'consu'
         product3.type = 'consu'
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.virtual_loc.id,
             'procurement_group_id': group.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -903,6 +905,7 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.virtual_loc.id,
+                'expected_date': expected_date,
             }), (0, 0, {
                 'product_id': product2.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -911,6 +914,7 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.virtual_loc.id,
+                'expected_date': expected_date,
             }), (0, 0, {
                 'product_id': product3.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -919,6 +923,7 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.virtual_loc.id,
+                'expected_date': expected_date,
             })]
         }
         order = self.request_order.create(vals)
