@@ -1,6 +1,7 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
+from odoo import fields
 from odoo.tests import common
 
 
@@ -73,10 +74,12 @@ class TestStockRequestPurchase(common.TransactionCase):
 
     def test_create_request_01(self):
         """Single Stock request with buy rule"""
+        expected_date = fields.Date.today()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -84,6 +87,7 @@ class TestStockRequestPurchase(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
 
