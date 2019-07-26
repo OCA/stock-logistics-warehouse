@@ -66,6 +66,7 @@ class TestStockWarehouseOrderpoint(SavepointCase):
             'name': 'Test move',
             'product_id': self.product.id,
             'product_uom': self.product_uom.id,
+            'product_uom_qty': 10,
             'quantity_done': 10,
             'location_id': source_location.id,
             'location_dest_id': destination_location.id
