@@ -33,3 +33,10 @@ msgstr ""
 msgid "Inventory Line"
 msgstr ""
 
+#. module: stock_inventory_cost_info
+#: model:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree
+#: model:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree2
+#: model:ir.ui.view,arch_db:stock_inventory_cost_info.view_inventory_form
+msgid "Total"
+msgstr ""
+
