@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo11-addon-stock_cycle_count',
         'odoo11-addon-stock_demand_estimate',
         'odoo11-addon-stock_inventory_chatter',
+        'odoo11-addon-stock_inventory_cost_info',
         'odoo11-addon-stock_inventory_discrepancy',
         'odoo11-addon-stock_inventory_exclude_sublocation',
         'odoo11-addon-stock_inventory_lockdown',
