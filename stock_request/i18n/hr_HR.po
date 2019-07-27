@@ -508,6 +508,7 @@ msgid "Planned"
 msgstr ""
 
 #. module: stock_request
+#: model:ir.model,name:stock_request.model_procurement_group
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__procurement_group_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__procurement_group_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__procurement_group_id
