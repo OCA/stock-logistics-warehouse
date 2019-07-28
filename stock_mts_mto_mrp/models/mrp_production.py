@@ -26,7 +26,7 @@ class MrpProduction(models.Model):
                 ('route_id', 'in', [x.id for x in routes]),
                 ('location_src_id', '=', move.location_id.id),
                 ('location_id', '=', move.location_dest_id.id),
-                ('action', '!=', 'push')], limit=1)
+                ('action', '!=', 'push')], limit=1, order='sequence asc')
             if pull and pull.action == 'split_procurement':
                 qty_available = (
                     self.env['stock.quant']._get_available_quantity(
