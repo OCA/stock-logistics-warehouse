@@ -67,7 +67,8 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
             self.analytic, self.main_company)
         order = self.env['stock.request.order'].create(vals)
         req = order.stock_request_ids
-        order.action_confirm()
+        order.action_confirm()  # To submit
+        order.action_confirm()  # To confirm
         self.assertEqual(
             req.move_ids.mapped('analytic_account_id'), self.analytic)
         self.assertEqual(order.analytic_count, 1)
