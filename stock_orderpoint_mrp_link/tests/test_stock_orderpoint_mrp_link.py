@@ -32,9 +32,9 @@ class TestStockOrderpointMRPLink(SavepointCase):
         test_route = cls.route_model.create({
             'name': 'Stock -> Test',
             'product_selectable': True,
-            'pull_ids': [(0, 0, {
+            'rule_ids': [(0, 0, {
                 'name': 'stock to test',
-                'action': 'move',
+                'action': 'pull',
                 'location_id': cls.secondary_loc.id,
                 'location_src_id': cls.stock_loc.id,
                 'procure_method': 'make_to_order',
