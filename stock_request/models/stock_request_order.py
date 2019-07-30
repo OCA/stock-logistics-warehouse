@@ -15,6 +15,7 @@ class StockRequestOrder(models.Model):
     _name = 'stock.request.order'
     _description = 'Stock Request Order'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = 'id desc'
 
     @api.model
     def default_get(self, fields):
