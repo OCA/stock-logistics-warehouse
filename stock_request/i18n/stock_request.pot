@@ -122,7 +122,7 @@ msgid "Company"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:170
+#: code:addons/stock_request/models/stock_request.py:171
 #, python-format
 msgid "Company must be equal to the order"
 msgstr ""
@@ -212,7 +212,7 @@ msgid "Expected Date"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:177
+#: code:addons/stock_request/models/stock_request.py:178
 #, python-format
 msgid "Expected date must be equal to the order"
 msgstr ""
@@ -341,7 +341,7 @@ msgid "Location"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:153
+#: code:addons/stock_request/models/stock_request.py:154
 #, python-format
 msgid "Location must be equal to the order"
 msgstr ""
@@ -449,13 +449,13 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:264
+#: code:addons/stock_request/models/stock_request_order.py:265
 #, python-format
 msgid "Only orders on draft state can be unlinked"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:314
+#: code:addons/stock_request/models/stock_request.py:315
 #, python-format
 msgid "Only requests on draft state can be unlinked"
 msgstr ""
@@ -509,7 +509,7 @@ msgid "Procurement Group"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:163
+#: code:addons/stock_request/models/stock_request.py:164
 #, python-format
 msgid "Procurement group must be equal to the order"
 msgstr ""
@@ -633,7 +633,7 @@ msgid "Requested by"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:139
+#: code:addons/stock_request/models/stock_request.py:140
 #, python-format
 msgid "Requested by must be equal to the order"
 msgstr ""
@@ -818,13 +818,13 @@ msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move.py:38
-#: code:addons/stock_request/models/stock_request_order.py:281
+#: code:addons/stock_request/models/stock_request_order.py:282
 #, python-format
 msgid "The company of the stock request must match with that of the location."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:272
+#: code:addons/stock_request/models/stock_request_order.py:273
 #, python-format
 msgid "The company of the stock request must match with that of the warehouse."
 msgstr ""
@@ -836,13 +836,13 @@ msgid "The following requested items from Stock Request %s have now been receive
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:187
+#: code:addons/stock_request/models/stock_request.py:188
 #, python-format
 msgid "The picking policy must be equal to the order"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:290
+#: code:addons/stock_request/models/stock_request_order.py:291
 #, python-format
 msgid "This action only works in the context of products"
 msgstr ""
@@ -866,7 +866,7 @@ msgid "Transfers"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:311
+#: code:addons/stock_request/models/stock_request_order.py:312
 #, python-format
 msgid "Unfortunately it seems you do not have the necessary rights for creating stock requests. Please contact your administrator."
 msgstr ""
@@ -910,7 +910,7 @@ msgid "Warehouse"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:146
+#: code:addons/stock_request/models/stock_request.py:147
 #, python-format
 msgid "Warehouse must be equal to the order"
 msgstr ""

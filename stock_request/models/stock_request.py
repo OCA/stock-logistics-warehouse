@@ -17,6 +17,7 @@ class StockRequest(models.Model):
     _name = "stock.request"
     _description = "Stock Request"
     _inherit = 'stock.request.abstract'
+    _order = 'id desc'
 
     def _get_default_requested_by(self):
         return self.env['res.users'].browse(self.env.uid)
