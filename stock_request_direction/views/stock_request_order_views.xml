@@ -1,0 +1,43 @@
+<odoo>
+
+    <!-- Copyright (c) 2019 Open Source Integrators
+         License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+
+    <record id="stock_request_order_tree" model="ir.ui.view">
+        <field name="name">stock.request.order.tree</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="warehouse_id" position="after">
+                <field name="direction"/>
+            </field>
+        </field>
+    </record>
+
+    <record  id="stock_request_order_form" model="ir.ui.view">
+        <field name="name">stock.request.order.form</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='warehouse_id']" position="after">
+                <field name="direction" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='stock_request_ids']" position="attributes">
+                <attribute name="context">{
+                    'default_expected_date': expected_date,
+                    'default_picking_policy': picking_policy,
+                    'default_warehouse_id': warehouse_id,
+                    'default_direction': direction,
+                    'default_location_id': location_id,
+                    'default_procurement_group_id': procurement_group_id,
+                    'default_company_id': company_id,
+                    'default_state': state,
+                    }</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='warehouse_id']" position="after">
+                <field name="direction" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
