@@ -1,0 +1,28 @@
+<odoo>
+
+    <!-- Copyright (c) 2019 Open Source Integrators
+         License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+
+    <record id="view_stock_request_tree" model="ir.ui.view">
+        <field name="name">stock.request.tree</field>
+        <field name="model">stock.request</field>
+        <field name="inherit_id" ref="stock_request.view_stock_request_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='warehouse_id']" position="after">
+                <field name="direction"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_request_form" model="ir.ui.view">
+        <field name="name">stock.request.form</field>
+        <field name="model">stock.request</field>
+        <field name="inherit_id" ref="stock_request.view_stock_request_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='warehouse_id']" position="after">
+                <field name="direction"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
