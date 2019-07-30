@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Warehouse Orderpoint Stock Info Unreserved",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "depends": [
         "stock_warehouse_orderpoint_stock_info",
         "stock_available_unreserved"
