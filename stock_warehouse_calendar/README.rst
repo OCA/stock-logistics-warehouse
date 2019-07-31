@@ -87,7 +87,8 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* Jordi Ballester (EFICENT) <jordi.ballester@eficent.com>.
+* Jordi Ballester <jordi.ballester@eficent.com>
+* Lois Rilo <lois.rilo@eficent>
 
 Maintainers
 ~~~~~~~~~~~
