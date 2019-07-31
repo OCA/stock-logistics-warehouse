@@ -14,7 +14,6 @@
     ],
     'data': [
         'wizards/put_in_pack_nbr.xml',
-        'views/stock_picking.xml',
         'views/stock_quant_package.xml',
     ],
     'installable': True,
