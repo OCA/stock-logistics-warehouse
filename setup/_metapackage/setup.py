@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo11-addon-procurement_auto_create_group',
         'odoo11-addon-stock_account_change_qty_reason',
         'odoo11-addon-stock_account_internal_move',
+        'odoo11-addon-stock_account_inventory_force_date',
         'odoo11-addon-stock_available',
         'odoo11-addon-stock_available_global',
         'odoo11-addon-stock_available_mrp',
