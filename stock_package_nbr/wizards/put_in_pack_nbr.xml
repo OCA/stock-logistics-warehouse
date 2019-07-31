@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_put_in_pack_nbr_form" model="ir.ui.view">
+        <field name="name">put.in.pack.nbr.view.form</field>
+        <field name="model">put.in.pack.nbr</field>
+        <field name="arch" type="xml">
+            <form string="Put in Pack">
+                <group>
+                    <field name="picking_id" invisible="1"/>
+                    <field name="nbr_packages"/>
+                </group>
+
+                <footer>
+                    <button name="do_put_in_pack" string="Put in Pack" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="put_in_pack_nbr" model="ir.actions.act_window">
+        <field name="name">Put in Pack</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">put.in.pack.nbr</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
