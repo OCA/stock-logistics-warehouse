@@ -125,6 +125,12 @@ class TestStockRequest(common.TransactionCase):
             **vals
         ))
 
+
+class TestStockRequestBase(TestStockRequest):
+
+    def setUp(self):
+        super(TestStockRequestBase, self).setUp()
+
     def test_defaults(self):
         vals = {
             'product_id': self.product.id,
