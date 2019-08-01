@@ -208,16 +208,21 @@ class StockRequest(models.Model):
     @api.multi
     def action_confirm(self):
         # Check if user allowed to skip Submit stage
-        if self.env.user.\
-                has_group('stock_request.group_bypass_submit_request'):
-            self._action_confirm()
-            return True
-        else:
-            # Move one state
-            if self.state == 'draft':
-                self._action_submit()
-            else:
+        if self.product_uom_qty != 0:
+            if self.env.user.\
+                    has_group('stock_request.group_bypass_submit_request'):
                 self._action_confirm()
+                return True
+            else:
+                # Move one state
+                if self.state == 'draft':
+                    self._action_submit()
+                else:
+                    self._action_confirm()
+        else:
+            raise(ValidationError(_(
+                'Stock Request cannot have 0 quantity'
+            )))
         return True
 
     def action_draft(self):

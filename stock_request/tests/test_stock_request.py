@@ -882,3 +882,25 @@ class TestStockRequest(common.TransactionCase):
         order.stock_request_ids.onchange_warehouse_id()
         self.assertEqual(
             order.stock_request_ids[0].location_id, self.virtual_loc)
+
+    def test_stock_request_zero_quant(self):
+        expected_date = datetime.now()
+        vals = {
+            'company_id': self.main_company.id,
+            'expected_date': expected_date,
+            'warehouse_id': self.warehouse.id,
+            'location_id': self.virtual_loc.id,
+            'stock_request_ids': [(0, 0, {
+                'product_id': self.product.id,
+                'product_uom_id': self.product.uom_id.id,
+                'product_uom_qty': 0.0,
+                'company_id': self.main_company.id,
+                'expected_date': expected_date,
+                'warehouse_id': self.warehouse.id,
+                'location_id': self.virtual_loc.id,
+            })]
+        }
+        order = self.request_order.sudo(
+            self.stock_request_user).create(vals)
+        with self.assertRaises(exceptions.ValidationError):
+            order.action_confirm()
