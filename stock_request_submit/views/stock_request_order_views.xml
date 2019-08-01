@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--  Copyright 2019 Open Source Integrators
+          Copyright 2019 Eficent Business and IT Consulting Services, S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+    <record model="ir.ui.view" id="stock_request_order_form">
+        <field name="name">stock.request.order.form</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form"/>
+        <field name="arch" type="xml">
+            <button name="action_confirm" position="after">
+                <button name="action_submit"
+                            string="Submit" type="object"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+            </button>
+            <button name="action_confirm" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', '!=', 'submitted')]}</attribute>
+            </button>
+            <button name="action_draft" position="attributes">
+                <attribute name="states">submitted,cancel</attribute>
+            </button>
+            <button name="action_cancel" position="attributes">
+                <attribute name="states">draft,submitted,open</attribute>
+            </button>
+            <field name="stock_request_ids" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'submitted'])]}</attribute>
+            </field>
+            <field name="route_id" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'submitted'])]}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>
