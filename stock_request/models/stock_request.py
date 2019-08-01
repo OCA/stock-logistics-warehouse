@@ -22,6 +22,17 @@ class StockRequest(models.Model):
     def _get_default_requested_by(self):
         return self.env['res.users'].browse(self.env.uid)
 
+    @staticmethod
+    def _get_expected_date():
+        return fields.Datetime.now()
+
+    def _get_default_expected_date(self):
+        if self.order_id:
+            res = self.order_id.expected_date
+        else:
+            res = self._get_expected_date()
+        return res
+
     name = fields.Char(
         states={'draft': [('readonly', False)]}
     )
@@ -35,8 +46,8 @@ class StockRequest(models.Model):
         default=lambda s: s._get_default_requested_by(),
     )
     expected_date = fields.Datetime(
-        'Expected Date', default=fields.Datetime.now, index=True,
-        required=True, readonly=True,
+        'Expected Date', default=lambda s: s._get_default_expected_date(),
+        index=True, required=True, readonly=True,
         states={'draft': [('readonly', False)]},
         help="Date when you expect to receive the goods.",
     )
@@ -244,6 +255,10 @@ class StockRequest(models.Model):
             'stock_request_id': self.id,
         }
 
+    def _skip_procurement(self):
+        return self.state != 'draft' or \
+            self.product_id.type not in ('consu', 'product')
+
     @api.multi
     def _action_launch_procurement_rule(self):
         """
@@ -257,10 +272,7 @@ class StockRequest(models.Model):
             'Product Unit of Measure')
         errors = []
         for request in self:
-            if (
-                request.state != 'draft' or
-                request.product_id.type not in ('consu', 'product')
-            ):
+            if request._skip_procurement():
                 continue
             qty = 0.0
             for move in request.move_ids.filtered(
