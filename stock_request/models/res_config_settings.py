@@ -21,3 +21,6 @@ class ResConfigSettings(models.TransientModel):
 
     module_stock_request_analytic = fields.Boolean(
         string='Stock Requests Analytic integration')
+
+    module_stock_request_submit = fields.Boolean(
+        string='Submitted state in Stock Requests')
