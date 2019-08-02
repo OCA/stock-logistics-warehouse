@@ -10,6 +10,7 @@ class TestOrderpointPurchaseLink(common.TransactionCase):
 
         self.product_obj = self.env['product.product']
         self.partner_obj = self.env['res.partner']
+        self.po_obj = self.env['purchase.order']
         self.pol_obj = self.env['purchase.order.line']
         self.location_obj = self.env['stock.location']
         self.orderpoint_obj = self.env['stock.warehouse.orderpoint']
@@ -75,3 +76,13 @@ class TestOrderpointPurchaseLink(common.TransactionCase):
         # Each orderpoint must have required 20.0 units:
         self.assertEqual(po_line.product_qty, 40.0)
         self.assertEqual(len(po_line.orderpoint_ids), 2)
+
+    def test_02_action_view_purchases(self):
+        """Test that action view purchases return M2M relation of
+         PO lines and Orderpoints."""
+        self.group_obj.run_scheduler()
+        po_orderpoint = self.pol_obj.search(
+            [('orderpoint_ids', 'in', self.op2.id)]).mapped('order_id')
+        result = self.op2.action_view_purchase()
+        po_action = self.po_obj.search(result['domain'])
+        self.assertIn(po_orderpoint, po_action)
