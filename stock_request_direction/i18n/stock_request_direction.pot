@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_request_direction
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_request_direction
+#: model:ir.model.fields,field_description:stock_request_direction.field_stock_request__direction
+#: model:ir.model.fields,field_description:stock_request_direction.field_stock_request_order__direction
+msgid "Direction"
+msgstr ""
+
+#. module: stock_request_direction
+#: selection:stock.request,direction:0
+#: selection:stock.request.order,direction:0
+msgid "Inbound"
+msgstr ""
+
+#. module: stock_request_direction
+#: selection:stock.request,direction:0
+#: selection:stock.request.order,direction:0
+msgid "Outbound"
+msgstr ""
+
+#. module: stock_request_direction
+#: model:ir.model,name:stock_request_direction.model_stock_request
+msgid "Stock Request"
+msgstr ""
+
+#. module: stock_request_direction
+#: model:ir.model,name:stock_request_direction.model_stock_request_order
+msgid "Stock Request Order"
+msgstr ""
+
