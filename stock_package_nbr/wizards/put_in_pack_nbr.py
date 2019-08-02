@@ -23,5 +23,5 @@ class PutInPackNbr(models.TransientModel):
     def do_put_in_pack(self):
         self.ensure_one()
 
-        package = self.picking_id.with_context(
+        return self.picking_id.with_context(
             default_nbr_packages=self.nbr_packages)._put_in_pack()
