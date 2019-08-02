@@ -19,7 +19,7 @@ class StockInventory(models.Model):
     @api.onchange('date')
     def _onchange_force_inventory_date(self):
         if self.force_inventory_date:
-            self.accounting_date = self.date
+            self.accounting_date = self.date.date()
 
     @api.multi
     def write(self, vals):
