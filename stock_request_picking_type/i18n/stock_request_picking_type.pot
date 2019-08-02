@@ -89,6 +89,11 @@ msgid "Late Stock Requests"
 msgstr ""
 
 #. module: stock_request_picking_type
+#: selection:stock.picking.type,code:0
+msgid "Manufacturing Operation"
+msgstr ""
+
+#. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_request__picking_type_id
 msgid "Operation Type"
 msgstr ""

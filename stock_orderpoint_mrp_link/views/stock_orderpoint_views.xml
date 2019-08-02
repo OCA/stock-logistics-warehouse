@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- Copyright 2016 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="view_warehouse_orderpoint_move_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.mrp.form</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button type="object"
+                    name="action_view_mrp_productions"
+                    class="oe_stat_button"
+                    string="Manufacturing Orders"
+                    icon="fa-wrench">
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>
