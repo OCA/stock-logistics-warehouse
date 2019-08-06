@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:35+0000\n"
-"PO-Revision-Date: 2018-01-16 14:35+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2019-08-06 14:44+0000\n"
+"Last-Translator: Alexandre Fayolle <alexandre.fayolle@camptocamp.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
@@ -33,7 +34,7 @@ msgstr "Société"
 #: model:ir.actions.act_window,name:stock_demand_estimate.stock_demand_estimate_wizard_action
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_wizard_menu
 msgid "Create Stock Demand Estimates"
-msgstr ""
+msgstr "Créer des estimations de demande de stock"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__create_uid
@@ -60,18 +61,18 @@ msgstr "Date de"
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_date_range
 msgid "Date Range"
-msgstr ""
+msgstr "Période temporelle"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__date_range_type_id
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard__date_range_type_id
 msgid "Date Range Type"
-msgstr ""
+msgstr "Type de de période temporelle"
 
 #. module: stock_demand_estimate
 #: model:ir.ui.menu,name:stock_demand_estimate.date_range_menu
 msgid "Date Ranges"
-msgstr ""
+msgstr "Périodes temporelles"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard__date_end
@@ -80,19 +81,18 @@ msgstr "Date de fin"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__date_end
-#, fuzzy
 msgid "Date to"
 msgstr "Date de fin"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_date_range__days
 msgid "Days between dates"
-msgstr ""
+msgstr "Nombre de jours dans la période"
 
 #. module: stock_demand_estimate
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_planning_menu
 msgid "Demand Planning"
-msgstr ""
+msgstr "Plannification de la Demande"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__display_name
@@ -105,28 +105,28 @@ msgstr "Nom affiché"
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__estimate_id
 msgid "Estimate"
-msgstr ""
+msgstr "Estimation"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:256
 #, python-format
 msgid "Estimate Sheet"
-msgstr ""
+msgstr "Feuille d'estimation"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "Estimated quantity"
-msgstr ""
+msgstr "Quantité estimée"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__line_ids
 msgid "Estimates"
-msgstr ""
+msgstr "Estimations"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_range_id
 msgid "Estimating Period"
-msgstr ""
+msgstr "Période d'estimation"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__id
@@ -172,17 +172,17 @@ msgstr "Emplacement"
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "Period"
-msgstr ""
+msgstr "Période"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__value_x
 msgid "Period Name"
-msgstr ""
+msgstr "Nom de la période"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 msgid "Prepare"
-msgstr ""
+msgstr "Préparer"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_id
@@ -192,17 +192,15 @@ msgstr "Article"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__value_y
-#, fuzzy
-#| msgid "Product"
 msgid "Product Name"
-msgstr "Article"
+msgstr "Nom de l'article"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__product_ids
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard__product_ids
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 msgid "Products"
-msgstr ""
+msgstr "Articles"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom_qty
@@ -213,50 +211,50 @@ msgstr "Quantité"
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__daily_qty
 msgid "Quantity / Day"
-msgstr ""
+msgstr "Quantité / jour"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Quantity in the default UoM of the product"
-msgstr ""
+msgstr "Quantité dans l'unité par défaut du produit"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Real Quantity"
-msgstr ""
+msgstr "Quantité réelle"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Search Stock Demand Estimates"
-msgstr ""
+msgstr "Rechercher dans les estimation de demande"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_pivot
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_tree
 msgid "Stock Demand Estimate"
-msgstr ""
+msgstr "Estimation de demande de stock"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate
 msgid "Stock Demand Estimate Line"
-msgstr ""
+msgstr "Ligne d'estimation de demande de stock"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate_sheet
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "Stock Demand Estimate Sheet"
-msgstr ""
+msgstr "Feuille d'estimation de demande de stock"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate_sheet_line
 msgid "Stock Demand Estimate Sheet Line"
-msgstr ""
+msgstr "Ligne de la feuille d'estimation de demande de stock"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate_wizard
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 msgid "Stock Demand Estimate Wizard"
-msgstr ""
+msgstr "Wizard d'estimation de demande de stock"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:143
@@ -264,12 +262,12 @@ msgstr ""
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_menu
 #, python-format
 msgid "Stock Demand Estimates"
-msgstr ""
+msgstr "Estimations de demande de stock"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__location_id
 msgid "Stock Location"
-msgstr ""
+msgstr "Emplacement"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:79
@@ -278,34 +276,36 @@ msgid ""
 "The requested operation cannot be processed because of a programming error "
 "setting the `product_qty` field instead of the `product_uom_qty`."
 msgstr ""
+"L'opération demandée ne peut aboutir en raison d'une erreur de programmation "
+": le champ `product_qty` a été modifié, et non le champ `product_uom_qty`."
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:226
 #, python-format
 msgid "The start date cannot be later than the end date."
-msgstr ""
+msgstr "La date de début doit être antérieure à la date de fin."
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:52
 #, python-format
 msgid "There is no ranges created."
-msgstr ""
+msgstr "Il n'y a pas de période."
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
-msgstr ""
+msgstr "Unité de mesure"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "Validate"
-msgstr ""
+msgstr "Valider"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:243
 #, python-format
 msgid "You must select at least one product."
-msgstr ""
+msgstr "Vous devez choisir au moins un produit."
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
@@ -316,4 +316,4 @@ msgstr "ou"
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "to"
-msgstr ""
+msgstr "au"
