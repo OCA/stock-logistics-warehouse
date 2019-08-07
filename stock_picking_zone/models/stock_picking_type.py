@@ -13,12 +13,14 @@ class StockPickingType(models.Model):
 
     @api.constrains('is_zone', 'default_location_src_id')
     def _check_zone_location_src_unique(self):
-        for zone in self:
-            src_location = zone.default_location_src_id
+        for picking_type in self:
+            if not picking_type.is_zone:
+                continue
+            src_location = picking_type.default_location_src_id
             domain = [
                 ('is_zone', '=', True),
                 ('default_location_src_id', '=', src_location.id),
-                ('id', '!=', zone.id)
+                ('id', '!=', picking_type.id)
             ]
             other = self.search(domain)
             if other:
