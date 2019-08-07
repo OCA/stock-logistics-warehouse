@@ -58,6 +58,9 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def _get_line_rule(self):
+        if self.route_id and self.route_id.rule_ids:
+            return self.route_id.rule_ids.sorted(
+                key=lambda r: (r.route_sequence, r.sequence))[0]
         """ Get applicable rule for this product
 
         Reproduce get suitable rule from procurement
