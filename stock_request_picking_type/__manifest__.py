@@ -11,7 +11,7 @@
               'Odoo Community Association (OCA)',
     'category': 'Warehouse Management',
     'depends': [
-        'stock_request',
+        'stock_request_submit',
     ],
     'data': [
         'data/stock_picking_type.xml',
