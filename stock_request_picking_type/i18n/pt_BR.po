@@ -6,161 +6,165 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-03-24 18:22+0000\n"
+"Last-Translator: Marcel Savegnago <marcel.savegnago@gmail.com>\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
 msgstr ""
+"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\""
+"Manage\"/>"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 msgid "<span>New</span>"
-msgstr ""
+msgstr "<span>Novo</span>"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 msgid "<span>View</span>"
-msgstr ""
+msgstr "<span>Visualizar</span>"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 msgid "All"
-msgstr ""
+msgstr "Tudo"
 
 #. module: stock_request_picking_type
 #: selection:stock.picking.type,code:0
 msgid "Customers"
-msgstr ""
+msgstr "Clientes"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Done"
-msgstr ""
+msgstr "Concluído"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Expected Date"
-msgstr ""
+msgstr "Data Prevista"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Expected Date by Month"
-msgstr ""
+msgstr "Data Prevista por Mês"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Group By..."
-msgstr ""
+msgstr "Agrupar por..."
 
 #. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_open
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "In Progress"
-msgstr ""
+msgstr "Em Andamento"
 
 #. module: stock_request_picking_type
 #: selection:stock.picking.type,code:0
 msgid "Internal"
-msgstr ""
+msgstr "Interno"
 
 #. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_late
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Late"
-msgstr ""
+msgstr "Atrasado"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Late Stock Requests"
-msgstr ""
+msgstr "Requisições de Estoque em Atrasado"
 
 #. module: stock_request_picking_type
 #: selection:stock.picking.type,code:0
 msgid "Manufacturing Operation"
-msgstr ""
+msgstr "Operação de Fabricação"
 
 #. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_request_order__picking_type_id
 msgid "Operation Type"
-msgstr ""
+msgstr "Tipo da Operação"
 
 #. module: stock_request_picking_type
 #: model:ir.model,name:stock_request_picking_type.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipo de Separação"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Search Stock Request Orders"
-msgstr ""
+msgstr "Pesquisar Ordens de Requisição de Estoque"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 msgid "Settings"
-msgstr ""
+msgstr "Configurações"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: stock_request_picking_type
 #: model:ir.model,name:stock_request_picking_type.model_stock_request_order
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 #: selection:stock.picking.type,code:0
 msgid "Stock Request Order"
-msgstr ""
+msgstr "Ordens de Requisição de Estoque"
 
 #. module: stock_request_picking_type
 #: model:ir.actions.act_window,name:stock_request_picking_type.action_picking_dashboard
 #: model:ir.actions.act_window,name:stock_request_picking_type.action_stock_request_order_form
 #: model:ir.ui.menu,name:stock_request_picking_type.menu_stock_request_order
 msgid "Stock Request Orders"
-msgstr ""
+msgstr "Ordens de Requisição de Estoque"
 
 #. module: stock_request_picking_type
 #: model:stock.picking.type,name:stock_request_picking_type.stock_request_order
 msgid "Stock Requests"
-msgstr ""
+msgstr "Requisições de Estoque"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Stock Requests To Do."
-msgstr ""
+msgstr "Requisições de Estoque A Fazer."
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Stock Requests in Progress."
-msgstr ""
+msgstr "Requisições de Estoque em Andamento."
 
 #. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_todo
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "To Do"
-msgstr ""
+msgstr "A Fazer"
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 msgid "To Process"
-msgstr ""
+msgstr "Para Processar"
 
 #. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__code
 msgid "Type of Operation"
-msgstr ""
+msgstr "Tipo de Operação"
 
 #. module: stock_request_picking_type
 #: selection:stock.picking.type,code:0
 msgid "Vendors"
-msgstr ""
-
+msgstr "Fornecedores"
