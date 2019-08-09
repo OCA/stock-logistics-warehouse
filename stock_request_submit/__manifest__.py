@@ -17,4 +17,5 @@
         'views/stock_request_views.xml',
     ],
     "installable": True,
+    'uninstall_hook': 'uninstall_hook',
 }
