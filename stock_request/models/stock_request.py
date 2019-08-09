@@ -7,10 +7,10 @@ from odoo.addons import decimal_precision as dp
 from odoo.tools import float_compare
 
 REQUEST_STATES = [
-    ('draft', 'Draft'),
-    ('open', 'In progress'),
-    ('done', 'Done'),
-    ('cancel', 'Cancelled')]
+    ('draft', _('Draft')),
+    ('open', _('In progress')),
+    ('done', _('Done')),
+    ('cancel', _('Cancelled'))]
 
 
 class StockRequest(models.Model):
@@ -18,6 +18,12 @@ class StockRequest(models.Model):
     _description = "Stock Request"
     _inherit = 'stock.request.abstract'
     _order = 'id desc'
+
+    def __get_request_states(self):
+        return REQUEST_STATES
+
+    def _get_request_states(self):
+        return self.__get_request_states()
 
     def _get_default_requested_by(self):
         return self.env['res.users'].browse(self.env.uid)
@@ -36,10 +42,11 @@ class StockRequest(models.Model):
     name = fields.Char(
         states={'draft': [('readonly', False)]}
     )
-    state = fields.Selection(selection=REQUEST_STATES, string='Status',
-                             copy=False, default='draft', index=True,
-                             readonly=True, track_visibility='onchange',
-                             )
+    state = fields.Selection(
+        selection=_get_request_states, string='Status',
+        copy=False, default='draft', index=True,
+        readonly=True, track_visibility='onchange',
+    )
     requested_by = fields.Many2one(
         'res.users', 'Requested by', required=True,
         track_visibility='onchange',
