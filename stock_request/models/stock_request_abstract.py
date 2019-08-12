@@ -158,6 +158,13 @@ class StockRequest(models.AbstractModel):
                   'same category than the default unit '
                   'of measure of the product'))
 
+    @api.constrains('product_qty')
+    def _check_qty(self):
+        for rec in self:
+            if rec.product_qty <= 0:
+                raise ValueError(_('Stock Request product quantity has to be'
+                                   ' strictly positive.'))
+
     @api.onchange('warehouse_id')
     def onchange_warehouse_id(self):
         """ Finds location id for changed warehouse. """

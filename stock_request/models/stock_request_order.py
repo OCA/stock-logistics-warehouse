@@ -4,12 +4,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError, AccessError
 
-REQUEST_STATES = [
-    ('draft', 'Draft'),
-    ('open', 'In progress'),
-    ('done', 'Done'),
-    ('cancel', 'Cancelled')]
-
 
 class StockRequestOrder(models.Model):
     _name = 'stock.request.order'
@@ -29,6 +23,12 @@ class StockRequestOrder(models.Model):
             res['location_id'] = warehouse.lot_stock_id.id
         return res
 
+    def __get_request_order_states(self):
+        return self.env['stock.request']._get_request_states()
+
+    def _get_request_order_states(self):
+        return self.__get_request_order_states()
+
     def _get_default_requested_by(self):
         return self.env['res.users'].browse(self.env.uid)
 
@@ -36,10 +36,11 @@ class StockRequestOrder(models.Model):
         'Name', copy=False, required=True, readonly=True,
         states={'draft': [('readonly', False)]},
         default='/')
-    state = fields.Selection(selection=REQUEST_STATES, string='Status',
-                             copy=False, default='draft', index=True,
-                             readonly=True, track_visibility='onchange',
-                             )
+    state = fields.Selection(
+        selection=_get_request_order_states,
+        string='Status', copy=False, default='draft', index=True,
+        readonly=True, track_visibility='onchange',
+    )
     requested_by = fields.Many2one(
         'res.users', 'Requested by', required=True,
         track_visibility='onchange',
@@ -301,7 +302,7 @@ class StockRequestOrder(models.Model):
                 stock_request_ids=[(0, 0, dict(
                     product_id=product.id,
                     product_uom_id=product.uom_id.id,
-                    product_uom_qty=0.0,
+                    product_uom_qty=1.0,
                     expected_date=expected,
                 )) for product in products]
             ))

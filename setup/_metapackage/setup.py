@@ -40,6 +40,7 @@ setuptools.setup(
         'odoo12-addon-stock_request_kanban',
         'odoo12-addon-stock_request_picking_type',
         'odoo12-addon-stock_request_purchase',
+        'odoo12-addon-stock_request_submit',
         'odoo12-addon-stock_request_tier_validation',
         'odoo12-addon-stock_secondary_unit',
         'odoo12-addon-stock_warehouse_calendar',

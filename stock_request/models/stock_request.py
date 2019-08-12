@@ -7,10 +7,10 @@ from odoo.addons import decimal_precision as dp
 from odoo.tools import float_compare
 
 REQUEST_STATES = [
-    ('draft', 'Draft'),
-    ('open', 'In progress'),
-    ('done', 'Done'),
-    ('cancel', 'Cancelled')]
+    ('draft', _('Draft')),
+    ('open', _('In progress')),
+    ('done', _('Done')),
+    ('cancel', _('Cancelled'))]
 
 
 class StockRequest(models.Model):
@@ -19,24 +19,42 @@ class StockRequest(models.Model):
     _inherit = 'stock.request.abstract'
     _order = 'id desc'
 
+    def __get_request_states(self):
+        return REQUEST_STATES
+
+    def _get_request_states(self):
+        return self.__get_request_states()
+
     def _get_default_requested_by(self):
         return self.env['res.users'].browse(self.env.uid)
+
+    @staticmethod
+    def _get_expected_date():
+        return fields.Datetime.now()
+
+    def _get_default_expected_date(self):
+        if self.order_id:
+            res = self.order_id.expected_date
+        else:
+            res = self._get_expected_date()
+        return res
 
     name = fields.Char(
         states={'draft': [('readonly', False)]}
     )
-    state = fields.Selection(selection=REQUEST_STATES, string='Status',
-                             copy=False, default='draft', index=True,
-                             readonly=True, track_visibility='onchange',
-                             )
+    state = fields.Selection(
+        selection=_get_request_states, string='Status',
+        copy=False, default='draft', index=True,
+        readonly=True, track_visibility='onchange',
+    )
     requested_by = fields.Many2one(
         'res.users', 'Requested by', required=True,
         track_visibility='onchange',
         default=lambda s: s._get_default_requested_by(),
     )
     expected_date = fields.Datetime(
-        'Expected Date', default=fields.Datetime.now, index=True,
-        required=True, readonly=True,
+        'Expected Date', default=lambda s: s._get_default_expected_date(),
+        index=True, required=True, readonly=True,
         states={'draft': [('readonly', False)]},
         help="Date when you expect to receive the goods.",
     )
@@ -244,6 +262,10 @@ class StockRequest(models.Model):
             'stock_request_id': self.id,
         }
 
+    def _skip_procurement(self):
+        return self.state != 'draft' or \
+            self.product_id.type not in ('consu', 'product')
+
     @api.multi
     def _action_launch_procurement_rule(self):
         """
@@ -257,10 +279,7 @@ class StockRequest(models.Model):
             'Product Unit of Measure')
         errors = []
         for request in self:
-            if (
-                request.state != 'draft' or
-                request.product_id.type not in ('consu', 'product')
-            ):
+            if request._skip_procurement():
                 continue
             qty = 0.0
             for move in request.move_ids.filtered(
