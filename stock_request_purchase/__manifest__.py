@@ -12,7 +12,7 @@
     "category": "Warehouse Management",
     "depends": [
         "stock_request",
-        "purchase",
+        "purchase_stock",
     ],
     "data": [
         "security/ir.model.access.csv",
