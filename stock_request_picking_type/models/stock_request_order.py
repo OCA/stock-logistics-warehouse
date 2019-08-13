@@ -4,13 +4,13 @@
 from odoo import api, fields, models
 
 
-class StockRequest(models.Model):
-    _inherit = 'stock.request'
+class StockRequestOrder(models.Model):
+    _inherit = 'stock.request.order'
 
     @api.model
     def _get_default_picking_type(self):
         return self.env['stock.picking.type'].search([
-            ('code', '=', 'stock_request'),
+            ('code', '=', 'stock_request_order'),
             ('warehouse_id.company_id', 'in',
              [self.env.context.get('company_id', self.env.user.company_id.id),
               False])],

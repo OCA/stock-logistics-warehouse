@@ -25,7 +25,7 @@ Stock Request Picking Type
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module adds stock requests within the Inventory app with a new operation type.
+This module adds stock request orders within the Inventory app with a new operation type.
 
 **Table of contents**
 
@@ -36,8 +36,8 @@ Usage
 =====
 
 * Go to Inventory
-* Click on the Stock Requests tile to process stock requests
-* You can also go to Inventory > Operations > Stock Requests
+* Click on the Stock Request Orders tile to process stock requests
+* You can also go to Inventory > Operations > Stock Request Orders
 
 Bug Tracker
 ===========
