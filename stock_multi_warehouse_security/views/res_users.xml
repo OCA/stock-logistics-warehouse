@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="priority" eval="30"/>
+        <field name="arch" type="xml">
+            <field name="warehouse_id" position="before">
+                <field name="warehouse_ids" widget="many2many_tags"
+                       groups="stock_multi_warehouse_security.group_multi_warehouse"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
