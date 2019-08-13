@@ -40,34 +40,29 @@ msgstr ""
 
 #. module: stock_request_picking_type
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Done"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
-msgid "Draft"
-msgstr ""
-
-#. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Expected Date"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Expected Date by Month"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Group By..."
 msgstr ""
 
 #. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_open
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "In Progress"
 msgstr ""
 
@@ -79,12 +74,12 @@ msgstr ""
 #. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_late
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Late"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "Late Stock Requests"
 msgstr ""
 
@@ -94,7 +89,7 @@ msgid "Manufacturing Operation"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_request__picking_type_id
+#: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_request_order__picking_type_id
 msgid "Operation Type"
 msgstr ""
 
@@ -104,13 +99,8 @@ msgid "Picking Type"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
-msgid "Product"
-msgstr ""
-
-#. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
-msgid "Search Stock Request"
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
+msgid "Search Stock Request Orders"
 msgstr ""
 
 #. module: stock_request_picking_type
@@ -119,38 +109,43 @@ msgid "Settings"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "State"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model:ir.model,name:stock_request_picking_type.model_stock_request
+#: model:ir.model,name:stock_request_picking_type.model_stock_request_order
 #: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
 #: selection:stock.picking.type,code:0
-msgid "Stock Request"
-msgstr ""
-
-#. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
-msgid "Stock Requesta in Progress."
+msgid "Stock Request Order"
 msgstr ""
 
 #. module: stock_request_picking_type
 #: model:ir.actions.act_window,name:stock_request_picking_type.action_picking_dashboard
-#: model:ir.actions.act_window,name:stock_request_picking_type.action_stock_request_form
-#: model:ir.ui.menu,name:stock_request_picking_type.menu_stock_request
-#: model:stock.picking.type,name:stock_request_picking_type.stock_request
+#: model:ir.actions.act_window,name:stock_request_picking_type.action_stock_request_order_form
+#: model:ir.ui.menu,name:stock_request_picking_type.menu_stock_request_order
+msgid "Stock Request Orders"
+msgstr ""
+
+#. module: stock_request_picking_type
+#: model:stock.picking.type,name:stock_request_picking_type.stock_request_order
 msgid "Stock Requests"
 msgstr ""
 
 #. module: stock_request_picking_type
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
-msgid "Stock Requests in draft."
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
+msgid "Stock Requests To Do."
+msgstr ""
+
+#. module: stock_request_picking_type
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
+msgid "Stock Requests in Progress."
 msgstr ""
 
 #. module: stock_request_picking_type
 #: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_todo
-#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.view_stock_request_order_filter
 msgid "To Do"
 msgstr ""
 
