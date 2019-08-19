@@ -53,6 +53,12 @@ class MrpProduction(models.Model):
             elif not pull:  # If there is no make_to_stock rule either
                 if mto_route and mto_route.id in [x.id for x in routes]:
                     move.procure_method = 'make_to_order'
+        moves_in_zero = self.move_raw_ids.filtered(
+            lambda m: m.product_uom_qty == 0.0)
+        if moves_in_zero:
+            moves_in_zero.write({'state': 'draft'})
+            moves_in_zero.unlink()
+
 
     @api.multi
     def _update_unit_factor(self):
