@@ -10,6 +10,7 @@ class MrpProduction(models.Model):
 
     @api.multi
     def _adjust_procure_method(self):
+        self.invalidate_cache()
         try:
             mto_route = self.env['stock.warehouse']._find_global_route(
                 'stock.route_warehouse0_mto', _('Make To Order'))
