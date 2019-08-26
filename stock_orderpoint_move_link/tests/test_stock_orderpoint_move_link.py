@@ -1,6 +1,6 @@
 # Copyright 2019 Eficent Business and IT Consulting Services S.L.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+import ast
 from odoo.tests.common import SavepointCase
 
 
@@ -16,6 +16,7 @@ class TestStockOrderpointMoveLink(SavepointCase):
         cls.route_obj = cls.env['stock.location.route']
         cls.group_obj = cls.env['procurement.group']
         cls.move_obj = cls.env['stock.move']
+        cls.picking_obj = cls.env['stock.picking']
 
         cls.warehouse = cls.env.ref('stock.warehouse0')
         cls.stock_loc = cls.env.ref('stock.stock_location_stock')
@@ -26,7 +27,7 @@ class TestStockOrderpointMoveLink(SavepointCase):
             'usage': 'internal',
             'location_id': cls.warehouse.view_location_id.id,
         })
-        test_route = cls.route_obj.create({
+        cls.test_route = cls.route_obj.create({
             'name': 'Stock -> Test 1',
             'product_selectable': True,
             'rule_ids': [(0, 0, {
@@ -45,7 +46,7 @@ class TestStockOrderpointMoveLink(SavepointCase):
             'usage': 'internal',
             'location_id': cls.warehouse.view_location_id.id,
         })
-        test_route_2 = cls.route_obj.create({
+        cls.test_route_2 = cls.route_obj.create({
             'name': 'Test 1 -> Test 2',
             'product_selectable': True,
             'rule_ids': [(0, 0, {
@@ -61,7 +62,7 @@ class TestStockOrderpointMoveLink(SavepointCase):
         })
 
         # Prepare Products:
-        routes = test_route_2 + test_route
+        routes = cls.test_route_2 + cls.test_route
         cls.product = cls.product_obj.create({
             'name': 'Test Product',
             'route_ids': [(6, 0, routes.ids)],
@@ -83,3 +84,12 @@ class TestStockOrderpointMoveLink(SavepointCase):
         move = self.move_obj.search([
             ('orderpoint_ids', '=', self.orderpoint_need_loc.id)])
         self.assertTrue(len(move), 2)
+
+    def test_02_stock_orderpoint_move_link_action_view(self):
+        sp_orderpoint = self.move_obj.search(
+            [('orderpoint_ids', 'in', self.orderpoint_need_loc.id)]).mapped(
+            'picking_id')
+        result = self.orderpoint_need_loc.action_view_stock_picking()
+        sp_action = self.picking_obj.search(
+            ast.literal_eval(result['domain']))
+        self.assertEquals(sp_orderpoint, sp_action)
