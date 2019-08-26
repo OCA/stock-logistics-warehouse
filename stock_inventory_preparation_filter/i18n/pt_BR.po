@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
-"PO-Revision-Date: 2018-06-21 14:03+0000\n"
+"PO-Revision-Date: 2019-08-26 16:01+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__empty_line_ids
@@ -44,7 +44,7 @@ msgstr "Criado em"
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__display_name
 msgid "Display Name"
-msgstr "Nome para Mostrar"
+msgstr "Exibir Nome"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
@@ -65,15 +65,13 @@ msgstr "Inventário"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory_line_empty
-#, fuzzy
-#| msgid "Inventory"
 msgid "Inventory Line Empty"
-msgstr "Inventário"
+msgstr "Linha Vazia do Inventário"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty____last_update
 msgid "Last Modified on"
-msgstr "Última atualização em"
+msgstr "Última Modificação em"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_uid
