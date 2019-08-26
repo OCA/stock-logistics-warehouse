@@ -4,7 +4,7 @@
 {
     "name": "Stock Orderpoint Move Link",
     "summary": "Link Reordering rules to stock moves",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.1.0",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Eficent, "
