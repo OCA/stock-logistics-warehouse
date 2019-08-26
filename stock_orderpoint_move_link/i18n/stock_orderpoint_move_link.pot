@@ -19,6 +19,11 @@ msgid "Linked Reordering Rules"
 msgstr ""
 
 #. module: stock_orderpoint_move_link
+#: model:ir.model,name:stock_orderpoint_move_link.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr ""
+
+#. module: stock_orderpoint_move_link
 #: model:ir.model,name:stock_orderpoint_move_link.model_stock_move
 msgid "Stock Move"
 msgstr ""
@@ -26,5 +31,10 @@ msgstr ""
 #. module: stock_orderpoint_move_link
 #: model:ir.model,name:stock_orderpoint_move_link.model_stock_rule
 msgid "Stock Rule"
+msgstr ""
+
+#. module: stock_orderpoint_move_link
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_move_link.view_warehouse_orderpoint_move_form
+msgid "Transfers"
 msgstr ""
 
