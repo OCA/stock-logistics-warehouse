@@ -4,7 +4,7 @@
 {
     "name": "Stock Orderpoint Purchase Link",
     "summary": "Link Reordering rules to purchase orders",
-    "version": "11.0.1.0.2",
+    "version": "11.0.1.1.0",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Eficent, "
