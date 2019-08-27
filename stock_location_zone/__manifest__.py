@@ -5,7 +5,7 @@
 {
     'name': 'Stock Location Zone',
     'version': '12.0.1.0.0',
-    'author': "BCIM, Okia, Odoo Community Association (OCA)",
+    'author': "BCIM, Okia, Camptocamp, Odoo Community Association (OCA)",
     'website': "https://github.com/OCA/stock-logistics-warehouse",
     'summary': "Add coordinate attributes on stock location. "
                "Define picking zone with links to picking type.",

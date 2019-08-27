@@ -17,7 +17,7 @@
             <tree string="Picking Zones" editable="bottom">
                 <field name="name"/>
                 <field name="code"/>
-                <field name="pick_type_id"/>
+                <field name="picking_type_id"/>
             </tree>
         </field>
     </record>
