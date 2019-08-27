@@ -72,7 +72,6 @@ class StockLocation(models.Model):
             # We should have the record's values in the cache at this
             # point. We must be cautious not to leak an environment through
             # relational fields.
-            # values = self._convert_to_cache(location._cache)
             location.name = template.format(**location._cache)
 
     @api.multi
