@@ -157,10 +157,12 @@ class TestStockRequest(common.TransactionCase):
             order.location_id, self.warehouse.lot_stock_id)
 
     def test_onchanges_order(self):
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -168,6 +170,7 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
         order = self.request_order.sudo(
@@ -203,7 +206,7 @@ class TestStockRequest(common.TransactionCase):
             order.picking_policy,
             order.stock_request_ids.picking_policy)
 
-        order.expected_date = fields.Date.today()
+        order.expected_date = fields.Datetime.now()
         order.onchange_expected_date()
         self.assertEqual(
             order.expected_date,
@@ -286,7 +289,7 @@ class TestStockRequest(common.TransactionCase):
     def test_stock_request_order_validations_01(self):
         """ Testing the discrepancy in warehouse_id between
         stock request and order"""
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.wh2.id,
@@ -309,7 +312,7 @@ class TestStockRequest(common.TransactionCase):
     def test_stock_request_order_validations_02(self):
         """ Testing the discrepancy in location_id between
         stock request and order"""
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
@@ -332,7 +335,7 @@ class TestStockRequest(common.TransactionCase):
     def test_stock_request_order_validations_03(self):
         """ Testing the discrepancy in requested_by between
         stock request and order"""
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
@@ -360,7 +363,7 @@ class TestStockRequest(common.TransactionCase):
         procurement_group = self.env['procurement.group'].create({
             'name': 'Procurement',
         })
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
@@ -384,7 +387,7 @@ class TestStockRequest(common.TransactionCase):
     def test_stock_request_order_validations_05(self):
         """ Testing the discrepancy in company between
         stock request and order"""
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.company_2.id,
             'warehouse_id': self.wh2.id,
@@ -407,7 +410,7 @@ class TestStockRequest(common.TransactionCase):
     def test_stock_request_order_validations_06(self):
         """ Testing the discrepancy in expected dates between
         stock request and order"""
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         child_expected_date = '2015-01-01'
         vals = {
             'company_id': self.company_2.id,
@@ -430,7 +433,7 @@ class TestStockRequest(common.TransactionCase):
     def test_stock_request_order_validations_07(self):
         """ Testing the discrepancy in picking policy between
         stock request and order"""
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
@@ -483,7 +486,7 @@ class TestStockRequest(common.TransactionCase):
             stock_request.action_confirm()
 
     def test_create_request_01(self):
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
@@ -629,7 +632,7 @@ class TestStockRequest(common.TransactionCase):
         self.assertEqual(stock_request_2.state, 'done')
 
     def test_cancel_request(self):
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
@@ -686,7 +689,7 @@ class TestStockRequest(common.TransactionCase):
         self.assertEqual(len(stock_request.sudo().move_ids), 2)
 
     def test_view_actions(self):
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
@@ -862,10 +865,12 @@ class TestStockRequest(common.TransactionCase):
         self.assertTrue(order.allow_virtual_location)
 
     def test_onchange_wh_no_effect_from_order(self):
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.virtual_loc.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -873,6 +878,7 @@ class TestStockRequest(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.virtual_loc.id,
+                'expected_date': expected_date,
             })]
         }
         order = self.request_order.sudo(
@@ -890,7 +896,7 @@ class TestStockRequest(common.TransactionCase):
         self.product.type = 'consu'
         product2.type = 'consu'
         product3.type = 'consu'
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
