@@ -62,9 +62,9 @@
                     <p><i class="fa fa-thumbs-down"/> Operation has been <b>rejected</b>.</p>
                 </div>
             </header>
-            <div name="button_box" position="inside">
-                <field name="review_ids" widget="review_popup" attrs="{'invisible':[('review_ids', '=', [])]}"/>
-            </div>
+            <xpath expr="//form/div[hasclass('oe_chatter')]" position="before">
+                <field name="review_ids" widget="tier_validation" attrs="{'invisible':[('review_ids', '=', [])]}"/>
+            </xpath>
         </field>
     </record>
 
