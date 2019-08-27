@@ -21,7 +21,7 @@ class StockLocation(models.Model):
         string='Picking zone')
 
     picking_type_id = fields.Many2one(
-        related='picking_zone_id.pick_type_id',
+        related='picking_zone_id.picking_type_id',
         help="Picking type for operations from this location",
         oldname='barcode_picking_type_id')
 
@@ -61,12 +61,28 @@ class StockLocation(models.Model):
             if not location.kind == 'bin':
                 continue
             area = location
-            while not area.location_name_format:
-                if not area.location_id:
-                    return
+            while area and not area.location_name_format:
                 area = area.location_id
-            location.name = area.location_name_format\
-                .format(**location.read())
+            if not area:
+                continue
+            template = area.location_name_format
+            # We don't want to use the full browse record as it would
+            # give too much access to internals for the users.
+            # We cannot use location.read() as we may have a NewId.
+            # We should have the record's values in the cache at this
+            # point. We must be cautious not to leak an environment through
+            # relational fields.
+            # values = self._convert_to_cache(location._cache)
+            location.name = template.format(**location._cache)
+
+    @api.multi
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        self.ensure_one()
+        default = dict(default or {})
+        if 'name' not in default:
+            default['name'] = _("%s (copy)") % (self.name)
+        return super().copy(default=default)
 
     _sql_constraints = [
         (
@@ -75,4 +91,3 @@ class StockLocation(models.Model):
             _('The location name must be unique'),
         )
     ]
-

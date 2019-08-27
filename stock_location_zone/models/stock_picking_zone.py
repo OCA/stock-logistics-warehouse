@@ -7,14 +7,15 @@ from odoo import fields, models
 
 class PickingZone(models.Model):
     _name = 'stock.picking.zone'
+    _description = "Stock Picking Zone"
 
     name = fields.Char('Name', required=True, translate=True)
     code = fields.Char('Code', required=True)
-    pick_type_id = fields.Many2one(
+    picking_type_id = fields.Many2one(
         'stock.picking.type',
         string='Pick Type',
         help="Picking type for operations from this location",
-        )
+    )
 
     _sql_constraints = [
         (
