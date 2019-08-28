@@ -74,7 +74,7 @@ class TestStockRequestPurchase(common.TransactionCase):
 
     def test_create_request_01(self):
         """Single Stock request with buy rule"""
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
