@@ -10,7 +10,7 @@ class TestStockRequestSubmit(test_stock_request.TestStockRequest):
         super(TestStockRequestSubmit, self).setUp()
 
     def test_stock_request_submit(self):
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
