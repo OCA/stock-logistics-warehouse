@@ -19,5 +19,6 @@
         'security/ir.model.access.csv',
     ],
     'installable': True,
+    'development_status': 'Alpha',
     'license': 'AGPL-3',
 }

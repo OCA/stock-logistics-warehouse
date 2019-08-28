@@ -1,10 +1,11 @@
 # Copyright 2017 Sylvain Van Hoof <svh@sylvainvh.be>
 # Copyright 2018-2019 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+# Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from psycopg2 import sql
 
-from odoo import _, api, exceptions, fields, models, SUPERUSER_ID
+from odoo import _, api, fields, models, SUPERUSER_ID
 from odoo.tools.sql import index_exists, _schema
 
 
@@ -37,8 +38,7 @@ class StockLocation(models.Model):
     kind = fields.Selection([
         ('zone', 'Picking Zone'),
         ('area', 'Area'),
-        ('bin', 'Bin'),
-        ],
+        ('bin', 'Bin')],
         string='Kind')
 
     picking_zone_id = fields.Many2one(
