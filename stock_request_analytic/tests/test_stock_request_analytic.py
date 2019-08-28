@@ -43,7 +43,7 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
         self.pizza.route_ids = [(6, 0, self.demand_route.ids)]
 
     def prepare_order_request_analytic(self, aa, company):
-        expected_date = fields.Date.today()
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': company.id,
             'warehouse_id': self.warehouse.id,
