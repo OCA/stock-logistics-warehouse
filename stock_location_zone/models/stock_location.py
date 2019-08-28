@@ -2,7 +2,32 @@
 # Copyright 2018-2019 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, exceptions, fields, models
+from psycopg2 import sql
+
+from odoo import _, api, exceptions, fields, models, SUPERUSER_ID
+from odoo.tools.sql import index_exists, _schema
+
+
+def create_unique_index_where(cr, indexname, tablename, expressions, where):
+    """Create the given unique index unless it exists."""
+    if index_exists(cr, indexname):
+        return
+
+    args = ', '.join(expressions)
+    # pylint: disable=sql-injection
+    cr.execute(
+        sql.SQL(
+            'CREATE UNIQUE INDEX {} ON {} ({}) WHERE {}').format(
+                sql.Identifier(indexname),
+                sql.Identifier(tablename),
+                sql.SQL(args),
+                sql.SQL(where),
+        )
+    )
+    _schema.debug(
+        "Table %r: created unique index %r (%s) WHERE {}",
+        tablename, indexname, args, where
+    )
 
 
 class StockLocation(models.Model):
@@ -85,27 +110,35 @@ class StockLocation(models.Model):
             default['name'] = _("%s (copy)") % (self.name)
         return super().copy(default=default)
 
-    @api.constrains('name', 'picking_zone_id', 'location_id')
-    def _check_location_zone_unique_name(self):
-        """Check that no location has same name for a zone"""
-        for location in self:
-            # find zone of the location in parents
-            current = location
-            zone = current.picking_zone_id
-            while current and not zone:
-                current = current.location_id
-                zone = current.picking_zone_id
-            if not zone:
-                continue
-            # find all locations in the same zone
-            zone_locs = self.search([('picking_zone_id', '=', zone.id)])
-            same_name_locs = self.search([
-                ('id', 'child_of', zone_locs.ids),
-                ('id', '!=', location.id),
-                ('name', '=', location.name),
-            ])
-            if same_name_locs:
-                raise exceptions.ValidationError(
-                    _('Another location with the name "%s" exists in the same'
-                      ' zone. Please use another name.') % (location.name,)
-                )
+    @api.model_cr
+    def init(self):
+        env = api.Environment(self._cr, SUPERUSER_ID, {})
+        self._init_zone_index(env)
+
+    def _init_zone_index(self, env):
+        """Add unique index on name per zone
+
+        We cannot use _sql_constraints because it doesn't support
+        WHERE conditions. We need to apply the unique constraint
+        only within the same zone, otherwise the constraint fails
+        even on demo data (locations created automatically for
+        warehouses).
+        """
+        index_name = 'stock_location_unique_name_zone_index'
+        create_unique_index_where(
+            env.cr, index_name, self._table,
+            ['name', 'picking_zone_id'],
+            'picking_zone_id IS NOT NULL'
+        )
+
+    @classmethod
+    def _init_constraints_onchanges(cls):
+        # As the unique index created in this model acts as a unique
+        # constraints but cannot be registered in '_sql_constraints'
+        # (it doesn't support WHERE clause), associate an error
+        # message manually (reproduce what _sql_constraints does).
+        key = 'unique_name_zone'
+        message = ('Another location with the same name exists in the same'
+                   ' zone. Please rename the location.')
+        cls.pool._sql_error[cls._table + '_' + key] = message
+        super()._init_constraints_onchanges()
