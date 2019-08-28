@@ -15,6 +15,7 @@
         <group string="Vertical Lift" name="vertical_lift"
                attrs="{'invisible': [('vertical_lift_kind', 'not in', ('shuttle', 'tray', 'cell'))]}">
           <field name="vertical_lift_kind"/>
+          <field name="cell_name_format" attrs="{'invisible': [('vertical_lift_kind', '!=', 'tray')]}"/>
           <field name="vertical_lift_tray_type_id"
                  attrs="{'invisible': [('vertical_lift_kind', '!=', 'tray')], 'required': [('vertical_lift_kind', '=', 'tray')]}"/>
           <field name="tray_matrix"

@@ -1,6 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from collections import defaultdict
 from odoo import _, api, exceptions, fields, models
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
@@ -32,6 +33,19 @@ class StockLocation(models.Model):
         help="Used to know if a cell of a Tray location is empty.",
     )
     tray_matrix = Serialized(string='Cells', compute='_compute_tray_matrix')
+    cell_name_format = fields.Char(
+        string='Name Format for Cells',
+        default=lambda self: self._default_cell_name_format(),
+        help="Cells sub-locations generated in a tray will be named"
+        " after this format. Replacement fields between curly braces are used"
+        " to inject positions. {x} will be replaced by the x position and"
+        " {y} by the y position. Complex formatting (such as padding, ...)"
+        " can be done using the format specification at "
+        " https://docs.python.org/2/library/string.html#formatstrings",
+    )
+
+    def _default_cell_name_format(self):
+        return 'x{x:0>2}y{y:0>2}'
 
     # TODO document hierarchy
     # Vertical Lift View
@@ -121,6 +135,13 @@ class StockLocation(models.Model):
                 trays_to_update = (
                     location.vertical_lift_tray_type_id.id != new_tray_type_id
                 )
+            # short-circuit this check if we already know that we have to
+            # update trays
+            if not trays_to_update and 'cell_name_format' in vals:
+                new_format = vals.get('cell_name_format')
+                trays_to_update = (
+                    location.cell_name_format != new_format
+                )
             super(StockLocation, location).write(vals)
             if trays_to_update:
                 self._update_tray_sublocations()
@@ -169,6 +190,11 @@ class StockLocation(models.Model):
                 cells[cell.posy - 1][cell.posx - 1] = 1
         return cells
 
+    def _format_tray_sublocation_name(self, x, y):
+        template = self.cell_name_format or self._default_cell_name_format()
+        # using format_map allow to have missing replacement strings
+        return template.format_map(defaultdict(str, x=x, y=y))
+
     @api.multi
     def _update_tray_sublocations(self):
         values = []
@@ -196,7 +222,7 @@ class StockLocation(models.Model):
             for row in range(1, tray_type.rows + 1):
                 for col in range(1, tray_type.cols + 1):
                     subloc_values = {
-                        'name': _('x{}y{}').format(col, row),
+                        'name': location._format_tray_sublocation_name(col, row),
                         'posx': col,
                         'posy': row,
                         'location_id': location.id,
