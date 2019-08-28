@@ -38,8 +38,8 @@ class StockLocation(models.Model):
         default=lambda self: self._default_cell_name_format(),
         help="Cells sub-locations generated in a tray will be named"
         " after this format. Replacement fields between curly braces are used"
-        " to inject positions. {x} will be replaced by the x position and"
-        " {y} by the y position. Complex formatting (such as padding, ...)"
+        " to inject positions. {x}, {y}, and {z} will be replaced by their"
+        " corresponding position. Complex formatting (such as padding, ...)"
         " can be done using the format specification at "
         " https://docs.python.org/2/library/string.html#formatstrings",
     )
@@ -145,6 +145,10 @@ class StockLocation(models.Model):
             super(StockLocation, location).write(vals)
             if trays_to_update:
                 self._update_tray_sublocations()
+            elif 'posz' in vals and location.vertical_lift_kind == 'tray':
+                # On initial generation (when tray_to_update is true),
+                # the sublocations are already generated with the pos z.
+                location.child_ids.write({'posz': vals['posz']})
         return True
 
     @api.constrains('active')
@@ -190,10 +194,10 @@ class StockLocation(models.Model):
                 cells[cell.posy - 1][cell.posx - 1] = 1
         return cells
 
-    def _format_tray_sublocation_name(self, x, y):
+    def _format_tray_sublocation_name(self, x, y, z):
         template = self.cell_name_format or self._default_cell_name_format()
         # using format_map allow to have missing replacement strings
-        return template.format_map(defaultdict(str, x=x, y=y))
+        return template.format_map(defaultdict(str, x=x, y=y, z=z))
 
     @api.multi
     def _update_tray_sublocations(self):
@@ -219,12 +223,17 @@ class StockLocation(models.Model):
                 continue
 
             # create accepts several records now
+            posz = location.posz or 0
             for row in range(1, tray_type.rows + 1):
                 for col in range(1, tray_type.cols + 1):
+                    cell_name = location._format_tray_sublocation_name(
+                        col, row, posz
+                    )
                     subloc_values = {
-                        'name': location._format_tray_sublocation_name(col, row),
+                        'name': cell_name,
                         'posx': col,
                         'posy': row,
+                        'posz': posz,
                         'location_id': location.id,
                         'company_id': location.company_id.id,
                     }

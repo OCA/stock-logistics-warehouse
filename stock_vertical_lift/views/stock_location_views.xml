@@ -32,6 +32,9 @@
       <field name="posy" position="attributes">
         <attribute name="attrs">{'readonly': [('vertical_lift_kind', '=', 'cell')]}</attribute>
       </field>
+      <field name="posz" position="attributes">
+        <attribute name="attrs">{'readonly': [('vertical_lift_kind', '=', 'cell')]}</attribute>
+      </field>
     </field>
   </record>
 
