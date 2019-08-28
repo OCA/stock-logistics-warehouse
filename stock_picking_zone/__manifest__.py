@@ -18,4 +18,5 @@
         'views/stock_picking_type_views.xml',
     ],
     'installable': True,
+    'development_status': 'Alpha',
 }
