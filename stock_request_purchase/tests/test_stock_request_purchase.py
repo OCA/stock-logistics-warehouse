@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
 from odoo.tests import common
+from odoo import fields
 
 
 class TestStockRequestPurchase(common.TransactionCase):
@@ -73,10 +74,12 @@ class TestStockRequestPurchase(common.TransactionCase):
 
     def test_create_request_01(self):
         """Single Stock request with buy rule"""
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -84,6 +87,7 @@ class TestStockRequestPurchase(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
 
@@ -187,10 +191,12 @@ class TestStockRequestPurchase(common.TransactionCase):
                          stock_request_2.product_uom_qty)
 
     def test_view_actions(self):
+        expected_date = fields.Datetime.now()
         vals = {
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
                 'product_uom_id': self.product.uom_id.id,
@@ -198,6 +204,7 @@ class TestStockRequestPurchase(common.TransactionCase):
                 'company_id': self.main_company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
             })]
         }
 
