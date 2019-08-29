@@ -302,6 +302,8 @@ class VerticalLiftShuttle(models.Model):
             self._domain_move_lines_to_do(), limit=1
         )
         self.current_move_line_id = next_move_line
+        # TODO use a state machine to define next steps and
+        # description?
         descr = (
             _('Scan New Destination Location')
             if next_move_line
