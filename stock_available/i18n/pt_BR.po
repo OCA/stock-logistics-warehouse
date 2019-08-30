@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-03 20:56+0000\n"
-"PO-Revision-Date: 2016-07-07 19:37+0000\n"
-"Last-Translator: Claudio Araujo Santos <claudioaraujosantos@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-"
-"logistics-warehouse-9-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2019-08-30 14:23+0000\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
+"OCA-stock-logistics-warehouse-9-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
@@ -28,14 +29,13 @@ msgstr "<span class=\"o_stat_text\">Disponível</span>"
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_form
-#, fuzzy
 msgid "<span class=\"o_stat_text\">Potential</span>"
-msgstr "<span class=\"o_stat_text\">Disponível</span>"
+msgstr "<span class=\"o_stat_text\">Potencial</span>"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
 msgid "Available to Promise:"
-msgstr "Disponível a prometer"
+msgstr "Disponível a prometer:"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product__immediately_usable_qty
@@ -56,14 +56,13 @@ msgstr ""
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_res_config_settings
-#, fuzzy
 msgid "Config Settings"
-msgstr "stock.config.settings"
+msgstr "Definições de configuração"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_sale
 msgid "Exclude goods already in sale quotations"
-msgstr ""
+msgstr "Excluir mercadorias já em cotações de venda"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_immediately
@@ -79,7 +78,7 @@ msgstr "Incluir o potencial de produção"
 #: model:ir.model.fields,field_description:stock_available.field_product_product__potential_qty
 #: model:ir.model.fields,field_description:stock_available.field_product_template__potential_qty
 msgid "Potential"
-msgstr ""
+msgstr "Potencial"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
@@ -97,6 +96,8 @@ msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand."
 msgstr ""
+"Quantidade deste produto que pode ser produzida usando os materiais já "
+"disponíveis."
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_template__potential_qty
@@ -105,6 +106,9 @@ msgid ""
 "at hand. If the product has several variants, this will be the biggest "
 "quantity that can be made for a any single variant."
 msgstr ""
+"Quantidade deste produto que pode ser produzida usando os materiais já "
+"disponíveis. Se o produto tiver várias variantes, essa será a maior "
+"quantidade que pode ser feita para uma única variante."
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_configuration
@@ -124,15 +128,14 @@ msgstr ""
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_product__immediately_usable_qty
-#, fuzzy
 msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs."
 msgstr ""
-"Estoque para este produto que pode ser proposto com segurança para a venda "
-"aos clientes.\n"
-"A definição deste valor pode ser configurado para atender às suas "
-"necessidades"
+"Estoque para este produto que pode ser proposto com segurança para venda aos "
+"clientes.\n"
+"A definição desse valor pode ser configurada para atender às suas "
+"necessidades."
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_mrp
@@ -160,7 +163,6 @@ msgstr ""
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_sale
-#, fuzzy
 msgid ""
 "This will subtract quantities from the sale quotations from the quantities "
 "available to promise.\n"
@@ -168,10 +170,11 @@ msgid ""
 "If the modules sale and sale_delivery_date are not installed, this will "
 "install them too"
 msgstr ""
-"Isto irá adicionar as quantidades de produtos que podem ser fabricados de "
-"imediato, para as quantidades disponíveis para prometer.\n"
-"Isso instala o stock_available_mrp módulo.\n"
-"Se o MRP módulo não está instalado, este irá instalar-lo também"
+"Isso subtrairá as quantidades das cotações de venda das quantidades "
+"disponíveis para promessa.\n"
+"Isso instala os módulos stock_available_sale.\n"
+"Se os módulos sale e sale_delivery_date não estiverem instalados, isso "
+"também os instalará"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__stock_available_mrp_based_on
