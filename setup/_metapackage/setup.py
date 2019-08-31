@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo12-addon-procurement_auto_create_group',
         'odoo12-addon-stock_account_change_qty_reason',
         'odoo12-addon-stock_available',
+        'odoo12-addon-stock_available_mrp',
         'odoo12-addon-stock_available_unreserved',
         'odoo12-addon-stock_change_qty_reason',
         'odoo12-addon-stock_cycle_count',
