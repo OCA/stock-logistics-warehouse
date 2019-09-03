@@ -20,14 +20,14 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: stock_available_mrp
-#: model:product.product,name:stock_available_mrp.product_product_9_white
-#: model:product.template,name:stock_available_mrp.product_product_9_white_product_template
-msgid "Apple Wireless Keyboard"
+#: model:ir.model.fields,field_description:stock_available_mrp.field_product_product__bom_id
+msgid "BOM"
 msgstr ""
 
 #. module: stock_available_mrp
-#: model:ir.model.fields,field_description:stock_available_mrp.field_product_product_bom_id
-msgid "Bill of Materials"
+#: model:product.product,name:stock_available_mrp.product_computer_desk_bolt_white
+#: model:product.template,name:stock_available_mrp.product_computer_desk_bolt_white_product_template
+msgid "Bolt"
 msgstr ""
 
 #. module: stock_available_mrp
@@ -36,21 +36,35 @@ msgid "Product"
 msgstr "产品"
 
 #. module: stock_available_mrp
-#: model:ir.model,name:stock_available_mrp.model_product_template
-msgid "Product Template"
-msgstr "产品模板"
-
-#. module: stock_available_mrp
 #: model:product.product,name:stock_available_mrp.product_kit_1a
 #: model:product.template,name:stock_available_mrp.product_kit_1a_product_template
-msgid "Self Build Kit"
+msgid "Table Kit"
 msgstr ""
 
 #. module: stock_available_mrp
 #: model:product.product,description:stock_available_mrp.product_kit_1a
 #: model:product.template,description:stock_available_mrp.product_kit_1a_product_template
-msgid "Self Build kit."
+msgid "Table kit"
 msgstr ""
+
+#. module: stock_available_mrp
+#: model:product.product,uom_name:stock_available_mrp.product_computer_desk_bolt_white
+#: model:product.product,uom_name:stock_available_mrp.product_kit_1a
+#: model:product.template,uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
+#: model:product.template,uom_name:stock_available_mrp.product_kit_1a_product_template
+msgid "Unit(s)"
+msgstr ""
+
+#. module: stock_available_mrp
+#: model:product.product,weight_uom_name:stock_available_mrp.product_computer_desk_bolt_white
+#: model:product.product,weight_uom_name:stock_available_mrp.product_kit_1a
+#: model:product.template,weight_uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
+#: model:product.template,weight_uom_name:stock_available_mrp.product_kit_1a_product_template
+msgid "kg"
+msgstr ""
+
+#~ msgid "Product Template"
+#~ msgstr "产品模板"
 
 #~ msgid "<span class=\"o_stat_text\">Potential</span>"
 #~ msgstr "<span class=\"o_stat_text\">潜在</span>"
