@@ -8,7 +8,7 @@ class PickingType(models.Model):
     _inherit = 'stock.picking.type'
 
     display_completion_info = fields.Boolean(
-        help='Inform operator of a completed order pick at processing and at'
+        help='Inform operator of a completed operation at processing and at'
              ' completion'
     )
 
@@ -20,9 +20,9 @@ class StockPicking(models.Model):
     completion_info = fields.Selection(
         [
             ('no', 'No'),
-            ('last_picking', 'Completion of this picking allows next pickings '
+            ('last_picking', 'Completion of this operation allows next operations '
                              'to be processed.'),
-            ('next_picking_ready', 'Next pickings are ready to be processed.')
+            ('next_picking_ready', 'Next operations are ready to be processed.')
         ],
         compute='_compute_completion_info')
 
