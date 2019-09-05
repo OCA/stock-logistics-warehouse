@@ -14,7 +14,7 @@ class StockLocation(models.Model):
     )
 
     def check_move_dest_constraint(self, line=None, product=None):
-        res = super().check_move_dest_constraint(product)
+        res = super().check_move_dest_constraint(line=line, product=product)
         if product:
             product_tags = product.product_storage_tag_ids
             if not product_tags:
