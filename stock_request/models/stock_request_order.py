@@ -201,6 +201,11 @@ class StockRequestOrder(models.Model):
 
     @api.multi
     def action_confirm(self):
+        if not self.procurement_group_id:
+            self.procurement_group_id = self.env['procurement.group'].create(
+                {'name': self.name,
+                 'move_type': 'direct'})
+            self.change_childs()
         self.mapped('stock_request_ids').action_confirm()
         self.write({'state': 'open'})
         return True
