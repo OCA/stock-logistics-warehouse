@@ -10,7 +10,7 @@ class StockLocation(models.Model):
 
     def check_move_dest_constraint(self, line=None, product=None):
         """Raise Validation error if not allowed"""
-        res = super().check_move_dest_constraint(line=line)
+        res = super().check_move_dest_constraint(line=line, product=product)
         existing_quant = self.env['stock.quant'].search([
             ('location_id', '=', self.id), ('quantity', '>', 0)
         ])
