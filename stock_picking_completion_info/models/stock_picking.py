@@ -9,7 +9,7 @@ class PickingType(models.Model):
 
     display_completion_info = fields.Boolean(
         help='Inform operator of a completed operation at processing and at'
-             ' completion'
+        ' completion'
     )
 
 
@@ -20,15 +20,22 @@ class StockPicking(models.Model):
     completion_info = fields.Selection(
         [
             ('no', 'No'),
-            ('last_picking', 'Completion of this operation allows next operations '
-                             'to be processed.'),
-            ('next_picking_ready', 'Next operations are ready to be processed.')
+            (
+                'last_picking',
+                'Completion of this operation allows next operations to be '
+                'processed.',
+            ),
+            (
+                'next_picking_ready',
+                'Next operations are ready to be processed.',
+            ),
         ],
-        compute='_compute_completion_info')
+        compute='_compute_completion_info',
+    )
 
     @api.depends(
         'picking_type_id.display_completion_info',
-        'move_lines.move_dest_ids.move_orig_ids.state'
+        'move_lines.move_dest_ids.move_orig_ids.state',
     )
     def _compute_completion_info(self):
         for picking in self:
@@ -43,9 +50,7 @@ class StockPicking(models.Model):
             depending_moves = picking.move_lines.mapped(
                 'move_dest_ids.picking_id.move_lines.move_orig_ids'
             )
-            if all(
-                m.state in ('done', 'cancel') for m in depending_moves
-            ):
+            if all(m.state in ('done', 'cancel') for m in depending_moves):
                 picking.completion_info = 'next_picking_ready'
                 continue
             # If there aren't any depending move from another picking that is

@@ -17,7 +17,9 @@ class TestStockPickingCompletionInfo(SavepointCase):
         cls.customers_location = cls.env.ref('stock.stock_location_customers')
         cls.output_location = cls.env.ref('stock.stock_location_output')
         cls.packing_location = cls.env.ref('stock.location_pack_zone')
-        cls.stock_shelf_location = cls.env.ref('stock.stock_location_components')
+        cls.stock_shelf_location = cls.env.ref(
+            'stock.stock_location_components'
+        )
         cls.stock_shelf_2_location = cls.env.ref('stock.stock_location_14')
 
         cls.out_type = cls.warehouse.out_type_id
