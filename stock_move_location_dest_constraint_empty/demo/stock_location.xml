@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="location_shelf_3" model="stock.location">
+        <field name="name">Shelf 3</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+    </record>
+</odoo>
