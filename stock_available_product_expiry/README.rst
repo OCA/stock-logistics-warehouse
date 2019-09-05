@@ -29,6 +29,11 @@ Product Expiry Available
 * Take into account the expired production lots into the computation of the available quantities.
 * Scraps the products with a past removal date on the production lots.
 
+.. IMPORTANT::
+   This is an alpha version, the data model and design can change at any time without warning.
+   Only for development or testing purpose, do not use in production.
+   `More details on development status <https://odoo-community.org/page/development-status>`_
+
 **Table of contents**
 
 .. contents::
