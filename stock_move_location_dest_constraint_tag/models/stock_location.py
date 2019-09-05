@@ -19,12 +19,17 @@ class StockLocation(models.Model):
             product_tags = product.product_storage_tag_ids
             if not product_tags:
                 product_tags = product.categ_id.product_storage_tag_ids
-            if product_tags and not product_tags <= self.product_storage_tag_ids:
+            if (
+                product_tags and
+                not product_tags <= self.product_storage_tag_ids
+            ):
                 raise ValidationError(_(
                     'Tags mismatch between product tags requirements %s (%s)'
                     ' and location tags allowed %s (%s)' % (
                         product.name,
-                        ','.join(product.product_storage_tag_ids.mapped('name')),
+                        ','.join(
+                            product.product_storage_tag_ids.mapped('name')
+                        ),
                         self.name,
                         ','.join(self.product_storage_tag_ids.mapped('name'))
                     )
