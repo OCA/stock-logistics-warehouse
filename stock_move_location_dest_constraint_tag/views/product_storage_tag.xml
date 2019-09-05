@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="product_storage_tag_tree_view" model="ir.ui.view">
+        <field name="name">product.storage.tag.tree</field>
+        <field name="model">product.storage.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Storage Tags" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_storage_tag_action" model="ir.actions.act_window">
+        <field name="name">Storage Tags</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.storage.tag</field>
+        <field name="view_mode">tree</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <menuitem id="menu_product_storage_tag_action"
+        action="product_storage_tag_action"
+        parent="stock.menu_product_in_config_stock"/>
+</odoo>

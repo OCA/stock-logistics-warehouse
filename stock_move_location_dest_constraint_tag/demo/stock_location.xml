@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="stock.location_refrigerator_small" model="stock.location">
+        <field name="product_storage_tag_ids" eval="[(6,0,[ref('tag_cold')])]" />
+        <field name="bypass_constraints" eval="False" />
+    </record>
+    <record id="location_freezer_dangerous" model="stock.location">
+        <field name="name">Freezer for dangerous goods</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock.stock_location_14"/>
+        <field name="product_storage_tag_ids" eval="[(6,0,[ref('tag_cold'), ref('tag_dangerous')])]" />
+    </record>
+    <record id="location_bin_acids" model="stock.location">
+        <field name="name">Acids Bin</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock.stock_location_components"/>
+        <field name="product_storage_tag_ids" eval="[(6,0,[ref('tag_liquid'), ref('tag_dangerous')])]" />
+    </record>
+    <record id="location_bin_dangerous" model="stock.location">
+        <field name="name">Dangerous Bin</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock.stock_location_components"/>
+        <field name="product_storage_tag_ids" eval="[(6,0,[ref('tag_dangerous')])]" />
+    </record>
+</odoo>

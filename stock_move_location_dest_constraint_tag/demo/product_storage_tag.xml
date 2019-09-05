@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="tag_dangerous" model="product.storage.tag">
+        <field name="sequence">10</field>
+        <field name="name">Dangerous</field>
+    </record>
+    <record id="tag_cold" model="product.storage.tag">
+        <field name="sequence">20</field>
+        <field name="name">Cold</field>
+    </record>
+    <record id="tag_hot" model="product.storage.tag">
+        <field name="sequence">30</field>
+        <field name="name">Hot</field>
+    </record>
+    <record id="tag_liquid" model="product.storage.tag">
+        <field name="sequence">40</field>
+        <field name="name">Liquid</field>
+    </record>
+</odoo>

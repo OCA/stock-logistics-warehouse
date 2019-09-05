@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="product_product_sulfuric_acid" model="product.product">
+        <field name="name">Sulfuric Acid</field>
+        <field name="categ_id" ref="product_category_acid"/>
+        <field name="standard_price">9.0</field>
+        <field name="list_price">10.0</field>
+        <field name="type">product</field>
+        <field name="uom_id" ref="uom.product_uom_litre"/>
+        <field name="uom_po_id" ref="uom.product_uom_litre"/>
+    </record>
+    <record id="product_product_phosphoric_acid" model="product.product">
+        <field name="name">Phosphoric Acid</field>
+        <field name="categ_id" ref="product_category_acid"/>
+        <field name="standard_price">9.0</field>
+        <field name="list_price">10.0</field>
+        <field name="type">product</field>
+        <field name="uom_id" ref="uom.product_uom_litre"/>
+        <field name="uom_po_id" ref="uom.product_uom_litre"/>
+    </record>
+
+    <record id="product_product_ammonium_nitrate" model="product.product">
+        <field name="name">Ammonium Nitrate</field>
+        <field name="categ_id" ref="product_category_dangerous"/>
+        <field name="standard_price">9.0</field>
+        <field name="list_price">10.0</field>
+        <field name="type">product</field>
+        <field name="uom_id" ref="uom.product_uom_litre"/>
+        <field name="uom_po_id" ref="uom.product_uom_litre"/>
+        <field name="product_storage_tag_ids" eval="[(6,0,[ref('tag_dangerous'), ref('tag_cold')])]" />
+    </record>
+    <record id="product_product_tnt" model="product.product">
+        <field name="name">TNT</field>
+        <field name="categ_id" ref="product_category_dangerous"/>
+        <field name="standard_price">18.0</field>
+        <field name="list_price">20.0</field>
+        <field name="type">product</field>
+        <field name="uom_id" ref="uom.product_uom_gram"/>
+        <field name="uom_po_id" ref="uom.product_uom_gram"/>
+    </record>
+
+    <record id="product_product_ice_cream" model="product.product">
+        <field name="name">Ice cream</field>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="standard_price">2.0</field>
+        <field name="list_price">2.5</field>
+        <field name="type">product</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="product_storage_tag_ids" eval="[(6,0,[ref('tag_cold')])]" />
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="product_category_acid" model="product.category">
+        <field name="parent_id" ref="product.product_category_all"/>
+        <field name="name">Acids</field>
+        <field name="product_storage_tag_ids" eval="[(6,0,[ref('tag_liquid'), ref('tag_dangerous')])]" />
+    </record>
+    <record id="product_category_dangerous" model="product.category">
+        <field name="parent_id" ref="product.product_category_all"/>
+        <field name="name">Dangerous</field>
+        <field name="product_storage_tag_ids" eval="[(6,0,[ref('tag_dangerous')])]" />
+    </record>
+
+</odoo>
