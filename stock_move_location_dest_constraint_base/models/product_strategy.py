@@ -28,7 +28,9 @@ class FixedPutAwayStrategy(models.Model):
             filtered_putaways = self.browse()
             for put in putaway_strats:
                 try:
-                    put.location_id.check_move_dest_constraint(product=product)
+                    put.fixed_location_id.check_move_dest_constraint(
+                        product=product
+                    )
                 except ValidationError:
                     continue
                 filtered_putaways |= put
