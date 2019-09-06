@@ -129,7 +129,9 @@ class TestStockMovePutawayABC(SavepointCase):
         # Sofa product is office category
         # office category has an ABC putaway strategy to B
         # Bin B is set as inactive so it must go into Bin C
+        # Bin C is set as inactive so it must go into Bin A
         self.bin_b_location.active = False
+        self.bin_c_location.active = False
         replenish_wiz = self.env['product.replenish'].create({
             'product_id': self.product_sofa.id,
             'product_tmpl_id': self.product_sofa.product_tmpl_id.id,
@@ -149,5 +151,5 @@ class TestStockMovePutawayABC(SavepointCase):
         self.assertEqual(generated_move.state, 'assigned')
         self.assertEqual(
             generated_move.move_line_ids.location_dest_id,
-            self.bin_c_location
+            self.bin_a_location
         )

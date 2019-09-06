@@ -67,6 +67,7 @@ class ABCPutAwayStrategy(models.Model):
     category_id = fields.Many2one('product.category', 'Product Category')
     abc_priority = fields.Selection(
         ABC_SELECTION,
+        string='ABC Priority',
         required=True,
     )
     sequence = fields.Integer(

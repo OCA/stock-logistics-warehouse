@@ -6,6 +6,9 @@
         <field name="model">product.putaway</field>
         <field name="arch" type="xml">
             <field name="fixed_location_ids" position="after">
+                <p class="oe_grey">
+                    The rules defined by fixed location will be applied before the rules defined by ABC classification.
+                </p>
                 <field name="product_abc_strategy_ids" colspan="4" nolabel="1">
                     <tree editable="bottom">
                         <field name="sequence" widget='handle'/>

@@ -10,5 +10,5 @@ class StockLocation(models.Model):
     # TODO Check if we want to define this only on locations without children
     #  or if filtering those in validate_abc_location is enough
     abc_classification = fields.Selection(
-        ABC_SELECTION,
+        ABC_SELECTION, strinng='ABC Classification'
     )
