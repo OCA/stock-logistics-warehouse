@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="product_category_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.category.form.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="stock.product_category_form_view_inherit" />
+        <field name="arch" type="xml">
+            <field name="removal_strategy_id" position="before">
+                <field name="fixed_putaway_strategy_ids" context="{'default_category_id': active_id, 'default_product_id': False}">
+                    <tree>
+                        <field name="putaway_id" />
+                        <field name="fixed_location_id" />
+                    </tree>
+                    <form>
+                        <group>
+                            <field name="putaway_id" />
+                            <field name="fixed_location_id" />
+                            <field name="category_id" readonly="1" />
+                        </group>
+                    </form>
+                </field>
+            </field>
+        </field>
+    </record>
+</odoo>
