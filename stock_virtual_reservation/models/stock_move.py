@@ -1,74 +1,63 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models
+from odoo import api, fields, models
 from odoo.osv import expression
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    def _virtual_quantity_domain(
-        self,
-        location_id,
-        lot_id=None,
-        package_id=None,
-        owner_id=None,
-        strict=True,
-    ):
+    virtual_reserved_qty = fields.Float(
+        "Virtual Reserved Quantity",
+        compute="_compute_virtual_reserved_qty",
+        help="Quantity to be reserved by older operations that do not have"
+        " a real reservation yet",
+    )
+
+    # TODO does it make sense to have the 'virtual reserved qty' on product
+    # alongside other quantities?
+    @api.depends()
+    def _compute_virtual_reserved_qty(self):
+        for move in self:
+            if not move._should_compute_virtual_reservation():
+                move.virtual_reserved_qty = 0.
+                continue
+            # TODO verify where we should check the quantity for (full
+            # warehouse?)
+            available = move.product_id.qty_available
+            move.virtual_reserved_qty = max(
+                min(
+                    available - move._virtual_reserved_qty(), self.product_qty
+                ),
+                0.,
+            )
+
+    def _should_compute_virtual_reservation(self):
+        return (
+            self.picking_code == 'outgoing'
+            and not self.product_id.type == "consu"
+            and not self.location_id.should_bypass_reservation()
+        )
+
+    def _virtual_quantity_domain(self, location_id=None):
+        states = ("draft", "confirmed", "partially_available", "waiting")
         domain = [
-            ("state", "in", ("draft", "confirmed", "partially_available")),
+            ("state", "in", states),
             ("product_id", "=", self.product_id.id),
+            # FIXME searchable? (might need to write an optimized SQL here)
+            ("picking_code", "=", "outgoing"),
+            # TODO easier way to customize date field to use
             ("date", "<=", self.date),
         ]
-
-        def augment(domain, field_name, value, operator="="):
-            domain = domain[:]
-            if value:
-                fragment = (field_name, operator, value.id)
-                domain = expression.AND([[fragment], domain])
-            return domain
-
-        def augment_s(domain, field_name, value):
-            domain = domain[:]
-            fragment = (field_name, "=", value.id if value else False)
-            domain = expression.AND([[fragment], domain])
-            return domain
-
-        if not strict:
-            domain = augment(domain, "lot_id", lot_id)
-            domain = augment(domain, "package_id", package_id)
-            domain = augment(domain, "owner_id", owner_id)
-            domain = augment(
-                domain, "location_id", owner_id, operator="child_of"
-            )
-        else:
-            domain = augment_s(domain, "lot_id", lot_id)
-            domain = augment_s(domain, "package_id", package_id)
-            domain = augment_s(domain, "owner_id", owner_id)
-            domain = augment_s(domain, "location_id", location_id)
+        # TODO priority?
         return domain
 
-    def _update_reserved_quantity(
-        self,
-        need,
-        available_quantity,
-        location_id,
-        lot_id=None,
-        package_id=None,
-        owner_id=None,
-        strict=True,
-    ):
+    def _virtual_reserved_qty(self, location_id=None):
         previous_moves = self.search(
             expression.AND(
                 [
-                    self._virtual_quantity_domain(
-                        location_id,
-                        lot_id=lot_id,
-                        package_id=package_id,
-                        owner_id=owner_id,
-                        strict=strict,
-                    ),
+                    self._virtual_quantity_domain(location_id=location_id),
                     [("id", "!=", self.id)],
                 ]
             )
@@ -80,7 +69,26 @@ class StockMove(models.Model):
                 )
             )
         )
-        available_quantity = max(available_quantity - virtual_reserved, 0.)
+        return virtual_reserved
+
+    def _update_reserved_quantity(
+        self,
+        need,
+        available_quantity,
+        location_id,
+        lot_id=None,
+        package_id=None,
+        owner_id=None,
+        strict=True,
+    ):
+        # TODO how to ensure this is done before any other override of the
+        # method...
+        if self._should_compute_virtual_reservation():
+            virtual_reserved = self._virtual_reserved_qty(
+                location_id=location_id
+            )
+            available_quantity = max(available_quantity - virtual_reserved, 0.)
+
         return super()._update_reserved_quantity(
             need,
             available_quantity,
