@@ -9,8 +9,8 @@ class ABCPutAwayStrategy(models.Model):
     _inherit = 'stock.abc.putaway.strat'
 
     @api.multi
-    def validate_abc_location(self, locations):
-        res = super().validate_abc_location(locations)
+    def validate_abc_locations(self, locations):
+        res = super().validate_abc_locations(locations)
         product = None
         if self.product_id:
             product = self.product_id
