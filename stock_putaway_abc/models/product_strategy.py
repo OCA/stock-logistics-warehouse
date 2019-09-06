@@ -3,7 +3,11 @@
 from odoo import api, models, fields
 
 
+ABC_SELECTION = [('a', 'A'), ('b', 'B'), ('c', 'C')]
+
+
 class PutAwayStrategy(models.Model):
+
     _inherit = 'product.putaway'
 
     # TODO PR to add this field to odoo core ?
@@ -52,10 +56,7 @@ class PutAwayStrategy(models.Model):
 class ABCPutAwayStrategy(models.Model):
 
     _name = 'stock.abc.putaway.strat'
-
-    @api.model
-    def _get_abc_priority_selection(self):
-        return [('a', 'A'), ('b', 'B'), ('c', 'C')]
+    _description = 'ABC Chaotic putaway'
 
     product_id = fields.Many2one('product.product', 'Product')
     putaway_id = fields.Many2one(
@@ -65,7 +66,7 @@ class ABCPutAwayStrategy(models.Model):
     )
     category_id = fields.Many2one('product.category', 'Product Category')
     abc_priority = fields.Selection(
-        _get_abc_priority_selection(),
+        ABC_SELECTION,
         required=True,
     )
     sequence = fields.Integer(
@@ -85,14 +86,14 @@ class ABCPutAwayStrategy(models.Model):
         return False
 
     @api.multi
-    def validate_abc_location(self, locations):
+    def validate_abc_locations(self, locations):
         """Return locations without children or locations, to be inherited to
         add validation rules"""
         self.ensure_one()
         no_children_locations = locations.filtered(lambda l: not l.child_ids)
         return no_children_locations or locations
 
-    @api.mutli
+    @api.multi
     def find_abc_location(self):
         self.ensure_one()
         validated_location = self.env['stock.location']
@@ -102,7 +103,7 @@ class ABCPutAwayStrategy(models.Model):
             children_locations = self.env['stock.location'].search(
                 [
                     ('abc_classification', '=', actual_priority),
-                    ('id', 'childof', parent_locations.ids)
+                    ('id', 'child_of', parent_locations.ids),
                 ]
             )
             if not children_locations:

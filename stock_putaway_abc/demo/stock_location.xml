@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="location_bin_a" model="stock.location">
+        <field name="name">Bin A</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock.stock_location_components"/>
+        <field name="abc_classification">a</field>
+    </record>
+    <record id="location_bin_b" model="stock.location">
+        <field name="name">Bin B</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock.stock_location_components"/>
+        <field name="abc_classification">b</field>
+    </record>
+    <record id="location_bin_c" model="stock.location">
+        <field name="name">Bin C</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="stock.stock_location_14"/>
+        <field name="abc_classification">c</field>
+    </record>
+</odoo>

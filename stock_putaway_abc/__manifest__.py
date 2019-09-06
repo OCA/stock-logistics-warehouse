@@ -19,4 +19,8 @@
         "views/stock_location.xml",
         "views/product_strategy.xml",
     ],
+    "demo": [
+        "demo/stock_location.xml",
+        "demo/product_strategy.xml",
+    ],
 }

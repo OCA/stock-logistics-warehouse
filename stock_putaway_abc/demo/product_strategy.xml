@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="product_putaway_wh_stock" model="product.putaway">
+        <field name="name">Stock putaways</field>
+    </record>
+    <record id="abc_putaway_category_office" model="stock.abc.putaway.strat">
+        <field name="putaway_id" ref="product_putaway_wh_stock" />
+        <field name="category_id" ref="product.product_category_5" />
+        <field name="abc_priority">b</field>
+    </record>
+    <record id="abc_putaway_product_flipover" model="stock.abc.putaway.strat">
+        <field name="putaway_id" ref="product_putaway_wh_stock" />
+        <field name="product_id" ref="product.product_product_20" />
+        <field name="abc_priority">a</field>
+    </record>
+</odoo>
