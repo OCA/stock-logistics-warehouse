@@ -4,9 +4,9 @@ from odoo import api, models
 from odoo.exceptions import ValidationError
 
 
-class ABCPutAwayStrategy(models.Model):
+class StockPutawayRule(models.Model):
 
-    _inherit = 'stock.abc.putaway.strat'
+    _inherit = 'stock.putaway.rule'
 
     @api.multi
     def validate_abc_locations(self, locations):
