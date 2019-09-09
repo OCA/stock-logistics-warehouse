@@ -12,7 +12,7 @@
     "application": False,
     "installable": True,
     "depends": [
-        "stock",
+        "stock_putaway_rule",
     ],
     "data": [
         "data/stock_location.xml",
