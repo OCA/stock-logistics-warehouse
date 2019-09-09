@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="product_category_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.category.form.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button string="Putaway Rules"
+                        class="oe_stat_button"
+                        icon="fa-random" name="%(category_open_putaway)d" type="action"
+                        groups="stock.group_stock_multi_locations"/>
+            </div>
+        </field>
+    </record>
+
+    <record id="product_variant_easy_edit_view_inherit" model="ir.ui.view">
+        <field name="name">product.product.view.form.easy.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
+        <field name="arch" type="xml">
+            <field name="id" position="after">
+                <div class="oe_button_box" name="button_box">
+                    <button string="Putaway Rules" type="object"
+                        name="action_view_related_putaway_rules"
+                        class="oe_stat_button" icon="fa-random" groups="stock.group_stock_multi_locations"
+                        attrs="{'invisible': [('type', '=', 'service')]}"
+                        context="{'invisible_handle': True, 'single_product': True}"/>
+                </div>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_normal_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <button name="toggle_active" position="before">
+                <button string="Putaway Rules" type="object"
+                    name="action_view_related_putaway_rules"
+                    class="oe_stat_button" icon="fa-random" groups="stock.group_stock_multi_locations"
+                    attrs="{'invisible': [('type', '=', 'service')]}"
+                    context="{'invisible_handle': True, 'single_product': True}"/>
+            </button>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_template_only_form_view_inherit">
+        <field name="name">product.template.product.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <button name="toggle_active" position="before">
+                <button string="Putaway Rules" type="object"
+                    name="action_view_related_putaway_rules"
+                    class="oe_stat_button" icon="fa-random" groups="stock.group_stock_multi_locations"
+                    attrs="{'invisible': [('type', '=', 'service')]}"
+                    context="{
+                        'invisible_handle': True,
+                        'single_product': product_variant_count == 1,
+                    }"/>
+            </button>
+        </field>
+    </record>
+</odoo>
