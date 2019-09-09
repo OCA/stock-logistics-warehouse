@@ -1,69 +1,26 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo import api, models, fields
+from odoo import api, models, fields, _
+from odoo.exceptions import UserError
 
 
 ABC_SELECTION = [('a', 'A'), ('b', 'B'), ('c', 'C')]
 
 
-class PutAwayStrategy(models.Model):
+class StockPutawayRuleAbc(models.Model):
 
-    _inherit = 'product.putaway'
-
-    # TODO PR to add this field to odoo core ?
-    location_ids = fields.One2many('stock.location', 'putaway_strategy_id')
-    product_abc_strategy_ids = fields.One2many(
-        'stock.abc.putaway.strat',
-        'putaway_id',
-        domain=[('product_id', '!=', False)],
-        copy=True,
-    )
-    category_abc_strategy_ids = fields.One2many(
-        'stock.abc.putaway.strat',
-        'putaway_id',
-        domain=[('category_id', '!=', False)],
-        copy=True,
-    )
-
-    def putaway_apply(self, product):
-        location = super().putaway_apply(product)
-        if location:
-            return location
-        abc_putaway = self._get_abc_putaway_rule(product)
-        if abc_putaway:
-            return abc_putaway.find_abc_location()
-        return self.env['stock.location']
-
-    def _get_abc_putaway_rule(self, product):
-        if self.product_abc_strategy_ids:
-            put_away = self.product_abc_strategy_ids.filtered(
-                lambda x: x.product_id == product
-            )
-            if put_away:
-                return put_away[0]
-        if self.category_abc_strategy_ids:
-            categ = product.categ_id
-            while categ:
-                put_away = self.category_abc_strategy_ids.filtered(
-                    lambda x: x.category_id == categ
-                )
-                if put_away:
-                    return put_away[0]
-                categ = categ.parent_id
-        return self.env['stock.location']
-
-
-class ABCPutAwayStrategy(models.Model):
-
-    _name = 'stock.abc.putaway.strat'
+    _name = 'stock.putaway.rule.abc'
     _description = 'ABC Chaotic putaway'
 
+    def _default_location_id(self):
+        if self.env.context.get('active_model') == 'stock.location':
+            return self.env.context.get('active_id')
+
     product_id = fields.Many2one('product.product', 'Product')
-    putaway_id = fields.Many2one(
-        'product.putaway',
-        'Put Away Method',
-        required=True
-    )
+    location_in_id = fields.Many2one(
+        'stock.location', 'When product arrives in', check_company=True,
+        domain="[('child_ids', '!=', False), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
+        default=_default_location_id, required=True, ondelete='cascade')
     category_id = fields.Many2one('product.category', 'Product Category')
     abc_priority = fields.Selection(
         ABC_SELECTION,
@@ -75,6 +32,28 @@ class ABCPutAwayStrategy(models.Model):
         help="Give to the more specialized category, a higher priority to have"
              " them in top of the list."
     )
+    company_id = fields.Many2one(
+        'res.company', 'Company', required=True,
+        default=lambda s: s.env.company.id, index=True
+    )
+
+    @api.onchange('location_in_id')
+    def _onchange_location_in(self):
+        if self.location_out_id:
+            child_location_count = self.env['stock.location'].search_count([
+                ('id', '=', self.location_out_id.id),
+                ('id', 'child_of', self.location_in_id.id),
+                ('id', '!=', self.location_in_id.id),
+            ])
+            if not child_location_count:
+                self.location_out_id = None
+
+    def write(self, vals):
+        if 'company_id' in vals:
+            for rule in self:
+                if rule.company_id.id != vals['company_id']:
+                    raise UserError(_("Changing the company of this record is forbidden at this point, you should rather archive it and create a new one."))
+        return super().write(vals)
 
     @api.model
     def _next_abc_priority(self, priority):

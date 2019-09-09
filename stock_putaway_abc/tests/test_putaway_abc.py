@@ -18,11 +18,6 @@ class TestStockMovePutawayABC(SavepointCase):
         cls.vendors_location = cls.env.ref('stock.stock_location_suppliers')
         cls.stock_location = cls.env.ref('stock.stock_location_stock')
 
-        cls.stock_putaway = cls.env.ref(
-            'stock_putaway_abc.product_putaway_wh_stock'
-        )
-        cls.stock_location.write({'putaway_strategy_id': cls.stock_putaway.id})
-
         cls.bin_a_location = cls.env.ref('stock_putaway_abc.location_bin_a')
         cls.bin_b_location = cls.env.ref('stock_putaway_abc.location_bin_b')
         cls.bin_c_location = cls.env.ref('stock_putaway_abc.location_bin_c')
