@@ -13,12 +13,11 @@ class StockLocation(models.Model):
     abc_classification = fields.Selection(
         ABC_SELECTION, strinng='ABC Classification'
     )
-    putaway_rule_abc_ids = fields.One2many(
-        'stock.putaway.rule.abc', 'location_in_id', 'Putaway Rules'
-    )
 
     def _get_putaway_strategy(self, product):
-        location = super()._get_putaway_strategy(product)
+        location = super(
+            StockLocation, self.with_context(_putaway_method='fixed')
+        )._get_putaway_strategy(product)
         if location:
             return location
         abc_putaway = self._get_putaway_strategy_abc(product)
@@ -31,8 +30,9 @@ class StockLocation(models.Model):
         putaway_location = self.env['stock.location']
         while current_location and not putaway_location:
             # Looking for a putaway about the product.
-            putaway_rules = self.putaway_rule_abc_ids.filtered(
-                lambda x: x.product_id == product)
+            putaway_rules = self.putaway_rule_ids.filtered(
+                lambda x: x.product_id == product and x.method == 'abc'
+            )
             if putaway_rules:
                 putaway_location = putaway_rules[0].find_abc_location()
             # If not product putaway found, we're looking with category so.
@@ -40,7 +40,8 @@ class StockLocation(models.Model):
                 categ = product.categ_id
                 while categ:
                     putaway_rules = self.putaway_rule_abc_ids.filtered(
-                        lambda x: x.category_id == categ)
+                        lambda x: x.category_id == categ and x.method == 'abc'
+                    )
                     if putaway_rules:
                         putaway_location = putaway_rules[0].find_abc_location()
                         break

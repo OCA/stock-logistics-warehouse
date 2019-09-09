@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="abc_putaway_category_office" model="stock.putaway.rule.abc">
+    <record id="abc_putaway_category_office" model="stock.putaway.rule">
         <field name="location_in_id" ref="stock.stock_location_stock" />
         <field name="category_id" ref="product.product_category_5" />
+        <field name="method">abc</field>
         <field name="abc_priority">b</field>
     </record>
-    <record id="abc_putaway_product_flipover" model="stock.putaway.rule.abc">
+    <record id="abc_putaway_product_flipover" model="stock.putaway.rule">
         <field name="location_in_id" ref="stock.stock_location_stock" />
         <field name="product_id" ref="product.product_product_20" />
+        <field name="method">abc</field>
         <field name="abc_priority">a</field>
     </record>
 </odoo>
