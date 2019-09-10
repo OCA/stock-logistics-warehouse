@@ -24,6 +24,9 @@
                 <div class="alert alert-warning" attrs="{'invisible': [('completion_info', '!=', 'last_picking')]}" role="alert">
                     <field name="completion_info" nolabel="1" />
                 </div>
+                <div class="alert alert-primary" attrs="{'invisible': [('completion_info', '!=', 'full_order_picking')]}" role="alert">
+                    <field name="completion_info" nolabel="1" />
+                </div>
             </xpath>
         </field>
     </record>

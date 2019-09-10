@@ -22,13 +22,18 @@ class StockPicking(models.Model):
             ('no', 'No'),
             (
                 'last_picking',
-                'Completion of this operation allows next operations to be '
-                'processed.',
+                'Last picking: Completion of this operation allows next '
+                'operations to be processed.',
             ),
             (
                 'next_picking_ready',
                 'Next operations are ready to be processed.',
             ),
+            (
+                'full_order_picking',
+                'Full order picking: You are processing a full order picking '
+                'that will allow next operation to be processed'
+            )
         ],
         compute='_compute_completion_info',
     )
@@ -50,8 +55,15 @@ class StockPicking(models.Model):
             depending_moves = picking.move_lines.mapped(
                 'move_dest_ids.picking_id.move_lines.move_orig_ids'
             )
+            # If all the depending moves are done or canceled then next picking
+            # is ready to be processed
             if all(m.state in ('done', 'cancel') for m in depending_moves):
                 picking.completion_info = 'next_picking_ready'
+                continue
+            # If all the depending moves are the moves on the actual picking
+            # then it's a full order and next picking is ready to be processed
+            if depending_moves == picking.move_lines:
+                picking.completion_info = 'full_order_picking'
                 continue
             # If there aren't any depending move from another picking that is
             # not done, then actual picking is the last to process
