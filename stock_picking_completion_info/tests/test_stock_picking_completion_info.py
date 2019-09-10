@@ -134,12 +134,12 @@ class TestStockPickingCompletionInfo(SavepointCase):
         self.assertEqual(pick_move_1.state, 'confirmed')
         self.assertEqual(pick_move_2.state, 'confirmed')
         self.assertEqual(pick_order.state, 'confirmed')
-        self.assertEqual(pick_order.completion_info, 'last_picking')
+        self.assertEqual(pick_order.completion_info, 'full_order_picking')
         pick_order.action_assign()
         self.assertEqual(pick_move_1.state, 'assigned')
         self.assertEqual(pick_move_2.state, 'assigned')
         self.assertEqual(pick_order.state, 'assigned')
-        self.assertEqual(pick_order.completion_info, 'last_picking')
+        self.assertEqual(pick_order.completion_info, 'full_order_picking')
         wiz = self.env['stock.immediate.transfer'].create(
             {'pick_ids': [(4, pick_order.id)]}
         )
@@ -223,12 +223,12 @@ class TestStockPickingCompletionInfo(SavepointCase):
         self.assertEqual(pick_move_1.state, 'confirmed')
         self.assertEqual(pick_move_2.state, 'confirmed')
         self.assertEqual(pick_order.state, 'confirmed')
-        self.assertEqual(pick_order.completion_info, 'last_picking')
+        self.assertEqual(pick_order.completion_info, 'full_order_picking')
         pick_order.action_assign()
         self.assertEqual(pick_move_1.state, 'assigned')
         self.assertEqual(pick_move_2.state, 'assigned')
         self.assertEqual(pick_order.state, 'assigned')
-        self.assertEqual(pick_order.completion_info, 'last_picking')
+        self.assertEqual(pick_order.completion_info, 'full_order_picking')
         # Process partially to create backorder
         pick_move_1.move_line_ids.qty_done = 1.0
         pick_move_2.move_line_ids.qty_done = \
