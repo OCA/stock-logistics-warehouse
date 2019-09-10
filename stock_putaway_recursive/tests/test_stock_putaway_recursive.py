@@ -16,7 +16,7 @@ class TestStockPutawayRecursive(SavepointCase):
         cls.shelf2_location = cls.env.ref('stock.stock_location_14')
         cls.refri_location = cls.env.ref('stock.location_refrigerator_small')
 
-        # Define putaway from Stock to Stock/Shelf 1
+        # Define putaway from Stock to Stock/Shelf 2
         stock_putaway = cls.env['product.putaway'].create({
             'name': 'stock putaway',
         })
@@ -24,19 +24,6 @@ class TestStockPutawayRecursive(SavepointCase):
             'putaway_strategy_id': stock_putaway.id
         })
         stock_putaway.write({
-            'product_location_ids': [(0, 0, {
-                'product_id': cls.product_flipover.id,
-                'fixed_location_id': cls.shelf1_location.id,
-            })]
-        })
-        # Define putaway from Stock/Shelf 1 to Stock/Shelf 2
-        shelf1_putaway = cls.env['product.putaway'].create({
-            'name': 'shelf1 putaway',
-        })
-        cls.shelf1_location.write({
-            'putaway_strategy_id': shelf1_putaway.id
-        })
-        shelf1_putaway.write({
             'product_location_ids': [(0, 0, {
                 'product_id': cls.product_flipover.id,
                 'fixed_location_id': cls.shelf2_location.id,
