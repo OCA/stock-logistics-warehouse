@@ -15,7 +15,6 @@
         "stock_putaway_rule"
     ],
     "data": [
-        "security/ir.model.access.csv",
         "views/stock_location.xml",
         "views/product_strategy.xml",
     ],
