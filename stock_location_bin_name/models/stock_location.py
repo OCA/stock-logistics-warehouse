@@ -16,6 +16,20 @@ class StockLocation(models.Model):
              "'{area}-{corridor:0>2}.{rack:0>3}"
              ".{level:0>2}'")
 
+    area = fields.Char(
+        'Area',
+        compute='_compute_area',
+        store=True,
+    )
+
+    @api.depends('name', 'location_kind', 'location_id.area')
+    def _compute_area(self):
+        for location in self:
+            if location.location_kind == 'area':
+                location.area = location.name
+            else:
+                location.area = location.location_id.area
+
     @api.multi
     @api.onchange('corridor', 'row', 'rack', 'level',
                   'posx', 'posy', 'posz')
