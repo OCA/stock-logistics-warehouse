@@ -1,5 +1,5 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
-
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 """Allow forcing reservations of quants in a location (or children)
 
 When the context key "gather_in_location_id" is passed, it will look

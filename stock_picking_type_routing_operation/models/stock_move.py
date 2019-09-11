@@ -1,5 +1,5 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
-
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from itertools import chain
 from odoo import models
 
@@ -9,18 +9,16 @@ class StockMove(models.Model):
 
     def _action_assign(self):
         super()._action_assign()
-        if not self.env.context.get('exclude_apply_zone'):
-            moves = self._split_per_zone()
-            moves._apply_move_location_zone()
+        if not self.env.context.get('exclude_apply_routing_operation'):
+            moves = self._split_per_routing_operation()
+            moves._apply_move_location_routing_operation()
 
-    def _split_per_zone(self):
+    def _split_per_routing_operation(self):
         move_to_assign_ids = set()
         new_move_per_location = {}
         for move in self:
             if move.state not in ('assigned', 'partially_available'):
                 continue
-
-            pick_type_model = self.env['stock.picking.type']
 
             # Group move lines per source location, some may need an additional
             # operations while others not. Store the number of products to
@@ -31,39 +29,42 @@ class StockMove(models.Model):
                 location = move_line.location_id
                 move_lines[location] = sum(move_line.mapped('product_uom_qty'))
 
-            # We'll split the move to have one move per different zones where
+            # We'll split the move to have one move per different location where
             # we have to take products
-            zone_quantities = {}
+            routing_quantities = {}
             for source_location, qty in move_lines.items():
-                zone = pick_type_model._find_zone_for_location(source_location)
-                zone_quantities.setdefault(zone, 0.0)
-                zone_quantities[zone] += qty
+                routing_picking_type = \
+                    source_location._find_picking_type_for_routing_operation()
+                routing_quantities.setdefault(routing_picking_type, 0.0)
+                routing_quantities[routing_picking_type] += qty
 
-            if len(zone_quantities) == 1:
-                # The whole quantity can be taken from only one zone (a
-                # non-zone being equal to a zone here), nothing to split.
+            if len(routing_quantities) == 1:
+                # The whole quantity can be taken from only one location (an
+                # empty routing picking type being equal to one location here), nothing to split.
                 continue
 
             move._do_unreserve()
             move_to_assign_ids.add(move.id)
-            zone_location = zone.default_location_src_id
-            for zone, qty in zone_quantities.items():
-                # if zone is False-ish, we take in a location which is
+            for picking_type, qty in routing_quantities.items():
+                # if picking type is empty, we don't need a new move
                 # not a zone
-                if zone:
-                    # split returns the same move if the qty is the same
+                if picking_type:
+                    routing_location = picking_type.default_location_src_id
+                    # if we have a picking type, split returns the same move if the qty is the same
                     new_move_id = move._split(qty)
-                    new_move_per_location.setdefault(zone_location.id, [])
-                    new_move_per_location[zone_location.id].append(new_move_id)
+                    new_move_per_location.setdefault(routing_location.id, [])
+                    new_move_per_location[routing_location.id].append(
+                        new_move_id
+                    )
 
-        # it is important to assign the zones first
+        # it is important to assign the routed moves first
         for location_id, new_move_ids in new_move_per_location.items():
             new_moves = self.browse(new_move_ids)
             new_moves.with_context(
-                # Prevent to call _apply_move_location_zone, will be called
+                # Prevent to call _apply_move_location_routing_operation, will be called
                 # when all lines are processed.
-                exclude_apply_zone=True,
-                # Force reservation of quants in the zone they were
+                exclude_apply_routing_operation=True,
+                # Force reservation of quants in the location they were
                 # reserved in at the origin (so we keep the same quantities
                 # at the same places)
                 gather_in_location_id=location_id,
@@ -78,33 +79,33 @@ class StockMove(models.Model):
         ))
         return self + new_moves
 
-    def _apply_move_location_zone(self):
+    def _apply_move_location_routing_operation(self):
         for move in self:
             if move.state not in ('assigned', 'partially_available'):
                 continue
-
-            pick_type_model = self.env['stock.picking.type']
 
             # Group move lines per source location, some may need an additional
             # operations while others not. Store the number of products to
             # take from each location, so we'll be able to split the move
             # if needed.
-            # At this point, we should not have lines with different zones,
-            # they have been split in _split_per_zone(), so we can take the
-            # first one
+            # At this point, we should not have lines with different source locations,
+            # they have been split in _split_per_routing_operation(), so we
+            # can take the first one
             source = move.move_line_ids[0].location_id
-            zone = pick_type_model._find_zone_for_location(source)
-            if not zone:
+            picking_type = source._find_picking_type_for_routing_operation()
+            if not picking_type:
                 continue
-            if (move.picking_type_id == zone and
-                    move.location_dest_id == zone.default_location_dest_id):
+            if (
+                move.picking_type_id == picking_type and
+                move.location_dest_id == picking_type.default_location_dest_id
+            ):
                 # already done
                 continue
 
             move._do_unreserve()
             move.write({
-                'location_dest_id': zone.default_location_dest_id.id,
-                'picking_type_id': zone.id,
+                'location_dest_id': picking_type.default_location_dest_id.id,
+                'picking_type_id': picking_type.id,
             })
             move._insert_middle_moves()
             move._assign_picking()

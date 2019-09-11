@@ -3,7 +3,7 @@
 from odoo.tests import common
 
 
-class TestPickingZone(common.SavepointCase):
+class TestPickingTypeRoutingOperation(common.SavepointCase):
 
     @classmethod
     def setUpClass(cls):
@@ -56,15 +56,17 @@ class TestPickingZone(common.SavepointCase):
             'padding': 5,
             'company_id': cls.wh.company_id.id,
         })
-        cls.pick_type_zone = cls.env['stock.picking.type'].create({
-            'name': 'Zone',
+        cls.pick_type_routing_op = cls.env['stock.picking.type'].create({
+            'name': 'Routing operation',
             'code': 'internal',
             'use_create_lots': False,
             'use_existing_lots': True,
             'default_location_src_id': cls.location_hb.id,
             'default_location_dest_id': cls.location_handover.id,
-            'is_zone': True,
             'sequence_id': picking_type_sequence.id,
+        })
+        cls.location_hb.write({
+            'routing_operation_picking_type_id': cls.pick_type_routing_op.id
         })
 
     def _create_pick_ship(self, wh, products=None):
@@ -156,7 +158,7 @@ class TestPickingZone(common.SavepointCase):
         move.move_line_ids.qty_done = qty
         move.picking_id.action_done()
 
-    def test_change_location_to_zone(self):
+    def test_change_location_to_routing_operation(self):
         pick_picking, customer_picking = self._create_pick_ship(
             self.wh, [(self.product1, 10)]
         )
@@ -173,7 +175,9 @@ class TestPickingZone(common.SavepointCase):
         self.assert_src_highbay_1_2(ml)
         self.assert_dest_handover(ml)
 
-        self.assertEqual(ml.picking_id.picking_type_id, self.pick_type_zone)
+        self.assertEqual(
+            ml.picking_id.picking_type_id, self.pick_type_routing_op
+        )
 
         self.assert_src_stock(move_a)
         self.assert_dest_handover(move_a)
@@ -266,7 +270,9 @@ class TestPickingZone(common.SavepointCase):
         self.assert_src_highbay_1_2(ml)
         self.assert_dest_handover(ml)
         # this is a new HO picking
-        self.assertEqual(ml.picking_id.picking_type_id, self.pick_type_zone)
+        self.assertEqual(
+            ml.picking_id.picking_type_id, self.pick_type_routing_op
+        )
         self.assertEqual(ml.state, 'assigned')
 
         # this one stays in the PICK/
@@ -391,7 +397,9 @@ class TestPickingZone(common.SavepointCase):
         self.assert_src_highbay_1_2(ml)
         self.assert_dest_handover(ml)
         # this is a new HO picking
-        self.assertEqual(ml.picking_id.picking_type_id, self.pick_type_zone)
+        self.assertEqual(
+            ml.picking_id.picking_type_id, self.pick_type_routing_op
+        )
         self.assertEqual(ml.state, 'assigned')
 
         # the split move is waiting for 'move_ho'

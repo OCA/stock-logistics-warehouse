@@ -3,8 +3,7 @@
 
   <record id="stock_location_highbay_demo" model="stock.location">
     <field name="name">Highbay</field>
-    <field name="location_id" model="stock.location"
-           eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+    <field name="location_id" ref="stock.stock_location_stock"/>
   </record>
   <record id="stock_location_highbay_a_demo" model="stock.location">
     <field name="name">Bay A</field>
@@ -21,8 +20,7 @@
 
   <record id="stock_location_handover_demo" model="stock.location">
     <field name="name">Handover</field>
-    <field name="location_id" model="stock.location"
-           eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+    <field name="location_id" ref="stock.stock_location_stock"/>
   </record>
 
 </odoo>

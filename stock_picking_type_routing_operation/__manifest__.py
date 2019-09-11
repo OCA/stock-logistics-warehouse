@@ -15,7 +15,7 @@
         'demo/stock_picking_type_demo.xml',
     ],
     'data': [
-        'views/stock_picking_type_views.xml',
+        'views/stock_location.xml',
     ],
     'installable': True,
     'development_status': 'Alpha',

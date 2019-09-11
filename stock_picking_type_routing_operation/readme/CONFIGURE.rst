@@ -4,7 +4,7 @@ In Inventory Settings, you must have:
  * Multi-Warehouses
  * Multi-Step Routes
 
-Create an operation type and activate the "Is Zone" checkbox.
+On stock location, create an "Routing operation" operation type.
 The default destination location will be the destination location
 of the new operation inserted when a move has a source location which
-is a child of the type's source location.
+is a child of the location.
