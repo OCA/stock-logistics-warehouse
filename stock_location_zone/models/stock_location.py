@@ -40,12 +40,6 @@ class StockLocation(models.Model):
              '* Other: any other location',
     )
 
-    area = fields.Char(
-        'Area',
-        compute='_compute_area',
-        store=True,
-    )
-
     _sql_constraints = [
         'name_zone_unique',
         'EXCLUDE (name WITH =), (zone_location_id WITH=) '
@@ -95,14 +89,6 @@ class StockLocation(models.Model):
             else:
                 location.zone_location_id = \
                     location.location_id.zone_location_id
-
-    @api.depends('name', 'location_kind', 'location_id.area')
-    def _compute_area(self):
-        for location in self:
-            if location.location_kind == 'area':
-                location.area = location.name
-            else:
-                location.area = location.location_id.area
 
     @api.multi
     @api.returns('self', lambda value: value.id)
