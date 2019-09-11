@@ -48,7 +48,8 @@ class StockLocation(models.Model):
 
     _sql_constraints = [
         'name_zone_unique',
-        'unique(name, zone_location_id)',
+        'EXCLUDE (name WITH =), (zone_location_id WITH=) '
+        'WHERE (zone_location_id IS NOT NULL)',
         'Another location with the same name exists in the same zone. '
         'Please rename the location.',
     ]
