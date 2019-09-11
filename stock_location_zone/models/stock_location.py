@@ -3,32 +3,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from psycopg2 import sql
-
-from odoo import _, api, fields, models, SUPERUSER_ID
-from odoo.tools.sql import index_exists, _schema
-
-
-def create_unique_index_where(cr, indexname, tablename, expressions, where):
-    """Create the given unique index unless it exists."""
-    if index_exists(cr, indexname):
-        return
-
-    args = ', '.join(expressions)
-    # pylint: disable=sql-injection
-    cr.execute(
-        sql.SQL(
-            'CREATE UNIQUE INDEX {} ON {} ({}) WHERE {}').format(
-                sql.Identifier(indexname),
-                sql.Identifier(tablename),
-                sql.SQL(args),
-                sql.SQL(where),
-        )
-    )
-    _schema.debug(
-        "Table %r: created unique index %r (%s) WHERE {}",
-        tablename, indexname, args, where
-    )
+from odoo import api, fields, models
 
 
 class StockLocation(models.Model):
@@ -70,6 +45,13 @@ class StockLocation(models.Model):
         compute='_compute_area',
         store=True,
     )
+
+    _sql_constraints = [
+        'name_zone_unique',
+        'unique(name, zone_location_id)',
+        'Another location with the same name exists in the same zone. '
+        'Please rename the location.',
+    ]
 
     @api.depends('is_zone', 'usage', 'location_id.usage', 'zone_location_id',
                  'child_ids')
@@ -120,36 +102,3 @@ class StockLocation(models.Model):
                 location.area = location.name
             else:
                 location.area = location.location_id.area
-
-    @api.model_cr
-    def init(self):
-        env = api.Environment(self._cr, SUPERUSER_ID, {})
-        self._init_zone_index(env)
-
-    def _init_zone_index(self, env):
-        """Add unique index on name per zone
-
-        We cannot use _sql_constraints because it doesn't support
-        WHERE conditions. We need to apply the unique constraint
-        only within the same zone, otherwise the constraint fails
-        even on demo data (locations created automatically for
-        warehouses).
-        """
-        index_name = 'stock_location_unique_name_zone_index'
-        create_unique_index_where(
-            env.cr, index_name, self._table,
-            ['name', 'picking_zone_id'],
-            'picking_zone_id IS NOT NULL'
-        )
-
-    @classmethod
-    def _init_constraints_onchanges(cls):
-        # As the unique index created in this model acts as a unique
-        # constraints but cannot be registered in '_sql_constraints'
-        # (it doesn't support WHERE clause), associate an error
-        # message manually (reproduce what _sql_constraints does).
-        key = 'unique_name_zone'
-        message = ('Another location with the same name exists in the same'
-                   ' zone. Please rename the location.')
-        cls.pool._sql_error[cls._table + '_' + key] = message
-        super()._init_constraints_onchanges()
