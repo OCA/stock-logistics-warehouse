@@ -10,7 +10,7 @@ class StockLocation(models.Model):
     _inherit = 'stock.location'
 
     is_zone = fields.Boolean(
-        string='Is a zone location?',
+        string='Is a Zone Location?',
         help='Mark to define this location as a zone',
     )
 
@@ -40,13 +40,13 @@ class StockLocation(models.Model):
              '* Other: any other location',
     )
 
-    _sql_constraints = [
+    _sql_constraints = [(
         'name_zone_unique',
-        'EXCLUDE (name WITH =), (zone_location_id WITH=) '
-        'WHERE (zone_location_id IS NOT NULL)',
-        'Another location with the same name exists in the same zone. '
-        'Please rename the location.',
-    ]
+        'EXCLUDE (name WITH =, zone_location_id WITH =)'
+        ' WHERE (zone_location_id IS NOT NULL)',
+        'Another location with the same name exists in the same zone.'
+        ' Please rename the location.'
+    )]
 
     @api.depends('is_zone', 'usage', 'location_id.usage', 'zone_location_id',
                  'child_ids')
@@ -74,7 +74,7 @@ class StockLocation(models.Model):
             if (
                 location.usage == 'internal'
                 and location.zone_location_id
-                and not location.child_ids
+                and location.child_ids
             ):
                 location.location_kind = 'area'
                 continue

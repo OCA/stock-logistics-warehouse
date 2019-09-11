@@ -12,7 +12,6 @@
             <field name="usage" position="after">
                 <field name="location_kind" />
                 <field name="zone_location_id" />
-                <field name="area" />
             </field>
         </field>
     </record>
