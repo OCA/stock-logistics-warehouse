@@ -1,6 +1,8 @@
 # list the OCA project dependencies, one per line
 # add a github url if you need a forked version
 account-analytic
+stock-logistics-warehouse https://github.com/grindtildeath/stock-logistics-warehouse 12.0_add_stock_location_attribute
+stock-logistics-warehouse https://github.com/grindtildeath/stock-logistics-warehouse 12.0_rework_stock_location_zone
 product-attribute
 server-ux
 web
