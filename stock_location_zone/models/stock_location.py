@@ -34,81 +34,92 @@ def create_unique_index_where(cr, indexname, tablename, expressions, where):
 class StockLocation(models.Model):
     _inherit = 'stock.location'
 
-    # FIXME: add in selection: shuttle, tray (module vertical lift)
-    kind = fields.Selection([
-        ('zone', 'Picking Zone'),
-        ('area', 'Area'),
-        ('bin', 'Bin')],
-        string='Kind')
+    is_zone = fields.Boolean(
+        string='Is a zone location?',
+        help='Mark to define this location as a zone',
+    )
 
-    picking_zone_id = fields.Many2one(
-        'stock.picking.zone',
-        string='Picking zone',
+    zone_location_id = fields.Many2one(
+        'stock.location',
+        string='Location zone',
+        compute='_compute_zone_location_id',
+        store=True,
         index=True,
     )
 
-    picking_type_id = fields.Many2one(
-        related='picking_zone_id.picking_type_id',
-        help="Picking type for operations from this location",
-        oldname='barcode_picking_type_id')
+    location_kind = fields.Selection(
+        [
+            ('zone', 'Zone'),
+            ('area', 'Area'),
+            ('bin', 'Bin'),
+            ('stock', 'Main Stock'),
+            ('other', 'Other'),
+        ],
+        string='Location Kind',
+        compute='_compute_location_kind',
+        help='Group location according to their kinds:'
+             '* Zone: locations that are flagged as being zones'
+             '* Area: locations with children that are part of a zone'
+             '* Bin: locations without children that are part of a zone'
+             '* Stock: internal locations whose parent is a view'
+             '* Other: any other location',
+    )
 
     area = fields.Char(
         'Area',
-        compute='_compute_area', store=True,
-        oldname='zone')
+        compute='_compute_area',
+        store=True,
+    )
 
-    @api.depends('name', 'kind', 'location_id.area')
+    @api.depends('is_zone', 'usage', 'location_id.usage', 'zone_location_id',
+                 'child_ids')
+    def _compute_location_kind(self):
+        for location in self:
+            if location.is_zone:
+                location.location_kind = 'zone'
+                continue
+            # Internal locations whose parent is view are main stocks
+            if (
+                location.usage == 'internal'
+                and location.location_id.usage == 'view'
+            ):
+                location.location_kind = 'stock'
+                continue
+            # Internal locations having a zone and no children are bins
+            if (
+                location.usage == 'internal'
+                and location.zone_location_id
+                and not location.child_ids
+            ):
+                location.location_kind = 'bin'
+                continue
+            # Internal locations having a zone and children are areas
+            if (
+                location.usage == 'internal'
+                and location.zone_location_id
+                and not location.child_ids
+            ):
+                location.location_kind = 'area'
+                continue
+            # All the rest are other locations
+            location.location_kind = 'other'
+
+    @api.depends('is_zone', 'location_id.zone_location_id')
+    def _compute_zone_location_id(self):
+        for location in self:
+            if location.is_zone:
+                location.zone_location_id = location
+            else:
+                location.zone_location_id = \
+                    location.location_id.zone_location_id
+
+    @api.depends('name', 'location_kind', 'location_id.area')
     def _compute_area(self):
         for location in self:
-            if location.kind == 'area':
+            if location.location_kind == 'area':
                 location.area = location.name
             else:
                 location.area = location.location_id.area
-
-    corridor = fields.Char('Corridor', help="Street")
-    row = fields.Char('Row', help="Side in the street")
-    rack = fields.Char('Rack', oldname='shelf', help="House number")
-    level = fields.Char('Level', help="Height on the shelf")
-    posx = fields.Integer('Box (X)')
-    posy = fields.Integer('Box (Y)')
-    posz = fields.Integer('Box (Z)')
-
-    location_name_format = fields.Char(
-        'Location Name Format',
-        help="Format string that will compute the name of the location. "
-             "Use location fields. Example: "
-             "'{area}-{corridor:0>2}.{rack:0>3}"
-             ".{level:0>2}'")
-
-    @api.multi
-    @api.onchange('corridor', 'row', 'rack', 'level',
-                  'posx', 'posy', 'posz')
-    def _compute_name(self):
-        for location in self:
-            if not location.kind == 'bin':
-                continue
-            area = location
-            while area and not area.location_name_format:
-                area = area.location_id
-            if not area:
-                continue
-            template = area.location_name_format
-            # We don't want to use the full browse record as it would
-            # give too much access to internals for the users.
-            # We cannot use location.read() as we may have a NewId.
-            # We should have the record's values in the cache at this
-            # point. We must be cautious not to leak an environment through
-            # relational fields.
-            location.name = template.format(**location._cache)
-
-    @api.multi
-    @api.returns('self', lambda value: value.id)
-    def copy(self, default=None):
-        self.ensure_one()
-        default = dict(default or {})
-        if 'name' not in default:
-            default['name'] = _("%s (copy)") % (self.name)
-        return super().copy(default=default)
 
     @api.model_cr
     def init(self):
