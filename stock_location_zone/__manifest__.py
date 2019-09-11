@@ -7,16 +7,13 @@
     'version': '12.0.1.0.0',
     'author': "BCIM, Okia, Camptocamp, Odoo Community Association (OCA)",
     'website': "https://github.com/OCA/stock-logistics-warehouse",
-    'summary': "Add coordinate attributes on stock location. "
-               "Define picking zone with links to picking type.",
+    'summary': "Classify locations with zones.",
     'category': 'Stock Management',
     'depends': [
         'stock',
     ],
     'data': [
-        'views/stock_picking_zone.xml',
         'views/stock_location.xml',
-        'security/ir.model.access.csv',
     ],
     'installable': True,
     'development_status': 'Alpha',
