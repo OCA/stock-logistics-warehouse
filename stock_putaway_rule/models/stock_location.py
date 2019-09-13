@@ -10,7 +10,7 @@ class StockLocation(models.Model):
     putaway_rule_ids = fields.One2many('stock.putaway.rule', 'location_in_id',
                                        'Putaway Rules')
 
-    def _get_putaway_strategy(self, product):
+    def get_putaway_strategy(self, product):
         ''' Returns the location where the product has to be put, if any compliant putaway strategy is found. Otherwise returns None.'''
         current_location = self
         putaway_location = self.env['stock.location']
