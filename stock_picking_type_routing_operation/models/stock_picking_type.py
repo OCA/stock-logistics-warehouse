@@ -17,7 +17,7 @@ class StockPickingType(models.Model):
         for picking_type in self:
             if not picking_type.routing_operation_location_ids:
                 continue
-            if len(picking_type.routing_operation_location_ids):
+            if len(picking_type.routing_operation_location_ids) > 1:
                 raise exceptions.ValidationError(_(
                     'The same picking type cannot be used on different '
                     'locations having routing operations.'
