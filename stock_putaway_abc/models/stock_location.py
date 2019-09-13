@@ -14,10 +14,10 @@ class StockLocation(models.Model):
         ABC_SELECTION, strinng='ABC Classification'
     )
 
-    def _get_putaway_strategy(self, product):
+    def get_putaway_strategy(self, product):
         location = super(
             StockLocation, self.with_context(_putaway_method='fixed')
-        )._get_putaway_strategy(product)
+        ).get_putaway_strategy(product)
         if location:
             return location
         abc_putaway = self._get_putaway_strategy_abc(product)
