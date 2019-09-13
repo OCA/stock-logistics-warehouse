@@ -19,7 +19,6 @@ class StockLocation(models.Model):
     area = fields.Char(
         'Area',
         compute='_compute_area',
-        store=True,
     )
 
     @api.depends('name', 'location_kind', 'location_id.area')
