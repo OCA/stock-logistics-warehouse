@@ -20,9 +20,9 @@ class StockLocation(models.Model):
         existing_locations = self.search([])
         existing_locations.write({'bypass_constraints': True})
 
-    def _get_putaway_strategy(self, product):
+    def get_putaway_strategy(self, product):
         """Activate constraint when looking for putaway rules"""
         self = self.with_context(
             _filter_on_constraints=True, _constraint_product=product.id
         )
-        return super()._get_putaway_strategy(product)
+        return super().get_putaway_strategy(product)
