@@ -40,14 +40,6 @@ class StockLocation(models.Model):
              '* Other: any other location',
     )
 
-    _sql_constraints = [(
-        'name_zone_unique',
-        'EXCLUDE (name WITH =, zone_location_id WITH =)'
-        ' WHERE (zone_location_id IS NOT NULL)',
-        'Another location with the same name exists in the same zone.'
-        ' Please rename the location.'
-    )]
-
     @api.depends('is_zone', 'usage', 'location_id.usage', 'zone_location_id',
                  'child_ids')
     def _compute_location_kind(self):
