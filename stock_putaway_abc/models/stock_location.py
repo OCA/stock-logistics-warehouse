@@ -11,7 +11,7 @@ class StockLocation(models.Model):
     # TODO Check if we want to define this only on locations without children
     #  or if filtering those in validate_abc_location is enough
     abc_classification = fields.Selection(
-        ABC_SELECTION, strinng='ABC Classification'
+        ABC_SELECTION, string='ABC Classification'
     )
 
     def get_putaway_strategy(self, product):
@@ -39,7 +39,7 @@ class StockLocation(models.Model):
             else:
                 categ = product.categ_id
                 while categ:
-                    putaway_rules = self.putaway_rule_abc_ids.filtered(
+                    putaway_rules = self.putaway_rule_ids.filtered(
                         lambda x: x.category_id == categ and x.method == 'abc'
                     )
                     if putaway_rules:
