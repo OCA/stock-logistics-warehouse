@@ -12,6 +12,10 @@
     "application": False,
     "installable": True,
     "depends": [
-        "stock"
+        # FIXME should depend on stock, however, stock_putaway_rule
+        # overrides StockLocation.get_putaway_strategy without calling
+        # super(), so until we have an alternative, add a dependency
+        # there.
+        "stock_putaway_rule",
     ],
 }
