@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_average_consumption_config_settings" model="ir.ui.view">
+            <field name="name">Average Consumption settings</field>
+            <field name="model">stock.config.settings</field>
+            <field name="inherit_id" ref="stock.view_stock_config_settings"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='group_stock_packaging']/.." position="after">
+                    <group name="average_consumption" string="Product Average Consumption">
+                        <field name="default_consumption_calculation_method" widget="radio"/>
+                        <field name="default_calculation_range" attrs="{'invisible': [('default_consumption_calculation_method','!=','moves')]}"/>
+                        <field name="default_display_range"/>
+                        <field name="module_product_history"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

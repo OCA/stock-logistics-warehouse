@@ -1,0 +1,130 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_average_consumption
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_calculation_range
+#: model:ir.model.fields,help:product_average_consumption.field_product_template_calculation_range
+msgid " Number of days used for the calculation of the average  consumption. For example: if you put 365, the calculation will  be done on last year."
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_calculation_range
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_calculation_range
+msgid "Asked Calculation Range (days)"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_displayed_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_displayed_average_consumption
+msgid "Average Consumption"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_default_calculation_range
+msgid "Calculation Range in days"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_consumption_calculation_method
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_consumption_calculation_method
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_default_consumption_calculation_method
+msgid "Consumption Calculation Method"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.ui.view,arch_db:product_average_consumption.view_template_consumption_form
+msgid "Consumption figures"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_display_range
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_display_range
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_default_display_range
+msgid "Display Range in days"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_display_range
+#: model:ir.model.fields,help:product_average_consumption.field_product_template_display_range
+#: model:ir.model.fields,help:product_average_consumption.field_stock_config_settings_default_display_range
+msgid "Examples:\n"
+"        1 -> Average Consumption per days\n"
+"        7 -> Average Consumption per week\n"
+"        30 -> Average Consumption per month"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_nb_days
+msgid "Number of days for the calculation"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model,name:product_average_consumption.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.ui.view,arch_db:product_average_consumption.view_average_consumption_config_settings
+msgid "Product Average Consumption"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model,name:product_average_consumption.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_nb_days
+msgid "Real Calculation Range (days)"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_nb_days
+msgid "The calculation will be done according to Calculation Range field or since the first stock move of the product if it's more recent"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_product_template_nb_days
+msgid "The calculation will be done for the last 365 days or since the first stock move of the product if it's more recent"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_stock_config_settings_default_calculation_range
+msgid "This field is used if the selected method is based on Stock Moves.Number of days used for the calculation of the average consumption. For example: if you put 365, the calculation will be done on last year."
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_stock_config_settings_module_product_history
+msgid "This will install product_history module"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_total_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_total_consumption
+msgid "Total Consumption"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_module_product_history
+msgid "View product History"
+msgstr ""
+
+#. module: product_average_consumption
+#: model:ir.model,name:product_average_consumption.model_stock_config_settings
+msgid "stock.config.settings"
+msgstr ""
+

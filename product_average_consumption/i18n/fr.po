@@ -1,0 +1,174 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_average_consumption
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-26 19:12+0000\n"
+"PO-Revision-Date: 2016-02-26 19:12+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_calculation_range
+#: model:ir.model.fields,help:product_average_consumption.field_product_template_calculation_range
+msgid " Number of days used for the calculation of the average  consumption. For example: if you put 365, the calculation will  be done on last year."
+msgstr " Nombre de jours pour le calcul de la consommation moyenne. Par exemple: si vous mettez 365, le calcul sera fait sur la dernière année."
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_calculation_range
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_calculation_range
+msgid "Asked Calculation Range (days)"
+msgstr "Plage de calcul demandée (jours)"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_displayed_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_displayed_average_consumption
+msgid "Average Consumption"
+msgstr "Conso moy"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_average_consumption
+msgid "Average Consumption"
+msgstr "Consommation moyenne"
+
+#. module: product_average_consumption
+#: selection:product.template,consumption_calculation_method:0
+#: selection:stock.config.settings,default_consumption_calculation_method:0
+msgid "Calculate consumption based on Stock Moves"
+msgstr "Calculer la consommation basée sur les Mouvements de Stock"
+
+#. module: product_average_consumption
+#: selection:product.template,consumption_calculation_method:0
+#: selection:stock.config.settings,default_consumption_calculation_method:0
+msgid "Calculate consumption based on the Product History"
+msgstr "Calculer la consommation basée sur l'Historique du Produit"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_default_calculation_range
+msgid "Calculation Range in days"
+msgstr "Plage de calcul (jours)"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_consumption_calculation_method
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_consumption_calculation_method
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_default_consumption_calculation_method
+msgid "Consumption Calculation Method"
+msgstr "Méthode de calcul"
+
+#. module: product_average_consumption
+#: model:ir.ui.view,arch_db:product_average_consumption.view_product_consumption_form
+#: model:ir.ui.view,arch_db:product_average_consumption.view_template_consumption_form
+msgid "Consumption figures"
+msgstr "Statistiques de consommation"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_display_range
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_display_range
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_default_display_range
+msgid "Display Range in days"
+msgstr "Plage d'affichage (jours)"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_display_range
+#: model:ir.model.fields,help:product_average_consumption.field_product_template_display_range
+#: model:ir.model.fields,help:product_average_consumption.field_stock_config_settings_default_display_range
+msgid "Examples:\n"
+"        1 -> Average Consumption per days\n"
+"        7 -> Average Consumption per week\n"
+"        30 -> Average Consumption per month"
+msgstr "Exemples:\n"
+"        1 -> Consommation moyenne par jour\n"
+"        7 -> Consommation moyenne par semaine\n"
+"        30 -> Consommation moyenne par mpois"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_number_of_periods
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_number_of_periods_real
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_number_of_periods_target
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_number_of_periods
+msgid "Number of History periods"
+msgstr "Nombre de périodes d'historique"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_nb_days
+msgid "Number of days for the calculation"
+msgstr "Nombre de jours pour le calcul"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_default_number_of_periods
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_number_of_periods
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_number_of_periods_real
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_number_of_periods_target
+#: model:ir.model.fields,help:product_average_consumption.field_product_template_number_of_periods
+msgid "Number of valid history periods used for the calculation"
+msgstr "Nombre de périodes d'historique valides utilisées pour le calcul"
+
+#. module: product_average_consumption
+#: model:ir.model,name:product_average_consumption.model_product_product
+msgid "Product"
+msgstr "Article"
+
+#. module: product_average_consumption
+#: model:ir.ui.view,arch_db:product_average_consumption.view_average_consumption_config_settings
+msgid "Product Average Consumption"
+msgstr "Consommation Moyenne"
+
+#. module: product_average_consumption
+#: model:ir.model,name:product_average_consumption.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_nb_days
+msgid "Real Calculation Range (days)"
+msgstr "Plage réelle de calcul (jours)"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_product_product_nb_days
+msgid "The calculation will be done according to Calculation Range field or since the first stock move of the product if it's more recent"
+msgstr "Le calcul sera fait selon le champs Plage de Calcul ou depuis le 1er mouvement de stock de ce produit s'il est plus récent"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_product_template_nb_days
+msgid "The calculation will be done for the last 365 days or since the first stock move of the product if it's more recent"
+msgstr "Le calcul sera fait selon le champs Plage de Calcul ou depuis le 1er mouvement de stock de ce produit s'il est plus récent"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_stock_config_settings_default_number_of_periods
+msgid "This field is used if the selected method is based on Product History"
+msgstr "Ce champs est utilisé si la méthode sélectionnée est basée sur l'Historique du Produit"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_stock_config_settings_default_calculation_range
+msgid "This field is used if the selected method is based on Stock Moves.Number of days used for the calculation of the average consumption. For example: if you put 365, the calculation will be done on last year."
+msgstr "Ce champs est utilisé si la méthode sélectionnée est basée sur les Mouvements de Stock. Nombre de jours utilisés pour le calcul de la consommation moyenne. Par exemple, si vous indiquez 365, le calcul se fera sur l'année passée."
+
+#. module: product_average_consumption
+#: model:ir.model.fields,help:product_average_consumption.field_stock_config_settings_module_product_history
+msgid "This will install product_history module"
+msgstr "Le module product_history sera installé"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_total_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_total_consumption
+msgid "Total Consumption"
+msgstr "Consommation totale"
+
+#. module: product_average_consumption
+#: model:ir.model.fields,field_description:product_average_consumption.field_stock_config_settings_module_product_history
+msgid "View product History"
+msgstr "Historique"
+
+#. module: product_average_consumption
+#: model:ir.model,name:product_average_consumption.model_stock_config_settings
+msgid "stock.config.settings"
+msgstr "stock.config.settings"
+

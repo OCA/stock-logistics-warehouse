@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************** -->
+<!--Product - Average Consumption Module for Odoo                           -->
+<!--Copyright (C) 2013-Today GRAP (http://www.grap.coop)                    -->
+<!--@author Julien Weste                                                    -->
+<!--@author Sylvain LE GAL (https://twitter.com/legalsylvain)               -->
+
+<!--This program is free software: you can redistribute it and/or modify    -->
+<!--it under the terms of the GNU Affero General Public License as          -->
+<!--published by the Free Software Foundation, either version 3 of the      -->
+<!--License, or (at your option) any later version.                         -->
+
+<!--This program is distributed in the hope that it will be useful,         -->
+<!--but WITHOUT ANY WARRANTY; without even the implied warranty of          -->
+<!--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           -->
+<!--GNU Affero General Public License for more details.                     -->
+
+<!--You should have received a copy of the GNU Affero General Public License-->
+<!--along with this program.  If not, see <http://www.gnu.org/licenses/>.   -->
+<!-- ********************************************************************** -->
+
+<odoo>
+    <record id="view_template_consumption_form" model="ir.ui.view">
+        <field name="name">template.consumption.form</field>
+        <field name="model">product.template</field>
+        <field eval="7" name="priority"/>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <group name="group_lots_and_weight" position="after">
+                <group name="Consumption" string="Consumption figures">
+                    <field name="consumption_calculation_method"/>
+                    <group name="ConsumptionMove" attrs="{'invisible': [('consumption_calculation_method','!=','moves')]}">
+                        <field name="calculation_range" />
+                        <field name="nb_days"/>
+                        <field name="total_consumption"/>
+                        <field name="displayed_average_consumption"/>
+                        <field name="display_range"/>
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
