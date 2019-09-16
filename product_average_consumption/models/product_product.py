@@ -1,8 +1,11 @@
-# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    Product - Average Consumption Module for Odoo
+#    Copyright (C) 2019-Today: La Louve (<https://cooplalouve.fr>)
+#    Copyright (C) 2019-Today: Druidoo (<https://www.druidoo.io>)
 #    Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+#    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+#    @author Druidoo
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
@@ -23,36 +26,24 @@
 
 import time
 import datetime
-from openerp import models, fields, api
-from openerp.tools.float_utils import float_round
+from odoo import models, fields, api
+from odoo.tools.float_utils import float_round
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
     # Columns Section
-    average_consumption = fields.Float(
-        compute='_average_consumption',
-        string='Average Consumption', multi='average_consumption')
-    displayed_average_consumption = fields.Float(
-        compute='_displayed_average_consumption',
-        string='Average Consumption')
-    total_consumption = fields.Float(
-        compute='_average_consumption',
-        string='Total Consumption', multi='average_consumption')
-    nb_days = fields.Integer(
-        compute='_average_consumption',
-        string='Number of days for the calculation',
-        multi='average_consumption',
+    average_consumption = fields.Float(compute='_average_consumption', string='Average Consumption')
+    displayed_average_consumption = fields.Float(compute='_displayed_average_consumption', string='Average Consumption')
+    total_consumption = fields.Float(compute='_average_consumption', string='Total Consumption')
+    nb_days = fields.Integer(compute='_average_consumption', string='Number of days for the calculation',
         help="""The calculation will be done according to Calculation Range"""
         """ field or since the first stock move of the product if it's"""
         """ more recent""")
-    consumption_calculation_method = fields.Selection(
-        related='product_tmpl_id.consumption_calculation_method')
-    display_range = fields.Integer(
-        related='product_tmpl_id.display_range')
-    calculation_range = fields.Integer(
-        related='product_tmpl_id.calculation_range')
+    consumption_calculation_method = fields.Selection(related='product_tmpl_id.consumption_calculation_method')
+    display_range = fields.Integer(related='product_tmpl_id.display_range')
+    calculation_range = fields.Integer(related='product_tmpl_id.calculation_range')
 
     # Private Function Section
     @api.model
@@ -62,57 +53,44 @@ class ProductProduct(models.Model):
         cr = self.env.cr
         cr.execute(query)
         results = cr.fetchall()
-        return results and results[0] and results[0][0] \
-            or time.strftime('%Y-%m-%d')
+        return results and results[0] and results[0][0] or time.strftime('%Y-%m-%d')
 
     # Fields Function Section
-    @api.depends(
-        'consumption_calculation_method', 'calculation_range')
-    @api.multi
+    @api.depends('consumption_calculation_method', 'calculation_range')
     def _average_consumption(self):
         for product in self:
             if product.consumption_calculation_method == 'moves':
                 product._average_consumption_moves()
 
-    @api.onchange('calculation_range')
-    @api.multi
-    def _average_consumption_moves(self):
-        context = self.env.context or {}
-        domain_products = [('product_id', 'in', self.ids)]
-        domain_move_out = []
-        dql, dmil, domain_move_out_loc = self._get_domain_locations()
-        domain_move_out += self._get_domain_dates() + \
-            [('state', 'not in', ('cancel', 'draft'))] + \
-            domain_products
-        if context.get('owner_id'):
-            owner_domain = ('restrict_partner_id', '=', context['owner_id'])
-            domain_move_out.append(owner_domain)
-        domain_move_out += domain_move_out_loc
-        moves_out = self.pool.get('stock.move').read_group(
-            self.env.cr, self.env.uid, domain_move_out,
-            ['product_id', 'product_qty'], ['product_id'], context=context)
-        moves_out = dict(map(
-            lambda x: (x['product_id'][0], x['product_qty']), moves_out))
+    def _get_domain_dates(self):
+        from_date = self._context.get('from_date', False)
+        to_date = self._context.get('to_date', False)
+        domain = []
+        if from_date:
+            domain.append(('date', '>=', from_date))
+        if to_date:
+            domain.append(('date', '<=', to_date))
+        return domain
 
+    # @api.onchange('calculation_range')
+    # @api.multi
+    def _average_consumption_moves(self):
+        dql, dmil, domain_move_out_loc = self._get_domain_locations()
+        domain_move_out = [('state', 'not in', ('cancel', 'draft'))]
+        if self._context.get('owner_id'):
+            domain_move_out.append(('restrict_partner_id', '=', self._context['owner_id']))
+        domain_move_out += domain_move_out_loc
         for product in self:
-            begin_date = (
-                datetime.datetime.today() -
-                datetime.timedelta(days=product.calculation_range)
-            ).strftime('%Y-%m-%d')
-            first_date = max(
-                begin_date,
-                self._min_date(product.id)
-            )
-            outgoing_qty = float_round(
-                moves_out.get(product.id, 0.0),
-                precision_rounding=product.uom_id.rounding)
-            nb_days = (
-                datetime.datetime.today() -
-                datetime.datetime.strptime(first_date, '%Y-%m-%d')
-            ).days
-            product.average_consumption = (
-                nb_days and
-                (outgoing_qty / nb_days) or False)
+            begin_date = (datetime.datetime.today() -
+                          datetime.timedelta(days=product.calculation_range)).strftime('%Y-%m-%d')
+            first_date = max(begin_date, self._min_date(product.id))
+            domain_move_out = self.with_context(from_date=first_date)._get_domain_dates() +\
+                               [('product_id', '=', product.id)] + domain_move_out
+            moves_out = self.env['stock.move'].read_group(domain_move_out, ['product_id', 'product_qty'], ['product_id'])
+            moves_out = dict([(x['product_id'][0], x['product_qty']) for x in moves_out])
+            outgoing_qty = float_round(moves_out.get(product.id, 0.0), precision_rounding=product.uom_id.rounding)
+            nb_days = (datetime.datetime.today() - datetime.datetime.strptime(first_date, '%Y-%m-%d')).days
+            product.average_consumption = (nb_days and (outgoing_qty / nb_days) or False)
             product.total_consumption = outgoing_qty or False
             product.nb_days = nb_days or False
 
@@ -120,5 +98,4 @@ class ProductProduct(models.Model):
     @api.multi
     def _displayed_average_consumption(self):
         for product in self:
-            product.displayed_average_consumption =\
-                product.average_consumption * product.display_range
+            product.displayed_average_consumption = product.average_consumption * product.display_range

@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <record id="view_average_consumption_config_settings" model="ir.ui.view">
-            <field name="name">Average Consumption settings</field>
-            <field name="model">stock.config.settings</field>
-            <field name="inherit_id" ref="stock.view_stock_config_settings"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='group_stock_packaging']/.." position="after">
-                    <group name="average_consumption" string="Product Average Consumption">
-                        <field name="default_consumption_calculation_method" widget="radio"/>
-                        <field name="default_calculation_range" attrs="{'invisible': [('default_consumption_calculation_method','!=','moves')]}"/>
-                        <field name="default_display_range"/>
-                        <field name="module_product_history"/>
-                    </group>
-                </xpath>
-            </field>
-        </record>
-    </data>
-</openerp>
+<odoo>
+
+    <record id="view_average_consumption_config_settings" model="ir.ui.view">
+        <field name="name">Average Consumption settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='stock']" position="inside">
+                <h2>Operations</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div  class="o_setting_right_pane">
+                            <strong>Consumption Calculation Method</strong><br/>
+                            <field name="default_consumption_calculation_method" widget="radio"/>
+                        </div>
+                        <div class="o_setting_right_pane" attrs="{'invisible': [('default_consumption_calculation_method','!=','moves')]}">
+                            <strong>Calculation Range in </strong><field name="default_calculation_range"/> <strong> days.</strong>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="module_product_history"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="module_product_history"/>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <strong>Display Range in </strong><field name="default_display_range"/> <strong> days.</strong>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

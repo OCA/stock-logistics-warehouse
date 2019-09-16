@@ -1,8 +1,11 @@
-# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    Product - Average Consumption Module for Odoo
+#    Copyright (C) 2019-Today: La Louve (<https://cooplalouve.fr>)
+#    Copyright (C) 2019-Today: Druidoo (<https://www.druidoo.io>)
 #    Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+#    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+#    @author Druidoo
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
@@ -22,7 +25,7 @@
 ##############################################################################
 {
     'name': 'Product - Average Consumption',
-    'version': '9.0.1',
+    'version': '12.0.1.0.0',
     'category': 'Product',
     'description': """
 Shows figures in the product form about the average consumption of products
@@ -32,14 +35,17 @@ the display range.
 
 Copyright, Author and Licence :
 -------------------------------
+    * Copyright (C) 2019-Today: La Louve (<https://cooplalouve.fr>)
+    * Copyright (C) 2019-Today: Druidoo (<https://www.druidoo.io>)
     * Copyright : 2013-Today, Groupement Régional Alimentaire de Proximité;
     * Author :
+        * Druidoo
         * Julien WESTE;
         * Sylvain LE GAL (https://twitter.com/legalsylvain);
     * Licence : AGPL-3 (http://www.gnu.org/licenses/)
     """,
-    'author': 'GRAP',
-    'website': 'http://www.grap.coop',
+    'author': 'Druidoo',
+    'website': 'https://www.druidoo.io',
     'license': 'AGPL-3',
     'depends': [
         'product',
@@ -49,4 +55,5 @@ Copyright, Author and Licence :
         'views/product_template_view.xml',
         'views/res_config_view.xml',
     ],
+    'installable': True,
 }

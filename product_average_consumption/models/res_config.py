@@ -1,10 +1,17 @@
-# -*- coding: utf-8 -*-
 
-from openerp import fields, models, api
+#    Copyright (C) 2019-Today: La Louve (<https://cooplalouve.fr>)
+#    Copyright (C) 2019-Today: Druidoo (<https://www.druidoo.io>)
+#    Copyright (C) 2013-Today GRAP (http://www.grap.coop)
+#    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+#    @author Druidoo
+#    @author Julien WESTE
+#    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
+
+from odoo import fields, models, api
 
 
-class PurchaseConfigSettings(models.TransientModel):
-    _inherit = 'stock.config.settings'
+class StockConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
 
     def _get_consumption_calculation_method(self):
         return [
@@ -55,42 +62,43 @@ class PurchaseConfigSettings(models.TransientModel):
                 UPDATE product_template
                 SET calculation_range=%i""" % (
                 vals.get('default_calculation_range')))
-        if vals.get('default_number_of_periods', False):
-            self.env.cr.execute("""
-                UPDATE product_template
-                SET number_of_periods=%i""" % (
-                vals.get('default_number_of_periods')))
+        #TOCHECK Need to move to product_history module
+        # if vals.get('default_number_of_periods', False):
+        #     self.env.cr.execute("""
+        #         UPDATE product_template
+        #         SET number_of_periods=%i""" % (
+        #         vals.get('default_number_of_periods')))
         if vals.get('default_consumption_calculation_method', False):
             self.env.cr.execute("""
                 UPDATE product_template
                 SET consumption_calculation_method='%s'""" % (
                 vals.get('default_consumption_calculation_method')))
-        return super(PurchaseConfigSettings, self).create(vals)
+        return super(StockConfigSettings, self).create(vals)
 
     @api.multi
     def write(self, vals):
-        for config in self:
-            if vals.get('default_display_range', False):
-                self.env.cr.execute("""
-                    UPDATE product_template
-                    SET display_range=%i""" % (
-                    vals.get('default_display_range')))
-            if vals.get('default_calculation_range', False):
-                self.env.cr.execute("""
-                    UPDATE product_template
-                    SET calculation_range=%i""" % (
-                    vals.get('default_calculation_range')))
-            if vals.get('default_number_of_periods', False):
-                self.env.cr.execute("""
-                    UPDATE product_template
-                    SET number_of_periods=%i""" % (
-                    vals.get('default_number_of_periods')))
-            if vals.get('default_consumption_calculation_method', False):
-                self.env.cr.execute("""
-                    UPDATE product_template
-                    SET consumption_calculation_method='%s'""" % (
-                    vals.get('default_consumption_calculation_method')))
-        return super(PurchaseConfigSettings, self).write(vals)
+        if vals.get('default_display_range', False):
+            self.env.cr.execute("""
+                UPDATE product_template
+                SET display_range=%i""" % (
+                vals.get('default_display_range')))
+        if vals.get('default_calculation_range', False):
+            self.env.cr.execute("""
+                UPDATE product_template
+                SET calculation_range=%i""" % (
+                vals.get('default_calculation_range')))
+        # TOCHECK Need to move to product_history module
+        # if vals.get('default_number_of_periods', False):
+        #     self.env.cr.execute("""
+        #         UPDATE product_template
+        #         SET number_of_periods=%i""" % (
+        #         vals.get('default_number_of_periods')))
+        if vals.get('default_consumption_calculation_method', False):
+            self.env.cr.execute("""
+                UPDATE product_template
+                SET consumption_calculation_method='%s'""" % (
+                vals.get('default_consumption_calculation_method')))
+        return super(StockConfigSettings, self).write(vals)
 
     @api.onchange('default_calculation_range')
     @api.multi
