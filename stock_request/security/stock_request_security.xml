@@ -71,6 +71,7 @@
             <field name="perm_write" eval="True"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[(1,'=',1)]</field>
         </record>
     
         <record id="stock_request_manager_rule" model="ir.rule">
@@ -121,6 +122,17 @@
             <field name="perm_write" eval="True"/>
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="stock_request_order_user_inventory_user_rule" model="ir.rule">
+            <field name="name">Stock Request Order User Inventory User</field>
+            <field name="model_id" ref="model_stock_request_order"/>
+            <field name="groups" eval="[(6,0, [ref('stock.group_stock_user')])]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">[(1,'=',1)]</field>
         </record>
             
     </data>
