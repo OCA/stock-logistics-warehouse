@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field name="name">stock.inventory.form.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='location_id']" position="after">
+                <field name="virtual_location_id" groups="stock.group_stock_multi_locations"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/kanban/field[@name='location_id']" position="after">
+                <field name="virtual_location_id" groups="stock.group_stock_multi_locations"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

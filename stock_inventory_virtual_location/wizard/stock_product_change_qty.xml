@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_change_product_quantity" model="ir.ui.view">
+        <field name="name">Change Product Quantity Reason</field>
+        <field name="model">stock.change.product.qty</field>
+        <field name="inherit_id" ref="stock.view_change_product_quantity"/>
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="virtual_location_id" groups="stock.group_stock_multi_locations"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
