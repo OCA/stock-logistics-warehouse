@@ -30,9 +30,10 @@ class StockLocation(models.Model):
         putaway_location = self.env['stock.location']
         while current_location and not putaway_location:
             # Looking for a putaway about the product.
-            putaway_rules = self.putaway_rule_ids.filtered(
-                lambda x: x.product_id == product and x.method == 'abc'
-            )
+            putaway_rules = self.putaway_rule_ids.with_context(
+                _putaway_method='abc').filtered(
+                    lambda x: x.product_id == product and x.method == 'abc'
+                )
             if putaway_rules:
                 for put_rule in putaway_rules:
                     putaway_location = put_rule.find_abc_location()
@@ -42,9 +43,11 @@ class StockLocation(models.Model):
             else:
                 categ = product.categ_id
                 while categ:
-                    putaway_rules = self.putaway_rule_ids.filtered(
-                        lambda x: x.category_id == categ and x.method == 'abc'
-                    )
+                    putaway_rules = self.putaway_rule_ids.with_context(
+                        _putaway_method='abc').filtered(
+                            lambda x: x.category_id == categ
+                                      and x.method == 'abc'
+                        )
                     if putaway_rules:
                         for put_rule in putaway_rules:
                             putaway_location = put_rule.find_abc_location()
