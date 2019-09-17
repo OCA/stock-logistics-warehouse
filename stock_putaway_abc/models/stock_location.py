@@ -34,7 +34,10 @@ class StockLocation(models.Model):
                 lambda x: x.product_id == product and x.method == 'abc'
             )
             if putaway_rules:
-                putaway_location = putaway_rules[0].find_abc_location()
+                for put_rule in putaway_rules:
+                    putaway_location = put_rule.find_abc_location()
+                    if putaway_location:
+                        break
             # If not product putaway found, we're looking with category so.
             else:
                 categ = product.categ_id
@@ -43,8 +46,10 @@ class StockLocation(models.Model):
                         lambda x: x.category_id == categ and x.method == 'abc'
                     )
                     if putaway_rules:
-                        putaway_location = putaway_rules[0].find_abc_location()
-                        break
+                        for put_rule in putaway_rules:
+                            putaway_location = put_rule.find_abc_location()
+                            if putaway_location:
+                                break
                     categ = categ.parent_id
             current_location = current_location.location_id
         return putaway_location
