@@ -29,9 +29,18 @@ class StockPutawayRule(models.Model):
                 raise ValidationError(_(
                     "Fixed putaways require a 'Store to' location."
                 ))
+            elif rule.method == 'fixed' and rule.abc_priority:
+                raise ValidationError(_(
+                    "Fixed putaways are not allowed to have an ABC priority."
+                ))
             elif rule.method == 'abc' and not rule.abc_priority:
                 raise ValidationError(_(
                     "ABC putaways require an ABC priority."
+                ))
+            elif rule.method == 'abc' and rule.location_out_id:
+                raise ValidationError(_(
+                    "ABC putaways are not allowed to have a 'Store to' "
+                    "location."
                 ))
 
     @api.model
