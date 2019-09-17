@@ -5,6 +5,8 @@ from odoo import models
 
 class StockLocation(models.Model):
 
+    _inherit = 'stock.location'
+
     def check_move_dest_constraint(self, line=None, product=None):
         # As stock.putaway.rule.location_out_id is not required when
         # stock_putaway_abc is installed, we check here that this method
