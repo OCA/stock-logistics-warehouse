@@ -49,7 +49,9 @@ class TestVirtualReservation(common.SavepointCase):
         group = self.env["procurement.group"].create(
             {
                 "name": "TEST",
-                "move_type": "one",
+                # TODO test case with "one": we should not create
+                # the chained moves until we all the whole quantity
+                "move_type": "direct",
                 "partner_id": self.partner_delta.id,
             }
         )
@@ -71,6 +73,9 @@ class TestVirtualReservation(common.SavepointCase):
                 "TEST",
                 values,
             )
+        return self._pickings_in_group(group)
+
+    def _pickings_in_group(self, group):
         return self.env["stock.picking"].search([("group_id", "=", group.id)])
 
     def _update_qty_in_location(self, location, product, quantity):
@@ -81,28 +86,43 @@ class TestVirtualReservation(common.SavepointCase):
     def _prev_picking(self, picking):
         return picking.move_lines.move_orig_ids.picking_id
 
+    def _out_picking(self, pickings):
+        return pickings.filtered(lambda r: r.picking_type_code == "outgoing")
+
     def _deliver(self, picking):
         picking.action_assign()
         for line in picking.mapped("move_lines.move_line_ids"):
             line.qty_done = line.product_qty
         picking.action_done()
 
-    def test_reservation(self):
-        picking = self._create_picking_chain(
-            self.wh, [(self.product1, 5)], date=datetime(2019, 9, 2, 16, 0)
-        ).filtered(lambda r: r.picking_type_code == "outgoing")
-        picking2 = self._create_picking_chain(
-            self.wh, [(self.product1, 3)], date=datetime(2019, 9, 2, 16, 1)
-        ).filtered(lambda r: r.picking_type_code == "outgoing")
+    def test_virtual_reservation_value(self):
+        picking = self._out_picking(
+            self._create_picking_chain(
+                self.wh, [(self.product1, 5)], date=datetime(2019, 9, 2, 16, 0)
+            )
+        )
+        picking2 = self._out_picking(
+            self._create_picking_chain(
+                self.wh, [(self.product1, 3)], date=datetime(2019, 9, 2, 16, 1)
+            )
+        )
         # we'll assign this one in the test, should deduct pick 1 and 2
-        picking3 = self._create_picking_chain(
-            self.wh, [(self.product1, 20)], date=datetime(2019, 9, 3, 16, 0)
-        ).filtered(lambda r: r.picking_type_code == "outgoing")
+        picking3 = self._out_picking(
+            self._create_picking_chain(
+                self.wh,
+                [(self.product1, 20)],
+                date=datetime(2019, 9, 3, 16, 0),
+            )
+        )
         # this one should be ignored when we'll assign pick 3 as it has
         # a later date
-        picking4 = self._create_picking_chain(
-            self.wh, [(self.product1, 20)], date=datetime(2019, 9, 4, 16, 1)
-        ).filtered(lambda r: r.picking_type_code == "outgoing")
+        picking4 = self._out_picking(
+            self._create_picking_chain(
+                self.wh,
+                [(self.product1, 20)],
+                date=datetime(2019, 9, 4, 16, 1),
+            )
+        )
 
         for pick in (picking, picking2, picking3, picking4):
             # self.assertEqual(pick.move_lines.virtual_reserved_qty, 0)
@@ -116,31 +136,19 @@ class TestVirtualReservation(common.SavepointCase):
         self.assertEqual(picking3.move_lines.virtual_reserved_qty, 12)
         self.assertEqual(picking4.move_lines.virtual_reserved_qty, 0)
 
-        # Take care of the stock->output
-        self._deliver(self._prev_picking(picking3))
-
-        # Now, output->customer should be partially reserved, according
-        # to the virtual reservation
-        self.assertEqual(picking.move_lines.reserved_availability, 0.)
-        self.assertEqual(
-            picking3.move_lines.reserved_availability,
-            12.0,
-            "12 expected as 8 are virtually reserved for the first pickings",
-        )
-
     def test_defer_creation(self):
         pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
         self.assertEqual(len(pickings), 2, "expect stock->out + out->customer")
         self.assertRecordValues(
-            pickings,
+            pickings.sorted("id"),
             [
-                {
-                    "location_id": self.wh.wh_output_stock_loc_id.id,
-                    "location_dest_id": self.loc_customer.id,
-                },
                 {
                     "location_id": self.wh.lot_stock_id.id,
                     "location_dest_id": self.wh.wh_output_stock_loc_id.id,
+                },
+                {
+                    "location_id": self.wh.wh_output_stock_loc_id.id,
+                    "location_dest_id": self.loc_customer.id,
                 },
             ],
         )
@@ -148,16 +156,96 @@ class TestVirtualReservation(common.SavepointCase):
         rules = self.wh.delivery_route_id.rule_ids
         rules.write({"virtual_reservation_defer_pull": True})
 
+        self._update_qty_in_location(self.loc_bin1, self.product1, 20.)
         pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
         self.assertEqual(
             len(pickings), 1, "expect only the last out->customer"
         )
+        cust_picking = pickings
         self.assertRecordValues(
-            pickings,
+            cust_picking,
             [
                 {
+                    "state": "waiting",
                     "location_id": self.wh.wh_output_stock_loc_id.id,
                     "location_dest_id": self.loc_customer.id,
                 }
             ],
         )
+        # TODO we want to ensure that we do not assign the new moves
+
+        cust_picking.move_lines._run_stock_rule()
+        out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
+        self.assertRecordValues(
+            out_picking,
+            [
+                {
+                    "state": "confirmed",
+                    "location_id": self.wh.lot_stock_id.id,
+                    "location_dest_id": self.wh.wh_output_stock_loc_id.id,
+                }
+            ],
+        )
+
+    def test_defer_creation_backorder(self):
+        rules = self.wh.delivery_route_id.rule_ids
+        rules.write({"virtual_reservation_defer_pull": True})
+
+        self._update_qty_in_location(self.loc_bin1, self.product1, 7.)
+
+        pickings = self._create_picking_chain(self.wh, [(self.product1, 20)])
+        self.assertEqual(
+            len(pickings), 1, "expect only the last out->customer"
+        )
+        cust_picking = pickings
+        self.assertRecordValues(
+            cust_picking,
+            [
+                {
+                    "state": "waiting",
+                    "location_id": self.wh.wh_output_stock_loc_id.id,
+                    "location_dest_id": self.loc_customer.id,
+                }
+            ],
+        )
+
+        cust_picking.action_assign()
+
+        out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
+        self.assertRecordValues(
+            out_picking,
+            [
+                {
+                    "state": "confirmed",
+                    "location_id": self.wh.lot_stock_id.id,
+                    "location_dest_id": self.wh.wh_output_stock_loc_id.id,
+                }
+            ],
+        )
+
+        self.assertRecordValues(out_picking.move_lines, [{"product_qty": 7.}])
+
+        self._deliver(out_picking)
+        self.assertRecordValues(out_picking, [{"state": "done"}])
+
+        self.assertRecordValues(cust_picking, [{"state": "assigned"}])
+        self.assertRecordValues(
+            cust_picking.move_lines,
+            [
+                {
+                    "state": "partially_available",
+                    "product_qty": 20.,
+                    "reserved_availability": 7.,
+                }
+            ],
+        )
+
+        self._deliver(cust_picking)
+        self.assertRecordValues(cust_picking, [{"state": "done"}])
+
+        cust_backorder = (
+            self._pickings_in_group(cust_picking.group_id)
+            - cust_picking
+            - out_picking
+        )
+        self.assertEqual(len(cust_backorder), 1)

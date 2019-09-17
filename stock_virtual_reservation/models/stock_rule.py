@@ -1,7 +1,10 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import logging
 
-from odoo import fields, models
+from odoo import api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class StockRule(models.Model):
@@ -26,7 +29,8 @@ class StockRule(models.Model):
         values,
     ):
         if (
-            self.virtual_reservation_defer_pull
+            not self.env.context.get("_rule_no_virtual_defer")
+            and self.virtual_reservation_defer_pull
             # we generate the destination operation
             # TODO is there a reason for this? Why not
             # generate them when available too?
@@ -42,3 +46,41 @@ class StockRule(models.Model):
             origin,
             values,
         )
+
+
+class ProcurementGroup(models.Model):
+    _inherit = "procurement.group"
+
+    @api.model
+    def run_defer(
+        self, product_id, product_qty, product_uom, location_id, origin, values
+    ):
+        values.setdefault(
+            "company_id",
+            self.env["res.company"]._company_default_get("procurement.group"),
+        )
+        values.setdefault("priority", "1")
+        values.setdefault("date_planned", fields.Datetime.now())
+        rule = self._get_rule(product_id, location_id, values)
+        if not rule:
+            # this is the difference
+            return
+        action = "pull" if rule.action == "pull_push" else rule.action
+        if action != "pull":
+            return
+        if hasattr(rule, "_run_%s" % action):
+            getattr(rule, "_run_%s" % action)(
+                product_id,
+                product_qty,
+                product_uom,
+                location_id,
+                rule.name,
+                origin,
+                values,
+            )
+        else:
+            _logger.error(
+                "The method _run_%s doesn't exist on the procument rules"
+                % action
+            )
+        return True
