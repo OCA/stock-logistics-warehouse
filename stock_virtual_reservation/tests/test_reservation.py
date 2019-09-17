@@ -127,3 +127,37 @@ class TestVirtualReservation(common.SavepointCase):
             12.0,
             "12 expected as 8 are virtually reserved for the first pickings",
         )
+
+    def test_defer_creation(self):
+        pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
+        self.assertEqual(len(pickings), 2, "expect stock->out + out->customer")
+        self.assertRecordValues(
+            pickings,
+            [
+                {
+                    "location_id": self.wh.wh_output_stock_loc_id.id,
+                    "location_dest_id": self.loc_customer.id,
+                },
+                {
+                    "location_id": self.wh.lot_stock_id.id,
+                    "location_dest_id": self.wh.wh_output_stock_loc_id.id,
+                },
+            ],
+        )
+
+        rules = self.wh.delivery_route_id.rule_ids
+        rules.write({"virtual_reservation_defer_pull": True})
+
+        pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
+        self.assertEqual(
+            len(pickings), 1, "expect only the last out->customer"
+        )
+        self.assertRecordValues(
+            pickings,
+            [
+                {
+                    "location_id": self.wh.wh_output_stock_loc_id.id,
+                    "location_dest_id": self.loc_customer.id,
+                }
+            ],
+        )

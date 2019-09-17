@@ -45,7 +45,10 @@ class StockMove(models.Model):
         domain = [
             ("state", "in", states),
             ("product_id", "=", self.product_id.id),
-            # FIXME searchable? (might need to write an optimized SQL here)
+            # FIXME might need to write an optimized SQL here, this one
+            # will be slow with the DB growing as picking_code is a
+            # related to picking_id.picking_type_id.code ->
+            # generates a query searching all outgoing stock.picking first
             ("picking_code", "=", "outgoing"),
             # TODO easier way to customize date field to use
             ("date", "<=", self.date),
@@ -71,6 +74,10 @@ class StockMove(models.Model):
         )
         return virtual_reserved
 
+    # TODO As we will defer the creation of the previous operations before
+    # doing this reservation, we might not even need to do this, since
+    # the previous operation will reserve only what's possible. Still,
+    # for the one-step...
     def _update_reserved_quantity(
         self,
         need,
