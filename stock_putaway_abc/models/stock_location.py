@@ -20,9 +20,9 @@ class StockLocation(models.Model):
         ).get_putaway_strategy(product)
         if location:
             return location
-        abc_putaway = self._get_putaway_strategy_abc(product)
-        if abc_putaway:
-            return abc_putaway.find_abc_location()
+        abc_putaway_location = self._get_putaway_strategy_abc(product)
+        if abc_putaway_location:
+            return abc_putaway_location
         return self.env['stock.location']
 
     def _get_putaway_strategy_abc(self, product):
