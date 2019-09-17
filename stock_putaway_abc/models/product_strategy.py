@@ -56,13 +56,13 @@ class StockPutawayRule(models.Model):
     def find_abc_location(self):
         self.ensure_one()
         validated_location = self.env['stock.location']
-        parent_locations = self.putaway_id.location_ids
+        parent_location = self.location_in_id
         actual_priority = first_priority = self.abc_priority
         while not validated_location:
             children_locations = self.env['stock.location'].search(
                 [
                     ('abc_classification', '=', actual_priority),
-                    ('id', 'child_of', parent_locations.ids),
+                    ('id', 'child_of', parent_location.id),
                 ]
             )
             if not children_locations:
