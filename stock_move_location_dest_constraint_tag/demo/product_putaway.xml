@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="putaway_strat_acid_category" model="stock.fixed.putaway.strat">
+    <record id="putaway_strat_acid_category" model="stock.putaway.rule">
         <field name="category_id" ref="product_category_acid" />
         <field name="location_in_id" ref="stock.stock_location_stock" />
         <field name="location_out_id" ref="location_bin_acids" />
     </record>
-    <record id="putaway_strat_dangerous_category" model="stock.fixed.putaway.strat">
+    <record id="putaway_strat_dangerous_category" model="stock.putaway.rule">
         <field name="category_id" ref="product_category_dangerous" />
         <field name="location_in_id" ref="stock.stock_location_stock" />
         <field name="location_out_id" ref="location_bin_dangerous" />
     </record>
-    <record id="putaway_strat_ice_cream_product" model="stock.fixed.putaway.strat">
+    <record id="putaway_strat_ice_cream_product" model="stock.putaway.rule">
         <field name="product_id" ref="product_product_ice_cream" />
         <field name="location_in_id" ref="stock.stock_location_stock" />
         <field name="location_out_id" ref="stock.location_refrigerator_small" />
     </record>
-    <record id="putaway_strat_ammonium_product" model="stock.fixed.putaway.strat">
+    <record id="putaway_strat_ammonium_product" model="stock.putaway.rule">
         <field name="product_id" ref="product_product_ammonium_nitrate" />
         <field name="location_in_id" ref="stock.stock_location_stock" />
         <field name="location_out_id" ref="location_freezer_dangerous" />
