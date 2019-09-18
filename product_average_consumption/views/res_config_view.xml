@@ -11,11 +11,19 @@
                 <div class="row mt16 o_settings_container">
                     <div class="col-12 col-lg-6 o_setting_box">
                         <div  class="o_setting_right_pane">
-                            <strong>Consumption Calculation Method</strong><br/>
-                            <field name="default_consumption_calculation_method" widget="radio"/>
+                            <strong>Consumption Calculation Method</strong>
+                            <br/>
+                            <field
+                                name="default_consumption_calculation_method"
+                                widget="radio"/>
                         </div>
-                        <div class="o_setting_right_pane" attrs="{'invisible': [('default_consumption_calculation_method','!=','moves')]}">
-                            <strong>Calculation Range in </strong><field name="default_calculation_range"/> <strong> days.</strong>
+                        <div class="o_setting_right_pane"
+                             attrs="{'invisible':
+                             [('default_consumption_calculation_method',
+                             '!=','moves')]}">
+                            <strong>Calculation Range in </strong>
+                            <field name="default_calculation_range"/>
+                            <strong> days.</strong>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 o_setting_box">
@@ -28,7 +36,9 @@
                     </div>
                     <div class="col-12 col-lg-6 o_setting_box">
                         <div class="o_setting_right_pane">
-                            <strong>Display Range in </strong><field name="default_display_range"/> <strong> days.</strong>
+                            <strong>Display Range in </strong>
+                            <field name="default_display_range"/>
+                            <strong> days.</strong>
                         </div>
                     </div>
                 </div>

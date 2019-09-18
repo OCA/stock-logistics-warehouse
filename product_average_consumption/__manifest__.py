@@ -27,25 +27,8 @@
     'name': 'Product - Average Consumption',
     'version': '12.0.1.0.0',
     'category': 'Product',
-    'description': """
-Shows figures in the product form about the average consumption of products
-There are settings in Inventory/settings to define the calculation range and
-the display range.
-===========================================================================
-
-Copyright, Author and Licence :
--------------------------------
-    * Copyright (C) 2019-Today: La Louve (<https://cooplalouve.fr>)
-    * Copyright (C) 2019-Today: Druidoo (<https://www.druidoo.io>)
-    * Copyright : 2013-Today, Groupement Régional Alimentaire de Proximité;
-    * Author :
-        * Druidoo
-        * Julien WESTE;
-        * Sylvain LE GAL (https://twitter.com/legalsylvain);
-    * Licence : AGPL-3 (http://www.gnu.org/licenses/)
-    """,
-    'author': 'Druidoo',
-    'website': 'https://www.druidoo.io',
+    'author': 'GRAP, Druidoo',
+    'website': 'https://cooplalouve.fr',
     'license': 'AGPL-3',
     'depends': [
         'product',

@@ -55,24 +55,24 @@ class StockConfigSettings(models.TransientModel):
         if vals.get('default_display_range', False):
             self.env.cr.execute("""
                 UPDATE product_template
-                SET display_range=%i""" % (
-                vals.get('default_display_range')))
+                SET display_range=%s""", (
+                vals.get('default_display_range'),))
         if vals.get('default_calculation_range', False):
             self.env.cr.execute("""
                 UPDATE product_template
-                SET calculation_range=%i""" % (
-                vals.get('default_calculation_range')))
-        #TOCHECK Need to move to product_history module
+                SET calculation_range=%s""", (
+                vals.get('default_calculation_range'),))
+        # TOCHECK Need to move to product_history module
         # if vals.get('default_number_of_periods', False):
         #     self.env.cr.execute("""
         #         UPDATE product_template
-        #         SET number_of_periods=%i""" % (
-        #         vals.get('default_number_of_periods')))
+        #         SET number_of_periods=%s""", (
+        #         vals.get('default_number_of_periods'),))
         if vals.get('default_consumption_calculation_method', False):
             self.env.cr.execute("""
                 UPDATE product_template
-                SET consumption_calculation_method='%s'""" % (
-                vals.get('default_consumption_calculation_method')))
+                SET consumption_calculation_method=%s""", (
+                vals.get('default_consumption_calculation_method'),))
         return super(StockConfigSettings, self).create(vals)
 
     @api.multi
@@ -80,24 +80,24 @@ class StockConfigSettings(models.TransientModel):
         if vals.get('default_display_range', False):
             self.env.cr.execute("""
                 UPDATE product_template
-                SET display_range=%i""" % (
-                vals.get('default_display_range')))
+                SET display_range=%s""", (
+                vals.get('default_display_range'),))
         if vals.get('default_calculation_range', False):
             self.env.cr.execute("""
                 UPDATE product_template
-                SET calculation_range=%i""" % (
-                vals.get('default_calculation_range')))
+                SET calculation_range=%s""", (
+                vals.get('default_calculation_range'),))
         # TOCHECK Need to move to product_history module
         # if vals.get('default_number_of_periods', False):
         #     self.env.cr.execute("""
         #         UPDATE product_template
-        #         SET number_of_periods=%i""" % (
-        #         vals.get('default_number_of_periods')))
+        #         SET number_of_periods=%s""", (
+        #         vals.get('default_number_of_periods'),))
         if vals.get('default_consumption_calculation_method', False):
             self.env.cr.execute("""
                 UPDATE product_template
-                SET consumption_calculation_method='%s'""" % (
-                vals.get('default_consumption_calculation_method')))
+                SET consumption_calculation_method=%s""", (
+                vals.get('default_consumption_calculation_method'),))
         return super(StockConfigSettings, self).write(vals)
 
     @api.onchange('default_calculation_range')
@@ -106,5 +106,5 @@ class StockConfigSettings(models.TransientModel):
         for config in self:
             self.env.cr.execute("""
                 UPDATE product_template
-                SET calculation_range=%i""" % (
-                config.default_calculation_range))
+                SET calculation_range=%s""", (
+                config.default_calculation_range,))
