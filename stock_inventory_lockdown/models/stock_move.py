@@ -29,8 +29,8 @@ class StockMove(models.Model):
             reserved_locs = move._get_reserved_locations()
             dest_locs = move._get_dest_locations()
             if (locked_location_ids and
-                    move.product_id.property_stock_inventory not in [
-                        move.location_dest_id, move.location_id] and
+                    not any([move.location_dest_id.usage == 'inventory',
+                             move.location_id.usage == 'inventory']) and
                     (move.location_dest_id in locked_location_ids or
                      any([l in locked_location_ids for l in dest_locs]) or
                      any([l in locked_location_ids for l in reserved_locs]))):
