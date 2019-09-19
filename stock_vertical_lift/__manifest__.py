@@ -11,9 +11,10 @@
         'stock',
         'barcodes',
         'base_sparse_field',
+        'stock_location_tray',  # OCA/stock-logistics-warehouse
         'web_notify',  # OCA/web
     ],
-    'website': 'https://www.camptocamp.com',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'demo': [
         'demo/stock_location_demo.xml',
         'demo/vertical_lift_shuttle_demo.xml',
@@ -24,11 +25,8 @@
     'data': [
         'views/stock_location_views.xml',
         'views/vertical_lift_shuttle_views.xml',
-        'views/vertical_lift_tray_type_views.xml',
         'views/stock_vertical_lift_templates.xml',
         'views/shuttle_screen_templates.xml',
-        'data/stock_location.xml',
-        'data/vertical_lift_tray_type.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

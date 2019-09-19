@@ -85,11 +85,11 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
         self.assertEqual(
             self.shuttle.tray_type_id,
             # the tray type is on the parent of the cell (on the tray)
-            ml.location_id.location_id.vertical_lift_tray_type_id,
+            ml.location_id.location_id.tray_type_id,
         )
         self.assertEqual(
             self.shuttle.tray_type_code,
-            ml.location_id.location_id.vertical_lift_tray_type_id.code,
+            ml.location_id.location_id.tray_type_id.code,
         )
         self.assertEqual(self.shuttle.tray_x, ml.location_id.posx)
         self.assertEqual(self.shuttle.tray_y, ml.location_id.posy)

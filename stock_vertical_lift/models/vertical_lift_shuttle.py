@@ -52,7 +52,7 @@ class VerticalLiftShuttle(models.Model):
     )
     tray_name = fields.Char(compute='_compute_tray_matrix', string='Tray Name')
     tray_type_id = fields.Many2one(
-        comodel_name='vertical.lift.tray.type',
+        comodel_name='stock.location.tray.type',
         compute='_compute_tray_matrix',
         string='Tray Type',
     )
@@ -192,7 +192,7 @@ class VerticalLiftShuttle(models.Model):
                 'inventory': 'location_id',
             }
             location = record.current_move_line_id[modes[record.mode]]
-            tray_type = location.location_id.vertical_lift_tray_type_id
+            tray_type = location.location_id.tray_type_id
             selected = []
             cells = []
             if location:
