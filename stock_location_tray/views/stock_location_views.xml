@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_location_form" model="ir.ui.view">
+        <field name="name">stock.location.form.tray.type</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <group name="localization" position="after">
+                <group string="Tray" name="tray">
+                    <field name="tray_type_id"
+                            attrs="{'invisible': [('cell_in_tray_type_id', '!=', False)]}"/>
+                    <field name="cell_name_format" attrs="{'invisible': [('tray_type_id', '=', False)]}"/>
+                    <field name="cell_in_tray_type_id"
+                           attrs="{'invisible': [('cell_in_tray_type_id', '=', False)]}"/>
+                    <field name="tray_matrix"
+                           widget="location_tray_matrix"
+                           attrs="{'invisible': [('tray_type_id', '=', False), ('cell_in_tray_type_id', '=', False)]}"
+                           options="{'click_action': 'action_tray_matrix_click'}"
+                    />
+                </group>
+            </group>
+
+            <field name="posx" position="attributes">
+                <attribute name="attrs">{'readonly': [('cell_in_tray_type_id', '!=', False)]}</attribute>
+            </field>
+            <field name="posy" position="attributes">
+                <attribute name="attrs">{'readonly': [('cell_in_tray_type_id', '!=', False)]}</attribute>
+            </field>
+            <field name="posz" position="attributes">
+                <attribute name="attrs">{'readonly': [('cell_in_tray_type_id', '!=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_location_search" model="ir.ui.view">
+        <field name="name">stock.location.search.tray.type</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search"/>
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <separator/>
+                <field name="tray_type_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
