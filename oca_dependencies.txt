@@ -4,3 +4,5 @@ account-analytic
 product-attribute
 server-ux
 web
+
+stock-logistics-warehouse https://github.com/guewen/stock-logistics-warehouse 12.0-add-stock_location_tray
