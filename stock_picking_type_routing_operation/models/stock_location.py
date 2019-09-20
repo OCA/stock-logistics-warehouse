@@ -19,6 +19,8 @@ class StockLocation(models.Model):
     def _check_routing_operation_picking_type_id(self):
         for location in self:
             picking_type = location.routing_operation_picking_type_id
+            if not picking_type:
+                continue
             if picking_type.default_location_src_id != location:
                 raise ValidationError(_(
                     'A picking type for routing operations cannot have a'
