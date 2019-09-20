@@ -16,10 +16,16 @@ class StockLocation(models.Model):
 
     zone_location_id = fields.Many2one(
         'stock.location',
-        string='Location zone',
-        compute='_compute_location_zone',
+        string='Location Zone',
+        compute='_compute_zone_location_id',
         store=True,
         index=True,
+    )
+    area_location_id = fields.Many2one(
+        'stock.location',
+        string='Location Area',
+        compute='_compute_zone_location_id',
+        store=True,
     )
 
     location_kind = fields.Selection(
@@ -31,61 +37,71 @@ class StockLocation(models.Model):
             ('other', 'Other'),
         ],
         string='Location Kind',
-        compute='_compute_location_zone',
-        help='Group location according to their kinds:'
-             '* Zone: locations that are flagged as being zones'
-             '* Area: locations with children that are part of a zone'
-             '* Bin: locations without children that are part of a zone'
-             '* Stock: internal locations whose parent is a view'
+        compute='_compute_location_kind',
+        store=True,
+        help='Group location according to their kinds: '
+             '* Zone: locations that are flagged as being zones '
+             '* Area: locations with children that are part of a zone '
+             '* Bin: locations without children that are part of a zone '
+             '* Stock: internal locations whose parent is a view '
              '* Other: any other location',
     )
 
-    @api.depends('is_zone', 'usage', 'location_id.usage', 'child_ids',
-                 'location_id.is_zone')
-    def _compute_location_zone(self):
+    @api.depends('is_zone', 'location_id.zone_location_id',
+                 'location_id.area_location_id')
+    def _compute_zone_location_id(self):
         for location in self:
+            location.zone_location_id = self.browse()
+            location.area_location_id = self.browse()
             if location.is_zone:
-                location.location_kind = 'zone'
                 location.zone_location_id = location
                 continue
-
-            # Get the zone from the parents
             parent = location.location_id
-            while parent:
-                if parent.is_zone:
-                    zone_location = parent
-                    break
-                parent = parent.location_id
-            else:
-                zone_location = self.browse()
+            if parent.zone_location_id:
+                location.zone_location_id = parent.zone_location_id
+                # If we have more than one level of area in a zone,
+                # the grouping is done by the first level
+                if parent.area_location_id:
+                    location.area_location_id = parent.area_location_id
+                else:
+                    location.area_location_id = location
 
-            location.zone_location_id = zone_location
-
-            # Internal locations whose parent is view are main stocks
-            if (
-                location.usage == 'internal'
-                and location.location_id.usage == 'view'
-            ):
-                location.location_kind = 'stock'
+    @api.depends('usage', 'location_id.usage',
+                 'child_ids',
+                 'area_location_id',
+                 'zone_location_id')
+    def _compute_location_kind(self):
+        for location in self:
+            if location.zone_location_id and not location.area_location_id:
+                location.location_kind = 'zone'
                 continue
-            # Internal locations having a zone and no children are bins
+
+            parent = location.location_id
             if (
                 location.usage == 'internal'
-                and zone_location
+                and parent.usage == 'view'
+            ):
+                # Internal locations whose parent is view are main stocks
+                location.location_kind = 'stock'
+            elif (
+                # Internal locations having a zone and no children are bins
+                location.usage == 'internal'
+                and location.zone_location_id
+                and location.area_location_id
                 and not location.child_ids
             ):
                 location.location_kind = 'bin'
-                continue
-            # Internal locations having a zone and children are areas
-            if (
+            elif (
                 location.usage == 'internal'
-                and zone_location
+                and location.zone_location_id
+                and location.area_location_id
                 and location.child_ids
             ):
+                # Internal locations having a zone and children are areas
                 location.location_kind = 'area'
-                continue
-            # All the rest are other locations
-            location.location_kind = 'other'
+            else:
+                # All the rest are other locations
+                location.location_kind = 'other'
 
     @api.multi
     @api.returns('self', lambda value: value.id)
