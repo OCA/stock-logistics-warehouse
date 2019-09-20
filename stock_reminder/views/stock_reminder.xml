@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="stock_reminder_tree" model="ir.ui.view">
+            <field name="name">Stock Reminder Tree</field>
+            <field name="model">stock.reminder</field>
+            <field name="arch" type="xml">
+                <tree string="Reminders" editable="top">
+                    <field name="res_user_id"/>
+                    <field name="product_product_id"/>
+                    <field name="rule"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_reminder_action" model="ir.actions.act_window">
+            <field name="name">Stock Reminder</field>
+            <field name="res_model">stock.reminder</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="menu_stock_reminder"
+            action="stock_reminder_action"
+            parent="stock.menu_stock_configuration">
+        </menuitem>
+
+    </data>
+</openerp>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="stock_reminder_check" model="ir.cron">
+            <field name="name">Check for Reminders to send</field>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"></field>
+            <field name="model" eval="'stock.reminder'"></field>
+            <field name="function" eval="'_check_reminders'"></field>
+        </record>
+
+    </data>
+</openerp>
