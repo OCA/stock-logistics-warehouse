@@ -40,7 +40,8 @@ class StockMove(models.Model):
 
             if len(routing_quantities) == 1:
                 # The whole quantity can be taken from only one location (an
-                # empty routing picking type being equal to one location here), nothing to split.
+                # empty routing picking type being equal to one location here),
+                # nothing to split.
                 continue
 
             move._do_unreserve()
@@ -50,7 +51,8 @@ class StockMove(models.Model):
                 # not a zone
                 if picking_type:
                     routing_location = picking_type.default_location_src_id
-                    # if we have a picking type, split returns the same move if the qty is the same
+                    # if we have a picking type, split returns the same move if
+                    # the qty is the same
                     new_move_id = move._split(qty)
                     new_move_per_location.setdefault(routing_location.id, [])
                     new_move_per_location[routing_location.id].append(
@@ -61,8 +63,8 @@ class StockMove(models.Model):
         for location_id, new_move_ids in new_move_per_location.items():
             new_moves = self.browse(new_move_ids)
             new_moves.with_context(
-                # Prevent to call _apply_move_location_routing_operation, will be called
-                # when all lines are processed.
+                # Prevent to call _apply_move_location_routing_operation, will
+                # be called when all lines are processed.
                 exclude_apply_routing_operation=True,
                 # Force reservation of quants in the location they were
                 # reserved in at the origin (so we keep the same quantities
@@ -88,9 +90,9 @@ class StockMove(models.Model):
             # operations while others not. Store the number of products to
             # take from each location, so we'll be able to split the move
             # if needed.
-            # At this point, we should not have lines with different source locations,
-            # they have been split in _split_per_routing_operation(), so we
-            # can take the first one
+            # At this point, we should not have lines with different source
+            # locations, they have been split in
+            # _split_per_routing_operation(), so we can take the first one
             source = move.move_line_ids[0].location_id
             picking_type = source._find_picking_type_for_routing_operation()
             if not picking_type:
