@@ -34,13 +34,12 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     # Columns Section
-    average_consumption = fields.Float(compute='_compute_average_consumption',
-                                       string='Average Consumption')
+    average_consumption = fields.Float(compute='_compute_average_consumption')
     displayed_average_consumption = fields.Float(
         compute='_compute_displayed_average_consumption',
-        string='Average Consumption')
-    total_consumption = fields.Float(compute='_compute_average_consumption',
-                                     string='Total Consumption')
+        string='Average Consumption (Range)',
+    )
+    total_consumption = fields.Float(compute='_compute_average_consumption')
     nb_days = fields.Integer(
         compute='_compute_average_consumption',
         string='Number of days for the calculation',
@@ -57,9 +56,9 @@ class ProductProduct(models.Model):
     @api.model
     def _min_date(self, product_id):
         query = """SELECT to_char(min(date), 'YYYY-MM-DD') \
-                from stock_move where product_id = %s""" % (product_id)
+                from stock_move where product_id = %s"""
         cr = self.env.cr
-        cr.execute(query)
+        cr.execute(query, (product_id, ))
         results = cr.fetchall()
         return results and results[0] and results[0][0] \
             or time.strftime('%Y-%m-%d')

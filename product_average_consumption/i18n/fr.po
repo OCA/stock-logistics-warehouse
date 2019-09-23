@@ -28,13 +28,6 @@ msgid "Asked Calculation Range (days)"
 msgstr "Plage de calcul demandée (jours)"
 
 #. module: product_average_consumption
-#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_average_consumption
-#: model:ir.model.fields,field_description:product_average_consumption.field_product_product_displayed_average_consumption
-#: model:ir.model.fields,field_description:product_average_consumption.field_product_template_displayed_average_consumption
-msgid "Average Consumption"
-msgstr "Conso moy"
-
-#. module: product_average_consumption
 #: model:ir.model.fields,field_description:product_average_consumption.field_product_template_average_consumption
 msgid "Average Consumption"
 msgstr "Consommation moyenne"
