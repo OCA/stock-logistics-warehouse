@@ -31,9 +31,6 @@ class StockRule(models.Model):
         if (
             not self.env.context.get("_rule_no_virtual_defer")
             and self.virtual_reservation_defer_pull
-            # we generate the destination operation
-            # TODO is there a reason for this? Why not
-            # generate them when available too?
             and not self.picking_type_id.code == "outgoing"
         ):
             return True
@@ -63,24 +60,17 @@ class ProcurementGroup(models.Model):
         values.setdefault("date_planned", fields.Datetime.now())
         rule = self._get_rule(product_id, location_id, values)
         if not rule:
-            # this is the difference
             return
         action = "pull" if rule.action == "pull_push" else rule.action
         if action != "pull":
             return
-        if hasattr(rule, "_run_%s" % action):
-            getattr(rule, "_run_%s" % action)(
-                product_id,
-                product_qty,
-                product_uom,
-                location_id,
-                rule.name,
-                origin,
-                values,
-            )
-        else:
-            _logger.error(
-                "The method _run_%s doesn't exist on the procument rules"
-                % action
-            )
+        rule._run_pull(
+            product_id,
+            product_qty,
+            product_uom,
+            location_id,
+            rule.name,
+            origin,
+            values,
+        )
         return True

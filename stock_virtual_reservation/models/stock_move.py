@@ -1,27 +1,13 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api,  models
 from odoo.osv import expression
 from odoo.tools import float_compare
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
-
-    virtual_reserved_qty = fields.Float(
-        "Virtual Reserved Quantity",
-        compute="_compute_virtual_reserved_qty",
-        help="Quantity to be reserved by older operations that do not have"
-        " a real reservation yet",
-    )
-
-    # TODO does it make sense to have the 'virtual reserved qty' on product
-    # alongside other quantities?
-    @api.depends()
-    def _compute_virtual_reserved_qty(self):
-        for move in self:
-            move.virtual_reserved_qty = move._get_virtual_reserved_qty()
 
     def _should_compute_virtual_reservation(self):
         return (
@@ -30,25 +16,22 @@ class StockMove(models.Model):
             and not self.location_id.should_bypass_reservation()
         )
 
-    def _get_virtual_reserved_qty(self):
+    def _virtual_available_qty(self):
         if not self._should_compute_virtual_reservation():
             return 0.
-        # TODO verify where we should check the quantity for (full
-        # warehouse?)
+        # TODO available must be the qty in the warehouse Stock location
         available = self.product_id.qty_available
         return max(
             min(available - self._virtual_reserved_qty(), self.product_qty), 0.
         )
 
     def _virtual_quantity_domain(self):
+        # FIXME partially_available shouldn't exist if we split them?
+        # would make the qty wrong anyway
         states = ("draft", "confirmed", "partially_available", "waiting")
         domain = [
             ("state", "in", states),
             ("product_id", "=", self.product_id.id),
-            # FIXME might need to write an optimized SQL here, this one
-            # will be slow with the DB growing as picking_code is a
-            # related to picking_id.picking_type_id.code ->
-            # generates a query searching all outgoing stock.picking first
             ("picking_code", "=", "outgoing"),
             # TODO easier way to customize date field to use
             ("date", "<=", self.date),
@@ -71,38 +54,10 @@ class StockMove(models.Model):
         )
         return virtual_reserved
 
-    # TODO As we will defer the creation of the previous operations before
-    # doing this reservation, we might not even need to do this, since
-    # the previous operation will reserve only what's possible. Still,
-    # for the one-step...
-    # def _update_reserved_quantity(
-    #     self,
-    #     need,
-    #     available_quantity,
-    #     location_id,
-    #     lot_id=None,
-    #     package_id=None,
-    #     owner_id=None,
-    #     strict=True,
-    # ):
-    #     # TODO how to ensure this is done before any other override of the
-    #     # method...
-    #     if self._should_compute_virtual_reservation():
-    #         virtual_reserved = self._virtual_reserved_qty()
-    #         available_quantity = max(available_quantity - virtual_reserved, 0.)
-    #     return super()._update_reserved_quantity(
-    #         need,
-    #         available_quantity,
-    #         location_id,
-    #         lot_id=lot_id,
-    #         package_id=package_id,
-    #         owner_id=owner_id,
-    #         strict=strict,
-    #     )
-
-    def _action_assign(self):
-        self._run_stock_rule()
-        return super()._action_assign()
+    # TODO add a public method + wizard on moves
+    # def _action_assign(self):
+    #     self._run_stock_rule()
+    #     return super()._action_assign()
 
     @api.multi
     def _run_stock_rule(self):
@@ -128,7 +83,7 @@ class StockMove(models.Model):
                 continue
             # do not use the computed field, because it will keep
             # a value in cache that we cannot invalidate declaratively
-            available_quantity = move._get_virtual_reserved_qty()
+            available_quantity = move._virtual_available_qty()
             if (
                 float_compare(
                     available_quantity, 0, precision_digits=precision
@@ -144,6 +99,7 @@ class StockMove(models.Model):
             if float_compare(remaining, 0, precision_digits=precision) <= 0:
                 continue
 
+            # TODO split the 'out' picking before calling the pull rull
             quantity = min(remaining, available_quantity)
             values = move._prepare_procurement_values()
 

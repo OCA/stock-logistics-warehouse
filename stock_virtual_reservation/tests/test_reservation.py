@@ -131,10 +131,10 @@ class TestVirtualReservation(common.SavepointCase):
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 20.)
 
-        self.assertEqual(picking.move_lines.virtual_reserved_qty, 5)
-        self.assertEqual(picking2.move_lines.virtual_reserved_qty, 3)
-        self.assertEqual(picking3.move_lines.virtual_reserved_qty, 12)
-        self.assertEqual(picking4.move_lines.virtual_reserved_qty, 0)
+        self.assertEqual(picking.move_lines._virtual_available_qty(), 5)
+        self.assertEqual(picking2.move_lines._virtual_available_qty(), 3)
+        self.assertEqual(picking3.move_lines._virtual_available_qty(), 12)
+        self.assertEqual(picking4.move_lines._virtual_available_qty(), 0)
 
     def test_defer_creation(self):
         pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
