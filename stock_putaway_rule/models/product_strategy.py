@@ -1,6 +1,6 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -18,43 +18,81 @@ class StockPutawayRule(models.Model):
             return self.env.context.get('active_id')
 
     def _default_product_id(self):
-        if self.env.context.get('active_model') == 'product.template' and self.env.context.get('active_id'):
-            product_template = self.env['product.template'].browse(self.env.context.get('active_id'))
+        active_model = self.env.context.get('active_model')
+        active_id = self.env.context.get('active_id')
+        if active_model == 'product.template' and active_id:
+            product_template = self.env['product.template'].browse(active_id)
             product_template = product_template.exists()
             if product_template.product_variant_count == 1:
                 return product_template.product_variant_id
-        elif self.env.context.get('active_model') == 'product.product':
-            return self.env.context.get('active_id')
+        elif active_model == 'product.product':
+            return active_id
 
     def _domain_category_id(self):
         active_model = self.env.context.get('active_model')
-        if active_model in ('product.template', 'product.product') and self.env.context.get('active_id'):
-            product = self.env[active_model].browse(self.env.context.get('active_id'))
+        active_id = self.env.context.get('active_id')
+        if (
+            active_model in ('product.template', 'product.product')
+            and active_id
+        ):
+            product = self.env[active_model].browse(active_id)
             product = product.exists()
             if product:
                 return [('id', '=', product.categ_id.id)]
         return []
 
     def _domain_product_id(self):
-        domain = "[('type', '!=', 'service'), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
+        domain = "[('type', '!=', 'service'), " \
+                 "'|', " \
+                 "('company_id', '=', False), " \
+                 "('company_id', '=', company_id)]"
         if self.env.context.get('active_model') == 'product.template':
-            return [('product_tmpl_id', '=', self.env.context.get('active_id'))]
+            return [
+                ('product_tmpl_id', '=', self.env.context.get('active_id'))
+            ]
         return domain
 
     product_id = fields.Many2one(
-        'product.product', 'Product',
-        default=_default_product_id, domain=_domain_product_id, ondelete='cascade')
-    category_id = fields.Many2one('product.category', 'Product Category',
-        default=_default_category_id, domain=_domain_category_id, ondelete='cascade')
+        'product.product',
+        string='Product',
+        default=lambda s: s._default_product_id(),
+        domain=_domain_product_id,
+        ondelete='cascade'
+    )
+    category_id = fields.Many2one(
+        'product.category',
+        string='Product Category',
+        default=lambda s: s._default_category_id(),
+        domain=_domain_category_id,
+        ondelete='cascade'
+    )
     location_in_id = fields.Many2one(
-        'stock.location', 'When product arrives in',
-        domain="[('child_ids', '!=', False), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
-        default=_default_location_id, required=True, ondelete='cascade')
+        'stock.location',
+        string='When product arrives in',
+        domain="[('child_ids', '!=', False), "
+               "'|', "
+               "('company_id', '=', False), "
+               "('company_id', '=', company_id)]",
+        default=lambda s: s._default_location_id(),
+        required=True,
+        ondelete='cascade'
+    )
     location_out_id = fields.Many2one(
-        'stock.location', 'Store to',
-        domain="[('id', 'child_of', location_in_id), ('id', '!=', location_in_id), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
-        required=True, ondelete='cascade')
-    sequence = fields.Integer('Priority', help="Give to the more specialized category, a higher priority to have them in top of the list.")
+        'stock.location',
+        string='Store to',
+        domain="[('id', 'child_of', location_in_id), "
+               "('id', '!=', location_in_id), "
+               "'|', "
+               "('company_id', '=', False), "
+               "('company_id', '=', company_id)]",
+        required=True,
+        ondelete='cascade'
+    )
+    sequence = fields.Integer(
+        'Priority',
+        help="Give to the more specialized category, a higher priority to "
+             "have them in top of the list."
+    )
     company_id = fields.Many2one(
         'res.company', 'Company', required=True,
         default=lambda s: s.env.user.company_id, index=True)
@@ -74,5 +112,24 @@ class StockPutawayRule(models.Model):
         if 'company_id' in vals:
             for rule in self:
                 if rule.company_id.id != vals['company_id']:
-                    raise UserError(_("Changing the company of this record is forbidden at this point, you should rather archive it and create a new one."))
+                    raise UserError(_(
+                        "Changing the company of this record is forbidden at "
+                        "this point, you should rather archive it and create "
+                        "a new one."
+                    ))
         return super(StockPutawayRule, self).write(vals)
+
+    def filter_rules(self, product=None, category=None):
+        """Filter records according to product or categor"""
+        assert product or category
+        if product:
+            return self.filtered(lambda x: x.product_id == product)
+        else:
+            return self.filtered(lambda x: x.category_id == category)
+
+    def select_putaway(self):
+        """Select a putaway location to return"""
+        return self[0] if len(self) > 1 else self
+
+    def _get_destination_location(self):
+        return self.location_out_id
