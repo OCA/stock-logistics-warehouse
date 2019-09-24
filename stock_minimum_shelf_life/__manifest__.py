@@ -16,6 +16,7 @@
         "product_expiry",
     ],
     "data": [
+        "views/res_config_settings.xml",
     ],
     "installable": True,
     "development_status": 'Alpha',
