@@ -40,7 +40,7 @@ msgstr "无效的域运算符%s"
 #: code:addons/stock_available_unreserved/models/product.py:119
 #, python-format
 msgid "Invalid domain right operand %s"
-msgstr ""
+msgstr "无效的域权限操作数%s"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_product_product
