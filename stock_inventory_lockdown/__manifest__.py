@@ -4,7 +4,7 @@
 {
     "name": "Inventory Lock Down",
     "summary": "Lock down stock locations during inventories.",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "development_status": "Mature",
     "depends": ["stock"],
     "author": "Numérigraphe, Eficent, Odoo Community Association (OCA)",
