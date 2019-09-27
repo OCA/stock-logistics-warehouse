@@ -38,8 +38,9 @@ class StockMove(models.Model):
     def _virtual_available_qty(self):
         if not self._should_compute_virtual_reservation():
             return 0.
-        # TODO available must be the qty in the warehouse Stock location
-        available = self.product_id.qty_available
+        available = self.product_id.with_context(
+            location=self.warehouse_id.lot_stock_id.id
+        ).qty_available
         return max(
             min(available - self._virtual_reserved_qty(), self.product_qty), 0.
         )
@@ -50,7 +51,7 @@ class StockMove(models.Model):
             ("product_id", "=", self.product_id.id),
             ("picking_code", "=", "outgoing"),
             ("date_priority", "<=", self.date_priority),
-            # TODO same warehouse
+            ("warehouse_id", "=", self.warehouse_id.id),
         ]
         return domain
 

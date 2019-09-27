@@ -50,7 +50,7 @@ class TestVirtualReservation(common.SavepointCase):
             {
                 "name": "TEST",
                 # TODO test case with "one": we should not create
-                # the chained moves until we all the whole quantity
+                # the chained moves until we have the whole quantity
                 "move_type": "direct",
                 "partner_id": self.partner_delta.id,
             }
