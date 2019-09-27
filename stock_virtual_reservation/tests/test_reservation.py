@@ -41,7 +41,8 @@ class TestVirtualReservation(common.SavepointCase):
         a product. According to the WH, it creates the pick/pack/ship
         moves.
 
-        Products must be a list of tuples (product, quantity).
+        Products must be a list of tuples (product, quantity) or
+        (product, quantity, uom).
         One stock move will be created for each tuple.
         """
 
@@ -63,15 +64,18 @@ class TestVirtualReservation(common.SavepointCase):
             "partner_id": self.partner_delta,
         }
 
-        for product, qty in products:
+        for row in products:
+            if len(row) == 2:
+                product, qty = row
+                uom = product.uom_id
+            elif len(row) == 3:
+                product, qty, uom = row
+            else:
+                raise ValueError(
+                    "Expect (product, quantity, uom) or (product, quantity)"
+                )
             self.env["procurement.group"].run(
-                product,
-                qty,
-                product.uom_id,
-                self.loc_customer,
-                "TEST",
-                "TEST",
-                values,
+                product, qty, uom, self.loc_customer, "TEST", "TEST", values
             )
         pickings = self._pickings_in_group(group)
         pickings.mapped("move_lines").write(
@@ -389,4 +393,56 @@ class TestVirtualReservation(common.SavepointCase):
         self.assertRecordValues(
             out_picking.move_lines,
             [{"product_qty": 10., "product_id": self.product2.id}],
+        )
+
+    def test_defer_creation_uom(self):
+        self.wh.write({"virtual_reservation_defer_pull": True})
+
+        self._update_qty_in_location(self.loc_bin1, self.product1, 12.)
+        uom_dozen = self.env.ref("uom.product_uom_dozen")
+        pickings = self._create_picking_chain(
+            self.wh,
+            # means 24 products
+            [(self.product1, 2, uom_dozen)],
+        )
+        self.assertEqual(
+            len(pickings), 1, "expect only the last out->customer"
+        )
+        cust_picking = pickings
+        self.assertRecordValues(
+            cust_picking,
+            [
+                {
+                    "state": "waiting",
+                    "location_id": self.wh.wh_output_stock_loc_id.id,
+                    "location_dest_id": self.loc_customer.id,
+                }
+            ],
+        )
+        self.assertRecordValues(
+            cust_picking.move_lines,
+            [
+                {
+                    "state": "waiting",
+                    "product_uom": uom_dozen.id,
+                    "product_qty": 24.,
+                    "product_uom_qty": 2.,
+                    "virtual_available_qty": 12.,
+                }
+            ],
+        )
+
+        cust_picking.move_lines.release_virtual_reservation()
+        out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
+
+        self.assertRecordValues(
+            out_picking.move_lines,
+            [
+                {
+                    "state": "assigned",
+                    "product_qty": 12.,
+                    "reserved_availability": 1.,
+                    "product_uom_qty": 1.,
+                }
+            ],
         )

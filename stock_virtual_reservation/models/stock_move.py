@@ -114,10 +114,9 @@ class StockMove(models.Model):
             ):
                 continue
 
-            quantity = min(move.product_uom_qty, available_quantity)
-            remaining = move.product_uom_qty - quantity
+            quantity = min(move.product_qty, available_quantity)
+            remaining = move.product_qty - quantity
 
-            # TODO check if we have to convert UOM
             if float_compare(remaining, 0, precision_digits=precision) > 0:
                 if move.picking_id.move_type == "one":
                     # we don't want to delivery unless we can deliver all at
@@ -129,7 +128,9 @@ class StockMove(models.Model):
 
             self.env["procurement.group"].run_defer(
                 move.product_id,
-                quantity,
+                move.product_id.uom_id._compute_quantity(
+                    quantity, move.product_uom, rounding_method="HALF-UP"
+                ),
                 move.product_uom,
                 move.location_id,
                 move.origin,
