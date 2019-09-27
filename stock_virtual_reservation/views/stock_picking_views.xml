@@ -7,9 +7,9 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <button name="action_confirm" position="after">
-                <field name="picking_type_code" invisible="1"/>
+                <field name="need_rule_pull" invisible="1"/>
                 <button name="release_virtual_reservation"
-                        attrs="{'invisible': ['!', '&amp;', ('state', 'in', ('confirmed', 'waiting')), ('picking_type_code', '=', 'outgoing')]}"
+                        attrs="{'invisible': [('need_rule_pull', '=', False)]}"
                         string="Release"
                         type="object"
                         class="oe_highlight"

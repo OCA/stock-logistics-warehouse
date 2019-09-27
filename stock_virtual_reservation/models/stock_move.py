@@ -22,6 +22,7 @@ class StockMove(models.Model):
         help="Available quantity minus virtually reserved by older"
         " operations that do not have a real reservation yet",
     )
+    need_rule_pull = fields.Boolean()
 
     @api.depends()
     def _compute_virtual_available_qty(self):
@@ -47,9 +48,8 @@ class StockMove(models.Model):
 
     def _virtual_quantity_domain(self):
         domain = [
-            ("state", "in", ("confirmed", "waiting")),
+            ("need_rule_pull", "=", True),
             ("product_id", "=", self.product_id.id),
-            ("picking_code", "=", "outgoing"),
             ("date_priority", "<=", self.date_priority),
             ("warehouse_id", "=", self.warehouse_id.id),
         ]
@@ -79,8 +79,10 @@ class StockMove(models.Model):
         # The method set procure_method as 'make_to_stock' by default on split,
         # but we want to keep 'make_to_order' for chained moves when we split
         # a partially available move in _run_stock_rule().
-        if self.env.context.get("procure_method"):
-            vals["procure_method"] = self.env.context["procure_method"]
+        if self.env.context.get("virtual_reservation"):
+            vals.update(
+                {"procure_method": self.procure_method, "need_rule_pull": True}
+            )
         return vals
 
     @api.multi
@@ -95,11 +97,9 @@ class StockMove(models.Model):
             "Product Unit of Measure"
         )
         for move in self:
-            # FIXME what to do if there is no pull rule?
-            # should we have a different state for moves that need a release?
-            if move.state not in ("confirmed", "waiting"):
+            if not move.need_rule_pull:
                 continue
-            if move.product_id.type not in ("consu", "product"):
+            if move.state not in ("confirmed", "waiting"):
                 continue
             # do not use the computed field, because it will keep
             # a value in cache that we cannot invalidate declaratively
@@ -120,9 +120,7 @@ class StockMove(models.Model):
                     # we don't want to delivery unless we can deliver all at
                     # once
                     continue
-                move.with_context(procure_method=move.procure_method)._split(
-                    remaining
-                )
+                move.with_context(virtual_reservation=True)._split(remaining)
 
             values = move._prepare_procurement_values()
 

@@ -108,6 +108,7 @@ class TestVirtualReservation(common.SavepointCase):
         picking.action_done()
 
     def test_virtual_reservation_value(self):
+        self.wh.write({"virtual_reservation_defer_pull": True})
         picking = self._out_picking(
             self._create_picking_chain(
                 self.wh, [(self.product1, 5)], date=datetime(2019, 9, 2, 16, 0)

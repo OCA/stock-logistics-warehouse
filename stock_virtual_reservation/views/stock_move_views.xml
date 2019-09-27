@@ -10,6 +10,7 @@
         <field name="arch" type="xml">
             <field name="product_uom_qty" position="after">
                 <field name="virtual_available_qty"/>
+                <field name="date_priority"/>
             </field>
         </field>
     </record>
@@ -23,19 +24,8 @@
         <field name="arch" type="xml">
             <group name="main_grp_col2" position="inside">
                 <field name="virtual_available_qty"/>
+                <field name="date_priority"/>
             </group>
-        </field>
-    </record>
-
-    <record id="view_move_release_search" model="ir.ui.view">
-        <field name="name">stock.move.release.search</field>
-        <field name="model">stock.move</field>
-        <field name="inherit_id" ref="stock.view_move_search"/>
-        <field name="arch" type="xml">
-            <filter name="outgoing" position="after">
-                <separator/>
-                <filter string="To release" name="to_release" domain="[('state', 'in', ('confirmed', 'waiting')), ('picking_code', '=', 'outgoing')]" help="Stock Moves to release"/>
-            </filter>
         </field>
     </record>
 
@@ -51,7 +41,8 @@
                      (0, 0, {'view_mode': 'kanban', 'view_id': ref('stock.stock_move_view_kanban')}),
                      (0, 0, {'view_mode': 'form', 'view_id': ref('view_move_release_form')}),
                      ]"/>
-        <field name="context">{'search_default_to_release': 1}</field>
+        <field name="context"></field>
+        <field name="domain">[('need_rule_pull', '=' , True)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new stock movement

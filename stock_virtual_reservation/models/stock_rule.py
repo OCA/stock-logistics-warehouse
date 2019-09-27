@@ -26,8 +26,14 @@ class StockRule(models.Model):
             # We still want to create the first part of the chain
             and not self.picking_type_id.code == "outgoing"
         ):
+            moves = values.get("move_dest_ids")
+            # track the moves that needs to have their pull rule
+            # done
+            if moves:
+                moves.write({"need_rule_pull": True})
             return True
-        return super()._run_pull(
+
+        super()._run_pull(
             product_id,
             product_qty,
             product_uom,
@@ -36,6 +42,12 @@ class StockRule(models.Model):
             origin,
             values,
         )
+        moves = values.get("move_dest_ids")
+        if moves:
+            moves.filtered(lambda r: r.need_rule_pull).write(
+                {"need_rule_pull": False}
+            )
+        return True
 
 
 class ProcurementGroup(models.Model):
