@@ -9,10 +9,10 @@ from odoo.tools import float_compare
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    # TODO create glue module to set from sale order
     date_priority = fields.Datetime(
         string="Priority Date",
         index=True,
+        default=fields.Datetime.now,
         help="Date/time used to sort moves to deliver first. "
         "Used to calculate the virtual quantity.",
     )
