@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
+from odoo.addons import decimal_precision as dp
 from odoo.osv import expression
 from odoo.tools import float_compare
 
@@ -19,6 +20,7 @@ class StockMove(models.Model):
     virtual_available_qty = fields.Float(
         "Virtual Available Quantity",
         compute="_compute_virtual_available_qty",
+        digits=dp.get_precision("Product Unit of Measure"),
         help="Available quantity minus virtually reserved by older"
         " operations that do not have a real reservation yet",
     )
@@ -115,6 +117,7 @@ class StockMove(models.Model):
             quantity = min(move.product_uom_qty, available_quantity)
             remaining = move.product_uom_qty - quantity
 
+            # TODO check if we have to convert UOM
             if float_compare(remaining, 0, precision_digits=precision) > 0:
                 if move.picking_id.move_type == "one":
                     # we don't want to delivery unless we can deliver all at
