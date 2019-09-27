@@ -116,6 +116,10 @@ class StockMove(models.Model):
             remaining = move.product_uom_qty - quantity
 
             if float_compare(remaining, 0, precision_digits=precision) > 0:
+                if move.picking_id.move_type == "one":
+                    # we don't want to delivery unless we can deliver all at
+                    # once
+                    continue
                 move.with_context(procure_method=move.procure_method)._split(
                     remaining
                 )

@@ -32,7 +32,9 @@ class TestVirtualReservation(common.SavepointCase):
             {"name": "Bin1", "location_id": cls.loc_stock.id, "kind": "bin"}
         )
 
-    def _create_picking_chain(self, wh, products=None, date=None):
+    def _create_picking_chain(
+        self, wh, products=None, date=None, move_type="direct"
+    ):
         """Create picking chain
 
         It runs the procurement group to create the moves required for
@@ -49,9 +51,7 @@ class TestVirtualReservation(common.SavepointCase):
         group = self.env["procurement.group"].create(
             {
                 "name": "TEST",
-                # TODO test case with "one": we should not create
-                # the chained moves until we have the whole quantity
-                "move_type": "direct",
+                "move_type": move_type,
                 "partner_id": self.partner_delta.id,
             }
         )
@@ -148,7 +148,8 @@ class TestVirtualReservation(common.SavepointCase):
         self.assertEqual(picking3.move_lines._virtual_available_qty(), 12)
         self.assertEqual(picking4.move_lines._virtual_available_qty(), 0)
 
-    def test_defer_creation(self):
+    def test_normal_chain(self):
+        # usual scenario, without using the option to defer the pull
         pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
         self.assertEqual(len(pickings), 2, "expect stock->out + out->customer")
         self.assertRecordValues(
@@ -165,6 +166,7 @@ class TestVirtualReservation(common.SavepointCase):
             ],
         )
 
+    def test_defer_creation(self):
         self.wh.write({"virtual_reservation_defer_pull": True})
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 20.)
@@ -187,6 +189,50 @@ class TestVirtualReservation(common.SavepointCase):
         cust_picking.move_lines.release_virtual_reservation()
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
 
+        self.assertRecordValues(
+            out_picking,
+            [
+                {
+                    "state": "assigned",
+                    "location_id": self.wh.lot_stock_id.id,
+                    "location_dest_id": self.wh.wh_output_stock_loc_id.id,
+                }
+            ],
+        )
+
+    def test_defer_creation_move_type_one(self):
+        """Deliver all products at once"""
+        self.wh.write({"virtual_reservation_defer_pull": True})
+
+        self._update_qty_in_location(self.loc_bin1, self.product1, 5.)
+        pickings = self._create_picking_chain(
+            self.wh, [(self.product1, 10.)], move_type="one"
+        )
+        self.assertEqual(
+            len(pickings), 1, "expect only the last out->customer"
+        )
+        cust_picking = pickings
+        self.assertRecordValues(
+            cust_picking,
+            [
+                {
+                    "state": "waiting",
+                    "location_id": self.wh.wh_output_stock_loc_id.id,
+                    "location_dest_id": self.loc_customer.id,
+                }
+            ],
+        )
+
+        cust_picking.move_lines.release_virtual_reservation()
+        # no chain picking should have been created because we would have a
+        # partial and the move delivery type is "one"
+        out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
+        self.assertFalse(out_picking)
+
+        self._update_qty_in_location(self.loc_bin1, self.product1, 10.)
+        # now, we have enough, the picking is created
+        cust_picking.move_lines.release_virtual_reservation()
+        out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
         self.assertRecordValues(
             out_picking,
             [
