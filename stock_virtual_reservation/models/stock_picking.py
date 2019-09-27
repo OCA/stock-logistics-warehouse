@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
@@ -12,3 +12,7 @@ class StockPicking(models.Model):
     picking_type_code = fields.Selection(
         store=True,
     )
+
+    @api.multi
+    def release_virtual_reservation(self):
+        self.mapped('move_lines').release_virtual_reservation()

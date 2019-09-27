@@ -59,12 +59,10 @@ class ProcurementGroup(models.Model):
         values.setdefault("priority", "1")
         values.setdefault("date_planned", fields.Datetime.now())
         rule = self._get_rule(product_id, location_id, values)
-        if not rule:
+        if not rule or rule.action not in ("pull", "pull_push"):
             return
-        action = "pull" if rule.action == "pull_push" else rule.action
-        if action != "pull":
-            return
-        rule._run_pull(
+
+        rule.with_context(_rule_no_virtual_defer=True)._run_pull(
             product_id,
             product_qty,
             product_uom,

@@ -11,6 +11,10 @@
         'stock',
     ],
     'data': [
+        'views/stock_move_views.xml',
+        'views/stock_picking_views.xml',
+        'views/stock_rule_views.xml',
+        'wizards/stock_move_release_views.xml',
     ],
     'installable': True,
     'license': 'AGPL-3',

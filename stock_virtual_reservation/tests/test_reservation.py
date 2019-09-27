@@ -82,6 +82,14 @@ class TestVirtualReservation(common.SavepointCase):
         self.env["stock.quant"]._update_available_quantity(
             product, location, quantity
         )
+        self.env["product.product"].invalidate_cache(
+            fnames=[
+                "qty_available",
+                "virtual_available",
+                "incoming_qty",
+                "outgoing_qty",
+            ]
+        )
 
     def _prev_picking(self, picking):
         return picking.move_lines.move_orig_ids.picking_id
@@ -172,15 +180,15 @@ class TestVirtualReservation(common.SavepointCase):
                 }
             ],
         )
-        # TODO we want to ensure that we do not assign the new moves
 
-        cust_picking.move_lines._run_stock_rule()
+        cust_picking.move_lines.release_virtual_reservation()
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
+
         self.assertRecordValues(
             out_picking,
             [
                 {
-                    "state": "confirmed",
+                    "state": "assigned",
                     "location_id": self.wh.lot_stock_id.id,
                     "location_dest_id": self.wh.wh_output_stock_loc_id.id,
                 }
@@ -209,14 +217,15 @@ class TestVirtualReservation(common.SavepointCase):
             ],
         )
 
-        cust_picking.action_assign()
+        cust_picking.release_virtual_reservation()
 
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
+
         self.assertRecordValues(
             out_picking,
             [
                 {
-                    "state": "confirmed",
+                    "state": "assigned",
                     "location_id": self.wh.lot_stock_id.id,
                     "location_dest_id": self.wh.wh_output_stock_loc_id.id,
                 }
@@ -233,10 +242,17 @@ class TestVirtualReservation(common.SavepointCase):
             cust_picking.move_lines,
             [
                 {
-                    "state": "partially_available",
-                    "product_qty": 20.,
+                    "state": "assigned",
+                    "product_qty": 7.,
                     "reserved_availability": 7.,
-                }
+                    "procure_method": "make_to_order",
+                },
+                {
+                    "state": "waiting",
+                    "product_qty": 13.,
+                    "reserved_availability": 0.,
+                    "procure_method": "make_to_order",
+                },
             ],
         )
 
@@ -249,3 +265,36 @@ class TestVirtualReservation(common.SavepointCase):
             - out_picking
         )
         self.assertEqual(len(cust_backorder), 1)
+
+        # nothing happen, no stock
+        self.assertEqual(
+            len(self._pickings_in_group(cust_picking.group_id)), 3
+        )
+        cust_backorder.release_virtual_reservation()
+        self.assertEqual(
+            len(self._pickings_in_group(cust_picking.group_id)), 3
+        )
+
+        # We add stock, so now the release must create the next
+        # chained move
+        self._update_qty_in_location(self.loc_bin1, self.product1, 30)
+        cust_backorder.release_virtual_reservation()
+        out_backorder = (
+            self._pickings_in_group(cust_picking.group_id)
+            - cust_backorder
+            - cust_picking
+            - out_picking
+        )
+        self.assertRecordValues(
+            out_backorder.move_lines,
+            [
+                {
+                    "state": "assigned",
+                    "product_qty": 13.,
+                    "reserved_availability": 13.,
+                    "procure_method": "make_to_stock",
+                    "location_id": self.wh.lot_stock_id.id,
+                    "location_dest_id": self.wh.wh_output_stock_loc_id.id,
+                }
+            ],
+        )

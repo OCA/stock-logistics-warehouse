@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_release_form" model="ir.ui.view">
+        <field name="name">stock.picking.release.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <button name="action_confirm" position="after">
+                <field name="picking_type_code" invisible="1"/>
+                <button name="release_virtual_reservation"
+                        attrs="{'invisible': ['!', '&amp;', ('state', 'in', ('confirmed', 'waiting')), ('picking_type_code', '=', 'outgoing')]}"
+                        string="Release"
+                        type="object"
+                        class="oe_highlight"
+                        groups="stock.group_stock_user"/>
+            </button>
+        </field>
+    </record>
+
+</odoo>

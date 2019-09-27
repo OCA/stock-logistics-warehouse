@@ -1,13 +1,25 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api,  models
+from odoo import api, fields, models
 from odoo.osv import expression
 from odoo.tools import float_compare
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
+
+    virtual_available_qty = fields.Float(
+        "Virtual Available Quantity",
+        compute="_compute_virtual_available_qty",
+        help="Available quantity minus virtually reserved by older"
+        " operations that do not have a real reservation yet",
+    )
+
+    @api.depends()
+    def _compute_virtual_available_qty(self):
+        for move in self:
+            move.virtual_available_qty = move._virtual_available_qty()
 
     def _should_compute_virtual_reservation(self):
         return (
@@ -26,14 +38,13 @@ class StockMove(models.Model):
         )
 
     def _virtual_quantity_domain(self):
-        # FIXME partially_available shouldn't exist if we split them?
-        # would make the qty wrong anyway
-        states = ("draft", "confirmed", "partially_available", "waiting")
         domain = [
-            ("state", "in", states),
+            ("state", "in", ("confirmed", "waiting")),
             ("product_id", "=", self.product_id.id),
             ("picking_code", "=", "outgoing"),
             # TODO easier way to customize date field to use
+            # TODO use a datetime field, can be set from sale order
+            # with a glue module
             ("date", "<=", self.date),
         ]
         # TODO priority?
@@ -54,10 +65,18 @@ class StockMove(models.Model):
         )
         return virtual_reserved
 
-    # TODO add a public method + wizard on moves
-    # def _action_assign(self):
-    #     self._run_stock_rule()
-    #     return super()._action_assign()
+    @api.multi
+    def release_virtual_reservation(self):
+        self._run_stock_rule()
+
+    def _prepare_move_split_vals(self, qty):
+        vals = super()._prepare_move_split_vals(qty)
+        # The method set procure_method as 'make_to_stock' by default on split,
+        # but we want to keep 'make_to_order' for chained moves when we split
+        # a partially available move in _run_stock_rule().
+        if self.env.context.get("procure_method"):
+            vals["procure_method"] = self.env.context["procure_method"]
+        return vals
 
     @api.multi
     def _run_stock_rule(self):
@@ -71,13 +90,9 @@ class StockMove(models.Model):
             "Product Unit of Measure"
         )
         for move in self:
-            if move.rule_id.action != "pull":
-                continue
-            if move.state not in (
-                "waiting",
-                "confirmed",
-                "partially_available",
-            ):
+            # FIXME what to do if there is no pull rule?
+            # should we have a different state for moves that need a release?
+            if move.state not in ("confirmed", "waiting"):
                 continue
             if move.product_id.type not in ("consu", "product"):
                 continue
@@ -92,20 +107,17 @@ class StockMove(models.Model):
             ):
                 continue
 
-            # TODO probably not the good way to do this?
-            already_in_pull = sum(move.mapped("move_orig_ids.product_qty"))
-            remaining = move.product_uom_qty - already_in_pull
+            quantity = min(move.product_uom_qty, available_quantity)
+            remaining = move.product_uom_qty - quantity
 
-            if float_compare(remaining, 0, precision_digits=precision) <= 0:
-                continue
+            if float_compare(remaining, 0, precision_digits=precision) > 0:
+                move.with_context(procure_method=move.procure_method)._split(
+                    remaining
+                )
 
-            # TODO split the 'out' picking before calling the pull rull
-            quantity = min(remaining, available_quantity)
             values = move._prepare_procurement_values()
 
-            self.env["procurement.group"].with_context(
-                _rule_no_virtual_defer=True
-            ).run_defer(
+            self.env["procurement.group"].run_defer(
                 move.product_id,
                 quantity,
                 move.product_uom,
@@ -113,4 +125,11 @@ class StockMove(models.Model):
                 move.origin,
                 values,
             )
+
+            pull_move = move
+            while pull_move:
+                if pull_move.state == "confirmed":
+                    pull_move._action_assign()
+                pull_move = pull_move.move_orig_ids
+
         return True

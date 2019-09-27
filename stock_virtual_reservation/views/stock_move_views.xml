@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_move_release_tree" model="ir.ui.view">
+        <field name="name">Stock Moves Release</field>
+        <field name="model">stock.move</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="stock.view_move_tree"/>
+        <field eval="900" name="priority"/>
+        <field name="arch" type="xml">
+            <field name="product_uom_qty" position="after">
+                <field name="virtual_available_qty"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_release_form" model="ir.ui.view">
+        <field name="name">stock.move.release.form</field>
+        <field name="model">stock.move</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="stock.view_move_form"/>
+        <field eval="900" name="priority"/>
+        <field name="arch" type="xml">
+            <group name="main_grp_col2" position="inside">
+                <field name="virtual_available_qty"/>
+            </group>
+        </field>
+    </record>
+
+    <record id="view_move_release_search" model="ir.ui.view">
+        <field name="name">stock.move.release.search</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_search"/>
+        <field name="arch" type="xml">
+            <filter name="outgoing" position="after">
+                <separator/>
+                <filter string="To release" name="to_release" domain="[('state', 'in', ('confirmed', 'waiting')), ('picking_code', '=', 'outgoing')]" help="Stock Moves to release"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="stock_move_release_action" model="ir.actions.act_window">
+        <field name="name">Stock Moves To Release</field>
+        <field name="res_model">stock.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="search_view_id" ref="stock.view_move_search"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                     (0, 0, {'view_mode': 'tree', 'view_id': ref('view_move_release_tree')}),
+                     (0, 0, {'view_mode': 'kanban', 'view_id': ref('stock.stock_move_view_kanban')}),
+                     (0, 0, {'view_mode': 'form', 'view_id': ref('view_move_release_form')}),
+                     ]"/>
+        <field name="context">{'search_default_to_release': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new stock movement
+            </p><p>
+                This menu gives you the full traceability of inventory
+                operations on a specific product. You can filter on the product
+                to see all the past or future movements for the product.
+            </p>
+        </field>
+    </record>
+
+    <menuitem action="stock_move_release_action"
+              id="stock_move_release_menu"
+              parent="stock.menu_stock_warehouse_mgmt"
+              sequence="10"
+              groups="stock.group_stock_manager,stock.group_stock_user"
+    />
+
+</odoo>
