@@ -43,7 +43,7 @@ class StockMove(models.Model):
             return 0.
         available = self.product_id.with_context(
             location=self.warehouse_id.lot_stock_id.id
-        ).qty_available
+        ).virtual_available
         return max(
             min(available - self._virtual_reserved_qty(), self.product_qty), 0.
         )
@@ -138,8 +138,7 @@ class StockMove(models.Model):
 
             pull_move = move
             while pull_move:
-                if pull_move.state == "confirmed":
-                    pull_move._action_assign()
+                pull_move._action_assign()
                 pull_move = pull_move.move_orig_ids
 
         return True
