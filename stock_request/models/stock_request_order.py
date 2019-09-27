@@ -101,6 +101,7 @@ class StockRequestOrder(models.Model):
     stock_request_ids = fields.One2many(
         'stock.request',
         inverse_name='order_id',
+        copy=True,
     )
     stock_request_count = fields.Integer(
         string='Stock requests',
