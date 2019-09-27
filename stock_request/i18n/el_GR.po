@@ -469,7 +469,7 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:266
+#: code:addons/stock_request/models/stock_request_order.py:267
 #, python-format
 msgid "Only orders on draft state can be unlinked"
 msgstr ""
@@ -853,13 +853,13 @@ msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move.py:38
-#: code:addons/stock_request/models/stock_request_order.py:283
+#: code:addons/stock_request/models/stock_request_order.py:284
 #, python-format
 msgid "The company of the stock request must match with that of the location."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:274
+#: code:addons/stock_request/models/stock_request_order.py:275
 #, python-format
 msgid "The company of the stock request must match with that of the warehouse."
 msgstr ""
@@ -879,7 +879,7 @@ msgid "The picking policy must be equal to the order"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:292
+#: code:addons/stock_request/models/stock_request_order.py:293
 #, python-format
 msgid "This action only works in the context of products"
 msgstr ""
@@ -903,7 +903,7 @@ msgid "Transfers"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:313
+#: code:addons/stock_request/models/stock_request_order.py:314
 #, python-format
 msgid ""
 "Unfortunately it seems you do not have the necessary rights for creating "
