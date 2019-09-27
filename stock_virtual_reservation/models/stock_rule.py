@@ -10,14 +10,6 @@ _logger = logging.getLogger(__name__)
 class StockRule(models.Model):
     _inherit = "stock.rule"
 
-    # TODO add in view, visible when action is pull
-    virtual_reservation_defer_pull = fields.Boolean(
-        string="Defer Pull using Virtual Reservation",
-        default=False,
-        help="Create the pull moves only when the virtual "
-        "reservation is > 0.",
-    )
-
     def _run_pull(
         self,
         product_id,
@@ -30,7 +22,8 @@ class StockRule(models.Model):
     ):
         if (
             not self.env.context.get("_rule_no_virtual_defer")
-            and self.virtual_reservation_defer_pull
+            and self.warehouse_id.virtual_reservation_defer_pull
+            # We still want to create the first part of the chain
             and not self.picking_type_id.code == "outgoing"
         ):
             return True

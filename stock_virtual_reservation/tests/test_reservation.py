@@ -73,7 +73,11 @@ class TestVirtualReservation(common.SavepointCase):
                 "TEST",
                 values,
             )
-        return self._pickings_in_group(group)
+        pickings = self._pickings_in_group(group)
+        pickings.mapped("move_lines").write(
+            {"date_priority": date or fields.Datetime.now()}
+        )
+        return pickings
 
     def _pickings_in_group(self, group):
         return self.env["stock.picking"].search([("group_id", "=", group.id)])
@@ -161,8 +165,7 @@ class TestVirtualReservation(common.SavepointCase):
             ],
         )
 
-        rules = self.wh.delivery_route_id.rule_ids
-        rules.write({"virtual_reservation_defer_pull": True})
+        self.wh.write({"virtual_reservation_defer_pull": True})
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 20.)
         pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
@@ -196,8 +199,7 @@ class TestVirtualReservation(common.SavepointCase):
         )
 
     def test_defer_creation_backorder(self):
-        rules = self.wh.delivery_route_id.rule_ids
-        rules.write({"virtual_reservation_defer_pull": True})
+        self.wh.write({"virtual_reservation_defer_pull": True})
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 7.)
 

@@ -9,6 +9,13 @@ from odoo.tools import float_compare
 class StockMove(models.Model):
     _inherit = "stock.move"
 
+    # TODO create glue module to set from sale order
+    date_priority = fields.Datetime(
+        string="Priority Date",
+        index=True,
+        help="Date/time used to sort moves to deliver first. "
+        "Used to calculate the virtual quantity.",
+    )
     virtual_available_qty = fields.Float(
         "Virtual Available Quantity",
         compute="_compute_virtual_available_qty",
@@ -42,12 +49,9 @@ class StockMove(models.Model):
             ("state", "in", ("confirmed", "waiting")),
             ("product_id", "=", self.product_id.id),
             ("picking_code", "=", "outgoing"),
-            # TODO easier way to customize date field to use
-            # TODO use a datetime field, can be set from sale order
-            # with a glue module
-            ("date", "<=", self.date),
+            ("date_priority", "<=", self.date_priority),
+            # TODO same warehouse
         ]
-        # TODO priority?
         return domain
 
     def _virtual_reserved_qty(self):
