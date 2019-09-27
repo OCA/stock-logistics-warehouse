@@ -347,3 +347,46 @@ class TestVirtualReservation(common.SavepointCase):
                 }
             ],
         )
+
+    def test_defer_multi_move(self):
+        self.wh.write({"virtual_reservation_defer_pull": True})
+
+        self._update_qty_in_location(self.loc_bin1, self.product2, 10.)
+
+        pickings = self._create_picking_chain(
+            self.wh, [(self.product1, 20), (self.product2, 10)]
+        )
+        self.assertEqual(
+            len(pickings), 1, "expect only the last out->customer"
+        )
+        cust_picking = pickings
+        self.assertRecordValues(
+            cust_picking,
+            [
+                {
+                    "state": "waiting",
+                    "location_id": self.wh.wh_output_stock_loc_id.id,
+                    "location_dest_id": self.loc_customer.id,
+                }
+            ],
+        )
+
+        cust_picking.release_virtual_reservation()
+
+        out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
+
+        self.assertRecordValues(
+            out_picking,
+            [
+                {
+                    "state": "assigned",
+                    "location_id": self.wh.lot_stock_id.id,
+                    "location_dest_id": self.wh.wh_output_stock_loc_id.id,
+                }
+            ],
+        )
+
+        self.assertRecordValues(
+            out_picking.move_lines,
+            [{"product_qty": 10., "product_id": self.product2.id}],
+        )
