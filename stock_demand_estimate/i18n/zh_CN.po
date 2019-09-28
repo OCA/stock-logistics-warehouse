@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:35+0000\n"
-"PO-Revision-Date: 2018-01-16 14:35+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2019-09-28 09:24+0000\n"
+"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/oca/teams/23907/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
@@ -34,7 +35,7 @@ msgstr "公司"
 #: model:ir.actions.act_window,name:stock_demand_estimate.stock_demand_estimate_wizard_action
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_wizard_menu
 msgid "Create Stock Demand Estimates"
-msgstr ""
+msgstr "创建库存需求估算"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__create_uid
@@ -56,43 +57,43 @@ msgstr "创建时间"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__date_start
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard__date_start
 msgid "Date From"
-msgstr ""
+msgstr "起始日期"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_date_range
 msgid "Date Range"
-msgstr ""
+msgstr "日期范围"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__date_range_type_id
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard__date_range_type_id
 msgid "Date Range Type"
-msgstr ""
+msgstr "日期范围类型"
 
 #. module: stock_demand_estimate
 #: model:ir.ui.menu,name:stock_demand_estimate.date_range_menu
 msgid "Date Ranges"
-msgstr ""
+msgstr "日期范围"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard__date_end
 msgid "Date To"
-msgstr ""
+msgstr "结束日期"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__date_end
 msgid "Date to"
-msgstr ""
+msgstr "结束日期"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_date_range__days
 msgid "Days between dates"
-msgstr ""
+msgstr "日期间隔天数"
 
 #. module: stock_demand_estimate
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_planning_menu
 msgid "Demand Planning"
-msgstr ""
+msgstr "需求计划"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__display_name
@@ -105,28 +106,28 @@ msgstr "显示名称"
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__estimate_id
 msgid "Estimate"
-msgstr ""
+msgstr "估算"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:256
 #, python-format
 msgid "Estimate Sheet"
-msgstr ""
+msgstr "估算表"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "Estimated quantity"
-msgstr ""
+msgstr "估算数量"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__line_ids
 msgid "Estimates"
-msgstr ""
+msgstr "估算"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_range_id
 msgid "Estimating Period"
-msgstr ""
+msgstr "估算期"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__id
@@ -165,24 +166,24 @@ msgstr "最后更新时间"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__location_id
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard__location_id
 msgid "Location"
-msgstr ""
+msgstr "位置"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__date_range_id
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "Period"
-msgstr ""
+msgstr "期间"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__value_x
 msgid "Period Name"
-msgstr ""
+msgstr "期间名称"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 msgid "Prepare"
-msgstr ""
+msgstr "准备"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_id
@@ -192,71 +193,69 @@ msgstr "产品"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__value_y
-#, fuzzy
-#| msgid "Product"
 msgid "Product Name"
-msgstr "产品"
+msgstr "产品名称"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet__product_ids
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_wizard__product_ids
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 msgid "Products"
-msgstr ""
+msgstr "产品"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom_qty
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__product_uom_qty
 msgid "Quantity"
-msgstr ""
+msgstr "数量"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__daily_qty
 msgid "Quantity / Day"
-msgstr ""
+msgstr "数量/天"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Quantity in the default UoM of the product"
-msgstr ""
+msgstr "产品的默认计量单位数量"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Real Quantity"
-msgstr ""
+msgstr "实际数量"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Search Stock Demand Estimates"
-msgstr ""
+msgstr "搜索库存需求估算"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_pivot
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_tree
 msgid "Stock Demand Estimate"
-msgstr ""
+msgstr "库存需求估算"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate
 msgid "Stock Demand Estimate Line"
-msgstr ""
+msgstr "库存需求估算行"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate_sheet
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "Stock Demand Estimate Sheet"
-msgstr ""
+msgstr "库存需求估算表"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate_sheet_line
 msgid "Stock Demand Estimate Sheet Line"
-msgstr ""
+msgstr "库存需求估算表行"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate_wizard
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 msgid "Stock Demand Estimate Wizard"
-msgstr ""
+msgstr "库存需求估算向导"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:143
@@ -264,12 +263,12 @@ msgstr ""
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_menu
 #, python-format
 msgid "Stock Demand Estimates"
-msgstr ""
+msgstr "库存需求估算"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate_sheet_line__location_id
 msgid "Stock Location"
-msgstr ""
+msgstr "库存位置"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:79
@@ -277,35 +276,35 @@ msgstr ""
 msgid ""
 "The requested operation cannot be processed because of a programming error "
 "setting the `product_qty` field instead of the `product_uom_qty`."
-msgstr ""
+msgstr "由于设置“ product_qty”字段而不是“ product_uom_qty”的编程错误，因此无法处理请求的操作。"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:226
 #, python-format
 msgid "The start date cannot be later than the end date."
-msgstr ""
+msgstr "开始日期不能晚于结束日期。"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:52
 #, python-format
 msgid "There is no ranges created."
-msgstr ""
+msgstr "没有创建范围。"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
-msgstr ""
+msgstr "计量单位"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "Validate"
-msgstr ""
+msgstr "验证"
 
 #. module: stock_demand_estimate
 #: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:243
 #, python-format
 msgid "You must select at least one product."
-msgstr ""
+msgstr "您必须至少选择一种产品。"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
@@ -316,4 +315,4 @@ msgstr "或"
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.demand_estimate_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_sheet_view_form
 msgid "to"
-msgstr ""
+msgstr "至"
