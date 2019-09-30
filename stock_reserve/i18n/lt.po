@@ -414,6 +414,11 @@ msgid "Propagate cancel and split"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_purchase_line_id
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_push_rule_id
 msgid "Push Rule"
 msgstr ""
@@ -660,6 +665,11 @@ msgid ""
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_to_refund_so
+msgid "To Refund in SO"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Total"
 msgstr "Viso"
@@ -672,6 +682,12 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_picking_id
 msgid "Transfer Reference"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_to_refund_so
+msgid ""
+"Trigger a decrease of the delivered quantity in the associated Sale Order"
 msgstr ""
 
 #. module: stock_reserve
