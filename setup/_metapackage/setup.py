@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo10-addon-account_move_line_product',
         'odoo10-addon-account_move_line_stock_info',
         'odoo10-addon-packaging_uom',
+        'odoo10-addon-packaging_uom_view',
         'odoo10-addon-procurement_auto_create_group',
         'odoo10-addon-purchase_packaging',
         'odoo10-addon-sale_packaging',
