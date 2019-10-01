@@ -69,11 +69,6 @@ msgid "Configuration Error!"
 msgstr "Konfiguraatiovirhe."
 
 #. module: stock_reserve_sale
-#: field:stock.reservation,consumed_for:0
-msgid "Consumed for"
-msgstr ""
-
-#. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
 msgid "Created by"
 msgstr "Luonut"
@@ -144,16 +139,6 @@ msgstr "Huomautukset"
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "Pre-book products from stock"
 msgstr "Varaa tuotteita varastosta"
-
-#. module: stock_reserve_sale
-#: field:stock.reservation,production_id:0
-msgid "Production Order for Produced Products"
-msgstr ""
-
-#. module: stock_reserve_sale
-#: field:stock.reservation,raw_material_production_id:0
-msgid "Production Order for Raw Materials"
-msgstr ""
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
@@ -231,11 +216,6 @@ msgstr "Omistaja"
 #: field:sale.order.line,reservation_ids:0
 msgid "Stock Reservation"
 msgstr "Tuotevaraus"
-
-#. module: stock_reserve_sale
-#: help:stock.reservation,consumed_for:0
-msgid "Technical field used to make the traceability of produced products"
-msgstr ""
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/wizard/sale_stock_reserve.py:58

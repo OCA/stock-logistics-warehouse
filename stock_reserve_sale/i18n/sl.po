@@ -70,11 +70,6 @@ msgid "Configuration Error!"
 msgstr "Napaka v nastavitvah!"
 
 #. module: stock_reserve_sale
-#: field:stock.reservation,consumed_for:0
-msgid "Consumed for"
-msgstr "Potrošeno za"
-
-#. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
 msgid "Created by"
 msgstr "Ustvaril"
@@ -143,16 +138,6 @@ msgstr "Opombe"
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "Pre-book products from stock"
 msgstr "Pred-vpis proizvodov iz zaloge"
-
-#. module: stock_reserve_sale
-#: field:stock.reservation,production_id:0
-msgid "Production Order for Produced Products"
-msgstr "Proizvodni nalog za proizvedene izdelke"
-
-#. module: stock_reserve_sale
-#: field:stock.reservation,raw_material_production_id:0
-msgid "Production Order for Raw Materials"
-msgstr "Proizvodni nalog za surovine"
 
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
@@ -232,11 +217,6 @@ msgid "Stock Reservation"
 msgstr "Rezervacija zaloge"
 
 #. module: stock_reserve_sale
-#: help:stock.reservation,consumed_for:0
-msgid "Technical field used to make the traceability of produced products"
-msgstr "Tehnično polje za sledljivost proizvedenih izdelkov"
-
-#. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/wizard/sale_stock_reserve.py:58
 #, python-format
 msgid ""
@@ -273,3 +253,15 @@ msgstr "ali"
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "{\"reload_on_button\": 1}"
 msgstr "{\"reload_on_button\": 1}"
+
+#~ msgid "Consumed for"
+#~ msgstr "Potrošeno za"
+
+#~ msgid "Production Order for Produced Products"
+#~ msgstr "Proizvodni nalog za proizvedene izdelke"
+
+#~ msgid "Production Order for Raw Materials"
+#~ msgstr "Proizvodni nalog za surovine"
+
+#~ msgid "Technical field used to make the traceability of produced products"
+#~ msgstr "Tehnično polje za sledljivost proizvedenih izdelkov"

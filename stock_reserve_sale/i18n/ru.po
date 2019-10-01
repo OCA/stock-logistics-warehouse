@@ -65,11 +65,6 @@ msgid "Configuration Error!"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: field:stock.reservation,consumed_for:0
-msgid "Consumed for"
-msgstr ""
-
-#. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
 msgid "Created by"
 msgstr "Создано"
@@ -137,16 +132,6 @@ msgstr "Примечания"
 #. module: stock_reserve_sale
 #: view:sale.order:stock_reserve_sale.view_order_form_reserve
 msgid "Pre-book products from stock"
-msgstr ""
-
-#. module: stock_reserve_sale
-#: field:stock.reservation,production_id:0
-msgid "Production Order for Produced Products"
-msgstr ""
-
-#. module: stock_reserve_sale
-#: field:stock.reservation,raw_material_production_id:0
-msgid "Production Order for Raw Materials"
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -222,11 +207,6 @@ msgstr ""
 #: model:ir.model,name:stock_reserve_sale.model_stock_reservation
 #: field:sale.order.line,reservation_ids:0
 msgid "Stock Reservation"
-msgstr ""
-
-#. module: stock_reserve_sale
-#: help:stock.reservation,consumed_for:0
-msgid "Technical field used to make the traceability of produced products"
 msgstr ""
 
 #. module: stock_reserve_sale
