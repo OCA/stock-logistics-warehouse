@@ -58,7 +58,7 @@ addon | version | summary
 [stock_orderpoint_manual_procurement_uom](stock_orderpoint_manual_procurement_uom/) | 10.0.1.0.0 | Glue module for stock_orderpoint_uom and stock_orderpoint_manual_procurement
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 10.0.1.0.1 | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_product_location_sorted_by_qty](stock_product_location_sorted_by_qty/) | 10.0.1.0.0 | In the update wizard of quantities for a product, sort the stock location by quantity
-[stock_putaway_product](stock_putaway_product/) | 10.0.1.0.2 | Set a product location and put-away strategy per product
+[stock_putaway_product](stock_putaway_product/) | 10.0.1.1.0 | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 10.0.1.0.1 | Stock - Manual Quant Assignment
 [stock_quant_merge](stock_quant_merge/) | 10.0.1.0.1 | Stock - Quant merge
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 10.0.1.0.0 | Stock Quant Reserved Qty UoM
