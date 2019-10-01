@@ -31,6 +31,11 @@ are declared in product module), there is a duplicate when installing
 
 This module intent is to fix that behaviour.
 
+.. IMPORTANT::
+   This is an alpha version, the data model and design can change at any time without warning.
+   Only for development or testing purpose, do not use in production.
+   `More details on development status <https://odoo-community.org/page/development-status>`_
+
 **Table of contents**
 
 .. contents::
