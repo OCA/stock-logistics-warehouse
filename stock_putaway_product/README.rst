@@ -48,6 +48,19 @@ To use this module, you need to:
 
 #. Select the proper stock locations for each product on the product form
    on the "Inventory" tab
+#. If your products share some locations, you can use a wizard to make
+   encoding easier. To do so you need to select some product variants from the
+   tree view and use the action "Add Default Stock Location".
+
+.. image:: static/description/default_loc.png
+   :alt: Set default location by putaway method to products
+
+|
+
+.. image:: stock_product_putaway/static/description/default_loc.png
+   :alt: Set default location by putaway method to products
+
+|
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -61,6 +74,12 @@ Bugs are tracked on `GitHub Issues
 , please check there if your issue has already been reported. If you spotted
 it first, help us smashing it by providing a detailed and welcomed feedback.
 
+Roadmap
+===========
+
+ - Two modes : for the moment, it allows only to select one location for several products. In another mode, you could select different products and then a different location per product (you can have configuration with one location per product).
+ - Allow to launch the wizard on product templates (if you don't activate product variants you haven't access to wizard).
+
 Images
 ------
 
@@ -73,6 +92,7 @@ Contributors
 * Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
 * Denis Roussel - ACSONE SA/NV <denis.roussel@acsone.eu>
 * Thomas Fossoul - WINK SA/NV <tfossoul@wink.be>
+* David Béal - Akretion <david.beal@akretion.com>
 
 
 Maintainer

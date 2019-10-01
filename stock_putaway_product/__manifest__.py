@@ -5,11 +5,12 @@
 {
     'name': 'Putaway strategy per product',
     'summary': 'Set a product location and put-away strategy per product',
-    'version': '10.0.1.0.1',
+    'version': '10.0.1.0.2',
     'category': 'Inventory',
     'website': 'http://www.apertoso.be',
     'author': 'Apertoso N.V., '
               'Tecnativa, '
+              'Akretion, '
               'Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'depends': [
@@ -19,6 +20,7 @@
     'data': [
         'views/product.xml',
         'views/product_putaway.xml',
+        'wizard/quick_add_location.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [
