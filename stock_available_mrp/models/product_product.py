@@ -22,35 +22,10 @@ class ProductProduct(models.Model):
         super(ProductProduct, self)._compute_available_quantities()
 
     @api.multi
-    def _get_bom_id_domain(self):
-        """
-        Real multi domain
-        :return:
-        """
-        return [
-            '|',
-            ('product_id', 'in', self.ids),
-            '&',
-            ('product_id', '=', False),
-            ('product_tmpl_id', 'in', self.mapped('product_tmpl_id.id'))
-        ]
-
-    @api.multi
     @api.depends('product_tmpl_id')
     def _compute_bom_id(self):
-        bom_obj = self.env['mrp.bom']
-        boms = bom_obj.search(
-            self._get_bom_id_domain(),
-            order='sequence, product_id',
-        )
-        for product in self:
-            product_boms = boms.filtered(
-                lambda b: b.product_id == product or
-                (not b.product_id and
-                 b.product_tmpl_id == product.product_tmpl_id)
-            )
-            if product_boms:
-                product.bom_id = first(product_boms)
+        for one in self:
+            one.bom_id = self.env["mrp.bom"]._bom_find(product=one)
 
     @api.multi
     def _compute_available_quantities_dict(self):
