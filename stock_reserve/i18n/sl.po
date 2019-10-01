@@ -109,6 +109,11 @@ msgid "Company"
 msgstr "Družba"
 
 #. module: stock_reserve
+#: field:stock.reservation,consumed_for:0
+msgid "Consumed for"
+msgstr ""
+
+#. module: stock_reserve
 #: field:stock.reservation,create_uid:0
 msgid "Created by"
 msgstr "Ustvaril"
@@ -384,6 +389,16 @@ msgid "Product UoM"
 msgstr "EM proizvoda"
 
 #. module: stock_reserve
+#: field:stock.reservation,production_id:0
+msgid "Production Order for Produced Products"
+msgstr ""
+
+#. module: stock_reserve
+#: field:stock.reservation,raw_material_production_id:0
+msgid "Production Order for Raw Materials"
+msgstr ""
+
+#. module: stock_reserve
 #: field:stock.reservation,propagate:0
 msgid "Propagate cancel and split"
 msgstr "Širjenje preklica in razdelitve"
@@ -580,6 +595,11 @@ msgid ""
 msgstr ""
 "Tehnično polje za določitev omejitev na lastništvu kvantov, ki bodo "
 "upoštevani ob označbi premika kot 'opravljeno'"
+
+#. module: stock_reserve
+#: help:stock.reservation,consumed_for:0
+msgid "Technical field used to make the traceability of produced products"
+msgstr ""
 
 #. module: stock_reserve
 #: help:stock.reservation,price_unit:0

@@ -95,6 +95,11 @@ msgid "Company"
 msgstr "Yritys"
 
 #. module: stock_reserve
+#: field:stock.reservation,consumed_for:0
+msgid "Consumed for"
+msgstr ""
+
+#. module: stock_reserve
 #: field:stock.reservation,create_uid:0
 msgid "Created by"
 msgstr "Luonut"
@@ -366,6 +371,16 @@ msgid "Product UoM"
 msgstr "Tuotteen yksikkö"
 
 #. module: stock_reserve
+#: field:stock.reservation,production_id:0
+msgid "Production Order for Produced Products"
+msgstr ""
+
+#. module: stock_reserve
+#: field:stock.reservation,raw_material_production_id:0
+msgid "Production Order for Raw Materials"
+msgstr ""
+
+#. module: stock_reserve
 #: field:stock.reservation,propagate:0
 msgid "Propagate cancel and split"
 msgstr ""
@@ -551,6 +566,11 @@ msgstr ""
 msgid ""
 "Technical field used to depict a restriction on the ownership of quants to "
 "consider when marking this move as 'done'"
+msgstr ""
+
+#. module: stock_reserve
+#: help:stock.reservation,consumed_for:0
+msgid "Technical field used to make the traceability of produced products"
 msgstr ""
 
 #. module: stock_reserve

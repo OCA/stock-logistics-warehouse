@@ -108,6 +108,11 @@ msgid "Company"
 msgstr "Unternehmen"
 
 #. module: stock_reserve
+#: field:stock.reservation,consumed_for:0
+msgid "Consumed for"
+msgstr ""
+
+#. module: stock_reserve
 #: field:stock.reservation,create_uid:0
 msgid "Created by"
 msgstr "Angelegt durch"
@@ -388,6 +393,16 @@ msgid "Product UoM"
 msgstr "Produktmaßeinheit"
 
 #. module: stock_reserve
+#: field:stock.reservation,production_id:0
+msgid "Production Order for Produced Products"
+msgstr ""
+
+#. module: stock_reserve
+#: field:stock.reservation,raw_material_production_id:0
+msgid "Production Order for Raw Materials"
+msgstr ""
+
+#. module: stock_reserve
 #: field:stock.reservation,propagate:0
 msgid "Propagate cancel and split"
 msgstr "Storno und Split fortschreiben"
@@ -585,6 +600,11 @@ msgid ""
 msgstr ""
 "Technisches Feld zur Aufnahme von Besitz-Beschränkungen bei Quanten, wenn "
 "diese Umlagerung als 'erldigt' gekennzeichnet wird."
+
+#. module: stock_reserve
+#: help:stock.reservation,consumed_for:0
+msgid "Technical field used to make the traceability of produced products"
+msgstr ""
 
 #. module: stock_reserve
 #: help:stock.reservation,price_unit:0
