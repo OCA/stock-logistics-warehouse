@@ -21,21 +21,41 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_putaway_product
+#: model:ir.actions.act_window,name:stock_putaway_product.quick_add_product_location_act_window
+#, fuzzy
+#| msgid "Product stock locations"
+msgid "Add Default Stock Location"
+msgstr "Product-voorraadlocatie"
+
+#. module: stock_putaway_product
+#: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
+msgid "Apply"
+msgstr ""
+
+#. module: stock_putaway_product
+#: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_putaway_product
 #: model:ir.model,name:stock_putaway_product.model_stock_change_product_qty
 msgid "Change Product Quantity"
 msgstr "Wijzig Product Aantal"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_create_uid
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_create_uid
 msgid "Created by"
 msgstr "Aangemaakt door"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_create_date
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_create_date
 msgid "Created on"
 msgstr "Aangemaakt op"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_display_name
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_display_name
 msgid "Display Name"
 msgstr "Weergavenaam"
@@ -51,6 +71,7 @@ msgid "Fixed per product location"
 msgstr "Vast per productlocatie"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_id
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_id
 msgid "ID"
 msgstr "ID"
@@ -62,21 +83,25 @@ msgid "Is product variant"
 msgstr "Is productvariant"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location___last_update
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy___last_update
 msgid "Last Modified on"
 msgstr "Laatst aangepast op"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_write_uid
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_write_uid
 msgid "Last Updated by"
 msgstr "Laatst bijgewerkt door"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_write_date
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_write_date
 msgid "Last Updated on"
 msgstr "Laatst bijgewerkt op"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_fixed_location_id
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_fixed_location_id
 msgid "Location"
 msgstr "Locatie"
@@ -109,8 +134,23 @@ msgid "Product stock locations"
 msgstr "Product-voorraadlocatie"
 
 #. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_product_ids
+#: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
+#, fuzzy
+#| msgid "Product"
+msgid "Products"
+msgstr "Product"
+
+#. module: stock_putaway_product
 #: model:ir.ui.view,arch_db:stock_putaway_product.view_template_property_form
 msgid "Put Away Locations"
+msgstr "Wegzet-locaties"
+
+#. module: stock_putaway_product
+#: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_putaway_id
+#, fuzzy
+#| msgid "Put Away Locations"
+msgid "Put Away Method"
 msgstr "Wegzet-locaties"
 
 #. module: stock_putaway_product
@@ -120,9 +160,21 @@ msgid "Put Away Strategy"
 msgstr "Wegzet-strategie"
 
 #. module: stock_putaway_product
+#: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
+#, fuzzy
+#| msgid "Product putaway stragegy"
+msgid "Quick Product Putaway"
+msgstr "Product-wegzetstrategie"
+
+#. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_sequence
 msgid "Sequence"
 msgstr "Volgorde"
+
+#. module: stock_putaway_product
+#: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
+msgid "Set default location by putaway method to products"
+msgstr ""
 
 #. module: stock_putaway_product
 #: code:addons/stock_putaway_product/models/product_putaway.py:55
@@ -130,6 +182,20 @@ msgstr "Volgorde"
 #, python-format
 msgid "There is a duplicate location by put away assignment!"
 msgstr "Er is een dubbele locatie voor de wegzet-opdracht."
+
+#. module: stock_putaway_product
+#: code:addons/stock_putaway_product/wizard/quick_add_location.py:74
+#, fuzzy, python-format
+#| msgid "Product putaway stragegy"
+msgid "Updated products putaway: %s"
+msgstr "Product-wegzetstrategie"
+
+#. module: stock_putaway_product
+#: model:ir.model,name:stock_putaway_product.model_quick_add_product_location
+#, fuzzy
+#| msgid "Fixed per product location"
+msgid "quick.add.product.location"
+msgstr "Vast per productlocatie"
 
 #. module: stock_putaway_product
 #: model:ir.model,name:stock_putaway_product.model_stock_product_putaway_strategy
