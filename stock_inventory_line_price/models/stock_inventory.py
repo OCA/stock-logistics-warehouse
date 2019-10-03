@@ -30,6 +30,20 @@ class StockInventoryLine(models.Model):
         return super(StockInventoryLine, self)._resolve_inventory_line(
             inventory_line)
 
+    @api.multi
+    def onchange_createline(self, location_id=False, product_id=False,
+                            uom_id=False, package_id=False, prod_lot_id=False,
+                            partner_id=False, company_id=False):
+        res = super(StockInventoryLine, self).onchange_createline(
+            location_id, product_id, uom_id, package_id,
+            prod_lot_id, partner_id, company_id)
+        if 'value' in res:
+            standard_price = self.env['product.product'].browse(
+                product_id).standard_price
+            res['value']['theoretical_std_price'] = standard_price
+            res['value']['standard_price'] = standard_price
+        return res
+
 
 class StockInventory(models.Model):
     _inherit = 'stock.inventory'
