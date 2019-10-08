@@ -70,3 +70,15 @@ class TestLocationTrayType(LocationTrayTypeCase):
         # we can modify size of unused ones
         self.unused_tray_type.rows = 10
         self.unused_tray_type.cols = 10
+
+    def test_width_per_cell(self):
+        tray_type = self.used_tray_type
+        tray_type.cols = 10
+        tray_type.width = 120
+        self.assertEqual(tray_type.width_per_cell, 12)
+
+    def test_depth_per_cell(self):
+        tray_type = self.used_tray_type
+        tray_type.rows = 10
+        tray_type.depth = 120
+        self.assertEqual(tray_type.depth_per_cell, 12)
