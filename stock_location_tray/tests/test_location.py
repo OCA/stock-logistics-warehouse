@@ -168,3 +168,39 @@ class TestLocation(LocationTrayTypeCase):
         message = "cannot be modified when they contain products"
         with self.assertRaisesRegex(exceptions.UserError, message):
             self.tray_location.tray_type_id = tray_type
+
+    def test_location_center_pos(self):
+        cell = self.env.ref(
+            "stock_location_tray.stock_location_tray_demo_x3y2"
+        )
+        tray_type = cell.cell_in_tray_type_id
+        number_of_x = 4
+        number_of_y = 2
+        self.assertEqual(
+            (number_of_x, number_of_y), (tray_type.cols, tray_type.rows)
+        )
+
+        total_width = 80
+        total_depth = 30
+        tray_type.width = total_width
+        tray_type.depth = total_depth
+
+        self.assertEqual(
+            (total_width / number_of_x, total_depth / number_of_y),
+            (tray_type.width_per_cell, tray_type.depth_per_cell),
+        )
+        from_left, from_bottom = cell.tray_cell_center_position()
+        # fmt: off
+        expected_left = (
+            (total_width / number_of_x)  # width of a cell
+            * 2  # we want the center of the cell x3, so we want 2 full cells
+            + ((total_width / number_of_x) / 2)  # + the half of our cell
+        )
+        expected_bottom = (
+            (total_depth / number_of_y)  # depth of a cell
+            * 1  # we want the center of the cell y2, so we want 1 full cells
+            + ((total_depth / number_of_y) / 2)  # + the half of our cell
+        )
+        # fmt: on
+        self.assertEqual(from_left, expected_left)
+        self.assertEqual(from_bottom, expected_bottom)
