@@ -187,7 +187,6 @@
       <form string="Operations">
         <group>
           <field name="name"/>
-          <field name="address"/>
           <field name="mode"/>
           <field name="location_id"/>
           <field name="hardware"/>
@@ -205,7 +204,6 @@ remove later -->
     <field name="arch" type="xml">
       <kanban class="o_kanban_dashboard">
         <field name="name"/>
-        <field name="address"/>
         <field name="mode"/>
         <field name="number_of_ops"/>
         <field name="number_of_ops_all"/>
@@ -260,7 +258,6 @@ remove later -->
     <field name="arch" type="xml">
       <tree string="Shuttle">
         <field name="name"/>
-        <field name="address"/>
       </tree>
     </field>
   </record>

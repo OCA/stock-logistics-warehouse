@@ -11,7 +11,6 @@ class VerticalLiftShuttle(models.Model):
     _description = 'Vertical Lift Shuttle'
 
     name = fields.Char()
-    address = fields.Char()
     mode = fields.Selection(
         [('pick', 'Pick'), ('put', 'Put'), ('inventory', 'Inventory')],
         default='pick',
