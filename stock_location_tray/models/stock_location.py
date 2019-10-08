@@ -153,6 +153,23 @@ class StockLocation(models.Model):
                     )
                 )
 
+    def tray_cell_center_position(self):
+        """Return the center position in mm of a cell
+
+        The returned position is a tuple with the number of millimeters
+        from the bottom-left corner. Tuple: (left, bottom)
+        """
+        if not self.cell_in_tray_type_id:
+            return 0, 0
+        posx = self.posx
+        posy = self.posy
+        cell_width = self.cell_in_tray_type_id.width_per_cell
+        cell_depth = self.cell_in_tray_type_id.depth_per_cell
+        # posx and posy start at one, we want to count from 0
+        from_left = (posx - 1) * cell_width + (cell_width / 2)
+        from_bottom = (posy - 1) * cell_depth + (cell_depth / 2)
+        return from_left, from_bottom
+
     def _tray_cell_coords(self):
         if not self.cell_in_tray_type_id:
             return []
