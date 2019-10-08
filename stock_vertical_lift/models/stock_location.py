@@ -70,7 +70,7 @@ class StockLocation(models.Model):
                 shuttle = location.location_id.vertical_lift_shuttle_id
             location.vertical_lift_shuttle_id = shuttle
 
-    def _fetch_vertical_lift_tray(self, cell_location=None):
+    def _hardware_vertical_lift_tray(self, cell_location=None):
         """Send instructions to the vertical lift hardware
 
         Private method, this is where the implementation actually happens.
@@ -110,7 +110,7 @@ class StockLocation(models.Model):
         Depending on the hardware, the laser pointer may not be implemented.
 
         The actual implementation of the method goes in the private method
-        ``_fetch_vertical_lift_tray()``.
+        ``_hardware_vertical_lift_tray()``.
         """
         self.ensure_one()
         if self.vertical_lift_kind == "cell":
@@ -122,7 +122,7 @@ class StockLocation(models.Model):
             tray = self.location_id
             tray.fetch_vertical_lift_tray(cell_location=self)
         elif self.vertical_lift_kind == "tray":
-            self._fetch_vertical_lift_tray(cell_location=cell_location)
+            self._hardware_vertical_lift_tray(cell_location=cell_location)
         else:
             raise exceptions.UserError(
                 _("Cannot fetch a vertical lift tray on location %s")
