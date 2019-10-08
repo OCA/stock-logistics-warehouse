@@ -24,6 +24,7 @@
     ],
     'data': [
         'views/stock_location_views.xml',
+        'views/stock_move_line_views.xml',
         'views/vertical_lift_shuttle_views.xml',
         'views/stock_vertical_lift_templates.xml',
         'views/shuttle_screen_templates.xml',
