@@ -14,11 +14,37 @@ class StockLocationTrayType(models.Model):
     code = fields.Char(required=True)
     rows = fields.Integer(required=True)
     cols = fields.Integer(required=True)
+
+    width = fields.Integer(help="Width of the tray in mm")
+    depth = fields.Integer(help="Depth of the tray in mm")
+    height = fields.Integer(help="Height of the tray in mm")
+
+    width_per_cell = fields.Float(compute='_compute_width_per_cell')
+    depth_per_cell = fields.Float(compute='_compute_depth_per_cell')
+
     active = fields.Boolean(default=True)
     tray_matrix = Serialized(compute="_compute_tray_matrix")
     location_ids = fields.One2many(
         comodel_name="stock.location", inverse_name="tray_type_id"
     )
+
+    @api.depends("width", "cols")
+    def _compute_width_per_cell(self):
+        for record in self:
+            width = record.width
+            if not width:
+                record.width_per_cell = 0.
+                continue
+            record.width_per_cell = width / record.cols
+
+    @api.depends("depth", "rows")
+    def _compute_depth_per_cell(self):
+        for record in self:
+            depth = record.depth
+            if not depth:
+                record.depth_per_cell = 0.
+                continue
+            record.depth_per_cell = depth / record.rows
 
     @api.depends("rows", "cols")
     def _compute_tray_matrix(self):

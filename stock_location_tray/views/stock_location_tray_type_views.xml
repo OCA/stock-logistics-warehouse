@@ -24,6 +24,19 @@
             <field name="rows"/>
             <field name="cols"/>
           </group>
+          <group string="Sizes" name="size">
+              <label for="width"/>
+              <div>
+                <field name="width"/> mm /
+                <field name="width_per_cell"/> mm per cell
+              </div>
+              <label for="depth"/>
+              <div>
+                <field name="depth"/> mm /
+                <field name="depth_per_cell"/> mm per cell
+              </div>
+              <field name="height"/>
+          </group>
           <group string="Disposition" name="disposition">
             <field name="tray_matrix"
                    widget="location_tray_matrix"
