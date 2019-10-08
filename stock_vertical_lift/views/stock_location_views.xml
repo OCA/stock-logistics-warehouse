@@ -11,6 +11,8 @@
                        attrs="{'invisible': [('vertical_lift_kind', '!=', False), ('vertical_lift_kind', '!=', 'view')]}"
                 />
                 <field name="vertical_lift_kind"/>
+                <field name="vertical_lift_shuttle_id"
+                       attrs="{'invisible': [('vertical_lift_kind', 'not in', ('shuttle', 'tray', 'cell'))]}" />
             </field>
             <field name="tray_type_id" position="attributes">
                 <attribute name="attrs">
@@ -28,6 +30,7 @@
         <field name="arch" type="xml">
             <field name="tray_type_id" position="after">
                 <field name="vertical_lift_kind"/>
+                <field name="vertical_lift_shuttle_id"/>
             </field>
         </field>
     </record>

@@ -107,6 +107,11 @@ class VerticalLiftShuttle(models.Model):
         store=False,
     )
 
+    _sql_constraints = [
+        ('location_id_unique', 'UNIQUE(location_id)',
+         'You cannot have two shuttles using the same location.'),
+    ]
+
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
         # FIXME notify_info is only for the demo
@@ -258,9 +263,6 @@ class VerticalLiftShuttle(models.Model):
         )
 
     def button_release(self):
-        if self.current_move_line_id:
-            self._hardware_switch_off_laser_pointer()
-            self._hardware_close_tray()
         self.select_next_move_line()
         if not self.current_move_line_id:
             # sorry not sorry
@@ -310,8 +312,8 @@ class VerticalLiftShuttle(models.Model):
         )
         self.operation_descr = descr
         if next_move_line:
-            self._hardware_switch_on_laser_pointer()
-            self._hardware_open_tray()
+            # TODO different method (source vs dest) on pick/put scenario
+            next_move_line.fetch_vertical_lift_tray_source()
 
     def action_open_screen(self):
         self.select_next_move_line()
@@ -364,36 +366,6 @@ class VerticalLiftShuttle(models.Model):
     def switch_inventory(self):
         self.mode = 'inventory'
         self.select_next_move_line()
-
-    def _hardware_switch_on_laser_pointer(self):
-        if self.hardware == 'simulation':
-            self.env.user.notify_info(
-                message=_('Laser pointer on x{} y{}').format(
-                    self.tray_x, self.tray_y
-                ),
-                title=_('Lift Simulation'),
-            )
-
-    def _hardware_switch_off_laser_pointer(self):
-        if self.hardware == 'simulation':
-            self.env.user.notify_info(
-                message=_('Switch off laser pointer'),
-                title=_('Lift Simulation'),
-            )
-
-    def _hardware_open_tray(self):
-        if self.hardware == 'simulation':
-            self.env.user.notify_info(
-                message=_('Opening tray {}').format(self.tray_name),
-                title=_('Lift Simulation'),
-            )
-
-    def _hardware_close_tray(self):
-        if self.hardware == 'simulation':
-            self.env.user.notify_info(
-                message=_('Closing tray {}').format(self.tray_name),
-                title=_('Lift Simulation'),
-            )
 
 
 class VerticalLiftShuttleManualBarcode(models.TransientModel):
