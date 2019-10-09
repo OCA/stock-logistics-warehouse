@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="vertical_lift_operation_inventory_screen_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.inventory.screen.view</field>
+        <field name="model">vertical.lift.operation.inventory</field>
+        <field name="inherit_id" ref="vertical_lift_operation_base_screen_view"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="string">Inventory Screen</attribute>
+            </form>
+            <xpath expr="//div[hasclass('o_shuttle_data')]" position="inside" >
+                <span>Not implemented</span>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

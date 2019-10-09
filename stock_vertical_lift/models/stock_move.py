@@ -5,19 +5,24 @@ from odoo import api, models
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
     @api.multi
     def write(self, vals):
         result = super().write(vals)
-        if 'state' in vals:
+        if "state" in vals:
             # We cannot have fields to depends on to invalidate these computed
-            # fields on vertical.lift.shuttle. But we know that when the state
-            # of any move line changes, we can invalidate them as the count of
-            # assigned move lines may change (and we track this in stock.move,
-            # not stock.move.line, becaus the state of the lines is a related
-            # to this one).
-            self.env['vertical.lift.shuttle'].invalidate_cache(
-                ['number_of_ops', 'number_of_ops_all']
+            # fields on vertical.lift.operation.*. But we know that when the
+            # state of any move line changes, we can invalidate them as the
+            # count of assigned move lines may change (and we track this in
+            # stock.move, not stock.move.line, because the state of the lines
+            # is a related to this one).
+            models = (
+                "vertical.lift.operation.pick",
+                "vertical.lift.operation.put",
             )
+            for model in models:
+                self.env[model].invalidate_cache(
+                    ["number_of_ops", "number_of_ops_all"]
+                )
         return result
