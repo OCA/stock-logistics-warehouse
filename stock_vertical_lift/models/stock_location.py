@@ -88,12 +88,37 @@ class StockLocation(models.Model):
         the tray. If a ``cell_location`` is passed and if the hardware supports
         a way to show a cell (such as a laser pointer), it should send this
         command as well.
+
+        Useful information that could be needed for the drivers:
+
+        * Any field of `self` (name, barcode, ...) which is the current tray.
+        * Any field of `cell_location` (name, barcode, ...) which is the cell
+          in the tray.
+        * ``self.vertical_lift_shuttle_id`` is the current Shuttle, where we
+          find details about the hardware, the current mode (pick, put, ...).
+        * ``self.tray_type_id`` is the kind of tray.
+        * ``self.tray_type_id.width_per_cell`` and
+          ``self.tray_type_id.depth_per_cell`` return the size of a cell in mm.
+        * ``cell_location.posx`` and ``posy`` are the coordinate from the
+          bottom-left of the tray.
+        * ``cell_location.tray_cell_center_position()`` returns the central
+          position of the cell in mm from the bottom-left of a tray. (distance
+          from left, distance from bottom). Can be used for instance for
+          highlighting the cell using a laser pointer.
         """
         if self.vertical_lift_shuttle_id.hardware == "simulation":
             message = _("Opening tray {}.").format(self.name)
             if cell_location:
-                message += _("<br/>Laser pointer on x{} y{}").format(
-                    cell_location.posx, cell_location.posy
+                from_left, from_bottom = (
+                    cell_location.tray_cell_center_position()
+                )
+                message += _(
+                    "<br/>Laser pointer on x{} y{} ({}mm, {}mm)"
+                ).format(
+                    cell_location.posx,
+                    cell_location.posy,
+                    from_left,
+                    from_bottom,
                 )
             self.env.user.notify_info(
                 message=message, title=_("Lift Simulation")
