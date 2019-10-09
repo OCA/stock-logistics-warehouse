@@ -51,11 +51,19 @@ class StockLocation(models.Model):
     def _compute_tray_matrix(self):
         for location in self:
             if not (location.tray_type_id or location.cell_in_tray_type_id):
+                location.tray_matrix = {}
                 continue
-            location.tray_matrix = {
-                "selected": location._tray_cell_coords(),
-                "cells": location._tray_cell_matrix(),
-            }
+            location.tray_matrix = location._tray_matrix_for_widget()
+
+    def _tray_matrix_for_widget(self):
+        selected = self._tray_cell_coords()
+        cells = self._tray_cell_matrix()
+        return {
+            # x, y: position of the selected cell
+            "selected": selected,
+            # 0 is empty, 1 is not
+            "cells": cells,
+        }
 
     @api.multi
     def action_tray_matrix_click(self, coordX, coordY):
