@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="vertical_lift_operation_put_screen_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.put.screen.view</field>
+        <field name="model">vertical.lift.operation.put</field>
+        <field name="inherit_id" ref="vertical_lift_operation_transfer_screen_view"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="string">Put Screen</attribute>
+            </form>
+        </field>
+    </record>
+
+</odoo>
