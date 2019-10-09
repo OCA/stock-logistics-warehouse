@@ -20,6 +20,7 @@
         'views/stock_location_views.xml',
         'views/stock_location_tray_type_views.xml',
         'views/stock_location_tray_templates.xml',
+        'views/stock_move_line_views.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,
