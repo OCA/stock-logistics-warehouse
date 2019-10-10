@@ -3,6 +3,7 @@
 
   <record id="product_running_socks" model="product.product">
     <field name="default_code">RS200</field>
+    <field name="barcode">4491673293664</field>
     <field name="name">Running Socks</field>
     <field name="type">product</field>
     <field name="categ_id" ref="product.product_category_6"/>
@@ -17,6 +18,7 @@
 
   <record id="product_recovery_socks" model="product.product">
     <field name="default_code">RS300</field>
+    <field name="barcode">2779891103531</field>
     <field name="name">Recovery Socks</field>
     <field name="type">product</field>
     <field name="categ_id" ref="product.product_category_6"/>

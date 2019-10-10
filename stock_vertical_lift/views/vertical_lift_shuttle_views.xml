@@ -37,7 +37,7 @@
     <field name="model">vertical.lift.shuttle.manual.barcode</field>
     <field name="arch" type="xml">
       <form string="Shuttle">
-        <div class="row o_vlift_shuttle_manual_barcode">
+        <div class="row o_vlift_shuttle_popup">
           <div class="col-8">
             <field name="barcode"/>
           </div>
