@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="o_shuttle_actions">
-                    <div class="o_shuttle_content">
+                    <div class="o_shuttle_content o_shuttle_content_left">
                         <button name="action_menu" type="object"
                                 class="btn-secondary o_shuttle_icon_btn"
                                 string="" icon="fa-bars"
