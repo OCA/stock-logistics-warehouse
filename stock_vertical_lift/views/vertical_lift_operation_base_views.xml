@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!--
+         When we refresh the page on the browser when we are using the
+         "screen" view, odoo loses the information that we want the view
+         to be headless, fullscreen, etc. so it's displayed pretty badly.
+         This view is a work-around: its priority is lower, so it will be
+         picked up by default on loading, and a button allows to re-open
+         the screen view with the proper options.
+    -->
+    <record id="vertical_lift_operation_base_button_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.base.button.view</field>
+        <field name="model">vertical.lift.operation.base</field>
+        <field name="arch" type="xml">
+            <form string="Operations" delete="0" create="0">
+                <button string="Reopen Screen"
+                        name="action_open_screen"
+                        type="object"
+                        class="btn-primary"
+                />
+            </form>
+        </field>
+    </record>
+
     <record id="vertical_lift_operation_base_screen_view" model="ir.ui.view">
         <field name="name">vertical.lift.operation.base.screen.view</field>
         <field name="model">vertical.lift.operation.base</field>
