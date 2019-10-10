@@ -59,7 +59,9 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     _inherit = "vertical.lift.operation.base"
     _description = "Vertical Lift Operation - Transfer"
 
-    current_move_line_id = fields.Many2one(comodel_name="stock.move.line")
+    current_move_line_id = fields.Many2one(
+        comodel_name="stock.move.line", readonly=True
+    )
 
     number_of_ops = fields.Integer(
         compute="_compute_number_of_ops", string="Number of Operations"
@@ -217,7 +219,6 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
 
     def on_screen_open(self):
         """Called when the screen is open"""
-        self.select_next_move_line()
 
     def button_release(self):
         """Release the operation, go to the next"""
@@ -245,20 +246,3 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
 
     def fetch_tray(self):
         return
-
-    def select_next_move_line(self):
-        self.ensure_one()
-        next_move_line = self.env["stock.move.line"].search(
-            self._domain_move_lines_to_do(), limit=1
-        )
-        self.current_move_line_id = next_move_line
-        # TODO use a state machine to define next steps and
-        # description?
-        descr = (
-            _("Scan New Destination Location")
-            if next_move_line
-            else _("No operations")
-        )
-        self.operation_descr = descr
-        if next_move_line:
-            self.fetch_tray()

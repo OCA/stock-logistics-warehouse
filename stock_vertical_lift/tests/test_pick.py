@@ -1,14 +1,12 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import unittest
-
-from odoo import _, exceptions
+from odoo import _
 
 from .common import VerticalLiftCase
 
 
-class TestVerticalLiftTrayType(VerticalLiftCase):
+class TestPick(VerticalLiftCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -26,19 +24,6 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
             self.shuttle._operation_for_mode().current_move_line_id,
             self.out_move_line,
         )
-
-    def test_switch_put(self):
-        self.shuttle.switch_put()
-        self.assertEqual(self.shuttle.mode, "put")
-        # TODO check that we have an incoming move when switching
-        self.assertEqual(
-            self.shuttle._operation_for_mode().current_move_line_id,
-            self.env["stock.move.line"].browse(),
-        )
-
-    def test_switch_inventory(self):
-        self.shuttle.switch_inventory()
-        self.assertEqual(self.shuttle.mode, "inventory")
 
     def test_pick_action_open_screen(self):
         self.shuttle.switch_pick()
@@ -170,37 +155,21 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
         self.assertEqual(operation1.number_of_ops_all, 6)
         self.assertEqual(operation2.number_of_ops_all, 6)
 
-    @unittest.skip("Not implemented")
-    def test_put_count_move_lines(self):
-        pass
-
-    @unittest.skip("Not implemented")
-    def test_inventory_count_move_lines(self):
-        pass
-
-    @unittest.skip("Not implemented")
     def test_on_barcode_scanned(self):
-        # test to implement when the code is implemented
-        pass
+        self.shuttle.switch_pick()
+        operation = self.shuttle._operation_for_mode()
+        move_line = operation.current_move_line_id
+        current_destination = move_line.location_dest_id
+        stock_location = self.env.ref("stock.stock_location_stock")
+        self.assertEqual(
+            current_destination, self.env.ref("stock.stock_location_customers")
+        )
+        operation.on_barcode_scanned(stock_location.barcode)
+        self.assertEqual(move_line.location_dest_id, stock_location)
 
     def test_button_release(self):
-        # for the test, we'll consider our last line has been delivered
-        self.out_move_line.qty_done = self.out_move_line.product_qty
-        self.out_move_line.move_id._action_done()
-        # release, no further operation in queue
-        operation = self.shuttle._operation_for_mode()
-        result = operation.button_release()
-        self.assertFalse(operation.current_move_line_id)
-        self.assertEqual(operation.operation_descr, _("No operations"))
-        expected_result = {
-            "effect": {
-                "fadeout": "slow",
-                "message": _("Congrats, you cleared the queue!"),
-                "img_url": "/web/static/src/img/smile.svg",
-                "type": "rainbow_man",
-            }
-        }
-        self.assertEqual(result, expected_result)
+        self.shuttle.switch_pick()
+        self._test_button_release(self.out_move_line)
 
     def test_process_current_pick(self):
         self.shuttle.switch_pick()
@@ -210,17 +179,6 @@ class TestVerticalLiftTrayType(VerticalLiftCase):
         operation.process_current()
         self.assertEqual(self.out_move_line.state, "done")
         self.assertEqual(self.out_move_line.qty_done, qty_to_process)
-
-    def test_process_current_put(self):
-        # test to implement when the code is implemented
-        self.shuttle.switch_put()
-        operation = self.shuttle._operation_for_mode()
-        with self.assertRaises(exceptions.UserError):
-            operation.process_current()
-
-    def test_process_current_inventory(self):
-        # test to implement when the code is implemented
-        self.shuttle.switch_inventory()
 
     def test_matrix(self):
         self.shuttle.switch_pick()

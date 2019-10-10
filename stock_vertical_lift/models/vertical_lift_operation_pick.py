@@ -51,3 +51,24 @@ class VerticalLiftOperationPick(models.Model):
         if line.state != "done":
             line.qty_done = line.product_qty
             line.move_id._action_done()
+
+    def on_screen_open(self):
+        """Called when the screen is open"""
+        self.select_next_move_line()
+
+    def select_next_move_line(self):
+        self.ensure_one()
+        next_move_line = self.env["stock.move.line"].search(
+            self._domain_move_lines_to_do(), limit=1
+        )
+        self.current_move_line_id = next_move_line
+        # TODO use a state machine to define next steps and
+        # description?
+        descr = (
+            _("Scan New Destination Location")
+            if next_move_line
+            else _("No operations")
+        )
+        self.operation_descr = descr
+        if next_move_line:
+            self.fetch_tray()

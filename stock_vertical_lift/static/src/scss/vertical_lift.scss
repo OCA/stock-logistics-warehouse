@@ -109,7 +109,18 @@
         }
     }
 
-    .o_vlift_shuttle_manual_barcode {
+    .o_vlift_shuttle_popup {
+
+        table tr {
+            line-height: 3;
+            font-size: 1.1em;
+
+            .o_list_record_remove {
+                width: 50px;
+                text-align: center;
+            }
+        }
+
         .o_field_char {
             padding: 1em;
             font-size: 2em;
@@ -120,5 +131,12 @@
             font-size: 2em;
             text-transform: uppercase;
         }
+
+    }
+
+    footer .btn {
+        padding: 1em;
+        font-size: 2em;
+        text-transform: uppercase;
     }
 }
