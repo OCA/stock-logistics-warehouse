@@ -16,5 +16,3 @@ Please don't hesitate to suggest one of your module to this project. Also, you m
  - https://github.com/OCA/stock-logistics-tracking
  - https://github.com/OCA/stock-logistics-barcode
  - https://github.com/OCA/stock-logistics-workflow
-
-
