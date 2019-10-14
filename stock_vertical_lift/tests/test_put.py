@@ -1,8 +1,6 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import unittest
-
 from .common import VerticalLiftCase
 
 
@@ -42,6 +40,14 @@ class TestPut(VerticalLiftCase):
         else:
             select.action_add_all()
         select._sync_lines()
+
+    def test_put_action_open_screen(self):
+        self.shuttle.switch_put()
+        action = self.shuttle.action_open_screen()
+        operation = self.shuttle._operation_for_mode()
+        self.assertEqual(action["type"], "ir.actions.act_window")
+        self.assertEqual(action["res_model"], "vertical.lift.operation.put")
+        self.assertEqual(action["res_id"], operation.id)
 
     def test_switch_put(self):
         self.shuttle.switch_put()

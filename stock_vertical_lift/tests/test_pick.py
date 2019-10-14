@@ -1,8 +1,6 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import unittest
-
 from odoo import _
 
 from .common import VerticalLiftCase
@@ -27,7 +25,6 @@ class TestPick(VerticalLiftCase):
             self.out_move_line,
         )
 
-    # TODO same test for other modes
     def test_pick_action_open_screen(self):
         self.shuttle.switch_pick()
         action = self.shuttle.action_open_screen()
@@ -158,10 +155,17 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation1.number_of_ops_all, 6)
         self.assertEqual(operation2.number_of_ops_all, 6)
 
-    @unittest.skip("Not implemented")
     def test_on_barcode_scanned(self):
-        # test to implement when the code is implemented
-        pass
+        self.shuttle.switch_pick()
+        operation = self.shuttle._operation_for_mode()
+        move_line = operation.current_move_line_id
+        current_destination = move_line.location_dest_id
+        stock_location = self.env.ref("stock.stock_location_stock")
+        self.assertEqual(
+            current_destination, self.env.ref("stock.stock_location_customers")
+        )
+        operation.on_barcode_scanned(stock_location.barcode)
+        self.assertEqual(move_line.location_dest_id, stock_location)
 
     def test_button_release(self):
         self.shuttle.switch_pick()
