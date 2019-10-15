@@ -1,31 +1,110 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import unittest
-
+from odoo import _
 from .common import VerticalLiftCase
 
 
 class TestInventory(VerticalLiftCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.picking_out = cls.env.ref(
-            "stock_vertical_lift.stock_picking_out_demo_vertical_lift_1"
-        )
-        # we have a move line to pick created by demo picking
-        # stock_picking_out_demo_vertical_lift_1
-        cls.out_move_line = cls.picking_out.move_line_ids
-
     def test_switch_inventory(self):
         self.shuttle.switch_inventory()
         self.assertEqual(self.shuttle.mode, "inventory")
+        self.assertEqual(
+            self.shuttle._operation_for_mode().current_inventory_line_id,
+            self.env["stock.inventory.line"].browse(),
+        )
 
-    @unittest.skip("Not implemented")
-    def test_inventory_count_move_lines(self):
-        pass
-
-    @unittest.skip("Not implemented")
-    def test_process_current_inventory(self):
-        # test to implement when the code is implemented
+    def test_inventory_action_open_screen(self):
         self.shuttle.switch_inventory()
+        action = self.shuttle.action_open_screen()
+        operation = self.shuttle._operation_for_mode()
+        self.assertEqual(action["type"], "ir.actions.act_window")
+        self.assertEqual(
+            action["res_model"], "vertical.lift.operation.inventory"
+        )
+        self.assertEqual(action["res_id"], operation.id)
+
+    def test_inventory_count_ops(self):
+        self._update_qty_in_location(
+            self.location_1a_x1y1, self.product_socks, 10
+        )
+        self._update_qty_in_location(
+            self.location_1a_x2y1, self.product_recovery, 10
+        )
+        self._create_inventory(
+            [
+                (self.location_1a_x1y1, self.product_socks),
+                (self.location_1a_x2y1, self.product_recovery),
+            ]
+        )
+        self._update_qty_in_location(
+            self.location_2a_x1y1, self.product_socks, 10
+        )
+        self._create_inventory([(self.location_2a_x1y1, self.product_socks)])
+
+        self.shuttle.switch_inventory()
+        operation = self.shuttle._operation_for_mode()
+        self.assertEqual(operation.number_of_ops, 2)
+        self.assertEqual(operation.number_of_ops_all, 3)
+
+    def test_process_current_inventory(self):
+        self._update_qty_in_location(
+            self.location_1a_x1y1, self.product_socks, 10
+        )
+        inventory = self._create_inventory(
+            [(self.location_1a_x1y1, self.product_socks)]
+        )
+        self.shuttle.switch_inventory()
+        operation = self.shuttle._operation_for_mode()
+        self.assertEqual(
+            operation.current_inventory_line_id, inventory.line_ids
+        )
+        # test the happy path, quantity is correct
+        operation.quantity_input = 10.0
+        result = operation.button_save()
+        # state is reset
+        self.assertEqual(operation.state, "quantity")
+        self.assertFalse(operation.current_inventory_line_id)
+        self.assertEqual(operation.operation_descr, _("No operations"))
+        self.assertTrue(inventory.line_ids.vertical_lift_done)
+        self.assertEqual(inventory.state, "done")
+        expected_result = {
+            "effect": {
+                "fadeout": "slow",
+                "message": _("Congrats, you cleared the queue!"),
+                "img_url": "/web/static/src/img/smile.svg",
+                "type": "rainbow_man",
+            }
+        }
+        self.assertEqual(result, expected_result)
+
+    def test_wrong_quantity(self):
+        self._update_qty_in_location(
+            self.location_1a_x1y1, self.product_socks, 10
+        )
+        inventory = self._create_inventory(
+            [(self.location_1a_x1y1, self.product_socks)]
+        )
+        self.shuttle.switch_inventory()
+        operation = self.shuttle._operation_for_mode()
+        line = operation.current_inventory_line_id
+        self.assertEqual(line, inventory.line_ids)
+
+        operation.quantity_input = 12.0
+        operation.button_save()
+        self.assertEqual(operation.last_quantity_input, 12.0)
+        self.assertEqual(operation.quantity_input, 0.0)
+        self.assertEqual(operation.state, "confirm_wrong_quantity")
+        self.assertEqual(operation.current_inventory_line_id, line)
+        self.assertEqual(
+            operation.operation_descr,
+            _("The quantity does not match, are you sure?"),
+        )
+
+        # entering the same quantity a second time validates
+        operation.quantity_input = 12.0
+        operation.button_save()
+        self.assertFalse(operation.current_inventory_line_id)
+
+        self.assertTrue(inventory.line_ids.vertical_lift_done)
+        self.assertEqual(inventory.state, "done")

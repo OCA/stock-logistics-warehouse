@@ -21,6 +21,47 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
         cls.vertical_lift_loc = cls.env.ref(
             'stock_vertical_lift.stock_location_vertical_lift'
         )
+        cls.location_1a = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_1a"
+        )
+        cls.location_1a_x1y1 = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_1a_x1y1"
+        )
+        cls.location_1a_x2y1 = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_1a_x2y1"
+        )
+        cls.location_1a_x3y1 = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_1a_x3y1"
+        )
+        cls.location_1a_x1y2 = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_1a_x1y2"
+        )
+        cls.location_1b_x1y1 = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_1b_x1y1"
+        )
+        cls.location_1b_x1y2 = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_1b_x1y2"
+        )
+        cls.location_2a = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_2a"
+        )
+        cls.location_2a_x1y1 = cls.env.ref(
+            "stock_vertical_lift."
+            "stock_location_vertical_lift_demo_tray_2a_x1y1"
+        )
+
+    def _update_qty_in_location(self, location, product, quantity):
+        self.env["stock.quant"]._update_available_quantity(
+            product, location, quantity
+        )
 
     @classmethod
     def _create_simple_picking_out(cls, product, quantity):
@@ -80,6 +121,25 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
                 ],
             }
         )
+
+    @classmethod
+    def _create_inventory(self, products):
+        """Create a draft inventory
+
+        Products is a list of tuples (bin location, product).
+        """
+        values = {
+            'name': 'Test Inventory',
+            'filter': 'partial',
+            'line_ids': [(0, 0, {
+                'product_id': product.id,
+                'product_uom_id': product.uom_id.id,
+                'location_id': location.id
+            }) for location, product in products]
+        }
+        inventory = self.env['stock.inventory'].create(values)
+        inventory.action_start()
+        return inventory
 
     def _test_button_release(self, move_line):
         # for the test, we'll consider our last line has been delivered

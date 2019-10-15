@@ -37,6 +37,9 @@
                         <field name="mode" readonly="1"/>
                     </div>
                     <div class="o_shuttle_header_right o_shuttle_header_content">
+                        <label for="number_of_ops"/>
+                        <field name="number_of_ops" readonly="1"/> /
+                        <field name="number_of_ops_all" readonly="1"/>
                     </div>
                 </div>
                 <div class="o_shuttle_actions">
@@ -86,11 +89,6 @@
         <field name="inherit_id" ref="vertical_lift_operation_base_screen_view"/>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('o_shuttle_header_right')]" position="inside" >
-                <label for="number_of_ops"/>
-                <field name="number_of_ops" readonly="1"/> /
-                <field name="number_of_ops_all" readonly="1"/>
-            </xpath>
             <xpath expr="//div[hasclass('o_shuttle_data')]" position="attributes" >
                 <attribute name="attrs" >{'invisible': [('current_move_line_id', '=', False)]}</attribute>
             </xpath>

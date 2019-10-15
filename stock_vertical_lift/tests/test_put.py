@@ -13,22 +13,6 @@ class TestPut(VerticalLiftCase):
         )
         cls.picking_in.action_confirm()
         cls.in_move_line = cls.picking_in.move_line_ids
-        cls.location_1a_x1y1 = cls.env.ref(
-            "stock_vertical_lift."
-            "stock_location_vertical_lift_demo_tray_1a_x1y1"
-        )
-        cls.location_1a_x2y1 = cls.env.ref(
-            "stock_vertical_lift."
-            "stock_location_vertical_lift_demo_tray_1a_x2y1"
-        )
-        cls.location_1a_x3y1 = cls.env.ref(
-            "stock_vertical_lift."
-            "stock_location_vertical_lift_demo_tray_1a_x3y1"
-        )
-        cls.location_1a_x1y2 = cls.env.ref(
-            "stock_vertical_lift."
-            "stock_location_vertical_lift_demo_tray_1a_x1y2"
-        )
         cls.in_move_line.location_dest_id = cls.location_1a_x3y1
 
     def _select_move_lines(self, shuttle, move_lines=None):
@@ -107,10 +91,6 @@ class TestPut(VerticalLiftCase):
     def test_put_count_move_lines(self):
         self.shuttle.switch_put()
         self.picking_in.action_cancel()
-        location_2a_x1y1 = self.env.ref(
-            "stock_vertical_lift."
-            "stock_location_vertical_lift_demo_tray_2a_x1y1"
-        )
         put1 = self._create_simple_picking_in(
             self.product_socks, 10, self.location_1a_x1y1
         )
@@ -120,7 +100,7 @@ class TestPut(VerticalLiftCase):
         )
         put2.action_confirm()
         put3 = self._create_simple_picking_in(
-            self.product_recovery, 10, location_2a_x1y1
+            self.product_recovery, 10, self.location_2a_x1y1
         )
         put3.action_confirm()
         operation = self.shuttle._operation_for_mode()
