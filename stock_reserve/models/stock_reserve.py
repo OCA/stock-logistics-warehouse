@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.tools.float_utils import float_round
+from odoo.tools import float_compare
 from odoo.exceptions import UserError
 
 class StockReservation(models.Model):
@@ -217,7 +218,8 @@ class StockReservation(models.Model):
     @api.onchange('product_uom_qty')
     def _onchange_quantity(self):
         """ On change of product quantity avoid negative quantities """
-        if not self.product_id or self.product_uom_qty <= 0.0:
+        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+        if not self.product_id or float_compare(self.product_uom_qty, 0.0, precision_digits=precision) <= 0:
             self.product_uom_qty = 0.0
 
     @api.multi
