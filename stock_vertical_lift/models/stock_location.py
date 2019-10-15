@@ -154,3 +154,9 @@ class StockLocation(models.Model):
                 % (self.name,)
             )
         return True
+
+    def button_fetch_vertical_lift_tray(self):
+        self.ensure_one()
+        if self.vertical_lift_kind in ("cell", "tray"):
+            self.fetch_vertical_lift_tray()
+        return True
