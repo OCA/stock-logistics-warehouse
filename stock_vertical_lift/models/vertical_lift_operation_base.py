@@ -19,6 +19,13 @@ class VerticalLiftOperationBase(models.AbstractModel):
     location_id = fields.Many2one(
         related="shuttle_id.location_id", readonly=True
     )
+    number_of_ops = fields.Integer(
+        compute="_compute_number_of_ops", string="Number of Operations"
+    )
+    number_of_ops_all = fields.Integer(
+        compute="_compute_number_of_ops_all",
+        string="Number of Operations in all shuttles",
+    )
     mode = fields.Selection(related="shuttle_id.mode", readonly=True)
     operation_descr = fields.Char(
         string="Operation", default="...", readonly=True
@@ -31,6 +38,16 @@ class VerticalLiftOperationBase(models.AbstractModel):
             "One pick can be run at a time for a shuttle.",
         )
     ]
+
+    @api.depends()
+    def _compute_number_of_ops(self):
+        for record in self:
+            record.number_of_ops = 0
+
+    @api.depends()
+    def _compute_number_of_ops_all(self):
+        for record in self:
+            record.number_of_ops_all = 0
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
@@ -51,6 +68,35 @@ class VerticalLiftOperationBase(models.AbstractModel):
     def action_manual_barcode(self):
         return self.shuttle_id.action_manual_barcode()
 
+    def button_save(self):
+        """Process the action (pick, put, ...)"""
+        raise NotImplementedError
+
+    def button_release(self):
+        """Release the operation, go to the next"""
+        raise NotImplementedError
+
+    def _render_product_packagings(self, product):
+        values = {
+            "packagings": [
+                {"name": pkg.name, "qty": pkg.qty, "unit": product.uom_id.name}
+                for pkg in product.packaging_ids
+            ]
+        }
+        content = self.env["ir.qweb"].render(
+            "stock_vertical_lift.packagings", values
+        )
+        return content
+
+    def _get_tray_qty(self, product, location):
+        quants = self.env["stock.quant"].search(
+            [
+                ("location_id", "=", location.id),
+                ("product_id", "=", product.id),
+            ]
+        )
+        return sum(quants.mapped("quantity"))
+
 
 class VerticalLiftOperationTransfer(models.AbstractModel):
     """Base model for shuttle pick and put operations"""
@@ -61,14 +107,6 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
 
     current_move_line_id = fields.Many2one(
         comodel_name="stock.move.line", readonly=True
-    )
-
-    number_of_ops = fields.Integer(
-        compute="_compute_number_of_ops", string="Number of Operations"
-    )
-    number_of_ops_all = fields.Integer(
-        compute="_compute_number_of_ops_all",
-        string="Number of Operations in all shuttles",
     )
 
     tray_location_id = fields.Many2one(
@@ -137,21 +175,10 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     def _compute_product_packagings(self):
         for record in self:
             if not record.current_move_line_id:
+                record.product_packagings = ""
                 continue
             product = record.current_move_line_id.product_id
-            values = {
-                "packagings": [
-                    {
-                        "name": pkg.name,
-                        "qty": pkg.qty,
-                        "unit": product.uom_id.name,
-                    }
-                    for pkg in product.packaging_ids
-                ]
-            }
-            content = self.env["ir.qweb"].render(
-                "stock_vertical_lift.packagings", values
-            )
+            content = self._render_product_packagings(product)
             record.product_packagings = content
 
     @api.depends()
@@ -168,17 +195,12 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     def _compute_tray_qty(self):
         for record in self:
             if not (record.tray_location_id and record.current_move_line_id):
+                record.tray_qty = 0.
                 continue
             product = record.current_move_line_id.product_id
-            quants = self.env["stock.quant"].search(
-                [
-                    ("location_id", "=", record.tray_location_id.id),
-                    ("product_id", "=", product.id),
-                ]
-            )
-            record.tray_qty = sum(quants.mapped("quantity"))
+            location = record.tray_location_id
+            record.tray_qty = self._get_tray_qty(product, location)
 
-    # depends of the quantity so we can't have all triggers
     @api.depends("current_move_line_id")
     def _compute_tray_data(self):
         for record in self:
@@ -245,4 +267,4 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
         self.operation_descr = _("Release")
 
     def fetch_tray(self):
-        return
+        raise NotImplementedError
