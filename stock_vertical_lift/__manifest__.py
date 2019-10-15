@@ -13,6 +13,7 @@
         'base_sparse_field',
         'stock_location_tray',  # OCA/stock-logistics-warehouse
         'web_notify',  # OCA/web
+        'web_ir_actions_act_view_reload',  # OCA/web
     ],
     'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'demo': [
