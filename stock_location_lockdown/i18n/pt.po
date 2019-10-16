@@ -17,8 +17,9 @@ msgstr ""
 "X-Generator: Weblate 3.3\n"
 
 #. module: stock_location_lockdown
-#: model:ir.model.fields,field_description:stock_location_lockdown.field_stock_location_block_stock_entrance
-msgid "Block stock entrance"
+#: model:ir.model.fields,field_description:stock_location_lockdown.field_stock_location__block_stock_entrance
+#, fuzzy
+msgid "Block Stock Entrance"
 msgstr "Bloquear entradas de stock"
 
 #. module: stock_location_lockdown
@@ -27,19 +28,27 @@ msgid "Inventory Locations"
 msgstr "Localizações de Inventário"
 
 #. module: stock_location_lockdown
+#: code:addons/stock_location_lockdown/models/stock_location.py:28
+#, python-format
+msgid ""
+"It is impossible to prohibit this location from                    receiving "
+"products as it already contains some."
+msgstr ""
+
+#. module: stock_location_lockdown
 #: model:ir.model,name:stock_location_lockdown.model_stock_quant
 msgid "Quants"
 msgstr ""
 
 #. module: stock_location_lockdown
-#: code:addons/stock_location_lockdown/models/stock_quant.py:17
+#: code:addons/stock_location_lockdown/models/stock_quant.py:18
 #, python-format
 msgid ""
 "The location %s is blocked and can not be used for moving the product %s"
 msgstr ""
 
 #. module: stock_location_lockdown
-#: model:ir.model.fields,help:stock_location_lockdown.field_stock_location_block_stock_entrance
+#: model:ir.model.fields,help:stock_location_lockdown.field_stock_location__block_stock_entrance
 msgid ""
 "if this box is checked, putting stock on this location won't be allowed. "
 "Usually used for a virtual location that has childrens."
