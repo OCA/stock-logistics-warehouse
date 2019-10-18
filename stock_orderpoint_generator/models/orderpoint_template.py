@@ -54,14 +54,15 @@ class OrderpointTemplate(models.Model):
         """ Create instances of model using template inherited model
         """
         orderpoint_model = self.env['stock.warehouse.orderpoint']
-        for data in self.copy_data():
-            data.pop('auto_generate', None)
-            data.pop('auto_product_ids', None)
-            data.pop('auto_last_generation', None)
-            for product_id in product_ids:
-                vals = data.copy()
-                vals['product_id'] = product_id
-                orderpoint_model.create(vals)
+        for record in self:
+            for data in record.copy_data():
+                data.pop('auto_generate')
+                data.pop('auto_product_ids')
+                data.pop('auto_last_generation')
+                for product_id in product_ids:
+                    vals = data.copy()
+                    vals['product_id'] = product_id
+                    orderpoint_model.create(vals)
 
     @api.multi
     def create_orderpoints(self, product_ids):
