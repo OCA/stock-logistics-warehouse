@@ -23,11 +23,13 @@
                     <field name="rule_removal_ids" nolabel="1">
                         <tree string="Removal Rules">
                             <field name="sequence" widget="handle" />
+                            <field name="name"/>
                             <field name="location_id"/>
                             <field name="removal_strategy"/>
                         </tree>
                         <form string="Removal Rule">
                             <group>
+                                <field name="name"/>
                                 <field name="location_id" domain="[('id', 'child_of', parent.location_id)]" />
                                 <field name="removal_strategy"/>
                                 <field name="quant_domain" widget="domain"  options="{'model': 'stock.quant'}" />

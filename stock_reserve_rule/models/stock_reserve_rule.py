@@ -102,6 +102,7 @@ class StockReserveRuleRemoval(models.Model):
     rule_id = fields.Many2one(
         comodel_name="stock.reserve.rule", required=True, ondelete="cascade"
     )
+    name = fields.Char(string="Description")
     location_id = fields.Many2one(comodel_name="stock.location", required=True)
 
     sequence = fields.Integer(default=lambda s: _default_sequence(s))
