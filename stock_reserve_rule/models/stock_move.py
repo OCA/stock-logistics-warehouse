@@ -30,22 +30,11 @@ class StockMove(models.Model):
                 strict=strict,
             )
         rules = self.env["stock.reserve.rule"]._rules_for_location(location_id)
-        if not rules:
-            return super()._update_reserved_quantity(
-                need,
-                available_quantity,
-                location_id=location_id,
-                lot_id=lot_id,
-                package_id=package_id,
-                owner_id=owner_id,
-                strict=strict,
-            )
-
-        still_need = need
 
         forced_package_id = self.package_level_id.package_id or None
         rounding = self.product_id.uom_id.rounding
 
+        still_need = need
         for rule in rules:
             # 1st check if rule is applicable from the move
             if not rule._is_rule_applicable(self):
@@ -102,10 +91,46 @@ class StockMove(models.Model):
                     # useless to eval the other rules when still_need <= 0
                     break
 
-        reserved = need - still_need
-        return reserved + super()._update_reserved_quantity(
-            still_need,
-            available_quantity - reserved,
+            reserved = need - still_need
+            if rule.fallback_location_id:
+                quants = self.env["stock.quant"]._gather(
+                    self.product_id,
+                    rule.fallback_location_id,
+                    lot_id=lot_id,
+                    package_id=forced_package_id,
+                    owner_id=owner_id,
+                    strict=strict,
+                )
+                fallback_quantity = sum(quants.mapped("quantity")) - sum(
+                    quants.mapped("reserved_quantity")
+                )
+                return reserved + super()._update_reserved_quantity(
+                    still_need,
+                    fallback_quantity,
+                    location_id=rule.fallback_location_id,
+                    lot_id=lot_id,
+                    package_id=package_id,
+                    owner_id=owner_id,
+                    strict=strict,
+                )
+
+            else:
+                # Implicit fallback on the original location
+                return reserved + super()._update_reserved_quantity(
+                    still_need,
+                    available_quantity - reserved,
+                    location_id=location_id,
+                    lot_id=lot_id,
+                    package_id=package_id,
+                    owner_id=owner_id,
+                    strict=strict,
+                )
+
+        # We fall here if there is no rule or they have all been
+        # excluded by 'rule._is_rule_applicable'
+        return super()._update_reserved_quantity(
+            need,
+            available_quantity,
             location_id=location_id,
             lot_id=lot_id,
             package_id=package_id,

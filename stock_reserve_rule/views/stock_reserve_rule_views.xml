@@ -15,6 +15,7 @@
                 <h1><field name="name"/></h1>
                 <group string="Rule Applicability" name="configuration">
                     <field name="location_id"/>
+                    <field name="fallback_location_id"/>
                     <field name="rule_domain" widget="domain"  options="{'model': 'stock.move'}" />
                     <field name="company_id" groups="base.group_multi_company"/>
                 </group>

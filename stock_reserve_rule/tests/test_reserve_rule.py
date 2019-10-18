@@ -20,67 +20,31 @@ class TestReserveRule(common.SavepointCase):
         cls.customer_loc = cls.env.ref("stock.stock_location_customers")
 
         cls.loc_zone1 = cls.env["stock.location"].create(
-            {
-                "name": "Zone1",
-                "location_id": cls.wh.lot_stock_id.id,
-                "kind": "zone",
-            }
+            {"name": "Zone1", "location_id": cls.wh.lot_stock_id.id}
         )
         cls.loc_zone1_bin1 = cls.env["stock.location"].create(
-            {
-                "name": "Zone1 Bin1",
-                "location_id": cls.loc_zone1.id,
-                "kind": "bin",
-            }
+            {"name": "Zone1 Bin1", "location_id": cls.loc_zone1.id}
         )
         cls.loc_zone1_bin2 = cls.env["stock.location"].create(
-            {
-                "name": "Zone1 Bin2",
-                "location_id": cls.loc_zone1.id,
-                "kind": "bin",
-            }
+            {"name": "Zone1 Bin2", "location_id": cls.loc_zone1.id}
         )
         cls.loc_zone2 = cls.env["stock.location"].create(
-            {
-                "name": "Zone2",
-                "location_id": cls.wh.lot_stock_id.id,
-                "kind": "zone",
-            }
+            {"name": "Zone2", "location_id": cls.wh.lot_stock_id.id}
         )
         cls.loc_zone2_bin1 = cls.env["stock.location"].create(
-            {
-                "name": "Zone2 Bin1",
-                "location_id": cls.loc_zone2.id,
-                "kind": "bin",
-            }
+            {"name": "Zone2 Bin1", "location_id": cls.loc_zone2.id}
         )
         cls.loc_zone2_bin2 = cls.env["stock.location"].create(
-            {
-                "name": "Zone2 Bin2",
-                "location_id": cls.loc_zone2.id,
-                "kind": "bin",
-            }
+            {"name": "Zone2 Bin2", "location_id": cls.loc_zone2.id}
         )
         cls.loc_zone3 = cls.env["stock.location"].create(
-            {
-                "name": "Zone3",
-                "location_id": cls.wh.lot_stock_id.id,
-                "kind": "zone",
-            }
+            {"name": "Zone3", "location_id": cls.wh.lot_stock_id.id}
         )
         cls.loc_zone3_bin1 = cls.env["stock.location"].create(
-            {
-                "name": "Zone3 Bin1",
-                "location_id": cls.loc_zone3.id,
-                "kind": "bin",
-            }
+            {"name": "Zone3 Bin1", "location_id": cls.loc_zone3.id}
         )
         cls.loc_zone3_bin2 = cls.env["stock.location"].create(
-            {
-                "name": "Zone3 Bin2",
-                "location_id": cls.loc_zone3.id,
-                "kind": "bin",
-            }
+            {"name": "Zone3 Bin2", "location_id": cls.loc_zone3.id}
         )
 
         cls.product1 = cls.env["product.product"].create(
@@ -238,6 +202,41 @@ class TestReserveRule(common.SavepointCase):
         )
         self.assertEqual(move.state, "partially_available")
         self.assertEqual(move.reserved_availability, 300.)
+
+    def test_rule_fallback(self):
+        reserve = self.env["stock.location"].create(
+            {"name": "Reserve", "location_id": self.wh.view_location_id.id}
+        )
+
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
+        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 100)
+        self._update_qty_in_location(self.loc_zone3_bin1, self.product1, 100)
+        self._update_qty_in_location(reserve, self.product1, 300)
+        picking = self._create_picking(self.wh, [(self.product1, 400)])
+
+        self._create_rule(
+            {"fallback_location_id": reserve.id},
+            [
+                {"location_id": self.loc_zone1.id, "sequence": 3},
+                {"location_id": self.loc_zone2.id, "sequence": 1},
+                {"location_id": self.loc_zone3.id, "sequence": 2},
+            ],
+        )
+
+        picking.action_assign()
+        move = picking.move_lines
+        ml = move.move_line_ids
+        self.assertRecordValues(
+            ml,
+            [
+                {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
+                {"location_id": self.loc_zone3_bin1.id, "product_qty": 100},
+                {"location_id": self.loc_zone1_bin1.id, "product_qty": 100},
+                {"location_id": reserve.id, "product_qty": 100},
+            ],
+        )
+        self.assertEqual(move.state, "assigned")
+        self.assertEqual(move.reserved_availability, 400.)
 
     def test_rule_domain(self):
         self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)

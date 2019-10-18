@@ -17,15 +17,12 @@ def _default_sequence(record):
 class StockReserveRule(models.Model):
     """Rules for stock reservations
 
-    A rule is separated in:
+    Each rule can have many removal rules, they configure the conditions and
+    advanced removal strategies to apply on a specific location (sub-location
+    of the rule).
 
-    * Check if a rule is applicable, based on the stock move
-      (_is_rule_applicable)
-    * Filter quants that a rule can reserve (_filter_quants)
-    * An advanced removal strategy for the preselected quants (_apply_strategy)
-
-    The first 2 can be cumulative, the removal strategy is exclusive.
-
+    The rules are selected for a move based on their source location and a
+    configurable domain on the rule.
     """
 
     _name = "stock.reserve.rule"
@@ -41,6 +38,12 @@ class StockReserveRule(models.Model):
     )
 
     location_id = fields.Many2one(comodel_name="stock.location", required=True)
+    fallback_location_id = fields.Many2one(
+        comodel_name="stock.location",
+        help="If all removal rules are exhausted, try to reserve in this "
+        "location. When empty, the fallback happens in any of the move's "
+        "source sub-locations.",
+    )
 
     rule_removal_ids = fields.One2many(
         comodel_name="stock.reserve.rule.removal", inverse_name="rule_id"
@@ -79,17 +82,17 @@ class StockReserveRule(models.Model):
 
 
 class StockReserveRuleRemoval(models.Model):
-    """Rules for stock reservations
+    """Rules for stock reservations removal
 
-    A rule is separated in:
+    A removal rule does:
 
-    * Check if a rule is applicable, based on the stock move
-      (_is_rule_applicable)
-    * Filter quants that a rule can reserve (_filter_quants)
+    * Filter quants that a removal rule can reserve for the location
+      (_filter_quants)
     * An advanced removal strategy for the preselected quants (_apply_strategy)
 
-    The first 2 can be cumulative, the removal strategy is exclusive.
-
+    New advanced removal strategies can be added by other modules, see the
+    method ``_apply_strategy`` and the default methods for more documentation
+    about their contract.
     """
 
     _name = "stock.reserve.rule.removal"
