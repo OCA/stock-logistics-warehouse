@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2019-10-16 15:58+0000\n"
-"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
+"PO-Revision-Date: 2019-10-21 15:32+0000\n"
+"Last-Translator: Tony Gu <tony@openerp.cn>\n"
 "Language-Team: none\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #. module: stock_secondary_unit
 #: model_terms:ir.ui.view,arch_db:stock_secondary_unit.report_delivery_document
 msgid "<strong>Secondary Qty</strong>"
-msgstr "<strong>第二数量</strong>"
+msgstr "<strong> 辅助单位数量</strong>"
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__display_name
@@ -59,32 +59,32 @@ msgstr "产品模板"
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__secondary_unit_qty_available
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__secondary_unit_qty_available
 msgid "Quantity On Hand (2Unit)"
-msgstr "在手数量（2个单位）"
+msgstr "在手数量（辅助单位）"
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_id
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__secondary_uom_id
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin__secondary_uom_id
 msgid "Second unit"
-msgstr "第二单位"
+msgstr "辅助单位"
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__stock_secondary_uom_id
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__stock_secondary_uom_id
 msgid "Second unit for inventory"
-msgstr "库存第二单位"
+msgstr "库存辅助单位"
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_qty
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__secondary_uom_qty
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_secondary_unit_mixin__secondary_uom_qty
 msgid "Secondary Qty"
-msgstr "第二数量"
+msgstr "辅助单位数量"
 
 #. module: stock_secondary_unit
 #: model_terms:ir.ui.view,arch_db:stock_secondary_unit.view_template_property_form
 msgid "Secondary unit"
-msgstr "第二单位"
+msgstr "辅助单位"
 
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_stock_move
@@ -94,9 +94,9 @@ msgstr "库存移动"
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit
 msgid "Stock Product Secondary Unit"
-msgstr "库存产品第二单位"
+msgstr "库存产品辅助单位"
 
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_stock_secondary_unit_mixin
 msgid "Stock Secondary Unit Mixin"
-msgstr "库存二级单位混合"
+msgstr "库存辅助单位混合类"
