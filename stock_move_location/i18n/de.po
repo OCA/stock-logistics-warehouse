@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2019-10-25 14:24+0000\n"
+"PO-Revision-Date: 2019-10-25 14:25+0000\n"
 "Last-Translator: Stefan Wild <stefan.wild@sewisoft.de>\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -180,7 +180,7 @@ msgstr "Einheit"
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_stock_move_location_move
 msgid "Whether this move is a part of stock_location moves"
-msgstr "Bewegung ist Teil der Lagerbeweungen"
+msgstr "Ist diese Bewegung Teil der Lagerortbewegungen"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_wiz_stock_move_location
