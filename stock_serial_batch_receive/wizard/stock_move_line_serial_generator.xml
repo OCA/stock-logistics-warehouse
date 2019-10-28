@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_stock_move_line_serial_generator" model="ir.ui.view">
+        <field name="name">stock.move.line.serial.generator.form</field>
+        <field name="model">stock.move.line.serial.generator</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="stock_move_id" invisible="1"/>
+                    <field name="qty_to_process"  />
+                    <field name="first_number" />
+                </group>
+                <footer>
+                    <button name="generate_serials" type="object" string="Generate serials" class="oe_highlight"/>
+                    <button string="Cancel" name="cancel" type="object" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_stock_move_line_serial_generator" model="ir.actions.act_window">
+        <field name="name">Generate serial numbers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.move.line.serial.generator</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_stock_move_id': active_id}</field>
+        <field name="view_id" eval="view_stock_move_line_serial_generator"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
