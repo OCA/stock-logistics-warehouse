@@ -38,7 +38,7 @@ class TestStockInventoryDestinationLocation(SavepointCase):
             'filter': 'product',
             'product_id': product.id,
         })
-        inventory.onchange_filter()
+        inventory._onchange_filter()
         inventory.action_start()
         line = fields.first(inventory.line_ids.filtered(
             lambda l: l.product_id.id == product.id))
@@ -46,7 +46,7 @@ class TestStockInventoryDestinationLocation(SavepointCase):
         # check using empty virtual_location_id
         line.virtual_location_id = self.stock_location
         line.product_qty = 3
-        inventory.action_done()
+        inventory._action_done()
 
         move = self.stock_move.search([
             ('product_id', '=', product.id),
@@ -66,7 +66,7 @@ class TestStockInventoryDestinationLocation(SavepointCase):
             'filter': 'product',
             'product_id': product.id,
         })
-        inventory.onchange_filter()
+        inventory._onchange_filter()
         inventory.action_start()
         line = fields.first(inventory.line_ids.filtered(
             lambda l: l.product_id.id == product.id))
@@ -78,12 +78,11 @@ class TestStockInventoryDestinationLocation(SavepointCase):
         })
         line.virtual_location_id = new_location
         line.product_qty = 3
-        inventory.action_done()
+        inventory._action_done()
 
         move = self.stock_move.search([
             ('product_id', '=', product.id),
             ('inventory_id', '=', inventory.id),
         ], limit=1)
 
-        self.assertEqual(move.location_id,
-                         line.virtual_location_id)
+        self.assertEqual(move.location_id, line.virtual_location_id)
