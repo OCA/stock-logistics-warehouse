@@ -61,6 +61,10 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
             'name': 'Lot for product1',
             'product_id': self.product1.id
         })
+        self.lot_b = self.lot_model.create({
+            'name': 'Lot for product2',
+            'product_id': self.product2.id
+        })
         self.package = self.package_model.create({'name': 'PACK00TEST1'})
 
         # Add a product in each location
@@ -82,7 +86,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
                         "product.product_uom_unit").id,
                     'product_qty': 4.0,
                     'location_id': self.sublocation.id,
-                    'prod_lot_id': self.lot_a.id
+                    'prod_lot_id': self.lot_b.id
                 }),
             ],
         })
