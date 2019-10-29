@@ -1,0 +1,2 @@
+Glue module for stock_inventory_virtual_location and stock_change_qty_reason
+modules.
