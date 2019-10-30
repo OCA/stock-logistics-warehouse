@@ -8,17 +8,17 @@ class StockLocation(models.Model):
 
     _inherit = 'stock.location'
 
-    routing_operation_picking_type_id = fields.Many2one(
+    src_routing_picking_type_id = fields.Many2one(
         'stock.picking.type',
-        string='Routing operation',
+        string='Routing Operation',
         help="Change destination of the move line according to the"
              " default destination setup after reservation occurs",
     )
 
-    @api.constrains('routing_operation_picking_type_id')
-    def _check_routing_operation_picking_type_id(self):
+    @api.constrains('src_routing_picking_type_id')
+    def _check_src_routing_picking_type_id(self):
         for location in self:
-            picking_type = location.routing_operation_picking_type_id
+            picking_type = location.src_routing_picking_type_id
             if not picking_type:
                 continue
             if picking_type.default_location_src_id != location:
@@ -29,7 +29,7 @@ class StockLocation(models.Model):
                 ))
 
     @api.multi
-    def _find_picking_type_for_routing_operation(self):
+    def _find_picking_type_for_src_routing(self):
         self.ensure_one()
         # First select all the parent locations and the matching
         # picking types. In a second step, the picking type matching the
@@ -42,7 +42,7 @@ class StockLocation(models.Model):
             order='parent_path desc'
         )
         picking_types = self.env['stock.picking.type'].search([
-            ('routing_operation_location_ids', '!=', False),
+            ('src_routing_location_ids', '!=', False),
             ('default_location_src_id', 'in', tree.ids)
         ])
         # the first location is the current move line's source location,

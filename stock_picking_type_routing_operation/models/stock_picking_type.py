@@ -6,24 +6,24 @@ from odoo import _, api, exceptions, fields, models
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
-    routing_operation_location_ids = fields.One2many(
-        'stock.location', 'routing_operation_picking_type_id'
+    src_routing_location_ids = fields.One2many(
+        'stock.location', 'src_routing_picking_type_id'
     )
 
     @api.constrains(
-        'routing_operation_location_ids', 'default_location_src_id'
+        'src_routing_location_ids', 'default_location_src_id'
     )
-    def _check_routing_operation_location_src_unique(self):
+    def _check_src_routing_location_unique(self):
         for picking_type in self:
-            if not picking_type.routing_operation_location_ids:
+            if not picking_type.src_routing_location_ids:
                 continue
-            if len(picking_type.routing_operation_location_ids) > 1:
+            if len(picking_type.src_routing_location_ids) > 1:
                 raise exceptions.ValidationError(_(
                     'The same picking type cannot be used on different '
                     'locations having routing operations.'
                 ))
             if (
-                picking_type.routing_operation_location_ids
+                picking_type.src_routing_location_ids
                 != picking_type.default_location_src_id
             ):
                 raise exceptions.ValidationError(_(
@@ -33,7 +33,7 @@ class StockPickingType(models.Model):
                 ))
             src_location = picking_type.default_location_src_id
             domain = [
-                ('routing_operation_location_ids', '!=', False),
+                ('src_routing_location_ids', '!=', False),
                 ('default_location_src_id', '=', src_location.id),
                 ('id', '!=', picking_type.id)
             ]

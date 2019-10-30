@@ -3,7 +3,7 @@
 from odoo.tests import common
 
 
-class TestPickingTypeRoutingOperation(common.SavepointCase):
+class TestSourceRoutingOperation(common.SavepointCase):
 
     @classmethod
     def setUpClass(cls):
@@ -66,7 +66,7 @@ class TestPickingTypeRoutingOperation(common.SavepointCase):
             'sequence_id': picking_type_sequence.id,
         })
         cls.location_hb.write({
-            'routing_operation_picking_type_id': cls.pick_type_routing_op.id
+            'src_routing_picking_type_id': cls.pick_type_routing_op.id
         })
 
     def _create_pick_ship(self, wh, products=None):

@@ -34,7 +34,7 @@ class StockMove(models.Model):
             routing_quantities = {}
             for source_location, qty in move_lines.items():
                 routing_picking_type = \
-                    source_location._find_picking_type_for_routing_operation()
+                    source_location._find_picking_type_for_src_routing()
                 routing_quantities.setdefault(routing_picking_type, 0.0)
                 routing_quantities[routing_picking_type] += qty
 
@@ -94,7 +94,7 @@ class StockMove(models.Model):
             # locations, they have been split in
             # _split_per_routing_operation(), so we can take the first one
             source = move.move_line_ids[0].location_id
-            picking_type = source._find_picking_type_for_routing_operation()
+            picking_type = source._find_picking_type_for_src_routing()
             if not picking_type:
                 continue
             if (

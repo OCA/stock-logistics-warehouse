@@ -21,7 +21,7 @@
   </record>
 
   <record id="stock_location_highbay_demo" model="stock.location">
-      <field name="routing_operation_picking_type_id" ref="stock_picking_type_highbay_handover_demo"/>
+      <field name="src_routing_picking_type_id" ref="stock_picking_type_highbay_handover_demo"/>
   </record>
 
 </odoo>
