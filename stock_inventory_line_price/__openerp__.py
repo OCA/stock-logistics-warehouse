@@ -22,5 +22,6 @@
     "data": [
         "views/inventory_view.xml",
     ],
+    "license": "AGPL-3",
     "installable": True,
 }
