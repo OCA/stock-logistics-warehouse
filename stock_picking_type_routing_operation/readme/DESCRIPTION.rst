@@ -28,3 +28,11 @@ a "routing operation". A routing operation is based on a picking type.
 The extra operation will have the selected picking type, and the new move
 will have the source destination of the picking type.
 
+When putting away:
+
+A put-away rule targets the High-Bay location.
+An operation Input-Highbay is created. You expect Input-Handover-Highbay.
+
+You can configure a routing operation for the put-away on the High-Bay Location.
+The picking type of the new Handover move will the routing operation selected,
+and its destination will be the destination of the picking type.
