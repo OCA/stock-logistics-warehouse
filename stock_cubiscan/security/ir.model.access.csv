@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cubiscan_device_inventory_manager,cubiscan.device.inventory.manager,stock_cubiscan.model_cubiscan_device,stock.group_stock_manager,1,1,1,1
+access_cubiscan_device_inventory_user,cubiscan.device.inventory.user,stock_cubiscan.model_cubiscan_device,stock.group_stock_user,1,0,0,0
