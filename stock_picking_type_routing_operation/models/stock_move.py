@@ -63,6 +63,7 @@ class StockMove(models.Model):
                 continue
 
             move._do_unreserve()
+            move.package_level_id.unlink()
             move_to_assign_ids.add(move.id)
             for picking_type, qty in routing_quantities.items():
                 # When picking_type is empty, it means we have no routing
