@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <field name="putaway_strategy_id" position="after">
                 <field name="src_routing_picking_type_id" domain="[('default_location_src_id', '=', active_id)]" context="{'default_default_location_src_id': active_id}" />
+                <field name="dest_routing_picking_type_id" domain="[('default_location_dest_id', '=', active_id)]" context="{'default_default_location_dest_id': active_id}" />
             </field>
         </field>
     </record>

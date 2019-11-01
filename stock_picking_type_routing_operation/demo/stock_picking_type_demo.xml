@@ -1,27 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
 
-  <record id="sequence_stock_picking_type_highbay_handover_demo" model="ir.sequence">
-    <field name="name">Highbay Handover</field>
-    <field name="code">stock.ho</field>
-    <field name="prefix">HO/</field>
+  <record id="sequence_stock_picking_type_highbay_to_handover_demo" model="ir.sequence">
+    <field name="name">Highbay → Handover</field>
+    <field name="code">stock.hb.ho</field>
+    <field name="prefix">HBHO/</field>
     <field name="padding">5</field>
     <field name="number_next">1</field>
     <field name="number_increment">1</field>
   </record>
 
-  <record model="stock.picking.type" id="stock_picking_type_highbay_handover_demo">
-    <field name="name">Highbay Handover</field>
+  <record model="stock.picking.type" id="stock_picking_type_highbay_to_handover_demo">
+    <field name="name">Highbay → Handover</field>
     <field name="code">internal</field>
     <field name="use_create_lots" eval="False"/>
     <field name="use_existing_lots" eval="True"/>
     <field name="default_location_src_id" ref="stock_location_highbay_demo"/>
     <field name="default_location_dest_id" ref="stock_location_handover_demo"/>
-    <field name="sequence_id" ref="sequence_stock_picking_type_highbay_handover_demo"/>
+    <field name="sequence_id" ref="sequence_stock_picking_type_highbay_to_handover_demo"/>
+  </record>
+
+  <record id="sequence_stock_picking_type_handover_to_highbay_demo" model="ir.sequence">
+    <field name="name">Handover → Highbay</field>
+    <field name="code">stock.ho.hb</field>
+    <field name="prefix">HOHB/</field>
+    <field name="padding">5</field>
+    <field name="number_next">1</field>
+    <field name="number_increment">1</field>
+  </record>
+
+  <record model="stock.picking.type" id="stock_picking_type_handover_to_highbay_demo">
+    <field name="name">Handover → Highbay</field>
+    <field name="code">internal</field>
+    <field name="use_create_lots" eval="False"/>
+    <field name="use_existing_lots" eval="True"/>
+    <field name="default_location_src_id" ref="stock_location_handover_demo"/>
+    <field name="default_location_dest_id" ref="stock_location_highbay_demo"/>
+    <field name="sequence_id" ref="sequence_stock_picking_type_handover_to_highbay_demo"/>
   </record>
 
   <record id="stock_location_highbay_demo" model="stock.location">
-      <field name="src_routing_picking_type_id" ref="stock_picking_type_highbay_handover_demo"/>
+    <field name="src_routing_picking_type_id" ref="stock_picking_type_highbay_to_handover_demo"/>
+    <field name="dest_routing_picking_type_id" ref="stock_picking_type_handover_to_highbay_demo"/>
   </record>
 
 </odoo>
