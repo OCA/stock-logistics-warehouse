@@ -16,9 +16,9 @@ class StockPicking(models.Model):
     def _compute_need_rule_pull(self):
         for picking in self:
             picking.need_rule_pull = any(
-                move.need_rule_pull for move in picking
+                move.need_rule_pull for move in picking.move_lines
             )
 
     @api.multi
-    def release_virtual_reservation(self):
-        self.mapped("move_lines").release_virtual_reservation()
+    def release_available_to_promise(self):
+        self.mapped("move_lines").release_available_to_promise()

@@ -15,40 +15,43 @@ class StockMove(models.Model):
         index=True,
         default=fields.Datetime.now,
         help="Date/time used to sort moves to deliver first. "
-        "Used to calculate the virtual quantity.",
+        "Used to calculate the ordered available to promise.",
     )
-    virtual_available_qty = fields.Float(
-        "Virtual Available Quantity",
-        compute="_compute_virtual_available_qty",
+    ordered_available_to_promise = fields.Float(
+        "Ordered Available to Promise",
+        compute="_compute_ordered_available_to_promise",
         digits=dp.get_precision("Product Unit of Measure"),
-        help="Available quantity minus virtually reserved by older"
-        " operations that do not have a real reservation yet",
+        help="Available to Promise quantity minus quantities promised "
+        " to older promised operations.",
     )
     need_rule_pull = fields.Boolean()
 
     @api.depends()
-    def _compute_virtual_available_qty(self):
+    def _compute_ordered_available_to_promise(self):
         for move in self:
-            move.virtual_available_qty = move._virtual_available_qty()
+            move.ordered_available_to_promise = (
+                move._ordered_available_to_promise()
+            )
 
-    def _should_compute_virtual_reservation(self):
+    def _should_compute_ordered_available_to_promise(self):
         return (
             self.picking_code == "outgoing"
             and not self.product_id.type == "consu"
             and not self.location_id.should_bypass_reservation()
         )
 
-    def _virtual_available_qty(self):
-        if not self._should_compute_virtual_reservation():
+    def _ordered_available_to_promise(self):
+        if not self._should_compute_ordered_available_to_promise():
             return 0.
         available = self.product_id.with_context(
             location=self.warehouse_id.lot_stock_id.id
         ).virtual_available
         return max(
-            min(available - self._virtual_reserved_qty(), self.product_qty), 0.
+            min(available - self._previous_promised_qty(), self.product_qty),
+            0.,
         )
 
-    def _virtual_quantity_domain(self):
+    def _available_to_promise_quantity_domain(self):
         domain = [
             ("need_rule_pull", "=", True),
             ("product_id", "=", self.product_id.id),
@@ -57,23 +60,26 @@ class StockMove(models.Model):
         ]
         return domain
 
-    def _virtual_reserved_qty(self):
+    def _previous_promised_qty(self):
         previous_moves = self.search(
             expression.AND(
-                [self._virtual_quantity_domain(), [("id", "!=", self.id)]]
+                [
+                    self._available_to_promise_quantity_domain(),
+                    [("id", "!=", self.id)],
+                ]
             )
         )
-        virtual_reserved = sum(
+        promised_qty = sum(
             previous_moves.mapped(
                 lambda move: max(
                     move.product_qty - move.reserved_availability, 0.
                 )
             )
         )
-        return virtual_reserved
+        return promised_qty
 
     @api.multi
-    def release_virtual_reservation(self):
+    def release_available_to_promise(self):
         self._run_stock_rule()
 
     def _prepare_move_split_vals(self, qty):
@@ -81,7 +87,7 @@ class StockMove(models.Model):
         # The method set procure_method as 'make_to_stock' by default on split,
         # but we want to keep 'make_to_order' for chained moves when we split
         # a partially available move in _run_stock_rule().
-        if self.env.context.get("virtual_reservation"):
+        if self.env.context.get("release_available_to_promise"):
             vals.update(
                 {"procure_method": self.procure_method, "need_rule_pull": True}
             )
@@ -92,8 +98,9 @@ class StockMove(models.Model):
         """Launch procurement group run method with remaining quantity
 
         As we only generate chained moves for the quantity available minus the
-        virtually reserved quantity, to delay the reservation at the latest, we
-        have to periodically retry to assign the remaining quantities.
+        quantity promised to older moves, to delay the reservation at the
+        latest, we have to periodically retry to assign the remaining
+        quantities.
         """
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
@@ -105,7 +112,7 @@ class StockMove(models.Model):
                 continue
             # do not use the computed field, because it will keep
             # a value in cache that we cannot invalidate declaratively
-            available_quantity = move._virtual_available_qty()
+            available_quantity = move._ordered_available_to_promise()
             if (
                 float_compare(
                     available_quantity, 0, precision_digits=precision
@@ -122,7 +129,9 @@ class StockMove(models.Model):
                     # we don't want to delivery unless we can deliver all at
                     # once
                     continue
-                move.with_context(virtual_reservation=True)._split(remaining)
+                move.with_context(release_available_to_promise=True)._split(
+                    remaining
+                )
 
             values = move._prepare_procurement_values()
 

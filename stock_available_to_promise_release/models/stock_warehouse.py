@@ -7,9 +7,10 @@ from odoo import fields, models
 class StockWarehouse(models.Model):
     _inherit = "stock.warehouse"
 
-    virtual_reservation_defer_pull = fields.Boolean(
-        string="Defer Pull using Virtual Reservation",
+    available_to_promise_defer_pull = fields.Boolean(
+        string="Release based on Available to Promise",
         default=False,
         help="Do not create chained moved automatically for delivery. "
-        "Transfers must be released manually.",
+        "Transfers must be released manually when they have enough available"
+        " to promise.",
     )

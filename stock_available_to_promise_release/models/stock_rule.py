@@ -21,8 +21,8 @@ class StockRule(models.Model):
         values,
     ):
         if (
-            not self.env.context.get("_rule_no_virtual_defer")
-            and self.warehouse_id.virtual_reservation_defer_pull
+            not self.env.context.get("_rule_no_available_defer")
+            and self.warehouse_id.available_to_promise_defer_pull
             # We still want to create the first part of the chain
             and not self.picking_type_id.code == "outgoing"
         ):
@@ -67,7 +67,7 @@ class ProcurementGroup(models.Model):
         if not rule or rule.action not in ("pull", "pull_push"):
             return
 
-        rule.with_context(_rule_no_virtual_defer=True)._run_pull(
+        rule.with_context(_rule_no_available_defer=True)._run_pull(
             product_id,
             product_qty,
             product_uom,

@@ -12,5 +12,5 @@ class StockMoveRelease(models.TransientModel):
         moves = self.env['stock.move'].browse(
             self.env.context.get('active_ids', [])
         ).exists()
-        moves.release_virtual_reservation()
+        moves.release_available_to_promise()
         return {'type': 'ir.actions.act_window_close'}

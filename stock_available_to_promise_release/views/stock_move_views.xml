@@ -9,7 +9,7 @@
         <field eval="900" name="priority"/>
         <field name="arch" type="xml">
             <field name="product_uom_qty" position="after">
-                <field name="virtual_available_qty"/>
+                <field name="ordered_available_to_promise"/>
                 <field name="date_priority"/>
             </field>
         </field>
@@ -23,7 +23,7 @@
         <field eval="900" name="priority"/>
         <field name="arch" type="xml">
             <group name="main_grp_col2" position="inside">
-                <field name="virtual_available_qty"/>
+                <field name="ordered_available_to_promise"/>
                 <field name="date_priority"/>
             </group>
         </field>

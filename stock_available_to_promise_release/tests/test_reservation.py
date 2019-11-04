@@ -7,7 +7,7 @@ from odoo import fields
 from odoo.tests import common
 
 
-class TestVirtualReservation(common.SavepointCase):
+class TestAvailableToPromiseRelease(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -111,8 +111,8 @@ class TestVirtualReservation(common.SavepointCase):
             line.qty_done = line.product_qty
         picking.action_done()
 
-    def test_virtual_reservation_value(self):
-        self.wh.write({"virtual_reservation_defer_pull": True})
+    def test_ordered_available_to_promise_value(self):
+        self.wh.write({"available_to_promise_defer_pull": True})
         picking = self._out_picking(
             self._create_picking_chain(
                 self.wh, [(self.product1, 5)], date=datetime(2019, 9, 2, 16, 0)
@@ -142,16 +142,15 @@ class TestVirtualReservation(common.SavepointCase):
         )
 
         for pick in (picking, picking2, picking3, picking4):
-            # self.assertEqual(pick.move_lines.virtual_reserved_qty, 0)
             self.assertEqual(pick.state, "waiting")
             self.assertEqual(pick.move_lines.reserved_availability, 0.)
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 20.)
 
-        self.assertEqual(picking.move_lines._virtual_available_qty(), 5)
-        self.assertEqual(picking2.move_lines._virtual_available_qty(), 3)
-        self.assertEqual(picking3.move_lines._virtual_available_qty(), 12)
-        self.assertEqual(picking4.move_lines._virtual_available_qty(), 0)
+        self.assertEqual(picking.move_lines._ordered_available_to_promise(), 5)
+        self.assertEqual(picking2.move_lines._ordered_available_to_promise(), 3)
+        self.assertEqual(picking3.move_lines._ordered_available_to_promise(), 12)
+        self.assertEqual(picking4.move_lines._ordered_available_to_promise(), 0)
 
     def test_normal_chain(self):
         # usual scenario, without using the option to defer the pull
@@ -172,7 +171,7 @@ class TestVirtualReservation(common.SavepointCase):
         )
 
     def test_defer_creation(self):
-        self.wh.write({"virtual_reservation_defer_pull": True})
+        self.wh.write({"available_to_promise_defer_pull": True})
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 20.)
         pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
@@ -191,7 +190,7 @@ class TestVirtualReservation(common.SavepointCase):
             ],
         )
 
-        cust_picking.move_lines.release_virtual_reservation()
+        cust_picking.move_lines.release_available_to_promise()
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
 
         self.assertRecordValues(
@@ -207,7 +206,7 @@ class TestVirtualReservation(common.SavepointCase):
 
     def test_defer_creation_move_type_one(self):
         """Deliver all products at once"""
-        self.wh.write({"virtual_reservation_defer_pull": True})
+        self.wh.write({"available_to_promise_defer_pull": True})
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 5.)
         pickings = self._create_picking_chain(
@@ -228,7 +227,7 @@ class TestVirtualReservation(common.SavepointCase):
             ],
         )
 
-        cust_picking.move_lines.release_virtual_reservation()
+        cust_picking.move_lines.release_available_to_promise()
         # no chain picking should have been created because we would have a
         # partial and the move delivery type is "one"
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
@@ -236,7 +235,7 @@ class TestVirtualReservation(common.SavepointCase):
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 10.)
         # now, we have enough, the picking is created
-        cust_picking.move_lines.release_virtual_reservation()
+        cust_picking.move_lines.release_available_to_promise()
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
         self.assertRecordValues(
             out_picking,
@@ -250,7 +249,7 @@ class TestVirtualReservation(common.SavepointCase):
         )
 
     def test_defer_creation_backorder(self):
-        self.wh.write({"virtual_reservation_defer_pull": True})
+        self.wh.write({"available_to_promise_defer_pull": True})
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 7.)
 
@@ -270,7 +269,7 @@ class TestVirtualReservation(common.SavepointCase):
             ],
         )
 
-        cust_picking.release_virtual_reservation()
+        cust_picking.release_available_to_promise()
 
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
 
@@ -323,7 +322,7 @@ class TestVirtualReservation(common.SavepointCase):
         self.assertEqual(
             len(self._pickings_in_group(cust_picking.group_id)), 3
         )
-        cust_backorder.release_virtual_reservation()
+        cust_backorder.release_available_to_promise()
         self.assertEqual(
             len(self._pickings_in_group(cust_picking.group_id)), 3
         )
@@ -331,7 +330,7 @@ class TestVirtualReservation(common.SavepointCase):
         # We add stock, so now the release must create the next
         # chained move
         self._update_qty_in_location(self.loc_bin1, self.product1, 30)
-        cust_backorder.release_virtual_reservation()
+        cust_backorder.release_available_to_promise()
         out_backorder = (
             self._pickings_in_group(cust_picking.group_id)
             - cust_backorder
@@ -353,7 +352,7 @@ class TestVirtualReservation(common.SavepointCase):
         )
 
     def test_defer_multi_move(self):
-        self.wh.write({"virtual_reservation_defer_pull": True})
+        self.wh.write({"available_to_promise_defer_pull": True})
 
         self._update_qty_in_location(self.loc_bin1, self.product2, 10.)
 
@@ -375,7 +374,7 @@ class TestVirtualReservation(common.SavepointCase):
             ],
         )
 
-        cust_picking.release_virtual_reservation()
+        cust_picking.release_available_to_promise()
 
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
 
@@ -396,7 +395,7 @@ class TestVirtualReservation(common.SavepointCase):
         )
 
     def test_defer_creation_uom(self):
-        self.wh.write({"virtual_reservation_defer_pull": True})
+        self.wh.write({"available_to_promise_defer_pull": True})
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 12.)
         uom_dozen = self.env.ref("uom.product_uom_dozen")
@@ -427,12 +426,12 @@ class TestVirtualReservation(common.SavepointCase):
                     "product_uom": uom_dozen.id,
                     "product_qty": 24.,
                     "product_uom_qty": 2.,
-                    "virtual_available_qty": 12.,
+                    "ordered_available_to_promise": 12.,
                 }
             ],
         )
 
-        cust_picking.move_lines.release_virtual_reservation()
+        cust_picking.move_lines.release_available_to_promise()
         out_picking = self._pickings_in_group(pickings.group_id) - cust_picking
 
         self.assertRecordValues(

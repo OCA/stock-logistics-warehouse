@@ -10,8 +10,7 @@ Allow each delivery move to mark a quantity as virtually reserved. Simple rule
 would be first ordered, first served. More complex rules could be implemented.
 
 When the reservation of a picking move occurs, the quantity that is reserved is
-then based on the quantity that was promised to the customer (virtually
-reserved):
+then based on the quantity that was promised to the customer (available to promise):
 
 * The moves can be reserved in any order, the right quantity is always reserved
 * The removal strategy is computed only when the reservation occurs. If you
