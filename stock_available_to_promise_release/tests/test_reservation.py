@@ -112,7 +112,9 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
         picking.action_done()
 
     def test_ordered_available_to_promise_value(self):
-        self.wh.write({"available_to_promise_defer_pull": True})
+        self.wh.delivery_route_id.write(
+            {"available_to_promise_defer_pull": True}
+        )
         picking = self._out_picking(
             self._create_picking_chain(
                 self.wh, [(self.product1, 5)], date=datetime(2019, 9, 2, 16, 0)
@@ -148,9 +150,15 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
         self._update_qty_in_location(self.loc_bin1, self.product1, 20.)
 
         self.assertEqual(picking.move_lines._ordered_available_to_promise(), 5)
-        self.assertEqual(picking2.move_lines._ordered_available_to_promise(), 3)
-        self.assertEqual(picking3.move_lines._ordered_available_to_promise(), 12)
-        self.assertEqual(picking4.move_lines._ordered_available_to_promise(), 0)
+        self.assertEqual(
+            picking2.move_lines._ordered_available_to_promise(), 3
+        )
+        self.assertEqual(
+            picking3.move_lines._ordered_available_to_promise(), 12
+        )
+        self.assertEqual(
+            picking4.move_lines._ordered_available_to_promise(), 0
+        )
 
     def test_normal_chain(self):
         # usual scenario, without using the option to defer the pull
@@ -171,7 +179,9 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
         )
 
     def test_defer_creation(self):
-        self.wh.write({"available_to_promise_defer_pull": True})
+        self.wh.delivery_route_id.write(
+            {"available_to_promise_defer_pull": True}
+        )
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 20.)
         pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
@@ -206,7 +216,9 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
 
     def test_defer_creation_move_type_one(self):
         """Deliver all products at once"""
-        self.wh.write({"available_to_promise_defer_pull": True})
+        self.wh.delivery_route_id.write(
+            {"available_to_promise_defer_pull": True}
+        )
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 5.)
         pickings = self._create_picking_chain(
@@ -249,7 +261,9 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
         )
 
     def test_defer_creation_backorder(self):
-        self.wh.write({"available_to_promise_defer_pull": True})
+        self.wh.delivery_route_id.write(
+            {"available_to_promise_defer_pull": True}
+        )
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 7.)
 
@@ -352,7 +366,9 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
         )
 
     def test_defer_multi_move(self):
-        self.wh.write({"available_to_promise_defer_pull": True})
+        self.wh.delivery_route_id.write(
+            {"available_to_promise_defer_pull": True}
+        )
 
         self._update_qty_in_location(self.loc_bin1, self.product2, 10.)
 
@@ -395,7 +411,9 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
         )
 
     def test_defer_creation_uom(self):
-        self.wh.write({"available_to_promise_defer_pull": True})
+        self.wh.delivery_route_id.write(
+            {"available_to_promise_defer_pull": True}
+        )
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 12.)
         uom_dozen = self.env.ref("uom.product_uom_dozen")
@@ -445,3 +463,9 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
                 }
             ],
         )
+
+    def test_mto_picking(self):
+        self.wh.delivery_route_id.write(
+            {"available_to_promise_defer_pull": True}
+        )
+        # TODO a MTO picking should work normally

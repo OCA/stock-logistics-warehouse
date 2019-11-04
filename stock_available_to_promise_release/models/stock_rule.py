@@ -22,7 +22,7 @@ class StockRule(models.Model):
     ):
         if (
             not self.env.context.get("_rule_no_available_defer")
-            and self.warehouse_id.available_to_promise_defer_pull
+            and self.route_id.available_to_promise_defer_pull
             # We still want to create the first part of the chain
             and not self.picking_type_id.code == "outgoing"
         ):
