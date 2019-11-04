@@ -71,7 +71,12 @@ class StockLocation(models.Model):
             location.vertical_lift_shuttle_id = shuttle
 
     def _hardware_vertical_lift_tray(self, cell_location=None):
-        """Send instructions to the vertical lift hardware
+        payload = self._hardware_vertical_lift_tray_payload(cell_location)
+        res = self.vertical_lift_shuttle_id._hardware_send_message(payload)
+        return res
+
+    def _hardware_vertical_lift_tray_payload(self, cell_location=None):
+        """Prepare the message to be sent to the vertical lift hardware
 
         Private method, this is where the implementation actually happens.
         Addons can add their instructions based on the hardware used for
@@ -120,9 +125,9 @@ class StockLocation(models.Model):
                     from_left,
                     from_bottom,
                 )
-            self.env.user.notify_info(
-                message=message, title=_("Lift Simulation")
-            )
+            return message
+        else:
+            return super()._hardware_vertical_lift_tray_payload(cell_location)
 
     def fetch_vertical_lift_tray(self, cell_location=None):
         """Send instructions to the vertical lift hardware
