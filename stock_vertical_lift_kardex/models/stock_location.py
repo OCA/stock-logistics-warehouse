@@ -11,10 +11,40 @@ class StockLocation(models.Model):
     _inherit = 'stock.location'
 
     def _hardware_kardex_prepare_payload(self, cell_location=None):
-        return ""
+        message_template = ("{code}|{hostId}|{addr}|{carrier}|{carrierNext}|"
+                            "{x}|{y}|{boxType}|{Q}|{order}|{part}|{desc}|\r\n")
+        shuttle = self.vertical_lift_shuttle_id
+        if shuttle.mode == "pick":
+            code = "1"
+        elif shuttle.mode == "put":
+            code = "2"
+        elif shuttle.mode == "inventory":
+            code = "5"
+        else:
+            code = "61"  # ping
+        if cell_location:
+            x, y = cell_location.tray_cell_center_position()
+        else:
+            x, y = '', ''
+        subst = {
+            'code': code,
+            'hostId': 'odoo',
+            'addr': shuttle.name,
+            'carrier': self.name,
+            'carrierNext': '',
+            'x': x,
+            'y': y,
+            'boxType': '',
+            'Q': '',
+            'order': '',
+            'part': '',
+            'desc': '',
+        }
+        payload = message_template.format(subst)
+        return payload.encode('iso-8859-1', 'replace')
 
-    def _hardware_vertical_lift_tray(self, cell_location=None):
-        """Send instructions to the vertical lift hardware
+    def _hardware_vertical_lift_tray_payload(self, cell_location=None):
+        """Prepare the message to be sent to the vertical lift hardware
 
         Private method, this is where the implementation actually happens.
         Addons can add their instructions based on the hardware used for
@@ -53,4 +83,4 @@ class StockLocation(models.Model):
             payload = self._hardware_kardex_prepare_payload()
             _logger.debug("Sending to kardex: {}", payload)
             # TODO implement the communication with kardex
-        super()._hardware_vertical_lift_tray(cell_location=cell_location)
+        super()._hardware_vertical_lift_tray_payload(cell_location=cell_location)
