@@ -13,7 +13,7 @@ class StockPicking(models.Model):
         if not self.move_line_ids.filtered(
                 lambda o: o.qty_done > 0 and not o.result_package_id):
             # let's raise the standard error
-            return self.put_in_pack()
+            return super(StockPicking, self).put_in_pack()
 
         res = self.check_destinations()
         if res.get('type'):
