@@ -58,12 +58,19 @@
     <field name="model">vertical.lift.shuttle</field>
     <field name="arch" type="xml">
       <form string="Operations">
-        <group>
-          <field name="name"/>
-          <field name="mode"/>
-          <field name="location_id"/>
-          <field name="hardware"/>
-        </group>
+          <group name="main">
+              <group name="left">
+                  <field name="name"/>
+                  <field name="mode"/>
+                  <field name="location_id"/>
+                  <field name="hardware"/>
+              </group>
+              <group string="Network" name="network">
+                  <field name="server"/>
+                  <field name="port"/>
+                  <field name="use_tls"/>
+              </group>
+          </group>
       </form>
     </field>
   </record>

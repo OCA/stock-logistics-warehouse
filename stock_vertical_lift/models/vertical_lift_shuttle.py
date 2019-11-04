@@ -1,7 +1,12 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import logging
+import socket
+import ssl
 
 from odoo import _, api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class VerticalLiftShuttle(models.Model):
@@ -25,6 +30,13 @@ class VerticalLiftShuttle(models.Model):
     )
     hardware = fields.Selection(
         selection="_selection_hardware", default="simulation", required=True
+    )
+    server = fields.Char(help="hostname or IP address of the server")
+    port = fields.Integer(
+        help="network port of the server on which to send the message"
+    )
+    use_tls = fields.Boolean(
+        help="set this if the server expects TLS wrapped communication"
     )
 
     _sql_constraints = [
@@ -63,6 +75,85 @@ class VerticalLiftShuttle(models.Model):
                 "vertical_lift_operation_inventory_screen_view"
             ),
         }
+
+    def _hardware_send_message(self, payload):
+        """default implementation for message sending
+
+        If in hardware is 'simulation' then display a simple message.
+        Otherwise defaults to connecting to server:port using a TCP socket
+        (optionnally wrapped with TLS) and sending the payload, then waiting
+        for a response and disconnecting.
+
+        :param payload: a bytes object containing the payload
+
+        """
+        self.ensure_one()
+        _logger.info('send %r', payload)
+        if self.hardware == "simulation":
+            self.env.user.notify_info(message=payload,
+                                      title=_("Lift Simulation"))
+            return True
+        else:
+            conn = self._hardware_get_server_connection()
+            try:
+                offset = 0
+                while True:
+                    size = conn.send(payload[offset:])
+                    offset += size
+                    if offset >= len(payload) or not size:
+                        break
+                response = self._hardware_recv_response(conn)
+                _logger.info('recv %r', response)
+                return self._check_server_response(payload, response)
+            finally:
+                self._hardware_release_server_connection(conn)
+
+    def _hardware_recv_response(self, conn):
+        """Default implementation expects the remote server to close()
+        the socket after sending the reponse.
+        Override to match the protocol implemented by the hardware.
+
+        :param conn: a socket connected to the server
+        :return: the response sent by the server, as a bytes object
+        """
+        response = b''
+        chunk = True
+        while chunk:
+            chunk = conn.recv(1024)
+            response += chunk
+        return response
+
+    def _check_server_response(self, payload, response):
+        """Use this to check if the response is a success or a failure
+
+        :param payload: the payload sent
+        :param response: the response received
+        :return: True if the response is a succes, False otherwise
+        """
+        return True
+
+    def _hardware_release_server_connection(self, conn):
+        conn.close()
+
+    def _hardware_get_server_connection(self):
+        """This implementation will yield a new connection to the server
+        and close() it when exiting the context.
+        Override to match the communication protocol of your hardware"""
+        conn = socket.create_connection((self.server, self.port))
+        if self.use_tls:
+            ctx = ssl.create_default_context()
+            self._hardware_update_tls_context(ctx)
+            conntls = ctx.wrap_socket(conn, server_hostname=self.server)
+            return conntls
+        else:
+            return conn
+
+    def _hardware_update_tls_context(self, context):
+        """Update the TLS context, e.g. to add a client certificate.
+
+        This method does nothing, override to match your communication
+        protocol."""
+        pass
 
     def _operation_for_mode(self):
         model = self._model_for_mode[self.mode]
