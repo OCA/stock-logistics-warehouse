@@ -9,10 +9,10 @@ class StockRequest(models.Model):
 
     def __get_request_states(self):
         states = super().__get_request_states()
-        if not ('submitted', _('Submitted')) in states:
+        if not ('submitted', 'Submitted') in states:
             states.insert(
-                states.index(('draft', _('Draft'))) + 1,
-                ('submitted', _('Submitted')))
+                states.index(('draft', 'Draft')) + 1,
+                ('submitted', 'Submitted'))
         return states
 
     route_id = fields.Many2one(states={'draft': [('readonly', False)],
