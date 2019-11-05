@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <button name="action_confirm" position="after">
                 <field name="need_rule_pull" invisible="1"/>
-                <button name="release_virtual_reservation"
+                <button name="release_available_to_promise"
                         attrs="{'invisible': [('need_rule_pull', '=', False)]}"
                         string="Release"
                         type="object"
