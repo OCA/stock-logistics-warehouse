@@ -41,7 +41,7 @@
                      (0, 0, {'view_mode': 'kanban', 'view_id': ref('stock.stock_move_view_kanban')}),
                      (0, 0, {'view_mode': 'form', 'view_id': ref('view_move_release_form')}),
                      ]"/>
-        <field name="context"></field>
+        <field name="context">{'search_default_groupby_picking_id': 1}</field>
         <field name="domain">[('need_rule_pull', '=' , True)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
