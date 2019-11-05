@@ -61,7 +61,6 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
             "group_id": group,
             "date_planned": date or fields.Datetime.now(),
             "warehouse_id": wh,
-            "partner_id": self.partner_delta,
         }
 
         for row in products:
