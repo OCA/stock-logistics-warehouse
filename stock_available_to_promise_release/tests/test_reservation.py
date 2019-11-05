@@ -29,7 +29,7 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
         )
         cls.partner_delta = cls.env.ref("base.res_partner_4")
         cls.loc_bin1 = cls.env["stock.location"].create(
-            {"name": "Bin1", "location_id": cls.loc_stock.id, "kind": "bin"}
+            {"name": "Bin1", "location_id": cls.loc_stock.id}
         )
 
     def _create_picking_chain(
