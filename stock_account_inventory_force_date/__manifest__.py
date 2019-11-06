@@ -5,7 +5,7 @@
     "name": "Stock Account Inventory Force Date",
     "summary": "Force the inventory adjustments to a date in the past.",
     "version": "12.0.1.0.0",
-    "category": "Warehouse Management",
+    "category": "Warehouse",
     "license": "AGPL-3",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",

@@ -10,7 +10,7 @@
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Open Source Integrators, "
               "Odoo Community Association (OCA)",
-    "category": "Warehouse Management",
+    "category": "Warehouse",
     'depends': ['stock_request'],
     'data': [
         'views/stock_request_order_views.xml',
