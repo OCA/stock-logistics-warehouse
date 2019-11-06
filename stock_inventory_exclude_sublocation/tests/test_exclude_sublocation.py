@@ -26,7 +26,6 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         self.user = self.res_users_model.create({
             'name': 'Test Account User',
             'login': 'user_1',
-            'password': 'demo',
             'email': 'example@yourcompany.com',
             'company_id': self.company.id,
             'company_ids': [(4, self.company.id)],
