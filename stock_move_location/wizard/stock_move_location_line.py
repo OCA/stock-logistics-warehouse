@@ -10,13 +10,8 @@ from odoo.tools import float_compare
 
 class StockMoveLocationWizardLine(models.TransientModel):
     _name = "wiz.stock.move.location.line"
+    _description = 'Wizard move location line'
 
-    move_location_wizard_id = fields.Many2one(
-        string="Move location Wizard",
-        comodel_name="wiz.stock.move.location",
-        ondelete="cascade",
-        required=True,
-    )
     product_id = fields.Many2one(
         string="Product",
         comodel_name="product.product",
@@ -32,7 +27,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
     )
     product_uom_id = fields.Many2one(
         string='Product Unit of Measure',
-        comodel_name='product.uom',
+        comodel_name='uom.uom',
     )
     lot_id = fields.Many2one(
         string='Lot/Serial Number',
@@ -71,12 +66,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
                     "Move quantity can not exceed max quantity or be negative"
                 ))
 
-    @api.onchange('product_id', 'lot_id')
-    def onchange_product_id(self):
+    def get_max_quantity(self):
         self.product_uom_id = self.product_id.uom_id
-        wiz = self.move_location_wizard_id
         search_args = [
-            ('location_id', '=', wiz.origin_location_id.id),
+            ('location_id', '=', self.origin_location_id.id),
             ('product_id', '=', self.product_id.id),
         ]
         if self.lot_id:
@@ -85,9 +78,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
             search_args.append(('lot_id', '=', False))
         res = self.env['stock.quant'].read_group(search_args, ['quantity'], [])
         max_quantity = res[0]['quantity']
-        self.max_quantity = max_quantity
-        self.origin_location_id = wiz.origin_location_id
-        self.destination_location_id = wiz.destination_location_id
+        return max_quantity
 
     def create_move_lines(self, picking, move):
         for line in self:
