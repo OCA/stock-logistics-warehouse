@@ -10,5 +10,5 @@ class SaleOrderLine(models.Model):
     @api.multi
     def _prepare_procurement_values(self, group_id=False):
         values = super()._prepare_procurement_values(group_id)
-        values['date_priority'] = self.create_date
+        values['date_priority'] = self.order_id.confirmation_date
         return values
