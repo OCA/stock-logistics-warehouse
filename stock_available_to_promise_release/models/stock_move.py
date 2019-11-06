@@ -51,7 +51,7 @@ class StockMove(models.Model):
             0.,
         )
 
-    def _available_to_promise_quantity_domain(self):
+    def _previous_promised_quantity_domain(self):
         domain = [
             ("need_release", "=", True),
             ("product_id", "=", self.product_id.id),
@@ -64,7 +64,7 @@ class StockMove(models.Model):
         previous_moves = self.search(
             expression.AND(
                 [
-                    self._available_to_promise_quantity_domain(),
+                    self._previous_promised_quantity_domain(),
                     [("id", "!=", self.id)],
                 ]
             )
