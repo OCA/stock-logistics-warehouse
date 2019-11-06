@@ -23,12 +23,8 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         self.grp_production_lot = self.env.ref('stock.group_production_lot')
         self.grp_tracking_lot = self.env.ref('stock.group_tracking_lot')
 
-        self.user = self.res_users_model.create({
-            'name': 'Test Account User',
-            'login': 'user_1',
-            'password': 'demo',
-            'email': 'example@yourcompany.com',
-            'company_id': self.company.id,
+        self.user = self.env.ref('base.user_demo')
+        self.user.write({
             'company_ids': [(4, self.company.id)],
             'groups_id': [(6, 0, [
                 self.grp_stock_manager.id,
