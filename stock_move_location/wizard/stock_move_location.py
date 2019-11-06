@@ -9,6 +9,7 @@ from odoo.fields import first
 
 class StockMoveLocationWizard(models.TransientModel):
     _name = "wiz.stock.move.location"
+    _description = 'Wizard move location'
 
     origin_location_id = fields.Many2one(
         string='Origin Location',
@@ -22,10 +23,9 @@ class StockMoveLocationWizard(models.TransientModel):
         required=True,
         domain=lambda self: self._get_locations_domain(),
     )
-    stock_move_location_line_ids = fields.One2many(
+    stock_move_location_line_ids = fields.Many2many(
         string="Move Location lines",
         comodel_name="wiz.stock.move.location.line",
-        inverse_name="move_location_wizard_id",
     )
     picking_id = fields.Many2one(
         string="Connected Picking",
@@ -175,23 +175,24 @@ class StockMoveLocationWizard(models.TransientModel):
                 # cursor returns None instead of False
                 'lot_id': group.get("lot_id") or False,
                 'product_uom_id': product.uom_id.id,
-                'move_location_wizard_id': self.id,
                 'custom': False,
             })
         return product_data
 
-    def add_lines(self):
-        self.ensure_one()
-        line_model = self.env["wiz.stock.move.location.line"]
-        if not self.stock_move_location_line_ids:
+    @api.onchange('origin_location_id')
+    def onchange_origin_location(self):
+        lines = []
+        if self.origin_location_id:
+            line_model = self.env["wiz.stock.move.location.line"]
             for line_val in self._get_stock_move_location_lines_values():
                 if line_val.get('max_quantity') <= 0:
                     continue
                 line = line_model.create(line_val)
-                line.onchange_product_id()
-        return {
-            "type": "ir.actions.do_nothing",
-        }
+                line.max_quantity = line.get_max_quantity()
+                lines.append(line)
+                # self.stock_move_location_line_ids = [(4, line.id)]
+            self.update({'stock_move_location_line_ids': [
+                (6, 0, [line.id for line in lines])]})
 
     def clear_lines(self):
         self._clear_lines()
