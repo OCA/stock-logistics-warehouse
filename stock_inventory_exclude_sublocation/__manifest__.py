@@ -6,7 +6,7 @@
     "name": "Stock Inventory Exclude Sublocation",
     "summary": "Allow to perform inventories of a location without including "
                "its child locations.",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "development_status": "Mature",
     "author": "Eficent, "
               "Tecnativa, "
