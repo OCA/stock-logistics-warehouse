@@ -27,10 +27,14 @@ class StockRule(models.Model):
             and not self.picking_type_id.code == "outgoing"
         ):
             moves = values.get("move_dest_ids")
-            # track the moves that needs to have their pull rule
-            # done
+            # Track the moves that needs to have their pull rule
+            # done. Before the 'pull' is done, we don't know the
+            # which route is chosen. We update the destination
+            # move (ie. the outgoing) when the current route
+            # defers the pull rules and return so we don't create
+            # the next move of the chain (pick or pack).
             if moves:
-                moves.write({"need_rule_pull": True})
+                moves.write({"need_release": True})
             return True
 
         super()._run_pull(
@@ -44,8 +48,8 @@ class StockRule(models.Model):
         )
         moves = values.get("move_dest_ids")
         if moves:
-            moves.filtered(lambda r: r.need_rule_pull).write(
-                {"need_rule_pull": False}
+            moves.filtered(lambda r: r.need_release).write(
+                {"need_release": False}
             )
         return True
 

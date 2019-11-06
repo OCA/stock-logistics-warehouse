@@ -24,7 +24,7 @@ class StockMove(models.Model):
         help="Available to Promise quantity minus quantities promised "
         " to older promised operations.",
     )
-    need_rule_pull = fields.Boolean()
+    need_release = fields.Boolean()
 
     @api.depends()
     def _compute_ordered_available_to_promise(self):
@@ -53,7 +53,7 @@ class StockMove(models.Model):
 
     def _available_to_promise_quantity_domain(self):
         domain = [
-            ("need_rule_pull", "=", True),
+            ("need_release", "=", True),
             ("product_id", "=", self.product_id.id),
             ("date_priority", "<=", self.date_priority),
             ("warehouse_id", "=", self.warehouse_id.id),
@@ -89,7 +89,7 @@ class StockMove(models.Model):
         # a partially available move in _run_stock_rule().
         if self.env.context.get("release_available_to_promise"):
             vals.update(
-                {"procure_method": self.procure_method, "need_rule_pull": True}
+                {"procure_method": self.procure_method, "need_release": True}
             )
         return vals
 
@@ -106,7 +106,7 @@ class StockMove(models.Model):
             "Product Unit of Measure"
         )
         for move in self:
-            if not move.need_rule_pull:
+            if not move.need_release:
                 continue
             if move.state not in ("confirmed", "waiting"):
                 continue
