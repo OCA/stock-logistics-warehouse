@@ -26,18 +26,18 @@ class TestsCommon(common.SavepointCase):
             "usage": "internal",
             "active": True,
         })
-        cls.uom_unit = cls.env.ref('product.product_uom_unit')
+        cls.uom_unit = cls.env.ref('uom.product_uom_unit')
         cls.product_no_lots = product_obj.create({
             "name": "Pineapple",
             "type": "product",
             "tracking": "none",
-            'categ_id': cls.env.ref('product.product_category_all').id,
+            'category_id': cls.env.ref('product.product_category_all').id,
         })
         cls.product_lots = product_obj.create({
             "name": "Pineapple",
             "type": "product",
             "tracking": "lot",
-            'categ_id': cls.env.ref('product.product_category_all').id,
+            'category_id': cls.env.ref('product.product_category_all').id,
         })
         cls.lot1 = cls.env['stock.production.lot'].create({
             'product_id': cls.product_lots.id,

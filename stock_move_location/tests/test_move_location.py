@@ -21,7 +21,7 @@ class TestMoveLocation(TestsCommon):
     def test_move_location_wizard(self):
         """Test a simple move."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
-        wizard.add_lines()
+        wizard.onchange_origin_location()
         wizard.action_move_location()
         self.check_product_amount(
             self.product_no_lots, self.internal_loc_1, 0,
@@ -51,14 +51,14 @@ class TestMoveLocation(TestsCommon):
     def test_move_location_wizard_amount(self):
         """Can't move more than exists."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
-        wizard.add_lines()
+        wizard.onchange_origin_location()
         with self.assertRaises(ValidationError):
             wizard.stock_move_location_line_ids[0].move_quantity += 1
 
     def test_move_location_wizard_ignore_reserved(self):
         """Can't move more than exists."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
-        wizard.add_lines()
+        wizard.onchange_origin_location()
         # reserve some quants
         self.quant_obj._update_reserved_quantity(
             self.product_no_lots,
@@ -86,7 +86,7 @@ class TestMoveLocation(TestsCommon):
     def test_wizard_clear_lines(self):
         """Test lines getting cleared properly."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
-        wizard.add_lines()
+        wizard.onchange_origin_location()
         self.assertEqual(len(wizard.stock_move_location_line_ids), 4)
         wizard._onchange_destination_location_id()
         self.assertEqual(len(wizard.stock_move_location_line_ids), 4)
@@ -99,7 +99,7 @@ class TestMoveLocation(TestsCommon):
     def test_planned_transfer(self):
         """Test planned transfer."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
-        wizard.add_lines()
+        wizard.onchange_origin_location()
         wizard.with_context({'planned': True}).action_move_location()
         picking = wizard.picking_id
         self.assertEqual(picking.state, 'draft')
