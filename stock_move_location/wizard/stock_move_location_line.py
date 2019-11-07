@@ -93,11 +93,13 @@ class StockMoveLocationWizardLine(models.TransientModel):
     @api.multi
     def _get_move_line_values(self, picking, move):
         self.ensure_one()
+        location_dest_id = self.destination_location_id.get_putaway_strategy(
+            self.product_id).id or self.destination_location_id.id
         return {
             "product_id": self.product_id.id,
             "lot_id": self.lot_id.id,
             "location_id": self.origin_location_id.id,
-            "location_dest_id": self.destination_location_id.id,
+            "location_dest_id": location_dest_id,
             "qty_done": self._get_available_quantity(),
             "product_uom_id": self.product_uom_id.id,
             "picking_id": picking.id,
