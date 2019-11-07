@@ -106,7 +106,7 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(len(picking.move_line_ids), 4)
         self.assertEqual(
             sorted(picking.move_line_ids.mapped("qty_done")),
-            [1, 1, 1, 123],
+            [0.0, 0.0, 0.0, 0.0],
         )
 
     def test_quant_transfer(self):

@@ -83,7 +83,8 @@ class StockMoveLocationWizardLine(models.TransientModel):
     def create_move_lines(self, picking, move):
         for line in self:
             values = line._get_move_line_values(picking, move)
-            if values.get("qty_done") <= 0:
+            if not self.env.context.get("planned") and \
+                    values.get("qty_done") <= 0:
                 continue
             self.env["stock.move.line"].create(
                 values
@@ -116,7 +117,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
             return 0
         if self.env.context.get("planned"):
             # for planned transfer we don't care about the amounts at all
-            return self.move_quantity
+            return 0.0
         search_args = [
             ('location_id', '=', self.origin_location_id.id),
             ('product_id', '=', self.product_id.id),
