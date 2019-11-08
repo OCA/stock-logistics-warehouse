@@ -4,6 +4,7 @@
 
 from odoo import _, api, fields, models
 from odoo.addons import decimal_precision as dp
+from odoo.tools.safe_eval import safe_eval
 
 
 class StockInventoryEmptyLines(models.Model):
@@ -41,6 +42,7 @@ class StockInventory(models.Model):
         res_filters = super(StockInventory, self)._selection_filter()
         res_filters.append(('categories', _('Selected Categories')))
         res_filters.append(('products', _('Selected Products')))
+        res_filters.append(('domain', _('Filtered Products')))
         for res_filter in res_filters:
             if res_filter[0] == 'lot':
                 res_filters.append(('lots', _('Selected Lots')))
@@ -60,6 +62,7 @@ class StockInventory(models.Model):
     empty_line_ids = fields.One2many(
         comodel_name='stock.inventory.line.empty', inverse_name='inventory_id',
         string='Capture Lines')
+    product_domain = fields.Char('Domain', default=[('name', 'ilike', '')])
 
     @api.model
     def _get_inventory_lines_values(self):
@@ -85,6 +88,14 @@ class StockInventory(models.Model):
                 inventory.lot_id = lot
                 vals += super(StockInventory,
                               inventory)._get_inventory_lines_values()
+        elif self.filter == 'domain':
+            domain = safe_eval(self.product_domain)
+            products = self.env['product.product'].search(domain)
+            inventory.filter = 'product'
+            for product in products:
+                inventory.product_id = product
+                vals += super(
+                    StockInventory, inventory)._get_inventory_lines_values()
         elif self.filter == 'empty':
             tmp_lines = {}
             for line in self.empty_line_ids:
