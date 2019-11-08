@@ -19,9 +19,13 @@
                             attrs="{'invisible':[('filter','!=','categories')]}" />
                     </field>
                     <field name="product_id" position="after">
-                        <field name="product_ids"
-                            widget="many2many_tags"
-                            attrs="{'invisible':[('filter','!=','products')]}" />
+                        <field name="product_ids" attrs="{'invisible':[('filter','!=','products')]}">
+                            <tree>
+                                <field name="default_code"/>
+                                <field name="name"/>
+                                <field name="barcode"/>
+                            </tree>
+                        </field>
                     </field>
                     <field name="lot_id" position="after">
                         <field name="lot_ids"
