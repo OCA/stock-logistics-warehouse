@@ -27,6 +27,9 @@
                         <field name="lot_ids"
                                 attrs="{'invisible':[('filter','!=','lots')]}" />
                     </field>
+                    <notebook position="before">
+                        <field name="product_domain" widget="domain" attrs="{'invisible': [('filter', '!=', 'domain')]}" options="{'model': 'product.product'}"/>
+                    </notebook>
                     <notebook position="inside">
                         <page string="Capture Lines"
                             attrs="{'invisible':[('filter','!=','empty')]}">
