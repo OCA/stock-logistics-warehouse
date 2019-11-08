@@ -46,9 +46,20 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
+msgid "Domain"
+msgstr ""
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:50
 #, python-format
 msgid "Empty list"
+msgstr ""
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:45
+#, python-format
+msgid "Filtered Products"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
@@ -103,19 +114,19 @@ msgid "Quantity"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:42
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
 #, python-format
 msgid "Selected Categories"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:46
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
 #, python-format
 msgid "Selected Lots"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:44
 #, python-format
 msgid "Selected Products"
 msgstr ""
