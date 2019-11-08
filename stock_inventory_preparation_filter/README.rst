@@ -28,6 +28,7 @@ Extended Inventory Preparation Filters
 Includes more options for making an inventory out of:
 
 * Multiple products.
+* Products filtered by a domain.
 * Products of a category.
 * Multiple lots
 
