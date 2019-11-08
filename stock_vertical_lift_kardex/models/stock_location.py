@@ -83,4 +83,4 @@ class StockLocation(models.Model):
             payload = self._hardware_kardex_prepare_payload()
             _logger.debug("Sending to kardex: {}", payload)
             # TODO implement the communication with kardex
-        super()._hardware_vertical_lift_tray(cell_location=cell_location)
+        super()._hardware_vertical_lift_tray_payload(cell_location=cell_location)
