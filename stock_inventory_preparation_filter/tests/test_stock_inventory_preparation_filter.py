@@ -121,6 +121,20 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
         self.assertEqual(line2.theoretical_qty, 4.0)
         self.assertEqual(line2.location_id, self.location)
 
+    def test_inventory_domain_filter(self):
+        inventory = self.inventory_model.create({
+            'name': 'Domain inventory',
+            'filter': 'domain',
+            'location_id': self.location.id,
+            'product_domain': [('id', '=', self.product1.id)],
+        })
+        inventory.action_start()
+        self.assertEqual(len(inventory.line_ids), 1)
+        line1 = inventory.line_ids[0]
+        self.assertEqual(line1.product_id, self.product1)
+        self.assertEqual(line1.theoretical_qty, 2.0)
+        self.assertEqual(line1.location_id, self.location)
+
     def test_inventory_lots_filter(self):
         inventory = self.inventory_model.create(
             {
