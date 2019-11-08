@@ -97,6 +97,28 @@ class VerticalLiftOperationBase(models.AbstractModel):
         )
         return sum(quants.mapped("quantity"))
 
+    def _send_notification_refresh(self):
+        """Send a refresh notification
+
+        Generally, you want to call the method
+        _send_notification_refresh() on VerticalLiftShuttle so you
+        don't need to know the id of the current operation.
+
+        Other notifications can be implemented, they have to be
+        added in static/src/js/vertical_lift.js and the message
+        must contain an "action" and "params".
+        """
+        self.ensure_one()
+        channel = "notify_vertical_lift_screen"
+        bus_message = {
+            "action": "refresh",
+            "params": {
+                "model": self._name,
+                "id": self.id,
+            }
+        }
+        self.env["bus.bus"].sendone(channel, bus_message)
+
 
 class VerticalLiftOperationTransfer(models.AbstractModel):
     """Base model for shuttle pick and put operations"""

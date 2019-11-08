@@ -214,6 +214,20 @@ class VerticalLiftShuttle(models.Model):
         self.mode = "inventory"
         return self.action_open_screen()
 
+    def _send_notification_refresh(self):
+        """Send a refresh notification to the current opened screen
+
+        The form controller on the front-end side will instantaneously
+        refresh the form with the latest committed data.
+
+        It can be used for instance after a vertical lift hardware
+        event occurred to inform the user on their screen.
+
+        The method is private only to prevent xml/rpc calls to
+        interact with the screen.
+        """
+        self._operation_for_mode._send_notification_refresh()
+
 
 class VerticalLiftShuttleManualBarcode(models.TransientModel):
     _name = "vertical.lift.shuttle.manual.barcode"
