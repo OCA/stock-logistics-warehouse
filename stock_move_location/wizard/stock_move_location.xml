@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_wiz_stock_move_location_form_stock_move_location" model="ir.ui.view">
+    <field name="name">wiz.stock.move.location.form.stock_move_location</field>
+    <field name="model">wiz.stock.move.location</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group name="main">
+            <field name="origin_location_id" invisible="context.get('origin_location_disable', False)"/>
+            <field name="destination_location_id"/>
+          </group>
+          <group name="lines">
+            <field name="stock_move_location_line_ids" nolabel="1" >
+              <tree string="Inventory Details" editable="bottom" decoration-info="move_quantity != max_quantity" decoration-danger="(move_quantity &lt; 0) or (move_quantity > max_quantity)" create="0">
+                  <field name="product_id"  domain="[('type','=','product')]"/>
+                  <field name="product_uom_id" string="UoM" groups="uom.group_uom"/>
+                  <field name="origin_location_id" readonly="1" force_save="1"/>
+                  <field name="destination_location_id" readonly="1" force_save="1"/>
+                  <field name="lot_id" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"  groups="stock.group_production_lot" options="{'no_create': True}"/>
+                  <field name="move_quantity"/>
+                  <field name="custom" invisible="1" />
+                  <field name="max_quantity" attrs="{'readonly': [('custom', '!=', True)]}" force_save="1"/>
+              </tree>
+            </field>
+          </group>
+          <footer>
+            <button name="action_move_location" string="Immediate Transfer" type="object" class="btn-primary"/>
+            <button name="action_move_location" string="Planned Transfer" type="object" class="btn-primary" context="{'planned': True}"/>
+            <button special="cancel" string="Cancel" class="btn-default"/>
+          </footer>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="wiz_stock_move_location_action" model="ir.actions.act_window">
+    <field name="name">Move from location...</field>
+    <field name="res_model">wiz.stock.move.location</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <menuitem
+      id="menuitem_move_location"
+      string="Move from location..."
+      parent="stock.menu_stock_warehouse_mgmt"
+      action="wiz_stock_move_location_action"
+      sequence="99"/>
+
+</odoo>
