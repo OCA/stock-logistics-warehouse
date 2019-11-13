@@ -11,12 +11,16 @@ class StockMoveLocationWizard(models.TransientModel):
     _name = "wiz.stock.move.location"
     _description = 'Wizard move location'
 
+    origin_location_disable = fields.Boolean(
+        compute='_compute_readonly_locations')
     origin_location_id = fields.Many2one(
         string='Origin Location',
         comodel_name='stock.location',
         required=True,
         domain=lambda self: self._get_locations_domain(),
     )
+    destination_location_disable = fields.Boolean(
+        compute='_compute_readonly_locations')
     destination_location_id = fields.Many2one(
         string='Destination Location',
         comodel_name='stock.location',
@@ -27,10 +31,24 @@ class StockMoveLocationWizard(models.TransientModel):
         string="Move Location lines",
         comodel_name="wiz.stock.move.location.line",
     )
+    picking_type_id = fields.Many2one(
+        comodel_name='stock.picking.type'
+    )
     picking_id = fields.Many2one(
         string="Connected Picking",
         comodel_name="stock.picking",
     )
+    edit_locations = fields.Boolean(string='Edit Locations',
+                                    default=True)
+
+    @api.depends('edit_locations')
+    def _compute_readonly_locations(self):
+        for rec in self:
+            rec.origin_location_disable = self.env.context.get(
+                'origin_location_disable', False)
+            if not rec.edit_locations:
+                rec.origin_location_disable = True
+                rec.destination_location_disable = True
 
     @api.model
     def default_get(self, fields):
@@ -70,7 +88,8 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def _create_picking(self):
         return self.env['stock.picking'].create({
-            'picking_type_id': self.env.ref('stock.picking_type_internal').id,
+            'picking_type_id': self.picking_type_id.id or
+            self.env.ref('stock.picking_type_internal').id,
             'location_id': self.origin_location_id.id,
             'location_dest_id': self.destination_location_id.id,
         })
@@ -166,12 +185,16 @@ class StockMoveLocationWizard(models.TransientModel):
         product_data = []
         for group in self._get_group_quants():
             product = product_obj.browse(group.get("product_id")).exists()
+            # Apply the putaway strategy
+            location_dest_id = \
+                self.destination_location_id.get_putaway_strategy(
+                    product).id or self.destination_location_id.id
             product_data.append({
                 'product_id': product.id,
                 'move_quantity': group.get("sum"),
                 'max_quantity': group.get("sum"),
                 'origin_location_id': self.origin_location_id.id,
-                'destination_location_id': self.destination_location_id.id,
+                'destination_location_id': location_dest_id,
                 # cursor returns None instead of False
                 'lot_id': group.get("lot_id") or False,
                 'product_uom_id': product.uom_id.id,
