@@ -7,12 +7,21 @@
     <field name="arch" type="xml">
       <form>
         <sheet>
+          <div class="oe_button_box" name="button_box"/>
+           <div>
+              <label for="edit_locations">
+                Edit Locations
+              </label>
+              <field name="edit_locations" widget="boolean_toggle"/>
+          </div>
           <group name="main">
-            <field name="origin_location_id" invisible="context.get('origin_location_disable', False)"/>
-            <field name="destination_location_id"/>
+              <field name="origin_location_disable" invisible="True"/>
+              <field name="origin_location_id" attrs="{'readonly': [('origin_location_disable', '=', True)]}"/>
+              <field name="destination_location_disable" invisible="True"/>
+              <field name="destination_location_id" attrs="{'readonly': [('destination_location_disable', '=', True)]}"/>
           </group>
           <group name="lines">
-            <field name="stock_move_location_line_ids" nolabel="1" >
+            <field name="stock_move_location_line_ids" nolabel="1" widget="one2many_list" mode="tree,kanban">
               <tree string="Inventory Details" editable="bottom" decoration-info="move_quantity != max_quantity" decoration-danger="(move_quantity &lt; 0) or (move_quantity > max_quantity)" create="0">
                   <field name="product_id"  domain="[('type','=','product')]"/>
                   <field name="product_uom_id" string="UoM" groups="uom.group_uom"/>
@@ -23,6 +32,26 @@
                   <field name="custom" invisible="1" />
                   <field name="max_quantity" attrs="{'readonly': [('custom', '!=', True)]}" force_save="1"/>
               </tree>
+              <kanban class="o_kanban_mobile">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="o_kanban_record_body">
+                                    <field name="product_id"/>
+                                    <field name="product_uom_id"/>
+                                    <field name="lot_id" groups="stock.group_production_lot"/>
+                                    <field name="origin_location_id"/>
+                                    <field name="destination_location_id"/>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_right">
+                                        <span><field name="move_quantity"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+              </kanban>
             </field>
           </group>
           <footer>

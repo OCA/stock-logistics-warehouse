@@ -17,6 +17,7 @@
     "category": "Stock",
     "data": [
         'data/stock_quant_view.xml',
+        'views/stock_picking_type_views.xml',
         'wizard/stock_move_location.xml',
     ],
 }
