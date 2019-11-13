@@ -150,6 +150,9 @@ class StockMoveLocationWizard(models.TransientModel):
         self._create_moves(picking)
         if not self.env.context.get("planned"):
             picking.button_validate()
+        else:
+            picking.action_confirm()
+            picking.action_assign()
         self.picking_id = picking
         return self._get_picking_action(picking.id)
 
