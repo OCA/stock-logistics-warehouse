@@ -43,7 +43,7 @@ class StockMoveLine(models.Model):
                 'product_uom_qty', vals.get('qty_done', 0.0))
             qty = float_round(
                 move_line_qty / (factor or 1.0),
-                precision_rounding=move.secondary_uom_id.uom_id.factor
+                precision_rounding=move.secondary_uom_id.uom_id.rounding
             )
             vals.update({
                 'secondary_uom_qty': qty,
