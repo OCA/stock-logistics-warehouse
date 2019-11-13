@@ -102,11 +102,11 @@ class TestMoveLocation(TestsCommon):
         wizard.onchange_origin_location()
         wizard.with_context({'planned': True}).action_move_location()
         picking = wizard.picking_id
-        self.assertEqual(picking.state, 'draft')
+        self.assertEqual(picking.state, 'assigned')
         self.assertEqual(len(picking.move_line_ids), 4)
         self.assertEqual(
-            sorted(picking.move_line_ids.mapped("qty_done")),
-            [0.0, 0.0, 0.0, 0.0],
+            sorted(picking.move_line_ids.mapped("product_uom_qty")),
+            [1, 1, 1, 123],
         )
 
     def test_quant_transfer(self):
