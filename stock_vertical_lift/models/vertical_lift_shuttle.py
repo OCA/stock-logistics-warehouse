@@ -38,7 +38,10 @@ class VerticalLiftShuttle(models.Model):
     use_tls = fields.Boolean(
         help="set this if the server expects TLS wrapped communication"
     )
-
+    command_ids = fields.One2many(
+        'vertical.lift.command', 'shuttle_id',
+        string="Hardware commands"
+    )
     _sql_constraints = [
         (
             "location_id_unique",
@@ -81,14 +84,21 @@ class VerticalLiftShuttle(models.Model):
 
         If in hardware is 'simulation' then display a simple message.
         Otherwise defaults to connecting to server:port using a TCP socket
-        (optionnally wrapped with TLS) and sending the payload, then waiting
-        for a response and disconnecting.
+        (optionnally wrapped with TLS) and sending the payload.
 
         :param payload: a bytes object containing the payload
 
         """
         self.ensure_one()
         _logger.info('send %r', payload)
+        command_values = {
+            'shuttle_id': self.id,
+            'command': payload.decode(),
+        }
+
+        self.env['vertical.lift.command'].sudo().create(
+            command_values
+        )
         if self.hardware == "simulation":
             self.env.user.notify_info(message=payload,
                                       title=_("Lift Simulation"))
@@ -102,28 +112,18 @@ class VerticalLiftShuttle(models.Model):
                     offset += size
                     if offset >= len(payload) or not size:
                         break
-                response = self._hardware_recv_response(conn)
-                _logger.info('recv %r', response)
-                return self._check_server_response(payload, response)
             finally:
                 self._hardware_release_server_connection(conn)
 
-    def _hardware_recv_response(self, conn):
-        """Default implementation expects the remote server to close()
-        the socket after sending the reponse.
-        Override to match the protocol implemented by the hardware.
+    def _hardware_response_callback(self, command):
+        """should be called when a response is received from the hardware
 
-        :param conn: a socket connected to the server
-        :return: the response sent by the server, as a bytes object
+        :param response: a string
         """
-        response = b''
-        chunk = True
-        while chunk:
-            chunk = conn.recv(1024)
-            response += chunk
-        return response
+        success = self._check_server_response(command)
+        self._send_notification_refresh(success)
 
-    def _check_server_response(self, payload, response):
+    def _check_server_response(self, command):
         """Use this to check if the response is a success or a failure
 
         :param payload: the payload sent
@@ -214,7 +214,7 @@ class VerticalLiftShuttle(models.Model):
         self.mode = "inventory"
         return self.action_open_screen()
 
-    def _send_notification_refresh(self):
+    def _send_notification_refresh(self, success):
         """Send a refresh notification to the current opened screen
 
         The form controller on the front-end side will instantaneously
@@ -226,7 +226,8 @@ class VerticalLiftShuttle(models.Model):
         The method is private only to prevent xml/rpc calls to
         interact with the screen.
         """
-        self._operation_for_mode._send_notification_refresh()
+        # XXX do we want to do something special in the notification?
+        self._operation_for_mode()._send_notification_refresh()
 
 
 class VerticalLiftShuttleManualBarcode(models.TransientModel):
