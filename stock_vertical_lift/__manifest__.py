@@ -34,6 +34,7 @@
         'views/stock_vertical_lift_templates.xml',
         'views/shuttle_screen_templates.xml',
         'security/ir.model.access.csv',
+        'data/ir_sequence.xml',
     ],
     'installable': True,
     'development_status': 'Alpha',
