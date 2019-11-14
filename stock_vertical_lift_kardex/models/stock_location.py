@@ -28,10 +28,10 @@ class StockLocation(models.Model):
             x, y = '', ''
         subst = {
             'code': code,
-            'hostId': 'odoo',
+            'hostId': self.env['ir.sequence'].next_by_code('vertical.lift.command'),
             'addr': shuttle.name,
-            'carrier': self.name,
-            'carrierNext': '',
+            'carrier': self.level,
+            'carrierNext': '0',
             'x': x,
             'y': y,
             'boxType': '',
@@ -40,7 +40,7 @@ class StockLocation(models.Model):
             'part': '',
             'desc': '',
         }
-        payload = message_template.format(subst)
+        payload = message_template.format(**subst)
         return payload.encode('iso-8859-1', 'replace')
 
     def _hardware_vertical_lift_tray_payload(self, cell_location=None):
@@ -83,4 +83,6 @@ class StockLocation(models.Model):
             payload = self._hardware_kardex_prepare_payload()
             _logger.debug("Sending to kardex: {}", payload)
             # TODO implement the communication with kardex
-        super()._hardware_vertical_lift_tray_payload(cell_location=cell_location)
+        else:
+            payload = super()._hardware_vertical_lift_tray_payload(cell_location=cell_location)
+        return payload

@@ -11,7 +11,8 @@
         'stock_vertical_lift',
     ],
     'website': 'https://www.camptocamp.com',
-    'data': [],
+    'data': [
+    ],
     'installable': True,
     'development_status': 'Alpha',
 }
