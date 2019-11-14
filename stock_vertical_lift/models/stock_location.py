@@ -127,7 +127,7 @@ class StockLocation(models.Model):
                 )
             return message
         else:
-            return super()._hardware_vertical_lift_tray_payload(cell_location)
+            raise NotImplemented()
 
     def fetch_vertical_lift_tray(self, cell_location=None):
         """Send instructions to the vertical lift hardware
