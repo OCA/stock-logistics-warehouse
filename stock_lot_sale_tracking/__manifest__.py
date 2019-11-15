@@ -19,6 +19,8 @@
     'data': [
         "security/security.xml",
         "report/stock_lot_sale_report.xml",
+        "views/sale_order.xml",
+        "views/stock_lot_sale_detail.xml",
     ],
     'installable': True,
 }

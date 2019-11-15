@@ -8,4 +8,13 @@
         <field name="perm_write" eval="0"/>
         <field name="perm_unlink" eval="0"/>
     </record>
+
+    <record model="ir.model.access" id="stock_lot_tracking_detail_access_everybody">
+        <field name="name">Stock Lot Sale Tracking detail: access everybody</field>
+        <field name="model_id" ref="model_stock_lot_sale_tracking_detail"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
 </odoo>

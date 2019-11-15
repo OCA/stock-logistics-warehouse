@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_lot_sale_detail_tree" model="ir.ui.view">
+        <field name="name">stock.lot.sale.detail.tree (in stock_lot_sale_tracking)</field>
+        <field name="model">stock.lot.sale.tracking.detail</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_id"/>
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <field name="default_code"/>
+                <field name="lot_id"/>
+                <field name="picking_type_id"/>
+                <field name="date"/>
+                <field name="product_uom_qty"/>
+                <field name="inventory_value"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_stock_lot_sale_detail_search" model="ir.ui.view">
+        <field name="name">stock.lot.sale.detail.search (in stock_lot_sale_tracking)</field>
+        <field name="model">stock.lot.sale.tracking.detail</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="order_id"/>
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <field name="lot_id"/>
+                <field name="date"/>
+                <field name="picking_type_id"/>
+                <filter name="today" string="Today" domain="[('date', '>=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                <filter name="last_week" string="Last Week" domain="[('date','&gt;', (context_today() - datetime.timedelta(weeks=1)).strftime('%%Y-%%m-%%d') )]"/>
+                <filter name="last_week" string="Last Month" domain="[('date','&gt;', (context_today() - datetime.timedelta(weeks=4)).strftime('%%Y-%%m-%%d') )]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Operation Type" name="groupby_picking_type" domain="[]" context="{'group_by':'picking_type_id'}"/>
+                    <filter string="Lot" name="groupby_lot" domain="[]" context="{'group_by':'lot_id'}"/>
+                    <filter string="Partner" name="groupby_partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Sale Order" name="groupby_order" domain="[]" context="{'group_by':'order_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_stock_lot_sale_detail" model="ir.actions.act_window">
+        <field name="name">Lot Tracking Detail</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.lot.sale.tracking.detail</field>
+        <field name="view_mode">tree</field>
+       <field name="context">{'search_default_today': 1, 'search_default_groupby_lot': 1}</field>
+    </record>
+
+    <record id="action_stock_lot_sale_detail_from_sale" model="ir.actions.act_window">
+        <field name="name">Lot Tracking Detail</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.lot.sale.tracking.detail</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="stock_lot_tracking_detail_menu"
+              action="action_stock_lot_sale_detail"
+              parent="stock.menu_warehouse_report"
+              sequence="30"/>
+
+</odoo>

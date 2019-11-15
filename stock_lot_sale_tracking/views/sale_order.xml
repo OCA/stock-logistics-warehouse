@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form (in stock_lot_sale_tracking)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_lot_tracking_detail"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-barcode"
+                    attrs="{'invisible': [('sale_lot_tracking_count', '=', 0)]}">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value"><field name="sale_lot_tracking_count"/></span>
+                        <span class="o_stat_text">Lot Tracking Detail</span>
+                    </div>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
