@@ -61,7 +61,9 @@ class SaleOrderLine(models.Model):
         self.ensure_one()
         if self.route_id and self.route_id.rule_ids:
             return self.route_id.rule_ids.sorted(
-                key=lambda r: (r.route_sequence, r.sequence))[0]
+                from odoo.fields import first
+                return first(self.route_id.rule_ids.sorted(
+                key=lambda r: (r.route_sequence, r.sequence)))
         """ Get applicable rule for this product
 
         Reproduce get suitable rule from procurement
