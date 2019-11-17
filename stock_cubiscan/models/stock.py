@@ -14,6 +14,14 @@ class StockWarehouse(models.Model):
 
 class ProductPackaging(models.Model):
     _inherit = "product.packaging"
+    _sql_constraints = [
+        (
+            'product_packaging_type_unique',
+            'unique (product_id, packaging_type_id)',
+            'It is forbidden to have different packagings '
+            'with the same type for a given product.',
+        )
+    ]
 
     # TODO move these in an addon. Warning:
     # * 'delivery' defines the same fields and add them in the 'Delivery
@@ -21,11 +29,16 @@ class ProductPackaging(models.Model):
     # * our put-away modules (wms/stock_putaway_storage_type_strategy) will
     #   need these fields as well
     max_weight = fields.Float()
-    length = fields.Integer()
-    width = fields.Integer()
-    height = fields.Integer()
+    length = fields.Integer('Length (mm)', help='length in millimeters')
+    width = fields.Integer('Width (mm)', help='width in millimeters')
+    height = fields.Integer('Height (mm)', help='height in millimeters')
     volume = fields.Float(
-        compute='_compute_volume', readonly=True, store=False
+        'Volume (m³)',
+        digits=(8, 4),
+        compute='_compute_volume',
+        readonly=True,
+        store=False,
+        help='volume in cubic meters',
     )
 
     @api.depends('length', 'width', 'height')

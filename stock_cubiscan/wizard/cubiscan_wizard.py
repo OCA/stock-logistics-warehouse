@@ -10,24 +10,36 @@ class CubiscanWizard(models.TransientModel):
     _description = 'Cubiscan Wizard'
     _rec_name = 'device_id'
 
-    PACKAGING_UNITS = ['Unit', 'kfVE', 'DhVE', 'KrVE', 'PAL']
-
     device_id = fields.Many2one('cubiscan.device', readonly=True)
-    product_id = fields.Many2one('product.template')
+    product_id = fields.Many2one(
+        'product.product', domain=[('type', '=', 'product')]
+    )
     line_ids = fields.One2many('cubiscan.wizard.line', 'wizard_id')
 
     @api.onchange('product_id')
     def onchange_product_id(self):
         if self.product_id:
             to_create = []
-            for seq, name in enumerate(self.PACKAGING_UNITS):
-                pack = self.product_id.packaging_ids.filtered(
-                    lambda rec: rec.name == name
+            packaging_types = self.env['product.packaging.type'].search([])
+            for seq, pack_type in enumerate(packaging_types):
+                pack = self.env['product.packaging'].search(
+                    [
+                        ('product_id', '=', self.product_id.id),
+                        ('packaging_type_id', '=', pack_type.id),
+                    ],
+                    limit=1,
                 )
                 vals = {
                     'wizard_id': self.id,
                     'sequence': seq + 1,
-                    'name': name,
+                    'name': pack_type.name,
+                    'qty': 0,
+                    'max_weight': 0,
+                    'length': 0,
+                    'width': 0,
+                    'height': 0,
+                    'barcode': False,
+                    'packaging_type_id': pack_type.id,
                 }
                 if pack:
                     vals.update(
@@ -38,11 +50,13 @@ class CubiscanWizard(models.TransientModel):
                             'width': pack.width,
                             'height': pack.height,
                             'barcode': pack.barcode,
+                            'packaging_id': pack.id,
+                            'packaging_type_id': pack_type.id,
                         }
                     )
                 to_create.append(vals)
             recs = self.env['cubiscan.wizard.line'].create(to_create)
-            self.line_ids = [(6, 0, recs.ids)]
+            self.line_ids = recs
         else:
             self.line_ids = [(5, 0, 0)]
 
@@ -66,7 +80,7 @@ class CubiscanWizard(models.TransientModel):
     @api.multi
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
-        prod = self.env['product.template'].search([('barcode', '=', barcode)])
+        prod = self.env['product.product'].search([('barcode', '=', barcode)])
         self.product_id = prod
         self.onchange_product_id()
 
@@ -76,7 +90,6 @@ class CubiscanWizard(models.TransientModel):
         actions = []
         for line in self.line_ids:
             vals = {
-                'sequence': line.sequence,
                 'name': line.name,
                 'qty': line.qty,
                 'max_weight': line.max_weight,
@@ -84,10 +97,9 @@ class CubiscanWizard(models.TransientModel):
                 'width': line.width,
                 'height': line.height,
                 'barcode': line.barcode,
+                'packaging_type_id': line.packaging_type_id.id,
             }
-            pack = self.product_id.packaging_ids.filtered(
-                lambda rec: rec.name == line.name
-            )
+            pack = line.packaging_id
             if pack:
                 actions.append((1, pack.id, vals))
             else:
@@ -132,9 +144,20 @@ class CubiscanWizardLine(models.TransientModel):
     width = fields.Integer("Width (mm)", readonly=True)
     height = fields.Integer("Height (mm)", readonly=True)
     volume = fields.Float(
-        "Volume (m3)", compute='_compute_volume', readonly=True, store=False
+        "Volume (m³)",
+        digits=(8, 4),
+        compute='_compute_volume',
+        readonly=True,
+        store=False,
     )
     barcode = fields.Char("GTIN")
+    packaging_id = fields.Many2one('product.packaging', readonly=True)
+    packaging_type_id = fields.Many2one(
+        'product.packaging.type', readonly=True, required=True
+    )
+    required = fields.Boolean(
+        related='packaging_type_id.required', readonly=True
+    )
 
     @api.depends('length', 'width', 'height')
     def _compute_volume(self):
