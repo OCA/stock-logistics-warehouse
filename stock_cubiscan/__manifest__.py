@@ -10,7 +10,8 @@
     'depends': [
         'barcodes',
         'stock',
-        'web_tree_dynamic_colored_field'
+        'web_tree_dynamic_colored_field',
+        'product_packaging_type_required',
     ],
     'website': 'http://www.camptocamp.com',
     'data': [

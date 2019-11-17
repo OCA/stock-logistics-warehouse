@@ -29,6 +29,24 @@ class TestCubiscanWizard(SavepointCase):
 
         cls.device_obj = cls.env['cubiscan.device']
         cls.cs_wizard = cls.env['cubiscan.wizard']
+        PackType = cls.env['product.packaging.type']
+        pack_type_data = [
+            ('unit', 1, 0, 0),
+            ('internal', 2, 1, 0),
+            ('retail', 10, 1, 1),
+            ('transport', 20, 1, 1),
+            ('pallet', 30, 1, 1),
+        ]
+        for name, seq, gtin, req in pack_type_data:
+            PackType.create(
+                {
+                    'name': name,
+                    'code': name.upper(),
+                    'sequence': seq,
+                    'has_gtin': gtin,
+                    'required': req,
+                }
+            )
 
         cls.device = cls.device_obj.create(
             {
@@ -41,14 +59,11 @@ class TestCubiscanWizard(SavepointCase):
 
         cls.wizard = cls.cs_wizard.create({'device_id': cls.device.id})
 
-        cls.product_1 = cls.env.ref(
-            'product.product_product_6'
-        ).product_tmpl_id
-        cls.product_2 = cls.env.ref(
-            'product.product_product_7'
-        ).product_tmpl_id
+        cls.product_1 = cls.env.ref('product.product_product_6')
+        cls.product_2 = cls.env.ref('product.product_product_7')
 
         cls.product_1.barcode = '424242'
+        PackType.cron_check_create_required_packaging()
 
     def test_product_onchange(self):
         self.wizard.product_id = self.product_1.id
