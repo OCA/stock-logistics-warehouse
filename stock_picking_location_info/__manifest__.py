@@ -3,11 +3,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Stock picking location info',
+    'name': 'Location putaway destination id',
     'version': '12.0.1.0.0',
     'author': "Eficent, Odoo Community Association (OCA)",
     'website': "https://github.com/OCA/stock-logistics-warehouse",
-    'category': 'Stock',
+    'category': 'Warehouse',
     'depends': [
         'stock',
     ],
