@@ -36,9 +36,15 @@ class StockMove(models.Model):
     def _should_compute_ordered_available_to_promise(self):
         return (
             self.picking_code == "outgoing"
+            and self.need_release
             and not self.product_id.type == "consu"
             and not self.location_id.should_bypass_reservation()
         )
+
+    def _action_cancel(self):
+        super()._action_cancel()
+        self.write({'need_release': False})
+        return True
 
     def _ordered_available_to_promise(self):
         if not self._should_compute_ordered_available_to_promise():
