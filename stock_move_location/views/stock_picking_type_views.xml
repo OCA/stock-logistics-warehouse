@@ -21,7 +21,7 @@
             </field>
             <xpath expr="//div[hasclass('o_kanban_primary_left')]" position="inside">
                 <div t-if="record.show_move_onhand.raw_value">
-                    <button name="action_move_location" type="object" class="btn btn-info">
+                    <button name="action_move_location" type="object" class="btn btn-info" style="margin-top: 5px;">
                         Move On Hand
                     </button>
                 </div>
