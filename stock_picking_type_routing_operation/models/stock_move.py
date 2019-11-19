@@ -145,7 +145,15 @@ class StockMove(models.Model):
                 'picking_type_id': picking_type.id,
             })
             move._insert_src_routing_moves()
+
+            picking = move.picking_id
             move._assign_picking()
+            if not picking.move_lines:
+                # When the picking type changes, it will create a new picking
+                # for the move. If the previous picking has no other move,
+                # we have to drop it.
+                picking.unlink()
+
             move._action_assign()
 
     def _insert_src_routing_moves(self):
