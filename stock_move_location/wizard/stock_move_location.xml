@@ -14,6 +14,9 @@
               </label>
               <field name="edit_locations" widget="boolean_toggle"/>
           </div>
+          <group name="picking_type">
+              <field name="picking_type_id"/>
+          </group>
           <group name="main">
               <field name="origin_location_disable" invisible="True"/>
               <field name="origin_location_id" attrs="{'readonly': [('origin_location_disable', '=', True)]}"/>
