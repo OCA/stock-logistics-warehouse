@@ -10,8 +10,10 @@
                 <field name="name"/>
                 <field name="warehouse_id" groups="stock.group_stock_multi_locations"/>
                 <field name="location_id" groups="stock.group_stock_multi_locations"/>
-                <field name="product_min_qty"/>
-                <field name="product_max_qty"/>
+                <field name="product_min_qty" attrs="{'invisble': [('auto_min_qty', '!=', False)]}"/>
+                <field name="product_max_qty" attrs="{'invisble': [('auto_min_qty', '!=', False)]}"/>
+                <field name="auto_min_qty"/>
+                <field name="auto_max_qty"/>
                 <field name="auto_generate"/>
             </tree>
         </field>
@@ -59,8 +61,10 @@
                     </group>
                     <group>
                         <group string="Rules">
-                            <field name="product_min_qty" />
-                            <field name="product_max_qty" />
+                            <field name="auto_min_qty"/>
+                            <field name="product_min_qty" attrs="{'required': [('auto_min_qty','=', False)], 'invisible': [('auto_min_qty','!=', False)]}"/>
+                            <field name="auto_max_qty"/>
+                            <field name="product_max_qty" attrs="{'required': [('auto_max_qty','=', False)], 'invisible': [('auto_max_qty','!=', False)]}"/>
                             <field name="qty_multiple" string="Quantity Multiple"/>
                         </group>
                         <group string="Misc">
@@ -71,6 +75,16 @@
                                 <field name="lead_days"/>
                                 <field name="lead_type"/>
                             </div>
+                        </group>
+                        <group name="auto_minimum" string="Auto Minimum Criteria" attrs="{'invisible': [('auto_min_qty','=', False)]}">
+                            <field name="auto_min_qty_criteria" attrs="{'required': [('auto_min_qty','!=', False)]}"/>
+                            <field name="auto_min_date_start" attrs="{'required': [('auto_min_qty','!=', False)]}"/>
+                            <field name="auto_min_date_end" attrs="{'required': [('auto_min_qty','!=', False)]}"/>
+                        </group>
+                        <group name="auto_maximum" string="Auto Maximum Criteria" attrs="{'invisible': [('auto_max_qty','=', False)]}">
+                            <field name="auto_max_qty_criteria" attrs="{'required': [('auto_max_qty','!=', False)]}"/>
+                            <field name="auto_max_date_start" attrs="{'required': [('auto_max_qty','!=', False)]}"/>
+                            <field name="auto_max_date_end" attrs="{'required': [('auto_max_qty','!=', False)]}"/>
                         </group>
                     </group>
                     <notebook attrs="{'invisible': [('auto_generate', '=', False)]}">
