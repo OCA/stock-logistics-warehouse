@@ -1,22 +1,20 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_orderpoint_generator
+# 	* stock_orderpoint_generator
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (9.0)\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-31 02:38+0000\n"
-"PO-Revision-Date: 2017-05-30 10:13+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-"
-"warehouse-9-0/language/es/)\n"
-"Language: es\n"
+"POT-Creation-Date: 2019-11-21 15:42+0000\n"
+"PO-Revision-Date: 2019-11-21 15:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_product_ids
@@ -24,6 +22,8 @@ msgid ""
 "A reordering rule will be automatically created by the scheduled action for "
 "every product in this list."
 msgstr ""
+"A reordering rule will be automatically created by the scheduled action for "
+"every product in this list."
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
@@ -31,9 +31,47 @@ msgid "Apply"
 msgstr "Aplicar"
 
 #. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_max_qty
+msgid "Auto Maximum"
+msgstr "Auto Máximo"
+
+#. module: stock_orderpoint_generator
+#: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
+msgid "Auto Maximum Criteria"
+msgstr "Criterio Auto Máximo"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_min_qty
+msgid "Auto Minimum"
+msgstr "Auto mínimo"
+
+#. module: stock_orderpoint_generator
+#: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
+msgid "Auto Minimum Criteria"
+msgstr "Criterio Auto Mínimo"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_max_qty
+msgid "Auto compute maximum quantity per product for a given a date range"
+msgstr ""
+"Auto calcular cantidad máxima por producto para un rango de fechas dado"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_min_qty
+msgid "Auto compute minimum quantity per product for a given a date range"
+msgstr ""
+"Auto calcular cantidad mímina por producto para un rango de fechas dado"
+
+#. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_product_product_auto_orderpoint_template_ids
 msgid "Automatic Reordering Rules"
-msgstr ""
+msgstr "Reglas de Reabastecimiento Automáticas"
+
+#. module: stock_orderpoint_generator
+#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
+#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+msgid "Average"
+msgstr "Media"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
@@ -41,20 +79,22 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: stock_orderpoint_generator
-#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:39
+#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:37
 #, python-format
 msgid "Cannot apply because some of selected products has multiple variants."
 msgstr ""
+"No es posible aplicar la plantilla ya que alguno de los productos "
+"seleccionados contiene múltiples variantes."
 
 #. module: stock_orderpoint_generator
 #: model:ir.actions.act_window,help:stock_orderpoint_generator.action_orderpoint_template
 msgid "Click to add a reordering rule template."
-msgstr ""
+msgstr "Click para añadir una plantilla de regla de reabastecimiento."
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_generate
 msgid "Create Rules Automatically"
-msgstr ""
+msgstr "Crear Reglas Automáticamente"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_create_uid
@@ -69,9 +109,17 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_max_qty_criteria
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_min_qty_criteria
+msgid "Criteria"
+msgstr "Criterio"
+
+#. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_uom
 msgid "Default Unit of Measure used for all stock operation."
 msgstr ""
+"Unidad de medida predeterminada utilizada para todas las operaciones de "
+"stock."
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_display_name
@@ -80,9 +128,15 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_max_date_start
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_min_date_start
+msgid "From"
+msgstr "De"
+
+#. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
 msgid "Generate Automatic Rules"
-msgstr ""
+msgstr "Generar Reglas Automáticas"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_search
@@ -93,24 +147,24 @@ msgstr "Agrupar por"
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_id
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_id
 msgid "ID"
-msgstr "ID"
+msgstr "ID (identificación)"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_last_generation
 msgid "Last Automatic Generation"
-msgstr ""
+msgstr "Última Generación Automática"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator___last_update
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template___last_update
 msgid "Last Modified on"
-msgstr "Última modificación el"
+msgstr "Última modificación en"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_write_uid
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_write_uid
 msgid "Last Updated by"
-msgstr "Última actualización por"
+msgstr "Última actualización de"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator_write_date
@@ -121,12 +175,40 @@ msgstr "Última actualización en"
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_search
 msgid "Location"
-msgstr "Localización"
+msgstr "Ubicación"
+
+#. module: stock_orderpoint_generator
+#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
+#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+msgid "Maximum"
+msgstr "Máximo"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_max_qty
+msgid "Maximum Quantity"
+msgstr "Cantidad máxima"
+
+#. module: stock_orderpoint_generator
+#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
+#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+msgid "Minimum"
+msgstr "Mínimo"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_min_qty
+msgid "Minimum Quantity"
+msgstr "Cantidad mínima"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
 msgid "Misc"
-msgstr "Misc."
+msgstr "Varios"
+
+#. module: stock_orderpoint_generator
+#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
+#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+msgid "Most frequent"
+msgstr "Más frecuente"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_group_id
@@ -135,6 +217,10 @@ msgid ""
 "If none is given, the moves generated by procurement rules will be grouped "
 "into one big picking."
 msgstr ""
+"Los movimientos creados por esta orden de abastecimiento serán colocados en "
+"este grupo de abastecimiento. Si no se proporciona ningún grupo, los "
+"movimientos generados por las reglas de abastecimiento serán agrupados en un "
+"gran albarán."
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_name
@@ -144,12 +230,12 @@ msgstr "Nombre"
 #. module: stock_orderpoint_generator
 #: model:ir.model,name:stock_orderpoint_generator.model_stock_warehouse_orderpoint_generator
 msgid "Orderpoint Generator"
-msgstr ""
+msgstr "Generador de Reglas de Reabastecimiento"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_group_id
 msgid "Procurement Group"
-msgstr ""
+msgstr "Grupo de abastecimiento"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model,name:stock_orderpoint_generator.model_product_product
@@ -171,12 +257,12 @@ msgstr "Productos"
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
 msgid "Quantity Multiple"
-msgstr ""
+msgstr "Múltiplo de la cantidad"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
 msgid "Reordering Rule Template"
-msgstr ""
+msgstr "Plantilla de Regla de Reabastecimiento"
 
 #. module: stock_orderpoint_generator
 #: model:ir.actions.act_window,name:stock_orderpoint_generator.action_orderpoint_template
@@ -186,26 +272,26 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_search
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_tree
 msgid "Reordering Rule Templates"
-msgstr ""
+msgstr "Plantillas de Regla de Reabastecimiento"
 
 #. module: stock_orderpoint_generator
 #: model:ir.actions.server,name:stock_orderpoint_generator.ir_cron_auto_orderpoint_template_ir_actions_server
 #: model:ir.cron,cron_name:stock_orderpoint_generator.ir_cron_auto_orderpoint_template
 #: model:ir.cron,name:stock_orderpoint_generator.ir_cron_auto_orderpoint_template
 msgid "Reordering Rule Templates Generator"
-msgstr ""
+msgstr "Generador de Plantillas de Regla de Reabastecimiento"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_search
 msgid "Reordering Rule Templates Search"
-msgstr ""
+msgstr "Búsqueda de Plantillas de Regla de Reabastecimiento"
 
 #. module: stock_orderpoint_generator
 #: model:ir.actions.act_window,name:stock_orderpoint_generator.act_create_product_conf
 #: model:ir.actions.act_window,name:stock_orderpoint_generator.act_create_product_template_conf
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
 msgid "Reordering Rules Generator"
-msgstr ""
+msgstr "Generador de Reglas de Reabastecimiento"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
@@ -213,11 +299,23 @@ msgid ""
 "Reordering rules will be created for the selected products. This is "
 "equivalent to the Scheduled Action action."
 msgstr ""
+"Se crearán reglas de reabastecimiento para los productos seleccionados. Es "
+"el equivalente a la acción programada"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
 msgid "Rules"
 msgstr "Reglas"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_max_qty_criteria
+msgid "Select a criteria to auto compute the maximum"
+msgstr "Escoja un criterio para auto calcular el máximo"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_min_qty_criteria
+msgid "Select a criteria to auto compute the minimum"
+msgstr "Escoja un criterio para auto calcular el mínimo"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
@@ -228,6 +326,14 @@ msgstr "Plantillas"
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
 msgid "This wizard will apply the following orderpoint to selected product(s)"
 msgstr ""
+"Este asistente aplicará las siguientes plantillas de regla de "
+"reabastecimiento a los productos seleccionados"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_max_date_end
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_auto_min_date_end
+msgid "To"
+msgstr "Para"
 
 #. module: stock_orderpoint_generator
 #: model:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_search
@@ -240,6 +346,9 @@ msgid ""
 "When checked, the 'Reordering Rule Templates Generator' scheduled action "
 "will automatically update the rules of a selection of products."
 msgstr ""
+"La acción programada para 'Regenerar Plantillas de Reglas de "
+"Reabastecimiento' actualizará automáticamente las regls para la selección de "
+"productos."
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_product_product_auto_orderpoint_template_ids
@@ -248,9 +357,28 @@ msgid ""
 "Action will automatically generate or update the reordering rules of the "
 "product."
 msgstr ""
+"Cuando una o más reglas de reabastecimiento son seleccionadas, una acción "
+"programada generará automáticamente o actualizará las reglas de "
+"reabastecimiento del producto."
 
-#~ msgid "Active"
-#~ msgstr "Activo"
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_min_qty
+msgid ""
+"When the virtual stock goes below the Min Quantity specified for this field, "
+"Odoo generates a procurement to bring the forecasted quantity to the Max "
+"Quantity."
+msgstr ""
+"Cuando el stock virtual esté por debajo de la cantidad mínima especificada "
+"en este campo, Odoo generará un abastecimiento para llevar la cantidad "
+"prevista a la cantidad máxima."
 
-#~ msgid "Company"
-#~ msgstr "Compañía"
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template_product_max_qty
+msgid ""
+"When the virtual stock goes below the Min Quantity, Odoo generates a "
+"procurement to bring the forecasted quantity to the Quantity specified as "
+"Max Quantity."
+msgstr ""
+"Cuando el stock virtual esté por debajo de la cantidad, Odoo generará un "
+"abastecimiento para llevar la cantidad prevista a la cantidad especificada "
+"como aquí como máxima."
