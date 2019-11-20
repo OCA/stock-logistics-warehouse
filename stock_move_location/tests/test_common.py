@@ -16,6 +16,12 @@ class TestsCommon(common.SavepointCase):
         cls.wizard_obj = cls.env["wiz.stock.move.location"]
         cls.quant_obj = cls.env["stock.quant"]
 
+        # Enable multi-locations:
+        wizard = cls.env['res.config.settings'].create({
+            'group_stock_multi_locations': True,
+        })
+        wizard.execute()
+
         cls.internal_loc_1 = cls.location_obj.create({
             "name": "INT_1",
             "usage": "internal",
