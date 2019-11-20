@@ -35,7 +35,7 @@ class MrpProduction(models.Model):
                 move_qty = move.product_qty
                 if qty_available == 0.0:
                     move.procure_method = 'make_to_order'
-                elif move_qty > qty_available and qty_available != 0.0:
+                elif move_qty > qty_available and qty_available != 0.0 and qty_available > 0.001:
                     rounding_method = self._context.get(
                         'rounding_method', 'UP')
                     qty_mto = move.product_uom._compute_quantity(
@@ -48,6 +48,8 @@ class MrpProduction(models.Model):
                         'product_uom_qty': qty_mto,
                         'procure_method': 'make_to_order'})
                     move.product_uom_qty = qty_mts
+                elif qty_available < 0.001:
+                    move.procure_method = 'make_to_order'
             elif pull and (pull.procure_method == 'make_to_order'):
                 move.procure_method = pull.procure_method
             elif not pull:  # If there is no make_to_stock rule either
