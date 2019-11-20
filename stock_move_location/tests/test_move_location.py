@@ -100,7 +100,9 @@ class TestMoveLocation(TestsCommon):
         """Test planned transfer."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.onchange_origin_location()
-        wizard.with_context({'planned': True}).action_move_location()
+        wizard.add_lines()
+        wizard = wizard.with_context({'planned': True})
+        wizard.action_move_location()
         picking = wizard.picking_id
         self.assertEqual(picking.state, 'assigned')
         self.assertEqual(len(picking.move_line_ids), 4)
@@ -129,3 +131,20 @@ class TestMoveLocation(TestsCommon):
         wizard.origin_location_id = self.internal_loc_2
         wizard._onchange_destination_location_id()
         self.assertEqual(len(lines), 3)
+
+    def test_readonly_location_computation(self):
+        """Test that origin_location_disable and destination_location_disable
+        are computed correctly."""
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        # locations are editable.
+        self.assertFalse(wizard.origin_location_disable)
+        self.assertFalse(wizard.destination_location_disable)
+        # Disable edit mode:
+        wizard.edit_locations = False
+        self.assertTrue(wizard.origin_location_disable)
+        self.assertTrue(wizard.destination_location_disable)
+
+    def test_picking_type_action_dummy(self):
+        """Test that no error is raised from actions."""
+        pick_type = self.env.ref("stock.picking_type_internal")
+        pick_type.action_move_location()
