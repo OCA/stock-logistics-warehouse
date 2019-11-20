@@ -5,6 +5,7 @@ from collections import Counter
 
 from odoo import api, fields, models
 from odoo.fields import first
+from odoo.tools import float_round
 
 
 class ProductProduct(models.Model):
@@ -82,7 +83,8 @@ class ProductProduct(models.Model):
         for product in product_with_bom:
             # Need by product (same product can be in many BOM lines/levels)
             exploded_components = exploded_boms[product.id]
-            component_needs = product._get_components_needs(exploded_components)
+            component_needs = product._get_components_needs(
+                exploded_components)
             if not component_needs:
                 # The BoM has no line we can use
                 potential_qty = immediately_usable_qty = 0.0
@@ -119,10 +121,7 @@ class ProductProduct(models.Model):
         return a dict by product_id of exploded bom lines
         :return:
         """
-        exploded_boms = {}
-        for rec in self:
-            exploded_boms[rec.id] = rec.bom_id.explode(rec, 1.0)[1]
-        return exploded_boms
+        return self.explode_bom_quantities()
 
     @api.model
     def _get_components_needs(self, exploded_components):
@@ -132,8 +131,79 @@ class ProductProduct(models.Model):
         :rtype: collections.Counter
         """
         needs = Counter()
-        for bom_component in exploded_components:
-            component = bom_component[0].product_id
-            needs += Counter({component: bom_component[1]["qty"]})
+        for bom_line, bom_qty in exploded_components:
+            component = bom_line.product_id
+            needs += Counter({component: bom_qty})
 
         return needs
+
+    def explode_bom_quantities(self):
+        """Explode a bill of material with quantities to consume
+
+        It returns a dict with the exploded bom lines and
+        the quantity they consume. Example::
+
+            {
+            <product-id>: [
+                    (<bom-line-id>, <quantity>)
+                    (<bom-line-id>, <quantity>)
+                ]
+            }
+
+        The 'MrpBom.explode()' method includes the same information, with other
+        things, but is under-optimized to be used for the purpose of this
+        module. The killer is particularly the call to `_bom_find()` which can
+        generate thousands of SELECT for searches.
+        """
+        result = {}
+
+        for product in self:
+            lines_done = []
+            bom_lines = [
+                (product.bom_id, bom_line, product, 1.0)
+                for bom_line in product.bom_id.bom_line_ids
+            ]
+
+            while bom_lines:
+                (current_bom,
+                 current_line,
+                 current_product,
+                 current_qty) = bom_lines[0]
+                bom_lines = bom_lines[1:]
+
+                if current_line._skip_bom_line(current_product):
+                    continue
+
+                line_quantity = current_qty * current_line.product_qty
+
+                sub_bom = current_line.product_id.bom_id
+                if sub_bom.type == 'phantom':
+                    product_uom = current_line.product_uom_id
+                    converted_line_quantity = product_uom._compute_quantity(
+                        line_quantity / sub_bom.product_qty,
+                        sub_bom.product_uom_id,
+                    )
+                    bom_lines = [
+                        (
+                            sub_bom,
+                            line,
+                            current_line.product_id,
+                            converted_line_quantity,
+                        )
+                        for line in sub_bom.bom_line_ids
+                    ] + bom_lines
+                else:
+                    # We round up here because the user expects that if he has
+                    # to consume a little more, the whole UOM unit should be
+                    # consumed.
+                    rounding = current_line.product_uom_id.rounding
+                    line_quantity = float_round(
+                        line_quantity,
+                        precision_rounding=rounding,
+                        rounding_method='UP',
+                    )
+                    lines_done.append((current_line, line_quantity))
+
+            result[product.id] = lines_done
+
+        return result
