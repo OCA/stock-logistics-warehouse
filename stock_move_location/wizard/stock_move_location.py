@@ -20,7 +20,9 @@ class StockMoveLocationWizard(models.TransientModel):
              ('warehouse_id.company_id', '=', company_id)], limit=1).id
 
     origin_location_disable = fields.Boolean(
-        compute='_compute_readonly_locations')
+        compute="_compute_readonly_locations",
+        help="technical field to disable the edition of origin location."
+    )
     origin_location_id = fields.Many2one(
         string='Origin Location',
         comodel_name='stock.location',
@@ -28,7 +30,9 @@ class StockMoveLocationWizard(models.TransientModel):
         domain=lambda self: self._get_locations_domain(),
     )
     destination_location_disable = fields.Boolean(
-        compute='_compute_readonly_locations')
+        compute="_compute_readonly_locations",
+        help="technical field to disable the edition of destination location."
+    )
     destination_location_id = fields.Many2one(
         string='Destination Location',
         comodel_name='stock.location',
