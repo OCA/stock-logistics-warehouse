@@ -25,20 +25,18 @@ class OrderpointGenerator(models.TransientModel):
 
     @api.multi
     def action_configure(self):
-        """ Action to retrieve wizard data and launch creation of items.
-        """
+        """Action to retrieve wizard data and launch creation of items."""
         self.ensure_one()
-
-        product_ids = self.env.context.get('active_ids')
-        assert product_ids and isinstance(product_ids, list)
-
+        model_obj = self.env[self.env.context.get('active_model')]
+        record_ids = model_obj.browse(self.env.context.get('active_ids'))
+        if not record_ids:
+            return model_obj
         if self.env.context.get('active_model') == 'product.template':
-            templates = self.env['product.template'].browse(product_ids)
-            product_ids = templates.mapped('product_variant_ids.id')
-            if len(product_ids) != len(templates):
+            product_ids = record_ids.mapped('product_variant_ids')
+            if len(product_ids) != len(record_ids):
                 raise UserError(_(
                     'Cannot apply because some of selected '
                     'products has multiple variants.'
                 ))
-
-        self.orderpoint_template_id.create_orderpoints(product_ids)
+            record_ids = product_ids
+        self.orderpoint_template_id.create_orderpoints(record_ids)
