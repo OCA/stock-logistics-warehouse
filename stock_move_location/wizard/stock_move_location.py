@@ -10,6 +10,14 @@ from odoo.fields import first
 class StockMoveLocationWizard(models.TransientModel):
     _name = "wiz.stock.move.location"
 
+    @api.multi
+    def _get_default_picking_type_id(self):
+        company_id = self.env.context.get('company_id') or \
+            self.env.user.company_id.id
+        return self.env['stock.picking.type'].search(
+            [('code', '=', 'internal'),
+             ('warehouse_id.company_id', '=', company_id)], limit=1).id
+
     origin_location_disable = fields.Boolean(
         compute='_compute_readonly_locations')
     origin_location_id = fields.Many2one(
@@ -27,7 +35,8 @@ class StockMoveLocationWizard(models.TransientModel):
         domain=lambda self: self._get_locations_domain(),
     )
     picking_type_id = fields.Many2one(
-        comodel_name='stock.picking.type'
+        comodel_name='stock.picking.type',
+        default=_get_default_picking_type_id,
     )
     stock_move_location_line_ids = fields.One2many(
         string="Move Location lines",
@@ -88,8 +97,7 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def _create_picking(self):
         return self.env['stock.picking'].create({
-            'picking_type_id': self.picking_type_id.id or
-            self.env.ref('stock.picking_type_internal').id,
+            'picking_type_id': self.picking_type_id.id,
             'location_id': self.origin_location_id.id,
             'location_dest_id': self.destination_location_id.id,
         })
