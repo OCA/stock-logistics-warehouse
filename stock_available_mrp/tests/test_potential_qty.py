@@ -1,69 +1,68 @@
 # Copyright 2014 Numérigraphe SARL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 from odoo.osv.expression import TRUE_LEAF
 
 
-class TestPotentialQty(TransactionCase):
+class TestPotentialQty(SavepointCase):
     """Test the potential quantity on a product with a multi-line BoM"""
 
-    def setUp(self):
-        super(TestPotentialQty, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestPotentialQty, cls).setUpClass()
 
-        self.product_model = self.env["product.product"]
-        self.bom_model = self.env["mrp.bom"]
-        self.bom_line_model = self.env["mrp.bom.line"]
-        self.stock_quant_model = self.env["stock.quant"]
-        self.config = self.env['ir.config_parameter']
-        self.location = self.env['stock.location']
+        cls.product_model = cls.env["product.product"]
+        cls.bom_model = cls.env["mrp.bom"]
+        cls.bom_line_model = cls.env["mrp.bom.line"]
+        cls.stock_quant_model = cls.env["stock.quant"]
+        cls.config = cls.env['ir.config_parameter']
+        cls.location = cls.env['stock.location']
         # Get the warehouses
-        self.wh_main = self.browse_ref('stock.warehouse0')
-        self.wh_ch = self.browse_ref('stock.stock_warehouse_shop0')
+        cls.wh_main = cls.env.ref('stock.warehouse0')
+        cls.wh_ch = cls.env.ref('stock.stock_warehouse_shop0')
 
         # We need to compute parent_left and parent_right of the locations as
         # they are used to compute qty_available of the product.
-        self.location._parent_store_compute()
-        self.setup_demo_data()
+        cls.location._parent_store_compute()
+        cls.setup_demo_data()
 
-    def setup_demo_data(self):
+    @classmethod
+    def setup_demo_data(cls):
         #  An interesting product (multi-line BoM, variants)
-        self.tmpl = self.browse_ref(
+        cls.tmpl = cls.env.ref(
             'mrp.product_product_build_kit_product_template')
         #  First variant
-        self.var1 = self.browse_ref('mrp.product_product_build_kit')
-        self.var1.type = 'product'
+        cls.var1 = cls.env.ref('mrp.product_product_build_kit')
+        cls.var1.type = 'product'
         #  Second variant
-        self.var2 = self.browse_ref(
+        cls.var2 = cls.env.ref(
             'stock_available_mrp.product_kit_1a')
-        self.var2.type = 'product'
+        cls.var2.type = 'product'
         # Components that can be used to make the product
-        component_ids = [
+        components = (
             # KeyBoard
-            self.ref('product.product_product_9'),
+            cls.env.ref('product.product_product_9') |
             # Mouse
-            self.ref('product.product_product_12'),
-        ]
+            cls.env.ref('product.product_product_12')
+        )
 
         # Zero-out the inventory of all variants and components
-        for component_id in (
-                component_ids + [v.id
-                                 for v in self.tmpl.product_variant_ids]):
-            prod = self.product_model.browse(component_id)
-            self.env['stock.quant'].search([
-                ('product_id', '=', prod.id)
+        for component in components + cls.tmpl.product_variant_ids:
+            cls.env['stock.quant'].search([
+                ('product_id', '=', component.id)
             ]).unlink()
 
-        self.product_model.invalidate_cache()
+        cls.product_model.invalidate_cache()
         #  A product without a BoM
-        self.product_wo_bom = self.browse_ref('product.product_product_11')
+        cls.product_wo_bom = cls.env.ref('product.product_product_11')
 
         #  Record the initial quantity available for sale
-        self.initial_usable_qties = {i.id: i.immediately_usable_qty
-                                     for i in [self.tmpl,
-                                               self.var1,
-                                               self.var2,
-                                               self.product_wo_bom]}
+        cls.initial_usable_qties = {i.id: i.immediately_usable_qty
+                                    for i in [cls.tmpl,
+                                              cls.var1,
+                                              cls.var2,
+                                              cls.product_wo_bom]}
 
     def create_inventory(self, product_id, qty, location_id=None):
         if location_id is None:
@@ -201,6 +200,7 @@ class TestPotentialQty(TransactionCase):
              'location_id': self.wh_main.lot_stock_id.id,
              'product_qty': 1000.0})
         inventory.action_done()
+
         for i in [self.tmpl, self.var1, self.var2]:
             self.assertPotentialQty(
                 i, 0.0,
@@ -365,7 +365,7 @@ class TestPotentialQty(TransactionCase):
         # Test to change component stock for compute BOM stock
 
         # Get a demo product with outgoing move (qty: 3)
-        prod = self.browse_ref('product.product_product_20')
+        prod = self.env.ref('product.product_product_20')
 
         # Set on hand qty
         self.create_inventory(prod.id, 3)
@@ -426,6 +426,7 @@ class TestPotentialQty(TransactionCase):
         self.config.set_param('stock_available_mrp_based_on',
                               'virtual_available')
         p1.refresh()
+
         self.assertEqual(5.0, p1.potential_qty)
 
     def test_potential_qty_list(self):
