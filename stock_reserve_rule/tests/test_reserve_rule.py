@@ -453,3 +453,27 @@ class TestReserveRule(common.SavepointCase):
             ],
         )
         self.assertEqual(move.state, "assigned")
+
+    def test_rule_packaging_0_packaging(self):
+        # a packaging mistakenly created with a 0 qty should be ignored,
+        # not make the reservation fail
+        self._setup_packagings(
+            self.product1,
+            [("Pallet", 500), ("Outer Box", 50), ("DivisionByZero", 0)],
+        )
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 40)
+        picking = self._create_picking(self.wh, [(self.product1, 590)])
+        self._create_rule(
+            {},
+            [
+                {
+                    "location_id": self.loc_zone1.id,
+                    "sequence": 1,
+                    "removal_strategy": "packaging",
+                }
+            ],
+        )
+        # Here, it will try to reserve a pallet of 500, then an outer box of
+        # 50, then should ignore the one with 0 not to fail because of division
+        # by zero
+        picking.action_assign()

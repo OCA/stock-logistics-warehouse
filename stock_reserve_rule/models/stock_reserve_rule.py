@@ -216,7 +216,7 @@ class StockReserveRuleRemoval(models.Model):
         # we'll walk the packagings from largest to smallest to have the
         # largest containers as possible (1 pallet rather than 10 boxes)
         packaging_quantities = sorted(
-            product.packaging_ids.mapped("qty"), reverse=True
+            product.packaging_ids.filtered("qty").mapped("qty"), reverse=True
         )
 
         rounding = product.uom_id.rounding
