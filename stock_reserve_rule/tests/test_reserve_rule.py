@@ -395,9 +395,9 @@ class TestReserveRule(common.SavepointCase):
         )
         self.assertEqual(move.state, "assigned")
 
-    def test_rule_empty_bin_smallest_first(self):
-        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 60)
-        self._update_qty_in_location(self.loc_zone1_bin2, self.product1, 30)
+    def test_rule_empty_bin_largest_first(self):
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 30)
+        self._update_qty_in_location(self.loc_zone1_bin2, self.product1, 60)
         self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 50)
         picking = self._create_picking(self.wh, [(self.product1, 80)])
 
@@ -416,15 +416,16 @@ class TestReserveRule(common.SavepointCase):
         move = picking.move_lines
         ml = move.move_line_ids
 
-        # We expect to take 30 in zone1/bin2 as it will empty a bin,
-        # and we prefer to take in the most empty bins first.
-        # Then we cannot take in zone1/bin1 as it would not be empty.
+        # We expect to take 60 in zone1/bin2 as it will empty a bin,
+        # and we prefer to take in the largest empty bins first to minimize
+        # the number of operations.
+        # Then we cannot take in zone1/bin1 as it would not be empty afterwards
 
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 30.},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 50.},
+                {"location_id": self.loc_zone1_bin2.id, "product_qty": 60.},
+                {"location_id": self.loc_zone2_bin1.id, "product_qty": 20.},
             ],
         )
         self.assertEqual(move.state, "assigned")

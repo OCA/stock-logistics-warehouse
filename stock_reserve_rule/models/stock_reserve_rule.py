@@ -125,6 +125,13 @@ class StockReserveRuleRemoval(models.Model):
         ],
         required=True,
         default="default",
+        help="Defines if and how goods are taken from locations."
+        "Default: take the first ones with the configured Removal Strategy"
+        "(FIFO, FEFO, ...).\n"
+        "Empty Bins: take goods from a location only if the bin is"
+        " empty afterwards.\n"
+        "Full Packaging: take goods from a location only if the location "
+        "quantity matches a packaging quantity (do not open boxes).",
     )
 
     packaging_type_ids = fields.Many2many(
@@ -188,8 +195,12 @@ class StockReserveRuleRemoval(models.Model):
         # the total quantity held in a location).
         quants_per_bin = quants._group_by_location()
 
-        # Sort by min quant first so we empty as most bins as we
-        # can. But keep the original ordering for equal quantities!
+        # We want to limit the operations as much as possible.
+        # We'll sort the quants desc so we can fulfill as much as possible
+        # from as few as possible locations. The best case being an exact
+        # match.
+        # The original ordering (fefo, fifo, ...) must be kept.
+
         bins = sorted(
             [
                 (
@@ -199,11 +210,12 @@ class StockReserveRuleRemoval(models.Model):
                     location,
                 )
                 for location, quants in quants_per_bin
-            ]
+            ],
+            reverse=True,
         )
 
-        # Propose the smallest quants first, so we can empty as most bins
-        # as possible.
+        # Propose the largest quants first, so we have as less operations
+        # as possible. We take goods only if we empty the bin.
         rounding = fields.first(quants).product_id.uom_id.rounding
         for location_quantity, quants, location in bins:
             if location_quantity <= 0:

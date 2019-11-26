@@ -16,11 +16,11 @@ The included advanced removal strategies are:
 
 * Default Removal Strategy: apply the default configured one (fifo, fefo, ...)
 * Empty Bins: goods are removed from a bin only if the bin will be empty after
-  the removal (favor smallest bins first, then apply the default removal
-  strategy for equal quantities).
-* Prefer Full Packaging: tries to remove full packaging (configured on the
-  products) first, by largest to smallest package (default removal strategy is
-  then applied for equal quantities).
+  the removal (favor largest bins first to minimize the number of operations,
+  then apply the default removal strategy for equal quantities).
+* Full Packaging: tries to remove full packaging (configured on the products)
+  first, by largest to smallest package or based on a pre-selected package
+  (default removal strategy is then applied for equal quantities).
 
 Examples of scenario:
 
