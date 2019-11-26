@@ -54,6 +54,19 @@ class TestReserveRule(common.SavepointCase):
             {"name": "Product 2", "type": "product"}
         )
 
+        cls.unit = cls.env["product.packaging.type"].create(
+            {"name": "Unit", "code": "UNIT", "sequence": 0}
+        )
+        cls.retail_box = cls.env["product.packaging.type"].create(
+            {"name": "Retail Box", "code": "PACK", "sequence": 3}
+        )
+        cls.transport_box = cls.env["product.packaging.type"].create(
+            {"name": "Transport Box", "code": "CASE", "sequence": 4}
+        )
+        cls.pallet = cls.env["product.packaging.type"].create(
+            {"name": "Pallet", "code": "PALLET", "sequence": 5}
+        )
+
     def _create_picking(self, wh, products=None):
         """Create picking
 
@@ -103,12 +116,17 @@ class TestReserveRule(common.SavepointCase):
 
     def _setup_packagings(self, product, packagings):
         """Create packagings on a product
-        packagings is a list [(name, qty)]
+        packagings is a list [(name, qty, packaging_type)]
         """
         self.env["product.packaging"].create(
             [
-                {"name": name, "qty": qty, "product_id": product.id}
-                for name, qty in packagings
+                {
+                    "name": name,
+                    "qty": qty,
+                    "product_id": product.id,
+                    "packaging_type_id": packaging_type.id,
+                }
+                for name, qty, packaging_type in packagings
             ]
         )
 
@@ -413,7 +431,11 @@ class TestReserveRule(common.SavepointCase):
 
     def test_rule_packaging(self):
         self._setup_packagings(
-            self.product1, [("Pallet", 500), ("Outer Box", 50)]
+            self.product1,
+            [
+                ("Pallet", 500, self.pallet),
+                ("Retail Box", 50, self.retail_box),
+            ],
         )
         self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 40)
         self._update_qty_in_location(self.loc_zone1_bin2, self.product1, 510)
@@ -459,7 +481,11 @@ class TestReserveRule(common.SavepointCase):
         # not make the reservation fail
         self._setup_packagings(
             self.product1,
-            [("Pallet", 500), ("Outer Box", 50), ("DivisionByZero", 0)],
+            [
+                ("Pallet", 500, self.pallet),
+                ("Retail Box", 50, self.retail_box),
+                ("DivisionByZero", 0, self.unit),
+            ],
         )
         self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 40)
         picking = self._create_picking(self.wh, [(self.product1, 590)])
@@ -477,3 +503,58 @@ class TestReserveRule(common.SavepointCase):
         # 50, then should ignore the one with 0 not to fail because of division
         # by zero
         picking.action_assign()
+
+    def test_rule_packaging_type(self):
+        # only take one kind of packaging
+        self._setup_packagings(
+            self.product1,
+            [
+                ("Pallet", 500, self.pallet),
+                ("Transport Box", 50, self.transport_box),
+                ("Retail Box", 10, self.retail_box),
+                ("Unit", 1, self.unit),
+            ],
+        )
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 40)
+        self._update_qty_in_location(self.loc_zone1_bin2, self.product1, 600)
+        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 30)
+        self._update_qty_in_location(self.loc_zone2_bin2, self.product1, 500)
+        self._update_qty_in_location(self.loc_zone3_bin1, self.product1, 500)
+        picking = self._create_picking(self.wh, [(self.product1, 560)])
+
+        self._create_rule(
+            {},
+            [
+                # we'll take one pallet (500) from zone1/bin2, but as we filter
+                # on pallets only, we won't take the 600 out of it (if the rule
+                # had no type, we would have taken 100 of transport boxes).
+                {
+                    "location_id": self.loc_zone1.id,
+                    "sequence": 1,
+                    "removal_strategy": "packaging",
+                    "packaging_type_ids": [(6, 0, self.pallet.ids)],
+                },
+                # zone2/bin2 will match the second packaging size of 50,
+                # but won't take 60 because it doesn't take retail boxes
+                {
+                    "location_id": self.loc_zone2.id,
+                    "sequence": 2,
+                    "removal_strategy": "packaging",
+                    "packaging_type_ids": [(6, 0, self.transport_box.ids)],
+                },
+                # the rest should be taken here
+                {"location_id": self.loc_zone3.id, "sequence": 3},
+            ],
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        ml = move.move_line_ids
+        self.assertRecordValues(
+            ml,
+            [
+                {"location_id": self.loc_zone1_bin2.id, "product_qty": 500.},
+                {"location_id": self.loc_zone2_bin2.id, "product_qty": 50.},
+                {"location_id": self.loc_zone3_bin1.id, "product_qty": 10.},
+            ],
+        )
+        self.assertEqual(move.state, "assigned")

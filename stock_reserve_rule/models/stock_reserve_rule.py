@@ -121,10 +121,17 @@ class StockReserveRuleRemoval(models.Model):
         selection=[
             ("default", "Default Removal Strategy"),
             ("empty_bin", "Empty Bins"),
-            ("packaging", "Prefer Full Packaging"),
+            ("packaging", "Full Packaging"),
         ],
         required=True,
         default="default",
+    )
+
+    packaging_type_ids = fields.Many2many(
+        comodel_name="product.packaging.type",
+        help="Optional packaging when using 'Full Packaging'.\n"
+        "Only the quantities matching one of the packaging are removed.\n"
+        "When empty, any packaging can be removed.",
     )
 
     def _eval_quant_domain(self, quants, domain):
@@ -213,10 +220,23 @@ class StockReserveRuleRemoval(models.Model):
 
         product = fields.first(quants).product_id
 
+        packaging_type_filter = self.packaging_type_ids
+
         # we'll walk the packagings from largest to smallest to have the
         # largest containers as possible (1 pallet rather than 10 boxes)
         packaging_quantities = sorted(
-            product.packaging_ids.filtered("qty").mapped("qty"), reverse=True
+            product.packaging_ids.filtered(
+                # it doesn't make sense to consider a unit as a packaging
+                lambda packaging: (
+                    packaging.qty > 1
+                    and (
+                        packaging.packaging_type_id in packaging_type_filter
+                        if packaging_type_filter
+                        else True
+                    )
+                )
+            ).mapped("qty"),
+            reverse=True,
         )
 
         rounding = product.uom_id.rounding

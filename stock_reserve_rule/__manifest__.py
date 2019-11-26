@@ -9,6 +9,7 @@
     'category': 'Stock Management',
     'depends': [
         'stock',
+        'product_packaging_type',  # OCA/product-attribute
     ],
     'demo': [
         'demo/product_demo.xml',
