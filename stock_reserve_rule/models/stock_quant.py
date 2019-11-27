@@ -1,6 +1,8 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from collections import OrderedDict
+
 from odoo import models
 
 
@@ -18,14 +20,11 @@ class StockQuant(models.Model):
         The returned format is: [(location, quants)]
 
         """
-        quants_per_location = []
-        seen = {}
+        seen = OrderedDict()
         for quant in self:
             location = quant.location_id
             if location in seen:
-                index = seen[location]
-                quants_per_location[index][1] += quant
+                seen[location] = seen[location] | quant
             else:
-                quants_per_location.append((location, quant))
-                seen[location] = len(quants_per_location) - 1
-        return quants_per_location
+                seen[location] = quant
+        return [(location, quants) for location, quants in seen.items()]
