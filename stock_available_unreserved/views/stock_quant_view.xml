@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="quant_search_view" model="ir.ui.view">
         <field name="name">stock.quant.search</field>
         <field name="model">stock.quant</field>
@@ -11,19 +10,14 @@
                 <field name="contains_unreserved"/>
             </field>
             <filter name="internal_loc" position="after">
-                <filter name='internal_unreserved'
-                        string="Internal Unreserved"
-                        domain="[('contains_unreserved','=', True), ('location_id.usage','=', 'internal')]"/>
+                <filter domain="[('contains_unreserved','=', True), ('location_id.usage','=', 'internal')]" name="internal_unreserved" string="Internal Unreserved"/>
             </filter>
         </field>
     </record>
-
-    <record model="ir.actions.act_window"
-            id="product_open_quants_unreserved">
+    <record id="product_open_quants_unreserved" model="ir.actions.act_window">
         <field name="name">Stock On Hand (Unreserved)</field>
         <field name="context">{'search_default_internal_loc': 1, 'search_default_locationgroup':1}</field>
         <field name="domain">[('product_id', '=', active_id), ('contains_unreserved', '=', True)]</field>
         <field name="res_model">stock.quant</field>
     </record>
-
 </odoo>
