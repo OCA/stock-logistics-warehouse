@@ -28,7 +28,8 @@ class ProcurementOrder(models.Model):
     mts_mto_procurement_id = fields.Many2one(
         'procurement.order',
         string="Mto+Mts Procurement",
-        copy=False)
+        copy=False,
+        index=True)
     mts_mto_procurement_ids = fields.One2many(
         'procurement.order',
         'mts_mto_procurement_id',
