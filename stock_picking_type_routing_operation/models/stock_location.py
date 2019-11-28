@@ -13,7 +13,8 @@ class StockLocation(models.Model):
         help="Change destination of the move line according to the"
              " default destination of the picking type after reservation"
              " occurs, when the source of the move is in this location"
-             " (including sub-locations).",
+             " (including sub-locations). A new chained move will be created "
+             " to reach the original destination.",
     )
     dest_routing_picking_type_id = fields.Many2one(
         'stock.picking.type',
@@ -21,7 +22,8 @@ class StockLocation(models.Model):
         help="Change source of the move line according to the"
              " default source of the picking type after reservation"
              " occurs, when the destination of the move is in this location"
-             " (including sub-locations).",
+             " (including sub-locations). A new chained move will be created "
+             " to reach the original source.",
     )
 
     @api.constrains('src_routing_picking_type_id')
