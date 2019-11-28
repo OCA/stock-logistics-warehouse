@@ -5,11 +5,11 @@ from odoo import models
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
     def _action_assign(self):
         super()._action_assign()
-        if not self.env.context.get('exclude_apply_routing_operation'):
+        if not self.env.context.get("exclude_apply_routing_operation"):
             self._apply_src_move_routing_operation()
             self._apply_dest_move_routing_operation()
 
@@ -35,7 +35,7 @@ class StockMove(models.Model):
         move_to_assign_ids = set()
         new_move_per_location = {}
         for move in self:
-            if move.state not in ('assigned', 'partially_available'):
+            if move.state not in ("assigned", "partially_available"):
                 continue
 
             # Group move lines per source location, some may need an additional
@@ -45,14 +45,15 @@ class StockMove(models.Model):
             move_lines = {}
             for move_line in move.move_line_ids:
                 location = move_line.location_id
-                move_lines[location] = sum(move_line.mapped('product_uom_qty'))
+                move_lines[location] = sum(move_line.mapped("product_uom_qty"))
 
             # We'll split the move to have one move per different location
             # where we have to take products
             routing_quantities = {}
-            for source_location, qty in move_lines.items():
-                routing_picking_type = \
-                    source_location._find_picking_type_for_routing("src")
+            for source, qty in move_lines.items():
+                routing_picking_type = source._find_picking_type_for_routing(
+                    "src"
+                )
                 routing_quantities.setdefault(routing_picking_type, 0.0)
                 routing_quantities[routing_picking_type] += qty
 
@@ -100,9 +101,9 @@ class StockMove(models.Model):
         moves_to_assign = self.browse(move_to_assign_ids)
         if moves_to_assign:
             moves_to_assign._action_assign()
-        new_moves = self.browse(chain.from_iterable(
-            new_move_per_location.values()
-        ))
+        new_moves = self.browse(
+            chain.from_iterable(new_move_per_location.values())
+        )
         return self + new_moves
 
     def _apply_move_location_src_routing_operation(self):
@@ -115,7 +116,7 @@ class StockMove(models.Model):
         after it.
         """
         for move in self:
-            if move.state not in ('assigned', 'partially_available'):
+            if move.state not in ("assigned", "partially_available"):
                 continue
 
             # Group move lines per source location, some may need an additional
@@ -126,25 +127,37 @@ class StockMove(models.Model):
             # locations, they have been split in
             # _split_per_routing_operation(), so we can take the first one
             source = move.move_line_ids[0].location_id
-            picking_type = source._find_picking_type_for_routing("src")
-            if not picking_type:
+            destination = move.move_line_ids[0].location_dest_id
+            # we have to add a move as destination
+            # we have to add move as origin
+            routing = source._find_picking_type_for_routing("src")
+            if not routing:
                 continue
-            if (
-                move.picking_type_id == picking_type and
-                move.location_dest_id == picking_type.default_location_dest_id
+
+            if self.env["stock.location"].search(
+                [
+                    ("id", "=", routing.default_location_dest_id.id),
+                    ("id", "parent_of", move.location_dest_id.id),
+                ]
             ):
-                # already done
+                # we don't need to do anything because we already go through
+                # the expected destination
                 continue
 
             # the current move becomes the routing move, and we'll add a new
             # move after this one to pick the goods where the routing moved
-            # them
+            # them, we have to unreserve and assign at the end to have the move
+            # lines go to the correct destination
             move._do_unreserve()
-            move.write({
-                'location_dest_id': picking_type.default_location_dest_id.id,
-                'picking_type_id': picking_type.id,
-            })
-            move._insert_src_routing_moves()
+            move.package_level_id.unlink()
+            dest = routing.default_location_dest_id
+            current_picking_type = move.picking_id.picking_type_id
+            move.write(
+                {"location_dest_id": dest.id, "picking_type_id": routing.id}
+            )
+            move._insert_routing_moves(
+                current_picking_type, move.location_id, destination
+            )
 
             picking = move.picking_id
             move._assign_picking()
@@ -156,45 +169,38 @@ class StockMove(models.Model):
 
             move._action_assign()
 
-    def _insert_src_routing_moves(self):
+    def _insert_routing_moves(self, picking_type, location, destination):
         """Create a chained move for the source routing operation"""
         self.ensure_one()
         dest_moves = self.move_dest_ids
-        dest_location = self.location_dest_id
-        for dest_move in dest_moves:
-            final_location = dest_move.location_id
-            if dest_location == final_location:
-                # shortcircuit to avoid a query checking if it is a child
-                continue
-            child_locations = self.env['stock.location'].search([
-                ('id', 'child_of', final_location.id)
-            ])
-            if dest_location in child_locations:
-                # normal behavior, we don't need a move between A and B
-                continue
-            # Insert move between the source and destination for the new
-            # operation
-            move_values = self._prepare_src_routing_move_values(
-                final_location
+        # Insert move between the source and destination for the new
+        # operation
+        routing_move_values = self._prepare_routing_move_values(
+            picking_type, location, destination
+        )
+        routing_move = self.copy(routing_move_values)
+
+        # modify the chain to include the new move
+        self.write(
+            {
+                "move_dest_ids": [(3, m.id) for m in dest_moves]
+                + [(4, routing_move.id)]
+            }
+        )
+        if dest_moves:
+            dest_moves.write(
+                {"move_orig_ids": [(3, self.id), (4, routing_move.id)]}
             )
-            move = self.copy(move_values)
+        routing_move._action_confirm(merge=False)
+        routing_move._assign_picking()
 
-            # modify the chain to include the new move
-            dest_move.write({
-                'move_orig_ids': [(3, self.id), (4, move.id)],
-            })
-            self.write({
-                'move_dest_ids': [(3, dest_move.id), (4, move.id)],
-            })
-            move._action_confirm(merge=False)
-
-    def _prepare_src_routing_move_values(self, destination):
+    def _prepare_routing_move_values(self, picking_type, source, destination):
         return {
-            'picking_id': False,
-            'location_id': self.location_id.id,
-            'location_dest_id': destination.id,
-            'state': 'waiting',
-            'picking_type_id': self.picking_id.picking_type_id.id,
+            "picking_id": False,
+            "location_id": source.id,
+            "location_dest_id": destination.id,
+            "state": "waiting",
+            "picking_type_id": picking_type.id,
         }
 
     def _split_per_dest_routing_operation(self):
@@ -211,7 +217,7 @@ class StockMove(models.Model):
         """
         new_moves = self.browse()
         for move in self:
-            if move.state not in ('assigned', 'partially_available'):
+            if move.state not in ("assigned", "partially_available"):
                 continue
 
             # Group move lines per destination location, some may need an
@@ -221,15 +227,15 @@ class StockMove(models.Model):
             routing_move_lines = {}
             routing_operations = {}
             for move_line in move.move_line_ids:
-                location = move_line.location_dest_id
-                if location in routing_operations:
-                    routing_picking_type = routing_operations[location]
+                dest = move_line.location_dest_id
+                if dest in routing_operations:
+                    routing_picking_type = routing_operations[dest]
                 else:
-                    routing_picking_type = \
-                        location._find_picking_type_for_routing("dest")
+                    routing_picking_type = dest._find_picking_type_for_routing(
+                        "dest"
+                    )
                 routing_move_lines.setdefault(
-                    routing_picking_type,
-                    self.env['stock.move.line'].browse()
+                    routing_picking_type, self.env["stock.move.line"].browse()
                 )
                 routing_move_lines[routing_picking_type] |= move_line
 
@@ -247,14 +253,14 @@ class StockMove(models.Model):
                     continue
                 # if we have a picking type, split returns the same move if
                 # the qty is the same
-                qty = sum(move_lines.mapped('product_uom_qty'))
+                qty = sum(move_lines.mapped("product_uom_qty"))
                 new_move_id = move._split(qty)
                 new_move = self.browse(new_move_id)
-                move_lines.write({'move_id': new_move.id})
-                assert move.state in ('assigned', 'partially_available')
+                move_lines.write({"move_id": new_move.id})
+                assert move.state in ("assigned", "partially_available")
                 # We know the new move is 'assigned' because we created it
                 # with the quantity matching the move lines that we move into
-                new_move.state = 'assigned'
+                new_move.state = "assigned"
                 new_moves += new_move
 
         return self + new_moves
@@ -269,7 +275,7 @@ class StockMove(models.Model):
         after it.
         """
         for move in self:
-            if move.state not in ('assigned', 'partially_available'):
+            if move.state not in ("assigned", "partially_available"):
                 continue
 
             # Group move lines per source location, some may need an additional
@@ -283,58 +289,26 @@ class StockMove(models.Model):
             picking_type = destination._find_picking_type_for_routing("dest")
             if not picking_type:
                 continue
-            if move.picking_type_id == picking_type:
+            if self.env["stock.location"].search(
+                [
+                    ("id", "=", picking_type.default_location_dest_id.id),
+                    ("id", "parent_of", move.location_dest_id.id),
+                ]
+            ):
                 # This move has been created for the routing operation,
+                # or was already created with the correct locations anyway,
                 # exit or it would indefinitely add a next move
                 continue
 
             # Move the goods in the "routing" location instead.
             # In this use case, we want to keep the move lines so we don't
             # change the reservation.
-            move.write({
-                'location_dest_id': picking_type.default_location_src_id.id,
-            })
-            move.move_line_ids.write({
-                'location_dest_id': picking_type.default_location_src_id.id,
-            })
-            move._insert_dest_routing_move(picking_type, destination)
-
-    def _insert_dest_routing_move(self, picking_type, original_destination):
-        """Create a chained move for the destination routing operation
-
-        It adds a new move after the current move, and link the existing
-        destination moves to the new move.
-        """
-        self.ensure_one()
-        routing_move_values = self._prepare_dest_routing_move_values(
-            picking_type,
-            original_destination
-        )
-        routing_move = self.copy(routing_move_values)
-        dest_moves = self.move_dest_ids
-        # modify the chain to include the new move
-        self.write({
-            'move_dest_ids': [
-                (3, m.id) for m in dest_moves
-            ] + [
-                (4, routing_move.id)
-            ],
-        })
-        if dest_moves:
-            dest_moves.write({
-                'move_orig_ids': [(3, self.id), (4, routing_move.id)],
-            })
-        routing_move._action_confirm(merge=False)
-        routing_move._assign_picking()
-
-    def _prepare_dest_routing_move_values(
-            self, picking_type,
-            original_destination
-    ):
-        return {
-            'picking_id': False,
-            'location_id': self.location_dest_id.id,
-            'location_dest_id': original_destination.id,
-            'state': 'waiting',
-            'picking_type_id': picking_type.id,
-        }
+            move.write(
+                {"location_dest_id": picking_type.default_location_src_id.id}
+            )
+            move.move_line_ids.write(
+                {"location_dest_id": picking_type.default_location_src_id.id}
+            )
+            move._insert_routing_moves(
+                picking_type, move.location_dest_id, destination
+            )

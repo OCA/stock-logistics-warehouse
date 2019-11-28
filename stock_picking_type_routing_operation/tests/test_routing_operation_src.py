@@ -186,7 +186,7 @@ class TestSourceRoutingOperation(common.SavepointCase):
         self.assert_dest_customer(move_b)
 
         move_middle = move_a.move_dest_ids
-        # the middle move stays in the same source location than the original
+        # the routing move stays in the same source location than the original
         # move: the move line will be in the sub-locations (handover)
 
         self.assert_src_stock(move_middle)
