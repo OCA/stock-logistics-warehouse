@@ -20,11 +20,6 @@ class TestCubiscan(SavepointCase):
         with self.assertRaises(ValidationError):
             self.device_obj.create(vals)
 
-        # Wrong IP
-        vals.update({'device_address': '999.261.42.42', 'port': 5982})
-        with self.assertRaises(ValidationError):
-            self.device_obj.create(vals)
-
     def test_device_test(self):
         vals = {
             'name': 'Test Device',
