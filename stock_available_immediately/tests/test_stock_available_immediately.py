@@ -50,7 +50,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
             'name': 'MOVE INCOMING -> STOCK ',
             'product_id': productA.id,
             'product_uom': productA.uom_id.id,
-            'product_uom_qty': 2,})
+            'product_uom_qty': 2})
 
         stockMoveInB = moveObj.create({
             'location_id': supplier_location.id,
@@ -58,7 +58,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
             'name': 'MOVE INCOMING -> STOCK ',
             'product_id': productB.id,
             'product_uom': productB.uom_id.id,
-            'product_uom_qty': 3,})
+            'product_uom_qty': 3})
 
         def compare_product_usable_qty(product, value):
             # Refresh, because the function field is not recalculated between
@@ -99,7 +99,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
             'product_id': productA.id,
             'product_uom': productA.uom_id.id,
             'product_uom_qty': 1,
-            'state': 'confirmed',})
+            'state': 'confirmed'})
 
         stockMoveOutA._action_confirm()
         stockMoveOutA._action_assign()
