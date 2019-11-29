@@ -42,6 +42,7 @@ Contributors
 * Lionel Sausin (Numérigraphe) <ls@numerigraphe.com>
 * Sodexis <sodexis@sodexis.com>
 * Cédric Pigeon <cedric.pigeon@acsone.eu>
+* Sergio Díaz <sergiodm.1989@gmail.com>
 
 Maintainer
 ----------
