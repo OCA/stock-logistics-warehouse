@@ -7,10 +7,10 @@ from odoo.addons import decimal_precision as dp
 from odoo.tools import float_compare
 
 REQUEST_STATES = [
-    ('draft', _('Draft')),
-    ('open', _('In progress')),
-    ('done', _('Done')),
-    ('cancel', _('Cancelled'))]
+    ('draft', 'Draft'),
+    ('open', 'In progress'),
+    ('done', 'Done'),
+    ('cancel', 'Cancelled')]
 
 
 class StockRequest(models.Model):
