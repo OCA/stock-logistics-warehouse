@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 # Copyright 2014 Camptocamp, Akretion, Numérigraphe
 # Copyright 2016 Sodexis
+# Copyright 2019 Sergio Díaz <sergiodm.1989@gmail.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
@@ -9,8 +9,10 @@ from odoo.tests.common import TransactionCase
 class TestStockLogisticsWarehouse(TransactionCase):
 
     def test01_stock_levels(self):
-        """checking that immediately_usable_qty actually reflects \
-the variations in stock, both on product and template"""
+        """
+        Checking that immediately_usable_qty actually reflects the variations
+        in stock, both on product and template.
+        """
         moveObj = self.env['stock.move']
         productObj = self.env['product.product']
         templateObj = self.env['product.template']
@@ -20,48 +22,43 @@ the variations in stock, both on product and template"""
         uom_unit = self.env.ref('product.product_uom_unit')
 
         # Create product template
-        templateAB = templateObj.create(
-            {'name': 'templAB',
-             'uom_id': uom_unit.id,
-             })
+        templateAB = templateObj.create({
+            'name': 'templAB',
+            'uom_id': uom_unit.id})
 
         # Create product A and B
-        productA = productObj.create(
-            {'name': 'product A',
-             'standard_price': 1,
-             'type': 'product',
-             'uom_id': uom_unit.id,
-             'default_code': 'A',
-             'product_tmpl_id': templateAB.id,
-             })
+        productA = productObj.create({
+            'name': 'product A',
+            'standard_price': 1,
+            'type': 'product',
+            'uom_id': uom_unit.id,
+            'default_code': 'A',
+            'product_tmpl_id': templateAB.id})
 
-        productB = productObj.create(
-            {'name': 'product B',
-             'standard_price': 1,
-             'type': 'product',
-             'uom_id': uom_unit.id,
-             'default_code': 'B',
-             'product_tmpl_id': templateAB.id,
-             })
+        productB = productObj.create({
+            'name': 'product B',
+            'standard_price': 1,
+            'type': 'product',
+            'uom_id': uom_unit.id,
+            'default_code': 'B',
+            'product_tmpl_id': templateAB.id})
 
         # Create a stock move from INCOMING to STOCK
-        stockMoveInA = moveObj.create(
-            {'location_id': supplier_location.id,
-             'location_dest_id': stock_location.id,
-             'name': 'MOVE INCOMING -> STOCK ',
-             'product_id': productA.id,
-             'product_uom': productA.uom_id.id,
-             'product_uom_qty': 2,
-             })
+        stockMoveInA = moveObj.create({
+            'location_id': supplier_location.id,
+            'location_dest_id': stock_location.id,
+            'name': 'MOVE INCOMING -> STOCK ',
+            'product_id': productA.id,
+            'product_uom': productA.uom_id.id,
+            'product_uom_qty': 2})
 
-        stockMoveInB = moveObj.create(
-            {'location_id': supplier_location.id,
-             'location_dest_id': stock_location.id,
-             'name': 'MOVE INCOMING -> STOCK ',
-             'product_id': productB.id,
-             'product_uom': productB.uom_id.id,
-             'product_uom_qty': 3,
-             })
+        stockMoveInB = moveObj.create({
+            'location_id': supplier_location.id,
+            'location_dest_id': stock_location.id,
+            'name': 'MOVE INCOMING -> STOCK ',
+            'product_id': productB.id,
+            'product_uom': productB.uom_id.id,
+            'product_uom_qty': 3})
 
         def compare_product_usable_qty(product, value):
             # Refresh, because the function field is not recalculated between
@@ -72,36 +69,42 @@ the variations in stock, both on product and template"""
         compare_product_usable_qty(productA, 0)
         compare_product_usable_qty(templateAB, 0)
 
-        stockMoveInA.action_confirm()
+        stockMoveInA._action_confirm()
         compare_product_usable_qty(productA, 0)
         compare_product_usable_qty(templateAB, 0)
 
-        stockMoveInA.action_assign()
+        stockMoveInA._action_assign()
         compare_product_usable_qty(productA, 0)
         compare_product_usable_qty(templateAB, 0)
 
-        stockMoveInA.action_done()
+        stockMoveInA.move_line_ids.write({'qty_done': 2.0})
+        stockMoveInA._action_done()
         compare_product_usable_qty(productA, 2)
         compare_product_usable_qty(templateAB, 2)
 
         # will directly trigger action_done on productB
-        stockMoveInB.action_done()
+        stockMoveInB._action_confirm()
+        stockMoveInB._action_assign()
+        stockMoveInB.move_line_ids.write({'qty_done': 3.0})
+        stockMoveInB._action_done()
         compare_product_usable_qty(productA, 2)
         compare_product_usable_qty(productB, 3)
         compare_product_usable_qty(templateAB, 5)
 
         # Create a stock move from STOCK to CUSTOMER
-        stockMoveOutA = moveObj.create(
-            {'location_id': stock_location.id,
-             'location_dest_id': customer_location.id,
-             'name': ' STOCK --> CUSTOMER ',
-             'product_id': productA.id,
-             'product_uom': productA.uom_id.id,
-             'product_uom_qty': 1,
-             'state': 'confirmed',
-             })
+        stockMoveOutA = moveObj.create({
+            'location_id': stock_location.id,
+            'location_dest_id': customer_location.id,
+            'name': ' STOCK --> CUSTOMER ',
+            'product_id': productA.id,
+            'product_uom': productA.uom_id.id,
+            'product_uom_qty': 1,
+            'state': 'confirmed'})
 
-        stockMoveOutA.action_done()
+        stockMoveOutA._action_confirm()
+        stockMoveOutA._action_assign()
+        stockMoveOutA.move_line_ids.write({'qty_done': 1.0})
+        stockMoveOutA._action_done()
         compare_product_usable_qty(productA, 1)
         compare_product_usable_qty(templateAB, 4)
 
