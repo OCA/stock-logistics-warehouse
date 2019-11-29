@@ -171,9 +171,9 @@ class StockRequest(models.AbstractModel):
         if self.warehouse_id:
             loc_wh = self.location_id.sudo().get_warehouse()
             if self.warehouse_id != loc_wh:
-                self.location_id = self.warehouse_id.lot_stock_id.id
-            if self.warehouse_id.company_id != self.company_id:
-                self.company_id = self.warehouse_id.company_id
+                self.location_id = self.warehouse_id.sudo().lot_stock_id.id
+            if self.warehouse_id.sudo().company_id != self.company_id:
+                self.company_id = self.warehouse_id.sudo().company_id
         return res
 
     @api.onchange('location_id')

@@ -164,7 +164,7 @@ class StockRequestOrder(models.Model):
                 self.location_id = self.warehouse_id.sudo().lot_stock_id
                 self.with_context(no_change_childs=True).onchange_location_id()
             if self.warehouse_id.sudo().company_id != self.company_id:
-                self.company_id = self.warehouse_id.company_id
+                self.company_id = self.warehouse_id.sudo().company_id
                 self.with_context(no_change_childs=True).onchange_company_id()
         self.change_childs()
 
