@@ -1,7 +1,7 @@
 # Copyright 2019 Open Source Integrators
 # Copyright 2019 Eficent Business and IT Consulting Services, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class StockRequest(models.Model):
@@ -9,10 +9,10 @@ class StockRequest(models.Model):
 
     def __get_request_states(self):
         states = super().__get_request_states()
-        if not ('submitted', _('Submitted')) in states:
+        if not ('submitted', 'Submitted') in states:
             states.insert(
-                states.index(('draft', _('Draft'))) + 1,
-                ('submitted', _('Submitted')))
+                states.index(('draft', 'Draft')) + 1,
+                ('submitted', 'Submitted'))
         return states
 
     route_id = fields.Many2one(states={'draft': [('readonly', False)],
