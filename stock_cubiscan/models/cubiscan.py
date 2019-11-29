@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from ipaddress import ip_address
+import ssl as SSL
 
 from cubiscan.cubiscan import CubiScan
 from odoo import _, api, fields, models
@@ -33,11 +33,6 @@ class CubiscanDevice(models.Model):
         if not 1 <= self.port <= 65535:
             raise ValidationError('Port must be in range 1-65535')
 
-        try:
-            ip_address(self.device_address)
-        except ValueError:
-            raise ValidationError('Device IP Address is not valid')
-
     @api.multi
     def copy(self, default=None):
         if not default:
@@ -67,7 +62,11 @@ class CubiscanDevice(models.Model):
     @api.multi
     def _get_interface(self):
         self.ensure_one()
-        return CubiScan(self.device_address, self.port, self.timeout)
+        ctx = SSL.create_default_context()
+        ctx.load_cert_chain('/usr/lib/ssl/certs/camptocamp.pem')
+        ctx.check_hostname = False
+        ctx.verify_mode = SSL.CERT_NONE
+        return CubiScan(self.device_address, self.port, self.timeout, ssl=ctx)
 
     @api.multi
     def test_device(self):
