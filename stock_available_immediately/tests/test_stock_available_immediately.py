@@ -77,11 +77,15 @@ class TestStockLogisticsWarehouse(TransactionCase):
         compare_product_usable_qty(productA, 0)
         compare_product_usable_qty(templateAB, 0)
 
+        stockMoveInA.move_line_ids.write({'qty_done': 2.0})
         stockMoveInA._action_done()
         compare_product_usable_qty(productA, 2)
         compare_product_usable_qty(templateAB, 2)
 
         # will directly trigger action_done on productB
+        stockMoveInB._action_confirm()
+        stockMoveInB._action_assign()
+        stockMoveInB.move_line_ids.write({'qty_done': 3.0})
         stockMoveInB._action_done()
         compare_product_usable_qty(productA, 2)
         compare_product_usable_qty(productB, 3)
@@ -97,6 +101,9 @@ class TestStockLogisticsWarehouse(TransactionCase):
             'product_uom_qty': 1,
             'state': 'confirmed',})
 
+        stockMoveOutA._action_confirm()
+        stockMoveOutA._action_assign()
+        stockMoveOutA.move_line_ids.write({'qty_done': 1.0})
         stockMoveOutA._action_done()
         compare_product_usable_qty(productA, 1)
         compare_product_usable_qty(templateAB, 4)
