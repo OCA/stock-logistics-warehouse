@@ -103,12 +103,6 @@ msgid "Cancel"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:13
-#, python-format
-msgid "Cancelled"
-msgstr ""
-
-#. module: stock_request
 #: model_terms:ir.actions.act_window,help:stock_request.action_stock_request_form
 msgid "Click to add a Stock Request."
 msgstr ""
@@ -178,16 +172,8 @@ msgid "Display Name"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:12
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
-#, python-format
 msgid "Done"
-msgstr ""
-
-#. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:10
-#, python-format
-msgid "Draft"
 msgstr ""
 
 #. module: stock_request
@@ -285,12 +271,6 @@ msgstr ""
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_error
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
-
-#. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:11
-#, python-format
-msgid "In progress"
 msgstr ""
 
 #. module: stock_request
