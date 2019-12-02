@@ -115,12 +115,6 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:13
-#, python-format
-msgid "Cancelled"
-msgstr "Abgebrochen"
-
-#. module: stock_request
 #: model_terms:ir.actions.act_window,help:stock_request.action_stock_request_form
 msgid "Click to add a Stock Request."
 msgstr "Klicken, um eine Bestandaanforderung zu stellen."
@@ -193,17 +187,9 @@ msgid "Display Name"
 msgstr "Anzeigebezeichnung"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:12
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
-#, python-format
 msgid "Done"
 msgstr "Erledigt"
-
-#. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:10
-#, python-format
-msgid "Draft"
-msgstr "Entwurf"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
@@ -301,12 +287,6 @@ msgstr "Wenn angehakt, erfordern neue Meldungen Ihre Aufmerksamkeit."
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Wenn angehakt, haben Meldungen einen Zustellfehler."
-
-#. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:11
-#, python-format
-msgid "In progress"
-msgstr "In Bearbeitung"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location
@@ -1065,6 +1045,15 @@ msgid ""
 msgstr ""
 "Sie müssen eine Produktmengeneinheit aus der gleichen Kategorie, wie die "
 "Basismengeneinheit des Produkts, verwenden"
+
+#~ msgid "Cancelled"
+#~ msgstr "Abgebrochen"
+
+#~ msgid "Draft"
+#~ msgstr "Entwurf"
+
+#~ msgid "In progress"
+#~ msgstr "In Bearbeitung"
 
 #~ msgid "Packing Operation"
 #~ msgstr "Packvorgang"
