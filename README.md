@@ -51,7 +51,7 @@ addon | version | summary
 [stock_location_area_management](stock_location_area_management/) | 8.0.0.1.0 | Enter a location's area based on different units of measure
 [stock_location_ownership](stock_location_ownership/) | 8.0.0.1.0 | Stock Location Ownership
 [stock_lot_quantity](stock_lot_quantity/) | 8.0.1.0.0 | Stock quantity for serial number
-[stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.0 | Add a MTS+MTO route
+[stock_mts_mto_rule](stock_mts_mto_rule/) | 8.0.1.0.1 | Add a MTS+MTO route
 [stock_operation_type_location](stock_operation_type_location/) | 8.0.1.1.0 | Allows to filter locations on stock operations
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 8.0.1.0.0 | Mass configuration of stock order points
 [stock_orderpoint_manual_procurement](stock_orderpoint_manual_procurement/) | 8.0.1.0.0 | Allows to create procurement orders from orderpoints instead of relying only on the scheduler
