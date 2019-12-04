@@ -6,7 +6,7 @@ from odoo.tests import common
 
 class TestStockOrderpointRoute(common.TransactionCase):
     def setUp(self):
-        super(TestStockOrderpointRoute, self).setUp()
+        super().setUp()
 
         # common models
         self.orderpoint_model = self.env[
@@ -19,7 +19,7 @@ class TestStockOrderpointRoute(common.TransactionCase):
             self.env.ref('stock.group_stock_multi_locations')
         self.main_company = self.env.ref('base.main_company')
         self.warehouse = self.env.ref('stock.warehouse0')
-        self.categ_unit = self.env.ref('product.product_uom_categ_unit')
+        self.categ_unit = self.env.ref('uom.product_uom_categ_unit')
         self.virtual_loc = self.env.ref('stock.stock_location_customers')
 
         # common data
@@ -55,19 +55,19 @@ class TestStockOrderpointRoute(common.TransactionCase):
             'sequence': 10,
         })
 
-        self.uom_dozen = self.env['product.uom'].create({
+        self.uom_dozen = self.env['uom.uom'].create({
             'name': 'Test-DozenA',
             'category_id': self.categ_unit.id,
             'factor_inv': 12,
             'uom_type': 'bigger',
             'rounding': 0.001})
 
-        self.env['procurement.rule'].create({
+        self.env['stock.rule'].create({
             'name': 'Transfer',
             'route_id': self.route.id,
             'location_src_id': self.ressuply_loc.id,
             'location_id': self.warehouse.lot_stock_id.id,
-            'action': 'move',
+            'action': 'pull',
             'picking_type_id': self.warehouse.int_type_id.id,
             'procure_method': 'make_to_stock',
             'warehouse_id': self.warehouse.id,
@@ -75,12 +75,12 @@ class TestStockOrderpointRoute(common.TransactionCase):
             'propagate': 'False',
         })
 
-        self.env['procurement.rule'].create({
+        self.env['stock.rule'].create({
             'name': 'Transfer 2',
             'route_id': self.route2.id,
             'location_src_id': self.ressuply_loc2.id,
             'location_id': self.warehouse.lot_stock_id.id,
-            'action': 'move',
+            'action': 'pull',
             'picking_type_id': self.warehouse.int_type_id.id,
             'procure_method': 'make_to_stock',
             'warehouse_id': self.warehouse.id,
@@ -103,7 +103,7 @@ class TestStockOrderpointRoute(common.TransactionCase):
         return self.env['product.product'].create(dict(
             name=name,
             default_code=default_code,
-            uom_id=self.env.ref('product.product_uom_unit').id,
+            uom_id=self.env.ref('uom.product_uom_unit').id,
             company_id=company_id,
             type='product',
             **vals
