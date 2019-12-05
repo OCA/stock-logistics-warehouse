@@ -10,17 +10,37 @@ from odoo.fields import first
 class StockMoveLocationWizard(models.TransientModel):
     _name = "wiz.stock.move.location"
 
+    @api.multi
+    def _get_default_picking_type_id(self):
+        company_id = self.env.context.get('company_id') or \
+            self.env.user.company_id.id
+        return self.env['stock.picking.type'].search(
+            [('code', '=', 'internal'),
+             ('warehouse_id.company_id', '=', company_id)], limit=1).id
+
+    origin_location_disable = fields.Boolean(
+        compute="_compute_readonly_locations",
+        help="technical field to disable the edition of origin location."
+    )
     origin_location_id = fields.Many2one(
         string='Origin Location',
         comodel_name='stock.location',
         required=True,
         domain=lambda self: self._get_locations_domain(),
     )
+    destination_location_disable = fields.Boolean(
+        compute="_compute_readonly_locations",
+        help="technical field to disable the edition of destination location."
+    )
     destination_location_id = fields.Many2one(
         string='Destination Location',
         comodel_name='stock.location',
         required=True,
         domain=lambda self: self._get_locations_domain(),
+    )
+    picking_type_id = fields.Many2one(
+        comodel_name='stock.picking.type',
+        default=_get_default_picking_type_id,
     )
     stock_move_location_line_ids = fields.One2many(
         string="Move Location lines",
@@ -31,6 +51,17 @@ class StockMoveLocationWizard(models.TransientModel):
         string="Connected Picking",
         comodel_name="stock.picking",
     )
+    edit_locations = fields.Boolean(string='Edit Locations',
+                                    default=True)
+
+    @api.depends('edit_locations')
+    def _compute_readonly_locations(self):
+        for rec in self:
+            rec.origin_location_disable = self.env.context.get(
+                'origin_location_disable', False)
+            if not rec.edit_locations:
+                rec.origin_location_disable = True
+                rec.destination_location_disable = True
 
     @api.model
     def default_get(self, fields):
@@ -70,7 +101,7 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def _create_picking(self):
         return self.env['stock.picking'].create({
-            'picking_type_id': self.env.ref('stock.picking_type_internal').id,
+            'picking_type_id': self.picking_type_id.id,
             'location_id': self.origin_location_id.id,
             'location_dest_id': self.destination_location_id.id,
         })
@@ -131,6 +162,9 @@ class StockMoveLocationWizard(models.TransientModel):
         self._create_moves(picking)
         if not self.env.context.get("planned"):
             picking.button_validate()
+        else:
+            picking.action_confirm()
+            picking.action_assign()
         self.picking_id = picking
         return self._get_picking_action(picking.id)
 
@@ -166,12 +200,16 @@ class StockMoveLocationWizard(models.TransientModel):
         product_data = []
         for group in self._get_group_quants():
             product = product_obj.browse(group.get("product_id")).exists()
+            # Apply the putaway strategy
+            location_dest_id = \
+                self.destination_location_id.get_putaway_strategy(
+                    product).id or self.destination_location_id.id
             product_data.append({
                 'product_id': product.id,
                 'move_quantity': group.get("sum"),
                 'max_quantity': group.get("sum"),
                 'origin_location_id': self.origin_location_id.id,
-                'destination_location_id': self.destination_location_id.id,
+                'destination_location_id': location_dest_id,
                 # cursor returns None instead of False
                 'lot_id': group.get("lot_id") or False,
                 'product_uom_id': product.uom_id.id,
