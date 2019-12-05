@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_move_location
+# 	* stock_move_location
 #
 msgid ""
 msgstr ""
@@ -60,10 +60,25 @@ msgid "Destination Location"
 msgstr "Ziellagerort"
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_destination_location_disable
+#, fuzzy
+#| msgid "Destination Location"
+msgid "Destination Location Disable"
+msgstr "Ziellagerort"
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_display_name
 msgid "Display Name"
 msgstr "Anzeigename"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_edit_locations
+#: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+#, fuzzy
+#| msgid "Origin Location"
+msgid "Edit Locations"
+msgstr "Quelllagerort"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_id
@@ -115,6 +130,11 @@ msgid "Move Location lines"
 msgstr "Lagerort Buchungszeilen"
 
 #. module: stock_move_location
+#: model:ir.ui.view,arch_db:stock_move_location.stock_picking_type_kanban
+msgid "Move On Hand"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.actions.act_window,name:stock_move_location.wiz_stock_move_location_action
 #: model:ir.ui.menu,name:stock_move_location.menuitem_move_location
 msgid "Move from location..."
@@ -143,9 +163,21 @@ msgid "Origin Location"
 msgstr "Quelllagerort"
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_origin_location_disable
+#, fuzzy
+#| msgid "Origin Location"
+msgid "Origin Location Disable"
+msgstr "Quelllagerort"
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move_location_move
 msgid "Part of move location"
 msgstr "Teil der Lagerortbewegung"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_picking_type_id
+msgid "Picking Type"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -168,9 +200,26 @@ msgid "Quantity to move"
 msgstr "Anzahl"
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type_show_move_onhand
+msgid "Show Move On hand stock"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_stock_picking_type_show_move_onhand
+msgid ""
+"Show a button 'Move On Hand' in the Inventory Dashboard to initiate the "
+"process to move the products in stock at the origin location."
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_move
 msgid "Stock Move"
 msgstr "Lagerbewegung"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_picking_type
+msgid "The operation type determines the picking view"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -181,6 +230,16 @@ msgstr "Einheit"
 #: model:ir.model.fields,help:stock_move_location.field_stock_move_location_move
 msgid "Whether this move is a part of stock_location moves"
 msgstr "Ist diese Bewegung Teil der Lagerortbewegungen"
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location_destination_location_disable
+msgid "technical field to disable the edition of destination location."
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location_origin_location_disable
+msgid "technical field to disable the edition of origin location."
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_wiz_stock_move_location
