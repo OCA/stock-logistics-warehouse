@@ -36,8 +36,8 @@ another and move only selected quants.
 Usage
 =====
 
-* A new menuitem Stock > Move from location... opens a wizard
-  where 2 location ca be specified.
+* A new menu item Stock > Move from location... opens a wizard
+  where 2 location can be specified.
 * Select origin and destination locations and press "IMMEDIATE TRANSFER" or "PLANNED TRANSFER"
 * Press `ADD ALL` button to add all products available
 * Those lines can be edited. Move quantity can't be more than a max available quantity
@@ -54,6 +54,10 @@ If you want to transfer a full quant:
    opened.
 
 *  Select the quants which you want move to another location
+
+If you go to the Inventory Dashboard you can see the button "Move from location"
+in each of the picking types (only applicable to internal transfers). Press it
+and you will be directed to the wizard.
 
 Known issues / Roadmap
 ======================
@@ -89,6 +93,8 @@ Contributors
 * Mathieu Vatel <mathieu@julius.fr>
 * Mykhailo Panarin <m.panarin@mobilunity.com>
 * Sergio Teruel <sergio.teruel@tecnativa.com>
+* Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Lois Rilo <lois.rilo@eficent.com>
 
 Maintainers
 ~~~~~~~~~~~
