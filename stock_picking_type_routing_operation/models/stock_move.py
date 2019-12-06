@@ -289,10 +289,11 @@ class StockMove(models.Model):
             picking_type = destination._find_picking_type_for_routing("dest")
             if not picking_type:
                 continue
+
             if self.env["stock.location"].search(
                 [
-                    ("id", "=", picking_type.default_location_dest_id.id),
-                    ("id", "parent_of", move.location_dest_id.id),
+                    ("id", "=", picking_type.default_location_src_id.id),
+                    ("id", "parent_of", move.location_id.id),
                 ]
             ):
                 # This move has been created for the routing operation,
