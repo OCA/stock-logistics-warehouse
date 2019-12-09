@@ -238,9 +238,8 @@ class StockReserveRuleRemoval(models.Model):
         # largest containers as possible (1 pallet rather than 10 boxes)
         packaging_quantities = sorted(
             product.packaging_ids.filtered(
-                # it doesn't make sense to consider a unit as a packaging
                 lambda packaging: (
-                    packaging.qty > 1
+                    packaging.qty > 0
                     and (
                         packaging.packaging_type_id in packaging_type_filter
                         if packaging_type_filter
