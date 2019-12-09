@@ -50,10 +50,25 @@ msgid "Destination Location"
 msgstr "Ziellagerort"
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__destination_location_disable
+#, fuzzy
+#| msgid "Destination Location"
+msgid "Destination Location Disable"
+msgstr "Ziellagerort"
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__display_name
 msgid "Display Name"
 msgstr "Anzeigename"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__edit_locations
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+#, fuzzy
+#| msgid "Origin Location"
+msgid "Edit Locations"
+msgstr "Quelllagerort"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
@@ -105,6 +120,11 @@ msgid "Move Location lines"
 msgstr "Lagerort Buchungszeilen"
 
 #. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.stock_picking_type_kanban
+msgid "Move On Hand"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.actions.act_window,name:stock_move_location.wiz_stock_move_location_action
 #: model:ir.ui.menu,name:stock_move_location.menuitem_move_location
 msgid "Move from location..."
@@ -128,9 +148,22 @@ msgid "Origin Location"
 msgstr "Quelllagerort"
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_disable
+#, fuzzy
+#| msgid "Origin Location"
+msgid "Origin Location Disable"
+msgstr "Quelllagerort"
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
 msgid "Part of move location"
 msgstr "Teil der Lagerortbewegung"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_picking_type
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__picking_type_id
+msgid "Picking Type"
+msgstr ""
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -151,6 +184,18 @@ msgstr "Produkt Maßeinheit"
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__move_quantity
 msgid "Quantity to move"
 msgstr "Anzahl"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
+msgid "Show Move On hand stock"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_stock_picking_type__show_move_onhand
+msgid ""
+"Show a button 'Move On Hand' in the Inventory Dashboard to initiate the "
+"process to move the products in stock at the origin location."
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_move
@@ -180,6 +225,16 @@ msgstr "Teil der Lagerortbewegung"
 #| msgid "Move Location lines"
 msgid "Wizard move location line"
 msgstr "Lagerort Buchungszeilen"
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__destination_location_disable
+msgid "technical field to disable the edition of destination location."
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__origin_location_disable
+msgid "technical field to disable the edition of origin location."
+msgstr ""
 
 #~ msgid "Add all"
 #~ msgstr "Alle hinzufügen"
