@@ -151,8 +151,9 @@ class StockMoveLocationWizard(models.TransientModel):
         move = self.env["stock.move"].create(
             self._get_move_values(picking, lines),
         )
-        for line in lines:
-            line.create_move_lines(picking, move)
+        if not self.env.context.get("planned"):
+            for line in lines:
+                line.create_move_lines(picking, move)
         return move
 
     @api.multi
