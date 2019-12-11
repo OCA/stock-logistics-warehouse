@@ -1,6 +1,7 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
+from odoo.fields import first
 import odoo.addons.decimal_precision as dp
 
 
@@ -60,7 +61,6 @@ class SaleOrderLine(models.Model):
     def _get_line_rule(self):
         self.ensure_one()
         if self.route_id and self.route_id.rule_ids:
-            from odoo.fields import first
             return first(self.route_id.rule_ids.sorted(
             key=lambda r: (r.route_sequence, r.sequence)))
         """ Get applicable rule for this product
