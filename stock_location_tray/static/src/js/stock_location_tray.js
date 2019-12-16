@@ -172,7 +172,7 @@ var LocationTrayMatrixField = DebouncedField.extend({
      *
      */
     _renderInDOM: function () {
-        this.canvas = this.$el.find('canvas').context;
+        this.canvas = this.$el[0];
         var canvas = this.canvas;
         var ctx = canvas.getContext('2d');
         this.resizeCanvasToDisplaySize(ctx.canvas);

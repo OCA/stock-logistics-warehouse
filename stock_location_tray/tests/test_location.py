@@ -18,9 +18,7 @@ class TestLocation(LocationTrayTypeCase):
             }
         )
 
-        self.assertEqual(
-            len(tray_loc.child_ids), tray_type.cols * tray_type.rows  # 8
-        )
+        self.assertEqual(len(tray_loc.child_ids), tray_type.cols * tray_type.rows)  # 8
         self.assertTrue(
             all(
                 subloc.cell_in_tray_type_id == tray_type
@@ -29,9 +27,7 @@ class TestLocation(LocationTrayTypeCase):
         )
 
     def test_tray_has_stock(self):
-        cell = self.env.ref(
-            "stock_location_tray.stock_location_tray_demo_x3y2"
-        )
+        cell = self.env.ref("stock_location_tray.stock_location_tray_demo_x3y2")
         self.assertFalse(cell.quant_ids)
         self.assertFalse(cell.tray_cell_contains_stock)
         self._update_quantity_in_cell(cell, self.product, 1)
@@ -127,17 +123,13 @@ class TestLocation(LocationTrayTypeCase):
         )
 
     def test_check_active_empty(self):
-        cell = self.env.ref(
-            "stock_location_tray.stock_location_tray_demo_x3y2"
-        )
+        cell = self.env.ref("stock_location_tray.stock_location_tray_demo_x3y2")
         self.assertFalse(cell.tray_cell_contains_stock)
         # allowed to archive empty cell
         cell.active = False
 
     def test_check_active_not_empty(self):
-        cell = self.env.ref(
-            "stock_location_tray.stock_location_tray_demo_x3y2"
-        )
+        cell = self.env.ref("stock_location_tray.stock_location_tray_demo_x3y2")
         self._update_quantity_in_cell(cell, self.product, 1)
         self.assertTrue(cell.tray_cell_contains_stock)
 
@@ -151,13 +143,15 @@ class TestLocation(LocationTrayTypeCase):
             # restore state for the next test loop
             location.active = True
             location = location.location_id
+            if location == self.wh.lot_stock_id:
+                # we can't disable the Stock location anyway
+                break
 
     def test_change_tray_type_when_empty(self):
         tray_type = self.tray_type_small_32x
         self.tray_location.tray_type_id = tray_type
         self.assertEqual(
-            len(self.tray_location.child_ids),
-            tray_type.cols * tray_type.rows,  # 32
+            len(self.tray_location.child_ids), tray_type.cols * tray_type.rows  # 32
         )
 
     def test_change_tray_type_error_when_not_empty(self):
@@ -170,15 +164,11 @@ class TestLocation(LocationTrayTypeCase):
             self.tray_location.tray_type_id = tray_type
 
     def test_location_center_pos(self):
-        cell = self.env.ref(
-            "stock_location_tray.stock_location_tray_demo_x3y2"
-        )
+        cell = self.env.ref("stock_location_tray.stock_location_tray_demo_x3y2")
         tray_type = cell.cell_in_tray_type_id
         number_of_x = 4
         number_of_y = 2
-        self.assertEqual(
-            (number_of_x, number_of_y), (tray_type.cols, tray_type.rows)
-        )
+        self.assertEqual((number_of_x, number_of_y), (tray_type.cols, tray_type.rows))
 
         total_width = 80
         total_depth = 30
