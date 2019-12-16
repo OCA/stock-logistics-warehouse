@@ -1,9 +1,9 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models
-from odoo.tools.safe_eval import safe_eval
 from odoo.osv import expression
 from odoo.tools.float_utils import float_compare
+from odoo.tools.safe_eval import safe_eval
 
 
 def _default_sequence(record):
@@ -33,8 +33,7 @@ class StockReserveRule(models.Model):
     sequence = fields.Integer(default=lambda s: _default_sequence(s))
     active = fields.Boolean(default=True)
     company_id = fields.Many2one(
-        comodel_name="res.company",
-        default=lambda self: self.env.user.company_id.id,
+        comodel_name="res.company", default=lambda self: self.env.user.company_id.id
     )
 
     location_id = fields.Many2one(comodel_name="stock.location", required=True)
@@ -143,9 +142,7 @@ class StockReserveRuleRemoval(models.Model):
 
     def _eval_quant_domain(self, quants, domain):
         quant_domain = [("id", "in", quants.ids)]
-        return self.env["stock.quant"].search(
-            expression.AND([quant_domain, domain])
-        )
+        return self.env["stock.quant"].search(expression.AND([quant_domain, domain]))
 
     def _filter_quants(self, move, quants):
         domain = safe_eval(self.quant_domain) or []
@@ -206,7 +203,6 @@ class StockReserveRuleRemoval(models.Model):
                 (
                     sum(quants.mapped("quantity"))
                     - sum(quants.mapped("reserved_quantity")),
-                    quants,
                     location,
                 )
                 for location, quants in quants_per_bin
@@ -217,7 +213,7 @@ class StockReserveRuleRemoval(models.Model):
         # Propose the largest quants first, so we have as less operations
         # as possible. We take goods only if we empty the bin.
         rounding = fields.first(quants).product_id.uom_id.rounding
-        for location_quantity, quants, location in bins:
+        for location_quantity, location in bins:
             if location_quantity <= 0:
                 continue
 
@@ -253,9 +249,7 @@ class StockReserveRuleRemoval(models.Model):
         rounding = product.uom_id.rounding
 
         def is_greater_eq(value, other):
-            return (
-                float_compare(value, other, precision_rounding=rounding) >= 0
-            )
+            return float_compare(value, other, precision_rounding=rounding) >= 0
 
         for pack_quantity in packaging_quantities:
             # Get quants quantity on each loop because they may change.
@@ -266,7 +260,6 @@ class StockReserveRuleRemoval(models.Model):
                     (
                         sum(quants.mapped("quantity"))
                         - sum(quants.mapped("reserved_quantity")),
-                        quants,
                         location,
                     )
                     for location, quants in quants_per_bin
@@ -274,12 +267,10 @@ class StockReserveRuleRemoval(models.Model):
                 reverse=True,
             )
 
-            for location_quantity, quants, location in bins:
+            for location_quantity, location in bins:
                 if location_quantity <= 0:
                     continue
-                enough_for_packaging = is_greater_eq(
-                    location_quantity, pack_quantity
-                )
+                enough_for_packaging = is_greater_eq(location_quantity, pack_quantity)
                 asked_more_than_packaging = is_greater_eq(need, pack_quantity)
                 if enough_for_packaging and asked_more_than_packaging:
                     # compute how much packaging we can get

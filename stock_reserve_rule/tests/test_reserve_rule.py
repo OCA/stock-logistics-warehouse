@@ -101,9 +101,7 @@ class TestReserveRule(common.SavepointCase):
         return picking
 
     def _update_qty_in_location(self, location, product, quantity):
-        self.env["stock.quant"]._update_available_quantity(
-            product, location, quantity
-        )
+        self.env["stock.quant"]._update_available_quantity(product, location, quantity)
 
     def _create_rule(self, rule_values, removal_values):
         rule_config = {
@@ -113,6 +111,8 @@ class TestReserveRule(common.SavepointCase):
         }
         rule_config.update(rule_values)
         self.env["stock.reserve.rule"].create(rule_config)
+        # workaround for https://github.com/odoo/odoo/pull/41900
+        self.env["stock.reserve.rule"].invalidate_cache()
 
     def _setup_packagings(self, product, packagings):
         """Create packagings on a product
@@ -219,7 +219,7 @@ class TestReserveRule(common.SavepointCase):
             ],
         )
         self.assertEqual(move.state, "partially_available")
-        self.assertEqual(move.reserved_availability, 300.)
+        self.assertEqual(move.reserved_availability, 300.0)
 
     def test_rule_fallback(self):
         reserve = self.env["stock.location"].create(
@@ -254,7 +254,7 @@ class TestReserveRule(common.SavepointCase):
             ],
         )
         self.assertEqual(move.state, "assigned")
-        self.assertEqual(move.reserved_availability, 400.)
+        self.assertEqual(move.reserved_availability, 400.0)
 
     def test_rule_domain(self):
         self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
@@ -355,9 +355,9 @@ class TestReserveRule(common.SavepointCase):
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 150.},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 50.},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 50.},
+                {"location_id": self.loc_zone1_bin2.id, "product_qty": 150.0},
+                {"location_id": self.loc_zone2_bin1.id, "product_qty": 50.0},
+                {"location_id": self.loc_zone3_bin1.id, "product_qty": 50.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -389,8 +389,8 @@ class TestReserveRule(common.SavepointCase):
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin1.id, "product_qty": 50.},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 30.},
+                {"location_id": self.loc_zone1_bin1.id, "product_qty": 50.0},
+                {"location_id": self.loc_zone2_bin1.id, "product_qty": 30.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -424,8 +424,8 @@ class TestReserveRule(common.SavepointCase):
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 60.},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 20.},
+                {"location_id": self.loc_zone1_bin2.id, "product_qty": 60.0},
+                {"location_id": self.loc_zone2_bin1.id, "product_qty": 20.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -433,10 +433,7 @@ class TestReserveRule(common.SavepointCase):
     def test_rule_packaging(self):
         self._setup_packagings(
             self.product1,
-            [
-                ("Pallet", 500, self.pallet),
-                ("Retail Box", 50, self.retail_box),
-            ],
+            [("Pallet", 500, self.pallet), ("Retail Box", 50, self.retail_box)],
         )
         self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 40)
         self._update_qty_in_location(self.loc_zone1_bin2, self.product1, 510)
@@ -470,9 +467,9 @@ class TestReserveRule(common.SavepointCase):
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 500.},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 50.},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 40.},
+                {"location_id": self.loc_zone1_bin2.id, "product_qty": 500.0},
+                {"location_id": self.loc_zone2_bin1.id, "product_qty": 50.0},
+                {"location_id": self.loc_zone3_bin1.id, "product_qty": 40.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -553,9 +550,9 @@ class TestReserveRule(common.SavepointCase):
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 500.},
-                {"location_id": self.loc_zone2_bin2.id, "product_qty": 50.},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 10.},
+                {"location_id": self.loc_zone1_bin2.id, "product_qty": 500.0},
+                {"location_id": self.loc_zone2_bin2.id, "product_qty": 50.0},
+                {"location_id": self.loc_zone3_bin1.id, "product_qty": 10.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
