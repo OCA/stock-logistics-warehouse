@@ -155,7 +155,6 @@
         <field name="name">Vertical Lift Shuttles</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">vertical.lift.shuttle</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="target">current</field>
         <field name="domain">[]</field>

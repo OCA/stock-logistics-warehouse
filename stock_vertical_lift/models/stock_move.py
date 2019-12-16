@@ -1,13 +1,12 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import models
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.multi
     def write(self, vals):
         result = super().write(vals)
         if "state" in vals:

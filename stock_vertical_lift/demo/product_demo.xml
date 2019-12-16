@@ -13,7 +13,6 @@
         <field name="tracking">none</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="property_stock_inventory" ref="stock.location_inventory"/>
     </record>
 
     <record id="product_recovery_socks" model="product.product">
@@ -28,7 +27,6 @@
         <field name="tracking">none</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="property_stock_inventory" ref="stock.location_inventory"/>
     </record>
 
 </odoo>

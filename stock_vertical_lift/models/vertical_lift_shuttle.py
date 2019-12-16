@@ -4,7 +4,7 @@ import logging
 import socket
 import ssl
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -49,7 +49,6 @@ class VerticalLiftShuttle(models.Model):
         )
     ]
 
-    @api.model
     def _selection_hardware(self):
         return [("simulation", "Simulation")]
 
@@ -161,7 +160,7 @@ class VerticalLiftShuttle(models.Model):
             "res_id": operation.id,
             "target": "fullscreen",
             "flags": {
-                "headless": True,
+                "withControlPanel": False,
                 "form_view_initial_mode": "edit",
                 "no_breadcrumbs": True,
             },
@@ -222,7 +221,6 @@ class VerticalLiftShuttleManualBarcode(models.TransientModel):
 
     barcode = fields.Char(string="Barcode")
 
-    @api.multi
     def button_save(self):
         active_id = self.env.context.get("active_id")
         model = self.env.context.get("active_model")

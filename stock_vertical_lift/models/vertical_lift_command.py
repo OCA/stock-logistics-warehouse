@@ -12,17 +12,17 @@ class VerticalLiftCommand(models.Model):
     _order = "shuttle_id, name desc"
     _description = "commands sent to the shuttle"
 
-    @api.model
     def _default_name(self):
         return self.env["ir.sequence"].next_by_code("vertical.lift.command")
 
-    name = fields.Char("Name", default=_default_name, required=True, index=True)
+    name = fields.Char(
+        "Name", default=lambda s: s._default_name(), required=True, index=True
+    )
     command = fields.Char(required=True)
     answer = fields.Char()
     error = fields.Char()
     shuttle_id = fields.Many2one("vertical.lift.shuttle", required=True)
 
-    @api.model
     def record_answer(self, answer):
         name = self._get_key(answer)
         record = self.search([("name", "=", name)], limit=1)
@@ -34,11 +34,10 @@ class VerticalLiftCommand(models.Model):
         return record
 
     def _get_key(self, answer):
-        key = answer.split("|")[1]
+        key = answer.split("|")[1:2]
         return key
 
     @api.model_create_multi
-    @api.returns("self", lambda value: value.id)
     def create(self, vals_list):
         for values in vals_list:
             if "name" not in values:
