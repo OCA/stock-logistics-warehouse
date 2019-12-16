@@ -3,6 +3,7 @@
 
 from odoo import _, api, exceptions, fields, models
 from odoo.osv import expression
+
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
 
@@ -19,8 +20,8 @@ class StockLocationTrayType(models.Model):
     depth = fields.Integer(help="Depth of the tray in mm")
     height = fields.Integer(help="Height of the tray in mm")
 
-    width_per_cell = fields.Float(compute='_compute_width_per_cell')
-    depth_per_cell = fields.Float(compute='_compute_depth_per_cell')
+    width_per_cell = fields.Float(compute="_compute_width_per_cell")
+    depth_per_cell = fields.Float(compute="_compute_depth_per_cell")
 
     active = fields.Boolean(default=True)
     tray_matrix = Serialized(compute="_compute_tray_matrix")
@@ -33,7 +34,7 @@ class StockLocationTrayType(models.Model):
         for record in self:
             width = record.width
             if not width:
-                record.width_per_cell = 0.
+                record.width_per_cell = 0.0
                 continue
             record.width_per_cell = width / record.cols
 
@@ -42,7 +43,7 @@ class StockLocationTrayType(models.Model):
         for record in self:
             depth = record.depth
             if not depth:
-                record.depth_per_cell = 0.
+                record.depth_per_cell = 0.0
                 continue
             record.depth_per_cell = depth / record.rows
 
@@ -56,7 +57,6 @@ class StockLocationTrayType(models.Model):
             cells = self._generate_cells_matrix(default_state=1)
             record.tray_matrix = {"selected": [], "cells": cells}
 
-    @api.model
     def _name_search(
         self, name, args=None, operator="ilike", limit=100, name_get_uid=None
     ):
@@ -65,9 +65,7 @@ class StockLocationTrayType(models.Model):
         if name:
             domain = ["|", ("name", operator, name), ("code", operator, name)]
         tray_ids = self._search(
-            expression.AND([domain, args]),
-            limit=limit,
-            access_rights_uid=name_get_uid,
+            expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid
         )
         return self.browse(tray_ids).name_get()
 
@@ -106,7 +104,6 @@ class StockLocationTrayType(models.Model):
                     ).format(record.name, "\n".join(location_bullets))
                 )
 
-    @api.multi
     def open_locations(self):
         action = self.env.ref("stock.action_location_form").read()[0]
         action["domain"] = [("tray_type_id", "in", self.ids)]

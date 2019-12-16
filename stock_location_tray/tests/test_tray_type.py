@@ -11,27 +11,21 @@ class TestLocationTrayType(LocationTrayTypeCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.used_tray_type = cls.env.ref(
-            'stock_location_tray.stock_location_tray_type_large_16x'
+            "stock_location_tray.stock_location_tray_type_large_16x"
         )
         cls.unused_tray_type = cls.env.ref(
-            'stock_location_tray.stock_location_tray_type_small_16x_3'
+            "stock_location_tray.stock_location_tray_type_small_16x_3"
         )
 
     def test_tray_type(self):
         # any location created directly under the view is a shuttle
-        tray_type = self.env['stock.location.tray.type'].create(
-            {
-                'name': 'Test Type',
-                'code': '🐵',
-                'usage': 'internal',
-                'rows': 4,
-                'cols': 6,
-            }
+        tray_type = self.env["stock.location.tray.type"].create(
+            {"name": "Test Type", "code": "🐵", "rows": 4, "cols": 6}
         )
         self.assertEqual(
             tray_type.tray_matrix,
             {
-                'selected': [],  # no selection as this is the "model"
+                "selected": [],  # no selection as this is the "model"
                 # a "full" matrix is generated for display on the UI
                 # fmt: off
                 'cells': [
@@ -49,7 +43,7 @@ class TestLocationTrayType(LocationTrayTypeCase):
         location.tray_type_id = self.used_tray_type
         location = self.used_tray_type.location_ids
         self.assertTrue(location)
-        message = 'cannot be archived.*{}.*'.format(location.name)
+        message = "cannot be archived.*{}.*".format(location.name)
         # we cannot archive used ones
         with self.assertRaisesRegex(exceptions.ValidationError, message):
             self.used_tray_type.active = False
@@ -61,7 +55,7 @@ class TestLocationTrayType(LocationTrayTypeCase):
         location.tray_type_id = self.used_tray_type
         location = self.used_tray_type.location_ids
         self.assertTrue(location)
-        message = 'size cannot be changed.*{}.*'.format(location.name)
+        message = "size cannot be changed.*{}.*".format(location.name)
         # we cannot modify size of used ones
         with self.assertRaisesRegex(exceptions.ValidationError, message):
             self.used_tray_type.rows = 10
