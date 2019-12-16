@@ -36,12 +36,8 @@ class OrderpointTemplate(models.Model):
         help="Auto compute minimum quantity "
              "per product for a given a date range",
     )
-    auto_min_date_start = fields.Datetime(
-        string="From",
-    )
-    auto_min_date_end = fields.Datetime(
-        string="To",
-    )
+    auto_min_date_start = fields.Datetime()
+    auto_min_date_end = fields.Datetime()
     auto_min_qty_criteria = fields.Selection(
         selection=[
             ('max', 'Maximum'),
@@ -50,7 +46,6 @@ class OrderpointTemplate(models.Model):
             ('min', 'Minimum'),
         ],
         default='max',
-        string="Criteria",
         help="Select a criteria to auto compute the minimum",
     )
     auto_max_qty = fields.Boolean(
@@ -65,15 +60,10 @@ class OrderpointTemplate(models.Model):
             ('avg', 'Average'),
             ('min', 'Minimum'),
         ],
-        string="Criteria",
         help="Select a criteria to auto compute the maximum",
     )
-    auto_max_date_start = fields.Datetime(
-        string="From",
-    )
-    auto_max_date_end = fields.Datetime(
-        string="To",
-    )
+    auto_max_date_start = fields.Datetime()
+    auto_max_date_end = fields.Datetime()
     auto_generate = fields.Boolean(
         string='Create Rules Automatically',
         help="When checked, the 'Reordering Rule Templates Generator' "
