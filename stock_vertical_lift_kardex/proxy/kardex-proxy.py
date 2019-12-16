@@ -87,11 +87,11 @@ class KardexClientProtocol(asyncio.Protocol):
         if b"\r\n" in self.buffer:
             msg, sep, rem = self.buffer.partition(b"\r\n")
             self.buffer = rem
-            msg = msg.decode('iso-8859-1', 'replace').strip()
-            if msg.startswith('0|ping'):
-                _logger.info('ping ok')
+            msg = msg.decode("iso-8859-1", "replace").strip()
+            if msg.startswith("0|ping"):
+                _logger.info("ping ok")
             else:
-                _logger.info('notify odoo: %s', msg)
+                _logger.info("notify odoo: %s", msg)
                 self.loop.create_task(self.notify_odoo(msg))
 
     def connection_lost(self, exc):
@@ -100,12 +100,10 @@ class KardexClientProtocol(asyncio.Protocol):
     async def notify_odoo(self, msg):
         url = self.args.odoo_url + "/vertical-lift"
         async with aiohttp.ClientSession() as session:
-            params = {'answer': msg, 'secret': self.args.secret}
+            params = {"answer": msg, "secret": self.args.secret}
             async with session.post(url, data=params) as resp:
                 resp_text = await resp.text()
-                _logger.info(
-                    'Reponse from Odoo: %s %s', resp.status, resp_text
-                )
+                _logger.info("Reponse from Odoo: %s %s", resp.status, resp_text)
 
 
 def main(args, ssl_context=None):
@@ -116,9 +114,7 @@ def main(args, ssl_context=None):
     queue = asyncio.Queue(loop=loop)
     # create the main server
     coro = loop.create_server(
-        lambda: KardexProxyProtocol(loop, queue, args),
-        host=args.host,
-        port=args.port
+        lambda: KardexProxyProtocol(loop, queue, args), host=args.host, port=args.port
     )
     loop.run_until_complete(coro)
 
@@ -160,7 +156,7 @@ def make_parser():
         ("--port", listen_port, int),
         ("--odoo-url", odoo_url, str),
         ("--odoo-db", odoo_db, str),
-        ("--secret",  secret, str),
+        ("--secret", secret, str),
         ("--kardex-host", kardex_host, str),
         ("--kardex-port", kardex_port, str),
         ("--kardex-use-tls", kardex_use_tls, bool),
@@ -168,6 +164,7 @@ def make_parser():
     for name, default, type_ in arguments:
         parser.add_argument(name, default=default, action="store", type=type_)
     return parser
+
 
 if __name__ == "__main__":
     parser = make_parser()
