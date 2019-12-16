@@ -11,7 +11,7 @@
     'summary': """Add a limit by product quantity on a stock location.
                 This limit can later be used to track the capacity
                 available of the location.""",
-    'category': 'Stock Management',
+    'category': 'Warehouse',
     'depends': [
         'stock',
     ],

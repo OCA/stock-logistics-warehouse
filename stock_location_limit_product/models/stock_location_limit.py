@@ -2,7 +2,7 @@
 # Copyright (C) 2019 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockLocationLimit(models.Model):
@@ -19,23 +19,13 @@ class StockLocationLimit(models.Model):
         'product.product',
         string='Product',
     )
-    qty = fields.Integer('Maximum Quantity')
+    qty = fields.Float('Maximum Quantity')
     uom_id = fields.Many2one(
         'uom.uom',
+        related='product_id.uom_id',
         string='UoM',
-        default=lambda self: self.product_id.uom_id.id
     )
     location_id = fields.Many2one(
         'stock.location',
         string='Location',
     )
-
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        """Onchange Product.
-
-        Set default uom of the selected product.
-        """
-        for rec in self:
-            if rec.product_id:
-                rec.uom_id = rec.product_id.uom_id and rec.product_id.uom_id.id
