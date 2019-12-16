@@ -11,9 +11,7 @@ class VerticalLiftOperationPick(models.Model):
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
-        location = self.env["stock.location"].search(
-            [("barcode", "=", barcode)]
-        )
+        location = self.env["stock.location"].search([("barcode", "=", barcode)])
         if location:
             self.current_move_line_id.location_dest_id = location
             self.operation_descr = _("Save")
@@ -65,9 +63,7 @@ class VerticalLiftOperationPick(models.Model):
         # TODO use a state machine to define next steps and
         # description?
         descr = (
-            _("Scan New Destination Location")
-            if next_move_line
-            else _("No operations")
+            _("Scan New Destination Location") if next_move_line else _("No operations")
         )
         self.operation_descr = descr
         if next_move_line:

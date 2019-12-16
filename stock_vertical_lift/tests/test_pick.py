@@ -21,8 +21,7 @@ class TestPick(VerticalLiftCase):
         self.shuttle.switch_pick()
         self.assertEqual(self.shuttle.mode, "pick")
         self.assertEqual(
-            self.shuttle._operation_for_mode().current_move_line_id,
-            self.out_move_line,
+            self.shuttle._operation_for_mode().current_move_line_id, self.out_move_line
         )
 
     def test_pick_action_open_screen(self):
@@ -39,9 +38,7 @@ class TestPick(VerticalLiftCase):
         operation = self.shuttle._operation_for_mode()
         operation.select_next_move_line()
         self.assertEqual(operation.current_move_line_id, self.out_move_line)
-        self.assertEqual(
-            operation.operation_descr, _("Scan New Destination Location")
-        )
+        self.assertEqual(operation.operation_descr, _("Scan New Destination Location"))
 
     def test_pick_save(self):
         self.shuttle.switch_pick()
@@ -71,8 +68,7 @@ class TestPick(VerticalLiftCase):
             ml.location_id.location_id.tray_type_id,
         )
         self.assertEqual(
-            operation.tray_type_code,
-            ml.location_id.location_id.tray_type_id.code,
+            operation.tray_type_code, ml.location_id.location_id.tray_type_id.code
         )
         self.assertEqual(operation.tray_x, ml.location_id.posx)
         self.assertEqual(operation.tray_y, ml.location_id.posy)
@@ -80,9 +76,7 @@ class TestPick(VerticalLiftCase):
         # Move line related fields
         self.assertEqual(operation.picking_id, ml.picking_id)
         self.assertEqual(operation.picking_origin, ml.picking_id.origin)
-        self.assertEqual(
-            operation.picking_partner_id, ml.picking_id.partner_id
-        )
+        self.assertEqual(operation.picking_partner_id, ml.picking_id.partner_id)
         self.assertEqual(operation.product_id, ml.product_id)
         self.assertEqual(operation.product_uom_id, ml.product_uom_id)
         self.assertEqual(operation.product_uom_qty, ml.product_uom_qty)
@@ -100,13 +94,11 @@ class TestPick(VerticalLiftCase):
         # ensure that we have stock in some cells, we'll put product1
         # in the first Shuttle and product2 in the second
         cell1 = self.env.ref(
-            "stock_vertical_lift."
-            "stock_location_vertical_lift_demo_tray_1a_x3y2"
+            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x3y2"
         )
         self._update_quantity_in_cell(cell1, product1, 50)
         cell2 = self.env.ref(
-            "stock_vertical_lift."
-            "stock_location_vertical_lift_demo_tray_2a_x1y1"
+            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_2a_x1y1"
         )
         self._update_quantity_in_cell(cell2, product2, 50)
 
@@ -203,8 +195,7 @@ class TestPick(VerticalLiftCase):
 
     def test_tray_qty(self):
         cell = self.env.ref(
-            "stock_vertical_lift."
-            "stock_location_vertical_lift_demo_tray_1a_x3y2"
+            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x3y2"
         )
         self.out_move_line.location_id = cell
         operation = self.shuttle._operation_for_mode()

@@ -109,9 +109,7 @@ class VerticalLiftOperationPut(models.Model):
         self.current_operation_line_id.process()
 
     def button_release(self):
-        self.write(
-            {"operation_line_ids": [(2, self.current_operation_line_id.id)]}
-        )
+        self.write({"operation_line_ids": [(2, self.current_operation_line_id.id)]})
         return super().button_release()
 
     def button_save(self):
@@ -138,9 +136,7 @@ class VerticalLiftOperationPut(models.Model):
 
     def action_select_operations(self):
         self.ensure_one()
-        menu_xmlid = (
-            "stock_vertical_lift." "vertical_lift_operation_put_select_view"
-        )
+        menu_xmlid = "stock_vertical_lift." "vertical_lift_operation_put_select_view"
         select_model = self.env["vertical.lift.operation.put.select"]
         select = select_model.create(
             {
@@ -165,13 +161,9 @@ class VerticalLiftOperationPutLine(models.Model):
     _description = "Vertical Lift Operation Put Line"
 
     operation_id = fields.Many2one(
-        comodel_name="vertical.lift.operation.put",
-        required=True,
-        readonly=True,
+        comodel_name="vertical.lift.operation.put", required=True, readonly=True
     )
-    move_line_id = fields.Many2one(
-        comodel_name="stock.move.line", readonly=True
-    )
+    move_line_id = fields.Many2one(comodel_name="stock.move.line", readonly=True)
 
     def process(self):
         line = self.move_line_id
@@ -186,9 +178,7 @@ class VerticalLiftOperationPutSelect(models.TransientModel):
     _description = "Vertical Lift Operation Put Select"
 
     operation_id = fields.Many2one(
-        comodel_name="vertical.lift.operation.put",
-        required=True,
-        readonly=True,
+        comodel_name="vertical.lift.operation.put", required=True, readonly=True
     )
     move_line_ids = fields.Many2many(comodel_name="stock.move.line")
 
@@ -197,10 +187,7 @@ class VerticalLiftOperationPutSelect(models.TransientModel):
         operation_line_model = self.env["vertical.lift.operation.put.line"]
         operation_line_model.create(
             [
-                {
-                    "operation_id": self.operation_id.id,
-                    "move_line_id": move_line.id,
-                }
+                {"operation_id": self.operation_id.id, "move_line_id": move_line.id}
                 for move_line in self.move_line_ids
             ]
         )
@@ -217,9 +204,7 @@ class VerticalLiftOperationPutSelect(models.TransientModel):
         ]
 
     def action_add_all(self):
-        move_lines = self.env["stock.move.line"].search(
-            self._move_line_domain()
-        )
+        move_lines = self.env["stock.move.line"].search(self._move_line_domain())
         self.move_line_ids = move_lines
         self._sync_lines()
         return {"type": "ir.actions.act_window_close"}
@@ -227,9 +212,7 @@ class VerticalLiftOperationPutSelect(models.TransientModel):
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
         domain = self._move_line_domain()
-        domain = expression.AND(
-            [domain, [("product_id.barcode", "=", barcode)]]
-        )
+        domain = expression.AND([domain, [("product_id.barcode", "=", barcode)]])
         move_lines = self.env["stock.move.line"].search(domain)
         # note: on_barcode_scanned is called in an onchange, so 'self'
         # is a NewID, we can't use 'write()' on it.

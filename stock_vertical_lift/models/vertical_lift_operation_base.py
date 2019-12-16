@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
 
@@ -16,9 +17,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
     shuttle_id = fields.Many2one(
         comodel_name="vertical.lift.shuttle", required=True, readonly=True
     )
-    location_id = fields.Many2one(
-        related="shuttle_id.location_id", readonly=True
-    )
+    location_id = fields.Many2one(related="shuttle_id.location_id", readonly=True)
     number_of_ops = fields.Integer(
         compute="_compute_number_of_ops", string="Number of Operations"
     )
@@ -27,9 +26,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
         string="Number of Operations in all shuttles",
     )
     mode = fields.Selection(related="shuttle_id.mode", readonly=True)
-    operation_descr = fields.Char(
-        string="Operation", default="...", readonly=True
-    )
+    operation_descr = fields.Char(string="Operation", default="...", readonly=True)
 
     _sql_constraints = [
         (
@@ -83,17 +80,12 @@ class VerticalLiftOperationBase(models.AbstractModel):
                 for pkg in product.packaging_ids
             ]
         }
-        content = self.env["ir.qweb"].render(
-            "stock_vertical_lift.packagings", values
-        )
+        content = self.env["ir.qweb"].render("stock_vertical_lift.packagings", values)
         return content
 
     def _get_tray_qty(self, product, location):
         quants = self.env["stock.quant"].search(
-            [
-                ("location_id", "=", location.id),
-                ("product_id", "=", product.id),
-            ]
+            [("location_id", "=", location.id), ("product_id", "=", product.id)]
         )
         return sum(quants.mapped("quantity"))
 
@@ -112,10 +104,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
         channel = "notify_vertical_lift_screen"
         bus_message = {
             "action": "refresh",
-            "params": {
-                "model": self._name,
-                "id": self.id,
-            }
+            "params": {"model": self._name, "id": self.id},
         }
         self.env["bus.bus"].sendone(channel, bus_message)
 
@@ -142,15 +131,11 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
         compute="_compute_tray_data",
         string="Tray Type",
     )
-    tray_type_code = fields.Char(
-        compute="_compute_tray_data", string="Tray Code"
-    )
+    tray_type_code = fields.Char(compute="_compute_tray_data", string="Tray Code")
     tray_x = fields.Integer(string="X", compute="_compute_tray_data")
     tray_y = fields.Integer(string="Y", compute="_compute_tray_data")
     tray_matrix = Serialized(string="Cells", compute="_compute_tray_data")
-    tray_qty = fields.Float(
-        string="Stock Quantity", compute="_compute_tray_qty"
-    )
+    tray_qty = fields.Float(string="Stock Quantity", compute="_compute_tray_qty")
 
     # current operation information
     picking_id = fields.Many2one(
@@ -174,12 +159,8 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     product_packagings = fields.Html(
         string="Packaging", compute="_compute_product_packagings"
     )
-    qty_done = fields.Float(
-        related="current_move_line_id.qty_done", readonly=True
-    )
-    lot_id = fields.Many2one(
-        related="current_move_line_id.lot_id", readonly=True
-    )
+    qty_done = fields.Float(related="current_move_line_id.qty_done", readonly=True)
+    lot_id = fields.Many2one(related="current_move_line_id.lot_id", readonly=True)
     location_dest_id = fields.Many2one(
         string="Destination",
         related="current_move_line_id.location_dest_id",
@@ -217,7 +198,7 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     def _compute_tray_qty(self):
         for record in self:
             if not (record.tray_location_id and record.current_move_line_id):
-                record.tray_qty = 0.
+                record.tray_qty = 0.0
                 continue
             product = record.current_move_line_id.product_id
             location = record.tray_location_id
@@ -250,9 +231,7 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     def count_move_lines_to_do(self):
         """Count move lines to process in current shuttles"""
         self.ensure_one()
-        return self.env["stock.move.line"].search_count(
-            self._domain_move_lines_to_do()
-        )
+        return self.env["stock.move.line"].search_count(self._domain_move_lines_to_do())
 
     def count_move_lines_to_do_all(self):
         """Count move lines to process in all shuttles"""

@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _
+
 from .common import VerticalLiftCase
 
 
@@ -19,27 +20,19 @@ class TestInventory(VerticalLiftCase):
         action = self.shuttle.action_open_screen()
         operation = self.shuttle._operation_for_mode()
         self.assertEqual(action["type"], "ir.actions.act_window")
-        self.assertEqual(
-            action["res_model"], "vertical.lift.operation.inventory"
-        )
+        self.assertEqual(action["res_model"], "vertical.lift.operation.inventory")
         self.assertEqual(action["res_id"], operation.id)
 
     def test_inventory_count_ops(self):
-        self._update_qty_in_location(
-            self.location_1a_x1y1, self.product_socks, 10
-        )
-        self._update_qty_in_location(
-            self.location_1a_x2y1, self.product_recovery, 10
-        )
+        self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
+        self._update_qty_in_location(self.location_1a_x2y1, self.product_recovery, 10)
         self._create_inventory(
             [
                 (self.location_1a_x1y1, self.product_socks),
                 (self.location_1a_x2y1, self.product_recovery),
             ]
         )
-        self._update_qty_in_location(
-            self.location_2a_x1y1, self.product_socks, 10
-        )
+        self._update_qty_in_location(self.location_2a_x1y1, self.product_socks, 10)
         self._create_inventory([(self.location_2a_x1y1, self.product_socks)])
 
         self.shuttle.switch_inventory()
@@ -48,17 +41,13 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(operation.number_of_ops_all, 3)
 
     def test_process_current_inventory(self):
-        self._update_qty_in_location(
-            self.location_1a_x1y1, self.product_socks, 10
-        )
+        self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
         inventory = self._create_inventory(
             [(self.location_1a_x1y1, self.product_socks)]
         )
         self.shuttle.switch_inventory()
         operation = self.shuttle._operation_for_mode()
-        self.assertEqual(
-            operation.current_inventory_line_id, inventory.line_ids
-        )
+        self.assertEqual(operation.current_inventory_line_id, inventory.line_ids)
         # test the happy path, quantity is correct
         operation.quantity_input = 10.0
         result = operation.button_save()
@@ -79,9 +68,7 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(result, expected_result)
 
     def test_wrong_quantity(self):
-        self._update_qty_in_location(
-            self.location_1a_x1y1, self.product_socks, 10
-        )
+        self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
         inventory = self._create_inventory(
             [(self.location_1a_x1y1, self.product_socks)]
         )
@@ -97,8 +84,7 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(operation.state, "confirm_wrong_quantity")
         self.assertEqual(operation.current_inventory_line_id, line)
         self.assertEqual(
-            operation.operation_descr,
-            _("The quantity does not match, are you sure?"),
+            operation.operation_descr, _("The quantity does not match, are you sure?")
         )
 
         # entering the same quantity a second time validates

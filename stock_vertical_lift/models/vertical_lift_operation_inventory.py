@@ -2,8 +2,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-from odoo.addons.base_sparse_field.models.fields import Serialized
 from odoo.tools import float_compare
+
+from odoo.addons.base_sparse_field.models.fields import Serialized
 
 # TODO handle autofocus + easy way to validate for the input field
 
@@ -24,10 +25,7 @@ class VerticalLiftOperationInventory(models.Model):
     state = fields.Selection(
         selection=[
             ("quantity", "Inventory, please enter the amount"),
-            (
-                "confirm_wrong_quantity",
-                "The quantity does not match, are you sure?",
-            ),
+            ("confirm_wrong_quantity", "The quantity does not match, are you sure?"),
             ("save", "Save"),
         ],
         default="quantity",
@@ -44,15 +42,11 @@ class VerticalLiftOperationInventory(models.Model):
         compute="_compute_tray_data",
         string="Tray Type",
     )
-    tray_type_code = fields.Char(
-        compute="_compute_tray_data", string="Tray Code"
-    )
+    tray_type_code = fields.Char(compute="_compute_tray_data", string="Tray Code")
     tray_x = fields.Integer(string="X", compute="_compute_tray_data")
     tray_y = fields.Integer(string="Y", compute="_compute_tray_data")
     tray_matrix = Serialized(string="Cells", compute="_compute_tray_data")
-    tray_qty = fields.Float(
-        string="Stock Quantity", compute="_compute_tray_qty"
-    )
+    tray_qty = fields.Float(string="Stock Quantity", compute="_compute_tray_qty")
 
     # current operation information
     inventory_id = fields.Many2one(
@@ -105,10 +99,8 @@ class VerticalLiftOperationInventory(models.Model):
     @api.depends("tray_location_id", "current_inventory_line_id.product_id")
     def _compute_tray_qty(self):
         for record in self:
-            if not (
-                record.tray_location_id and record.current_inventory_line_id
-            ):
-                record.tray_qty = 0.
+            if not (record.tray_location_id and record.current_inventory_line_id):
+                record.tray_qty = 0.0
                 continue
             product = record.current_inventory_line_id.product_id
             location = record.tray_location_id
@@ -151,11 +143,7 @@ class VerticalLiftOperationInventory(models.Model):
 
     def reset(self):
         self.write(
-            {
-                "quantity_input": 0.,
-                "last_quantity_input": 0.,
-                "state": "quantity",
-            }
+            {"quantity_input": 0.0, "last_quantity_input": 0.0, "state": "quantity"}
         )
         self.update_step_description()
 
@@ -216,7 +204,7 @@ class VerticalLiftOperationInventory(models.Model):
                 return True
             else:
                 self.last_quantity_input = self.quantity_input
-                self.quantity_input = 0.
+                self.quantity_input = 0.0
                 self.step_to("confirm_wrong_quantity")
                 return False
         if self.step() == "confirm_wrong_quantity":
@@ -255,7 +243,6 @@ class VerticalLiftOperationInventory(models.Model):
         self.reset()
         if (
             next_line
-            and previous_line.vertical_lift_tray_id
-            != next_line.vertical_lift_tray_id
+            and previous_line.vertical_lift_tray_id != next_line.vertical_lift_tray_id
         ):
             self.fetch_tray()

@@ -2,17 +2,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
+
 from odoo import models
 
 _logger = logging.getLogger(__name__)
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     def _hardware_kardex_prepare_payload(self, cell_location=None):
-        message_template = ("{code}|{hostId}|{addr}|{carrier}|{carrierNext}|"
-                            "{x}|{y}|{boxType}|{Q}|{order}|{part}|{desc}|\r\n")
+        message_template = (
+            "{code}|{hostId}|{addr}|{carrier}|{carrierNext}|"
+            "{x}|{y}|{boxType}|{Q}|{order}|{part}|{desc}|\r\n"
+        )
         shuttle = self.vertical_lift_shuttle_id
         if shuttle.mode == "pick":
             code = "1"
@@ -25,23 +28,23 @@ class StockLocation(models.Model):
         if cell_location:
             x, y = cell_location.tray_cell_center_position()
         else:
-            x, y = '', ''
+            x, y = "", ""
         subst = {
-            'code': code,
-            'hostId': self.env['ir.sequence'].next_by_code('vertical.lift.command'),
-            'addr': shuttle.name,
-            'carrier': self.level,
-            'carrierNext': '0',
-            'x': x,
-            'y': y,
-            'boxType': '',
-            'Q': '',
-            'order': '',
-            'part': '',
-            'desc': '',
+            "code": code,
+            "hostId": self.env["ir.sequence"].next_by_code("vertical.lift.command"),
+            "addr": shuttle.name,
+            "carrier": self.level,
+            "carrierNext": "0",
+            "x": x,
+            "y": y,
+            "boxType": "",
+            "Q": "",
+            "order": "",
+            "part": "",
+            "desc": "",
         }
         payload = message_template.format(**subst)
-        return payload.encode('iso-8859-1', 'replace')
+        return payload.encode("iso-8859-1", "replace")
 
     def _hardware_vertical_lift_tray_payload(self, cell_location=None):
         """Prepare the message to be sent to the vertical lift hardware
@@ -84,5 +87,7 @@ class StockLocation(models.Model):
             _logger.debug("Sending to kardex: {}", payload)
             # TODO implement the communication with kardex
         else:
-            payload = super()._hardware_vertical_lift_tray_payload(cell_location=cell_location)
+            payload = super()._hardware_vertical_lift_tray_payload(
+                cell_location=cell_location
+            )
         return payload
