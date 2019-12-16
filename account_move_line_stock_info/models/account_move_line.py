@@ -5,8 +5,8 @@ from odoo import fields, models
 
 
 class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     stock_move_id = fields.Many2one(
-        comodel_name='stock.move', string='Stock Move', copy=False,
-        index=True)
+        comodel_name="stock.move", string="Stock Move", copy=False, index=True
+    )
