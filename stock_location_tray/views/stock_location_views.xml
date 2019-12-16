@@ -6,7 +6,7 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
-            <group name="localization" position="after">
+            <group name="additional_info" position="after">
                 <group string="Tray" name="tray">
                     <field name="tray_type_id"
                             attrs="{'invisible': [('cell_in_tray_type_id', '!=', False)]}"/>
@@ -18,18 +18,11 @@
                            attrs="{'invisible': [('tray_type_id', '=', False), ('cell_in_tray_type_id', '=', False)]}"
                            options="{'click_action': 'action_tray_matrix_click'}"
                     />
+                    <field name="posx" attrs="{'readonly': [('cell_in_tray_type_id', '!=', False)], 'invisible': ['|', ('cell_in_tray_type_id', '=', False), ('tray_type_id', '=', True)]}" />
+                    <field name="posy" attrs="{'readonly': [('cell_in_tray_type_id', '!=', False)], 'invisible': ['|', ('cell_in_tray_type_id', '=', False), ('tray_type_id', '=', True)]}" />
+                    <field name="posz" attrs="{'readonly': [('cell_in_tray_type_id', '!=', False)], 'invisible': ['|', ('cell_in_tray_type_id', '=', False), ('tray_type_id', '=', True)]}" />
                 </group>
             </group>
-
-            <field name="posx" position="attributes">
-                <attribute name="attrs">{'readonly': [('cell_in_tray_type_id', '!=', False)]}</attribute>
-            </field>
-            <field name="posy" position="attributes">
-                <attribute name="attrs">{'readonly': [('cell_in_tray_type_id', '!=', False)]}</attribute>
-            </field>
-            <field name="posz" position="attributes">
-                <attribute name="attrs">{'readonly': [('cell_in_tray_type_id', '!=', False)]}</attribute>
-            </field>
         </field>
     </record>
 

@@ -8,32 +8,25 @@ class LocationTrayTypeCase(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.stock_location = cls.env.ref('stock.stock_location_stock')
-        cls.product = cls.env.ref(
-            'product.product_delivery_02'
-        )
-        cls.tray_location = cls.env.ref(
-            "stock_location_tray.stock_location_tray_demo"
-        )
+        cls.wh = cls.env.ref("stock.warehouse0")
+        cls.stock_location = cls.env.ref("stock.stock_location_stock")
+        cls.product = cls.env.ref("product.product_delivery_02")
+        cls.tray_location = cls.env.ref("stock_location_tray.stock_location_tray_demo")
         cls.tray_type_small_8x = cls.env.ref(
-            'stock_location_tray.stock_location_tray_type_small_8x'
+            "stock_location_tray.stock_location_tray_type_small_8x"
         )
         cls.tray_type_small_32x = cls.env.ref(
-            'stock_location_tray.stock_location_tray_type_small_32x'
+            "stock_location_tray.stock_location_tray_type_small_32x"
         )
 
     def _cell_for(self, tray, x=1, y=1):
-        cell = self.env['stock.location'].search(
-            [('location_id', '=', tray.id), ('posx', '=', x), ('posy', '=', y)]
+        cell = self.env["stock.location"].search(
+            [("location_id", "=", tray.id), ("posx", "=", x), ("posy", "=", y)]
         )
         self.assertEqual(
-            len(cell),
-            1,
-            "Cell x{}y{} not found for {}".format(x, y, tray.name),
+            len(cell), 1, "Cell x{}y{} not found for {}".format(x, y, tray.name)
         )
         return cell
 
     def _update_quantity_in_cell(self, cell, product, quantity):
-        self.env['stock.quant']._update_available_quantity(
-            product, cell, quantity
-        )
+        self.env["stock.quant"]._update_available_quantity(product, cell, quantity)
