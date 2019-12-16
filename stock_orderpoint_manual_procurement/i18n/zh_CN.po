@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_orderpoint_manual_procurement
+# 	* stock_orderpoint_manual_procurement
 #
 msgid ""
 msgstr ""
@@ -120,6 +120,7 @@ msgstr "计划日期"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_qty
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_qty
 msgid "Procure Recommendation"
 msgstr "获取推荐"
 
@@ -152,6 +153,7 @@ msgstr "数量必须为正数。"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_date
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_date
 msgid "Recommended Request Date"
 msgstr "引用请求日期"
 
@@ -173,11 +175,15 @@ msgstr "计量单位"
 #. module: stock_orderpoint_manual_procurement
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
-msgid "Use this assistant to generate a procurement request for this\n"
+msgid ""
+"Use this assistant to generate a procurement request for this\n"
 "                    stock buffer. According to the product configuration,\n"
-"                    this may trigger a draft purchase order, a manufacturing\n"
+"                    this may trigger a draft purchase order, a "
+"manufacturing\n"
 "                    order or a transfer picking."
-msgstr "使用此助手为此库存缓冲区生成采购请求。根据产品配置，这可能会触发采购订单草案、生产订单或转移领料。"
+msgstr ""
+"使用此助手为此库存缓冲区生成采购请求。根据产品配置，这可能会触发采购订单草"
+"案、生产订单或转移领料。"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__warehouse_id
