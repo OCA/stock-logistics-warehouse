@@ -17,12 +17,7 @@ class StockMove(models.Model):
             # count of assigned move lines may change (and we track this in
             # stock.move, not stock.move.line, because the state of the lines
             # is a related to this one).
-            models = (
-                "vertical.lift.operation.pick",
-                "vertical.lift.operation.put",
-            )
+            models = ("vertical.lift.operation.pick", "vertical.lift.operation.put")
             for model in models:
-                self.env[model].invalidate_cache(
-                    ["number_of_ops", "number_of_ops_all"]
-                )
+                self.env[model].invalidate_cache(["number_of_ops", "number_of_ops_all"])
         return result

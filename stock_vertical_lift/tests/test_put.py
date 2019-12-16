@@ -56,13 +56,10 @@ class TestPut(VerticalLiftCase):
         operation = self.shuttle._operation_for_mode()
         select = select_model.create({"operation_id": operation.id})
         select.on_barcode_scanned(self.product_socks.barcode)
-        self.assertRecordValues(
-            select, [{"move_line_ids": put1.move_line_ids.ids}]
-        )
+        self.assertRecordValues(select, [{"move_line_ids": put1.move_line_ids.ids}])
         select.on_barcode_scanned(self.product_recovery.barcode)
         self.assertRecordValues(
-            select,
-            [{"move_line_ids": (put1.move_line_ids | put2.move_line_ids).ids}],
+            select, [{"move_line_ids": (put1.move_line_ids | put2.move_line_ids).ids}]
         )
         select.action_validate()
         self.assertEqual(len(operation.operation_line_ids), 2)

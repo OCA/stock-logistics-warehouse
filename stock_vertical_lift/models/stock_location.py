@@ -10,8 +10,7 @@ class StockLocation(models.Model):
     vertical_lift_location = fields.Boolean(
         "Is a Vertical Lift View Location?",
         default=False,
-        help="Check this box to use it as the view for Vertical"
-        " Lift Shuttles.",
+        help="Check this box to use it as the view for Vertical" " Lift Shuttles.",
     )
     vertical_lift_kind = fields.Selection(
         selection=[
@@ -29,9 +28,7 @@ class StockLocation(models.Model):
     # give the unique shuttle for any location in the tree (whether it's a
     # shuttle, a tray or a cell)
     inverse_vertical_lift_shuttle_ids = fields.One2many(
-        comodel_name="vertical.lift.shuttle",
-        inverse_name="location_id",
-        readonly=True,
+        comodel_name="vertical.lift.shuttle", inverse_name="location_id", readonly=True
     )
     # compute the unique shuttle for any shuttle, tray or cell location, by
     # going through the parents
@@ -42,9 +39,7 @@ class StockLocation(models.Model):
     )
 
     @api.depends(
-        "location_id",
-        "location_id.vertical_lift_kind",
-        "vertical_lift_location",
+        "location_id", "location_id.vertical_lift_kind", "vertical_lift_location"
     )
     def _compute_vertical_lift_kind(self):
         tree = {"view": "shuttle", "shuttle": "tray", "tray": "cell"}
@@ -57,8 +52,7 @@ class StockLocation(models.Model):
                 location.vertical_lift_kind = kind
 
     @api.depends(
-        "inverse_vertical_lift_shuttle_ids",
-        "location_id.vertical_lift_shuttle_id",
+        "inverse_vertical_lift_shuttle_ids", "location_id.vertical_lift_shuttle_id"
     )
     def _compute_vertical_lift_shuttle_id(self):
         for location in self:
@@ -114,20 +108,13 @@ class StockLocation(models.Model):
         if self.vertical_lift_shuttle_id.hardware == "simulation":
             message = _("Opening tray {}.").format(self.name)
             if cell_location:
-                from_left, from_bottom = (
-                    cell_location.tray_cell_center_position()
-                )
-                message += _(
-                    "<br/>Laser pointer on x{} y{} ({}mm, {}mm)"
-                ).format(
-                    cell_location.posx,
-                    cell_location.posy,
-                    from_left,
-                    from_bottom,
+                from_left, from_bottom = cell_location.tray_cell_center_position()
+                message += _("<br/>Laser pointer on x{} y{} ({}mm, {}mm)").format(
+                    cell_location.posx, cell_location.posy, from_left, from_bottom
                 )
             return message
         else:
-            raise NotImplemented()
+            raise NotImplementedError()
 
     def fetch_vertical_lift_tray(self, cell_location=None):
         """Send instructions to the vertical lift hardware
@@ -146,8 +133,7 @@ class StockLocation(models.Model):
         if self.vertical_lift_kind == "cell":
             if cell_location:
                 raise ValueError(
-                    "cell_location cannot be set when the location is "
-                    "a cell."
+                    "cell_location cannot be set when the location is a cell."
                 )
             tray = self.location_id
             tray.fetch_vertical_lift_tray(cell_location=self)
@@ -155,8 +141,7 @@ class StockLocation(models.Model):
             self._hardware_vertical_lift_tray(cell_location=cell_location)
         else:
             raise exceptions.UserError(
-                _("Cannot fetch a vertical lift tray on location %s")
-                % (self.name,)
+                _("Cannot fetch a vertical lift tray on location %s") % (self.name,)
             )
         return True
 
