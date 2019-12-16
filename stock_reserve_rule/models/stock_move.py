@@ -84,8 +84,7 @@ class StockMove(models.Model):
                         break
 
                 need_zero = (
-                    float_compare(still_need, 0, precision_rounding=rounding)
-                    != 1
+                    float_compare(still_need, 0, precision_rounding=rounding) != 1
                 )
                 if need_zero:
                     # useless to eval the other rules when still_need <= 0

@@ -27,4 +27,4 @@ class StockQuant(models.Model):
                 seen[location] = seen[location] | quant
             else:
                 seen[location] = quant
-        return [(location, quants) for location, quants in seen.items()]
+        return [(loc, quants) for loc, quants in seen.items()]

@@ -7,17 +7,20 @@
         <field name="arch" type="xml">
             <form string="Stock Reservation Rule">
                 <div class="oe_button_box" name="button_box">
-                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                        <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
-                    </button>
                 </div>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
                 <label for="name" class="oe_edit_only"/>
                 <h1><field name="name"/></h1>
                 <group string="Rule Applicability" name="configuration">
-                    <field name="location_id"/>
-                    <field name="fallback_location_id"/>
-                    <field name="rule_domain" widget="domain"  options="{'model': 'stock.move'}" />
-                    <field name="company_id" groups="base.group_multi_company"/>
+                    <group>
+                        <field name="active" invisible="1"/>
+                        <field name="location_id"/>
+                        <field name="fallback_location_id"/>
+                    </group>
+                    <group>
+                        <field name="rule_domain" widget="domain"  options="{'model': 'stock.move', 'in_dialog': true}" />
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
                 </group>
                 <group string="Removal Rules" name="rule">
                     <field name="rule_removal_ids" nolabel="1">
@@ -36,7 +39,7 @@
                                        widget="many2many_tags"
                                        attrs="{'invisible': [('removal_strategy', '!=', 'packaging')]}"
                                 />
-                                <field name="quant_domain" widget="domain"  options="{'model': 'stock.quant'}" />
+                                <field name="quant_domain" widget="domain"  options="{'model': 'stock.quant', 'in_dialog': true}" />
                             </group>
                         </form>
                     </field>
@@ -74,7 +77,6 @@
         <field name="name">Stock Reservation Rules</field>
         <field name="res_model">stock.reserve.rule</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
         <field name="view_id" ref="view_stock_reserve_rule_tree"/>
         <field name="search_view_id" ref="view_stock_reserve_rule_search"/>
         <field name="context"></field>
