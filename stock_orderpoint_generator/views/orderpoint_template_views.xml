@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_warehouse_orderpoint_template_tree" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.template.tree</field>
+        <field name="model">stock.warehouse.orderpoint.template</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <tree string="Reordering Rule Templates">
+                <field name="name"/>
+                <field name="warehouse_id" groups="stock.group_stock_multi_locations"/>
+                <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                <field name="product_min_qty" attrs="{'invisble': [('auto_min_qty', '!=', False)]}"/>
+                <field name="product_max_qty" attrs="{'invisble': [('auto_min_qty', '!=', False)]}"/>
+                <field name="auto_min_qty"/>
+                <field name="auto_max_qty"/>
+                <field name="auto_generate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_warehouse_orderpoint_template_search">
+        <field name="name">stock.warehouse.orderpoint.template.search</field>
+        <field name="model">stock.warehouse.orderpoint.template</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search string="Reordering Rule Templates Search">
+                <field name="name" string="Reordering Rule Templates"/>
+                <field name="warehouse_id"/>
+                <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <group expand="0" string="Group By">
+                    <filter string="Warehouse" name="warehouse" domain="[]"  context="{'group_by':'warehouse_id'}"/>
+                    <filter string="Location" name="location" domain="[]" context="{'group_by':'location_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_warehouse_orderpoint_template_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.template.form</field>
+        <field name="model">stock.warehouse.orderpoint.template</field>
+        <field name="arch" type="xml">
+            <form string="Reordering Rule Template">
+                <header>
+                    <button name="create_auto_orderpoints" type="object" string="Generate Automatic Rules"
+                            help="Reordering rules will be created for the selected products. This is equivalent to the Scheduled Action action."
+                            attrs="{'invisible': [('auto_generate', '=', False)]}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="warehouse_id" widget="selection" groups="stock.group_stock_multi_locations"/>
+                            <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                            <field name="group_id" groups="stock.group_adv_location"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Rules">
+                            <field name="auto_min_qty"/>
+                            <field name="product_min_qty" attrs="{'required': [('auto_min_qty','=', False)], 'invisible': [('auto_min_qty','!=', False)]}"/>
+                            <field name="auto_max_qty"/>
+                            <field name="product_max_qty" attrs="{'required': [('auto_max_qty','=', False)], 'invisible': [('auto_max_qty','!=', False)]}"/>
+                            <field name="qty_multiple" string="Quantity Multiple"/>
+                        </group>
+                        <group string="Misc">
+                            <field name="active" />
+                            <field name="auto_generate"/>
+                            <label for="lead_days"/>
+                            <div class="o_row">
+                                <field name="lead_days"/>
+                                <field name="lead_type"/>
+                            </div>
+                        </group>
+                        <group name="auto_minimum" string="Auto Minimum Criteria" attrs="{'invisible': [('auto_min_qty','=', False)]}">
+                            <field name="auto_min_qty_criteria" string="Criteria" attrs="{'required': [('auto_min_qty','!=', False)]}"/>
+                            <field name="auto_min_date_start" string="From" attrs="{'required': [('auto_min_qty','!=', False)]}"/>
+                            <field name="auto_min_date_end" string="To" attrs="{'required': [('auto_min_qty','!=', False)]}"/>
+                        </group>
+                        <group name="auto_maximum" string="Auto Maximum Criteria" attrs="{'invisible': [('auto_max_qty','=', False)]}">
+                            <field name="auto_max_qty_criteria" string="Criteria" attrs="{'required': [('auto_max_qty','!=', False)]}"/>
+                            <field name="auto_max_date_start" string="From" attrs="{'required': [('auto_max_qty','!=', False)]}"/>
+                            <field name="auto_max_date_end" string="To" attrs="{'required': [('auto_max_qty','!=', False)]}"/>
+                        </group>
+                    </group>
+                    <notebook attrs="{'invisible': [('auto_generate', '=', False)]}">
+                        <page string="Products" name="auto_rules">
+                            <field name="auto_product_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+    <record id="action_orderpoint_template" model="ir.actions.act_window">
+        <field name="name">Reordering Rule Templates</field>
+        <field name="res_model">stock.warehouse.orderpoint.template</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_warehouse_orderpoint_template_tree"/>
+        <field name="search_view_id" ref="view_warehouse_orderpoint_template_search" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to add a reordering rule template.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_orderpoint_template" name="Reordering Rule Templates"
+            parent="stock.menu_product_in_config_stock"
+            action="action_orderpoint_template"
+    />
+
+</odoo>
