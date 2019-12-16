@@ -12,14 +12,13 @@
                   icon="fa-filter" name="open_locations"
                   type="object"
                   />
-          <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
-          </button>
         </div>
+        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
         <label for="name" class="oe_edit_only"/>
         <h1><field name="name"/></h1>
         <group>
           <group string="Tray Configuration" name="settings">
+            <field name="active" invisible="1"/>
             <field name="code"/>
             <field name="rows"/>
             <field name="cols"/>
@@ -77,7 +76,6 @@
     <field name="name">Location Tray Types</field>
     <field name="res_model">stock.location.tray.type</field>
     <field name="type">ir.actions.act_window</field>
-    <field name="view_type">form</field>
     <field name="view_id" ref="view_stock_location_tray_type_tree"/>
     <field name="search_view_id" ref="view_stock_location_tray_type_search"/>
     <field name="context"></field>

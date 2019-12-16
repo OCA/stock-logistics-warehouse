@@ -2,7 +2,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from collections import defaultdict
+
 from odoo import _, api, exceptions, fields, models
+
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
 
@@ -13,9 +15,7 @@ class StockLocation(models.Model):
         comodel_name="stock.location.tray.type", ondelete="restrict"
     )
     cell_in_tray_type_id = fields.Many2one(
-        string="Cell Tray Type",
-        related="location_id.tray_type_id",
-        readonly=True,
+        string="Cell Tray Type", related="location_id.tray_type_id", readonly=True
     )
     tray_cell_contains_stock = fields.Boolean(
         compute="_compute_tray_cell_contains_stock",
@@ -30,7 +30,7 @@ class StockLocation(models.Model):
         " to inject positions. {x}, {y}, and {z} will be replaced by their"
         " corresponding position. Complex formatting (such as padding, ...)"
         " can be done using the format specification at "
-        " https://docs.python.org/2/library/string.html#formatstrings",
+        " https://docs.python.org/3/library/string.html#formatstrings",
     )
 
     def _default_cell_name_format(self):
@@ -40,14 +40,14 @@ class StockLocation(models.Model):
     def _compute_tray_cell_contains_stock(self):
         for location in self:
             if not location.cell_in_tray_type_id:
-                # we skip the others only for performance
+                # Not a tray cell so the value is irrelevant,
+                # best to skip them for performance.
+                location.tray_cell_contains_stock = False
                 continue
             quants = location.quant_ids.filtered(lambda r: r.quantity > 0)
             location.tray_cell_contains_stock = bool(quants)
 
-    @api.depends(
-        "quant_ids.quantity", "tray_type_id", "location_id.tray_type_id"
-    )
+    @api.depends("quant_ids.quantity", "tray_type_id", "location_id.tray_type_id")
     def _compute_tray_matrix(self):
         for location in self:
             if not (location.tray_type_id or location.cell_in_tray_type_id):
@@ -65,7 +65,6 @@ class StockLocation(models.Model):
             "cells": cells,
         }
 
-    @api.multi
     def action_tray_matrix_click(self, coordX, coordY):
         self.ensure_one()
         if self.cell_in_tray_type_id:
@@ -104,14 +103,10 @@ class StockLocation(models.Model):
     def _check_before_add_tray_type(self):
         if not self.tray_type_id and self.child_ids:
             raise exceptions.UserError(
-                _(
-                    "Location %s has sub-locations, it cannot be converted"
-                    " to a tray."
-                )
+                _("Location %s has sub-locations, it cannot be converted" " to a tray.")
                 % (self.display_name)
             )
 
-    @api.multi
     def write(self, vals):
         for location in self:
             trays_to_update = False
@@ -201,7 +196,6 @@ class StockLocation(models.Model):
         # using format_map allows to have missing replacement strings
         return template.format_map(defaultdict(str, x=x, y=y, z=z))
 
-    @api.multi
     def _update_tray_sublocations(self):
         values = []
         for location in self:
@@ -213,10 +207,7 @@ class StockLocation(models.Model):
                 # trap this check (_tray_check_active) to display a
                 # contextual error message
                 raise exceptions.UserError(
-                    _(
-                        "Trays cannot be modified when "
-                        "they contain products."
-                    )
+                    _("Trays cannot be modified when " "they contain products.")
                 )
 
             if not tray_type:
@@ -226,9 +217,7 @@ class StockLocation(models.Model):
             posz = location.posz or 0
             for row in range(1, tray_type.rows + 1):
                 for col in range(1, tray_type.cols + 1):
-                    cell_name = location._format_tray_sublocation_name(
-                        col, row, posz
-                    )
+                    cell_name = location._format_tray_sublocation_name(col, row, posz)
                     subloc_values = {
                         "name": cell_name,
                         "posx": col,
@@ -241,7 +230,6 @@ class StockLocation(models.Model):
         if values:
             self.create(values)
 
-    @api.multi
     def _create_tray_xmlids(self, module):
         """Create external IDs for generated cells
 
