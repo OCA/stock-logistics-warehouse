@@ -47,9 +47,8 @@ class StockLocation(models.Model):
             if location.vertical_lift_location:
                 location.vertical_lift_kind = "view"
                 continue
-            kind = tree.get(location.location_id.vertical_lift_kind)
-            if kind:
-                location.vertical_lift_kind = kind
+            kind = tree.get(location.location_id.vertical_lift_kind, False)
+            location.vertical_lift_kind = kind
 
     @api.depends(
         "inverse_vertical_lift_shuttle_ids", "location_id.vertical_lift_shuttle_id"
@@ -66,8 +65,7 @@ class StockLocation(models.Model):
 
     def _hardware_vertical_lift_tray(self, cell_location=None):
         payload = self._hardware_vertical_lift_tray_payload(cell_location)
-        res = self.vertical_lift_shuttle_id._hardware_send_message(payload)
-        return res
+        return self.vertical_lift_shuttle_id._hardware_send_message(payload)
 
     def _hardware_vertical_lift_tray_payload(self, cell_location=None):
         """Prepare the message to be sent to the vertical lift hardware
@@ -104,6 +102,9 @@ class StockLocation(models.Model):
           position of the cell in mm from the bottom-left of a tray. (distance
           from left, distance from bottom). Can be used for instance for
           highlighting the cell using a laser pointer.
+
+        Returns a message in bytes, that will be sent through
+        ``VerticalLiftShuttle._hardware_send_message()``.
         """
         if self.vertical_lift_shuttle_id.hardware == "simulation":
             message = _("Opening tray {}.").format(self.name)
@@ -112,7 +113,7 @@ class StockLocation(models.Model):
                 message += _("<br/>Laser pointer on x{} y{} ({}mm, {}mm)").format(
                     cell_location.posx, cell_location.posy, from_left, from_bottom
                 )
-            return message
+            return message.encode("utf-8")
         else:
             raise NotImplementedError()
 

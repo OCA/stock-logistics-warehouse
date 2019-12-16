@@ -116,7 +116,6 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
         """
         values = {
             "name": "Test Inventory",
-            "filter": "partial",
             "line_ids": [
                 (
                     0,

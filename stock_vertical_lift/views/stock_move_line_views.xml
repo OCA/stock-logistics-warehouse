@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="view_stock_move_line_operation_tree" model="ir.ui.view">
-        <field name="name">stock.move.line.operations.tree.tray.type</field>
+        <field name="name">stock.move.line.operations.tree.vertical.lift</field>
         <field name="model">stock.move.line</field>
         <field name="inherit_id" ref="stock_location_tray.view_stock_move_line_operation_tree" />
         <field name="arch" type="xml">
