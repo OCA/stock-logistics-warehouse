@@ -6,7 +6,7 @@
         <field name="model">stock.warehouse.orderpoint.generator</field>
         <field name="arch" type="xml">
             <form string="Reordering Rules Generator">
-                <label string="This wizard will apply the following orderpoint to selected product(s)"/>
+                <label for="orderpoint_template" string="This wizard will apply the following orderpoint to selected product(s)"/>
                 <group string="Templates" colspan="4">
                     <field name="orderpoint_template_id" colspan="4"/>
                 </group>
