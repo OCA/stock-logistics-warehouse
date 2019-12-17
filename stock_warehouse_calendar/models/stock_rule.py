@@ -1,4 +1,4 @@
-# Copyright 2018-19 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2018-19 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from datetime import datetime
@@ -17,8 +17,8 @@ class StockRule(models.Model):
         location_id,
         name,
         origin,
+        company_id,
         values,
-        group_id,
     ):
         res = super(StockRule, self)._get_stock_move_values(
             product_id,
@@ -27,8 +27,8 @@ class StockRule(models.Model):
             location_id,
             name,
             origin,
+            company_id,
             values,
-            group_id,
         )
         warehouse = self.propagate_warehouse_id or self.warehouse_id
         if warehouse.calendar_id and self.delay:

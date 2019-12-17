@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2018 Eficent
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<!-- Copyright 2018 2018-19 ForgeFlow S.L. (https://www.forgeflow.com)
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
 <odoo>
 
     <record id="view_warehouse" model="ir.ui.view">
