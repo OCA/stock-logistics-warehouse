@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import fields, models
+from odoo.addons import decimal_precision as dp
 
 
 class StockLocationLimit(models.Model):
@@ -19,7 +20,8 @@ class StockLocationLimit(models.Model):
         'product.product',
         string='Product',
     )
-    qty = fields.Float('Maximum Quantity')
+    qty = fields.Float('Maximum Quantity',
+                       digits=dp.get_precision('Product Quantity'))
     uom_id = fields.Many2one(
         'uom.uom',
         related='product_id.uom_id',
