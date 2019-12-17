@@ -7,11 +7,10 @@ from odoo import fields, models
 
 
 class StockWarehouse(models.Model):
-    _inherit = 'stock.warehouse'
+    _inherit = "stock.warehouse"
 
     calendar_id = fields.Many2one(
-        comodel_name='resource.calendar',
-        string='Working Hours',
+        comodel_name="resource.calendar", string="Working Hours"
     )
 
     def wh_plan_days(self, date_from, delta):
