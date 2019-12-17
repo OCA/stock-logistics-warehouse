@@ -7,17 +7,11 @@
     "version": "12.0.1.0.1",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
-    "author": "Eficent, "
-              "Odoo Community Association (OCA)",
+    "author": "Eficent, " "Odoo Community Association (OCA)",
     "category": "Warehouse Management",
-    "depends": [
-        "stock",
-        "resource",
-    ],
-    "data": [
-        "views/stock_warehouse_views.xml",
-    ],
+    "depends": ["stock", "resource"],
+    "data": ["views/stock_warehouse_views.xml"],
     "installable": True,
-    'development_status': 'Beta',
-    'maintainers': ['jbeficent'],
+    "development_status": "Beta",
+    "maintainers": ["jbeficent"],
 }
