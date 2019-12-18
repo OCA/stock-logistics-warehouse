@@ -17,6 +17,5 @@ class StockPicking(models.Model):
         for picking in self:
             picking.need_release = any(move.need_release for move in picking.move_lines)
 
-    @api.multi
     def release_available_to_promise(self):
         self.mapped("move_lines").release_available_to_promise()

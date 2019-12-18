@@ -77,7 +77,6 @@ class StockMove(models.Model):
         )
         return promised_qty
 
-    @api.multi
     def release_available_to_promise(self):
         self._run_stock_rule()
 
@@ -90,7 +89,6 @@ class StockMove(models.Model):
             vals.update({"procure_method": self.procure_method, "need_release": True})
         return vals
 
-    @api.multi
     def _run_stock_rule(self):
         """Launch procurement group run method with remaining quantity
 
@@ -102,6 +100,8 @@ class StockMove(models.Model):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
+        procurement_requests = []
+        pulled_moves = self.env["stock.move"]
         for move in self:
             if not move.need_release:
                 continue
@@ -118,27 +118,30 @@ class StockMove(models.Model):
 
             if float_compare(remaining, 0, precision_digits=precision) > 0:
                 if move.picking_id.move_type == "one":
-                    # we don't want to delivery unless we can deliver all at
+                    # we don't want to deliver unless we can deliver all at
                     # once
                     continue
                 move.with_context(release_available_to_promise=True)._split(remaining)
 
             values = move._prepare_procurement_values()
-
-            self.env["procurement.group"].run_defer(
-                move.product_id,
-                move.product_id.uom_id._compute_quantity(
-                    quantity, move.product_uom, rounding_method="HALF-UP"
-                ),
-                move.product_uom,
-                move.location_id,
-                move.origin,
-                values,
+            procurement_requests.append(
+                self.env["procurement.group"].Procurement(
+                    move.product_id,
+                    move.product_uom_qty,
+                    move.product_uom,
+                    move.location_id,
+                    move.rule_id and move.rule_id.name or "/",
+                    move.origin,
+                    move.company_id,
+                    values,
+                )
             )
+            pulled_moves |= move
 
-            pull_move = move
-            while pull_move:
-                pull_move._action_assign()
-                pull_move = pull_move.move_orig_ids
+        self.env["procurement.group"].run_defer(procurement_requests)
+
+        while pulled_moves:
+            pulled_moves._action_assign()
+            pulled_moves = pulled_moves.mapped("move_orig_ids")
 
         return True

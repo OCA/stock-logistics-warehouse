@@ -24,7 +24,6 @@
         <field name="name">Release Stock Move</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.move.release</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]"/>

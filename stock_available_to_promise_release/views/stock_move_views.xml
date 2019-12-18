@@ -33,7 +33,6 @@
         <field name="name">Stock Moves To Release</field>
         <field name="res_model">stock.move</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form</field>
         <field name="search_view_id" ref="stock.view_move_search"/>
         <field name="view_ids" eval="[(5, 0, 0),

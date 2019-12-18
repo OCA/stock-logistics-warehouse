@@ -71,8 +71,20 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
                 raise ValueError(
                     "Expect (product, quantity, uom) or (product, quantity)"
                 )
+
             self.env["procurement.group"].run(
-                product, qty, uom, self.loc_customer, "TEST", "TEST", values
+                [
+                    self.env["procurement.group"].Procurement(
+                        product,
+                        qty,
+                        uom,
+                        self.loc_customer,
+                        "TEST",
+                        "TEST",
+                        wh.company_id,
+                        values,
+                    )
+                ]
             )
         pickings = self._pickings_in_group(group)
         pickings.mapped("move_lines").write(
@@ -166,6 +178,7 @@ class TestAvailableToPromiseRelease(common.SavepointCase):
 
         self._update_qty_in_location(self.loc_bin1, self.product1, 20.0)
         pickings = self._create_picking_chain(self.wh, [(self.product1, 5)])
+
         self.assertEqual(len(pickings), 1, "expect only the last out->customer")
         cust_picking = pickings
         self.assertRecordValues(
