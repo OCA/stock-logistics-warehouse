@@ -3,8 +3,6 @@
 from odoo import api, fields, models
 from odoo.tools.float_utils import float_round
 
-from odoo.addons import decimal_precision as dp
-
 
 class StockSecondaryUnitMixin(models.AbstractModel):
     _name = "stock.secondary.unit.mixin"
@@ -14,7 +12,7 @@ class StockSecondaryUnitMixin(models.AbstractModel):
         comodel_name="product.secondary.unit", string="Second unit"
     )
     secondary_uom_qty = fields.Float(
-        string="Secondary Qty", digits=dp.get_precision("Product Unit of Measure")
+        string="Secondary Qty", digits="Product Unit of Measure"
     )
 
 
@@ -23,7 +21,7 @@ class StockMove(models.Model):
     _name = "stock.move"
 
     def _merge_moves_fields(self):
-        res = super(StockMove, self)._merge_moves_fields()
+        res = super()._merge_moves_fields()
         res["secondary_uom_qty"] = self[-1:].secondary_uom_qty
         return res
 
