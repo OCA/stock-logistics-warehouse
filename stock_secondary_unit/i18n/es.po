@@ -97,7 +97,6 @@ msgstr ""
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit
 #, fuzzy
-#| msgid "Secondary unit"
 msgid "Stock Product Secondary Unit"
 msgstr "Unidad Secundaria"
 
