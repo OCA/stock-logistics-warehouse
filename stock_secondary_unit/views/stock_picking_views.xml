@@ -15,12 +15,6 @@
                        domain="[('product_tmpl_id.product_variant_ids', 'in', [product_id])]"
                        options="{'no_create': True}"/>
             </xpath>
-            <xpath expr="//field[@name='move_line_ids_without_package']/tree/field[@name='product_uom_qty']" position="before">
-                <field name="secondary_uom_qty"/>
-                <field name="secondary_uom_id"
-                       domain="[('product_tmpl_id.product_variant_ids', 'in', [product_id])]"
-                       options="{'no_create': True}"/>
-            </xpath>
         </field>
     </record>
 
