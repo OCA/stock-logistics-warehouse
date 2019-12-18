@@ -19,30 +19,36 @@ def pre_init_hook(cr):
 
 
 def set_stock_location_removal_priority_default(cr):
-    cr.execute("""SELECT column_name
+    cr.execute(
+        """SELECT column_name
     FROM information_schema.columns
     WHERE table_name='stock_location' AND
-    column_name='removal_priority'""")
+    column_name='removal_priority'"""
+    )
     if not cr.fetchone():
-        logger.info('Creating field removal_priority on stock_location')
+        logger.info("Creating field removal_priority on stock_location")
         cr.execute(
             """
             ALTER TABLE stock_location
             ADD COLUMN removal_priority integer
             DEFAULT 10;
-            """)
+            """
+        )
 
 
 def set_stock_quant_removal_priority_default(cr):
-    cr.execute("""SELECT column_name
+    cr.execute(
+        """SELECT column_name
     FROM information_schema.columns
     WHERE table_name='stock_quant' AND
-    column_name='removal_priority'""")
+    column_name='removal_priority'"""
+    )
     if not cr.fetchone():
-        logger.info('Creating field removal_priority on stock_quant')
+        logger.info("Creating field removal_priority on stock_quant")
         cr.execute(
             """
             ALTER TABLE stock_quant
             ADD COLUMN removal_priority integer
             DEFAULT 10;
-            """)
+            """
+        )
