@@ -3,7 +3,7 @@
 {
     "name": "Stock Picking Completion Info",
     "summary": "Display on current document completion information according "
-               "to next operations",
+    "to next operations",
     "version": "12.0.1.0.0",
     "development_status": "Alpha",
     "category": "Warehouse Management",
@@ -12,10 +12,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "stock",
-    ],
-    "data": [
-        "views/stock_picking.xml",
-    ],
+    "depends": ["stock"],
+    "data": ["views/stock_picking.xml"],
 }
