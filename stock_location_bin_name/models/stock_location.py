@@ -7,30 +7,30 @@ from odoo import api, fields, models
 
 class StockLocation(models.Model):
 
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     location_name_format = fields.Char(
-        'Location Name Format',
+        "Location Name Format",
         help="Format string that will compute the name of the location. "
-             "Use location fields. Example: "
-             "'{area}-{corridor:0>2}.{rack:0>3}"
-             ".{level:0>2}'")
+        "Use location fields. Example: "
+        "'{area}-{corridor:0>2}.{rack:0>3}"
+        ".{level:0>2}'",
+    )
 
     area = fields.Char(
-        string='Area',
+        string="Area",
         # Field used for _onchange_attribute_compute_name, so we
         # have the name in the record's cache. Does not need to be
         # stored as we already have 'area_location_id'
-        related='area_location_id.name',
+        related="area_location_id.name",
         readonly=True,
     )
 
     @api.multi
-    @api.onchange('corridor', 'row', 'rack', 'level',
-                  'posx', 'posy', 'posz')
+    @api.onchange("corridor", "row", "rack", "level", "posx", "posy", "posz")
     def _onchange_attribute_compute_name(self):
         for location in self:
-            if not location.location_kind == 'bin':
+            if not location.location_kind == "bin":
                 continue
             area = location
             while area and not area.location_name_format:
