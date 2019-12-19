@@ -12,50 +12,48 @@ from odoo import api, fields, models
 
 
 class StockWarehouseOrderpoint(models.Model):
-    _inherit = 'stock.warehouse.orderpoint'
+    _inherit = "stock.warehouse.orderpoint"
 
     product_location_qty = fields.Float(
-        string='Quantity On Location',
-        compute='_compute_product_available_qty'
+        string="Quantity On Location", compute="_compute_product_available_qty"
     )
     incoming_location_qty = fields.Float(
-        string='Incoming On Location',
-        compute='_compute_product_available_qty'
+        string="Incoming On Location", compute="_compute_product_available_qty"
     )
     outgoing_location_qty = fields.Float(
-        string='Outgoing On Location',
-        compute='_compute_product_available_qty'
+        string="Outgoing On Location", compute="_compute_product_available_qty"
     )
     virtual_location_qty = fields.Float(
-        string='Forecast On Location',
-        compute='_compute_product_available_qty'
+        string="Forecast On Location", compute="_compute_product_available_qty"
     )
     product_category = fields.Many2one(
-        string='Product Category',
-        related='product_id.categ_id',
-        store=True
+        string="Product Category", related="product_id.categ_id", store=True
     )
 
     @api.multi
     def _compute_product_available_qty(self):
         operation_by_locaion = defaultdict(
-            lambda: self.env['stock.warehouse.orderpoint']
+            lambda: self.env["stock.warehouse.orderpoint"]
         )
         for order in self:
             operation_by_locaion[order.location_id] |= order
         for location_id, order_in_locaion in operation_by_locaion.items():
-            products = order_in_locaion.mapped('product_id').with_context(
-                location=location_id.id
-            )._compute_quantities_dict(
-                lot_id=self.env.context.get('lot_id'),
-                owner_id=self.env.context.get('owner_id'),
-                package_id=self.env.context.get('package_id')
+            products = (
+                order_in_locaion.mapped("product_id")
+                .with_context(location=location_id.id)
+                ._compute_quantities_dict(
+                    lot_id=self.env.context.get("lot_id"),
+                    owner_id=self.env.context.get("owner_id"),
+                    package_id=self.env.context.get("package_id"),
+                )
             )
             for order in order_in_locaion:
                 product = products[order.product_id.id]
-                order.update({
-                    'product_location_qty': product['qty_available'],
-                    'incoming_location_qty': product['incoming_qty'],
-                    'outgoing_location_qty': product['outgoing_qty'],
-                    'virtual_location_qty': product['virtual_available'],
-                })
+                order.update(
+                    {
+                        "product_location_qty": product["qty_available"],
+                        "incoming_location_qty": product["incoming_qty"],
+                        "outgoing_location_qty": product["outgoing_qty"],
+                        "virtual_location_qty": product["virtual_available"],
+                    }
+                )
