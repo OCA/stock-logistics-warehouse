@@ -6,12 +6,17 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
-            <field name="posx" position="before">
-                <field name="corridor" />
-                <field name="row" />
-                <field name="rack" />
-                <field name="level" />
-            </field>
+            <group name="additional_info" position="after">
+                <group name="position" string="Position">
+                    <field name="corridor" />
+                    <field name="row" />
+                    <field name="rack" />
+                    <field name="level" />
+                    <field name="posx" />
+                    <field name="posy" />
+                    <field name="posz" />
+                </group>
+            </group>
         </field>
     </record>
 
@@ -26,6 +31,9 @@
                 <field name="row" />
                 <field name="rack" />
                 <field name="level" />
+                <field name="posx" />
+                <field name="posy" />
+                <field name="posz" />
             </xpath>
 
         </field>
