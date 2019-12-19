@@ -8,7 +8,7 @@
 
 from collections import defaultdict
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockWarehouseOrderpoint(models.Model):
@@ -30,7 +30,6 @@ class StockWarehouseOrderpoint(models.Model):
         string="Product Category", related="product_id.categ_id", store=True
     )
 
-    @api.multi
     def _compute_product_available_qty(self):
         operation_by_locaion = defaultdict(
             lambda: self.env["stock.warehouse.orderpoint"]
