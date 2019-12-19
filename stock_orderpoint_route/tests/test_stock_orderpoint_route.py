@@ -78,7 +78,6 @@ class TestStockOrderpointRoute(common.SavepointCase):
                 "procure_method": "make_to_stock",
                 "warehouse_id": cls.warehouse.id,
                 "company_id": cls.main_company.id,
-                "propagate": "False",
             }
         )
 
@@ -93,7 +92,6 @@ class TestStockOrderpointRoute(common.SavepointCase):
                 "procure_method": "make_to_stock",
                 "warehouse_id": cls.warehouse.id,
                 "company_id": cls.main_company.id,
-                "propagate": "False",
             }
         )
 
