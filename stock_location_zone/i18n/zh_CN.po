@@ -17,12 +17,6 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_location_zone
-#: code:addons/stock_location_zone/models/stock_location.py:110
-#, python-format
-msgid "%s (copy)"
-msgstr "%s （复制）"
-
-#. module: stock_location_zone
 #: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__area
 #: selection:stock.location,kind:0
 msgid "Area"
