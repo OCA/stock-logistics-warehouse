@@ -8,12 +8,12 @@ from odoo import fields, models
 
 class StockLocation(models.Model):
 
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
-    corridor = fields.Char('Corridor')
-    row = fields.Char('Row')
-    rack = fields.Char('Rack')
-    level = fields.Char('Level')
-    posx = fields.Integer('Box (X)')
-    posy = fields.Integer('Box (Y)')
-    posz = fields.Integer('Box (Z)')
+    corridor = fields.Char("Corridor")
+    row = fields.Char("Row")
+    rack = fields.Char("Rack")
+    level = fields.Char("Level")
+    posx = fields.Integer("Box (X)")
+    posy = fields.Integer("Box (Y)")
+    posz = fields.Integer("Box (Z)")
