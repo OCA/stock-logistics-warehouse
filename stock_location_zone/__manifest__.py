@@ -3,19 +3,15 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Stock Location Zone',
-    'version': '12.0.1.0.0',
-    'author': "BCIM, Okia, Camptocamp, Odoo Community Association (OCA)",
-    'website': "https://github.com/OCA/stock-logistics-warehouse",
-    'summary': "Classify locations with zones.",
-    'category': 'Stock Management',
-    'depends': [
-        'stock',
-    ],
-    'data': [
-        'views/stock_location.xml',
-    ],
-    'installable': True,
-    'development_status': 'Alpha',
-    'license': 'AGPL-3',
+    "name": "Stock Location Zone",
+    "version": "12.0.1.0.0",
+    "author": "BCIM, Okia, Camptocamp, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
+    "summary": "Classify locations with zones.",
+    "category": "Stock Management",
+    "depends": ["stock"],
+    "data": ["views/stock_location.xml"],
+    "installable": True,
+    "development_status": "Alpha",
+    "license": "AGPL-3",
 }
