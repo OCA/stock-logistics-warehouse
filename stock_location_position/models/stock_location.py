@@ -10,10 +10,22 @@ class StockLocation(models.Model):
 
     _inherit = "stock.location"
 
-    corridor = fields.Char("Corridor")
-    row = fields.Char("Row")
-    rack = fields.Char("Rack")
-    level = fields.Char("Level")
-    posx = fields.Integer("Box (X)")
-    posy = fields.Integer("Box (Y)")
-    posz = fields.Integer("Box (Z)")
+    corridor = fields.Char("Corridor", help="Define as the street")
+    row = fields.Char("Row", help="Define as the side within the street")
+    rack = fields.Char("Rack", help="Define as the house number within the street")
+    level = fields.Char("Level", help="Define as the floor of the house")
+    posx = fields.Integer(
+        "Box (X)",
+        help="Optional (X) coordinate of the bin if the location"
+        " is split in several parts. (e.g. drawer storage)",
+    )
+    posy = fields.Integer(
+        "Box (Y)",
+        help="Optional (Y) coordinate of the bin if the location"
+        " is split in several parts. (e.g. drawer storage)",
+    )
+    posz = fields.Integer(
+        "Box (Z)",
+        help="Optional (Z) coordinate of the bin if the location"
+        " is split in several parts. (e.g. storage tray)",
+    )
