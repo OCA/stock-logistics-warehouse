@@ -14,12 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_location_zone
-#: code:addons/stock_location_zone/models/stock_location.py:110
-#, python-format
-msgid "%s (copy)"
-msgstr ""
-
-#. module: stock_location_zone
 #: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__area
 #: selection:stock.location,kind:0
 msgid "Area"
