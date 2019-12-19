@@ -10,7 +10,7 @@
     "author": "Eficent, "
               "Camptocamp, "
               "Odoo Community Association (OCA)",
-    "category": "Warehouse Management",
+    "category": "Warehouse",
     "depends": [
         "stock",
     ],
