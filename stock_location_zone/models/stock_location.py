@@ -3,7 +3,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class StockLocation(models.Model):
@@ -102,12 +102,3 @@ class StockLocation(models.Model):
             else:
                 # All the rest are other locations
                 location.location_kind = "other"
-
-    @api.multi
-    @api.returns("self", lambda value: value.id)
-    def copy(self, default=None):
-        self.ensure_one()
-        default = dict(default or {})
-        if "name" not in default:
-            default["name"] = _("%s (copy)") % self.name
-        return super().copy(default=default)
