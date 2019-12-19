@@ -71,3 +71,16 @@ class StockPicking(models.Model):
                 picking.completion_info = "last_picking"
                 continue
             picking.completion_info = "no"
+
+
+class StockMove(models.Model):
+
+    _inherit = "stock.move"
+
+    def write(self, vals):
+        super().write(vals)
+        if "state" in vals:
+            # invalidate cache, the api.depends do not allow to find all
+            # the conditions to invalidate the field
+            self.env["stock.picking"].invalidate_cache(fnames=["completion_info"])
+        return True
