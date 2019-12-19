@@ -1,10 +1,9 @@
 # Copyright 2018 Camptocamp SA
 # Copyright 2016 ACSONE SA/NV (<http://acsone.eu>)
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016 ForgeFlow S.L. (https://www.forgeflow.com)
 # Copyright 2016 Therp BV <http://therp.nl>
 # Copyright 2019 JARSA Sistemas S.A. de C.V.
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.tests.common import SavepointCase
 
