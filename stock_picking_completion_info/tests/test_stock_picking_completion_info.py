@@ -10,7 +10,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner_delta = cls.env.ref("base.res_partner_4")
         cls.warehouse = cls.env.ref("stock.warehouse0")
-        cls.warehouse.write({"outgoing_shipments": "pick_pack_ship"})
+        cls.warehouse.write({"delivery_steps": "pick_pack_ship"})
         cls.customers_location = cls.env.ref("stock.stock_location_customers")
         cls.output_location = cls.env.ref("stock.stock_location_output")
         cls.packing_location = cls.env.ref("stock.location_pack_zone")
@@ -32,9 +32,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
     def _init_inventory(self, same_location=True):
         # Product 1 on shelf 1
         # Product 2 on shelf 2
-        inventory = self.env["stock.inventory"].create(
-            {"name": "Test init", "filter": "partial"}
-        )
+        inventory = self.env["stock.inventory"].create({"name": "Test init"})
         inventory.action_start()
         if not same_location:
             product_location_list = [
