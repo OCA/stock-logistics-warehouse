@@ -11,7 +11,6 @@ class StockLocation(models.Model):
     _inherit = "stock.location"
     _order = "name"
 
-    @api.multi
     @api.constrains("location_id")
     def _check_inventory_location_id(self):
         """Error if an inventory is being conducted here"""
@@ -22,7 +21,6 @@ class StockLocation(models.Model):
         if location_inventory_open_ids:
             raise ValidationError(_("An inventory is being conducted at this location"))
 
-    @api.multi
     def unlink(self):
         """Refuse unlink if an inventory is being conducted"""
         location_inventory_open_ids = (

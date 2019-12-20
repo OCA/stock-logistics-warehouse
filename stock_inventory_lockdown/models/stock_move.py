@@ -1,5 +1,5 @@
 # © 2016 Numérigraphe SARL
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017 ForgeFlow S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -10,12 +10,10 @@ from odoo.exceptions import ValidationError
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.multi
     def _get_reserved_locations(self):
         self.ensure_one()
         return self.move_line_ids.mapped("location_id")
 
-    @api.multi
     def _get_dest_locations(self):
         self.ensure_one()
         return self.move_line_ids.mapped("location_dest_id")
@@ -48,7 +46,7 @@ class StockMove(models.Model):
                 raise ValidationError(
                     _(
                         "An inventory is being conducted at the following "
-                        "location(s):\n%s"
+                        "location(s):\n - %s"
                     )
                     % "\n - ".join(location_names)
                 )
