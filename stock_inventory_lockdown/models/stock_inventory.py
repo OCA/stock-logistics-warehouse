@@ -7,22 +7,23 @@ from odoo import api, models
 
 
 class StockInventory(models.Model):
-    _inherit = 'stock.inventory'
+    _inherit = "stock.inventory"
 
     @api.model
     def _get_locations_open_inventories(self, locations_ids=None):
         """IDs of locations in open exhaustive inventories, with children"""
-        inventory_domain = [('state', '=', 'confirm')]
+        inventory_domain = [("state", "=", "confirm")]
         if locations_ids:
-            inventory_domain.append(('location_id', 'child_of', locations_ids))
+            inventory_domain.append(("location_id", "child_of", locations_ids))
         inventories = self.search(inventory_domain)
         if not inventories:
             # Early exit if no match found
             return []
-        location_ids = inventories.mapped('location_id')
+        location_ids = inventories.mapped("location_id")
 
         # Extend to the children Locations
         location_domain = [
-            ('location_id', 'child_of', location_ids.ids),
-            ('usage', 'in', ['internal', 'transit'])]
-        return self.env['stock.location'].search(location_domain)
+            ("location_id", "child_of", location_ids.ids),
+            ("usage", "in", ["internal", "transit"]),
+        ]
+        return self.env["stock.location"].search(location_domain)
