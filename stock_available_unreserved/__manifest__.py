@@ -9,12 +9,7 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "depends": [
-        "stock",
-    ],
-    "data": [
-        "views/stock_quant_view.xml",
-        "views/product_view.xml",
-    ],
+    "depends": ["stock"],
+    "data": ["views/stock_quant_view.xml", "views/product_view.xml"],
     "license": "LGPL-3",
 }
