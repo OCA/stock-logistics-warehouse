@@ -1,16 +1,12 @@
 # Copyright 2018 Camptocamp SA
-# Copyright 2016 ACSONE SA/NV (<http://acsone.eu>)
-# Copyright 2016 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2016-19 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_round
 
-from odoo.addons import decimal_precision as dp
 from odoo.addons.stock.models.product import OPERATORS
-
-UNIT = dp.get_precision("Product Unit of Measure")
 
 
 class ProductTemplate(models.Model):
@@ -18,12 +14,11 @@ class ProductTemplate(models.Model):
 
     qty_available_not_res = fields.Float(
         string="Quantity On Hand Unreserved",
-        digits=UNIT,
+        digits="Product Unit of Measure",
         compute="_compute_product_available_not_res",
         search="_search_quantity_unreserved",
     )
 
-    @api.multi
     @api.depends("product_variant_ids.qty_available_not_res")
     def _compute_product_available_not_res(self):
         for tmpl in self:
@@ -33,14 +28,13 @@ class ProductTemplate(models.Model):
                 tmpl.mapped("product_variant_ids.qty_available_not_res")
             )
 
-    @api.multi
     def action_open_quants_unreserved(self):
         products_ids = self.mapped("product_variant_ids").ids
         quants = self.env["stock.quant"].search([("product_id", "in", products_ids)])
         quant_ids = quants.filtered(
             lambda x: x.product_id.qty_available_not_res > 0
         ).ids
-        result = self.env.ref("stock.product_open_quants").read()[0]
+        result = self.env.ref("stock.product_template_open_quants").read()[0]
         result["domain"] = [("id", "in", quant_ids)]
         result["context"] = {
             "search_default_locationgroup": 1,
@@ -59,19 +53,17 @@ class ProductProduct(models.Model):
 
     qty_available_not_res = fields.Float(
         string="Qty Available Not Reserved",
-        digits=UNIT,
+        digits="Product Unit of Measure",
         compute="_compute_qty_available_not_reserved",
         search="_search_quantity_unreserved",
     )
 
-    @api.multi
     def _prepare_domain_available_not_reserved(self):
         domain_quant = [("product_id", "in", self.ids)]
         domain_quant_locations = self._get_domain_locations()[0]
         domain_quant.extend(domain_quant_locations)
         return domain_quant
 
-    @api.multi
     def _compute_product_available_not_res_dict(self):
 
         res = {}
@@ -102,7 +94,6 @@ class ProductProduct(models.Model):
             res[product.id] = {"qty_available_not_res": available_not_res}
         return res
 
-    @api.multi
     @api.depends("stock_move_ids.product_qty", "stock_move_ids.state")
     def _compute_qty_available_not_reserved(self):
         res = self._compute_product_available_not_res_dict()
