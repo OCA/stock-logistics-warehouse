@@ -1,7 +1,5 @@
 # Copyright 2018 Camptocamp SA
-# Copyright 2016 ACSONE SA/NV (<http://acsone.eu>)
-# Copyright 2016 ForgeFlow S.L. (https://www.forgeflow.com)
-# Copyright 2016 Therp BV <http://therp.nl>
+# Copyright 2016-19 ForgeFlow S.L. (https://www.forgeflow.com)
 # Copyright 2019 JARSA Sistemas S.A. de C.V.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
@@ -15,6 +13,9 @@ class TestStockLogisticsWarehouse(SavepointCase):
         cls.pickingObj = cls.env["stock.picking"]
         cls.productObj = cls.env["product.product"]
         cls.templateObj = cls.env["product.template"]
+        cls.attrObj = cls.env["product.attribute"]
+        cls.attrvalueObj = cls.env["product.attribute.value"]
+
         cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
@@ -43,33 +44,33 @@ class TestStockLogisticsWarehouse(SavepointCase):
 
         # Create product template
         cls.templateAB = cls.templateObj.create(
-            {"name": "templAB", "uom_id": cls.uom_unit.id}
+            {"name": "templAB", "uom_id": cls.uom_unit.id, "type": "product"}
         )
-
-        cls.productC = cls.templateAB.product_variant_ids
 
         # Create product A and B
-        cls.productA = cls.productObj.create(
+        cls.color_attribute = cls.attrObj.create({"name": "Color", "sequence": 1})
+        cls.color_black = cls.attrvalueObj.create(
+            {"name": "Black", "attribute_id": cls.color_attribute.id, "sequence": 1}
+        )
+        cls.color_white = cls.attrvalueObj.create(
+            {"name": "White", "attribute_id": cls.color_attribute.id, "sequence": 2}
+        )
+        cls.color_grey = cls.attrvalueObj.create(
+            {"name": "Grey", "attribute_id": cls.color_attribute.id, "sequence": 3}
+        )
+        cls.product_attribute_line = cls.env["product.template.attribute.line"].create(
             {
-                "name": "product A",
-                "standard_price": 1,
-                "type": "product",
-                "uom_id": cls.uom_unit.id,
-                "default_code": "A",
                 "product_tmpl_id": cls.templateAB.id,
+                "attribute_id": cls.color_attribute.id,
+                "value_ids": [
+                    (6, 0, [cls.color_white.id, cls.color_black.id, cls.color_grey.id])
+                ],
             }
         )
+        cls.productA = cls.templateAB.product_variant_ids[0]
+        cls.productB = cls.templateAB.product_variant_ids[1]
 
-        cls.productB = cls.productObj.create(
-            {
-                "name": "product B",
-                "standard_price": 1,
-                "type": "product",
-                "uom_id": cls.uom_unit.id,
-                "default_code": "B",
-                "product_tmpl_id": cls.templateAB.id,
-            }
-        )
+        cls.productC = cls.templateAB.product_variant_ids[2]
 
         # Create a picking move from INCOMING to STOCK
         cls.pickingInA = cls.pickingObj.create(
@@ -143,7 +144,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
         product.invalidate_cache()
         self.assertEqual(product.qty_available_not_res, value)
 
-    def test_stock_levels(self):
+    def test_01_stock_levels(self):
         """checking that qty_available_not_res actually reflects \
         the variations in stock, both on product and template"""
 
@@ -185,7 +186,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
 
         self.templateAB.action_open_quants_unreserved()
 
-    def test_more_than_one_quant(self):
+    def test_02_more_than_one_quant(self):
         self.env["stock.quant"].create(
             {
                 "location_id": self.stock_location.id,
@@ -239,7 +240,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
                 )
             )
 
-    def test_stock_search(self):
+    def test_03_stock_search(self):
         all_variants = self.templateAB.product_variant_ids
         a_and_b = self.productA + self.productB
         b_and_c = self.productB + self.productC
