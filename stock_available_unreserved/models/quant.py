@@ -14,11 +14,10 @@ class StockQuant(models.Model):
         store=True,
     )
 
-    @api.depends('product_id', 'location_id', 'quantity', 'reserved_quantity')
+    @api.depends("product_id", "location_id", "quantity", "reserved_quantity")
     def _compute_contains_unreserved(self):
         for record in self:
             available = record._get_available_quantity(
-                record.product_id,
-                record.location_id,
+                record.product_id, record.location_id
             )
             record.contains_unreserved = True if available > 0 else False
