@@ -45,11 +45,7 @@ class StockInventoryLocationTest(TestStockCommon):
         )
         # Prepare an inventory
         self.inventory = self.env["stock.inventory"].create(
-            {
-                "name": "Lock down location",
-                "filter": "none",
-                "location_id": self.new_location.id,
-            }
+            {"name": "Lock down location", "location_ids": [(4, self.new_location.id)]}
         )
         self.inventory.action_start()
         self.assertTrue(self.inventory.line_ids, "The inventory is empty.")
@@ -69,13 +65,15 @@ class StockInventoryLocationTest(TestStockCommon):
     def test_update_parent_location(self):
         """Updating the parent of a location is OK if no inv. in progress."""
         self.inventory.action_cancel_draft()
-        self.inventory.location_id.location_id = self.env.ref("stock.stock_location_4")
+        self.inventory.location_ids.location_id = self.env.ref(
+            "stock.stock_location_14"
+        )
 
     def test_update_parent_location_locked_down(self):
         """Updating the parent of a location must fail"""
         with self.assertRaises(ValidationError):
-            self.inventory.location_id.location_id = self.env.ref(
-                "stock.stock_location_4"
+            self.inventory.location_ids.location_id = self.env.ref(
+                "stock.stock_location_stock"
             )
 
     def test_inventory(self):
@@ -103,8 +101,7 @@ class StockInventoryLocationTest(TestStockCommon):
         inventory_subloc = self.env["stock.inventory"].create(
             {
                 "name": "Lock down location",
-                "filter": "partial",
-                "location_id": self.new_sublocation.id,
+                "location_ids": [(4, self.new_sublocation.id)],
             }
         )
         inventory_subloc.action_start()
@@ -127,7 +124,7 @@ class StockInventoryLocationTest(TestStockCommon):
         """Stock moves must be forbidden during inventory from/to inventoried
         location."""
         move1 = self.create_stock_move(
-            self.productA, origin_id=self.inventory.location_id.id
+            self.productA, origin_id=self.inventory.location_ids.id
         )
         move1._action_confirm()
         with self.assertRaises(ValidationError):
@@ -135,7 +132,7 @@ class StockInventoryLocationTest(TestStockCommon):
             move1.move_line_ids[0].qty_done = 10.0
             move1._action_done()
         move2 = self.create_stock_move(
-            self.productA, dest_id=self.inventory.location_id.id
+            self.productA, dest_id=self.inventory.location_ids.id
         )
         with self.assertRaises(ValidationError):
             move2._action_confirm()
