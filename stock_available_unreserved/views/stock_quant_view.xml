@@ -18,8 +18,7 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window"
-            id="product_open_quants_unreserved">
+    <record id="product_open_quants_unreserved" model="ir.actions.act_window">
         <field name="name">Stock On Hand (Unreserved)</field>
         <field name="context">{'search_default_internal_loc': 1, 'search_default_locationgroup':1}</field>
         <field name="domain">[('product_id', '=', active_id), ('contains_unreserved', '=', True)]</field>
