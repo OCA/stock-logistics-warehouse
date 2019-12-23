@@ -1,4 +1,4 @@
-# Copyright 2019 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import SavepointCase
@@ -13,6 +13,7 @@ class TestStockAccountChangeQtyReason(SavepointCase):
         cls.product_product_model = cls.env["product.product"]
         cls.product_category_model = cls.env["product.category"]
         cls.wizard_model = cls.env["stock.change.product.qty"]
+        cls.stock_inventory = cls.env["stock.inventory"]
         cls.preset_reason = cls.env["stock.inventory.line.reason"]
 
         # INSTANCES
@@ -76,6 +77,14 @@ class TestStockAccountChangeQtyReason(SavepointCase):
         # Start Inventory with 10 units
         cls.product = cls._create_product(cls, "product_product")
         cls._product_change_qty(cls, cls.product, 10)
+        cls.inventory = cls.stock_inventory.create(
+            {
+                "name": "Inventory Adjustment Product",
+                "product_ids": [(4, cls.product.id)],
+                "preset_reason_id": cls.reason.id,
+            }
+        )
+        cls.inventory.action_start()
 
     def _create_product(self, name):
         return self.product_product_model.create(
@@ -87,12 +96,12 @@ class TestStockAccountChangeQtyReason(SavepointCase):
             }
         )
 
-    def _product_change_qty(self, product, new_qty, reason=None, preset_reason_id=None):
-        values = {"product_id": product.id, "new_quantity": new_qty}
-        if reason:
-            values = {**values, "reason": reason}
-        if preset_reason_id:
-            values = {**values, "preset_reason_id": preset_reason_id.id}
+    def _product_change_qty(self, product, new_qty):
+        values = {
+            "product_tmpl_id": product.product_tmpl_id.id,
+            "product_id": product.id,
+            "new_quantity": new_qty,
+        }
         wizard = self.wizard_model.create(values)
         wizard.change_product_qty()
 
@@ -101,7 +110,8 @@ class TestStockAccountChangeQtyReason(SavepointCase):
 
     def test_product_change_qty_account_input(self):
         # update qty on hand and add reason
-        self._product_change_qty(self.product, 100, self.reason.name, self.reason)
+        self.inventory.line_ids[0].write({"product_qty": 100})
+        self.inventory.action_validate()
 
         # check stock moves and account moves created
         stock_move = self.env["stock.move"].search(
@@ -130,7 +140,8 @@ class TestStockAccountChangeQtyReason(SavepointCase):
 
     def test_product_change_qty_account_output(self):
         # update qty on hand and add reason
-        self._product_change_qty(self.product, 5, self.reason.name, self.reason)
+        self.inventory.line_ids[0].write({"product_qty": 5})
+        self.inventory.action_validate()
 
         # check stock moves and account moves created
         stock_move = self.env["stock.move"].search(
