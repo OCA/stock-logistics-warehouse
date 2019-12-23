@@ -9,8 +9,9 @@ class StockMove(models.Model):
     @api.multi
     def _get_accounting_data_for_valuation(self):
         self.ensure_one()
-        journal_id, acc_src, acc_dest, acc_valuation = \
-            super(StockMove, self)._get_accounting_data_for_valuation()
+        journal_id, acc_src, acc_dest, acc_valuation = super(
+            StockMove, self
+        )._get_accounting_data_for_valuation()
         if self.preset_reason_id:
             if self.preset_reason_id.account_reason_input_id:
                 acc_src = self.preset_reason_id.account_reason_input_id.id
