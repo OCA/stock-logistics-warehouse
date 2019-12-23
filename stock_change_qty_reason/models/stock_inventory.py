@@ -1,4 +1,4 @@
-# Copyright 2019 Eficent Business and IT Consulting Services S.L.
+# Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 
@@ -20,10 +20,16 @@ class StockInventory(models.Model):
 
     @api.onchange("reason")
     def onchange_reason(self):
-        for line in self.line_ids:
+        line_ids = self.line_ids
+        if not isinstance(self.id, int):
+            line_ids = self.browse(self.id.origin).line_ids
+        for line in line_ids:
             line.reason = self.reason
 
     @api.onchange("preset_reason_id")
     def onchange_preset_reason(self):
-        for line in self.line_ids:
+        line_ids = self.line_ids
+        if not isinstance(self.id, int):
+            line_ids = self.browse(self.id.origin).line_ids
+        for line in line_ids:
             line.preset_reason_id = self.preset_reason_id
