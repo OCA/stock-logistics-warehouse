@@ -18,9 +18,7 @@ class StockInventoryLine(models.Model):
             qty, location_id, location_dest_id, out
         )
         context = (
-            self.env.context.get("change_quantity_reason", False) or self.reason
-            if not self.preset_reason_id
-            else self.preset_reason_id.name
+            self.reason if not self.preset_reason_id else self.preset_reason_id.name
         )
         if res.get("origin"):
             res["origin"] = " ,".join([res.get("origin"), context])

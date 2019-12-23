@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2019 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2019 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_preset_reason" model="ir.ui.view">
@@ -30,7 +30,6 @@
             <field name="name">Change Qty Reasons</field>
             <field name="res_model">stock.inventory.line.reason</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="view_type">form</field>
             <field name="view_mode">list,form</field>
     </record>
 
