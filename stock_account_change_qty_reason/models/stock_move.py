@@ -1,12 +1,11 @@
-# Copyright 2019 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, models
+from odoo import models
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.multi
     def _get_accounting_data_for_valuation(self):
         self.ensure_one()
         journal_id, acc_src, acc_dest, acc_valuation = super(
