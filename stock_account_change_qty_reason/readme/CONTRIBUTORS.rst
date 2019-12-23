@@ -1,1 +1,2 @@
-* Héctor Villarreal <hector.villarreal@eficent.com>
+* Héctor Villarreal <hector.villarreal@forgeflow.com>
+* Adrià Gil Sorribes <adria.gil@forgeflow.com>
