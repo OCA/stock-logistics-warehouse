@@ -4,13 +4,17 @@ from odoo import fields, models
 
 
 class StockAccountInventoryChangeReason(models.Model):
-    _inherit = 'stock.inventory.line.reason'
+    _inherit = "stock.inventory.line.reason"
 
     account_reason_input_id = fields.Many2one(
-        'account.account', string="Input Account for Stock Valuation",
+        "account.account",
+        string="Input Account for Stock Valuation",
         help="When set, it will be used as offsetting account when "
-             "products are received into the company.")
+        "products are received into the company.",
+    )
     account_reason_output_id = fields.Many2one(
-        'account.account', string="Output Account for Stock Valuation",
+        "account.account",
+        string="Output Account for Stock Valuation",
         help="When set, it will be used as offsetting account when "
-             "products are issued from the company.")
+        "products are issued from the company.",
+    )
