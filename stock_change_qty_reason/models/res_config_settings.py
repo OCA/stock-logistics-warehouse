@@ -4,11 +4,12 @@ from odoo import fields, models
 
 
 class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
+    _inherit = "res.config.settings"
 
     group_qty_reason_preset = fields.Boolean(
         string="Preset Change Qty Reason",
         required=True,
-        implied_group='stock_change_qty_reason.group_qty_reason_preset',
+        implied_group="stock_change_qty_reason.group_qty_reason_preset",
         help="Enable use of predefined Reasons to manage Inventory Adjustments"
-             "and Product Update Quantities Wizard.")
+        "and Product Update Quantities Wizard.",
+    )
