@@ -6,5 +6,4 @@ from odoo import fields, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    preset_reason_id = fields.Many2one('stock.inventory.line.reason',
-                                       required=False)
+    preset_reason_id = fields.Many2one("stock.inventory.line.reason", required=False)
