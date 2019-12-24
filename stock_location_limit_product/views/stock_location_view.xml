@@ -1,0 +1,25 @@
+<odoo>
+
+    <!-- Inherited stock location form view -->
+    <record id="stock_location_view_form_extend" model="ir.ui.view">
+        <field name="name">stock.location.view.form.extend</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='localization']" position="after">
+                <group name="limits" string="Limits">
+                    <field name="limit_ids" nolabel="1">
+                        <tree string="Stock Location Limit" editable="bottom">
+                            <field name="product_id" required="1"/>
+                            <field name="qty" required="1"/>
+                            <field name="uom_id"
+                                   options="{'no_open': True, 'no_create': True}"
+                                   groups="uom.group_uom"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

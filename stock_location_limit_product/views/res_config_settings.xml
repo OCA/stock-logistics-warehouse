@@ -1,0 +1,12 @@
+<odoo>
+
+    <record model="res.config.settings" id="res_config_settings_stock_location_limit_product">
+        <field name="group_stock_multi_locations" eval="1"/>
+    </record>
+
+    <function model="res.config.settings" name="execute">
+        <!-- ids = -->      <value eval="[ref('stock_location_limit_product.res_config_settings_stock_location_limit_product')]"/>
+        <!-- context = -->  <value eval="{}"/>
+    </function>
+
+</odoo>
