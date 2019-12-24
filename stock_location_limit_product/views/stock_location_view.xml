@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
 
     <!-- Inherited stock location form view -->
@@ -9,12 +7,14 @@
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='localization']" position="after">
-                <group name="limit_grp" string="Limit">
+                <group name="limits" string="Limits">
                     <field name="limit_ids" nolabel="1">
-                        <tree string="Stock Location Limit" editable="top">
+                        <tree string="Stock Location Limit" editable="bottom">
                             <field name="product_id" required="1"/>
                             <field name="qty" required="1"/>
-                            <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom"/>
+                            <field name="uom_id"
+                                   options="{'no_open': True, 'no_create': True}"
+                                   groups="uom.group_uom"/>
                         </tree>
                     </field>
                 </group>
