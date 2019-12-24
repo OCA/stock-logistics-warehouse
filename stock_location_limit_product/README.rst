@@ -13,14 +13,18 @@ Stock Location Limit Product
 .. |badge2| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
     :target: https://github.com/OCA/stock-logistics-warehouse/tree/12.0/stock_location_limit_product
     :alt: OCA/stock-logistics-warehouse
-.. |badge3| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
+.. |badge3| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-12-0/stock-logistics-warehouse-12-0-stock_location_limit_product
+    :alt: Translate me on Weblate
+.. |badge4| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/153/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3|
+|badge1| |badge2| |badge3| |badge4| 
 
-This module allows you to define a limit by product quantity on a stock location. This limit can later be used to track the capacity available of the location.
-
+This module allows you to define a limit by product quantity
+on a stock location.This limit can later be used to track
+the capacity available of the location.
 
 **Table of contents**
 
@@ -30,11 +34,9 @@ This module allows you to define a limit by product quantity on a stock location
 Configuration
 =============
 
-In Inventory Settings, Go to
-    Inventory > Configuration > Warehouse Management > Locations
+Go to Inventory > Configuration > Warehouse Management > Locations
     Select or create a location
     Enter the limits by selecting a product and entering the quantity
-
 
 Bug Tracker
 ===========
@@ -53,13 +55,18 @@ Authors
 ~~~~~~~
 
 * Open Source Integrators
-* Odoo Community Association (OCA)
+* 
 
 Contributors
 ~~~~~~~~~~~~
 
-* Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
-* Nikita Vaghela <nikita.vaghela.serpentcs@gmail.com>
+* Open Source Integrators <https://www.@opensourceintegrators.com>
+
+    * Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
+
+* Serpent Consulting Services Pvt. Ltd. <https://www.serpentcs.com>
+
+    * Nikita Vaghela <nikita.vaghela.serpentcs@gmail.com>
 
 Maintainers
 ~~~~~~~~~~~
@@ -73,6 +80,14 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
+
+.. |maintainer-max3903| image:: https://github.com/max3903.png?size=40px
+    :target: https://github.com/max3903
+    :alt: max3903
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-max3903| 
 
 This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/12.0/stock_location_limit_product>`_ project on GitHub.
 
