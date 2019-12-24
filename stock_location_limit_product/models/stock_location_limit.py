@@ -21,8 +21,8 @@ class StockLocationLimit(models.Model):
             raise ValidationError(_(
                 "The unit of measure for the limit with the product %s must "
                 "be in the uom category %s!") %
-                                  (self.product_id.name,
-                                   self.product_id.uom_id.category_id.name))
+                (self.product_id.name,
+                 self.product_id.uom_id.category_id.name))
 
     _sql_constraints = [
         ('product_uniq', 'unique(product_id,location_id)',
