@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_inventory_cost_info
-#: model:ir.ui.view,arch_db:stock_inventory_cost_info.report_inventory_cost_info
+#: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.report_inventory_cost_info
 msgid "<strong>Adjustment cost</strong>"
 msgstr "<strong>Coste de ajuste</strong>"
 
 #. module: stock_inventory_cost_info
-#: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line_adjustment_cost
+#: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line__adjustment_cost
 msgid "Adjustment cost"
 msgstr "Coste de ajuste"
 
 #. module: stock_inventory_cost_info
-#: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line_currency_id
+#: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line__currency_id
 msgid "Currency"
 msgstr "Moneda"
 
@@ -37,8 +37,8 @@ msgid "Inventory Line"
 msgstr "Línea de inventario"
 
 #. module: stock_inventory_cost_info
-#: model:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree
-#: model:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree2
-#: model:ir.ui.view,arch_db:stock_inventory_cost_info.view_inventory_form
+#: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree
+#: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree2
+#: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.view_inventory_form
 msgid "Total"
 msgstr ""
