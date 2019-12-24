@@ -1,10 +1,9 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from dateutil.rrule import MONTHLY
-from odoo import fields
-from odoo.exceptions import ValidationError
+# Copyright 2017-19 ForgeFlow S.L. (https://www.forgeflow.com)
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
 from odoo.tests.common import SavepointCase
+
+from datetime import date, timedelta as td
 
 
 class TestStockDemandEstimate(SavepointCase):
@@ -14,10 +13,13 @@ class TestStockDemandEstimate(SavepointCase):
         cls.res_users_model = cls.env['res.users']
         cls.product_model = cls.env['product.product']
         cls.stock_location_model = cls.env['stock.location']
+        cls.estimate_model = cls.env["stock.demand.estimate"]
 
         cls.g_stock_manager = cls.env.ref('stock.group_stock_manager')
         cls.g_stock_user = cls.env.ref('stock.group_stock_user')
         cls.company = cls.env.ref('base.main_company')
+        cls.uom_unit = cls.env.ref('uom.product_uom_unit')
+        cls.uom_dozen = cls.env.ref('uom.product_uom_dozen')
 
         # Create users:
         cls.manager = cls._create_user(
@@ -30,27 +32,13 @@ class TestStockDemandEstimate(SavepointCase):
             [cls.g_stock_user],
             cls.company,
         ).id
-        cls.drt_monthly = cls.env['date.range.type'].create({
-            'name': 'Month',
-            'allow_overlap': False,
-        })
-
-        generator = cls.env['date.range.generator']
-        generator = generator.create({
-            'date_start': '1943-01-01',
-            'name_prefix': '1943-',
-            'type_id': cls.drt_monthly.id,
-            'duration_count': 1,
-            'unit_of_time': MONTHLY,
-            'count': 12,
-        })
-        generator.action_apply()
 
         # Create a product:
-        cls.product1 = cls.product_model.create({
+        cls.product_1 = cls.product_model.create({
             'name': 'Test Product 1',
             'type': 'product',
             'default_code': 'PROD1',
+            "uom_id": cls.uom_unit.id,
         })
         # Create a location:
         cls.location = cls.stock_location_model.create({
@@ -72,107 +60,57 @@ class TestStockDemandEstimate(SavepointCase):
         })
         return user
 
-    def test_demand_estimate(self):
-        """Tests creation of demand estimates."""
-        sheets = self.env['stock.demand.estimate.sheet'].search([])
-        for sheet in sheets:
-            sheet.unlink()
-        wiz = self.env['stock.demand.estimate.wizard']
-        wiz = wiz.create({
-            'date_start': '1943-01-01',
-            'date_end': '1943-12-31',
-            'location_id': self.location.id,
-            'date_range_type_id': self.drt_monthly.id,
-            'product_ids': [(6, 0, [self.product1.id])],
+    def test_01_create_estimate(self):
+        """Crete an estimate entering manually the date from and date to."""
+        date_from = date.today() + td(days=10)
+        date_to = date.today() + td(days=20)
+        estimate = self.estimate_model.create({
+            "product_id": self.product_1.id,
+            "location_id": self.location.id,
+            "manual_date_from": date_from,
+            "manual_date_to": date_to,
+            "product_uom_qty": 500.0,
         })
-        wiz.create_sheet()
-        sheets = self.env['stock.demand.estimate.sheet'].search([])
-        for sheet in sheets:
-            self.assertEqual(
-                len(sheet.line_ids),
-                12,
-                'There should be 12 lines.',
-            )
-            self.assertEqual(
-                fields.Date.to_string(sheet.date_start),
-                '1943-01-01',
-                'The date start should be 1943-01-01',
-            )
-            self.assertEqual(
-                fields.Date.to_string(sheet.date_end),
-                '1943-12-31',
-                'The date end should be 1943-12-31',
-            )
-            self.assertEqual(
-                sheet.location_id.id,
-                self.location.id,
-                'Wrong location',
-            )
-            for line in sheet.line_ids:
-                line.product_uom_qty = 1
-                self.assertEqual(
-                    line.product_id.id,
-                    self.product1.id,
-                    'The product does not match in the line',
-                )
-                self.assertEqual(
-                    line.location_id.id,
-                    self.location.id,
-                    'The product does not match in the line',
-                )
-            sheet.button_validate()
-            ranges = self.env['date.range'].search(
-                [('type_id', '=', self.drt_monthly.id)],
-            )
-            estimates = self.env['stock.demand.estimate'].search(
-                [('date_range_id', 'in', ranges.ids)]
-            )
-            self.assertEqual(
-                len(estimates),
-                12,
-                'There should be 12 estimate records.',
-            )
-            for estimate in estimates:
-                self.assertEqual(
-                    estimate.product_id.id,
-                    self.product1.id,
-                    'The product does not match in the estimate',
-                )
-                self.assertEqual(
-                    estimate.location_id.id,
-                    self.location.id,
-                    'The product does not match in the estimate',
-                )
+        self.assertEqual(estimate.date_from, date_from)
+        self.assertEqual(estimate.date_to, date_to)
+        self.assertEqual(estimate.duration, 10)
+        self.assertEqual(estimate.product_qty, 500.0)
+        self.assertEqual(estimate.daily_qty, 500.0 / 10.0)
 
-        sheets = self.env['stock.demand.estimate.sheet'].search([])
-        for sheet in sheets:
-            sheet.unlink()
-        wiz = self.env['stock.demand.estimate.wizard']
-        wiz = wiz.create({
-            'date_start': '1943-01-01',
-            'date_end': '1943-12-31',
-            'location_id': self.location.id,
-            'date_range_type_id': self.drt_monthly.id,
-            'product_ids': [(6, 0, [self.product1.id])],
+    def test_02_create_estimate_by_duration_and_different_uom(self):
+        """Create an estimate entering manually the date from, duration and
+        using a different UoM than product's."""
+        date_from = date.today() + td(days=10)
+        estimate = self.estimate_model.create({
+            "product_id": self.product_1.id,
+            "location_id": self.location.id,
+            "manual_date_from": date_from,
+            "manual_duration": 15,
+            "product_uom_qty": 100.0,
+            "product_uom": self.uom_dozen.id,
         })
-        wiz.create_sheet()
-        sheets = self.env['stock.demand.estimate.sheet'].search([])
-        for sheet in sheets:
-            for line in sheet.line_ids:
-                self.assertEqual(
-                    line.product_uom_qty,
-                    1,
-                    'The quantity should be 1',
-                )
+        self.assertEqual(estimate.date_from, date_from)
+        expected_date_to = estimate.date_from + td(days=15)
+        self.assertEqual(estimate.date_to, expected_date_to)
+        self.assertEqual(estimate.duration, 15)
+        expected_qty = 100 * 12.0  # 100 dozens -> units
+        self.assertEqual(estimate.product_qty, expected_qty)
+        self.assertEqual(estimate.daily_qty, expected_qty / 15)
 
-    def test_invalid_dates(self):
-
-        wiz = self.env['stock.demand.estimate.wizard']
-        with self.assertRaises(ValidationError):
-            wiz.create({
-                'date_start': '1943-12-31',
-                'date_end': '1943-01-01',
-                'location_id': self.location.id,
-                'date_range_type_id': self.drt_monthly.id,
-                'product_ids': [(6, 0, [self.product1.id])],
-            })
+    def test_03_get_qty_by_range(self):
+        date_from = date.today() + td(days=10)
+        date_to = date.today() + td(days=20)
+        estimate = self.estimate_model.create({
+            "product_id": self.product_1.id,
+            "location_id": self.location.id,
+            "manual_date_from": date_from,
+            "manual_date_to": date_to,
+            "product_uom_qty": 100.0,
+        })
+        self.assertEqual(estimate.daily_qty, 10.0)
+        res = estimate.get_quantity_by_date_range(
+            date_from + td(days=3), date_from + td(days=17))
+        self.assertEqual(res, 80)
+        res = estimate.get_quantity_by_date_range(
+            date_from + td(days=3), date_from + td(days=7))
+        self.assertEqual(res, 50)

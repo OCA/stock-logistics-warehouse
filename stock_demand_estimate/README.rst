@@ -10,9 +10,9 @@ Stock Demand Estimate
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
-    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
-    :alt: License: AGPL-3
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
+    :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
+    :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
     :target: https://github.com/OCA/stock-logistics-warehouse/tree/12.0/stock_demand_estimate
     :alt: OCA/stock-logistics-warehouse
@@ -35,27 +35,6 @@ The module does not provide in itself any specific usage of the estimates.
 .. contents::
    :local:
 
-Installation
-============
-
-This module relies on:
-
-* The OCA module '2D matrix for x2many fields', and can be downloaded from
-  Github: https://github.com/OCA/web/tree/12.0/web_widget_x2many_2d_matrix
-* The OCA module 'Date Range', and can be downloaded from
-  Github: https://github.com/OCA/server-ux/tree/12.0/date_range
-
-Usage
-=====
-
-Go to 'Inventory / Configuration / Date Ranges' and define your estimating periods.
-
-Go to 'Inventory / Demand Planning / Create Demand Estimates' to create or
-update your demand estimates.
-
-Go to 'Inventory / Demand Planning / Demand Estimates' to review the
-estimates created.
-
 Bug Tracker
 ===========
 
@@ -72,13 +51,13 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 
 Contributors
 ~~~~~~~~~~~~
 
-* Jordi Ballester Alomar <jordi.ballester@eficent.com>
-* Lois Rilo <lois.rilo@eficent.com>
+* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+* Lois Rilo <lois.rilo@forgeflow.com>
 
 Maintainers
 ~~~~~~~~~~~
