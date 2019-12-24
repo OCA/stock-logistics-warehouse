@@ -27,6 +27,7 @@ setuptools.setup(
         'odoo12-addon-stock_inventory_lockdown',
         'odoo12-addon-stock_inventory_preparation_filter',
         'odoo12-addon-stock_inventory_verification_request',
+        'odoo12-addon-stock_location_limit_product',
         'odoo12-addon-stock_location_lockdown',
         'odoo12-addon-stock_location_zone',
         'odoo12-addon-stock_move_location',
