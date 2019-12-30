@@ -21,18 +21,20 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_move.py:39
-#, python-format
+#: code:addons/stock_inventory_lockdown/models/stock_move.py:0
+#, fuzzy, python-format
+#| msgid ""
+#| "An inventory is being conducted at the following location(s):\n"
+#| "%s"
 msgid ""
 "An inventory is being conducted at the following location(s):\n"
-"%s"
+" - %s"
 msgstr ""
 "正在以下位置进行盘点：\n"
 "%s"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_location.py:22
-#: code:addons/stock_inventory_lockdown/models/stock_location.py:31
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:0
 #, python-format
 msgid "An inventory is being conducted at this location"
 msgstr "正在此位置进行盘点"
