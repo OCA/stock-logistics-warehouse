@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo12-addon-stock_change_qty_reason',
         'odoo12-addon-stock_cycle_count',
         'odoo12-addon-stock_demand_estimate',
+        'odoo12-addon-stock_demand_estimate_matrix',
         'odoo12-addon-stock_inventory_chatter',
         'odoo12-addon-stock_inventory_cost_info',
         'odoo12-addon-stock_inventory_discrepancy',
