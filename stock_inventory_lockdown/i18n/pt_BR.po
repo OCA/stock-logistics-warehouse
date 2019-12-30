@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
 "PO-Revision-Date: 2019-11-24 19:58+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,18 +21,20 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_move.py:39
-#, python-format
+#: code:addons/stock_inventory_lockdown/models/stock_move.py:0
+#, fuzzy, python-format
+#| msgid ""
+#| "An inventory is being conducted at the following location(s):\n"
+#| "%s"
 msgid ""
 "An inventory is being conducted at the following location(s):\n"
-"%s"
+" - %s"
 msgstr ""
 "Um inventário está sendo realizado nos seguintes locais:\n"
 "%s"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_location.py:22
-#: code:addons/stock_inventory_lockdown/models/stock_location.py:31
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:0
 #, python-format
 msgid "An inventory is being conducted at this location"
 msgstr "Um inventário está sendo realizado neste local"
