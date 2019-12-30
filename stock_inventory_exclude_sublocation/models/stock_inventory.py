@@ -1,5 +1,4 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2019 ForgeFlow S.L. (http://www.forgeflow.com)
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -28,6 +27,6 @@ class Inventory(models.Model):
             return vals
         new_vals = []
         for val in vals:
-            if val["location_id"] == self.location_id.id:
+            if val["location_id"] in self.location_ids.ids:
                 new_vals.append(val)
         return new_vals
