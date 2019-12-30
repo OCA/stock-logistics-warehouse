@@ -5,21 +5,15 @@
 {
     "name": "Stock Inventory Exclude Sublocation",
     "summary": "Allow to perform inventories of a location without including "
-               "its child locations.",
+    "its child locations.",
     "version": "12.0.1.0.1",
     "development_status": "Mature",
-    "author": "Eficent, "
-              "Tecnativa, "
-              "Odoo Community Association (OCA)",
+    "author": "Eficent, " "Tecnativa, " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "depends": [
-        "stock",
-    ],
-    "data": [
-        'views/stock_inventory_view.xml',
-    ],
+    "depends": ["stock"],
+    "data": ["views/stock_inventory_view.xml"],
     "license": "AGPL-3",
-    'installable': True,
-    'application': False,
+    "installable": True,
+    "application": False,
 }
