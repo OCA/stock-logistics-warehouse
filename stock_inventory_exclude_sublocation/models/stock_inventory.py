@@ -7,12 +7,15 @@ from odoo import fields, models
 
 
 class Inventory(models.Model):
-    _inherit = 'stock.inventory'
+    _inherit = "stock.inventory"
 
     exclude_sublocation = fields.Boolean(
-        string='Exclude Sublocations', default=False,
-        track_visibility='onchange', readonly=True,
-        states={'draft': [('readonly', False)]})
+        string="Exclude Sublocations",
+        default=False,
+        track_visibility="onchange",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+    )
 
     def _get_inventory_lines_values(self):
         """Discard inventory lines that are from sublocations if option
@@ -25,6 +28,6 @@ class Inventory(models.Model):
             return vals
         new_vals = []
         for val in vals:
-            if val['location_id'] == self.location_id.id:
+            if val["location_id"] == self.location_id.id:
                 new_vals.append(val)
         return new_vals
