@@ -10,17 +10,11 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         super(TestStockInventoryExcludeSublocation, self).setUp()
         self.inventory_model = self.env["stock.inventory"]
         self.location_model = self.env["stock.location"]
-        self.lot_model = self.env["stock.production.lot"]
-        self.quant_model = self.env["stock.quant"]
-        self.package_model = self.env["stock.quant.package"]
         self.res_users_model = self.env["res.users"]
 
         self.company = self.env.ref("base.main_company")
         self.partner = self.ref("base.res_partner_4")
         self.grp_stock_manager = self.env.ref("stock.group_stock_manager")
-        self.grp_tracking_owner = self.env.ref("stock.group_tracking_owner")
-        self.grp_production_lot = self.env.ref("stock.group_production_lot")
-        self.grp_tracking_lot = self.env.ref("stock.group_tracking_lot")
 
         self.user = self.res_users_model.create(
             {
@@ -29,18 +23,7 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
                 "email": "example@yourcompany.com",
                 "company_id": self.company.id,
                 "company_ids": [(4, self.company.id)],
-                "groups_id": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.grp_stock_manager.id,
-                            self.grp_tracking_owner.id,
-                            self.grp_production_lot.id,
-                            self.grp_tracking_lot.id,
-                        ],
-                    )
-                ],
+                "groups_id": [(6, 0, [self.grp_stock_manager.id])],
             }
         )
 
@@ -68,19 +51,11 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
                 "location_id": self.location.id,
             }
         )
-        self.lot_a = self.lot_model.create(
-            {"name": "Lot for product1", "product_id": self.product1.id}
-        )
-        self.lot_b = self.lot_model.create(
-            {"name": "Lot for product1", "product_id": self.product2.id}
-        )
-        self.package = self.package_model.create({"name": "PACK00TEST1"})
 
         # Add a product in each location
         starting_inv = self.inventory_model.create(
             {
                 "name": "Starting inventory",
-                "filter": "product",
                 "line_ids": [
                     (
                         0,
@@ -90,7 +65,6 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
                             "product_uom_id": self.env.ref("uom.product_uom_unit").id,
                             "product_qty": 2.0,
                             "location_id": self.location.id,
-                            "prod_lot_id": self.lot_a.id,
                         },
                     ),
                     (
@@ -101,20 +75,19 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
                             "product_uom_id": self.env.ref("uom.product_uom_unit").id,
                             "product_qty": 4.0,
                             "location_id": self.sublocation.id,
-                            "prod_lot_id": self.lot_b.id,
                         },
                     ),
                 ],
             }
         )
+        starting_inv.action_start()
         starting_inv.action_validate()
 
     def _create_inventory_all_products(self, name, location, exclude_sublocation):
         inventory = self.inventory_model.create(
             {
                 "name": name,
-                "filter": "none",
-                "location_id": location.id,
+                "location_ids": [(4, location.id)],
                 "exclude_sublocation": exclude_sublocation,
             }
         )
@@ -153,81 +126,4 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
             len(lines_sublocation),
             1,
             "The products in the sublocations are not excluded",
-        )
-
-    def test_lot_excluding_sublocation(self):
-        """Check if the sublocations are excluded when using lots."""
-        inventory = self.inventory_model.sudo(self.user.id).create(
-            {
-                "name": "Inventory lot",
-                "filter": "lot",
-                "location_id": self.location.id,
-                "lot_id": self.lot_a.id,
-                "exclude_sublocation": True,
-            }
-        )
-        inventory.action_start()
-        inventory.action_validate()
-        lines = inventory.line_ids
-        self.assertEqual(
-            len(lines),
-            1,
-            "The products in the sublocations are " "not excluded with lots.",
-        )
-
-    def test_product_and_owner_excluding_sublocation(self):
-        """Check if sublocations are excluded when filtering by owner and
-        product."""
-        self.quant_model.create(
-            {
-                "product_id": self.product1.id,
-                "location_id": self.location.id,
-                "quantity": 1,
-                "owner_id": self.partner,
-            }
-        )
-        inventory = self.inventory_model.sudo(self.user.id).create(
-            {
-                "name": "Inventory lot",
-                "filter": "product_owner",
-                "location_id": self.location.id,
-                "product_id": self.product1.id,
-                "partner_id": self.partner,
-                "exclude_sublocation": True,
-            }
-        )
-        inventory.action_start()
-        lines = inventory.line_ids
-        self.assertEqual(
-            len(lines),
-            1,
-            "The products in the sublocations are "
-            "not excluded with product and owner filter.",
-        )
-
-    def test_pack_excluding_sublocation(self):
-        """Check if sublocations are excluded when filtering by package."""
-        self.quant_model.create(
-            {
-                "product_id": self.product1.id,
-                "location_id": self.location.id,
-                "quantity": 1,
-                "package_id": self.package.id,
-            }
-        )
-        inventory = self.inventory_model.sudo(self.user.id).create(
-            {
-                "name": "Inventory lot",
-                "filter": "pack",
-                "location_id": self.location.id,
-                "package_id": self.package.id,
-                "exclude_sublocation": True,
-            }
-        )
-        inventory.action_start()
-        lines = inventory.line_ids
-        self.assertEqual(
-            len(lines),
-            1,
-            "The products in the sublocations are " "not excluded with package filter.",
         )
