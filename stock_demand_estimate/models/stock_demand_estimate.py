@@ -85,14 +85,14 @@ class StockDemandEstimate(models.Model):
             rec.date_from = rec.manual_date_from or today
             if rec.manual_date_to:
                 rec.date_to = rec.manual_date_to
-                rec.duration = (rec.manual_date_to - rec.date_from).days
+                rec.duration = (rec.manual_date_to - rec.date_from).days + 1
             elif rec.manual_duration:
                 rec.date_to = rec.date_from + timedelta(
-                    days=rec.manual_duration)
+                    days=rec.manual_duration - 1)
                 rec.duration = rec.manual_duration
             else:
                 rec.date_to = rec.date_from + timedelta(days=1)
-                rec.duration = 1
+                rec.duration = 2
 
     @api.multi
     @api.depends("product_qty", "duration")
@@ -138,14 +138,14 @@ class StockDemandEstimate(models.Model):
         for rec in self:
             if rec.manual_date_from:
                 rec.manual_duration = (
-                    rec.manual_date_to - rec.manual_date_from).days
+                    rec.manual_date_to - rec.manual_date_from).days + 1
 
     @api.onchange("manual_duration")
     def _onchange_manual_duration(self):
         for rec in self:
             if rec.manual_date_from:
                 rec.manual_date_to = rec.manual_date_from + timedelta(
-                    days=rec.manual_duration)
+                    days=rec.manual_duration - 1)
 
     @api.model
     def get_quantity_by_date_range(self, date_start, date_end):
