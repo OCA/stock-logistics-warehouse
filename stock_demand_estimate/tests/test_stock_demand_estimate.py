@@ -63,7 +63,7 @@ class TestStockDemandEstimate(SavepointCase):
     def test_01_create_estimate(self):
         """Crete an estimate entering manually the date from and date to."""
         date_from = date.today() + td(days=10)
-        date_to = date.today() + td(days=20)
+        date_to = date.today() + td(days=19)
         estimate = self.estimate_model.create({
             "product_id": self.product_1.id,
             "location_id": self.location.id,
@@ -90,7 +90,7 @@ class TestStockDemandEstimate(SavepointCase):
             "product_uom": self.uom_dozen.id,
         })
         self.assertEqual(estimate.date_from, date_from)
-        expected_date_to = estimate.date_from + td(days=15)
+        expected_date_to = estimate.date_from + td(days=15 - 1)
         self.assertEqual(estimate.date_to, expected_date_to)
         self.assertEqual(estimate.duration, 15)
         expected_qty = 100 * 12.0  # 100 dozens -> units
@@ -99,7 +99,7 @@ class TestStockDemandEstimate(SavepointCase):
 
     def test_03_get_qty_by_range(self):
         date_from = date.today() + td(days=10)
-        date_to = date.today() + td(days=20)
+        date_to = date.today() + td(days=19)
         estimate = self.estimate_model.create({
             "product_id": self.product_1.id,
             "location_id": self.location.id,
@@ -107,10 +107,19 @@ class TestStockDemandEstimate(SavepointCase):
             "manual_date_to": date_to,
             "product_uom_qty": 100.0,
         })
+        self.assertEqual(estimate.duration, 10.0)
         self.assertEqual(estimate.daily_qty, 10.0)
         res = estimate.get_quantity_by_date_range(
             date_from + td(days=3), date_from + td(days=17))
-        self.assertEqual(res, 80)
+        self.assertEqual(res, 70)
         res = estimate.get_quantity_by_date_range(
             date_from + td(days=3), date_from + td(days=7))
         self.assertEqual(res, 50)
+        # get full period
+        res = estimate.get_quantity_by_date_range(
+            date.today(), date_from + td(days=17))
+        self.assertEqual(res, 100)
+        # Get exact period:
+        res = estimate.get_quantity_by_date_range(
+            estimate.date_from, estimate.date_to)
+        self.assertEqual(res, 100)
