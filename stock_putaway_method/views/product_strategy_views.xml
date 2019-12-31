@@ -1,6 +1,5 @@
-<?xml version="1.0"?>
-
 <odoo>
+
     <record id="view_putaway" model="ir.ui.view">
         <field name="name">product.putaway.form.method</field>
         <field name="model">product.putaway</field>
@@ -9,12 +8,10 @@
             <field name="name" position="after">
                 <field name="method"/>
             </field>
-            <xpath expr="//separator" position="attributes">
-                <attribute name="attrs">{'invisible': [('method', '!=', 'fixed')]}</attribute>
-            </xpath>
             <field name="fixed_location_ids" position="attributes">
                 <attribute name="attrs">{'invisible': [('method', '!=', 'fixed')]}</attribute>
             </field>
         </field>
     </record>
+
 </odoo>
