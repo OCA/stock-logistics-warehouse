@@ -1,0 +1,17 @@
+<odoo>
+
+    <record id="view_putaway" model="ir.ui.view">
+        <field name="name">product.putaway.form.method</field>
+        <field name="model">product.putaway</field>
+        <field name="inherit_id" ref="stock.view_putaway"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="method"/>
+            </field>
+            <field name="fixed_location_ids" position="attributes">
+                <attribute name="attrs">{'invisible': [('method', '!=', 'fixed')]}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>
