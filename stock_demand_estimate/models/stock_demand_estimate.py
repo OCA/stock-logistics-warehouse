@@ -2,83 +2,61 @@
 # Copyright 2016 Aleph Objects, Inc. (https://www.alephobjects.com/)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, fields, models, _
-from odoo.addons import decimal_precision as dp
+from datetime import date, timedelta
+
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from datetime import timedelta, date
+from odoo.addons import decimal_precision as dp
 
 
 class StockDemandEstimate(models.Model):
-    _name = 'stock.demand.estimate'
-    _description = 'Stock Demand Estimate Line'
+    _name = "stock.demand.estimate"
+    _description = "Stock Demand Estimate Line"
 
     date_from = fields.Date(
-        compute="_compute_dates",
-        string="From (computed)",
-        store=True
+        compute="_compute_dates", string="From (computed)", store=True
     )
-    date_to = fields.Date(
-        compute="_compute_dates",
-        string="To (computed)",
-        store=True,
-    )
+    date_to = fields.Date(compute="_compute_dates", string="To (computed)", store=True)
     manual_date_from = fields.Date(string="From")
     manual_date_to = fields.Date(string="To")
     manual_duration = fields.Integer(
-        string="Duration",
-        help="Duration (in days)",
-        default=1,
+        string="Duration", help="Duration (in days)", default=1
     )
     duration = fields.Integer(
-        compute="_compute_dates",
-        string="Duration (computed))",
-        store=True,
+        compute="_compute_dates", string="Duration (computed))", store=True
     )
     product_id = fields.Many2one(
-        comodel_name="product.product",
-        string="Product",
-        required=True,
+        comodel_name="product.product", string="Product", required=True
     )
-    product_uom = fields.Many2one(
-        comodel_name="uom.uom",
-        string="Unit of measure",
-    )
+    product_uom = fields.Many2one(comodel_name="uom.uom", string="Unit of measure")
     location_id = fields.Many2one(
-        comodel_name="stock.location",
-        string="Location",
-        required=True,
+        comodel_name="stock.location", string="Location", required=True
     )
     product_uom_qty = fields.Float(
-        string="Quantity",
-        digits=dp.get_precision('Product Unit of Measure'),
+        string="Quantity", digits=dp.get_precision("Product Unit of Measure")
     )
     product_qty = fields.Float(
-        'Real Quantity',
-        compute='_compute_product_quantity',
-        inverse='_inverse_product_quantity',
+        "Real Quantity",
+        compute="_compute_product_quantity",
+        inverse="_inverse_product_quantity",
         digits=0,
         store=True,
-        help='Quantity in the default UoM of the product',
+        help="Quantity in the default UoM of the product",
         readonly=True,
     )
-    daily_qty = fields.Float(
-        string='Quantity / Day',
-        compute='_compute_daily_qty',
-    )
+    daily_qty = fields.Float(string="Quantity / Day", compute="_compute_daily_qty")
     company_id = fields.Many2one(
-        comodel_name='res.company',
-        string='Company',
+        comodel_name="res.company",
+        string="Company",
         required=True,
-        default=lambda self: self.env['res.company']._company_default_get(
-            'stock.demand.estimate'
-        )
+        default=lambda self: self.env["res.company"]._company_default_get(
+            "stock.demand.estimate"
+        ),
     )
 
     @api.multi
-    @api.depends(
-        "manual_duration", "manual_date_from", "manual_date_to",
-    )
+    @api.depends("manual_duration", "manual_date_from", "manual_date_to")
     def _compute_dates(self):
         today = date.today()
         for rec in self:
@@ -87,8 +65,7 @@ class StockDemandEstimate(models.Model):
                 rec.date_to = rec.manual_date_to
                 rec.duration = (rec.manual_date_to - rec.date_from).days + 1
             elif rec.manual_duration:
-                rec.date_to = rec.date_from + timedelta(
-                    days=rec.manual_duration - 1)
+                rec.date_to = rec.date_from + timedelta(days=rec.manual_duration - 1)
                 rec.duration = rec.manual_duration
             else:
                 rec.date_to = rec.date_from + timedelta(days=1)
@@ -104,7 +81,7 @@ class StockDemandEstimate(models.Model):
                 rec.daily_qty = 0.0
 
     @api.multi
-    @api.depends('product_id', 'product_uom', 'product_uom_qty')
+    @api.depends("product_id", "product_uom", "product_uom_qty")
     def _compute_product_quantity(self):
         for rec in self:
             if rec.product_uom:
@@ -115,20 +92,24 @@ class StockDemandEstimate(models.Model):
                 rec.product_qty = rec.product_uom_qty
 
     def _inverse_product_quantity(self):
-        raise UserError(_(
-            'The requested operation cannot be '
-            'processed because of a programming error '
-            'setting the `product_qty` field instead '
-            'of the `product_uom_qty`.'
-        ))
+        raise UserError(
+            _(
+                "The requested operation cannot be "
+                "processed because of a programming error "
+                "setting the `product_qty` field instead "
+                "of the `product_uom_qty`."
+            )
+        )
 
     @api.multi
     def name_get(self):
         res = []
         for rec in self:
-            name = "%s - %s: %s - %s" % (
-                rec.date_from, rec.date_to,
-                rec.product_id.name, rec.location_id.name,
+            name = "{} - {}: {} - {}".format(
+                rec.date_from,
+                rec.date_to,
+                rec.product_id.name,
+                rec.location_id.name,
             )
             res.append((rec.id, name))
         return res
@@ -138,14 +119,16 @@ class StockDemandEstimate(models.Model):
         for rec in self:
             if rec.manual_date_from:
                 rec.manual_duration = (
-                    rec.manual_date_to - rec.manual_date_from).days + 1
+                    rec.manual_date_to - rec.manual_date_from
+                ).days + 1
 
     @api.onchange("manual_duration")
     def _onchange_manual_duration(self):
         for rec in self:
             if rec.manual_date_from:
                 rec.manual_date_to = rec.manual_date_from + timedelta(
-                    days=rec.manual_duration - 1)
+                    days=rec.manual_duration - 1
+                )
 
     @api.model
     def get_quantity_by_date_range(self, date_start, date_end):
