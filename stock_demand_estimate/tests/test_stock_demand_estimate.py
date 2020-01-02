@@ -124,3 +124,44 @@ class TestStockDemandEstimate(SavepointCase):
         # Get exact period:
         res = estimate.get_quantity_by_date_range(estimate.date_from, estimate.date_to)
         self.assertEqual(res, 100)
+        # Ask for interval out fo the estimate's:
+        res = estimate.get_quantity_by_date_range(
+            date.today(), date.today() + td(days=8)
+        )
+        self.assertEqual(res, 0)
+
+    def test_04_name_get(self):
+        date_from = date.today() + td(days=10)
+        estimate = self.estimate_model.create(
+            {
+                "product_id": self.product_1.id,
+                "location_id": self.location.id,
+                "manual_date_from": date_from,
+                "manual_duration": False,  # to test else case in _compute_dates.
+                "product_uom_qty": 500.0,
+            }
+        )
+        res = estimate.name_get()
+        self.assertEqual(len(res), 1)
+        rec_id, name_get = res[0]
+        self.assertEqual(estimate.id, rec_id)
+        self.assertIn(self.product_1.name, name_get)
+
+    def test_05_onchange_methods(self):
+        date_from = date.today() + td(days=10)
+        date_to = date.today() + td(days=19)
+        estimate = self.estimate_model.new(
+            {
+                "product_id": self.product_1.id,
+                "location_id": self.location.id,
+                "manual_date_from": date_from,
+                "manual_date_to": date_to,
+                "product_uom_qty": 500.0,
+            }
+        )
+        estimate._onchange_manual_date_to()
+        self.assertEqual(estimate.manual_duration, 10)
+        # Change duration manually:
+        estimate.manual_duration = 5
+        estimate._onchange_manual_duration()
+        self.assertEqual(estimate.manual_date_to, date_from + td(days=4))
