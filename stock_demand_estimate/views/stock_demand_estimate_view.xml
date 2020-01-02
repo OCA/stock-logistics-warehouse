@@ -77,7 +77,6 @@
         <field name="name">Stock Demand Estimates</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.demand.estimate</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form,pivot</field>
         <field name="search_view_id"
                ref="stock_demand_estimate_view_search"/>

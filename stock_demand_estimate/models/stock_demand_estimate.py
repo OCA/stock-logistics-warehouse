@@ -1,4 +1,4 @@
-# Copyright 2016-19 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # Copyright 2016 Aleph Objects, Inc. (https://www.alephobjects.com/)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
@@ -6,8 +6,6 @@ from datetime import date, timedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-
-from odoo.addons import decimal_precision as dp
 
 
 class StockDemandEstimate(models.Model):
@@ -33,9 +31,7 @@ class StockDemandEstimate(models.Model):
     location_id = fields.Many2one(
         comodel_name="stock.location", string="Location", required=True
     )
-    product_uom_qty = fields.Float(
-        string="Quantity", digits=dp.get_precision("Product Unit of Measure")
-    )
+    product_uom_qty = fields.Float(string="Quantity", digits="Product Unit of Measure")
     product_qty = fields.Float(
         "Real Quantity",
         compute="_compute_product_quantity",
@@ -50,12 +46,9 @@ class StockDemandEstimate(models.Model):
         comodel_name="res.company",
         string="Company",
         required=True,
-        default=lambda self: self.env["res.company"]._company_default_get(
-            "stock.demand.estimate"
-        ),
+        default=lambda self: self.env.company,
     )
 
-    @api.multi
     @api.depends("manual_duration", "manual_date_from", "manual_date_to")
     def _compute_dates(self):
         today = date.today()
@@ -71,7 +64,6 @@ class StockDemandEstimate(models.Model):
                 rec.date_to = rec.date_from + timedelta(days=1)
                 rec.duration = 2
 
-    @api.multi
     @api.depends("product_qty", "duration")
     def _compute_daily_qty(self):
         for rec in self:
@@ -80,7 +72,6 @@ class StockDemandEstimate(models.Model):
             else:
                 rec.daily_qty = 0.0
 
-    @api.multi
     @api.depends("product_id", "product_uom", "product_uom_qty")
     def _compute_product_quantity(self):
         for rec in self:
@@ -101,15 +92,11 @@ class StockDemandEstimate(models.Model):
             )
         )
 
-    @api.multi
     def name_get(self):
         res = []
         for rec in self:
             name = "{} - {}: {} - {}".format(
-                rec.date_from,
-                rec.date_to,
-                rec.product_id.name,
-                rec.location_id.name,
+                rec.date_from, rec.date_to, rec.product_id.name, rec.location_id.name
             )
             res.append((rec.id, name))
         return res
