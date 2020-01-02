@@ -7,9 +7,7 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "depends": [
-        "stock",
-    ],
+    "depends": ["stock"],
     "data": [
         "security/ir.model.access.csv",
         "security/stock_security.xml",
