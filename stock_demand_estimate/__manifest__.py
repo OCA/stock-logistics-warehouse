@@ -1,10 +1,11 @@
-# Copyright 2016-19 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Stock Demand Estimate",
     "summary": "Allows to create demand estimates.",
-    "version": "12.0.2.0.1",
+    "version": "13.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
+    "development_status": "Production/Stable",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "depends": ["stock"],
