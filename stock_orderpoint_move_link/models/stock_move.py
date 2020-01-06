@@ -4,21 +4,19 @@ from odoo import fields, models
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
     orderpoint_ids = fields.Many2many(
-        comodel_name='stock.warehouse.orderpoint',
-        string='Linked Reordering Rules',
+        comodel_name="stock.warehouse.orderpoint", string="Linked Reordering Rules"
     )
 
     def _prepare_procurement_values(self):
         res = super(StockMove, self)._prepare_procurement_values()
         if self.orderpoint_ids:
-            res['orderpoint_ids'] = self.orderpoint_ids
+            res["orderpoint_ids"] = self.orderpoint_ids
         return res
 
     def _merge_moves_fields(self):
         res = super(StockMove, self)._merge_moves_fields()
-        res['orderpoint_ids'] = [(4, m.id)
-                                 for m in self.mapped('orderpoint_ids')]
+        res["orderpoint_ids"] = [(4, m.id) for m in self.mapped("orderpoint_ids")]
         return res
