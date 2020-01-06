@@ -5,7 +5,7 @@ from odoo.tools import float_round
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
     # @override
     @api.multi
@@ -14,7 +14,7 @@ class StockMove(models.Model):
         res = super()._action_done()
         for move in res:
             # first of all, define if we need to even valuate something
-            if move.product_id.valuation != 'real_time':
+            if move.product_id.valuation != "real_time":
                 continue
             # we're customizing behavior on moves between internal locations
             # only, thus ensuring that we don't clash w/ account moves
@@ -59,49 +59,56 @@ class StockMove(models.Model):
 
         # get valuation accounts for product
         if self._is_internal():
-            product_valuation_accounts \
-                = self.product_id.product_tmpl_id.get_product_accounts()
-            stock_valuation = product_valuation_accounts.get('stock_valuation')
-            stock_journal = product_valuation_accounts.get('stock_journal')
+            product_valuation_accounts = (
+                self.product_id.product_tmpl_id.get_product_accounts()
+            )
+            stock_valuation = product_valuation_accounts.get("stock_valuation")
+            stock_journal = product_valuation_accounts.get("stock_journal")
 
-            if location_from.force_accounting_entries \
-                    and location_to.force_accounting_entries:
+            if (
+                location_from.force_accounting_entries
+                and location_to.force_accounting_entries
+            ):
                 self._create_account_move_line(
                     location_from.valuation_out_account_id.id,
                     location_to.valuation_in_account_id.id,
-                    stock_journal.id)
+                    stock_journal.id,
+                )
             elif location_from.force_accounting_entries:
                 self._create_account_move_line(
                     location_from.valuation_out_account_id.id,
                     stock_valuation.id,
-                    stock_journal.id)
+                    stock_journal.id,
+                )
             elif location_to.force_accounting_entries:
                 self._create_account_move_line(
                     stock_valuation.id,
                     location_to.valuation_in_account_id.id,
-                    stock_journal.id)
+                    stock_journal.id,
+                )
 
         return res
 
     @api.multi
     def _is_internal(self):
         self.ensure_one()
-        return self.location_id.usage == 'internal' \
-            and self.location_dest_id.usage == 'internal'
+        return (
+            self.location_id.usage == "internal"
+            and self.location_dest_id.usage == "internal"
+        )
 
     @api.multi
     def _get_accounting_data_for_valuation(self):
         self.ensure_one()
-        journal_id, acc_src, acc_dest, acc_valuation \
-            = super()._get_accounting_data_for_valuation()
+        journal_id, acc_src, acc_dest, acc_valuation = (
+            super()._get_accounting_data_for_valuation()
+        )
         # intercept account valuation, use account specified on internal
         # location as a local valuation
         if self._is_in() and self.location_dest_id.force_accounting_entries:
             # (acc_src if not dest.usage == 'customer') => acc_valuation
-            acc_valuation \
-                = self.location_dest_id.valuation_in_account_id.id
+            acc_valuation = self.location_dest_id.valuation_in_account_id.id
         if self._is_out() and self.location_id.force_accounting_entries:
             # acc_valuation => (acc_dest if not dest.usage == 'supplier')
-            acc_valuation \
-                = self.location_id.valuation_out_account_id.id
+            acc_valuation = self.location_id.valuation_out_account_id.id
         return journal_id, acc_src, acc_dest, acc_valuation
