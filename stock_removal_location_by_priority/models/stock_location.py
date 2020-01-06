@@ -11,6 +11,5 @@ class StockLocation(models.Model):
     removal_priority = fields.Integer(
         string="Removal Priority",
         default=10,
-        help="This priority applies when removing stock and incoming dates "
-        "are equal.",
+        help="This priority applies when removing stock and incoming dates are equal.",
     )
