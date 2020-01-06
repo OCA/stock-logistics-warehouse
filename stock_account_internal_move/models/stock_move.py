@@ -1,48 +1,51 @@
 # Copyright (C) 2018 by Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, models
-from odoo.tools import float_round
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
     # @override
-    @api.multi
-    def _action_done(self):
-        """Call _account_entry_move for internal moves as well."""
-        res = super()._action_done()
-        for move in res:
-            # first of all, define if we need to even valuate something
-            if move.product_id.valuation != "real_time":
-                continue
-            # we're customizing behavior on moves between internal locations
-            # only, thus ensuring that we don't clash w/ account moves
-            # created in `stock_account`
-            if not move._is_internal():
-                continue
-            move._account_entry_move()
+    @api.model
+    def _get_valued_types(self):
+        res = super(StockMove, self)._get_valued_types()
+        if self._is_internal():
+            res.append('internal')
         return res
 
-    # @override
-    @api.multi
-    def _run_valuation(self, quantity=None):
-        # Extend `_run_valuation` to make it work on internal moves.
-        self.ensure_one()
-        res = super()._run_valuation(quantity)
-        if self._is_internal() and not self.value:
-            # TODO: recheck if this part respects product valuation method
-            self.value = float_round(
-                value=self.product_id.standard_price * self.quantity_done,
-                precision_rounding=self.company_id.currency_id.rounding,
-            )
-        return res
+    def _get_internal_move_lines(self):
+      self.ensure_one()
+      res = self.env['stock.move.line']
+      for move_line in self.move_line_ids:
+          if move_line.owner_id and move_line.owner_id != move_line.company_id.partner_id:
+              continue
+          if move_line.location_id._should_be_valued() and move_line.location_dest_id._should_be_valued():
+              res |= move_line
+      return res
+
+    def _create_internal_svl(self):
+
+        svl_vals_list = []
+        for move in self:
+            move = move.with_context(force_company=move.company_id.id)
+            valued_move_lines = move._get_internal_move_lines()
+            valued_quantity = 0
+            for valued_move_line in valued_move_lines:
+                valued_quantity += valued_move_line.product_uom_id._compute_quantity(valued_move_line.qty_done, move.product_id.uom_id)
+            unit_cost = abs(move._get_price_unit())
+            if move.product_id.cost_method == 'standard':
+                unit_cost = move.product_id.standard_price
+            svl_vals = move.product_id._prepare_internal_svl_vals(valued_quantity, unit_cost)
+            svl_vals.update(move._prepare_common_svl_vals())
+            svl_vals['description'] = move.picking_id.name
+            svl_vals_list.append(svl_vals)
+        return self.env['stock.valuation.layer'].sudo().create(svl_vals_list)
 
     # @override
-    @api.multi
-    def _account_entry_move(self):
+    def _account_entry_move(self, qty, description, svl_id, cost):
         self.ensure_one()
-        res = super()._account_entry_move()
+        res = super()._account_entry_move(qty, description, svl_id, cost)
         if res is not None and not res:
             # `super()` tends to `return False` as an indicator that no
             # valuation should happen in this case
@@ -72,32 +75,29 @@ class StockMove(models.Model):
                 self._create_account_move_line(
                     location_from.valuation_out_account_id.id,
                     location_to.valuation_in_account_id.id,
-                    stock_journal.id,
+                    stock_journal.id, qty, description, svl_id, cost,
                 )
             elif location_from.force_accounting_entries:
                 self._create_account_move_line(
                     location_from.valuation_out_account_id.id,
                     stock_valuation.id,
-                    stock_journal.id,
+                    stock_journal.id, qty, description, svl_id, cost
                 )
             elif location_to.force_accounting_entries:
                 self._create_account_move_line(
                     stock_valuation.id,
                     location_to.valuation_in_account_id.id,
-                    stock_journal.id,
+                    stock_journal.id, qty, description, svl_id, cost
                 )
 
         return res
 
-    @api.multi
     def _is_internal(self):
         self.ensure_one()
-        return (
-            self.location_id.usage == "internal"
-            and self.location_dest_id.usage == "internal"
-        )
+        if self._get_internal_move_lines():
+            return True
+        return False
 
-    @api.multi
     def _get_accounting_data_for_valuation(self):
         self.ensure_one()
         journal_id, acc_src, acc_dest, acc_valuation = (
