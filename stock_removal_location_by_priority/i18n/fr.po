@@ -51,7 +51,7 @@ msgstr ""
 "Priorité appliquée lors des dates d'entrée sont égales pour 2 emplacements."
 
 #. module: stock_removal_location_by_priority
-#: code:addons/stock_removal_location_by_priority/models/stock_quant.py:25
+#: code:addons/stock_removal_location_by_priority/models/stock_quant.py:0
 #, python-format
 msgid "Removal strategy %s not implemented."
 msgstr "La stratégie d'enlèvement %s n'est pas codée."
