@@ -9,12 +9,8 @@
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Eficent, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
-    "depends": [
-        "stock",
-    ],
-    "data": [
-        "views/stock_move_views.xml",
-    ],
+    "depends": ["stock"],
+    "data": ["views/stock_move_views.xml"],
     "installable": True,
     "auto_install": False,
 }
