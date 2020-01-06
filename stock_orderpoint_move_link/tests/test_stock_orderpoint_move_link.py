@@ -46,7 +46,6 @@ class TestStockOrderpointMoveLink(SavepointCase):
                             "picking_type_id": cls.env.ref(
                                 "stock.picking_type_internal"
                             ).id,
-                            "propagate": True,
                         },
                     )
                 ],
@@ -76,7 +75,6 @@ class TestStockOrderpointMoveLink(SavepointCase):
                             "picking_type_id": cls.env.ref(
                                 "stock.picking_type_internal"
                             ).id,
-                            "propagate": True,
                         },
                     )
                 ],
