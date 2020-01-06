@@ -14,7 +14,7 @@ class StockQuant(models.Model):
     )
 
     @api.model
-    def _get_removal_strategy_order(self, removal_strategy=None):
+    def _get_removal_strategy_order(self, removal_strategy):
         if self.user_has_groups(
             "stock_removal_location_by_priority.group_removal_priority"
         ):
@@ -25,7 +25,4 @@ class StockQuant(models.Model):
             raise UserError(
                 _("Removal strategy %s not implemented.") % (removal_strategy,)
             )
-        else:
-            return super()._get_removal_strategy_order(
-                removal_strategy=removal_strategy
-            )
+        return super(StockQuant, self)._get_removal_strategy_order(removal_strategy)

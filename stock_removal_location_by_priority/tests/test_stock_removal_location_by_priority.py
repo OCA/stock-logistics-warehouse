@@ -126,6 +126,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         picking_1 = self._create_picking(
             self.picking_internal, self.stock, self.stock_2, 5
         )
+        picking_1.flush()
         picking_1.action_confirm()
         picking_1.action_assign()
 
@@ -150,6 +151,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         picking_1 = self._create_picking(
             self.picking_internal, self.stock, self.stock_2, 5
         )
+        picking_1.flush()
         picking_1.action_confirm()
         picking_1.action_assign()
 
