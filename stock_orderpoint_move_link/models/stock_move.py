@@ -11,12 +11,12 @@ class StockMove(models.Model):
     )
 
     def _prepare_procurement_values(self):
-        res = super(StockMove, self)._prepare_procurement_values()
+        res = super()._prepare_procurement_values()
         if self.orderpoint_ids:
             res["orderpoint_ids"] = self.orderpoint_ids
         return res
 
     def _merge_moves_fields(self):
-        res = super(StockMove, self)._merge_moves_fields()
+        res = super()._merge_moves_fields()
         res["orderpoint_ids"] = [(4, m.id) for m in self.mapped("orderpoint_ids")]
         return res

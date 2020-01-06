@@ -2,13 +2,12 @@
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models
+from odoo import models
 
 
 class StockWarehouseOrderpoint(models.Model):
     _inherit = "stock.warehouse.orderpoint"
 
-    @api.multi
     def action_view_stock_picking(self):
         action = self.env.ref("stock.action_picking_tree_all")
         result = action.read()[0]

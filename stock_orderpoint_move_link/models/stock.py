@@ -14,8 +14,8 @@ class StockRule(models.Model):
         location_id,
         name,
         origin,
+        company_id,
         values,
-        group_id,
     ):
         vals = super()._get_stock_move_values(
             product_id,
@@ -24,8 +24,8 @@ class StockRule(models.Model):
             location_id,
             name,
             origin,
+            company_id,
             values,
-            group_id,
         )
         if "orderpoint_id" in values:
             vals["orderpoint_ids"] = [(4, values["orderpoint_id"].id)]
