@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="stock_assets_backend"
+        name="stock_inventory assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/stock_inventory_discrepancy/static/src/js/inventory_validate_button_controller.js"
+            />
+        </xpath>
+    </template>
+</odoo>

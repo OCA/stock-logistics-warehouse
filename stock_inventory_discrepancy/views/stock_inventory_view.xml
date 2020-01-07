@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2017-2020 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
     <record id="view_inventory_form" model="ir.ui.view">
         <field name="name">Inventory form view - discrepancy extension </field>
         <field name="model">stock.inventory</field>
-        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
         <field name="arch" type="xml">
             <field name="state" position="attributes">
                 <attribute name="statusbar_visible">
@@ -17,32 +15,56 @@
                     {"pending":"red"}
                 </attribute>
             </field>
-            <xpath expr="//button[@name='action_validate']"
-                   position="attributes">
-                <attribute name="groups">stock_inventory_discrepancy.group_stock_inventory_validation</attribute>
-                <attribute name="context">{'normal_view': True}</attribute>
+            <xpath expr="//button[@name='action_validate']" position="attributes">
+                <attribute
+                    name="groups"
+                >stock_inventory_discrepancy.group_stock_inventory_validation</attribute>
             </xpath>
-            <xpath expr="//button[@name='action_validate']"
-                   position="after">
-                <button name="action_force_done"
-                        string="Force Validation" type="object"
-                        class="oe_highlight"
-                        groups="stock_inventory_discrepancy.group_stock_inventory_validation_always"
-                        attrs="{'invisible': ['|',('state', '!=', 'pending'),('over_discrepancy_line_count', '=', 0)]}"/>
+            <xpath expr="//button[@name='action_validate']" position="after">
+                <button
+                    name="action_force_done"
+                    string="Force Validation"
+                    type="object"
+                    class="oe_highlight"
+                    groups="stock_inventory_discrepancy.group_stock_inventory_validation_always"
+                    attrs="{'invisible': ['|',('state', '!=', 'pending'),('over_discrepancy_line_count', '=', 0)]}"
+                />
             </xpath>
-            <field name="date" position="after">
-                <field name="over_discrepancy_line_count" attrs="{'invisible': [('state', '!=', 'pending')]}"/>
+            <xpath
+                expr="//button[@name='action_open_inventory_lines']"
+                position="attributes"
+            >
+                <attribute name="states">pending,confirm</attribute>
+            </xpath>
+            <xpath
+                expr="//button[@name='action_cancel_draft'][2]"
+                position="attributes"
+            >
+                <attribute name="states">pending,confirm</attribute>
+            </xpath>
+            <field name="company_id" position="before">
+                <field
+                    name="over_discrepancy_line_count"
+                    attrs="{'invisible': [('state', '!=', 'pending')]}"
+                />
             </field>
-            <xpath expr="//field[@name='line_ids']/tree/field[@name='product_qty']"
-                   position="after">
-                <field name="discrepancy_qty"/>
-                <field name="discrepancy_percent"/>
-                <field name="discrepancy_threshold"/>
-            </xpath>
-            <xpath expr="//field[@name='line_ids']/tree" position="attributes">
-                <attribute name="decoration-danger">theoretical_qty &lt; 0 or discrepancy_percent &gt; discrepancy_threshold</attribute>
+        </field>
+    </record>
+    <record id="stock_inventory_line_tree2" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree2</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree2" />
+        <field name="arch" type="xml">
+            <field name="product_qty" position="after">
+                <field name="discrepancy_qty" />
+                <field name="discrepancy_percent" />
+                <field name="discrepancy_threshold" />
+            </field>
+            <xpath expr="//tree" position="attributes">
+                <attribute
+                    name="decoration-danger"
+                >theoretical_qty &lt; 0 or discrepancy_percent &gt; discrepancy_threshold or "product_qty != theoretical_qty"</attribute>
             </xpath>
         </field>
     </record>
-
 </odoo>
