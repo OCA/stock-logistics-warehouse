@@ -1,10 +1,8 @@
 # Copyright 2017-2020 ForgeFlow S.L.
-#   (http://www.eficent.com)
+#   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
-
-from odoo.addons import decimal_precision as dp
 
 
 class StockInventoryLine(models.Model):
@@ -15,7 +13,7 @@ class StockInventoryLine(models.Model):
         compute="_compute_discrepancy",
         help="The difference between the actual qty counted and the "
         "theoretical quantity on hand.",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         default=0,
     )
     discrepancy_percent = fields.Float(
@@ -32,7 +30,6 @@ class StockInventoryLine(models.Model):
         compute="_compute_discrepancy_threshold",
     )
 
-    @api.multi
     @api.depends("theoretical_qty", "product_qty")
     def _compute_discrepancy(self):
         for line in self:
@@ -43,8 +40,9 @@ class StockInventoryLine(models.Model):
                 )
             elif not line.theoretical_qty and line.product_qty:
                 line.discrepancy_percent = 100.0
+            else:
+                line.discrepancy_percent = 0.0
 
-    @api.multi
     def _compute_discrepancy_threshold(self):
         for line in self:
             whs = line.location_id.get_warehouse()
