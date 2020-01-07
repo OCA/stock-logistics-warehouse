@@ -1,5 +1,5 @@
 # Copyright 2017-2020 ForgeFlow S.L.
-#   (http://www.eficent.com)
+#   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
@@ -9,16 +9,8 @@ from odoo.exceptions import UserError
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
-    INVENTORY_STATE_SELECTION = [
-        ("draft", "Draft"),
-        ("cancel", "Cancelled"),
-        ("confirm", "In Progress"),
-        ("pending", "Pending to Approve"),
-        ("done", "Validated"),
-    ]
-
     state = fields.Selection(
-        selection=INVENTORY_STATE_SELECTION,
+        selection_add=[("pending", "Pending to Approve"), ("done",)],
         string="Status",
         readonly=True,
         index=True,
@@ -37,7 +29,6 @@ class StockInventory(models.Model):
         store=True,
     )
 
-    @api.multi
     @api.depends("line_ids.product_qty", "line_ids.theoretical_qty")
     def _compute_over_discrepancy_line_count(self):
         for inventory in self:
@@ -46,13 +37,12 @@ class StockInventory(models.Model):
             )
             inventory.over_discrepancy_line_count = len(lines)
 
-    @api.multi
     def action_over_discrepancies(self):
         self.write({"state": "pending"})
 
     def _check_group_inventory_validation_always(self):
         grp_inv_val = self.env.ref(
-            "stock_inventory_discrepancy.group_" "stock_inventory_validation_always"
+            "stock_inventory_discrepancy.group_stock_inventory_validation_always"
         )
         if grp_inv_val in self.env.user.groups_id:
             return True
@@ -70,13 +60,17 @@ class StockInventory(models.Model):
             if inventory.over_discrepancy_line_count and inventory.line_ids.filtered(
                 lambda t: t.discrepancy_threshold > 0.0
             ):
-                if inventory.env.context.get("normal_view", False):
+                if self.user_has_groups(
+                    "stock_inventory_discrepancy.group_stock_inventory_validation"
+                ) and not self.user_has_groups(
+                    "stock_inventory_discrepancy."
+                    "group_stock_inventory_validation_always"
+                ):
                     inventory.action_over_discrepancies()
                     return True
                 else:
                     inventory._check_group_inventory_validation_always()
         return super(StockInventory, self)._action_done()
 
-    @api.multi
     def action_force_done(self):
         return super(StockInventory, self)._action_done()
