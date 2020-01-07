@@ -9,11 +9,12 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
-            <field name="partner_id" position="after">
+            <field name="return_location" position="after">
                 <label for="discrepancy_threshold"/>
                 <div>
                     <field name="discrepancy_threshold" class="oe_inline"/> %
                 </div>
+                <field name="propagate_discrepancy_threshold"/>
             </field>
         </field>
     </record>
