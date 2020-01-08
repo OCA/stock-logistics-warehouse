@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo13-addon-stock_demand_estimate',
         'odoo13-addon-stock_inventory_chatter',
         'odoo13-addon-stock_inventory_lockdown',
+        'odoo13-addon-stock_removal_location_by_priority',
         'odoo13-addon-stock_warehouse_calendar',
     ],
     classifiers=[
