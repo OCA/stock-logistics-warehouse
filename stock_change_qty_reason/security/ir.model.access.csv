@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_inventory_line_reason_user,stock.inventory.line.reason,model_stock_inventory_line_reason,stock.group_stock_user,1,0,0,0
+access_stock_inventory_line_reason_manager,stock.inventory.line.reason,model_stock_inventory_line_reason,stock.group_stock_manager,1,1,1,1
