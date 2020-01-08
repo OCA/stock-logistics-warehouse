@@ -1,0 +1,128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_chatter
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-05 00:45+0000\n"
+"PO-Revision-Date: 2017-07-05 00:45+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Danish (https://www.transifex.com/oca/teams/23907/da/)\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_inventory_chatter
+#: selection:stock.inventory,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: selection:stock.inventory,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory__filter
+msgid ""
+"If you do an entire inventory, you can choose 'All Products' and it will "
+"prefill the inventory with the current stock.  If you only do some products  "
+"(e.g. Cycle Counting) you can choose 'Manual Selection of Products' and the "
+"system won't propose anything.  You can also let the system propose for a "
+"single product / lot /... "
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: selection:stock.inventory,state:0
+msgid "In Progress"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__location_id
+msgid "Inventoried Location"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__partner_id
+msgid "Inventoried Owner"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model,name:stock_inventory_chatter.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
+msgid "Inventory Canceled"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_confirmed
+msgid "Inventory Confirmed"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_done
+msgid "Inventory Done"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__filter
+msgid "Inventory of"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: selection:stock.inventory,state:0
+msgid "Pending to Approve"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory__partner_id
+msgid "Specify Owner to focus your inventory on a particular Owner."
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory__state
+msgid ""
+"States of the Inventory Adjustment:\n"
+"- Draft: Inventory not started.\n"
+"- In Progress: Inventory in execution.\n"
+"- Pending to Approve: Inventory have some discrepancies greater than the "
+"predefined threshold and it's waiting for the Control Manager approval.\n"
+"- Validated: Inventory Approved."
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__state
+msgid "Status"
+msgstr ""
+
+#. module: stock_inventory_chatter
+#: selection:stock.inventory,state:0
+msgid "Validated"
+msgstr ""
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "Dato for sidste besked på denne post."
+
+#~ msgid "Followers"
+#~ msgstr "Followers"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Hvis afmærket, kræver nye beskeder din attention"
+
+#~ msgid "Last Message Date"
+#~ msgstr "Sidste dato for besked"
+
+#~ msgid "Messages"
+#~ msgstr "Beskeder"
+
+#~ msgid "Unread Messages"
+#~ msgstr "Ulæste beskeder"
