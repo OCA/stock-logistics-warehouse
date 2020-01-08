@@ -124,7 +124,6 @@ class StockMoveConfirmationCase(common.SavepointCase):
 
     def test_50_create_account_move_line(self):
         move = self._create_move()
-        move._action_done()
         # perform a manual evaluation of teh fresh move
         # we don't really care about those numbers
         move._create_account_move_line(
