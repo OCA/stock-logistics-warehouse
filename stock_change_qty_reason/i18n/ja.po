@@ -24,11 +24,6 @@ msgid "Active"
 msgstr ""
 
 #. module: stock_change_qty_reason
-#: model:ir.model,name:stock_change_qty_reason.model_stock_change_product_qty
-msgid "Change Product Quantity"
-msgstr ""
-
-#. module: stock_change_qty_reason
 #: model:ir.actions.act_window,name:stock_change_qty_reason.action_change_qty_reasons_list
 #: model:ir.ui.menu,name:stock_change_qty_reason.menu_reasons
 msgid "Change Qty Reasons"
@@ -113,7 +108,6 @@ msgid "Preset Change Qty Reason"
 msgstr ""
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_change_product_qty__preset_reason_id
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory__preset_reason_id
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line__preset_reason_id
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move__preset_reason_id
@@ -123,7 +117,6 @@ msgid "Preset Reason"
 msgstr "理由"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_change_product_qty__reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory__reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line__reason
 msgid "Reason"
@@ -151,13 +144,12 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,help:stock_change_qty_reason.field_stock_change_product_qty__reason
 #: model:ir.model.fields,help:stock_change_qty_reason.field_stock_inventory__reason
 #: model:ir.model.fields,help:stock_change_qty_reason.field_stock_inventory_line__reason
 msgid "Type in a reason for the product quantity change"
 msgstr ""
 
 #. module: stock_change_qty_reason
-#: sql_constraint:stock.inventory.line.reason:0
+#: model:ir.model.constraint,message:stock_change_qty_reason.constraint_stock_inventory_line_reason_name_unique
 msgid "You cannot have two reason with the same name."
 msgstr ""
