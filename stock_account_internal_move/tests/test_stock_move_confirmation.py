@@ -122,12 +122,17 @@ class StockMoveConfirmationCase(common.SavepointCase):
                 {"force_accounting_entries": True, "valuation_in_account_id": False}
             )
 
-    def test_50_create_account_move_line(self):
+    def test_50_create_account_move_line(self, qty, description, svl_id, cost):
         move = self._create_move()
         # perform a manual evaluation of teh fresh move
         # we don't really care about those numbers
+        move._action_done()
         move._create_account_move_line(
             self.location_from.valuation_out_account_id.id,
             self.location_to.valuation_in_account_id.id,
             self.fake_stock_journal.id,
+            qty,
+            description,
+            svl_id,
+            cost,
         )
