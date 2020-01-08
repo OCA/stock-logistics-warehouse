@@ -11,18 +11,24 @@ class StockMove(models.Model):
     def _get_valued_types(self):
         res = super(StockMove, self)._get_valued_types()
         if self._is_internal():
-            res.append('internal')
+            res.append("internal")
         return res
 
     def _get_internal_move_lines(self):
-      self.ensure_one()
-      res = self.env['stock.move.line']
-      for move_line in self.move_line_ids:
-          if move_line.owner_id and move_line.owner_id != move_line.company_id.partner_id:
-              continue
-          if move_line.location_id._should_be_valued() and move_line.location_dest_id._should_be_valued():
-              res |= move_line
-      return res
+        self.ensure_one()
+        res = self.env["stock.move.line"]
+        for move_line in self.move_line_ids:
+            if (
+                move_line.owner_id
+                and move_line.owner_id != move_line.company_id.partner_id
+            ):
+                continue
+            if (
+                move_line.location_id._should_be_valued()
+                and move_line.location_dest_id._should_be_valued()
+            ):
+                res |= move_line
+        return res
 
     def _create_internal_svl(self):
 
@@ -32,15 +38,19 @@ class StockMove(models.Model):
             valued_move_lines = move._get_internal_move_lines()
             valued_quantity = 0
             for valued_move_line in valued_move_lines:
-                valued_quantity += valued_move_line.product_uom_id._compute_quantity(valued_move_line.qty_done, move.product_id.uom_id)
+                valued_quantity += valued_move_line.product_uom_id._compute_quantity(
+                    valued_move_line.qty_done, move.product_id.uom_id
+                )
             unit_cost = abs(move._get_price_unit())
-            if move.product_id.cost_method == 'standard':
+            if move.product_id.cost_method == "standard":
                 unit_cost = move.product_id.standard_price
-            svl_vals = move.product_id._prepare_internal_svl_vals(valued_quantity, unit_cost)
+            svl_vals = move.product_id._prepare_internal_svl_vals(
+                valued_quantity, unit_cost
+            )
             svl_vals.update(move._prepare_common_svl_vals())
-            svl_vals['description'] = move.picking_id.name
+            svl_vals["description"] = move.picking_id.name
             svl_vals_list.append(svl_vals)
-        return self.env['stock.valuation.layer'].sudo().create(svl_vals_list)
+        return self.env["stock.valuation.layer"].sudo().create(svl_vals_list)
 
     # @override
     def _account_entry_move(self, qty, description, svl_id, cost):
@@ -75,19 +85,31 @@ class StockMove(models.Model):
                 self._create_account_move_line(
                     location_from.valuation_out_account_id.id,
                     location_to.valuation_in_account_id.id,
-                    stock_journal.id, qty, description, svl_id, cost,
+                    stock_journal.id,
+                    qty,
+                    description,
+                    svl_id,
+                    cost,
                 )
             elif location_from.force_accounting_entries:
                 self._create_account_move_line(
                     location_from.valuation_out_account_id.id,
                     stock_valuation.id,
-                    stock_journal.id, qty, description, svl_id, cost
+                    stock_journal.id,
+                    qty,
+                    description,
+                    svl_id,
+                    cost,
                 )
             elif location_to.force_accounting_entries:
                 self._create_account_move_line(
                     stock_valuation.id,
                     location_to.valuation_in_account_id.id,
-                    stock_journal.id, qty, description, svl_id, cost
+                    stock_journal.id,
+                    qty,
+                    description,
+                    svl_id,
+                    cost,
                 )
 
         return res
