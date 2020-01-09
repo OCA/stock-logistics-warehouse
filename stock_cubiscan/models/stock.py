@@ -14,7 +14,8 @@ class StockWarehouse(models.Model):
 
 class ProductPackaging(models.Model):
     _inherit = "product.packaging"
-    # FIXME: Not sure this is still the best place for this constraint
+    # FIXME: move this constraint in product_packaging_type
+    # https://github.com/OCA/product-attribute/tree/13.0/product_packaging_type
     _sql_constraints = [
         (
             "product_packaging_type_unique",

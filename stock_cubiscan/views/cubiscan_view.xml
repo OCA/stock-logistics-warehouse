@@ -46,7 +46,6 @@
     <record id="action_cubiscan_device_form" model="ir.actions.act_window">
         <field name="name">CubiScan Devices</field>
         <field name="res_model">cubiscan.device</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 

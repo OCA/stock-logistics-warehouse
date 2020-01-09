@@ -1,7 +1,8 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-# from cubiscan.cubiscan import CubiScan
-# from mock import patch
+from cubiscan.cubiscan import CubiScan
+from mock import patch
+
 from odoo.tests.common import SavepointCase
 
 
@@ -66,63 +67,56 @@ class TestCubiscanWizard(SavepointCase):
         PackType.cron_check_create_required_packaging()
 
     def test_product_onchange(self):
-        return
-        # self.wizard.product_id = self.product_1.id
+        self.wizard.product_id = self.product_1.id
 
-        # self.assertEqual(len(self.wizard.line_ids), 0)
-        # self.wizard.onchange_product_id()
-        # self.assertEqual(len(self.wizard.line_ids), 5)
+        self.assertEqual(len(self.wizard.line_ids), 0)
+        self.wizard.onchange_product_id()
+        self.assertEqual(len(self.wizard.line_ids), 6)
 
     def test_product_onchange_barcode(self):
-        return
-        # self.assertFalse(self.wizard.product_id)
-        # self.assertFalse(self.wizard.line_ids)
+        self.assertFalse(self.wizard.product_id)
+        self.assertFalse(self.wizard.line_ids)
 
-        # self.wizard.on_barcode_scanned('424242')
+        self.wizard.on_barcode_scanned("424242")
 
-        # self.assertEqual(self.wizard.product_id, self.product_1)
-        # self.assertEqual(len(self.wizard.line_ids), 5)
+        self.assertEqual(self.wizard.product_id, self.product_1)
+        self.assertEqual(len(self.wizard.line_ids), 6)
 
     def test_cubiscan_measures(self):
-        return
-        # self.wizard.product_id = self.product_1.id
-        # self.wizard.onchange_product_id()
+        self.wizard.product_id = self.product_1.id
+        self.wizard.onchange_product_id()
 
-        # with patch.object(CubiScan, '_make_request') as request:
-        #     for idx, line in enumerate(self.wizard.line_ids):
-        #         request.return_value = TestCubiscanWizard.get_measure_result(
-        #             2 ** idx, 1, 1, 2 ** idx
-        #         )
-        #         line.cubiscan_measure()
-        #         self.assertEqual(
-        #             line.read(
-        #                 ['length', 'width', 'height', 'max_weight', 'volume']
-        #             )[0],
-        #             {
-        #                 'id': line.id,
-        #                 'length': (2 ** idx) * 1000,
-        #                 'width': 1000,
-        #                 'height': 1000,
-        #                 'max_weight': 2.0 ** idx,
-        #                 'volume': 2.0 ** idx,
-        #             },
-        #         )
+        with patch.object(CubiScan, "_make_request") as request:
+            for idx, line in enumerate(self.wizard.line_ids):
+                request.return_value = TestCubiscanWizard.get_measure_result(
+                    2 ** idx, 1, 1, 2 ** idx
+                )
+                line.cubiscan_measure()
+                self.assertEqual(
+                    line.read(["lngth", "width", "height", "max_weight", "volume"])[0],
+                    {
+                        "id": line.id,
+                        "lngth": (2 ** idx) * 1000,
+                        "width": 1000,
+                        "height": 1000,
+                        "max_weight": 2.0 ** idx,
+                        "volume": 2.0 ** idx,
+                    },
+                )
 
-        # self.wizard.action_save()
+        self.wizard.action_save()
 
-        # packagings = self.product_1.packaging_ids
-        # self.assertEqual(len(packagings), 5)
-        # for idx, packaging in enumerate(packagings):
-        #     self.assertEqual(
-        #         packaging.read(
-        #             ['length', 'width', 'height', 'max_weight', 'volume']
-        #         )[0],
-        #         {
-        #             'id': packaging.id,
-        #             'length': (2 ** idx) * 1000,
-        #             'width': 1000,
-        #             'height': 1000,
-        #             'max_weight': 2.0 ** idx,
-        #             'volume': 2.0 ** idx,
-        #         },
-        #     )
+        packagings = self.product_1.packaging_ids.sorted()
+        self.assertEqual(len(packagings), 6)
+        for idx, packaging in enumerate(packagings):
+            self.assertEqual(
+                packaging.read(["lngth", "width", "height", "max_weight", "volume"])[0],
+                {
+                    "id": packaging.id,
+                    "lngth": (2 ** idx) * 1000,
+                    "width": 1000,
+                    "height": 1000,
+                    "max_weight": 2.0 ** idx,
+                    "volume": 2.0 ** idx,
+                },
+            )

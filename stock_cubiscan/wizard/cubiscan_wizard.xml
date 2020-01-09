@@ -10,7 +10,10 @@
                 </header>
                 <group>
                     <group>
-                        <field name="product_id" nolabel="1" options="{'no_open': True, 'create': False, 'create_edit': False}" />
+                        <label for="device_id" />
+                        <field name="device_id" nolabel="1" options="{'no_open': True, 'no_create_edit': True}" />
+                        <label for="product_id" />
+                        <field name="product_id" nolabel="1" options="{'no_open': True, 'no_create_edit': True}" />
                         <field name="_barcode_scanned" widget="barcode_handler" invisible="1" />
                     </group>
                     <group/>
@@ -23,7 +26,7 @@
                         <field name="name" />
                         <field name="qty" />
                         <field name="max_weight" options="{'bg_color': 'lightcoral: max_weight == 0.0 and required'}" />
-                        <field name="length"     options="{'bg_color': 'lightcoral: length == 0.0 and required'}" />
+                        <field name="lngth"      options="{'bg_color': 'lightcoral: lngth == 0.0 and required'}" />
                         <field name="width"      options="{'bg_color': 'lightcoral: width == 0.0 and required'}" />
                         <field name="height"     options="{'bg_color': 'lightcoral: height == 0.0 and required'}" />
                         <field name="volume"     options="{'bg_color': 'lightcoral: volume == 0.0 and required'}" />

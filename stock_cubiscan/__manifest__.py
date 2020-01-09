@@ -3,9 +3,9 @@
 {
     "name": "Stock Cubiscan",
     "summary": "Implement inteface with Cubiscan devices for packaging",
-    "version": "12.0.1.0.0",
-    "category": "Stock",
-    "author": "Camptocamp",
+    "version": "13.0.1.0.0",
+    "category": "Warehouse",
+    "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": [
         "barcodes",
@@ -14,7 +14,8 @@
         "product_packaging_dimension",
         "product_packaging_type_required",
     ],
-    "website": "http://www.camptocamp.com",
+    "external_dependencies": {"python": ["cubiscan"]},
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "data": [
         "views/assets.xml",
         "views/cubiscan_view.xml",
