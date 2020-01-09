@@ -9,17 +9,17 @@ class TestCubiscanWizard(SavepointCase):
     @staticmethod
     def get_measure_result(length, width, height, weight):
         return {
-            'origin': '1',
-            'location': 'dev001',
-            'length': (length, None),
-            'width': (width, None),
-            'height': (height, None),
-            'space_metric': True,
-            'weight': (weight, None),
-            'dim_weight': (weight, None),
-            'weight_metric': True,
-            'factor': 1,
-            'intl_unit': True,
+            "origin": "1",
+            "location": "dev001",
+            "length": (length, None),
+            "width": (width, None),
+            "height": (height, None),
+            "space_metric": True,
+            "weight": (weight, None),
+            "dim_weight": (weight, None),
+            "weight_metric": True,
+            "factor": 1,
+            "intl_unit": True,
         }
 
     @classmethod
@@ -27,42 +27,42 @@ class TestCubiscanWizard(SavepointCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
-        cls.device_obj = cls.env['cubiscan.device']
-        cls.cs_wizard = cls.env['cubiscan.wizard']
-        PackType = cls.env['product.packaging.type']
+        cls.device_obj = cls.env["cubiscan.device"]
+        cls.cs_wizard = cls.env["cubiscan.wizard"]
+        PackType = cls.env["product.packaging.type"]
         pack_type_data = [
-            ('unit', 1, 0, 0),
-            ('internal', 2, 1, 0),
-            ('retail', 10, 1, 1),
-            ('transport', 20, 1, 1),
-            ('pallet', 30, 1, 1),
+            ("unit", 1, 0, 0),
+            ("internal", 2, 1, 0),
+            ("retail", 10, 1, 1),
+            ("transport", 20, 1, 1),
+            ("pallet", 30, 1, 1),
         ]
         for name, seq, gtin, req in pack_type_data:
             PackType.create(
                 {
-                    'name': name,
-                    'code': name.upper(),
-                    'sequence': seq,
-                    'has_gtin': gtin,
-                    'required': req,
+                    "name": name,
+                    "code": name.upper(),
+                    "sequence": seq,
+                    "has_gtin": gtin,
+                    "required": req,
                 }
             )
 
         cls.device = cls.device_obj.create(
             {
-                'name': 'Test Device',
-                'device_address': '192.168.21.42',
-                'port': 4242,
-                'state': 'ready',
+                "name": "Test Device",
+                "device_address": "192.168.21.42",
+                "port": 4242,
+                "state": "ready",
             }
         )
 
-        cls.wizard = cls.cs_wizard.create({'device_id': cls.device.id})
+        cls.wizard = cls.cs_wizard.create({"device_id": cls.device.id})
 
-        cls.product_1 = cls.env.ref('product.product_product_6')
-        cls.product_2 = cls.env.ref('product.product_product_7')
+        cls.product_1 = cls.env.ref("product.product_product_6")
+        cls.product_2 = cls.env.ref("product.product_product_7")
 
-        cls.product_1.barcode = '424242'
+        cls.product_1.barcode = "424242"
         PackType.cron_check_create_required_packaging()
 
     def test_product_onchange(self):

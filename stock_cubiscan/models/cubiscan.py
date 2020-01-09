@@ -4,58 +4,59 @@
 import ssl as SSL
 
 from cubiscan.cubiscan import CubiScan
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
 class CubiscanDevice(models.Model):
-    _name = 'cubiscan.device'
-    _description = 'Cubiscan Device'
-    _order = 'warehouse_id, name'
+    _name = "cubiscan.device"
+    _description = "Cubiscan Device"
+    _order = "warehouse_id, name"
 
-    name = fields.Char('Name', required=True)
-    device_address = fields.Char('Device IP Address', required=True)
-    port = fields.Integer('Port', required=True)
+    name = fields.Char("Name", required=True)
+    device_address = fields.Char("Device IP Address", required=True)
+    port = fields.Integer("Port", required=True)
     timeout = fields.Integer(
-        'Timeout', help="Timeout in seconds", required=True, default=30
+        "Timeout", help="Timeout in seconds", required=True, default=30
     )
-    warehouse_id = fields.Many2one('stock.warehouse', 'Warehouse')
+    warehouse_id = fields.Many2one("stock.warehouse", "Warehouse")
     state = fields.Selection(
-        [('not_ready', 'Not Ready'), ('ready', 'Ready')],
-        default='not_ready',
+        [("not_ready", "Not Ready"), ("ready", "Ready")],
+        default="not_ready",
         readonly=True,
     )
 
     @api.multi
-    @api.constrains('device_address', 'port')
+    @api.constrains("device_address", "port")
     def _check_connection_infos(self):
         self.ensure_one()
         if not 1 <= self.port <= 65535:
-            raise ValidationError('Port must be in range 1-65535')
+            raise ValidationError("Port must be in range 1-65535")
 
     @api.multi
     def copy(self, default=None):
         if not default:
             default = dict()
-        default['state'] = 'not_ready'
+        default["state"] = "not_ready"
         return super().copy(default)
 
     @api.multi
     def open_wizard(self):
         self.ensure_one()
         return {
-            'name': _('CubiScan Wizard'),
-            'res_model': 'cubiscan.wizard',
-            'type': 'ir.actions.act_window',
-            'view_id': False,
-            'view_mode': 'form',
-            'view_type': 'form',
-            'context': {'default_device_id': self.id},
-            'target': 'fullscreen',
-            'flags': {
-                'headless': True,
-                'form_view_initial_mode': 'edit',
-                'no_breadcrumbs': True,
+            "name": _("CubiScan Wizard"),
+            "res_model": "cubiscan.wizard",
+            "type": "ir.actions.act_window",
+            "view_id": False,
+            "view_mode": "form",
+            "view_type": "form",
+            "context": {"default_device_id": self.id},
+            "target": "fullscreen",
+            "flags": {
+                "headless": True,
+                "form_view_initial_mode": "edit",
+                "no_breadcrumbs": True,
             },
         }
 
@@ -63,7 +64,7 @@ class CubiscanDevice(models.Model):
     def _get_interface(self):
         self.ensure_one()
         ctx = SSL.create_default_context()
-        ctx.load_cert_chain('/usr/lib/ssl/certs/camptocamp.pem')
+        ctx.load_cert_chain("/usr/lib/ssl/certs/camptocamp.pem")
         ctx.check_hostname = False
         ctx.verify_mode = SSL.CERT_NONE
         return CubiScan(self.device_address, self.port, self.timeout, ssl=ctx)
@@ -72,16 +73,17 @@ class CubiscanDevice(models.Model):
     def test_device(self):
         for device in self:
             res = device._get_interface().test()
-            if res and 'error' not in res and device.state == 'not_ready':
-                device.state = 'ready'
-            elif res and 'error' in res and device.state == 'ready':
-                device.state = 'not_ready'
+            if res and "error" not in res and device.state == "not_ready":
+                device.state = "ready"
+            elif res and "error" in res and device.state == "ready":
+                device.state = "not_ready"
 
     @api.multi
     def get_measure(self):
         self.ensure_one()
-        if self.state != 'ready':
+        if self.state != "ready":
             raise UserError(
-                "Device is not ready. Please use the 'Test' button before using the device."
+                "Device is not ready. Please use the 'Test'"
+                " button before using the device."
             )
         return self._get_interface().measure()
