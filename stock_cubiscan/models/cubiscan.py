@@ -1,8 +1,6 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import ssl as SSL
-
 from cubiscan.cubiscan import CubiScan
 
 from odoo import _, api, fields, models
@@ -51,17 +49,32 @@ class CubiscanDevice(models.Model):
             },
         }
 
+    def _get_interface_client_args(self):
+        """Prepare the arguments to instanciate the CubiScan client
+
+        Can be overriden to change the parameters.
+
+        Example, adding a ssl certificate::
+
+            args, kwargs = super()._get_interface_client_args()
+            ctx = SSL.create_default_context()
+            ctx.load_cert_chain("/usr/lib/ssl/certs/my_cert.pem")
+            kwargs['ssl'] = ctx
+            return args, kwargs
+
+        Returns a 2 items tuple with: (args, kwargs) where args
+        is a list and kwargs a dict.
+        """
+        return ([self.device_address, self.port, self.timeout], {})
+
     def _get_interface(self):
         """Return the CubiScan client
 
         Can be overrided to customize the way it is instanciated
         """
         self.ensure_one()
-        ctx = SSL.create_default_context()
-        ctx.load_cert_chain("/usr/lib/ssl/certs/camptocamp.pem")
-        ctx.check_hostname = False
-        ctx.verify_mode = SSL.CERT_NONE
-        return CubiScan(self.device_address, self.port, self.timeout, ssl=ctx)
+        args, kwargs = self._get_interface_client_args()
+        return CubiScan(*args, **kwargs)
 
     def test_device(self):
         """Check connection with the Cubiscan device"""
