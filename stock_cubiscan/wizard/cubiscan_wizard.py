@@ -5,6 +5,11 @@ from odoo import _, api, fields, models
 
 
 class CubiscanWizard(models.TransientModel):
+    """This wizard is used to show a screen showing Cubiscan information
+
+    It is opened in a headless view (no breadcrumb, no menus, fullscreen).
+    """
+
     _name = "cubiscan.wizard"
     _inherit = "barcodes.barcode_events_mixin"
     _description = "Cubiscan Wizard"
@@ -33,7 +38,7 @@ class CubiscanWizard(models.TransientModel):
                     "name": pack_type.name,
                     "qty": 0,
                     "max_weight": 0,
-                    "length": 0,
+                    "lngth": 0,
                     "width": 0,
                     "height": 0,
                     "barcode": False,
@@ -44,7 +49,7 @@ class CubiscanWizard(models.TransientModel):
                         {
                             "qty": pack.qty,
                             "max_weight": pack.max_weight,
-                            "length": pack.length,
+                            "lngth": pack.lngth,
                             "width": pack.width,
                             "height": pack.height,
                             "barcode": pack.barcode,
@@ -58,7 +63,6 @@ class CubiscanWizard(models.TransientModel):
         else:
             self.line_ids = [(5, 0, 0)]
 
-    @api.multi
     def action_reopen_fullscreen(self):
         # Action to reopen wizard in fullscreen (e.g. after page refresh)
         self.ensure_one()
@@ -75,14 +79,12 @@ class CubiscanWizard(models.TransientModel):
             "target": "new",
         }
 
-    @api.multi
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
         prod = self.env["product.product"].search([("barcode", "=", barcode)])
         self.product_id = prod
         self.onchange_product_id()
 
-    @api.multi
     def action_save(self):
         self.ensure_one()
         actions = []
@@ -91,7 +93,7 @@ class CubiscanWizard(models.TransientModel):
                 "name": line.name,
                 "qty": line.qty,
                 "max_weight": line.max_weight,
-                "length": line.length,
+                "lngth": line.lngth,
                 "width": line.width,
                 "height": line.height,
                 "barcode": line.barcode,
@@ -103,8 +105,9 @@ class CubiscanWizard(models.TransientModel):
             else:
                 actions.append((0, 0, vals))
         self.product_id.packaging_ids = actions
+        # reload lines
+        self.onchange_product_id()
 
-    @api.multi
     def action_close(self):
         self.ensure_one()
         action = self.env.ref("stock_cubiscan.action_cubiscan_device_form").read()[0]
@@ -134,7 +137,9 @@ class CubiscanWizardLine(models.TransientModel):
     name = fields.Char("Packaging", readonly=True)
     qty = fields.Float("Quantity")
     max_weight = fields.Float("Weight (kg)", readonly=True)
-    length = fields.Integer("Length (mm)", readonly=True)
+    # this is not a typo:
+    # https://github.com/odoo/odoo/issues/41353#issuecomment-568037415
+    lngth = fields.Integer("Length (mm)", readonly=True)
     width = fields.Integer("Width (mm)", readonly=True)
     height = fields.Integer("Height (mm)", readonly=True)
     volume = fields.Float(
@@ -151,20 +156,20 @@ class CubiscanWizardLine(models.TransientModel):
     )
     required = fields.Boolean(related="packaging_type_id.required", readonly=True)
 
-    @api.depends("length", "width", "height")
+    @api.depends("lngth", "width", "height")
     def _compute_volume(self):
         for line in self:
-            line.volume = (line.length * line.width * line.height) / 1000.0 ** 3
+            line.volume = (line.lngth * line.width * line.height) / 1000.0 ** 3
 
-    @api.multi
     def cubiscan_measure(self):
         self.ensure_one()
         measures = self.wizard_id.device_id.get_measure()
+        # measures are a tuple of 2 slots (measure, precision error),
+        # we only care about the measure for now
         measures = {
-            k: (v[0] if k in ["length", "width", "height", "weight"] else False)
-            for k, v in measures.items()
+            "lngth": int(measures["length"][0] * 1000),
+            "width": int(measures["width"][0] * 1000),
+            "height": int(measures["height"][0] * 1000),
+            "max_weight": measures["weight"][0],
         }
-        weight = measures.pop("weight")
-        measures = {k: int(v * 1000) for k, v in measures.items()}
-        measures["max_weight"] = weight
         self.write(measures)

@@ -25,23 +25,15 @@ class CubiscanDevice(models.Model):
         [("not_ready", "Not Ready"), ("ready", "Ready")],
         default="not_ready",
         readonly=True,
+        copy=False,
     )
 
-    @api.multi
     @api.constrains("device_address", "port")
     def _check_connection_infos(self):
         self.ensure_one()
         if not 1 <= self.port <= 65535:
-            raise ValidationError("Port must be in range 1-65535")
+            raise ValidationError(_("Port must be in range 1-65535"))
 
-    @api.multi
-    def copy(self, default=None):
-        if not default:
-            default = dict()
-        default["state"] = "not_ready"
-        return super().copy(default)
-
-    @api.multi
     def open_wizard(self):
         self.ensure_one()
         return {
@@ -50,18 +42,20 @@ class CubiscanDevice(models.Model):
             "type": "ir.actions.act_window",
             "view_id": False,
             "view_mode": "form",
-            "view_type": "form",
             "context": {"default_device_id": self.id},
             "target": "fullscreen",
             "flags": {
-                "headless": True,
+                "withControlPanel": False,
                 "form_view_initial_mode": "edit",
                 "no_breadcrumbs": True,
             },
         }
 
-    @api.multi
     def _get_interface(self):
+        """Return the CubiScan client
+
+        Can be overrided to customize the way it is instanciated
+        """
         self.ensure_one()
         ctx = SSL.create_default_context()
         ctx.load_cert_chain("/usr/lib/ssl/certs/camptocamp.pem")
@@ -69,8 +63,8 @@ class CubiscanDevice(models.Model):
         ctx.verify_mode = SSL.CERT_NONE
         return CubiScan(self.device_address, self.port, self.timeout, ssl=ctx)
 
-    @api.multi
     def test_device(self):
+        """Check connection with the Cubiscan device"""
         for device in self:
             res = device._get_interface().test()
             if res and "error" not in res and device.state == "not_ready":
@@ -78,12 +72,14 @@ class CubiscanDevice(models.Model):
             elif res and "error" in res and device.state == "ready":
                 device.state = "not_ready"
 
-    @api.multi
     def get_measure(self):
+        """Return a measure from the Cubiscan device"""
         self.ensure_one()
         if self.state != "ready":
             raise UserError(
-                "Device is not ready. Please use the 'Test'"
-                " button before using the device."
+                _(
+                    "Device is not ready. Please use the 'Test'"
+                    " button before using the device."
+                )
             )
         return self._get_interface().measure()
