@@ -5,10 +5,10 @@ from odoo import fields, models
 
 
 class StockWarehouse(models.Model):
-    _inherit = 'stock.warehouse'
+    _inherit = "stock.warehouse"
 
     cubiscan_device_ids = fields.One2many(
-        'cubiscan.device', 'warehouse_id', string="Cubiscan Devices"
+        "cubiscan.device", "warehouse_id", string="Cubiscan Devices"
     )
 
 
@@ -17,9 +17,9 @@ class ProductPackaging(models.Model):
     # FIXME: Not sure this is still the best place for this constraint
     _sql_constraints = [
         (
-            'product_packaging_type_unique',
-            'unique (product_id, packaging_type_id)',
-            'It is forbidden to have different packagings '
-            'with the same type for a given product.',
+            "product_packaging_type_unique",
+            "unique (product_id, packaging_type_id)",
+            "It is forbidden to have different packagings "
+            "with the same type for a given product.",
         )
     ]
