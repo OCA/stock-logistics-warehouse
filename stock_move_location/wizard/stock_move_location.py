@@ -9,56 +9,60 @@ from odoo.fields import first
 
 class StockMoveLocationWizard(models.TransientModel):
     _name = "wiz.stock.move.location"
-    _description = 'Wizard move location'
+    _description = "Wizard move location"
 
     @api.multi
     def _get_default_picking_type_id(self):
-        company_id = self.env.context.get('company_id') or \
-            self.env.user.company_id.id
-        return self.env['stock.picking.type'].search(
-            [('code', '=', 'internal'),
-             ('warehouse_id.company_id', '=', company_id)], limit=1).id
+        company_id = self.env.context.get("company_id") or self.env.user.company_id.id
+        return (
+            self.env["stock.picking.type"]
+            .search(
+                [
+                    ("code", "=", "internal"),
+                    ("warehouse_id.company_id", "=", company_id),
+                ],
+                limit=1,
+            )
+            .id
+        )
 
     origin_location_disable = fields.Boolean(
         compute="_compute_readonly_locations",
-        help="technical field to disable the edition of origin location."
+        help="technical field to disable the edition of origin location.",
     )
     origin_location_id = fields.Many2one(
-        string='Origin Location',
-        comodel_name='stock.location',
+        string="Origin Location",
+        comodel_name="stock.location",
         required=True,
         domain=lambda self: self._get_locations_domain(),
     )
     destination_location_disable = fields.Boolean(
         compute="_compute_readonly_locations",
-        help="technical field to disable the edition of destination location."
+        help="technical field to disable the edition of destination location.",
     )
     destination_location_id = fields.Many2one(
-        string='Destination Location',
-        comodel_name='stock.location',
+        string="Destination Location",
+        comodel_name="stock.location",
         required=True,
         domain=lambda self: self._get_locations_domain(),
     )
     stock_move_location_line_ids = fields.Many2many(
-        string="Move Location lines",
-        comodel_name="wiz.stock.move.location.line",
+        string="Move Location lines", comodel_name="wiz.stock.move.location.line"
     )
     picking_type_id = fields.Many2one(
-        comodel_name='stock.picking.type',
-        default=_get_default_picking_type_id,
+        comodel_name="stock.picking.type", default=_get_default_picking_type_id
     )
     picking_id = fields.Many2one(
-        string="Connected Picking",
-        comodel_name="stock.picking",
+        string="Connected Picking", comodel_name="stock.picking"
     )
-    edit_locations = fields.Boolean(string='Edit Locations',
-                                    default=True)
+    edit_locations = fields.Boolean(string="Edit Locations", default=True)
 
-    @api.depends('edit_locations')
+    @api.depends("edit_locations")
     def _compute_readonly_locations(self):
         for rec in self:
             rec.origin_location_disable = self.env.context.get(
-                'origin_location_disable', False)
+                "origin_location_disable", False
+            )
             if not rec.edit_locations:
                 rec.origin_location_disable = True
                 rec.destination_location_disable = True
@@ -66,29 +70,37 @@ class StockMoveLocationWizard(models.TransientModel):
     @api.model
     def default_get(self, fields):
         res = super().default_get(fields)
-        if self.env.context.get('active_model', False) != 'stock.quant':
+        if self.env.context.get("active_model", False) != "stock.quant":
             return res
         # Load data directly from quants
-        quants = self.env['stock.quant'].browse(
-            self.env.context.get('active_ids', False))
-        res['stock_move_location_line_ids'] = [(0, 0, {
-            'product_id': quant.product_id.id,
-            'move_quantity': quant.quantity,
-            'max_quantity': quant.quantity,
-            'origin_location_id': quant.location_id.id,
-            'lot_id': quant.lot_id.id,
-            'product_uom_id': quant.product_uom_id.id,
-            'custom': False,
-        }) for quant in quants]
-        res['origin_location_id'] = first(quants).location_id.id
+        quants = self.env["stock.quant"].browse(
+            self.env.context.get("active_ids", False)
+        )
+        res["stock_move_location_line_ids"] = [
+            (
+                0,
+                0,
+                {
+                    "product_id": quant.product_id.id,
+                    "move_quantity": quant.quantity,
+                    "max_quantity": quant.quantity,
+                    "origin_location_id": quant.location_id.id,
+                    "lot_id": quant.lot_id.id,
+                    "product_uom_id": quant.product_uom_id.id,
+                    "custom": False,
+                },
+            )
+            for quant in quants
+        ]
+        res["origin_location_id"] = first(quants).location_id.id
         return res
 
-    @api.onchange('origin_location_id')
+    @api.onchange("origin_location_id")
     def _onchange_origin_location_id(self):
-        if not self.env.context.get('origin_location_disable', False):
+        if not self.env.context.get("origin_location_disable", False):
             self._clear_lines()
 
-    @api.onchange('destination_location_id')
+    @api.onchange("destination_location_id")
     def _onchange_destination_location_id(self):
         for line in self.stock_move_location_line_ids:
             line.destination_location_id = self.destination_location_id
@@ -97,22 +109,23 @@ class StockMoveLocationWizard(models.TransientModel):
         self.stock_move_location_line_ids = False
 
     def _get_locations_domain(self):
-        return [('usage', '=', 'internal')]
+        return [("usage", "=", "internal")]
 
     def _create_picking(self):
-        return self.env['stock.picking'].create({
-            'picking_type_id': self.picking_type_id.id,
-            'location_id': self.origin_location_id.id,
-            'location_dest_id': self.destination_location_id.id,
-        })
+        return self.env["stock.picking"].create(
+            {
+                "picking_type_id": self.picking_type_id.id,
+                "location_id": self.origin_location_id.id,
+                "location_dest_id": self.destination_location_id.id,
+            }
+        )
 
     @api.multi
     def group_lines(self):
         lines_grouped = {}
         for line in self.stock_move_location_line_ids:
             lines_grouped.setdefault(
-                line.product_id.id,
-                self.env["wiz.stock.move.location.line"].browse(),
+                line.product_id.id, self.env["wiz.stock.move.location.line"].browse()
             )
             lines_grouped[line.product_id.id] |= line
         return lines_grouped
@@ -148,9 +161,7 @@ class StockMoveLocationWizard(models.TransientModel):
     @api.multi
     def _create_move(self, picking, lines):
         self.ensure_one()
-        move = self.env["stock.move"].create(
-            self._get_move_values(picking, lines),
-        )
+        move = self.env["stock.move"].create(self._get_move_values(picking, lines))
         if not self.env.context.get("planned"):
             for line in lines:
                 line.create_move_lines(picking, move)
@@ -172,18 +183,14 @@ class StockMoveLocationWizard(models.TransientModel):
     def _get_picking_action(self, pickinig_id):
         action = self.env.ref("stock.action_picking_tree_all").read()[0]
         form_view = self.env.ref("stock.view_picking_form").id
-        action.update({
-            "view_mode": "form",
-            "views": [(form_view, "form")],
-            "res_id": pickinig_id,
-        })
+        action.update(
+            {"view_mode": "form", "views": [(form_view, "form")], "res_id": pickinig_id}
+        )
         return action
 
     def _get_group_quants(self):
         location_id = self.origin_location_id.id
-        company = self.env['res.company']._company_default_get(
-            'stock.inventory',
-        )
+        company = self.env["res.company"]._company_default_get("stock.inventory")
         # Using sql as search_group doesn't support aggregation functions
         # leading to overhead in queries to DB
         query = """
@@ -197,44 +204,46 @@ class StockMoveLocationWizard(models.TransientModel):
         return self.env.cr.dictfetchall()
 
     def _get_stock_move_location_lines_values(self):
-        product_obj = self.env['product.product']
+        product_obj = self.env["product.product"]
         product_data = []
         for group in self._get_group_quants():
             product = product_obj.browse(group.get("product_id")).exists()
             # Apply the putaway strategy
-            location_dest_id = \
-                self.destination_location_id.get_putaway_strategy(
-                    product).id or self.destination_location_id.id
-            product_data.append({
-                'product_id': product.id,
-                'move_quantity': group.get("sum"),
-                'max_quantity': group.get("sum"),
-                'origin_location_id': self.origin_location_id.id,
-                'destination_location_id': location_dest_id,
-                # cursor returns None instead of False
-                'lot_id': group.get("lot_id") or False,
-                'product_uom_id': product.uom_id.id,
-                'custom': False,
-            })
+            location_dest_id = (
+                self.destination_location_id.get_putaway_strategy(product).id
+                or self.destination_location_id.id
+            )
+            product_data.append(
+                {
+                    "product_id": product.id,
+                    "move_quantity": group.get("sum"),
+                    "max_quantity": group.get("sum"),
+                    "origin_location_id": self.origin_location_id.id,
+                    "destination_location_id": location_dest_id,
+                    # cursor returns None instead of False
+                    "lot_id": group.get("lot_id") or False,
+                    "product_uom_id": product.uom_id.id,
+                    "custom": False,
+                }
+            )
         return product_data
 
-    @api.onchange('origin_location_id')
+    @api.onchange("origin_location_id")
     def onchange_origin_location(self):
         lines = []
         if self.origin_location_id:
             line_model = self.env["wiz.stock.move.location.line"]
             for line_val in self._get_stock_move_location_lines_values():
-                if line_val.get('max_quantity') <= 0:
+                if line_val.get("max_quantity") <= 0:
                     continue
                 line = line_model.create(line_val)
                 line.max_quantity = line.get_max_quantity()
                 lines.append(line)
                 # self.stock_move_location_line_ids = [(4, line.id)]
-            self.update({'stock_move_location_line_ids': [
-                (6, 0, [line.id for line in lines])]})
+            self.update(
+                {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}
+            )
 
     def clear_lines(self):
         self._clear_lines()
-        return {
-            "type": "ir.action.do_nothing",
-        }
+        return {"type": "ir.action.do_nothing"}
