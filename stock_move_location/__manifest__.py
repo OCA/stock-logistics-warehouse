@@ -5,19 +5,16 @@
 {
     "name": "Move Stock Location",
     "version": "12.0.1.2.0",
-    "author": "Julius Network Solutions, "
-              "Odoo Community Association (OCA)",
+    "author": "Julius Network Solutions, " "Odoo Community Association (OCA)",
     "summary": "This module allows to move all stock "
-               "in a stock location to an other one.",
+    "in a stock location to an other one.",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    'license': 'AGPL-3',
-    "depends": [
-        "stock",
-    ],
+    "license": "AGPL-3",
+    "depends": ["stock"],
     "category": "Stock",
     "data": [
-        'data/stock_quant_view.xml',
-        'views/stock_picking_type_views.xml',
-        'wizard/stock_move_location.xml',
+        "data/stock_quant_view.xml",
+        "views/stock_picking_type_views.xml",
+        "wizard/stock_move_location.xml",
     ],
 }
