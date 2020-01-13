@@ -51,16 +51,14 @@ repos:
   rev: v1.24.0
   hooks:
   - id: pyupgrade
-- repo: https://github.com/asottile/seed-isort-config
-  rev: v1.9.3
-  hooks:
-  - id: seed-isort-config
-- repo: https://github.com/pre-commit/mirrors-isort
-  rev: v4.3.21
+- repo: https://github.com/timothycrosley/isort
+  rev: 4.3.21-2
   hooks:
   - id: isort
     name: isort except __init__.py
+    'types': [python]
     exclude: /__init__\.py$
+    additional_dependencies: [pipreqs, pip-api]
 - repo: https://github.com/pre-commit/mirrors-eslint
   rev: v6.5.1
   hooks:
