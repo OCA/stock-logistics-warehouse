@@ -11,7 +11,6 @@ class StockMoveLocationWizard(models.TransientModel):
     _name = "wiz.stock.move.location"
     _description = "Wizard move location"
 
-    @api.multi
     def _get_default_picking_type_id(self):
         company_id = self.env.context.get("company_id") or self.env.user.company_id.id
         return (
@@ -62,6 +61,9 @@ class StockMoveLocationWizard(models.TransientModel):
         for rec in self:
             rec.origin_location_disable = self.env.context.get(
                 "origin_location_disable", False
+            )
+            rec.destination_location_disable = self.env.context.get(
+                "destination_location_disable", False
             )
             if not rec.edit_locations:
                 rec.origin_location_disable = True
@@ -120,7 +122,6 @@ class StockMoveLocationWizard(models.TransientModel):
             }
         )
 
-    @api.multi
     def group_lines(self):
         lines_grouped = {}
         for line in self.stock_move_location_line_ids:
@@ -130,7 +131,6 @@ class StockMoveLocationWizard(models.TransientModel):
             lines_grouped[line.product_id.id] |= line
         return lines_grouped
 
-    @api.multi
     def _create_moves(self, picking):
         self.ensure_one()
         groups = self.group_lines()
@@ -158,7 +158,6 @@ class StockMoveLocationWizard(models.TransientModel):
             "location_move": True,
         }
 
-    @api.multi
     def _create_move(self, picking, lines):
         self.ensure_one()
         move = self.env["stock.move"].create(self._get_move_values(picking, lines))
@@ -167,7 +166,6 @@ class StockMoveLocationWizard(models.TransientModel):
                 line.create_move_lines(picking, move)
         return move
 
-    @api.multi
     def action_move_location(self):
         self.ensure_one()
         picking = self._create_picking()
@@ -189,18 +187,16 @@ class StockMoveLocationWizard(models.TransientModel):
         return action
 
     def _get_group_quants(self):
-        location_id = self.origin_location_id.id
-        company = self.env["res.company"]._company_default_get("stock.inventory")
+        location_id = self.origin_location_id
         # Using sql as search_group doesn't support aggregation functions
         # leading to overhead in queries to DB
         query = """
             SELECT product_id, lot_id, SUM(quantity)
             FROM stock_quant
             WHERE location_id = %s
-            AND company_id = %s
             GROUP BY product_id, lot_id
         """
-        self.env.cr.execute(query, (location_id, company.id))
+        self.env.cr.execute(query, (location_id.id,))
         return self.env.cr.dictfetchall()
 
     def _get_stock_move_location_lines_values(self):
@@ -210,7 +206,7 @@ class StockMoveLocationWizard(models.TransientModel):
             product = product_obj.browse(group.get("product_id")).exists()
             # Apply the putaway strategy
             location_dest_id = (
-                self.destination_location_id.get_putaway_strategy(product).id
+                self.destination_location_id._get_putaway_strategy(product).id
                 or self.destination_location_id.id
             )
             product_data.append(
