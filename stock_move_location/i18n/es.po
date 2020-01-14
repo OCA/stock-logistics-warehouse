@@ -131,7 +131,7 @@ msgid "Move from location..."
 msgstr "Mover desde ubicación..."
 
 #. module: stock_move_location
-#: code:addons/stock_move_location/wizard/stock_move_location_line.py:65
+#: code:addons/stock_move_location/wizard/stock_move_location_line.py:0
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
 msgstr "La cantidad movida no puede superar la cantidad máxima o ser negativo"
