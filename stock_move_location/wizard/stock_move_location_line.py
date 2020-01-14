@@ -6,8 +6,6 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import float_compare
 
-from odoo.addons import decimal_precision as dp
-
 
 class StockMoveLocationWizardLine(models.TransientModel):
     _name = "wiz.stock.move.location.line"
@@ -31,11 +29,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
         domain="[('product_id','=',product_id)]",
     )
     move_quantity = fields.Float(
-        string="Quantity to move", digits=dp.get_precision("Product Unit of Measure")
+        string="Quantity to move", digits="Product Unit of Measure"
     )
     max_quantity = fields.Float(
-        string="Maximum available quantity",
-        digits=dp.get_precision("Product Unit of Measure"),
+        string="Maximum available quantity", digits="Product Unit of Measure"
     )
     custom = fields.Boolean(string="Custom line", default=True)
 
@@ -78,11 +75,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
             self.env["stock.move.line"].create(values)
         return True
 
-    @api.multi
     def _get_move_line_values(self, picking, move):
         self.ensure_one()
         location_dest_id = (
-            self.destination_location_id.get_putaway_strategy(self.product_id).id
+            self.destination_location_id._get_putaway_strategy(self.product_id).id
             or self.destination_location_id.id
         )
         qty_todo, qty_done = self._get_available_quantity()

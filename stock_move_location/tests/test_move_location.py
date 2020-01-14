@@ -12,14 +12,6 @@ class TestMoveLocation(TestsCommon):
         super().setUp()
         self.setup_product_amounts()
 
-    def _create_wizard(self, origin_location, destination_location):
-        return self.wizard_obj.create(
-            {
-                "origin_location_id": origin_location.id,
-                "destination_location_id": destination_location.id,
-            }
-        )
-
     def test_move_location_wizard(self):
         """Test a simple move."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
