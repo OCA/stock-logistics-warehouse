@@ -4,15 +4,14 @@
 {
     "name": "Stock Orderpoint UoM",
     "summary": "Allows to create procurement orders in the UoM indicated in "
-               "the orderpoint",
+    "the orderpoint",
     "version": "12.0.1.1.0",
-    "author": "Eficent, "
-              "Odoo Community Association (OCA)",
+    "author": "Eficent, " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "depends": ["purchase_stock"],
     "data": ["views/stock_warehouse_orderpoint_view.xml"],
     "license": "AGPL-3",
-    'installable': True,
-    'application': False,
+    "installable": True,
+    "application": False,
 }
