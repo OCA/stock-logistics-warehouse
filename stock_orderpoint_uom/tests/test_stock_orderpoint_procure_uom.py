@@ -1,5 +1,4 @@
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-19 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import odoo.tests.common as common
@@ -46,7 +45,7 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
             }
         )
 
-    def test_stock_orderpoint_procure_uom(self):
+    def test_01_stock_orderpoint_procure_uom(self):
 
         orderpoint = self.env["stock.warehouse.orderpoint"].create(
             {
@@ -72,7 +71,7 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
         self.assertEqual(purchase_line.product_uom, self.uom_dozen)
         self.assertEqual(purchase_line.product_qty, 2)
 
-    def test_stock_orderpoint_wrong_uom(self):
+    def test_02_stock_orderpoint_wrong_uom(self):
 
         with mute_logger("openerp.sql_db"):
             with self.assertRaises(ValidationError):
@@ -87,7 +86,7 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
                     }
                 )
 
-    def test_regenerate_po(self):
+    def test_03_regenerate_po(self):
         def _assert_purchase_generated(self, supplier, product):
             purchase = self.purchase_model.search([("partner_id", "=", supplier.id)])
             self.assertEquals(len(purchase), 1)
@@ -99,7 +98,7 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
             return purchase
 
         supplier = self.env["res.partner"].create(
-            {"name": "Brewery Inc", "is_company": True, "supplier": True}
+            {"name": "Brewery Inc", "is_company": True}
         )
 
         product = self.env["product.product"].create(
