@@ -19,9 +19,11 @@
         <field name="inherit_id"
                ref="stock.view_warehouse_orderpoint_form"/>
         <field name="arch" type="xml">
-            <field name="product_uom" position="after">
-                <field name="procure_uom_id" class="oe_inline"
-                       groups="uom.group_uom"/>
+            <field name="product_id" position="after">
+                <field name="procure_uom_id" class="oe_inline" groups="uom.group_uom"/>
+            </field>
+            <field name="qty_multiple" position="after">
+                <p class="oe_grey">Quantity Multiple is applied to the base UoM.</p>
             </field>
         </field>
     </record>
