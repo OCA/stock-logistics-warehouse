@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
 "PO-Revision-Date: 2019-08-30 14:23+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr "Diário  Item"
 
 #. module: account_move_line_stock_info
 #: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_move_form
-#: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_move_picking_form
+#: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_picking_form
 msgid "Journal Items"
 msgstr "Itens do Diário"
 
