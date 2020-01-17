@@ -158,7 +158,7 @@ msgid "Stock Demand Estimates"
 msgstr "Estimations de demande de stock"
 
 #. module: stock_demand_estimate
-#: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:118
+#: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:0
 #, python-format
 msgid ""
 "The requested operation cannot be processed because of a programming error "
