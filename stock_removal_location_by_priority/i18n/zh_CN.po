@@ -51,7 +51,7 @@ msgid ""
 msgstr "当两个位置的传入日期相等时，将应用删除优先级。"
 
 #. module: stock_removal_location_by_priority
-#: code:addons/stock_removal_location_by_priority/models/stock_quant.py:25
+#: code:addons/stock_removal_location_by_priority/models/stock_quant.py:0
 #, python-format
 msgid "Removal strategy %s not implemented."
 msgstr "未执行删除策略%s。"
