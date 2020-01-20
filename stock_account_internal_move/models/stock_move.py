@@ -10,8 +10,7 @@ class StockMove(models.Model):
     @api.model
     def _get_valued_types(self):
         res = super(StockMove, self)._get_valued_types()
-        if self._is_internal():
-            res.append("internal")
+        res.append("internal")
         return res
 
     def _get_internal_move_lines(self):
