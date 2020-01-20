@@ -1,13 +1,12 @@
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Stock Orderpoint Manual Procurement",
     "summary": "Allows to create procurement orders from orderpoints instead "
     "of relying only on the scheduler.",
-    "version": "12.0.1.1.0",
-    "author": "Eficent, " "Odoo Community Association (OCA)",
+    "version": "13.0.1.0.0",
+    "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "depends": ["purchase_stock"],

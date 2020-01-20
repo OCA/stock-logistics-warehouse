@@ -1,5 +1,4 @@
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
@@ -59,13 +58,13 @@ class MakeProcurementOrderpoint(models.TransientModel):
         res["item_ids"] = items
         return res
 
-    @api.multi
     def make_procurement(self):
         self.ensure_one()
         errors = []
         # User requesting the procurement is passed by context to be able to
         # update final MO, PO or trasfer with that information.
         pg_obj = self.env["procurement.group"].with_context(requested_uid=self.env.user)
+        procurements = []
         for item in self.item_ids:
             if not item.qty:
                 raise ValidationError(_("Quantity must be positive."))
@@ -75,21 +74,25 @@ class MakeProcurementOrderpoint(models.TransientModel):
             values["date_planned"] = fields.Datetime.to_string(
                 fields.Date.from_string(item.date_planned)
             )
-            # Run procurement
-            try:
-                pg_obj.run(
+            procurements.append(
+                pg_obj.Procurement(
                     item.orderpoint_id.product_id,
                     item.qty,
                     item.uom_id,
                     item.orderpoint_id.location_id,
                     item.orderpoint_id.name,
                     item.orderpoint_id.name,
+                    item.orderpoint_id.company_id,
                     values,
                 )
-            except UserError as error:
-                errors.append(error.name)
-            if errors:
-                raise UserError("\n".join(errors))
+            )
+        try:
+            # Run procurement
+            pg_obj.run(procurements)
+        except UserError as error:
+            errors.append(error.name)
+        if errors:
+            raise UserError("\n".join(errors))
         return {"type": "ir.actions.act_window_close"}
 
 
@@ -123,7 +126,6 @@ class MakeProcurementOrderpointItem(models.TransientModel):
         string="Location", comodel_name="stock.location", readonly=True
     )
 
-    @api.multi
     @api.onchange("uom_id")
     def onchange_uom_id(self):
         for rec in self:

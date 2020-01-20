@@ -1,15 +1,10 @@
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
 
 from odoo import api, fields, models
 from odoo.tools import float_compare, float_round
-
-from odoo.addons import decimal_precision as dp
-
-UNIT = dp.get_precision("Product Unit of Measure")
 
 
 class StockWarehouseOrderpoint(models.Model):
@@ -18,13 +13,12 @@ class StockWarehouseOrderpoint(models.Model):
     procure_recommended_qty = fields.Float(
         string="Procure Recommendation",
         compute="_compute_procure_recommended",
-        digits=UNIT,
+        digits="Product Unit of Measure",
     )
     procure_recommended_date = fields.Date(
         string="Recommended Request Date", compute="_compute_procure_recommended"
     )
 
-    @api.multi
     def _get_procure_recommended_qty(self, virtual_qty, op_qtys):
         self.ensure_one()
         procure_recommended_qty = 0.0
@@ -45,7 +39,6 @@ class StockWarehouseOrderpoint(models.Model):
             procure_recommended_qty = qty_rounded
         return procure_recommended_qty
 
-    @api.multi
     @api.depends("product_min_qty", "product_id", "qty_multiple")
     def _compute_procure_recommended(self):
         op_qtys = self._quantity_in_progress()
