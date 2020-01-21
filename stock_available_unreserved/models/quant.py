@@ -17,6 +17,10 @@ class StockQuant(models.Model):
     @api.depends("product_id", "location_id", "quantity", "reserved_quantity")
     def _compute_contains_unreserved(self):
         for record in self:
+            # Avoid error when adding a new line on manually Update Quantity
+            if isinstance(record.id, models.NewId):
+                record.contains_unreserved = False
+                continue
             available = record._get_available_quantity(
                 record.product_id, record.location_id
             )
