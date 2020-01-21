@@ -4,7 +4,7 @@
 
 from collections import defaultdict
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockWarehouseOrderpoint(models.Model):
@@ -15,7 +15,6 @@ class StockWarehouseOrderpoint(models.Model):
         compute="_compute_product_available_qty",
     )
 
-    @api.multi
     def _compute_product_available_qty(self):
         super()._compute_product_available_qty()
         op_by_loc = defaultdict(set)
