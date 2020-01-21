@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record forcecreate="True" id="ir_cron_product_stock_history_day" model="ir.cron">
+        <field name="name">Calculation of product stock history per day</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="DateTime(2015,1,1,0,0,1)"/>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+        <field name="model_id" ref="model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">model.run_product_history_day()</field>
+    </record>
+
+    <record forcecreate="True" id="ir_cron_product_stock_history_week" model="ir.cron">
+        <field name="name">Calculation of product stock history per week</field>
+        <field name="active" eval="True"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="DateTime(2015,1,1,0,0,1)"/>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+        <field name="model_id" ref="model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">model.run_product_history_week()</field>
+    </record>
+
+    <record forcecreate="True" id="ir_cron_product_stock_history_month" model="ir.cron">
+        <field name="name">Calculation of product stock history per month</field>
+        <field name="active" eval="True"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="DateTime(2015,1,1,0,0,1)"/>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+        <field name="model_id" ref="model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">model.run_product_history_month()</field>
+    </record>
+
+    <record forcecreate="True" id="ir_cron_recompute_last_6weeks_product_history" model="ir.cron">
+        <field name="name">Recompute the last 6weeks product history</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+        <field name="model_id" ref="model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">model.run_recompute_6weeks_product_history()</field>
+    </record>
+
+</odoo>

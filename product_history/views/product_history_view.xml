@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_product_history_search" model="ir.ui.view">
+        <field name="name">product.history.search</field>
+        <field name="model">product.history</field>
+        <field name="arch" type="xml">
+            <search string="History">
+                <field name="history_range"/>
+                <field name="product_tmpl_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_product_history_tree" model="ir.ui.view">
+        <field name="model">product.history</field>
+        <field name="arch" type="xml">
+            <tree string="Product History" edit="false" create="false" delete="false">
+                <field name="history_range"/>
+                <field name="product_id"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="start_qty"/>
+                <field name="purchase_qty"/>
+                <field name="sale_qty"/>
+                <field name="loss_qty"/>
+                <field name="end_qty"/>
+                <field name="incoming_qty"/>
+                <field name="outgoing_qty"/>
+                <field name="virtual_qty"/>
+                <field name="ignored" invisible="1"/>
+                <button name="ignore_line" attrs="{'invisible': [('ignored','=',True)]}" type="object" icon="STOCK_STOP" help="This history line is active. Click this button to ignore it." string="Ignore"/>
+                <button name="unignore_line" attrs="{'invisible': [('ignored','=',False)]}" type="object" icon="STOCK_APPLY" help="This history line is not active. Click this button to reactivate it." string="Reactivate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_product_history_action" model="ir.actions.act_window">
+        <field name="name">Product History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.history</field>
+        <field name="context">{'search_default_product_tmpl_id': [active_id], 'default_product_tmpl_id': active_id}</field>
+        <field name="search_view_id" ref="view_product_history_search"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_history_view">
+        <field name="name">Product History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.history</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+            name="History"
+            id="menu_history"
+            action="action_history_view"
+            parent="stock.menu_stock_config_settings"
+            groups="base.group_no_one"/>
+
+</odoo>

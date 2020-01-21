@@ -1,0 +1,245 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_history
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_end_qty
+msgid "Closing quantity"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_company_id
+msgid "Company"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: product_history
+#: selection:product.history,history_range:0
+#: selection:stock.config.settings,default_history_range:0
+msgid "Days"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_from_date
+msgid "From Date"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product_product_history_ids
+#: model:ir.model.fields,field_description:product_history.field_product_template_product_history_ids
+#: model:ir.ui.menu,name:product_history.menu_history
+#: model:ir.ui.view,arch_db:product_history.view_product_history_search
+#: model:ir.ui.view,arch_db:product_history.view_template_history_form
+msgid "History"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product_history_range
+#: model:ir.model.fields,field_description:product_history.field_product_template_history_range
+msgid "History Range"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_history_range
+msgid "History range"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_id
+msgid "ID"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_ignored
+msgid "Ignored"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_incoming_qty
+msgid "Incoming quantity"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_location_id
+msgid "Location"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_loss_qty
+msgid "Losses"
+msgstr ""
+
+#. module: product_history
+#: selection:product.history,history_range:0
+#: selection:product.template,history_range:0
+#: selection:stock.config.settings,default_history_range:0
+msgid "Month"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product_number_of_periods
+#: model:ir.model.fields,field_description:product_history.field_product_product_number_of_periods_real
+#: model:ir.model.fields,field_description:product_history.field_product_product_number_of_periods_target
+#: model:ir.model.fields,field_description:product_history.field_product_template_number_of_periods
+msgid "Number of History periods"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_stock_config_settings_default_number_of_periods
+#: model:ir.model.fields,help:product_history.field_product_product_number_of_periods
+#: model:ir.model.fields,help:product_history.field_product_product_number_of_periods_real
+#: model:ir.model.fields,help:product_history.field_product_product_number_of_periods_target
+#: model:ir.model.fields,help:product_history.field_product_template_number_of_periods
+msgid "Number of valid history periods used for the calculation"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_start_qty
+msgid "Opening quantity"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_outgoing_qty
+msgid "Outgoing quantity"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model,name:product_history.model_product_product
+#: model:ir.model.fields,field_description:product_history.field_product_history_product_id
+msgid "Product"
+msgstr ""
+
+#. module: product_history
+#: model:ir.actions.act_window,name:product_history.action_history_view
+#: model:ir.actions.act_window,name:product_history.view_product_history_action
+#: model:ir.ui.view,arch_db:product_history.view_product_history_tree
+#: model:ir.ui.view,arch_db:product_history.view_template_history_form
+msgid "Product History"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_stock_config_settings_default_history_range
+msgid "Product History Display Range"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model,name:product_history.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_production_qty
+msgid "Production"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_purchase_qty
+msgid "Purchases"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_sale_qty
+msgid "Sales"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_product_tmpl_id
+msgid "Template"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,help:product_history.field_stock_config_settings_default_number_of_periods
+msgid "This field is used if the selected method is based on Product History"
+msgstr ""
+
+#. module: product_history
+#: sql_constraint:product.history:0
+msgid "This history line already exists!"
+msgstr ""
+
+#. module: product_history
+#: model:ir.ui.view,arch_db:product_history.view_product_history_tree
+#: model:ir.ui.view,arch_db:product_history.view_template_history_form
+msgid "This history line is active. Click this button to ignore it."
+msgstr ""
+
+#. module: product_history
+#: model:ir.ui.view,arch_db:product_history.view_product_history_tree
+#: model:ir.ui.view,arch_db:product_history.view_template_history_form
+msgid "This history line is active. Click this button to reactivate it."
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_to_date
+msgid "To Date"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_virtual_qty
+msgid "Virtual quantity"
+msgstr ""
+
+#. module: product_history
+#: selection:product.history,history_range:0
+#: selection:product.template,history_range:0
+#: selection:stock.config.settings,default_history_range:0
+msgid "Week"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product_last_history_day
+#: model:ir.model.fields,field_description:product_history.field_product_product_last_history_month
+#: model:ir.model.fields,field_description:product_history.field_product_product_last_history_week
+msgid "last day history record"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model,name:product_history.model_product_history
+msgid "product.history"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model,name:product_history.model_stock_config_settings
+msgid "stock.config.settings"
+msgstr ""
+

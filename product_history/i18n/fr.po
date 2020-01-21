@@ -1,0 +1,213 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_history
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-02 10:34+0000\n"
+"PO-Revision-Date: 2016-03-02 10:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_history
+#: model:ir.ui.view,arch_db:product_history.view_product_history_tree
+msgid "Click this button to ignore this history line."
+msgstr "Cliquer sur ce bouton pour ignorer cette ligne d'historique."
+
+#. module: product_history
+#: model:ir.ui.view,arch_db:product_history.view_product_history_tree
+msgid "Click this button to reactivate this history line."
+msgstr "Cliquer sur ce bouton pour réactiver cette ligne d'historique."
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_end_qty
+msgid "Closing quantity"
+msgstr "Stock final"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: product_history
+#: selection:product.history,history_range:0
+#: selection:product.template,history_range:0
+#: selection:stock.config.settings,default_history_range:0
+msgid "Days"
+msgstr "Jours"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_from_date
+msgid "From Date"
+msgstr "Date de début"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product_product_history_ids
+#: model:ir.model.fields,field_description:product_history.field_product_template_product_history_ids
+#: model:ir.ui.view,arch_db:product_history.view_template_history_form
+msgid "History"
+msgstr "Historique"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product_history_range
+#: model:ir.model.fields,field_description:product_history.field_product_template_history_range
+msgid "History Range"
+msgstr "Période d'historique"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_history_range
+msgid "History range"
+msgstr "Période d'historique"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_id
+msgid "ID"
+msgstr "ID"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_ignored
+msgid "Ignored"
+msgstr "Ignoré"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_incoming_qty
+msgid "Incoming quantity"
+msgstr "Qté entrante"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_location_id
+msgid "Location"
+msgstr "Lieu"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_loss_qty
+msgid "Losses"
+msgstr "Pertes"
+
+#. module: product_history
+#: selection:product.history,history_range:0
+#: selection:product.template,history_range:0
+#: selection:stock.config.settings,default_history_range:0
+msgid "Month"
+msgstr "Mois"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_start_qty
+msgid "Opening quantity"
+msgstr "Stock initial"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_outgoing_qty
+msgid "Outgoing quantity"
+msgstr "Qté sortante"
+
+#. module: product_history
+#: model:ir.model,name:product_history.model_product_product
+#: model:ir.model.fields,field_description:product_history.field_product_history_product_id
+msgid "Product"
+msgstr "Produit"
+
+#. module: product_history
+#: model:ir.ui.view,arch_db:product_history.view_product_history_tree
+#: model:ir.ui.view,arch_db:product_history.view_template_history_form
+msgid "Product History"
+msgstr "Historique Produit"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_stock_config_settings_default_history_range
+msgid "Product History Display Range"
+msgstr "Plage d'affichage de l'historique"
+
+#. module: product_history
+#: model:ir.model,name:product_history.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_production_qty
+msgid "Production"
+msgstr "Production"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_purchase_qty
+msgid "Purchases"
+msgstr "Achats"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_sale_qty
+msgid "Sales"
+msgstr "Ventes"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_product_tmpl_id
+msgid "Template"
+msgstr "Modèle"
+
+#. module: product_history
+#: sql_constraint:product.history:0
+msgid "This history line already exists!"
+msgstr "Cette ligne d'historique existe déjà!"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_to_date
+msgid "To Date"
+msgstr "Date de fin"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_history_virtual_qty
+msgid "Virtual quantity"
+msgstr "Stock virtuel"
+
+#. module: product_history
+#: selection:product.history,history_range:0
+#: selection:product.template,history_range:0
+#: selection:stock.config.settings,default_history_range:0
+msgid "Week"
+msgstr "Semaine"
+
+#. module: product_history
+#: model:ir.ui.view,arch_db:product_history.view_product_history_tree
+msgid "ignored"
+msgstr "ignoré"
+
+#. module: product_history
+#: model:ir.model,name:product_history.model_product_history
+msgid "product.history"
+msgstr "product.history"
+
+#. module: product_history
+#: model:ir.model,name:product_history.model_stock_config_settings
+msgid "stock.config.settings"
+msgstr "stock.config.settings"
+
