@@ -188,9 +188,11 @@ class PurchaseOrderLine(models.Model):
                 vals['product_purchase_qty'],
                 to_uom)
         res = super(PurchaseOrderLine, self).create(self.update_vals(vals))
-        if 'product_qty' in vals:
+        if 'product_qty' in vals and not \
+                self.env.context.get('recomputing_product_qty'):
             # Mandatory as we always want product_qty be computed
-            res._compute_product_qty()
+            res.with_context(
+                recomputing_product_qty=True)._compute_product_qty()
         return res
 
     @api.multi
