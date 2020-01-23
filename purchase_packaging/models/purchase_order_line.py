@@ -187,8 +187,20 @@ class PurchaseOrderLine(models.Model):
             vals['product_qty'] = to_uom._compute_quantity(
                 vals['product_purchase_qty'],
                 to_uom)
-        return super(PurchaseOrderLine, self).create(self.update_vals(vals))
+        res = super(PurchaseOrderLine, self).create(self.update_vals(vals))
+        if 'product_qty' in vals:
+            # Mandatory as we always want product_qty be computed
+            res._compute_product_qty()
+        return res
 
     @api.multi
     def write(self, vals):
-        return super(PurchaseOrderLine, self).write(self.update_vals(vals))
+        res = super(PurchaseOrderLine, self).write(self.update_vals(vals))
+        # Required if we want to avoid recursion as there is nothing in
+        # environment that would help distinguish write call from a
+        # compute
+        if 'product_qty' in vals and not \
+                self.env.context.get('recomputing_product_qty'):
+            self.with_context(
+                recomputing_product_qty=True)._compute_product_qty()
+        return res
