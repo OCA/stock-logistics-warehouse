@@ -26,11 +26,11 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     def _get_consumption_calculation_method(self):
-        selection = super(ProductTemplate, self).\
+        selection = super(ProductTemplate, self). \
             _get_consumption_calculation_method()
         selection.append(
             ('history', 'History (calculate consumption based on the Product\
-            History)'),)
+            History)'), )
         return selection
 
     # Columns section
@@ -91,6 +91,6 @@ class ProductTemplate(models.Model):
                 template.number_of_periods = number_of_periods
                 template.total_consumption = total_consumption
                 template.average_consumption = (
-                        number_of_periods and
-                        (total_consumption / number_of_periods /
-                         DAYS_IN_RANGE[product.history_range]) or False)
+                    number_of_periods and
+                    (total_consumption / number_of_periods /
+                     DAYS_IN_RANGE[product.history_range]) or False)
