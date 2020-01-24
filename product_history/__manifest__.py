@@ -10,7 +10,7 @@
     'version': '12.0.1.0.0',
     'category': 'Product',
     'author': 'Akretion,'
-              'Druidoo <http://druidoo.io>',
+              'Druidoo',
     'website': 'http://druidoo.io',
     'license': 'AGPL-3',
     'depends': [
