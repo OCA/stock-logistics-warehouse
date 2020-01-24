@@ -177,6 +177,12 @@ class VerticalLiftShuttle(models.Model):
             "res_id": self.id,
         }
 
+    def action_back_to_settings(self):
+        action_xmlid = "stock_vertical_lift.vertical_lift_shuttle_action"
+        action = self.env.ref(action_xmlid).read()[0]
+        action["target"] = "main"
+        return action
+
     def action_manual_barcode(self):
         return {
             "type": "ir.actions.act_window",
