@@ -16,6 +16,7 @@ HISTORY_RANGE = [
 
 class ProductHistory(models.Model):
     _name = "product.history"
+    _description = "Product History"
     _order = 'from_date desc'
 
     # Columns section
@@ -47,9 +48,10 @@ class ProductHistory(models.Model):
         required=True)
 
     _sql_constraints = [
-        ('history_uniq', 'unique(\
-            product_id, location_id, from_date, to_date,\
-            history_range)', 'This history line already exists!'),
+        ('history_uniq',
+         'unique(product_id, location_id, from_date, to_date, history_range)',
+         'This history line already exists!'
+         ),
     ]
 
     # Private section

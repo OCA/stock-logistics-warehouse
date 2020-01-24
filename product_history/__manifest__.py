@@ -17,7 +17,7 @@
         'product',
         'stock',
         'product_average_consumption',
-        'connector',
+        'queue_job',
     ],
     'data': [
         'security/product_history_security.xml',
