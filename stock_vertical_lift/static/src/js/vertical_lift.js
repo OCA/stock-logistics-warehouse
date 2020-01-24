@@ -2,10 +2,7 @@ odoo.define('stock_vertical_lift.vertical_lift', function (require) {
     "use strict";
 
     var KanbanRecord = require('web.KanbanRecord');
-    var basicFields = require('web.basic_fields');
-    var field_registry = require('web.field_registry');
     var FormController = require('web.FormController');
-    var FieldInteger = basicFields.FieldInteger;
 
     KanbanRecord.include({
 
@@ -26,27 +23,6 @@ odoo.define('stock_vertical_lift.vertical_lift', function (require) {
         },
 
     });
-
-    var ExitButton = FieldInteger.extend({
-        tagName: 'button',
-        className: 'btn btn-danger btn-block btn-lg o_shuttle_exit',
-        events: {
-            'click': '_onClick',
-        },
-        _render: function () {
-            this.$el.text(this.string);
-        },
-        _onClick: function () {
-            // The only reason to have this field widget is to be able
-            // to inject clear_breadcrumbs in the action:
-            // it will revert back to a normal - non-headless - view
-            this.do_action('stock_vertical_lift.vertical_lift_shuttle_action', {
-                clear_breadcrumbs: true,
-            });
-        },
-
-    });
-
 
     FormController.include({
         init: function () {
@@ -94,10 +70,7 @@ odoo.define('stock_vertical_lift.vertical_lift', function (require) {
 
     });
 
-    field_registry.add('vlift_shuttle_exit_button', ExitButton);
 
-    return {
-        ExitButton: ExitButton,
-    };
+    return {};
 
 });

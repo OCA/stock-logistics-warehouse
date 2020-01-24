@@ -23,8 +23,10 @@
                             class="btn-primary btn-block btn btn-lg"/>
                     </div>
                     <div class="col-6">
-                        <field name="id" string="Back to settings"
-                            widget="vlift_shuttle_exit_button" readonly="1"/>
+                        <button name="action_back_to_settings"
+                            type="object"
+                            string="Back to settings"
+                            class="btn-danger btn-block btn-lg" />
                     </div>
                 </div>
                 <footer></footer>
