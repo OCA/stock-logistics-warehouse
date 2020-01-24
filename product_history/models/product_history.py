@@ -30,8 +30,8 @@ class ProductHistory(models.Model):
     location_id = fields.Many2one(
         'stock.location', string='Location', required=True,
         ondelete='cascade')
-    from_date = fields.Date("From Date", required=True)
-    to_date = fields.Date("To Date", required=True)
+    from_date = fields.Date(required=True)
+    to_date = fields.Date(required=True)
     purchase_qty = fields.Float("Purchases", default=0)
     production_qty = fields.Float("Production", default=0)
     sale_qty = fields.Float("Sales", default=0)
@@ -41,9 +41,9 @@ class ProductHistory(models.Model):
     incoming_qty = fields.Float("Incoming quantity", default=0)
     outgoing_qty = fields.Float("Outgoing quantity", default=0)
     virtual_qty = fields.Float("Virtual quantity", default=0)
-    ignored = fields.Boolean("Ignored", default=False)
+    ignored = fields.Boolean(default=False)
     history_range = fields.Selection(
-        HISTORY_RANGE, "History range",
+        HISTORY_RANGE,
         required=True)
 
     _sql_constraints = [

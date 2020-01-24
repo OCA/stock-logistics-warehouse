@@ -119,10 +119,10 @@ class ProductProduct(models.Model):
                 product.average_consumption = 0
                 product.number_of_periods_real = 0
             else:
-                ids = list(range(nb))
+                list_indexes = list(range(nb))
                 total_consumption = 0
-                for id in ids:
-                    total_consumption -= history_ids[id].sale_qty
+                for index in list_indexes:
+                    total_consumption -= history_ids[index].sale_qty
                 product.total_consumption = total_consumption
                 product.average_consumption = \
                     total_consumption/nb/DAYS_IN_RANGE[product.history_range]
@@ -212,8 +212,7 @@ class ProductProduct(models.Model):
                 self.env.cr.execute(
                     """SELECT to_date, end_qty FROM product_history
                     WHERE product_id=%s AND history_range='%s'
-                    ORDER BY "id" DESC LIMIT 1"""
-                    % (product.id, history_range))
+                    ORDER BY "id" DESC LIMIT 1""", (product.id, history_range))
                 last_record = self.env.cr.fetchone()
                 last_date = last_record and dt.strptime(
                     last_record[0], "%Y-%m-%d").date() or old_date
@@ -223,8 +222,8 @@ class ProductProduct(models.Model):
             else:
                 self.env.cr.execute(
                     """SELECT date FROM stock_move
-                    WHERE product_id=%s ORDER BY "date" LIMIT 1"""
-                    % (product.id))
+                    WHERE product_id=%s ORDER BY "date" LIMIT 1""",
+                    (product.id, ))
                 fetch = self.env.cr.fetchone()
                 from_date = fetch and fetch[0].date() or to_date
                 if history_range == "months":
@@ -357,14 +356,13 @@ class ProductProduct(models.Model):
                 ('product_id', '=', product.id)
             ], order="id desc", limit=7)
             if history_ids:
-                length = len(history_ids)
                 last_6weeks_histories = history_ids[:6]
                 past_7th_history = history_ids[-1]
 
                 # Remove the last 6 weeks histories
                 last_6weeks_histories.unlink()
 
-                if length == 7:
+                if len(history_ids) == 7:
                     to_date = past_7th_history.to_date
                     to_date_dt = fields.Date.from_string(to_date)
                     ending_qty = product.get_stock_inventory_at(
@@ -384,7 +382,7 @@ class ProductProduct(models.Model):
 
         query = """
 SELECT product_id, sum(quantity) AS quantity
-FROM   
+FROM
 (
     (
         SELECT sum(quant.qty) AS quantity,
@@ -429,7 +427,7 @@ FROM
             AND ( NOT ( dest_location.company_id IS NULL
                         AND source_location.company_id IS NULL )
                     OR dest_location.company_id != source_location.company_id
-                    OR dest_location.usage NOT IN ( 'internal', 'transit' ) 
+                    OR dest_location.usage NOT IN ( 'internal', 'transit' )
                 )
             AND stock_move.date <= %s
             AND stock_move.product_id = %s

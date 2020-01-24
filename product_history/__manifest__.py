@@ -9,8 +9,9 @@
     'name': 'Product - History',
     'version': '12.0.1.0.0',
     'category': 'Product',
-    'author': 'Akretion',
-    'website': 'http://www.akretion.com/fr',
+    'author': 'Akretion,'
+              'Druidoo <http://druidoo.io>',
+    'website': 'http://druidoo.io',
     'license': 'AGPL-3',
     'depends': [
         'product',

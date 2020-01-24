@@ -36,15 +36,23 @@ class ProductTemplate(models.Model):
     # Columns section
     consumption_calculation_method = fields.Selection(
         _get_consumption_calculation_method,
-        'Consumption Calculation Method', default='moves')
+        default='moves'
+    )
     history_range = fields.Selection(
-        HISTORY_RANGE, "History Range", default="weeks")
+        HISTORY_RANGE,
+        default="weeks"
+    )
     product_history_ids = fields.Many2many(
-        comodel_name='product.history', inverse_name='product_tmpl_id',
-        string='History', compute="_compute_product_history_ids")
+        comodel_name='product.history',
+        inverse_name='product_tmpl_id',
+        string='History',
+        compute="_compute_product_history_ids"
+    )
     number_of_periods = fields.Integer(
-        'Number of History periods', default=6,
-        help="""Number of valid history periods used for the calculation""")
+        'Number of History periods',
+        default=6,
+        help="""Number of valid history periods used for the calculation"""
+    )
 
     # Private section
     @api.depends('history_range')

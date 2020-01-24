@@ -11,7 +11,7 @@
                         <field name="history_range"/>
                     </group>
                     <field name="product_history_ids">
-                        <tree string="Product History">
+                        <tree>
                             <field name="product_id"/>
                             <field name="from_date"/>
                             <field name="to_date"/>
