@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- *********************************************************************** -->
-<!-- See __manifest__.py file for Copyright and Licence Informations.        -->
-<!-- *********************************************************************** -->
+
 <odoo noupdate="1">
     <function model="product.product" name="init_history"/>
 </odoo>
