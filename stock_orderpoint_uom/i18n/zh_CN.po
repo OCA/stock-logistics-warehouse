@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_orderpoint_uom
-#: code:addons/stock_orderpoint_uom/models/product_template.py:21
+#: code:addons/stock_orderpoint_uom/models/product_template.py:0
 #, python-format
 msgid ""
 "At least one reordering rule for this product has a different Procurement "
@@ -29,7 +29,7 @@ msgid ""
 msgstr "该产品的至少一个重新订购规则具有不同的采购计量单位类别。"
 
 #. module: stock_orderpoint_uom
-#: code:addons/stock_orderpoint_uom/models/stock_warehouse_orderpoint.py:23
+#: code:addons/stock_orderpoint_uom/models/stock_warehouse_orderpoint.py:0
 #, python-format
 msgid ""
 "Error: The product default Unit of Measure and the procurement Unit of "
@@ -48,7 +48,6 @@ msgstr "补货组"
 
 #. module: stock_orderpoint_uom
 #: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint__procure_uom_id
-#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint_template__procure_uom_id
 msgid "Procurement UoM"
 msgstr "采购单位"
 
@@ -56,3 +55,8 @@ msgstr "采购单位"
 #: model:ir.model,name:stock_orderpoint_uom.model_product_template
 msgid "Product Template"
 msgstr "产品模板"
+
+#. module: stock_orderpoint_uom
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_uom.view_warehouse_orderpoint_form
+msgid "Quantity Multiple is applied to the base UoM."
+msgstr ""

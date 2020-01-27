@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_orderpoint_uom
-#: code:addons/stock_orderpoint_uom/models/product_template.py:21
+#: code:addons/stock_orderpoint_uom/models/product_template.py:0
 #, python-format
 msgid ""
 "At least one reordering rule for this product has a different Procurement "
@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_orderpoint_uom
-#: code:addons/stock_orderpoint_uom/models/stock_warehouse_orderpoint.py:23
+#: code:addons/stock_orderpoint_uom/models/stock_warehouse_orderpoint.py:0
 #, python-format
 msgid ""
 "Error: The product default Unit of Measure and the procurement Unit of "
@@ -46,7 +46,6 @@ msgstr ""
 
 #. module: stock_orderpoint_uom
 #: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint__procure_uom_id
-#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint_template__procure_uom_id
 msgid "Procurement UoM"
 msgstr ""
 
@@ -54,3 +53,8 @@ msgstr ""
 #: model:ir.model,name:stock_orderpoint_uom.model_product_template
 msgid "Product Template"
 msgstr "Ürün Şablonu"
+
+#. module: stock_orderpoint_uom
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_uom.view_warehouse_orderpoint_form
+msgid "Quantity Multiple is applied to the base UoM."
+msgstr ""
