@@ -6,46 +6,23 @@
 Putaway strategy per product
 ============================
 
+
 This module extends the functionality of the odoo putaway strategy.
-It defines a new type of putaway strategy where users can set a specific
-stock location per product.
+From Odoo v12, putaway strategies per product have already been integrated into Odoo Core.
 
-On the product form, the case, rack, location fields are replaced with a
-specific putaway strategy and location id for the product.
-
-A putaway strategy can be used to ensure that incoming products will be
-stored in the location set on the product form.
-
-A recommended set-up is to create a separate putaway strategy for each
-warehouse. This will ensure that the same product will be placed in the
-appropriate location in each warehouse it is received.
+This module adds an easy way to modify putaway strategies from the product view for a better UX.
 
 Installation
 ============
 
 To install this module, just click the install button.
 
-Configuration
-=============
-
-To configure this module, you need to:
-
-#. Go to Inventory > Configuration > Settings
-#. Check "Multi-Step Routes" in the Warehouse section
-   Routes
-#. Go to Inventory > Configuration > Warehouse Management > Locations
-#. On the main inventory location of your warehouse,
-   set a new putaway strategy.
-#. For the new putaway strategy, select 'Fixed per product location'
-   as method
-
 Usage
 =====
 
 To use this module, you need to:
 
-#. Select the proper stock locations for each product on the product form
-   on the "Inventory" tab
+#. Open form view for products and use the fields in the "Putaway" section in "Inventory" page
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -72,7 +49,7 @@ Contributors
 * Denis Roussel - ACSONE SA/NV <denis.roussel@acsone.eu>
 * Thomas Fossoul - WINK SA/NV <tfossoul@wink.be>
 * Alexandre Saunier - Camptocamp SA <alexandre.saunier@camptocamp.com>
-
+* Kevin Khao - Akretion <kevin.khao@akretion.com>
 
 Maintainer
 ----------

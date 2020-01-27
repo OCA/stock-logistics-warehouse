@@ -2,84 +2,58 @@
 # Copyright 2016 Jos De Graeve - Apertoso N.V. <Jos.DeGraeve@apertoso.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
-from lxml import etree
+from odoo.tests.common import TransactionCase
 
 
-class TestProductPutaway(SavepointCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+class TestProductPutaway(TransactionCase):
+    def setUp(self):
+        super().setUp()
+        self.putawayObj = self.env["product.putaway"]
+        self.putawayLineObj = self.env["stock.fixed.putaway.strat"]
+        ref = self.env.ref
+        self.product_tmpl_chair = ref(
+            "product.product_product_11_product_template"
+        )
+        self.product_product_chair = ref("product.product_product_11")
+        self.location_chicago_stock = ref("stock.stock_location_shop0")
+        self.category_furniture = ref("product.product_category_5")
+        self.category_services = ref("product.product_category_3")
+        self.putaway_strat_1 = self.putawayObj.create(
+            {"name": "Putaway Strategy 1"}
+        )
+        self.putaway_line_1 = self.putawayLineObj.create(
+            {
+                "product_id": self.product_product_chair.id,
+                "putaway_id": self.putaway_strat_1.id,
+                "fixed_location_id": self.location_chicago_stock.id,
+            }
+        )
+        self.putaway_line_2 = self.putawayLineObj.create(
+            {
+                "category_id": self.category_furniture.id,
+                "putaway_id": self.putaway_strat_1.id,
+                "fixed_location_id": self.location_chicago_stock.id,
+            }
+        )
 
-        cls.putawayObj = cls.env['product.putaway']
-        cls.putaway_per_product = cls.putawayObj.create({
-            'name': 'WH - Putaway Per Product',
-            'method': 'per_product'
-        })
+    def test_tmpl_has_putaways_from_products(self):
+        self.assertIn(
+            self.putaway_line_1,
+            self.product_tmpl_chair.product_tmpl_putaway_ids,
+        )
+        self.putaway_line_1.product_id = self.env["product.product"]
+        self.assertNotIn(
+            self.putaway_line_1,
+            self.product_tmpl_chair.product_tmpl_putaway_ids,
+        )
 
-        cls.stock_location = cls.env.ref('stock.stock_location_stock')
-        cls.stock_location.putaway_strategy_id = cls.putaway_per_product
-        cls.location_shelf1 = cls.env.ref('stock.stock_location_components')
-
-        cls.product_computer = cls.env.ref('product.product_product_3')
-        cls.product_ipad = cls.env.ref('product.product_product_4')
-
-        cls.strategyObj = cls.env['stock.product.putaway.strategy']
-        cls.product_putaway_strategy_product_4 = cls.strategyObj.create({
-            'product_product_id': cls.product_ipad.id,
-            'product_tmpl_id': cls.env.ref(
-                'product.product_product_4_product_template').id,
-            'putaway_id': cls.putaway_per_product.id,
-            'fixed_location_id': cls.location_shelf1.id
-        })
-
-    # Check if "per_product" is a valid putaway method
-    def test_01_putaway_methods(self):
-        field_method = self.env['product.putaway']._fields.get('method')
-        self.assertIn('per_product', field_method.get_values(self.env))
-
-    def test_02_putway_apply(self):
-        self.assertEqual(
-            self.putaway_per_product.putaway_apply(self.product_ipad),
-            self.location_shelf1)
-
-    def test_03_stock_change_product_qty_default(self):
-        wiz_obj = self.env['stock.change.product.qty']
-        test_context = {
-            'active_model': 'product.product',
-            'active_id': self.product_ipad.id,
-        }
-        wiz_instance = wiz_obj.with_context(test_context).create({
-            'product_tmpl_id': self.product_ipad.product_tmpl_id.id
-        })
-        self.assertEqual(wiz_instance.location_id, self.location_shelf1)
-
-    def test_04_putaway_apply_none(self):
-        self.assertFalse(
-            self.putaway_per_product.putaway_apply(self.product_computer))
-
-    def test_05_putaway_apply_fixed(self):
-        # Test super
-        putaway_fixed = self.putawayObj.create({
-            'name': 'TEST',
-            'method': 'fixed'
-        })
-        self.assertEqual(
-            putaway_fixed.putaway_apply(self.product_computer),
-            self.env['stock.location'])
-
-    def test_06_putaway_check_variant(self):
-        t_product = self.env.ref(
-            'product.product_product_4_product_template')
-        self.assertEqual(type(t_product), type(self.env['product.template']))
-        p_product = self.env.ref('product.product_product_5')
-        self.assertEqual(type(p_product), type(self.env['product.product']))
-
-        view = p_product.fields_view_get()
-        product_xml = etree.XML(view['arch'])
-        putaway_path = "//field[@name='product_putaway_ids']"
-        putaway_field = product_xml.xpath(putaway_path)[0]
-        self.assertEqual(
-            putaway_field.attrib['context'],
-            "{'default_product_tmpl_id': product_tmpl_id,"
-            "'default_product_product_id': active_id}")
+    def test_tmpl_has_putaways_from_category(self):
+        self.assertIn(
+            self.putaway_line_2,
+            self.product_tmpl_chair.product_putaway_categ_ids,
+        )
+        self.product_tmpl_chair.categ_id = self.category_services
+        self.assertNotIn(
+            self.putaway_line_2,
+            self.product_tmpl_chair.product_putaway_categ_ids,
+        )
