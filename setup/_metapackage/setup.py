@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo13-addon-stock_inventory_chatter',
         'odoo13-addon-stock_inventory_exclude_sublocation',
         'odoo13-addon-stock_inventory_lockdown',
+        'odoo13-addon-stock_orderpoint_uom',
         'odoo13-addon-stock_removal_location_by_priority',
         'odoo13-addon-stock_warehouse_calendar',
         'odoo13-addon-stock_warehouse_orderpoint_stock_info',
