@@ -58,7 +58,7 @@ repos:
     name: isort except __init__.py
     'types': [python]
     exclude: /__init__\.py$
-    additional_dependencies: [pipreqs, pip-api]
+    additional_dependencies: ["pipreqs==0.4.10", "pip-api==0.0.13"]
 - repo: https://github.com/pre-commit/mirrors-eslint
   rev: v6.5.1
   hooks:
