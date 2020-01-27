@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="stock_request_order_form">
+        <field name="name">stock.request.order.form (in stock_request_employee)</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form"/>
+        <field name="arch" type="xml">
+            <field name="location_id" position="before">
+                <field name="to_employee"/>
+                <field name="employee_id" attrs="{'invisible': [('to_employee', '=', False)], 'required': [('to_employee', '=', True)]}"/>
+            </field>
+            <field name="location_id" position="attributes">
+                <attribute name="attrs">{'invisible': [('to_employee', '=', True)]}</attribute>
+            </field>
+            <xpath expr="//field[@name='stock_request_ids']//field[@name='location_id']" position="after">
+                <field name="to_employee" invisible="1"/>
+                <field name="employee_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_request_order_search">
+        <field name="name">stock.request.order.search (in stock_request_employee)</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_search"/>
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="employee_id"/>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

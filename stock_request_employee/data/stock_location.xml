@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="1">
+
+    <record id="location_employee" model="stock.location" forcecreate="1">
+        <field name="name">Employee Location</field>
+        <field name="location_id" ref="stock.stock_location_customers"/>
+        <field name="usage">customer</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+</odoo>
