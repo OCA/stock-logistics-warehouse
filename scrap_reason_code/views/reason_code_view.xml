@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2019 Open Source Integrators
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
@@ -38,7 +37,6 @@
     <record id="open_view_reason_code_form" model="ir.actions.act_window">
         <field name="name">Scrap Reason Codes</field>
         <field name="res_model">reason.code</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 
