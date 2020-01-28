@@ -6,35 +6,38 @@ from odoo import api, fields, models
 
 
 class StockScrap(models.Model):
-    _inherit = 'stock.scrap'
+    _inherit = "stock.scrap"
 
     reason_code_id = fields.Many2one(
-        'reason.code', string='Reason Code',
-        states={'done': [('readonly', True)]})
+        "reason.code", string="Reason Code", states={"done": [("readonly", True)]}
+    )
     scrap_location_id = fields.Many2one(
-        'stock.location', 'Scrap Location',
-        required=True, readonly=True)
+        "stock.location", "Scrap Location", required=True, readonly=True
+    )
 
     def _prepare_move_values(self):
         res = super(StockScrap, self)._prepare_move_values()
-        res['reason_code_id'] = self.reason_code_id.id
+        res["reason_code_id"] = self.reason_code_id.id
         return res
 
-    @api.onchange('reason_code_id')
+    @api.onchange("reason_code_id")
     def _onchange_reason_code_id(self):
         if self.reason_code_id.location_id:
             self.scrap_location_id = self.reason_code_id.location_id
 
-    @api.multi
     def write(self, vals):
-        if 'reason_code_id' in vals:
-            self.scrap_location_id = self.env['reason.code'].browse(
-                vals.get('reason_code_id')).location_id
+        if "reason_code_id" in vals:
+            self.scrap_location_id = (
+                self.env["reason.code"].browse(vals.get("reason_code_id")).location_id
+            )
         return super(StockScrap, self).write(vals)
 
     @api.model
     def create(self, vals):
-        if 'reason_code_id' in vals:
-            vals['scrap_location_id'] = self.env['reason.code'].browse(
-                vals.get('reason_code_id')).location_id.id
+        if "reason_code_id" in vals:
+            vals["scrap_location_id"] = (
+                self.env["reason.code"]
+                .browse(vals.get("reason_code_id"))
+                .location_id.id
+            )
         return super(StockScrap, self).create(vals)
