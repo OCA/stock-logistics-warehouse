@@ -39,7 +39,7 @@
             <field name="global" eval="True"/>
             <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
         </record>
-    
+
         <record id="stock_request_followers_rule" model="ir.rule">
             <field name="name">Follow Stock Request</field>
             <field name="model_id" ref="model_stock_request"/>
@@ -51,7 +51,7 @@
             <field name="domain_force">['|',('requested_by','=',user.id),
                                             ('message_partner_ids', 'in', [user.partner_id.id])]</field>
         </record>
-    
+
         <record id="stock_request_rule" model="ir.rule">
             <field name="name">Stock Request User</field>
             <field name="model_id" ref="model_stock_request"/>
@@ -62,7 +62,7 @@
             <field name="perm_unlink" eval="True"/>
             <field name="domain_force">[('requested_by','=',user.id)]</field>
         </record>
-    
+
         <record id="stock_request_manager_rule" model="ir.rule">
             <field name="name">Stock Request Manager</field>
             <field name="model_id" ref="model_stock_request"/>
