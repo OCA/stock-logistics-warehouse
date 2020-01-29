@@ -1,4 +1,4 @@
-# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2017-2020 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import models
@@ -15,8 +15,8 @@ class StockRule(models.Model):
         location_id,
         name,
         origin,
+        company_id,
         values,
-        group_id,
     ):
         result = super(StockRule, self)._get_stock_move_values(
             product_id,
@@ -25,8 +25,8 @@ class StockRule(models.Model):
             location_id,
             name,
             origin,
+            company_id,
             values,
-            group_id,
         )
         if values.get("stock_request_id", False):
             result["allocation_ids"] = [
