@@ -51,7 +51,7 @@ class StockMoveLine(models.Model):
             # We do sudo because potentially the user that completes the move
             #  may not have permissions for stock.request.
             to_allocate_qty = ml.qty_done
-            for allocation in ml.move_id.allocation_ids.sudo():
+            for allocation in ml.move_id.allocation_ids:
                 allocated_qty = 0.0
                 if allocation.open_product_qty:
                     allocated_qty = min(allocation.open_product_qty, qty_done)

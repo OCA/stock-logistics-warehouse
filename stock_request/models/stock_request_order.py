@@ -92,9 +92,7 @@ class StockRequestOrder(models.Model):
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
-        default=lambda self: self.env["res.company"]._company_default_get(
-            "stock.request.order"
-        ),
+        default=lambda self: self.env.company,
     )
     expected_date = fields.Datetime(
         "Expected Date",
@@ -173,7 +171,7 @@ class StockRequestOrder(models.Model):
     @api.onchange("location_id")
     def onchange_location_id(self):
         if self.location_id:
-            loc_wh = self.location_id.sudo().get_warehouse()
+            loc_wh = self.location_id.get_warehouse()
             if loc_wh and self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
                 self.with_context(no_change_childs=True).onchange_warehouse_id()
@@ -188,11 +186,11 @@ class StockRequestOrder(models.Model):
     def onchange_warehouse_id(self):
         if self.warehouse_id:
             # search with sudo because the user may not have permissions
-            loc_wh = self.location_id.sudo().get_warehouse()
+            loc_wh = self.location_id.get_warehouse()
             if self.warehouse_id != loc_wh:
-                self.location_id = self.warehouse_id.sudo().lot_stock_id
+                self.location_id = self.warehouse_id.lot_stock_id
                 self.with_context(no_change_childs=True).onchange_location_id()
-            if self.warehouse_id.sudo().company_id != self.company_id:
+            if self.warehouse_id.company_id != self.company_id:
                 self.company_id = self.warehouse_id.company_id
                 self.with_context(no_change_childs=True).onchange_company_id()
         self.change_childs()
@@ -204,8 +202,7 @@ class StockRequestOrder(models.Model):
     @api.onchange("company_id")
     def onchange_company_id(self):
         if self.company_id and (
-            not self.warehouse_id
-            or self.warehouse_id.sudo().company_id != self.company_id
+            not self.warehouse_id or self.warehouse_id.company_id != self.company_id
         ):
             self.warehouse_id = self.env["stock.warehouse"].search(
                 [("company_id", "=", self.company_id.id)], limit=1
@@ -225,7 +222,6 @@ class StockRequestOrder(models.Model):
                 line.requested_by = self.requested_by
                 line.procurement_group_id = self.procurement_group_id
 
-    @api.multi
     def action_confirm(self):
         for line in self.stock_request_ids:
             line.action_confirm()
@@ -253,7 +249,6 @@ class StockRequestOrder(models.Model):
             self.action_done()
         return
 
-    @api.multi
     def action_view_transfer(self):
         action = self.env.ref("stock.action_picking_tree_all").read()[0]
 
@@ -265,7 +260,6 @@ class StockRequestOrder(models.Model):
             action["res_id"] = pickings.id
         return action
 
-    @api.multi
     def action_view_stock_requests(self):
         action = self.env.ref("stock_request.action_stock_request_form").read()[0]
         if len(self.stock_request_ids) > 1:
@@ -286,7 +280,6 @@ class StockRequestOrder(models.Model):
             )
         return super().create(upd_vals)
 
-    @api.multi
     def unlink(self):
         if self.filtered(lambda r: r.state != "draft"):
             raise UserError(_("Only orders on draft state can be unlinked"))

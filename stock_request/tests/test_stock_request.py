@@ -32,6 +32,11 @@ class TestStockRequest(common.TransactionCase):
         self.company_2 = self.env["res.company"].create(
             {"name": "Comp2", "parent_id": self.main_company.id}
         )
+        self.company_2_address = (
+            self.env["res.partner"]
+            .with_context(company_id=self.company_2.id)
+            .create({"name": "Peñiscola"})
+        )
         self.wh2 = self.env["stock.warehouse"].search(
             [("company_id", "=", self.company_2.id)], limit=1
         )
@@ -51,11 +56,21 @@ class TestStockRequest(common.TransactionCase):
         )
 
         self.ressuply_loc = self.env["stock.location"].create(
-            {"name": "Ressuply", "location_id": self.warehouse.view_location_id.id}
+            {
+                "name": "Ressuply",
+                "location_id": self.warehouse.view_location_id.id,
+                "usage": "internal",
+                "company_id": self.main_company.id,
+            }
         )
 
         self.ressuply_loc_2 = self.env["stock.location"].create(
-            {"name": "Ressuply", "location_id": self.wh2.view_location_id.id}
+            {
+                "name": "Ressuply",
+                "location_id": self.wh2.view_location_id.id,
+                "usage": "internal",
+                "company_id": self.company_2.id,
+            }
         )
 
         self.route = self.env["stock.location.route"].create(
@@ -99,7 +114,6 @@ class TestStockRequest(common.TransactionCase):
                 "procure_method": "make_to_stock",
                 "warehouse_id": self.warehouse.id,
                 "company_id": self.main_company.id,
-                "propagate": "False",
             }
         )
 
@@ -114,7 +128,6 @@ class TestStockRequest(common.TransactionCase):
                 "procure_method": "make_to_stock",
                 "warehouse_id": self.wh2.id,
                 "company_id": self.company_2.id,
-                "propagate": "False",
             }
         )
 
@@ -127,7 +140,7 @@ class TestStockRequest(common.TransactionCase):
                     "name": name,
                     "password": "demo",
                     "login": name,
-                    "email": "@".join([name, "@test.com"]),
+                    "email": "@".join([name, "test.com"]),
                     "groups_id": [(6, 0, group_ids)],
                     "company_ids": [(6, 0, company_ids)],
                 }
@@ -158,7 +171,7 @@ class TestStockRequestBase(TestStockRequest):
             "product_uom_qty": 5.0,
         }
         stock_request = (
-            self.stock_request.sudo(self.stock_request_user.id)
+            self.stock_request.with_user(self.stock_request_user)
             .with_context(company_id=self.main_company.id)
             .create(vals)
         )
@@ -172,7 +185,7 @@ class TestStockRequestBase(TestStockRequest):
     def test_defaults_order(self):
         vals = {}
         order = (
-            self.request_order.sudo(self.stock_request_user.id)
+            self.request_order.with_user(self.stock_request_user)
             .with_context(company_id=self.main_company.id)
             .create(vals)
         )
@@ -206,7 +219,7 @@ class TestStockRequestBase(TestStockRequest):
                 )
             ],
         }
-        order = self.request_order.sudo(self.stock_request_user).new(vals)
+        order = self.request_order.with_user(self.stock_request_user).new(vals)
         self.stock_request_user.company_id = self.company_2
         order.company_id = self.company_2
 
@@ -249,7 +262,7 @@ class TestStockRequestBase(TestStockRequest):
             "product_uom_qty": 5.0,
             "company_id": self.main_company.id,
         }
-        stock_request = self.stock_request.sudo(self.stock_request_user).new(vals)
+        stock_request = self.stock_request.with_user(self.stock_request_user).new(vals)
         stock_request.product_id = self.product
         vals = stock_request.default_get(["warehouse_id", "company_id"])
         stock_request.update(vals)
@@ -292,7 +305,14 @@ class TestStockRequestBase(TestStockRequest):
         wh2_2 = (
             self.env["stock.warehouse"]
             .with_context(company_id=self.company_2.id)
-            .create({"name": "C2_2", "code": "C2_2", "company_id": self.company_2.id})
+            .create(
+                {
+                    "name": "C2_2",
+                    "code": "C2_2",
+                    "company_id": self.company_2.id,
+                    "partner_id": self.company_2_address.id,
+                }
+            )
         )
         stock_request.warehouse_id = wh2_2
         stock_request.onchange_warehouse_id()
@@ -332,7 +352,7 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.request_order.sudo(self.stock_request_user).create(vals)
+            self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_02(self):
         """ Testing the discrepancy in location_id between
@@ -360,7 +380,7 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.request_order.sudo(self.stock_request_user).create(vals)
+            self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_03(self):
         """ Testing the discrepancy in requested_by between
@@ -390,7 +410,7 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.request_order.sudo(self.stock_request_user).create(vals)
+            self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_04(self):
         """ Testing the discrepancy in procurement_group_id between
@@ -422,7 +442,7 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.request_order.sudo(self.stock_request_user).create(vals)
+            self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_05(self):
         """ Testing the discrepancy in company between
@@ -450,7 +470,7 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.request_order.sudo(self.stock_request_user).create(vals)
+            self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_06(self):
         """ Testing the discrepancy in expected dates between
@@ -479,7 +499,7 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.request_order.sudo().create(vals)
+            self.request_order.create(vals)
 
     def test_stock_request_order_validations_07(self):
         """ Testing the discrepancy in picking policy between
@@ -508,7 +528,7 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.request_order.sudo(self.stock_request_user).create(vals)
+            self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_validations_01(self):
         vals = {
@@ -521,7 +541,7 @@ class TestStockRequestBase(TestStockRequest):
         }
         # Select a UoM that is incompatible with the product's UoM
         with self.assertRaises(exceptions.ValidationError):
-            self.stock_request.sudo(self.stock_request_user).create(vals)
+            self.stock_request.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_validations_02(self):
         vals = {
@@ -533,7 +553,9 @@ class TestStockRequestBase(TestStockRequest):
             "location_id": self.warehouse.lot_stock_id.id,
         }
 
-        stock_request = self.stock_request.sudo(self.stock_request_user).create(vals)
+        stock_request = self.stock_request.with_user(self.stock_request_user).create(
+            vals
+        )
 
         # With no route found, should raise an error
         with self.assertRaises(exceptions.UserError):
@@ -563,21 +585,21 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
 
-        order = self.request_order.sudo(self.stock_request_user).create(vals)
+        order = self.request_order.with_user(self.stock_request_user).create(vals)
 
         stock_request = order.stock_request_ids
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.action_confirm()
+        order.with_user(self.stock_request_user).action_confirm()
         self.assertEqual(order.state, "open")
         self.assertEqual(stock_request.state, "open")
 
-        self.assertEqual(len(order.sudo().picking_ids), 1)
-        self.assertEqual(len(order.sudo().move_ids), 1)
-        self.assertEqual(len(stock_request.sudo().picking_ids), 1)
-        self.assertEqual(len(stock_request.sudo().move_ids), 1)
+        self.assertEqual(len(order.picking_ids), 1)
+        self.assertEqual(len(order.move_ids), 1)
+        self.assertEqual(len(stock_request.picking_ids), 1)
+        self.assertEqual(len(stock_request.move_ids), 1)
         self.assertEqual(
-            stock_request.sudo().move_ids[0].location_dest_id, stock_request.location_id
+            stock_request.move_ids[0].location_dest_id, stock_request.location_id
         )
         self.assertEqual(stock_request.qty_in_progress, stock_request.product_uom_qty)
         self.env["stock.quant"].create(
@@ -587,15 +609,15 @@ class TestStockRequestBase(TestStockRequest):
                 "quantity": 5.0,
             }
         )
-        picking = stock_request.sudo().picking_ids[0]
-        picking.action_confirm()
+        picking = stock_request.picking_ids[0]
+        picking.with_user(self.stock_request_manager).action_confirm()
         self.assertEqual(stock_request.qty_in_progress, 5.0)
         self.assertEqual(stock_request.qty_done, 0.0)
-        picking.action_assign()
+        picking.with_user(self.stock_request_manager).action_assign()
         self.assertEqual(picking.origin, order.name)
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 5
-        picking.action_done()
+        picking.with_user(self.stock_request_manager).action_done()
         self.assertEqual(stock_request.qty_in_progress, 0.0)
         self.assertEqual(stock_request.qty_done, stock_request.product_uom_qty)
         self.assertEqual(order.state, "done")
@@ -613,15 +635,17 @@ class TestStockRequestBase(TestStockRequest):
             "location_id": self.warehouse.lot_stock_id.id,
         }
 
-        stock_request = self.stock_request.sudo(self.stock_request_user).create(vals)
+        stock_request = self.stock_request.with_user(self.stock_request_user).create(
+            vals
+        )
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        stock_request.action_confirm()
+        stock_request.with_user(self.stock_request_manager).action_confirm()
         self.assertEqual(stock_request.state, "open")
-        self.assertEqual(len(stock_request.sudo().picking_ids), 1)
-        self.assertEqual(len(stock_request.sudo().move_ids), 1)
+        self.assertEqual(len(stock_request.picking_ids), 1)
+        self.assertEqual(len(stock_request.move_ids), 1)
         self.assertEqual(
-            stock_request.sudo().move_ids[0].location_dest_id, stock_request.location_id
+            stock_request.move_ids[0].location_dest_id, stock_request.location_id
         )
         self.assertEqual(stock_request.qty_in_progress, stock_request.product_uom_qty)
         self.env["stock.quant"].create(
@@ -631,14 +655,14 @@ class TestStockRequestBase(TestStockRequest):
                 "quantity": 12.0,
             }
         )
-        picking = stock_request.sudo().picking_ids[0]
-        picking.action_confirm()
+        picking = stock_request.picking_ids[0]
+        picking.with_user(self.stock_request_manager).action_confirm()
         self.assertEqual(stock_request.qty_in_progress, 1.0)
         self.assertEqual(stock_request.qty_done, 0.0)
-        picking.action_assign()
+        picking.with_user(self.stock_request_manager).action_assign()
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 1
-        picking.action_done()
+        picking.with_user(self.stock_request_manager).action_done()
         self.assertEqual(stock_request.qty_in_progress, 0.0)
         self.assertEqual(stock_request.qty_done, stock_request.product_uom_qty)
         self.assertEqual(stock_request.state, "done")
@@ -655,22 +679,20 @@ class TestStockRequestBase(TestStockRequest):
         }
 
         stock_request_1 = (
-            self.env["stock.request"].sudo(self.stock_request_user).create(vals)
+            self.env["stock.request"].with_user(self.stock_request_user).create(vals)
         )
         stock_request_2 = (
-            self.env["stock.request"].sudo(self.stock_request_manager).create(vals)
+            self.env["stock.request"]
+            .with_user(self.stock_request_manager.id)
+            .create(vals)
         )
         stock_request_2.product_uom_qty = 6.0
         self.product.route_ids = [(6, 0, self.route.ids)]
-        stock_request_1.action_confirm()
-        stock_request_2.action_confirm()
-        self.assertEqual(len(stock_request_1.sudo().picking_ids), 1)
-        self.assertEqual(
-            stock_request_1.sudo().picking_ids, stock_request_2.sudo().picking_ids
-        )
-        self.assertEqual(
-            stock_request_1.sudo().move_ids, stock_request_2.sudo().move_ids
-        )
+        stock_request_1.with_user(self.stock_request_manager).action_confirm()
+        stock_request_2.with_user(self.stock_request_manager).action_confirm()
+        self.assertEqual(len(stock_request_1.picking_ids), 1)
+        self.assertEqual(stock_request_1.picking_ids, stock_request_2.picking_ids)
+        self.assertEqual(stock_request_1.move_ids, stock_request_2.move_ids)
         self.env["stock.quant"].create(
             {
                 "product_id": self.product.id,
@@ -678,12 +700,12 @@ class TestStockRequestBase(TestStockRequest):
                 "quantity": 10.0,
             }
         )
-        picking = stock_request_1.sudo().picking_ids[0]
-        picking.action_confirm()
-        picking.action_assign()
+        picking = stock_request_1.picking_ids[0]
+        picking.with_user(self.stock_request_manager).action_confirm()
+        picking.with_user(self.stock_request_manager).action_assign()
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 10
-        picking.action_done()
+        picking.with_user(self.stock_request_manager).action_done()
 
     def test_cancel_request(self):
         expected_date = fields.Datetime.now()
@@ -709,17 +731,17 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
 
-        order = self.request_order.sudo(self.stock_request_user).create(vals)
+        order = self.request_order.with_user(self.stock_request_user).create(vals)
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.action_confirm()
+        order.with_user(self.stock_request_user).action_confirm()
         stock_request = order.stock_request_ids
-        self.assertEqual(len(order.sudo().picking_ids), 1)
-        self.assertEqual(len(order.sudo().move_ids), 1)
-        self.assertEqual(len(stock_request.sudo().picking_ids), 1)
-        self.assertEqual(len(stock_request.sudo().move_ids), 1)
+        self.assertEqual(len(order.picking_ids), 1)
+        self.assertEqual(len(order.move_ids), 1)
+        self.assertEqual(len(stock_request.picking_ids), 1)
+        self.assertEqual(len(stock_request.move_ids), 1)
         self.assertEqual(
-            stock_request.sudo().move_ids[0].location_dest_id, stock_request.location_id
+            stock_request.move_ids[0].location_dest_id, stock_request.location_id
         )
         self.assertEqual(stock_request.qty_in_progress, stock_request.product_uom_qty)
         self.env["stock.quant"].create(
@@ -729,26 +751,26 @@ class TestStockRequestBase(TestStockRequest):
                 "quantity": 5.0,
             }
         )
-        picking = stock_request.sudo().picking_ids[0]
-        picking.action_confirm()
+        picking = stock_request.picking_ids[0]
+        picking.with_user(self.stock_request_user).action_confirm()
         self.assertEqual(stock_request.qty_in_progress, 5.0)
         self.assertEqual(stock_request.qty_done, 0.0)
-        picking.action_assign()
-        order.action_cancel()
+        picking.with_user(self.stock_request_manager).action_assign()
+        order.with_user(self.stock_request_manager).action_cancel()
 
         self.assertEqual(stock_request.qty_in_progress, 0.0)
         self.assertEqual(stock_request.qty_done, 0.0)
-        self.assertEqual(len(stock_request.sudo().picking_ids), 0)
+        self.assertEqual(len(stock_request.picking_ids), 0)
 
         # Set the request back to draft
-        order.action_draft()
+        order.with_user(self.stock_request_user).action_draft()
         self.assertEqual(order.state, "draft")
         self.assertEqual(stock_request.state, "draft")
 
         # Re-confirm. We expect new pickings to be created
-        order.action_confirm()
-        self.assertEqual(len(stock_request.sudo().picking_ids), 1)
-        self.assertEqual(len(stock_request.sudo().move_ids), 2)
+        order.with_user(self.stock_request_user).action_confirm()
+        self.assertEqual(len(stock_request.picking_ids), 1)
+        self.assertEqual(len(stock_request.move_ids), 2)
 
     def test_view_actions(self):
         expected_date = fields.Datetime.now()
@@ -774,10 +796,10 @@ class TestStockRequestBase(TestStockRequest):
             ],
         }
 
-        order = self.request_order.sudo().create(vals)
+        order = self.request_order.create(vals)
         self.product.route_ids = [(6, 0, self.route.ids)]
 
-        order.action_confirm()
+        order.with_user(self.stock_request_manager).action_confirm()
         stock_request = order.stock_request_ids
         self.assertTrue(stock_request.picking_ids)
         self.assertTrue(order.picking_ids)
@@ -811,7 +833,9 @@ class TestStockRequestBase(TestStockRequest):
             "location_id": self.warehouse.lot_stock_id.id,
         }
 
-        stock_request = self.stock_request.sudo(self.stock_request_user).create(vals)
+        stock_request = self.stock_request.with_user(self.stock_request_user).create(
+            vals
+        )
 
         # Cannot assign a warehouse that belongs to another company
         with self.assertRaises(exceptions.ValidationError):
@@ -906,7 +930,7 @@ class TestStockRequestBase(TestStockRequest):
             "for creating stock requests. Please contact your "
             "administrator.",
         ):
-            order.sudo(self.stock_request_user)._create_from_product_multiselect(
+            order.with_user(self.stock_request_user)._create_from_product_multiselect(
                 template_a + template_b
             )
 
@@ -929,7 +953,9 @@ class TestStockRequestBase(TestStockRequest):
             "warehouse_id": self.warehouse.id,
             "location_id": self.virtual_loc.id,
         }
-        stock_request = self.stock_request.sudo(self.stock_request_user).create(vals)
+        stock_request = self.stock_request.with_user(self.stock_request_user).create(
+            vals
+        )
         stock_request.onchange_allow_virtual_location()
         self.assertTrue(stock_request.allow_virtual_location)
         vals = {
@@ -937,7 +963,7 @@ class TestStockRequestBase(TestStockRequest):
             "warehouse_id": self.warehouse.id,
             "location_id": self.virtual_loc.id,
         }
-        order = self.request_order.sudo(self.stock_request_user).create(vals)
+        order = self.request_order.with_user(self.stock_request_user).create(vals)
         order.onchange_allow_virtual_location()
         self.assertTrue(order.allow_virtual_location)
 
@@ -964,6 +990,6 @@ class TestStockRequestBase(TestStockRequest):
                 )
             ],
         }
-        order = self.request_order.sudo(self.stock_request_user).create(vals)
+        order = self.request_order.with_user(self.stock_request_user).create(vals)
         order.stock_request_ids.onchange_warehouse_id()
         self.assertEqual(order.stock_request_ids[0].location_id, self.virtual_loc)
