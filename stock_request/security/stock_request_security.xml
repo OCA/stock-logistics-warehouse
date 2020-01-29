@@ -17,7 +17,7 @@
         <field name="name">Stock Request Manager</field>
         <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         <field name="implied_ids"
-               eval="[(4, ref('stock_request.group_stock_request_user'))]"/>
+               eval="[(4, ref('stock_request.group_stock_request_user')),(4, ref('stock.group_stock_user'))]"/>
         <field name="category_id" ref="module_category_stock_request"/>
     </record>
 

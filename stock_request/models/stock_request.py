@@ -1,11 +1,9 @@
-# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2017-2020 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_compare
-
-from odoo.addons import decimal_precision as dp
 
 REQUEST_STATES = [
     ("draft", "Draft"),
@@ -92,7 +90,7 @@ class StockRequest(models.Model):
     )
     qty_in_progress = fields.Float(
         "Qty In Progress",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         readonly=True,
         compute="_compute_qty",
         store=True,
@@ -100,7 +98,7 @@ class StockRequest(models.Model):
     )
     qty_done = fields.Float(
         "Qty Done",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         readonly=True,
         compute="_compute_qty",
         store=True,
@@ -208,12 +206,10 @@ class StockRequest(models.Model):
         if self.order_id and self.order_id.picking_policy != self.picking_policy:
             raise ValidationError(_("The picking policy must be equal to the order"))
 
-    @api.multi
     def _action_confirm(self):
         self._action_launch_procurement_rule()
         self.state = "open"
 
-    @api.multi
     def action_confirm(self):
         self._action_confirm()
         return True
@@ -223,7 +219,7 @@ class StockRequest(models.Model):
         return True
 
     def action_cancel(self):
-        self.sudo().mapped("move_ids")._action_cancel()
+        self.mapped("move_ids")._action_cancel()
         self.state = "cancel"
         return True
 
@@ -271,7 +267,6 @@ class StockRequest(models.Model):
     def _skip_procurement(self):
         return self.state != "draft" or self.product_id.type not in ("consu", "product")
 
-    @api.multi
     def _action_launch_procurement_rule(self):
         """
         Launch procurement group run method with required/custom
@@ -298,25 +293,26 @@ class StockRequest(models.Model):
                 group_id=request.procurement_group_id
             )
             try:
-                # We launch with sudo because potentially we could create
-                # objects that the user is not authorized to create, such
-                # as PO.
-                self.env["procurement.group"].sudo().run(
-                    request.product_id,
-                    request.product_uom_qty,
-                    request.product_uom_id,
-                    request.location_id,
-                    request.name,
-                    request.name,
-                    values,
+                procurements = []
+                procurements.append(
+                    self.env["procurement.group"].Procurement(
+                        request.product_id,
+                        request.product_uom_qty,
+                        request.product_uom_id,
+                        request.location_id,
+                        request.name,
+                        request.name,
+                        self.env.company,
+                        values,
+                    )
                 )
+                self.env["procurement.group"].run(procurements)
             except UserError as error:
                 errors.append(error.name)
         if errors:
             raise UserError("\n".join(errors))
         return True
 
-    @api.multi
     def action_view_transfer(self):
         action = self.env.ref("stock.action_picking_tree_all").read()[0]
 
@@ -335,7 +331,6 @@ class StockRequest(models.Model):
             upd_vals["name"] = self.env["ir.sequence"].next_by_code("stock.request")
         return super().create(upd_vals)
 
-    @api.multi
     def unlink(self):
         if self.filtered(lambda r: r.state != "draft"):
             raise UserError(_("Only requests on draft state can be unlinked"))
