@@ -1,13 +1,13 @@
-# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2017-2020 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "Stock Request",
     "summary": "Internal request for stock",
-    "version": "12.0.1.1.6",
+    "version": "13.0.1.0.0",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
-    "author": "Eficent, " "Odoo Community Association (OCA)",
+    "author": "ForgeFlow, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": ["stock"],
     "data": [
