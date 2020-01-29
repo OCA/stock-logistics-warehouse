@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_move_line.py:20
+#: code:addons/stock_request/models/stock_move_line.py:0
 #, python-format
 msgid "<li><b>%s</b>: Transferred quantity %s %s</li>"
 msgstr "<li><b>%s</b>: Umgelagerte Menge %s %s</li>"
@@ -43,6 +43,13 @@ msgstr "Aktiviert Anforderungs-Aufträge"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_ids
 msgid "Activities"
 msgstr "Aktivitäten"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_exception_decoration
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_exception_decoration
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_state
@@ -134,7 +141,7 @@ msgid "Company"
 msgstr "Unternehmen"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:189
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Company must be equal to the order"
 msgstr "Unternehmen muss mit Auftrag übereinstimmen"
@@ -223,7 +230,7 @@ msgid "Expected Date"
 msgstr "Voraussichtliches Datum"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:196
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Expected date must be equal to the order"
 msgstr "Voraussichtliches Datum muss mit Auftrag übereinstimmen"
@@ -268,23 +275,36 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_request
-#: model:ir.model.fields,help:stock_request.field_stock_request__message_unread
-#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_unread
-#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_unread
-msgid "If checked new messages require your attention."
-msgstr "Wenn angehakt, erfordern Meldungen Ihre Aufmerksamkeit."
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_exception_icon
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_exception_icon
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__activity_exception_icon
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_exception_icon
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_needaction
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_unread
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_needaction
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_unread
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_needaction
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "Wenn angehakt, erfordern neue Meldungen Ihre Aufmerksamkeit."
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_has_error
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_has_sms_error
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_error
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_sms_error
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Wenn angehakt, haben Meldungen einen Zustellfehler."
 
@@ -346,7 +366,7 @@ msgid "Location"
 msgstr "Ort"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:172
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Location must be equal to the order"
 msgstr "Lagerplatz muss dem des Auftrags entsprechen"
@@ -398,7 +418,7 @@ msgid "Name"
 msgstr "Bezeichnung"
 
 #. module: stock_request
-#: sql_constraint:stock.request:0 sql_constraint:stock.request.abstract:0
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
 msgid "Name must be unique"
 msgstr "Der Name muss einzigartig sein"
 
@@ -434,7 +454,9 @@ msgstr "Anzahl der Handlungen"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_error_counter
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_error_counter
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_error_counter
-msgid "Number of error"
+#, fuzzy
+#| msgid "Number of error"
+msgid "Number of errors"
 msgstr "Fehleranzahl"
 
 #. module: stock_request
@@ -459,13 +481,13 @@ msgid "Number of unread messages"
 msgstr "Anzahl ungelesener Meldungen"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:267
+#: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
 msgid "Only orders on draft state can be unlinked"
 msgstr "Nur Aufträge im Entwurf dürfen gelöscht werden"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:334
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Only requests on draft state can be unlinked"
 msgstr "Nur Anforderungen im Entwurf dürfen gelöscht werden"
@@ -492,24 +514,10 @@ msgid "Orders &amp; Configuration"
 msgstr "Aufträge &amp; Konfiguration"
 
 #. module: stock_request
-#: selection:stock.request,activity_state:0
-#: selection:stock.request.abstract,activity_state:0
-#: selection:stock.request.order,activity_state:0
-msgid "Overdue"
-msgstr "Überfällig"
-
-#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__picking_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__picking_ids
 msgid "Pickings"
 msgstr "Kommissionierungen"
-
-#. module: stock_request
-#: selection:stock.request,activity_state:0
-#: selection:stock.request.abstract,activity_state:0
-#: selection:stock.request.order,activity_state:0
-msgid "Planned"
-msgstr "Geplant"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_procurement_group
@@ -520,7 +528,7 @@ msgid "Procurement Group"
 msgstr "Beschaffungsgruppe"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:182
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Procurement group must be equal to the order"
 msgstr "Beschaffungsgruppe muss mit Auftrag übereinstimmen"
@@ -611,20 +619,20 @@ msgid "Real Quantity"
 msgstr "Ist-Menge"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_move_line.py:12
+#: code:addons/stock_request/models/stock_move_line.py:0
 #, python-format
 msgid "Receipt confirmation %s for your Request %s"
 msgstr "Bestätigungsbeleg %s zu Ihrer Anforderung %s"
 
 #. module: stock_request
-#: selection:stock.request,picking_policy:0
-#: selection:stock.request.order,picking_policy:0
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request__picking_policy__one
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request_order__picking_policy__one
 msgid "Receive all products at once"
 msgstr "Alle Produkte auf einmal erhalten"
 
 #. module: stock_request
-#: selection:stock.request,picking_policy:0
-#: selection:stock.request.order,picking_policy:0
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request__picking_policy__direct
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request_order__picking_policy__direct
 msgid "Receive each product when available"
 msgstr "Jedes Produkt bei Verfügbarkeit erhalten"
 
@@ -652,7 +660,7 @@ msgid "Requested by"
 msgstr "Angefordert durch"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:158
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Requested by must be equal to the order"
 msgstr "Angefordert muss mit dem Auftrag übereinstimmen"
@@ -675,6 +683,15 @@ msgstr "Route"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_ids
 msgid "Routes"
 msgstr "Routen"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_sms_error
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_sms_error
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_sms_error
+#, fuzzy
+#| msgid "Message Delivery error"
+msgid "SMS Delivery error"
+msgstr "Meldungszustellfehler"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
@@ -751,7 +768,6 @@ msgstr "Bestandszuweisung beantragen"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.view_move_form
-#: model_terms:ir.ui.view,arch_db:stock_request.view_move_picking_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_allocation_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_allocation_tree
 msgid "Stock Request Allocations"
@@ -785,12 +801,13 @@ msgid "Stock Request User"
 msgstr "Anforderungs-Anwender"
 
 #. module: stock_request
-#: sql_constraint:stock.request:0 sql_constraint:stock.request.order:0
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_name_uniq
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_order_name_uniq
 msgid "Stock Request name must be unique"
 msgstr "Bezeichner der Anforderung muss eindeutig sein"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:165
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "Stock Request product quantity has to be strictly positive."
 msgstr "Bestandsanforderungs-Produktmenge muss streng positiv sein."
@@ -854,20 +871,20 @@ msgid "Submitted state in Stock Requests"
 msgstr "Klicken, um eine Bestandaanforderung zu stellen."
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_move.py:38
-#: code:addons/stock_request/models/stock_request_order.py:284
+#: code:addons/stock_request/models/stock_move.py:0
+#: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
 msgid "The company of the stock request must match with that of the location."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:275
+#: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
 msgid "The company of the stock request must match with that of the warehouse."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_move_line.py:15
+#: code:addons/stock_request/models/stock_move_line.py:0
 #, python-format
 msgid ""
 "The following requested items from Stock Request %s have now been received "
@@ -877,23 +894,16 @@ msgstr ""
 "Kommissionierung %s:"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:206
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "The picking policy must be equal to the order"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:293
+#: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
 msgid "This action only works in the context of products"
 msgstr "Diese Aktion kann nur im Kontext von Produkten ausgeführt werden"
-
-#. module: stock_request
-#: selection:stock.request,activity_state:0
-#: selection:stock.request.abstract,activity_state:0
-#: selection:stock.request.order,activity_state:0
-msgid "Today"
-msgstr ""
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_picking
@@ -907,7 +917,14 @@ msgid "Transfers"
 msgstr "Umlagerungen"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:314
+#: model:ir.model.fields,help:stock_request.field_stock_request__activity_exception_decoration
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_exception_decoration
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
 msgid ""
 "Unfortunately it seems you do not have the necessary rights for creating "
@@ -953,7 +970,7 @@ msgid "Warehouse"
 msgstr "Warenlager"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request.py:165
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Warehouse must be equal to the order"
 msgstr ""
@@ -973,7 +990,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_location.py:24
+#: code:addons/stock_request/models/stock_location.py:0
 #, python-format
 msgid ""
 "You cannot change the company of the location, as it is already assigned to "
@@ -981,7 +998,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_location.py:17
+#: code:addons/stock_request/models/stock_location.py:0
 #, python-format
 msgid ""
 "You cannot change the company of the location, as it is already assigned to "
@@ -989,7 +1006,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_location_route.py:17
+#: code:addons/stock_request/models/stock_location_route.py:0
 #, python-format
 msgid ""
 "You cannot change the company of the route, as it is already assigned to "
@@ -997,7 +1014,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_warehouse.py:26
+#: code:addons/stock_request/models/stock_warehouse.py:0
 #, python-format
 msgid ""
 "You cannot change the company of the warehouse, as it is already assigned to "
@@ -1005,7 +1022,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_warehouse.py:18
+#: code:addons/stock_request/models/stock_warehouse.py:0
 #, python-format
 msgid ""
 "You cannot change the company of the warehouse, as it is already assigned to "
@@ -1013,31 +1030,31 @@ msgid ""
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:138
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "You have entered a location that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:133
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "You have entered a product that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:147
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "You have entered a route that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:142
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "You have entered a warehouse that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:157
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid ""
 "You have to select a product unit of measure in the same category than the "
@@ -1045,6 +1062,15 @@ msgid ""
 msgstr ""
 "Sie müssen eine Produktmengeneinheit aus der gleichen Kategorie, wie die "
 "Basismengeneinheit des Produkts, verwenden"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Wenn angehakt, erfordern Meldungen Ihre Aufmerksamkeit."
+
+#~ msgid "Overdue"
+#~ msgstr "Überfällig"
+
+#~ msgid "Planned"
+#~ msgstr "Geplant"
 
 #~ msgid "Cancelled"
 #~ msgstr "Abgebrochen"

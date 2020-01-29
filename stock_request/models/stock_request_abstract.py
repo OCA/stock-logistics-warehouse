@@ -1,10 +1,8 @@
-# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2017-2020 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-
-from odoo.addons import decimal_precision as dp
 
 
 class StockRequest(models.AbstractModel):
@@ -66,16 +64,16 @@ class StockRequest(models.AbstractModel):
     )
     product_uom_qty = fields.Float(
         "Quantity",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         required=True,
-        help="Quantity, specified in the unit of measure indicated in the " "request.",
+        help="Quantity, specified in the unit of measure indicated in the request.",
     )
     product_qty = fields.Float(
         "Real Quantity",
         compute="_compute_product_qty",
         store=True,
         copy=False,
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         help="Quantity in the default UoM of the product",
     )
     procurement_group_id = fields.Many2one(
@@ -86,12 +84,7 @@ class StockRequest(models.AbstractModel):
         "procurement rules will be grouped into one big picking.",
     )
     company_id = fields.Many2one(
-        "res.company",
-        "Company",
-        required=True,
-        default=lambda self: self.env["res.company"]._company_default_get(
-            "stock.request"
-        ),
+        "res.company", "Company", required=True, default=lambda self: self.env.company
     )
     route_id = fields.Many2one(
         "stock.location.route",
@@ -202,8 +195,8 @@ class StockRequest(models.AbstractModel):
     def _check_qty(self):
         for rec in self:
             if rec.product_qty <= 0:
-                raise ValueError(
-                    _("Stock Request product quantity has to be" " strictly positive.")
+                raise ValidationError(
+                    _("Stock Request product quantity has to be strictly positive.")
                 )
 
     @api.onchange("warehouse_id")
@@ -217,7 +210,7 @@ class StockRequest(models.AbstractModel):
             # the onchange, as it could lead to inconsistencies.
             return res
         if self.warehouse_id:
-            loc_wh = self.location_id.sudo().get_warehouse()
+            loc_wh = self.location_id.get_warehouse()
             if self.warehouse_id != loc_wh:
                 self.location_id = self.warehouse_id.lot_stock_id.id
             if self.warehouse_id.company_id != self.company_id:
@@ -227,7 +220,7 @@ class StockRequest(models.AbstractModel):
     @api.onchange("location_id")
     def onchange_location_id(self):
         if self.location_id:
-            loc_wh = self.location_id.sudo().get_warehouse()
+            loc_wh = self.location_id.get_warehouse()
             if loc_wh and self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
                 self.with_context(no_change_childs=True).onchange_warehouse_id()
