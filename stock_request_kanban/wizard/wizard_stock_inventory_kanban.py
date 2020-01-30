@@ -1,24 +1,20 @@
 # Copyright 2017 Creu Blanca
-# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2017-2020 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import fields, models, _
+from odoo import _, fields, models
 
 
-class WizardStockRequestOrderKanbanAbstract(models.TransientModel):
+class WizardStockInventoryKanban(models.TransientModel):
     _name = "wizard.stock.inventory.kanban"
+    _description = "Stock Inventory Kanban Wizard"
     _inherit = "wizard.stock.request.kanban.abstract"
 
-    inventory_kanban_id = fields.Many2one(
-        'stock.inventory.kanban',
-        readonly=True,
-    )
+    inventory_kanban_id = fields.Many2one("stock.inventory.kanban", readonly=True)
 
     def barcode_ending(self):
         super().barcode_ending()
-        self.inventory_kanban_id.write({
-            'scanned_kanban_ids': [(4, self.kanban_id.id)]
-        })
+        self.inventory_kanban_id.write({"scanned_kanban_ids": [(4, self.kanban_id.id)]})
 
     def validate_kanban(self, barcode):
         res = super().validate_kanban(barcode)
