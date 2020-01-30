@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!--Shows simplest case for categories -->
+    <record id="putaway_strat_1" model="product.putaway">
+        <field name="name">Putaway Strategy 1</field>
+    </record>
+    <record id="putaway_strat_1_line_1" model="stock.fixed.putaway.strat">
+        <field name="product_id" ref="product.product_product_11"/>
+        <field name="putaway_id" ref="stock_putaway_product_form.putaway_strat_1"/>
+        <field name="fixed_location_id" ref="stock.stock_location_shop0"/>
+    </record>
+
+    <record id="putaway_strat_1_line_2" model="stock.fixed.putaway.strat">
+        <field name="category_id" ref="product.product_category_5"/>
+        <field name="putaway_id" ref="stock_putaway_product_form.putaway_strat_1"/>
+        <field name="fixed_location_id" ref="stock.stock_location_shop0"/>
+    </record>
+
+    <!--Shows inherited case for categories-->
+    <record id="putaway_strat_2" model="product.putaway">
+        <field name="name">Putaway Strategy 2</field>
+    </record>
+    <record id="putaway_strat_2_line_1" model="stock.fixed.putaway.strat">
+        <field name="category_id" ref="product.product_category_1"/>
+        <field name="putaway_id" ref="stock_putaway_product_form.putaway_strat_2"/>
+        <field name="fixed_location_id" ref="stock.stock_location_stock"/>
+    </record>
+
+    <record id="putaway_strat_2_line_2" model="stock.fixed.putaway.strat">
+        <field name="category_id" ref="product.product_category_all"/>
+        <field name="putaway_id" ref="stock_putaway_product_form.putaway_strat_2"/>
+        <field name="fixed_location_id" ref="stock.stock_location_stock"/>
+    </record>
+
+</odoo>
