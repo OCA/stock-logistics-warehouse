@@ -11,5 +11,4 @@
         <field name="header_spacing">0</field>
         <field name="dpi">72</field>
     </record>
-
 </odoo>
