@@ -226,8 +226,14 @@ class StockMoveLocationWizard(models.TransientModel):
 
     @api.onchange("origin_location_id")
     def onchange_origin_location(self):
-        lines = []
-        if self.origin_location_id:
+        # Get origin_location_disable context key to prevent load all origin
+        # location products when user opens the wizard from stock quants to
+        # move it to other location.
+        if (
+            not self.env.context.get("origin_location_disable")
+            and self.origin_location_id
+        ):
+            lines = []
             line_model = self.env["wiz.stock.move.location.line"]
             for line_val in self._get_stock_move_location_lines_values():
                 if line_val.get("max_quantity") <= 0:
@@ -235,7 +241,6 @@ class StockMoveLocationWizard(models.TransientModel):
                 line = line_model.create(line_val)
                 line.max_quantity = line.get_max_quantity()
                 lines.append(line)
-                # self.stock_move_location_line_ids = [(4, line.id)]
             self.update(
                 {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}
             )

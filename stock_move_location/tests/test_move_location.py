@@ -92,6 +92,8 @@ class TestMoveLocation(TestsCommon):
         )
         lines = wizard.stock_move_location_line_ids
         self.assertEqual(len(lines), 3)
+        wizard.onchange_origin_location()
+        self.assertEqual(len(lines), 3)
         wizard.destination_location_id = self.internal_loc_1
         wizard._onchange_destination_location_id()
         self.assertEqual(lines.mapped("destination_location_id"), self.internal_loc_1)
