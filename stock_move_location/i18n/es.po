@@ -6,15 +6,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2019-04-25 16:16+0000\n"
+"POT-Creation-Date: 2020-02-03 17:47+0000\n"
+"PO-Revision-Date: 2020-02-03 18:48+0100\n"
 "Last-Translator: Enric Tobella <etobella@creublanca.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__apply_putaway_strategy
+msgid "Apply putaway strategy"
+msgstr "Aplicar estrategia de traslado"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Apply putaway strategy for moving products"
+msgstr "Aplicar estrategia de traslado para los movimientos de producto"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -68,7 +79,7 @@ msgstr "Nombre mostrado"
 #, fuzzy
 #| msgid "Origin Location"
 msgid "Edit Locations"
-msgstr "Ubicación de origen"
+msgstr "(editar)"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
@@ -121,14 +132,20 @@ msgstr "Líneas de movimiento de Ubicación"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.stock_picking_type_kanban
+#, fuzzy
 msgid "Move On Hand"
-msgstr ""
+msgstr " Disponible"
 
 #. module: stock_move_location
 #: model:ir.actions.act_window,name:stock_move_location.wiz_stock_move_location_action
 #: model:ir.ui.menu,name:stock_move_location.menuitem_move_location
 msgid "Move from location..."
 msgstr "Mover desde ubicación..."
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__move_location_wizard_id
+msgid "Move location Wizard"
+msgstr "Asistente para mover desde ubicación"
 
 #. module: stock_move_location
 #: code:addons/stock_move_location/wizard/stock_move_location_line.py:0
@@ -164,8 +181,9 @@ msgstr "Parte de un movimiento entre ubicaciones"
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_picking_type
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__picking_type_id
+#, fuzzy
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipo de operación"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -189,8 +207,9 @@ msgstr "Cantidad a mover"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
+#, fuzzy
 msgid "Show Move On hand stock"
-msgstr ""
+msgstr "Stock On Hand"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_stock_picking_type__show_move_onhand
@@ -219,14 +238,14 @@ msgstr "Si este movimiento es parte de movimiento de ubicaciones"
 #, fuzzy
 #| msgid "Part of move location"
 msgid "Wizard move location"
-msgstr "Parte de un movimiento entre ubicaciones"
+msgstr "Asistente para mover desde ubicación"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_wiz_stock_move_location_line
 #, fuzzy
 #| msgid "Move Location lines"
 msgid "Wizard move location line"
-msgstr "Líneas de movimiento de Ubicación"
+msgstr "Asistente para mover desde ubicación"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__destination_location_disable
@@ -243,9 +262,6 @@ msgstr ""
 
 #~ msgid "Clear all"
 #~ msgstr "Limpiar todo"
-
-#~ msgid "Move location Wizard"
-#~ msgstr "Asistente para mover desde ubicación"
 
 #~ msgid "wiz.stock.move.location"
 #~ msgstr "wiz.stock.move.location"
