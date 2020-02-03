@@ -46,7 +46,10 @@ class StockMoveLocationWizard(models.TransientModel):
         domain=lambda self: self._get_locations_domain(),
     )
     stock_move_location_line_ids = fields.Many2many(
-        string="Move Location lines", comodel_name="wiz.stock.move.location.line"
+        string="Move Location lines",
+        comodel_name="wiz.stock.move.location.line",
+        column1="move_location_wiz_id",
+        column2="move_location_line_wiz_id",
     )
     picking_type_id = fields.Many2one(
         comodel_name="stock.picking.type", default=_get_default_picking_type_id
@@ -55,6 +58,7 @@ class StockMoveLocationWizard(models.TransientModel):
         string="Connected Picking", comodel_name="stock.picking"
     )
     edit_locations = fields.Boolean(string="Edit Locations", default=True)
+    apply_putaway_strategy = fields.Boolean(string="Apply putaway strategy")
 
     @api.depends("edit_locations")
     def _compute_readonly_locations(self):
@@ -206,7 +210,8 @@ class StockMoveLocationWizard(models.TransientModel):
             product = product_obj.browse(group.get("product_id")).exists()
             # Apply the putaway strategy
             location_dest_id = (
-                self.destination_location_id._get_putaway_strategy(product).id
+                self.apply_putaway_strategy
+                and self.destination_location_id.get_putaway_strategy(product).id
                 or self.destination_location_id.id
             )
             product_data.append(

@@ -11,6 +11,13 @@ class StockMoveLocationWizardLine(models.TransientModel):
     _name = "wiz.stock.move.location.line"
     _description = "Wizard move location line"
 
+    move_location_wizard_id = fields.Many2many(
+        string="Move location Wizard",
+        comodel_name="wiz.stock.move.location",
+        column1="move_location_line_wiz_id",
+        column2="move_location_wiz_id",
+        readonly=True,
+    )
     product_id = fields.Many2one(
         string="Product", comodel_name="product.product", required=True
     )
@@ -78,7 +85,8 @@ class StockMoveLocationWizardLine(models.TransientModel):
     def _get_move_line_values(self, picking, move):
         self.ensure_one()
         location_dest_id = (
-            self.destination_location_id._get_putaway_strategy(self.product_id).id
+            self.move_location_wizard_id.apply_putaway_strategy
+            and self.destination_location_id.get_putaway_strategy(self.product_id).id
             or self.destination_location_id.id
         )
         qty_todo, qty_done = self._get_available_quantity()
