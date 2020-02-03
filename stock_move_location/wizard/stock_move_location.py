@@ -42,6 +42,9 @@ class StockMoveLocationWizard(models.TransientModel):
     stock_move_location_line_ids = fields.Many2many(
         string="Move Location lines",
         comodel_name="wiz.stock.move.location.line",
+        column1="move_location_wiz_id",
+        column2="move_location_line_wiz_id",
+
     )
     picking_type_id = fields.Many2one(
         comodel_name='stock.picking.type',
@@ -53,6 +56,9 @@ class StockMoveLocationWizard(models.TransientModel):
     )
     edit_locations = fields.Boolean(string='Edit Locations',
                                     default=True)
+    apply_putaway_strategy = fields.Boolean(
+        string='Apply putaway strategy',
+    )
 
     @api.depends('edit_locations')
     def _compute_readonly_locations(self):
@@ -202,9 +208,10 @@ class StockMoveLocationWizard(models.TransientModel):
         for group in self._get_group_quants():
             product = product_obj.browse(group.get("product_id")).exists()
             # Apply the putaway strategy
-            location_dest_id = \
-                self.destination_location_id.get_putaway_strategy(
-                    product).id or self.destination_location_id.id
+            location_dest_id = (
+                self.apply_putaway_strategy and
+                self.destination_location_id.get_putaway_strategy(product).id
+                or self.destination_location_id.id)
             product_data.append({
                 'product_id': product.id,
                 'move_quantity': group.get("sum"),
