@@ -31,24 +31,16 @@ class TestStockLocationLimitProduct(TransactionCase):
             'usage': 'internal',
         })
 
-    def test_onchange_uom_id(self):
-        limit = self.limit_obj
-        with self.assertRaises(ValidationError):
-            # constrain is called when create a record.
-            limit = self.limit_obj.create({
-                'location_id': self.location.id,
-                'product_id': self.product.id,
-                'qty': 100,
-            })
-        if not limit:
-            limit = self.limit_obj.create({
-                'location_id': self.location.id,
-                'product_id': self.product2.id,
-                'qty': 100,
-                'uom_id': self.uom.id,
-            })
-            limit.onchange_uom_id()
-            limit.check_uom_id()
-            limit_count = len(self.limit_obj.search([]))
-            self.assertEqual(limit_count, 2)
-            self.assertEqual(limit.uom_id.id, self.uom.id)
+    def test_creating_stock_location_limit(self):
+        self.limit_obj.create({
+            'location_id': self.location.id,
+            'product_id': self.product.id,
+            'qty': 100,
+        })
+        self.limit_obj.create({
+            'location_id': self.location.id,
+            'product_id': self.product2.id,
+            'qty': 100,
+        })
+        limit_count = len(self.limit_obj.search([]))
+        self.assertEqual(limit_count, 2)
