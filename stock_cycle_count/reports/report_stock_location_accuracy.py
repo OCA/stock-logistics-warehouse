@@ -11,9 +11,11 @@ class LocationAccuracyReport(models.AbstractModel):
 
     @api.model
     def _get_inventory_domain(self, loc_id, exclude_sublocation=True):
-        return [('location_id', '=', loc_id),
-                ('exclude_sublocation', '=', exclude_sublocation),
-                ('state', '=', 'done')]
+        return [
+            ("location_id", "=", loc_id),
+            ("exclude_sublocation", "=", exclude_sublocation),
+            ("state", "=", "done"),
+        ]
 
     @api.model
     def _get_location_data(self, locations):
@@ -29,10 +31,5 @@ class LocationAccuracyReport(models.AbstractModel):
         report_obj = self.env["report"]
         locs = self.env["stock.location"].browse(self._ids)
         data = self._get_location_data(locs)
-        docargs = {
-            "doc_ids": locs._ids,
-            "docs": locs,
-            "data": data,
-        }
-        return report_obj.render(
-            "stock_cycle_count.stock_location_accuracy", docargs)
+        docargs = {"doc_ids": locs._ids, "docs": locs, "data": data}
+        return report_obj.render("stock_cycle_count.stock_location_accuracy", docargs)
