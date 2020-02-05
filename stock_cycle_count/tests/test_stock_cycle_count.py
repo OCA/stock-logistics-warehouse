@@ -70,7 +70,7 @@ class TestStockCycleCount(common.TransactionCase):
         self.stock_location_model._parent_store_compute()
 
         # Create a cycle count:
-        self.cycle_count_1 = self.cycle_count_model.sudo(self.manager).create(
+        self.cycle_count_1 = self.cycle_count_model.with_user(self.manager).create(
             {
                 "name": "Test cycle count",
                 "cycle_count_rule_id": self.rule_periodic.id,
@@ -98,7 +98,7 @@ class TestStockCycleCount(common.TransactionCase):
         return user
 
     def _create_stock_cycle_count_rule_periodic(self, uid, name, values):
-        rule = self.stock_cycle_count_rule_model.sudo(uid).create(
+        rule = self.stock_cycle_count_rule_model.with_user(uid).create(
             {
                 "name": name,
                 "rule_type": "periodic",
@@ -109,7 +109,7 @@ class TestStockCycleCount(common.TransactionCase):
         return rule
 
     def _create_stock_cycle_count_rule_turnover(self, uid, name, values):
-        rule = self.stock_cycle_count_rule_model.sudo(uid).create(
+        rule = self.stock_cycle_count_rule_model.with_user(uid).create(
             {
                 "name": name,
                 "rule_type": "turnover",
@@ -119,7 +119,7 @@ class TestStockCycleCount(common.TransactionCase):
         return rule
 
     def _create_stock_cycle_count_rule_accuracy(self, uid, name, values, zone_ids):
-        rule = self.stock_cycle_count_rule_model.sudo(uid).create(
+        rule = self.stock_cycle_count_rule_model.with_user(uid).create(
             {
                 "name": name,
                 "rule_type": "accuracy",
@@ -131,7 +131,7 @@ class TestStockCycleCount(common.TransactionCase):
         return rule
 
     def _create_stock_cycle_count_rule_zero(self, uid, name):
-        rule = self.stock_cycle_count_rule_model.sudo(uid).create(
+        rule = self.stock_cycle_count_rule_model.with_user(uid).create(
             {"name": name, "rule_type": "zero"}
         )
         return rule
@@ -161,7 +161,11 @@ class TestStockCycleCount(common.TransactionCase):
         )
         date = datetime.today() - timedelta(days=1)
         self.inventory_model.create(
-            {"name": "Pre-existing inventory", "location_id": loc.id, "date": date}
+            {
+                "name": "Pre-existing inventory",
+                "location_ids": [(4, loc.id)],
+                "date": date,
+            }
         )
         self.quant_model.create(
             {
@@ -266,7 +270,7 @@ class TestStockCycleCount(common.TransactionCase):
         with self.assertRaises(AccessError):
             self._create_stock_cycle_count_rule_periodic(self.user, "rule_1b", [2, 7])
         with self.assertRaises(AccessError):
-            self.cycle_count_1.sudo(self.user).unlink()
+            self.cycle_count_1.with_user(self.user).unlink()
 
     def test_rule_periodic_constrains(self):
         """Tests the constrains for the periodic rules."""
