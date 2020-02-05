@@ -1,14 +1,14 @@
-# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2017-18 ForgeFlow Business and IT Consulting Services S.L.
+#   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Stock Cycle Count",
     "summary": "Adds the capability to schedule cycle counts in a "
     "warehouse through different rules defined by the user.",
-    "version": "12.0.1.0.1",
+    "version": "13.0.1.0.0",
     "development_status": "Mature",
-    "maintainers": ["lreficent"],
-    "author": "Eficent, " "Odoo Community Association (OCA)",
+    "maintainers": ["LoisRForgeFlow"],
+    "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "depends": [
