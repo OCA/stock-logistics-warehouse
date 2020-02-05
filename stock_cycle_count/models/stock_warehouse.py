@@ -31,7 +31,6 @@ class StockWarehouse(models.Model):
         help="Number of latest inventories used to calculate location " "accuracy",
     )
 
-    @api.multi
     def get_horizon_date(self):
         self.ensure_one()
         date = datetime.today()
@@ -61,7 +60,6 @@ class StockWarehouse(models.Model):
                 )
         return locations
 
-    @api.multi
     def _cycle_count_rules_to_compute(self):
         self.ensure_one()
         rules = self.env["stock.cycle.count.rule"].search(
@@ -78,7 +76,6 @@ class StockWarehouse(models.Model):
             "state": "draft",
         }
 
-    @api.multi
     def action_compute_cycle_count_rules(self):
         """ Apply the rule in all the sublocations of a given warehouse(s) and
         returns a list with required dates for the cycle count of each
