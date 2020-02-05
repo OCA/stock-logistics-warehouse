@@ -11,7 +11,6 @@ PERCENT = 100.0
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
-    @api.multi
     @api.depends("state", "line_ids")
     def _compute_inventory_accuracy(self):
         for inv in self:
@@ -44,19 +43,16 @@ class StockInventory(models.Model):
                 inv.cycle_count_id.state = "done"
         return True
 
-    @api.multi
     def action_validate(self):
         res = super(StockInventory, self).action_validate()
         self._update_cycle_state()
         return res
 
-    @api.multi
     def action_force_done(self):
         res = super(StockInventory, self).action_force_done()
         self._update_cycle_state()
         return res
 
-    @api.multi
     def write(self, vals):
         for inventory in self:
             if (
