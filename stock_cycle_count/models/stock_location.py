@@ -5,7 +5,7 @@
 import logging
 from datetime import datetime
 
-from odoo import api, fields, models, tools
+from odoo import fields, models, tools
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
@@ -21,13 +21,12 @@ except (ImportError, IOError) as err:
 class StockLocation(models.Model):
     _inherit = "stock.location"
 
-    @api.multi
     def _compute_loc_accuracy(self):
         for rec in self:
             history = self.env["stock.inventory"].search(
-                [("location_id", "=", rec.id), ("state", "=", "done")]
+                [("location_ids", "in", rec.id), ("state", "=", "done")],
+                order="write_date desc",
             )
-            history = history.sorted(key=lambda r: r.write_date, reverse=True)
             if history:
                 wh = rec.get_warehouse()
                 if (
@@ -41,6 +40,8 @@ class StockLocation(models.Model):
                     )
                 else:
                     rec.loc_accuracy = mean(history.mapped("inventory_accuracy"))
+            else:
+                rec.loc_accuracy = 0
 
     zero_confirmation_disabled = fields.Boolean(
         string="Disable Zero Confirmations",
@@ -59,13 +60,11 @@ class StockLocation(models.Model):
         string="Inventory Accuracy", compute="_compute_loc_accuracy", digits=(3, 2)
     )
 
-    @api.multi
     def _get_zero_confirmation_domain(self):
         self.ensure_one()
         domain = [("location_id", "=", self.id), ("quantity", ">", 0.0)]
         return domain
 
-    @api.multi
     def check_zero_confirmation(self):
         for rec in self:
             if not rec.zero_confirmation_disabled:
@@ -81,7 +80,6 @@ class StockLocation(models.Model):
                     if not quants:
                         rec.create_zero_confirmation_cycle_count()
 
-    @api.multi
     def create_zero_confirmation_cycle_count(self):
         self.ensure_one()
         date = datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT)
@@ -113,7 +111,6 @@ class StockLocation(models.Model):
         )
         return True
 
-    @api.multi
     def action_accuracy_stats(self):
         self.ensure_one()
         action = self.env.ref("stock_cycle_count.act_accuracy_stats")

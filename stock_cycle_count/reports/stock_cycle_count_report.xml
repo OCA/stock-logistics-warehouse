@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-
     <template id="report_cyclecount">
         <t t-call="web.html_container">
             <t t-call="web.internal_layout">
                 <div class="page">
-
                     <table class="table table-condensed">
                         <thead>
                             <tr>
@@ -18,35 +15,33 @@
                                 <th>Assigned to</th>
                                 <th>Status</th>
                             </tr>
-                       </thead>
-                       <tbody class="sale_tbody">
+                        </thead>
+                        <tbody class="sale_tbody">
                             <t t-foreach="docs" t-as="doc">
                                 <tr>
                                     <td>
-                                       <span t-field="doc.name"/>
+                                        <span t-field="doc.name" />
                                     </td>
                                     <td>
-                                        <span t-field="doc.location_id"/>
+                                        <span t-field="doc.location_id" />
                                     </td>
                                     <td>
-                                        <span t-field="doc.date_deadline"/>
+                                        <span t-field="doc.date_deadline" />
                                     </td>
                                     <td>
-                                        <span t-field="doc.responsible_id"/>
+                                        <span t-field="doc.responsible_id" />
                                     </td>
                                     <td class="text-right">
-                                        <span t-field="doc.state"/>
+                                        <span t-field="doc.state" />
                                     </td>
                                 </tr>
                             </t>
                         </tbody>
                     </table>
-
                 </div>
             </t>
         </t>
     </template>
-
     <!-- Report action -->
     <report
         id="action_report_stock_cycle_count"
@@ -54,6 +49,6 @@
         name="stock_cycle_count.report_cyclecount"
         string="Cycle Count"
         report_type="qweb-pdf"
-        groups="stock.group_stock_user"/>
-
+        groups="stock.group_stock_user"
+    />
 </odoo>
