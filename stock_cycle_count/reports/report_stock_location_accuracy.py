@@ -26,7 +26,6 @@ class LocationAccuracyReport(models.AbstractModel):
             data[loc] = counts
         return data
 
-    @api.multi
     def render_html(self, data=None):
         report_obj = self.env["report"]
         locs = self.env["stock.location"].browse(self._ids)
