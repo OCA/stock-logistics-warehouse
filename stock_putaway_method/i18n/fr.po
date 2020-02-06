@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_putaway_method
-#: model:ir.model.fields,field_description:stock_putaway_method.field_product_putaway_method
+#: model:ir.model.fields,field_description:stock_putaway_method.field_product_putaway__method
 msgid "Method"
 msgstr "Méthode"
 
