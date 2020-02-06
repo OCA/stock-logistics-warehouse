@@ -50,7 +50,7 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_custom
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__custom
 msgid "Custom line"
 msgstr "Línea personalizada"
 
@@ -82,8 +82,8 @@ msgid "Edit Locations"
 msgstr "(editar)"
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_id
-#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line_id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
 msgid "ID"
 msgstr "ID"
 
@@ -148,7 +148,7 @@ msgid "Move location Wizard"
 msgstr "Asistente para mover desde ubicación"
 
 #. module: stock_move_location
-#: code:addons/stock_move_location/wizard/stock_move_location_line.py:73
+#: code:addons/stock_move_location/wizard/stock_move_location_line.py:72
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
 msgstr "La cantidad movida no puede superar la cantidad máxima o ser negativo"
