@@ -46,7 +46,10 @@ class StockMoveLocationWizard(models.TransientModel):
         domain=lambda self: self._get_locations_domain(),
     )
     stock_move_location_line_ids = fields.Many2many(
-        string="Move Location lines", comodel_name="wiz.stock.move.location.line"
+        string="Move Location lines",
+        comodel_name="wiz.stock.move.location.line",
+        column1="move_location_wiz_id",
+        column2="move_location_line_wiz_id",
     )
     picking_type_id = fields.Many2one(
         comodel_name="stock.picking.type", default=_get_default_picking_type_id
@@ -55,6 +58,7 @@ class StockMoveLocationWizard(models.TransientModel):
         string="Connected Picking", comodel_name="stock.picking"
     )
     edit_locations = fields.Boolean(string="Edit Locations", default=True)
+    apply_putaway_strategy = fields.Boolean(string="Apply putaway strategy")
 
     @api.depends("edit_locations")
     def _compute_readonly_locations(self):
@@ -206,7 +210,8 @@ class StockMoveLocationWizard(models.TransientModel):
             product = product_obj.browse(group.get("product_id")).exists()
             # Apply the putaway strategy
             location_dest_id = (
-                self.destination_location_id._get_putaway_strategy(product).id
+                self.apply_putaway_strategy
+                and self.destination_location_id.get_putaway_strategy(product).id
                 or self.destination_location_id.id
             )
             product_data.append(
@@ -226,8 +231,14 @@ class StockMoveLocationWizard(models.TransientModel):
 
     @api.onchange("origin_location_id")
     def onchange_origin_location(self):
-        lines = []
-        if self.origin_location_id:
+        # Get origin_location_disable context key to prevent load all origin
+        # location products when user opens the wizard from stock quants to
+        # move it to other location.
+        if (
+            not self.env.context.get("origin_location_disable")
+            and self.origin_location_id
+        ):
+            lines = []
             line_model = self.env["wiz.stock.move.location.line"]
             for line_val in self._get_stock_move_location_lines_values():
                 if line_val.get("max_quantity") <= 0:
@@ -235,7 +246,6 @@ class StockMoveLocationWizard(models.TransientModel):
                 line = line_model.create(line_val)
                 line.max_quantity = line.get_max_quantity()
                 lines.append(line)
-                # self.stock_move_location_line_ids = [(4, line.id)]
             self.update(
                 {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}
             )
