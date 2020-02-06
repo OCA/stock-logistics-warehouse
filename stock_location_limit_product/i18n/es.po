@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_location_limit_product
+# 	* stock_location_limit_product
 #
 msgid ""
 msgstr ""
@@ -25,6 +25,11 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:stock_location_limit_product.field_stock_location_limit__create_date
 msgid "Created on"
 msgstr "Creado en"
+
+#. module: stock_location_limit_product
+#: model:ir.model.fields,help:stock_location_limit_product.field_stock_location_limit__uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr ""
 
 #. module: stock_location_limit_product
 #: model:ir.model.fields,field_description:stock_location_limit_product.field_stock_location_limit__display_name
@@ -88,14 +93,6 @@ msgid "Stock Location Limit Product"
 msgstr "Producto de límite de ubicación de stock"
 
 #. module: stock_location_limit_product
-#: code:addons/stock_location_limit_product/models/stock_location_limit.py:21
-#, python-format
-msgid "The unit of measure for the limit with the product %s must be in the uom category %s!"
-msgstr ""
-"La unidad de medida para el límite con el producto %s debe estar en la "
-"categoría udm %s!"
-
-#. module: stock_location_limit_product
 #: model:ir.model.fields,field_description:stock_location_limit_product.field_stock_location_limit__uom_id
 msgid "UoM"
 msgstr "UdM"
@@ -105,3 +102,10 @@ msgstr "UdM"
 msgid "You cannot set 2 limits with the same product for a location!"
 msgstr ""
 "¡No puede establecer 2 límites con el mismo producto para una ubicación!"
+
+#~ msgid ""
+#~ "The unit of measure for the limit with the product %s must be in the uom "
+#~ "category %s!"
+#~ msgstr ""
+#~ "La unidad de medida para el límite con el producto %s debe estar en la "
+#~ "categoría udm %s!"
