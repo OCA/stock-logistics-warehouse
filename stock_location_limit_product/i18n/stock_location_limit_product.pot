@@ -24,6 +24,11 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_location_limit_product
+#: model:ir.model.fields,help:stock_location_limit_product.field_stock_location_limit__uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr ""
+
+#. module: stock_location_limit_product
 #: model:ir.model.fields,field_description:stock_location_limit_product.field_stock_location_limit__display_name
 msgid "Display Name"
 msgstr ""
@@ -82,12 +87,6 @@ msgstr ""
 #. module: stock_location_limit_product
 #: model:ir.model,name:stock_location_limit_product.model_stock_location_limit
 msgid "Stock Location Limit Product"
-msgstr ""
-
-#. module: stock_location_limit_product
-#: code:addons/stock_location_limit_product/models/stock_location_limit.py:21
-#, python-format
-msgid "The unit of measure for the limit with the product %s must be in the uom category %s!"
 msgstr ""
 
 #. module: stock_location_limit_product
