@@ -5,19 +5,13 @@
     "name": "Stock Inventory Cost Info",
     "summary": "Shows the cost of the inventory adjustments",
     "version": "12.0.1.0.0",
-    "author": "Tecnativa, "
-              "Odoo Community Association (OCA)",
+    "author": "Tecnativa, " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": [
-        "stock",
-    ],
-    "data": [
-        "views/stock_inventory_views.xml",
-        "views/report_stockinventory.xml",
-    ],
+    "depends": ["stock"],
+    "data": ["views/stock_inventory_views.xml", "views/report_stockinventory.xml"],
     "pre_init_hook": "pre_init_hook",
     "license": "AGPL-3",
-    'installable': True,
-    'application': False,
+    "installable": True,
+    "application": False,
 }
