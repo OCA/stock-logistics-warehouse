@@ -3,9 +3,13 @@
 
 
 def pre_init_hook(cr):
-    cr.execute("""ALTER TABLE stock_inventory_line
+    cr.execute(
+        """ALTER TABLE stock_inventory_line
     ADD COLUMN adjustment_cost numeric
-    DEFAULT 0""")
+    DEFAULT 0"""
+    )
 
-    cr.execute("""ALTER TABLE stock_inventory_line
-    ALTER COLUMN adjustment_cost DROP DEFAULT;""")
+    cr.execute(
+        """ALTER TABLE stock_inventory_line
+    ALTER COLUMN adjustment_cost DROP DEFAULT;"""
+    )
