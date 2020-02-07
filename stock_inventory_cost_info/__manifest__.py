@@ -4,7 +4,7 @@
 {
     "name": "Stock Inventory Cost Info",
     "summary": "Shows the cost of the inventory adjustments",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "author": "Tecnativa, " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",

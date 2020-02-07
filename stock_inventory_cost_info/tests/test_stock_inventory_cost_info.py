@@ -2,9 +2,10 @@
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, tagged
 
 
+@tagged("post_install", "-at_install")
 class TestStockInventoryCostInfo(TransactionCase):
     def setUp(self):
         super(TestStockInventoryCostInfo, self).setUp()
@@ -18,7 +19,6 @@ class TestStockInventoryCostInfo(TransactionCase):
         self.inventory = self.env["stock.inventory"].create(
             {
                 "name": "Another inventory",
-                "filter": "partial",
                 "line_ids": [
                     (
                         0,
