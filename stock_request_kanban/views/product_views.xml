@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ForgeFlow, S.L.
-     License LGPL-3.0 or later (https://www.gnu.org/licenses/gpl). -->
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
 <odoo>
     <record id="product_product_form_view_kanban_card_button" model="ir.ui.view">
         <field name="name">product.product.stock.request.kanban</field>
