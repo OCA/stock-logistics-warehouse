@@ -8,30 +8,43 @@ from odoo.tests.common import TransactionCase
 class TestStockInventoryCostInfo(TransactionCase):
     def setUp(self):
         super(TestStockInventoryCostInfo, self).setUp()
-        product_obj = self.env['product.product']
-        self.product_1 = product_obj.create({
-            'name': 'product test 1',
-            'type': 'product',
-            'standard_price': 1000,
-        })
-        self.product_2 = product_obj.create({
-            'name': 'product test 2',
-            'type': 'product',
-            'standard_price': 2000,
-        })
-        self.inventory = self.env['stock.inventory'].create({
-            'name': 'Another inventory',
-            'filter': 'partial',
-            'line_ids': [(0, 0, {
-                'product_id': self.product_1.id,
-                'product_qty': 10,
-                'location_id': self.env.ref('stock.warehouse0').lot_stock_id.id
-            }), (0, 0, {
-                'product_id': self.product_2.id,
-                'product_qty': 20,
-                'location_id': self.env.ref('stock.warehouse0').lot_stock_id.id
-            })]
-        })
+        product_obj = self.env["product.product"]
+        self.product_1 = product_obj.create(
+            {"name": "product test 1", "type": "product", "standard_price": 1000}
+        )
+        self.product_2 = product_obj.create(
+            {"name": "product test 2", "type": "product", "standard_price": 2000}
+        )
+        self.inventory = self.env["stock.inventory"].create(
+            {
+                "name": "Another inventory",
+                "filter": "partial",
+                "line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_1.id,
+                            "product_qty": 10,
+                            "location_id": self.env.ref(
+                                "stock.warehouse0"
+                            ).lot_stock_id.id,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product_2.id,
+                            "product_qty": 20,
+                            "location_id": self.env.ref(
+                                "stock.warehouse0"
+                            ).lot_stock_id.id,
+                        },
+                    ),
+                ],
+            }
+        )
 
     def test_compute_adjustment_cost(self):
         """Tests if the adjustment_cost is correctly computed."""
