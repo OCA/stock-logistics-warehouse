@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_request_kanban
+# 	* stock_request_kanban
 #
 msgid ""
 msgstr ""
@@ -15,6 +15,13 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 3.8\n"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_product__kanban_card_count
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_template__kanban_card_count
+#, fuzzy
+msgid "# Kanban Cards"
+msgstr "看板卡"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_needaction
@@ -34,6 +41,12 @@ msgid "Activities"
 msgstr "活动"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_exception_decoration
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_state
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_state
 msgid "Activity State"
@@ -49,7 +62,7 @@ msgid "Add Kanban"
 msgstr "添加看板"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban.py:23
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban.py:0
 #, python-format
 msgid "Added kanban %s for product %s"
 msgstr "为产品%s添加了看板%s"
@@ -71,25 +84,27 @@ msgid "Attachment Count"
 msgstr "附件数量"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban_abstract.py:29
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban_abstract.py:0
 #, python-format
-msgid "Barcode %s does not correspond to any Kanban. Try with another barcode or press Close to finish scanning."
+msgid ""
+"Barcode %s does not correspond to any Kanban. Try with another barcode or "
+"press Close to finish scanning."
 msgstr "条形码%s与任何看板都不对应。尝试使用其他条形码或按“关闭”完成扫描。"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_inventory_kanban.py:34
+#: code:addons/stock_request_kanban/wizard/wizard_stock_inventory_kanban.py:0
 #, python-format
 msgid "Barcode %s is already scanned"
 msgstr "条码%s已被扫描"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_inventory_kanban.py:28
+#: code:addons/stock_request_kanban/wizard/wizard_stock_inventory_kanban.py:0
 #, python-format
 msgid "Barcode %s is not in the inventory"
 msgstr "条码%s不在库存中"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:23
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
 #, python-format
 msgid "Barcode %s is on the order"
 msgstr "条码%s在订单上"
@@ -103,7 +118,7 @@ msgid "Barcode Scanned"
 msgstr "条码扫描"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/models/stock_request_kanban.py:39
+#: code:addons/stock_request_kanban/models/stock_request_kanban.py:0
 #, python-format
 msgid "CRC is not valid"
 msgstr "CRC无效"
@@ -114,7 +129,7 @@ msgid "Cancel"
 msgstr "取消"
 
 #. module: stock_request_kanban
-#: selection:stock.inventory.kanban,state:0
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__cancelled
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -136,7 +151,7 @@ msgid "Close"
 msgstr "关闭"
 
 #. module: stock_request_kanban
-#: selection:stock.inventory.kanban,state:0
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__closed
 msgid "Closed"
 msgstr "已关闭"
 
@@ -146,7 +161,7 @@ msgid "Company"
 msgstr "公司"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:32
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
 #, python-format
 msgid "Company must be the same"
 msgstr "公司必须相同"
@@ -180,7 +195,7 @@ msgid "Display Name"
 msgstr "显示名称"
 
 #. module: stock_request_kanban
-#: selection:stock.inventory.kanban,state:0
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__draft
 msgid "Draft"
 msgstr "草稿"
 
@@ -190,7 +205,7 @@ msgid "Finish"
 msgstr "完成"
 
 #. module: stock_request_kanban
-#: selection:stock.inventory.kanban,state:0
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__finished
 msgid "Finished"
 msgstr "已完成"
 
@@ -228,25 +243,35 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_request_kanban
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_unread
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_unread
-msgid "If checked new messages require your attention."
-msgstr ".如果勾选此项，将会收到新消息提醒。"
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_exception_icon
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_exception_icon
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_needaction
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_unread
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_needaction
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "如果勾选此项，将会收到新消息提醒。"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "如果勾选此项， 某些信息将会产生传递错误。"
 
 #. module: stock_request_kanban
-#: selection:stock.inventory.kanban,state:0
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__in_progress
 msgid "In progress"
 msgstr "进行中"
 
@@ -282,6 +307,13 @@ msgstr "是关注者"
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
 msgid "Kanban"
 msgstr "看板"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.product_product_form_view_kanban_card_button
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.product_template_form_view_bom_button
+#, fuzzy
+msgid "Kanban Cards"
+msgstr "看板卡"
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_kanban_view
@@ -322,7 +354,7 @@ msgid "Last Updated on"
 msgstr "最后更新时间"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:27
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
 #, python-format
 msgid "Lines only can be added on orders with draft state"
 msgstr "只有处于草稿状态的订单才能添加行"
@@ -335,7 +367,7 @@ msgid "Location"
 msgstr "位置"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:40
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
 #, python-format
 msgid "Location must be the same"
 msgstr "位置必须相同"
@@ -375,8 +407,13 @@ msgstr "看板缺失"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__procurement_group_id
-msgid "Moves created through this stock request will be put in this procurement group. If none is given, the moves generated by procurement rules will be grouped into one big picking."
-msgstr "通过此库存请求创建的移动将放入此采购组。如果没有给出，则由采购规则生成的移动将被分组为一个大拣货。"
+msgid ""
+"Moves created through this stock request will be put in this procurement "
+"group. If none is given, the moves generated by procurement rules will be "
+"grouped into one big picking."
+msgstr ""
+"通过此库存请求创建的移动将放入此采购组。如果没有给出，则由采购规则生成的移动"
+"将被分组为一个大拣货。"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__name
@@ -411,7 +448,8 @@ msgstr "操作次数"
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_error_counter
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_error_counter
-msgid "Number of error"
+#, fuzzy
+msgid "Number of errors"
 msgstr "错误数"
 
 #. module: stock_request_kanban
@@ -438,18 +476,6 @@ msgid "Order"
 msgstr "订单"
 
 #. module: stock_request_kanban
-#: selection:stock.inventory.kanban,activity_state:0
-#: selection:stock.request.kanban,activity_state:0
-msgid "Overdue"
-msgstr "逾期"
-
-#. module: stock_request_kanban
-#: selection:stock.inventory.kanban,activity_state:0
-#: selection:stock.request.kanban,activity_state:0
-msgid "Planned"
-msgstr "计划"
-
-#. module: stock_request_kanban
 #: model:ir.actions.report,name:stock_request_kanban.action_report_kanban
 msgid "Print kanban"
 msgstr "打印看板"
@@ -465,14 +491,22 @@ msgid "Procurement Group"
 msgstr "补货组"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:38
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
 #, python-format
 msgid "Procurement group must be the same"
 msgstr "补货组必须相同"
 
 #. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_product_product
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_id
 msgid "Product"
+msgstr "产品"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_product_template
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_template_id
+#, fuzzy
+msgid "Product Template"
 msgstr "产品"
 
 #. module: stock_request_kanban
@@ -527,10 +561,24 @@ msgid "Routes"
 msgstr "路线"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
+#, fuzzy
+msgid "SMS Delivery error"
+msgstr "消息递送错误"
+
+#. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
 msgid "Scan"
 msgstr "扫描"
+
+#. module: stock_request_kanban
+#. openerp-web
+#: code:addons/stock_request_kanban/static/src/xml/stock_request_kanban_scan.xml:0
+#, fuzzy, python-format
+msgid "Scan Kanban"
+msgstr "已扫描看板"
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
@@ -576,7 +624,8 @@ msgstr "状态"
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_state
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_state
-msgid "Status based on activities\n"
+msgid ""
+"Status based on activities\n"
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
@@ -591,6 +640,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_tree
 msgid "Stock Inventories"
 msgstr "库存存货"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_inventory_kanban
+#, fuzzy
+msgid "Stock Inventory Kanban Wizard"
+msgstr "库存存货看板"
 
 #. module: stock_request_kanban
 #: model:ir.actions.act_window,name:stock_request_kanban.stock_inventory_kanban_action
@@ -611,8 +666,26 @@ msgid "Stock Request Kanban"
 msgstr "库存请求看板"
 
 #. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban_abstract
+#, fuzzy
+msgid "Stock Request Kanban Abstract Wizard"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban
+#, fuzzy
+msgid "Stock Request Kanban Wizard"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
 #: model:ir.actions.act_window,name:stock_request_kanban.stock_request_kanban_action
 msgid "Stock Request Kanbans"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_order_kanban
+#, fuzzy
+msgid "Stock Request Order Kanban Wizard"
 msgstr "库存请求看板"
 
 #. module: stock_request_kanban
@@ -627,10 +700,10 @@ msgid "Stock Requests Kanban"
 msgstr "库存请求看板"
 
 #. module: stock_request_kanban
-#: selection:stock.inventory.kanban,activity_state:0
-#: selection:stock.request.kanban,activity_state:0
-msgid "Today"
-msgstr "今天"
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_exception_decoration
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_unread
@@ -660,7 +733,7 @@ msgid "Warehouse"
 msgstr "仓库"
 
 #. module: stock_request_kanban
-#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:42
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
 #, python-format
 msgid "Warehouse must be the same"
 msgstr "仓库必须相同"
@@ -677,22 +750,26 @@ msgstr "网站消息"
 msgid "Website communication history"
 msgstr "网站沟通记录"
 
-#. module: stock_request_kanban
-#: model:ir.model,name:stock_request_kanban.model_wizard_stock_inventory_kanban
-msgid "wizard.stock.inventory.kanban"
-msgstr "wizard.stock.inventory.kanban"
+#~ msgid "If checked new messages require your attention."
+#~ msgstr ".如果勾选此项，将会收到新消息提醒。"
 
-#. module: stock_request_kanban
-#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban
-msgid "wizard.stock.request.kanban"
-msgstr "wizard.stock.request.kanban"
+#~ msgid "Overdue"
+#~ msgstr "逾期"
 
-#. module: stock_request_kanban
-#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban_abstract
-msgid "wizard.stock.request.kanban.abstract"
-msgstr "wizard.stock.request.kanban.abstract"
+#~ msgid "Planned"
+#~ msgstr "计划"
 
-#. module: stock_request_kanban
-#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_order_kanban
-msgid "wizard.stock.request.order.kanban"
-msgstr "wizard.stock.request.order.kanban"
+#~ msgid "Today"
+#~ msgstr "今天"
+
+#~ msgid "wizard.stock.inventory.kanban"
+#~ msgstr "wizard.stock.inventory.kanban"
+
+#~ msgid "wizard.stock.request.kanban"
+#~ msgstr "wizard.stock.request.kanban"
+
+#~ msgid "wizard.stock.request.kanban.abstract"
+#~ msgstr "wizard.stock.request.kanban.abstract"
+
+#~ msgid "wizard.stock.request.order.kanban"
+#~ msgstr "wizard.stock.request.order.kanban"
