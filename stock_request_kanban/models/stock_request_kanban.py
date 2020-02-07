@@ -13,6 +13,7 @@ class StockRequestKanban(models.Model):
     _inherit = "stock.request.abstract"
 
     active = fields.Boolean(default=True)
+    product_template_id = fields.Many2one(related="product_id.product_tmpl_id")
 
     @api.model
     def create(self, vals):
@@ -37,11 +38,17 @@ class StockRequestKanban(models.Model):
             == "0"
         ):
             return barcode
-        bcc = getCodes()[self.get_barcode_format()](value=barcode[:-1])
-        bcc.validate()
-        bcc.encode()
-        if bcc.encoded[1:-1] != barcode:
-            raise ValidationError(_("CRC is not valid"))
+        if (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("stock_request_kanban.ignore_crc", default="0")
+            == "0"
+        ):
+            bcc = getCodes()[self.get_barcode_format()](value=barcode[:-1])
+            bcc.validate()
+            bcc.encode()
+            if bcc.encoded[1:-1] != barcode:
+                raise ValidationError(_("CRC is not valid"))
         return barcode[:-1]
 
     @api.model

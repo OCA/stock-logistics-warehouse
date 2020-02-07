@@ -20,9 +20,12 @@
         "views/stock_request_kanban_views.xml",
         "views/stock_inventory_kanban_views.xml",
         "views/stock_request_menu.xml",
+        "views/stock_request_views.xml",
+        "views/product_views.xml",
         "report/stock_request_kanban_templates.xml",
         "security/ir.model.access.csv",
     ],
+    "qweb": ["static/src/xml/stock_request_kanban_scan.xml"],
     "installable": True,
     "application": False,
 }
