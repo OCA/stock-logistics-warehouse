@@ -11,15 +11,14 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
     def setUp(self):
         super(TestStockInventoryPreparationFilterCategories, self).setUp()
         self.inventory_model = self.env["stock.inventory"]
+        self.location = self.env.ref("stock.stock_location_stock")
+        self.Product = self.env["product.product"]
+        self.Category = self.env["product.category"]
         # Create some categories
-        self.category = self.env["product.category"].create(
-            {"name": "Category for inventory"}
-        )
-        self.category2 = self.env["product.category"].create(
-            {"name": "Category for inventory 2"}
-        )
+        self.category = self.Category.create({"name": "Category for inventory"})
+        self.category2 = self.Category.create({"name": "Category for inventory 2"})
         # Create some products in the category
-        self.product1 = self.env["product.product"].create(
+        self.product1 = self.Product.create(
             {
                 "name": "Product for inventory 1",
                 "type": "product",
@@ -27,7 +26,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 "default_code": "PROD1-TEST",
             }
         )
-        self.product2 = self.env["product.product"].create(
+        self.product2 = self.Product.create(
             {
                 "name": "Product for inventory 2",
                 "type": "product",
@@ -35,7 +34,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 "default_code": "PROD2-TEST",
             }
         )
-        self.product3 = self.env["product.product"].create(
+        self.product3 = self.Product.create(
             {
                 "name": "Product for inventory 3",
                 "type": "product",
@@ -43,7 +42,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 "default_code": "PROD3-TEST",
             }
         )
-        self.product_lot = self.env["product.product"].create(
+        self.product_lot = self.Product.create(
             {
                 "name": "Product for inventory with lots",
                 "type": "product",
@@ -51,7 +50,41 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
             }
         )
         self.lot = self.env["stock.production.lot"].create(
-            {"name": "Lot test", "product_id": self.product_lot.id}
+            {
+                "name": "Lot test",
+                "product_id": self.product_lot.id,
+                "company_id": self.env.user.company_id.id,
+            }
+        )
+        # Add quants for products to ensure that inventory lines are created
+        self.env["stock.quant"].create(
+            [
+                {
+                    "product_id": self.product1.id,
+                    "product_uom_id": self.product1.uom_id.id,
+                    "location_id": self.location.id,
+                    "quantity": 2.0,
+                },
+                {
+                    "product_id": self.product2.id,
+                    "product_uom_id": self.product2.uom_id.id,
+                    "location_id": self.location.id,
+                    "quantity": 2.0,
+                },
+                {
+                    "product_id": self.product3.id,
+                    "product_uom_id": self.product3.uom_id.id,
+                    "location_id": self.location.id,
+                    "quantity": 2.0,
+                },
+                {
+                    "product_id": self.product_lot.id,
+                    "product_uom_id": self.product_lot.uom_id.id,
+                    "location_id": self.location.id,
+                    "quantity": 2.0,
+                    "lot_id": self.lot.id,
+                },
+            ]
         )
         # Add user to lot tracking group
         self.env.user.groups_id = [(4, self.env.ref("stock.group_production_lot").id)]
@@ -59,93 +92,35 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
         self.location = self.env["stock.location"].create(
             {"name": "Inventory tests", "usage": "internal"}
         )
-        inventory = self.inventory_model.create(
-            {
-                "name": "Product1 inventory",
-                "filter": "product",
-                "line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product1.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 2.0,
-                            "location_id": self.location.id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product2.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 4.0,
-                            "location_id": self.location.id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product_lot.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 6.0,
-                            "location_id": self.location.id,
-                            "prod_lot_id": self.lot.id,
-                        },
-                    ),
-                ],
-            }
+        self.test_products = (
+            self.product1 + self.product2 + self.product3 + self.product_lot
         )
-        inventory._action_done()
 
-    def test_inventory_category_filter(self):
+    def test_inventory_filter(self):
+        # Filter all products
         inventory = self.inventory_model.create(
-            {
-                "name": "Category inventory",
-                "filter": "categories",
-                "location_id": self.location.id,
-                "categ_ids": [(6, 0, [self.category.id])],
-            }
+            {"name": "Inventory test", "filter": "products"}
         )
         inventory.action_start()
-        self.assertEqual(len(inventory.line_ids), 2)
-        line1 = inventory.line_ids[0]
-        self.assertEqual(line1.product_id, self.product1)
-        self.assertEqual(line1.theoretical_qty, 2.0)
-        self.assertEqual(line1.location_id, self.location)
-        line2 = inventory.line_ids[1]
-        self.assertEqual(line2.product_id, self.product2)
-        self.assertEqual(line2.theoretical_qty, 4.0)
-        self.assertEqual(line2.location_id, self.location)
-
-    def test_inventory_products_filter(self):
-        inventory = self.inventory_model.create(
-            {
-                "name": "Products inventory",
-                "filter": "products",
-                "location_id": self.location.id,
-                "product_ids": [(6, 0, [self.product1.id, self.product2.id])],
-            }
+        self.assertTrue(self.test_products <= inventory.line_ids.mapped("product_id"))
+        # Filter by categories
+        inventory.action_cancel_draft()
+        inventory.update(
+            {"filter": "categories", "categ_ids": [(6, 0, [self.category.id])]}
         )
         inventory.action_start()
-        self.assertEqual(len(inventory.line_ids), 2)
-        line1 = inventory.line_ids[0]
-        self.assertEqual(line1.product_id, self.product1)
-        self.assertEqual(line1.theoretical_qty, 2.0)
-        self.assertEqual(line1.location_id, self.location)
-        line2 = inventory.line_ids[1]
-        self.assertEqual(line2.product_id, self.product2)
-        self.assertEqual(line2.theoretical_qty, 4.0)
-        self.assertEqual(line2.location_id, self.location)
+        self.assertEqual(len(inventory.line_ids), 3)
+        # Filter by lots
+        inventory.action_cancel_draft()
+        inventory.update({"filter": "lots", "lot_ids": [(6, 0, self.lot.ids)]})
+        inventory.action_start()
+        self.assertEqual(len(inventory.line_ids), 1)
 
     def test_inventory_domain_filter(self):
         inventory = self.inventory_model.create(
             {
                 "name": "Domain inventory",
                 "filter": "domain",
-                "location_id": self.location.id,
                 "product_domain": [("id", "=", self.product1.id)],
             }
         )
@@ -154,53 +129,3 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
         line1 = inventory.line_ids[0]
         self.assertEqual(line1.product_id, self.product1)
         self.assertEqual(line1.theoretical_qty, 2.0)
-        self.assertEqual(line1.location_id, self.location)
-
-    def test_inventory_lots_filter(self):
-        inventory = self.inventory_model.create(
-            {
-                "name": "Products inventory",
-                "filter": "lots",
-                "location_id": self.location.id,
-                "lot_ids": [(6, 0, [self.lot.id])],
-            }
-        )
-        inventory.action_start()
-        self.assertEqual(len(inventory.line_ids), 1)
-        line1 = inventory.line_ids[0]
-        self.assertEqual(line1.product_id, self.product_lot)
-        self.assertEqual(line1.prod_lot_id, self.lot)
-        self.assertEqual(line1.theoretical_qty, 6.0)
-        self.assertEqual(line1.location_id, self.location)
-
-    def test_inventory_empty_filter(self):
-        inventory = self.inventory_model.create(
-            {
-                "name": "Products inventory",
-                "filter": "empty",
-                "location_id": self.location.id,
-                "empty_line_ids": [
-                    (0, 0, {"product_code": "PROD1-TEST", "product_qty": 3.0}),
-                    (0, 0, {"product_code": "PROD2-TEST", "product_qty": 7.0}),
-                    (0, 0, {"product_code": "PROD3-TEST", "product_qty": 5.0}),
-                    (0, 0, {"product_code": "UNEXISTING-CODE", "product_qty": 0.0}),
-                ],
-            }
-        )
-        inventory.action_start()
-        self.assertEqual(len(inventory.line_ids), 3)
-        line1 = inventory.line_ids[0]
-        self.assertEqual(line1.product_id, self.product1)
-        self.assertEqual(line1.theoretical_qty, 2.0)
-        self.assertEqual(line1.product_qty, 3.0)
-        self.assertEqual(line1.location_id, self.location)
-        line2 = inventory.line_ids[1]
-        self.assertEqual(line2.product_id, self.product2)
-        self.assertEqual(line2.theoretical_qty, 4.0)
-        self.assertEqual(line2.product_qty, 7.0)
-        self.assertEqual(line2.location_id, self.location)
-        line3 = inventory.line_ids[2]
-        self.assertEqual(line3.product_id, self.product3)
-        self.assertEqual(line3.theoretical_qty, 0.0)
-        self.assertEqual(line3.product_qty, 5.0)
-        self.assertEqual(line3.location_id, self.location)
