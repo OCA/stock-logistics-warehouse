@@ -3,5 +3,6 @@
 
   * Pedro M. Baeza
   * David Vidal
+  * Sergio Teruel
 
 * Xavier Jimenez <xavier.jimenez@qubiq.es>
