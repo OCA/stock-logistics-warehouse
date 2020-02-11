@@ -1,48 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
-        <record model="ir.ui.view" id="stock_inventory_form">
-            <field name="name">stock.inventory.form</field>
-            <field name="model">stock.inventory</field>
-            <field name="inherit_id" ref="stock.view_inventory_form" />
-            <field name="arch" type="xml">
-                <data>
-                    <notebook position="attributes">
-                        <attribute name="attrs" />
-                    </notebook>
-                    <xpath expr="//button[@name='action_reset_product_qty']/ancestor::*[position()=1]" position="attributes">
-                        <attribute name="attrs">{'invisible':[('state','=','draft')]}</attribute>
-                    </xpath>
-                    <field name="category_id" position="after">
-                        <field name="categ_ids"
-                            widget="many2many_tags"
-                            attrs="{'invisible':[('filter','!=','categories')]}" />
-                    </field>
-                    <field name="product_id" position="after">
-                        <field name="product_ids"
-                            widget="many2many_tags"
-                            attrs="{'invisible':[('filter','!=','products')]}" />
-                    </field>
-                    <field name="lot_id" position="after">
-                        <field name="lot_ids"
-                                attrs="{'invisible':[('filter','!=','lots')]}" />
-                    </field>
-                    <notebook position="before">
-                        <field name="product_domain" widget="domain" attrs="{'invisible': [('filter', '!=', 'domain')]}" options="{'model': 'product.product'}"/>
-                    </notebook>
-                    <notebook position="inside">
-                        <page string="Capture Lines"
-                            attrs="{'invisible':[('filter','!=','empty')]}">
-                            <field name="empty_line_ids" nolabel="1">
-                                <tree editable="bottom">
-                                    <field name="product_code"/>
-                                    <field name="product_qty"/>
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
-                </data>
+    <record model="ir.ui.view" id="view_inventory_form">
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="arch" type="xml">
+            <field name="product_ids" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('filter', '!=', 'products')]}</attribute>
             </field>
-        </record>
-
+            <xpath expr="//field[@name='location_ids']/../.." position="before">
+                <group>
+                    <group>
+                        <field
+                            name="filter"
+                            string="Inventory of"
+                            widget='radio'
+                            attrs="{'readonly': [('state', '!=', 'draft')]}"
+                        />
+                    </group>
+                </group>
+            </xpath>
+            <field name="location_ids" position="before">
+                <field
+                    name="categ_ids"
+                    widget="many2many_tags"
+                    attrs="{'invisible':[('filter','!=','categories')]}"
+                />
+            </field>
+            <field name="location_ids" position="before">
+                <field
+                    name="lot_ids"
+                    widget="many2many_tags"
+                    attrs="{'invisible':[('filter','!=','lots')]}"
+                />
+            </field>
+            <xpath expr="//field[@name='location_ids']/../.." position="after">
+                <field
+                    name="product_domain"
+                    widget="domain"
+                    attrs="{'invisible': [('filter', '!=', 'domain')]}"
+                    options="{'model': 'product.product'}"
+                />
+            </xpath>
+        </field>
+    </record>
 </odoo>
