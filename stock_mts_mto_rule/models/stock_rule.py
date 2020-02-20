@@ -59,12 +59,12 @@ class StockRule(models.Model):
                            precision_digits=precision) == 0.0:
                 getattr(self.mto_rule_id,  '_run_%s' % rule.mto_rule_id.action)(procurements)
             else:
-                qty = procurement.product_qty - needed_qty
-                setattr(procurement, 'product_qty', qty)
-                #procurement.product_qty = procurement.product_qty - needed_qty
+                mts_qty = procurement.product_qty - needed_qty
+                procurement = procurement._replace(product_qty = mts_qty)
+                procurements = [[procurement,rule]]
                 getattr(self.mts_rule_id, '_run_%s' % rule.mts_rule_id.action)(procurements)
-                setattr(procurement, 'product_qty', needed_qty)
-                #procurement.product_qty = needed_qty
+                procurement = procurement._replace(product_qty = needed_qty)
+                procurements = [[procurement,rule]]
                 getattr(self.mto_rule_id, '_run_%s' % rule.mto_rule_id.action)(procurements)
                 
         return True
