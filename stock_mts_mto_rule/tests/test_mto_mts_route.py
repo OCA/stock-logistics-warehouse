@@ -149,7 +149,10 @@ class TestMtoMtsRoute(TransactionCase):
         self.uom = self.env['uom.uom'].browse(1)
         self.warehouse.mto_mts_management = True
         self.customer_loc = self.env.ref('stock.stock_location_customers')
-        self.product = self.env.ref('product.product_product_4')
+        self.product = self.env['product.product'].create({
+            'name': 'Test product',
+            'type': 'product',
+        })
         self.company_partner = self.env.ref('base.main_partner')
         self.group = self.env['procurement.group'].create({
             'name': 'test',
