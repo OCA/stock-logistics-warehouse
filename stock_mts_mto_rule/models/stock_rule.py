@@ -61,9 +61,11 @@ class StockRule(models.Model):
             else:
                 mts_qty = procurement.product_qty - needed_qty
                 procurement = procurement._replace(product_qty = mts_qty)
+                rule.procure_method = 'make_to_stock'
                 procurements = [[procurement,rule]]
                 getattr(self.mts_rule_id, '_run_%s' % rule.mts_rule_id.action)(procurements)
                 procurement = procurement._replace(product_qty = needed_qty)
+                rule.procure_method = 'make_to_order'
                 procurements = [[procurement,rule]]
                 getattr(self.mto_rule_id, '_run_%s' % rule.mto_rule_id.action)(procurements)
                 
