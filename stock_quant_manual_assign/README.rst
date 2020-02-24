@@ -23,7 +23,7 @@ Stock - Manual Quant Assignment
     :target: https://runbot.odoo-community.org/runbot/153/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module allows you to manually change the automatic quant selection.
 
@@ -78,6 +78,10 @@ Contributors
 
   * Jordi Ballester <jordi.ballester@eficent.com>
   * Lois Rilo <lois.rilo@eficent.com>
+
+* `PESOL <https://pesol.es>`_:
+
+  * Angel Moya <angel.moya@pesol.es>
 
 Maintainers
 ~~~~~~~~~~~

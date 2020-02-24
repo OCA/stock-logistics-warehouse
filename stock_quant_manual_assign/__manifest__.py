@@ -3,6 +3,7 @@
 # Copyright 2018 Fanha Giang
 # Copyright 2018 Tecnativa - Vicent Cubells
 # Copyright 2016-2018 Tecnativa - Pedro M. Baeza
+# Copyright 2020 PESOL - Angel Moya
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
@@ -22,6 +23,7 @@
     "data": [
         "wizard/assign_manual_quants_view.xml",
         "views/stock_move_view.xml",
+        "views/stock_picking_type_view.xml"
     ],
     "installable": True,
 }
