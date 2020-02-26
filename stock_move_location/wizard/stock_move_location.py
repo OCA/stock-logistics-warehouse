@@ -211,7 +211,7 @@ class StockMoveLocationWizard(models.TransientModel):
             # Apply the putaway strategy
             location_dest_id = (
                 self.apply_putaway_strategy
-                and self.destination_location_id.get_putaway_strategy(product).id
+                and self.destination_location_id._get_putaway_strategy(product).id
                 or self.destination_location_id.id
             )
             product_data.append(
