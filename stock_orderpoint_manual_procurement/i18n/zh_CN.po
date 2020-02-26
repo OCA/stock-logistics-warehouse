@@ -108,7 +108,7 @@ msgid "Minimum Inventory Rule"
 msgstr "最小库存规则"
 
 #. module: stock_orderpoint_manual_procurement
-#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:72
+#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:0
 #, python-format
 msgid "No reordering rule found!"
 msgstr "找不到重新订购规则！"
@@ -120,7 +120,6 @@ msgstr "计划日期"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_qty
-#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_qty
 msgid "Procure Recommendation"
 msgstr "获取推荐"
 
@@ -146,14 +145,13 @@ msgid "Quantity"
 msgstr "数量"
 
 #. module: stock_orderpoint_manual_procurement
-#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:70
+#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:0
 #, python-format
 msgid "Quantity must be positive."
 msgstr "数量必须为正数。"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_date
-#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_date
 msgid "Recommended Request Date"
 msgstr "引用请求日期"
 
