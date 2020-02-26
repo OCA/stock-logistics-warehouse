@@ -32,6 +32,15 @@ class TestsCommon(common.SavepointCase):
                 "company_id": cls.company.id,
             }
         )
+        cls.internal_loc_2_shelf = cls.location_obj.create(
+            {
+                "name": "Shelf",
+                "usage": "internal",
+                "active": True,
+                "company_id": cls.company.id,
+                "location_id": cls.internal_loc_2.id,
+            }
+        )
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
         cls.product_no_lots = product_obj.create(
             {"name": "Pineapple", "type": "product", "tracking": "none"}
@@ -94,3 +103,13 @@ class TestsCommon(common.SavepointCase):
                 "destination_location_id": destination_location.id,
             }
         )
+
+    def _create_putaway_for_product(self, product, loc_in, loc_out):
+        putaway = self.env["stock.putaway.rule"].create(
+            {
+                "product_id": product.id,
+                "location_in_id": loc_in.id,
+                "location_out_id": loc_out.id,
+            }
+        )
+        loc_in.write({"putaway_rule_ids": [(4, putaway.id, 0)]})
