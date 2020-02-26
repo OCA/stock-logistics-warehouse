@@ -117,3 +117,18 @@ class TestMoveLocation(TestsCommon):
         """Test that no error is raised from actions."""
         pick_type = self.env.ref("stock.picking_type_internal")
         pick_type.action_move_location()
+
+    def test_wizard_with_putaway_strategy(self):
+        """Test that Putaway strategies are being applied."""
+        self._create_putaway_for_product(
+            self.product_no_lots, self.internal_loc_2, self.internal_loc_2_shelf
+        )
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.apply_putaway_strategy = True
+        wizard.onchange_origin_location()
+        putaway_line = wizard.stock_move_location_line_ids.filtered(
+            lambda p: p.product_id == self.product_no_lots
+        )[0]
+        self.assertEqual(
+            putaway_line.destination_location_id, self.internal_loc_2_shelf
+        )
