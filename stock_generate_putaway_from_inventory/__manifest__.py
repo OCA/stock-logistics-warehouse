@@ -10,8 +10,6 @@
     "category": "Warehouse",
     "depends": ["stock_putaway_product"],
     "license": "AGPL-3",
-    "data": [
-        "views/stock_inventory.xml",
-    ],
-    'installable': True,
+    "data": ["views/stock_inventory.xml",],
+    "installable": True,
 }
