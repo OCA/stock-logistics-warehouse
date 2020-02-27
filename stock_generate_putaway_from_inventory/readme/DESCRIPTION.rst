@@ -1,0 +1,1 @@
+Generates Product Putaway Location from an inventory.

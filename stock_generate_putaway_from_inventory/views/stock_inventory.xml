@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.actions.server" id="generate_putaway_from_inventory_act">
+        <field name="name">Generate putaway per product</field>
+        <field name="model_id" ref="model_stock_inventory"/>
+        <field name="type">ir.actions.server</field>
+        <field name="condition">True</field>
+        <field name="code">
+            action = model.browse(env.context['active_ids']).generate_putaway_strategy()
+        </field>
+    </record>
+
+    <record model="ir.values" id="generate_putaway_from_inventory_act_values">
+        <field name="name">Generate putaway per product</field>
+        <field name="action_id" ref="generate_putaway_from_inventory_act" />
+        <field name="value" eval="'ir.actions.server,' + str(ref('generate_putaway_from_inventory_act'))" />
+        <field name="key">action</field>
+        <field name="model_id" ref="model_stock_inventory"/>
+        <field name="model">stock.inventory</field>
+        <field name="key2">client_action</field>
+    </record>
+
+</odoo>
