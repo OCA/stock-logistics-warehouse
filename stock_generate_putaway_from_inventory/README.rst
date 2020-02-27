@@ -13,13 +13,13 @@ Stock Generate Putaway from Inventory
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-akretion%2Fak--odoo--incubator-lightgray.png?logo=github
-    :target: https://github.com/akretion/ak-odoo-incubator/tree/10.0/stock_generate_putaway_from_inventory
-    :alt: akretion/ak-odoo-incubator
+.. |badge3| image:: https://img.shields.io/badge/github-oca%2Fstock--logistics--warehouse-lightgray.png?logo=github
+    :target: https://github.com/oca/stock-logistics-warehouse/tree/12.0/stock_generate_putaway_from_inventory
+    :alt: oca/stock-logistics-warehouse
 
 |badge1| |badge2| |badge3| 
 
-Generates Product Putaway Location from an inventory.
+Synchronize a Product Putaway Location from an inventory. Note that this module assumes that there is a one-to-one correspondence between the location and putaway strategy, and if the location currently has no putaway strategy, an error will be raised.
 
 **Table of contents**
 
@@ -29,28 +29,17 @@ Generates Product Putaway Location from an inventory.
 Usage
 =====
 
-Before using this module you should specify a putaway strategy on the stock location
-you want to generate putaway for. You can find similar instructions on the 
-stock_putaway_product module which is a dependency.
-
 From a validated stock adjustment, use action -> Generate putaway per product.
 
-Once this is done, the products of the stock adjustment without putaway locations 
-will have one of the strategy defined on the inventory's location.
-
-Known issues / Roadmap
-======================
-
-At the moment, the module only creates putaway locations and does not update
-the existing ones. It could be interesing to do so but can be destructive as well
+The end result is that the location's putaway strategy will be updated, so that all products (and their locations) from the inventory will show up on the putaway strategy.
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/akretion/ak-odoo-incubator/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/oca/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/akretion/ak-odoo-incubator/issues/new?body=module:%20stock_generate_putaway_from_inventory%0Aversion:%2010.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/oca/stock-logistics-warehouse/issues/new?body=module:%20stock_generate_putaway_from_inventory%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -65,11 +54,31 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-Pierrick Brun <pierrick.brun@akretion.com> (akretion.com)
+* Pierrick Brun <pierrick.brun@akretion.com>
+* David Beal <david.beal@akretion.com>
+* Sébastien Beau <sebastien.beau@akretion.com>
+* Kevin Khao <kevin.khao@akretion.com>
 
 Maintainers
 ~~~~~~~~~~~
 
-This module is part of the `akretion/ak-odoo-incubator <https://github.com/akretion/ak-odoo-incubator/tree/10.0/stock_generate_putaway_from_inventory>`_ project on GitHub.
+.. |maintainer-pierrickbrun| image:: https://github.com/pierrickbrun.png?size=40px
+    :target: https://github.com/pierrickbrun
+    :alt: pierrickbrun
+.. |maintainer-bealdav| image:: https://github.com/bealdav.png?size=40px
+    :target: https://github.com/bealdav
+    :alt: bealdav
+.. |maintainer-sebastienbeau| image:: https://github.com/sebastienbeau.png?size=40px
+    :target: https://github.com/sebastienbeau
+    :alt: sebastienbeau
+.. |maintainer-kevinkhao| image:: https://github.com/kevinkhao.png?size=40px
+    :target: https://github.com/kevinkhao
+    :alt: kevinkhao
+
+Current maintainers:
+
+|maintainer-pierrickbrun| |maintainer-bealdav| |maintainer-sebastienbeau| |maintainer-kevinkhao| 
+
+This module is part of the `oca/stock-logistics-warehouse <https://github.com/oca/stock-logistics-warehouse/tree/12.0/stock_generate_putaway_from_inventory>`_ project on GitHub.
 
 You are welcome to contribute.
