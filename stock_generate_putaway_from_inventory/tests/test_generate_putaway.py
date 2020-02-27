@@ -1,42 +1,80 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-18 Akretion
+# Copyright Akretion
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
+from odoo.exceptions import ValidationError
 
 
 class TestGeneratePutaway(TransactionCase):
-    """Test that the putaway locations are updated when the method is used"""
-
-    def test_generate(self):
-        """Test default methods"""
-        self.product_10 = self.env.ref("product.product_product_10")
-        self.product_25 = self.env.ref("product.product_product_25")
-        inventory = self.env.ref("stock.stock_inventory_0")
-        self.env["stock.inventory.line"].create(
+    def setUp(self):
+        super().setUp()
+        ref = self.env.ref
+        # demo data
+        self.inventory_location = ref("stock.stock_location_stock")
+        self.inventory = self.env["stock.inventory"].create(
             {
-                "product_id": self.product_25.id,
-                "product_uom_id": self.ref("product.product_uom_unit"),
-                "inventory_id": inventory.id,
-                "product_qty": 1.0,
-                "location_id": self.ref("stock.stock_location_components"),
+                "name": "example inventory",
+                "location_id": self.inventory_location.id,
             }
         )
-        inventory.generate_putaway_strategy()
-        self.assertEquals(
-            len(self.product_25.product_putaway_ids),
-            1,
-            "pas le bon nombre de putaway strategy créées",
+        self.inventory_line_1_product = ref("product.product_product_24")
+        self.inventory_line_1_location = ref("stock.stock_location_14")
+        self.inventory_line_1 = self.env["stock.inventory.line"].create(
+            {
+                "product_id": self.inventory_line_1_product.id,
+                "location_id": self.inventory_line_1_location.id,
+            }
         )
-        self.assertEquals(
-            self.product_10.product_putaway_ids.fixed_location_id.id,
-            self.ref("stock.stock_location_components"),
+        self.irrelevant_location = ref("stock.stock_location_customers")
+
+    def test_error_not_validated(self):
+        putaway = self.env["product.putaway"].create(
+            {"name": "Putaway example"}
         )
-        self.assertEquals(
-            self.product_10.product_putaway_ids.putaway_id.id,
-            self.ref("stock_putaway_product.product_putaway_per_product_wh"),
+        self.inventory.putaway_strategy_id = putaway
+        self.inventory.action_cancel_draft()
+        with self.assertRaises(ValidationError):
+            self.inventory.action_generate_putaway_strategy()
+
+    def test_error_location_has_no_putaway_strategy(self):
+        self.inventory_location.putaway_strategy_id = self.env[
+            "product.putaway"
+        ]
+        self.inventory.action_start()
+        self.inventory.action_validate()
+        with self.assertRaises(ValidationError):
+            self.inventory.action_generate_putaway_strategy()
+
+    def test_putaway_line_location_update(self):
+        putaway = self.env["product.putaway"].create(
+            {"name": "Putaway example"}
         )
-        self.assertEquals(
-            self.product_25.product_putaway_ids.fixed_location_id.id,
-            self.ref("stock.stock_location_14"),
+        putaway_line_1 = self.env["stock.fixed.putaway.strat"].create(
+            {
+                "putaway_id": putaway.id,
+                "fixed_location_id": self.irrelevant_location.id,
+                "product_id": self.inventory_line_1_product.id,
+            }
+        )
+        self.inventory_location.putaway_strategy_id = putaway
+        self.inventory.action_start()
+        self.inventory.action_validate()
+        self.inventory.action_generate_putaway_strategy()
+        self.assertEqual(
+            putaway_line_1.fixed_location_id, self.inventory_line_1_location
+        )
+
+    def test_putaway_line_location_create(self):
+        putaway = self.env["product.putaway"].create(
+            {"name": "Putaway example"}
+        )
+        self.inventory_location.putaway_strategy_id = putaway
+        self.inventory.action_start()
+        self.inventory.action_validate()
+        self.inventory.action_generate_putaway_strategy()
+        putaway_line = putaway.product_location_ids.filtered(
+            lambda r: r.product_id == self.inventory_line_1_product
+        )
+        self.assertEqual(
+            putaway_line.fixed_location_id, self.inventory_line_1_location
         )
