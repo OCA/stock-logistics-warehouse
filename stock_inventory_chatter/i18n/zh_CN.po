@@ -36,6 +36,22 @@ msgid "Inventory Done"
 msgstr "库存完成"
 
 #. module: stock_inventory_chatter
+#: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory__state
+msgid ""
+"States of the Inventory Adjustment:\n"
+"- Draft: Inventory not started.\n"
+"- In Progress: Inventory in execution.\n"
+"- Pending to Approve: Inventory have some discrepancies greater than the "
+"predefined threshold and it's waiting for the Control Manager approval.\n"
+"- Validated: Inventory Approved."
+msgstr ""
+"库存调整的状态：\n"
+"- 草稿：库存未开始。\n"
+"- 进行中：执行中的库存。\n"
+"- 待批准：库存有一些差异大于预定义的阈值，并且正在等待控制管理中心批准。\n"
+"- 已验证：库存已批准。"
+
+#. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__state
 msgid "Status"
 msgstr "状态"
@@ -77,20 +93,6 @@ msgstr "状态"
 
 #~ msgid "Specify Owner to focus your inventory on a particular Owner."
 #~ msgstr "指定所有者以便一个特定所有者专注于你的存货。"
-
-#~ msgid ""
-#~ "States of the Inventory Adjustment:\n"
-#~ "- Draft: Inventory not started.\n"
-#~ "- In Progress: Inventory in execution.\n"
-#~ "- Pending to Approve: Inventory have some discrepancies greater than the "
-#~ "predefined threshold and it's waiting for the Control Manager approval.\n"
-#~ "- Validated: Inventory Approved."
-#~ msgstr ""
-#~ "库存调整的状态：\n"
-#~ "- 草稿：库存未开始。\n"
-#~ "- 进行中：执行中的库存。\n"
-#~ "- 待批准：库存有一些差异大于预定义的阈值，并且正在等待控制管理中心批准。\n"
-#~ "- 已验证：库存已批准。"
 
 #~ msgid "Validated"
 #~ msgstr "已验证"
