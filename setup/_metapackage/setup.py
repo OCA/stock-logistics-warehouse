@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo13-addon-stock_change_qty_reason',
         'odoo13-addon-stock_demand_estimate',
         'odoo13-addon-stock_inventory_chatter',
+        'odoo13-addon-stock_inventory_discrepancy',
         'odoo13-addon-stock_inventory_exclude_sublocation',
         'odoo13-addon-stock_inventory_lockdown',
         'odoo13-addon-stock_move_location',
