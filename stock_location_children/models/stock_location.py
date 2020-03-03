@@ -19,9 +19,26 @@ class StockLocation(models.Model):
 
     @api.depends('child_ids', 'child_ids.children_ids')
     def _compute_children_ids(self):
+        query = """SELECT sub.id, ARRAY_AGG(sl2.id) AS children
+            FROM stock_location sl2,
+            (
+            SELECT id, parent_path
+            FROM stock_location sl
+            ) sub
+            WHERE sl2.parent_path LIKE sub.parent_path || '%%'
+            AND sl2.id != sub.id
+            AND sub.id IN %s
+            GROUP BY sub.id;
+        """
+        self.env.cr.execute(query, (tuple(self.ids),))
+        rows = self.env.cr.dictfetchall()
         for loc in self:
-            if not loc.child_ids.mapped('child_ids'):
-                all_children = loc.child_ids
+            all_ids = []
+            for row in rows:
+                if row.get('id') == loc.id:
+                    all_ids = row.get('children')
+                    break
+            if all_ids:
+                loc.children_ids = [(6, 0, all_ids)]
             else:
-                all_children = loc.child_ids | loc.child_ids.children_ids
-            loc.children_ids = all_children
+                loc.children_ids = [(5, 0, 0)]
