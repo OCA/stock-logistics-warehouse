@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo13-addon-stock_inventory_discrepancy',
         'odoo13-addon-stock_inventory_exclude_sublocation',
         'odoo13-addon-stock_inventory_lockdown',
+        'odoo13-addon-stock_location_position',
         'odoo13-addon-stock_move_location',
         'odoo13-addon-stock_orderpoint_manual_procurement',
         'odoo13-addon-stock_orderpoint_uom',
