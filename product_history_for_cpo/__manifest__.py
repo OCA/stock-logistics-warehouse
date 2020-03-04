@@ -8,8 +8,7 @@
     'name': 'Product History for CPO',
     'version': '12.0.1.0.0',
     'category': 'Product',
-    'description':
-"""
+    'description': """
 Give access to Product History information in CPO process
 =======================================================
 
