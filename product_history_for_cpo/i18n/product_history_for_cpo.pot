@@ -19,6 +19,7 @@ msgid "Computed Purchase Order Line"
 msgstr ""
 
 #. module: product_history_for_cpo
+#: model:ir.model,name:product_history_for_cpo.model_product_history
 #: model:ir.model.fields,field_description:product_history_for_cpo.field_computed_purchase_order_line__displayed_product_history_ids
 #: model_terms:ir.ui.view,arch_db:product_history_for_cpo.view_product_history_tree
 msgid "Product History"
@@ -38,10 +39,5 @@ msgstr ""
 #: model:ir.actions.act_window,name:product_history_for_cpo.action_view_history
 #: model_terms:ir.ui.view,arch_db:product_history_for_cpo.view_computed_purchase_order_inherit_form
 msgid "View Product History"
-msgstr ""
-
-#. module: product_history_for_cpo
-#: model:ir.model,name:product_history_for_cpo.model_product_history
-msgid "product.history"
 msgstr ""
 
