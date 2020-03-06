@@ -5,31 +5,31 @@ from odoo import models
 
 
 class StockRule(models.Model):
-    _inherit = 'stock.rule'
+    _inherit = "stock.rule"
 
-    def _prepare_purchase_order_line(self, product_id, product_qty,
-                                     product_uom, values, po, partner):
+    def _prepare_purchase_order_line(
+        self, product_id, product_qty, product_uom, values, po, partner
+    ):
         vals = super()._prepare_purchase_order_line(
-            product_id, product_qty, product_uom, values, po, partner)
+            product_id, product_qty, product_uom, values, po, partner
+        )
         # If the procurement was run directly by a reordering rule.
-        if 'orderpoint_id' in values:
-            vals['orderpoint_ids'] = [
-                (4, values['orderpoint_id'].id)]
+        if "orderpoint_id" in values:
+            vals["orderpoint_ids"] = [(4, values["orderpoint_id"].id)]
         # If the procurement was run by a stock move.
-        elif 'orderpoint_ids' in values:
-            vals['orderpoint_ids'] = [(4, o.id)
-                                      for o in values['orderpoint_ids']]
+        elif "orderpoint_ids" in values:
+            vals["orderpoint_ids"] = [(4, o.id) for o in values["orderpoint_ids"]]
         return vals
 
-    def _update_purchase_order_line(self, product_id, product_qty, product_uom,
-                                    values, line, partner):
+    def _update_purchase_order_line(
+        self, product_id, product_qty, product_uom, values, line, partner
+    ):
         vals = super()._update_purchase_order_line(
-            product_id, product_qty, product_uom, values, line, partner)
-        if 'orderpoint_id' in values:
-            vals['orderpoint_ids'] = [
-                (4, values['orderpoint_id'].id)]
+            product_id, product_qty, product_uom, values, line, partner
+        )
+        if "orderpoint_id" in values:
+            vals["orderpoint_ids"] = [(4, values["orderpoint_id"].id)]
         # If the procurement was run by a stock move.
-        elif 'orderpoint_ids' in values:
-            vals['orderpoint_ids'] = [(4, o.id)
-                                      for o in values['orderpoint_ids']]
+        elif "orderpoint_ids" in values:
+            vals["orderpoint_ids"] = [(4, o.id) for o in values["orderpoint_ids"]]
         return vals

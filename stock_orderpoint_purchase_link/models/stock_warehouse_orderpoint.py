@@ -5,10 +5,11 @@ from odoo import fields, models
 
 
 class StockWarehouseOrderpoint(models.Model):
-    _inherit = 'stock.warehouse.orderpoint'
+    _inherit = "stock.warehouse.orderpoint"
 
     purchase_line_ids = fields.Many2many(
-        comodel_name='purchase.order.line',
-        string='Purchase Order Lines', copy=False,
+        comodel_name="purchase.order.line",
+        string="Purchase Order Lines",
+        copy=False,
         readonly=True,
     )
