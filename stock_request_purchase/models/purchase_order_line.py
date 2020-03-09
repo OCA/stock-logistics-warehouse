@@ -1,4 +1,4 @@
-# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2017-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import _, api, fields, models
@@ -12,7 +12,6 @@ class PurchaseOrderLine(models.Model):
         comodel_name="stock.request", string="Stock Requests", copy=False
     )
 
-    @api.multi
     def _prepare_stock_moves(self, picking):
         res = super(PurchaseOrderLine, self)._prepare_stock_moves(picking)
 
