@@ -31,7 +31,6 @@ class StockRequestOrder(models.Model):
             req.purchase_line_ids = req.stock_request_ids.mapped("purchase_line_ids")
             req.purchase_count = len(req.purchase_ids)
 
-    @api.multi
     def action_view_purchase(self):
         action = self.env.ref("purchase.purchase_order_action_generic").read()[0]
         purchases = self.mapped("purchase_ids")
