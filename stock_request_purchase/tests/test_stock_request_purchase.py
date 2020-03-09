@@ -1,4 +1,4 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
 from odoo import fields
@@ -39,9 +39,7 @@ class TestStockRequestPurchase(common.TransactionCase):
             [self.main_company.id, self.company_2.id],
         )
         self.route_buy = self.warehouse.buy_pull_id.route_id
-        self.supplier = self.env["res.partner"].create(
-            {"name": "Supplier", "supplier": True}
-        )
+        self.supplier = self.env["res.partner"].create({"name": "Supplier"})
         self.product = self._create_product("SH", "Shoes", False)
 
         self.uom_dozen = self.env["uom.uom"].create(
@@ -63,7 +61,7 @@ class TestStockRequestPurchase(common.TransactionCase):
                     "name": name,
                     "password": "demo",
                     "login": name,
-                    "email": "@".join([name, "@test.com"]),
+                    "email": str(name) + "@test.com",
                     "groups_id": [(6, 0, group_ids)],
                     "company_ids": [(6, 0, company_ids)],
                 }
@@ -109,7 +107,9 @@ class TestStockRequestPurchase(common.TransactionCase):
         }
 
         order = (
-            self.env["stock.request.order"].sudo(self.stock_request_user).create(vals)
+            self.env["stock.request.order"]
+            .with_user(self.stock_request_user)
+            .create(vals)
         )
 
         order.action_confirm()
@@ -158,17 +158,19 @@ class TestStockRequestPurchase(common.TransactionCase):
             "location_id": self.warehouse.lot_stock_id.id,
         }
 
-        stock_request_1 = self.stock_request.sudo(self.stock_request_user).create(vals)
-        stock_request_2 = self.stock_request.sudo(self.stock_request_manager).create(
+        stock_request_1 = self.stock_request.with_user(self.stock_request_user).create(
             vals
         )
+        stock_request_2 = self.stock_request.with_user(
+            self.stock_request_manager
+        ).create(vals)
 
         stock_request_1.action_confirm()
         self.assertEqual(
             sum(stock_request_1.sudo().purchase_line_ids.mapped("product_qty")), 5
         )
 
-        stock_request_2.action_confirm()
+        stock_request_2.with_user(self.stock_request_manager).sudo().action_confirm()
 
         self.assertEqual(
             sum(stock_request_2.sudo().purchase_line_ids.mapped("product_qty")), 10
