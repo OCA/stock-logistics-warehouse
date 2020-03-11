@@ -1,0 +1,45 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_orderpoint_purchase_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2019-10-12 16:36+0000\n"
+"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.8\n"
+
+#. module: stock_orderpoint_purchase_link
+#: model:ir.model,name:stock_orderpoint_purchase_link.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "最小库存规则"
+
+#. module: stock_orderpoint_purchase_link
+#: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_purchase_order_line__orderpoint_ids
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_purchase_link.purchase_order_form
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_purchase_link.purchase_order_line_form2
+msgid "Orderpoints"
+msgstr "订货点"
+
+#. module: stock_orderpoint_purchase_link
+#: model:ir.model,name:stock_orderpoint_purchase_link.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "采购订单行"
+
+#. module: stock_orderpoint_purchase_link
+#: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint__purchase_line_ids
+#: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint_template__purchase_line_ids
+msgid "Purchase Order Lines"
+msgstr "采购订单行"
+
+#. module: stock_orderpoint_purchase_link
+#: model:ir.model,name:stock_orderpoint_purchase_link.model_stock_rule
+msgid "Stock Rule"
+msgstr "库存规则"
