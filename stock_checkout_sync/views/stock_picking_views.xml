@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <button name="action_confirm" position="before">
+                <field name="can_sync_to_checkout" invisible="1" />
+                <button
+                    name="open_checkout_sync_wizard"
+                    string="Checkout Sync"
+                    type="object"
+                    class="oe_highlight"
+                    groups="base.group_user"
+                    attrs="{'invisible': [('can_sync_to_checkout', '=', False)]}"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>

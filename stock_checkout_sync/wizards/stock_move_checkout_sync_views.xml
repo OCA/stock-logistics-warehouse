@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_move_checkout_sync" model="ir.ui.view">
+        <field name="name">stock.move.checkout.sync.form</field>
+        <field name="model">stock.move.checkout.sync</field>
+        <field name="arch" type="xml">
+            <form string="Checkout Sync">
+                <p>
+                    Use this assistant to select a checkout location for all the moves going to the same operation (including in other transfers).
+                    The destination location of the moves below will be updated with the selected location.
+                </p>
+                <field name="remaining_help" />
+                <group>
+                    <field name="show_skip_button" invisible="1" />
+                    <field name="picking_type_location_id" invisible="1" />
+                    <field
+                        name="location_id"
+                        options="{'no_open': True, 'no_create': True}"
+                        domain="[('id', 'child_of', picking_type_location_id)]"
+                        required="1"
+                    />
+                </group>
+                <group>
+                    <field name="move_ids" nolabel="1">
+                        <tree>
+                            <field name="product_id" />
+                            <field name="product_uom_qty" />
+                            <field
+                                name="product_uom"
+                                options="{'no_open': True, 'no_create': True}"
+                                string="Unit of Measure"
+                                groups="uom.group_uom"
+                                optional="hide"
+                            />
+                            <field name="picking_id" />
+                            <field
+                                name="location_id"
+                                options="{'no_create': True}"
+                                groups="stock.group_stock_multi_locations"
+                                optional="hide"
+                            />
+                            <field
+                                name="location_dest_id"
+                                options="{'no_create': True}"
+                                groups="stock.group_stock_multi_locations"
+                            />
+                            <field
+                                name="date_expected"
+                                string="Date Expected"
+                                optional="show"
+                            />
+                            <field name="state" optional="show" />
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button
+                        name="sync"
+                        string="Sync Destination"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="skip_to_next"
+                        attrs="{'invisible': [('show_skip_button', '=', False)]}"
+                        string="Skip"
+                        type="object"
+                    />
+                    <button string="Discard" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
