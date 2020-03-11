@@ -18,4 +18,13 @@ class StockPicking(models.Model):
             picking.need_release = any(move.need_release for move in picking.move_lines)
 
     def release_available_to_promise(self):
-        self.mapped("move_lines").release_available_to_promise()
+        # When the stock.picking form view is opened through the "Deliveries"
+        # button of a sale order, the latter sets values in the context such as
+        # default_picking_id default_origin, ... Clean up these values
+        # otherwise they make the release misbehave.
+        context = {
+            key: value
+            for key, value in self.env.context.items()
+            if not key.startswith("default_")
+        }
+        self.mapped("move_lines").with_context(context).release_available_to_promise()
