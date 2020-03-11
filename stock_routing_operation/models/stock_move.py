@@ -9,6 +9,8 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _action_assign(self):
+        # TODO use savepoint on the original assign instead of using
+        # unreserve
         super()._action_assign()
         if not self.env.context.get("exclude_apply_routing_operation"):
             self._apply_src_move_routing_operation()
@@ -23,7 +25,7 @@ class StockMove(models.Model):
         dest_moves._apply_move_location_dest_routing_operation()
 
     def _bypass_routing_operation_application(self, routing_type):
-        """ Override this method if you need to by pass the routing operation
+        """ Override this method if you need to bypass the routing operation
         logic for moves related characteristic.
         """
         if routing_type not in ("src", "dest"):
