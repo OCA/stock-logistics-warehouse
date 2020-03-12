@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ForgeFlow S.L. (https://www.forgeflow.com)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_stock_request_form" model="ir.ui.view">
+        <field name="name">stock.request.form</field>
+        <field name="model">stock.request</field>
+        <field name="inherit_id" ref="stock_request.view_stock_request_form" />
+        <field name="groups_id" eval="[(4, ref('mrp.group_mrp_user'))]" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <field name="production_ids" invisible="1" />
+                <button
+                    type="object"
+                    name="action_view_mrp_production"
+                    class="oe_stat_button"
+                    icon="fa-truck"
+                    attrs="{'invisible': [('production_count', '=', 0)]}"
+                >
+                    <field name="production_count" widget="statinfo" string="MOs" />
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
