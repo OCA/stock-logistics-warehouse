@@ -5,11 +5,11 @@ from odoo import api, models
 
 
 class StockRequestOrder(models.Model):
-    _inherit = 'stock.request.order'
+    _inherit = "stock.request.order"
 
     @api.multi
     def action_submit(self):
         for line in self.stock_request_ids:
             line.action_submit()
-        self.state = 'submitted'
+        self.state = "submitted"
         return True
