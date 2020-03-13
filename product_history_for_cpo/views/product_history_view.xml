@@ -6,7 +6,7 @@
             <field name="model">computed.purchase.order</field>
             <field name="arch" type="xml">
                 <field name="product_code_inv" position="before">
-                    <button name="view_history" string="View Product History" type="object" icon="fa-list fa-2x"/>
+                    <button name="view_history" string="View Product History" type="object" icon="fa-history fa-2x"/>
                 </field>
             </field>
         </record>
