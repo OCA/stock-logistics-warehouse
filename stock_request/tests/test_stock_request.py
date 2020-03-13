@@ -6,7 +6,10 @@ from odoo import fields, exceptions
 from collections import Counter
 from datetime import datetime
 
+from odoo import exceptions, fields
+from odoo.tests import common, tagged
 
+@tagged("-standard", "-at_install", "post_install")
 class TestStockRequest(common.TransactionCase):
 
     def setUp(self):
