@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <!--  To move quants directly from qants views  -->
-    <act_window id="wiz_stock_quant_location_action"
+    <act_window
+        id="wiz_stock_quant_location_action"
         name="Move to location..."
         res_model="wiz.stock.move.location"
         binding_model="stock.quant"
@@ -11,5 +11,4 @@
         target="new"
         groups="stock.group_stock_user"
     />
-
 </odoo>
