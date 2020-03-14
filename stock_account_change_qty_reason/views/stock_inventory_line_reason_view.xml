@@ -1,15 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2019 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_account_preset_reason" model="ir.ui.view">
         <field name="name">Preset Reason Accounts</field>
         <field name="model">stock.inventory.line.reason</field>
-        <field name="inherit_id" ref="stock_change_qty_reason.view_preset_reason"/>
+        <field name="inherit_id" ref="stock_change_qty_reason.view_preset_reason" />
         <field name="arch" type="xml">
             <field name="description" position="after">
-                <field name="account_reason_input_id" groups="account.group_account_user"/>
-                <field name="account_reason_output_id" groups="account.group_account_user"/>
+                <field
+                    name="account_reason_input_id"
+                    groups="account.group_account_user"
+                />
+                <field
+                    name="account_reason_output_id"
+                    groups="account.group_account_user"
+                />
             </field>
         </field>
     </record>
