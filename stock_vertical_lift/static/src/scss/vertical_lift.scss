@@ -27,7 +27,7 @@
         .o_shuttle_header_content {
             display: flex;
             flex-flow: row nowrap;
-            font-size: 2.0em;
+            font-size: 2em;
             flex: 1 0 auto;
             align-items: center;
             width: 33%;
@@ -93,7 +93,6 @@
                 border-radius: 10px;
             }
         }
-
     }
 
     .o_vlift_shuttle_menu {
@@ -106,7 +105,6 @@
     }
 
     .o_vlift_shuttle_popup {
-
         table tr {
             line-height: 3;
             font-size: 1.1em;
@@ -127,7 +125,6 @@
             font-size: 2em;
             text-transform: uppercase;
         }
-
     }
 
     footer .btn {
