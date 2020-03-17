@@ -7,9 +7,9 @@ from collections import Counter
 from datetime import datetime
 
 from odoo import exceptions, fields
-from odoo.tests import common, tagged
+from odoo.tests import common
 
-@tagged("-standard", "-at_install", "post_install")
+
 class TestStockRequest(common.TransactionCase):
 
     def setUp(self):
@@ -495,7 +495,7 @@ class TestStockRequestBase(TestStockRequest):
 
         # With no route found, should raise an error
         with self.assertRaises(exceptions.UserError):
-            stock_request.action_confirm()
+            stock_request.with_user(self.stock_request_manager).action_confirm()
 
     def test_create_request_01(self):
         expected_date = fields.Datetime.now()
@@ -521,24 +521,27 @@ class TestStockRequestBase(TestStockRequest):
         stock_request = order.stock_request_ids
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.action_confirm()
-        self.assertEqual(order.state, 'open')
-        self.assertEqual(stock_request.state, 'open')
+        order.with_user(self.stock_request_manager).action_confirm()
+        self.assertEqual(order.state, "open")
+        self.assertEqual(stock_request.state, "open")
 
-        self.assertEqual(len(order.sudo().picking_ids), 1)
-        self.assertEqual(len(order.sudo().move_ids), 1)
-        self.assertEqual(len(stock_request.sudo().picking_ids), 1)
-        self.assertEqual(len(stock_request.sudo().move_ids), 1)
-        self.assertEqual(stock_request.sudo().move_ids[0].location_dest_id,
-                         stock_request.location_id)
-        self.assertEqual(stock_request.qty_in_progress,
-                         stock_request.product_uom_qty)
-        self.env['stock.quant'].create({
-            'product_id': self.product.id,
-            'location_id': self.ressuply_loc.id,
-            'quantity': 5.0})
-        picking = stock_request.sudo().picking_ids[0]
-        picking.action_confirm()
+        self.assertEqual(len(order.picking_ids), 1)
+        self.assertEqual(len(order.move_ids), 1)
+        self.assertEqual(len(stock_request.picking_ids), 1)
+        self.assertEqual(len(stock_request.move_ids), 1)
+        self.assertEqual(
+            stock_request.move_ids[0].location_dest_id, stock_request.location_id
+        )
+        self.assertEqual(stock_request.qty_in_progress, stock_request.product_uom_qty)
+        self.env["stock.quant"].create(
+            {
+                "product_id": self.product.id,
+                "location_id": self.ressuply_loc.id,
+                "quantity": 5.0,
+            }
+        )
+        picking = stock_request.picking_ids[0]
+        picking.with_user(self.stock_request_manager).action_confirm()
         self.assertEqual(stock_request.qty_in_progress, 5.0)
         self.assertEqual(stock_request.qty_done, 0.0)
         picking.action_assign()
@@ -666,7 +669,7 @@ class TestStockRequestBase(TestStockRequest):
             self.stock_request_user).create(vals)
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.action_confirm()
+        order.with_user(self.stock_request_manager).action_confirm()
         stock_request = order.stock_request_ids
         self.assertEqual(len(order.sudo().picking_ids), 1)
         self.assertEqual(len(order.sudo().move_ids), 1)
@@ -697,9 +700,9 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(stock_request.state, 'draft')
 
         # Re-confirm. We expect new pickings to be created
-        order.action_confirm()
-        self.assertEqual(len(stock_request.sudo().picking_ids), 1)
-        self.assertEqual(len(stock_request.sudo().move_ids), 2)
+        order.with_user(self.stock_request_manager).action_confirm()
+        self.assertEqual(len(stock_request.picking_ids), 1)
+        self.assertEqual(len(stock_request.move_ids), 2)
 
     def test_view_actions(self):
         expected_date = fields.Datetime.now()

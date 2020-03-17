@@ -23,19 +23,22 @@ def link_existing_mos_to_stock_request(cr):
     stock_request_order_obj = env["stock.request.order"]
     stock_request_allocation_obj = env["stock.request.allocation"]
     mrp_production_obj = env["mrp.production"]
-    mos_with_sr = mrp_production_obj.search(
-        [("origin", "ilike", "SR/%"), ("state", "!=", "cancel")]
-    )
+    mos_with_sr = mrp_production_obj.search([("origin", "ilike", "SR/%")])
     logger.info("Linking %s MOs records" % len(mos_with_sr))
     for mo in mos_with_sr:
         stock_request = stock_request_obj.search([("name", "=", mo.origin)])
         if stock_request:
             # Link SR to MO
             mo.stock_request_ids = [(6, 0, stock_request.ids)]
-            if not stock_request_allocation_obj.search(
-                [("stock_request_id", "=", stock_request.id)]
+            logger.info("MO {} linked to SR {}".format(mo.name, stock_request.name))
+            if (
+                not stock_request_allocation_obj.search(
+                    [("stock_request_id", "=", stock_request.id)]
+                )
+                and mo.state != "cancel"
             ):
                 # Create allocation for finish move
+                logger.info("Create allocation for {}".format(stock_request.name))
                 mo.move_finished_ids[0].allocation_ids = [
                     (
                         0,
@@ -47,7 +50,7 @@ def link_existing_mos_to_stock_request(cr):
                     )
                     for request in mo.stock_request_ids
                 ]
-                logger.info("MO {} linked to SR {}".format(mo.name, stock_request.name))
+
             # Update allocations
             logger.info("Updating Allocations for SR %s" % stock_request.name)
             for ml in mo.finished_move_line_ids.filtered(
