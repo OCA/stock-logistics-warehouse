@@ -8,6 +8,7 @@ class TestStockOrderpointRoute(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         # common models
         cls.orderpoint_model = cls.env["stock.warehouse.orderpoint"]
@@ -99,7 +100,7 @@ class TestStockOrderpointRoute(common.SavepointCase):
     def _create_user(cls, name, group_ids, company_ids):
         return (
             cls.env["res.users"]
-            .with_context({"no_reset_password": True})
+            .with_context(no_reset_password=True)
             .create(
                 {
                     "name": name,
@@ -136,7 +137,7 @@ class TestStockOrderpointRoute(common.SavepointCase):
             "location_id": self.warehouse.lot_stock_id.id,
         }
 
-        orderpoint = self.orderpoint_model.sudo(self.stock_manager).create(vals)
+        orderpoint = self.orderpoint_model.with_user(self.stock_manager).create(vals)
         self.assertIn(self.route, orderpoint.route_ids)
         self.assertIn(self.route2, orderpoint.route_ids)
         orderpoint.route_id = self.route.id
@@ -161,7 +162,7 @@ class TestStockOrderpointRoute(common.SavepointCase):
             "location_id": self.warehouse.lot_stock_id.id,
         }
 
-        orderpoint = self.orderpoint_model.sudo(self.stock_manager).create(vals)
+        orderpoint = self.orderpoint_model.with_user(self.stock_manager).create(vals)
         self.assertIn(self.route, orderpoint.route_ids)
         self.assertIn(self.route2, orderpoint.route_ids)
         orderpoint.route_id = self.route2.id
