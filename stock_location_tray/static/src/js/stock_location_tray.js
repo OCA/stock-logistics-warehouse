@@ -1,50 +1,50 @@
-odoo.define('stock_location_tray.tray', function (require) {
+odoo.define("stock_location_tray.tray", function(require) {
     "use strict";
 
-    var basicFields = require('web.basic_fields');
-    var field_registry = require('web.field_registry');
+    var basicFields = require("web.basic_fields");
+    var field_registry = require("web.field_registry");
     var DebouncedField = basicFields.DebouncedField;
 
     /**
-    * Shows a canvas with the Tray's cells
-    *
-    * An action can be configured which is called when a cell is clicked.
-    * The action must be an action.multi, it will receive the x and y positions
-    * of the cell clicked (starting from 0). The action must be configured in
-    * the options of the field and be on the same model:
-    *
-    * <field name="tray_matrix"
-    *        widget="location_tray_matrix"
-    *        options="{'click_action': 'action_tray_matrix_click'}"
-    *        />
-    *
-    */
+     * Shows a canvas with the Tray's cells
+     *
+     * An action can be configured which is called when a cell is clicked.
+     * The action must be an action.multi, it will receive the x and y positions
+     * of the cell clicked (starting from 0). The action must be configured in
+     * the options of the field and be on the same model:
+     *
+     * <field name="tray_matrix"
+     *        widget="location_tray_matrix"
+     *        options="{'click_action': 'action_tray_matrix_click'}"
+     *        />
+     *
+     */
     var LocationTrayMatrixField = DebouncedField.extend({
-        className: 'o_field_location_tray_matrix',
-        tagName: 'canvas',
-        supportedFieldTypes: ['serialized'],
+        className: "o_field_location_tray_matrix",
+        tagName: "canvas",
+        supportedFieldTypes: ["serialized"],
         events: {
-            'click': '_onClick',
+            click: "_onClick",
         },
 
-        cellColorEmpty: '#ffffff',
-        cellColorNotEmpty: '#4e6bfd',
-        selectedColor: '#08f46b',
+        cellColorEmpty: "#ffffff",
+        cellColorNotEmpty: "#4e6bfd",
+        selectedColor: "#08f46b",
         selectedLineWidth: 5,
         globalAlpha: 0.8,
         cellPadding: 2,
 
-        init: function (parent, name, record, options) {
+        init: function(parent, name, record, options) {
             this._super.apply(this, arguments);
             this.nodeOptions = _.defaults(this.nodeOptions, {});
-            if ('clickAction' in (options || {})) {
+            if ("clickAction" in (options || {})) {
                 this.clickAction = options.clickAction;
             } else {
                 this.clickAction = this.nodeOptions.click_action;
             }
         },
 
-        isSet: function () {
+        isSet: function() {
             if (Object.keys(this.value).length === 0) {
                 return false;
             }
@@ -54,16 +54,16 @@ odoo.define('stock_location_tray.tray', function (require) {
             return this._super.apply(this, arguments);
         },
 
-        start: function () {
+        start: function() {
             // Setup resize events to redraw the canvas
             this._resizeDebounce = this._resizeDebounce.bind(this);
             this._resizePromise = null;
-            $(window).on('resize', this._resizeDebounce);
+            $(window).on("resize", this._resizeDebounce);
 
             var self = this;
-            return this._super.apply(this, arguments).then(function () {
+            return this._super.apply(this, arguments).then(function() {
                 if (self.clickAction) {
-                    self.$el.css('cursor', 'pointer');
+                    self.$el.css("cursor", "pointer");
                 }
                 // _super calls _render(), but the function
                 // resizeCanvasToDisplaySize would resize the canvas
@@ -75,7 +75,7 @@ odoo.define('stock_location_tray.tray', function (require) {
             });
         },
 
-        _onClick: function (ev) {
+        _onClick: function(ev) {
             if (!this.isSet()) {
                 return;
             }
@@ -94,8 +94,8 @@ odoo.define('stock_location_tray.tray', function (require) {
                 rows = cells.length;
 
             // We remove 1 to start counting from 0
-            var coordX = Math.ceil(clickX * cols / width) - 1,
-                coordY = Math.ceil(clickY * rows / height) - 1;
+            var coordX = Math.ceil((clickX * cols) / width) - 1,
+                coordY = Math.ceil((clickY * rows) / height) - 1;
             // If we click on the last pixel on the bottom or the right
             // we would get an offset index
             if (coordX >= cols) {
@@ -115,37 +115,36 @@ odoo.define('stock_location_tray.tray', function (require) {
                 model: this.model,
                 method: this.clickAction,
                 args: [[this.res_id], coordX, coordY],
-            })
-                .then(function (action) {
-                    self.trigger_up('do_action', {action: action});
-                });
+            }).then(function(action) {
+                self.trigger_up("do_action", {action: action});
+            });
         },
 
         /**
-        * Debounce the rendering on resize.
-        * It is useless to render on each resize event.
-        *
-        */
-        _resizeDebounce: function () {
+         * Debounce the rendering on resize.
+         * It is useless to render on each resize event.
+         *
+         */
+        _resizeDebounce: function() {
             clearTimeout(this._resizePromise);
             var self = this;
-            this._resizePromise = setTimeout(function () {
+            this._resizePromise = setTimeout(function() {
                 self._render();
             }, 20);
         },
 
-        destroy: function () {
-            $(window).off('resize', this._resizeDebounce);
+        destroy: function() {
+            $(window).off("resize", this._resizeDebounce);
             this._super.apply(this, arguments);
         },
 
         /**
-        * Render the widget only when it is in the DOM.
-        * We need the width and height of the widget to draw the canvas.
-        *
-        * @returns {Promise}
-        */
-        _render: function () {
+         * Render the widget only when it is in the DOM.
+         * We need the width and height of the widget to draw the canvas.
+         *
+         * @returns {Promise}
+         */
+        _render: function() {
             if (this._ready) {
                 return this._renderInDOM();
             }
@@ -153,14 +152,14 @@ odoo.define('stock_location_tray.tray', function (require) {
         },
 
         /**
-        * Resize the canvas width and height to the actual size.
-        * If we don't do that, it will automatically scale to the
-        * CSS size with blurry squares.
-        *
-        * @param {jQueryElement} canvas - the DOM canvas to draw
-        * @returns {Boolean}
-        */
-        resizeCanvasToDisplaySize: function (canvas) {
+         * Resize the canvas width and height to the actual size.
+         * If we don't do that, it will automatically scale to the
+         * CSS size with blurry squares.
+         *
+         * @param {jQueryElement} canvas - the DOM canvas to draw
+         * @returns {Boolean}
+         */
+        resizeCanvasToDisplaySize: function(canvas) {
             // Look up the size the canvas is being displayed
             var width = canvas.clientWidth;
             var height = canvas.clientHeight;
@@ -176,14 +175,14 @@ odoo.define('stock_location_tray.tray', function (require) {
         },
 
         /**
-        * Resize the canvas, clear it and redraw the cells
-        * Should be called only if the canvas is already in DOM
-        *
-        */
-        _renderInDOM: function () {
+         * Resize the canvas, clear it and redraw the cells
+         * Should be called only if the canvas is already in DOM
+         *
+         */
+        _renderInDOM: function() {
             this.canvas = this.$el[0];
             var canvas = this.canvas;
-            var ctx = canvas.getContext('2d');
+            var ctx = canvas.getContext("2d");
             this.resizeCanvasToDisplaySize(ctx.canvas);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.save();
@@ -195,15 +194,15 @@ odoo.define('stock_location_tray.tray', function (require) {
         },
 
         /**
-        * Draw the cells in the canvas.
-        *
-        * @param {jQueryElement} canvas - the DOM canvas to draw
-        * @param {Object} ctx - the canvas 2d context
-        * @param {List} cells - A 2-dimensional list of cells
-        * @param {List} selected - A list containing the position (x,y) of the
-        * selected cell (can be empty if no cell is selected)
-        */
-        _drawMatrix: function (canvas, ctx, cells, selected) {
+         * Draw the cells in the canvas.
+         *
+         * @param {jQueryElement} canvas - the DOM canvas to draw
+         * @param {Object} ctx - the canvas 2d context
+         * @param {List} cells - A 2-dimensional list of cells
+         * @param {List} selected - A list containing the position (x,y) of the
+         * selected cell (can be empty if no cell is selected)
+         */
+        _drawMatrix: function(canvas, ctx, cells, selected) {
             var colors = {
                 0: this.cellColorEmpty,
                 1: this.cellColorNotEmpty,
@@ -244,8 +243,10 @@ odoo.define('stock_location_tray.tray', function (require) {
                         fillHeight += padding;
                     }
                     ctx.fillRect(
-                        x * (w + padding), y * (h + padding),
-                        fillWidth, fillHeight,
+                        x * (w + padding),
+                        y * (h + padding),
+                        fillWidth,
+                        fillHeight
                     );
                     if (selected && selectedX === x && selectedY === y) {
                         ctx.globalAlpha = 1.0;
@@ -260,11 +261,9 @@ odoo.define('stock_location_tray.tray', function (require) {
         },
     });
 
-
-    field_registry.add('location_tray_matrix', LocationTrayMatrixField);
+    field_registry.add("location_tray_matrix", LocationTrayMatrixField);
 
     return {
         LocationTrayMatrixField: LocationTrayMatrixField,
     };
-
 });
