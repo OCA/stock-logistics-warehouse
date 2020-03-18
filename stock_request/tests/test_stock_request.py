@@ -559,7 +559,7 @@ class TestStockRequestBase(TestStockRequest):
 
         # With no route found, should raise an error
         with self.assertRaises(exceptions.UserError):
-            stock_request.action_confirm()
+            stock_request.with_user(self.stock_request_manager).action_confirm()
 
     def test_create_request_01(self):
         expected_date = fields.Datetime.now()
@@ -590,7 +590,7 @@ class TestStockRequestBase(TestStockRequest):
         stock_request = order.stock_request_ids
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.with_user(self.stock_request_user).action_confirm()
+        order.with_user(self.stock_request_manager).action_confirm()
         self.assertEqual(order.state, "open")
         self.assertEqual(stock_request.state, "open")
 
@@ -734,7 +734,7 @@ class TestStockRequestBase(TestStockRequest):
         order = self.request_order.with_user(self.stock_request_user).create(vals)
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.with_user(self.stock_request_user).action_confirm()
+        order.with_user(self.stock_request_manager).action_confirm()
         stock_request = order.stock_request_ids
         self.assertEqual(len(order.picking_ids), 1)
         self.assertEqual(len(order.move_ids), 1)
@@ -768,7 +768,7 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(stock_request.state, "draft")
 
         # Re-confirm. We expect new pickings to be created
-        order.with_user(self.stock_request_user).action_confirm()
+        order.with_user(self.stock_request_manager).action_confirm()
         self.assertEqual(len(stock_request.picking_ids), 1)
         self.assertEqual(len(stock_request.move_ids), 2)
 
