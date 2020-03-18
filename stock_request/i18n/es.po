@@ -96,11 +96,6 @@ msgid "Analytic accounting in Stock Requests"
 msgstr "Contabilidad analítica en solicitudes de stock"
 
 #. module: stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-msgid "Archived"
-msgstr "Archivado"
-
-#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_attachment_count
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_attachment_count
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_attachment_count
@@ -192,6 +187,7 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Done"
 msgstr "Hecho"
@@ -417,6 +413,7 @@ msgstr "Nombre"
 
 #. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_kanban_name_uniq
 msgid "Name must be unique"
 msgstr "El nombre debe ser único"
 
@@ -534,6 +531,7 @@ msgstr "El grupo de abastecimiento debe coincidir"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__product_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__product_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__product_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Product"
 msgstr "Producto"
 
@@ -672,6 +670,7 @@ msgstr "Usuario Responsable"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__route_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Route"
 msgstr "Ruta"
 
@@ -711,6 +710,7 @@ msgstr "Política de Entrega"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__state
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__state
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Status"
 msgstr "Estado"
 
@@ -902,6 +902,11 @@ msgid "This action only works in the context of products"
 msgstr "Esta acción solo funciona en el contexto de productos"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "To Do"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_picking
 msgid "Transfer"
 msgstr "Transferir"
@@ -1070,6 +1075,9 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
+
+#~ msgid "Archived"
+#~ msgstr "Archivado"
 
 #~ msgid "If checked new messages require your attention."
 #~ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
