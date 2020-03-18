@@ -94,11 +94,11 @@ class ProductProduct(models.Model):
             # Need by product (same product can be in many BOM lines/levels)
             exploded_components = exploded_boms[product.id]
             component_needs = product._get_components_needs(
-                exploded_components)
+                exploded_components, only_stockable=True)
+
             if not component_needs:
                 # The BoM has no line we can use
-                potential_qty = 0.0
-
+                potential_qty = -1.0
             else:
                 # Find the lowest quantity we can make with the stock at hand
                 components_potential_qty = min(
@@ -135,7 +135,7 @@ class ProductProduct(models.Model):
         return exploded_boms
 
     @api.model
-    def _get_components_needs(self, exploded_components):
+    def _get_components_needs(self, exploded_components, only_stockable=False):
         """ Return the needed qty of each compoments in the exploded_components
 
         :type exploded_components
@@ -144,6 +144,9 @@ class ProductProduct(models.Model):
         needs = Counter()
         for bom_component in exploded_components:
             component = bom_component[0].product_id
+            # ignore 'service' and 'consu' in BoM to set potential_qty=-1.0
+            if only_stockable and component.type != "product":
+                continue
             needs += Counter({component: bom_component[1]['qty']})
 
         return needs
