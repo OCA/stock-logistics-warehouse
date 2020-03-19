@@ -6,8 +6,7 @@
 from odoo import api, models
 
 
-class Product(models.Model):
-    """Subtract incoming qty from immediately_usable_qty"""
+class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     @api.multi
