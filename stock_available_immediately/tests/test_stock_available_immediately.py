@@ -1,6 +1,7 @@
 # Copyright 2014 Camptocamp, Akretion, Numérigraphe
 # Copyright 2016 Sodexis
 # Copyright 2019 Sergio Díaz <sergiodm.1989@gmail.com>
+# Copyright 2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
@@ -19,7 +20,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
         supplier_location = self.env.ref('stock.stock_location_suppliers')
         stock_location = self.env.ref('stock.stock_location_stock')
         customer_location = self.env.ref('stock.stock_location_customers')
-        uom_unit = self.env.ref('product.product_uom_unit')
+        uom_unit = self.env.ref('uom.product_uom_unit')
 
         # Create product template
         templateAB = templateObj.create({
