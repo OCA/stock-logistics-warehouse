@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record model="stock.location.tray.type" id="stock_location_tray_type_small_32x">
+        <field name="name">Small 32x</field>
+        <field name="code">B10804</field>
+        <field name="rows">4</field>
+        <field name="cols">8</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_small_16x">
+        <field name="name">Small 16x</field>
+        <field name="code">B20802</field>
+        <field name="rows">2</field>
+        <field name="cols">8</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_small_8x">
+        <field name="name">Small 8x</field>
+        <field name="code">B20402</field>
+        <field name="rows">2</field>
+        <field name="cols">4</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_small_16x_2">
+        <field name="name">Small 16x</field>
+        <field name="code">B40802</field>
+        <field name="rows">2</field>
+        <field name="cols">8</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_small_16x_3">
+        <field name="name">Small 16x</field>
+        <field name="code">B30404</field>
+        <field name="rows">4</field>
+        <field name="cols">4</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_large_32x">
+        <field name="name">Large 32x</field>
+        <field name="code">B20804</field>
+        <field name="rows">4</field>
+        <field name="cols">8</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_large_16x">
+        <field name="name">Large 16x</field>
+        <field name="code">B30802</field>
+        <field name="rows">2</field>
+        <field name="cols">8</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_large_8x">
+        <field name="name">Large 8x</field>
+        <field name="code">B30402</field>
+        <field name="rows">2</field>
+        <field name="cols">4</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_large_4x">
+        <field name="name">Large 4x</field>
+        <field name="code">B30401</field>
+        <field name="rows">1</field>
+        <field name="cols">4</field>
+    </record>
+    <record model="stock.location.tray.type" id="stock_location_tray_type_large_16x_2">
+        <field name="name">Large 16x</field>
+        <field name="code">B30404</field>
+        <field name="rows">4</field>
+        <field name="cols">4</field>
+    </record>
+</odoo>

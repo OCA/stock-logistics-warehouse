@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="stock_location_tray_demo" model="stock.location">
+        <field name="name">Tray</field>
+        <field name="barcode">TRAY</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="tray_type_id" ref="stock_location_tray_type_small_8x" />
+        <field name="usage">internal</field>
+    </record>
+    <!-- When the trays are created, they will create their 'cell' locations.
+         This method will add xmlids on them to be able to reference them in
+         other demo data and tests.
+    -->
+    <function model="stock.location" name="_create_tray_xmlids">
+        <function
+            eval="[[('cell_in_tray_type_id', '!=', False)]]"
+            model="stock.location"
+            name="search"
+        />
+        <value>stock_location_tray</value>
+    </function>
+</odoo>

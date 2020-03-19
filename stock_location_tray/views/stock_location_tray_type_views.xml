@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_location_tray_type_form" model="ir.ui.view">
+        <field name="name">stock.location.tray.type.form</field>
+        <field name="model">stock.location.tray.type</field>
+        <field name="arch" type="xml">
+            <form string="Location Tray Type">
+                <div class="oe_button_box" name="button_box">
+                    <button
+                        string="Locations"
+                        class="oe_stat_button"
+                        icon="fa-filter"
+                        name="open_locations"
+                        type="object"
+                    />
+                </div>
+                <widget
+                    name="web_ribbon"
+                    title="Archived"
+                    bg_color="bg-danger"
+                    attrs="{'invisible': [('active', '=', True)]}"
+                />
+                <label for="name" class="oe_edit_only" />
+                <h1>
+                    <field name="name" />
+                </h1>
+                <group>
+                    <group string="Tray Configuration" name="settings">
+                        <field name="active" invisible="1" />
+                        <field name="code" />
+                        <field name="rows" />
+                        <field name="cols" />
+                    </group>
+                    <group string="Sizes" name="size">
+                        <label for="width" />
+                        <div>
+                <field name="width" /> mm /
+                <field name="width_per_cell" /> mm per cell
+              </div>
+                        <label for="depth" />
+                        <div>
+                <field name="depth" /> mm /
+                <field name="depth_per_cell" /> mm per cell
+              </div>
+                        <field name="height" />
+                    </group>
+                    <group string="Disposition" name="disposition">
+                        <field
+                            name="tray_matrix"
+                            widget="location_tray_matrix"
+                            nolabel="1"
+                        />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="view_stock_location_tray_type_search" model="ir.ui.view">
+        <field name="name">stock.location.tray.type.search</field>
+        <field name="model">stock.location.tray.type</field>
+        <field name="arch" type="xml">
+            <search string="Location Tray Type">
+                <field name="name" />
+                <field name="code" />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="view_stock_location_tray_type_tree" model="ir.ui.view">
+        <field name="name">stock.location.tray.type</field>
+        <field name="model">stock.location.tray.type</field>
+        <field name="arch" type="xml">
+            <tree string="Location Tray Type">
+                <field name="name" />
+                <field name="code" />
+                <field name="rows" />
+                <field name="cols" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_stock_location_tray_type" model="ir.actions.act_window">
+        <field name="name">Location Tray Types</field>
+        <field name="res_model">stock.location.tray.type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="view_stock_location_tray_type_tree" />
+        <field name="search_view_id" ref="view_stock_location_tray_type_search" />
+        <field name="context" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+        Add a Location Tray Type
+        </p>
+            <p>
+        Define the number of rows and cols on a tray, depending of the boxes
+size.
+      </p>
+        </field>
+    </record>
+    <menuitem
+        action="action_stock_location_tray_type"
+        id="menu_stock_location_tray_type"
+        parent="stock.menu_warehouse_config"
+        sequence="10"
+    />
+</odoo>
