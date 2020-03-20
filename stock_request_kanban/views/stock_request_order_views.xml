@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="stock_request_order_form">
+        <field name="name">stock.request.order.form</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="%(stock_request_kanban.wizard_stock_request_order_kanban_action)d"
+                    type="action"
+                    icon="fa-barcode"
+                    string="Scan"
+                    states="draft"
+                    class="oe_read_only"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
