@@ -454,6 +454,32 @@ class TestPotentialQty(TransactionCase):
         )
 
         self.assertEqual(
-            {p1.id: 3.0, p2.id: 3.0, p3.id: 0.0},
+            {p1.id: -1.0, p2.id: 3.0, p3.id: 0.0},
             {p.id: p.potential_qty for p in products}
         )
+
+    def test_potential_quantity_service_and_stockable(self):
+        stockable_product = self.product_model.create(
+            {'name': 'Test Product', 'type': 'product'}
+        )
+        service_product = self.product_model.create(
+            {'name': 'Test PService', 'type': 'service'}
+        )
+
+        # stockable_product need one service_product
+        self.create_simple_bom(stockable_product, service_product)
+
+        self.assertEqual(stockable_product.potential_qty, -1.0)
+
+    def test_potential_quantity_consumable_and_stockable(self):
+        stockable_product = self.product_model.create(
+            {'name': 'Test Product', 'type': 'product'}
+        )
+        consumable_product = self.product_model.create(
+            {'name': 'Test PService', 'type': 'consu'}
+        )
+
+        # stockable_product need one consumable_product
+        self.create_simple_bom(stockable_product, consumable_product)
+
+        self.assertEqual(stockable_product.potential_qty, -1.0)
