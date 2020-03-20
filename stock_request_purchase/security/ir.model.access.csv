@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_request_purchase_user,stock.request purchase user,stock_request.model_stock_request,purchase.group_purchase_user,1,0,0,0
+access_stock_request_allocation_purchase_user,stock request allocation purchase user,stock_request.model_stock_request_allocation,purchase.group_purchase_user,1,0,0,0
