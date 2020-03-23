@@ -23,6 +23,14 @@ class StockRequestOrder(models.Model):
             # Otherwise the Stock Location of the Warehouse
             self.location_id = self.warehouse_id.lot_stock_id.id
 
+    @api.onchange('warehouse_id')
+    def _onchange_warehouse_id(self):
+        if self.direction:
+            self.direction = False
+        for stock_request in self.stock_request_ids:
+            if stock_request.route_id:
+                stock_request.route_id = False
+
     def change_childs(self):
         super().change_childs()
         if not self._context.get("no_change_childs", False):
