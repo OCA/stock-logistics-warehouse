@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo13-addon-stock_orderpoint_manual_procurement',
         'odoo13-addon-stock_orderpoint_move_link',
         'odoo13-addon-stock_orderpoint_purchase_link',
+        'odoo13-addon-stock_orderpoint_route',
         'odoo13-addon-stock_orderpoint_uom',
         'odoo13-addon-stock_removal_location_by_priority',
         'odoo13-addon-stock_request',
