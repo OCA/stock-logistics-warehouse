@@ -88,10 +88,9 @@
     <act_window
         name="Create Stock Demand Estimates"
         res_model="stock.demand.estimate.wizard"
-        src_model="stock.demand.estimate.sheet"
+        binding_model="stock.demand.estimate.sheet"
         view_mode="form"
         target="new"
-        key2="client_action_multi"
         id="stock_demand_estimate_wizard_action"
     />
     <menuitem

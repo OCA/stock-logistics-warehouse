@@ -5,8 +5,6 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
 
-from odoo.addons import decimal_precision as dp
-
 
 class StockDemandEstimateSheet(models.TransientModel):
     _name = "stock.demand.estimate.sheet"
@@ -126,7 +124,6 @@ class StockDemandEstimateSheet(models.TransientModel):
             "product_uom": line.product_id.uom_id.id,
         }
 
-    @api.multi
     def button_validate(self):
         res = []
         for line in self.line_ids:
@@ -154,16 +151,15 @@ class StockDemandEstimateSheetLine(models.TransientModel):
     _description = "Stock Demand Estimate Sheet Line"
 
     estimate_id = fields.Many2one(comodel_name="stock.demand.estimate")
-    date_range_id = fields.Many2one(comodel_name="date.range", string="Period",)
+    date_range_id = fields.Many2one(comodel_name="date.range", string="Period")
     location_id = fields.Many2one(
-        comodel_name="stock.location", string="Stock Location",
+        comodel_name="stock.location", string="Stock Location"
     )
-    product_id = fields.Many2one(comodel_name="product.product", string="Product",)
-    value_x = fields.Char(string="Period Name",)
-    value_y = fields.Char(string="Product Name",)
-    product_uom_qty = fields.Float(
-        string="Quantity", digits=dp.get_precision("Product UoM"),
-    )
+    product_id = fields.Many2one(comodel_name="product.product", string="Product")
+    value_x = fields.Char(string="Period Name")
+    value_y = fields.Char(string="Product Name")
+    product_uom = fields.Many2one(comodel_name="uom.uom", string="Unit of measure")
+    product_uom_qty = fields.Float(string="Quantity", digits="Product UoM")
 
 
 class DemandEstimateWizard(models.TransientModel):
@@ -200,7 +196,6 @@ class DemandEstimateWizard(models.TransientModel):
                 _("The start date cannot be later than the end date.")
             )
 
-    @api.multi
     def _prepare_demand_estimate_sheet(self):
         self.ensure_one()
         return {
@@ -210,7 +205,6 @@ class DemandEstimateWizard(models.TransientModel):
             "location_id": self.location_id.id,
         }
 
-    @api.multi
     def create_sheet(self):
         self.ensure_one()
         if not self.product_ids:
