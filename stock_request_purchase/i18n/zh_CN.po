@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_request_purchase
+# 	* stock_request_purchase
 #
 msgid ""
 msgstr ""
@@ -79,13 +79,16 @@ msgid "Stock Rule"
 msgstr "库存规则"
 
 #. module: stock_request_purchase
-#: code:addons/stock_request_purchase/models/purchase_order_line.py:31
+#: code:addons/stock_request_purchase/models/purchase_order_line.py:0
 #, python-format
-msgid "You cannot link a purchase order line to a stock request that belongs to another company."
+msgid ""
+"You cannot link a purchase order line to a stock request that belongs to "
+"another company."
 msgstr "您无法将采购订单行链接到属于另一家公司的库存请求。"
 
 #. module: stock_request_purchase
-#: code:addons/stock_request_purchase/models/stock_request.py:32
+#: code:addons/stock_request_purchase/models/stock_request.py:0
 #, python-format
-msgid "You have linked to a purchase order line that belongs to another company."
+msgid ""
+"You have linked to a purchase order line that belongs to another company."
 msgstr "您已链接到属于另一家公司的采购订单行。"
