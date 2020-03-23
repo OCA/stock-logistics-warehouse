@@ -3,15 +3,11 @@
 {
     "name": "Stock Demand Estimate Matrix",
     "summary": "Allows to create demand estimates.",
-    "version": "12.0.2.0.0",
+    "version": "13.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "depends": [
-        "stock_demand_estimate",
-        "web_widget_x2many_2d_matrix",
-        "date_range",
-    ],
+    "depends": ["stock_demand_estimate", "web_widget_x2many_2d_matrix", "date_range"],
     "data": [
         "views/stock_demand_estimate_view.xml",
         "views/date_range.xml",
