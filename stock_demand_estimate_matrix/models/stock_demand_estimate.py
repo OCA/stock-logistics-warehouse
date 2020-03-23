@@ -5,12 +5,10 @@ from odoo import api, fields, models
 
 
 class StockDemandEstimate(models.Model):
-    _inherit = 'stock.demand.estimate'
+    _inherit = "stock.demand.estimate"
 
     date_range_id = fields.Many2one(
-        comodel_name="date.range",
-        string="Estimating Period",
-        ondelete='restrict'
+        comodel_name="date.range", string="Estimating Period", ondelete="restrict"
     )
 
     @api.multi
@@ -19,8 +17,7 @@ class StockDemandEstimate(models.Model):
     )
     def _compute_dates(self):
         date_range_records = self.filtered(lambda r: r.date_range_id)
-        res = super(
-            StockDemandEstimate, self - date_range_records)._compute_dates()
+        res = super(StockDemandEstimate, self - date_range_records)._compute_dates()
         for rec in date_range_records:
             rec.date_from = rec.date_range_id.date_start
             rec.date_to = rec.date_range_id.date_end
@@ -32,9 +29,8 @@ class StockDemandEstimate(models.Model):
         date_range_records = self.filtered(lambda r: r.date_range_id)
         res = super(StockDemandEstimate, self - date_range_records).name_get()
         for rec in date_range_records:
-            name = "%s - %s - %s" % (
-                rec.date_range_id.name, rec.product_id.name,
-                rec.location_id.name,
+            name = "{} - {} - {}".format(
+                rec.date_range_id.name, rec.product_id.name, rec.location_id.name,
             )
             res.append((rec.id, name))
         return res
