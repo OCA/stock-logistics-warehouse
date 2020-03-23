@@ -1,93 +1,102 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
-
-    <record id="stock_demand_estimate_sheet_view_form"
-            model="ir.ui.view">
+    <record id="stock_demand_estimate_sheet_view_form" model="ir.ui.view">
         <field name="name">stock.demand.estimate.sheet.form</field>
         <field name="model">stock.demand.estimate.sheet</field>
         <field name="arch" type="xml">
             <form string="Stock Demand Estimate Sheet">
                 <group name="dates">
-                    <label for="date_start" string="Period"/>
-                    <div><field name="date_start" class="oe_inline"/> to <field name="date_end" class="oe_inline"/></div>
+                    <label for="date_start" string="Period" />
+                    <div><field name="date_start" class="oe_inline" /> to <field
+                            name="date_end"
+                            class="oe_inline"
+                        /></div>
                 </group>
                 <group>
                     <group name="attributes" colspan="2">
-                        <field name="date_range_type_id"/>
-                        <field name="location_id"/>
+                        <field name="date_range_type_id" />
+                        <field name="location_id" />
                     </group>
                 </group>
-                <div/>
-                <group name="estimated_quantity"
-                       string="Estimated quantity">
-                    <field name="line_ids" nolabel="1"
-                           widget="x2many_2d_matrix"
-                           field_x_axis="value_x"
-                           field_y_axis="value_y"
-                           field_value="product_uom_qty"
-                           x_axis_clickable="0"
-                           y_axis_clickable="0">
+                <div />
+                <group name="estimated_quantity" string="Estimated quantity">
+                    <field
+                        name="line_ids"
+                        nolabel="1"
+                        widget="x2many_2d_matrix"
+                        field_x_axis="value_x"
+                        field_y_axis="value_y"
+                        field_value="product_uom_qty"
+                        x_axis_clickable="0"
+                        y_axis_clickable="0"
+                    >
                         <tree>
-                            <field name="value_x"/>
-                            <field name="value_y"/>
-                            <field name="product_uom_qty"/>
+                            <field name="value_x" />
+                            <field name="value_y" />
+                            <field name="product_uom_qty" />
                         </tree>
                     </field>
                 </group>
                 <footer>
-                <button name="button_validate"
+                    <button
+                        name="button_validate"
                         type="object"
                         string="Validate"
-                        class="oe_highlight"/>
-                <button class="oe_link"
-                        special="cancel"
-                        string="Cancel"/>
+                        class="oe_highlight"
+                    />
+                    <button class="oe_link" special="cancel" string="Cancel" />
                 </footer>
             </form>
-      </field>
+        </field>
     </record>
-
-    <record id="demand_estimate_wizard_view_form"
-            model="ir.ui.view">
+    <record id="demand_estimate_wizard_view_form" model="ir.ui.view">
         <field name="name">stock.demand.estimate.wizard.form</field>
         <field name="model">stock.demand.estimate.wizard</field>
         <field name="arch" type="xml">
             <form string="Stock Demand Estimate Wizard">
                 <sheet>
                     <group name="dates">
-                        <label for="date_start" string="Period"/>
-                        <div><field name="date_start" class="oe_inline"/> to <field name="date_end" class="oe_inline"/></div>
+                        <label for="date_start" string="Period" />
+                        <div><field name="date_start" class="oe_inline" /> to <field
+                                name="date_end"
+                                class="oe_inline"
+                            /></div>
                     </group>
                     <group>
                         <group name="attributes">
-                            <field name="date_range_type_id"/>
-                            <field name="location_id"/>
+                            <field name="date_range_type_id" />
+                            <field name="location_id" />
                         </group>
                     </group>
-                    <div/>
+                    <div />
                     <group name="products" string="Products">
-                        <field name="product_ids" nolabel="1"/>
+                        <field name="product_ids" nolabel="1" />
                     </group>
                     <footer>
-                        <button name="create_sheet" string="Prepare"
-                                type="object"  class="oe_highlight"  /> or
+                        <button
+                            name="create_sheet"
+                            string="Prepare"
+                            type="object"
+                            class="oe_highlight"
+                        /> or
                         <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
                 </sheet>
             </form>
-      </field>
+        </field>
     </record>
-
-    <act_window name="Create Stock Demand Estimates"
+    <act_window
+        name="Create Stock Demand Estimates"
         res_model="stock.demand.estimate.wizard"
         src_model="stock.demand.estimate.sheet"
         view_mode="form"
         target="new"
         key2="client_action_multi"
-        id="stock_demand_estimate_wizard_action"/>
-
-    <menuitem id="stock_demand_estimate_wizard_menu"
-              parent="stock_demand_estimate.stock_demand_planning_menu"
-              action="stock_demand_estimate_wizard_action"/>
-
+        id="stock_demand_estimate_wizard_action"
+    />
+    <menuitem
+        id="stock_demand_estimate_wizard_menu"
+        parent="stock_demand_estimate.stock_demand_planning_menu"
+        action="stock_demand_estimate_wizard_action"
+    />
 </odoo>
