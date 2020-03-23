@@ -11,7 +11,6 @@ class DateRange(models.Model):
         string="Days between dates", compute="_compute_days", readonly=True,
     )
 
-    @api.multi
     @api.depends("date_start", "date_end")
     def _compute_days(self):
         for rec in self.filtered(lambda x: x.date_start and x.date_end):

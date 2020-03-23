@@ -28,14 +28,13 @@ class TestStockDemandEstimate(SavepointCase):
             {"name": "Month", "allow_overlap": False}
         )
 
-        generator = cls.env["date.range.generator"]
-        generator = generator.create(
+        generator = cls.env["date.range.generator"].create(
             {
                 "date_start": "1943-01-01",
                 "name_prefix": "1943-",
                 "type_id": cls.drt_monthly.id,
                 "duration_count": 1,
-                "unit_of_time": MONTHLY,
+                "unit_of_time": str(MONTHLY),
                 "count": 12,
             }
         )
@@ -176,7 +175,7 @@ class TestStockDemandEstimate(SavepointCase):
             {
                 "product_id": self.product_1.id,
                 "location_id": self.location.id,
-                "date_range_id": range.id,
+                "date_range_id": date_range.id,
                 "product_uom_qty": 100.0,
             }
         )
