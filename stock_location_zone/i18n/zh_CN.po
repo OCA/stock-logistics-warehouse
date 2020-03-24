@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_location_zone
+# 	* stock_location_zone
 #
 msgid ""
 msgstr ""
@@ -17,80 +17,33 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__area
-#: selection:stock.location,kind:0
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__area
 msgid "Area"
 msgstr "区域"
 
 #. module: stock_location_zone
-#: selection:stock.location,kind:0
+#: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
+msgid "Area location"
+msgstr ""
+
+#. module: stock_location_zone
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__bin
 msgid "Bin"
 msgstr "箱子"
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__posx
-msgid "Box (X)"
-msgstr "盒子（X）"
+#: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
+msgid "Group By"
+msgstr ""
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__posy
-msgid "Box (Y)"
-msgstr "盒子（Y）"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__posz
-msgid "Box (Z)"
-msgstr "盒子（Z）"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__code
-msgid "Code"
-msgstr "代码"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__corridor
-msgid "Corridor"
-msgstr "过道"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__create_uid
-msgid "Created by"
-msgstr "创建者"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__create_date
-msgid "Created on"
-msgstr "创建时间"
-
-#. module: stock_location_zone
-#: model_terms:ir.actions.act_window,help:stock_location_zone.action_picking_zone
-msgid "Define the picking zones of your warehouses"
-msgstr "定义仓库的拣货区域"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__display_name
-msgid "Display Name"
-msgstr "显示名称"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__location_name_format
-msgid "Format string that will compute the name of the location. Use location fields. Example: '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'"
-msgstr "格式字符串，用于计算位置名称。使用位置字段。例： '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__level
-msgid "Height on the shelf"
-msgstr "架子上的高度"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__rack
-msgid "House number"
-msgstr "门牌号码"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__id
-msgid "ID"
-msgstr "ID"
+#: model:ir.model.fields,help:stock_location_zone.field_stock_location__location_kind
+msgid ""
+"Group location according to their kinds: * Zone: locations that are flagged "
+"as being zones * Area: locations with children that are part of a zone * "
+"Bin: locations without children that are part of a zone * Stock: internal "
+"locations whose parent is a view * Other: any other location"
+msgstr ""
 
 #. module: stock_location_zone
 #: model:ir.model,name:stock_location_zone.model_stock_location
@@ -98,103 +51,149 @@ msgid "Inventory Locations"
 msgstr "库存位置"
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__kind
-msgid "Kind"
-msgstr "种类"
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__is_zone
+#, fuzzy
+#| msgid "Inventory Locations"
+msgid "Is a Zone Location?"
+msgstr "库存位置"
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone____last_update
-msgid "Last Modified on"
-msgstr "最后修改时间"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__write_uid
-msgid "Last Updated by"
-msgstr "最后更新者"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__write_date
-msgid "Last Updated on"
-msgstr "最后更新时间"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__level
-msgid "Level"
-msgstr "层级"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__location_name_format
-msgid "Location Name Format"
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__area_location_id
+#, fuzzy
+#| msgid "Location Name Format"
+msgid "Location Area"
 msgstr "位置名称格式"
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__name
-msgid "Name"
-msgstr "名称"
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__location_kind
+#: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
+msgid "Location Kind"
+msgstr ""
 
 #. module: stock_location_zone
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__posx
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__posy
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__posz
-msgid "Optional localization details, for information purpose only"
-msgstr "可选的本地化详细信息，仅供参考"
-
-#. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__picking_type_id
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_picking_zone__picking_type_id
-msgid "Pick Type"
-msgstr "拣货类型"
-
-#. module: stock_location_zone
-#: selection:stock.location,kind:0
-msgid "Picking Zone"
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__zone_location_id
+#, fuzzy
+#| msgid "Picking Zone"
+msgid "Location Zone"
 msgstr "拣货区域"
 
 #. module: stock_location_zone
-#: model:ir.actions.act_window,name:stock_location_zone.action_picking_zone
-#: model:ir.ui.menu,name:stock_location_zone.picking_zone_menu
-#: model_terms:ir.ui.view,arch_db:stock_location_zone.picking_zone_view_filter
-#: model_terms:ir.ui.view,arch_db:stock_location_zone.picking_zone_view_tree
-msgid "Picking Zones"
-msgstr "拣货区域"
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__stock
+msgid "Main Stock"
+msgstr ""
 
 #. module: stock_location_zone
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__picking_type_id
-#: model:ir.model.fields,help:stock_location_zone.field_stock_picking_zone__picking_type_id
-msgid "Picking type for operations from this location"
-msgstr "从此位置进行操作的拣货类型"
+#: model:ir.model.fields,help:stock_location_zone.field_stock_location__is_zone
+msgid "Mark to define this location as a zone"
+msgstr ""
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__picking_zone_id
-msgid "Picking zone"
-msgstr "拣货区域"
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__other
+msgid "Other"
+msgstr ""
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__rack
-msgid "Rack"
-msgstr "架子"
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__zone
+msgid "Zone"
+msgstr ""
 
 #. module: stock_location_zone
-#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__row
-msgid "Row"
-msgstr "行"
+#: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
+#, fuzzy
+#| msgid "Inventory Locations"
+msgid "Zone location"
+msgstr "库存位置"
 
-#. module: stock_location_zone
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__row
-msgid "Side in the street"
-msgstr "在过道上"
+#~ msgid "Box (X)"
+#~ msgstr "盒子（X）"
 
-#. module: stock_location_zone
-#: model:ir.model,name:stock_location_zone.model_stock_picking_zone
-msgid "Stock Picking Zone"
-msgstr "拣货区域"
+#~ msgid "Box (Y)"
+#~ msgstr "盒子（Y）"
 
-#. module: stock_location_zone
-#: model:ir.model.fields,help:stock_location_zone.field_stock_location__corridor
-msgid "Street"
-msgstr "过道"
+#~ msgid "Box (Z)"
+#~ msgstr "盒子（Z）"
 
-#. module: stock_location_zone
-#: sql_constraint:stock.picking.zone:0
-msgid "The picking zone code must be unique"
-msgstr "拣货区域代码必须唯一"
+#~ msgid "Code"
+#~ msgstr "代码"
+
+#~ msgid "Corridor"
+#~ msgstr "过道"
+
+#~ msgid "Created by"
+#~ msgstr "创建者"
+
+#~ msgid "Created on"
+#~ msgstr "创建时间"
+
+#~ msgid "Define the picking zones of your warehouses"
+#~ msgstr "定义仓库的拣货区域"
+
+#~ msgid "Display Name"
+#~ msgstr "显示名称"
+
+#~ msgid ""
+#~ "Format string that will compute the name of the location. Use location "
+#~ "fields. Example: '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'"
+#~ msgstr ""
+#~ "格式字符串，用于计算位置名称。使用位置字段。例： '{area}-{corridor:0>2}."
+#~ "{rack:0>3}.{level:0>2}'"
+
+#~ msgid "Height on the shelf"
+#~ msgstr "架子上的高度"
+
+#~ msgid "House number"
+#~ msgstr "门牌号码"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Kind"
+#~ msgstr "种类"
+
+#~ msgid "Last Modified on"
+#~ msgstr "最后修改时间"
+
+#~ msgid "Last Updated by"
+#~ msgstr "最后更新者"
+
+#~ msgid "Last Updated on"
+#~ msgstr "最后更新时间"
+
+#~ msgid "Level"
+#~ msgstr "层级"
+
+#~ msgid "Name"
+#~ msgstr "名称"
+
+#~ msgid "Optional localization details, for information purpose only"
+#~ msgstr "可选的本地化详细信息，仅供参考"
+
+#~ msgid "Pick Type"
+#~ msgstr "拣货类型"
+
+#~ msgid "Picking Zones"
+#~ msgstr "拣货区域"
+
+#~ msgid "Picking type for operations from this location"
+#~ msgstr "从此位置进行操作的拣货类型"
+
+#~ msgid "Picking zone"
+#~ msgstr "拣货区域"
+
+#~ msgid "Rack"
+#~ msgstr "架子"
+
+#~ msgid "Row"
+#~ msgstr "行"
+
+#~ msgid "Side in the street"
+#~ msgstr "在过道上"
+
+#~ msgid "Stock Picking Zone"
+#~ msgstr "拣货区域"
+
+#~ msgid "Street"
+#~ msgstr "过道"
+
+#~ msgid "The picking zone code must be unique"
+#~ msgstr "拣货区域代码必须唯一"
