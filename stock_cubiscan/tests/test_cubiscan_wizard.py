@@ -32,8 +32,8 @@ class TestCubiscanWizard(SavepointCase):
         cls.cs_wizard = cls.env["cubiscan.wizard"]
         PackType = cls.env["product.packaging.type"]
         pack_type_data = [
-            ("unit", 1, 0, 0),
-            ("internal", 2, 1, 0),
+            ("unit", 2, 0, 0),
+            ("internal", 3, 1, 0),
             ("retail", 10, 1, 1),
             ("transport", 20, 1, 1),
             ("pallet", 30, 1, 1),
