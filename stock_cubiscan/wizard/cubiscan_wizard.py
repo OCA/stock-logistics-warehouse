@@ -150,7 +150,9 @@ class CubiscanWizardLine(models.TransientModel):
         store=False,
     )
     barcode = fields.Char("GTIN")
-    packaging_id = fields.Many2one("product.packaging", readonly=True)
+    packaging_id = fields.Many2one(
+        "product.packaging", string="Packaging (rel)", readonly=True
+    )
     packaging_type_id = fields.Many2one(
         "product.packaging.type", readonly=True, required=True
     )
