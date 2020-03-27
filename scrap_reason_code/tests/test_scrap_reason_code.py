@@ -31,7 +31,7 @@ class StockScrap(TransactionCase):
             }
         )
 
-        self.reason_code = self.env["reason.code"].create(
+        self.reason_code = self.env["scrap.reason.code"].create(
             {
                 "name": "DM300",
                 "description": "Product is damage",
