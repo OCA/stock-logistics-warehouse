@@ -5,8 +5,8 @@
 from odoo import fields, models
 
 
-class ReasonCode(models.Model):
-    _name = "reason.code"
+class ScrapReasonCode(models.Model):
+    _name = "scrap.reason.code"
     _description = "Reason Code"
 
     name = fields.Char("Code", required=True)
