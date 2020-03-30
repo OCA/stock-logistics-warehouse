@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 13:47+0000\n"
-"PO-Revision-Date: 2020-02-26 13:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,14 +24,14 @@ msgid "Inventory"
 msgstr ""
 
 #. module: stock_generate_putaway_from_inventory
-#: code:addons/stock_generate_putaway_from_inventory/models/stock_inventory.py:29
+#: code:addons/stock_generate_putaway_from_inventory/models/stock_inventory.py:53
 #, python-format
-msgid "Some inventories are not validated. Please validate the following inventories: "
+msgid "Inventory location doesn't have a putaway strategy. Please set a putaway strategy on the inventory's location."
 msgstr ""
 
 #. module: stock_generate_putaway_from_inventory
-#: code:addons/stock_generate_putaway_from_inventory/models/stock_inventory.py:22
+#: code:addons/stock_generate_putaway_from_inventory/models/stock_inventory.py:45
 #, python-format
-msgid "Some locations don't have a putaway strategy. Please set a putaway strategy for the locations: "
+msgid "Please validate the inventory before generating the putaway strategy."
 msgstr ""
 
