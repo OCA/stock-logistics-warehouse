@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo13-addon-stock_account_change_qty_reason',
         'odoo13-addon-stock_available_unreserved',
         'odoo13-addon-stock_change_qty_reason',
+        'odoo13-addon-stock_cubiscan',
         'odoo13-addon-stock_demand_estimate',
         'odoo13-addon-stock_demand_estimate_matrix',
         'odoo13-addon-stock_inventory_chatter',
