@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_cubiscan_device_form">
+        <field name="name">cubiscan.device.form</field>
+        <field name="model">cubiscan.device</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        type="object"
+                        name="open_wizard"
+                        string="Wizard"
+                        class="oe_highlight"
+                    />
+                    <button
+                        type="object"
+                        name="test_device"
+                        string="Test Device"
+                        attrs="{'invisible': [('id','=',False)]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <field name="id" invisible="1" />
+                    <group>
+                        <group name="cubiscan">
+                            <field name="name" />
+                            <field name="device_address" />
+                            <field name="port" />
+                            <field name="timeout" />
+                            <field name="warehouse_id" />
+                        </group>
+                        <group />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_cubiscan_device_tree">
+        <field name="name">cubiscan.device.tree</field>
+        <field name="model">cubiscan.device</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-warning="state == 'not_ready'"
+                decoration-success="state == 'ready'"
+            >
+                <field name="name" />
+                <field name="device_address" />
+                <field name="port" />
+                <field name="timeout" />
+                <field name="warehouse_id" />
+                <field name="state" invisible="1" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_cubiscan_device_form" model="ir.actions.act_window">
+        <field name="name">CubiScan Devices</field>
+        <field name="res_model">cubiscan.device</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        action="action_cubiscan_device_form"
+        id="menu_action_cubiscan_device_form"
+        parent="stock.menu_warehouse_config"
+        sequence="2"
+    />
+</odoo>
