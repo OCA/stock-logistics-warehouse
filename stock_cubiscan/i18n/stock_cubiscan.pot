@@ -1,0 +1,288 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_cubiscan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_cubiscan
+#: code:addons/stock_cubiscan/wizard/cubiscan_wizard.py:0
+#, python-format
+msgid "Barcode"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard___barcode_scanned
+msgid "Barcode Scanned"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model_terms:ir.ui.view,arch_db:stock_cubiscan.view_cubiscan_wizard
+msgid "Close"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__create_uid
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__create_uid
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__create_date
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__create_date
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model_terms:ir.ui.view,arch_db:stock_cubiscan.view_cubiscan_wizard
+msgid "CubiScan"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.actions.act_window,name:stock_cubiscan.action_cubiscan_device_form
+#: model:ir.ui.menu,name:stock_cubiscan.menu_action_cubiscan_device_form
+msgid "CubiScan Devices"
+msgstr ""
+
+#. module: stock_cubiscan
+#: code:addons/stock_cubiscan/models/cubiscan.py:0
+#, python-format
+msgid "CubiScan Wizard"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model,name:stock_cubiscan.model_cubiscan_device
+msgid "Cubiscan Device"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_stock_warehouse__cubiscan_device_ids
+msgid "Cubiscan Devices"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model,name:stock_cubiscan.model_cubiscan_wizard
+msgid "Cubiscan Wizard"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model,name:stock_cubiscan.model_cubiscan_wizard_line
+msgid "Cubiscan Wizard Line"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__device_id
+msgid "Device"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__device_address
+msgid "Device IP Address"
+msgstr ""
+
+#. module: stock_cubiscan
+#: code:addons/stock_cubiscan/models/cubiscan.py:0
+#, python-format
+msgid ""
+"Device is not ready. Please use the 'Test' button before using the device."
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__display_name
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__display_name
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model_terms:ir.ui.view,arch_db:stock_cubiscan.view_cubiscan_wizard
+msgid "Fullscreen"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__barcode
+msgid "GTIN"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__height
+msgid "Height (mm)"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__id
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__id
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.constraint,message:stock_cubiscan.constraint_product_packaging_product_packaging_type_unique
+msgid ""
+"It is forbidden to have different packagings with the same type for a given "
+"product."
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device____last_update
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard____last_update
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__write_uid
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__write_uid
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__write_date
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__write_date
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__lngth
+msgid "Length (mm)"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__line_ids
+msgid "Line"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields.selection,name:stock_cubiscan.selection__cubiscan_device__state__not_ready
+msgid "Not Ready"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__name
+msgid "Packaging"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__packaging_id
+msgid "Packaging (rel)"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__packaging_type_id
+msgid "Packaging Type"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__port
+msgid "Port"
+msgstr ""
+
+#. module: stock_cubiscan
+#: code:addons/stock_cubiscan/models/cubiscan.py:0
+#, python-format
+msgid "Port must be in range 1-65535"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model,name:stock_cubiscan.model_product_packaging
+msgid "Product Packaging"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__qty
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields.selection,name:stock_cubiscan.selection__cubiscan_device__state__ready
+msgid "Ready"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__required
+msgid "Required"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model_terms:ir.ui.view,arch_db:stock_cubiscan.view_cubiscan_wizard
+msgid "Save"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__state
+msgid "State"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model_terms:ir.ui.view,arch_db:stock_cubiscan.view_cubiscan_device_form
+msgid "Test Device"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__timeout
+msgid "Timeout"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,help:stock_cubiscan.field_cubiscan_device__timeout
+msgid "Timeout in seconds"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,help:stock_cubiscan.field_cubiscan_wizard___barcode_scanned
+msgid "Value of the last barcode scanned."
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__volume
+msgid "Volume (m³)"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model,name:stock_cubiscan.model_stock_warehouse
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device__warehouse_id
+msgid "Warehouse"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__max_weight
+msgid "Weight (kg)"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__width
+msgid "Width (mm)"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__wizard_id
+#: model_terms:ir.ui.view,arch_db:stock_cubiscan.view_cubiscan_device_form
+msgid "Wizard"
+msgstr ""
