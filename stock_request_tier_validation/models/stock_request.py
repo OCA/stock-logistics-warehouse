@@ -1,4 +1,4 @@
-# Copyright 2019 Eficent Business and IT Consulting Services S.L.
+# Copyright 2019-2020 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, models
 
@@ -11,6 +11,6 @@ class StockRequest(models.Model):
 
     @api.model
     def _get_under_validation_exceptions(self):
-        res = super(StockRequest, self)._get_under_validation_exceptions()
+        res = super()._get_under_validation_exceptions()
         res.append("route_id")
         return res
