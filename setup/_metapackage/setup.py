@@ -34,6 +34,7 @@ setuptools.setup(
         'odoo13-addon-stock_request',
         'odoo13-addon-stock_request_kanban',
         'odoo13-addon-stock_request_purchase',
+        'odoo13-addon-stock_request_tier_validation',
         'odoo13-addon-stock_secondary_unit',
         'odoo13-addon-stock_warehouse_calendar',
         'odoo13-addon-stock_warehouse_orderpoint_stock_info',
