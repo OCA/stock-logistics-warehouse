@@ -14,60 +14,60 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__name
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__name
 msgid "Code"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__create_uid
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__create_date
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__description
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__description
 msgid "Description"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__display_name
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__id
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__id
 msgid "ID"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code____last_update
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__write_uid
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__write_date
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model,name:scrap_reason_code.model_reason_code
+#: model:ir.model,name:scrap_reason_code.model_scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__reason_code_id
 #: model_terms:ir.ui.view,arch_db:scrap_reason_code.stock_reason_code_form
-#: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_reason_code_form
+#: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_scrap_reason_code_form
 msgid "Reason Code"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_reason_code_list
+#: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_scrap_reason_code_list
 msgid "Reason Codes"
 msgstr ""
 
@@ -82,14 +82,14 @@ msgid "Scrap"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_reason_code__location_id
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__location_id
 #: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__scrap_location_id
 msgid "Scrap Location"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model:ir.actions.act_window,name:scrap_reason_code.open_view_reason_code_form
-#: model:ir.ui.menu,name:scrap_reason_code.menu_view_reason_code_form
+#: model:ir.actions.act_window,name:scrap_reason_code.open_view_scrap_reason_code_form
+#: model:ir.ui.menu,name:scrap_reason_code.menu_view_scrap_reason_code_form
 msgid "Scrap Reason Codes"
 msgstr ""
 
