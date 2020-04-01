@@ -9,14 +9,11 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.float_utils import float_compare
 
-from odoo.addons import decimal_precision as dp
-
 
 class AssignManualQuants(models.TransientModel):
     _name = "assign.manual.quants"
     _description = "Assign Manual Quants"
 
-    @api.multi
     @api.constrains("quants_lines")
     def _check_qty(self):
         precision_digits = self.env["decimal.precision"].precision_get(
@@ -44,19 +41,18 @@ class AssignManualQuants(models.TransientModel):
     lines_qty = fields.Float(
         string="Reserved qty",
         compute="_compute_qties",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
     )
     move_qty = fields.Float(
         string="Remaining qty",
         compute="_compute_qties",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
     )
     quants_lines = fields.One2many(
         "assign.manual.quants.lines", "assign_wizard", string="Quants"
     )
     move_id = fields.Many2one(comodel_name="stock.move", string="Move",)
 
-    @api.multi
     def assign_quants(self):
         move = self.move_id
         move._do_unreserve()
@@ -82,14 +78,15 @@ class AssignManualQuants(models.TransientModel):
         )
         quants_lines = []
         for quant in available_quants:
-            line = {}
-            line["quant_id"] = quant.id
-            line["on_hand"] = quant.quantity
-            line["location_id"] = quant.location_id.id
-            line["lot_id"] = quant.lot_id.id
-            line["package_id"] = quant.package_id.id
-            line["owner_id"] = quant.owner_id.id
-            line["selected"] = False
+            line = {
+                "quant_id": quant.id,
+                "on_hand": quant.quantity,
+                "location_id": quant.location_id.id,
+                "lot_id": quant.lot_id.id,
+                "package_id": quant.package_id.id,
+                "owner_id": quant.owner_id.id,
+                "selected": False,
+            }
             move_lines = move.move_line_ids.filtered(
                 lambda ml: (
                     ml.location_id == quant.location_id
@@ -120,11 +117,7 @@ class AssignManualQuantsLines(models.TransientModel):
         ondelete="cascade",
     )
     quant_id = fields.Many2one(
-        comodel_name="stock.quant",
-        string="Quant",
-        required=True,
-        ondelete="cascade",
-        oldname="quant",
+        comodel_name="stock.quant", string="Quant", required=True, ondelete="cascade",
     )
     location_id = fields.Many2one(
         comodel_name="stock.location",
@@ -152,15 +145,11 @@ class AssignManualQuantsLines(models.TransientModel):
     )
     # This is not correctly shown as related or computed, so we make it regular
     on_hand = fields.Float(
-        readonly=True,
-        string="On Hand",
-        digits=dp.get_precision("Product Unit of Measure"),
+        readonly=True, string="On Hand", digits="Product Unit of Measure",
     )
-    reserved = fields.Float(
-        string="Others Reserved", digits=dp.get_precision("Product Unit of Measure")
-    )
+    reserved = fields.Float(string="Others Reserved", digits="Product Unit of Measure")
     selected = fields.Boolean(string="Select")
-    qty = fields.Float(string="QTY", digits=dp.get_precision("Product Unit of Measure"))
+    qty = fields.Float(string="QTY", digits="Product Unit of Measure")
 
     @api.onchange("selected")
     def _onchange_selected(self):
@@ -177,7 +166,6 @@ class AssignManualQuantsLines(models.TransientModel):
                 remaining_qty = record.assign_wizard.move_qty
                 record.qty = min(quant_qty, remaining_qty)
 
-    @api.multi
     @api.constrains("qty")
     def _check_qty(self):
         precision_digits = self.env["decimal.precision"].precision_get(
