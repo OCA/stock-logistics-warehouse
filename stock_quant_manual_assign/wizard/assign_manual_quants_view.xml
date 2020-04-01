@@ -46,7 +46,7 @@
     <act_window
         name="Manual assignment"
         res_model="assign.manual.quants"
-        src_model="stock.move"
+        binding_model="stock.move"
         view_mode="form"
         target="new"
         id="assign_manual_quants_action"
