@@ -9,6 +9,7 @@ class TestStockQuantManualAssign(TransactionCase):
     def setUp(self):
         super(TestStockQuantManualAssign, self).setUp()
         self.quant_model = self.env["stock.quant"]
+        self.location_model = self.env["stock.location"]
         self.move_model = self.env["stock.move"]
         self.quant_assign_wizard = self.env["assign.manual.quants"]
         self.product = self.env["product.product"].create(
@@ -16,9 +17,27 @@ class TestStockQuantManualAssign(TransactionCase):
         )
         self.location_src = self.env.ref("stock.stock_location_locations_virtual")
         self.location_dst = self.env.ref("stock.stock_location_customers")
-        self.location1 = self.env.ref("stock.location_inventory")
-        self.location2 = self.env.ref("stock.location_procurement")
-        self.location3 = self.env.ref("stock.location_production")
+        self.location1 = self.location_model.create(
+            {
+                "name": "Location 1",
+                "usage": "internal",
+                "location_id": self.location_src.id,
+            }
+        )
+        self.location2 = self.location_model.create(
+            {
+                "name": "Location 2",
+                "usage": "internal",
+                "location_id": self.location_src.id,
+            }
+        )
+        self.location3 = self.location_model.create(
+            {
+                "name": "Location 3",
+                "usage": "internal",
+                "location_id": self.location_src.id,
+            }
+        )
         self.quant1 = self.quant_model.sudo().create(
             {
                 "product_id": self.product.id,
