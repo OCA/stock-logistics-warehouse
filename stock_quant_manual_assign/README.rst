@@ -79,6 +79,10 @@ Contributors
   * Jordi Ballester <jordi.ballester@eficent.com>
   * Lois Rilo <lois.rilo@eficent.com>
 
+* `Shine IT <https://www.openerp.cn>`_:
+
+  * Tony Gu <tony@openerp.cn>
+
 Maintainers
 ~~~~~~~~~~~
 
