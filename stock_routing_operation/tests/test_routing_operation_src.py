@@ -421,3 +421,119 @@ class TestSourceRoutingOperation(common.SavepointCase):
         self.assertEqual(move_a1.state, "done")
         self.assertEqual(move_a2.state, "done")
         self.assertEqual(move_b.state, "done")
+
+    def test_destination_parent_tree_change_picking_type_and_dest(self):
+        # Change the picking type destination so the move goes to a location
+        # which is a parent destination of the routing destination (move will
+        # go to Output, routing destination is Output/Area1).
+        # With this configuration, the move already goes to the correct place,
+        # so we don't need to add a chained move before it. However, since the
+        # location of the picking type was more precise, we have to change it.
+        # Also, we expect the move to be "re-classified" in a picking of the
+        # routing's picking type.
+        area1 = self.env["stock.location"].create(
+            {"location_id": self.wh.wh_output_stock_loc_id.id, "name": "Area1"}
+        )
+        self.pick_type_routing_op.default_location_dest_id = area1
+
+        pick_picking, customer_picking = self._create_pick_ship(
+            self.wh, [(self.product1, 10)]
+        )
+        move_a = pick_picking.move_lines
+        move_b = customer_picking.move_lines
+
+        self._update_product_qty_in_location(
+            self.location_hb_1_2, move_a.product_id, 100
+        )
+        pick_picking.action_assign()
+
+        ml = move_a.move_line_ids
+        self.assertEqual(len(ml), 1)
+        self.assert_src_highbay_1_2(ml)
+        self.assertEqual(ml.location_dest_id, area1)
+
+        self.assertEqual(ml.picking_id.picking_type_id, self.pick_type_routing_op)
+
+        self.assert_src_stock(move_a)
+        self.assertEqual(move_a.location_dest_id, area1)
+        # the move stays B stays on the same source location
+        self.assert_src_output(move_b)
+        self.assert_dest_customer(move_b)
+
+        # the original chaining stays the same: we don't add any move here
+        self.assertFalse(move_a.move_orig_ids)
+        self.assertEqual(move_a.move_dest_ids, move_b)
+        self.assertFalse(move_b.move_dest_ids)
+
+        self.assert_src_stock(move_a.picking_id)
+        self.assertEqual(move_a.picking_id.location_dest_id, area1)
+
+        self.assertEqual(move_a.state, "assigned")
+        self.assertEqual(move_b.state, "waiting")
+
+        # we deliver move A to check that our move B properly takes
+        # goods from the area1
+        self.process_operations(move_a)
+        self.assertEqual(move_a.state, "done")
+        self.assertEqual(move_b.state, "assigned")
+        self.assertEqual(move_b.move_line_ids.location_id, area1)
+
+    def test_destination_child_tree_change_picking_type(self):
+        # Change the picking type destination so the move goes to a location
+        # which is a child destination of the routing destination (move will
+        # go to Above Output/Area1, routing destination is Above Output).
+        # With this configuration, the move already goes to the correct place,
+        # so we don't need to add a chained move before it. And as the location
+        # in more precise, we have to keep it.
+        # We expect the move to be "re-classified" in a picking of the
+        # routing's picking type.
+        above_output = self.env["stock.location"].create(
+            {
+                "location_id": self.wh.wh_output_stock_loc_id.location_id.id,
+                "name": "Above Output",
+            }
+        )
+        self.wh.wh_output_stock_loc_id.location_id = above_output
+        self.pick_type_routing_op.default_location_dest_id = above_output
+
+        pick_picking, customer_picking = self._create_pick_ship(
+            self.wh, [(self.product1, 10)]
+        )
+        move_a = pick_picking.move_lines
+        move_b = customer_picking.move_lines
+
+        self._update_product_qty_in_location(
+            self.location_hb_1_2, move_a.product_id, 100
+        )
+        pick_picking.action_assign()
+
+        ml = move_a.move_line_ids
+        self.assertEqual(len(ml), 1)
+        self.assert_src_highbay_1_2(ml)
+        self.assert_dest_output(ml)
+
+        self.assertEqual(ml.picking_id.picking_type_id, self.pick_type_routing_op)
+
+        self.assert_src_stock(move_a)
+        self.assert_dest_output(move_a)
+        # the move stays B stays on the same source location
+        self.assert_src_output(move_b)
+        self.assert_dest_customer(move_b)
+
+        # the original chaining stays the same: we don't add any move here
+        self.assertFalse(move_a.move_orig_ids)
+        self.assertEqual(move_a.move_dest_ids, move_b)
+        self.assertFalse(move_b.move_dest_ids)
+
+        self.assert_src_stock(move_a.picking_id)
+        self.assert_dest_output(move_a.picking_id)
+
+        self.assertEqual(move_a.state, "assigned")
+        self.assertEqual(move_b.state, "waiting")
+
+        # we deliver move A to check that our move B properly takes
+        # goods from the output
+        self.process_operations(move_a)
+        self.assertEqual(move_a.state, "done")
+        self.assertEqual(move_b.state, "assigned")
+        self.assert_src_output(move_b.move_line_ids)

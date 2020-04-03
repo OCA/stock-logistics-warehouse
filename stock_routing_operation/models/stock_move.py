@@ -1,4 +1,4 @@
-# Copyright 2019 Camptocamp (https://www.camptocamp.com)
+# Copyright 2019-2020 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from itertools import chain
 
@@ -123,6 +123,7 @@ class StockMove(models.Model):
         type with the routing operation ones and creates a new chained move
         after it.
         """
+        pickings_to_check_for_emptiness = self.env["stock.picking"]
         for move in self:
             if move.state not in (
                 "assigned",
@@ -138,21 +139,12 @@ class StockMove(models.Model):
             # locations, they have been split in
             # _split_per_routing_operation(), so we can take the first one
             source = move.move_line_ids[0].location_id
-            destination = move.move_line_ids[0].location_dest_id
-            # we have to add a move as destination
-            # we have to add move as origin
+            original_destination = move.move_line_ids[0].location_dest_id
             routing = source._find_picking_type_for_routing("src")
             if not routing:
                 continue
 
-            if self.env["stock.location"].search(
-                [
-                    ("id", "=", routing.default_location_dest_id.id),
-                    ("id", "parent_of", move.location_dest_id.id),
-                ]
-            ):
-                # we don't need to do anything because we already go through
-                # the expected destination
+            if move.picking_id.picking_type_id == routing:
                 continue
 
             # the current move becomes the routing move, and we'll add a new
@@ -161,22 +153,49 @@ class StockMove(models.Model):
             # lines go to the correct destination
             move._do_unreserve()
             move.package_level_id.unlink()
-            dest = routing.default_location_dest_id
+
             current_picking_type = move.picking_id.picking_type_id
-            move.write({"location_dest_id": dest.id, "picking_type_id": routing.id})
-            move._insert_routing_moves(
-                current_picking_type, move.location_id, destination
-            )
+            if self.env["stock.location"].search(
+                [
+                    ("id", "=", routing.default_location_dest_id.id),
+                    ("id", "child_of", move.location_dest_id.id),
+                ]
+            ):
+                # The destination of the move, as a parent of the destination
+                # of the routing, goes to the correct place, but is not precise
+                # enough: set the new destination to match the picking type
+                move.location_dest_id = routing.default_location_dest_id
+                move.picking_type_id = routing
 
-            picking = move.picking_id
+            elif self.env["stock.location"].search(
+                [
+                    ("id", "=", routing.default_location_dest_id.id),
+                    ("id", "parent_of", move.location_dest_id.id),
+                ]
+            ):
+                # The destination of the move is already more precise than the
+                # expected destination of the routing: keep it, but we still
+                # want to change the picking type
+                move.picking_type_id = routing
+            else:
+                # The destination of the move is unrelated (nor identical, nor
+                # a parent or a child) to the routing destination: in this case
+                # we have to add a routing move before the current move to
+                # route the goods in the routing
+                move.location_dest_id = routing.default_location_dest_id
+                move.picking_type_id = routing
+                # create a copy of the move with the current picking type and
+                # going to its original destination: it will be assigned to the
+                # same picking as the original picking of our move
+                move._insert_routing_moves(
+                    current_picking_type, move.location_id, original_destination
+                )
+
+            pickings_to_check_for_emptiness |= move.picking_id
             move._assign_picking()
-            if not picking.move_lines:
-                # When the picking type changes, it will create a new picking
-                # for the move. If the previous picking has no other move,
-                # we have to drop it.
-                picking.unlink()
-
             move._action_assign()
+
+        pickings_to_check_for_emptiness._routing_operation_handle_empty()
 
     def _insert_routing_moves(self, picking_type, location, destination):
         """Create a chained move for the source routing operation"""
