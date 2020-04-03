@@ -6,8 +6,15 @@ from odoo import _, api, exceptions, fields, models
 class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
+    # NOTE: these fields will be moved to dedicated models
     src_routing_location_ids = fields.One2many(
         "stock.location", "src_routing_picking_type_id"
+    )
+    src_routing_move_domain = fields.Char(
+        string="Source Routing Domain",
+        default=[],
+        help="Domain based on Stock Moves, to define if the "
+        "source routing is applicable or not.",
     )
     dest_routing_location_ids = fields.One2many(
         "stock.location", "dest_routing_picking_type_id"

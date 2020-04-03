@@ -537,3 +537,49 @@ class TestSourceRoutingOperation(common.SavepointCase):
         self.assertEqual(move_a.state, "done")
         self.assertEqual(move_b.state, "assigned")
         self.assert_src_output(move_b.move_line_ids)
+
+    def test_domain_ignore_move(self):
+        # define a domain that will exclude the routing for this
+        # move, there will not be any change on the moves compared
+        # to a standard setup
+        domain = "[('product_id', '=', {})]".format(self.product2.id)
+        self.pick_type_routing_op.src_routing_move_domain = domain
+        pick_picking, customer_picking = self._create_pick_ship(
+            self.wh, [(self.product1, 10)]
+        )
+        move_a = pick_picking.move_lines
+        move_b = customer_picking.move_lines
+        self._update_product_qty_in_location(
+            self.location_hb_1_2, move_a.product_id, 100
+        )
+        pick_picking.action_assign()
+
+        self.assertEqual(
+            move_a.move_line_ids.picking_id.picking_type_id, self.wh.pick_type_id
+        )
+        # the original chaining stays the same: we don't add any move here
+        self.assertFalse(move_a.move_orig_ids)
+        self.assertEqual(move_a.move_dest_ids, move_b)
+        self.assertFalse(move_b.move_dest_ids)
+
+    def test_domain_include_move(self):
+        # define a domain that will include the routing for this
+        # move, so routing is applied
+        domain = "[('product_id', '=', {})]".format(self.product1.id)
+        self.pick_type_routing_op.src_routing_move_domain = domain
+        pick_picking, customer_picking = self._create_pick_ship(
+            self.wh, [(self.product1, 10)]
+        )
+        move_a = pick_picking.move_lines
+        move_b = customer_picking.move_lines
+        self._update_product_qty_in_location(
+            self.location_hb_1_2, move_a.product_id, 100
+        )
+        pick_picking.action_assign()
+
+        self.assertEqual(
+            move_a.move_line_ids.picking_id.picking_type_id, self.pick_type_routing_op
+        )
+        self.assertFalse(move_a.move_orig_ids)
+        self.assertNotEqual(move_a.move_dest_ids, move_b)
+        self.assertFalse(move_b.move_dest_ids)

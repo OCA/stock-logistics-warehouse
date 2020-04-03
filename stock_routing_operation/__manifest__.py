@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "depends": ["stock"],
     "demo": ["demo/stock_location_demo.xml", "demo/stock_picking_type_demo.xml"],
-    "data": ["views/stock_location_views.xml"],
+    "data": ["views/stock_location_views.xml", "views/stock_picking_type_views.xml"],
     "installable": True,
     "development_status": "Alpha",
 }

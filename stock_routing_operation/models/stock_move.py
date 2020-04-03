@@ -3,6 +3,8 @@
 from itertools import chain
 
 from odoo import models
+from odoo.osv import expression
+from odoo.tools.safe_eval import safe_eval
 
 
 class StockMove(models.Model):
@@ -24,20 +26,28 @@ class StockMove(models.Model):
         dest_moves = self._split_per_dest_routing_operation()
         dest_moves._apply_move_location_dest_routing_operation()
 
-    def _bypass_routing_operation_application(self, routing_type):
-        """ Override this method if you need to bypass the routing operation
-        logic for moves related characteristic.
-        """
-        if routing_type not in ("src", "dest"):
-            raise ValueError("routing_type must be one of ('src', 'dest')")
-        return False
+    def _src_routing_apply_domain(self, routing):
+        if not routing.src_routing_move_domain:
+            return self
+        domain = safe_eval(routing.src_routing_move_domain)
+        return self._eval_routing_domain(domain)
+
+    def _eval_routing_domain(self, domain):
+        move_domain = [("id", "in", self.ids)]
+        # Warning: if we build a domain with dotted path such as
+        # group_id.is_urgent (hypothetic field), can become very slow as odoo
+        # searches all "procurement.group.is_urgent" first then uses "IN
+        # group_ids" on the stock move only. In such situations, it can be
+        # better either to add a related field on the stock.move, either extend
+        # _src_routing_apply_domain to add your own logic (based on SQL, ...).
+        return self.env["stock.move"].search(expression.AND([move_domain, domain]))
 
     def _split_per_src_routing_operation(self):
         """Split moves per source routing operations
 
         When a move has move lines with different routing operations or lines
         with routing operations and lines without, on the source location, this
-        method split the move in as many source routing operations they have.
+        method splits the move in as many source routing operations they have.
 
         The reason: the destination location of the moves with a routing
         operation will change and their "move_dest_ids" will be modified to
@@ -46,10 +56,7 @@ class StockMove(models.Model):
         move_to_assign_ids = set()
         new_move_per_location = {}
         for move in self:
-            if move.state not in (
-                "assigned",
-                "partially_available",
-            ) or move._bypass_routing_operation_application("src"):
+            if move.state not in ("assigned", "partially_available"):
                 continue
 
             # Group move lines per source location, some may need an additional
@@ -65,7 +72,12 @@ class StockMove(models.Model):
             # where we have to take products
             routing_quantities = {}
             for source, qty in move_lines.items():
+                # TODO consider to use the domain directly in the method that
+                # find the routing
                 routing_picking_type = source._find_picking_type_for_routing("src")
+                if not move._src_routing_apply_domain(routing_picking_type):
+                    # reset to "no routing"
+                    routing_picking_type = self.env["stock.picking.type"].browse()
                 routing_quantities.setdefault(routing_picking_type, 0.0)
                 routing_quantities[routing_picking_type] += qty
 
@@ -125,10 +137,7 @@ class StockMove(models.Model):
         """
         pickings_to_check_for_emptiness = self.env["stock.picking"]
         for move in self:
-            if move.state not in (
-                "assigned",
-                "partially_available",
-            ) or move._bypass_routing_operation_application("src"):
+            if move.state not in ("assigned", "partially_available"):
                 continue
 
             # Group move lines per source location, some may need an additional
@@ -139,13 +148,17 @@ class StockMove(models.Model):
             # locations, they have been split in
             # _split_per_routing_operation(), so we can take the first one
             source = move.move_line_ids[0].location_id
-            original_destination = move.move_line_ids[0].location_dest_id
             routing = source._find_picking_type_for_routing("src")
-            if not routing:
+            # TODO we might optimize this by calling it once for a routing
+            # and a group of moves
+            if not routing or not move._src_routing_apply_domain(routing):
                 continue
 
             if move.picking_id.picking_type_id == routing:
+                # already correct
                 continue
+
+            original_destination = move.move_line_ids[0].location_dest_id
 
             # the current move becomes the routing move, and we'll add a new
             # move after this one to pick the goods where the routing moved
@@ -240,10 +253,7 @@ class StockMove(models.Model):
         """
         new_moves = self.browse()
         for move in self:
-            if move.state not in (
-                "assigned",
-                "partially_available",
-            ) or move._bypass_routing_operation_application("dest"):
+            if move.state not in ("assigned", "partially_available"):
                 continue
 
             # Group move lines per destination location, some may need an
@@ -299,10 +309,7 @@ class StockMove(models.Model):
         after it.
         """
         for move in self:
-            if move.state not in (
-                "assigned",
-                "partially_available",
-            ) or move._bypass_routing_operation_application("dest"):
+            if move.state not in ("assigned", "partially_available"):
                 continue
 
             # Group move lines per source location, some may need an additional

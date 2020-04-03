@@ -7,6 +7,7 @@ from odoo.exceptions import ValidationError
 class StockLocation(models.Model):
     _inherit = "stock.location"
 
+    # NOTE: these fields will be moved to dedicated models
     src_routing_picking_type_id = fields.Many2one(
         "stock.picking.type",
         string="Source Routing Operation",
