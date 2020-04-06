@@ -401,6 +401,8 @@ class TestDestRoutingOperation(common.SavepointCase):
             {"product_uom_qty": 4.0, "location_dest_id": self.location_shelf_1.id}
         )
         move_b.move_line_ids.invalidate_cache(["product_uom_qty", "location_dest_id"])
+        # assign moves ignoring the routing, then apply it manually
+        move_b.with_context(exclude_apply_routing_operation=True)._action_assign()
         # At this point, we should have this
         #
         # +-----------------------------------------------------+
@@ -416,7 +418,6 @@ class TestDestRoutingOperation(common.SavepointCase):
         # | 6x Product1 Input → Stock/HB-1-2   (available)         |
         # | 4x Product1 Input → Stock/Shelf1   (available)         |
         # +--------------------------------------------------------+
-
         move_b._apply_dest_move_routing_operation()
 
         # We expect the routing operation to split the move_b so

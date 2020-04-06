@@ -1,28 +1,50 @@
 # Copyright 2019-2020 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
+import uuid
 from itertools import chain
+
+from psycopg2 import sql
 
 from odoo import models
 from odoo.osv import expression
 from odoo.tools.safe_eval import safe_eval
+
+# TODO check product_qty / product_uom_qty
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _action_assign(self):
-        # TODO use savepoint on the original assign instead of using
-        # unreserve
-        super()._action_assign()
-        if not self.env.context.get("exclude_apply_routing_operation"):
+        if self.env.context.get("exclude_apply_routing_operation"):
+            super()._action_assign()
+        else:
+            # these methods will call _action_assign in a savepoint
+            # and modify the routing if necessary
             self._apply_src_move_routing_operation()
             self._apply_dest_move_routing_operation()
 
     def _apply_src_move_routing_operation(self):
+        """Apply source routing operations
+
+        * calls super()._action_assign() on moves not yet available
+        * split the moves if their move lines have different source locations
+        * apply the routing
+
+        Important: if you inherit this method to skip the routing for some
+        moves, you have to call super()._action_assign() on them
+        """
         src_moves = self._split_per_src_routing_operation()
         src_moves._apply_move_location_src_routing_operation()
 
     def _apply_dest_move_routing_operation(self):
+        """Apply destination routing operations
+
+        * at this point, _action_assign should have been called by
+          ``_apply_src_move_routing_operation``
+        * split the moves if their move lines have different destination locations
+        * apply the routing
+        """
         dest_moves = self._split_per_dest_routing_operation()
         dest_moves._apply_move_location_dest_routing_operation()
 
@@ -53,8 +75,20 @@ class StockMove(models.Model):
         operation will change and their "move_dest_ids" will be modified to
         target a new move for the routing operation.
         """
-        move_to_assign_ids = set()
+        if not self:
+            return self
+
         new_move_per_location = {}
+
+        savepoint_name = uuid.uuid1().hex
+        self.env["base"].flush()
+        # pylint: disable=sql-injection
+        self.env.cr.execute(
+            sql.SQL("SAVEPOINT {}").format(sql.Identifier(savepoint_name))
+        )
+        super()._action_assign()
+
+        moves_with_routing = {}
         for move in self:
             if move.state not in ("assigned", "partially_available"):
                 continue
@@ -81,15 +115,30 @@ class StockMove(models.Model):
                 routing_quantities.setdefault(routing_picking_type, 0.0)
                 routing_quantities[routing_picking_type] += qty
 
-            if len(routing_quantities) == 1:
+            if len(routing_quantities) > 1:
                 # The whole quantity can be taken from only one location (an
                 # empty routing picking type being equal to one location here),
                 # nothing to split.
-                continue
+                moves_with_routing[move] = routing_quantities
 
-            move._do_unreserve()
-            move.package_level_id.unlink()
-            move_to_assign_ids.add(move.id)
+        if not moves_with_routing:
+            # no split needed, so the reservations done by _action_assign
+            # are valid
+            self.env["base"].flush()
+            # pylint: disable=sql-injection
+            self.env.cr.execute(
+                sql.SQL("RELEASE SAVEPOINT {}").format(sql.Identifier(savepoint_name))
+            )
+            return self
+
+        # rollack _action_assign, it'll be called again after the splits
+        self.env.clear()
+        # pylint: disable=sql-injection
+        self.env.cr.execute(
+            sql.SQL("ROLLBACK TO SAVEPOINT {}").format(sql.Identifier(savepoint_name))
+        )
+
+        for move, routing_quantities in moves_with_routing.items():
             for picking_type, qty in routing_quantities.items():
                 # When picking_type is empty, it means we have no routing
                 # operation for the move, so we have nothing to do.
@@ -106,7 +155,8 @@ class StockMove(models.Model):
                     new_move_per_location.setdefault(routing_location.id, [])
                     new_move_per_location[routing_location.id].append(new_move_id)
 
-        # it is important to assign the routed moves first
+        # it is important to assign the routed moves first so they take the
+        # quantities in the expected locations (same locations as the splits)
         for location_id, new_move_ids in new_move_per_location.items():
             new_moves = self.browse(new_move_ids)
             new_moves.with_context(
@@ -120,9 +170,7 @@ class StockMove(models.Model):
             )._action_assign()
 
         # reassign the moves which have been unreserved for the split
-        moves_to_assign = self.browse(move_to_assign_ids)
-        if moves_to_assign:
-            moves_to_assign._action_assign()
+        super()._action_assign()
         new_moves = self.browse(chain.from_iterable(new_move_per_location.values()))
         return self + new_moves
 
@@ -250,6 +298,10 @@ class StockMove(models.Model):
         The reason: the destination location of the moves with a routing
         operation will change and their "move_dest_ids" will be modified to
         target a new move for the routing operation.
+
+        We don't need to cancel the reservation as done in
+        ``_split_per_src_routing_operation`` because the source location
+        doesn't change.
         """
         new_moves = self.browse()
         for move in self:
@@ -291,6 +343,7 @@ class StockMove(models.Model):
                 new_move_id = move._split(qty)
                 new_move = self.browse(new_move_id)
                 move_lines.write({"move_id": new_move.id})
+                move_lines.modified(["product_uom_qty"])
                 assert move.state in ("assigned", "partially_available")
                 # We know the new move is 'assigned' because we created it
                 # with the quantity matching the move lines that we move into
