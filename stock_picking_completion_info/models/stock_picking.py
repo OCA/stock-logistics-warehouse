@@ -37,7 +37,7 @@ class StockPicking(models.Model):
 
     @api.depends(
         "picking_type_id.display_completion_info",
-        "move_lines.move_dest_ids.move_orig_ids.state",
+        "move_lines.common_dest_move_ids.state",
     )
     def _compute_completion_info(self):
         for picking in self:
@@ -49,9 +49,7 @@ class StockPicking(models.Model):
                 continue
             # Depending moves are all the origin moves linked to the
             # destination pickings' moves
-            depending_moves = picking.move_lines.mapped(
-                "move_dest_ids.picking_id.move_lines.move_orig_ids"
-            )
+            depending_moves = picking.move_lines.mapped("common_dest_move_ids")
             # If all the depending moves are done or canceled then next picking
             # is ready to be processed
             if all(m.state in ("done", "cancel") for m in depending_moves):
