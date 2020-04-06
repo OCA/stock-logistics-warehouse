@@ -12,6 +12,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["stock"],
+    "depends": ["stock_move_common_dest"],
     "data": ["views/stock_picking.xml"],
 }
