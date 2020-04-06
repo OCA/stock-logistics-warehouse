@@ -212,8 +212,8 @@ class StockMove(models.Model):
             # move after this one to pick the goods where the routing moved
             # them, we have to unreserve and assign at the end to have the move
             # lines go to the correct destination
+            move.mapped("move_line_ids.package_level_id").unlink()
             move._do_unreserve()
-            move.package_level_id.unlink()
 
             current_picking_type = move.picking_id.picking_type_id
             if self.env["stock.location"].search(
