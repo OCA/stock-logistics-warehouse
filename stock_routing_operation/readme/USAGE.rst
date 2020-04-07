@@ -16,19 +16,19 @@ The initial setup in the demo data contains locations:
 
 The "Highbay" location (and children) is configured to:
 
-* create a source routing operation from Highbay to Handover when
+* create a pull routing transfer from Highbay to Handover when
   goods are taken from Highbay (using a new picking type Highbay → Handover)
-* create a destination routing operation from Handover to Highbay when
+* create a push routing transfer from Handover to Highbay when
   goods are put to Highbay (using a new picking type Handover → Highbay)
 
-Steps to try the Source Routing Operation:
+Steps to try the Pull Routing Transfer:
 
 * In the main Warehouse, configure outgoing shipments to "Send goods in output and then deliver (2 steps)"
 * Inventory a product, for instance "[FURN_8999] Three-Seat Sofa", add 50 items in "WH/Stock/Highbay/Bay A/Bin 1", and nowhere else
 * Create a sales order with 5 "[FURN_8999] Three-Seat Sofa", confirm
 * You'll have 3 transfers; a new one has been created dynamically for Highbay -> Handover.
 
-Steps to try the Destination Routing Operation:
+Steps to try the Push Routing Transfer:
 
 * In the "WH/Stock" location, create a Put-Away Strategy with:
 

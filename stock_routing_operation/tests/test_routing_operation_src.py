@@ -57,8 +57,20 @@ class TestSourceRoutingOperation(common.SavepointCase):
                 "default_location_dest_id": cls.location_handover.id,
             }
         )
-        cls.location_hb.write(
-            {"src_routing_picking_type_id": cls.pick_type_routing_op.id}
+        cls.routing = cls.env["stock.routing"].create(
+            {
+                "location_id": cls.location_hb.id,
+                "rule_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "method": "pull",
+                            "picking_type_id": cls.pick_type_routing_op.id,
+                        },
+                    )
+                ],
+            }
         )
 
     def _create_pick_ship(self, wh, products=None):
@@ -543,7 +555,7 @@ class TestSourceRoutingOperation(common.SavepointCase):
         # move, there will not be any change on the moves compared
         # to a standard setup
         domain = "[('product_id', '=', {})]".format(self.product2.id)
-        self.pick_type_routing_op.src_routing_move_domain = domain
+        self.routing.rule_ids.rule_domain = domain
         pick_picking, customer_picking = self._create_pick_ship(
             self.wh, [(self.product1, 10)]
         )
@@ -566,7 +578,7 @@ class TestSourceRoutingOperation(common.SavepointCase):
         # define a domain that will include the routing for this
         # move, so routing is applied
         domain = "[('product_id', '=', {})]".format(self.product1.id)
-        self.pick_type_routing_op.src_routing_move_domain = domain
+        self.routing.rule_ids.rule_domain = domain
         pick_picking, customer_picking = self._create_pick_ship(
             self.wh, [(self.product1, 10)]
         )

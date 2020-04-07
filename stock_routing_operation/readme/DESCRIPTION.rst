@@ -1,11 +1,10 @@
-Route explains the steps you want to produce whereas the “picking routing
-operation” defines how operations are grouped according to their final source
+Route explains the steps you want to produce whereas the “Routing Rules” defines how operations are grouped according to their final source
 and destination location.
 
 This allows for example:
 
-* To parallelize picking operations in two locations of a warehouse, splitting
-  them in two different picking type
+* To parallelize transfers in two locations of a warehouse, splitting
+  them in two different operation type
 * To define pre-picking (wave) in some sub-locations, then roundtrip picking of
   the sub-location waves
 
@@ -24,9 +23,8 @@ usual Pick(Highbay)-Pack-Ship steps. If the good is picked from the High-Bay, yo
 need an extra operation: Pick(Highbay)-Handover-Pack-Ship.
 
 This is what this feature is doing: on the High-Bay location, you define
-a "routing operation". A routing operation is based on a picking type.
-The extra operation will have the selected picking type, and the new move
-will have the source destination of the picking type.
+a "routing rule". A routing rule selects a different operation type for the move.
+The extra transfer will have the selected operation type, and be added before the chain of moves.
 
 When putting away:
 
@@ -34,5 +32,5 @@ A put-away rule targets the High-Bay location.
 An operation Input-Highbay is created. You expect Input-Handover-Highbay.
 
 You can configure a routing operation for the put-away on the High-Bay Location.
-The picking type of the new Handover move will the routing operation selected,
-and its destination will be the destination of the picking type.
+The operation type of the new Handover move will the one of the matching routing rule,
+and its destination will be the destination of the operation type.

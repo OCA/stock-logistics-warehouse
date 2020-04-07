@@ -57,8 +57,20 @@ class TestDestRoutingOperation(common.SavepointCase):
                 "default_location_dest_id": cls.location_hb.id,
             }
         )
-        cls.location_hb.write(
-            {"dest_routing_picking_type_id": cls.pick_type_routing_op.id}
+        cls.routing = cls.env["stock.routing"].create(
+            {
+                "location_id": cls.location_hb.id,
+                "rule_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "method": "push",
+                            "picking_type_id": cls.pick_type_routing_op.id,
+                        },
+                    )
+                ],
+            }
         )
 
     def _create_supplier_input_highbay(self, wh, products=None):
@@ -387,7 +399,7 @@ class TestDestRoutingOperation(common.SavepointCase):
         # need an additional move, the one in the shelf not.
 
         # In order to simulate this, we'll manually change the move lines of
-        # move_b and call'_apply_dest_move_routing_operation()' on it to force
+        # move_b and call '_split_and_apply_routing_push' on it to force
         # the application of the routing operation.
 
         first_ml = move_b.move_line_ids
@@ -403,6 +415,7 @@ class TestDestRoutingOperation(common.SavepointCase):
         move_b.move_line_ids.invalidate_cache(["product_uom_qty", "location_dest_id"])
         # assign moves ignoring the routing, then apply it manually
         move_b.with_context(exclude_apply_routing_operation=True)._action_assign()
+
         # At this point, we should have this
         #
         # +-----------------------------------------------------+
@@ -418,7 +431,7 @@ class TestDestRoutingOperation(common.SavepointCase):
         # | 6x Product1 Input → Stock/HB-1-2   (available)         |
         # | 4x Product1 Input → Stock/Shelf1   (available)         |
         # +--------------------------------------------------------+
-        move_b._apply_dest_move_routing_operation()
+        move_b._split_and_apply_routing_push()
 
         # We expect the routing operation to split the move_b so
         # we'll be able to have a move_dest_ids for the Highbay:

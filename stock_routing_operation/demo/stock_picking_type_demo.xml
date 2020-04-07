@@ -23,10 +23,4 @@
     <field name="default_location_dest_id" ref="stock_location_highbay_demo"/>
   </record>
 
-  <!-- pylint:disable=duplicate-xml-record-id -->
-  <record id="stock_location_highbay_demo" model="stock.location">
-    <field name="src_routing_picking_type_id" ref="stock_picking_type_highbay_to_handover_demo"/>
-    <field name="dest_routing_picking_type_id" ref="stock_picking_type_handover_to_highbay_demo"/>
-  </record>
-
 </odoo>

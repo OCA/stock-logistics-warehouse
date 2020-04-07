@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_routing_form" model="ir.ui.view">
+        <field name="name">stock.routing.form</field>
+        <field name="model">stock.routing</field>
+        <field name="arch" type="xml">
+            <form string="Stock Routing">
+                <div class="oe_button_box" name="button_box">
+                </div>
+                <widget
+                    name="web_ribbon"
+                    title="Archived"
+                    bg_color="bg-danger"
+                    attrs="{'invisible': [('active', '=', True)]}"
+                />
+                <label for="location_id" class="oe_edit_only" />
+                <h1>
+                    <field name="location_id" />
+                </h1>
+                <field name="active" invisible="1" />
+                <group string="Routing Rules" name="rule">
+                    <field name="rule_ids" nolabel="1">
+                        <tree string="Routing Rules">
+                            <field name="sequence" widget="handle" />
+                            <field name="method" />
+                            <field name="picking_type_id" />
+                            <field name="location_src_id" />
+                            <field name="location_dest_id" />
+                            <field name="rule_domain" />
+                        </tree>
+                        <form string="Routing Rule">
+                            <group>
+                                <field name="method" />
+                                <field name="routing_location_id" invisible="1" />
+                                <field
+                                    name="picking_type_id"
+                                    domain="['|', ('default_location_src_id', '=', routing_location_id),
+                                                  ('default_location_dest_id', '=', routing_location_id)]"
+                                />
+                                <field name="location_src_id" />
+                                <field name="location_dest_id" />
+                                <field
+                                    name="rule_domain"
+                                    widget="domain"
+                                    options="{'model': 'stock.move', 'in_dialog': true}"
+                                />
+                            </group>
+                        </form>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="view_stock_routing_search" model="ir.ui.view">
+        <field name="name">stock.routing.search</field>
+        <field name="model">stock.routing</field>
+        <field name="arch" type="xml">
+            <search string="Stock Routing">
+                <field name="location_id" />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="view_stock_routing_tree" model="ir.ui.view">
+        <field name="name">stock.routing</field>
+        <field name="model">stock.routing</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Routing">
+                <field name="location_id" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_stock_routing" model="ir.actions.act_window">
+        <field name="name">Stock Routing</field>
+        <field name="res_model">stock.routing</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="view_stock_routing_tree" />
+        <field name="search_view_id" ref="view_stock_routing_search" />
+        <field name="context" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a Stock Routing
+            </p>
+        </field>
+    </record>
+    <menuitem
+        action="action_stock_routing"
+        id="menu_stock_routing"
+        parent="stock.menu_warehouse_config"
+        sequence="30"
+    />
+</odoo>

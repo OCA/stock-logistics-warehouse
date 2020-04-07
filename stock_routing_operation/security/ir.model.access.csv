@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_routing_stock_user,access_stock_routing stock user,model_stock_routing,stock.group_stock_user,1,0,0,0
+access_stock_routing_manager,access_stock_routing stock manager,model_stock_routing,stock.group_stock_manager,1,1,1,1
+access_stock_routing_rule_stock_user,access_stock_routing_rule stock user,model_stock_routing_rule,stock.group_stock_user,1,0,0,0
+access_stock_routing_rule_manager,access_stock_routing_rule stock manager,model_stock_routing_rule,stock.group_stock_manager,1,1,1,1
