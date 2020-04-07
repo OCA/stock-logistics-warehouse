@@ -24,6 +24,7 @@ setuptools.setup(
         'odoo13-addon-stock_location_position',
         'odoo13-addon-stock_location_tray',
         'odoo13-addon-stock_location_zone',
+        'odoo13-addon-stock_move_common_dest',
         'odoo13-addon-stock_move_location',
         'odoo13-addon-stock_orderpoint_manual_procurement',
         'odoo13-addon-stock_orderpoint_move_link',
