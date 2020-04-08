@@ -32,22 +32,11 @@
         <field name="name">Adjust Stock Valuation Account Discrepancies</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.valuation.account.mass.adjust</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="view_id"
                ref="view_stock_valuation_account_mass_adjust"/>
+        <field name="binding_model_id" ref="product.model_product_product"/>
         <field name="target">new</field>
-    </record>
-
-    <record model="ir.values"
-            id="product_stock_valuation_account_mass_adjust">
-        <field name="model_id" ref="model_product_product" />
-        <field name="name">Adjust Stock Valuation Account Discrepancies</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value"
-               eval="'ir.actions.act_window,' + str(ref('action_stock_valuation_account_mass_adjust'))" />
-        <field name="key">action</field>
-        <field name="model">product.product</field>
     </record>
 
 </odoo>
