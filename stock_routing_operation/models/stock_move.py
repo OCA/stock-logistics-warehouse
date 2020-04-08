@@ -202,7 +202,10 @@ class StockMove(models.Model):
             # original_destination = move.move_line_ids[0].location_dest_id
             original_destination = move.location_dest_id
 
+            current_source_location = move.location_id
             current_picking_type = move.picking_id.picking_type_id
+            move.location_id = routing_rule.location_src_id
+            move.picking_type_id = routing_rule.picking_type_id
             if self.env["stock.location"].search(
                 [
                     ("id", "=", routing_rule.location_dest_id.id),
@@ -212,35 +215,24 @@ class StockMove(models.Model):
                 # The destination of the move, as a parent of the destination
                 # of the routing, goes to the correct place, but is not precise
                 # enough: set the new destination to match the rule's one
-                move.location_id = routing_rule.location_src_id
                 move.location_dest_id = routing_rule.location_dest_id
-                move.picking_type_id = routing_rule.picking_type_id
 
-            elif self.env["stock.location"].search(
+            elif not self.env["stock.location"].search(
                 [
                     ("id", "=", routing_rule.location_dest_id.id),
                     ("id", "parent_of", move.location_dest_id.id),
                 ]
             ):
-                # The destination of the move is already more precise than the
-                # expected destination of the routing: keep it, but we still
-                # want to change the picking type
-                move.location_id = routing_rule.location_src_id
-                move.picking_type_id = routing_rule.picking_type_id
-            else:
                 # The destination of the move is unrelated (nor identical, nor
                 # a parent or a child) to the routing destination: in this case
                 # we have to add a routing move before the current move to
                 # route the goods in the correct place
-                source_location = move.location_id
-                move.location_id = routing_rule.location_src_id
                 move.location_dest_id = routing_rule.location_dest_id
-                move.picking_type_id = routing_rule.picking_type_id
                 # create a copy of the move with the current picking type and
                 # going to its original destination: it will be assigned to the
                 # same picking as the original picking of our move
                 move._insert_routing_moves(
-                    current_picking_type, source_location, original_destination
+                    current_picking_type, current_source_location, original_destination
                 )
 
             pickings_to_check_for_emptiness |= move.picking_id
@@ -315,6 +307,7 @@ class StockMove(models.Model):
                     move.push_routing_rule_id = rule
                 continue
 
+            # TODO split when we split pull
             for rule, move_lines in routing_rules.items():
                 if not rule:
                     # No routing operation is required for these moves,
@@ -345,6 +338,7 @@ class StockMove(models.Model):
         type with the routing operation ones and creates a new chained move
         after it.
         """
+        pickings_to_check_for_emptiness = self.env["stock.picking"]
         for move in self:
             if move.state not in ("assigned", "partially_available"):
                 continue
@@ -361,28 +355,39 @@ class StockMove(models.Model):
             if not routing_rule:
                 continue
             if move.picking_id.picking_type_id == routing_rule.picking_type_id:
-                # already correct
+                # the routing rule has already been applied and re-classified
+                # the move in the picking type
+                continue
+            if move.location_dest_id == routing_rule.location_src_id:
+                # the routing rule has already been applied and added a new
+                # routing move after this one
                 continue
 
             if self.env["stock.location"].search(
                 [
+                    # the source is already correct (more precise than the routing),
+                    # but we still want to classify the move in the routing's picking
+                    # type
                     ("id", "=", routing_rule.location_src_id.id),
+                    # if the source location of the move is a child of the routing's
+                    # source location, we don't need to change it
                     ("id", "parent_of", move.location_id.id),
                 ]
             ):
-                # This move has been created for the routing operation,
-                # or was already created with the correct locations anyway,
-                # exit or it would indefinitely add a next move
-                continue
+                move.picking_type_id = routing_rule.picking_type_id
+                pickings_to_check_for_emptiness |= move.picking_id
+                move._assign_picking()
+            else:
+                # Fall here when the source location is unrelated to the
+                # routing's one. Redirect the move and move line to go through
+                # the routing and add a new move after it to reach the
+                # destination of the routing.
+                move.location_dest_id = routing_rule.location_src_id
+                move.move_line_ids.location_dest_id = routing_rule.location_src_id
+                move._insert_routing_moves(
+                    routing_rule.picking_type_id,
+                    routing_rule.location_src_id,
+                    destination,
+                )
 
-            # Move the goods in the "routing" location instead.
-            # In this use case, we want to keep the move lines so we don't
-            # change the reservation.
-            move.write({"location_dest_id": routing_rule.location_src_id.id})
-            move.move_line_ids.write(
-                {"location_dest_id": routing_rule.location_src_id.id}
-            )
-
-            move._insert_routing_moves(
-                routing_rule.picking_type_id, routing_rule.location_src_id, destination
-            )
+        pickings_to_check_for_emptiness._routing_operation_handle_empty()

@@ -13,11 +13,7 @@
         "demo/stock_picking_type_demo.xml",
         "demo/stock_routing_demo.xml",
     ],
-    "data": [
-        "views/stock_location_views.xml",
-        "views/stock_routing_views.xml",
-        "security/ir.model.access.csv",
-    ],
+    "data": ["views/stock_routing_views.xml", "security/ir.model.access.csv"],
     "installable": True,
     "development_status": "Alpha",
 }

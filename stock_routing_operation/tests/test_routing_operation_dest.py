@@ -11,7 +11,7 @@ class TestDestRoutingOperation(common.SavepointCase):
         cls.wh = cls.env["stock.warehouse"].create(
             {
                 "name": "Base Warehouse",
-                "reception_steps": "one_step",
+                "reception_steps": "two_steps",
                 "delivery_steps": "pick_ship",
                 "code": "WHTEST",
             }
@@ -198,7 +198,6 @@ class TestDestRoutingOperation(common.SavepointCase):
         # | Stock/Handover → Highbay                                          |
         # | Product1 Stock/Highbay/Handover → Highbay1-2 (waiting) added_move |
         # +-------------------------------------------------------------------+
-
         self.assert_src_supplier(move_a)
         self.assert_dest_input(move_a)
         self.assert_src_input(move_b)
@@ -551,3 +550,93 @@ class TestDestRoutingOperation(common.SavepointCase):
         self.assertEqual(move_b_shelf.state, "done")
         self.assertEqual(move_b_handover.state, "done")
         self.assertEqual(routing_move.state, "done")
+
+    def test_classify_picking_type_sub_location(self):
+        # When a move already comes from a location within the source location
+        # of the routing's picking type, we don't need a new routing move, but
+        # we want to re-classify the move in a stock.picking of the routing's
+        # picking type.
+        # For this test, we create a handover inside Input, and we change the
+        # routing to be Input -> Highbay. Then we change the moves to go
+        # through Input Handover, to match the picking type.
+        # The source location of the move stays "Input Handover" because it is already
+        # more precise as the "Input" of the picking type.
+        input_ho_location = self.env["stock.location"].create(
+            {"location_id": self.wh.wh_input_stock_loc_id.id, "name": "Input Handover"}
+        )
+        # any move from input (and sub-locations) to highbay has to be classified in
+        # our picking type
+        self.pick_type_routing_op.default_location_src_id = (
+            self.wh.wh_input_stock_loc_id
+        )
+
+        in_picking, internal_picking = self._create_supplier_input_highbay(
+            self.wh, [(self.product1, 10, self.location_hb_1_2)]
+        )
+        move_a = in_picking.move_lines
+        move_b = internal_picking.move_lines
+        # go through our Input Handover location, as it is under the source location
+        # of the routing's picking type, we should not have an additional move,
+        # but move_b must be classified in the routing's picking type
+        move_a.location_dest_id = input_ho_location
+        move_a.move_line_ids.location_dest_id = input_ho_location
+        move_b.location_id = input_ho_location
+
+        self.process_operations(move_a)
+
+        self.assertEqual(move_a.state, "done")
+
+        # move B is classified in a new picking
+        self.assertEqual(move_b.push_routing_rule_id, self.routing.rule_ids)
+        self.assertEqual(move_b.state, "assigned")
+        self.assertEqual(move_b.location_id, input_ho_location)
+        self.assertEqual(move_b.move_line_ids.location_id, input_ho_location)
+        self.assertEqual(move_b.picking_id.location_id, input_ho_location)
+        self.assert_dest_highbay_1_2(move_b)
+        self.assert_dest_highbay_1_2(move_b.move_line_ids)
+        self.assert_dest_highbay_1_2(move_b.picking_id)
+        self.assertEqual(move_b.picking_id.picking_type_id, self.pick_type_routing_op)
+        self.assertFalse(move_b.move_dest_ids)
+
+    def test_picking_type_super_location_extra_move(self):
+        # When a move comes from a location above the source location of the
+        # routing's picking type, we need an extra move to reach the particular
+        # space in the location (example: the goods were brought to Input, but the
+        # picking type is "Input/Handover -> Highbay"), we'll need an extra move to
+        # move goods from Input to Input/Handover).
+        # For this test, we create a handover inside Input, and we change the
+        # routing to be "Input Handover" -> Highbay. And we change the routing source
+        # location to "Input Handover".
+        input_ho_location = self.env["stock.location"].create(
+            {"location_id": self.wh.wh_input_stock_loc_id.id, "name": "Input Handover"}
+        )
+        # any move from input (and sub-locations) to highbay has to be classified in
+        # our picking type
+        self.pick_type_routing_op.default_location_src_id = input_ho_location
+
+        in_picking, internal_picking = self._create_supplier_input_highbay(
+            self.wh, [(self.product1, 10, self.location_hb_1_2)]
+        )
+        move_a = in_picking.move_lines
+        move_b = internal_picking.move_lines
+
+        self.process_operations(move_a)
+
+        self.assertEqual(move_a.state, "done")
+
+        self.assertEqual(move_b.push_routing_rule_id, self.routing.rule_ids)
+        self.assertEqual(move_b.state, "assigned")
+        self.assert_src_input(move_b)
+        self.assertEqual(move_b.location_dest_id, input_ho_location)
+        self.assertEqual(move_b.move_line_ids.location_dest_id, input_ho_location)
+
+        # we have an extra move to reach the Highbay from Input/Handover
+        extra_move = move_b.move_dest_ids
+        self.assert_dest_highbay_1_2(extra_move)
+        self.assert_dest_highbay_1_2(extra_move.picking_id)
+        self.assertEqual(
+            extra_move.picking_id.picking_type_id, self.pick_type_routing_op
+        )
+        self.assertFalse(extra_move.move_dest_ids)
+
+        # TODO tests for domains
