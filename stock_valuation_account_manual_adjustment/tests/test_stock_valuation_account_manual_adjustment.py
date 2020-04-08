@@ -79,7 +79,7 @@ class TestProductInventoryAccountReconcile(TransactionCase):
 
         # Default journal
         journals = self.env['account.journal'].search([('type', '=',
-                                                       'general')])
+                                                        'general')])
         self.journal = journals[0]
 
         # Create a journal entry
@@ -174,7 +174,7 @@ class TestProductInventoryAccountReconcile(TransactionCase):
                 'decrease_account_id': self.account_revaluation.id,
                 'journal_id': self.journal.id,
                 'remarks': 'Test'
-                })
+            })
         wiz.process()
         self.product_average_1.refresh()
         self.assertEquals(self.product_average_1.valuation_discrepancy, 0.0)
