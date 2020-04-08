@@ -76,8 +76,6 @@ class StockMove(models.Model):
         if not self:
             return self
 
-        new_move_per_location = {}
-
         savepoint_name = uuid.uuid1().hex
         self.env["base"].flush()
         # pylint: disable=sql-injection
@@ -89,7 +87,8 @@ class StockMove(models.Model):
         move_routing_rules = self.env["stock.routing"]._routing_rule_for_moves(
             "pull", self
         )
-        moves_with_routing = {}
+        moves_routing = {}
+        no_routing_rule = self.env["stock.routing.rule"].browse()
         need_split = False
         for move in self:
             if move.state not in ("assigned", "partially_available"):
@@ -99,19 +98,25 @@ class StockMove(models.Model):
             # operations while others not. Store the number of products to
             # take from each location, so we'll be able to split the move
             # if needed.
-            move_routing = move_routing_rules[move]
-            # FIXME split partial quantities when there is a rule
-            moves_with_routing[move] = {
+            routing_rules = move_routing_rules[move]
+            moves_routing[move] = {
                 rule: sum(move_lines.mapped("product_uom_qty"))
-                for rule, move_lines in move_routing.items()
+                for rule, move_lines in routing_rules.items()
             }
+            if move.state == "partially_available":
+                # consider unreserved quantity as without routing, so it will
+                # be split if another part of the quantity need a routing
+                moves_routing[move].setdefault(no_routing_rule, 0)
+                moves_routing[move][no_routing_rule] += (
+                    move.product_uom_qty - move.reserved_availability
+                )
 
-        if any(len(rules) > 1 for rules in moves_with_routing.values()):
+        if any(len(rules) > 1 for rules in moves_routing.values()):
             need_split = True
         else:
             # shortcut, we can directly save the rule as we do not need
             # to split
-            for move, rule_quantities in moves_with_routing.items():
+            for move, rule_quantities in moves_routing.items():
                 move.pull_routing_rule_id = next(iter(rule_quantities))
 
         if not need_split:
@@ -131,7 +136,8 @@ class StockMove(models.Model):
             sql.SQL("ROLLBACK TO SAVEPOINT {}").format(sql.Identifier(savepoint_name))
         )
 
-        for move, routing_quantities in moves_with_routing.items():
+        new_move_per_location = {}
+        for move, routing_quantities in moves_routing.items():
             for routing_rule, qty in routing_quantities.items():
                 # When the rule is empty, it means we have no routing
                 # operation for the move, so we have nothing to do,
@@ -212,6 +218,7 @@ class StockMove(models.Model):
                 # The destination of the move, as a parent of the destination
                 # of the routing, goes to the correct place, but is not precise
                 # enough: set the new destination to match the rule's one
+                move.location_id = routing_rule.location_src_id
                 move.location_dest_id = routing_rule.location_dest_id
                 move.picking_type_id = routing_rule.picking_type_id
 
@@ -224,19 +231,22 @@ class StockMove(models.Model):
                 # The destination of the move is already more precise than the
                 # expected destination of the routing: keep it, but we still
                 # want to change the picking type
+                move.location_id = routing_rule.location_src_id
                 move.picking_type_id = routing_rule.picking_type_id
             else:
                 # The destination of the move is unrelated (nor identical, nor
                 # a parent or a child) to the routing destination: in this case
                 # we have to add a routing move before the current move to
                 # route the goods in the routing
+                source_location = move.location_id
+                move.location_id = routing_rule.location_src_id
                 move.location_dest_id = routing_rule.location_dest_id
                 move.picking_type_id = routing_rule.picking_type_id
                 # create a copy of the move with the current picking type and
                 # going to its original destination: it will be assigned to the
                 # same picking as the original picking of our move
                 move._insert_routing_moves(
-                    current_picking_type, move.location_id, original_destination
+                    current_picking_type, source_location, original_destination
                 )
 
             pickings_to_check_for_emptiness |= move.picking_id
