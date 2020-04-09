@@ -19,7 +19,7 @@ class TestRoutingPush(common.SavepointCase):
 
         cls.supplier_loc = cls.env.ref("stock.stock_location_suppliers")
         cls.location_hb = cls.env["stock.location"].create(
-            {"name": "Highbay", "location_id": cls.wh.lot_stock_id.id}
+            {"name": "Highbay", "location_id": cls.wh.view_location_id.id}
         )
         cls.location_shelf_1 = cls.env["stock.location"].create(
             {"name": "Shelf 1", "location_id": cls.wh.lot_stock_id.id}
@@ -35,11 +35,25 @@ class TestRoutingPush(common.SavepointCase):
         )
 
         cls.location_handover = cls.env["stock.location"].create(
-            {"name": "Handover", "location_id": cls.location_hb.id}
+            {"name": "Handover", "location_id": cls.wh.view_location_id.id}
         )
 
         cls.product1 = cls.env["product.product"].create(
             {"name": "Product 1", "type": "product"}
+        )
+        cls.env["stock.putaway.rule"].create(
+            {
+                "product_id": cls.product1.id,
+                "location_in_id": cls.wh.lot_stock_id.id,
+                "location_out_id": cls.location_shelf_1.id,
+            }
+        )
+        cls.env["stock.putaway.rule"].create(
+            {
+                "product_id": cls.product1.id,
+                "location_in_id": cls.location_hb.id,
+                "location_out_id": cls.location_hb_1_2.id,
+            }
         )
         cls.product2 = cls.env["product.product"].create(
             {"name": "Product 2", "type": "product"}
@@ -154,6 +168,9 @@ class TestRoutingPush(common.SavepointCase):
     def assert_dest_shelf1(self, record):
         self.assertEqual(record.location_dest_id, self.location_shelf_1)
 
+    def assert_dest_highbay(self, record):
+        self.assertEqual(record.location_dest_id, self.location_hb)
+
     def assert_src_highbay_1_2(self, record):
         self.assertEqual(record.location_id, self.location_hb_1_2)
 
@@ -203,7 +220,7 @@ class TestRoutingPush(common.SavepointCase):
         self.assert_src_input(move_b)
         # the move stays B stays on the same dest location
         self.assert_dest_handover(move_b)
-        self.assertEqual(move_b.push_routing_rule_id, self.routing.rule_ids)
+        self.assertEqual(move_b.routing_rule_id, self.routing.rule_ids)
 
         # we should have a move added after move_b to put
         # the goods in their final location
@@ -212,7 +229,7 @@ class TestRoutingPush(common.SavepointCase):
         # move: the move line will be in the sub-locations (handover)
 
         self.assert_src_handover(routing_move)
-        self.assert_dest_highbay_1_2(routing_move)
+        self.assert_dest_highbay(routing_move)
 
         self.assertEquals(routing_move.picking_type_id, self.pick_type_routing_op)
         self.assertEquals(
@@ -314,7 +331,7 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(routing_picking.move_lines, routing_move)
         self.assertEqual(routing_picking.picking_type_id, self.pick_type_routing_op)
         self.assert_src_handover(routing_picking)
-        self.assert_dest_highbay_1_2(routing_picking)
+        self.assert_dest_highbay(routing_picking)
 
         # check move and move line A for product1
         self.assert_src_supplier(move_a_p1)
@@ -352,7 +369,7 @@ class TestRoutingPush(common.SavepointCase):
 
         # check routing move for product1
         self.assert_src_handover(routing_move)
-        self.assert_dest_highbay_1_2(routing_move)
+        self.assert_dest_highbay(routing_move)
 
         # Deliver the internal picking (moves B),
         # the routing move for product1 should be assigned,
@@ -389,32 +406,31 @@ class TestRoutingPush(common.SavepointCase):
 
         self.process_operations(move_a)
 
-        # At this point, move_a being 'done', action_assign is executed
-        # on move_b. The standard put-away rules would put all the 10
-        # products in a location. So with a standard odoo, we can't have
-        # the situation we want to test here. Using additional modules
-        # with more advanced put-away rules, the put-away could create
-        # several move lines with different destinations, for instance
-        # one in the highbay, one in the shelf. The highbay one will
-        # need an additional move, the one in the shelf not.
+        # At this point, move_a being 'done', action_assign is automatically
+        # executed on move_b. The standard put-away rules would put all the 10
+        # products in a location. So with a standard odoo, we can't have the
+        # situation we want to test here. Using additional modules with more
+        # advanced put-away rules, the put-away could create several move lines
+        # with different destinations, for instance one in the highbay, one in
+        # the shelf. The highbay one will need an additional move, the one in
+        # the shelf not.
 
-        # In order to simulate this, we'll manually change the move lines of
-        # move_b and call '_split_and_apply_routing_push' on it to force
-        # the application of the routing operation.
-
-        first_ml = move_b.move_line_ids
-        # use _write to bypass the changes to quants done in the
-        # write of stock.move.line: we want to keep the same reservation
-        # of 10 units
-        first_ml._write(
-            {"product_uom_qty": 6.0, "location_dest_id": self.location_hb_1_2.id}
-        )
-        move_b.move_line_ids.copy(
-            {"product_uom_qty": 4.0, "location_dest_id": self.location_shelf_1.id}
-        )
-        move_b.move_line_ids.invalidate_cache(["product_uom_qty", "location_dest_id"])
-        # assign moves ignoring the routing, then apply it manually
-        move_b.with_context(exclude_apply_routing_operation=True)._action_assign()
+        # In order to simulate this, we'll unreserve move_b and manually call
+        # the routing machinery with a forged routing grid
+        move_b._do_unreserve()
+        # normally this is what is returned by _routing_compute_rules:
+        moves_routing = {
+            move_b: {
+                # qty of 6 using this routing rule
+                self.routing.rule_ids: 6,
+                # no routing for the 4 remaining
+                self.env["stock.routing"].browse(): 4,
+            }
+        }
+        # this is what is done in in _action_assign()
+        moves = move_b._routing_splits(moves_routing)
+        moves._apply_routing_rule_push()
+        moves._action_assign()
 
         # At this point, we should have this
         #
@@ -431,7 +447,7 @@ class TestRoutingPush(common.SavepointCase):
         # | 6x Product1 Input → Stock/HB-1-2   (available)         |
         # | 4x Product1 Input → Stock/Shelf1   (available)         |
         # +--------------------------------------------------------+
-        move_b._split_and_apply_routing_push()
+        # move_b._split_and_apply_routing()
 
         # We expect the routing operation to split the move_b so
         # we'll be able to have a move_dest_ids for the Highbay:
@@ -464,9 +480,9 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(len(routing_move), 1)
         routing_picking = routing_move.picking_id
 
-        self.assertEqual(move_b_handover.push_routing_rule_id, self.routing.rule_ids)
-        self.assertFalse(move_b_shelf.push_routing_rule_id)
-        self.assertFalse(routing_move.push_routing_rule_id)
+        self.assertEqual(move_b_handover.routing_rule_id, self.routing.rule_ids)
+        self.assertFalse(move_b_shelf.routing_rule_id)
+        self.assertFalse(routing_move.routing_rule_id)
 
         # check chaining
         self.assertEqual(move_a.move_dest_ids, move_b_shelf + move_b_handover)
@@ -475,6 +491,8 @@ class TestRoutingPush(common.SavepointCase):
         self.assertFalse(routing_move.move_dest_ids)
 
         self.assertEqual(move_a.state, "done")
+        move_b_handover._action_assign()
+
         self.assertEqual(move_b_shelf.state, "assigned")
         self.assertEqual(move_b_handover.state, "assigned")
         self.assertEqual(routing_move.state, "waiting")
@@ -495,7 +513,7 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(routing_picking.move_lines, routing_move)
         self.assertEqual(routing_picking.picking_type_id, self.pick_type_routing_op)
         self.assert_src_handover(routing_picking)
-        self.assert_dest_highbay_1_2(routing_picking)
+        self.assert_dest_highbay(routing_picking)
 
         # check move and move line A
         self.assert_src_supplier(move_a)
@@ -531,7 +549,7 @@ class TestRoutingPush(common.SavepointCase):
 
         # check routing move for product1
         self.assert_src_handover(routing_move)
-        self.assert_dest_highbay_1_2(routing_move)
+        self.assert_dest_highbay(routing_move)
 
         # Deliver the internal picking (moves B),
         # the routing move should be assigned,
@@ -592,7 +610,7 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(move_a.state, "done")
 
         # move B is classified in a new picking
-        self.assertEqual(move_b.push_routing_rule_id, self.routing.rule_ids)
+        self.assertEqual(move_b.routing_rule_id, self.routing.rule_ids)
         self.assertEqual(move_b.state, "assigned")
         self.assertEqual(move_b.location_id, input_ho_location)
         self.assertEqual(move_b.move_line_ids.location_id, input_ho_location)
@@ -629,7 +647,7 @@ class TestRoutingPush(common.SavepointCase):
 
         self.assertEqual(move_a.state, "done")
 
-        self.assertEqual(move_b.push_routing_rule_id, self.routing.rule_ids)
+        self.assertEqual(move_b.routing_rule_id, self.routing.rule_ids)
         self.assertEqual(move_b.state, "assigned")
         self.assert_src_input(move_b)
         self.assertEqual(move_b.location_dest_id, input_ho_location)
@@ -637,8 +655,8 @@ class TestRoutingPush(common.SavepointCase):
 
         # we have an extra move to reach the Highbay from Input/Handover
         extra_move = move_b.move_dest_ids
-        self.assert_dest_highbay_1_2(extra_move)
-        self.assert_dest_highbay_1_2(extra_move.picking_id)
+        self.assert_dest_highbay(extra_move)
+        self.assert_dest_highbay(extra_move.picking_id)
         self.assertEqual(
             extra_move.picking_id.picking_type_id, self.pick_type_routing_op
         )
@@ -656,7 +674,7 @@ class TestRoutingPush(common.SavepointCase):
         move_a = in_picking.move_lines
         move_b = internal_picking.move_lines
         self.process_operations(move_a)
-        self.assertFalse(move_b.push_routing_rule_id)
+        self.assertFalse(move_b.routing_rule_id)
         self.assertEqual(move_b.picking_id.picking_type_id, self.wh.int_type_id)
         # the original chaining stays the same: we don't add any move here
         self.assertFalse(move_a.move_orig_ids)
@@ -674,7 +692,7 @@ class TestRoutingPush(common.SavepointCase):
         move_a = in_picking.move_lines
         move_b = internal_picking.move_lines
         self.process_operations(move_a)
-        self.assertEqual(move_b.push_routing_rule_id, self.routing.rule_ids)
+        self.assertEqual(move_b.routing_rule_id, self.routing.rule_ids)
         # we have an extra move
         self.assertFalse(move_a.move_orig_ids)
         self.assertEqual(move_a.move_dest_ids, move_b)

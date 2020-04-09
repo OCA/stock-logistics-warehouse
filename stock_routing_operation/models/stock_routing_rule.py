@@ -5,6 +5,8 @@ from odoo import _, api, exceptions, fields, models
 from odoo.osv import expression
 from odoo.tools.safe_eval import safe_eval
 
+from .stock_routing import _default_sequence
+
 
 class StockRoutingRule(models.Model):
     _name = "stock.routing.rule"
@@ -15,7 +17,9 @@ class StockRoutingRule(models.Model):
     routing_id = fields.Many2one(
         comodel_name="stock.routing", required=True, ondelete="cascade"
     )
-    routing_location_id = fields.Many2one(related="routing_id.location_id")
+    routing_location_id = fields.Many2one(
+        related="routing_id.location_id", store=True, index=True
+    )
     method = fields.Selection(
         selection=[("pull", "Pull"), ("push", "Push")],
         help="On pull, the routing is applied when the source location of "
@@ -38,11 +42,7 @@ class StockRoutingRule(models.Model):
     )
 
     def _default_sequence(self):
-        maxrule = self.search([], order="sequence desc", limit=1)
-        if maxrule:
-            return maxrule.sequence + 10
-        else:
-            return 0
+        return _default_sequence(self)
 
     @api.constrains("picking_type_id")
     def _constrains_picking_type_location(self):

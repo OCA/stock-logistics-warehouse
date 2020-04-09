@@ -1,13 +1,23 @@
 # Copyright 2019-2020 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 
-from odoo import fields, models
+from collections import defaultdict
+
+from odoo import fields, models, tools
+
+
+def _default_sequence(model):
+    maxrule = model.search([], order="sequence desc", limit=1)
+    if maxrule:
+        return maxrule.sequence + 10
+    else:
+        return 0
 
 
 class StockRouting(models.Model):
     _name = "stock.routing"
     _description = "Stock Routing"
-    _order = "location_id"
+    _order = "sequence, id"
 
     _rec_name = "location_id"
 
@@ -18,6 +28,7 @@ class StockRouting(models.Model):
         ondelete="cascade",
         index=True,
     )
+    sequence = fields.Integer(default=lambda self: self._default_sequence())
     active = fields.Boolean(default=True)
     rule_ids = fields.One2many(
         comodel_name="stock.routing.rule", inverse_name="routing_id"
@@ -31,56 +42,78 @@ class StockRouting(models.Model):
         )
     ]
 
-    def _routing_rule_for_moves(self, method, moves):
+    def _default_sequence(self):
+        return _default_sequence(self)
+
+    # TODO write tests for this
+    # TODO would be nice to add a constraint that would prevent to
+    # have a pull + a pull routing that would apply on the same move
+    def _routing_rule_for_moves(self, moves):
         """Return a routing rule for moves
 
-        :param method: pull (pick) or push (put-away)
+        Look first for a pull routing rule, if no match, look for a push
+        routing rule.
+
         :param move: recordset of the move
         :return: dict {move: {rule: move_lines}}
         """
-        if method not in ("pull", "push"):
-            raise ValueError("routing_type must be one of ('pull', 'push')")
-
-        result = {move: {} for move in moves}
-        valid_rules_for_move = set()
+        self.__cached_is_rule_valid_for_move.clear_cache(self)
+        result = {
+            move: defaultdict(self.env["stock.move.line"].browse) for move in moves
+        }
+        empty_rule = self.env["stock.routing.rule"].browse()
         for move_line in moves.mapped("move_line_ids"):
-            if method == "pull":
-                location = move_line.location_id
-            else:
-                location = move_line.location_dest_id
-            location_tree = location._location_parent_tree()
-            candidate_routings = self.search([("location_id", "in", location_tree.ids)])
+            src_location = move_line.location_id
+            dest_location = move_line.location_dest_id
+            pull_location_tree = src_location._location_parent_tree()
+            push_location_tree = dest_location._location_parent_tree()
+            candidate_rules = self.env["stock.routing.rule"].search(
+                [
+                    "|",
+                    "&",
+                    ("routing_location_id", "in", pull_location_tree.ids),
+                    ("method", "=", "pull"),
+                    "&",
+                    ("routing_location_id", "in", push_location_tree.ids),
+                    ("method", "=", "push"),
+                ]
+            )
+            candidate_rules.sorted(lambda r: (r.routing_id.sequence, r.sequence))
+            rule = self._get_move_line_routing_rule(
+                move_line, pull_location_tree, candidate_rules
+            )
+            if rule:
+                result[move_line.move_id][rule] |= move_line
+                continue
 
-            result.setdefault(move_line.move_id, [])
-            # the first location is the current move line's source or dest
-            # location, then we climb up the tree of locations
-            for loc in location_tree:
-                # and search the first allowed rule in the routing
-                routing = candidate_routings.filtered(lambda r: r.location_id == loc)
-                rules = routing.rule_ids.filtered(lambda r: r.method == method)
-                # find the first valid rule
-                found = False
-                for rule in rules:
-                    if not (
-                        (move_line.move_id, rule) in valid_rules_for_move
-                        or rule._is_valid_for_moves(move_line.move_id)
-                    ):
-                        continue
-                    # memorize the result so we don't compute it for
-                    # every move line
-                    valid_rules_for_move.add((move_line.move_id, rule))
-                    if rule in result[move_line.move_id]:
-                        result[move_line.move_id][rule] |= move_line
-                    else:
-                        result[move_line.move_id][rule] = move_line
-                    found = True
-                    break
-                if found:
-                    break
-            else:
-                empty_rule = self.env["stock.routing.rule"].browse()
-                if empty_rule in result[move_line.move_id]:
-                    result[move_line.move_id][empty_rule] |= move_line
-                else:
-                    result[move_line.move_id][empty_rule] = move_line
+            rule = self._get_move_line_routing_rule(
+                move_line, push_location_tree, candidate_rules
+            )
+            if rule:
+                result[move_line.move_id][rule] |= move_line
+                continue
+
+            result[move_line.move_id][empty_rule] |= move_line
+
         return result
+
+    @tools.ormcache("rule", "move")
+    def __cached_is_rule_valid_for_move(self, rule, move):
+        """To be used only by _routing_rule_for_moves
+
+        The method _routing_rule_for_moves reset the cache at beginning.
+        Cache the result so inside _routing_rule_for_moves, we compute it
+        only once for a move an a rule.
+        """
+        return rule._is_valid_for_moves(move)
+
+    def _get_move_line_routing_rule(self, move_line, location_tree, rules):
+        # the first location is the current move line's source or dest
+        # location, then we climb up the tree of locations
+        for loc in location_tree:
+            # find the first valid rule
+            for rule in rules.filtered(lambda r: r.routing_location_id == loc):
+                if not self.__cached_is_rule_valid_for_move(rule, move_line.move_id):
+                    continue
+                return rule
+        return self.env["stock.routing.rule"].browse()
