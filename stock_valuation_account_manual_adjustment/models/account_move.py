@@ -8,8 +8,7 @@ class AccountMove(models.Model):
 
     stock_valuation_account_manual_adjustment_id = fields.Many2one(
         comodel_name='stock.valuation.account.manual.adjustment',
-        string='Stock Valuation Account Manual Adjustment',
-        ondelete='restrict')
+        string='Stock Valuation Account Manual Adjustment')
 
     @api.multi
     def unlink(self):
@@ -28,7 +27,7 @@ class AccountMoveLine(models.Model):
         comodel_name='stock.valuation.account.manual.adjustment',
         related='move_id.stock_valuation_account_manual_adjustment_id',
         string='Stock Valuation Account Manual Adjustment',
-        store=True, ondelete='restrict', readonly=True)
+        store=True, readonly=True)
 
     @api.multi
     def unlink(self):

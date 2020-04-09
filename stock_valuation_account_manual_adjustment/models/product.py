@@ -38,6 +38,13 @@ class ProductProduct(models.Model):
         groups="stock_valuation_account_manual_adjustment."
                "group_stock_valuation_account_manual_adjustment",
     )
+    qty_discrepancy = fields.Float(
+        string="Quantity discrepancy",
+        compute="_compute_inventory_account_value",
+        digits=UNIT,
+        groups="stock_valuation_account_manual_adjustment."
+               "group_stock_valuation_account_manual_adjustment",
+    )
 
     @api.multi
     def _compute_inventory_account_value(self):
@@ -46,9 +53,11 @@ class ProductProduct(models.Model):
         for product in self:
             inventory_v = inventory_val.get(product.id, 0.0)
             accounting_v = accounting_val.get(product.id, 0.0)
+            qty_discrepancy = product.qty_at_date - product.account_qty_at_date
             product.accounting_value = accounting_v
             product.inventory_value = inventory_v
             product.valuation_discrepancy = inventory_v - accounting_v
+            product.qty_discrepancy = qty_discrepancy
 
     @api.model
     def _get_accounting_valuation_by_product(self):
@@ -131,10 +140,15 @@ class ProductProduct(models.Model):
                 UNION ALL
                 SELECT * FROM Q2),
             Q4 AS (
-                SELECT pr.id, sum(sq.qty*sq.cost) as valuation
+                SELECT pr.id, sum(sq.quantity*ip.value_float) as valuation
                 FROM stock_quant as sq
                 INNER JOIN product_product as pr
                 ON pr.id = sq.product_id
+                INNER JOIN ir_property as ip
+                ON (ip.res_id = 'product.product,' || pr.id)
+                INNER JOIN ir_model_fields imf
+                ON (imf.id = ip.fields_id
+                AND imf.name = 'standard_price')
                 INNER JOIN stock_location as sl
                 ON sl.id = sq.location_id
                 INNER JOIN Q3
@@ -143,7 +157,7 @@ class ProductProduct(models.Model):
                 AND sl.usage = 'internal'
                 GROUP BY pr.id),
             Q5 AS (
-                SELECT pr.id, sum(sq.qty*ip.value_float) as valuation
+                SELECT pr.id, sum(sq.quantity*ip.value_float) as valuation
                 FROM stock_quant as sq
                 INNER JOIN product_product as pr
                 ON pr.id = sq.product_id
