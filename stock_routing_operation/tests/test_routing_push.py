@@ -3,7 +3,7 @@
 from odoo.tests import common
 
 
-class TestDestRoutingOperation(common.SavepointCase):
+class TestRoutingPush(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -203,6 +203,7 @@ class TestDestRoutingOperation(common.SavepointCase):
         self.assert_src_input(move_b)
         # the move stays B stays on the same dest location
         self.assert_dest_handover(move_b)
+        self.assertEqual(move_b.push_routing_rule_id, self.routing.rule_ids)
 
         # we should have a move added after move_b to put
         # the goods in their final location
@@ -463,6 +464,10 @@ class TestDestRoutingOperation(common.SavepointCase):
         self.assertEqual(len(routing_move), 1)
         routing_picking = routing_move.picking_id
 
+        self.assertEqual(move_b_handover.push_routing_rule_id, self.routing.rule_ids)
+        self.assertFalse(move_b_shelf.push_routing_rule_id)
+        self.assertFalse(routing_move.push_routing_rule_id)
+
         # check chaining
         self.assertEqual(move_a.move_dest_ids, move_b_shelf + move_b_handover)
         self.assertFalse(move_b_shelf.move_dest_ids)
@@ -639,4 +644,42 @@ class TestDestRoutingOperation(common.SavepointCase):
         )
         self.assertFalse(extra_move.move_dest_ids)
 
-        # TODO tests for domains
+    def test_domain_ignore_move(self):
+        # define a domain that will exclude the routing for this
+        # move, there will not be any change on the moves compared
+        # to a standard setup
+        domain = "[('product_id', '=', {})]".format(self.product2.id)
+        self.routing.rule_ids.rule_domain = domain
+        in_picking, internal_picking = self._create_supplier_input_highbay(
+            self.wh, [(self.product1, 10, self.location_hb_1_2)]
+        )
+        move_a = in_picking.move_lines
+        move_b = internal_picking.move_lines
+        self.process_operations(move_a)
+        self.assertFalse(move_b.push_routing_rule_id)
+        self.assertEqual(move_b.picking_id.picking_type_id, self.wh.int_type_id)
+        # the original chaining stays the same: we don't add any move here
+        self.assertFalse(move_a.move_orig_ids)
+        self.assertEqual(move_a.move_dest_ids, move_b)
+        self.assertFalse(move_b.move_dest_ids)
+
+    def test_domain_include_move(self):
+        # define a domain that will include the routing for this
+        # move, so routing is applied
+        domain = "[('product_id', '=', {})]".format(self.product1.id)
+        self.routing.rule_ids.rule_domain = domain
+        in_picking, internal_picking = self._create_supplier_input_highbay(
+            self.wh, [(self.product1, 10, self.location_hb_1_2)]
+        )
+        move_a = in_picking.move_lines
+        move_b = internal_picking.move_lines
+        self.process_operations(move_a)
+        self.assertEqual(move_b.push_routing_rule_id, self.routing.rule_ids)
+        # we have an extra move
+        self.assertFalse(move_a.move_orig_ids)
+        self.assertEqual(move_a.move_dest_ids, move_b)
+        self.assertTrue(move_b.move_dest_ids)
+        next_move = move_b.move_dest_ids
+        self.assertEqual(
+            next_move.picking_id.picking_type_id, self.pick_type_routing_op
+        )
