@@ -89,6 +89,13 @@ class StockValuationAccountManualAdjustment(models.Model):
         self.post()
         return True
 
+    @api.multi
+    def button_draft(self):
+        for am in self.account_move_ids:
+            am.button_cancel()
+        self.state = 'draft'
+        return True
+
     @api.onchange("product_id")
     def _onchange_product_id(self):
         if self.product_id:
@@ -114,23 +121,25 @@ class StockValuationAccountManualAdjustment(models.Model):
         }
 
     def _prepare_debit_move_line_data(self, amount, account_id, prod,
-                                      date_move):
+                                      date_move, qty):
         self.ensure_one()
         return {
             'name': '(%s) %s' % (self.name, prod.name),
             'date': date_move,
+            'quantity': qty,
             'product_id': prod.id,
             'account_id': account_id,
             'debit': amount
         }
 
     def _prepare_credit_move_line_data(self, amount, account_id,
-                                       prod, date_move):
+                                       prod, date_move, qty):
         self.ensure_one()
         return {
             'name': '(%s) %s' % (self.name, prod.name),
             'date': date_move,
             'product_id': prod.id,
+            'quantity': qty,
             'account_id': account_id,
             'credit': amount
         }
@@ -142,20 +151,24 @@ class StockValuationAccountManualAdjustment(models.Model):
             if not adj.amount:
                 continue
             datas = adj.product_id.product_tmpl_id.get_product_accounts()
+            dr_qty = 0.0
+            cr_qty = 0.0
             if adj.product_id.valuation_discrepancy <= 0.0:
                 debit_account_id = self.decrease_account_id.id
                 credit_account_id = \
                     datas['stock_valuation'].id or False
+                cr_qty = adj.product_id.qty_discrepancy
             else:
                 debit_account_id = \
                     datas['stock_valuation'].id or False
+                dr_qty = adj.product_id.qty_discrepancy
                 credit_account_id = self.increase_account_id.id
             debit_move_line_data = self._prepare_debit_move_line_data(
                 abs(adj.product_id.valuation_discrepancy),
-                debit_account_id, adj.product_id, today)
+                debit_account_id, adj.product_id, today, dr_qty)
             credit_move_line_data = self._prepare_credit_move_line_data(
                 abs(adj.product_id.valuation_discrepancy),
-                credit_account_id, adj.product_id, today)
+                credit_account_id, adj.product_id, today, cr_qty)
             move_data = self._prepare_move_data(today, debit_move_line_data,
                                                 credit_move_line_data)
             move = self.env['account.move'].create(move_data)

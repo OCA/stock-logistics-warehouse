@@ -4,6 +4,7 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.addons import decimal_precision as dp
 
 
 class StockValuationAccountMassAdjust(models.TransientModel):
@@ -52,6 +53,7 @@ class StockValuationAccountMassAdjust(models.TransientModel):
             'increase_account_id': increase_account.id,
             'decrease_account_id': decrease_account.id,
             'journal_id': self.journal_id.id,
+            'qty_discrepancy': product.qty_discrepancy,
             'remarks': self.remarks,
             'product_id': product.id,
             'amount': product.valuation_discrepancy

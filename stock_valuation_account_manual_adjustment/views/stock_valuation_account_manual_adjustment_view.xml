@@ -10,6 +10,8 @@
                     <button name="button_post" states="draft"
                             string="Post" type="object"
                             class="oe_highlight"/>
+                    <button name="button_draft" states="posted"
+                            string="Cancel" type="object"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,done,cancel"
                            statusbar_colors='{"done":"blue"}'/>
