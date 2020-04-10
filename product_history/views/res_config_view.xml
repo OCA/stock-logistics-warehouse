@@ -6,9 +6,15 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="product_average_consumption.view_average_consumption_config_settings"/>
         <field name="arch" type="xml">
-            <field name="default_consumption_calculation_method" position="after">
-                <field name="default_number_of_periods" attrs="{'invisible': [('default_consumption_calculation_method','!=','history')]}"/>
-            </field>
+            <xpath expr="//field[@name='default_consumption_calculation_method']/.." position="after">
+                <div class="o_setting_right_pane"
+                     attrs="{'invisible': [('default_consumption_calculation_method','!=','history')]}">
+                    <div class="row">
+                        <label for="default_number_of_periods" class="col-8"/>
+                        <field name="default_number_of_periods" class="col-2"/>
+                    </div>
+                </div>
+            </xpath>
         </field>
     </record>
 

@@ -67,7 +67,6 @@ msgstr ""
 #. module: product_history
 #: selection:product.history,history_range:0
 #: selection:res.config.settings,default_history_range:0
-#: selection:user.config.settings,default_history_range:0
 msgid "Days"
 msgstr ""
 
@@ -162,7 +161,6 @@ msgstr ""
 #: selection:product.history,history_range:0
 #: selection:product.template,history_range:0
 #: selection:res.config.settings,default_history_range:0
-#: selection:user.config.settings,default_history_range:0
 msgid "Month"
 msgstr ""
 
@@ -184,7 +182,6 @@ msgstr ""
 
 #. module: product_history
 #: model:ir.model.fields,field_description:product_history.field_res_config_settings__default_number_of_periods
-#: model:ir.model.fields,field_description:product_history.field_user_config_settings__default_number_of_periods
 #: model:ir.model.fields,help:product_history.field_product_product__number_of_periods
 #: model:ir.model.fields,help:product_history.field_product_product__number_of_periods_real
 #: model:ir.model.fields,help:product_history.field_product_product__number_of_periods_target
@@ -217,7 +214,6 @@ msgstr ""
 
 #. module: product_history
 #: model:ir.model.fields,field_description:product_history.field_res_config_settings__default_history_range
-#: model:ir.model.fields,field_description:product_history.field_user_config_settings__default_history_range
 msgid "Product History Display Range"
 msgstr ""
 
@@ -262,7 +258,6 @@ msgstr ""
 
 #. module: product_history
 #: model:ir.model.fields,help:product_history.field_res_config_settings__default_number_of_periods
-#: model:ir.model.fields,help:product_history.field_user_config_settings__default_number_of_periods
 msgid "This field is used if the selected method is based on Product History"
 msgstr ""
 
@@ -297,7 +292,6 @@ msgstr ""
 #: selection:product.history,history_range:0
 #: selection:product.template,history_range:0
 #: selection:res.config.settings,default_history_range:0
-#: selection:user.config.settings,default_history_range:0
 msgid "Week"
 msgstr ""
 
