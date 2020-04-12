@@ -8,7 +8,13 @@
     "author": "Akretion, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": ["stock"],
+    "external_dependencies": {
+        "python": [
+            "openupgradelib",
+        ],
+    },
     "data": ["views/product.xml"],
     "demo": ["demo/putaway_strategies.xml"],
     "maintainers": ["kevinkhao", "sebastienbeau"],
+    "post_init_hook": "post_init_hook",
 }
