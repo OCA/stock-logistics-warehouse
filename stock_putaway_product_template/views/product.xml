@@ -9,20 +9,18 @@
             <xpath expr="//page[@name='inventory']" position="inside">
                 <div name="putaway" groups="stock.group_adv_location" string="Putaway strategies">
                     <field name="product_variant_ids" invisible="1"/>
-                    <field name="product_variant_id" invisible="1"/>
                     <group name="putaway_products" string="Put Away Strategies by products"
                            attrs="{'invisible': [('is_product_variant', '=', True)]}">
                         <group>
                             <p class="oe_grey">
                             The rules defined per product will be applied before the rules defined per product category.
+                            <div>Keep empty product field to apply strategy to all variants.</div>
                             </p>
                         </group>
-                        <field name="product_tmpl_putaway_ids"
-                               nolabel="1">
+                        <field name="product_tmpl_putaway_ids" nolabel="1">
                             <tree editable="top">
-                                <field name="product_id" domain="[('product_tmpl_id', '=', parent.id)]"
-                                       options="{'no_create': 1}" required="True"/>
-                                <field name="putaway_id" options="{'no_create': 1}"/>
+                                <field name="product_id" domain="[('product_tmpl_id', '=', parent.id)]"/>
+                                <field name="putaway_id"/>
                                 <field name="fixed_location_id"/>
                             </tree>
                         </field>
@@ -53,7 +51,7 @@
                        attrs="{'invisible': [('is_product_variant', '=', False)]}">
                     <field name="product_product_putaway_ids" groups="stock.group_adv_location" nolabel="1">
                         <tree editable="bottom">
-                            <field name="putaway_id" options="{'no_create': 1}"/>
+                            <field name="putaway_id"/>
                             <field name="fixed_location_id"/>
                         </tree>
                     </field>
