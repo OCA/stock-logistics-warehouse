@@ -26,6 +26,10 @@ class StockValuationAccountMassAdjustPicking(models.TransientModel):
             if picking.location_id.company_id == picking.location_dest_id.company_id or picking.state != 'done':
                 # we don't want to account for internal moves or dropshipments nor for not finished pickings
                 continue
+            account_move_lines = self.env['account.move.line'].search([('stock_move_id', 'in', picking.move_lines.ids), ('reconciled', '=', True)])
+            if account_move_lines:
+                # we don't want to account if the some journal entries are reconciled
+                continue
             self.create_valuation_entries(picking)
         action = self.env.ref('account.action_account_moves_all_a')
 
