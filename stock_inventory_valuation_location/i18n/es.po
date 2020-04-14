@@ -17,6 +17,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_inventory_valuation_location
+#: model:ir.model.fields,field_description:stock_inventory_valuation_location.field_stock_quant__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: stock_inventory_valuation_location
+#: model:ir.model,name:stock_inventory_valuation_location.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_inventory_valuation_location
 #: model:ir.model.fields,field_description:stock_inventory_valuation_location.field_stock_quant__value
 msgid "Value"
 msgstr "Valoración"
