@@ -39,6 +39,11 @@ class StockValuationAccountMassAdjustPicking(models.TransientModel):
 
     def create_valuation_entries(self, picking):
         for move in picking.move_lines:
+            # Do not create zero entries
+            if not move.product_id.standard_price:
+                continue
+            if not move.product_qty:
+                continue
             # Apply restrictions on the stock move to be able to make
             # consistent accounting entries.
             if move._is_in() and move._is_out():
