@@ -32,7 +32,7 @@ class StockValuationAccountMassAdjustMove(models.TransientModel):
         action = self.env.ref('account.action_account_moves_all_a')
 
         result = action.read()[0]
-        result['domain'] = [('stock_move_id', '=', move.id)]
+        result['domain'] = [('stock_move_id', 'in', moves.ids)]
         return result
 
     def create_valuation_entries(self, move):
