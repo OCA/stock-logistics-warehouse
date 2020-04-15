@@ -21,7 +21,7 @@
         "views/account_move_line_view.xml",
         "views/stock_valuation_account_manual_adjustment_view.xml",
         "wizards/mass_create_view.xml",
-        "wizards/stock_valuation_account_mass_adust_picking.xml"
+        "wizards/stock_valuation_account_mass_adjust_move.xml"
     ],
     'pre_init_hook': 'pre_init_hook',
     "license": "AGPL-3",
