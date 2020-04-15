@@ -37,7 +37,7 @@ class StockValuationAccountMassAdjustMove(models.TransientModel):
 
     def create_valuation_entries(self, move):
         # Do not create zero entries
-        if not move.product_id.standard_price or move.product_qty:
+        if not move.product_id.standard_price or not move.product_qty:
             return
         # Apply restrictions on the stock move to be able to make
         # consistent accounting entries.
