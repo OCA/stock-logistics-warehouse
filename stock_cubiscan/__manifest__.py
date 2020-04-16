@@ -13,10 +13,12 @@
         "web_tree_dynamic_colored_field",
         "product_packaging_dimension",
         "product_packaging_type_required",
+        "product_dimension",
     ],
     "external_dependencies": {"python": ["cubiscan"]},
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "data": [
+        "data/uom.xml",
         "views/assets.xml",
         "views/cubiscan_view.xml",
         "wizard/cubiscan_wizard.xml",
