@@ -80,25 +80,13 @@
 -
   !python {model: stock.reservation, id: reserv_sorbet2}: |
     assert 'assigned' == self.state
-    assert 1 == len(self.reserved_quant_ids)
+
 -
   I check Virtual stock of Sorbet after update reservation
 -
   !python {model: product.product, id: product_sorbet}: |
     assert 3.5 == self.virtual_available
--
-  I run the scheduler
--
-  !python {model: procurement.order}: |
-    self.run_scheduler()
--
-  The procurement linked to the orderpoint must be in exception (no routes configured)
--
-  !python {model: stock.warehouse.orderpoint}: |
-    orderpoint = self.browse(ref('stock_reserve.sorbet_orderpoint'))
-    assert orderpoint.procurement_ids[0].state == 'exception', 'procurement must be in exception as there is no rule for procurement'
-    import math
-    assert orderpoint.procurement_ids[0].product_qty == math.ceil(15 - 3.5), 'wrong product qty ordered'
+
 -
   I release the reservation
 -

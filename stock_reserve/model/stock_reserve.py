@@ -1,24 +1,5 @@
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Guewen Baconnier
-#    Copyright 2013 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
+# Copyright 2020 Camptocamp SA.
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import models, fields, api
 from odoo.exceptions import except_orm
 from odoo.tools.translate import _
@@ -139,7 +120,7 @@ class StockReservation(models.Model):
         A date until which the product is reserved can be specified.
         """
         self.write({'date_expected': fields.Datetime.now()})
-        self.mapped('move_id').action_confirm()
+        self.mapped('move_id')._action_confirm()
         self.mapped('move_id.picking_id').action_assign()
         return True
 
@@ -148,14 +129,15 @@ class StockReservation(models.Model):
         """
         Release moves from reservation
         """
-        self.mapped('move_id').action_cancel()
+        self.mapped('move_id')._action_cancel()
         return True
 
     @api.model
     def release_validity_exceeded(self, ids=None):
         """ Release all the reservation having an exceeded validity date """
-        domain = [('date_validity', '<', fields.date.today()),
-                  ('state', '=', 'assigned')]
+        domain = [
+            ('date_validity', '<', fields.date.today()),
+            ('state', '=', 'assigned')]
         if ids:
             domain.append(('id', 'in', ids))
         self.search(domain).release()
