@@ -54,3 +54,4 @@ class StockPicking(models.Model):
             move_obj.create(data)
         self.action_confirm()
         self.action_assign()
+        return True
