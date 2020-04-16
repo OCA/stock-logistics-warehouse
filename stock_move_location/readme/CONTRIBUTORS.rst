@@ -8,3 +8,5 @@
 
   * Sergio Teruel
   * João Marques
+* Jacques-Etienne Baudoux <je@bcim.be>
+* Iryna Vyshnevska <i.vyshnevska@mobilunity.com>
