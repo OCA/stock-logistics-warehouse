@@ -19,10 +19,6 @@
         'view/sale.xml',
         'view/stock_reserve.xml',
     ],
-    'test': [
-        'test/sale_reserve.yml',
-        'test/sale_line_reserve.yml',
-    ],
     'installable': True,
     'auto_install': False,
 }
