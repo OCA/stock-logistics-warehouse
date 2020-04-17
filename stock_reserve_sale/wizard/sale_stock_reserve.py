@@ -1,24 +1,5 @@
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Guewen Baconnier, Leonardo Pistone
-#    Copyright 2013-2015 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
+# Copyright 2020 Camptocamp SA.
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import models, fields, api, exceptions
 
 
@@ -27,7 +8,13 @@ class SaleStockReserve(models.TransientModel):
 
     @api.model
     def _default_location_id(self):
-        return self.env['stock.reservation']._default_location_id()
+        active_model = self.env.context.get('active_model')
+        active_id = self.env.context.get('active_id')
+        browse_model = self.env[active_model].browse(active_id)
+        if active_model == 'sale.order.line':
+            browse_model = browse_model.order_id
+        return browse_model.warehouse_id.pick_type_id.\
+            default_location_src_id.id
 
     @api.model
     def _default_location_dest_id(self):
@@ -63,7 +50,8 @@ class SaleStockReserve(models.TransientModel):
         'stock.location',
         'Source Location',
         required=True,
-        default=_default_location_id)
+        default=_default_location_id
+        )
     location_dest_id = fields.Many2one(
         'stock.location',
         'Reservation Location',
@@ -82,26 +70,23 @@ class SaleStockReserve(models.TransientModel):
     @api.multi
     def _prepare_stock_reservation(self, line):
         self.ensure_one()
-        product_uos = line.product_uos.id if line.product_uos else False
-        return {'product_id': line.product_id.id,
-                'product_uom': line.product_uom.id,
-                'product_uom_qty': line.product_uom_qty,
-                'date_validity': self.date_validity,
-                'name': "%s (%s)" % (line.order_id.name, line.name),
-                'location_id': self.location_id.id,
-                'location_dest_id': self.location_dest_id.id,
-                'note': self.note,
-                'product_uos_qty': line.product_uos_qty,
-                'product_uos': product_uos,
-                'price_unit': line.price_unit,
-                'sale_line_id': line.id,
-                'restrict_partner_id': self.owner_id.id,
-                }
+        return {
+            'product_id': line.product_id.id,
+            'product_uom': line.product_uom.id,
+            'product_uom_qty': line.product_uom_qty,
+            'date_validity': self.date_validity,
+            'name': "%s (%s)" % (line.order_id.name, line.name),
+            'location_id': self.location_id.id,
+            'location_dest_id': self.location_dest_id.id,
+            'note': self.note,
+            'price_unit': line.price_unit,
+            'sale_line_id': line.id,
+            'restrict_partner_id': self.owner_id.id,
+        }
 
     @api.multi
     def stock_reserve(self, line_ids):
         self.ensure_one()
-
         lines = self.env['sale.order.line'].browse(line_ids)
         for line in lines:
             if not line.is_stock_reservable:
