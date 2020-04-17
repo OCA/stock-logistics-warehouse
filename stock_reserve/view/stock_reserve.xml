@@ -14,11 +14,11 @@
                     <button name="release" type="object"
                         string="Release"
                         class="oe_highlight"
-                        states="assigned,confirmed,done"/>
+                        states="assigned,partially_available,confirmed,done"/>
                     <button name="open_move" type="object"
                         string="View Reservation Move"/>
                     <field name="state" widget="statusbar"
-                        statusbar_visible="draft,assigned"/>
+                        statusbar_visible="draft,assigned,cancel"/>
                 </header>
                 <sheet>
                     <group>
@@ -55,8 +55,7 @@
         <field name="name">stock.reservation.tree</field>
         <field name="model">stock.reservation</field>
         <field name="arch" type="xml">
-            <tree string="Stock Reservations"
-                    colors="blue:state == 'draft';grey:state == 'cancel'" >
+            <tree string="Stock Reservations" >
                 <field name="name" />
                 <field name="product_id" />
                 <field name="move_id" />
@@ -76,7 +75,7 @@
                     type="object"
                     help="Release"
                     icon="fa-cogs"
-                    states="assigned,confirmed,done"
+                    states="assigned,partially_available,confirmed,done"
                     />
             </tree>
         </field>
@@ -90,6 +89,12 @@
                 <filter name="draft" string="Draft"
                     domain="[('state', '=', 'draft')]"
                     help="Not already reserved"/>
+                <filter name="partially_available" string="Partially Available"
+                    domain="[('state', '=', 'partially_available')]"
+                    help="Partially Available"/>
+                <filter name="confirmed" string="Waiting Availability"
+                    domain="[('state', '=', 'confirmed')]"
+                    help="Waiting Availability"/>
                 <filter name="reserved" string="Reserved"
                     domain="[('state', '=', 'assigned')]"
                     help="Moves are reserved."/>
@@ -126,6 +131,8 @@
         <field name="search_view_id" ref="view_stock_reservation_search"/>
         <field name="context">{
             'search_default_draft': 1,
+            'search_default_partially_available': 1,
+            'search_default_confirmed': 1,
             'search_default_reserved': 1,
             'search_default_groupby_product': 1}</field>
         <field name="help" type="html">

@@ -25,6 +25,8 @@ class ProductTemplate(models.Model):
         action_dict['domain'] = [('product_id', 'in', product_ids)]
         action_dict['context'] = {
             'search_default_draft': 1,
+            'search_default_partially_available': 1,
+            'search_default_confirmed': 1,
             'search_default_reserved': 1
             }
         return action_dict
@@ -42,7 +44,8 @@ class ProductProduct(models.Model):
         for product in self:
             domain = [
                 ('product_id', '=', product.id),
-                ('state', 'in', ['draft', 'assigned'])]
+                ('state', 'in', [
+                    'draft', 'partially_available', 'confirmed', 'assigned'])]
             reservations = self.env['stock.reservation'].search(domain)
             product.reservation_count = sum(reservations.mapped('product_qty'))
 
@@ -54,6 +57,8 @@ class ProductProduct(models.Model):
         action_dict['domain'] = [('product_id', '=', self.id)]
         action_dict['context'] = {
             'search_default_draft': 1,
+            'search_default_partially_available': 1,
+            'search_default_confirmed': 1,
             'search_default_reserved': 1
             }
         return action_dict

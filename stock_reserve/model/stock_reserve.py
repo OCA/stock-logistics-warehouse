@@ -120,7 +120,7 @@ class StockReservation(models.Model):
         A date until which the product is reserved can be specified.
         """
         self.write({'date_expected': fields.Datetime.now()})
-        self.mapped('move_id')._action_confirm()
+        self.mapped('move_id')._action_confirm(merge=False)
         self.mapped('move_id.picking_id').action_assign()
         return True
 
@@ -137,7 +137,7 @@ class StockReservation(models.Model):
         """ Release all the reservation having an exceeded validity date """
         domain = [
             ('date_validity', '<', fields.date.today()),
-            ('state', '=', 'assigned')]
+            ('state', 'in', ('assigned', 'partially_available', 'confirmed'))]
         if ids:
             domain.append(('id', 'in', ids))
         self.search(domain).release()
