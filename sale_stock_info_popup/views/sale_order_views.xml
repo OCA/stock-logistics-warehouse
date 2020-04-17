@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- Copyright 2020 Tecnativa - Ernesto Tejeda
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.line.tree.inherit</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
+                <!-- below fields are used in the widget qty_at_date_widget -->
+                <field name="product_type" invisible="1"/>
+                <field name="virtual_available_at_date" invisible="1"/>
+                <field name="qty_available_today" invisible="1"/>
+                <field name="free_qty_today" invisible="1"/>
+                <field name="scheduled_date" invisible="1"/>
+                <field name="warehouse_id" invisible="1"/>
+                <field name="qty_to_deliver" invisible="1"/>
+                <field name="is_mto" invisible="1"/>
+                <field name="display_qty_widget" invisible="1"/>
+                <widget name="qty_at_date_widget" width="0.1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
