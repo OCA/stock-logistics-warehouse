@@ -164,9 +164,9 @@ class SaleOrderLine(models.Model):
     @api.multi
     def write(self, vals):
         block_on_reserve = (
-            'product_id', 'product_uom', 'product_uos', 'type')
+            'product_id', 'product_uom', 'type')
         update_on_reserve = (
-            'price_unit', 'product_uom_qty', 'product_uos_qty')
+            'price_unit', 'product_uom_qty')
         keys = set(vals.keys())
         test_block = keys.intersection(block_on_reserve)
         test_update = keys.intersection(update_on_reserve)
@@ -194,10 +194,8 @@ class SaleOrderLine(models.Model):
                             'line. Impossible to adjust their quantity. '
                             'Please release the reservation '
                             'before changing the quantity.'))
-
                 line.reservation_ids.write({
                     'price_unit': line.price_unit,
                     'product_uom_qty': line.product_uom_qty,
-                    'product_uos_qty': line.product_uos_qty,
                     })
         return res
