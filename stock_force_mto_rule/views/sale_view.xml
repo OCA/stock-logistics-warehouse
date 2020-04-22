@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2018 PlanetaTIC - Francisco Fernández <ffernandez@planetatic.com>
+     Copyright 2018 PlanetaTIC - Lluís Rovira <lrovira@planetatic.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+<record id="view_order_form" model="ir.ui.view">
+    <field name="name">stock_force_mto_rule.sale.order.form</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+            <field name="route_mto" attrs="{'readonly': ['|', ('state', 'not in', (False, 'draft')), ('product_id', '=', False)]}"/>
+        </xpath>
+    </field>
+</record>
+
+</odoo>
