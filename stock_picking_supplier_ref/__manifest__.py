@@ -6,7 +6,7 @@
     'name': 'Stock Picking Supplier Reference',
     'version': '10.0.1.0.0',
     'category': 'Stock',
-    'author': 'Trey',
+    'author': 'Trey, Odoo Community Association (OCA)',
     'website': 'https://www.trey.es',
     'license': 'AGPL-3',
     'summary': '''Adds a supplier reference field inside supplier's pickings
