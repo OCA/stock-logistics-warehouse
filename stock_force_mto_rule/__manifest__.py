@@ -15,7 +15,7 @@
         'stock',
     ],
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'views/sale_view.xml',
     ],
     'demo': [],
