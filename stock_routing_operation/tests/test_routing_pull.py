@@ -198,10 +198,8 @@ class TestRoutingPull(common.SavepointCase):
         self.assert_dest_customer(move_b)
 
         move_middle = move_a.move_dest_ids
-        # the routing move stays in the same source location than the original
-        # move: the move line will be in the sub-locations (handover)
-
-        self.assert_src_stock(move_middle)
+        # the routing move comes from the place where we put the goods
+        self.assert_src_handover(move_middle)
         # Output
         self.assert_dest_output(move_middle)
 
@@ -300,8 +298,8 @@ class TestRoutingPull(common.SavepointCase):
         self.assertEqual(move_b_p2.state, "waiting")
 
         # Check middle move
-        # Stock
-        self.assert_src_stock(move_middle)
+        # the new source is handover since we move the goods here
+        self.assert_src_handover(move_middle)
         # Output
         self.assert_dest_output(move_middle)
         self.assert_src_stock(move_middle.picking_id)
@@ -413,7 +411,7 @@ class TestRoutingPull(common.SavepointCase):
 
         # the split move is waiting for 'move_ho'
         self.assertEqual(len(ml), 1)
-        self.assert_src_stock(move_a2)
+        self.assert_src_handover(move_a2)
         self.assert_dest_output(move_a2)
         self.assertEqual(move_a2.picking_id.picking_type_id, self.wh.pick_type_id)
         self.assertEqual(move_a2.state, "waiting")
@@ -481,8 +479,9 @@ class TestRoutingPull(common.SavepointCase):
 
         self.assert_src_highbay(move_a)
         self.assertEqual(move_a.location_dest_id, area1)
-        # the move stays B stays on the same source location
-        self.assert_src_output(move_b)
+        # the move B is changed to have the same source location as dest of
+        # the previous move
+        self.assertEqual(move_b.location_id, area1)
         self.assert_dest_customer(move_b)
 
         # the original chaining stays the same: we don't add any move here
@@ -643,3 +642,284 @@ class TestRoutingPull(common.SavepointCase):
         )
         self.assert_src_highbay(routing_move)
         self.assert_dest_handover(routing_move)
+
+    def test_change_dest_move_source(self):
+        # Change the picking type destination so the move goes to a location
+        # which is a parent destination of the routing destination (move will
+        # go to Output, routing destination is Output/Area1). We want to check
+        # that the destination move source has been changed from Output to
+        # Output/Area1 and the routing Output/Area1 -> Customer applied
+        area1 = self.env["stock.location"].create(
+            {"location_id": self.wh.wh_output_stock_loc_id.id, "name": "Area1"}
+        )
+        self.pick_type_routing_op.default_location_dest_id = area1
+
+        pick_type_routing_delivery = self.env["stock.picking.type"].create(
+            {
+                "name": "Delivery (after routing)",
+                "code": "outgoing",
+                "sequence_code": "OUT(R)",
+                "warehouse_id": self.wh.id,
+                "use_create_lots": False,
+                "use_existing_lots": True,
+                "default_location_src_id": area1.id,
+                "default_location_dest_id": self.customer_loc.id,
+            }
+        )
+        routing_delivery = self.env["stock.routing"].create(
+            {
+                "location_id": area1.id,
+                "rule_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "method": "pull",
+                            "picking_type_id": pick_type_routing_delivery.id,
+                        },
+                    )
+                ],
+            }
+        )
+
+        pick_picking, customer_picking = self._create_pick_ship(
+            self.wh, [(self.product1, 10)]
+        )
+        move_a = pick_picking.move_lines
+        move_b = customer_picking.move_lines
+
+        self._update_product_qty_in_location(
+            self.location_hb_1_2, move_a.product_id, 100
+        )
+        pick_picking.action_assign()
+        self.assertEqual(move_a.routing_rule_id, self.routing.rule_ids)
+        self.assertEqual(move_b.location_id, area1)
+
+        # routing has been applied
+        self.assertEqual(move_b.routing_rule_id, routing_delivery.rule_ids)
+        self.assertEqual(move_b.picking_id.picking_type_id, pick_type_routing_delivery)
+
+    def test_change_dest_move_source_split(self):
+        # Change the picking type destination so the move goes to a location
+        # which is a parent destination of the routing destination (move will
+        # go to Output, routing destination is Output/Area1). We want to check
+        # that the destination move source has been changed from Output to
+        # Output/Area1
+        area1 = self.env["stock.location"].create(
+            {"location_id": self.wh.wh_output_stock_loc_id.id, "name": "Area1"}
+        )
+        self.pick_type_routing_op.default_location_dest_id = area1
+
+        pick_type_routing_delivery = self.env["stock.picking.type"].create(
+            {
+                "name": "Delivery (after routing)",
+                "code": "outgoing",
+                "sequence_code": "OUT(R)",
+                "warehouse_id": self.wh.id,
+                "use_create_lots": False,
+                "use_existing_lots": True,
+                "default_location_src_id": area1.id,
+                "default_location_dest_id": self.customer_loc.id,
+            }
+        )
+        routing_delivery = self.env["stock.routing"].create(
+            {
+                "location_id": area1.id,
+                "rule_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "method": "pull",
+                            "picking_type_id": pick_type_routing_delivery.id,
+                        },
+                    )
+                ],
+            }
+        )
+
+        pick_picking, customer_picking = self._create_pick_ship(
+            self.wh, [(self.product1, 10)]
+        )
+        move_a = pick_picking.move_lines
+        move_b = customer_picking.move_lines
+
+        self._update_product_qty_in_location(self.location_hb_1_2, move_a.product_id, 6)
+        pick_picking.action_assign()
+
+        # We now expect the chain of moves to have been split following this schema:
+        # Move A:
+        # +-------------------------------------------------------------------+
+        # | WHTES/PICK/00001 confirmed
+        # | 4x Product Stock → Output (confirmed) move_a
+        # +-------------------------------------------------------------------+
+        # Move B, waiting only on Move A
+        # +-------------------------------------------------------------------+
+        # | WHTES/OUT/00001 waiting
+        # | 4x Product Output → Customers (waiting) move_b
+        # +-------------------------------------------------------------------+
+
+        # And since 6 products have been reserved in the Highbay, and we have a
+        # routing that go through Output/Area1 with a special picking type, the
+        # move for the 6 units has been split and moved to different picking
+        # types/pickings
+
+        # +-------------------------------------------------------------------+
+        # | WHTES/WH/HO/00001 Assigned
+        # | 6x Product Highbay → Output/Area1 (assigned) move_c
+        # +-------------------------------------------------------------------+
+        #
+        # +-------------------------------------------------------------------+
+        # | WHTES/WH/OUT(R)/00001 Waiting
+        # | 6x Product Output/Area1 → Customers (assigned) move_d
+        # +-------------------------------------------------------------------+
+        move_c = (
+            self.env["stock.picking"]
+            .search([("picking_type_id", "=", self.pick_type_routing_op.id)])
+            .move_lines
+        )
+        move_d = (
+            self.env["stock.picking"]
+            .search([("picking_type_id", "=", pick_type_routing_delivery.id)])
+            .move_lines
+        )
+        self.assertRecordValues(
+            move_a | move_b | move_c | move_d,
+            [
+                {
+                    "move_orig_ids": [],
+                    "move_dest_ids": move_b.ids,
+                    "routing_rule_id": False,
+                    "state": "confirmed",
+                    "location_id": self.wh.lot_stock_id.id,
+                    "location_dest_id": self.wh.wh_output_stock_loc_id.id,
+                },
+                {
+                    "move_orig_ids": move_a.ids,
+                    "move_dest_ids": [],
+                    "routing_rule_id": False,
+                    "state": "waiting",
+                    "location_id": self.wh.wh_output_stock_loc_id.id,
+                    "location_dest_id": self.customer_loc.id,
+                },
+                {
+                    "move_orig_ids": [],
+                    "move_dest_ids": move_d.ids,
+                    "routing_rule_id": self.routing.rule_ids.id,
+                    "state": "assigned",
+                    "location_id": self.location_hb.id,
+                    "location_dest_id": area1.id,
+                },
+                {
+                    "move_orig_ids": move_c.ids,
+                    "move_dest_ids": [],
+                    "routing_rule_id": routing_delivery.rule_ids.id,
+                    "state": "waiting",
+                    "location_id": area1.id,
+                    "location_dest_id": self.customer_loc.id,
+                },
+            ],
+        )
+
+        self.assertEqual(move_a.picking_id.picking_type_id, self.wh.pick_type_id)
+        self.assertEqual(move_b.picking_id.picking_type_id, self.wh.out_type_id)
+        self.assertEqual(move_c.picking_id.picking_type_id, self.pick_type_routing_op)
+        self.assertEqual(move_d.picking_id.picking_type_id, pick_type_routing_delivery)
+
+    def test_change_dest_move_source_chain(self):
+        location_qa = self.env["stock.location"].create(
+            {"location_id": self.wh.wh_output_stock_loc_id.id, "name": "QA"}
+        )
+        # The setup we want is:
+        #
+        # * When the initial move line reserves in Highbay, the move is
+        #   classified in picking type "Routing operation" with locations
+        #   Highbay -> Handover (a new move is inserted between Handover and
+        #   Output)
+        # * When the next move source location is set to "Handover", we
+        #   we want to classify the next move as "QA" with locations Handover
+        #   -> Output/QA
+        # * When the last move source location is changed to "QA", it must be
+        #   classified as "Delivery (after QA)" with locations Output/QA ->
+        #   Customer
+
+        pick_type_routing_qa = self.env["stock.picking.type"].create(
+            {
+                "name": "QA",
+                "code": "internal",
+                "sequence_code": "WH/QA",
+                "warehouse_id": self.wh.id,
+                "use_create_lots": False,
+                "use_existing_lots": True,
+                "default_location_src_id": self.location_handover.id,
+                "default_location_dest_id": location_qa.id,
+            }
+        )
+        routing_qa = self.env["stock.routing"].create(
+            {
+                "location_id": self.location_handover.id,
+                "rule_ids": [
+                    (
+                        0,
+                        0,
+                        {"method": "pull", "picking_type_id": pick_type_routing_qa.id},
+                    )
+                ],
+            }
+        )
+
+        pick_type_routing_delivery = self.env["stock.picking.type"].create(
+            {
+                "name": "Delivery (after QA)",
+                "code": "outgoing",
+                "sequence_code": "OUT(R)",
+                "warehouse_id": self.wh.id,
+                "use_create_lots": False,
+                "use_existing_lots": True,
+                "default_location_src_id": location_qa.id,
+                "default_location_dest_id": self.customer_loc.id,
+            }
+        )
+        routing_delivery = self.env["stock.routing"].create(
+            {
+                "location_id": location_qa.id,
+                "rule_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "method": "pull",
+                            "picking_type_id": pick_type_routing_delivery.id,
+                        },
+                    )
+                ],
+            }
+        )
+
+        pick_picking, customer_picking = self._create_pick_ship(
+            self.wh, [(self.product1, 10)]
+        )
+        move_a = pick_picking.move_lines
+        move_b = customer_picking.move_lines
+
+        self._update_product_qty_in_location(
+            self.location_hb_1_2, move_a.product_id, 100
+        )
+        pick_picking.action_assign()
+        self.assertEqual(move_a.routing_rule_id, self.routing.rule_ids)
+        move_middle = move_a.move_dest_ids
+        self.assertNotEqual(move_middle, move_b)
+
+        self.assert_src_highbay(move_a)
+        self.assert_dest_handover(move_a)
+        self.assert_src_handover(move_middle)
+        self.assertEqual(move_middle.location_dest_id, location_qa)
+        self.assertEqual(move_b.location_id, location_qa)
+        self.assert_dest_customer(move_b)
+
+        # routing has been applied
+        self.assertEqual(move_middle.routing_rule_id, routing_qa.rule_ids)
+        self.assertEqual(move_middle.picking_id.picking_type_id, pick_type_routing_qa)
+
+        self.assertEqual(move_b.routing_rule_id, routing_delivery.rule_ids)
+        self.assertEqual(move_b.picking_id.picking_type_id, pick_type_routing_delivery)

@@ -701,3 +701,92 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(
             next_move.picking_id.picking_type_id, self.pick_type_routing_op
         )
+
+    def test_chain(self):
+        location_pre_handover = self.env["stock.location"].create(
+            {"name": "Pre-Handover", "location_id": self.wh.view_location_id.id}
+        )
+        pick_type_pre_handover = self.env["stock.picking.type"].create(
+            {
+                "name": "Routing Pre-Handover",
+                "code": "internal",
+                "sequence_code": "WH/PHO",
+                "warehouse_id": self.wh.id,
+                "use_create_lots": False,
+                "use_existing_lots": True,
+                "default_location_src_id": location_pre_handover.id,
+                "default_location_dest_id": self.location_handover.id,
+            }
+        )
+        routing_pre_handover = self.env["stock.routing"].create(
+            {
+                "location_id": self.location_handover.id,
+                "rule_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "method": "push",
+                            "picking_type_id": pick_type_pre_handover.id,
+                        },
+                    )
+                ],
+            }
+        )
+
+        in_picking, internal_picking = self._create_supplier_input_highbay(
+            self.wh, [(self.product1, 10, self.location_hb_1_2)]
+        )
+        move_a = in_picking.move_lines
+        move_b = internal_picking.move_lines
+        self.assertEqual(move_a.state, "assigned")
+        self.process_operations(move_a)
+
+        move_pre_handover = move_b.move_dest_ids
+        move_hb = move_pre_handover.move_dest_ids
+
+        self.assertRecordValues(
+            move_a | move_b | move_pre_handover | move_hb,
+            [
+                {
+                    "move_orig_ids": [],
+                    "move_dest_ids": move_b.ids,
+                    "routing_rule_id": False,
+                    "state": "done",
+                    "location_id": self.supplier_loc.id,
+                    "location_dest_id": self.wh.wh_input_stock_loc_id.id,
+                },
+                {
+                    "move_orig_ids": move_a.ids,
+                    "move_dest_ids": move_pre_handover.ids,
+                    # only the last applied rule is kept...
+                    "routing_rule_id": routing_pre_handover.rule_ids.id,
+                    "state": "assigned",
+                    "location_id": self.wh.wh_input_stock_loc_id.id,
+                    "location_dest_id": location_pre_handover.id,
+                },
+                {
+                    "move_orig_ids": move_b.ids,
+                    "move_dest_ids": move_hb.ids,
+                    "routing_rule_id": False,
+                    "state": "waiting",
+                    "location_id": location_pre_handover.id,
+                    "location_dest_id": self.location_handover.id,
+                },
+                {
+                    "move_orig_ids": move_pre_handover.ids,
+                    "move_dest_ids": [],
+                    "routing_rule_id": False,
+                    "state": "waiting",
+                    "location_id": self.location_handover.id,
+                    "location_dest_id": self.location_hb.id,
+                },
+            ],
+        )
+
+        self.assertEqual(move_a.picking_id.picking_type_id, self.wh.in_type_id)
+        self.assertEqual(move_b.picking_id.picking_type_id, self.wh.int_type_id)
+        self.assertEqual(
+            move_pre_handover.picking_id.picking_type_id, pick_type_pre_handover
+        )
+        self.assertEqual(move_hb.picking_id.picking_type_id, self.pick_type_routing_op)

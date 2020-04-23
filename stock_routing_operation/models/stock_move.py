@@ -20,6 +20,29 @@ class StockMove(models.Model):
         " selected for the move.",
     )
 
+    def write(self, values):
+        result = super().write(values)
+        if not self.env.context.get("__applying_routing_rule") and values.get(
+            "location_id"
+        ):
+            self.filtered(lambda r: r.state == "waiting")._chain_apply_routing()
+        return result
+
+    def _chain_apply_routing(self):
+        """Apply routing on moves waiting for another one in a chained flow
+
+        When the first move of a chain is reserved, it might trigger a change
+        in the routing, we want to adapt the moves along the chained flow.
+        """
+        if not self:
+            return
+        move_routing_rules = self.env["stock.routing"]._routing_rule_for_moves(self)
+        for move, rule in move_routing_rules.items():
+            if rule:
+                move.routing_rule_id = rule
+        self._apply_routing_rule_pull()
+        self._apply_routing_rule_push()
+
     def _action_assign(self):
         if self.env.context.get("exclude_apply_routing_operation"):
             super()._action_assign()
@@ -104,7 +127,9 @@ class StockMove(models.Model):
         Return a dictionary {move: {rule: reserved quantity}}. The rule for a quantity
         can be an empty recordset, which means no routing rule.
         """
-        move_routing_rules = self.env["stock.routing"]._routing_rule_for_moves(self)
+        move_routing_rules = self.env["stock.routing"]._routing_rule_for_move_lines(
+            self
+        )
         moves_routing = {}
         no_routing_rule = self.env["stock.routing.rule"].browse()
         for move in self:
@@ -153,6 +178,7 @@ class StockMove(models.Model):
                 # The _split() method returns the same move if the qty
                 # is the same than the move's qty, so we don't need to
                 # explicitly check if we really need to split or not.
+                # FIXME _split must be called on product_qty
                 new_move_id = move._split(qty)
                 new_move = self.env["stock.move"].browse(new_move_id)
                 new_move.routing_rule_id = routing_rule
@@ -183,11 +209,11 @@ class StockMove(models.Model):
 
             # we expect all the lines to go to the same destination for
             # pull routing rules
-
-            original_source = move.location_id
             original_destination = move.location_dest_id
             current_picking_type = move.picking_id.picking_type_id
-            move.location_id = routing_rule.location_src_id
+            move.with_context(
+                __applying_routing_rule=True
+            ).location_id = routing_rule.location_src_id
             move.picking_type_id = routing_rule.picking_type_id
             if self.env["stock.location"].search(
                 [
@@ -197,8 +223,10 @@ class StockMove(models.Model):
             ):
                 # The destination of the move, as a parent of the destination
                 # of the routing, goes to the correct place, but is not precise
-                # enough: set the new destination to match the rule's one
-                move.location_dest_id = routing_rule.location_dest_id
+                # enough: set the new destination to match the rule's one.
+                # The source of the dest. move will be changed to match it,
+                # which may reapply a new routing rule on the dest. move.
+                move._routing_pull_switch_destination(routing_rule)
 
             elif not self.env["stock.location"].search(
                 [
@@ -210,12 +238,8 @@ class StockMove(models.Model):
                 # a parent or a child) to the routing destination: in this case
                 # we have to add a routing move before the current move to
                 # route the goods in the correct place
-                move.location_dest_id = routing_rule.location_dest_id
-                # create a copy of the move with the current picking type and
-                # going to its original destination: it will be assigned to the
-                # same picking as the original picking of our move
-                move._insert_routing_moves(
-                    current_picking_type, original_source, original_destination
+                move._routing_pull_insert_move(
+                    routing_rule, current_picking_type, original_destination
                 )
 
             pickings_to_check_for_emptiness |= move.picking_id
@@ -223,6 +247,48 @@ class StockMove(models.Model):
             move._action_assign()
 
         pickings_to_check_for_emptiness._routing_operation_handle_empty()
+
+    def _routing_pull_switch_destination(self, routing_rule):
+        """Switch the destination of the move in place
+
+        In this case, do not insert a new move but switch the destination
+        of the current move. The destination move source location is changed
+        as well, which might trigger a new routing on the destination move.
+        """
+        self.location_dest_id = routing_rule.location_dest_id
+        next_move = self.move_dest_ids.filtered(lambda r: r.state == "waiting")
+        # FIXME what should happen if we have > 1 move? What would
+        # be the use case?
+        if next_move and len(next_move) == 1:
+            split_move = self.browse(next_move._split(self.product_qty))
+            if split_move != next_move:
+                # No split occurs if the quantity was the same.
+                # But if it did split, detach it from the move on which
+                # we have a different routing
+                next_move.move_orig_ids -= self
+                split_move.move_orig_ids = self
+            next_move = split_move
+
+        next_move.location_id = routing_rule.location_dest_id
+
+    def _routing_pull_insert_move(self, routing_rule, picking_type, destination):
+        """Add a move after the current move to reach the destination
+
+        The routing rules are applied on the new move in case it would trigger
+        a new move or a switch of picking type.
+        """
+        self.location_dest_id = routing_rule.location_dest_id
+        # create a copy of the move with the current picking type and
+        # going to its original destination: it will be assigned to the
+        # same picking as the original picking of our move
+        routing_move = self._insert_routing_moves(
+            picking_type,
+            # the source of the next move has to be the same as the
+            # destination of the current move
+            routing_rule.location_dest_id,
+            destination,
+        )
+        routing_move._chain_apply_routing()
 
     def _apply_routing_rule_push(self):
         """Apply routing operations
@@ -270,11 +336,14 @@ class StockMove(models.Model):
                 # destination of the routing.
                 move.location_dest_id = routing_rule.location_src_id
                 move.move_line_ids.location_dest_id = routing_rule.location_src_id
-                move._insert_routing_moves(
+                routing_move = move._insert_routing_moves(
                     routing_rule.picking_type_id,
                     routing_rule.location_src_id,
                     routing_rule.location_dest_id,
                 )
+                routing_move._assign_picking()
+                # recursively apply chain in case we have several routing steps
+                move._chain_apply_routing()
 
         pickings_to_check_for_emptiness._routing_operation_handle_empty()
 
@@ -296,11 +365,10 @@ class StockMove(models.Model):
         if dest_moves:
             dest_moves.write({"move_orig_ids": [(3, self.id), (4, routing_move.id)]})
         routing_move._action_confirm(merge=False)
-        routing_move._assign_picking()
+        return routing_move
 
     def _prepare_routing_move_values(self, picking_type, source, destination):
         return {
-            "picking_id": False,
             "location_id": source.id,
             "location_dest_id": destination.id,
             "state": "waiting",
