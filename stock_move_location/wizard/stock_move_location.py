@@ -209,7 +209,10 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def action_move_location(self):
         self.ensure_one()
-        picking = self._create_picking()
+        if not self.picking_id:
+            picking = self._create_picking()
+        else:
+            picking = self.picking_id
         self._create_moves(picking)
         if not self.env.context.get("planned"):
             moves_to_reassign = self._unreserve_moves()
