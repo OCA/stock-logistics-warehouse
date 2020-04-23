@@ -1,0 +1,201 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_location_template
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__location_count
+msgid "# Locations"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_form
+msgid "<span class=\"o_stat_text\"> Locations</span>"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__active
+msgid "Active"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_form
+msgid "Additional Information"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_search
+msgid "Archived"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__auto_generate_locations
+msgid "Auto Generate Stock Locations"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__cell_name_example
+msgid "Cell Naming example"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__cells_nomenclature
+msgid "Cells Nomenclature"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__digits
+msgid "Digits to use in nomenclature"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_form
+msgid "Example of Cell Naming"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model,name:stock_location_template.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_form
+msgid "Location Physical Type"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location__location_template_id
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_search
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_tree
+msgid "Location Template"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.actions.act_window,name:stock_location_template.action_location_template_form
+#: model:ir.ui.menu,name:stock_location_template.menu_action_location_template_form
+msgid "Location Templates"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location__auto_generated_from_template
+msgid "Location generated from template"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_form
+msgid "Nomenclature of Cells"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__cells_nbr
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_form
+msgid "Number of Cells"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__starting_nbr
+msgid "Starting number"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,field_description:stock_location_template.field_stock_location_template__location_ids
+msgid "Stock Location"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_form
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_tree
+msgid "Stock Location Template"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_search
+msgid "Stock Location Templates"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model,name:stock_location_template.model_stock_location_template
+msgid "Stock Location Type"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_search
+msgid "Stock Location Types"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,help:stock_location_template.field_stock_location_template__location_count
+msgid "The number of locations that share the location template"
+msgstr ""
+
+#. module: stock_location_template
+#: model:ir.model.fields,help:stock_location_template.field_stock_location_template__cells_nomenclature
+msgid "Use the character %c that will be replaced by the corresponding cell number"
+msgstr ""
+
+#. module: stock_location_template
+#: model_terms:ir.ui.view,arch_db:stock_location_template.view_location_template_form
+msgid "Write %c where you want the number to be placed. E.g. CELL-%c will result in CELL-01"
+msgstr ""
+
+#. module: stock_location_template
+#: code:addons/stock_location_template/models/stock_location.py:30
+#, python-format
+msgid "You cannot change the tempalte of a location when there are sub-locations that have been generated from this template"
+msgstr ""
+
