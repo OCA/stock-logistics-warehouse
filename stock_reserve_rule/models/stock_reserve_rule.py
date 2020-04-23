@@ -1,9 +1,14 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import fields, models
+import logging
+
+from odoo import _, api, fields, models
 from odoo.osv import expression
 from odoo.tools.float_utils import float_compare
 from odoo.tools.safe_eval import safe_eval
+from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 def _default_sequence(record):
@@ -54,6 +59,37 @@ class StockReserveRule(models.Model):
         help="Domain based on Stock Moves, to define if the "
         "rule is applicable or not.",
     )
+
+    missing_reserve_rule = fields.Boolean(
+        string="Miss a reserve rule with higher priority?",
+        compute="_compute_missing_reserve_rule",
+    )
+
+    @api.depends()
+    def _compute_missing_reserve_rule(self):
+        for rule in self:
+            rule.missing_reserve_rule = any(
+                rule.rule_removal_ids.mapped("missing_reserve_rule"))
+
+    @api.constrains("fallback_location_id")
+    def _constraint_fallback_location_id(self):
+        """The fallback location has to be a child of the main location."""
+        location_model = self.env["stock.location"]
+        for rule in self:
+            if rule.fallback_location_id:
+                is_child = location_model.search_count(
+                    [
+                        ("id", "=", rule.fallback_location_id.id),
+                        ("id", "child_of", rule.location_id.id),
+                    ],
+                )
+                if not is_child:
+                    msg = _(
+                        "Fallback location has to be a child of the "
+                        "location '{}'."
+                    ).format(rule.location_id.display_name)
+                    _logger.error("Rule '%s' - %s", rule.name, msg)
+                    raise ValidationError(msg)
 
     def _rules_for_location(self, location):
         return self.search([("location_id", "parent_of", location.id)])
@@ -139,6 +175,48 @@ class StockReserveRuleRemoval(models.Model):
         "Only the quantities matching one of the packaging are removed.\n"
         "When empty, any packaging can be removed.",
     )
+
+    missing_reserve_rule = fields.Boolean(
+        string="Miss a reserve rule with higher priority?",
+        compute="_compute_missing_reserve_rule",
+    )
+
+    @api.depends()
+    def _compute_missing_reserve_rule(self):
+        for removal_rule in self:
+            removal_rule.missing_reserve_rule = False
+            # The current rule could satisfies the need already
+            if removal_rule.location_id == removal_rule.rule_id.location_id:
+                break
+            rules = self.env["stock.reserve.rule"].search(
+                [
+                    ("location_id", "=", removal_rule.location_id.id),
+                    ("sequence", "<", removal_rule.rule_id.sequence),
+                ]
+            )
+            removal_rule.missing_reserve_rule = not rules
+
+    @api.constrains("location_id")
+    def _constraint_location_id(self):
+        """The location has to be a child of the rule location."""
+        location_model = self.env["stock.location"]
+        for removal_rule in self:
+            is_child = location_model.search_count(
+                [
+                    ("id", "=", removal_rule.location_id.id),
+                    ("id", "child_of", removal_rule.rule_id.location_id.id),
+                ],
+            )
+            if not is_child:
+                msg = _(
+                    "Removal rule '{}' location has to be a child "
+                    "of the rule location '{}'."
+                ).format(
+                    removal_rule.name,
+                    removal_rule.rule_id.location_id.display_name,
+                )
+                _logger.error("Rule '%s' - %s", removal_rule.rule_id.name, msg)
+                raise ValidationError(msg)
 
     def _eval_quant_domain(self, quants, domain):
         quant_domain = [("id", "in", quants.ids)]

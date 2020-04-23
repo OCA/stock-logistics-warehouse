@@ -1,6 +1,7 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
 
 from odoo.tests import common
+from odoo import exceptions
 
 
 class TestReserveRule(common.SavepointCase):
@@ -130,6 +131,73 @@ class TestReserveRule(common.SavepointCase):
             ]
         )
 
+    def test_rule_fallback_child_of_location(self):
+        # fallback is a child
+        self._create_rule(
+            {
+                "fallback_location_id": self.loc_zone1.id,
+            },
+            [
+                {"location_id": self.loc_zone1.id},
+            ],
+        )
+        # fallback is not a child
+        with self.assertRaises(exceptions.ValidationError):
+            self._create_rule(
+                {
+                    "fallback_location_id": self.env.ref(
+                        "stock.stock_location_locations").id,
+                },
+                [{"location_id": self.loc_zone1.id}],
+            )
+
+    def test_removal_rule_location_child_of_rule_location(self):
+        # removal rule location is a child
+        self._create_rule(
+            {},
+            [{"location_id": self.loc_zone1.id}],
+        )
+        # removal rule location is not a child
+        with self.assertRaises(exceptions.ValidationError):
+            self._create_rule(
+                {},
+                [
+                    {
+                        "location_id": self.env.ref(
+                            "stock.stock_location_locations").id,
+                    },
+                ],
+            )
+
+    def test_rule_fallback_partial_assign(self):
+        """Assign move partially available.
+
+        The move should be splitted in two:
+            - one move assigned with reserved goods
+            - one move for remaining goods targetting the fallback location
+        """
+        # Need 150 and 120 available => new move with 30 waiting qties
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
+        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 20)
+        picking = self._create_picking(self.wh, [(self.product1, 150)])
+        self._create_rule(
+            {
+                "fallback_location_id": self.loc_zone2_bin1.id,
+            },
+            [
+                {"location_id": self.loc_zone1_bin1.id, "sequence": 1},
+            ],
+        )
+        self.assertEqual(len(picking.move_lines), 1)
+        picking.action_assign()
+        self.assertEqual(len(picking.move_lines), 2)
+        move_assigned = picking.move_lines.filtered(
+            lambda m: m.state == "assigned")
+        move_unassigned = picking.move_lines.filtered(
+            lambda m: m.state == "confirmed")
+        self.assertEqual(move_assigned.state, "assigned")
+        self.assertEqual(move_unassigned.state, "confirmed")
+
     def test_rule_take_all_in_2(self):
         all_locs = (
             self.loc_zone1_bin1,
@@ -223,7 +291,7 @@ class TestReserveRule(common.SavepointCase):
 
     def test_rule_fallback(self):
         reserve = self.env["stock.location"].create(
-            {"name": "Reserve", "location_id": self.wh.view_location_id.id}
+            {"name": "Reserve", "location_id": self.wh.lot_stock_id.id}
         )
 
         self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
