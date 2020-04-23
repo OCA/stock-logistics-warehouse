@@ -7,8 +7,6 @@ from psycopg2 import sql
 
 from odoo import fields, models
 
-# TODO check product_qty / product_uom_qty
-
 
 class StockMove(models.Model):
     _inherit = "stock.move"
@@ -142,16 +140,26 @@ class StockMove(models.Model):
             # if needed.
             routing_rules = move_routing_rules[move]
             moves_routing[move] = {
-                rule: sum(move_lines.mapped("product_uom_qty"))
+                # use product_qty and not product_uom_qty, because we'll use
+                # this for the _split() and this method expect product_qty
+                # units
+                rule: sum(move_lines.mapped("product_qty"))
                 for rule, move_lines in routing_rules.items()
             }
             if move.state == "partially_available":
                 # consider unreserved quantity as without routing, so it will
                 # be split if another part of the quantity need a routing
                 moves_routing[move].setdefault(no_routing_rule, 0)
-                moves_routing[move][no_routing_rule] += (
+                missing_reserved_uom_quantity = (
                     move.product_uom_qty - move.reserved_availability
                 )
+                missing_reserved_quantity = move.product_uom._compute_quantity(
+                    missing_reserved_uom_quantity,
+                    move.product_id.uom_id,
+                    # this match what is done in StockMove._action_assign()
+                    rounding_method="HALF-UP",
+                )
+                moves_routing[move][no_routing_rule] += missing_reserved_quantity
         return moves_routing
 
     def _routing_splits(self, moves_routing):
@@ -178,7 +186,6 @@ class StockMove(models.Model):
                 # The _split() method returns the same move if the qty
                 # is the same than the move's qty, so we don't need to
                 # explicitly check if we really need to split or not.
-                # FIXME _split must be called on product_qty
                 new_move_id = move._split(qty)
                 new_move = self.env["stock.move"].browse(new_move_id)
                 new_move.routing_rule_id = routing_rule
