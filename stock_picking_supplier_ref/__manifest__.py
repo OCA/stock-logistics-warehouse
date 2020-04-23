@@ -9,8 +9,9 @@
     'author': 'Trey, Odoo Community Association (OCA)',
     'website': 'https://www.trey.es',
     'license': 'AGPL-3',
-    'summary': '''Adds a supplier reference field inside supplier's pickings
-               ans allows search for this reference.''',
+    'description': '''
+        Adds a supplier reference field inside supplier's pickings and
+        allows search for this reference.''',
     'depends': [
         'stock',
     ],
