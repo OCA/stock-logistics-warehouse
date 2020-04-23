@@ -22,6 +22,7 @@
                         <field name="active" invisible="1" />
                         <field name="location_id" />
                         <field name="fallback_location_id" />
+                        <field name="sequence" />
                     </group>
                     <group>
                         <field
@@ -32,13 +33,14 @@
                         <field name="company_id" groups="base.group_multi_company" />
                     </group>
                 </group>
-                <group string="Removal Rules" name="rule">
+                <group string="Removal Rules" name="rule" col="1">
                     <field name="rule_removal_ids" nolabel="1">
-                        <tree string="Removal Rules">
+                        <tree string="Removal Rules" decoration-warning="missing_reserve_rule">
                             <field name="sequence" widget="handle" />
                             <field name="name" />
                             <field name="location_id" />
                             <field name="removal_strategy" />
+                            <field name="missing_reserve_rule" invisible="1"/>
                         </tree>
                         <form string="Removal Rule">
                             <group>
@@ -61,6 +63,10 @@
                             </group>
                         </form>
                     </field>
+                    <field name="missing_reserve_rule" invisible="1"/>
+                    <strong attrs="{'invisible': [('missing_reserve_rule', '=', False)]}" style="color:red;">
+                      WARNING: some of the removal rules are missing a reservation rule with a lower sequence. If it is desirable you should create them to ensure that the reservation on the related locations will use these rules first instead of this one.
+                    </strong>
                 </group>
             </form>
         </field>
@@ -89,6 +95,7 @@
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="location_id" />
+                <field name="rule_domain"/>
             </tree>
         </field>
     </record>
