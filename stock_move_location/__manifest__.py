@@ -6,10 +6,7 @@
 {
     "name": "Move Stock Location",
     "version": "14.0.1.0.1",
-    "author": "Julius Network Solutions, "
-    "BCIM,"
-    "Camptocamp,"
-    "Odoo Community Association (OCA)",
+    "author": "Julius Network Solutions, BCIM, Camptocamp, Odoo Community Association (OCA)",
     "summary": "This module allows to move all stock "
     "in a stock location to an other one.",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
