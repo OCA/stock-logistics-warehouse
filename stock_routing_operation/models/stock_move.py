@@ -193,7 +193,7 @@ class StockMove(models.Model):
                 new_move_per_location[routing_location.id].append(new_move_id)
 
         new_moves = self.browse(chain.from_iterable(new_move_per_location.values()))
-        return self + new_moves
+        return self | new_moves
 
     def _apply_routing_rule_pull(self):
         """Apply routing operations
