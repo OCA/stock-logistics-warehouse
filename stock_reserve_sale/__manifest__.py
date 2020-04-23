@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     'name': 'Stock Reserve Sales',
-    'version': '1.0',
+    'version': '11.0.1.0.0',
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'category': 'Warehouse',
     'license': 'AGPL-3',

@@ -1,8 +1,7 @@
 # Copyright 2020 Camptocamp SA.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import except_orm
-from odoo.tools.translate import _
 
 
 class SaleOrder(models.Model):
@@ -131,25 +130,33 @@ class SaleOrderLine(models.Model):
         return True
 
     @api.multi
-    def product_id_change(
-            self, pricelist, product, qty=0, uom=False, qty_uos=0, uos=False,
-            name='', partner_id=False, lang=False, update_tax=True,
-            date_order=False, packaging=False, fiscal_position=False,
-            flag=False, context=None):
-        result = super(SaleOrderLine, self).product_id_change(
-            pricelist, product, qty=qty, uom=uom, qty_uos=qty_uos, uos=uos,
-            name=name, partner_id=partner_id, lang=lang, update_tax=update_tax,
-            date_order=date_order, packaging=packaging,
-            fiscal_position=fiscal_position, flag=flag, context=context)
-        if not self.ids:  # warn only if we change an existing line
-            return result
-        assert len(self.ids) == 1, "Expected 1 ID, got %r" % self.ids
-        line = self.browse(self.ids[0], context=context)
-        if qty != line.product_uom_qty and line.reservation_ids:
+    @api.onchange('product_id')
+    def product_id_change(self):
+        result = super(SaleOrderLine, self).product_id_change()
+        if self.reservation_ids:
+            msg = _(
+                "you can't change to new product if old product "
+                "has stock reservation")
+            msg += "\n\n"
+            result.setdefault('warning', {})
+            if result['warning'].get('message'):
+                result['warning']['message'] += msg
+            else:
+                result['warning'] = {
+                    'title': _('Configuration Error!'),
+                    'message': msg,
+                }
+        return result
+
+    @api.multi
+    @api.onchange('product_uom_qty')
+    def product_uom_qty_change(self):
+        result = {}
+        if self.reservation_ids:
             msg = _(
                 "As you changed the quantity of the line, "
                 "the quantity of the stock reservation will "
-                "be automatically adjusted to %.2f.") % qty
+                "be automatically adjusted to %.2f.") % self.product_uom_qty
             msg += "\n\n"
             result.setdefault('warning', {})
             if result['warning'].get('message'):
