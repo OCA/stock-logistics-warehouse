@@ -4,7 +4,6 @@
 
 from odoo import _, models
 from odoo.exceptions import UserError
-from itertools import groupby
 
 
 class StockPicking(models.Model):
