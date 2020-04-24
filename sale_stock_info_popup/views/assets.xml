@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Tecnativa - Ernesto Tejeda
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+<odoo>
+    <template id="sale_stock_info_popup" name="sale_stock_info_popup" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/sale_stock_info_popup/static/src/js/qty_at_date_widget.js"></script>
+        </xpath>
+    </template>
+</odoo>
