@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Tecnativa - Carlos Roca -->
+<odoo>
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field
+            name="name"
+        >Inventory form view - stock_inventory_include_exhausted extension</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="arch" type="xml">
+            <field name="prefill_counted_quantity" position="after">
+                <field name="include_exhausted" />
+            </field>
+        </field>
+    </record>
+</odoo>
