@@ -52,7 +52,9 @@ class StockPicking(models.Model):
             depending_moves = picking.move_lines.mapped("common_dest_move_ids")
             # If all the depending moves are done or canceled then next picking
             # is ready to be processed
-            if all(m.state in ("done", "cancel") for m in depending_moves):
+            if picking.state == "done" and all(
+                m.state in ("done", "cancel") for m in depending_moves
+            ):
                 picking.completion_info = "next_picking_ready"
                 continue
             # If all the depending moves are the moves on the actual picking
