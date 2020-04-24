@@ -333,26 +333,46 @@ class StockMove(models.Model):
                     ("id", "parent_of", move.location_id.id),
                 ]
             ):
-                move.picking_type_id = routing_rule.picking_type_id
-                pickings_to_check_for_emptiness |= move.picking_id
-                move._assign_picking()
+                picking = move.picking_id
+                move._routing_push_switch_picking_type(routing_rule)
+                pickings_to_check_for_emptiness |= picking
             else:
                 # Fall here when the source location is unrelated to the
                 # routing's one. Redirect the move and move line to go through
                 # the routing and add a new move after it to reach the
                 # destination of the routing.
-                move.location_dest_id = routing_rule.location_src_id
-                move.move_line_ids.location_dest_id = routing_rule.location_src_id
-                routing_move = move._insert_routing_moves(
-                    routing_rule.picking_type_id,
-                    routing_rule.location_src_id,
-                    routing_rule.location_dest_id,
-                )
-                routing_move._assign_picking()
-                # recursively apply chain in case we have several routing steps
-                move._chain_apply_routing()
+                move._routing_push_insert_move(routing_rule)
 
         pickings_to_check_for_emptiness._routing_operation_handle_empty()
+
+    def _routing_push_switch_picking_type(self, routing_rule):
+        """Switch the picking type of the move in place
+
+        In this case, do not insert a new move but only change the picking type
+        and reassign to a picking, so the move will be included in a transfer
+        of the same type or a new transfer will be created.
+        """
+        self.picking_type_id = routing_rule.picking_type_id
+        self._assign_picking()
+
+    def _routing_push_insert_move(self, routing_rule):
+        """Change destination of the current move and add a move after it
+
+        The routing rules are applied on the move after its destination has
+        been changed in case it would need again a new move or a switch of
+        picking type.
+        """
+        self.location_dest_id = routing_rule.location_src_id
+        self.move_line_ids.location_dest_id = routing_rule.location_src_id
+        routing_move = self._insert_routing_moves(
+            routing_rule.picking_type_id,
+            routing_rule.location_src_id,
+            routing_rule.location_dest_id,
+        )
+        routing_move._assign_picking()
+        # recursively apply chain in case we have several routing steps (since
+        # the destination of the move has changed, a new push rule may apply)
+        self._chain_apply_routing()
 
     def _insert_routing_moves(self, picking_type, location, destination):
         """Create a chained move for a routing rule"""
