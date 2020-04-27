@@ -154,3 +154,21 @@ class TestCommonMoveDest(SavepointCase):
         self.assertEqual(pack_move_1b.common_dest_move_ids, pack_move_1a)
         self.assertFalse(ship_move_1a.common_dest_move_ids)
         self.assertFalse(ship_move_1b.common_dest_move_ids)
+        self.assertEqual(
+            self.env["stock.move"].search(
+                [("common_dest_move_ids", "=", pick_move_1b.id)]
+            ),
+            pick_move_1a,
+        )
+        self.assertEqual(
+            self.env["stock.move"].search(
+                [("common_dest_move_ids", "=", pick_move_1a.id)]
+            ),
+            pick_move_1b,
+        )
+        self.assertEqual(
+            self.env["stock.move"].search(
+                [("common_dest_move_ids", "in", (pick_move_1a | pick_move_1b).ids)]
+            ),
+            pick_move_1a | pick_move_1b,
+        )
