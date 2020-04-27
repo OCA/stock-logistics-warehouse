@@ -1,6 +1,8 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo.addons.stock_move_common_dest.tests.test_move_common_dest import TestCommonMoveDest
+from odoo.addons.stock_move_common_dest.tests.test_move_common_dest import (
+    TestCommonMoveDest,
+)
 
 
 class TestMoveCommonDestSyncLocation(TestCommonMoveDest):
@@ -18,7 +20,12 @@ class TestMoveCommonDestSyncLocation(TestCommonMoveDest):
     def test_sync_common_move_dest_location(self):
         self.pick_type.sync_common_move_dest_location = True
         self._init_inventory()
-        ship_order_1, pack_order_1, pick_order_1a, pick_order_1b = self._create_pickings()
+        (
+            ship_order_1,
+            pack_order_1,
+            pick_order_1a,
+            pick_order_1b,
+        ) = self._create_pickings()
         ship_move_1a = self._create_move(ship_order_1, self.product_1)
         pack_move_1a = self._create_move(
             pack_order_1, self.product_1, move_dest=ship_move_1a
@@ -52,12 +59,13 @@ class TestMoveCommonDestSyncLocation(TestCommonMoveDest):
         self.assertEqual(pick_order_1a.location_dest_id, self.packing_location)
         self.assertEqual(pick_order_1b.location_dest_id, self.packing_location)
 
-        pick_move_1a.move_line_ids.write({'location_dest_id': self.packing_location_1})
-        self.assertEqual(pick_move_1b.move_line_ids.location_dest_id, self.packing_location_1)
+        pick_move_1a.move_line_ids.write({"location_dest_id": self.packing_location_1})
+        self.assertEqual(
+            pick_move_1b.move_line_ids.location_dest_id, self.packing_location_1
+        )
         # Test sync deactivated
         self.pick_type.sync_common_move_dest_location = False
-        pick_move_1a.move_line_ids.write(
-            {'location_dest_id': self.packing_location_2}
+        pick_move_1a.move_line_ids.write({"location_dest_id": self.packing_location_2})
+        self.assertEqual(
+            pick_move_1b.move_line_ids.location_dest_id, self.packing_location_1
         )
-        self.assertEqual(pick_move_1b.move_line_ids.location_dest_id,
-                         self.packing_location_1)

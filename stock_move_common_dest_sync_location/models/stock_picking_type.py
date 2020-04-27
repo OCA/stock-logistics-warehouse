@@ -10,6 +10,6 @@ class StockPickingType(models.Model):
     sync_common_move_dest_location = fields.Boolean(
         string="Sync destination location for common destination moves",
         help="When checked, updating the destination location on a move line "
-             "will update move lines from common destination moves (i.e moves "
-             "having a chained destination move sharing the same picking)"
+        "will update move lines from common destination moves (i.e moves "
+        "having a chained destination move sharing the same picking)",
     )
