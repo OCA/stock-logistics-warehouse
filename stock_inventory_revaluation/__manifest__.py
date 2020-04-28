@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# Copyright 2020 Matt Taylor
 # Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
@@ -9,16 +9,17 @@
     "name": "Stock Inventory Revaluation",
     "summary": "Introduces inventory revaluation as single point to change "
                "the valuation of products.",
-    "version": "10.0.1.1.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Serpent Consulting Services Pvt. Ltd.,"
+              "Matt Taylor,"
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Warehouse",
     "depends": ["stock_account", "product"],
     "license": "AGPL-3",
     "data": [
-        "wizards/stock_inventory_revaluation_get_quants_view.xml",
+        "wizards/stock_inventory_revaluation_get_moves_view.xml",
         "security/stock_inventory_revaluation_security.xml",
         "security/ir.model.access.csv",
         "views/stock_inventory_revaluation_view.xml",

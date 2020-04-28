@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view"
+            id="stock_inventory_revaluation_get_move_form">
+      <field name="name">stock.inventory.revaluation.get.moves.form</field>
+      <field name="model">stock.inventory.revaluation.get.moves</field>
+      <field name="arch" type="xml">
+        <form string="Get Moves">
+          <group colspan="2" col="2">
+            <field name="revaluation_id" invisible="1"/>
+            <field name="product_id" invisible="1"/>
+            <field name="date_from"/>
+            <field name="date_to"/>
+            <field name="lot_id"/>
+            <field name="location_id"/>
+          </group>
+          <footer>
+            <button name="process" string="Get Moves" type="object"
+                    class="oe_highlight"/>
+            or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_stock_inventory_revaluation_get_move"
+            model="ir.actions.act_window">
+      <field name="name">Get Moves for Inventory Revaluation</field>
+      <field name="res_model">stock.inventory.revaluation.get.moves</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id"
+             ref="stock_inventory_revaluation_get_move_form"/>
+      <field name="target">new</field>
+    </record>
+
+</odoo>

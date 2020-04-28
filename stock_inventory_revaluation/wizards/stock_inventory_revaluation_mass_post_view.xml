@@ -27,15 +27,7 @@
       <field name="view_id"
              ref="stock_inventory_revaluation_mass_post_form"/>
       <field name="target">new</field>
-    </record>
-
-    <record model="ir.values" id="stock_inventory_revaluation_mass_post">
-        <field name="model_id" ref="model_stock_inventory_revaluation" />
-        <field name="name">Post Inventory Revaluations</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval="'ir.actions.act_window,' + str(ref('action_stock_inventory_revaluation_mass_post'))" />
-        <field name="key">action</field>
-        <field name="model">stock.inventory.revaluation</field>
+      <field name="binding_model_id" ref="model_stock_inventory_revaluation" />
     </record>
 
 </odoo>

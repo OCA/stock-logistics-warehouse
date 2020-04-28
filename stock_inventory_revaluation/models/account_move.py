@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# Copyright 2020 Matt Taylor
 # Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
@@ -36,7 +36,9 @@ class AccountMoveLine(models.Model):
         comodel_name='stock.inventory.revaluation',
         related='move_id.stock_inventory_revaluation_id',
         string='Stock Inventory Revaluation',
-        store=True, ondelete='restrict', copy=False, readonly=True)
+        store=True,
+        ondelete='restrict',
+        copy=False)
 
     @api.multi
     def unlink(self):
