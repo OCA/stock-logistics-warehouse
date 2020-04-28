@@ -29,16 +29,17 @@
                         <h1>
                             <field name="name" class="oe_inline"/>
                         </h1>
+                        <field name="reval_template_id" nolabel="1" placeholder="Revaluation Template"/>
                         <group name="main">
                             <group name="basic">
                                 <field name="document_date"/>
                                 <field name="post_date"/>
-                                <field name="user_id"/>
-                                <field name="revaluation_type"/>
-                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="create_uid" readonly="1"/>
                             </group>
                             <group name="accounting">
                                 <field name="journal_id"/>
+                                <field name="revaluation_type"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
                             </group>
                             <group name="remarks" colspan="2">
                                 <field name="remarks"/>
@@ -73,24 +74,24 @@
                                 </group>
                             </group>
                             <notebook>
-                                <page name="quant" string="Quants" attrs="{'invisible':[('cost_method','!=', 'real')]}">
+                                <page name="move" string="Moves" attrs="{'invisible':[('cost_method','!=', 'fifo')]}">
                                     <button
-                                            name="%(action_stock_inventory_revaluation_get_quant)d"
-                                            string="Get Quants" type="action" class="oe_highlight"
+                                            name="%(action_stock_inventory_revaluation_get_move)d"
+                                            string="Get Moves" type="action"
+                                            class="oe_highlight"
                                             states="draft"/>
-                                    <field name="reval_quant_ids"
-                                           nolabel="1">
-                                        <tree name="quants"
-                                              string="Quants"
+                                    <field name="reval_move_ids" nolabel="1">
+                                        <tree name="moves"
+                                              string="Moves"
                                               create="false"
-                                              delete="false" editable="bottom">
-                                            <field name="quant_id"/>
+                                              editable="bottom">
+                                            <field name="name"/>
                                             <field name="in_date"/>
-                                            <field name="product_id"/>
                                             <field name="location_id"/>
                                             <field name="qty"/>
-                                            <field name="current_cost"/>
-                                            <field name="new_cost"/>
+                                            <field name="old_value"/>
+                                            <field name="current_value"/>
+                                            <field name="new_value"/>
                                         </tree>
                                     </field>
                                 </page>
@@ -113,7 +114,7 @@
                     <field name="name"/>
                     <field name="revaluation_type"/>
                     <field name="document_date"/>
-                    <field name="user_id"/>
+                    <field name="create_uid"/>
                     <field name="product_template_id"/>
                     <field name="uom_id"/>
                     <field name="cost_method"/>
@@ -132,35 +133,38 @@
             </field>
         </record>
 
-        <record id="view_stock_inventory_revaluation_quant_tree"
+        <record id="view_stock_inventory_revaluation_move_tree"
                 model="ir.ui.view">
-            <field name="name">stock.inventory.revaluation.quant.tree</field>
-            <field name="model">stock.inventory.revaluation.quant</field>
+            <field name="name">stock.inventory.revaluation.move.tree</field>
+            <field name="model">stock.inventory.revaluation.move</field>
             <field name="arch" type="xml">
-                <tree string="Stock Inventory Revaluation Line Quants">
-                    <field name="quant_id"/>
+                <tree string="Stock Inventory Revaluation Line Moves">
+                    <field name="name"/>
                     <field name="in_date"/>
                     <field name="product_id"/>
                     <field name="location_id"/>
                     <field name="qty"/>
-                    <field name="current_cost"/>
-                    <field name="new_cost"/>
+                    <field name="old_value"/>
+                    <field name="current_value"/>
+                    <field name="new_value"/>
                 </tree>
             </field>
         </record>
 
-        <record id="view_stock_inventory_revaluation_quant_form"
-                model="ir.ui.view">
-            <field name="name">stock.inventory.revaluation.quant.form</field>
-            <field name="model">stock.inventory.revaluation.quant</field>
+        <record id="view_stock_inventory_revaluation_move_form" model="ir.ui.view">
+            <field name="name">stock.inventory.revaluation.move.form</field>
+            <field name="model">stock.inventory.revaluation.move</field>
             <field name="arch" type="xml">
-                <form string="Stock Inventory Revaluation Quants">
-                    <field name="quant_id"/>
+                <form string="Stock Inventory Revaluation Moves">
+                    <field name="name"/>
                     <field name="product_id"/>
+                    <field name="move_id"/>
                     <field name="location_id"/>
+                    <field name="old_qty"/>
                     <field name="qty"/>
-                    <field name="current_cost"/>
-                    <field name="new_cost"/>
+                    <field name="old_value"/>
+                    <field name="current_value"/>
+                    <field name="new_value"/>
                 </form>
             </field>
         </record>
@@ -195,7 +199,7 @@
 
        <menuitem action="action_stock_inventory_revaluation_tree"
                  id="menu_action_stock_inventory_revaluation_tree"
-                 parent="stock.menu_stock_inventory_control"
-                 groups="stock_account.group_inventory_valuation"/>
+                 parent="stock.menu_stock_warehouse_mgmt"
+                 groups="stock.group_stock_manager"/>
 
 </odoo>
