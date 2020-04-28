@@ -118,6 +118,8 @@ class TestCommonMoveDest(SavepointCase):
             move_vals["move_dest_ids"] = [(4, move_dest.id, False)]
         return self.env["stock.move"].create(move_vals)
 
+
+class TestMoveDest(TestCommonMoveDest):
     def test_packing_sub_location(self):
         self._init_inventory()
         (

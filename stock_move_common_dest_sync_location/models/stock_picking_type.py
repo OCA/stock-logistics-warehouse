@@ -8,8 +8,8 @@ class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
     sync_common_move_dest_location = fields.Boolean(
-        string="Sync destination location for common destination moves",
-        help="When checked, updating the destination location on a move line "
-        "will update move lines from common destination moves (i.e moves "
-        "having a chained destination move sharing the same picking)",
+        string="Group incoming goods in the same destination",
+        help="When checked, the first time an operation is moved in a transfer"
+        " of this type, the destination of the pending operations are changed"
+        " to the same destination.",
     )
