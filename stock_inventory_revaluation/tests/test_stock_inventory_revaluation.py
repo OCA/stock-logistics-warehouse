@@ -1,6 +1,6 @@
 # Copyright 2020 Matt Taylor
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-17 ForgeFlow  S.L.
+#   (https://forgeflow.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -34,7 +34,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         self.res_users_model = self.env['res.users']
 
         # Get required Model data
-        self.uom_unit = self.env.ref('uom.product_uom_unit')
+        self.uom_unit = self.env.ref('product.product_uom_unit')
         self.company = self.env.ref('base.main_company')
 
         # groups
@@ -69,9 +69,11 @@ class TestStockInventoryRevaluation(TransactionCase):
                                                  self.company)
 
         # get accounting journal
-        self.journal = self.journal_model.search(
-            [('name', '=', 'Stock Journal')])
-
+        self.journal = self.journal_model.create({
+            'code': 'test',
+            'name': 'test',
+            'type': 'general'
+        })
         # Create account for Inventory
         name = 'Inventory'
         code = 'inventory'
@@ -504,8 +506,8 @@ class TestStockInventoryRevaluation(TransactionCase):
 
         revaluation_type = 'inventory_value'
         invent_price_change_fifo = self._create_inventory_revaluation(
-                revaluation_type,
-                self.product_fifo_1)
+            revaluation_type,
+            self.product_fifo_1)
 
         # Create an Inventory Revaluation Line Move
         date_from = date.today() - timedelta(1)

@@ -1,6 +1,6 @@
 # Copyright 2020 Matt Taylor
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-17 ForgeFlow  S.L.
+#   (https://forgeflow.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -97,7 +97,7 @@ class StockInventoryRevaluation(models.Model):
         related='product_id.cost_method')
 
     uom_id = fields.Many2one(
-        comodel_name='uom.uom',
+        comodel_name='product.uom',
         string='UoM',
         related="product_template_id.uom_id")
 

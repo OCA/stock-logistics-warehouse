@@ -1,6 +1,6 @@
 # Copyright 2020 Matt Taylor
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-17 ForgeFlow  S.L.
+#   (https://forgeflow.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -79,7 +79,8 @@ class StockInventoryRevaluationGetMoves(models.TransientModel):
         # Delete the previous records
         self.revaluation_id.reval_move_ids.unlink()
 
-        moves = self.env['stock.move'].search(self._get_move_search_criteria())
+        moves = self.env['stock.move'].search(
+            self._get_move_search_criteria())
         for move in moves:
             m_data = self._prepare_line_move_data(move)
             reval_move_obj.create(m_data)
