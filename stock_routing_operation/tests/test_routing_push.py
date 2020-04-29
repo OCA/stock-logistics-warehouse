@@ -220,7 +220,6 @@ class TestRoutingPush(common.SavepointCase):
         self.assert_src_input(move_b)
         # the move stays B stays on the same dest location
         self.assert_dest_handover(move_b)
-        self.assertEqual(move_b.routing_rule_id, self.routing.rule_ids)
 
         # we should have a move added after move_b to put
         # the goods in their final location
@@ -229,7 +228,7 @@ class TestRoutingPush(common.SavepointCase):
         # move: the move line will be in the sub-locations (handover)
 
         self.assert_src_handover(routing_move)
-        self.assert_dest_highbay(routing_move)
+        self.assert_dest_highbay_1_2(routing_move)
 
         self.assertEquals(routing_move.picking_type_id, self.pick_type_routing_op)
         self.assertEquals(
@@ -331,7 +330,7 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(routing_picking.move_lines, routing_move)
         self.assertEqual(routing_picking.picking_type_id, self.pick_type_routing_op)
         self.assert_src_handover(routing_picking)
-        self.assert_dest_highbay(routing_picking)
+        self.assert_dest_highbay_1_2(routing_picking)
 
         # check move and move line A for product1
         self.assert_src_supplier(move_a_p1)
@@ -369,7 +368,7 @@ class TestRoutingPush(common.SavepointCase):
 
         # check routing move for product1
         self.assert_src_handover(routing_move)
-        self.assert_dest_highbay(routing_move)
+        self.assert_dest_highbay_1_2(routing_move)
 
         # Deliver the internal picking (moves B),
         # the routing move for product1 should be assigned,
@@ -422,14 +421,21 @@ class TestRoutingPush(common.SavepointCase):
         moves_routing = {
             move_b: {
                 # qty of 6 using this routing rule
-                self.routing.rule_ids: 6,
+                self.env["stock.move"].RoutingDetails(
+                    self.routing.rule_ids, self.location_hb_1_2
+                ): 6,
                 # no routing for the 4 remaining
-                self.env["stock.routing"].browse(): 4,
+                self.env["stock.move"].RoutingDetails(
+                    self.env["stock.routing"].browse(), self.env["stock.move"].browse()
+                ): 4,
             }
         }
         # this is what is done in in _action_assign()
-        moves = move_b._routing_splits(moves_routing)
-        moves._apply_routing_rule_push()
+        moves_with_routing_details = move_b._routing_splits(moves_routing)
+        moves = self.env["stock.move"].browse(
+            move.id for move in moves_with_routing_details
+        )
+        moves._apply_routing_rule_push(moves_with_routing_details)
         moves._action_assign()
 
         # At this point, we should have this
@@ -480,10 +486,6 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(len(routing_move), 1)
         routing_picking = routing_move.picking_id
 
-        self.assertEqual(move_b_handover.routing_rule_id, self.routing.rule_ids)
-        self.assertFalse(move_b_shelf.routing_rule_id)
-        self.assertFalse(routing_move.routing_rule_id)
-
         # check chaining
         self.assertEqual(move_a.move_dest_ids, move_b_shelf + move_b_handover)
         self.assertFalse(move_b_shelf.move_dest_ids)
@@ -513,7 +515,7 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(routing_picking.move_lines, routing_move)
         self.assertEqual(routing_picking.picking_type_id, self.pick_type_routing_op)
         self.assert_src_handover(routing_picking)
-        self.assert_dest_highbay(routing_picking)
+        self.assert_dest_highbay_1_2(routing_picking)
 
         # check move and move line A
         self.assert_src_supplier(move_a)
@@ -549,7 +551,7 @@ class TestRoutingPush(common.SavepointCase):
 
         # check routing move for product1
         self.assert_src_handover(routing_move)
-        self.assert_dest_highbay(routing_move)
+        self.assert_dest_highbay_1_2(routing_move)
 
         # Deliver the internal picking (moves B),
         # the routing move should be assigned,
@@ -610,7 +612,6 @@ class TestRoutingPush(common.SavepointCase):
         self.assertEqual(move_a.state, "done")
 
         # move B is classified in a new picking
-        self.assertEqual(move_b.routing_rule_id, self.routing.rule_ids)
         self.assertEqual(move_b.state, "assigned")
         self.assertEqual(move_b.location_id, input_ho_location)
         self.assertEqual(move_b.move_line_ids.location_id, input_ho_location)
@@ -647,7 +648,6 @@ class TestRoutingPush(common.SavepointCase):
 
         self.assertEqual(move_a.state, "done")
 
-        self.assertEqual(move_b.routing_rule_id, self.routing.rule_ids)
         self.assertEqual(move_b.state, "assigned")
         self.assert_src_input(move_b)
         self.assertEqual(move_b.location_dest_id, input_ho_location)
@@ -655,8 +655,8 @@ class TestRoutingPush(common.SavepointCase):
 
         # we have an extra move to reach the Highbay from Input/Handover
         extra_move = move_b.move_dest_ids
-        self.assert_dest_highbay(extra_move)
-        self.assert_dest_highbay(extra_move.picking_id)
+        self.assert_dest_highbay_1_2(extra_move)
+        self.assert_dest_highbay_1_2(extra_move.picking_id)
         self.assertEqual(
             extra_move.picking_id.picking_type_id, self.pick_type_routing_op
         )
@@ -674,7 +674,6 @@ class TestRoutingPush(common.SavepointCase):
         move_a = in_picking.move_lines
         move_b = internal_picking.move_lines
         self.process_operations(move_a)
-        self.assertFalse(move_b.routing_rule_id)
         self.assertEqual(move_b.picking_id.picking_type_id, self.wh.int_type_id)
         # the original chaining stays the same: we don't add any move here
         self.assertFalse(move_a.move_orig_ids)
@@ -692,7 +691,6 @@ class TestRoutingPush(common.SavepointCase):
         move_a = in_picking.move_lines
         move_b = internal_picking.move_lines
         self.process_operations(move_a)
-        self.assertEqual(move_b.routing_rule_id, self.routing.rule_ids)
         # we have an extra move
         self.assertFalse(move_a.move_orig_ids)
         self.assertEqual(move_a.move_dest_ids, move_b)
@@ -718,7 +716,7 @@ class TestRoutingPush(common.SavepointCase):
                 "default_location_dest_id": self.location_handover.id,
             }
         )
-        routing_pre_handover = self.env["stock.routing"].create(
+        self.env["stock.routing"].create(
             {
                 "location_id": self.location_handover.id,
                 "rule_ids": [
@@ -751,7 +749,6 @@ class TestRoutingPush(common.SavepointCase):
                 {
                     "move_orig_ids": [],
                     "move_dest_ids": move_b.ids,
-                    "routing_rule_id": False,
                     "state": "done",
                     "location_id": self.supplier_loc.id,
                     "location_dest_id": self.wh.wh_input_stock_loc_id.id,
@@ -759,8 +756,6 @@ class TestRoutingPush(common.SavepointCase):
                 {
                     "move_orig_ids": move_a.ids,
                     "move_dest_ids": move_pre_handover.ids,
-                    # only the last applied rule is kept...
-                    "routing_rule_id": routing_pre_handover.rule_ids.id,
                     "state": "assigned",
                     "location_id": self.wh.wh_input_stock_loc_id.id,
                     "location_dest_id": location_pre_handover.id,
@@ -768,7 +763,6 @@ class TestRoutingPush(common.SavepointCase):
                 {
                     "move_orig_ids": move_b.ids,
                     "move_dest_ids": move_hb.ids,
-                    "routing_rule_id": False,
                     "state": "waiting",
                     "location_id": location_pre_handover.id,
                     "location_dest_id": self.location_handover.id,
@@ -776,10 +770,9 @@ class TestRoutingPush(common.SavepointCase):
                 {
                     "move_orig_ids": move_pre_handover.ids,
                     "move_dest_ids": [],
-                    "routing_rule_id": False,
                     "state": "waiting",
                     "location_id": self.location_handover.id,
-                    "location_dest_id": self.location_hb.id,
+                    "location_dest_id": self.location_hb_1_2.id,
                 },
             ],
         )

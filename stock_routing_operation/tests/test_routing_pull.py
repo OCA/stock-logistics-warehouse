@@ -3,7 +3,7 @@
 from odoo.tests import common
 
 
-class TestRoutingPull(common.SavepointCase):
+class TestRoutingPullCommon(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -170,6 +170,8 @@ class TestRoutingPull(common.SavepointCase):
         move.move_line_ids.qty_done = qty
         move.picking_id.action_done()
 
+
+class TestRoutingPull(TestRoutingPullCommon):
     def test_change_location_to_routing_operation(self):
         pick_picking, customer_picking = self._create_pick_ship(
             self.wh, [(self.product1, 10)]
@@ -181,8 +183,6 @@ class TestRoutingPull(common.SavepointCase):
             self.location_hb_1_2, move_a.product_id, 100
         )
         pick_picking.action_assign()
-
-        self.assertEqual(move_a.routing_rule_id, self.routing.rule_ids)
 
         ml = move_a.move_line_ids
         self.assertEqual(len(ml), 1)
@@ -240,8 +240,6 @@ class TestRoutingPull(common.SavepointCase):
         move_b_p2 = cust_moves.filtered(lambda r: r.product_id == product2)
 
         pick_picking.action_assign()
-        self.assertEqual(move_a_p1.routing_rule_id, self.routing.rule_ids)
-        self.assertFalse(move_a_p2.routing_rule_id)
 
         # At this point, we should have 3 stock.picking:
         #
@@ -360,14 +358,12 @@ class TestRoutingPull(common.SavepointCase):
         move_a1 = pick_picking.move_lines.filtered(
             lambda move: move.product_uom_qty == 4
         )
-        self.assertFalse(move_a1.routing_rule_id)
         move_a2 = pick_picking.move_lines.filtered(
             lambda move: move.product_uom_qty == 6
         )
         move_ho = move_a2.move_orig_ids
         # move_ho is the move which has been split from move_a and moved
         # to a different picking type
-        self.assertEqual(move_ho.routing_rule_id, self.routing.rule_ids)
         self.assertTrue(move_ho)
 
         # At this point, we should have 3 stock.picking:
@@ -468,7 +464,6 @@ class TestRoutingPull(common.SavepointCase):
             self.location_hb_1_2, move_a.product_id, 100
         )
         pick_picking.action_assign()
-        self.assertEqual(move_a.routing_rule_id, self.routing.rule_ids)
 
         ml = move_a.move_line_ids
         self.assertEqual(len(ml), 1)
@@ -530,7 +525,6 @@ class TestRoutingPull(common.SavepointCase):
             self.location_hb_1_2, move_a.product_id, 100
         )
         pick_picking.action_assign()
-        self.assertEqual(move_a.routing_rule_id, self.routing.rule_ids)
 
         ml = move_a.move_line_ids
         self.assertEqual(len(ml), 1)
@@ -579,7 +573,6 @@ class TestRoutingPull(common.SavepointCase):
         )
         pick_picking.action_assign()
 
-        self.assertFalse(move_a.routing_rule_id)
         self.assertEqual(move_a.picking_id.picking_type_id, self.wh.pick_type_id)
         # the original chaining stays the same: we don't add any move here
         self.assertFalse(move_a.move_orig_ids)
@@ -601,7 +594,6 @@ class TestRoutingPull(common.SavepointCase):
         )
         pick_picking.action_assign()
 
-        self.assertEqual(move_a.routing_rule_id, self.routing.rule_ids)
         self.assertEqual(move_a.picking_id.picking_type_id, self.pick_type_routing_op)
         self.assertFalse(move_a.move_orig_ids)
         self.assertNotEqual(move_a.move_dest_ids, move_b)
@@ -619,7 +611,6 @@ class TestRoutingPull(common.SavepointCase):
         self.assertEqual(move_a.picking_id, pick_picking)
         self.assertEqual(move_a.product_qty, 2)
         self.assertEqual(move_a.state, "confirmed")
-        self.assertFalse(move_a.routing_rule_id)
 
         # we have a new waiting move in the PICK with a qty of 8
         split_move = move_a.move_dest_ids.move_orig_ids - move_a
@@ -629,7 +620,6 @@ class TestRoutingPull(common.SavepointCase):
 
         # we have a new move for the routing before the split move
         routing_move = split_move.move_orig_ids
-        self.assertEqual(routing_move.routing_rule_id, self.routing.rule_ids)
         self.assertRecordValues(
             routing_move,
             [
@@ -666,7 +656,7 @@ class TestRoutingPull(common.SavepointCase):
                 "default_location_dest_id": self.customer_loc.id,
             }
         )
-        routing_delivery = self.env["stock.routing"].create(
+        self.env["stock.routing"].create(
             {
                 "location_id": area1.id,
                 "rule_ids": [
@@ -692,11 +682,9 @@ class TestRoutingPull(common.SavepointCase):
             self.location_hb_1_2, move_a.product_id, 100
         )
         pick_picking.action_assign()
-        self.assertEqual(move_a.routing_rule_id, self.routing.rule_ids)
         self.assertEqual(move_b.location_id, area1)
 
         # routing has been applied
-        self.assertEqual(move_b.routing_rule_id, routing_delivery.rule_ids)
         self.assertEqual(move_b.picking_id.picking_type_id, pick_type_routing_delivery)
 
     def test_change_dest_move_source_split(self):
@@ -722,7 +710,7 @@ class TestRoutingPull(common.SavepointCase):
                 "default_location_dest_id": self.customer_loc.id,
             }
         )
-        routing_delivery = self.env["stock.routing"].create(
+        self.env["stock.routing"].create(
             {
                 "location_id": area1.id,
                 "rule_ids": [
@@ -789,7 +777,6 @@ class TestRoutingPull(common.SavepointCase):
                 {
                     "move_orig_ids": [],
                     "move_dest_ids": move_b.ids,
-                    "routing_rule_id": False,
                     "state": "confirmed",
                     "location_id": self.wh.lot_stock_id.id,
                     "location_dest_id": self.wh.wh_output_stock_loc_id.id,
@@ -797,7 +784,6 @@ class TestRoutingPull(common.SavepointCase):
                 {
                     "move_orig_ids": move_a.ids,
                     "move_dest_ids": [],
-                    "routing_rule_id": False,
                     "state": "waiting",
                     "location_id": self.wh.wh_output_stock_loc_id.id,
                     "location_dest_id": self.customer_loc.id,
@@ -805,7 +791,6 @@ class TestRoutingPull(common.SavepointCase):
                 {
                     "move_orig_ids": [],
                     "move_dest_ids": move_d.ids,
-                    "routing_rule_id": self.routing.rule_ids.id,
                     "state": "assigned",
                     "location_id": self.location_hb.id,
                     "location_dest_id": area1.id,
@@ -813,7 +798,6 @@ class TestRoutingPull(common.SavepointCase):
                 {
                     "move_orig_ids": move_c.ids,
                     "move_dest_ids": [],
-                    "routing_rule_id": routing_delivery.rule_ids.id,
                     "state": "waiting",
                     "location_id": area1.id,
                     "location_dest_id": self.customer_loc.id,
@@ -855,7 +839,7 @@ class TestRoutingPull(common.SavepointCase):
                 "default_location_dest_id": location_qa.id,
             }
         )
-        routing_qa = self.env["stock.routing"].create(
+        self.env["stock.routing"].create(
             {
                 "location_id": self.location_handover.id,
                 "rule_ids": [
@@ -880,7 +864,7 @@ class TestRoutingPull(common.SavepointCase):
                 "default_location_dest_id": self.customer_loc.id,
             }
         )
-        routing_delivery = self.env["stock.routing"].create(
+        self.env["stock.routing"].create(
             {
                 "location_id": location_qa.id,
                 "rule_ids": [
@@ -906,7 +890,6 @@ class TestRoutingPull(common.SavepointCase):
             self.location_hb_1_2, move_a.product_id, 100
         )
         pick_picking.action_assign()
-        self.assertEqual(move_a.routing_rule_id, self.routing.rule_ids)
         move_middle = move_a.move_dest_ids
         self.assertNotEqual(move_middle, move_b)
 
@@ -918,8 +901,6 @@ class TestRoutingPull(common.SavepointCase):
         self.assert_dest_customer(move_b)
 
         # routing has been applied
-        self.assertEqual(move_middle.routing_rule_id, routing_qa.rule_ids)
         self.assertEqual(move_middle.picking_id.picking_type_id, pick_type_routing_qa)
 
-        self.assertEqual(move_b.routing_rule_id, routing_delivery.rule_ids)
         self.assertEqual(move_b.picking_id.picking_type_id, pick_type_routing_delivery)

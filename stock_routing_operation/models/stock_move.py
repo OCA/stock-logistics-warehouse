@@ -1,22 +1,29 @@
 # Copyright 2019-2020 Camptocamp (https://www.camptocamp.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 import uuid
-from itertools import chain
+from collections import defaultdict, namedtuple
 
 from psycopg2 import sql
 
-from odoo import fields, models
+from odoo import models
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    routing_rule_id = fields.Many2one(
-        comodel_name="stock.routing.rule",
-        copy=False,
-        help="Technical field. Store the routing rule that has been"
-        " selected for the move.",
+    RoutingDetails = namedtuple(
+        "RoutingDetails",
+        # rule is the routing rule to apply
+        # push_original_destination is used only for push rules, store the
+        # original location
+        "rule push_original_destination",
     )
+
+    def _no_routing_details(self):
+        return self.RoutingDetails(
+            rule=self.env["stock.routing.rule"].browse(),
+            push_original_destination=self.env["stock.location"].browse(),
+        )
 
     def write(self, values):
         result = super().write(values)
@@ -35,11 +42,20 @@ class StockMove(models.Model):
         if not self:
             return
         move_routing_rules = self.env["stock.routing"]._routing_rule_for_moves(self)
+        moves_with_routing_details = {}
         for move, rule in move_routing_rules.items():
             if rule:
-                move.routing_rule_id = rule
-        self._apply_routing_rule_pull()
-        self._apply_routing_rule_push()
+                moves_with_routing_details[move] = self.RoutingDetails(
+                    rule=rule,
+                    # Never change the destination of push rules in a chain,
+                    # it's done only on the first move re-routed
+                    push_original_destination=self.env["stock.location"].browse(),
+                )
+            else:
+                moves_with_routing_details[move] = self._no_routing_details()
+
+        self._apply_routing_rule_pull(moves_with_routing_details)
+        self._apply_routing_rule_push(moves_with_routing_details)
 
     def _action_assign(self):
         if self.env.context.get("exclude_apply_routing_operation"):
@@ -71,9 +87,10 @@ class StockMove(models.Model):
             # on the same moves
             return self.browse()
         # apply the routing
-        moves = self._routing_splits(moves_routing)
-        moves._apply_routing_rule_pull()
-        moves._apply_routing_rule_push()
+        moves_with_routing_details = self._routing_splits(moves_routing)
+        moves = self.browse(move.id for move in moves_with_routing_details)
+        moves._apply_routing_rule_pull(moves_with_routing_details)
+        moves._apply_routing_rule_push(moves_with_routing_details)
         return moves
 
     def _prepare_routing_pull(self):
@@ -103,8 +120,9 @@ class StockMove(models.Model):
         super()._action_assign()
 
         moves_routing = self._routing_compute_rules()
-
-        if not any(rule for routing in moves_routing.values() for rule in routing):
+        if not any(
+            details.rule for routing in moves_routing.values() for details in routing
+        ):
             # no routing to apply, so the reservations done by _action_assign
             # are valid and we can resolve to a normal flow
             self.env["base"].flush()
@@ -133,7 +151,7 @@ class StockMove(models.Model):
             self
         )
         moves_routing = {}
-        no_routing_rule = self.env["stock.routing.rule"].browse()
+        no_loc = self.env["stock.location"].browse()
         for move in self:
             if move.state not in ("assigned", "partially_available"):
                 continue
@@ -143,17 +161,26 @@ class StockMove(models.Model):
             # take from each location, so we'll be able to split the move
             # if needed.
             routing_rules = move_routing_rules[move]
-            moves_routing[move] = {
-                # use product_qty and not product_uom_qty, because we'll use
-                # this for the _split() and this method expect product_qty
-                # units
-                rule: sum(move_lines.mapped("product_qty"))
-                for rule, move_lines in routing_rules.items()
-            }
+            moves_routing[move] = {}
+            # use product_qty and not product_uom_qty, because we'll use
+            # this for the _split() and this method expect product_qty
+            # units
+            for rule, move_lines in routing_rules.items():
+                if rule.method == "push":
+                    dests = defaultdict(lambda: 0.0)
+                    for line in move_lines:
+                        dests[line.location_dest_id] += line.product_qty
+                    for destination, qty in dests.items():
+                        moves_routing[move][
+                            self.RoutingDetails(rule, destination)
+                        ] = qty
+                else:
+                    moves_routing[move][self.RoutingDetails(rule, no_loc)] = sum(
+                        move_lines.mapped("product_qty")
+                    )
             if move.state == "partially_available":
                 # consider unreserved quantity as without routing, so it will
                 # be split if another part of the quantity need a routing
-                moves_routing[move].setdefault(no_routing_rule, 0)
                 missing_reserved_uom_quantity = (
                     move.product_uom_qty - move.reserved_availability
                 )
@@ -163,7 +190,9 @@ class StockMove(models.Model):
                     # this match what is done in StockMove._action_assign()
                     rounding_method="HALF-UP",
                 )
-                moves_routing[move][no_routing_rule] += missing_reserved_quantity
+                routing_details = self._no_routing_details()
+                moves_routing[move].setdefault(routing_details, 0)
+                moves_routing[move][routing_details] += missing_reserved_quantity
         return moves_routing
 
     def _routing_splits(self, moves_routing):
@@ -171,18 +200,19 @@ class StockMove(models.Model):
 
         This method splits the move in as many routing pull rules they have.
 
-        This method writes "routing_rule_id" on the moves, this rule will be
-        used by ``_apply_routing_rule_pull`` / ``_apply_routing_rule_push``
+        This method returns the routing details that will be passed to
+        ``_apply_routing_rule_pull`` / ``_apply_routing_rule_push`` to apply
+        them.
         """
-        new_move_per_location = {}
+        moves_with_routing_details = {}
         for move, routing_quantities in moves_routing.items():
-            for routing_rule, qty in routing_quantities.items():
+            moves_with_routing_details[move] = self._no_routing_details()
+            for routing_details, qty in routing_quantities.items():
                 # When the rule is empty, it means we have no routing
                 # operation for the move, so we have nothing to do,
                 # it will behave as normally.
-                if not routing_rule:
+                if not routing_details.rule:
                     continue
-                routing_location = routing_rule.location_src_id
                 # If we have a routing operation, the move may have several
                 # lines with different routing operations (or lines with
                 # a routing operation, lines without). We split the lines
@@ -192,14 +222,11 @@ class StockMove(models.Model):
                 # explicitly check if we really need to split or not.
                 new_move_id = move._split(qty)
                 new_move = self.env["stock.move"].browse(new_move_id)
-                new_move.routing_rule_id = routing_rule
-                new_move_per_location.setdefault(routing_location.id, [])
-                new_move_per_location[routing_location.id].append(new_move_id)
+                moves_with_routing_details[new_move] = routing_details
 
-        new_moves = self.browse(chain.from_iterable(new_move_per_location.values()))
-        return self | new_moves
+        return moves_with_routing_details
 
-    def _apply_routing_rule_pull(self):
+    def _apply_routing_rule_pull(self, routing_details):
         """Apply routing operations
 
         When a move has a routing operation configured on its location and the
@@ -210,7 +237,7 @@ class StockMove(models.Model):
         """
         pickings_to_check_for_emptiness = self.env["stock.picking"]
         for move in self:
-            routing_rule = move.routing_rule_id
+            routing_rule = routing_details[move].rule
             if not routing_rule.method == "pull":
                 continue
 
@@ -307,7 +334,7 @@ class StockMove(models.Model):
         )
         routing_move._chain_apply_routing()
 
-    def _apply_routing_rule_push(self):
+    def _apply_routing_rule_push(self, routing_details):
         """Apply routing operations
 
         When a move has a routing operation configured on its location and the
@@ -318,9 +345,10 @@ class StockMove(models.Model):
         """
         pickings_to_check_for_emptiness = self.env["stock.picking"]
         for move in self:
+            move_routing_details = routing_details[move]
             # At this point, we should not have lines with different source
             # locations, they have been split by _routing_splits()
-            routing_rule = move.routing_rule_id
+            routing_rule = move_routing_details.rule
             if not routing_rule.method == "push":
                 continue
             if move.picking_id.picking_type_id == routing_rule.picking_type_id:
@@ -351,7 +379,9 @@ class StockMove(models.Model):
                 # routing's one. Redirect the move and move line to go through
                 # the routing and add a new move after it to reach the
                 # destination of the routing.
-                move._routing_push_insert_move(routing_rule)
+                move._routing_push_insert_move(
+                    routing_rule, move_routing_details.push_original_destination
+                )
 
         pickings_to_check_for_emptiness._routing_operation_handle_empty()
 
@@ -365,19 +395,28 @@ class StockMove(models.Model):
         self.picking_type_id = routing_rule.picking_type_id
         self._assign_picking()
 
-    def _routing_push_insert_move(self, routing_rule):
+    def _routing_push_insert_move(self, routing_rule, destination):
         """Change destination of the current move and add a move after it
 
         The routing rules are applied on the move after its destination has
         been changed in case it would need again a new move or a switch of
         picking type.
+
+        When the new move is the one that triggered the routing in the first
+        place (put-away assigned in the final Bin for instance), the initial
+        destination of the original move line is kept so we are sure the move
+        goes to the correct place. For all other moves, the destination is the
+        one of the picking type to respect the locations chain.
         """
         self.location_dest_id = routing_rule.location_src_id
         self.move_line_ids.location_dest_id = routing_rule.location_src_id
         routing_move = self._insert_routing_moves(
             routing_rule.picking_type_id,
             routing_rule.location_src_id,
-            routing_rule.location_dest_id,
+            # destination should be set only for the initial move, which
+            # was the destination location of the stock.move.line generated
+            # for the initial move (by a put-away rule for instance).
+            destination or routing_rule.location_dest_id,
         )
         routing_move._assign_picking()
         # recursively apply chain in case we have several routing steps (since
