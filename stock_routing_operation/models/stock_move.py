@@ -65,7 +65,11 @@ class StockMove(models.Model):
         """
         moves_routing = self._prepare_routing_pull()
         if not moves_routing:
-            return self
+            # When we have no routing rules, _prepare_routing_pull already
+            # called _action_assign(), returning an empty recordset will
+            # prevent the caller of the method to call _action_assign() again
+            # on the same moves
+            return self.browse()
         # apply the routing
         moves = self._routing_splits(moves_routing)
         moves._apply_routing_rule_pull()
@@ -251,7 +255,13 @@ class StockMove(models.Model):
 
             pickings_to_check_for_emptiness |= move.picking_id
             move._assign_picking()
-            move._action_assign()
+            # Note: we have to call _action_assign() here because if the move
+            # has been split because of partial availability, we want to ensure
+            # to reserve the move which has been "routed" first. Even if
+            # _action_assign() is called again, it should not be an issue
+            # because the move's state will be "assigned" and will be excluded
+            # by the method.
+            move.with_context(exclude_apply_routing_operation=True)._action_assign()
 
         pickings_to_check_for_emptiness._routing_operation_handle_empty()
 
