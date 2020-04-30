@@ -45,20 +45,22 @@ class StockMoveLine(models.Model):
 
             # We do sudo because potentially the user that completes the move
             #  may not have permissions for stock.request.
-            to_allocate_qty = ml.qty_done
+            to_allocate_qty = qty_done
             for allocation in ml.move_id.allocation_ids.sudo():
                 allocated_qty = 0.0
                 if allocation.open_product_qty:
                     allocated_qty = min(
-                        allocation.open_product_qty, qty_done)
+                        allocation.open_product_qty, to_allocate_qty)
                     allocation.allocated_product_qty += allocated_qty
                     to_allocate_qty -= allocated_qty
-                request = allocation.stock_request_id
-                message_data = self._prepare_message_data(ml, request,
-                                                          allocated_qty)
-                message = \
-                    self._stock_request_confirm_done_message_content(
-                        message_data)
-                request.message_post(body=message, subtype='mail.mt_comment')
-                request.check_done()
+                if allocated_qty:
+                    request = allocation.stock_request_id
+                    message_data = self._prepare_message_data(
+                        ml, request, allocated_qty)
+                    message = \
+                        self._stock_request_confirm_done_message_content(
+                            message_data)
+                    request.message_post(body=message,
+                                         subtype='mail.mt_comment')
+                    request.check_done()
         return res
