@@ -35,3 +35,5 @@ Works best when used with ``stock_available_to_promise_release``:
   is handled by canceling the remaining line.
 * When the module is not used, then the destination of the backorders may be
   changed at the same time
+
+Compatible with ``stock_dynamic_routing``.

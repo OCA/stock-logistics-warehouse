@@ -5,7 +5,37 @@ from odoo.addons.stock_move_common_dest.tests.test_move_common_dest import (
 )
 
 
-class TestMoveCommonDestSyncLocation(TestCommonMoveDest):
+class TestCommonSyncDest(TestCommonMoveDest):
+    @classmethod
+    def _update_qty_in_location(cls, location, product, quantity):
+        cls.env["stock.quant"]._update_available_quantity(product, location, quantity)
+
+    @classmethod
+    def _create_single_move(cls, picking_type, product, move_orig=None):
+        move_vals = {
+            "name": product.name,
+            "picking_type_id": picking_type.id,
+            "product_id": product.id,
+            "product_uom_qty": 2.0,
+            "product_uom": product.uom_id.id,
+            "location_id": picking_type.default_location_src_id.id,
+            "location_dest_id": picking_type.default_location_dest_id.id,
+            "state": "confirmed",
+            "procure_method": "make_to_stock",
+            "group_id": cls.procurement_group_1.id,
+        }
+        if move_orig:
+            move_vals.update(
+                {
+                    "procure_method": "make_to_order",
+                    "state": "waiting",
+                    "move_orig_ids": [(6, 0, move_orig.ids)],
+                }
+            )
+        return cls.env["stock.move"].create(move_vals)
+
+
+class TestMoveCommonDestSyncLocation(TestCommonSyncDest):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -67,34 +97,6 @@ class TestMoveCommonDestSyncLocation(TestCommonMoveDest):
         moves._assign_picking()
         moves._action_assign()
 
-    @classmethod
-    def _update_qty_in_location(cls, location, product, quantity):
-        cls.env["stock.quant"]._update_available_quantity(product, location, quantity)
-
-    @classmethod
-    def _create_single_move(cls, picking_type, product, move_orig=None):
-        move_vals = {
-            "name": product.name,
-            "picking_type_id": picking_type.id,
-            "product_id": product.id,
-            "product_uom_qty": 2.0,
-            "product_uom": product.uom_id.id,
-            "location_id": picking_type.default_location_src_id.id,
-            "location_dest_id": picking_type.default_location_dest_id.id,
-            "state": "confirmed",
-            "procure_method": "make_to_stock",
-            "group_id": cls.procurement_group_1.id,
-        }
-        if move_orig:
-            move_vals.update(
-                {
-                    "procure_method": "make_to_order",
-                    "state": "waiting",
-                    "move_orig_ids": [(6, 0, move_orig.ids)],
-                }
-            )
-        return cls.env["stock.move"].create(move_vals)
-
     def test_pack_sync(self):
         self.pack_type.sync_common_move_dest_location = True
         self.pack_post_type.sync_common_move_dest_location = True
@@ -111,9 +113,6 @@ class TestMoveCommonDestSyncLocation(TestCommonMoveDest):
         # different picking type,
         # pick_move3 should change because it reaches the same pack transfer.
         self.pick_move1._action_done()
-        self.assertEqual(self.pick_move2.location_dest_id, self.packing_location_1)
-        self.assertEqual(self.pick_move3.location_dest_id, self.packing_location_1)
-        self.assertEqual(self.pick_move4.location_dest_id, self.packing_location)
         self.assertEqual(
             self.pick_move2.move_line_ids.location_dest_id, self.packing_location_1
         )
@@ -172,4 +171,51 @@ class TestMoveCommonDestSyncLocation(TestCommonMoveDest):
         )
         self.assertEqual(
             self.pick_move1.move_line_ids.location_dest_id, self.packing_location
+        )
+
+    def test_pack_sync_all_at_once(self):
+        self.pack_type.sync_common_move_dest_location = True
+        self.pack_post_type.sync_common_move_dest_location = True
+        self.pick_move1.move_line_ids.write(
+            {
+                "location_dest_id": self.packing_location_1.id,
+                "qty_done": self.pick_move1.move_line_ids.product_uom_qty,
+            }
+        )
+        self.pick_move2.move_line_ids.write(
+            {
+                "location_dest_id": self.packing_location_1.id,
+                "qty_done": self.pick_move2.move_line_ids.product_uom_qty,
+            }
+        )
+        self.pick_move3.move_line_ids.write(
+            {
+                "location_dest_id": self.packing_location_2.id,
+                "qty_done": self.pick_move3.move_line_ids.product_uom_qty,
+            }
+        )
+        self.pick_move4.move_line_ids.write(
+            {
+                "location_dest_id": self.packing_location_2.id,
+                "qty_done": self.pick_move4.move_line_ids.product_uom_qty,
+            }
+        )
+        # done on all the picking at once: we expect the original destinations
+        # to be kept
+        self.pick_move1.picking_id.action_done()
+
+        self.assertEqual(
+            self.pick_move1.move_line_ids.location_dest_id, self.packing_location_1
+        )
+        self.assertEqual(
+            self.pick_move2.move_line_ids.location_dest_id, self.packing_location_1
+        )
+        self.assertEqual(
+            self.pick_move3.move_line_ids.location_dest_id,
+            # this one is changed because the stock.picking of pick_move3 is
+            # not done yet, the stock.move is 'assigned'
+            self.packing_location_1,
+        )
+        self.assertEqual(
+            self.pick_move4.move_line_ids.location_dest_id, self.packing_location_2
         )
