@@ -9,7 +9,7 @@ class StockPicking(models.Model):
     canceled_by_routing = fields.Boolean(
         default=False,
         help="Technical field. Indicates the transfer is"
-        " canceled because it was left empty after a routing operation.",
+        " canceled because it was left empty after a dynamic routing.",
     )
 
     @api.depends("canceled_by_routing")
@@ -19,8 +19,8 @@ class StockPicking(models.Model):
             if picking.canceled_by_routing:
                 picking.state = "cancel"
 
-    def _routing_operation_handle_empty(self):
-        """Handle pickings emptied during a routing operation"""
+    def _dynamic_routing_handle_empty(self):
+        """Handle pickings emptied during a dynamic routing"""
         for picking in self:
             if not picking.move_lines:
                 # When the picking type changes, it will create a new picking

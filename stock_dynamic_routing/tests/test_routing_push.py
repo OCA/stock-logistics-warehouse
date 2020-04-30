@@ -61,7 +61,7 @@ class TestRoutingPush(common.SavepointCase):
 
         cls.pick_type_routing_op = cls.env["stock.picking.type"].create(
             {
-                "name": "Routing operation",
+                "name": "Dynamic Routing",
                 "code": "internal",
                 "sequence_code": "WH/HO",
                 "warehouse_id": cls.wh.id,
@@ -186,7 +186,7 @@ class TestRoutingPush(common.SavepointCase):
             move.move_line_ids.qty_done = qty
         move.mapped("picking_id").action_done()
 
-    def test_change_location_to_routing_operation(self):
+    def test_change_location_to_dynamic_routing(self):
         in_picking, internal_picking = self._create_supplier_input_highbay(
             self.wh, [(self.product1, 10, self.location_hb_1_2)]
         )
@@ -399,7 +399,7 @@ class TestRoutingPush(common.SavepointCase):
         )
         move_a = in_picking.move_lines
         move_b = internal_picking.move_lines
-        # We do not want to trigger the routing operation now (see explanation
+        # We do not want to trigger the dynamic routing now (see explanation
         # below)
         move_b.location_dest_id = self.wh.lot_stock_id
 

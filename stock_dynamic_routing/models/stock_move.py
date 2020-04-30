@@ -58,7 +58,7 @@ class StockMove(models.Model):
         self._apply_routing_rule_push(moves_with_routing_details)
 
     def _action_assign(self):
-        if self.env.context.get("exclude_apply_routing_operation"):
+        if self.env.context.get("exclude_apply_dynamic_routing"):
             super()._action_assign()
         else:
             # these methods will call _action_assign in a savepoint
@@ -187,7 +187,7 @@ class StockMove(models.Model):
                 missing_reserved_quantity = move.product_uom._compute_quantity(
                     missing_reserved_uom_quantity,
                     move.product_id.uom_id,
-                    # this match what is done in StockMove._action_assign()
+                    # this matches what is done in StockMove._action_assign()
                     rounding_method="HALF-UP",
                 )
                 routing_details = self._no_routing_details()
@@ -208,18 +208,18 @@ class StockMove(models.Model):
         for move, routing_quantities in moves_routing.items():
             moves_with_routing_details[move] = self._no_routing_details()
             for routing_details, qty in routing_quantities.items():
-                # When the rule is empty, it means we have no routing
-                # operation for the move, so we have nothing to do,
-                # it will behave as normally.
+                # When the rule is empty, it means we have no dynamic routing
+                # for the move, so we have nothing to do, it will behave as
+                # normally.
                 if not routing_details.rule:
                     continue
-                # If we have a routing operation, the move may have several
-                # lines with different routing operations (or lines with
-                # a routing operation, lines without). We split the lines
-                # according to these.
-                # The _split() method returns the same move if the qty
-                # is the same than the move's qty, so we don't need to
-                # explicitly check if we really need to split or not.
+                # If we have a dynamic routing, the move may have several
+                # lines with different routing (or lines with a dynamic
+                # routing, lines without). We split the lines according to
+                # these.
+                # The _split() method returns the same move if the qty is the
+                # same than the move's qty, so we don't need to explicitly
+                # check if we really need to split or not.
                 new_move_id = move._split(qty)
                 new_move = self.env["stock.move"].browse(new_move_id)
                 moves_with_routing_details[new_move] = routing_details
@@ -227,13 +227,12 @@ class StockMove(models.Model):
         return moves_with_routing_details
 
     def _apply_routing_rule_pull(self, routing_details):
-        """Apply routing operations
+        """Apply pull dynamic routing
 
-        When a move has a routing operation configured on its location and the
-        destination of the move does not match the destination of the routing
-        operation, this method updates the move's destination and it's picking
-        type with the routing operation ones and creates a new chained move
-        after it.
+        When a move has a dynamic routing configured on its location and the
+        destination of the move does not match the destination of the routing,
+        this method updates the move's destination and it's picking type with
+        the routing ones and creates a new chained move after it.
         """
         pickings_to_check_for_emptiness = self.env["stock.picking"]
         for move in self:
@@ -288,9 +287,9 @@ class StockMove(models.Model):
             # _action_assign() is called again, it should not be an issue
             # because the move's state will be "assigned" and will be excluded
             # by the method.
-            move.with_context(exclude_apply_routing_operation=True)._action_assign()
+            move.with_context(exclude_apply_dynamic_routing=True)._action_assign()
 
-        pickings_to_check_for_emptiness._routing_operation_handle_empty()
+        pickings_to_check_for_emptiness._dynamic_routing_handle_empty()
 
     def _routing_pull_switch_destination(self, routing_rule):
         """Switch the destination of the move in place
@@ -335,13 +334,12 @@ class StockMove(models.Model):
         routing_move._chain_apply_routing()
 
     def _apply_routing_rule_push(self, routing_details):
-        """Apply routing operations
+        """Apply push dynamic routing
 
-        When a move has a routing operation configured on its location and the
-        destination of the move does not match the destination of the routing
-        operation, this method updates the move's destination and it's picking
-        type with the routing operation ones and creates a new chained move
-        after it.
+        When a move has a dynamic routing configured on its location and the
+        destination of the move does not match the destination of the routing,
+        this method updates the move's destination and it's picking type with
+        the routing ones and creates a new chained move after it.
         """
         pickings_to_check_for_emptiness = self.env["stock.picking"]
         for move in self:
@@ -383,7 +381,7 @@ class StockMove(models.Model):
                     routing_rule, move_routing_details.push_original_destination
                 )
 
-        pickings_to_check_for_emptiness._routing_operation_handle_empty()
+        pickings_to_check_for_emptiness._dynamic_routing_handle_empty()
 
     def _routing_push_switch_picking_type(self, routing_rule):
         """Switch the picking type of the move in place

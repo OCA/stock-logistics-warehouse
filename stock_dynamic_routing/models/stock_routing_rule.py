@@ -10,7 +10,7 @@ from .stock_routing import _default_sequence
 
 class StockRoutingRule(models.Model):
     _name = "stock.routing.rule"
-    _description = "Stock Routing Rule"
+    _description = "Stock Dynamic Routing Rule"
     _order = "sequence, id"
 
     sequence = fields.Integer(default=lambda self: self._default_sequence())

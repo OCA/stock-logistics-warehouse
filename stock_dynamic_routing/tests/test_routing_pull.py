@@ -47,7 +47,7 @@ class TestRoutingPullCommon(common.SavepointCase):
 
         cls.pick_type_routing_op = cls.env["stock.picking.type"].create(
             {
-                "name": "Routing operation",
+                "name": "Dynamic Routing",
                 "code": "internal",
                 "sequence_code": "WH/HO",
                 "warehouse_id": cls.wh.id,
@@ -172,7 +172,7 @@ class TestRoutingPullCommon(common.SavepointCase):
 
 
 class TestRoutingPull(TestRoutingPullCommon):
-    def test_change_location_to_routing_operation(self):
+    def test_change_location_to_dynamic_routing(self):
         pick_picking, customer_picking = self._create_pick_ship(
             self.wh, [(self.product1, 10)]
         )
@@ -817,7 +817,7 @@ class TestRoutingPull(TestRoutingPullCommon):
         # The setup we want is:
         #
         # * When the initial move line reserves in Highbay, the move is
-        #   classified in picking type "Routing operation" with locations
+        #   classified in picking type "Dynamic Routing" with locations
         #   Highbay -> Handover (a new move is inserted between Handover and
         #   Output)
         # * When the next move source location is set to "Handover", we

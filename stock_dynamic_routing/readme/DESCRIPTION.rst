@@ -1,5 +1,6 @@
-Route explains the steps you want to produce whereas the “Routing Rules” defines how operations are grouped according to their final source
-and destination location.
+Standard Stock Routes explain the steps you want to produce whereas the
+“Dynamic Routing” defines how operations are grouped according to their final
+source and destination location.
 
 This allows for example:
 
@@ -24,13 +25,14 @@ need an extra operation: Pick(Highbay)-Handover-Pack-Ship.
 
 This is what this feature is doing: on the High-Bay location, you define
 a "routing rule". A routing rule selects a different operation type for the move.
-The extra transfer will have the selected operation type, and be added before the chain of moves.
+The extra transfer will have the selected operation type, and be added
+dynamically, on reservation, before the chain of moves.
 
 When putting away:
 
 A put-away rule targets the High-Bay location.
 An operation Input-Highbay is created. You expect Input-Handover-Highbay.
 
-You can configure a routing operation for the put-away on the High-Bay Location.
+You can configure a dynamic routing for the put-away on the High-Bay Location.
 The operation type of the new Handover move will the one of the matching routing rule,
 and its destination will be the destination of the operation type.

@@ -16,7 +16,7 @@ def _default_sequence(model):
 
 class StockRouting(models.Model):
     _name = "stock.routing"
-    _description = "Stock Routing"
+    _description = "Stock Dynamic Routing"
     _order = "sequence, id"
 
     _rec_name = "location_id"
