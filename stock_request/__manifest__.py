@@ -4,7 +4,7 @@
 {
     "name": "Stock Request",
     "summary": "Internal request for stock",
-    "version": "12.0.1.1.7",
+    "version": "12.0.1.2.0",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Eficent, "
