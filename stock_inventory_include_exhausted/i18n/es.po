@@ -19,11 +19,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_inventory_include_exhausted
+#: model:ir.model.fields,help:stock_inventory_include_exhausted.field_stock_inventory__include_exhausted
+msgid ""
+"If you select this option, you will receive the out of stock inventory "
+"products"
+msgstr ""
+
+#. module: stock_inventory_include_exhausted
 #: model:ir.model.fields,field_description:stock_inventory_include_exhausted.field_stock_inventory__include_exhausted
 msgid "Include Exhausted"
 msgstr "Incluir productos sin existencias"
 
-#. module: stock_inventory_exclude_sublocation
+#. module: stock_inventory_include_exhausted
 #: model:ir.model,name:stock_inventory_include_exhausted.model_stock_inventory
 msgid "Inventory"
 msgstr "Inventario"
