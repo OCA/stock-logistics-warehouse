@@ -131,6 +131,7 @@ msgstr "公司"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:189
+#: code:addons/stock_request/models/stock_request.py:199
 #, python-format
 msgid "Company must be equal to the order"
 msgstr "公司必须等于订单"
@@ -218,6 +219,7 @@ msgstr "预计日期"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:196
+#: code:addons/stock_request/models/stock_request.py:206
 #, python-format
 msgid "Expected date must be equal to the order"
 msgstr "预计日期必须等于订单"
@@ -341,6 +343,7 @@ msgstr "位置"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:172
+#: code:addons/stock_request/models/stock_request.py:182
 #, python-format
 msgid "Location must be equal to the order"
 msgstr "位置必须等于订单"
@@ -452,6 +455,7 @@ msgid "Number of unread messages"
 msgstr "未读消息的数量"
 
 #. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:265
 #: code:addons/stock_request/models/stock_request_order.py:267
 #, python-format
 msgid "Only orders on draft state can be unlinked"
@@ -459,6 +463,7 @@ msgstr "只有处于草稿状态的订单才能取消链接"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:334
+#: code:addons/stock_request/models/stock_request.py:353
 #, python-format
 msgid "Only requests on draft state can be unlinked"
 msgstr "只有处于草稿状态的请求才能取消链接"
@@ -513,6 +518,7 @@ msgstr "补货组"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:182
+#: code:addons/stock_request/models/stock_request.py:192
 #, python-format
 msgid "Procurement group must be equal to the order"
 msgstr "补货组必须等于订单"
@@ -541,6 +547,13 @@ msgid "Purchases"
 msgstr "采购"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_cancelled
+#, fuzzy
+#| msgid "Cancelled"
+msgid "Qty Cancelled"
+msgstr "已取消"
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_done
 msgid "Qty Done"
 msgstr "完成数量"
@@ -555,6 +568,13 @@ msgstr "进行中的数量"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__product_uom_qty
 msgid "Quantity"
 msgstr "数量"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__qty_cancelled
+#, fuzzy
+#| msgid "Quantity completed"
+msgid "Quantity cancelled"
+msgstr "已完成数量"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_done
@@ -641,6 +661,7 @@ msgstr "请求者"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:158
+#: code:addons/stock_request/models/stock_request.py:168
 #, python-format
 msgid "Requested by must be equal to the order"
 msgstr "请求者必须等于订单"
@@ -840,12 +861,14 @@ msgstr "库存请求的提交状态"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move.py:38
+#: code:addons/stock_request/models/stock_request_order.py:282
 #: code:addons/stock_request/models/stock_request_order.py:284
 #, python-format
 msgid "The company of the stock request must match with that of the location."
 msgstr "库存请求的公司必须与位置的公司匹配。"
 
 #. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:273
 #: code:addons/stock_request/models/stock_request_order.py:275
 #, python-format
 msgid "The company of the stock request must match with that of the warehouse."
@@ -861,11 +884,13 @@ msgstr "从库存请求%s中请求的下列项目现在已在使用领料%s的%s
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:206
+#: code:addons/stock_request/models/stock_request.py:216
 #, python-format
 msgid "The picking policy must be equal to the order"
 msgstr "拣货策略必须等于订单"
 
 #. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:291
 #: code:addons/stock_request/models/stock_request_order.py:293
 #, python-format
 msgid "This action only works in the context of products"
@@ -890,6 +915,7 @@ msgid "Transfers"
 msgstr "调拨"
 
 #. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:312
 #: code:addons/stock_request/models/stock_request_order.py:314
 #, python-format
 msgid ""
@@ -937,6 +963,7 @@ msgstr "仓库"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:165
+#: code:addons/stock_request/models/stock_request.py:175
 #, python-format
 msgid "Warehouse must be equal to the order"
 msgstr "仓库必须等于订单"
@@ -1026,9 +1053,6 @@ msgid ""
 "You have to select a product unit of measure in the same category than the "
 "default unit of measure of the product"
 msgstr "您必须选择与产品默认计量单位相同类别的产品计量单位"
-
-#~ msgid "Cancelled"
-#~ msgstr "已取消"
 
 #~ msgid "Draft"
 #~ msgstr "草稿"
