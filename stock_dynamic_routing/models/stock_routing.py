@@ -120,6 +120,9 @@ class StockRouting(models.Model):
         :param move: recordset of the move
         :return: dict {move: rule}}
         """
+        # FIXME clear_cache triggers a cache invalidation on *all* the
+        # workers, we don't need this here! we only want a cache local
+        # to the current thread, replace ormcache by a local cache
         self.__cached_is_rule_valid_for_move.clear_cache(self)
         result = {}
         for move in moves:
