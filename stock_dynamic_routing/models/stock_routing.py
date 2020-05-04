@@ -2,8 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 
 from collections import defaultdict
+from functools import lru_cache
 
-from odoo import fields, models, tools
+from odoo import fields, models
 
 
 def _default_sequence(model):
@@ -99,7 +100,9 @@ class StockRouting(models.Model):
         :param move: recordset of the move
         :return: dict {move: {rule: move_lines}}
         """
-        self.__cached_is_rule_valid_for_move.clear_cache(self)
+        # ensure the cache is clean
+        self.__cached_is_rule_valid_for_move.cache_clear()
+
         result = {
             move: defaultdict(self.env["stock.move.line"].browse) for move in moves
         }
@@ -109,6 +112,8 @@ class StockRouting(models.Model):
             )
             result[move_line.move_id][rule] |= move_line
 
+        # free memory used for the cache
+        self.__cached_is_rule_valid_for_move.cache_clear()
         return result
 
     def _routing_rule_for_moves(self, moves):
@@ -120,10 +125,9 @@ class StockRouting(models.Model):
         :param move: recordset of the move
         :return: dict {move: rule}}
         """
-        # FIXME clear_cache triggers a cache invalidation on *all* the
-        # workers, we don't need this here! we only want a cache local
-        # to the current thread, replace ormcache by a local cache
-        self.__cached_is_rule_valid_for_move.clear_cache(self)
+        # ensure the cache is clean
+        self.__cached_is_rule_valid_for_move.cache_clear()
+
         result = {}
         for move in moves:
             rule = self._find_rule_for_location(
@@ -131,9 +135,14 @@ class StockRouting(models.Model):
             )
             result[move] = rule
 
+        # free memory used for the cache
+        self.__cached_is_rule_valid_for_move.cache_clear()
         return result
 
-    @tools.ormcache("rule", "move")
+    # Do not use ormcache, which would invalidate cache of other workers every
+    # time we clear it. We only need a local cache used for the duration of the
+    # execution of
+    @lru_cache()
     def __cached_is_rule_valid_for_move(self, rule, move):
         """To be used only by _routing_rule_for_move(_line)s
 
