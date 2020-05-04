@@ -48,7 +48,7 @@ class StockMove(models.Model):
             # the other waiting moves will now match the same routing
             # which will be applied.
             move._sync_destination_to_neighbour_moves(
-                neighbours, dest_move.location_id, dest_move_line.location_id
+                neighbours, dest_move_line.location_id
             )
         return moves_todo
 
@@ -56,9 +56,7 @@ class StockMove(models.Model):
     def _filter_sync_destination(move):
         return move.picking_id.picking_type_id.sync_common_move_dest_location
 
-    def _sync_destination_to_neighbour_moves(
-        self, neighbour_moves, move_destination, move_line_destination
-    ):
+    def _sync_destination_to_neighbour_moves(self, neighbour_moves, destination):
         self.ensure_one()
         neighbour_moves = neighbour_moves.filtered(lambda m: m.state != "done")
         # Normally the move destination does not change. But when using other
@@ -66,14 +64,19 @@ class StockMove(models.Model):
         # destination move can change, so handle this case too. (there is a
         # glue module stock_dynamic_routing_common_dest_sync).
         moves_to_update = (self | neighbour_moves).filtered(
-            lambda m: m.location_dest_id != move_destination
+            lambda m: m.location_dest_id != destination
         )
-        moves_to_update.write({"location_dest_id": move_destination.id})
+        moves_to_update.write({"location_dest_id": destination.id})
         # Sync the source of the destination move too, if it's still waiting.
-        moves_to_update.move_dest_ids.filtered(lambda m: m.state == "waiting").write(
-            {"location_id": move_destination.id}
-        )
+        moves_to_update.move_dest_ids.filtered(
+            lambda m: (
+                m.state == "waiting"
+                or m.state == "assigned"
+                and m in self.move_dest_ids
+            )
+            and m.location_id != destination
+        ).write({"location_id": destination.id})
         lines = neighbour_moves.mapped("move_line_ids")
         lines.filtered(
-            lambda l: l.location_dest_id != move_line_destination and l.state != "done"
-        ).write({"location_dest_id": move_line_destination.id})
+            lambda l: l.location_dest_id != destination and l.state != "done"
+        ).write({"location_dest_id": destination.id})

@@ -102,16 +102,19 @@ class TestRoutingPullWithSync(TestCommonSyncDest):
         )
         self.pick_move1._action_done()
 
-        self.assert_dest_pack_post(self.pick_move1)
+        self.assert_dest_pack_post_bay1(self.pick_move1)
         self.assert_dest_pack_post_bay1(self.pick_move1.move_line_ids)
-        self.assert_dest_pack_post(self.pick_move1)
+        self.assert_dest_pack_post_bay1(self.pick_move1)
         self.assert_dest_pack_post_bay1(self.pick_move2.move_line_ids)
-        self.assert_dest_pack_post(self.pick_move3)
+        self.assert_dest_pack_post_bay1(self.pick_move3)
         self.assert_dest_pack_post_bay1(self.pick_move3.move_line_ids)
 
-        self.assert_src_pack_post(self.pack_move1)
+        # check source of destination moves:
+        # the routing applies the picking type's origin
+        self.assert_src_pack_post_bay1(self.pack_move1)
         self.assert_src_pack_post_bay1(self.pack_move1.move_line_ids)
         # no move lines on these waiting moves:
+
         self.assert_src_pack_post(self.pack_move2)
         self.assert_src_pack_post(self.pack_move3)
 
@@ -145,16 +148,18 @@ class TestRoutingPullWithSync(TestCommonSyncDest):
         # to be kept
         self.pick_move1.picking_id.action_done()
 
-        self.assert_dest_pack_post(self.pick_move2)
+        self.assert_dest_pack_post_bay1(self.pick_move2)
         self.assert_dest_pack_post_bay1(self.pick_move2.move_line_ids)
-        self.assert_dest_packing(self.pick_move3)
+
+        # as we set the line 3 in pack load, the line must remain there
+        self.assert_dest_pack_load(self.pick_move3)
         self.assert_dest_pack_load(self.pick_move3.move_line_ids)
 
-        self.assert_src_pack_post(self.pack_move1)
+        self.assert_src_pack_post_bay1(self.pack_move1)
         self.assert_src_pack_post_bay1(self.pack_move1.move_line_ids)
-        self.assert_src_pack_post(self.pack_move2)
+        self.assert_src_pack_post_bay1(self.pack_move2)
         self.assert_src_pack_post_bay1(self.pack_move1.move_line_ids)
-        self.assert_src_packing(self.pack_move3)
+        self.assert_src_pack_load(self.pack_move3)
         self.assert_src_pack_load(self.pack_move3.move_line_ids)
 
         self.assert_picking_type_pack_post(self.pack_move1.picking_id)
@@ -188,15 +193,15 @@ class TestRoutingPullWithSync(TestCommonSyncDest):
         self.assertEqual(self.pack_move1.state, "waiting")
         self.assertEqual(pack_move_split.state, "assigned")
 
-        self.assert_dest_pack_post(self.pick_move1)
+        self.assert_dest_pack_post_bay1(self.pick_move1)
         self.assert_dest_pack_post_bay1(self.pick_move1.move_line_ids)
-        self.assert_dest_pack_post(pick_move_split)
-        self.assert_dest_pack_post(self.pick_move1)
+        self.assert_dest_pack_post_bay1(pick_move_split)
+        self.assert_dest_pack_post_bay1(self.pick_move1)
         self.assert_dest_pack_post_bay1(self.pick_move2.move_line_ids)
-        self.assert_dest_pack_post(self.pick_move3)
+        self.assert_dest_pack_post_bay1(self.pick_move3)
         self.assert_dest_pack_post_bay1(self.pick_move3.move_line_ids)
 
-        self.assert_src_pack_post(pack_move_split)
+        self.assert_src_pack_post_bay1(pack_move_split)
         self.assert_src_pack_post_bay1(pack_move_split.move_line_ids)
         # no move lines on these waiting moves:
         self.assert_src_pack_post(self.pack_move1)
