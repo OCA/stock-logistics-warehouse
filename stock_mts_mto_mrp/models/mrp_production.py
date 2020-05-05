@@ -85,3 +85,17 @@ class MrpProduction(models.Model):
         res = super()._update_raw_move(bom_line, line_data)
         self._update_unit_factor()
         return res
+
+    @api.multi
+    def _generate_moves(self):
+        res = super()._generate_moves()
+        for production in self:
+            move_mts = production.move_raw_ids.filtered(
+                lambda m: m.procure_method == 'make_to_stock')
+            if move_mts:
+                qty_wizard = self.env['change.production.qty'].create({
+                    'mo_id': production.id,
+                    'product_qty': production.product_qty,
+                })
+                qty_wizard.change_prod_qty()
+        return res
