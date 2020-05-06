@@ -152,6 +152,11 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Current requests"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__expected_date
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__expected_date
 msgid "Date when you expect to receive the goods."
