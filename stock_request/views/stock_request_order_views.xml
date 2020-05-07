@@ -155,6 +155,52 @@
             </form>
         </field>
     </record>
+    <record model="ir.ui.view" id="stock_request_order_search">
+        <field name="name">stock.request.order.search</field>
+        <field name="model">stock.request.order</field>
+        <field name="arch" type="xml">
+            <search string="Stock Requests Order Search">
+                <field name="name" string="Stock Request Orders" />
+                <field name="state" />
+                <field name="warehouse_id" />
+                <field name="location_id" groups="stock.group_stock_multi_locations" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
+                />
+                <separator />
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]" />
+                <filter
+                    string="In Progress"
+                    name="open"
+                    domain="[('state','=','open')]"
+                />
+                <filter string="Finished" name="done" domain="[('state','=','done')]" />
+                <filter
+                    string="Cancelled"
+                    name="cancel"
+                    domain="[('state','=','cancel')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Warehouse"
+                        name="warehouse"
+                        domain="[]"
+                        context="{'group_by':'warehouse_id'}"
+                    />
+                    <filter
+                        string="Location"
+                        name="location"
+                        domain="[]"
+                        context="{'group_by':'location_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
     <record model="ir.actions.act_window" id="stock_request_order_action">
         <field name="name">Stock Request Orders</field>
         <field name="type">ir.actions.act_window</field>
