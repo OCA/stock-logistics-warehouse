@@ -11,6 +11,7 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
     "depends": ["stock_account", "stock_inventory_revaluation",
+                "stock_account_valuation_report",
                 "account_move_line_stock_info"],
     "data": [
         "data/stock_valuation_account_manual_adjustment_data.xml",
