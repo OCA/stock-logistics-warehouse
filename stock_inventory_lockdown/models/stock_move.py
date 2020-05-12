@@ -38,8 +38,8 @@ class StockMove(models.Model):
                 )
                 and (
                     move.location_dest_id in locked_location_ids
-                    or any([l in locked_location_ids for l in dest_locs])
-                    or any([l in locked_location_ids for l in reserved_locs])
+                    or any([loc in locked_location_ids for loc in dest_locs])
+                    or any([loc in locked_location_ids for loc in reserved_locs])
                 )
             ):
                 location_names = locked_location_ids.mapped("complete_name")
