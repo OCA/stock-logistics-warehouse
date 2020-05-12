@@ -194,7 +194,6 @@ msgid "Write %c where you want the number to be placed. E.g. CELL-%c will result
 msgstr ""
 
 #. module: stock_location_template
-#: code:addons/stock_location_template/models/stock_location.py:30
 #: code:addons/stock_location_template/models/stock_location.py:34
 #, python-format
 msgid "You cannot change the tempalte of a location when there are sub-locations that have been generated from this template"
