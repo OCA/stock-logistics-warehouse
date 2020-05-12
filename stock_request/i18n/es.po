@@ -89,6 +89,7 @@ msgid "Analytic accounting in Stock Requests"
 msgstr "Contabilidad analítica en solicitudes de stock"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Archived"
 msgstr "Archivado"
@@ -114,6 +115,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Cancel"
 msgstr "Cancelar"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#, fuzzy
+#| msgid "Cancelled"
+msgid "Cancelled"
+msgstr "Cancelado"
 
 #. module: stock_request
 #: model_terms:ir.actions.act_window,help:stock_request.action_stock_request_form
@@ -197,6 +206,12 @@ msgid "Done"
 msgstr "Hecho"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Analytic Accounting in Stock Requests"
 msgstr "Habilitar contabilidad analítica en solicitudes de stock"
@@ -234,6 +249,12 @@ msgid "Expected date must be equal to the order"
 msgstr "La fecha prevista debe ser la misma que la del pedido"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Finished"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_follower_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_follower_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_follower_ids
@@ -255,6 +276,7 @@ msgid "Followers (Partners)"
 msgstr "Seguidores (Socios)"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Group By"
 msgstr "Agrupar por"
@@ -292,6 +314,14 @@ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#, fuzzy
+#| msgid "In progress"
+msgid "In Progress"
+msgstr "En progreso"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location
@@ -346,6 +376,7 @@ msgstr "Última actualización el"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__location_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Location"
 msgstr "Ubicación"
@@ -789,6 +820,7 @@ msgstr "Pedido de existencias"
 #. module: stock_request
 #: model:ir.actions.act_window,name:stock_request.stock_request_order_action
 #: model:ir.ui.menu,name:stock_request.stock_request_order_menu
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 msgid "Stock Request Orders"
 msgstr "Pedidos de existencias"
 
@@ -838,6 +870,13 @@ msgstr "Solicitudes de stock Integración analítica"
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_kanban
 msgid "Stock Requests Kanban integration"
 msgstr "Integración de solicitudes de existencias con tarjetas Kanbans"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#, fuzzy
+#| msgid "Stock Requests Search"
+msgid "Stock Requests Order Search"
+msgstr "Buscar solicitudes de existencias"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
@@ -967,6 +1006,7 @@ msgstr "Usar Compras con las Solicitudes de Existencias"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__warehouse_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Warehouse"
 msgstr "Almacén"
@@ -1074,12 +1114,6 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
-
-#~ msgid "Draft"
-#~ msgstr "Borrador"
-
-#~ msgid "In progress"
-#~ msgstr "En progreso"
 
 #~ msgid "Packing Operation"
 #~ msgstr "Operación de empaquetado"

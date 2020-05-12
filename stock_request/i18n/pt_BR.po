@@ -89,6 +89,7 @@ msgid "Analytic accounting in Stock Requests"
 msgstr "Contabilidade analítica em Requisições de Estoque"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Archived"
 msgstr "Arquivado"
@@ -113,6 +114,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#, fuzzy
+#| msgid "Cancel"
+msgid "Cancelled"
 msgstr "Cancelar"
 
 #. module: stock_request
@@ -197,6 +206,12 @@ msgid "Done"
 msgstr "Concluído"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Draft"
+msgstr ""
+
+#. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Analytic Accounting in Stock Requests"
 msgstr "Habilitar a Contabilidade Analítica em Requisições de Estoque"
@@ -234,6 +249,12 @@ msgid "Expected date must be equal to the order"
 msgstr "A data prevista deve ser igual a ordem"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Finished"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_follower_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_follower_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_follower_ids
@@ -255,6 +276,7 @@ msgid "Followers (Partners)"
 msgstr "Seguidores (Parceiros)"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Group By"
 msgstr "Agrupar por"
@@ -292,6 +314,14 @@ msgstr "Se marcado novas mensagens solicitarão sua atenção."
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se marcado, algumas mensagens tem erro de entrega."
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#, fuzzy
+#| msgid "Qty In Progress"
+msgid "In Progress"
+msgstr "Qtd em Andamento"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location
@@ -346,6 +376,7 @@ msgstr "Última atualização em"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__location_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Location"
 msgstr "Local"
@@ -789,6 +820,7 @@ msgstr "Ordens de Requisição de Estoque"
 #. module: stock_request
 #: model:ir.actions.act_window,name:stock_request.stock_request_order_action
 #: model:ir.ui.menu,name:stock_request.stock_request_order_menu
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 msgid "Stock Request Orders"
 msgstr "Ordens de Requisição de Estoque"
 
@@ -838,6 +870,13 @@ msgstr "Integração Analítica de Requisições de Estoque"
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_kanban
 msgid "Stock Requests Kanban integration"
 msgstr "Integração de Kanban de Requisições de Estoque"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#, fuzzy
+#| msgid "Stock Requests Search"
+msgid "Stock Requests Order Search"
+msgstr "Pesquisar Requisições de Estoque"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
@@ -967,6 +1006,7 @@ msgstr "Usar Compras com Requisição de Estoque"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__warehouse_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Warehouse"
 msgstr "Armazém"

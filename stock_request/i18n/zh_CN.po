@@ -87,6 +87,7 @@ msgid "Analytic accounting in Stock Requests"
 msgstr "库存请求中的分析会计"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Archived"
 msgstr "已归档"
@@ -110,6 +111,14 @@ msgstr "默认情况下，库存请求和订单中只允许内部和运输地点
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Cancel"
 msgstr "取消"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#, fuzzy
+#| msgid "Cancelled"
+msgid "Cancelled"
+msgstr "已取消"
 
 #. module: stock_request
 #: model_terms:ir.actions.act_window,help:stock_request.action_stock_request_form
@@ -193,6 +202,12 @@ msgid "Done"
 msgstr "完成"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Draft"
+msgstr "草稿"
+
+#. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Analytic Accounting in Stock Requests"
 msgstr "在库存请求中启用分析会计"
@@ -230,6 +245,12 @@ msgid "Expected date must be equal to the order"
 msgstr "预计日期必须等于订单"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Finished"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_follower_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_follower_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_follower_ids
@@ -251,6 +272,7 @@ msgid "Followers (Partners)"
 msgstr "关注者(业务伙伴)"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Group By"
 msgstr "分组"
@@ -288,6 +310,14 @@ msgstr "如果勾选此项，将会收到新消息提醒。"
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr "如果勾选此项， 某些信息将会产生传递错误。"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#, fuzzy
+#| msgid "In progress"
+msgid "In Progress"
+msgstr "进行中"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location
@@ -342,6 +372,7 @@ msgstr "最后更新时间"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__location_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Location"
 msgstr "位置"
@@ -780,6 +811,7 @@ msgstr "库存请求单"
 #. module: stock_request
 #: model:ir.actions.act_window,name:stock_request.stock_request_order_action
 #: model:ir.ui.menu,name:stock_request.stock_request_order_menu
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 msgid "Stock Request Orders"
 msgstr "库存请求单"
 
@@ -827,6 +859,13 @@ msgstr "库存请求分析集成"
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_kanban
 msgid "Stock Requests Kanban integration"
 msgstr "库存请求看板集成"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#, fuzzy
+#| msgid "Stock Requests Search"
+msgid "Stock Requests Order Search"
+msgstr "库存请求搜索"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
@@ -952,6 +991,7 @@ msgstr "将采购与库存请求一起使用"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__warehouse_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Warehouse"
 msgstr "仓库"
@@ -1047,9 +1087,3 @@ msgid ""
 "You have to select a product unit of measure in the same category than the "
 "default unit of measure of the product"
 msgstr "您必须选择与产品默认计量单位相同类别的产品计量单位"
-
-#~ msgid "Draft"
-#~ msgstr "草稿"
-
-#~ msgid "In progress"
-#~ msgstr "进行中"
