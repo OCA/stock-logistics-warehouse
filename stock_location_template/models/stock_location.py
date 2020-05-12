@@ -14,15 +14,19 @@ class StockLocation(models.Model):
     auto_generated_from_template = fields.Boolean(
         string="Location generated from template", default=False)
 
+    def _get_location_vals(self, index):
+        return {
+            "name": self.location_template_id.get_cell_name(index),
+            "location_id": self.id,
+            "auto_generated_from_template": True,
+        }
+
     def _generate_sublocations(self):
         starting_nbr = self.location_template_id.starting_nbr
         ending_nbr = starting_nbr + self.location_template_id.cells_nbr
         for i in range(starting_nbr, ending_nbr):
-            self.create({
-                "name": self.location_template_id.get_cell_name(i),
-                "location_id": self.id,
-                "auto_generated_from_template": True,
-            })
+            vals = self._get_location_vals(i)
+            self.create(vals)
 
     def _check_can_change_template(self):
         if any(self.child_ids.mapped("auto_generated_from_template")):
