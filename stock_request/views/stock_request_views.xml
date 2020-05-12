@@ -36,9 +36,15 @@
                 <field name="location_id" groups="stock.group_stock_multi_locations"/>
                 <field name="company_id" groups="base.group_multi_company"/>
                 <field name="product_id"/>
+                <separator/>
                 <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 <filter name="current_requests" string="Current requests"
                         domain="['|', ('expected_date', '>', (datetime.date.today() - relativedelta(months=1)).strftime('%Y-%m-01')), ('state', '!=', 'done')]"/>
+                <separator/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="In Progress" name="open" domain="[('state','=','open')]"/>
+                <filter string="Finished" name="done" domain="[('state','=','done')]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state','=','cancel')]"/>
                 <group expand="0" string="Group By">
                     <filter name="warehouse" string="Warehouse" domain="[]"  context="{'group_by':'warehouse_id'}"/>
                     <filter name="location" string="Location" domain="[]" context="{'group_by':'location_id'}"/>
@@ -136,7 +142,11 @@
         <field name="type">ir.actions.act_window</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,pivot</field>
-        <field name="context">{'search_default_current_requests': 1, 'pivot_column_groupby': ['location_id'], 'pivot_row_groupby': ['product_id'], 'pivot_measures': ['product_uom_qty', 'qty_done']}</field>
+        <field name="context">{
+            'search_default_current_requests': 1,
+            'pivot_column_groupby': ['location_id'], 'pivot_row_groupby': ['product_id'], 'pivot_measures': ['product_uom_qty', 'qty_done'],
+            'search_default_draft': 1, 'search_default_open': 1
+        }</field>
         <field name="view_id" ref="view_stock_request_tree"/>
         <field name="search_view_id" ref="stock_request_search" />
         <field name="help" type="html">
