@@ -4,7 +4,7 @@
 {
     "name": "Stock Location Template",
     "summary": "Introduces the concept of location template",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "license": "AGPL-3",
     "author": "ForgeFlow S.L., Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
