@@ -96,10 +96,10 @@ class SaleStockInfoPopup(SavepointCase):
         line = so.order_line[0]
         self.assertAlmostEqual(line.scheduled_date, datetime.now(),
                                delta=timedelta(seconds=10))
-        self.assertEqual(line.virtual_available_at_date, 32)
-        self.assertEqual(line.free_qty_today, 35)
-        self.assertEqual(line.qty_available_today, 40)
-        self.assertEqual(line.qty_to_deliver, 1)
+        self.assertAlmostEqual(line.virtual_available_at_date, 32)
+        self.assertAlmostEqual(line.free_qty_today, 35)
+        self.assertAlmostEqual(line.qty_available_today, 40)
+        self.assertAlmostEqual(line.qty_to_deliver, 1)
 
     def test_10_qty_available(self):
         """Create a sale order containing three times the same product. The
@@ -131,4 +131,5 @@ class SaleStockInfoPopup(SavepointCase):
                 }),
             ],
         })
-        self.assertEqual(so.order_line.mapped('free_qty_today'), [40, 35, 30])
+        for qty in so.order_line.mapped('free_qty_today'):
+            self.assertIn(qty, [40, 35, 30])
