@@ -3,10 +3,10 @@
 import logging
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.osv import expression
 from odoo.tools.float_utils import float_compare
 from odoo.tools.safe_eval import safe_eval
-from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -45,8 +45,10 @@ class StockReserveRule(models.Model):
     fallback_location_id = fields.Many2one(
         comodel_name="stock.location",
         help="If all removal rules are exhausted, try to reserve in this "
-        "location. When empty, the fallback happens in any of the move's "
-        "source sub-locations.",
+        "location. Use it for replenishment. The source location move will be "
+        "changed to this location if the move is not available. If the move is "
+        "partially available, it is split and the unavailable quantity is sourced "
+        "in this location for replenishment.",
     )
 
     rule_removal_ids = fields.One2many(
@@ -69,7 +71,8 @@ class StockReserveRule(models.Model):
     def _compute_missing_reserve_rule(self):
         for rule in self:
             rule.missing_reserve_rule = any(
-                rule.rule_removal_ids.mapped("missing_reserve_rule"))
+                rule.rule_removal_ids.mapped("missing_reserve_rule")
+            )
 
     @api.constrains("fallback_location_id")
     def _constraint_fallback_location_id(self):
@@ -85,8 +88,7 @@ class StockReserveRule(models.Model):
                 )
                 if not is_child:
                     msg = _(
-                        "Fallback location has to be a child of the "
-                        "location '{}'."
+                        "Fallback location has to be a child of the location '{}'."
                     ).format(rule.location_id.display_name)
                     _logger.error("Rule '%s' - %s", rule.name, msg)
                     raise ValidationError(msg)
@@ -212,8 +214,7 @@ class StockReserveRuleRemoval(models.Model):
                     "Removal rule '{}' location has to be a child "
                     "of the rule location '{}'."
                 ).format(
-                    removal_rule.name,
-                    removal_rule.rule_id.location_id.display_name,
+                    removal_rule.name, removal_rule.rule_id.location_id.display_name,
                 )
                 _logger.error("Rule '%s' - %s", removal_rule.rule_id.name, msg)
                 raise ValidationError(msg)
