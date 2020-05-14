@@ -224,7 +224,13 @@ class TestReserveRule(common.SavepointCase):
         move = picking.move_lines
         self.assertRecordValues(
             move,
-            [{"state": "confirmed", "location_id": fallback.id, "product_uom_qty": 150}],
+            [
+                {
+                    "state": "confirmed",
+                    "location_id": fallback.id,
+                    "product_uom_qty": 150,
+                }
+            ],
         )
 
     def test_rule_take_all_in_2(self):
@@ -651,5 +657,32 @@ class TestReserveRule(common.SavepointCase):
                 {"location_id": self.loc_zone2_bin2.id, "product_qty": 50.0},
                 {"location_id": self.loc_zone3_bin1.id, "product_qty": 10.0},
             ],
+        )
+        self.assertEqual(move.state, "assigned")
+
+    def test_rule_excluded_not_child_location(self):
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
+        self._update_qty_in_location(self.loc_zone1_bin2, self.product1, 100)
+        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 100)
+        picking = self._create_picking(self.wh, [(self.product1, 80)])
+
+        self._create_rule(
+            {},
+            [
+                {"location_id": self.loc_zone1.id, "sequence": 1},
+                {"location_id": self.loc_zone2.id, "sequence": 2},
+            ],
+        )
+        move = picking.move_lines
+
+        move.location_id = self.loc_zone2
+        picking.action_assign()
+        ml = move.move_line_ids
+
+        # As the source location of the stock.move is loc_zone2, we should
+        # never take any quantity in zone1.
+
+        self.assertRecordValues(
+            ml, [{"location_id": self.loc_zone2_bin1.id, "product_qty": 80.0}]
         )
         self.assertEqual(move.state, "assigned")

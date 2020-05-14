@@ -41,6 +41,18 @@ class StockMove(models.Model):
                 continue
 
             for removal_rule in rule.rule_removal_ids:
+                # Exclude any rule which does not share the same path as the
+                # move's location. Example:
+                # Rule location: Stock
+                # Removal rule 1: Stock/Zone1
+                # Removal rule 2: Stock/Zone2
+                # If we have a stock.move with "Stock" as source location,
+                # it can use both rules.
+                # If we have a stock.move with "Stock/Zone2" as source location,
+                # it should never use "Stock/Zone1"
+                if not removal_rule.location_id.is_sublocation_of(location_id):
+                    continue
+
                 quants = self.env["stock.quant"]._gather(
                     self.product_id,
                     removal_rule.location_id,
