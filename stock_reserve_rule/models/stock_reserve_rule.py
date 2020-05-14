@@ -62,18 +62,6 @@ class StockReserveRule(models.Model):
         "rule is applicable or not.",
     )
 
-    missing_reserve_rule = fields.Boolean(
-        string="Miss a reserve rule with higher priority?",
-        compute="_compute_missing_reserve_rule",
-    )
-
-    @api.depends()
-    def _compute_missing_reserve_rule(self):
-        for rule in self:
-            rule.missing_reserve_rule = any(
-                rule.rule_removal_ids.mapped("missing_reserve_rule")
-            )
-
     @api.constrains("fallback_location_id")
     def _constraint_fallback_location_id(self):
         """The fallback location has to be a child of the main location."""
@@ -177,26 +165,6 @@ class StockReserveRuleRemoval(models.Model):
         "Only the quantities matching one of the packaging are removed.\n"
         "When empty, any packaging can be removed.",
     )
-
-    missing_reserve_rule = fields.Boolean(
-        string="Miss a reserve rule with higher priority?",
-        compute="_compute_missing_reserve_rule",
-    )
-
-    @api.depends()
-    def _compute_missing_reserve_rule(self):
-        for removal_rule in self:
-            removal_rule.missing_reserve_rule = False
-            # The current rule could satisfies the need already
-            if removal_rule.location_id == removal_rule.rule_id.location_id:
-                break
-            rules = self.env["stock.reserve.rule"].search(
-                [
-                    ("location_id", "=", removal_rule.location_id.id),
-                    ("sequence", "<", removal_rule.rule_id.sequence),
-                ]
-            )
-            removal_rule.missing_reserve_rule = not rules
 
     @api.constrains("location_id")
     def _constraint_location_id(self):
