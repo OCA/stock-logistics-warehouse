@@ -25,9 +25,9 @@ class StockMove(models.Model):
 
     @api.constrains('location_dest_id', 'location_id', 'state')
     def _check_locked_location(self):
-        for move in self.filtered(lambda m: m.state != 'draft'):
-            locked_location_ids = self.env[
-                'stock.inventory']._get_locations_open_inventories(
+        for move in self.filtered(lambda m: m.state in ('assigned', 'done')):
+            locked_location_ids = self.env['stock.inventory'].sudo().\
+                _get_locations_open_inventories(
                 [move.location_dest_id.id, move.location_id.id])
             reserved_locs = move._get_reserved_locations()
             dest_locs = move._get_dest_locations()
