@@ -59,9 +59,6 @@ class StockRouting(models.Model):
         The source/destination locations are not an exact match: it looks
         for the location or a parent.
         """
-        # the result of _location_parent_tree() is cached, so get the rules
-        # at once even if we don't use the "push" candidates, we can spare
-        # some queries
         pull_location_tree = src_location._location_parent_tree()
         push_location_tree = dest_location._location_parent_tree()
         candidate_rules = self.env["stock.routing.rule"].search(
