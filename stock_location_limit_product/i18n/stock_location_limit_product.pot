@@ -34,6 +34,12 @@ msgid "Display Name"
 msgstr ""
 
 #. module: stock_location_limit_product
+#: model:ir.model.fields,field_description:stock_location_limit_product.field_product_product__equivalent_product_ids
+#: model:ir.model.fields,field_description:stock_location_limit_product.field_product_template__equivalent_product_ids
+msgid "Equivalent Products"
+msgstr ""
+
+#. module: stock_location_limit_product
 #: model:ir.model.fields,field_description:stock_location_limit_product.field_stock_location_limit__id
 msgid "ID"
 msgstr ""
@@ -77,6 +83,17 @@ msgstr ""
 #. module: stock_location_limit_product
 #: model:ir.model.fields,field_description:stock_location_limit_product.field_stock_location_limit__product_id
 msgid "Product"
+msgstr ""
+
+#. module: stock_location_limit_product
+#: model:ir.model,name:stock_location_limit_product.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_location_limit_product
+#: model:ir.model.fields,help:stock_location_limit_product.field_product_product__equivalent_product_ids
+#: model:ir.model.fields,help:stock_location_limit_product.field_product_template__equivalent_product_ids
+msgid "Products of equivalent volume to compute the remaining capacity of an inventory location."
 msgstr ""
 
 #. module: stock_location_limit_product
