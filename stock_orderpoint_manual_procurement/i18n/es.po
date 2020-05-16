@@ -6,165 +6,169 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2020-05-16 15:19+0000\n"
+"Last-Translator: Aserti Global Solutions, S.L. <soporte@aserti.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:res.groups,name:stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty
 msgid "Change quantity in manual procurements from reordering rules"
 msgstr ""
+"Cambiar la cantidad en abastecimientos manuales de las reglas de "
+"reabastecimiento"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_warehouse_orderpoint_tree
 msgid "Create Procurement"
-msgstr ""
+msgstr "Crear abastecimiento"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_create_uid
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_create_date
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_display_name
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre a mostrar"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
 msgid "Execute"
-msgstr ""
+msgstr "Ejecutar"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_id
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_ids
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
 msgid "Items"
-msgstr ""
+msgstr "Elementos"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint___last_update
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación en"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_write_uid
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_write_date
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_location_id
 msgid "Location"
-msgstr ""
+msgstr "Ubicación"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model,name:stock_orderpoint_manual_procurement.model_make_procurement_orderpoint_item
 msgid "Make Procurements from Orderpoint Item"
-msgstr ""
+msgstr "Generar abastecimientos de reglas de abastecimiento"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model,name:stock_orderpoint_manual_procurement.model_make_procurement_orderpoint
 msgid "Make Procurements from Orderpoints"
-msgstr ""
+msgstr "Generar abastecimientos de reglas de abastecimiento"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model,name:stock_orderpoint_manual_procurement.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr ""
+msgstr "Regla de inventario mínimo"
 
 #. module: stock_orderpoint_manual_procurement
 #: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:72
 #, python-format
 msgid "No reordering rule found!"
-msgstr ""
+msgstr "¡No se encontraron reglas de reabastecimiento!"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_date_planned
 msgid "Planned Date"
-msgstr ""
+msgstr "Fecha planificada"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_procure_recommended_qty
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template_procure_recommended_qty
 msgid "Procure Recommendation"
-msgstr ""
+msgstr "Recomendación de abastecimiento"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
 msgid "Procurement Request"
-msgstr ""
+msgstr "Solicitud de abastecimiento"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_product_id
 msgid "Product"
-msgstr ""
+msgstr "Producto"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_qty
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_qty_without_security
 msgid "Quantity"
-msgstr ""
+msgstr "Cantidad"
 
 #. module: stock_orderpoint_manual_procurement
 #: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:70
 #, python-format
 msgid "Quantity must be positive."
-msgstr ""
+msgstr "La cantidad debe ser positiva."
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_procure_recommended_date
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template_procure_recommended_date
 msgid "Recommended Request Date"
-msgstr ""
+msgstr "Fecha de solicitud recomendada"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_orderpoint_id
 msgid "Reordering rule"
-msgstr ""
+msgstr "Regla de reabastecimiento"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.actions.act_window,name:stock_orderpoint_manual_procurement.act_make_procurement_from_orderpoint
 msgid "Request Procurement"
-msgstr ""
+msgstr "Solicitar abastecimiento"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_uom_id
 msgid "Unit of Measure"
-msgstr ""
+msgstr "Unidad de medida"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
@@ -174,13 +178,17 @@ msgid "Use this assistant to generate a procurement request for this\n"
 "                    this may trigger a draft purchase order, a manufacturing\n"
 "                    order or a transfer picking."
 msgstr ""
+"Use este asistente para generar una solicitud de abastecimiento\n"
+"para este buffer de inventario. Según la configuración del producto,\n"
+"esto puede provocar un pedido de compra, una orden de fabricación\n"
+"o un albarán de transferencia."
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_warehouse_id
 msgid "Warehouse"
-msgstr ""
+msgstr "Almacén"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item_wiz_id
 msgid "Wizard"
-msgstr ""
+msgstr "Asistente"
