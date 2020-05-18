@@ -87,6 +87,12 @@ msgid "Analytic accounting in Stock Requests"
 msgstr ""
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Archived"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_attachment_count
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_attachment_count
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_attachment_count
@@ -104,6 +110,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Cancel"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Cancelled"
 msgstr ""
 
 #. module: stock_request
@@ -156,6 +168,11 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Current requests"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__expected_date
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__expected_date
 msgid "Date when you expect to receive the goods."
@@ -176,9 +193,14 @@ msgid "Display Name"
 msgstr ""
 
 #. module: stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Done"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Draft"
 msgstr ""
 
 #. module: stock_request
@@ -219,6 +241,12 @@ msgid "Expected date must be equal to the order"
 msgstr ""
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Finished"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_follower_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_follower_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_follower_ids
@@ -240,6 +268,7 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Group By"
 msgstr ""
@@ -289,6 +318,12 @@ msgstr ""
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "In Progress"
 msgstr ""
 
 #. module: stock_request
@@ -344,6 +379,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__location_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Location"
 msgstr ""
@@ -758,6 +794,7 @@ msgstr ""
 #. module: stock_request
 #: model:ir.actions.act_window,name:stock_request.stock_request_order_action
 #: model:ir.ui.menu,name:stock_request.stock_request_order_menu
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 msgid "Stock Request Orders"
 msgstr ""
 
@@ -805,6 +842,11 @@ msgstr ""
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_kanban
 msgid "Stock Requests Kanban integration"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+msgid "Stock Requests Order Search"
 msgstr ""
 
 #. module: stock_request
@@ -873,11 +915,6 @@ msgid "This action only works in the context of products"
 msgstr ""
 
 #. module: stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-msgid "To Do"
-msgstr ""
-
-#. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_picking
 msgid "Transfer"
 msgstr ""
@@ -937,6 +974,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__warehouse_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__warehouse_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Warehouse"
 msgstr ""
