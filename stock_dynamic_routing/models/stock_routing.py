@@ -47,8 +47,7 @@ class StockRouting(models.Model):
         return _default_sequence(self)
 
     # TODO would be nice to add a constraint that would prevent to
-    # have a pull + a pull routing that would apply on the same move
-    # TODO write tests for this
+    # have a pull + a push routing that would apply on the same move
     def _find_rule_for_location(self, move, src_location, dest_location):
         """Return the routing rule for a source or destination location
 
