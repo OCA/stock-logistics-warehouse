@@ -7,7 +7,7 @@
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "depends": ["stock_vertical_lift"],
+    "depends": ["stock_vertical_lift", "stock_location_position"],
     "website": "https://www.camptocamp.com",
     "data": [],
     "installable": True,
