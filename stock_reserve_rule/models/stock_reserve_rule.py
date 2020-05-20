@@ -42,14 +42,6 @@ class StockReserveRule(models.Model):
     )
 
     location_id = fields.Many2one(comodel_name="stock.location", required=True)
-    fallback_location_id = fields.Many2one(
-        comodel_name="stock.location",
-        help="If all removal rules are exhausted, try to reserve in this "
-        "location. Use it for replenishment. The source location move will be "
-        "changed to this location if the move is not available. If the move is "
-        "partially available, it is split and the unavailable quantity is sourced "
-        "in this location for replenishment.",
-    )
 
     rule_removal_ids = fields.One2many(
         comodel_name="stock.reserve.rule.removal", inverse_name="rule_id"
@@ -61,25 +53,6 @@ class StockReserveRule(models.Model):
         help="Domain based on Stock Moves, to define if the "
         "rule is applicable or not.",
     )
-
-    @api.constrains("fallback_location_id")
-    def _constraint_fallback_location_id(self):
-        """The fallback location has to be a child of the main location."""
-        location_model = self.env["stock.location"]
-        for rule in self:
-            if rule.fallback_location_id:
-                is_child = location_model.search_count(
-                    [
-                        ("id", "=", rule.fallback_location_id.id),
-                        ("id", "child_of", rule.location_id.id),
-                    ],
-                )
-                if not is_child:
-                    msg = _(
-                        "Fallback location has to be a child of the location '{}'."
-                    ).format(rule.location_id.display_name)
-                    _logger.error("Rule '%s' - %s", rule.name, msg)
-                    raise ValidationError(msg)
 
     def _rules_for_location(self, location):
         # We'll typically have a handful of rules, so reading all of them then
