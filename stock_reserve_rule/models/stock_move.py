@@ -103,68 +103,16 @@ class StockMove(models.Model):
                     break
 
             reserved = need - still_need
-            if rule.fallback_location_id:
-                quants = self.env["stock.quant"]._gather(
-                    self.product_id,
-                    rule.fallback_location_id,
-                    lot_id=lot_id,
-                    package_id=forced_package_id,
-                    owner_id=owner_id,
-                    strict=strict,
-                )
-                fallback_quantity = sum(quants.mapped("quantity")) - sum(
-                    quants.mapped("reserved_quantity")
-                )
-                # If there is some qties to reserve in the fallback location,
-                # reserve them
-                reserved_fallback = super()._update_reserved_quantity(
-                    still_need,
-                    fallback_quantity,
-                    location_id=rule.fallback_location_id,
-                    lot_id=lot_id,
-                    package_id=package_id,
-                    owner_id=owner_id,
-                    strict=strict,
-                )
-                reserved += reserved_fallback
-                still_need = self.product_uom_qty - reserved
-                if still_need:
-                    if not reserved:
-                        # nothing could be reserved, however, we want to source
-                        # the move on the specific fallback location (for
-                        # replenishment), so update it's origin and return 0
-                        # reserved to leave the move confirmed
-                        self.location_id = rule.fallback_location_id
-                        return 0
-                    else:
-                        # Then if there is still a need, we split the current move to
-                        # get a new one targetting the fallback location with the
-                        # remaining qties for replenishment
-                        qty_split = self.product_uom._compute_quantity(
-                            still_need,
-                            self.product_id.uom_id,
-                            rounding_method="HALF-UP",
-                        )
-                        new_move_id = self._split(qty_split)
-                        new_move = self.browse(new_move_id)
-                        new_move.location_id = rule.fallback_location_id
-                        # Shunt the caller '_action_assign' by telling that all
-                        # the need has been reserved to get the current move
-                        # updated to the state 'assigned'
-                        return reserved + new_move.product_uom_qty
-                return reserved
-
-            else:
-                # Implicit fallback on the original location
-                return reserved + super()._update_reserved_quantity(
-                    still_need,
-                    available_quantity - reserved,
-                    location_id=location_id,
-                    lot_id=lot_id,
-                    package_id=package_id,
-                    owner_id=owner_id,
-                    strict=strict,
-                )
+            # Implicit fallback on the original location
+            return reserved + super()._update_reserved_quantity(
+                still_need,
+                available_quantity - reserved,
+                location_id=location_id,
+                lot_id=lot_id,
+                package_id=package_id,
+                owner_id=owner_id,
+                strict=strict,
+            )
 
         # We fall here if there is no rule or they have all been
         # excluded by 'rule._is_rule_applicable'
