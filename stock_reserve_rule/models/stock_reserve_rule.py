@@ -149,15 +149,10 @@ class StockReserveRuleRemoval(models.Model):
     @api.constrains("location_id")
     def _constraint_location_id(self):
         """The location has to be a child of the rule location."""
-        location_model = self.env["stock.location"]
         for removal_rule in self:
-            is_child = location_model.search_count(
-                [
-                    ("id", "=", removal_rule.location_id.id),
-                    ("id", "child_of", removal_rule.rule_id.location_id.id),
-                ],
-            )
-            if not is_child:
+            if not removal_rule.location_id.is_sublocation_of(
+                removal_rule.rule_id.location_id
+            ):
                 msg = _(
                     "Removal rule '{}' location has to be a child "
                     "of the rule location '{}'."
