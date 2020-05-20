@@ -131,23 +131,6 @@ class TestReserveRule(common.SavepointCase):
             ]
         )
 
-    def test_rule_fallback_child_of_location(self):
-        # fallback is a child
-        self._create_rule(
-            {"fallback_location_id": self.loc_zone1.id},
-            [{"location_id": self.loc_zone1.id}],
-        )
-        # fallback is not a child
-        with self.assertRaises(exceptions.ValidationError):
-            self._create_rule(
-                {
-                    "fallback_location_id": self.env.ref(
-                        "stock.stock_location_locations"
-                    ).id
-                },
-                [{"location_id": self.loc_zone1.id}],
-            )
-
     def test_removal_rule_location_child_of_rule_location(self):
         # removal rule location is a child
         self._create_rule({}, [{"location_id": self.loc_zone1.id}])
@@ -156,82 +139,6 @@ class TestReserveRule(common.SavepointCase):
             self._create_rule(
                 {}, [{"location_id": self.env.ref("stock.stock_location_locations").id}]
             )
-
-    def test_rule_fallback_partial_assign(self):
-        """Assign move partially available.
-
-        The move should be splitted in two:
-            - one move assigned with reserved goods
-            - one move for remaining goods targetting the fallback location
-        """
-        # Need 150 and 120 available => new move with 30 waiting qties
-        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
-        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 20)
-        picking = self._create_picking(self.wh, [(self.product1, 150)])
-        fallback = self.loc_zone2_bin1
-        self._create_rule(
-            {"fallback_location_id": fallback.id},
-            [{"location_id": self.loc_zone1_bin1.id, "sequence": 1}],
-        )
-        self.assertEqual(len(picking.move_lines), 1)
-        picking.action_assign()
-        self.assertEqual(len(picking.move_lines), 2)
-        move_assigned = picking.move_lines.filtered(lambda m: m.state == "assigned")
-        move_unassigned = picking.move_lines.filtered(lambda m: m.state == "confirmed")
-        self.assertRecordValues(
-            move_assigned,
-            [
-                {
-                    "state": "assigned",
-                    "location_id": picking.location_id.id,
-                    "product_uom_qty": 120,
-                }
-            ],
-        )
-        self.assertRecordValues(
-            move_unassigned,
-            [{"state": "confirmed", "location_id": fallback.id, "product_uom_qty": 30}],
-        )
-
-    def test_rule_fallback_unavailable(self):
-        """Assign move unavailable.
-
-        The move source location should be changed to be the fallback location.
-        """
-        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
-        picking = self._create_picking(self.wh, [(self.product1, 150)])
-        fallback = self.loc_zone2_bin1
-        self._create_rule(
-            {"fallback_location_id": fallback.id},
-            [
-                {
-                    "location_id": self.loc_zone1_bin1.id,
-                    "sequence": 1,
-                    # FIXME check if this isn't an issue?
-                    # for the test: StockQuant._get_available_quantity should
-                    # return something otherwise we won't enter in
-                    # StockMove._update_reserved_quantity
-                    # and the fallback will not be applied, so to reproduce a
-                    # case where the quants are not allowed to be taken,
-                    # use a domain that always resolves to false
-                    "quant_domain": [("id", "=", 0)],
-                }
-            ],
-        )
-        self.assertEqual(len(picking.move_lines), 1)
-        picking.action_assign()
-        self.assertEqual(len(picking.move_lines), 1)
-        move = picking.move_lines
-        self.assertRecordValues(
-            move,
-            [
-                {
-                    "state": "confirmed",
-                    "location_id": fallback.id,
-                    "product_uom_qty": 150,
-                }
-            ],
-        )
 
     def test_rule_take_all_in_2(self):
         all_locs = (
@@ -323,41 +230,6 @@ class TestReserveRule(common.SavepointCase):
         )
         self.assertEqual(move.state, "partially_available")
         self.assertEqual(move.reserved_availability, 300.0)
-
-    def test_rule_fallback(self):
-        reserve = self.env["stock.location"].create(
-            {"name": "Reserve", "location_id": self.wh.lot_stock_id.id}
-        )
-
-        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
-        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 100)
-        self._update_qty_in_location(self.loc_zone3_bin1, self.product1, 100)
-        self._update_qty_in_location(reserve, self.product1, 300)
-        picking = self._create_picking(self.wh, [(self.product1, 400)])
-
-        self._create_rule(
-            {"fallback_location_id": reserve.id},
-            [
-                {"location_id": self.loc_zone1.id, "sequence": 3},
-                {"location_id": self.loc_zone2.id, "sequence": 1},
-                {"location_id": self.loc_zone3.id, "sequence": 2},
-            ],
-        )
-
-        picking.action_assign()
-        move = picking.move_lines
-        ml = move.move_line_ids
-        self.assertRecordValues(
-            ml,
-            [
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone1_bin1.id, "product_qty": 100},
-                {"location_id": reserve.id, "product_qty": 100},
-            ],
-        )
-        self.assertEqual(move.state, "assigned")
-        self.assertEqual(move.reserved_availability, 400.0)
 
     def test_rule_domain(self):
         self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
