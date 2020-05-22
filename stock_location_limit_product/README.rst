@@ -22,9 +22,8 @@ Stock Location Limit Product
 
 |badge1| |badge2| |badge3| |badge4| 
 
-This module allows you to define a limit by product quantity
-on a stock location.This limit can later be used to track
-the capacity available of the location.
+This module allows you to define a limit by product quantity on a stock location.
+This limit can later be used to track the capacity available of the location.
 
 **Table of contents**
 
@@ -34,9 +33,16 @@ the capacity available of the location.
 Configuration
 =============
 
-Go to Inventory > Configuration > Warehouse Management > Locations
-    Select or create a location
-    Enter the limits by selecting a product and entering the quantity
+* Go to *Inventory > Configuration > Settings*
+* Scroll to "Warehouse"
+* Activate the option "Storage Locations"
+
+Usage
+=====
+
+* Go to *Inventory > Configuration > Warehouse Management > Locations*
+* Select or create a location
+* Enter the limits by selecting a product and entering the quantity
 
 Bug Tracker
 ===========
