@@ -20,7 +20,6 @@
     'data': [
         'security/ir.model.access.csv',
         'views/product_template.xml',
-        'views/res_config_settings.xml',
         'views/stock_location_view.xml',
     ],
     'installable': True,
