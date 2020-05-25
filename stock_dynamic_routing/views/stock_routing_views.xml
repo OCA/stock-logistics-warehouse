@@ -38,8 +38,8 @@
                                 <field name="method" />
                                 <field
                                     name="picking_type_id"
-                                    domain="['|', ('default_location_src_id', '=', parent.location_id),
-                                                  ('default_location_dest_id', '=', parent.location_id)]"
+                                    domain="['|', ('default_location_src_id', 'child_of', parent.location_id),
+                                                  ('default_location_dest_id', 'child_of', parent.location_id)]"
                                 />
                                 <field name="location_src_id" />
                                 <field name="location_dest_id" />

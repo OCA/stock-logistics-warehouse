@@ -59,19 +59,29 @@ class StockRoutingRule(models.Model):
         for record in self:
             base_location = record.routing_location_id
 
-            if record.method == "pull" and record.location_src_id != base_location:
+            if record.method == "pull" and (
+                not record.location_src_id
+                or not record.location_src_id.parent_path.startswith(
+                    base_location.parent_path
+                )
+            ):
                 raise exceptions.ValidationError(
                     _(
-                        "Operation type of a rule used as 'pull' must have '{}' as"
-                        " source location."
+                        "Operation type of a rule used as 'pull' must have '{}'"
+                        " or a sub-location as source location."
                     ).format(base_location.display_name)
                 )
-            elif record.method == "push" and record.location_dest_id != base_location:
+            elif record.method == "push" and (
+                not record.location_dest_id
+                or not record.location_dest_id.parent_path.startswith(
+                    base_location.parent_path
+                )
+            ):
 
                 raise exceptions.ValidationError(
                     _(
-                        "Operation type of a rule used as 'push' must have '{}' as"
-                        " destination location."
+                        "Operation type of a rule used as 'push' must have '{}'"
+                        " or a sub-location as destination location."
                     ).format(base_location.display_name)
                 )
 
