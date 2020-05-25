@@ -241,6 +241,13 @@ class StockLocation(models.Model):
 
         Called from stock_location_tray/demo/stock_location_demo.xml.
         """
+        xmlids_to_create = []
+
+        def has_ref(xmlid):
+            ModelData = self.env["ir.model.data"]
+            __, res_id = ModelData.xmlid_to_res_model_res_id(xmlid)
+            return bool(res_id)
+
         for location in self:
             if not location.cell_in_tray_type_id:
                 continue
@@ -260,8 +267,8 @@ class StockLocation(models.Model):
                 tray_name, location.posx, location.posy
             )
             cell_xmlid = "{}.{}".format(module, cell_external_id)
-            if not self.env.ref(cell_xmlid, raise_if_not_found=False):
-                self.env["ir.model.data"].create(
+            if not has_ref(cell_xmlid):
+                xmlids_to_create.append(
                     {
                         "name": cell_external_id,
                         "module": module,
@@ -270,3 +277,5 @@ class StockLocation(models.Model):
                         "noupdate": tray_external.noupdate,
                     }
                 )
+
+        self.env["ir.model.data"].create(xmlids_to_create)
