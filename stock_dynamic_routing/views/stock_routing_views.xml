@@ -5,53 +5,58 @@
         <field name="model">stock.routing</field>
         <field name="arch" type="xml">
             <form string="Dynamic Routing">
-                <div class="oe_button_box" name="button_box">
-                </div>
-                <widget
-                    name="web_ribbon"
-                    title="Archived"
-                    bg_color="bg-danger"
-                    attrs="{'invisible': [('active', '=', True)]}"
-                />
-                <label for="location_id" class="oe_edit_only" />
-                <h1>
-                    <field name="location_id" />
-                </h1>
-                <group>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <label for="location_id" class="oe_edit_only" />
+                    <h1>
+                        <field name="location_id" />
+                    </h1>
                     <group>
-                        <field name="picking_type_id" />
-                    </group>
-                </group>
-                <field name="active" invisible="1" />
-                <group string="Routing Rules" name="rule">
-                    <field name="rule_ids" nolabel="1">
-                        <tree string="Routing Rules">
-                            <field name="sequence" widget="handle" />
-                            <field name="method" />
+                        <group>
                             <field name="picking_type_id" />
-                            <field name="location_src_id" />
-                            <field name="location_dest_id" />
-                            <field name="rule_domain" />
-                        </tree>
-                        <form string="Routing Rule">
-                            <group>
+                        </group>
+                        <group>
+                            <field name="routing_message" nolabel="1" />
+                        </group>
+                    </group>
+                    <field name="active" invisible="1" />
+                    <group string="Routing Rules" name="rule">
+                        <field name="rule_ids" nolabel="1">
+                            <tree string="Routing Rules">
+                                <field name="sequence" widget="handle" />
                                 <field name="method" />
-                                <field
-                                    name="picking_type_id"
-                                    domain="['|', ('default_location_src_id', 'child_of', parent.location_id),
-                                                  ('default_location_dest_id', 'child_of', parent.location_id)]"
-                                />
+                                <field name="picking_type_id" />
                                 <field name="location_src_id" />
                                 <field name="location_dest_id" />
-                                <field
-                                    name="rule_domain"
-                                    widget="domain"
-                                    options="{'model': 'stock.move', 'in_dialog': true}"
-                                />
-                            </group>
-                        </form>
-                    </field>
-                </group>
+                                <field name="rule_domain" />
+                            </tree>
+                            <form string="Routing Rule">
+                                <group>
+                                    <field name="method" />
+                                    <field
+                                        name="picking_type_id"
+                                        domain="['|', ('default_location_src_id', 'child_of', parent.location_id),
+                                                    ('default_location_dest_id', 'child_of', parent.location_id)]"
+                                    />
+                                    <field name="location_src_id" />
+                                    <field name="location_dest_id" />
+                                    <field
+                                        name="rule_domain"
+                                        widget="domain"
+                                        options="{'model': 'stock.move', 'in_dialog': true}"
+                                    />
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
