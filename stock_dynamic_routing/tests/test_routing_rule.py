@@ -51,130 +51,141 @@ class TestRoutingRule(common.SavepointCase):
                 "product_id": product.id,
                 "product_uom_qty": qty,
                 "product_uom": product.uom_id.id,
+                "picking_type_id": picking_type.id,
                 "location_id": picking_type.default_location_src_id.id,
                 "location_dest_id": picking_type.default_location_dest_id.id,
                 "state": "confirmed",
             }
         )
 
-    def test_find_pull_rule(self):
-        pick_type_a = self._create_picking_type(
-            "A", self.location_shelf, self.customer_loc
-        )
+    def _test_find_rule(self, pick_type, src_loc, dest_loc, method):
         routing = self.env["stock.routing"].create(
-            {"location_id": self.location_shelf.id}
+            {
+                "location_id": pick_type.default_location_src_id.id
+                if method == "pull"
+                else pick_type.default_location_dest_id.id,
+                "picking_type_id": pick_type.id,
+            }
         )
         self.env["stock.routing.rule"].create(
             {
-                "method": "pull",
+                "method": method,
                 "routing_id": routing.id,
-                "picking_type_id": pick_type_a.id,
+                "picking_type_id": pick_type.id,
                 "sequence": 12,
             }
         )
         rule = self.env["stock.routing.rule"].create(
             {
-                "method": "pull",
+                "method": method,
                 "routing_id": routing.id,
-                "picking_type_id": pick_type_a.id,
+                "picking_type_id": pick_type.id,
                 "sequence": 10,
             }
         )
 
-        move = self._create_stock_move(self.product, 10, pick_type_a)
+        move = self._create_stock_move(self.product, 10, pick_type)
         found_rule = self.env["stock.routing"]._find_rule_for_location(
-            move, self.location_shelf_1, self.customer_loc
+            move, src_loc, dest_loc
         )
         self.assertEqual(found_rule, rule)
 
+    def test_find_pull_rule(self):
+        pick_type = self._create_picking_type(
+            "A", self.location_shelf, self.suppliers_loc
+        )
+        self._test_find_rule(
+            pick_type, self.location_shelf_1, self.customer_loc, "pull"
+        )
+
     def test_find_push_rule(self):
-        pick_type_a = self._create_picking_type(
+        pick_type = self._create_picking_type(
             "A", self.suppliers_loc, self.location_shelf
         )
+        self._test_find_rule(
+            pick_type, self.customer_loc, self.location_shelf_1, "push"
+        )
+
+    def _test_find_rule_domain(self, src_loc, dest_loc, method):
+        pick_type_a = self._create_picking_type("A", src_loc, dest_loc)
         routing = self.env["stock.routing"].create(
-            {"location_id": self.location_shelf.id}
+            {
+                "location_id": src_loc.id if method == "pull" else dest_loc.id,
+                "picking_type_id": pick_type_a.id,
+            }
         )
         self.env["stock.routing.rule"].create(
             {
-                "method": "push",
+                "method": method,
                 "routing_id": routing.id,
                 "picking_type_id": pick_type_a.id,
-                "sequence": 12,
+                "sequence": 1,
+                # rule not selected because of this:
+                "rule_domain": [("product_id", "!=", self.product.id)],
             }
         )
         rule = self.env["stock.routing.rule"].create(
             {
-                "method": "push",
+                "method": method,
                 "routing_id": routing.id,
                 "picking_type_id": pick_type_a.id,
                 "sequence": 10,
             }
         )
+
         move = self._create_stock_move(self.product, 10, pick_type_a)
         found_rule = self.env["stock.routing"]._find_rule_for_location(
-            move, self.suppliers_loc, self.location_shelf_1
+            move, src_loc, dest_loc
         )
         self.assertEqual(found_rule, rule)
 
     def test_find_pull_rule_domain(self):
-        pick_type_a = self._create_picking_type(
-            "A", self.location_shelf, self.customer_loc
-        )
-        routing = self.env["stock.routing"].create(
-            {"location_id": self.location_shelf.id}
-        )
-        self.env["stock.routing.rule"].create(
-            {
-                "method": "pull",
-                "routing_id": routing.id,
-                "picking_type_id": pick_type_a.id,
-                "sequence": 1,
-                # rule not selected because of this:
-                "rule_domain": [("product_id", "!=", self.product.id)],
-            }
-        )
-        rule = self.env["stock.routing.rule"].create(
-            {
-                "method": "pull",
-                "routing_id": routing.id,
-                "picking_type_id": pick_type_a.id,
-                "sequence": 10,
-            }
-        )
-
-        move = self._create_stock_move(self.product, 10, pick_type_a)
-        found_rule = self.env["stock.routing"]._find_rule_for_location(
-            move, self.location_shelf_1, self.customer_loc
-        )
-        self.assertEqual(found_rule, rule)
+        self._test_find_rule_domain(self.location_shelf, self.customer_loc, "pull")
 
     def test_find_push_rule_domain(self):
-        pick_type_a = self._create_picking_type(
-            "A", self.suppliers_loc, self.location_shelf
-        )
+        self._test_find_rule_domain(self.customer_loc, self.location_shelf, "push")
+
+    def _test_find_picking_type(self, src_loc, dest_loc, method):
+        pick_type_a = self._create_picking_type("A", src_loc, dest_loc)
+        pick_type_b = self._create_picking_type("B", src_loc, dest_loc)
         routing = self.env["stock.routing"].create(
-            {"location_id": self.location_shelf.id}
+            {
+                "location_id": src_loc.id if method == "pull" else dest_loc.id,
+                # routing not selected because different pick type
+                "picking_type_id": pick_type_a.id,
+            }
         )
         self.env["stock.routing.rule"].create(
             {
-                "method": "push",
+                "method": method,
                 "routing_id": routing.id,
                 "picking_type_id": pick_type_a.id,
                 "sequence": 1,
-                # rule not selected because of this:
-                "rule_domain": [("product_id", "!=", self.product.id)],
+            }
+        )
+        routing = self.env["stock.routing"].create(
+            {
+                "location_id": src_loc.id if method == "pull" else dest_loc.id,
+                # routing selected because same pick type
+                "picking_type_id": pick_type_b.id,
             }
         )
         rule = self.env["stock.routing.rule"].create(
             {
-                "method": "push",
+                "method": method,
                 "routing_id": routing.id,
-                "picking_type_id": pick_type_a.id,
+                "picking_type_id": pick_type_b.id,
                 "sequence": 10,
             }
         )
-        move = self._create_stock_move(self.product, 10, pick_type_a)
+        move = self._create_stock_move(self.product, 10, pick_type_b)
         found_rule = self.env["stock.routing"]._find_rule_for_location(
-            move, self.suppliers_loc, self.location_shelf_1
+            move, src_loc, dest_loc
         )
         self.assertEqual(found_rule, rule)
+
+    def test_find_pull_picking_type(self):
+        self._test_find_picking_type(self.location_shelf, self.suppliers_loc, "pull")
+
+    def test_find_push_picking_type(self):
+        self._test_find_picking_type(self.suppliers_loc, self.location_shelf, "push")

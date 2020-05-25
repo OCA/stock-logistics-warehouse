@@ -60,6 +60,7 @@ class TestRoutingPullCommon(common.SavepointCase):
         cls.routing = cls.env["stock.routing"].create(
             {
                 "location_id": cls.location_hb.id,
+                "picking_type_id": cls.wh.pick_type_id.id,
                 "rule_ids": [
                     (
                         0,
@@ -659,6 +660,7 @@ class TestRoutingPull(TestRoutingPullCommon):
         self.env["stock.routing"].create(
             {
                 "location_id": area1.id,
+                "picking_type_id": self.wh.out_type_id.id,
                 "rule_ids": [
                     (
                         0,
@@ -713,6 +715,7 @@ class TestRoutingPull(TestRoutingPullCommon):
         self.env["stock.routing"].create(
             {
                 "location_id": area1.id,
+                "picking_type_id": self.wh.out_type_id.id,
                 "rule_ids": [
                     (
                         0,
@@ -842,6 +845,7 @@ class TestRoutingPull(TestRoutingPullCommon):
         self.env["stock.routing"].create(
             {
                 "location_id": self.location_handover.id,
+                "picking_type_id": self.wh.pick_type_id.id,
                 "rule_ids": [
                     (
                         0,
@@ -867,6 +871,7 @@ class TestRoutingPull(TestRoutingPullCommon):
         self.env["stock.routing"].create(
             {
                 "location_id": location_qa.id,
+                "picking_type_id": self.wh.out_type_id.id,
                 "rule_ids": [
                     (
                         0,

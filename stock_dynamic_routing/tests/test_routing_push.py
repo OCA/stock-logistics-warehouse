@@ -74,6 +74,7 @@ class TestRoutingPush(common.SavepointCase):
         cls.routing = cls.env["stock.routing"].create(
             {
                 "location_id": cls.location_hb.id,
+                "picking_type_id": cls.wh.int_type_id.id,
                 "rule_ids": [
                     (
                         0,
@@ -719,6 +720,7 @@ class TestRoutingPush(common.SavepointCase):
         self.env["stock.routing"].create(
             {
                 "location_id": self.location_handover.id,
+                "picking_type_id": self.wh.int_type_id.id,
                 "rule_ids": [
                     (
                         0,

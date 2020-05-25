@@ -23,11 +23,13 @@ class StockRouting(models.Model):
     _rec_name = "location_id"
 
     location_id = fields.Many2one(
-        comodel_name="stock.location",
+        comodel_name="stock.location", required=True, ondelete="cascade", index=True,
+    )
+    picking_type_id = fields.Many2one(
+        comodel_name="stock.picking.type",
+        string="Operation Type",
         required=True,
-        unique=True,
-        ondelete="cascade",
-        index=True,
+        help="Apply this routing only if the operation type of the move is the same.",
     )
     sequence = fields.Integer(default=lambda self: self._default_sequence())
     active = fields.Boolean(default=True)
@@ -37,9 +39,9 @@ class StockRouting(models.Model):
 
     _sql_constraints = [
         (
-            "location_id_uniq",
-            "unique(location_id)",
-            "A routing configuration already exists for this location",
+            "location_picking_type_uniq",
+            "unique(location_id, picking_type_id)",
+            "A routing configuration already exists for this location and picking type",
         )
     ]
 
@@ -60,14 +62,19 @@ class StockRouting(models.Model):
         """
         pull_location_tree = src_location._location_parent_tree()
         push_location_tree = dest_location._location_parent_tree()
+        picking_type = move.picking_type_id or move.picking_id.picking_type_id
         candidate_rules = self.env["stock.routing.rule"].search(
             [
                 "|",
                 "&",
+                "&",
                 ("routing_location_id", "in", pull_location_tree.ids),
+                ("routing_picking_type_id", "=", picking_type.id),
                 ("method", "=", "pull"),
                 "&",
+                "&",
                 ("routing_location_id", "in", push_location_tree.ids),
+                ("routing_picking_type_id", "=", picking_type.id),
                 ("method", "=", "push"),
             ]
         )

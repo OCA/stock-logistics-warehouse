@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <record id="stock_routing_highbay_demo" model="stock.routing">
+    <record id="stock_routing_highbay_pick_demo" model="stock.routing">
         <field name="location_id" ref="stock_location_highbay_demo" />
+        <field
+            name="picking_type_id"
+            model="stock.warehouse"
+            eval="obj().env.ref('stock.warehouse0').pick_type_id.id"
+        />
     </record>
     <record
         id="stock_routing_rule_highbay_pull_handover_demo"
         model="stock.routing.rule"
     >
-        <field name="routing_id" ref="stock_routing_highbay_demo" />
+        <field name="routing_id" ref="stock_routing_highbay_pick_demo" />
         <field name="method">pull</field>
         <field
             name="picking_type_id"
             ref="stock_picking_type_highbay_to_handover_demo"
         />
     </record>
+    <record id="stock_routing_highbay_receipt_demo" model="stock.routing">
+        <field name="location_id" ref="stock_location_highbay_demo" />
+        <field name="picking_type_id" ref="stock.picking_type_in" />
+    </record>
     <record
         id="stock_routing_rule_highbay_push_handover_demo"
         model="stock.routing.rule"
     >
-        <field name="routing_id" ref="stock_routing_highbay_demo" />
+        <field name="routing_id" ref="stock_routing_highbay_receipt_demo" />
         <field name="method">push</field>
         <field
             name="picking_type_id"

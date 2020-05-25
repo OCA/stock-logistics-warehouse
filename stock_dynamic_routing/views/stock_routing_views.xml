@@ -4,7 +4,7 @@
         <field name="name">stock.routing.form</field>
         <field name="model">stock.routing</field>
         <field name="arch" type="xml">
-            <form string="Stock Routing">
+            <form string="Dynamic Routing">
                 <div class="oe_button_box" name="button_box">
                 </div>
                 <widget
@@ -17,6 +17,11 @@
                 <h1>
                     <field name="location_id" />
                 </h1>
+                <group>
+                    <group>
+                        <field name="picking_type_id" />
+                    </group>
+                </group>
                 <field name="active" invisible="1" />
                 <group string="Routing Rules" name="rule">
                     <field name="rule_ids" nolabel="1">
@@ -54,7 +59,7 @@
         <field name="name">stock.routing.search</field>
         <field name="model">stock.routing</field>
         <field name="arch" type="xml">
-            <search string="Stock Routing">
+            <search string="Dynamic Routing">
                 <field name="location_id" />
                 <separator />
                 <filter
@@ -69,14 +74,15 @@
         <field name="name">stock.routing</field>
         <field name="model">stock.routing</field>
         <field name="arch" type="xml">
-            <tree string="Stock Routing">
+            <tree string="Dynamic Routing">
                 <field name="sequence" widget="handle" />
                 <field name="location_id" />
+                <field name="picking_type_id" />
             </tree>
         </field>
     </record>
     <record id="action_stock_routing" model="ir.actions.act_window">
-        <field name="name">Stock Routing</field>
+        <field name="name">Dynamic Routing</field>
         <field name="res_model">stock.routing</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_id" ref="view_stock_routing_tree" />
@@ -84,7 +90,7 @@
         <field name="context" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Add a Stock Routing
+                Add a Dynamic Routing
             </p>
         </field>
     </record>

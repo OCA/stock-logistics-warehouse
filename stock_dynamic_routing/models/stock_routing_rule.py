@@ -20,6 +20,12 @@ class StockRoutingRule(models.Model):
     routing_location_id = fields.Many2one(
         related="routing_id.location_id", store=True, index=True
     )
+    routing_picking_type_id = fields.Many2one(
+        related="routing_id.picking_type_id",
+        store=True,
+        index=True,
+        help="Routing applied only on moves of this operation type.",
+    )
     method = fields.Selection(
         selection=[("pull", "Pull"), ("push", "Push")],
         help="On pull, the routing is applied when the source location of "
@@ -27,7 +33,11 @@ class StockRoutingRule(models.Model):
         "On push, the routing is applied when the destination location of "
         "a move line matches the destination location of the rule.",
     )
-    picking_type_id = fields.Many2one(comodel_name="stock.picking.type", required=True)
+    picking_type_id = fields.Many2one(
+        comodel_name="stock.picking.type",
+        required=True,
+        help="Operation type that will be applied on the move.",
+    )
     location_src_id = fields.Many2one(
         related="picking_type_id.default_location_src_id", readonly=True
     )
