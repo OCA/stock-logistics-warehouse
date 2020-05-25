@@ -41,7 +41,12 @@ class StockReserveRule(models.Model):
         comodel_name="res.company", default=lambda self: self.env.user.company_id.id
     )
 
-    location_id = fields.Many2one(comodel_name="stock.location", required=True)
+    location_id = fields.Many2one(
+        comodel_name="stock.location",
+        required=True,
+        help="Rule applied only in this location and sub-locations.",
+    )
+    )
 
     rule_removal_ids = fields.One2many(
         comodel_name="stock.reserve.rule.removal", inverse_name="rule_id"
