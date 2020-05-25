@@ -27,6 +27,16 @@ class TestRoutingPullWithSync(CheckoutSyncCommon):
         cls.routing = cls.env["stock.routing"].create(
             {
                 "location_id": cls.location_pack_post.id,
+                "picking_type_id": cls.warehouse.pack_type_id.id,
+                "rule_ids": [
+                    (0, 0, {"method": "pull", "picking_type_id": cls.pack_post_type.id})
+                ],
+            }
+        )
+        cls.env["stock.routing"].create(
+            {
+                "location_id": cls.location_pack_post.id,
+                "picking_type_id": cls.pack_post_type.id,
                 "rule_ids": [
                     (0, 0, {"method": "pull", "picking_type_id": cls.pack_post_type.id})
                 ],
@@ -147,19 +157,26 @@ class TestRoutingPullWithSync(CheckoutSyncCommon):
             ]
         ).unlink()
 
+        # only 1 qty of 2 is available in Shelf
         self._update_qty_in_location(self.stock_shelf_location, self.product_1, 1)
 
         self.pick_move1._action_assign()
 
+        # sync pick move 1 to have move lines set to pack post bay1
         wizard = self.env["stock.move.checkout.sync"]._create_self(
             self.pick_move1.picking_id
         )
         wizard.location_id = self.location_pack_post_bay1
+        # This will update the destination, and the source location
+        # of the Pack moves. Which will trigger the routing.
         wizard.sync()
 
         self.pick_move1.move_line_ids.write({"qty_done": 1})
         self.pick_move1._action_done()
+
         pick_move_split = self.pick_move1.move_dest_ids.move_orig_ids - self.pick_move1
+        # the pack move should be split, one part coming from pick_move1 being
+        # done, and the other part waiting for the remaining quantity.
         self.assertEqual(
             sorted(pick_move_split.move_dest_ids.mapped("state")),
             ["assigned", "waiting"],
@@ -181,7 +198,7 @@ class TestRoutingPullWithSync(CheckoutSyncCommon):
         self.assert_dest_pack_post_bay1(self.pick_move3)
         self.assert_dest_pack_post_bay1(self.pick_move3.move_line_ids)
 
-        # routing reapply the default source location of the routing
+        # routing reapplies the default source location of the routing
         self.assert_src_pack_post(assigned_pack)
         self.assert_src_pack_post_bay1(assigned_pack.move_line_ids)
         # no move lines on these waiting moves:
