@@ -172,7 +172,6 @@ class StockReserveRuleRemoval(models.Model):
                 ).format(
                     removal_rule.name, removal_rule.rule_id.location_id.display_name,
                 )
-                _logger.error("Rule '%s' - %s", removal_rule.rule_id.name, msg)
                 raise ValidationError(msg)
 
     def _eval_quant_domain(self, quants, domain):
