@@ -23,7 +23,7 @@ class ChangeProductionQty(models.TransientModel):
         res = super().change_prod_qty()
         # If a MTO move was deleted, the method change_prod_qty creates a new
         # move for the component, but it's in draft state and cannot be
-        # reserved, we need to confirm the stock.move
+        # reserved, we need to confirm the stock.move 
         moves = self.mo_id.move_raw_ids.filtered(
             lambda l: l.state == 'draft')._action_confirm()
         production = self.mo_id
@@ -59,4 +59,6 @@ class ChangeProductionQty(models.TransientModel):
                     else:
                         documents[key] = [value]
         production._log_manufacture_exception(documents)
+        for move_raw in production.move_raw_ids:
+            move_raw.move_orig_ids = False
         return res
