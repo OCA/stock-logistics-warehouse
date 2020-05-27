@@ -64,14 +64,7 @@ class StockReserveRule(models.Model):
     )
 
     def _rules_for_location(self, location):
-        # We'll typically have a handful of rules, so reading all of them then
-        # checking if they are a parent location of the location is pretty
-        # fast. Searching all the parent locations then the rules matching them
-        # can be much slower if we have many locations.
-        rules = self.search([]).filtered(
-            lambda rule: rule.location_id.parent_path.startswith(location.parent_path)
-        )
-        return rules
+        return self.search([("location_id", "parent_of", location.id)])
 
     def _eval_rule_domain(self, move, domain):
         move_domain = [("id", "=", move.id)]
