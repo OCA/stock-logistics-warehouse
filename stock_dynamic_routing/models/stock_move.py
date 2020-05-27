@@ -252,10 +252,9 @@ class StockMove(models.Model):
                 __applying_routing_rule=True
             ).location_id = routing_rule.location_src_id
             move.picking_type_id = routing_rule.picking_type_id
-            location_path = move.location_dest_id.parent_path
-            rule_location_path = routing_rule.location_dest_id.parent_path
-            # if the move location is a parent of the rule's location
-            if rule_location_path.startswith(location_path):
+            dest_location = move.location_dest_id
+            rule_location = routing_rule.location_dest_id
+            if rule_location.is_sublocation_of(dest_location):
                 # The destination of the move, as a parent of the destination
                 # of the routing, goes to the correct place, but is not precise
                 # enough: set the new destination to match the rule's one.
@@ -263,8 +262,7 @@ class StockMove(models.Model):
                 # which may reapply a new routing rule on the dest. move.
                 move._routing_pull_switch_destination(routing_rule)
 
-            # if the move location is not a child of the rule's location
-            elif not location_path.startswith(rule_location_path):
+            elif not dest_location.is_sublocation_of(rule_location):
                 # The destination of the move is unrelated (nor identical, nor
                 # a parent or a child) to the routing destination: in this case
                 # we have to add a routing move before the current move to
@@ -352,11 +350,10 @@ class StockMove(models.Model):
                 # routing move after this one
                 continue
 
-            rule_location_path = routing_rule.location_src_id.parent_path
-            location_path = move.location_id.parent_path
-            # if rule location is parent of location
-            if location_path.startswith(rule_location_path):
-                # The source is already correct (more precise than the routing),
+            rule_location = routing_rule.location_src_id
+            location = move.location_id
+            if location.is_sublocation_of(rule_location):
+                # The source is already correct (or more precise than the routing),
                 # but we still want to classify the move in the routing's picking
                 # type.
                 # If the source location of the move is a child of the routing's

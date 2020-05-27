@@ -14,3 +14,13 @@ class StockLocation(models.Model):
         # the recordset will be ordered bottom location to top location
         tree_ids.reverse()
         return self.browse(tree_ids)
+
+    def is_sublocation_of(self, others):
+        """Return True if self is a sublocation of at least one other
+
+        It is equivalent to the "child_of" operator, so it includes itself.
+        """
+        self.ensure_one()
+        # Efficient way to verify that the current location is
+        # below one of the other location without using SQL.
+        return any(self.parent_path.startswith(other.parent_path) for other in others)

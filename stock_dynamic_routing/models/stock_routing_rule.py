@@ -61,9 +61,7 @@ class StockRoutingRule(models.Model):
 
             if record.method == "pull" and (
                 not record.location_src_id
-                or not record.location_src_id.parent_path.startswith(
-                    base_location.parent_path
-                )
+                or not record.location_src_id.is_sublocation_of(base_location)
             ):
                 raise exceptions.ValidationError(
                     _(
@@ -73,9 +71,7 @@ class StockRoutingRule(models.Model):
                 )
             elif record.method == "push" and (
                 not record.location_dest_id
-                or not record.location_dest_id.parent_path.startswith(
-                    base_location.parent_path
-                )
+                or not record.location_dest_id.is_sublocation_of(base_location)
             ):
 
                 raise exceptions.ValidationError(
