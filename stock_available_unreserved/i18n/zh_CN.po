@@ -32,12 +32,14 @@ msgstr "内部未预留"
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:116
+#: code:addons/stock_available_unreserved/models/product.py:117
 #, python-format
 msgid "Invalid domain operator %s"
 msgstr "无效的域运算符%s"
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:118
+#: code:addons/stock_available_unreserved/models/product.py:119
 #, python-format
 msgid "Invalid domain right operand %s"
 msgstr "无效的域权限操作数%s"

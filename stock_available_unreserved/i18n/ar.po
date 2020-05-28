@@ -29,12 +29,14 @@ msgstr "الغير محجوز داخلياً"
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:116
+#: code:addons/stock_available_unreserved/models/product.py:117
 #, python-format
 msgid "Invalid domain operator %s"
 msgstr ""
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:118
+#: code:addons/stock_available_unreserved/models/product.py:119
 #, python-format
 msgid "Invalid domain right operand %s"
 msgstr ""
