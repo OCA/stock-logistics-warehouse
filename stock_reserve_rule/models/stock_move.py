@@ -103,16 +103,7 @@ class StockMove(models.Model):
                     break
 
             reserved = need - still_need
-            # Implicit fallback on the original location
-            return reserved + super()._update_reserved_quantity(
-                still_need,
-                available_quantity - reserved,
-                location_id=location_id,
-                lot_id=lot_id,
-                package_id=package_id,
-                owner_id=owner_id,
-                strict=strict,
-            )
+            return reserved
 
         # We fall here if there is no rule or they have all been
         # excluded by 'rule._is_rule_applicable'
