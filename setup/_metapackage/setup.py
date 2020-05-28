@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo13-addon-stock_inventory_exclude_sublocation',
         'odoo13-addon-stock_inventory_include_exhausted',
         'odoo13-addon-stock_inventory_lockdown',
+        'odoo13-addon-stock_location_bin_name',
         'odoo13-addon-stock_location_position',
         'odoo13-addon-stock_location_tray',
         'odoo13-addon-stock_location_zone',
