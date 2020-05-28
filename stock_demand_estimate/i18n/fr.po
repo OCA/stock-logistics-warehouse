@@ -75,6 +75,12 @@ msgid "Duration (in days)"
 msgstr ""
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:256
+#, python-format
+msgid "Estimate Sheet"
+msgstr "Feuille d'estimation"
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
 #, fuzzy
 #| msgid "Date From"
@@ -152,12 +158,15 @@ msgid "Stock Demand Estimate Line"
 msgstr "Ligne d'estimation de demande de stock"
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:143
 #: model:ir.actions.act_window,name:stock_demand_estimate.stock_demand_estimate_action
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_menu
+#, python-format
 msgid "Stock Demand Estimates"
 msgstr "Estimations de demande de stock"
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:79
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:118
 #, python-format
 msgid ""
@@ -167,6 +176,18 @@ msgstr ""
 "L'opération demandée ne peut aboutir en raison d'une erreur de "
 "programmation : le champ `product_qty` a été modifié, et non le champ "
 "`product_uom_qty`."
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:226
+#, python-format
+msgid "The start date cannot be later than the end date."
+msgstr "La date de début doit être antérieure à la date de fin."
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:52
+#, python-format
+msgid "There is no ranges created."
+msgstr "Il n'y a pas de période."
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_to
@@ -182,6 +203,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr "Unité de mesure"
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:243
+#, python-format
+msgid "You must select at least one product."
+msgstr "Vous devez choisir au moins un produit."
 
 #~ msgid "Cancel"
 #~ msgstr "Annuler"
@@ -206,9 +233,6 @@ msgstr "Unité de mesure"
 
 #~ msgid "Estimate"
 #~ msgstr "Estimation"
-
-#~ msgid "Estimate Sheet"
-#~ msgstr "Feuille d'estimation"
 
 #~ msgid "Estimated quantity"
 #~ msgstr "Quantité estimée"
@@ -246,17 +270,8 @@ msgstr "Unité de mesure"
 #~ msgid "Stock Location"
 #~ msgstr "Emplacement"
 
-#~ msgid "The start date cannot be later than the end date."
-#~ msgstr "La date de début doit être antérieure à la date de fin."
-
-#~ msgid "There is no ranges created."
-#~ msgstr "Il n'y a pas de période."
-
 #~ msgid "Validate"
 #~ msgstr "Valider"
-
-#~ msgid "You must select at least one product."
-#~ msgstr "Vous devez choisir au moins un produit."
 
 #~ msgid "or"
 #~ msgstr "ou"

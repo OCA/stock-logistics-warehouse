@@ -76,6 +76,12 @@ msgid "Duration (in days)"
 msgstr ""
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:256
+#, python-format
+msgid "Estimate Sheet"
+msgstr "估算表"
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
 #, fuzzy
 #| msgid "Date From"
@@ -153,12 +159,15 @@ msgid "Stock Demand Estimate Line"
 msgstr "库存需求估算行"
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:143
 #: model:ir.actions.act_window,name:stock_demand_estimate.stock_demand_estimate_action
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_menu
+#, python-format
 msgid "Stock Demand Estimates"
 msgstr "库存需求估算"
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:79
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:118
 #, python-format
 msgid ""
@@ -167,6 +176,18 @@ msgid ""
 msgstr ""
 "由于设置“ product_qty”字段而不是“ product_uom_qty”的编程错误，因此无法处理请"
 "求的操作。"
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:226
+#, python-format
+msgid "The start date cannot be later than the end date."
+msgstr "开始日期不能晚于结束日期。"
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:52
+#, python-format
+msgid "There is no ranges created."
+msgstr "没有创建范围。"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_to
@@ -182,6 +203,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr "计量单位"
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:243
+#, python-format
+msgid "You must select at least one product."
+msgstr "您必须至少选择一种产品。"
 
 #~ msgid "Cancel"
 #~ msgstr "取消"
@@ -206,9 +233,6 @@ msgstr "计量单位"
 
 #~ msgid "Estimate"
 #~ msgstr "估算"
-
-#~ msgid "Estimate Sheet"
-#~ msgstr "估算表"
 
 #~ msgid "Estimated quantity"
 #~ msgstr "估算数量"
@@ -246,17 +270,8 @@ msgstr "计量单位"
 #~ msgid "Stock Location"
 #~ msgstr "库存位置"
 
-#~ msgid "The start date cannot be later than the end date."
-#~ msgstr "开始日期不能晚于结束日期。"
-
-#~ msgid "There is no ranges created."
-#~ msgstr "没有创建范围。"
-
 #~ msgid "Validate"
 #~ msgstr "验证"
-
-#~ msgid "You must select at least one product."
-#~ msgstr "您必须至少选择一种产品。"
 
 #~ msgid "or"
 #~ msgstr "或"

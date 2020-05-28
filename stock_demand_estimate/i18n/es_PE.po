@@ -73,6 +73,12 @@ msgid "Duration (in days)"
 msgstr ""
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:256
+#, python-format
+msgid "Estimate Sheet"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
 msgid "From"
 msgstr ""
@@ -148,17 +154,32 @@ msgid "Stock Demand Estimate Line"
 msgstr ""
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:143
 #: model:ir.actions.act_window,name:stock_demand_estimate.stock_demand_estimate_action
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_menu
+#, python-format
 msgid "Stock Demand Estimates"
 msgstr ""
 
 #. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:79
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:118
 #, python-format
 msgid ""
 "The requested operation cannot be processed because of a programming error "
 "setting the `product_qty` field instead of the `product_uom_qty`."
+msgstr ""
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:226
+#, python-format
+msgid "The start date cannot be later than the end date."
+msgstr ""
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:52
+#, python-format
+msgid "There is no ranges created."
 msgstr ""
 
 #. module: stock_demand_estimate
@@ -174,6 +195,12 @@ msgstr ""
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: code:addons/stock_demand_estimate/wizards/stock_demand_estimate_wizard.py:243
+#, python-format
+msgid "You must select at least one product."
 msgstr ""
 
 #~ msgid "or"
