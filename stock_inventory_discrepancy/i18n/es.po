@@ -9,44 +9,45 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2017-11-30 03:53+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2020-05-29 17:13+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: stock_inventory_discrepancy
 #: selection:stock.inventory,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_qty
 msgid "Discrepancy"
-msgstr ""
+msgstr "Discrepancia"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_percent
 msgid "Discrepancy percent (%)"
-msgstr ""
+msgstr "Porcentaje de discrepancia (%)"
 
 #. module: stock_inventory_discrepancy
 #: selection:stock.inventory,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_inventory_form
 msgid "Force Validation"
-msgstr ""
+msgstr "Forzar validación"
 
 #. module: stock_inventory_discrepancy
 #: selection:stock.inventory,state:0
 msgid "In Progress"
-msgstr ""
+msgstr "En progreso"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_inventory
@@ -61,14 +62,14 @@ msgstr "Línea inventario"
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicaciones de inventario"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_threshold
 msgid "Maximum Discrepancy Rate Threshold"
-msgstr ""
+msgstr "Ratio límite de discrepancia máxima"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
@@ -76,6 +77,9 @@ msgid ""
 "Maximum Discrepancy Rate allowed for any product when doing an Inventory "
 "Adjustment. Threshold defined in involved Location has preference."
 msgstr ""
+"Ratio límite de discrepancia máxima permitida para cualquier producto cuando "
+"se realiza un ajuste de inventario. El límite definido en la ubicación "
+"implicada tiene prioridad."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
@@ -84,16 +88,19 @@ msgid ""
 "Adjustment. Thresholds defined in Locations have preference over Warehouse's "
 "ones."
 msgstr ""
+"Ratio límite de discrepancia máxima permitida para cualquier producto cuando "
+"se realiza un ajuste de inventario. El límite definido en la ubicación "
+"implicada tiene prioridad sobre la de almacén."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory__over_discrepancy_line_count
 msgid "Number of Discrepancies Over Threshold"
-msgstr ""
+msgstr "Nº de discrepancias por encima del límite"
 
 #. module: stock_inventory_discrepancy
 #: selection:stock.inventory,state:0
 msgid "Pending to Approve"
-msgstr ""
+msgstr "Pendiente de aprobar"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory__state
@@ -105,11 +112,16 @@ msgid ""
 "predefined threshold and it's waiting for the Control Manager approval.\n"
 "- Validated: Inventory Approved."
 msgstr ""
+"Estados del ajuste de inventario:\n"
+"- Borrador: Inventario no iniciado\n"
+"- En progreso: Inventario en ejecución\n"
+"- Pendiente de aprobar: El inventario tiene algunas discrepancias mayores "
+"que los límites definidos y está esperando la aprobación de un responsable."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory__state
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #. module: stock_inventory_discrepancy
 #: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:56
@@ -118,6 +130,8 @@ msgid ""
 "The Qty Update is over the Discrepancy Threshold.\n"
 " Please, contact a user with rights to perform this action."
 msgstr ""
+"La cantidad actualizada está por encima del límite de discrepancia.\n"
+"Por favor, contacte con un usuario con permisos para realizar esta acción."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_qty
@@ -125,31 +139,33 @@ msgid ""
 "The difference between the actual qty counted and the theoretical quantity "
 "on hand."
 msgstr ""
+"La diferencia entre la cantidad real contada y la cantidad teórica a mano."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_percent
 msgid "The discrepancy expressed in percent with theoretical quantity as basis"
 msgstr ""
+"La discrepancia expresada en porcentanje con respecto a la cantidad teórica"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_threshold
 msgid "Threshold (%)"
-msgstr ""
+msgstr "Límite (%)"
 
 #. module: stock_inventory_discrepancy
 #: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation_always
 msgid "Validate All inventory Adjustments"
-msgstr ""
+msgstr "Validar todos los ajustes de inventario"
 
 #. module: stock_inventory_discrepancy
 #: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation
 msgid "Validate Inventory Adjustments Under Threshold"
-msgstr ""
+msgstr "Validar ajustes de inventario por debajo del límite"
 
 #. module: stock_inventory_discrepancy
 #: selection:stock.inventory,state:0
 msgid "Validated"
-msgstr ""
+msgstr "Validado"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_warehouse
