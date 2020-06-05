@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <record id="view_stock_valuation_account_mass_adjust"
+    <record id="view_stock_valuation_account_mass_adjust_stock_move"
             model="ir.ui.view">
         <field name="name">Recreate Valuation Entries</field>
         <field name="model">stock.valuation.account.mass.adjust.move</field>
@@ -20,7 +20,7 @@
         </field>
     </record>
 
-    <record id="action_stock_valuation_account_mass_adjust"
+    <record id="action_stock_valuation_account_mass_adjust_stock_move"
             model="ir.actions.act_window">
         <field name="name">Recreate Valuation Entries</field>
         <field name="type">ir.actions.act_window</field>
