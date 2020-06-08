@@ -8,24 +8,19 @@ from odoo.tools import float_compare
 class Product(models.Model):
     _inherit = "product.product"
 
-    def product_qty_by_packaging(self, prod_qty, min_unit=None):
+    def product_qty_by_packaging(self, prod_qty):
         """Calculate quantity by packaging.
+
+        The minimal quantity is always represented by the UoM of the product.
 
         Limitation: fractional quantities are lost.
 
         :prod_qty: total qty to satisfy.
-        :min_unit: minimal unit of measure as a tuple (qty, name).
-                   Default: to UoM unit.
         :returns: list of tuple in the form [(qty_per_package, package_name)]
-
         """
         packagings = [(x.qty, x.name) for x in self.packaging_ids]
-        if min_unit is None:
-            # You can pass `False` to skip it.
-            single_unit = self.uom_id
-            min_unit = (single_unit.factor, single_unit.name)
-        if min_unit:
-            packagings.append(min_unit)
+        # Add minimal unit
+        packagings.append((self.uom_id.factor, self.uom_id.name))
         return self._product_qty_by_packaging(
             sorted(packagings, reverse=True), prod_qty
         )
@@ -45,7 +40,10 @@ class Product(models.Model):
     def _qty_by_pkg(self, pkg_qty, qty):
         """Calculate qty needed for given package qty."""
         qty_per_pkg = 0
-        while float_compare(qty - pkg_qty, 0.0, precision_digits=3) >= 0.0:
+        while (
+            float_compare(qty - pkg_qty, 0.0, precision_digits=self.uom_id.rounding)
+            >= 0.0
+        ):
             qty -= pkg_qty
             qty_per_pkg += 1
         return qty_per_pkg, qty
