@@ -48,19 +48,6 @@ class TestCalc(SavepointCase):
             [(1, "Box"), (30, self.uom_unit.name)],
         )
 
-    def test_calc_4(self):
-        """Test minimal unit override."""
-        self.assertEqual(
-            self.product_a.product_qty_by_packaging(80, min_unit=(5, "Pack 5")),
-            [(1, "Box"), (6, "Pack 5")],
-        )
-
-    def test_calc_5(self):
-        """Test no minimal unit."""
-        self.assertEqual(
-            self.product_a.product_qty_by_packaging(80, min_unit=False), [(1, "Box")]
-        )
-
     def test_calc_6(self):
         """Test fractional qty is lost."""
         self.assertEqual(self.product_a.product_qty_by_packaging(50.5), [(1, "Box")])
