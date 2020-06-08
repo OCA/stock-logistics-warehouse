@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:67
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "(No description provided.)"
 msgstr ""
@@ -105,8 +105,8 @@ msgid "Cancel"
 msgstr "Hủy bỏ"
 
 #. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__cancelled
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
-#: selection:stock.cycle.count,state:0
 msgid "Cancelled"
 msgstr ""
 
@@ -282,13 +282,13 @@ msgid "Display Name"
 msgstr "Tên hiển thị"
 
 #. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__done
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
-#: selection:stock.cycle.count,state:0
 msgid "Done"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:49
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
 "Ensures that at least a defined number of counts in a given period will be "
@@ -296,13 +296,13 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:168
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Error found determining the frequency of periodic cycle count rule. %s"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:214
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Error found when comparing turnover with the rule threshold. %s"
 msgstr ""
@@ -313,8 +313,8 @@ msgid "Exclude from Cycle Count"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__open
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
-#: selection:stock.cycle.count,state:0
 msgid "Execution"
 msgstr ""
 
@@ -350,12 +350,8 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread
-msgid "If checked new messages require your attention."
-msgstr "Nếu đánh dấu kiểm, các thông điệp mới yêu cầu sự có mặt của bạn."
-
-#. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread
 #, fuzzy
 #| msgid "If checked new messages require your attention."
 msgid "If checked, new messages require your attention."
@@ -363,6 +359,7 @@ msgstr "Nếu đánh dấu kiểm, các thông điệp mới yêu cầu sự có
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 #, fuzzy
 #| msgid "If checked new messages require your attention."
 msgid "If checked, some messages have a delivery error."
@@ -478,7 +475,7 @@ msgid "Messages"
 msgstr "Thông điệp"
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:24
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Minimum Accuracy"
 msgstr ""
@@ -501,7 +498,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
-msgid "Number of error"
+msgid "Number of errors"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -527,7 +524,7 @@ msgid "Number of unread messages"
 msgstr "Thông điệp chưa đọc"
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:62
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
 "Perform an Inventory Adjustment every time a location in the warehouse runs "
@@ -540,14 +537,14 @@ msgid "Period in days"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:22
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Periodic"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__draft
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
-#: selection:stock.cycle.count,state:0
 msgid "Planned"
 msgstr ""
 
@@ -563,7 +560,12 @@ msgid "Rule Description"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:58
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: stock_cycle_count
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
 "Schedules a count every time the accuracy of a location goes under a given "
@@ -571,7 +573,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:53
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
 "Schedules a count every time the total turnover of a location exceeds the "
@@ -584,12 +586,12 @@ msgid "Search Cycle Count"
 msgstr ""
 
 #. module: stock_cycle_count
-#: selection:stock.cycle.count.rule,apply_in:0
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count_rule__apply_in__location
 msgid "Selected Location Zones."
 msgstr ""
 
 #. module: stock_cycle_count
-#: selection:stock.cycle.count.rule,apply_in:0
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count_rule__apply_in__warehouse
 msgid "Selected warehouses"
 msgstr ""
 
@@ -655,7 +657,7 @@ msgid "Unread Messages Counter"
 msgstr "Thông điệp chưa đọc"
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:23
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Value Turnover"
 msgstr ""
@@ -691,31 +693,31 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count.py:93
+#: code:addons/stock_cycle_count/models/stock_cycle_count.py:0
 #, python-format
 msgid "You can only confirm cycle counts in state 'Planned'."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:42
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You can only have one zero confirmation rule per warehouse."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:75
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You cannot define a negative or null number of counts per period."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:80
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You cannot define a negative period."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_inventory.py:60
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid ""
 "You cannot modify the configuration of an Inventory Adjustment related to a "
@@ -723,13 +725,13 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:25
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Zero Confirmation"
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:33
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Zero confirmation rules can only have one warehouse assigned."
 msgstr ""
@@ -744,6 +746,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
 msgstr ""
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Nếu đánh dấu kiểm, các thông điệp mới yêu cầu sự có mặt của bạn."
 
 #~ msgid "Date of the last message posted on the record."
 #~ msgstr "Ngày của thông điệp gần nhất được ghi nhận trên một bản ghi"
