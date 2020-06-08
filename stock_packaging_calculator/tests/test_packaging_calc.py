@@ -9,7 +9,6 @@ class TestCalc(SavepointCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
-        cls.uom_kg = cls.env.ref("uom.product_uom_kgm")
         cls.product_a = cls.env["product.product"].create(
             {
                 "name": "Product A",
@@ -60,3 +59,91 @@ class TestCalc(SavepointCase):
             {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(50.5), expected)
+
+    def test_calc_sub1(self):
+        """Test contained packaging behavior 1."""
+        expected = [
+            {
+                "id": self.pkg_pallet.id,
+                "qty": 1,
+                "name": self.pkg_pallet.name,
+                "contained": [
+                    {
+                        "id": self.pkg_big_box.id,
+                        "qty": 10,
+                        "name": self.pkg_big_box.name,
+                    },
+                ],
+            },
+            {
+                "id": self.pkg_big_box.id,
+                "qty": 3,
+                "name": self.pkg_big_box.name,
+                "contained": [
+                    {"id": self.pkg_box.id, "qty": 4, "name": self.pkg_box.name},
+                ],
+            },
+            {
+                "id": self.pkg_box.id,
+                "qty": 1,
+                "name": self.pkg_box.name,
+                "contained": [
+                    {"id": self.uom_unit.id, "qty": 50, "name": self.uom_unit.name},
+                ],
+            },
+            {
+                "id": self.uom_unit.id,
+                "qty": 5,
+                "name": self.uom_unit.name,
+                "contained": [],
+            },
+        ]
+        self.assertEqual(
+            self.product_a.product_qty_by_packaging(2655, with_contained=True),
+            expected,
+        )
+
+    def test_calc_sub2(self):
+        """Test contained packaging behavior 1."""
+        self.pkg_box.qty = 30
+        expected = [
+            {
+                "id": self.pkg_pallet.id,
+                "qty": 1,
+                "name": self.pkg_pallet.name,
+                "contained": [
+                    {
+                        "id": self.pkg_big_box.id,
+                        "qty": 10,
+                        "name": self.pkg_big_box.name,
+                    },
+                ],
+            },
+            {
+                "id": self.pkg_big_box.id,
+                "qty": 3,
+                "name": self.pkg_big_box.name,
+                "contained": [
+                    {"id": self.pkg_box.id, "qty": 6, "name": self.pkg_box.name},
+                    {"id": self.uom_unit.id, "qty": 20, "name": self.uom_unit.name},
+                ],
+            },
+            {
+                "id": self.pkg_box.id,
+                "qty": 1,
+                "name": self.pkg_box.name,
+                "contained": [
+                    {"id": self.uom_unit.id, "qty": 30, "name": self.uom_unit.name},
+                ],
+            },
+            {
+                "id": self.uom_unit.id,
+                "qty": 25,
+                "name": self.uom_unit.name,
+                "contained": [],
+            },
+        ]
+        self.assertEqual(
+            self.product_a.product_qty_by_packaging(2655, with_contained=True),
+            expected,
+        )
