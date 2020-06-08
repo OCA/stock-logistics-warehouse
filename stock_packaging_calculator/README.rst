@@ -25,8 +25,20 @@ Stock packaging calculator
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-
 Basic module providing an helper method to calculate the quantity of product by packaging.
+
+.. IMPORTANT::
+   This is an alpha version, the data model and design can change at any time without warning.
+   Only for development or testing purpose, do not use in production.
+   `More details on development status <https://odoo-community.org/page/development-status>`_
+
+**Table of contents**
+
+.. contents::
+   :local:
+
+Usage
+=====
 
 Imagine you have the following packagings:
 
@@ -38,21 +50,32 @@ and you have to pick from your warehouse 2860 Units.
 
 Then you can do:
 
-    >>> product.product_qty_by_packaging(2860)
+    .. code-block::
 
-    [(2, "Pallet"), (1, "Big Box"), (7, "Box"), (10, "Units")]
+        >>> product.product_qty_by_packaging(2860)
+
+        [
+            {"id": 1, "qty": 2, "name": "Pallet"},
+            {"id": 2, "qty": 1, "name": "Big box"},
+            {"id": 3, "qty": 7, "name": "Box"},
+            {"id": 100, "qty": 10, "name": "Units"},
+        ]
 
 With this you can show a proper message to warehouse operators to quickly pick the quantity they need.
 
-.. IMPORTANT::
-   This is an alpha version, the data model and design can change at any time without warning.
-   Only for development or testing purpose, do not use in production.
-   `More details on development status <https://odoo-community.org/page/development-status>`_
+Optionally you can get contained packaging by passing `with_contained` flag:
 
-**Table of contents**
 
-.. contents::
-   :local:
+    .. code-block::
+
+        >>> product.product_qty_by_packaging(2860, with_contained=True)
+
+        [
+            {"id": 1, "qty": 2, "name": "Pallet", "contained": [{"id": 2, "qty": 2, "name": "Big box"}]},
+            {"id": 2, "qty": 1, "name": "Big box", "contained": [{"id": 3, "qty": 10, "name": "Box"}]},
+            {"id": 3, "qty": 7, "name": "Box", "contained": [{"id": 100, "qty": 50, "name": "Units"}]},
+            {"id": 100, "qty": 10, "name": "Units", "contained": []},},
+        ]
 
 Known issues / Roadmap
 ======================
