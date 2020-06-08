@@ -30,24 +30,33 @@ class TestCalc(SavepointCase):
 
     def test_calc_1(self):
         """Test easy behavior 1."""
-        self.assertEqual(
-            self.product_a.product_qty_by_packaging(2655),
-            [(1, "Pallet"), (3, "Big Box"), (1, "Box"), (5, self.uom_unit.name)],
-        )
+        expected = [
+            {"id": self.pkg_pallet.id, "qty": 1, "name": self.pkg_pallet.name},
+            {"id": self.pkg_big_box.id, "qty": 3, "name": self.pkg_big_box.name},
+            {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
+            {"id": self.uom_unit.id, "qty": 5, "name": self.uom_unit.name},
+        ]
+        self.assertEqual(self.product_a.product_qty_by_packaging(2655), expected)
 
     def test_calc_2(self):
         """Test easy behavior 2."""
-        self.assertEqual(
-            self.product_a.product_qty_by_packaging(350), [(1, "Big Box"), (3, "Box")]
-        )
+        expected = [
+            {"id": self.pkg_big_box.id, "qty": 1, "name": self.pkg_big_box.name},
+            {"id": self.pkg_box.id, "qty": 3, "name": self.pkg_box.name},
+        ]
+        self.assertEqual(self.product_a.product_qty_by_packaging(350), expected)
 
     def test_calc_3(self):
         """Test easy behavior 3."""
-        self.assertEqual(
-            self.product_a.product_qty_by_packaging(80),
-            [(1, "Box"), (30, self.uom_unit.name)],
-        )
+        expected = [
+            {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
+            {"id": self.uom_unit.id, "qty": 30, "name": self.uom_unit.name},
+        ]
+        self.assertEqual(self.product_a.product_qty_by_packaging(80), expected)
 
     def test_calc_6(self):
         """Test fractional qty is lost."""
-        self.assertEqual(self.product_a.product_qty_by_packaging(50.5), [(1, "Box")])
+        expected = [
+            {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
+        ]
+        self.assertEqual(self.product_a.product_qty_by_packaging(50.5), expected)
