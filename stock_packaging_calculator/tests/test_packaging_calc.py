@@ -4,6 +4,10 @@ from odoo.tests import SavepointCase
 
 
 class TestCalc(SavepointCase):
+
+    at_install = False
+    post_install = True
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -12,7 +16,6 @@ class TestCalc(SavepointCase):
         cls.product_a = cls.env["product.product"].create(
             {
                 "name": "Product A",
-                "type": "product",
                 "uom_id": cls.uom_unit.id,
                 "uom_po_id": cls.uom_unit.id,
             }
@@ -25,6 +28,46 @@ class TestCalc(SavepointCase):
         )
         cls.pkg_pallet = cls.env["product.packaging"].create(
             {"name": "Pallet", "product_id": cls.product_a.id, "qty": 2000}
+        )
+
+    def test_contained_mapping(self):
+        self.assertEqual(
+            self.product_a.packaging_contained_mapping,
+            {
+                str(self.pkg_pallet.id): [
+                    {
+                        "id": self.pkg_big_box.id,
+                        "qty": 10,
+                        "name": self.pkg_big_box.name,
+                    },
+                ],
+                str(self.pkg_big_box.id): [
+                    {"id": self.pkg_box.id, "qty": 4, "name": self.pkg_box.name},
+                ],
+                str(self.pkg_box.id): [
+                    {"id": self.uom_unit.id, "qty": 50, "name": self.uom_unit.name},
+                ],
+            },
+        )
+        # Update pkg qty
+        self.pkg_pallet.qty = 4000
+        self.assertEqual(
+            self.product_a.packaging_contained_mapping,
+            {
+                str(self.pkg_pallet.id): [
+                    {
+                        "id": self.pkg_big_box.id,
+                        "qty": 20,
+                        "name": self.pkg_big_box.name,
+                    },
+                ],
+                str(self.pkg_big_box.id): [
+                    {"id": self.pkg_box.id, "qty": 4, "name": self.pkg_box.name},
+                ],
+                str(self.pkg_box.id): [
+                    {"id": self.uom_unit.id, "qty": 50, "name": self.uom_unit.name},
+                ],
+            },
         )
 
     def test_calc_1(self):
@@ -95,7 +138,7 @@ class TestCalc(SavepointCase):
                 "id": self.uom_unit.id,
                 "qty": 5,
                 "name": self.uom_unit.name,
-                "contained": [],
+                "contained": None,
             },
         ]
         self.assertEqual(
@@ -140,7 +183,7 @@ class TestCalc(SavepointCase):
                 "id": self.uom_unit.id,
                 "qty": 25,
                 "name": self.uom_unit.name,
-                "contained": [],
+                "contained": None,
             },
         ]
         self.assertEqual(
