@@ -103,7 +103,9 @@ class StockMoveLocationWizard(models.TransientModel):
         self.stock_move_location_line_ids = False
 
     def _get_locations_domain(self):
-        return [('usage', '=', 'internal')]
+        return ['|',
+                ('company_id', '=', self.env.user.company_id.id),
+                ('company_id', '=', False)]
 
     def _create_picking(self):
         return self.env['stock.picking'].create({
