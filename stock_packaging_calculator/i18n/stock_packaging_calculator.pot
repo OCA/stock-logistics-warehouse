@@ -14,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_packaging_calculator
+#: model:ir.model.fields,field_description:stock_packaging_calculator.field_product_product__packaging_contained_mapping
+msgid "Packaging Contained Mapping"
+msgstr ""
+
+#. module: stock_packaging_calculator
 #: model:ir.model,name:stock_packaging_calculator.model_product_product
 msgid "Product"
+msgstr ""
+
+#. module: stock_packaging_calculator
+#: model:ir.model.fields,help:stock_packaging_calculator.field_product_product__packaging_contained_mapping
+msgid "Technical field to store contained packaging. "
 msgstr ""
