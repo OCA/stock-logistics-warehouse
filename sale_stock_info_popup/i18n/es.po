@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_stock_info_popup
+# 	* sale_stock_info_popup
 #
 msgid ""
 msgstr ""
@@ -18,7 +18,9 @@ msgstr ""
 
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,help:sale_stock_info_popup.field_sale_order_line__product_type
-msgid "A storable product is a product for which you manage stock. The Inventory app has to be installed.\n"
+msgid ""
+"A storable product is a product for which you manage stock. The Inventory "
+"app has to be installed.\n"
 "A consumable product is a product for which stock is not managed.\n"
 "A service is a non-material product you provide."
 msgstr ""
@@ -37,7 +39,7 @@ msgstr "Todas las operaciones planeadas incluidas"
 
 #. module: sale_stock_info_popup
 #. openerp-web
-#: code:addons/sale_stock_info_popup/static/src/js/qty_at_date_widget.js:71
+#: code:addons/sale_stock_info_popup/static/src/js/qty_at_date_widget.js:91
 #, python-format
 msgid "Availability"
 msgstr "Disponibilidad"
@@ -63,10 +65,14 @@ msgstr "Entrega esperada"
 
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,help:sale_stock_info_popup.field_product_product__free_qty
-msgid "Forecast quantity (computed as Quantity On Hand - reserved quantity)\n"
-"In a context with a single Stock Location, this includes goods stored in this location, or any of its children.\n"
-"In a context with a single Warehouse, this includes goods stored in the Stock Location of this Warehouse, or any of its children.\n"
-"Otherwise, this includes goods stored in any Stock Location with 'internal' type."
+msgid ""
+"Forecast quantity (computed as Quantity On Hand - reserved quantity)\n"
+"In a context with a single Stock Location, this includes goods stored in "
+"this location, or any of its children.\n"
+"In a context with a single Warehouse, this includes goods stored in the "
+"Stock Location of this Warehouse, or any of its children.\n"
+"Otherwise, this includes goods stored in any Stock Location with 'internal' "
+"type."
 msgstr ""
 "Cantidad prevista (calculada como Cantidad disponible - cantidad reservada)\n"
 "En un contexto con una única Ubicación de inventario, esto incluye bienes "
