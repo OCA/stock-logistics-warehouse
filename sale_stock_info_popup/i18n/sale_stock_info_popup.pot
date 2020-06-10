@@ -29,7 +29,7 @@ msgstr ""
 
 #. module: sale_stock_info_popup
 #. openerp-web
-#: code:addons/sale_stock_info_popup/static/src/js/qty_at_date_widget.js:71
+#: code:addons/sale_stock_info_popup/static/src/js/qty_at_date_widget.js:91
 #, python-format
 msgid "Availability"
 msgstr ""
