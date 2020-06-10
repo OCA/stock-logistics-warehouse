@@ -5,6 +5,7 @@ odoo.define('sale_stock.QtyAtDateWidget', function (require) {
 "use strict";
 
 var core = require('web.core');
+var ListRenderer = require('web.ListRenderer')
 var QWeb = core.qweb;
 
 var Widget = require('web.Widget');
@@ -12,6 +13,25 @@ var widget_registry = require('web.widget_registry');
 
 var _t = core._t;
 var time = require('web.time');
+
+/**
+ * Make the widget fully compatible with tree views
+ */
+ListRenderer.include({
+    /**
+     * @override
+     */
+    _renderBodyCell: function (record, node) {
+        var $td = this._super.apply(this, arguments);
+        if (node.tag === 'widget' && node.attrs.name === 'qty_at_date_widget') {
+            // Workaround: Thanks to this class the column will be ignored
+            // when try active a cell in the list.
+            // See: https://github.com/odoo/odoo/blob/c881e3fe2a8b3db43fa9613a52b996fdfab21392/addons/web/static/src/js/views/list/list_editable_renderer.js#L814
+            $td.addClass('o_list_button');
+        }
+        return $td;
+    }
+})
 
 var QtyAtDateWidget = Widget.extend({
     template: 'sale_stock.qtyAtDate',
