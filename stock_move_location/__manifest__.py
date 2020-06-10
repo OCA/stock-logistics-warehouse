@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 {
     "name": "Move Stock Location",
-    "version": "12.0.1.3.1",
+    "version": "12.0.1.3.2",
     "author": "Julius Network Solutions, "
               "Odoo Community Association (OCA)",
     "summary": "This module allows to move all stock "
