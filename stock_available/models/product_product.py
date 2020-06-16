@@ -4,7 +4,6 @@
 
 from odoo import api, fields, models
 
-from odoo.addons import decimal_precision as dp
 from odoo.addons.stock.models.product import OPERATORS
 
 
@@ -17,7 +16,6 @@ class ProductProduct(models.Model):
 
     _inherit = "product.product"
 
-    @api.multi
     def _compute_available_quantities_dict(self):
         stock_dict = self._compute_quantities_dict(
             self._context.get("lot_id"),
@@ -34,7 +32,6 @@ class ProductProduct(models.Model):
             }
         return res, stock_dict
 
-    @api.multi
     @api.depends("virtual_available")
     def _compute_available_quantities(self):
         res, _ = self._compute_available_quantities_dict()
@@ -44,7 +41,7 @@ class ProductProduct(models.Model):
                     product[key] = value
 
     immediately_usable_qty = fields.Float(
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         compute="_compute_available_quantities",
         search="_search_immediately_usable_qty",
         string="Available to promise",
@@ -55,7 +52,7 @@ class ProductProduct(models.Model):
     )
     potential_qty = fields.Float(
         compute="_compute_available_quantities",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         string="Potential",
         help="Quantity of this Product that could be produced using "
         "the materials already at hand.",
