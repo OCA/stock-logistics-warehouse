@@ -4,14 +4,12 @@
 
 from odoo import api, fields, models
 
-from odoo.addons import decimal_precision as dp
 from odoo.addons.stock.models.product import OPERATORS
 
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    @api.multi
     @api.depends(
         "product_variant_ids.immediately_usable_qty",
         "product_variant_ids.potential_qty",
@@ -23,7 +21,6 @@ class ProductTemplate(models.Model):
                 if key in product._fields:
                     product[key] = value
 
-    @api.multi
     def _compute_available_quantities_dict(self):
         variants_dict, _ = self.mapped(
             "product_variant_ids"
@@ -51,7 +48,7 @@ class ProductTemplate(models.Model):
         return res
 
     immediately_usable_qty = fields.Float(
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         compute="_compute_available_quantities",
         search="_search_immediately_usable_qty",
         string="Available to promise",
@@ -62,7 +59,7 @@ class ProductTemplate(models.Model):
     )
     potential_qty = fields.Float(
         compute="_compute_available_quantities",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         string="Potential",
         help="Quantity of this Product that could be produced using "
         "the materials already at hand. "
