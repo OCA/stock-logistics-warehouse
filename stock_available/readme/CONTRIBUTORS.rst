@@ -13,3 +13,7 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
     * Sergio Teruel <sergio.teruel@tecnativa.com>
+
+* `Ecosoft <http://ecosoft.co.th/>`_:
+
+    * Pimolnat Suntian <pimolnats@ecosoft.co.th>
