@@ -17,7 +17,6 @@ class ProductProduct(models.Model):
     def _compute_available_quantities(self):
         super(ProductProduct, self)._compute_available_quantities()
 
-    @api.multi
     def _get_bom_id_domain(self):
         """
         Real multi domain
@@ -31,7 +30,6 @@ class ProductProduct(models.Model):
             ("product_tmpl_id", "in", self.mapped("product_tmpl_id.id")),
         ]
 
-    @api.multi
     @api.depends("product_tmpl_id")
     def _compute_bom_id(self):
         bom_obj = self.env["mrp.bom"]
@@ -44,7 +42,6 @@ class ProductProduct(models.Model):
             if product_boms:
                 product.bom_id = first(product_boms)
 
-    @api.multi
     def _compute_available_quantities_dict(self):
         res, stock_dict = super(
             ProductProduct, self
@@ -117,7 +114,6 @@ class ProductProduct(models.Model):
 
         return res, stock_dict
 
-    @api.multi
     def _explode_boms(self):
         """
         return a dict by product_id of exploded bom lines
