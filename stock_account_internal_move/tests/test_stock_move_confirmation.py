@@ -131,4 +131,8 @@ class StockMoveConfirmationCase(common.SavepointCase):
             self.location_from.valuation_out_account_id.id,
             self.location_to.valuation_in_account_id.id,
             self.fake_stock_journal.id,
+            1,
+            'test',
+            1000,
+            50,
         )
