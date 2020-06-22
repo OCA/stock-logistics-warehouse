@@ -85,7 +85,9 @@ class StockLocation(models.Model):
           highlighting the cell using a laser pointer.
         """
         if self.vertical_lift_shuttle_id.hardware == "kardex":
-            payload = self._hardware_kardex_prepare_payload()
+            payload = self._hardware_kardex_prepare_payload(
+                cell_location=cell_location
+            )
             _logger.debug("Sending to kardex: {}", payload)
             # TODO implement the communication with kardex
         else:
