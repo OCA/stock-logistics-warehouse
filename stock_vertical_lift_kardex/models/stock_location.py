@@ -32,7 +32,9 @@ class StockLocation(models.Model):
         subst = {
             "code": code,
             "hostId": self.env["ir.sequence"].next_by_code("vertical.lift.command"),
-            "addr": shuttle.name,
+            # hard code the gate for now.
+            # TODO proper handling of multiple gates for 1 lift.
+            "addr": shuttle.name + '-1',
             "carrier": self.level,
             "carrierNext": "0",
             "x": x,
