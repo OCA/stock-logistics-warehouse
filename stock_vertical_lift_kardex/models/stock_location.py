@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import models
+from odoo import _, exceptions, models
 
 _logger = logging.getLogger(__name__)
 
@@ -12,6 +12,11 @@ class StockLocation(models.Model):
     _inherit = "stock.location"
 
     def _hardware_kardex_prepare_payload(self, cell_location=None):
+        if self.level is False:
+            raise exceptions.UserError(
+                _('Shuttle tray %s has no level. '
+                  'Please fix the configuration') % self.display_name
+            )
         message_template = (
             "{code}|{hostId}|{addr}|{carrier}|{carrierNext}|"
             "{x}|{y}|{boxType}|{Q}|{order}|{part}|{desc}|\r\n"
@@ -27,6 +32,12 @@ class StockLocation(models.Model):
             code = "61"  # ping
         if cell_location:
             x, y = cell_location.tray_cell_center_position()
+            if x == 0 and y == 0:
+                raise exceptions.UserError(
+                    _('Cell location %s has no position. '
+                      'Check if the dimensions of tray %s '
+                      'are properly set in the tray type.') % (cell_location.display_name, self.name)
+                )
         else:
             x, y = "", ""
         subst = {
