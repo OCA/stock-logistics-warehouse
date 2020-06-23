@@ -4,7 +4,7 @@
 {
     "name": "Stock Warehouse Calendar",
     "summary": "Adds a calendar to the Warehouse",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Eficent, "
