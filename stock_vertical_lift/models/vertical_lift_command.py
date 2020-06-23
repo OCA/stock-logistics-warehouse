@@ -35,7 +35,10 @@ class VerticalLiftCommand(models.Model):
 
     def _get_key(self, answer):
         key = answer.split("|")[1:2]
-        return key
+        if key:
+            return key[0]
+        else:
+            return ''
 
     @api.model_create_multi
     def create(self, vals_list):
