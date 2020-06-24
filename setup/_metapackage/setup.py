@@ -31,6 +31,7 @@ setuptools.setup(
         'odoo12-addon-stock_inventory_exclude_sublocation',
         'odoo12-addon-stock_inventory_lockdown',
         'odoo12-addon-stock_inventory_preparation_filter',
+        'odoo12-addon-stock_inventory_revaluation',
         'odoo12-addon-stock_inventory_valuation_location',
         'odoo12-addon-stock_inventory_verification_request',
         'odoo12-addon-stock_location_limit_product',
