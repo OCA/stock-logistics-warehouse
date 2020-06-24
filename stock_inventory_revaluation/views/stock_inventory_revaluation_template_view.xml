@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_inventory_revaluation_tmpl_form" model="ir.ui.view">
+        <field name="name">stock.inventory.revaluation.tmpl.form</field>
+        <field name="model">stock.inventory.revaluation.template</field>
+        <field name="arch" type="xml">
+            <form string="Stock Inventory Revaluation Template">
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="name"/>
+                            <field name="revaluation_type"/>
+                        </group>
+                        <group name="right">
+                            <field name="journal_id"/>
+                            <field name="increase_account_id"/>
+                            <field name="decrease_account_id"/>
+                        </group>
+                        <group name="remarks" colspan="2">
+                            <field name="remarks"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_stock_inventory_revaluation_tmpl_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.revaluation.tmpl.tree</field>
+        <field name="model">stock.inventory.revaluation.template</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Inventory Revaluation Template">
+                <field name="name"/>
+                <field name="revaluation_type"/>
+                <field name="remarks"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_inventory_revaluation_tmpl_tree" model="ir.actions.act_window">
+        <field name="name">Inventory Revaluation Template</field>
+        <field name="res_model">stock.inventory.revaluation.template</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to start a new Stock Inventory Revaluation Template.
+          </p>
+        </field>
+    </record>
+
+   <menuitem action="action_stock_inventory_revaluation_tmpl_tree"
+             id="menu_action_stock_inventory_revaluation_tmpl_tree"
+             parent="stock.menu_stock_config_settings"
+             groups="stock.group_stock_manager"
+             sequence="100"/>
+
+</odoo>

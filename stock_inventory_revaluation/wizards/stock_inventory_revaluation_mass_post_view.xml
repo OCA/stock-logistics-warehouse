@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view"
+            id="stock_inventory_revaluation_mass_post_form">
+      <field name="name">stock.inventory.revaluation.mass.post.form</field>
+      <field name="model">stock.inventory.revaluation.mass.post</field>
+      <field name="arch" type="xml">
+        <form string="Get Quants">
+          <footer>
+            <button name="process" string="Post" type="object"
+                    class="oe_highlight"/>
+            or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_stock_inventory_revaluation_mass_post"
+            model="ir.actions.act_window">
+      <field name="name">Post Inventory Revaluation</field>
+      <field name="res_model">stock.inventory.revaluation.mass.post</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id"
+             ref="stock_inventory_revaluation_mass_post_form"/>
+      <field name="target">new</field>
+      <field name="binding_model_id" ref="model_stock_inventory_revaluation" />
+    </record>
+
+</odoo>
