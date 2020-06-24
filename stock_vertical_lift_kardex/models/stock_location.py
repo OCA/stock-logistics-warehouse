@@ -38,6 +38,7 @@ class StockLocation(models.Model):
                       'Check if the dimensions of tray %s '
                       'are properly set in the tray type.') % (cell_location.display_name, self.name)
                 )
+            x, y = int(x), int(y)
         else:
             x, y = "", ""
         subst = {
