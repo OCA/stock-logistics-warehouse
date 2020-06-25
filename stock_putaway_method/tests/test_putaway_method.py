@@ -8,5 +8,5 @@ class TestPutawayMethod(TransactionCase):
 
     # Check if "fixed" is a valid putaway method
     def test_01_putaway_methods(self):
-        field_method = self.env['product.putaway']._fields.get('method')
-        self.assertIn('fixed', field_method.get_values(self.env))
+        field_method = self.env["product.putaway"]._fields.get("method")
+        self.assertIn("fixed", field_method.get_values(self.env))
