@@ -11,9 +11,16 @@ class VerticalLiftOperationPick(models.Model):
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
+        if not self.current_move_line_id or self.current_move_line_id == "done":
+            return
         location = self.env["stock.location"].search([("barcode", "=", barcode)])
         if location:
             self.current_move_line_id.location_dest_id = location
+            # even if location_dest_id is a related, we need to set it, otherwise
+            # it's not refreshed on the view. We need both updates otherwise the
+            # line is not updated, probably because on_barcode_scanner is called
+            # in an onchange. (Even if the related is not readonly, tested.)
+            self.location_dest_id = location
             self.operation_descr = _("Save")
         else:
             self.env.user.notify_warning(
@@ -21,9 +28,8 @@ class VerticalLiftOperationPick(models.Model):
             )
 
     def _domain_move_lines_to_do(self):
-        # TODO check domain
         domain = [
-            ("state", "=", "assigned"),
+            ("state", "in", ("assigned", "partially_available")),
             ("location_id", "child_of", self.location_id.id),
         ]
         return domain
@@ -32,9 +38,8 @@ class VerticalLiftOperationPick(models.Model):
         shuttle_locations = self.env["stock.location"].search(
             [("vertical_lift_kind", "=", "view")]
         )
-        # TODO check domain
         domain = [
-            ("state", "=", "assigned"),
+            ("state", "in", ("assigned", "partially_available")),
             ("location_id", "child_of", shuttle_locations.ids),
         ]
         return domain
@@ -43,10 +48,8 @@ class VerticalLiftOperationPick(models.Model):
         self.current_move_line_id.fetch_vertical_lift_tray_source()
 
     def process_current(self):
-        # test code, TODO the smart one
-        # (scan of barcode increments qty, save calls action_done?)
         line = self.current_move_line_id
-        if line.state != "done":
+        if line.state in ("assigned", "partially_available"):
             line.qty_done = line.product_qty
             line.move_id._action_done()
 
