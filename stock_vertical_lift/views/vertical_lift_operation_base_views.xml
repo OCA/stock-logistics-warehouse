@@ -140,6 +140,7 @@
                                 <field
                                     name="location_dest_id"
                                     class="bg-primary o_shuttle_highlight"
+                                    readonly="1"
                                     options="{'no_open': True}"
                                 />
                             </div>

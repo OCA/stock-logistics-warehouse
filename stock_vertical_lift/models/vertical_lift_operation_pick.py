@@ -11,15 +11,10 @@ class VerticalLiftOperationPick(models.Model):
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
-        if not self.current_move_line_id or self.current_move_line_id == "done":
+        if not self.current_move_line_id or self.current_move_line_id.state == "done":
             return
         location = self.env["stock.location"].search([("barcode", "=", barcode)])
         if location:
-            self.current_move_line_id.location_dest_id = location
-            # even if location_dest_id is a related, we need to set it, otherwise
-            # it's not refreshed on the view. We need both updates otherwise the
-            # line is not updated, probably because on_barcode_scanner is called
-            # in an onchange. (Even if the related is not readonly, tested.)
             self.location_dest_id = location
             self.operation_descr = _("Save")
         else:
