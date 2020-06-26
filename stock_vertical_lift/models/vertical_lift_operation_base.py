@@ -36,6 +36,20 @@ class VerticalLiftOperationBase(models.AbstractModel):
         )
     ]
 
+    def onchange(self, values, field_name, field_onchange):
+        if field_name == "_barcode_scanned":
+            # _barcode_scanner is implemented (in the barcodes module) as an
+            # onchange, which is really annoying when we want it to act as a
+            # normal button and actually have side effect in the database
+            # (update line, go to the next step, ...). This override shorts the
+            # onchange call and calls the scanner method as a normal method.
+            self.on_barcode_scanned(values['_barcode_scanned'])
+            # We can't know which fields on_barcode_scanned changed, refresh
+            # everything.
+            return {"value": self.read()[0]}
+        else:
+            return super().onchange(values, field_name, field_onchange)
+
     @api.depends()
     def _compute_number_of_ops(self):
         for record in self:
@@ -164,7 +178,7 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     location_dest_id = fields.Many2one(
         string="Destination",
         related="current_move_line_id.location_dest_id",
-        readonly=True,
+        readonly=False,
     )
     # TODO add a glue addon with product_expiry to add the field
 
