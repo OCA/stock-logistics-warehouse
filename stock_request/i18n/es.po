@@ -181,7 +181,6 @@ msgstr "Creado el"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy
-#| msgid "Stock requests"
 msgid "Current requests"
 msgstr "Solicitudes de existencias"
 
@@ -337,7 +336,6 @@ msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy
-#| msgid "In progress"
 msgid "In Progress"
 msgstr "En progreso"
 
@@ -490,7 +488,6 @@ msgstr "Numero de Acciones"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_error_counter
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_error_counter
 #, fuzzy
-#| msgid "Number of error"
 msgid "Number of errors"
 msgstr "Número de error"
 
@@ -725,7 +722,6 @@ msgstr "Rutas"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_sms_error
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_sms_error
 #, fuzzy
-#| msgid "Message Delivery error"
 msgid "SMS Delivery error"
 msgstr "Mensaje de Entrega de error"
 
@@ -879,7 +875,6 @@ msgstr "Integración de solicitudes de existencias con tarjetas Kanbans"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #, fuzzy
-#| msgid "Stock Requests Search"
 msgid "Stock Requests Order Search"
 msgstr "Buscar solicitudes de existencias"
 
