@@ -24,12 +24,12 @@ msgid "Inventory Line"
 msgstr ""
 
 #. module: stock_inventory_virtual_location
-#: model:ir.model.fields,field_description:stock_inventory_virtual_location.field_stock_change_product_qty_virtual_location_id
+#: model:ir.model.fields,field_description:stock_inventory_virtual_location.field_stock_change_product_qty__virtual_location_id
 msgid "Virtual Adjustment Location"
 msgstr ""
 
 #. module: stock_inventory_virtual_location
-#: model:ir.model.fields,field_description:stock_inventory_virtual_location.field_stock_inventory_line_virtual_location_id
+#: model:ir.model.fields,field_description:stock_inventory_virtual_location.field_stock_inventory_line__virtual_location_id
 msgid "Virtual Location"
 msgstr ""
 
