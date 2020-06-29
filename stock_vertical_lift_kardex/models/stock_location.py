@@ -14,8 +14,8 @@ class StockLocation(models.Model):
     def _hardware_kardex_prepare_payload(self, cell_location=None):
         if self.level is False:
             raise exceptions.UserError(
-                _('Shuttle tray %s has no level. '
-                  'Please fix the configuration') % self.display_name
+                _("Shuttle tray %s has no level. " "Please fix the configuration")
+                % self.display_name
             )
         message_template = (
             "{code}|{hostId}|{addr}|{carrier}|{carrierNext}|"
@@ -34,9 +34,12 @@ class StockLocation(models.Model):
             x, y = cell_location.tray_cell_center_position()
             if x == 0 and y == 0:
                 raise exceptions.UserError(
-                    _('Cell location %s has no position. '
-                      'Check if the dimensions of tray %s '
-                      'are properly set in the tray type.') % (cell_location.display_name, self.name)
+                    _(
+                        "Cell location %s has no position. "
+                        "Check if the dimensions of tray %s "
+                        "are properly set in the tray type."
+                    )
+                    % (cell_location.display_name, self.name)
                 )
             x, y = int(x), int(y)
         else:
@@ -46,7 +49,7 @@ class StockLocation(models.Model):
             "hostId": self.env["ir.sequence"].next_by_code("vertical.lift.command"),
             # hard code the gate for now.
             # TODO proper handling of multiple gates for 1 lift.
-            "addr": shuttle.name + '-1',
+            "addr": shuttle.name + "-1",
             "carrier": self.level,
             "carrierNext": "0",
             "x": x,
@@ -97,9 +100,7 @@ class StockLocation(models.Model):
           highlighting the cell using a laser pointer.
         """
         if self.vertical_lift_shuttle_id.hardware == "kardex":
-            payload = self._hardware_kardex_prepare_payload(
-                cell_location=cell_location
-            )
+            payload = self._hardware_kardex_prepare_payload(cell_location=cell_location)
             _logger.debug("Sending to kardex: {}", payload)
             # TODO implement the communication with kardex
         else:
