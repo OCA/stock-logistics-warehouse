@@ -35,8 +35,7 @@ class TestInventory(VerticalLiftCase):
         self._update_qty_in_location(self.location_2a_x1y1, self.product_socks, 10)
         self._create_inventory([(self.location_2a_x1y1, self.product_socks)])
 
-        self.shuttle.switch_inventory()
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("inventory")
         self.assertEqual(operation.number_of_ops, 2)
         self.assertEqual(operation.number_of_ops_all, 3)
 
@@ -45,16 +44,17 @@ class TestInventory(VerticalLiftCase):
         inventory = self._create_inventory(
             [(self.location_1a_x1y1, self.product_socks)]
         )
-        self.shuttle.switch_inventory()
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("inventory")
+        self.assertEqual(operation.state, "quantity")
         self.assertEqual(operation.current_inventory_line_id, inventory.line_ids)
         # test the happy path, quantity is correct
         operation.quantity_input = 10.0
         result = operation.button_save()
+
         # state is reset
-        self.assertEqual(operation.state, "quantity")
+        # noop because we have no further lines
+        self.assertEqual(operation.state, "noop")
         self.assertFalse(operation.current_inventory_line_id)
-        self.assertEqual(operation.operation_descr, _("No operations"))
         self.assertTrue(inventory.line_ids.vertical_lift_done)
         self.assertEqual(inventory.state, "done")
         expected_result = {
@@ -72,8 +72,7 @@ class TestInventory(VerticalLiftCase):
         inventory = self._create_inventory(
             [(self.location_1a_x1y1, self.product_socks)]
         )
-        self.shuttle.switch_inventory()
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("inventory")
         line = operation.current_inventory_line_id
         self.assertEqual(line, inventory.line_ids)
 
@@ -83,9 +82,6 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(operation.quantity_input, 0.0)
         self.assertEqual(operation.state, "confirm_wrong_quantity")
         self.assertEqual(operation.current_inventory_line_id, line)
-        self.assertEqual(
-            operation.operation_descr, _("The quantity does not match, are you sure?")
-        )
 
         # entering the same quantity a second time validates
         operation.quantity_input = 12.0
@@ -94,3 +90,26 @@ class TestInventory(VerticalLiftCase):
 
         self.assertTrue(inventory.line_ids.vertical_lift_done)
         self.assertEqual(inventory.state, "done")
+
+    def test_inventory_next_line(self):
+        self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
+        self._update_qty_in_location(self.location_1a_x2y1, self.product_recovery, 10)
+        inventory = self._create_inventory(
+            [
+                (self.location_1a_x1y1, self.product_socks),
+                (self.location_1a_x2y1, self.product_recovery),
+            ]
+        )
+        inventory_lines = inventory.line_ids
+        operation = self._open_screen("inventory")
+        operation.quantity_input = 10.0
+        line1 = operation.current_inventory_line_id
+        result = operation.button_save()
+        self.assertFalse(result)  # no rainbow man
+
+        # go to next line
+        remaining_line = inventory_lines - line1
+        self.assertEqual(operation.state, "quantity")
+        self.assertEqual(operation.current_inventory_line_id, remaining_line)
+        self.assertEqual(operation.last_quantity_input, 0.0)
+        self.assertEqual(operation.quantity_input, 0.0)

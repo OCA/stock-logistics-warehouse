@@ -13,17 +13,7 @@ class TestPut(VerticalLiftCase):
         )
         cls.picking_in.action_confirm()
         cls.in_move_line = cls.picking_in.move_line_ids
-        cls.in_move_line.location_dest_id = cls.location_1a_x3y1
-
-    def _select_move_lines(self, shuttle, move_lines=None):
-        select_model = self.env["vertical.lift.operation.put.select"]
-        operation = shuttle._operation_for_mode()
-        select = select_model.create({"operation_id": operation.id})
-        if move_lines:
-            select.move_line_ids = [(6, 0, move_lines.ids)]
-        else:
-            select.action_add_all()
-        select._sync_lines()
+        cls.in_move_line.location_dest_id = cls.shuttle.location_id
 
     def test_put_action_open_screen(self):
         self.shuttle.switch_put()
@@ -41,127 +31,105 @@ class TestPut(VerticalLiftCase):
             self.env["stock.move.line"].browse(),
         )
 
-    def test_select_from_barcode(self):
-        self.shuttle.switch_put()
-        self.picking_in.action_cancel()
-        put1 = self._create_simple_picking_in(
-            self.product_socks, 10, self.location_1a_x1y1
-        )
-        put1.action_confirm()
-        put2 = self._create_simple_picking_in(
-            self.product_recovery, 10, self.location_1a_x2y1
-        )
-        put2.action_confirm()
-        select_model = self.env["vertical.lift.operation.put.select"]
-        operation = self.shuttle._operation_for_mode()
-        select = select_model.create({"operation_id": operation.id})
-        select.on_barcode_scanned(self.product_socks.barcode)
-        self.assertRecordValues(select, [{"move_line_ids": put1.move_line_ids.ids}])
-        select.on_barcode_scanned(self.product_recovery.barcode)
-        self.assertRecordValues(
-            select, [{"move_line_ids": (put1.move_line_ids | put2.move_line_ids).ids}]
-        )
-        select.action_validate()
-        self.assertEqual(len(operation.operation_line_ids), 2)
-        self.assertRecordValues(
-            operation.mapped("operation_line_ids"),
-            [
-                {"move_line_id": put1.move_line_ids.id},
-                {"move_line_id": put2.move_line_ids.id},
-            ],
-        )
-
-    def test_no_select_from_barcode_outside_location(self):
-        self.shuttle.switch_put()
-        self.picking_in.action_cancel()
-        location = self.env.ref("stock.location_refrigerator_small")
-        put1 = self._create_simple_picking_in(self.product_socks, 10, location)
-        put1.action_confirm()
-        select_model = self.env["vertical.lift.operation.put.select"]
-        operation = self.shuttle._operation_for_mode()
-        select = select_model.create({"operation_id": operation.id})
-        select.on_barcode_scanned(self.product_socks.barcode)
-        # the move line is outside of the vertical lift, should not be
-        # selected
-        self.assertRecordValues(select, [{"move_line_ids": []}])
-
     def test_put_count_move_lines(self):
-        self.shuttle.switch_put()
         self.picking_in.action_cancel()
         put1 = self._create_simple_picking_in(
             self.product_socks, 10, self.location_1a_x1y1
         )
         put1.action_confirm()
         put2 = self._create_simple_picking_in(
-            self.product_recovery, 10, self.location_1a_x2y1
+            self.product_recovery, 10, self.vertical_lift_loc
         )
         put2.action_confirm()
         put3 = self._create_simple_picking_in(
-            self.product_recovery, 10, self.location_2a_x1y1
+            self.product_recovery, 10, self.vertical_lift_loc
         )
         put3.action_confirm()
-        operation = self.shuttle._operation_for_mode()
-        self._select_move_lines(self.shuttle)
+        operation = self._open_screen("put")
         shuttle2 = self.env.ref(
             "stock_vertical_lift.stock_vertical_lift_demo_shuttle_2"
         )
-        shuttle2.switch_put()
-        operation2 = shuttle2._operation_for_mode()
-        self._select_move_lines(shuttle2)
+        operation2 = self._open_screen("put", shuttle=shuttle2)
 
-        self.assertEqual(operation.number_of_ops, 2)
+        # we don't really care about the "number_of_ops" for the
+        # put-away, as the move lines are supposed to have the whole
+        # whole shuttle view as destination
+        self.assertEqual(operation.number_of_ops, 1)
         self.assertEqual(operation.number_of_ops_all, 3)
-        self.assertEqual(operation2.number_of_ops, 1)
+        self.assertEqual(operation2.number_of_ops, 0)
         self.assertEqual(operation2.number_of_ops_all, 3)
 
-    def test_process_current_put(self):
-        self.shuttle.switch_put()
-        operation = self.shuttle._operation_for_mode()
-        self._select_move_lines(self.shuttle, self.in_move_line)
-        self.assertEqual(operation.current_move_line_id, self.in_move_line)
-        qty_to_process = self.in_move_line.product_qty
-        operation.process_current()
-        self.assertEqual(self.in_move_line.state, "done")
-        self.assertEqual(self.in_move_line.qty_done, qty_to_process)
+    def test_transition_start(self):
+        operation = self._open_screen("put")
+        # we begin with an empty screen, user has to scan a package, product,
+        # or lot
+        self.assertEqual(operation.state, "scan_source")
 
-    def test_transition_reset(self):
-        self.shuttle.switch_put()
-        operation = self.shuttle._operation_for_mode()
-        self._select_move_lines(self.shuttle, self.in_move_line)
-        operation.state = "scan_tray_type"
-        operation.reset_steps()
-        self.assertEqual(operation.step(), "scan_product")
-
-    def test_transition_scan_product(self):
-        self.shuttle.switch_put()
-        operation = self.shuttle._operation_for_mode()
-        self._select_move_lines(self.shuttle, self.in_move_line)
-        operation.state = "scan_product"
+    def test_transition_scan_source_to_scan_tray_type(self):
+        operation = self._open_screen("put")
+        self.assertEqual(operation.state, "scan_source")
         # wrong barcode, nothing happens
         operation.on_barcode_scanned("foo")
+        self.assertEqual(operation.state, "scan_source")
         # product scanned, move to next step
         operation.on_barcode_scanned(self.product_socks.barcode)
-        self.assertEqual(operation.step(), "scan_tray_type")
+        self.assertEqual(operation.state, "scan_tray_type")
+        self.assertEqual(operation.current_move_line_id, self.in_move_line)
 
-    def test_transition_scan_tray_type(self):
-        self.shuttle.switch_put()
-        operation = self.shuttle._operation_for_mode()
-        self._select_move_lines(self.shuttle, self.in_move_line)
+    def test_transition_scan_tray_type_to_save(self):
+        operation = self._open_screen("put")
+        # assume we already scanned the product
         operation.state = "scan_tray_type"
+        operation.current_move_line_id = self.in_move_line
         # wrong barcode, nothing happens
         operation.on_barcode_scanned("foo")
         # tray type scanned, move to next step
-        operation.on_barcode_scanned(operation.tray_type_id.code)
-        self.assertEqual(operation.step(), "save")
+        operation.on_barcode_scanned(self.location_1a.tray_type_id.code)
+        self.assertEqual(operation.state, "save")
+        # a cell has been set
+        self.assertTrue(
+            self.in_move_line.location_dest_id
+            in self.shuttle.location_id.child_ids.child_ids
+        )
+
+    def test_transition_scan_tray_type_no_empty_cell(self):
+        operation = self._open_screen("put")
+        # assume we already scanned the product
+        operation.state = "scan_tray_type"
+        operation.current_move_line_id = self.in_move_line
+        # create a tray type without location, which is the same as if all the
+        # locations of a tray type were full
+        new_tray_type = self.env["stock.location.tray.type"].create(
+            {"name": "new tray type", "code": "test", "rows": 1, "cols": 1}
+        )
+        operation.on_barcode_scanned(new_tray_type.code)
+        # should stay the same state
+        self.assertEqual(operation.state, "scan_tray_type")
+        # destination not changed
+        self.assertEqual(self.in_move_line.location_dest_id, self.shuttle.location_id)
 
     def test_transition_save(self):
-        self.shuttle.switch_put()
-        operation = self.shuttle._operation_for_mode()
-        self._select_move_lines(self.shuttle, self.in_move_line)
+        operation = self._open_screen("put")
+        # first steps of the workflow are done
+        operation.current_move_line_id = self.in_move_line
+        operation.current_move_line_id.location_dest_id = self.location_1a_x1y1
         operation.state = "save"
+        qty_to_process = self.in_move_line.product_qty
         operation.button_save()
-        self.assertEqual(operation.step(), "release")
+        self.assertEqual(self.in_move_line.state, "done")
+        self.assertEqual(self.in_move_line.qty_done, qty_to_process)
 
     def test_transition_button_release(self):
-        self.shuttle.switch_put()
-        self._test_button_release(self.in_move_line)
+        operation = self._open_screen("put")
+        move_line = self.in_move_line
+        # first steps of the workflow are done
+        operation.current_move_line_id = move_line
+        operation.current_move_line_id.location_dest_id = self.location_1a_x1y1
+        # for the test, we'll consider our last line has been delivered
+        move_line.qty_done = move_line.product_qty
+        move_line.move_id._action_done()
+
+        operation = self._open_screen("put")
+        operation.button_release()
+        self.assertEqual(operation.state, "scan_source")
+        self.assertFalse(operation.current_move_line_id)

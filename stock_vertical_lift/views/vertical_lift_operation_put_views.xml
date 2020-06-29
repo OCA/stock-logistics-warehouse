@@ -22,68 +22,16 @@
                 <attribute name="string">Put-Away Screen</attribute>
             </form>
             <xpath
-                expr="//div[hasclass('o_shuttle_actions')]/div[hasclass('o_shuttle_content_left')]"
-                position="inside"
+                expr="//div[hasclass('o_shuttle_header_right')]/field[@name='number_of_ops']"
+                position="attributes"
             >
-                <button
-                    name="action_select_operations"
-                    type="object"
-                    class="btn-primary"
-                    string="Select Operations"
-                    aria-label="Select Operations"
-                    title="Select Operations"
-                />
+                <attribute name="invisible">1</attribute>
             </xpath>
-            <field name="_barcode_scanned" position="before">
-                <!-- these fields have to be in the view otherwise they
-                     would be empty in the record sent to the _barcode_scanned
-                     onchange method
-                -->
-                <field name="state" invisible="1" />
-                <field name="current_operation_line_id" invisible="1" />
-            </field>
-        </field>
-    </record>
-    <record id="vertical_lift_operation_put_select_view" model="ir.ui.view">
-        <field name="name">vertical.lift.operation.put.select.view</field>
-        <field name="model">vertical.lift.operation.put.select</field>
-        <field name="arch" type="xml">
-            <form string="Select" class="o_vlift_shuttle_popup">
-                <field name="move_line_ids">
-                    <tree create="0" edit="0">
-                        <field name="product_id" />
-                    </tree>
-                    <form>
-                        <group>
-                            <field name="product_id" readonly="1" />
-                            <field name="product_uom_qty" readonly="1" />
-                            <field name="qty_done" readonly="1" />
-                        </group>
-                    </form>
-                </field>
-                <!-- this field has to be in the view otherwise it
-                     would be empty in the record sent to the _barcode_scanned
-                     onchange method
-                -->
-                <field name="operation_id" invisible="1" />
-                <field name="_barcode_scanned" widget="barcode_handler" />
-                <footer>
-                    <button
-                        name="action_validate"
-                        string="Validate"
-                        type="object"
-                        class="btn-primary"
-                    />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
-                    <button
-                        name="action_add_all"
-                        string="Add all"
-                        type="object"
-                        groups="base.group_no_one"
-                        class="btn-secondary"
-                    />
-                </footer>
-            </form>
+            <xpath
+                expr="//div[hasclass('o_shuttle_header_right')]/field[@name='number_of_ops']/following-sibling::span"
+                position="replace"
+            >
+            </xpath>
         </field>
     </record>
 </odoo>

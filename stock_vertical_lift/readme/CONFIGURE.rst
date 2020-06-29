@@ -37,3 +37,12 @@ in Odoo for each physical shuttle. Depending of the subsidiary addons installed
 (eg. Kardex), different options may be required (host address, ...). The base
 addon only includes shuttles of kind "simulation" which will not send orders to
 the hardware.
+
+Put-away configuration
+~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to use put-away in the vertical lift, the Receipts must have the
+vertical lift view as destination. E.g. create put-away rules on the products
+so when they arrive in WH/Stock, they are stored in WH/Stock/Vertical Lift. On
+the put-away screen, when scanning the tray type to store, the destination will
+be updated with an available cell of the same tray type in the current shuttle.

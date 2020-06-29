@@ -18,6 +18,8 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
         cls.vertical_lift_loc = cls.env.ref(
             "stock_vertical_lift.stock_location_vertical_lift"
         )
+        cls.stock_location = cls.env.ref("stock.stock_location_stock")
+        cls.customers_location = cls.env.ref("stock.stock_location_customers")
         cls.location_1a = cls.env.ref(
             "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a"
         )
@@ -48,6 +50,12 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
 
     def _update_qty_in_location(self, location, product, quantity):
         self.env["stock.quant"]._update_available_quantity(product, location, quantity)
+
+    def _open_screen(self, mode, shuttle=None):
+        getattr(shuttle or self.shuttle, "switch_{}".format(mode))()
+        # opening the screen can do some initialization for the steps
+        action = (shuttle or self.shuttle).action_open_screen()
+        return self.env[action["res_model"]].browse(action["res_id"])
 
     @classmethod
     def _create_simple_picking_out(cls, product, quantity):
@@ -133,15 +141,17 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
         inventory.action_start()
         return inventory
 
-    def _test_button_release(self, move_line):
+    def _test_button_release(self, move_line, expected_state):
         # for the test, we'll consider our last line has been delivered
         move_line.qty_done = move_line.product_qty
         move_line.move_id._action_done()
         # release, no further operation in queue
         operation = self.shuttle._operation_for_mode()
+        # the release button can be used only in the state... release
+        operation.state = "release"
         result = operation.button_release()
+        self.assertEqual(operation.state, expected_state)
         self.assertFalse(operation.current_move_line_id)
-        self.assertEqual(operation.operation_descr, _("No operations"))
         expected_result = {
             "effect": {
                 "fadeout": "slow",

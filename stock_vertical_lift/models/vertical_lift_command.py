@@ -38,7 +38,7 @@ class VerticalLiftCommand(models.Model):
         if key:
             return key[0]
         else:
-            return ''
+            return ""
 
     @api.model_create_multi
     def create(self, vals_list):
