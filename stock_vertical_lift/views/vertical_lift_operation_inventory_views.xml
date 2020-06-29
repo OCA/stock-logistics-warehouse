@@ -24,6 +24,11 @@
             <form position="inside">
                 <field name="state" invisible="1" />
             </form>
+            <button name="button_save" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('state', 'not in', ('quantity', 'confirm_wrong_quantity'))]}</attribute>
+            </button>
             <button name="button_release" position="attributes">
                 <attribute name="invisible">1</attribute>
             </button>
@@ -72,6 +77,7 @@
                                         name="quantity_input"
                                         default_focus="1"
                                         class="oe_inline"
+                                        attrs="{'readonly': [('state', 'not in', ('quantity', 'confirm_wrong_quantity'))]}"
                                     />
                                     <field
                                         name="product_uom_id"

@@ -1,9 +1,14 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+import logging
+from collections import namedtuple
+
+from odoo import api, fields, models
 
 from odoo.addons.base_sparse_field.models.fields import Serialized
+
+_logger = logging.getLogger(__name__)
 
 
 class VerticalLiftOperationBase(models.AbstractModel):
@@ -26,7 +31,18 @@ class VerticalLiftOperationBase(models.AbstractModel):
         string="Number of Operations in all shuttles",
     )
     mode = fields.Selection(related="shuttle_id.mode", readonly=True)
-    operation_descr = fields.Char(string="Operation", default="...", readonly=True)
+
+    state = fields.Selection(
+        selection=lambda self: self._selection_states(),
+        default=lambda self: self._initial_state,
+    )
+    _initial_state = None  # to define in sub-classes
+
+    # if there is an action and it's returning True, the transition is done,
+    # otherwise not
+    Transition = namedtuple("Transition", "current_state next_state action direct_eval")
+    # default values to None
+    Transition.__new__.__defaults__ = (None,) * len(Transition._fields)
 
     _sql_constraints = [
         (
@@ -36,6 +52,128 @@ class VerticalLiftOperationBase(models.AbstractModel):
         )
     ]
 
+    def _selection_states(self):
+        return []
+
+    def _transitions(self):
+        """Define the transitions between the states
+
+        To set in sub-classes.
+        It is a tuple of a ``Transition`` instances, evaluated in order.
+        A transition has a source step, a destination step, a function and a
+        flag ``direct_eval``.
+        When the function returns True, the transition is applied, otherwise,
+        the next transition matching the current step is evaluated.
+        When a transition has no function, it is always applied.
+        The flag ``direct_eval`` indicates that the workflow should directly
+        evaluates again the transitions to reach the next step. It allows to
+        use "virtual" steps that will never be kept for users but be used as
+        router.
+
+        The initial state must be defined in the attribute ``_initial_state``.
+
+        The transition from a step to another are triggered by a call to
+        ``next_step()``. This method is called in several places:
+
+        * ``reset_steps()`` (called when the screen opens)
+        * ``button_save()``, generally used to post the move
+        * ``button_release()``, generally used to go to the next line
+        * ``on_barcode_scanned()``, the calls to ``next_step()`` are to
+          implement in sub-classed if the scanned barcode leads to the next
+          step
+
+        Example of workflow described below:
+
+        ::
+            _initial_state = "noop"
+
+            def _selection_states(self):
+                return [
+                    ("noop", "No operations"),
+                    ("scan_destination", "Scan New Destination Location"),
+                    ("save", "Put goods in tray and save"),
+                    ("release", "Release"),
+                ]
+
+            def _transitions(self):
+                return (
+                    self.Transition(
+                        "noop",
+                        "scan_destination",
+                        lambda self: self.select_next_move_line()
+                    ),
+                    self.Transition("scan_destination", "save"),
+                    self.Transition("save", "release"),
+                    self.Transition(
+                        "release",
+                        "scan_destination",
+                        lambda self: self.select_next_move_line()
+                    ),
+                    self.Transition("release", "noop"),
+                )
+
+        When we arrive on the screen, the ``on_screen_open`` methods resets the
+        steps (``reset_steps()``). It ensures the current step is ``noop`` and
+        directly tries to reach the next step (call to ``next_step()``).
+
+        It tries to go from ``noop`` to ``scan_destination``, calling
+        ``self.select_next_move_line()``. If the method finds a line, it
+        returns True and the transition is applied, otherwise, the step stays
+        ``noop``.
+
+        The transitions from ``scan_destination`` and ``save`` and from
+        ``save`` and ``release`` are always applied when ``next_step()`` is
+        called (``scan_destination`` → ``save`` from ``on_barcode_scanned``
+        when a destination was found, ``save`` → ``release`` from the save
+        button).
+
+        When ``button_release()`` is called, it calls ``next_step()`` which
+        first evaluates ``self.select_next_move_line()``: if a move line remains, it
+        goes to ``scan_destination``, otherwise to ``noop``.
+
+        """
+        return ()
+
+    def step(self):
+        return self.state
+
+    def next_step(self, direct_eval=False):
+        current_state = self.state
+        for transition in self._transitions():
+            if direct_eval and not transition.direct_eval:
+                continue
+            if transition.current_state != current_state:
+                continue
+            if not transition.action or transition.action(self):
+                _logger.debug(
+                    "Transition %s → %s",
+                    transition.current_state,
+                    transition.next_state,
+                )
+                self.state = transition.next_state
+                break
+        # reevaluate the transitions if we have a new state with direct_eval transitions
+        if self.state != current_state and any(
+            transition.direct_eval
+            for transition in self._transitions()
+            if transition.current_state == self.state
+        ):
+            self.next_step(direct_eval=True)
+
+    def reset_steps(self):
+        if not self._initial_state:
+            raise NotImplementedError("_initial_state must be defined")
+        self.state = self._initial_state
+        self.next_step()
+
+    def on_barcode_scanned(self, barcode):
+        self.ensure_one()
+        # to implement in sub-classes
+
+    def on_screen_open(self):
+        """Called when the screen is opened"""
+        self.reset_steps()
+
     def onchange(self, values, field_name, field_onchange):
         if field_name == "_barcode_scanned":
             # _barcode_scanner is implemented (in the barcodes module) as an
@@ -43,7 +181,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
             # normal button and actually have side effect in the database
             # (update line, go to the next step, ...). This override shorts the
             # onchange call and calls the scanner method as a normal method.
-            self.on_barcode_scanned(values['_barcode_scanned'])
+            self.on_barcode_scanned(values["_barcode_scanned"])
             # We can't know which fields on_barcode_scanned changed, refresh
             # everything.
             return {"value": self.read()[0]}
@@ -60,16 +198,6 @@ class VerticalLiftOperationBase(models.AbstractModel):
         for record in self:
             record.number_of_ops_all = 0
 
-    def on_barcode_scanned(self, barcode):
-        self.ensure_one()
-        # to implement in sub-classes
-
-    def on_screen_open(self):
-        """Called when the screen is open
-
-        To implement in sub-classes.
-        """
-
     def action_open_screen(self):
         return self.shuttle_id.action_open_screen()
 
@@ -79,13 +207,26 @@ class VerticalLiftOperationBase(models.AbstractModel):
     def action_manual_barcode(self):
         return self.shuttle_id.action_manual_barcode()
 
-    def button_save(self):
-        """Process the action (pick, put, ...)"""
+    def process_current(self):
+        """Process the action (pick, put, ...)
+
+        To implement in sub-classes
+        """
         raise NotImplementedError
+
+    def button_save(self):
+        """Confirm the operation (set move to done, ...)"""
+        self.ensure_one()
+        if not self.step() == "save":
+            return
+        self.next_step()
 
     def button_release(self):
         """Release the operation, go to the next"""
-        raise NotImplementedError
+        self.ensure_one()
+        if not self.step() == "release":
+            return
+        self.next_step()
 
     def _render_product_packagings(self, product):
         values = {
@@ -254,32 +395,20 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
             self._domain_move_lines_to_do_all()
         )
 
-    def on_screen_open(self):
-        """Called when the screen is open"""
-
-    def button_release(self):
-        """Release the operation, go to the next"""
-        self.select_next_move_line()
-        if not self.current_move_line_id:
-            # sorry not sorry
-            return {
-                "effect": {
-                    "fadeout": "slow",
-                    "message": _("Congrats, you cleared the queue!"),
-                    "img_url": "/web/static/src/img/smile.svg",
-                    "type": "rainbow_man",
-                }
-            }
-
     def process_current(self):
-        raise NotImplementedError
-
-    def button_save(self):
-        if not (self and self.current_move_line_id):
-            return
-        self.ensure_one()
-        self.process_current()
-        self.operation_descr = _("Release")
+        line = self.current_move_line_id
+        if line.state in ("assigned", "partially_available"):
+            line.qty_done = line.product_qty
+            line.move_id._action_done()
+        return True
 
     def fetch_tray(self):
         raise NotImplementedError
+
+    def reset_steps(self):
+        self.clear_current_move_line()
+        super().reset_steps()
+
+    def clear_current_move_line(self):
+        self.current_move_line_id = False
+        return True

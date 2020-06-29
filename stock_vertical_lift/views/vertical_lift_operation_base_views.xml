@@ -37,7 +37,8 @@
                     </div>
                     <div class="o_shuttle_header_right o_shuttle_header_content">
                         <label for="number_of_ops" />
-                        <field name="number_of_ops" readonly="1" /> /
+                        <field name="number_of_ops" readonly="1" />
+                        <span>/</span>
                         <field name="number_of_ops_all" readonly="1" />
                     </div>
                 </div>
@@ -72,6 +73,7 @@
                                 icon="fa-check"
                                 class="btn-primary"
                                 barcode_trigger="save"
+                                attrs="{'invisible': [('state', '!=', 'save')]}"
                             />
                             <!-- will react on barcode 'O-BTN.release -->
                             <button
@@ -80,13 +82,14 @@
                                 string="Release"
                                 class="btn-primary"
                                 barcode_trigger="release"
+                                attrs="{'invisible': [('state', '!=', 'release')]}"
                             />
                         </div>
                     </div>
                 </div>
                 <div class="o_shuttle_operation bg-primary jumbotron jumbotron-fluid">
                     <div class="container">
-                        <field name="operation_descr" />
+                        <field name="state" invisible="0" readonly="True" />
                     </div>
                 </div>
                 <div class="o_shuttle_data">
@@ -134,7 +137,6 @@
                                     options="{'no_open': True}"
                                 />
                             </div>
-                            <!-- TODO change for pick and put? -->
                             <label for="location_dest_id" />
                             <div>
                                 <field
@@ -179,8 +181,12 @@
                     </div>
                 </div>
                 <!-- on the right of the screen -->
-                <div class="o_shuttle_data_content o_shuttle_tray">
+                <div
+                    class="o_shuttle_data_content o_shuttle_tray"
+                    attrs="{'invisible': [('tray_type_id', '=', False)]}"
+                >
                     <group col="1">
+                        <field name="tray_type_id" invisible="1" />
                         <field name="tray_name" />
                         <field name="tray_type_code" />
                         <field name="tray_y" />

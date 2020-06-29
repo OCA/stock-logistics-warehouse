@@ -1,8 +1,6 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _
-
 from .common import VerticalLiftCase
 
 
@@ -34,23 +32,22 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(action["res_id"], operation.id)
 
     def test_pick_select_next_move_line(self):
-        self.shuttle.mode = "pick"
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("pick")
         operation.select_next_move_line()
         self.assertEqual(operation.current_move_line_id, self.out_move_line)
-        self.assertEqual(operation.operation_descr, _("Scan New Destination Location"))
+        self.assertEqual(operation.state, "scan_destination")
 
     def test_pick_save(self):
-        self.shuttle.switch_pick()
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("pick")
+        # assume we already scanned the destination, current state is save
+        operation.state = "save"
         operation.current_move_line_id = self.out_move_line
         operation.button_save()
         self.assertEqual(operation.current_move_line_id.state, "done")
-        self.assertEqual(operation.operation_descr, _("Release"))
+        self.assertEqual(operation.state, "release")
 
     def test_pick_related_fields(self):
-        self.shuttle.switch_pick()
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("pick")
         ml = operation.current_move_line_id = self.out_move_line
 
         # Trays related fields
@@ -148,8 +145,8 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation2.number_of_ops_all, 6)
 
     def test_on_barcode_scanned(self):
-        self.shuttle.switch_pick()
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("pick")
+        self.assertEqual(operation.state, "scan_destination")
         move_line = operation.current_move_line_id
         current_destination = move_line.location_dest_id
         stock_location = self.env.ref("stock.stock_location_stock")
@@ -158,14 +155,14 @@ class TestPick(VerticalLiftCase):
         )
         operation.on_barcode_scanned(stock_location.barcode)
         self.assertEqual(move_line.location_dest_id, stock_location)
+        self.assertEqual(operation.state, "save")
 
     def test_button_release(self):
-        self.shuttle.switch_pick()
-        self._test_button_release(self.out_move_line)
+        self._open_screen("pick")
+        self._test_button_release(self.out_move_line, "noop")
 
     def test_process_current_pick(self):
-        self.shuttle.switch_pick()
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("pick")
         operation.current_move_line_id = self.out_move_line
         qty_to_process = self.out_move_line.product_qty
         operation.process_current()
@@ -173,8 +170,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(self.out_move_line.qty_done, qty_to_process)
 
     def test_matrix(self):
-        self.shuttle.switch_pick()
-        operation = self.shuttle._operation_for_mode()
+        operation = self._open_screen("pick")
         operation.current_move_line_id = self.out_move_line
         location = self.out_move_line.location_id
         # offset by -1 because the fields are for humans

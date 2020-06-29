@@ -14,6 +14,68 @@ class VerticalLiftOperationInventory(models.Model):
     _inherit = "vertical.lift.operation.base"
     _description = "Vertical Lift Operation Inventory"
 
+    _initial_state = "noop"
+
+    def _selection_states(self):
+        return [
+            ("noop", "No inventory in progress"),
+            ("quantity", "Inventory, please enter the amount"),
+            ("confirm_wrong_quantity", "The quantity does not match, are you sure?"),
+            # save is never visible, but save and go to the next or noop directly
+            ("save", "Save"),
+            # no need for release and save button here?
+            # ("release", "Release"),
+        ]
+
+    def _transitions(self):
+        return (
+            self.Transition(
+                "noop",
+                "quantity",
+                # transition only if inventory lines are found
+                lambda self: self.select_next_inventory_line(),
+            ),
+            self.Transition(
+                "quantity", "save", lambda self: self._has_identical_quantity(),
+            ),
+            self.Transition(
+                "quantity",
+                "confirm_wrong_quantity",
+                lambda self: self._start_confirm_wrong_quantity(),
+            ),
+            self.Transition(
+                "confirm_wrong_quantity",
+                "save",
+                lambda self: self.quantity_input == self.last_quantity_input,
+            ),
+            # if the confirmation of the quantity is different, cycle back to
+            # the 'quantity' step
+            self.Transition(
+                "confirm_wrong_quantity",
+                "quantity",
+                lambda self: self._go_back_to_quantity_input(),
+            ),
+            # go to quantity if we have lines in queue, otherwise, go to noop
+            self.Transition(
+                "save",
+                "quantity",
+                lambda self: self.process_current()
+                and self.select_next_inventory_line(),
+                # when we reach 'save', this transition is directly
+                # evaluated
+                direct_eval=True,
+            ),
+            self.Transition(
+                "save",
+                "noop",
+                lambda self: self.process_current()
+                and self.clear_current_inventory_line(),
+                # when we reach 'save', this transition is directly
+                # evaluated
+                direct_eval=True,
+            ),
+        )
+
     current_inventory_line_id = fields.Many2one(
         comodel_name="stock.inventory.line", readonly=True
     )
@@ -22,14 +84,6 @@ class VerticalLiftOperationInventory(models.Model):
     # if the quantity is wrong, user has to write 2 times
     # the same quantity to really confirm it's correct
     last_quantity_input = fields.Float()
-    state = fields.Selection(
-        selection=[
-            ("quantity", "Inventory, please enter the amount"),
-            ("confirm_wrong_quantity", "The quantity does not match, are you sure?"),
-            ("save", "Save"),
-        ],
-        default="quantity",
-    )
 
     tray_location_id = fields.Many2one(
         comodel_name="stock.location",
@@ -137,54 +191,9 @@ class VerticalLiftOperationInventory(models.Model):
             ("vertical_lift_done", "=", False),
         ]
 
-    def on_screen_open(self):
-        """Called when the screen is open"""
-        self.select_next_inventory_line()
-
-    def reset(self):
-        self.write(
-            {"quantity_input": 0.0, "last_quantity_input": 0.0, "state": "quantity"}
-        )
-        self.update_step_description()
-
-    def step(self):
-        return self.state
-
-    def step_to(self, state):
-        self.state = state
-        self.update_step_description()
-
-    def step_description(self):
-        state_field = self._fields["state"]
-        return state_field.convert_to_export(self.state, self)
-
-    def update_step_description(self):
-        if self.current_inventory_line_id:
-            descr = self.step_description()
-        else:
-            descr = _("No operations")
-        self.operation_descr = descr
-
-    def button_save(self):
-        if not self.current_inventory_line_id:
-            return
-        self.ensure_one()
-        self.process_current()
-        if self.step() == "save":
-            self.select_next_inventory_line()
-            if not self.current_inventory_line_id:
-                # sorry not sorry
-                return {
-                    "effect": {
-                        "fadeout": "slow",
-                        "message": _("Congrats, you cleared the queue!"),
-                        "img_url": "/web/static/src/img/smile.svg",
-                        "type": "rainbow_man",
-                    }
-                }
-
-    def button_release(self):
-        raise NotImplementedError
+    def reset_steps(self):
+        self.clear_current_inventory_line()
+        super().reset_steps()
 
     def _has_identical_quantity(self):
         line = self.current_inventory_line_id
@@ -197,35 +206,25 @@ class VerticalLiftOperationInventory(models.Model):
             == 0
         )
 
-    def _process_quantity(self):
-        if self.step() == "quantity":
-            if self._has_identical_quantity():
-                self.step_to("save")
-                return True
-            else:
-                self.last_quantity_input = self.quantity_input
-                self.quantity_input = 0.0
-                self.step_to("confirm_wrong_quantity")
-                return False
-        if self.step() == "confirm_wrong_quantity":
-            if self.quantity_input == self.last_quantity_input:
-                # confirms the previous input
-                self.step_to("save")
-                return True
-            else:
-                # cycle back to the first quantity check
-                self.step_to("quantity")
-                return self._process_quantity()
+    def _start_confirm_wrong_quantity(self):
+        self.last_quantity_input = self.quantity_input
+        self.quantity_input = 0.0
+        return True
 
-    def process_current(self):
-        line = self.current_inventory_line_id
-        if self._process_quantity() and not line.vertical_lift_done:
-            line.vertical_lift_done = True
-            if self.quantity_input != line.product_qty:
-                line.product_qty = self.quantity_input
-            inventory = line.inventory_id
-            if all(line.vertical_lift_done for line in inventory.line_ids):
-                inventory.action_validate()
+    def _go_back_to_quantity_input(self):
+        self.last_quantity_input = self.quantity_input
+        self.quantity_input = 0.0
+        return True
+
+    def clear_current_inventory_line(self):
+        self.write(
+            {
+                "quantity_input": 0.0,
+                "last_quantity_input": 0.0,
+                "current_inventory_line_id": False,
+            }
+        )
+        return True
 
     def fetch_tray(self):
         location = self.current_inventory_line_id.location_id
@@ -233,16 +232,44 @@ class VerticalLiftOperationInventory(models.Model):
 
     def select_next_inventory_line(self):
         self.ensure_one()
+        previous_line = self.current_inventory_line_id
         next_line = self.env["stock.inventory.line"].search(
             self._domain_inventory_lines_to_do(),
             limit=1,
             order="vertical_lift_tray_id, location_id, id",
         )
-        previous_line = self.current_inventory_line_id
         self.current_inventory_line_id = next_line
-        self.reset()
         if (
             next_line
             and previous_line.vertical_lift_tray_id != next_line.vertical_lift_tray_id
         ):
             self.fetch_tray()
+        return bool(next_line)
+
+    def process_current(self):
+        line = self.current_inventory_line_id
+        if not line.vertical_lift_done:
+            line.vertical_lift_done = True
+            if self.quantity_input != line.product_qty:
+                line.product_qty = self.quantity_input
+            inventory = line.inventory_id
+            if all(line.vertical_lift_done for line in inventory.line_ids):
+                inventory.action_validate()
+            self.quantity_input = self.last_quantity_input = 0.0
+        return True
+
+    def button_save(self):
+        self.ensure_one()
+        if not self.step() in ("quantity", "confirm_wrong_quantity"):
+            return
+        self.next_step()
+        if self.step() == "noop":
+            # sorry not sorry
+            return {
+                "effect": {
+                    "fadeout": "slow",
+                    "message": _("Congrats, you cleared the queue!"),
+                    "img_url": "/web/static/src/img/smile.svg",
+                    "type": "rainbow_man",
+                }
+            }

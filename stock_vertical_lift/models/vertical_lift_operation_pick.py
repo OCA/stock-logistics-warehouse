@@ -9,18 +9,43 @@ class VerticalLiftOperationPick(models.Model):
     _inherit = "vertical.lift.operation.transfer"
     _description = "Vertical Lift Operation Pick"
 
+    _initial_state = "noop"
+
+    def _selection_states(self):
+        return [
+            ("noop", "No operations"),
+            ("scan_destination", "Scan New Destination Location"),
+            ("save", "Pick goods and save"),
+            ("release", "Release"),
+        ]
+
+    def _transitions(self):
+        return (
+            self.Transition(
+                "noop", "scan_destination", lambda self: self.select_next_move_line()
+            ),
+            self.Transition("scan_destination", "save"),
+            self.Transition("save", "release", lambda self: self.process_current()),
+            # go to scan_destination if we have lines in queue, otherwise, go to noop
+            self.Transition(
+                "release", "scan_destination", lambda self: self.select_next_move_line()
+            ),
+            self.Transition("release", "noop"),
+        )
+
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
         if not self.current_move_line_id or self.current_move_line_id.state == "done":
             return
-        location = self.env["stock.location"].search([("barcode", "=", barcode)])
-        if location:
-            self.location_dest_id = location
-            self.operation_descr = _("Save")
-        else:
-            self.env.user.notify_warning(
-                _("No location found for barcode {}").format(barcode)
-            )
+        if self.step() == "scan_destination":
+            location = self.env["stock.location"].search([("barcode", "=", barcode)])
+            if location:
+                self.location_dest_id = location
+                self.next_step()
+            else:
+                self.env.user.notify_warning(
+                    _("No location found for barcode {}").format(barcode)
+                )
 
     def _domain_move_lines_to_do(self):
         domain = [
@@ -42,27 +67,27 @@ class VerticalLiftOperationPick(models.Model):
     def fetch_tray(self):
         self.current_move_line_id.fetch_vertical_lift_tray_source()
 
-    def process_current(self):
-        line = self.current_move_line_id
-        if line.state in ("assigned", "partially_available"):
-            line.qty_done = line.product_qty
-            line.move_id._action_done()
-
-    def on_screen_open(self):
-        """Called when the screen is open"""
-        self.select_next_move_line()
-
     def select_next_move_line(self):
         self.ensure_one()
         next_move_line = self.env["stock.move.line"].search(
             self._domain_move_lines_to_do(), limit=1
         )
         self.current_move_line_id = next_move_line
-        # TODO use a state machine to define next steps and
-        # description?
-        descr = (
-            _("Scan New Destination Location") if next_move_line else _("No operations")
-        )
-        self.operation_descr = descr
         if next_move_line:
             self.fetch_tray()
+            return True
+        return False
+
+    def button_release(self):
+        """Release the operation, go to the next"""
+        super().button_release()
+        if self.step() == "noop":
+            # sorry not sorry
+            return {
+                "effect": {
+                    "fadeout": "slow",
+                    "message": _("Congrats, you cleared the queue!"),
+                    "img_url": "/web/static/src/img/smile.svg",
+                    "type": "rainbow_man",
+                }
+            }
