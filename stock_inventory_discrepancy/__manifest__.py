@@ -10,7 +10,7 @@
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    "category": "Warehouse Management",
+    "category": "Warehouse",
     "depends": ["stock"],
     "data": [
         'security/stock_inventory_discrepancy_security.xml',

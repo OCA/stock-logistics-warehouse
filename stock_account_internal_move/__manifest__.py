@@ -4,7 +4,7 @@
     'name': """Stock Account Internal Move""",
     'summary': """Allows tracking moves between internal locations"""
                """ via accounts.""",
-    'category': "Warehouse Management",
+    'category': "Warehouse",
     'version': "12.0.1.0.0",
     'author': "Camptocamp SA,"
               " Odoo Community Association (OCA)",

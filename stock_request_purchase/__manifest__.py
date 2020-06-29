@@ -9,7 +9,7 @@
     "website": "https://github.com/stock-logistics-warehouse",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
-    "category": "Warehouse Management",
+    "category": "Warehouse",
     "depends": [
         "stock_request",
         "purchase_stock",
