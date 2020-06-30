@@ -68,10 +68,15 @@ class Product(models.Model):
         )
 
     def _ordered_packaging(self):
-        """Prepare packaging ordered by qty and exclude empty ones."""
+        """Prepare packaging ordered by qty and exclude empty ones.
+
+        Use ctx key `_packaging_filter` to pass a function to filter packaging
+        to be considered.
+        """
+        custom_filter = self.env.context.get("_packaging_filter", lambda x: x)
         packagings = [
             Packaging(x.id, x.name, x.qty, False)
-            for x in self.packaging_ids
+            for x in self.packaging_ids.filtered(custom_filter)
             # Exclude the ones w/ zero qty as they are useless for the math
             if x.qty
         ]
