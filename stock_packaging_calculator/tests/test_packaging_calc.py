@@ -117,6 +117,25 @@ class TestCalc(SavepointCase):
             expected,
         )
 
+    def test_calc_name_get(self):
+        """Test custom name getter."""
+        expected = [
+            {"id": self.pkg_pallet.id, "qty": 1, "name": "FOO " + self.pkg_pallet.name},
+            {
+                "id": self.pkg_big_box.id,
+                "qty": 3,
+                "name": "FOO " + self.pkg_big_box.name,
+            },
+            {"id": self.pkg_box.id, "qty": 1, "name": "FOO " + self.pkg_box.name},
+            {"id": self.uom_unit.id, "qty": 5, "name": self.uom_unit.name},
+        ]
+        self.assertEqual(
+            self.product_a.with_context(
+                _packaging_name_getter=lambda x: "FOO " + x.name
+            ).product_qty_by_packaging(2655),
+            expected,
+        )
+
     def test_calc_sub1(self):
         """Test contained packaging behavior 1."""
         expected = [
