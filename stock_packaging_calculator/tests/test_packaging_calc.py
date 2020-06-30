@@ -103,6 +103,20 @@ class TestCalc(SavepointCase):
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(50.5), expected)
 
+    def test_calc_filter(self):
+        """Test packaging filter."""
+        expected = [
+            {"id": self.pkg_big_box.id, "qty": 13, "name": self.pkg_big_box.name},
+            {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
+            {"id": self.uom_unit.id, "qty": 5, "name": self.uom_unit.name},
+        ]
+        self.assertEqual(
+            self.product_a.with_context(
+                _packaging_filter=lambda x: x != self.pkg_pallet
+            ).product_qty_by_packaging(2655),
+            expected,
+        )
+
     def test_calc_sub1(self):
         """Test contained packaging behavior 1."""
         expected = [
