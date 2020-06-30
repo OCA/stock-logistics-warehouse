@@ -72,10 +72,14 @@ class Product(models.Model):
 
         Use ctx key `_packaging_filter` to pass a function to filter packaging
         to be considered.
+
+        Use ctx key `_packaging_name_getter` to pass a function to change
+        the display name of the packaging.
         """
         custom_filter = self.env.context.get("_packaging_filter", lambda x: x)
+        name_getter = self.env.context.get("_packaging_name_getter", lambda x: x.name)
         packagings = [
-            Packaging(x.id, x.name, x.qty, False)
+            Packaging(x.id, name_getter(x), x.qty, False)
             for x in self.packaging_ids.filtered(custom_filter)
             # Exclude the ones w/ zero qty as they are useless for the math
             if x.qty
