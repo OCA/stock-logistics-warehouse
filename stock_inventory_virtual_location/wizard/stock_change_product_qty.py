@@ -4,16 +4,16 @@ from odoo import fields, models
 
 
 class StockChangeProductQty(models.TransientModel):
-    _inherit = 'stock.change.product.qty'
+    _inherit = "stock.change.product.qty"
 
     virtual_location_id = fields.Many2one(
-        comodel_name='stock.location',
-        string='Virtual Adjustment Location',
-        domain=[('usage', 'like', 'inventory')],
+        comodel_name="stock.location",
+        string="Virtual Adjustment Location",
+        domain=[("usage", "like", "inventory")],
     )
 
     def _action_start_line(self):
         res = super(StockChangeProductQty, self)._action_start_line()
         if self.virtual_location_id:
-            res.update({'virtual_location_id': self.virtual_location_id.id})
+            res.update({"virtual_location_id": self.virtual_location_id.id})
         return res
