@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_inventory_form" model="ir.ui.view">
-        <field name="name">stock.inventory.form.inherit</field>
-        <field name="model">stock.inventory</field>
-        <field name="inherit_id" ref="stock.view_inventory_form" />
+    <record id="stock_inventory_line_tree2" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree2.inherit</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree2" />
         <field name="arch" type="xml">
-            <xpath
-                expr="//field[@name='line_ids']/tree/field[@name='location_id']"
-                position="after"
-            >
+            <field name="location_id" position="after">
                 <field
                     name="virtual_location_id"
                     groups="stock.group_stock_multi_locations"
+                    options="{'no_create': True}"
+                    invisible="context.get('readonly_virtual_location_id', False)"
+                    readonly="context.get('readonly_virtual_location_id', False)"
+                    attrs="{'readonly': ['|',
+                            ('is_editable', '=', False),
+                            ('state', '!=', 'confirm')]}"
                 />
-            </xpath>
-            <xpath
-                expr="//field[@name='line_ids']/kanban/field[@name='location_id']"
-                position="after"
-            >
-                <field
-                    name="virtual_location_id"
-                    groups="stock.group_stock_multi_locations"
-                />
-            </xpath>
+            </field>
         </field>
     </record>
 </odoo>
