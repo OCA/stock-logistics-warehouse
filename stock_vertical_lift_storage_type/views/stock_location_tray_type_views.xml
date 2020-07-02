@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_location_tray_type_form" model="ir.ui.view">
+        <field name="name">stock.location.tray.type.form</field>
+        <field name="model">stock.location.tray.type</field>
+        <field
+            name="inherit_id"
+            ref="stock_location_tray.view_stock_location_tray_type_form"
+        />
+        <field name="arch" type="xml">
+            <group name="size" position="after">
+                <group string="Put-Away" name="putaway">
+                    <field name="location_storage_type_ids" widget="many2many_tags" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
