@@ -48,8 +48,18 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
             "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_2a_x1y1"
         )
 
-    def _update_qty_in_location(self, location, product, quantity):
-        self.env["stock.quant"]._update_available_quantity(product, location, quantity)
+    @classmethod
+    def _update_qty_in_location(
+        cls, location, product, quantity, package=None, lot=None
+    ):
+        quants = cls.env["stock.quant"]._gather(
+            product, location, lot_id=lot, package_id=package, strict=True
+        )
+        # this method adds the quantity to the current quantity, so remove it
+        quantity -= sum(quants.mapped("quantity"))
+        cls.env["stock.quant"]._update_available_quantity(
+            product, location, quantity, package_id=package, lot_id=lot
+        )
 
     def _open_screen(self, mode, shuttle=None):
         getattr(shuttle or self.shuttle, "switch_{}".format(mode))()
