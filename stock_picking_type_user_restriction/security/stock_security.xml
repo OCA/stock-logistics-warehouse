@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_assigned_picking_types_user" model="res.groups">
+        <field name="name">User: Assigned Operation Types Only</field>
+        <field name="category_id" ref="base.module_category_warehouse_management"/>
+        <field name="comment">The user will have access to her assigned operation types.</field>
+    </record>
+    <record id="stock.group_stock_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_assigned_picking_types_user'))]"/>
+    </record>
+
+<data noupdate="1">
+    <record id="picking_type_assigned_users" model="ir.rule">
+        <field name="name">Assigned picking types</field>
+        <field ref="stock.model_stock_picking_type" name="model_id"/>
+        <field name="domain_force">['|',('assigned_user_ids','in',user.id),('assigned_user_ids','=',False)]</field>
+        <field name="groups" eval="[(4, ref('group_assigned_picking_types_user'))]"/>
+    </record>
+    <record id="picking_assigned_users" model="ir.rule">
+        <field name="name">Assigned pickings</field>
+        <field ref="stock.model_stock_picking" name="model_id"/>
+        <field name="domain_force">['|',('picking_type_id.assigned_user_ids','in',user.id),('picking_type_id.assigned_user_ids','=',False)]</field>
+        <field name="groups" eval="[(4, ref('group_assigned_picking_types_user'))]"/>
+    </record>
+
+    <record id="picking_type_see_all" model="ir.rule">
+        <field name="name">All picking types</field>
+        <field ref="stock.model_stock_picking_type" name="model_id"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+    <record id="picking_see_all" model="ir.rule">
+        <field name="name">All pickings</field>
+        <field ref="stock.model_stock_picking" name="model_id"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+</data>
+
+</odoo>
