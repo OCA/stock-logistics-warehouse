@@ -1,3 +1,4 @@
 product-attribute
 server-ux
 web
+wms

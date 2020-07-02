@@ -65,9 +65,6 @@ class VerticalLiftOperationPut(models.Model):
                     _("No move line found for barcode {}").format(barcode)
                 )
 
-        # TODO if the move line already has a storage type, assign directly a
-        # destination and save
-
         elif self.step() == "scan_tray_type":
             tray_type = self._find_tray_type(barcode)
             if tray_type:
