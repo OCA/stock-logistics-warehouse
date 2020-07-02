@@ -88,9 +88,28 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(operation.state, "save")
         # a cell has been set
         self.assertTrue(
+            self.in_move_line.location_dest_id in self.location_1a.child_ids
+        )
+
+    def test_change_tray_type_on_save(self):
+        operation = self._open_screen("put")
+        move_line = self.in_move_line
+        # assume we already scanned the product and the tray type
+        # and the assigned location was location_1a_x1y1
+        operation.current_move_line_id = move_line
+        move_line.location_dest_id = self.location_1a_x1y1
+        operation.state = "save"
+        # we want to use another tray with a different type though,
+        # so we scan again
+        operation.on_barcode_scanned(self.location_1b.tray_type_id.code)
+        self.assertTrue(
             self.in_move_line.location_dest_id
             in self.shuttle.location_id.child_ids.child_ids
         )
+        # we are still in save
+        self.assertEqual(operation.state, "save")
+        # a cell has been set in the other tray
+        self.assertTrue(move_line.location_dest_id in self.location_1b.child_ids)
 
     def test_transition_scan_tray_type_no_empty_cell(self):
         operation = self._open_screen("put")

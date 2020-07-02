@@ -65,15 +65,22 @@ class VerticalLiftOperationPut(models.Model):
                     _("No move line found for barcode {}").format(barcode)
                 )
 
-        elif self.step() == "scan_tray_type":
+        elif self.step() in ("scan_tray_type", "save"):
+            # note: we must be able to scan a different tray type when we are
+            # in the save step too, in case we couldn't put it in the first one
+            # for some reason.
             tray_type = self._find_tray_type(barcode)
             if tray_type:
                 if self._assign_available_cell(tray_type):
                     self.fetch_tray()
-                    self.next_step()
+                    if self.step() == "scan_tray_type":
+                        # when we are in "save" step, stay here
+                        self.next_step()
                 else:
                     self.env.user.notify_warning(
-                        _("No free space for this tray type in this shuttle.")
+                        _('No free space for tray type "{}" in this shuttle.').format(
+                            tray_type.display_name
+                        )
                     )
             else:
                 self.env.user.notify_warning(
@@ -152,6 +159,7 @@ class VerticalLiftOperationPut(models.Model):
         )
         if location:
             self.current_move_line_id.location_dest_id = location
+            self.current_move_line_id.package_level_id.location_dest_id = location
             return True
         return False
 
