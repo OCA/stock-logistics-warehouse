@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_assigned_users" model="ir.ui.view">
+        <field name="name">view_picking_form_assigned_users</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header//button[3]" position="attributes">
+                <attribute name="groups">stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+            <xpath expr="//header//button[4]" position="attributes">
+                <attribute name="groups">stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+            <xpath expr="//header//button[5]" position="attributes">
+                <attribute name="groups">stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="stock.all_picking" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('group_assigned_picking_types_user'))]"/>
+    </record>
+</odoo>
