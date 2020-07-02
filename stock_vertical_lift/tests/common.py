@@ -35,6 +35,9 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
         cls.location_1a_x1y2 = cls.env.ref(
             "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x1y2"
         )
+        cls.location_1b = cls.env.ref(
+            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1b"
+        )
         cls.location_1b_x1y1 = cls.env.ref(
             "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1b_x1y1"
         )
