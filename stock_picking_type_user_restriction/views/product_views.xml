@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_template_property_form_assigned_users" model="ir.ui.view">
+        <field name="name">view_template_property_form_assigned_users</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_template_property_form"/>
+        <field name="arch" type="xml">
+            <page name="inventory" position="attributes">
+                <attribute name="groups">stock.group_stock_user,product.group_stock_packaging,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </page>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock.product_form_view_procurement_button">
+        <field name="groups_id" eval="[(4, ref('stock_picking_type_user_restriction.group_assigned_picking_types_user'))]"/>
+    </record>
+    <record model="ir.ui.view" id="product_form_view_procurement_button_assigned_users">
+        <field name="name">product_form_view_procurement_button_assigned_users</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(stock.action_product_replenish)d']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_view_stock_move_lines']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock.product_template_form_view_procurement_button">
+        <field name="groups_id" eval="[(4, ref('stock_picking_type_user_restriction.group_assigned_picking_types_user'))]"/>
+    </record>
+    <record model="ir.ui.view" id="product_template_form_view_procurement_button_assigned_users">
+        <field name="name">product_template_form_view_procurement_button_assigned_users</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(stock.action_product_replenish)d']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_view_stock_move_lines']" position="attributes">
+                <attribute name="groups">stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
