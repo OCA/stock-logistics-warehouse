@@ -69,7 +69,6 @@ class StockInventory(models.Model):
         self.ensure_one()
         vals = []
         product_obj = self.env['product.product']
-        inventory = self.new(self._convert_to_write(self.read()[0]))
         if self.filter in ('categories', 'products'):
             if self.filter == 'categories':
                 products = product_obj.search([
@@ -77,12 +76,14 @@ class StockInventory(models.Model):
                 ])
             else:  # filter = 'products'
                 products = self.product_ids
+            inventory = self.new(self._convert_to_write(self.read()[0]))
             inventory.filter = 'product'
             for product in products:
                 inventory.product_id = product
                 vals += super(StockInventory,
                               inventory)._get_inventory_lines_values()
         elif self.filter == 'lots':
+            inventory = self.new(self._convert_to_write(self.read()[0]))
             inventory.filter = 'lot'
             for lot in self.lot_ids:
                 inventory.lot_id = lot
@@ -91,6 +92,7 @@ class StockInventory(models.Model):
         elif self.filter == 'domain':
             domain = safe_eval(self.product_domain)
             products = self.env['product.product'].search(domain)
+            inventory = self.new(self._convert_to_write(self.read()[0]))
             inventory.filter = 'product'
             for product in products:
                 inventory.product_id = product
@@ -102,6 +104,7 @@ class StockInventory(models.Model):
                 tmp_lines.setdefault(line.product_code, 0)
                 tmp_lines[line.product_code] += line.product_qty
             self.empty_line_ids.unlink()
+            inventory = self.new(self._convert_to_write(self.read()[0]))
             inventory.filter = 'product'
             # HACK: Make sure location is preserved
             inventory.location_id = self.location_id
