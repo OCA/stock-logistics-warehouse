@@ -83,11 +83,4 @@ class VerticalLiftOperationPick(models.Model):
         super().button_release()
         if self.step() == "noop":
             # sorry not sorry
-            return {
-                "effect": {
-                    "fadeout": "slow",
-                    "message": _("Congrats, you cleared the queue!"),
-                    "img_url": "/web/static/src/img/smile.svg",
-                    "type": "rainbow_man",
-                }
-            }
+            return self._rainbow_man()

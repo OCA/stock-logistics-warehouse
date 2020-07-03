@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.tools import float_compare
 
 from odoo.addons.base_sparse_field.models.fields import Serialized
@@ -265,11 +265,4 @@ class VerticalLiftOperationInventory(models.Model):
         self.next_step()
         if self.step() == "noop":
             # sorry not sorry
-            return {
-                "effect": {
-                    "fadeout": "slow",
-                    "message": _("Congrats, you cleared the queue!"),
-                    "img_url": "/web/static/src/img/smile.svg",
-                    "type": "rainbow_man",
-                }
-            }
+            return self._rainbow_man()
