@@ -57,10 +57,44 @@ class VerticalLiftOperationPut(models.Model):
 
         return tuple(updated_transitions)
 
-    def _has_storage_type(self):
+    def _has_storage_type_domain(self):
         move_line = self.current_move_line_id
-        storage_type = move_line.package_id.package_storage_type_id
-        return bool(storage_type)
+        package_storage_type = move_line.package_id.package_storage_type_id
+        # When a put-away is done based on the package's storage type and no
+        # destination is found, we can have 2 reasons:
+        #
+        # 1. No location is available according to the storage types rules,
+        #    for instance because they are full
+        # 2. The storage type of the package doesn't have any location
+        #    configured in the shuttle's locations
+        #
+        # We want to differentiate the 2 cases and handle them differently.
+        # For 2. we consider the storage type is not meant to be in any
+        # shuttle's tray but the user still tries: act the same way as if we
+        # had no storage type at all, the user has to scan the tray type.
+        # For 1. we try to find a destination location and if none is found,
+        # a notification indicates that the shuttle is full.
+        # In any case, the user should always be able to scan a different
+        # tray type.
+        return [
+            ("id", "!=", self.location_id.id),
+            ("id", "child_of", self.location_id.id),
+            (
+                "allowed_location_storage_type_ids",
+                "in",
+                package_storage_type.location_storage_type_ids.ids,
+            ),
+        ]
+
+    def _has_storage_type(self):
+        domain = self._has_storage_type_domain()
+        # we don't care about order and count, only if we have at least one
+        # configured location for the storage type: sorting by id and limit by
+        # 1 will give the best explain plan
+        compatible_locations = self.env["stock.location"].search(
+            domain, limit=1, order="id"
+        )
+        return bool(compatible_locations)
 
     def _putaway_with_storage_type(self):
         move_line = self.current_move_line_id
@@ -74,6 +108,8 @@ class VerticalLiftOperationPut(models.Model):
             move_line.package_level_id.location_dest_id = new_destination
             self.fetch_tray()
             return True
+        # no destination found: all the trays for this tray type are full, or rejected
+        # by the location storage type rules
         return False
 
     def _put_away_with_storage_type_failed(self):
