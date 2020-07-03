@@ -56,36 +56,41 @@ class VerticalLiftOperationPut(models.Model):
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
         if self.step() == "scan_source":
-            line = self._find_move_line(barcode)
-            if line:
-                self.current_move_line_id = line
-                self.next_step()
-            else:
-                self.env.user.notify_warning(
-                    _("No move line found for barcode {}").format(barcode)
-                )
-
+            self._scan_source_action(barcode)
         elif self.step() in ("scan_tray_type", "save"):
             # note: we must be able to scan a different tray type when we are
             # in the save step too, in case we couldn't put it in the first one
             # for some reason.
-            tray_type = self._find_tray_type(barcode)
-            if tray_type:
-                if self._assign_available_cell(tray_type):
-                    self.fetch_tray()
-                    if self.step() == "scan_tray_type":
-                        # when we are in "save" step, stay here
-                        self.next_step()
-                else:
-                    self.env.user.notify_warning(
-                        _('No free space for tray type "{}" in this shuttle.').format(
-                            tray_type.display_name
-                        )
-                    )
+            self._scan_tray_type_action(barcode)
+
+    def _scan_source_action(self, barcode):
+        line = self._find_move_line(barcode)
+        if line:
+            self.current_move_line_id = line
+            self.next_step()
+        else:
+            self.env.user.notify_warning(
+                _("No move line found for barcode {}").format(barcode)
+            )
+
+    def _scan_tray_type_action(self, barcode):
+        tray_type = self._find_tray_type(barcode)
+        if tray_type:
+            if self._assign_available_cell(tray_type):
+                self.fetch_tray()
+                if self.step() == "scan_tray_type":
+                    # when we are in "save" step, stay here
+                    self.next_step()
             else:
                 self.env.user.notify_warning(
-                    _("No tray type found for barcode {}").format(barcode)
+                    _('No free space for tray type "{}" in this shuttle.').format(
+                        tray_type.display_name
+                    )
                 )
+        else:
+            self.env.user.notify_warning(
+                _("No tray type found for barcode {}").format(barcode)
+            )
 
     def _find_tray_type(self, barcode):
         return self.env["stock.location.tray.type"].search(
