@@ -170,3 +170,9 @@ class VerticalLiftOperationPut(models.Model):
 
     def fetch_tray(self):
         self.current_move_line_id.fetch_vertical_lift_tray_dest()
+
+    def button_release(self):
+        super().button_release()
+        if self.count_move_lines_to_do_all() == 0:
+            # sorry not sorry
+            return self._rainbow_man()

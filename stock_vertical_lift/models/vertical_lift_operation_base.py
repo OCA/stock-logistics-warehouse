@@ -4,7 +4,7 @@
 import logging
 from collections import namedtuple
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
@@ -243,6 +243,18 @@ class VerticalLiftOperationBase(models.AbstractModel):
             [("location_id", "=", location.id), ("product_id", "=", product.id)]
         )
         return sum(quants.mapped("quantity"))
+
+    def _rainbow_man(self, message=None):
+        if not message:
+            message = _("Congrats, you cleared the queue!")
+        return {
+            "effect": {
+                "fadeout": "slow",
+                "message": message,
+                "img_url": "/web/static/src/img/smile.svg",
+                "type": "rainbow_man",
+            }
+        }
 
     def _send_notification_refresh(self):
         """Send a refresh notification
