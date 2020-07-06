@@ -4,15 +4,18 @@
 {
     "name": "Stock Inventory Account Manual Adjustment",
     "summary": "Shows in the product inventory stock value and the accounting "
-               "value and allows to reconcile them",
+    "value and allows to reconcile them",
     "version": "12.0.1.0.0",
-    "author": "ForgeFlow S.L., "
-              "Odoo Community Association (OCA)",
+    "author": "ForgeFlow S.L., " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": ["stock_account", "stock_inventory_revaluation",
-                "stock_account_valuation_report",
-                "account_move_line_stock_info"],
+    "depends": [
+        "stock_account",
+        "stock_inventory_revaluation",
+        "stock_account_valuation_report",
+        "account_move_line_stock_info",
+        "queue_job",
+    ],
     "data": [
         "data/stock_valuation_account_manual_adjustment_data.xml",
         "security/stock_valuation_account_manual_adjustment_security.xml",
@@ -22,9 +25,8 @@
         "views/account_move_line_view.xml",
         "views/stock_valuation_account_manual_adjustment_view.xml",
         "wizards/mass_create_view.xml",
-        "wizards/stock_valuation_account_mass_adjust_move.xml"
     ],
-    'pre_init_hook': 'pre_init_hook',
+    "pre_init_hook": "pre_init_hook",
     "license": "AGPL-3",
-    'installable': True,
+    "installable": True,
 }

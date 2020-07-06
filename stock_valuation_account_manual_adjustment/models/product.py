@@ -6,44 +6,51 @@ from odoo.exceptions import UserError
 from odoo.addons import decimal_precision as dp
 import operator
 
-ops = {'=': operator.eq,
-       '!=': operator.ne,
-       '<=': operator.le,
-       '>=': operator.ge,
-       '>': operator.gt,
-       '<': operator.lt}
+ops = {
+    "=": operator.eq,
+    "!=": operator.ne,
+    "<=": operator.le,
+    ">=": operator.ge,
+    ">": operator.gt,
+    "<": operator.lt,
+}
 
-UNIT = dp.get_precision('Account')
+UNIT = dp.get_precision("Account")
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
     inventory_value = fields.Float(
-        string="Inventory Value", compute="_compute_inventory_account_value",
-        search="_search_inventory_value", digits=UNIT,
+        string="Inventory Value",
+        compute="_compute_inventory_account_value",
+        search="_search_inventory_value",
+        digits=UNIT,
         groups="stock_valuation_account_manual_adjustment."
-               "group_stock_valuation_account_manual_adjustment",
+        "group_stock_valuation_account_manual_adjustment",
     )
     accounting_value = fields.Float(
-        string="Accounting Value", compute="_compute_inventory_account_value",
-        search="_search_accounting_value", digits=UNIT,
+        string="Accounting Value",
+        compute="_compute_inventory_account_value",
+        search="_search_accounting_value",
+        digits=UNIT,
         groups="stock_valuation_account_manual_adjustment."
-               "group_stock_valuation_account_manual_adjustment",
+        "group_stock_valuation_account_manual_adjustment",
     )
     valuation_discrepancy = fields.Float(
         string="Valuation discrepancy",
         compute="_compute_inventory_account_value",
-        search="_search_valuation_discrepancy", digits=UNIT,
+        search="_search_valuation_discrepancy",
+        digits=UNIT,
         groups="stock_valuation_account_manual_adjustment."
-               "group_stock_valuation_account_manual_adjustment",
+        "group_stock_valuation_account_manual_adjustment",
     )
     qty_discrepancy = fields.Float(
         string="Quantity discrepancy",
         compute="_compute_inventory_account_value",
         digits=UNIT,
         groups="stock_valuation_account_manual_adjustment."
-               "group_stock_valuation_account_manual_adjustment",
+        "group_stock_valuation_account_manual_adjustment",
     )
 
     @api.multi
@@ -62,7 +69,8 @@ class ProductProduct(models.Model):
     @api.model
     def _get_accounting_valuation_by_product(self):
         accounting_val = {}
-        self.env.cr.execute("""
+        self.env.cr.execute(
+            """
             SELECT aml.product_id, sum(debit) - sum(credit) AS
             valuation
             FROM account_move_line as aml
@@ -76,12 +84,14 @@ class ProductProduct(models.Model):
             AND 'account.account,' || aml.account_id =
             ip.value_reference)
             GROUP BY aml.product_id
-        """)
+        """
+        )
 
         for product_id, valuation in self.env.cr.fetchall():
             accounting_val[product_id] = valuation
 
-        self.env.cr.execute("""
+        self.env.cr.execute(
+            """
             SELECT aml.product_id, sum(debit) - sum(credit)
             as valuation
             FROM account_move_line as aml
@@ -104,20 +114,24 @@ class ProductProduct(models.Model):
                 'property_stock_valuation_account_id'
             )
             GROUP BY aml.product_id
-        """)
+        """
+        )
         for product_id, valuation in self.env.cr.fetchall():
             accounting_val[product_id] = valuation
         return accounting_val
 
     @api.model
     def _get_internal_quant_domain_search(self):
-        return [('product_id.type', '=', 'product'),
-                ('location_id.usage', '=', 'internal')]
+        return [
+            ("product_id.type", "=", "product"),
+            ("location_id.usage", "=", "internal"),
+        ]
 
     @api.model
     def _get_inventory_valuation_by_product(self):
         inventory_val = {}
-        self.env.cr.execute("""
+        self.env.cr.execute(
+            """
             WITH Q1 AS (
                 SELECT pt.id, ip.value_text as cost_method
                 FROM product_template as pt
@@ -181,7 +195,8 @@ class ProductProduct(models.Model):
                 WHERE pr.id NOT IN (select id from Q6))
             SELECT *
             FROM Q7
-        """)
+        """
+        )
         for product_id, valuation in self.env.cr.fetchall():
             inventory_val[product_id] = valuation
         return inventory_val
@@ -190,50 +205,59 @@ class ProductProduct(models.Model):
     def _search_accounting_value(self, operator, value):
         if operator not in ops.keys():
             raise UserError(
-                _('Search operator %s not implemented for value %s')
+                _("Search operator %s not implemented for value %s")
                 % (operator, value)
             )
         accounting_val = self._get_accounting_valuation_by_product()
-        products = self.search([
-            ('active', '=', True),
-            ('categ_id.property_valuation', '=', 'real_time')])
+        products = self.search(
+            [
+                ("active", "=", True),
+                ("categ_id.property_valuation", "=", "real_time"),
+            ]
+        )
         found_ids = []
         for product in products:
             accounting_v = accounting_val.get(product.id, 0.0)
             if ops[operator](accounting_v, value):
                 found_ids.append(product.id)
-        return [('id', 'in', found_ids)]
+        return [("id", "in", found_ids)]
 
     @api.multi
     def _search_inventory_value(self, operator, value):
         if operator not in ops.keys():
             raise UserError(
-                _('Search operator %s not implemented for value %s')
+                _("Search operator %s not implemented for value %s")
                 % (operator, value)
             )
         inventory_val = self._get_inventory_valuation_by_product()
-        products = self.search([
-            ('active', '=', True),
-            ('categ_id.property_valuation', '=', 'real_time')])
+        products = self.search(
+            [
+                ("active", "=", True),
+                ("categ_id.property_valuation", "=", "real_time"),
+            ]
+        )
         found_ids = []
         for product in products:
             inventory_v = inventory_val.get(product.id, 0.0)
             if ops[operator](inventory_v, value):
                 found_ids.append(product.id)
-        return [('id', 'in', found_ids)]
+        return [("id", "in", found_ids)]
 
     @api.multi
     def _search_valuation_discrepancy(self, operator, value):
         if operator not in ops.keys():
             raise UserError(
-                _('Search operator %s not implemented for value %s')
+                _("Search operator %s not implemented for value %s")
                 % (operator, value)
             )
         accounting_val = self._get_accounting_valuation_by_product()
         inventory_val = self._get_inventory_valuation_by_product()
-        products = self.search([
-            ('active', '=', True),
-            ('categ_id.property_valuation', '=', 'real_time')])
+        products = self.search(
+            [
+                ("active", "=", True),
+                ("categ_id.property_valuation", "=", "real_time"),
+            ]
+        )
         found_ids = []
         for product in products:
             inventory_v = inventory_val.get(product.id, 0.0)
@@ -241,4 +265,4 @@ class ProductProduct(models.Model):
             valuation_discrepancy = inventory_v - accounting_v
             if ops[operator](valuation_discrepancy, value):
                 found_ids.append(product.id)
-        return [('id', 'in', found_ids)]
+        return [("id", "in", found_ids)]

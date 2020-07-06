@@ -4,36 +4,45 @@ from odoo import api, exceptions, fields, models, _
 
 
 class AccountMove(models.Model):
-    _inherit = 'account.move'
+    _inherit = "account.move"
 
     stock_valuation_account_manual_adjustment_id = fields.Many2one(
-        comodel_name='stock.valuation.account.manual.adjustment',
-        string='Stock Valuation Account Manual Adjustment')
+        comodel_name="stock.valuation.account.manual.adjustment",
+        string="Stock Valuation Account Manual Adjustment",
+    )
 
     @api.multi
     def unlink(self):
         for rec in self:
             if rec.stock_valuation_account_manual_adjustment_id:
                 raise exceptions.Warning(
-                    _("You cannot remove the journal entry that is related "
-                      "to a Stock valuation account manual adjustment "))
+                    _(
+                        "You cannot remove the journal entry that is related "
+                        "to a Stock valuation account manual adjustment "
+                    )
+                )
         return super(AccountMove, self).unlink()
 
 
 class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     stock_valuation_account_manual_adjustment_id = fields.Many2one(
-        comodel_name='stock.valuation.account.manual.adjustment',
-        related='move_id.stock_valuation_account_manual_adjustment_id',
-        string='Stock Valuation Account Manual Adjustment',
-        store=True, readonly=True)
+        comodel_name="stock.valuation.account.manual.adjustment",
+        related="move_id.stock_valuation_account_manual_adjustment_id",
+        string="Stock Valuation Account Manual Adjustment",
+        store=True,
+        readonly=True,
+    )
 
     @api.multi
     def unlink(self):
         for rec in self:
             if rec.stock_valuation_account_manual_adjustment_id:
                 raise exceptions.Warning(
-                    _("You cannot remove the journal item that is related "
-                      "to a Stock valuation account manual adjustment "))
+                    _(
+                        "You cannot remove the journal item that is related "
+                        "to a Stock valuation account manual adjustment "
+                    )
+                )
         return super(AccountMoveLine, self).unlink()

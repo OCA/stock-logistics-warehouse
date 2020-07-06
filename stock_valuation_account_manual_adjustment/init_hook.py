@@ -20,10 +20,12 @@ def pre_init_hook(cr):
 
 
 def set_stock_valuation_account_manual_adjustment_in_account_move(cr):
-    cr.execute("""SELECT column_name
+    cr.execute(
+        """SELECT column_name
     FROM information_schema.columns
     WHERE table_name='account_move' AND
-    column_name='stock_valuation_account_manual_adjustment_id'""")
+    column_name='stock_valuation_account_manual_adjustment_id'"""
+    )
     if not cr.fetchone():
         cr.execute(
             """
@@ -33,14 +35,17 @@ def set_stock_valuation_account_manual_adjustment_in_account_move(cr):
             COMMENT ON COLUMN
             account_move.stock_valuation_account_manual_adjustment_id IS
             'Stock Valuation Account Manual Adjustment';
-            """)
+            """
+        )
 
 
 def set_stock_valuation_account_manual_adjustment_in_account_move_line(cr):
-    cr.execute("""SELECT column_name
+    cr.execute(
+        """SELECT column_name
     FROM information_schema.columns
     WHERE table_name='account_move_line' AND
-    column_name='stock_valuation_account_manual_adjustment_id'""")
+    column_name='stock_valuation_account_manual_adjustment_id'"""
+    )
     if not cr.fetchone():
         cr.execute(
             """
@@ -50,4 +55,5 @@ def set_stock_valuation_account_manual_adjustment_in_account_move_line(cr):
             COMMENT ON COLUMN
             account_move_line.stock_valuation_account_manual_adjustment_id
             IS 'Stock Valuation Account Manual Adjustment';
-            """)
+            """
+        )
