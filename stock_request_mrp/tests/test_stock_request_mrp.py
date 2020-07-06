@@ -114,7 +114,7 @@ class TestStockRequestMrp(common.TransactionCase):
         wiz = Form(
             self.produce_wiz.with_context({"active_id": mo.id, "active_ids": [mo.id]})
         )
-        wiz.qty_producing = qty or mo.product_qty
+        wiz.product_qty = qty or mo.product_qty
         produce_wizard = wiz.save()
         produce_wizard.do_produce()
         return True
@@ -145,9 +145,7 @@ class TestStockRequestMrp(common.TransactionCase):
         }
 
         order = (
-            self.env["stock.request.order"]
-            .with_user(self.stock_request_user)
-            .create(vals)
+            self.env["stock.request.order"].create(vals)
         )
 
         order.action_confirm()

@@ -26,7 +26,8 @@ class ResConfigSettings(models.TransientModel):
     module_stock_request_submit = fields.Boolean(
         string='Submitted state in Stock Requests')
 
-    module_stock_request_mrp = fields.Boolean(string="Stock Request for Manufacturing")
+    module_stock_request_mrp = fields.Boolean(
+        string="Stock Request for Manufacturing")
 
     # Dependencies
     @api.onchange('stock_request_allow_virtual_loc')

@@ -8,9 +8,8 @@ from odoo.exceptions import ValidationError
 class StockRequest(models.Model):
     _inherit = "stock.request"
 
-    production_ids = fields.One2many(
-        "mrp.production",
-        "stock_request_ids",
+    production_ids = fields.Many2many(
+        comodel_name="mrp.production",
         string="Manufacturing Orders",
         readonly=True,
     )

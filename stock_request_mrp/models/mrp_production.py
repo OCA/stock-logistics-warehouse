@@ -8,11 +8,9 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     stock_request_ids = fields.Many2many(
-        "stock.request",
-        "mrp_production_stock_request_rel",
-        "mrp_production_id",
-        "stock_request_id",
+        comodel_name="stock.request",
         string="Stock Requests",
+        readonly=True,
     )
     stock_request_count = fields.Integer(
         "Stock Request #", compute="_compute_stock_request_ids"
@@ -39,23 +37,13 @@ class MrpProduction(models.Model):
             action["res_id"] = requests.id
         return action
 
-    def _get_finished_move_value(
-        self,
-        product_id,
-        product_uom_qty,
-        product_uom,
-        operation_id=False,
-        byproduct_id=False,
-    ):
-        res = super()._get_finished_move_value(
-            product_id,
-            product_uom_qty,
-            product_uom,
-            operation_id=operation_id,
-            byproduct_id=byproduct_id,
-        )
-        if self.stock_request_ids:
-            res["allocation_ids"] = [
+    @api.model
+    def create(self, values):
+        production = super(MrpProduction, self).create(values)
+        # import pdb
+        # pdb.set_trace()
+        if production.stock_request_ids:
+            allocations = [
                 (
                     0,
                     0,
@@ -64,6 +52,10 @@ class MrpProduction(models.Model):
                         "requested_product_uom_qty": request.product_qty,
                     },
                 )
-                for request in self.stock_request_ids
+                for request in production.stock_request_ids
             ]
-        return res
+            # filter out by-product finished moves
+            move = production.move_finished_ids.filtered(
+                lambda x: x.product_id == production.product_id)
+            move.write({'allocation_ids': allocations})
+        return production
