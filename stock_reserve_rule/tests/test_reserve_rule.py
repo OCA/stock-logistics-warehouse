@@ -17,6 +17,8 @@ class TestReserveRule(common.SavepointCase):
                 "code": "WHTEST",
             }
         )
+        cls.rule = cls.env.ref("stock_reserve_rule.stock_reserve_rule_1_demo")
+        cls.rule.active = True
 
         cls.customer_loc = cls.env.ref("stock.stock_location_customers")
 
