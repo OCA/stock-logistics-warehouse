@@ -5,6 +5,7 @@
         <field name="sequence">1</field>
         <field name="location_id" ref="stock.stock_location_stock" />
         <field name="company_id" ref="base.main_company" />
+        <field name="active" eval="False" />
     </record>
     <record id="stock_reserve_rule_removal_1_demo" model="stock.reserve.rule.removal">
         <field name="rule_id" ref="stock_reserve_rule_1_demo" />
