@@ -39,13 +39,24 @@ class TestCalc(SavepointCase):
                         "id": self.pkg_big_box.id,
                         "qty": 10,
                         "name": self.pkg_big_box.name,
+                        "is_unit": False,
                     },
                 ],
                 str(self.pkg_big_box.id): [
-                    {"id": self.pkg_box.id, "qty": 4, "name": self.pkg_box.name},
+                    {
+                        "id": self.pkg_box.id,
+                        "qty": 4,
+                        "name": self.pkg_box.name,
+                        "is_unit": False,
+                    },
                 ],
                 str(self.pkg_box.id): [
-                    {"id": self.uom_unit.id, "qty": 50, "name": self.uom_unit.name},
+                    {
+                        "id": self.uom_unit.id,
+                        "qty": 50,
+                        "name": self.uom_unit.name,
+                        "is_unit": False,
+                    },
                 ],
             },
         )
@@ -59,13 +70,24 @@ class TestCalc(SavepointCase):
                         "id": self.pkg_big_box.id,
                         "qty": 20,
                         "name": self.pkg_big_box.name,
+                        "is_unit": False,
                     },
                 ],
                 str(self.pkg_big_box.id): [
-                    {"id": self.pkg_box.id, "qty": 4, "name": self.pkg_box.name},
+                    {
+                        "id": self.pkg_box.id,
+                        "qty": 4,
+                        "name": self.pkg_box.name,
+                        "is_unit": False,
+                    },
                 ],
                 str(self.pkg_box.id): [
-                    {"id": self.uom_unit.id, "qty": 50, "name": self.uom_unit.name},
+                    {
+                        "id": self.uom_unit.id,
+                        "qty": 50,
+                        "name": self.uom_unit.name,
+                        "is_unit": False,
+                    },
                 ],
             },
         )
@@ -73,42 +95,102 @@ class TestCalc(SavepointCase):
     def test_calc_1(self):
         """Test easy behavior 1."""
         expected = [
-            {"id": self.pkg_pallet.id, "qty": 1, "name": self.pkg_pallet.name},
-            {"id": self.pkg_big_box.id, "qty": 3, "name": self.pkg_big_box.name},
-            {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
-            {"id": self.uom_unit.id, "qty": 5, "name": self.uom_unit.name},
+            {
+                "id": self.pkg_pallet.id,
+                "qty": 1,
+                "name": self.pkg_pallet.name,
+                "is_unit": False,
+            },
+            {
+                "id": self.pkg_big_box.id,
+                "qty": 3,
+                "name": self.pkg_big_box.name,
+                "is_unit": False,
+            },
+            {
+                "id": self.pkg_box.id,
+                "qty": 1,
+                "name": self.pkg_box.name,
+                "is_unit": False,
+            },
+            {
+                "id": self.uom_unit.id,
+                "qty": 5,
+                "name": self.uom_unit.name,
+                "is_unit": True,
+            },
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(2655), expected)
 
     def test_calc_2(self):
         """Test easy behavior 2."""
         expected = [
-            {"id": self.pkg_big_box.id, "qty": 1, "name": self.pkg_big_box.name},
-            {"id": self.pkg_box.id, "qty": 3, "name": self.pkg_box.name},
+            {
+                "id": self.pkg_big_box.id,
+                "qty": 1,
+                "name": self.pkg_big_box.name,
+                "is_unit": False,
+            },
+            {
+                "id": self.pkg_box.id,
+                "qty": 3,
+                "name": self.pkg_box.name,
+                "is_unit": False,
+            },
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(350), expected)
 
     def test_calc_3(self):
         """Test easy behavior 3."""
         expected = [
-            {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
-            {"id": self.uom_unit.id, "qty": 30, "name": self.uom_unit.name},
+            {
+                "id": self.pkg_box.id,
+                "qty": 1,
+                "name": self.pkg_box.name,
+                "is_unit": False,
+            },
+            {
+                "id": self.uom_unit.id,
+                "qty": 30,
+                "name": self.uom_unit.name,
+                "is_unit": True,
+            },
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(80), expected)
 
     def test_calc_6(self):
         """Test fractional qty is lost."""
         expected = [
-            {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
+            {
+                "id": self.pkg_box.id,
+                "qty": 1,
+                "name": self.pkg_box.name,
+                "is_unit": False,
+            },
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(50.5), expected)
 
     def test_calc_filter(self):
         """Test packaging filter."""
         expected = [
-            {"id": self.pkg_big_box.id, "qty": 13, "name": self.pkg_big_box.name},
-            {"id": self.pkg_box.id, "qty": 1, "name": self.pkg_box.name},
-            {"id": self.uom_unit.id, "qty": 5, "name": self.uom_unit.name},
+            {
+                "id": self.pkg_big_box.id,
+                "qty": 13,
+                "name": self.pkg_big_box.name,
+                "is_unit": False,
+            },
+            {
+                "id": self.pkg_box.id,
+                "qty": 1,
+                "name": self.pkg_box.name,
+                "is_unit": False,
+            },
+            {
+                "id": self.uom_unit.id,
+                "qty": 5,
+                "name": self.uom_unit.name,
+                "is_unit": True,
+            },
         ]
         self.assertEqual(
             self.product_a.with_context(
@@ -125,9 +207,20 @@ class TestCalc(SavepointCase):
                 "id": self.pkg_big_box.id,
                 "qty": 3,
                 "name": "FOO " + self.pkg_big_box.name,
+                "is_unit": False,
             },
-            {"id": self.pkg_box.id, "qty": 1, "name": "FOO " + self.pkg_box.name},
-            {"id": self.uom_unit.id, "qty": 5, "name": self.uom_unit.name},
+            {
+                "id": self.pkg_box.id,
+                "qty": 1,
+                "name": "FOO " + self.pkg_box.name,
+                "is_unit": False,
+            },
+            {
+                "id": self.uom_unit.id,
+                "qty": 5,
+                "name": self.uom_unit.name,
+                "is_unit": True,
+            },
         ]
         self.assertEqual(
             self.product_a.with_context(
@@ -143,6 +236,7 @@ class TestCalc(SavepointCase):
                 "id": self.pkg_pallet.id,
                 "qty": 1,
                 "name": self.pkg_pallet.name,
+                "is_unit": False,
                 "contained": [
                     {
                         "id": self.pkg_big_box.id,
@@ -155,6 +249,7 @@ class TestCalc(SavepointCase):
                 "id": self.pkg_big_box.id,
                 "qty": 3,
                 "name": self.pkg_big_box.name,
+                "is_unit": False,
                 "contained": [
                     {"id": self.pkg_box.id, "qty": 4, "name": self.pkg_box.name},
                 ],
@@ -163,6 +258,7 @@ class TestCalc(SavepointCase):
                 "id": self.pkg_box.id,
                 "qty": 1,
                 "name": self.pkg_box.name,
+                "is_unit": False,
                 "contained": [
                     {"id": self.uom_unit.id, "qty": 50, "name": self.uom_unit.name},
                 ],
@@ -171,6 +267,7 @@ class TestCalc(SavepointCase):
                 "id": self.uom_unit.id,
                 "qty": 5,
                 "name": self.uom_unit.name,
+                "is_unit": True,
                 "contained": None,
             },
         ]
@@ -192,6 +289,7 @@ class TestCalc(SavepointCase):
                         "id": self.pkg_big_box.id,
                         "qty": 10,
                         "name": self.pkg_big_box.name,
+                        "is_unit": False,
                     },
                 ],
             },
@@ -199,6 +297,7 @@ class TestCalc(SavepointCase):
                 "id": self.pkg_big_box.id,
                 "qty": 3,
                 "name": self.pkg_big_box.name,
+                "is_unit": False,
                 "contained": [
                     {"id": self.pkg_box.id, "qty": 6, "name": self.pkg_box.name},
                     {"id": self.uom_unit.id, "qty": 20, "name": self.uom_unit.name},
@@ -208,6 +307,7 @@ class TestCalc(SavepointCase):
                 "id": self.pkg_box.id,
                 "qty": 1,
                 "name": self.pkg_box.name,
+                "is_unit": False,
                 "contained": [
                     {"id": self.uom_unit.id, "qty": 30, "name": self.uom_unit.name},
                 ],
@@ -216,6 +316,7 @@ class TestCalc(SavepointCase):
                 "id": self.uom_unit.id,
                 "qty": 25,
                 "name": self.uom_unit.name,
+                "is_unit": True,
                 "contained": None,
             },
         ]
