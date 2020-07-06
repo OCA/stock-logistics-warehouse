@@ -100,7 +100,12 @@ class Product(models.Model):
         for pkg in pkg_by_qty:
             qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
             if qty_per_pkg:
-                value = {"id": pkg.id, "qty": qty_per_pkg, "name": pkg.name}
+                value = {
+                    "id": pkg.id,
+                    "qty": qty_per_pkg,
+                    "name": pkg.name,
+                    "is_unit": pkg.is_unit,
+                }
                 if with_contained:
                     contained = None
                     if not pkg.is_unit:
