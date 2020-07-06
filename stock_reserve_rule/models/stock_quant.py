@@ -3,12 +3,13 @@
 
 from collections import OrderedDict
 
-from odoo import models
+from odoo import api, models
 
 
 class StockQuant(models.Model):
     _inherit = "stock.quant"
 
+    @api.model
     def _group_by_location(self):
         """Return quants grouped by locations
 

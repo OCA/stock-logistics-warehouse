@@ -24,7 +24,7 @@
         <field name="product_qty">100.0</field>
         <field name="location_id" ref="stock_location_zone_c_bin_1_demo" />
     </record>
-    <function model="stock.inventory" name="_action_start">
+    <function model="stock.inventory" name="action_start">
         <function
             eval="[[('state','=','draft'),('id', '=', ref('stock_reserve_rule.stock_inventory_1_demo'))]]"
             model="stock.inventory"
