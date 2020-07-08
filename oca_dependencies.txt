@@ -4,3 +4,4 @@ account-analytic
 product-attribute
 server-ux
 web
+stock-logistics-reporting

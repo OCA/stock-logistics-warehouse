@@ -216,7 +216,6 @@ class TestProductInventoryAccountReconcile(TransactionCase):
         self.product_average_1.refresh()
         self.assertEquals(self.product_average_1.valuation_discrepancy, 0.0)
 
-
     def test_queue(self):
         self.assertEquals(self.product_average_1.valuation_discrepancy, -100.0)
 
@@ -241,4 +240,3 @@ class TestProductInventoryAccountReconcile(TransactionCase):
             ('uuid', '=', wiz.id)
         ])
         self.assertEqual(len(queues), 1, "Queue Job has not been created")
-
