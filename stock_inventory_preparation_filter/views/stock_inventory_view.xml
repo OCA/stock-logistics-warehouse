@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_inventory_form">
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="arch" type="xml">
+            <field name="product_ids" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('filter', '!=', 'products')]}</attribute>
+            </field>
+            <xpath expr="//field[@name='location_ids']/../.." position="before">
+                <group>
+                    <group>
+                        <field
+                            name="filter"
+                            string="Inventory of"
+                            widget='radio'
+                            attrs="{'readonly': [('state', '!=', 'draft')]}"
+                        />
+                    </group>
+                </group>
+            </xpath>
+            <field name="location_ids" position="before">
+                <field
+                    name="categ_ids"
+                    widget="many2many_tags"
+                    attrs="{'invisible':[('filter','!=','categories')]}"
+                />
+            </field>
+            <field name="location_ids" position="before">
+                <field
+                    name="lot_ids"
+                    widget="many2many_tags"
+                    attrs="{'invisible':[('filter','!=','lots')]}"
+                />
+            </field>
+            <xpath expr="//field[@name='location_ids']/../.." position="after">
+                <field
+                    name="product_domain"
+                    widget="domain"
+                    attrs="{'invisible': [('filter', '!=', 'domain')]}"
+                    options="{'model': 'product.product'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

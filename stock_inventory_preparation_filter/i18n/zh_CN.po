@@ -1,0 +1,134 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_preparation_filter
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-27 11:37+0000\n"
+"PO-Revision-Date: 2019-09-28 09:24+0000\n"
+"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/oca/teams/23907/"
+"zh_CN/)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.8\n"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__empty_line_ids
+#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.stock_inventory_form
+msgid "Capture Lines"
+msgstr "获取行"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__categ_ids
+msgid "Categories"
+msgstr "分类"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__create_uid
+msgid "Created by"
+msgstr "创建者"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
+msgid "Domain"
+msgstr ""
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:50
+#, python-format
+msgid "Empty list"
+msgstr "空列表"
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:45
+#, fuzzy, python-format
+#| msgid "Selected Products"
+msgid "Filtered Products"
+msgstr "已选定产品"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__inventory_id
+msgid "Inventory"
+msgstr "库存"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory_line_empty
+msgid "Inventory Line Empty"
+msgstr "库存行空"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty____last_update
+msgid "Last Modified on"
+msgstr "最后修改时间"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_uid
+msgid "Last Updated by"
+msgstr "最后更新者"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
+msgid "Lots"
+msgstr "批次"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__product_code
+msgid "Product Code"
+msgstr "产品代码"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_ids
+msgid "Products"
+msgstr "产品"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__product_qty
+msgid "Quantity"
+msgstr "数量"
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
+#, python-format
+msgid "Selected Categories"
+msgstr "已选定分类"
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
+#, python-format
+msgid "Selected Lots"
+msgstr "已选定批次"
+
+#. module: stock_inventory_preparation_filter
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:44
+#, python-format
+msgid "Selected Products"
+msgstr "已选定产品"
