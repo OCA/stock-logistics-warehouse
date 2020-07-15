@@ -1,5 +1,5 @@
 # Copyright 2020 Camptocamp SA
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
 {
     "name": "Stock packaging calculator",
     "summary": "Compute product quantity to pick by packaging",
@@ -8,7 +8,7 @@
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Camptocamp, Odoo Community Association (OCA)",
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "application": False,
     "installable": True,
     "depends": ["product"],
