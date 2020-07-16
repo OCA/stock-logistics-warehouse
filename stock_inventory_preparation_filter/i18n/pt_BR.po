@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
 "PO-Revision-Date: 2019-11-24 19:58+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,10 +21,11 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__empty_line_ids
-#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.stock_inventory_form
-msgid "Capture Lines"
-msgstr "Linhas capturadas"
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
+#, fuzzy, python-format
+#| msgid "Products"
+msgid "All products"
+msgstr "Produtos"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__categ_ids
@@ -32,67 +33,38 @@ msgid "Categories"
 msgstr "Categorias"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__create_uid
-msgid "Created by"
-msgstr "Criado por"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__create_date
-msgid "Created on"
-msgstr "Criado em"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__display_name
-msgid "Display Name"
-msgstr "Exibir Nome"
-
-#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr "Domínio"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:50
-#, python-format
-msgid "Empty list"
-msgstr "Lista vazia"
-
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:45
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Filtered Products"
 msgstr "Produtos Filtrados"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__id
-msgid "ID"
-msgstr "ID"
+#: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
+msgid ""
+"If you do an entire inventory, you can choose 'All Products' and it will "
+"prefill the inventory with the current stock.  If you only do some products "
+"(e.g. Cycle Counting) you can choose 'Manual Selection of Products' and the "
+"system won't propose anything.  You can also let the system propose for a "
+"single product / lot /... "
+msgstr ""
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__inventory_id
 msgid "Inventory"
 msgstr "Inventário"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory_line_empty
-msgid "Inventory Line Empty"
-msgstr "Linha Vazia do Inventário"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty____last_update
-msgid "Last Modified on"
-msgstr "Última Modificação em"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_uid
-msgid "Last Updated by"
-msgstr "Última atualização por"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_date
-msgid "Last Updated on"
-msgstr "Última atualização em"
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
+#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
+#, fuzzy
+#| msgid "Inventory"
+msgid "Inventory of"
+msgstr "Inventário"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
@@ -100,34 +72,52 @@ msgid "Lots"
 msgstr "Lotes"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__product_code
-msgid "Product Code"
-msgstr "Código do Produto"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_ids
-msgid "Products"
-msgstr "Produtos"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__product_qty
-msgid "Quantity"
-msgstr "Quantidade"
-
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Categories"
 msgstr "Categorias Selecionadas"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Lots"
 msgstr "Lotes selecionados"
 
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:44
-#, python-format
-msgid "Selected Products"
-msgstr "Produtos Selecionados"
+#~ msgid "Capture Lines"
+#~ msgstr "Linhas capturadas"
+
+#~ msgid "Created by"
+#~ msgstr "Criado por"
+
+#~ msgid "Created on"
+#~ msgstr "Criado em"
+
+#~ msgid "Display Name"
+#~ msgstr "Exibir Nome"
+
+#~ msgid "Empty list"
+#~ msgstr "Lista vazia"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Inventory Line Empty"
+#~ msgstr "Linha Vazia do Inventário"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificação em"
+
+#~ msgid "Last Updated by"
+#~ msgstr "Última atualização por"
+
+#~ msgid "Last Updated on"
+#~ msgstr "Última atualização em"
+
+#~ msgid "Product Code"
+#~ msgstr "Código do Produto"
+
+#~ msgid "Quantity"
+#~ msgstr "Quantidade"
+
+#~ msgid "Selected Products"
+#~ msgstr "Produtos Selecionados"

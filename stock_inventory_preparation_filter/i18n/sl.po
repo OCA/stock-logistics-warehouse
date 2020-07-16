@@ -20,10 +20,11 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__empty_line_ids
-#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.stock_inventory_form
-msgid "Capture Lines"
-msgstr "Zajem postavk"
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
+#, fuzzy, python-format
+#| msgid "Products"
+msgid "All products"
+msgstr "Proizvodi"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__categ_ids
@@ -31,70 +32,39 @@ msgid "Categories"
 msgstr "Kategorije"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__create_uid
-msgid "Created by"
-msgstr "Ustvaril"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__create_date
-msgid "Created on"
-msgstr "Ustvarjeno"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__display_name
-msgid "Display Name"
-msgstr "Prikazni naziv"
-
-#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:50
-#, python-format
-msgid "Empty list"
-msgstr "Prazen seznam"
-
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:45
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, fuzzy, python-format
 #| msgid "Selected Products"
 msgid "Filtered Products"
 msgstr "Izbrani proizvodi"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__id
-msgid "ID"
-msgstr "ID"
+#: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
+msgid ""
+"If you do an entire inventory, you can choose 'All Products' and it will "
+"prefill the inventory with the current stock.  If you only do some products "
+"(e.g. Cycle Counting) you can choose 'Manual Selection of Products' and the "
+"system won't propose anything.  You can also let the system propose for a "
+"single product / lot /... "
+msgstr ""
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__inventory_id
 msgid "Inventory"
 msgstr "Inventar"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory_line_empty
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
+#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
 #, fuzzy
 #| msgid "Inventory"
-msgid "Inventory Line Empty"
+msgid "Inventory of"
 msgstr "Inventar"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty____last_update
-msgid "Last Modified on"
-msgstr "Zadnjič spremenjeno"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_uid
-msgid "Last Updated by"
-msgstr "Zadnji posodobil"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_date
-msgid "Last Updated on"
-msgstr "Zadnjič posodobljeno"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
@@ -102,34 +72,54 @@ msgid "Lots"
 msgstr "Loti"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__product_code
-msgid "Product Code"
-msgstr "Koda proizvoda"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_ids
-msgid "Products"
-msgstr "Proizvodi"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__product_qty
-msgid "Quantity"
-msgstr "Količina"
-
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Categories"
 msgstr "Izbrane kategorije"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Lots"
 msgstr "Izbrani loti"
 
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:44
-#, python-format
-msgid "Selected Products"
-msgstr "Izbrani proizvodi"
+#~ msgid "Capture Lines"
+#~ msgstr "Zajem postavk"
+
+#~ msgid "Created by"
+#~ msgstr "Ustvaril"
+
+#~ msgid "Created on"
+#~ msgstr "Ustvarjeno"
+
+#~ msgid "Display Name"
+#~ msgstr "Prikazni naziv"
+
+#~ msgid "Empty list"
+#~ msgstr "Prazen seznam"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#, fuzzy
+#~| msgid "Inventory"
+#~ msgid "Inventory Line Empty"
+#~ msgstr "Inventar"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnjič spremenjeno"
+
+#~ msgid "Last Updated by"
+#~ msgstr "Zadnji posodobil"
+
+#~ msgid "Last Updated on"
+#~ msgstr "Zadnjič posodobljeno"
+
+#~ msgid "Product Code"
+#~ msgstr "Koda proizvoda"
+
+#~ msgid "Quantity"
+#~ msgstr "Količina"
+
+#~ msgid "Selected Products"
+#~ msgstr "Izbrani proizvodi"

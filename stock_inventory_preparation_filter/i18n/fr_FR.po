@@ -20,9 +20,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__empty_line_ids
-#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.stock_inventory_form
-msgid "Capture Lines"
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
+#, python-format
+msgid "All products"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
@@ -31,66 +31,35 @@ msgid "Categories"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__create_uid
-msgid "Created by"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__create_date
-msgid "Created on"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:50
-#, python-format
-msgid "Empty list"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:45
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Filtered Products"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__id
-msgid "ID"
+#: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
+msgid ""
+"If you do an entire inventory, you can choose 'All Products' and it will "
+"prefill the inventory with the current stock.  If you only do some products "
+"(e.g. Cycle Counting) you can choose 'Manual Selection of Products' and the "
+"system won't propose anything.  You can also let the system propose for a "
+"single product / lot /... "
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__inventory_id
 msgid "Inventory"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory_line_empty
-msgid "Inventory Line Empty"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_uid
-msgid "Last Updated by"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__write_date
-msgid "Last Updated on"
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
+#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
+msgid "Inventory of"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
@@ -99,34 +68,16 @@ msgid "Lots"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__product_code
-msgid "Product Code"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_ids
-msgid "Products"
-msgstr ""
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory_line_empty__product_qty
-msgid "Quantity"
-msgstr "Quantité"
-
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Categories"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
+#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Lots"
 msgstr ""
 
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:44
-#, python-format
-msgid "Selected Products"
-msgstr ""
+#~ msgid "Quantity"
+#~ msgstr "Quantité"
