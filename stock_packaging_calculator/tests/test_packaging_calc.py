@@ -55,7 +55,7 @@ class TestCalc(SavepointCase):
                         "id": self.uom_unit.id,
                         "qty": 50,
                         "name": self.uom_unit.name,
-                        "is_unit": False,
+                        "is_unit": True,
                     },
                 ],
             },
@@ -86,7 +86,7 @@ class TestCalc(SavepointCase):
                         "id": self.uom_unit.id,
                         "qty": 50,
                         "name": self.uom_unit.name,
-                        "is_unit": False,
+                        "is_unit": True,
                     },
                 ],
             },
@@ -202,7 +202,12 @@ class TestCalc(SavepointCase):
     def test_calc_name_get(self):
         """Test custom name getter."""
         expected = [
-            {"id": self.pkg_pallet.id, "qty": 1, "name": "FOO " + self.pkg_pallet.name},
+            {
+                "id": self.pkg_pallet.id,
+                "qty": 1,
+                "name": "FOO " + self.pkg_pallet.name,
+                "is_unit": False,
+            },
             {
                 "id": self.pkg_big_box.id,
                 "qty": 3,
@@ -242,6 +247,7 @@ class TestCalc(SavepointCase):
                         "id": self.pkg_big_box.id,
                         "qty": 10,
                         "name": self.pkg_big_box.name,
+                        "is_unit": False,
                     },
                 ],
             },
@@ -251,7 +257,12 @@ class TestCalc(SavepointCase):
                 "name": self.pkg_big_box.name,
                 "is_unit": False,
                 "contained": [
-                    {"id": self.pkg_box.id, "qty": 4, "name": self.pkg_box.name},
+                    {
+                        "id": self.pkg_box.id,
+                        "qty": 4,
+                        "name": self.pkg_box.name,
+                        "is_unit": False,
+                    },
                 ],
             },
             {
@@ -260,7 +271,12 @@ class TestCalc(SavepointCase):
                 "name": self.pkg_box.name,
                 "is_unit": False,
                 "contained": [
-                    {"id": self.uom_unit.id, "qty": 50, "name": self.uom_unit.name},
+                    {
+                        "id": self.uom_unit.id,
+                        "qty": 50,
+                        "name": self.uom_unit.name,
+                        "is_unit": True,
+                    },
                 ],
             },
             {
@@ -284,6 +300,7 @@ class TestCalc(SavepointCase):
                 "id": self.pkg_pallet.id,
                 "qty": 1,
                 "name": self.pkg_pallet.name,
+                "is_unit": False,
                 "contained": [
                     {
                         "id": self.pkg_big_box.id,
@@ -299,8 +316,18 @@ class TestCalc(SavepointCase):
                 "name": self.pkg_big_box.name,
                 "is_unit": False,
                 "contained": [
-                    {"id": self.pkg_box.id, "qty": 6, "name": self.pkg_box.name},
-                    {"id": self.uom_unit.id, "qty": 20, "name": self.uom_unit.name},
+                    {
+                        "id": self.pkg_box.id,
+                        "qty": 6,
+                        "name": self.pkg_box.name,
+                        "is_unit": False,
+                    },
+                    {
+                        "id": self.uom_unit.id,
+                        "qty": 20,
+                        "name": self.uom_unit.name,
+                        "is_unit": True,
+                    },
                 ],
             },
             {
@@ -309,7 +336,12 @@ class TestCalc(SavepointCase):
                 "name": self.pkg_box.name,
                 "is_unit": False,
                 "contained": [
-                    {"id": self.uom_unit.id, "qty": 30, "name": self.uom_unit.name},
+                    {
+                        "id": self.uom_unit.id,
+                        "qty": 30,
+                        "name": self.uom_unit.name,
+                        "is_unit": True,
+                    },
                 ],
             },
             {
