@@ -31,7 +31,7 @@
                     position="before"
                 >
                     <field name="product_purchase_qty" />
-                    <field name="product_purchase_uom_id" groups="product.group_uom" />
+                    <field name="product_purchase_uom_id" groups="uom.group_uom" />
                 </xpath>
                 <xpath
                     expr="//page//field[@name='order_line']/tree/field[@name='product_uom']"
@@ -64,7 +64,7 @@
                     position="before"
                 >
                     <field name="product_purchase_qty" />
-                    <field name="product_purchase_uom_id" groups="product.group_uom" />
+                    <field name="product_purchase_uom_id" groups="uom.group_uom" />
                 </xpath>
                 <xpath
                     expr="//page//field[@name='order_line']/form//field[@name='product_uom']"

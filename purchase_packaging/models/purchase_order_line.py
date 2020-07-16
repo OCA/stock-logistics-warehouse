@@ -2,15 +2,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 
-import odoo.addons.decimal_precision as dp
-
 
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
     @api.model
     def _default_product_purchase_uom_id(self):
-        return self.env.ref("product.product_uom_unit")
+        return self.env.ref("uom.product_uom_unit")
 
     product_tmpl_id = fields.Many2one(
         related="product_id.product_tmpl_id",
@@ -20,12 +18,12 @@ class PurchaseOrderLine(models.Model):
     packaging_id = fields.Many2one("product.packaging", "Packaging")
     product_purchase_qty = fields.Float(
         "Purchase quantity",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         required=True,
         default=lambda *a: 1.0,
     )
     product_purchase_uom_id = fields.Many2one(
-        "product.uom",
+        "uom.uom",
         "Purchase Unit of Measure",
         required=True,
         default=_default_product_purchase_uom_id,
@@ -35,6 +33,7 @@ class PurchaseOrderLine(models.Model):
         string="Quantity",
         inverse="_inverse_product_qty",
         store=True,
+        readonly=False,
     )
 
     def _get_product_seller(self):
@@ -42,9 +41,7 @@ class PurchaseOrderLine(models.Model):
         return self.product_id._select_seller(
             partner_id=self.order_id.partner_id,
             quantity=self.product_qty,
-            date=self.order_id.date_order
-            and fields.Date.to_string(fields.Date.from_string(self.order_id.date_order))
-            or None,
+            date=self.order_id.date_order.date(),
             uom_id=self.product_uom,
         )
 
@@ -58,12 +55,15 @@ class PurchaseOrderLine(models.Model):
         Compute the total quantity
         """
         uom_categories = self.mapped("product_purchase_uom_id.category_id")
-        uom_obj = self.env["product.uom"]
+        uom_obj = self.env["uom.uom"]
         to_uoms = uom_obj.search(
             [("category_id", "in", uom_categories.ids), ("uom_type", "=", "reference")]
         )
         uom_by_category = {to_uom.category_id: to_uom for to_uom in to_uoms}
         for line in self:
+            if line.display_type:
+                line.product_qty = 0
+                continue
             line.product_qty = line.product_purchase_uom_id._compute_quantity(
                 line.product_purchase_qty,
                 uom_by_category.get(line.product_purchase_uom_id.category_id),
@@ -73,7 +73,7 @@ class PurchaseOrderLine(models.Model):
         """ If product_quantity is set compute the purchase_qty
         """
         uom_categories = self.mapped("product_purchase_uom_id.category_id")
-        uom_obj = self.env["product.uom"]
+        uom_obj = self.env["uom.uom"]
         from_uoms = uom_obj.search(
             [("category_id", "in", uom_categories.ids), ("uom_type", "=", "reference")]
         )
@@ -119,7 +119,7 @@ class PurchaseOrderLine(models.Model):
             domain["product_purchase_uom_id"] = [
                 ("id", "in", self.product_id.mapped("seller_ids.min_qty_uom_id.id"),)
             ]
-        res = super(PurchaseOrderLine, self).onchange_product_id()
+        res = super().onchange_product_id()
         if self.product_id:
             supplier = self._get_product_seller()
         else:
@@ -134,7 +134,7 @@ class PurchaseOrderLine(models.Model):
             domain["product_purchase_uom_id"] = [
                 ("id", "=", supplier.min_qty_uom_id.id)
             ]
-            to_uom = self.env["product.uom"].search(
+            to_uom = self.env["uom.uom"].search(
                 [
                     ("category_id", "=", supplier.min_qty_uom_id.category_id.id,),
                     ("uom_type", "=", "reference"),
@@ -147,18 +147,33 @@ class PurchaseOrderLine(models.Model):
             )
         self.packaging_id = supplier.packaging_id
         if domain:
-            if res.get("domain"):
-                res["domain"].update(domain)
-            else:
-                res["domain"] = domain  # pragma: no cover not aware of super
+            if not res:
+                res = {}
+            res.setdefault("domain", {})
+            res["domain"].update(domain)
         return res
 
     def _prepare_stock_moves(self, picking):
         self.ensure_one()
-        val = super(PurchaseOrderLine, self)._prepare_stock_moves(picking)
-        for v in val:
-            v["product_packaging"] = self.packaging_id.id
-        return val
+        vals_list = super()._prepare_stock_moves(picking)
+        if not self.packaging_id:
+            return vals_list
+        qty = 0.0
+        outgoing_moves, incoming_moves = self._get_outgoing_incoming_moves()
+        for move in outgoing_moves:
+            qty -= move.product_uom._compute_quantity(
+                move.product_uom_qty, self.product_uom, rounding_method="HALF-UP"
+            )
+        for move in incoming_moves:
+            qty += move.product_uom._compute_quantity(
+                move.product_uom_qty, self.product_uom, rounding_method="HALF-UP"
+            )
+        diff_quantity = self.product_qty - qty
+        for vals in vals_list:
+            vals.update(
+                {"product_uom_qty": diff_quantity, "product_uom": self.product_uom.id}
+            )
+        return vals_list
 
     @api.model
     def update_vals(self, vals):
@@ -173,32 +188,39 @@ class PurchaseOrderLine(models.Model):
         return vals
 
     @api.model
-    @api.returns("self", lambda rec: rec.id)
-    def create(self, vals):
-        if "product_qty" not in vals and "product_purchase_qty" in vals:
-            # compute product_qty to avoid inverse computation and reset to 1
-            uom_obj = self.env["product.uom"]
-            product_purchase_uom = uom_obj.browse(vals["product_purchase_uom_id"])
-            to_uom = uom_obj.search(
-                [
-                    ("category_id", "=", product_purchase_uom.category_id.id),
-                    ("uom_type", "=", "reference"),
-                ],
-                limit=1,
-            )
-            vals["product_qty"] = to_uom._compute_quantity(
-                vals["product_purchase_qty"], to_uom
-            )
-        res = super(PurchaseOrderLine, self).create(self.update_vals(vals))
-        if "product_qty" in vals and not self.env.context.get(
-            "recomputing_product_qty"
-        ):
-            # Mandatory as we always want product_qty be computed
-            res.with_context(recomputing_product_qty=True)._compute_product_qty()
+    def update_vals_list(self, vals_list):
+        for vals in vals_list:
+            self.update_vals(vals)
+        return vals_list
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if "product_qty" not in vals and "product_purchase_qty" in vals:
+                # compute product_qty to avoid inverse computation and reset to 1
+                uom_obj = self.env["uom.uom"]
+                product_purchase_uom = uom_obj.browse(vals["product_purchase_uom_id"])
+                to_uom = uom_obj.search(
+                    [
+                        ("category_id", "=", product_purchase_uom.category_id.id),
+                        ("uom_type", "=", "reference"),
+                    ],
+                    limit=1,
+                )
+                vals["product_qty"] = to_uom._compute_quantity(
+                    vals["product_purchase_qty"], to_uom
+                )
+        res = super().create(self.update_vals_list(vals_list))
+        for vals in vals_list:
+            if "product_qty" in vals and not self.env.context.get(
+                "recomputing_product_qty"
+            ):
+                # Mandatory as we always want product_qty be computed
+                res.with_context(recomputing_product_qty=True)._compute_product_qty()
         return res
 
     def write(self, vals):
-        res = super(PurchaseOrderLine, self).write(self.update_vals(vals))
+        res = super().write(self.update_vals(vals))
         # Required if we want to avoid recursion as there is nothing in
         # environment that would help distinguish write call from a
         # compute

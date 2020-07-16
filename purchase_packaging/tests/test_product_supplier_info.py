@@ -8,16 +8,16 @@ class TestProductSupplierInfo(common.TransactionCase):
         """ Create a packagings with uom product_uom_dozen on
             product_supplierinfo_1'product (uom is product_uom_unit)
         """
-        super(TestProductSupplierInfo, self).setUp()
+        super().setUp()
         self.product_supplier_info = self.env.ref("product.product_supplierinfo_1")
-        self.product_tmpl_id = self.product_supplier_info.product_tmpl_id
-        self.product_supplier_info.product_tmpl_id.uom_po_id = self.env.ref(
-            "product.product_uom_unit"
+        self.product_id = self.product_supplier_info.product_id
+        self.product_supplier_info.product_id.uom_po_id = self.env.ref(
+            "uom.product_uom_unit"
         )
         self.product_packaging_dozen = self.env["product.packaging"].create(
             {
-                "product_tmpl_id": self.product_tmpl_id.id,
-                "uom_id": self.env.ref("product.product_uom_dozen").id,
+                "product_id": self.product_id.id,
+                "uom_id": self.env.ref("uom.product_uom_dozen").id,
                 "name": "Packaging Dozen",
             }
         )
@@ -29,12 +29,12 @@ class TestProductSupplierInfo(common.TransactionCase):
         """
         self.assertEqual(
             self.product_supplier_info.product_uom.id,
-            self.env.ref("product.product_uom_unit").id,
+            self.env.ref("uom.product_uom_unit").id,
         )
         self.product_supplier_info.write(
             {"packaging_id": self.product_packaging_dozen.id}
         )
         self.assertEqual(
             self.product_supplier_info.product_uom.id,
-            self.env.ref("product.product_uom_dozen").id,
+            self.env.ref("uom.product_uom_dozen").id,
         )

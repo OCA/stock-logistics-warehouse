@@ -4,6 +4,8 @@
 
 def post_init_hook(cr, registry):
     cr.execute(
-        """update purchase_order_line
-                  set product_purchase_qty = product_qty"""
+        """
+        UPDATE purchase_order_line
+        SET product_purchase_qty = product_qty
+        WHERE product_qty IS NOT NULL"""
     )
