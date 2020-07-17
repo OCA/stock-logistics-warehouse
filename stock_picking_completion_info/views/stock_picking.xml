@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_type_form_inherit" model="ir.ui.view">
+        <field name="name">Operation Types inherit</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="model">stock.picking.type</field>
+        <field name="arch" type="xml">
+            <field name="show_reserved" position="after">
+                <field name="display_completion_info" />
+            </field>
+        </field>
+    </record>
+    <record id="view_picking_form_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <xpath expr="//h1" position="after">
+                <label for="completion_info" invisible="1" />
+                <div
+                    class="alert alert-success"
+                    attrs="{'invisible': [('completion_info', '!=', 'next_picking_ready')]}"
+                    role="alert"
+                >
+                    <field name="completion_info" nolabel="1" />
+                </div>
+                <div
+                    class="alert alert-warning"
+                    attrs="{'invisible': [('completion_info', '!=', 'last_picking')]}"
+                    role="alert"
+                >
+                    <field name="completion_info" nolabel="1" />
+                </div>
+                <div
+                    class="alert alert-primary"
+                    attrs="{'invisible': [('completion_info', '!=', 'full_order_picking')]}"
+                    role="alert"
+                >
+                    <field name="completion_info" nolabel="1" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
