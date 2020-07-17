@@ -63,6 +63,7 @@ class Product(models.Model):
 
             {contained: [{id: 1, qty: 4, name: "Big box"}]}
         """
+        self.ensure_one()
         return self._product_qty_by_packaging(
             self._ordered_packaging(), prod_qty, with_contained=with_contained,
         )
@@ -100,7 +101,7 @@ class Product(models.Model):
         for pkg in pkg_by_qty:
             qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
             if qty_per_pkg:
-                value = {"id": pkg.id, "qty": qty_per_pkg, "name": pkg.name}
+                value = self._prepare_qty_by_packaging_values(pkg, qty_per_pkg)
                 if with_contained:
                     contained = None
                     if not pkg.is_unit:
@@ -123,3 +124,11 @@ class Product(models.Model):
             qty -= pkg_qty
             qty_per_pkg += 1
         return qty_per_pkg, qty
+
+    def _prepare_qty_by_packaging_values(self, packaging, qty_per_pkg):
+        return {
+            "id": packaging.id,
+            "qty": qty_per_pkg,
+            "name": packaging.name,
+            "is_unit": packaging.is_unit,
+        }
