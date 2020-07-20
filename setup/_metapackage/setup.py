@@ -52,6 +52,7 @@ setuptools.setup(
         'odoo12-addon-stock_orderpoint_uom',
         'odoo12-addon-stock_packaging',
         'odoo12-addon-stock_picking_procure_method',
+        'odoo12-addon-stock_picking_type_user_restriction',
         'odoo12-addon-stock_pull_list',
         'odoo12-addon-stock_putaway_method',
         'odoo12-addon-stock_quant_manual_assign',
