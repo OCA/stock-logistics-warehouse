@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-27 11:37+0000\n"
+"POT-Creation-Date: 2020-07-20 12:32+0000\n"
 "PO-Revision-Date: 2018-02-27 11:37+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>, 2018\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
@@ -21,22 +21,17 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: purchase_packaging
-#: model:ir.ui.view,arch_db:purchase_packaging.product_supplierinfo_view_form_inherit_purchase_packaging
+#: model_terms:ir.ui.view,arch_db:purchase_packaging.product_supplierinfo_view_form_inherit_purchase_packaging
 msgid "<span> of </span>"
 msgstr "<span> od </span>"
 
 #. module: purchase_packaging
-#: model:ir.model,name:purchase_packaging.model_product_supplierinfo
-msgid "Information about a product vendor"
-msgstr "Informacija o dobavljaču proizvoda"
-
-#. module: purchase_packaging
-#: model:ir.model.fields,field_description:purchase_packaging.field_product_supplierinfo_packaging_id
+#: model:ir.model.fields,field_description:purchase_packaging.field_product_supplierinfo__packaging_id
 msgid "Logisitical Units"
 msgstr "Logističke jedinice"
 
 #. module: purchase_packaging
-#: model:ir.model.fields,field_description:purchase_packaging.field_product_supplierinfo_min_qty_uom_id
+#: model:ir.model.fields,field_description:purchase_packaging.field_product_supplierinfo__min_qty_uom_id
 msgid "Minimal Unit of Measure Quantity"
 msgstr "Minimalna količina u jedinici mjere"
 
@@ -46,17 +41,12 @@ msgid "Minimum Inventory Rule"
 msgstr "Pravilo minimalne zalihe"
 
 #. module: purchase_packaging
-#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_packaging_id
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line__packaging_id
 msgid "Packaging"
 msgstr "Pakiranje"
 
 #. module: purchase_packaging
-#: model:ir.model,name:purchase_packaging.model_procurement_order
-msgid "Procurement"
-msgstr "Nabava"
-
-#. module: purchase_packaging
-#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_product_tmpl_id
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line__product_tmpl_id
 msgid "Product Template"
 msgstr "Predložak proizvoda"
 
@@ -66,16 +56,48 @@ msgid "Purchase Order Line"
 msgstr "Stavka naloga za nabavu"
 
 #. module: purchase_packaging
-#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_product_purchase_uom_id
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line__product_purchase_uom_id
 msgid "Purchase Unit of Measure"
 msgstr "Jedinica mjere u nabavi"
 
 #. module: purchase_packaging
-#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line_product_purchase_qty
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line__product_purchase_qty
 msgid "Purchase quantity"
 msgstr "Količina nabave"
 
 #. module: purchase_packaging
-#: model:ir.ui.view,arch_db:purchase_packaging.product_supplierinfo_view_form_inherit_purchase_packaging
+#: model:ir.model.fields,field_description:purchase_packaging.field_purchase_order_line__product_qty
+msgid "Quantity"
+msgstr ""
+
+#. module: purchase_packaging
+#: model:ir.model,name:purchase_packaging.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
+
+#. module: purchase_packaging
+#: model:ir.model,name:purchase_packaging.model_product_supplierinfo
+msgid "Supplier Pricelist"
+msgstr ""
+
+#. module: purchase_packaging
+#: model:ir.model.fields,field_description:purchase_packaging.field_product_supplierinfo__product_uom
+#, fuzzy
+msgid "Supplier Unit of Measure"
+msgstr "Jedinica mjere u nabavi"
+
+#. module: purchase_packaging
+#: model:ir.model.fields,help:purchase_packaging.field_product_supplierinfo__product_uom
+msgid "This comes from the product form."
+msgstr ""
+
+#. module: purchase_packaging
+#: model_terms:ir.ui.view,arch_db:purchase_packaging.product_supplierinfo_view_form_inherit_purchase_packaging
 msgid "using package"
 msgstr "koristi pakiranje"
+
+#~ msgid "Information about a product vendor"
+#~ msgstr "Informacija o dobavljaču proizvoda"
+
+#~ msgid "Procurement"
+#~ msgstr "Nabava"
