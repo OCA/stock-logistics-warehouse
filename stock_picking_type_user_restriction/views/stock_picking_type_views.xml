@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_picking_type_form_assigned_users">
+        <field name="name">view_picking_type_form_assigned_users</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <field name="show_reserved" position="after">
+                <field name="assigned_user_ids" widget="many2many_tags" options="{'no_create': True}"
+                       groups="stock.group_stock_manager"/>
+            </field>
+        </field>
+    </record>
+</odoo>
