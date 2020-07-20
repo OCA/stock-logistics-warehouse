@@ -910,6 +910,7 @@ class TestStockRequestBase(TestStockRequest):
             'company_id': self.main_company.id,
             'warehouse_id': self.warehouse.id,
             'location_id': self.virtual_loc.id,
+            'expected_date': fields.Datetime.now(),
             'procurement_group_id': group.id,
             'stock_request_ids': [(0, 0, {
                 'product_id': self.product.id,
