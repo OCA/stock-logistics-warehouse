@@ -1,25 +1,31 @@
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestUserRestriction(TransactionCase):
+class TestUserRestriction(SavepointCase):
 
-    def setUp(self):
-        super(TestUserRestriction, self).setUp()
-        self.stock_user = self.env['res.users'].create({
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(
+            cls.env.context,
+            tracking_disable=True,
+            no_reset_password=True,
+        ))
+        cls.stock_user = cls.env['res.users'].create({
             'login': 'stock_user',
             'name': 'stock_user',
-            'groups_id': [(6, 0, [self.env.ref('stock.group_stock_user').id])]
+            'groups_id': [(6, 0, [cls.env.ref('stock.group_stock_user').id])]
         })
-        self.stock_user_assigned_type = self.env['res.users'].create({
+        cls.stock_user_assigned_type = cls.env['res.users'].create({
             'login': 'stock_user_assigned_type',
             'name': 'stock_user_assigned_type',
-            'groups_id': [(6, 0, [self.env.ref(
+            'groups_id': [(6, 0, [cls.env.ref(
                 'stock_picking_type_user_restriction.'
                 'group_assigned_picking_types_user'
             ).id])]
         })
-        self.picking_type_out = self.env.ref('stock.picking_type_out')
-        self.picking_type_model = self.env['stock.picking.type']
+        cls.picking_type_out = cls.env.ref('stock.picking_type_out')
+        cls.picking_type_model = cls.env['stock.picking.type']
 
     def test_access_picking_type(self):
         # assigned_user_ids is not set: both users can read
