@@ -12,6 +12,7 @@
                      <field name="increase_account_id"/>
                      <field name="decrease_account_id"/>
                      <field name="journal_id"/>
+                     <field name="product_ids" invisible="1"/>
                      <field name="remarks"/>
                  </group>
                  <newline/>

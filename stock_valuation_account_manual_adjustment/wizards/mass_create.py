@@ -34,6 +34,17 @@ class StockValuationAccountMassAdjust(models.TransientModel):
         required=True,
         help="This text is copied to the journal entry.",
     )
+    product_ids = fields.Many2many('product.product')
+
+    @api.model
+    def default_get(self, fields):
+        res = super().default_get(fields)
+        ctx = self.env.context
+        if (
+                ctx.get('active_model') == 'product.product' and
+                ctx.get('active_ids')):
+            res['product_ids'] = [(6, 0, pp) for pp in [ctx.get('active_ids')]]
+        return res
 
     def _prepare_data(self, product):
         self.ensure_one()
@@ -67,16 +78,7 @@ class StockValuationAccountMassAdjust(models.TransientModel):
     @api.multi
     @job(default_channel="root.adjust_inventory_valuation")
     def process(self):
-        context = self.env.context
-        active_model = self.env.context.get("active_model", False)
-        if not active_model:
-            raise UserError(_("Incorrect model."))
-        if active_model == "product.product":
-            products = self.env["product.product"].browse(
-                context.get("active_ids", [])
-            )
-        else:
-            raise UserError(_("Incorrect model."))
+        products = self.product_ids
 
         for product in products:
             if product.valuation != "real_time":
