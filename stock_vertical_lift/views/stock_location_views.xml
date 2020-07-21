@@ -15,6 +15,15 @@
                     icon="fa-hand-paper-o"
                     attrs="{'invisible': [('vertical_lift_kind', 'not in', ('tray', 'cell'))]}"
                 />
+                <button
+                    name="button_release_vertical_lift_tray"
+                    string="Release Shuttle Tray"
+                    type="object"
+                    groups="stock.group_stock_manager"
+                    class="oe_stat_button"
+                    icon="fa-hand-rock-o"
+                    attrs="{'invisible': [('vertical_lift_kind', 'not in', ('tray', 'cell'))]}"
+                />
             </div>
             <field name="return_location" position="after">
                 <field

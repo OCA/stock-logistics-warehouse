@@ -178,6 +178,7 @@ class VerticalLiftShuttle(models.Model):
         }
 
     def action_back_to_settings(self):
+        self.release_vertical_lift_tray()
         action_xmlid = "stock_vertical_lift.vertical_lift_shuttle_action"
         action = self.env.ref(action_xmlid).read()[0]
         action["target"] = "main"
@@ -195,15 +196,54 @@ class VerticalLiftShuttle(models.Model):
     # TODO: should the mode be changed on all the shuttles at the same time?
     def switch_pick(self):
         self.mode = "pick"
+        self.release_vertical_lift_tray()
         return self.action_open_screen()
 
     def switch_put(self):
         self.mode = "put"
+        self.release_vertical_lift_tray()
         return self.action_open_screen()
 
     def switch_inventory(self):
         self.mode = "inventory"
+        self.release_vertical_lift_tray()
         return self.action_open_screen()
+
+    def _hardware_vertical_lift_release_tray_payload(self):
+        """Prepare "release" message to be sent to the vertical lift hardware
+
+        Private method, this is where the implementation actually happens.
+        Addons can add their instructions based on the hardware used for
+        this location.
+
+        The hardware used for a location can be found in:
+
+        ``self.hardware``
+
+        Each addon can implement its own mechanism depending of this value
+        and must call ``super``.
+
+        The method must send the command to the vertical lift to release (close)
+        the tray.
+
+        Returns a message in bytes, that will be sent through
+        ``VerticalLiftShuttle._hardware_send_message()``.
+        """
+        if self.hardware == "simulation":
+            message = _("Releasing tray")
+            return message.encode("utf-8")
+        else:
+            raise NotImplementedError()
+
+    def release_vertical_lift_tray(self):
+        """Send instructions to the vertical lift hardware to close trays
+
+        The actual implementation of the method goes in the private method
+        ``_hardware_vertical_lift_release_tray()``.
+        """
+        self.ensure_one()
+        payload = self._hardware_vertical_lift_release_tray_payload()
+        return self._hardware_send_message(payload)
 
     def _send_notification_refresh(self, success):
         """Send a refresh notification to the current opened screen

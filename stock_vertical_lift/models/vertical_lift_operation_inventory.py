@@ -264,5 +264,7 @@ class VerticalLiftOperationInventory(models.Model):
             return
         self.next_step()
         if self.step() == "noop":
+            # close the tray once everything is inventoried
+            self.shuttle_id.release_vertical_lift_tray()
             # sorry not sorry
             return self._rainbow_man()
