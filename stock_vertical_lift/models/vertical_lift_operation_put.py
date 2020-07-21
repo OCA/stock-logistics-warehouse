@@ -172,6 +172,9 @@ class VerticalLiftOperationPut(models.Model):
         self.current_move_line_id.fetch_vertical_lift_tray_dest()
 
     def button_release(self):
+        # release (close) the tray each time, because for put-away, we
+        # never know if the operator will scan another line or not
+        self.shuttle_id.release_vertical_lift_tray()
         super().button_release()
         if self.count_move_lines_to_do_all() == 0:
             # sorry not sorry

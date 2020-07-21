@@ -11,25 +11,13 @@ _logger = logging.getLogger(__name__)
 class StockLocation(models.Model):
     _inherit = "stock.location"
 
-    def _hardware_kardex_prepare_payload(self, cell_location=None):
+    def _hardware_kardex_prepare_fetch_payload(self, cell_location=None):
         if self.level is False:
             raise exceptions.UserError(
                 _("Shuttle tray %s has no level. " "Please fix the configuration")
                 % self.display_name
             )
-        message_template = (
-            "{code}|{hostId}|{addr}|{carrier}|{carrierNext}|"
-            "{x}|{y}|{boxType}|{Q}|{order}|{part}|{desc}|\r\n"
-        )
         shuttle = self.vertical_lift_shuttle_id
-        if shuttle.mode == "pick":
-            code = "1"
-        elif shuttle.mode == "put":
-            code = "2"
-        elif shuttle.mode == "inventory":
-            code = "5"
-        else:
-            code = "61"  # ping
         if cell_location:
             x, y = cell_location.tray_cell_center_position()
             if x == 0 and y == 0:
@@ -45,7 +33,7 @@ class StockLocation(models.Model):
         else:
             x, y = "", ""
         subst = {
-            "code": code,
+            "code": shuttle._kardex_shuttle_code(),
             "hostId": self.env["ir.sequence"].next_by_code("vertical.lift.command"),
             # hard code the gate for now.
             # TODO proper handling of multiple gates for 1 lift.
@@ -60,11 +48,10 @@ class StockLocation(models.Model):
             "part": "",
             "desc": "",
         }
-        payload = message_template.format(**subst)
-        return payload.encode("iso-8859-1", "replace")
+        return shuttle._hardware_kardex_format_template(subst)
 
-    def _hardware_vertical_lift_tray_payload(self, cell_location=None):
-        """Prepare the message to be sent to the vertical lift hardware
+    def _hardware_vertical_lift_fetch_tray_payload(self, cell_location=None):
+        """Prepare "fetch" message to be sent to the vertical lift hardware
 
         Private method, this is where the implementation actually happens.
         Addons can add their instructions based on the hardware used for
@@ -100,11 +87,12 @@ class StockLocation(models.Model):
           highlighting the cell using a laser pointer.
         """
         if self.vertical_lift_shuttle_id.hardware == "kardex":
-            payload = self._hardware_kardex_prepare_payload(cell_location=cell_location)
-            _logger.debug("Sending to kardex: {}", payload)
-            # TODO implement the communication with kardex
+            payload = self._hardware_kardex_prepare_fetch_payload(
+                cell_location=cell_location
+            )
+            _logger.debug("Sending to kardex (fetch): {}", payload)
         else:
-            payload = super()._hardware_vertical_lift_tray_payload(
+            payload = super()._hardware_vertical_lift_fetch_tray_payload(
                 cell_location=cell_location
             )
         return payload

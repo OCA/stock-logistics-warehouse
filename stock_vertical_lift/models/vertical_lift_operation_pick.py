@@ -82,5 +82,9 @@ class VerticalLiftOperationPick(models.Model):
         """Release the operation, go to the next"""
         super().button_release()
         if self.step() == "noop":
+            # we don't need to release (close) the tray until we have reached
+            # the last line: the release is implicit when a next line is
+            # fetched
+            self.shuttle_id.release_vertical_lift_tray()
             # sorry not sorry
             return self._rainbow_man()

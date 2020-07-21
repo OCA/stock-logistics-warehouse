@@ -66,32 +66,48 @@
         <field name="name">vertical.lift.shuttle.view.form</field>
         <field name="model">vertical.lift.shuttle</field>
         <field name="arch" type="xml">
-            <form string="Operations">
-                <group name="main">
-                    <group name="left">
-                        <field name="name" />
-                        <field name="mode" />
-                        <field name="location_id" />
-                        <field name="hardware" />
+            <form string="Shuttle">
+                <header>
+                    <button
+                        name="release_vertical_lift_tray"
+                        string="Release tray"
+                        type="object"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" />
+                        <h1>
+                            <field name="name" placeholder="Shuttle Name" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group name="left">
+                            <field name="mode" />
+                            <field name="location_id" />
+                            <field name="hardware" />
+                        </group>
+                        <group string="Network" name="network">
+                            <field name="server" />
+                            <field name="port" />
+                            <field name="use_tls" />
+                        </group>
                     </group>
-                    <group string="Network" name="network">
-                        <field name="server" />
-                        <field name="port" />
-                        <field name="use_tls" />
+                    <group groups="base.group_no_one">
+                        <label for="command_ids" />
+                        <field name="command_ids">
+                            <tree>
+                                <field name="name" />
+                                <field name="command" />
+                                <field name="answer" />
+                                <field name="error" />
+                                <field name="create_date" />
+                            </tree>
+                        </field>
                     </group>
-                </group>
-                <group groups="base.group_no_one">
-                    <label for="command_ids" />
-                    <field name="command_ids">
-                        <tree>
-                            <field name="name" />
-                            <field name="command" />
-                            <field name="answer" />
-                            <field name="error" />
-                            <field name="create_date" />
-                        </tree>
-                    </field>
-                </group>
+                </sheet>
             </form>
         </field>
     </record>

@@ -63,12 +63,12 @@ class StockLocation(models.Model):
                 shuttle = location.location_id.vertical_lift_shuttle_id
             location.vertical_lift_shuttle_id = shuttle
 
-    def _hardware_vertical_lift_tray(self, cell_location=None):
-        payload = self._hardware_vertical_lift_tray_payload(cell_location)
+    def _hardware_vertical_lift_fetch_tray(self, cell_location=None):
+        payload = self._hardware_vertical_lift_fetch_tray_payload(cell_location)
         return self.vertical_lift_shuttle_id._hardware_send_message(payload)
 
-    def _hardware_vertical_lift_tray_payload(self, cell_location=None):
-        """Prepare the message to be sent to the vertical lift hardware
+    def _hardware_vertical_lift_fetch_tray_payload(self, cell_location=None):
+        """Prepare "fetch" message to be sent to the vertical lift hardware
 
         Private method, this is where the implementation actually happens.
         Addons can add their instructions based on the hardware used for
@@ -118,7 +118,7 @@ class StockLocation(models.Model):
             raise NotImplementedError()
 
     def fetch_vertical_lift_tray(self, cell_location=None):
-        """Send instructions to the vertical lift hardware
+        """Send instructions to the vertical lift hardware to fetch a tray
 
         Public method to use for:
         * fetch the vertical lift tray and presenting it to the operator
@@ -128,7 +128,7 @@ class StockLocation(models.Model):
         Depending on the hardware, the laser pointer may not be implemented.
 
         The actual implementation of the method goes in the private method
-        ``_hardware_vertical_lift_tray()``.
+        ``_hardware_vertical_lift_fetch_tray()``.
         """
         self.ensure_one()
         if self.vertical_lift_kind == "cell":
@@ -139,7 +139,7 @@ class StockLocation(models.Model):
             tray = self.location_id
             tray.fetch_vertical_lift_tray(cell_location=self)
         elif self.vertical_lift_kind == "tray":
-            self._hardware_vertical_lift_tray(cell_location=cell_location)
+            self._hardware_vertical_lift_fetch_tray(cell_location=cell_location)
         else:
             raise exceptions.UserError(
                 _("Cannot fetch a vertical lift tray on location %s") % (self.name,)
@@ -150,4 +150,10 @@ class StockLocation(models.Model):
         self.ensure_one()
         if self.vertical_lift_kind in ("cell", "tray"):
             self.fetch_vertical_lift_tray()
+        return True
+
+    def button_release_vertical_lift_tray(self):
+        self.ensure_one()
+        if self.vertical_lift_kind:
+            self.vertical_lift_shuttle_id.release_vertical_lift_tray()
         return True
