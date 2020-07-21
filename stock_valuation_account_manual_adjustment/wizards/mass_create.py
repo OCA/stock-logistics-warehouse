@@ -68,7 +68,9 @@ class StockValuationAccountMassAdjust(models.TransientModel):
     @job(default_channel="root.adjust_inventory_valuation")
     def process(self):
         context = self.env.context
-        active_model = self.env.context["active_model"]
+        active_model = self.env.context.get("active_model", False)
+        if not active_model:
+            raise UserError(_("Incorrect model."))
         if active_model == "product.product":
             products = self.env["product.product"].browse(
                 context.get("active_ids", [])
