@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2014 Numérigraphe SARL
 # Copyright 2017 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -15,10 +14,10 @@ class TestQuotedQty(common.SavepointCase):
         cls.product_tmpl = cls.env['product.template'].create({
             'name': 'Test product template',
         })
-        cls.uom_cat = cls.env['product.uom.categ'].create({
+        cls.uom_cat = cls.env['uom.category'].create({
             'name': 'Coolness',
         })
-        cls.uom = cls.env['product.uom'].create({
+        cls.uom = cls.env['uom.uom'].create({
             'name': 'odoos',
             'category_id': cls.uom_cat.id,
         })
@@ -54,7 +53,7 @@ class TestQuotedQty(common.SavepointCase):
         #  Record the initial quantity available for sale
         cls.initial_usable_qty = cls.product1.immediately_usable_qty
         #  Create a UoM in the category of PCE
-        cls.thousand = cls.env['product.uom'].create({
+        cls.thousand = cls.env['uom.uom'].create({
             'name': 'Thousand',
             'factor': 0.001,
             'rounding': 0.001,

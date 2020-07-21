@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2014 Numérigraphe SARL
 # Copyright 2017 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -13,6 +12,9 @@ class ProductProduct(models.Model):
     """Add the computation for the stock available to promise"""
     _inherit = 'product.product'
 
+    sale_order_line_ids = fields.One2many(
+        'sale.order.line', 'product_id',
+        help='Technical: used to compute quantities.')
     quoted_qty = fields.Float(
         compute='_compute_quoted_qty',
         type='float',
@@ -38,6 +40,16 @@ class ProductProduct(models.Model):
                 product.quoted_qty
         return res, stock_dict
 
+    @api.multi
+    @api.depends('sale_order_line_ids',
+                 'sale_order_line_ids.state',
+                 'sale_order_line_ids.product_id',
+                 'sale_order_line_ids.company_id',
+                 'sale_order_line_ids.order_id',
+                 'sale_order_line_ids.order_id.warehouse_id',
+                 'sale_order_line_ids.order_id.warehouse_id.lot_stock_id',
+                 'sale_order_line_ids.order_id.commitment_date',
+                 'sale_order_line_ids.order_id.date_order')
     def _compute_quoted_qty(self):
         """Compute the quantities in Quotations."""
         domain = [('state', '=', 'draft'),
@@ -55,12 +67,12 @@ class ProductProduct(models.Model):
         # Take warehouses that have these locations as stock locations
         if self.env.context.get('location', False):
             # Search by ID
-            if isinstance(self.env.context['location'], (int, long)):
+            if isinstance(self.env.context['location'], int):
                 domain.append(
                     ('order_id.warehouse_id.lot_stock_id', loc_op,
                      [self.env.context['location']]))
             # Search by name
-            elif isinstance(self.env.context['location'], basestring):
+            elif isinstance(self.env.context['location'], str):
                 location_ids = [
                     l.id
                     for l in self.env['stock.location'].search([
@@ -83,17 +95,17 @@ class ProductProduct(models.Model):
         to_date = self.env.context.get('to_date', False)
         if from_date:
             domain.extend([
-                ('order_id.requested_date', '>=', from_date),
-                '&',  # only consider 'date' when 'requested_date' is empty
-                ('order_id.requested_date', '=', False),
-                ('order_id.date', '>=', from_date),
+                ('order_id.commitment_date', '>=', from_date),
+                '&',  # only consider 'date_order' when 'commitment_date' is empty
+                ('order_id.commitment_date', '=', False),
+                ('order_id.date_order', '>=', from_date),
                 ])
         if to_date:
             domain.extend([
-                ('order_id.requested_date', '<=', to_date),
-                '&',  # only consider 'date' when 'requested_date' is empty
-                ('order_id.requested_date', '=', False),
-                ('order_id.date', '<=', to_date),
+                ('order_id.commitment_date', '<=', to_date),
+                '&',  # only consider 'date_order' when 'commitment_date' is empty
+                ('order_id.commitment_date', '=', False),
+                ('order_id.date_order', '<=', to_date),
                 ])
         # Compute the quoted quantity for each product
         results = Counter()
@@ -107,7 +119,7 @@ class ProductProduct(models.Model):
             # Rounding is OK since small values have not been squashed before
             results += Counter({
                 product_id:
-                    self.env['product.uom'].browse(uom_id)._compute_quantity(
+                    self.env['uom.uom'].browse(uom_id)._compute_quantity(
                         group['product_uom_qty'],
                         self.browse(product_id).uom_id)
             })
