@@ -12,10 +12,13 @@ class VerticalLiftShuttle(models.Model):
     def _server_env_fields(self):
         base_fields = super()._server_env_fields
         sftp_fields = {
-            "hardware": {},
+            "hardware": {"compute_default": "_compute_default_hardware"},
             "server": {},
             "port": {},
             "use_tls": {},
         }
         sftp_fields.update(base_fields)
         return sftp_fields
+
+    def _compute_default_hardware(self):
+        self.hardware = "simulation"
