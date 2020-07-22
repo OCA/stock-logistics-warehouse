@@ -3,7 +3,7 @@
 {
     "name": "Stock Cubiscan",
     "summary": "Implement inteface with Cubiscan devices for packaging",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "category": "Warehouse",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
