@@ -37,8 +37,20 @@
             <field name="inherit_id" ref="stock.warehouse_orderpoint_search" />
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
-                    <field name="product_category" filter_domain="[('product_category','child_of',self)]"/>
+                    <field name="product_category" filter_domain="[('product_category','child_of',self)]" />
+                    <field name="product_under_minimun" />
+                    <field name="product_over_maximum" />
                 </field>
+
+                <xpath expr="//filter[@name='inactive']" position="after">
+                    <filter string="Under Minimum"
+                        domain="[('product_under_minimun','=',True)]"
+                        name="under_minimun"/>
+                    <filter string="Over Maximum"
+                        domain="[('product_over_maximum','=',True)]"
+                        name="under_minimun"/>
+                </xpath>
+
                 <xpath expr="//group[1]" position="inside">
                     <filter name="product"
                             string="Product"
@@ -51,4 +63,5 @@
                 </xpath>
             </field>
         </record>
+
 </odoo>

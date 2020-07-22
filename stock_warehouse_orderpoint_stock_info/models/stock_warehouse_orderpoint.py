@@ -16,7 +16,7 @@ class StockWarehouseOrderpoint(models.Model):
 
     product_location_qty = fields.Float(
         string='Quantity On Location',
-        compute='_compute_product_available_qty'
+        compute='_compute_product_available_qty',
     )
     incoming_location_qty = fields.Float(
         string='Incoming On Location',
@@ -35,27 +35,56 @@ class StockWarehouseOrderpoint(models.Model):
         related='product_id.categ_id',
         store=True
     )
+    product_under_minimun = fields.Boolean(
+        string='Product Under Minimun',
+        compute='_compute_product_available_qty',
+        search='_search_product_under_minimun'
+    )
+    product_over_maximum = fields.Boolean(
+        string='Product Over Maximum',
+        compute='_compute_product_available_qty',
+        search='_search_product_over_maximum'
+    )
 
     @api.multi
     def _compute_product_available_qty(self):
-        operation_by_locaion = defaultdict(
+        operation_by_location = defaultdict(
             lambda: self.env['stock.warehouse.orderpoint']
         )
         for order in self:
-            operation_by_locaion[order.location_id] |= order
-        for location_id, order_in_locaion in operation_by_locaion.items():
-            products = order_in_locaion.mapped('product_id').with_context(
+            operation_by_location[order.location_id] |= order
+        for location_id, order_in_location in operation_by_location.items():
+            products = order_in_location.mapped('product_id').with_context(
                 location=location_id.id
             )._compute_quantities_dict(
                 lot_id=self.env.context.get('lot_id'),
                 owner_id=self.env.context.get('owner_id'),
                 package_id=self.env.context.get('package_id')
             )
-            for order in order_in_locaion:
+            for order in order_in_location:
                 product = products[order.product_id.id]
                 order.update({
                     'product_location_qty': product['qty_available'],
                     'incoming_location_qty': product['incoming_qty'],
                     'outgoing_location_qty': product['outgoing_qty'],
                     'virtual_location_qty': product['virtual_available'],
+                    'product_under_minimun' : product['qty_available'] < order.product_min_qty,
+                    'product_over_maximum' : product['qty_available'] > order.product_max_qty,
                 })
+
+    def _search_product_under_minimun(self, operator, value):
+        if operator == '=':
+            recs = self.search([]).filtered(lambda x : x.product_under_minimun is True)
+        else:
+            recs = self.search([]).filtered(lambda x : x.product_under_minimun is False)
+        if recs:
+            return [('id', 'in', [x.id for x in recs])]
+
+    def _search_product_over_maximum(self, operator, value):
+        if operator == '=':
+            recs = self.search([]).filtered(lambda x : x.product_over_maximum is True)
+        else:
+            recs = self.search([]).filtered(lambda x : x.product_over_maximum is False)
+        if recs:
+            return [('id', 'in', [x.id for x in recs])]
+
