@@ -127,13 +127,6 @@ msgid "ID"
 msgstr ""
 
 #. module: stock_cubiscan
-#: model:ir.model.constraint,message:stock_cubiscan.constraint_product_packaging_product_packaging_type_unique
-msgid ""
-"It is forbidden to have different packagings with the same type for a given "
-"product."
-msgstr ""
-
-#. module: stock_cubiscan
 #: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_device____last_update
 #: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard____last_update
 #: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line____last_update
@@ -203,11 +196,6 @@ msgstr ""
 #. module: stock_cubiscan
 #: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard__product_id
 msgid "Product"
-msgstr ""
-
-#. module: stock_cubiscan
-#: model:ir.model,name:stock_cubiscan.model_product_packaging
-msgid "Product Packaging"
 msgstr ""
 
 #. module: stock_cubiscan
