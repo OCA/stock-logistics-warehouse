@@ -88,12 +88,13 @@ class SaleStockReserve(models.TransientModel):
     def stock_reserve(self, line_ids):
         self.ensure_one()
         lines = self.env['sale.order.line'].browse(line_ids)
+        reserv = self.env['stock.reservation']
         for line in lines:
             if not line.is_stock_reservable:
                 continue
             vals = self._prepare_stock_reservation(line)
-            reserv = self.env['stock.reservation'].create(vals)
-            reserv.reserve()
+            reserv |= self.env['stock.reservation'].create(vals)
+        reserv.reserve()
         return True
 
     @api.multi
