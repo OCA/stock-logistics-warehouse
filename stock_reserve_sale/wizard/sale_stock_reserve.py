@@ -94,7 +94,8 @@ class SaleStockReserve(models.TransientModel):
                 continue
             vals = self._prepare_stock_reservation(line)
             reserv |= self.env['stock.reservation'].create(vals)
-        reserv.reserve()
+        if reserv:
+            reserv.reserve()
         return True
 
     @api.multi
