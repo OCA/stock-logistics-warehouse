@@ -117,7 +117,7 @@ class VerticalLiftOperationPut(models.Model):
 
     def _find_move_line_for_package(self, package):
         domain = AND(
-            [self._domain_move_lines_to_do_all(), [("package_id", "=", package.id)]]
+            [self._domain_move_lines_to_do_all(), [("package_id", "in", package.ids)]]
         )
         return self.env["stock.move.line"].search(domain, limit=1)
 
