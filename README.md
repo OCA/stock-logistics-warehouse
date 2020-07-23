@@ -28,7 +28,7 @@ addon | version | summary
 [packaging_uom](packaging_uom/) | 10.0.1.0.1 | Use uom in package
 [packaging_uom_view](packaging_uom_view/) | 10.0.1.0.0 | If purchase is installed along with packaging_uom, there is a duplicate view
 [procurement_auto_create_group](procurement_auto_create_group/) | 10.0.1.0.0 | Allows to configure the system to propose automatically new procurement groups in procurement orders.
-[purchase_packaging](purchase_packaging/) | 10.0.1.0.8 | In purchase, use package
+[purchase_packaging](purchase_packaging/) | 10.0.1.0.9 | In purchase, use package
 [sale_packaging](sale_packaging/) | 10.0.1.0.1 | In sale, use uom's package
 [stock_account_change_product_valuation](stock_account_change_product_valuation/) | 10.0.1.0.0 | Adjusts valuation of the products and quants when the cost method or type of a product changes
 [stock_account_quant_merge](stock_account_quant_merge/) | 10.0.1.0.0 | extension of 'stock_quant_merge', and adds the cost as a criteria to merge quants.
