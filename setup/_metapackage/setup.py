@@ -65,6 +65,7 @@ setuptools.setup(
         'odoo12-addon-stock_request_purchase',
         'odoo12-addon-stock_request_submit',
         'odoo12-addon-stock_request_tier_validation',
+        'odoo12-addon-stock_reserve_rule',
         'odoo12-addon-stock_secondary_unit',
         'odoo12-addon-stock_serial_batch_receive',
         'odoo12-addon-stock_warehouse_calendar',
