@@ -96,7 +96,7 @@ msgid "Is Mto"
 msgstr ""
 
 #. module: sale_stock_info_popup
-#: code:addons/sale_stock_info_popup/models/sale_order.py:103
+#: code:addons/sale_stock_info_popup/models/sale_order.py:104
 #, python-format
 msgid "Make To Order"
 msgstr ""
