@@ -234,6 +234,24 @@ class TestCalc(SavepointCase):
             expected,
         )
 
+    def test_calc_custom_values(self):
+        """Test custom values handler."""
+        expected = [
+            {"my_qty": 1, "foo": self.pkg_pallet.name},
+            {"my_qty": 3, "foo": self.pkg_big_box.name},
+            {"my_qty": 1, "foo": self.pkg_box.name},
+            {"my_qty": 5, "foo": self.uom_unit.name},
+        ]
+        self.assertEqual(
+            self.product_a.with_context(
+                _packaging_values_handler=lambda pkg, qty_per_pkg: {
+                    "my_qty": qty_per_pkg,
+                    "foo": pkg.name,
+                }
+            ).product_qty_by_packaging(2655),
+            expected,
+        )
+
     def test_calc_sub1(self):
         """Test contained packaging behavior 1."""
         expected = [
