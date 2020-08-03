@@ -79,12 +79,16 @@ class Product(models.Model):
         """
         custom_filter = self.env.context.get("_packaging_filter", lambda x: x)
         name_getter = self.env.context.get("_packaging_name_getter", lambda x: x.name)
-        packagings = [
-            Packaging(x.id, name_getter(x), x.qty, False)
-            for x in self.packaging_ids.filtered(custom_filter)
-            # Exclude the ones w/ zero qty as they are useless for the math
-            if x.qty
-        ]
+        packagings = sorted(
+            [
+                Packaging(x.id, name_getter(x), x.qty, False)
+                for x in self.packaging_ids.filtered(custom_filter)
+                # Exclude the ones w/ zero qty as they are useless for the math
+                if x.qty
+            ],
+            reverse=True,
+            key=lambda x: x.qty,
+        )
         # Add minimal unit
         packagings.append(
             # NOTE: the ID here could clash w/ one of the packaging's.
@@ -92,7 +96,7 @@ class Product(models.Model):
             # You can use `is_unit` to check this.
             Packaging(self.uom_id.id, self.uom_id.name, self.uom_id.factor, True)
         )
-        return sorted(packagings, reverse=True, key=lambda x: x.qty)
+        return packagings
 
     def _product_qty_by_packaging(self, pkg_by_qty, qty, with_contained=False):
         """Produce a list of dictionaries of packaging info."""
