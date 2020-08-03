@@ -102,10 +102,13 @@ class Product(models.Model):
         """Produce a list of dictionaries of packaging info."""
         # TODO: refactor to handle fractional quantities (eg: 0.5 Kg)
         res = []
+        prepare_values = self.env.context.get(
+            "_packaging_values_handler", self._prepare_qty_by_packaging_values
+        )
         for pkg in pkg_by_qty:
             qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
             if qty_per_pkg:
-                value = self._prepare_qty_by_packaging_values(pkg, qty_per_pkg)
+                value = prepare_values(pkg, qty_per_pkg)
                 if with_contained:
                     contained = None
                     if not pkg.is_unit:
