@@ -10,24 +10,7 @@
                     <group name="options">
                         <field name="history_range"/>
                     </group>
-                    <field name="product_history_ids">
-                        <tree>
-                            <field name="product_id"/>
-                            <field name="from_date"/>
-                            <field name="to_date"/>
-                            <field name="start_qty"/>
-                            <field name="purchase_qty"/>
-                            <field name="sale_qty"/>
-                            <field name="loss_qty"/>
-                            <field name="end_qty"/>
-                            <field name="incoming_qty"/>
-                            <field name="outgoing_qty"/>
-                            <field name="virtual_qty"/>
-                            <field name="ignored" invisible="1"/>
-                            <button name="ignore_line" attrs="{'invisible': [('ignored','=',True)]}" type="object" icon="STOCK_STOP" help="This history line is active. Click this button to ignore it." string="Ignore"/>
-                            <button name="unignore_line" attrs="{'invisible': [('ignored','=',False)]}" type="object" icon="STOCK_APPLY" help="This history line is not active. Click this button to reactivate it." string="Reactivate"/>
-                        </tree>
-                    </field>
+                    <field name="product_history_ids"/>
                 </page>
             </page>
             <div name="button_box" position="inside">

@@ -247,6 +247,8 @@ class ProductProduct(models.Model):
             last_qtys[product.id] = last_qty
 
         product_ids.sort()
+        if not last_dates:
+            return False
         last_date = min(last_dates.values())
 
         sql = """
