@@ -1,46 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="view_computed_purchase_order_inherit_form" model="ir.ui.view">
-            <field name="inherit_id" ref="purchase_compute_order.view_computed_purchase_order_form"/>
-            <field name="model">computed.purchase.order</field>
-            <field name="arch" type="xml">
-                <field name="product_code_inv" position="before">
-                    <button name="view_history" string="View Product History" type="object" icon="fa-history fa-2x"/>
-                </field>
+    <record id="view_computed_purchase_order_inherit_form" model="ir.ui.view">
+        <field name="inherit_id" ref="purchase_compute_order.view_computed_purchase_order_form"/>
+        <field name="model">computed.purchase.order</field>
+        <field name="arch" type="xml">
+            <field name="product_code_inv" position="before">
+                <button name="view_history" string="View Product History" type="object" icon="fa-history fa-2x"/>
             </field>
-        </record>
-        <record id="view_product_history_tree" model="ir.ui.view">
-            <field name="model">product.history</field>
-            <field name="arch" type="xml">
-                <tree string="Product History" edit="false" create="false" delete="false">
-                    <field name="product_id"/>
-                    <field name="from_date"/>
-                    <field name="to_date"/>
-                    <field name="start_qty"/>
-                    <field name="purchase_qty"/>
-                    <field name="sale_qty"/>
-                    <field name="loss_qty"/>
-                    <field name="end_qty"/>
-                    <field name="incoming_qty"/>
-                    <field name="outgoing_qty"/>
-                    <field name="virtual_qty"/>
-                    <field name="ignored" invisible="1"/>
-                    <button name="ignore_line_cpo" attrs="{'invisible': [('ignored','=',True)]}" type="object" icon="fa-plus-circle fa-2x" help="This history line is active. Click this button to ignore it."/>
-                    <button name="unignore_line_cpo" attrs="{'invisible': [('ignored','=',False)]}" type="object" icon="fa-times-circle fa-2x" help="This history line is active. Click this button to reactivate it."/>
-                </tree>
-            </field>
-        </record>
+        </field>
+    </record>
 
-        <record id="action_view_history" model="ir.actions.act_window">
-            <field name="name">View Product History</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">product.history</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="product_history_for_cpo.view_product_history_tree"/>
-            <field name="target">new</field>
-            <field name="domain">[]</field>
-        </record>
-    </data>
+    <record id="view_product_history_tree" model="ir.ui.view">
+        <field name="model">product.history</field>
+        <field name="arch" type="xml">
+            <tree string="Product History" edit="false" create="false" delete="false">
+                <field name="product_id"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="start_qty"/>
+                <field name="purchase_qty"/>
+                <field name="sale_qty"/>
+                <field name="loss_qty"/>
+                <field name="end_qty"/>
+                <field name="incoming_qty"/>
+                <field name="outgoing_qty"/>
+                <field name="virtual_qty"/>
+                <field name="ignored" invisible="1"/>
+                <button name="ignore_line_cpo" attrs="{'invisible': [('ignored','=',True)]}" type="object" class="text-success" icon="fa-check-circle" string="This history line is active. Click this button to ignore it."/>
+                <button name="unignore_line_cpo" attrs="{'invisible': [('ignored','=',False)]}" type="object" class="text-danger" icon="fa-times-circle" string="This history line is active. Click this button to reactivate it."/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_view_history" model="ir.actions.act_window">
+        <field name="name">View Product History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.history</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="product_history_for_cpo.view_product_history_tree"/>
+        <field name="target">new</field>
+        <field name="domain">[]</field>
+    </record>
 </odoo>
