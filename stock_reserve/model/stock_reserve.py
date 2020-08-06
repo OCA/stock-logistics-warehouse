@@ -120,8 +120,12 @@ class StockReservation(models.Model):
         A date until which the product is reserved can be specified.
         """
         self.write({'date_expected': fields.Datetime.now()})
-        self.mapped('move_id')._action_confirm(merge=False)
-        self.mapped('move_id.picking_id').action_assign()
+        moves = self.mapped('move_id')
+        pickings = moves.mapped('picking_id')
+        if moves:
+            moves._action_confirm(merge=False)
+        if pickings:
+            pickings.action_assign()
         return True
 
     @api.multi
