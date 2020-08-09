@@ -5,6 +5,7 @@
         <field name="name">product.template.product.form</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_manager'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='inventory']" position="inside">
                 <div name="putaway" groups="stock.group_adv_location" string="Putaway strategies">
@@ -45,6 +46,7 @@
         <field name="name">product.product.form.putaway</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_manager'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='putaway_categ']" position="before">
                 <group name="putaway_products" string="Put Away Strategies by products"
@@ -59,5 +61,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
