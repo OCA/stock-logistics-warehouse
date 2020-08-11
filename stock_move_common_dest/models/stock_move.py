@@ -10,7 +10,7 @@ class StockMove(models.Model):
     common_dest_move_ids = fields.Many2many(
         "stock.move",
         compute="_compute_common_dest_move_ids",
-        search="_search_compute_dest_move_ids",
+        search="_search_common_dest_move_ids",
         help="All the stock moves having a chained destination move sharing the"
         " same picking as the actual move's destination move",
     )
@@ -53,7 +53,7 @@ class StockMove(models.Model):
             else:
                 move.common_dest_move_ids = [(5, 0, 0)]
 
-    def _search_compute_dest_move_ids(self, operator, value):
+    def _search_common_dest_move_ids(self, operator, value):
         moves = self.search([("id", operator, value)])
         if not moves:
             return [("id", "=", 0)]
