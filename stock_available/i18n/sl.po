@@ -8,39 +8,40 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-30 03:10+0000\n"
-"PO-Revision-Date: 2016-04-27 11:10+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-"
-"warehouse-9-0/language/sl/)\n"
+"PO-Revision-Date: 2020-08-11 10:59+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/"
+"OCA-stock-logistics-warehouse-9-0/language/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Available</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Na voljo</span>"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Potential</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Potencialno</span>"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
 msgid "Available to Promise:"
-msgstr ""
+msgstr "Lahko obljubimo:"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product__immediately_usable_qty
 #: model:ir.model.fields,field_description:stock_available.field_product_template__immediately_usable_qty
 msgid "Available to promise"
-msgstr ""
+msgstr "Lahko obljubimo"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__stock_available_mrp_based_on
@@ -49,32 +50,35 @@ msgid ""
 "If empty, Quantity On Hand is used.\n"
 "Only the quantity fields have meaning for computing stock"
 msgstr ""
+"Izbira polja proizvoda po katerem se izračuna potencial.\n"
+"Če se pusti prazno, se uporabi količina pri roki.\n"
+"Le količinska polja imajo smisel pri izračunu zalog"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_sale
 msgid "Exclude goods already in sale quotations"
-msgstr ""
+msgstr "Izvzemi blago, ki je že v prodajnih ponudbah"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_immediately
 msgid "Exclude incoming goods"
-msgstr ""
+msgstr "Izvzemi blago, ki prihaja"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_mrp
 msgid "Include the production potential"
-msgstr ""
+msgstr "Vključno proizvodni potencial"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product__potential_qty
 #: model:ir.model.fields,field_description:stock_available.field_product_template__potential_qty
 msgid "Potential"
-msgstr ""
+msgstr "Potencial"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
@@ -91,7 +95,7 @@ msgstr "Predloga proizvoda"
 msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand."
-msgstr ""
+msgstr "Količina proizvoda, ki bi se lahko proizvedla s surovinami že pri roki."
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_template__potential_qty
@@ -100,11 +104,14 @@ msgid ""
 "at hand. If the product has several variants, this will be the biggest "
 "quantity that can be made for a any single variant."
 msgstr ""
+"Količina proizvoda, ki bi se lahko proizvedla s surovinami že pri roki. Če "
+"ima proizvod več različic, bo to največja količina, ki se lahko proizvede za "
+"katerokoli posamezno različico."
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_configuration
 msgid "Stock available to promise"
-msgstr ""
+msgstr "Zaloga, ki jo lahko obljubimo"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_template__immediately_usable_qty
@@ -112,6 +119,8 @@ msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs"
 msgstr ""
+"Zaloga proizvoda, ki jo lahko varno obljubimo za prodajo kupcem.\n"
+"Definicija te vrednosti se lahko nastavi po lastnih potrebah"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_product__immediately_usable_qty
@@ -119,6 +128,8 @@ msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs."
 msgstr ""
+"Zaloga proizvoda, ki jo lahko varno obljubimo za prodajo kupcem.\n"
+"Definicija te vrednosti se lahko nastavi po lastnih potrebah."
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_mrp
@@ -128,6 +139,10 @@ msgid ""
 "This installs the module stock_available_mrp.\n"
 "If the module mrp is not installed, this will install it too"
 msgstr ""
+"Količini, ki jo lahko obljubimo, doda količino blaga, ki se ga lahko takoj "
+"proizvede.\n"
+"Namesti modul stock_available_mrp.\n"
+"Če modul mrp ni nameščen, namesti tudi le-tega"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_immediately
@@ -136,6 +151,8 @@ msgid ""
 "promise.\n"
 "This installs the module stock_available_immediately."
 msgstr ""
+"Odbije količine v prihodu od količin, ki se lahko obljubijo.\n"
+"Namesti modul stock_available_immediately."
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_sale
@@ -146,8 +163,12 @@ msgid ""
 "If the modules sale and sale_delivery_date are not installed, this will "
 "install them too"
 msgstr ""
+"Odbije količine iz prodajnih predračunov od količine, ki se jo lahko obljubi."
+"\n"
+"Namesti modul stock_available_sale.\n"
+"Če modula sale in sale_delivery_date nista nameščena, namesti tudi njiju"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__stock_available_mrp_based_on
 msgid "based on"
-msgstr ""
+msgstr "na osnovi"
