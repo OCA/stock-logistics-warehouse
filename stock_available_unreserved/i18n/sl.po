@@ -9,20 +9,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:35+0000\n"
-"PO-Revision-Date: 2018-01-16 14:35+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2020-08-11 10:59+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__contains_unreserved
 msgid "Contains unreserved products"
-msgstr ""
+msgstr "Vsebuje ne rezervirane proizvode"
 
 #. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.quant_search_view
@@ -34,14 +35,14 @@ msgstr "Interno ne rezervirano"
 #: code:addons/stock_available_unreserved/models/product.py:117
 #, python-format
 msgid "Invalid domain operator %s"
-msgstr ""
+msgstr "Neveljaven domenski operator %s"
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:118
 #: code:addons/stock_available_unreserved/models/product.py:119
 #, python-format
 msgid "Invalid domain right operand %s"
-msgstr ""
+msgstr "Neveljaven desni domenski operand %s"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_product_product
@@ -66,12 +67,12 @@ msgstr "Ne rezervirana količna pri roki"
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Kvant"
 
 #. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_search_form_view_stock
 msgid "Reservable Products"
-msgstr ""
+msgstr "Proizvodi za rezervacijo"
 
 #. module: stock_available_unreserved
 #: model:ir.actions.act_window,name:stock_available_unreserved.product_open_quants_unreserved
