@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2020-08-11 10:59+0000\n"
+"PO-Revision-Date: 2020-08-13 19:59+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -34,6 +34,10 @@ msgid ""
 "'Total Value Change': Change the total value of the inventory. Unit price is "
 "recalculated according to the new total value and available quantity."
 msgstr ""
+"'Sprememba cene enote': spremeni ceno enote proizvoda. Vrednost inventarja "
+"se preračuna glede na novo ceno in razpoložljivo količino.\n"
+"'Sprememba celotne vrednosti': sprememba celotne vrednosti inventarja. Cena "
+"enote se preračuna glede na novo celotno vrednost in razpoložljivo količino."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__revaluation_type
@@ -45,6 +49,12 @@ msgid ""
 "Actual resulting value may be slightly different, based on per-unit price "
 "precision and rounding."
 msgstr ""
+"'Sprememba cene enote': spremeni ceno enote proizvoda. Vrednost inventarja "
+"se preračuna glede na novo ceno in razpoložljivo količino.\n"
+"'Sprememba celotne vrednosti': sprememba celotne vrednosti inventarja. Cena "
+"enote se preračuna glede na novo celotno vrednost in razpoložljivo količino. "
+"Vrednost dejanskega rezultata je lahko rahlo drugačna glede na decimalno "
+"natančnost cene in zaokroževanje."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__account_move_ids
@@ -54,7 +64,7 @@ msgstr "Vknjižba"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__document_date
 msgid "Applied date"
-msgstr ""
+msgstr "Datum prevrednotenja"
 
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
@@ -76,24 +86,24 @@ msgstr "Preklicano"
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_stock_change_standard_price
 msgid "Change Standard Price"
-msgstr ""
+msgstr "Spremeni standardno ceno"
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:277
 #, python-format
 msgid "Change the cost before posting"
-msgstr ""
+msgstr "Spremeni lastno ceno pred vknjižbo"
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:280
 #, python-format
 msgid "Change the value before posting"
-msgstr ""
+msgstr "Spremeni vrednost pred vknjižbo"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__reval_template_id
 msgid "Choose a template to automatically apply revaluation options."
-msgstr ""
+msgstr "Izberi predlogo za samodejno uveljavljanje opcij prevrednotenja."
 
 #. module: stock_inventory_revaluation
 #: model_terms:ir.actions.act_window,help:stock_inventory_revaluation.action_stock_inventory_revaluation_tmpl_tree
@@ -103,7 +113,7 @@ msgstr "Ustvari novo prevrednotenje zaloge."
 #. module: stock_inventory_revaluation
 #: model_terms:ir.actions.act_window,help:stock_inventory_revaluation.action_stock_inventory_revaluation_tree
 msgid "Click to start a new Stock Inventory Revaluation."
-msgstr ""
+msgstr "Zaženi novo prevrednotenje zaloge."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__company_id
@@ -114,7 +124,7 @@ msgstr "Družba"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__cost_method
 msgid "Cost Method"
-msgstr "Metoda vrednotenja stroškov"
+msgstr "Metoda vrednotenja lastne cene"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__create_uid
@@ -142,7 +152,7 @@ msgstr "Tekoča vrednost"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__current_cost
 msgid "Current cost"
-msgstr "Tekoči strošek"
+msgstr "Tekoči lastna cena"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__qty_available
@@ -157,6 +167,15 @@ msgid ""
 "Otherwise, this includes goods stored in any Stock Location with 'internal' "
 "type."
 msgstr ""
+"Tekoča količina proizvodov.\n"
+"V kontekstu posamezne lokacije zalog vključuje blago hranjeno na tej "
+"lokaciji ali njej podrejenih lokacijah.\n"
+"V kontekstu posameznega skladišča vključuje blago hranjeno na lokaciji "
+"zaloge tega skladišča in njej podrejenih lokacij.\n"
+"V kontekstu trgovine vključuje blago hranjeno na lokaciji zaloge skladišča "
+"te trgovine in njej podrejenih lokacij.\n"
+"Drugače vključuje blago hranjeno na katerikoli lokaciji zaloge tipa "
+"'interno'."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__current_value
@@ -177,7 +196,7 @@ msgstr "Do datuma"
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__decrease_account_id
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_template__decrease_account_id
 msgid "Decrease Account"
-msgstr "Zmanjšaj znesek"
+msgstr "Konto znižanja"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__uom_id
@@ -264,8 +283,8 @@ msgid ""
 "Enter the new cost you wish to assign to the product. Relevant only when the "
 "selected revaluation type is Price Change."
 msgstr ""
-"Vnesite nov strošek, ki ga želite dodeliti proizvodu. Relevantno je le, če "
-"je izbrani tip vrednotenja Sprememba cene."
+"Vnesite novo lastno ceno, ki jo želite dodeliti proizvodu. Relevantno je le, "
+"če je izbrani tip vrednotenja Sprememba cene."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_move__new_value
@@ -280,7 +299,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_get_move_form
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 msgid "Get Moves"
-msgstr ""
+msgstr "Pridobi premike"
 
 #. module: stock_inventory_revaluation
 #: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_get_move
@@ -402,12 +421,12 @@ msgstr "Lokacija"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_move__location_id
 msgid "Location where the system will stock the finished products."
-msgstr ""
+msgstr "Lokacija kamor bo sistem skladiščil dokončane proizvode."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_get_moves__lot_id
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/serijska številka"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_move__in_date
@@ -415,11 +434,13 @@ msgid ""
 "Move date: scheduled date until move is done, then date of actual move "
 "processing"
 msgstr ""
+"Datum premika: načrtovani datum dokler premik ni opravljen, nato datum "
+"dejanske obdelave premika"
 
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 msgid "Moves"
-msgstr ""
+msgstr "Premiki"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__name
@@ -430,12 +451,12 @@ msgstr "Naziv"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__new_value
 msgid "New Value"
-msgstr ""
+msgstr "Nova vrednost"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__new_cost
 msgid "New cost"
-msgstr "Nov strošek"
+msgstr "Nova lastna cena"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__new_value
@@ -444,6 +465,10 @@ msgid ""
 "revaluation type is Total Value Change.  Actual resulting value may be "
 "slightly different, based on per-unit price precision and rounding."
 msgstr ""
+"Nova skupna vrednost razpoložljivega inventarja. Relevantno le, če je "
+"izbrano prevrednotenje tipa sprememba vrednosti.  Vrednost dejanskega "
+"rezultata je lahko rahlo drugačna, glede na decimalno natančnost cene enote "
+"in zaokroževanje."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__new_value
@@ -454,7 +479,7 @@ msgstr "Nova vrednost"
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:292
 #, python-format
 msgid "No changes were made to move values"
-msgstr ""
+msgstr "Ni opravljenih sprememb, da bi premikali vrednosti"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_qty
@@ -475,13 +500,13 @@ msgstr "Stara vrednost"
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:259
 #, python-format
 msgid "Only stockable products can be revalued"
-msgstr ""
+msgstr "Le hranljivi proizvodi (na zalogo) se lahko prevrednotijo"
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:311
 #, python-format
 msgid "Please add a Stock Valuation Account in product category %s"
-msgstr ""
+msgstr "Dodajte konto prevrednotenja zalog v kategorijo proizvoda %s"
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:304
@@ -497,7 +522,7 @@ msgstr ""
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:285
 #, python-format
 msgid "Please revalue one or more stock moves"
-msgstr ""
+msgstr "Prosimo, da prevrednotite enega ali več premikov zalog"
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:317
@@ -506,6 +531,8 @@ msgid ""
 "Please specify an accounting journal on the revaluation, or in product "
 "category %s"
 msgstr ""
+"Prosimo, da določite knj. dnevnik za prevrednotenje na kategoriji proizvoda "
+"%s"
 
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.stock_inventory_revaluation_mass_post_form
@@ -617,6 +644,8 @@ msgid ""
 "Revaluation type 'Unit Price Change' doesn't apply to Stock-Move-Specific "
 "changes.  Use type 'Total Value Change'."
 msgstr ""
+"Tip prevrednotenja 'Sprememba cene enote' se ne nanaša na spremembe "
+"posameznih premikov zalog.  Uporabite tip 'Sprememba skupne vrednosti'."
 
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_search
@@ -630,6 +659,8 @@ msgid ""
 "Select a journal for the accounting entry.  Leave blank to usethe default "
 "journal for the product."
 msgstr ""
+"Izberite dnevnik za knjigovodski vnos.  Pustite prazno za uporabo privzetega "
+"dnevnika za proizvod."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_value
@@ -685,7 +716,7 @@ msgstr "Predloga"
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:265
 #, python-format
 msgid "The available quantity for this product must be a positive number"
-msgstr ""
+msgstr "Razpoložljiva količina tega proizvoda mora biti pozitivno število"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__current_cost
@@ -696,7 +727,7 @@ msgstr "Tekoča cena proizvoda."
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:209
 #, python-format
 msgid "The new cost must be positive"
-msgstr ""
+msgstr "Nova lastna cena mora biti pozitivna"
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:206
@@ -712,28 +743,31 @@ msgid ""
 "The remaining quantity on a stock move has changed. You can't cancel this "
 "revaluation. Try creating a new revaluation to reverse this one."
 msgstr ""
+"Spremenjena je bila preostala količina v premiku zalog. Tega prevrednotenja "
+"ne morete preklicati. Poskusite ustvariti novo prevrednotenje, da izničite "
+"tega."
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:296
 #, python-format
 msgid "The selected moves are for a different product than the revaluation"
-msgstr ""
+msgstr "Izbrani premiki so za drugačen proizvod kot prevrednotenje"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_template__remarks
 msgid "This text is copied to the notes on the journal entry."
-msgstr ""
+msgstr "To besedilo je kopirano med opombe dnevniškega vnosa."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__stock_valuation_account_id
 msgid "To be set automatically when posting the revaluation"
-msgstr ""
+msgstr "Za samodejno nastavitev pri knjiženju prevrednotenja"
 
 #. module: stock_inventory_revaluation
 #: selection:stock.inventory.revaluation,revaluation_type:0
 #: selection:stock.inventory.revaluation.template,revaluation_type:0
 msgid "Total Value Change"
-msgstr ""
+msgstr "Sprememba skupne vrednosti"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__current_value
@@ -755,7 +789,7 @@ msgstr "Sprememba cene enote"
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:347
 #, python-format
 msgid "Unknown costing method %s"
-msgstr ""
+msgstr "Neznana metoda vrednotenja %s"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__uom_id
@@ -779,11 +813,14 @@ msgid ""
 "case the revaluation gets canceled. If the remaining quantity at the time of "
 "cancellation is different, we can't allow the cancellation."
 msgstr ""
+"Preostalo količino ob knjiženju prevrednotenja shranimo, za primer, če bi se "
+"prevrednotenje preklicalo. Če je preostala količina ob času preklica "
+"drugačna, preklica ne moremo dovoliti."
 
 #. module: stock_inventory_revaluation
 #: sql_constraint:stock.inventory.revaluation.template:0
 msgid "You cannot have two templates with the same name."
-msgstr ""
+msgstr "Ne morete imeti dveh predlog z istim nazivom."
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/account_move.py:26
