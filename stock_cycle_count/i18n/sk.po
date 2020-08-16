@@ -327,14 +327,12 @@ msgstr "Odberatelia"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_channel_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Channels)"
 msgstr "Odberatelia"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_partner_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Partners)"
 msgstr "Odberatelia"
 
@@ -354,7 +352,6 @@ msgstr "ID"
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread
 #, fuzzy
-#| msgid "If checked new messages require your attention."
 msgid "If checked, new messages require your attention."
 msgstr "Ak zaškrtnuté, nové správy vyžadujú vašu pozornosť."
 
@@ -362,7 +359,6 @@ msgstr "Ak zaškrtnuté, nové správy vyžadujú vašu pozornosť."
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 #, fuzzy
-#| msgid "If checked new messages require your attention."
 msgid "If checked, some messages have a delivery error."
 msgstr "Ak zaškrtnuté, nové správy vyžadujú vašu pozornosť."
 
@@ -425,7 +421,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_is_follower
 #, fuzzy
-#| msgid "Followers"
 msgid "Is Follower"
 msgstr "Odberatelia"
 
@@ -521,7 +516,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Number of unread messages"
 msgstr "Neprečítané správy"
 
@@ -655,7 +649,6 @@ msgstr "Neprečítané správy"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Unread Messages Counter"
 msgstr "Neprečítané správy"
 
@@ -678,7 +671,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Messages"
 msgid "Website Messages"
 msgstr "Správy"
 

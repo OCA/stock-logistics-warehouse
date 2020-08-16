@@ -356,7 +356,6 @@ msgstr "Si se marca, los nuevos mensajes requieren su atención"
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 #, fuzzy
-#| msgid "If checked, new messages require your attention."
 msgid "If checked, some messages have a delivery error."
 msgstr "Si se marca, los nuevos mensajes requieren su atención"
 
@@ -494,7 +493,6 @@ msgstr "Número de acciones"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
 #, fuzzy
-#| msgid "Number of Actions"
 msgid "Number of errors"
 msgstr "Número de acciones"
 
@@ -511,7 +509,6 @@ msgstr "Número de mensajes que requieren una acción"
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
 #, fuzzy
-#| msgid "Number of messages which requires an action"
 msgid "Number of messages with delivery error"
 msgstr "Número de mensajes que requieren una acción"
 
@@ -671,7 +668,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Messages"
 msgid "Website Messages"
 msgstr "Mensajes"
 

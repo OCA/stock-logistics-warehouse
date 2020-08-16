@@ -636,7 +636,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread
 #, fuzzy
-#| msgid "Messages"
 msgid "Unread Messages"
 msgstr "Mensagens"
 
@@ -664,7 +663,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Messages"
 msgid "Website Messages"
 msgstr "Mensagens"
 
