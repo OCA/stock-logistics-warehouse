@@ -59,7 +59,6 @@ msgstr "Lista vacía"
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:45
 #, fuzzy, python-format
-#| msgid "Selected Products"
 msgid "Filtered Products"
 msgstr "Productos seleccionados"
 
@@ -77,7 +76,6 @@ msgstr "Inventario"
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory_line_empty
 #, fuzzy
-#| msgid "Inventory"
 msgid "Inventory Line Empty"
 msgstr "Inventario"
 

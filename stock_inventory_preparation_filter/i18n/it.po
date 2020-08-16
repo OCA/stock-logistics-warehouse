@@ -76,7 +76,6 @@ msgstr "Inventario"
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory_line_empty
 #, fuzzy
-#| msgid "Inventory"
 msgid "Inventory Line Empty"
 msgstr "Inventario"
 
