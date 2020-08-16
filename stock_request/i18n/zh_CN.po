@@ -117,7 +117,6 @@ msgstr "取消"
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy, python-format
-#| msgid "Cancelled"
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -174,7 +173,6 @@ msgstr "创建时间"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy
-#| msgid "Stock requests"
 msgid "Current requests"
 msgstr "库存请求"
 
@@ -322,14 +320,12 @@ msgstr "如果勾选此项， 某些信息将会产生传递错误。"
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy
-#| msgid "In progress"
 msgid "In Progress"
 msgstr "进行中"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:11
 #, fuzzy, python-format
-#| msgid "In progress"
 msgid "In progress"
 msgstr "进行中"
 
@@ -599,7 +595,6 @@ msgstr "采购"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_cancelled
 #, fuzzy
-#| msgid "Cancelled"
 msgid "Qty Cancelled"
 msgstr "已取消"
 
@@ -622,7 +617,6 @@ msgstr "数量"
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_cancelled
 #, fuzzy
-#| msgid "Quantity completed"
 msgid "Quantity cancelled"
 msgstr "已完成数量"
 
@@ -882,7 +876,6 @@ msgstr "库存请求看板集成"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #, fuzzy
-#| msgid "Stock Requests Search"
 msgid "Stock Requests Order Search"
 msgstr "库存请求搜索"
 

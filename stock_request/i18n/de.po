@@ -120,7 +120,6 @@ msgstr "Abbrechen"
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy, python-format
-#| msgid "Cancelled"
 msgid "Cancelled"
 msgstr "Abgebrochen"
 
@@ -153,7 +152,6 @@ msgstr "Unternehmen muss mit Auftrag übereinstimmen"
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_res_config_settings
 #, fuzzy
-#| msgid "Settings"
 msgid "Config Settings"
 msgstr "Einstellungen"
 
@@ -327,14 +325,12 @@ msgstr "Wenn angehakt, haben Meldungen einen Zustellfehler."
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy
-#| msgid "In progress"
 msgid "In Progress"
 msgstr "In Bearbeitung"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:11
 #, fuzzy, python-format
-#| msgid "In progress"
 msgid "In progress"
 msgstr "In Bearbeitung"
 
@@ -606,7 +602,6 @@ msgstr "Einkäufe"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_cancelled
 #, fuzzy
-#| msgid "Cancelled"
 msgid "Qty Cancelled"
 msgstr "Abgebrochen"
 
@@ -629,7 +624,6 @@ msgstr "Menge"
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_cancelled
 #, fuzzy
-#| msgid "Quantity completed"
 msgid "Quantity cancelled"
 msgstr "Erledigte Menge"
 
@@ -893,7 +887,6 @@ msgstr "Bestandsanforderungen Kanban-Integration"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #, fuzzy
-#| msgid "Stock Requests Search"
 msgid "Stock Requests Order Search"
 msgstr "Anforderungssuche"
 
