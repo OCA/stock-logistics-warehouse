@@ -327,14 +327,12 @@ msgstr "Ακόλουθοι"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_channel_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Channels)"
 msgstr "Ακόλουθοι"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_partner_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Partners)"
 msgstr "Ακόλουθοι"
 
@@ -354,7 +352,6 @@ msgstr "Κωδικός"
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread
 #, fuzzy
-#| msgid "If checked new messages require your attention."
 msgid "If checked, new messages require your attention."
 msgstr "Εάν επιλεγεί τα νέα μηνύματα χρειάζονται την προσοχή σας"
 
@@ -362,7 +359,6 @@ msgstr "Εάν επιλεγεί τα νέα μηνύματα χρειάζοντ�
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 #, fuzzy
-#| msgid "If checked new messages require your attention."
 msgid "If checked, some messages have a delivery error."
 msgstr "Εάν επιλεγεί τα νέα μηνύματα χρειάζονται την προσοχή σας"
 
@@ -424,7 +420,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_is_follower
 #, fuzzy
-#| msgid "Followers"
 msgid "Is Follower"
 msgstr "Ακόλουθοι"
 
@@ -520,7 +515,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Number of unread messages"
 msgstr "Αδιάβαστα Μυνήματα"
 
@@ -653,7 +647,6 @@ msgstr "Αδιάβαστα Μυνήματα"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Unread Messages Counter"
 msgstr "Αδιάβαστα Μυνήματα"
 
@@ -676,7 +669,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Messages"
 msgid "Website Messages"
 msgstr "Μηνύματα"
 
