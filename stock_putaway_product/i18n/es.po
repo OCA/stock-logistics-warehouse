@@ -21,7 +21,6 @@ msgstr ""
 #. module: stock_putaway_product
 #: model:ir.actions.act_window,name:stock_putaway_product.quick_add_product_location_act_window
 #, fuzzy
-#| msgid "Product stock locations"
 msgid "Add Default Stock Location"
 msgstr "Ubicaciones de existencias del producto"
 
@@ -135,7 +134,6 @@ msgstr "Ubicaciones de existencias del producto"
 #: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_product_ids
 #: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
 #, fuzzy
-#| msgid "Product"
 msgid "Products"
 msgstr "Producto"
 
@@ -147,7 +145,6 @@ msgstr "Ubicaciones de traslado"
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_putaway_id
 #, fuzzy
-#| msgid "Put Away Locations"
 msgid "Put Away Method"
 msgstr "Ubicaciones de traslado"
 
@@ -160,7 +157,6 @@ msgstr "Estrategia de traslado"
 #. module: stock_putaway_product
 #: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
 #, fuzzy
-#| msgid "Product putaway stragegy"
 msgid "Quick Product Putaway"
 msgstr "Estrategia de traslado del producto"
 
@@ -184,14 +180,12 @@ msgstr "Hay una ubicación duplicada en la asignación de traslado"
 #. module: stock_putaway_product
 #: code:addons/stock_putaway_product/wizard/quick_add_location.py:74
 #, fuzzy, python-format
-#| msgid "Product putaway stragegy"
 msgid "Updated products putaway: %s"
 msgstr "Estrategia de traslado del producto"
 
 #. module: stock_putaway_product
 #: model:ir.model,name:stock_putaway_product.model_quick_add_product_location
 #, fuzzy
-#| msgid "Fixed per product location"
 msgid "quick.add.product.location"
 msgstr "Fija por ubicación del producto"
 

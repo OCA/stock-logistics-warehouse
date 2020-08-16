@@ -22,7 +22,6 @@ msgstr ""
 #. module: stock_putaway_product
 #: model:ir.actions.act_window,name:stock_putaway_product.quick_add_product_location_act_window
 #, fuzzy
-#| msgid "Product stock locations"
 msgid "Add Default Stock Location"
 msgstr "Lokacije zaloge proizvoda"
 
@@ -136,7 +135,6 @@ msgstr "Lokacije zaloge proizvoda"
 #: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_product_ids
 #: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
 #, fuzzy
-#| msgid "Product"
 msgid "Products"
 msgstr "Proizvod"
 
@@ -148,7 +146,6 @@ msgstr ""
 #. module: stock_putaway_product
 #: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_putaway_id
 #, fuzzy
-#| msgid "Put Away Strategy"
 msgid "Put Away Method"
 msgstr "Strategija shranjevanja"
 
@@ -161,7 +158,6 @@ msgstr "Strategija shranjevanja"
 #. module: stock_putaway_product
 #: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
 #, fuzzy
-#| msgid "Product putaway stragegy"
 msgid "Quick Product Putaway"
 msgstr "Strategija shranjevanja proizvoda"
 
@@ -185,14 +181,12 @@ msgstr ""
 #. module: stock_putaway_product
 #: code:addons/stock_putaway_product/wizard/quick_add_location.py:74
 #, fuzzy, python-format
-#| msgid "Product putaway stragegy"
 msgid "Updated products putaway: %s"
 msgstr "Strategija shranjevanja proizvoda"
 
 #. module: stock_putaway_product
 #: model:ir.model,name:stock_putaway_product.model_quick_add_product_location
 #, fuzzy
-#| msgid "Fixed per product location"
 msgid "quick.add.product.location"
 msgstr "Fiksno po lokaciji proizvoda"
 

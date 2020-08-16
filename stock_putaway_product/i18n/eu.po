@@ -133,7 +133,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_product_ids
 #: model:ir.ui.view,arch_db:stock_putaway_product.view_model_form
 #, fuzzy
-#| msgid "Product"
 msgid "Products"
 msgstr "Produktua"
 
