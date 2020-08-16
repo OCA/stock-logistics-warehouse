@@ -466,7 +466,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_ids
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Messages"
 msgstr "Mensaxes sen ler"
 
@@ -515,7 +514,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Number of unread messages"
 msgstr "Mensaxes sen ler"
 
@@ -644,7 +642,6 @@ msgstr "Mensaxes sen ler"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Unread Messages Counter"
 msgstr "Mensaxes sen ler"
 
@@ -667,7 +664,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Website Messages"
 msgstr "Mensaxes sen ler"
 

@@ -326,14 +326,12 @@ msgstr "フォロワー"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_channel_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Channels)"
 msgstr "フォロワー"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_partner_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Partners)"
 msgstr "フォロワー"
 
@@ -422,7 +420,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_is_follower
 #, fuzzy
-#| msgid "Followers"
 msgid "Is Follower"
 msgstr "フォロワー"
 
@@ -518,7 +515,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Number of unread messages"
 msgstr "未読メッセージ"
 
@@ -646,7 +642,6 @@ msgstr "未読メッセージ"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Unread Messages Counter"
 msgstr "未読メッセージ"
 
@@ -669,7 +664,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Messages"
 msgid "Website Messages"
 msgstr "メッセージ"
 

@@ -327,14 +327,12 @@ msgstr "Følgere."
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_channel_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Channels)"
 msgstr "Følgere."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_partner_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Partners)"
 msgstr "Følgere."
 
@@ -358,14 +356,12 @@ msgstr "Hvis det er merket nye meldinger så krever dette din oppmerksomhet."
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction
 #, fuzzy
-#| msgid "If checked new messages require your attention."
 msgid "If checked, new messages require your attention."
 msgstr "Hvis det er merket nye meldinger så krever dette din oppmerksomhet."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
 #, fuzzy
-#| msgid "If checked new messages require your attention."
 msgid "If checked, some messages have a delivery error."
 msgstr "Hvis det er merket nye meldinger så krever dette din oppmerksomhet."
 
@@ -427,7 +423,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_is_follower
 #, fuzzy
-#| msgid "Followers"
 msgid "Is Follower"
 msgstr "Følgere."
 
@@ -523,7 +518,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Number of unread messages"
 msgstr "Uleste meldinger."
 
@@ -652,7 +646,6 @@ msgstr "Uleste meldinger."
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Unread Messages Counter"
 msgstr "Uleste meldinger."
 
@@ -675,7 +668,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Messages"
 msgid "Website Messages"
 msgstr "Meldinger"
 
