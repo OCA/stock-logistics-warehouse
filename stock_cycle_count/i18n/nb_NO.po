@@ -356,7 +356,6 @@ msgstr "Hvis valgt, vil nye meldinger kreve din oppmerksomhet"
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 #, fuzzy
-#| msgid "If checked, new messages require your attention."
 msgid "If checked, some messages have a delivery error."
 msgstr "Hvis valgt, vil nye meldinger kreve din oppmerksomhet"
 
@@ -492,7 +491,6 @@ msgstr "Antall handlinger"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
 #, fuzzy
-#| msgid "Number of Actions"
 msgid "Number of errors"
 msgstr "Antall handlinger"
 
@@ -509,7 +507,6 @@ msgstr "Antall meldinger som krever handling"
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
 #, fuzzy
-#| msgid "Number of messages which requires an action"
 msgid "Number of messages with delivery error"
 msgstr "Antall meldinger som krever handling"
 
@@ -648,7 +645,6 @@ msgstr "Uleste meldinger"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Unread Messages"
 msgid "Unread Messages Counter"
 msgstr "Uleste meldinger"
 
@@ -671,7 +667,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Messages"
 msgid "Website Messages"
 msgstr "Meldinger"
 
