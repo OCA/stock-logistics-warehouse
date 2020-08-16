@@ -59,7 +59,6 @@ msgstr "Te tonen naam"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_duration
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
 #, fuzzy
-#| msgid "Location"
 msgid "Duration"
 msgstr "Locatie"
 
@@ -82,7 +81,6 @@ msgstr ""
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
 #, fuzzy
-#| msgid "Date From"
 msgid "From"
 msgstr "Datum van"
 
