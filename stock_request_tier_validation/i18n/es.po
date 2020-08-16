@@ -48,21 +48,18 @@ msgstr "Descartar"
 #: model:tier.definition,name:stock_request_tier_validation.stock_request_default_tier_definition
 #: model:tier.definition,name:stock_request_tier_validation.stock_request_order_default_tier_definition
 #, fuzzy
-#| msgid "Tier Review"
 msgid "Manager review"
 msgstr "Revisión de nivel"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 #, fuzzy
-#| msgid "Stock Request Order"
 msgid "My Stock Request Orders to review"
 msgstr "Pedido de existencias"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #, fuzzy
-#| msgid "Stock Request Order"
 msgid "My Stock Requests to review"
 msgstr "Pedido de existencias"
 
@@ -115,7 +112,6 @@ msgstr "Pedido de existencias validadas y preparadas para ser confirmadas"
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_tier_definition
 #, fuzzy
-#| msgid "tier.definition"
 msgid "Tier Definition"
 msgstr "tier.definition"
 
