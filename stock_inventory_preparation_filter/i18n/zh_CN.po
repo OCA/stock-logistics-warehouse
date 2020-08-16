@@ -23,7 +23,6 @@ msgstr ""
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, fuzzy, python-format
-#| msgid "Products"
 msgid "All products"
 msgstr "产品"
 
@@ -40,7 +39,6 @@ msgstr ""
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, fuzzy, python-format
-#| msgid "Selected Products"
 msgid "Filtered Products"
 msgstr "已选定产品"
 
@@ -63,7 +61,6 @@ msgstr "库存"
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
 #: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
 #, fuzzy
-#| msgid "Inventory"
 msgid "Inventory of"
 msgstr "库存"
 
