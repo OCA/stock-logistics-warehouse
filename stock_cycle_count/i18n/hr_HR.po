@@ -329,14 +329,12 @@ msgstr "Pratitelji"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_channel_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Channels)"
 msgstr "Pratitelji"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_partner_ids
 #, fuzzy
-#| msgid "Followers"
 msgid "Followers (Partners)"
 msgstr "Pratitelji"
 
@@ -496,7 +494,6 @@ msgstr "Broj radnji"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
 #, fuzzy
-#| msgid "Number of Actions"
 msgid "Number of errors"
 msgstr "Broj radnji"
 
@@ -645,14 +642,12 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread
 #, fuzzy
-#| msgid "Messages"
 msgid "Unread Messages"
 msgstr "Poruke"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
 #, fuzzy
-#| msgid "Last Message Date"
 msgid "Unread Messages Counter"
 msgstr "Datum zadnje poruke"
 
@@ -675,7 +670,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
 #, fuzzy
-#| msgid "Messages"
 msgid "Website Messages"
 msgstr "Poruke"
 
