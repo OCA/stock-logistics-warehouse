@@ -30,9 +30,6 @@ msgstr "Inventaire"
 #. module: stock_generate_putaway_from_inventory
 #: code:addons/stock_generate_putaway_from_inventory/models/stock_inventory.py:53
 #, fuzzy, python-format
-#| msgid ""
-#| "Some locations don't have a putaway strategy. Please set a putaway "
-#| "strategy for the locations: "
 msgid ""
 "Inventory location doesn't have a putaway strategy. Please set a putaway "
 "strategy on the inventory's location."
