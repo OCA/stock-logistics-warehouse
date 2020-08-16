@@ -70,7 +70,6 @@ msgstr ""
 #. module: stock_change_qty_reason
 #: model:ir.model,name:stock_change_qty_reason.model_stock_inventory
 #, fuzzy
-#| msgid "Inventory Line"
 msgid "Inventory"
 msgstr "Inventář"
 
@@ -147,7 +146,6 @@ msgstr "Důvod"
 #. module: stock_change_qty_reason
 #: model:ir.model,name:stock_change_qty_reason.model_stock_inventory_line_reason
 #, fuzzy
-#| msgid "Inventory Line"
 msgid "Stock Inventory Line Reason"
 msgstr "Inventář"
 
