@@ -178,7 +178,6 @@ msgstr "Lokacija"
 #: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
 #: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
 #, fuzzy
-#| msgid "Maximum Quantity"
 msgid "Maximum"
 msgstr "Maksimalna količina"
 
@@ -191,7 +190,6 @@ msgstr "Maksimalna količina"
 #: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
 #: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
 #, fuzzy
-#| msgid "Minimum Quantity"
 msgid "Minimum"
 msgstr "Minimalna količina"
 
