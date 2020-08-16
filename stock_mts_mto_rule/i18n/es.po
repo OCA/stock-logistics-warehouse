@@ -110,7 +110,6 @@ msgstr ""
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_rule
 #, fuzzy
-#| msgid "MTS Rule"
 msgid "Stock Rule"
 msgstr "Regla \"bajo existencias\""
 
