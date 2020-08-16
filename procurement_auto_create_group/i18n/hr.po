@@ -28,14 +28,12 @@ msgstr "Automatski kreiraj grupu nabave"
 #. module: procurement_auto_create_group
 #: code:addons/procurement_auto_create_group/models/procurement_group.py:28
 #, fuzzy, python-format
-#| msgid "No sequence defined for procurement group"
 msgid "No sequence defined for procurement group."
 msgstr "Nema definiranog brojevnog kruga za grupe nabave"
 
 #. module: procurement_auto_create_group
 #: model:ir.model,name:procurement_auto_create_group.model_procurement_group
 #, fuzzy
-#| msgid "Procurement Rule"
 msgid "Procurement Group"
 msgstr "Pavilo nabave"
 
