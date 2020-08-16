@@ -177,7 +177,6 @@ msgstr "创建时间"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy
-#| msgid "Stock requests"
 msgid "Current requests"
 msgstr "库存请求"
 
@@ -333,7 +332,6 @@ msgstr "如果勾选此项， 某些信息将会产生传递错误。"
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy
-#| msgid "In progress"
 msgid "In Progress"
 msgstr "进行中"
 
@@ -485,7 +483,6 @@ msgstr "操作次数"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_error_counter
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_error_counter
 #, fuzzy
-#| msgid "Number of error"
 msgid "Number of errors"
 msgstr "错误数"
 
@@ -716,7 +713,6 @@ msgstr "路线"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_sms_error
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_sms_error
 #, fuzzy
-#| msgid "Message Delivery error"
 msgid "SMS Delivery error"
 msgstr "消息递送错误"
 
@@ -868,7 +864,6 @@ msgstr "库存请求看板集成"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #, fuzzy
-#| msgid "Stock Requests Search"
 msgid "Stock Requests Order Search"
 msgstr "库存请求搜索"
 
