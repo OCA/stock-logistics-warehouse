@@ -20,7 +20,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_kanban.field_product_product__kanban_card_count
 #: model:ir.model.fields,field_description:stock_request_kanban.field_product_template__kanban_card_count
 #, fuzzy
-#| msgid "Kanban cards"
 msgid "# Kanban Cards"
 msgstr "看板卡"
 
@@ -313,7 +312,6 @@ msgstr "看板"
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.product_product_form_view_kanban_card_button
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.product_template_form_view_bom_button
 #, fuzzy
-#| msgid "Kanban cards"
 msgid "Kanban Cards"
 msgstr "看板卡"
 
@@ -451,7 +449,6 @@ msgstr "操作次数"
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_error_counter
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_error_counter
 #, fuzzy
-#| msgid "Number of error"
 msgid "Number of errors"
 msgstr "错误数"
 
@@ -509,7 +506,6 @@ msgstr "产品"
 #: model:ir.model,name:stock_request_kanban.model_product_template
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_template_id
 #, fuzzy
-#| msgid "Product"
 msgid "Product Template"
 msgstr "产品"
 
@@ -568,7 +564,6 @@ msgstr "路线"
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
 #, fuzzy
-#| msgid "Message Delivery error"
 msgid "SMS Delivery error"
 msgstr "消息递送错误"
 
@@ -582,7 +577,6 @@ msgstr "扫描"
 #. openerp-web
 #: code:addons/stock_request_kanban/static/src/xml/stock_request_kanban_scan.xml:0
 #, fuzzy, python-format
-#| msgid "Scanned Kanban"
 msgid "Scan Kanban"
 msgstr "已扫描看板"
 
@@ -650,7 +644,6 @@ msgstr "库存存货"
 #. module: stock_request_kanban
 #: model:ir.model,name:stock_request_kanban.model_wizard_stock_inventory_kanban
 #, fuzzy
-#| msgid "Stock Inventory Kanbans"
 msgid "Stock Inventory Kanban Wizard"
 msgstr "库存存货看板"
 
@@ -675,14 +668,12 @@ msgstr "库存请求看板"
 #. module: stock_request_kanban
 #: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban_abstract
 #, fuzzy
-#| msgid "Stock Request Kanbans"
 msgid "Stock Request Kanban Abstract Wizard"
 msgstr "库存请求看板"
 
 #. module: stock_request_kanban
 #: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban
 #, fuzzy
-#| msgid "Stock Request Kanban"
 msgid "Stock Request Kanban Wizard"
 msgstr "库存请求看板"
 
@@ -694,7 +685,6 @@ msgstr "库存请求看板"
 #. module: stock_request_kanban
 #: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_order_kanban
 #, fuzzy
-#| msgid "Stock Request Kanban"
 msgid "Stock Request Order Kanban Wizard"
 msgstr "库存请求看板"
 
