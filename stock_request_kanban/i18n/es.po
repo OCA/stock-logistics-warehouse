@@ -31,7 +31,6 @@ msgstr "Activo"
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_ids
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_ids
 #, fuzzy
-#| msgid "Active"
 msgid "Activities"
 msgstr "Activo"
 
@@ -39,7 +38,6 @@ msgstr "Activo"
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_state
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_state
 #, fuzzy
-#| msgid "Status State"
 msgid "Activity State"
 msgstr "Estado del Status"
 
@@ -297,7 +295,6 @@ msgstr "Kanban"
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_kanban_view
 #, fuzzy
-#| msgid "Kanban cards"
 msgid "Kanban Image"
 msgstr "Tarjetas Kanban"
 
@@ -480,7 +477,6 @@ msgstr ""
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__procurement_group_id
 #, fuzzy
-#| msgid "Procurement group must be the same"
 msgid "Procurement Group"
 msgstr "El grupo de reestablecimiento debe coincidir"
 
