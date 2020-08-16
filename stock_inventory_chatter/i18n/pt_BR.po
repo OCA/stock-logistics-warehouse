@@ -52,7 +52,6 @@ msgstr ""
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__partner_id
 #, fuzzy
-#| msgid "Inventory"
 msgid "Inventoried Owner"
 msgstr "Inventário"
 
@@ -79,7 +78,6 @@ msgstr ""
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__filter
 #, fuzzy
-#| msgid "Inventory"
 msgid "Inventory of"
 msgstr "Inventário"
 

@@ -47,14 +47,12 @@ msgstr ""
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__location_id
 #, fuzzy
-#| msgid "Inventory Done"
 msgid "Inventoried Location"
 msgstr "Inventář byl hotov"
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__partner_id
 #, fuzzy
-#| msgid "Inventory Done"
 msgid "Inventoried Owner"
 msgstr "Inventář byl hotov"
 
@@ -81,7 +79,6 @@ msgstr "Inventář byl hotov"
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__filter
 #, fuzzy
-#| msgid "Inventory"
 msgid "Inventory of"
 msgstr "Inventář"
 
