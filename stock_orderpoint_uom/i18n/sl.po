@@ -45,7 +45,6 @@ msgstr "Pravilo minimalne zaloge"
 #. module: stock_orderpoint_uom
 #: model:ir.model,name:stock_orderpoint_uom.model_procurement_group
 #, fuzzy
-#| msgid "Procurement UoM"
 msgid "Procurement Group"
 msgstr "EM oskrbovanja"
 
