@@ -48,7 +48,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__account_move_ids
 #, fuzzy
-#| msgid "Account move ids"
 msgid "Account Move"
 msgstr "Ids d'écriture comptable"
 
@@ -99,7 +98,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model_terms:ir.actions.act_window,help:stock_inventory_revaluation.action_stock_inventory_revaluation_tmpl_tree
 #, fuzzy
-#| msgid "Click to start a new Stock Inventory Revaluation."
 msgid "Click to start a new Stock Inventory Revaluation Template."
 msgstr "Cliquez pour démarrer une nouvelle réévaluation du stock"
 
@@ -140,7 +138,6 @@ msgstr "Créé le"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__current_value
 #, fuzzy
-#| msgid "Current value"
 msgid "Current Value"
 msgstr "Valeur actuelle"
 
@@ -187,7 +184,6 @@ msgstr "Compte de déflation"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__uom_id
 #, fuzzy
-#| msgid "Default Unit of Measure used for all stock operation."
 msgid "Default unit of measure used for all stock operations."
 msgstr ""
 "Unité de mesure par défaut utilisée pour toutes les opérations de stock"
@@ -275,7 +271,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_get_move
 #, fuzzy
-#| msgid "Click to start a new Stock Inventory Revaluation."
 msgid "Get Moves for Inventory Revaluation"
 msgstr "Cliquez pour démarrer une nouvelle réévaluation du stock"
 
@@ -351,7 +346,6 @@ msgstr "Pièces comptables"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__post_date
 #, fuzzy
-#| msgid "Journal Entries"
 msgid "Journal Entry posting date"
 msgstr "Pièces comptables"
 
@@ -442,7 +436,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__new_value
 #, fuzzy
-#| msgid "Current value"
 msgid "New value"
 msgstr "Valeur actuelle"
 
@@ -455,7 +448,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_qty
 #, fuzzy
-#| msgid "Quantity"
 msgid "Old Quantity"
 msgstr "Quantité"
 
@@ -598,7 +590,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 #, fuzzy
-#| msgid "Product Template"
 msgid "Revaluation Template"
 msgstr "Modèle de produit"
 
@@ -651,14 +642,12 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_move_tree
 #, fuzzy
-#| msgid "Click to start a new Stock Inventory Revaluation."
 msgid "Stock Inventory Revaluation Line Moves"
 msgstr "Cliquez pour démarrer une nouvelle réévaluation du stock"
 
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_move_form
 #, fuzzy
-#| msgid "Click to start a new Stock Inventory Revaluation."
 msgid "Stock Inventory Revaluation Moves"
 msgstr "Cliquez pour démarrer une nouvelle réévaluation du stock"
 
@@ -666,7 +655,6 @@ msgstr "Cliquez pour démarrer une nouvelle réévaluation du stock"
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_tmpl_form
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_tmpl_tree
 #, fuzzy
-#| msgid "Click to start a new Stock Inventory Revaluation."
 msgid "Stock Inventory Revaluation Template"
 msgstr "Cliquez pour démarrer une nouvelle réévaluation du stock"
 
@@ -678,14 +666,12 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__stock_valuation_account_id
 #, fuzzy
-#| msgid "Valuation Decrease Account"
 msgid "Stock Valuation Account"
 msgstr "Compte de valeur de déflation"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__reval_template_id
 #, fuzzy
-#| msgid "Product Template"
 msgid "Template"
 msgstr "Modèle de produit"
 

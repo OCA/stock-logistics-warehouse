@@ -49,7 +49,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__account_move_ids
 #, fuzzy
-#| msgid "Account Entry"
 msgid "Account Move"
 msgstr "Movimento de Conta"
 
@@ -343,7 +342,6 @@ msgstr "Movs. de Diário"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__post_date
 #, fuzzy
-#| msgid "Journal Entries"
 msgid "Journal Entry posting date"
 msgstr "Movs. de Diário"
 
@@ -445,7 +443,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_qty
 #, fuzzy
-#| msgid "Quantity"
 msgid "Old Quantity"
 msgstr "Quantidade"
 

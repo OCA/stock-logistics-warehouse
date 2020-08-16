@@ -49,7 +49,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__account_move_ids
 #, fuzzy
-#| msgid "Account Entry"
 msgid "Account Move"
 msgstr "Asento contable"
 
@@ -139,7 +138,6 @@ msgstr "Creado en"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__current_value
 #, fuzzy
-#| msgid "Current value"
 msgid "Current Value"
 msgstr "Valor actual"
 
@@ -434,7 +432,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__new_value
 #, fuzzy
-#| msgid "Current value"
 msgid "New value"
 msgstr "Valor actual"
 
@@ -447,7 +444,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_qty
 #, fuzzy
-#| msgid "Quantity"
 msgid "Old Quantity"
 msgstr "Cantidade"
 

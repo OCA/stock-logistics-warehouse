@@ -341,7 +341,6 @@ msgstr "Journaloppføringer"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__post_date
 #, fuzzy
-#| msgid "Journal Entries"
 msgid "Journal Entry posting date"
 msgstr "Journaloppføringer"
 

@@ -47,7 +47,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__account_move_ids
 #, fuzzy
-#| msgid "Account Entry"
 msgid "Account Move"
 msgstr "Asiento contable"
 

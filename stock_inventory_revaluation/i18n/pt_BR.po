@@ -52,7 +52,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__account_move_ids
 #, fuzzy
-#| msgid "Account Entry"
 msgid "Account Move"
 msgstr "Entrada de conta"
 
@@ -446,7 +445,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_qty
 #, fuzzy
-#| msgid "Quantity"
 msgid "Old Quantity"
 msgstr "Quantidade"
 
@@ -589,7 +587,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 #, fuzzy
-#| msgid "Product Template"
 msgid "Revaluation Template"
 msgstr "Modelo Produto"
 
@@ -668,7 +665,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__reval_template_id
 #, fuzzy
-#| msgid "Product Template"
 msgid "Template"
 msgstr "Modelo Produto"
 

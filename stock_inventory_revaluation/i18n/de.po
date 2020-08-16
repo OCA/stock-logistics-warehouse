@@ -47,7 +47,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__account_move_ids
 #, fuzzy
-#| msgid "Account move ids"
 msgid "Account Move"
 msgstr "Buchungs-IDs"
 
@@ -98,7 +97,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model_terms:ir.actions.act_window,help:stock_inventory_revaluation.action_stock_inventory_revaluation_tmpl_tree
 #, fuzzy
-#| msgid "Search Stock Inventory Revaluation"
 msgid "Click to start a new Stock Inventory Revaluation Template."
 msgstr "Suche Bestandsneubewertung"
 
@@ -139,7 +137,6 @@ msgstr "Erstellt am:"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__current_value
 #, fuzzy
-#| msgid "Current value"
 msgid "Current Value"
 msgstr "Aktueller Wert"
 
@@ -186,7 +183,6 @@ msgstr "Menge verringern"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__uom_id
 #, fuzzy
-#| msgid "Default Unit of Measure used for all stock operation."
 msgid "Default unit of measure used for all stock operations."
 msgstr "Vorgabe Maßeinheit bei allen Lagerbuchungen."
 
@@ -254,7 +250,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__old_cost
 #, fuzzy
-#| msgid "Displays the previous cost of the product."
 msgid "Displays the previous cost of the product"
 msgstr "Weist die vorherigen Einstandkosten des Produkts aus."
 
@@ -275,9 +270,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_move__new_value
 #, fuzzy
-#| msgid ""
-#| "Enter the new cost you wish to assign to the product. Relevant only when "
-#| "the selected revaluation type is Price Change."
 msgid ""
 "Enter the new value you wish to assign to the Move. Relevant only when the "
 "selected revaluation type is Total Value Change."
@@ -294,7 +286,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_get_move
 #, fuzzy
-#| msgid "Get Quants for Inventory Revaluation"
 msgid "Get Moves for Inventory Revaluation"
 msgstr "Ermittele Quanten zur Bestandsneubewertung"
 
@@ -332,7 +323,6 @@ msgstr "Neubewertungs-Inventur"
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_move
 #, fuzzy
-#| msgid "Inventory Revaluation"
 msgid "Inventory Revaluation Move"
 msgstr "Neubewertungs-Inventur"
 
@@ -340,7 +330,6 @@ msgstr "Neubewertungs-Inventur"
 #: model:ir.actions.act_window,name:stock_inventory_revaluation.action_stock_inventory_revaluation_tmpl_tree
 #: model:ir.ui.menu,name:stock_inventory_revaluation.menu_action_stock_inventory_revaluation_tmpl_tree
 #, fuzzy
-#| msgid "Inventory Revaluation"
 msgid "Inventory Revaluation Template"
 msgstr "Neubewertungs-Inventur"
 
@@ -352,14 +341,12 @@ msgstr "Neubewertungs-Inventur"
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_get_moves
 #, fuzzy
-#| msgid "Inventory revaluation get Quants"
 msgid "Inventory revaluation get moves"
 msgstr "Ermittele Quanten bei Bestandsneubewertung"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model,name:stock_inventory_revaluation.model_stock_inventory_revaluation_template
 #, fuzzy
-#| msgid "Inventory revaluation quant"
 msgid "Inventory revaluation template"
 msgstr "Quant der Bastandsneubewertung"
 
@@ -378,7 +365,6 @@ msgstr "Journaleinträge"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__post_date
 #, fuzzy
-#| msgid "Journal Entries"
 msgid "Journal Entry posting date"
 msgstr "Journaleinträge"
 
@@ -469,7 +455,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__new_value
 #, fuzzy
-#| msgid "Old value"
 msgid "New value"
 msgstr "Voriger Wert"
 
@@ -482,7 +467,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_qty
 #, fuzzy
-#| msgid "Quantity"
 msgid "Old Quantity"
 msgstr "Anzahl"
 
@@ -511,7 +495,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:304
 #, fuzzy, python-format
-#| msgid "Please add an Increase Account and a Decrease Account."
 msgid ""
 "Please add an Increase Account and a Decrease Account to the revaluation, or "
 "add them to product category %s"
@@ -560,7 +543,6 @@ msgstr "Buchungsdatum"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_value
 #, fuzzy
-#| msgid "Previous cost"
 msgid "Previous Value"
 msgstr "Vorherige Kosten"
 
@@ -623,14 +605,12 @@ msgstr "Neubewertung %s liegt nicht im Entwurf vor"
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__reval_move_ids
 #, fuzzy
-#| msgid "Revaluation Type"
 msgid "Revaluation Moves"
 msgstr "Neuberwertungsart"
 
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
 #, fuzzy
-#| msgid "Revaluation Type"
 msgid "Revaluation Template"
 msgstr "Neuberwertungsart"
 
@@ -664,7 +644,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_move__old_value
 #, fuzzy
-#| msgid "Shows the previous cost of the quant"
 msgid "Shows the previous value of the move"
 msgstr "Weist die vorigen Kosten dieses Quants aus"
 
@@ -685,14 +664,12 @@ msgstr "Bestandsneubewertung"
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_move_tree
 #, fuzzy
-#| msgid "Stock Inventory Revaluation Line Quants"
 msgid "Stock Inventory Revaluation Line Moves"
 msgstr "Quanten zu Bestandsneubewertungsposition"
 
 #. module: stock_inventory_revaluation
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_move_form
 #, fuzzy
-#| msgid "Stock Inventory Revaluation"
 msgid "Stock Inventory Revaluation Moves"
 msgstr "Bestandsneubewertung"
 
@@ -700,7 +677,6 @@ msgstr "Bestandsneubewertung"
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_tmpl_form
 #: model_terms:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_tmpl_tree
 #, fuzzy
-#| msgid "Stock Inventory Revaluation Quants"
 msgid "Stock Inventory Revaluation Template"
 msgstr "Quanten der Bestandsneubewertung"
 
@@ -712,14 +688,12 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__stock_valuation_account_id
 #, fuzzy
-#| msgid "Valuation Decrease Account"
 msgid "Stock Valuation Account"
 msgstr "Konto für Wertminderung"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation__reval_template_id
 #, fuzzy
-#| msgid "Product Template"
 msgid "Template"
 msgstr "Produktvorlage"
 
@@ -732,7 +706,6 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__current_cost
 #, fuzzy
-#| msgid "Displays the current cost of the product."
 msgid "The current cost of the product."
 msgstr "Weist die aktuellen Produkt-Einstandskosten aus."
 
@@ -746,7 +719,6 @@ msgstr ""
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:206
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:500
 #, fuzzy, python-format
-#| msgid "The new value for product %s cannot be negative"
 msgid "The new value must be positive"
 msgstr "Der neue Wert des Produkts %s darf nicht negativ sein."
 
@@ -783,14 +755,12 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__current_value
 #, fuzzy
-#| msgid "Displays the current value of the product."
 msgid "Total current value of product in stock"
 msgstr "Weist den aktuellen Wert des Produktes aus."
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation__old_value
 #, fuzzy
-#| msgid "Displays the current value of the product."
 msgid "Total current value of the product, prior to revaluation"
 msgstr "Weist den aktuellen Wert des Produktes aus."
 
@@ -798,7 +768,6 @@ msgstr "Weist den aktuellen Wert des Produktes aus."
 #: selection:stock.inventory.revaluation,revaluation_type:0
 #: selection:stock.inventory.revaluation.template,revaluation_type:0
 #, fuzzy
-#| msgid "Price Change"
 msgid "Unit Price Change"
 msgstr "Preisänderung"
 
