@@ -80,7 +80,6 @@ msgstr "超过阈值的差异数量"
 #. module: stock_inventory_discrepancy
 #: code:addons/stock_inventory_discrepancy/hooks.py:0
 #, fuzzy, python-format
-#| msgid "Validate All inventory Adjustments"
 msgid "Only a stock manager can validate an inventory adjustment."
 msgstr "验证所有库存调整"
 
@@ -95,14 +94,12 @@ msgstr "待批准"
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
 #, fuzzy
-#| msgid "Maximum Discrepancy Rate Threshold"
 msgid "Propagate Maximum Discrepancy Rate Threshold to child locations"
 msgstr "最大差异率阈值"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
 #, fuzzy
-#| msgid "Maximum Discrepancy Rate Threshold"
 msgid "Propagate discrepancy threshold"
 msgstr "最大差异率阈值"
 
@@ -164,7 +161,6 @@ msgstr "阈值（％）"
 #. module: stock_inventory_discrepancy
 #: code:addons/stock_inventory_discrepancy/hooks.py:0
 #, fuzzy, python-format
-#| msgid "Validate All inventory Adjustments"
 msgid "Tracked Products in Inventory Adjustment"
 msgstr "验证所有库存调整"
 
