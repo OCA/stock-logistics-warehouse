@@ -53,14 +53,12 @@ msgstr "库存位置"
 #. module: stock_location_zone
 #: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__is_zone
 #, fuzzy
-#| msgid "Inventory Locations"
 msgid "Is a Zone Location?"
 msgstr "库存位置"
 
 #. module: stock_location_zone
 #: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__area_location_id
 #, fuzzy
-#| msgid "Location Name Format"
 msgid "Location Area"
 msgstr "位置名称格式"
 
@@ -73,7 +71,6 @@ msgstr ""
 #. module: stock_location_zone
 #: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__zone_location_id
 #, fuzzy
-#| msgid "Picking Zone"
 msgid "Location Zone"
 msgstr "拣货区域"
 
@@ -100,7 +97,6 @@ msgstr ""
 #. module: stock_location_zone
 #: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
 #, fuzzy
-#| msgid "Inventory Locations"
 msgid "Zone location"
 msgstr "库存位置"
 
