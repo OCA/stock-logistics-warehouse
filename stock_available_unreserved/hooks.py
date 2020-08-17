@@ -11,7 +11,7 @@ def pre_init_hook(cr):
     of the module on an existing Odoo instance.
 
     Without this script, if a database has a few hundred thousand
-    partners, which is not unlikely, the update will take
+    quants, which is not unlikely, the update will take
     at least a few hours.
 
     The pre init script pre-computes the field using SQL.
@@ -34,8 +34,7 @@ def add_field_unreserved_quantity(cr):
     if not cr.fetchone():
         cr.execute(
             """
-            ALTER TABLE stock_quant ADD COLUMN unreserved_quantity numeric
-            DEFAULT 0.0;
+            ALTER TABLE stock_quant ADD COLUMN unreserved_quantity numeric;
             """
         )
         cr.execute(
@@ -61,8 +60,7 @@ def add_field_contains_unreserved(cr):
     if not cr.fetchone():
         cr.execute(
             """
-            ALTER TABLE stock_quant ADD COLUMN contains_unreserved boolean
-            DEFAULT FALSE;
+            ALTER TABLE stock_quant ADD COLUMN contains_unreserved boolean;
             """
         )
         cr.execute(
