@@ -16,5 +16,6 @@
         "views/stock_quant_view.xml",
         "views/product_view.xml",
     ],
+    "pre_init_hook": "pre_init_hook",
     "license": "LGPL-3",
 }
