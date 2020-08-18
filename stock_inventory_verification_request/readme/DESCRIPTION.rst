@@ -1,5 +1,6 @@
 Adds the capability to request a Slot Verification when an inventory is
-'Pending to Approve'. When asked from an inventory adjustment, which have
+'Pending to Approve' or create one at will when a potential issue with a
+specific location is found. When asked from an inventory adjustment, which have
 discrepancies over the threshold for the location, a Slot Verification
 Request will be created for each line that exceed the maximum discrepancy
 allowed.

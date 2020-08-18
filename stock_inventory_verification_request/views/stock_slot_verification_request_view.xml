@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2020 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
@@ -27,6 +27,9 @@
         <field name="arch" type="xml">
             <form string="Stock Slot Verification Request">
                 <header>
+                    <button name="action_create_inventory_adjustment"
+                            type="object" states="open" string="Create Inventory Adjustment"
+                            class="oe_highlight" />
                     <button name="action_confirm"
                             type="object" states="wait" string="Confirm"
                             class="oe_highlight" />
@@ -96,8 +99,8 @@
                 view_mode="tree,form" />
     <menuitem id="menu_slot_verification_request"
               name="Slot Verification Request"
-              parent="stock.menu_stock_inventory_control"
-              sequence="40"
+              parent="stock.menu_stock_warehouse_mgmt"
+              sequence="31"
               action="action_slot_verification_request" />
 
 </odoo>
