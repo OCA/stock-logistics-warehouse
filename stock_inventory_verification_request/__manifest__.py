@@ -1,5 +1,5 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2017-20 ForgeFlow S.L.
+#   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Stock Inventory Verification Request",
@@ -7,8 +7,8 @@
                "a inventory is Pending to Approve",
     "version": "12.0.1.0.0",
     "development_status": "Mature",
-    "maintainers": ['lreficent'],
-    "author": "Eficent, "
+    "maintainers": ['LoisRForgeFlow'],
+    "author": "ForgeFlow, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
@@ -20,6 +20,7 @@
         'security/ir.model.access.csv',
         'views/stock_slot_verification_request_view.xml',
         'views/stock_inventory_view.xml',
+        'views/stock_location_view.xml',
         'data/slot_verification_request_sequence.xml',
     ],
     "license": "AGPL-3",

@@ -8,3 +8,5 @@ In order to use this module act as follow:
 * You can now check the involved lines and moves to help you.
 * Once you have found the problem and you have fixed it 'Mark as Solved' the
   Verification.
+
+You can also create the SVR manually.
