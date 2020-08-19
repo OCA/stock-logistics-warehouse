@@ -25,23 +25,23 @@ class StockScrap(models.Model):
 
     def write(self, vals):
         if "reason_code_id" in vals:
-            scrap_loc = (
+            location_id = (
                 self.env["scrap.reason.code"]
                 .browse(vals.get("reason_code_id"))
                 .location_id
             )
-            if scrap_loc:
-                vals.update({"scrap_location_id": scrap_loc})
+            if location_id:
+                vals.update({"scrap_location_id": location_id})
         return super(StockScrap, self).write(vals)
 
     @api.model
     def create(self, vals):
         if "reason_code_id" in vals:
-            scrap_loc = (
+            location_id = (
                 self.env["scrap.reason.code"]
                 .browse(vals.get("reason_code_id"))
                 .location_id
             )
-            if scrap_loc:
-                vals["scrap_location_id"] = scrap_loc.id
+            if location_id:
+                vals["scrap_location_id"] = location_id.id
         return super(StockScrap, self).create(vals)
