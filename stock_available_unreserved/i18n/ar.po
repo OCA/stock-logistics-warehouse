@@ -28,15 +28,15 @@ msgid "Internal Unreserved"
 msgstr "الغير محجوز داخلياً"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:116
 #: code:addons/stock_available_unreserved/models/product.py:117
+#: code:addons/stock_available_unreserved/models/product.py:126
 #, python-format
 msgid "Invalid domain operator %s"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:118
 #: code:addons/stock_available_unreserved/models/product.py:119
+#: code:addons/stock_available_unreserved/models/product.py:128
 #, python-format
 msgid "Invalid domain right operand %s"
 msgstr ""
@@ -80,6 +80,13 @@ msgstr "الكمية في متناول اليد (غير محجوزة)"
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_form_view_procurement_button
 msgid "Unreserved"
+msgstr "غير محجوز"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__unreserved_quantity
+#, fuzzy
+#| msgid "Unreserved"
+msgid "Unreserved quantity"
 msgstr "غير محجوز"
 
 #. module: stock_available_unreserved

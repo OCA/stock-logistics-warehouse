@@ -30,15 +30,15 @@ msgid "Internal Unreserved"
 msgstr "Non réservé en interne"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:116
 #: code:addons/stock_available_unreserved/models/product.py:117
+#: code:addons/stock_available_unreserved/models/product.py:126
 #, fuzzy, python-format
 msgid "Invalid domain operator %s"
 msgstr "Opérateur de domaine non valide %s"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:118
 #: code:addons/stock_available_unreserved/models/product.py:119
+#: code:addons/stock_available_unreserved/models/product.py:128
 #, fuzzy, python-format
 msgid "Invalid domain right operand %s"
 msgstr "Opérateur de domaine droit non valide %s"
@@ -83,6 +83,13 @@ msgstr "Quantité non réservée"
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_form_view_procurement_button
 msgid "Unreserved"
+msgstr "Non réservé"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__unreserved_quantity
+#, fuzzy
+#| msgid "Unreserved"
+msgid "Unreserved quantity"
 msgstr "Non réservé"
 
 #. module: stock_available_unreserved

@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_available_unreserved
@@ -31,15 +31,15 @@ msgid "Internal Unreserved"
 msgstr "Interno ne rezervirano"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:116
 #: code:addons/stock_available_unreserved/models/product.py:117
+#: code:addons/stock_available_unreserved/models/product.py:126
 #, python-format
 msgid "Invalid domain operator %s"
 msgstr "Neveljaven domenski operator %s"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:118
 #: code:addons/stock_available_unreserved/models/product.py:119
+#: code:addons/stock_available_unreserved/models/product.py:128
 #, python-format
 msgid "Invalid domain right operand %s"
 msgstr "Neveljaven desni domenski operand %s"
@@ -86,6 +86,13 @@ msgid "Unreserved"
 msgstr "Odstranjena rezervacija"
 
 #. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__unreserved_quantity
+#, fuzzy
+#| msgid "Unreserved stock quantity"
+msgid "Unreserved quantity"
+msgstr "Količina ne rezerviranih zalog"
+
+#. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
 msgid "Unreserved:"
 msgstr "Ne rezervirano:"
@@ -95,6 +102,3 @@ msgstr "Ne rezervirano:"
 
 #~ msgid "Available per stock"
 #~ msgstr "Na voljo po zalogah"
-
-#~ msgid "Unreserved stock quantity"
-#~ msgstr "Količina ne rezerviranih zalog"

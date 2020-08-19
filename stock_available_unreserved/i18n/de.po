@@ -29,15 +29,15 @@ msgid "Internal Unreserved"
 msgstr "Intern nicht reserviert"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:116
 #: code:addons/stock_available_unreserved/models/product.py:117
+#: code:addons/stock_available_unreserved/models/product.py:126
 #, python-format
 msgid "Invalid domain operator %s"
 msgstr ""
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:118
 #: code:addons/stock_available_unreserved/models/product.py:119
+#: code:addons/stock_available_unreserved/models/product.py:128
 #, python-format
 msgid "Invalid domain right operand %s"
 msgstr ""
@@ -84,6 +84,13 @@ msgid "Unreserved"
 msgstr "Nicht reserviert"
 
 #. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__unreserved_quantity
+#, fuzzy
+#| msgid "Unreserved stock quantity"
+msgid "Unreserved quantity"
+msgstr "Nicht reservierte Bestandsmenge"
+
+#. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
 msgid "Unreserved:"
 msgstr "Nicht reserviert:"
@@ -93,6 +100,3 @@ msgstr "Nicht reserviert:"
 
 #~ msgid "Available per stock"
 #~ msgstr "Verfügbar nach Bestand"
-
-#~ msgid "Unreserved stock quantity"
-#~ msgstr "Nicht reservierte Bestandsmenge"
