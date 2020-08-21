@@ -23,6 +23,8 @@ We want all the lines that reach PACK001 to be updated with:
 * The same moves' destination must reach Packing/PACK2 as well:
   we constrain the user to move the goods there as we want to move
   all the goods at the same place for the packing.
+* As the moves' destinations are updated to the same packing location,
+  new move lines will have the correct destination as well
 
 
 .. figure:: ../static/description/sync-assistant.png
