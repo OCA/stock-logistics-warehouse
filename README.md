@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/OCA/stock-logistics-warehouse.svg?branch=10.0)](https://travis-ci.org/OCA/stock-logistics-warehouse)
 [![Coverage Status](https://img.shields.io/coveralls/OCA/stock-logistics-warehouse/badge.png?branch=10.0)](https://coveralls.io/r/OCA/stock-logistics-warehouse?branch=10.0)
+[![Translation Status](https://translation.odoo-community.org/widgets/stock-logistics-warehouse-10-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/stock-logistics-warehouse-10-0/?utm_source=widget)
 
 Odoo Stock Logistics Warehouse
 ==============================
