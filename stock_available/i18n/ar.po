@@ -51,7 +51,6 @@ msgstr ""
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_res_config_settings
 #, fuzzy
-#| msgid "res.config.settings"
 msgid "Config Settings"
 msgstr "الإعدادات"
 
