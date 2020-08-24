@@ -93,9 +93,35 @@
         </field>
     </record>
 
+    <record id="stock_slot_verification_request_search_view" model="ir.ui.view">
+        <field name="name">stock.slot.verification.request.search</field>
+        <field name="model">stock.slot.verification.request</field>
+        <field name="arch" type="xml">
+            <search string="Stock Slot Verification Request">
+                <field name="name"/>
+                <field name="location_id"/>
+                <field name="product_id"/>
+                <field name="responsible_id"/>
+                <separator/>
+                <filter name="wait_state" string="Waiting Actions"
+                        domain="[('state','=', 'wait')]"/>
+                <filter name="open_state" string="In Progress"
+                        domain="[('state','=', 'open')]"/>
+                <filter name="done_state" string="Done"
+                        domain="[('state','=', 'done')]"/>
+                <filter name="cancelled_state" string="Cancelled"
+                        domain="[('state','=', 'cancelled')]"/>
+                <separator/>
+                <filter name="assigned_to_user" string="Assigned to me"
+                        domain="[('responsible_id','=', uid)]"/>
+            </search>
+        </field>
+    </record>
+
     <act_window id="action_slot_verification_request"
                 name="Stock Slot Verification Request"
                 res_model="stock.slot.verification.request"
+                context="{'search_default_wait_state':1,'search_default_open_state':1}"
                 view_mode="tree,form" />
     <menuitem id="menu_slot_verification_request"
               name="Slot Verification Request"
