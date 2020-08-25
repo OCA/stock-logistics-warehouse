@@ -8,6 +8,7 @@ from odoo import api, fields, models
 class SlotVerificationRequest(models.Model):
     _name = 'stock.slot.verification.request'
     _inherit = 'mail.thread'
+    _description = "Slot Verification Request"
 
     @api.model
     def create(self, vals):
@@ -25,6 +26,11 @@ class SlotVerificationRequest(models.Model):
     def _compute_involved_inv_line_count(self):
         for rec in self:
             rec.involved_inv_line_count = len(rec.involved_inv_line_ids)
+
+    @api.multi
+    def _compute_created_inventory_count(self):
+        for rec in self:
+            rec.created_inventory_count = len(rec.created_inventory_ids)
 
     name = fields.Char(
         default="/", required=True,
@@ -71,6 +77,14 @@ class SlotVerificationRequest(models.Model):
         string='Involved Inventory Lines')
     involved_inv_line_count = fields.Integer(
         compute='_compute_involved_inv_line_count')
+    created_inventory_ids = fields.One2many(
+        comodel_name="stock.inventory",
+        string="Created Inventories",
+        inverse_name="solving_slot_verification_request_id",
+        help="These inventory adjustment were created from this SVR.",
+    )
+    created_inventory_count = fields.Integer(
+        compute='_compute_created_inventory_count')
 
     @api.multi
     def _get_involved_moves_domain(self):
@@ -146,11 +160,13 @@ class SlotVerificationRequest(models.Model):
         return result
 
     def action_create_inventory_adjustment(self):
+        self.ensure_one()
         inventory = self.env["stock.inventory"].sudo().create({
             "name": "Inventory Adjustment from %s" % self.name,
             "filter": "product" if self.product_id else "none",
             "location_id": self.location_id.id,
             "product_id": self.product_id.id,
+            "solving_slot_verification_request_id": self.id,
         })
         action = self.env.ref('stock.action_inventory_form')
         result = action.read()[0]
@@ -158,4 +174,18 @@ class SlotVerificationRequest(models.Model):
         res = self.env.ref('stock.view_inventory_form', False)
         result['views'] = [(res and res.id or False, 'form')]
         result['res_id'] = inventory.id
+        return result
+
+    @api.multi
+    def action_view_inventories(self):
+        action = self.env.ref("stock.action_inventory_form")
+        result = action.read()[0]
+        result["context"] = {}
+        inventory_ids = self.mapped("created_inventory_ids").ids
+        if len(inventory_ids) > 1:
+            result["domain"] = [("id", "in", inventory_ids)]
+        elif len(inventory_ids) == 1:
+            res = self.env.ref("stock.view_inventory_form", False)
+            result["views"] = [(res and res.id or False, "form")]
+            result["res_id"] = inventory_ids and inventory_ids[0] or False
         return result
