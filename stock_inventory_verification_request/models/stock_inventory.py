@@ -13,6 +13,10 @@ class StockInventory(models.Model):
     slot_verification_ids = fields.One2many(
         comodel_name='stock.slot.verification.request',
         string='Slot Verification Requests', inverse_name='inventory_id')
+    solving_slot_verification_request_id = fields.Many2one(
+        comodel_name="stock.slot.verification.request",
+        help="This Inventory adjustment was created from the specified SVR."
+    )
 
     @api.multi
     def action_request_verification(self):
