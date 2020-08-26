@@ -23,10 +23,12 @@ class StockMove(models.Model):
             lambda m: (m.state == "waiting" or m.state == "assigned")
             and m.location_id != location
         ).write({"location_id": location.id})
-        lines = moves.mapped("move_line_ids")
-        lines.filtered(
+
+        lines = moves.mapped("move_line_ids").filtered(
             lambda l: l.location_dest_id != location and l.state != "done"
-        ).write({"location_dest_id": location.id})
+        )
+        lines.write({"location_dest_id": location.id})
+        lines.package_level_id.write({"location_dest_id": location.id})
 
     def _moves_to_sync_checkout(self):
         selected_pickings = OrderedDict()
