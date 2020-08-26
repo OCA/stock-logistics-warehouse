@@ -20,11 +20,7 @@ class StockMove(models.Model):
         moves_to_update.write({"location_dest_id": location.id})
         # Sync the source of the destination move too, if it's still waiting.
         moves_to_update.move_dest_ids.filtered(
-            lambda m: (
-                m.state == "waiting"
-                or m.state == "assigned"
-                and m in self.move_dest_ids
-            )
+            lambda m: (m.state == "waiting" or m.state == "assigned")
             and m.location_id != location
         ).write({"location_id": location.id})
         lines = moves.mapped("move_line_ids")
