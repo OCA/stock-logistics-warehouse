@@ -225,9 +225,7 @@ class CubiscanWizardLine(models.TransientModel):
     packaging_id = fields.Many2one(
         "product.packaging", string="Packaging (rel)", readonly=True
     )
-    packaging_type_id = fields.Many2one(
-        "product.packaging.type", readonly=True,
-    )
+    packaging_type_id = fields.Many2one("product.packaging.type", readonly=True,)
     required = fields.Boolean(related="packaging_type_id.required", readonly=True)
 
     @api.depends("lngth", "width", "height")
