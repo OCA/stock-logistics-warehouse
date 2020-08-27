@@ -108,8 +108,12 @@ class TestCubiscanWizard(SavepointCase):
         self.assertEqual(
             self.product_1.read(
                 [
-                    "product_length", "product_width", "product_height",
-                    "weight", "volume", "dimensional_uom_id"
+                    "product_length",
+                    "product_width",
+                    "product_height",
+                    "weight",
+                    "volume",
+                    "dimensional_uom_id",
                 ]
             )[0],
             {
@@ -119,8 +123,8 @@ class TestCubiscanWizard(SavepointCase):
                 "product_height": 1000,
                 "weight": 1.0,
                 "volume": 1.0,
-                "dimensional_uom_id": (mm_uom.id, mm_uom.name)
-            }
+                "dimensional_uom_id": (mm_uom.id, mm_uom.name),
+            },
         )
         packagings = self.product_1.packaging_ids.sorted()
         self.assertEqual(len(packagings), 5)
