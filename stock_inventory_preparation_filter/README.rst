@@ -35,6 +35,8 @@ Includes more options for making an inventory out of:
 It also allows to make an inventory based on scanned products, adding a line
 with product code and quantity.
 
+To add several products, lots or categories by selecting all of them, install the module web_widget_many2many_tags_multi_selection.
+
 **Table of contents**
 
 .. contents::

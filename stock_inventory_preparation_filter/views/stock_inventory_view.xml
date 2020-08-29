@@ -25,7 +25,8 @@
                     </field>
                     <field name="lot_id" position="after">
                         <field name="lot_ids"
-                                attrs="{'invisible':[('filter','!=','lots')]}" />
+                            widget="many2many_tags"
+                            attrs="{'invisible':[('filter','!=','lots')]}" />
                     </field>
                     <notebook position="before">
                         <field name="product_domain" widget="domain" attrs="{'invisible': [('filter', '!=', 'domain')]}" options="{'model': 'product.product'}"/>
