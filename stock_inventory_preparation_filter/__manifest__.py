@@ -5,7 +5,7 @@
 
 {
     "name": "Extended Inventory Preparation Filters",
-    "version": "12.0.1.1.1",
+    "version": "12.0.1.2.0",
     "depends": [
         "stock",
     ],
