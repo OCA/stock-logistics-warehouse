@@ -229,14 +229,13 @@ class VerticalLiftOperationBase(models.AbstractModel):
         self.next_step()
 
     def _render_product_packagings(self, product):
-        values = {
-            "packagings": [
-                {"name": pkg.name, "qty": pkg.qty, "unit": product.uom_id.name}
-                for pkg in product.packaging_ids
-            ]
-        }
-        content = self.env["ir.qweb"].render("stock_vertical_lift.packagings", values)
-        return content
+        return self.env["ir.qweb"].render(
+            "stock_vertical_lift.packagings",
+            self._prepare_values_for_product_packaging(product),
+        )
+
+    def _prepare_values_for_product_packaging(self, product):
+        return {"product": product}
 
     def _get_tray_qty(self, product, location):
         quants = self.env["stock.quant"].search(
