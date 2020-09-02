@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_consolidation_priority
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_consolidation_priority
+#: model:ir.model,name:stock_picking_consolidation_priority.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_picking_consolidation_priority
+#: model:ir.model.fields,field_description:stock_picking_consolidation_priority.field_stock_picking_type__consolidate_priority
+msgid "Raise priority when partially available"
+msgstr ""
+
+#. module: stock_picking_consolidation_priority
+#: model:ir.model,name:stock_picking_consolidation_priority.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_picking_consolidation_priority
+#: model:ir.model.fields,help:stock_picking_consolidation_priority.field_stock_picking_type__consolidate_priority
+msgid ""
+"Tick this box to raise the priority of all previous related picking when "
+"current transfer will be made partially available. This is usually used in "
+"packing zone when several people work on different transfers to be "
+"consolidated in the packing zone. When the first one finish, all other "
+"related pickings gets with a high priority. The goal is to reduce the number"
+" of order being packed at the same time as the space is often limited."
+msgstr ""
