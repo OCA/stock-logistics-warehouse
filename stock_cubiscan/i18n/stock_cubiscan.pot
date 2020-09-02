@@ -15,6 +15,7 @@ msgstr ""
 
 #. module: stock_cubiscan
 #: code:addons/stock_cubiscan/wizard/cubiscan_wizard.py:0
+#: code:addons/stock_cubiscan/wizard/cubiscan_wizard.py:0
 #, python-format
 msgid "Barcode"
 msgstr ""
@@ -22,6 +23,14 @@ msgstr ""
 #. module: stock_cubiscan
 #: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard___barcode_scanned
 msgid "Barcode Scanned"
+msgstr ""
+
+#. module: stock_cubiscan
+#: code:addons/stock_cubiscan/wizard/cubiscan_wizard.py:0
+#: code:addons/stock_cubiscan/wizard/cubiscan_wizard.py:0
+#, python-format
+msgid ""
+"Cannot find 'mm' Unit of measure, please update `stock_cubiscan` module"
 msgstr ""
 
 #. module: stock_cubiscan
@@ -273,4 +282,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cubiscan.field_cubiscan_wizard_line__wizard_id
 #: model_terms:ir.ui.view,arch_db:stock_cubiscan.view_cubiscan_device_form
 msgid "Wizard"
+msgstr ""
+
+#. module: stock_cubiscan
+#: model:uom.uom,name:stock_cubiscan.product_uom_mm
+msgid "mm"
 msgstr ""
