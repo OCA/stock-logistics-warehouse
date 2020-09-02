@@ -15,7 +15,6 @@ msgstr ""
 
 #. module: stock_cubiscan
 #: code:addons/stock_cubiscan/wizard/cubiscan_wizard.py:0
-#: code:addons/stock_cubiscan/wizard/cubiscan_wizard.py:0
 #, python-format
 msgid "Barcode"
 msgstr ""
