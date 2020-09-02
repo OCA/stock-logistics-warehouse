@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import _, api, exceptions, fields, models
 
 
 class CubiscanWizard(models.TransientModel):
@@ -23,45 +23,89 @@ class CubiscanWizard(models.TransientModel):
     def onchange_product_id(self):
         if self.product_id:
             to_create = []
-            packaging_types = self.env["product.packaging.type"].search([])
-            for seq, pack_type in enumerate(packaging_types):
-                pack = self.env["product.packaging"].search(
-                    [
-                        ("product_id", "=", self.product_id.id),
-                        ("packaging_type_id", "=", pack_type.id),
-                    ],
-                    limit=1,
-                )
-                vals = {
-                    "wizard_id": self.id,
-                    "sequence": seq + 1,
-                    "name": pack_type.name,
-                    "qty": 0,
-                    "max_weight": 0,
-                    "lngth": 0,
-                    "width": 0,
-                    "height": 0,
-                    "barcode": False,
-                    "packaging_type_id": pack_type.id,
-                }
-                if pack:
-                    vals.update(
-                        {
-                            "qty": pack.qty,
-                            "max_weight": pack.max_weight,
-                            "lngth": pack.lngth,
-                            "width": pack.width,
-                            "height": pack.height,
-                            "barcode": pack.barcode,
-                            "packaging_id": pack.id,
-                            "packaging_type_id": pack_type.id,
-                        }
-                    )
-                to_create.append(vals)
+            to_create += self._prepare_unit_line()
+            to_create += self._prepare_packaging_lines()
             recs = self.env["cubiscan.wizard.line"].create(to_create)
             self.line_ids = recs
         else:
             self.line_ids = [(5, 0, 0)]
+
+    def _prepare_unit_line(self):
+        vals = {
+            "wizard_id": self.id,
+            "sequence": 0,
+            "name": "Unit",
+            "qty": 1,
+            "max_weight": self.product_id.weight,
+            "lngth": self.product_id.product_length,
+            "width": self.product_id.product_width,
+            "height": self.product_id.product_height,
+        }
+        product_dimension_uom = self.product_id.dimensional_uom_id
+        cubiscan_mm_uom = self.env.ref(
+            "stock_cubiscan.product_uom_mm", raise_if_not_found=False
+        )
+        if not cubiscan_mm_uom:
+            raise exceptions.UserError(
+                _(
+                    "Cannot find 'mm' Unit of measure, please update "
+                    "`stock_cubiscan` module"
+                )
+            )
+        if cubiscan_mm_uom != product_dimension_uom:
+            vals.update(
+                {
+                    "lngth": product_dimension_uom._compute_quantity(
+                        self.product_id.product_length, cubiscan_mm_uom
+                    ),
+                    "width": product_dimension_uom._compute_quantity(
+                        self.product_id.product_width, cubiscan_mm_uom
+                    ),
+                    "height": product_dimension_uom._compute_quantity(
+                        self.product_id.product_height, cubiscan_mm_uom
+                    ),
+                }
+            )
+        return [vals]
+
+    def _prepare_packaging_lines(self):
+        vals_list = []
+        packaging_types = self.env["product.packaging.type"].search([])
+        for seq, pack_type in enumerate(packaging_types):
+            pack = self.env["product.packaging"].search(
+                [
+                    ("product_id", "=", self.product_id.id),
+                    ("packaging_type_id", "=", pack_type.id),
+                ],
+                limit=1,
+            )
+            vals = {
+                "wizard_id": self.id,
+                "sequence": seq + 1,
+                "name": pack_type.name,
+                "qty": 0,
+                "max_weight": 0,
+                "lngth": 0,
+                "width": 0,
+                "height": 0,
+                "barcode": False,
+                "packaging_type_id": pack_type.id,
+            }
+            if pack:
+                vals.update(
+                    {
+                        "qty": pack.qty,
+                        "max_weight": pack.max_weight,
+                        "lngth": pack.lngth,
+                        "width": pack.width,
+                        "height": pack.height,
+                        "barcode": pack.barcode,
+                        "packaging_id": pack.id,
+                        "packaging_type_id": pack_type.id,
+                    }
+                )
+            vals_list.append(vals)
+        return vals_list
 
     def action_reopen_fullscreen(self):
         # Action to reopen wizard in fullscreen (e.g. after page refresh)
@@ -87,24 +131,52 @@ class CubiscanWizard(models.TransientModel):
 
     def action_save(self):
         self.ensure_one()
-        actions = []
+        product_vals = {}
+        packaging_ids_list = []
         for line in self.line_ids:
-            vals = {
-                "name": line.name,
-                "qty": line.qty,
-                "max_weight": line.max_weight,
-                "lngth": line.lngth,
-                "width": line.width,
-                "height": line.height,
-                "barcode": line.barcode,
-                "packaging_type_id": line.packaging_type_id.id,
-            }
-            pack = line.packaging_id
-            if pack:
-                actions.append((1, pack.id, vals))
+            packaging_type = line.packaging_type_id
+            if packaging_type:
+                # Handle lines with packaging
+                vals = {
+                    "name": line.name,
+                    "qty": line.qty,
+                    "max_weight": line.max_weight,
+                    "lngth": line.lngth,
+                    "width": line.width,
+                    "height": line.height,
+                    "barcode": line.barcode,
+                    "packaging_type_id": line.packaging_type_id.id,
+                }
+                pack = line.packaging_id
+                if pack:
+                    packaging_ids_list.append((1, pack.id, vals))
+                else:
+                    packaging_ids_list.append((0, 0, vals))
             else:
-                actions.append((0, 0, vals))
-        self.product_id.packaging_ids = actions
+                # Handle unit line
+                cubiscan_mm_uom = self.env.ref(
+                    "stock_cubiscan.product_uom_mm", raise_if_not_found=False
+                )
+                if not cubiscan_mm_uom:
+                    raise exceptions.UserError(
+                        _(
+                            "Cannot find 'mm' Unit of measure, please update "
+                            "`stock_cubiscan` module"
+                        )
+                    )
+                product_vals.update(
+                    {
+                        "product_length": line.lngth,
+                        "product_width": line.width,
+                        "product_height": line.height,
+                        "dimensional_uom_id": cubiscan_mm_uom.id,
+                        "weight": line.max_weight,
+                    }
+                )
+        product_vals.update({"packaging_ids": packaging_ids_list})
+        self.product_id.write(product_vals)
+        # Call onchange to update volume on product.product
+        self.product_id.onchange_calculate_volume()
         # reload lines
         self.onchange_product_id()
 
@@ -153,9 +225,7 @@ class CubiscanWizardLine(models.TransientModel):
     packaging_id = fields.Many2one(
         "product.packaging", string="Packaging (rel)", readonly=True
     )
-    packaging_type_id = fields.Many2one(
-        "product.packaging.type", readonly=True, required=True
-    )
+    packaging_type_id = fields.Many2one("product.packaging.type", readonly=True,)
     required = fields.Boolean(related="packaging_type_id.required", readonly=True)
 
     @api.depends("lngth", "width", "height")

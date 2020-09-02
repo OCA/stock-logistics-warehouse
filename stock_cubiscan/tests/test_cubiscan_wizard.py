@@ -32,7 +32,6 @@ class TestCubiscanWizard(SavepointCase):
         cls.cs_wizard = cls.env["cubiscan.wizard"]
         PackType = cls.env["product.packaging.type"]
         pack_type_data = [
-            ("unit", 2, 0, 0),
             ("internal", 3, 1, 0),
             ("retail", 10, 1, 1),
             ("transport", 20, 1, 1),
@@ -105,10 +104,31 @@ class TestCubiscanWizard(SavepointCase):
                 )
 
         self.wizard.action_save()
-
+        mm_uom = self.env.ref("stock_cubiscan.product_uom_mm")
+        self.assertEqual(
+            self.product_1.read(
+                [
+                    "product_length",
+                    "product_width",
+                    "product_height",
+                    "weight",
+                    "volume",
+                    "dimensional_uom_id",
+                ]
+            )[0],
+            {
+                "id": self.product_1.id,
+                "product_length": 1000,
+                "product_width": 1000,
+                "product_height": 1000,
+                "weight": 1.0,
+                "volume": 1.0,
+                "dimensional_uom_id": (mm_uom.id, mm_uom.name),
+            },
+        )
         packagings = self.product_1.packaging_ids.sorted()
-        self.assertEqual(len(packagings), 6)
-        for idx, packaging in enumerate(packagings):
+        self.assertEqual(len(packagings), 5)
+        for idx, packaging in enumerate(packagings, 1):
             self.assertEqual(
                 packaging.read(["lngth", "width", "height", "max_weight", "volume"])[0],
                 {
