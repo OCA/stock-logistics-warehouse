@@ -14,6 +14,7 @@
                     <field name="posx" />
                     <field name="posy" />
                     <field name="posz" />
+                    <field name="barcode" />
                 </group>
             </group>
         </field>
