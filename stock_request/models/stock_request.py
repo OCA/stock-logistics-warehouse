@@ -149,8 +149,14 @@ class StockRequest(models.Model):
                  'allocation_ids.stock_move_id.move_line_ids.qty_done')
     def _compute_qty(self):
         for request in self:
-            done_qty = sum(request.allocation_ids.mapped(
-                'allocated_product_qty'))
+            incoming_qty = 0.0
+            other_qty = 0.0
+            for allocation in request.allocation_ids:
+                if allocation.stock_move_id.picking_code == 'incoming':
+                    incoming_qty += allocation.allocated_product_qty
+                else:
+                    other_qty += allocation.allocated_product_qty
+            done_qty = abs(other_qty - incoming_qty)
             open_qty = sum(request.allocation_ids.mapped('open_product_qty'))
             uom = request.product_id.uom_id
             request.qty_done = uom._compute_quantity(
