@@ -189,8 +189,8 @@
                         <field name="tray_type_id" invisible="1" />
                         <field name="tray_name" />
                         <field name="tray_type_code" />
-                        <field name="tray_y" />
                         <field name="tray_x" />
+                        <field name="tray_y" />
                         <label for="tray_qty" />
                         <div colspan="2" class="oe_title">
                             <h1>
