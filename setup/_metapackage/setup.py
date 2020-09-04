@@ -40,6 +40,7 @@ setuptools.setup(
         'odoo13-addon-stock_packaging_calculator',
         'odoo13-addon-stock_picking_completion_info',
         'odoo13-addon-stock_picking_consolidation_priority',
+        'odoo13-addon-stock_quant_manual_assign',
         'odoo13-addon-stock_removal_location_by_priority',
         'odoo13-addon-stock_request',
         'odoo13-addon-stock_request_kanban',
