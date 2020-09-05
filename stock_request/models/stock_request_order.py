@@ -117,8 +117,18 @@ class StockRequestOrder(models.Model):
     @api.depends('stock_request_ids.allocation_ids')
     def _compute_picking_ids(self):
         for record in self:
-            record.picking_ids = record.stock_request_ids.mapped('picking_ids')
-            record.picking_count = len(record.picking_ids)
+            # The first query is kept for compatibility with the original method
+            # the second query is added for the pickings which were created as backorder / split
+
+            direct_pick_ids = record.stock_request_ids.mapped('picking_ids')
+            procurement_id = record.procurement_group_id
+            if procurement_id:
+                to_add_pick_ids = self.env['stock.picking'].search([('group_id', '=', procurement_id.id)])
+                all_pick_ids = direct_pick_ids | to_add_pick_ids
+            else:
+                all_pick_ids = direct_pick_ids
+            record.picking_ids = all_pick_ids
+            record.picking_count = len(all_pick_ids)
 
     @api.depends('stock_request_ids')
     def _compute_move_ids(self):
