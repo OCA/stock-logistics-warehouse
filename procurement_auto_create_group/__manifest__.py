@@ -6,16 +6,11 @@
     "development_status": "Production/Stable",
     "license": "AGPL-3",
     "summary": "Allows to configure the system to propose automatically new "
-               "procurement groups during the procurement run.",
-    "author": "Eficent,"
-              "Odoo Community Association (OCA)",
+    "procurement groups during the procurement run.",
+    "author": "Eficent," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": [
-        "stock",
-    ],
-    "data": [
-        'views/procurement_view.xml',
-    ],
+    "depends": ["stock"],
+    "data": ["views/procurement_view.xml"],
     "installable": True,
 }
