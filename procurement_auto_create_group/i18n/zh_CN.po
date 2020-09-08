@@ -26,7 +26,7 @@ msgid "Auto-create Procurement Group"
 msgstr "自动创建补货组"
 
 #. module: procurement_auto_create_group
-#: code:addons/procurement_auto_create_group/models/procurement_group.py:28
+#: code:addons/procurement_auto_create_group/models/procurement_group.py:0
 #, python-format
 msgid "No sequence defined for procurement group."
 msgstr "没有为补货组定义序列。"
