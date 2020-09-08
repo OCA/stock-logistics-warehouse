@@ -45,6 +45,7 @@ setuptools.setup(
         'odoo13-addon-stock_removal_location_by_priority',
         'odoo13-addon-stock_request',
         'odoo13-addon-stock_request_kanban',
+        'odoo13-addon-stock_request_mrp',
         'odoo13-addon-stock_request_purchase',
         'odoo13-addon-stock_request_tier_validation',
         'odoo13-addon-stock_reserve_rule',
