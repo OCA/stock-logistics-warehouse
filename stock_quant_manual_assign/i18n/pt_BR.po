@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-07-05 00:45+0000\n"
 "PO-Revision-Date: 2019-08-30 14:23+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,7 +139,7 @@ msgid "Quant"
 msgstr "Quantidade"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:27
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
 msgid "Quantity is higher than the needed one"
 msgstr "Quantidade é maior que o necessário"
@@ -165,7 +165,7 @@ msgid "Select"
 msgstr "Selecione"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:176
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
 msgid ""
 "Selected line quantity is higher than the available one. Maybe an operation "
