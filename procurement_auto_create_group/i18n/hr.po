@@ -26,7 +26,7 @@ msgid "Auto-create Procurement Group"
 msgstr "Automatski kreiraj grupu nabave"
 
 #. module: procurement_auto_create_group
-#: code:addons/procurement_auto_create_group/models/procurement_group.py:28
+#: code:addons/procurement_auto_create_group/models/procurement_group.py:0
 #, fuzzy, python-format
 #| msgid "No sequence defined for procurement group"
 msgid "No sequence defined for procurement group."
