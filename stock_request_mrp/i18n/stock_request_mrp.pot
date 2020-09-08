@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_request_mrp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_request_mrp
+#: model_terms:ir.ui.view,arch_db:stock_request_mrp.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request_mrp.view_stock_request_form
+msgid "MOs"
+msgstr ""
+
+#. module: stock_request_mrp
+#: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request__production_ids
+#: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request_order__production_ids
+msgid "Manufacturing Orders"
+msgstr ""
+
+#. module: stock_request_mrp
+#: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request__production_count
+#: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request_order__production_count
+msgid "Manufacturing Orders count"
+msgstr ""
+
+#. module: stock_request_mrp
+#: model:ir.model,name:stock_request_mrp.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: stock_request_mrp
+#: model:ir.model,name:stock_request_mrp.model_stock_request
+msgid "Stock Request"
+msgstr ""
+
+#. module: stock_request_mrp
+#: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production__stock_request_count
+msgid "Stock Request #"
+msgstr ""
+
+#. module: stock_request_mrp
+#: model:ir.model,name:stock_request_mrp.model_stock_request_order
+msgid "Stock Request Order"
+msgstr ""
+
+#. module: stock_request_mrp
+#: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production__stock_request_ids
+#: model_terms:ir.ui.view,arch_db:stock_request_mrp.mrp_production_form_view
+msgid "Stock Requests"
+msgstr ""
+
+#. module: stock_request_mrp
+#: model:ir.model,name:stock_request_mrp.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
+
+#. module: stock_request_mrp
+#: code:addons/stock_request_mrp/models/stock_request.py:0
+#, python-format
+msgid ""
+"You have linked to a Manufacture Order that belongs to another company."
+msgstr ""
