@@ -228,6 +228,11 @@ msgstr "启用库存请求看板卡"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Stock Requests for Manufacturing"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Stock Requests for Purchases"
 msgstr "启用采购的库存请求"
 
@@ -405,6 +410,11 @@ msgstr "位置必须等于订单"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_main_attachment_id
 msgid "Main Attachment"
 msgstr "附件"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Manufacturing"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.ui.menu,name:stock_request.menu_stock_request_master_data
@@ -826,6 +836,11 @@ msgid "Stock Request User"
 msgstr "库存请求用户"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_mrp
+msgid "Stock Request for Manufacturing"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_name_uniq
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_order_name_uniq
 msgid "Stock Request name must be unique"
@@ -980,6 +995,11 @@ msgstr "单位"
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Use Kanban cards for consumable products"
 msgstr "对消耗品使用看板卡"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Use Manufacturing Orders with Stock Requests"
+msgstr ""
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
