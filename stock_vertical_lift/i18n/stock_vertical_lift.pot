@@ -1,0 +1,793 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_vertical_lift
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/stock_location.py:0
+#, python-format
+msgid "<br/>Laser pointer on x{} y{} ({}mm, {}mm)"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_kanban
+msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_vertical_lift_shuttle_manual_barcode
+msgid "Action to input a barcode"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__answer
+msgid "Answer"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
+msgid "Back to settings"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__barcode
+#, python-format
+msgid "Barcode"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
+msgid "Barcode Input"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base___barcode_scanned
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory___barcode_scanned
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick___barcode_scanned
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put___barcode_scanned
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer___barcode_scanned
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle___barcode_scanned
+msgid "Barcode Scanned"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/stock_location.py:0
+#, python-format
+msgid "Cannot fetch a vertical lift tray on location %s"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__cell
+msgid "Cell"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_matrix
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_matrix
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_matrix
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_matrix
+msgid "Cells"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_stock_location__vertical_lift_location
+msgid "Check this box to use it as the view for Vertical Lift Shuttles."
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__command
+msgid "Command"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_manual_barcode_form
+msgid "Confirm"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_operation_base.py:0
+#: code:addons/stock_vertical_lift/tests/common.py:0
+#: code:addons/stock_vertical_lift/tests/test_inventory.py:0
+#, python-format
+msgid "Congrats, you cleared the queue!"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_partner_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__picking_partner_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_partner_id
+msgid "Contact"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__product_qty
+msgid "Counted Quantity"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__create_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__create_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__create_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__create_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__create_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__create_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__create_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__create_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__create_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__create_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__current_inventory_line_id
+msgid "Current Inventory Line"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__current_move_line_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__current_move_line_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__current_move_line_id
+msgid "Current Move Line"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__location_dest_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__location_dest_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__location_dest_id
+msgid "Destination"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__qty_done
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__qty_done
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__qty_done
+msgid "Done"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
+msgid "Dropdown menu"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__error
+msgid "Error"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_stock_move_line_operation_tree
+msgid "Fetch Destination Tray"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_location_form
+msgid "Fetch Shuttle Tray"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_stock_move_line_operation_tree
+msgid "Fetch Source Tray"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__hardware
+msgid "Hardware"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__command_ids
+msgid "Hardware commands"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__inventory_id
+#: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__inventory
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_inventory_button_view
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_inventory_screen_view
+msgid "Inventory Screen"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__inverse_vertical_lift_shuttle_ids
+msgid "Inverse Vertical Lift Shuttle"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_location
+msgid "Is a Vertical Lift View Location?"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__last_quantity_input
+msgid "Last Quantity Input"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__write_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__write_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__write_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__write_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__write_uid
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__write_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__write_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__write_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__write_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__write_date
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
+#, python-format
+msgid "Lift Simulation"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__location_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__location_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__location_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__location_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__location_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__lot_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__lot_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__lot_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__lot_id
+msgid "Lot/Serial Number"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
+#, python-format
+msgid "Menu"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__mode
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__mode
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__mode
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__mode
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__mode
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__mode
+msgid "Mode"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_kanban
+msgid "Mode:"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
+msgid "Network"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_operation_put.py:0
+#, python-format
+msgid "No free space for tray type \"{}\" in this shuttle."
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_operation_pick.py:0
+#, python-format
+msgid "No location found for barcode {}"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_operation_put.py:0
+#, python-format
+msgid "No move line found for barcode {}"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_operation_put.py:0
+#, python-format
+msgid "No tray type found for barcode {}"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__number_of_ops
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__number_of_ops
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__number_of_ops
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__number_of_ops
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__number_of_ops
+msgid "Number of Operations"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__number_of_ops_all
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__number_of_ops_all
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__number_of_ops_all
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__number_of_ops_all
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__number_of_ops_all
+msgid "Number of Operations in all shuttles"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_operation_base_shuttle_id_unique
+#: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_operation_inventory_shuttle_id_unique
+#: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_operation_pick_shuttle_id_unique
+#: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_operation_put_shuttle_id_unique
+#: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_operation_transfer_shuttle_id_unique
+msgid "One pick can be run at a time for a shuttle."
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.actions.act_window,help:stock_vertical_lift.vertical_lift_shuttle_action
+msgid "Open the Shuttle Interface."
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/stock_location.py:0
+#, python-format
+msgid "Opening tray {}."
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_button_view
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
+msgid "Operations"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__package_id
+msgid "Pack"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__product_packagings
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__product_packagings
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__product_packagings
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__product_packagings
+msgid "Packaging"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__pick
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
+msgid "Pick"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_button_view
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_screen_view
+msgid "Pick Screen"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__port
+msgid "Port"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__product_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__product_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__product_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__product_uom_id
+msgid "Product Unit of Measure"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__put
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
+msgid "Put"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_put_button_view
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_put_screen_view
+msgid "Put-Away Screen"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_inventory_screen_view
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_transfer_screen_view
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__quantity_input
+msgid "Quantity Input"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:product.product,name:stock_vertical_lift.product_recovery_socks
+#: model:product.template,name:stock_vertical_lift.product_recovery_socks_product_template
+msgid "Recovery Socks"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_pick__picking_origin
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_put__picking_origin
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_origin
+msgid "Reference of the document"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
+msgid "Release"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_location_form
+msgid "Release Shuttle Tray"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
+msgid "Release tray"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
+#, python-format
+msgid "Releasing tray"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_button_view
+msgid "Reopen Screen"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__product_uom_qty
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__product_uom_qty
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__product_uom_qty
+msgid "Reserved"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:product.product,name:stock_vertical_lift.product_running_socks
+#: model:product.template,name:stock_vertical_lift.product_running_socks_product_template
+msgid "Running Socks"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
+msgid "Save"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__server
+msgid "Server"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_kanban
+msgid "Settings"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__shuttle_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__shuttle_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__shuttle_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__shuttle_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__shuttle_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__shuttle_id
+#: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__shuttle
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_manual_barcode_form
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_tree
+msgid "Shuttle"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
+msgid "Shuttle Name"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_origin
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__picking_origin
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_origin
+msgid "Source Document"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__state
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__state
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__state
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__state
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__state
+msgid "State"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__picking_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_id
+msgid "Stock Picking"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_qty
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_qty
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_qty
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_qty
+msgid "Stock Quantity"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_base__location_id
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_inventory__location_id
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_pick__location_id
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_put__location_id
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer__location_id
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__location_id
+msgid ""
+"The Shuttle source location for Pick operations and destination location for"
+" Put operations."
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_pick__picking_id
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_put__picking_id
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_id
+msgid "The stock operation where the packing has been made"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__tray
+msgid "Tray"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_type_code
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_type_code
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_type_code
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_type_code
+msgid "Tray Code"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_location_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_location_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_location_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_location_id
+msgid "Tray Location"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_name
+msgid "Tray Name"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_type_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_type_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_type_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_type_id
+msgid "Tray Type"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__product_uom_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__product_uom_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__product_uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:product.product,uom_name:stock_vertical_lift.product_recovery_socks
+#: model:product.product,uom_name:stock_vertical_lift.product_running_socks
+#: model:product.template,uom_name:stock_vertical_lift.product_recovery_socks_product_template
+#: model:product.template,uom_name:stock_vertical_lift.product_running_socks_product_template
+msgid "Units"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_command.py:0
+#, python-format
+msgid "Unknown record %s"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__use_tls
+msgid "Use Tls"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_base___barcode_scanned
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_inventory___barcode_scanned
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_pick___barcode_scanned
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_put___barcode_scanned
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer___barcode_scanned
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle___barcode_scanned
+msgid "Value of the last barcode scanned."
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_inventory_line__vertical_lift_done
+msgid "Vertical Lift Done"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_kind
+msgid "Vertical Lift Kind"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_base
+msgid "Vertical Lift Operation - Base"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_transfer
+msgid "Vertical Lift Operation - Transfer"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_inventory
+msgid "Vertical Lift Operation Inventory"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_pick
+msgid "Vertical Lift Operation Pick"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_put
+msgid "Vertical Lift Operation Put"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_vertical_lift_shuttle
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_shuttle_id
+msgid "Vertical Lift Shuttle"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.actions.act_window,name:stock_vertical_lift.vertical_lift_shuttle_action
+#: model:ir.ui.menu,name:stock_vertical_lift.vertical_lift_shuttle
+msgid "Vertical Lift Shuttles"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_inventory_line__vertical_lift_tray_id
+msgid "Vertical Lift Tray"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__view
+msgid "View"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_shuttle_location_id_unique
+msgid "You cannot have two shuttles using the same location."
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_vertical_lift_command
+msgid "commands sent to the shuttle"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__server
+msgid "hostname or IP address of the server"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__port
+msgid "network port of the server on which to send the message"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__use_tls
+msgid "set this if the server expects TLS wrapped communication"
+msgstr ""
