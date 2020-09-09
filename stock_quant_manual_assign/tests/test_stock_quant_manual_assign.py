@@ -1,51 +1,52 @@
 # Copyright 2015 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 from odoo.exceptions import ValidationError
 
 
-class TestStockQuantManualAssign(TransactionCase):
+class TestStockQuantManualAssign(SavepointCase):
 
-    def setUp(self):
-        super(TestStockQuantManualAssign, self).setUp()
-        self.quant_model = self.env['stock.quant']
-        self.move_model = self.env['stock.move']
-        self.quant_assign_wizard = self.env['assign.manual.quants']
-        self.product = self.env['product.product'].create({
+    @classmethod
+    def setUpClass(cls):
+        super(TestStockQuantManualAssign, cls).setUpClass()
+        cls.quant_model = cls.env['stock.quant']
+        cls.move_model = cls.env['stock.move']
+        cls.quant_assign_wizard = cls.env['assign.manual.quants']
+        cls.product = cls.env['product.product'].create({
             'name': 'Product 4 test',
             'type': 'product',
         })
-        self.location_src = self.env.ref(
+        cls.location_src = cls.env.ref(
             'stock.stock_location_locations_virtual')
-        self.location_dst = self.env.ref('stock.stock_location_customers')
-        self.location1 = self.env.ref('stock.location_inventory')
-        self.location2 = self.env.ref('stock.location_procurement')
-        self.location3 = self.env.ref('stock.location_production')
-        self.quant1 = self.quant_model.sudo().create({
-            'product_id': self.product.id,
+        cls.location_dst = cls.env.ref('stock.stock_location_customers')
+        cls.location1 = cls.env.ref('stock.location_inventory')
+        cls.location2 = cls.env.ref('stock.location_procurement')
+        cls.location3 = cls.env.ref('stock.location_production')
+        cls.quant1 = cls.quant_model.sudo().create({
+            'product_id': cls.product.id,
             'quantity': 100.0,
-            'location_id': self.location1.id,
+            'location_id': cls.location1.id,
         })
-        self.quant2 = self.quant_model.sudo().create({
-            'product_id': self.product.id,
+        cls.quant2 = cls.quant_model.sudo().create({
+            'product_id': cls.product.id,
             'quantity': 100.0,
-            'location_id': self.location2.id,
+            'location_id': cls.location2.id,
         })
-        self.quant3 = self.quant_model.sudo().create({
-            'product_id': self.product.id,
+        cls.quant3 = cls.quant_model.sudo().create({
+            'product_id': cls.product.id,
             'quantity': 100.0,
-            'location_id': self.location3.id,
+            'location_id': cls.location3.id,
         })
-        self.move = self.move_model.create({
-            'name': self.product.name,
-            'product_id': self.product.id,
+        cls.move = cls.move_model.create({
+            'name': cls.product.name,
+            'product_id': cls.product.id,
             'product_uom_qty': 400.0,
-            'product_uom': self.product.uom_id.id,
-            'location_id': self.location_src.id,
-            'location_dest_id': self.location_dst.id,
+            'product_uom': cls.product.uom_id.id,
+            'location_id': cls.location_src.id,
+            'location_dest_id': cls.location_dst.id,
         })
-        self.move._action_confirm()
+        cls.move._action_confirm()
 
     def test_quant_assign_wizard(self):
         wizard = self.quant_assign_wizard.with_context(
