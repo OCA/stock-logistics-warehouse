@@ -232,17 +232,13 @@ class VerticalLiftOperationInventory(models.Model):
 
     def select_next_inventory_line(self):
         self.ensure_one()
-        previous_line = self.current_inventory_line_id
         next_line = self.env["stock.inventory.line"].search(
             self._domain_inventory_lines_to_do(),
             limit=1,
             order="vertical_lift_tray_id, location_id, id",
         )
         self.current_inventory_line_id = next_line
-        if (
-            next_line
-            and previous_line.vertical_lift_tray_id != next_line.vertical_lift_tray_id
-        ):
+        if next_line:
             self.fetch_tray()
         return bool(next_line)
 
