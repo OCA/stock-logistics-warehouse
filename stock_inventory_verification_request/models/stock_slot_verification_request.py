@@ -46,19 +46,29 @@ class SlotVerificationRequest(models.Model):
     location_id = fields.Many2one(
         comodel_name='stock.location',
         string='Location',
-        required=True)
+        required=True,
+        readonly=True, states={'wait': [('readonly', False)]},
+        track_visibility="onchange",
+    )
     state = fields.Selection(selection=[
         ('wait', 'Waiting Actions'),
         ('open', 'In Progress'),
         ('cancelled', 'Cancelled'),
         ('done', 'Solved')
-    ], string='Status', default='wait')
+    ], string='Status', default='wait',
+        track_visibility="onchange",
+    )
     responsible_id = fields.Many2one(
         comodel_name='res.users',
-        string='Assigned to')
+        string='Assigned to',
+        track_visibility="onchange",
+    )
     product_id = fields.Many2one(
         comodel_name='product.product',
-        string='Product')
+        string='Product',
+        readonly=True, states={'wait': [('readonly', False)]},
+        track_visibility="onchange",
+    )
     notes = fields.Text(string='Notes')
     involved_move_ids = fields.Many2many(
         comodel_name='stock.move',
