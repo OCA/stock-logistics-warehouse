@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<odoo>
+    <record id="view_template_form_putaway" model="ir.ui.view">
+        <field name="name">product.template.product.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_manager'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='inventory']" position="inside">
+                <div name="putaway" groups="stock.group_adv_location" string="Putaway strategies">
+                    <field name="product_variant_ids" invisible="1"/>
+                    <group name="putaway_products" string="Put Away Strategies by products"
+                           attrs="{'invisible': [('is_product_variant', '=', True)]}">
+                        <group>
+                            <p class="oe_grey">
+                            The rules defined per product will be applied before the rules defined per product category.
+                            <div>Keep empty product field to apply strategy to all variants.</div>
+                            </p>
+                        </group>
+                        <field name="product_tmpl_putaway_ids" nolabel="1">
+                            <tree editable="top">
+                                <field name="product_id" domain="[('product_tmpl_id', '=', parent.id)]"/>
+                                <field name="putaway_id"/>
+                                <field name="fixed_location_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group name="putaway_categ" string="Put Away Strategies by category"
+                           attrs="{'readonly': 1}">
+                        <field name="product_putaway_categ_ids"
+                               nolabel="1">
+                            <tree>
+                                <field name="category_id"/>
+                                <field name="putaway_id" widget="selection"/>
+                                <field name="fixed_location_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_form_putaway" model="ir.ui.view">
+        <field name="name">product.product.form.putaway</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_manager'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='putaway_categ']" position="before">
+                <group name="putaway_products" string="Put Away Strategies by products"
+                       attrs="{'invisible': [('is_product_variant', '=', False)]}">
+                    <field name="product_product_putaway_ids" groups="stock.group_adv_location" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="putaway_id"/>
+                            <field name="fixed_location_id"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
