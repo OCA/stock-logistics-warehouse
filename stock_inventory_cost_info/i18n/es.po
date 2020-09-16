@@ -39,6 +39,5 @@ msgstr "Línea de inventario"
 #. module: stock_inventory_cost_info
 #: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree
 #: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree2
-#: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.view_inventory_form
 msgid "Total"
 msgstr ""
