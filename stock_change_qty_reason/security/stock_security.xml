@@ -4,4 +4,12 @@
         <field name="name">Manage Stock Change Qty Preset Reasons</field>
         <field name="category_id" ref="base.module_category_hidden" />
     </record>
+    <record model="ir.rule" id="stock_inventory_line_reason_company_rule">
+        <field name="name">stock_inventory_line_reason multi-company</field>
+        <field name="model_id" ref="model_stock_inventory_line_reason" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
 </odoo>
