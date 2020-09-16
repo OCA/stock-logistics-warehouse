@@ -11,6 +11,7 @@
     "depends": ["stock"],
     "data": [
         "security/ir.model.access.csv",
+        "security/scrap_reason_code_security.xml",
         "views/reason_code_view.xml",
         "views/stock_scrap_views.xml",
         "views/stock_move_views.xml",

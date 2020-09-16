@@ -11,6 +11,7 @@ class ScrapReasonCode(models.Model):
 
     name = fields.Char("Code", required=True)
     description = fields.Text("Description")
+    company_id = fields.Many2one("res.company", default=lambda a: a.env.company.id)
     location_id = fields.Many2one(
         "stock.location",
         string="Scrap Location",
