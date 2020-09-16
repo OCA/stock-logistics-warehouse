@@ -6,8 +6,13 @@ from odoo import api, fields, models
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
-    reason = fields.Char(help="Type in a reason for the " "product quantity change")
-    preset_reason_id = fields.Many2one("stock.inventory.line.reason")
+    reason = fields.Char(
+        help="Type in a reason for the " "product quantity change",
+        states={"done": [("readonly", True)]},
+    )
+    preset_reason_id = fields.Many2one(
+        "stock.inventory.line.reason", states={"done": [("readonly", True)]}
+    )
 
     def _get_inventory_lines_values(self):
         vals = super(StockInventory, self)._get_inventory_lines_values()
