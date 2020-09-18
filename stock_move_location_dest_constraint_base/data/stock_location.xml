@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <function model="stock.location" name="_set_bypass_on_existing_locations" />
-</odoo>
