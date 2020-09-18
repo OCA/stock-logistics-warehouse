@@ -4,4 +4,3 @@ account-analytic
 product-attribute
 server-ux
 web
-stock-logistics-warehouse https://github.com/grindtildeath/stock-logistics-warehouse 12.0_add_stock_putaway_rule
