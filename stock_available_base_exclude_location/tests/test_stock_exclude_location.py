@@ -2,16 +2,20 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.tests import SavepointCase
-from .common import TestExcludeLocationMixin, ExcludeLocationModelFake
+from odoo_test_helper import FakeModelLoader
 
 
-class TestExcludeLocation(SavepointCase, TestExcludeLocationMixin):
+class TestExcludeLocation(SavepointCase):
 
     @classmethod
     def setUpClass(cls):
         super(TestExcludeLocation, cls).setUpClass()
-        ExcludeLocationModelFake._test_setup_model(cls.env)
-        cls.fake = cls.env["exclude.location.fake"].create({})
+        cls.loader = FakeModelLoader(cls.env, cls.__module__)
+        cls.loader.backup_registry()
+        from .common import ResPartner
+        cls.loader.update_registry((ResPartner,))
+
+        cls.fake = cls.env["res.partner"].create({"name": "name"})
         cls.location_shop = cls.env.ref("stock.stock_location_shop0")
         vals = {
             "location_id": cls.location_shop.id,
@@ -23,7 +27,7 @@ class TestExcludeLocation(SavepointCase, TestExcludeLocationMixin):
 
     @classmethod
     def tearDownClass(cls):
-        ExcludeLocationModelFake._test_teardown_model(cls.env)
+        cls.loader.restore_registry()
         super(TestExcludeLocation, cls).tearDownClass()
 
     def _add_stock_to_product(self, product, location, qty):
