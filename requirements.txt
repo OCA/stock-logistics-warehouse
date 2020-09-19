@@ -1,2 +1,2 @@
 openupgradelib==2.0.0
-
+odoo-test-helper
