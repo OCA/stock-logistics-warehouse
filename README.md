@@ -34,7 +34,7 @@ addon | version | summary
 [stock_account_change_product_valuation](stock_account_change_product_valuation/) | 10.0.1.0.0 | Adjusts valuation of the products and quants when the cost method or type of a product changes
 [stock_account_quant_merge](stock_account_quant_merge/) | 10.0.1.0.0 | extension of 'stock_quant_merge', and adds the cost as a criteria to merge quants.
 [stock_available](stock_available/) | 10.0.1.0.1 | Stock available to promise
-[stock_available_base_exclude_location](stock_available_base_exclude_location/) | 10.0.1.0.0 | Base module to exclude locations for product available quantities
+[stock_available_base_exclude_location](stock_available_base_exclude_location/) | 10.0.1.0.1 | Base module to exclude locations for product available quantities
 [stock_available_immediately](stock_available_immediately/) | 10.0.1.0.0 | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 10.0.1.0.2 | Consider the production potential is available to promise
 [stock_available_product_expiry](stock_available_product_expiry/) | 10.0.1.0.3 | Allows to get product availability taking into account lot removal date
