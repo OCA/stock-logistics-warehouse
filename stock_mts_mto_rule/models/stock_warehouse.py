@@ -12,7 +12,7 @@ class StockWarehouse(models.Model):
         "purchase order will be created only if the virtual stock is "
         "less than 0 else, the product will be taken from stocks",
     )
-    mts_mto_rule_id = fields.Many2one("stock.rule", "MTO+MTS rule")
+    mts_mto_rule_id = fields.Many2one("stock.rule", "MTO+MTS rule", check_company=True)
 
     def _get_all_routes(self):
         routes = super(StockWarehouse, self)._get_all_routes()
@@ -54,7 +54,7 @@ class StockWarehouse(models.Model):
                         "procure_method": "make_to_order",
                         "company_id": self.company_id.id,
                         "auto": "manual",
-                        "propagate": True,
+                        "propagate_cancel": True,
                         "route_id": self._find_global_route(
                             "stock_mts_mto_rule.route_mto_mts",
                             _("Make To Order + Make To Stock"),
