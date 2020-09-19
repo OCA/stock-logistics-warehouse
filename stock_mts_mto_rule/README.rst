@@ -47,7 +47,7 @@ You should not select both the mts+mto route and the mto route.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/153/12.0
+   :target: https://runbot.odoo-community.org/runbot/153/13.0
 
 Known issues
 ============
