@@ -2,6 +2,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.osv import expression
 from odoo.tools import float_compare, float_is_zero
 
 
@@ -11,8 +12,8 @@ class StockRule(models.Model):
     action = fields.Selection(
         selection_add=[("split_procurement", "Choose between MTS and MTO")]
     )
-    mts_rule_id = fields.Many2one("stock.rule", string="MTS Rule")
-    mto_rule_id = fields.Many2one("stock.rule", string="MTO Rule")
+    mts_rule_id = fields.Many2one("stock.rule", string="MTS Rule", check_company=True)
+    mto_rule_id = fields.Many2one("stock.rule", string="MTO Rule", check_company=True)
 
     @api.constrains("action", "mts_rule_id", "mto_rule_id")
     def _check_mts_mto_rule(self):
@@ -34,7 +35,6 @@ class StockRule(models.Model):
                     ) % (rule.name,)
                     raise ValidationError(msg)
 
-    @api.multi
     def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
         self.ensure_one()
         precision = self.env["decimal.precision"].precision_get(
@@ -54,30 +54,53 @@ class StockRule(models.Model):
                 return product_qty - qty_available
         return product_qty
 
-    def _run_split_procurement(
-        self, product_id, product_qty, product_uom, location_id, name, origin, values
-    ):
+    def _run_split_procurement(self, procurements):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
-        needed_qty = self.get_mto_qty_to_order(
-            product_id, product_qty, product_uom, values
-        )
+        for procurement, rule in procurements:
+            domain = self.env["procurement.group"]._get_moves_to_assign_domain(
+                procurement.company_id.id
+            )
+            needed_qty = rule.get_mto_qty_to_order(
+                procurement.product_id,
+                procurement.product_qty,
+                procurement.product_uom,
+                procurement.values,
+            )
+            if float_is_zero(needed_qty, precision_digits=precision):
+                getattr(self.env["stock.rule"], "_run_%s" % rule.mts_rule_id.action)(
+                    [(procurement, rule.mts_rule_id)]
+                )
+            elif (
+                float_compare(
+                    needed_qty, procurement.product_qty, precision_digits=precision
+                )
+                == 0.0
+            ):
+                getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
+                    [(procurement, rule.mto_rule_id)]
+                )
+            else:
+                mts_qty = procurement.product_qty - needed_qty
+                mts_procurement = procurement._replace(product_qty=mts_qty)
+                getattr(self.env["stock.rule"], "_run_%s" % rule.mts_rule_id.action)(
+                    [(mts_procurement, rule.mts_rule_id)]
+                )
 
-        if float_is_zero(needed_qty, precision_digits=precision):
-            getattr(self.mts_rule_id, "_run_%s" % self.mts_rule_id.action)(
-                product_id, product_qty, product_uom, location_id, name, origin, values
-            )
-        elif float_compare(needed_qty, product_qty, precision_digits=precision) == 0.0:
-            getattr(self.mto_rule_id, "_run_%s" % self.mto_rule_id.action)(
-                product_id, product_qty, product_uom, location_id, name, origin, values
-            )
-        else:
-            mts_qty = product_qty - needed_qty
-            getattr(self.mts_rule_id, "_run_%s" % self.mts_rule_id.action)(
-                product_id, mts_qty, product_uom, location_id, name, origin, values
-            )
-            getattr(self.mto_rule_id, "_run_%s" % self.mto_rule_id.action)(
-                product_id, needed_qty, product_uom, location_id, name, origin, values
-            )
+                # Search all confirmed stock_moves of mts_procuremet and assign them
+                # to adjust the product's free qty
+                group_id = mts_procurement.values.get("group_id")
+                group_domain = expression.AND(
+                    [domain, [("group_id", "=", group_id.id)]]
+                )
+                moves_to_assign = self.env["stock.move"].search(
+                    group_domain, order="priority desc, date_expected asc"
+                )
+                moves_to_assign._action_assign()
+
+                mto_procurement = procurement._replace(product_qty=needed_qty)
+                getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
+                    [(mto_procurement, rule.mto_rule_id)]
+                )
         return True
