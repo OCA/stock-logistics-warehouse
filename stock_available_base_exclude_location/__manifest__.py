@@ -6,7 +6,7 @@
     'name': 'Stock Available Base Exclude Location',
     'summary': """
         Base module to exclude locations for product available quantities""",
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'category': 'Warehouse',
     'maintainers': ['rousseldenis'],
     'license': 'AGPL-3',
