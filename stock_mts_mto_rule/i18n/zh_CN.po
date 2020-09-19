@@ -26,12 +26,7 @@ msgid "Action"
 msgstr "动作"
 
 #. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Buy"
-msgstr "购买"
-
-#. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
+#: model:ir.model.fields.selection,name:stock_mts_mto_rule.selection__stock_rule__action__split_procurement
 msgid "Choose between MTS and MTO"
 msgstr "在MTS和MTO之间选择"
 
@@ -41,10 +36,12 @@ msgid ""
 "If this new route is selected on product form view, a purchase order will be "
 "created only if the virtual stock is less than 0 else, the product will be "
 "taken from stocks"
-msgstr "如果在产品表单视图中选择了此新路线，则仅当虚拟库存小于0时才创建采购订单，否则将从库存中提取产品"
+msgstr ""
+"如果在产品表单视图中选择了此新路线，则仅当虚拟库存小于0时才创建采购订单，否则"
+"将从库存中提取产品"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_rule.py:28
+#: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
 #, python-format
 msgid ""
 "Inconsistency between the source locations of the mts and mto rules linked "
@@ -67,43 +64,23 @@ msgid "MTS Rule"
 msgstr "MTS规则"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:36
+#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
 #, python-format
 msgid "MTS+MTO"
 msgstr "MTS+MTO"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:57
+#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
 #: model:stock.location.route,name:stock_mts_mto_rule.route_mto_mts
 #, python-format
 msgid "Make To Order + Make To Stock"
 msgstr "按订单生产+按库存生产"
 
 #. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Manufacture"
-msgstr "制造"
-
-#. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_rule.py:23
+#: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
 msgstr "采购规则上未配置MTS或MTO规则：%s！"
-
-#. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Pull & Push"
-msgstr "推拉"
-
-#. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Pull From"
-msgstr "拉"
-
-#. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Push To"
-msgstr "推"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_rule
@@ -119,6 +96,21 @@ msgstr "使用MTO+MTS规则"
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_warehouse
 msgid "Warehouse"
 msgstr "仓库"
+
+#~ msgid "Buy"
+#~ msgstr "购买"
+
+#~ msgid "Manufacture"
+#~ msgstr "制造"
+
+#~ msgid "Pull & Push"
+#~ msgstr "推拉"
+
+#~ msgid "Pull From"
+#~ msgstr "拉"
+
+#~ msgid "Push To"
+#~ msgstr "推"
 
 #~ msgid "Procurement"
 #~ msgstr "补货"
