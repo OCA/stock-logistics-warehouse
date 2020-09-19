@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo10-addon-stock_account_change_product_valuation',
         'odoo10-addon-stock_account_quant_merge',
         'odoo10-addon-stock_available',
+        'odoo10-addon-stock_available_base_exclude_location',
         'odoo10-addon-stock_available_immediately',
         'odoo10-addon-stock_available_mrp',
         'odoo10-addon-stock_available_product_expiry',
