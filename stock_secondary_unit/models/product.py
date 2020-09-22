@@ -15,7 +15,7 @@ class StockProductSecondaryUnit(models.AbstractModel):
     )
 
     def _compute_secondary_unit_qty_available(self):
-        for product in self:
+        for product in self.with_context(company_owned=True).sudo():
             if not product.stock_secondary_uom_id:
                 product.secondary_unit_qty_available = 0.0
             else:
