@@ -23,6 +23,14 @@ class StockMoveLineSerialGenerator(models.TransientModel):
     )
     first_number = fields.Char(required=True)
 
+    prefix = fields.Char(
+        string='Prefix',
+        help='Create the batches with the following prefix.')
+
+    padding = fields.Integer(
+        string='Padding',
+        help='Create the batches with this len and fill with zeroes.')
+
     @api.model
     def default_get(self, fields):
         res = super().default_get(fields)
@@ -106,7 +114,16 @@ class StockMoveLineSerialGenerator(models.TransientModel):
         if not self.first_number.isdigit():
             raise ValidationError(_('Only numbers are allowed'))
         number = int(self.first_number)
-        return [i for i in range(number, self.qty_to_process + number)]
+
+        lots = []
+        for i in range(number, self.qty_to_process + number):
+            lot = str(i)
+            if self.padding:
+                lot = lot.zfill(self.padding)
+            if self.prefix:
+                lot = self.prefix + lot
+            lots.append(lot)
+        return lots
 
     def _fill_with_new_serials(self, move_lines, new_serials):
         for i in range(self.qty_to_process):

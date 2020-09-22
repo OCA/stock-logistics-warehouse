@@ -8,6 +8,8 @@
                 <group>
                     <field name="stock_move_id" invisible="1"/>
                     <field name="qty_to_process"  />
+                    <field name="prefix" />
+                    <field name="padding" />
                     <field name="first_number" />
                 </group>
                 <footer>

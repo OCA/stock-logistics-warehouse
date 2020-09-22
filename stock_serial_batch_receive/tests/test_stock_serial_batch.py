@@ -2,8 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import SavepointCase
 from odoo.exceptions import ValidationError
+from odoo.tests import TransactionCase, tagged
 
 
+@tagged('serial_batch_generator')
 class TestSerialBatchGenerator(SavepointCase):
 
     @classmethod
@@ -36,9 +38,11 @@ class TestSerialBatchGenerator(SavepointCase):
             'picking_type_id': picking_type.id,
         })
         picking.action_assign()
-        cls.wizard = cls.env['stock.move.line.serial.generator'].create(
-            {'stock_move_id': cls.move.id}
-        )
+
+        cls.wizard = cls.env['stock.move.line.serial.generator'].create({
+            'stock_move_id': cls.move.id,
+            'first_number': 1,
+        })
 
     def test_01_genrate_batch_serials(self):
         # serials numbers successfully created
@@ -70,4 +74,26 @@ class TestSerialBatchGenerator(SavepointCase):
         self.wizard.generate_serials()
         serials = self.wizard.stock_move_id.mapped('move_line_ids.lot_name')
         exp_serials = ['23', '24', '25', '12345', '26']
+        self.assertEqual(serials, exp_serials)
+
+    def test_04_generate_batch_serials_with_prefix(self):
+        # serials numbers successfully created
+        self.wizard.qty_to_process = 5
+        self.wizard.prefix = 'LOT/'
+        self.wizard.first_number = 23
+        self.wizard.generate_serials()
+        serials = self.wizard.stock_move_id.mapped('move_line_ids.lot_name')
+        exp_serials = ['LOT/23', 'LOT/24', 'LOT/25', 'LOT/26', 'LOT/27']
+        self.assertEqual(serials, exp_serials)
+
+    def test_05_generate_batch_serials_with_prefix_and_padding(self):
+        # serials numbers successfully created
+        self.wizard.qty_to_process = 5
+        self.wizard.prefix = 'LOT/'
+        self.wizard.padding = 3
+        self.wizard.first_number = 23
+        self.wizard.generate_serials()
+        serials = self.wizard.stock_move_id.mapped('move_line_ids.lot_name')
+        exp_serials = ['LOT/023', 'LOT/024',
+                       'LOT/025', 'LOT/026', 'LOT/027']
         self.assertEqual(serials, exp_serials)
