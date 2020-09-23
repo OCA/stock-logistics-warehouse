@@ -51,7 +51,6 @@ msgid "Domain"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:50
 #, python-format
 msgid "Empty list"
@@ -116,21 +115,18 @@ msgid "Quantity"
 msgstr "Quantité"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:42
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
 #, python-format
 msgid "Selected Categories"
 msgstr "Catégories sélectionnées"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:46
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
 #, python-format
 msgid "Selected Lots"
 msgstr "Lots sélectionnés"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:44
 #, python-format
 msgid "Selected Products"

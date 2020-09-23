@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_inventory_preparation_filter
@@ -52,7 +52,6 @@ msgid "Domain"
 msgstr "Domena"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:50
 #, python-format
 msgid "Empty list"
@@ -116,21 +115,18 @@ msgid "Quantity"
 msgstr "Količina"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:42
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
 #, python-format
 msgid "Selected Categories"
 msgstr "Izbrane kategorije"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:46
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:48
 #, python-format
 msgid "Selected Lots"
 msgstr "Izbrani loti"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:43
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:44
 #, python-format
 msgid "Selected Products"
