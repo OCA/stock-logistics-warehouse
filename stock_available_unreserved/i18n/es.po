@@ -30,14 +30,12 @@ msgid "Internal Unreserved"
 msgstr "No reservado interno"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:117
 #: code:addons/stock_available_unreserved/models/product.py:126
 #, python-format
 msgid "Invalid domain operator %s"
 msgstr "Operador de dominio inválido %s"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:119
 #: code:addons/stock_available_unreserved/models/product.py:128
 #, python-format
 msgid "Invalid domain right operand %s"
