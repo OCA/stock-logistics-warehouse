@@ -17,12 +17,6 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_request_submit
-#: code:addons/stock_request_submit/models/stock_request.py:14
-#, python-format
-msgid "Draft"
-msgstr "草稿"
-
-#. module: stock_request_submit
 #: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__route_id
 msgid "Route"
 msgstr "路线"
@@ -43,9 +37,8 @@ msgstr "库存请求单"
 msgid "Submit"
 msgstr "提交"
 
-#. module: stock_request_submit
-#: code:addons/stock_request_submit/models/stock_request.py:12
-#: code:addons/stock_request_submit/models/stock_request.py:15
-#, python-format
-msgid "Submitted"
-msgstr "已提交"
+#~ msgid "Draft"
+#~ msgstr "草稿"
+
+#~ msgid "Submitted"
+#~ msgstr "已提交"

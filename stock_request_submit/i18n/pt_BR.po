@@ -17,12 +17,6 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_request_submit
-#: code:addons/stock_request_submit/models/stock_request.py:14
-#, python-format
-msgid "Draft"
-msgstr ""
-
-#. module: stock_request_submit
 #: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__route_id
 msgid "Route"
 msgstr "Rota"
@@ -43,10 +37,7 @@ msgstr "Ordem de Requisição de Estoque"
 msgid "Submit"
 msgstr "Submeter"
 
-#. module: stock_request_submit
-#: code:addons/stock_request_submit/models/stock_request.py:12
-#: code:addons/stock_request_submit/models/stock_request.py:15
-#, fuzzy, python-format
-#| msgid "Submit"
-msgid "Submitted"
-msgstr "Submeter"
+#, fuzzy
+#~| msgid "Submit"
+#~ msgid "Submitted"
+#~ msgstr "Submeter"
