@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo13-addon-account_move_line_product',
         'odoo13-addon-account_move_line_stock_info',
         'odoo13-addon-procurement_auto_create_group',
+        'odoo13-addon-product_quantity_update_force_inventory',
         'odoo13-addon-scrap_reason_code',
         'odoo13-addon-stock_account_change_qty_reason',
         'odoo13-addon-stock_available',
