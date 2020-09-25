@@ -70,6 +70,7 @@ class StockWarehouse(models.Model):
             'location_id': cycle_count_proposed['location'].id,
             'cycle_count_rule_id': cycle_count_proposed[
                 'rule_type'].id,
+            'inventory_filter': cycle_count_proposed['rule_type'].inventory_filter,
             'state': 'draft'
         }
 
@@ -120,9 +121,28 @@ class StockWarehouse(models.Model):
                         cycle_count_proposed['date']) - datetime.today())
                     if not existing_cycle_counts and \
                             delta.days < rec.cycle_count_planning_horizon:
-                        cc_vals = self._prepare_cycle_count(
-                            cycle_count_proposed)
-                        self.env['stock.cycle.count'].create(cc_vals)
+                        self._create_cycle_count(cycle_count_proposed)
+
+    def _create_cycle_count(self, cycle_count_proposed):
+        cycle_count_proposed_list = []
+        inventory_filter = cycle_count_proposed['rule_type'].inventory_filter
+        if inventory_filter == 'none':
+            cycle_count_proposed_list.append(
+                self._prepare_cycle_count(cycle_count_proposed)
+            )
+        elif inventory_filter == 'category':
+            for category_id in cycle_count_proposed['rule_type'].product_category_ids:
+                cc_vals = self._prepare_cycle_count(cycle_count_proposed)
+                cc_vals['product_category_id'] = category_id.id
+                cycle_count_proposed_list.append(cc_vals)
+        elif inventory_filter == 'product':
+            for product_id in cycle_count_proposed['rule_type'].product_ids:
+                cc_vals = self._prepare_cycle_count(cycle_count_proposed)
+                cc_vals['product_id'] = product_id.id
+                cycle_count_proposed_list.append(cc_vals)
+
+        for cc_vals in cycle_count_proposed_list:
+            self.env['stock.cycle.count'].create(cc_vals)
 
     @api.model
     def cron_cycle_count(self):
