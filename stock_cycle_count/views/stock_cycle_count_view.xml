@@ -60,6 +60,9 @@
                         <group name="left">
                             <field name="location_id">Location</field>
                             <field name="cycle_count_rule_id"/>
+                            <field name="inventory_filter"/>
+                            <field name="product_id" attrs="{'invisible': [('inventory_filter', '!=', 'product')]}"/>
+                            <field name="product_category_id" attrs="{'invisible': [('inventory_filter', '!=', 'category')]}"/>
                         </group>
                         <group name="right">
                             <field name="responsible_id">Assigned to</field>

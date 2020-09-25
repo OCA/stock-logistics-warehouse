@@ -64,6 +64,15 @@
                             <field name="location_ids" widget="many2many_tags"
                                    attrs="{'invisible': [('apply_in', '!=', 'location')]}"/>
                         </group>
+                        <group string="Filter" colspan="2">
+                            <field name="inventory_filter"/>
+                            <field name="product_ids" widget="many2many_tags"
+                                   attrs="{'required': [('inventory_filter', '=', 'product')],
+                                    'invisible': [('inventory_filter', '!=', 'product')]}"/>
+                            <field name="product_category_ids" widget="many2many_tags"
+                                   attrs="{'required': [('inventory_filter', '=', 'category')],
+                                    'invisible': [('inventory_filter', '!=', 'category')]}"/>
+                        </group>
                     </group>
 
                 </sheet>
