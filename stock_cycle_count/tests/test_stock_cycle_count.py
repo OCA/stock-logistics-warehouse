@@ -1,11 +1,11 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo.tests import common
-from odoo.exceptions import ValidationError
-from odoo.exceptions import AccessError
-
 from datetime import datetime, timedelta
+
+from odoo.exceptions import AccessError
+from odoo.exceptions import ValidationError
+from odoo.tests import common
 
 
 class TestStockCycleCount(common.TransactionCase):
@@ -41,6 +41,28 @@ class TestStockCycleCount(common.TransactionCase):
             'cycle_count_planning_horizon': 30})
         self.small_wh = self.stock_warehouse_model.create({
             'name': 'SMALL', 'code': 'S'})
+        self.filter_wh = self.stock_warehouse_model.create({
+            'name': 'FILTER', 'code': 'F'})
+
+        self.category_4 = self.env.ref('product.product_category_4')
+        self.category_5 = self.env.ref('product.product_category_5')
+        self.category_6 = self.env.ref('product.product_category_6')
+
+        self.category_list = [
+            self.category_4,
+            self.category_5,
+            self.category_6,
+        ]
+
+        self.product_a = self.env.ref('product.consu_delivery_01')
+        self.product_b = self.env.ref('product.consu_delivery_02')
+        self.product_c = self.env.ref('product.consu_delivery_03')
+
+        self.product_list = [
+            self.product_a,
+            self.product_b,
+            self.product_c,
+        ]
 
         # Create rules:
         self.rule_periodic = \
@@ -54,6 +76,14 @@ class TestStockCycleCount(common.TransactionCase):
                 self.manager, 'rule_3', [5], self.big_wh.view_location_id.ids)
         self.zero_rule = self._create_stock_cycle_count_rule_zero(
             self.manager, 'rule_4')
+        self.category_rule = \
+            self._create_stock_cycle_count_rule_periodic_filter_category(
+                self.manager, 'rule_5', [2, 7], self.category_list
+            )
+        self.product_list = \
+            self._create_stock_cycle_count_rule_periodic_filter_product(
+                self.manager, 'rule_6', [2, 7], self.product_list
+            )
 
         # Configure warehouses:
         self.rule_ids = [
@@ -62,6 +92,15 @@ class TestStockCycleCount(common.TransactionCase):
             self.rule_accuracy.id,
             self.zero_rule.id]
         self.big_wh.write({
+            'cycle_count_rule_ids': [(6, 0, self.rule_ids)]
+        })
+
+        # Configure warehouses:
+        self.rule_ids = [
+            self.category_rule.id,
+            self.product_list.id,
+        ]
+        self.filter_wh.write({
             'cycle_count_rule_ids': [(6, 0, self.rule_ids)]
         })
 
@@ -130,6 +169,30 @@ class TestStockCycleCount(common.TransactionCase):
         rule = self.stock_cycle_count_rule_model.sudo(uid).create({
             'name': name,
             'rule_type': 'zero',
+        })
+        return rule
+
+    def _create_stock_cycle_count_rule_periodic_filter_category(
+            self, uid, name, values, category_ids):
+        rule = self.stock_cycle_count_rule_model.sudo(uid).create({
+            'name': name,
+            'rule_type': 'periodic',
+            'periodic_qty_per_period': values[0],
+            'periodic_count_period': values[1],
+            'inventory_type': 'category',
+            'category_ids': [(6, 0, category_ids)],
+        })
+        return rule
+
+    def _create_stock_cycle_count_rule_periodic_filter_product(
+            self, uid, name, values, product_ids):
+        rule = self.stock_cycle_count_rule_model.sudo(uid).create({
+            'name': name,
+            'rule_type': 'periodic',
+            'periodic_qty_per_period': values[0],
+            'periodic_count_period': values[1],
+            'inventory_type': 'product',
+            'category_ids': [(6, 0, product_ids)],
         })
         return rule
 
