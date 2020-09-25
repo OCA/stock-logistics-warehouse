@@ -129,6 +129,27 @@ class StockCycleCountRule(models.Model):
         relation='location_cycle_count_rule_rel', column1='rule_id',
         column2='location_id', string='Zones where applied',
     )
+    inventory_filter = fields.Selection(
+        string="Inventory of",
+        selection=[
+            ('none', 'All Products'),
+            ('category', 'Product Categories'),
+            ('product', 'Products'),
+        ],
+        required=True,
+        default='none',
+    )
+    product_category_ids = fields.Many2many(
+        comodel_name='product.category',
+        relation='category_cycle_count_rule_rel', column1='rule_id',
+        string='Product Categories',
+    )
+    product_ids = fields.Many2many(
+        comodel_name='product.product',
+        relation='products_cycle_count_rule_rel',
+        column1='rule_id',
+        string='Products',
+    )
 
     def compute_rule(self, locs):
         if self.rule_type == 'periodic':

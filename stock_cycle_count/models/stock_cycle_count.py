@@ -60,6 +60,26 @@ class StockCycleCount(models.Model):
         default=_default_company,
         readonly=True,
     )
+    inventory_filter = fields.Selection(
+        string="Inventory of",
+        selection=[
+            ('none', 'All Products'),
+            ('category', 'Product Categories'),
+            ('product', 'Products'),
+        ],
+        readonly=True,
+        default='none',
+    )
+    product_category_id = fields.Many2one(
+        comodel_name='product.category',
+        string='Product Category',
+        readonly=True,
+    )
+    product_id = fields.Many2one(
+        comodel_name='product.product',
+        string='Product',
+        readonly=True,
+    )
 
     @api.depends('stock_adjustment_ids')
     @api.multi
@@ -78,7 +98,10 @@ class StockCycleCount(models.Model):
             'name': 'INV/{}'.format(self.name),
             'cycle_count_id': self.id,
             'location_id': self.location_id.id,
-            'exclude_sublocation': True
+            'exclude_sublocation': True,
+            'filter': self.inventory_filter or 'none',
+            'product_id': self.product_id.id,
+            'category_id': self.product_category_id.id
         }
 
     @api.model
