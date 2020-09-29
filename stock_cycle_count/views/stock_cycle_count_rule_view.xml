@@ -59,7 +59,7 @@
                             <field name="apply_in"/>
                         </group>
                         <group colspan="2">
-                            <field name="warehouse_ids" widget="many2many_tags"
+                            <field name="warehouse_ids" widget="many2many_tags" force-save="1"
                                    attrs="{'readonly': [('apply_in', '!=', 'warehouse')]}"/>
                             <field name="location_ids" widget="many2many_tags"
                                    attrs="{'invisible': [('apply_in', '!=', 'location')]}"/>
