@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="vertical_lift_shuttle_form_menu" model="ir.ui.view">
+        <field name="name">vertical.lift.shuttle.view.form.menu</field>
+        <field name="model">vertical.lift.shuttle</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <form string="Shuttle">
+                <div class="row o_vlift_shuttle_menu">
+                    <div class="col-6">
+                        <button
+                            name="switch_pick"
+                            type="object"
+                            string="Pick"
+                            class="btn-primary btn-block btn btn-lg"
+                        />
+                        <button
+                            name="switch_put"
+                            type="object"
+                            string="Put"
+                            class="btn-primary btn-block btn btn-lg"
+                        />
+                        <button
+                            name="switch_inventory"
+                            type="object"
+                            string="Inventory"
+                            class="btn-primary btn-block btn btn-lg"
+                        />
+                    </div>
+                    <div class="col-6">
+                        <button
+                            name="action_back_to_settings"
+                            type="object"
+                            string="Back to settings"
+                            class="btn-danger btn-block btn-lg"
+                        />
+                    </div>
+                </div>
+                <footer />
+            </form>
+        </field>
+    </record>
+    <record id="vertical_lift_shuttle_manual_barcode_form" model="ir.ui.view">
+        <field name="name">vertical.lift.shuttle.manual.barcode.view.form</field>
+        <field name="model">vertical.lift.shuttle.manual.barcode</field>
+        <field name="arch" type="xml">
+            <form string="Shuttle">
+                <div class="row o_vlift_shuttle_popup">
+                    <div class="col-8">
+                        <field name="barcode" />
+                    </div>
+                    <div class="col-2">
+                        <button
+                            name="button_save"
+                            string="Confirm"
+                            type="object"
+                            class="btn-primary"
+                        />
+                    </div>
+                </div>
+                <footer />
+            </form>
+        </field>
+    </record>
+    <record id="vertical_lift_shuttle_view_form" model="ir.ui.view">
+        <field name="name">vertical.lift.shuttle.view.form</field>
+        <field name="model">vertical.lift.shuttle</field>
+        <field name="arch" type="xml">
+            <form string="Shuttle">
+                <header>
+                    <button
+                        name="release_vertical_lift_tray"
+                        string="Release tray"
+                        type="object"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" />
+                        <h1>
+                            <field name="name" placeholder="Shuttle Name" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group name="left">
+                            <field name="mode" />
+                            <field name="location_id" />
+                            <field name="hardware" />
+                        </group>
+                        <group string="Network" name="network">
+                            <field name="server" />
+                            <field name="port" />
+                            <field name="use_tls" />
+                        </group>
+                    </group>
+                    <group groups="base.group_no_one">
+                        <label for="command_ids" />
+                        <field name="command_ids">
+                            <tree>
+                                <field name="name" />
+                                <field name="command" />
+                                <field name="answer" />
+                                <field name="error" />
+                                <field name="create_date" />
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="vertical_lift_shuttle_view_kanban">
+        <field name="name">vertical.lift.shuttle.kanban</field>
+        <field name="model">vertical.lift.shuttle</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <field name="name" />
+                <field name="mode" />
+                <!-- <field name="number_of_ops"/> -->
+                <!-- <field name="number_of_ops_all"/> -->
+                <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            class="oe_kanban_global_click o_has_icon open_shuttle_screen"
+                        >
+                            <div class="o_vlift_kanban_main">
+                                <div class="o_kanban_card_content">
+                                    <div class="o_kanban_primary_left">
+                                        <div class="o_primary">
+                                            <strong class="o_kanban_record_title">
+                                                <span>
+                                                    <t t-esc="record.name.value" />
+                                                </span>
+                                            </strong>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                Mode:
+                                                <field name="mode" />
+                                            </div>
+                                            <!-- <div class="col-8"> -->
+                                            <!-- Operations: -->
+                                            <!-- <field name="number_of_ops"/> -->
+                                            <!-- </div> -->
+                                            <!-- <div class="col-8"> -->
+                                            <!-- All <t t-esc="record.mode.value"/> Operations:  -->
+                                            <!-- <field name="number_of_ops_all"/> -->
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="o_kanban_card_manage_pane dropdown-menu"
+                                    groups="stock.group_stock_manager"
+                                    role="menu"
+                                >
+                                    <div
+                                        class="o_kanban_card_manage_section o_kanban_manage_reports"
+                                    >
+                                        <div role="menuitem">
+                                            <a type="edit">Settings</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a
+                                    class="o_kanban_manage_toggle_button o_left"
+                                    href="#"
+                                    groups="stock.group_stock_manager"
+                                >
+                                    <i
+                                        class="fa fa-ellipsis-v"
+                                        role="img"
+                                        aria-label="Manage"
+                                        title="Manage"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="vertical_lift_shuttle_view_tree">
+        <field name="name">vertical.lift.shuttle.tree</field>
+        <field name="model">vertical.lift.shuttle</field>
+        <field name="arch" type="xml">
+            <tree string="Shuttle">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="vertical_lift_shuttle_action">
+        <field name="name">Vertical Lift Shuttles</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vertical.lift.shuttle</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="target">current</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Open the Shuttle Interface.
+            </p>
+        </field>
+    </record>
+    <menuitem
+        id="vertical_lift_shuttle"
+        name="Vertical Lift Shuttles"
+        action="vertical_lift_shuttle_action"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="15"
+    />
+</odoo>

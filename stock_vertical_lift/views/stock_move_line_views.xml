@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_move_line_operation_tree" model="ir.ui.view">
+        <field name="name">stock.move.line.operations.tree.vertical.lift</field>
+        <field name="model">stock.move.line</field>
+        <field
+            name="inherit_id"
+            ref="stock_location_tray.view_stock_move_line_operation_tree"
+        />
+        <field name="arch" type="xml">
+            <button name="action_show_source_tray" position="before">
+                <button
+                    name="fetch_vertical_lift_tray_source"
+                    string="Fetch Source Tray"
+                    type="object"
+                    icon="fa-hand-paper-o"
+                    attrs="{'invisible': [('tray_source_matrix', '=', {})]}"
+                    invisible="not context.get('show_source_location')"
+                    groups="stock.group_stock_multi_locations"
+                />
+            </button>
+            <button name="action_show_dest_tray" position="before">
+                <button
+                    name="fetch_vertical_lift_tray_dest"
+                    string="Fetch Destination Tray"
+                    type="object"
+                    icon="fa-hand-paper-o"
+                    attrs="{'invisible': [('tray_dest_matrix', '=', {})]}"
+                    invisible="not context.get('show_destination_location')"
+                    groups="stock.group_stock_multi_locations"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="stock_picking_out_demo_vertical_lift_1" model="stock.picking">
+        <field name="picking_type_id" ref="stock.picking_type_out" />
+        <field name="origin">Outgoing shipment from Vertical Lift (demo)</field>
+        <field name="partner_id" ref="base.res_partner_1" />
+        <field name="date" eval="DateTime.today()" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field
+            name="move_lines"
+            model="stock.move"
+            eval="[(0, 0, {
+            'name': obj().env.ref('stock_vertical_lift.product_running_socks').name,
+            'product_id': ref('stock_vertical_lift.product_running_socks'),
+            'product_uom': ref('uom.product_uom_unit'),
+            'product_uom_qty': 15.0,
+            'picking_type_id': ref('stock.picking_type_out'),
+            'location_id': ref('stock.stock_location_stock'),
+            'location_dest_id': ref('stock.stock_location_customers'),
+            })]"
+        />
+    </record>
+    <function model="stock.picking" name="action_confirm">
+        <value
+            model="stock.picking"
+            eval="[obj().env.ref('stock_vertical_lift.stock_picking_out_demo_vertical_lift_1').id]"
+        />
+    </function>
+    <function model="stock.picking" name="action_assign">
+        <value
+            model="stock.picking"
+            eval="[obj().env.ref('stock_vertical_lift.stock_picking_out_demo_vertical_lift_1').id]"
+        />
+    </function>
+    <record id="stock_picking_in_demo_vertical_lift_1" model="stock.picking">
+        <field name="picking_type_id" ref="stock.picking_type_in" />
+        <field name="origin">Incoming shipment from Vertical Lift (demo)</field>
+        <field name="partner_id" ref="base.res_partner_1" />
+        <field name="date" eval="DateTime.today()" />
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+        <field
+            name="move_lines"
+            model="stock.move"
+            eval="[(0, 0, {
+            'name': obj().env.ref('stock_vertical_lift.product_running_socks').name,
+            'product_id': ref('stock_vertical_lift.product_running_socks'),
+            'product_uom': ref('uom.product_uom_unit'),
+            'product_uom_qty': 15.0,
+            'picking_type_id': ref('stock.picking_type_in'),
+            'location_id': ref('stock.stock_location_suppliers'),
+            'location_dest_id': ref('stock.stock_location_stock'),
+            })]"
+        />
+    </record>
+    <function model="stock.picking" name="action_confirm">
+        <value
+            model="stock.picking"
+            eval="[obj().env.ref('stock_vertical_lift.stock_picking_in_demo_vertical_lift_1').id]"
+        />
+    </function>
+</odoo>

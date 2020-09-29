@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="vertical_lift_operation_put_button_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.put.button.view</field>
+        <field name="model">vertical.lift.operation.put</field>
+        <field name="inherit_id" ref="vertical_lift_operation_base_button_view" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="string">Put-Away Screen</attribute>
+            </form>
+        </field>
+    </record>
+    <record id="vertical_lift_operation_put_screen_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.put.screen.view</field>
+        <field name="model">vertical.lift.operation.put</field>
+        <field name="inherit_id" ref="vertical_lift_operation_transfer_screen_view" />
+        <field name="priority">100</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="string">Put-Away Screen</attribute>
+            </form>
+            <xpath
+                expr="//div[hasclass('o_shuttle_header_right')]/field[@name='number_of_ops']"
+                position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//div[hasclass('o_shuttle_header_right')]/field[@name='number_of_ops']/following-sibling::span"
+                position="replace"
+            >
+            </xpath>
+        </field>
+    </record>
+</odoo>
