@@ -23,7 +23,7 @@ Stock Orderpoint Move Link
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds to stock moves a direct link to the reordering rules that created them.
 In chained moves, the reordering rule is propagated.
@@ -49,14 +49,14 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 
 Contributors
 ~~~~~~~~~~~~
 
-* Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
 * Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
-* Héctor Villarreal Ortega <hector.villarreal@eficent.com>
+* Héctor Villarreal Ortega <hector.villarreal@forgeflow.com>
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
 
 Maintainers
