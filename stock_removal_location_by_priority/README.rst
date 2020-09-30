@@ -75,13 +75,13 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 
 Contributors
 ~~~~~~~~~~~~
 
-* Miquel Raïch <miquel.raich@eficent.com>
-* Lois Rilo <lois.rilo@eficent.com>
+* Miquel Raïch <miquel.raich@forgeflow.com>
+* Lois Rilo <lois.rilo@forgeflow.com>
 * Pimolnat Suntian <pimolnats@ecosoft.co.th>
 
 Maintainers
