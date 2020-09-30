@@ -5,7 +5,7 @@
     "name": "Account Move Line Product",
     "version": "13.0.1.0.0",
     "summary": "Displays the product in the journal entries and items",
-    "author": "Eficent, Odoo Community Association (OCA)",
+    "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "http://www.github.com/OCA/stock-logistics-warehouse",
     "category": "Generic",
     "depends": ["account"],
