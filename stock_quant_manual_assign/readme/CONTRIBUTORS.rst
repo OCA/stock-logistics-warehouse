@@ -7,10 +7,10 @@
   * Pedro M. Baeza <pedro.baeza@tecnativa.com>
   * Vicent Cubells <vicent.cubells@tecnativa.com>
 
-* `Eficent <https://www.eficent.com>`_:
+* `ForgeFlow <https://www.forgeflow.com>`_:
 
-  * Jordi Ballester <jordi.ballester@eficent.com>
-  * Lois Rilo <lois.rilo@eficent.com>
+  * Jordi Ballester <jordi.ballester@forgeflow.com>
+  * Lois Rilo <lois.rilo@forgeflow.com>
 
 * `Shine IT <https://www.openerp.cn>`_:
 
