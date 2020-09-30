@@ -23,7 +23,7 @@ Stock - Manual Quant Assignment
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module allows you to manually change the automatic quant selection.
 
@@ -59,7 +59,7 @@ Authors
 
 * AvanzOSC
 * Tecnativa
-* Eficent
+* ForgeFlow
 * Fanha Giang
 
 Contributors
@@ -74,10 +74,10 @@ Contributors
   * Pedro M. Baeza <pedro.baeza@tecnativa.com>
   * Vicent Cubells <vicent.cubells@tecnativa.com>
 
-* `Eficent <https://www.eficent.com>`_:
+* `ForgeFlow <https://www.forgeflow.com>`_:
 
-  * Jordi Ballester <jordi.ballester@eficent.com>
-  * Lois Rilo <lois.rilo@eficent.com>
+  * Jordi Ballester <jordi.ballester@forgeflow.com>
+  * Lois Rilo <lois.rilo@forgeflow.com>
 
 * `Shine IT <https://www.openerp.cn>`_:
 
