@@ -23,7 +23,7 @@ Stock Warehouse Orderpoint Stock Info
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This modules allows to know the product availability directly in the reordering rules.
 
@@ -58,7 +58,7 @@ Contributors
 * Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
 * Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 * Ana Juaristi <anajuaristi@avanzosc.es>
-* Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
 * Serpent Consulting Services Pvt. Ltd. <http://www.serpentcs.com>
 * Saran Limpajitkutaporn <saranl@ecosoft.co.th>
 * Pimolnat Suntian <pimolnats@ecosoft.co.th>
