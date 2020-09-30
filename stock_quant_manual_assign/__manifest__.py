@@ -1,5 +1,5 @@
 # Copyright 2015 Mikel Arregi - AvanzOSC
-# Copyright 2017 Eficent - Jordi Ballester
+# Copyright 2017 ForgeFlow - Jordi Ballester
 # Copyright 2018 Fanha Giang
 # Copyright 2018 Tecnativa - Vicent Cubells
 # Copyright 2016-2018 Tecnativa - Pedro M. Baeza
@@ -12,7 +12,7 @@
     "license": "AGPL-3",
     "author": "AvanzOSC, "
     "Tecnativa, "
-    "Eficent, "
+    "ForgeFlow, "
     "Fanha Giang, "
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
