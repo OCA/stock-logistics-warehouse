@@ -6,37 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2020-10-02 00:16+0000\n"
+"Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: stock_inventory_cost_info
 #: model:ir.ui.view,arch_db:stock_inventory_cost_info.report_inventory_cost_info
 msgid "<strong>Adjustment cost</strong>"
-msgstr ""
+msgstr "<strong>Custo do ajuste</strong>"
 
 #. module: stock_inventory_cost_info
 #: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line_adjustment_cost
 msgid "Adjustment cost"
-msgstr ""
+msgstr "Custo do ajuste"
 
 #. module: stock_inventory_cost_info
 #: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line_currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Moeda"
 
 #. module: stock_inventory_cost_info
 #: model:ir.model,name:stock_inventory_cost_info.model_stock_inventory_line
 msgid "Inventory Line"
-msgstr ""
+msgstr "Linha do inventário"
 
 #. module: stock_inventory_cost_info
 #: model:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree
 #: model:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree2
 #: model:ir.ui.view,arch_db:stock_inventory_cost_info.view_inventory_form
 msgid "Total"
-msgstr ""
+msgstr "Total"
