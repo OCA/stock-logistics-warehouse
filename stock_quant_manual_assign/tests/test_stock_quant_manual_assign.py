@@ -17,7 +17,7 @@ class TestStockQuantManualAssign(TransactionCase):
         cls.quant_assign_wizard = cls.env["assign.manual.quants"]
         cls.ModelDataObj = cls.env["ir.model.data"]
         cls.product = cls.env["product.product"].create(
-            {"name": "Product 4 test", "type": "product"}
+            {"name": "Product 4 test", "type": "consu", "is_storable": True}
         )
         cls.location_src = cls.env.ref("stock.stock_location_locations_virtual")
         cls.location_dst = cls.env.ref("stock.stock_location_customers")
