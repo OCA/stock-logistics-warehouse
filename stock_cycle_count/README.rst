@@ -23,7 +23,7 @@ Stock Cycle Count
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module provides the capability to execute a cycle count strategy in a
 warehouse through different rules defined by the user. Cycle count is an
@@ -166,7 +166,7 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-LoisRForgeFlow|
+|maintainer-LoisRForgeFlow| 
 
 This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/13.0/stock_cycle_count>`_ project on GitHub.
 
