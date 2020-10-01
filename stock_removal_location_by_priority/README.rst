@@ -23,7 +23,7 @@ Stock Removal Location by Priority
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module adds a removal priority field on stock locations.
 This priority applies when removing a product from different stock locations
