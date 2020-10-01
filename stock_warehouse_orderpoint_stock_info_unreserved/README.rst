@@ -23,7 +23,7 @@ Stock Warehouse Orderpoint Stock Info Unreserved
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This modules allows to display the availability of stock on hand and unreserved on a reordering rule.
 
