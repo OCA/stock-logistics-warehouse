@@ -23,7 +23,7 @@ Stock Orderpoint Move Link
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module adds to stock moves a direct link to the reordering rules that created them.
 In chained moves, the reordering rule is propagated.
