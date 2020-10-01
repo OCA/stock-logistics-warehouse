@@ -15,6 +15,7 @@ msgstr ""
 
 #. module: stock_orderpoint_route
 #: model:ir.model.fields,field_description:stock_orderpoint_route.field_stock_warehouse_orderpoint__route_ids
+#: model:ir.model.fields,field_description:stock_orderpoint_route.field_stock_warehouse_orderpoint_template__route_ids
 msgid "Allowed routes"
 msgstr ""
 
@@ -25,5 +26,6 @@ msgstr ""
 
 #. module: stock_orderpoint_route
 #: model:ir.model.fields,field_description:stock_orderpoint_route.field_stock_warehouse_orderpoint__route_id
+#: model:ir.model.fields,field_description:stock_orderpoint_route.field_stock_warehouse_orderpoint_template__route_id
 msgid "Route"
 msgstr ""
