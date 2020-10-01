@@ -9,58 +9,59 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2017-06-10 05:35+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2020-10-02 00:16+0000\n"
+"Last-Translator: Luis Felipe Miléo <mileo@kmee.com.br>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:68
 #, python-format
 msgid "(No description provided.)"
-msgstr ""
+msgstr "(Nenhuma descrição fornecida.)"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<span>Location:</span>"
-msgstr ""
+msgstr "<span>Localização:</span>"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<strong>Complete name:</strong>"
-msgstr ""
+msgstr "<strong>Nome Completo:</strong>"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<strong>Current Accuracy:</strong>"
-msgstr ""
+msgstr "<strong> Precisão Atual:</strong>"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_qty_variance_inventory_threshold
 msgid "Acceptable Inventory Quantity Variance Threshold"
-msgstr ""
+msgstr "Limite aceitável de variação de quantidade de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory_inventory_accuracy
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "Accuracy"
-msgstr ""
+msgstr "Precisão"
 
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_location_form
 msgid "Accuracy Stats"
-msgstr ""
+msgstr "Estatísticas de Precisão"
 
 #. module: stock_cycle_count
 #: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
 msgid "Accuracy report"
-msgstr ""
+msgstr "Relatório de precisão"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_active
@@ -70,12 +71,12 @@ msgstr "Ativo"
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "Applied in:"
-msgstr ""
+msgstr "Aplicado em:"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_apply_in
 msgid "Apply this rule in:"
-msgstr ""
+msgstr "Aplique esta regra em:"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_responsible_id
@@ -88,7 +89,7 @@ msgstr "Atribuído à"
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Assigned to me"
-msgstr ""
+msgstr "Atribuídos a mim"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
@@ -109,7 +110,7 @@ msgstr "Empresa"
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.action_server_warehouse_execute_cycle_count
 msgid "Compute Cycle Count Rules"
-msgstr ""
+msgstr "Calcular as regras de contagem cíclica"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
@@ -119,12 +120,12 @@ msgstr "Confirmar"
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.action_server_cycle_count_confirm
 msgid "Confirm Cycle Counts"
-msgstr ""
+msgstr "Confirmar contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_periodic_qty_per_period
 msgid "Counts per period"
-msgstr ""
+msgstr "Contagens por período"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_create_uid
@@ -149,35 +150,35 @@ msgstr "Moeda"
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_location_form
 msgid "Cycle Count"
-msgstr ""
+msgstr "Contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
 msgid "Cycle Count #"
-msgstr ""
+msgstr "Contagem de ciclos #"
 
 #. module: stock_cycle_count
 #: model:ir.ui.menu,name:stock_cycle_count.menu_report_accuracy_stats
 msgid "Cycle Count Accuracy"
-msgstr ""
+msgstr "Precisão da contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.ir_cron_compute_cycle_count_action_ir_actions_server
 #: model:ir.cron,cron_name:stock_cycle_count.ir_cron_compute_cycle_count_action
 #: model:ir.cron,name:stock_cycle_count.ir_cron_compute_cycle_count_action
 msgid "Cycle Count Planner Computation"
-msgstr ""
+msgstr "Planejar as contagem de cíclicas"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse_cycle_count_planning_horizon
 msgid "Cycle Count Planning Horizon (in days)"
-msgstr ""
+msgstr "Horizonte de Planejamento da Contagem de Ciclos (em dias)"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse_cycle_count_rule_ids
 #: model:ir.ui.menu,name:stock_cycle_count.menu_stock_cycle_count_rule
 msgid "Cycle Count Rules"
-msgstr ""
+msgstr "Regras de contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
@@ -185,6 +186,8 @@ msgid ""
 "Cycle Count Rules\n"
 "                    applied in this Warehouse:"
 msgstr ""
+"Regras de contagem de ciclos\n"
+"                    aplicadas neste Armazém:"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse_cycle_count_planning_horizon
@@ -192,66 +195,68 @@ msgid ""
 "Cycle Count planning horizon in days. Only the counts inside the horizon "
 "will be created."
 msgstr ""
+"Horizonte de planejamento de contagem de ciclo em dias. Apenas as contagens "
+"dentro do horizonte serão criadas."
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
 msgid "Cycle Counting"
-msgstr ""
+msgstr "Contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.ui.menu,name:stock_cycle_count.menu_stock_cycle_count
 msgid "Cycle Counts"
-msgstr ""
+msgstr "Contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts Assigned to me"
-msgstr ""
+msgstr "Contagens de ciclo atribuídas a mim"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts Cancelled"
-msgstr ""
+msgstr "Contagem de ciclos cancelada"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts Done"
-msgstr ""
+msgstr "Contagem de ciclos feito"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts Planned"
-msgstr ""
+msgstr "Contagem de ciclos planejada"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cycle Counts in Execution"
-msgstr ""
+msgstr "Contagem de ciclos em execução"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_cycle_count_rule_id
 msgid "Cycle count rule"
-msgstr ""
+msgstr "Regra de contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
 msgid "Cycle count rules"
-msgstr ""
+msgstr "Regras de contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 msgid "Deadline Date"
-msgstr ""
+msgstr "Data limite"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_location_cycle_count_disabled
 msgid "Define whether the location is going to be cycle counted."
-msgstr ""
+msgstr "Defina se o local será contado em ciclo."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_location_zero_confirmation_disabled
@@ -259,11 +264,13 @@ msgid ""
 "Define whether this location will trigger a zero-confirmation validation "
 "when a rule for its warehouse is defined to perform zero-confirmations."
 msgstr ""
+"Defina se esse local acionará uma validação de confirmação zero quando uma "
+"regra para seu armazém for definida para realizar confirmações zero."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_zero_confirmation_disabled
 msgid "Disable Zero Confirmations"
-msgstr ""
+msgstr "Desativar confirmações zero"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy_display_name
@@ -285,29 +292,34 @@ msgid ""
 "Ensures that at least a defined number of counts in a given period will be "
 "run."
 msgstr ""
+"Garante que pelo menos um número definido de contagens em um determinado "
+"período será executado."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:171
 #, python-format
 msgid "Error found determining the frequency of periodic cycle count rule. %s"
 msgstr ""
+"Erro encontrado determinando a frequência da regra de contagem de ciclos "
+"periódicos. %s"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:217
 #, python-format
 msgid "Error found when comparing turnover with the rule threshold. %s"
 msgstr ""
+"Erro encontrado ao comparar o volume de negócios com o limite de regra. %s"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_cycle_count_disabled
 msgid "Exclude from Cycle Count"
-msgstr ""
+msgstr "Excluir da contagem cíclica"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 #: selection:stock.cycle.count,state:0
 msgid "Execution"
-msgstr ""
+msgstr "Execução"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
@@ -328,11 +340,14 @@ msgid ""
 "                        going to the locations form and checking the box\n"
 "                        \"Exclude from Cycle Count\"."
 msgstr ""
+"Em ambos os casos, você pode excluir locais específicos\n"
+"                        indo para o formulário locais e verificando a caixa\n"
+"                        \"Exclua da Contagem de Ciclos\"."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse_counts_for_accuracy_qty
 msgid "Inventories for location accuracy calculation"
-msgstr ""
+msgstr "Estoques para cálculo de precisão de localização"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_inventory
@@ -344,38 +359,37 @@ msgstr "Inventário"
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location_loc_accuracy
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_inventory_pivot
 msgid "Inventory Accuracy"
-msgstr ""
+msgstr "Precisão de inventário"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_inventory_adj_count
-#, fuzzy
 msgid "Inventory Adj Count"
-msgstr "Inventário"
+msgstr "Contagem de ajuste de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_stock_adjustment_ids
 msgid "Inventory Adjustment"
-msgstr ""
+msgstr "Ajuste de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 msgid "Inventory Adjustments"
-msgstr ""
+msgstr "Ajustes de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Locais de inventário"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.view_inventory_graph
 msgid "Inventory accuracy evolution"
-msgstr ""
+msgstr "Evolução da precisão do inventário"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 msgid "Inventory adjustments associated"
-msgstr ""
+msgstr "Ajustes de estoque associados"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy___last_update
@@ -408,12 +422,12 @@ msgstr "Location"
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:25
 #, python-format
 msgid "Minimum Accuracy"
-msgstr ""
+msgstr "Precisão Mínima"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_accuracy_threshold
 msgid "Minimum Accuracy Threshold"
-msgstr ""
+msgstr "Limite mínimo de precisão"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_name
@@ -425,6 +439,7 @@ msgstr "Nome"
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse_counts_for_accuracy_qty
 msgid "Number of latest inventories used to calculate location accuracy"
 msgstr ""
+"Número de estoques mais recentes usados para calcular a precisão do local"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:63
@@ -433,34 +448,36 @@ msgid ""
 "Perform an Inventory Adjustment every time a location in the warehouse runs "
 "out of stock in order to confirm it is truly empty."
 msgstr ""
+"Realize um Ajuste de Inventário toda vez que um local no armazém ficar sem "
+"estoque, a fim de confirmar que está realmente vazio."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_periodic_count_period
 msgid "Period in days"
-msgstr ""
+msgstr "Período em dias"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:23
 #, python-format
 msgid "Periodic"
-msgstr ""
+msgstr "Periódico"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 #: selection:stock.cycle.count,state:0
 msgid "Planned"
-msgstr ""
+msgstr "Planejado"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_date_deadline
 #: model:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
 msgid "Required Date"
-msgstr ""
+msgstr "Data necessária"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_rule_description
 msgid "Rule Description"
-msgstr ""
+msgstr "Descrição da Regra"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:59
@@ -469,6 +486,8 @@ msgid ""
 "Schedules a count every time the accuracy of a location goes under a given "
 "threshold."
 msgstr ""
+"Agenda uma contagem toda vez que a precisão de um local fica sob um "
+"determinado limiar."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:54
@@ -477,21 +496,23 @@ msgid ""
 "Schedules a count every time the total turnover of a location exceeds the "
 "threshold. This considers every product going into/out of the location"
 msgstr ""
+"Agenda uma contagem toda vez que o volume de negócios total de um local "
+"excede o limite. Isso considera todos os produtos entrando/saindo do local"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Search Cycle Count"
-msgstr ""
+msgstr "Contagem de ciclo de pesquisa"
 
 #. module: stock_cycle_count
 #: selection:stock.cycle.count.rule,apply_in:0
 msgid "Selected Location Zones."
-msgstr ""
+msgstr "Zonas de localização selecionadas."
 
 #. module: stock_cycle_count
 #: selection:stock.cycle.count.rule,apply_in:0
 msgid "Selected warehouses"
-msgstr ""
+msgstr "Armazéns selecionados"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_state
@@ -501,9 +522,8 @@ msgstr "Estado"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
-#, fuzzy
 msgid "Status"
-msgstr "Estado"
+msgstr "Situação"
 
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count
@@ -511,22 +531,22 @@ msgstr "Estado"
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_tree_view
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_tree_view
 msgid "Stock Cycle Count"
-msgstr ""
+msgstr "Contagem do ciclo de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count_rules
 msgid "Stock Cycle Count Rules"
-msgstr ""
+msgstr "Regras de contagem de ciclo de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_cycle_count
 msgid "Stock Cycle Counts"
-msgstr ""
+msgstr "Contagem do ciclo de ações"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_cycle_count_rule
 msgid "Stock Cycle Counts Rules"
-msgstr ""
+msgstr "Regras de contagem de ciclo de ações"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_move
@@ -536,18 +556,18 @@ msgstr "Movimentação de estoque"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_turnover_inventory_value_threshold
 msgid "Turnover Inventory Value Threshold"
-msgstr ""
+msgstr "Limite de valor de estoque de volume de negócios"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_rule_type
 msgid "Type of rule"
-msgstr ""
+msgstr "Tipo de regra"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:24
 #, python-format
 msgid "Value Turnover"
-msgstr ""
+msgstr "Valor Turnover"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_warehouse
@@ -557,7 +577,7 @@ msgstr "Armazém"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_warehouse_ids
 msgid "Warehouses where applied"
-msgstr ""
+msgstr "Armazéns onde será aplicado"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
@@ -566,30 +586,34 @@ msgid ""
 "                        warehouses or specific zones. A zone it is\n"
 "                        understood as a location and all its children."
 msgstr ""
+"Você pode aplicar as regras de contagem de ciclos em completo\n"
+"                        armazéns ou zonas específicas. Uma zona que é\n"
+"                        entendido como um local e todos os seus filhos."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count.py:93
 #, python-format
 msgid "You can only confirm cycle counts in state 'Planned'."
-msgstr ""
+msgstr "Você só pode confirmar contagem de ciclos no estado 'Planejado'."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:43
 #, python-format
 msgid "You can only have one zero confirmation rule per warehouse."
-msgstr ""
+msgstr "Você só pode ter uma regra de confirmação zero por armazém."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:76
 #, python-format
 msgid "You cannot define a negative or null number of counts per period."
 msgstr ""
+"Você não pode definir um número negativo ou nulo de contagens por período."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:81
 #, python-format
 msgid "You cannot define a negative period."
-msgstr ""
+msgstr "Você não pode definir um período negativo."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_inventory.py:60
@@ -598,34 +622,36 @@ msgid ""
 "You cannot modify the configuration of an Inventory Adjustment related to a "
 "Cycle Count."
 msgstr ""
+"Não é possível modificar a configuração de um ajuste de inventário "
+"relacionado a uma contagem de ciclos."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:26
 #, python-format
 msgid "Zero Confirmation"
-msgstr ""
+msgstr "Confirmação zero"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:34
 #, python-format
 msgid "Zero confirmation rules can only have one warehouse assigned."
-msgstr ""
+msgstr "As regras de confirmação zero só podem ter um armazém atribuído."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_location_ids
 msgid "Zones where applied"
-msgstr ""
+msgstr "Zonas aplicadas"
 
 #. module: stock_cycle_count
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 #: model:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
-msgstr ""
+msgstr "cycle counts test:"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_report_stock_location_accuracy
 msgid "report.stock_location_accuracy"
-msgstr ""
+msgstr "report.stock_location_accuracy"
 
 #~ msgid "Action Needed"
 #~ msgstr "Ação necessária"
