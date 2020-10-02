@@ -62,14 +62,14 @@ class StockWarehouseOrderpoint(models.Model):
                 package_id=self.env.context.get('package_id')
             )
             for order in order_in_location:
-                product = products[order.product_id.id]
+                p = products[order.product_id.id]
                 order.update({
-                    'product_location_qty': product['qty_available'],
-                    'incoming_location_qty': product['incoming_qty'],
-                    'outgoing_location_qty': product['outgoing_qty'],
-                    'virtual_location_qty': product['virtual_available'],
-                    'product_under_minimun' : product['qty_available'] < order.product_min_qty,
-                    'product_over_maximum' : product['qty_available'] > order.product_max_qty,
+                    'product_location_qty': p['qty_available'],
+                    'incoming_location_qty': p['incoming_qty'],
+                    'outgoing_location_qty': p['outgoing_qty'],
+                    'virtual_location_qty': p['virtual_available'],
+                    'product_under_minimun' : p['qty_available'] < order.product_min_qty,
+                    'product_over_maximum' : p['qty_available'] > order.product_max_qty,
                 })
 
     def _search_product_under_minimun(self, operator, value):
@@ -87,4 +87,3 @@ class StockWarehouseOrderpoint(models.Model):
             recs = self.search([]).filtered(lambda x : x.product_over_maximum is False)
         if recs:
             return [('id', 'in', [x.id for x in recs])]
-
