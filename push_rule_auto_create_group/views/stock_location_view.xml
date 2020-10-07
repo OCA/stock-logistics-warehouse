@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="stock_location_path_form">
+        <field name="name">stock.location.path - push_rule_auto_create_group</field>
+        <field name="model">stock.location.path</field>
+        <field name="inherit_id" ref="stock.stock_location_path_form"/>
+        <field name="arch" type="xml">
+            <field name="auto" position="after">
+                <field name="auto_create_group"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
