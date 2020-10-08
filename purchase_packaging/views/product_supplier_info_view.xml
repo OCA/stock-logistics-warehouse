@@ -23,22 +23,21 @@
         <field name="name">product.supplierinfo.form.view (purchase_packaging)</field>
         <field name="model">product.supplierinfo</field>
         <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
+        <field name="priority" eval="120"/>
         <field name="arch" type="xml">
-            <field name="min_qty" position="after">
-                <span> x <field name="min_qty_uom_id" groups="uom.group_uom" /></span>
-            </field>
-            <field name="product_uom" position="before">
-                <span> of </span>
-            </field>
-            <field name="product_uom" position="after">
+            <label for="min_qty" position="replace"/>
+            <xpath expr="//field[@name='min_qty']/.." position="replace">
+                <label for="min_qty"/>
                 <div>
-                         using package <field
-                        name="packaging_id"
-                        domain="[('product_tmpl_id', '=', product_tmpl_id)]"
-                        groups="product.group_stock_packaging"
-                    />
-                    </div>
-            </field>
+                    <field name="min_qty" class="oe_inline" nolabel="1"/>
+                    <span class="oe_inline"> x </span>
+                    <field name="min_qty_uom_id" groups="uom.group_uom" class="oe_inline" nolabel="1" options="{'no_open': True, 'no_create': True}"/>
+                    <span class="oe_inline"> of </span>
+                    <field name="product_uom" groups="uom.group_uom" class="oe_inline" nolabel="1"/>
+                    <span class="oe_inline"> using package </span>
+                    <field name="packaging_id" options="{'no_open': True, 'no_create': True}" nolabel="1" domain="[('product_id.product_tmpl_id', '=', product_tmpl_id)]" groups="product.group_stock_packaging" class="oe_inline"/>
+                </div>
+            </xpath>
             <field name="delay" position="after">
                 <field name="product_tmpl_id" invisible="1" required="False" />
             </field>
