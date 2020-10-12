@@ -60,6 +60,6 @@ class StockMoveLine(models.Model):
                 request = allocation.stock_request_id
                 message_data = self._prepare_message_data(ml, request, allocated_qty)
                 message = self._stock_request_confirm_done_message_content(message_data)
-                request.message_post(body=message, subtype="mail.mt_comment")
+                request.message_post(body=message, subtype_xmlid="mail.mt_comment")
                 request.check_done()
         return res

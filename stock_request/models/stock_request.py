@@ -47,13 +47,13 @@ class StockRequest(models.Model):
         default="draft",
         index=True,
         readonly=True,
-        track_visibility="onchange",
+        tracking=True,
     )
     requested_by = fields.Many2one(
         "res.users",
         "Requested by",
         required=True,
-        track_visibility="onchange",
+        tracking=True,
         default=lambda s: s._get_default_requested_by(),
     )
     expected_date = fields.Datetime(
@@ -278,7 +278,6 @@ class StockRequest(models.Model):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
-        errors = []
         for request in self:
             if request._skip_procurement():
                 continue
@@ -292,25 +291,20 @@ class StockRequest(models.Model):
             values = request._prepare_procurement_values(
                 group_id=request.procurement_group_id
             )
-            try:
-                procurements = []
-                procurements.append(
-                    self.env["procurement.group"].Procurement(
-                        request.product_id,
-                        request.product_uom_qty,
-                        request.product_uom_id,
-                        request.location_id,
-                        request.name,
-                        request.name,
-                        self.env.company,
-                        values,
-                    )
+            procurements = []
+            procurements.append(
+                self.env["procurement.group"].Procurement(
+                    request.product_id,
+                    request.product_uom_qty,
+                    request.product_uom_id,
+                    request.location_id,
+                    request.name,
+                    request.name,
+                    self.env.company,
+                    values,
                 )
-                self.env["procurement.group"].run(procurements)
-            except UserError as error:
-                errors.append(error.name)
-        if errors:
-            raise UserError("\n".join(errors))
+            )
+            self.env["procurement.group"].run(procurements)
         return True
 
     def action_view_transfer(self):

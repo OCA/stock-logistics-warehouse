@@ -15,3 +15,4 @@ access_stock_request_user_warehouse,stock request user Warehouse,stock.model_sto
 access_stock_request_manager_warehouse,stock request manager Warehouse,stock.model_stock_warehouse,group_stock_request_manager,1,0,0,0
 access_stock_request_user_stock_move,stock request user stock move,stock.model_stock_move,group_stock_request_user,1,0,0,0
 access_stock_request_manager_stock_move,stock request manager stock move,stock.model_stock_move,group_stock_request_manager,1,0,0,0
+access_stock_warehouse_orderpoint,stock request user stock warehouse orderpoint,stock.model_stock_warehouse_orderpoint,group_stock_request_user,1,0,0,0

@@ -11,11 +11,11 @@
                 decoration-muted="state == 'cancel'"
                 decoration-bf="message_needaction==True"
             >
-                <field name="message_needaction" invisible="1" />
+                <field name="message_needaction" attrs="{'invisible': True}" />
                 <field name="name" />
                 <field name="warehouse_id" groups="stock.group_stock_multi_locations" />
                 <field name="location_id" groups="stock.group_stock_multi_locations" />
-                <field name="allow_virtual_location" invisible="1" />
+                <field name="allow_virtual_location" attrs="{'invisible': True}" />
                 <field
                     name="route_id"
                     options="{'no_create': True}"
@@ -45,11 +45,6 @@
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="product_id" />
                 <separator />
-                <filter
-                    string="Archived"
-                    name="inactive"
-                    domain="[('active','=',False)]"
-                />
                 <filter
                     name="current_requests"
                     string="Current requests"
@@ -137,7 +132,7 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <field name="picking_ids" invisible="1" />
+                        <field name="picking_ids" attrs="{'invisible': True}" />
                         <button
                             type="object"
                             name="action_view_transfer"
@@ -156,14 +151,14 @@
                     <div class="oe_title">
                         <label for="name" string="Stock Request" />
                         <h1>
-                            <field name="name" readonly="1" />
+                            <field name="name" attrs="{'readonly': True}" />
                         </h1>
                     </div>
                     <group>
                         <group>
                             <field
                                 name="order_id"
-                                readonly="1"
+                                attrs="{'readonly': True}"
                                 groups="stock_request.group_stock_request_order"
                             />
                             <field name="product_id" />
@@ -186,7 +181,7 @@
                                 options="{'no_create': True}"
                                 groups="stock.group_stock_multi_locations"
                             />
-                            <field name="route_ids" invisible="1" />
+                            <field name="route_ids" attrs="{'invisible': True}" />
                             <field
                                 name="procurement_group_id"
                                 groups="stock.group_adv_location"

@@ -10,3 +10,6 @@
   * Steve Campbell <scampbell@opensourceintegrators.com>
 
 * Héctor Villarreal <hector.villarreal@forgeflow.com>
+* `Jarsa <https://www.jarsa.com.mx>`_
+
+  * Alan Ramos <alan.ramos@jarsa.com.mx>

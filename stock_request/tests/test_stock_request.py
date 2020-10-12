@@ -543,24 +543,6 @@ class TestStockRequestBase(TestStockRequest):
         with self.assertRaises(exceptions.ValidationError):
             self.stock_request.with_user(self.stock_request_user).create(vals)
 
-    def test_stock_request_validations_02(self):
-        vals = {
-            "product_id": self.product.id,
-            "product_uom_id": self.product.uom_id.id,
-            "product_uom_qty": 5.0,
-            "company_id": self.main_company.id,
-            "warehouse_id": self.warehouse.id,
-            "location_id": self.warehouse.lot_stock_id.id,
-        }
-
-        stock_request = self.stock_request.with_user(self.stock_request_user).create(
-            vals
-        )
-
-        # With no route found, should raise an error
-        with self.assertRaises(exceptions.UserError):
-            stock_request.with_user(self.stock_request_manager).action_confirm()
-
     def test_create_request_01(self):
         expected_date = fields.Datetime.now()
         vals = {
@@ -617,7 +599,7 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(picking.origin, order.name)
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 5
-        picking.with_user(self.stock_request_manager).action_done()
+        picking.with_user(self.stock_request_manager)._action_done()
         self.assertEqual(stock_request.qty_in_progress, 0.0)
         self.assertEqual(stock_request.qty_done, stock_request.product_uom_qty)
         self.assertEqual(order.state, "done")
@@ -662,7 +644,7 @@ class TestStockRequestBase(TestStockRequest):
         picking.with_user(self.stock_request_manager).action_assign()
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 1
-        picking.with_user(self.stock_request_manager).action_done()
+        picking.with_user(self.stock_request_manager)._action_done()
         self.assertEqual(stock_request.qty_in_progress, 0.0)
         self.assertEqual(stock_request.qty_done, stock_request.product_uom_qty)
         self.assertEqual(stock_request.state, "done")
@@ -705,7 +687,7 @@ class TestStockRequestBase(TestStockRequest):
         picking.with_user(self.stock_request_manager).action_assign()
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 10
-        picking.with_user(self.stock_request_manager).action_done()
+        picking.with_user(self.stock_request_manager)._action_done()
 
     def test_cancel_request(self):
         expected_date = fields.Datetime.now()
@@ -924,7 +906,7 @@ class TestStockRequestBase(TestStockRequest):
         # the action from the products, so test that they get a friendlier
         # error message.
         self.stock_request_user.groups_id -= self.stock_request_user_group
-        with self.assertRaisesRegexp(
+        with self.assertRaisesRegex(
             exceptions.UserError,
             "Unfortunately it seems you do not have the necessary rights "
             "for creating stock requests. Please contact your "
