@@ -24,7 +24,7 @@
                         widget="statinfo"
                         string="Stock Requests"
                     />
-                    <field name="stock_request_ids" invisible="1" />
+                    <field name="stock_request_ids" attrs="{'invisible': True}" />
                 </button>
             </xpath>
             <xpath expr="//field[@name='order_line']/form//notebook" position="inside">

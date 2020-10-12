@@ -117,7 +117,6 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.assertEqual(order.stock_request_ids.state, "open")
 
         order.refresh()
-
         self.assertEqual(len(order.sudo().purchase_ids), 1)
         self.assertEqual(len(order.picking_ids), 0)
         self.assertEqual(len(order.move_ids), 0)
@@ -138,7 +137,7 @@ class TestStockRequestPurchase(common.TransactionCase):
         picking.action_assign()
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 5
-        picking.action_done()
+        picking.button_validate()
 
         self.assertEqual(order.stock_request_ids.qty_in_progress, 0.0)
         self.assertEqual(
@@ -205,7 +204,7 @@ class TestStockRequestPurchase(common.TransactionCase):
         picking.action_assign()
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 10
-        picking.action_done()
+        picking.button_validate()
 
         self.assertEqual(stock_request_1.qty_in_progress, 0.0)
         self.assertEqual(stock_request_1.qty_done, stock_request_1.product_uom_qty)
