@@ -7,7 +7,8 @@
         <field name="model_id" ref="product.model_product_product" />
         <field name="binding_model_id" ref="product.model_product_product" />
         <field name="code">
-action = records.env['stock.request.order']._create_from_product_multiselect(records)
+            action =
+            records.env['stock.request.order']._create_from_product_multiselect(records)
         </field>
     </record>
     <record
@@ -20,7 +21,8 @@ action = records.env['stock.request.order']._create_from_product_multiselect(rec
         <field name="model_id" ref="product.model_product_template" />
         <field name="binding_model_id" ref="product.model_product_template" />
         <field name="code">
-action = records.env['stock.request.order']._create_from_product_multiselect(records)
+            action =
+            records.env['stock.request.order']._create_from_product_multiselect(records)
         </field>
     </record>
 </odoo>

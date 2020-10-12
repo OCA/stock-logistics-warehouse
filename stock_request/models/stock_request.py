@@ -249,7 +249,7 @@ class StockRequest(models.Model):
 
     def _prepare_procurement_values(self, group_id=False):
 
-        """ Prepare specific key for moves or other components that
+        """Prepare specific key for moves or other components that
         will be created from a procurement rule
         coming from a stock request. This method could be override
         in order to add other custom key that could be used in

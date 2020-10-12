@@ -327,7 +327,7 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(stock_request.location_id, self.warehouse.lot_stock_id)
 
     def test_stock_request_order_validations_01(self):
-        """ Testing the discrepancy in warehouse_id between
+        """Testing the discrepancy in warehouse_id between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {
@@ -355,7 +355,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_02(self):
-        """ Testing the discrepancy in location_id between
+        """Testing the discrepancy in location_id between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {
@@ -383,7 +383,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_03(self):
-        """ Testing the discrepancy in requested_by between
+        """Testing the discrepancy in requested_by between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {
@@ -413,7 +413,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_04(self):
-        """ Testing the discrepancy in procurement_group_id between
+        """Testing the discrepancy in procurement_group_id between
         stock request and order"""
         procurement_group = self.env["procurement.group"].create(
             {"name": "Procurement"}
@@ -445,7 +445,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_05(self):
-        """ Testing the discrepancy in company between
+        """Testing the discrepancy in company between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {
@@ -473,7 +473,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_06(self):
-        """ Testing the discrepancy in expected dates between
+        """Testing the discrepancy in expected dates between
         stock request and order"""
         expected_date = fields.Datetime.now()
         child_expected_date = "2015-01-01"
@@ -502,7 +502,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.create(vals)
 
     def test_stock_request_order_validations_07(self):
-        """ Testing the discrepancy in picking policy between
+        """Testing the discrepancy in picking policy between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {

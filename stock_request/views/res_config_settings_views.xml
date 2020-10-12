@@ -42,7 +42,8 @@
                                     for="stock_request_allow_virtual_loc"
                                 />
                                 <div class="text-muted">
-                                    By default only internal and transit locations are allowed in Stock Request and Orders.
+                                    By default only internal and transit locations are
+                                    allowed in Stock Request and Orders.
                                 </div>
                             </div>
                         </div>
@@ -56,7 +57,8 @@
                                     for="module_stock_request_purchase"
                                 />
                                 <div class="text-muted">
-                                    Add State to Stock Request and Stock Request Orders if activated.
+                                    Add State to Stock Request and Stock Request Orders
+                                    if activated.
                                 </div>
                             </div>
                         </div>

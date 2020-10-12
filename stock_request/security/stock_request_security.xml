@@ -38,9 +38,9 @@
                 model="ir.model"
             />
             <field name="global" eval="True" />
-            <field
-                name="domain_force"
-            >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+            <field name="domain_force">
+                ['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
         </record>
         <record id="stock_request_followers_rule" model="ir.rule">
             <field name="name">Follow Stock Request</field>
@@ -50,8 +50,11 @@
             <field name="perm_write" eval="False" />
             <field name="perm_create" eval="False" />
             <field name="perm_unlink" eval="False" />
-            <field name="domain_force">['|',('requested_by','=',user.id),
-                                            ('message_partner_ids', 'in', [user.partner_id.id])]</field>
+            <field name="domain_force">
+                ['|',('requested_by','=',user.id),
+                                            ('message_partner_ids', 'in',
+                [user.partner_id.id])]
+            </field>
         </record>
         <record id="stock_request_rule" model="ir.rule">
             <field name="name">Stock Request User</field>
@@ -76,9 +79,9 @@
             <field name="name">stock_request_order multi-company</field>
             <field name="model_id" ref="model_stock_request_order" />
             <field name="global" eval="True" />
-            <field
-                name="domain_force"
-            >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+            <field name="domain_force">
+                ['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]
+            </field>
         </record>
         <record id="stock_request_order_followers_rule" model="ir.rule">
             <field name="name">Follow Stock Request Order</field>
@@ -91,8 +94,11 @@
             <field name="perm_write" eval="False" />
             <field name="perm_create" eval="False" />
             <field name="perm_unlink" eval="False" />
-            <field name="domain_force">['|',('requested_by','=',user.id),
-                                            ('message_partner_ids', 'in', [user.partner_id.id])]</field>
+            <field name="domain_force">
+                ['|',('requested_by','=',user.id),
+                                            ('message_partner_ids', 'in',
+                [user.partner_id.id])]
+            </field>
         </record>
         <record id="stock_request_order_rule" model="ir.rule">
             <field name="name">Stock Request Order User</field>
