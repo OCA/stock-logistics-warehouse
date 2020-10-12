@@ -14,9 +14,7 @@ class StockRequest(models.Model):
         string="Purchase Orders",
         readonly=True,
     )
-    purchase_count = fields.Integer(
-        string="Purchase count", compute="_compute_purchase_ids", readonly=True
-    )
+    purchase_count = fields.Integer(compute="_compute_purchase_ids", readonly=True)
     purchase_line_ids = fields.Many2many(
         "purchase.order.line", string="Purchase Order Lines", readonly=True, copy=False
     )
@@ -41,7 +39,7 @@ class StockRequest(models.Model):
             )
 
     def action_view_purchase(self):
-        action = self.env.ref("purchase.purchase_order_action_generic").read()[0]
+        action = self.env.ref("purchase.purchase_rfq").read()[0]
 
         purchases = self.mapped("purchase_ids")
         if len(purchases) > 1:
