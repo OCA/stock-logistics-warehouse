@@ -135,9 +135,9 @@ class TestLocation(LocationTrayTypeCase):
 
         # we cannot archive an empty cell or any parent
         location = cell
-        message = "cannot be archived"
+        message = "You still have some product in locations"
         while location:
-            with self.assertRaisesRegex(exceptions.ValidationError, message):
+            with self.assertRaisesRegex(exceptions.UserError, message):
                 location.active = False
 
             # restore state for the next test loop
@@ -159,7 +159,7 @@ class TestLocation(LocationTrayTypeCase):
             self._cell_for(self.tray_location, x=1, y=1), self.product, 1
         )
         tray_type = self.tray_type_small_32x
-        message = "cannot be modified when they contain products"
+        message = "You still have some product in locations"
         with self.assertRaisesRegex(exceptions.UserError, message):
             self.tray_location.tray_type_id = tray_type
 
