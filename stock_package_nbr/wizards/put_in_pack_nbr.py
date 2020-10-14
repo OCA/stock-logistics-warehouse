@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class PutInPackNbr(models.TransientModel):
     _name = 'put.in.pack.nbr'
+    _description = 'Put In Pack Number'
 
     nbr_packages = fields.Integer(
         'Number of packages', required=True, default=1)

@@ -3,12 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Stock Package Nbr',
+    'name': 'Stock Package Number',
     'version': '12.0.1.0.0',
     'author': "BCIM, Okia, Odoo Community Association (OCA)",
     'website': "https://github.com/OCA/stock-logistics-warehouse",
     'summary': "Add quantity of packages in a pack.",
-    'category': 'Stock Management',
+    'category': 'Warehouse',
     'depends': [
         'stock',
     ],
