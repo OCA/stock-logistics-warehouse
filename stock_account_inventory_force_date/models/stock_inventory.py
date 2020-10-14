@@ -92,7 +92,7 @@ class StockInventory(models.Model):
                 lines.extend(self._generate_lines_at_date(loc, product_ids))
         else:
             raise ValidationError(_(
-                'Option %s not available when forcing Inventory Date.',
+                'Option %s not available when forcing Inventory Date.' %
                 self.filter))
         return lines
 
