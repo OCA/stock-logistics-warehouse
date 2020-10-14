@@ -20,6 +20,7 @@ class StockInventory(models.Model):
     def _onchange_force_inventory_date(self):
         if self.force_inventory_date:
             self.accounting_date = self.date.date()
+            self.exhausted = False
 
     @api.multi
     def write(self, vals):
@@ -40,7 +41,7 @@ class StockInventory(models.Model):
         return res
 
     @api.multi
-    def _generate_lines_at_date(self, location, product_ids):
+    def _generate_lines_at_date(self, location, product_ids, lot=None):
         lines = []
         products_at_date = self.env['product.product'].with_context({
             'to_date': self.date,
@@ -49,12 +50,25 @@ class StockInventory(models.Model):
         }).search([('id', 'in', product_ids)]).filtered(
             lambda p: p.qty_available)
         for p in products_at_date:
-            line = {
-                'product_id': p.id,
-                'product_qty': p.qty_available,
-                'location_id': location.id,
-            }
-            lines.append(line)
+            if p.tracking == "none":
+                line = {
+                    'product_id': p.id,
+                    'product_qty': p.qty_available,
+                    'location_id': location.id,
+                }
+                lines.append(line)
+            else:
+                res = self.env["stock.move.line"].get_lot_qty_at_date_in_location(
+                    p, location, self.date, lot=lot
+                )
+                for item in res:
+                    line = {
+                        'product_id': p.id,
+                        'product_qty': item.get("qty"),
+                        'location_id': location.id,
+                        'prod_lot_id': item.get("lot_id")
+                    }
+                    lines.append(line)
         return lines
 
     def _get_inventory_lines_values(self):
@@ -90,6 +104,11 @@ class StockInventory(models.Model):
             ).mapped("product_variant_ids").ids
             for loc in locations:
                 lines.extend(self._generate_lines_at_date(loc, product_ids))
+        elif self.filter == 'lot':
+            for loc in locations:
+                lines.extend(self._generate_lines_at_date(
+                    loc, [self.lot_id.product_id.id], lot=self.lot_id)
+                )
         else:
             raise ValidationError(_(
                 'Option %s not available when forcing Inventory Date.' %

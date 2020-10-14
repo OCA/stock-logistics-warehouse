@@ -92,6 +92,14 @@ class TestStockInventoryForceDate(TransactionCase):
             'standard_price': 1.0,
             'categ_id': self.categ_standard.id,
         })
+        self.product3 = self.obj_product.create({
+            'name': 'Test Product 3',
+            'type': 'product',
+            'default_code': 'PROD3',
+            'tracking': 'serial',
+            'standard_price': 1.0,
+            'categ_id': self.categ_standard.id,
+        })
         self.test_loc = self.obj_location.create({
             'name': 'Test Location',
             'usage': 'internal',
@@ -427,3 +435,99 @@ class TestStockInventoryForceDate(TransactionCase):
         })
         inventory._onchange_force_inventory_date()
         self.assertEqual(inventory.accounting_date, to_date.date())
+
+    def test_serial_product(self):
+        prod_lot_obj = self.env['stock.production.lot']
+        initial_date = datetime(2020, 10, 1, 0, 0, 0, 0)
+        self.env['product.price.history'].create({
+            'product_id': self.product3.id,
+            'datetime': initial_date,
+            'cost': 25,
+            'company_id': self.env.user.company_id.id,
+        })
+        serial_001 = prod_lot_obj.create(
+            {
+                "name": "001",
+                "product_id": self.product3.id,
+            }
+        )
+        serial_002 = prod_lot_obj.create(
+            {
+                "name": "002",
+                "product_id": self.product3.id,
+            }
+        )
+        serial_003 = prod_lot_obj.create(
+            {
+                "name": "003",
+                "product_id": self.product3.id,
+            }
+        )
+        initial_inventory = self.obj_inventory.create({
+            'name': 'Initial inventory',
+            'location_id': self.test_loc.id,
+            'filter': 'product',
+            'product_id': self.product3.id,
+            'date': initial_date,
+            'force_inventory_date': True,
+            'line_ids': [
+                (0, 0, {
+                    'product_id': self.product3.id,
+                    'product_uom_id': self.env.ref(
+                        "uom.product_uom_unit").id,
+                    'product_qty': 1.0,
+                    'location_id': self.test_loc.id,
+                    'prod_lot_id': serial_001.id,
+                }), (0, 0, {
+                    'product_id': self.product3.id,
+                    'product_uom_id': self.env.ref(
+                        "uom.product_uom_unit").id,
+                    'product_qty': 1.0,
+                    'location_id': self.test_loc.id,
+                    'prod_lot_id': serial_002.id,
+                }), (0, 0, {
+                    'product_id': self.product3.id,
+                    'product_uom_id': self.env.ref(
+                        "uom.product_uom_unit").id,
+                    'product_qty': 1.0,
+                    'location_id': self.test_loc.id,
+                    'prod_lot_id': serial_003.id,
+                }),
+            ],
+        })
+        initial_inventory.action_validate()
+        serial_003_inv_date = datetime(2020, 10, 10, 0, 0, 0, 0)
+        serial_003_inventory = self.obj_inventory.create({
+            'name': 'Serial 003 inventory',
+            'location_id': self.test_loc.id,
+            'filter': 'lot',
+            'lot_id': serial_003.id,
+            'date': serial_003_inv_date,
+        })
+        serial_003_inventory.action_start()
+        self.assertEqual(len(serial_003_inventory.line_ids), 1)
+        self.assertEqual(serial_003_inventory.line_ids.theoretical_qty, 1)
+        serial_003_inventory.line_ids.product_qty = 0
+        serial_003_inventory.action_validate()
+        after_inv_date = datetime(2020, 10, 20, 0, 0, 0, 0)
+        product_inventory_after = self.obj_inventory.create({
+            'name': 'Product inventory',
+            'location_id': self.test_loc.id,
+            'filter': 'product',
+            'product_id': self.product3.id,
+            'date': after_inv_date,
+        })
+        product_inventory_after.action_start()
+        self.assertEqual(len(product_inventory_after.line_ids), 2)
+        product_inventory_after.action_cancel_draft()
+        before_inv_date = datetime(2020, 10, 5, 0, 0, 0, 0)
+        product_inventory_before = self.obj_inventory.create({
+            'name': 'Product inventory',
+            'location_id': self.test_loc.id,
+            'filter': 'product',
+            'product_id': self.product3.id,
+            'date': before_inv_date,
+            'force_inventory_date': True,
+        })
+        product_inventory_before.action_start()
+        self.assertEqual(len(product_inventory_before.line_ids), 3)
