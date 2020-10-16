@@ -1,4 +1,4 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017-2020 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 from odoo import fields
 
@@ -7,7 +7,7 @@ from odoo.addons.stock_request.tests import test_stock_request
 
 class TestStockRequestSubmit(test_stock_request.TestStockRequest):
     def setUp(self):
-        super(TestStockRequestSubmit, self).setUp()
+        super().setUp()
 
     def test_stock_request_submit(self):
         expected_date = fields.Datetime.now()
@@ -33,7 +33,7 @@ class TestStockRequestSubmit(test_stock_request.TestStockRequest):
             ],
         }
 
-        order = self.request_order.sudo(self.stock_request_user).create(vals)
+        order = self.request_order.with_user(self.stock_request_user).create(vals)
 
         stock_request = order.stock_request_ids
 

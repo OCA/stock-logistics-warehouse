@@ -1,4 +1,4 @@
-# Copyright 2019 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2019-2020 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import SUPERUSER_ID, api
 

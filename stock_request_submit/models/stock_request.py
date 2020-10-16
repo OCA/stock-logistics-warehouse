@@ -1,7 +1,7 @@
 # Copyright 2019 Open Source Integrators
-# Copyright 2019 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2019-2020 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockRequest(models.Model):
@@ -19,17 +19,15 @@ class StockRequest(models.Model):
         states={"draft": [("readonly", False)], "submitted": [("readonly", False)]}
     )
 
-    @api.multi
     def action_submit(self):
         self._action_submit()
 
-    @api.multi
     def _action_submit(self):
         self.state = "submitted"
 
     def _skip_procurement(self):
         return (
-            super(StockRequest, self)._skip_procurement()
+            super()._skip_procurement()
             and self.state != "submitted"
             or self.product_id.type not in ("consu", "product")
         )
