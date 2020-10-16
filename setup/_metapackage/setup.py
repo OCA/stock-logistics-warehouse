@@ -52,6 +52,7 @@ setuptools.setup(
         'odoo12-addon-stock_packaging',
         'odoo12-addon-stock_picking_procure_method',
         'odoo12-addon-stock_picking_type_user_restriction',
+        'odoo12-addon-stock_production_lot_quantity_tree',
         'odoo12-addon-stock_pull_list',
         'odoo12-addon-stock_putaway_method',
         'odoo12-addon-stock_putaway_product_form',
