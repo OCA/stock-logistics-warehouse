@@ -2,13 +2,16 @@
 # -*- encoding: utf-8 -*-
 # Copyright 2020 InfinityloopSistemas - JulianRam
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import datetime
+from odoo.tests.common import SavepointCase
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
-from odoo.tests.common import TransactionCase
 
+class StockReserve(SavepointCase):
 
-class StockMove(TransactionCase):
-    def setUp(self):
-        super(StockMove, self).setUp()
+    @classmethod
+    def setUpClass(self):
+        super().setUpClass()
         self.stock_location = self.env.ref('stock.stock_location_stock')
         self.uom_kgm = self.env.ref('uom.product_uom_kgm')
         self.uom_gram = self.env.ref('uom.product_uom_gram')
@@ -107,8 +110,6 @@ class StockMove(TransactionCase):
             "Stock is not updated.")
 
         # I set the validity of the second reservation to yesterday
-        import datetime
-        from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
         yesterday = datetime.date.today() - datetime.timedelta(days=1)
         yesterday = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
         self.reserv_sorbet2.write({'date_validity': yesterday})
