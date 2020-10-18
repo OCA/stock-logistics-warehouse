@@ -10,49 +10,49 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 class StockReserve(SavepointCase):
 
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
         super().setUpClass()
-        self.stock_location = self.env.ref('stock.stock_location_stock')
-        self.uom_kgm = self.env.ref('uom.product_uom_kgm')
-        self.uom_gram = self.env.ref('uom.product_uom_gram')
+        cls.stock_location = cls.env.ref('stock.stock_location_stock')
+        cls.uom_kgm = cls.env.ref('uom.product_uom_kgm')
+        cls.uom_gram = cls.env.ref('uom.product_uom_gram')
 
         # I create a product to test the stock reservation
 
-        self.product_sorbet = self.env['product.product'].create({
+        cls.product_sorbet = cls.env['product.product'].create({
             'default_code': '001SORBET',
             'name': 'Sorbet',
             'type': 'product',
-            'categ_id': self.env.ref('product.product_category_1').id,
+            'categ_id': cls.env.ref('product.product_category_1').id,
             'list_price': 100.0,
             'standard_price': 70.0,
-            'uom_id': self.uom_kgm.id,
-            'uom_po_id': self.uom_kgm.id
+            'uom_id': cls.uom_kgm.id,
+            'uom_po_id': cls.uom_kgm.id
         })
 
         # I update the current stock of the Sorbet with 10 kgm
-        self.env['stock.change.product.qty'].create({
-            'product_id': self.product_sorbet.id,
+        cls.env['stock.change.product.qty'].create({
+            'product_id': cls.product_sorbet.id,
             'new_quantity': 10.0,
-            'location_id': self.stock_location.id
+            'location_id': cls.stock_location.id
         }).change_product_qty()
 
-        self.wh = self.env["stock.warehouse"].search([])
+        cls.wh = cls.env["stock.warehouse"].search([])
 
         #  I create a stock orderpoint for the product
 
-        self.sorbet_orderpoint = self.env['stock.warehouse.orderpoint'].create
+        cls.sorbet_orderpoint = cls.env['stock.warehouse.orderpoint'].create
         ({
-            'warehouse_id': self.wh[0].id,
-            'location_id': self.stock_location.id,
-            'product_id': self.product_sorbet.id,
-            'product_uom': self.uom_kgm.id,
+            'warehouse_id': cls.wh[0].id,
+            'location_id': cls.stock_location.id,
+            'product_id': cls.product_sorbet.id,
+            'product_uom': cls.uom_kgm.id,
             'product_min_qty': 4.0,
             'product_max_qty': 15.0,
         })
 
-    def test_virtual_stock(self):
+    def test_stock_reserve(self):
         # I create a stock reservation for 6 kgm
-        self.reserv_sorbet1 = self.env['stock.reservation'].create({
+        reserv_sorbet1 = self.env['stock.reservation'].create({
             'product_id': self.product_sorbet.id,
             'product_uom_qty': 6.0,
             'product_uom': self.uom_kgm.id,
@@ -60,7 +60,7 @@ class StockReserve(SavepointCase):
         })
 
         #  I create a stock reservation for 500g
-        self.reserv_sorbet2 = self.env['stock.reservation'].create({
+        reserv_sorbet2 = self.env['stock.reservation'].create({
             'product_id': self.product_sorbet.id,
             'product_uom_qty': 500,
             'product_uom': self.uom_gram.id,
@@ -76,11 +76,11 @@ class StockReserve(SavepointCase):
 
         # I create a stock reservation for 6 kgm and reserve
 
-        self.reserv_sorbet1.reserve()
+        reserv_sorbet1.reserve()
 
         #  I create a stock reservation for 500g
 
-        self.reserv_sorbet2.reserve()
+        reserv_sorbet2.reserve()
 
         # I check the reserved amount of the product and the template
 
@@ -90,8 +90,8 @@ class StockReserve(SavepointCase):
 
         # Then the reservation should be assigned and have reserved a quant
 
-        self.assertEqual(self.reserv_sorbet2.state, 'assigned')
-        self.assertEqual(self.reserv_sorbet2.reserved_availability, 500)
+        self.assertEqual(reserv_sorbet2.state, 'assigned')
+        self.assertEqual(reserv_sorbet2.reserved_availability, 500)
 
         # I check Virtual stock of Sorbet after update reservation
 
@@ -102,7 +102,7 @@ class StockReserve(SavepointCase):
         self.env['procurement.group'].run_scheduler()
 
         # I release the reservation
-        self.reserv_sorbet1.release()
+        reserv_sorbet1.release()
         # I check Virtual stock of Sorbet after update reservation
         self.assertEqual(
             self.product_sorbet.virtual_available,
@@ -112,7 +112,7 @@ class StockReserve(SavepointCase):
         # I set the validity of the second reservation to yesterday
         yesterday = datetime.date.today() - datetime.timedelta(days=1)
         yesterday = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        self.reserv_sorbet2.write({'date_validity': yesterday})
+        reserv_sorbet2.write({'date_validity': yesterday})
         # I call the function releasing expired reservations
         self.env['stock.reservation'].release_validity_exceeded()
         # I check Virtual stock of Sorbet after update reservation
@@ -124,16 +124,16 @@ class StockReserve(SavepointCase):
 
         # I create a stock reservation for 3 kgm
 
-        self.reserv_sorbet3 = self.env['stock.reservation'].create({
+        reserv_sorbet3 = self.env['stock.reservation'].create({
             'product_id': self.product_sorbet.id,
             'product_uom_qty': 3.0,
             'product_uom': self.uom_kgm.id,
             'name': 'reserve 3 kg of sorbet for test (release on unlink)'
         })
 
-        self.reserv_sorbet3.reserve()
-        move = self.reserv_sorbet3.move_id
-        action_dict = self.reserv_sorbet3.open_move()
+        reserv_sorbet3.reserve()
+        move = reserv_sorbet3.move_id
+        action_dict = reserv_sorbet3.open_move()
         self.assertEqual(
             action_dict['res_model'],
             'stock.move',
@@ -208,7 +208,7 @@ class StockReserve(SavepointCase):
             "wrong context")
 
         # I unlink the reservation
-        reserv = self.reserv_sorbet3
+        reserv = reserv_sorbet3
         move = reserv.move_id
         reserv.unlink()
         self.assertEqual(move.state, 'cancel', "Stock move not canceled.")
