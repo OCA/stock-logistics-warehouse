@@ -37,7 +37,8 @@ class StockMove(TransactionCase):
 
         #  I create a stock orderpoint for the product
 
-        self.sorbet_orderpoint = self.env['stock.warehouse.orderpoint'].create({
+        self.sorbet_orderpoint = self.env['stock.warehouse.orderpoint'].create
+        ({
             'warehouse_id': self.wh[0].id,
             'location_id': self.stock_location.id,
             'product_id': self.product_sorbet.id,
@@ -189,7 +190,8 @@ class StockMove(TransactionCase):
             "action model is not 'stock.move'")
         self.assertTrue(len(action_dict['domain']), "wrong domain")
         self.assertEqual(
-            action_dict['domain'][0][:2], ('product_id', 'in'), "action domain is not correct")
+            action_dict['domain'][0][:2],
+            ('product_id', 'in'), "action domain is not correct")
         self.assertEqual(set(action_dict['domain'][0][-1]), set(product_ids))
         self.assertEqual(
             action_dict['id'],
