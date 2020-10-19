@@ -40,8 +40,7 @@ class StockReserve(SavepointCase):
 
         #  I create a stock orderpoint for the product
 
-        cls.sorbet_orderpoint = cls.env['stock.warehouse.orderpoint'].create
-        ({
+        cls.sorbet_orderpoint = cls.env['stock.warehouse.orderpoint'].create({
             'warehouse_id': cls.wh[0].id,
             'location_id': cls.stock_location.id,
             'product_id': cls.product_sorbet.id,
