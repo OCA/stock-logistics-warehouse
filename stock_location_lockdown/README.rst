@@ -23,7 +23,7 @@ Stock Location Lockdown
     :target: https://runbot.odoo-community.org/runbot/153/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 The aim of this module is to mark internal locations where no product should transit.
 Indeed, in complex warehouse setups, we may have a complicated tree of internal locations with parent locations only used to create the hierarchy of the internal locations.
@@ -62,6 +62,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * Florian da Costa <florian.dacosta@akretion.com>
+* Manuel Regidor <manuel.regidor@sygel.es>
 
 Maintainers
 ~~~~~~~~~~~
