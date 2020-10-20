@@ -831,6 +831,7 @@ msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_abstract.py:0
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "Stock Request product quantity has to be strictly positive."
 msgstr ""
@@ -1061,11 +1062,13 @@ msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_abstract.py:0
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "You have entered a location that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "You have entered a product that is assigned to another company."
@@ -1073,17 +1076,20 @@ msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_abstract.py:0
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "You have entered a route that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_abstract.py:0
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid "You have entered a warehouse that is assigned to another company."
 msgstr ""
 
 #. module: stock_request
+#: code:addons/stock_request/models/stock_request_abstract.py:0
 #: code:addons/stock_request/models/stock_request_abstract.py:0
 #, python-format
 msgid ""
