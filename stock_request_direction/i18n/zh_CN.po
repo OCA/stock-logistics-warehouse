@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_request_direction
+# 	* stock_request_direction
 #
 msgid ""
 msgstr ""
@@ -23,14 +23,14 @@ msgid "Direction"
 msgstr "方向"
 
 #. module: stock_request_direction
-#: selection:stock.request,direction:0
-#: selection:stock.request.order,direction:0
+#: model:ir.model.fields.selection,name:stock_request_direction.selection__stock_request__direction__inbound
+#: model:ir.model.fields.selection,name:stock_request_direction.selection__stock_request_order__direction__inbound
 msgid "Inbound"
 msgstr "入库"
 
 #. module: stock_request_direction
-#: selection:stock.request,direction:0
-#: selection:stock.request.order,direction:0
+#: model:ir.model.fields.selection,name:stock_request_direction.selection__stock_request__direction__outbound
+#: model:ir.model.fields.selection,name:stock_request_direction.selection__stock_request_order__direction__outbound
 msgid "Outbound"
 msgstr "出库"
 
