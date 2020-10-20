@@ -51,7 +51,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
 
         # Add default quantity
         quantity = 20.00
-        self._update_product_qty(self.product, self.location, quantity)
+        self._update_product_qty(self.product, quantity)
 
         # Create Reordering Rule
         self.reorder = self.create_orderpoint()
@@ -90,12 +90,12 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         )
         return product
 
-    def _update_product_qty(self, product, location, quantity):
+    def _update_product_qty(self, product, quantity):
         """Update Product quantity."""
         change_product_qty = self.stock_change_model.create(
             {
-                "location_id": location.id,
                 "product_id": product.id,
+                "product_tmpl_id": product.product_tmpl_id.id,
                 "new_quantity": quantity,
             }
         )
@@ -104,7 +104,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
 
     def create_orderpoint(self):
         """Create a Reordering Rule"""
-        reorder = self.reordering_rule_model.sudo(self.user).create(
+        reorder = self.reordering_rule_model.with_user(self.user).create(
             {
                 "name": "Order-point",
                 "product_id": self.product.id,
@@ -124,7 +124,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
             "active_id": self.reorder.id,
         }
         wizard = (
-            self.make_procurement_orderpoint_model.sudo(self.user)
+            self.make_procurement_orderpoint_model.with_user(self.user)
             .with_context(context)
             .create({})
         )
