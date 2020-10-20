@@ -49,6 +49,7 @@ setuptools.setup(
         'odoo13-addon-stock_request_kanban',
         'odoo13-addon-stock_request_mrp',
         'odoo13-addon-stock_request_purchase',
+        'odoo13-addon-stock_request_submit',
         'odoo13-addon-stock_request_tier_validation',
         'odoo13-addon-stock_reserve_rule',
         'odoo13-addon-stock_secondary_unit',
