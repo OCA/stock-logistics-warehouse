@@ -1,13 +1,12 @@
 # Copyright 2018-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models
+from odoo import models
 
 
 class StockWarehouseOrderpoint(models.Model):
     _inherit = "stock.warehouse.orderpoint"
 
-    @api.multi
     def _get_procure_recommended_qty(self, virtual_qty, op_qtys):
         product_qty = super(
             StockWarehouseOrderpoint, self
