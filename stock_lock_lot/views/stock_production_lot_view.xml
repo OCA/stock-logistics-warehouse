@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="name">view.production.lot.form.inherit.lock.lot</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <field name="ref" position="after">
+                <field name="locked" />
+            </field>
+        </field>
+    </record>
+    <record id="view_production_lot_tree" model="ir.ui.view">
+        <field name="name">view.production.lot.tree.inh.locklot</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <field name="create_date" position="after">
+                <field name="locked" />
+            </field>
+        </field>
+    </record>
+    <record id="search_product_lot_filter" model="ir.ui.view">
+        <field name="name">search.product.lot.filter.inh.locklot</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.search_product_lot_filter" />
+        <field name="arch" type="xml">
+            <group position="before">
+                <field name="locked" />
+                <filter
+                    string="Locked"
+                    name="locked_filter"
+                    domain="[('locked', '=', True)]"
+                />
+            </group>
+            <filter name="group_by_product" position="before">
+                <filter
+                    name="group_by_locked"
+                    string="Blocked"
+                    domain="[]"
+                    context="{'group_by':'locked'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
