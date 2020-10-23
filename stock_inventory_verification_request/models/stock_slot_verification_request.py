@@ -11,6 +11,11 @@ class SlotVerificationRequest(models.Model):
     _description = "Slot Verification Request"
 
     @api.model
+    def _default_company(self):
+        company_id = self.env['res.company']._company_default_get(self._name)
+        return company_id
+
+    @api.model
     def create(self, vals):
         if not vals.get('name') or vals.get('name') == '/':
             vals['name'] = self.env['ir.sequence'].next_by_code(
@@ -49,6 +54,12 @@ class SlotVerificationRequest(models.Model):
         required=True,
         readonly=True, states={'wait': [('readonly', False)]},
         track_visibility="onchange",
+    )
+    company_id = fields.Many2one(
+        comodel_name='res.company', string='Company',
+        required=True,
+        default=_default_company,
+        readonly=True,
     )
     state = fields.Selection(selection=[
         ('wait', 'Waiting Actions'),
@@ -177,6 +188,7 @@ class SlotVerificationRequest(models.Model):
             "location_id": self.location_id.id,
             "product_id": self.product_id.id,
             "solving_slot_verification_request_id": self.id,
+            "company_id": self.company_id.id,
         })
         action = self.env.ref('stock.action_inventory_form')
         result = action.read()[0]
