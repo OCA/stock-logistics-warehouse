@@ -122,7 +122,7 @@ class PullListWizard(models.TransientModel):
     def _get_stock_rule_id(self, product_id, location_id):
         values = {
             "warehouse_id": self.warehouse_id,
-            "company_id": self.env.user.company_id.id,
+            "company_id": self.env.user.company_id,
         }
         stock_rule_id = self.env["procurement.group"]._get_rule(
             product_id, location_id, values)
