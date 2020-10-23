@@ -107,7 +107,7 @@ msgid "Package"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_5645
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_qty_5646
 msgid "QTY"
 msgstr ""
 
