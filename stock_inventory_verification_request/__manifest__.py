@@ -5,7 +5,7 @@
     "name": "Stock Inventory Verification Request",
     "summary": "Adds the capability to request a Slot Verification when "
                "a inventory is Pending to Approve",
-    "version": "12.0.1.0.0",
+    "version": "12.0.2.0.0",
     "development_status": "Mature",
     "maintainers": ['LoisRForgeFlow'],
     "author": "ForgeFlow, "
@@ -18,6 +18,7 @@
     ],
     "data": [
         'security/ir.model.access.csv',
+        'security/stock_security.xml',
         'views/stock_slot_verification_request_view.xml',
         'views/stock_inventory_view.xml',
         'views/stock_location_view.xml',
