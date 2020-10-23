@@ -31,6 +31,7 @@ class StockInventory(models.Model):
                     'location_id': line.location_id.id,
                     'state': 'wait',
                     'product_id': line.product_id.id,
+                    'company_id': self.company_id.id,
                 })
 
 
