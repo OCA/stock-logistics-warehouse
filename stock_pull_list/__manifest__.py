@@ -5,7 +5,7 @@
     "name": "Stock Pull List",
     "summary": "The pull list checks the stock situation and calculates "
                "needed quantities.",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "ForgeFlow, "
