@@ -1,50 +1,68 @@
 <odoo>
-
     <record id="view_stock_request_order_filter" model="ir.ui.view">
         <field name="name">stock.request.order.select</field>
         <field name="model">stock.request.order</field>
         <field name="arch" type="xml">
             <search string="Search Stock Request Orders">
-                <field name="name"/>
-                <filter string="To Do" name="todo" domain="[('state','=', 'submitted')]"
-                        help="Stock Requests To Do."/>
-                <filter string="In Progress" name="inprogress" domain="[('state', '=', 'open')]"
-                        help="Stock Requests in Progress."/>
-                <filter string="Late" domain="['&amp;', ('expected_date', '&lt;', current_date), ('state', 'in', ('submitted', 'open'))]"
-                        name="late" help="Late Stock Requests"/>
-                <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
+                <field name="name" />
+                <filter
+                    string="To Do"
+                    name="todo"
+                    domain="[('state','=', 'submitted')]"
+                    help="Stock Requests To Do."
+                />
+                <filter
+                    string="In Progress"
+                    name="inprogress"
+                    domain="[('state', '=', 'open')]"
+                    help="Stock Requests in Progress."
+                />
+                <filter
+                    string="Late"
+                    domain="['&amp;', ('expected_date', '&lt;', current_date), ('state', 'in', ('submitted', 'open'))]"
+                    name="late"
+                    help="Late Stock Requests"
+                />
+                <filter string="Done" name="done" domain="[('state', '=', 'done')]" />
                 <group expand="0" string="Group By...">
-                    <filter string="Expected Date" name="expected_date" domain="[]" context="{'group_by': 'expected_date'}" help="Expected Date by Month"/>
-                    <filter string="State" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter
+                        string="Expected Date"
+                        name="expected_date"
+                        domain="[]"
+                        context="{'group_by': 'expected_date'}"
+                        help="Expected Date by Month"
+                    />
+                    <filter
+                        string="State"
+                        name="state"
+                        domain="[]"
+                        context="{'group_by': 'state'}"
+                    />
                 </group>
             </search>
         </field>
     </record>
-
     <record id="action_picking_dashboard" model="ir.actions.act_window">
         <field name="name">Stock Request Orders</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.request.order</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" eval="False"/>
-        <field name="search_view_id" ref="view_stock_request_order_filter"/>
+        <field name="view_id" eval="False" />
+        <field name="search_view_id" ref="view_stock_request_order_filter" />
         <field name="domain">[('picking_type_id', '=', active_id)]</field>
         <field name="context">{'default_picking_type_id': active_id}</field>
     </record>
-
     <record id="action_stock_request_order_form" model="ir.actions.act_window">
         <field name="name">Stock Request Orders</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.request.order</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
     </record>
-
-    <menuitem id="menu_stock_request_order"
-              action="stock_request.stock_request_order_action"
-              name="Stock Request Orders"
-              parent="stock.menu_stock_warehouse_mgmt"
-              sequence="30"/>
-
+    <menuitem
+        id="menu_stock_request_order"
+        action="stock_request.stock_request_order_action"
+        name="Stock Request Orders"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="30"
+    />
 </odoo>
