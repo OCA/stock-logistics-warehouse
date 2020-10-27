@@ -4,5 +4,6 @@
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
 * `Tecnativa <https://www.tecnativa.com>`_:
 
-  * Vicent Cubells <vicent@vcubells.net>
+  * Vicent Cubells
   * David Vidal
+  * Víctor Martínez
