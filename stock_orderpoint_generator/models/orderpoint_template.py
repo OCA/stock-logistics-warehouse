@@ -1,5 +1,6 @@
 # Copyright 2012-2016 Camptocamp SA
-# Copyright 2019 Tecnativa
+# Copyright 2019 David Vidal - Tecnativa
+# Copyright 2020 Víctor Martínez - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
@@ -157,6 +158,7 @@ class OrderpointTemplate(models.Model):
                     to_date=record.auto_max_date_end,
                     criteria=record.auto_max_qty_criteria,
                 )
+            vals_list = []
             for data in record.copy_data():
                 for discard_field in self._template_fields_to_discard():
                     data.pop(discard_field)
@@ -167,9 +169,9 @@ class OrderpointTemplate(models.Model):
                         vals["product_min_qty"] = stock_min_qty.get(product_id.id, 0)
                     if record.auto_max_qty:
                         vals["product_max_qty"] = stock_max_qty.get(product_id.id, 0)
-                    orderpoint_model.create(vals)
+                    vals_list.append(vals)
+            orderpoint_model.create(vals_list)
 
-    @api.multi
     def create_orderpoints(self, products):
         """ Create orderpoint for *products* based on these templates.
         :type products: recordset of products
@@ -177,7 +179,6 @@ class OrderpointTemplate(models.Model):
         self._disable_old_instances(products)
         self._create_instances(products)
 
-    @api.multi
     def create_auto_orderpoints(self):
         for template in self:
             if not template.auto_generate:
