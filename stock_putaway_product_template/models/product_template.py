@@ -20,15 +20,11 @@ class ProductTemplate(models.Model):
 
     def _find_closest_categ_match(self, categ, putaway_lines):
         """Returns the putaway line with the nearest product category"""
-        lines_match_categ = putaway_lines.filtered(
-            lambda r: r.category_id == categ
-        )
+        lines_match_categ = putaway_lines.filtered(lambda r: r.category_id == categ)
         if lines_match_categ:
             return lines_match_categ[0]
         elif categ.parent_id:
-            return self._find_closest_categ_match(
-                categ.parent_id, putaway_lines
-            )
+            return self._find_closest_categ_match(categ.parent_id, putaway_lines)
         else:
             return self.env["stock.fixed.putaway.strat"]
 
@@ -50,9 +46,9 @@ class ProductTemplate(models.Model):
             categ = rec.categ_id
             categs = self._get_categ_and_parents(categ)
             # get matching lines from our category or its parents
-            product_putaway_categ_lines = self.env[
-                "stock.fixed.putaway.strat"
-            ].search([("category_id", "in", categs.ids)])
+            product_putaway_categ_lines = self.env["stock.fixed.putaway.strat"].search(
+                [("category_id", "in", categs.ids)]
+            )
             # from these, get the matching putaway.strats and find
             # the lowest-level category match
             product_putaways = product_putaway_categ_lines.mapped("putaway_id")
