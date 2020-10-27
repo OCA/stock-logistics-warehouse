@@ -1,5 +1,6 @@
 # Copyright 2017 Camptocamp SA
-# Copyright 2019 Tecnativa
+# Copyright 2019 David Vidal - Tecnativa
+# Copyright 2020 Víctor Martínez - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from collections import OrderedDict
@@ -26,7 +27,6 @@ class ProductProduct(models.Model):
             record.auto_orderpoint_template_ids.create_orderpoints(record)
         return record
 
-    @api.multi
     def write(self, vals):
         result = super().write(vals)
         if vals.get("auto_orderpoint_template_ids"):
@@ -34,45 +34,16 @@ class ProductProduct(models.Model):
             orderpoint_templates.create_orderpoints(self)
         return result
 
-    def _compute_historic_quantities_dict(
-        self, location_id=False, from_date=False, to_date=False
-    ):
-        """Returns a dict of products with a dict of historic moves as for
-           a list of historic stock values resulting from those moves. If
-           a location_id is passed, we can restrict it to such location"""
-        location = location_id and location_id.id
-        domain_quant_loc, domain_move_in_loc, domain_move_out_loc = self.with_context(
-            location=location
-        )._get_domain_locations()
-        if not to_date:
-            to_date = fields.Datetime.now()
-        domain_move_in = domain_move_out = [
-            ("product_id", "in", self.ids),
-            ("state", "=", "done"),
-        ] + domain_move_in_loc
-        domain_move_out = [
-            ("product_id", "in", self.ids),
-            ("state", "=", "done"),
-        ] + domain_move_out_loc
+    def _get_stock_move_domain(self, domain_move=False, from_date=False, to_date=False):
+        domain = [("product_id", "in", self.ids), ("state", "=", "done")] + domain_move
         if from_date:
-            domain_move_in += [("date", ">=", from_date)]
-            domain_move_out += [("date", ">=", from_date)]
-        domain_move_in += [("date", "<=", to_date)]
-        domain_move_out += [("date", "<=", to_date)]
-        move_obj = self.env["stock.move"]
-        # Positive moves
-        moves_in = move_obj.search_read(
-            domain_move_in, ["product_id", "product_qty", "date"], order="date asc"
-        )
-        # We'll convert to negative these quantities to operate with them
-        # to obtain the stock snapshot in every moment
-        moves_out = move_obj.search_read(
-            domain_move_out, ["product_id", "product_qty", "date"], order="date asc"
-        )
-        for move in moves_out:
-            move["product_qty"] *= -1
-        # Merge both results and group them by product id as key
-        moves = moves_in + moves_out
+            domain += [("date", ">=", from_date)]
+        domain += [("date", "<=", to_date)]
+        return domain
+
+    def _set_product_moves_dict(
+        self, moves=False, location=False, from_date=False, to_date=False
+    ):
         # Obtain a dict with the stock snapshot for the relative date_from
         # otherwise, the first move will counted as first stock value. We
         # default the compute the stock value anyway to default the value
@@ -85,7 +56,7 @@ class ProductProduct(models.Model):
         for move in moves:
             product_moves_dict.setdefault(move["product_id"][0], {})
             product_moves_dict[move["product_id"][0]].update(
-                {move["date"]: {"prod_qty": move["product_qty"],}}
+                {move["date"]: {"prod_qty": move["product_qty"]}}
             )
         for product in self.with_context(prefetch_fields=False):
             # If no there are no moves for a product we default the stock
@@ -121,3 +92,37 @@ class ProductProduct(models.Model):
                 v["stock"] for k, v in product_moves.items()
             ]
         return product_moves_dict
+
+    def _compute_historic_quantities_dict(
+        self, location_id=False, from_date=False, to_date=False
+    ):
+        """Returns a dict of products with a dict of historic moves as for
+           a list of historic stock values resulting from those moves. If
+           a location_id is passed, we can restrict it to such location"""
+        location = location_id and location_id.id
+        domain_quant_loc, domain_move_in_loc, domain_move_out_loc = self.with_context(
+            location=location
+        )._get_domain_locations()
+        if not to_date:
+            to_date = fields.Datetime.now()
+        domain_move_in = self._get_stock_move_domain(
+            domain_move_in_loc, from_date, to_date
+        )
+        domain_move_out = self._get_stock_move_domain(
+            domain_move_out_loc, from_date, to_date
+        )
+        move_obj = self.env["stock.move"]
+        # Positive moves
+        moves_in = move_obj.search_read(
+            domain_move_in, ["product_id", "product_qty", "date"], order="date asc"
+        )
+        # We'll convert to negative these quantities to operate with them
+        # to obtain the stock snapshot in every moment
+        moves_out = move_obj.search_read(
+            domain_move_out, ["product_id", "product_qty", "date"], order="date asc"
+        )
+        for move in moves_out:
+            move["product_qty"] *= -1
+        # Merge both results and group them by product id as key
+        moves = moves_in + moves_out
+        return self._set_product_moves_dict(moves, location, from_date, to_date)

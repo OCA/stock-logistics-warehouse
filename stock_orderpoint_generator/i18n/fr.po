@@ -31,6 +31,11 @@ msgid "Active"
 msgstr "Actif"
 
 #. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__allowed_location_ids
+msgid "Allowed Location"
+msgstr ""
+
+#. module: stock_orderpoint_generator
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
 msgid "Apply"
 msgstr "Appliquer"
@@ -101,8 +106,8 @@ msgid "Automatic Reordering Rules"
 msgstr ""
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__avg
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__avg
 msgid "Average"
 msgstr ""
 
@@ -112,7 +117,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: stock_orderpoint_generator
-#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:37
+#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:0
 #, python-format
 msgid "Cannot apply because some of selected products has multiple variants."
 msgstr ""
@@ -147,16 +152,6 @@ msgstr "Créé le"
 #. module: stock_orderpoint_generator
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
 msgid "Criteria"
-msgstr ""
-
-#. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,lead_type:0
-msgid "Day(s) to get the products"
-msgstr ""
-
-#. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,lead_type:0
-msgid "Day(s) to purchase"
 msgstr ""
 
 #. module: stock_orderpoint_generator
@@ -238,8 +233,8 @@ msgid "Location"
 msgstr "Emplacement"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__max
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__max
 msgid "Maximum"
 msgstr ""
 
@@ -249,8 +244,8 @@ msgid "Maximum Quantity"
 msgstr ""
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__min
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__min
 msgid "Minimum"
 msgstr ""
 
@@ -265,8 +260,8 @@ msgid "Misc"
 msgstr ""
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__median
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__median
 msgid "Most frequent"
 msgstr ""
 
@@ -307,9 +302,9 @@ msgid "Product"
 msgstr "Produit"
 
 #. module: stock_orderpoint_generator
-#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom
-msgid "Product Unit of Measure"
-msgstr "Unité de mesure de l'article"
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom_name
+msgid "Product unit of measure label"
+msgstr ""
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__auto_product_ids
@@ -406,6 +401,11 @@ msgid "To"
 msgstr ""
 
 #. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__warehouse_id
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_search
 msgid "Warehouse"
@@ -429,9 +429,9 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_min_qty
 msgid ""
-"When the virtual stock goes below the Min Quantity specified for this field, "
-"Odoo generates a procurement to bring the forecasted quantity to the Max "
-"Quantity."
+"When the virtual stock equals to or goes below the Min Quantity specified "
+"for this field, Odoo generates a procurement to bring the forecasted "
+"quantity to the Max Quantity."
 msgstr ""
 
 #. module: stock_orderpoint_generator
@@ -441,3 +441,6 @@ msgid ""
 "procurement to bring the forecasted quantity to the Quantity specified as "
 "Max Quantity."
 msgstr ""
+
+#~ msgid "Product Unit of Measure"
+#~ msgstr "Unité de mesure de l'article"

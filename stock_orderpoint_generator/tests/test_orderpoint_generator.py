@@ -1,5 +1,6 @@
 # Copyright 2016 Cyril Gaudin (Camptocamp)
-# Copyright 2019 Tecnativa
+# Copyright 2019 David Vidal - Tecnativa
+# Copyright 2020 Víctor Martínez - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import models
 from odoo.exceptions import UserError
@@ -14,17 +15,17 @@ class TestOrderpointGenerator(SavepointCase):
         cls.orderpoint_model = cls.env["stock.warehouse.orderpoint"]
         cls.orderpoint_template_model = cls.env["stock.warehouse.orderpoint.template"]
         cls.product_model = cls.env["product.product"]
-        cls.p1 = cls.product_model.create({"name": "Unittest P1", "type": "product",})
-        cls.p2 = cls.product_model.create({"name": "Unittest P2", "type": "product",})
+        cls.p1 = cls.product_model.create({"name": "Unittest P1", "type": "product"})
+        cls.p2 = cls.product_model.create({"name": "Unittest P2", "type": "product"})
         cls.wh1 = cls.env["stock.warehouse"].create(
-            {"name": "TEST WH1", "code": "TST1",}
+            {"name": "TEST WH1", "code": "TST1"}
         )
         location_obj = cls.env["stock.location"]
         cls.supplier_loc = location_obj.create(
-            {"name": "Test supplier location", "usage": "supplier",}
+            {"name": "Test supplier location", "usage": "supplier"}
         )
         cls.customer_loc = location_obj.create(
-            {"name": "Test customer location", "usage": "customer",}
+            {"name": "Test customer location", "usage": "customer"}
         )
         cls.orderpoint_fields_dict = {
             "warehouse_id": cls.wh1.id,
@@ -325,39 +326,25 @@ class TestOrderpointGenerator(SavepointCase):
         wizard = self.wizard_over_products(self.p1, self.template)
         wizard.action_configure()
         orderpoint_auto_dict = self.orderpoint_fields_dict.copy()
-        orderpoint_auto_dict.update(
-            {"product_min_qty": 100.0,}
-        )
+        orderpoint_auto_dict.update({"product_min_qty": 100.0})
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
         # Min stock for p1: 45
-        self.template.write(
-            {"auto_min_qty_criteria": "min",}
-        )
+        self.template.write({"auto_min_qty_criteria": "min"})
         wizard = self.wizard_over_products(self.p1, self.template)
         wizard.action_configure()
-        orderpoint_auto_dict.update(
-            {"product_min_qty": 45.0,}
-        )
+        orderpoint_auto_dict.update({"product_min_qty": 45.0})
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
         # Median of stock for p1: 52
-        self.template.write(
-            {"auto_min_qty_criteria": "median",}
-        )
+        self.template.write({"auto_min_qty_criteria": "median"})
         wizard = self.wizard_over_products(self.p1, self.template)
         wizard.action_configure()
-        orderpoint_auto_dict.update(
-            {"product_min_qty": 52.0,}
-        )
+        orderpoint_auto_dict.update({"product_min_qty": 52.0})
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
         # Average of stock for p1: 60.4
-        self.template.write(
-            {"auto_min_qty_criteria": "avg",}
-        )
+        self.template.write({"auto_min_qty_criteria": "avg"})
         wizard = self.wizard_over_products(self.p1, self.template)
         wizard.action_configure()
-        orderpoint_auto_dict.update(
-            {"product_min_qty": 60.4,}
-        )
+        orderpoint_auto_dict.update({"product_min_qty": 60.4})
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
         # Set auto values for min and max: 60.4 (avg) 100 (max)
         self.template.write(
@@ -370,19 +357,13 @@ class TestOrderpointGenerator(SavepointCase):
         )
         wizard = self.wizard_over_products(self.p1, self.template)
         wizard.action_configure()
-        orderpoint_auto_dict.update(
-            {"product_max_qty": 100,}
-        )
+        orderpoint_auto_dict.update({"product_max_qty": 100})
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
         # If they have the same values, only one is computed:
-        self.template.write(
-            {"auto_min_qty_criteria": "max",}
-        )
+        self.template.write({"auto_min_qty_criteria": "max"})
         wizard = self.wizard_over_products(self.p1, self.template)
         wizard.action_configure()
-        orderpoint_auto_dict.update(
-            {"product_min_qty": 100,}
-        )
+        orderpoint_auto_dict.update({"product_min_qty": 100})
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
         # Auto min max over a shorter period
         self.template.write(
@@ -395,9 +376,7 @@ class TestOrderpointGenerator(SavepointCase):
         )
         wizard = self.wizard_over_products(self.p1, self.template)
         wizard.action_configure()
-        orderpoint_auto_dict.update(
-            {"product_min_qty": 55, "product_max_qty": 50,}
-        )
+        orderpoint_auto_dict.update({"product_min_qty": 55, "product_max_qty": 50})
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
 
     def test_auto_qty_multi_products(self):

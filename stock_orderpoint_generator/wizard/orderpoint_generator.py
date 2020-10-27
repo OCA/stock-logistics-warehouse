@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 _template_register = ["orderpoint_template_id"]
@@ -22,7 +22,6 @@ class OrderpointGenerator(models.TransientModel):
         string="Reordering Rule Templates",
     )
 
-    @api.multi
     def action_configure(self):
         """Action to retrieve wizard data and launch creation of items."""
         self.ensure_one()
