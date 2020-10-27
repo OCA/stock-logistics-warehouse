@@ -3,8 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import api, fields, models
 from statistics import mean, median_high
+
+from odoo import api, fields, models
 
 
 class OrderpointTemplate(models.Model):
@@ -18,11 +19,12 @@ class OrderpointTemplate(models.Model):
 
     _table is redefined to separate templates from orderpoints
     """
-    _name = 'stock.warehouse.orderpoint.template'
-    _description = 'Reordering Rule Templates'
 
-    _inherit = 'stock.warehouse.orderpoint'
-    _table = 'stock_warehouse_orderpoint_template'
+    _name = "stock.warehouse.orderpoint.template"
+    _description = "Reordering Rule Templates"
+
+    _inherit = "stock.warehouse.orderpoint"
+    _table = "stock_warehouse_orderpoint_template"
 
     name = fields.Char(copy=True)
     group_id = fields.Many2one(copy=True)
@@ -33,137 +35,138 @@ class OrderpointTemplate(models.Model):
 
     auto_min_qty = fields.Boolean(
         string="Auto Minimum",
-        help="Auto compute minimum quantity "
-             "per product for a given a date range",
+        help="Auto compute minimum quantity " "per product for a given a date range",
     )
     auto_min_date_start = fields.Datetime()
     auto_min_date_end = fields.Datetime()
     auto_min_qty_criteria = fields.Selection(
         selection=[
-            ('max', 'Maximum'),
-            ('median', 'Most frequent'),
-            ('avg', 'Average'),
-            ('min', 'Minimum'),
+            ("max", "Maximum"),
+            ("median", "Most frequent"),
+            ("avg", "Average"),
+            ("min", "Minimum"),
         ],
-        default='max',
+        default="max",
         help="Select a criteria to auto compute the minimum",
     )
     auto_max_qty = fields.Boolean(
         string="Auto Maximum",
-        help="Auto compute maximum quantity "
-             "per product for a given a date range",
+        help="Auto compute maximum quantity " "per product for a given a date range",
     )
     auto_max_qty_criteria = fields.Selection(
         selection=[
-            ('max', 'Maximum'),
-            ('median', 'Most frequent'),
-            ('avg', 'Average'),
-            ('min', 'Minimum'),
+            ("max", "Maximum"),
+            ("median", "Most frequent"),
+            ("avg", "Average"),
+            ("min", "Minimum"),
         ],
         help="Select a criteria to auto compute the maximum",
     )
     auto_max_date_start = fields.Datetime()
     auto_max_date_end = fields.Datetime()
     auto_generate = fields.Boolean(
-        string='Create Rules Automatically',
+        string="Create Rules Automatically",
         help="When checked, the 'Reordering Rule Templates Generator' "
-             "scheduled action will automatically update the rules of a "
-             "selection of products."
+        "scheduled action will automatically update the rules of a "
+        "selection of products.",
     )
     auto_product_ids = fields.Many2many(
-        comodel_name='product.product',
-        string='Products',
+        comodel_name="product.product",
+        string="Products",
         help="A reordering rule will be automatically created by the "
-             "scheduled action for every product in this list."
+        "scheduled action for every product in this list.",
     )
-    auto_last_generation = fields.Datetime(string='Last Automatic Generation')
+    auto_last_generation = fields.Datetime(string="Last Automatic Generation")
 
     def _template_fields_to_discard(self):
         """In order to create every orderpoint we should pop this template
            customization fields """
         return [
-            'auto_generate', 'auto_product_ids', 'auto_last_generation',
-            'auto_min_qty', 'auto_min_date_start', 'auto_min_qty_criteria',
-            'auto_min_date_end', 'auto_max_date_start', 'auto_max_date_end',
-            'auto_max_qty_criteria', 'auto_max_qty',
+            "auto_generate",
+            "auto_product_ids",
+            "auto_last_generation",
+            "auto_min_qty",
+            "auto_min_date_start",
+            "auto_min_qty_criteria",
+            "auto_min_date_end",
+            "auto_max_date_start",
+            "auto_max_date_end",
+            "auto_max_qty_criteria",
+            "auto_max_qty",
         ]
 
     def _disable_old_instances(self, products):
         """Clean old instance by setting those inactives"""
-        orderpoints = self.env['stock.warehouse.orderpoint'].search(
-            [('product_id', 'in', products.ids)]
+        orderpoints = self.env["stock.warehouse.orderpoint"].search(
+            [("product_id", "in", products.ids)]
         )
-        orderpoints.write({'active': False})
+        orderpoints.write({"active": False})
 
     @api.model
     def _get_criteria_methods(self):
         """Allows to extend methods with other statistical aproaches"""
         return {
-            'max': max,
-            'median': median_high,
-            'avg': mean,
-            'min': min,
+            "max": max,
+            "median": median_high,
+            "avg": mean,
+            "min": min,
         }
 
     @api.model
     def _get_product_qty_by_criteria(
-            self, products, location_id, from_date, to_date, criteria):
+        self, products, location_id, from_date, to_date, criteria
+    ):
         """Returns a dict with product ids as keys and the resulting
            calculation of historic moves according to criteria"""
         stock_qty_history = products._compute_historic_quantities_dict(
-            location_id=location_id,
-            from_date=from_date,
-            to_date=to_date)
+            location_id=location_id, from_date=from_date, to_date=to_date
+        )
         criteria_methods = self._get_criteria_methods()
-        return {x: criteria_methods[criteria](y['stock_history'])
-                for x, y in stock_qty_history.items()}
+        return {
+            x: criteria_methods[criteria](y["stock_history"])
+            for x, y in stock_qty_history.items()
+        }
 
     def _create_instances(self, product_ids):
         """Create instances of model using template inherited model and
            compute autovalues if needed"""
-        orderpoint_model = self.env['stock.warehouse.orderpoint']
+        orderpoint_model = self.env["stock.warehouse.orderpoint"]
         for record in self:
             # Flag equality so we compute the values just once
             auto_same_values = (
-                record.auto_max_date_start == record.auto_min_date_start
-                ) and (
-                    record.auto_max_date_end == record.auto_max_date_end
-                    ) and (
-                        record.auto_max_qty_criteria ==
-                        record.auto_min_qty_criteria)
+                (record.auto_max_date_start == record.auto_min_date_start)
+                and (record.auto_max_date_end == record.auto_max_date_end)
+                and (record.auto_max_qty_criteria == record.auto_min_qty_criteria)
+            )
             stock_min_qty = stock_max_qty = {}
             if record.auto_min_qty:
-                stock_min_qty = (
-                    self._get_product_qty_by_criteria(
-                        product_ids,
-                        location_id=record.location_id,
-                        from_date=record.auto_min_date_start,
-                        to_date=record.auto_min_date_end,
-                        criteria=record.auto_min_qty_criteria,
-                    ))
+                stock_min_qty = self._get_product_qty_by_criteria(
+                    product_ids,
+                    location_id=record.location_id,
+                    from_date=record.auto_min_date_start,
+                    to_date=record.auto_min_date_end,
+                    criteria=record.auto_min_qty_criteria,
+                )
                 if auto_same_values:
                     stock_max_qty = stock_min_qty
             if record.auto_max_qty and not stock_max_qty:
-                stock_max_qty = (
-                    self._get_product_qty_by_criteria(
-                        product_ids,
-                        location_id=record.location_id,
-                        from_date=record.auto_max_date_start,
-                        to_date=record.auto_max_date_end,
-                        criteria=record.auto_max_qty_criteria,
-                    ))
+                stock_max_qty = self._get_product_qty_by_criteria(
+                    product_ids,
+                    location_id=record.location_id,
+                    from_date=record.auto_max_date_start,
+                    to_date=record.auto_max_date_end,
+                    criteria=record.auto_max_qty_criteria,
+                )
             for data in record.copy_data():
                 for discard_field in self._template_fields_to_discard():
                     data.pop(discard_field)
                 for product_id in product_ids:
                     vals = data.copy()
-                    vals['product_id'] = product_id.id
+                    vals["product_id"] = product_id.id
                     if record.auto_min_qty:
-                        vals['product_min_qty'] = stock_min_qty.get(
-                            product_id.id, 0)
+                        vals["product_min_qty"] = stock_min_qty.get(product_id.id, 0)
                     if record.auto_max_qty:
-                        vals['product_max_qty'] = stock_max_qty.get(
-                            product_id.id, 0)
+                        vals["product_max_qty"] = stock_max_qty.get(product_id.id, 0)
                     orderpoint_model.create(vals)
 
     @api.multi
@@ -179,11 +182,13 @@ class OrderpointTemplate(models.Model):
         for template in self:
             if not template.auto_generate:
                 continue
-            if (not template.auto_last_generation or
-                    template.write_date > template.auto_last_generation):
+            if (
+                not template.auto_last_generation
+                or template.write_date > template.auto_last_generation
+            ):
                 template.auto_last_generation = fields.Datetime.now()
                 template.create_orderpoints(template.auto_product_ids)
 
     @api.model
     def _cron_create_auto_orderpoints(self):
-        self.search([('auto_generate', '=', True)]).create_auto_orderpoints()
+        self.search([("auto_generate", "=", True)]).create_auto_orderpoints()
