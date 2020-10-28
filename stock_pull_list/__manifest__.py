@@ -4,21 +4,15 @@
 {
     "name": "Stock Pull List",
     "summary": "The pull list checks the stock situation and calculates "
-               "needed quantities.",
+    "needed quantities.",
     "version": "12.0.1.0.1",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    "author": "ForgeFlow, "
-              "Odoo Community Association (OCA)",
+    "author": "ForgeFlow, " "Odoo Community Association (OCA)",
     "maintainers": ["LoisRForgeFlow"],
     "development_status": "Alpha",
     "category": "Warehouse Management",
-    "depends": [
-        "stock",
-        "stock_available_unreserved",
-    ],
-    "data": [
-        "wizards/stock_pull_list_wizard.xml",
-    ],
+    "depends": ["stock", "stock_available_unreserved",],
+    "data": ["wizards/stock_pull_list_wizard.xml",],
     "installable": True,
 }
