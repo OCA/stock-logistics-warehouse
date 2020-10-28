@@ -1,3 +1,3 @@
-from . import product_product
-from . import product_template
-from . import putaway_strategy
+from . import product
+from . import stock_location
+from . import stock_putaway_rule
