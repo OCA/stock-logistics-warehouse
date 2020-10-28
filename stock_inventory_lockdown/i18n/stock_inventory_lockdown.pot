@@ -24,6 +24,8 @@ msgstr ""
 #. module: stock_inventory_lockdown
 #: code:addons/stock_inventory_lockdown/models/stock_location.py:0
 #: code:addons/stock_inventory_lockdown/models/stock_location.py:0
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:0
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:0
 #, python-format
 msgid "An inventory is being conducted at this location"
 msgstr ""
