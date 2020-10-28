@@ -1,14 +1,13 @@
 # Copyright 2020 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests.common import TransactionCase
-from odoo import fields
-
 from datetime import timedelta as td
+
+from odoo import fields
+from odoo.tests.common import TransactionCase
 
 
 class TestPullListCommon(TransactionCase):
-
     def setUp(self):
         super().setUp()
         self.wh_obj = self.env["stock.warehouse"]
@@ -20,21 +19,17 @@ class TestPullListCommon(TransactionCase):
         self.warehouse = self.env.ref("stock.warehouse0")
         self.customer_loc = self.env.ref("stock.stock_location_customers")
 
-        self.warehouse_2 = self.wh_obj.create({
-            "code": "WH-T",
-            "name": "Warehouse Test",
-        })
-        self.product_a = self.env["product.product"].create({
-            "name": "test product A",
-            "default_code": "TEST-A",
-            "type": "product",
-        })
+        self.warehouse_2 = self.wh_obj.create(
+            {"code": "WH-T", "name": "Warehouse Test",}
+        )
+        self.product_a = self.env["product.product"].create(
+            {"name": "test product A", "default_code": "TEST-A", "type": "product",}
+        )
 
         route_vals = {
             "name": "WH2 -> WH",
         }
-        self.transfer_route = self.env["stock.location.route"].create(
-            route_vals)
+        self.transfer_route = self.env["stock.location.route"].create(route_vals)
         rule_vals = {
             "location_id": self.warehouse.lot_stock_id.id,
             "location_src_id": self.warehouse_2.lot_stock_id.id,
@@ -59,21 +54,28 @@ class TestPullListCommon(TransactionCase):
         self.create_picking_out_a(self.date_3, 70)
 
     def create_picking_out_a(self, date_move, qty):
-        picking = self.picking_obj.create({
-            "picking_type_id": self.ref("stock.picking_type_out"),
-            "location_id": self.warehouse.lot_stock_id.id,
-            "location_dest_id": self.customer_loc.id,
-            "move_lines": [
-                (0, 0, {
-                    "name": "Test move",
-                    "product_id": self.product_a.id,
-                    "date_expected": date_move,
-                    "date": date_move,
-                    "product_uom": self.product_a.uom_id.id,
-                    "product_uom_qty": qty,
-                    "location_id": self.warehouse.lot_stock_id.id,
-                    "location_dest_id": self.customer_loc.id,
-                })]
-        })
+        picking = self.picking_obj.create(
+            {
+                "picking_type_id": self.ref("stock.picking_type_out"),
+                "location_id": self.warehouse.lot_stock_id.id,
+                "location_dest_id": self.customer_loc.id,
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Test move",
+                            "product_id": self.product_a.id,
+                            "date_expected": date_move,
+                            "date": date_move,
+                            "product_uom": self.product_a.uom_id.id,
+                            "product_uom_qty": qty,
+                            "location_id": self.warehouse.lot_stock_id.id,
+                            "location_dest_id": self.customer_loc.id,
+                        },
+                    )
+                ],
+            }
+        )
         picking.action_confirm()
         return picking
