@@ -92,8 +92,8 @@ class PullListWizard(models.TransientModel):
         qty_needed = max(demand_qty - qty_available - supply_qty, 0.0)
         qty_assigned[product] = prev + qty_assigned_now
         return {
-            "product_id": product,
-            "location_id": location,
+            "product_id": product.id if product else False,
+            "location_id": location.id if location else False,
             "date_expected": date_expected,
             "stock_rule_id": rule.id if rule else False,
             "raw_demand_qty": demand_qty,
@@ -250,10 +250,7 @@ class PullListWizard(models.TransientModel):
         lines_obj = self.env["stock.pull.list.wizard.line"]
         errors = []
         proc_groups = []
-        # User requesting the procurement is passed by context to be able to
-        # update final MO, PO or trasfer with that information.
-        # TODO: migration to v13: requested_uid is not needed.
-        pg_obj = self.env["procurement.group"].with_context(requested_uid=self.env.user)
+        pg_obj = self.env["procurement.group"]
         grouping_keys = self._get_procurement_group_keys()
         fields = self._get_fields_for_keys()
         for gk in grouping_keys:
@@ -266,6 +263,7 @@ class PullListWizard(models.TransientModel):
                 continue
             group = pg_obj.create(self._prepare_proc_group_values())
             proc_groups.append(group.id)
+            procurements = []
             for line in lines.filtered(lambda l: l.selected):
                 n += 1
                 if 0 < self.max_lines < n:
@@ -274,20 +272,25 @@ class PullListWizard(models.TransientModel):
                     proc_groups.append(group.id)
 
                 values = self._prepare_procurement_values(line.date_expected, group)
-                try:
-                    pg_obj.run(
+                procurements.append(
+                    pg_obj.Procurement(
                         line.product_id,
                         line.needed_qty,
                         line.product_id.uom_id,
                         line.location_id,
                         "Pull List %s" % self.id,
                         "Pull List %s" % self.id,
+                        self.env.user.company_id,
                         values,
                     )
-                except UserError as error:
-                    errors.append(error.name)
-                if errors:
-                    raise UserError("\n".join(errors))
+                )
+            # Run procurements
+            try:
+                pg_obj.run(procurements)
+            except UserError as error:
+                errors.append(error.name)
+            if errors:
+                raise UserError("\n".join(errors))
         res = {
             "name": _("Generated Procurement Groups"),
             "src_model": "stock.pull.list.wizard",
