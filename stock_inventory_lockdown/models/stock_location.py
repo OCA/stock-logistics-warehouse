@@ -9,7 +9,6 @@ class StockLocation(models.Model):
     """Refuse changes during exhaustive Inventories"""
 
     _inherit = "stock.location"
-    _order = "name"
 
     @api.constrains("location_id")
     def _check_inventory_location_id(self):
