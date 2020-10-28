@@ -1,1 +1,1 @@
-This module adds an easy way to modify product-specific putaway strategies from the product view for a better UX.
+This module add product template in putaway strategies from the product view to not need defined putaway strategies for all variants.
