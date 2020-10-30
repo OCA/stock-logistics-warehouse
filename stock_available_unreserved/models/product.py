@@ -84,10 +84,36 @@ class ProductProduct(models.Model):
         """Hook used to introduce possible variations"""
         return False
 
+    def _set_stock_available_not_reserved_values(self, result, quants):
+        """From the given quants values from read_group(), set the
+        different values.
+
+        :param result: result dictionary
+        :type result: dict
+        :param quants: quants from a read_group()
+        :type quants: dict
+        """
+
+        values_prod = {}
+        on_hand = _(" On Hand")
+        for quant in quants:
+            # create a dictionary with the total value per products
+            values_prod.setdefault(quant['product_id'][0], 0)
+            values_prod[quant['product_id'][0]] += quant['qty']
+        for product in self.with_context(prefetch_fields=False, lang=''):
+            result[product.id] = {}
+            # get total qty for the product
+            qty = float_round(values_prod.get(product.id, 0.0),
+                              precision_rounding=product.uom_id.rounding)
+            qty_available_not_res = qty
+            result[product.id].update({
+                'qty_available_not_res': qty_available_not_res})
+            text = str(qty_available_not_res) + on_hand
+            result[product.id].update({'qty_available_stock_text': text})
+
     @api.multi
     def _compute_product_available_not_res_dict(self):
-
-        res = {}
+        result = {}
 
         domain_quant = self._prepare_domain_available_not_res(self)
 
@@ -95,22 +121,9 @@ class ProductProduct(models.Model):
             domain_quant,
             ['product_id', 'location_id', 'qty'],
             ['product_id', 'location_id'],
+            orderby='id',
             lazy=False)
-        values_prod = {}
-        for quant in quants:
-            # create a dictionary with the total value per products
-            values_prod.setdefault(quant['product_id'][0], 0)
-            values_prod[quant['product_id'][0]] += quant['qty']
-        for product in self.with_context(prefetch_fields=False, lang=''):
-            res[product.id] = {}
-            # get total qty for the product
-            qty = float_round(values_prod.get(product.id, 0.0),
-                              precision_rounding=product.uom_id.rounding)
-            qty_available_not_res = qty
-            res[product.id].update({'qty_available_not_res':
-                                    qty_available_not_res})
-            text = str(qty_available_not_res) + _(" On Hand")
-            res[product.id].update({'qty_available_stock_text': text})
-        self._product_available_not_res_hook(quants)
 
-        return res
+        self._set_stock_available_not_reserved_values(result, quants)
+        self._product_available_not_res_hook(quants)
+        return result
