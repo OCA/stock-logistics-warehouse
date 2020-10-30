@@ -26,7 +26,8 @@ Stock Inventory Verification Request
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 Adds the capability to request a Slot Verification when an inventory is
-'Pending to Approve'. When asked from an inventory adjustment, which have
+'Pending to Approve' or create one at will when a potential issue with a
+specific location is found. When asked from an inventory adjustment, which have
 discrepancies over the threshold for the location, a Slot Verification
 Request will be created for each line that exceed the maximum discrepancy
 allowed.
@@ -62,6 +63,8 @@ In order to use this module act as follow:
 * Once you have found the problem and you have fixed it 'Mark as Solved' the
   Verification.
 
+You can also create the SVR manually.
+
 Bug Tracker
 ===========
 
@@ -78,14 +81,15 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 
 Contributors
 ~~~~~~~~~~~~
 
-* Lois Rilo Antelo <lois.rilo@eficent.com>
+* Lois Rilo Antelo <lois.rilo@forgeflow.com>
 * Michael Allen <mallen@opensourceintegrators.com>
 * Bhavesh Odedra <bodedra@opensourceintegrators.com>
+* Adrià Gil Sorribes <adria.gil@forgeflow.com>
 
 Maintainers
 ~~~~~~~~~~~
@@ -100,13 +104,13 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-.. |maintainer-lreficent| image:: https://github.com/lreficent.png?size=40px
-    :target: https://github.com/lreficent
-    :alt: lreficent
+.. |maintainer-LoisRForgeFlow| image:: https://github.com/LoisRForgeFlow.png?size=40px
+    :target: https://github.com/LoisRForgeFlow
+    :alt: LoisRForgeFlow
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-lreficent| 
+|maintainer-LoisRForgeFlow| 
 
 This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/12.0/stock_inventory_verification_request>`_ project on GitHub.
 
