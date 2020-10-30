@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field name="name">stock.inventory.form - stock_inventory_line_open</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    string="Inventory Lines"
+                    type="object"
+                    name="action_validated_inventory_lines"
+                    class="oe_stat_button"
+                    icon="fa-list"
+                    attrs="{'invisible': [('state', '!=', 'done')]}"
+                />
+            </div>
+        </field>
+    </record>
+    <record id="stock_inventory_line_tree_readonly" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree.readonly</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree2" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="create">0</attribute>
+                <attribute name="js_class" />
+                <attribute name="editable" />
+            </tree>
+        </field>
+    </record>
+</odoo>
