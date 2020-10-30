@@ -1,78 +1,84 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2020 ForgeFlow S.L.
+#   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import odoo.tests.common as common
 from odoo.exceptions import AccessError
 
 
-class TestStockVerificationRequest(common.TransactionCase):
+class TestStockVerificationRequest(common.SavepointCase):
 
-    def setUp(self):
-        super(TestStockVerificationRequest, self).setUp()
-        self.obj_wh = self.env['stock.warehouse']
-        self.obj_location = self.env['stock.location']
-        self.obj_inventory = self.env['stock.inventory']
-        self.obj_product = self.env['product.product']
-        self.obj_svr = self.env['stock.slot.verification.request']
-        self.obj_move = self.env['stock.move']
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        # disable tracking test suite wise
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.user_model = cls.env["res.users"].with_context(
+            no_reset_password=True)
 
-        self.product1 = self.obj_product.create({
+        cls.obj_wh = cls.env['stock.warehouse']
+        cls.obj_location = cls.env['stock.location']
+        cls.obj_inventory = cls.env['stock.inventory']
+        cls.obj_product = cls.env['product.product']
+        cls.obj_svr = cls.env['stock.slot.verification.request']
+        cls.obj_move = cls.env['stock.move']
+
+        cls.product1 = cls.obj_product.create({
             'name': 'Test Product 1',
             'type': 'product',
             'default_code': 'PROD1',
         })
-        self.product2 = self.obj_product.create({
+        cls.product2 = cls.obj_product.create({
             'name': 'Test Product 2',
             'type': 'product',
             'default_code': 'PROD2',
         })
-        self.test_loc = self.obj_location.create({
+        cls.test_loc = cls.obj_location.create({
             'name': 'Test Location',
             'usage': 'internal',
             'discrepancy_threshold': 0.1
         })
 
         # Create Stock manager able to force validation on inventories.
-        group_stock_man = self.env.ref('stock.group_stock_manager')
-        group_inventory_all = self.env.ref(
+        group_stock_man = cls.env.ref('stock.group_stock_manager')
+        group_inventory_all = cls.env.ref(
             'stock_inventory_discrepancy.'
             'group_stock_inventory_validation_always')
-        self.manager = self.env['res.users'].create({
+        cls.manager = cls.env['res.users'].create({
             'name': 'Test Manager',
             'login': 'manager',
             'email': 'test.manager@example.com',
             'groups_id': [(6, 0, [group_stock_man.id, group_inventory_all.id])]
         })
-        group_stock_user = self.env.ref('stock.group_stock_user')
-        self.user = self.env['res.users'].create({
+        group_stock_user = cls.env.ref('stock.group_stock_user')
+        cls.user = cls.env['res.users'].create({
             'name': 'Test User',
             'login': 'user',
             'email': 'test.user@example.com',
             'groups_id': [(6, 0, [group_stock_user.id])]
         })
 
-        self.starting_inv = self.obj_inventory.create({
+        cls.starting_inv = cls.obj_inventory.create({
             'name': 'Starting inventory',
             'filter': 'product',
             'line_ids': [
                 (0, 0, {
-                    'product_id': self.product1.id,
-                    'product_uom_id': self.env.ref(
+                    'product_id': cls.product1.id,
+                    'product_uom_id': cls.env.ref(
                         "uom.product_uom_unit").id,
                     'product_qty': 2.0,
-                    'location_id': self.test_loc.id,
+                    'location_id': cls.test_loc.id,
                 }),
                 (0, 0, {
-                    'product_id': self.product2.id,
-                    'product_uom_id': self.env.ref(
+                    'product_id': cls.product2.id,
+                    'product_uom_id': cls.env.ref(
                         "uom.product_uom_unit").id,
                     'product_qty': 4.0,
-                    'location_id': self.test_loc.id,
+                    'location_id': cls.test_loc.id,
                 }),
             ],
         })
-        self.starting_inv.action_force_done()
+        cls.starting_inv.action_force_done()
 
     def test_svr_creation(self):
         """Tests the creation of Slot Verification Requests."""

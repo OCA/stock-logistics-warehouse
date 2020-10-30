@@ -1,5 +1,5 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2017-20 ForgeFlow S.L.
+#   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -13,6 +13,10 @@ class StockInventory(models.Model):
     slot_verification_ids = fields.One2many(
         comodel_name='stock.slot.verification.request',
         string='Slot Verification Requests', inverse_name='inventory_id')
+    solving_slot_verification_request_id = fields.Many2one(
+        comodel_name="stock.slot.verification.request",
+        help="This Inventory adjustment was created from the specified SVR."
+    )
 
     @api.multi
     def action_request_verification(self):
@@ -27,6 +31,7 @@ class StockInventory(models.Model):
                     'location_id': line.location_id.id,
                     'state': 'wait',
                     'product_id': line.product_id.id,
+                    'company_id': self.company_id.id,
                 })
 
 

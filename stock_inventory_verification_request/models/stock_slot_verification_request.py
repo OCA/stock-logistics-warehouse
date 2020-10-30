@@ -1,5 +1,5 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2017-20 ForgeFlow S.L.
+#   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -8,6 +8,12 @@ from odoo import api, fields, models
 class SlotVerificationRequest(models.Model):
     _name = 'stock.slot.verification.request'
     _inherit = 'mail.thread'
+    _description = "Slot Verification Request"
+
+    @api.model
+    def _default_company(self):
+        company_id = self.env['res.company']._company_default_get(self._name)
+        return company_id
 
     @api.model
     def create(self, vals):
@@ -26,6 +32,11 @@ class SlotVerificationRequest(models.Model):
         for rec in self:
             rec.involved_inv_line_count = len(rec.involved_inv_line_ids)
 
+    @api.multi
+    def _compute_created_inventory_count(self):
+        for rec in self:
+            rec.created_inventory_count = len(rec.created_inventory_ids)
+
     name = fields.Char(
         default="/", required=True,
         readonly=True, states={'wait': [('readonly', False)]})
@@ -40,19 +51,35 @@ class SlotVerificationRequest(models.Model):
     location_id = fields.Many2one(
         comodel_name='stock.location',
         string='Location',
-        required=True)
+        required=True,
+        readonly=True, states={'wait': [('readonly', False)]},
+        track_visibility="onchange",
+    )
+    company_id = fields.Many2one(
+        comodel_name='res.company', string='Company',
+        required=True,
+        default=_default_company,
+        readonly=True,
+    )
     state = fields.Selection(selection=[
         ('wait', 'Waiting Actions'),
         ('open', 'In Progress'),
         ('cancelled', 'Cancelled'),
         ('done', 'Solved')
-    ], string='Status', default='wait')
+    ], string='Status', default='wait',
+        track_visibility="onchange",
+    )
     responsible_id = fields.Many2one(
         comodel_name='res.users',
-        string='Assigned to')
+        string='Assigned to',
+        track_visibility="onchange",
+    )
     product_id = fields.Many2one(
         comodel_name='product.product',
-        string='Product', required=True)
+        string='Product',
+        readonly=True, states={'wait': [('readonly', False)]},
+        track_visibility="onchange",
+    )
     notes = fields.Text(string='Notes')
     involved_move_ids = fields.Many2many(
         comodel_name='stock.move',
@@ -71,18 +98,28 @@ class SlotVerificationRequest(models.Model):
         string='Involved Inventory Lines')
     involved_inv_line_count = fields.Integer(
         compute='_compute_involved_inv_line_count')
+    created_inventory_ids = fields.One2many(
+        comodel_name="stock.inventory",
+        string="Created Inventories",
+        inverse_name="solving_slot_verification_request_id",
+        help="These inventory adjustment were created from this SVR.",
+    )
+    created_inventory_count = fields.Integer(
+        compute='_compute_created_inventory_count')
 
     @api.multi
     def _get_involved_moves_domain(self):
-        domain = [('product_id', '=', self.product_id.id), '|',
-                  ('location_id', '=', self.location_id.id),
+        domain = ['|', ('location_id', '=', self.location_id.id),
                   ('location_dest_id', '=', self.location_id.id)]
+        if self.product_id:
+            domain.append(('product_id', '=', self.product_id.id))
         return domain
 
     @api.multi
     def _get_involved_lines_domain(self):
-        domain = [('product_id', '=', self.product_id.id),
-                  ('location_id', '=', self.location_id.id)]
+        domain = [('location_id', '=', self.location_id.id)]
+        if self.product_id:
+            domain.append(('product_id', '=', self.product_id.id))
         return domain
 
     @api.multi
@@ -141,4 +178,36 @@ class SlotVerificationRequest(models.Model):
                                'view_inventory_line_form', False)
             result['views'] = [(res and res.id or False, 'form')]
             result['res_id'] = line_ids and line_ids[0] or False
+        return result
+
+    def action_create_inventory_adjustment(self):
+        self.ensure_one()
+        inventory = self.env["stock.inventory"].sudo().create({
+            "name": "Inventory Adjustment from %s" % self.name,
+            "filter": "product" if self.product_id else "none",
+            "location_id": self.location_id.id,
+            "product_id": self.product_id.id,
+            "solving_slot_verification_request_id": self.id,
+            "company_id": self.company_id.id,
+        })
+        action = self.env.ref('stock.action_inventory_form')
+        result = action.read()[0]
+
+        res = self.env.ref('stock.view_inventory_form', False)
+        result['views'] = [(res and res.id or False, 'form')]
+        result['res_id'] = inventory.id
+        return result
+
+    @api.multi
+    def action_view_inventories(self):
+        action = self.env.ref("stock.action_inventory_form")
+        result = action.read()[0]
+        result["context"] = {}
+        inventory_ids = self.mapped("created_inventory_ids").ids
+        if len(inventory_ids) > 1:
+            result["domain"] = [("id", "in", inventory_ids)]
+        elif len(inventory_ids) == 1:
+            res = self.env.ref("stock.view_inventory_form", False)
+            result["views"] = [(res and res.id or False, "form")]
+            result["res_id"] = inventory_ids and inventory_ids[0] or False
         return result
