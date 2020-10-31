@@ -3,6 +3,7 @@ from odoo.tools.float_utils import float_round
 from odoo.tools import float_compare
 from odoo.exceptions import UserError
 
+
 class StockReservation(models.Model):
     """ Allow to reserve products.
 
@@ -132,7 +133,8 @@ class StockReservation(models.Model):
             lambda x: x.state not in ('done', 'draft', 'cancel')
         )._action_cancel()
         # If the move is done, we need to reverse it.
-        done_moves = self.mapped('move_id').filtered(lambda x: x.state == 'done')
+        done_moves = self.mapped('move_id').filtered(
+            lambda x: x.state == 'done')
         # We group them by picking to have one revesed picking for all moves.
         for picking in done_moves.mapped('picking_id'):
             return_obj = self.env['stock.return.picking']
@@ -218,8 +220,10 @@ class StockReservation(models.Model):
     @api.onchange('product_uom_qty')
     def _onchange_quantity(self):
         """ On change of product quantity avoid negative quantities """
-        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
-        if not self.product_id or float_compare(self.product_uom_qty, 0.0, precision_digits=precision) <= 0:
+        precision = self.env['decimal.precision'].precision_get(
+            'Product Unit of Measure')
+        if not self.product_id or float_compare(
+                self.product_uom_qty, 0.0, precision_digits=precision) <= 0:
             self.product_uom_qty = 0.0
 
     @api.multi
@@ -233,5 +237,5 @@ class StockReservation(models.Model):
         action_dict.update(
             views=[(view_id, 'form')],
             res_id=self.move_id.id,
-            )
+        )
         return action_dict
