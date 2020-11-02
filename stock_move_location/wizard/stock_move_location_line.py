@@ -41,6 +41,9 @@ class StockMoveLocationWizardLine(models.TransientModel):
     max_quantity = fields.Float(
         string="Maximum available quantity", digits="Product Unit of Measure"
     )
+    reserved_quantity = fields.Float(
+        string="Reserved quantity", digits="Product Unit of Measure"
+    )
     custom = fields.Boolean(string="Custom line", default=True)
 
     @staticmethod

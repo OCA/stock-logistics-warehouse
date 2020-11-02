@@ -132,3 +132,36 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(
             putaway_line.destination_location_id, self.internal_loc_2_shelf
         )
+
+    def test_inmediate_transfer_reserved_quantity(self):
+        """
+        Unreserve quantities in old location and reserve the same items on
+        new location
+        """
+        # Create some quants
+        self.set_product_amount(
+            self.product_lots, self.internal_loc_1, 100, lot_id=self.lot1
+        )
+        # Reserve some quantities
+        stock_move = self.env["stock.move"].create(
+            {
+                "name": "Move for test",
+                "product_id": self.product_lots.id,
+                "product_uom_qty": 20.0,
+                "product_uom": self.product_lots.uom_id.id,
+                "location_id": self.internal_loc_1.id,
+                "location_dest_id": self.internal_loc_2.id,
+            }
+        )
+        stock_move._action_confirm()
+        stock_move._action_assign()
+        # Move all quantities to other location
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2_shelf)
+        wizard.onchange_origin_location()
+        wizard.action_move_location()
+        # The old reserved quantities must be in new location after confirm wizard
+        self.assertEqual(len(stock_move.move_line_ids), 1)
+        self.assertEqual(stock_move.move_line_ids.product_uom_qty, 20.0)
+        self.assertEqual(
+            stock_move.move_line_ids.location_id, self.internal_loc_2_shelf
+        )
