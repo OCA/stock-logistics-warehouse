@@ -84,6 +84,11 @@
                                     attrs="{'readonly': [('custom', '!=', True)]}"
                                     force_save="1"
                                 />
+                                <field
+                                    name="reserved_quantity"
+                                    readonly="1"
+                                    force_save="1"
+                                />
                             </tree>
                             <kanban class="o_kanban_mobile">
                                 <templates>
