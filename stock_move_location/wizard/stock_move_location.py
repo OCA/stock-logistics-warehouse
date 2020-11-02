@@ -90,6 +90,7 @@ class StockMoveLocationWizard(models.TransientModel):
                     "product_id": quant.product_id.id,
                     "move_quantity": quant.quantity,
                     "max_quantity": quant.quantity,
+                    "reserved_quantity": quant.reserved_quantity,
                     "origin_location_id": quant.location_id.id,
                     "lot_id": quant.lot_id.id,
                     "product_uom_id": quant.product_uom_id.id,
@@ -174,12 +175,46 @@ class StockMoveLocationWizard(models.TransientModel):
                 line.create_move_lines(picking, move)
         return move
 
+    def _unreserve_moves(self):
+        """
+        Try to unreserve moves that they has reserved quantity before user
+        moves products from a location to other one and change move origin
+        location to the new location to assign later.
+        :return moves unreserved
+        """
+        moves_to_reassign = self.env["stock.move"]
+        lines_to_ckeck_reverve = self.stock_move_location_line_ids.filtered(
+            lambda l: (
+                l.move_quantity > l.max_quantity - l.reserved_quantity
+                and not l.origin_location_id.should_bypass_reservation()
+            )
+        )
+        for line in lines_to_ckeck_reverve:
+            move_lines = self.env["stock.move.line"].search(
+                [
+                    ("state", "=", "assigned"),
+                    ("product_id", "=", line.product_id.id),
+                    ("location_id", "=", line.origin_location_id.id),
+                    ("lot_id", "=", line.lot_id.id),
+                    ("product_uom_qty", ">", 0.0),
+                ]
+            )
+            moves_to_unreserve = move_lines.mapped("move_id")
+            # Unreserve in old location
+            moves_to_unreserve._do_unreserve()
+            # Change location in move with the new one
+            moves_to_unreserve.write({"location_id": line.destination_location_id.id})
+            moves_to_reassign |= moves_to_unreserve
+        return moves_to_reassign
+
     def action_move_location(self):
         self.ensure_one()
         picking = self._create_picking()
         self._create_moves(picking)
         if not self.env.context.get("planned"):
+            moves_to_reassign = self._unreserve_moves()
             picking.button_validate()
+            moves_to_reassign._action_assign()
         else:
             picking.action_confirm()
             picking.action_assign()
@@ -199,7 +234,8 @@ class StockMoveLocationWizard(models.TransientModel):
         # Using sql as search_group doesn't support aggregation functions
         # leading to overhead in queries to DB
         query = """
-            SELECT product_id, lot_id, SUM(quantity)
+            SELECT product_id, lot_id, SUM(quantity) AS quantity,
+                SUM(reserved_quantity) AS reserved_quantity
             FROM stock_quant
             WHERE location_id = %s
             GROUP BY product_id, lot_id
@@ -221,8 +257,9 @@ class StockMoveLocationWizard(models.TransientModel):
             product_data.append(
                 {
                     "product_id": product.id,
-                    "move_quantity": group.get("sum"),
-                    "max_quantity": group.get("sum"),
+                    "move_quantity": group.get("quantity"),
+                    "max_quantity": group.get("quantity"),
+                    "reserved_quantity": group.get("reserved_quantity"),
                     "origin_location_id": self.origin_location_id.id,
                     "destination_location_id": location_dest_id,
                     # cursor returns None instead of False
@@ -249,6 +286,7 @@ class StockMoveLocationWizard(models.TransientModel):
                     continue
                 line = line_model.create(line_val)
                 line.max_quantity = line.get_max_quantity()
+                line.reserved_quantity = line.reserved_quantity
                 lines.append(line)
             self.update(
                 {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}

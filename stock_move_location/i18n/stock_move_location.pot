@@ -140,6 +140,7 @@ msgstr ""
 
 #. module: stock_move_location
 #: code:addons/stock_move_location/wizard/stock_move_location_line.py:0
+#: code:addons/stock_move_location/wizard/stock_move_location_line.py:0
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
 msgstr ""
@@ -189,6 +190,11 @@ msgstr ""
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__move_quantity
 msgid "Quantity to move"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__reserved_quantity
+msgid "Reserved quantity"
 msgstr ""
 
 #. module: stock_move_location
