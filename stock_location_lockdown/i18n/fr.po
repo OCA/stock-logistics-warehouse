@@ -29,7 +29,7 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_location_lockdown
-#: code:addons/stock_location_lockdown/models/stock_location.py:28
+#: code:addons/stock_location_lockdown/models/stock_location.py:0
 #, python-format
 msgid ""
 "It is impossible to prohibit this location from                    receiving "
@@ -42,7 +42,7 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_location_lockdown
-#: code:addons/stock_location_lockdown/models/stock_quant.py:18
+#: code:addons/stock_location_lockdown/models/stock_quant.py:0
 #, python-format
 msgid ""
 "The location %s is blocked and can not be used for moving the product %s"

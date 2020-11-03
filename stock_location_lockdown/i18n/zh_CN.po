@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_location_lockdown
+# 	* stock_location_lockdown
 #
 msgid ""
 msgstr ""
@@ -27,9 +27,11 @@ msgid "Inventory Locations"
 msgstr "库存位置"
 
 #. module: stock_location_lockdown
-#: code:addons/stock_location_lockdown/models/stock_location.py:28
+#: code:addons/stock_location_lockdown/models/stock_location.py:0
 #, python-format
-msgid "It is impossible to prohibit this location from                    receiving products as it already contains some."
+msgid ""
+"It is impossible to prohibit this location from                    receiving "
+"products as it already contains some."
 msgstr "因为已经包含一些产品，所以无法禁止此位置接收产品。"
 
 #. module: stock_location_lockdown
@@ -38,12 +40,15 @@ msgid "Quants"
 msgstr "数量分析"
 
 #. module: stock_location_lockdown
-#: code:addons/stock_location_lockdown/models/stock_quant.py:18
+#: code:addons/stock_location_lockdown/models/stock_quant.py:0
 #, python-format
-msgid "The location %s is blocked and can not be used for moving the product %s"
+msgid ""
+"The location %s is blocked and can not be used for moving the product %s"
 msgstr "位置%s被阻止，无法用于移动产品%s"
 
 #. module: stock_location_lockdown
 #: model:ir.model.fields,help:stock_location_lockdown.field_stock_location__block_stock_entrance
-msgid "if this box is checked, putting stock on this location won't be allowed. Usually used for a virtual location that has childrens."
+msgid ""
+"if this box is checked, putting stock on this location won't be allowed. "
+"Usually used for a virtual location that has childrens."
 msgstr "如果选中此框，则不允许在此位置放货。通常用于有子位置的虚拟位置。"
