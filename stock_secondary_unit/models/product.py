@@ -1,6 +1,6 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.tools.float_utils import float_round
 
 
@@ -14,6 +14,7 @@ class StockProductSecondaryUnit(models.AbstractModel):
         digits="Product Unit of Measure",
     )
 
+    @api.depends("stock_secondary_uom_id")
     def _compute_secondary_unit_qty_available(self):
         for product in self:
             if not product.stock_secondary_uom_id:
@@ -35,15 +36,7 @@ class ProductTemplate(models.Model):
         comodel_name="product.secondary.unit", string="Second unit for inventory"
     )
 
-    def _compute_quantities(self):
-        super()._compute_quantities()
-        self._compute_secondary_unit_qty_available()
-
 
 class ProductProduct(models.Model):
     _inherit = ["product.product", "stock.product.secondary.unit"]
     _name = "product.product"
-
-    def _compute_quantities(self):
-        super()._compute_quantities()
-        self._compute_secondary_unit_qty_available()
