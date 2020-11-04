@@ -1,1 +1,1 @@
--e git+https://github.com/OCA/openupgradelib.git@master#egg=openupgradelib
+git+https://github.com/OCA/openupgradelib.git
