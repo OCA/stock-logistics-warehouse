@@ -8,7 +8,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
     def setUp(self, *args, **kwargs):
         super(TestProcurementAutoCreateGroup, self).setUp(*args, **kwargs)
         self.group_obj = self.env["procurement.group"]
-        self.push_obj = self.env["stock.location.path"]
+        self.push_obj = self.env["stock.rule"]
         self.route_obj = self.env["stock.location.route"]
         self.move_obj = self.env["stock.move"]
         self.picking_obj = self.env["stock.picking"]
@@ -22,7 +22,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         picking_type_id = self.env.ref("stock.picking_type_internal").id
 
         # Create rules and routes:
-        route_auto = self.route_obj.create({"name": "Auto Create Group",})
+        route_auto = self.route_obj.create({"name": "Auto Create Group"})
         self.push_obj.create(
             {
                 "name": "route_auto",
@@ -30,13 +30,13 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "location_dest_id": self.loc_components.id,
                 "route_id": route_auto.id,
                 "auto_create_group": True,
-                "auto": "manual",
+                "action": "push",
                 "picking_type_id": picking_type_id,
                 "warehouse_id": self.warehouse.id,
                 "company_id": self.company_id.id,
             }
         )
-        route_no_auto = self.route_obj.create({"name": "Not Auto Create Group",})
+        route_no_auto = self.route_obj.create({"name": "Not Auto Create Group"})
         self.push_obj.create(
             {
                 "name": "route_no_auto",
@@ -44,7 +44,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "location_dest_id": self.loc_components.id,
                 "route_id": route_no_auto.id,
                 "auto_create_group": False,
-                "auto": "manual",
+                "action": "push",
                 "picking_type_id": picking_type_id,
                 "warehouse_id": self.warehouse.id,
                 "company_id": self.company_id.id,
