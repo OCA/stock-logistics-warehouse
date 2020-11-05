@@ -78,6 +78,7 @@
             <search string="Reservation Rule">
                 <field name="name" />
                 <field name="location_id" />
+                <field name="picking_type_id" />
                 <separator />
                 <filter
                     string="Archived"
@@ -95,6 +96,7 @@
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="location_id" />
+                <field name="picking_type_id" />
                 <field name="rule_domain" />
             </tree>
         </field>
