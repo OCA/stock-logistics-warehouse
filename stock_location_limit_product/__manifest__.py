@@ -12,7 +12,7 @@
                 This limit can later be used to track the capacity
                 available of the location.""",
     'category': 'Warehouse',
-    'development_status': 'Stable',
+    'development_status': 'Production/Stable',
     'maintainers': ['max3903'],
     'depends': [
         'stock',
