@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo11-addon-account_move_line_stock_info',
         'odoo11-addon-packaging_uom',
         'odoo11-addon-procurement_auto_create_group',
+        'odoo11-addon-push_rule_auto_create_group',
         'odoo11-addon-scrap_reason_code',
         'odoo11-addon-stock_account_change_qty_reason',
         'odoo11-addon-stock_account_internal_move',
