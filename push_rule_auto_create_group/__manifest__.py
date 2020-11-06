@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Push Rule Auto Create Group",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "development_status": "Alpha",
     "license": "AGPL-3",
     "summary": "Allows to configure the system to propose automatically new "
