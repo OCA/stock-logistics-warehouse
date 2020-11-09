@@ -18,9 +18,7 @@ class PullListWizard(models.TransientModel):
         wh = self.env["stock.warehouse"].search(
             [("company_id", "=", company.id)], limit=1
         )
-        res.update(
-            {"warehouse_id": wh.id, "location_id": wh.lot_stock_id.id,}
-        )
+        res.update({"warehouse_id": wh.id, "location_id": wh.lot_stock_id.id})
         return res
 
     location_id = fields.Many2one(comodel_name="stock.location", required=True,)
@@ -172,9 +170,7 @@ class PullListWizard(models.TransientModel):
         for key, demand_qty in demand_dict.items():
             supply_qty = incoming_dict.get(key, 0.0)
             lines.append((0, 0, self._prepare_line_values(key, demand_qty, supply_qty)))
-        self.update(
-            {"line_ids": lines,}
-        )
+        self.update({"line_ids": lines})
         res = self._act_window_pull_list_step_2()
         return res
 
