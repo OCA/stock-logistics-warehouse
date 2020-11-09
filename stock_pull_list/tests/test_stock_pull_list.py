@@ -22,7 +22,7 @@ class TestStockPullList(TestPullListCommon):
 
     def test_02_consolidate(self):
         self._generate_moves()
-        wiz = self.wiz_obj.create({"consolidate_by_product": True,})
+        wiz = self.wiz_obj.create({"consolidate_by_product": True})
         wiz.action_prepare()
         line = wiz.line_ids.filtered(lambda l: l.product_id == self.product_a)
         self.assertEqual(len(line), 1)
