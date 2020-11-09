@@ -12,7 +12,7 @@
     "maintainers": ["LoisRForgeFlow"],
     "development_status": "Alpha",
     "category": "Warehouse Management",
-    "depends": ["stock", "stock_available_unreserved",],
-    "data": ["wizards/stock_pull_list_wizard.xml",],
+    "depends": ["stock", "stock_available_unreserved"],
+    "data": ["wizards/stock_pull_list_wizard.xml"],
     "installable": True,
 }
