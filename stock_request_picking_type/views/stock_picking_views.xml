@@ -1,0 +1,196 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="stock_request_type_kanban" model="ir.ui.view">
+        <field name="name">stock.picking.type.kanban</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.stock_picking_type_kanban" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="count_sr_todo" />
+                <field name="count_sr_open" />
+                <field name="count_sr_late" />
+            </field>
+            <xpath expr='//div[@name="stock_picking"]' position="after">
+                <div
+                    t-if="record.code.raw_value == 'stock_request_order'"
+                    t-attf-class="#{kanban_color(record.color.raw_value)}"
+                >
+                    <div>
+                        <div t-attf-class="o_kanban_card_header">
+                            <div class="o_kanban_card_header_title">
+                                <a
+                                    type="object"
+                                    name="get_stock_request_order_picking_type_action"
+                                    class="o_primary"
+                                >
+                                    <field name="name" />
+                                </a>
+                                <div class="o_secondary">
+                                    <field class="o_secondary" name="warehouse_id" />
+                                </div>
+                            </div>
+                            <div class="o_kanban_manage_button_section">
+                                <a class="o_kanban_manage_toggle_button" href="#">
+                                    <i
+                                        class="fa fa-ellipsis-v"
+                                        role="img"
+                                        aria-label="Manage"
+                                        title="Manage"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="container o_kanban_card_content">
+                            <div class="row">
+                                <div class="col-6 o_kanban_primary_left">
+                                    <button
+                                        class="btn btn-primary"
+                                        name="%(action_picking_dashboard)d"
+                                        type="action"
+                                        context="{'search_default_todo': 1}"
+                                    >
+                                        <span
+                                            t-if="record.code.raw_value =='stock_request_order'"
+                                        ><t
+                                                t-esc="record.count_sr_todo.value"
+                                            /> To Process</span>
+                                    </button>
+                                </div>
+                                <div class="col-6 o_kanban_primary_right">
+                                    <div
+                                        t-if="record.count_sr_open.raw_value > 0"
+                                        class="row"
+                                    >
+                                        <div class="col-9">
+                                            <a
+                                                name="%(action_picking_dashboard)d"
+                                                type="action"
+                                                context="{'search_default_inprogress': 1}"
+                                            >
+                                                In Progress
+                                            </a>
+                                        </div>
+                                        <div class="col-3">
+                                            <field name="count_sr_open" />
+                                        </div>
+                                    </div>
+                                    <div
+                                        t-if="record.count_sr_late.raw_value > 0"
+                                        class="row"
+                                    >
+                                        <div class="col-9">
+                                            <a
+                                                class="oe_kanban_stock_picking_type_list"
+                                                name="%(action_picking_dashboard)d"
+                                                type="action"
+                                                context="{'search_default_late': 1}"
+                                            >
+                                                Late
+                                            </a>
+                                        </div>
+                                        <div class="col-3">
+                                            <field name="count_sr_late" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="container o_kanban_card_manage_pane dropdown-menu"
+                            role="menu"
+                        >
+                            <div class="row">
+                                <div
+                                    class="col-6 o_kanban_card_manage_section o_kanban_manage_view"
+                                    name="picking_left_manage_pane"
+                                >
+                                    <div
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >
+                                        <span>View</span>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="%(action_picking_dashboard)d"
+                                            type="action"
+                                        >All</a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="%(action_picking_dashboard)d"
+                                            type="action"
+                                            context="{'search_default_todo': 1}"
+                                        >To Do</a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="%(action_picking_dashboard)d"
+                                            type="action"
+                                            context="{'search_default_open': 1}"
+                                        >In Progress</a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="%(action_picking_dashboard)d"
+                                            type="action"
+                                            context="{'search_default_done': 1}"
+                                        >Done</a>
+                                    </div>
+                                </div>
+                                <div
+                                    class="col-6 o_kanban_card_manage_section o_kanban_manage_new"
+                                >
+                                    <div
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >
+                                        <span>New</span>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="%(action_stock_request_order_form)d"
+                                            type="action"
+                                        >Stock Request Order</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                t-if="widget.editable"
+                                class="o_kanban_card_manage_settings row"
+                            >
+                                <div role="menuitem" aria-haspopup="true" class="col-8">
+                                    <ul
+                                        role="menu"
+                                        class="oe_kanban_colorpicker"
+                                        data-field="color"
+                                    />
+                                </div>
+                                <div role="menuitem" class="col-4 text-right">
+                                    <a type="edit">Settings</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_picking_type_form_inherit_sro" model="ir.ui.view">
+        <field name="name">Operation Types</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <field name="show_operations" position="attributes">
+                <attribute
+                    name="attrs"
+                >{"invisible": [("code", "=", "stock_request_order")]}</attribute>
+            </field>
+            <field name="show_reserved" position="attributes">
+                <attribute
+                    name="attrs"
+                >{"invisible": [("code", "=", "stock_request_order")]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
