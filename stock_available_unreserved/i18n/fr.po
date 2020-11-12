@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-04 03:58+0000\n"
-"PO-Revision-Date: 2020-08-17 13:59+0000\n"
-"Last-Translator: Khalid Hazam <k.hazam@badep.ma>\n"
+"PO-Revision-Date: 2020-11-12 12:44+0000\n"
+"Last-Translator: Yann Papouin <y.papouin@dec-industrie.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -31,15 +31,15 @@ msgstr "Non réservé en interne"
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:126
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid domain operator %s"
-msgstr "Opérateur de domaine non valide %s"
+msgstr "Opérateur du domaine non valide : %s"
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:128
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid domain right operand %s"
-msgstr "Opérateur de domaine droit non valide %s"
+msgstr "Opérande droit du domaine non valide : %s"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_product_product
@@ -49,7 +49,7 @@ msgstr "Variante d'article"
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_product_template
 msgid "Product Template"
-msgstr "Article"
+msgstr "Modèle d'article"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_product__qty_available_not_res
@@ -58,9 +58,8 @@ msgstr "Qté disponible non réservée"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template__qty_available_not_res
-#, fuzzy
 msgid "Quantity On Hand Unreserved"
-msgstr "Quantité en main non réservée"
+msgstr "Quantité disponible non réservée"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_stock_quant
@@ -75,7 +74,7 @@ msgstr "Articles réservables"
 #. module: stock_available_unreserved
 #: model:ir.actions.act_window,name:stock_available_unreserved.product_open_quants_unreserved
 msgid "Stock On Hand (Unreserved)"
-msgstr "Quantité non réservée"
+msgstr "Stock physique (non réservé)"
 
 #. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
@@ -85,12 +84,10 @@ msgstr "Non réservé"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__unreserved_quantity
-#, fuzzy
-#| msgid "Unreserved"
 msgid "Unreserved quantity"
-msgstr "Non réservé"
+msgstr "Quantité non réservée"
 
 #. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
 msgid "Unreserved:"
-msgstr "Non réservé :"
+msgstr "Non réservé :"
