@@ -4,6 +4,7 @@ import asyncio
 import logging
 import os
 import ssl
+import sys
 import time
 
 import aiohttp  # pylint: disable=missing-manifest-dependency
@@ -68,7 +69,7 @@ class KardexClientProtocol(asyncio.Protocol):
             t = int(time.time())
             msg = "61|ping%d|SH1-1|0|0||||||||\r\n" % t
             await self.send_message(msg)
-            await asyncio.sleep(20)
+            await asyncio.sleep(60)
 
     async def send_message(self, message):
         _logger.info("SEND %r", message)
@@ -95,6 +96,7 @@ class KardexClientProtocol(asyncio.Protocol):
                 self.loop.create_task(self.notify_odoo(msg))
 
     def connection_lost(self, exc):
+        _logger.error("Connection lost: %s", exc)
         self.loop.stop()
 
     async def notify_odoo(self, msg):
@@ -103,7 +105,7 @@ class KardexClientProtocol(asyncio.Protocol):
             params = {"answer": msg, "secret": self.args.secret}
             async with session.post(url, data=params) as resp:
                 resp_text = await resp.text()
-                _logger.info("Reponse from Odoo: %s %s", resp.status, resp_text)
+                _logger.info("Response from Odoo: %s %s", resp.status, resp_text)
 
 
 def main(args, ssl_context=None):
@@ -114,7 +116,7 @@ def main(args, ssl_context=None):
     queue = asyncio.Queue(loop=loop)
     # create the main server
     coro = loop.create_server(
-        lambda: KardexProxyProtocol(loop, queue, args), host=args.host, port=args.port
+        lambda: KardexProxyProtocol(loop, queue, args), host=args.host, port=args.port,
     )
     loop.run_until_complete(coro)
 
@@ -133,8 +135,12 @@ def main(args, ssl_context=None):
     transport, client = loop.run_until_complete(coro)
     loop.create_task(client.keepalive())
     loop.create_task(client.process_queue())
-    loop.run_forever()
-    loop.close()
+    try:
+        loop.run_forever()
+    finally:
+        loop.run_until_complete(loop.shutdown_asyncgens())
+        loop.close()
+    return 0
 
 
 def make_parser():
@@ -169,4 +175,5 @@ def make_parser():
 if __name__ == "__main__":
     parser = make_parser()
     args = parser.parse_args()
-    main(args)
+    res = main(args)
+    sys.exit(res)
