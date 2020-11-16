@@ -29,7 +29,7 @@ msgid "Advanced Removal Strategy"
 msgstr ""
 
 #. module: stock_reserve_rule
-#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__picking_type_id
+#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
 msgid "Apply this rule only if the operation type of the move is the same."
 msgstr ""
 
@@ -145,8 +145,8 @@ msgid "Location"
 msgstr ""
 
 #. module: stock_reserve_rule
-#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__picking_type_id
-msgid "Operation Type"
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
+msgid "Operation Types"
 msgstr ""
 
 #. module: stock_reserve_rule

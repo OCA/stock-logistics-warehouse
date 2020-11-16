@@ -22,7 +22,11 @@
                         <group>
                             <field name="active" invisible="1" />
                             <field name="location_id" />
-                            <field name="picking_type_id" />
+                            <field
+                                name="picking_type_ids"
+                                widget="many2many_tags"
+                                options="{'no_create': 1}"
+                            />
                             <field name="sequence" />
                         </group>
                         <group>
@@ -78,6 +82,7 @@
             <search string="Reservation Rule">
                 <field name="name" />
                 <field name="location_id" />
+                <field name="picking_type_ids" />
                 <separator />
                 <filter
                     string="Archived"
@@ -95,6 +100,11 @@
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="location_id" />
+                <field
+                    name="picking_type_ids"
+                    widget="many2many_tags"
+                    options="{'no_create': 1}"
+                />
                 <field name="rule_domain" />
             </tree>
         </field>
