@@ -274,12 +274,12 @@ class TestReserveRule(common.SavepointCase):
 
         self._create_rule(
             # different picking, should be excluded
-            {"picking_type_id": self.wh.int_type_id.id, "sequence": 1},
+            {"picking_type_ids": [(6, 0, self.wh.int_type_id.ids)], "sequence": 1},
             [{"location_id": self.loc_zone1.id, "sequence": 1}],
         )
         self._create_rule(
             # same picking type as the move
-            {"picking_type_id": self.wh.pick_type_id.id, "sequence": 2},
+            {"picking_type_ids": [(6, 0, self.wh.pick_type_id.ids)], "sequence": 2},
             [
                 {"location_id": self.loc_zone2.id, "sequence": 1},
                 {"location_id": self.loc_zone3.id, "sequence": 2},

@@ -46,9 +46,9 @@ class StockReserveRule(models.Model):
         required=True,
         help="Rule applied only in this location and sub-locations.",
     )
-    picking_type_id = fields.Many2one(
+    picking_type_ids = fields.Many2many(
         comodel_name="stock.picking.type",
-        string="Operation Type",
+        string="Operation Types",
         help="Apply this rule only if the operation type of the move is the same.",
     )
 
@@ -82,9 +82,9 @@ class StockReserveRule(models.Model):
         )
 
     def _is_rule_applicable(self, move):
-        if self.picking_type_id:
+        if self.picking_type_ids:
             picking_type = move.picking_type_id or move.picking_id.picking_type_id
-            if picking_type != self.picking_type_id:
+            if picking_type not in self.picking_type_ids:
                 return False
         domain = safe_eval(self.rule_domain) or []
         if domain:
