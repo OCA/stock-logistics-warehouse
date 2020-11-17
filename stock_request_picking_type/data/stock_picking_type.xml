@@ -3,6 +3,6 @@
         <field name="name">Stock Requests</field>
         <field name="sequence_id" ref="stock_request.seq_stock_request_order" />
         <field name="code">stock_request_order</field>
-        <field name="sequence">0</field>
+        <field name="sequence_code">SRO</field>
     </record>
 </odoo>

@@ -15,9 +15,6 @@ class StockPickingType(models.Model):
     count_sr_late = fields.Integer(string="Late", compute="_compute_sr_count")
 
     def _compute_sr_count(self):
-        types = self.filtered(lambda picking: picking.code == "stock_request_order")
-        if not types:
-            return
         domains = {
             "count_sr_todo": [("state", "=", "submitted")],
             "count_sr_open": [("state", "=", "open")],
@@ -41,7 +38,7 @@ class StockPickingType(models.Model):
                 and x["picking_type_id"][0]: x["picking_type_id_count"]
                 for x in data
             }
-            for record in types:
+            for record in self:
                 record[field] = count.get(record.id, 0)
 
     def get_stock_request_order_picking_type_action(self):
