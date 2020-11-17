@@ -7,9 +7,9 @@
     "version": "13.0.1.0.0",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
-    "author": "Open Source Integrators, " "Odoo Community Association (OCA)",
+    "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "category": "Warehouse",
-    "depends": ["stock_request_submit"],
+    "depends": ["stock_request"],
     "data": [
         "data/stock_picking_type.xml",
         "views/stock_request_order_views.xml",

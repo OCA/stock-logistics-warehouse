@@ -9,21 +9,16 @@ class StockRequestOrder(models.Model):
 
     @api.model
     def _get_default_picking_type(self):
+        companies = self._context.get("allowed_company_ids", []).copy()
+        companies.append(False)
         return (
             self.env["stock.picking.type"]
             .search(
                 [
                     ("code", "=", "stock_request_order"),
-                    (
-                        "warehouse_id.company_id",
-                        "in",
-                        [
-                            self.env.context.get(
-                                "company_id", self.env.user.company_id.id
-                            ),
-                            False,
-                        ],
-                    ),
+                    "|",
+                    ("warehouse_id.company_id", "in", companies),
+                    ("warehouse_id", "=", False),
                 ],
                 limit=1,
             )
@@ -31,8 +26,8 @@ class StockRequestOrder(models.Model):
         )
 
     picking_type_id = fields.Many2one(
-        "stock.picking.type",
-        "Operation Type",
+        comodel_name="stock.picking.type",
+        string="Operation Type",
         default=_get_default_picking_type,
         required=True,
     )
