@@ -113,37 +113,4 @@
             </search>
         </field>
     </record>
-    <record id="tier_review_form_wiz" model="ir.ui.view">
-        <field name="name">stock.request.order.reviews</field>
-        <field name="model">stock.request.order</field>
-        <field name="arch" type="xml">
-            <form string="Tier Review">
-                <group>
-                    <field name="review_ids" nolabel="1" readonly="1">
-                        <tree
-                            create="false"
-                            decoration-danger="status=='rejected'"
-                            decoration-warning="status=='pending'"
-                            decoration-success="status=='approved'"
-                        >
-                            <field name="sequence" />
-                            <field name="requested_by" />
-                            <field name="review_type" />
-                            <field name="name" />
-                            <field name="status" />
-                            <field name="done_by" />
-                        </tree>
-                    </field>
-                </group>
-                <footer>
-                    <button
-                        name="dismiss_popup"
-                        type="object"
-                        string="Dismiss"
-                        class="oe_highlight"
-                    />
-                </footer>
-            </form>
-        </field>
-    </record>
 </odoo>
