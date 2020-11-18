@@ -53,6 +53,7 @@ setuptools.setup(
         'odoo13-addon-stock_request_direction',
         'odoo13-addon-stock_request_kanban',
         'odoo13-addon-stock_request_mrp',
+        'odoo13-addon-stock_request_picking_type',
         'odoo13-addon-stock_request_purchase',
         'odoo13-addon-stock_request_submit',
         'odoo13-addon-stock_request_tier_validation',
