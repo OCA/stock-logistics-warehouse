@@ -26,12 +26,7 @@ msgid "Action"
 msgstr ""
 
 #. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Buy"
-msgstr ""
-
-#. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
+#: model:ir.model.fields.selection,name:stock_mts_mto_rule.selection__stock_rule__action__split_procurement
 msgid "Choose between MTS and MTO"
 msgstr "Izaberite između MTO i MTS pravila"
 
@@ -44,7 +39,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_rule.py:28
+#: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
 #, python-format
 msgid ""
 "Inconsistency between the source locations of the mts and mto rules linked "
@@ -67,42 +62,22 @@ msgid "MTS Rule"
 msgstr "MTS pravilo"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:36
+#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
 #, python-format
 msgid "MTS+MTO"
 msgstr "MTS+MTO"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:57
+#: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
 #: model:stock.location.route,name:stock_mts_mto_rule.route_mto_mts
 #, python-format
 msgid "Make To Order + Make To Stock"
 msgstr "Make To Order + Make To Stock"
 
 #. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Manufacture"
-msgstr ""
-
-#. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_rule.py:23
+#: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
-msgstr ""
-
-#. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Pull & Push"
-msgstr ""
-
-#. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Pull From"
-msgstr ""
-
-#. module: stock_mts_mto_rule
-#: selection:stock.rule,action:0
-msgid "Push To"
 msgstr ""
 
 #. module: stock_mts_mto_rule
