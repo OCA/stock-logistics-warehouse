@@ -143,6 +143,7 @@ class StockMoveLocationWizard(models.TransientModel):
             "product_uom_qty": qty,
             "picking_id": picking.id,
             "location_move": True,
+            "picking_type_id": picking.picking_type_id.id,
         }
 
     @api.multi
