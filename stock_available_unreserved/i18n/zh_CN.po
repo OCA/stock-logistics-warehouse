@@ -86,7 +86,6 @@ msgstr "未预留"
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__unreserved_quantity
 #, fuzzy
-#| msgid "Unreserved"
 msgid "Unreserved quantity"
 msgstr "未预留"
 
