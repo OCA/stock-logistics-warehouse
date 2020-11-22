@@ -27,14 +27,12 @@ msgstr "Crear grupo de abastecimiento automáticamene"
 #. module: procurement_auto_create_group
 #: code:addons/procurement_auto_create_group/models/procurement_group.py:0
 #, fuzzy, python-format
-#| msgid "No sequence defined for procurement group"
 msgid "No sequence defined for procurement group."
 msgstr "No se ha definido una secuencia para el grupo de abastecimiento"
 
 #. module: procurement_auto_create_group
 #: model:ir.model,name:procurement_auto_create_group.model_procurement_group
 #, fuzzy
-#| msgid "Procurement Rule"
 msgid "Procurement Group"
 msgstr "Regla de abastecimiento"
 
