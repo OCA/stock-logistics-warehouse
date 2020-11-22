@@ -21,14 +21,12 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants
 #, fuzzy
-#| msgid "Manual Quants"
 msgid "Assign Manual Quants"
 msgstr "Quants manuales"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants_lines
 #, fuzzy
-#| msgid "assign.manual.quants.lines"
 msgid "Assign Manual Quants Lines"
 msgstr "assign.manual.quants.lines"
 
