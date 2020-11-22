@@ -91,7 +91,6 @@ msgstr "Producto"
 #. module: stock_location_limit_product
 #: model:ir.model,name:stock_location_limit_product.model_product_template
 #, fuzzy
-#| msgid "Product"
 msgid "Product Template"
 msgstr "Producto"
 
