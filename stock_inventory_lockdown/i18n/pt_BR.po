@@ -23,9 +23,6 @@ msgstr ""
 #. module: stock_inventory_lockdown
 #: code:addons/stock_inventory_lockdown/models/stock_move.py:0
 #, fuzzy, python-format
-#| msgid ""
-#| "An inventory is being conducted at the following location(s):\n"
-#| "%s"
 msgid ""
 "An inventory is being conducted at the following location(s):\n"
 " - %s"
