@@ -62,7 +62,6 @@ msgstr "Ziellagerort"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_destination_location_disable
 #, fuzzy
-#| msgid "Destination Location"
 msgid "Destination Location Disable"
 msgstr "Ziellagerort"
 
@@ -76,7 +75,6 @@ msgstr "Anzeigename"
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_edit_locations
 #: model:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 #, fuzzy
-#| msgid "Origin Location"
 msgid "Edit Locations"
 msgstr "Quelllagerort"
 
@@ -165,7 +163,6 @@ msgstr "Quelllagerort"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_origin_location_disable
 #, fuzzy
-#| msgid "Origin Location"
 msgid "Origin Location Disable"
 msgstr "Quelllagerort"
 
