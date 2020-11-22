@@ -226,7 +226,6 @@ msgstr "ID"
 #: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model:ir.ui.view,arch_db:stock_request.stock_request_search
 #, fuzzy
-#| msgid "In progress"
 msgid "In Progress"
 msgstr "En progreso"
 
@@ -410,7 +409,6 @@ msgstr "Compras"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_qty_cancelled
 #, fuzzy
-#| msgid "Cancelled"
 msgid "Qty Cancelled"
 msgstr "Cancelado"
 
@@ -434,7 +432,6 @@ msgstr "Cantidad"
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request_qty_cancelled
 #, fuzzy
-#| msgid "Quantity completed"
 msgid "Quantity cancelled"
 msgstr "Cantidad completada"
 
@@ -670,7 +667,6 @@ msgstr "Integración de solicitudes de existencias con tarjetas Kanbans"
 #. module: stock_request
 #: model:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #, fuzzy
-#| msgid "Stock Requests Search"
 msgid "Stock Requests Order Search"
 msgstr "Buscar solicitudes de existencias"
 
