@@ -80,7 +80,6 @@ msgstr "Bestandsanforderungen"
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_stock_rule
 #, fuzzy
-#| msgid "Stock Request"
 msgid "Stock Rule"
 msgstr "Bestandsanforderung"
 
