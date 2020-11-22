@@ -34,7 +34,6 @@ msgstr ""
 #. module: procurement_auto_create_group
 #: model:ir.model,name:procurement_auto_create_group.model_procurement_group
 #, fuzzy
-#| msgid "Procurement Rule"
 msgid "Procurement Group"
 msgstr "Oskrbovalno pravilo"
 
