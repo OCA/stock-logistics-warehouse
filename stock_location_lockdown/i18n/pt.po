@@ -19,7 +19,6 @@ msgstr ""
 #. module: stock_location_lockdown
 #: model:ir.model.fields,field_description:stock_location_lockdown.field_stock_location__block_stock_entrance
 #, fuzzy
-#| msgid "Block stock entrance"
 msgid "Block Stock Entrance"
 msgstr "Bloquear entradas de stock"
 
