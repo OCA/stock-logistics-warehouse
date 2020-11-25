@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_warehouse_orderpoint_stock_info_unreserved
+# 	* stock_warehouse_orderpoint_stock_info_unreserved
 #
 msgid ""
 msgstr ""
@@ -23,5 +23,6 @@ msgstr "最小库存规则"
 
 #. module: stock_warehouse_orderpoint_stock_info_unreserved
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info_unreserved.field_stock_warehouse_orderpoint__product_location_qty_available_not_res
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info_unreserved.field_stock_warehouse_orderpoint_template__product_location_qty_available_not_res
 msgid "Quantity On Location (Unreserved)"
 msgstr "位置数量（未预留）"
