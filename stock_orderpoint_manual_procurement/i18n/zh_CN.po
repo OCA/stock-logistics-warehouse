@@ -120,6 +120,7 @@ msgstr "计划日期"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_qty
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_qty
 msgid "Procure Recommendation"
 msgstr "获取推荐"
 
@@ -152,6 +153,7 @@ msgstr "数量必须为正数。"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_date
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_date
 msgid "Recommended Request Date"
 msgstr "引用请求日期"
 
