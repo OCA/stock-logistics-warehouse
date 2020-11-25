@@ -21,11 +21,13 @@ msgstr ""
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__virtual_location_qty
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__virtual_location_qty
 msgid "Forecast On Location"
 msgstr "Previsto en ubicació"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__incoming_location_qty
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__incoming_location_qty
 msgid "Incoming On Location"
 msgstr "Entrada en ubicación"
 
@@ -36,6 +38,7 @@ msgstr "Regla de inventario mínimo"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__outgoing_location_qty
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__outgoing_location_qty
 msgid "Outgoing On Location"
 msgstr "Salida de ubicación"
 
@@ -46,16 +49,19 @@ msgstr "Producto"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__product_category
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__product_category
 #: model_terms:ir.ui.view,arch_db:stock_warehouse_orderpoint_stock_info.warehouse_orderpoint_search
 msgid "Product Category"
 msgstr "Categoría de producto"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__product_location_qty
+#: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__product_location_qty
 msgid "Quantity On Location"
 msgstr "Cantidad en ubicación"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,help:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__product_category
+#: model:ir.model.fields,help:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__product_category
 msgid "Select category for the current product"
 msgstr "Seleccione la categoría del producto actual"
