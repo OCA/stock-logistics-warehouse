@@ -1,0 +1,88 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_archive_constraint
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-08 09:03+0000\n"
+"PO-Revision-Date: 2021-01-08 10:06+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: stock_archive_constraint
+#: model:ir.model,name:stock_archive_constraint.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicaciones de inventario"
+
+#. module: stock_archive_constraint
+#: code:addons/stock_archive_constraint/models/stock_location.py:41
+#, python-format
+msgid ""
+"It is not possible to archive location '%s' which has associated picking "
+"lines."
+msgstr ""
+"No es posible archivar la ubicación '%s' que tiene líneas de albaranes "
+"asociadas."
+
+#. module: stock_archive_constraint
+#: code:addons/stock_archive_constraint/models/stock_location.py:24
+#, python-format
+msgid ""
+"It is not possible to archive location '%s' which has associated stock "
+"quantities."
+msgstr ""
+"No es posible archivar la ubicación '%s' que tiene asociadas cantidades "
+"de stock."
+
+#. module: stock_archive_constraint
+#: code:addons/stock_archive_constraint/models/stock_location.py:58
+#, python-format
+msgid ""
+"It is not possible to archive location '%s' which has associated stock "
+"reservations."
+msgstr ""
+"No es posible archivar la ubicación '%s' que tiene reservas de stock "
+"asociadas."
+
+#. module: stock_archive_constraint
+#: code:addons/stock_archive_constraint/models/product_product.py:36
+#, python-format
+msgid ""
+"It is not possible to archive product '%s' which has associated picking "
+"lines."
+msgstr ""
+"No es posible archivar el producto '%s' que tiene líneas de albaranes "
+"asociadas."
+
+#. module: stock_archive_constraint
+#: code:addons/stock_archive_constraint/models/product_product.py:22
+#, python-format
+msgid ""
+"It is not possible to archive product '%s' which has associated stock "
+"quantities."
+msgstr ""
+"No es posible archivar el producto '%s' que tiene asociadas cantidades "
+"de stock."
+
+#. module: stock_archive_constraint
+#: code:addons/stock_archive_constraint/models/product_product.py:50
+#, python-format
+msgid ""
+"It is not possible to archive product '%s' which has associated stock "
+"reservations."
+msgstr ""
+"No es posible archivar el producto '%s' que tiene reservas de stock "
+"asociadas."
+
+#. module: stock_archive_constraint
+#: model:ir.model,name:stock_archive_constraint.model_product_product
+msgid "Product"
+msgstr "Producto"
