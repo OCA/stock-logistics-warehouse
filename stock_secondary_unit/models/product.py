@@ -40,3 +40,9 @@ class ProductTemplate(models.Model):
 class ProductProduct(models.Model):
     _inherit = ["product.product", "stock.product.secondary.unit"]
     _name = "product.product"
+
+    stock_secondary_uom_id = fields.Many2one(
+        comodel_name="product.secondary.unit",
+        string="Second unit for inventory",
+        related="product_tmpl_id.stock_secondary_uom_id",
+    )
