@@ -126,6 +126,14 @@ msgid "Created by"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_operation_base.py:0
+#, python-format
+msgid ""
+"Created from backorder <a href=# data-oe-model=stock.picking data-oe-"
+"id=%d>%s</a>."
+msgstr ""
+
+#. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__create_date
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__create_date
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__create_date
