@@ -13,13 +13,13 @@
                     <div>
                         <label for="edit_locations">
                 Edit Locations
-              </label>
+            </label>
                         <field name="edit_locations" widget="boolean_toggle" />
                     </div>
                     <div groups="stock.group_stock_multi_locations">
                         <label for="apply_putaway_strategy">
                 Apply putaway strategy for moving products
-              </label>
+            </label>
                         <field name="apply_putaway_strategy" widget="boolean_toggle" />
                     </div>
                     <group name="picking_type">
@@ -142,10 +142,11 @@
         <field name="res_model">wiz.stock.move.location</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+        <field name="context">{}</field>
     </record>
     <menuitem
         id="menuitem_move_location"
-        string="Move from location..."
+        name="Move from location..."
         parent="stock.menu_stock_warehouse_mgmt"
         action="wiz_stock_move_location_action"
         sequence="99"

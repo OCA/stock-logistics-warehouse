@@ -1,5 +1,5 @@
 * A new menu item Stock > Move from location... opens a wizard
-  where 2 location can be specified.
+  where 2 locations can be specified.
 * Select origin and destination locations and press "IMMEDIATE TRANSFER" or "PLANNED TRANSFER"
 * Press `ADD ALL` button to add all products available
 * Those lines can be edited. Move quantity can't be more than a max available quantity
@@ -15,7 +15,7 @@ If you want to transfer a full quant:
    or `Inventory > Reporting > Inventory`, the quants view will be
    opened.
 
-*  Select the quants which you want move to another location
+*  Select the quantities which you want move to another location
 
 If you go to the Inventory Dashboard you can see the button "Move from location"
 in each of the picking types (only applicable to internal transfers). Press it
