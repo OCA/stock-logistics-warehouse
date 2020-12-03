@@ -56,6 +56,9 @@ class AssignManualQuants(models.TransientModel):
             ml.qty_done = ml.product_qty
         move._recompute_state()
         move.mapped('picking_id')._compute_state()
+        # after confirm, the data is useless, so clear the useless data
+        self.quants_lines.unlink()
+        self.unlink()
         return {}
 
     @api.model

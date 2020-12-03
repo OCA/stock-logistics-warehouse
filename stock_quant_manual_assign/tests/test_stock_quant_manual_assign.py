@@ -92,8 +92,8 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertEqual(wizard.lines_qty, 150.0)
         self.assertEqual(wizard.move_qty, 250.0)
         wizard.assign_quants()
-        self.assertAlmostEqual(len(self.move.move_line_ids),
-                               len(wizard.quants_lines.filtered('selected')))
+        self.assertAlmostEqual(len(self.move.move_line_ids), 2,
+                               'There are 2 quants selected')
 
     def test_quant_assign_wizard_after_availability_check(self):
         self.move._action_assign()
