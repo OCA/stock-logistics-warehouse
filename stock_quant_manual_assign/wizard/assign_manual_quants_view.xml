@@ -43,12 +43,12 @@
             </form>
         </field>
     </record>
-    <act_window
-        name="Manual assignment"
-        res_model="assign.manual.quants"
-        binding_model="stock.move"
-        view_mode="form"
-        target="new"
-        id="assign_manual_quants_action"
-    />
+
+    <record id="assign_manual_quants_action" model="ir.actions.act_window">
+        <field name="name">Manual assignment</field>
+        <field name="res_model">assign.manual.quants</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
 </odoo>

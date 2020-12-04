@@ -51,7 +51,10 @@ class AssignManualQuants(models.TransientModel):
     quants_lines = fields.One2many(
         "assign.manual.quants.lines", "assign_wizard", string="Quants"
     )
-    move_id = fields.Many2one(comodel_name="stock.move", string="Move",)
+    move_id = fields.Many2one(
+        comodel_name="stock.move",
+        string="Move",
+    )
 
     def assign_quants(self):
         move = self.move_id
@@ -63,6 +66,9 @@ class AssignManualQuants(models.TransientModel):
             ml.qty_done = ml.product_qty
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
+        # after confirm, the data is useless, so clear the useless data
+        self.quants_lines.unlink()
+        self.unlink()
         return {}
 
     @api.model
@@ -117,7 +123,10 @@ class AssignManualQuantsLines(models.TransientModel):
         ondelete="cascade",
     )
     quant_id = fields.Many2one(
-        comodel_name="stock.quant", string="Quant", required=True, ondelete="cascade",
+        comodel_name="stock.quant",
+        string="Quant",
+        required=True,
+        ondelete="cascade",
     )
     location_id = fields.Many2one(
         comodel_name="stock.location",
@@ -145,7 +154,9 @@ class AssignManualQuantsLines(models.TransientModel):
     )
     # This is not correctly shown as related or computed, so we make it regular
     on_hand = fields.Float(
-        readonly=True, string="On Hand", digits="Product Unit of Measure",
+        readonly=True,
+        string="On Hand",
+        digits="Product Unit of Measure",
     )
     reserved = fields.Float(string="Others Reserved", digits="Product Unit of Measure")
     selected = fields.Boolean(string="Select")

@@ -10,7 +10,7 @@
                     name="%(assign_manual_quants_action)d"
                     type="action"
                     icon="fa-tags"
-                    string="Manual Quants"
+                    title="Manual Quants"
                     options='{"warn": true}'
                     attrs="{'invisible':['|',('picking_code','=','incoming'),('state','not in',('confirmed','assigned','partially_available'))]}"
                 />
