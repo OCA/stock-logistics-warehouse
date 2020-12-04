@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -62,6 +62,8 @@ msgid "Destination Location Disable"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__display_name
 msgid "Display Name"
@@ -74,6 +76,8 @@ msgid "Edit Locations"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
 msgid "ID"
@@ -90,6 +94,8 @@ msgid "Inventory Details"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line____last_update
 msgid "Last Modified on"
