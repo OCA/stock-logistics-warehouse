@@ -8,6 +8,7 @@
                 <field name='quants_lines' colspan="4">
                     <tree editable="top" delete="0" create="0">
                         <field name="lot_id" />
+                        <field name="quant_id" invisible="1" />
                         <field name="package_id" />
                         <field name="owner_id" />
                         <field name="location_id" />
@@ -43,12 +44,12 @@
             </form>
         </field>
     </record>
-    <act_window
-        name="Manual assignment"
-        res_model="assign.manual.quants"
-        binding_model="stock.move"
-        view_mode="form"
-        target="new"
-        id="assign_manual_quants_action"
-    />
+
+    <record id="assign_manual_quants_action" model="ir.actions.act_window">
+        <field name="name">Manual assignment</field>
+        <field name="res_model">assign.manual.quants</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
 </odoo>
