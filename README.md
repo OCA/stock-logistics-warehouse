@@ -15,7 +15,11 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[stock_move_location](stock_move_location/) | 14.0.1.0.0 | This module allows to move all stock in a stock location to an other one.
 
 [//]: # (end addons)
 
