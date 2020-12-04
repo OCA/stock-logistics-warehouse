@@ -51,7 +51,10 @@ class AssignManualQuants(models.TransientModel):
     quants_lines = fields.One2many(
         "assign.manual.quants.lines", "assign_wizard", string="Quants"
     )
-    move_id = fields.Many2one(comodel_name="stock.move", string="Move",)
+    move_id = fields.Many2one(
+        comodel_name="stock.move",
+        string="Move",
+    )
 
     def assign_quants(self):
         move = self.move_id
@@ -76,7 +79,7 @@ class AssignManualQuants(models.TransientModel):
                 ("quantity", ">", 0),
             ]
         )
-        quants_lines = []
+        q_lines = []
         for quant in available_quants:
             line = {
                 "quant_id": quant.id,
@@ -98,10 +101,8 @@ class AssignManualQuants(models.TransientModel):
             line["qty"] = sum(move_lines.mapped("product_uom_qty"))
             line["selected"] = bool(line["qty"])
             line["reserved"] = quant.reserved_quantity - line["qty"]
-            quants_lines.append(line)
-        res.update(
-            {"quants_lines": [(0, 0, x) for x in quants_lines], "move_id": move.id}
-        )
+            q_lines.append(line)
+        res.update({"quants_lines": [(0, 0, x) for x in q_lines], "move_id": move.id})
         return res
 
 
@@ -117,7 +118,10 @@ class AssignManualQuantsLines(models.TransientModel):
         ondelete="cascade",
     )
     quant_id = fields.Many2one(
-        comodel_name="stock.quant", string="Quant", required=True, ondelete="cascade",
+        comodel_name="stock.quant",
+        string="Quant",
+        required=True,
+        ondelete="cascade",
     )
     location_id = fields.Many2one(
         comodel_name="stock.location",
@@ -145,7 +149,9 @@ class AssignManualQuantsLines(models.TransientModel):
     )
     # This is not correctly shown as related or computed, so we make it regular
     on_hand = fields.Float(
-        readonly=True, string="On Hand", digits="Product Unit of Measure",
+        readonly=True,
+        string="On Hand",
+        digits="Product Unit of Measure",
     )
     reserved = fields.Float(string="Others Reserved", digits="Product Unit of Measure")
     selected = fields.Boolean(string="Select")
