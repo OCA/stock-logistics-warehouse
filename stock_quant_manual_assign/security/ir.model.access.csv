@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_assign_manual_quants_user,access_assign_manual_quants,model_assign_manual_quants,stock.group_stock_user,1,1,1,1
+access_assign_manual_quants_lines_user,access_assign_manual_quants_lines,model_assign_manual_quants_lines,stock.group_stock_user,1,1,1,1
