@@ -31,6 +31,11 @@ msgid "Active"
 msgstr ""
 
 #. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__allowed_location_ids
+msgid "Allowed Location"
+msgstr ""
+
+#. module: stock_orderpoint_generator
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
 msgid "Apply"
 msgstr "Aplicar"
@@ -43,14 +48,12 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__auto_max_date_start
 #, fuzzy
-#| msgid "Auto Maximum Criteria"
 msgid "Auto Max Date Start"
 msgstr "Criterio Auto Máximo"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__auto_max_qty_criteria
 #, fuzzy
-#| msgid "Auto Maximum Criteria"
 msgid "Auto Max Qty Criteria"
 msgstr "Criterio Auto Máximo"
 
@@ -72,14 +75,12 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__auto_min_date_start
 #, fuzzy
-#| msgid "Auto Minimum Criteria"
 msgid "Auto Min Date Start"
 msgstr "Criterio Auto Mínimo"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__auto_min_qty_criteria
 #, fuzzy
-#| msgid "Auto Minimum Criteria"
 msgid "Auto Min Qty Criteria"
 msgstr "Criterio Auto Mínimo"
 
@@ -111,8 +112,8 @@ msgid "Automatic Reordering Rules"
 msgstr "Reglas de Reabastecimiento Automáticas"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__avg
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__avg
 msgid "Average"
 msgstr "Media"
 
@@ -122,7 +123,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: stock_orderpoint_generator
-#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:37
+#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:0
 #, python-format
 msgid "Cannot apply because some of selected products has multiple variants."
 msgstr ""
@@ -162,19 +163,8 @@ msgid "Criteria"
 msgstr "Criterio"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,lead_type:0
-msgid "Day(s) to get the products"
-msgstr ""
-
-#. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,lead_type:0
-msgid "Day(s) to purchase"
-msgstr ""
-
-#. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom
 #, fuzzy
-#| msgid "Default Unit of Measure used for all stock operation."
 msgid "Default unit of measure used for all stock operations."
 msgstr ""
 "Unidad de medida predeterminada utilizada para todas las operaciones de "
@@ -254,8 +244,8 @@ msgid "Location"
 msgstr "Ubicación"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__max
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__max
 msgid "Maximum"
 msgstr "Máximo"
 
@@ -265,8 +255,8 @@ msgid "Maximum Quantity"
 msgstr "Cantidad máxima"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__min
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__min
 msgid "Minimum"
 msgstr "Mínimo"
 
@@ -281,18 +271,14 @@ msgid "Misc"
 msgstr "Varios"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__median
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__median
 msgid "Most frequent"
 msgstr "Más frecuente"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__group_id
 #, fuzzy
-#| msgid ""
-#| "Moves created through this orderpoint will be put in this procurement "
-#| "group. If none is given, the moves generated by procurement rules will be "
-#| "grouped into one big picking."
 msgid ""
 "Moves created through this orderpoint will be put in this procurement group. "
 "If none is given, the moves generated by stock rules will be grouped into "
@@ -332,9 +318,9 @@ msgid "Product"
 msgstr "Producto"
 
 #. module: stock_orderpoint_generator
-#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom
-msgid "Product Unit of Measure"
-msgstr "Unidad de medida"
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom_name
+msgid "Product unit of measure label"
+msgstr ""
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__auto_product_ids
@@ -345,7 +331,6 @@ msgstr "Productos"
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__qty_multiple
 #, fuzzy
-#| msgid "Quantity Multiple"
 msgid "Qty Multiple"
 msgstr "Múltiplo de la cantidad"
 
@@ -437,6 +422,11 @@ msgid "To"
 msgstr "Para"
 
 #. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__warehouse_id
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_search
 msgid "Warehouse"
@@ -466,13 +456,10 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_min_qty
 msgid ""
-"When the virtual stock goes below the Min Quantity specified for this field, "
-"Odoo generates a procurement to bring the forecasted quantity to the Max "
-"Quantity."
+"When the virtual stock equals to or goes below the Min Quantity specified "
+"for this field, Odoo generates a procurement to bring the forecasted "
+"quantity to the Max Quantity."
 msgstr ""
-"Cuando el stock virtual esté por debajo de la cantidad mínima especificada "
-"en este campo, Odoo generará un abastecimiento para llevar la cantidad "
-"prevista a la cantidad máxima."
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_max_qty
@@ -484,3 +471,15 @@ msgstr ""
 "Cuando el stock virtual esté por debajo de la cantidad, Odoo generará un "
 "abastecimiento para llevar la cantidad prevista a la cantidad especificada "
 "como aquí como máxima."
+
+#~ msgid "Product Unit of Measure"
+#~ msgstr "Unidad de medida"
+
+#~ msgid ""
+#~ "When the virtual stock goes below the Min Quantity specified for this "
+#~ "field, Odoo generates a procurement to bring the forecasted quantity to "
+#~ "the Max Quantity."
+#~ msgstr ""
+#~ "Cuando el stock virtual esté por debajo de la cantidad mínima "
+#~ "especificada en este campo, Odoo generará un abastecimiento para llevar "
+#~ "la cantidad prevista a la cantidad máxima."
