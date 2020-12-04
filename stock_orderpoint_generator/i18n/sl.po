@@ -10,14 +10,14 @@ msgstr ""
 "POT-Creation-Date: 2017-07-15 10:54+0000\n"
 "PO-Revision-Date: 2020-08-11 10:59+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/"
-"OCA-stock-logistics-warehouse-9-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-"
+"warehouse-9-0/language/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_orderpoint_generator
@@ -31,6 +31,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__active
 msgid "Active"
 msgstr "Aktivno"
+
+#. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__allowed_location_ids
+msgid "Allowed Location"
+msgstr ""
 
 #. module: stock_orderpoint_generator
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
@@ -103,8 +108,8 @@ msgid "Automatic Reordering Rules"
 msgstr ""
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__avg
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__avg
 msgid "Average"
 msgstr ""
 
@@ -114,7 +119,7 @@ msgid "Cancel"
 msgstr "Preklic"
 
 #. module: stock_orderpoint_generator
-#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:37
+#: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:0
 #, python-format
 msgid "Cannot apply because some of selected products has multiple variants."
 msgstr ""
@@ -151,16 +156,6 @@ msgstr "Ustvarjeno"
 #. module: stock_orderpoint_generator
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_form
 msgid "Criteria"
-msgstr ""
-
-#. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,lead_type:0
-msgid "Day(s) to get the products"
-msgstr ""
-
-#. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,lead_type:0
-msgid "Day(s) to purchase"
 msgstr ""
 
 #. module: stock_orderpoint_generator
@@ -242,8 +237,8 @@ msgid "Location"
 msgstr "Lokacija"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__max
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__max
 msgid "Maximum"
 msgstr "Maksimum"
 
@@ -253,8 +248,8 @@ msgid "Maximum Quantity"
 msgstr "Maksimalna količina"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__min
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__min
 msgid "Minimum"
 msgstr "Minimum"
 
@@ -269,8 +264,8 @@ msgid "Misc"
 msgstr "Razno"
 
 #. module: stock_orderpoint_generator
-#: selection:stock.warehouse.orderpoint.template,auto_max_qty_criteria:0
-#: selection:stock.warehouse.orderpoint.template,auto_min_qty_criteria:0
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_max_qty_criteria__median
+#: model:ir.model.fields.selection,name:stock_orderpoint_generator.selection__stock_warehouse_orderpoint_template__auto_min_qty_criteria__median
 msgid "Most frequent"
 msgstr ""
 
@@ -314,9 +309,9 @@ msgid "Product"
 msgstr "Proizvod"
 
 #. module: stock_orderpoint_generator
-#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom
-msgid "Product Unit of Measure"
-msgstr "EM proizvoda"
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom_name
+msgid "Product unit of measure label"
+msgstr ""
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__auto_product_ids
@@ -416,6 +411,11 @@ msgid "To"
 msgstr ""
 
 #. module: stock_orderpoint_generator
+#: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__warehouse_id
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.view_warehouse_orderpoint_template_search
 msgid "Warehouse"
@@ -439,13 +439,10 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_min_qty
 msgid ""
-"When the virtual stock goes below the Min Quantity specified for this field, "
-"Odoo generates a procurement to bring the forecasted quantity to the Max "
-"Quantity."
+"When the virtual stock equals to or goes below the Min Quantity specified "
+"for this field, Odoo generates a procurement to bring the forecasted "
+"quantity to the Max Quantity."
 msgstr ""
-"Ko virtualna zaloga poide pod min. količino določeno za to polje, Odoo "
-"generira oskrbovanje, da bi pripeljal napovedano količino do maksimalne "
-"količine."
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_max_qty
@@ -457,6 +454,18 @@ msgstr ""
 "Ko virtualna zaloga poide pod min. količino določeno za to polje, Odoo "
 "generira oskrbovanje, da bi pripeljal napovedano količino do količine, ki je "
 "določena kot maksimalna količina."
+
+#~ msgid "Product Unit of Measure"
+#~ msgstr "EM proizvoda"
+
+#~ msgid ""
+#~ "When the virtual stock goes below the Min Quantity specified for this "
+#~ "field, Odoo generates a procurement to bring the forecasted quantity to "
+#~ "the Max Quantity."
+#~ msgstr ""
+#~ "Ko virtualna zaloga poide pod min. količino določeno za to polje, Odoo "
+#~ "generira oskrbovanje, da bi pripeljal napovedano količino do maksimalne "
+#~ "količine."
 
 #~ msgid "Created Procurements"
 #~ msgstr "Ustvarjene oskrbe"
