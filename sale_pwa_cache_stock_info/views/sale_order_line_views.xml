@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_order_line_view_form_readonly" model="ir.ui.view">
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.sale_order_line_view_form_readonly"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="before">
+                <group>
+                    <field name="product_type" invisible="1"/>
+                    <field name="virtual_available_at_date" invisible="1"/>
+                    <field name="qty_available_today" invisible="1"/>
+                    <field name="free_qty_today" invisible="1"/>
+                    <field name="scheduled_date" invisible="1"/>
+                    <field name="warehouse_id" invisible="1"/>
+                    <field name="qty_to_deliver" invisible="1"/>
+                    <field name="is_mto" invisible="1"/>
+                    <field name="display_qty_widget" invisible="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
