@@ -134,7 +134,7 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertAlmostEqual(
             len(self.move.move_line_ids),
             2,
-            "Three are 2 quants selected",
+            "There are 2 quants selected",
         )
 
     def test_quant_assign_wizard_after_availability_check(self):
