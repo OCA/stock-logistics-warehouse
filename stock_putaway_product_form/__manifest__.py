@@ -2,7 +2,7 @@
 {
     "name": "Putaway strategies on product form view",
     "summary": "Edit putaway strategies directly from the product form view",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Inventory",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Akretion, Odoo Community Association (OCA)",
