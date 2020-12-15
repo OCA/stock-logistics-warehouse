@@ -27,14 +27,17 @@ class TestProductInventoryAccountReconcile(TransactionCase):
         # Get required Model data
         self.company = self.env.ref('base.main_company')
 
-        location = self.stock_location_model.search([('name', '=', 'WH')])
+        location = self.stock_location_model.search(
+            [('name', '=', 'WH')])
         self.location = self.stock_location_model.search([('location_id', '=',
                                                            location.id)])
 
         # Account types
-        expense_type = self.env.ref('account.data_account_type_expenses')
+        expense_type = self.env.ref(
+            'account.data_account_type_expenses')
         equity_type = self.env.ref('account.data_account_type_equity')
-        asset_type = self.env.ref('account.data_account_type_fixed_assets')
+        asset_type = self.env.ref(
+            'account.data_account_type_fixed_assets')
 
         # Create account for Goods Received Not Invoiced
         name = 'Goods Received Not Invoiced'
@@ -79,7 +82,7 @@ class TestProductInventoryAccountReconcile(TransactionCase):
 
         # Default journal
         journals = self.env['account.journal'].search([('type', '=',
-                                                       'general')])
+                                                        'general')])
         self.journal = journals[0]
 
         # Create a journal entry
@@ -164,7 +167,8 @@ class TestProductInventoryAccountReconcile(TransactionCase):
 
     def test_reconcile_product(self):
         """Test that it is possible to reconcile for a product"""
-        self.assertEquals(self.product_average_1.valuation_discrepancy, -100.0)
+        self.assertEquals(
+            self.product_average_1.valuation_discrepancy, -100.0)
 
         wiz = self.env['stock.valuation.account.mass.adjust'].with_context(
             active_model="product.product",
@@ -174,7 +178,8 @@ class TestProductInventoryAccountReconcile(TransactionCase):
                 'decrease_account_id': self.account_revaluation.id,
                 'journal_id': self.journal.id,
                 'remarks': 'Test'
-                })
+            })
         wiz.process()
         self.product_average_1.refresh()
-        self.assertEquals(self.product_average_1.valuation_discrepancy, 0.0)
+        self.assertEquals(
+            self.product_average_1.valuation_discrepancy, 0.0)

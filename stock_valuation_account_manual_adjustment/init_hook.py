@@ -17,7 +17,8 @@ def pre_init_hook(cr):
     at least a few hours.
     """
     set_stock_valuation_account_manual_adjustment_in_account_move(cr)
-    set_stock_valuation_account_manual_adjustment_in_account_move_line(cr)
+    set_stock_valuation_account_manual_adjustment_in_account_move_line(
+        cr)
 
 
 def set_stock_valuation_account_manual_adjustment_in_account_move(cr):

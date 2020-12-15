@@ -9,10 +9,11 @@
         <field name="arch" type="xml">
              <form string="Reconcile Inventory Account">
                  <group>
-                     <field name="increase_account_id"/>
-                     <field name="decrease_account_id"/>
-                     <field name="journal_id"/>
+                     <field name="increase_account_id" domain="[('company_id', '=', company_id)]"/>
+                     <field name="decrease_account_id" domain="[('company_id', '=', company_id)]"/>
+                     <field name="journal_id" domain="[('company_id', '=', company_id)]"/>
                      <field name="remarks"/>
+                     <field name="company_id" invisible="1"/>
                  </group>
                  <newline/>
                  <footer>
@@ -51,4 +52,3 @@
     </record>
 
 </odoo>
-

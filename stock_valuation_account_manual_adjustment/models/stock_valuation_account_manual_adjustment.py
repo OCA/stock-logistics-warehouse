@@ -94,10 +94,13 @@ class StockValuationAccountManualAdjustment(models.Model):
     def _onchange_product_id(self):
         if self.product_id:
             self.increase_account_id = \
-                self.product_id.categ_id and self.product_id.categ_id.\
+                self.product_id.categ_id and \
+                self.product_id.categ_id.with_context(
+                    force_company=self.env.user.company_id.id).\
                 property_inventory_revaluation_increase_account_categ
             self.decrease_account_id = self.product_id.categ_id and \
-                self.product_id.categ_id.\
+                self.product_id.categ_id.with_context(
+                    force_company=self.env.user.company_id.id).\
                 property_inventory_revaluation_decrease_account_categ
 
     def _prepare_move_data(self, date_move, debit_move_line_data,
@@ -142,24 +145,41 @@ class StockValuationAccountManualAdjustment(models.Model):
         for adj in self:
             if not adj.amount:
                 continue
-            datas = adj.product_id.product_tmpl_id.get_product_accounts()
-            if adj.product_id.valuation_discrepancy <= 0.0:
-                debit_account_id = self.decrease_account_id.id
-                credit_account_id = \
-                    datas['stock_valuation'].id or False
+            datas = adj.product_id.product_tmpl_id.with_context(
+                force_company=self.env.user.company_id.id).get_product_accounts()
+
+            if self.env.context.get('valuation_discrepancy', False):
+                valuation_discrepancy = self.env.context.get(
+                    'valuation_discrepancy')
             else:
-                debit_account_id = \
-                    datas['stock_valuation'].id or False
+                valuation_discrepancy = adj.product_id.valuation_discrepancy
+
+            if valuation_discrepancy <= 0.0:
+                debit_account_id = self.decrease_account_id.id
+                if not self.increase_account_id:
+                    credit_account_id = \
+                        datas['stock_valuation'].id or False
+                else:
+                    credit_account_id = self.increase_account_id.id
+            else:
+                if not self.decrease_account_id:
+                    debit_account_id = \
+                        datas['stock_valuation'].id or False
+                else:
+                    debit_account_id = self.decrease_account_id.id
                 credit_account_id = self.increase_account_id.id
+
             debit_move_line_data = self._prepare_debit_move_line_data(
-                abs(adj.product_id.valuation_discrepancy),
+                abs(valuation_discrepancy),
                 debit_account_id, adj.product_id, today)
             credit_move_line_data = self._prepare_credit_move_line_data(
-                abs(adj.product_id.valuation_discrepancy),
+                abs(valuation_discrepancy),
                 credit_account_id, adj.product_id, today)
-            move_data = self._prepare_move_data(today, debit_move_line_data,
-                                                credit_move_line_data)
+
+            move_data = self._prepare_move_data(
+                today, debit_move_line_data, credit_move_line_data)
             move = self.env['account.move'].create(move_data)
+
             move.post()
             self.post_date = fields.Datetime.now()
             self.state = 'posted'
