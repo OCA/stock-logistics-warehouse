@@ -163,6 +163,11 @@ msgid "Packaging Type"
 msgstr ""
 
 #. module: stock_reserve_rule
+#: model:ir.model,name:stock_reserve_rule.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_quant
 msgid "Quants"
 msgstr ""
@@ -200,6 +205,11 @@ msgstr ""
 #: model:ir.actions.act_window,name:stock_reserve_rule.action_stock_reserve_rule
 #: model:ir.ui.menu,name:stock_reserve_rule.menu_stock_reserve_rule
 msgid "Reservation Rules"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_picking_type__reserve_rule_ids
+msgid "Reserve Rule"
 msgstr ""
 
 #. module: stock_reserve_rule
