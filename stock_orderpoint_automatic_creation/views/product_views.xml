@@ -16,9 +16,9 @@
         <field name="model">product.category</field>
         <field name="inherit_id" ref="product.product_category_form_view"/>
         <field name="arch" type="xml">
-            <field name="type" position="after">
+            <group name="first" position="inside">
                 <field name="create_orderpoints"/>
-            </field>
+            </group>
         </field>
     </record>
 
