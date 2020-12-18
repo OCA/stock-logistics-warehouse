@@ -17,6 +17,7 @@ class TestMtoMtsRoute(TransactionCase):
 
     def test_standard_mto_route(self):
         mto_route = self.env.ref("stock.route_warehouse0_mto")
+        mto_route.active = True
         self.product.route_ids = [(6, 0, [mto_route.id])]
         self.env["procurement.group"].run(
             [
