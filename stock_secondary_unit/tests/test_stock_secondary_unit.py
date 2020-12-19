@@ -1,17 +1,24 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.tests import SavepointCase
+from odoo.tests import Form, SavepointCase, tagged
 
 
+@tagged("-at_install", "post_install")
 class TestProductSecondaryUnit(SavepointCase):
-    at_install = False
-    post_install = True
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # Active multiple units of measure security group for user
+        cls.env.user.groups_id = [(4, cls.env.ref("uom.group_uom").id)]
+        cls.StockPicking = cls.env["stock.picking"]
         cls.warehouse = cls.env.ref("stock.warehouse0")
+        cls.location_supplier = cls.env.ref("stock.stock_location_suppliers")
+        cls.location_stock = cls.env.ref("stock.stock_location_stock")
+        cls.picking_type_in = cls.env.ref("stock.picking_type_in")
+        cls.picking_type_out = cls.env.ref("stock.picking_type_out")
+
         cls.product_uom_kg = cls.env.ref("uom.product_uom_kgm")
+        cls.product_uom_ton = cls.env.ref("uom.product_uom_ton")
         cls.product_uom_unit = cls.env.ref("uom.product_uom_unit")
         ProductAttribute = cls.env["product.attribute"]
         ProductAttributeValue = cls.env["product.attribute.value"]
@@ -34,7 +41,7 @@ class TestProductSecondaryUnit(SavepointCase):
                         0,
                         {
                             "code": "A",
-                            "name": "unit-700",
+                            "name": "unit-500",
                             "uom_id": cls.product_uom_unit.id,
                             "factor": 0.5,
                         },
@@ -47,6 +54,16 @@ class TestProductSecondaryUnit(SavepointCase):
                             "name": "unit-900",
                             "uom_id": cls.product_uom_unit.id,
                             "factor": 0.9,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "code": "C",
+                            "name": "box 10",
+                            "uom_id": cls.product_uom_unit.id,
+                            "factor": 10,
                         },
                     ),
                 ],
@@ -97,22 +114,19 @@ class TestProductSecondaryUnit(SavepointCase):
     def test_03_stock_picking_secondary_unit(self):
         StockPicking = self.env["stock.picking"]
         product1 = self.product_template.product_variant_ids[0]
-        location = self.env.ref("stock.stock_location_suppliers")
-        location_dest = self.env.ref("stock.stock_location_stock")
-        picking_type = self.env.ref("stock.picking_type_in")
         move_vals = {
             "product_id": product1.id,
             "name": product1.display_name,
             "secondary_uom_id": product1.secondary_uom_ids[0].id,
             "product_uom": product1.uom_id.id,
             "product_uom_qty": 10.0,
-            "location_id": location.id,
-            "location_dest_id": location_dest.id,
+            "location_id": self.location_supplier.id,
+            "location_dest_id": self.location_stock.id,
         }
         do_vals = {
-            "location_id": location.id,
-            "location_dest_id": location_dest.id,
-            "picking_type_id": picking_type.id,
+            "location_id": self.location_supplier.id,
+            "location_dest_id": self.location_stock.id,
+            "picking_type_id": self.picking_type_in.id,
             "move_ids_without_package": [
                 (0, None, move_vals),
                 (0, None, move_vals),
@@ -130,3 +144,83 @@ class TestProductSecondaryUnit(SavepointCase):
         )
         self.assertEquals(uom_qty, 20.0)
         self.assertEquals(secondary_uom_qty, 40.0)
+
+    def test_picking_secondary_unit(self):
+        product = self.product_template.product_variant_ids[0]
+        with Form(
+            self.StockPicking.with_context(
+                planned_picking=True, default_picking_type_id=self.picking_type_out.id,
+            )
+        ) as picking_form:
+            with picking_form.move_ids_without_package.new() as move:
+                move.product_id = product
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[0]
+                self.assertEqual(move.product_uom_qty, 0.5)
+                move.secondary_uom_qty = 2
+                self.assertEqual(move.product_uom_qty, 1)
+                move.secondary_uom_id = product.secondary_uom_ids[1]
+                self.assertEqual(move.product_uom_qty, 1.8)
+                move.product_uom_qty = 5
+                self.assertAlmostEqual(move.secondary_uom_qty, 5.56, 2)
+                # Change uom from stock move line
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[2]
+                self.assertEqual(move.product_uom_qty, 10)
+                move.product_uom = self.product_uom_ton
+                self.assertAlmostEqual(move.secondary_uom_qty, 1000, 2)
+
+        picking = picking_form.save()
+        picking.action_confirm()
+        with Form(picking) as picking_form:
+            # Test detail operations
+            with picking_form.move_line_ids_without_package.new() as move:
+                move.product_id = product
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[0]
+                self.assertEqual(move.qty_done, 0.5)
+                move.secondary_uom_qty = 2
+                self.assertEqual(move.qty_done, 1)
+                move.secondary_uom_id = product.secondary_uom_ids[1]
+                self.assertEqual(move.qty_done, 1.8)
+                move.qty_done = 5
+                self.assertAlmostEqual(move.secondary_uom_qty, 5.56, 2)
+
+    def test_secondary_unit_merge_move_diff_uom(self):
+        product = self.product_template.product_variant_ids[0]
+        with Form(
+            self.StockPicking.with_context(
+                planned_picking=True, default_picking_type_id=self.picking_type_out.id,
+            )
+        ) as picking_form:
+            with picking_form.move_ids_without_package.new() as move:
+                move.product_id = product
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[0]
+            with picking_form.move_ids_without_package.new() as move:
+                move.product_id = product
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[1]
+        picking = picking_form.save()
+        picking.action_confirm()
+        self.assertEquals(len(picking.move_lines), 2)
+
+    def test_secondary_unit_merge_move_same_uom(self):
+        product = self.product_template.product_variant_ids[0]
+        with Form(
+            self.StockPicking.with_context(
+                planned_picking=True, default_picking_type_id=self.picking_type_out.id,
+            )
+        ) as picking_form:
+            with picking_form.move_ids_without_package.new() as move:
+                move.product_id = product
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[0]
+            with picking_form.move_ids_without_package.new() as move:
+                move.product_id = product
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[0]
+        picking = picking_form.save()
+        picking.action_confirm()
+        self.assertEquals(len(picking.move_lines), 1)
+        self.assertEquals(picking.move_lines.secondary_uom_qty, 2)
