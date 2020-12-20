@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="stock_request_order_form">
+        <field name="name">stock_request_order.form</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expected_date']" position="before">
+                <field name="partner_id" />
+            </xpath>
+            <xpath expr="//field[@name='stock_request_ids']" position="attributes">
+                <attribute name="context">{
+                    'default_expected_date':expected_date,
+                    'default_picking_policy': picking_policy,
+                    'default_warehouse_id': warehouse_id,
+                    'default_location_id': location_id,
+                    'default_procurement_group_id': procurement_group_id,
+                    'default_company_id': company_id,
+                    'default_state': state,
+                    'default_partner_id': partner_id,
+                }</attribute>
+            </xpath>
+            <xpath expr="//field[@name='stock_request_ids']/tree" position="inside">
+                <field name="partner_id" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
