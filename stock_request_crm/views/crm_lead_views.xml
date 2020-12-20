@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="crm_lead_form">
+        <field name="name">crm_lead.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="create_stock_request"
+                    string="Create Stock Request"
+                    type="object"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_stock_request"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-chain"
+                    attrs="{'invisible':[('stock_request_ids', '=', [])]}"
+                >
+                    <div class="o_stat_info">
+                        <field name="stock_request_count" class="o_stat_value" />
+                        <span
+                            class="o_stat_text"
+                            attrs="{'invisible': [('stock_request_count', '&lt;', 2)]}"
+                        > Stock Requests</span>
+                        <span
+                            class="o_stat_text"
+                            attrs="{'invisible': [('stock_request_count', '&gt;', 1)]}"
+                        > Stock Request</span>
+                        <field name="stock_request_ids" invisible="1" />
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
