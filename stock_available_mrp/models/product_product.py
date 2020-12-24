@@ -41,6 +41,8 @@ class ProductProduct(models.Model):
             )
             if product_boms:
                 product.bom_id = first(product_boms)
+            else:
+                product.bom_id = False
 
     def _compute_available_quantities_dict(self):
         res, stock_dict = super(
