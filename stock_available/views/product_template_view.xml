@@ -81,13 +81,13 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="stock.product_template_kanban_stock_view" />
         <field name="arch" type="xml">
-            <ul position="inside">
-                <li
+            <xpath expr="//div[@name='product_lst_price']" position="after">
+                <div
                     t-if="record.type.raw_value == 'product'"
                 >Available to Promise: <field name="immediately_usable_qty" /> <field
                         name="uom_id"
-                    /></li>
-            </ul>
+                    /></div>
+            </xpath>
         </field>
     </record>
 </odoo>
