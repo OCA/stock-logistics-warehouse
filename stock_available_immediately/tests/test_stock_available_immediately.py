@@ -14,38 +14,36 @@ class TestStockLogisticsWarehouse(TransactionCase):
         in stock, both on product and template.
         """
         moveObj = self.env["stock.move"]
-        productObj = self.env["product.product"]
         templateObj = self.env["product.template"]
         supplier_location = self.env.ref("stock.stock_location_suppliers")
         stock_location = self.env.ref("stock.stock_location_stock")
         customer_location = self.env.ref("stock.stock_location_customers")
         uom_unit = self.env.ref("uom.product_uom_unit")
 
-        # Create product template
-        templateAB = templateObj.create({"name": "templAB", "uom_id": uom_unit.id})
+        # Create product template with 2 variant
+        templateAB = templateObj.create(
+            {"name": "templAB", "uom_id": uom_unit.id, "type": "product"}
+        )
+        self.env["product.template.attribute.line"].create(
+            {
+                "product_tmpl_id": templateAB.id,
+                "attribute_id": self.env.ref("product.product_attribute_2").id,
+                "value_ids": [
+                    (
+                        6,
+                        0,
+                        [
+                            self.env.ref("product.product_attribute_value_3").id,
+                            self.env.ref("product.product_attribute_value_4").id,
+                        ],
+                    )
+                ],
+            }
+        )
 
         # Create product A and B
-        productA = productObj.create(
-            {
-                "name": "product A",
-                "standard_price": 1,
-                "type": "product",
-                "uom_id": uom_unit.id,
-                "default_code": "A",
-                "product_tmpl_id": templateAB.id,
-            }
-        )
-
-        productB = productObj.create(
-            {
-                "name": "product B",
-                "standard_price": 1,
-                "type": "product",
-                "uom_id": uom_unit.id,
-                "default_code": "B",
-                "product_tmpl_id": templateAB.id,
-            }
-        )
+        productA = templateAB.product_variant_ids[0]
+        productB = templateAB.product_variant_ids[1]
 
         # Create a stock move from INCOMING to STOCK
         stockMoveInA = moveObj.create(
