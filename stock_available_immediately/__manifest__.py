@@ -6,8 +6,9 @@
 
 {
     "name": "Ignore planned receptions in quantity available to promise",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "depends": ["stock_available"],
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Camptocamp,Sodexis,Odoo Community Association (OCA),Sergio Díaz",
     "license": "AGPL-3",
     "category": "Hidden",

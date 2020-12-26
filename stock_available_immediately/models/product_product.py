@@ -9,11 +9,8 @@ from odoo import api, models
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    @api.multi
     def _compute_available_quantities_dict(self):
-        res, stock_dict = super(
-            ProductProduct, self
-        )._compute_available_quantities_dict()
+        res, stock_dict = super()._compute_available_quantities_dict()
         for product in self:
             res[product.id]["immediately_usable_qty"] -= stock_dict[product.id][
                 "incoming_qty"
@@ -22,4 +19,4 @@ class ProductProduct(models.Model):
 
     @api.depends("virtual_available", "incoming_qty")
     def _compute_available_quantities(self):
-        return super(ProductProduct, self)._compute_available_quantities()
+        return super()._compute_available_quantities()
