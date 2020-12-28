@@ -1,12 +1,12 @@
 # Copyright 2015 AvanzOSC - Oihane Crucelaegi
 # Copyright 2015 Tecnativa - Pedro M. Baeza
+# Copyright 2020 Iván Todorovich
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tests import common
 
 
-@common.at_install(False)
-@common.post_install(True)
+@common.tagged("-at_install", "post_install")
 class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
     def setUp(self):
         super(TestStockInventoryPreparationFilterCategories, self).setUp()
