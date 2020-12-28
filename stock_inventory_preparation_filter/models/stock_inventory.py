@@ -12,15 +12,15 @@ class StockInventory(models.Model):
 
     @api.model
     def _selection_filter(self):
-        """ Get the list of filter allowed according to the options checked
-        in 'Settings / Warehouse'. """
+        """Get the list of filter allowed according to the options checked
+        in 'Settings / Warehouse'."""
         res_filter = [
             ("products", _("All products")),
             ("categories", _("Selected Categories")),
             ("domain", _("Filtered Products")),
         ]
         if self.user_has_groups("stock.group_production_lot"):
-            res_filter.append(("lots", _("Selected Lots")))
+            res_filter.insert(-1, ("lots", _("Selected Lots")))
         return res_filter
 
     filter = fields.Selection(
