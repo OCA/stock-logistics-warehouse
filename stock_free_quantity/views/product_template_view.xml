@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_stock_available_form">
+        <field name="model">product.template</field>
+        <field
+            name="inherit_id"
+            ref="stock.product_template_form_view_procurement_button"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='action_product_tmpl_forecast_report']"
+                position="after"
+            >
+                <button
+                    type="object"
+                    name="action_open_quants"
+                    attrs="{'invisible':[('type', 'not in', ['product'])]}"
+                    class="oe_stat_button"
+                    icon="fa-building-o"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value" widget="statinfo">
+                            <field
+                                name="free_qty"
+                                widget="statinfo"
+                                nolabel="1"
+                                class="mr4"
+                            />
+                            <field name="uom_name" />
+                        </span>
+                        <span class="o_stat_text">Free</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="product_template_kanban_free_qty_view">
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view" />
+            <field name="priority" eval="15" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='product_lst_price']" position="after">
+                    <div t-if="record.type.raw_value == 'product'">Free: <field
+                        name="free_qty"
+                    /> <field name="uom_id" /></div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_stock_product_template_free_qty_tree" model="ir.ui.view">
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_stock_product_template_tree" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="after">
+                    <field
+                    name="free_qty"
+                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    optional="show"
+                    decoration-danger="free_qty &lt; 0"
+                    decoration-bf="1"
+                />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_stock_product_product_free_qty_tree" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.view_stock_product_tree" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="after">
+                    <field
+                    name="free_qty"
+                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    optional="show"
+                    decoration-danger="free_qty &lt; 0"
+                    decoration-warning="free_qty == 0"
+                    decoration-bf="1"
+                />
+                </field>
+            </field>
+        </record>
+
+</odoo>
