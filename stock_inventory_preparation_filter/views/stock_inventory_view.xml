@@ -10,8 +10,8 @@
                 >{'invisible': [('filter', '!=', 'products')]}</attribute>
             </field>
             <xpath expr="//field[@name='location_ids']/../.." position="before">
-                <group>
-                    <group>
+                <group name="preparation_filter">
+                    <group name="preparation_filter_left">
                         <field
                             name="filter"
                             string="Inventory of"
@@ -19,30 +19,29 @@
                             attrs="{'readonly': [('state', '!=', 'draft')]}"
                         />
                     </group>
+                    <group name="preparation_filter_right">
+                        <field
+                            name="product_domain"
+                            nolabel="1"
+                            widget="domain"
+                            attrs="{'invisible': [('filter', '!=', 'domain')]}"
+                            options="{'model': 'product.product'}"
+                        />
+                    </group>
                 </group>
             </xpath>
-            <field name="location_ids" position="before">
+            <field name="product_ids" position="after">
                 <field
                     name="categ_ids"
                     widget="many2many_tags"
                     attrs="{'invisible':[('filter','!=','categories')]}"
                 />
-            </field>
-            <field name="location_ids" position="before">
                 <field
                     name="lot_ids"
                     widget="many2many_tags"
                     attrs="{'invisible':[('filter','!=','lots')]}"
                 />
             </field>
-            <xpath expr="//field[@name='location_ids']/../.." position="after">
-                <field
-                    name="product_domain"
-                    widget="domain"
-                    attrs="{'invisible': [('filter', '!=', 'domain')]}"
-                    options="{'model': 'product.product'}"
-                />
-            </xpath>
         </field>
     </record>
 </odoo>
