@@ -11,6 +11,79 @@ from odoo.addons.base_sparse_field.models.fields import Serialized
 _logger = logging.getLogger(__name__)
 
 
+# The following methods have been copied from 'shopfloor' module (OCA/wms)
+# TODO: we should move them in a generic module
+
+
+def split_other_move_lines(move, move_lines):
+    """Substract `move_lines` from `move.move_line_ids`, put the result
+    in a new move and returns it.
+    """
+    other_move_lines = move.move_line_ids - move_lines
+    if other_move_lines or move.state == "partially_available":
+        qty_to_split = move.product_uom_qty - sum(move_lines.mapped("product_uom_qty"))
+        backorder_move_id = move._split(qty_to_split)
+        backorder_move = move.browse(backorder_move_id)
+        backorder_move.move_line_ids = other_move_lines
+        backorder_move._recompute_state()
+        backorder_move._action_assign()
+        move._recompute_state()
+        return backorder_move
+    return False
+
+
+def extract_and_action_done(move):
+    """Extract the moves in a separate transfer and validate them.
+
+    You can combine this method with `split_other_move_lines` method
+    to first extract some move lines in a separate move, then validate it
+    with this method.
+    """
+    # Put remaining qty to process from partially available moves
+    # in their own move (which will be then 'confirmed')
+    partial_moves = move.filtered(lambda m: m.state == "partially_available")
+    for partial_move in partial_moves:
+        partial_move.split_other_move_lines(partial_move.move_line_ids)
+    # Process assigned moves
+    moves = move.filtered(lambda m: m.state == "assigned")
+    if not moves:
+        return False
+    for picking in moves.picking_id:
+        moves_todo = picking.move_lines & moves
+        if moves_todo == picking.move_lines:
+            # No need to create a new transfer if we are processing all moves
+            new_picking = picking
+        else:
+            new_picking = picking.copy(
+                {
+                    "name": "/",
+                    "move_lines": [],
+                    "move_line_ids": [],
+                    "backorder_id": picking.id,
+                }
+            )
+            new_picking.message_post(
+                body=_(
+                    "Created from backorder "
+                    "<a href=# data-oe-model=stock.picking data-oe-id=%d>%s</a>."
+                )
+                % (picking.id, picking.name)
+            )
+            moves_todo.write({"picking_id": new_picking.id})
+            moves_todo.package_level_id.write({"picking_id": new_picking.id})
+            moves_todo.move_line_ids.write({"picking_id": new_picking.id})
+            moves_todo.move_line_ids.package_level_id.write(
+                {"picking_id": new_picking.id}
+            )
+            new_picking.action_assign()
+            assert new_picking.state == "assigned"
+        new_picking.action_done()
+    return True
+
+
+# /methods
+
+
 class VerticalLiftOperationBase(models.AbstractModel):
     """Base model for shuttle operations (pick, put, inventory)"""
 
@@ -412,7 +485,9 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
         line = self.current_move_line_id
         if line.state in ("assigned", "partially_available"):
             line.qty_done = line.product_qty
-            line.move_id._action_done()
+            # if the move has other move lines, it is split to have only this move line
+            split_other_move_lines(line.move_id, line)
+            extract_and_action_done(line.move_id)
         return True
 
     def fetch_tray(self):

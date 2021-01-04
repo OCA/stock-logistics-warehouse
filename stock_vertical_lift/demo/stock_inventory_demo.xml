@@ -7,7 +7,27 @@
         <field name="product_id" ref="product_running_socks" />
         <field name="product_uom_id" ref="uom.product_uom_unit" />
         <field name="inventory_id" ref="stock_inventory_vertical_lift_0" />
-        <field name="product_qty">30.0</field>
+        <field name="product_qty">10.0</field>
+        <field
+            name="location_id"
+            ref="stock_location_vertical_lift_demo_tray_1b_x1y2"
+        />
+    </record>
+    <record id="stock_inventory_vertical_lift_line_2" model="stock.inventory.line">
+        <field name="product_id" ref="product_running_socks" />
+        <field name="product_uom_id" ref="uom.product_uom_unit" />
+        <field name="inventory_id" ref="stock_inventory_vertical_lift_0" />
+        <field name="product_qty">10.0</field>
+        <field
+            name="location_id"
+            ref="stock_location_vertical_lift_demo_tray_1b_x2y2"
+        />
+    </record>
+    <record id="stock_inventory_vertical_lift_line_3" model="stock.inventory.line">
+        <field name="product_id" ref="product_running_socks" />
+        <field name="product_uom_id" ref="uom.product_uom_unit" />
+        <field name="inventory_id" ref="stock_inventory_vertical_lift_0" />
+        <field name="product_qty">10.0</field>
         <field
             name="location_id"
             ref="stock_location_vertical_lift_demo_tray_1b_x3y2"
