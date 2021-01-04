@@ -97,8 +97,6 @@ msgstr ""
 
 #. module: stock_vertical_lift
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_base.py:0
-#: code:addons/stock_vertical_lift/models/vertical_lift_operation_base.py:0
-#: code:addons/stock_vertical_lift/tests/common.py:0
 #: code:addons/stock_vertical_lift/tests/common.py:0
 #: code:addons/stock_vertical_lift/tests/test_inventory.py:0
 #, python-format
