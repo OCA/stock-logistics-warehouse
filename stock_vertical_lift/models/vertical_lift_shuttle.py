@@ -145,11 +145,6 @@ class VerticalLiftShuttle(models.Model):
         record = self.env[model].search([("shuttle_id", "=", self.id)])
         if not record:
             record = self.env[model].create({"shuttle_id": self.id})
-        # Since https://github.com/odoo/odoo/commit/3a6ac95
-        # _compute_vertical_lift_shuttle_id() don't work fine
-        # These change fix it temporally
-        if "location_id" in record:
-            record.location_id._compute_vertical_lift_shuttle_id()
         return record
 
     def action_open_screen(self):
