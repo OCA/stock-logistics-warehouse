@@ -1,7 +1,7 @@
 # © 2018 Akretion
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, _
+from odoo import _, models
 from odoo.exceptions import ValidationError
 
 
@@ -27,9 +27,7 @@ class StockInventory(models.Model):
             ]
         )
         if putaway_line:
-            putaway_line.write(
-                {"fixed_location_id": inventory_line.location_id.id}
-            )
+            putaway_line.write({"fixed_location_id": inventory_line.location_id.id})
         else:
             putaway_line_obj.create(
                 {
