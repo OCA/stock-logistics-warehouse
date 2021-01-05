@@ -10,11 +10,6 @@ class PurchaseOrderLine(models.Model):
     def _default_product_purchase_uom_id(self):
         return self.env.ref("uom.product_uom_unit")
 
-    product_tmpl_id = fields.Many2one(
-        related="product_id.product_tmpl_id",
-        comodel_name="product.template",
-        readonly=True,
-    )
     packaging_id = fields.Many2one("product.packaging", "Packaging")
     product_purchase_qty = fields.Float(
         "Purchase quantity",

@@ -15,11 +15,10 @@
                     <attribute name="readonly">1</attribute>
                 </field>
                 <label for="product_qty" position="before">
-                    <field name="product_tmpl_id" invisible="1" />
                     <field name="product_uom_category_id" invisible="1" />
                     <field
                         name="packaging_id"
-                        domain="[('product_tmpl_id','=',product_tmpl_id)]"
+                        domain="[('product_id','=',product_id)]"
                         groups="product.group_stock_packaging"
                     />
                     <field name="product_purchase_qty" />
