@@ -8,52 +8,51 @@ from odoo.exceptions import ValidationError
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
-    def action_generate_putaway_strategy(self):
-        for inventory in self:
-            inventory._generate_putaway_strategy()
+    def action_generate_putaway_rules(self):
+        self._generate_putaway_rules()
 
-    def _get_putaway_strategy(self, loc):
-        if loc.putaway_strategy_id:
-            return loc.putaway_strategy_id
-        elif loc.location_id:
-            return self._get_putaway_strategy(loc.location_id)
+    def _generate_putaway_rules(self):
+        for record in self:
+            if record.state != "done":
+                raise ValidationError(
+                    _(
+                        "Please validate the inventory before generating "
+                        "the putaway strategy."
+                    )
+                )
+            for location in record.location_ids:
+                record.line_ids._generate_putaway_rules(location)
 
-    def _update_product_putaway_strategy(self, inventory_line, strategy):
-        putaway_line_obj = self.env["stock.fixed.putaway.strat"]
-        putaway_line = putaway_line_obj.search(
+
+class StockInventoryLine(models.Model):
+    _inherit = "stock.inventory.line"
+
+    def _generate_putaway_rules(self, inventory_location):
+        # Eliminate lines for other IN locations
+        # and eliminate lines where quantity is null
+        self.filtered(
+            lambda x: x.location_id._is_child(inventory_location) and x.product_qty > 0
+        )._update_product_putaway_rule(inventory_location)
+
+    def _update_product_putaway_rule(self, location_in):
+        putaway_rule_obj = self.env["stock.putaway.rule"]
+        putaway_rules = putaway_rule_obj.search(
             [
-                ("product_id", "=", inventory_line.product_id.id),
-                ("putaway_id", "=", strategy.id),
+                ("product_id", "in", self.mapped("product_id").ids),
+                ("location_in_id", "=", location_in.id),
             ]
         )
-        if putaway_line:
-            putaway_line.write({"fixed_location_id": inventory_line.location_id.id})
-        else:
-            putaway_line_obj.create(
-                {
-                    "product_id": inventory_line.product_id.id,
-                    "fixed_location_id": inventory_line.location_id.id,
-                    "putaway_id": strategy.id,
-                }
+        for record in self:
+            putaway_rule = putaway_rules.filtered(
+                lambda x: x.product_id == record.product_id
             )
-
-    def _generate_putaway_strategy(self):
-        if self.state != "done":
-            raise ValidationError(
-                _(
-                    "Please validate the inventory before generating "
-                    "the putaway strategy."
+            if putaway_rule:
+                putaway_rule.location_out_id = record.location_id
+            else:
+                putaway_rule_obj.create(
+                    {
+                        "product_id": record.product_id.id,
+                        "location_in_id": location_in.id,
+                        "location_out_id": record.location_id.id,
+                    }
                 )
-            )
-        putaway = self._get_putaway_strategy(self.location_id)
-        if not putaway:
-            raise ValidationError(
-                _(
-                    "Inventory location doesn't have a putaway strategy. "
-                    "Please set a putaway strategy on the inventory's "
-                    "location."
-                )
-            )
-        for line in self.line_ids:
-            if line.product_qty > 0:
-                self._update_product_putaway_strategy(line, putaway)
