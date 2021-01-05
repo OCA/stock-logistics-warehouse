@@ -219,28 +219,14 @@ class StockReserveRuleRemoval(models.Model):
         # the total quantity held in a location).
         quants_per_bin = quants._group_by_location()
 
-        # We want to limit the operations as much as possible.
-        # We'll sort the quants desc so we can fulfill as much as possible
-        # from as few as possible locations. The best case being an exact
-        # match.
+        # We take goods only if we empty the bin.
         # The original ordering (fefo, fifo, ...) must be kept.
-
-        bins = sorted(
-            [
-                (
-                    sum(quants.mapped("quantity"))
-                    - sum(quants.mapped("reserved_quantity")),
-                    location,
-                )
-                for location, quants in quants_per_bin
-            ],
-            reverse=True,
-        )
-
-        # Propose the largest quants first, so we have as less operations
-        # as possible. We take goods only if we empty the bin.
         rounding = fields.first(quants).product_id.uom_id.rounding
-        for location_quantity, location in bins:
+        for location, location_quants in quants_per_bin:
+            location_quantity = sum(location_quants.mapped("quantity")) - sum(
+                location_quants.mapped("reserved_quantity")
+            )
+
             if location_quantity <= 0:
                 continue
 
