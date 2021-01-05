@@ -41,6 +41,7 @@ msgstr ""
 
 #. module: stock_vertical_lift
 #: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
+#: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__barcode
 #, python-format
 msgid "Barcode"
@@ -324,6 +325,7 @@ msgstr ""
 
 #. module: stock_vertical_lift
 #: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
+#: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
 #, python-format
 msgid "Menu"
 msgstr ""
@@ -532,6 +534,7 @@ msgid "Release tray"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
 #: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
 #, python-format
 msgid "Releasing tray"
