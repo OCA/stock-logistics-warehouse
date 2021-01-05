@@ -498,6 +498,48 @@ class TestReserveRule(common.SavepointCase):
         )
         self.assertEqual(move.state, "assigned")
 
+    def test_rule_packaging_fifo(self):
+        self._setup_packagings(
+            self.product1,
+            [("Pallet", 500, self.pallet), ("Retail Box", 50, self.retail_box)],
+        )
+        self._update_qty_in_location(
+            self.loc_zone1_bin1,
+            self.product1,
+            500,
+            in_date=fields.Datetime.to_datetime("2021-01-04 12:00:00"),
+        )
+        self._update_qty_in_location(
+            self.loc_zone1_bin2,
+            self.product1,
+            500,
+            in_date=fields.Datetime.to_datetime("2021-01-02 12:00:00"),
+        )
+        self._create_rule(
+            {},
+            [
+                {
+                    "location_id": self.loc_zone1.id,
+                    "sequence": 1,
+                    "removal_strategy": "packaging",
+                },
+            ],
+        )
+
+        # take in bin2 to respect fifo
+        picking = self._create_picking(self.wh, [(self.product1, 50)])
+        picking.action_assign()
+        self.assertRecordValues(
+            picking.move_lines.move_line_ids,
+            [{"location_id": self.loc_zone1_bin2.id, "product_qty": 50.0}],
+        )
+        picking2 = self._create_picking(self.wh, [(self.product1, 50)])
+        picking2.action_assign()
+        self.assertRecordValues(
+            picking2.move_lines.move_line_ids,
+            [{"location_id": self.loc_zone1_bin2.id, "product_qty": 50.0}],
+        )
+
     def test_rule_packaging_0_packaging(self):
         # a packaging mistakenly created with a 0 qty should be ignored,
         # not make the reservation fail
