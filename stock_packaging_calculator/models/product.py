@@ -65,7 +65,9 @@ class Product(models.Model):
         """
         self.ensure_one()
         return self._product_qty_by_packaging(
-            self._ordered_packaging(), prod_qty, with_contained=with_contained,
+            self._ordered_packaging(),
+            prod_qty,
+            with_contained=with_contained,
         )
 
     def _ordered_packaging(self):
