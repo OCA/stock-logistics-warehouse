@@ -89,12 +89,6 @@ msgid "Analytic accounting in Stock Requests"
 msgstr "Contabilidad analítica en solicitudes de stock"
 
 #. module: stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-msgid "Archived"
-msgstr "Archivado"
-
-#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_attachment_count
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_attachment_count
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_attachment_count
@@ -1108,6 +1102,9 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
+
+#~ msgid "Archived"
+#~ msgstr "Archivado"
 
 #, fuzzy
 #~ msgid "In progress"
