@@ -262,7 +262,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
         # Process partially to create backorder
         pick_move_1.move_line_ids.qty_done = 1.0
         pick_move_2.move_line_ids.qty_done = pick_move_2.move_line_ids.product_uom_qty
-        pick_order.action_done()
+        pick_order._action_done()
         pick_backorder = self.env["stock.picking"].search(
             [("backorder_id", "=", pick_order.id)]
         )
@@ -278,7 +278,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
         pick_backorder_move.move_line_ids.qty_done = (
             pick_backorder_move.move_line_ids.product_uom_qty
         )
-        pick_backorder.action_done()
+        pick_backorder._action_done()
         self.assertEqual(pick_backorder_move.state, "done")
         self.assertEqual(pick_backorder.state, "done")
         self.assertEqual(pick_order.completion_info, "next_picking_ready")
