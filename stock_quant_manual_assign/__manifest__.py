@@ -22,6 +22,7 @@
     "data": [
         "wizard/assign_manual_quants_view.xml",
         "views/stock_move_view.xml",
+        "views/stock_picking_type_views.xml",
     ],
     "installable": True,
 }
