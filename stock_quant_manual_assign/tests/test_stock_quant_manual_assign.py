@@ -9,6 +9,7 @@ class TestStockQuantManualAssign(TransactionCase):
     def setUp(self):
         super(TestStockQuantManualAssign, self).setUp()
         self.quant_model = self.env["stock.quant"]
+        self.picking_model = self.env["stock.picking"]
         self.location_model = self.env["stock.location"]
         self.move_model = self.env["stock.move"]
         self.quant_assign_wizard = self.env["assign.manual.quants"]
@@ -38,6 +39,7 @@ class TestStockQuantManualAssign(TransactionCase):
                 "location_id": self.location_src.id,
             }
         )
+        self.picking_type = self.env.ref("stock.picking_type_out")
         self.quant1 = self.quant_model.sudo().create(
             {
                 "product_id": self.product.id,
@@ -67,6 +69,7 @@ class TestStockQuantManualAssign(TransactionCase):
                 "product_uom": self.product.uom_id.id,
                 "location_id": self.location_src.id,
                 "location_dest_id": self.location_dst.id,
+                "picking_type_id": self.picking_type.id,
             }
         )
         self.move._action_confirm()
@@ -134,6 +137,21 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertAlmostEqual(
             len(self.move.move_line_ids), len(wizard.quants_lines.filtered("selected"))
         )
+        self.assertFalse(self.move.picking_type_id.auto_fill_qty_done)
+        self.assertEqual(sum(self.move.move_line_ids.mapped("qty_done")), 0.0)
+
+    def test_quant_manual_assign_auto_fill_qty_done(self):
+        wizard = self.quant_assign_wizard.with_context(active_id=self.move.id).create(
+            {}
+        )
+        wizard.quants_lines[0].write({"selected": True})
+        wizard.quants_lines[0]._onchange_selected()
+        wizard.quants_lines[1].write({"selected": True, "qty": 50.0})
+        self.assertEqual(wizard.lines_qty, 150.0)
+        self.picking_type.auto_fill_qty_done = True
+        wizard.assign_quants()
+        self.assertTrue(self.move.picking_type_id.auto_fill_qty_done)
+        self.assertEqual(sum(self.move.move_line_ids.mapped("qty_done")), 150.0)
 
     def test_quant_assign_wizard_after_availability_check(self):
         self.move._action_assign()
