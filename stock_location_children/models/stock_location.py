@@ -17,7 +17,7 @@ class StockLocation(models.Model):
         help="All the children (multi-level) stock location of this location",
     )
 
-    @api.depends("child_ids", "child_ids.child_ids")
+    @api.depends("child_ids", "children_ids.child_ids")
     def _compute_children_ids(self):
         query = """SELECT sub.id, ARRAY_AGG(sl2.id) AS children
             FROM stock_location sl2,
@@ -30,6 +30,7 @@ class StockLocation(models.Model):
             AND sub.id IN %s
             GROUP BY sub.id;
         """
+        self.flush(["location_id", "child_ids"])
         self.env.cr.execute(query, (tuple(self.ids),))
         rows = self.env.cr.dictfetchall()
         for loc in self:
