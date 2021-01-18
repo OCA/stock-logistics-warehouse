@@ -219,28 +219,14 @@ class StockReserveRuleRemoval(models.Model):
         # the total quantity held in a location).
         quants_per_bin = quants._group_by_location()
 
-        # We want to limit the operations as much as possible.
-        # We'll sort the quants desc so we can fulfill as much as possible
-        # from as few as possible locations. The best case being an exact
-        # match.
+        # We take goods only if we empty the bin.
         # The original ordering (fefo, fifo, ...) must be kept.
-
-        bins = sorted(
-            [
-                (
-                    sum(quants.mapped("quantity"))
-                    - sum(quants.mapped("reserved_quantity")),
-                    location,
-                )
-                for location, quants in quants_per_bin
-            ],
-            reverse=True,
-        )
-
-        # Propose the largest quants first, so we have as less operations
-        # as possible. We take goods only if we empty the bin.
         rounding = fields.first(quants).product_id.uom_id.rounding
-        for location_quantity, location in bins:
+        for location, location_quants in quants_per_bin:
+            location_quantity = sum(location_quants.mapped("quantity")) - sum(
+                location_quants.mapped("reserved_quantity")
+            )
+
             if location_quantity <= 0:
                 continue
 
@@ -278,28 +264,17 @@ class StockReserveRuleRemoval(models.Model):
         def is_greater_eq(value, other):
             return float_compare(value, other, precision_rounding=rounding) >= 0
 
-        for pack_quantity in packaging_quantities:
-            # Get quants quantity on each loop because they may change.
-            # Sort by max quant first so we have more chance to take a full
-            # package. But keep the original ordering for equal quantities!
-            bins = sorted(
-                [
-                    (
-                        sum(quants.mapped("quantity"))
-                        - sum(quants.mapped("reserved_quantity")),
-                        location,
-                    )
-                    for location, quants in quants_per_bin
-                ],
-                reverse=True,
+        for location, location_quants in quants_per_bin:
+            location_quantity = sum(location_quants.mapped("quantity")) - sum(
+                location_quants.mapped("reserved_quantity")
             )
+            if location_quantity <= 0:
+                continue
 
-            for location_quantity, location in bins:
-                if location_quantity <= 0:
-                    continue
+            for pack_quantity in packaging_quantities:
                 enough_for_packaging = is_greater_eq(location_quantity, pack_quantity)
-                asked_more_than_packaging = is_greater_eq(need, pack_quantity)
-                if enough_for_packaging and asked_more_than_packaging:
+                asked_at_least_packaging_qty = is_greater_eq(need, pack_quantity)
+                if enough_for_packaging and asked_at_least_packaging_qty:
                     # compute how much packaging we can get
                     take = (need // pack_quantity) * pack_quantity
                     need = yield location, location_quantity, take

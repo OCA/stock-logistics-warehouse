@@ -1,6 +1,6 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
 
-from odoo import exceptions
+from odoo import exceptions, fields
 from odoo.tests import common
 
 
@@ -103,8 +103,10 @@ class TestReserveRule(common.SavepointCase):
             )
         return picking
 
-    def _update_qty_in_location(self, location, product, quantity):
-        self.env["stock.quant"]._update_available_quantity(product, location, quantity)
+    def _update_qty_in_location(self, location, product, quantity, in_date=None):
+        self.env["stock.quant"]._update_available_quantity(
+            product, location, quantity, in_date=in_date
+        )
 
     def _create_rule(self, rule_values, removal_values):
         rule_config = {
@@ -403,10 +405,25 @@ class TestReserveRule(common.SavepointCase):
         )
         self.assertEqual(move.state, "assigned")
 
-    def test_rule_empty_bin_largest_first(self):
-        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 30)
-        self._update_qty_in_location(self.loc_zone1_bin2, self.product1, 60)
-        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 50)
+    def test_rule_empty_bin_fifo(self):
+        self._update_qty_in_location(
+            self.loc_zone1_bin1,
+            self.product1,
+            30,
+            in_date=fields.Datetime.to_datetime("2021-01-04 12:00:00"),
+        )
+        self._update_qty_in_location(
+            self.loc_zone1_bin2,
+            self.product1,
+            60,
+            in_date=fields.Datetime.to_datetime("2021-01-02 12:00:00"),
+        )
+        self._update_qty_in_location(
+            self.loc_zone2_bin1,
+            self.product1,
+            50,
+            in_date=fields.Datetime.to_datetime("2021-01-05 12:00:00"),
+        )
         picking = self._create_picking(self.wh, [(self.product1, 80)])
 
         self._create_rule(
@@ -424,11 +441,10 @@ class TestReserveRule(common.SavepointCase):
         move = picking.move_lines
         ml = move.move_line_ids
 
-        # We expect to take 60 in zone1/bin2 as it will empty a bin,
-        # and we prefer to take in the largest empty bins first to minimize
-        # the number of operations.
-        # Then we cannot take in zone1/bin1 as it would not be empty afterwards
-
+        # We expect to take 60 in zone1/bin2 as it will empty a bin and
+        # respecting fifo, the 60 of zone2 should be taken before the 30 of
+        # zone1. Then, as zone1/bin1 would not be empty, it is discarded. The
+        # remaining is taken in zone2 which has no rule.
         self.assertRecordValues(
             ml,
             [
@@ -481,6 +497,48 @@ class TestReserveRule(common.SavepointCase):
             ],
         )
         self.assertEqual(move.state, "assigned")
+
+    def test_rule_packaging_fifo(self):
+        self._setup_packagings(
+            self.product1,
+            [("Pallet", 500, self.pallet), ("Retail Box", 50, self.retail_box)],
+        )
+        self._update_qty_in_location(
+            self.loc_zone1_bin1,
+            self.product1,
+            500,
+            in_date=fields.Datetime.to_datetime("2021-01-04 12:00:00"),
+        )
+        self._update_qty_in_location(
+            self.loc_zone1_bin2,
+            self.product1,
+            500,
+            in_date=fields.Datetime.to_datetime("2021-01-02 12:00:00"),
+        )
+        self._create_rule(
+            {},
+            [
+                {
+                    "location_id": self.loc_zone1.id,
+                    "sequence": 1,
+                    "removal_strategy": "packaging",
+                },
+            ],
+        )
+
+        # take in bin2 to respect fifo
+        picking = self._create_picking(self.wh, [(self.product1, 50)])
+        picking.action_assign()
+        self.assertRecordValues(
+            picking.move_lines.move_line_ids,
+            [{"location_id": self.loc_zone1_bin2.id, "product_qty": 50.0}],
+        )
+        picking2 = self._create_picking(self.wh, [(self.product1, 50)])
+        picking2.action_assign()
+        self.assertRecordValues(
+            picking2.move_lines.move_line_ids,
+            [{"location_id": self.loc_zone1_bin2.id, "product_qty": 50.0}],
+        )
 
     def test_rule_packaging_0_packaging(self):
         # a packaging mistakenly created with a 0 qty should be ignored,
