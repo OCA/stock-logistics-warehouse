@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo13-addon-stock_inventory_lockdown',
         'odoo13-addon-stock_inventory_preparation_filter',
         'odoo13-addon-stock_location_bin_name',
+        'odoo13-addon-stock_location_children',
         'odoo13-addon-stock_location_lockdown',
         'odoo13-addon-stock_location_position',
         'odoo13-addon-stock_location_tray',
