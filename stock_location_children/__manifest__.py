@@ -3,7 +3,7 @@
 {
     "name": "Stock location children",
     "summary": "Add relation between stock location and all its children",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "development_status": "Alpha",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
