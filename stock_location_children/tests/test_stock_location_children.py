@@ -11,9 +11,18 @@ class TestStockLocationChildren(SavepointCase):
         ref = cls.env.ref
         cls.stock_input = ref("stock.stock_location_company")
         cls.stock_location = ref("stock.stock_location_stock")
-        cls.stock_shelf_1 = ref("stock.stock_location_components")
-        cls.stock_shelf_2 = ref("stock.stock_location_14")
-        cls.stock_shelf_2_refrigerator = ref("stock.location_refrigerator_small")
+        cls.test_location = cls.env["stock.location"].create(
+            {"name": "Test Location", "location_id": cls.stock_location.id}
+        )
+        cls.stock_shelf_1 = cls.env["stock.location"].create(
+            {"name": "Test Shelf 1", "location_id": cls.test_location.id}
+        )
+        cls.stock_shelf_2 = cls.env["stock.location"].create(
+            {"name": "Test Shelf 2", "location_id": cls.test_location.id}
+        )
+        cls.stock_shelf_2_refrigerator = cls.env["stock.location"].create(
+            {"name": "Test Shelf Refrigerator", "location_id": cls.stock_shelf_2.id}
+        )
 
     def test_location_children(self):
         self.assertFalse(self.stock_shelf_2_refrigerator.child_ids)
@@ -22,10 +31,10 @@ class TestStockLocationChildren(SavepointCase):
         self.assertFalse(self.stock_shelf_1.child_ids)
         self.assertFalse(self.stock_shelf_1.children_ids)
         self.assertEqual(
-            self.stock_location.child_ids, self.stock_shelf_1 | self.stock_shelf_2
+            self.test_location.child_ids, self.stock_shelf_1 | self.stock_shelf_2
         )
         self.assertEqual(
-            self.stock_location.children_ids,
+            self.test_location.children_ids,
             self.stock_shelf_1 | self.stock_shelf_2 | self.stock_shelf_2_refrigerator,
         )
 
@@ -45,7 +54,7 @@ class TestStockLocationChildren(SavepointCase):
             self.stock_shelf_2_refrigerator | refrigerator_drawer,
         )
         self.assertEqual(
-            self.stock_location.children_ids,
+            self.test_location.children_ids,
             self.stock_shelf_1
             | self.stock_shelf_2
             | self.stock_shelf_2_refrigerator
@@ -56,6 +65,6 @@ class TestStockLocationChildren(SavepointCase):
         self.assertEqual(self.stock_shelf_2.child_ids, self.stock_shelf_2_refrigerator)
         self.assertEqual(self.stock_shelf_2.child_ids, self.stock_shelf_2.children_ids)
         self.assertEqual(
-            self.stock_location.children_ids,
+            self.test_location.children_ids,
             self.stock_shelf_1 | self.stock_shelf_2 | self.stock_shelf_2_refrigerator,
         )
