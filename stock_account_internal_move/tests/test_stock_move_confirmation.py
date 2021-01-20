@@ -132,7 +132,7 @@ class StockMoveConfirmationCase(common.SavepointCase):
                 "remaining_qty": 0,
                 "description": "test",
                 "stock_move_id": move.id,
-                "product_id": self.product_id.id,
+                "product_id": self.product.id,
                 "company_id": self.env.company.id,
             }
         )
