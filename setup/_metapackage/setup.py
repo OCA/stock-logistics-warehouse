@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-stock_account_change_qty_reason',
         'odoo12-addon-stock_account_internal_move',
         'odoo12-addon-stock_account_inventory_force_date',
+        'odoo12-addon-stock_archive_constraint',
         'odoo12-addon-stock_available',
         'odoo12-addon-stock_available_immediately',
         'odoo12-addon-stock_available_mrp',
