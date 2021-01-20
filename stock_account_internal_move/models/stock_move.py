@@ -121,9 +121,12 @@ class StockMove(models.Model):
 
     def _get_accounting_data_for_valuation(self):
         self.ensure_one()
-        journal_id, acc_src, acc_dest, acc_valuation = (
-            super()._get_accounting_data_for_valuation()
-        )
+        (
+            journal_id,
+            acc_src,
+            acc_dest,
+            acc_valuation,
+        ) = super()._get_accounting_data_for_valuation()
         # intercept account valuation, use account specified on internal
         # location as a local valuation
         if self._is_in() and self.location_dest_id.force_accounting_entries:
