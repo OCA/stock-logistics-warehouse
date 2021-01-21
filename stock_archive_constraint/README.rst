@@ -36,8 +36,8 @@ Allows to block archiving locations with associated stock.quant or stock.move.
 Usage
 =====
 
-#. Go to Settings,> Users> Edit a user and check the "Manage Multiple Stock Locations" permission
-#. Go to Inventory> Settings> Locations and disable one
+#. Go to Settings > Users > Edit a user and check the "Manage Multiple Stock Locations" permission
+#. Go to Inventory > Settings > Locations and disable one
 
 Bug Tracker
 ===========
