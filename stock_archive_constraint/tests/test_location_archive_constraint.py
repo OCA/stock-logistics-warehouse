@@ -1,4 +1,4 @@
-# Copyright 2020 Tecnativa - Víctor Martínez
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import ValidationError
@@ -9,6 +9,7 @@ class TestLocationArchiveConstraint(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.company = cls.env.ref("base.main_company")
         cls.product_1 = cls._create_product(cls, "Product 1")
         cls.product_2 = cls._create_product(cls, "Product 2")
         stock_location_stock = cls.env.ref("stock.stock_location_stock")
@@ -32,17 +33,15 @@ class TestLocationArchiveConstraint(SavepointCase):
         stock_location_form.usage = self.env.ref("stock.stock_location_stock").usage
         return stock_location_form.save()
 
-    def _create_stock_inventory(self, location_id, product_id, qty):
-        stock_inventory_form = Form(self.env["stock.inventory"])
-        stock_inventory_form.name = "INV: %s" % product_id.display_name
-        stock_inventory_form.filter = "product"
-        stock_inventory_form.product_id = product_id
-        stock_inventory_form.location_id = location_id
-        stock_inventory = stock_inventory_form.save()
-        stock_inventory.action_start()
-        for line_id in stock_inventory.line_ids:
-            line_id.product_qty = qty
-        stock_inventory.action_validate()
+    def _create_stock_quant(self, location_id, product_id, qty):
+        self.env["stock.quant"].create(
+            {
+                "company_id": self.company.id,
+                "location_id": location_id.id,
+                "product_id": product_id.id,
+                "quantity": qty,
+            }
+        )
 
     def _create_stock_move(self, location_id, location_dest_id, product_id, qty):
         stock_move_form = Form(self.env["stock.move"])
@@ -55,14 +54,18 @@ class TestLocationArchiveConstraint(SavepointCase):
         stock_move._action_done()
 
     def _create_stock_move_line(self, location_id, location_dest_id, product_id, qty):
-        stock_move_line_form = Form(self.env["stock.move.line"])
-        stock_move_line_form.location_id = location_id
-        stock_move_line_form.location_dest_id = location_dest_id
-        stock_move_line_form.product_id = product_id
-        stock_move_line_form.product_uom_qty = qty
-        stock_move_line_form.qty_done = qty
-        stock_move_line_form.state = "done"
-        stock_move_line_form.save()
+        self.env["stock.move.line"].create(
+            {
+                "company_id": self.company.id,
+                "location_id": location_id.id,
+                "location_dest_id": location_dest_id.id,
+                "product_id": product_id.id,
+                "product_uom_qty": qty,
+                "product_uom_id": product_id.uom_id.id,
+                "qty_done": qty,
+                "state": "done",
+            }
+        )
 
     def _create_stock_picking(self, location_id, location_dest_id, product_id, qty):
         stock_picking_form = Form(self.env["stock.picking"])
@@ -146,14 +149,14 @@ class TestLocationArchiveConstraint(SavepointCase):
         self.assertFalse(self.product_2.active)
 
     def test_archive_product_stock_location(self):
-        self._create_stock_inventory(self.stock_location, self.product_2, 20.00)
+        self._create_stock_quant(self.stock_location, self.product_2, 20.00)
         self.product_1.active = False
         self.assertFalse(self.product_1.active)
         with self.assertRaises(ValidationError):
             self.product_2.active = False
 
     def test_archive_product_stock_location_child(self):
-        self._create_stock_inventory(self.stock_location_child, self.product_2, 20.00)
+        self._create_stock_quant(self.stock_location_child, self.product_2, 20.00)
         self.product_1.active = False
         self.assertFalse(self.product_1.active)
         with self.assertRaises(ValidationError):
@@ -170,9 +173,9 @@ class TestLocationArchiveConstraint(SavepointCase):
         self.assertFalse(self.stock_location.active)
 
     def test_archive_stock_location(self):
-        self._create_stock_inventory(self.stock_location, self.product_2, 20.00)
+        self._create_stock_quant(self.stock_location, self.product_2, 20.00)
         with self.assertRaises(ValidationError):
-            self.stock_location.active = False
+            self.stock_location.with_context(do_not_check_quant=True).active = False
 
     def test_archive_unarchive_stock_location_child(self):
         self.stock_location_child.active = False
@@ -181,6 +184,6 @@ class TestLocationArchiveConstraint(SavepointCase):
         self.assertTrue(self.stock_location_child.active)
 
     def test_archive_stock_location_child(self):
-        self._create_stock_inventory(self.stock_location_child, self.product_2, 20.00)
+        self._create_stock_quant(self.stock_location_child, self.product_2, 20.00)
         with self.assertRaises(ValidationError):
-            self.stock_location.active = False
+            self.stock_location.with_context(do_not_check_quant=True).active = False
