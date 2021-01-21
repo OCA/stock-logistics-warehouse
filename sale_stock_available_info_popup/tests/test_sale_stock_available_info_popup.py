@@ -82,6 +82,7 @@ class SaleStockAvailableInfoPopup(SavepointCase):
             'partner_id': self.env.ref('base.res_partner_1').id,
             'order_line': [
                 (0, 0, {
+                    'sequence': 1,
                     'name': self.product.name,
                     'product_id': self.product.id,
                     'product_uom_qty': 5,
@@ -89,6 +90,7 @@ class SaleStockAvailableInfoPopup(SavepointCase):
                     'price_unit': self.product.list_price
                 }),
                 (0, 0, {
+                    'sequence': 2,
                     'name': self.product.name,
                     'product_id': self.product.id,
                     'product_uom_qty': 5,
@@ -96,6 +98,7 @@ class SaleStockAvailableInfoPopup(SavepointCase):
                     'price_unit': self.product.list_price
                 }),
                 (0, 0, {
+                    'sequence': 3,
                     'name': self.product.name,
                     'product_id': self.product.id,
                     'product_uom_qty': 5,
