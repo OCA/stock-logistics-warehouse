@@ -12,8 +12,8 @@
                 <field name="name"/>
                 <field name="categ_id"/>
                 <field name="uom_id" string="UoM"/>
-                <field name="inventory_value"/>
-                <field name="accounting_value"/>
+                <field name="inventory_value" sum="Inventory Value"/>
+                <field name="accounting_value" sum="Accounting Value"/>
                 <field name="valuation_discrepancy"/>
             </tree>
       </field>
