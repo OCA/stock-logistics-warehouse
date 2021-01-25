@@ -46,3 +46,10 @@ vertical lift view as destination. E.g. create put-away rules on the products
 so when they arrive in WH/Stock, they are stored in WH/Stock/Vertical Lift. On
 the put-away screen, when scanning the tray type to store, the destination will
 be updated with an available cell of the same tray type in the current shuttle.
+
+Barcodes
+~~~~~~~~
+
+The operations allowed in the screen for the vertical lift (save, release, skip)
+can be triggered using a barcode. For this, print the barcodes contained in the
+folder 'images'.
