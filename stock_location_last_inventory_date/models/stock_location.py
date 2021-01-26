@@ -28,7 +28,7 @@ class StockLocation(models.Model):
         domain="[('location_ids', 'in', id), ('state', '=', 'done')]",
     )
 
-    @api.depends("validated_inventory_ids", "validated_inventory_ids.write_date")
+    @api.depends("validated_inventory_ids", "validated_inventory_ids.date")
     def _compute_last_inventory_date(self):
         """Store date of the last inventory for each leaf location"""
         for loc in self:
@@ -38,7 +38,7 @@ class StockLocation(models.Model):
                 and loc.validated_inventory_ids
             ):
                 loc.last_inventory_date = loc.validated_inventory_ids.sorted(
-                    lambda inventory: inventory.write_date
+                    lambda inventory: inventory.date
                 )[-1].date
             else:
                 loc.last_inventory_date = False
