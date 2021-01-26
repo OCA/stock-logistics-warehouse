@@ -374,7 +374,6 @@ msgstr ""
 
 #. module: stock_vertical_lift
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_pick.py:0
-#: code:addons/stock_vertical_lift/models/vertical_lift_operation_pick.py:0
 #, python-format
 msgid "No location found for barcode {}"
 msgstr ""
