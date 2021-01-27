@@ -70,16 +70,23 @@ class AssignManualQuants(models.TransientModel):
         return {}
 
     @api.model
+    def _domain_for_available_quants(self, move):
+        return [
+            ("location_id", "child_of", move.location_id.id),
+            ("product_id", "=", move.product_id.id),
+            ("quantity", ">", 0),
+        ]
+
+    @api.model
+    def _get_available_quants(self, move):
+        domain = self._domain_for_available_quants(move)
+        return self.env["stock.quant"].search(domain)
+
+    @api.model
     def default_get(self, fields):
         res = super(AssignManualQuants, self).default_get(fields)
         move = self.env["stock.move"].browse(self.env.context["active_id"])
-        available_quants = self.env["stock.quant"].search(
-            [
-                ("location_id", "child_of", move.location_id.id),
-                ("product_id", "=", move.product_id.id),
-                ("quantity", ">", 0),
-            ]
-        )
+        available_quants = self._get_available_quants(move)
         q_lines = []
         for quant in available_quants:
             line = self._prepare_wizard_line(move, quant)
