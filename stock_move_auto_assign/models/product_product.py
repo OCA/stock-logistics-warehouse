@@ -8,7 +8,6 @@ import psycopg2
 from odoo import models
 
 from odoo.addons.queue_job.exception import RetryableJobError
-from odoo.addons.queue_job.job import job
 
 _logger = logging.getLogger(__name__)
 
@@ -32,8 +31,6 @@ class ProductProduct(models.Model):
             # out anyway.
         ]
 
-    # TODO remove decorator
-    @job(default_channel="root.stock_auto_assign")
     def moves_auto_assign(self, locations):
         """Job trying to reserve moves based on product and locations
 

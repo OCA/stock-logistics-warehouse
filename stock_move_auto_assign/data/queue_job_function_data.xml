@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record
+        id="job_function_product_product_moves_auto_assign"
+        model="queue.job.function"
+    >
+        <field name="model_id" ref="product.model_product_product" />
+        <field name="method">moves_auto_assign</field>
+        <field name="channel_id" ref="channel_stock_auto_assign" />
+        <field name="retry_pattern" eval="{1: 1, 5: 5, 10: 10, 15: 30}" />
+    </record>
+</odoo>
