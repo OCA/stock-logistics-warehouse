@@ -15,8 +15,8 @@ class ProcurementRule(models.Model):
         location_id,
         name,
         origin,
+        company_id,
         values,
-        group_id,
     ):
         res = super(ProcurementRule, self)._get_stock_move_values(
             product_id,
@@ -25,8 +25,8 @@ class ProcurementRule(models.Model):
             location_id,
             name,
             origin,
+            company_id,
             values,
-            group_id,
         )
         if values.get("stock_request_id"):
             analytic_account_id = (

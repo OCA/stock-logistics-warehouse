@@ -26,7 +26,6 @@ class StockRequestOrder(models.Model):
             )
             req.analytic_count = len(req.analytic_account_ids)
 
-    @api.multi
     def action_view_analytic(self):
         action = self.env.ref("analytic.action_account_analytic_account_form").read()[0]
         analytics = self.mapped("analytic_account_ids")

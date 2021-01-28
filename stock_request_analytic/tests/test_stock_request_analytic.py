@@ -46,7 +46,7 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
                 "procure_method": "make_to_stock",
                 "warehouse_id": self.warehouse.id,
                 "company_id": self.main_company.id,
-                "propagate": "False",
+                "group_propagation_option": "none",
             }
         )
         self.pizza.route_ids = [(6, 0, self.demand_route.ids)]
