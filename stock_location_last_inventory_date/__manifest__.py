@@ -5,7 +5,7 @@
     "summary": "Show the last inventory date for a leaf location",
     "version": "13.0.1.0.0",
     "development_status": "Alpha",
-    "category": "Warehouse Management",
+    "category": "Warehouse",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",

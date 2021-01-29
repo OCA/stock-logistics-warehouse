@@ -29,10 +29,13 @@ class StockLocation(models.Model):
     )
 
     @api.depends(
+        "usage",
+        "child_ids",
         "validated_inventory_ids",
         "validated_inventory_ids.date",
-        "validated_inventory_ids.usage",
-        "validated_inventory_ids.child_ids",
+        "validated_inventory_ids.state",
+        "validated_inventory_ids.location_ids.usage",
+        "validated_inventory_ids.location_ids.child_ids",
     )
     def _compute_last_inventory_date(self):
         """Store date of the last inventory for each leaf location"""
