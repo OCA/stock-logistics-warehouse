@@ -60,7 +60,6 @@ class TestLocationArchiveConstraint(SavepointCase):
         stock_move_line_form.location_id = location_id
         stock_move_line_form.location_dest_id = location_dest_id
         stock_move_line_form.product_id = product_id
-        stock_move_line_form.product_uom_qty = qty
         stock_move_line_form.qty_done = qty
         stock_move_line_form.state = 'done'
         stock_move_line_form.save()
