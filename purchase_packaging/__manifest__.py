@@ -12,8 +12,7 @@
         "purchase",
         "packaging_uom",
         "stock",
-        "purchase_requisition",
-        "purchase_requisition_stock",
+        "purchase_stock"
     ],
     "data": [
         "views/product_supplier_info_view.xml",

@@ -892,3 +892,79 @@ class TestProcurementOrder(common.TransactionCase):
         self.assertEqual(uom_20_kg, new_po_lines.product_uom)
         self.assertEqual(product_packaging_20, new_po_lines.packaging_id)
         self.assertEqual(20, new_po_lines.price_unit)
+
+    def test_procurement_regrouped_po(self):
+        """
+        Product must be bought per 8 units Package
+        1/ run a procurement for 4 units
+        A po lines must be generate for 1 package of 8 units
+        2/ run a new procurement for 4 units
+        The po line should remain unchanged as the first rounding value is
+        enough
+        """
+        self.product_test.route_ids = [
+            (4, self.env.ref("purchase_stock.route_warehouse0_buy").id)
+        ]
+        self.env.ref("uom.product_uom_unit").rounding = 1
+
+        self.sp_30.min_qty = 1
+        self.sp_30.min_qty_uom_id = self.product_uom_8
+        self.sp_30.price = 3
+        existing_po_lines = self.env["purchase.order.line"].search(
+            [("product_id", "=", self.product_test.id)], order="id"
+        )
+        self.env["procurement.group"].run(
+            [
+                self.env["procurement.group"].Procurement(
+                    self.product_test,
+                    4,
+                    self.env.ref("uom.product_uom_unit"),
+                    self.env.ref("stock.stock_location_stock"),
+                    "/",
+                    "/",
+                    self.env.company,
+                    {
+                        "warehouse_id": self.env.ref("stock.warehouse0"),
+                        "date_planned": fields.Date.today(),
+                    },
+                )
+            ]
+        )
+        new_po_lines = self.env["purchase.order.line"].search(
+            [
+                ("product_id", "=", self.product_test.id),
+                ("id", "not in", existing_po_lines.ids),
+            ],
+            order="id",
+        )
+        self.assertEqual(
+            self.product_uom_8,
+            new_po_lines.product_purchase_uom_id,
+        )
+        self.assertEqual(1, new_po_lines.product_purchase_qty)
+        self.assertEqual(8, new_po_lines.product_qty)
+        self.assertEqual(4, new_po_lines.product_qty_needed)
+        self.env["procurement.group"].run(
+            [
+                self.env["procurement.group"].Procurement(
+                    self.product_test,
+                    4,
+                    self.env.ref("uom.product_uom_unit"),
+                    self.env.ref("stock.stock_location_stock"),
+                    "/",
+                    "/",
+                    self.env.company,
+                    {
+                        "warehouse_id": self.env.ref("stock.warehouse0"),
+                        "date_planned": fields.Date.today(),
+                    },
+                )
+            ]
+        )
+        self.assertEqual(
+            self.product_uom_8,
+            new_po_lines.product_purchase_uom_id,
+        )
+        self.assertEqual(1, new_po_lines.product_purchase_qty)
+        self.assertEqual(8, new_po_lines.product_qty_needed)
+        self.assertEqual(8, new_po_lines.product_qty)
