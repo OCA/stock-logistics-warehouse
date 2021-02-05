@@ -22,7 +22,7 @@ addon | version | summary
 [stock_free_quantity](stock_free_quantity/) | 14.0.1.0.0 | Stock Free Quantity
 [stock_inventory_include_exhausted](stock_inventory_include_exhausted/) | 14.0.1.0.0 | It includes the option for adding products exhausted on the inventories.
 [stock_move_location](stock_move_location/) | 14.0.1.0.0 | This module allows to move all stock in a stock location to an other one.
-[stock_packaging_calculator](stock_packaging_calculator/) | 14.0.1.0.0 | Compute product quantity to pick by packaging
+[stock_packaging_calculator](stock_packaging_calculator/) | 14.0.1.0.1 | Compute product quantity to pick by packaging
 
 [//]: # (end addons)
 
