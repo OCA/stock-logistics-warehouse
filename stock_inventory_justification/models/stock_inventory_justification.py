@@ -12,7 +12,7 @@ class StockInventoryJustification(models.Model):
         (
             "unique_name",
             "EXCLUDE (name WITH =) WHERE (active = True)",
-            "This stock inventory justification already exsits.",
+            "This stock inventory justification already exists.",
         ),
     ]
 
