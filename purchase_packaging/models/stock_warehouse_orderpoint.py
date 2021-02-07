@@ -23,9 +23,11 @@ class Orderpoint(models.Model):
         # created
         res = super()._quantity_in_progress()
         for orderpoint in self:
-            domain = [('orderpoint_id', '=', orderpoint.id),
-                      ('state', 'in', ["draft", "sent", "to approve"])]
-            po_lines = self.env['purchase.order.line'].search(domain)
+            domain = [
+                ("orderpoint_id", "=", orderpoint.id),
+                ("state", "in", ["draft", "sent", "to approve"]),
+            ]
+            po_lines = self.env["purchase.order.line"].search(domain)
             if po_lines:
                 qty = sum([line.product_qty for line in po_lines])
                 precision = orderpoint.product_uom.rounding

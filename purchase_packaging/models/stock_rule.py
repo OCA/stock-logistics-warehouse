@@ -16,10 +16,10 @@ class StockRule(models.Model):
         res = super()._prepare_purchase_order_line(
             product_id, product_qty, product_uom, company_id, values, po
         )
-        if not res.get('orderpoint_id', False):
+        if not res.get("orderpoint_id", False):
             # if the po line is generated from a procurement (stock rule),
             # store the initial demand
-            res['product_qty_needed'] = product_qty
+            res["product_qty_needed"] = product_qty
         seller = product_id._select_seller(
             partner_id=values["supplier"].name,
             quantity=res["product_qty"],
@@ -38,10 +38,12 @@ class StockRule(models.Model):
                 res["product_qty"] = max(qty, seller.min_qty)
         return res
 
-    def _update_purchase_order_line(self, product_id, product_qty, product_uom,
-                                    company_id, values, line):
+    def _update_purchase_order_line(
+        self, product_id, product_qty, product_uom, company_id, values, line
+    ):
         res = super()._update_purchase_order_line(
-            product_id, product_qty, product_uom, company_id, values, line)
+            product_id, product_qty, product_uom, company_id, values, line
+        )
         if not line.orderpoint_id:
             # if the po line is generated from a procurement (stock rule)
             # base the computation on what is really needed.
@@ -57,6 +59,6 @@ class StockRule(models.Model):
             # the real need is oncsidered thanks
             # to _quantity_in_progress() method
             product_qty_needed = line.product_qty_needed + product_qty
-            res['product_qty_needed'] = product_qty_needed
-            res['product_qty'] = product_qty_needed
+            res["product_qty_needed"] = product_qty_needed
+            res["product_qty"] = product_qty_needed
         return res

@@ -938,8 +938,7 @@ class TestProcurementOrder(common.TransactionCase):
             order="id",
         )
         self.assertEqual(
-            self.product_uom_8,
-            new_po_lines.product_purchase_uom_id,
+            self.product_uom_8, new_po_lines.product_purchase_uom_id,
         )
         self.assertEqual(1, new_po_lines.product_purchase_qty)
         self.assertEqual(8, new_po_lines.product_qty)
@@ -962,8 +961,7 @@ class TestProcurementOrder(common.TransactionCase):
             ]
         )
         self.assertEqual(
-            self.product_uom_8,
-            new_po_lines.product_purchase_uom_id,
+            self.product_uom_8, new_po_lines.product_purchase_uom_id,
         )
         self.assertEqual(1, new_po_lines.product_purchase_qty)
         self.assertEqual(8, new_po_lines.product_qty_needed)

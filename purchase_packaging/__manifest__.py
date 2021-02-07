@@ -7,13 +7,7 @@
     "category": "Warehouse",
     "website": "http://www.acsone.eu",
     "summary": "In purchase, use package",
-    "depends": [
-        "product",
-        "purchase",
-        "packaging_uom",
-        "stock",
-        "purchase_stock"
-    ],
+    "depends": ["product", "purchase", "packaging_uom", "stock", "purchase_stock"],
     "data": [
         "views/product_supplier_info_view.xml",
         "views/purchase_order_view.xml",

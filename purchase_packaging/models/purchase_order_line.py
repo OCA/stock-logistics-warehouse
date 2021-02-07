@@ -12,8 +12,7 @@ class PurchaseOrderLine(models.Model):
 
     packaging_id = fields.Many2one("product.packaging", "Packaging")
     product_qty_needed = fields.Float(
-        "Quantity Needed",
-        digits="Product Unit of Measure",
+        "Quantity Needed", digits="Product Unit of Measure",
     )
     product_purchase_qty = fields.Float(
         "Purchase quantity",
