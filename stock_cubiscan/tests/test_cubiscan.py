@@ -24,10 +24,10 @@ class TestCubiscan(SavepointCase):
     def test_device_test(self):
         vals = {"name": "Test Device", "device_address": "10.10.0.42", "port": 5982}
         device = self.device_obj.create(vals)
-        self.assertEquals(device.state, "not_ready")
+        self.assertEqual(device.state, "not_ready")
 
         with patch.object(CubiScan, "_make_request") as mocked:
             mocked.return_value = {"identifier": 42}
             device.test_device()
 
-        self.assertEquals(device.state, "ready")
+        self.assertEqual(device.state, "ready")

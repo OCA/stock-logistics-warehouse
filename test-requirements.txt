@@ -1,0 +1,5 @@
+odoo14-addon-web_tree_dynamic_colored_field @ git+https://github.com/phuctranerp/web.git@14.0-mig-web_tree_dynamic_colored_field#subdirectory=setup/web_tree_dynamic_colored_field
+odoo14-addon-product_packaging_dimension @ git+https://github.com/ecosoft-odoo/product-attribute.git@14.0-mig-product_packaging_dimension#subdirectory=setup/product_packaging_dimension
+odoo14-addon-product_packaging_type_required @ git+https://github.com/phuctranerp/product-attribute.git@14.0-mig-product_packaging_type_required#subdirectory=setup/product_packaging_type_required
+odoo14-addon-product_dimension @ git+https://github.com/OCA/product-attribute.git@14.0#subdirectory=setup/product_dimension
+odoo14-addon-product_packaging_type @ git+https://github.com/trobz/product-attribute.git@14.0-mig-product_packaging_type#subdirectory=setup/product_packaging_type
