@@ -22,14 +22,23 @@ class Orderpoint(models.Model):
         # This override will return 12 and no additionnal procurement will be
         # created
         res = super()._quantity_in_progress()
+        domain = [
+            ("orderpoint_id", "in", self.ids),
+            ("state", "in", ["draft", "sent", "to approve"]),
+        ]
+        po_lines_read_group_res = self.env["purchase.order.line"].read_group(
+            domain=domain,
+            fields=["orderpoint_id", "product_qty"],
+            groupby=["orderpoint_id"],
+        )
+        po_lines_dict = {}
+        for dic in po_lines_read_group_res:
+            orderpoint_id = dic["orderpoint_id"][0]
+            qty = dic["product_qty"]
+            po_lines_dict[orderpoint_id] = qty
         for orderpoint in self:
-            domain = [
-                ("orderpoint_id", "=", orderpoint.id),
-                ("state", "in", ["draft", "sent", "to approve"]),
-            ]
-            po_lines = self.env["purchase.order.line"].search(domain)
-            if po_lines:
-                qty = sum([line.product_qty for line in po_lines])
+            if orderpoint.id in po_lines_dict:
+                qty = po_lines_dict[orderpoint.id]
                 precision = orderpoint.product_uom.rounding
                 if (
                     float_compare(
