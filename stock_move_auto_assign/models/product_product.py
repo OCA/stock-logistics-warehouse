@@ -1,9 +1,15 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import logging
+
+import psycopg2
+
 from odoo import models
 
-from odoo.addons.queue_job.job import job
+from odoo.addons.queue_job.exception import RetryableJobError
+
+_logger = logging.getLogger(__name__)
 
 
 class ProductProduct(models.Model):
@@ -25,9 +31,8 @@ class ProductProduct(models.Model):
             # out anyway.
         ]
 
-    @job(default_channel="root.stock_auto_assign")
     def moves_auto_assign(self, locations):
-        """Try to reserve moves based on product and locations
+        """Job trying to reserve moves based on product and locations
 
         When a product has been added to a location, it searches all*
         the moves with a source equal or above this location and try
@@ -38,4 +43,23 @@ class ProductProduct(models.Model):
         """
         self.ensure_one()
         moves = self.env["stock.move"].search(self._moves_auto_assign_domain(locations))
+        pickings = moves.picking_id
+        if not pickings:
+            return
+        try:
+            self.env.cr.execute(
+                "SELECT id FROM stock_picking WHERE id IN %s FOR UPDATE NOWAIT",
+                (tuple(pickings.ids),),
+            )
+        except psycopg2.OperationalError as err:
+            if err.pgcode == "55P03":  # could not obtain the lock
+                _logger.debug(
+                    "Another job is already auto-assigning moves and acquired a"
+                    " lock on one or some of stock.picking%s, retry later.",
+                    tuple(pickings.ids),
+                )
+                raise RetryableJobError(
+                    "Could not obtain lock on transfers, will retry.", ignore_retry=True
+                )
+            raise
         moves._action_assign()
