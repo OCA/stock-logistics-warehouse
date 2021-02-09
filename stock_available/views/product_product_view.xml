@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2014 Numérigraphe
+     Copyright 2016 Sodexis
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record model="ir.ui.view" id="product_normal_form_view">
+        <field name="name">Quantity available to promise (variant tree)</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='action_product_forecast_report']"
+                position="after"
+            >
+                <button
+                    type="object"
+                    name="action_open_quants"
+                    attrs="{'invisible':[('type', 'not in', ['product','consu'])]}"
+                    class="oe_stat_button"
+                    icon="fa-building-o"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value" widget="statinfo">
+                            <field
+                                name="immediately_usable_qty"
+                                widget="statinfo"
+                                nolabel="1"
+                                class="mr4"
+                            />
+                            <field name="uom_name" />
+                        </span>
+                        <span class="o_stat_text">Available</span>
+                    </div>
+                </button>
+                <button
+                    type="object"
+                    name="action_open_quants"
+                    attrs="{'invisible':[('type', 'not in', ['product','consu'])]}"
+                    class="oe_stat_button"
+                    icon="fa-building-o"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value" widget="statinfo">
+                            <field
+                                name="potential_qty"
+                                widget="statinfo"
+                                nolabel="1"
+                                class="mr4"
+                            />
+                            <field name="uom_name" />
+                        </span>
+                        <span class="o_stat_text">Potential</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_stock_available_product_tree">
+        <field name="name">Quantity available to promise (variant tree)</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.view_stock_product_tree" />
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute
+                    name="decoration-danger"
+                >virtual_available&lt;0 or immediately_usable_qty&lt;0</attribute>
+                <attribute
+                    name="decoration-info"
+                >virtual_available&gt;=0 or immediately_usable_qty&gt;0</attribute>
+            </tree>
+            <field name="virtual_available" position="after">
+                <field name="immediately_usable_qty" />
+            </field>
+        </field>
+    </record>
+</odoo>
