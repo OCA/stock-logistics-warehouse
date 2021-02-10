@@ -57,6 +57,7 @@ class StockLocationTrayType(models.Model):
             cells = self._generate_cells_matrix(default_state=1)
             record.tray_matrix = {"selected": [], "cells": cells}
 
+    @api.model
     def _name_search(
         self, name, args=None, operator="ilike", limit=100, name_get_uid=None
     ):
@@ -64,10 +65,10 @@ class StockLocationTrayType(models.Model):
         domain = []
         if name:
             domain = ["|", ("name", operator, name), ("code", operator, name)]
-        tray_ids = self._search(
+
+        return self._search(
             expression.AND([domain, args]), limit=limit, access_rights_uid=name_get_uid
         )
-        return self.browse(tray_ids).name_get()
 
     def _generate_cells_matrix(self, default_state=0):
         return [[default_state] * self.cols for __ in range(self.rows)]
