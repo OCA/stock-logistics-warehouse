@@ -43,7 +43,7 @@ class TestLocationTrayType(LocationTrayTypeCase):
         location.tray_type_id = self.used_tray_type
         location = self.used_tray_type.location_ids
         self.assertTrue(location)
-        message = "cannot be archived.*{}.*".format(location.name)
+        message = "cannot be archived.\n\n.*{}*".format(location.name)
         # we cannot archive used ones
         with self.assertRaisesRegex(exceptions.ValidationError, message):
             self.used_tray_type.active = False
@@ -55,7 +55,7 @@ class TestLocationTrayType(LocationTrayTypeCase):
         location.tray_type_id = self.used_tray_type
         location = self.used_tray_type.location_ids
         self.assertTrue(location)
-        message = "size cannot be changed.*{}.*".format(location.name)
+        message = "size cannot be changed.\n\n.*{}*".format(location.name)
         # we cannot modify size of used ones
         with self.assertRaisesRegex(exceptions.ValidationError, message):
             self.used_tray_type.rows = 10
