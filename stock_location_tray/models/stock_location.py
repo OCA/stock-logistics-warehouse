@@ -103,7 +103,7 @@ class StockLocation(models.Model):
     def _check_before_add_tray_type(self):
         if not self.tray_type_id and self.child_ids:
             raise exceptions.UserError(
-                _("Location %s has sub-locations, it cannot be converted" " to a tray.")
+                _("Location %s has sub-locations, it cannot be converted to a tray.")
                 % (self.display_name)
             )
 
@@ -207,7 +207,7 @@ class StockLocation(models.Model):
                 # trap this check (_tray_check_active) to display a
                 # contextual error message
                 raise exceptions.UserError(
-                    _("Trays cannot be modified when " "they contain products.")
+                    _("Trays cannot be modified when they contain products.")
                 )
 
             if not tray_type:
