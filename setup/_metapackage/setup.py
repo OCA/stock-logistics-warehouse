@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo13-addon-stock_cycle_count',
         'odoo13-addon-stock_demand_estimate',
         'odoo13-addon-stock_demand_estimate_matrix',
+        'odoo13-addon-stock_helper',
         'odoo13-addon-stock_inventory_chatter',
         'odoo13-addon-stock_inventory_cost_info',
         'odoo13-addon-stock_inventory_discrepancy',
