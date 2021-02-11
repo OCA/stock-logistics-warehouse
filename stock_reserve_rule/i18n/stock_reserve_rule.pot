@@ -116,11 +116,6 @@ msgid "ID"
 msgstr ""
 
 #. module: stock_reserve_rule
-#: model:ir.model,name:stock_reserve_rule.model_stock_location
-msgid "Inventory Locations"
-msgstr ""
-
-#. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule____last_update
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal____last_update
 msgid "Last Modified on"
