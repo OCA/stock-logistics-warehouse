@@ -3,8 +3,8 @@
 {
     "name": "Stock location children",
     "summary": "Add relation between stock location and all its children",
-    "version": "13.0.1.0.1",
-    "development_status": "Alpha",
+    "version": "14.0.1.0.0",
+    "development_status": "Production/Stable",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Camptocamp, Odoo Community Association (OCA)",
