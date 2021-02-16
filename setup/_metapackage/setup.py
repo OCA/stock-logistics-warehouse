@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-stock_available',
         'odoo14-addon-stock_free_quantity',
         'odoo14-addon-stock_inventory_include_exhausted',
+        'odoo14-addon-stock_location_lockdown',
         'odoo14-addon-stock_move_location',
         'odoo14-addon-stock_packaging_calculator',
         'odoo14-addon-stock_warehouse_calendar',
