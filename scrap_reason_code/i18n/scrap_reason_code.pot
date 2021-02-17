@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,16 +35,22 @@ msgstr ""
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__display_name
+#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__display_name
+#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__id
+#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__id
+#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__id
 msgid "ID"
 msgstr ""
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code____last_update
+#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move____last_update
+#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap____last_update
 msgid "Last Modified on"
 msgstr ""
 
