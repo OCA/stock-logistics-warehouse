@@ -11,5 +11,5 @@
     "author": "Camptocamp,Sodexis,Odoo Community Association (OCA),Sergio Díaz",
     "license": "AGPL-3",
     "category": "Hidden",
-    'installable': True,
+    "installable": True,
 }
