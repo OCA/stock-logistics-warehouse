@@ -598,7 +598,7 @@ msgid "Shuttle Name"
 msgstr ""
 
 #. module: stock_vertical_lift
-#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_screen_view
 msgid "Skip"
 msgstr ""
 
