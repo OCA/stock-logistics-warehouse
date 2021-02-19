@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Tecnativa - Ernesto Tejeda
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates>
+    <div t-extend="sale_stock.qtyAtDate">
+        <t
+            t-jquery="t[t-if^='widget.data.virtual_available_at_date']"
+            t-operation="attributes"
+        >
+            <attribute
+                name="t-if"
+            >widget.data.immediately_usable_qty_today &lt; widget.data.qty_to_deliver and !widget.data.is_mto</attribute>
+        </t>
+    </div>
+    <div t-extend="sale_stock.QtyDetailPopOver">
+        <t t-jquery="t[t-if*='!data.is_mto']" t-operation="append">
+            <tr>
+                <td>
+                    <strong>Available to promise</strong>
+                </td>
+                <td>
+                    <t t-esc='data.immediately_usable_qty_today' />
+                    <t t-esc='data.product_uom.data.display_name' />
+                </td>
+            </tr>
+        </t>
+    </div>
+</templates>
