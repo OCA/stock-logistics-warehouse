@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_stock_available_info_popup
+# 	* sale_stock_available_info_popup
 #
 msgid ""
 msgstr ""
@@ -13,13 +13,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: sale_stock_available_info_popup
 #. openerp-web
-#: code:addons/sale_stock_available_info_popup/static/src/xml/qty_at_date.xml:13
+#: code:addons/sale_stock_available_info_popup/static/src/xml/qty_at_date.xml:0
 #, python-format
 msgid "Available to promise"
 msgstr "Lahko obljubimo"
@@ -36,9 +36,11 @@ msgstr "Prodajna postavka"
 
 #. module: sale_stock_available_info_popup
 #. openerp-web
-#: code:addons/sale_stock_available_info_popup/static/src/xml/qty_at_date.xml:7
+#: code:addons/sale_stock_available_info_popup/static/src/xml/qty_at_date.xml:0
 #, python-format
-msgid "widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver and !widget.data.is_mto"
+msgid ""
+"widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver and !"
+"widget.data.is_mto"
 msgstr ""
-"widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver and "
-"!widget.data.is_mto"
+"widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver and !"
+"widget.data.is_mto"

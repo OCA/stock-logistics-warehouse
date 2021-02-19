@@ -7,7 +7,7 @@ from odoo.tests.common import SavepointCase
 class SaleStockAvailableInfoPopup(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(SaleStockAvailableInfoPopup, cls).setUpClass()
+        super().setUpClass()
         user_group_stock_user = cls.env.ref("stock.group_stock_user")
         cls.user_stock_user = cls.env["res.users"].create(
             {
@@ -19,7 +19,7 @@ class SaleStockAvailableInfoPopup(SavepointCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Storable product", "type": "product",}
+            {"name": "Storable product", "type": "product"}
         )
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.customers_location = cls.env.ref("stock.stock_location_customers")
