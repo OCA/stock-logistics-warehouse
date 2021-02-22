@@ -65,15 +65,6 @@
                     </div>
                     <div class="o_shuttle_content o_shuttle_content_right">
                         <div>
-                            <button
-                                name="button_skip"
-                                type="object"
-                                string="Skip"
-                                icon="fa-forward"
-                                class="btn-danger"
-                                barcode_trigger="skip"
-                                attrs="{'invisible': [('state', '=', 'noop')]}"
-                            />
                             <!-- will react on barcode 'O-BTN.save' -->
                             <button
                                 name="button_save"
