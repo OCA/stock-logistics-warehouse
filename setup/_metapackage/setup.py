@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-stock_available',
+        'odoo14-addon-stock_demand_estimate',
         'odoo14-addon-stock_free_quantity',
         'odoo14-addon-stock_inventory_include_exhausted',
         'odoo14-addon-stock_location_children',
