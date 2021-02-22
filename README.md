@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [stock_available](stock_available/) | 14.0.1.0.1 | Stock available to promise
+[stock_demand_estimate](stock_demand_estimate/) | 14.0.1.1.0 | Allows to create demand estimates.
 [stock_free_quantity](stock_free_quantity/) | 14.0.1.0.0 | Stock Free Quantity
 [stock_inventory_include_exhausted](stock_inventory_include_exhausted/) | 14.0.1.0.0 | It includes the option for adding products exhausted on the inventories.
 [stock_location_children](stock_location_children/) | 14.0.1.0.0 | Add relation between stock location and all its children
