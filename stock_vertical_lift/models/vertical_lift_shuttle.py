@@ -138,7 +138,6 @@ class VerticalLiftShuttle(models.Model):
 
         This method does nothing, override to match your communication
         protocol."""
-        pass
 
     def _operation_for_mode(self):
         model = self._model_for_mode[self.mode]

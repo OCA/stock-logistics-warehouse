@@ -1,11 +1,11 @@
-odoo.define("stock_vertical_lift.vertical_lift", function(require) {
+odoo.define("stock_vertical_lift.vertical_lift", function (require) {
     "use strict";
 
     var KanbanRecord = require("web.KanbanRecord");
     var FormController = require("web.FormController");
 
     KanbanRecord.include({
-        _openRecord: function() {
+        _openRecord: function () {
             if (
                 this.modelName === "vertical.lift.shuttle" &&
                 this.$el.hasClass("open_shuttle_screen")
@@ -15,7 +15,7 @@ odoo.define("stock_vertical_lift.vertical_lift", function(require) {
                     method: "action_open_screen",
                     model: self.modelName,
                     args: [self.id],
-                }).then(function(action) {
+                }).then(function (action) {
                     self.trigger_up("do_action", {action: action});
                 });
             } else {
@@ -25,7 +25,7 @@ odoo.define("stock_vertical_lift.vertical_lift", function(require) {
     });
 
     FormController.include({
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             if (this.modelName.startsWith("vertical.lift.operation.")) {
                 this.call("bus_service", "addChannel", "notify_vertical_lift_screen");
@@ -39,9 +39,9 @@ odoo.define("stock_vertical_lift.vertical_lift", function(require) {
                 this.call("bus_service", "startPolling");
             }
         },
-        vlift_bus_notification: function(notifications) {
+        vlift_bus_notification: function (notifications) {
             var self = this;
-            _.each(notifications, function(notification) {
+            _.each(notifications, function (notification) {
                 var channel = notification[0];
                 var message = notification[1];
                 if (channel === "notify_vertical_lift_screen") {
@@ -53,7 +53,7 @@ odoo.define("stock_vertical_lift.vertical_lift", function(require) {
                 }
             });
         },
-        vlift_bus_action_refresh: function(params) {
+        vlift_bus_action_refresh: function (params) {
             var selectedIds = this.getSelectedIds();
             if (!selectedIds.length) {
                 return;
@@ -63,7 +63,7 @@ odoo.define("stock_vertical_lift.vertical_lift", function(require) {
                 this.reload();
             }
         },
-        destroy: function() {
+        destroy: function () {
             if (this.modelName.startsWith("vertical.lift.operation.")) {
                 this.call(
                     "bus_service",

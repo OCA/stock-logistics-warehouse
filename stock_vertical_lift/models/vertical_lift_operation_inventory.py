@@ -36,7 +36,9 @@ class VerticalLiftOperationInventory(models.Model):
                 lambda self: self.select_next_inventory_line(),
             ),
             self.Transition(
-                "quantity", "save", lambda self: self._has_identical_quantity(),
+                "quantity",
+                "save",
+                lambda self: self._has_identical_quantity(),
             ),
             self.Transition(
                 "quantity",
