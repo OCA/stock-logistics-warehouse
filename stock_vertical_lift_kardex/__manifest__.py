@@ -8,7 +8,7 @@
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": ["stock_vertical_lift", "stock_location_position"],
-    "website": "https://www.camptocamp.com",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "data": [],
     "installable": True,
     "development_status": "Alpha",
