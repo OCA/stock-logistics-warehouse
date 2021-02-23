@@ -1,6 +1,8 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import exceptions
+
 from .common import VerticalLiftCase
 
 
@@ -24,6 +26,19 @@ class TestVerticalLiftLocation(VerticalLiftCase):
         self.assertTrue(
             all(location.vertical_lift_kind == "cell" for location in cells)
         )
+
+    def test_fetch_vertical_lift_tray(self):
+        shuttles = self.vertical_lift_loc.child_ids
+        trays = shuttles.mapped("child_ids")
+        cells = trays.mapped("child_ids")
+        self.assertTrue(cells[0].button_fetch_vertical_lift_tray())
+        message = "cell_location cannot be set when the location is a cell."
+        with self.assertRaisesRegex(ValueError, message):
+            cells[0].fetch_vertical_lift_tray(cells[0])
+        message = "Cannot fetch a vertical lift tray on location"
+        with self.assertRaisesRegex(exceptions.UserError, message):
+            shuttles[0].fetch_vertical_lift_tray(cells[0])
+        self.assertTrue(cells[0].button_release_vertical_lift_tray())
 
     def test_create_shuttle(self):
         # any location created directly under the view is a shuttle

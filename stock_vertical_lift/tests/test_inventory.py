@@ -23,6 +23,23 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(action["res_model"], "vertical.lift.operation.inventory")
         self.assertEqual(action["res_id"], operation.id)
 
+    def test_inventory_actions(self):
+        self.shuttle.switch_inventory()
+        action = self.shuttle.action_menu()
+        self.assertEqual(action["type"], "ir.actions.act_window")
+        self.assertEqual(action["res_model"], "vertical.lift.shuttle")
+        self.assertEqual(action["res_id"], self.shuttle.id)
+
+        action = self.shuttle.action_back_to_settings()
+        self.assertEqual(action["type"], "ir.actions.act_window")
+        self.assertEqual(action["res_model"], "vertical.lift.shuttle")
+        self.assertEqual(action["res_id"], 0)
+
+        action = self.shuttle.action_manual_barcode()
+        self.assertEqual(action["type"], "ir.actions.act_window")
+        self.assertEqual(action["res_model"], "vertical.lift.shuttle.manual.barcode")
+        self.assertEqual(action["name"], "Barcode")
+
     def test_inventory_count_ops(self):
         self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
         self._update_qty_in_location(self.location_1a_x2y1, self.product_recovery, 10)
@@ -91,6 +108,24 @@ class TestInventory(VerticalLiftCase):
         self.assertTrue(inventory.line_ids.vertical_lift_done)
         self.assertEqual(inventory.state, "done")
 
+    def test_confirm_wrong_quantity(self):
+        self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
+        inventory = self._create_inventory(
+            [(self.location_1a_x1y1, self.product_socks)]
+        )
+        operation = self._open_screen("inventory")
+        line = operation.current_inventory_line_id
+        self.assertEqual(line, inventory.line_ids)
+
+        operation.quantity_input = 12.0
+        operation.button_save()
+        self.assertEqual(operation.last_quantity_input, 12.0)
+        self.assertEqual(operation.quantity_input, 0.0)
+        self.assertEqual(operation.state, "confirm_wrong_quantity")
+        self.assertEqual(operation.current_inventory_line_id, line)
+        operation.button_save()
+        self.assertEqual(operation.state, "quantity")
+
     def test_inventory_next_line(self):
         self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
         self._update_qty_in_location(self.location_1a_x2y1, self.product_recovery, 10)
@@ -113,3 +148,19 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(operation.current_inventory_line_id, remaining_line)
         self.assertEqual(operation.last_quantity_input, 0.0)
         self.assertEqual(operation.quantity_input, 0.0)
+
+    def test_inventory_locations(self):
+        self.shuttle.switch_inventory()
+        opr_inventory = self.shuttle._operation_for_mode()
+        opr_inventory._compute_tray_data()
+        opr_inventory._compute_product_packagings()
+        self.assertEqual(opr_inventory.product_packagings, "")
+        opr_inventory._compute_tray_qty()
+        self.assertEqual(opr_inventory.tray_qty, 0.0)
+
+        self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
+        self._create_inventory([(self.location_1a_x1y1, self.product_socks)])
+        self._open_screen("inventory")
+        opr_inventory._compute_product_packagings()
+        opr_inventory._compute_tray_qty()
+        self.assertEqual(opr_inventory.tray_qty, 10)

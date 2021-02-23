@@ -32,6 +32,12 @@ class TestPut(VerticalLiftCase):
         )
 
     def test_put_count_move_lines(self):
+        # If stock_picking_cancel_confirm is installed, we need to explicitly
+        # confirm the cancellation.
+        try:
+            self.picking_in.cancel_confirm = True
+        except AttributeError:
+            pass
         self.picking_in.action_cancel()
         put1 = self._create_simple_picking_in(
             self.product_socks, 10, self.location_1a_x1y1

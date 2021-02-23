@@ -158,7 +158,7 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
         # for the test, we'll consider all the lines has been delivered
         for move_line in move_lines:
             move_line.qty_done = move_line.product_qty
-        move_lines.picking_id.action_done()
+        move_lines.picking_id._action_done()
         # release, no further operation in queue
         operation = self.shuttle._operation_for_mode()
         # the release button can be used only in the state... release

@@ -118,9 +118,16 @@ class TestPick(VerticalLiftCase):
         product1 = self.env.ref("stock_vertical_lift.product_running_socks")
         product2 = self.env.ref("stock_vertical_lift.product_recovery_socks")
         # cancel the picking from demo data to start from a clean state
-        self.env.ref(
+        picking_1 = self.env.ref(
             "stock_vertical_lift.stock_picking_out_demo_vertical_lift_1"
-        ).action_cancel()
+        )
+        # If stock_picking_cancel_confirm is installed, we need to explicitly
+        # confirm the cancellation.
+        try:
+            picking_1.cancel_confirm = True
+        except AttributeError:
+            pass
+        picking_1.action_cancel()
 
         # ensure that we have stock in some cells, we'll put product1
         # in the first Shuttle and product2 in the second
@@ -181,6 +188,8 @@ class TestPick(VerticalLiftCase):
     def test_on_barcode_scanned(self):
         operation = self._open_screen("pick")
         self.assertEqual(operation.state, "scan_destination")
+        # Scan wrong one first for test coverage
+        operation.on_barcode_scanned("test")
         move_line = operation.current_move_line_id
         current_destination = move_line.location_dest_id
         stock_location = self.env.ref("stock.stock_location_stock")
@@ -190,6 +199,9 @@ class TestPick(VerticalLiftCase):
         operation.on_barcode_scanned(stock_location.barcode)
         self.assertEqual(move_line.location_dest_id, stock_location)
         self.assertEqual(operation.state, "save")
+        # Done for test coverage
+        operation.button_save()
+        operation.on_barcode_scanned("test")
 
     def test_button_release(self):
         self._open_screen("pick")
@@ -216,8 +228,8 @@ class TestPick(VerticalLiftCase):
                 "selected": [expected_x, expected_y],
                 # fmt: off
                 'cells': [
-                    [0, 0, 0, 0, 0, 0, 0, 0],
-                    [1, 1, 1, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [1, 1, 1, 0],
                 ]
                 # fmt: on
             },

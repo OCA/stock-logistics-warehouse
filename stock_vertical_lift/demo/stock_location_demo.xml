@@ -32,7 +32,7 @@
         <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_1" />
         <field
             name="tray_type_id"
-            ref="stock_location_tray.stock_location_tray_type_large_16x"
+            ref="stock_location_tray.stock_location_tray_type_large_8x"
         />
         <field name="usage">internal</field>
     </record>
@@ -102,7 +102,7 @@
         <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_3" />
         <field
             name="tray_type_id"
-            ref="stock_location_tray.stock_location_tray_type_small_32x"
+            ref="stock_location_tray.stock_location_tray_type_small_16x_2"
         />
         <field name="usage">internal</field>
     </record>

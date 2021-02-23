@@ -138,6 +138,7 @@ class VerticalLiftShuttle(models.Model):
 
         This method does nothing, override to match your communication
         protocol."""
+        pass  # noqa
 
     def _operation_for_mode(self):
         model = self._model_for_mode[self.mode]
@@ -258,19 +259,3 @@ class VerticalLiftShuttle(models.Model):
         """
         # XXX do we want to do something special in the notification?
         self._operation_for_mode()._send_notification_refresh()
-
-
-class VerticalLiftShuttleManualBarcode(models.TransientModel):
-    _name = "vertical.lift.shuttle.manual.barcode"
-    _description = "Action to input a barcode"
-
-    barcode = fields.Char(string="Barcode")
-
-    def button_save(self):
-        active_id = self.env.context.get("active_id")
-        model = self.env.context.get("active_model")
-        record = self.env[model].browse(active_id).exists()
-        if not record:
-            return
-        if self.barcode:
-            record.on_barcode_scanned(self.barcode)

@@ -10,7 +10,7 @@ class StockLocation(models.Model):
     vertical_lift_location = fields.Boolean(
         "Is a Vertical Lift View Location?",
         default=False,
-        help="Check this box to use it as the view for Vertical" " Lift Shuttles.",
+        help="Check this box to use it as the view for Vertical Lift Shuttles.",
     )
     vertical_lift_kind = fields.Selection(
         selection=[
