@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_pull_list
+# 	* stock_pull_list
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,13 +15,15 @@ msgstr ""
 
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
-msgid "All existing Stock moves moving outside of the location specified will be considered demand.\n"
+msgid ""
+"All existing Stock moves moving outside of the location specified will be considered demand.\n"
 "                You can filter these moves in the section below."
 msgstr ""
 
 #. module: stock_pull_list
 #: model:ir.model.fields,help:stock_pull_list.field_stock_pull_list_wizard__consolidate_by_product
-msgid "All needs for each product will be grouped in one line, disregarding date."
+msgid ""
+"All needs for each product will be grouped in one line, disregarding date."
 msgstr ""
 
 #. module: stock_pull_list
@@ -105,7 +107,7 @@ msgid "Generate Pull List"
 msgstr ""
 
 #. module: stock_pull_list
-#: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:295
+#: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:0
 #, python-format
 msgid "Generated Procurement Groups"
 msgstr ""
@@ -191,7 +193,7 @@ msgid "Product"
 msgstr ""
 
 #. module: stock_pull_list
-#: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:188
+#: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:0
 #, python-format
 msgid "Pull List"
 msgstr ""
@@ -213,7 +215,9 @@ msgstr ""
 
 #. module: stock_pull_list
 #: model:ir.model.fields,help:stock_pull_list.field_stock_pull_list_wizard__available_in_source_location
-msgid "Select only rules with enough available stock in source location. Applies for rules with a source location."
+msgid ""
+"Select only rules with enough available stock in source location. Applies "
+"for rules with a source location."
 msgstr ""
 
 #. module: stock_pull_list
@@ -243,7 +247,8 @@ msgstr ""
 
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
-msgid "The pull list checks the stock situation at the given location and calculates\n"
+msgid ""
+"The pull list checks the stock situation at the given location and calculates\n"
 "                the shortfall quantities (quantity needed to cover all needs) for products."
 msgstr ""
 
@@ -262,4 +267,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
 msgid "or"
 msgstr ""
-
