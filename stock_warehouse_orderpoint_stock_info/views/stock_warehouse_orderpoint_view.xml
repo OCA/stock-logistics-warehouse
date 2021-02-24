@@ -39,7 +39,21 @@
                     name="product_category"
                     filter_domain="[('product_category','child_of',self)]"
                 />
+                <field name="product_under_minimum" />
+                <field name="product_over_maximum" />
             </field>
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <filter
+                    string="Under Minimum"
+                    domain="[('product_under_minimum','=',True)]"
+                    name="under_minimum"
+                />
+                <filter
+                    string="Over Maximum"
+                    domain="[('product_over_maximum','=',True)]"
+                    name="over_maximum"
+                />
+            </xpath>
             <xpath expr="//group[1]" position="inside">
                 <filter
                     name="product"
