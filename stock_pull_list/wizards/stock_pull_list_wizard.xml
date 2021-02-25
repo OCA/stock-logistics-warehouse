@@ -55,7 +55,7 @@
                             <field name="wizard_id" invisible="1" />
                             <field name="product_id" />
                             <field name="location_id" />
-                            <field name="date_expected" />
+                            <field name="date" />
                             <field name="available_qty" />
                             <field name="incoming_qty" />
                             <field name="raw_demand_qty" />
@@ -112,14 +112,14 @@
             </form>
         </field>
     </record>
-    <act_window
-        name="Generate Pull List"
-        res_model="stock.pull.list.wizard"
-        binding_model="stock.pull.list.wizard"
-        view_mode="form"
-        target="new"
-        id="action_stock_pull_list_wizard"
-    />
+    <record id="action_stock_pull_list_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Pull List</field>
+        <field name="res_model">stock.pull.list.wizard</field>
+        <field name="binding_model_id" ref="model_stock_pull_list_wizard" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
     <menuitem
         name="Generate Pull List"
         id="menu_stock_pull_list_wizard"

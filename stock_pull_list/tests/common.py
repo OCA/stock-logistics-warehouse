@@ -67,7 +67,6 @@ class TestPullListCommon(TransactionCase):
                         {
                             "name": "Test move",
                             "product_id": self.product_a.id,
-                            "date_expected": date_move,
                             "date": date_move,
                             "product_uom": self.product_a.uom_id.id,
                             "product_uom_qty": qty,
