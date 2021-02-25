@@ -24,19 +24,16 @@ class TestPotentialQty(TransactionCase):
         # We need to compute parent_left and parent_right of the locations as
         # they are used to compute qty_available of the product.
         self.location._parent_store_compute()
-        self.setup_demo_data()
-
-    def setup_demo_data(self):
         #  An interesting product (multi-line BoM, variants)
         self.tmpl = self.browse_ref(
             'mrp.product_product_table_kit_product_template')
         #  First variant
         self.var1 = self.browse_ref('mrp.product_product_table_kit')
-        self.var1.type = 'product'
+        self.var1.type = 'consu'
         #  Second variant
         self.var2 = self.browse_ref(
             'stock_available_mrp.product_kit_1a')
-        self.var2.type = 'product'
+        self.var2.type = 'consu'
         # Make bolt a stockable product to be able to change its stock
         # we need to unreserve the existing move before being able to do it.
         bolt = self.env.ref('mrp.product_product_computer_desk_bolt')
@@ -297,7 +294,7 @@ class TestPotentialQty(TransactionCase):
 
         p2 = self.product_model.create({
             'name': 'Test sub product with BOM',
-            'type': 'product',
+            'type': 'consu',
             'uom_id': self.env.ref('uom.product_uom_unit').id,
         })
 
@@ -368,73 +365,6 @@ class TestPotentialQty(TransactionCase):
         self.create_inventory(p3.id, 10)
         p1.refresh()
         self.assertEqual(2.0, p1.potential_qty)
-
-    def test_component_stock_choice(self):
-        # Test to change component stock for compute BOM stock
-
-        # Get a demo product with outgoing move (qty: 3)
-        prod = self.browse_ref('product.product_product_16')
-
-        # Set on hand qty
-        self.create_inventory(prod.id, 3)
-
-        # Create a product with BOM
-        p1 = self.product_model.create({
-            'name': 'Test product with BOM',
-        })
-        bom_p1 = self.bom_model.create({
-            'product_tmpl_id': p1.product_tmpl_id.id,
-            'product_id': p1.id,
-            'product_qty': 1,
-        })
-
-        # Need 1 prod for that
-        self.bom_line_model.create({
-            'bom_id': bom_p1.id,
-            'product_id': prod.id,
-            'product_qty': 1,
-        })
-
-        # Default component is qty_available
-        p1.refresh()
-        self.assertEqual(3.0, p1.potential_qty)
-
-        # Change to immediately usable
-        self.config.set_param('stock_available_mrp_based_on',
-                              'immediately_usable_qty')
-
-        p1.refresh()
-        self.assertEqual(0.0, p1.potential_qty)
-
-        # If iMac has a Bom and can be manufactured
-        component = self.product_model.create({
-            'name': 'component',
-            'type': 'product'
-        })
-        self.create_inventory(component.id, 5)
-
-        imac_bom = self.bom_model.create({
-            'product_tmpl_id': prod.product_tmpl_id.id,
-            'product_id': prod.id,
-            'product_qty': 1,
-            'type': 'phantom',
-        })
-
-        # Need 1 component for prod
-        self.bom_line_model.create({
-            'bom_id': imac_bom.id,
-            'product_id': component.id,
-            'product_qty': 1,
-        })
-
-        p1.refresh()
-        self.assertEqual(5.0, p1.potential_qty)
-
-        # Changing to virtual (same as immediately in current config)
-        self.config.set_param('stock_available_mrp_based_on',
-                              'virtual_available')
-        p1.refresh()
-        self.assertEqual(5.0, p1.potential_qty)
 
     def test_potential_qty_list(self):
         # Try to highlight a bug when _get_potential_qty is called on
