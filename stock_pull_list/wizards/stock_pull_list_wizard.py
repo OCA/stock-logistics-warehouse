@@ -5,6 +5,7 @@ import itertools
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class PullListWizard(models.TransientModel):
@@ -69,7 +70,7 @@ class PullListWizard(models.TransientModel):
         if self.exclude_reserved:
             domain.append(("state", "not in", ("assigned",)))
         if self.date_to:
-            domain.append(("date_expected", "<=", self.date_to))
+            domain.append(("date", "<=", self.date_to))
         if self.procurement_group_ids:
             domain.append(("group_id", "in", self.procurement_group_ids.ids))
         return domain
@@ -81,12 +82,12 @@ class PullListWizard(models.TransientModel):
             ("state", "not in", ("draft", "done", "cancel")),
         ]
         if self.date_to:
-            domain.append(("date_expected", "<=", self.date_to))
+            domain.append(("date", "<=", self.date_to))
         return domain
 
     @api.model
     def _prepare_line_values(self, key, demand_qty, supply_qty):
-        product, location, date_expected = key
+        product, location, date = key
         rule = self._get_stock_rule_id(product, location)
         global qty_assigned
         prev = qty_assigned.setdefault(product, 0.0)
@@ -98,7 +99,7 @@ class PullListWizard(models.TransientModel):
         return {
             "product_id": product.id if product else False,
             "location_id": location.id if location else False,
-            "date_expected": date_expected,
+            "date": date,
             "stock_rule_id": rule.id if rule else False,
             "raw_demand_qty": demand_qty,
             "available_qty": qty_available,
@@ -112,7 +113,7 @@ class PullListWizard(models.TransientModel):
             product.id
         )
         if self.exclude_reserved:
-            return product_l.qty_available_not_res
+            return product_l.free_qty
         return product_l.qty_available
 
     @api.model
@@ -130,35 +131,28 @@ class PullListWizard(models.TransientModel):
         domain = self._get_moves_demand_domain()
         # `read_group` is not possible here because of the date format the
         # method returns.
-        demand_moves = self.env["stock.move"].search(domain, order="date_expected asc")
+        demand_moves = self.env["stock.move"].search(domain, order="date asc")
         demand_dict = {}
         force_date = fields.Date.today() if self.consolidate_by_product else False
         for demand in demand_moves:
             key = (
                 demand.product_id,
                 demand.location_id,
-                fields.Date.to_date(demand.date_expected)
-                if not force_date
-                else force_date,
+                fields.Date.to_date(demand.date) if not force_date else force_date,
             )
             prev = demand_dict.setdefault(key, 0.0)
             # TODO: when exclude_reserved is selected, handle partially avail.
             demand_dict[key] = prev + demand.product_uom_qty
 
         domain = self._get_moves_incoming_domain()
-        incoming_moves = self.env["stock.move"].search(
-            domain, order="date_expected asc"
-        )
+        incoming_moves = self.env["stock.move"].search(domain, order="date asc")
         incoming_dict = {}
         for supply in incoming_moves:
             move_for_date = demand_moves.filtered(
-                lambda m: m.product_id == supply.product_id
-                and m.date_expected >= supply.date_expected
+                lambda m: m.product_id == supply.product_id and m.date >= supply.date
             )
             if move_for_date:
-                date_selected = (
-                    move_for_date[0].date_expected if not force_date else force_date
-                )
+                date_selected = move_for_date[0].date if not force_date else force_date
             else:
                 # Supply is later than last demand -> ignore it.
                 continue
@@ -273,7 +267,7 @@ class PullListWizard(models.TransientModel):
                     group = pg_obj.create(self._prepare_proc_group_values())
                     proc_groups.append(group.id)
 
-                values = self._prepare_procurement_values(line.date_expected, group)
+                values = self._prepare_procurement_values(line.date, group)
                 procurements.append(
                     pg_obj.Procurement(
                         line.product_id,
@@ -318,11 +312,11 @@ class PullListWizardLine(models.TransientModel):
     location_id = fields.Many2one(
         comodel_name="stock.location",
     )
-    date_expected = fields.Date()
-    available_qty = fields.Float()
-    incoming_qty = fields.Float()
-    raw_demand_qty = fields.Float()
-    needed_qty = fields.Float()
+    date = fields.Date()
+    available_qty = fields.Float(digits="Product Unit of Measure")
+    incoming_qty = fields.Float(digits="Product Unit of Measure")
+    raw_demand_qty = fields.Float(digits="Product Unit of Measure")
+    needed_qty = fields.Float(digits="Product Unit of Measure")
     stock_rule_id = fields.Many2one(
         comodel_name="stock.rule",
     )
@@ -334,4 +328,4 @@ class PullListWizardLine(models.TransientModel):
         qty_avail = self.wizard_id._get_available_qty(
             self.product_id, self.stock_rule_id.location_src_id
         )
-        return qty_avail > self.needed_qty
+        return float_compare(qty_avail, self.needed_qty, precision_digits=2) > 0
