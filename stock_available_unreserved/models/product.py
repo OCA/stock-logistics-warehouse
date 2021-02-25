@@ -34,12 +34,20 @@ class ProductTemplate(models.Model):
         quant_ids = quants.filtered(
             lambda x: x.product_id.qty_available_not_res > 0
         ).ids
-        result = self.env.ref("stock.product_template_open_quants").read()[0]
-        result["domain"] = [("id", "in", quant_ids)]
-        result["context"] = {
-            "search_default_locationgroup": 1,
-            "search_default_internal_loc": 1,
+        result = {
+            "type": "ir.actions.act_window",
+            "name": _("some name"),
+            "target": "current",
+            "res_model": "stock.quant",
+            "domain": [("id", "in", quant_ids)],
+            "view_type": "tree",
+            "view_mode": "tree",
+            "context": {
+                "search_default_locationgroup": 1,
+                "search_default_internal_loc": 1,
+            },
         }
+
         return result
 
     def _search_quantity_unreserved(self, operator, value):
