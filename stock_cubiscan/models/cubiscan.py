@@ -13,11 +13,12 @@ class CubiscanDevice(models.Model):
     _order = "warehouse_id, name"
 
     name = fields.Char("Name", required=True)
-    device_address = fields.Char("Device IP Address", required=True)
-    port = fields.Integer("Port", required=True)
-    timeout = fields.Integer(
-        "Timeout", help="Timeout in seconds", required=True, default=30
+    driver = fields.Selection(
+        [("cubiscan", "Cubiscan")], required=True, default="cubiscan"
     )
+    device_address = fields.Char("Device IP Address")
+    port = fields.Integer("Port")
+    timeout = fields.Integer("Timeout", help="Timeout in seconds", default=30)
     warehouse_id = fields.Many2one("stock.warehouse", "Warehouse")
     state = fields.Selection(
         [("not_ready", "Not Ready"), ("ready", "Ready")],
@@ -29,7 +30,7 @@ class CubiscanDevice(models.Model):
     @api.constrains("device_address", "port")
     def _check_connection_infos(self):
         self.ensure_one()
-        if not 1 <= self.port <= 65535:
+        if self.driver == "cubiscan" and (not 1 <= self.port <= 65535):
             raise ValidationError(_("Port must be in range 1-65535"))
 
     def open_wizard(self):

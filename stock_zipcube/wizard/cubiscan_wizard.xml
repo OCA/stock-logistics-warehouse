@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_zipcube_wizard" model="ir.ui.view">
+        <field name="name">zipcube.wizard.form</field>
+        <field name="model">cubiscan.wizard</field>
+        <field name="inherit_id" ref="stock_cubiscan.view_cubiscan_wizard" />
+        <field name="arch" type="xml">
+            <field name="_barcode_scanned" position="after">
+                <field name="device_driver" invisible="1" />
+                <button
+                    name="reload"
+                    type="object"
+                    string="Refresh"
+                    icon="fa-refresh"
+                    attrs="{'invisible': [('device_driver', '!=', 'zipcube')]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

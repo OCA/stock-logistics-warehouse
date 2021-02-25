@@ -23,12 +23,27 @@
                 <sheet>
                     <field name="id" invisible="1" />
                     <group>
-                        <group name="cubiscan">
+                        <group name="device">
                             <field name="name" />
-                            <field name="device_address" />
-                            <field name="port" />
-                            <field name="timeout" />
+                            <field name="driver" />
                             <field name="warehouse_id" />
+                        </group>
+                        <group
+                            name="cubiscan"
+                            attrs="{'invisible': [('driver', '!=', 'cubiscan')]}"
+                        >
+                            <field
+                                name="device_address"
+                                attrs="{'required': [('driver', '=', 'cubiscan')]}"
+                            />
+                            <field
+                                name="port"
+                                attrs="{'required': [('driver', '=', 'cubiscan')]}"
+                            />
+                            <field
+                                name="timeout"
+                                attrs="{'required': [('driver', '=', 'cubiscan')]}"
+                            />
                         </group>
                         <group />
                     </group>
@@ -45,6 +60,7 @@
                 decoration-success="state == 'ready'"
             >
                 <field name="name" />
+                <field name="driver" />
                 <field name="device_address" />
                 <field name="port" />
                 <field name="timeout" />

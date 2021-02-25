@@ -235,13 +235,14 @@ class CubiscanWizardLine(models.TransientModel):
 
     def cubiscan_measure(self):
         self.ensure_one()
-        measures = self.wizard_id.device_id.get_measure()
-        # measures are a tuple of 2 slots (measure, precision error),
-        # we only care about the measure for now
-        measures = {
-            "lngth": int(measures["length"][0] * 1000),
-            "width": int(measures["width"][0] * 1000),
-            "height": int(measures["height"][0] * 1000),
-            "max_weight": measures["weight"][0],
-        }
-        self.write(measures)
+        if self.wizard_id.device_id.driver == "cubiscan":
+            measures = self.wizard_id.device_id.get_measure()
+            # measures are a tuple of 2 slots (measure, precision error),
+            # we only care about the measure for now
+            measures = {
+                "lngth": int(measures["length"][0] * 1000),
+                "width": int(measures["width"][0] * 1000),
+                "height": int(measures["height"][0] * 1000),
+                "max_weight": measures["weight"][0],
+            }
+            self.write(measures)
