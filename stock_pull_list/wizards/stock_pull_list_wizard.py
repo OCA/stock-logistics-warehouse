@@ -21,8 +21,13 @@ class PullListWizard(models.TransientModel):
         res.update({"warehouse_id": wh.id, "location_id": wh.lot_stock_id.id})
         return res
 
-    location_id = fields.Many2one(comodel_name="stock.location", required=True,)
-    warehouse_id = fields.Many2one(comodel_name="stock.warehouse",)
+    location_id = fields.Many2one(
+        comodel_name="stock.location",
+        required=True,
+    )
+    warehouse_id = fields.Many2one(
+        comodel_name="stock.warehouse",
+    )
     line_ids = fields.One2many(
         comodel_name="stock.pull.list.wizard.line",
         inverse_name="wizard_id",
@@ -31,7 +36,8 @@ class PullListWizard(models.TransientModel):
     # Step 1 - filtering options.
     exclude_reserved = fields.Boolean()
     location_dest_id = fields.Many2one(
-        string="Destination Location", comodel_name="stock.location",
+        string="Destination Location",
+        comodel_name="stock.location",
     )
     date_to = fields.Date()
     consolidate_by_product = fields.Boolean(
@@ -303,15 +309,23 @@ class PullListWizardLine(models.TransientModel):
     _name = "stock.pull.list.wizard.line"
     _description = "Stock Pull List Wizard Line"
 
-    wizard_id = fields.Many2one(comodel_name="stock.pull.list.wizard",)
-    product_id = fields.Many2one(comodel_name="product.product",)
-    location_id = fields.Many2one(comodel_name="stock.location",)
+    wizard_id = fields.Many2one(
+        comodel_name="stock.pull.list.wizard",
+    )
+    product_id = fields.Many2one(
+        comodel_name="product.product",
+    )
+    location_id = fields.Many2one(
+        comodel_name="stock.location",
+    )
     date_expected = fields.Date()
     available_qty = fields.Float()
     incoming_qty = fields.Float()
     raw_demand_qty = fields.Float()
     needed_qty = fields.Float()
-    stock_rule_id = fields.Many2one(comodel_name="stock.rule",)
+    stock_rule_id = fields.Many2one(
+        comodel_name="stock.rule",
+    )
     selected = fields.Boolean(default=True)
 
     def _is_available_in_source_location(self):
