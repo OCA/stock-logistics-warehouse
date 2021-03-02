@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo13-addon-stock_account_change_qty_reason',
         'odoo13-addon-stock_archive_constraint',
         'odoo13-addon-stock_available',
+        'odoo13-addon-stock_available_immediately',
         'odoo13-addon-stock_available_unreserved',
         'odoo13-addon-stock_change_qty_reason',
         'odoo13-addon-stock_cubiscan',
