@@ -12,6 +12,13 @@ class StockRequest(models.Model):
         "account.analytic.account", string="Analytic Account"
     )
 
+    @api.onchange("product_id")
+    def onchange_product_id(self):
+        res = super().onchange_product_id()
+        if self.order_id and self.order_id.analytic_account_id:
+            self.analytic_account_id = self.order_id.analytic_account_id
+        return res
+
     @api.constrains("analytic_account_id")
     def _check_analytic_company_constrains(self):
         if any(

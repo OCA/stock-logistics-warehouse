@@ -17,6 +17,9 @@ class StockRequestOrder(models.Model):
         string="Analytic Accounts",
         readonly=True,
     )
+    analytic_account_id = fields.Many2one(
+        "account.analytic.account",
+    )
 
     @api.depends("stock_request_ids")
     def _compute_analytic_ids(self):
