@@ -5,7 +5,7 @@
 {
     'name': 'Order point generator',
     'summary': 'Mass configuration of stock order points',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'author': "Camptocamp, "
               "Tecnativa, "
               "Odoo Community Association (OCA)",
