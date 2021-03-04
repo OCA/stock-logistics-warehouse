@@ -70,7 +70,7 @@ class TestPotentialQty(TransactionCase):
             location_id = self.wh_main.lot_stock_id.id
 
         inventory = self.env["stock.inventory"].create(
-            {"name": "Test inventory", "location_id": location_id, "filter": "partial"}
+            {"name": "Test inventory", "location_ids": [(4, location_id)]}
         )
         inventory.action_start()
         self.env["stock.inventory.line"].create(
@@ -129,8 +129,7 @@ class TestPotentialQty(TransactionCase):
             {
                 "name": "Receive CPUa8",
                 "company_id": chicago_id,
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "filter": "partial",
+                "location_ids": [(4, self.wh_ch.lot_stock_id.id)],
             }
         )
         inventory.action_start()
@@ -150,8 +149,7 @@ class TestPotentialQty(TransactionCase):
             {
                 "name": "components for 1st variant",
                 "company_id": chicago_id,
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "filter": "partial",
+                "location_ids": [(4, self.wh_ch.lot_stock_id.id)],
             }
         )
         inventory.action_start()
@@ -212,8 +210,7 @@ class TestPotentialQty(TransactionCase):
         inventory = self.env["stock.inventory"].create(
             {
                 "name": "Receive Mouses",
-                "location_id": self.wh_main.lot_stock_id.id,
-                "filter": "partial",
+                "location_ids": [(4, self.wh_main.lot_stock_id.id)],
             }
         )
         inventory.action_start()
@@ -238,8 +235,7 @@ class TestPotentialQty(TransactionCase):
         inventory = self.env["stock.inventory"].create(
             {
                 "name": "components for 1st variant",
-                "location_id": self.wh_main.lot_stock_id.id,
-                "filter": "partial",
+                "location_ids": [(4, self.wh_main.lot_stock_id.id)],
             }
         )
         inventory.action_start()
@@ -269,8 +265,7 @@ class TestPotentialQty(TransactionCase):
         inventory = self.env["stock.inventory"].create(
             {
                 "name": "components for 2nd variant",
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "filter": "partial",
+                "location_ids": [(4, self.wh_ch.lot_stock_id.id)],
             }
         )
         inventory.action_start()

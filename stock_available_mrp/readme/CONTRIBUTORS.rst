@@ -4,3 +4,4 @@
 * Laurent Mignon <laurent.mignon@acsone.eu>
 * Cédric Pigeon <cedric.pigeon@acsone.eu>
 * Florian da Costa <florian.dacosta@akretion.com>
+* Pimolnat Suntian <pimolnats@ecosoft.co.th>
