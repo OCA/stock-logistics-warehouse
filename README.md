@@ -19,6 +19,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[scrap_reason_code](scrap_reason_code/) | 14.0.1.0.0 | Reason code for scrapping
 [stock_available](stock_available/) | 14.0.1.0.1 | Stock available to promise
 [stock_demand_estimate](stock_demand_estimate/) | 14.0.1.1.0 | Allows to create demand estimates.
 [stock_free_quantity](stock_free_quantity/) | 14.0.1.0.0 | Stock Free Quantity
