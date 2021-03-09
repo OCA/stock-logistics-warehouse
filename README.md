@@ -26,6 +26,7 @@ addon | version | summary
 --- | --- | ---
 [account_move_line_product](account_move_line_product/) | 10.0.1.0.0 | Displays the product in the journal entries and items
 [account_move_line_stock_info](account_move_line_stock_info/) | 10.0.1.0.0 | Account Move Line Stock Move
+[business_product_location](business_product_location/) | 10.0.1.0.0 | Business Product Location
 [packaging_uom](packaging_uom/) | 10.0.1.0.1 | Use uom in package
 [packaging_uom_view](packaging_uom_view/) | 10.0.1.0.0 | If purchase is installed along with packaging_uom, there is a duplicate view
 [procurement_auto_create_group](procurement_auto_create_group/) | 10.0.1.0.0 | Allows to configure the system to propose automatically new procurement groups in procurement orders.
