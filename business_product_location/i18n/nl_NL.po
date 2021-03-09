@@ -1,0 +1,188 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * business_product_location
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Peter Hageman <hageman.p@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-16 07:35+0000\n"
+"PO-Revision-Date: 2017-10-20 00:49+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/"
+"teams/23907/nl_NL/)\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: business_product_location
+#: model:ir.ui.view,arch_db:business_product_location.report_bpl
+msgid "<strong>Excepted Quantity</strong>"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.ui.view,arch_db:business_product_location.report_bpl
+msgid "<strong>Outgoing Quantity</strong>"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.ui.view,arch_db:business_product_location.report_bpl
+msgid "<strong>Product</strong>"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.ui.view,arch_db:business_product_location.report_bpl
+msgid "<strong>Real Quantity</strong>"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.ui.view,arch_db:business_product_location.business_product_location_view_form
+msgid "Business Name"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.actions.act_window,name:business_product_location.business_product_location_action
+#: model:ir.actions.report.xml,name:business_product_location.business_product_location_report_action
+#: model:ir.ui.menu,name:business_product_location.business_product_location_menu
+#: model:ir.ui.view,arch_db:business_product_location.business_product_location_view_form
+msgid "Business Product Location"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_product_product_business_usage_ids
+#: model:ir.model.fields,field_description:business_product_location.field_stock_location_business_usage_id
+#: model:ir.ui.view,arch_db:business_product_location.product_product_view_form_inherit_business_product_location
+msgid "Business Usage"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_create_uid
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_create_date
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_display_name
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_display_name
+#: model:ir.model.fields,field_description:business_product_location.field_report_business_product_location_report_bpl_display_name
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#. module: business_product_location
+#: model:ir.ui.view,arch_db:business_product_location.report_bpl
+msgid "Excepted product -"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_id
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_id
+#: model:ir.model.fields,field_description:business_product_location.field_report_business_product_location_report_bpl_id
+msgid "ID"
+msgstr "ID"
+
+#. module: business_product_location
+#: model:ir.model,name:business_product_location.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line___last_update
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location___last_update
+#: model:ir.model.fields,field_description:business_product_location.field_report_business_product_location_report_bpl___last_update
+msgid "Last Modified on"
+msgstr "Laatst gewijzigd op"
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_write_uid
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_write_date
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_location_ids
+#: model:ir.ui.view,arch_db:business_product_location.business_product_location_view_form
+msgid "Locations"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_name
+msgid "Name"
+msgstr "Naam"
+
+#. module: business_product_location
+#: model:ir.ui.view,arch_db:business_product_location.report_bpl
+msgid "Non excepted product -"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_business_product_location_id
+msgid "Parent business product location"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model,name:business_product_location.model_product_product
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_product_id
+msgid "Product"
+msgstr "Product"
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_product_qty
+msgid "Product Quantity"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_line_product_uom_id
+msgid "Product Unit of Measure"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model.fields,field_description:business_product_location.field_business_product_location_product_ids
+#: model:ir.ui.view,arch_db:business_product_location.business_product_location_view_form
+msgid "Products"
+msgstr ""
+
+#. module: business_product_location
+#: code:addons/business_product_location/models/business_product_line.py:57
+#, python-format
+msgid ""
+"The Product Unit of Measure you chose has a different category than in the "
+"product form."
+msgstr ""
+
+#. module: business_product_location
+#: code:addons/business_product_location/models/business_product_line.py:56
+#, python-format
+msgid "Warning"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model,name:business_product_location.model_business_product_line
+msgid "business.product.line"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model,name:business_product_location.model_business_product_location
+msgid "business.product.location"
+msgstr ""
+
+#. module: business_product_location
+#: model:ir.model,name:business_product_location.model_report_business_product_location_report_bpl
+msgid "report.business_product_location.report_bpl"
+msgstr ""

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="report_bpl">
+            <t t-call="report.html_container">
+                <t t-foreach="less_product_by_loc" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <h2>
+                            Excepted product - <span t-esc="o_value['location_name']"/>
+                            </h2>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Product</strong></th>
+                                        <th class="text-right"><strong>Excepted Quantity</strong></th>
+                                        <th class="text-right"><strong>Real Quantity</strong></th>
+                                        <th class="text-right"><strong>Outgoing Quantity</strong></th>
+                                    </tr>
+                                </thead>
+                                <tr t-foreach="o_value['products']" t-as="line">
+                                    <t t-if="line_value['strong']">
+                                        <td><strong><span t-esc="line_value['product_name']"/></strong></td>
+                                        <td class="text-right"><strong><span t-esc="line_value['excepted_qty']"/></strong></td>
+                                        <td class="text-right"><strong><span t-esc="line_value['real_qty']"/></strong></td>
+                                        <td class="text-right"><strong><span t-esc="line_value['outgoing_qty']"/></strong></td>
+                                    </t>
+                                    <t t-if="not line_value['strong']">
+                                        <td><span t-esc="line_value['product_name']"/></td>
+                                        <td class="text-right"><span t-esc="line_value['excepted_qty']"/></td>
+                                        <td class="text-right"><span t-esc="line_value['real_qty']"/></td>
+                                        <td class="text-right"><span t-esc="line_value['outgoing_qty']"/></td>
+                                    </t>
+                                </tr>
+                            </table>
+                            <h2>
+                            Non excepted product - <span t-esc="o_value['location_name']"/>
+                            </h2>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Product</strong></th>
+                                        <th class="text-right"><strong>Excepted Quantity</strong></th>
+                                        <th class="text-right"><strong>Real Quantity</strong></th>
+                                        <th class="text-right"><strong>Outgoing Quantity</strong></th>
+                                    </tr>
+                                </thead>
+                                <tr t-foreach="more_product_by_loc[o]['products']" t-as="line">
+                                    <t t-if="line_value['strong']">
+                                        <td><strong><span t-esc="line_value['product_name']"/></strong></td>
+                                        <td class="text-right"><strong><span t-esc="line_value['excepted_qty']"/></strong></td>
+                                        <td class="text-right"><strong><span t-esc="line_value['real_qty']"/></strong></td>
+                                        <td class="text-right"><strong><span t-esc="line_value['outgoing_qty']"/></strong></td>
+                                    </t>
+                                    <t t-if="not line_value['strong']">
+                                        <td><span t-esc="line_value['product_name']"/></td>
+                                        <td class="text-right"><span t-esc="line_value['excepted_qty']"/></td>
+                                        <td class="text-right"><span t-esc="line_value['real_qty']"/></td>
+                                        <td class="text-right"><span t-esc="line_value['outgoing_qty']"/></td>
+                                    </t>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                 </t>
+             </t>
+        </template>
+</odoo>
