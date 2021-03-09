@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_location_zone
+# 	* stock_location_zone
 #
 msgid ""
 msgstr ""
@@ -80,8 +80,12 @@ msgstr "显示名称"
 
 #. module: stock_location_zone
 #: model:ir.model.fields,help:stock_location_zone.field_stock_location__location_name_format
-msgid "Format string that will compute the name of the location. Use location fields. Example: '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'"
-msgstr "格式字符串，用于计算位置名称。使用位置字段。例： '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'"
+msgid ""
+"Format string that will compute the name of the location. Use location "
+"fields. Example: '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'"
+msgstr ""
+"格式字符串，用于计算位置名称。使用位置字段。例： '{area}-{corridor:0>2}."
+"{rack:0>3}.{level:0>2}'"
 
 #. module: stock_location_zone
 #: model:ir.model.fields,help:stock_location_zone.field_stock_location__level
@@ -140,10 +144,24 @@ msgstr "名称"
 
 #. module: stock_location_zone
 #: model:ir.model.fields,help:stock_location_zone.field_stock_location__posx
+msgid ""
+"Optional (X) coordinate of the bin if the location is split in several "
+"parts. (e.g. drawer storage)"
+msgstr ""
+
+#. module: stock_location_zone
 #: model:ir.model.fields,help:stock_location_zone.field_stock_location__posy
+msgid ""
+"Optional (Y) coordinate of the bin if the location is split in several "
+"parts. (e.g. drawer storage)"
+msgstr ""
+
+#. module: stock_location_zone
 #: model:ir.model.fields,help:stock_location_zone.field_stock_location__posz
-msgid "Optional localization details, for information purpose only"
-msgstr "可选的本地化详细信息，仅供参考"
+msgid ""
+"Optional (Z) coordinate of the bin if the location is split in several "
+"parts. (e.g. storage tray)"
+msgstr ""
 
 #. module: stock_location_zone
 #: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__picking_type_id
@@ -204,3 +222,6 @@ msgstr "过道"
 #: sql_constraint:stock.picking.zone:0
 msgid "The picking zone code must be unique"
 msgstr "拣货区域代码必须唯一"
+
+#~ msgid "Optional localization details, for information purpose only"
+#~ msgstr "可选的本地化详细信息，仅供参考"
