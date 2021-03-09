@@ -137,9 +137,17 @@ msgstr ""
 
 #. module: stock_location_zone
 #: model:ir.model.fields,help:stock_location_zone.field_stock_location__posx
+msgid "Optional (X) coordinate of the bin if the location is split in several parts. (e.g. drawer storage)"
+msgstr ""
+
+#. module: stock_location_zone
 #: model:ir.model.fields,help:stock_location_zone.field_stock_location__posy
+msgid "Optional (Y) coordinate of the bin if the location is split in several parts. (e.g. drawer storage)"
+msgstr ""
+
+#. module: stock_location_zone
 #: model:ir.model.fields,help:stock_location_zone.field_stock_location__posz
-msgid "Optional localization details, for information purpose only"
+msgid "Optional (Z) coordinate of the bin if the location is split in several parts. (e.g. storage tray)"
 msgstr ""
 
 #. module: stock_location_zone
