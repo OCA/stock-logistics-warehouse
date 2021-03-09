@@ -39,6 +39,7 @@ setuptools.setup(
         'odoo12-addon-stock_inventory_virtual_location_change_qty_reason',
         'odoo12-addon-stock_location_limit_product',
         'odoo12-addon-stock_location_lockdown',
+        'odoo12-addon-stock_location_position',
         'odoo12-addon-stock_location_template',
         'odoo12-addon-stock_location_zone',
         'odoo12-addon-stock_move_location',
