@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo10-addon-account_move_line_product',
         'odoo10-addon-account_move_line_stock_info',
+        'odoo10-addon-business_product_location',
         'odoo10-addon-packaging_uom',
         'odoo10-addon-packaging_uom_view',
         'odoo10-addon-procurement_auto_create_group',
