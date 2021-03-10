@@ -10,6 +10,8 @@ class StockRequest(models.Model):
 
     analytic_account_id = fields.Many2one(
         'account.analytic.account', string='Analytic Account')
+    analytic_tag_ids = fields.Many2many(
+        'account.analytic.tag', string='Analytic Tags')
 
     @api.constrains('analytic_account_id')
     def _check_analytic_company_constrains(self):
