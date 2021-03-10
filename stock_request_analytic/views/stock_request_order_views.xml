@@ -10,6 +10,7 @@
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <field name="analytic_account_ids" invisible="1"/>
+                <field name="analytic_tag_ids" />
                 <button type="object"
                     name="action_view_analytic"
                     class="oe_stat_button"
