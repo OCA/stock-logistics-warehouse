@@ -10,6 +10,7 @@
         <field name="arch" type="xml">
             <field name="procurement_group_id" position="after">
                 <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
             </field>
         </field>
     </record>
