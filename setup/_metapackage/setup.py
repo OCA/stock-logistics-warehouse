@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo13-addon-stock_inventory_discrepancy',
         'odoo13-addon-stock_inventory_exclude_sublocation',
         'odoo13-addon-stock_inventory_include_exhausted',
+        'odoo13-addon-stock_inventory_justification',
         'odoo13-addon-stock_inventory_line_open',
         'odoo13-addon-stock_inventory_lockdown',
         'odoo13-addon-stock_inventory_preparation_filter',
