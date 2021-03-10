@@ -12,7 +12,14 @@ class StockRule(models.Model):
         vals = super(StockRule, self)._prepare_purchase_order_line(
             product_id, product_qty, product_uom, values, po, supplier)
         if 'stock_request_id' in values:
-            vals['stock_request_ids'] = [(4, values['stock_request_id'])]
+            stock_request = self.env["stock.request"].browse(values['stock_request_id'])
+            vals['stock_request_ids'] = [(4, stock_request.id)]
+            if stock_request.analytic_account_id:
+                vals['account_analytic_id'] = stock_request.analytic_account_id.id
+            if stock_request.analytic_tag_ids:
+                vals['analytic_tag_ids'] = [
+                    (4, tag.id) for tag in stock_request.analytic_tag_ids
+                ]
         return vals
 
     def _update_purchase_order_line(self, product_id, product_qty, product_uom,
