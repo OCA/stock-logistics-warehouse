@@ -17,12 +17,20 @@ class StockRequestOrder(models.Model):
         string='Analytic Accounts',
         readonly=True,
     )
+    analytic_tag_ids = fields.One2many(
+        comodel_name='account.analytic.tag',
+        compute='_compute_analytic_ids',
+        string='Analytic Tags',
+        readonly=True,
+    )
 
     @api.depends('stock_request_ids')
     def _compute_analytic_ids(self):
         for req in self.sudo():
             req.analytic_account_ids = req.stock_request_ids.mapped(
                 'analytic_account_id')
+            req.analytic_tag_ids = req.stock_request_ids.mapped(
+                'analytic_tag_ids')
             req.analytic_count = len(req.analytic_account_ids)
 
     @api.multi

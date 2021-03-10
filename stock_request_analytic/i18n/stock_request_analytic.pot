@@ -31,6 +31,12 @@ msgid "Analytic Count"
 msgstr ""
 
 #. module: stock_request_analytic
+#: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request__analytic_tag_ids
+#: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__analytic_tag_ids
+msgid "Analytic Tags"
+msgstr ""
+
+#. module: stock_request_analytic
 #: model:ir.model,name:stock_request_analytic.model_stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request_analytic.view_account_analytic_account_form
 msgid "Stock Request"
@@ -52,7 +58,7 @@ msgid "Stock Rule"
 msgstr ""
 
 #. module: stock_request_analytic
-#: code:addons/stock_request_analytic/models/stock_request.py:19
+#: code:addons/stock_request_analytic/models/stock_request.py:21
 #, python-format
 msgid "You cannot link a analytic account to a stock request that belongs to another company."
 msgstr ""
