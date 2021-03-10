@@ -14,14 +14,10 @@ def convert_m2o_to_x2m_fields(env):
             "categ_ids",
             categ_column,
         )
-    lot_column = openupgrade.get_legacy_name("lot_column")
+    lot_column = openupgrade.get_legacy_name("lot_id")
     if openupgrade.column_exists(env.cr, "stock_inventory", lot_column):
         openupgrade.m2o_to_x2m(
-            env.cr,
-            env["stock.inventory"],
-            "stock_inventory",
-            "lot_ids",
-            openupgrade.get_legacy_name("lot_id"),
+            env.cr, env["stock.inventory"], "stock_inventory", "lot_ids", lot_column,
         )
 
 
