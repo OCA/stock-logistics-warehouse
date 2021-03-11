@@ -42,8 +42,9 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
         })
         self.pizza.route_ids = [(6, 0, self.demand_route.ids)]
 
-    def prepare_order_request_analytic(self, aa, company):
+    def prepare_order_request_analytic(self, aa, company, analytic_tags=None):
         expected_date = fields.Datetime.now()
+        analytic_tags = analytic_tags or self.env["account.analytic.tag"]
         vals = {
             'company_id': company.id,
             'warehouse_id': self.warehouse.id,
@@ -54,6 +55,7 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
                 'product_uom_id': self.pizza.uom_id.id,
                 'product_uom_qty': 5.0,
                 'analytic_account_id': aa.id,
+                'analytic_tag_ids': [(4, tag.id) for tag in analytic_tags],
                 'company_id': company.id,
                 'warehouse_id': self.warehouse.id,
                 'location_id': self.demand_loc.id,
@@ -63,13 +65,16 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
         return vals
 
     def test_stock_analytic(self):
+        analytic_tag = self.env.ref('analytic.tag_contract')
         vals = self.prepare_order_request_analytic(
-            self.analytic, self.main_company)
+            self.analytic, self.main_company, analytic_tags=analytic_tag)
         order = self.env['stock.request.order'].create(vals)
         req = order.stock_request_ids
         order.action_confirm()
         self.assertEqual(
             req.move_ids.mapped('analytic_account_id'), self.analytic)
+        self.assertEqual(
+            req.move_ids.mapped('analytic_tag_ids'), analytic_tag)
         self.assertEqual(order.analytic_count, 1)
         action = order.action_view_analytic()
         self.assertTrue(action['res_id'], self.analytic.id)
