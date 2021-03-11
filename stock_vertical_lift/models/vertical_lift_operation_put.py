@@ -172,11 +172,12 @@ class VerticalLiftOperationPut(models.Model):
         self.current_move_line_id.fetch_vertical_lift_tray_dest()
 
     def button_release(self):
-        super().button_release()
+        res = super().button_release()
         if self.count_move_lines_to_do_all() == 0:
             # we don't need to release (close) the tray until we have reached
             # the last line: the release is implicit when a next line is
             # fetched if the tray change
             self.shuttle_id.release_vertical_lift_tray()
             # sorry not sorry
-            return self._rainbow_man()
+            res = self._rainbow_man()
+        return res
