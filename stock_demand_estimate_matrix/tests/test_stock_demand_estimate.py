@@ -22,8 +22,16 @@ class TestStockDemandEstimate(SavepointCase):
         cls.company = cls.env.ref("base.main_company")
 
         # Create users:
-        cls.manager = cls._create_user("user_1", [cls.g_stock_manager], cls.company,).id
-        cls.user = cls._create_user("user_2", [cls.g_stock_user], cls.company,).id
+        cls.manager = cls._create_user(
+            "user_1",
+            [cls.g_stock_manager],
+            cls.company,
+        ).id
+        cls.user = cls._create_user(
+            "user_2",
+            [cls.g_stock_user],
+            cls.company,
+        ).id
         cls.drt_monthly = cls.env["date.range.type"].create(
             {"name": "Month", "allow_overlap": False}
         )
@@ -84,7 +92,9 @@ class TestStockDemandEstimate(SavepointCase):
         sheets = self.env["stock.demand.estimate.sheet"].search([])
         for sheet in sheets:
             self.assertEqual(
-                len(sheet.line_ids), 12, "There should be 12 lines.",
+                len(sheet.line_ids),
+                12,
+                "There should be 12 lines.",
             )
             self.assertEqual(
                 fields.Date.to_string(sheet.date_start),
@@ -97,7 +107,9 @@ class TestStockDemandEstimate(SavepointCase):
                 "The date end should be 1943-12-31",
             )
             self.assertEqual(
-                sheet.location_id.id, self.location.id, "Wrong location",
+                sheet.location_id.id,
+                self.location.id,
+                "Wrong location",
             )
             for line in sheet.line_ids:
                 line.product_uom_qty = 1
@@ -119,7 +131,9 @@ class TestStockDemandEstimate(SavepointCase):
                 [("date_range_id", "in", ranges.ids)]
             )
             self.assertEqual(
-                len(estimates), 12, "There should be 12 estimate records.",
+                len(estimates),
+                12,
+                "There should be 12 estimate records.",
             )
             for estimate in estimates:
                 self.assertEqual(
@@ -151,7 +165,9 @@ class TestStockDemandEstimate(SavepointCase):
         for sheet in sheets:
             for line in sheet.line_ids:
                 self.assertEqual(
-                    line.product_uom_qty, 1, "The quantity should be 1",
+                    line.product_uom_qty,
+                    1,
+                    "The quantity should be 1",
                 )
 
     def test_02_invalid_dates(self):
