@@ -10,23 +10,38 @@ class StockDemandEstimateSheet(models.TransientModel):
     _name = "stock.demand.estimate.sheet"
     _description = "Stock Demand Estimate Sheet"
 
-    date_start = fields.Date(string="Date From", readonly=True,)
-    date_end = fields.Date(string="Date to", readonly=True,)
+    date_start = fields.Date(
+        string="Date From",
+        readonly=True,
+    )
+    date_end = fields.Date(
+        string="Date to",
+        readonly=True,
+    )
     date_range_type_id = fields.Many2one(
-        string="Date Range Type", comodel_name="date.range.type", readonly=True,
+        string="Date Range Type",
+        comodel_name="date.range.type",
+        readonly=True,
     )
     location_id = fields.Many2one(
-        comodel_name="stock.location", string="Location", readonly=True,
+        comodel_name="stock.location",
+        string="Location",
+        readonly=True,
     )
     line_ids = fields.Many2many(
         string="Estimates",
         comodel_name="stock.demand.estimate.sheet.line",
         relation="stock_demand_estimate_line_rel",
     )
-    product_ids = fields.Many2many(string="Products", comodel_name="product.product",)
+    product_ids = fields.Many2many(
+        string="Products",
+        comodel_name="product.product",
+    )
 
     @api.onchange(
-        "date_start", "date_end", "date_range_type_id",
+        "date_start",
+        "date_end",
+        "date_range_type_id",
     )
     def _onchange_dates(self):
         for sheet in self:
@@ -166,15 +181,28 @@ class DemandEstimateWizard(models.TransientModel):
     _name = "stock.demand.estimate.wizard"
     _description = "Stock Demand Estimate Wizard"
 
-    date_start = fields.Date(string="Date From", required=True,)
-    date_end = fields.Date(string="Date To", required=True,)
+    date_start = fields.Date(
+        string="Date From",
+        required=True,
+    )
+    date_end = fields.Date(
+        string="Date To",
+        required=True,
+    )
     date_range_type_id = fields.Many2one(
-        string="Date Range Type", comodel_name="date.range.type", required=True,
+        string="Date Range Type",
+        comodel_name="date.range.type",
+        required=True,
     )
     location_id = fields.Many2one(
-        comodel_name="stock.location", string="Location", required=True,
+        comodel_name="stock.location",
+        string="Location",
+        required=True,
     )
-    product_ids = fields.Many2many(comodel_name="product.product", string="Products",)
+    product_ids = fields.Many2many(
+        comodel_name="product.product",
+        string="Products",
+    )
 
     @api.onchange("date_range_type_id")
     def _onchange_date_range_type_id(self):
