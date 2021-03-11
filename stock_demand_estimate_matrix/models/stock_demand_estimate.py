@@ -12,7 +12,10 @@ class StockDemandEstimate(models.Model):
     )
 
     @api.depends(
-        "date_range_id", "manual_duration", "manual_date_from", "manual_date_to",
+        "date_range_id",
+        "manual_duration",
+        "manual_date_from",
+        "manual_date_to",
     )
     def _compute_dates(self):
         date_range_records = self.filtered(lambda r: r.date_range_id)
@@ -28,7 +31,9 @@ class StockDemandEstimate(models.Model):
         res = super(StockDemandEstimate, self - date_range_records).name_get()
         for rec in date_range_records:
             name = "{} - {} - {}".format(
-                rec.date_range_id.name, rec.product_id.name, rec.location_id.name,
+                rec.date_range_id.name,
+                rec.product_id.name,
+                rec.location_id.name,
             )
             res.append((rec.id, name))
         return res
