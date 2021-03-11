@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.stock</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="30" />
+            <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath
+                    expr="//field[@name='group_stock_adv_location']/ancestor::div[hasclass('o_setting_box')]"
+                    position="after"
+                >
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="vertical_lift_empty_tray_check" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="vertical_lift_empty_tray_check" />
+                            <div class="text-muted">
+                                If checked and the system thinks the vertical tray is
+                                empty, the operator will be asked to explicitly check
+                                if this is the case or not
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
