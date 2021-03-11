@@ -8,7 +8,9 @@ class DateRange(models.Model):
     _inherit = "date.range"
 
     days = fields.Integer(
-        string="Days between dates", compute="_compute_days", readonly=True,
+        string="Days between dates",
+        compute="_compute_days",
+        readonly=True,
     )
 
     @api.depends("date_start", "date_end")
