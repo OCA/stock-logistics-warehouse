@@ -2,7 +2,7 @@
 <odoo>
     <menuitem
         id="date_range_menu"
-        string="Date Ranges"
+        name="Date Ranges"
         parent="stock.menu_stock_config_settings"
         action="date_range.date_range_action"
         sequence="99"
