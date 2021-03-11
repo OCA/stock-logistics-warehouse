@@ -85,14 +85,13 @@
             </form>
         </field>
     </record>
-    <act_window
-        name="Create Stock Demand Estimates"
-        res_model="stock.demand.estimate.wizard"
-        binding_model="stock.demand.estimate.sheet"
-        view_mode="form"
-        target="new"
-        id="stock_demand_estimate_wizard_action"
-    />
+    <record id="stock_demand_estimate_wizard_action" model="ir.actions.act_window">
+            <field name="name">Create Stock Demand Estimates</field>
+            <field name="res_model">stock.demand.estimate.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_stock_demand_estimate_sheet" />
+        </record>
     <menuitem
         id="stock_demand_estimate_wizard_menu"
         parent="stock_demand_estimate.stock_demand_planning_menu"
