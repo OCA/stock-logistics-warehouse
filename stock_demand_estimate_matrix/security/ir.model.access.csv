@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_demand_estimate_sheet,access stock.demand.estimate.sheet,model_stock_demand_estimate_sheet,base.group_user,1,1,1,1
+access_stock_demand_estimate_sheet_line,access stock.demand.estimate.sheet.line,model_stock_demand_estimate_sheet_line,base.group_user,1,1,1,1
+access_stock_demand_estimate_wizard,access stock.demand.estimate.wizard,model_stock_demand_estimate_wizard,base.group_user,1,1,1,1
