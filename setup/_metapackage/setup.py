@@ -70,6 +70,7 @@ setuptools.setup(
         'odoo13-addon-stock_reserve_rule',
         'odoo13-addon-stock_secondary_unit',
         'odoo13-addon-stock_vertical_lift',
+        'odoo13-addon-stock_vertical_lift_empty_tray_check',
         'odoo13-addon-stock_vertical_lift_kardex',
         'odoo13-addon-stock_vertical_lift_packaging_type',
         'odoo13-addon-stock_vertical_lift_server_env',
