@@ -233,6 +233,8 @@ class TestStockRequestPurchase(common.TransactionCase):
 
     def test_create_request_analytic_data(self):
         """Single Stock request with analytic data"""
+        if not self.stock_request._fields.get("analytic_account_id"):
+            self.skipTest('No analytic addon installed')
         expected_date = fields.Datetime.now()
         analytic_accont = self.env["account.analytic.account"].create({
             "name": "Test Analytic Account",
