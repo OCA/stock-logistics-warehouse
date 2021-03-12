@@ -299,7 +299,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
         self.ensure_one()
         if not self.step() == "release":
             return
-        self.next_step()
+        return self.next_step()
 
     def _render_product_packagings(self, product):
         if not product:
