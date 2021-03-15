@@ -4,7 +4,7 @@ import logging
 import os
 
 from odoo import _, http
-from odoo.exceptions import MissingError
+from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
@@ -47,9 +47,4 @@ class ZipcubeController(http.Controller):
         if secret and secret == os.environ.get("ZIPCUBE_SECRET"):
             return True
         else:
-            _logger.error(
-                "Zipcube secret mismatch: %r != %r",
-                secret,
-                os.environ.get("ZIPCUBE_SECRET", ""),
-            )
-            raise http.AuthenticationError()
+            raise AccessError()
