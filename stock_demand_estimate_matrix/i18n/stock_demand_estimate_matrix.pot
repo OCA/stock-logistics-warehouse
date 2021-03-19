@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -77,6 +77,8 @@ msgid "Days between dates"
 msgstr ""
 
 #. module: stock_demand_estimate_matrix
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_date_range__display_name
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate__display_name
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet__display_name
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet_line__display_name
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_wizard__display_name
@@ -110,6 +112,8 @@ msgid "Estimating Period"
 msgstr ""
 
 #. module: stock_demand_estimate_matrix
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_date_range__id
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate__id
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet__id
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet_line__id
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_wizard__id
@@ -117,6 +121,8 @@ msgid "ID"
 msgstr ""
 
 #. module: stock_demand_estimate_matrix
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_date_range____last_update
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate____last_update
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet____last_update
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet_line____last_update
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_wizard____last_update
@@ -205,7 +211,7 @@ msgid "Stock Demand Estimate Wizard"
 msgstr ""
 
 #. module: stock_demand_estimate_matrix
-#: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_wizard.py:0
+#: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_sheet.py:0
 #, python-format
 msgid "Stock Demand Estimates"
 msgstr ""
@@ -222,7 +228,7 @@ msgid "The start date cannot be later than the end date."
 msgstr ""
 
 #. module: stock_demand_estimate_matrix
-#: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_wizard.py:0
+#: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_sheet.py:0
 #, python-format
 msgid "There is no ranges created."
 msgstr ""
