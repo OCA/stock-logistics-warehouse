@@ -788,6 +788,18 @@ class TestStockRequestBase(TestStockRequest):
             product_tmpl_id=template_b.id, active=False)
         order = self.request_order
 
+        # change products virtual_available
+        stock_location = self.env.ref('stock.stock_location_stock')
+        product_uom_qty_a1 = -10
+        product_uom_qty_a2 = 5
+        product_uom_qty_b1 = 0
+        self.env['stock.quant']._update_available_quantity(
+            product_a1, stock_location, product_uom_qty_a1)
+        self.env['stock.quant']._update_available_quantity(
+            product_a2, stock_location, product_uom_qty_a2)
+        self.env['stock.quant']._update_available_quantity(
+            product_b1, stock_location, product_uom_qty_b1)
+
         # Selecting some variants and creating an order
         preexisting = order.search([])
         wanted_products = product_a1 + product_a2 + product_b1
@@ -801,6 +813,16 @@ class TestStockRequestBase(TestStockRequest):
             Counter(new_order.stock_request_ids.mapped('product_id')),
             msg="Not all wanted products were ordered"
         )
+
+        sr1 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_a1)
+        sr2 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_a2)
+        sr3 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_b1)
+        self.assertEqual(sr1.product_uom_qty, abs(product_uom_qty_a1))
+        self.assertEqual(sr2.product_uom_qty, 1)
+        self.assertEqual(sr3.product_uom_qty, 1)
 
         # Selecting a template and creating an order
         preexisting = order.search([])

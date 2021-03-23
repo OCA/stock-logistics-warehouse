@@ -8,3 +8,4 @@
 
   * Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
   * Steve Campbell <scampbell@opensourceintegrators.com>
+* Juanjo Algaz (Planeta Huerto) <juanjoalgaz@planetahuerto.es>
