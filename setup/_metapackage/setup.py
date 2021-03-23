@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo14-addon-stock_demand_estimate',
         'odoo14-addon-stock_demand_estimate_matrix',
         'odoo14-addon-stock_free_quantity',
+        'odoo14-addon-stock_helper',
         'odoo14-addon-stock_inventory_preparation_filter',
         'odoo14-addon-stock_location_children',
         'odoo14-addon-stock_location_lockdown',
