@@ -1,9 +1,10 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
+import os
 
 from odoo import _, http
-from odoo.exceptions import AccessError, MissingError
+from odoo.exceptions import MissingError
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
@@ -43,8 +44,12 @@ class ZipcubeController(http.Controller):
         return data
 
     def _check_secret(self, secret):
-        if secret:
-            # XXX
+        if secret and secret == os.environ.get("ZIPCUBE_SECRET"):
             return True
         else:
-            raise AccessError()
+            _logger.error(
+                "Zipcube secret mismatch: %r != %r",
+                secret,
+                os.environ.get("ZIPCUBE_SECRET", ""),
+            )
+            raise http.AuthenticationError()
