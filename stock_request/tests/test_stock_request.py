@@ -25,6 +25,7 @@ class TestStockRequest(common.TransactionCase):
         self.warehouse = self.env.ref('stock.warehouse0')
         self.categ_unit = self.env.ref('uom.product_uom_categ_unit')
         self.virtual_loc = self.env.ref('stock.stock_location_customers')
+        self.stock_loc = self.env.ref('stock.stock_location_stock')
 
         # common data
         self.company_2 = self.env['res.company'].create({
@@ -788,6 +789,17 @@ class TestStockRequestBase(TestStockRequest):
             product_tmpl_id=template_b.id, active=False)
         order = self.request_order
 
+        # change products virtual_available
+        product_uom_qty_a1 = -10
+        product_uom_qty_a2 = 5
+        product_uom_qty_b1 = 0
+        self.env['stock.quant']._update_available_quantity(
+            product_a1, self.stock_loc, product_uom_qty_a1)
+        self.env['stock.quant']._update_available_quantity(
+            product_a2, self.stock_loc, product_uom_qty_a2)
+        self.env['stock.quant']._update_available_quantity(
+            product_b1, self.stock_loc, product_uom_qty_b1)
+
         # Selecting some variants and creating an order
         preexisting = order.search([])
         wanted_products = product_a1 + product_a2 + product_b1
@@ -801,6 +813,16 @@ class TestStockRequestBase(TestStockRequest):
             Counter(new_order.stock_request_ids.mapped('product_id')),
             msg="Not all wanted products were ordered"
         )
+
+        sr1 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_a1)
+        sr2 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_a2)
+        sr3 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_b1)
+        self.assertEqual(sr1.product_uom_qty, abs(product_uom_qty_a1))
+        self.assertEqual(sr2.product_uom_qty, 1)
+        self.assertEqual(sr3.product_uom_qty, 1)
 
         # Selecting a template and creating an order
         preexisting = order.search([])
@@ -849,6 +871,48 @@ class TestStockRequestBase(TestStockRequest):
         # Wrong model should just raise ValidationError
         with self.assertRaises(exceptions.ValidationError):
             order._create_from_product_multiselect(self.stock_request_user)
+
+    def test_stock_request_order_product_quantity(self):
+        product_a1 = self._create_product('CODEA1', 'Product A1',
+                                          self.main_company.id)
+        template_a = product_a1.product_tmpl_id
+        product_a2 = self._create_product(
+            'CODEA2', 'Product A2', self.main_company.id,
+            product_tmpl_id=template_a.id)
+        product_b1 = self._create_product('CODEB1', 'Product B1',
+                                          self.main_company.id)
+        template_b = product_b1.product_tmpl_id
+        # One archived variant of B
+        self._create_product(
+            'CODEB2', 'Product B2', self.main_company.id,
+            product_tmpl_id=template_b.id, active=False)
+        order = self.request_order
+
+        # change products virtual_available
+        product_uom_qty_a1 = -10
+        product_uom_qty_a2 = 5
+        product_uom_qty_b1 = 0
+        self.env['stock.quant']._update_available_quantity(
+            product_a1, self.stock_loc, product_uom_qty_a1)
+        self.env['stock.quant']._update_available_quantity(
+            product_a2, self.stock_loc, product_uom_qty_a2)
+        self.env['stock.quant']._update_available_quantity(
+            product_b1, self.stock_loc, product_uom_qty_b1)
+
+        preexisting = order.search([])
+        wanted_products = product_a1 + product_a2 + product_b1
+        order._create_from_product_multiselect(wanted_products)
+        new_order = order.search([]) - preexisting
+
+        sr1 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_a1)
+        sr2 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_a2)
+        sr3 = new_order.stock_request_ids.filtered(
+            lambda r: r.product_id == product_b1)
+        self.assertEqual(sr1.product_uom_qty, abs(product_uom_qty_a1))
+        self.assertEqual(sr2.product_uom_qty, 1)
+        self.assertEqual(sr3.product_uom_qty, 1)
 
     def test_allow_virtual_location(self):
         self.main_company.stock_request_allow_virtual_loc = True

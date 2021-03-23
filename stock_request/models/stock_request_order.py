@@ -301,7 +301,8 @@ class StockRequestOrder(models.Model):
                 stock_request_ids=[(0, 0, dict(
                     product_id=product.id,
                     product_uom_id=product.uom_id.id,
-                    product_uom_qty=1.0,
+                    product_uom_qty=1.0 if product.virtual_available >= 0
+                    else abs(product.virtual_available),
                     expected_date=expected,
                 )) for product in products]
             ))
