@@ -7,22 +7,17 @@ from odoo.tests import common
 
 class TestStockRequestPurchase(common.TransactionCase):
     def setUp(self):
-        super(TestStockRequestPurchase, self).setUp()
-
+        super().setUp()
         # common models
         self.stock_request = self.env["stock.request"]
-
         # refs
-        self.stock_request_user_group = self.env.ref(
-            "stock_request.group_stock_request_user"
-        )
+        self.stock_request_user_group = self.env.ref("stock.group_stock_user")
         self.stock_request_manager_group = self.env.ref(
             "stock_request.group_stock_request_manager"
         )
         self.main_company = self.env.ref("base.main_company")
         self.warehouse = self.env.ref("stock.warehouse0")
         self.categ_unit = self.env.ref("uom.product_uom_categ_unit")
-
         # common data
         self.company_2 = self.env["res.company"].create({"name": "Comp2"})
         self.wh2 = self.env["stock.warehouse"].search(
@@ -41,7 +36,6 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.route_buy = self.warehouse.buy_pull_id.route_id
         self.supplier = self.env["res.partner"].create({"name": "Supplier"})
         self.product = self._create_product("SH", "Shoes", False)
-
         self.uom_dozen = self.env["uom.uom"].create(
             {
                 "name": "Test-DozenA",
