@@ -1,1 +1,1 @@
-This module allows to display the life date on its tree view.
+This module allows to display expirations dates on stock quant tree view.
