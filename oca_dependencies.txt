@@ -1,3 +1,4 @@
+account-analytic
 product-attribute
 server-env
 server-ux
