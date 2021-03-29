@@ -5,8 +5,11 @@ from odoo import fields, models
 
 
 class AccountAnalyticAccount(models.Model):
-    _inherit = 'account.analytic.account'
+    _inherit = "account.analytic.account"
 
     stock_request_ids = fields.One2many(
-        comodel_name='stock.request', inverse_name='analytic_account_id',
-        string='Stock Requests', copy=False)
+        comodel_name="stock.request",
+        inverse_name="analytic_account_id",
+        string="Stock Requests",
+        copy=False,
+    )
