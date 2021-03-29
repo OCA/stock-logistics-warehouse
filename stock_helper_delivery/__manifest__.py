@@ -8,7 +8,7 @@
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Hidden",
-    "depends": ["stock", "delivery", "stock_helper"],
+    "depends": ["stock", "delivery"],
     "data": [],
     "installable": True,
     "license": "LGPL-3",
