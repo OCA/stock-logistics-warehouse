@@ -101,6 +101,28 @@ class ProductProduct(models.Model):
             ]
         return product_moves_dict
 
+    def _get_delivered_to_customer_dict(
+        self, location=False, from_date=False, to_date=False
+    ):
+        """Returns a dict of products with their delivered qtys for the
+        given dates and locations
+        """
+        domain = [
+            ("product_id", "in", self.ids),
+            ("state", "=", "done"),
+            ("location_dest_id.usage", "=", "customer"),
+        ]
+        if location:
+            domain += [("location_id", "child_of", location.id)]
+        if from_date:
+            domain += [("date", ">=", from_date)]
+        if to_date:
+            domain += [("date", "<=", to_date)]
+        move_lines = self.env["stock.move.line"].read_group(
+            domain, ["product_id", "qty_done"], ["product_id"]
+        )
+        return {p["product_id"][0]: p["qty_done"] for p in move_lines}
+
     def _compute_historic_quantities_dict(
         self, location_id=False, from_date=False, to_date=False
     ):
