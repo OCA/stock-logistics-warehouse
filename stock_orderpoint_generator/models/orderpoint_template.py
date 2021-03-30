@@ -46,6 +46,7 @@ class OrderpointTemplate(models.Model):
             ("median", "Most frequent"),
             ("avg", "Average"),
             ("min", "Minimum"),
+            ("delivered", "Delivered"),
         ],
         default="max",
         help="Select a criteria to auto compute the minimum",
@@ -60,6 +61,7 @@ class OrderpointTemplate(models.Model):
             ("median", "Most frequent"),
             ("avg", "Average"),
             ("min", "Minimum"),
+            ("delivered", "Delivered"),
         ],
         help="Select a criteria to auto compute the maximum",
     )
@@ -118,7 +120,13 @@ class OrderpointTemplate(models.Model):
         self, products, location_id, from_date, to_date, criteria
     ):
         """Returns a dict with product ids as keys and the resulting
-           calculation of historic moves according to criteria"""
+           calculation of historic moves according to criteria. If the
+           creteria is delivered we just search how many items were
+           delivered in the given period of time"""
+        if criteria == "delivered":
+            return products._get_delivered_to_customer_dict(
+                location_id, from_date, to_date
+            )
         stock_qty_history = products._compute_historic_quantities_dict(
             location_id=location_id, from_date=from_date, to_date=to_date
         )

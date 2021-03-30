@@ -378,6 +378,13 @@ class TestOrderpointGenerator(SavepointCase):
         wizard.action_configure()
         orderpoint_auto_dict.update({"product_min_qty": 55, "product_max_qty": 50})
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
+        # Check delivered
+        self.template.auto_min_qty_criteria = "delivered"
+        self.template.auto_max_qty_criteria = "delivered"
+        wizard = self.wizard_over_products(self.p1, self.template)
+        wizard.action_configure()
+        orderpoint_auto_dict.update({"product_min_qty": 3, "product_max_qty": 5})
+        self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
 
     def test_auto_qty_multi_products(self):
         """Each product has a different history"""
