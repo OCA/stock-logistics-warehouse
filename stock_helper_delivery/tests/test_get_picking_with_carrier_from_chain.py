@@ -13,7 +13,7 @@ class TestStockPickingGetCarrier(StockHelperDeliveryCommonCase):
             {"name": "Test Product", "type": "product"}
         )
 
-    def test_get_carrier_from_pick(self):
+    def test_get_picking_with_carrier_from_pick(self):
         move1 = self._create_move(
             self.product,
             self.stock_loc,
@@ -35,10 +35,13 @@ class TestStockPickingGetCarrier(StockHelperDeliveryCommonCase):
         (move1 | move2 | move3)._assign_picking()
         carrier = self.env.ref("delivery.free_delivery_carrier")
         move3.picking_id.carrier_id = carrier
-        move1.move_dest_ids = move3
-        self.assertEqual(move1.picking_id.get_carrier_from_chained_picking(), carrier)
+        move1.move_dest_ids = move2
+        move2.move_dest_ids = move3
+        picking_with_carrier = move1.picking_id.get_picking_with_carrier_from_chain()
+        self.assertEqual(picking_with_carrier, move3.picking_id)
+        self.assertEqual(picking_with_carrier.carrier_id, carrier)
 
-    def test_get_carrier_from_pack(self):
+    def test_get_picking_with_carrier_from_pack(self):
         move1 = self._create_move(
             self.product,
             self.stock_loc,
@@ -55,9 +58,11 @@ class TestStockPickingGetCarrier(StockHelperDeliveryCommonCase):
         carrier = self.env.ref("delivery.free_delivery_carrier")
         move2.picking_id.carrier_id = carrier
         move1.move_dest_ids = move2
-        self.assertEqual(move1.picking_id.get_carrier_from_chained_picking(), carrier)
+        picking_with_carrier = move1.picking_id.get_picking_with_carrier_from_chain()
+        self.assertEqual(picking_with_carrier, move2.picking_id)
+        self.assertEqual(picking_with_carrier.carrier_id, carrier)
 
-    def test_get_carrier_from_picking_with_existing_carrier(self):
+    def test_get_picking_with_carrier_from_picking_with_existing_carrier(self):
         carrier1 = self.env.ref("delivery.free_delivery_carrier")
         carrier2 = self.env.ref("delivery.delivery_carrier")
         move1 = self._create_move(
@@ -76,9 +81,11 @@ class TestStockPickingGetCarrier(StockHelperDeliveryCommonCase):
         move1.picking_id.carrier_id = carrier1
         move2.picking_id.carrier_id = carrier2
         move1.move_dest_ids = move2
-        self.assertEqual(move1.picking_id.get_carrier_from_chained_picking(), carrier1)
+        picking_with_carrier = move1.picking_id.get_picking_with_carrier_from_chain()
+        self.assertEqual(picking_with_carrier, move1.picking_id)
+        self.assertEqual(picking_with_carrier.carrier_id, carrier1)
 
-    def test_get_carrier_no_carrier_found(self):
+    def test_get_picking_with_carrier_no_picking_found(self):
         move1 = self._create_move(
             self.product,
             self.stock_loc,
@@ -93,4 +100,4 @@ class TestStockPickingGetCarrier(StockHelperDeliveryCommonCase):
         )
         (move1 | move2)._assign_picking()
         move1.move_dest_ids = move2
-        self.assertFalse(move1.picking_id.get_carrier_from_chained_picking())
+        self.assertFalse(move1.picking_id.get_picking_with_carrier_from_chain())

@@ -1,32 +1,31 @@
 # Copyright 2021 Camptocamp SA (http://www.camptocamp.com)
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from odoo import fields, models
+from odoo import models
 
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    def get_carrier_from_chained_picking(self):
-        """Returns the proper carrier for the current transfer.
+    def get_picking_with_carrier_from_chain(self):
+        """Returns a picking with a carrier among next chained pickings.
 
-        For non-delivery transfers this method will return the carrier used
-        on the related delivery transfer if there is one.
+        For non-delivery transfers this method will often return the related
+        delivery.
         """
         self.ensure_one()
         if self.carrier_id:
-            return self.carrier_id
+            return self
 
-        def get_moves_dest(moves):
-            return moves.move_dest_ids.filtered(
-                lambda m: m.state not in ("cancel", "done")
-            )
+        def get_first_move_dest(moves):
+            for move in moves.move_dest_ids:
+                if move.state not in ("cancel", "done"):
+                    return move
 
-        moves_dest = get_moves_dest(self.move_lines)
-        while moves_dest:
-            carrier = moves_dest.picking_id.carrier_id
-            if carrier:
-                return fields.first(carrier)
-            moves_dest = get_moves_dest(moves_dest)
+        move_dest = get_first_move_dest(self.move_lines)
+        while move_dest:
+            if move_dest.picking_id.carrier_id:
+                return move_dest.picking_id
+            move_dest = get_first_move_dest(move_dest)
         # Should return an empty record if we reach this line
-        return self.carrier_id
+        return self.browse()
