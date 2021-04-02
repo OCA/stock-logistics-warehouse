@@ -5,7 +5,7 @@
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_form" />
         <field name="arch" type="xml">
-            <group name="linked_group" position="inside">
+            <field name="move_dest_id" position="after">
                 <field
                     name="common_dest_move_ids"
                     string="Common destination moves"
@@ -21,7 +21,7 @@
                         <field name="state" />
                     </tree>
                 </field>
-            </group>
+            </field>
         </field>
     </record>
 </odoo>

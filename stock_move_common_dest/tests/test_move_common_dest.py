@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from odoo.tests import SavepointCase
@@ -6,7 +7,7 @@ from odoo.tests import SavepointCase
 class TestCommonMoveDest(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super().setUpClass()
+        super(TestCommonMoveDest, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner_delta = cls.env.ref("base.res_partner_4")
         cls.warehouse = cls.env.ref("stock.warehouse0")
@@ -56,7 +57,7 @@ class TestCommonMoveDest(SavepointCase):
                 )
             )
         inventory.write({"line_ids": lines_vals})
-        inventory.action_validate()
+        inventory.action_done()
 
     def _create_pickings(self):
         # Create delivery order
@@ -115,7 +116,7 @@ class TestCommonMoveDest(SavepointCase):
             "group_id": self.procurement_group_1.id,
         }
         if move_dest:
-            move_vals["move_dest_ids"] = [(4, move_dest.id, False)]
+            move_vals["move_dest_id"] = move_dest.id
         return self.env["stock.move"].create(move_vals)
 
     def test_packing_sub_location(self):
@@ -148,6 +149,16 @@ class TestCommonMoveDest(SavepointCase):
             procure_method="make_to_stock",
             move_dest=pack_move_1b,
         )
+        # ship_order_1
+        #    ship_move_1a
+        #    ship_move_1b
+        # pack_order_1
+        #    pack_move_1a -> ship_move_1a
+        #    pack_move_1b -> ship_move_1b
+        # pick_order_1a
+        #    pick_move_1a -> pack_move_1a
+        # pick_order_1b
+        #    pick_move_1b -> pack_move_1b
         self.assertEqual(pick_move_1a.common_dest_move_ids, pick_move_1b)
         self.assertEqual(pick_move_1b.common_dest_move_ids, pick_move_1a)
         self.assertEqual(pack_move_1a.common_dest_move_ids, pack_move_1b)
