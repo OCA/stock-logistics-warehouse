@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from odoo.tests import SavepointCase
@@ -6,7 +7,7 @@ from odoo.tests import SavepointCase
 class TestStockPickingCompletionInfo(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super().setUpClass()
+        super(TestStockPickingCompletionInfo, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner_delta = cls.env.ref("base.res_partner_4")
         cls.warehouse = cls.env.ref("stock.warehouse0")
@@ -59,7 +60,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
                 )
             )
         inventory.write({"line_ids": lines_vals})
-        inventory.action_validate()
+        inventory.action_done()
 
     def _create_pickings(self, same_pick_location=True):
         # Create delivery order
@@ -119,7 +120,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
             "procure_method": procure_method,
         }
         if move_dest:
-            move_vals["move_dest_ids"] = [(4, move_dest.id, False)]
+            move_vals["move_dest_id"] = move_dest.id
         return self.env["stock.move"].create(move_vals)
 
     def test_picking_all_at_once(self):
@@ -147,6 +148,14 @@ class TestStockPickingCompletionInfo(SavepointCase):
             procure_method="make_to_stock",
             move_dest=pack_move_2,
         )
+        # ship_order
+        #    ship_move_1
+        # pack_order
+        #    pack_move_1 -> ship_move_1
+        #    pack_move_2 -> ship_move_2
+        # pick_order
+        #    pick_move_1 -> pack_move_1
+        #    pick_move_2 -> pack_move_2
         self.assertEqual(pick_move_1.state, "confirmed")
         self.assertEqual(pick_move_2.state, "confirmed")
         self.assertEqual(pick_order.state, "confirmed")
@@ -157,7 +166,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
         self.assertEqual(pick_order.state, "assigned")
         self.assertEqual(pick_order.completion_info, "full_order_picking")
         wiz = self.env["stock.immediate.transfer"].create(
-            {"pick_ids": [(4, pick_order.id)]}
+            {"pick_id": pick_order.id}
         )
         wiz.process()
         self.assertEqual(pick_move_1.state, "done")
@@ -207,7 +216,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
         self.assertEqual(pick_order_2.state, "assigned")
         self.assertEqual(pick_order_2.completion_info, "no")
         wiz = self.env["stock.immediate.transfer"].create(
-            {"pick_ids": [(4, pick_order_1.id)]}
+            {"pick_id": pick_order_1.id}
         )
         wiz.process()
         self.assertEqual(pick_move_1.state, "done")
@@ -217,7 +226,7 @@ class TestStockPickingCompletionInfo(SavepointCase):
         self.assertNotEqual(pick_order_2.state, "done")
         self.assertEqual(pick_order_2.completion_info, "last_picking")
         wiz = self.env["stock.immediate.transfer"].create(
-            {"pick_ids": [(4, pick_order_2.id)]}
+            {"pick_id": pick_order_2.id}
         )
         wiz.process()
         self.assertEqual(pick_move_2.state, "done")
@@ -260,9 +269,17 @@ class TestStockPickingCompletionInfo(SavepointCase):
         self.assertEqual(pick_order.state, "assigned")
         self.assertEqual(pick_order.completion_info, "full_order_picking")
         # Process partially to create backorder
-        pick_move_1.move_line_ids.qty_done = 1.0
-        pick_move_2.move_line_ids.qty_done = pick_move_2.move_line_ids.product_uom_qty
-        pick_order.action_done()
+        pick_move_1.linked_move_operation_ids.operation_id.qty_done = 1.0
+        pick_move_2.linked_move_operation_ids.operation_id.qty_done = \
+            pick_move_2.linked_move_operation_ids.operation_id.product_qty
+        result = pick_order.do_new_transfer()
+        if isinstance(result, dict) and result:
+            model = result.get("res_model")
+            wizard = self.env[model].browse(int(result.get("res_id")))
+
+            # Fortunately these wizards have the same
+            # method "process" to execute the wizard
+            wizard.process()
         pick_backorder = self.env["stock.picking"].search(
             [("backorder_id", "=", pick_order.id)]
         )
@@ -275,10 +292,10 @@ class TestStockPickingCompletionInfo(SavepointCase):
         self.assertEqual(pick_order.completion_info, "no")
         self.assertEqual(pick_backorder.completion_info, "last_picking")
         # Process backorder
-        pick_backorder_move.move_line_ids.qty_done = (
-            pick_backorder_move.move_line_ids.product_uom_qty
+        pick_backorder_move.linked_move_operation_ids.operation_id.qty_done = (
+            pick_backorder_move.linked_move_operation_ids.operation_id.product_qty
         )
-        pick_backorder.action_done()
+        pick_backorder.do_transfer()
         self.assertEqual(pick_backorder_move.state, "done")
         self.assertEqual(pick_backorder.state, "done")
         self.assertEqual(pick_order.completion_info, "next_picking_ready")

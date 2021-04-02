@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from odoo import api, fields, models
@@ -78,7 +79,7 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     def write(self, vals):
-        super().write(vals)
+        super(StockMove, self).write(vals)
         if "state" in vals:
             # invalidate cache, the api.depends do not allow to find all
             # the conditions to invalidate the field
