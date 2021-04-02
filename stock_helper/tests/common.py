@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020-2021 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
@@ -7,7 +8,7 @@ from odoo.tests import SavepointCase
 class StockHelperCommonCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super().setUpClass()
+        super(StockHelperCommonCase, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         cls.wh = cls.env.ref("stock.warehouse0")
