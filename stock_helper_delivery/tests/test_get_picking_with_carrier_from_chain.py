@@ -101,3 +101,28 @@ class TestStockPickingGetCarrier(StockHelperDeliveryCommonCase):
         (move1 | move2)._assign_picking()
         move1.move_dest_ids = move2
         self.assertFalse(move1.picking_id.get_picking_with_carrier_from_chain())
+
+    def test_get_ship_from_chain(self):
+        move1 = self._create_move(
+            self.product,
+            self.stock_loc,
+            self.shelf1_loc,
+            picking_type_id=self.wh.pick_type_id.id,
+        )
+        move2 = self._create_move(
+            self.product,
+            self.stock_loc,
+            self.shelf1_loc,
+            picking_type_id=self.wh.pack_type_id.id,
+        )
+        move3 = self._create_move(
+            self.product,
+            self.shelf1_loc,
+            self.shelf2_loc,
+            picking_type_id=self.wh.out_type_id.id,
+        )
+        (move1 | move2 | move3)._assign_picking()
+        move1.move_dest_ids = move2
+        move2.move_dest_ids = move3
+        ship = move1.picking_id._get_ship_from_chain()
+        self.assertEqual(ship, move3.picking_id)
