@@ -10,7 +10,6 @@
     "license": "AGPL-3",
     "depends": [
         # For the pop-up message to tell the user to refresh.
-        "web_notify",
         "web_ir_actions_act_view_reload",
         # TODO: extract the common parts in a separate module to avoid pulling
         # unneeded external_dependencies

@@ -56,8 +56,8 @@ class ZipcubeDevice(models.Model):
         # this original user in the environment because notify_warning checks
         # that you only notify a user which is the same than the one set in
         # the environment.
-        wizard_line.wizard_id.create_uid.with_user(
-            wizard_line.wizard_id.create_uid.id
-        ).notify_warning(message=_("Please, press the REFRESH button."))
-
+        # wizard_line.wizard_id.create_uid.with_user(
+        #     wizard_line.wizard_id.create_uid.id
+        # ).notify_warning(message=_("Please, press the REFRESH button."))
+        _logger.warning(_("Please, press the REFRESH button."))
         return to_update
