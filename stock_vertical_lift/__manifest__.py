@@ -3,7 +3,7 @@
 {
     "name": "Vertical Lift",
     "summary": "Provides the core for integration with Vertical Lifts",
-    "version": "13.0.1.3.1",
+    "version": "13.0.1.3.2",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
@@ -12,7 +12,6 @@
         "barcodes",
         "base_sparse_field",
         "stock_location_tray",  # OCA/stock-logistics-warehouse
-        "web_notify",  # OCA/web
         "web_ir_actions_act_view_reload",  # OCA/web
     ],
     "website": "https://github.com/OCA/stock-logistics-warehouse",

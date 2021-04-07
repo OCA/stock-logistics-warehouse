@@ -86,7 +86,7 @@ class VerticalLiftShuttle(models.Model):
 
         self.env["vertical.lift.command"].sudo().create(command_values)
         if self.hardware == "simulation":
-            self.env.user.notify_info(message=payload, title=_("Lift Simulation"))
+            # self.env.user.notify_info(message=payload, title=_("Lift Simulation"))
             return True
         else:
             conn = self._hardware_get_server_connection()

@@ -1,9 +1,11 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+import logging
 from itertools import cycle
 
 from odoo import _, models
+
+_logger = logging.getLogger(__name__)
 
 
 class VerticalLiftOperationPick(models.Model):
@@ -61,9 +63,10 @@ class VerticalLiftOperationPick(models.Model):
                 self.location_dest_id = location
                 self.next_step()
             else:
-                self.env.user.notify_warning(
-                    _("No location found for barcode {}").format(barcode)
-                )
+                # self.env.user.notify_warning(
+                #     _("No location found for barcode {}").format(barcode)
+                # )
+                _logger.warning(_("No location found for barcode {}").format(barcode))
 
     def _domain_move_lines_to_do(self):
         domain = [

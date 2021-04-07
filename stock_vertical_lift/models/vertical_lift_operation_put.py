@@ -1,8 +1,11 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import logging
 
 from odoo import _, fields, models
 from odoo.osv.expression import AND
+
+_logger = logging.getLogger(__name__)
 
 
 class VerticalLiftOperationPut(models.Model):
@@ -69,9 +72,10 @@ class VerticalLiftOperationPut(models.Model):
             self.current_move_line_id = line
             self.next_step()
         else:
-            self.env.user.notify_warning(
-                _("No move line found for barcode {}").format(barcode)
-            )
+            # self.env.user.notify_warning(
+            #     _("No move line found for barcode {}").format(barcode)
+            # )
+            _logger.warning(_("No move line found for barcode {}").format(barcode))
 
     def _scan_tray_type_action(self, barcode):
         tray_type = self._find_tray_type(barcode)
@@ -82,15 +86,21 @@ class VerticalLiftOperationPut(models.Model):
                     # when we are in "save" step, stay here
                     self.next_step()
             else:
-                self.env.user.notify_warning(
-                    _('No free space for tray type "{}" in this shuttle.').format(
+                # self.env.user.notify_warning(
+                #     _('No free space for tray type "{}" in this shuttle.').format(
+                #         tray_type.display_name
+                #     )
+                # )
+                _logger.warning(
+                    'No free space for tray type "{}" in this shuttle.'.format(
                         tray_type.display_name
                     )
                 )
         else:
-            self.env.user.notify_warning(
-                _("No tray type found for barcode {}").format(barcode)
-            )
+            # self.env.user.notify_warning(
+            #     _("No tray type found for barcode {}").format(barcode)
+            # )
+            _logger.warning(_("No tray type found for barcode {}").format(barcode))
 
     def _find_tray_type(self, barcode):
         return self.env["stock.location.tray.type"].search(

@@ -411,9 +411,10 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
-        self.env.user.notify_info(
-            "Scanned barcode: {}. Not implemented.".format(barcode)
-        )
+        # self.env.user.notify_info(
+        #     "Scanned barcode: {}. Not implemented.".format(barcode)
+        # )
+        _logger.info("Scanned barcode: {}. Not implemented.".format(barcode))
 
     @api.depends("current_move_line_id.product_id.packaging_ids")
     def _compute_product_packagings(self):
