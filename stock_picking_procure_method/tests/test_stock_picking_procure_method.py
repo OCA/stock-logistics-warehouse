@@ -17,7 +17,7 @@ class TestStockPickingMTO(common.SavepointCase):
             }
         )
         cls.wh_obj = cls.env["stock.warehouse"]
-        cls.wh1 = cls.wh_obj.create({"name": "Test WH1", "code": "TSWH1",})
+        cls.wh1 = cls.wh_obj.create({"name": "Test WH1", "code": "TSWH1"})
         cls.wh2 = cls.wh_obj.create(
             {
                 "name": "Test WH2",
@@ -36,7 +36,7 @@ class TestStockPickingMTO(common.SavepointCase):
                 "location_id": cls.wh2.lot_stock_id.id,
                 "warehouse_id": cls.wh2.id,
                 "group_propagation_option": "propagate",
-                "propagate": True,
+                "propagate_cancel": True,
                 "propagate_warehouse_id": cls.wh1.id,
             }
         )
@@ -69,9 +69,7 @@ class TestStockPickingMTO(common.SavepointCase):
         move_line.procure_method = "make_to_order"
         self.assertEqual(self.picking.procure_method, "make_to_order")
         # Add a new line with MTS rule
-        move_line.copy(
-            {"procure_method": "make_to_stock",}
-        )
+        move_line.copy({"procure_method": "make_to_stock"})
         self.assertFalse(self.picking.procure_method)
         # We set the procure method in the picking
         self.picking.procure_method = "make_to_order"
