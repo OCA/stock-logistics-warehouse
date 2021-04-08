@@ -40,5 +40,5 @@ class StockPicking(models.Model):
 
     def _inverse_procure_method(self):
         self.filtered("procure_method").mapped("move_lines").update(
-            {"procure_method": self.procure_method,}
+            {"procure_method": self.procure_method}
         )
