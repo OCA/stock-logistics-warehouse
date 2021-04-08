@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_picking_procure_method
+# 	* stock_picking_procure_method
 #
 msgid ""
 msgstr ""
@@ -18,10 +18,16 @@ msgstr ""
 
 #. module: stock_picking_procure_method
 #: model:ir.model.fields,help:stock_picking_procure_method.field_stock_picking__procure_method
-msgid "By default, the system will take from the stock in the source location and passively wait for availability. The other possibility allows you to directly create a procurement on the source location (and thus ignore its current stock) to gather products. If we want to chain moves and have this one to wait for the previous, this second option should be chosen."
+msgid ""
+"By default, the system will take from the stock in the source location and "
+"passively wait for availability. The other possibility allows you to "
+"directly create a procurement on the source location (and thus ignore its "
+"current stock) to gather products. If we want to chain moves and have this "
+"one to wait for the previous, this second option should be chosen."
 msgstr ""
-"默认情况下，系统将从源位置中的库存中取出，并被动地等待可用性。另一种可能性使您可以直接在源位置创建采购（从而忽略其当前库存）以收集产品。如果我们要链接移动"
-"并让其等待上一个，则应选择第二个选项。"
+"默认情况下，系统将从源位置中的库存中取出，并被动地等待可用性。另一种可能性使"
+"您可以直接在源位置创建采购（从而忽略其当前库存）以收集产品。如果我们要链接移"
+"动并让其等待上一个，则应选择第二个选项。"
 
 #. module: stock_picking_procure_method
 #: model:ir.model.fields,field_description:stock_picking_procure_method.field_stock_picking__procure_method
