@@ -1,4 +1,4 @@
-# Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2017-2020 ForgeFlow, S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import fields, models
@@ -13,3 +13,16 @@ class AccountAnalyticAccount(models.Model):
         string="Stock Requests",
         copy=False,
     )
+
+    def action_view_stock_request(self):
+        self.ensure_one()
+        action = self.env.ref("stock_request.action_stock_request_form").read()[0]
+        requests = self.mapped("stock_request_ids")
+        if len(requests) > 1:
+            action["domain"] = [("id", "in", requests.ids)]
+        elif requests:
+            action["views"] = [
+                (self.env.ref("stock_request.view_stock_request_form").id, "form")
+            ]
+            action["res_id"] = requests.id
+        return action
