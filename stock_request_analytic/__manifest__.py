@@ -7,13 +7,9 @@
     "version": "12.0.1.0.1",
     "license": "LGPL-3",
     "website": "https://github.com/stock-logistics-warehouse",
-    "author": "Eficent, "
-              "Odoo Community Association (OCA)",
+    "author": "Eficent, " "Odoo Community Association (OCA)",
     "category": "Analytic",
-    "depends": [
-        "stock_request",
-        "stock_analytic",
-    ],
+    "depends": ["stock_request", "stock_analytic",],
     "data": [
         "security/ir.model.access.csv",
         "views/stock_request_views.xml",
