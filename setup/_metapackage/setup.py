@@ -60,6 +60,7 @@ setuptools.setup(
         'odoo13-addon-stock_quant_manual_assign',
         'odoo13-addon-stock_removal_location_by_priority',
         'odoo13-addon-stock_request',
+        'odoo13-addon-stock_request_analytic',
         'odoo13-addon-stock_request_direction',
         'odoo13-addon-stock_request_kanban',
         'odoo13-addon-stock_request_mrp',
