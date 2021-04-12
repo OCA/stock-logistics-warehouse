@@ -11,6 +11,9 @@
             <field name="company_id" position="after">
                 <field name="calendar_id" options="{'no_create': True}"/>
             </field>
+            <field name="calendar_id" position="before">
+                <field name="partner_tz" options="{'no_create': True}"/>
+            </field>
         </field>
     </record>
 </odoo>
