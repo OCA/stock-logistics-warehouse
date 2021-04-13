@@ -16,6 +16,10 @@ class StockMove(models.Model):
         " same picking as the actual move's destination move",
     )
 
+    def _flush_common_dest_move_query(self):
+        # flush is necessary before a SELECT
+        self.flush(["move_orig_ids", "move_dest_ids"])
+
     def _common_dest_move_query(self):
         sql = """SELECT smmr.move_orig_id move_id
             , array_agg(smmr2.move_orig_id) common_move_dest_ids
@@ -41,6 +45,7 @@ class StockMove(models.Model):
         "move_dest_ids.picking_id.move_lines.move_orig_ids",
     )
     def _compute_common_dest_move_ids(self):
+        self._flush_common_dest_move_query()
         sql = self._common_dest_move_query()
         self.env.cr.execute(sql, (tuple(self.ids),))
         res = {
@@ -58,6 +63,7 @@ class StockMove(models.Model):
         moves = self.search([("id", operator, value)])
         if not moves:
             return FALSE_DOMAIN
+        self._flush_common_dest_move_query()
         sql = self._common_dest_move_query()
         self.env.cr.execute(sql, (tuple(moves.ids),))
         res = [
