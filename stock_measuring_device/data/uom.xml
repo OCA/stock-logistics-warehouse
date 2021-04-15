@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_uom_mm" model="uom.uom">
+        <field name="category_id" ref="uom.uom_categ_length" />
+        <field name="name">mm</field>
+        <field name="factor" eval="1000" />
+        <field name="uom_type">smaller</field>
+    </record>
+</odoo>
