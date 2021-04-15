@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <template
+        id="stock_measuring_device_assets"
+        name="stock_measuring_device assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/stock_measuring_device/static/src/scss/measuring_wizard.scss"
+            />
+        </xpath>
+    </template>
+</odoo>

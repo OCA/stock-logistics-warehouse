@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_measuring_device_form">
+        <field name="name">measuring.device.form</field>
+        <field name="model">measuring.device</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        type="object"
+                        name="open_wizard"
+                        string="Wizard"
+                        class="oe_highlight"
+                    />
+                    <button
+                        type="object"
+                        name="test_device"
+                        string="Test Device"
+                        attrs="{'invisible': [('id','=',False)]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group name="device">
+                            <field name="name" />
+                            <field name="warehouse_id" />
+                            <field name="device_type" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_measuring_device_tree">
+        <field name="name">measuring.device.tree</field>
+        <field name="model">measuring.device</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="warehouse_id" />
+                <field name="device_type" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_measuring_device_form" model="ir.actions.act_window">
+        <field name="name">Measuring Devices</field>
+        <field name="res_model">measuring.device</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
