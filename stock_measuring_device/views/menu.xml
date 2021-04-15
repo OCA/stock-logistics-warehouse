@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<odoo>
+    <menuitem
+        id="menu_measuring_device"
+        action="action_measuring_device_form"
+        parent="stock.menu_warehouse_config"
+        sequence="100"
+    />
+</odoo>
