@@ -26,7 +26,7 @@ class StockRequestOrder(models.Model):
             if stock_request.route_id:
                 stock_request.route_id = False
 
-    @api.onchange('warehouse_id')
+    @api.onchange("warehouse_id")
     def onchange_warehouse_id(self):
         # Onchange no longer needed
         pass
