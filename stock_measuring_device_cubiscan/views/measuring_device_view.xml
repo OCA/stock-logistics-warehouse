@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_measuring_device_cubiscan_form">
+        <field name="name">measuring.device.cubiscan.form"</field>
+        <field name="model">measuring.device</field>
+        <field
+            name="inherit_id"
+            ref="stock_measuring_device.view_measuring_device_form"
+        />
+        <field name="arch" type="xml">
+            <group name="device" position="after">
+                <group
+                    name="cubiscan"
+                    attrs="{'invisible':[('device_type', '!=', 'cubiscan')]}"
+                >
+                    <field name="device_address" />
+                    <field name="port" />
+                    <field name="timeout" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
