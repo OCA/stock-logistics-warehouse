@@ -17,8 +17,8 @@ class StockRequest(models.Model):
     @api.onchange("direction")
     def _onchange_location_id(self):
         if self.direction == "outbound":
-            # Partner Locations/Customers
-            self.location_id = self.env.ref("stock.stock_location_customers")
+            # Stock Location set to Partner Locations/Customers
+            self.location_id = self.company_id.partner_id.property_stock_customer.id
         else:
             # Otherwise the Stock Location of the Warehouse
             self.location_id = self.warehouse_id.lot_stock_id.id
