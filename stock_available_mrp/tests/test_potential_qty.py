@@ -29,11 +29,9 @@ class TestPotentialQty(TransactionCase):
             'mrp.product_product_table_kit_product_template')
         #  First variant
         self.var1 = self.browse_ref('mrp.product_product_table_kit')
-        self.var1.type = 'consu'
         #  Second variant
         self.var2 = self.browse_ref(
             'stock_available_mrp.product_kit_1a')
-        self.var2.type = 'consu'
         # Make bolt a stockable product to be able to change its stock
         # we need to unreserve the existing move before being able to do it.
         bolt = self.env.ref('mrp.product_product_computer_desk_bolt')
