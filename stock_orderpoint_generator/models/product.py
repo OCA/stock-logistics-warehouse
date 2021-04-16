@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from collections import OrderedDict
+from datetime import timedelta
 
 from odoo import api, fields, models
 
@@ -49,8 +50,13 @@ class ProductProduct(models.Model):
         # default the compute the stock value anyway to default the value
         # for products with no moves for the given period
         initial_stock = {}
+        # Compute the second before the given date so we don't duplicate
+        # history values in case the given hour is the same than the one
+        # of the first move
+        from_date_stock = from_date - timedelta(seconds=1)
+        to_date_stock = to_date + timedelta(seconds=1)
         initial_stock = self.with_context(location=location)._compute_quantities_dict(
-            False, False, False, to_date=from_date or to_date
+            False, False, False, to_date=from_date_stock or to_date_stock
         )
         product_moves_dict = {}
         for move in moves:
@@ -76,22 +82,46 @@ class ProductProduct(models.Model):
             # we can compute the stock historical values from the moves
             # sequence so we can exploit it statisticaly
             product_moves = OrderedDict(sorted(product_moves.items()))
-            stock = False
+            product_moves_dict[product.id]["stock_history"] = [
+                prod_initial_stock.get("qty_available", 0)
+            ]
+            stock = 0
             first_item = product_moves[next(iter(product_moves))]
             if from_date:
                 stock = prod_initial_stock.get("qty_available")
-            if not stock:
-                stock = first_item["prod_qty"]
-            first_item["stock"] = stock
+            first_item["stock"] = stock + first_item["prod_qty"]
+            stock = first_item["stock"]
             iter_moves = iter(product_moves)
             next(iter_moves, None)
             for date in iter_moves:
                 stock += product_moves[date]["prod_qty"]
                 product_moves[date]["stock"] = stock
-            product_moves_dict[product.id]["stock_history"] = [
+            product_moves_dict[product.id]["stock_history"] += [
                 v["stock"] for k, v in product_moves.items()
             ]
         return product_moves_dict
+
+    def _get_delivered_to_customer_dict(
+        self, location=False, from_date=False, to_date=False
+    ):
+        """Returns a dict of products with their delivered qtys for the
+        given dates and locations
+        """
+        domain = [
+            ("product_id", "in", self.ids),
+            ("state", "=", "done"),
+            ("location_dest_id.usage", "=", "customer"),
+        ]
+        if location:
+            domain += [("location_id", "child_of", location.id)]
+        if from_date:
+            domain += [("date", ">=", from_date)]
+        if to_date:
+            domain += [("date", "<=", to_date)]
+        move_lines = self.env["stock.move.line"].read_group(
+            domain, ["product_id", "qty_done"], ["product_id"]
+        )
+        return {p["product_id"][0]: p["qty_done"] for p in move_lines}
 
     def _compute_historic_quantities_dict(
         self, location_id=False, from_date=False, to_date=False
