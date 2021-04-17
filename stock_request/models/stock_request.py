@@ -196,6 +196,8 @@ class StockRequest(models.Model):
                 if request.allocation_ids
                 else 0
             )
+            if request.qty_cancelled:
+                request.action_done()
 
     @api.constrains("order_id", "requested_by")
     def check_order_requested_by(self):
