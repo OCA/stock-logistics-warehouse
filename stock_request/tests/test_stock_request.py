@@ -688,8 +688,8 @@ class TestStockRequestBase(TestStockRequest):
         )
         stock_request_2.product_uom_qty = 6.0
         self.product.route_ids = [(6, 0, self.route.ids)]
-        stock_request_1.action_confirm()
-        stock_request_2.action_confirm()
+        stock_request_1.sudo().action_confirm()
+        stock_request_2.sudo().action_confirm()
         self.assertEqual(len(stock_request_1.sudo().picking_ids), 1)
         self.assertEqual(
             stock_request_1.sudo().picking_ids, stock_request_2.sudo().picking_ids
