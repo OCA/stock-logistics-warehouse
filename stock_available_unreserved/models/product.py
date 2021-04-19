@@ -92,8 +92,17 @@ class ProductProduct(models.Model):
                 precision_rounding=product.uom_id.rounding,
             )
             for obj_company in self.env.companies:
-                scrap_location = self.env['stock.location'].search([('scrap_location', '=', True), ('company_id', '=', obj_company.id)])
-                quant_scrap = self.env['stock.quant'].search([('product_id', '=', product.id), ('location_id', '=', scrap_location.id)])
+                scrap_location = self.env["stock.location"].search(
+                    [("scrap_location", "=", True), ("company_id", "=", obj_company.id)]
+                )
+                quant_scrap = self.env["stock.quant"].search(
+                    [
+                        ("product_id", "=", product.id),
+                        ("location_id", "=", scrap_location.id),
+                    ]
+                )
+                # scrap_location = self.env['stock.location'].search([('scrap_location', '=', True), ('company_id', '=', obj_company.id)])
+                # quant_scrap = self.env['stock.quant'].search([('product_id', '=', product.id), ('location_id', '=', scrap_location.id)])
                 if quant_scrap:
                     available_not_res = available_not_res + quant_scrap.quantity
             res[product.id] = {"qty_available_not_res": available_not_res}
