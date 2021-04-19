@@ -66,3 +66,13 @@ class StockMove(models.Model):
                 )
             )
         return super(StockMove, self).copy_data(default)
+
+    def _action_cancel(self):
+        res = super()._action_cancel()
+        self.mapped("allocation_ids.stock_request_id").check_done()
+        return res
+
+    def _action_done(self, cancel_backorder=False):
+        res = super()._action_done(cancel_backorder=cancel_backorder)
+        self.mapped("allocation_ids.stock_request_id").check_done()
+        return res
