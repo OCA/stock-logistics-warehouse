@@ -131,6 +131,10 @@ class TestStockRequest(common.TransactionCase):
             }
         )
 
+        self.env["ir.config_parameter"].sudo().set_param(
+            "stock.no_auto_scheduler", "True"
+        )
+
     def _create_user(self, name, group_ids, company_ids):
         return (
             self.env["res.users"]
@@ -543,24 +547,6 @@ class TestStockRequestBase(TestStockRequest):
         with self.assertRaises(exceptions.ValidationError):
             self.stock_request.with_user(self.stock_request_user).create(vals)
 
-    def test_stock_request_validations_02(self):
-        vals = {
-            "product_id": self.product.id,
-            "product_uom_id": self.product.uom_id.id,
-            "product_uom_qty": 5.0,
-            "company_id": self.main_company.id,
-            "warehouse_id": self.warehouse.id,
-            "location_id": self.warehouse.lot_stock_id.id,
-        }
-
-        stock_request = self.stock_request.with_user(self.stock_request_user).create(
-            vals
-        )
-
-        # With no route found, should raise an error
-        with self.assertRaises(exceptions.UserError):
-            stock_request.with_user(self.stock_request_manager).action_confirm()
-
     def test_create_request_01(self):
         expected_date = fields.Datetime.now()
         vals = {
@@ -617,7 +603,7 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(picking.origin, order.name)
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 5
-        picking.with_user(self.stock_request_manager).action_done()
+        picking.with_user(self.stock_request_manager)._action_done()
         self.assertEqual(stock_request.qty_in_progress, 0.0)
         self.assertEqual(stock_request.qty_done, stock_request.product_uom_qty)
         self.assertEqual(order.state, "done")
@@ -662,7 +648,7 @@ class TestStockRequestBase(TestStockRequest):
         picking.with_user(self.stock_request_manager).action_assign()
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 1
-        picking.with_user(self.stock_request_manager).action_done()
+        picking.with_user(self.stock_request_manager)._action_done()
         self.assertEqual(stock_request.qty_in_progress, 0.0)
         self.assertEqual(stock_request.qty_done, stock_request.product_uom_qty)
         self.assertEqual(stock_request.state, "done")
@@ -715,9 +701,9 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(stock_request_2.qty_cancelled, 0)
         packout1 = picking.move_line_ids[0]
         packout1.qty_done = 4
-        self.env["stock.backorder.confirmation"].create(
-            {"pick_ids": [(4, picking.id)]}
-        ).process_cancel_backorder()
+        self.env["stock.backorder.confirmation"].with_context(
+            button_validate_picking_ids=[picking.id]
+        ).create({"pick_ids": [(4, picking.id)]}).process_cancel_backorder()
         self.assertEqual(stock_request_1.qty_in_progress, 0)
         self.assertEqual(stock_request_1.qty_done, 4)
         self.assertEqual(stock_request_1.qty_cancelled, 0)
@@ -944,7 +930,7 @@ class TestStockRequestBase(TestStockRequest):
         # the action from the products, so test that they get a friendlier
         # error message.
         self.stock_request_user.groups_id -= self.stock_request_user_group
-        with self.assertRaisesRegexp(
+        with self.assertRaisesRegex(
             exceptions.UserError,
             "Unfortunately it seems you do not have the necessary rights "
             "for creating stock requests. Please contact your "
@@ -1085,9 +1071,9 @@ class TestStockRequestBase(TestStockRequest):
         self.assertNotEqual(sr1.state, "done")
         self.assertNotEqual(sr2.state, "done")
         self.assertNotEqual(sr3.state, "done")
-        self.env["stock.backorder.confirmation"].create(
-            {"pick_ids": [(4, picking.id)]}
-        ).process()
+        self.env["stock.backorder.confirmation"].with_context(
+            button_validate_picking_ids=[picking.id]
+        ).create({"pick_ids": [(4, picking.id)]}).process()
         sr1.refresh()
         sr2.refresh()
         sr3.refresh()
@@ -1104,10 +1090,9 @@ class TestStockRequestBase(TestStockRequest):
         line.quantity_done = 4
         line = picking.move_lines.filtered(lambda r: r.product_id == product2)
         line.quantity_done = 1
-
-        self.env["stock.backorder.confirmation"].create(
-            {"pick_ids": [(4, picking.id)]}
-        ).process_cancel_backorder()
+        self.env["stock.backorder.confirmation"].with_context(
+            button_validate_picking_ids=[picking.id]
+        ).create({"pick_ids": [(4, picking.id)]}).process_cancel_backorder()
         sr1.refresh()
         sr2.refresh()
         sr3.refresh()
