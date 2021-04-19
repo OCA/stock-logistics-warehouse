@@ -10,3 +10,4 @@
   * Steve Campbell <scampbell@opensourceintegrators.com>
 
 * Héctor Villarreal <hector.villarreal@forgeflow.com>
+* Kitti U. <kittiu@ecosoft.co.th>
