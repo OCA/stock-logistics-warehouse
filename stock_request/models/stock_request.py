@@ -113,7 +113,9 @@ class StockRequest(models.Model):
         help="Quantity cancelled",
     )
     picking_count = fields.Integer(
-        string="Delivery Orders", compute="_compute_picking_ids", readonly=True,
+        string="Delivery Orders",
+        compute="_compute_picking_ids",
+        readonly=True,
     )
     allocation_ids = fields.One2many(
         comodel_name="stock.request.allocation",
@@ -291,7 +293,7 @@ class StockRequest(models.Model):
 
     def _prepare_procurement_values(self, group_id=False):
 
-        """ Prepare specific key for moves or other components that
+        """Prepare specific key for moves or other components that
         will be created from a procurement rule
         coming from a stock request. This method could be override
         in order to add other custom key that could be used in
