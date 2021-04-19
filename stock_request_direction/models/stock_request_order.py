@@ -14,7 +14,7 @@ class StockRequestOrder(models.Model):
         readonly=True,
     )
 
-    @api.onchange("direction")
+    @api.onchange("warehouse_id", "direction")
     def _onchange_location_id(self):
         if self.direction == "outbound":
             # Stock Location set to Partner Locations/Customers
@@ -22,6 +22,14 @@ class StockRequestOrder(models.Model):
         else:
             # Otherwise the Stock Location of the Warehouse
             self.location_id = self.warehouse_id.lot_stock_id.id
+        for stock_request in self.stock_request_ids:
+            if stock_request.route_id:
+                stock_request.route_id = False
+
+    @api.onchange("warehouse_id")
+    def onchange_warehouse_id(self):
+        # Onchange no longer needed
+        pass
 
     def change_childs(self):
         super().change_childs()
