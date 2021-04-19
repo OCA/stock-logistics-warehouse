@@ -57,7 +57,8 @@ class StockRequestAllocation(models.Model):
         "in the default UoM of the product",
     )
     open_product_qty = fields.Float(
-        "Open Quantity", compute="_compute_open_product_qty",
+        "Open Quantity",
+        compute="_compute_open_product_qty",
     )
 
     @api.depends(
