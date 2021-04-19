@@ -47,13 +47,13 @@ class StockRequest(models.Model):
         default="draft",
         index=True,
         readonly=True,
-        track_visibility="onchange",
+        tracking=True,
     )
     requested_by = fields.Many2one(
         "res.users",
         "Requested by",
         required=True,
-        track_visibility="onchange",
+        tracking=True,
         default=lambda s: s._get_default_requested_by(),
     )
     expected_date = fields.Datetime(
@@ -198,8 +198,6 @@ class StockRequest(models.Model):
                 if request.allocation_ids
                 else 0
             )
-            if request.qty_cancelled:
-                request.action_done()
 
     @api.constrains("order_id", "requested_by")
     def check_order_requested_by(self):

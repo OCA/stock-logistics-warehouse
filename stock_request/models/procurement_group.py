@@ -8,7 +8,7 @@ class ProcurementGroup(models.Model):
     _inherit = "procurement.group"
 
     @api.model
-    def run(self, procurements):
+    def run(self, procurements, raise_user_error=True):
         indexes_to_pop = []
         new_procs = []
         for i, procurement in enumerate(procurements):
@@ -26,4 +26,4 @@ class ProcurementGroup(models.Model):
             for index in indexes_to_pop:
                 procurements.pop(index)
             procurements.extend(new_procs)
-        return super().run(procurements)
+        return super().run(procurements, raise_user_error=raise_user_error)
