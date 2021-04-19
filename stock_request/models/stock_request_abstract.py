@@ -185,8 +185,8 @@ class StockRequest(models.AbstractModel):
 
     @api.constrains("product_id")
     def _check_product_uom(self):
-        """ Check if the UoM has the same category as the
-        product standard UoM """
+        """Check if the UoM has the same category as the
+        product standard UoM"""
         if any(
             request.product_id.uom_id.category_id != request.product_uom_id.category_id
             for request in self
@@ -240,8 +240,8 @@ class StockRequest(models.AbstractModel):
 
     @api.onchange("company_id")
     def onchange_company_id(self):
-        """ Sets a default warehouse when the company is changed and limits
-        the user selection of warehouses. """
+        """Sets a default warehouse when the company is changed and limits
+        the user selection of warehouses."""
         if self.company_id and (
             not self.warehouse_id or self.warehouse_id.company_id != self.company_id
         ):
