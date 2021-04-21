@@ -56,7 +56,6 @@ Configure the measuring device in Inventory > Configuration > Measuring
 Devices, don't forget to set the device type, and any other additional
 parameters.
 
-
 Usage
 =====
 
@@ -106,6 +105,14 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
+
+.. |maintainer-gurneyalex| image:: https://github.com/gurneyalex.png?size=40px
+    :target: https://github.com/gurneyalex
+    :alt: gurneyalex
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-gurneyalex| 
 
 This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/13.0/stock_measuring_device>`_ project on GitHub.
 
