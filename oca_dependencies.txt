@@ -1,4 +1,5 @@
 account-analytic
+connector
 product-attribute
 server-env
 server-ux
