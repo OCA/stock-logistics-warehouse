@@ -41,6 +41,7 @@ setuptools.setup(
         'odoo13-addon-stock_location_position',
         'odoo13-addon-stock_location_tray',
         'odoo13-addon-stock_location_zone',
+        'odoo13-addon-stock_measuring_device',
         'odoo13-addon-stock_move_auto_assign',
         'odoo13-addon-stock_move_common_dest',
         'odoo13-addon-stock_move_location',
