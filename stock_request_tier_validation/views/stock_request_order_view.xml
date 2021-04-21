@@ -69,9 +69,9 @@
     </record>
 
     <record id="view_stock_request_order_filter" model="ir.ui.view">
-        <field name="name">stock.request.select - stock_request_tier_validation</field>
-        <field name="model">stock.request</field>
-        <field name="inherit_id" ref="stock_request.stock_request_search"/>
+        <field name="name">stock.request.order.select - stock_request_tier_validation</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_search"/>
         <field name="arch" type="xml">
             <search position="inside">
                 <group expand="0" string="Need actions">
