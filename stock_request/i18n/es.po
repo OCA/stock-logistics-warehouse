@@ -96,12 +96,6 @@ msgid "Analytic accounting in Stock Requests"
 msgstr "Contabilidad analítica en solicitudes de stock"
 
 #. module: stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-msgid "Archived"
-msgstr "Archivado"
-
-#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_attachment_count
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_attachment_count
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_attachment_count
@@ -599,6 +593,11 @@ msgid "Purchases"
 msgstr "Compras"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_cancelled
+msgid "Qty Cancelled"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_done
 msgid "Qty Done"
 msgstr "Cantidad finalizada"
@@ -613,6 +612,11 @@ msgstr "Cantidad en progreso"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__product_uom_qty
 msgid "Quantity"
 msgstr "Cantidad"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__qty_cancelled
+msgid "Quantity cancelled"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_done
@@ -1134,6 +1138,9 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
+
+#~ msgid "Archived"
+#~ msgstr "Archivado"
 
 #~ msgid "If checked new messages require your attention."
 #~ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
