@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo14-addon-stock_move_location',
         'odoo14-addon-stock_packaging_calculator',
         'odoo14-addon-stock_pull_list',
+        'odoo14-addon-stock_request',
         'odoo14-addon-stock_warehouse_calendar',
     ],
     classifiers=[
