@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_stock_request_allocation_tree" model="ir.ui.view">
+        <field name="name">stock.request.allocation.tree</field>
+        <field name="model">stock.request.allocation</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Request Allocations">
+                <field name="stock_request_id" />
+                <field name="stock_move_id" />
+                <field name="product_id" />
+                <field name="requested_product_uom_qty" />
+                <field
+                    name="product_uom_id"
+                    options="{'no_open': True, 'no_create': True}"
+                    groups="uom.group_uom"
+                />
+                <field name="requested_product_qty" />
+                <field name="allocated_product_qty" />
+                <field name="open_product_qty" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_stock_request_allocation_form" model="ir.ui.view">
+        <field name="name">stock.request.allocation.form</field>
+        <field name="model">stock.request.allocation</field>
+        <field name="arch" type="xml">
+            <form string="Stock Request Allocations">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="stock_request_id" />
+                            <field name="stock_move_id" />
+                        </group>
+                        <group>
+                            <field name="product_id" />
+                            <field name="requested_product_uom_qty" />
+                            <field
+                                name="product_uom_id"
+                                options="{'no_open': True, 'no_create': True}"
+                                groups="uom.group_uom"
+                            />
+                            <field name="requested_product_qty" />
+                            <field name="allocated_product_qty" />
+                            <field name="open_product_qty" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_create': True}"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
