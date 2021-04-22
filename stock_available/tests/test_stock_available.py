@@ -144,3 +144,37 @@ class TestStockLogisticsWarehouse(TransactionCase):
         # Potential Qty is set as 0.0 by default
         self.assertEquals(templateAB.potential_qty, 0.0)
         self.assertEquals(productA.potential_qty, 0.0)
+
+    def test_available_stock_multiple_location(self):
+        uom_unit = self.env.ref("uom.product_uom_unit")
+        productA = self.env["product.product"].create(
+            {
+                "name": "product A",
+                "standard_price": 1,
+                "type": "product",
+                "uom_id": uom_unit.id,
+                "default_code": "A",
+            }
+        )
+        supplier_location = self.env.ref("stock.stock_location_suppliers")
+        shelf1 = self.env.ref("stock.stock_location_components")
+        shelf2 = self.env.ref("stock.stock_location_14")
+
+        # Create a stock move from INCOMING to STOCK
+        stockMoveIn = self.env["stock.move"].create(
+            {
+                "location_id": supplier_location.id,
+                "location_dest_id": shelf1.id,
+                "name": "MOVE INCOMING -> STOCK ",
+                "product_id": productA.id,
+                "product_uom": productA.uom_id.id,
+                "product_uom_qty": 2,
+            }
+        )
+        stockMoveIn._action_confirm()
+        self.assertEqual(
+            productA.with_context(location=shelf1.id).immediately_usable_qty, 2.0
+        )
+        self.assertEqual(
+            productA.with_context(location=shelf2.id).immediately_usable_qty, 0.0
+        )
