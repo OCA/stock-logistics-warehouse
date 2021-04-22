@@ -104,8 +104,16 @@ class StockRequest(models.Model):
         store=True,
         help="Quantity completed",
     )
+    qty_cancelled = fields.Float(
+        "Qty Cancelled",
+        digits="Product Unit of Measure",
+        readonly=True,
+        compute="_compute_qty",
+        store=True,
+        help="Quantity cancelled",
+    )
     picking_count = fields.Integer(
-        string="Delivery Orders", compute="_compute_picking_ids", readonly=True
+        string="Delivery Orders", compute="_compute_picking_ids", readonly=True,
     )
     allocation_ids = fields.One2many(
         comodel_name="stock.request.allocation",
@@ -136,12 +144,16 @@ class StockRequest(models.Model):
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")
     ]
 
-    @api.depends("allocation_ids")
+    @api.depends("allocation_ids", "allocation_ids.stock_move_id")
     def _compute_move_ids(self):
         for request in self:
             request.move_ids = request.allocation_ids.mapped("stock_move_id")
 
-    @api.depends("allocation_ids")
+    @api.depends(
+        "allocation_ids",
+        "allocation_ids.stock_move_id",
+        "allocation_ids.stock_move_id.picking_id",
+    )
     def _compute_picking_ids(self):
         for request in self:
             request.picking_count = 0
@@ -159,13 +171,30 @@ class StockRequest(models.Model):
     )
     def _compute_qty(self):
         for request in self:
-            done_qty = sum(request.allocation_ids.mapped("allocated_product_qty"))
+            incoming_qty = 0.0
+            other_qty = 0.0
+            for allocation in request.allocation_ids:
+                if allocation.stock_move_id.picking_code == "incoming":
+                    incoming_qty += allocation.allocated_product_qty
+                else:
+                    other_qty += allocation.allocated_product_qty
+            done_qty = abs(other_qty - incoming_qty)
             open_qty = sum(request.allocation_ids.mapped("open_product_qty"))
-            request.qty_done = request.product_id.uom_id._compute_quantity(
-                done_qty, request.product_uom_id
-            )
-            request.qty_in_progress = request.product_id.uom_id._compute_quantity(
+            uom = request.product_id.uom_id
+            request.qty_done = uom._compute_quantity(done_qty, request.product_uom_id)
+            request.qty_in_progress = uom._compute_quantity(
                 open_qty, request.product_uom_id
+            )
+            request.qty_cancelled = (
+                max(
+                    0,
+                    uom._compute_quantity(
+                        request.product_qty - done_qty - open_qty,
+                        request.product_uom_id,
+                    ),
+                )
+                if request.allocation_ids
+                else 0
             )
 
     @api.constrains("order_id", "requested_by")
@@ -208,7 +237,7 @@ class StockRequest(models.Model):
 
     def _action_confirm(self):
         self._action_launch_procurement_rule()
-        self.state = "open"
+        self.write({"state": "open"})
 
     def action_confirm(self):
         self._action_confirm()
@@ -219,14 +248,13 @@ class StockRequest(models.Model):
         return True
 
     def action_cancel(self):
-        self.mapped("move_ids")._action_cancel()
-        self.state = "cancel"
+        self.sudo().mapped("move_ids")._action_cancel()
+        self.write({"state": "cancel"})
         return True
 
     def action_done(self):
-        self.state = "done"
-        if self.order_id:
-            self.order_id.check_done()
+        self.write({"state": "done"})
+        self.mapped("order_id").check_done()
         return True
 
     def check_done(self):
@@ -245,7 +273,19 @@ class StockRequest(models.Model):
                 >= 0
             ):
                 request.action_done()
+            elif request._check_done_allocation():
+                request.action_done()
         return True
+
+    def _check_done_allocation(self):
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        self.ensure_one()
+        return (
+            self.allocation_ids
+            and float_compare(self.qty_cancelled, 0, precision_digits=precision) > 0
+        )
 
     def _prepare_procurement_values(self, group_id=False):
 
