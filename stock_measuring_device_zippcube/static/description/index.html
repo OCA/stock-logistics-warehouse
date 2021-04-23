@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.15.1: http://docutils.sourceforge.net/" />
 <title>Stock Zippcube</title>
 <style type="text/css">
 
@@ -402,12 +402,12 @@ environment variable called ZIPPCUBE_SECRET set to the value of the secret.</p>
 <p>After you have configured the measuring device in Odoo, you need to configure the device itself.</p>
 <p>Edit the language file on the computer attached to the device, and set the
 following parameters (the secret value must be the one generated earlier):</p>
-<p><tt class="docutils literal">`
-<span class="pre">REST_Body={&quot;barcode&quot;:&quot;%%VAR_NUMBER%%&quot;,</span> <span class="pre">&quot;weight&quot;:&quot;%%VAR_SCALE_WEIGHT%%&quot;,</span>&nbsp; <span class="pre">&quot;length&quot;:&quot;%%VAR_LENGTH&quot;,</span> <span class="pre">&quot;width&quot;:&quot;%%VAR_WIDTH%%&quot;,</span> <span class="pre">&quot;height&quot;:&quot;%%VAR_HEIGHT%%&quot;,</span> &quot;secret&quot;: &quot;&lt;insert secret <span class="pre">here&gt;&quot;}</span>
-<span class="pre">REST_BaseURL=http://&lt;odoo_host_url&gt;/stock/zippcube/&lt;device_name&gt;/measurement</span>
+<pre class="literal-block">
+REST_Body={&quot;barcode&quot;:&quot;%%VAR_NUMBER%%&quot;, &quot;weight&quot;:&quot;%%VAR_SCALE_WEIGHT%%&quot;,  &quot;length&quot;:&quot;%%VAR_LENGTH&quot;, &quot;width&quot;:&quot;%%VAR_WIDTH%%&quot;, &quot;height&quot;:&quot;%%VAR_HEIGHT%%&quot;, &quot;secret&quot;: &quot;&lt;insert secret here&gt;&quot;}
+REST_BaseURL=http://&lt;odoo_host_url&gt;/stock/zippcube/&lt;device_name&gt;/measurement
 REST_ContentType=application/json
 REST_AcceptEncoding=gzip, deflate
-`</tt></p>
+</pre>
 <p>For local testing you can use the script in <cite>scripts/measurement.sh</cite></p>
 </div>
 <div class="section" id="configuration">
