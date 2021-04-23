@@ -33,6 +33,15 @@ class ProductProduct(models.Model):
         return res, stock_dict
 
     @api.depends("virtual_available")
+    @api.depends_context(
+        "lot_id",
+        "owner_id",
+        "package_id",
+        "from_date",
+        "to_date",
+        "location",
+        "warehouse",
+    )
     def _compute_available_quantities(self):
         res, _ = self._compute_available_quantities_dict()
         for product in self:
