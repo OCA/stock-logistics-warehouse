@@ -248,7 +248,7 @@ class StockRequestOrder(models.Model):
         return
 
     def action_view_transfer(self):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+        action = self.env.ref("stock.action_picking_tree_all").sudo().read()[0]
 
         pickings = self.mapped("picking_ids")
         if len(pickings) > 1:
