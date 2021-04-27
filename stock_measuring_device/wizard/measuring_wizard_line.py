@@ -33,6 +33,7 @@ class MeasuringWizardLine(models.TransientModel):
     packaging_type_id = fields.Many2one("product.packaging.type", readonly=True)
     is_unit_line = fields.Boolean(readonly=True)
     required = fields.Boolean(related="packaging_type_id.required", readonly=True)
+    is_measured = fields.Boolean()
 
     @api.depends("lngth", "width", "height")
     def _compute_volume(self):

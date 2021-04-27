@@ -111,6 +111,8 @@ class MeasuringWizard(models.TransientModel):
         packaging_ids_list = []
         for line in self.line_ids:
             packaging_type = line.packaging_type_id
+            if not line.is_measured:
+                continue
             if packaging_type:
                 # Handle lines with packaging
                 vals = {
