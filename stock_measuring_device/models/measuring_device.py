@@ -87,7 +87,7 @@ class MeasuringDevice(models.Model):
             _logger.warning("No wizard line found for this measure.")
             packaging.write(measures)
         else:
-            measures.update({"scan_requested": False})
+            measures.update({"scan_requested": False, "is_measured": True})
             wizard_line.write(measures)
 
         self._get_measuring_device().post_update_packaging_measures(
