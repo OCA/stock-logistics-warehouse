@@ -82,6 +82,11 @@ msgid "ID"
 msgstr ""
 
 #. module: stock_measuring_device
+#: model:ir.model.fields,field_description:stock_measuring_device.field_measuring_wizard_line__is_measured
+msgid "Is Measured"
+msgstr ""
+
+#. module: stock_measuring_device
 #: model:ir.model.fields,field_description:stock_measuring_device.field_measuring_wizard_line__is_unit_line
 msgid "Is Unit Line"
 msgstr ""
@@ -199,6 +204,11 @@ msgstr ""
 #. module: stock_measuring_device
 #: model:ir.model.fields,field_description:stock_measuring_device.field_measuring_wizard_line__required
 msgid "Required"
+msgstr ""
+
+#. module: stock_measuring_device
+#: model_terms:ir.ui.view,arch_db:stock_measuring_device.view_measuring_wizard
+msgid "Retrieve Product"
 msgstr ""
 
 #. module: stock_measuring_device
