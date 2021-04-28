@@ -30,12 +30,6 @@ msgid "No such Zippcube with name {}."
 msgstr ""
 
 #. module: stock_measuring_device_zippcube
-#: code:addons/stock_measuring_device_zippcube/components/zippcube_device_component.py:0
-#, python-format
-msgid "Please, press the REFRESH button."
-msgstr ""
-
-#. module: stock_measuring_device_zippcube
 #: model:ir.model.fields,help:stock_measuring_device_zippcube.field_measuring_device__device_type
 msgid ""
 "The type of device (e.g. zippcube, cubiscan...) depending on which module "
