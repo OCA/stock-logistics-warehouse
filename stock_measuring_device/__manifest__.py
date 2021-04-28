@@ -15,7 +15,7 @@
         "product_packaging_dimension",
         "product_packaging_type_required",
         "product_dimension",
-        # For the pop-up message to tell the user to refresh.
+        # To refresh wizard screen or pop-up message on the wizard
         "web_notify",
         "web_ir_actions_act_view_reload",
     ],
