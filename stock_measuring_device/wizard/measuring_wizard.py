@@ -167,6 +167,7 @@ class MeasuringWizard(models.TransientModel):
 
     def _send_notification_refresh(self):
         """Send a refresh notification on the wizard.
+
         Other notifications can be implemented, they have to be
         added in static/src/js/measuring_wizard.js and the message
         must contain an "action" and "params".
