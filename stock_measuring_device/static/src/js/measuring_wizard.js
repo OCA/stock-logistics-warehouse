@@ -28,21 +28,19 @@ odoo.define("stock_measuring_device.measuring_wizard", function(require) {
                 var channel = notification[0];
                 var message = notification[1];
                 if (channel === "notify_measuring_wizard_screen") {
-                    switch (message.action) {
-                        case "refresh":
-                            self.measuring_wizard_bus_action_refresh(message.params);
-                            break;
+                    if (message.action === "refresh") {
+                        self.measuring_wizard_bus_action_refresh(message.params);
                     }
                 }
             });
         },
         measuring_wizard_bus_action_refresh: function(params) {
             var selectedIds = this.getSelectedIds();
-            if (!selectedIds.length) {
+            if (!selectedIds.length || params.model !== this.modelName) {
                 return;
             }
             var currentId = selectedIds[0];
-            if (params.id === currentId && params.model === this.modelName) {
+            if (params.id === currentId) {
                 this.reload();
             }
         },
