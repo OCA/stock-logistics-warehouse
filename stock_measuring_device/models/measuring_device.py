@@ -40,7 +40,7 @@ class MeasuringDevice(models.Model):
             return work_ctx.component(usage=self.device_type)
 
     def open_wizard(self):
-        return {
+        res = {
             "name": _("Measurement Wizard"),
             "res_model": "measuring.wizard",
             "type": "ir.actions.act_window",
@@ -54,6 +54,12 @@ class MeasuringDevice(models.Model):
                 "no_breadcrumbs": True,
             },
         }
+        if self._is_being_used():
+            pack = self.env["product.packaging"].search(
+                [("measuring_device_id", "=", self.id)], limit=1
+            )
+            res["context"]["default_product_id"] = pack.product_id.id
+        return res
 
     def _is_being_used(self):
         self.ensure_one()
