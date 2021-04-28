@@ -165,6 +165,20 @@ class MeasuringWizard(models.TransientModel):
             "type": "ir.actions.act_view_reload",
         }
 
+    def _send_notification_refresh(self):
+        """Send a refresh notification on the wizard.
+        Other notifications can be implemented, they have to be
+        added in static/src/js/measuring_wizard.js and the message
+        must contain an "action" and "params".
+        """
+        self.ensure_one()
+        channel = "notify_measuring_wizard_screen"
+        bus_message = {
+            "action": "refresh",
+            "params": {"model": self._name, "id": self.id},
+        }
+        self.env["bus.bus"].sendone(channel, bus_message)
+
     def _notify(self, message):
         """Show a gentle notification on the wizard
 
