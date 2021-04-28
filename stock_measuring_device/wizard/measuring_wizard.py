@@ -89,6 +89,7 @@ class MeasuringWizard(models.TransientModel):
                         "barcode": pack.barcode,
                         "packaging_id": pack.id,
                         "packaging_type_id": pack_type.id,
+                        "scan_requested": bool(pack.measuring_device_id),
                     }
                 )
             vals_list.append(vals)
@@ -159,6 +160,15 @@ class MeasuringWizard(models.TransientModel):
             "target": "main",
             "flags": {"headless": False, "clear_breadcrumbs": True},
         }
+
+    def retrieve_product(self):
+        """Assigns product that locks the device if a scan is already requested."""
+        if self.device_id._is_being_used():
+            pack = self.env["product.packaging"]._measuring_device_find_assigned(
+                self.device_id
+            )
+            self.product_id = pack.product_id
+            self.onchange_product_id()
 
     def reload(self):
         return {

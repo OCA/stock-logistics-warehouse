@@ -37,6 +37,12 @@
                             string="Refresh"
                             icon="fa-refresh"
                         />
+                        <button
+                            name="retrieve_product"
+                            type="object"
+                            string="Retrieve Product"
+                            icon="fa-search"
+                        />
                     </group>
                     <group name="col2" />
                 </group>

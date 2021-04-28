@@ -16,6 +16,7 @@ class ProductPackaging(models.Model):
         string="Measuring device which will scan the package",
         help="Technical field set when an operator uses the device "
         "to scan this package",
+        index=True,
     )
 
     def _measuring_device_assign(self, device):
