@@ -1,7 +1,6 @@
 # Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from datetime import datetime
 
 from odoo import api, fields, models
 from odoo.tools import float_compare, float_round
@@ -51,10 +50,10 @@ class StockWarehouseOrderpoint(models.Model):
                 float_compare(
                     virtual_qty,
                     op.product_min_qty,
-                    precision_rounding=op.product_uom.rounding,
+                    precision_rounding=op.product_uom.rounding or 0.01,
                 )
                 < 0
             ):
                 qty = op._get_procure_recommended_qty(virtual_qty, op_qtys)
             op.procure_recommended_qty = qty
-            op.procure_recommended_date = op._get_date_planned(qty, datetime.today())
+            op.procure_recommended_date = op.lead_days_date

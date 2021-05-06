@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_make_procurement_orderpoint_wizard,make.procurement.orderpoint wizard,model_make_procurement_orderpoint,stock.group_stock_user,1,1,1,1
+access_make_procurement_orderpoint_item_wizard,make.procurement.orderpoint.item wizard,model_make_procurement_orderpoint_item,stock.group_stock_user,1,1,1,1
