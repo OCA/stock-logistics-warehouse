@@ -3,3 +3,7 @@
 * Bhavesh Odedra <bodedra@opensourceintegrators.com>
 * Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
 * Joan Sisquella Andrés <joan.sisquella@forgeflow.com>
+
+* `Trobz <https://trobz.com>`_:
+
+  * Dung Tran <dungtd@trobz.com>
