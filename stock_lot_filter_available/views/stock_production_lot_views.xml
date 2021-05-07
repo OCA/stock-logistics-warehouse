@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Carlos Roca
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record model="ir.ui.view" id="search_product_lot_filter">
+        <field name="name">Production Lots Filter</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.search_product_lot_filter" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <filter
+                    name="filter_on_stock"
+                    string="On hand"
+                    domain="[('product_qty', '>', 0)]"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
