@@ -86,7 +86,7 @@ class StockInventory(models.Model):
                     loc, self.product_id.ids))
         elif self.filter == 'category':
             product_ids = self.env['product.product'].search([
-                ('category_id', '=', self.category_id.id)]).ids
+                ('categ_id', '=', self.category_id.id)]).ids
             for loc in locations:
                 lines.extend(self._generate_lines_at_date(loc, product_ids))
         else:
