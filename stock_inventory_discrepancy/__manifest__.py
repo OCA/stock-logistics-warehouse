@@ -21,4 +21,5 @@
     "license": "AGPL-3",
     'installable': True,
     'application': False,
+    'pre_init_hook': 'compute_over_discrepancy_line_count',
 }

@@ -32,4 +32,5 @@
     "license": "AGPL-3",
     "installable": True,
     "application": False,
+    "pre_init_hook": "compute_inventory_accuracy",
 }
