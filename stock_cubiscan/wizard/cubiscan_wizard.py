@@ -83,7 +83,7 @@ class CubiscanWizard(models.TransientModel):
                 "wizard_id": self.id,
                 "sequence": seq + 1,
                 "name": pack_type.name,
-                "qty": 0,
+                "qty": 1.0,
                 "max_weight": 0,
                 "lngth": 0,
                 "width": 0,
