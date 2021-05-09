@@ -29,6 +29,7 @@ addon | version | summary
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 14.0.1.0.0 | More filters for inventory adjustments
 [stock_location_children](stock_location_children/) | 14.0.1.0.0 | Add relation between stock location and all its children
 [stock_location_lockdown](stock_location_lockdown/) | 14.0.1.0.0 | Prevent to add stock on locked locations
+[stock_location_position](stock_location_position/) | 14.0.1.0.0 | Add coordinate attributes on stock location.
 [stock_move_common_dest](stock_move_common_dest/) | 14.0.1.0.0 | Adds field for common destination moves
 [stock_move_location](stock_move_location/) | 14.0.1.0.0 | This module allows to move all stock in a stock location to an other one.
 [stock_packaging_calculator](stock_packaging_calculator/) | 14.0.1.0.1 | Compute product quantity to pick by packaging
