@@ -10,8 +10,12 @@ class StockRequest(models.Model):
     _check_company_auto = True
 
     analytic_account_id = fields.Many2one(
-        "account.analytic.account", string="Analytic Account", check_company=True,
+        "account.analytic.account",
+        string="Analytic Account",
+        check_company=True,
     )
     analytic_tag_ids = fields.Many2many(
-        "account.analytic.tag", string="Analytic Tags", check_company=True,
+        "account.analytic.tag",
+        string="Analytic Tags",
+        check_company=True,
     )
