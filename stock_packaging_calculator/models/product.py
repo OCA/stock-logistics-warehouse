@@ -9,7 +9,7 @@ from odoo.tools import float_compare
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
 # Unify records as we mix up w/ UoM
-Packaging = namedtuple("Packaging", "id name qty is_unit")
+Packaging = namedtuple("Packaging", "id name qty barcode is_unit")
 
 
 class Product(models.Model):
@@ -81,7 +81,7 @@ class Product(models.Model):
         name_getter = self.env.context.get("_packaging_name_getter", lambda x: x.name)
         packagings = sorted(
             [
-                Packaging(x.id, name_getter(x), x.qty, False)
+                Packaging(x.id, name_getter(x), x.qty, x.barcode, False)
                 for x in self.packaging_ids.filtered(custom_filter)
                 # Exclude the ones w/ zero qty as they are useless for the math
                 if x.qty
@@ -94,7 +94,7 @@ class Product(models.Model):
             # NOTE: the ID here could clash w/ one of the packaging's.
             # If you create a mapping based on IDs, keep this in mind.
             # You can use `is_unit` to check this.
-            Packaging(self.uom_id.id, self.uom_id.name, self.uom_id.factor, True)
+            Packaging(self.uom_id.id, self.uom_id.name, self.uom_id.factor, None, True)
         )
         return packagings
 
@@ -138,4 +138,5 @@ class Product(models.Model):
             "qty": qty_per_pkg,
             "name": packaging.name,
             "is_unit": packaging.is_unit,
+            "barcode": packaging.barcode,
         }
