@@ -130,7 +130,6 @@ msgstr ""
 
 #. module: stock_measuring_device
 #: code:addons/stock_measuring_device/wizard/measuring_wizard_line.py:0
-#: code:addons/stock_measuring_device/wizard/measuring_wizard_line.py:0
 #, python-format
 msgid "Measurement machine already in use."
 msgstr ""
@@ -233,7 +232,6 @@ msgid "Sequence"
 msgstr ""
 
 #. module: stock_measuring_device
-#: code:addons/stock_measuring_device/models/product_packaging.py:0
 #: code:addons/stock_measuring_device/models/product_packaging.py:0
 #, python-format
 msgid ""
