@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Akretion
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="stock_picking_supplier_code_search" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field
+                    name="move_lines"
+                    string="Supplier Default Code"
+                    filter_domain="[('move_lines.product_id.seller_ids.product_code','ilike',self)]"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
