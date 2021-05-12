@@ -82,6 +82,11 @@ msgid "ID"
 msgstr ""
 
 #. module: stock_measuring_device
+#: model:ir.model.fields,field_description:stock_measuring_device.field_measuring_wizard_line__is_measured
+msgid "Is Measured"
+msgstr ""
+
+#. module: stock_measuring_device
 #: model:ir.model.fields,field_description:stock_measuring_device.field_measuring_wizard_line__is_unit_line
 msgid "Is Unit Line"
 msgstr ""
@@ -124,6 +129,7 @@ msgid "Measurement Wizard"
 msgstr ""
 
 #. module: stock_measuring_device
+#: code:addons/stock_measuring_device/wizard/measuring_wizard_line.py:0
 #: code:addons/stock_measuring_device/wizard/measuring_wizard_line.py:0
 #, python-format
 msgid "Measurement machine already in use."
@@ -203,6 +209,11 @@ msgstr ""
 
 #. module: stock_measuring_device
 #: model_terms:ir.ui.view,arch_db:stock_measuring_device.view_measuring_wizard
+msgid "Retrieve Product"
+msgstr ""
+
+#. module: stock_measuring_device
+#: model_terms:ir.ui.view,arch_db:stock_measuring_device.view_measuring_wizard
 msgid "Save"
 msgstr ""
 
@@ -222,6 +233,7 @@ msgid "Sequence"
 msgstr ""
 
 #. module: stock_measuring_device
+#: code:addons/stock_measuring_device/models/product_packaging.py:0
 #: code:addons/stock_measuring_device/models/product_packaging.py:0
 #, python-format
 msgid ""
