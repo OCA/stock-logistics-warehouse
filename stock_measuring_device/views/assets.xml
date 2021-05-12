@@ -11,6 +11,10 @@
                 type="text/scss"
                 href="/stock_measuring_device/static/src/scss/measuring_wizard.scss"
             />
+            <script
+                type="text/javascript"
+                src="/stock_measuring_device/static/src/js/measuring_wizard.js"
+            />
         </xpath>
     </template>
 </odoo>

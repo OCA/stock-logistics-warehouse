@@ -3,8 +3,6 @@
 
 import logging
 
-from odoo import _
-
 from odoo.addons.component.core import Component
 
 _logger = logging.getLogger(__name__)
@@ -35,5 +33,8 @@ class ZippcubeDevice(Component):
         }
 
     def post_update_packaging_measures(self, measures, packaging, wizard_line):
-        wizard_line.wizard_id._notify(_("Please, press the REFRESH button."))
+        # wizard_line is only set when measurements are made from the measurement
+        # device wizard.
+        if wizard_line:
+            wizard_line.wizard_id._send_notification_refresh()
         packaging._measuring_device_release()

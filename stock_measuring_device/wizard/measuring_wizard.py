@@ -89,6 +89,7 @@ class MeasuringWizard(models.TransientModel):
                         "barcode": pack.barcode,
                         "packaging_id": pack.id,
                         "packaging_type_id": pack_type.id,
+                        "scan_requested": bool(pack.measuring_device_id),
                     }
                 )
             vals_list.append(vals)
@@ -111,6 +112,8 @@ class MeasuringWizard(models.TransientModel):
         packaging_ids_list = []
         for line in self.line_ids:
             packaging_type = line.packaging_type_id
+            if not line.is_measured:
+                continue
             if packaging_type:
                 # Handle lines with packaging
                 vals = {
@@ -148,7 +151,11 @@ class MeasuringWizard(models.TransientModel):
         self.onchange_product_id()
 
     def action_close(self):
-        self.ensure_one()
+        for line in self.line_ids:
+            if not line.scan_requested:
+                continue
+            line.packaging_id._measuring_device_release()
+            line.scan_requested = False
         return {
             "type": "ir.actions.act_window",
             "res_model": self.device_id._name,
@@ -158,10 +165,34 @@ class MeasuringWizard(models.TransientModel):
             "flags": {"headless": False, "clear_breadcrumbs": True},
         }
 
+    def retrieve_product(self):
+        """Assigns product that locks the device if a scan is already requested."""
+        if self.device_id._is_being_used():
+            pack = self.env["product.packaging"]._measuring_device_find_assigned(
+                self.device_id
+            )
+            self.product_id = pack.product_id
+            self.onchange_product_id()
+
     def reload(self):
         return {
             "type": "ir.actions.act_view_reload",
         }
+
+    def _send_notification_refresh(self):
+        """Send a refresh notification on the wizard.
+
+        Other notifications can be implemented, they have to be
+        added in static/src/js/measuring_wizard.js and the message
+        must contain an "action" and "params".
+        """
+        self.ensure_one()
+        channel = "notify_measuring_wizard_screen"
+        bus_message = {
+            "action": "refresh",
+            "params": {"model": self._name, "id": self.id},
+        }
+        self.env["bus.bus"].sendone(channel, bus_message)
 
     def _notify(self, message):
         """Show a gentle notification on the wizard
