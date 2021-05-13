@@ -7,19 +7,19 @@
             ref="mrp.product_product_table_kit_product_template"
         />
         <field
-            name="attribute_value_ids"
+            name="product_template_attribute_value_ids"
             eval="[(6,0,[ref('product.product_attribute_value_3')])]"
         />
     </record>
     <record id="mrp.product_product_table_kit" model="product.product">
         <field
-            name="attribute_value_ids"
+            name="product_template_attribute_value_ids"
             eval="[(6,0,[ref('product.product_attribute_value_4')])]"
         />
     </record>
     <record id="mrp.mrp_bom_kit_line_2" model="mrp.bom.line">
         <field
-            name="attribute_value_ids"
+            name="bom_product_template_attribute_value_ids"
             eval="[(6,0,[ref('product.product_attribute_value_4')])]"
         />
     </record>
@@ -40,7 +40,7 @@
         <field name="sequence">5</field>
         <field name="bom_id" ref="mrp.mrp_bom_kit" />
         <field
-            name="attribute_value_ids"
+            name="bom_product_template_attribute_value_ids"
             eval="[(6,0,[ref('product.product_attribute_value_3')])]"
         />
     </record>
