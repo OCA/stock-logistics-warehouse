@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2019 Open Source Integrators
+     Copyright 2019-2020 ForgeFlow S.L. (https://www.forgeflow.com)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <!-- Copyright 2019 Open Source Integrators
-         Copyright 2019-2020 ForgeFlow S.L. (https://www.forgeflow.com)
-         License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
     <record model="ir.ui.view" id="stock_request_order_form">
         <field name="name">stock.request.order.form</field>
         <field name="model">stock.request.order</field>
