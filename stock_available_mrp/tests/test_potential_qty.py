@@ -1,4 +1,5 @@
 # Copyright 2014 Numérigraphe SARL
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.osv.expression import TRUE_LEAF
@@ -9,7 +10,7 @@ class TestPotentialQty(TransactionCase):
     """Test the potential quantity on a product with a multi-line BoM"""
 
     def setUp(self):
-        super(TestPotentialQty, self).setUp()
+        super().setUp()
 
         self.product_model = self.env["product.product"]
         self.bom_model = self.env["mrp.bom"]
@@ -17,13 +18,10 @@ class TestPotentialQty(TransactionCase):
         self.stock_quant_model = self.env["stock.quant"]
         self.config = self.env["ir.config_parameter"]
         self.location = self.env["stock.location"]
+        self.main_company = self.browse_ref("base.main_company")
         # Get the warehouses
         self.wh_main = self.browse_ref("stock.warehouse0")
         self.wh_ch = self.browse_ref("stock.stock_warehouse_shop0")
-
-        # We need to compute parent_left and parent_right of the locations as
-        # they are used to compute qty_available of the product.
-        self.location._parent_store_compute()
         #  An interesting product (multi-line BoM, variants)
         self.tmpl = self.browse_ref("mrp.product_product_table_kit_product_template")
         #  First variant
@@ -33,27 +31,20 @@ class TestPotentialQty(TransactionCase):
         # Make bolt a stockable product to be able to change its stock
         # we need to unreserve the existing move before being able to do it.
         bolt = self.env.ref("mrp.product_product_computer_desk_bolt")
-        bolt_moves = self.env["stock.move"].search(
-            [("product_id", "=", bolt.id), ("state", "not in", ("done", "cancel"))]
-        )
-        bolt_moves._do_unreserve()
+        bolt.stock_move_ids._do_unreserve()
         bolt.type = "product"
         # Components that can be used to make the product
-        component_ids = [
+        components = [
             # Bolt
-            bolt.id,
+            bolt,
             # Wood Panel
-            self.ref("mrp.product_product_wood_panel"),
+            self.browse_ref("mrp.product_product_wood_panel"),
         ]
 
         # Zero-out the inventory of all variants and components
-        for component_id in component_ids + [
-            v.id for v in self.tmpl.product_variant_ids
-        ]:
-            prod = self.product_model.browse(component_id)
-            self.env["stock.quant"].search([("product_id", "=", prod.id)]).unlink()
+        for component in components + [v for v in self.tmpl.product_variant_ids]:
+            component.stock_quant_ids.unlink()
 
-        self.product_model.invalidate_cache()
         #  A product without a BoM
         self.product_wo_bom = self.browse_ref("product.product_product_11")
 
@@ -63,22 +54,37 @@ class TestPotentialQty(TransactionCase):
             for i in [self.tmpl, self.var1, self.var2, self.product_wo_bom]
         }
 
-    def create_inventory(self, product_id, qty, location_id=None):
-        if location_id is None:
-            location_id = self.wh_main.lot_stock_id.id
-
+    def _create_inventory(self, location_id, company_id):
         inventory = self.env["stock.inventory"].create(
-            {"name": "Test inventory", "location_id": location_id, "filter": "partial"}
+            {
+                "name": "Test inventory",
+                "company_id": company_id,
+                "location_ids": [(4, location_id)],
+                "start_empty": True,
+            }
         )
         inventory.action_start()
+        return inventory
+
+    def _create_inventory_line(self, inventory_id, product_id, location_id, qty):
         self.env["stock.inventory.line"].create(
             {
-                "inventory_id": inventory.id,
+                "inventory_id": inventory_id,
                 "product_id": product_id,
                 "location_id": location_id,
                 "product_qty": qty,
             }
         )
+
+    def create_inventory(self, product_id, qty, location_id=None, company_id=None):
+        if location_id is None:
+            location_id = self.wh_main.lot_stock_id.id
+
+        if company_id is None:
+            company_id = self.main_company.id
+
+        inventory = self._create_inventory(location_id, company_id)
+        self._create_inventory_line(inventory.id, product_id, location_id, qty)
         inventory._action_done()
 
     def create_simple_bom(
@@ -121,48 +127,20 @@ class TestPotentialQty(TransactionCase):
 
     def test_potential_qty_no_bom_for_company(self):
         chicago_id = self.ref("stock.res_company_1")
-
         # Receive 1000x Wood Panel owned by Chicago
-        inventory = self.env["stock.inventory"].create(
-            {
-                "name": "Receive CPUa8",
-                "company_id": chicago_id,
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "filter": "partial",
-            }
+        self.create_inventory(
+            product_id=self.env.ref("mrp.product_product_wood_panel").id,
+            qty=1000.0,
+            location_id=self.wh_ch.lot_stock_id.id,
+            company_id=chicago_id,
         )
-        inventory.action_start()
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "company_id": chicago_id,
-                "product_id": self.ref("mrp.product_product_wood_panel"),
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "product_qty": 1000.0,
-            }
-        )
-        inventory._action_done()
-
         # Put Bolt owned by Chicago for 1000x the 1st variant in main WH
-        inventory = self.env["stock.inventory"].create(
-            {
-                "name": "components for 1st variant",
-                "company_id": chicago_id,
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "filter": "partial",
-            }
+        self.create_inventory(
+            product_id=self.env.ref("mrp.product_product_computer_desk_bolt").id,
+            qty=1000.0,
+            location_id=self.wh_ch.lot_stock_id.id,
+            company_id=chicago_id,
         )
-        inventory.action_start()
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "company_id": chicago_id,
-                "product_id": self.ref("mrp.product_product_computer_desk_bolt"),
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "product_qty": 1000.0,
-            }
-        )
-        inventory._action_done()
         self.assertPotentialQty(
             self.tmpl, 250.0, "Wrong template potential after receiving components"
         )
@@ -171,8 +149,8 @@ class TestPotentialQty(TransactionCase):
             {
                 "name": "test_demo",
                 "login": "test_demo",
-                "company_id": self.ref("base.main_company"),
-                "company_ids": [(4, self.ref("base.main_company"))],
+                "company_id": self.main_company.id,
+                "company_ids": [(4, self.main_company.id), (4, chicago_id)],
                 "groups_id": [
                     (4, self.ref("stock.group_stock_user")),
                     (4, self.ref("mrp.group_mrp_user")),
@@ -182,7 +160,7 @@ class TestPotentialQty(TransactionCase):
 
         bom = self.env["mrp.bom"].search([("product_tmpl_id", "=", self.tmpl.id)])
 
-        test_user_tmpl = self.tmpl.sudo(test_user)
+        test_user_tmpl = self.tmpl.with_user(test_user)
         self.assertPotentialQty(
             test_user_tmpl, 250.0, "Simple user can access to the potential_qty"
         )
@@ -191,8 +169,8 @@ class TestPotentialQty(TransactionCase):
         # and all products without company (visible to all)
         # and the demo user on Chicago (child of main company)
         self.env["product.product"].search([TRUE_LEAF]).write({"company_id": False})
-        test_user.write({"company_id": chicago_id, "company_ids": [(4, chicago_id)]})
-        bom.company_id = self.ref("base.main_company")
+        test_user.write({"company_ids": [(6, 0, self.main_company.ids)]})
+        bom.company_id = self.main_company
         self.assertPotentialQty(
             test_user_tmpl,
             0,
@@ -200,6 +178,7 @@ class TestPotentialQty(TransactionCase):
             "company or company child of the bom's company",
         )
         bom.company_id = chicago_id
+        test_user.write({"company_ids": [(4, chicago_id)]})
         self.assertPotentialQty(test_user_tmpl, 250.0, "")
 
     def test_potential_qty(self):
@@ -207,23 +186,11 @@ class TestPotentialQty(TransactionCase):
             self.assertPotentialQty(i, 0.0, "The potential quantity should start at 0")
 
         # Receive 1000x Wood Panel
-        inventory = self.env["stock.inventory"].create(
-            {
-                "name": "Receive Mouses",
-                "location_id": self.wh_main.lot_stock_id.id,
-                "filter": "partial",
-            }
+        self.create_inventory(
+            product_id=self.env.ref("mrp.product_product_wood_panel").id,
+            qty=1000.0,
+            location_id=self.wh_main.lot_stock_id.id,
         )
-        inventory.action_start()
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "product_id": self.ref("mrp.product_product_wood_panel"),
-                "location_id": self.wh_main.lot_stock_id.id,
-                "product_qty": 1000.0,
-            }
-        )
-        inventory._action_done()
         for i in [self.tmpl, self.var1, self.var2]:
             self.assertPotentialQty(
                 i,
@@ -233,23 +200,11 @@ class TestPotentialQty(TransactionCase):
             )
 
         # Receive enough bolt to make 1000x the 1st variant in main WH
-        inventory = self.env["stock.inventory"].create(
-            {
-                "name": "components for 1st variant",
-                "location_id": self.wh_main.lot_stock_id.id,
-                "filter": "partial",
-            }
+        self.create_inventory(
+            product_id=self.env.ref("mrp.product_product_computer_desk_bolt").id,
+            qty=1000.0,
+            location_id=self.wh_main.lot_stock_id.id,
         )
-        inventory.action_start()
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "product_id": self.ref("mrp.product_product_computer_desk_bolt"),
-                "location_id": self.wh_main.lot_stock_id.id,
-                "product_qty": 1000.0,
-            }
-        )
-        inventory._action_done()
         self.assertPotentialQty(
             self.tmpl, 250.0, "Wrong template potential after receiving components"
         )
@@ -264,31 +219,20 @@ class TestPotentialQty(TransactionCase):
         )
 
         # Receive enough components to make 213 the 2nd variant at Chicago
-        inventory = self.env["stock.inventory"].create(
-            {
-                "name": "components for 2nd variant",
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "filter": "partial",
-            }
+        inventory = self._create_inventory(
+            self.wh_ch.lot_stock_id.id, self.ref("stock.res_company_1")
         )
-        inventory.action_start()
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "product_id": self.ref("mrp.product_product_wood_panel"),
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "product_qty": 1000.0,
-            }
+        self._create_inventory_line(
+            inventory.id,
+            self.ref("mrp.product_product_wood_panel"),
+            self.wh_ch.lot_stock_id.id,
+            1000.0,
         )
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory.id,
-                "product_id": self.ref(
-                    "stock_available_mrp.product_computer_desk_bolt_white"
-                ),
-                "location_id": self.wh_ch.lot_stock_id.id,
-                "product_qty": 852.0,
-            }
+        self._create_inventory_line(
+            inventory.id,
+            self.ref("stock_available_mrp.product_computer_desk_bolt_white"),
+            self.wh_ch.lot_stock_id.id,
+            852.0,
         )
         inventory._action_done()
         self.assertPotentialQty(
@@ -357,7 +301,7 @@ class TestPotentialQty(TransactionCase):
         )
 
         bom_p1 = self.bom_model.create(
-            {"product_tmpl_id": p1.product_tmpl_id.id, "product_id": p1.id,}
+            {"product_tmpl_id": p1.product_tmpl_id.id, "product_id": p1.id}
         )
 
         self.bom_line_model.create(
