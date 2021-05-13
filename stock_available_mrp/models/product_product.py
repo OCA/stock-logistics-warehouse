@@ -8,16 +8,16 @@ from odoo.fields import first
 
 
 class ProductProduct(models.Model):
-
     _inherit = "product.product"
 
-    bom_id = fields.Many2one("mrp.bom", compute="_compute_bom_id", string="BOM")
+    bom_id = fields.Many2one(
+        comodel_name="mrp.bom", compute="_compute_bom_id", string="BOM"
+    )
 
     @api.depends("virtual_available", "bom_id", "bom_id.product_qty")
     def _compute_available_quantities(self):
-        super(ProductProduct, self)._compute_available_quantities()
+        super()._compute_available_quantities()
 
-    @api.multi
     def _get_bom_id_domain(self):
         """
         Real multi domain
@@ -31,12 +31,12 @@ class ProductProduct(models.Model):
             ("product_tmpl_id", "in", self.mapped("product_tmpl_id.id")),
         ]
 
-    @api.multi
     @api.depends("product_tmpl_id")
     def _compute_bom_id(self):
         bom_obj = self.env["mrp.bom"]
-        boms = bom_obj.search(self._get_bom_id_domain(), order="sequence, product_id",)
+        boms = bom_obj.search(self._get_bom_id_domain(), order="sequence, product_id")
         for product in self:
+            product.bom_id = product.bom_id
             product_boms = boms.filtered(
                 lambda b: b.product_id == product
                 or (not b.product_id and b.product_tmpl_id == product.product_tmpl_id)
@@ -44,11 +44,8 @@ class ProductProduct(models.Model):
             if product_boms:
                 product.bom_id = first(product_boms)
 
-    @api.multi
     def _compute_available_quantities_dict(self):
-        res, stock_dict = super(
-            ProductProduct, self
-        )._compute_available_quantities_dict()
+        res, stock_dict = super()._compute_available_quantities_dict()
         # compute qty for product with bom
         product_with_bom = self.filtered("bom_id")
 
@@ -88,8 +85,7 @@ class ProductProduct(models.Model):
             component_needs = product._get_components_needs(exploded_components)
             if not component_needs:
                 # The BoM has no line we can use
-                potential_qty = 0.0
-
+                potential_qty = immediately_usable_qty = 0.0
             else:
                 # Find the lowest quantity we can make with the stock at hand
                 components_potential_qty = min(
@@ -113,11 +109,11 @@ class ProductProduct(models.Model):
                 )
 
             res[product.id]["potential_qty"] = potential_qty
-            res[product.id]["immediately_usable_qty"] += potential_qty
+            immediately_usable_qty = potential_qty if bom_id.type != "phantom" else 0
+            res[product.id]["immediately_usable_qty"] += immediately_usable_qty
 
         return res, stock_dict
 
-    @api.multi
     def _explode_boms(self):
         """
         return a dict by product_id of exploded bom lines
