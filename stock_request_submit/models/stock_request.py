@@ -1,6 +1,7 @@
 # Copyright 2019 Open Source Integrators
 # Copyright 2019-2020 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
 from odoo import fields, models
 
 
