@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_available_mrp
+# 	* stock_available_mrp
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,14 +46,5 @@ msgstr ""
 #: model:product.product,uom_name:stock_available_mrp.product_kit_1a
 #: model:product.template,uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
 #: model:product.template,uom_name:stock_available_mrp.product_kit_1a_product_template
-msgid "Unit(s)"
+msgid "Units"
 msgstr ""
-
-#. module: stock_available_mrp
-#: model:product.product,weight_uom_name:stock_available_mrp.product_computer_desk_bolt_white
-#: model:product.product,weight_uom_name:stock_available_mrp.product_kit_1a
-#: model:product.template,weight_uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
-#: model:product.template,weight_uom_name:stock_available_mrp.product_kit_1a_product_template
-msgid "kg"
-msgstr ""
-
