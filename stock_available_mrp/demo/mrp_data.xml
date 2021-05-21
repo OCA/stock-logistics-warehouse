@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="product_kit_1a" model="product.product">
+        <field name="default_code">PCSC234-WHITE</field>
+        <field
+            name="product_tmpl_id"
+            ref="mrp.product_product_table_kit_product_template"
+        />
+        <field
+            name="product_template_attribute_value_ids"
+            eval="[(6,0,[ref('product.product_attribute_value_3')])]"
+        />
+    </record>
+    <record id="mrp.product_product_table_kit" model="product.product">
+        <field
+            name="product_template_attribute_value_ids"
+            eval="[(6,0,[ref('product.product_attribute_value_4')])]"
+        />
+    </record>
+    <record id="mrp.mrp_bom_kit_line_2" model="mrp.bom.line">
+        <field
+            name="bom_product_template_attribute_value_ids"
+            eval="[(6,0,[ref('product.product_attribute_value_4')])]"
+        />
+    </record>
+    <record id="product_computer_desk_bolt_white" model="product.product">
+        <field name="name">Bolt</field>
+        <field name="categ_id" ref="product.product_category_5" />
+        <field name="standard_price">1.0</field>
+        <field name="list_price">5.0</field>
+        <field name="type">product</field>
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="uom_po_id" ref="uom.product_uom_unit" />
+        <field name="default_code">BOLT-WHITE</field>
+    </record>
+    <record id="mrp_bom_kit_line_3" model="mrp.bom.line">
+        <field name="product_id" ref="product_computer_desk_bolt_white" />
+        <field name="product_qty">4</field>
+        <field name="product_uom_id" ref="uom.product_uom_unit" />
+        <field name="sequence">5</field>
+        <field name="bom_id" ref="mrp.mrp_bom_kit" />
+        <field
+            name="bom_product_template_attribute_value_ids"
+            eval="[(6,0,[ref('product.product_attribute_value_3')])]"
+        />
+    </record>
+</odoo>
