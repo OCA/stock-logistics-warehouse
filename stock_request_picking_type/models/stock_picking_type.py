@@ -8,7 +8,8 @@ class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
     code = fields.Selection(
-        selection_add=[("stock_request_order", "Stock Request Order")]
+        selection_add=[("stock_request_order", "Stock Request Order")],
+        ondelete={"stock_request_order": "cascade"},
     )
     count_sr_todo = fields.Integer(string="To Do", compute="_compute_sr_count")
     count_sr_open = fields.Integer(string="In Progress", compute="_compute_sr_count")
