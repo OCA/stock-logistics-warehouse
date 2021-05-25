@@ -18,7 +18,7 @@
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//notebook//form//field[@name='description_picking']"
+                expr="//notebook//form//field[@name='description_picking']/.."
                 position="after"
             >
                 <group name="account_move_lines_grp" string="Journal Items" colspan="4">
