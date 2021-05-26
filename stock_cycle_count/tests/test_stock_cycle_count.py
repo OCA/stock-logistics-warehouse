@@ -293,3 +293,26 @@ class TestStockCycleCount(common.TransactionCase):
             zero2.warehouse_ids = [(4, self.big_wh.id)]
         with self.assertRaises(ValidationError):
             self.zero_rule.warehouse_ids = [(4, self.small_wh.id)]
+
+    def test_auto_link_inventory_to_cycle_count_1(self):
+        """Create an inventory that could fit a planned cycle count should
+        auto-link it to that cycle count."""
+        self.assertEqual(self.cycle_count_1.state, "draft")
+        inventory = self.inventory_model.create(
+            {
+                "name": "new inventory",
+                "location_ids": [(4, self.count_loc.id)],
+                "exclude_sublocation": True,
+            }
+        )
+        self.assertEqual(inventory.cycle_count_id, self.cycle_count_1)
+        self.assertEqual(self.cycle_count_1.state, "open")
+
+    def test_auto_link_inventory_to_cycle_count_2(self):
+        """Test auto-link when exclude sublocation is no set."""
+        self.assertEqual(self.cycle_count_1.state, "draft")
+        inventory = self.inventory_model.create(
+            {"name": "new inventory", "location_ids": [(4, self.count_loc.id)]}
+        )
+        self.assertEqual(inventory.cycle_count_id, self.cycle_count_1)
+        self.assertEqual(self.cycle_count_1.state, "open")

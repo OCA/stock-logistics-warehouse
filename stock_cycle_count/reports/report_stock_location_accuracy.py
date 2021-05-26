@@ -14,6 +14,7 @@ class LocationAccuracyReport(models.AbstractModel):
         return [
             ("location_id", "=", loc_id),
             ("exclude_sublocation", "=", exclude_sublocation),
+            ("filter", "=", "none"),
             ("state", "=", "done"),
         ]
 
