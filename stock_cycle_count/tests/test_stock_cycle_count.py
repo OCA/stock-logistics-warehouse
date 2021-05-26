@@ -301,7 +301,7 @@ class TestStockCycleCount(common.TransactionCase):
         inventory = self.inventory_model.create(
             {
                 "name": "new inventory",
-                "location_ids": [(4, self.count_loc.id)],
+                "location_ids": [(6, 0, [self.count_loc.id])],
                 "exclude_sublocation": True,
             }
         )
@@ -312,7 +312,10 @@ class TestStockCycleCount(common.TransactionCase):
         """Test auto-link when exclude sublocation is no set."""
         self.assertEqual(self.cycle_count_1.state, "draft")
         inventory = self.inventory_model.create(
-            {"name": "new inventory", "location_ids": [(4, self.count_loc.id)]}
+            {
+                "name": "new inventory",
+                "location_ids": [(6, 0, [self.count_loc.id])],
+            }
         )
         self.assertEqual(inventory.cycle_count_id, self.cycle_count_1)
         self.assertEqual(self.cycle_count_1.state, "open")
