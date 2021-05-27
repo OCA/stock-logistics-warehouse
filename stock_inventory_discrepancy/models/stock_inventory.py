@@ -1,5 +1,4 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2017-21 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, _
@@ -36,8 +35,7 @@ class StockInventory(models.Model):
     def _compute_over_discrepancy_line_count(self):
         for inventory in self:
             lines = inventory.line_ids.filtered(
-                lambda line: line.discrepancy_percent > line.
-                discrepancy_threshold
+                lambda line: line._has_over_discrepancy()
             )
             inventory.over_discrepancy_line_count = len(lines)
 
@@ -60,9 +58,7 @@ class StockInventory(models.Model):
 
     def _action_done(self):
         for inventory in self:
-            if (inventory.over_discrepancy_line_count and
-                    inventory.line_ids.filtered(
-                        lambda t: t.discrepancy_threshold > 0.0)):
+            if inventory.over_discrepancy_line_count > 0:
                 if inventory.env.context.get('normal_view', False):
                     inventory.action_over_discrepancies()
                     return True

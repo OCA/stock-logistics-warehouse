@@ -129,6 +129,7 @@ class TestInventoryDiscrepancy(TransactionCase):
         self.assertEqual(inventory.line_ids.discrepancy_threshold, 0.1,
                          'Threshold wrongly computed in Inventory Line.')
         inventory.with_context({'normal_view': True}).action_validate()
+        self.assertTrue(inventory.line_ids.has_over_discrepancy)
         self.assertEqual(inventory.over_discrepancy_line_count, 1,
                          'Computation of over-discrepancies failed.')
         self.assertEqual(inventory.state, 'pending',
