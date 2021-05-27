@@ -126,7 +126,7 @@ class ProductProduct(models.Model):
 
     @api.model
     def _get_components_needs(self, exploded_components):
-        """ Return the needed qty of each compoments in the exploded_components
+        """Return the needed qty of each compoments in the exploded_components
 
         :type exploded_components
         :rtype: collections.Counter

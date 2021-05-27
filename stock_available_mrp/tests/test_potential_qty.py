@@ -43,6 +43,11 @@ class TestPotentialQty(TransactionCase):
 
         # Zero-out the inventory of all variants and components
         for component in components + [v for v in self.tmpl.product_variant_ids]:
+            moves = component.stock_move_ids.filtered(
+                lambda mo: mo.state not in ("done", "cancel")
+            )
+            moves._action_cancel()
+
             component.stock_quant_ids.unlink()
 
         #  A product without a BoM
@@ -87,15 +92,12 @@ class TestPotentialQty(TransactionCase):
         self._create_inventory_line(inventory.id, product_id, location_id, qty)
         inventory._action_done()
 
-    def create_simple_bom(
-        self, product, sub_product, product_qty=1, sub_product_qty=1, routing_id=False
-    ):
+    def create_simple_bom(self, product, sub_product, product_qty=1, sub_product_qty=1):
         bom = self.bom_model.create(
             {
                 "product_tmpl_id": product.product_tmpl_id.id,
                 "product_id": product.id,
                 "product_qty": product_qty,
-                "routing_id": routing_id,
             }
         )
         self.bom_line_model.create(
