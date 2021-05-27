@@ -1,5 +1,4 @@
-# Copyright 2017-2020 ForgeFlow S.L.
-#   (http://www.forgeflow.com)
+# Copyright 2017-21 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -29,6 +28,7 @@ class StockInventoryLine(models.Model):
         help="Maximum Discrepancy Rate Threshold",
         compute="_compute_discrepancy_threshold",
     )
+    has_over_discrepancy = fields.Boolean(compute="_compute_has_over_discrepancy",)
 
     @api.depends("theoretical_qty", "product_qty")
     def _compute_discrepancy(self):
@@ -52,3 +52,10 @@ class StockInventoryLine(models.Model):
                 line.discrepancy_threshold = whs.discrepancy_threshold
             else:
                 line.discrepancy_threshold = False
+
+    def _compute_has_over_discrepancy(self):
+        for rec in self:
+            rec.has_over_discrepancy = rec._has_over_discrepancy()
+
+    def _has_over_discrepancy(self):
+        return self.discrepancy_percent > self.discrepancy_threshold > 0
