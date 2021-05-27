@@ -59,11 +59,12 @@
                 <field name="discrepancy_qty" />
                 <field name="discrepancy_percent" />
                 <field name="discrepancy_threshold" />
+                <field name="has_over_discrepancy" invisible="1" />
             </field>
             <xpath expr="//tree" position="attributes">
                 <attribute
                     name="decoration-danger"
-                >theoretical_qty &lt; 0 or discrepancy_percent &gt; discrepancy_threshold or "product_qty != theoretical_qty"</attribute>
+                >theoretical_qty &lt; 0 or has_over_discrepancy</attribute>
             </xpath>
         </field>
     </record>

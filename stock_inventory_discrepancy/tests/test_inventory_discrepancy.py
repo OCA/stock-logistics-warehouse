@@ -173,6 +173,7 @@ class TestInventoryDiscrepancy(TransactionCase):
         )
         inventory.with_user(self.user).action_start()
         inventory.with_user(self.user).action_validate()
+        self.assertTrue(inventory.line_ids.has_over_discrepancy)
         self.assertEqual(
             inventory.over_discrepancy_line_count,
             1,
