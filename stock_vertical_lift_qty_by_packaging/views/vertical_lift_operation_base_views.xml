@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="vertical_lift_operation_transfer_screen_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.transfer.screen.view</field>
+        <field name="model">vertical.lift.operation.transfer</field>
+        <field
+            name="inherit_id"
+            ref="stock_vertical_lift.vertical_lift_operation_transfer_screen_view"
+        />
+        <field name="arch" type="xml">
+            <!-- Display only full qty by packaging and units -->
+            <xpath expr="//field[@name='product_uom_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_uom_qty']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_uom_id']" position="after">
+                <field
+                    name="product_qty_by_packaging_display"
+                    class="oe_inline ml8 text-white"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
