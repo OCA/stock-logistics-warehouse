@@ -78,7 +78,9 @@ class Product(models.Model):
         the display name of the packaging.
         """
         custom_filter = self.env.context.get("_packaging_filter", lambda x: x)
-        name_getter = self.env.context.get("_packaging_name_getter", lambda x: x.name)
+        name_getter = self.env.context.get(
+            "_packaging_name_getter", self._packaging_name_getter
+        )
         packagings = sorted(
             [
                 Packaging(x.id, name_getter(x), x.qty, x.barcode, False)
@@ -97,6 +99,9 @@ class Product(models.Model):
             Packaging(self.uom_id.id, self.uom_id.name, self.uom_id.factor, None, True)
         )
         return packagings
+
+    def _packaging_name_getter(self, packaging):
+        return packaging.name
 
     def _product_qty_by_packaging(self, pkg_by_qty, qty, with_contained=False):
         """Produce a list of dictionaries of packaging info."""
