@@ -5,6 +5,8 @@ from datetime import datetime
 
 from odoo import api, fields, models
 from odoo.tools import float_compare, float_round
+from dateutil import relativedelta
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class StockWarehouseOrderpoint(models.Model):
@@ -18,6 +20,13 @@ class StockWarehouseOrderpoint(models.Model):
     procure_recommended_date = fields.Date(
         string="Recommended Request Date", compute="_compute_procure_recommended"
     )
+    lead_days = fields.Integer(
+        'Lead Time', default=1,
+        help="Number of days after the orderpoint is triggered to receive the products or to order to the vendor")
+    lead_type = fields.Selection(
+        [('net', 'Days to get the products'), ('supplier', 'Days to purchase')], 'Lead Type',
+        required=True, default='supplier')
+    allowed_location_ids = fields.One2many(comodel_name='stock.location', compute='_compute_allowed_location_ids')
 
     def _get_procure_recommended_qty(self, virtual_qty, op_qtys):
         self.ensure_one()
@@ -38,6 +47,16 @@ class StockWarehouseOrderpoint(models.Model):
         if qty_rounded > 0:
             procure_recommended_qty = qty_rounded
         return procure_recommended_qty
+
+    def _get_date_planned(self, product_qty, start_date):
+        days = self.lead_days or 0.0
+        if self.lead_type == 'supplier':
+            days += self.product_id._select_seller(
+                quantity=product_qty,
+                date=fields.Date.context_today(self, start_date),
+                uom_id=self.product_uom).delay or 0.0
+        date_planned = start_date + relativedelta.relativedelta(days=days)
+        return date_planned.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
 
     @api.depends("product_min_qty", "product_id", "qty_multiple")
     def _compute_procure_recommended(self):
