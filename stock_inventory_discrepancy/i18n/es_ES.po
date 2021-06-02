@@ -120,7 +120,6 @@ msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:54
-#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:56
 #, python-format
 msgid ""
 "The Qty Update is over the Discrepancy Threshold.\n"
