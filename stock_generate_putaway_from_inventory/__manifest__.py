@@ -8,7 +8,7 @@
     "author": "Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": ["stock"],
+    "depends": ["stock", "stock_location_children"],
     "license": "AGPL-3",
     "data": ["views/stock_inventory.xml"],
     "installable": True,

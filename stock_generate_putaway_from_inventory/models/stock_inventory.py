@@ -20,19 +20,20 @@ class StockInventory(models.Model):
                         "the putaway strategy."
                     )
                 )
-            for location in record.location_ids:
-                record.line_ids._generate_putaway_rules(location)
+            record.line_ids._generate_putaway_rules(record.location_ids)
 
 
 class StockInventoryLine(models.Model):
     _inherit = "stock.inventory.line"
 
-    def _generate_putaway_rules(self, inventory_location):
+    def _generate_putaway_rules(self, inventory_locations):
         # Eliminate lines for other IN locations
         # and eliminate lines where quantity is null
-        self.filtered(
-            lambda x: x.location_id._is_child(inventory_location) and x.product_qty > 0
-        )._update_product_putaway_rule(inventory_location)
+        for location_in in inventory_locations:
+            self.filtered(
+                lambda x: x.product_qty > 0
+                and x.location_id.id in location_in.children_ids.ids
+            )._update_product_putaway_rule(location_in)
 
     def _update_product_putaway_rule(self, location_in):
         putaway_rule_obj = self.env["stock.putaway.rule"]

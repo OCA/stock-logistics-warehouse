@@ -11,6 +11,7 @@ class TestGeneratePutaway(TransactionCase):
         ref = self.env.ref
         # demo data
         self.inventory_location = ref("stock.stock_location_stock")
+        self.inventory_location._compute_children_ids()
         self.inventory = self.env["stock.inventory"].create(
             {
                 "name": "example inventory",
