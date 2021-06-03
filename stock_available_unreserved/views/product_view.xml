@@ -29,11 +29,11 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="stock.product_template_kanban_stock_view" />
         <field name="arch" type="xml">
-            <ul position="inside">
-                <li t-if="record.type.raw_value == 'product'">Unreserved: <field
+            <xpath expr="//field[@name='qty_available']/parent::div" position="after">
+                <div t-if="record.type.raw_value == 'product'">Unreserved: <field
                         name="qty_available_not_res"
-                    /> <field name="uom_id" /></li>
-            </ul>
+                    /> <field name="uom_id" /></div>
+            </xpath>
         </field>
     </record>
     <record id="view_stock_product_tree" model="ir.ui.view">
