@@ -163,8 +163,8 @@ class TestStockLogisticsWarehouse(SavepointCase):
         self.compare_qty_available_not_res(self.productA, 2)
         self.compare_qty_available_not_res(self.templateAB, 2)
 
-        # will directly trigger action_done on self.productB
-        self.pickingInB.action_done()
+        # will directly trigger button_validate on self.productB
+        self.pickingInB.button_validate()
         self.compare_qty_available_not_res(self.productA, 2)
         self.compare_qty_available_not_res(self.productB, 3)
         self.compare_qty_available_not_res(self.templateAB, 5)
@@ -180,7 +180,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
         self.compare_qty_available_not_res(self.productB, 1)
         self.compare_qty_available_not_res(self.templateAB, 3)
 
-        self.pickingOutA.action_done()
+        self.pickingOutA.button_validate()
         self.compare_qty_available_not_res(self.productB, 1)
         self.compare_qty_available_not_res(self.templateAB, 3)
 
@@ -334,7 +334,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
         self.check_template_found_correctly("<=", 0, self.templateAB)
         self.check_template_found_correctly("<=", -1, no_template)
 
-        self.pickingInB.action_done()
+        self.pickingInB.button_validate()
         # product A has 2 unreserved, product B has 3 unreserved and
         # the remaining variant has 0
 
