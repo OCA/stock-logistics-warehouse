@@ -113,4 +113,4 @@ class TestStockOrderpointMoveLink(SavepointCase):
         ).mapped("picking_id")
         result = self.orderpoint_need_loc.action_view_stock_picking()
         sp_action = self.picking_obj.search(ast.literal_eval(result["domain"]))
-        self.assertEquals(sp_orderpoint, sp_action)
+        self.assertEqual(sp_orderpoint, sp_action)
