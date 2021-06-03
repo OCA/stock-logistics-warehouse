@@ -710,7 +710,6 @@ msgid "You cannot define a negative period."
 msgstr "您不能定义一个负数期。"
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_inventory.py:60
 #: code:addons/stock_cycle_count/models/stock_inventory.py:91
 #, python-format
 msgid ""
