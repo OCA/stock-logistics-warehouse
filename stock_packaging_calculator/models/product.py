@@ -24,6 +24,7 @@ class Product(models.Model):
         help="Technical field to store contained packaging. ",
     )
 
+    @api.depends_context("lang")
     @api.depends("packaging_ids.qty")
     def _compute_packaging_contained_mapping(self):
         for rec in self:
