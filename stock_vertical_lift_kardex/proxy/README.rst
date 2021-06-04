@@ -1,0 +1,1 @@
+Kardex device proxy.
