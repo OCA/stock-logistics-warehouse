@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-scrap_reason_code',
         'odoo14-addon-stock_available',
         'odoo14-addon-stock_available_immediately',
+        'odoo14-addon-stock_available_mrp',
         'odoo14-addon-stock_demand_estimate',
         'odoo14-addon-stock_demand_estimate_matrix',
         'odoo14-addon-stock_free_quantity',
