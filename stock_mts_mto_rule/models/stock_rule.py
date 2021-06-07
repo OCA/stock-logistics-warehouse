@@ -30,6 +30,10 @@ class StockRule(models.Model):
                             'rule: %s! It should be the same.') % (rule.name,)
                     raise ValidationError(msg)
 
+    def _get_qty_available_for_mto_qty(self, product, product_location, product_uom):
+        virtual_available = product_location.virtual_available
+        return product.uom_id._compute_quantity(virtual_available, product_uom)
+
     @api.multi
     def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
         self.ensure_one()
@@ -37,9 +41,8 @@ class StockRule(models.Model):
             .precision_get('Product Unit of Measure')
         src_location_id = self.mts_rule_id.location_src_id.id
         product_location = product.with_context(location=src_location_id)
-        virtual_available = product_location.virtual_available
-        qty_available = product.uom_id._compute_quantity(
-            virtual_available, product_uom)
+        qty_available = self._get_qty_available_for_mto_qty(
+            product, product_location, product_uom)
         if float_compare(qty_available, 0.0, precision_digits=precision) > 0:
             if float_compare(qty_available, product_qty,
                              precision_digits=precision) >= 0:
@@ -54,7 +57,6 @@ class StockRule(models.Model):
             .precision_get('Product Unit of Measure')
         needed_qty = self.get_mto_qty_to_order(product_id, product_qty,
                                                product_uom, values)
-
         if float_is_zero(needed_qty, precision_digits=precision):
             getattr(self.mts_rule_id, '_run_%s' % self.mts_rule_id.action)(
                 product_id, product_qty, product_uom, location_id, name,
