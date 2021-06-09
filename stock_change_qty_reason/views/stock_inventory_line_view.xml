@@ -24,16 +24,6 @@
             </field>
         </field>
     </record>
-    <record id="reason_stock_inventory_line_tree2" model="ir.ui.view">
-        <field name="name">stock.inventory.line.tree</field>
-        <field name="model">stock.inventory.line</field>
-        <field name="inherit_id" ref="stock.stock_inventory_line_tree2" />
-        <field name="arch" type="xml">
-            <field name="location_id" position="before">
-                <field name="reason" />
-            </field>
-        </field>
-    </record>
     <record id="reason_stock_inventory_line_tree2_reason_id" model="ir.ui.view">
         <field name="name">stock.inventory.line.tree.reason.code</field>
         <field name="model">stock.inventory.line</field>
