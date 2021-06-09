@@ -95,21 +95,21 @@ class ProductProduct(models.Model):
                         for component, need in component_needs.items()
                     ]
                 )
-
-                bom_id = product.bom_id
-                potential_qty = bom_id.product_qty * components_potential_qty
+                potential_qty = product.bom_id.product_qty * components_potential_qty
                 potential_qty = potential_qty > 0.0 and potential_qty or 0.0
 
                 # We want to respect the rounding factor of the potential_qty
                 # Rounding down as we want to be pesimistic.
-                potential_qty = bom_id.product_uom_id._compute_quantity(
+                potential_qty = product.bom_id.product_uom_id._compute_quantity(
                     potential_qty,
                     product.bom_id.product_tmpl_id.uom_id,
                     rounding_method="DOWN",
                 )
 
             res[product.id]["potential_qty"] = potential_qty
-            immediately_usable_qty = potential_qty if bom_id.type != "phantom" else 0
+            immediately_usable_qty = (
+                potential_qty if product.bom_id.type != "phantom" else 0
+            )
             res[product.id]["immediately_usable_qty"] += immediately_usable_qty
 
         return res, stock_dict
