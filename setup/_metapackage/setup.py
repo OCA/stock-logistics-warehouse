@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo12-addon-sale_stock_info_popup',
         'odoo12-addon-stock_account_change_qty_reason',
         'odoo12-addon-stock_account_internal_move',
+        'odoo12-addon-stock_account_inventory_discrepancy',
         'odoo12-addon-stock_account_inventory_force_date',
         'odoo12-addon-stock_archive_constraint',
         'odoo12-addon-stock_available',
