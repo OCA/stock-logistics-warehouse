@@ -5,7 +5,10 @@ from .common import TestCommon
 
 class TestAsStr(TestCommon):
     def test_as_str(self):
-        self.assertEqual(self.product_a.product_qty_by_packaging_as_str(10), "")
+        self.assertEqual(self.product_a.product_qty_by_packaging_as_str(10), "10 Units")
+        self.assertEqual(
+            self.product_a.product_qty_by_packaging_as_str(10, only_packaging=True), ""
+        )
         self.assertEqual(self.product_a.product_qty_by_packaging_as_str(100), "2 Box")
         self.assertEqual(
             self.product_a.product_qty_by_packaging_as_str(250), "1 Big Box,\xa01 Box"
@@ -14,13 +17,18 @@ class TestAsStr(TestCommon):
             self.product_a.product_qty_by_packaging_as_str(255),
             "1 Big Box,\xa01 Box,\xa05 Units",
         )
+        # only_packaging has no impact if we get not only units
+        self.assertEqual(
+            self.product_a.product_qty_by_packaging_as_str(255, only_packaging=True),
+            "1 Big Box,\xa01 Box,\xa05 Units",
+        )
 
     def test_as_str_w_units(self):
         self.assertEqual(
             self.product_a.product_qty_by_packaging_as_str(
                 10, include_total_units=True
             ),
-            "",
+            "10 Units",
         )
         self.assertEqual(
             self.product_a.product_qty_by_packaging_as_str(
@@ -37,6 +45,13 @@ class TestAsStr(TestCommon):
         self.assertEqual(
             self.product_a.product_qty_by_packaging_as_str(
                 255, include_total_units=True
+            ),
+            "1 Big Box,\xa01 Box,\xa05 Units (255 Units)",
+        )
+        # only_packaging has no impact if we get not only units
+        self.assertEqual(
+            self.product_a.product_qty_by_packaging_as_str(
+                255, include_total_units=True, only_packaging=True
             ),
             "1 Big Box,\xa01 Box,\xa05 Units (255 Units)",
         )
