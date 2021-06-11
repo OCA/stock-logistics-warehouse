@@ -11,11 +11,9 @@ class StockWarehouse(models.Model):
         string="Maximum Discrepancy Amount Threshold",
         currency_field="discrepancy_amount_threshold_currency_id",
         help="Maximum Discrepancy Amount allowed for any product when doing "
-             "an Inventory Adjustment. Threshold defined in involved Location "
-             "has preference.",
+        "an Inventory Adjustment. Threshold defined in involved Location "
+        "has preference.",
     )
     discrepancy_amount_threshold_currency_id = fields.Many2one(
-        comodel_name="res.currency",
-        related="company_id.currency_id",
-        readonly=True,
+        comodel_name="res.currency", related="company_id.currency_id", readonly=True,
     )

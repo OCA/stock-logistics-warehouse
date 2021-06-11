@@ -1,8 +1,9 @@
 # Copyright 2021 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.addons import decimal_precision as dp
 from odoo import api, fields, models
+
+from odoo.addons import decimal_precision as dp
 
 
 class StockInventoryLine(models.Model):
@@ -13,13 +14,16 @@ class StockInventoryLine(models.Model):
         compute="_compute_discrepancy_amount",
         currency_field="company_currency_id",
         help="The difference between the actual qty counted and the "
-             "theoretical quantity on hand expressed in the cost amount.",
-        digits=dp.get_precision("Product Unit of Measure"), default=0)
+        "theoretical quantity on hand expressed in the cost amount.",
+        digits=dp.get_precision("Product Unit of Measure"),
+        default=0,
+    )
     discrepancy_amount_threshold = fields.Monetary(
         string="Amount Threshold",
         currency_field="company_currency_id",
         help="Maximum Discrepancy Amount Threshold",
-        compute="_compute_discrepancy_amount_threshold")
+        compute="_compute_discrepancy_amount_threshold",
+    )
     company_currency_id = fields.Many2one(
         string="Company Currency",
         comodel_name="res.currency",
@@ -40,16 +44,17 @@ class StockInventoryLine(models.Model):
         for line in self:
             whs = line.location_id.get_warehouse()
             if line.location_id.discrepancy_amount_threshold > 0.0:
-                line.discrepancy_amount_threshold = line.location_id.\
-                    discrepancy_amount_threshold
+                line.discrepancy_amount_threshold = (
+                    line.location_id.discrepancy_amount_threshold
+                )
             elif whs.discrepancy_amount_threshold > 0.0:
-                line.discrepancy_amount_threshold = \
-                    whs.discrepancy_amount_threshold
+                line.discrepancy_amount_threshold = whs.discrepancy_amount_threshold
             else:
                 line.discrepancy_amount_threshold = False
 
     @api.multi
     def _has_over_discrepancy(self):
         res = super()._has_over_discrepancy()
-        return res or abs(
-            self.discrepancy_amount) > self.discrepancy_amount_threshold > 0
+        return (
+            res or abs(self.discrepancy_amount) > self.discrepancy_amount_threshold > 0
+        )
