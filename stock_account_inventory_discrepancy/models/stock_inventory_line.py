@@ -3,8 +3,6 @@
 
 from odoo import api, fields, models
 
-from odoo.addons import decimal_precision as dp
-
 
 class StockInventoryLine(models.Model):
     _inherit = "stock.inventory.line"
@@ -15,7 +13,7 @@ class StockInventoryLine(models.Model):
         currency_field="company_currency_id",
         help="The difference between the actual qty counted and the "
         "theoretical quantity on hand expressed in the cost amount.",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
         default=0,
     )
     discrepancy_amount_threshold = fields.Monetary(
@@ -31,7 +29,6 @@ class StockInventoryLine(models.Model):
         readonly=False,
     )
 
-    @api.multi
     @api.depends("theoretical_qty", "product_qty")
     def _compute_discrepancy_amount(self):
         for line in self:
@@ -39,7 +36,6 @@ class StockInventoryLine(models.Model):
             cost = line.product_id.standard_price
             line.discrepancy_amount = discrepancy_qty * cost
 
-    @api.multi
     def _compute_discrepancy_amount_threshold(self):
         for line in self:
             whs = line.location_id.get_warehouse()
@@ -52,7 +48,6 @@ class StockInventoryLine(models.Model):
             else:
                 line.discrepancy_amount_threshold = False
 
-    @api.multi
     def _has_over_discrepancy(self):
         res = super()._has_over_discrepancy()
         return (

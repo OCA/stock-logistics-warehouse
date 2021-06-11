@@ -1,7 +1,7 @@
 # Copyright 2021 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.exceptions import UserError
+from odoo.exceptions import except_orm
 from odoo.tests.common import TransactionCase
 
 
@@ -39,7 +39,7 @@ class TestInventoryDiscrepancy(TransactionCase):
             }
         )
         self.test_wh = self.obj_warehouse.create(
-            {"name": "Test WH", "code": "T", "discrepancy_amount_threshold": 300,}
+            {"name": "Test WH", "code": "T", "discrepancy_amount_threshold": 300}
         )
         self.obj_location._parent_store_compute()
 
@@ -69,7 +69,6 @@ class TestInventoryDiscrepancy(TransactionCase):
         starting_inv = self.obj_inventory.create(
             {
                 "name": "Starting inventory",
-                "filter": "product",
                 "line_ids": [
                     (
                         0,
@@ -102,8 +101,7 @@ class TestInventoryDiscrepancy(TransactionCase):
         inventory = self.obj_inventory.create(
             {
                 "name": "Test Discrepancy Computation",
-                "location_id": self.test_loc.id,
-                "filter": "none",
+                "location_ids": [(6, 0, self.test_loc.ids)],
                 "line_ids": [
                     (
                         0,
@@ -136,8 +134,7 @@ class TestInventoryDiscrepancy(TransactionCase):
         inventory = self.obj_inventory.create(
             {
                 "name": "Test Forcing Validation Method",
-                "location_id": self.test_loc.id,
-                "filter": "none",
+                "location_ids": [(6, 0, self.test_loc.ids)],
                 "line_ids": [
                     (
                         0,
@@ -153,9 +150,12 @@ class TestInventoryDiscrepancy(TransactionCase):
             }
         )
         self.assertEqual(inventory.state, "draft")
+        inventory.action_start()
         self.assertEqual(inventory.line_ids.discrepancy_amount_threshold, 100)
         self.assertTrue(inventory.line_ids[0].has_over_discrepancy)
-        inventory.with_context({"normal_view": True}).action_validate()
+        inventory.with_user(self.user).with_context(
+            {"normal_view": True}
+        ).action_validate()
         self.assertEqual(inventory.over_discrepancy_line_count, 1)
         self.assertEqual(inventory.state, "pending")
 
@@ -164,8 +164,7 @@ class TestInventoryDiscrepancy(TransactionCase):
         inventory = self.obj_inventory.create(
             {
                 "name": "Test Threshold Defined in WH",
-                "location_id": self.test_wh.view_location_id.id,
-                "filter": "none",
+                "location_ids": [(6, 0, self.test_wh.view_location_id.ids)],
                 "line_ids": [
                     (
                         0,
@@ -186,13 +185,16 @@ class TestInventoryDiscrepancy(TransactionCase):
         """Test if a user error raises when a stock user tries to update the
         qty for a product and the correction is a discrepancy over the
         threshold."""
-        upd_qty = self.obj_upd_qty_wizard.sudo(self.user).create(
+        upd_qty = self.obj_upd_qty_wizard.with_user(self.user).create(
             {
                 "product_id": self.product1.id,
                 "product_tmpl_id": self.product1.product_tmpl_id.id,
                 "new_quantity": 10.0,
-                "location_id": self.test_loc.id,
             }
         )
-        with self.assertRaises(UserError):
+        # Since v13, stock users are not allowed to update product qty
+        # (AccessError, standard) but if access are modified to allow them,
+        # they will not be able to surpass the threshold (UserError
+        # added in this module).
+        with self.assertRaises(except_orm):
             upd_qty.change_product_qty()
