@@ -9,7 +9,6 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "LGPL-3",
-    "application": False,
     "installable": True,
     "depends": ["stock_packaging_calculator", "stock"],
     "data": ["views/stock_picking.xml"],
