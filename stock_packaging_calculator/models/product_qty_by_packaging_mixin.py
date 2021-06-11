@@ -27,10 +27,11 @@ class ProductQtyByPackagingMixin(models.AbstractModel):
             depends.append(self._qty_by_pkg__qty_field_name)
         return depends
 
-    @api.depends_context("lang", "qty_by_pkg_total_units")
+    @api.depends_context("lang", "qty_by_pkg_total_units", "qty_by_pkg_only_packaging")
     @api.depends(lambda self: self._product_qty_by_packaging_display_depends())
     def _compute_product_qty_by_packaging_display(self):
         include_total_units = self.env.context.get("qty_by_pkg_total_units", False)
+        only_packaging = self.env.context.get("qty_by_pkg_only_packaging", False)
         for record in self:
             value = ""
             product = record._qty_by_packaging_get_product()
@@ -38,6 +39,7 @@ class ProductQtyByPackagingMixin(models.AbstractModel):
                 value = product.product_qty_by_packaging_as_str(
                     record._qty_by_packaging_get_qty(),
                     include_total_units=include_total_units,
+                    only_packaging=only_packaging,
                 )
             record.product_qty_by_packaging_display = value
 
