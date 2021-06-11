@@ -38,7 +38,7 @@ class TestCalc(TestCommon):
         self.assertEqual(self.product_a.product_qty_by_packaging(350), expected)
 
     def test_as_str(self):
-        self.assertEqual(self.product_a.product_qty_by_packaging_as_str(10), "")
+        self.assertEqual(self.product_a.product_qty_by_packaging_as_str(10), "10 Units")
         self.assertEqual(self.product_a.product_qty_by_packaging_as_str(100), "2PACK")
         self.assertEqual(
             self.product_a.product_qty_by_packaging_as_str(250), "1CASE,\xa01PACK"
