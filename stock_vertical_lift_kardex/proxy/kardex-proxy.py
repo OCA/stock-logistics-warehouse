@@ -6,7 +6,7 @@ import os
 import ssl
 import time
 
-import aiohttp
+import aiohttp  # pylint: disable=missing-manifest-dependency
 
 _logger = logging.getLogger(__name__)
 
