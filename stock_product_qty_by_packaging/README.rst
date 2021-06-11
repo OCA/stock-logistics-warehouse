@@ -26,6 +26,13 @@ Stock packaging calculator
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 Glue module for `stock_packaging_calculator` and `stock`.
+It adds product qty computed by packaging to:
+
+* stock move
+* stock move line
+* stock quant
+
+and displays it for move line on stock picking view.
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
