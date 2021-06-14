@@ -128,6 +128,8 @@ class TestPut(VerticalLiftCase):
         # the dest location was Vertical Lift, it has been change to Vertical
         # Lift/Shuttle 1, and the computation from there took the first cell
         # available, we should be the pos x1 and y1 in the tray A.
+
+        # FIXME
         self.assertEqual(move_line.location_dest_id, self.location_1a_x1y1)
         self.assertEqual(
             move_line.package_level_id.location_dest_id, self.location_1a_x1y1
