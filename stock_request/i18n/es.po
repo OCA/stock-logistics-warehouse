@@ -60,6 +60,13 @@ msgid "Activity State"
 msgstr "Estado de Actividad"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_type_icon
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_type_icon
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Add State to Stock Request and Stock Request Orders if activated."
 msgstr ""
@@ -94,12 +101,6 @@ msgstr "Analítica"
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Analytic accounting in Stock Requests"
 msgstr "Contabilidad analítica en solicitudes de stock"
-
-#. module: stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-msgid "Archived"
-msgstr "Archivado"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_attachment_count
@@ -197,10 +198,20 @@ msgid "Delivery Orders"
 msgstr "Pedidos de entrega"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_procurement_group__display_name
+#: model:ir.model.fields,field_description:stock_request.field_res_company__display_name
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_location_route__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_move_line__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking__display_name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__display_name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__display_name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__display_name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_rule__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -285,6 +296,13 @@ msgid "Followers (Partners)"
 msgstr "Seguidores (Socios)"
 
 #. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__activity_type_icon
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_type_icon
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Group By"
@@ -296,10 +314,20 @@ msgid "Group Stock Request Order"
 msgstr "Agrupa las solicitudes en pedidos"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_procurement_group__id
+#: model:ir.model.fields,field_description:stock_request.field_res_company__id
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_location_route__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_move_line__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking__id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_rule__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse__id
 msgid "ID"
 msgstr "ID"
 
@@ -371,10 +399,20 @@ msgid "Kanban"
 msgstr "Kanban"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_procurement_group____last_update
+#: model:ir.model.fields,field_description:stock_request.field_res_company____last_update
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_location_route____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_move_line____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking____last_update
 #: model:ir.model.fields,field_description:stock_request.field_stock_request____last_update
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract____last_update
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation____last_update
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_rule____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse____last_update
 msgid "Last Modified on"
 msgstr "Última Modificación el"
 
@@ -452,6 +490,13 @@ msgstr ""
 "un gran movimiento."
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__my_activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__my_activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__name
@@ -460,7 +505,6 @@ msgstr "Nombre"
 
 #. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
-#: model:ir.model.constraint,message:stock_request.constraint_stock_request_kanban_name_uniq
 msgid "Name must be unique"
 msgstr "El nombre debe ser único"
 
@@ -598,6 +642,11 @@ msgid "Purchases"
 msgstr "Compras"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_cancelled
+msgid "Qty Cancelled"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_done
 msgid "Qty Done"
 msgstr "Cantidad finalizada"
@@ -612,6 +661,11 @@ msgstr "Cantidad en progreso"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__product_uom_qty
 msgid "Quantity"
 msgstr "Cantidad"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__qty_cancelled
+msgid "Quantity cancelled"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_done
@@ -1133,6 +1187,9 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
+
+#~ msgid "Archived"
+#~ msgstr "Archivado"
 
 #~ msgid "If checked new messages require your attention."
 #~ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
