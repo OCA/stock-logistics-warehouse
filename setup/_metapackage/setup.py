@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo14-addon-stock_move_common_dest',
         'odoo14-addon-stock_move_location',
         'odoo14-addon-stock_packaging_calculator',
+        'odoo14-addon-stock_picking_cancel_confirm',
         'odoo14-addon-stock_pull_list',
         'odoo14-addon-stock_quant_manual_assign',
         'odoo14-addon-stock_request',
