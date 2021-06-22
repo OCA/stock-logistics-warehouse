@@ -38,6 +38,7 @@ msgstr "ID"
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__product_uom_qty
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_reservation__product_uom_qty
 msgid "Initial Demand"
 msgstr ""
 
@@ -91,6 +92,7 @@ msgstr "库存产品辅助单位"
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
+#: model:ir.model.fields,help:stock_secondary_unit.field_stock_reservation__product_uom_qty
 msgid ""
 "This is the quantity of products from an inventory point of view. For moves "
 "in the state 'done', this is the quantity of products that were actually "
