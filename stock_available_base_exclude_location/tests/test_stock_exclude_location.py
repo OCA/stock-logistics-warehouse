@@ -1,26 +1,23 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo.tests import SavepointCase
 from odoo_test_helper import FakeModelLoader
+
+from odoo.tests import SavepointCase
 
 
 class TestExcludeLocation(SavepointCase):
-
     @classmethod
     def setUpClass(cls):
         super(TestExcludeLocation, cls).setUpClass()
         cls.loader = FakeModelLoader(cls.env, cls.__module__)
         cls.loader.backup_registry()
         from .common import ResPartner
+
         cls.loader.update_registry((ResPartner,))
 
         cls.fake = cls.env["res.partner"].create({"name": "name"})
         cls.location_shop = cls.env.ref("stock.stock_location_shop0")
-        vals = {
-            "location_id": cls.location_shop.id,
-            "name": "Sub Location 1"
-        }
+        vals = {"location_id": cls.location_shop.id, "name": "Sub Location 1"}
         cls.sub_location_1 = cls.env["stock.location"].create(vals)
         cls.sub_location_1._parent_store_compute()
         cls.product = cls.env.ref("product.product_product_4")
@@ -55,14 +52,8 @@ class TestExcludeLocation(SavepointCase):
         self._add_stock_to_product(self.product, self.sub_location_1, 25.0)
         self.fake.stock_excluded_location_ids = self.sub_location_1
         qty = self.product.with_context(
-            excluded_location_ids=self.fake.stock_excluded_location_ids).\
-            qty_available
-        self.assertEquals(
-            50.0,
-            qty
-        )
+            excluded_location_ids=self.fake.stock_excluded_location_ids
+        ).qty_available
+        self.assertEquals(50.0, qty)
         qty = self.product.qty_available
-        self.assertEquals(
-            75.0,
-            qty
-        )
+        self.assertEquals(75.0, qty)
