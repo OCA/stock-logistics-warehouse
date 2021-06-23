@@ -16,7 +16,7 @@ class TestExcludeLocation(SavepointCase):
         cls.loader.update_registry((ResPartner,))
 
         cls.fake = cls.env["res.partner"].create({"name": "name"})
-        cls.location_shop = cls.env.ref("stock.stock_location_shop0")
+        cls.location_shop = cls.env.ref("stock.stock_location_stock")
         vals = {"location_id": cls.location_shop.id, "name": "Sub Location 1"}
         cls.sub_location_1 = cls.env["stock.location"].create(vals)
         cls.sub_location_1._parent_store_compute()
@@ -33,14 +33,13 @@ class TestExcludeLocation(SavepointCase):
         :param product: product.product recordset
         :param qty: float
         """
-        wizard = self.env["stock.change.product.qty"].create(
+        self.env["stock.quant"].with_context(inventory_mode=True).create(
             {
                 "product_id": product.id,
-                "new_quantity": qty,
                 "location_id": location.id,
+                "inventory_quantity": qty,
             }
         )
-        wizard.change_product_qty()
 
     def test_exclude_location(self):
         # Add different levels of stock for product as :
@@ -54,6 +53,7 @@ class TestExcludeLocation(SavepointCase):
         qty = self.product.with_context(
             excluded_location_ids=self.fake.stock_excluded_location_ids
         ).qty_available
-        self.assertEquals(50.0, qty)
+        self.assertEqual(50.0, qty)
+        self.product.invalidate_cache()
         qty = self.product.qty_available
-        self.assertEquals(75.0, qty)
+        self.assertEqual(75.0, qty)

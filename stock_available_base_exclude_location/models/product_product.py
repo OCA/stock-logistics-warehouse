@@ -18,9 +18,11 @@ class ProductProduct(models.Model):
         :param compute_child:
         :return:
         """
-        domain_quant_loc, domain_move_in_loc, domain_move_out_loc = super(
-            ProductProduct, self
-        )._get_domain_locations_new(
+        (
+            domain_quant_loc,
+            domain_move_in_loc,
+            domain_move_out_loc,
+        ) = super()._get_domain_locations_new(
             location_ids=location_ids,
             company_id=company_id,
             compute_child=compute_child,
@@ -35,7 +37,13 @@ class ProductProduct(models.Model):
             )
             domain_move_in_loc = expression.AND(
                 [
-                    [("location_dest_id", "not in", excluded_location_ids.ids)],
+                    [
+                        (
+                            "location_dest_id",
+                            "not in",
+                            excluded_location_ids.ids,
+                        )
+                    ],
                     domain_quant_loc,
                 ]
             )
