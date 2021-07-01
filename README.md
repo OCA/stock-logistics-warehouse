@@ -38,6 +38,7 @@ addon | version | summary
 [stock_pull_list](stock_pull_list/) | 14.0.1.0.0 | The pull list checks the stock situation and calculates needed quantities.
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 14.0.1.0.0 | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 14.0.1.0.1 | Internal request for stock
+[stock_request_picking_type](stock_request_picking_type/) | 14.0.1.0.0 | Add Stock Requests to the Inventory App
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 14.0.1.0.1 | Adds a calendar to the Warehouse
 
 [//]: # (end addons)
