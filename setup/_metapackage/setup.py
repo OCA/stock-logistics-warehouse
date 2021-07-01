@@ -27,6 +27,7 @@ setuptools.setup(
         'odoo14-addon-stock_pull_list',
         'odoo14-addon-stock_quant_manual_assign',
         'odoo14-addon-stock_request',
+        'odoo14-addon-stock_request_picking_type',
         'odoo14-addon-stock_warehouse_calendar',
     ],
     classifiers=[
