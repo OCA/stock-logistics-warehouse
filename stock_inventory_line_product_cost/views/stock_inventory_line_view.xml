@@ -1,0 +1,16 @@
+<odoo>
+    <record id="stock_inventory_line_cost_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.line.cost.tree</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='difference_qty']" position="after">
+                <field
+                    name="product_cost"
+                    optional="show"
+                    groups="stock.group_stock_manager"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
