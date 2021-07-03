@@ -13,23 +13,34 @@
             <xpath expr='//div[@name="stock_picking"]' position="after">
                 <div
                     t-if="record.code.raw_value == 'stock_request_order'"
-                    t-attf-class="#{kanban_color(record.color.raw_value)}"
+                    t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}"
                 >
                     <div>
                         <div t-attf-class="o_kanban_card_header">
                             <div class="o_kanban_card_header_title">
-                                <a
-                                    type="object"
-                                    name="get_stock_request_order_picking_type_action"
-                                    class="o_primary"
-                                >
+                                <div class="o_primary" t-if="!selection_mode">
+                                    <a
+                                        type="object"
+                                        name="get_stock_request_order_picking_type_action"
+                                    >
+                                        <field name="name" />
+                                    </a>
+                                </div>
+                                <div class="o_primary" t-if="selection_mode">
                                     <field name="name" />
-                                </a>
+                                </div>
                                 <div class="o_secondary">
-                                    <field class="o_secondary" name="warehouse_id" />
+                                    <field
+                                        class="o_secondary"
+                                        name="warehouse_id"
+                                        readonly="1"
+                                    />
                                 </div>
                             </div>
-                            <div class="o_kanban_manage_button_section">
+                            <div
+                                class="o_kanban_manage_button_section"
+                                t-if="!selection_mode"
+                            >
                                 <a class="o_kanban_manage_toggle_button" href="#">
                                     <i
                                         class="fa fa-ellipsis-v"
@@ -40,14 +51,17 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="container o_kanban_card_content">
+                        <div
+                            class="container o_kanban_card_content"
+                            t-if="!selection_mode"
+                        >
                             <div class="row">
                                 <div class="col-6 o_kanban_primary_left">
                                     <button
                                         class="btn btn-primary"
                                         name="%(action_picking_dashboard)d"
                                         type="action"
-                                        context="{'search_default_todo': 1}"
+                                        context="{'search_default_submitted': 1}"
                                     >
                                         <span
                                             t-if="record.code.raw_value =='stock_request_order'"
@@ -65,7 +79,7 @@
                                             <a
                                                 name="%(action_picking_dashboard)d"
                                                 type="action"
-                                                context="{'search_default_inprogress': 1}"
+                                                context="{'search_default_open': 1}"
                                             >
                                                 In Progress
                                             </a>
@@ -120,8 +134,8 @@
                                         <a
                                             name="%(action_picking_dashboard)d"
                                             type="action"
-                                            context="{'search_default_todo': 1}"
-                                        >To Do</a>
+                                            context="{'search_default_draft': 1}"
+                                        >Draft</a>
                                     </div>
                                     <div role="menuitem">
                                         <a
@@ -166,7 +180,7 @@
                                         data-field="color"
                                     />
                                 </div>
-                                <div role="menuitem" class="col-4 text-right">
+                                <div role="menuitem" class="col-4 text-center">
                                     <a type="edit">Settings</a>
                                 </div>
                             </div>
