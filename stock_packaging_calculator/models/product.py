@@ -151,11 +151,16 @@ class Product(models.Model):
             "barcode": packaging.barcode,
         }
 
-    def product_qty_by_packaging_as_str(self, prod_qty, include_total_units=False):
+    def product_qty_by_packaging_as_str(
+        self, prod_qty, include_total_units=False, only_packaging=False
+    ):
         """Return a string representing the qty of each packaging.
 
         :param prod_qty: the qty of current product to translate to pkg qty
         :param include_total_units: includes total qty required initially
+        :param only_packaging: exclude units if you have only units.
+            IOW: if the qty does not match any packaging and this flag is true
+            you'll get an empty string instead of `N units`.
         """
         self.ensure_one()
         if not prod_qty:
@@ -189,8 +194,8 @@ class Product(models.Model):
             if bit:
                 as_string.append(bit)
         # Restore unit information if any.
-        # Skip it if we get only units in the count.
-        if unit_qty and not has_only_units:
+        include_units = (has_only_units and not only_packaging) or not has_only_units
+        if unit_qty and include_units:
             as_string.append(f"{unit_qty} {self.uom_id.name}")
         # We want to avoid line break here as this string
         # can be used by reports
