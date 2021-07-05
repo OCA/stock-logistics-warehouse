@@ -3,7 +3,7 @@
 {
     "name": "Stock packaging calculator packaging type",
     "summary": "Glue module for packaging type",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.1.0",
     "development_status": "Alpha",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
