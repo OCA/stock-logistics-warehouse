@@ -21,6 +21,17 @@
             <form position="attributes">
                 <attribute name="string">Pick Screen</attribute>
             </form>
+            <button name="button_save" position="before">
+                <button
+                    name="button_skip"
+                    type="object"
+                    string="Skip"
+                    icon="fa-forward"
+                    class="btn-danger"
+                    barcode_trigger="skip"
+                    attrs="{'invisible': [('state', '=', 'noop')]}"
+                />
+            </button>
         </field>
     </record>
 </odoo>

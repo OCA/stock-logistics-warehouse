@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="scheduled_date" position="after">
+                <field
+                    name="procure_method"
+                    attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('state', '!=', 'draft')]}"
+                    groups="stock.group_adv_location"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

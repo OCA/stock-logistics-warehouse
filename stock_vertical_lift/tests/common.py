@@ -154,10 +154,11 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
         inventory.action_start()
         return inventory
 
-    def _test_button_release(self, move_line, expected_state):
-        # for the test, we'll consider our last line has been delivered
-        move_line.qty_done = move_line.product_qty
-        move_line.move_id._action_done()
+    def _test_button_release(self, move_lines, expected_state):
+        # for the test, we'll consider all the lines has been delivered
+        for move_line in move_lines:
+            move_line.qty_done = move_line.product_qty
+        move_lines.picking_id.action_done()
         # release, no further operation in queue
         operation = self.shuttle._operation_for_mode()
         # the release button can be used only in the state... release

@@ -2,6 +2,9 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+from datetime import timedelta
+
+from odoo.fields import Datetime
 from odoo.tests import common
 
 
@@ -71,20 +74,29 @@ class TestsCommon(common.SavepointCase):
         )
 
     def setup_product_amounts(self):
+        now = Datetime.now()
         self.set_product_amount(self.product_no_lots, self.internal_loc_1, 123)
         self.set_product_amount(
-            self.product_lots, self.internal_loc_1, 1.0, lot_id=self.lot1
+            self.product_lots,
+            self.internal_loc_1,
+            1.0,
+            lot_id=self.lot1,
+            in_date=(now - timedelta(seconds=4)),
         )
         self.set_product_amount(
-            self.product_lots, self.internal_loc_1, 1.0, lot_id=self.lot2
+            self.product_lots,
+            self.internal_loc_1,
+            1.0,
+            lot_id=self.lot2,
+            in_date=(now - timedelta(seconds=2)),
         )
         self.set_product_amount(
             self.product_lots, self.internal_loc_1, 1.0, lot_id=self.lot3
         )
 
-    def set_product_amount(self, product, location, amount, lot_id=None):
+    def set_product_amount(self, product, location, amount, lot_id=None, in_date=None):
         self.env["stock.quant"]._update_available_quantity(
-            product, location, amount, lot_id=lot_id
+            product, location, amount, lot_id=lot_id, in_date=in_date
         )
 
     def check_product_amount(self, product, location, amount, lot_id=None):

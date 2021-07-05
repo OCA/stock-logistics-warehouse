@@ -29,7 +29,7 @@ msgid "Advanced Removal Strategy"
 msgstr ""
 
 #. module: stock_reserve_rule
-#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__picking_type_id
+#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
 msgid "Apply this rule only if the operation type of the move is the same."
 msgstr ""
 
@@ -116,11 +116,6 @@ msgid "ID"
 msgstr ""
 
 #. module: stock_reserve_rule
-#: model:ir.model,name:stock_reserve_rule.model_stock_location
-msgid "Inventory Locations"
-msgstr ""
-
-#. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule____last_update
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal____last_update
 msgid "Last Modified on"
@@ -145,8 +140,8 @@ msgid "Location"
 msgstr ""
 
 #. module: stock_reserve_rule
-#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__picking_type_id
-msgid "Operation Type"
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
+msgid "Operation Types"
 msgstr ""
 
 #. module: stock_reserve_rule
@@ -160,6 +155,11 @@ msgstr ""
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__packaging_type_ids
 msgid "Packaging Type"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model,name:stock_reserve_rule.model_stock_picking_type
+msgid "Picking Type"
 msgstr ""
 
 #. module: stock_reserve_rule
@@ -200,6 +200,11 @@ msgstr ""
 #: model:ir.actions.act_window,name:stock_reserve_rule.action_stock_reserve_rule
 #: model:ir.ui.menu,name:stock_reserve_rule.menu_stock_reserve_rule
 msgid "Reservation Rules"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_picking_type__reserve_rule_ids
+msgid "Reserve Rule"
 msgstr ""
 
 #. module: stock_reserve_rule

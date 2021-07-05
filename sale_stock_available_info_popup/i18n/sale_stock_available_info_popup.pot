@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_stock_available_info_popup
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_stock_available_info_popup
+#. openerp-web
+#: code:addons/sale_stock_available_info_popup/static/src/xml/qty_at_date.xml:0
+#, python-format
+msgid "Available to promise"
+msgstr ""
+
+#. module: sale_stock_available_info_popup
+#: model:ir.model.fields,field_description:sale_stock_available_info_popup.field_sale_order_line__immediately_usable_qty_today
+msgid "Immediately Usable Qty Today"
+msgstr ""
+
+#. module: sale_stock_available_info_popup
+#: model:ir.model,name:sale_stock_available_info_popup.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: sale_stock_available_info_popup
+#. openerp-web
+#: code:addons/sale_stock_available_info_popup/static/src/xml/qty_at_date.xml:0
+#, python-format
+msgid ""
+"widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver and "
+"!widget.data.is_mto"
+msgstr ""

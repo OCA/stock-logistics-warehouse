@@ -21,38 +21,41 @@ class TestStockLogisticsWarehouse(TransactionCase):
         """checking that immediately_usable_qty actually reflects \
            the variations in stock, both on product and template"""
         moveObj = self.env["stock.move"]
-        productObj = self.env["product.product"]
         templateObj = self.env["product.template"]
         supplier_location = self.env.ref("stock.stock_location_suppliers")
         stock_location = self.env.ref("stock.stock_location_stock")
         customer_location = self.env.ref("stock.stock_location_customers")
         uom_unit = self.env.ref("uom.product_uom_unit")
 
-        # Create product template
-        templateAB = templateObj.create({"name": "templAB", "uom_id": uom_unit.id})
-
-        # Create product A and B
-        productA = productObj.create(
-            {
-                "name": "product A",
-                "standard_price": 1,
-                "type": "product",
-                "uom_id": uom_unit.id,
-                "default_code": "A",
-                "product_tmpl_id": templateAB.id,
-            }
+        size_attr = self.env["product.attribute"].create({"name": "Size"})
+        size_attr_value_s = self.env["product.attribute.value"].create(
+            {"name": "S", "attribute_id": size_attr.id}
+        )
+        size_attr_value_m = self.env["product.attribute.value"].create(
+            {"name": "M", "attribute_id": size_attr.id}
         )
 
-        productB = productObj.create(
+        # Create products
+        templateAB = templateObj.create(
             {
-                "name": "product B",
-                "standard_price": 1,
-                "type": "product",
+                "name": "templAB",
                 "uom_id": uom_unit.id,
-                "default_code": "B",
-                "product_tmpl_id": templateAB.id,
+                "type": "product",
+                "attribute_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "attribute_id": size_attr.id,
+                            "value_ids": [
+                                (6, 0, [size_attr_value_s.id, size_attr_value_m.id])
+                            ],
+                        },
+                    )
+                ],
             }
         )
+        productA, productB = templateAB.product_variant_ids
 
         # Create a stock move from INCOMING to STOCK
         stockMoveInA = moveObj.create(

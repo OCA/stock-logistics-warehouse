@@ -13,7 +13,7 @@ class TestPick(VerticalLiftCase):
         )
         # we have a move line to pick created by demo picking
         # stock_picking_out_demo_vertical_lift_1
-        cls.out_move_line = cls.picking_out.move_line_ids
+        cls.out_move_line = cls.picking_out.move_line_ids[0]
 
     def test_switch_pick(self):
         self.shuttle.switch_pick()
@@ -34,8 +34,29 @@ class TestPick(VerticalLiftCase):
     def test_pick_select_next_move_line(self):
         operation = self._open_screen("pick")
         operation.select_next_move_line()
-        self.assertEqual(operation.current_move_line_id, self.out_move_line)
+        self.assertEqual(
+            operation.current_move_line_id, self.picking_out.move_line_ids[1]
+        )
         self.assertEqual(operation.state, "scan_destination")
+
+    def test_pick_select_next_move_line_was_skipped(self):
+        """Previously skipped moves can be reprocessed"""
+        self.picking_out.move_line_ids.write({"vertical_lift_skipped": True})
+        operation = self._open_screen("pick")
+        self.assertEqual(
+            operation.current_move_line_id, self.picking_out.move_line_ids[0]
+        )
+        operation.select_next_move_line()
+        self.assertEqual(
+            operation.current_move_line_id, self.picking_out.move_line_ids[1]
+        )
+        self.assertEqual(operation.state, "scan_destination")
+        self.assertFalse(operation.current_move_line_id.vertical_lift_skipped)
+        # When I skip the last move I come back to the first
+        operation.select_next_move_line()
+        self.assertEqual(
+            operation.current_move_line_id, self.picking_out.move_line_ids[0]
+        )
 
     def test_pick_save(self):
         operation = self._open_screen("pick")
@@ -45,6 +66,31 @@ class TestPick(VerticalLiftCase):
         operation.button_save()
         self.assertEqual(operation.current_move_line_id.state, "done")
         self.assertEqual(operation.state, "release")
+
+    def test_pick_skip_from_scan_destination(self):
+        """Being in state Scan Destination, skip it"""
+        self._test_pick_skip_from_state("scan_destination")
+
+    def test_pick_skip_from_save(self):
+        """Being in state Save, skip it"""
+        self._test_pick_skip_from_state("save")
+
+    def test_pick_skip_from_release(self):
+        """Being in state Release, skip it"""
+        self._test_pick_skip_from_state("release")
+
+    def _test_pick_skip_from_state(self, state):
+        operation = self._open_screen("pick")
+        operation.state = state
+        operation.current_move_line_id = self.out_move_line
+        first_move_line = operation.current_move_line_id
+        self.assertFalse(operation.current_move_line_id.vertical_lift_skipped)
+        operation.button_skip()
+        second_move_line = operation.current_move_line_id
+        self.assertNotEqual(first_move_line, second_move_line)
+        self.assertFalse(operation.current_move_line_id.vertical_lift_skipped)
+        self.assertEqual(operation.current_move_line_id.state, "assigned")
+        self.assertEqual(operation.state, "scan_destination")
 
     def test_pick_related_fields(self):
         operation = self._open_screen("pick")
@@ -159,7 +205,7 @@ class TestPick(VerticalLiftCase):
 
     def test_button_release(self):
         self._open_screen("pick")
-        self._test_button_release(self.out_move_line, "noop")
+        self._test_button_release(self.picking_out.move_line_ids, "noop")
 
     def test_process_current_pick(self):
         operation = self._open_screen("pick")
@@ -183,7 +229,7 @@ class TestPick(VerticalLiftCase):
                 # fmt: off
                 'cells': [
                     [0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 1, 0, 0, 0, 0, 0],
+                    [1, 1, 1, 0, 0, 0, 0, 0],
                 ]
                 # fmt: on
             },

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-04-02 14:19+0000\n"
+"PO-Revision-Date: 2021-02-28 12:45+0000\n"
 "Last-Translator: Dong <dong@freshoo.cn>\n"
 "Language-Team: none\n"
 "Language: zh_CN\n"
@@ -14,26 +14,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "<i class=\"fa fa-info-circle\"/>This Stock Request needs to be\n"
 "                        validated."
-msgstr "<i class=\"fa fa-info-circle\"/>此库存请求需要审批。"
+msgstr "<i class=\"fa fa-info-circle\"/>库存申请需要审批。"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "<i class=\"fa fa-thumbs-down\"/> Operation has been <b>rejected</b>."
-msgstr "<i class=\"fa fa-thumbs-down\"/> 操作已被 <b>驳回</b>."
+msgstr "<i class=\"fa fa-thumbs-down\"/> 单据操作审批已 <b>拒绝</b>。"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "<i class=\"fa fa-thumbs-up\"/> Operation has been <b>validated</b>!"
-msgstr "<i class=\"fa fa-thumbs-up\"/> 操作已 <b>批准</b>!"
+msgstr "<i class=\"fa fa-thumbs-up\"/> 单据操作审批已 <b>通过</b>！"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_form_wiz
@@ -50,12 +50,12 @@ msgstr "管理员审批"
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "My Stock Request Orders to review"
-msgstr "等待我审核的库存请求单"
+msgstr "我的库存申请审批待办"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 msgid "My Stock Requests to review"
-msgstr "等待我审核的库存请求"
+msgstr "我的库存申请审批待办"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
@@ -67,19 +67,19 @@ msgstr "需要操作"
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Needs my Review"
-msgstr "需要我审核"
+msgstr "需要我审批"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Reject"
-msgstr "驳回"
+msgstr "拒绝"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Request Validation"
-msgstr "请求审批"
+msgstr "提交审批"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
@@ -90,38 +90,38 @@ msgstr "撤回审批"
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_stock_request
 msgid "Stock Request"
-msgstr "库存请求"
+msgstr "库存申请"
 
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_stock_request_order
 msgid "Stock Request Order"
-msgstr "库存请求单"
+msgstr "库存申请单"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Stock Requests validated and ready to be confirmed"
-msgstr "库存请求已批准并等待确认"
+msgstr "库存申请审批已通过并等待确认"
 
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_tier_definition
 msgid "Tier Definition"
-msgstr "层级定义"
+msgstr "节点定义"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_form_wiz
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.tier_review_order_form_wiz
 msgid "Tier Review"
-msgstr "多层级审批"
+msgstr "多级审批"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Validate"
-msgstr "批准"
+msgstr "通过"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Validated"
-msgstr "已批准"
+msgstr "已通过"
