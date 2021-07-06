@@ -51,6 +51,9 @@ class StockInventoryIncludeExhaustedTest(TransactionCase):
         self.location = self.location_model.create(
             {"name": "Inventory tests 1", "usage": "internal"}
         )
+        self.location2 = self.location_model.create(
+            {"name": "Inventory tests 2", "usage": "internal"}
+        )
 
     def _create_inventory_all_products(self, name, location, include_exhausted):
         inventory = self.inventory_model.create(

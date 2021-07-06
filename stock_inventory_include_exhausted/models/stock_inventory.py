@@ -18,6 +18,8 @@ class StockInventory(models.Model):
 
         if self.include_exhausted:
             domain = [("qty_available", "=", 0), ("type", "=", "product")]
+            product_ids = [data.get("product_id") for data in vals]
+            domain.append(("id", "not in", product_ids))
             if self.product_ids:
                 domain.append(("id", "in", self.product_ids.ids))
             exhausted_products = self.env["product.product"].search(domain)
