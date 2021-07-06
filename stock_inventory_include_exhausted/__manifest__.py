@@ -5,7 +5,7 @@
     "name": "Inventory Include Exhausted",
     "summary": "It includes the option for adding products exhausted on the "
     "inventories.",
-    "version": "13.0.1.0.1",
+    "version": "13.0.1.1.0",
     "depends": ["stock"],
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
