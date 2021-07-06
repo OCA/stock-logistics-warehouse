@@ -1,8 +1,9 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.tests import SavepointCase
+from odoo.tests import Form, SavepointCase, tagged
 
 
+@tagged("-at_install", "post_install")
 class TestProductSecondaryUnit(SavepointCase):
     at_install = False
     post_install = True
@@ -10,8 +11,11 @@ class TestProductSecondaryUnit(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.StockPicking = cls.env["stock.picking"]
+        cls.env.user.groups_id = [(4, cls.env.ref("uom.group_uom").id)]
         cls.warehouse = cls.env.ref('stock.warehouse0')
         cls.product_uom_kg = cls.env.ref('uom.product_uom_kgm')
+        cls.product_uom_ton = cls.env.ref("uom.product_uom_ton")
         cls.product_uom_unit = cls.env.ref('uom.product_uom_unit')
         ProductAttribute = cls.env['product.attribute']
         ProductAttributeValue = cls.env['product.attribute.value']
@@ -42,6 +46,12 @@ class TestProductSecondaryUnit(SavepointCase):
                     'uom_id': cls.product_uom_unit.id,
                     'factor': 0.9,
                 }),
+                (0, 0, {
+                    'code': 'C',
+                    'name': 'box 10',
+                    'uom_id': cls.product_uom_unit.id,
+                    'factor': 10,
+                }),
             ],
             'attribute_line_ids': [(0, 0, {
                 'attribute_id': cls.attribute_color.id,
@@ -67,6 +77,7 @@ class TestProductSecondaryUnit(SavepointCase):
             'location_id': cls.warehouse.lot_stock_id.id,
             'quantity': 10.0,
         })
+        cls.picking_type_out = cls.env.ref("stock.picking_type_out")
 
     def test_01_stock_secondary_unit_template(self):
         self.assertEqual(
@@ -110,3 +121,32 @@ class TestProductSecondaryUnit(SavepointCase):
             sum(delivery_order.move_line_ids.mapped('secondary_uom_qty'))
         self.assertEquals(uom_qty, 20.0)
         self.assertEquals(secondary_uom_qty, 40.0)
+
+    def test_04_picking_secondary_unit(self):
+        product = self.product_template.product_variant_ids[0]
+        with Form(
+            self.StockPicking.with_context(
+                planned_picking=True,
+                default_picking_type_id=self.picking_type_out.id,
+            )
+        ) as picking_form:
+            with picking_form.move_ids_without_package.new() as move:
+                move.product_id = product
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[0]
+                self.assertEqual(move.product_uom_qty, 0.5)
+                move.secondary_uom_qty = 2
+                self.assertEqual(move.product_uom_qty, 1)
+                move.secondary_uom_id = product.secondary_uom_ids[1]
+                self.assertEqual(move.product_uom_qty, 1.8)
+                move.product_uom_qty = 5
+                self.assertAlmostEqual(move.secondary_uom_qty, 5.56, 2)
+                # Change uom from stock move line
+                move.secondary_uom_qty = 1
+                move.secondary_uom_id = product.secondary_uom_ids[2]
+                self.assertEqual(move.product_uom_qty, 10)
+                move.product_uom = self.product_uom_ton
+                self.assertAlmostEqual(move.secondary_uom_qty, 1000, 2)
+
+        picking = picking_form.save()
+        picking.action_confirm()
