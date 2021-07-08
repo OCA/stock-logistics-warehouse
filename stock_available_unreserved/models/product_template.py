@@ -13,6 +13,8 @@ class ProductTemplate(models.Model):
         digits="Product Unit of Measure",
         compute="_compute_product_available_not_res",
         search="_search_quantity_unreserved",
+        help="Quantity of this product that is "
+        "not currently reserved for a stock move",
     )
 
     @api.depends("product_variant_ids.qty_available_not_res")
