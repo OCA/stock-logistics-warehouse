@@ -17,6 +17,8 @@ class ProductProduct(models.Model):
         digits="Product Unit of Measure",
         compute="_compute_qty_available_not_reserved",
         search="_search_quantity_unreserved",
+        help="Quantity of this product that is "
+        "not currently reserved for a stock move",
     )
 
     def _prepare_domain_available_not_reserved(self):
