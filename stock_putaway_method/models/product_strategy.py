@@ -2,8 +2,8 @@
 from odoo import api, fields, models
 
 
-class PutAwayStrategy(models.Model):
-    _inherit = "product.putaway"
+class StockPutawayRule(models.Model):
+    _inherit = "stock.putaway.rule"
 
     method = fields.Selection(
         selection="_get_putaway_options",

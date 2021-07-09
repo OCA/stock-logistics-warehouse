@@ -1,14 +1,14 @@
 <odoo>
 
     <record id="view_putaway" model="ir.ui.view">
-        <field name="name">product.putaway.form.method</field>
-        <field name="model">product.putaway</field>
-        <field name="inherit_id" ref="stock.view_putaway" />
+        <field name="name">stock.putaway.rule.form.method</field>
+        <field name="model">stock.putaway.rule</field>
+        <field name="inherit_id" ref="stock.stock_putaway_list" />
         <field name="arch" type="xml">
-            <field name="name" position="after">
+            <field name="location_out_id" position="after">
                 <field name="method" />
             </field>
-            <field name="fixed_location_ids" position="attributes">
+            <field name="location_in_id" position="attributes">
                 <attribute
                     name="attrs"
                 >{'invisible': [('method', '!=', 'fixed')]}</attribute>
