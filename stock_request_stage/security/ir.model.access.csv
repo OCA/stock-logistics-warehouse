@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_request_stage_user,stock.request.stage.user,model_stock_request_stage,stock_request.group_stock_request_user,1,0,0,0
+access_stock_request_stage_manager,stock.request.stage manager,model_stock_request_stage,stock_request.group_stock_request_user,1,1,1,1

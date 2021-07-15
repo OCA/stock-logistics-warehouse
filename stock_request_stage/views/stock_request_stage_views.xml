@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ForgeFlow
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="view_stock_request_stage_tree" model="ir.ui.view">
+        <field name="name">stock.request.stage.tree</field>
+        <field name="model">stock.request.stage</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Request Stage">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="fold" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_stock_request_stage_form" model="ir.ui.view">
+        <field name="name">stock.request.stage.form</field>
+        <field name="model">stock.request.stage</field>
+        <field name="arch" type="xml">
+            <form string="Stock Request Stage">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="fold" />
+                            <field name="sequence" />
+                            <field name="set_state" />
+                        </group>
+                    </group>
+                    <group string="Stage Description">
+                        <field
+                            name="description"
+                            placeholder="Add a description..."
+                            nolabel="1"
+                            colspan="2"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="stock_request_stage_action" model="ir.actions.act_window">
+        <field name="name">Stages</field>
+        <field name="res_model">stock.request.stage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_stock_request_stage_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Create a new stage to manage stock requests
+          </p>
+            <p>
+            Define the steps that will be used in the stock request from the
+            creation, up to the closing.
+            You will use these stages in order to track the progress in
+            solving a stock request.
+          </p>
+        </field>
+    </record>
+</odoo>
