@@ -28,7 +28,16 @@ NUMBER_OF_PRODUCTS_PER_JOB = 50
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    # Column section
+    # these computed fields are defined in product_average_consumption;
+    # with product_history installed, we take the assumption that all products
+    # will use it (consumption_calculation_method = 'history')
+    # so we can store these fields, as they will will be recomputed after
+    # the updates of product_history_ids (see data/cron.xml)
+    average_consumption = fields.Float(store=True)
+    displayed_average_consumption = fields.Float(store=True)
+    total_consumption = fields.Float(store=True)
+    nb_days = fields.Integer(store=True)
+
     product_tmpl_id = fields.Many2one(comodel_name='product.template')
     history_range = fields.Selection(
         related="product_tmpl_id.history_range",
@@ -62,7 +71,7 @@ class ProductProduct(models.Model):
     )
 
     # Private section
-    @api.onchange(
+    @api.depends(
         'history_range', 'product_history_ids', 'number_of_periods_target')
     @api.multi
     def _compute_average_consumption(self):
