@@ -111,7 +111,7 @@ class ProductProduct(models.Model):
             product.total_consumption = outgoing_qty or False
             product.nb_days = nb_days or False
 
-    @api.onchange('display_range', 'average_consumption')
+    @api.depends('display_range', 'average_consumption')
     @api.multi
     def _compute_displayed_average_consumption(self):
         for product in self:
