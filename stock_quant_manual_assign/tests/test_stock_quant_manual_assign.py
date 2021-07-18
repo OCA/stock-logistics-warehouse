@@ -2,79 +2,81 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo.exceptions import ValidationError
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestStockQuantManualAssign(TransactionCase):
-    def setUp(self):
-        super(TestStockQuantManualAssign, self).setUp()
-        self.quant_model = self.env["stock.quant"]
-        self.location_model = self.env["stock.location"]
-        self.move_model = self.env["stock.move"]
-        self.quant_assign_wizard = self.env["assign.manual.quants"]
-        self.product = self.env["product.product"].create(
+class TestStockQuantManualAssign(SavepointCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(TestStockQuantManualAssign, cls).setUp()
+        cls.quant_model = cls.env["stock.quant"]
+        cls.location_model = cls.env["stock.location"]
+        cls.move_model = cls.env["stock.move"]
+        cls.quant_assign_wizard = cls.env["assign.manual.quants"]
+        cls.product = cls.env["product.product"].create(
             {"name": "Product 4 test", "type": "product"}
         )
-        self.location_src = self.env.ref("stock.stock_location_locations_virtual")
-        self.location_dst = self.env.ref("stock.stock_location_customers")
-        self.location1 = self.location_model.create(
+        cls.location_src = cls.env.ref(
+            "stock.stock_location_locations_virtual")
+        cls.location_dst = cls.env.ref("stock.stock_location_customers")
+        cls.location1 = cls.location_model.create(
             {
                 "name": "Location 1",
                 "usage": "internal",
-                "location_id": self.location_src.id,
+                "location_id": cls.location_src.id,
             }
         )
-        self.location2 = self.location_model.create(
+        cls.location2 = cls.location_model.create(
             {
                 "name": "Location 2",
                 "usage": "internal",
-                "location_id": self.location_src.id,
+                "location_id": cls.location_src.id,
             }
         )
-        self.location3 = self.location_model.create(
+        cls.location3 = cls.location_model.create(
             {
                 "name": "Location 3",
                 "usage": "internal",
-                "location_id": self.location_src.id,
+                "location_id": cls.location_src.id,
             }
         )
-        self.quant1 = self.quant_model.sudo().create(
+        cls.quant1 = cls.quant_model.sudo().create(
             {
-                "product_id": self.product.id,
+                "product_id": cls.product.id,
                 "quantity": 100.0,
-                "location_id": self.location1.id,
+                "location_id": cls.location1.id,
             }
         )
-        self.quant2 = self.quant_model.sudo().create(
+        cls.quant2 = cls.quant_model.sudo().create(
             {
-                "product_id": self.product.id,
+                "product_id": cls.product.id,
                 "quantity": 100.0,
-                "location_id": self.location2.id,
+                "location_id": cls.location2.id,
             }
         )
-        self.quant3 = self.quant_model.sudo().create(
+        cls.quant3 = cls.quant_model.sudo().create(
             {
-                "product_id": self.product.id,
+                "product_id": cls.product.id,
                 "quantity": 100.0,
-                "location_id": self.location3.id,
+                "location_id": cls.location3.id,
             }
         )
-        self.move = self.move_model.create(
+        cls.move = cls.move_model.create(
             {
-                "name": self.product.name,
-                "product_id": self.product.id,
+                "name": cls.product.name,
+                "product_id": cls.product.id,
                 "product_uom_qty": 400.0,
-                "product_uom": self.product.uom_id.id,
-                "location_id": self.location_src.id,
-                "location_dest_id": self.location_dst.id,
+                "product_uom": cls.product.uom_id.id,
+                "location_id": cls.location_src.id,
+                "location_dest_id": cls.location_dst.id,
             }
         )
-        self.move._action_confirm()
+        cls.move._action_confirm()
 
     def test_quant_assign_wizard(self):
-        wizard = self.quant_assign_wizard.with_context(active_id=self.move.id).create(
-            {}
-        )
+        wizard = self.quant_assign_wizard.with_context(
+            active_id=self.move.id).create({})
         self.assertEqual(
             len(wizard.quants_lines.ids),
             3,
@@ -93,9 +95,8 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertEqual(wizard.move_qty, self.move.product_uom_qty)
 
     def test_quant_assign_wizard_constraint(self):
-        wizard = self.quant_assign_wizard.with_context(active_id=self.move.id).create(
-            {}
-        )
+        wizard = self.quant_assign_wizard.with_context(
+            active_id=self.move.id).create({})
         self.assertEqual(
             len(wizard.quants_lines.ids),
             3,
@@ -108,18 +109,16 @@ class TestStockQuantManualAssign(TransactionCase):
         )
         self.assertEqual(wizard.lines_qty, 0.0, "None selected must give 0")
         with self.assertRaises(ValidationError):
-            wizard.write(
-                {
-                    "quants_lines": [
-                        (1, wizard.quants_lines[:1].id, {"selected": True, "qty": 500})
-                    ]
-                }
-            )
+            wizard.write({
+                "quants_lines": [
+                    (1, wizard.quants_lines[:1].id,
+                        {"selected": True, "qty": 500})
+                ]
+            })
 
     def test_quant_manual_assign(self):
-        wizard = self.quant_assign_wizard.with_context(active_id=self.move.id).create(
-            {}
-        )
+        wizard = self.quant_assign_wizard.with_context(
+            active_id=self.move.id).create({})
         self.assertEqual(
             len(wizard.quants_lines.ids),
             3,
@@ -132,14 +131,14 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertEqual(wizard.move_qty, 250.0)
         wizard.assign_quants()
         self.assertAlmostEqual(
-            len(self.move.move_line_ids), len(wizard.quants_lines.filtered("selected"))
+            len(self.move.move_line_ids),
+            len(wizard.quants_lines.filtered("selected"))
         )
 
     def test_quant_assign_wizard_after_availability_check(self):
         self.move._action_assign()
-        wizard = self.quant_assign_wizard.with_context(active_id=self.move.id).create(
-            {}
-        )
+        wizard = self.quant_assign_wizard.with_context(
+            active_id=self.move.id).create({})
         self.assertEqual(
             len(wizard.quants_lines.ids),
             3,
@@ -153,7 +152,8 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertEqual(wizard.lines_qty, 300.0)
         self.assertEqual(wizard.move_qty, 100.0)
         self.assertEqual(
-            len(wizard.quants_lines.filtered("selected")), len(self.move.move_line_ids)
+            len(wizard.quants_lines.filtered("selected")),
+            len(self.move.move_line_ids)
         )
         self.assertEqual(
             sum(line.qty for line in wizard.quants_lines),
