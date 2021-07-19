@@ -28,6 +28,7 @@
                             <field name="fold" />
                             <field name="sequence" />
                             <field name="set_state" />
+                            <field name="complete_pickings" />
                         </group>
                     </group>
                     <group string="Stage Description">

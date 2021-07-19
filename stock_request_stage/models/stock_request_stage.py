@@ -29,3 +29,8 @@ class StockRequestStage(models.Model):
         help="Status that should be set when the stock request reaches to "
         "this stage.",
     )
+    complete_pickings = fields.Boolean(
+        string="Complete pickings",
+        help="When this stage is reached the system will try to complete the "
+        "pickings associated with the stock request.",
+    )

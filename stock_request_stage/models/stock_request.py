@@ -51,14 +51,32 @@ class StockRequest(models.Model):
             elif set_state == "done" and rec.state != "done":
                 rec.action_done()
 
+    def complete_pickings(self):
+        for rec in self:
+            if rec.stage_id.complete_pickings:
+                for picking in rec.picking_ids.filtered(lambda x: x.state == "draft"):
+                    picking.action_confirm()
+                for picking in rec.picking_ids.filtered(
+                    lambda x: x.state == "confirmed"
+                ):
+                    picking.action_assign()
+                for picking in rec.picking_ids.filtered(
+                    lambda x: x.state == "assigned"
+                ):
+                    wiz_id = picking.button_validate()["res_id"]
+                    wiz = self.env["stock.immediate.transfer"].browse([wiz_id])
+                    wiz.process()
+
     @api.model
     def create(self, vals):
         request = super(StockRequest, self).create(vals)
         if vals.get("stage_id"):
             request.update_request_state()
+            request.complete_pickings()
         return request
 
     def write(self, vals):
         super(StockRequest, self).write(vals)
         if vals.get("stage_id"):
             self.update_request_state()
+            self.complete_pickings()
