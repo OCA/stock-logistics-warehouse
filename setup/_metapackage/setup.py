@@ -44,6 +44,7 @@ setuptools.setup(
         'odoo12-addon-stock_location_template',
         'odoo12-addon-stock_location_zone',
         'odoo12-addon-stock_move_location',
+        'odoo12-addon-stock_move_packaging_qty',
         'odoo12-addon-stock_mts_mto_rule',
         'odoo12-addon-stock_orderpoint_generator',
         'odoo12-addon-stock_orderpoint_manual_procurement',
