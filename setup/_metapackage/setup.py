@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo14-addon-stock_location_position',
         'odoo14-addon-stock_move_common_dest',
         'odoo14-addon-stock_move_location',
+        'odoo14-addon-stock_orderpoint_move_link',
         'odoo14-addon-stock_packaging_calculator',
         'odoo14-addon-stock_picking_cancel_confirm',
         'odoo14-addon-stock_pull_list',
