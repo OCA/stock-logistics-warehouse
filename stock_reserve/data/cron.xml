@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record forcecreate="True" id="ir_cron_reserve_waiting_confirmed" model="ir.cron">
+        <field
+            name="name"
+        >Stock reservation: Assign waiting/confirmed reserve moves</field>
+        <field name="model_id" ref="model_stock_reservation" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="state">code</field>
+        <field name="code">model.assign_waiting_confirmed_reserve_moves()</field>
+    </record>
+    <record forcecreate="True" id="ir_cron_release_stock_reservation" model="ir.cron">
+        <field
+            name="name"
+        >Release the stock reservation having a passed validity date</field>
+        <field name="model_id" ref="model_stock_reservation" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="state">code</field>
+        <field name="code">model.release_validity_exceeded()</field>
+    </record>
+</odoo>
