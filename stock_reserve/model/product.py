@@ -1,24 +1,6 @@
-##############################################################################
-#
-#    Author: Guewen Baconnier
-#    Copyright 2013 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
-from odoo import api, fields, models
+# Copyright 2013 Camptocamp SA - Guewen Baconnier
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import fields, models
 
 
 class ProductTemplate(models.Model):
@@ -28,14 +10,12 @@ class ProductTemplate(models.Model):
         compute="_compute_reservation_count", string="# Sales"
     )
 
-    @api.multi
     def _compute_reservation_count(self):
         for product in self:
             product.reservation_count = sum(
                 product.product_variant_ids.mapped("reservation_count")
             )
 
-    @api.multi
     def action_view_reservations(self):
         self.ensure_one()
         ref = "stock_reserve.action_stock_reservation_tree"
@@ -45,6 +25,7 @@ class ProductTemplate(models.Model):
         action_dict["context"] = {
             "search_default_draft": 1,
             "search_default_reserved": 1,
+            "default_product_id": self.product_variant_ids[0].id,
         }
         return action_dict
 
@@ -56,7 +37,6 @@ class ProductProduct(models.Model):
         compute="_compute_reservation_count", string="# Sales"
     )
 
-    @api.multi
     def _compute_reservation_count(self):
         for product in self:
             domain = [
@@ -66,7 +46,6 @@ class ProductProduct(models.Model):
             reservations = self.env["stock.reservation"].search(domain)
             product.reservation_count = sum(reservations.mapped("product_qty"))
 
-    @api.multi
     def action_view_reservations(self):
         self.ensure_one()
         ref = "stock_reserve.action_stock_reservation_tree"
@@ -75,5 +54,6 @@ class ProductProduct(models.Model):
         action_dict["context"] = {
             "search_default_draft": 1,
             "search_default_reserved": 1,
+            "default_product_id": self.id,
         }
         return action_dict
