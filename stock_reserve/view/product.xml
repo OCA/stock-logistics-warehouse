@@ -23,7 +23,7 @@
         </field>
     </record>
     <record model="ir.ui.view" id="product_product_form_view_reservation_button">
-        <field name="name">product.template.reservation.button</field>
+        <field name="name">product.product.reservation.button</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view" />
         <field name="arch" type="xml">
