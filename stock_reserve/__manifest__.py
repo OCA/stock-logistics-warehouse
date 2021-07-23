@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Guewen Baconnier
@@ -19,25 +18,25 @@
 #
 ##############################################################################
 
-{'name': 'Stock Reservation',
- 'summary': 'Stock reservations on products',
- 'version': '10.0.1.0.0',
- 'author': "Camptocamp,Odoo Community Association (OCA)",
- 'category': 'Warehouse',
- 'license': 'AGPL-3',
- 'complexity': 'normal',
- 'images': [],
- 'website': "http://www.camptocamp.com",
- 'depends': ['stock',
-             ],
- 'demo': [],
- 'data': ['view/stock_reserve.xml',
-          'view/product.xml',
-          'data/stock_data.xml',
-          'security/ir.model.access.csv',
-          ],
- 'auto_install': False,
- 'test': ['test/stock_reserve.yml',
-          ],
- 'installable': True,
- }
+{
+    "name": "Stock Reservation",
+    "summary": "Stock reservations on products",
+    "version": "10.0.1.0.0",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
+    "category": "Warehouse",
+    "license": "AGPL-3",
+    "complexity": "normal",
+    "images": [],
+    "website": "http://www.camptocamp.com",
+    "depends": ["stock",],
+    "demo": [],
+    "data": [
+        "view/stock_reserve.xml",
+        "view/product.xml",
+        "data/stock_data.xml",
+        "security/ir.model.access.csv",
+    ],
+    "auto_install": False,
+    "test": ["test/stock_reserve.yml",],
+    "installable": True,
+}
