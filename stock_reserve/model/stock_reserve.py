@@ -1,25 +1,8 @@
-##############################################################################
-#
-#    Author: Guewen Baconnier
-#    Copyright 2013 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
+# Copyright 2013 Camptocamp SA - Guewen Baconnier
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 from odoo.exceptions import except_orm
+from odoo.tools import float_compare
 from odoo.tools.translate import _
 
 
@@ -78,7 +61,7 @@ class StockReservation(models.Model):
         if "location_id" in fields_list and "picking_type_id" not in fields_list:
             fields_list = fields_list + ["picking_type_id"]
 
-        res = super(StockReservation, self).default_get(fields_list)
+        res = super().default_get(fields_list)
 
         if "product_qty" in res:
             del res["product_qty"]
@@ -132,7 +115,6 @@ class StockReservation(models.Model):
         ref = "stock_reserve.stock_location_reservation"
         return self.get_location_from_ref(ref)
 
-    @api.multi
     def reserve(self):
         """ Confirm reservations
 
@@ -140,47 +122,52 @@ class StockReservation(models.Model):
         A date until which the product is reserved can be specified.
         """
         self.write({"date_expected": fields.Datetime.now()})
-        self.mapped("move_id").action_confirm()
+        self.mapped("move_id")._action_confirm(merge=False)
         self.mapped("move_id.picking_id").action_assign()
         return True
 
-    @api.multi
-    def release(self):
+    def release_reserve(self):
         """
         Release moves from reservation
         """
-        self.mapped("move_id").action_cancel()
+        moves = self.mapped("move_id")
+        moves._action_cancel()
+        # HACK: For avoiding to accumulate all reservations in the same picking
+        moves.write({"picking_id": False})
         return True
+
+    def _get_state_domain_release_reserve(self, mode):
+        if mode == "reserve":
+            return
+        elif mode == "release":
+            return "cancel"
 
     @api.model
     def release_validity_exceeded(self, ids=None):
         """ Release all the reservation having an exceeded validity date """
         domain = [
             ("date_validity", "<", fields.date.today()),
-            ("state", "=", "assigned"),
+            ("state", "!=", "cancel"),
         ]
         if ids:
             domain.append(("id", "in", ids))
-        self.search(domain).release()
+        self.env["stock.reservation"].search(domain).release_reserve()
         return True
 
-    @api.multi
     def unlink(self):
         """ Release the reservation before the unlink """
-        self.release()
-        return super(StockReservation, self).unlink()
+        self.release_reserve()
+        return super().unlink()
 
     @api.onchange("product_id")
     def _onchange_product_id(self):
         """ set product_uom and name from product onchange """
         # save value before reading of self.move_id as this last one erase
         # product_id value
-        move = self.move_id or self.env["stock.move"].new(
-            {"product_id": self.product_id}
-        )
-        move.onchange_product_id()
-        self.name = move.name
-        self.product_uom = move.product_uom
+        self.move_id.product_id = self.product_id
+        self.move_id.onchange_product_id()
+        self.name = self.move_id.name
+        self.product_uom = self.move_id.product_uom
 
     @api.onchange("product_uom_qty")
     def _onchange_quantity(self):
@@ -188,7 +175,6 @@ class StockReservation(models.Model):
         if not self.product_id or self.product_uom_qty <= 0.0:
             self.product_uom_qty = 0.0
 
-    @api.multi
     def open_move(self):
         self.ensure_one()
         action = self.env.ref("stock.stock_move_action")
@@ -200,3 +186,32 @@ class StockReservation(models.Model):
             views=[(view_id, "form")], res_id=self.move_id.id,
         )
         return action_dict
+
+    def write(self, vals):
+        res = super().write(vals)
+        rounding = self.product_uom.rounding
+        if (
+            "product_uom_qty" in vals
+            and self.state in ["confirmed", "waiting", "partially_available"]
+            and float_compare(
+                self.product_id.virtual_available, 0, precision_rounding=rounding
+            )
+            >= 0
+        ):
+            self.reserve()
+        return res
+
+    def _get_reservations_to_assign_domain(self):
+        return [
+            ("state", "in", ["confirmed", "waiting", "partially_available"]),
+            "|",
+            ("date_validity", ">=", fields.date.today()),
+            ("date_validity", "=", False),
+        ]
+
+    @api.model
+    def assign_waiting_confirmed_reserve_moves(self):
+        reservations_to_assign = self.search(self._get_reservations_to_assign_domain())
+        for reservation in reservations_to_assign:
+            reservation.reserve()
+        return True
