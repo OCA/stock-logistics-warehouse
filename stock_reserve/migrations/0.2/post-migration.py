@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #    Author: Leonardo Pistone
 #    Copyright 2015 Camptocamp SA
 #
@@ -18,8 +17,9 @@
 
 def migrate(cr, installed_version):
     """Update a wrong location that is no_update in XML."""
-    if installed_version == '8.0.0.1':
-        cr.execute('''
+    if installed_version == "8.0.0.1":
+        cr.execute(
+            """
             UPDATE stock_location
             SET location_id = (
                 SELECT res_id
@@ -39,4 +39,5 @@ def migrate(cr, installed_version):
                 WHERE name = 'stock_location_company'
                 AND module = 'stock'
             );
-        ''')
+        """
+        )
