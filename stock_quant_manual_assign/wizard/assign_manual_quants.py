@@ -62,8 +62,9 @@ class AssignManualQuants(models.TransientModel):
         for line in self.quants_lines:
             line._assign_quant_line()
         # Auto-fill all lines as done
-        for ml in move.move_line_ids:
-            ml.qty_done = ml.product_qty
+        if move.company_id.stock_quant_manual_assign_as_done:
+            for ml in move.move_line_ids:
+                ml.qty_done = ml.product_qty
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
         return {}
