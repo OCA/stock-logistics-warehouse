@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-06-30 17:48+0000\n"
+"PO-Revision-Date: 2021-07-26 17:49+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -18,15 +18,10 @@ msgstr ""
 
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,help:sale_stock_info_popup.field_sale_order_line__product_type
-#, fuzzy
 msgid "A storable product is a product for which you manage stock. The Inventory app has to be installed.\n"
 "A consumable product is a product for which stock is not managed.\n"
 "A service is a non-material product you provide."
 msgstr ""
-"A storable product is a product for which you manage stock. The Inventory "
-"app has to be installed.\n"
-"A consumable product is a product for which stock is not managed.\n"
-"A service is a non-material product you provide."
 
 #. module: sale_stock_info_popup
 #. openerp-web
