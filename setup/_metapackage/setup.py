@@ -48,6 +48,7 @@ setuptools.setup(
         'odoo13-addon-stock_move_auto_assign',
         'odoo13-addon-stock_move_common_dest',
         'odoo13-addon-stock_move_location',
+        'odoo13-addon-stock_move_packaging_qty',
         'odoo13-addon-stock_mts_mto_rule',
         'odoo13-addon-stock_orderpoint_generator',
         'odoo13-addon-stock_orderpoint_manual_procurement',
