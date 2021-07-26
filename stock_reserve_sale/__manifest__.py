@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Guewen Baconnier, Leonardo Pistone
@@ -19,25 +18,23 @@
 #
 ##############################################################################
 
-{'name': 'Stock Reserve Sales',
- 'version': '8.0.1.0.0',
- 'author': "Camptocamp,Odoo Community Association (OCA)",
- 'category': 'Warehouse',
- 'license': 'AGPL-3',
- 'complexity': 'normal',
- 'images': [],
- 'website': "http://www.camptocamp.com",
- 'depends': ['sale_stock',
-             'stock_reserve',
-             ],
- 'demo': [],
- 'data': ['wizard/sale_stock_reserve_view.xml',
-          'view/sale.xml',
-          'view/stock_reserve.xml',
-          ],
- 'test': ['test/sale_reserve.yml',
-          'test/sale_line_reserve.yml',
-          ],
- 'installable': False,
- 'auto_install': False,
- }
+{
+    "name": "Stock Reserve Sales",
+    "version": "8.0.1.0.0",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
+    "category": "Warehouse",
+    "license": "AGPL-3",
+    "complexity": "normal",
+    "images": [],
+    "website": "http://www.camptocamp.com",
+    "depends": ["sale_stock", "stock_reserve",],
+    "demo": [],
+    "data": [
+        "wizard/sale_stock_reserve_view.xml",
+        "view/sale.xml",
+        "view/stock_reserve.xml",
+    ],
+    "test": ["test/sale_reserve.yml", "test/sale_line_reserve.yml",],
+    "installable": False,
+    "auto_install": False,
+}
