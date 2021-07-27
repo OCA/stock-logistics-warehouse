@@ -58,9 +58,10 @@ class AssignManualQuants(models.TransientModel):
         move._do_unreserve()
         for line in self.quants_lines:
             line._assign_quant_line()
-        # Auto-fill all lines as done
-        for ml in move.move_line_ids:
-            ml.qty_done = ml.product_qty
+        if move.picking_type_id.auto_fill_qty_done:
+            # Auto-fill all lines as done
+            for ml in move.move_line_ids:
+                ml.qty_done = ml.product_qty
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
         return {}
@@ -78,31 +79,36 @@ class AssignManualQuants(models.TransientModel):
         )
         quants_lines = []
         for quant in available_quants:
-            line = {
-                "quant_id": quant.id,
-                "on_hand": quant.quantity,
-                "location_id": quant.location_id.id,
-                "lot_id": quant.lot_id.id,
-                "package_id": quant.package_id.id,
-                "owner_id": quant.owner_id.id,
-                "selected": False,
-            }
-            move_lines = move.move_line_ids.filtered(
-                lambda ml: (
-                    ml.location_id == quant.location_id
-                    and ml.lot_id == quant.lot_id
-                    and ml.owner_id == quant.owner_id
-                    and ml.package_id == quant.package_id
-                )
-            )
-            line["qty"] = sum(move_lines.mapped("product_uom_qty"))
-            line["selected"] = bool(line["qty"])
-            line["reserved"] = quant.reserved_quantity - line["qty"]
+            line = self._prepare_wizard_line(move, quant)
             quants_lines.append(line)
         res.update(
             {"quants_lines": [(0, 0, x) for x in quants_lines], "move_id": move.id}
         )
         return res
+
+    @api.model
+    def _prepare_wizard_line(self, move, quant):
+        line = {
+            "quant_id": quant.id,
+            "on_hand": quant.quantity,
+            "location_id": quant.location_id.id,
+            "lot_id": quant.lot_id.id,
+            "package_id": quant.package_id.id,
+            "owner_id": quant.owner_id.id,
+            "selected": False,
+        }
+        move_lines = move.move_line_ids.filtered(
+            lambda ml: (
+                ml.location_id == quant.location_id
+                and ml.lot_id == quant.lot_id
+                and ml.owner_id == quant.owner_id
+                and ml.package_id == quant.package_id
+            )
+        )
+        line["qty"] = sum(move_lines.mapped("product_uom_qty"))
+        line["selected"] = bool(line["qty"])
+        line["reserved"] = quant.reserved_quantity - line["qty"]
+        return line
 
 
 class AssignManualQuantsLines(models.TransientModel):
