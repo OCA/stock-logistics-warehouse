@@ -1,36 +1,19 @@
-##############################################################################
-#
-#    Author: Guewen Baconnier
-#    Copyright 2013 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2013 Camptocamp SA - Guewen Baconnier
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import api, fields, models
+from odoo.exceptions import UserError, except_orm
+from odoo.tools.translate import _
 
-from openerp import api, fields, models
-from openerp.exceptions import except_orm
-from openerp.tools.translate import _
+_LINE_KEYS = ["product_id", "product_uom_qty"]
 
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    @api.multi
     @api.depends(
         "state", "order_line.reservation_ids", "order_line.is_stock_reservable"
     )
-    def _stock_reservation(self):
+    def _compute_stock_reservation(self):
         for sale in self:
             has_stock_reservation = False
             is_stock_reservable = False
@@ -45,53 +28,100 @@ class SaleOrder(models.Model):
             sale.has_stock_reservation = has_stock_reservation
 
     has_stock_reservation = fields.Boolean(
-        compute="_stock_reservation",
+        compute="_compute_stock_reservation",
         readonly=True,
         multi="stock_reservation",
         store=True,
         string="Has Stock Reservations",
     )
     is_stock_reservable = fields.Boolean(
-        compute="_stock_reservation",
+        compute="_compute_stock_reservation",
         readonly=True,
         multi="stock_reservation",
         store=True,
         string="Can Have Stock Reservations",
     )
 
-    @api.multi
     def release_all_stock_reservation(self):
         line_ids = [line.id for order in self for line in order.order_line]
         lines = self.env["sale.order.line"].browse(line_ids)
         lines.release_stock_reservation()
         return True
 
-    @api.multi
-    def action_button_confirm(self):
+    def action_confirm(self):
         self.release_all_stock_reservation()
-        return super(SaleOrder, self).action_button_confirm()
+        return super().action_confirm()
 
-    @api.multi
     def action_cancel(self):
         self.release_all_stock_reservation()
-        return super(SaleOrder, self).action_cancel()
+        return super().action_cancel()
+
+    def write(self, vals):
+        old_lines = self.mapped("order_line")
+        dict_old_lines = {}
+        for line in old_lines:
+            dict_old_lines[line.id] = {
+                "product_id": line.product_id,
+                "product_uom_qty": line.product_uom_qty,
+            }
+        res = super().write(vals)
+        for order in self:
+            body = ""
+            for line in vals.get("order_line", []):
+                if line[0] == 1 and list(set(line[2].keys()).intersection(_LINE_KEYS)):
+                    body += order.get_message(dict_old_lines.get(line[1]), line[2])
+            if body != "":
+                order.message_post(body=body)
+        return res
+
+    @api.model
+    def get_message(self, old_vals, new_vals):
+        ProductProduct = self.env["product.product"]
+        body = _("<p>Modified Order line data</p>")
+        if "product_id" in new_vals:
+            old_product = old_vals["product_id"].display_name
+            new_product = ProductProduct.browse(new_vals["product_id"]).display_name
+            body += _("<div>     <b>Product</b>: ")
+            body += "{} → {}</div>".format(old_product, new_product)
+        if "product_uom_qty" in new_vals:
+            if "product_id" not in new_vals:
+                body += _("<div>     <b>Product</b>: %s") % (
+                    old_vals["product_id"].display_name
+                )
+            body += _("<div>     <b>Product qty.</b>: ")
+            body += "{} → {}</div>".format(
+                old_vals["product_uom_qty"], float(new_vals["product_uom_qty"]),
+            )
+        body += "<br/>"
+        return body
+
+    def unlink(self):
+        for order in self:
+            if order.has_stock_reservation:
+                raise UserError(
+                    _(
+                        "Sale Order %s has some reserved lines.\n"
+                        "Please unreserve this lines before delete the order."
+                    )
+                    % (order.name)
+                )
+        return super().unlink()
 
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    @api.multi
     def _get_line_rule(self):
         """ Get applicable rule for this product
 
         Reproduce get suitable rule from procurement
         to predict source location """
-        ProcurementRule = self.env["procurement.rule"]
+        StockRule = self.env["stock.rule"]
         product = self.product_id
         product_route_ids = [
             x.id for x in product.route_ids + product.categ_id.total_route_ids
         ]
-        rules = ProcurementRule.search(
+        rules = StockRule.search(
             [("route_id", "in", product_route_ids)],
             order="route_sequence, sequence",
             limit=1,
@@ -108,13 +138,12 @@ class SaleOrderLine(models.Model):
                 ("route_id", "in", wh_route_ids),
             ]
 
-            rules = ProcurementRule.search(domain, order="route_sequence, sequence")
+            rules = StockRule.search(domain, order="route_sequence, sequence")
 
         if rules:
-            return rules[0]
+            fields.first(rules)
         return False
 
-    @api.multi
     def _get_procure_method(self):
         """ Get procure_method depending on product routes """
         rule = self._get_line_rule()
@@ -122,9 +151,8 @@ class SaleOrderLine(models.Model):
             return rule.procure_method
         return False
 
-    @api.multi
     @api.depends("state", "product_id.route_ids", "product_id.type")
-    def _is_stock_reservable(self):
+    def _compute_is_stock_reservable(self):
         for line in self:
             reservable = False
             if (
@@ -139,89 +167,30 @@ class SaleOrderLine(models.Model):
                 reservable = True
             line.is_stock_reservable = reservable
 
+    @api.depends("order_id.state", "reservation_ids")
+    def _compute_is_readonly(self):
+        for line in self:
+            line.is_readonly = (
+                len(line.reservation_ids) > 0 or line.order_id.state != "draft"
+            )
+
     reservation_ids = fields.One2many(
         "stock.reservation", "sale_line_id", string="Stock Reservation", copy=False
     )
     is_stock_reservable = fields.Boolean(
-        compute="_is_stock_reservable", readonly=True, string="Can be reserved"
+        compute="_compute_is_stock_reservable", readonly=True, string="Can be reserved"
     )
+    is_readonly = fields.Boolean(compute="_compute_is_readonly", store=False)
 
-    @api.multi
     def release_stock_reservation(self):
         reserv_ids = [reserv.id for line in self for reserv in line.reservation_ids]
         reservations = self.env["stock.reservation"].browse(reserv_ids)
-        reservations.release()
+        reservations.release_reserve()
         return True
 
-    def product_id_change(
-        self,
-        cr,
-        uid,
-        ids,
-        pricelist,
-        product,
-        qty=0,
-        uom=False,
-        qty_uos=0,
-        uos=False,
-        name="",
-        partner_id=False,
-        lang=False,
-        update_tax=True,
-        date_order=False,
-        packaging=False,
-        fiscal_position=False,
-        flag=False,
-        context=None,
-    ):
-        result = super(SaleOrderLine, self).product_id_change(
-            cr,
-            uid,
-            ids,
-            pricelist,
-            product,
-            qty=qty,
-            uom=uom,
-            qty_uos=qty_uos,
-            uos=uos,
-            name=name,
-            partner_id=partner_id,
-            lang=lang,
-            update_tax=update_tax,
-            date_order=date_order,
-            packaging=packaging,
-            fiscal_position=fiscal_position,
-            flag=flag,
-            context=context,
-        )
-        if not ids:  # warn only if we change an existing line
-            return result
-        assert len(ids) == 1, "Expected 1 ID, got %r" % ids
-        line = self.browse(cr, uid, ids[0], context=context)
-        if qty != line.product_uom_qty and line.reservation_ids:
-            msg = (
-                _(
-                    "As you changed the quantity of the line, "
-                    "the quantity of the stock reservation will "
-                    "be automatically adjusted to %.2f."
-                )
-                % qty
-            )
-            msg += "\n\n"
-            result.setdefault("warning", {})
-            if result["warning"].get("message"):
-                result["warning"]["message"] += msg
-            else:
-                result["warning"] = {
-                    "title": _("Configuration Error!"),
-                    "message": msg,
-                }
-        return result
-
-    @api.multi
     def write(self, vals):
-        block_on_reserve = ("product_id", "product_uom", "product_uos", "type")
-        update_on_reserve = ("price_unit", "product_uom_qty", "product_uos_qty")
+        block_on_reserve = ("product_id", "product_uom", "type")
+        update_on_reserve = ("price_unit", "product_uom_qty")
         keys = set(vals.keys())
         test_block = keys.intersection(block_on_reserve)
         test_update = keys.intersection(update_on_reserve)
@@ -238,7 +207,7 @@ class SaleOrderLine(models.Model):
                         "before changing the product."
                     ),
                 )
-        res = super(SaleOrderLine, self).write(vals)
+        res = super().write(vals)
         if test_update:
             for line in self:
                 if not line.reservation_ids:
@@ -258,7 +227,19 @@ class SaleOrderLine(models.Model):
                     {
                         "price_unit": line.price_unit,
                         "product_uom_qty": line.product_uom_qty,
-                        "product_uos_qty": line.product_uos_qty,
                     }
                 )
         return res
+
+    def unlink(self):
+        for line in self:
+            if line.reservation_ids:
+                raise UserError(
+                    _(
+                        'Sale order line "[%s] %s" has a related reservation.\n'
+                        "Please unreserve this line before "
+                        "delete the line"
+                    )
+                    % (line.order_id.name, line.name)
+                )
+        return super().unlink()
