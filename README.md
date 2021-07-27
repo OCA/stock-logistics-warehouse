@@ -37,7 +37,7 @@ addon | version | summary
 [stock_packaging_calculator](stock_packaging_calculator/) | 14.0.1.0.1 | Compute product quantity to pick by packaging
 [stock_picking_cancel_confirm](stock_picking_cancel_confirm/) | 14.0.1.0.1 | Stock Picking Cancel Confirm
 [stock_pull_list](stock_pull_list/) | 14.0.1.0.0 | The pull list checks the stock situation and calculates needed quantities.
-[stock_quant_manual_assign](stock_quant_manual_assign/) | 14.0.1.0.0 | Stock - Manual Quant Assignment
+[stock_quant_manual_assign](stock_quant_manual_assign/) | 14.0.1.1.0 | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 14.0.1.0.1 | Internal request for stock
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.0.0 | Add Stock Requests to the Inventory App
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 14.0.1.0.0 | Allows to search for picking from supplierinfo code
