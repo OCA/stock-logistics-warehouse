@@ -1,32 +1,17 @@
-##############################################################################
-#
-#    Author: Guewen Baconnier, Leonardo Pistone
-#    Copyright 2013-2015 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
-from openerp import api, exceptions, fields, models
+# Copyright 2013 Camptocamp SA - Guewen Baconnier
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import _, api, exceptions, fields, models
 
 
 class SaleStockReserve(models.TransientModel):
     _name = "sale.stock.reserve"
+    _description = "Sale Stock Reserve"
 
     @api.model
     def _default_location_id(self):
-        return self.env["stock.reservation"]._default_location_id()
+        return self.env["stock.reservation"].get_location_from_ref(
+            "stock.stock_location_stock"
+        )
 
     @api.model
     def _default_location_dest_id(self):
@@ -53,8 +38,10 @@ class SaleStockReserve(models.TransientModel):
             return owners.pop()
         elif len(owners) > 1:
             raise exceptions.Warning(
-                "The lines have different owners. Please reserve them "
-                "individually with the reserve button on each one."
+                _(
+                    """The lines have different owners. Please reserve them
+                    individually with the reserve button on each one."""
+                )
             )
 
         return self.env["res.partner"]
@@ -77,10 +64,8 @@ class SaleStockReserve(models.TransientModel):
     note = fields.Text("Notes")
     owner_id = fields.Many2one("res.partner", "Stock Owner", default=_default_owner)
 
-    @api.multi
     def _prepare_stock_reservation(self, line):
         self.ensure_one()
-        product_uos = line.product_uos.id if line.product_uos else False
         return {
             "product_id": line.product_id.id,
             "product_uom": line.product_uom.id,
@@ -90,14 +75,11 @@ class SaleStockReserve(models.TransientModel):
             "location_id": self.location_id.id,
             "location_dest_id": self.location_dest_id.id,
             "note": self.note,
-            "product_uos_qty": line.product_uos_qty,
-            "product_uos": product_uos,
             "price_unit": line.price_unit,
             "sale_line_id": line.id,
             "restrict_partner_id": self.owner_id.id,
         }
 
-    @api.multi
     def stock_reserve(self, line_ids):
         self.ensure_one()
 
@@ -110,7 +92,6 @@ class SaleStockReserve(models.TransientModel):
             reserv.reserve()
         return True
 
-    @api.multi
     def button_reserve(self):
         env = self.env
         self.ensure_one()
