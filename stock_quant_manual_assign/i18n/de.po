@@ -31,6 +31,11 @@ msgid "Assign Manual Quants Lines"
 msgstr "Manuelle Quants"
 
 #. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
+msgid "Auto-fill Quantity Done"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -130,6 +135,11 @@ msgid "Package"
 msgstr "Packung"
 
 #. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
 msgstr "Menge"
@@ -164,6 +174,13 @@ msgstr "Reservierte Menge"
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__selected
 msgid "Select"
 msgstr "Auswahl"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
+msgid ""
+"Select this in case done quantity of the stock move line should be auto-"
+"filled when quants are manually assigned."
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
