@@ -31,6 +31,11 @@ msgid "Assign Manual Quants Lines"
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
+msgid "Auto-fill Quantity Done"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Cancel"
 msgstr "İptal et"
@@ -55,18 +60,21 @@ msgstr "Oluşturulma tarihi"
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__display_name
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__display_name
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__display_name
 msgid "Display Name"
 msgstr "Görünen ad"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__id
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__id
 msgid "ID"
 msgstr "Kimlik"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants____last_update
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines____last_update
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type____last_update
 msgid "Last Modified on"
 msgstr "En son güncelleme tarihi"
 
@@ -129,6 +137,11 @@ msgid "Package"
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
 msgstr ""
@@ -162,6 +175,13 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__selected
 msgid "Select"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
+msgid ""
+"Select this in case done quantity of the stock move line should be auto-"
+"filled when quants are manually assigned."
 msgstr ""
 
 #. module: stock_quant_manual_assign
