@@ -653,7 +653,7 @@ msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__sale_line_id
-msgid "Sale Line"
+msgid "Sale Order Line"
 msgstr ""
 
 #. module: stock_reserve
