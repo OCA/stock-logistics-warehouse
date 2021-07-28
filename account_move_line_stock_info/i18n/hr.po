@@ -22,6 +22,7 @@ msgstr ""
 
 #. module: account_move_line_stock_info
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move__account_move_line_ids
+#: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_reservation__account_move_line_ids
 #, fuzzy
 msgid "Account Move Line"
 msgstr "ID-ovi stavaka temeljnica"
