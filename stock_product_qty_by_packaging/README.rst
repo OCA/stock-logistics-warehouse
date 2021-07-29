@@ -31,8 +31,12 @@ It adds product qty computed by packaging to:
 * stock move
 * stock move line
 * stock quant
+* stock inventory line
 
-and displays it for move line on stock picking view.
+Displays it:
+
+* stock picking view for move line
+* on inventory line tree view for stock_inventory_line
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
