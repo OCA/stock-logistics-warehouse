@@ -4,8 +4,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from odoo.addons import decimal_precision as dp
-
 
 class StockPicking(models.Model):
     _inherit = "stock.move"
@@ -20,7 +18,7 @@ class StockPicking(models.Model):
         string="Package quantity",
         compute="_compute_product_packaging_qty",
         inverse="_inverse_product_packaging_qty",
-        digits=dp.get_precision("Product Unit of Measure"),
+        digits="Product Unit of Measure",
     )
 
     @api.depends(
