@@ -11,5 +11,5 @@
     "license": "LGPL-3",
     "installable": True,
     "depends": ["stock_packaging_calculator", "stock"],
-    "data": ["views/stock_picking.xml"],
+    "data": ["views/stock_picking.xml", "views/stock_inventory_line.xml"],
 }
