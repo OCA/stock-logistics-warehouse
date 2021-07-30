@@ -170,3 +170,11 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         self.assertEquals(len(purchase_line), 1)
         pol_date = fields.Date.from_string(purchase_line.date_planned)
         self.assertEquals(pol_date, manual_date)
+
+    def test_compute_procure_recommended_with_newid(self):
+        """'_compute_procure_recommended' method uses '_quantity_in_progress'
+        standard method which could trigger an issue in 'purchase_stock' when
+        dealing with NewID IDs.
+        """
+        self.create_orderpoint_procurement()
+        self.reorder.new(origin=self.reorder)._compute_procure_recommended()
