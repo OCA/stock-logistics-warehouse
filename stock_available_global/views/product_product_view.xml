@@ -11,9 +11,9 @@
             <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_product)d']"
                 position="after">
                 <button class="oe_stat_button"
-                       name="%(stock.product_open_quants)d"
+                       name="open_stock_avaliable_global"
                        icon="fa-building-o"
-                       type="action" attrs="{'invisible':[('type', '!=', 'product')]}">
+                       type="object" attrs="{'invisible':[('type', '!=', 'product')]}">
                     <field name="qty_available_global" widget="statinfo" string="On Hand(All)"/>
                 </button>
                 <button type="action"

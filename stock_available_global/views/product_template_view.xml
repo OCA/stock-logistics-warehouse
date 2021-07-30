@@ -16,8 +16,8 @@
                     class="oe_stat_button" icon="fa-codepen">
                     <field name="qty_available_global" widget="statinfo" string="On Hand(All)"/>
                 </button>
-                <button type="action"
-                    name="%(stock.action_stock_level_forecast_report_template)d"
+                <button type="object"
+                    name="open_stock_forecast_global"
                     attrs="{'invisible':[('type', '!=', 'product')]}"
                     class="oe_stat_button" icon="fa-codepen">
                     <div class="o_form_field o_stat_info">

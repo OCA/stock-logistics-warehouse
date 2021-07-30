@@ -7,3 +7,7 @@ from odoo import models
 class ProductProduct(models.Model):
     _inherit = ['product.product', 'product.stock.available.mixin']
     _name = 'product.product'
+
+    def open_stock_avaliable_global(self):
+        action = self.sudo().env.ref('stock.product_open_quants').read()[0]
+        return action

@@ -7,6 +7,7 @@ from odoo.addons import decimal_precision as dp
 
 class ProductStockAvailableMixin(models.AbstractModel):
     _name = 'product.stock.available.mixin'
+    _description = 'Product Stock Available Mixin'
 
     qty_available_global = fields.Float(
         digits=dp.get_precision('Product Unit of Measure'),
