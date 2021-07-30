@@ -26,6 +26,7 @@ addon | version | summary
 [stock_demand_estimate](stock_demand_estimate/) | 14.0.1.1.0 | Allows to create demand estimates.
 [stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 14.0.1.0.0 | Allows to create demand estimates.
 [stock_free_quantity](stock_free_quantity/) | 14.0.1.0.0 | Stock Free Quantity
+[stock_generate_putaway_from_inventory](stock_generate_putaway_from_inventory/) | 14.0.1.0.0 | Generate Putaway locations per Product deduced from Inventory
 [stock_helper](stock_helper/) | 14.0.1.0.0 | Add methods shared between various stock modules
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 14.0.1.0.0 | More filters for inventory adjustments
 [stock_location_children](stock_location_children/) | 14.0.1.0.0 | Add relation between stock location and all its children
