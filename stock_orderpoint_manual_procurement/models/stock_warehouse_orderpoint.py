@@ -40,8 +40,19 @@ class StockWarehouseOrderpoint(models.Model):
 
     @api.depends("product_min_qty", "product_id", "qty_multiple")
     def _compute_procure_recommended(self):
-        op_qtys = self._quantity_in_progress()
+        # '_quantity_in_progress' override in 'purchase_stock' method has not
+        # been designed to work with NewIds (resulting in KeyError exceptions).
+        # To circumvent this, we knowingly skip such records here.
+        op_qtys = self.filtered(lambda x: x.id)._quantity_in_progress()
         for op in self:
+            if not op.id:
+                op.update(
+                    {
+                        "procure_recommended_qty": False,
+                        "procure_recommended_date": False,
+                    }
+                )
+                continue
             qty = 0.0
             virtual_qty = op.with_context(
                 location=op.location_id.id
