@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_generate_putaway_from_inventory
+# 	* stock_generate_putaway_from_inventory
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,8 +14,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_generate_putaway_from_inventory
+#: model:ir.model.fields,field_description:stock_generate_putaway_from_inventory.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:stock_generate_putaway_from_inventory.field_stock_inventory_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_generate_putaway_from_inventory
 #: model:ir.actions.server,name:stock_generate_putaway_from_inventory.action_generate_putaway_strategy
 msgid "Generate putaway strategies"
+msgstr ""
+
+#. module: stock_generate_putaway_from_inventory
+#: model:ir.model.fields,field_description:stock_generate_putaway_from_inventory.field_stock_inventory__id
+#: model:ir.model.fields,field_description:stock_generate_putaway_from_inventory.field_stock_inventory_line__id
+msgid "ID"
 msgstr ""
 
 #. module: stock_generate_putaway_from_inventory
@@ -24,14 +36,18 @@ msgid "Inventory"
 msgstr ""
 
 #. module: stock_generate_putaway_from_inventory
-#: code:addons/stock_generate_putaway_from_inventory/models/stock_inventory.py:53
-#, python-format
-msgid "Inventory location doesn't have a putaway strategy. Please set a putaway strategy on the inventory's location."
+#: model:ir.model,name:stock_generate_putaway_from_inventory.model_stock_inventory_line
+msgid "Inventory Line"
 msgstr ""
 
 #. module: stock_generate_putaway_from_inventory
-#: code:addons/stock_generate_putaway_from_inventory/models/stock_inventory.py:45
+#: model:ir.model.fields,field_description:stock_generate_putaway_from_inventory.field_stock_inventory____last_update
+#: model:ir.model.fields,field_description:stock_generate_putaway_from_inventory.field_stock_inventory_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_generate_putaway_from_inventory
+#: code:addons/stock_generate_putaway_from_inventory/models/stock_inventory.py:0
 #, python-format
 msgid "Please validate the inventory before generating the putaway strategy."
 msgstr ""
-
