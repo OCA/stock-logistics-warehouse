@@ -3,7 +3,8 @@
 
     <record id="view_template_history_form" model="ir.ui.view">
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+        <field name="priority">20</field>
         <field name="arch" type="xml">
             <page name="sales" position="after">
                 <page string="History" name="history" groups="base.group_no_one">
@@ -13,13 +14,13 @@
                     <field name="product_history_ids"/>
                 </page>
             </page>
-            <div name="button_box" position="inside">
+            <button name="action_view_orderpoints" position="before">
                 <button name="%(product_history.view_product_history_action)d" type="action"
                         icon="fa-line-chart" class="oe_stat_button"
                         groups="stock.group_stock_manager"
                         string="History">
                 </button>
-            </div>
+            </button>
         </field>
     </record>
 

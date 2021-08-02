@@ -31,8 +31,9 @@ class ProductProduct(models.Model):
     # these computed fields are defined in product_average_consumption;
     # with product_history installed, we take the assumption that all products
     # will use it (consumption_calculation_method = 'history')
-    # so we can store these fields, as they will will be recomputed after
-    # the updates of product_history_ids (see data/cron.xml)
+    # so we can store these fields, and we explicitly recompute them after
+    # the creation of product.history records, by _compute_history()
+    # (see data/cron.xml)
     average_consumption = fields.Float(store=True)
     displayed_average_consumption = fields.Float(store=True)
     total_consumption = fields.Float(store=True)
@@ -189,6 +190,12 @@ class ProductProduct(models.Model):
     def run_product_history_month(self):
         # This method is called by the cron task
         self._create_job_compute_history('months')
+
+    @api.model
+    def run_product_average_consumption(self):
+        product_chunks = self._get_products_multiple_parts()
+        for chunk in product_chunks:
+            self.with_delay().job_compute_average_consumption(chunk)
 
     @api.model
     def run_recompute_6weeks_product_history(self):
@@ -385,6 +392,7 @@ class ProductProduct(models.Model):
                     product.last_history_week = history_id.id
                 else:
                     product.last_history_day = history_id.id
+                product._compute_average_consumption()
 
     @api.multi
     def recompute_last_6weeks_history(self):
@@ -501,6 +509,12 @@ class ProductProduct(models.Model):
         """ Job for Computing Product History """
         products = self.browse(product_ids)
         products._compute_history(history_range)
+
+    @job
+    def job_compute_average_consumption(self, product_ids):
+        """ Job for Computing Average Consumption """
+        products = self.browse(product_ids)
+        products._compute_average_consumption()
 
     @job
     def job_recompute_last_6weeks_history(self, history_range, product_ids):

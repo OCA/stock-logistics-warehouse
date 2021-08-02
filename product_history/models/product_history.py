@@ -59,6 +59,7 @@ class ProductHistory(models.Model):
     def mark_line(self, ignored=True):
         for line in self:
             line.ignored = ignored
+            line.product_id._compute_average_consumption()
             line.product_id.product_tmpl_id._compute_average_consumption()
 
     @api.multi
