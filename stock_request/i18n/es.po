@@ -1,0 +1,1213 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_request
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+# enjolras <yo@miguelrevilla.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-02 03:44+0000\n"
+"PO-Revision-Date: 2021-05-26 18:47+0000\n"
+"Last-Translator: JrAdhoc <jr@adhoc.com.ar>\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_move_line.py:0
+#, python-format
+msgid "<li><b>%s</b>: Transferred quantity %s %s</li>"
+msgstr "<li><b>%s</b>: Cantidad transferida %s %s</li>"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_needaction
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_needaction
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_needaction
+msgid "Action Needed"
+msgstr "Acción Necesaria"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Activates Stock Request Orders"
+msgstr "Activa las Solicitudes de existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_exception_decoration
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_exception_decoration
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_state
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_state
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_state
+msgid "Activity State"
+msgstr "Estado de Actividad"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_type_icon
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_type_icon
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Add State to Stock Request and Stock Request Orders if activated."
+msgstr ""
+"Agregue estado a la solicitud de stock y las órdenes de solicitud de stock "
+"si está activado."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__allocated_product_qty
+msgid "Allocated Quantity"
+msgstr "Cantidad reservada"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Allow All Locations Types"
+msgstr "Permitir Todos los Tipos de Ubicaciones"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_company__stock_request_allow_virtual_loc
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__stock_request_allow_virtual_loc
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__allow_virtual_location
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__allow_virtual_location
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__allow_virtual_location
+msgid "Allow Virtual locations on Stock Requests"
+msgstr "Permitir ubicaciones Virtuales en Solicitudes de Stock"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Analytic"
+msgstr "Analítica"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Analytic accounting in Stock Requests"
+msgstr "Contabilidad analítica en solicitudes de stock"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_attachment_count
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_attachment_count
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_attachment_count
+msgid "Attachment Count"
+msgstr "Cuenta de Archivos Adjuntos"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid ""
+"By default only internal and transit locations are allowed in Stock Request "
+"and Orders."
+msgstr ""
+"De manera predeterminada, solo se permiten ubicaciones internas y de "
+"tránsito en Solicitud de inventario y pedidos."
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: stock_request
+#: model_terms:ir.actions.act_window,help:stock_request.action_stock_request_form
+msgid "Click to add a Stock Request."
+msgstr "Pulse para añadir una solicitud de existencias."
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__company_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__company_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__company_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Company must be equal to the order"
+msgstr "La compañía debe ser la misma que la de la petición"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_res_config_settings
+msgid "Config Settings"
+msgstr "Configuración"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__create_uid
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__create_uid
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__create_date
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__create_date
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#, fuzzy
+msgid "Current requests"
+msgstr "Solicitudes de existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__expected_date
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__expected_date
+msgid "Date when you expect to receive the goods."
+msgstr "Fecha prevista de recepción de la mercancía."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__picking_count
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__picking_count
+msgid "Delivery Orders"
+msgstr "Pedidos de entrega"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_procurement_group__display_name
+#: model:ir.model.fields,field_description:stock_request.field_res_company__display_name
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_location_route__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_move_line__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_rule__display_name
+#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Done"
+msgstr "Hecho"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Analytic Accounting in Stock Requests"
+msgstr "Habilitar contabilidad analítica en solicitudes de stock"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Orders"
+msgstr "Permite usar Pedidos de entrega"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Stock Requests Kanban cards"
+msgstr "Permite usar tarjetas Kanban para las solicitudes de existencias"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Stock Requests for Manufacturing"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Stock Requests for Purchases"
+msgstr "Permite usar las solicitudes de existencias con Compras"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Enable Submitted State"
+msgstr "Habilitar Estado Enviado"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__expected_date
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__expected_date
+msgid "Expected Date"
+msgstr "Fecha prevista"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Expected date must be equal to the order"
+msgstr "La fecha prevista debe ser la misma que la del pedido"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Finished"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_follower_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_follower_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_channel_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_channel_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_partner_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_partner_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Socios)"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__activity_type_icon
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_type_icon
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__group_stock_request_order
+msgid "Group Stock Request Order"
+msgstr "Agrupa las solicitudes en pedidos"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_procurement_group__id
+#: model:ir.model.fields,field_description:stock_request.field_res_company__id
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_location_route__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_move_line__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_rule__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_exception_icon
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_exception_icon
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__activity_exception_icon
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_exception_icon
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_needaction
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_unread
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_needaction
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_unread
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_needaction
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, los nuevos mensajes requieren su atención."
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_has_error
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_has_sms_error
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_error
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_sms_error
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "In Progress"
+msgstr "En progreso"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_location
+msgid "Inventory Locations"
+msgstr "Localización de Inventarios"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_location_route
+msgid "Inventory Routes"
+msgstr "Rutas de inventarios"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_is_follower
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_is_follower
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_is_follower
+msgid "Is Follower"
+msgstr "Es Seguidor"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+msgid "Items"
+msgstr "Elementos"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Kanban"
+msgstr "Kanban"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_procurement_group____last_update
+#: model:ir.model.fields,field_description:stock_request.field_res_company____last_update
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_location_route____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_move_line____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_request____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_rule____last_update
+#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__write_uid
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__write_uid
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__write_date
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__write_date
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__location_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__location_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__location_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Location must be equal to the order"
+msgstr "La ubicación debe ser la misma que la del pedido"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_main_attachment_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_main_attachment_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjunto Principal"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Manufacturing"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.ui.menu,name:stock_request.menu_stock_request_master_data
+msgid "Master Data"
+msgstr "Datos Maestros"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_error
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_error
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_error
+msgid "Message Delivery error"
+msgstr "Mensaje de Entrega de error"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__procurement_group_id
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__procurement_group_id
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__procurement_group_id
+msgid ""
+"Moves created through this stock request will be put in this procurement "
+"group. If none is given, the moves generated by procurement rules will be "
+"grouped into one big picking."
+msgstr ""
+"Los movimientos generados por esta solicitud se asignaran a este grupo de "
+"reabastecimiento. Si no se define, los movimientos generados se agruparan en "
+"un gran movimiento."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__my_activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__my_activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__name
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__name
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: stock_request
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
+msgid "Name must be unique"
+msgstr "El nombre debe ser único"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Fecha Límite de Actividad Siguiente"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_summary
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_summary
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de actividad siguiente"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_type_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_type_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_type_id
+msgid "Next Activity Type"
+msgstr "Siguiente tipo de actividad"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_needaction_counter
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_needaction_counter
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Numero de Acciones"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_error_counter
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_error_counter
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_error_counter
+#, fuzzy
+msgid "Number of errors"
+msgstr "Número de error"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_needaction_counter
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_needaction_counter
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción."
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_has_error_counter
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_error_counter
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__message_unread_counter
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_unread_counter
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leídos"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
+msgid "Only orders on draft state can be unlinked"
+msgstr "Solo los pedidos en estado borrado pueden ser eliminadas"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Only requests on draft state can be unlinked"
+msgstr "Sólo se pueden eliminar peticiones en estado borrador"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__open_product_qty
+msgid "Open Quantity"
+msgstr "Cantidad pendiente"
+
+#. module: stock_request
+#: model:ir.ui.menu,name:stock_request.menu_stock_request_operations
+msgid "Operations"
+msgstr "Operaciones"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__order_id
+msgid "Order"
+msgstr "Pedido"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Orders &amp; Configuration"
+msgstr "Pedidos y Configuraciones"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__picking_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__picking_ids
+msgid "Pickings"
+msgstr "Albaranes"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_procurement_group
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__procurement_group_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__procurement_group_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__procurement_group_id
+msgid "Procurement Group"
+msgstr "Grupo de abastecimiento"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Procurement group must be equal to the order"
+msgstr "El grupo de abastecimiento debe coincidir"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__product_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__product_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__product_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Product"
+msgstr "Producto"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de producto (línea de movimiento de stock)"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__product_uom_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__product_uom_id
+msgid "Product Unit of Measure"
+msgstr "Unidad de medida del producto"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Purchases"
+msgstr "Compras"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_cancelled
+msgid "Qty Cancelled"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_done
+msgid "Qty Done"
+msgstr "Cantidad finalizada"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_in_progress
+msgid "Qty In Progress"
+msgstr "Cantidad en progreso"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__product_uom_qty
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__product_uom_qty
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__qty_cancelled
+msgid "Quantity cancelled"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__qty_done
+msgid "Quantity completed"
+msgstr "Cantidad completada"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__qty_in_progress
+msgid "Quantity in progress."
+msgstr "Cantidad en progreso."
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__product_qty
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__product_qty
+msgid "Quantity in the default UoM of the product"
+msgstr "Cantidad en la UdM por defecto del producto"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_allocation__requested_product_uom_qty
+msgid ""
+"Quantity of the stock request allocated to the stock move, in the UoM of the "
+"Stock Request"
+msgstr ""
+"Cantidad asignada de la solicitud de existencias en el movimiento, en la UdM "
+"de la Solicitud de Existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_allocation__allocated_product_qty
+#: model:ir.model.fields,help:stock_request.field_stock_request_allocation__requested_product_qty
+msgid ""
+"Quantity of the stock request allocated to the stock move, in the default "
+"UoM of the product"
+msgstr ""
+"Cantidad asignada de la solicitud de existencias en el movimiento, en la UdM "
+"por defecto del producto"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__product_uom_qty
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__product_uom_qty
+msgid "Quantity, specified in the unit of measure indicated in the request."
+msgstr "Cantidad, especificada en la unidad de medida de la solicitud."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__product_qty
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__product_qty
+msgid "Real Quantity"
+msgstr "Cantidad real"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_move_line.py:0
+#, python-format
+msgid "Receipt confirmation %s for your Request %s"
+msgstr "Confirmación de la recepción %s de la solicitud %s"
+
+#. module: stock_request
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request__picking_policy__one
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request_order__picking_policy__one
+msgid "Receive all products at once"
+msgstr "Recibir todos los productos a la vez"
+
+#. module: stock_request
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request__picking_policy__direct
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request_order__picking_policy__direct
+msgid "Receive each product when available"
+msgstr "Recibir cada producto cuando este disponible"
+
+#. module: stock_request
+#: model:ir.actions.server,name:stock_request.action_template_generate_stock_request_orders
+#: model:ir.actions.server,name:stock_request.action_variant_generate_stock_request_orders
+msgid "Request Stock"
+msgstr "Solicitud de Existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__requested_product_qty
+msgid "Requested Quantity"
+msgstr "Cantidad solicitada"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__requested_product_uom_qty
+msgid "Requested Quantity (UoM)"
+msgstr "Cantidad Solicitada (UdM)"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__requested_by
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__requested_by
+msgid "Requested by"
+msgstr "Solicitado por"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Requested by must be equal to the order"
+msgstr "El solicitante debe coincidir"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_user_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_user_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario Responsable"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__route_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Route"
+msgstr "Ruta"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__route_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_ids
+msgid "Routes"
+msgstr "Rutas"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_sms_error
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_sms_error
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_sms_error
+#, fuzzy
+msgid "SMS Delivery error"
+msgstr "Mensaje de Entrega de error"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Set to Draft"
+msgstr "Marcar como Borrador"
+
+#. module: stock_request
+#: model:ir.actions.act_window,name:stock_request.action_stock_request_config
+#: model:ir.ui.menu,name:stock_request.menu_stock_request_config
+msgid "Settings"
+msgstr "Ajustes"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__picking_policy
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__picking_policy
+msgid "Shipping Policy"
+msgstr "Política de Entrega"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__state
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__state
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Status"
+msgstr "Estado"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__activity_state
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_state
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Atrasado: la fecha de vencimiento ya pasó\n"
+"Hoy: la fecha de la actividad es hoy\n"
+"Planificado: Actividades futuras."
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_move
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__stock_move_id
+msgid "Stock Move"
+msgstr "Movimiento de stock"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__move_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__move_ids
+msgid "Stock Moves"
+msgstr "Movimientos de stock"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__stock_request_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_ids
+#: model:ir.module.category,name:stock_request.module_category_stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Stock Request"
+msgstr "Solicitud de existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking__stock_request_count
+msgid "Stock Request #"
+msgstr "Solicitud de existencias #"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_request_allocation
+#: model:ir.model.fields,field_description:stock_request.field_stock_move__allocation_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__allocation_ids
+msgid "Stock Request Allocation"
+msgstr "Asignación de solicitud de existencias"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.view_move_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_allocation_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_allocation_tree
+msgid "Stock Request Allocations"
+msgstr "Asignaciones de solicitud de existencias"
+
+#. module: stock_request
+#: model:res.groups,name:stock_request.group_stock_request_manager
+msgid "Stock Request Manager"
+msgstr "Gestor de solicitudes de existencias"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_request_order
+#: model:res.groups,name:stock_request.group_stock_request_order
+msgid "Stock Request Order"
+msgstr "Pedido de existencias"
+
+#. module: stock_request
+#: model:ir.actions.act_window,name:stock_request.stock_request_order_action
+#: model:ir.ui.menu,name:stock_request.stock_request_order_menu
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+msgid "Stock Request Orders"
+msgstr "Pedidos de existencias"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_request_abstract
+msgid "Stock Request Template"
+msgstr "Plantilla de solicitud de existencias"
+
+#. module: stock_request
+#: model:res.groups,name:stock_request.group_stock_request_user
+msgid "Stock Request User"
+msgstr "Usuario de Solicitudes de Existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_mrp
+msgid "Stock Request for Manufacturing"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_name_uniq
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_order_name_uniq
+msgid "Stock Request name must be unique"
+msgstr "El nombre de la solicitud debe ser único"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_abstract.py:0
+#, python-format
+msgid "Stock Request product quantity has to be strictly positive."
+msgstr ""
+"La cantidad de producto de la solicitud de stock debe ser estrictamente "
+"positiva."
+
+#. module: stock_request
+#: model:ir.actions.act_window,name:stock_request.action_stock_request_form
+#: model:ir.model.fields,field_description:stock_request.field_stock_move__stock_request_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking__stock_request_ids
+#: model:ir.ui.menu,name:stock_request.menu_stock_request
+#: model:ir.ui.menu,name:stock_request.menu_stock_request_root
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#: model_terms:ir.ui.view,arch_db:stock_request.view_picking_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_tree
+msgid "Stock Requests"
+msgstr "Solicitudes de existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_analytic
+msgid "Stock Requests Analytic integration"
+msgstr "Solicitudes de stock Integración analítica"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_kanban
+msgid "Stock Requests Kanban integration"
+msgstr "Integración de solicitudes de existencias con tarjetas Kanbans"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#, fuzzy
+msgid "Stock Requests Order Search"
+msgstr "Buscar solicitudes de existencias"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Stock Requests Search"
+msgstr "Buscar solicitudes de existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_purchase
+msgid "Stock Requests for Purchases"
+msgstr "Solicitudes de existencias para compras"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_rule
+msgid "Stock Rule"
+msgstr "Regla de stock"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+msgid "Stock request"
+msgstr "Solicitud de existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_count
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_tree
+msgid "Stock requests"
+msgstr "Solicitudes de existencias"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_submit
+msgid "Submitted state in Stock Requests"
+msgstr "Estado enviado en solicitudes de stock"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_move.py:0
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
+msgid "The company of the stock request must match with that of the location."
+msgstr "La compañía de la solicitud debe coincidir con la de la localización."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
+msgid "The company of the stock request must match with that of the warehouse."
+msgstr "La compañía de la solicitud debe coincidir con la del almacén."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"The following requested items from Stock Request %s have now been received "
+"in %s using Picking %s:"
+msgstr ""
+"Los siguientes elementos de la solicitud %s se ha recibido en %s con el "
+"albarán %s:"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "The picking policy must be equal to the order"
+msgstr "La política de albaranes debe coincidir"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
+msgid "This action only works in the context of products"
+msgstr "Esta acción solo funciona en el contexto de productos"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
+msgid "Transfers"
+msgstr "Transferencias"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__activity_exception_decoration
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_exception_decoration
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
+msgid ""
+"Unfortunately it seems you do not have the necessary rights for creating "
+"stock requests. Please contact your administrator."
+msgstr ""
+"No tiene los permisos necesarios para crear una solicitud de existencias. "
+"Por favor, contacte con su administrador."
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_unread
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_unread
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes no leídos"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_unread_counter
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_unread_counter
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de Mensajes no Leídos"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__product_uom_id
+msgid "UoM"
+msgstr "UdM"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Use Kanban cards for consumable products"
+msgstr "Usar tarjetas Kanban para los consumibles"
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Use Manufacturing Orders with Stock Requests"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
+msgid "Use Purchases with Stock Requests"
+msgstr "Usar Compras con las Solicitudes de Existencias"
+
+#. module: stock_request
+#: model:ir.model,name:stock_request.model_stock_warehouse
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__warehouse_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__warehouse_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__warehouse_id
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Warehouse must be equal to the order"
+msgstr "El almacén debe coincidir"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__website_message_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__website_message_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__website_message_ids
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__website_message_ids
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicación del sitio web"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_location.py:0
+#, python-format
+msgid ""
+"You cannot change the company of the location, as it is already assigned to "
+"stock request orders that belong to another company."
+msgstr ""
+"No puede cambiar la compañía de la localización, ya que tiene asignados "
+"pedidos de existencias que pertenecen a otras compañías."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_location.py:0
+#, python-format
+msgid ""
+"You cannot change the company of the location, as it is already assigned to "
+"stock requests that belong to another company."
+msgstr ""
+"No puede cambiar la compañía de la localización, ya que tiene asignadas "
+"solicitudes de existencias que pertenecen a otras compañías."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_location_route.py:0
+#, python-format
+msgid ""
+"You cannot change the company of the route, as it is already assigned to "
+"stock requests that belong to another company."
+msgstr ""
+"No puede cambiar la compañía de la ruta, ya que está asignada a solicitudes "
+"de existencias que pertenecen a otras compañías."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_warehouse.py:0
+#, python-format
+msgid ""
+"You cannot change the company of the warehouse, as it is already assigned to "
+"stock request orders that belong to another company."
+msgstr ""
+"No puede cambiar la compañía del almacén, ya que está asignada a pedidos de "
+"existencias que pertenecen a otras compañías."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_warehouse.py:0
+#, python-format
+msgid ""
+"You cannot change the company of the warehouse, as it is already assigned to "
+"stock requests that belong to another company."
+msgstr ""
+"No puede cambiar la compañía del almacén, ya que está asignada a solicitudes "
+"de existencias que pertenecen a otras compañías."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_abstract.py:0
+#, python-format
+msgid "You have entered a location that is assigned to another company."
+msgstr "Ha seleccionado una localización que está asignada a otra compañía."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_abstract.py:0
+#, python-format
+msgid "You have entered a product that is assigned to another company."
+msgstr "Ha seleccionado un producto que está asignado a otra compañía."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_abstract.py:0
+#, python-format
+msgid "You have entered a route that is assigned to another company."
+msgstr "Ha seleccionado una ruta que está asignada a otra compañía."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_abstract.py:0
+#, python-format
+msgid "You have entered a warehouse that is assigned to another company."
+msgstr "Ha seleccionado un almacén que está asignado a otra compañía."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_abstract.py:0
+#, python-format
+msgid ""
+"You have to select a product unit of measure in the same category than the "
+"default unit of measure of the product"
+msgstr ""
+"Debe seleccionada una unidad de medida de producto de la misma categoría que "
+"la unidad de medida por defecto del producto"
+
+#~ msgid "Archived"
+#~ msgstr "Archivado"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
+
+#~ msgid "Overdue"
+#~ msgstr "Atrasado"
+
+#~ msgid "Planned"
+#~ msgstr "Planificado"
+
+#~ msgid "Today"
+#~ msgstr "Hoy"
+
+#~ msgid "Packing Operation"
+#~ msgstr "Operación de empaquetado"
+
+#~ msgid "Procurement Rule"
+#~ msgstr "Regla de abastecimiento"
+
+#~ msgid "Orders"
+#~ msgstr "Pedidos"

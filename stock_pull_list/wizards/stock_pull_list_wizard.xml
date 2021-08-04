@@ -1,0 +1,131 @@
+<!-- Copyright 2020 ForgeFlow S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="view_run_stock_pull_list_wizard_wizard" model="ir.ui.view">
+        <field name="name">stock.pull.list.wizard.form</field>
+        <field name="model">stock.pull.list.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <p
+                >The pull list checks the stock situation at the given location and calculates
+                the shortfall quantities (quantity needed to cover all needs) for products.</p>
+                <group>
+                    <field name="warehouse_id" options="{'no_create': True}" />
+                    <field name="location_id" options="{'no_create': True}" />
+                </group>
+                <p
+                >All existing Stock moves moving outside of the location specified will be considered demand.
+                You can filter these moves in the section below.</p>
+                <group name="options" string="Filtering">
+                    <group>
+                        <field name="date_to" />
+                        <field name="location_dest_id" options="{'no_create': True}" />
+                        <field
+                            name="procurement_group_ids"
+                            widget="many2many_tags"
+                            options="{'no_create': True}"
+                        />
+                    </group>
+                    <group>
+                        <field name="exclude_reserved" />
+                        <field name="consolidate_by_product" />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="action_prepare"
+                        string="Prepare"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_run_stock_pull_list_wizard_wizard_step_2" model="ir.ui.view">
+        <field name="name">stock.pull.list.wizard.form.2</field>
+        <field name="model">stock.pull.list.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group string="Needs">
+                    <field name="line_ids" readonly="1" nolabel="1">
+                        <tree>
+                            <field name="wizard_id" invisible="1" />
+                            <field name="product_id" />
+                            <field name="location_id" />
+                            <field name="date" />
+                            <field name="available_qty" />
+                            <field name="incoming_qty" />
+                            <field name="raw_demand_qty" />
+                            <field name="needed_qty" />
+                            <field name="stock_rule_id" />
+                            <field name="selected" widget="toggle_button" />
+                        </tree>
+                    </field>
+                </group>
+                <group string="Filter Selected">
+                    <group>
+                        <field name="consolidate_by_product" invisible="1" />
+                        <field name="select_all" />
+                        <field
+                            name="rule_action"
+                            attrs="{'invisible':[('select_all', '!=', False)]}"
+                        />
+                        <field
+                            name="available_in_source_location"
+                            attrs="{'invisible':['|', ('consolidate_by_product', '!=', True), ('select_all', '!=', False)]}"
+                        />
+                        <field
+                            name="exclude_reserved"
+                            attrs="{'invisible':['|', ('available_in_source_location', '!=', True), ('select_all', '!=', False)]}"
+                        />
+                    </group>
+                    <group>
+                        <button
+                            name="action_update_selected"
+                            string="Apply Filter"
+                            type="object"
+                            icon="fa-cogs"
+                        />
+                    </group>
+                </group>
+                <group name="grouping" string="Split/Grouping Options">
+                    <group>
+                        <field name="max_lines" />
+                    </group>
+                    <group>
+                        <field name="group_by_rule" />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="action_procure"
+                        string="Procure"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_stock_pull_list_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Pull List</field>
+        <field name="res_model">stock.pull.list.wizard</field>
+        <field name="binding_model_id" ref="model_stock_pull_list_wizard" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        name="Generate Pull List"
+        id="menu_stock_pull_list_wizard"
+        action="action_stock_pull_list_wizard"
+        parent="stock.menu_stock_warehouse_mgmt"
+        groups="stock.group_stock_manager"
+        sequence="90"
+    />
+</odoo>

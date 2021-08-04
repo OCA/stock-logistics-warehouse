@@ -1,0 +1,45 @@
+<!-- Copyright 2019 Open Source Integrators
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Scrap Reason Code Type -->
+    <record id="view_scrap_reason_code_form" model="ir.ui.view">
+        <field name="name">scrap.reason.code.form</field>
+        <field name="model">scrap.reason.code</field>
+        <field name="arch" type="xml">
+            <form string="Reason Code">
+                <group>
+                    <field name="name" />
+                </group>
+                <group>
+                    <field name="description" />
+                </group>
+                <group>
+                    <field name="location_id" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="view_scrap_reason_code_list" model="ir.ui.view">
+        <field name="name">scrap.reason.code.list</field>
+        <field name="model">scrap.reason.code</field>
+        <field name="arch" type="xml">
+            <tree string="Reason Codes">
+                <field name="name" />
+                <field name="description" />
+                <field name="location_id" />
+            </tree>
+        </field>
+    </record>
+    <record id="open_view_scrap_reason_code_form" model="ir.actions.act_window">
+        <field name="name">Scrap Reason Codes</field>
+        <field name="res_model">scrap.reason.code</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        action="open_view_scrap_reason_code_form"
+        id="menu_view_scrap_reason_code_form"
+        parent="stock.menu_stock_config_settings"
+        sequence="55"
+        groups="stock.group_stock_manager"
+    />
+</odoo>

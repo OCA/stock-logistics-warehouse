@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_move_form_inherit" model="ir.ui.view">
+        <field name="name">stock.move.form.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form" />
+        <field name="arch" type="xml">
+            <group name="linked_group" position="inside">
+                <field
+                    name="common_dest_move_ids"
+                    string="Common destination moves"
+                    readonly="1"
+                >
+                    <tree>
+                        <field name="picking_id" />
+                        <field name="product_id" />
+                        <field name="location_id" />
+                        <field name="location_dest_id" />
+                        <field name="product_uom_qty" />
+                        <field name="product_uom" />
+                        <field name="state" />
+                    </tree>
+                </field>
+            </group>
+        </field>
+    </record>
+</odoo>

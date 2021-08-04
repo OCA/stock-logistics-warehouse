@@ -1,0 +1,223 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_quant_manual_assign
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-05 00:45+0000\n"
+"PO-Revision-Date: 2017-07-05 00:45+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants
+#, fuzzy
+msgid "Assign Manual Quants"
+msgstr "Ročni kvanti"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants_lines
+#, fuzzy
+msgid "Assign Manual Quants Lines"
+msgstr "Ročni kvanti"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
+msgid "Auto-fill Quantity Done"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: stock_quant_manual_assign
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
+msgid "Confirm"
+msgstr "Potrdi"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__create_uid
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__create_uid
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__create_date
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__create_date
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__display_name
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__display_name
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__display_name
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants____last_update
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines____last_update
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type____last_update
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__write_uid
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__write_uid
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__write_date
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__write_date
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__location_id
+msgid "Location"
+msgstr "Lokacija"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__lot_id
+msgid "Lot"
+msgstr "Lot"
+
+#. module: stock_quant_manual_assign
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.stock_picking_manual_quants_form_view
+msgid "Manual Quants"
+msgstr "Ročni kvanti"
+
+#. module: stock_quant_manual_assign
+#: model:ir.actions.act_window,name:stock_quant_manual_assign.assign_manual_quants_action
+#, fuzzy
+msgid "Manual assignment"
+msgstr "Ročni kvanti"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_id
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__assign_wizard
+msgid "Move"
+msgstr "Premik"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__on_hand
+msgid "On Hand"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__reserved
+msgid "Others Reserved"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__owner_id
+msgid "Owner"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id
+msgid "Package"
+msgstr "Pakiranje"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
+msgid "QTY"
+msgstr "KOL"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__quant_id
+msgid "Quant"
+msgstr "Kvant"
+
+#. module: stock_quant_manual_assign
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
+#, python-format
+msgid "Quantity is higher than the needed one"
+msgstr "Količina je višja od potrebne"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__quants_lines
+msgid "Quants"
+msgstr "Kvant"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_qty
+msgid "Remaining qty"
+msgstr "Preostala kol"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__lines_qty
+msgid "Reserved qty"
+msgstr "Rezervirana kol"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__selected
+msgid "Select"
+msgstr "Izbira"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
+msgid ""
+"Select this in case done quantity of the stock move line should be auto-"
+"filled when quants are manually assigned."
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
+#, python-format
+msgid ""
+"Selected line quantity is higher than the available one. Maybe an operation "
+"with this product has been done meanwhile or you have manually increased the "
+"suggested value."
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id
+msgid "The package containing this quant"
+msgstr "Pakiranje, ki vsebuje ta kvant"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__owner_id
+msgid "This is the owner of the quant"
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
+msgid "qty"
+msgstr "kol"
+
+#~ msgid "Manual quants"
+#~ msgstr "Ročni kvanti"
+
+#~ msgid "Name"
+#~ msgstr "Naziv"
+
+#~ msgid "Stock Move"
+#~ msgstr "Premik zaloge"
+
+#~ msgid "Type of Operation"
+#~ msgstr "Tip operacije"
