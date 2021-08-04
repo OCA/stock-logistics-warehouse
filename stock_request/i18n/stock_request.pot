@@ -475,6 +475,13 @@ msgid ""
 msgstr ""
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__my_activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__my_activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__name

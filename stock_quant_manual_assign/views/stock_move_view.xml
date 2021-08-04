@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="stock_picking_manual_quants_form_view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <button name="action_show_details" position="before">
+                <button
+                    name="%(assign_manual_quants_action)d"
+                    type="action"
+                    icon="fa-tags"
+                    title="Manual Quants"
+                    options='{"warn": true}'
+                    attrs="{'invisible':['|',('picking_code','=','incoming'),('state','not in',('confirmed','assigned','partially_available'))]}"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>

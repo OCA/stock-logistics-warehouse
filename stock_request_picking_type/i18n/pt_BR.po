@@ -1,0 +1,145 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_request_picking_type
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2020-03-24 18:22+0000\n"
+"Last-Translator: Marcel Savegnago <marcel.savegnago@gmail.com>\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
+
+#. module: stock_request_picking_type
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid ""
+"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title="
+"\"Manage\"/>"
+msgstr ""
+"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title="
+"\"Manage\"/>"
+
+#. module: stock_request_picking_type
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "<span>New</span>"
+msgstr "<span>Novo</span>"
+
+#. module: stock_request_picking_type
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "<span>View</span>"
+msgstr "<span>Visualizar</span>"
+
+#. module: stock_request_picking_type
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "All"
+msgstr "Tudo"
+
+#. module: stock_request_picking_type
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "Done"
+msgstr "Concluído"
+
+#. module: stock_request_picking_type
+#: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_open
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "In Progress"
+msgstr "Em Andamento"
+
+#. module: stock_request_picking_type
+#: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_late
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "Late"
+msgstr "Atrasado"
+
+#. module: stock_request_picking_type
+#: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_request_order__picking_type_id
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_order_search
+msgid "Operation Type"
+msgstr "Tipo da Operação"
+
+#. module: stock_request_picking_type
+#: model:ir.model,name:stock_request_picking_type.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Tipo de Separação"
+
+#. module: stock_request_picking_type
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "Settings"
+msgstr "Configurações"
+
+#. module: stock_request_picking_type
+#: model:ir.model,name:stock_request_picking_type.model_stock_request_order
+#: model:ir.model.fields.selection,name:stock_request_picking_type.selection__stock_picking_type__code__stock_request_order
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "Stock Request Order"
+msgstr "Ordens de Requisição de Estoque"
+
+#. module: stock_request_picking_type
+#: model:ir.actions.act_window,name:stock_request_picking_type.action_picking_dashboard
+#: model:ir.actions.act_window,name:stock_request_picking_type.action_stock_request_order_form
+#: model:ir.ui.menu,name:stock_request_picking_type.menu_stock_request_order
+msgid "Stock Request Orders"
+msgstr "Ordens de Requisição de Estoque"
+
+#. module: stock_request_picking_type
+#: model:stock.picking.type,name:stock_request_picking_type.stock_request_order
+msgid "Stock Requests"
+msgstr "Requisições de Estoque"
+
+#. module: stock_request_picking_type
+#: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__count_sr_todo
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "To Do"
+msgstr "A Fazer"
+
+#. module: stock_request_picking_type
+#: model_terms:ir.ui.view,arch_db:stock_request_picking_type.stock_request_type_kanban
+msgid "To Process"
+msgstr "Para Processar"
+
+#. module: stock_request_picking_type
+#: model:ir.model.fields,field_description:stock_request_picking_type.field_stock_picking_type__code
+msgid "Type of Operation"
+msgstr "Tipo de Operação"
+
+#~ msgid "Customers"
+#~ msgstr "Clientes"
+
+#~ msgid "Expected Date"
+#~ msgstr "Data Prevista"
+
+#~ msgid "Expected Date by Month"
+#~ msgstr "Data Prevista por Mês"
+
+#~ msgid "Group By..."
+#~ msgstr "Agrupar por..."
+
+#~ msgid "Internal"
+#~ msgstr "Interno"
+
+#~ msgid "Late Stock Requests"
+#~ msgstr "Requisições de Estoque em Atrasado"
+
+#~ msgid "Manufacturing Operation"
+#~ msgstr "Operação de Fabricação"
+
+#~ msgid "Search Stock Request Orders"
+#~ msgstr "Pesquisar Ordens de Requisição de Estoque"
+
+#~ msgid "State"
+#~ msgstr "Estado"
+
+#~ msgid "Stock Requests To Do."
+#~ msgstr "Requisições de Estoque A Fazer."
+
+#~ msgid "Stock Requests in Progress."
+#~ msgstr "Requisições de Estoque em Andamento."
+
+#~ msgid "Vendors"
+#~ msgstr "Fornecedores"

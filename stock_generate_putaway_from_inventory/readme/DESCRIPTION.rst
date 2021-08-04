@@ -1,0 +1,1 @@
+Synchronize a Product Putaway Location from an inventory. Note that this module assumes that there is a one-to-one correspondence between the location and putaway strategy, and if the location currently has no putaway strategy, an error will be raised.

@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2016 ForgeFlow S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="move_dest_ids" position="after">
+                <field name="orderpoint_ids" />
+            </field>
+        </field>
+    </record>
+    <record id="view_warehouse_orderpoint_move_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.move.form</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form" />
+        <field name="arch" type="xml">
+            <div class="oe_title" position="before">
+                <div name="button_box" class="oe_button_box">
+                    <button
+                        type="object"
+                        name="action_view_stock_picking"
+                        class="oe_stat_button"
+                        string="Transfers"
+                        icon="fa-arrows-h"
+                    >
+                    </button>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
