@@ -5,7 +5,9 @@ dependency_installation_mode: PIP
 generate_requirements_txt: true
 include_wkhtmltopdf: false
 odoo_version: 14.0
-rebel_module_groups: []
+rebel_module_groups:
+- stock_request_direction
+- stock_request_picking_type
 repo_description: 'TODO: add repo description.'
 repo_name: stock-logistics-warehouse
 repo_slug: stock-logistics-warehouse
