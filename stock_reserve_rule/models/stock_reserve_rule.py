@@ -163,7 +163,8 @@ class StockReserveRuleRemoval(models.Model):
                     "Removal rule '{}' location has to be a child "
                     "of the rule location '{}'."
                 ).format(
-                    removal_rule.name, removal_rule.rule_id.location_id.display_name,
+                    removal_rule.name,
+                    removal_rule.rule_id.location_id.display_name,
                 )
                 raise ValidationError(msg)
 
