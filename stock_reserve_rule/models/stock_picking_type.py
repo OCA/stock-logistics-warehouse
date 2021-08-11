@@ -9,5 +9,4 @@ class StockPickingType(models.Model):
 
     reserve_rule_ids = fields.Many2many(
         comodel_name="stock.reserve.rule",
-        inverse_name="picking_type_ids",
     )
