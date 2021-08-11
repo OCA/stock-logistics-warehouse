@@ -8,6 +8,7 @@ class TestReserveRule(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner_delta = cls.env.ref("base.res_partner_4")
         cls.wh = cls.env["stock.warehouse"].create(
             {
