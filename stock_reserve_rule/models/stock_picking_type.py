@@ -8,5 +8,6 @@ class StockPickingType(models.Model):
     _inherit = "stock.picking.type"
 
     reserve_rule_ids = fields.Many2many(
-        comodel_name="stock.reserve.rule", inverse_name="picking_type_ids",
+        comodel_name="stock.reserve.rule",
+        inverse_name="picking_type_ids",
     )
