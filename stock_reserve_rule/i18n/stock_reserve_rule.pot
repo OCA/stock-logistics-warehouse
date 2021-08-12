@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -76,6 +76,9 @@ msgid "Description"
 msgstr ""
 
 #. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_picking_type__display_name
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_quant__display_name
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__display_name
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__display_name
 msgid "Display Name"
@@ -110,12 +113,18 @@ msgid "Funky Socks"
 msgstr ""
 
 #. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_picking_type__id
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_quant__id
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__id
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__id
 msgid "ID"
 msgstr ""
 
 #. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_picking_type____last_update
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_quant____last_update
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule____last_update
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal____last_update
 msgid "Last Modified on"
