@@ -255,8 +255,10 @@ class StockLocation(models.Model):
             tray_external_id = tray.get_external_id().get(tray.id)
             if not tray_external_id:
                 continue
-            if "." not in tray_external_id:
-                continue
+            # This will never happen as both name and module are required
+            # in ir.model.data
+            # if "." not in tray_external_id:
+            #     continue
             namespace, tray_name = tray_external_id.split(".")
             if module != namespace:
                 continue
