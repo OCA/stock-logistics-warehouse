@@ -41,6 +41,7 @@ addon | version | summary
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 14.0.1.1.0 | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 14.0.1.0.1 | Internal request for stock
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.0.0 | Add Stock Requests to the Inventory App
+[stock_reserve_rule](stock_reserve_rule/) | 14.0.1.0.0 | Configure reservation rules by location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 14.0.1.0.0 | Allows to search for picking from supplierinfo code
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 14.0.1.0.1 | Adds a calendar to the Warehouse
 
