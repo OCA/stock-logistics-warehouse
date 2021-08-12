@@ -19,6 +19,18 @@ class LocationTrayTypeCase(common.SavepointCase):
             "stock_location_tray.stock_location_tray_type_small_32x"
         )
 
+    def _create_tray_z(self, tray_type=None):
+        tray_type = tray_type or self.tray_type_small_8x
+        tray_z = self.env["stock.location"].create(
+            {
+                "name": "Tray Z",
+                "location_id": self.stock_location.id,
+                "usage": "internal",
+                "tray_type_id": tray_type.id,
+            }
+        )
+        return tray_z
+
     def _cell_for(self, tray, x=1, y=1):
         cell = self.env["stock.location"].search(
             [("location_id", "=", tray.id), ("posx", "=", x), ("posy", "=", y)]

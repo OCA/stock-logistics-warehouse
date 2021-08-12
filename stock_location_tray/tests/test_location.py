@@ -9,14 +9,7 @@ from .common import LocationTrayTypeCase
 class TestLocation(LocationTrayTypeCase):
     def test_create_tray(self):
         tray_type = self.tray_type_small_8x
-        tray_loc = self.env["stock.location"].create(
-            {
-                "name": "Tray Z",
-                "location_id": self.stock_location.id,
-                "usage": "internal",
-                "tray_type_id": tray_type.id,
-            }
-        )
+        tray_loc = self._create_tray_z(tray_type)
 
         self.assertEqual(len(tray_loc.child_ids), tray_type.cols * tray_type.rows)  # 8
         self.assertTrue(
@@ -54,6 +47,16 @@ class TestLocation(LocationTrayTypeCase):
                 # fmt: on
             },
         )
+        saved_tray_type = self.tray_location.tray_type_id
+        self.tray_location.tray_type_id = False
+        self.assertEqual(self.tray_location.tray_matrix, {})
+        subloc = self.tray_location.create({"name": "Sub Location"})
+        self.tray_location.write({"child_ids": [(6, 0, subloc.id)]})
+        message = "Location %s has sub-locations, it cannot be converted to a tray."
+        with self.assertRaisesRegex(
+            exceptions.UserError, message % (self.tray_location.display_name)
+        ):
+            self.tray_location.tray_type_id = saved_tray_type
 
     def test_matrix_stock_tray(self):
         self._update_quantity_in_cell(
@@ -88,6 +91,13 @@ class TestLocation(LocationTrayTypeCase):
                 # fmt: on
             },
         )
+
+    def test_action_tray_matrix_click(self):
+        location_view = self.tray_location.action_tray_matrix_click(2, 1)
+        self.assertEqual(location_view["res_model"], "stock.location")
+        cell = self.env.ref("stock_location_tray.stock_location_tray_demo_x3y2")
+        location_view = cell.action_tray_matrix_click(2, 1)
+        self.assertEqual(location_view["res_model"], "stock.location")
 
     def test_matrix_stock_cell(self):
         self.tray_location.tray_type_id = self.env.ref(
@@ -147,6 +157,11 @@ class TestLocation(LocationTrayTypeCase):
                 # we can't disable the Stock location anyway
                 break
 
+        location = cell.location_id
+        message = "Tray locations cannot be archived when "
+        with self.assertRaisesRegex(exceptions.ValidationError, message):
+            location.with_context(do_not_check_quant=True).active = False
+
     def test_change_tray_type_when_empty(self):
         tray_type = self.tray_type_small_32x
         self.tray_location.tray_type_id = tray_type
@@ -159,9 +174,17 @@ class TestLocation(LocationTrayTypeCase):
             self._cell_for(self.tray_location, x=1, y=1), self.product, 1
         )
         tray_type = self.tray_type_small_32x
+        location = self.tray_location
+        saved_tray_type = location.tray_type_id
         message = "You still have some product in locations"
         with self.assertRaisesRegex(exceptions.UserError, message):
-            self.tray_location.tray_type_id = tray_type
+            location.tray_type_id = tray_type
+
+        message = "Trays cannot be modified when they contain products."
+        with self.assertRaisesRegex(exceptions.UserError, message):
+            location.with_context(
+                do_not_check_quant=True
+            ).tray_type_id = saved_tray_type
 
     def test_location_center_pos(self):
         cell = self.env.ref("stock_location_tray.stock_location_tray_demo_x3y2")
@@ -194,3 +217,34 @@ class TestLocation(LocationTrayTypeCase):
         # fmt: on
         self.assertEqual(from_left, expected_left)
         self.assertEqual(from_bottom, expected_bottom)
+
+        self.assertEqual(self.tray_location.tray_cell_center_position(), (0, 0))
+
+    def test_cell_name_format_posz(self):
+        location = self.tray_location
+        location.cell_name_format = "x{x:0>2}, y{y:0>2}"
+        self.assertEqual(location.child_ids[0].name, "x01, y01")
+        location.posz = 1
+        self.assertEqual(location.mapped("posz"), [1])
+        self.assertEqual(
+            location.child_ids.mapped("posz"), [1] * len(location.child_ids)
+        )
+
+    def test_create_tray_xmlids(self):
+        module = "stock_location_tray"
+        tray_z = self._create_tray_z()
+        # Cover if not location.cell_in_tray_type_id
+        tray_z._create_tray_xmlids(module)
+        # Cover if not tray_external_id
+        tray_z.child_ids._create_tray_xmlids(module)
+        values = {
+            "name": "stock_location_tray_z",
+            "module": module,
+            "model": tray_z._name,
+            "res_id": tray_z.id,
+            "noupdate": 1,
+        }
+        self.env["ir.model.data"].create(values)
+        # Cover if module != namespace
+        tray_z.child_ids._create_tray_xmlids("no_module")
+        tray_z.child_ids._create_tray_xmlids(module)
