@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="stock_location_zone_a_demo" model="stock.location">
+        <field name="name">Zone A</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+    </record>
+    <record id="stock_location_zone_b_demo" model="stock.location">
+        <field name="name">Zone B</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+    </record>
+    <record id="stock_location_zone_c_demo" model="stock.location">
+        <field name="name">Zone C</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+    </record>
+    <record id="stock_location_zone_a_bin_1_demo" model="stock.location">
+        <field name="name">Bin A1</field>
+        <field name="location_id" ref="stock_location_zone_a_demo" />
+    </record>
+    <record id="stock_location_zone_b_bin_1_demo" model="stock.location">
+        <field name="name">Bin B1</field>
+        <field name="location_id" ref="stock_location_zone_b_demo" />
+    </record>
+    <record id="stock_location_zone_c_bin_1_demo" model="stock.location">
+        <field name="name">Bin C1</field>
+        <field name="location_id" ref="stock_location_zone_c_demo" />
+    </record>
+</odoo>
