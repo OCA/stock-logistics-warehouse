@@ -149,3 +149,32 @@ class TestMoveLocation(TestsCommon):
         """Test that no error is raised from actions."""
         pick_type = self.env.ref("stock.picking_type_internal")
         pick_type.action_move_location()
+
+    def test_non_reserved_qty(self):
+        """Test get reserved qty and calc ."""
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        # reserve some quants
+        print("============")
+        print(self.quant_obj.quantity, " → qty")
+        print(self.quant_obj.reserved_quantity, " → reserved")
+        print(self.wizard_obj.non_reserved_quantity, " → non-reserved") #AttributeError: 'wiz.stock.move.location' object has no attribute 'non_reserved_quantity'
+        print("============")
+        # self.quant_obj._update_reserved_quantity(
+        #     self.product_no_lots,
+        #     self.internal_loc_1,
+        #     50,
+        # )
+        # self.quant_obj._update_reserved_quantity(
+        #     self.product_lots,
+        #     self.internal_loc_1,
+        #     1,
+        #     lot_id=self.lot1,
+        # )
+        wizard.action_move_location()
+        self.check_product_amount(
+            self.product_no_lots, self.internal_loc_1, self.wizard_obj.non_reserved_quantity,
+        )
+        self.check_product_amount(
+            self.product_no_lots, self.internal_loc_2, self.wizard_obj.non_reserved_quantity,
+        )

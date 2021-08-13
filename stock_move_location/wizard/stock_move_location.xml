@@ -37,6 +37,7 @@
                   <field name="origin_location_id" readonly="1" force_save="1"/>
                   <field name="destination_location_id" readonly="1" force_save="1"/>
                   <field name="lot_id" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"  groups="stock.group_production_lot" options="{'no_create': True}"/>
+                  <field name="non_reserved_quantity" invisible="1"/>   <!-- AttributeError: 'wiz.stock.move.location' object has no attribute 'non_reserved_quantity' -->
                   <field name="move_quantity"/>
                   <field name="custom" invisible="1" />
                   <field name="max_quantity" attrs="{'readonly': [('custom', '!=', True)]}" force_save="1"/>
@@ -88,3 +89,4 @@
       sequence="99"/>
 
 </odoo>
+

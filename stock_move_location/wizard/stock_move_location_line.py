@@ -41,6 +41,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
         comodel_name='stock.production.lot',
         domain="[('product_id','=',product_id)]"
     )
+    non_reserved_quantity = fields.Float(    #AttributeError: 'wiz.stock.move.location' object has no attribute 'non_reserved_quantity'
+        string="non_reserved_quantity",
+        digits=dp.get_precision('Product Unit of Measure'),
+    )
     move_quantity = fields.Float(
         string="Quantity to move",
         digits=dp.get_precision('Product Unit of Measure'),

@@ -84,12 +84,11 @@ class StockMoveLocationWizard(models.TransientModel):
 
     @api.model
     def _prepare_wizard_move_lines(self, quants):
-        res = []
-        exclude_reserved_qty = self.env.context.get('only_reserved_qty', False)
-        if not exclude_reserved_qty:
+        if not self.env.context.get('only_reserved_qty', False):
             res = [(0, 0, {
                 'product_id': quant.product_id.id,
-                'move_quantity': quant.quantity,
+                'non_reserved_quantity': quant.quantity - quant.reserved_quantity,
+                'move_quantity': quant.quantity - quant.reserved_quantity,
                 'max_quantity': quant.quantity,
                 'origin_location_id': quant.location_id.id,
                 'lot_id': quant.lot_id.id,
@@ -98,6 +97,7 @@ class StockMoveLocationWizard(models.TransientModel):
             }) for quant in quants]
         else:
             # if need move only available qty per product on location
+            res = []
             for product, quant in groupby(quants, lambda r: r.product_id):
                 # we need only one quant per product
                 quant = list(quant)[0]
@@ -108,6 +108,7 @@ class StockMoveLocationWizard(models.TransientModel):
                 if qty:
                     res.append((0, 0, {
                         'product_id': quant.product_id.id,
+                        'non_reserved_quantity': qty,
                         'move_quantity': qty,
                         'max_quantity': qty,
                         'origin_location_id': quant.location_id.id,
@@ -226,7 +227,8 @@ class StockMoveLocationWizard(models.TransientModel):
         # Using sql as search_group doesn't support aggregation functions
         # leading to overhead in queries to DB
         query = """
-            SELECT product_id, lot_id, SUM(quantity)
+            SELECT product_id, lot_id, SUM(quantity),
+                SUM(reserved_quantity) as reserved
             FROM stock_quant
             WHERE location_id = %s
             AND company_id = %s
@@ -245,9 +247,11 @@ class StockMoveLocationWizard(models.TransientModel):
                 self.apply_putaway_strategy and
                 self.destination_location_id.get_putaway_strategy(product).id
                 or self.destination_location_id.id)
+            non_reserved_qty = group.get("sum") - group.get("reserved")
             product_data.append({
                 'product_id': product.id,
-                'move_quantity': group.get("sum"),
+                'non_reserved_quantity': non_reserved_qty,
+                'move_quantity': non_reserved_qty,
                 'max_quantity': group.get("sum"),
                 'origin_location_id': self.origin_location_id.id,
                 'destination_location_id': location_dest_id,
