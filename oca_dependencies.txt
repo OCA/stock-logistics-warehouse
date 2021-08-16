@@ -1,3 +1,4 @@
+sale-workflow
 stock-logistics-tracking
 stock-logistics-barcode
 stock-logistics-workflow

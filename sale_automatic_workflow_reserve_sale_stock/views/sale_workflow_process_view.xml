@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Hugo Santos <hugo.santos@factorlibre.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<openerp>
+  <data>
+    <record id="sale_workflow_process_view_form" model="ir.ui.view">
+        <field name="name">sale_automatic_workflow_reserve_sale_stock.sale_workflow_process.view_form</field>
+        <field name="model">sale.workflow.process</field>
+        <field name="inherit_id"
+            ref="sale_automatic_workflow.sale_workflow_process_view_form"/>
+        <field name="arch" type="xml">
+            <field name="warning" position="before">
+                <field name="stock_reservation"/>
+                <field name="stock_reservation_validity"/>
+                <field name="stock_reservation_location_id"/>
+                <field name="stock_reservation_location_dest_id"/>
+            </field>
+        </field>
+    </record>
+  </data>
+</openerp>
