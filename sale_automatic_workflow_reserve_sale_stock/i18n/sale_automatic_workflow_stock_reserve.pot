@@ -7,20 +7,19 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-06 10:28+0000\n"
-"PO-Revision-Date: 2021-08-06 12:36+0200\n"
+"PO-Revision-Date: 2021-08-06 10:28+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.3\n"
-"Last-Translator: \n"
-"Language: es\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model:ir.model.fields,help:sale_automatic_workflow_stock_reserve.field_sale_workflow_process__stock_reservation
-msgid "Allows to make stock reservations before the confirm the sale quotation"
-msgstr "Permite hacer reservas de stock antes de confirmar el presupuesto"
+msgid ""
+"Allows to make stock reservations before the confirm the sale quotation"
+msgstr ""
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model:ir.model.fields,help:sale_automatic_workflow_stock_reserve.field_sale_workflow_process__stock_reservation_validity
@@ -28,18 +27,16 @@ msgid ""
 "Make a stock reservation for this number of days. When this number of days "
 "pass the stock reservation is released"
 msgstr ""
-"Realiza una reserva de stock para esta cantidad de días. Cuando este número "
-"de días se supera la reserva va a ser liberada"
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model_terms:ir.ui.view,arch_db:sale_automatic_workflow_stock_reserve.sale_workflow_process_view_form
 msgid "Reserve Options"
-msgstr "Opciones de reserva"
+msgstr ""
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model:ir.model,name:sale_automatic_workflow_stock_reserve.model_sale_workflow_process
 msgid "Sale Workflow Process"
-msgstr "Proceso del flujo de venta"
+msgstr ""
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model:ir.model,name:sale_automatic_workflow_stock_reserve.model_automatic_workflow_job
@@ -47,25 +44,23 @@ msgid ""
 "Scheduler that will play automatically the validation of invoices, "
 "pickings..."
 msgstr ""
-"Planificar que va a ser ejecutada automáticamente la validaciín de facturas, "
-"movimientos de stock..."
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model:ir.model.fields,field_description:sale_automatic_workflow_stock_reserve.field_sale_workflow_process__stock_reservation
 msgid "Stock Reservation"
-msgstr "Reserva de stock"
+msgstr ""
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model:ir.model.fields,field_description:sale_automatic_workflow_stock_reserve.field_sale_workflow_process__stock_reservation_validity
 msgid "Stock Reservation Validity (Days)"
-msgstr "Validez de la reserva de stock (días)"
+msgstr ""
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model:ir.model.fields,field_description:sale_automatic_workflow_stock_reserve.field_sale_workflow_process__stock_reservation_location_dest_id
 msgid "Stock reservation Location"
-msgstr "Localización de la reserva"
+msgstr ""
 
 #. module: sale_automatic_workflow_stock_reserve
 #: model:ir.model.fields,field_description:sale_automatic_workflow_stock_reserve.field_sale_workflow_process__stock_reservation_location_id
 msgid "Stock reservation Source Location"
-msgstr "Localización inicial de la reserva"
+msgstr ""
