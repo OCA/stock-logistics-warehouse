@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_automatic_workflow_reserve_sale_stock
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-01 11:26+0000\n"
+"PO-Revision-Date: 2016-02-01 12:28+0100\n"
+"Last-Translator: Hugo Santos <hugo.santos@factorlibre.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: sale_automatic_workflow_reserve_sale_stock
+#: help:sale.workflow.process,stock_reservation:0
+msgid "Allows to make stock reservations before the confirm the sale quotation"
+msgstr ""
+"Permite realizar reservas de stock antes de confirmar el presupuesto de "
+"venta."
+
+#. module: sale_automatic_workflow_reserve_sale_stock
+#: help:sale.workflow.process,stock_reservation_validity:0
+msgid ""
+"Make a stock reservation for this number of days. When this number of days "
+"pass the stock reservation is released"
+msgstr ""
+"Realiza una reserva de stock durante este número de días. Cuando pasan la "
+"reserva de stock es liberada"
+
+#. module: sale_automatic_workflow_reserve_sale_stock
+#: model:ir.model,name:sale_automatic_workflow_reserve_sale_stock.model_sale_workflow_process
+msgid "Sale Workflow Process"
+msgstr "Proceso Workflow Venta"
+
+#. module: sale_automatic_workflow_reserve_sale_stock
+#: field:sale.workflow.process,stock_reservation:0
+msgid "Stock Reservation"
+msgstr "Reserva de stock"
+
+#. module: sale_automatic_workflow_reserve_sale_stock
+#: field:sale.workflow.process,stock_reservation_validity:0
+msgid "Stock Reservation Validity (Days)"
+msgstr "Validez de reserva de stock (Días)"
+
+#. module: sale_automatic_workflow_reserve_sale_stock
+#: field:sale.workflow.process,stock_reservation_location_dest_id:0
+msgid "Stock reservation Location"
+msgstr "Ub. de reserva de stock"
+
+#. module: sale_automatic_workflow_reserve_sale_stock
+#: field:sale.workflow.process,stock_reservation_location_id:0
+msgid "Stock reservation Source Location"
+msgstr "Ub. origen de reserva de stock"
