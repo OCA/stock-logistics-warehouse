@@ -128,34 +128,6 @@ class StockLocation(models.Model):
                 location.child_ids.write({"posz": vals["posz"]})
         return True
 
-    @api.constrains("active")
-    def _tray_check_active(self):
-        for record in self:
-            if record.active:
-                continue
-            # We cannot disable any cell of a tray (entire tray)
-            # if at least one of the cell contains stock.
-            # We cannot disable a tray, a shuffle or a view if
-            # at least one of their tray contain stock.
-            if record.cell_in_tray_type_id:
-                parent = record.location_id
-            else:
-                parent = record
-            # Add the record to the search: as it has been set inactive, it
-            # will not be found by the search.
-            locs = self.search([("id", "child_of", parent.id)]) | record
-            if any(
-                (loc.tray_type_id or loc.cell_in_tray_type_id)
-                and loc.tray_cell_contains_stock
-                for loc in locs
-            ):
-                raise exceptions.ValidationError(
-                    _(
-                        "Tray locations cannot be archived when "
-                        "they contain products."
-                    )
-                )
-
     def tray_cell_center_position(self):
         """Return the center position in mm of a cell
 
@@ -200,16 +172,7 @@ class StockLocation(models.Model):
         values = []
         for location in self:
             tray_type = location.tray_type_id
-
-            try:
-                location.child_ids.write({"active": False})
-            except exceptions.ValidationError:
-                # trap this check (_tray_check_active) to display a
-                # contextual error message
-                raise exceptions.UserError(
-                    _("Trays cannot be modified when they contain products.")
-                )
-
+            location.child_ids.write({"active": False})
             if not tray_type:
                 continue
 
