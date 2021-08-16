@@ -90,6 +90,7 @@ class StockMoveLocationWizard(models.TransientModel):
             res = [(0, 0, {
                 'product_id': quant.product_id.id,
                 'move_quantity': quant.quantity,
+                'available_quantity': quant.quantity - quant.reserved_quantity,
                 'max_quantity': quant.quantity,
                 'origin_location_id': quant.location_id.id,
                 'lot_id': quant.lot_id.id,
@@ -116,6 +117,15 @@ class StockMoveLocationWizard(models.TransientModel):
                         'custom': False,
                     }))
         return res
+
+    @api.onchange('picking_type_id')
+    def onchange_picking_type_id(self):
+        if self.picking_type_id and self.picking_type_id.suggest_available_qty:
+            for line in self.stock_move_location_line_ids:
+                line.move_quantity = line.available_quantity
+        else:
+            for line in self.stock_move_location_line_ids:
+                line.move_quantity = line.max_quantity
 
     @api.onchange('origin_location_id')
     def _onchange_origin_location_id(self):
@@ -226,7 +236,8 @@ class StockMoveLocationWizard(models.TransientModel):
         # Using sql as search_group doesn't support aggregation functions
         # leading to overhead in queries to DB
         query = """
-            SELECT product_id, lot_id, SUM(quantity)
+            SELECT product_id, lot_id, SUM(quantity),
+                SUM(reserved_quantity) as qty_reserved
             FROM stock_quant
             WHERE location_id = %s
             AND company_id = %s
@@ -245,9 +256,14 @@ class StockMoveLocationWizard(models.TransientModel):
                 self.apply_putaway_strategy and
                 self.destination_location_id.get_putaway_strategy(product).id
                 or self.destination_location_id.id)
+            available_quantity = group.get("sum") - group.get("qty_reserved")
+            move_quantity = group.get("sum")
+            if self.picking_type_id.suggest_available_qty:
+                move_quantity = available_quantity
             product_data.append({
                 'product_id': product.id,
-                'move_quantity': group.get("sum"),
+                'move_quantity': move_quantity,
+                'available_quantity': available_quantity,
                 'max_quantity': group.get("sum"),
                 'origin_location_id': self.origin_location_id.id,
                 'destination_location_id': location_dest_id,

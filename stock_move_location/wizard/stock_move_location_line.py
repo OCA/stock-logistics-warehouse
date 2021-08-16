@@ -41,6 +41,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
         comodel_name='stock.production.lot',
         domain="[('product_id','=',product_id)]"
     )
+    available_quantity = fields.Float(
+        string="Available Quantity",
+        digits=dp.get_precision('Product Unit of Measure'),
+    )
     move_quantity = fields.Float(
         string="Quantity to move",
         digits=dp.get_precision('Product Unit of Measure'),

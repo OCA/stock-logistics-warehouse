@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
             <field name="show_operations" position="after">
                 <field name="show_move_onhand" attrs='{"invisible": [("code", "not in", ["internal"])]}'/>
+                <field name="suggest_available_qty" attrs='{"invisible": [("code", "not in", ["internal"])]}'/>
             </field>
         </field>
     </record>
