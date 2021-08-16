@@ -157,11 +157,6 @@ class TestLocation(LocationTrayTypeCase):
                 # we can't disable the Stock location anyway
                 break
 
-        location = cell.location_id
-        message = "Tray locations cannot be archived when "
-        with self.assertRaisesRegex(exceptions.ValidationError, message):
-            location.with_context(do_not_check_quant=True).active = False
-
     def test_change_tray_type_when_empty(self):
         tray_type = self.tray_type_small_32x
         self.tray_location.tray_type_id = tray_type
@@ -174,17 +169,9 @@ class TestLocation(LocationTrayTypeCase):
             self._cell_for(self.tray_location, x=1, y=1), self.product, 1
         )
         tray_type = self.tray_type_small_32x
-        location = self.tray_location
-        saved_tray_type = location.tray_type_id
         message = "You still have some product in locations"
         with self.assertRaisesRegex(exceptions.UserError, message):
-            location.tray_type_id = tray_type
-
-        message = "Trays cannot be modified when they contain products."
-        with self.assertRaisesRegex(exceptions.UserError, message):
-            location.with_context(
-                do_not_check_quant=True
-            ).tray_type_id = saved_tray_type
+            self.tray_location.tray_type_id = tray_type
 
     def test_location_center_pos(self):
         cell = self.env.ref("stock_location_tray.stock_location_tray_demo_x3y2")
