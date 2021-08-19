@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="assets_backend_cost_inventory"
+        name="Cost Inventory Adjustment"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/stock_inventory_revaluation_adjustment/static/src/js/cost_inventory_products.js"
+            />
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="add_product_multi_view_form" model="ir.ui.view">
+        <field name="name">add.multi.product.form</field>
+        <field name="model">add.multi.product</field>
+        <field name="arch" type="xml">
+            <form string="Products">
+                <sheet>
+                    <group>
+                        <field
+                            name="product_ids"
+                            domain="[('bom_ids','=',False)]"
+                            nolabel="1"
+                        />
+                    </group>
+                    <footer>
+                        <button
+                            name="add_products"
+                            type="object"
+                            string="Add"
+                            class="btn-primary"
+                        />
+                        <button
+                            string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"
+                        />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="add_multi_product_action" model="ir.actions.act_window">
+        <field name="name">Add Multi Products</field>
+        <field name="res_model">add.multi.product</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

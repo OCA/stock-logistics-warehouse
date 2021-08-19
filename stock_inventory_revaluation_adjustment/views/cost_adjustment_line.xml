@@ -1,0 +1,144 @@
+<odoo>
+
+    <record id="cost_adjustment_line_view_tree" model="ir.ui.view">
+        <field name="name">cost.adjustment.line.tree</field>
+        <field name="model">cost.adjustment.line</field>
+        <field name="arch" type="xml">
+            <tree
+                default_order="product_id"
+                editable="top"
+                string="Cost Adjustment Details"
+                decoration-danger="product_cost != product_original_cost"
+                decoration-muted="product_cost == product_original_cost"
+                decoration-bf="is_editable"
+            >
+                <field name="cost_adjustment_id" invisible="1" />
+                <field name="company_id" invisible="1" />
+                <field name="currency_id" invisible="1" />
+                <field name="is_editable" invisible="1" />
+                <field name="price_outdated" invisible="1" />
+                <field name="qty_outdated" invisible="1" />
+                <field
+                    name="product_id"
+                    readonly="context.get('default_product_id', False)"
+                    attrs="{'readonly': ['|', ('is_editable', '=', False), ('state', '!=', 'confirm')]}"
+                    options="{'no_create': True}"
+                />
+                <field name="product_type" optional="hide" />
+                <field name="categ_id" optional="hide" />
+                <field
+                    name="product_original_cost"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                    sum="Sum"
+                    readonly="1"
+                    force_save="1"
+                    optional="show"
+                />
+                <button
+                    name="action_get_origin_cost"
+                    title="Refresh quantity"
+                    icon="fa-refresh"
+                    type="object"
+                    attrs="{'invisible': ['|', ('price_outdated', '=', False), ('state', '=', 'posted')]}"
+                />
+                <field
+                    name="product_cost"
+                    optional="show"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                    sum="Sum"
+                />
+                <field
+                    name="difference_cost"
+                    optional="show"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                    sum="Sum"
+                />
+                <field name="percent_difference" />
+                <field name="qty_on_hand" optional="show" sum="Sum" />
+                <button
+                    name="action_refresh_quantity"
+                    title="Refresh quantity"
+                    icon="fa-refresh"
+                    type="object"
+                    attrs="{'invisible': ['|', ('qty_outdated', '=', False),('state', '=', 'posted')]}"
+                />
+                <field
+                    name="total_difference"
+                    optional="show"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                    sum="Sum"
+                />
+                <field name="cost_adjustment_date" optional="hide" />
+                <field
+                    name="state"
+                    optional="hide"
+                    widget="badge"
+                    decoration-success="state in ('done', 'posted')"
+                    decoration-info="state in ('draft', 'confirm')"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="cost_adjustment_line_search" model="ir.ui.view">
+        <field name="name">cost.adjustment.line.search</field>
+        <field name="model">cost.adjustment.line</field>
+        <field name="arch" type="xml">
+            <search string="Search Cost Adjustment Lines">
+                <field name="product_id" />
+                <field name="categ_id" />
+                <filter
+                    string="Difference different than zero"
+                    name="difference"
+                    domain="[('difference_cost', '!=', '0')]"
+                />
+                <group expand='0' string='Group by...'>
+                    <filter
+                        string='Product'
+                        name="product"
+                        domain="[]"
+                        context="{'group_by' : 'product_id'}"
+                    />
+                    <filter
+                        string='Product Category'
+                        name="product_category"
+                        domain="[]"
+                        context="{'group_by' : 'categ_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record
+        id="model_cost_adjustment_line_action_recompute_origin_cost"
+        model="ir.actions.server"
+    >
+        <field name="name">Recompute Original Cost</field>
+        <field name="model_id" ref="model_cost_adjustment_line" />
+        <field name="binding_model_id" ref="model_cost_adjustment_line" />
+        <field name="state">code</field>
+        <field name="code">
+if records:
+    action = records.action_get_origin_cost()
+        </field>
+    </record>
+
+    <record
+        id="model_cost_adjustment_line_action_recompute_quantity"
+        model="ir.actions.server"
+    >
+        <field name="name">Recompute On Hand Quantity</field>
+        <field name="model_id" ref="model_cost_adjustment_line" />
+        <field name="binding_model_id" ref="model_cost_adjustment_line" />
+        <field name="state">code</field>
+        <field name="code">
+if records:
+    action = records.action_refresh_quantity()
+        </field>
+    </record>
+</odoo>
