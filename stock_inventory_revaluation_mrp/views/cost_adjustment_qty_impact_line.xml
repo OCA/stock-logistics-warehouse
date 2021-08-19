@@ -1,0 +1,45 @@
+<odoo>
+
+    <record id="cost_adjustment_qty_detail_mrp_view_tree" model="ir.ui.view">
+        <field name="name">cost.adjustment.qty.detail.mrp.tree</field>
+        <field name="model">cost.adjustment.qty.impact.line</field>
+        <field name="arch" type="xml">
+            <tree
+                string="QTY on Hand Impact"
+                decoration-danger="product_original_cost != product_cost"
+            >
+                <field name="cost_adjustment_id" invisible="1" />
+                <field name="bom_id" invisible="1" />
+                <field name="company_id" invisible="1" />
+                <field name="currency_id" invisible="1" />
+                <field name="product_id" string="BoM Product" />
+                <field
+                    name="product_original_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                    sum="Sum"
+                />
+                <field
+                    name="product_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                    sum="Sum"
+                />
+                <field
+                    name="difference_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                    sum="Sum"
+                />
+                <field name="percent_difference" />
+                <field name="qty_on_hand" />
+                <field
+                    name="total_difference"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                    sum="Sum"
+                />
+            </tree>
+        </field>
+    </record>
+</odoo>

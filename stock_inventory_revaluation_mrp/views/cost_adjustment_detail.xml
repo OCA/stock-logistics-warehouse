@@ -1,0 +1,65 @@
+<odoo>
+
+    <record id="cost_adjustment_detail_mrp_view_tree" model="ir.ui.view">
+        <field name="name">cost.adjustment.detail.mrp.tree</field>
+        <field name="model">cost.adjustment.detail</field>
+        <field name="arch" type="xml">
+            <tree
+                string="Details"
+                decoration-danger="product_original_cost != product_cost"
+            >
+                <field name="cost_adjustment_id" invisible="1" />
+                <field name="company_id" invisible="1" />
+                <field name="currency_id" invisible="1" />
+                <field name="product_id" string="Component Product" />
+                <field name="bom_id" string="BoM Product" />
+                <field name="quantity" />
+                <field
+                    name="bom_product_qty_on_hand"
+                    invisible="not context.get('qty_details')"
+                />
+                <field
+                    name="product_original_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                />
+                <field
+                    name="current_bom_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                />
+                <field
+                    name="product_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                />
+                <field
+                    name="future_bom_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                />
+                <field
+                    name="difference_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                />
+                <field name="percent_difference" />
+            </tree>
+        </field>
+    </record>
+    <record id="cost_adjustment_detail_view_search" model="ir.ui.view">
+        <field name="name">cost.adjustment.detail.view.search</field>
+        <field name="model">cost.adjustment.detail</field>
+        <field name="arch" type="xml">
+            <search string="Cost Adjustment Details">
+                <field name="bom_id" />
+                <filter
+                    name="group_by_bom_id"
+                    string="Parent BoM"
+                    context="{'group_by': 'bom_id'}"
+                />
+            </search>
+        </field>
+    </record>
+
+</odoo>
