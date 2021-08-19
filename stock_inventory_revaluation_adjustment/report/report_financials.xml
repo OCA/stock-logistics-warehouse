@@ -1,0 +1,65 @@
+<odoo>
+    <record id="cost_adjustment_financial_report" model="ir.actions.report">
+        <field name="name">Financial Report</field>
+        <field name="model">cost.adjustment.line</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >product_cost_adjustment.report_cost_adjustment_financial</field>
+        <field name="binding_model_id" ref="model_cost_adjustment_line" />
+    </record>
+
+    <template id="report_cost_adjustment_financial">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1>Cost Adjustment Financials Report</h1>
+                    <br />
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th><strong>Product</strong></th>
+                                <th class="text-right"><strong
+                                    >Original Cost</strong></th>
+                                <th class="text-right"><strong>New Cost</strong></th>
+                                <th class="text-right"><strong
+                                    >Cost Difference</strong></th>
+                                <th class="text-right"><strong>On Hand Qty</strong></th>
+                                <th class="text-right"><strong>Total</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="line">
+                                <tr>
+                                    <td><span t-field="line.product_id" /></td>
+                                    <td class="text-right"><span
+                                            t-field="line.product_original_cost"
+                                            t-options='{"widget": "monetary", "display_currency": line.currency_id}'
+                                        /></td>
+                                    <td class="text-right"><span
+                                            t-field="line.product_cost"
+                                            t-options='{"widget": "monetary", "display_currency": line.currency_id}'
+                                        /></td>
+                                    <td class="text-right"><span
+                                            t-field="line.difference_cost"
+                                            t-options='{"widget": "monetary", "display_currency": line.currency_id}'
+                                        /></td>
+                                    <td class="text-right"><span
+                                            t-field="line.qty_on_hand"
+                                        /> <span
+                                            t-field="line.product_id.product_uom_id"
+                                            groups="uom.group_uom"
+                                        /></td>
+                                    <td class="text-right"><span
+                                            t-field="line.total_difference"
+                                            t-options='{"widget": "monetary", "display_currency": line.currency_id}'
+                                        /></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
