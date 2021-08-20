@@ -78,6 +78,7 @@ setuptools.setup(
         'odoo13-addon-stock_request_tier_validation',
         'odoo13-addon-stock_reserve',
         'odoo13-addon-stock_reserve_rule',
+        'odoo13-addon-stock_reserve_sale',
         'odoo13-addon-stock_secondary_unit',
         'odoo13-addon-stock_vertical_lift',
         'odoo13-addon-stock_vertical_lift_empty_tray_check',
