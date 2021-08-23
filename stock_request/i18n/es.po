@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2020-02-04 22:13+0000\n"
-"Last-Translator: Nelson Ramírez Sánchez <info@konos.cl>\n"
+"PO-Revision-Date: 2021-08-23 07:50+0000\n"
+"Last-Translator: Enric Tobella <etobella@creublanca.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:20
@@ -113,7 +113,6 @@ msgstr "Cancelar"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-#, fuzzy
 msgid "Cancelled"
 msgstr "Cancelado"
 
@@ -168,9 +167,8 @@ msgstr "Creado el"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-#, fuzzy
 msgid "Current requests"
-msgstr "Solicitudes de existencias"
+msgstr "Solicitudes actuales"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__expected_date
@@ -244,7 +242,7 @@ msgstr "La fecha prevista debe ser la misma que la del pedido"
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Finished"
-msgstr ""
+msgstr "Finalizado"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_follower_ids
@@ -310,7 +308,6 @@ msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-#, fuzzy
 msgid "In Progress"
 msgstr "En progreso"
 
@@ -469,7 +466,7 @@ msgstr "Número de error"
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_needaction_counter
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr "Número de mensajes que requieren una acción."
+msgstr "Número de mensajes que requieren una acción"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_has_error_counter
@@ -576,9 +573,8 @@ msgstr "Compras"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_cancelled
-#, fuzzy
 msgid "Qty Cancelled"
-msgstr "Cancelado"
+msgstr "Cantidad cancelada"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_done
@@ -598,7 +594,6 @@ msgstr "Cantidad"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_cancelled
-#, fuzzy
 msgid "Quantity cancelled"
 msgstr "Cantidad completada"
 
@@ -862,7 +857,6 @@ msgstr "Integración de solicitudes de existencias con tarjetas Kanbans"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
-#, fuzzy
 msgid "Stock Requests Order Search"
 msgstr "Buscar solicitudes de existencias"
 
