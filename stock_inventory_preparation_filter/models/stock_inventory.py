@@ -52,18 +52,26 @@ class StockInventory(models.Model):
     product_domain = fields.Char("Domain", default=[("name", "ilike", "")])
 
     def _action_start(self):
-        Product = self.env["product.product"]
         for inventory in self:
-            products = Product.browse()
             if inventory.state != "draft":
                 continue
-            if inventory.filter == "categories":
-                products = Product.search([("categ_id", "in", inventory.categ_ids.ids)])
-            if inventory.filter == "lots":
-                products = inventory.lot_ids.mapped("product_id")
-            if inventory.filter == "domain":
-                domain = safe_eval(inventory.product_domain)
-                products = Product.search(domain)
-            if products:
-                inventory.product_ids = [(6, 0, products.ids)]
+            if inventory.filter:
+                products = inventory._prepare_inventory_filter()
+                if products:
+                    inventory.product_ids = [(6, 0, products.ids)]
         return super()._action_start()
+
+    def _prepare_inventory_filter(self):
+        # This method is designed to be inherited by other modules
+        # such as the OCA module stock_inventory_preparation_filter_pos
+        self.ensure_one()
+        Product = self.env["product.product"]
+        products = Product
+        if self.filter == "categories":
+            products = Product.search([("categ_id", "in", self.categ_ids.ids)])
+        elif self.filter == "lots":
+            products = self.lot_ids.product_id
+        elif self.filter == "domain":
+            domain = safe_eval(self.product_domain)
+            products = Product.search(domain)
+        return products
