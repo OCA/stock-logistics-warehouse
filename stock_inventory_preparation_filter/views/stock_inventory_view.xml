@@ -34,12 +34,12 @@
                 <field
                     name="categ_ids"
                     widget="many2many_tags"
-                    attrs="{'invisible':[('filter','!=','categories')]}"
+                    attrs="{'invisible':[('filter','!=','categories')], 'required': [('filter','=','categories')]}"
                 />
                 <field
                     name="lot_ids"
                     widget="many2many_tags"
-                    attrs="{'invisible':[('filter','!=','lots')]}"
+                    attrs="{'invisible':[('filter','!=','lots')], 'required': [('filter','=','lots')]}"
                 />
             </field>
         </field>
