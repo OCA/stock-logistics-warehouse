@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-scrap_reason_code',
+        'odoo14-addon-stock_archive_constraint',
         'odoo14-addon-stock_available',
         'odoo14-addon-stock_available_immediately',
         'odoo14-addon-stock_available_mrp',
