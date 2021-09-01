@@ -1,18 +1,14 @@
 # Copyright 2020 Camptocamp SA
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
-from odoo.tests import SavepointCase
+from odoo.tests.common import SavepointCase
 
 
-class TestCalc(SavepointCase):
-
-    at_install = False
-    post_install = True
-
+class TestPackagingCalc(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super().setUpClass()
+        super(TestPackagingCalc, cls).setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.uom_unit = cls.env.ref("uom.product_uom_unit")
+        cls.uom_unit = cls.env.ref("product.product_uom_unit")
         cls.product_a = cls.env["product.product"].create(
             {
                 "name": "Product A",
@@ -20,178 +16,121 @@ class TestCalc(SavepointCase):
                 "uom_po_id": cls.uom_unit.id,
             }
         )
+        cls.product_tmpl_a = cls.product_a.product_tmpl_id
         cls.pkg_box = cls.env["product.packaging"].create(
-            {"name": "Box", "product_id": cls.product_a.id, "qty": 50}
+            {"name": "Box", "product_tmpl_id": cls.product_tmpl_a.id, "qty": 50}
         )
         cls.pkg_big_box = cls.env["product.packaging"].create(
-            {"name": "Big Box", "product_id": cls.product_a.id, "qty": 200}
+            {"name": "Big Box", "product_tmpl_id": cls.product_tmpl_a.id, "qty": 200}
         )
         cls.pkg_pallet = cls.env["product.packaging"].create(
-            {"name": "Pallet", "product_id": cls.product_a.id, "qty": 2000}
+            {"name": "Pallet", "product_tmpl_id": cls.product_tmpl_a.id, "qty": 2000}
         )
 
-    def test_contained_mapping(self):
-        self.assertEqual(
-            self.product_a.packaging_contained_mapping,
-            {
-                str(self.pkg_pallet.id): [
+    @classmethod
+    def _generate_expected_contained_mapping(cls, expected_result_map):
+        """
+        get the general structure for mapping. structure be like :
+        str(self.pkg_pallet.id): [
                     {
                         "id": self.pkg_big_box.id,
                         "qty": 10,
                         "name": self.pkg_big_box.name,
                         "is_unit": False,
                     },
-                ],
-                str(self.pkg_big_box.id): [
-                    {
-                        "id": self.pkg_box.id,
-                        "qty": 4,
-                        "name": self.pkg_box.name,
-                        "is_unit": False,
-                    },
-                ],
-                str(self.pkg_box.id): [
-                    {
-                        "id": self.uom_unit.id,
-                        "qty": 50,
-                        "name": self.uom_unit.name,
-                        "is_unit": True,
-                    },
-                ],
-            },
+                ]
+        """
+        return {
+            str(item[0]): [
+                {
+                    "id": item[1][0],
+                    "qty": item[1][1],
+                    "name": item[1][2],
+                    "is_unit": item[1][3],
+                }
+            ]
+            for item in expected_result_map
+        }
+
+    @classmethod
+    def _generate_expected_packaging_info(cls, expected_info, extended_name=None):
+        return [
+            {
+                "id": package_info[0].id,
+                "qty": package_info[1],
+                "name": extended_name + package_info[0].name
+                if extended_name and package_info[0].id != cls.uom_unit.id
+                else package_info[0].name,
+                "is_unit": package_info[2],
+            }
+            for package_info in expected_info
+        ]
+
+    def test_contained_mapping(self):
+        pkg_pallet = (
+            self.pkg_pallet.id,
+            (self.pkg_big_box.id, 10, self.pkg_big_box.name, False),
         )
+        pkg_big_box = (
+            self.pkg_big_box.id,
+            (self.pkg_box.id, 4, self.pkg_box.name, False),
+        )
+        pkg_box = (self.pkg_box.id, (self.uom_unit.id, 50, self.uom_unit.name, True))
+        expected_mapping = self._generate_expected_contained_mapping(
+            [pkg_pallet, pkg_big_box, pkg_box]
+        )
+        self.assertEqual(self.product_a.packaging_contained_mapping, expected_mapping)
         # Update pkg qty
         self.pkg_pallet.qty = 4000
-        self.assertEqual(
-            self.product_a.packaging_contained_mapping,
-            {
-                str(self.pkg_pallet.id): [
-                    {
-                        "id": self.pkg_big_box.id,
-                        "qty": 20,
-                        "name": self.pkg_big_box.name,
-                        "is_unit": False,
-                    },
-                ],
-                str(self.pkg_big_box.id): [
-                    {
-                        "id": self.pkg_box.id,
-                        "qty": 4,
-                        "name": self.pkg_box.name,
-                        "is_unit": False,
-                    },
-                ],
-                str(self.pkg_box.id): [
-                    {
-                        "id": self.uom_unit.id,
-                        "qty": 50,
-                        "name": self.uom_unit.name,
-                        "is_unit": True,
-                    },
-                ],
-            },
+        pkg_pallet = (
+            self.pkg_pallet.id,
+            (self.pkg_big_box.id, 20, self.pkg_big_box.name, False),
         )
+        expected_mapping = self._generate_expected_contained_mapping(
+            [pkg_pallet, pkg_big_box, pkg_box]
+        )
+        self.assertEqual(self.product_a.packaging_contained_mapping, expected_mapping)
 
     def test_calc_1(self):
         """Test easy behavior 1."""
-        expected = [
-            {
-                "id": self.pkg_pallet.id,
-                "qty": 1,
-                "name": self.pkg_pallet.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.pkg_big_box.id,
-                "qty": 3,
-                "name": self.pkg_big_box.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.pkg_box.id,
-                "qty": 1,
-                "name": self.pkg_box.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.uom_unit.id,
-                "qty": 5,
-                "name": self.uom_unit.name,
-                "is_unit": True,
-            },
-        ]
+        pallet_info = (self.pkg_pallet, 1, False)
+        big_box_info = (self.pkg_big_box, 3, False)
+        box_info = (self.pkg_box, 1, False)
+        unit_info = (self.uom_unit, 5, True)
+        expected = self._generate_expected_packaging_info(
+            [pallet_info, big_box_info, box_info, unit_info]
+        )
         self.assertEqual(self.product_a.product_qty_by_packaging(2655), expected)
 
     def test_calc_2(self):
         """Test easy behavior 2."""
-        expected = [
-            {
-                "id": self.pkg_big_box.id,
-                "qty": 1,
-                "name": self.pkg_big_box.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.pkg_box.id,
-                "qty": 3,
-                "name": self.pkg_box.name,
-                "is_unit": False,
-            },
-        ]
+        big_box_info = (self.pkg_big_box, 1, False)
+        box_info = (self.pkg_box, 3, False)
+        expected = self._generate_expected_packaging_info([big_box_info, box_info])
         self.assertEqual(self.product_a.product_qty_by_packaging(350), expected)
 
     def test_calc_3(self):
         """Test easy behavior 3."""
-        expected = [
-            {
-                "id": self.pkg_box.id,
-                "qty": 1,
-                "name": self.pkg_box.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.uom_unit.id,
-                "qty": 30,
-                "name": self.uom_unit.name,
-                "is_unit": True,
-            },
-        ]
+        box_info = (self.pkg_box, 1, False)
+        unit_info = (self.uom_unit, 30, True)
+        expected = self._generate_expected_packaging_info([box_info, unit_info])
         self.assertEqual(self.product_a.product_qty_by_packaging(80), expected)
 
-    def test_calc_6(self):
-        """Test fractional qty is lost."""
-        expected = [
-            {
-                "id": self.pkg_box.id,
-                "qty": 1,
-                "name": self.pkg_box.name,
-                "is_unit": False,
-            },
-        ]
+    def test_calc_4(self):
+        """Test fractional qty is  in the unit package."""
+        unit_info = (self.uom_unit, 1, True)
+        box_info = (self.pkg_box, 1, False)
+        expected = self._generate_expected_packaging_info([box_info, unit_info])
         self.assertEqual(self.product_a.product_qty_by_packaging(50.5), expected)
 
     def test_calc_filter(self):
         """Test packaging filter."""
-        expected = [
-            {
-                "id": self.pkg_big_box.id,
-                "qty": 13,
-                "name": self.pkg_big_box.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.pkg_box.id,
-                "qty": 1,
-                "name": self.pkg_box.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.uom_unit.id,
-                "qty": 5,
-                "name": self.uom_unit.name,
-                "is_unit": True,
-            },
-        ]
+        big_box_info = (self.pkg_big_box, 13, False)
+        box_info = (self.pkg_box, 1, False)
+        unit_info = (self.uom_unit, 5, True)
+        expected = self._generate_expected_packaging_info(
+            [big_box_info, box_info, unit_info]
+        )
         self.assertEqual(
             self.product_a.with_context(
                 _packaging_filter=lambda x: x != self.pkg_pallet
@@ -201,32 +140,16 @@ class TestCalc(SavepointCase):
 
     def test_calc_name_get(self):
         """Test custom name getter."""
-        expected = [
-            {
-                "id": self.pkg_pallet.id,
-                "qty": 1,
-                "name": "FOO " + self.pkg_pallet.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.pkg_big_box.id,
-                "qty": 3,
-                "name": "FOO " + self.pkg_big_box.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.pkg_box.id,
-                "qty": 1,
-                "name": "FOO " + self.pkg_box.name,
-                "is_unit": False,
-            },
-            {
-                "id": self.uom_unit.id,
-                "qty": 5,
-                "name": self.uom_unit.name,
-                "is_unit": True,
-            },
-        ]
+
+        pallet_info = (self.pkg_pallet, 1, False)
+        big_box_info = (self.pkg_big_box, 3, False)
+        box_info = (self.pkg_box, 1, False)
+        unit_info = (self.uom_unit, 5, True)
+        extended_name = "FOO "
+        expected = self._generate_expected_packaging_info(
+            [pallet_info, big_box_info, box_info, unit_info],
+            extended_name=extended_name,
+        )
         self.assertEqual(
             self.product_a.with_context(
                 _packaging_name_getter=lambda x: "FOO " + x.name

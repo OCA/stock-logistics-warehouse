@@ -3,19 +3,17 @@
 
 from collections import namedtuple
 
-from odoo import api, models
+from odoo import api, fields, models
 from odoo.tools import float_compare
 
-from odoo.addons.base_sparse_field.models.fields import Serialized
-
-# Unify records as we mix up w/ UoM
 Packaging = namedtuple("Packaging", "id name qty is_unit")
 
 
-class Product(models.Model):
+class ProductProduct(models.Model):
+
     _inherit = "product.product"
 
-    packaging_contained_mapping = Serialized(
+    packaging_contained_mapping = fields.Serialized(
         compute="_compute_packaging_contained_mapping",
         help="Technical field to store contained packaging. ",
     )
@@ -39,7 +37,9 @@ class Product(models.Model):
             if pkg.is_unit:
                 # skip minimal unit
                 continue
-            res[pkg.id] = self._product_qty_by_packaging(packaging[i + 1 :], pkg.qty)
+            res[str(pkg.id)] = self._product_qty_by_packaging(
+                packaging[i + 1 :], pkg.qty
+            )
         return res
 
     def product_qty_by_packaging(self, prod_qty, with_contained=False):
@@ -65,9 +65,7 @@ class Product(models.Model):
         """
         self.ensure_one()
         return self._product_qty_by_packaging(
-            self._ordered_packaging(),
-            prod_qty,
-            with_contained=with_contained,
+            self._ordered_packaging(), prod_qty, with_contained=with_contained,
         )
 
     def _ordered_packaging(self):
@@ -102,7 +100,6 @@ class Product(models.Model):
 
     def _product_qty_by_packaging(self, pkg_by_qty, qty, with_contained=False):
         """Produce a list of dictionaries of packaging info."""
-        # TODO: refactor to handle fractional quantities (eg: 0.5 Kg)
         res = []
         prepare_values = self.env.context.get(
             "_packaging_values_handler", self._prepare_qty_by_packaging_values
@@ -119,6 +116,9 @@ class Product(models.Model):
                         contained = mapping.get(str(pkg.id))
                     value["contained"] = contained
                 res.append(value)
+                if 0 < qty < 1:
+                    unit_pkg = prepare_values(pkg_by_qty[-1], 1)
+                    res.append(unit_pkg)
             if not qty:
                 break
         return res
@@ -132,6 +132,7 @@ class Product(models.Model):
         ):
             qty -= pkg_qty
             qty_per_pkg += 1
+
         return qty_per_pkg, qty
 
     def _prepare_qty_by_packaging_values(self, packaging, qty_per_pkg):
