@@ -10,7 +10,7 @@ class ProcurementGroup(models.Model):
     _inherit = "procurement.group"
 
     @api.model
-    def run(self, procurements):
+    def run(self, procurements, raise_user_error=True):
         # 'Procurement' is a 'namedtuple', which is not editable.
         # The 'procurement' which needs to be edited is created new
         # and the previous one is deleted.
@@ -46,4 +46,4 @@ class ProcurementGroup(models.Model):
             for index in indexes_to_pop:
                 procurements.pop(index)
         procurements.extend(new_procs)
-        return super(ProcurementGroup, self).run(procurements)
+        return super(ProcurementGroup, self).run(procurements, raise_user_error)
