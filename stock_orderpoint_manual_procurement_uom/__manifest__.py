@@ -4,7 +4,7 @@
     "name": "Stock Orderpoint Manual Procurement UoM",
     "summary": "Glue module for stock_orderpoint_uom and "
     "stock_orderpoint_manual_procurement",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
