@@ -17,7 +17,7 @@
         <field name="inherit_id" ref="stock_request.stock_request_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='warehouse_id']" position="after">
-                <field name="direction" required="1" />
+                <field name="direction" />
             </xpath>
             <xpath expr="//field[@name='stock_request_ids']" position="attributes">
                 <attribute name="context">{
