@@ -11,6 +11,10 @@ class ResConfigSettings(models.TransientModel):
         implied_group="stock_request.group_stock_request_order"
     )
 
+    group_bypass_submit_request = fields.Boolean(
+        implied_group="stock_request.group_bypass_submit_request"
+    )
+
     module_stock_request_purchase = fields.Boolean(
         string="Stock Requests for Purchases"
     )

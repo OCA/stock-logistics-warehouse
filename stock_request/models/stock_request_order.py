@@ -225,6 +225,17 @@ class StockRequestOrder(models.Model):
     def action_confirm(self):
         self.mapped("stock_request_ids").action_confirm()
         self.write({"state": "open"})
+        # Check if user allowed to skip Submit stage
+        if self.env.user.has_group("stock_request.group_bypass_submit_request"):
+            self.mapped("stock_request_ids").action_confirm()
+            self.write({"state": "open"})
+        else:
+            # Move one state
+            self.mapped("stock_request_ids").action_confirm()
+            if self.state == "draft":
+                self.state = "submitted"
+            else:
+                self.state = "open"
         return True
 
     def action_draft(self):

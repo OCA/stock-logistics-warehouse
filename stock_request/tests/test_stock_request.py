@@ -20,6 +20,9 @@ class TestStockRequest(common.TransactionCase):
         self.stock_request_user_group = self.env.ref(
             "stock_request.group_stock_request_user"
         )
+        self.group_bypass_submit_request = self.env.ref(
+            "stock_request.group_bypass_submit_request"
+        )
         self.stock_request_manager_group = self.env.ref(
             "stock_request.group_stock_request_manager"
         )
@@ -42,12 +45,12 @@ class TestStockRequest(common.TransactionCase):
         )
         self.stock_request_user = self._create_user(
             "stock_request_user",
-            [self.stock_request_user_group.id],
+            [self.stock_request_user_group.id, self.group_bypass_submit_request.id],
             [self.main_company.id, self.company_2.id],
         )
         self.stock_request_manager = self._create_user(
             "stock_request_manager",
-            [self.stock_request_manager_group.id],
+            [self.stock_request_manager_group.id, self.group_bypass_submit_request.id],
             [self.main_company.id, self.company_2.id],
         )
         self.product = self._create_product("SH", "Shoes", False)
@@ -576,7 +579,8 @@ class TestStockRequestBase(TestStockRequest):
         stock_request = order.stock_request_ids
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        order.with_user(self.stock_request_manager).action_confirm()
+        order.with_user(self.stock_request_manager).action_confirm()  # To submit
+        order.with_user(self.stock_request_manager).action_confirm()  # To confirm
         self.assertEqual(order.state, "open")
         self.assertEqual(stock_request.state, "open")
 
@@ -626,7 +630,8 @@ class TestStockRequestBase(TestStockRequest):
         )
 
         self.product.route_ids = [(6, 0, self.route.ids)]
-        stock_request.with_user(self.stock_request_manager).action_confirm()
+        self.with_user(self.stock_request_manager).action_confirm()  # To submit
+        self.with_user(self.stock_request_manager).action_confirm()  # To confirm
         self.assertEqual(stock_request.state, "open")
         self.assertEqual(len(stock_request.picking_ids), 1)
         self.assertEqual(len(stock_request.move_ids), 1)
@@ -674,8 +679,10 @@ class TestStockRequestBase(TestStockRequest):
         )
         stock_request_2.product_uom_qty = 6.0
         self.product.route_ids = [(6, 0, self.route.ids)]
-        stock_request_1.sudo().action_confirm()
-        stock_request_2.sudo().action_confirm()
+        stock_request_1.sudo().action_confirm()  # To submit
+        stock_request_1.sudo().action_confirm()  # To confirm
+        stock_request_2.sudo().action_confirm()  # To submit
+        stock_request_2.sudo().action_confirm()  # To confirm
         self.assertEqual(len(stock_request_1.sudo().picking_ids), 1)
         self.assertEqual(
             stock_request_1.sudo().picking_ids, stock_request_2.sudo().picking_ids
@@ -740,6 +747,7 @@ class TestStockRequestBase(TestStockRequest):
         order = self.request_order.with_user(self.stock_request_user).create(vals)
 
         self.product.route_ids = [(6, 0, self.route.ids)]
+        order.with_user(self.stock_request_manager).action_confirm()
         order.with_user(self.stock_request_manager).action_confirm()
         stock_request = order.stock_request_ids
         self.assertEqual(len(order.picking_ids), 1)
@@ -930,6 +938,8 @@ class TestStockRequestBase(TestStockRequest):
         # the action from the products, so test that they get a friendlier
         # error message.
         self.stock_request_user.groups_id -= self.stock_request_user_group
+        self.stock_request_user.groups_id -= self.group_bypass_submit_request
+
         with self.assertRaisesRegex(
             exceptions.UserError,
             "Unfortunately it seems you do not have the necessary rights "

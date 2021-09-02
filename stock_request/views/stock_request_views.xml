@@ -109,17 +109,17 @@
                         name="action_confirm"
                         string="Confirm"
                         type="object"
-                        attrs="{'invisible': [('state', 'not in', ['draft'])]}"
+                        states="draft,submitted"
                     />
                     <button
                         name="action_cancel"
-                        states="draft,open"
+                        states="draft,submitted,cancel,open"
                         type="object"
                         string="Cancel"
                     />
                     <button
                         name="action_draft"
-                        states="cancel"
+                        states="submitted,cancel"
                         type="object"
                         string="Set to Draft"
                     />

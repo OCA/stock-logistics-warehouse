@@ -7,6 +7,7 @@ from odoo.tools import float_compare
 
 REQUEST_STATES = [
     ("draft", "Draft"),
+    ("submitted", "Submitted"),
     ("open", "In progress"),
     ("done", "Done"),
     ("cancel", "Cancelled"),
@@ -242,12 +243,24 @@ class StockRequest(models.Model):
         self.write({"state": "open"})
 
     def action_confirm(self):
-        self._action_confirm()
+        # Check if user allowed to skip Submit stage
+        if self.env.user.has_group("stock_request.group_bypass_submit_request"):
+            self._action_confirm()
+            return True
+        else:
+            # Move one state
+            if self.state == "draft":
+                self._action_submit()
+            else:
+                self._action_confirm()
         return True
 
     def action_draft(self):
         self.write({"state": "draft"})
         return True
+
+    def _action_submit(self):
+        self.write({"state": "submitted"})
 
     def action_cancel(self):
         self.sudo().mapped("move_ids")._action_cancel()
@@ -307,7 +320,10 @@ class StockRequest(models.Model):
         }
 
     def _skip_procurement(self):
-        return self.state != "draft" or self.product_id.type not in ("consu", "product")
+        return self.state not in ("draft", "submitted") or self.product_id.type not in (
+            "consu",
+            "product",
+        )
 
     def _action_launch_procurement_rule(self):
         """
