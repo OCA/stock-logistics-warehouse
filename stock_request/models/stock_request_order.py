@@ -136,6 +136,10 @@ class StockRequestOrder(models.Model):
         string="Stock requests", compute="_compute_stock_request_count", readonly=True
     )
 
+    production_ids = fields.Many2many('mrp.production', compute='_compute_production_ids')
+    production_count = fields.Integer(compute='_compute_production_ids')
+
+
     _sql_constraints = [
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")
     ]
@@ -155,6 +159,12 @@ class StockRequestOrder(models.Model):
     def _compute_stock_request_count(self):
         for record in self:
             record.stock_request_count = len(record.stock_request_ids)
+
+
+    def _compute_production_ids(self):
+        for request in self:
+            request.production_ids = self.env['mrp.production'].search([('origin', '=', request.name)])
+            request.production_count = len(request.production_ids)
 
     @api.onchange("requested_by")
     def onchange_requested_by(self):
@@ -267,6 +277,11 @@ class StockRequestOrder(models.Model):
                 (self.env.ref("stock_request.view_stock_request_form").id, "form")
             ]
             action["res_id"] = self.stock_request_ids.id
+        return action
+
+    def action_view_production(self):
+        action = self.env.ref('mrp.mrp_production_action').read()[0]
+        action['domain'] = [('id', 'in', self.production_ids.ids)]
         return action
 
     @api.model
