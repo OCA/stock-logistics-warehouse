@@ -69,6 +69,19 @@
                                 string="Stock Requests"
                             />
                         </button>
+                        <button
+                                type="object"
+                                name="action_view_production"
+                                class="oe_stat_button"
+                                icon="fa-wrench"
+                                attrs="{'invisible': [('production_count', '=', 0)]}"
+                        >
+                            <field
+                                    name="production_count"
+                                    widget="statinfo"
+                                    string="Production"
+                            />
+                        </button>
                     </div>
                     <div class="oe_title">
                         <label for="name" string="Stock Request" />
