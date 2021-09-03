@@ -63,6 +63,7 @@ setuptools.setup(
         'odoo13-addon-stock_picking_consolidation_priority',
         'odoo13-addon-stock_picking_procure_method',
         'odoo13-addon-stock_product_qty_by_packaging',
+        'odoo13-addon-stock_production_lot_quantity_tree',
         'odoo13-addon-stock_pull_list',
         'odoo13-addon-stock_putaway_product_template',
         'odoo13-addon-stock_quant_manual_assign',
