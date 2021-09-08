@@ -46,10 +46,6 @@ class TestStockLocation(SavepointCase):
         inventory.with_user(stock_user).action_start()
         inventory.with_user(stock_manager).action_validate()
         self.assertEqual(
-            self.leaf_location.with_user(stock_user).validated_inventory_ids.ids,
-            [inventory.id],
-        )
-        self.assertEqual(
             self.leaf_location.with_user(stock_user).last_inventory_date, inventory.date
         )
         try:
@@ -60,8 +56,6 @@ class TestStockLocation(SavepointCase):
 
     def test_leaf_location(self):
         self.assertFalse(self.leaf_location.child_ids)
-        self.assertFalse(self.leaf_location.validated_inventory_ids)
-        self.assertFalse(self.leaf_location.last_inventory_date)
         inventory = self.env["stock.inventory"].create(
             {
                 "name": "Inventory Adjustment",
@@ -71,13 +65,10 @@ class TestStockLocation(SavepointCase):
         )
         inventory.action_start()
         inventory.action_validate()
-        self.assertEqual(self.leaf_location.validated_inventory_ids.ids, [inventory.id])
         self.assertEqual(self.leaf_location.last_inventory_date, inventory.date)
+        self.assertFalse(self.top_location.last_inventory_date)
 
     def test_top_location(self):
-        self.assertTrue(self.top_location.child_ids)
-        self.assertFalse(self.top_location.validated_inventory_ids)
-        self.assertFalse(self.top_location.last_inventory_date)
         inventory = self.env["stock.inventory"].create(
             {
                 "name": "Inventory Adjustment",
@@ -87,5 +78,5 @@ class TestStockLocation(SavepointCase):
         )
         inventory.action_start()
         inventory.action_validate()
-        self.assertEqual(self.top_location.validated_inventory_ids.ids, [inventory.id])
-        self.assertFalse(self.top_location.last_inventory_date)
+        self.assertEqual(self.leaf_location.last_inventory_date, inventory.date)
+        self.assertEqual(self.top_location.last_inventory_date, inventory.date)
