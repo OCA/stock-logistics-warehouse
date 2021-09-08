@@ -16,8 +16,8 @@ msgstr ""
 #. module: stock_location_last_inventory_date
 #: model:ir.model.fields,help:stock_location_last_inventory_date.field_stock_location__last_inventory_date
 msgid ""
-"Indicates the last inventory date for the location (only for validated "
-"inventories). It is only computed for leaf locations."
+"Indicates the last inventory date for the location, including inventory done"
+" on parents location."
 msgstr ""
 
 #. module: stock_location_last_inventory_date
@@ -28,14 +28,4 @@ msgstr ""
 #. module: stock_location_last_inventory_date
 #: model:ir.model.fields,field_description:stock_location_last_inventory_date.field_stock_location__last_inventory_date
 msgid "Last Inventory Date"
-msgstr ""
-
-#. module: stock_location_last_inventory_date
-#: model:ir.model.fields,field_description:stock_location_last_inventory_date.field_stock_location__validated_inventory_ids
-msgid "Stock Inventories"
-msgstr ""
-
-#. module: stock_location_last_inventory_date
-#: model:ir.model.fields,help:stock_location_last_inventory_date.field_stock_location__validated_inventory_ids
-msgid "Stock inventories in state validated for this location."
 msgstr ""
