@@ -27,7 +27,7 @@ class ZippcubeDevice(Component):
             data[key] = value
         return {
             "max_weight": data["weight"],
-            "lngth": data["length"],
+            "packaging_length": data["length"],
             "width": data["width"],
             "height": data["height"],
         }

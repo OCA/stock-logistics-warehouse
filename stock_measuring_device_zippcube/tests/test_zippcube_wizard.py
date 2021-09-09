@@ -74,28 +74,33 @@ class TestZippcubeWizard(SavepointComponentCase):
         self.assertEqual(self.wizard.product_id, self.product_1)
         self.assertEqual(len(self.wizard.line_ids), 6)
 
-    def test_zippcube_measures(self):
+    def setup_wizard(self, verify=True):
         self.wizard.product_id = self.product_1.id
         self.wizard.onchange_product_id()
+        fields = ["packaging_length", "width", "height", "max_weight", "volume"]
         for idx, line in enumerate(self.wizard.line_ids):
             return_value = TestZippcubeWizard.get_measure_result(
                 100 * 2 ** idx, 100, 100, 3 ** idx
             )
             line.measuring_select_for_measure()
             self.device._update_packaging_measures(return_value)
+            if not verify:
+                continue
             self.assertEqual(
-                line.read(["lngth", "width", "height", "max_weight", "volume"])[0],
+                line.read(fields)[0],
                 {
                     "id": line.id,
-                    "lngth": (2 ** idx) * 1000,
+                    "packaging_length": (2 ** idx) * 1000,
                     "width": 1000,
                     "height": 1000,
                     "max_weight": 3.0 ** idx,
                     "volume": 2.0 ** idx,
                 },
             )
-
         self.wizard.action_save()
+
+    def test_zippcube_measures(self):
+        self.setup_wizard()
         mm_uom = self.env.ref("stock_measuring_device.product_uom_mm")
         self.assertEqual(
             self.product_1.read(
@@ -120,15 +125,51 @@ class TestZippcubeWizard(SavepointComponentCase):
         )
         packagings = self.product_1.packaging_ids.sorted()
         self.assertEqual(len(packagings), 5)
+        self.assertEqual(set(packagings.mapped("length_uom_name")), {"mm"})
         for idx, packaging in enumerate(packagings, 1):
             self.assertEqual(
-                packaging.read(["lngth", "width", "height", "max_weight", "volume"])[0],
+                packaging.read(
+                    ["packaging_length", "width", "height", "max_weight", "volume"]
+                )[0],
                 {
                     "id": packaging.id,
-                    "lngth": (2 ** idx) * 1000,
+                    "packaging_length": (2 ** idx) * 1000,
                     "width": 1000,
                     "height": 1000,
                     "max_weight": 3.0 ** idx,
                     "volume": 2.0 ** idx,
                 },
             )
+
+    def test_wizard_actions(self):
+        self.setup_wizard(verify=False)
+        res = self.wizard.action_reopen_fullscreen()
+        self.assertEqual(res["res_id"], self.wizard.id)
+        res = self.wizard.reload()
+        self.assertEqual(res, {"type": "ir.actions.act_view_reload"})
+        self.wizard._notify("Test message")
+        self.wizard.line_ids[-1].scan_requested = True
+        res = self.wizard.action_close()
+        self.assertEqual(
+            res,
+            {
+                "type": "ir.actions.act_window",
+                "res_model": self.device._name,
+                "res_id": self.device.id,
+                "view_mode": "form",
+                "target": "main",
+                "flags": {"headless": False, "clear_breadcrumbs": True},
+            },
+        )
+        test_product = self.product_2
+        self.assertNotEqual(self.wizard.product_id, test_product)
+        test_product.packaging_ids[1].measuring_device_id = self.device
+        res = self.device.open_wizard()
+        self.assertEqual(res["context"]["default_product_id"], test_product.id)
+        self.wizard.retrieve_product()
+        self.assertEqual(self.wizard.product_id, test_product)
+        self.assertFalse(self.wizard.line_ids[-1].measuring_select_for_measure())
+        self.assertTrue(self.wizard.line_ids[-1].measuring_select_for_measure_cancel())
+        self.device.state = "not_ready"
+        self.device.test_device()
+        self.assertEqual(self.device.state, "ready")
