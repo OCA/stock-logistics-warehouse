@@ -87,7 +87,9 @@ class MeasuringDevice(models.Model):
             ]
 
         wizard_line = self.env["measuring.wizard.line"].search(
-            line_domain, order="write_date DESC", limit=1,
+            line_domain,
+            order="write_date DESC",
+            limit=1,
         )
         if not wizard_line:
             _logger.warning("No wizard line found for this measure.")

@@ -1,10 +1,10 @@
-odoo.define("stock_measuring_device.measuring_wizard", function(require) {
+odoo.define("stock_measuring_device.measuring_wizard", function (require) {
     "use strict";
 
     var FormController = require("web.FormController");
 
     FormController.include({
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             if (this.modelName === "measuring.wizard") {
                 this.call(
@@ -22,9 +22,9 @@ odoo.define("stock_measuring_device.measuring_wizard", function(require) {
                 this.call("bus_service", "startPolling");
             }
         },
-        measuring_wizard_bus_notification: function(notifications) {
+        measuring_wizard_bus_notification: function (notifications) {
             var self = this;
-            _.each(notifications, function(notification) {
+            _.each(notifications, function (notification) {
                 var channel = notification[0];
                 var message = notification[1];
                 if (channel === "notify_measuring_wizard_screen") {
@@ -34,7 +34,7 @@ odoo.define("stock_measuring_device.measuring_wizard", function(require) {
                 }
             });
         },
-        measuring_wizard_bus_action_refresh: function(params) {
+        measuring_wizard_bus_action_refresh: function (params) {
             var selectedIds = this.getSelectedIds();
             if (!selectedIds.length || params.model !== this.modelName) {
                 return;
@@ -44,7 +44,7 @@ odoo.define("stock_measuring_device.measuring_wizard", function(require) {
                 this.reload();
             }
         },
-        destroy: function() {
+        destroy: function () {
             if (this.modelName === "measuring.wizard") {
                 this.call(
                     "bus_service",
