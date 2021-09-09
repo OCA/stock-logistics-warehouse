@@ -113,7 +113,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: stock_measuring_device
-#: model:ir.model.fields,field_description:stock_measuring_device.field_measuring_wizard_line__lngth
+#: model:ir.model.fields,field_description:stock_measuring_device.field_measuring_wizard_line__packaging_length
 msgid "Length (mm)"
 msgstr ""
 

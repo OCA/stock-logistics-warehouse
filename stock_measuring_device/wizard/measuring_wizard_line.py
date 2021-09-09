@@ -14,9 +14,7 @@ class MeasuringWizardLine(models.TransientModel):
     name = fields.Char("Packaging", readonly=True)
     qty = fields.Float("Quantity")
     max_weight = fields.Float("Weight (kg)", readonly=True)
-    # this is not a typo:
-    # https://github.com/odoo/odoo/issues/41353#issuecomment-568037415
-    lngth = fields.Integer("Length (mm)", readonly=True)
+    packaging_length = fields.Integer("Length (mm)", readonly=True)
     width = fields.Integer("Width (mm)", readonly=True)
     height = fields.Integer("Height (mm)", readonly=True)
     volume = fields.Float(
@@ -35,10 +33,12 @@ class MeasuringWizardLine(models.TransientModel):
     required = fields.Boolean(related="packaging_type_id.required", readonly=True)
     is_measured = fields.Boolean()
 
-    @api.depends("lngth", "width", "height")
+    @api.depends("packaging_length", "width", "height")
     def _compute_volume(self):
         for line in self:
-            line.volume = (line.lngth * line.width * line.height) / 1000.0 ** 3
+            line.volume = (
+                line.packaging_length * line.width * line.height
+            ) / 1000.0 ** 3
 
     def measuring_select_for_measure(self):
         """Current line has been selected for measurement
