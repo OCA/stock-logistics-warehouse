@@ -77,9 +77,9 @@ class StockWarehouse(models.Model):
         }
 
     def action_compute_cycle_count_rules(self):
-        """ Apply the rule in all the sublocations of a given warehouse(s) and
+        """Apply the rule in all the sublocations of a given warehouse(s) and
         returns a list with required dates for the cycle count of each
-        location """
+        location"""
         for rec in self:
             proposed_cycle_counts = []
             rules = rec._cycle_count_rules_to_compute()
