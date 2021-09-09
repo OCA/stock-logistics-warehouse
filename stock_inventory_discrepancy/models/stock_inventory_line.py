@@ -28,7 +28,9 @@ class StockInventoryLine(models.Model):
         help="Maximum Discrepancy Rate Threshold",
         compute="_compute_discrepancy_threshold",
     )
-    has_over_discrepancy = fields.Boolean(compute="_compute_has_over_discrepancy",)
+    has_over_discrepancy = fields.Boolean(
+        compute="_compute_has_over_discrepancy",
+    )
 
     @api.depends("theoretical_qty", "product_qty")
     def _compute_discrepancy(self):
