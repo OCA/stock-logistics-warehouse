@@ -102,8 +102,7 @@ class TestInventoryDiscrepancy(TransactionCase):
         starting_inv.action_force_done()
 
     def test_compute_discrepancy(self):
-        """Tests if the discrepancy is correctly computed.
-        """
+        """Tests if the discrepancy is correctly computed."""
         inventory = self.obj_inventory.create(
             {
                 "name": "Test Discrepancy Computation",
