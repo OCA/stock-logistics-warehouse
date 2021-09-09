@@ -53,7 +53,7 @@
     <record id="stock_inventory_line_tree2" model="ir.ui.view">
         <field name="name">stock.inventory.line.tree2</field>
         <field name="model">stock.inventory.line</field>
-        <field name="inherit_id" ref="stock.stock_inventory_line_tree2" />
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree" />
         <field name="arch" type="xml">
             <field name="product_qty" position="after">
                 <field name="discrepancy_qty" />
