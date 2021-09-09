@@ -64,8 +64,8 @@
                             options="{'bg_color': 'lightcoral: max_weight == 0.0 and required'}"
                         />
                         <field
-                            name="lngth"
-                            options="{'bg_color': 'lightcoral: lngth == 0.0 and required'}"
+                            name="packaging_length"
+                            options="{'bg_color': 'lightcoral: packaging_length == 0.0 and required'}"
                         />
                         <field
                             name="width"

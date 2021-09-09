@@ -31,7 +31,7 @@ class MeasuringWizard(models.TransientModel):
             "name": "Unit",
             "qty": 1,
             "max_weight": self.product_id.weight,
-            "lngth": self.product_id.product_length,
+            "packaging_length": self.product_id.product_length,
             "width": self.product_id.product_width,
             "height": self.product_id.product_height,
             "is_unit_line": True,
@@ -41,7 +41,7 @@ class MeasuringWizard(models.TransientModel):
         if mm_uom != product_dimension_uom:
             vals.update(
                 {
-                    "lngth": product_dimension_uom._compute_quantity(
+                    "packaging_length": product_dimension_uom._compute_quantity(
                         self.product_id.product_length, mm_uom
                     ),
                     "width": product_dimension_uom._compute_quantity(
@@ -72,7 +72,7 @@ class MeasuringWizard(models.TransientModel):
                 "name": pack_type.name,
                 "qty": 0,
                 "max_weight": 0,
-                "lngth": 0,
+                "packaging_length": 0,
                 "width": 0,
                 "height": 0,
                 "barcode": False,
@@ -83,7 +83,7 @@ class MeasuringWizard(models.TransientModel):
                     {
                         "qty": pack.qty,
                         "max_weight": pack.max_weight,
-                        "lngth": pack.lngth,
+                        "packaging_length": pack.packaging_length,
                         "width": pack.width,
                         "height": pack.height,
                         "barcode": pack.barcode,
@@ -108,6 +108,7 @@ class MeasuringWizard(models.TransientModel):
 
     def action_save(self):
         self.ensure_one()
+        mm_uom = self.env.ref("stock_measuring_device.product_uom_mm")
         product_vals = {}
         packaging_ids_list = []
         for line in self.line_ids:
@@ -120,9 +121,10 @@ class MeasuringWizard(models.TransientModel):
                     "name": line.name,
                     "qty": line.qty,
                     "max_weight": line.max_weight,
-                    "lngth": line.lngth,
+                    "packaging_length": line.packaging_length,
                     "width": line.width,
                     "height": line.height,
+                    "length_uom_id": mm_uom.id,
                     "barcode": line.barcode,
                     "packaging_type_id": line.packaging_type_id.id,
                 }
@@ -133,10 +135,9 @@ class MeasuringWizard(models.TransientModel):
                     packaging_ids_list.append((0, 0, vals))
             else:
                 # Handle unit line
-                mm_uom = self.env.ref("stock_measuring_device.product_uom_mm")
                 product_vals.update(
                     {
-                        "product_length": line.lngth,
+                        "product_length": line.packaging_length,
                         "product_width": line.width,
                         "product_height": line.height,
                         "dimensional_uom_id": mm_uom.id,
