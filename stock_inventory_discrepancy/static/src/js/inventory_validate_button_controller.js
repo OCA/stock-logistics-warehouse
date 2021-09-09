@@ -1,4 +1,4 @@
-odoo.define("stock_inventory_discrepancy.InventoryValidationController", function(
+odoo.define("stock_inventory_discrepancy.InventoryValidationController", function (
     require
 ) {
     "use strict";
@@ -13,7 +13,7 @@ odoo.define("stock_inventory_discrepancy.InventoryValidationController", functio
          * @override
          * @see displayNotification
          */
-        do_notify: function(title, message, sticky, className) {
+        do_notify: function (title, message, sticky, className) {
             var self = this;
             if (this.modelName === "stock.inventory.line") {
                 this._rpc({
@@ -21,13 +21,13 @@ odoo.define("stock_inventory_discrepancy.InventoryValidationController", functio
                     method: "read",
                     args: [this.inventory_id, ["state"]],
                 })
-                    .then(function(res) {
+                    .then(function (res) {
                         if (res[0].state === "pending") {
                             title = _t("Pending to Approve");
                             message = _t("The inventory needs to be approved");
                         }
                     })
-                    .finally(function() {
+                    .finally(function () {
                         return self.displayNotification({
                             type: "warning",
                             title: title,
