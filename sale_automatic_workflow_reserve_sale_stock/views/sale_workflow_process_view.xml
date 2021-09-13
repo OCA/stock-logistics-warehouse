@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="sale_workflow_process_view_form" model="ir.ui.view">
+            <field name="name">sale.workflow.process.stock.reserve</field>
+            <field name="model">sale.workflow.process</field>
+            <field
+                name="inherit_id"
+                ref="sale_automatic_workflow.sale_workflow_process_view_form"
+            />
+            <field name="arch" type="xml">
+                <group name="invoice_options" position="after">
+                    <group name="reserve_options" string="Reserve Options">
+                        <field name="stock_reservation" />
+                        <field name="stock_reservation_validity" />
+                        <field name="stock_reservation_location_id" />
+                        <field name="stock_reservation_location_dest_id" />
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>
