@@ -70,6 +70,7 @@
                             <field
                                 name="warehouse_ids"
                                 widget="many2many_tags"
+                                force_save="1"
                                 attrs="{'readonly': [('apply_in', '!=', 'warehouse')]}"
                             />
                             <field
