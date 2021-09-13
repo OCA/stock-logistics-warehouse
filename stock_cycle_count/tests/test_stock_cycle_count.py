@@ -246,7 +246,7 @@ class TestStockCycleCount(common.TransactionCase):
     def test_view_methods(self):
         """Tests the methods used to handle views."""
         self.cycle_count_1.action_create_inventory_adjustment()
-        self.cycle_count_1.action_view_inventory()
+        self.cycle_count_1.sudo().action_view_inventory()
         inv_count = self.cycle_count_1.inventory_adj_count
         self.assertEqual(inv_count, 1, "View method failing.")
         rules = [
