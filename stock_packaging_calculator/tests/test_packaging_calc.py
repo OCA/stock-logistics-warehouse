@@ -121,7 +121,9 @@ class TestCalc(TestCommon):
                 contained=[make_pkg_values(self.pkg_box, qty=4)],
             ),
             make_pkg_values(
-                self.pkg_box, qty=1, contained=[make_pkg_values(self.uom_unit, qty=50)],
+                self.pkg_box,
+                qty=1,
+                contained=[make_pkg_values(self.uom_unit, qty=50)],
             ),
             make_pkg_values(self.uom_unit, qty=5, contained=None),
         ]
@@ -148,7 +150,9 @@ class TestCalc(TestCommon):
                 ],
             ),
             make_pkg_values(
-                self.pkg_box, qty=1, contained=[make_pkg_values(self.uom_unit, qty=30)],
+                self.pkg_box,
+                qty=1,
+                contained=[make_pkg_values(self.uom_unit, qty=30)],
             ),
             make_pkg_values(self.uom_unit, qty=25, contained=None),
         ]
