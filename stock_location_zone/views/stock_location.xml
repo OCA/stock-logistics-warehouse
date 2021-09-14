@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="stock_location_form_inherit" model="ir.ui.view">
+        <field name="name">stock.location.zone</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <field name="scrap_location" position="before">
+                <field name="is_zone" />
+            </field>
+            <field name="usage" position="after">
+                <field name="location_kind" />
+                <field name="zone_location_id" />
+                <field name="area_location_id" />
+            </field>
+        </field>
+    </record>
+    <record id="view_location_search" model="ir.ui.view">
+        <field name="name">view.location.search.inherit</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="location_kind" />
+                <field name="is_zone" />
+                <field name="zone_location_id" />
+                <field name="area_location_id" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Location Kind"
+                        name="location_kind"
+                        domain="[]"
+                        context="{'group_by':'location_kind'}"
+                    />
+                    <filter
+                        string="Zone location"
+                        name="zone_location"
+                        domain="[]"
+                        context="{'group_by':'zone_location_id'}"
+                    />
+                    <filter
+                        string="Area location"
+                        name="area_location"
+                        domain="[]"
+                        context="{'group_by':'area_location_id'}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
