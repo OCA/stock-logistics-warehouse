@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2016-08-28 10:00+0000\n"
 "PO-Revision-Date: 2019-09-26 15:05+0000\n"
 "Last-Translator: 黎伟杰 <674416404@qq.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/oca/"
-"OCA-stock-logistics-warehouse-9-0/language/zh_CN/)\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-stock-"
+"logistics-warehouse-9-0/language/zh_CN/)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,19 +32,32 @@ msgid "Bolt"
 msgstr "螺栓"
 
 #. module: stock_available_mrp
+#: model:ir.model.fields,field_description:stock_available_mrp.field_product_product__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_available_mrp
+#: model:ir.model.fields,field_description:stock_available_mrp.field_product_product__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_available_mrp
+#: model:ir.model.fields,field_description:stock_available_mrp.field_product_product____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_available_mrp
 #: model:ir.model,name:stock_available_mrp.model_product_product
 msgid "Product"
 msgstr "产品"
 
 #. module: stock_available_mrp
 #: model:product.product,name:stock_available_mrp.product_kit_1a
-#: model:product.template,name:stock_available_mrp.product_kit_1a_product_template
 msgid "Table Kit"
 msgstr "桌台套件"
 
 #. module: stock_available_mrp
 #: model:product.product,description:stock_available_mrp.product_kit_1a
-#: model:product.template,description:stock_available_mrp.product_kit_1a_product_template
 msgid "Table kit"
 msgstr "桌台套件"
 
@@ -52,17 +65,25 @@ msgstr "桌台套件"
 #: model:product.product,uom_name:stock_available_mrp.product_computer_desk_bolt_white
 #: model:product.product,uom_name:stock_available_mrp.product_kit_1a
 #: model:product.template,uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
-#: model:product.template,uom_name:stock_available_mrp.product_kit_1a_product_template
-msgid "Unit(s)"
-msgstr "件"
+msgid "Units"
+msgstr ""
 
 #. module: stock_available_mrp
 #: model:product.product,weight_uom_name:stock_available_mrp.product_computer_desk_bolt_white
 #: model:product.product,weight_uom_name:stock_available_mrp.product_kit_1a
 #: model:product.template,weight_uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
-#: model:product.template,weight_uom_name:stock_available_mrp.product_kit_1a_product_template
 msgid "kg"
 msgstr "公斤"
+
+#. module: stock_available_mrp
+#: model:product.product,volume_uom_name:stock_available_mrp.product_computer_desk_bolt_white
+#: model:product.product,volume_uom_name:stock_available_mrp.product_kit_1a
+#: model:product.template,volume_uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
+msgid "m³"
+msgstr ""
+
+#~ msgid "Unit(s)"
+#~ msgstr "件"
 
 #~ msgid "Product Template"
 #~ msgstr "产品模板"
