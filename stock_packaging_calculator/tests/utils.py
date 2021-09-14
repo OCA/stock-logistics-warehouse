@@ -3,8 +3,7 @@
 
 
 def make_pkg_values(record, **kw):
-    """Helper to generate test values for packaging.
-    """
+    """Helper to generate test values for packaging."""
     name = record.name
     if record._name == "uom.uom":
         is_unit = True
