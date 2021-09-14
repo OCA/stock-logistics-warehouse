@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -108,7 +108,9 @@ msgid "Destination Tray"
 msgstr ""
 
 #. module: stock_location_tray
+#: model:ir.model.fields,field_description:stock_location_tray.field_stock_location__display_name
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__display_name
+#: model:ir.model.fields,field_description:stock_location_tray.field_stock_move_line__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -128,7 +130,9 @@ msgid "Height of the tray in mm"
 msgstr ""
 
 #. module: stock_location_tray
+#: model:ir.model.fields,field_description:stock_location_tray.field_stock_location__id
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__id
+#: model:ir.model.fields,field_description:stock_location_tray.field_stock_move_line__id
 msgid "ID"
 msgstr ""
 
@@ -138,7 +142,9 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_location_tray
+#: model:ir.model.fields,field_description:stock_location_tray.field_stock_location____last_update
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type____last_update
+#: model:ir.model.fields,field_description:stock_location_tray.field_stock_move_line____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -274,18 +280,6 @@ msgstr ""
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location__tray_type_id
 msgid "Tray Type"
-msgstr ""
-
-#. module: stock_location_tray
-#: code:addons/stock_location_tray/models/stock_location.py:0
-#, python-format
-msgid "Tray locations cannot be archived when they contain products."
-msgstr ""
-
-#. module: stock_location_tray
-#: code:addons/stock_location_tray/models/stock_location.py:0
-#, python-format
-msgid "Trays cannot be modified when they contain products."
 msgstr ""
 
 #. module: stock_location_tray
