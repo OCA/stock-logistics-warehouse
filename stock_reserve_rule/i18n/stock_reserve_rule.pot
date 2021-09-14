@@ -267,3 +267,15 @@ msgstr ""
 #: model:product.template,uom_name:stock_reserve_rule.product_funky_socks_product_template
 msgid "Units"
 msgstr ""
+
+#. module: stock_reserve_rule
+#: model:product.product,weight_uom_name:stock_reserve_rule.product_funky_socks
+#: model:product.template,weight_uom_name:stock_reserve_rule.product_funky_socks_product_template
+msgid "kg"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:product.product,volume_uom_name:stock_reserve_rule.product_funky_socks
+#: model:product.template,volume_uom_name:stock_reserve_rule.product_funky_socks_product_template
+msgid "m³"
+msgstr ""
