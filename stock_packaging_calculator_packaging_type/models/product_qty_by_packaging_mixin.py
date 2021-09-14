@@ -6,8 +6,7 @@ from odoo import api, models
 
 
 class ProductQtyByPackagingMixin(models.AbstractModel):
-    """Allow displaying product qty by packaging.
-    """
+    """Allow displaying product qty by packaging."""
 
     _inherit = "product.qty_by_packaging.mixin"
 

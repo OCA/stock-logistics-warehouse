@@ -45,7 +45,8 @@ class TestCalc(TestCommon):
         )
         self.assertEqual(
             self.product_a.with_context(
-                qty_by_packaging_type_fname="name", qty_by_packaging_type_compact=False,
+                qty_by_packaging_type_fname="name",
+                qty_by_packaging_type_compact=False,
             ).product_qty_by_packaging_as_str(250),
             "1 Transport Box,\xa01 Retail Box",
         )
