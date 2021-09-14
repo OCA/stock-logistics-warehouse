@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="stock_location_tray_assets"
+        name="stock.location.tray.assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/stock_location_tray/static/src/scss/stock_location_tray.scss"
+            />
+            <script
+                type="text/javascript"
+                src="/stock_location_tray/static/src/js/stock_location_tray.js"
+            />
+        </xpath>
+    </template>
+</odoo>

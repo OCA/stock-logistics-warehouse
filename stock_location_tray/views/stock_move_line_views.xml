@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_move_line_operation_tree" model="ir.ui.view">
+        <field name="name">stock.move.line.operations.tree.tray.type</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="tray_source_matrix" invisible="1" />
+                <button
+                    name="action_show_source_tray"
+                    string="Show Source Tray"
+                    type="object"
+                    icon="fa-th"
+                    attrs="{'invisible': [('tray_source_matrix', '=', {})]}"
+                    invisible="not context.get('show_source_location')"
+                    groups="stock.group_stock_multi_locations"
+                />
+            </field>
+            <field name="location_dest_id" position="after">
+                <field name="tray_dest_matrix" invisible="1" />
+                <button
+                    name="action_show_dest_tray"
+                    string="Show Destination Tray"
+                    type="object"
+                    icon="fa-th"
+                    attrs="{'invisible': [('tray_dest_matrix', '=', {})]}"
+                    invisible="not context.get('show_destination_location')"
+                    groups="stock.group_stock_multi_locations"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_stock_move_line_tray" model="ir.ui.view">
+        <field name="name">stock.move.line.tray</field>
+        <field name="model">stock.move.line</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <form string="Tray" create="0" edit="0" delete="0">
+                <group
+                    name="source_tray"
+                    invisible="not context.get('show_source_tray')"
+                >
+                    <field name="location_id" readonly="1" />
+                    <field name="tray_source_matrix" widget="location_tray_matrix" />
+                </group>
+                <group
+                    name="destination_tray"
+                    invisible="not context.get('show_dest_tray')"
+                >
+                    <field name="location_dest_id" readonly="1" />
+                    <field name="tray_dest_matrix" widget="location_tray_matrix" />
+                </group>
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
