@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo14-addon-stock_location_children',
         'odoo14-addon-stock_location_lockdown',
         'odoo14-addon-stock_location_position',
+        'odoo14-addon-stock_location_tray',
         'odoo14-addon-stock_location_zone',
         'odoo14-addon-stock_move_common_dest',
         'odoo14-addon-stock_move_location',
