@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_measuring_device_inventory_manager,measuring.device.inventory.manager,stock_measuring_device.model_measuring_device,stock.group_stock_manager,1,1,1,1
+access_measuring_device_inventory_user,measuring.device.inventory.user,stock_measuring_device.model_measuring_device,stock.group_stock_user,1,0,0,0
+access_measuring_wizard,access_measuring_wizard,model_measuring_wizard,base.group_user,1,1,1,1
+access_measuring_wizard_line,access_measuring_wizard_line,model_measuring_wizard_line,base.group_user,1,1,1,1
