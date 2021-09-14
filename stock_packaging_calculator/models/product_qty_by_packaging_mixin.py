@@ -6,8 +6,7 @@ from odoo import api, fields, models
 
 
 class ProductQtyByPackagingMixin(models.AbstractModel):
-    """Allow displaying product qty by packaging.
-    """
+    """Allow displaying product qty by packaging."""
 
     _name = "product.qty_by_packaging.mixin"
     _description = "Product Qty By Packaging (Mixin)"
