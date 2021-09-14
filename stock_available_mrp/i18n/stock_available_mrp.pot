@@ -60,3 +60,17 @@ msgstr ""
 #: model:product.template,uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
 msgid "Units"
 msgstr ""
+
+#. module: stock_available_mrp
+#: model:product.product,weight_uom_name:stock_available_mrp.product_computer_desk_bolt_white
+#: model:product.product,weight_uom_name:stock_available_mrp.product_kit_1a
+#: model:product.template,weight_uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
+msgid "kg"
+msgstr ""
+
+#. module: stock_available_mrp
+#: model:product.product,volume_uom_name:stock_available_mrp.product_computer_desk_bolt_white
+#: model:product.product,volume_uom_name:stock_available_mrp.product_kit_1a
+#: model:product.template,volume_uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
+msgid "m³"
+msgstr ""
