@@ -21,4 +21,4 @@ class VerticalLiftShuttle(models.Model):
         return sftp_fields
 
     def _compute_default_hardware(self):
-        self.hardware = "simulation"
+        self.update({"hardware": "simulation"})
