@@ -1,7 +1,7 @@
 # Copyright 2020 Camptocamp SA
 # @author: Simone Orsi <simone.orsi@camptocamp.com>
 # @author: Sébastien Alix <sebastien.alix@camptocamp.com>
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import models
 

@@ -1,5 +1,5 @@
 # Copyright 2021 Camptocamp SA
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from odoo.addons.stock_packaging_calculator.tests.common import TestCommon
 
 # from odoo.addons.stock_packaging_calculator.tests.utils import make_pkg_values
