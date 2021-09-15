@@ -28,9 +28,9 @@ class TestStockLotFilterAvailable(SavepointCase):
     def test_bad_operator(self):
         with self.assertRaises(ValueError):
             self.StockProductionLot._search_product_qty("in", [10, 15])
-        with self.assertRaises(ValueError):
-            self.StockProductionLot._search_product_qty(">", 2)
 
     def test_good_operator(self):
         domain = self.StockProductionLot._search_product_qty(">", 0)
+        self.assertTrue(self.lot.id in domain[0][2])
+        domain = self.StockProductionLot._search_product_qty(">", 2)
         self.assertTrue(self.lot.id in domain[0][2])

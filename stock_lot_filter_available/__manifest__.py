@@ -3,7 +3,7 @@
 {
     "name": "Stock Lot Filter Available",
     "summary": "Allow to filter lots by available on stock",
-    "version": "13.0.1.0.0",
+    "version": "13.0.2.0.0",
     "category": "Warehouse",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
