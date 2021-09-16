@@ -135,6 +135,7 @@ class TestStockOrderpointRoute(common.SavepointCase):
             "company_id": self.main_company.id,
             "warehouse_id": self.warehouse.id,
             "location_id": self.warehouse.lot_stock_id.id,
+            "qty_to_order": 11.0,
         }
 
         orderpoint = self.orderpoint_model.with_user(self.stock_manager).create(vals)
@@ -160,6 +161,7 @@ class TestStockOrderpointRoute(common.SavepointCase):
             "company_id": self.main_company.id,
             "warehouse_id": self.warehouse.id,
             "location_id": self.warehouse.lot_stock_id.id,
+            "qty_to_order": 11.0,
         }
 
         orderpoint = self.orderpoint_model.with_user(self.stock_manager).create(vals)

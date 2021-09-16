@@ -47,7 +47,7 @@ class StockWarehouseOrderpoint(models.Model):
             [("id", "parent_of", self.location_id.id)]
         )
 
-    def _prepare_procurement_values(self, product_qty, date=False, group=False):
-        res = super()._prepare_procurement_values(product_qty, date=date, group=group)
+    def _prepare_procurement_values(self, date=False, group=False):
+        res = super()._prepare_procurement_values(date=date, group=group)
         res["route_ids"] = self.route_id
         return res
