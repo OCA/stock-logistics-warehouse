@@ -83,6 +83,7 @@ class ProductProduct(models.Model):
             # Need by product (same product can be in many BOM lines/levels)
             exploded_components = exploded_boms[product.id]
             component_needs = product._get_components_needs(exploded_components)
+            bom_id = product.bom_id
             if not component_needs:
                 # The BoM has no line we can use
                 potential_qty = immediately_usable_qty = 0.0
@@ -96,7 +97,6 @@ class ProductProduct(models.Model):
                     ]
                 )
 
-                bom_id = product.bom_id
                 potential_qty = bom_id.product_qty * components_potential_qty
                 potential_qty = potential_qty > 0.0 and potential_qty or 0.0
 
