@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record model="ir.sequence" id="sequence_kardex_command">
+        <field name="name">Vertical Lift Commands</field>
+        <field name="code">vertical.lift.command</field>
+        <field name="prefix">L</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>

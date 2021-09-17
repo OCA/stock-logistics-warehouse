@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="stock_vertical_lift_demo_shuttle_1" model="vertical.lift.shuttle">
+        <field name="name">Shuttle 1</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_1" />
+        <field name="mode">pick</field>
+    </record>
+    <record id="stock_vertical_lift_demo_shuttle_2" model="vertical.lift.shuttle">
+        <field name="name">Shuttle 2</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_2" />
+        <field name="mode">pick</field>
+    </record>
+    <record id="stock_vertical_lift_demo_shuttle_3" model="vertical.lift.shuttle">
+        <field name="name">Shuttle 3</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_3" />
+        <field name="mode">pick</field>
+    </record>
+</odoo>

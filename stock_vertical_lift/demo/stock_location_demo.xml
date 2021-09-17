@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="stock_location_vertical_lift" model="stock.location">
+        <field name="name">Vertical Lift</field>
+        <!-- Beware, must not be view, even if we must not have stock here.
+             Because stock moves targeting views are not included in the
+             inventory at date, and we want to be able to use "Vertical Lift View"
+             as destination (the final destination will be a "cell" in a Shuttle).
+        -->
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="usage">internal</field>
+        <field name="vertical_lift_location" eval="True" />
+    </record>
+    <record id="stock_location_vertical_lift_demo_shuttle_1" model="stock.location">
+        <field name="name">Shuttle 1</field>
+        <field name="location_id" ref="stock_location_vertical_lift" />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_1a" model="stock.location">
+        <field name="name">Tray 1A</field>
+        <field name="barcode">T1A</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_1" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_small_8x"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_1b" model="stock.location">
+        <field name="name">Tray 1B</field>
+        <field name="barcode">T1B</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_1" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_large_8x"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_1c" model="stock.location">
+        <field name="name">Tray 1C</field>
+        <field name="barcode">T1C</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_1" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_large_32x"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_shuttle_2" model="stock.location">
+        <field name="name">Shuttle 2</field>
+        <field name="location_id" ref="stock_location_vertical_lift" />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_2a" model="stock.location">
+        <field name="name">Tray 2A</field>
+        <field name="barcode">T2A</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_2" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_large_8x"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_2b" model="stock.location">
+        <field name="name">Tray 2B</field>
+        <field name="barcode">T2B</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_2" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_large_4x"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_2c" model="stock.location">
+        <field name="name">Tray 2C</field>
+        <field name="barcode">T2C</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_2" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_large_16x_2"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_2d" model="stock.location">
+        <field name="name">Tray 2D</field>
+        <field name="barcode">T2D</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_2" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_small_8x"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_shuttle_3" model="stock.location">
+        <field name="name">Shuttle 3</field>
+        <field name="location_id" ref="stock_location_vertical_lift" />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_3a" model="stock.location">
+        <field name="name">Tray 3A</field>
+        <field name="barcode">T3A</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_3" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_small_16x_2"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <record id="stock_location_vertical_lift_demo_tray_3b" model="stock.location">
+        <field name="name">Tray 3B</field>
+        <field name="barcode">T3B</field>
+        <field name="location_id" ref="stock_location_vertical_lift_demo_shuttle_3" />
+        <field
+            name="tray_type_id"
+            ref="stock_location_tray.stock_location_tray_type_large_32x"
+        />
+        <field name="usage">internal</field>
+    </record>
+    <!-- When the trays are created, they will create their 'cell' locations.
+         This method will add xmlids on them to be able to reference them in
+         other demo data and tests.
+    -->
+    <function model="stock.location" name="_create_tray_xmlids">
+        <function
+            eval="[[('cell_in_tray_type_id', '!=', False)]]"
+            model="stock.location"
+            name="search"
+        />
+        <value>stock_vertical_lift</value>
+    </function>
+</odoo>

@@ -1,0 +1,135 @@
+.o_web_client.o_fullscreen {
+    $o-shuttle-padding: $o-horizontal-padding;
+
+    .o_form_view.o_vlift_shuttle {
+        display: flex;
+        flex-flow: column nowrap;
+        padding: 0;
+
+        font-size: 16px;
+
+        @include media-breakpoint-up(xl) {
+            font-size: 18px;
+        }
+
+        .btn {
+            font-size: 1em;
+            padding: 1em;
+            margin: 0 5px;
+        }
+
+        .o_shuttle_header {
+            display: flex;
+            flex-flow: row wrap;
+            padding: $o-shuttle-padding;
+        }
+
+        .o_shuttle_header_content {
+            display: flex;
+            flex-flow: row nowrap;
+            font-size: 2em;
+            flex: 1 0 auto;
+            align-items: center;
+            width: 33%;
+
+            &.o_shuttle_header_right {
+                justify-content: flex-end;
+            }
+        }
+
+        .o_shuttle_actions {
+            display: flex;
+            flex-flow: row nowrap;
+            font-size: 1.2em;
+            padding: $o-shuttle-padding * 0.5;
+        }
+
+        .o_shuttle_operation {
+            text-align: center;
+            font-size: 2.5em;
+            padding: 0.5em;
+            color: #ffffff;
+        }
+
+        .o_shuttle_content {
+            display: flex;
+            flex-flow: row nowrap;
+            flex: 1 0 auto;
+            align-items: center;
+
+            &.o_shuttle_content_right {
+                justify-content: flex-end;
+            }
+        }
+
+        .o_shuttle_data {
+            display: flex;
+            flex-flow: row wrap;
+            padding: $o-shuttle-padding * 0.5;
+
+            .o_shuttle_data_content {
+                flex-flow: row nowrap;
+                font-size: 1.2em;
+                flex: 1 0 auto;
+                align-items: center;
+                width: 50%;
+
+                &.o_shuttle_tray {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .o_group {
+                        display: block;
+                    }
+                }
+
+                .o_field_location_tray_matrix {
+                    width: 450px;
+                }
+            }
+
+            .o_shuttle_highlight {
+                padding: 6px;
+                border-radius: 10px;
+            }
+        }
+    }
+
+    .o_vlift_shuttle_menu {
+        .btn {
+            margin-bottom: $o-shuttle-padding;
+            padding: 1em;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+    }
+
+    .o_vlift_shuttle_popup {
+        table tr {
+            line-height: 3;
+            font-size: 1.1em;
+
+            .o_list_record_remove {
+                width: 50px;
+                text-align: center;
+            }
+        }
+
+        .o_field_char {
+            padding: 1em;
+            font-size: 2em;
+        }
+
+        .btn {
+            padding: 1em;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+    }
+
+    footer .btn {
+        padding: 1em;
+        font-size: 2em;
+        text-transform: uppercase;
+    }
+}

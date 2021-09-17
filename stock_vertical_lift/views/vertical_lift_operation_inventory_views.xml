@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="vertical_lift_operation_inventory_button_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.inventory.button.view</field>
+        <field name="model">vertical.lift.operation.inventory</field>
+        <field name="inherit_id" ref="vertical_lift_operation_base_button_view" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="string">Inventory Screen</attribute>
+            </form>
+        </field>
+    </record>
+    <record id="vertical_lift_operation_inventory_screen_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.inventory.screen.view</field>
+        <field name="model">vertical.lift.operation.inventory</field>
+        <field name="inherit_id" ref="vertical_lift_operation_base_screen_view" />
+        <field name="priority">100</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="string">Inventory Screen</attribute>
+            </form>
+            <form position="inside">
+                <field name="state" invisible="1" />
+            </form>
+            <button name="button_save" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('state', 'not in', ('quantity', 'confirm_wrong_quantity'))]}</attribute>
+            </button>
+            <button name="button_release" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+            <xpath expr="//div[hasclass('o_shuttle_data')]" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('current_inventory_line_id', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('o_shuttle_data')]" position="inside">
+                <!-- on the left of the screen -->
+                <div class="o_shuttle_data_content o_shuttle_move">
+                    <div>
+                        <group>
+                            <field name="current_inventory_line_id" invisible="1" />
+                            <div>
+                                <div>
+                                    <field
+                                        name="inventory_id"
+                                        options="{'no_open': True}"
+                                        class="mr8"
+                                    />
+                                </div>
+                            </div>
+                            <label for="product_id" />
+                            <div colspan="2" class="oe_title">
+                                <h1>
+                                    <field
+                                        name="product_id"
+                                        options="{'no_open': True}"
+                                    />
+                                </h1>
+                            </div>
+                            <div colspan="2">
+                                <field name="product_packagings" />
+                            </div>
+                            <field name="lot_id" />
+                            <field name="package_id" />
+                            <label
+                                for="quantity_input"
+                                string="Quantity"
+                                class="ml32"
+                            />
+                            <div colspan="2" class="ml32">
+                                <h1 class="bg-primary o_shuttle_highlight">
+                                    <field
+                                        name="quantity_input"
+                                        default_focus="1"
+                                        class="oe_inline"
+                                        attrs="{'readonly': [('state', 'not in', ('quantity', 'confirm_wrong_quantity'))]}"
+                                    />
+                                    <field
+                                        name="product_uom_id"
+                                        options="{'no_open': True}"
+                                        class="oe_inline ml8 text-white"
+                                    />
+                                </h1>
+                            </div>
+                        </group>
+                    </div>
+                </div>
+                <!-- on the right of the screen -->
+                <div class="o_shuttle_data_content o_shuttle_tray">
+                    <group col="1">
+                        <field name="tray_name" />
+                        <field name="tray_type_code" />
+                        <field name="tray_x" />
+                        <field name="tray_y" />
+                    </group>
+                    <group>
+                        <div>
+                            <field name="tray_matrix" widget="location_tray_matrix" />
+                        </div>
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

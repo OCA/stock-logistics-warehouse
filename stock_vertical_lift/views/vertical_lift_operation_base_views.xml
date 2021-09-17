@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--
+         When we refresh the page on the browser when we are using the
+         "screen" view, odoo loses the information that we want the view
+         to be headless, fullscreen, etc. so it's displayed pretty badly.
+         This view is a work-around: its priority is lower, so it will be
+         picked up by default on loading, and a button allows to re-open
+         the screen view with the proper options.
+    -->
+    <record id="vertical_lift_operation_base_button_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.base.button.view</field>
+        <field name="model">vertical.lift.operation.base</field>
+        <field name="arch" type="xml">
+            <form string="Operations" delete="0" create="0">
+                <button
+                    string="Reopen Screen"
+                    name="action_open_screen"
+                    type="object"
+                    class="btn-primary"
+                />
+            </form>
+        </field>
+    </record>
+    <record id="vertical_lift_operation_base_screen_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.base.screen.view</field>
+        <field name="model">vertical.lift.operation.base</field>
+        <field name="arch" type="xml">
+            <form string="Operations" delete="0" create="0" class="o_vlift_shuttle">
+                <div class="o_shuttle_header">
+                    <div class="o_shuttle_header_left o_shuttle_header_content">
+                        <field name="name" readonly="1" />
+                    </div>
+                    <div class="o_shuttle_header_center o_shuttle_header_content">
+                        <label for="mode" />
+                        <field name="mode" readonly="1" />
+                    </div>
+                    <div class="o_shuttle_header_right o_shuttle_header_content">
+                        <label for="number_of_ops" />
+                        <field name="number_of_ops" readonly="1" />
+                        <span>/</span>
+                        <field name="number_of_ops_all" readonly="1" />
+                    </div>
+                </div>
+                <div class="o_shuttle_actions">
+                    <div class="o_shuttle_content o_shuttle_content_left">
+                        <button
+                            name="action_menu"
+                            type="object"
+                            class="btn-secondary o_shuttle_icon_btn"
+                            string=""
+                            icon="fa-bars"
+                            aria-label="Dropdown menu"
+                            title="Dropdown menu"
+                        />
+                        <button
+                            name="action_manual_barcode"
+                            type="object"
+                            class="btn-secondary o_shuttle_icon_btn"
+                            string=""
+                            icon="fa-terminal"
+                            aria-label="Barcode Input"
+                            title="Barcode Input"
+                        />
+                    </div>
+                    <div class="o_shuttle_content o_shuttle_content_right">
+                        <div>
+                            <!-- will react on barcode 'O-BTN.save' -->
+                            <button
+                                name="button_save"
+                                type="object"
+                                string="Save"
+                                icon="fa-check"
+                                class="btn-primary"
+                                barcode_trigger="save"
+                                attrs="{'invisible': [('state', '!=', 'save')]}"
+                            />
+                            <!-- will react on barcode 'O-BTN.release -->
+                            <button
+                                name="button_release"
+                                type="object"
+                                string="Release"
+                                class="btn-primary"
+                                barcode_trigger="release"
+                                attrs="{'invisible': [('state', '!=', 'release')]}"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="o_shuttle_operation bg-primary jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <field name="state" invisible="0" readonly="True" />
+                    </div>
+                </div>
+                <div class="o_shuttle_data">
+                </div>
+                <field name="_barcode_scanned" widget="barcode_handler" />
+            </form>
+        </field>
+    </record>
+    <record id="vertical_lift_operation_transfer_screen_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.transfer.screen.view</field>
+        <field name="model">vertical.lift.operation.transfer</field>
+        <field name="inherit_id" ref="vertical_lift_operation_base_screen_view" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_shuttle_data')]" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('current_move_line_id', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('o_shuttle_data')]" position="inside">
+                <!-- on the left of the screen -->
+                <div class="o_shuttle_data_content o_shuttle_move">
+                    <div>
+                        <group>
+                            <field name="current_move_line_id" invisible="1" />
+                            <label for="picking_id" />
+                            <div>
+                                <div>
+                                    <field
+                                        name="picking_id"
+                                        options="{'no_open': True}"
+                                        class="mr8"
+                                    />
+                                    <span>/</span>
+                                    <field
+                                        name="picking_origin"
+                                        class="oe_inline ml8"
+                                    />
+                                </div>
+                            </div>
+                            <label for="picking_partner_id" />
+                            <div>
+                                <field
+                                    name="picking_partner_id"
+                                    options="{'no_open': True}"
+                                />
+                            </div>
+                            <label for="location_dest_id" />
+                            <div>
+                                <field
+                                    name="location_dest_id"
+                                    class="bg-primary o_shuttle_highlight"
+                                    readonly="1"
+                                    options="{'no_open': True}"
+                                />
+                            </div>
+                            <label for="product_id" />
+                            <div colspan="2" class="oe_title">
+                                <h1>
+                                    <field
+                                        name="product_id"
+                                        options="{'no_open': True}"
+                                    />
+                                </h1>
+                            </div>
+                            <div colspan="2">
+                                <field name="product_packagings" />
+                            </div>
+                            <field name="lot_id" />
+                            <label
+                                for="product_uom_qty"
+                                string="Quantity"
+                                class="ml32"
+                            />
+                            <div colspan="2" class="ml32">
+                                <h1 class="bg-primary o_shuttle_highlight">
+                                    <field
+                                        name="product_uom_qty"
+                                        class="oe_inline text-white"
+                                    />
+                                    <field
+                                        name="product_uom_id"
+                                        options="{'no_open': True}"
+                                        class="oe_inline ml8 text-white"
+                                    />
+                                </h1>
+                            </div>
+                        </group>
+                    </div>
+                </div>
+                <!-- on the right of the screen -->
+                <div
+                    class="o_shuttle_data_content o_shuttle_tray"
+                    attrs="{'invisible': [('tray_type_id', '=', False)]}"
+                >
+                    <group col="1">
+                        <field name="tray_type_id" invisible="1" />
+                        <field name="tray_name" />
+                        <field name="tray_type_code" />
+                        <field name="tray_x" />
+                        <field name="tray_y" />
+                        <label for="tray_qty" />
+                        <div colspan="2" class="oe_title">
+                            <h1>
+                                <field name="tray_qty" />
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <div>
+                            <field name="tray_matrix" widget="location_tray_matrix" />
+                        </div>
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

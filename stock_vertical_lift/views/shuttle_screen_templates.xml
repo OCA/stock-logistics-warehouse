@@ -1,0 +1,23 @@
+<odoo>
+    <template id="packagings">
+        <ul class="o_vlift_packaging list-unstyled">
+            <t t-foreach="product.packaging_ids" t-as="packaging">
+                <li>
+                    <span>1</span>
+                    <span
+                        class="packaging_name"
+                        itemprop="name"
+                        t-esc="packaging.name"
+                    />
+                    <span>: </span>
+                    <span class="packaging_qty" itemprop="qty" t-esc="packaging.qty" />
+                    <span
+                        class="packaging_unit"
+                        itemprop="unit"
+                        t-esc="product.uom_id.name"
+                    />
+                </li>
+            </t>
+        </ul>
+    </template>
+</odoo>

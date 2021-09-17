@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="stock_vertical_lift_assets"
+        name="stock.vertical.lift.assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/stock_vertical_lift/static/src/scss/vertical_lift.scss"
+            />
+            <script
+                type="text/javascript"
+                src="/stock_vertical_lift/static/src/js/vertical_lift.js"
+            />
+        </xpath>
+    </template>
+</odoo>

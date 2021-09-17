@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="vertical_lift_operation_pick_button_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.pick.button.view</field>
+        <field name="model">vertical.lift.operation.pick</field>
+        <field name="inherit_id" ref="vertical_lift_operation_base_button_view" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="string">Pick Screen</attribute>
+            </form>
+        </field>
+    </record>
+    <record id="vertical_lift_operation_pick_screen_view" model="ir.ui.view">
+        <field name="name">vertical.lift.operation.pick.screen.view</field>
+        <field name="model">vertical.lift.operation.pick</field>
+        <field name="inherit_id" ref="vertical_lift_operation_transfer_screen_view" />
+        <field name="priority">100</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="string">Pick Screen</attribute>
+            </form>
+            <button name="button_save" position="before">
+                <button
+                    name="button_skip"
+                    type="object"
+                    string="Skip"
+                    icon="fa-forward"
+                    class="btn-danger"
+                    barcode_trigger="skip"
+                    attrs="{'invisible': [('state', '=', 'noop')]}"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>

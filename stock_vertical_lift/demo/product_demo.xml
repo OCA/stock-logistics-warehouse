@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="product_running_socks" model="product.product">
+        <field name="default_code">RS200</field>
+        <field name="barcode">4491673293664</field>
+        <field name="name">Running Socks</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="product.product_category_6" />
+        <field name="lst_price">30.0</field>
+        <field name="standard_price">20.0</field>
+        <field name="weight">1.0</field>
+        <field name="tracking">none</field>
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="uom_po_id" ref="uom.product_uom_unit" />
+    </record>
+    <record id="product_recovery_socks" model="product.product">
+        <field name="default_code">RS300</field>
+        <field name="barcode">2779891103531</field>
+        <field name="name">Recovery Socks</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="product.product_category_6" />
+        <field name="lst_price">30.0</field>
+        <field name="standard_price">20.0</field>
+        <field name="weight">1.0</field>
+        <field name="tracking">none</field>
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="uom_po_id" ref="uom.product_uom_unit" />
+    </record>
+</odoo>
