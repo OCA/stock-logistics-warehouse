@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -163,6 +163,11 @@ msgid "Destination"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_inventory_line__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move_line__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_quant__display_name
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__display_name
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__display_name
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__display_name
@@ -217,6 +222,11 @@ msgid "Hardware commands"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_inventory_line__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move_line__id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_quant__id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__id
@@ -269,6 +279,11 @@ msgid "Is a Vertical Lift View Location?"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_inventory_line____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move_line____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_quant____last_update
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command____last_update
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base____last_update
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory____last_update
@@ -629,13 +644,6 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_vertical_lift
-#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_id
-#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__picking_id
-#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_id
-msgid "Stock Picking"
-msgstr ""
-
-#. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_qty
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_qty
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_qty
@@ -660,6 +668,13 @@ msgstr ""
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_put__picking_id
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_id
 msgid "The stock operation where the packing has been made"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__picking_id
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_id
+msgid "Transfer"
 msgstr ""
 
 #. module: stock_vertical_lift
@@ -805,6 +820,22 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__server
 msgid "hostname or IP address of the server"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:product.product,weight_uom_name:stock_vertical_lift.product_recovery_socks
+#: model:product.product,weight_uom_name:stock_vertical_lift.product_running_socks
+#: model:product.template,weight_uom_name:stock_vertical_lift.product_recovery_socks_product_template
+#: model:product.template,weight_uom_name:stock_vertical_lift.product_running_socks_product_template
+msgid "kg"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:product.product,volume_uom_name:stock_vertical_lift.product_recovery_socks
+#: model:product.product,volume_uom_name:stock_vertical_lift.product_running_socks
+#: model:product.template,volume_uom_name:stock_vertical_lift.product_recovery_socks_product_template
+#: model:product.template,volume_uom_name:stock_vertical_lift.product_running_socks_product_template
+msgid "m³"
 msgstr ""
 
 #. module: stock_vertical_lift
