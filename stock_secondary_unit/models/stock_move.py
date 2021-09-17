@@ -85,8 +85,7 @@ class StockMoveLine(models.Model):
         if move.secondary_uom_id:
             uom = self.env['uom.uom'].browse(vals['product_uom_id'])
             factor = move.secondary_uom_id.factor * uom.factor
-            move_line_qty = vals.get(
-                'product_uom_qty', vals.get('qty_done', 0.0))
+            move_line_qty = vals.get('product_uom_qty', vals.get('qty_done', 0.0))
             qty = float_round(
                 move_line_qty / (factor or 1.0),
                 precision_rounding=move.secondary_uom_id.uom_id.rounding
@@ -104,13 +103,14 @@ class StockMoveLine(models.Model):
             if move.secondary_uom_id:
                 uom = rec.product_id.uom_id
                 factor = move.secondary_uom_id.factor * uom.factor
-                move_line_qty = vals.get('product_uom_qty', rec.product_uom_qty)
-                qty = float_round(
-                    move_line_qty / (factor or 1.0),
-                    precision_rounding=move.secondary_uom_id.uom_id.rounding
-                )
-                vals.update({
-                    'secondary_uom_qty': qty,
-                    'secondary_uom_id': move.secondary_uom_id.id,
-                })
+                move_line_qty = vals.get('product_uom_qty', vals.get('qty_done', 0.0))
+                if (move_line_qty > 0):
+                    qty = float_round(
+                        move_line_qty / (factor or 1.0),
+                        precision_rounding=move.secondary_uom_id.uom_id.rounding
+                    )
+                    vals.update({
+                        'secondary_uom_qty': qty,
+                        'secondary_uom_id': move.secondary_uom_id.id,
+                    })
         return super().write(vals)
