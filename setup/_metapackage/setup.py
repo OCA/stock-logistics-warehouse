@@ -39,6 +39,7 @@ setuptools.setup(
         'odoo14-addon-stock_request_picking_type',
         'odoo14-addon-stock_reserve_rule',
         'odoo14-addon-stock_search_supplierinfo_code',
+        'odoo14-addon-stock_vertical_lift',
         'odoo14-addon-stock_warehouse_calendar',
     ],
     classifiers=[
