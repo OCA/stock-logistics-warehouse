@@ -96,3 +96,21 @@ class StockMoveLine(models.Model):
                 'secondary_uom_id': move.secondary_uom_id.id,
             })
         return super().create(vals)
+
+    @api.multi
+    def write(self, vals):
+        for rec in self:
+            move = rec.move_id
+            if move.secondary_uom_id:
+                uom = rec.product_id.uom_id
+                factor = move.secondary_uom_id.factor * uom.factor
+                move_line_qty = vals.get('product_uom_qty', rec.product_uom_qty)
+                qty = float_round(
+                    move_line_qty / (factor or 1.0),
+                    precision_rounding=move.secondary_uom_id.uom_id.rounding
+                )
+                vals.update({
+                    'secondary_uom_qty': qty,
+                    'secondary_uom_id': move.secondary_uom_id.id,
+                })
+        return super().write(vals)
