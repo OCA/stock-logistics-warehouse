@@ -7,20 +7,6 @@ from odoo import models
 class StockRule(models.Model):
     _inherit = "stock.rule"
 
-    def _prepare_purchase_order_line(
-        self, product_id, product_qty, product_uom, company_id, values, po
-    ):
-        vals = super()._prepare_purchase_order_line(
-            product_id, product_qty, product_uom, company_id, values, po
-        )
-        # If the procurement was run directly by a reordering rule.
-        if "orderpoint_id" in values and values["orderpoint_id"].id:
-            vals["orderpoint_ids"] = [(4, values["orderpoint_id"].id)]
-        # If the procurement was run by a stock move.
-        elif "orderpoint_ids" in values:
-            vals["orderpoint_ids"] = [(4, o.id) for o in values["orderpoint_ids"]]
-        return vals
-
     def _update_purchase_order_line(
         self, product_id, product_qty, product_uom, company_id, values, line
     ):
