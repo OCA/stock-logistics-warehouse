@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,8 +22,26 @@ msgid ""
 msgstr ""
 
 #. module: stock_vertical_lift_kardex
+#: model:ir.model.fields,field_description:stock_vertical_lift_kardex.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift_kardex.field_vertical_lift_shuttle__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_vertical_lift_kardex
+#: model:ir.model.fields,field_description:stock_vertical_lift_kardex.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_vertical_lift_kardex.field_vertical_lift_shuttle__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_vertical_lift_kardex
 #: model:ir.model,name:stock_vertical_lift_kardex.model_stock_location
 msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_vertical_lift_kardex
+#: model:ir.model.fields,field_description:stock_vertical_lift_kardex.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift_kardex.field_vertical_lift_shuttle____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_vertical_lift_kardex
