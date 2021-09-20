@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_location_bin_name
+#: model:ir.model.fields,field_description:stock_location_bin_name.field_stock_location__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_location_bin_name
 #: model:ir.model.fields,help:stock_location_bin_name.field_stock_location__location_name_format
 msgid ""
 "Format string that will compute the name of the location. Use location fields. Example: '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'\n"
@@ -21,8 +26,18 @@ msgid ""
 msgstr ""
 
 #. module: stock_location_bin_name
+#: model:ir.model.fields,field_description:stock_location_bin_name.field_stock_location__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_location_bin_name
 #: model:ir.model,name:stock_location_bin_name.model_stock_location
 msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_bin_name
+#: model:ir.model.fields,field_description:stock_location_bin_name.field_stock_location____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_location_bin_name
