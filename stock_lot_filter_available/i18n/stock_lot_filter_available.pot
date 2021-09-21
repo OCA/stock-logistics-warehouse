@@ -30,6 +30,7 @@ msgstr ""
 
 #. module: stock_lot_filter_available
 #: code:addons/stock_lot_filter_available/models/stock_production_lot.py:0
+#: code:addons/stock_lot_filter_available/models/stock_production_lot.py:0
 #, python-format
 msgid "Unsupported search"
 msgstr ""
