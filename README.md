@@ -42,7 +42,7 @@ addon | version | maintainers | summary
 [stock_move_common_dest](stock_move_common_dest/) | 14.0.1.0.0 |  | Adds field for common destination moves
 [stock_move_location](stock_move_location/) | 14.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_orderpoint_move_link](stock_orderpoint_move_link/) | 14.0.1.0.0 |  | Link Reordering rules to stock moves
-[stock_packaging_calculator](stock_packaging_calculator/) | 14.0.1.0.1 |  | Compute product quantity to pick by packaging
+[stock_packaging_calculator](stock_packaging_calculator/) | 14.0.1.1.0 |  | Compute product quantity to pick by packaging
 [stock_picking_cancel_confirm](stock_picking_cancel_confirm/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Stock Picking Cancel Confirm
 [stock_pull_list](stock_pull_list/) | 14.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
 [stock_putaway_method](stock_putaway_method/) | 14.0.1.0.0 | [![asaunier](https://github.com/asaunier.png?size=30px)](https://github.com/asaunier) | Add the putaway strategy method back, removed from the stock module in Odoo 12
