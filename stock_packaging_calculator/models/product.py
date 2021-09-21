@@ -1,6 +1,8 @@
 # Copyright 2020 Camptocamp SA
+# @author: Simone Orsi <simone.orsi@camptocamp.com>
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
 
+import unicodedata
 from collections import namedtuple
 
 from odoo import api, models
@@ -9,7 +11,9 @@ from odoo.tools import float_compare
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
 # Unify records as we mix up w/ UoM
-Packaging = namedtuple("Packaging", "id name qty is_unit")
+Packaging = namedtuple("Packaging", "id name qty barcode is_unit")
+
+NO_BREAK_SPACE_CHAR = unicodedata.lookup("NO-BREAK SPACE")
 
 
 class Product(models.Model):
@@ -20,6 +24,7 @@ class Product(models.Model):
         help="Technical field to store contained packaging. ",
     )
 
+    @api.depends_context("lang")
     @api.depends("packaging_ids.qty")
     def _compute_packaging_contained_mapping(self):
         for rec in self:
@@ -80,10 +85,12 @@ class Product(models.Model):
         the display name of the packaging.
         """
         custom_filter = self.env.context.get("_packaging_filter", lambda x: x)
-        name_getter = self.env.context.get("_packaging_name_getter", lambda x: x.name)
+        name_getter = self.env.context.get(
+            "_packaging_name_getter", self._packaging_name_getter
+        )
         packagings = sorted(
             [
-                Packaging(x.id, name_getter(x), x.qty, False)
+                Packaging(x.id, name_getter(x), x.qty, x.barcode, False)
                 for x in self.packaging_ids.filtered(custom_filter)
                 # Exclude the ones w/ zero qty as they are useless for the math
                 if x.qty
@@ -96,9 +103,12 @@ class Product(models.Model):
             # NOTE: the ID here could clash w/ one of the packaging's.
             # If you create a mapping based on IDs, keep this in mind.
             # You can use `is_unit` to check this.
-            Packaging(self.uom_id.id, self.uom_id.name, self.uom_id.factor, True)
+            Packaging(self.uom_id.id, self.uom_id.name, self.uom_id.factor, None, True)
         )
         return packagings
+
+    def _packaging_name_getter(self, packaging):
+        return packaging.name
 
     def _product_qty_by_packaging(self, pkg_by_qty, qty, with_contained=False):
         """Produce a list of dictionaries of packaging info."""
@@ -140,4 +150,64 @@ class Product(models.Model):
             "qty": qty_per_pkg,
             "name": packaging.name,
             "is_unit": packaging.is_unit,
+            "barcode": packaging.barcode,
         }
+
+    def product_qty_by_packaging_as_str(
+        self, prod_qty, include_total_units=False, only_packaging=False
+    ):
+        """Return a string representing the qty of each packaging.
+
+        :param prod_qty: the qty of current product to translate to pkg qty
+        :param include_total_units: includes total qty required initially
+        :param only_packaging: exclude units if you have only units.
+            IOW: if the qty does not match any packaging and this flag is true
+            you'll get an empty string instead of `N units`.
+        """
+        self.ensure_one()
+        if not prod_qty:
+            return ""
+
+        qty_by_packaging = self.product_qty_by_packaging(prod_qty)
+        if not qty_by_packaging:
+            return ""
+
+        # Exclude unit qty and reuse it later
+        unit_qty = None
+        has_only_units = True
+        _qty_by_packaging = []
+        for pkg_qty in qty_by_packaging:
+            if pkg_qty["is_unit"]:
+                unit_qty = pkg_qty["qty"]
+                continue
+            has_only_units = False
+            _qty_by_packaging.append(pkg_qty)
+        # Browse them all at once
+        records = self.env["product.packaging"].browse(
+            [x["id"] for x in _qty_by_packaging]
+        )
+        _qty_by_packaging_as_str = self.env.context.get(
+            "_qty_by_packaging_as_str", self._qty_by_packaging_as_str
+        )
+        # Collect all strings representations
+        as_string = []
+        for record, info in zip(records, _qty_by_packaging):
+            bit = _qty_by_packaging_as_str(record, info["qty"])
+            if bit:
+                as_string.append(bit)
+        # Restore unit information if any.
+        include_units = (has_only_units and not only_packaging) or not has_only_units
+        if unit_qty and include_units:
+            as_string.append(f"{unit_qty} {self.uom_id.name}")
+        # We want to avoid line break here as this string
+        # can be used by reports
+        res = f",{NO_BREAK_SPACE_CHAR}".join(as_string)
+        if include_total_units and not has_only_units:
+            res += " " + self._qty_by_packaging_total_units(prod_qty)
+        return res
+
+    def _qty_by_packaging_as_str(self, packaging, qty):
+        return f"{qty} {packaging.name}"
+
+    def _qty_by_packaging_total_units(self, prod_qty):
+        return f"({prod_qty} {self.uom_id.name})"
