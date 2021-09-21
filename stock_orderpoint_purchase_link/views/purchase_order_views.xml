@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2018 ForgeFlow S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form//notebook" position="inside">
+                <page
+                    name="orderpoints"
+                    string="Orderpoints"
+                    groups="stock.group_stock_user"
+                >
+                    <field name="orderpoint_ids" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="purchase_order_line_form2" model="ir.ui.view">
+        <field name="name">purchase.order.line.form2</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form2" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <separator string="Orderpoints" />
+                <field name="orderpoint_ids" />
+            </field>
+        </field>
+    </record>
+</odoo>
