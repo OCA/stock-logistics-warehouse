@@ -1,0 +1,2 @@
+The usage of this module is automatic but here's an explanation to force its behavior.
+Go to Configuration>Locations and select a location that at least has one child. Edit the location's "Parent Location" to a different one and save the changes. Once the changes are saved, "Associated Warehouse" will be updated with a new warehouse. After this, go to any of its children and check the info: if things go well, "Associated Warehouse" will have changed too.
