@@ -44,6 +44,7 @@ setuptools.setup(
         'odoo14-addon-stock_vertical_lift',
         'odoo14-addon-stock_vertical_lift_kardex',
         'odoo14-addon-stock_vertical_lift_server_env',
+        'odoo14-addon-stock_vertical_lift_storage_type',
         'odoo14-addon-stock_warehouse_calendar',
     ],
     classifiers=[
