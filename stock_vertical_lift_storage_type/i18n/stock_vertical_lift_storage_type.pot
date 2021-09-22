@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_vertical_lift_storage_type
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_vertical_lift_storage_type
+#: code:addons/stock_vertical_lift_storage_type/models/stock_location.py:0
+#, python-format
+msgid ""
+"Error creating '{}': Location storage type must be set on the tray type"
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: code:addons/stock_vertical_lift_storage_type/models/stock_location.py:0
+#, python-format
+msgid "Error updating {}: Location storage type must be set on the tray type"
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: model:ir.model,name:stock_vertical_lift_storage_type.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: model:ir.model.fields,field_description:stock_vertical_lift_storage_type.field_stock_location_tray_type__location_storage_type_ids
+msgid "Location Storage Type"
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: model:ir.model.fields,help:stock_vertical_lift_storage_type.field_stock_location_tray_type__location_storage_type_ids
+msgid "Location storage types applied on the location using this tray type."
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: code:addons/stock_vertical_lift_storage_type/models/vertical_lift_operation_put.py:0
+#, python-format
+msgid "No free space found for storage type '{}' in shuttle '{}'"
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift_storage_type.view_stock_location_tray_type_form
+msgid "Put-Away"
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: model:ir.model,name:stock_vertical_lift_storage_type.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: model:ir.model,name:stock_vertical_lift_storage_type.model_stock_location_tray_type
+msgid "Stock Location Tray Type"
+msgstr ""
+
+#. module: stock_vertical_lift_storage_type
+#: model:ir.model,name:stock_vertical_lift_storage_type.model_vertical_lift_operation_put
+msgid "Vertical Lift Operation Put"
+msgstr ""
