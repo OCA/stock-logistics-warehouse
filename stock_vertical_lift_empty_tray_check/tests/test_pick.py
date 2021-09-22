@@ -66,8 +66,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(inventory.line_ids[0].theoretical_qty, 0)
 
     def test_location_empty_is_not_empty(self):
-        """ Location is indicated as being empty, but it is not.
-        """
+        """Location is indicated as being empty, but it is not."""
         operation = self._open_screen("pick")
         tray_location = operation.tray_location_id
         tray_product = operation.current_move_line_id.product_id
@@ -77,7 +76,8 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(
             inventory.name,
             "{} zero check issue on location {}".format(
-                self.picking_out.name, tray_location.complete_name,
+                self.picking_out.name,
+                tray_location.complete_name,
             ),
         )
         self.assertEqual(inventory.product_ids, tray_product)
