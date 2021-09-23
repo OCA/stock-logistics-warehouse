@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2021 Creu Blanca
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+-->
+<odoo>
+    <menuitem
+        id="menu_stock_request_report_root"
+        name="Reports"
+        sequence="200"
+        parent="stock_request.menu_stock_request_root"
+    />
+    <record id="stock_request_pivot" model="ir.ui.view">
+        <field name="name">stock.request.pivot</field>
+        <field name="model">stock.request</field>
+        <field name="arch" type="xml">
+            <pivot
+                string="Stock Requests"
+                disable_linking="True"
+                display_quantity="True"
+            >
+                <field name="product_id" type="row" />
+                <field name="warehouse_id" type="col" />
+                <field name="location_id" type="col" />
+            </pivot>
+        </field>
+    </record>
+    <record id="stock_request_pivot_search" model="ir.ui.view">
+        <field name="name">stock.request.pivot.search</field>
+        <field name="model">stock.request</field>
+        <field name="inherit_id" ref="stock_request.stock_request_search" />
+        <field name="arch" type="xml">
+            <filter name="current_requests" position="after">
+                <separator />
+                <filter
+                    string="Date"
+                    name="date"
+                    date="create_date"
+                    default_period="this_month"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="stock_request_pivot_action" model="ir.actions.act_window">
+        <field name="name">Stock Request Report</field>
+        <field name="res_model">stock.request</field>
+        <field name="view_mode">pivot</field>
+        <field name="search_view_id" ref="stock_request_pivot_search" />
+        <field name="context">{'search_default_done': 1}</field>
+        <field name="view_id" ref="stock_request_pivot" />
+    </record>
+    <menuitem
+        id="menu_stock_request_report"
+        name="Stock Request Report"
+        parent="menu_stock_request_report_root"
+        action="stock_request_pivot_action"
+    />
+</odoo>
