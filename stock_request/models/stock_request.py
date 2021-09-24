@@ -32,13 +32,6 @@ class StockRequest(models.Model):
     def _get_expected_date():
         return fields.Datetime.now()
 
-    def _get_default_expected_date(self):
-        if self.order_id:
-            res = self.order_id.expected_date
-        else:
-            res = self._get_expected_date()
-        return res
-
     name = fields.Char(states={"draft": [("readonly", False)]})
     state = fields.Selection(
         selection=_get_request_states,
@@ -58,7 +51,6 @@ class StockRequest(models.Model):
     )
     expected_date = fields.Datetime(
         "Expected Date",
-        default=lambda s: s._get_default_expected_date(),
         index=True,
         required=True,
         readonly=True,
@@ -371,6 +363,11 @@ class StockRequest(models.Model):
         upd_vals = vals.copy()
         if upd_vals.get("name", "/") == "/":
             upd_vals["name"] = self.env["ir.sequence"].next_by_code("stock.request")
+        if "order_id" in upd_vals:
+            order_id = self.env["stock.request.order"].browse(upd_vals["order_id"])
+            upd_vals["expected_date"] = order_id.expected_date
+        else:
+            upd_vals["expected_date"] = self._get_expected_date()
         return super().create(upd_vals)
 
     def unlink(self):
