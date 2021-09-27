@@ -175,6 +175,11 @@ msgid "Current requests"
 msgstr "库存请求"
 
 #. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_pivot_search
+msgid "Date"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__expected_date
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__expected_date
 msgid "Date when you expect to receive the goods."
@@ -675,6 +680,11 @@ msgid "Receive each product when available"
 msgstr "收到每个可用的产品"
 
 #. module: stock_request
+#: model:ir.ui.menu,name:stock_request.menu_stock_request_report_root
+msgid "Reports"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.actions.server,name:stock_request.action_template_generate_stock_request_orders
 #: model:ir.actions.server,name:stock_request.action_variant_generate_stock_request_orders
 msgid "Request Stock"
@@ -830,6 +840,12 @@ msgid "Stock Request Orders"
 msgstr "库存请求单"
 
 #. module: stock_request
+#: model:ir.actions.act_window,name:stock_request.stock_request_pivot_action
+#: model:ir.ui.menu,name:stock_request.menu_stock_request_report
+msgid "Stock Request Report"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_request_abstract
 msgid "Stock Request Template"
 msgstr "库存请求模版"
@@ -863,6 +879,7 @@ msgstr "库存请求产品的数量必须严格为正数。"
 #: model:ir.ui.menu,name:stock_request.menu_stock_request
 #: model:ir.ui.menu,name:stock_request.menu_stock_request_root
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_pivot
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #: model_terms:ir.ui.view,arch_db:stock_request.view_picking_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
