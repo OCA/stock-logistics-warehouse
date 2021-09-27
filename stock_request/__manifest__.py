@@ -23,5 +23,6 @@
         "views/stock_request_menu.xml",
         "data/stock_request_sequence_data.xml",
     ],
+    "maintainers": ["Kosaaaaa"],
     "installable": True,
 }
