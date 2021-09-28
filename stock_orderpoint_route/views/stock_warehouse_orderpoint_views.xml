@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ForgeFlow
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_warehouse_orderpoint_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.form</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field
+                    name="route_id"
+                    options="{'no_create': True}"
+                    groups="stock.group_adv_location"
+                />
+                <field name="route_ids" invisible="1" />
+            </field>
+        </field>
+    </record>
+</odoo>
