@@ -4,31 +4,32 @@
 import odoo.tests.common as common
 
 
-class TestPurchaseOrderLine(common.TransactionCase):
+class TestPurchaseOrderLine(common.SavepointCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         """ Create a packagings with uom product_uom_dozen on
             product_supplierinfo_1'product (uom is product_uom_unit)
         """
-        super(TestPurchaseOrderLine, self).setUp()
-        self.product_supplier_info = self.env.ref(
+        super(TestPurchaseOrderLine, cls).setUpClass()
+        cls.product_supplier_info = cls.env.ref(
             'product.product_supplierinfo_1')
-        self.product_tmpl_id = self.product_supplier_info.product_tmpl_id
-        self.product_supplier_info.product_tmpl_id.uom_po_id = self.env.ref(
+        cls.product_tmpl_id = cls.product_supplier_info.product_tmpl_id
+        cls.product_supplier_info.product_tmpl_id.uom_po_id = cls.env.ref(
             'product.product_uom_unit')
-        self.product_supplier_info.min_qty = 1
-        self.product_packaging_dozen = self.env['product.packaging'].create({
-            'product_tmpl_id': self.product_tmpl_id.id,
-            'uom_id': self.env.ref('product.product_uom_dozen').id,
+        cls.product_supplier_info.min_qty = 1
+        cls.product_packaging_dozen = cls.env['product.packaging'].create({
+            'product_tmpl_id': cls.product_tmpl_id.id,
+            'uom_id': cls.env.ref('product.product_uom_dozen').id,
             'name': 'Packaging Dozen'
         })
-        self.product_packaging_unit = self.env['product.packaging'].create({
-            'product_tmpl_id': self.product_tmpl_id.id,
-            'uom_id': self.env.ref('product.product_uom_unit').id,
+        cls.product_packaging_unit = cls.env['product.packaging'].create({
+            'product_tmpl_id': cls.product_tmpl_id.id,
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
             'name': 'Packaging Unit'
         })
-        self.product_uom_8 = self.env['product.uom'].create({
-            'category_id': self.env.ref('product.product_uom_categ_unit').id,
+        cls.product_uom_8 = cls.env['product.uom'].create({
+            'category_id': cls.env.ref('product.product_uom_categ_unit').id,
             'name': 'COL8',
             'factor_inv': 8,
             'uom_type': 'bigger',
