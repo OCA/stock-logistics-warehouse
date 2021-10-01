@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo14-addon-stock_free_quantity',
         'odoo14-addon-stock_generate_putaway_from_inventory',
         'odoo14-addon-stock_helper',
+        'odoo14-addon-stock_inventory_exclude_sublocation',
         'odoo14-addon-stock_inventory_preparation_filter',
         'odoo14-addon-stock_location_bin_name',
         'odoo14-addon-stock_location_children',
