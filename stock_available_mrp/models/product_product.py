@@ -52,6 +52,7 @@ class ProductProduct(models.Model):
 
         for product in product_with_bom:
             # Need by product (same product can be in many BOM lines/levels)
+            bom_id = first(product.bom_ids)
             exploded_components = exploded_boms[product.id]
             component_needs = product._get_components_needs(exploded_components)
             if not component_needs:
@@ -66,7 +67,6 @@ class ProductProduct(models.Model):
                         for component, need in component_needs.items()
                     ]
                 )
-                bom_id = first(product.bom_ids)
                 potential_qty = bom_id.product_qty * components_potential_qty
                 potential_qty = potential_qty > 0.0 and potential_qty or 0.0
 
