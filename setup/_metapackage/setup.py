@@ -34,6 +34,7 @@ setuptools.setup(
         'odoo14-addon-stock_measuring_device_zippcube',
         'odoo14-addon-stock_move_common_dest',
         'odoo14-addon-stock_move_location',
+        'odoo14-addon-stock_orderpoint_manual_procurement',
         'odoo14-addon-stock_orderpoint_move_link',
         'odoo14-addon-stock_orderpoint_purchase_link',
         'odoo14-addon-stock_orderpoint_route',
