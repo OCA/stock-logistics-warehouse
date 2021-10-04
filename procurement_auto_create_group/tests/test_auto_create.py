@@ -18,6 +18,8 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         loc_components = self.env.ref("stock.stock_location_components")
         picking_type_id = self.env.ref("stock.picking_type_internal").id
 
+        self.partner = self.env["res.partner"].create({"name": "Partner"})
+
         # Create rules and routes:
         route_auto = self.route_obj.create({"name": "Auto Create Group"})
         self.rule_1 = self.rule_obj.create(
@@ -30,6 +32,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "picking_type_id": picking_type_id,
                 "location_id": self.location.id,
                 "location_src_id": loc_components.id,
+                "partner_address_id": self.partner.id,
             }
         )
         route_no_auto = self.route_obj.create({"name": "Not Auto Create Group"})
@@ -98,6 +101,11 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         move = self.move_obj.search([("product_id", "=", self.prod_auto.id)])
         self.assertTrue(move)
         self.assertTrue(move.group_id, "Procurement Group not assigned.")
+        self.assertEqual(
+            move.group_id.partner_id,
+            self.partner,
+            "Procurement Group partner missing.",
+        )
 
     def test_03_onchange_method(self):
         """Test onchange method for stock rule."""
