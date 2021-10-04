@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+
+    <record id="group_change_orderpoint_procure_qty" model="res.groups">
+        <field
+            name="name"
+        >Change quantity in manual procurements from reordering rules</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+
+</odoo>

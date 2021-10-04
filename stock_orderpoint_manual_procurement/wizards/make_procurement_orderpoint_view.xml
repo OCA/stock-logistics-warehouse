@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!--  Make Procurement with security access right -->
+    <record id="view_make_procurment_buffer_wizard" model="ir.ui.view">
+        <field name="name">Request Procurement</field>
+        <field name="model">make.procurement.orderpoint</field>
+        <field name="arch" type="xml">
+            <form string="Procurement Request">
+                <p class="oe_gray">
+                    Use this assistant to generate a procurement request for this
+                    stock buffer. According to the product configuration,
+                    this may trigger a draft purchase order, a manufacturing
+                    order or a transfer picking.
+                </p>
+                <group name="items" string="Items">
+                    <field name="item_ids" nolabel="1">
+                        <tree string="Items" nocreate="1" editable="top">
+                            <field name="orderpoint_id" invisible="True" />
+                            <field
+                                name="warehouse_id"
+                                groups="stock.group_stock_multi_locations"
+                            />
+                            <field
+                                name="location_id"
+                                groups="stock.group_stock_multi_locations"
+                            />
+                            <field name="product_id" />
+                            <field name="qty" />
+                            <field name="qty_without_security" invisible="1" />
+                            <field name="uom_id" groups="uom.group_uom" />
+                            <field name="date_planned" />
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button
+                        string="Execute"
+                        name="make_procurement"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <!--  Make Procurement without security access right -->
+    <record id="view_make_procure_without_security" model="ir.ui.view">
+        <field name="name">Request Procurement</field>
+        <field name="model">make.procurement.orderpoint</field>
+        <field name="arch" type="xml">
+            <form string="Procurement Request">
+                <p class="oe_gray">
+                    Use this assistant to generate a procurement request for this
+                    stock buffer. According to the product configuration,
+                    this may trigger a draft purchase order, a manufacturing
+                    order or a transfer picking.
+                </p>
+                <group name="items" string="Items">
+                    <field name="item_ids" nolabel="1">
+                        <tree string="Items" nocreate="1" editable="top">
+                            <field name="orderpoint_id" invisible="True" />
+                            <field
+                                name="warehouse_id"
+                                groups="stock.group_stock_multi_locations"
+                            />
+                            <field
+                                name="location_id"
+                                groups="stock.group_stock_multi_locations"
+                            />
+                            <field name="product_id" />
+                            <field name="qty" invisible="1" />
+                            <field name="qty_without_security" readonly="1" />
+                            <field name="uom_id" groups="uom.group_uom" />
+                            <field name="date_planned" />
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button
+                        string="Execute"
+                        name="make_procurement"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="act_make_procurement_from_orderpoint">
+        <field name="name">Request Procurement</field>
+        <field name="res_model">make.procurement.orderpoint</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="stock.model_stock_warehouse_orderpoint" />
+    </record>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <record id="product_supplierinfo_product_7" model="product.supplierinfo">
+        <field name="product_tmpl_id" ref="product.product_product_7" />
+        <field name="name" ref="base.res_partner_3" />
+        <field name="delay">3</field>
+        <field name="min_qty">1</field>
+        <field name="price">72</field>
+    </record>
+</odoo>

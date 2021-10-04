@@ -1,0 +1,190 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_orderpoint_manual_procurement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_orderpoint_manual_procurement
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:res.groups,name:stock_orderpoint_manual_procurement.group_change_orderpoint_procure_qty
+msgid "Change quantity in manual procurements from reordering rules"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_warehouse_orderpoint_tree
+msgid "Create Procurement"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__create_uid
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__create_date
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__display_name
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid "Execute"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__id
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__item_ids
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid "Items"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint____last_update
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__write_uid
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__write_date
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model,name:stock_orderpoint_manual_procurement.model_make_procurement_orderpoint_item
+msgid "Make Procurements from Orderpoint Item"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model,name:stock_orderpoint_manual_procurement.model_make_procurement_orderpoint
+msgid "Make Procurements from Orderpoints"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model,name:stock_orderpoint_manual_procurement.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:0
+#, python-format
+msgid "No reordering rule found!"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__date_planned
+msgid "Planned Date"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_qty
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_qty
+msgid "Procure Recommendation"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid "Procurement Request"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__qty
+msgid "Qty"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__qty_without_security
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: code:addons/stock_orderpoint_manual_procurement/wizards/make_procurement_orderpoint.py:0
+#, python-format
+msgid "Quantity must be positive."
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_date
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_date
+msgid "Recommended Request Date"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__orderpoint_id
+msgid "Reordering rule"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.actions.act_window,name:stock_orderpoint_manual_procurement.act_make_procurement_from_orderpoint
+msgid "Request Procurement"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__uom_id
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procure_without_security
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
+msgid ""
+"Use this assistant to generate a procurement request for this\n"
+"                    stock buffer. According to the product configuration,\n"
+"                    this may trigger a draft purchase order, a manufacturing\n"
+"                    order or a transfer picking."
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__warehouse_id
+msgid "Warehouse"
+msgstr ""
+
+#. module: stock_orderpoint_manual_procurement
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__wiz_id
+msgid "Wizard"
+msgstr ""
