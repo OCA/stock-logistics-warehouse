@@ -16,10 +16,9 @@ class SaleOrderLine(models.Model):
     @api.depends("product_id", "product_uom_qty")
     def _compute_immediately_usable_qty_today(self):
         qty_processed_per_product = defaultdict(lambda: 0)
-        remaining = self.env["sale.order.line"]
+        self.immediately_usable_qty_today = False
         for line in self.sorted(key=lambda r: r.sequence):
             if not line.display_qty_widget:
-                remaining |= line
                 continue
             product = line.product_id
             qty_processed = qty_processed_per_product[product.id]
@@ -27,4 +26,3 @@ class SaleOrderLine(models.Model):
                 product.immediately_usable_qty - qty_processed
             )
             qty_processed_per_product[product.id] += line.product_uom_qty
-        remaining.write({"immediately_usable_qty_today": False})
