@@ -16,6 +16,7 @@ class TestProductSecondaryUnit(SavepointCase):
         cls.location_stock = cls.env.ref("stock.stock_location_stock")
         cls.picking_type_in = cls.env.ref("stock.picking_type_in")
         cls.picking_type_out = cls.env.ref("stock.picking_type_out")
+        cls.picking_type_out.show_operations = True
 
         cls.product_uom_kg = cls.env.ref("uom.product_uom_kgm")
         cls.product_uom_ton = cls.env.ref("uom.product_uom_ton")
@@ -135,15 +136,15 @@ class TestProductSecondaryUnit(SavepointCase):
         delivery_order = StockPicking.create(do_vals)
         delivery_order.action_confirm()
         # Move is merged into 1 line for both stock.move and stock.move.line
-        self.assertEquals(len(delivery_order.move_lines), 1)
-        self.assertEquals(len(delivery_order.move_line_ids), 1)
+        self.assertEqual(len(delivery_order.move_lines), 1)
+        self.assertEqual(len(delivery_order.move_line_ids), 1)
         # Qty merged to 20, and secondary unit qty is 40line
         uom_qty = sum(delivery_order.move_lines.mapped("product_uom_qty"))
         secondary_uom_qty = sum(
             delivery_order.move_line_ids.mapped("secondary_uom_qty")
         )
-        self.assertEquals(uom_qty, 20.0)
-        self.assertEquals(secondary_uom_qty, 40.0)
+        self.assertEqual(uom_qty, 20.0)
+        self.assertEqual(secondary_uom_qty, 40.0)
 
     def test_picking_secondary_unit(self):
         product = self.product_template.product_variant_ids[0]
@@ -205,7 +206,7 @@ class TestProductSecondaryUnit(SavepointCase):
                 move.secondary_uom_id = product.secondary_uom_ids[1]
         picking = picking_form.save()
         picking.action_confirm()
-        self.assertEquals(len(picking.move_lines), 2)
+        self.assertEqual(len(picking.move_lines), 2)
 
     def test_secondary_unit_merge_move_same_uom(self):
         product = self.product_template.product_variant_ids[0]
@@ -225,5 +226,5 @@ class TestProductSecondaryUnit(SavepointCase):
                 move.secondary_uom_id = product.secondary_uom_ids[0]
         picking = picking_form.save()
         picking.action_confirm()
-        self.assertEquals(len(picking.move_lines), 1)
-        self.assertEquals(picking.move_lines.secondary_uom_qty, 2)
+        self.assertEqual(len(picking.move_lines), 1)
+        self.assertEqual(picking.move_lines.secondary_uom_qty, 2)
