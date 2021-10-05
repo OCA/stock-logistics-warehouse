@@ -149,7 +149,8 @@ class TestProductSecondaryUnit(SavepointCase):
         product = self.product_template.product_variant_ids[0]
         with Form(
             self.StockPicking.with_context(
-                planned_picking=True, default_picking_type_id=self.picking_type_out.id,
+                planned_picking=True,
+                default_picking_type_id=self.picking_type_out.id,
             )
         ) as picking_form:
             with picking_form.move_ids_without_package.new() as move:
@@ -190,7 +191,8 @@ class TestProductSecondaryUnit(SavepointCase):
         product = self.product_template.product_variant_ids[0]
         with Form(
             self.StockPicking.with_context(
-                planned_picking=True, default_picking_type_id=self.picking_type_out.id,
+                planned_picking=True,
+                default_picking_type_id=self.picking_type_out.id,
             )
         ) as picking_form:
             with picking_form.move_ids_without_package.new() as move:
@@ -209,7 +211,8 @@ class TestProductSecondaryUnit(SavepointCase):
         product = self.product_template.product_variant_ids[0]
         with Form(
             self.StockPicking.with_context(
-                planned_picking=True, default_picking_type_id=self.picking_type_out.id,
+                planned_picking=True,
+                default_picking_type_id=self.picking_type_out.id,
             )
         ) as picking_form:
             with picking_form.move_ids_without_package.new() as move:
