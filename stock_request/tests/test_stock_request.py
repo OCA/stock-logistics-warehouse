@@ -829,6 +829,11 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(action["type"], "ir.actions.act_window")
         self.assertEqual(action["res_id"], stock_request.id)
 
+        action = order.action_view_production()
+        self.assertEqual(action["type"], "ir.actions.act_window")
+        self.assertEqual("domain" in action.keys(), True)
+
+
     def test_stock_request_constrains(self):
         vals = {
             "product_id": self.product.id,
