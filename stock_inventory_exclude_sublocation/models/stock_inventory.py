@@ -11,7 +11,7 @@ class Inventory(models.Model):
     exclude_sublocation = fields.Boolean(
         string="Exclude Sublocations",
         default=False,
-        track_visibility="onchange",
+        tracking=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
