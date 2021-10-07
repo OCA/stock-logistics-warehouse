@@ -259,7 +259,7 @@ class StockRequestOrder(models.Model):
         return action
 
     def action_view_stock_requests(self):
-        action = self.env.ref("stock_request.action_stock_request_form").read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id("stock_request.action_stock_request_form")
         if len(self.stock_request_ids) > 1:
             action["domain"] = [("order_id", "in", self.ids)]
         elif self.stock_request_ids:

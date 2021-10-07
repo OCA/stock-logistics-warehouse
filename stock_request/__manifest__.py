@@ -10,6 +10,7 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": ["stock"],
+    "maintainers": ["Kosaaaaa"],
     "data": [
         "security/stock_request_security.xml",
         "security/ir.model.access.csv",
