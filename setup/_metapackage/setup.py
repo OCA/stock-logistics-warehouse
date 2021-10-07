@@ -50,6 +50,7 @@ setuptools.setup(
         'odoo14-addon-stock_reserve_rule',
         'odoo14-addon-stock_search_supplierinfo_code',
         'odoo14-addon-stock_vertical_lift',
+        'odoo14-addon-stock_vertical_lift_empty_tray_check',
         'odoo14-addon-stock_vertical_lift_kardex',
         'odoo14-addon-stock_vertical_lift_server_env',
         'odoo14-addon-stock_vertical_lift_storage_type',
