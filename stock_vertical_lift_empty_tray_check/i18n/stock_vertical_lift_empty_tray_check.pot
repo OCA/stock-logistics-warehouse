@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,11 +29,15 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_vertical_lift_empty_tray_check
+#: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_vertical_lift_operation_pick__display_name
 #: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_vertical_lift_operation_pick_zero_check__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: stock_vertical_lift_empty_tray_check
+#: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_res_config_settings__id
+#: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_vertical_lift_operation_pick__id
 #: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_vertical_lift_operation_pick_zero_check__id
 msgid "ID"
 msgstr ""
@@ -53,6 +57,8 @@ msgid "Is the tray empty?"
 msgstr ""
 
 #. module: stock_vertical_lift_empty_tray_check
+#: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_vertical_lift_operation_pick____last_update
 #: model:ir.model.fields,field_description:stock_vertical_lift_empty_tray_check.field_vertical_lift_operation_pick_zero_check____last_update
 msgid "Last Modified on"
 msgstr ""
