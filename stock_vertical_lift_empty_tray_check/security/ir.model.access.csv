@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vertical_lift_operation_pick_zero_check_stock_user,access_vertical_lift_operation_pick_zero_check_stock_user,model_vertical_lift_operation_pick_zero_check,stock.group_stock_user,1,1,1,1
