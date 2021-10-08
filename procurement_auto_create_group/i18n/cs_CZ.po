@@ -26,6 +26,7 @@ msgstr "Automatické vytvoření skupiny nákupu"
 
 #. module: procurement_auto_create_group
 #: code:addons/procurement_auto_create_group/models/procurement_group.py:0
+#: code:addons/procurement_auto_create_group/models/stock_rule.py:0
 #, fuzzy, python-format
 msgid "No sequence defined for procurement group."
 msgstr "Nebyla definována žádná sekvence pro skupinu zakázek"
