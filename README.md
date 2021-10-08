@@ -43,6 +43,7 @@ addon | version | maintainers | summary
 [stock_location_zone](stock_location_zone/) | 14.0.1.0.0 |  | Classify locations with zones.
 [stock_measuring_device](stock_measuring_device/) | 14.0.1.0.0 | [![gurneyalex](https://github.com/gurneyalex.png?size=30px)](https://github.com/gurneyalex) | Implement a common interface for measuring and weighing devices
 [stock_measuring_device_zippcube](stock_measuring_device_zippcube/) | 14.0.1.0.0 | [![gurneyalex](https://github.com/gurneyalex.png?size=30px)](https://github.com/gurneyalex) | Implement interface with Bosche Zippcube devicesfor packaging measurement
+[stock_move_auto_assign](stock_move_auto_assign/) | 14.0.1.0.0 |  | Try to reserve moves when goods enter in a location
 [stock_move_common_dest](stock_move_common_dest/) | 14.0.1.0.0 |  | Adds field for common destination moves
 [stock_move_location](stock_move_location/) | 14.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_orderpoint_manual_procurement](stock_orderpoint_manual_procurement/) | 14.0.1.0.0 |  | Allows to create procurement orders from orderpoints instead of relying only on the scheduler.
