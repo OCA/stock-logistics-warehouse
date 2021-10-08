@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-30 01:24+0000\n"
-"PO-Revision-Date: 2017-05-30 01:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2021-10-08 12:34+0000\n"
+"Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: business_product_location
 #: view:business.product.location:business_product_location.business_product_location_view_form
@@ -103,7 +104,7 @@ msgstr "Zadnja izmjena"
 #: view:business.product.location:business_product_location.business_product_location_view_form
 #: field:business.product.location,location_ids:0
 msgid "Locations"
-msgstr ""
+msgstr "Lokacije"
 
 #. module: business_product_location
 #: field:business.product.location,name:0
