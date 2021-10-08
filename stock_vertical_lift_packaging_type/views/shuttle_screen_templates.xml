@@ -1,0 +1,7 @@
+<odoo>
+    <template id="packagings" inherit_id="stock_vertical_lift.packagings">
+        <xpath expr="//span[hasclass('packaging_name')]" position="attributes">
+            <attribute name="t-esc">packaging.packaging_type_id.display_name</attribute>
+        </xpath>
+    </template>
+</odoo>
