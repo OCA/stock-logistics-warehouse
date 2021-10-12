@@ -8,22 +8,23 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-02 01:08+0000\n"
-"PO-Revision-Date: 2017-05-16 19:34+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Croatian (http://www.transifex.com/oca/OCA-stock-logistics-"
-"warehouse-8-0/language/hr/)\n"
+"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
+"Language-Team: Croatian (http://www.transifex.com/oca/"
+"OCA-stock-logistics-warehouse-8-0/language/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_reserve
 #: field:product.product,reservation_count:0
 #: field:product.template,reservation_count:0
 msgid "# Sales"
-msgstr ""
+msgstr "# Prodaja"
 
 #. module: stock_reserve
 #: help:stock.reservation,state:0
@@ -59,7 +60,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,string_availability_info:0
 msgid "Availability"
-msgstr ""
+msgstr "Dostupnost"
 
 #. module: stock_reserve
 #: field:stock.reservation,backorder_id:0
