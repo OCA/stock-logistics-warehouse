@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-14 00:46+0000\n"
-"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"PO-Revision-Date: 2021-10-12 15:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
@@ -116,7 +116,7 @@ msgstr "Lokacija"
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,product_max_qty:0
 msgid "Maximum Quantity"
-msgstr ""
+msgstr "Maksimalna količina"
 
 #. module: stock_orderpoint_generator
 #: model:ir.model,name:stock_orderpoint_generator.model_stock_warehouse_orderpoint_template
@@ -126,7 +126,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: field:stock.warehouse.orderpoint.template,product_min_qty:0
 msgid "Minimum Quantity"
-msgstr ""
+msgstr "Minimalna količina"
 
 #. module: stock_orderpoint_generator
 #: help:stock.warehouse.orderpoint.template,group_id:0
