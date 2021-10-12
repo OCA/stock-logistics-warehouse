@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-30 03:46+0000\n"
-"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"PO-Revision-Date: 2021-10-12 15:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/hr/)\n"
@@ -69,15 +69,15 @@ msgstr "Površina"
 #. module: stock_location_area_management
 #: help:stock.location,location_uom:0
 msgid "This field corresponds to the unit of measure of the location"
-msgstr ""
+msgstr "Ovo polje odgovara mjernoj jedinici lokacije"
 
 #. module: stock_location_area_management
 #: help:res.company,locations_uom:0
 msgid ""
 "This field corresponds to the unit of measure of the warehouse locations"
-msgstr ""
+msgstr "Ovo polje odgovara mjernoj jedinici skladišne lokacije"
 
 #. module: stock_location_area_management
 #: field:res.company,locations_uom:0 field:stock.location,location_uom:0
 msgid "Unit of Measure"
-msgstr ""
+msgstr "Mjerna jedinica"
