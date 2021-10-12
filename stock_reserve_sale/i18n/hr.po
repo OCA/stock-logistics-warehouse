@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"PO-Revision-Date: 2021-10-12 15:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/hr/)\n"
@@ -86,7 +86,7 @@ msgstr "Naziv "
 #: code:addons/stock_reserve_sale/model/sale.py:230
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Greška"
 
 #. module: stock_reserve_sale
 #: field:sale.order,has_stock_reservation:0
@@ -123,7 +123,7 @@ msgstr "Zadnje ažuriranje"
 #. module: stock_reserve_sale
 #: help:sale.stock.reserve,location_dest_id:0
 msgid "Location where the system will reserve the products."
-msgstr ""
+msgstr "Lokacija iz koje će sustav rezervirati proizvode."
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
