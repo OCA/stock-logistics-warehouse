@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-29 09:32+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Croatian (http://www.transifex.com/oca/OCA-stock-logistics-"
-"warehouse-8-0/language/hr/)\n"
+"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
+"Language-Team: Croatian (http://www.transifex.com/oca/"
+"OCA-stock-logistics-warehouse-8-0/language/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
@@ -41,6 +42,8 @@ msgid ""
 "As you changed the quantity of the line, the quantity of the stock "
 "reservation will be automatically adjusted to %.2f."
 msgstr ""
+"Pošto ste promijenili količinu na retku, količina rezervirane zalihe će "
+"automatski biti prilagođena na %.2f."
 
 #. module: stock_reserve_sale
 #: field:sale.order,is_stock_reservable:0
@@ -50,7 +53,7 @@ msgstr ""
 #. module: stock_reserve_sale
 #: field:sale.order.line,is_stock_reservable:0
 msgid "Can be reserved"
-msgstr ""
+msgstr "Raspoloživo za rezervaciju"
 
 #. module: stock_reserve_sale
 #: view:sale.stock.reserve:stock_reserve_sale.view_sale_stock_reserve_form
@@ -61,7 +64,7 @@ msgstr "Odustani"
 #: code:addons/stock_reserve_sale/model/sale.py:196
 #, python-format
 msgid "Configuration Error!"
-msgstr ""
+msgstr "Greška u konfiguraciji!"
 
 #. module: stock_reserve_sale
 #: field:sale.stock.reserve,create_uid:0
