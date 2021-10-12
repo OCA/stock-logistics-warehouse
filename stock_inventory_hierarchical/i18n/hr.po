@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-18 03:43+0000\n"
-"PO-Revision-Date: 2016-04-14 14:54+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Croatian (http://www.transifex.com/oca/OCA-stock-logistics-"
-"warehouse-8-0/language/hr/)\n"
+"PO-Revision-Date: 2021-10-12 15:34+0000\n"
+"Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
+"Language-Team: Croatian (http://www.transifex.com/oca/"
+"OCA-stock-logistics-warehouse-8-0/language/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.generate.inventory:stock_inventory_hierarchical.view_stock_generate_inventory
@@ -71,7 +72,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: model:ir.model,name:stock_inventory_hierarchical.model_stock_inventory
 msgid "Inventory"
-msgstr ""
+msgstr "Zalihe"
 
 #. module: stock_inventory_hierarchical
 #: code:addons/stock_inventory_hierarchical/wizard/generate_inventory.py:125
@@ -82,12 +83,12 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_form_view
 msgid "Inventory on location"
-msgstr ""
+msgstr "Zalihe na lokaciji"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,prefix_inv_name:0
 msgid "Inventory prefix"
-msgstr ""
+msgstr "Prefiks zaliha"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,__last_update:0
@@ -107,12 +108,12 @@ msgstr "Zadnje ažuriranje"
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,level:0
 msgid "Level"
-msgstr ""
+msgstr "Razina"
 
 #. module: stock_inventory_hierarchical
 #: sql_constraint:stock.generate.inventory:0
 msgid "Level must be positive!"
-msgstr ""
+msgstr "Razina mora biti pozitivna!"
 
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,inventory_ids:0
@@ -122,7 +123,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.generate.inventory,location_id:0
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.view_inventory_subinventories_filter
