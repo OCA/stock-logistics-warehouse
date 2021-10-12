@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-29 09:22+0000\n"
-"PO-Revision-Date: 2017-03-29 09:22+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -18,11 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
 msgid "Available"
-msgstr ""
+msgstr "Dostupno"
 
 #. module: stock_traceability_operation
 #: selection:report.stock.traceability_operation,state:0
@@ -58,12 +59,12 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,partner_id:0
 msgid "Destination Address"
-msgstr ""
+msgstr "Adresa destinacije"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,location_dest_id:0
 msgid "Destination Location"
-msgstr ""
+msgstr "Lokacija destinacije"
 
 #. module: stock_traceability_operation
 #: code:addons/stock_traceability_operation/models/stock_quant.py:54
