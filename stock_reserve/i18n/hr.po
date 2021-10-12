@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-02 01:08+0000\n"
-"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"PO-Revision-Date: 2021-10-12 15:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/hr/)\n"
@@ -90,7 +90,7 @@ msgstr "Poduzeće"
 #. module: stock_reserve
 #: field:stock.reservation,consumed_for:0
 msgid "Consumed for"
-msgstr ""
+msgstr "Utrošeno za"
 
 #. module: stock_reserve
 #: field:stock.reservation,create_uid:0
@@ -115,12 +115,12 @@ msgstr "Opis"
 #. module: stock_reserve
 #: field:stock.reservation,partner_id:0
 msgid "Destination Address "
-msgstr ""
+msgstr "Adresa destinacije "
 
 #. module: stock_reserve
 #: field:stock.reservation,location_dest_id:0
 msgid "Destination Location"
-msgstr ""
+msgstr "Lokacija destinacije"
 
 #. module: stock_reserve
 #: field:stock.reservation,move_dest_id:0
@@ -130,7 +130,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,route_ids:0
 msgid "Destination route"
-msgstr ""
+msgstr "Ruta destinacije"
 
 #. module: stock_reserve
 #: view:stock.reservation:stock_reserve.view_stock_reservation_form
