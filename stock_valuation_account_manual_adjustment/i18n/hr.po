@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-23 02:06+0000\n"
-"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"PO-Revision-Date: 2021-10-12 15:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
@@ -89,7 +89,7 @@ msgstr ""
 #. module: stock_valuation_account_manual_adjustment
 #: help:stock.valuation.account.manual.adjustment,post_date:0
 msgid "Date of actual processing"
-msgstr ""
+msgstr "Datum stvarne obrade"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,display_name:0
@@ -112,13 +112,13 @@ msgstr "ID"
 #: code:addons/stock_valuation_account_manual_adjustment/wizards/mass_create.py:62
 #, python-format
 msgid "Incorrect model."
-msgstr ""
+msgstr "Neispravan model."
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:product.product,inventory_value:0
 #: field:stock.valuation.account.manual.adjustment,inventory_value:0
 msgid "Inventory Value"
-msgstr ""
+msgstr "Vrijednost zalihe"
 
 #. module: stock_valuation_account_manual_adjustment
 #: field:stock.valuation.account.manual.adjustment,journal_id:0
@@ -129,7 +129,7 @@ msgstr "Temeljnica"
 #. module: stock_valuation_account_manual_adjustment
 #: view:stock.valuation.account.manual.adjustment:stock_valuation_account_manual_adjustment.view_stock_valuation_account_manual_adjustment_form
 msgid "Journal Entries"
-msgstr ""
+msgstr "Stavke temeljnice"
 
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model,name:stock_valuation_account_manual_adjustment.model_account_move_line
