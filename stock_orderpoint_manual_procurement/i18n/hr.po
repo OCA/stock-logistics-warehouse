@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-23 02:06+0000\n"
-"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"PO-Revision-Date: 2021-10-12 15:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
@@ -113,7 +113,7 @@ msgstr ""
 #. module: stock_orderpoint_manual_procurement
 #: field:make.procurement.orderpoint.item,date_planned:0
 msgid "Planned Date"
-msgstr ""
+msgstr "Planirani datum"
 
 #. module: stock_orderpoint_manual_procurement
 #: field:stock.warehouse.orderpoint,procure_recommended_qty:0
@@ -123,12 +123,12 @@ msgstr ""
 #. module: stock_orderpoint_manual_procurement
 #: view:make.procurement.orderpoint:stock_orderpoint_manual_procurement.view_make_procurment_buffer_wizard
 msgid "Procurement Request"
-msgstr ""
+msgstr "Zahtjev za nabavom"
 
 #. module: stock_orderpoint_manual_procurement
 #: view:stock.warehouse.orderpoint:stock_orderpoint_manual_procurement.view_warehouse_orderpoint_tree
 msgid "Procurements"
-msgstr ""
+msgstr "Nabave"
 
 #. module: stock_orderpoint_manual_procurement
 #: field:make.procurement.orderpoint.item,product_id:0
