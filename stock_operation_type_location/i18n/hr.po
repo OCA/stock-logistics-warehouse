@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2016-11-18 03:44+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>, 2016\n"
+"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -18,11 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_operation_type_location
 #: field:stock.picking.type,allowed_dest_location_ids:0
 msgid "Allowed Destination Location"
-msgstr ""
+msgstr "Dozvoljena lokacija destinacije"
 
 #. module: stock_operation_type_location
 #: field:stock.picking.type,allowed_location_ids:0
