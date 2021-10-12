@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2021-10-12 12:34+0000\n"
+"PO-Revision-Date: 2021-10-12 15:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/hr/)\n"
@@ -96,18 +96,18 @@ msgstr ""
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory,product_ids:0
 msgid "Products"
-msgstr ""
+msgstr "Proizvodi"
 
 #. module: stock_inventory_preparation_filter
 #: field:stock.inventory.line.empty,product_qty:0
 msgid "Quantity"
-msgstr ""
+msgstr "Količina"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:55
 #, python-format
 msgid "Selected Categories"
-msgstr ""
+msgstr "Odabrane kategorije"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:59
@@ -119,9 +119,9 @@ msgstr ""
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:56
 #, python-format
 msgid "Selected Products"
-msgstr ""
+msgstr "Odabrani proizvodi"
 
 #. module: stock_inventory_preparation_filter
 #: view:stock.inventory:stock_inventory_preparation_filter.stock_inventory_form
 msgid "{'invisible':[('state','=','draft')]}"
-msgstr ""
+msgstr "{'invisible':[('state','=','draft')]}"
