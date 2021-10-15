@@ -149,7 +149,7 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         )
         picking_in.action_confirm()
         picking_in.move_lines.quantity_done = 1
-        picking_in.action_done()
+        picking_in._action_done()
 
         account_move_line = False
         for move in picking_in.move_lines:
@@ -162,7 +162,7 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         )
         picking_out.action_confirm()
         picking_out.move_lines.quantity_done = 1
-        picking_out.action_done()
+        picking_out._action_done()
 
         for move in picking_out.move_lines:
             self.assertEqual(len(move.account_move_line_ids), 2)
