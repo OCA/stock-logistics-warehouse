@@ -5,7 +5,7 @@
     "summary": """Allows tracking moves between internal locations"""
     """ via accounts.""",
     "category": "Warehouse Management",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "author": "Camptocamp SA," " Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "license": "AGPL-3",
