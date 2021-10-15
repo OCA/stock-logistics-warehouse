@@ -77,6 +77,7 @@ Authors
 ~~~~~~~
 
 * ForgeFlow
+* BCIM
 
 Contributors
 ~~~~~~~~~~~~
