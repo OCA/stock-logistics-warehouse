@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form" />
+        <field name="arch" type="xml">
+            <group name="linked_group" position="after">
+                <group name="account_move_lines_grp" string="Journal Items" colspan="4">
+                    <field name="account_move_line_ids" readonly="1" nolabel="1" />
+                </group>
+            </group>
+        </field>
+    </record>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//notebook//form//field[@name='description_picking']/.."
+                position="after"
+            >
+                <group name="account_move_lines_grp" string="Journal Items" colspan="4">
+                    <field name="account_move_line_ids" readonly="1" nolabel="1" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
