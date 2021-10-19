@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_inventory_tree" model="ir.ui.view">
+        <field name="name">Inventory tree view - cycle count extension</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_tree" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="location_ids" />
+                <field name="cycle_count_id" />
+                <field name="inventory_accuracy" />
+            </field>
+        </field>
+    </record>
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field name="name">Inventory form view - cycle count extension </field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="cycle_count_id" />
+                <label for="inventory_accuracy" />
+                <div>
+                    <field name="inventory_accuracy" class="oe_inline" /> %
+                </div>
+            </field>
+        </field>
+    </record>
+    <record id="view_inventory_filter" model="ir.ui.view">
+        <field name="name">stock.inventory.filter - stock_cycle_count</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_filter" />
+        <field name="arch" type="xml">
+            <field name="product_ids" position="after">
+                <field name="location_ids" />
+            </field>
+        </field>
+    </record>
+    <record id="view_inventory_graph" model="ir.ui.view">
+        <field name="name">stock.inventory.graph</field>
+        <field name="model">stock.inventory</field>
+        <field name="arch" type="xml">
+            <graph string="Inventory accuracy evolution" type="line">
+                <field name="cycle_count_id" type="col" />
+                <field name="inventory_accuracy" type="measure" />
+            </graph>
+        </field>
+    </record>
+    <record id="view_inventory_pivot" model="ir.ui.view">
+        <field name="name">stock.inventory.pivot</field>
+        <field name="model">stock.inventory</field>
+        <field name="arch" type="xml">
+            <pivot string="Inventory Accuracy">
+                <field name="date" type="col" />
+                <field name="name" type="row" />
+                <field name="inventory_accuracy" type="measure" />
+            </pivot>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="act_accuracy_stats">
+        <field name="domain">[('exclude_sublocation', '=', True),
+            ('state', '=', 'done')]</field>
+        <field name="name">Accuracy Stats</field>
+        <field name="res_model">stock.inventory</field>
+        <field name="view_mode">pivot,tree,form,graph</field>
+    </record>
+    <menuitem
+        id="menu_report_accuracy_stats"
+        name="Cycle Count Accuracy"
+        parent="stock.menu_warehouse_report"
+        action="act_accuracy_stats"
+    />
+</odoo>

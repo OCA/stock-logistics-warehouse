@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_warehouse_form" model="ir.ui.view">
+        <field name="name">Warehouse form - cycle count extension</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse" />
+        <field name="arch" type="xml">
+            <notebook position="before">
+                <group string="Cycle Counting" colspan="4">
+                    <field name="cycle_count_planning_horizon" />
+                    <field name="counts_for_accuracy_qty" />
+                    <br />
+                    <center colspan="4">
+                        <h3 colspan="4">Cycle Count Rules
+                    applied in this Warehouse:</h3>
+                    </center>
+                    <field name="cycle_count_rule_ids" nolabel="1" colspan="4">
+                        Cycle count rules</field>
+                </group>
+            </notebook>
+        </field>
+    </record>
+    <record id="action_server_warehouse_execute_cycle_count" model="ir.actions.server">
+        <field name="name">Compute Cycle Count Rules</field>
+        <field name="model_id" ref="stock.model_stock_warehouse" />
+        <field name="binding_model_id" ref="stock.model_stock_warehouse" />
+        <field name="state">code</field>
+        <field name="code">records.action_compute_cycle_count_rules()</field>
+    </record>
+</odoo>
