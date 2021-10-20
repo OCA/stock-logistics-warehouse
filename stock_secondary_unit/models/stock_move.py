@@ -99,18 +99,28 @@ class StockMoveLine(models.Model):
 
     @api.multi
     def write(self, vals):
-        for rec in self:
+        move_lines_with_second_unit = self.filtered(
+            lambda ml: ml.move_id.secondary_uom_id)
+        res = super(StockMoveLine, self - move_lines_with_second_unit).write(
+            vals)
+        for rec in move_lines_with_second_unit:
             move = rec.move_id
-            if move.secondary_uom_id:
-                uom = rec.product_id.uom_id
-                factor = move.secondary_uom_id.factor * uom.factor
-                move_line_qty = vals.get('product_uom_qty', rec.product_uom_qty)
-                qty = float_round(
-                    move_line_qty / (factor or 1.0),
-                    precision_rounding=move.secondary_uom_id.uom_id.rounding
-                )
-                vals.update({
-                    'secondary_uom_qty': qty,
-                    'secondary_uom_id': move.secondary_uom_id.id,
-                })
-        return super().write(vals)
+            uom = rec.product_id.uom_id
+            factor = move.secondary_uom_id.factor * uom.factor
+            if 'product_uom_qty' in vals and vals['product_uom_qty'] == 0:
+                # The picking has been validated and product_uom_qty is
+                # reset to zero
+                move_line_qty = move.quantity_done
+            else:
+                move_line_qty = vals.get(
+                    'product_uom_qty', rec.product_uom_qty)
+            qty = float_round(
+                move_line_qty / (factor or 1.0),
+                precision_rounding=move.secondary_uom_id.uom_id.rounding
+            )
+            vals.update({
+                'secondary_uom_qty': qty,
+                'secondary_uom_id': move.secondary_uom_id.id,
+            })
+            res = super(StockMoveLine, rec).write(vals)
+        return res
