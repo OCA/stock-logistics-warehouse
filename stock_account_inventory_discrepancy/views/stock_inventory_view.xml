@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ForgeFlow S.L. (https://www.forgeflow.com)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_inventory_line_tree2" model="ir.ui.view">
+        <field
+            name="name"
+        >stock.inventory.line.tree2 - stock_account_inventory_discrepancy</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree2" />
+        <field name="arch" type="xml">
+            <field name="product_qty" position="after">
+                <field name="discrepancy_amount" />
+                <field name="discrepancy_amount_threshold" />
+                <field name="company_currency_id" invisible="1" readonly="1" />
+            </field>
+        </field>
+    </record>
+</odoo>
