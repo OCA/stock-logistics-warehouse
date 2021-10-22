@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo13-addon-sale_stock_available_info_popup',
         'odoo13-addon-scrap_reason_code',
         'odoo13-addon-stock_account_change_qty_reason',
+        'odoo13-addon-stock_account_inventory_discrepancy',
         'odoo13-addon-stock_archive_constraint',
         'odoo13-addon-stock_available',
         'odoo13-addon-stock_available_immediately',
