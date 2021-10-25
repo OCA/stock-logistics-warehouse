@@ -52,16 +52,15 @@ msgid "Accuracy"
 msgstr "Genauigkeit"
 
 #. module: stock_cycle_count
+#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
+msgid "Accuracy Report"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
 msgid "Accuracy Stats"
 msgstr "Genauigkeitsstatistiken"
-
-#. module: stock_cycle_count
-#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
-#, fuzzy
-msgid "Accuracy report"
-msgstr "Genauigkeit"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_needaction
@@ -280,6 +279,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__display_name
 msgid "Display Name"
 msgstr "Anzeigename"
 
@@ -344,6 +347,10 @@ msgstr "Gruppiert nach..."
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy__id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__id
 msgid "ID"
 msgstr "ID"
 
@@ -426,6 +433,10 @@ msgstr "Ist Follower"
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse____last_update
 msgid "Last Modified on"
 msgstr "Zuletzt geändert am"
 
@@ -740,6 +751,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Accuracy report"
+#~ msgstr "Genauigkeit"
 
 #~ msgid "If checked new messages require your attention."
 #~ msgstr "Wenn angehakt, erfordern neue Mitteilungen Ihre Aufmerksamkeit."
