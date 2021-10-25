@@ -51,14 +51,14 @@ msgid "Accuracy"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
-msgid "Accuracy Stats"
+#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
+msgid "Accuracy Report"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
-msgid "Accuracy report"
+#: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
+msgid "Accuracy Stats"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -278,6 +278,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -342,6 +346,10 @@ msgstr "Regrouper par..."
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy__id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__id
 msgid "ID"
 msgstr "ID"
 
@@ -424,6 +432,10 @@ msgstr "Est abonné"
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse____last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
