@@ -84,12 +84,11 @@
         </field>
     </record>
     <!-- Action to open Stock Cycle Count Rule -->
-    <act_window
-        id="action_stock_cycle_count_rules"
-        name="Stock Cycle Count Rules"
-        res_model="stock.cycle.count.rule"
-        view_mode="tree,form"
-    />
+    <record id="action_stock_cycle_count_rules" model="ir.actions.act_window">
+        <field name="name">Stock Cycle Count Rules</field>
+        <field name="res_model">stock.cycle.count.rule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
     <menuitem
         id="menu_stock_cycle_count_rule"
         name="Cycle Count Rules"
