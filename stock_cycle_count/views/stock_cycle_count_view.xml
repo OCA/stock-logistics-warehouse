@@ -156,13 +156,15 @@
         </field>
     </record>
     <!-- Action to open Stock Cycle Count -->
-    <act_window
-        id="action_stock_cycle_count"
-        name="Stock Cycle Count"
-        res_model="stock.cycle.count"
-        view_mode="tree,form"
-        context="{'search_default_planned':1,'search_default_execution':1}"
-    />
+    <record id="action_stock_cycle_count" model="ir.actions.act_window">
+        <field name="name">Stock Cycle Count</field>
+        <field name="res_model">stock.cycle.count</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="context"
+        >{'search_default_planned':1,'search_default_execution':1}</field>
+    </record>
+
     <menuitem
         id="menu_stock_cycle_count"
         name="Cycle Counts"
