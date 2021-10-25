@@ -46,14 +46,14 @@ msgid "Accuracy"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
-msgid "Accuracy Stats"
+#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
+msgid "Accuracy Report"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
-msgid "Accuracy report"
+#: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
+msgid "Accuracy Stats"
 msgstr ""
 
 #. module: stock_cycle_count
