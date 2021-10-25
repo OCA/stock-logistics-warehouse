@@ -25,13 +25,13 @@ class StockCycleCount(models.Model):
         string="Assigned to",
         readonly=True,
         states={"draft": [("readonly", False)]},
-        track_visibility="onchange",
+        tracking=True,
     )
     date_deadline = fields.Date(
         string="Required Date",
         readonly=True,
         states={"draft": [("readonly", False)]},
-        track_visibility="onchange",
+        tracking=True,
     )
     cycle_count_rule_id = fields.Many2one(
         comodel_name="stock.cycle.count.rule",
@@ -39,7 +39,7 @@ class StockCycleCount(models.Model):
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
-        track_visibility="onchange",
+        tracking=True,
     )
     state = fields.Selection(
         selection=[
@@ -50,13 +50,13 @@ class StockCycleCount(models.Model):
         ],
         string="State",
         default="draft",
-        track_visibility="onchange",
+        tracking=True,
     )
     stock_adjustment_ids = fields.One2many(
         comodel_name="stock.inventory",
         inverse_name="cycle_count_id",
         string="Inventory Adjustment",
-        track_visibility="onchange",
+        tracking=True,
     )
     inventory_adj_count = fields.Integer(compute="_compute_inventory_adj_count")
     company_id = fields.Many2one(
