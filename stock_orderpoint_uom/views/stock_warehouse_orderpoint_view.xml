@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_warehouse_orderpoint_tree" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.tree</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree_editable" />
+        <field name="arch" type="xml">
+            <field name="product_uom_name" position="after">
+                <field name="procure_uom_id" groups="uom.group_uom" />
+            </field>
+        </field>
+    </record>
+    <record id="view_warehouse_orderpoint_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.form</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="procure_uom_id" class="oe_inline" groups="uom.group_uom" />
+            </field>
+            <field name="qty_multiple" position="after">
+                <p class="oe_grey">Quantity Multiple is applied to the base UoM.</p>
+            </field>
+        </field>
+    </record>
+</odoo>
