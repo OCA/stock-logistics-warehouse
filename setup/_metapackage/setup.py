@@ -41,6 +41,7 @@ setuptools.setup(
         'odoo14-addon-stock_orderpoint_move_link',
         'odoo14-addon-stock_orderpoint_purchase_link',
         'odoo14-addon-stock_orderpoint_route',
+        'odoo14-addon-stock_orderpoint_uom',
         'odoo14-addon-stock_packaging_calculator',
         'odoo14-addon-stock_packaging_calculator_packaging_type',
         'odoo14-addon-stock_picking_cancel_confirm',
