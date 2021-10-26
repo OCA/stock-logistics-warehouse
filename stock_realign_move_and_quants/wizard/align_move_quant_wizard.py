@@ -17,8 +17,11 @@ WITH product AS
          (
              SELECT DISTINCT product_id
              FROM stock_move
-             WHERE state = 'done'
-             AND create_date > %(start_date)s
+                      JOIN product_product pp ON pp.id = stock_move.product_id
+                      JOIN product_template pt ON pt.id = pp.product_tmpl_id
+             WHERE stock_move.state = 'done'
+               AND stock_move.create_date > %(start_date)s
+               AND pt.type = 'product'
          ),
      location AS (SELECT id AS location_id, usage FROM stock_location),
      error_move_lines AS (
