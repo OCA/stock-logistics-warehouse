@@ -404,8 +404,7 @@ class TestStockRequest(common.TransactionCase):
             })]
         }
         with self.assertRaises(exceptions.ValidationError):
-            self.request_order.sudo(
-                self.stock_request_user).create(vals)
+            self.request_order.create(vals)
 
     def test_stock_request_order_validations_06(self):
         """ Testing the discrepancy in expected dates between
