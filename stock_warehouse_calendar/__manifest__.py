@@ -12,6 +12,6 @@
     "depends": ["stock", "resource"],
     "data": ["views/stock_warehouse_views.xml"],
     "installable": True,
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["JordiBForgeFlow"],
 }
