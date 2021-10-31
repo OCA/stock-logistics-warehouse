@@ -238,8 +238,11 @@ class PullListWizard(models.TransientModel):
         return list(itertools.product(*options_list))
 
     def _prepare_proc_group_values(self):
-        # TODO: use special secuence to name procurement groups of pull lists.
-        return {}
+        vals = {}
+        name = self.env["ir.sequence"].next_by_code("stock.pull.list")
+        if name:
+            vals["name"] = name
+        return vals
 
     def action_procure(self):
         self.ensure_one()
