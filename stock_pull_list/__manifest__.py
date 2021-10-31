@@ -16,6 +16,7 @@
     "data": [
         "wizards/stock_pull_list_wizard.xml",
         "security/ir.model.access.csv",
+        "data/stock_pull_list_sequence_data.xml",
     ],
     "installable": True,
 }
