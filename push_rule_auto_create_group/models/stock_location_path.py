@@ -5,15 +5,13 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
-class PushedFlow(models.Model):
-    _inherit = "stock.location.path"
+class StockRule(models.Model):
+    _inherit = "stock.rule"
 
     auto_create_group = fields.Boolean(string="Auto-create Procurement Group")
 
-    def _prepare_move_copy_values(self, move_to_copy, new_date):
-        new_move_vals = super(PushedFlow, self)._prepare_move_copy_values(
-            move_to_copy, new_date
-        )
+    def _push_prepare_move_copy_values(self, move_to_copy, new_date):
+        new_move_vals = super()._push_prepare_move_copy_values(move_to_copy, new_date)
         if self.auto_create_group:
             group_data = self._prepare_auto_procurement_group_data()
             group = self.env["procurement.group"].create(group_data)
