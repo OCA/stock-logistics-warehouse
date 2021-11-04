@@ -1,0 +1,1 @@
+from . import test_stock_orderpoint_procure_location
