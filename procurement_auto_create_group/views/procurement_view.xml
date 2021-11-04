@@ -11,6 +11,12 @@
                     attrs="{'invisible':[('group_propagation_option','!=','propagate')]}"
                 />
             </field>
+            <field name="auto" position="after">
+                <field
+                    name="auto_create_group"
+                    attrs="{'invisible':[('action','!=','push')]}"
+                />
+            </field>
         </field>
     </record>
 </odoo>
