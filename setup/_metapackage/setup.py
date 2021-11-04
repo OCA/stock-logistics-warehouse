@@ -41,6 +41,7 @@ setuptools.setup(
         'odoo11-addon-stock_orderpoint_manual_procurement_uom',
         'odoo11-addon-stock_orderpoint_move_link',
         'odoo11-addon-stock_orderpoint_mrp_link',
+        'odoo11-addon-stock_orderpoint_procure_location',
         'odoo11-addon-stock_orderpoint_purchase_link',
         'odoo11-addon-stock_orderpoint_uom',
         'odoo11-addon-stock_picking_procure_method',
