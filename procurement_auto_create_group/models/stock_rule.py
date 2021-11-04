@@ -16,6 +16,14 @@ class StockRule(models.Model):
         if self.group_propagation_option != "propagate":
             self.auto_create_group = False
 
+    def _push_prepare_move_copy_values(self, move_to_copy, new_date):
+        new_move_vals = super()._push_prepare_move_copy_values(move_to_copy, new_date)
+        if self.auto_create_group:
+            group_data = self._prepare_auto_procurement_group_data()
+            group = self.env["procurement.group"].create(group_data)
+            new_move_vals["group_id"] = group.id
+        return new_move_vals
+
     def _prepare_auto_procurement_group_data(self):
         name = self.env["ir.sequence"].next_by_code("procurement.group") or False
         if not name:
