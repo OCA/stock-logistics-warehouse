@@ -94,6 +94,7 @@ Contributors
 * Bernat Puig <bernat.puig@forgeflow.com>
 * Laurent Mignon <laurent.mignon@acsone.eu>
 
+
 Maintainers
 ~~~~~~~~~~~
 
