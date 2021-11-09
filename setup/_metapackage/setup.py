@@ -31,6 +31,7 @@ setuptools.setup(
         'odoo14-addon-stock_location_lockdown',
         'odoo14-addon-stock_location_position',
         'odoo14-addon-stock_location_tray',
+        'odoo14-addon-stock_location_warehouse',
         'odoo14-addon-stock_location_zone',
         'odoo14-addon-stock_measuring_device',
         'odoo14-addon-stock_measuring_device_zippcube',
