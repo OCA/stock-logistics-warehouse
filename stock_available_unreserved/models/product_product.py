@@ -27,6 +27,33 @@ class ProductProduct(models.Model):
         domain_quant.extend(domain_quant_locations)
         return domain_quant
 
+    def _product_available_not_res_hook(self, quants):
+        """Hook used to introduce possible variations"""
+        return False
+
+    def _set_stock_available_not_reserved_values(self, result, quants):
+        """From the given quants values from read_group(), set the
+        different values.
+
+        :param result: result dictionary
+        :type result: dict
+        :param quants: quants from a read_group()
+        :type quants: dict
+        """
+        product_sums = {}
+        for quant in quants:
+            # create a dictionary with the total value per products
+            product_sums.setdefault(quant["product_id"][0], 0.0)
+            product_sums[quant["product_id"][0]] += (
+                quant["quantity"] - quant["reserved_quantity"]
+            )
+        for product in self.with_context(prefetch_fields=False, lang=""):
+            available_not_res = float_round(
+                product_sums.get(product.id, 0.0),
+                precision_rounding=product.uom_id.rounding,
+            )
+            result[product.id] = {"qty_available_not_res": available_not_res}
+
     def _compute_product_available_not_res_dict(self):
 
         res = {}
@@ -42,19 +69,9 @@ class ProductProduct(models.Model):
                 lazy=False,
             )
         )
-        product_sums = {}
-        for quant in quants:
-            # create a dictionary with the total value per products
-            product_sums.setdefault(quant["product_id"][0], 0.0)
-            product_sums[quant["product_id"][0]] += (
-                quant["quantity"] - quant["reserved_quantity"]
-            )
-        for product in self.with_context(prefetch_fields=False, lang=""):
-            available_not_res = float_round(
-                product_sums.get(product.id, 0.0),
-                precision_rounding=product.uom_id.rounding,
-            )
-            res[product.id] = {"qty_available_not_res": available_not_res}
+
+        self._set_stock_available_not_reserved_values(res, quants)
+        self._product_available_not_res_hook(quants)
         return res
 
     @api.depends("stock_move_ids.product_qty", "stock_move_ids.state")
