@@ -1,0 +1,33 @@
+<odoo noupdate="1">
+    <!-- Test Stock Exceptions Scheduler-->
+    <record model="ir.cron" forcecreate="True" id="ir_cron_test_stock_picking_except">
+        <field name="name">Stock: Test Draft Pickings Exception</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="state">code</field>
+        <field name="code">model.test_all_draft_pickings()</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">20</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="active" eval="False" />
+    </record>
+    <record id="sp_excep_no_partner" model="exception.rule">
+        <field name="name">No Partner</field>
+        <field name="description">No Partner</field>
+        <field name="sequence">50</field>
+        <field name="model">stock.picking</field>
+        <field name="code">if not self.partner_id:
+            failed=True</field>
+        <field name="active" eval="False" />
+    </record>
+    <record id="sm_excep_product_uom_qty_check" model="exception.rule">
+        <field name="name">Demand Quantity not positive</field>
+        <field name="description">Demand quantity must be positive</field>
+        <field name="sequence">50</field>
+        <field name="model">stock.move</field>
+        <field name="code">if self.product_uom_qty &lt;= 0:
+            failed=True</field>
+        <field name="active" eval="False" />
+    </record>
+</odoo>
