@@ -8,7 +8,7 @@ class InventoryLine(models.Model):
     _inherit = "stock.inventory.line"
 
     currency_id = fields.Many2one(
-        string="Currency", related="inventory_id.company_id.currency_id", readonly=True
+        string="Currency", related="inventory_id.company_id.currency_id"
     )
     adjustment_cost = fields.Monetary(
         string="Adjustment cost", compute="_compute_adjustment_cost", store=True
