@@ -8,7 +8,7 @@ from odoo.tests.common import TransactionCase, tagged
 @tagged("post_install", "-at_install")
 class TestStockInventoryCostInfo(TransactionCase):
     def setUp(self):
-        super(TestStockInventoryCostInfo, self).setUp()
+        super().setUp()
         product_obj = self.env["product.product"]
         self.product_1 = product_obj.create(
             {"name": "product test 1", "type": "product", "standard_price": 1000}
