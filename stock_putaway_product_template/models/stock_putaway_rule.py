@@ -19,16 +19,15 @@ class StockPutawayRule(models.Model):
     @api.depends("product_id")
     def _compute_product_tmpl_id(self):
         for rec in self:
-            rec.product_tmpl_id = False
             if rec.product_id:
                 rec.product_tmpl_id = rec.product_id.product_tmpl_id
             else:
                 params = self.env.context.get("params", {})
-                if params.get("model", "") == "product.template":
-                    rec.product_tmpl_id = params.get("id", False)
+                if params.get("model", "") == "product.template" and params.get("id"):
+                    rec.product_tmpl_id = params.get("id")
 
     def filtered(self, func):
-        res = super(StockPutawayRule, self).filtered(func)
+        res = super().filtered(func)
         if res or not self.env.context.get("filter_putaway_rule"):
             return res
         product = func.__closure__[0].cell_contents
