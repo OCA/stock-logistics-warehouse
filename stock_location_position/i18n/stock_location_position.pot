@@ -35,12 +35,22 @@ msgstr ""
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__level
-msgid "Height on the shelf"
+msgid "Define as the floor of the house"
 msgstr ""
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__rack
-msgid "House number"
+msgid "Define as the house number within the street"
+msgstr ""
+
+#. module: stock_location_position
+#: model:ir.model.fields,help:stock_location_position.field_stock_location__row
+msgid "Define as the side within the street"
+msgstr ""
+
+#. module: stock_location_position
+#: model:ir.model.fields,help:stock_location_position.field_stock_location__corridor
+msgid "Define as the street"
 msgstr ""
 
 #. module: stock_location_position
@@ -76,15 +86,5 @@ msgstr ""
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__row
 msgid "Row"
-msgstr ""
-
-#. module: stock_location_position
-#: model:ir.model.fields,help:stock_location_position.field_stock_location__row
-msgid "Side in the street"
-msgstr ""
-
-#. module: stock_location_position
-#: model:ir.model.fields,help:stock_location_position.field_stock_location__corridor
-msgid "Street"
 msgstr ""
 
