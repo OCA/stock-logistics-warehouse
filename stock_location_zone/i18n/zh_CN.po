@@ -17,7 +17,6 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_location_zone
-#: code:addons/stock_location_zone/models/stock_location.py:110
 #: code:addons/stock_location_zone/models/stock_location.py:112
 #, python-format
 msgid "%s (copy)"
