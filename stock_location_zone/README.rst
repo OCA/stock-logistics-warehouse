@@ -25,8 +25,16 @@ Stock Location Zone
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-Add coordinate attributes on stock location.
-Define picking zone with links to picking type.
+This module introduces Zone concept on stock locations to allow better
+classification of stock locations in a warehouse.
+
+Locations are then classified by location kinds that could be:
+
+* Zone: locations that are flagged as being zones. Zones are subdivisions of the warehouse for splitting picking operations. A picking operator work in a zone and can pick from any location of the zone.
+* Area: locations with children that are part of a zone. Areas are subdivisions of the warehouse for put-away operations. Each area has storage characteristics and strategy, e.g. area for pallets, shelf for boxes...
+* Bin: locations without children that are part of a zone
+* Stock: internal locations whose parent is a view
+* Other: any other location
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -37,15 +45,6 @@ Define picking zone with links to picking type.
 
 .. contents::
    :local:
-
-Configuration
-=============
-
-In Inventory Settings, you must have:
-
- * Storage Locations
-
-Set coordinate attibute on the locations.
 
 Bug Tracker
 ===========
@@ -73,6 +72,7 @@ Contributors
 * Syvain Van Hoof (Okia sprl) <sylvainvh@okia.be>
 * Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 * Guewen Baconnier (Camptocamp) <guewen.baconnier@camptocamp.com>
+* Akim Juillerat <akim.juillerat@camptocamp.com>
 
 Maintainers
 ~~~~~~~~~~~
