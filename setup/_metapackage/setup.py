@@ -50,6 +50,7 @@ setuptools.setup(
         'odoo14-addon-stock_product_qty_by_packaging',
         'odoo14-addon-stock_pull_list',
         'odoo14-addon-stock_putaway_method',
+        'odoo14-addon-stock_putaway_product_template',
         'odoo14-addon-stock_quant_manual_assign',
         'odoo14-addon-stock_request',
         'odoo14-addon-stock_request_picking_type',
