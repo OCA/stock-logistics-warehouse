@@ -16,7 +16,7 @@ class TestProductSecondaryUnit(SavepointCase):
         cls.location_stock = cls.env.ref("stock.stock_location_stock")
         cls.picking_type_in = cls.env.ref("stock.picking_type_in")
         cls.picking_type_out = cls.env.ref("stock.picking_type_out")
-
+        cls.picking_type_out.show_operations = True
         cls.product_uom_kg = cls.env.ref("uom.product_uom_kgm")
         cls.product_uom_ton = cls.env.ref("uom.product_uom_ton")
         cls.product_uom_unit = cls.env.ref("uom.product_uom_unit")
