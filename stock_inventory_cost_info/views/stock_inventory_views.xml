@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_inventory_line_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree.cost.info</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree" />
+        <field name="arch" type="xml">
+            <field name="product_uom_id" position="after">
+                <field name="currency_id" invisible="1" />
+                <field name="adjustment_cost" sum="Total" />
+            </field>
+        </field>
+    </record>
+</odoo>
