@@ -188,6 +188,7 @@ class StockLocation(models.Model):
                         "posz": posz,
                         "location_id": location.id,
                         "company_id": location.company_id.id,
+                        "tray_type_id": False,
                     }
                     values.append(subloc_values)
         if values:
