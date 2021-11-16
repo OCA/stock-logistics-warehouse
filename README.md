@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [stock_free_quantity](stock_free_quantity/) | 14.0.1.0.0 |  | Stock Free Quantity
 [stock_generate_putaway_from_inventory](stock_generate_putaway_from_inventory/) | 14.0.1.0.0 | [![pierrickbrun](https://github.com/pierrickbrun.png?size=30px)](https://github.com/pierrickbrun) [![bealdav](https://github.com/bealdav.png?size=30px)](https://github.com/bealdav) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) | Generate Putaway locations per Product deduced from Inventory
 [stock_helper](stock_helper/) | 14.0.1.0.0 |  | Add methods shared between various stock modules
+[stock_inventory_cost_info](stock_inventory_cost_info/) | 14.0.1.0.0 |  | Shows the cost of the inventory adjustments
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 14.0.1.0.0 |  | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 14.0.1.0.1 |  | Allow to perform inventories of a location without including its child locations.
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 14.0.1.0.0 |  | More filters for inventory adjustments
