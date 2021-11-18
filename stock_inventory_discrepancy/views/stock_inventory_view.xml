@@ -56,9 +56,9 @@
         <field name="inherit_id" ref="stock.stock_inventory_line_tree" />
         <field name="arch" type="xml">
             <field name="product_qty" position="after">
-                <field name="discrepancy_qty" />
-                <field name="discrepancy_percent" />
-                <field name="discrepancy_threshold" />
+                <field name="discrepancy_qty" optional="show" />
+                <field name="discrepancy_percent" optional="show" />
+                <field name="discrepancy_threshold" optional="show" />
                 <field name="has_over_discrepancy" invisible="1" />
             </field>
             <xpath expr="//tree" position="attributes">
