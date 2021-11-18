@@ -4,7 +4,7 @@
     "name": "Stock Orderpoint Procure Location",
     "summary": "Allows to create procurement orders in a different location"
     "the orderpoint",
-    "version": "11.0.1.0.0",
+    "version": "13.0.1.0.0",
     "author": "ForgeFlow, " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
