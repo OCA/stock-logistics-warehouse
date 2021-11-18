@@ -13,9 +13,7 @@ class Orderpoint(models.Model):
         domain="[('usage', '=', 'internal')]",
     )
 
-    def _prepare_procurement_values(
-        self, product_qty, date=False, group=False
-    ):
+    def _prepare_procurement_values(self, product_qty, date=False, group=False):
         """ Set the procure location
         """
         res = super(Orderpoint, self)._prepare_procurement_values(
