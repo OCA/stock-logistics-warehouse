@@ -16,7 +16,7 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
         self.warehouse = self.env.ref("stock.warehouse0")
         self.warehouse.reception_steps = "two_steps"
         self.location_stock = self.env.ref("stock.stock_location_stock")
-        self.uom_unit = self.env.ref("product.product_uom_unit")
+        self.uom_unit = self.env.ref("uom.product_uom_unit")
         self.location_input = self.env.ref("stock.stock_location_company")
 
         self.productA = productObj.create(
@@ -27,6 +27,9 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
                 "uom_id": self.uom_unit.id,
                 "uom_po_id": self.uom_unit.id,
                 "default_code": "A",
+                "route_ids": [
+                    (6, 0, [self.env.ref("purchase_stock.route_warehouse0_buy").id])
+                ],
                 "variant_seller_ids": [
                     (
                         0,
@@ -106,17 +109,14 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
             }
             lines.append((0, 0, line_values))
         return self.purchase_model.create(
-            {
-                "partner_id": self.env.ref("base.res_partner_3").id,
-                "order_line": lines,
-            }
+            {"partner_id": self.env.ref("base.res_partner_3").id, "order_line": lines}
         )
 
     def test_01_stock_orderpoint_procure_location(self):
         """
         Test the destination location is correct
         """
-        orderpoint = self.env["stock.warehouse.orderpoint"].create(
+        self.env["stock.warehouse.orderpoint"].create(
             {
                 "warehouse_id": self.warehouse.id,
                 "location_id": self.location_stock.id,
@@ -128,20 +128,23 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
             }
         )
 
+        purchase_line = self.purchase_line_model.search(
+            [("product_id", "=", self.productA.id)]
+        )
+        self.assertEquals(len(purchase_line), 0)
+
         self.env["procurement.group"].run_scheduler()
         # As per route configuration, it will create Purchase order
         purchase_line = self.purchase_line_model.search(
-            [("orderpoint_id", "=", orderpoint.id)]
+            [("product_id", "=", self.productA.id)]
         )
         self.assertEquals(len(purchase_line), 1)
-        self.assertEquals(purchase_line.orderpoint_id.id, orderpoint.id)
         self.assertEquals(purchase_line.product_qty, 24)
         purchase_line.order_id.button_confirm()
         self.assertEqual(
-            purchase_line.order_id.picking_ids[0]
-            .move_lines[0]
-            .location_dest_id.id,
+            purchase_line.order_id.picking_ids[0].move_lines[0].location_dest_id.id,
             self.location_input.id,
+            purchase_line.order_id.picking_ids[0].move_lines[0].location_dest_id.name,
         )
 
     def test_02_considering_open_po(self):
@@ -149,7 +152,7 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
         Test we consider confirmed POs received in procure location
         """
 
-        orderpointB = self.env["stock.warehouse.orderpoint"].create(
+        self.env["stock.warehouse.orderpoint"].create(
             {
                 "warehouse_id": self.warehouse.id,
                 "location_id": self.location_stock.id,
@@ -160,11 +163,14 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
                 "procure_location_id": self.location_input.id,
             }
         )
-
+        purchase_line = self.purchase_line_model.search(
+            [("product_id", "=", self.productB.id)]
+        )
+        self.assertEquals(len(purchase_line), 0)
         # The scheduler should create demand for the extra
         self.env["procurement.group"].run_scheduler()
         # As per route configuration, it will create Purchase order
         purchase_line = self.purchase_line_model.search(
-            [("orderpoint_id", "=", orderpointB.id)]
+            [("product_id", "=", self.productB.id)]
         )
         self.assertEquals(sum(purchase_line.mapped("product_qty")), 35)
