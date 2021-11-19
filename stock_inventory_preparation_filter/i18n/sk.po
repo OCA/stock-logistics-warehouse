@@ -9,36 +9,37 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
-"PO-Revision-Date: 2018-02-27 11:37+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2021-11-19 20:36+0000\n"
+"Last-Translator: Jan Prokop <jprokop@jackie.sk>\n"
 "Language-Team: Slovak (https://www.transifex.com/oca/teams/23907/sk/)\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "All products"
-msgstr ""
+msgstr "Všetky produkty"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__categ_ids
 msgid "Categories"
-msgstr ""
+msgstr "Kategórie"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
-msgstr ""
+msgstr "Doména"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Filtered Products"
-msgstr ""
+msgstr "Filtrované produkty"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -49,34 +50,38 @@ msgid ""
 "system won't propose anything.  You can also let the system propose for a "
 "single product / lot /... "
 msgstr ""
+"Pokiaľ robíte celkovú inventúru, výberom \"Všetky produkty\" sa inventúra "
+"predplní celým skladom. Pokiaľ to potrebuje len pre časť produktov (napr. "
+"pravidelné spočítanie) zvoľte \"Manuálny výber produktov\". Môžete vybrať "
+"len niektorú oblasť (šarža)... "
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
 msgid "Inventory"
-msgstr ""
+msgstr "Inventúra"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
 #: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
 msgid "Inventory of"
-msgstr ""
+msgstr "Inventúra"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
 msgid "Lots"
-msgstr ""
+msgstr "Šarže"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Categories"
-msgstr ""
+msgstr "Vybrané kategórie"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Lots"
-msgstr ""
+msgstr "Vybrané šarže"
 
 #~ msgid "Created by"
 #~ msgstr "Vytvoril"
