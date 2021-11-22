@@ -258,3 +258,11 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation.tray_qty, 50)
         self._update_quantity_in_cell(cell, self.out_move_line.product_id, -20)
         self.assertEqual(operation.tray_qty, 30)
+        self.assertTrue(operation.product_packagings)
+
+    def test_product_packagings(self):
+        operation = self.shuttle._operation_for_mode()
+        ml = operation.current_move_line_id
+        ml.move_id.state = "draft"
+        ml.product_id = False
+        self.assertFalse(operation.product_packagings)

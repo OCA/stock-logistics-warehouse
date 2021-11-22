@@ -13,6 +13,7 @@ class VerticalLiftShuttleManualBarcode(models.TransientModel):
     def button_save(self):
         active_id = self.env.context.get("active_id")
         model = self.env.context.get("active_model")
+        assert model
         record = self.env[model].browse(active_id).exists()
         if not record:
             return

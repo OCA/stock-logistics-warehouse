@@ -423,9 +423,7 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     def _compute_product_packagings(self):
         for record in self:
             product = record.current_move_line_id.product_id
-            if not product:
-                record.product_packagings = ""
-                continue
+            # Empty product is taken care in _render_product_packagings
             content = self._render_product_packagings(product)
             record.product_packagings = content
 
