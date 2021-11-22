@@ -47,18 +47,20 @@ Configuration
    'Multi-Step Routes' and press the 'Save' button.
 #. Activate the developer mode.
 #. Go to *Inventory / Configuration / Warehouse Management / Routes*
-   and select the route you want to change. Select the pull rule you wish
-   to change and Select 'Propagation of Procurement Group': 'Propagate'.
-   The checkbox 'Auto-create Procurement Group' will then appear and you can
-   set it if you want to procurement group to be automatically created.
+   and select the route you want to change. Select the rule you wish
+   to change, and in case of a Pull rule or Push & Pull rule Select
+   'Propagation of Procurement Group': 'Propagate'. The checkbox
+   'Auto-create Procurement Group' will then appear and you can set
+   it if you want to procurement group to be automatically created.
 
 Usage
 =====
 
-#. Run a new procurement and make sure that it determines a pull rule
+#. Run a new procurement and make sure that it determines a rule
    with the option 'Auto-create Procurement Group' set.
 #. When the procurement rule is executed, a procurement group with
-   format 'PG/000001' will be created.
+   format 'PG/000001' will be created. You can find this procurement
+   group in 'Additional info' tab of a transfer.
 
 Bug Tracker
 ===========
@@ -86,6 +88,7 @@ Contributors
 * Lois Rilo <lois.rilo@forgeflow.com>
 * Héctor Villarreal Ortega <hector.villarreal@forgeflow.com>
 * Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+* Bernat Puig <bernat.puig@forgeflow.com>
 
 Maintainers
 ~~~~~~~~~~~
