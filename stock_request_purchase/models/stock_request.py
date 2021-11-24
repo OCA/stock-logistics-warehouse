@@ -39,7 +39,7 @@ class StockRequest(models.Model):
             )
 
     def action_view_purchase(self):
-        action = self.env.ref("purchase.purchase_rfq").read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id("purchase.purchase_rfq")
 
         purchases = self.mapped("purchase_ids")
         if len(purchases) > 1:
