@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Camptocamp SA
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
 from odoo.tests.common import SavepointCase
@@ -18,13 +19,25 @@ class TestPackagingCalc(SavepointCase):
         )
         cls.product_tmpl_a = cls.product_a.product_tmpl_id
         cls.pkg_box = cls.env["product.packaging"].create(
-            {"name": "Box", "product_tmpl_id": cls.product_tmpl_a.id, "qty": 50}
+            {
+                "name": "Box",
+                "product_tmpl_id": cls.product_tmpl_a.id,
+                "qty": 50,
+            }
         )
         cls.pkg_big_box = cls.env["product.packaging"].create(
-            {"name": "Big Box", "product_tmpl_id": cls.product_tmpl_a.id, "qty": 200}
+            {
+                "name": "Big Box",
+                "product_tmpl_id": cls.product_tmpl_a.id,
+                "qty": 200,
+            }
         )
         cls.pkg_pallet = cls.env["product.packaging"].create(
-            {"name": "Pallet", "product_tmpl_id": cls.product_tmpl_a.id, "qty": 2000}
+            {
+                "name": "Pallet",
+                "product_tmpl_id": cls.product_tmpl_a.id,
+                "qty": 2000,
+            }
         )
 
     @classmethod
@@ -53,7 +66,9 @@ class TestPackagingCalc(SavepointCase):
         }
 
     @classmethod
-    def _generate_expected_packaging_info(cls, expected_info, extended_name=None):
+    def _generate_expected_packaging_info(
+        cls, expected_info, extended_name=None
+    ):
         return [
             {
                 "id": package_info[0].id,
@@ -75,11 +90,16 @@ class TestPackagingCalc(SavepointCase):
             self.pkg_big_box.id,
             (self.pkg_box.id, 4, self.pkg_box.name, False),
         )
-        pkg_box = (self.pkg_box.id, (self.uom_unit.id, 50, self.uom_unit.name, True))
+        pkg_box = (
+            self.pkg_box.id,
+            (self.uom_unit.id, 50, self.uom_unit.name, True),
+        )
         expected_mapping = self._generate_expected_contained_mapping(
             [pkg_pallet, pkg_big_box, pkg_box]
         )
-        self.assertEqual(self.product_a.packaging_contained_mapping, expected_mapping)
+        self.assertEqual(
+            self.product_a.packaging_contained_mapping, expected_mapping
+        )
         # Update pkg qty
         self.pkg_pallet.qty = 4000
         pkg_pallet = (
@@ -89,7 +109,9 @@ class TestPackagingCalc(SavepointCase):
         expected_mapping = self._generate_expected_contained_mapping(
             [pkg_pallet, pkg_big_box, pkg_box]
         )
-        self.assertEqual(self.product_a.packaging_contained_mapping, expected_mapping)
+        self.assertEqual(
+            self.product_a.packaging_contained_mapping, expected_mapping
+        )
 
     def test_calc_1(self):
         """Test easy behavior 1."""
@@ -100,28 +122,40 @@ class TestPackagingCalc(SavepointCase):
         expected = self._generate_expected_packaging_info(
             [pallet_info, big_box_info, box_info, unit_info]
         )
-        self.assertEqual(self.product_a.product_qty_by_packaging(2655), expected)
+        self.assertEqual(
+            self.product_a.product_qty_by_packaging(2655), expected
+        )
 
     def test_calc_2(self):
         """Test easy behavior 2."""
         big_box_info = (self.pkg_big_box, 1, False)
         box_info = (self.pkg_box, 3, False)
-        expected = self._generate_expected_packaging_info([big_box_info, box_info])
-        self.assertEqual(self.product_a.product_qty_by_packaging(350), expected)
+        expected = self._generate_expected_packaging_info(
+            [big_box_info, box_info]
+        )
+        self.assertEqual(
+            self.product_a.product_qty_by_packaging(350), expected
+        )
 
     def test_calc_3(self):
         """Test easy behavior 3."""
         box_info = (self.pkg_box, 1, False)
         unit_info = (self.uom_unit, 30, True)
-        expected = self._generate_expected_packaging_info([box_info, unit_info])
+        expected = self._generate_expected_packaging_info(
+            [box_info, unit_info]
+        )
         self.assertEqual(self.product_a.product_qty_by_packaging(80), expected)
 
     def test_calc_4(self):
         """Test fractional qty is  in the unit package."""
         unit_info = (self.uom_unit, 1, True)
         box_info = (self.pkg_box, 1, False)
-        expected = self._generate_expected_packaging_info([box_info, unit_info])
-        self.assertEqual(self.product_a.product_qty_by_packaging(50.5), expected)
+        expected = self._generate_expected_packaging_info(
+            [box_info, unit_info]
+        )
+        self.assertEqual(
+            self.product_a.product_qty_by_packaging(50.5), expected
+        )
 
     def test_calc_filter(self):
         """Test packaging filter."""
@@ -131,12 +165,12 @@ class TestPackagingCalc(SavepointCase):
         expected = self._generate_expected_packaging_info(
             [big_box_info, box_info, unit_info]
         )
-        self.assertEqual(
-            self.product_a.with_context(
-                _packaging_filter=lambda x: x != self.pkg_pallet
-            ).product_qty_by_packaging(2655),
-            expected,
-        )
+        with self.product_a.product_qty_by_packaging_arg_ctx(
+            packaging_filter=lambda x: x != self.pkg_pallet
+        ):
+            self.assertEqual(
+                self.product_a.product_qty_by_packaging(2655), expected,
+            )
 
     def test_calc_name_get(self):
         """Test custom name getter."""
@@ -150,12 +184,12 @@ class TestPackagingCalc(SavepointCase):
             [pallet_info, big_box_info, box_info, unit_info],
             extended_name=extended_name,
         )
-        self.assertEqual(
-            self.product_a.with_context(
-                _packaging_name_getter=lambda x: "FOO " + x.name
-            ).product_qty_by_packaging(2655),
-            expected,
-        )
+        with self.product_a.product_qty_by_packaging_arg_ctx(
+            packaging_name_getter=lambda x: "FOO " + x.name
+        ):
+            self.assertEqual(
+                self.product_a.product_qty_by_packaging(2655), expected,
+            )
 
     def test_calc_custom_values(self):
         """Test custom values handler."""
@@ -165,15 +199,16 @@ class TestPackagingCalc(SavepointCase):
             {"my_qty": 1, "foo": self.pkg_box.name},
             {"my_qty": 5, "foo": self.uom_unit.name},
         ]
-        self.assertEqual(
-            self.product_a.with_context(
-                _packaging_values_handler=lambda pkg, qty_per_pkg: {
-                    "my_qty": qty_per_pkg,
-                    "foo": pkg.name,
-                }
-            ).product_qty_by_packaging(2655),
-            expected,
-        )
+        with self.product_a.product_qty_by_packaging_arg_ctx(
+            packaging_values_handler=lambda pkg, qty_per_pkg: {
+                "my_qty": qty_per_pkg,
+                "foo": pkg.name,
+            }
+        ):
+
+            self.assertEqual(
+                self.product_a.product_qty_by_packaging(2655), expected,
+            )
 
     def test_calc_sub1(self):
         """Test contained packaging behavior 1."""

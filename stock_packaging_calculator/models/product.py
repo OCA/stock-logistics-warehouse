@@ -1,12 +1,25 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Camptocamp SA
+# Copyright 2021 ACSONE SA/NV
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
 
+import contextlib
 from collections import namedtuple
 
-from odoo import api, fields, models
 from odoo.tools import float_compare
 
+from odoo import api, fields, models
+from .. import context
+
 Packaging = namedtuple("Packaging", "id name qty is_unit")
+
+_packaging_filter_ctx = context.ContextVar("packaging_filter", None)
+_packaging_name_getter_ctx = context.ContextVar("packaging_name_getter", None)
+_packaging_values_handler_ctx = context.ContextVar(
+    "packaging_values_handler", None
+)
+
+_UNDEFINED = object()
 
 
 class ProductProduct(models.Model):
@@ -21,7 +34,9 @@ class ProductProduct(models.Model):
     @api.depends("packaging_ids.qty")
     def _compute_packaging_contained_mapping(self):
         for rec in self:
-            rec.packaging_contained_mapping = rec._packaging_contained_mapping()
+            rec.packaging_contained_mapping = (
+                rec._packaging_contained_mapping()
+            )
 
     def _packaging_contained_mapping(self):
         """Produce a mapping of packaging and contained packagings.
@@ -41,6 +56,48 @@ class ProductProduct(models.Model):
                 packaging[i + 1 :], pkg.qty
             )
         return res
+
+    @contextlib.contextmanager
+    @api.model
+    def product_qty_by_packaging_arg_ctx(
+        self,
+        packaging_filter=_UNDEFINED,
+        packaging_name_getter=_UNDEFINED,
+        packaging_values_handler=_UNDEFINED,
+    ):
+        """
+        Use `packaging_filter` to pass a function to filter packaging
+        to be considered.
+
+        Use `packaging_name_getter` to pass a function to change
+        the display name of the packaging.
+        """
+        try:
+            token_packaging_filter = None
+            token_packaging_name_getter = None
+            token_packaging_values_handler = None
+            if packaging_filter != _UNDEFINED:
+                token_packaging_filter = _packaging_filter_ctx.set(
+                    packaging_filter
+                )
+            if packaging_name_getter != _UNDEFINED:
+                token_packaging_name_getter = _packaging_name_getter_ctx.set(
+                    packaging_name_getter
+                )
+            if packaging_values_handler != _UNDEFINED:
+                token_packaging_values_handler = _packaging_values_handler_ctx.set(
+                    packaging_values_handler
+                )
+            yield
+        finally:
+            if token_packaging_values_handler:
+                _packaging_values_handler_ctx.reset(
+                    token_packaging_values_handler
+                )
+            if token_packaging_name_getter:
+                _packaging_name_getter_ctx.reset(token_packaging_name_getter)
+            if token_packaging_filter:
+                _packaging_filter_ctx.reset(token_packaging_filter)
 
     def product_qty_by_packaging(self, prod_qty, with_contained=False):
         """Calculate quantity by packaging.
@@ -71,14 +128,11 @@ class ProductProduct(models.Model):
     def _ordered_packaging(self):
         """Prepare packaging ordered by qty and exclude empty ones.
 
-        Use ctx key `_packaging_filter` to pass a function to filter packaging
-        to be considered.
-
-        Use ctx key `_packaging_name_getter` to pass a function to change
-        the display name of the packaging.
+        Use product_qty_by_packaging_arg_ctx context manager to
+        provide custom_getter and name_getter for collected packaging
         """
-        custom_filter = self.env.context.get("_packaging_filter", lambda x: x)
-        name_getter = self.env.context.get("_packaging_name_getter", lambda x: x.name)
+        custom_filter = _packaging_filter_ctx.get(lambda x: x)
+        name_getter = _packaging_name_getter_ctx.get(lambda x: x.name)
         packagings = sorted(
             [
                 Packaging(x.id, name_getter(x), x.qty, False)
@@ -94,15 +148,17 @@ class ProductProduct(models.Model):
             # NOTE: the ID here could clash w/ one of the packaging's.
             # If you create a mapping based on IDs, keep this in mind.
             # You can use `is_unit` to check this.
-            Packaging(self.uom_id.id, self.uom_id.name, self.uom_id.factor, True)
+            Packaging(
+                self.uom_id.id, self.uom_id.name, self.uom_id.factor, True
+            )
         )
         return packagings
 
     def _product_qty_by_packaging(self, pkg_by_qty, qty, with_contained=False):
         """Produce a list of dictionaries of packaging info."""
         res = []
-        prepare_values = self.env.context.get(
-            "_packaging_values_handler", self._prepare_qty_by_packaging_values
+        prepare_values = _packaging_values_handler_ctx.get(
+            self._prepare_qty_by_packaging_values
         )
         for pkg in pkg_by_qty:
             qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
@@ -127,7 +183,9 @@ class ProductProduct(models.Model):
         """Calculate qty needed for given package qty."""
         qty_per_pkg = 0
         while (
-            float_compare(qty - pkg_qty, 0.0, precision_digits=self.uom_id.rounding)
+            float_compare(
+                qty - pkg_qty, 0.0, precision_digits=self.uom_id.rounding
+            )
             >= 0.0
         ):
             qty -= pkg_qty
