@@ -35,6 +35,11 @@ class StockRequestOrder(models.Model):
         string="Analytic Tags",
         readonly=True,
     )
+    default_analytic_account_id = fields.Many2one(
+        comodel_name="account.analytic.account",
+        string="Default Analytic Account",
+        help="Set this if you want to define a default analytic account on requests",
+    )
 
     @api.depends("stock_request_ids")
     def _compute_analytic_ids(self):
