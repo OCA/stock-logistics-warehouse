@@ -2,7 +2,7 @@
 # Copyright 2021 Tecnativa - João Marques
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class StockRequest(models.Model):
@@ -19,3 +19,13 @@ class StockRequest(models.Model):
         string="Analytic Tags",
         check_company=True,
     )
+
+    @api.onchange("product_id")
+    def onchange_product_id(self):
+        """
+        Set default analytic account on lines from order if defined.
+        """
+        res = super().onchange_product_id()
+        if self.order_id and self.order_id.default_analytic_account_id:
+            self.analytic_account_id = self.order_id.default_analytic_account_id
+        return res

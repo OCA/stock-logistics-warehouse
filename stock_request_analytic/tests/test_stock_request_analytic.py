@@ -3,6 +3,7 @@
 
 from odoo import fields
 from odoo.exceptions import UserError
+from odoo.tests import Form
 
 from odoo.addons.stock_request.tests import test_stock_request
 
@@ -148,3 +149,25 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
                 self.analytic2, self.main_company
             )
             self.env["stock.request.order"].create(vals)
+
+    def test_default_analytic(self):
+        """
+        Create request order with a default analytic
+        """
+        vals = self.prepare_order_request_analytic(
+            self.analytic_model.browse(), self.main_company
+        )
+        vals.update(
+            {
+                "default_analytic_account_id": self.analytic.id,
+            }
+        )
+        order = self.env["stock.request.order"].create(vals)
+        with Form(order) as order_form:
+            with order_form.stock_request_ids.new() as line_form:
+                line_form.product_id = self.pizza
+                line_form.product_uom_qty = 5.0
+        self.assertEqual(
+            order.default_analytic_account_id,
+            order.stock_request_ids.mapped("analytic_account_id"),
+        )

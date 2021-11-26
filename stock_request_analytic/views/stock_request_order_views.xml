@@ -41,6 +41,12 @@
                     />
                 </button>
             </div>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field
+                    name="default_analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </xpath>
             <xpath
                 expr="//field[@name='stock_request_ids']/tree//field[@name='route_id']"
                 position="after"
