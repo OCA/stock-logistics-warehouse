@@ -4,6 +4,7 @@
 import unittest
 from ..context import ContextVar
 
+
 class TestContextVar(unittest.TestCase):
 
     def test_simple_set(self):
