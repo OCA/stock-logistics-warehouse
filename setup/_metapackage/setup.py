@@ -27,6 +27,7 @@ setuptools.setup(
         'odoo14-addon-stock_inventory_exclude_sublocation',
         'odoo14-addon-stock_inventory_line_product_cost',
         'odoo14-addon-stock_inventory_preparation_filter',
+        'odoo14-addon-stock_inventory_preparation_filter_pos',
         'odoo14-addon-stock_location_bin_name',
         'odoo14-addon-stock_location_children',
         'odoo14-addon-stock_location_last_inventory_date',
