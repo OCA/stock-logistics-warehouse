@@ -342,7 +342,7 @@ class StockRequest(models.Model):
                         request.location_id,
                         request.name,
                         request.name,
-                        self.env.company,
+                        request.company_id,
                         values,
                     )
                 )
