@@ -3,7 +3,7 @@
 {
     "name": "Vertical Lift - Kardex",
     "summary": "Integrate with Kardex Remstar Vertical Lifts",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
