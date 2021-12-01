@@ -26,27 +26,31 @@ class ProductProduct(models.Model):
         compute="_compute_inventory_account_value",
         search="_search_inventory_value",
         digits=UNIT,
-        groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment",
+        groups="stock_valuation_account_manual_adjustment."
+               "group_stock_valuation_account_manual_adjustment",
     )
     accounting_value = fields.Float(
         string="Accounting Value",
         compute="_compute_inventory_account_value",
         search="_search_accounting_value",
         digits=UNIT,
-        groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment",
+        groups="stock_valuation_account_manual_adjustment."
+               "group_stock_valuation_account_manual_adjustment",
     )
     valuation_discrepancy = fields.Float(
         string="Valuation discrepancy",
         compute="_compute_inventory_account_value",
         search="_search_valuation_discrepancy",
         digits=UNIT,
-        groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment",
+        groups="stock_valuation_account_manual_adjustment."
+               "group_stock_valuation_account_manual_adjustment",
     )
     qty_discrepancy = fields.Float(
         string="Quantity discrepancy",
         compute="_compute_inventory_account_value",
         digits=UNIT,
-        groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment",
+        groups="stock_valuation_account_manual_adjustment."
+               "group_stock_valuation_account_manual_adjustment",
     )
 
     @api.multi
