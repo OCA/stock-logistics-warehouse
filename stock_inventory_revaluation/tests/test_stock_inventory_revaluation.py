@@ -788,7 +788,7 @@ class TestStockInventoryRevaluation(TransactionCase):
         expected_change = (10.00 - 8.00) * 10.0
         expected_value = 8.0 * 10.0
         self.assertEqual(
-            invent_value_change_average.current_value, expected_value,
+            invent_value_change_average.product_id.stock_value, expected_value,
             'Wrong stock value on revalued product')
 
         # Verify journal entries were created
