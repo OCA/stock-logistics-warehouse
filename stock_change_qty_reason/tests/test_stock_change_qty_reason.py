@@ -40,8 +40,7 @@ class TestStockQuantityChangeReason(SavepointCase):
         return self.preset_reason_id.create({"name": name, "description": description})
 
     def test_inventory_adjustment_onchange_reason_preset_reason(self):
-        """ Check that adding a reason or a preset reason explode to lines
-        """
+        """Check that adding a reason or a preset reason explode to lines"""
         product2 = self._create_product("product_product_2")
         self._product_change_qty(product2, 50)
         inventory = self.env["stock.inventory"].create(
