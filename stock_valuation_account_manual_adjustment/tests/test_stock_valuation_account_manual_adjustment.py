@@ -212,7 +212,7 @@ class TestProductInventoryAccountReconcile(TransactionCase):
                 }
             )
         )
-        wiz.process()
+        wiz.with_context(no_delay=True).process()
         self.product_average_1.refresh()
         self.assertEquals(self.product_average_1.valuation_discrepancy, 0.0)
 
@@ -235,8 +235,7 @@ class TestProductInventoryAccountReconcile(TransactionCase):
                 }
             )
         )
+        wiz.process()
         # Test if a Queue Job has been generated
-        queues = self.env['queue.job'].search([
-            ('uuid', '=', wiz.id)
-        ])
+        queues = self.env['queue.job'].search([])
         self.assertEqual(len(queues), 1, "Queue Job has not been created")

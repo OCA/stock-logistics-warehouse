@@ -26,31 +26,27 @@ class ProductProduct(models.Model):
         compute="_compute_inventory_account_value",
         search="_search_inventory_value",
         digits=UNIT,
-        groups="stock_valuation_account_manual_adjustment."
-        "group_stock_valuation_account_manual_adjustment",
+        groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment",
     )
     accounting_value = fields.Float(
         string="Accounting Value",
         compute="_compute_inventory_account_value",
         search="_search_accounting_value",
         digits=UNIT,
-        groups="stock_valuation_account_manual_adjustment."
-        "group_stock_valuation_account_manual_adjustment",
+        groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment",
     )
     valuation_discrepancy = fields.Float(
         string="Valuation discrepancy",
         compute="_compute_inventory_account_value",
         search="_search_valuation_discrepancy",
         digits=UNIT,
-        groups="stock_valuation_account_manual_adjustment."
-        "group_stock_valuation_account_manual_adjustment",
+        groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment",
     )
     qty_discrepancy = fields.Float(
         string="Quantity discrepancy",
         compute="_compute_inventory_account_value",
         digits=UNIT,
-        groups="stock_valuation_account_manual_adjustment."
-        "group_stock_valuation_account_manual_adjustment",
+        groups="stock_valuation_account_manual_adjustment.group_stock_valuation_account_manual_adjustment",
     )
 
     @api.multi
@@ -202,11 +198,11 @@ class ProductProduct(models.Model):
         return inventory_val
 
     @api.multi
-    def _search_accounting_value(self, operator, value):
-        if operator not in ops.keys():
+    def _search_accounting_value(self, search_operator, value):
+        if search_operator not in ops.keys():
             raise UserError(
                 _("Search operator %s not implemented for value %s")
-                % (operator, value)
+                % (search_operator, value)
             )
         accounting_val = self._get_accounting_valuation_by_product()
         products = self.search(
@@ -218,16 +214,16 @@ class ProductProduct(models.Model):
         found_ids = []
         for product in products:
             accounting_v = accounting_val.get(product.id, 0.0)
-            if ops[operator](accounting_v, value):
+            if ops[search_operator](accounting_v, value):
                 found_ids.append(product.id)
         return [("id", "in", found_ids)]
 
     @api.multi
-    def _search_inventory_value(self, operator, value):
-        if operator not in ops.keys():
+    def _search_inventory_value(self, search_operator, value):
+        if search_operator not in ops.keys():
             raise UserError(
                 _("Search operator %s not implemented for value %s")
-                % (operator, value)
+                % (search_operator, value)
             )
         inventory_val = self._get_inventory_valuation_by_product()
         products = self.search(
@@ -239,16 +235,16 @@ class ProductProduct(models.Model):
         found_ids = []
         for product in products:
             inventory_v = inventory_val.get(product.id, 0.0)
-            if ops[operator](inventory_v, value):
+            if ops[search_operator](inventory_v, value):
                 found_ids.append(product.id)
         return [("id", "in", found_ids)]
 
     @api.multi
-    def _search_valuation_discrepancy(self, operator, value):
-        if operator not in ops.keys():
+    def _search_valuation_discrepancy(self, search_operator, value):
+        if search_operator not in ops.keys():
             raise UserError(
                 _("Search operator %s not implemented for value %s")
-                % (operator, value)
+                % (search_operator, value)
             )
         accounting_val = self._get_accounting_valuation_by_product()
         inventory_val = self._get_inventory_valuation_by_product()
@@ -263,6 +259,6 @@ class ProductProduct(models.Model):
             inventory_v = inventory_val.get(product.id, 0.0)
             accounting_v = accounting_val.get(product.id, 0.0)
             valuation_discrepancy = inventory_v - accounting_v
-            if ops[operator](valuation_discrepancy, value):
+            if ops[search_operator](valuation_discrepancy, value):
                 found_ids.append(product.id)
         return [("id", "in", found_ids)]

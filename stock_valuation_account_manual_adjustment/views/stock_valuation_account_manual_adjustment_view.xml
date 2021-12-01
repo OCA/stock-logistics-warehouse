@@ -13,7 +13,7 @@
                     <button name="button_draft" states="posted"
                             string="Cancel" type="object"/>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="draft,done,cancel"
+                           statusbar_visible="draft,posted"
                            statusbar_colors='{"done":"blue"}'/>
                 </header>
                 <sheet>

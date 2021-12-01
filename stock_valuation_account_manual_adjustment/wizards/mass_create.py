@@ -95,7 +95,10 @@ class StockValuationAccountMassAdjust(models.TransientModel):
             rec = self.env["stock.valuation.account.manual.adjustment"].create(
                 data
             )
-            rec.post()
+            if self.env.context.get('no_delay'):
+                rec.post()
+            else:
+                rec.with_delay().post()
             rec_ids.append(rec.id)
 
         return {

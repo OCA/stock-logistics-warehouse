@@ -14,7 +14,7 @@ Stock Inventory Account Manual Adjustment
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/10.0/stock_valuation_account_manual_adjustment
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/12.0/stock_valuation_account_manual_adjustment
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
     :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-10-0/stock-logistics-warehouse-10-0-stock_valuation_account_manual_adjustment
@@ -23,7 +23,7 @@ Stock Inventory Account Manual Adjustment
     :target: https://runbot.odoo-community.org/runbot/153/10.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module shows in the product inventory stock value and the accounting
 value, and allows to create accounting adjustment entries to align the

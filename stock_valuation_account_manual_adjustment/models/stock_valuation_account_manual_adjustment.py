@@ -90,7 +90,7 @@ class StockValuationAccountManualAdjustment(models.Model):
         digits=UNIT,
         readonly=True,
         required=True,
-        states={"done": [("readonly", False)]},
+        states={"posted": [("readonly", False)]},
     )
     document_date = fields.Date(
         string="Creation date",
