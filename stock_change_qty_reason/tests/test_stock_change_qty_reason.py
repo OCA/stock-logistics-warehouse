@@ -55,10 +55,10 @@ class TestStockQuantityChangeReason(SavepointCase):
         self.assertEqual(len(inventory.line_ids), 1)
         inventory.reason = "Reason 2"
         inventory.onchange_reason()
-        self.assertEquals(inventory.line_ids.reason, inventory.reason)
+        self.assertEqual(inventory.line_ids.reason, inventory.reason)
         inventory.preset_reason_id = self._create_reason("Test 2", "Description Test 2")
         inventory.onchange_preset_reason()
-        self.assertEquals(
+        self.assertEqual(
             inventory.line_ids.preset_reason_id, inventory.preset_reason_id
         )
         inventory.line_ids[0].write({"product_qty": 10})
