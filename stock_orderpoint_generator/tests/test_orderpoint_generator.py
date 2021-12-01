@@ -292,7 +292,7 @@ class TestOrderpointGenerator(SavepointCase):
         # Max stock for p1: 100
         self.template.write({
             'auto_min_qty': True,
-            'auto_min_date_start': '2019-01-01 00:00:00',
+            'auto_min_date_start': '2019-01-01 01:30:00',
             'auto_min_date_end': '2019-02-01 00:00:00',
             'auto_min_qty_criteria': 'max',
         })
@@ -358,7 +358,7 @@ class TestOrderpointGenerator(SavepointCase):
         self.check_orderpoint(self.p1, self.template, orderpoint_auto_dict)
         # Auto min max over a shorter period
         self.template.write({
-            'auto_max_date_start': '2019-01-01 02:00:00',
+            'auto_max_date_start': '2019-01-01 02:30:00',
             'auto_max_date_end': '2019-01-01 03:00:00',
             'auto_min_date_start': '2019-01-01 04:00:00',
             'auto_min_date_end': '2019-01-01 06:00:00',

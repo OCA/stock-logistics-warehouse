@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_quant_manual_assign
@@ -29,6 +29,11 @@ msgstr "Dodeli ročne kvante"
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants_lines
 msgid "Assign Manual Quants Lines"
 msgstr "Dodeli postavke ročnih kvantov"
+
+#. module: stock_quant_manual_assign
+#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
+msgid "Auto-fill Quantity Done"
+msgstr ""
 
 #. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -129,6 +134,11 @@ msgid "Package"
 msgstr "Pakiranje"
 
 #. module: stock_quant_manual_assign
+#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
 msgstr "KOL"
@@ -165,7 +175,14 @@ msgid "Select"
 msgstr "Izbira"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:176
+#: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
+msgid ""
+"Select this in case done quantity of the stock move line should be auto-"
+"filled when quants are manually assigned."
+msgstr ""
+
+#. module: stock_quant_manual_assign
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:177
 #, python-format
 msgid ""
 "Selected line quantity is higher than the available one. Maybe an operation "

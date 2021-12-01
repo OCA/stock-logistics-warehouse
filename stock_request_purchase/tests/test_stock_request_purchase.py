@@ -230,3 +230,37 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.assertEqual(action['domain'], '[]')
         self.assertEqual('views' in action.keys(), True)
         self.assertEqual(action['res_id'], order.purchase_ids[0].id)
+
+    def test_create_request_analytic_data(self):
+        """Single Stock request with analytic data"""
+        if not self.stock_request._fields.get("analytic_account_id"):
+            self.skipTest('No analytic addon installed')
+        expected_date = fields.Datetime.now()
+        analytic_accont = self.env["account.analytic.account"].create({
+            "name": "Test Analytic Account",
+        })
+        analytic_tags = self.env.ref('analytic.tag_contract')
+        vals = {
+            'company_id': self.main_company.id,
+            'warehouse_id': self.warehouse.id,
+            'location_id': self.warehouse.lot_stock_id.id,
+            'expected_date': expected_date,
+            'stock_request_ids': [(0, 0, {
+                'product_id': self.product.id,
+                'product_uom_id': self.product.uom_id.id,
+                'product_uom_qty': 5.0,
+                'company_id': self.main_company.id,
+                'warehouse_id': self.warehouse.id,
+                'location_id': self.warehouse.lot_stock_id.id,
+                'expected_date': expected_date,
+                'analytic_account_id': analytic_accont.id,
+                'analytic_tag_ids': [(6, 0, analytic_tags.ids)],
+            })]
+        }
+        order = self.env['stock.request.order'].sudo(
+            self.stock_request_user).create(vals)
+        order.action_confirm()
+        order.refresh()
+        purchase = order.sudo().purchase_ids[0]
+        self.assertEqual(purchase.order_line[0].account_analytic_id, analytic_accont)
+        self.assertEqual(purchase.order_line[0].analytic_tag_ids, analytic_tags)

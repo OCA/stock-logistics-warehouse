@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_inventory_discrepancy
+# 	* stock_inventory_discrepancy
 #
 msgid ""
 msgstr ""
@@ -42,6 +42,11 @@ msgid "Force Validation"
 msgstr "强制验证"
 
 #. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__has_over_discrepancy
+msgid "Has Over Discrepancy"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
 #: selection:stock.inventory,state:0
 msgid "In Progress"
 msgstr "进行中"
@@ -70,13 +75,22 @@ msgstr "最大差异率阈值"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
-msgid "Maximum Discrepancy Rate allowed for any product when doing an Inventory Adjustment. Threshold defined in involved Location has preference."
-msgstr "进行库存调整时，任何产品所允许的最大差异率。在所涉及的位置中定义的阈值具有优先级。"
+msgid ""
+"Maximum Discrepancy Rate allowed for any product when doing an Inventory "
+"Adjustment. Threshold defined in involved Location has preference."
+msgstr ""
+"进行库存调整时，任何产品所允许的最大差异率。在所涉及的位置中定义的阈值具有优"
+"先级。"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
-msgid "Maximum Discrepancy Rate allowed for any product when doing an Inventory Adjustment. Thresholds defined in Locations have preference over Warehouse's ones."
-msgstr "进行库存调整时，任何产品所允许的最大差异率。在“位置”中定义的阈值优先于“仓库”的阈值。"
+msgid ""
+"Maximum Discrepancy Rate allowed for any product when doing an Inventory "
+"Adjustment. Thresholds defined in Locations have preference over Warehouse's "
+"ones."
+msgstr ""
+"进行库存调整时，任何产品所允许的最大差异率。在“位置”中定义的阈值优先于“仓"
+"库”的阈值。"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory__over_discrepancy_line_count
@@ -90,10 +104,12 @@ msgstr "待批准"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory__state
-msgid "States of the Inventory Adjustment:\n"
+msgid ""
+"States of the Inventory Adjustment:\n"
 "- Draft: Inventory not started.\n"
 "- In Progress: Inventory in execution.\n"
-"- Pending to Approve: Inventory have some discrepancies greater than the predefined threshold and it's waiting for the Control Manager approval.\n"
+"- Pending to Approve: Inventory have some discrepancies greater than the "
+"predefined threshold and it's waiting for the Control Manager approval.\n"
 "- Validated: Inventory Approved."
 msgstr ""
 "库存调整的状态：\n"
@@ -108,9 +124,10 @@ msgid "Status"
 msgstr "状态"
 
 #. module: stock_inventory_discrepancy
-#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:56
+#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:54
 #, python-format
-msgid "The Qty Update is over the Discrepancy Threshold.\n"
+msgid ""
+"The Qty Update is over the Discrepancy Threshold.\n"
 " Please, contact a user with rights to perform this action."
 msgstr ""
 "数量更新超过差异阈值。\n"
@@ -118,7 +135,9 @@ msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_qty
-msgid "The difference between the actual qty counted and the theoretical quantity on hand."
+msgid ""
+"The difference between the actual qty counted and the theoretical quantity "
+"on hand."
 msgstr "计算的实际数量与现有理论数量之间的差。"
 
 #. module: stock_inventory_discrepancy

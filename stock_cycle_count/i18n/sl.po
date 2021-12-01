@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_cycle_count
@@ -701,7 +701,7 @@ msgid "You cannot define a negative period."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_inventory.py:60
+#: code:addons/stock_cycle_count/models/stock_inventory.py:91
 #, python-format
 msgid ""
 "You cannot modify the configuration of an Inventory Adjustment related to a "

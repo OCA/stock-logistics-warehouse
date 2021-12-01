@@ -1,0 +1,170 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_stock_info_popup
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-07-22 18:49+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"Language-Team: none\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,help:sale_stock_info_popup.field_sale_order_line__product_type
+msgid "A storable product is a product for which you manage stock. The Inventory app has to be installed.\n"
+"A consumable product is a product for which stock is not managed.\n"
+"A service is a non-material product you provide."
+msgstr ""
+"Um produto armazenável é um produto para o qual gere o stock. A App "
+"Inventário tem que ser instalada.\n"
+"Um produto consumível é um produto para o qual o stock não é gerido.\n"
+"Um serviço é um artigo imaterial que você fornece."
+
+#. module: sale_stock_info_popup
+#. openerp-web
+#: code:addons/sale_stock_info_popup/static/src/xml/qty_at_date.xml:26
+#, python-format
+msgid "All planned operations included"
+msgstr "Todas as operações planeadas incluídas"
+
+#. module: sale_stock_info_popup
+#. openerp-web
+#: code:addons/sale_stock_info_popup/static/src/js/qty_at_date_widget.js:91
+#, python-format
+msgid "Availability"
+msgstr "Disponibilidade"
+
+#. module: sale_stock_info_popup
+#. openerp-web
+#: code:addons/sale_stock_info_popup/static/src/xml/qty_at_date.xml:26
+#, python-format
+msgid "Available"
+msgstr "Disponível"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__display_qty_widget
+msgid "Display Qty Widget"
+msgstr "Widget Mostrar Qtd"
+
+#. module: sale_stock_info_popup
+#. openerp-web
+#: code:addons/sale_stock_info_popup/static/src/xml/qty_at_date.xml:33
+#, python-format
+msgid "Expected Delivery"
+msgstr "Entrega Prevista"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,help:sale_stock_info_popup.field_product_product__free_qty
+msgid "Forecast quantity (computed as Quantity On Hand - reserved quantity)\n"
+"In a context with a single Stock Location, this includes goods stored in this location, or any of its children.\n"
+"In a context with a single Warehouse, this includes goods stored in the Stock Location of this Warehouse, or any of its children.\n"
+"Otherwise, this includes goods stored in any Stock Location with 'internal' type."
+msgstr ""
+"Quantidade Prevista (calculada como Quantidade em Mão - A sair + A entrar)\n"
+"No contexto de uma única localização de stock, inclui mercadorias guardadas "
+"nesta localização, ou em localizações descendentes.\n"
+"No contexto de um único armazém, inclui mercadorias guardadas na localização "
+"de stock deste armazém, ou em localizações descendentes.\n"
+"Caso contrário, inclui mercadorias guardadas na localização de stock com o "
+"tipo \"interno\"."
+
+#. module: sale_stock_info_popup
+#. openerp-web
+#: code:addons/sale_stock_info_popup/static/src/xml/qty_at_date.xml:21
+#, python-format
+msgid "Forecasted Stock"
+msgstr "Stock Previsto"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__free_qty_today
+msgid "Free Qty Today"
+msgstr "Qtd Livre Hoje"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_product_product__free_qty
+msgid "Free To Use Quantity "
+msgstr "Quantidade Livre para Uso "
+
+#. module: sale_stock_info_popup
+#: code:addons/sale_stock_info_popup/models/product.py:48
+#, python-format
+msgid "Invalid domain operator %s"
+msgstr "Operador de domínio inválido %s"
+
+#. module: sale_stock_info_popup
+#: code:addons/sale_stock_info_popup/models/product.py:50
+#, python-format
+msgid "Invalid domain right operand %s"
+msgstr "Operando direito de domínio inválido %s"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__is_mto
+msgid "Is Mto"
+msgstr "É Mto"
+
+#. module: sale_stock_info_popup
+#: code:addons/sale_stock_info_popup/models/sale_order.py:104
+#, python-format
+msgid "Make To Order"
+msgstr "Produzir para Encomenda"
+
+#. module: sale_stock_info_popup
+#. openerp-web
+#: code:addons/sale_stock_info_popup/static/src/xml/qty_at_date.xml:21
+#, python-format
+msgid "On"
+msgstr "Em"
+
+#. module: sale_stock_info_popup
+#: model:ir.model,name:sale_stock_info_popup.model_product_product
+msgid "Product"
+msgstr "Produto"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__product_type
+msgid "Product Type"
+msgstr "Tipo de Produto"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__qty_available_today
+msgid "Qty Available Today"
+msgstr "Qtd. Disponível Hoje"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__qty_to_deliver
+msgid "Qty To Deliver"
+msgstr "Qtd. a Entregar"
+
+#. module: sale_stock_info_popup
+#: model:ir.model,name:sale_stock_info_popup.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Linha de Encomenda de Venda"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__scheduled_date
+msgid "Scheduled Date"
+msgstr "Data Agendada"
+
+#. module: sale_stock_info_popup
+#. openerp-web
+#: code:addons/sale_stock_info_popup/static/src/xml/qty_at_date.xml:37
+#, python-format
+msgid "This product is replenished on demand."
+msgstr "Este produto é reabastecido sob demanda."
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__virtual_available_at_date
+msgid "Virtual Available At Date"
+msgstr "Virtual Disponível na Data"
+
+#. module: sale_stock_info_popup
+#: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__warehouse_id
+msgid "Warehouse"
+msgstr "Armazém"

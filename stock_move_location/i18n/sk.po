@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_move_location
+# 	* stock_move_location
 #
 msgid ""
 msgstr ""
@@ -75,6 +75,11 @@ msgstr "Zobrazené meno"
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Edit Locations"
 msgstr "Upraviť lokácie"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_picking_form
+msgid "Fill with stock"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
@@ -154,6 +159,12 @@ msgid "Move to location..."
 msgstr "Presun do lokácie..."
 
 #. module: stock_move_location
+#: code:addons/stock_move_location/models/stock_picking.py:37
+#, python-format
+msgid "Moves lines already exists"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__origin_location_id
 msgid "Origin Location"
@@ -181,6 +192,12 @@ msgid "Planned Transfer"
 msgstr "Plánovaný prevod"
 
 #. module: stock_move_location
+#: code:addons/stock_move_location/models/stock_picking.py:35
+#, python-format
+msgid "Please choose a source end location"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
 msgid "Product"
 msgstr "Produkt"
@@ -202,7 +219,9 @@ msgstr "Zobraziť dostupnú zásobu"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_stock_picking_type__show_move_onhand
-msgid "Show a button 'Move On Hand' in the Inventory Dashboard to initiate the process to move the products in stock at the origin location."
+msgid ""
+"Show a button 'Move On Hand' in the Inventory Dashboard to initiate the "
+"process to move the products in stock at the origin location."
 msgstr ""
 "Zobraziť tlačidlo 'Presun dostupného množstva' na skladovej nástenke pre "
 "začatie presunu produktov z pôvodnej lokácie."
@@ -211,6 +230,12 @@ msgstr ""
 #: model:ir.model,name:stock_move_location.model_stock_move
 msgid "Stock Move"
 msgstr "Skladový pohyb"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_picking
+#, fuzzy
+msgid "Transfer"
+msgstr "Plánovaný prevod"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location

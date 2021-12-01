@@ -6,22 +6,14 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
-
+            <field name="scrap_location" position="before">
+                <field name="is_zone" />
+            </field>
             <field name="usage" position="after">
-                <field name="kind" />
-                <field name="location_name_format" attrs="{'invisible': [('kind', '=', 'bin')]}" />
-                <field name="picking_type_id" options="{'no_create': True}" attrs="{'readonly': [('kind', '!=', 'zone')]}" />
+                <field name="location_kind" />
+                <field name="zone_location_id" />
+                <field name="area_location_id" />
             </field>
-
-            <field name="posx" position="before">
-                <field name="picking_zone_id" />
-                <field name="area" />
-                <field name="corridor" />
-                <field name="row" />
-                <field name="rack" />
-                <field name="level" />
-            </field>
-
         </field>
     </record>
 
@@ -30,17 +22,17 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_search"/>
         <field name="arch" type="xml">
-
             <xpath expr="//search" position="inside">
-                <field name="kind"/>
-                <field name="picking_zone_id"/>
-                <field name="area" />
-                <field name="corridor" />
-                <field name="row" />
-                <field name="rack" />
-                <field name="level" />
+                <field name="location_kind"/>
+                <field name="is_zone" />
+                <field name="zone_location_id" />
+                <field name="area_location_id" />
+                <group expand="0" string="Group By">
+                    <filter string="Location Kind" name="location_kind" domain="[]" context="{'group_by':'location_kind'}"/>
+                    <filter string="Zone location" name="zone_location" domain="[]" context="{'group_by':'zone_location_id'}"/>
+                    <filter string="Area location" name="area_location" domain="[]" context="{'group_by':'area_location_id'}"/>
+                </group>
             </xpath>
-
         </field>
     </record>
 

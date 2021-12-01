@@ -9,36 +9,37 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-04 03:58+0000\n"
-"PO-Revision-Date: 2017-03-04 03:58+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2021-07-26 13:49+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__contains_unreserved
 msgid "Contains unreserved products"
-msgstr ""
+msgstr "Contém produtos sem reservas"
 
 #. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.quant_search_view
 msgid "Internal Unreserved"
-msgstr ""
+msgstr "Interno Não-reservado"
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:126
 #, python-format
 msgid "Invalid domain operator %s"
-msgstr ""
+msgstr "Operador de domínio inválido %s"
 
 #. module: stock_available_unreserved
 #: code:addons/stock_available_unreserved/models/product.py:128
 #, python-format
 msgid "Invalid domain right operand %s"
-msgstr ""
+msgstr "Operando direito de domínio inválido %s"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_product_product
@@ -48,17 +49,17 @@ msgstr "Produto"
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Modelo de Produto"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_product__qty_available_not_res
 msgid "Qty Available Not Reserved"
-msgstr ""
+msgstr "Qtd. Disponível Não Reservada"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template__qty_available_not_res
 msgid "Quantity On Hand Unreserved"
-msgstr ""
+msgstr "Quantidade em Mão Sem Reservas"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_stock_quant
@@ -68,25 +69,25 @@ msgstr ""
 #. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_search_form_view_stock
 msgid "Reservable Products"
-msgstr ""
+msgstr "Produtos Reserváveis"
 
 #. module: stock_available_unreserved
 #: model:ir.actions.act_window,name:stock_available_unreserved.product_open_quants_unreserved
 msgid "Stock On Hand (Unreserved)"
-msgstr ""
+msgstr "Stock em Mão (Sem reserva)"
 
 #. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_form_view_procurement_button
 msgid "Unreserved"
-msgstr ""
+msgstr "Não-reservado"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__unreserved_quantity
 msgid "Unreserved quantity"
-msgstr ""
+msgstr "Quantidade não reservada"
 
 #. module: stock_available_unreserved
 #: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
 msgid "Unreserved:"
-msgstr ""
+msgstr "Não-reservado:"

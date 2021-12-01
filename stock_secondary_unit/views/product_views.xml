@@ -32,7 +32,7 @@
                     class="oe_stat_button" icon="fa-building-o">
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value"><field name="secondary_unit_qty_available" widget="statinfo" nolabel="1"/></span>
-                        <span class="o_stat_text"><field name="stock_secondary_uom_id"/></span>
+                        <span class="o_stat_text"><field name="stock_secondary_uom_id" readonly="1"/></span>
                     </div>
                 </button>
             </xpath>
@@ -45,14 +45,14 @@
                ref="stock.product_form_view_procurement_button"/>
         <field name="groups_id" eval="[(4, ref('uom.group_uom'))]"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='qty_available']/.." position="after">
+            <xpath expr="//field[@name='qty_available']/../../.." position="after">
                 <button class="oe_stat_button"
                        name="%(stock.product_open_quants)d"
                        icon="fa-building-o"
                        type="action" attrs="{'invisible':[('type', '!=', 'product')]}">
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value"><field name="secondary_unit_qty_available" widget="statinfo" nolabel="1"/></span>
-                        <span class="o_stat_text"><field name="stock_secondary_uom_id"/></span>
+                        <span class="o_stat_text"><field name="stock_secondary_uom_id" readonly="1"/></span>
                     </div>
                 </button>
             </xpath>

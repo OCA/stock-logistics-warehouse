@@ -527,7 +527,8 @@ msgstr "未读消息的数量"
 msgid ""
 "Perform an Inventory Adjustment every time a location in the warehouse runs "
 "out of stock in order to confirm it is truly empty."
-msgstr "每当仓库中的某个位置缺货时，都要进行库存调整，以确认该位置是否真正空了。"
+msgstr ""
+"每当仓库中的某个位置缺货时，都要进行库存调整，以确认该位置是否真正空了。"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__periodic_count_period
@@ -571,7 +572,8 @@ msgstr "每当位置的准确性低于给定阈值时，计划一次计数。"
 msgid ""
 "Schedules a count every time the total turnover of a location exceeds the "
 "threshold. This considers every product going into/out of the location"
-msgstr "每当位置的总营业额超过阈值时，计划一个计数。这考虑了每件进出该地点的产品"
+msgstr ""
+"每当位置的总营业额超过阈值时，计划一个计数。这考虑了每件进出该地点的产品"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
@@ -679,7 +681,9 @@ msgid ""
 "You can apply the cycle count rules in complete\n"
 "                        warehouses or specific zones. A zone it is\n"
 "                        understood as a location and all its children."
-msgstr "您可以在完整的仓库或特定区域中应用周期盘点规则。一个区域被理解为一个位置和它的所有子元素。"
+msgstr ""
+"您可以在完整的仓库或特定区域中应用周期盘点规则。一个区域被理解为一个位置和它"
+"的所有子元素。"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count.py:93
@@ -706,7 +710,7 @@ msgid "You cannot define a negative period."
 msgstr "您不能定义一个负数期。"
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_inventory.py:60
+#: code:addons/stock_cycle_count/models/stock_inventory.py:91
 #, python-format
 msgid ""
 "You cannot modify the configuration of an Inventory Adjustment related to a "

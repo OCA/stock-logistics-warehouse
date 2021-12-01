@@ -9,37 +9,38 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2018-01-16 14:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2021-07-14 16:49+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__virtual_location_qty
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__virtual_location_qty
 msgid "Forecast On Location"
-msgstr ""
+msgstr "Previsto nell'Ubicazione"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__incoming_location_qty
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__incoming_location_qty
 msgid "Incoming On Location"
-msgstr ""
+msgstr "In arrivo nell'Ubicazione"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model,name:stock_warehouse_orderpoint_stock_info.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr ""
+msgstr "Regola Inventario Minimo"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__outgoing_location_qty
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__outgoing_location_qty
 msgid "Outgoing On Location"
-msgstr ""
+msgstr "In uscita dall'Ubicazione"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model_terms:ir.ui.view,arch_db:stock_warehouse_orderpoint_stock_info.warehouse_orderpoint_search
@@ -57,10 +58,10 @@ msgstr "Categoria Prodotto"
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__product_location_qty
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__product_location_qty
 msgid "Quantity On Location"
-msgstr ""
+msgstr "Quantità nell'Ubicazione"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,help:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__product_category
 #: model:ir.model.fields,help:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint_template__product_category
 msgid "Select category for the current product"
-msgstr ""
+msgstr "Seleziona una categoria per il prodotto attuale"

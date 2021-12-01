@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_inventory_discrepancy
@@ -43,6 +43,11 @@ msgstr "Osnutek"
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_inventory_form
 msgid "Force Validation"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__has_over_discrepancy
+msgid "Has Over Discrepancy"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
@@ -114,7 +119,7 @@ msgid "Status"
 msgstr "Status"
 
 #. module: stock_inventory_discrepancy
-#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:56
+#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:54
 #, python-format
 msgid ""
 "The Qty Update is over the Discrepancy Threshold.\n"

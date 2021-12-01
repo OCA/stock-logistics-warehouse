@@ -13,6 +13,7 @@ class LocationAccuracyReport(models.AbstractModel):
     def _get_inventory_domain(self, loc_id, exclude_sublocation=True):
         return [('location_id', '=', loc_id),
                 ('exclude_sublocation', '=', exclude_sublocation),
+                ('filter', '=', 'none'),
                 ('state', '=', 'done')]
 
     @api.model

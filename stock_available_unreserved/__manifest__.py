@@ -5,7 +5,7 @@
 {
     "name": "Stock Available Unreserved",
     "summary": "Quantity of stock available for immediate use",
-    "version": "12.0.1.1.0",
+    "version": "12.0.1.1.1",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",

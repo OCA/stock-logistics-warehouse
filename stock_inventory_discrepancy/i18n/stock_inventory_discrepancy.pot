@@ -39,6 +39,11 @@ msgid "Force Validation"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__has_over_discrepancy
+msgid "Has Over Discrepancy"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
 #: selection:stock.inventory,state:0
 msgid "In Progress"
 msgstr ""
@@ -100,7 +105,7 @@ msgid "Status"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:56
+#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:54
 #, python-format
 msgid "The Qty Update is over the Discrepancy Threshold.\n"
 " Please, contact a user with rights to perform this action."

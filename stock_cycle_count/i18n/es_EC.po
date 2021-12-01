@@ -708,7 +708,7 @@ msgid "You cannot define a negative period."
 msgstr ""
 
 #. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_inventory.py:60
+#: code:addons/stock_cycle_count/models/stock_inventory.py:91
 #, python-format
 msgid ""
 "You cannot modify the configuration of an Inventory Adjustment related to a "
