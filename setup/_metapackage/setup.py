@@ -69,6 +69,7 @@ setuptools.setup(
         'odoo13-addon-stock_pull_list',
         'odoo13-addon-stock_putaway_product_template',
         'odoo13-addon-stock_quant_manual_assign',
+        'odoo13-addon-stock_quant_view_reservation',
         'odoo13-addon-stock_removal_location_by_priority',
         'odoo13-addon-stock_request',
         'odoo13-addon-stock_request_analytic',
