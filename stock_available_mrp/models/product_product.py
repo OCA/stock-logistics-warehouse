@@ -134,6 +134,8 @@ class ProductProduct(models.Model):
         needs = Counter()
         for bom_component in exploded_components:
             component = bom_component[0].product_id
+            if component.type != "product":
+                continue
             needs += Counter({component: bom_component[1]["qty"]})
 
         return needs

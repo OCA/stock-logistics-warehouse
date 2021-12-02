@@ -287,7 +287,7 @@ class TestPotentialQty(TransactionCase):
         p2 = self.product_model.create(
             {
                 "name": "Test sub product with BOM",
-                "type": "consu",
+                "type": "product",
                 "uom_id": self.env.ref("uom.product_uom_unit").id,
             }
         )
@@ -371,8 +371,8 @@ class TestPotentialQty(TransactionCase):
         # a recordset with multiple products
         # Recursive compute is not working
 
-        p1 = self.product_model.create({"name": "Test P1"})
-        p2 = self.product_model.create({"name": "Test P2"})
+        p1 = self.product_model.create({"name": "Test P1", "type": "product"})
+        p2 = self.product_model.create({"name": "Test P2", "type": "product"})
         p3 = self.product_model.create({"name": "Test P3", "type": "product"})
 
         self.config.set_param("stock_available_mrp_based_on", "immediately_usable_qty")
@@ -387,7 +387,6 @@ class TestPotentialQty(TransactionCase):
         self.product_model.invalidate_cache()
 
         products = self.product_model.search([("id", "in", [p1.id, p2.id, p3.id])])
-
         self.assertEqual(
             {p1.id: 3.0, p2.id: 3.0, p3.id: 0.0},
             {p.id: p.potential_qty for p in products},
