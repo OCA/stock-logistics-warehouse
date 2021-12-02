@@ -1,6 +1,8 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from itertools import cycle
+
 from odoo import _, models
 
 
@@ -83,15 +85,30 @@ class VerticalLiftOperationPick(models.Model):
     def fetch_tray(self):
         self.current_move_line_id.fetch_vertical_lift_tray_source()
 
+    def _get_next_move_line(self, order):
+        def get_next(move_lines, current_move_line):
+            if not move_lines:
+                return False
+            move_lines_cycle = cycle(move_lines)
+            if not current_move_line or current_move_line not in move_lines:
+                return next(move_lines_cycle)
+            # Point to current_move_line and then return the next
+            while next(move_lines_cycle) != current_move_line:
+                continue
+            return next(move_lines_cycle)
+
+        move_lines = self.env["stock.move.line"].search(
+            self._domain_move_lines_to_do(), order=order
+        )
+        return get_next(move_lines, self.current_move_line_id)
+
     def select_next_move_line(self):
         self.ensure_one()
         next_move_line_order = "vertical_lift_skipped"
         if self._order:
             # If there already exists an order, keep it.
             next_move_line_order += "," + self._order
-        next_move_line = self.env["stock.move.line"].search(
-            self._domain_move_lines_to_do(), limit=1, order=next_move_line_order
-        )
+        next_move_line = self._get_next_move_line(next_move_line_order)
         self.current_move_line_id = next_move_line
         if next_move_line:
             if next_move_line.vertical_lift_skipped:
@@ -105,14 +122,15 @@ class VerticalLiftOperationPick(models.Model):
 
     def button_release(self):
         """Release the operation, go to the next"""
-        super().button_release()
+        res = super().button_release()
         if self.step() == "noop":
             # we don't need to release (close) the tray until we have reached
             # the last line: the release is implicit when a next line is
             # fetched
             self.shuttle_id.release_vertical_lift_tray()
             # sorry not sorry
-            return self._rainbow_man()
+            res = self._rainbow_man()
+        return res
 
     def button_skip(self):
         """Skip the operation, go to the next"""

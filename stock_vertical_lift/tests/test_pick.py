@@ -34,17 +34,29 @@ class TestPick(VerticalLiftCase):
     def test_pick_select_next_move_line(self):
         operation = self._open_screen("pick")
         operation.select_next_move_line()
-        self.assertEqual(operation.current_move_line_id, self.out_move_line)
+        self.assertEqual(
+            operation.current_move_line_id, self.picking_out.move_line_ids[1]
+        )
         self.assertEqual(operation.state, "scan_destination")
 
     def test_pick_select_next_move_line_was_skipped(self):
         """Previously skipped moves can be reprocessed"""
         self.picking_out.move_line_ids.write({"vertical_lift_skipped": True})
         operation = self._open_screen("pick")
+        self.assertEqual(
+            operation.current_move_line_id, self.picking_out.move_line_ids[0]
+        )
         operation.select_next_move_line()
-        self.assertEqual(operation.current_move_line_id, self.out_move_line)
+        self.assertEqual(
+            operation.current_move_line_id, self.picking_out.move_line_ids[1]
+        )
         self.assertEqual(operation.state, "scan_destination")
         self.assertFalse(operation.current_move_line_id.vertical_lift_skipped)
+        # When I skip the last move I come back to the first
+        operation.select_next_move_line()
+        self.assertEqual(
+            operation.current_move_line_id, self.picking_out.move_line_ids[0]
+        )
 
     def test_pick_save(self):
         operation = self._open_screen("pick")
@@ -246,3 +258,11 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation.tray_qty, 50)
         self._update_quantity_in_cell(cell, self.out_move_line.product_id, -20)
         self.assertEqual(operation.tray_qty, 30)
+        self.assertTrue(operation.product_packagings)
+
+    def test_product_packagings(self):
+        operation = self.shuttle._operation_for_mode()
+        ml = operation.current_move_line_id
+        ml.move_id.state = "draft"
+        ml.product_id = False
+        self.assertFalse(operation.product_packagings)
