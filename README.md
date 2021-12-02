@@ -71,7 +71,7 @@ addon | version | maintainers | summary
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add Stock Requests to the Inventory App
 [stock_reserve_rule](stock_reserve_rule/) | 14.0.1.0.0 |  | Configure reservation rules by location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 14.0.1.0.0 |  | Allows to search for picking from supplierinfo code
-[stock_vertical_lift](stock_vertical_lift/) | 14.0.1.0.0 |  | Provides the core for integration with Vertical Lifts
+[stock_vertical_lift](stock_vertical_lift/) | 14.0.1.1.0 |  | Provides the core for integration with Vertical Lifts
 [stock_vertical_lift_empty_tray_check](stock_vertical_lift_empty_tray_check/) | 14.0.1.0.0 |  | Checks if the tray is actually empty.
 [stock_vertical_lift_kardex](stock_vertical_lift_kardex/) | 14.0.1.1.0 |  | Integrate with Kardex Remstar Vertical Lifts
 [stock_vertical_lift_packaging_type](stock_vertical_lift_packaging_type/) | 14.0.1.0.0 |  | Provides integration with Vertical Lifts and packaging types
