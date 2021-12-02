@@ -22,7 +22,7 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     inventory_value = fields.Float(
-        string="Inventory Value",
+        string="Inventory Valuation",
         compute="_compute_inventory_account_value",
         search="_search_inventory_value",
         digits=UNIT,
@@ -30,7 +30,7 @@ class ProductProduct(models.Model):
                "group_stock_valuation_account_manual_adjustment",
     )
     accounting_value = fields.Float(
-        string="Accounting Value",
+        string="Accounting Valuation",
         compute="_compute_inventory_account_value",
         search="_search_accounting_value",
         digits=UNIT,

@@ -101,7 +101,7 @@ class StockValuationAccountManualAdjustment(models.Model):
     )
     user_id = fields.Many2one(
         comodel_name="res.users",
-        string="Created by",
+        string="Creator User",
         readonly=True,
         states={"draft": [("readonly", False)]},
         default=lambda self: self.env.user,
