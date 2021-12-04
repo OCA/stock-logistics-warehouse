@@ -23,7 +23,7 @@ Stock Quant Expiration Date Tree
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module allows to display expirations dates on stock quant tree view.
 
@@ -68,13 +68,13 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-.. |maintainer-rousseldenis| image:: https://github.com/rousseldenis.png?size=40px
-    :target: https://github.com/rousseldenis
-    :alt: rousseldenis
+.. |maintainer-Manuel Calero| image:: https://github.com/Manuel Calero.png?size=40px
+    :target: https://github.com/Manuel Calero
+    :alt: Manuel Calero
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-rousseldenis|
+|maintainer-Manuel Calero| 
 
 This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/13.0/stock_quant_expiration_date_tree>`_ project on GitHub.
 
