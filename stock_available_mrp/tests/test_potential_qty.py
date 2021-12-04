@@ -3,34 +3,45 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.osv.expression import TRUE_LEAF
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestPotentialQty(TransactionCase):
+class TestPotentialQty(SavepointCase):
     """Test the potential quantity on a product with a multi-line BoM"""
 
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestPotentialQty, cls).setUpClass()
 
-        self.product_model = self.env["product.product"]
-        self.bom_model = self.env["mrp.bom"]
-        self.bom_line_model = self.env["mrp.bom.line"]
-        self.stock_quant_model = self.env["stock.quant"]
-        self.config = self.env["ir.config_parameter"]
-        self.location = self.env["stock.location"]
-        self.main_company = self.browse_ref("base.main_company")
+        cls.product_model = cls.env["product.product"]
+        cls.bom_model = cls.env["mrp.bom"]
+        cls.bom_line_model = cls.env["mrp.bom.line"]
+        cls.stock_quant_model = cls.env["stock.quant"]
+        cls.config = cls.env["ir.config_parameter"]
+        cls.location = cls.env["stock.location"]
+        cls.main_company = cls.env.ref("base.main_company")
         # Get the warehouses
-        self.wh_main = self.browse_ref("stock.warehouse0")
-        self.wh_ch = self.browse_ref("stock.stock_warehouse_shop0")
+        cls.wh_main = cls.env.ref("stock.warehouse0")
+        cls.wh_ch = cls.env.ref("stock.stock_warehouse_shop0")
+
+        # We need to compute parent_left and parent_right of the locations as
+        # they are used to compute qty_available of the product.
+        cls.location._parent_store_compute()
+        cls.setup_demo_data()
+
+    @classmethod
+    def setup_demo_data(cls):
         #  An interesting product (multi-line BoM, variants)
-        self.tmpl = self.browse_ref("mrp.product_product_table_kit_product_template")
+        cls.tmpl = cls.env.ref("mrp.product_product_table_kit_product_template")
         #  First variant
-        self.var1 = self.browse_ref("mrp.product_product_table_kit")
+        cls.var1 = cls.env.ref("mrp.product_product_table_kit")
+        cls.var1.type = "product"
         #  Second variant
-        self.var2 = self.browse_ref("stock_available_mrp.product_kit_1a")
+        cls.var2 = cls.env.ref("stock_available_mrp.product_kit_1a")
+        cls.var2.type = "product"
         # Make bolt a stockable product to be able to change its stock
         # we need to unreserve the existing move before being able to do it.
-        bolt = self.env.ref("mrp.product_product_computer_desk_bolt")
+        bolt = cls.env.ref("mrp.product_product_computer_desk_bolt")
         bolt.stock_move_ids._do_unreserve()
         bolt.type = "product"
         # Components that can be used to make the product
@@ -38,11 +49,10 @@ class TestPotentialQty(TransactionCase):
             # Bolt
             bolt,
             # Wood Panel
-            self.browse_ref("mrp.product_product_wood_panel"),
+            cls.env.ref("mrp.product_product_wood_panel"),
         ]
-
         # Zero-out the inventory of all variants and components
-        for component in components + [v for v in self.tmpl.product_variant_ids]:
+        for component in components + [v for v in cls.tmpl.product_variant_ids]:
             moves = component.stock_move_ids.filtered(
                 lambda mo: mo.state not in ("done", "cancel")
             )
@@ -50,13 +60,13 @@ class TestPotentialQty(TransactionCase):
 
             component.stock_quant_ids.unlink()
 
-        #  A product without a BoM
-        self.product_wo_bom = self.browse_ref("product.product_product_11")
+        #  A product without a BoM
+        cls.product_wo_bom = cls.env.ref("product.product_product_11")
 
         #  Record the initial quantity available for sale
-        self.initial_usable_qties = {
+        cls.initial_usable_qties = {
             i.id: i.immediately_usable_qty
-            for i in [self.tmpl, self.var1, self.var2, self.product_wo_bom]
+            for i in [cls.tmpl, cls.var1, cls.var2, cls.product_wo_bom]
         }
 
     def _create_inventory(self, location_id, company_id):

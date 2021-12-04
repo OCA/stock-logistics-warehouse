@@ -3,51 +3,22 @@
 
 from collections import Counter
 
-from odoo import api, fields, models
+from odoo import api, models
 from odoo.fields import first
+from odoo.tools import float_round
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    bom_id = fields.Many2one(
-        comodel_name="mrp.bom", compute="_compute_bom_id", string="BOM"
-    )
-
-    @api.depends("virtual_available", "bom_id", "bom_id.product_qty")
+    @api.depends("virtual_available", "bom_ids", "bom_ids.product_qty")
     def _compute_available_quantities(self):
         super()._compute_available_quantities()
-
-    def _get_bom_id_domain(self):
-        """
-        Real multi domain
-        :return:
-        """
-        return [
-            "|",
-            ("product_id", "in", self.ids),
-            "&",
-            ("product_id", "=", False),
-            ("product_tmpl_id", "in", self.mapped("product_tmpl_id.id")),
-        ]
-
-    @api.depends("product_tmpl_id")
-    def _compute_bom_id(self):
-        bom_obj = self.env["mrp.bom"]
-        boms = bom_obj.search(self._get_bom_id_domain(), order="sequence, product_id")
-        for product in self:
-            product.bom_id = product.bom_id
-            product_boms = boms.filtered(
-                lambda b: b.product_id == product
-                or (not b.product_id and b.product_tmpl_id == product.product_tmpl_id)
-            )
-            if product_boms:
-                product.bom_id = first(product_boms)
 
     def _compute_available_quantities_dict(self):
         res, stock_dict = super()._compute_available_quantities_dict()
         # compute qty for product with bom
-        product_with_bom = self.filtered("bom_id")
+        product_with_bom = self.filtered("bom_ids")
 
         if not product_with_bom:
             return res, stock_dict
@@ -81,6 +52,7 @@ class ProductProduct(models.Model):
 
         for product in product_with_bom:
             # Need by product (same product can be in many BOM lines/levels)
+            bom_id = first(product.bom_ids)
             exploded_components = exploded_boms[product.id]
             component_needs = product._get_components_needs(exploded_components)
             if not component_needs:
@@ -95,21 +67,19 @@ class ProductProduct(models.Model):
                         for component, need in component_needs.items()
                     ]
                 )
-                potential_qty = product.bom_id.product_qty * components_potential_qty
+                potential_qty = bom_id.product_qty * components_potential_qty
                 potential_qty = potential_qty > 0.0 and potential_qty or 0.0
 
                 # We want to respect the rounding factor of the potential_qty
                 # Rounding down as we want to be pesimistic.
-                potential_qty = product.bom_id.product_uom_id._compute_quantity(
+                potential_qty = bom_id.product_uom_id._compute_quantity(
                     potential_qty,
-                    product.bom_id.product_tmpl_id.uom_id,
+                    bom_id.product_tmpl_id.uom_id,
                     rounding_method="DOWN",
                 )
 
             res[product.id]["potential_qty"] = potential_qty
-            immediately_usable_qty = (
-                potential_qty if product.bom_id.type != "phantom" else 0
-            )
+            immediately_usable_qty = potential_qty if bom_id.type != "phantom" else 0
             res[product.id]["immediately_usable_qty"] += immediately_usable_qty
 
         return res, stock_dict
@@ -119,10 +89,7 @@ class ProductProduct(models.Model):
         return a dict by product_id of exploded bom lines
         :return:
         """
-        exploded_boms = {}
-        for rec in self:
-            exploded_boms[rec.id] = rec.bom_id.explode(rec, 1.0)[1]
-        return exploded_boms
+        return self.explode_bom_quantities()
 
     @api.model
     def _get_components_needs(self, exploded_components):
@@ -132,8 +99,76 @@ class ProductProduct(models.Model):
         :rtype: collections.Counter
         """
         needs = Counter()
-        for bom_component in exploded_components:
-            component = bom_component[0].product_id
-            needs += Counter({component: bom_component[1]["qty"]})
+        for bom_line, bom_qty in exploded_components:
+            component = bom_line.product_id
+            needs += Counter({component: bom_qty})
 
         return needs
+
+    def explode_bom_quantities(self):
+        """Explode a bill of material with quantities to consume
+
+        It returns a dict with the exploded bom lines and
+        the quantity they consume. Example::
+
+            {
+            <product-id>: [
+                    (<bom-line-id>, <quantity>)
+                    (<bom-line-id>, <quantity>)
+                ]
+            }
+
+        The 'MrpBom.explode()' method includes the same information, with other
+        things, but is under-optimized to be used for the purpose of this
+        module. The killer is particularly the call to `_bom_find()` which can
+        generate thousands of SELECT for searches.
+        """
+        result = {}
+
+        for product in self:
+            lines_done = []
+            bom_lines = [
+                (first(product.bom_ids), bom_line, product, 1.0)
+                for bom_line in first(product.bom_ids).bom_line_ids
+            ]
+
+            while bom_lines:
+                (current_bom, current_line, current_product, current_qty) = bom_lines[0]
+                bom_lines = bom_lines[1:]
+
+                if current_line._skip_bom_line(current_product):
+                    continue
+
+                line_quantity = current_qty * current_line.product_qty
+
+                sub_bom = first(current_line.product_id.bom_ids)
+                if sub_bom.type == "phantom":
+                    product_uom = current_line.product_uom_id
+                    converted_line_quantity = product_uom._compute_quantity(
+                        line_quantity / sub_bom.product_qty,
+                        sub_bom.product_uom_id,
+                    )
+                    bom_lines = [
+                        (
+                            sub_bom,
+                            line,
+                            current_line.product_id,
+                            converted_line_quantity,
+                        )
+                        for line in sub_bom.bom_line_ids
+                    ] + bom_lines
+                else:
+                    # We round up here because the user expects that if he has
+                    # to consume a little more, the whole UOM unit should be
+                    # consumed.
+                    rounding = current_line.product_uom_id.rounding
+                    line_quantity = float_round(
+                        line_quantity,
+                        precision_rounding=rounding,
+                        rounding_method="UP",
+                    )
+                    lines_done.append((current_line, line_quantity))
+
+            result[product.id] = lines_done
+
+        return result

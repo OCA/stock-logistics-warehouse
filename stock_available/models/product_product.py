@@ -67,6 +67,9 @@ class ProductProduct(models.Model):
         "the materials already at hand.",
     )
 
+    def _get_search_immediately_usable_qty_domain(self):
+        return [("type", "=", "product")]
+
     @api.model
     def _search_immediately_usable_qty(self, operator, value):
         """Search function for the immediately_usable_qty field.
@@ -76,9 +79,10 @@ class ProductProduct(models.Model):
         :param value: str
         :return: list of tuple (domain)
         """
-        products = self.search([])
-        # Force prefetch
-        products.mapped("immediately_usable_qty")
+        product_domain = self._get_search_immediately_usable_qty_domain()
+        products = self.with_context(prefetch_fields=False).search(
+            product_domain, order="id"
+        )
         product_ids = []
         for product in products:
             if OPERATORS[operator](product.immediately_usable_qty, value):
