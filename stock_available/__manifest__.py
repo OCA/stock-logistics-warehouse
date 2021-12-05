@@ -4,7 +4,7 @@
 
 {
     "name": "Stock available to promise",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.0.3",
     "author": "Numérigraphe, Sodexis, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "development_status": "Production/Stable",
