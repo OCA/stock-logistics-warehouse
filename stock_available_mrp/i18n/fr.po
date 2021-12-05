@@ -20,11 +20,6 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_available_mrp
-#: model:ir.model.fields,field_description:stock_available_mrp.field_product_product__bom_id
-msgid "BOM"
-msgstr "Nomenclature"
-
-#. module: stock_available_mrp
 #: model:product.product,name:stock_available_mrp.product_computer_desk_bolt_white
 #: model:product.template,name:stock_available_mrp.product_computer_desk_bolt_white_product_template
 msgid "Bolt"
@@ -80,6 +75,9 @@ msgstr "kg"
 #: model:product.template,volume_uom_name:stock_available_mrp.product_computer_desk_bolt_white_product_template
 msgid "m³"
 msgstr ""
+
+#~ msgid "BOM"
+#~ msgstr "Nomenclature"
 
 #~ msgid "Unit(s)"
 #~ msgstr "Unité(s)"
