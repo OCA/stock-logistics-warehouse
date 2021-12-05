@@ -21,11 +21,6 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: stock_available_mrp
-#: model:ir.model.fields,field_description:stock_available_mrp.field_product_product__bom_id
-msgid "BOM"
-msgstr ""
-
-#. module: stock_available_mrp
 #: model:product.product,name:stock_available_mrp.product_computer_desk_bolt_white
 #: model:product.template,name:stock_available_mrp.product_computer_desk_bolt_white_product_template
 msgid "Bolt"
