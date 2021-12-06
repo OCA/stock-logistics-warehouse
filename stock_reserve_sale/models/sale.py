@@ -47,6 +47,12 @@ class SaleOrder(models.Model):
         lines = self.env["sale.order.line"].browse(line_ids)
         lines.release_stock_reservation()
         return True
+    
+    def action_reserve_all_lines(self):
+        RESERVE = self.env['sale.stock.reserve']
+        for rec in self.filtered(lambda s: s.is_stock_reservable):
+            reserve = RESERVE.with_context(active_model=self._name, active_id=rec.id, active_ids=rec.ids).create({})
+            reserve.stock_reserve(rec.order_line)
 
     def action_confirm(self):
         self.release_all_stock_reservation()
