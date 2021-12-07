@@ -10,10 +10,13 @@
     "website": "https://github.com/stock-logistics-warehouse",
     "depends": ["sale_stock", "stock_reserve"],
     "data": [
+        "security/ir.model.access.csv",
         "wizard/sale_stock_reserve_view.xml",
         "view/sale.xml",
         "view/stock_reserve.xml",
     ],
     "installable": True,
     "auto_install": False,
+    "pre_init_hook": "pre_init_hook",
+    "post_init_hook": "post_init_hook",
 }
