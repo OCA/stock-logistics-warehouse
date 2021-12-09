@@ -180,7 +180,7 @@ class VerticalLiftShuttle(models.Model):
     def action_back_to_settings(self):
         self.release_vertical_lift_tray()
         action_xmlid = "stock_vertical_lift.vertical_lift_shuttle_action"
-        action = self.env.ref(action_xmlid).read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["target"] = "main"
         return action
 
