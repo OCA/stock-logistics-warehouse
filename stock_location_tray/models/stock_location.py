@@ -82,7 +82,9 @@ class StockLocation(models.Model):
         )
         location.ensure_one()
         view = self.env.ref("stock.view_location_form")
-        action = self.env.ref("stock.action_location_form").read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_location_form"
+        )
         action.update(
             {
                 "res_id": location.id,

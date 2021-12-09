@@ -106,7 +106,9 @@ class StockLocationTrayType(models.Model):
                 )
 
     def open_locations(self):
-        action = self.env.ref("stock.action_location_form").read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_location_form"
+        )
         action["domain"] = [("tray_type_id", "in", self.ids)]
         if len(self.ids) == 1:
             action["context"] = {"default_tray_type_id": self.id}
