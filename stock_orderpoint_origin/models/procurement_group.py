@@ -28,5 +28,7 @@ class ProcurementGroup(models.Model):
                 new_origin = "%s (from %s)" % (source_names, procurement.origin)
                 new_procurement = procurement._replace(origin=new_origin)
                 new_procurement.values["source_group_ids"] = source_groups
-            new_procurements.append(new_procurement)
+                new_procurements.append(new_procurement)
+            else:
+                new_procurements.append(procurement)
         return super().run(new_procurements, raise_user_error=True)
