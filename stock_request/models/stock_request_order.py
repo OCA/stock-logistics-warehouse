@@ -248,7 +248,9 @@ class StockRequestOrder(models.Model):
         return
 
     def action_view_transfer(self):
-        action = self.env.ref("stock.action_picking_tree_all").sudo().read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_picking_tree_all"
+        )
 
         pickings = self.mapped("picking_ids")
         if len(pickings) > 1:
@@ -259,7 +261,9 @@ class StockRequestOrder(models.Model):
         return action
 
     def action_view_stock_requests(self):
-        action = self.env.ref("stock_request.action_stock_request_form").read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock_request.action_stock_request_form"
+        )
         if len(self.stock_request_ids) > 1:
             action["domain"] = [("order_id", "in", self.ids)]
         elif self.stock_request_ids:
@@ -353,7 +357,9 @@ class StockRequestOrder(models.Model):
                     "administrator."
                 )
             )
-        action = self.env.ref("stock_request.stock_request_order_action").read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock_request.stock_request_order_action"
+        )
         action["views"] = [
             (self.env.ref("stock_request.stock_request_order_form").id, "form")
         ]
