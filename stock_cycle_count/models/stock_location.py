@@ -113,8 +113,9 @@ class StockLocation(models.Model):
 
     def action_accuracy_stats(self):
         self.ensure_one()
-        action = self.env.ref("stock_cycle_count.act_accuracy_stats")
-        result = action.read()[0]
-        new_domain = result["domain"][:-1] + ", ('location_ids', 'in', active_ids)]"
-        result["domain"] = new_domain
-        return result
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock_cycle_count.act_accuracy_stats"
+        )
+        new_domain = action["domain"][:-1] + ", ('location_ids', 'in', active_ids)]"
+        action["domain"] = new_domain
+        return action
