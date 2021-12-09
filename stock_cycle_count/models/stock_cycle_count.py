@@ -99,14 +99,15 @@ class StockCycleCount(models.Model):
         return True
 
     def action_view_inventory(self):
-        action = self.env.ref("stock.action_inventory_form")
-        result = action.read()[0]
-        result["context"] = {}
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_inventory_form"
+        )
+        action["context"] = {}
         adjustment_ids = self.mapped("stock_adjustment_ids").ids
         if len(adjustment_ids) > 1:
-            result["domain"] = [("id", "in", adjustment_ids)]
+            action["domain"] = [("id", "in", adjustment_ids)]
         elif len(adjustment_ids) == 1:
             res = self.env.ref("stock.view_inventory_form", False)
-            result["views"] = [(res and res.id or False, "form")]
-            result["res_id"] = adjustment_ids and adjustment_ids[0] or False
-        return result
+            action["views"] = [(res and res.id or False, "form")]
+            action["res_id"] = adjustment_ids and adjustment_ids[0] or False
+        return action
