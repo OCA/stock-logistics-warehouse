@@ -3,7 +3,7 @@
 {
     "name": "Location Trays",
     "summary": "Organize a location as a matrix of cells",
-    "version": "14.0.1.1.1",
+    "version": "14.0.1.1.2",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
