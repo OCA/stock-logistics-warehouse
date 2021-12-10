@@ -27,7 +27,7 @@ addon | version | maintainers | summary
 [stock_available_immediately](stock_available_immediately/) | 14.0.1.0.0 |  | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 14.0.1.0.3 |  | Consider the production potential is available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 14.0.1.0.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
-[stock_cycle_count](stock_cycle_count/) | 14.0.1.1.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
+[stock_cycle_count](stock_cycle_count/) | 14.0.1.1.2 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
 [stock_demand_estimate](stock_demand_estimate/) | 14.0.1.1.0 |  | Allows to create demand estimates.
 [stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 14.0.1.0.0 |  | Allows to create demand estimates.
 [stock_free_quantity](stock_free_quantity/) | 14.0.1.0.0 |  | Stock Free Quantity
@@ -51,11 +51,11 @@ addon | version | maintainers | summary
 [stock_measuring_device_zippcube](stock_measuring_device_zippcube/) | 14.0.1.0.0 | [![gurneyalex](https://github.com/gurneyalex.png?size=30px)](https://github.com/gurneyalex) | Implement interface with Bosche Zippcube devicesfor packaging measurement
 [stock_move_auto_assign](stock_move_auto_assign/) | 14.0.1.0.0 |  | Try to reserve moves when goods enter in a location
 [stock_move_common_dest](stock_move_common_dest/) | 14.0.1.0.0 |  | Adds field for common destination moves
-[stock_move_location](stock_move_location/) | 14.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
+[stock_move_location](stock_move_location/) | 14.0.1.0.1 |  | This module allows to move all stock in a stock location to an other one.
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 14.0.1.0.0 |  | Add a MTS+MTO route
 [stock_orderpoint_manual_procurement](stock_orderpoint_manual_procurement/) | 14.0.1.0.1 |  | Allows to create procurement orders from orderpoints instead of relying only on the scheduler.
 [stock_orderpoint_manual_procurement_uom](stock_orderpoint_manual_procurement_uom/) | 14.0.1.0.1 |  | Glue module for stock_orderpoint_uom and stock_orderpoint_manual_procurement
-[stock_orderpoint_move_link](stock_orderpoint_move_link/) | 14.0.1.0.0 |  | Link Reordering rules to stock moves
+[stock_orderpoint_move_link](stock_orderpoint_move_link/) | 14.0.1.0.1 |  | Link Reordering rules to stock moves
 [stock_orderpoint_purchase_link](stock_orderpoint_purchase_link/) | 14.0.1.0.0 |  | Link Reordering rules to purchase orders
 [stock_orderpoint_route](stock_orderpoint_route/) | 14.0.1.1.0 |  | Allows to force a route to be used when procuring from orderpoints
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 14.0.1.0.0 |  | Allows to create procurement orders in the UoM indicated in the orderpoint
@@ -67,11 +67,11 @@ addon | version | maintainers | summary
 [stock_putaway_method](stock_putaway_method/) | 14.0.1.0.0 | [![asaunier](https://github.com/asaunier.png?size=30px)](https://github.com/asaunier) | Add the putaway strategy method back, removed from the stock module in Odoo 12
 [stock_putaway_product_template](stock_putaway_product_template/) | 14.0.1.0.0 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 14.0.1.1.0 |  | Stock - Manual Quant Assignment
-[stock_request](stock_request/) | 14.0.1.0.4 |  | Internal request for stock
+[stock_request](stock_request/) | 14.0.1.0.5 |  | Internal request for stock
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add Stock Requests to the Inventory App
 [stock_reserve_rule](stock_reserve_rule/) | 14.0.1.0.0 |  | Configure reservation rules by location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 14.0.1.0.0 |  | Allows to search for picking from supplierinfo code
-[stock_vertical_lift](stock_vertical_lift/) | 14.0.1.1.0 |  | Provides the core for integration with Vertical Lifts
+[stock_vertical_lift](stock_vertical_lift/) | 14.0.1.1.1 |  | Provides the core for integration with Vertical Lifts
 [stock_vertical_lift_empty_tray_check](stock_vertical_lift_empty_tray_check/) | 14.0.1.0.0 |  | Checks if the tray is actually empty.
 [stock_vertical_lift_kardex](stock_vertical_lift_kardex/) | 14.0.1.1.0 |  | Integrate with Kardex Remstar Vertical Lifts
 [stock_vertical_lift_packaging_type](stock_vertical_lift_packaging_type/) | 14.0.1.0.0 |  | Provides integration with Vertical Lifts and packaging types
