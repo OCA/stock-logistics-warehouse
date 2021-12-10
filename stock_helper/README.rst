@@ -23,7 +23,7 @@ Stock Helpers
     :target: https://runbot.odoo-community.org/runbot/153/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 Add methods to be used by other modules. This is not a functional module.
 
@@ -54,6 +54,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
+* Christopher Ormaza <chris.ormaza@forgeflow.com>
 
 Maintainers
 ~~~~~~~~~~~

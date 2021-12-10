@@ -1,10 +1,10 @@
 # Copyright 2020-2021 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class StockHelperCommonCase(SavepointCase):
+class StockHelperCommonCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
