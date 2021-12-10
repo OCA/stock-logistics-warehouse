@@ -348,8 +348,9 @@ class StockRequest(models.Model):
         return True
 
     def action_view_transfer(self):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
-
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_picking_tree_all"
+        )
         pickings = self.mapped("picking_ids")
         if len(pickings) > 1:
             action["domain"] = [("id", "in", pickings.ids)]
