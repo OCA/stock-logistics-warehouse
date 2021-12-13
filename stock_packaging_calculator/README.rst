@@ -23,7 +23,7 @@ Stock packaging calculator
     :target: https://runbot.odoo-community.org/runbot/153/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 Basic module providing an helper method to calculate the quantity of product by packaging.
 
@@ -107,6 +107,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * Simone Orsi <simahawk@gmail.com>
+* Christopher Ormaza <chris.ormaza@forgeflow.com>
 
 Maintainers
 ~~~~~~~~~~~
