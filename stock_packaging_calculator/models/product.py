@@ -89,12 +89,12 @@ class Product(models.Model):
             "_packaging_name_getter", self._packaging_name_getter
         )
         packagings = sorted(
-            [
+            (
                 Packaging(x.id, name_getter(x), x.qty, x.barcode, False)
                 for x in self.packaging_ids.filtered(custom_filter)
                 # Exclude the ones w/ zero qty as they are useless for the math
                 if x.qty
-            ],
+            ),
             reverse=True,
             key=lambda x: x.qty,
         )
