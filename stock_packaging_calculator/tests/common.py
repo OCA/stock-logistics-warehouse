@@ -1,9 +1,9 @@
 # Copyright 2020 Camptocamp SA
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class TestCommon(SavepointCase):
+class TestCommon(TransactionCase):
 
     at_install = False
     post_install = True
