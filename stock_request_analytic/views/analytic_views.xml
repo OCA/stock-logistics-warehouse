@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2016-2020 ForgeFlow, S.L. (https://www.forgeflow.com)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_account_analytic_account_form" model="ir.ui.view">
+        <field name="name">analytic.order.form</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="stock_request_ids" invisible="1" />
+                <button
+                    type="object"
+                    name="action_view_stock_request"
+                    class="oe_stat_button"
+                    icon="fa-chain"
+                    widget="statinfo"
+                    string="Stock Requests"
+                    attrs="{'invisible':[('stock_request_ids', '=', [])]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
