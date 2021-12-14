@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,7 +40,11 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_change_qty_reason
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line__display_name
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__display_name
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -52,7 +56,11 @@ msgid ""
 msgstr ""
 
 #. module: stock_change_qty_reason
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_res_config_settings__id
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory__id
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line__id
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__id
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move__id
 msgid "ID"
 msgstr ""
 
@@ -73,7 +81,11 @@ msgid "Inventory Line"
 msgstr ""
 
 #. module: stock_change_qty_reason
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory____last_update
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line____last_update
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason____last_update
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move____last_update
 msgid "Last Modified on"
 msgstr ""
 
