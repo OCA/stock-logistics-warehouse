@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="reason_stock_inventory_form_inherit" model="ir.ui.view">
+        <field name="name">stock.inventory.reason.form.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="reason" />
+            </field>
+        </field>
+    </record>
+    <record id="preset_reason_stock_inventory_form_inherit" model="ir.ui.view">
+        <field name="name">stock.inventory.reason.form.inherit.code</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="reason_stock_inventory_form_inherit" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_change_qty_reason.group_qty_reason_preset'))]"
+        />
+        <field name="arch" type="xml">
+            <field name="reason" position="replace">
+                <field name="preset_reason_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="reason_stock_inventory_line_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="before">
+                <field name="reason" />
+            </field>
+        </field>
+    </record>
+    <record id="reason_stock_inventory_line_tree_reason_id" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree.reason.code</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="reason_stock_inventory_line_tree" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_change_qty_reason.group_qty_reason_preset'))]"
+        />
+        <field name="arch" type="xml">
+            <field name="reason" position="replace">
+                <field name="preset_reason_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

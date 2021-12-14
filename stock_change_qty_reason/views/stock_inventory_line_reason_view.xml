@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_preset_reason" model="ir.ui.view">
+        <field name="name">Preset Reason</field>
+        <field name="model">stock.inventory.line.reason</field>
+        <field name="arch" type="xml">
+            <form string="Preset Reason">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="active_button_box">
+                        <button
+                            name="toggle_active"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                        >
+                            <field
+                                name="active"
+                                widget="boolean_button"
+                                options='{"terminology": "archive"}'
+                            />
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_change_qty_reasons_list" model="ir.actions.act_window">
+        <field name="name">Change Qty Reasons</field>
+        <field name="res_model">stock.inventory.line.reason</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem
+        id="menu_inventory_adjustments_config"
+        name="Inventory Adjustment"
+        parent="stock.menu_stock_config_settings"
+        groups="stock.group_stock_manager"
+        sequence="5"
+    />
+    <menuitem
+        id="menu_reasons"
+        name="Change Qty Reasons"
+        parent="menu_inventory_adjustments_config"
+        groups="stock_change_qty_reason.group_qty_reason_preset"
+        action="action_change_qty_reasons_list"
+        sequence="1"
+    />
+</odoo>

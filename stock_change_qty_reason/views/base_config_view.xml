@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="qty_reason_preset_selection" model="ir.ui.view">
+        <field name="name">Select qty_reason_preset config parameter</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='production_lot_info']" position='after'>
+                <h2>Inventory Adjustment</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="group_qty_reason_preset" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_qty_reason_preset" />
+                            <div class="text-muted">
+                                Manage predefined change quantity reasons
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
