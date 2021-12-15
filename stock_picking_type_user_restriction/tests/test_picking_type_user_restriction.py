@@ -7,7 +7,9 @@ class TestUserRestriction(SavepointCase):
         super().setUpClass()
         cls.env = cls.env(
             context=dict(
-                cls.env.context, tracking_disable=True, no_reset_password=True,
+                cls.env.context,
+                tracking_disable=True,
+                no_reset_password=True,
             )
         )
         cls.stock_user = cls.env["res.users"].create(
