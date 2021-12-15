@@ -2,7 +2,7 @@
 <odoo>
     <record id="group_assigned_picking_types_user" model="res.groups">
         <field name="name">User: Assigned Operation Types Only</field>
-        <field name="category_id" ref="base.module_category_operations_inventory" />
+        <field name="category_id" ref="base.module_category_inventory_inventory" />
         <field
             name="comment"
         >The user will have access to her assigned operation types.</field>
