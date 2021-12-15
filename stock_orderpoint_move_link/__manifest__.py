@@ -4,7 +4,7 @@
 {
     "name": "Stock Orderpoint Move Link",
     "summary": "Link Reordering rules to stock moves",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
