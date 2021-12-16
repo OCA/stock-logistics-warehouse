@@ -1,4 +1,5 @@
 # Copyright 2019 Camptocamp SA
+# Copyright 2019-2021 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import models
 from odoo.tools.float_utils import float_compare
@@ -50,7 +51,12 @@ class StockMove(models.Model):
                 # it can use both rules.
                 # If we have a stock.move with "Stock/Zone2" as source location,
                 # it should never use "Stock/Zone1"
-                if not removal_rule.location_id.is_sublocation_of(location_id):
+                # If we have a stock.move with "Stock/Zone1/A" as source location,
+                # it should use "Stock/Zone1" rule
+                if not (
+                    removal_rule.location_id.is_sublocation_of(location_id)
+                    or location_id.is_sublocation_of(removal_rule.location_id)
+                ):
                     continue
 
                 quants = self.env["stock.quant"]._gather(
