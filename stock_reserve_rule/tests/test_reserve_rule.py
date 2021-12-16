@@ -1,4 +1,5 @@
 # Copyright 2019 Camptocamp (https://www.camptocamp.com)
+# Copyright 2019-2021 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 
 from odoo import exceptions, fields
 from odoo.tests import common
@@ -71,7 +72,7 @@ class TestReserveRule(common.SavepointCase):
             {"name": "Pallet", "code": "PALLET", "sequence": 5}
         )
 
-    def _create_picking(self, wh, products=None):
+    def _create_picking(self, wh, products=None, location_src_id=None):
         """Create picking
 
         Products must be a list of tuples (product, quantity).
@@ -82,7 +83,7 @@ class TestReserveRule(common.SavepointCase):
 
         picking = self.env["stock.picking"].create(
             {
-                "location_id": wh.lot_stock_id.id,
+                "location_id": location_src_id or wh.lot_stock_id.id,
                 "location_dest_id": wh.wh_output_stock_loc_id.id,
                 "partner_id": self.partner_delta.id,
                 "picking_type_id": wh.pick_type_id.id,
@@ -97,7 +98,7 @@ class TestReserveRule(common.SavepointCase):
                     "product_uom_qty": qty,
                     "product_uom": product.uom_id.id,
                     "picking_id": picking.id,
-                    "location_id": wh.lot_stock_id.id,
+                    "location_id": location_src_id or wh.lot_stock_id.id,
                     "location_dest_id": wh.wh_output_stock_loc_id.id,
                     "state": "confirmed",
                 }
@@ -176,6 +177,43 @@ class TestReserveRule(common.SavepointCase):
             [
                 {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
                 {"location_id": self.loc_zone2_bin2.id, "product_qty": 100},
+            ],
+        )
+        self.assertEqual(move.state, "assigned")
+
+    def test_rule_match_parent(self):
+        all_locs = (
+            self.loc_zone1_bin1,
+            self.loc_zone1_bin2,
+            self.loc_zone2_bin1,
+            self.loc_zone2_bin2,
+            self.loc_zone3_bin1,
+            self.loc_zone3_bin2,
+        )
+        for loc in all_locs:
+            self._update_qty_in_location(loc, self.product1, 100)
+
+        picking = self._create_picking(
+            self.wh, [(self.product1, 200)], self.loc_zone1.id
+        )
+
+        self._create_rule(
+            {},
+            [
+                {"location_id": self.loc_zone1.id, "sequence": 2},
+                {"location_id": self.loc_zone2.id, "sequence": 1},
+                {"location_id": self.loc_zone3.id, "sequence": 3},
+            ],
+        )
+
+        picking.action_assign()
+        move = picking.move_lines
+        ml = move.move_line_ids
+        self.assertRecordValues(
+            ml,
+            [
+                {"location_id": self.loc_zone1_bin1.id, "product_qty": 100},
+                {"location_id": self.loc_zone1_bin2.id, "product_qty": 100},
             ],
         )
         self.assertEqual(move.state, "assigned")
