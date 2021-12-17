@@ -52,7 +52,7 @@ class SaleOrder(models.Model):
         RESERVE = self.env['sale.stock.reserve']
         for rec in self.filtered(lambda s: s.is_stock_reservable):
             reserve = RESERVE.with_context(active_model=self._name, active_id=rec.id, active_ids=rec.ids).create({})
-            reserve.stock_reserve(rec.order_line)
+            reserve.stock_reserve(rec.order_line.ids)
 
     def action_confirm(self):
         self.release_all_stock_reservation()

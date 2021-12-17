@@ -136,3 +136,13 @@ class TestStockReserveSale(common.SavepointCase):
             so.unlink()
         with self.assertRaises(UserError):
             so.order_line.unlink()
+
+    def test_reserve_06_all(self):
+        sale_order_form = Form(self.env["sale.order"])
+        sale_order_form.partner_id = self.partner
+        with sale_order_form.order_line.new() as order_line_form:
+            order_line_form.product_id = self.product_1
+            order_line_form.product_uom_qty = 3
+        so = sale_order_form.save()
+        so.action_reserve_all_lines()
+
