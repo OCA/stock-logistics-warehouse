@@ -90,11 +90,7 @@ class StockInventory(models.Model):
 
     def write(self, vals):
         for inventory in self:
-            if (
-                inventory.cycle_count_id
-                and "state" not in vals.keys()
-                and inventory.state == "draft"
-            ):
+            if inventory._allow_write(vals):
                 raise UserError(
                     _(
                         "You cannot modify the configuration of an Inventory "
@@ -102,3 +98,8 @@ class StockInventory(models.Model):
                     )
                 )
         return super(StockInventory, self).write(vals)
+
+    def _allow_write(self, vals):
+        return (
+            self.cycle_count_id and "state" not in vals.keys() and self.state == "draft"
+        )
