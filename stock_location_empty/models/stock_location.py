@@ -6,15 +6,15 @@ from odoo import api, fields, models
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     stock_amount = fields.Integer(
-        compute='_compute_location_amount', search='_search_location_amount'
+        compute="_compute_location_amount", search="_search_location_amount"
     )
 
     @api.multi
     def _search_location_amount(self, operator, value):
-        if operator not in ('=', '!=', '<', '<=', '>', '>='):
+        if operator not in ("=", "!=", "<", "<=", ">", ">="):
             return []
         # pylint: disable=sql-injection
         self.env.cr.execute(
@@ -27,7 +27,7 @@ class StockLocation(models.Model):
             (value,),
         )
         ids = [row[0] for row in self.env.cr.fetchall()]
-        return [('id', 'in', ids)]
+        return [("id", "in", ids)]
 
     @api.multi
     def _compute_location_amount(self):
