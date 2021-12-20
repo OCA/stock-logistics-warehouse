@@ -62,11 +62,11 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
         self.env["procurement.group"].run_scheduler()
         # As per route configuration, it will create Purchase order
         purchase = self.purchase_model.search([("origin", "ilike", orderpoint.name)])
-        self.assertEquals(len(purchase), 1)
+        self.assertEqual(len(purchase), 1)
         purchase_line = self.purchase_line_model.search(
             [("orderpoint_id", "=", orderpoint.id), ("order_id", "=", purchase.id)]
         )
-        self.assertEquals(len(purchase_line), 1)
+        self.assertEqual(len(purchase_line), 1)
         self.assertEqual(purchase_line.product_id, self.productA)
         self.assertEqual(purchase_line.product_uom, self.uom_dozen)
         self.assertEqual(purchase_line.product_qty, 2)
@@ -89,12 +89,12 @@ class TestStockOrderpointProcureUom(common.TransactionCase):
     def test_03_regenerate_po(self):
         def _assert_purchase_generated(self, supplier, product):
             purchase = self.purchase_model.search([("partner_id", "=", supplier.id)])
-            self.assertEquals(len(purchase), 1)
+            self.assertEqual(len(purchase), 1)
             lines = purchase.order_line
-            self.assertEquals(len(lines), 1)
-            self.assertEquals(lines.product_id, product)
-            self.assertEquals(lines.product_uom, self.uom_dozen)
-            self.assertEquals(lines.product_qty, 9)
+            self.assertEqual(len(lines), 1)
+            self.assertEqual(lines.product_id, product)
+            self.assertEqual(lines.product_uom, self.uom_dozen)
+            self.assertEqual(lines.product_qty, 9)
             return purchase
 
         supplier = self.env["res.partner"].create(
