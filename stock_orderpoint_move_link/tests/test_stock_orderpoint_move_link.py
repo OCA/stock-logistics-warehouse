@@ -2,10 +2,10 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import ast
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockOrderpointMoveLink(SavepointCase):
+class TestStockOrderpointMoveLink(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
