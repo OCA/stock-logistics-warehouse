@@ -13,7 +13,7 @@
               "Coop IT Easy SCRLfs,"
               "Odoo Community Association (OCA)",
     "category": "Stocks",
-    "website": "https://coopiteasy.be",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "data": [
         "security/ir.model.access.csv",
         "wizard/align_move_quant_wizard_views.xml",
