@@ -155,7 +155,7 @@ class StockMoveLocationWizard(models.TransientModel):
         location_to_id = lines[0].destination_location_id.id
         product = lines[0].product_id
         product_uom_id = lines[0].product_uom_id.id
-        qty = sum([x.move_quantity for x in lines])
+        qty = sum(x.move_quantity for x in lines)
         return {
             "name": product.display_name,
             "location_id": location_from_id,
