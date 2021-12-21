@@ -76,7 +76,6 @@
     <field name="name">Locations</field>
     <field name="res_model">stock.location</field>
     <field name="type">ir.actions.act_window</field>
-    <field name="view_type">form</field>
     <field name="view_id" ref="view_location_tree3" />
     <field name="search_view_id" ref="view_location_search_empty_2" />
     <field
@@ -84,11 +83,11 @@
         >{'search_default_in_location':1, 'search_default_stock_amount': 1}</field>
   </record>
 
-  <menuitem
-        id="stock_location_empty_menu"
-        name="Empty stock"
-        parent="stock.menu_stock_inventory_control"
-        action="action_stock_location_empty"
-    />
+    <record model="ir.ui.menu" id="stock_location_empty_menu">
+        <field name="name">Empty stock</field>
+        <field name="parent_id" ref="stock.menu_stock_inventory_control" />
+        <field name="action" ref="action_stock_location_empty" />
+        <field name="sequence" eval="16" />
+    </record>
 
 </odoo>
