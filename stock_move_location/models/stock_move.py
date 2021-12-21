@@ -14,6 +14,7 @@ class StockMove(models.Model):
 
     @api.depends("location_move")
     def _compute_show_details_visible(self):
-        super()._compute_show_details_visible()
+        res = super()._compute_show_details_visible()
         for move in self.filtered(lambda x: x.location_move):
             move.show_details_visible = True
+        return res
