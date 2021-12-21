@@ -44,10 +44,21 @@ class ProductProduct(models.Model):
 
     @api.model
     def write(self, vals):
-        if "active" in vals.keys() and not vals["active"]:
+        if (
+            "active" in vals.keys()
+            and not vals["active"]
+            and not self.env.context.get("skip_check_stock_inactive")
+        ):
             quantities = self.sudo()._check_has_quantities_archive()
             if quantities:
                 raise ValidationError(
                     MSG_ERROR_HAS_STOCK + self.sudo()._format_errors_archive(quantities)
                 )
         return super().write(vals)
+
+    def _unlink_or_archive(self, check_access=True):
+        """Skip check at variant creation time to avoid making
+        a mess on demo data"""
+        return super(
+            ProductProduct, self.with_context(skip_check_stock_inactive=True)
+        )._unlink_or_archive(check_access)
