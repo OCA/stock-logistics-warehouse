@@ -3,10 +3,10 @@
 # Copyright 2019 JARSA Sistemas S.A. de C.V.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockLogisticsWarehouse(SavepointCase):
+class TestStockLogisticsWarehouse(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -123,6 +123,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
                 "picking_type_id": cls.env.ref("stock.picking_type_out").id,
                 "location_id": cls.stock_location.id,
                 "location_dest_id": cls.customer_location.id,
+                "immediate_transfer": False,
                 "move_lines": [
                     (
                         0,
@@ -155,10 +156,6 @@ class TestStockLogisticsWarehouse(SavepointCase):
         self.compare_qty_available_not_res(self.productA, 0)
         self.compare_qty_available_not_res(self.templateAB, 0)
 
-        self.pickingInA.action_assign()
-        self.compare_qty_available_not_res(self.productA, 0)
-        self.compare_qty_available_not_res(self.templateAB, 0)
-
         self.pickingInA.button_validate()
         self.compare_qty_available_not_res(self.productA, 2)
         self.compare_qty_available_not_res(self.templateAB, 2)
@@ -173,10 +170,6 @@ class TestStockLogisticsWarehouse(SavepointCase):
         self.compare_qty_available_not_res(self.templateAB, 5)
 
         self.pickingOutA.action_confirm()
-        self.compare_qty_available_not_res(self.productB, 3)
-        self.compare_qty_available_not_res(self.templateAB, 5)
-
-        self.pickingOutA.action_assign()
         self.compare_qty_available_not_res(self.productB, 1)
         self.compare_qty_available_not_res(self.templateAB, 3)
 
