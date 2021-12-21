@@ -3,14 +3,15 @@
 
 {
     "name": "Stock Location Empty",
-    "version": "12.0.1.0.0",
+    "summary": "Adds a filter for empty stock location",
+    "version": "14.0.1.0.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "category": "stock",
+    "category": "Warehouse",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": [
         "stock",
     ],
-    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "data": [
         "views/stock.xml",
     ],

@@ -65,7 +65,7 @@ msgid "Parent Location"
 msgstr "Emplacement parent"
 
 #. module: stock_location_empty
-#: model:ir.model.fields,field_description:stock_location_empty.field_stock_location__stock_amount
+#: model:ir.model.fields,field_description:stock_location_empty.field_stock_location__stock_quantity
 msgid "Stock Amount"
 msgstr "Quantité en stock"
 
