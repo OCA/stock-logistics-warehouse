@@ -68,7 +68,7 @@ class TestMoveLocation(TestsCommon):
         """Test planned transfer."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.onchange_origin_location()
-        wizard = wizard.with_context({"planned": True})
+        wizard = wizard.with_context(planned=True)
         wizard.action_move_location()
         picking = wizard.picking_id
         self.assertEqual(picking.state, "assigned")
