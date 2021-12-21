@@ -57,8 +57,8 @@ class StockMoveLocationWizard(models.TransientModel):
     picking_id = fields.Many2one(
         string="Connected Picking", comodel_name="stock.picking"
     )
-    edit_locations = fields.Boolean(string="Edit Locations", default=True)
-    apply_putaway_strategy = fields.Boolean(string="Apply putaway strategy")
+    edit_locations = fields.Boolean(default=True)
+    apply_putaway_strategy = fields.Boolean()
 
     @api.depends("edit_locations")
     def _compute_readonly_locations(self):

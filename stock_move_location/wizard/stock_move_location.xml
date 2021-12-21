@@ -45,7 +45,6 @@
                             mode="tree,kanban"
                         >
                             <tree
-                                string="Inventory Details"
                                 editable="bottom"
                                 decoration-info="move_quantity != max_quantity"
                                 decoration-danger="(move_quantity &lt; 0) or (move_quantity > max_quantity)"

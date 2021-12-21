@@ -1,4 +1,4 @@
-* A new menu item Stock > Move from location... opens a wizard
+* A new menu item Operations > Move from location... opens a wizard
   where 2 locations can be specified.
 * Select origin and destination locations and press "IMMEDIATE TRANSFER" or "PLANNED TRANSFER"
 * Press `ADD ALL` button to add all products available
@@ -11,7 +11,7 @@
 
 If you want to transfer a full quant:
 
-*  Go to `Inventory > Master Data > Products` and click "On hand" smart button
+*  Go to `Inventory > Products > Products` and click "On hand" smart button
    or `Inventory > Reporting > Inventory`, the quants view will be
    opened.
 
