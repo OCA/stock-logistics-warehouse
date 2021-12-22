@@ -71,7 +71,7 @@ addon | version | maintainers | summary
 [stock_request](stock_request/) | 14.0.1.0.5 |  | Internal request for stock
 [stock_request_analytic](stock_request_analytic/) | 14.0.1.0.1 |  | Internal request for stock
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add Stock Requests to the Inventory App
-[stock_reserve_rule](stock_reserve_rule/) | 14.0.1.0.0 |  | Configure reservation rules by location
+[stock_reserve_rule](stock_reserve_rule/) | 14.0.1.0.1 |  | Configure reservation rules by location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 14.0.1.0.0 |  | Allows to search for picking from supplierinfo code
 [stock_vertical_lift](stock_vertical_lift/) | 14.0.1.1.1 |  | Provides the core for integration with Vertical Lifts
 [stock_vertical_lift_empty_tray_check](stock_vertical_lift_empty_tray_check/) | 14.0.1.0.0 |  | Checks if the tray is actually empty.
