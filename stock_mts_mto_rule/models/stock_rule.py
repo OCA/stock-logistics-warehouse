@@ -93,7 +93,7 @@ class StockRule(models.Model):
                 # to adjust the product's free qty
                 group_id = mts_procurement.values.get("group_id")
                 group_domain = expression.AND(
-                    [domain, [("group_id", "=", group_id.id)]]
+                    [domain, [("group_id", "=", group_id and group_id.id or False)]]
                 )
                 moves_to_assign = self.env["stock.move"].search(
                     group_domain, order="priority desc, date asc"

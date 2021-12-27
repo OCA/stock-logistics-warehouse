@@ -94,6 +94,52 @@ class TestMtoMtsRoute(TransactionCase):
         self.assertEqual(1, len(move_mto))
         self.assertEqual("waiting", move_mto.state)
 
+    def test_mts_mto_route_split_no_group(self):
+        mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
+        self.product.route_ids = [(6, 0, [mto_mts_route.id])]
+        self._create_quant(1.0)
+        vals = self.procurement_vals.copy()
+        vals.pop("group_id")
+        self.env["procurement.group"].run(
+            [
+                self.group.Procurement(
+                    self.product,
+                    2.0,
+                    self.uom,
+                    self.customer_loc,
+                    self.product.name,
+                    "test",
+                    self.warehouse.company_id,
+                    vals,
+                )
+            ]
+        )
+        moves = self.env["stock.move"].search(
+            [("product_id", "=", self.product.id), ("group_id", "=", False)]
+        )
+        self.assertEqual(3, len(moves))
+        move_mts = self.env["stock.move"].search(
+            [
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", False),
+                ("location_dest_id", "=", self.customer_loc.id),
+                ("procure_method", "=", "make_to_stock"),
+            ]
+        )
+        self.assertEqual(1, len(move_mts))
+        self.assertEqual(1.0, move_mts.product_uom_qty)
+        self.assertEqual("assigned", move_mts.state)
+        move_mto = self.env["stock.move"].search(
+            [
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", False),
+                ("location_dest_id", "=", self.customer_loc.id),
+                ("procure_method", "=", "make_to_order"),
+            ]
+        )
+        self.assertEqual(1, len(move_mto))
+        self.assertEqual("waiting", move_mto.state)
+
     def test_mts_mto_route_mto_only(self):
         mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
         self.product.route_ids = [(6, 0, [mto_mts_route.id])]
