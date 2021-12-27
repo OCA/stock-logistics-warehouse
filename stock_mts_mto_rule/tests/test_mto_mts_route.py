@@ -1,19 +1,54 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import exceptions
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestMtoMtsRoute(TransactionCase):
-    def _create_quant(self, qty):
-        self.quant = self.env["stock.quant"].create(
+class TestMtoMtsRoute(SavepointCase):
+    @classmethod
+    def _create_quant(cls, qty):
+        cls.quant = cls.env["stock.quant"].create(
             {
-                "owner_id": self.company_partner.id,
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "product_id": self.product.id,
+                "owner_id": cls.company_partner.id,
+                "location_id": cls.env.ref("stock.stock_location_stock").id,
+                "product_id": cls.product.id,
                 "quantity": qty,
             }
         )
+
+    @classmethod
+    def setUpClass(cls):
+        super(TestMtoMtsRoute, cls).setUpClass()
+        cls.move_obj = cls.env["stock.move"]
+        cls.warehouse = cls.env.ref("stock.warehouse0")
+        cls.uom = cls.env["uom.uom"].browse(1)
+        cls.warehouse.mto_mts_management = True
+        cls.customer_loc = cls.env.ref("stock.stock_location_customers")
+        cls.product = cls.env["product.product"].create(
+            {"name": "Test product", "type": "product"}
+        )
+        cls.company_partner = cls.env.ref("base.main_partner")
+        cls.group = cls.env["procurement.group"].create({"name": "test"})
+        cls.procurement_vals = {"warehouse_id": cls.warehouse, "group_id": cls.group}
+        # Since mrp and purchase modules may not be installed, we need to
+        # create a dummy step to show that mts, mto, and mts+mto flows work.
+        # Else, if purchase/manufacture are not installed, the mto would fail.
+        route_vals = {
+            "warehouse_selectable": True,
+            "name": "dummy route",
+        }
+        cls.dummy_route = cls.env["stock.location.route"].create(route_vals)
+        rule_vals = {
+            "location_id": cls.env.ref("stock.stock_location_stock").id,
+            "location_src_id": cls.env.ref("stock.stock_location_suppliers").id,
+            "action": "pull",
+            "warehouse_id": cls.warehouse.id,
+            "picking_type_id": cls.env.ref("stock.picking_type_out").id,
+            "name": "dummy rule",
+            "route_id": cls.dummy_route.id,
+        }
+        cls.dummy_rule = cls.env["stock.rule"].create(rule_vals)
+        cls.warehouse.write({"route_ids": [(4, cls.dummy_route.id)]})
 
     def test_standard_mto_route(self):
         mto_route = self.env.ref("stock.route_warehouse0_mto")
@@ -258,36 +293,3 @@ class TestMtoMtsRoute(TransactionCase):
         new_rule_name = rule_name.replace(self.warehouse.name, new_warehouse_name, 1)
         self.warehouse.name = new_warehouse_name
         self.assertEqual(new_rule_name, self.warehouse.mts_mto_rule_id.name)
-
-    def setUp(self):
-        super(TestMtoMtsRoute, self).setUp()
-        self.move_obj = self.env["stock.move"]
-        self.warehouse = self.env.ref("stock.warehouse0")
-        self.uom = self.env["uom.uom"].browse(1)
-        self.warehouse.mto_mts_management = True
-        self.customer_loc = self.env.ref("stock.stock_location_customers")
-        self.product = self.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
-        )
-        self.company_partner = self.env.ref("base.main_partner")
-        self.group = self.env["procurement.group"].create({"name": "test"})
-        self.procurement_vals = {"warehouse_id": self.warehouse, "group_id": self.group}
-        # Since mrp and purchase modules may not be installed, we need to
-        # create a dummy step to show that mts, mto, and mts+mto flows work.
-        # Else, if purchase/manufacture are not installed, the mto would fail.
-        route_vals = {
-            "warehouse_selectable": True,
-            "name": "dummy route",
-        }
-        self.dummy_route = self.env["stock.location.route"].create(route_vals)
-        rule_vals = {
-            "location_id": self.env.ref("stock.stock_location_stock").id,
-            "location_src_id": self.env.ref("stock.stock_location_suppliers").id,
-            "action": "pull",
-            "warehouse_id": self.warehouse.id,
-            "picking_type_id": self.env.ref("stock.picking_type_out").id,
-            "name": "dummy rule",
-            "route_id": self.dummy_route.id,
-        }
-        self.dummy_rule = self.env["stock.rule"].create(rule_vals)
-        self.warehouse.write({"route_ids": [(4, self.dummy_route.id)]})
