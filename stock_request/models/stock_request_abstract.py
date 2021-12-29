@@ -142,7 +142,7 @@ class StockRequest(models.AbstractModel):
         "company_id", "product_id", "warehouse_id", "location_id", "route_id"
     )
     def _check_company_constrains(self):
-        """ Check if the related models have the same company """
+        """Check if the related models have the same company"""
         for rec in self:
             if (
                 rec.product_id.company_id
@@ -209,7 +209,7 @@ class StockRequest(models.AbstractModel):
 
     @api.onchange("warehouse_id")
     def onchange_warehouse_id(self):
-        """ Finds location id for changed warehouse. """
+        """Finds location id for changed warehouse."""
         res = {"domain": {}}
         if self._name == "stock.request" and self.order_id:
             # When the stock request is created from an order the wh and
