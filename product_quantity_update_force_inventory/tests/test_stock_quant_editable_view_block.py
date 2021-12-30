@@ -55,7 +55,7 @@ class TestStockQuantEditableViewBlock(TransactionCase):
         self.assertIn(
             self.product_product.display_name, action_pp["context"]["default_name"]
         )
-        self.assertEquals(
+        self.assertEqual(
             action_pp["context"]["default_product_ids"],
             [(6, 0, self.product_product.ids)],
         )
@@ -65,7 +65,7 @@ class TestStockQuantEditableViewBlock(TransactionCase):
         self.assertIn(
             self.product_template.display_name, action_pt["context"]["default_name"]
         )
-        self.assertEquals(
+        self.assertEqual(
             action_pt["context"]["default_product_ids"],
             [(6, 0, self.product_template.product_variant_ids.ids)],
         )

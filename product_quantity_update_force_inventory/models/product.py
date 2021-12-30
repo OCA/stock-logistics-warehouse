@@ -10,7 +10,7 @@ class ProductTemplate(models.Model):
         """Create an Inventory Adjustment instead of edit directly on quants"""
         self.ensure_one()
         view_form_id = self.env.ref("stock.view_inventory_form").id
-        action = self.env.ref("stock.action_inventory_form").read()[0]
+        action = self.env.ref("stock.action_inventory_form").sudo().read()[0]
         action.update(
             {
                 "views": [(view_form_id, "form")],
@@ -31,7 +31,7 @@ class ProductProduct(models.Model):
         """Create an Inventory Adjustment instead of edit directly on quants"""
         self.ensure_one()
         view_form_id = self.env.ref("stock.view_inventory_form").id
-        action = self.env.ref("stock.action_inventory_form").read()[0]
+        action = self.env.ref("stock.action_inventory_form").sudo().read()[0]
         action.update(
             {
                 "views": [(view_form_id, "form")],
