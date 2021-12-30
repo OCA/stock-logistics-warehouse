@@ -33,7 +33,7 @@ class TestStockQuantEditableViewBlock(TransactionCase):
 
     def test_stock_quant_editable_view_block(self):
         """Check if clicking On hand Smart Button on Product Card
-         does not send user to editable stock quant view"""
+        does not send user to editable stock quant view"""
         action_pp = self.product_product.with_user(self.user).action_open_quants()
         self.assertNotEqual(
             self.stock_quant_editable_tree_view.id,
