@@ -44,13 +44,11 @@ class StockRequest(models.Model):
     )
     requested_by = fields.Many2one(
         "res.users",
-        "Requested by",
         required=True,
         tracking=True,
         default=lambda s: s._get_default_requested_by(),
     )
     expected_date = fields.Datetime(
-        "Expected Date",
         index=True,
         required=True,
         readonly=True,
@@ -81,7 +79,6 @@ class StockRequest(models.Model):
         readonly=True,
     )
     qty_in_progress = fields.Float(
-        "Qty In Progress",
         digits="Product Unit of Measure",
         readonly=True,
         compute="_compute_qty",
@@ -89,7 +86,6 @@ class StockRequest(models.Model):
         help="Quantity in progress.",
     )
     qty_done = fields.Float(
-        "Qty Done",
         digits="Product Unit of Measure",
         readonly=True,
         compute="_compute_qty",
@@ -97,7 +93,6 @@ class StockRequest(models.Model):
         help="Quantity completed",
     )
     qty_cancelled = fields.Float(
-        "Qty Cancelled",
         digits="Product Unit of Measure",
         readonly=True,
         compute="_compute_qty",
