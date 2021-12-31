@@ -6,7 +6,7 @@
         <field name="name">stock.request.allocation.tree</field>
         <field name="model">stock.request.allocation</field>
         <field name="arch" type="xml">
-            <tree string="Stock Request Allocations">
+            <tree>
                 <field name="stock_request_id" />
                 <field name="stock_move_id" />
                 <field name="product_id" />
