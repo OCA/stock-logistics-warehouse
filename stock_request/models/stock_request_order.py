@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class StockRequestOrder(models.Model):
@@ -34,7 +34,6 @@ class StockRequestOrder(models.Model):
         return self.env["res.users"].browse(self.env.uid)
 
     name = fields.Char(
-        "Name",
         copy=False,
         required=True,
         readonly=True,
@@ -52,7 +51,6 @@ class StockRequestOrder(models.Model):
     )
     requested_by = fields.Many2one(
         "res.users",
-        "Requested by",
         required=True,
         tracking=True,
         default=lambda s: s._get_default_requested_by(),
@@ -95,7 +93,6 @@ class StockRequestOrder(models.Model):
         default=lambda self: self.env.company,
     )
     expected_date = fields.Datetime(
-        "Expected Date",
         default=fields.Datetime.now,
         index=True,
         required=True,
@@ -171,7 +168,7 @@ class StockRequestOrder(models.Model):
     @api.onchange("location_id")
     def onchange_location_id(self):
         if self.location_id:
-            loc_wh = self.location_id.get_warehouse()
+            loc_wh = self.location_id.warehouse_id
             if loc_wh and self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
                 self.with_context(no_change_childs=True).onchange_warehouse_id()
@@ -186,7 +183,7 @@ class StockRequestOrder(models.Model):
     def onchange_warehouse_id(self):
         if self.warehouse_id:
             # search with sudo because the user may not have permissions
-            loc_wh = self.location_id.get_warehouse()
+            loc_wh = self.location_id.warehouse_id
             if self.warehouse_id != loc_wh:
                 self.location_id = self.warehouse_id.lot_stock_id
                 self.with_context(no_change_childs=True).onchange_location_id()
@@ -323,36 +320,24 @@ class StockRequestOrder(models.Model):
                 [("product_tmpl_id", "in", products.ids)]
             )
         expected = self.default_get(["expected_date"])["expected_date"]
-        try:
-            order = self.env["stock.request.order"].create(
-                dict(
-                    expected_date=expected,
-                    stock_request_ids=[
-                        (
-                            0,
-                            0,
-                            dict(
-                                product_id=product.id,
-                                product_uom_id=product.uom_id.id,
-                                product_uom_qty=1.0,
-                                expected_date=expected,
-                            ),
-                        )
-                        for product in products
-                    ],
-                )
+        order = self.env["stock.request.order"].create(
+            dict(
+                expected_date=expected,
+                stock_request_ids=[
+                    (
+                        0,
+                        0,
+                        dict(
+                            product_id=product.id,
+                            product_uom_id=product.uom_id.id,
+                            product_uom_qty=1.0,
+                            expected_date=expected,
+                        ),
+                    )
+                    for product in products
+                ],
             )
-        except AccessError:
-            # TODO: if there is a nice way to hide the action from the
-            # Action-menu if the user doesn't have the necessary rights,
-            # that would be a better way of doing this
-            raise UserError(
-                _(
-                    "Unfortunately it seems you do not have the necessary rights "
-                    "for creating stock requests. Please contact your "
-                    "administrator."
-                )
-            )
+        )
         action = self.env.ref("stock_request.stock_request_order_action").read()[0]
         action["views"] = [
             (self.env.ref("stock_request.stock_request_order_form").id, "form")

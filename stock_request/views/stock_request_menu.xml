@@ -35,12 +35,6 @@
         sequence="100"
     />
     <menuitem
-        id="menu_stock_request_master_data"
-        parent="menu_stock_request_root"
-        name="Master Data"
-        sequence="100"
-    />
-    <menuitem
         id="menu_stock_request_config"
         name="Settings"
         parent="menu_stock_request_root"

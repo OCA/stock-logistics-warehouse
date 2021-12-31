@@ -7,7 +7,6 @@
         <field name="model">stock.request</field>
         <field name="arch" type="xml">
             <tree
-                string="Stock Requests"
                 decoration-muted="state == 'cancel'"
                 decoration-bf="message_needaction==True"
             >

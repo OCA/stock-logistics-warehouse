@@ -138,7 +138,7 @@ class TestStockRequest(common.TransactionCase):
     def _create_user(self, name, group_ids, company_ids):
         return (
             self.env["res.users"]
-            .with_context({"no_reset_password": True})
+            .with_context(no_reset_password=True)
             .create(
                 {
                     "name": name,
@@ -162,6 +162,25 @@ class TestStockRequest(common.TransactionCase):
                 **vals
             )
         )
+
+    def _create_product_template_attribute_line(
+        self, product_tmpl_id, attribute_id, value_id
+    ):
+        return self.env["product.template.attribute.line"].create(
+            {
+                "product_tmpl_id": product_tmpl_id,
+                "attribute_id": attribute_id,
+                "value_ids": value_id,
+            }
+        )
+
+    def _create_product_attribute_value(self, name, attribute):
+        return self.env["product.attribute.value"].create(
+            {"name": name, "attribute_id": attribute}
+        )
+
+    def _create_product_attribute(self, name):
+        return self.env["product.attribute"].create({"name": name})
 
 
 class TestStockRequestBase(TestStockRequest):
@@ -857,13 +876,40 @@ class TestStockRequestBase(TestStockRequest):
             stock_request.route_id = self.route_2
 
     def test_stock_request_order_from_products(self):
-        product_a1 = self._create_product("CODEA1", "Product A1", self.main_company.id)
-        template_a = product_a1.product_tmpl_id
-        product_a2 = self._create_product(
-            "CODEA2", "Product A2", self.main_company.id, product_tmpl_id=template_a.id
+        template_a = self.env["product.template"].create({"name": "ProductTemplate"})
+        product_attribute = self._create_product_attribute("Attribute")
+        product_att_value = self._create_product_attribute_value(
+            "Name-1", product_attribute.id
         )
-        product_a3 = self._create_product(
-            "CODEA3", "Product A3", self.main_company.id, product_tmpl_id=template_a.id
+        product_tmpl_att_line = self._create_product_template_attribute_line(
+            template_a.id, product_attribute.id, product_att_value
+        )
+        template_a.attribute_line_ids |= product_tmpl_att_line
+        product_tmpl_att_value = self.env["product.template.attribute.value"].search(
+            []
+        )[-1]
+        product_a1 = self.env["product.product"].search(
+            [
+                (
+                    "product_template_variant_value_ids.name",
+                    "=",
+                    product_tmpl_att_value.name,
+                )
+            ]
+        )
+        product_att_value = self._create_product_attribute_value(
+            "Name-2", product_attribute.id
+        )
+        template_a.attribute_line_ids.value_ids |= product_att_value
+        product_a2 = self.env["product.product"].search(
+            [("product_template_variant_value_ids.name", "=", product_att_value.name)]
+        )
+        product_att_value = self._create_product_attribute_value(
+            "Name-3", product_attribute.id
+        )
+        template_a.attribute_line_ids.value_ids |= product_att_value
+        product_a3 = self.env["product.product"].search(
+            [("product_template_variant_value_ids.name", "=", product_att_value.name)]
         )
         product_b1 = self._create_product("CODEB1", "Product B1", self.main_company.id)
         template_b = product_b1.product_tmpl_id
@@ -930,12 +976,7 @@ class TestStockRequestBase(TestStockRequest):
         # the action from the products, so test that they get a friendlier
         # error message.
         self.stock_request_user.groups_id -= self.stock_request_user_group
-        with self.assertRaisesRegex(
-            exceptions.UserError,
-            "Unfortunately it seems you do not have the necessary rights "
-            "for creating stock requests. Please contact your "
-            "administrator.",
-        ):
+        with self.assertRaises(exceptions.AccessError):
             order.with_user(self.stock_request_user)._create_from_product_multiselect(
                 template_a + template_b
             )
