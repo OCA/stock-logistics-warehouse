@@ -1,4 +1,4 @@
-odoo.define("stock_request_kanban.StockRequestKanbanController", function(require) {
+odoo.define("stock_request_kanban.StockRequestKanbanController", function (require) {
     "use strict";
 
     var core = require("web.core");
@@ -11,7 +11,7 @@ odoo.define("stock_request_kanban.StockRequestKanbanController", function(requir
         // Public
         // -------------------------------------------------------------------------
 
-        init: function(parent, model, renderer) {
+        init: function (parent, model, renderer) {
             this.context = renderer.state.getContext();
             return this._super.apply(this, arguments);
         },
@@ -19,7 +19,7 @@ odoo.define("stock_request_kanban.StockRequestKanbanController", function(requir
         /**
          * @override
          */
-        renderButtons: function($node) {
+        renderButtons: function ($node) {
             this._super.apply(this, arguments);
             var $buttonScan = $(qweb.render("StockRequestKanban.Buttons"));
             $buttonScan.on("click", this._onOpenWizard.bind(this));
@@ -31,7 +31,7 @@ odoo.define("stock_request_kanban.StockRequestKanbanController", function(requir
         // Handlers
         // -------------------------------------------------------------------------
 
-        _onOpenWizard: function() {
+        _onOpenWizard: function () {
             var context = {
                 active_model: this.modelName,
             };
