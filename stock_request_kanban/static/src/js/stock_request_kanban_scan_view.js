@@ -1,4 +1,4 @@
-odoo.define("stock_request_kanban.StockRequestKanbanListView", function(require) {
+odoo.define("stock_request_kanban.StockRequestKanbanListView", function (require) {
     "use strict";
 
     var ListView = require("web.ListView");
