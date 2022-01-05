@@ -129,8 +129,7 @@ class StockInventoryKanban(models.Model):
         self.write(self._close_inventory_values())
 
     def print_missing_kanbans(self):
-        """ Print the missing kanban cards in order to restore them
-        """
+        """Print the missing kanban cards in order to restore them"""
         self.ensure_one()
         return self.env.ref("stock_request_kanban.action_report_kanban").report_action(
             self.missing_kanban_ids
