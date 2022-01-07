@@ -340,7 +340,7 @@ class StockRequest(models.Model):
                         values,
                     )
                 )
-                self.env["procurement.group"].run(procurements)
+                self.env["procurement.group"].sudo().run(procurements)
             except UserError as error:
                 errors.append(error.name)
         if errors:
