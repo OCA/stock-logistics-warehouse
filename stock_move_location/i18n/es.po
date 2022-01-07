@@ -1,0 +1,250 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_move_location
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-02 20:30+0000\n"
+"PO-Revision-Date: 2020-11-02 21:37+0100\n"
+"Last-Translator: Sergio Teruel <sergio.teruel@tecnativa.com>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__apply_putaway_strategy
+msgid "Apply putaway strategy"
+msgstr "Aplicar estrategia de traslado"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Apply putaway strategy for moving products"
+msgstr "Aplicar estrategia de traslado para los movimientos de producto"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__picking_id
+msgid "Connected Picking"
+msgstr "Operación relacionada"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__create_uid
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__create_date
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__custom
+msgid "Custom line"
+msgstr "Línea personalizada"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__destination_location_id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__destination_location_id
+msgid "Destination Location"
+msgstr "Ubicación de destino"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__destination_location_disable
+msgid "Destination Location Disable"
+msgstr "Ubicación de destino desactivada"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__display_name
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__edit_locations
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Edit Locations"
+msgstr "(editar)"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Immediate Transfer"
+msgstr "Transferencia Inmediata"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Inventory Details"
+msgstr "Detalles de Inventario"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location____last_update
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__write_uid
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__write_date
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__lot_id
+msgid "Lot/Serial Number"
+msgstr "Lote/Número de serie"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__max_quantity
+msgid "Maximum available quantity"
+msgstr "Cantidad máxima disponible"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__stock_move_location_line_ids
+msgid "Move Location lines"
+msgstr "Líneas de movimiento de Ubicación"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.stock_picking_type_kanban
+msgid "Move On Hand"
+msgstr "Disponible"
+
+#. module: stock_move_location
+#: model:ir.actions.act_window,name:stock_move_location.wiz_stock_move_location_action
+#: model:ir.ui.menu,name:stock_move_location.menuitem_move_location
+msgid "Move from location..."
+msgstr "Mover desde ubicación..."
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__move_location_wizard_id
+msgid "Move location Wizard"
+msgstr "Asistente para mover desde ubicación"
+
+#. module: stock_move_location
+#: code:addons/stock_move_location/wizard/stock_move_location_line.py:0
+#, python-format
+msgid "Move quantity can not exceed max quantity or be negative"
+msgstr "La cantidad movida no puede superar la cantidad máxima o ser negativo"
+
+#. module: stock_move_location
+#: model:ir.actions.act_window,name:stock_move_location.wiz_stock_quant_location_action
+msgid "Move to location..."
+msgstr "Mover a ubicación..."
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__origin_location_id
+msgid "Origin Location"
+msgstr "Ubicación de origen"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_disable
+msgid "Origin Location Disable"
+msgstr "Ubicación origen desactivada"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
+msgid "Part of move location"
+msgstr "Parte de un movimiento entre ubicaciones"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_picking_type
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__picking_type_id
+msgid "Picking Type"
+msgstr "Tipo de operación"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "Planned Transfer"
+msgstr "Transferencia Planificada"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_uom_id
+msgid "Product Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__move_quantity
+msgid "Quantity to move"
+msgstr "Cantidad a mover"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__reserved_quantity
+msgid "Reserved quantity"
+msgstr "Cantidad Reservada"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
+msgid "Show Move On hand stock"
+msgstr "Mostrar cantidad disponible"
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_stock_picking_type__show_move_onhand
+msgid ""
+"Show a button 'Move On Hand' in the Inventory Dashboard to initiate the "
+"process to move the products in stock at the origin location."
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
+msgid "UoM"
+msgstr "UdM"
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_stock_move__location_move
+msgid "Whether this move is a part of stock_location moves"
+msgstr "Si este movimiento es parte de movimiento de ubicaciones"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_wiz_stock_move_location
+#, fuzzy
+msgid "Wizard move location"
+msgstr "Asistente para mover desde ubicación"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_wiz_stock_move_location_line
+#, fuzzy
+msgid "Wizard move location line"
+msgstr "Asistente para mover desde ubicación"
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__destination_location_disable
+msgid "technical field to disable the edition of destination location."
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__origin_location_disable
+msgid "technical field to disable the edition of origin location."
+msgstr ""
