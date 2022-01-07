@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo-addon-procurement_auto_create_group>=15.0dev,<15.1dev',
         'odoo-addon-stock_demand_estimate>=15.0dev,<15.1dev',
         'odoo-addon-stock_helper>=15.0dev,<15.1dev',
+        'odoo-addon-stock_move_location>=15.0dev,<15.1dev',
         'odoo-addon-stock_warehouse_calendar>=15.0dev,<15.1dev',
     ],
     classifiers=[
