@@ -64,6 +64,7 @@ msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__display_name
@@ -77,7 +78,13 @@ msgid "Edit Locations"
 msgstr ""
 
 #. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_picking_form
+msgid "Fill with stock"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking__id
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
@@ -96,6 +103,7 @@ msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line____last_update
@@ -157,6 +165,12 @@ msgid "Move to location..."
 msgstr ""
 
 #. module: stock_move_location
+#: code:addons/stock_move_location/models/stock_picking.py:0
+#, python-format
+msgid "Moves lines already exists"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__origin_location_id
 msgid "Origin Location"
@@ -181,6 +195,12 @@ msgstr ""
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Planned Transfer"
+msgstr ""
+
+#. module: stock_move_location
+#: code:addons/stock_move_location/models/stock_picking.py:0
+#, python-format
+msgid "Please choose a source end location"
 msgstr ""
 
 #. module: stock_move_location
@@ -218,6 +238,11 @@ msgstr ""
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_move
 msgid "Stock Move"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_picking
+msgid "Transfer"
 msgstr ""
 
 #. module: stock_move_location
