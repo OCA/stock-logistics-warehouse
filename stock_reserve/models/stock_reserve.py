@@ -121,7 +121,7 @@ class StockReservation(models.Model):
         The reservation is done using the default UOM of the product.
         A date until which the product is reserved can be specified.
         """
-        self.write({"date_expected": fields.Datetime.now()})
+        self.write({"date_deadline": fields.Datetime.now()})
         self.mapped("move_id")._action_confirm(merge=False)
         self.mapped("move_id.picking_id").action_assign()
         return True
