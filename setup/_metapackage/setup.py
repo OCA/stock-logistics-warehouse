@@ -64,6 +64,7 @@ setuptools.setup(
         'odoo14-addon-stock_request_tier_validation',
         'odoo14-addon-stock_reserve_rule',
         'odoo14-addon-stock_search_supplierinfo_code',
+        'odoo14-addon-stock_secondary_unit',
         'odoo14-addon-stock_vertical_lift',
         'odoo14-addon-stock_vertical_lift_empty_tray_check',
         'odoo14-addon-stock_vertical_lift_kardex',
