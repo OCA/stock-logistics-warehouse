@@ -1,4 +1,4 @@
-# Copyright 2021 Open Source Integrators
+# Copyright 2021-2022 Open Source Integrators
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, models
@@ -18,10 +18,10 @@ class ProcurementGroup(models.Model):
             product = procurement.product_id
             # TODO: set warehouse_id in context?
             data = Forecast._get_report_data(product_variant_ids=[product.id])
-            source_docs = []
+            source_docs = set()  # Avoid duplicate sources
             for line in data["lines"]:
                 if not line["document_in"] and line["document_out"]:
-                    source_docs.append(line["document_out"])
+                    source_docs.add(line["document_out"])
             if source_docs:
                 source_groups = [x.procurement_group_id for x in source_docs]
                 source_names = ", ".join([x.name for x in source_docs])
