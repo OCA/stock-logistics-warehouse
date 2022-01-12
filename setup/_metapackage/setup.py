@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-account_move_line_stock_info',
         'odoo14-addon-procurement_auto_create_group',
+        'odoo14-addon-product_quantity_update_force_inventory',
         'odoo14-addon-scrap_reason_code',
         'odoo14-addon-stock_archive_constraint',
         'odoo14-addon-stock_available',
