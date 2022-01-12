@@ -19,12 +19,13 @@ odoo.define("stock_request_kanban.StockRequestKanbanController", function (requi
         /**
          * @override
          */
-        renderButtons: function ($node) {
+
+        renderButtons: function () {
             this._super.apply(this, arguments);
             var $buttonScan = $(qweb.render("StockRequestKanban.Buttons"));
             $buttonScan.on("click", this._onOpenWizard.bind(this));
 
-            $buttonScan.prependTo($node.find(".o_list_buttons"));
+            this.$buttons.prepend($buttonScan);
         },
 
         // -------------------------------------------------------------------------
