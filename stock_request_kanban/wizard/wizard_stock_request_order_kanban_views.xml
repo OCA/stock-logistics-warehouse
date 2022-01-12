@@ -16,12 +16,11 @@
             </field>
         </field>
     </record>
-    <act_window
-        id="wizard_stock_request_order_kanban_action"
-        name="Add Kanban"
-        res_model="wizard.stock.request.order.kanban"
-        view_mode="form"
-        context="{'default_order_id': active_id}"
-        target="new"
-    />
+    <record id="wizard_stock_request_order_kanban_action" model="ir.actions.act_window">
+        <field name="name">Add Kanban</field>
+        <field name="res_model">wizard.stock.request.order.kanban</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_order_id': active_id}</field>
+        <field name="target">new</field>
+    </record>
 </odoo>

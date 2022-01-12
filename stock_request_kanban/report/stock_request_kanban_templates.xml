@@ -90,14 +90,14 @@
             </t>
         </t>
     </template>
-    <report
-        id="action_report_kanban"
-        string="Print kanban"
-        model="stock.request.kanban"
-        report_type="qweb-pdf"
-        name="stock_request_kanban.report_kanban_label"
-        file="stock_request_kanban.report_kanban_label"
-        paperformat="stock_request_kanban.kanban_paper_format"
-        menu="True"
-    />
+    <record id="action_report_kanban" model="ir.actions.report">
+        <field name="name">Print kanban</field>
+        <field name="model">stock.request.kanban</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">stock_request_kanban.report_kanban_label</field>
+        <field name="report_file">stock_request_kanban.report_kanban_label</field>
+        <field name="paperformat_id" ref="stock_request_kanban.kanban_paper_format" />
+        <field name="binding_model_id" ref="model_stock_request_kanban" />
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

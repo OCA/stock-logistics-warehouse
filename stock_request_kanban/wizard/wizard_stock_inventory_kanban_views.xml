@@ -45,12 +45,11 @@
             </form>
         </field>
     </record>
-    <act_window
-        id="wizard_stock_inventory_kanban_action"
-        name="Add Kanban"
-        res_model="wizard.stock.inventory.kanban"
-        view_mode="form"
-        context="{'default_inventory_kanban_id': active_id}"
-        target="new"
-    />
+    <record id="wizard_stock_inventory_kanban_action" model="ir.actions.act_window">
+        <field name="name">Add Kanban</field>
+        <field name="res_model">wizard.stock.inventory.kanban</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'default_inventory_kanban_id': active_id}</field>
+        <field name="target">new</field>
+    </record>
 </odoo>
