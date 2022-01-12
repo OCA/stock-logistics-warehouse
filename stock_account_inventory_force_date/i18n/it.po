@@ -6,90 +6,98 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-01-12 13:39+0000\n"
+"Last-Translator: Sergio Corato <sergiocorato@gmail.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model,name:stock_account_inventory_force_date.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: stock_account_inventory_force_date
 #: model:res.groups,name:stock_account_inventory_force_date.group_stock_account_inventory_force_date
 msgid "Force Inventory Adjustment Date"
-msgstr ""
+msgstr "Forza Data Rettifica Inventario"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model.fields,field_description:stock_account_inventory_force_date.field_stock_inventory__force_inventory_date
 msgid "Force Inventory Date"
-msgstr ""
+msgstr "Forza Data Inventario"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model.fields,field_description:stock_account_inventory_force_date.field_res_company__force_inventory_lock_date
 msgid "Force Inventory Lock Date"
-msgstr ""
+msgstr "Forza Data Blocco Inventario"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model.fields,help:stock_account_inventory_force_date.field_stock_inventory__force_inventory_date
 msgid "Force the inventory moves and accounting entries to a given datein the past."
 msgstr ""
+"Forza i movimenti inventario e i movimenti contabili ad una data nel passato."
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model.fields,help:stock_account_inventory_force_date.field_res_company__force_inventory_lock_date
 msgid "If set, it won't be possible for any user to force an inventory,adjustment using a date earlier than this one."
 msgstr ""
+"Se impostato, non sarà possibile per alcun utente forzare una rettifica di "
+"inventario con una data precedente a questa."
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model,name:stock_account_inventory_force_date.model_stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_account_inventory_force_date.view_company_form
 msgid "Inventory"
-msgstr ""
+msgstr "Inventario"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model,name:stock_account_inventory_force_date.model_stock_inventory_line
 msgid "Inventory Line"
-msgstr ""
+msgstr "Riga Inventario"
 
 #. module: stock_account_inventory_force_date
 #: code:addons/stock_account_inventory_force_date/models/stock_inventory.py:107
 #, python-format
 msgid "It is not possible to force an inventory adjustment to a date before %s"
 msgstr ""
+"Non è possibile forzare una rettifica inventariale a una data prima di %s"
 
 #. module: stock_account_inventory_force_date
 #: code:addons/stock_account_inventory_force_date/models/stock_inventory.py:93
 #, python-format
 msgid "Option %s not available when forcing Inventory Date."
-msgstr ""
+msgstr "L'opzione %s non è disponibile quando si forza una Data di Inventario."
 
 #. module: stock_account_inventory_force_date
 #: code:addons/stock_account_inventory_force_date/models/stock_move.py:35
 #, python-format
 msgid "Please define a Standard Cost Change Offsetting Account in the company settings."
 msgstr ""
+"Si prega di definire un Conto Standard di Costo di differenza valutazione "
+"nelle configurazioni dell'azienda."
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model,name:stock_account_inventory_force_date.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimenti Prodotto (Stock Move Line)"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model.fields,field_description:stock_account_inventory_force_date.field_res_company__standard_cost_change_account_id
 msgid "Standard Cost Change Offsetting Account"
-msgstr ""
+msgstr "Costo Standard di Rettifica Valutazione"
 
 #. module: stock_account_inventory_force_date
 #: code:addons/stock_account_inventory_force_date/models/stock_move.py:47
 #, python-format
 msgid "Standard Price revalued for %s from %s"
-msgstr ""
+msgstr "Prezzo Standard rivalutato per %s da %s"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model,name:stock_account_inventory_force_date.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento Magazzino"
