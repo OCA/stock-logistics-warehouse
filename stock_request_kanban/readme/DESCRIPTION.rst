@@ -1,4 +1,4 @@
-On most companies there is products that must be purchased often but cannot be
+On most companies there are products that must be purchased often but cannot be
 stored as a usual product because no consumption moves are made.
 Usually, they are stored as consumables or putaway rules are defined.
 In both cases, reordering rules cannot be used.
