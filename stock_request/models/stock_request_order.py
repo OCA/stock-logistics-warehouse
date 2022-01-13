@@ -34,7 +34,6 @@ class StockRequestOrder(models.Model):
         return self.env["res.users"].browse(self.env.uid)
 
     name = fields.Char(
-        "Name",
         copy=False,
         required=True,
         readonly=True,
@@ -52,7 +51,6 @@ class StockRequestOrder(models.Model):
     )
     requested_by = fields.Many2one(
         "res.users",
-        "Requested by",
         required=True,
         tracking=True,
         default=lambda s: s._get_default_requested_by(),
@@ -95,7 +93,6 @@ class StockRequestOrder(models.Model):
         default=lambda self: self.env.company,
     )
     expected_date = fields.Datetime(
-        "Expected Date",
         default=fields.Datetime.now,
         index=True,
         required=True,
@@ -171,7 +168,7 @@ class StockRequestOrder(models.Model):
     @api.onchange("location_id")
     def onchange_location_id(self):
         if self.location_id:
-            loc_wh = self.location_id.get_warehouse()
+            loc_wh = self.location_id.warehouse_id
             if loc_wh and self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
                 self.with_context(no_change_childs=True).onchange_warehouse_id()
@@ -186,7 +183,7 @@ class StockRequestOrder(models.Model):
     def onchange_warehouse_id(self):
         if self.warehouse_id:
             # search with sudo because the user may not have permissions
-            loc_wh = self.location_id.get_warehouse()
+            loc_wh = self.location_id.warehouse_id
             if self.warehouse_id != loc_wh:
                 self.location_id = self.warehouse_id.lot_stock_id
                 self.with_context(no_change_childs=True).onchange_location_id()
@@ -356,7 +353,7 @@ class StockRequestOrder(models.Model):
                     "for creating stock requests. Please contact your "
                     "administrator."
                 )
-            )
+            ) from None
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_request.stock_request_order_action"
         )

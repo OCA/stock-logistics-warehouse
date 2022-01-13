@@ -9,24 +9,25 @@ class StockMoveLine(models.Model):
 
     @api.model
     def _stock_request_confirm_done_message_content(self, message_data):
-        title = _("Receipt confirmation %s for your Request %s") % (
-            message_data["picking_name"],
-            message_data["request_name"],
+        title = (
+            _("Receipt confirmation %(picking_name)s for your Request %(request_name)s")
+            % message_data
         )
         message = "<h3>%s</h3>" % title
-        message += _(
-            "The following requested items from Stock Request %s "
-            "have now been received in %s using Picking %s:"
-        ) % (
-            message_data["request_name"],
-            message_data["location_name"],
-            message_data["picking_name"],
+        message += (
+            _(
+                "The following requested items from Stock Request %(request_name)s "
+                "have now been received in %(location_name)s using Picking %(picking_name)s:"
+            )
+            % message_data
         )
         message += "<ul>"
-        message += _("<li><b>%s</b>: Transferred quantity %s %s</li>") % (
-            message_data["product_name"],
-            message_data["product_qty"],
-            message_data["product_uom"],
+        message += (
+            _(
+                "<li><b>%(product_name)s</b>: Transferred quantity %(product_qty)s"
+                "%(product_uom)s</li>"
+            )
+            % message_data
         )
         message += "</ul>"
         return message

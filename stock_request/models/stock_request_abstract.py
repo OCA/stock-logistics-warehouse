@@ -35,7 +35,7 @@ class StockRequest(models.AbstractModel):
                 rec.product_uom_qty, rec.product_id.product_tmpl_id.uom_id
             )
 
-    name = fields.Char("Name", copy=False, required=True, readonly=True, default="/")
+    name = fields.Char(copy=False, required=True, readonly=True, default="/")
     warehouse_id = fields.Many2one(
         "stock.warehouse", "Warehouse", ondelete="cascade", required=True
     )
@@ -218,7 +218,7 @@ class StockRequest(models.AbstractModel):
             # the onchange, as it could lead to inconsistencies.
             return res
         if self.warehouse_id:
-            loc_wh = self.location_id.get_warehouse()
+            loc_wh = self.location_id.warehouse_id
             if self.warehouse_id != loc_wh:
                 self.location_id = self.warehouse_id.lot_stock_id.id
             if self.warehouse_id.company_id != self.company_id:
@@ -228,7 +228,7 @@ class StockRequest(models.AbstractModel):
     @api.onchange("location_id")
     def onchange_location_id(self):
         if self.location_id:
-            loc_wh = self.location_id.get_warehouse()
+            loc_wh = self.location_id.warehouse_id
             if loc_wh and self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
                 self.with_context(no_change_childs=True).onchange_warehouse_id()

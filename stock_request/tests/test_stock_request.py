@@ -138,7 +138,7 @@ class TestStockRequest(common.TransactionCase):
     def _create_user(self, name, group_ids, company_ids):
         return (
             self.env["res.users"]
-            .with_context({"no_reset_password": True})
+            .with_context(**{"no_reset_password": True})
             .create(
                 {
                     "name": name,
@@ -946,7 +946,10 @@ class TestStockRequestBase(TestStockRequest):
         )
 
         # Wrong model should just raise ValidationError
-        with self.assertRaises(exceptions.ValidationError):
+        with self.assertRaisesRegex(
+            exceptions.ValidationError,
+            "This action only works in the context of products",
+        ):
             order._create_from_product_multiselect(self.stock_request_user)
 
     def test_allow_virtual_location(self):
