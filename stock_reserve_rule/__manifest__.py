@@ -25,6 +25,6 @@
         "security/stock_reserve_rule_security.xml",
     ],
     "installable": True,
-    "development_status": "Alpha",
+    "development_status": "Beta",
     "license": "AGPL-3",
 }
