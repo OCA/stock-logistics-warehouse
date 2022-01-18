@@ -2,38 +2,23 @@
 <openerp>
 <data>
 
-<record id="reception_checkpoint_form" model="ir.ui.view">
-    <field name="model">reception.checkpoint.wizard</field>
-    <field name="arch" type="xml">
-        <form>
-            <p class="oe_grey">Fill this form to be redirected to goods to receive
-            </p>
-            <group>
-                <field name="purchase_ids" widget="many2many_tags" 
-                       domain="[('state', 'not in', ('draft', 'sent', 'bid', 'confirmed', 'done', 'cancel'))]"/>
-                <field name="partner_id"/>
-                <field name="date"/>
-            </group>
-            <footer>
-                <button name="button_select_moves" string="Confirm" type="object" class="btn-primary"/>
-                <button string="Cancel" class="btn-secondary" special="cancel"/>
-            </footer>
-        </form>
-    </field>
-</record>
-
-
-<record id="reception_checkpoint_wiz_act" model="ir.actions.act_window">
-    <field name="name">Reception Checkpoint</field>
-    <field name="type">ir.actions.act_window</field>
-    <field name="res_model">reception.checkpoint.wizard</field>
-    <field name="view_mode">form</field>
-    <field name="target">new</field>
-</record>
-
-
-<menuitem id="reception_checkpoint_wizard_menu" action="reception_checkpoint_wiz_act" 
-          parent="stock.menu_stock_warehouse_mgmt" sequence="20"/>
+    <record id="reception_checkpoint_tree_view" model="ir.ui.view">
+        <field name="model">reception.checkpoint</field>
+        <field name="arch" type="xml">
+            <tree colors="blue: timing == 'toreceive'; orange: timing == 'more'; red: timing == 'inlate'">
+                <field name="order_id"/>
+                <field name="origin"/>
+                <field name="product_id"/>
+                <field name="date_planned"/>
+                <field name="received_date"/>
+                <field name="ordered_qty"/>
+                <field name="received_qty"/>
+                <field name="diff_qty"/>
+                <field name="timing" invisible="1"/>
+                <field name="purch_line" invisible="1"/>
+            </tree>
+        </field>
+    </record>
 
 
 </data>

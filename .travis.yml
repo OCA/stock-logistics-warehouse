@@ -42,13 +42,14 @@ env:
   #   Use `OS` to skip the PhantomJS upgrade & use the system version instead.
 
   matrix:
-  - LINT_CHECK="1"
+  # - LINT_CHECK="1"
 # use this to install a standalone database to export .pot files
 # - MAKEPOT="1"
 # add MAKEPOT="1" to a TEST line to export .pot files from
 # the test database after test success
-  - TESTS="1" ODOO_REPO="odoo/odoo" MAKEPOT="1" EXCLUDE='stock_putaway_product'
-  - TESTS="1" ODOO_REPO="OCA/OCB"
+  # - TESTS="1" ODOO_REPO="odoo/odoo" MAKEPOT="1" EXCLUDE='stock_putaway_product'
+  # - TESTS="1" ODOO_REPO="OCA/OCB"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE='stock_receive_checkpoint'
 # either use the two lines above or the two below. Don't change the default if
 # it's not necessary (it is only necessary if modules in your repository can't
 # be installed in the same database. And you get a huge speed penalty in your

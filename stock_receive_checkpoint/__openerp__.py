@@ -10,12 +10,13 @@
     "author": "Akretion, Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "installable": True,
+    "maintainers": ["bealdav"],
     "depends": [
         "purchase",
         "stock",
     ],
     "data": [
-        "views/stock_view.xml",
+        "wizards/checkpoint_select_view.xml",
         "wizards/checkpoint_view.xml",
     ],
 }

@@ -1,99 +1,87 @@
 # -*- coding: utf-8 -*-
-# © 2021 David BEAL @ Akretion
+# © 2022 David BEAL @ Akretion
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from datetime import datetime
+from collections import defaultdict
 
 from openerp import models, api, fields, _
 
+# from openerp.exceptions import Warning as UserError
 
-class ReceptionCheckpointWizard(models.TransientModel):
-    _name = "reception.checkpoint.wizard"
-    _description = "Select data for reception checkpoint"
+# from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DT
 
-    purchase_ids = fields.Many2many(
-        comodel_name="purchase.order",
-        # domain=lambda s: [("state" not in ("done", "cancel"))],
-        string="Purchases",
+
+class ReceptionCheckpoint(models.TransientModel):
+    _name = "reception.checkpoint"
+    _description = "Reception checkpoint"
+
+    product_id = fields.Many2one(comodel_name="product.product", string="Product")
+    # product_qty = fields.Float()
+    date_planned = fields.Date(related="purchase_line_id.date_planned")
+    purch_line = fields.Integer()
+    purchase_line_id = fields.Many2one(
+        comodel_name="purchase.order.line", string="Order Line"
     )
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Vendors")
-    date = fields.Date(
-        default=fields.Date.today(),
-        help="Select goods which should be received to this date",
+    order_id = fields.Many2one(
+        comodel_name="purchase.order", related="purchase_line_id.order_id"
     )
+    origin = fields.Char(related="purchase_line_id.order_id.origin")
+    ordered_qty = fields.Float()
+    received_date = fields.Date(string="Last received")
+    diff_qty = fields.Char()
+    received_qty = fields.Float()
+    timing = fields.Char(help="Technical field to apply color in tree view")
 
     @api.model
-    def default_get(self, field_lists):
-        res = super(ReceptionCheckpointWizard, self).default_get(field_lists)
-        old_obj = self.search(
-            [("write_uid", "=", self.env.user.id)], limit=1, order="write_date DESC"
-        )
-        if old_obj:
-            for afield in field_lists:
-                if old_obj._fields[afield].type == "many2many":
-                    res[afield] = [(6, 0, old_obj[afield].ids)]
-                elif old_obj._fields[afield].type == "many2one":
-                    res[afield] = old_obj[afield].id
-                else:
-                    res[afield] = old_obj[afield]
-        return res
+    def _create_checkpoint_moves(self, moves):
+        date = self.env.context.get("checkpoint_date") or fields.Date.today()
 
-    @api.multi
-    def button_select_moves(self):
-        picking_types = self.env["stock.picking.type"].search(
-            self._get_picking_type_domain()
-        )
-        if self.purchase_ids:
-            moves = self._get_moves_from_purchases(self.purchase_ids, picking_types)
-            name = ", ".join([x.name for x in self.purchase_ids])
-        elif self.partner_id:
-            purchases = self.env["purchase.order"].search(
-                [
-                    ("partner_id.commercial_partner_id", "=", self.partner_id.id),
-                    (
-                        "state",
-                        "not in",
-                        ("draft", "sent", "bid", "confirmed", "done", "cancel"),
-                    ),
-                ]
+        def init_dict(mfield, ttype):
+            if mfield not in pline:
+                if ttype == int:
+                    pline[mfield] = 0
+                elif ttype == "date":
+                    pline[mfield] = False
+
+        lines = defaultdict(dict)
+        line_ids = []
+        for move in moves:
+            pline = lines[move.purchase_line_id]
+            pline.update(
+                {
+                    "product_id": move.product_id.id,
+                    "purchase_line_id": move.purchase_line_id.id,
+                    "purch_line": move.purchase_line_id
+                    and move.purchase_line_id.id
+                    or False,
+                    "ordered_qty": move.purchase_line_id.product_qty,
+                    "order_id": move.purchase_line_id.order_id.id,
+                }
             )
-            moves = self._get_moves_from_purchases(purchases, picking_types)
-            name = self.partner_id.name
-        return {
-            "name": _("Reception checkpoint %s Date '%s'" % (name, self.date)),
-            "res_model": "stock.move",
-            "view_mode": "tree",
-            "context": "{'date': '%s'}" % self.date,
-            "domain": "[('id', 'in', %s)]" % moves.ids,
-            # "auto_search": True,
-            "view_id": self.env.ref(
-                "stock_receive_checkpoint.reception_checkpoint_tree"
-            ).id,
-            "type": "ir.actions.act_window",
-        }
+            init_dict("received_qty", int)
+            if move.state == "done":
+                init_dict("received_date", "date")
+                if not pline["received_date"] or move.date > pline["received_date"]:
+                    pline["received_date"] = move.date
+                pline["received_qty"] += move.product_uom_qty
+        self._add_computed_fields(lines)
+        self.env["reception.checkpoint"].search(
+            [("write_uid", "=", self.env.user.id)]
+        ).unlink()
+        for line in lines:
+            line_ids.append(self.env["reception.checkpoint"].create(lines[line]).id)
+        return line_ids
 
     @api.model
-    def _get_moves_from_purchases(self, purchases, picking_types):
-        purch_line_ids = []
-        for purch in purchases:
-            purch_line_ids.extend(purch.order_line.ids)
-        return self.env["stock.move"].search(
-            [
-                ("purchase_line_id", "in", purch_line_ids),
-                ("picking_type_id", "in", picking_types.ids),
-                ("state", "not in", ("done", "cancel")),
-            ]
-        )
-
-    @api.model
-    def _get_picking_type_domain(self):
-        """ Inherit according to your own needs """
-        return [("code", "=", "incoming")]
-
-    @api.onchange("purchase_ids")
-    def _purchase_onchange(self):
-        if self.purchase_ids:
-            self.partner_id = False
-
-    @api.onchange("partner_id")
-    def _partner_onchange(self):
-        if self.partner_id:
-            self.purchase_ids = False
+    def _add_computed_fields(self, lines):
+        for pline, line in lines.items():
+            line["diff_qty"] = line["ordered_qty"] - line["received_qty"]
+            if not line["purch_line"]:
+                line["timing"] = "more"
+            elif line["diff_qty"] > 0:
+                line["timing"] = "toreceive"
+            elif line["diff_qty"] < 0:
+                line["timing"] = "more"
+            else:
+                line["timing"] = "no"
