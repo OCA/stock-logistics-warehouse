@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="assign_manual_quants_form_view">
+        <field name="name">assign.manual.quants.form</field>
+        <field name="model">assign.manual.quants</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name='quants_lines' colspan="4">
+                    <tree editable="top" delete="0" create="0">
+                        <field name="lot_id" />
+                        <field name="quant_id" invisible="1" />
+                        <field name="package_id" />
+                        <field name="owner_id" />
+                        <field name="location_id" />
+                        <field name="on_hand" />
+                        <field name="reserved" />
+                        <field name="selected" />
+                        <field
+                            name="qty"
+                            attrs="{'readonly':[('selected', '=', False)]}"
+                            sum="qty"
+                        />
+                    </tree>
+                </field>
+                <group col='4' colspan="4">
+                    <field name="move_qty" colspan="2" readonly="1" />
+                    <field name="lines_qty" invisible="1" />
+                    <field name="move_id" invisible="1" />
+                </group>
+                <footer>
+                    <button
+                        name="assign_quants"
+                        type="object"
+                        string="Confirm"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="cancel"
+                        string="Cancel"
+                        class="oe_link"
+                        special="cancel"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="assign_manual_quants_action" model="ir.actions.act_window">
+        <field name="name">Manual assignment</field>
+        <field name="res_model">assign.manual.quants</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>
