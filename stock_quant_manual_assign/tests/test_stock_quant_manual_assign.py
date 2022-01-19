@@ -13,11 +13,18 @@ class TestStockQuantManualAssign(TransactionCase):
         self.location_model = self.env["stock.location"]
         self.move_model = self.env["stock.move"]
         self.quant_assign_wizard = self.env["assign.manual.quants"]
+        self.ModelDataObj = self.env["ir.model.data"]
         self.product = self.env["product.product"].create(
             {"name": "Product 4 test", "type": "product"}
         )
         self.location_src = self.env.ref("stock.stock_location_locations_virtual")
         self.location_dst = self.env.ref("stock.stock_location_customers")
+        self.picking_type_out = self.ModelDataObj._xmlid_to_res_id(
+            "stock.picking_type_out"
+        )
+        self.env["stock.picking.type"].browse(
+            self.picking_type_out
+        ).reservation_method = "manual"
         self.location1 = self.location_model.create(
             {
                 "name": "Location 1",
