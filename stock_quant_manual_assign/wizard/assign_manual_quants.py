@@ -156,7 +156,6 @@ class AssignManualQuantsLines(models.TransientModel):
     # This is not correctly shown as related or computed, so we make it regular
     on_hand = fields.Float(
         readonly=True,
-        string="On Hand",
         digits="Product Unit of Measure",
     )
     reserved = fields.Float(string="Others Reserved", digits="Product Unit of Measure")
