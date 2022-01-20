@@ -19,6 +19,7 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.stock_request_manager_group = self.env.ref(
             "stock_request.group_stock_request_manager"
         )
+        self.inventory_user = self.env.ref("stock.group_stock_user")
         self.main_company = self.env.ref("base.main_company")
         self.warehouse = self.env.ref("stock.warehouse0")
         self.categ_unit = self.env.ref("uom.product_uom_categ_unit")
@@ -30,7 +31,7 @@ class TestStockRequestPurchase(common.TransactionCase):
         )
         self.stock_request_user = self._create_user(
             "stock_request_user",
-            [self.stock_request_user_group.id],
+            [self.stock_request_user_group.id, self.inventory_user.id],
             [self.main_company.id, self.company_2.id],
         )
         self.stock_request_manager = self._create_user(
@@ -55,7 +56,7 @@ class TestStockRequestPurchase(common.TransactionCase):
     def _create_user(self, name, group_ids, company_ids):
         return (
             self.env["res.users"]
-            .with_context({"no_reset_password": True})
+            .with_context(no_reset_password=True)
             .create(
                 {
                     "name": name,
