@@ -1,9 +1,9 @@
-# Copyright 2018 Creu Blanca
+# Copyright 2018-22 Creu Blanca
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "Stock Request kanban",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Creu Blanca, ForgeFlow, Odoo Community Association (OCA)",
@@ -25,7 +25,15 @@
         "report/stock_request_kanban_templates.xml",
         "security/ir.model.access.csv",
     ],
-    "qweb": ["static/src/xml/stock_request_kanban_scan.xml"],
+    "assets": {
+        "web.assets_backend": [
+            "stock_request_kanban/static/src/js/stock_request_kanban_scan_controller.esm.js",
+            "stock_request_kanban/static/src/js/stock_request_kanban_scan_view.esm.js",
+        ],
+        "web.assets_qweb": [
+            "stock_request_kanban/static/src/xml/stock_request_kanban_scan.xml",
+        ],
+    },
     "installable": True,
     "application": False,
 }

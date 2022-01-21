@@ -13,8 +13,9 @@ class WizardStockInventoryKanban(models.TransientModel):
     inventory_kanban_id = fields.Many2one("stock.inventory.kanban", readonly=True)
 
     def barcode_ending(self):
-        super().barcode_ending()
+        res = super().barcode_ending()
         self.inventory_kanban_id.write({"scanned_kanban_ids": [(4, self.kanban_id.id)]})
+        return res
 
     def validate_kanban(self, barcode):
         res = super().validate_kanban(barcode)

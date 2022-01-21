@@ -25,7 +25,7 @@ class StockInventoryKanban(models.Model):
         default="draft",
         readonly=True,
         copy=False,
-        track_visibility="onchange",
+        tracking=True,
     )
     warehouse_ids = fields.Many2many(
         "stock.warehouse",
