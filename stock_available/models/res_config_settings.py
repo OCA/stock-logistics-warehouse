@@ -6,7 +6,6 @@ from odoo import api, fields, models
 
 
 class ResConfigSettings(models.TransientModel):
-
     """Add options to easily install the submodules"""
 
     _inherit = "res.config.settings"
@@ -67,7 +66,8 @@ class ResConfigSettings(models.TransientModel):
         return res
 
     def set_values(self):
-        super(ResConfigSettings, self).set_values()
+        res = super(ResConfigSettings, self).set_values()
         self.env["ir.config_parameter"].sudo().set_param(
             "stock_available_mrp_based_on", self.stock_available_mrp_based_on
         )
+        return res
