@@ -28,11 +28,9 @@ class ProductTemplate(models.Model):
         res = {}
         for template in self:
             immediately_usable_qty = sum(
-                
-                    variants_dict[p.id]["immediately_usable_qty"]
-                    - variants_dict[p.id]["potential_qty"]
-                    for p in template.product_variant_ids
-                
+                variants_dict[p.id]["immediately_usable_qty"]
+                - variants_dict[p.id]["potential_qty"]
+                for p in template.product_variant_ids
             )
             potential_qty = max(
                 [
