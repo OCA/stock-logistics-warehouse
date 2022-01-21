@@ -10,10 +10,10 @@ class TestStockLogisticsWarehouse(TransactionCase):
         """Test the config file"""
         stock_setting = self.env["res.config.settings"].create({})
 
-        self.assertEquals(stock_setting.stock_available_mrp_based_on, "qty_available")
+        self.assertEqual(stock_setting.stock_available_mrp_based_on, "qty_available")
         stock_setting.stock_available_mrp_based_on = "immediately_usable_qty"
         stock_setting.set_values()
-        self.assertEquals(
+        self.assertEqual(
             stock_setting.stock_available_mrp_based_on, "immediately_usable_qty"
         )
 
@@ -142,8 +142,8 @@ class TestStockLogisticsWarehouse(TransactionCase):
         compare_product_usable_qty(templateAB, 4)
 
         # Potential Qty is set as 0.0 by default
-        self.assertEquals(templateAB.potential_qty, 0.0)
-        self.assertEquals(productA.potential_qty, 0.0)
+        self.assertEqual(templateAB.potential_qty, 0.0)
+        self.assertEqual(productA.potential_qty, 0.0)
 
     def test_available_stock_multiple_location(self):
         uom_unit = self.env.ref("uom.product_uom_unit")
