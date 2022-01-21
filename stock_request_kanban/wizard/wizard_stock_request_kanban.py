@@ -13,12 +13,13 @@ class WizardStockRequestKanban(models.TransientModel):
     stock_request_id = fields.Many2one("stock.request", readonly=True)
 
     def barcode_ending(self):
-        super().barcode_ending()
+        res = super().barcode_ending()
         self.stock_request_id = self.env["stock.request"].create(
             self.stock_request_kanban_values()
         )
         self.stock_request_ending()
         self.update_status()
+        return res
 
     def stock_request_ending(self):
         self.stock_request_id.action_confirm()
@@ -28,11 +29,9 @@ class WizardStockRequestKanban(models.TransientModel):
             {
                 "status_state": 0,
                 "status": _(
-                    "Added kanban %s for product %s"
-                    % (
-                        self.stock_request_id.kanban_id.name,
-                        self.stock_request_id.product_id.display_name,
-                    )
+                    "Added kanban %(kanban)s for product %(product)s",
+                    kanban=self.stock_request_id.kanban_id.name,
+                    product=self.stock_request_id.product_id.display_name,
                 ),
             }
         )

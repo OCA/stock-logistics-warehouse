@@ -51,5 +51,6 @@ class WizardStockRequestOrderKanban(models.TransientModel):
         return
 
     def barcode_ending(self):
-        super().barcode_ending()
+        res = super().barcode_ending()
         self.order_id = self.stock_request_id.order_id
+        return res
