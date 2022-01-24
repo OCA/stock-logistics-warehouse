@@ -21,6 +21,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_move_line_stock_info](account_move_line_stock_info/) | 15.0.1.0.0 |  | Account Move Line Stock Info
 [procurement_auto_create_group](procurement_auto_create_group/) | 15.0.1.0.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
+[stock_available](stock_available/) | 15.0.1.0.0 |  | Stock available to promise
 [stock_demand_estimate](stock_demand_estimate/) | 15.0.1.0.0 |  | Allows to create demand estimates.
 [stock_helper](stock_helper/) | 15.0.1.0.0 |  | Add methods shared between various stock modules
 [stock_move_location](stock_move_location/) | 15.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
