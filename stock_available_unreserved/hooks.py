@@ -37,7 +37,6 @@ def add_field_unreserved_quantity(cr):
             """
             UPDATE stock_quant
             SET unreserved_quantity = quantity - reserved_quantity
-            WHERE reserved_quantity > 0.01
             """
         )
 
@@ -59,6 +58,6 @@ def add_field_contains_unreserved(cr):
         cr.execute(
             """
             UPDATE stock_quant
-            SET contains_unreserved = (reserved_quantity > 0.01);
+            SET contains_unreserved = (unreserved_quantity > 0.0);
             """
         )
