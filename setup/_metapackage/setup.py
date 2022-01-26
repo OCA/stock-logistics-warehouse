@@ -47,6 +47,8 @@ setuptools.setup(
         'odoo14-addon-stock_orderpoint_manual_procurement',
         'odoo14-addon-stock_orderpoint_manual_procurement_uom',
         'odoo14-addon-stock_orderpoint_move_link',
+        'odoo14-addon-stock_orderpoint_origin',
+        'odoo14-addon-stock_orderpoint_origin_mrp_link',
         'odoo14-addon-stock_orderpoint_purchase_link',
         'odoo14-addon-stock_orderpoint_route',
         'odoo14-addon-stock_orderpoint_uom',
