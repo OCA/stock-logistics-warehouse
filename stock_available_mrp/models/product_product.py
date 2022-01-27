@@ -61,11 +61,8 @@ class ProductProduct(models.Model):
             else:
                 # Find the lowest quantity we can make with the stock at hand
                 components_potential_qty = min(
-                    [
-                        component_qties[component.id][stock_available_mrp_based_on]
-                        / need
-                        for component, need in component_needs.items()
-                    ]
+                    component_qties[component.id][stock_available_mrp_based_on] / need
+                    for component, need in component_needs.items()
                 )
                 potential_qty = bom_id.product_qty * components_potential_qty
                 potential_qty = potential_qty > 0.0 and potential_qty or 0.0
