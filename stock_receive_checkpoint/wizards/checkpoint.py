@@ -29,7 +29,7 @@ class ReceptionCheckpoint(models.TransientModel):
     origin = fields.Char(related="purchase_line_id.order_id.origin")
     ordered_qty = fields.Float()
     received_date = fields.Date(string="Last received")
-    diff_qty = fields.Char()
+    diff_qty = fields.Float()
     received_qty = fields.Float()
     timing = fields.Char(help="Technical field to apply color in tree view")
 
@@ -71,7 +71,7 @@ class ReceptionCheckpoint(models.TransientModel):
         ).unlink()
         for line in lines:
             line_ids.append(self.env["reception.checkpoint"].create(lines[line]).id)
-        return line_ids
+        return self.browse(line_ids)
 
     @api.model
     def _add_computed_fields(self, lines):

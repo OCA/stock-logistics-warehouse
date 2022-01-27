@@ -29,7 +29,6 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
         "have been received to this date",
     )
     today = fields.Boolean(help="Check to apply today's date")
-    include_received = fields.Boolean()
 
     @api.model
     def default_get(self, field_lists):
@@ -58,22 +57,25 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
         purchases, name = self._get_purchases()
         moves = self._get_moves(purchases)
         date = datetime.strptime(self.date, DT).strftime("%d/%m/%Y")
-        line_ids = (
-            self.env["reception.checkpoint"]
-            .with_context(checkpoint_date=date)
-            ._create_checkpoint_moves(moves)
-        )
+        lines = self._get_checkpoint_lines(moves, date)
         return {
             "name": _("%s %s Reception Checkpoint" % (name, date)),
             "res_model": "reception.checkpoint",
             "view_mode": "tree",
             "context": "{'checkpoint_date': '%s'}" % self.date,
-            "domain": "[('id', 'in', %s)]" % line_ids,
+            "domain": "[('id', 'in', %s)]" % lines.ids,
             "view_id": self.env.ref(
                 "stock_receive_checkpoint.reception_checkpoint_tree_view"
             ).id,
             "type": "ir.actions.act_window",
         }
+
+    def _get_checkpoint_lines(self, moves, date):
+        return (
+            self.env["reception.checkpoint"]
+            .with_context(checkpoint_date=date)
+            ._create_checkpoint_moves(moves)
+        )
 
     def _get_purchases(self):
         self.ensure_one()
@@ -115,8 +117,6 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
             purch_line_ids.extend(purch.order_line.ids)
             picking_ids.extend(purch.picking_ids.ids)
         excluded_states = ["cancel", "done"]
-        if self.include_received:
-            excluded_states = ["cancel"]
         domain = self._get_moves_domain(picking_ids, excluded_states, picking_types)
         moves = self.env["stock.move"].search(domain)
         if not moves:
@@ -151,11 +151,11 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
                 ("picking_id", "in", picking_ids),
                 "|",
                 "&",
+                "&",
+                ("date", ">=", self.date),
                 ("date", "<=", self.date),
                 ("state", "=", "done"),
                 "&",
-                "&",
-                ("date_expected", ">=", self.date),
                 ("date_expected", "<=", self.date),
                 ("state", "not in", excluded_states),
             ]

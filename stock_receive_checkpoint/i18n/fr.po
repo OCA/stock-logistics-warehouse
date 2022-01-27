@@ -78,8 +78,8 @@ msgstr ""
 msgid "Extracted stock moves"
 msgstr ""
 "Critères d'extraction => \n"
-"Date égale au délai (mouvements non terminés) ou Date égale à la date de "
-"réception (mouvements terminés)"
+"Date inférieure ou égale au délai (mouvements de stocks non terminés) \n"
+"ou Date égale à la date de réception (mouvements de stocks terminés)"
 
 #. module: stock_receive_checkpoint
 #: view:reception.checkpoint.selection.wizard:stock_receive_checkpoint.reception_checkpoint_form
@@ -167,8 +167,7 @@ msgid ""
 "Select goods which should be received to this date or have been received to "
 "this date"
 msgstr ""
-"Sélectionne les marchandises qui devraient être reçues à cette date ou l'on "
-"étaient"
+"Sélectionne les marchandises qui devraient être reçues à cette date ou qui sont reçues à cette date"
 
 #. module: stock_receive_checkpoint
 #: model:ir.model,name:stock_receive_checkpoint.model_stock_move
