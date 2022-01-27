@@ -71,7 +71,7 @@ addon | version | maintainers | summary
 [stock_product_qty_by_packaging](stock_product_qty_by_packaging/) | 14.0.1.0.0 |  | Compute product quantity to pick by packaging
 [stock_pull_list](stock_pull_list/) | 14.0.1.1.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
 [stock_putaway_method](stock_putaway_method/) | 14.0.1.0.0 | [![asaunier](https://github.com/asaunier.png?size=30px)](https://github.com/asaunier) | Add the putaway strategy method back, removed from the stock module in Odoo 12
-[stock_putaway_product_template](stock_putaway_product_template/) | 14.0.1.0.0 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
+[stock_putaway_product_template](stock_putaway_product_template/) | 14.0.1.1.0 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 14.0.1.1.0 |  | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 14.0.1.0.6 |  | Internal request for stock
 [stock_request_analytic](stock_request_analytic/) | 14.0.1.0.1 |  | Internal request for stock
