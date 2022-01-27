@@ -33,6 +33,7 @@ setuptools.setup(
         'odoo14-addon-stock_inventory_preparation_filter_pos',
         'odoo14-addon-stock_location_bin_name',
         'odoo14-addon-stock_location_children',
+        'odoo14-addon-stock_location_empty',
         'odoo14-addon-stock_location_last_inventory_date',
         'odoo14-addon-stock_location_lockdown',
         'odoo14-addon-stock_location_position',
