@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2022-01-27 16:35+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,25 +18,21 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 
 #. module: stock_receive_checkpoint
+#: code:addons/stock_receive_checkpoint/wizards/checkpoint_select.py:63
+#, fuzzy, python-format
+#| msgid "Reception Checkpoint"
+msgid "%s %s Reception Checkpoint"
+msgstr "Point de contrôle réception"
+
+#. module: stock_receive_checkpoint
 #: view:reception.checkpoint.selection.wizard:stock_receive_checkpoint.reception_checkpoint_form
 msgid "Cancel"
 msgstr "Annuler"
 
 #. module: stock_receive_checkpoint
-#: view:stock.move:stock_receive_checkpoint.reception_checkpoint_tree
-msgid "Check"
-msgstr "Vérifier"
-
-#. module: stock_receive_checkpoint
 #: help:reception.checkpoint.selection.wizard,today:0
 msgid "Check to apply today's date"
-msgstr ""
-
-#. module: stock_receive_checkpoint
-#: code:addons/stock_receive_checkpoint/wizards/checkpoint.py:61
-#, python-format
-msgid "Checkpoint: %s Date '%s'"
-msgstr "Point de contrôle: %s Date '%s'"
+msgstr "Cocher pour appliquer la date du jour"
 
 #. module: stock_receive_checkpoint
 #: view:reception.checkpoint.selection.wizard:stock_receive_checkpoint.reception_checkpoint_form
@@ -44,31 +40,37 @@ msgid "Confirm"
 msgstr "Confirmer"
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_create_uid
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_create_uid
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_create_uid
+#: field:reception.checkpoint,create_uid:0
 #: field:reception.checkpoint.selection.wizard,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_create_date
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_create_date
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_create_date
+#: field:reception.checkpoint,create_date:0
 #: field:reception.checkpoint.selection.wizard,create_date:0
 msgid "Created on"
 msgstr ""
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_date
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_date
 #: field:reception.checkpoint.selection.wizard,date:0
 msgid "Date"
 msgstr "Date"
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_stock_move_diff_qty
-#: field:stock.move,diff_qty:0
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_diff_qty
+#: field:reception.checkpoint,diff_qty:0
 msgid "Diff qty"
 msgstr "Diff qté"
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_display_name
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_display_name
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_display_name
+#: field:reception.checkpoint,display_name:0
 #: field:reception.checkpoint.selection.wizard,display_name:0
 msgid "Display Name"
 msgstr ""
@@ -87,77 +89,136 @@ msgid "Fill this form to be redirected to goods to receive"
 msgstr "Remplissez ce formulaire afin de consulter les marchandises"
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_id
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_id
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_id
+#: field:reception.checkpoint,id:0
 #: field:reception.checkpoint.selection.wizard,id:0
 msgid "ID"
 msgstr ""
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_include_received
-#: field:reception.checkpoint.selection.wizard,include_received:0
-msgid "Include received"
-msgstr "Inclure tous les reçus"
-
-#. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard___last_update
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint___last_update
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard___last_update
+#: field:reception.checkpoint,__last_update:0
 #: field:reception.checkpoint.selection.wizard,__last_update:0
 msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_write_uid
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_write_uid
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_write_uid
+#: field:reception.checkpoint,write_uid:0
 #: field:reception.checkpoint.selection.wizard,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_write_date
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_write_date
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_write_date
+#: field:reception.checkpoint,write_date:0
 #: field:reception.checkpoint.selection.wizard,write_date:0
 msgid "Last Updated on"
 msgstr ""
 
 #. module: stock_receive_checkpoint
-#: code:addons/stock_receive_checkpoint/wizards/checkpoint.py:111
-#, python-format
-msgid "No data for this selection"
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_received_date
+#: field:reception.checkpoint,received_date:0
+#, fuzzy
+#| msgid "Include received"
+msgid "Last received"
+msgstr "Inclure tous les reçus"
+
+#. module: stock_receive_checkpoint
+#: code:addons/stock_receive_checkpoint/wizards/checkpoint_select.py:109
+#, fuzzy, python-format
+#| msgid "No data for this selection"
+msgid "No purchase data for this vendor"
 msgstr "Aucune données pour cette sélection"
 
 #. module: stock_receive_checkpoint
-#: view:stock.move:stock_receive_checkpoint.reception_checkpoint_tree
-msgid "Ordered Qty"
+#: code:addons/stock_receive_checkpoint/wizards/checkpoint_select.py:129
+#, python-format
+msgid "No stock moves for these purchases %s"
+msgstr "Pas  de mouvements de stock pour ces achats %s"
+
+#. module: stock_receive_checkpoint
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_purchase_line_id
+#: field:reception.checkpoint,purchase_line_id:0
+msgid "Order Line"
+msgstr ""
+
+#. module: stock_receive_checkpoint
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_order_id
+#: field:reception.checkpoint,order_id:0
+#, fuzzy
+#| msgid "Reference"
+msgid "Order Reference"
+msgstr "Reference"
+
+#. module: stock_receive_checkpoint
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_ordered_qty
+#: field:reception.checkpoint,ordered_qty:0
+#, fuzzy
+#| msgid "Ordered Qty"
+msgid "Ordered qty"
 msgstr "Qté cmdé"
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_purchase_ids
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_product_id
+#: field:reception.checkpoint,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: stock_receive_checkpoint
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_purch_line
+#: field:reception.checkpoint,purch_line:0
+#, fuzzy
+#| msgid "Purchases"
+msgid "Purch line"
+msgstr "Achats"
+
+#. module: stock_receive_checkpoint
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_purchase_ids
 #: field:reception.checkpoint.selection.wizard,purchase_ids:0
 msgid "Purchases"
 msgstr "Achats"
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_stock_move_ordered_qty
-#: field:stock.move,ordered_qty:0
-msgid "Quantity"
-msgstr "Quantité"
-
-#. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_stock_move_received_date
-#: field:stock.move,received_date:0
-msgid "Received date"
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_received_qty
+#: field:reception.checkpoint,received_qty:0
+#, fuzzy
+#| msgid "Received date"
+msgid "Received qty"
 msgstr "Date de réception"
 
 #. module: stock_receive_checkpoint
 #: model:ir.actions.act_window,name:stock_receive_checkpoint.reception_checkpoint_wiz_act
-#: model:ir.ui.menu,name:stock_receive_checkpoint.reception.checkpoint.selection.wizard_menu
+#: model:ir.ui.menu,name:stock_receive_checkpoint.reception_checkpoint_selection_wizard_menu
 msgid "Reception Checkpoint"
 msgstr "Point de contrôle réception"
 
 #. module: stock_receive_checkpoint
-#: view:stock.move:stock_receive_checkpoint.reception_checkpoint_tree
-msgid "Reference"
-msgstr "Reference"
+#: model:ir.model,name:stock_receive_checkpoint.model_reception_checkpoint
+#, fuzzy
+#| msgid "Reception Checkpoint"
+msgid "Reception checkpoint"
+msgstr "Point de contrôle réception"
 
 #. module: stock_receive_checkpoint
-#: model:ir.model,name:stock_receive_checkpoint.model_reception.checkpoint.selection.wizard
+#: help:reception.checkpoint,origin:0
+msgid ""
+"Reference of the document that generated this purchase order request; a "
+"sales order or an internal procurement request."
+msgstr ""
+
+#. module: stock_receive_checkpoint
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_date_planned
+#: field:reception.checkpoint,date_planned:0
+msgid "Scheduled Date"
+msgstr ""
+
+#. module: stock_receive_checkpoint
+#: model:ir.model,name:stock_receive_checkpoint.model_reception_checkpoint_selection_wizard
 msgid "Select data for reception checkpoint"
 msgstr "Sélectionne les données du point de contrôle réception"
 
@@ -167,48 +228,59 @@ msgid ""
 "Select goods which should be received to this date or have been received to "
 "this date"
 msgstr ""
-"Sélectionne les marchandises qui devraient être reçues à cette date ou qui sont reçues à cette date"
+"Sélectionne les marchandises qui devraient être reçues à cette date ou qui "
+"sont reçues à cette date"
 
 #. module: stock_receive_checkpoint
-#: model:ir.model,name:stock_receive_checkpoint.model_stock_move
-msgid "Stock Move"
-msgstr "Mouvement de stock"
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_origin
+#: field:reception.checkpoint,origin:0
+msgid "Source Document"
+msgstr ""
 
 #. module: stock_receive_checkpoint
-#: model:ir.actions.act_window,name:stock_receive_checkpoint.reception_checkpoint_act
-msgid "Stock Move Checkpoint"
-msgstr "Mouvement de stock du point de controle"
-
-#. module: stock_receive_checkpoint
-#: help:stock.move,timing:0
+#: help:reception.checkpoint,timing:0
 msgid "Technical field to apply color in tree view"
 msgstr ""
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_stock_move_timing
-#: field:stock.move,timing:0
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_timing
+#: field:reception.checkpoint,timing:0
 msgid "Timing"
 msgstr ""
 
 #. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_today
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_today
 #: field:reception.checkpoint.selection.wizard,today:0
 msgid "Today"
-msgstr ""
+msgstr "Aujourd'hui"
 
 #. module: stock_receive_checkpoint
-#: view:stock.move:stock_receive_checkpoint.reception_checkpoint_tree
-msgid "Unit of Measure"
-msgstr "Unité de mesure"
-
-#. module: stock_receive_checkpoint
-#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception.checkpoint.selection.wizard_partner_id
+#: model:ir.model.fields,field_description:stock_receive_checkpoint.field_reception_checkpoint_selection_wizard_partner_id
 #: field:reception.checkpoint.selection.wizard,partner_id:0
 msgid "Vendor"
 msgstr "Fournisseur"
 
 #. module: stock_receive_checkpoint
-#: code:addons/stock_receive_checkpoint/wizards/checkpoint.py:90
+#: code:addons/stock_receive_checkpoint/wizards/checkpoint_select.py:111
 #, python-format
 msgid "You must specify vendor or purchases"
 msgstr "Vous devez spécifier le fournisseur ou les commandes d'achat"
+
+#~ msgid "Check"
+#~ msgstr "Vérifier"
+
+#, python-format
+#~ msgid "Checkpoint: %s Date '%s'"
+#~ msgstr "Point de contrôle: %s Date '%s'"
+
+#~ msgid "Quantity"
+#~ msgstr "Quantité"
+
+#~ msgid "Stock Move"
+#~ msgstr "Mouvement de stock"
+
+#~ msgid "Stock Move Checkpoint"
+#~ msgstr "Mouvement de stock du point de controle"
+
+#~ msgid "Unit of Measure"
+#~ msgstr "Unité de mesure"

@@ -55,9 +55,10 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
     @api.multi
     def ui_select_moves(self):
         purchases, name = self._get_purchases()
-        moves = self._get_moves(purchases)
+        moves, domain = self._get_moves(purchases)
         date = datetime.strptime(self.date, DT).strftime("%d/%m/%Y")
         lines = self._get_checkpoint_lines(moves, date)
+        self._get_traceability(purchases, moves, domain, lines)
         return {
             "name": _("%s %s Reception Checkpoint" % (name, date)),
             "res_model": "reception.checkpoint",
@@ -69,6 +70,10 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
             ).id,
             "type": "ir.actions.act_window",
         }
+
+    def _get_traceability(self, purchases, moves, domain, lines):
+        """You may inherit to debug"""
+        pass
 
     def _get_checkpoint_lines(self, moves, date):
         return (
@@ -120,16 +125,11 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
         domain = self._get_moves_domain(picking_ids, excluded_states, picking_types)
         moves = self.env["stock.move"].search(domain)
         if not moves:
-            str_domain = str(domain).replace("'|'", "\n'|'").replace("'&'", "\n'&'")
             raise UserError(
-                "%s\n\n%s"
-                % (
-                    _("No stock moves for these purchases %s")
-                    % [x.name for x in purchases],
-                    str_domain,
-                )
+                _("No stock moves for these purchases %s")
+                % [x.name for x in purchases],
             )
-        return moves
+        return (moves, domain)
 
     @api.model
     def _get_picking_type_domain(self):
