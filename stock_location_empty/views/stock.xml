@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<odoo>
+
+  <record id="view_location_tree3" model="ir.ui.view">
+    <field name="name">stock.location.tree</field>
+    <field name="model">stock.location</field>
+    <field name="priority" eval="2" />
+    <field name="arch" type="xml">
+      <tree
+                string="Stock Location"
+                decoration-info="usage=='view'"
+                decoration-danger="usage=='internal'"
+            >
+        <field name="display_name" />
+        <field name="usage" />
+        <field name="company_id" groups="base.group_multi_company" />
+        <field name="stock_amount" />
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_location_search_inherit" model="ir.ui.view">
+    <field name="name">stock.location.search.inherit</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_search" />
+    <field name="arch" type="xml">
+      <field name="location_id" position="after">
+        <separator />
+        <filter
+                    name="stock_amount"
+                    string="Empty"
+                    domain="[('stock_amount', '=', 0)]"
+                    help="Empty stock"
+                />
+      </field>
+    </field>
+  </record>
+
+  <record id="view_location_search_empty_2" model="ir.ui.view">
+    <field name="name">stock.location.search2</field>
+    <field name="model">stock.location</field>
+    <field name="arch" type="xml">
+      <search string="Stock Locations">
+        <field name="name" string="Stock Locations" />
+        <field name="location_id" string="Parent Location" />
+        <filter
+                    name="in_location"
+                    string="Internal"
+                    domain="[('usage', '=', 'internal')]"
+                    help="Internal Locations"
+                />
+        <filter
+                    name="customer"
+                    string="Customer"
+                    domain="[('usage', '=', 'customer')]"
+                    help="Customer Locations"
+                />
+        <filter
+                    name="supplier"
+                    string="Vendor"
+                    domain="[('usage', '=', 'supplier')]"
+                    help="Vendor Locations"
+                />
+        <separator />
+        <filter
+                    name="stock_amount"
+                    string="Empty"
+                    domain="[('stock_amount', '=', 0)]"
+                    help="Empty stock"
+                />
+      </search>
+    </field>
+  </record>
+
+  <record id="action_stock_location_empty" model="ir.actions.act_window">
+    <field name="name">Locations</field>
+    <field name="res_model">stock.location</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_id" ref="view_location_tree3" />
+    <field name="search_view_id" ref="view_location_search_empty_2" />
+    <field
+            name="context"
+        >{'search_default_in_location':1, 'search_default_stock_amount': 1}</field>
+  </record>
+
+    <record model="ir.ui.menu" id="stock_location_empty_menu">
+        <field name="name">Empty stock</field>
+        <field name="parent_id" ref="stock.menu_stock_inventory_control" />
+        <field name="action" ref="action_stock_location_empty" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>
