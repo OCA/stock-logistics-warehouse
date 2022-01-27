@@ -17,27 +17,38 @@ class StockInventory(models.Model):
         vals = super()._get_inventory_lines_values()
 
         if self.include_exhausted:
-            domain = [("qty_available", "=", 0), ("type", "=", "product")]
-            product_ids = [data.get("product_id") for data in vals]
-            domain.append(("id", "not in", product_ids))
+            non_exhausted_set = {(l["product_id"], l["location_id"]) for l in vals}
             if self.product_ids:
-                domain.append(("id", "in", self.product_ids.ids))
-            exhausted_products = self.env["product.product"].search(domain)
-            vals_dic = {
-                "inventory_id": self.id,
-                "company_id": self.company_id.id,
-                "product_qty": 0,
-                "theoretical_qty": 0,
-            }
-            vals_dic["location_id"] = (
-                self.env["stock.warehouse"]
-                .search([("company_id", "=", vals_dic["company_id"])], limit=1)
-                .lot_stock_id.id
-            )
-            for product in exhausted_products:
-                vals_dic["product_id"] = product.id
-                vals_dic["product_uom_id"] = product.uom_id.id
-
-                vals.append(vals_dic.copy())
-
+                product_ids = self.product_ids.ids
+            else:
+                product_ids = self.env["product.product"].search_read(
+                    [
+                        "|",
+                        ("company_id", "=", self.company_id.id),
+                        ("company_id", "=", False),
+                        ("type", "=", "product"),
+                        ("active", "=", True),
+                    ],
+                    ["id"],
+                )
+                product_ids = [p["id"] for p in product_ids]
+            if self.location_ids:
+                location_ids = self.location_ids.ids
+            else:
+                location_ids = (
+                    self.env["stock.warehouse"]
+                    .search([("company_id", "=", self.company_id.id)])
+                    .lot_stock_id.ids
+                )
+            for product in product_ids:
+                for location_id in location_ids:
+                    if (product, location_id) not in non_exhausted_set:
+                        vals.append(
+                            {
+                                "inventory_id": self.id,
+                                "product_id": product,
+                                "location_id": location_id,
+                                "theoretical_qty": 0,
+                            }
+                        )
         return vals
