@@ -57,6 +57,10 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
     def ui_select_moves(self):
         purchases, name = self._get_purchases()
         moves, domain = self._get_moves(purchases)
+        vendor = False
+        vendors = list(set([x.partner_id.commercial_partner_id.id for x in purchases]))
+        if vendors and len(vendors) == 1:
+            vendor = vendors[0]
         date = datetime.strptime(self.date, DT).strftime("%d/%m/%Y")
         lines = self._get_checkpoint_lines(moves, date)
         self._get_traceability(purchases, moves, domain, lines)
@@ -64,7 +68,7 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
             "name": _("%s %s Reception Checkpoint" % (name, date)),
             "res_model": "reception.checkpoint",
             "view_mode": "tree",
-            "context": "{'checkpoint_date': '%s'}" % self.date,
+            "context": "{'checkpoint_date': '%s', 'vendor': %s}" % (self.date, vendor),
             "domain": "[('id', 'in', %s)]" % lines.ids,
             "view_id": self.env.ref(
                 "stock_receive_checkpoint.reception_checkpoint_tree_view"

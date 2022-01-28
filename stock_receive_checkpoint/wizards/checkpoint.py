@@ -17,7 +17,7 @@ class ReceptionCheckpoint(models.TransientModel):
     _description = "Reception checkpoint"
 
     product_id = fields.Many2one(comodel_name="product.product", string="Product")
-    # product_qty = fields.Float()
+    partner_ref = fields.Char(compute="_compute_partner_ref")
     date_planned = fields.Date(related="purchase_line_id.date_planned")
     purch_line = fields.Integer()
     purchase_line_id = fields.Many2one(
@@ -32,6 +32,21 @@ class ReceptionCheckpoint(models.TransientModel):
     diff_qty = fields.Float()
     received_qty = fields.Float()
     timing = fields.Char(help="Technical field to apply color in tree view")
+
+    @api.depends("product_id")
+    def _compute_partner_ref(self):
+        def get_ref(name):
+            if name[:1] == "[":
+                pos = name.find("]")
+                if pos:
+                    return name[1:pos]
+
+        vendor = self.env.context.get("vendor")
+        for rec in self:
+            if rec.product_id and vendor:
+                ref_vdr = rec.product_id.with_context(partner_id=vendor).name_get()
+                if ref_vdr:
+                    rec.partner_ref = get_ref(ref_vdr[0][1])
 
     @api.model
     def _create_checkpoint_moves(self, moves):
