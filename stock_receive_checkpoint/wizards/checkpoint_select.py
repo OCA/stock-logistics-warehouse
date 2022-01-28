@@ -29,6 +29,7 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
         "have been received to this date",
     )
     today = fields.Boolean(help="Check to apply today's date")
+    debug = fields.Boolean(help="Display computing details")
 
     @api.model
     def default_get(self, field_lists):
@@ -70,10 +71,6 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
             ).id,
             "type": "ir.actions.act_window",
         }
-
-    def _get_traceability(self, purchases, moves, domain, lines):
-        """You may inherit to debug"""
-        pass
 
     def _get_checkpoint_lines(self, moves, date):
         return (
@@ -171,3 +168,46 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
     def _partner_onchange(self):
         if self.partner_id:
             self.purchase_ids = False
+
+    def _get_traceability(self, purchases, moves, domain, lines):
+        """You may inherit to debug"""
+        if not self.debug:
+            return
+        str_domain = str(domain).replace("'|'", "\n'|'").replace("'&'", "\n'&'")
+        str_move = "\n".join(
+            [
+                str(
+                    {
+                        "product": x.product_id.default_code,
+                        "delay": x.date_expected,
+                        "qty": x.product_uom_qty,
+                        "state": x.state,
+                        "date": x.date,
+                    }
+                )
+                for x in moves
+            ]
+        )
+        str_line = "\n".join(
+            [
+                str(
+                    {
+                        "product": x.product_id.default_code,
+                        "delay": x.date_planned,
+                        "ordered_qty": x.ordered_qty,
+                        "diff_qty": x.diff_qty,
+                        "received_qty": x.received_qty,
+                    }
+                )
+                for x in lines
+            ]
+        )
+        raise UserError(
+            "%s\n\nStock moves domain\n%s\n\n\nStock moves: \n%s\n\n\nResulting Lines\n%s"
+            % (
+                "Stock moves for these purchases %s" % [x.name for x in purchases],
+                str_domain,
+                str_move,
+                str_line,
+            )
+        )
