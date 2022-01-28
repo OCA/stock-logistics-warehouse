@@ -3,10 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.osv.expression import TRUE_LEAF
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestPotentialQty(SavepointCase):
+class TestPotentialQty(TransactionCase):
     """Test the potential quantity on a product with a multi-line BoM"""
 
     @classmethod
@@ -69,38 +69,15 @@ class TestPotentialQty(SavepointCase):
             for i in [cls.tmpl, cls.var1, cls.var2, cls.product_wo_bom]
         }
 
-    def _create_inventory(self, location_id, company_id):
-        inventory = self.env["stock.inventory"].create(
-            {
-                "name": "Test inventory",
-                "company_id": company_id,
-                "location_ids": [(4, location_id)],
-                "start_empty": True,
-            }
-        )
-        inventory.action_start()
-        return inventory
-
-    def _create_inventory_line(self, inventory_id, product_id, location_id, qty):
-        self.env["stock.inventory.line"].create(
-            {
-                "inventory_id": inventory_id,
-                "product_id": product_id,
-                "location_id": location_id,
-                "product_qty": qty,
-            }
-        )
-
-    def create_inventory(self, product_id, qty, location_id=None, company_id=None):
-        if location_id is None:
-            location_id = self.wh_main.lot_stock_id.id
-
-        if company_id is None:
-            company_id = self.main_company.id
-
-        inventory = self._create_inventory(location_id, company_id)
-        self._create_inventory_line(inventory.id, product_id, location_id, qty)
-        inventory._action_done()
+    def create_inventory(self, product, qty, location=None, company_id=None):
+        if location is None:
+            location = self.wh_main.lot_stock_id
+        if company_id:
+            self.env["stock.quant"].with_company(company_id)._update_available_quantity(
+                product, location, qty
+            )
+        else:
+            self.env["stock.quant"]._update_available_quantity(product, location, qty)
 
     def create_simple_bom(self, product, sub_product, product_qty=1, sub_product_qty=1):
         bom = self.bom_model.create(
@@ -131,26 +108,26 @@ class TestPotentialQty(SavepointCase):
             msg,
         )
 
-    def test_potential_qty_no_bom(self):
+    def test_01_potential_qty_no_bom(self):
         #  Check the potential when there's no BoM
         self.assertPotentialQty(
             self.product_wo_bom, 0.0, "The potential without a BoM should be 0"
         )
 
-    def test_potential_qty_no_bom_for_company(self):
+    def test_02_potential_qty_no_bom_for_company(self):
         chicago_id = self.ref("stock.res_company_1")
         # Receive 1000x Wood Panel owned by Chicago
         self.create_inventory(
-            product_id=self.env.ref("mrp.product_product_wood_panel").id,
+            product=self.env.ref("mrp.product_product_wood_panel"),
             qty=1000.0,
-            location_id=self.wh_ch.lot_stock_id.id,
+            location=self.wh_ch.lot_stock_id,
             company_id=chicago_id,
         )
         # Put Bolt owned by Chicago for 1000x the 1st variant in main WH
         self.create_inventory(
-            product_id=self.env.ref("mrp.product_product_computer_desk_bolt").id,
+            product=self.env.ref("mrp.product_product_computer_desk_bolt"),
             qty=1000.0,
-            location_id=self.wh_ch.lot_stock_id.id,
+            location=self.wh_ch.lot_stock_id,
             company_id=chicago_id,
         )
         self.assertPotentialQty(
@@ -193,15 +170,15 @@ class TestPotentialQty(SavepointCase):
         test_user.write({"company_ids": [(4, chicago_id)]})
         self.assertPotentialQty(test_user_tmpl, 250.0, "")
 
-    def test_potential_qty(self):
+    def test_03_potential_qty(self):
         for i in [self.tmpl, self.var1, self.var2]:
             self.assertPotentialQty(i, 0.0, "The potential quantity should start at 0")
 
         # Receive 1000x Wood Panel
         self.create_inventory(
-            product_id=self.env.ref("mrp.product_product_wood_panel").id,
+            product=self.env.ref("mrp.product_product_wood_panel"),
             qty=1000.0,
-            location_id=self.wh_main.lot_stock_id.id,
+            location=self.wh_main.lot_stock_id,
         )
         for i in [self.tmpl, self.var1, self.var2]:
             self.assertPotentialQty(
@@ -213,9 +190,9 @@ class TestPotentialQty(SavepointCase):
 
         # Receive enough bolt to make 1000x the 1st variant in main WH
         self.create_inventory(
-            product_id=self.env.ref("mrp.product_product_computer_desk_bolt").id,
+            product=self.env.ref("mrp.product_product_computer_desk_bolt"),
             qty=1000.0,
-            location_id=self.wh_main.lot_stock_id.id,
+            location=self.wh_main.lot_stock_id,
         )
         self.assertPotentialQty(
             self.tmpl, 250.0, "Wrong template potential after receiving components"
@@ -231,22 +208,18 @@ class TestPotentialQty(SavepointCase):
         )
 
         # Receive enough components to make 213 the 2nd variant at Chicago
-        inventory = self._create_inventory(
-            self.wh_ch.lot_stock_id.id, self.ref("stock.res_company_1")
-        )
-        self._create_inventory_line(
-            inventory.id,
-            self.ref("mrp.product_product_wood_panel"),
-            self.wh_ch.lot_stock_id.id,
+        self.create_inventory(
+            self.env.ref("mrp.product_product_wood_panel"),
             1000.0,
+            self.wh_ch.lot_stock_id,
+            self.ref("stock.res_company_1"),
         )
-        self._create_inventory_line(
-            inventory.id,
-            self.ref("stock_available_mrp.product_computer_desk_bolt_white"),
-            self.wh_ch.lot_stock_id.id,
+        self.create_inventory(
+            self.env.ref("stock_available_mrp.product_computer_desk_bolt_white"),
             852.0,
+            self.wh_ch.lot_stock_id,
+            self.ref("stock.res_company_1"),
         )
-        inventory._action_done()
         self.assertPotentialQty(
             self.tmpl.with_context(test=True),
             250.0,
@@ -284,7 +257,7 @@ class TestPotentialQty(SavepointCase):
             "Wrong potential quantity in Chicago WH location",
         )
 
-    def test_multi_unit_recursive_bom(self):
+    def test_04_multi_unit_recursive_bom(self):
         # Test multi-level and multi-units BOM
         uom_unit = self.env.ref("uom.product_uom_unit")
         uom_unit.rounding = 1.0
@@ -358,27 +331,27 @@ class TestPotentialQty(SavepointCase):
         # Need a least 5 units for one P1
         self.assertEqual(0, p1.potential_qty)
 
-        self.create_inventory(p3.id, 1)
+        self.create_inventory(p3, 1)
         p1.refresh()
         self.assertEqual(0, p1.potential_qty)
 
-        self.create_inventory(p3.id, 3)
+        self.create_inventory(p3, 3)
         p1.refresh()
         self.assertEqual(0, p1.potential_qty)
 
-        self.create_inventory(p3.id, 5)
+        self.create_inventory(p3, 5)
         p1.refresh()
         self.assertEqual(1.0, p1.potential_qty)
 
-        self.create_inventory(p3.id, 6)
+        self.create_inventory(p3, 6)
         p1.refresh()
-        self.assertEqual(1.0, p1.potential_qty)
+        self.assertEqual(3.0, p1.potential_qty)
 
-        self.create_inventory(p3.id, 10)
+        self.create_inventory(p3, 10)
         p1.refresh()
-        self.assertEqual(2.0, p1.potential_qty)
+        self.assertEqual(5.0, p1.potential_qty)
 
-    def test_potential_qty_list(self):
+    def test_05_potential_qty_list(self):
         # Try to highlight a bug when _get_potential_qty is called on
         # a recordset with multiple products
         # Recursive compute is not working
@@ -394,7 +367,7 @@ class TestPotentialQty(SavepointCase):
         # P2 need one P3
         self.create_simple_bom(p2, p3)
 
-        self.create_inventory(p3.id, 3)
+        self.create_inventory(p3, 3)
 
         self.product_model.invalidate_cache()
 

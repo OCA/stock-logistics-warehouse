@@ -13,7 +13,8 @@ class ProductProduct(models.Model):
 
     @api.depends("virtual_available", "bom_ids", "bom_ids.product_qty")
     def _compute_available_quantities(self):
-        super()._compute_available_quantities()
+        res = super()._compute_available_quantities()
+        return res
 
     def _compute_available_quantities_dict(self):
         res, stock_dict = super()._compute_available_quantities_dict()

@@ -4,6 +4,7 @@
 * Laurent Mignon <laurent.mignon@acsone.eu>
 * Cédric Pigeon <cedric.pigeon@acsone.eu>
 * Florian da Costa <florian.dacosta@akretion.com>
+* Joan Mateu <joan.mateu@forgeflow.com>
 
 * `Tecnativa <https://www.tecnativa.com>`_:
 
