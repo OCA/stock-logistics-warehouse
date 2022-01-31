@@ -58,7 +58,8 @@ class StockRequestOrder(models.Model):
             raise ValidationError(
                 _("Analytic type (analytic_type) not present in the context")
             )
-        action = self.env.ref(MAP_ACTIONS[analytic_type]).read()[0]
+        xmlid = MAP_ACTIONS[analytic_type]
+        action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
         records = self.mapped(MAP_FIELDS[analytic_type])
         if len(records) > 1:
             action["domain"] = [("id", "in", records.ids)]
