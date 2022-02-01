@@ -16,7 +16,8 @@ class AccountAnalyticAccount(models.Model):
 
     def action_view_stock_request(self):
         self.ensure_one()
-        action = self.env.ref("stock_request.action_stock_request_form").read()[0]
+        xmlid = "stock_request.action_stock_request_form"
+        action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
         requests = self.mapped("stock_request_ids")
         if len(requests) > 1:
             action["domain"] = [("id", "in", requests.ids)]
