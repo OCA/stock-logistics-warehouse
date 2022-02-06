@@ -157,7 +157,6 @@ msgid "Move location Wizard"
 msgstr ""
 
 #. module: stock_move_location
-#: code:addons/stock_move_location/wizard/stock_move_location_line.py:72
 #: code:addons/stock_move_location/wizard/stock_move_location_line.py:76
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
