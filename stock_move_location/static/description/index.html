@@ -373,19 +373,32 @@ another and move only selected quants.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#usage" id="id1">Usage</a></li>
-<li><a class="reference internal" href="#known-issues-roadmap" id="id2">Known issues / Roadmap</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="id3">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="id4">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="id5">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="id6">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="id7">Maintainers</a></li>
+<li><a class="reference internal" href="#configuration" id="id1">Configuration</a></li>
+<li><a class="reference internal" href="#usage" id="id2">Usage</a></li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="id3">Known issues / Roadmap</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="id4">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="id5">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="id6">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="id7">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="id8">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="configuration">
+<h1><a class="toc-backref" href="#id1">Configuration</a></h1>
+<p>Go to <em>Inventory &gt; Configuration &gt; Warehouse Management &gt; Operation Types</em> and make
+following adjustments as necessary on the operation types.</p>
+<ul class="simple">
+<li>Select <em>Show Move On Hand Stock</em> to show the ‘Move On Hand’ button on the operation
+type in the inventory overview.</li>
+<li>Select <em>Suggest Available Qty</em> to make the default move quantity of the lines in the
+move location wizard the available quantity (non-reserved quantity) instead of the
+max quantity (quantity on hand).</li>
+</ul>
+</div>
 <div class="section" id="usage">
-<h1><a class="toc-backref" href="#id1">Usage</a></h1>
+<h1><a class="toc-backref" href="#id2">Usage</a></h1>
 <ul class="simple">
 <li>A new menu item Stock &gt; Move from location… opens a wizard
 where 2 location can be specified.</li>
@@ -418,7 +431,7 @@ Use barcode interface to scan a location and create an empty picking. Then use
 the fill with stock button.</p>
 </div>
 <div class="section" id="known-issues-roadmap">
-<h1><a class="toc-backref" href="#id2">Known issues / Roadmap</a></h1>
+<h1><a class="toc-backref" href="#id3">Known issues / Roadmap</a></h1>
 <p>Change the current implementation (suggested by Denis Roussel from ACSONE):</p>
 <ul class="simple">
 <li>A new parameter on stock picking types : ‘Product Change Location’ (with a little help).</li>
@@ -428,7 +441,7 @@ the fill with stock button.</p>
 </ul>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#id3">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#id4">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
@@ -436,9 +449,9 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#id4">Credits</a></h1>
+<h1><a class="toc-backref" href="#id5">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#id5">Authors</a></h2>
+<h2><a class="toc-backref" href="#id6">Authors</a></h2>
 <ul class="simple">
 <li>Julius Network Solutions</li>
 <li>BCIM</li>
@@ -446,7 +459,7 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#id6">Contributors</a></h2>
+<h2><a class="toc-backref" href="#id7">Contributors</a></h2>
 <ul class="simple">
 <li>Mathieu Vatel &lt;<a class="reference external" href="mailto:mathieu&#64;julius.fr">mathieu&#64;julius.fr</a>&gt;</li>
 <li>Mykhailo Panarin &lt;<a class="reference external" href="mailto:m.panarin&#64;mobilunity.com">m.panarin&#64;mobilunity.com</a>&gt;</li>
@@ -456,10 +469,12 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <li>Lois Rilo &lt;<a class="reference external" href="mailto:lois.rilo&#64;eficent.com">lois.rilo&#64;eficent.com</a>&gt;</li>
 <li>Jacques-Etienne Baudoux &lt;<a class="reference external" href="mailto:je&#64;bcim.be">je&#64;bcim.be</a>&gt;</li>
 <li>Iryna Vyshnevska &lt;<a class="reference external" href="mailto:i.vyshnevska&#64;mobilunity.com">i.vyshnevska&#64;mobilunity.com</a>&gt;</li>
+<li>Takahiro Yabe &lt;<a class="reference external" href="mailto:yabe&#64;quartile.co">yabe&#64;quartile.co</a>&gt;</li>
+<li>Yoshi Tashiro &lt;<a class="reference external" href="mailto:tashiro&#64;quartile.co">tashiro&#64;quartile.co</a>&gt;</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#id7">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#id8">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
