@@ -52,8 +52,13 @@ class TestMoveLocation(TestsCommon):
         """Can't move more than exists."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.onchange_origin_location()
+        line = wizard.stock_move_location_line_ids[0]
+        self.assertEqual(line.move_quantity, line.max_quantity)
         with self.assertRaises(ValidationError):
-            wizard.stock_move_location_line_ids[0].move_quantity += 1
+            line.move_quantity += 1
+        wizard.picking_type_id.suggest_available_qty = True
+        wizard.onchange_picking_type_id()
+        self.assertEqual(line.move_quantity, line.available_quantity)
 
     def test_move_location_wizard_ignore_reserved(self):
         """Can't move more than exists."""

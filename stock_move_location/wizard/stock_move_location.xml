@@ -31,7 +31,7 @@
           </group>
           <group name="lines">
             <field name="stock_move_location_line_ids" nolabel="1" widget="one2many_list" mode="tree,kanban">
-              <tree string="Inventory Details" editable="bottom" decoration-info="move_quantity != max_quantity" decoration-danger="(move_quantity &lt; 0) or (move_quantity > max_quantity)" create="0">
+              <tree string="Inventory Details" editable="bottom" decoration-info="move_quantity &lt;= available_quantity" decoration-warning="move_quantity > available_quantity" decoration-danger="(move_quantity &lt; 0) or (move_quantity > max_quantity)" create="0">
                   <field name="product_id"  domain="[('type','=','product')]"/>
                   <field name="product_uom_id" string="UoM" groups="uom.group_uom"/>
                   <field name="origin_location_id" readonly="1" force_save="1"/>
@@ -39,6 +39,7 @@
                   <field name="lot_id" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"  groups="stock.group_production_lot" options="{'no_create': True}"/>
                   <field name="move_quantity"/>
                   <field name="custom" invisible="1" />
+                  <field name="available_quantity" attrs="{'readonly': [('custom', '!=', True)]}" force_save="1"/>
                   <field name="max_quantity" attrs="{'readonly': [('custom', '!=', True)]}" force_save="1"/>
               </tree>
               <kanban class="o_kanban_mobile">

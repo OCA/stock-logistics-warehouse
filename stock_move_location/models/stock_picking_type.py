@@ -11,6 +11,10 @@ class StockPickingType(models.Model):
         help="Show a button 'Move On Hand' in the Inventory Dashboard "
              "to initiate the process to move the products in stock "
              "at the origin location.")
+    suggest_available_qty = fields.Boolean(
+        help="If selected, move location wizard should default the available"
+        "(non-reserved) quantities for the transfer instead of the quantities on hand."
+    )
 
     def action_move_location(self):
         action = self.env.ref(
