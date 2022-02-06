@@ -28,6 +28,11 @@ msgid "Apply putaway strategy for moving products"
 msgstr "Aplicar estrategia de traslado para los movimientos de producto"
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__available_quantity
+msgid "Available Quantity"
+msgstr ""
+
+#. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Cancel"
 msgstr "Cancelar"
@@ -91,6 +96,13 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_move_location
+#: model:ir.model.fields,help:stock_move_location.field_stock_picking_type__suggest_available_qty
+msgid ""
+"If selected, move location wizard should default the available(non-reserved) "
+"quantities for the transfer instead of the quantities on hand."
+msgstr ""
+
+#. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Immediate Transfer"
 msgstr "Transferencia Inmediata"
@@ -152,6 +164,7 @@ msgstr "Asistente para mover desde ubicación"
 
 #. module: stock_move_location
 #: code:addons/stock_move_location/wizard/stock_move_location_line.py:72
+#: code:addons/stock_move_location/wizard/stock_move_location_line.py:76
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
 msgstr "La cantidad movida no puede superar la cantidad máxima o ser negativo"
@@ -234,6 +247,11 @@ msgstr ""
 #: model:ir.model,name:stock_move_location.model_stock_move
 msgid "Stock Move"
 msgstr "Movimiento de existencias"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__suggest_available_qty
+msgid "Suggest Available Qty"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_picking
