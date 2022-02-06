@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 {
     "name": "Move Stock Location",
-    "version": "12.0.2.1.0",
+    "version": "12.0.2.2.0",
     "author": "Julius Network Solutions, "
               "BCIM,"
               "Camptocamp,"
