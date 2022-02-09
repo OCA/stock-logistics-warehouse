@@ -70,7 +70,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
                 raise ValidationError(_("Quantity must be positive."))
             if not item.orderpoint_id:
                 raise ValidationError(_("No reordering rule found!"))
-            values = item.orderpoint_id._prepare_procurement_values(item.qty)
+            values = item.orderpoint_id._prepare_procurement_values()
             values["date_planned"] = fields.Datetime.to_string(
                 fields.Date.from_string(item.date_planned)
             )
