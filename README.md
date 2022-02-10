@@ -77,6 +77,7 @@ addon | version | maintainers | summary
 [stock_request_analytic](stock_request_analytic/) | 14.0.1.0.2 |  | Internal request for stock
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add Stock Requests to the Inventory App
 [stock_request_purchase](stock_request_purchase/) | 14.0.1.0.0 |  | Internal request for stock
+[stock_request_submit](stock_request_submit/) | 14.0.1.0.0 |  | Add submit state on Stock Requests
 [stock_request_tier_validation](stock_request_tier_validation/) | 14.0.1.0.0 |  | Extends the functionality of Stock Requests to support a tier validation process.
 [stock_reserve_rule](stock_reserve_rule/) | 14.0.1.1.0 |  | Configure reservation rules by location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 14.0.1.0.0 |  | Allows to search for picking from supplierinfo code
