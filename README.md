@@ -7,7 +7,7 @@
 
 # stock-logistics-warehouse
 
-TODO: add repo description.
+TODO: add repo description, yessir.
 
 <!-- /!\ do not modify below this line -->
 
