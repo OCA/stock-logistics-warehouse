@@ -30,3 +30,14 @@ class TestStockPullList(TestPullListCommon):
         expected = 50 + 70
         self.assertEqual(line.raw_demand_qty, expected)
         self.assertEqual(line.needed_qty, expected)
+
+    def test_03_no_needed_qty(self):
+        """Tests that no line is created in the wizard if there's no
+        quantity needed."""
+        quantity = 120.00
+        self._update_product_qty(self.product_a, quantity)
+        self._generate_moves()
+        wiz = self.wiz_obj.create({"consolidate_by_product": True})
+        wiz.action_prepare()
+        line = wiz.line_ids.filtered(lambda l: l.product_id == self.product_a)
+        self.assertEqual(len(line), 0)
