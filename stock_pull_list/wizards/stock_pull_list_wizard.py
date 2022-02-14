@@ -169,7 +169,9 @@ class PullListWizard(models.TransientModel):
         qty_assigned = {}
         for key, demand_qty in demand_dict.items():
             supply_qty = incoming_dict.get(key, 0.0)
-            lines.append((0, 0, self._prepare_line_values(key, demand_qty, supply_qty)))
+            line_data = self._prepare_line_values(key, demand_qty, supply_qty)
+            if line_data["needed_qty"] > 0.0:
+                lines.append((0, 0, line_data))
         self.update({"line_ids": lines})
         res = self._act_window_pull_list_step_2()
         return res
