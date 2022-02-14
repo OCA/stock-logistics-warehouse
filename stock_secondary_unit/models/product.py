@@ -33,7 +33,9 @@ class ProductTemplate(models.Model):
     _name = "product.template"
 
     stock_secondary_uom_id = fields.Many2one(
-        comodel_name="product.secondary.unit", string="Second unit for inventory"
+        comodel_name="product.secondary.unit",
+        string="Second unit for inventory",
+        copy=False,
     )
 
 
