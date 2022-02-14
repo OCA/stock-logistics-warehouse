@@ -14,6 +14,7 @@ class TestPullListCommon(TransactionCase):
         self.move_obj = self.env["stock.move"]
         self.picking_obj = self.env["stock.picking"]
         self.wiz_obj = self.env["stock.pull.list.wizard"]
+        self.stock_change_obj = self.env["stock.change.product.qty"]
 
         self.company = self.env.ref("base.main_company")
         self.warehouse = self.env.ref("stock.warehouse0")
@@ -79,3 +80,15 @@ class TestPullListCommon(TransactionCase):
         )
         picking.action_confirm()
         return picking
+
+    def _update_product_qty(self, product, quantity):
+        """Update Product quantity."""
+        change_product_qty = self.stock_change_obj.create(
+            {
+                "product_id": product.id,
+                "product_tmpl_id": product.product_tmpl_id.id,
+                "new_quantity": quantity,
+            }
+        )
+        change_product_qty.change_product_qty()
+        return change_product_qty
