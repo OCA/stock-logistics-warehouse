@@ -18,9 +18,7 @@ class StockInventoryIncludeExhaustedTest(TransactionCase):
         # We need this to know how many product with no stock we have on our
         # database
         self.quantity_out_of_stock = len(
-            self.env["product.product"].search(
-                [("qty_available", "=", 0), ("type", "=", "product")]
-            )
+            self.env["product.product"].search([("type", "=", "product")])
         )
 
         self.user = self.res_users_model.create(
@@ -48,6 +46,11 @@ class StockInventoryIncludeExhaustedTest(TransactionCase):
             }
         )
 
+        self.quantity_out_of_stock_by_product = len(
+            self.env["product.product"].search(
+                [("id", "=", self.product1.id), ("type", "=", "product")]
+            )
+        )
         self.location = self.location_model.create(
             {"name": "Inventory tests 1", "usage": "internal"}
         )
@@ -55,21 +58,26 @@ class StockInventoryIncludeExhaustedTest(TransactionCase):
             {"name": "Inventory tests 2", "usage": "internal"}
         )
 
-    def _create_inventory_all_products(self, name, location, include_exhausted):
-        inventory = self.inventory_model.create(
-            {
-                "name": name,
-                "location_ids": [(4, location.id)],
-                "include_exhausted": include_exhausted,
-            }
-        )
+    def _create_inventory_all_products(
+        self, name, include_exhausted, location=False, product=False
+    ):
+        vals = {
+            "name": name,
+            "include_exhausted": include_exhausted,
+        }
+        if location:
+            vals["location_ids"] = [(4, location.id)]
+        if product:
+            vals["product_ids"] = [(4, product.id)]
+
+        inventory = self.inventory_model.create(vals)
         return inventory
 
     def test_not_including_exhausted(self):
         """Check if products with no stock are not included into the inventory
         if the including exhausted option is disabled."""
         inventory_not_inc = self._create_inventory_all_products(
-            "not_included", self.location, False
+            "not_included", False, self.location
         )
         inventory_not_inc.action_start()
         inventory_not_inc.action_validate()
@@ -83,8 +91,8 @@ class StockInventoryIncludeExhaustedTest(TransactionCase):
             # The products with no stock don't have a location,
             # that's why search the non-stocked in all locations
             "included",
-            self.location,
             True,
+            location=self.location,
         )
 
         inventory_inc.action_start()
@@ -93,5 +101,36 @@ class StockInventoryIncludeExhaustedTest(TransactionCase):
         self.assertEqual(
             len(lines),
             self.quantity_out_of_stock + 2,
+            "The products with no stock are not included",
+        )
+
+    def test_not_including_exhausted_with_product(self):
+        """Check if products with no stock are not included into the inventory
+        if the including exhausted option is disabled."""
+        inventory_not_inc = self._create_inventory_all_products(
+            "not_included", False, product=self.product1
+        )
+        inventory_not_inc.action_start()
+        inventory_not_inc.action_validate()
+        lines = inventory_not_inc.line_ids
+        self.assertEqual(len(lines), 0, "Not all expected products are included")
+
+    def test_including_exhausted_with_product(self):
+        """Check if products with no stock are included into the inventory
+        if the including exhausted option is enabled."""
+        inventory_inc = self._create_inventory_all_products(
+            # The products with no stock don't have a location,
+            # that's why search the non-stocked in all locations
+            "included",
+            True,
+            product=self.product1,
+        )
+
+        inventory_inc.action_start()
+        inventory_inc.action_validate()
+        lines = inventory_inc.line_ids
+        self.assertEqual(
+            len(lines),
+            self.quantity_out_of_stock_by_product,
             "The products with no stock are not included",
         )
