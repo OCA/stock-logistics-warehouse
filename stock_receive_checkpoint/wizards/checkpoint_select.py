@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
+import time
 
 from openerp import models, api, fields, _
 from openerp.exceptions import Warning as UserError
@@ -55,17 +56,24 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
 
     @api.multi
     def ui_select_moves(self):
+        start_time = time.time()
         purchases, name = self._get_purchases()
         moves, domain = self._get_moves(purchases)
         vendor = False
-        vendors = list(set([x.partner_id.commercial_partner_id.id for x in purchases]))
-        if vendors and len(vendors) == 1:
-            vendor = vendors[0]
+        if not self.purchase_ids:
+            vendor = purchases[0].partner_id.commercial_partner_id.id
+        else:
+            vendors = list(
+                set([x.partner_id.commercial_partner_id.id for x in purchases])
+            )
+            if vendors and len(vendors) == 1:
+                vendor = vendors[0]
         date = datetime.strptime(self.date, DT).strftime("%d/%m/%Y")
         lines = self._get_checkpoint_lines(moves, date)
         self._get_traceability(purchases, moves, domain, lines)
+        seconds = round(time.time() - start_time, 1)
         return {
-            "name": _("%s %s Reception Checkpoint" % (name, date)),
+            "name": _("%s %s Reception Checkpoint (%s s)" % (name, date, seconds)),
             "res_model": "reception.checkpoint",
             "view_mode": "tree",
             "context": "{'checkpoint_date': '%s', 'vendor': %s}" % (self.date, vendor),
@@ -73,6 +81,7 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
             "view_id": self.env.ref(
                 "stock_receive_checkpoint.reception_checkpoint_tree_view"
             ).id,
+            "limit": 200,
             "type": "ir.actions.act_window",
         }
 
@@ -101,9 +110,9 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
                     (
                         "state",
                         "not in",
-                        ("draft", "sent", "bid", "confirmed", "done", "cancel"),
+                        ("draft", "sent", "bid", "confirmed", "cancel"),
                     ),
-                ]
+                ],
             )
             name = self.partner_id.name
             if not purchases:
@@ -187,6 +196,7 @@ class ReceptionCheckpointSelectionWizard(models.TransientModel):
                         "qty": x.product_uom_qty,
                         "state": x.state,
                         "date": x.date,
+                        "id": x.id,
                     }
                 )
                 for x in moves

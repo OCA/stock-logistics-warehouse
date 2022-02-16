@@ -50,8 +50,6 @@ class ReceptionCheckpoint(models.TransientModel):
 
     @api.model
     def _create_checkpoint_moves(self, moves):
-        date = self.env.context.get("checkpoint_date") or fields.Date.today()
-
         def init_dict(mfield, ttype):
             if mfield not in pline:
                 if ttype == int:
@@ -61,6 +59,7 @@ class ReceptionCheckpoint(models.TransientModel):
 
         lines = defaultdict(dict)
         line_ids = []
+        uid = self.env.user.id
         for move in moves:
             pline = lines[move.purchase_line_id]
             pline.update(
@@ -72,6 +71,7 @@ class ReceptionCheckpoint(models.TransientModel):
                     or False,
                     "ordered_qty": move.purchase_line_id.product_qty,
                     "order_id": move.purchase_line_id.order_id.id,
+                    "write_uid": uid,
                 }
             )
             init_dict("received_qty", int)
@@ -84,8 +84,28 @@ class ReceptionCheckpoint(models.TransientModel):
         self.env["reception.checkpoint"].search(
             [("write_uid", "=", self.env.user.id)]
         ).unlink()
-        for line in lines:
-            line_ids.append(self.env["reception.checkpoint"].create(lines[line]).id)
+        vals = []
+        for line in lines.values():
+            vals.append(
+                (
+                    line["product_id"],
+                    line["purchase_line_id"],
+                    line["purch_line"],
+                    line["ordered_qty"],
+                    line["write_uid"],
+                )
+            )
+        query = (
+            """
+        INSERT INTO reception_checkpoint(product_id, purchase_line_id, purch_line, ordered_qty, write_uid)
+        VALUES %s
+        RETURNING id;
+        """
+            % vals
+        )
+        query = query.replace("[", "").replace("]", "")
+        self.env.cr.execute(query)
+        line_ids = [x[0] for x in self.env.cr.fetchall()]
         return self.browse(line_ids)
 
     @api.model
