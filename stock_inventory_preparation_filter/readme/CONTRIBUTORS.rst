@@ -4,5 +4,6 @@
   * Pedro M. Baeza
   * David Vidal
   * Sergio Teruel
+  * Carlos Roca
 
 * Xavier Jimenez <xavier.jimenez@qubiq.es>
