@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_variant_generate_stock_request_orders" model="ir.actions.server">
+        <field name="name">Request Stock</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_request.group_stock_request_user')),
+            (4, ref('stock_request.group_stock_request_manager'))]"
+        />
+        <field name="model_id" ref="product.model_product_product" />
+        <field name="binding_model_id" ref="product.model_product_product" />
+        <field name="code">
+action = records.env['stock.request.order']._create_from_product_multiselect(records)
+        </field>
+    </record>
+    <record
+        id="action_template_generate_stock_request_orders"
+        model="ir.actions.server"
+    >
+        <field name="name">Request Stock</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_request.group_stock_request_user')),
+            (4, ref('stock_request.group_stock_request_manager'))]"
+        />
+        <field name="model_id" ref="product.model_product_template" />
+        <field name="binding_model_id" ref="product.model_product_template" />
+        <field name="code">
+action = records.env['stock.request.order']._create_from_product_multiselect(records)
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_request_user,stock request user,model_stock_request,group_stock_request_user,1,1,1,1
+access_stock_request_manager,stock request manager,model_stock_request,group_stock_request_manager,1,1,1,1
+access_stock_request_stock_user,stock.request stock user,model_stock_request,stock.group_stock_user,1,0,0,0
+access_stock_request_allocation_user,stock request allocation user,model_stock_request_allocation,group_stock_request_user,1,1,1,1
+access_stock_request_allocation_manager,stock request allocation manager,model_stock_request_allocation,group_stock_request_manager,1,1,1,1
+access_stock_request_allocation_stock_user,stock.request.allocation stock user,model_stock_request_allocation,base.group_user,1,0,0,0
+access_stock_location_user,stock.location.user,stock.model_stock_location,group_stock_request_user,1,0,0,0
+access_stock_location_request_manager,stock.location request manager,stock.model_stock_location,group_stock_request_manager,1,0,0,0
+access_stock_rule_request_manager,stock_rule_request_manager,stock.model_stock_rule,group_stock_request_manager,1,0,0,0
+access_stock_rule_user,stock_rule_user,stock.model_stock_rule,group_stock_request_user,1,0,0,0
+access_stock_request_order_user,stock request user,model_stock_request_order,group_stock_request_user,1,1,1,0
+access_stock_request_order_manager,stock request manager,model_stock_request_order,group_stock_request_manager,1,1,1,1
+access_stock_request_user_warehouse,stock request user Warehouse,stock.model_stock_warehouse,group_stock_request_user,1,0,0,0
+access_stock_request_manager_warehouse,stock request manager Warehouse,stock.model_stock_warehouse,group_stock_request_manager,1,0,0,0
+access_stock_request_user_stock_move,stock request user stock move,stock.model_stock_move,group_stock_request_user,1,0,0,0
+access_stock_request_manager_stock_move,stock request manager stock move,stock.model_stock_move,group_stock_request_manager,1,0,0,0

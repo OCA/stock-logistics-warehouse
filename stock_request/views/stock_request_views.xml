@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_stock_request_tree" model="ir.ui.view">
+        <field name="name">stock.request.tree</field>
+        <field name="model">stock.request</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-muted="state == 'cancel'"
+                decoration-bf="message_needaction==True"
+            >
+                <field name="message_needaction" invisible="1" />
+                <field name="name" />
+                <field name="warehouse_id" groups="stock.group_stock_multi_locations" />
+                <field name="location_id" groups="stock.group_stock_multi_locations" />
+                <field name="allow_virtual_location" invisible="1" />
+                <field
+                    name="route_id"
+                    options="{'no_create': True}"
+                    groups="stock.group_stock_multi_locations"
+                />
+                <field name="product_id" />
+                <field
+                    name="product_uom_id"
+                    options="{'no_open': True, 'no_create': True}"
+                    groups="uom.group_uom"
+                />
+                <field name="product_uom_qty" />
+                <field name="qty_in_progress" />
+                <field name="qty_done" />
+                <field name="qty_cancelled" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="stock_request_search">
+        <field name="name">stock.request.search</field>
+        <field name="model">stock.request</field>
+        <field name="arch" type="xml">
+            <search string="Stock Requests Search">
+                <field name="name" string="Stock Requests" />
+                <field name="warehouse_id" />
+                <field name="location_id" groups="stock.group_stock_multi_locations" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="product_id" />
+                <separator />
+                <filter
+                    name="current_requests"
+                    string="Current requests"
+                    domain="['|', ('expected_date', '>', (datetime.date.today() - relativedelta(months=1)).strftime('%Y-%m-01')), ('state', '!=', 'done')]"
+                />
+                <separator />
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]" />
+                <filter
+                    string="In Progress"
+                    name="open"
+                    domain="[('state','=','open')]"
+                />
+                <filter string="Finished" name="done" domain="[('state','=','done')]" />
+                <filter
+                    string="Cancelled"
+                    name="cancel"
+                    domain="[('state','=','cancel')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="warehouse"
+                        string="Warehouse"
+                        domain="[]"
+                        context="{'group_by':'warehouse_id'}"
+                    />
+                    <filter
+                        name="location"
+                        string="Location"
+                        domain="[]"
+                        context="{'group_by':'location_id'}"
+                    />
+                    <filter
+                        name="status"
+                        string="Status"
+                        domain="[]"
+                        context="{'group_by':'state'}"
+                    />
+                    <filter
+                        name="route"
+                        string="Route"
+                        domain="[]"
+                        context="{'group_by':'route_id'}"
+                    />
+                    <filter
+                        name="product"
+                        string="Product"
+                        domain="[]"
+                        context="{'group_by':'product_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_stock_request_form" model="ir.ui.view">
+        <field name="name">stock.request.form</field>
+        <field name="model">stock.request</field>
+        <field name="arch" type="xml">
+            <form string="Stock Requests">
+                <header>
+                    <button
+                        name="action_confirm"
+                        string="Confirm"
+                        type="object"
+                        attrs="{'invisible': [('state', 'not in', ['draft'])]}"
+                    />
+                    <button
+                        name="action_cancel"
+                        states="draft,open"
+                        type="object"
+                        string="Cancel"
+                    />
+                    <button
+                        name="action_draft"
+                        states="cancel"
+                        type="object"
+                        string="Set to Draft"
+                    />
+                    <button
+                        name="action_done"
+                        string="Done"
+                        type="object"
+                        attrs="{'invisible': [('state', 'not in', ['open'])]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="picking_ids" invisible="1" />
+                        <button
+                            type="object"
+                            name="action_view_transfer"
+                            class="oe_stat_button"
+                            icon="fa-truck"
+                            attrs="{'invisible': [('picking_count', '=', 0)]}"
+                            groups="stock.group_stock_user"
+                        >
+                            <field
+                                name="picking_count"
+                                widget="statinfo"
+                                string="Transfers"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Stock Request" />
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="order_id"
+                                readonly="1"
+                                groups="stock_request.group_stock_request_order"
+                            />
+                            <field name="product_id" />
+                            <field name="expected_date" />
+                            <field name="picking_policy" />
+                        </group>
+                        <group>
+                            <field
+                                name="warehouse_id"
+                                widget="selection"
+                                groups="stock.group_stock_multi_locations"
+                            />
+                            <field
+                                name="location_id"
+                                groups="stock.group_stock_multi_locations"
+                                domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"
+                            />
+                            <field
+                                name="route_id"
+                                options="{'no_create': True}"
+                                groups="stock.group_stock_multi_locations"
+                            />
+                            <field name="route_ids" invisible="1" />
+                            <field
+                                name="procurement_group_id"
+                                groups="stock.group_adv_location"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                options="{'no_create': True}"
+                            />
+                        </group>
+                        <group name="quantities">
+                            <label for="product_uom_qty" />
+                            <div>
+                                <field name="product_uom_qty" class="oe_inline" />
+                                <field
+                                    name="product_uom_id"
+                                    class="oe_inline"
+                                    options="{'no_open': True, 'no_create': True}"
+                                    groups="uom.group_uom"
+                                />
+                            </div>
+                            <field
+                                name="qty_in_progress"
+                                attrs="{'invisible': [('state', '=', 'draft')]}"
+                            />
+                            <field
+                                name="qty_done"
+                                attrs="{'invisible': [('state', '=', 'draft')]}"
+                            />
+                            <field
+                                name="qty_cancelled"
+                                attrs="{'invisible': [('state', '=', 'draft')]}"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <!--Empty notebook to inherit pages from other related modules-->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="action_stock_request_form" model="ir.actions.act_window">
+        <field name="name">Stock Requests</field>
+        <field name="res_model">stock.request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="context">{
+            'search_default_current_requests': 1,
+            'pivot_column_groupby': ['location_id'], 'pivot_row_groupby': ['product_id'], 'pivot_measures': ['product_uom_qty', 'qty_done'],
+            'search_default_draft': 1, 'search_default_open': 1
+        }</field>
+        <field name="view_id" ref="view_stock_request_tree" />
+        <field name="search_view_id" ref="stock_request_search" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            Click to add a Stock Request.
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.module.category" id="module_category_stock_request">
+        <field name="name">Stock Request</field>
+        <field name="parent_id" ref="base.module_category_inventory" />
+        <field name="sequence">10</field>
+    </record>
+    <record id="group_stock_request_user" model="res.groups">
+        <field name="name">Stock Request User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="category_id" ref="module_category_stock_request" />
+    </record>
+    <record id="group_stock_request_manager" model="res.groups">
+        <field name="name">Stock Request Manager</field>
+        <field
+            name="users"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+        <field
+            name="implied_ids"
+            eval="[(4, ref('stock_request.group_stock_request_user')),(4, ref('stock.group_stock_user'))]"
+        />
+        <field name="category_id" ref="module_category_stock_request" />
+    </record>
+    <record id="group_stock_request_order" model="res.groups">
+        <field name="name">Stock Request Order</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+    <record id="stock.group_stock_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_stock_request_user'))]" />
+    </record>
+    <data noupdate="1">
+        <record model="ir.rule" id="stock_picking_rule">
+            <field name="name">stock_request multi-company</field>
+            <field
+                name="model_id"
+                search="[('model','=','stock.request')]"
+                model="ir.model"
+            />
+            <field name="global" eval="True" />
+            <field
+                name="domain_force"
+            >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        </record>
+        <record id="stock_request_followers_rule" model="ir.rule">
+            <field name="name">Follow Stock Request</field>
+            <field name="model_id" ref="model_stock_request" />
+            <field name="groups" eval="[(6,0, [ref('group_stock_request_user')])]" />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="False" />
+            <field name="perm_create" eval="False" />
+            <field name="perm_unlink" eval="False" />
+            <field name="domain_force">['|',('requested_by','=',user.id),
+                                            ('message_partner_ids', 'in', [user.partner_id.id])]</field>
+        </record>
+        <record id="stock_request_rule" model="ir.rule">
+            <field name="name">Stock Request User</field>
+            <field name="model_id" ref="model_stock_request" />
+            <field name="groups" eval="[(6,0, [ref('group_stock_request_user')])]" />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+            <field name="domain_force">[('requested_by','=',user.id)]</field>
+        </record>
+        <record id="stock_request_manager_rule" model="ir.rule">
+            <field name="name">Stock Request Manager</field>
+            <field name="model_id" ref="model_stock_request" />
+            <field name="groups" eval="[(6,0, [ref('group_stock_request_manager')])]" />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+        </record>
+        <record model="ir.rule" id="stock_request_order_picking_rule">
+            <field name="name">stock_request_order multi-company</field>
+            <field name="model_id" ref="model_stock_request_order" />
+            <field name="global" eval="True" />
+            <field
+                name="domain_force"
+            >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        </record>
+        <record id="stock_request_order_followers_rule" model="ir.rule">
+            <field name="name">Follow Stock Request Order</field>
+            <field name="model_id" ref="model_stock_request_order" />
+            <field
+                name="groups"
+                eval="[(6,0, [ref('stock_request.group_stock_request_user')])]"
+            />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="False" />
+            <field name="perm_create" eval="False" />
+            <field name="perm_unlink" eval="False" />
+            <field name="domain_force">['|',('requested_by','=',user.id),
+                                            ('message_partner_ids', 'in', [user.partner_id.id])]</field>
+        </record>
+        <record id="stock_request_order_rule" model="ir.rule">
+            <field name="name">Stock Request Order User</field>
+            <field name="model_id" ref="model_stock_request_order" />
+            <field
+                name="groups"
+                eval="[(6,0, [ref('stock_request.group_stock_request_user')])]"
+            />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+            <field name="domain_force">[('requested_by','=',user.id)]</field>
+        </record>
+        <record id="stock_request_order_manager_rule" model="ir.rule">
+            <field name="name">Stock Request Manager</field>
+            <field name="model_id" ref="model_stock_request_order" />
+            <field
+                name="groups"
+                eval="[(6,0, [ref('stock_request.group_stock_request_manager')])]"
+            />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+        </record>
+    </data>
+</odoo>
