@@ -30,6 +30,7 @@ addon | version | maintainers | summary
 [stock_orderpoint_move_link](stock_orderpoint_move_link/) | 15.0.1.0.0 |  | Link Reordering rules to stock moves
 [stock_orderpoint_purchase_link](stock_orderpoint_purchase_link/) | 15.0.1.0.0 |  | Link Reordering rules to purchase orders
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 15.0.1.0.0 |  | Stock - Manual Quant Assignment
+[stock_request](stock_request/) | 15.0.1.0.0 |  | Internal request for stock
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 15.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds a calendar to the Warehouse
 
 [//]: # (end addons)
