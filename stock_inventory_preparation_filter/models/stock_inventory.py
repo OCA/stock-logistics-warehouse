@@ -67,3 +67,9 @@ class StockInventory(models.Model):
             if products:
                 inventory.product_ids = [(6, 0, products.ids)]
         return super()._action_start()
+
+    def _get_inventory_lines_values(self):
+        vals = super()._get_inventory_lines_values()
+        if self.filter == "lots":
+            vals = list(filter(lambda x: x["prod_lot_id"] in self.lot_ids.ids, vals))
+        return vals
