@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="stock_demand_estimate_view_tree" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.tree</field>
+        <field name="model">stock.demand.estimate</field>
+        <field
+            name="inherit_id"
+            ref="stock_demand_estimate.stock_demand_estimate_view_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="date_from" position="before">
+                <field name="date_range_id" />
+            </field>
+            <tree position="attributes">
+                <attribute name="editable">top</attribute>
+                <attribute name="create">false</attribute>
+            </tree>
+        </field>
+    </record>
+    <record id="stock_demand_estimate_view_pivot" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.pivot</field>
+        <field name="model">stock.demand.estimate</field>
+        <field
+            name="inherit_id"
+            ref="stock_demand_estimate.stock_demand_estimate_view_pivot"
+        />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="date_range_id" type="col" />
+            </field>
+        </field>
+    </record>
+    <record id="stock_demand_estimate_view_search" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.search</field>
+        <field name="model">stock.demand.estimate</field>
+        <field
+            name="inherit_id"
+            ref="stock_demand_estimate.stock_demand_estimate_view_search"
+        />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="date_range_id" />
+            </field>
+        </field>
+    </record>
+    <record
+        id="stock_demand_estimate.stock_demand_estimate_action"
+        model="ir.actions.act_window"
+    >
+        <field name="view_mode">tree,pivot</field>
+    </record>
+</odoo>
