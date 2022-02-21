@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [stock_available_mrp](stock_available_mrp/) | 15.0.1.0.0 |  | Consider the production potential is available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 15.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
 [stock_demand_estimate](stock_demand_estimate/) | 15.0.1.0.0 |  | Allows to create demand estimates.
+[stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 15.0.1.0.0 |  | Allows to create demand estimates.
 [stock_helper](stock_helper/) | 15.0.1.0.0 |  | Add methods shared between various stock modules
 [stock_move_location](stock_move_location/) | 15.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_orderpoint_move_link](stock_orderpoint_move_link/) | 15.0.1.0.0 |  | Link Reordering rules to stock moves
