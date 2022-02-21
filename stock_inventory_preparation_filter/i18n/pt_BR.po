@@ -32,6 +32,11 @@ msgid "Categories"
 msgstr "Categorias"
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "Exibir Nome"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr "Domínio"
@@ -41,6 +46,11 @@ msgstr "Domínio"
 #, python-format
 msgid "Filtered Products"
 msgstr "Produtos Filtrados"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__id
+msgid "ID"
+msgstr "ID"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -63,6 +73,11 @@ msgstr "Inventário"
 #, fuzzy
 msgid "Inventory of"
 msgstr "Inventário"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory____last_update
+msgid "Last Modified on"
+msgstr "Última Modificação em"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
@@ -90,20 +105,11 @@ msgstr "Lotes selecionados"
 #~ msgid "Created on"
 #~ msgstr "Criado em"
 
-#~ msgid "Display Name"
-#~ msgstr "Exibir Nome"
-
 #~ msgid "Empty list"
 #~ msgstr "Lista vazia"
 
-#~ msgid "ID"
-#~ msgstr "ID"
-
 #~ msgid "Inventory Line Empty"
 #~ msgstr "Linha Vazia do Inventário"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Última Modificação em"
 
 #~ msgid "Last Updated by"
 #~ msgstr "Última atualização por"

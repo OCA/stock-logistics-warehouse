@@ -31,6 +31,11 @@ msgid "Categories"
 msgstr "Kategórie"
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "Zobraziť meno"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr "Doména"
@@ -40,6 +45,11 @@ msgstr "Doména"
 #, python-format
 msgid "Filtered Products"
 msgstr "Vybrané produkty"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__id
+msgid "ID"
+msgstr "ID"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -66,6 +76,11 @@ msgid "Inventory of"
 msgstr "Inventúra"
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory____last_update
+msgid "Last Modified on"
+msgstr "Posledná modifikácia"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
 msgid "Lots"
 msgstr "Šarže"
@@ -87,15 +102,6 @@ msgstr "Vybrané šarže"
 
 #~ msgid "Created on"
 #~ msgstr "Vytvorené"
-
-#~ msgid "Display Name"
-#~ msgstr "Zobraziť meno"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Posledná modifikácia"
 
 #~ msgid "Last Updated by"
 #~ msgstr "Naposledy upravoval"

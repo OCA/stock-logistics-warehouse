@@ -31,6 +31,11 @@ msgid "Categories"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr ""
@@ -40,6 +45,11 @@ msgstr ""
 #, python-format
 msgid "Filtered Products"
 msgstr ""
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__id
+msgid "ID"
+msgstr "المعرف"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -63,6 +73,11 @@ msgid "Inventory of"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
 msgid "Lots"
 msgstr ""
@@ -84,15 +99,6 @@ msgstr ""
 
 #~ msgid "Created on"
 #~ msgstr "أنشئ في"
-
-#~ msgid "Display Name"
-#~ msgstr "اسم العرض"
-
-#~ msgid "ID"
-#~ msgstr "المعرف"
-
-#~ msgid "Last Modified on"
-#~ msgstr "آخر تعديل في"
 
 #~ msgid "Last Updated by"
 #~ msgstr "آخر تحديث بواسطة"

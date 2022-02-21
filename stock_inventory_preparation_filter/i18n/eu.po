@@ -30,6 +30,11 @@ msgid "Categories"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "Izena erakutsi"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr ""
@@ -39,6 +44,11 @@ msgstr ""
 #, python-format
 msgid "Filtered Products"
 msgstr ""
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__id
+msgid "ID"
+msgstr "ID"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -59,6 +69,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
 #: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
 msgid "Inventory of"
+msgstr ""
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
@@ -83,12 +98,6 @@ msgstr ""
 
 #~ msgid "Created on"
 #~ msgstr "Created on"
-
-#~ msgid "Display Name"
-#~ msgstr "Izena erakutsi"
-
-#~ msgid "ID"
-#~ msgstr "ID"
 
 #~ msgid "Last Updated by"
 #~ msgstr "Last Updated by"

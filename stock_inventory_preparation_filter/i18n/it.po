@@ -9,36 +9,47 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
-"PO-Revision-Date: 2018-02-27 11:37+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2023-10-13 10:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "All products"
-msgstr ""
+msgstr "Tutti i prodotti"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__categ_ids
 msgid "Categories"
-msgstr ""
+msgstr "Categorie"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
-msgstr ""
+msgstr "Dominio"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Filtered Products"
-msgstr ""
+msgstr "Prodotti filtrati"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__id
+msgid "ID"
+msgstr "ID"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -49,6 +60,11 @@ msgid ""
 "system won't propose anything.  You can also let the system propose for a "
 "single product / lot /... "
 msgstr ""
+"Se fai un inventario completo, puoi scegliere 'Tutti i prodotti' e "
+"l'inventario verrà precompilato con le quantità attuali.  Se lo fai solo per "
+"alcuni prodotti (es. Inventario a rotazione) Puoi scegliere  'Selezione "
+"manuale dei prodotti' e il sistema non proporrà niente.  Puoi anche far sì "
+"che il sistema proponga un singolo prodotto / lotto / ... "
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
@@ -58,26 +74,30 @@ msgstr "Inventario"
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
 #: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
-#, fuzzy
 msgid "Inventory of"
-msgstr "Inventario"
+msgstr "Inventario di"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
 msgid "Lots"
-msgstr ""
+msgstr "Lotti"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Categories"
-msgstr ""
+msgstr "Categorie selezionate"
 
 #. module: stock_inventory_preparation_filter
 #: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
 msgid "Selected Lots"
-msgstr ""
+msgstr "Lotti selezionati"
 
 #~ msgid "Created by"
 #~ msgstr "Creato da"
@@ -85,19 +105,10 @@ msgstr ""
 #~ msgid "Created on"
 #~ msgstr "Creato il"
 
-#~ msgid "Display Name"
-#~ msgstr "Nome da visualizzare"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
 #, fuzzy
 #~| msgid "Inventory"
 #~ msgid "Inventory Line Empty"
 #~ msgstr "Inventario"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Ultima modifica il"
 
 #~ msgid "Last Updated by"
 #~ msgstr "Ultimo aggiornamento di"
