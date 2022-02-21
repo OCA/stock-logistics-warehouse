@@ -75,3 +75,9 @@ class StockInventory(models.Model):
             domain = safe_eval(self.product_domain)
             products = Product.search(domain)
         return products
+
+    def _get_inventory_lines_values(self):
+        vals = super()._get_inventory_lines_values()
+        if self.filter == "lots":
+            vals = list(filter(lambda x: x["prod_lot_id"] in self.lot_ids.ids, vals))
+        return vals
