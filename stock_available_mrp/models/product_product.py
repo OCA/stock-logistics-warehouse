@@ -50,6 +50,7 @@ class ProductProduct(models.Model):
                 for p in component_products
             }
 
+        immediately_usable_qty = 0.0
         for product in product_with_bom:
             # Need by product (same product can be in many BOM lines/levels)
             bom_id = first(product.bom_ids)
@@ -77,9 +78,11 @@ class ProductProduct(models.Model):
                     bom_id.product_tmpl_id.uom_id,
                     rounding_method="DOWN",
                 )
+                immediately_usable_qty = (
+                    potential_qty if bom_id.type != "phantom" else 0
+                )
 
             res[product.id]["potential_qty"] = potential_qty
-            immediately_usable_qty = potential_qty if bom_id.type != "phantom" else 0
             res[product.id]["immediately_usable_qty"] += immediately_usable_qty
 
         return res, stock_dict
