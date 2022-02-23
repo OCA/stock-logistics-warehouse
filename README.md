@@ -30,6 +30,7 @@ addon | version | maintainers | summary
 [stock_move_location](stock_move_location/) | 15.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_orderpoint_move_link](stock_orderpoint_move_link/) | 15.0.1.0.0 |  | Link Reordering rules to stock moves
 [stock_orderpoint_purchase_link](stock_orderpoint_purchase_link/) | 15.0.1.0.0 |  | Link Reordering rules to purchase orders
+[stock_orderpoint_uom](stock_orderpoint_uom/) | 15.0.1.0.0 |  | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_packaging_calculator](stock_packaging_calculator/) | 15.0.1.0.0 |  | Compute product quantity to pick by packaging
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 15.0.1.0.0 |  | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 15.0.1.0.0 |  | Internal request for stock
