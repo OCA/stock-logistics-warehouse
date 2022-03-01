@@ -86,7 +86,7 @@ class ProductProduct(models.Model):
             bom_id = product.bom_id
             if not component_needs:
                 # The BoM has no line we can use
-                potential_qty = immediately_usable_qty = 0.0
+                potential_qty = 0.0
             else:
                 # Find the lowest quantity we can make with the stock at hand
                 components_potential_qty = min(
@@ -109,8 +109,7 @@ class ProductProduct(models.Model):
                 )
 
             res[product.id]["potential_qty"] = potential_qty
-            immediately_usable_qty = potential_qty if bom_id.type != "phantom" else 0
-            res[product.id]["immediately_usable_qty"] += immediately_usable_qty
+            res[product.id]["immediately_usable_qty"] = potential_qty
 
         return res, stock_dict
 
