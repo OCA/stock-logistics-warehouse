@@ -72,6 +72,7 @@ class ReceptionCheckpoint(models.TransientModel):
                     "ordered_qty": move.purchase_line_id.product_qty,
                     "order_id": move.purchase_line_id.order_id.id,
                     "write_uid": uid,
+                    "move": move,
                 }
             )
             init_dict("received_qty", int)
@@ -84,6 +85,13 @@ class ReceptionCheckpoint(models.TransientModel):
         self.env["reception.checkpoint"].search(
             [("write_uid", "=", self.env.user.id)]
         ).unlink()
+        query = self._prepare_create(lines)
+        query = query.replace("[", "").replace("]", "")
+        self.env.cr.execute(query)
+        line_ids = [x[0] for x in self.env.cr.fetchall()]
+        return self.browse(line_ids)
+
+    def _prepare_create(self, lines):
         vals = []
         for line in lines.values():
             vals.append(
@@ -103,10 +111,7 @@ class ReceptionCheckpoint(models.TransientModel):
         """
             % vals
         )
-        query = query.replace("[", "").replace("]", "")
-        self.env.cr.execute(query)
-        line_ids = [x[0] for x in self.env.cr.fetchall()]
-        return self.browse(line_ids)
+        return query
 
     @api.model
     def _add_computed_fields(self, lines):
