@@ -16,8 +16,11 @@ class StockQuant(models.Model):
             if record.location_id.block_stock_entrance:
                 raise ValidationError(
                     _(
-                        "The location %s is blocked and can "
-                        "not be used for moving the product %s"
+                        "The location %(location)s is blocked and can "
+                        "not be used for moving the product %(product)s"
                     )
-                    % (record.location_id.display_name, record.product_id.display_name)
+                    % {
+                        "location": record.location_id.display_name,
+                        "product": record.product_id.display_name,
+                    }
                 )
