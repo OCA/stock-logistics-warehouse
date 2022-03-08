@@ -1,8 +1,8 @@
 <odoo>
 
     <record id="cost_adjustment_detail_mrp_view_tree" model="ir.ui.view">
-        <field name="name">cost.adjustment.detail.mrp.tree</field>
-        <field name="model">cost.adjustment.detail</field>
+        <field name="name">stock.cost.adjustment.detail.mrp.tree</field>
+        <field name="model">stock.cost.adjustment.detail</field>
         <field name="arch" type="xml">
             <tree
                 string="Details"
@@ -48,8 +48,8 @@
         </field>
     </record>
     <record id="cost_adjustment_detail_view_search" model="ir.ui.view">
-        <field name="name">cost.adjustment.detail.view.search</field>
-        <field name="model">cost.adjustment.detail</field>
+        <field name="name">stock.cost.adjustment.detail.view.search</field>
+        <field name="model">stock.cost.adjustment.detail</field>
         <field name="arch" type="xml">
             <search string="Cost Adjustment Details">
                 <field name="bom_id" />

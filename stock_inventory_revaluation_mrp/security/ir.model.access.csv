@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_cost_adjustment_detail_user,cost.adjustment.detail user,model_cost_adjustment_detail,stock.group_stock_user,1,0,0,0
-access_cost_adjustment_detail_manager,cost.adjustment.detail manager,model_cost_adjustment_detail,stock.group_stock_manager,1,1,1,1
-access_cost_adjustment_qty_impact_line,cost.adjustment.qty.impact.line manager,model_cost_adjustment_qty_impact_line,stock.group_stock_manager,1,1,1,1
+access_cost_adjustment_detail_user,cost.adjustment.detail user,model_stock_cost_adjustment_detail,stock.group_stock_user,1,0,0,0
+access_cost_adjustment_detail_manager,cost.adjustment.detail manager,model_stock_cost_adjustment_detail,stock.group_stock_manager,1,1,1,1
+access_cost_adjustment_qty_impact_line,cost.adjustment.qty.impact.line manager,model_stock_cost_adjustment_qty_impact_line,stock.group_stock_manager,1,1,1,1

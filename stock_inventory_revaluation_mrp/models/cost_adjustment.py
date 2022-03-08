@@ -5,17 +5,17 @@ from odoo import _, api, fields, models
 
 
 class CostAdjustment(models.Model):
-    _inherit = "cost.adjustment"
+    _inherit = "stock.cost.adjustment"
 
     bom_impact_ids = fields.One2many(
-        "cost.adjustment.detail",
+        "stock.cost.adjustment.detail",
         "cost_adjustment_id",
         string="BoM Impact",
         copy=False,
         states={"done": [("readonly", True)]},
     )
     qty_impact_ids = fields.One2many(
-        "cost.adjustment.qty.impact.line",
+        "stock.cost.adjustment.qty.impact.line",
         "cost_adjustment_id",
         string="Stock Qty. Impact",
         copy=False,
@@ -30,7 +30,7 @@ class CostAdjustment(models.Model):
             "type": "ir.actions.act_window",
             "view_mode": "tree",
             "name": _("Cost Adjustment Detail"),
-            "res_model": "cost.adjustment.detail",
+            "res_model": "stock.cost.adjustment.detail",
             "context": {
                 "default_is_editable": False,
                 "default_cost_adjustment_id": self.id,
@@ -46,8 +46,8 @@ class CostAdjustment(models.Model):
 
     def action_open_cost_adjustment_details_qty(self):
         self.action_open_cost_adjustment_details()
-        cost_detail_obj = self.env["cost.adjustment.detail"]
-        qty_impact_obj = self.env["cost.adjustment.qty.impact.line"]
+        cost_detail_obj = self.env["stock.cost.adjustment.detail"]
+        qty_impact_obj = self.env["stock.cost.adjustment.qty.impact.line"]
         prod_detail_lines_bom = cost_detail_obj.search(
             [
                 ("cost_adjustment_id", "=", self.id),
@@ -100,7 +100,7 @@ class CostAdjustment(models.Model):
             "type": "ir.actions.act_window",
             "view_mode": "tree",
             "name": _("QTY On Hand Impact"),
-            "res_model": "cost.adjustment.qty.impact.line",
+            "res_model": "stock.cost.adjustment.qty.impact.line",
             "context": {
                 "default_is_editable": False,
                 "default_cost_adjustment_id": self.id,
@@ -115,7 +115,7 @@ class CostAdjustment(models.Model):
 
     def _populate_bom_impact_details(self, products):
         """
-        Populates BOM Impact lines (cost.adjustment.detail)
+        Populates BOM Impact lines (stock.cost.adjustment.detail)
         """
         if products:
             done_boms = self.bom_impact_ids.bom_id
@@ -161,8 +161,8 @@ class CostAdjustment(models.Model):
         return variants | template_variants
 
     def _create_cost_details(self, boms):
-        cost_detail_obj = self.env["cost.adjustment.detail"]
-        cost_line_obj = self.env["cost.adjustment.line"]
+        cost_detail_obj = self.env["stock.cost.adjustment.detail"]
+        cost_line_obj = self.env["stock.cost.adjustment.line"]
         for bom in boms.bom_line_ids:
 
             if not cost_detail_obj.search(

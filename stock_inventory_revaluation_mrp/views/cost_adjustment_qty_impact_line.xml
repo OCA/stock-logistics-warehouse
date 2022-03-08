@@ -1,8 +1,8 @@
 <odoo>
 
     <record id="cost_adjustment_qty_detail_mrp_view_tree" model="ir.ui.view">
-        <field name="name">cost.adjustment.qty.detail.mrp.tree</field>
-        <field name="model">cost.adjustment.qty.impact.line</field>
+        <field name="name">stock.cost.adjustment.qty.detail.mrp.tree</field>
+        <field name="model">stock.cost.adjustment.qty.impact.line</field>
         <field name="arch" type="xml">
             <tree
                 string="QTY on Hand Impact"
