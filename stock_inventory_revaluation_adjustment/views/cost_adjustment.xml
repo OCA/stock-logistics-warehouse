@@ -1,8 +1,8 @@
 <odoo>
 
     <record id="cost_adjustment_view_tree" model="ir.ui.view">
-        <field name="name">cost.adjustment.tree</field>
-        <field name="model">cost.adjustment</field>
+        <field name="name">stock.cost.adjustment.tree</field>
+        <field name="model">stock.cost.adjustment</field>
         <field name="arch" type="xml">
             <tree string="Cost Adjustment" sample="1">
                 <field name="date" />
@@ -25,8 +25,8 @@
     </record>
 
     <record id="cost_adjustment_view_kanban" model="ir.ui.view">
-        <field name="name">cost.adjustment.kanban</field>
-        <field name="model">cost.adjustment</field>
+        <field name="name">stock.cost.adjustment.kanban</field>
+        <field name="model">stock.cost.adjustment</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile" sample="1">
                 <field name="name" />
@@ -65,8 +65,8 @@
     </record>
 
     <record id="cost_adjustment_view_form" model="ir.ui.view">
-        <field name="name">cost.adjustment.form</field>
-        <field name="model">cost.adjustment</field>
+        <field name="name">stock.cost.adjustment.form</field>
+        <field name="model">stock.cost.adjustment</field>
         <field name="arch" type="xml">
             <form string="Cost Adjustment">
             <header>
@@ -167,8 +167,8 @@
     </record>
 
     <record id="cost_adjustment_view_search" model="ir.ui.view">
-        <field name="name">cost.adjustment.search</field>
-        <field name="model">cost.adjustment</field>
+        <field name="name">stock.cost.adjustment.search</field>
+        <field name="model">stock.cost.adjustment</field>
         <field name="arch" type="xml">
             <search string="Search Cost Adjustment">
                 <field name="name" string="Reference" />
@@ -217,7 +217,7 @@
     <record id="action_cost_adjustment" model="ir.actions.act_window">
         <field name="name">Cost Adjustments</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">cost.adjustment</field>
+        <field name="res_model">stock.cost.adjustment</field>
         <field name="view_mode">tree,kanban,form</field>
         <field name="view_id" ref="cost_adjustment_view_tree" />
         <field name="search_view_id" ref="cost_adjustment_view_search" />

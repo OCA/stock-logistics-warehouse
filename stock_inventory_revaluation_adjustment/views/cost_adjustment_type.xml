@@ -1,8 +1,8 @@
 <odoo>
 
     <record id="cost_adjustment_type_view_tree" model="ir.ui.view">
-        <field name="name">cost.adjustment.type.tree</field>
-        <field name="model">cost.adjustment.type</field>
+        <field name="name">stock.cost.adjustment.type.tree</field>
+        <field name="model">stock.cost.adjustment.type</field>
         <field name="arch" type="xml">
             <tree string="Cost Adjustment Type" sample="1">
                 <field name="name" />
@@ -13,8 +13,8 @@
     </record>
 
     <record id="cost_adjustment_type_view_form" model="ir.ui.view">
-        <field name="name">cost.adjustment.type.form</field>
-        <field name="model">cost.adjustment.type</field>
+        <field name="name">stock.cost.adjustment.type.form</field>
+        <field name="model">stock.cost.adjustment.type</field>
         <field name="arch" type="xml">
             <form string="Cost Adjustment Type">
             <sheet>
@@ -40,8 +40,8 @@
     </record>
 
     <record id="cost_adjustment_type_view_search" model="ir.ui.view">
-        <field name="name">cost.adjustment.type.search</field>
-        <field name="model">cost.adjustment.type</field>
+        <field name="name">stock.cost.adjustment.type.search</field>
+        <field name="model">stock.cost.adjustment.type</field>
         <field name="arch" type="xml">
             <search string="Search Cost Adjustment">
                 <field name="name" />
@@ -54,7 +54,7 @@
     <record id="action_cost_adjustment_type" model="ir.actions.act_window">
         <field name="name">Cost Adjustment Types</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">cost.adjustment.type</field>
+        <field name="res_model">stock.cost.adjustment.type</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="cost_adjustment_type_view_tree" />
         <field name="search_view_id" ref="cost_adjustment_type_view_search" />

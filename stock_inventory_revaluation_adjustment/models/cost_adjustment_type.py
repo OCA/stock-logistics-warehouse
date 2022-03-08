@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class CostAdjustmentType(models.Model):
-    _name = "cost.adjustment.type"
+    _name = "stock.cost.adjustment.type"
     _description = "Cost Adjustment Type"
     _order = "name"
 

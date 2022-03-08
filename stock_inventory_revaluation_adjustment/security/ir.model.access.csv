@@ -1,8 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_cost_adjustment_user,cost.adjustment user,model_cost_adjustment,stock.group_stock_user,1,1,1,0
-access_cost_adjustment_manager,cost.adjustment manager,model_cost_adjustment,stock.group_stock_manager,1,1,1,1
-access_cost_adjustment_line_user,cost.adjustment.line user,model_cost_adjustment_line,stock.group_stock_user,1,1,1,0
-access_cost_adjustment_line_manager,cost.adjustment.line manager,model_cost_adjustment_line,stock.group_stock_manager,1,1,1,1
-access_cost_adjustment_type_user,cost.adjustment.line user,model_cost_adjustment_type,stock.group_stock_user,1,0,0,0
-access_cost_adjustment_type_manager,cost.adjustment.line manager,model_cost_adjustment_type,stock.group_stock_manager,1,1,1,1
-access_add_multi_product_manager,add.multi.product manager,model_add_multi_product,stock.group_stock_manager,1,1,1,1
+access_cost_adjustment_user,cost.adjustment user,model_stock_cost_adjustment,stock.group_stock_user,1,1,1,0
+access_cost_adjustment_manager,cost.adjustment manager,model_stock_cost_adjustment,stock.group_stock_manager,1,1,1,1
+access_cost_adjustment_line_user,cost.adjustment.line user,model_stock_cost_adjustment_line,stock.group_stock_user,1,1,1,0
+access_cost_adjustment_line_manager,cost.adjustment.line manager,model_stock_cost_adjustment_line,stock.group_stock_manager,1,1,1,1
+access_cost_adjustment_type_user,cost.adjustment.line user,model_stock_cost_adjustment_type,stock.group_stock_user,1,0,0,0
+access_cost_adjustment_type_manager,cost.adjustment.line manager,model_stock_cost_adjustment_type,stock.group_stock_manager,1,1,1,1
+access_add_multi_product_manager,add.multi.product manager,model_stock_add_multi_product,stock.group_stock_manager,1,1,1,1

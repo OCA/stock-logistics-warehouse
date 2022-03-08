@@ -1,8 +1,8 @@
 <odoo>
 
     <record id="cost_adjustment_line_view_tree" model="ir.ui.view">
-        <field name="name">cost.adjustment.line.tree</field>
-        <field name="model">cost.adjustment.line</field>
+        <field name="name">stock.cost.adjustment.line.tree</field>
+        <field name="model">stock.cost.adjustment.line</field>
         <field name="arch" type="xml">
             <tree
                 default_order="product_id"
@@ -85,8 +85,8 @@
     </record>
 
     <record id="cost_adjustment_line_search" model="ir.ui.view">
-        <field name="name">cost.adjustment.line.search</field>
-        <field name="model">cost.adjustment.line</field>
+        <field name="name">stock.cost.adjustment.line.search</field>
+        <field name="model">stock.cost.adjustment.line</field>
         <field name="arch" type="xml">
             <search string="Search Cost Adjustment Lines">
                 <field name="product_id" />
@@ -119,8 +119,8 @@
         model="ir.actions.server"
     >
         <field name="name">Recompute Original Cost</field>
-        <field name="model_id" ref="model_cost_adjustment_line" />
-        <field name="binding_model_id" ref="model_cost_adjustment_line" />
+        <field name="model_id" ref="model_stock_cost_adjustment_line" />
+        <field name="binding_model_id" ref="model_stock_cost_adjustment_line" />
         <field name="state">code</field>
         <field name="code">
 if records:
@@ -133,8 +133,8 @@ if records:
         model="ir.actions.server"
     >
         <field name="name">Recompute On Hand Quantity</field>
-        <field name="model_id" ref="model_cost_adjustment_line" />
-        <field name="binding_model_id" ref="model_cost_adjustment_line" />
+        <field name="model_id" ref="model_stock_cost_adjustment_line" />
+        <field name="binding_model_id" ref="model_stock_cost_adjustment_line" />
         <field name="state">code</field>
         <field name="code">
 if records:
