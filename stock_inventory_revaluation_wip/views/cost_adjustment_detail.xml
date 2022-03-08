@@ -2,8 +2,8 @@
 <odoo>
 
     <record id="cost_adjustment_detail_mrp_view_tree_inherit" model="ir.ui.view">
-        <field name="name">cost.adjustment.detail.mrp.tree.inherit</field>
-        <field name="model">cost.adjustment.detail</field>
+        <field name="name">stock.cost.adjustment.detail.mrp.tree.inherit</field>
+        <field name="model">stock.cost.adjustment.detail</field>
         <field
             name="inherit_id"
             ref="stock_inventory_revaluation_mrp.cost_adjustment_detail_mrp_view_tree"

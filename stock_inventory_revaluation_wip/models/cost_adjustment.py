@@ -5,12 +5,12 @@ from odoo import models
 
 
 class CostAdjustment(models.Model):
-    _inherit = "cost.adjustment"
+    _inherit = "stock.cost.adjustment"
 
     def action_open_cost_adjustment_details(self):
         res = super().action_open_cost_adjustment_details()
         self.get_product_workcenter_operation(self.line_ids.product_id)
-        cost_detail_obj = self.env["cost.adjustment.detail"]
+        cost_detail_obj = self.env["stock.cost.adjustment.detail"]
 
         self._get_all_boms_details()
         self._create_all_operations_details()
@@ -40,13 +40,10 @@ class CostAdjustment(models.Model):
                 )
             parent_bom_detail.write({"product_cost": total})
 
-        res.update(
-            {
-                "view_id": self.env.ref(
-                    "stock_inventory_revaluation_wip.cost_adjustment_detail_mrp_view_tree_inherit"
-                ).id
-            }
+        view = self.env.ref(
+            "stock_inventory_revaluation_wip.cost_adjustment_detail_mrp_view_tree_inherit"
         )
+        res.update({"view_id": view.id})
         return res
 
     def get_product_workcenter_operation(self, products):
@@ -70,7 +67,7 @@ class CostAdjustment(models.Model):
 
     def _get_all_boms_details(self):
         for bom in (
-            self.env["cost.adjustment.detail"]
+            self.env["stock.cost.adjustment.detail"]
             .search([("cost_adjustment_id", "=", self.id)])
             .mapped("bom_id")
         ):
@@ -91,7 +88,7 @@ class CostAdjustment(models.Model):
 
     def _create_all_operations_details(self):
         for bom in (
-            self.env["cost.adjustment.detail"]
+            self.env["stock.cost.adjustment.detail"]
             .search([("cost_adjustment_id", "=", self.id)])
             .mapped("bom_id")
         ):
@@ -99,14 +96,14 @@ class CostAdjustment(models.Model):
                 for (
                     activity
                 ) in operation.workcenter_id.analytic_product_id.activity_cost_ids:
-                    if not self.env["cost.adjustment.detail"].search(
+                    if not self.env["stock.cost.adjustment.detail"].search(
                         [
                             ("cost_adjustment_id", "=", self.id),
                             ("bom_id", "=", bom.id),
                             ("product_id", "=", activity.product_id.id),
                         ]
                     ):
-                        self.env["cost.adjustment.detail"].create(
+                        self.env["stock.cost.adjustment.detail"].create(
                             {
                                 "product_id": activity.product_id.id,
                                 "cost_adjustment_id": self.id,
@@ -120,14 +117,14 @@ class CostAdjustment(models.Model):
 
     def _create_all_bom_details(self, bom):
         for bom_line in bom.bom_line_ids:
-            if not self.env["cost.adjustment.detail"].search(
+            if not self.env["stock.cost.adjustment.detail"].search(
                 [
                     ("cost_adjustment_id", "=", self.id),
                     ("bom_id", "=", bom_line.bom_id.id),
                     ("product_id", "=", bom_line.product_id.id),
                 ]
             ):
-                self.env["cost.adjustment.detail"].create(
+                self.env["stock.cost.adjustment.detail"].create(
                     {
                         "product_id": bom_line.product_id.id,
                         "cost_adjustment_id": self.id,
@@ -141,9 +138,9 @@ class CostAdjustment(models.Model):
                 self._get_all_boms_details()
 
     def _create_cost_details_workcenter(self, cost_drive, operation):
-        cost_line_obj = self.env["cost.adjustment.line"]
+        cost_line_obj = self.env["stock.cost.adjustment.line"]
         for cost in cost_drive.activity_cost_ids:
-            if not self.env["cost.adjustment.detail"].search(
+            if not self.env["stock.cost.adjustment.detail"].search(
                 [
                     ("bom_id", "=", operation.bom_id.id),
                     ("operation_id", "=", operation.id),
@@ -163,7 +160,7 @@ class CostAdjustment(models.Model):
                     if prod_line.product_id.id == cost.product_id.id
                     else cost.product_id.standard_price
                 )
-                self.env["cost.adjustment.detail"].create(
+                self.env["stock.cost.adjustment.detail"].create(
                     {
                         "product_id": cost.product_id.id,
                         "cost_adjustment_id": self.id,
@@ -177,14 +174,14 @@ class CostAdjustment(models.Model):
                     }
                 )
         for bom_line in operation.bom_id.bom_line_ids:
-            if not self.env["cost.adjustment.detail"].search(
+            if not self.env["stock.cost.adjustment.detail"].search(
                 [
                     ("cost_adjustment_id", "=", self.id),
                     ("bom_id", "=", operation.bom_id.id),
                     ("product_id", "=", bom_line.product_id.id),
                 ]
             ):
-                self.env["cost.adjustment.detail"].create(
+                self.env["stock.cost.adjustment.detail"].create(
                     {
                         "product_id": bom_line.product_id.id,
                         "cost_adjustment_id": self.id,
@@ -200,7 +197,7 @@ class CostAdjustment(models.Model):
         self.action_open_cost_adjustment_details_qty()
         res = super().action_post()
         wc_ids = (
-            self.env["cost.adjustment.detail"]
+            self.env["stock.cost.adjustment.detail"]
             .search([("cost_adjustment_id", "=", self.id)])
             .mapped("operation_id")
         )
@@ -208,7 +205,7 @@ class CostAdjustment(models.Model):
             wc.workcenter_id.analytic_product_id.sudo().onchange_for_standard_price()
 
         bom_ids = (
-            self.env["cost.adjustment.detail"]
+            self.env["stock.cost.adjustment.detail"]
             .search([("cost_adjustment_id", "=", self.id)])
             .mapped("bom_id")
         )
