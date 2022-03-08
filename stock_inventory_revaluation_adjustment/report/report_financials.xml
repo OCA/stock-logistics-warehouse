@@ -1,12 +1,12 @@
 <odoo>
     <record id="cost_adjustment_financial_report" model="ir.actions.report">
         <field name="name">Financial Report</field>
-        <field name="model">cost.adjustment.line</field>
+        <field name="model">stock.cost.adjustment.line</field>
         <field name="report_type">qweb-pdf</field>
         <field
             name="report_name"
         >product_cost_adjustment.report_cost_adjustment_financial</field>
-        <field name="binding_model_id" ref="model_cost_adjustment_line" />
+        <field name="binding_model_id" ref="model_stock_cost_adjustment_line" />
     </record>
 
     <template id="report_cost_adjustment_financial">

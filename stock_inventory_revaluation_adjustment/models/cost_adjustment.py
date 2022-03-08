@@ -9,7 +9,7 @@ from odoo.addons.base.models.ir_model import MODULE_UNINSTALL_FLAG
 
 
 class CostAdjustment(models.Model):
-    _name = "cost.adjustment"
+    _name = "stock.cost.adjustment"
     _description = "Cost Adjustment"
     _order = "date desc, id desc"
     _inherit = ["mail.thread", "mail.activity.mixin"]
@@ -33,7 +33,7 @@ class CostAdjustment(models.Model):
          which the cost adjustment has been validated.""",
     )
     type_id = fields.Many2one(
-        "cost.adjustment.type",
+        "stock.cost.adjustment.type",
         string="Type",
         required=True,
         states={"draft": [("readonly", False)]},
@@ -44,7 +44,7 @@ class CostAdjustment(models.Model):
         related="type_id.account_id",
     )
     line_ids = fields.One2many(
-        "cost.adjustment.line",
+        "stock.cost.adjustment.line",
         "cost_adjustment_id",
         string="Inventories",
         copy=False,
@@ -52,7 +52,6 @@ class CostAdjustment(models.Model):
         states={"done": [("readonly", True)]},
     )
     state = fields.Selection(
-        string="Status",
         selection=[
             ("draft", "Draft"),
             ("cancel", "Cancelled"),
@@ -96,8 +95,8 @@ class CostAdjustment(models.Model):
         if negative:
             raise UserError(
                 _(
-                    """You cannot set a negative product cost in a cost adjustment
-                     line:\n\t%s - cost: %s""",
+                    "You cannot set a negative product cost in a cost adjustment "
+                    "line:\n\t%s - cost: %s",
                     negative.product_id.display_name,
                     negative.product_cost,
                 )
@@ -182,14 +181,14 @@ class CostAdjustment(models.Model):
                 continue
             vals = {"state": "confirm", "date": fields.Datetime.now()}
             if not adjustment.line_ids and not adjustment.start_empty:
-                self.env["cost.adjustment.line"].create(
+                self.env["stock.cost.adjustment.line"].create(
                     adjustment._get_cost_adjustment_lines_values()
                 )
             adjustment.write(vals)
 
     def _get_cost_adjustment_lines_values(self):
         """Return the values of the lines to create for this cost adjustment.
-        :return: a list containing the `cost.adjustment.line` values to create
+        :return: a list containing the `stock.cost.adjustment.line` values to create
         :rtype: list
         """
         vals = []
@@ -220,7 +219,7 @@ class CostAdjustment(models.Model):
             "type": "ir.actions.act_window",
             "view_mode": "tree",
             "name": _("Cost Adjustment Lines"),
-            "res_model": "cost.adjustment.line",
+            "res_model": "stock.cost.adjustment.line",
             "context": ctx,
             "domain": [("cost_adjustment_id", "=", self.id)],
             "view_id": self.env.ref(
@@ -230,14 +229,13 @@ class CostAdjustment(models.Model):
         return action
 
     def unlink(self):
+        is_uninstall = self.env.context.get(MODULE_UNINSTALL_FLAG)
         for adjustment in self:
-            if adjustment.state not in ("draft", "cancel") and not self.env.context.get(
-                MODULE_UNINSTALL_FLAG, False
-            ):
+            if adjustment.state not in ("draft", "cancel") and not is_uninstall:
                 raise UserError(
                     _(
-                        """You can only delete a draft cost adjustment.
-                         If the cost adjustment is not done, you can cancel it."""
+                        "You can only delete a draft cost adjustment. "
+                        "If the cost adjustment is not done, you can cancel it."
                     )
                 )
         return super().unlink()

@@ -6,20 +6,15 @@ from odoo.exceptions import UserError
 
 
 class CostAdjustmentLine(models.Model):
-    _name = "cost.adjustment.line"
+    _name = "stock.cost.adjustment.line"
     _description = "Cost Adjustment Line"
     _order = "product_id, cost_adjustment_id"
-
-    def _get_qty(self):
-        for line in self:
-            if line.state not in ("posted"):
-                line.qty_on_hand = line.product_id.sudo().quantity_svl
 
     is_editable = fields.Boolean(
         string="Editable?", help="Technical field to restrict editing."
     )
     cost_adjustment_id = fields.Many2one(
-        "cost.adjustment",
+        "stock.cost.adjustment",
         string="Cost Adjustment",
         check_company=True,
         index=True,
@@ -68,7 +63,7 @@ class CostAdjustmentLine(models.Model):
         string="Currency",
         related="company_id.currency_id",
     )
-    state = fields.Selection(string="Status", related="cost_adjustment_id.state")
+    state = fields.Selection(related="cost_adjustment_id.state")
     cost_adjustment_date = fields.Datetime(
         string="Cost Adjustment Date",
         related="cost_adjustment_id.date",
@@ -162,8 +157,8 @@ class CostAdjustmentLine(models.Model):
             if existings:
                 raise UserError(
                     _(
-                        """There is already one cost adjustment line for this product,
-                         you should rather modify this one instead of creating a
-                         new one."""
+                        "There is already one cost adjustment line for this product, "
+                        "you should rather modify this one instead of creating a "
+                        "new one."
                     )
                 )

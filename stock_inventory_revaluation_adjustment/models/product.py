@@ -173,7 +173,7 @@ class ProductTemplate(models.Model):
             fiscal_pos=fiscal_pos
         )
         if self._context.get("cost_adjustment_type_id"):
-            type_id = self.env["cost.adjustment.type"].browse(
+            type_id = self.env["stock.cost.adjustment.type"].browse(
                 self._context.get("cost_adjustment_type_id")
             )
             accounts.update(
