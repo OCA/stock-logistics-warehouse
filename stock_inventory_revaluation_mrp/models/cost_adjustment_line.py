@@ -9,86 +9,102 @@ class CostAdjustmentLine(models.Model):
 
     mrp_production_ids = fields.Many2many(
         "mrp.production",
-        string="Manufacturing Orders",
+        string="Impacted MOs List",
         compute="_compute_set_productions_boms",
     )
     production_count = fields.Integer(
-        string="Open MO's", compute="_compute_set_productions_boms", readonly=False
+        string="Impacted MOs",
+        compute="_compute_set_productions_boms",
+        help="MOs this item is used on",
     )
     bom_ids = fields.Many2many(
-        "mrp.bom", string="BOMs", compute="_compute_set_productions_boms"
+        "mrp.bom", string="Impacted BOMs List", compute="_compute_set_productions_boms"
     )
     bom_count = fields.Integer(
-        string="BOM's", compute="_compute_set_productions_boms", readonly=False
+        string="Impacted BOMs",
+        compute="_compute_set_productions_boms",
+        help="Bills of Materials this item is used on",
     )
 
-    @api.depends("product_id", "state")
+    @api.depends("product_id")
     def _compute_set_productions_boms(self):
+        Production = self.env["mrp.production"]
+        BOM = self.env["mrp.bom"]
         for line in self:
-            if line.state not in ("posted"):
-                # Set MO's
-                if line.mrp_production_ids:
-                    line.mrp_production_ids = [(5,)]
-                productions = self.env["mrp.production"].search(
-                    [("state", "in", ["draft", "confirmed", "progress"])]
-                )
-                activity_rule = self.env["product.product"].search(
-                    [("activity_cost_ids.product_id", "=", line.product_id.id)]
-                )
+            product = line.product_id
+            if product:
+                # List MOs where Product is used as s raw material
+                productions1_domain = [
+                    ("state", "in", ["draft", "confirmed", "progress"]),
+                    ("move_raw_ids.product_id", "=", product.id),
+                ]
+                productions1 = Production.search(productions1_domain)
+                # List MOs with a Work Center using Product as a Cost Type
+                productions2_domain = [
+                    ("state", "in", ["draft", "confirmed", "progress"]),
+                    (
+                        "workorder_ids.workcenter_id.analytic_product_id",
+                        "=",
+                        product.id,
+                    ),
+                ]
+                productions2 = Production.search(productions2_domain)
 
-                for production in productions:
-                    components = production.move_raw_ids.mapped("product_id")
-                    for product in components:
-                        if line.product_id.id == product.id:
-                            line.mrp_production_ids = [(4, production.id)]
-                    workcenters = production.workorder_ids.mapped("workcenter_id")
-                    for work_product in workcenters:
-                        if (
-                            line.product_id.id == work_product.analytic_product_id.id
-                        ) or (activity_rule.id == work_product.analytic_product_id.id):
-                            line.mrp_production_ids = [(4, production.id)]
+                # List MOs with a Work Center using Product as a Cost Type Driver
+                productions3_domain = [
+                    ("state", "in", ["draft", "confirmed", "progress"]),
+                    (
+                        "workorder_ids.workcenter_id.analytic_product_id.activity_cost_ids",
+                        "=",
+                        product.id,
+                    ),
+                ]
+                productions3 = Production.search(productions3_domain)
 
-                # Set BOMs
-                if line.bom_ids:
-                    line.bom_ids = [(5,)]
-                bom_lines = self.env["mrp.bom.line"].search(
-                    [("product_id", "=", line.product_id.id)]
-                )
-                for bom_line in bom_lines:
-                    line.bom_ids = [(4, bom_line.bom_id.id)]
-                work_center_product_ids = []
-                work_center_product_ids.append(line.product_id.id)
-                if activity_rule:
-                    work_center_product_ids.append(activity_rule.id)
-                work_center_ids = (
-                    self.env["mrp.workcenter"]
-                    .search(
-                        [
-                            ("analytic_product_id", "in", work_center_product_ids),
-                        ]
-                    )
-                    .ids
-                )
-
-                mrp_bom_ids = self.env["mrp.bom"].search(
-                    [("operation_ids.workcenter_id", "in", work_center_ids)]
-                )
-
-                for bom in mrp_bom_ids:
-                    line.bom_ids = [(4, bom.id)]
+                line.mrp_production_ids = productions1 | productions2 | productions3
                 line.production_count = len(line.mrp_production_ids)
+
+                # FIXME: move to a module to remove MRP Analytic Dependency!
+                # List BOMs where Product is used as a raw material
+                boms1_domain = [("bom_line_ids.product_id", "=", product.id)]
+                boms1 = BOM.search(boms1_domain)
+                # List BOMs with a Workcenter using the Product as a Cost Type
+                boms2_domain = [
+                    (
+                        "operation_ids.workcenter_id.analytic_product_id",
+                        "=",
+                        product.id,
+                    ),
+                ]
+                boms2 = BOM.search(boms2_domain)
+                # List BOMs with a Workcenter using the Product as a Cost Type Driver
+                boms3_domain = [
+                    (
+                        "operation_ids.workcenter_id.analytic_product_id.activity_cost_ids",
+                        "=",
+                        product.id,
+                    ),
+                ]
+                boms3 = BOM.search(boms3_domain)
+
+                line.bom_ids = boms1 | boms2 | boms3
                 line.bom_count = len(line.bom_ids)
+            else:
+                line.mrp_production_ids = None
+                line.production_count = 0
+                line.bom_ids = None
+                line.bom_count = 0
 
     def action_view_production(self):
         self.ensure_one()
         action = self.env["ir.actions.actions"]._for_xml_id("mrp.mrp_production_action")
-        action["domain"] = [("id", "in", self.mapped("mrp_production_ids.id"))]
+        action["domain"] = [("id", "in", self.mrp_production_ids.ids)]
         action["context"] = dict(self._context, create=False)
         return action
 
     def action_view_bom(self):
         self.ensure_one()
         action = self.env["ir.actions.actions"]._for_xml_id("mrp.product_open_bom")
-        action["domain"] = [("id", "in", self.mapped("bom_ids.id"))]
+        action["domain"] = [("id", "in", self.bom_ids.ids)]
         action["context"] = dict(self._context, create=False)
         return action
