@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class CostAdjustmentDetail(models.Model):
-    _inherit = "cost.adjustment.detail"
+    _inherit = "stock.cost.adjustment.detail"
 
     operation_id = fields.Many2one(
         "mrp.routing.workcenter",
