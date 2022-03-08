@@ -1,0 +1,3 @@
+- Go to Inventory > Operations > Scrap
+- Create a scrap order and select Location.
+- It will only show locations that have stock on hand.

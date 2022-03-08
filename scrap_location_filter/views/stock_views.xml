@@ -1,0 +1,30 @@
+<odoo>
+    <!-- Copyright (C) 2021 Open Source Integrators
+         License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+    <record id="stock_scrap_form_view_inherit" model="ir.ui.view">
+        <field name="name">stock.scrap.form.inherit</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_id']" position="attributes">
+                <attribute
+                    name="context"
+                >{'product_id': product_id, 'lot_id': lot_id}</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_scrap_form_view_inherit_wiz" model="ir.ui.view">
+        <field name="name">stock.scrap.form.inherit.wiz</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view2" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_id']" position="attributes">
+                <attribute
+                    name="context"
+                >{'product_id': product_id, 'lot_id': lot_id}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
