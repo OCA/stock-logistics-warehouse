@@ -1,8 +1,8 @@
 <odoo>
 
     <record id="cost_adjustment_line_mrp_view_tree" model="ir.ui.view">
-        <field name="name">cost.adjustment.line.mrp.tree</field>
-        <field name="model">cost.adjustment.line</field>
+        <field name="name">stock.cost.adjustment.line.mrp.tree</field>
+        <field name="model">stock.cost.adjustment.line</field>
         <field
             name="inherit_id"
             ref="stock_inventory_revaluation_adjustment.cost_adjustment_line_view_tree"

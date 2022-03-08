@@ -5,12 +5,12 @@ from odoo import api, fields, models
 
 
 class CostAdjustmentDetail(models.Model):
-    _name = "cost.adjustment.detail"
+    _name = "stock.cost.adjustment.detail"
     _description = "Cost Adjustment Detail"
     _order = "cost_adjustment_id"
 
     cost_adjustment_id = fields.Many2one(
-        "cost.adjustment",
+        "stock.cost.adjustment",
         string="Cost Adjustment",
         check_company=True,
         index=True,

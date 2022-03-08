@@ -5,7 +5,7 @@ from odoo import api, fields, models
 
 
 class CostAdjustmentLine(models.Model):
-    _inherit = "cost.adjustment.line"
+    _inherit = "stock.cost.adjustment.line"
 
     mrp_production_ids = fields.Many2many(
         "mrp.production",

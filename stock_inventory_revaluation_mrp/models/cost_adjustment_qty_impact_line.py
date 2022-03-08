@@ -5,11 +5,11 @@ from odoo import api, fields, models
 
 
 class CostAdjustmentImpactLine(models.Model):
-    _name = "cost.adjustment.qty.impact.line"
+    _name = "stock.cost.adjustment.qty.impact.line"
     _description = "Cost Adjustment Impact Line"
 
     cost_adjustment_id = fields.Many2one(
-        "cost.adjustment",
+        "stock.cost.adjustment",
         string="Cost Adjustment",
     )
     product_id = fields.Many2one(
