@@ -8,6 +8,16 @@
             ref="stock_inventory_revaluation_adjustment.cost_adjustment_view_form"
         />
         <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_compute_impact"
+                    type="object"
+                    string="Compute Impact"
+                    class="oe_highlight"
+                    groups="stock.group_stock_user"
+                    states="confirm"
+                />
+            </xpath>
             <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
                 <button
                     name="action_open_cost_adjustment_details"

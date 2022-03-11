@@ -12,7 +12,7 @@
     "depends": [
         "stock_inventory_revaluation_adjustment",
         "mrp_account",
-        "mrp_analytic_cost",
+        "mrp_account_analytic_wip",
     ],
     "data": [
         "security/ir.model.access.csv",
