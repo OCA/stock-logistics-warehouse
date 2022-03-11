@@ -2,7 +2,7 @@
 <templates id="add_multiple_products_cost_view" xml:space="preserve">
     <t t-extend="ListView.buttons">
         <t t-jquery="div.o_list_buttons" t-operation='append'>
-            <t t-if="widget.modelName == 'cost.adjustment.line'">
+            <t t-if="widget.modelName == 'stock.cost.adjustment.line'">
                 <button
                     type="button"
                     class="add_multi_product_adjustment btn btn-primary"

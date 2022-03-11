@@ -16,7 +16,7 @@ odoo.define("stock_inventory_revaluation_adjustment.ListView", function (require
                 {
                     name: "Products",
                     type: "ir.actions.act_window",
-                    res_model: "add.multi.product",
+                    res_model: "stock.add.multi.product",
                     view_mode: "form",
                     views: [[false, "form"]],
                     target: "new",
