@@ -47,6 +47,7 @@
             </tree>
         </field>
     </record>
+
     <record id="cost_adjustment_detail_view_search" model="ir.ui.view">
         <field name="name">stock.cost.adjustment.detail.view.search</field>
         <field name="model">stock.cost.adjustment.detail</field>

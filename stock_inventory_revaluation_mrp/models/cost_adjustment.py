@@ -1,6 +1,5 @@
 # Copyright 2021-2022 Open Source Integrators
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
 from odoo import _, api, fields, models
 
 
@@ -23,10 +22,7 @@ class CostAdjustment(models.Model):
     )
 
     def action_open_cost_adjustment_details(self):
-        self.bom_impact_ids.unlink()
-        self.qty_impact_ids.unlink()
-        self._populate_bom_impact_details(self.line_ids.product_id)
-        action = {
+        return {
             "type": "ir.actions.act_window",
             "view_mode": "tree",
             "name": _("Cost Adjustment Detail"),
@@ -42,10 +38,31 @@ class CostAdjustment(models.Model):
                 "stock_inventory_revaluation_mrp.cost_adjustment_detail_mrp_view_tree"
             ).id,
         }
-        return action
 
     def action_open_cost_adjustment_details_qty(self):
-        self.action_open_cost_adjustment_details()
+        return {
+            "type": "ir.actions.act_window",
+            "view_mode": "tree",
+            "name": _("QTY On Hand Impact"),
+            "res_model": "stock.cost.adjustment.qty.impact.line",
+            "context": {
+                "default_is_editable": False,
+                "default_cost_adjustment_id": self.id,
+                "default_company_id": self.company_id.id,
+            },
+            "domain": [("cost_adjustment_id", "=", self.id)],
+            "view_id": self.env.ref(
+                "stock_inventory_revaluation_mrp.cost_adjustment_qty_detail_mrp_view_tree"
+            ).id,
+        }
+
+    def action_compute_impact(self):
+        self.compute_impact()
+
+    def compute_impact(self):
+        self.bom_impact_ids.unlink()
+        self.qty_impact_ids.unlink()
+        self._populate_bom_impact_details(self.line_ids.product_id)
         cost_detail_obj = self.env["stock.cost.adjustment.detail"]
         qty_impact_obj = self.env["stock.cost.adjustment.qty.impact.line"]
         prod_detail_lines_bom = cost_detail_obj.search(
@@ -85,7 +102,6 @@ class CostAdjustment(models.Model):
                         )
                     ]
                 )
-
                 qty_impact_obj.create(
                     {
                         "cost_adjustment_id": self.id,
@@ -96,22 +112,6 @@ class CostAdjustment(models.Model):
                         "product_cost": future_cost,
                     }
                 )
-        action = {
-            "type": "ir.actions.act_window",
-            "view_mode": "tree",
-            "name": _("QTY On Hand Impact"),
-            "res_model": "stock.cost.adjustment.qty.impact.line",
-            "context": {
-                "default_is_editable": False,
-                "default_cost_adjustment_id": self.id,
-                "default_company_id": self.company_id.id,
-            },
-            "domain": [("cost_adjustment_id", "=", self.id)],
-            "view_id": self.env.ref(
-                "stock_inventory_revaluation_mrp.cost_adjustment_qty_detail_mrp_view_tree"
-            ).id,
-        }
-        return action
 
     def _populate_bom_impact_details(self, products):
         """
@@ -134,19 +134,23 @@ class CostAdjustment(models.Model):
         BoMs for a Product Variant are only impacted by that Variant.
         BoMs for a Product Templates are impacted by any Variant.
         """
-        BoM = self.env["mrp.bom"]
-        Product = self.env["product.product"]
-        product_ids = Product.search(
+        product_ids = self.env["product.product"].search(
             [
                 ("is_cost_type", "=", True),
                 ("activity_cost_ids.product_id", "in", products.ids),
             ]
         )
-        bom_ids = BoM.search([("bom_line_ids.product_id", "in", products.ids)])
-        bom_ids += BoM.search(
-            [("operation_ids.workcenter_id.analytic_product_id", "in", product_ids.ids)]
+        return self.env["mrp.bom"].search(
+            [
+                "|",
+                ("bom_line_ids.product_id", "in", products.ids),
+                (
+                    "operation_ids.workcenter_id.analytic_product_id",
+                    "in",
+                    product_ids.ids,
+                ),
+            ]
         )
-        return bom_ids
 
     @api.model
     def _get_products_for_boms(self, boms):
@@ -179,7 +183,6 @@ class CostAdjustment(models.Model):
                         ("product_id", "=", bom.product_id.id),
                     ]
                 )
-
                 parent_bom = cost_detail_obj.search(
                     [
                         "|",
@@ -200,7 +203,6 @@ class CostAdjustment(models.Model):
                         if prod_line.product_id.id == bom.product_id.id
                         else bom.product_id.standard_price
                     )
-
                 cost_detail_obj.create(
                     {
                         "product_id": bom.product_id.id,
@@ -214,7 +216,6 @@ class CostAdjustment(models.Model):
                         "product_cost": future_cost,
                     }
                 )
-        return True
 
     def action_post(self):
         res = super().action_post()
