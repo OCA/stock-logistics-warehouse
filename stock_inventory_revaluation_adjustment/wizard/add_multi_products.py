@@ -10,7 +10,10 @@ class AddMultiProducts(models.TransientModel):
 
     product_ids = fields.Many2many("product.product")
 
-    def add_products(self):
+    def action_add_products(self):
+        self.add_products()
+
+    def add_products(self, cost_adj_id=None):
         cost_adj_line_obj = self.env["stock.cost.adjustment.line"]
         for rec in self:
             for product in rec.product_ids:
@@ -20,7 +23,8 @@ class AddMultiProducts(models.TransientModel):
                             "product_id": product.id,
                             "cost_adjustment_id": self._context.get(
                                 "default_cost_adjustment_id"
-                            ),
+                            )
+                            or cost_adj_id,
                         }
                     ]
                 )

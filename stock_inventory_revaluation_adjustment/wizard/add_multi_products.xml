@@ -16,7 +16,7 @@
                     </group>
                     <footer>
                         <button
-                            name="add_products"
+                            name="action_add_products"
                             type="object"
                             string="Add"
                             class="btn-primary"

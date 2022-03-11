@@ -16,6 +16,7 @@ odoo.define("product_cost_adjustment.CostAdjustmentValidationController", functi
             },
             ListController.prototype.events
         ),
+
         /**
          * @override
          */
@@ -62,7 +63,7 @@ odoo.define("product_cost_adjustment.CostAdjustmentValidationController", functi
 
             prom.then(function () {
                 self._rpc({
-                    model: "cost.adjustment",
+                    model: "stock.cost.adjustment",
                     method: "action_validate",
                     args: [self.cost_adjustment_id],
                 }).then(function (res) {
