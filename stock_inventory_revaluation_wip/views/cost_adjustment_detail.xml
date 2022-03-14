@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
     <record id="cost_adjustment_detail_mrp_view_tree_inherit" model="ir.ui.view">

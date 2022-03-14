@@ -1,28 +1,21 @@
 # Copyright (C) 2021 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from odoo import models
 
 
 class CostAdjustment(models.Model):
     _inherit = "stock.cost.adjustment"
 
-    def action_open_cost_adjustment_details(self):
-        res = super().action_open_cost_adjustment_details()
+    def compute_impact(self):
+        super().compute_impact()
         self.get_product_workcenter_operation(self.line_ids.product_id)
         cost_detail_obj = self.env["stock.cost.adjustment.detail"]
-
         self._get_all_boms_details()
         self._create_all_operations_details()
-
-        final_cost_lines_by_bom = cost_detail_obj.search(
-            [("cost_adjustment_id", "=", self.id)]
-        ).mapped("bom_id")
-
         final_cost_lines = cost_detail_obj.search(
             [("cost_adjustment_id", "=", self.id)]
         )
-
+        final_cost_lines_by_bom = final_cost_lines.mapped("bom_id")
         for a in final_cost_lines_by_bom:
             total = sum(
                 [
@@ -39,12 +32,6 @@ class CostAdjustment(models.Model):
                     in a.product_tmpl_id.product_variant_ids.ids
                 )
             parent_bom_detail.write({"product_cost": total})
-
-        view = self.env.ref(
-            "stock_inventory_revaluation_wip.cost_adjustment_detail_mrp_view_tree_inherit"
-        )
-        res.update({"view_id": view.id})
-        return res
 
     def get_product_workcenter_operation(self, products):
         for product in products:
@@ -148,7 +135,6 @@ class CostAdjustment(models.Model):
                     ("cost_adjustment_id", "=", self.id),
                 ]
             ):
-
                 prod_line = cost_line_obj.search(
                     [
                         ("cost_adjustment_id", "=", self.id),
@@ -194,7 +180,6 @@ class CostAdjustment(models.Model):
                 )
 
     def action_post(self):
-        self.action_open_cost_adjustment_details_qty()
         res = super().action_post()
         wc_ids = (
             self.env["stock.cost.adjustment.detail"]
