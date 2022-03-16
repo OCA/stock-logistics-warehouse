@@ -21,6 +21,11 @@ class CostAdjustment(models.Model):
         states={"done": [("readonly", True)]},
     )
 
+    def action_cancel_draft(self):
+        self.bom_impact_ids.unlink()
+        self.qty_impact_ids.unlink()
+        super().action_cancel_draft()
+
     def action_open_cost_adjustment_details(self):
         return {
             "type": "ir.actions.act_window",
