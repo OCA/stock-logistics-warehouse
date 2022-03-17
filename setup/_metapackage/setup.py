@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo12-addon-procurement_auto_create_group',
         'odoo12-addon-sale_stock_available_info_popup',
         'odoo12-addon-sale_stock_info_popup',
+        'odoo12-addon-scrap_reason_code',
         'odoo12-addon-stock_account_change_qty_reason',
         'odoo12-addon-stock_account_internal_move',
         'odoo12-addon-stock_account_inventory_discrepancy',
