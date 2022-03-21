@@ -27,6 +27,9 @@ class ResConfigSettings(models.TransientModel):
         string="Stock Requests Analytic integration"
     )
 
+    stock_request_send_confirm_message = fields.Boolean(related='company_id.stock_request_send_confirm_message',
+                                                        readonly=False)
+
     module_stock_request_submit = fields.Boolean(
         string="Submitted state in Stock Requests"
     )

@@ -60,6 +60,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="stock_request_send_confirm_message"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label
+                                    string="Send Confirm Done messages"
+                                    for="stock_request_send_confirm_message"
+                                />
+                                <div class="text-muted">
+                                    Send confirm done messages in Stock Request chatters.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <h2>Purchases</h2>
                     <div
