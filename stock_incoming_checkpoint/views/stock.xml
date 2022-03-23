@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+<record id="incoming_checkpoint_tree" model="ir.ui.view">
+    <field name="model">stock.move</field>
+    <field name="arch" type="xml">
+        <tree colors="blue: color == 'toreceive'; orange: color == 'more'; red: color == 'inlate'">
+            <button type="object" name="ui_move2picking" string="Check" context="{'move_id': id}"/>
+            <field name="id"/>
+            <field name="origin"/>
+            <field name="color" invisible="1"/>
+            <field name="product_id" on_change="onchange_product_id(product_id,location_id,location_dest_id, False)"/>
+            <field name="date_expected"/>
+            <field name="received_date"/>
+            <field name="product_uom_qty" on_change="onchange_quantity(product_id, product_uom_qty, product_uom, product_uos)"/>
+            <field name="ordered_qty" string="Ordered Qty"/>
+            <field name="received_qty"/>
+            <field name="diff_qty"/>
+            <field name="received_count" string="Compte"/>
+            <field name="product_uom" string="Unit of Measure" groups="product.group_uom"/>
+            <field name="state"/>
+            <field name="location_dest_id" groups="stock.group_locations"/>
+            <field name="picking_id" string="Reference"/>
+            <field name="picking_type_id"/>
+            <field name="purch_line"/>
+        </tree>
+    </field>
+</record>
+
+
+
+<record id="view_move_picking_tree" model="ir.ui.view">
+    <field name="model">stock.move</field>
+    <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+    <field name="arch" type="xml">
+        <field name="date_expected" position="attributes">
+            <attribute name="invisible">0</attribute>
+        </field>
+    </field>
+</record>
+
+
+
+<record id="incoming.checkpoint_act" model="ir.actions.act_window">
+    <field name="name">Stock Move Checkpoint</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">stock.move</field> 
+    <field name="view_mode">tree</field>
+    <field name="domain">[("state", "!=", "done")]</field>
+</record>
+
+
+</data>
+</openerp>

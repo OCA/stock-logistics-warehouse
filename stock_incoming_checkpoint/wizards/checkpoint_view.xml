@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+    <record id="incoming_checkpoint_tree_view" model="ir.ui.view">
+        <field name="model">incoming.checkpoint</field>
+        <field name="arch" type="xml">
+            <tree default_order="purchase_line_id" colors="blue: color == 'toreceive'; orange: color == 'more'; red: color == 'inlate'">
+                <field name="order_id"/>
+                <field name="partner_ref"/>
+                <field name="product_id"/>
+                <field name="date_planned"/>
+                <field name="received_date"/>
+                <field name="ordered_qty"/>
+                <field name="received_qty"/>
+                <field name="diff_qty"/>
+                <field name="color" invisible="1"/>
+                <field name="purch_line" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+
+</data>
+</openerp>
