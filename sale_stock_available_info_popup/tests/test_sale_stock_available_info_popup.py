@@ -1,152 +1,91 @@
 # Copyright 2020 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import SavepointCase
+from datetime import timedelta
+
+from odoo.fields import Datetime
+from odoo.tests import Form
+from odoo.tests.common import SavepointCase, users
 
 
 class SaleStockAvailableInfoPopup(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        user_group_stock_user = cls.env.ref("stock.group_stock_user")
-        cls.user_stock_user = cls.env["res.users"].create(
-            {
-                "name": "Pauline Poivraisselle",
-                "login": "pauline",
-                "email": "p.p@example.com",
-                "notification_type": "inbox",
-                "groups_id": [(6, 0, [user_group_stock_user.id])],
-            }
-        )
+        # Scratch some seconds from the tracking stuff that we won't need
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env.ref("base.user_demo").groups_id += cls.env.ref("stock.group_stock_user")
         cls.product = cls.env["product.product"].create(
             {"name": "Storable product", "type": "product"}
         )
-        cls.stock_location = cls.env.ref("stock.stock_location_stock")
-        cls.customers_location = cls.env.ref("stock.stock_location_customers")
-        cls.suppliers_location = cls.env.ref("stock.stock_location_suppliers")
+        cls.partner = cls.env["res.partner"].create({"name": "Mr. Odoo"})
         cls.env["stock.quant"].create(
             {
                 "product_id": cls.product.id,
-                "location_id": cls.stock_location.id,
+                "location_id": cls.env.ref("stock.stock_location_stock").id,
                 "quantity": 40.0,
             }
         )
-        cls.picking_out = cls.env["stock.picking"].create(
-            {
-                "picking_type_id": cls.env.ref("stock.picking_type_out").id,
-                "location_id": cls.stock_location.id,
-                "location_dest_id": cls.customers_location.id,
-            }
-        )
-        cls.env["stock.move"].create(
-            {
-                "name": "a move",
-                "product_id": cls.product.id,
-                "product_uom_qty": 3.0,
-                "product_uom": cls.product.uom_id.id,
-                "picking_id": cls.picking_out.id,
-                "location_id": cls.stock_location.id,
-                "location_dest_id": cls.customers_location.id,
-            }
-        )
-        cls.picking_in = cls.env["stock.picking"].create(
-            {
-                "picking_type_id": cls.env.ref("stock.picking_type_in").id,
-                "location_id": cls.suppliers_location.id,
-                "location_dest_id": cls.stock_location.id,
-            }
-        )
-        cls.env["stock.move"].create(
-            {
-                "restrict_partner_id": cls.user_stock_user.partner_id.id,
-                "name": "another move",
-                "product_id": cls.product.id,
-                "product_uom_qty": 5.0,
-                "product_uom": cls.product.uom_id.id,
-                "picking_id": cls.picking_in.id,
-                "location_id": cls.suppliers_location.id,
-                "location_dest_id": cls.stock_location.id,
-            }
-        )
+        picking_form = Form(cls.env["stock.picking"])
+        picking_form.picking_type_id = cls.env.ref("stock.picking_type_in")
+        with picking_form.move_ids_without_package.new() as move:
+            move.product_id = cls.product
+            move.product_uom_qty = 5
+        picking_form.save().action_assign()
+        picking_form = Form(cls.env["stock.picking"])
+        picking_form.picking_type_id = cls.env.ref("stock.picking_type_out")
+        with picking_form.move_ids_without_package.new() as move:
+            move.product_id = cls.product
+            move.product_uom_qty = 3
+        picking_form.save().action_assign()
 
+    def _create_sale(self):
+        sale_form = Form(self.env["sale.order"])
+        sale_form.partner_id = self.partner
+        return sale_form
+
+    def _add_sale_line(self, sale_form, product, qty=1):
+        with sale_form.order_line.new() as line:
+            line.product_id = self.product
+            line.product_uom_qty = qty
+
+    @users("admin", "demo")
     def test_immediately_usable_qty_today(self):
-        self.picking_out.action_confirm()
-        self.picking_in.action_assign()
-        so = self.env["sale.order"].create(
-            {
-                "partner_id": self.env.ref("base.res_partner_1").id,
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "name": self.product.name,
-                            "product_id": self.product.id,
-                            "product_uom_qty": 1,
-                            "product_uom": self.product.uom_id.id,
-                            "price_unit": self.product.list_price,
-                        },
-                    ),
-                ],
-            }
-        )
-        line = so.order_line
-        self.assertEqual(
-            line.immediately_usable_qty_today, self.product.immediately_usable_qty,
+        sale_form = self._create_sale()
+        self._add_sale_line(sale_form, self.product)
+        sale = sale_form.save()
+        self.assertAlmostEqual(
+            sale.order_line.immediately_usable_qty_today,
+            self.product.immediately_usable_qty,
         )
 
+    @users("admin", "demo")
     def test_immediately_usable_qty_today_similar_solines(self):
-        """Create a sale order containing three times the same product. The
-        quantity available should be different for the 3 lines.
+        """Create a sale order containing three times the same product. The quantity
+        available should be different for the 3 lines.
         """
-        so = self.env["sale.order"].create(
-            {
-                "partner_id": self.env.ref("base.res_partner_1").id,
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "sequence": 1,
-                            "name": self.product.name,
-                            "product_id": self.product.id,
-                            "product_uom_qty": 5,
-                            "product_uom": self.product.uom_id.id,
-                            "price_unit": self.product.list_price,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "sequence": 2,
-                            "name": self.product.name,
-                            "product_id": self.product.id,
-                            "product_uom_qty": 5,
-                            "product_uom": self.product.uom_id.id,
-                            "price_unit": self.product.list_price,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "sequence": 3,
-                            "name": self.product.name,
-                            "product_id": self.product.id,
-                            "product_uom_qty": 5,
-                            "product_uom": self.product.uom_id.id,
-                            "price_unit": self.product.list_price,
-                        },
-                    ),
-                ],
-            }
-        )
+        # Modules like stock_available_inmmediately change the behavior of this field
+        # so we have to evaluate their values on the fly
+        qty = self.product.immediately_usable_qty
+        yesterday = Datetime.now() - timedelta(days=1)
+        sale_form = self._create_sale()
+        self._add_sale_line(sale_form, self.product, 5)
+        self._add_sale_line(sale_form, self.product, 5)
+        self._add_sale_line(sale_form, self.product, 5)
+        sale = sale_form.save()
         self.assertEqual(
-            so.order_line.mapped("immediately_usable_qty_today"),
-            [
-                self.product.immediately_usable_qty,
-                self.product.immediately_usable_qty - 5,
-                self.product.immediately_usable_qty - 10,
-            ],
+            sale.order_line.mapped("immediately_usable_qty_today"),
+            [qty, qty - 5, qty - 10],
+        )
+        self.product.invalidate_cache()
+        qty_yesterday = self.product.with_context(
+            to_date=yesterday
+        ).immediately_usable_qty
+        self.assertFalse(qty == qty_yesterday)
+        # Commitment date will affect the computation
+        sale.commitment_date = yesterday
+        sale.order_line.invalidate_cache()
+        self.assertEqual(
+            sale.order_line.mapped("immediately_usable_qty_today"),
+            [qty_yesterday, qty_yesterday - 5, qty_yesterday - 10],
         )
