@@ -13,24 +13,16 @@ class StockQuant(models.Model):
         compute="_compute_contains_unreserved",
         store=True,
     )
-
     unreserved_quantity = fields.Float(
         string="Unreserved quantity",
         compute="_compute_unreserved_quantity",
         store=True,
     )
 
-    @api.depends("product_id", "location_id", "quantity", "reserved_quantity")
+    @api.depends("quantity", "reserved_quantity")
     def _compute_contains_unreserved(self):
         for record in self:
-            # Avoid error when adding a new line on manually Update Quantity
-            if isinstance(record.id, models.NewId):
-                record.contains_unreserved = False
-                continue
-            available = record._get_available_quantity(
-                record.product_id, record.location_id
-            )
-            record.contains_unreserved = True if available > 0 else False
+            record.contains_unreserved = record.quantity > record.reserved_quantity
 
     @api.depends("quantity", "reserved_quantity")
     def _compute_unreserved_quantity(self):

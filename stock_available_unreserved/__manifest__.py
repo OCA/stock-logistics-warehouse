@@ -11,13 +11,8 @@
     "maintainers": ["LoisRForgeFlow"],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": [
-        "stock",
-    ],
-    "data": [
-        "views/stock_quant_view.xml",
-        "views/product_view.xml",
-    ],
+    "depends": ["stock"],
+    "data": ["views/stock_quant_view.xml", "views/product_view.xml"],
     "pre_init_hook": "pre_init_hook",
     "license": "LGPL-3",
 }
