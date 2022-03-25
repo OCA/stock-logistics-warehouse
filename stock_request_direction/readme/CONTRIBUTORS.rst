@@ -3,6 +3,7 @@
   * Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
   * Steve Campbell <scampbell@opensourceintegrators.com>
   * Freni Patel <fpatel@opensourceintegrators.com>
+  * Adnan Kapasi <adnan.k.serpentcs@gmail.com>
 
 * `Ecosoft <http://ecosoft.co.th>`__:
 

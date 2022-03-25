@@ -9,7 +9,6 @@ class StockRequestOrder(models.Model):
 
     direction = fields.Selection(
         [("outbound", "Outbound"), ("inbound", "Inbound")],
-        string="Direction",
         states={"draft": [("readonly", False)]},
         readonly=True,
     )
@@ -26,13 +25,9 @@ class StockRequestOrder(models.Model):
             if stock_request.route_id:
                 stock_request.route_id = False
 
-    @api.onchange("warehouse_id")
-    def onchange_warehouse_id(self):
-        # Onchange no longer needed
-        pass
-
     def change_childs(self):
-        super().change_childs()
+        res = super().change_childs()
         if not self._context.get("no_change_childs", False):
             for line in self.stock_request_ids:
                 line.direction = self.direction
+        return res

@@ -30,11 +30,21 @@ class TestStockRequestBase(TestStockRequest):
             stock_request.location_id,
             stock_request.company_id.partner_id.property_stock_customer,
         )
+        self.route_1 = self.env["stock.location.route"].create(
+            {
+                "name": "Transfer",
+                "product_categ_selectable": False,
+                "product_selectable": True,
+                "company_id": self.main_company.id,
+                "sequence": 10,
+            }
+        )
         # Inbound direction
         vals = {
             "product_id": self.product.id,
             "product_uom_id": self.product.uom_id.id,
             "product_uom_qty": 5.0,
+            "route_id": self.route_1.id,
         }
         stock_request = (
             self.stock_request.with_user(self.stock_request_user)
@@ -51,6 +61,15 @@ class TestStockRequestBase(TestStockRequest):
 
     def test_onchange_direction_order(self):
         expected_date = fields.Datetime.now()
+        self.route_2 = self.env["stock.location.route"].create(
+            {
+                "name": "Transfer",
+                "product_categ_selectable": False,
+                "product_selectable": True,
+                "company_id": self.main_company.id,
+                "sequence": 10,
+            }
+        )
         # Outbound direction
         vals = {
             "company_id": self.main_company.id,
@@ -70,6 +89,7 @@ class TestStockRequestBase(TestStockRequest):
                         "warehouse_id": self.warehouse.id,
                         "location_id": self.warehouse.lot_stock_id.id,
                         "expected_date": expected_date,
+                        "route_id": self.route_2.id,
                     },
                 )
             ],
