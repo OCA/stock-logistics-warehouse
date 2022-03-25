@@ -43,7 +43,7 @@ class StockRequestOrder(models.Model):
                 limit=1,
             )
             if picking_type_id:
-                self._origin.write({"picking_type_id": picking_type_id.id})
+                self.update({"picking_type_id": picking_type_id.id})
 
     @api.model
     def create(self, vals):

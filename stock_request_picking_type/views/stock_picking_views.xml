@@ -18,13 +18,14 @@
                     <div>
                         <div t-attf-class="o_kanban_card_header">
                             <div class="o_kanban_card_header_title">
+                                <div class="o_primary" t-if="!selection_mode">
                                 <a
-                                    type="object"
-                                    name="get_stock_request_order_picking_type_action"
-                                    class="o_primary"
-                                >
+                                        type="object"
+                                        name="get_stock_request_order_picking_type_action"
+                                    >
                                     <field name="name" />
                                 </a>
+                                </div>
                                 <div class="o_secondary">
                                     <field class="o_secondary" name="warehouse_id" />
                                 </div>
