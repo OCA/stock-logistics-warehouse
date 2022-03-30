@@ -13,7 +13,7 @@ class IncomingCheckpoint(models.TransientModel):
 
     product_id = fields.Many2one(comodel_name="product.product", string="Product")
     partner_ref = fields.Char(compute="_compute_partner_ref")
-    date_planned = fields.Date(related="purchase_line_id.date_planned")
+    date_planned = fields.Date(string="Schedule Date")
     purch_line = fields.Integer()
     purchase_line_id = fields.Many2one(
         comodel_name="purchase.order.line", string="Order Line"
@@ -27,6 +27,7 @@ class IncomingCheckpoint(models.TransientModel):
     diff_qty = fields.Float()
     received_qty = fields.Float()
     color = fields.Char(help="Technical field to apply color in tree view")
+    awaiting_move = fields.Many2one(comodel_name="stock.move")
 
     @api.depends("product_id")
     def _compute_partner_ref(self):
@@ -45,34 +46,37 @@ class IncomingCheckpoint(models.TransientModel):
 
     @api.model
     def _create_checkpoint_moves(self, moves):
-        def init_dict(mfield, ttype):
-            if mfield not in pline:
-                if ttype == int:
-                    pline[mfield] = 0
-                elif ttype == "date":
-                    pline[mfield] = False
-
         lines = defaultdict(dict)
         line_ids = []
         uid = self.env.user.id
         for move in moves:
-            pline = lines[move.purchase_line_id]
-            pline.update(
-                {
-                    "product_id": move.product_id.id,
-                    "purchase_line_id": move.purchase_line_id.id,
-                    "purch_line": move.purchase_line_id
-                    and move.purchase_line_id.id
-                    or False,
-                    "ordered_qty": move.purchase_line_id.product_qty,
-                    "order_id": move.purchase_line_id.order_id.id,
-                    "write_uid": uid,
-                    "move": move,
-                }
-            )
-            init_dict("received_qty", int)
+            if move.purchase_line_id in lines:
+                pline = lines[move.purchase_line_id]
+                pline.update({"move": move})
+            else:
+                pline = lines[move.purchase_line_id]
+                pline.update(
+                    {
+                        "product_id": move.product_id.id,
+                        "purchase_line_id": move.purchase_line_id.id,
+                        "purch_line": move.purchase_line_id
+                        and move.purchase_line_id.id
+                        or False,
+                        "date_planned": move.purchase_line_id.date_planned,
+                        "ordered_qty": move.purchase_line_id.product_qty,
+                        "order_id": move.purchase_line_id.order_id.id,
+                        "write_uid": uid,
+                        "move": move,
+                        "awaiting_move": None,
+                    }
+                )
+            if move.state not in ("done", "cancel", "draft"):
+                pline["awaiting_move"] = move.id
+            if "received_qty" not in pline:
+                pline["received_qty"] = 0
             if move.state == "done":
-                init_dict("received_date", "date")
+                if "received_date" not in pline:
+                    pline["received_date"] = False
                 if not pline["received_date"] or move.date > pline["received_date"]:
                     pline["received_date"] = move.date
                 pline["received_qty"] += move.product_uom_qty
@@ -106,17 +110,20 @@ class IncomingCheckpoint(models.TransientModel):
             line["product_id"],
             line["purchase_line_id"],
             line["purch_line"],
+            line["date_planned"],
             line["ordered_qty"],
             line["received_qty"],
             line["diff_qty"],
             line["write_uid"],
             line["color"],
+            line["awaiting_move"],
         ]
 
     def _get_insert_into_columns(self):
         """Inherit to complete columns"""
         return """INSERT INTO incoming_checkpoint(product_id, purchase_line_id,
-        purch_line, ordered_qty, received_qty, diff_qty, write_uid, color)"""
+        purch_line, date_planned, ordered_qty, received_qty, diff_qty,
+        write_uid, color, awaiting_move)"""
 
     @api.model
     def _add_computed_fields(self, lines):

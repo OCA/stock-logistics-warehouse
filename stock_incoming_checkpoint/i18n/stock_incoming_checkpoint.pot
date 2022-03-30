@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-23 08:24+0000\n"
-"PO-Revision-Date: 2022-03-23 08:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,6 +20,12 @@ msgid "%s %s Incoming Checkpoint (%s s)"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
+#: field:incoming.checkpoint,awaiting_move:0
+#: model:ir.model.fields,field_description:stock_incoming_checkpoint.field_incoming_checkpoint_awaiting_move
+msgid "Awaiting move"
+msgstr ""
+
+#. module: stock_incoming_checkpoint
 #: view:incoming.checkpoint.selection.wizard:stock_incoming_checkpoint.incoming_checkpoint_form
 msgid "Cancel"
 msgstr ""
@@ -29,6 +33,12 @@ msgstr ""
 #. module: stock_incoming_checkpoint
 #: help:incoming.checkpoint.selection.wizard,today:0
 msgid "Check to apply today's date"
+msgstr ""
+
+#. module: stock_incoming_checkpoint
+#: field:incoming.checkpoint,color:0
+#: model:ir.model.fields,field_description:stock_incoming_checkpoint.field_incoming_checkpoint_color
+msgid "Color"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
@@ -65,6 +75,11 @@ msgid "Debug"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
+#: view:incoming.checkpoint:stock_incoming_checkpoint.incoming_checkpoint_search_view
+msgid "Diff"
+msgstr ""
+
+#. module: stock_incoming_checkpoint
 #: field:incoming.checkpoint,diff_qty:0
 #: model:ir.model.fields,field_description:stock_incoming_checkpoint.field_incoming_checkpoint_diff_qty
 msgid "Diff qty"
@@ -91,6 +106,11 @@ msgstr ""
 #. module: stock_incoming_checkpoint
 #: view:incoming.checkpoint.selection.wizard:stock_incoming_checkpoint.incoming_checkpoint_form
 msgid "Fill this form to be redirected to goods to receive"
+msgstr ""
+
+#. module: stock_incoming_checkpoint
+#: view:incoming.checkpoint:stock_incoming_checkpoint.incoming_checkpoint_search_view
+msgid "Group By"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
@@ -143,15 +163,20 @@ msgid "Last received"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
-#: code:addons/stock_incoming_checkpoint/wizards/checkpoint_select.py:119
+#: code:addons/stock_incoming_checkpoint/wizards/checkpoint_select.py:120
 #, python-format
 msgid "No purchase data for this vendor"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
-#: code:addons/stock_incoming_checkpoint/wizards/checkpoint_select.py:139
+#: code:addons/stock_incoming_checkpoint/wizards/checkpoint_select.py:140
 #, python-format
 msgid "No stock moves for these purchases %s"
+msgstr ""
+
+#. module: stock_incoming_checkpoint
+#: help:incoming.checkpoint.selection.wizard,purchase_ids:0
+msgid "Only approved, done or in exception orders"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
@@ -179,6 +204,7 @@ msgid "Partner ref"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
+#: view:incoming.checkpoint:stock_incoming_checkpoint.incoming_checkpoint_search_view
 #: field:incoming.checkpoint,product_id:0
 #: model:ir.model.fields,field_description:stock_incoming_checkpoint.field_incoming_checkpoint_product_id
 msgid "Product"
@@ -210,7 +236,7 @@ msgstr ""
 #. module: stock_incoming_checkpoint
 #: field:incoming.checkpoint,date_planned:0
 #: model:ir.model.fields,field_description:stock_incoming_checkpoint.field_incoming_checkpoint_date_planned
-msgid "Scheduled Date"
+msgid "Schedule Date"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
@@ -230,6 +256,17 @@ msgid "Source Document"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
+#: help:incoming.checkpoint,color:0
+msgid "Technical field to apply color in tree view"
+msgstr ""
+
+#. module: stock_incoming_checkpoint
+#: view:incoming.checkpoint:stock_incoming_checkpoint.incoming_checkpoint_search_view
+msgid "This Week"
+msgstr ""
+
+#. module: stock_incoming_checkpoint
+#: view:incoming.checkpoint:stock_incoming_checkpoint.incoming_checkpoint_search_view
 #: field:incoming.checkpoint.selection.wizard,today:0
 #: model:ir.model.fields,field_description:stock_incoming_checkpoint.field_incoming_checkpoint_selection_wizard_today
 msgid "Today"
@@ -242,7 +279,7 @@ msgid "Vendor"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
-#: code:addons/stock_incoming_checkpoint/wizards/checkpoint_select.py:121
+#: code:addons/stock_incoming_checkpoint/wizards/checkpoint_select.py:122
 #, python-format
 msgid "You must specify vendor or purchases"
 msgstr ""

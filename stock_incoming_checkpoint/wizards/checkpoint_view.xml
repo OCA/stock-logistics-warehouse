@@ -2,6 +2,21 @@
 <openerp>
 <data>
 
+    <record id="incoming_checkpoint_search_view" model="ir.ui.view">
+        <field name="model">incoming.checkpoint</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <filter string="Diff" name="diff_qty" domain="['|', ('diff_qty','&gt;', 0), ('diff_qty','&lt;', 0)]"/>
+<!--                 <filter string="Today" name="today" domain="[('date_planned','&gt;=', ((context_today()).strftime('%Y-%m-%d'))), ('date_planned','&lt;=', ((context_today()+datetime.timedelta(days=1)).strftime('%Y-%m-%d')))]"/>
+                <filter string="This Week" name="week" domain="[('date_planned','&gt;=', ((context_today()).strftime('%Y-%m-%d'))), ('date_planned','&lt;=', ((context_today()+datetime.timedelta(days=7)).strftime('%Y-%m-%d')))]"/> -->
+                <group expand="0" string="Group By">
+                    <filter string="Product" name="product_id" domain="[]" context="{'group_by': 'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="incoming_checkpoint_tree_view" model="ir.ui.view">
         <field name="model">incoming.checkpoint</field>
         <field name="arch" type="xml">
@@ -16,10 +31,10 @@
                 <field name="diff_qty"/>
                 <field name="color" invisible="1"/>
                 <field name="purch_line" invisible="1"/>
+                <field name="awaiting_move" invisible="1" />
             </tree>
         </field>
     </record>
-
 
 </data>
 </openerp>

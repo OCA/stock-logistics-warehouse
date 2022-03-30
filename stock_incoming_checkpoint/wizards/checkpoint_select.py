@@ -71,12 +71,13 @@ class IncomingCheckpointSelectionWizard(models.TransientModel):
         date = datetime.strptime(self.date, DT).strftime("%d/%m/%Y")
         lines = self._get_checkpoint_lines(moves, date)
         self._get_traceability(purchases, moves, domain, lines)
-        seconds = round(time.time() - start_time, 1)
+        seconds = round(time.time() - start_time, 0)
         return {
-            "name": _("%s %s Incoming Checkpoint (%s s)" % (name, date, seconds)),
+            "name": _("%s %s Incoming Checkpoint (%s s)" % (name, date, int(seconds))),
             "res_model": "incoming.checkpoint",
             "view_mode": "tree",
-            "context": "{'checkpoint_date': '%s', 'vendor': %s}" % (self.date, vendor),
+            "context": "{'checkpoint_date': '%s', 'search_default_diff_qty': 1, 'vendor': %s}"
+            % (self.date, vendor),
             "domain": "[('id', 'in', %s)]" % lines.ids,
             "view_id": self.env.ref(
                 "stock_incoming_checkpoint.incoming_checkpoint_tree_view"

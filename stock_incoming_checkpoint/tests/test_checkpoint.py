@@ -22,7 +22,7 @@ class Test(TransactionCase):
     def test_1_purchase(self):
         """"""
         po = self.env["purchase.order"].create(self.get_purchase_order_vals())
-        self.get_confirmed_order()
+        self.get_approved_order(po)
         day = 23
         assert len(po.picking_ids) == 1
         self.make_backorder(po.picking_ids[0], TIME[:7], day)
@@ -37,8 +37,8 @@ class Test(TransactionCase):
                 "date": "%s-%s" % (TIME[:7], day),
             }
         )
-        moves = wiz._get_moves(wiz._get_purchases()[0])
-        assert len(moves) == 2
+        moves, __ = wiz._get_moves(wiz._get_purchases()[0])
+        assert len(moves) == 4
         lines = wiz._get_checkpoint_lines(moves, date)
         assert len(lines) == 2
         l_prd7 = lines.filtered(
@@ -61,13 +61,13 @@ class Test(TransactionCase):
         vals1 = self.get_purchase_order_vals()
         del vals1["order_line"][0]
         po1 = self.env["purchase.order"].create(vals1)
-        self.get_confirmed_order(po1)
+        self.get_approved_order(po1)
         self.make_backorder(po1.picking_ids[0], TIME[:7], 23)
         # create second purchase without reception
         vals2 = self.get_purchase_order_vals()
         del vals2["order_line"][1]
         po2 = self.env["purchase.order"].create(vals2)
-        self.get_confirmed_order(po2)
+        self.get_approved_order(po2)
         # checkpoint result
         wiz = self.env["incoming.checkpoint.selection.wizard"].create(
             {
@@ -75,7 +75,7 @@ class Test(TransactionCase):
                 "date": "%s-%s" % (TIME[:7], 23),
             }
         )
-        moves = wiz._get_moves(wiz._get_purchases()[0])
+        moves, __ = wiz._get_moves(wiz._get_purchases()[0])
         lines = wiz._get_checkpoint_lines(moves, "%s-%s" % (TIME[:7], 23))
         assert len(lines) == 2
         l_prd7 = lines.filtered(
@@ -104,12 +104,10 @@ class Test(TransactionCase):
             wiz.do_detailed_transfer()
 
     @freeze_time(TIME)
-    def get_confirmed_order(self, po=None):
-        if not po:
-            po = self.order
+    def get_approved_order(self, po):
         po.name = "%s%s" % (po.name, po.id)
         po.signal_workflow("purchase_confirm")
-        return po
+        po.signal_workflow("purchase_approve")
 
     @freeze_time(TIME)
     def get_purchase_order_vals(self):
