@@ -9,29 +9,30 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-05 09:53+0000\n"
-"PO-Revision-Date: 2017-05-05 09:53+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2022-03-30 12:17+0000\n"
+"Last-Translator: jabelchi <jabelchi@gmail.com>\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants
 msgid "Assign Manual Quants"
-msgstr ""
+msgstr "Assigna quantitats manuals"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants_lines
 msgid "Assign Manual Quants Lines"
-msgstr ""
+msgstr "Assigna línies de quantitats manuals"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
 msgid "Auto-fill Quantity Done"
-msgstr ""
+msgstr "Auto-omplir quantitat feta"
 
 #. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -88,89 +89,89 @@ msgstr "Darrera Actualització el"
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__location_id
 msgid "Location"
-msgstr "Ubicació "
+msgstr "Ubicació"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__lot_id
 msgid "Lot"
-msgstr ""
+msgstr "Lot"
 
 #. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.stock_picking_manual_quants_form_view
 msgid "Manual Quants"
-msgstr ""
+msgstr "Quantitats manuals"
 
 #. module: stock_quant_manual_assign
 #: model:ir.actions.act_window,name:stock_quant_manual_assign.assign_manual_quants_action
 msgid "Manual assignment"
-msgstr ""
+msgstr "Assignació manual"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_id
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__assign_wizard
 msgid "Move"
-msgstr ""
+msgstr "Moviment"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__on_hand
 msgid "On Hand"
-msgstr ""
+msgstr "Disponible"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__reserved
 msgid "Others Reserved"
-msgstr ""
+msgstr "Altres reserves"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__owner_id
 msgid "Owner"
-msgstr ""
+msgstr "Propietari"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id
 msgid "Package"
-msgstr ""
+msgstr "Paquet"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipus de moviment"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
-msgstr ""
+msgstr "QUANTITAT"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__quant_id
 msgid "Quant"
-msgstr ""
+msgstr "Quantitat"
 
 #. module: stock_quant_manual_assign
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
 msgid "Quantity is higher than the needed one"
-msgstr ""
+msgstr "La quantitat és més gran de la necessària"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__quants_lines
 msgid "Quants"
-msgstr ""
+msgstr "Quantitats"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_qty
 msgid "Remaining qty"
-msgstr ""
+msgstr "Quantitat restant"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__lines_qty
 msgid "Reserved qty"
-msgstr ""
+msgstr "Quantitat reservada"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__selected
 msgid "Select"
-msgstr ""
+msgstr "Seleccionar"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
@@ -178,6 +179,8 @@ msgid ""
 "Select this in case done quantity of the stock move line should be auto-"
 "filled when quants are manually assigned."
 msgstr ""
+"Seleccioneu això si les quantitats \"fet\" del moviment s'haurien d'auto "
+"omplir quan les quantitats s'assignen manualment."
 
 #. module: stock_quant_manual_assign
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
@@ -187,21 +190,24 @@ msgid ""
 "with this product has been done meanwhile or you have manually increased the "
 "suggested value."
 msgstr ""
+"La quantitat de la línia seleccionada és mes gran que la disponible. Potser "
+"s'ha fet una operació amb aquest producte entre tant o heu augmentat "
+"manualment el valor suggerit."
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id
 msgid "The package containing this quant"
-msgstr ""
+msgstr "El paquet conté aquesta quantitat"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__owner_id
 msgid "This is the owner of the quant"
-msgstr ""
+msgstr "Propietari de la quantitat"
 
 #. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
-msgstr ""
+msgstr "quantitat"
 
 #~ msgid "Name"
 #~ msgstr "Nom"
