@@ -10,6 +10,7 @@ from openerp import models, api, fields
 class IncomingCheckpoint(models.TransientModel):
     _name = "incoming.checkpoint"
     _description = "Incoming checkpoint"
+    _order = "date_planned ASC"
 
     product_id = fields.Many2one(comodel_name="product.product", string="Product")
     partner_ref = fields.Char(compute="_compute_partner_ref")
