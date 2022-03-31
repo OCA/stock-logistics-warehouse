@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="stcok_content_location_check_line_list" model="ir.ui.view">
+        <field name="name">stcok.content.location.check.list</field>
+        <field name="model">stock.location.content.check.line</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" string="Stock Location Content Check Line">
+                <field
+                    name="product_id"
+                    required="1"
+                    domain="[('type', '=', 'product')]"
+                />
+                <field name="expected_qty" />
+                <field name="current_qty" />
+                <field name="counted_qty" required="1" />
+                <field name="replenished_qty" required="1" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

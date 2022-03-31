@@ -1,0 +1,70 @@
+<odoo>
+
+    <record id="stock_content_location_form" model="ir.ui.view">
+        <field name="name">stock.content.location.form</field>
+        <field name="model">stock.location.content.template</field>
+        <field name="arch" type="xml">
+            <form string="Stock Location Content Template">
+                <sheet>
+                    <label for="name" class="oe_edit_only" />
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                    <notebook colspan="4">
+                        <page string="Products" name="products">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field
+                                        name="product_id"
+                                        domain="[('type', '=', 'product')]"
+                                    />
+                                    <field name="quantity" />
+                                    <field name="uom_id" groups="uom.group_uom" />
+                                    <field name="in_checkout" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_content_location_tree" model="ir.ui.view">
+        <field name="name">stock.content.location.tree</field>
+        <field name="model">stock.location.content.template</field>
+        <field name="arch" type="xml">
+            <tree string="Content Templates">
+                <field name="name" />
+                <field name="line_ids" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_content_location" model="ir.actions.act_window">
+        <field name="name">Content Templates</field>
+        <field name="res_model">stock.location.content.template</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="stock_content_location_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No template found. Let's create one!
+            </p>
+            <p>
+                Create new templates to define products and quantities that should be
+                in a location.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_stock_location_content_template"
+        name="Content Templates"
+        parent="stock.menu_stock_inventory_control"
+        action="action_stock_content_location"
+        sequence="5"
+        groups="stock.group_stock_multi_locations"
+    />
+
+</odoo>

@@ -1,0 +1,15 @@
+<odoo>
+
+    <record id="stcok_content_location_template_line_list" model="ir.ui.view">
+        <field name="name">stcok.content.location.template.list</field>
+        <field name="model">stock.location.content.template.line</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Location Content Template">
+                <field name="product_id" />
+                <field name="quantity" />
+                <field name="template_id" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

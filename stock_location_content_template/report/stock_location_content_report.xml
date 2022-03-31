@@ -1,0 +1,77 @@
+<odoo>
+
+    <record id="stock_location_content_report_view_list" model="ir.ui.view">
+        <field name="name">stock.location.content.report.view</field>
+        <field name="model">stock.location.content.report</field>
+        <field name="arch" type="xml">
+            <tree string="Location Content Report" create="false" edit="false">
+                <field name="location_id" />
+                <field name="product_id" />
+                <field name="expected_qty" />
+                <field name="current_qty" />
+                <field name="difference" />
+                <field name="done_transfer" invisible="1" />
+                <button
+                    attrs="{'invisible':['|',('difference','=',0.0),('done_transfer','=',True)]}"
+                    name="create_internal_transfer"
+                    icon="fa-refresh"
+                    type="object"
+                />
+                <field
+                    name="picking_id"
+                    attrs="{'invisible': ['|',('difference','=',0.0),('done_transfer','!=',True)]}"
+                />
+                <button
+                    name="open_internal_transfer"
+                    type="object"
+                    class="oe_highlight"
+                    string="Open Picking"
+                    attrs="{'invisible': [('done_transfer','!=',True)]}"
+                />
+
+            </tree>
+        </field>
+    </record>
+    <record id="stock_location_content_report_view_search" model="ir.ui.view">
+        <field name="name">stock.location.content.report.search</field>
+        <field name="model">stock.location.content.report</field>
+        <field name="arch" type="xml">
+            <search string="Location Content Report">
+                <field name="location_id" />
+                <field name="product_id" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Location"
+                        name="by_location"
+                        domain="[]"
+                        context="{'group_by': 'location_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="stock_location_content_report_action_server" model="ir.actions.server">
+        <field name="name">Location Content Report</field>
+        <field name="model_id" ref="model_stock_location_content_report" />
+        <field name="state">code</field>
+        <field
+            name="code"
+        >action = model._get_stock_location_content_reprot_data()</field>
+    </record>
+    <record
+        id="model_stock_location_content_report_action"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Location Content Report</field>
+        <field name="res_model">stock.location.content.report</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_by_location':1}</field>
+    </record>
+    <menuitem
+        id="model_stock_location_content_report_menu"
+        name="Location Content Report"
+        sequence="50"
+        action="stock_location_content_report_action_server"
+        parent="stock.menu_warehouse_report"
+    />
+</odoo>

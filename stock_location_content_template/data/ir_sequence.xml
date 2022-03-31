@@ -1,0 +1,9 @@
+<odoo noupdate="1">
+    <record id="seq_stock_location_content_check" model="ir.sequence">
+        <field name="name">Stock Location Content Check</field>
+        <field name="code">stock.location.content.check</field>
+        <field name="prefix">Check/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>

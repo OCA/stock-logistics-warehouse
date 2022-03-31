@@ -1,0 +1,142 @@
+<odoo>
+
+    <record id="stock_location_content_check_form" model="ir.ui.view">
+        <field name="name">stock.location.content.check.form</field>
+        <field name="model">stock.location.content.check</field>
+        <field name="arch" type="xml">
+            <form string="Content Check">
+                <header>
+                    <button
+                        name="action_confirm"
+                        string="Confirm"
+                        type="object"
+                        attrs="{'invisible':[('state','!=','draft')]}"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="action_complete"
+                        string="Complete"
+                        class="oe_highlight"
+                        type="object"
+                        attrs="{'invisible':[('state','not in',('confirmed'))]}"
+                    />
+                    <button
+                        name="action_close"
+                        string="Close"
+                        class="oe_highlight"
+                        type="object"
+                        attrs="{'invisible':[('state','not in',('completed'))]}"
+                    />
+                    <button
+                        name="action_reset"
+                        string="Reset to Draft"
+                        type="object"
+                        attrs="{'invisible':[('state','in',('draft','closed'))]}"
+                    />
+                    <button
+                        name="action_cancel"
+                        string="Cancel"
+                        type="object"
+                        attrs="{'invisible':[('state','not in',('draft','confirmed','completed'))]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            string="Delivery Order"
+                            attrs="{'invisible': [('state','in', ('draft','confirmed'))]}"
+                            name="action_view_delivery_order"
+                            class="oe_stat_button"
+                            type="object"
+                            icon="fa-truck"
+                        />
+                        <button
+                            string="Transfer"
+                            name="action_view_transfer"
+                            attrs="{'invisible': [('state','in', ('draft','confirmed'))]}"
+                            class="oe_stat_button"
+                            type="object"
+                            icon="fa-exchange"
+                        />
+                    </div>
+                    <label for="name" class="oe_edit_only" />
+                    <h1>
+                        <field name="name" readonly="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field
+                                name="date"
+                                attrs="{'readonly': [('state','not in',('draft'))]}"
+                            />
+                            <field
+                                name="location_id"
+                                domain="[('usage', '!=', 'view'),
+                                ('template_id','!=',None)]"
+                                attrs="{'readonly': [('state','not in',('draft'))]}"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="user_id"
+                                attrs="{'readonly': [('state','not in',('draft'))]}"
+                            />
+                            <field
+                                name="company_id"
+                                attrs="{'readonly': [('state','not in',('draft'))]}"
+                            />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Products" name="products">
+                            <field
+                                name="line_ids"
+                                attrs="{'readonly': [('state','not in',('draft','confirmed'))]}"
+                            >
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_content_location_check_tree" model="ir.ui.view">
+        <field name="name">stock.content.location.check.tree</field>
+        <field name="model">stock.location.content.check</field>
+        <field name="arch" type="xml">
+            <tree string="Content Checks">
+                <field name="date" />
+                <field name="name" />
+                <field name="location_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_content_location_check" model="ir.actions.act_window">
+        <field name="name">Content Checks</field>
+        <field name="res_model">stock.location.content.check</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="stock_content_location_check_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No check found. Let's create one!
+            </p><p>
+                Create new check to verify the content of your location and replenish if necessary.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_stock_location_content_check"
+        name="Checkouts"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="action_stock_content_location_check"
+        sequence="6"
+        groups="stock.group_stock_multi_locations"
+    />
+
+</odoo>
