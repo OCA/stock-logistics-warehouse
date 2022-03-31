@@ -31,7 +31,7 @@
                 <field name="diff_qty"/>
                 <field name="color" invisible="1"/>
                 <field name="purch_line" invisible="1"/>
-                <field name="awaiting_move" invisible="1" />
+                <field name="awaiting_move_id" invisible="1" />
             </tree>
         </field>
     </record>

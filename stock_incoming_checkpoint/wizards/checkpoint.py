@@ -27,7 +27,7 @@ class IncomingCheckpoint(models.TransientModel):
     diff_qty = fields.Float()
     received_qty = fields.Float()
     color = fields.Char(help="Technical field to apply color in tree view")
-    awaiting_move = fields.Many2one(comodel_name="stock.move")
+    awaiting_move_id = fields.Many2one(comodel_name="stock.move")
 
     @api.depends("product_id")
     def _compute_partner_ref(self):
@@ -67,11 +67,11 @@ class IncomingCheckpoint(models.TransientModel):
                         "order_id": move.purchase_line_id.order_id.id,
                         "write_uid": uid,
                         "move": move,
-                        "awaiting_move": None,
+                        "awaiting_move_id": None,
                     }
                 )
             if move.state not in ("done", "cancel", "draft"):
-                pline["awaiting_move"] = move.id
+                pline["awaiting_move_id"] = move.id
             if "received_qty" not in pline:
                 pline["received_qty"] = 0
             if move.state == "done":
@@ -116,14 +116,14 @@ class IncomingCheckpoint(models.TransientModel):
             line["diff_qty"],
             line["write_uid"],
             line["color"],
-            line["awaiting_move"],
+            line["awaiting_move_id"],
         ]
 
     def _get_insert_into_columns(self):
         """Inherit to complete columns"""
         return """INSERT INTO incoming_checkpoint(product_id, purchase_line_id,
         purch_line, date_planned, ordered_qty, received_qty, diff_qty,
-        write_uid, color, awaiting_move)"""
+        write_uid, color, awaiting_move_id)"""
 
     @api.model
     def _add_computed_fields(self, lines):

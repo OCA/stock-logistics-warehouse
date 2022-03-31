@@ -20,8 +20,8 @@ msgid "%s %s Incoming Checkpoint (%s s)"
 msgstr ""
 
 #. module: stock_incoming_checkpoint
-#: field:incoming.checkpoint,awaiting_move:0
-#: model:ir.model.fields,field_description:stock_incoming_checkpoint.field_incoming_checkpoint_awaiting_move
+#: field:incoming.checkpoint,awaiting_move_id:0
+#: model:ir.model.fields,field_description:stock_incoming_checkpoint.field_incoming_checkpoint_awaiting_move_id
 msgid "Awaiting move"
 msgstr ""
 
