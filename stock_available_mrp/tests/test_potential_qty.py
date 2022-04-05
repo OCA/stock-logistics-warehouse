@@ -383,14 +383,14 @@ class TestPotentialQty(SavepointCase):
         # a recordset with multiple products
         # Recursive compute is not working
 
-        p1 = self.product_model.create({"name": "Test P1"})
-        p2 = self.product_model.create({"name": "Test P2"})
+        p1 = self.product_model.create({"name": "Test P1", "type": "product"})
+        p2 = self.product_model.create({"name": "Test P2", "type": "product"})
         p3 = self.product_model.create({"name": "Test P3", "type": "product"})
 
         self.config.set_param("stock_available_mrp_based_on", "immediately_usable_qty")
 
         # P1 need one P2
-        self.create_simple_bom(p1, p2)
+        bom_p1 = self.create_simple_bom(p1, p2)
         # P2 need one P3
         self.create_simple_bom(p2, p3)
 
@@ -403,6 +403,24 @@ class TestPotentialQty(SavepointCase):
         self.assertEqual(
             {p1.id: 3.0, p2.id: 3.0, p3.id: 0.0},
             {p.id: p.potential_qty for p in products},
+        )
+        self.assertEqual(
+            {p1.id: 3.0, p2.id: 3.0, p3.id: 3.0},
+            {p.id: p.immediately_usable_qty for p in products},
+        )
+        # Let's stock P1. This is a manufactured product, so by default the available
+        # to promise will be its potential plus its stock.
+        self.create_inventory(p1.id, 2)
+        self.assertEqual(
+            {p1.id: 5.0, p2.id: 3.0, p3.id: 3.0},
+            {p.id: p.immediately_usable_qty for p in products},
+        )
+        # We can override this at BoM level
+        bom_p1.add_potential_exception = True
+        self.product_model.invalidate_cache()
+        self.assertEqual(
+            {p1.id: 2.0, p2.id: 3.0, p3.id: 3.0},
+            {p.id: p.immediately_usable_qty for p in products},
         )
 
     def test_product_phantom(self):
