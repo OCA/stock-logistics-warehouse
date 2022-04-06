@@ -1,8 +1,8 @@
 Known issues
 ~~~~~~~~~~~~
-The manufacturing delays are not taken into account : this module assumes that
+The manufacturing delays are not taken into account: this module assumes that
 if you have components in stock goods, you can manufacture finished goods
-quickly enough.
+quickly enough. This can be overriden at BoM level though.
 
 As a consequence, and to avoid overestimating, **only the first level** of Bill
 of Materials is considered.

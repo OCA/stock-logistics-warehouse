@@ -37,14 +37,24 @@ with the components available to promise.
 .. contents::
    :local:
 
+Usage
+=====
+
+It's possible to avoid adding potential stock to available to promise stock at Bill of
+Materials level. This is interesting in case that sum is missleading due to uncertain
+manufacturing processes. To do so:
+
+- Go to that specific Bill of Materials and in the Miscellaneous tab set the option
+  **Avoid adding potential to available to promise** on.
+
 Known issues / Roadmap
 ======================
 
 Known issues
 ~~~~~~~~~~~~
-The manufacturing delays are not taken into account : this module assumes that
+The manufacturing delays are not taken into account: this module assumes that
 if you have components in stock goods, you can manufacture finished goods
-quickly enough.
+quickly enough. This can be overriden at BoM level though.
 
 As a consequence, and to avoid overestimating, **only the first level** of Bill
 of Materials is considered.
@@ -113,6 +123,7 @@ Contributors
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Víctor Martínez
+  * David Vidal
 
 Maintainers
 ~~~~~~~~~~~
