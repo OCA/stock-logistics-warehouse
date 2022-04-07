@@ -1,0 +1,23 @@
+<odoo>
+    <record id="res_config_settings_view_form_abc" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.fsm</field>
+        <field name="model">res.config.settings</field>
+        <!-- <field name="priority" eval="40" /> -->
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='operations_setting_container']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box" id="process_transfers">
+                    <div class="o_setting_left_pane">
+                        <field name="count_all_products" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="count_all_products" />
+                        <div class="text-muted">
+                            Count all products including zero qty.
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

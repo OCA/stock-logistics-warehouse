@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_stock_cycle_count_rule_inherited" model="ir.ui.view">
+        <field name="name">stock.cycle.count.rule.inherited</field>
+        <field name="model">stock.cycle.count.rule</field>
+        <field
+            name="inherit_id"
+            ref="stock_cycle_count.stock_cycle_count_rule_form_view"
+        />
+        <field name="arch" type="xml">
+            <field name="rule_type" position="after">
+                <field
+                    name="frequency"
+                    attrs="{'invisible': [('rule_type', '!=', 'abc')]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

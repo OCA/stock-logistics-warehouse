@@ -1,0 +1,14 @@
+<odoo noupdate="1">
+    <record id="stock_abc_a" model="stock.abc">
+        <field name="name">A</field>
+        <field name="count">4</field>
+    </record>
+    <record id="stock_abc_b" model="stock.abc">
+        <field name="name">B</field>
+        <field name="count">2</field>
+    </record>
+    <record id="stock_abc_c" model="stock.abc">
+        <field name="name">C</field>
+        <field name="count">1</field>
+    </record>
+</odoo>
