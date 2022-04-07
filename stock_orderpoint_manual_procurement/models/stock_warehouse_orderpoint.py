@@ -43,7 +43,14 @@ class StockWarehouseOrderpoint(models.Model):
         # '_quantity_in_progress' override in 'purchase_stock' method has not
         # been designed to work with NewIds (resulting in KeyError exceptions).
         # To circumvent this, we knowingly skip such records here.
-        op_qtys = self.filtered(lambda x: x.id)._quantity_in_progress()
+        ops = self.filtered("id")
+        op_qtys = {}
+        # No need to call '_quantity_in_progress()' if there is no orderpoint,
+        # this leads to a heavy request done by a call to `read_group` with
+        # an empty domain on 'purchase.order.line' in the
+        # 'product.product._get_quantity_in_progress()' method.
+        if ops:
+            op_qtys = ops._quantity_in_progress()
         for op in self:
             if not op.id:
                 op.update(
