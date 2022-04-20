@@ -117,15 +117,20 @@ class Product(models.Model):
             "_packaging_values_handler", self._prepare_qty_by_packaging_values
         )
         for pkg in pkg_by_qty:
-            qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
-            # To handle fractional quantities (eg: 0.5 Kg)
-            if pkg.is_unit and not float_is_zero(
-                qty, precision_rounding=self.uom_id.rounding
-            ):
-                # `is_unit` package always be the last package by the sorting
-                # it has the same uom with the product, just sum the quantity
-                qty_per_pkg += float_round(qty, precision_rounding=self.uom_id.rounding)
-                qty = 0
+            # Boost perf: no need to deduce the qty_per_pkg if the pkg_qty is 1
+            if float_compare(pkg.qty, 1, precision_digits=self.uom_id.rounding) == 0:
+                qty_per_pkg = int(qty)
+                qty = 0.0
+            else:
+                qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
+                # To handle fractional quantities (eg: 0.5 Kg)
+                if pkg.is_unit and not float_is_zero(
+                    qty, precision_rounding=self.uom_id.rounding
+                ):
+                    # `is_unit` package always be the last package by the sorting
+                    # it has the same uom with the product, just sum the quantity
+                    qty_per_pkg += float_round(qty, precision_rounding=self.uom_id.rounding)
+                    qty = 0
 
             if qty_per_pkg:
                 value = prepare_values(pkg, qty_per_pkg)
