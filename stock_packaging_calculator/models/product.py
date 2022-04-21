@@ -118,7 +118,12 @@ class Product(models.Model):
             "_packaging_values_handler", self._prepare_qty_by_packaging_values
         )
         for pkg in pkg_by_qty:
-            qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
+            # Boost perf: no need to deduce the qty_per_pkg if the pkg_qty is 1
+            if float_compare(pkg.qty, 1, precision_digits=self.uom_id.rounding) == 0:
+                qty_per_pkg = int(qty)
+                qty = 0.0
+            else:
+                qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
             if qty_per_pkg:
                 value = prepare_values(pkg, qty_per_pkg)
                 if with_contained:
