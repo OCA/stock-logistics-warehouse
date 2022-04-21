@@ -119,6 +119,12 @@ msgid "Rejected"
 msgstr ""
 
 #. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__rejected_message
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__rejected_message
+msgid "Rejected Message"
+msgstr ""
+
+#. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Request Validation"
@@ -158,6 +164,12 @@ msgid "Tier Definition"
 msgstr ""
 
 #. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__to_validate_message
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__to_validate_message
+msgid "To Validate Message"
+msgstr ""
+
+#. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
 msgid "Validate"
@@ -169,6 +181,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Validated"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validated_message
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__validated_message
+msgid "Validated Message"
 msgstr ""
 
 #. module: stock_request_tier_validation
