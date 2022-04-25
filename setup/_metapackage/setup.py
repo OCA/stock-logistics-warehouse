@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo-addon-stock_helper>=15.0dev,<15.1dev',
         'odoo-addon-stock_location_lockdown>=15.0dev,<15.1dev',
         'odoo-addon-stock_move_location>=15.0dev,<15.1dev',
+        'odoo-addon-stock_mts_mto_rule>=15.0dev,<15.1dev',
         'odoo-addon-stock_orderpoint_move_link>=15.0dev,<15.1dev',
         'odoo-addon-stock_orderpoint_purchase_link>=15.0dev,<15.1dev',
         'odoo-addon-stock_orderpoint_uom>=15.0dev,<15.1dev',
