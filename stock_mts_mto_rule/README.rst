@@ -29,9 +29,9 @@ This module add a Make To Stock + Make to Order Route.
 
 If you choose the make to stock + make to order rule instead of the make to
 order route, the creation of a purchase order will depend on the virtual stock.
-There are 3 cases : 
+There are 3 cases :
 
-1. The virtual stock of the product is 0 
+1. The virtual stock of the product is 0
     => It will act exactly like the make to order route.
 
 2. The virtual stock is equal to the quantity ordered
@@ -42,10 +42,10 @@ There are 3 cases :
        will be created for the rest. So it will act like both make to order and
        make to stock rule.
 
-Example : 
+Example :
 We have a virtual stock of : 1 product A
 A sale Order is made for 3 products A.
-2 Procurements will be created : 
+2 Procurements will be created :
 
 1. 1 with a make to stock rule and a quantity of 1
 
