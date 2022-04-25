@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo-addon-stock_packaging_calculator>=15.0dev,<15.1dev',
         'odoo-addon-stock_quant_manual_assign>=15.0dev,<15.1dev',
         'odoo-addon-stock_request>=15.0dev,<15.1dev',
+        'odoo-addon-stock_request_purchase>=15.0dev,<15.1dev',
         'odoo-addon-stock_warehouse_calendar>=15.0dev,<15.1dev',
     ],
     classifiers=[
