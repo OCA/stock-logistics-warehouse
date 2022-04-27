@@ -141,15 +141,10 @@ class CostAdjustmentLine(models.Model):
     @api.model
     def create(self, vals):
         res = super().create(vals)
-        res._check_no_duplicate_line()
         res.action_refresh_quantity()
         return res
 
-    def write(self, vals):
-        res = super().write(vals)
-        self._check_no_duplicate_line()
-        return res
-
+    @api.constrains("product_id", "cost_adjustment_id")
     def _check_no_duplicate_line(self):
         for line in self:
             domain = [
@@ -161,8 +156,9 @@ class CostAdjustmentLine(models.Model):
             if existings:
                 raise UserError(
                     _(
-                        "There is already one cost adjustment line for this product, "
+                        "There is already one cost adjustment line for product %s, "
                         "you should rather modify this one instead of creating a "
                         "new one."
                     )
+                    % line.product_id.display_name
                 )
