@@ -6,7 +6,7 @@
     "summary": "Add link in stock move line references.",
     "version": "13.0.1.0.0",
     "license": "LGPL-3",
-    "website": "https://github.com/OCA/stock-logistics-warehouse",
+    "website": "https://github.com/OCA/stock-logistics-workflow",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": ["stock"],
