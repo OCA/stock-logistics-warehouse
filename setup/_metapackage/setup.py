@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo14-addon-stock_cycle_count',
         'odoo14-addon-stock_demand_estimate',
         'odoo14-addon-stock_demand_estimate_matrix',
+        'odoo14-addon-stock_exception',
         'odoo14-addon-stock_free_quantity',
         'odoo14-addon-stock_generate_putaway_from_inventory',
         'odoo14-addon-stock_helper',
