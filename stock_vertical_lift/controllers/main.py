@@ -14,9 +14,5 @@ class VerticalLiftController(http.Controller):
             rec = request.env["vertical.lift.command"].sudo().record_answer(answer)
             return str(rec.id)
         else:
-            _logger.error(
-                "secret mismatch: %r != %r",
-                secret,
-                os.environ.get("VERTICAL_LIFT_SECRET", ""),
-            )
+            _logger.error("secret mismatch: %r", secret)
             raise http.AuthenticationError()
