@@ -72,7 +72,10 @@ class StockCycleCount(models.Model):
         res = super().action_create_inventory_adjustment()
         if self.cycle_count_rule_id.rule_type == "abc":
             draft_inventory = self.env["stock.inventory"].search(
-                [("state", "=", "draft")]
+                [
+                    ("state", "=", "draft"),
+                    ("cycle_count_id.cycle_count_rule_id.rule_type", "=", "abc"),
+                ]
             )
             for inv in draft_inventory:
                 inv.action_start()

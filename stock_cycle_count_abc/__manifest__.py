@@ -1,11 +1,11 @@
 # Copyright (C) 2022 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    "name": "Stock Inventory ABC",
+    "name": "Stock Cycle Count ABC",
     "summary": "This module allows you to implement ABC Analysis \
 and configure cycle count rules using the ABC group.",
     "version": "14.0.1.0.0",
-    "maintainers": ["opensourceintegrators"],
+    "maintainers": ["max3903"],
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",

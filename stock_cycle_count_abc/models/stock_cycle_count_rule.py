@@ -36,19 +36,19 @@ class StockCycleCountRule(models.Model):
     @api.model
     def _compute_rule_abc(self, locs):
         cycle_counts = []
+        stock_inventory = self.env["stock.inventory"].search(
+            [
+                ("state", "in", ["confirm", "done", "draft"]),
+            ],
+            order="date desc",
+        )
+        latest_inventory_date = False
         for loc in locs:
-            latest_inventory_date = (
-                self.env["stock.inventory"]
-                .search(
-                    [
-                        ("location_ids", "in", [loc.id]),
-                        ("state", "in", ["confirm", "done", "draft"]),
-                    ],
-                    order="date desc",
-                    limit=1,
-                )
-                .date
+            latest_inventory = stock_inventory.filtered(
+                lambda r: loc.id in r.location_ids.ids
             )
+            if latest_inventory:
+                latest_inventory_date = latest_inventory[0].date
             if latest_inventory_date:
                 try:
                     if self.frequency == "daily":
