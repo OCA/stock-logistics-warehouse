@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
 
 
 class StockCycleCountRule(models.Model):
@@ -50,29 +49,20 @@ class StockCycleCountRule(models.Model):
             if latest_inventory:
                 latest_inventory_date = latest_inventory[0].date
             if latest_inventory_date:
-                try:
-                    if self.frequency == "daily":
-                        next_date = datetime.today()
-                    if self.frequency == "weekly":
-                        next_date = fields.Datetime.from_string(
-                            latest_inventory_date
-                        ) + timedelta(days=7)
-                    if self.frequency == "monthly":
-                        next_date = fields.Datetime.from_string(
-                            latest_inventory_date
-                        ) + timedelta(days=30)
-                    if self.frequency == "quarterly":
-                        next_date = fields.Datetime.from_string(
-                            latest_inventory_date
-                        ) + relativedelta(months=3)
-                except Exception as e:
-                    raise UserError(
-                        _(
-                            "Error found determining the frequency of periodic "
-                            "cycle count rule. %s"
-                        )
-                        % str(e)
-                    )
+                if self.frequency == "daily":
+                    next_date = datetime.today()
+                elif self.frequency == "weekly":
+                    next_date = fields.Datetime.from_string(
+                        latest_inventory_date
+                    ) + timedelta(days=7)
+                elif self.frequency == "monthly":
+                    next_date = fields.Datetime.from_string(
+                        latest_inventory_date
+                    ) + timedelta(days=30)
+                elif self.frequency == "quarterly":
+                    next_date = fields.Datetime.from_string(
+                        latest_inventory_date
+                    ) + relativedelta(months=3)
             else:
                 next_date = datetime.today()
             cycle_count = self._propose_cycle_count(next_date, loc)
