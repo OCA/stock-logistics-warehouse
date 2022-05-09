@@ -7,6 +7,7 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Hidden",
     "depends": ["stock_available", "mrp"],
+    "data": ["views/mrp_bom_views.xml"],
     "demo": ["demo/mrp_data.xml"],
     "license": "AGPL-3",
     "installable": True,

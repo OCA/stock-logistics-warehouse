@@ -79,8 +79,19 @@ class ProductProduct(models.Model):
                 )
 
             res[product.id]["potential_qty"] = potential_qty
-            res[product.id]["immediately_usable_qty"] = potential_qty
-
+            # Normal BoM products (those which are manufactured) are regular stored
+            # products and their immediately_usable_qty will be the sum of its regular
+            # available to promise quanity as storable product and its potential qty
+            # Phantom BoM products (kits) don't have real stock so their available
+            # to promise quantity will be the same as the potential.
+            if bom_id.type == "phantom":
+                res[product.id]["immediately_usable_qty"] = potential_qty
+            # We can override at BoM level to add the potential quantity to the
+            # manufactured product. This could be the case when the manufacturing
+            # proccess is uncertain and the promising such quantities could be
+            # missleading.
+            elif not bom_id.add_potential_exception:
+                res[product.id]["immediately_usable_qty"] += potential_qty
         return res, stock_dict
 
     def _explode_boms(self):
