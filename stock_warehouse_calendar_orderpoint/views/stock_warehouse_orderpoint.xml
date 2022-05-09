@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Camptocamp SA
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+
+    <record id="view_warehouse_orderpoint_tree_editable" model="ir.ui.view">
+      <field name="name">stock.warehouse.orderpoint.tree.editable.inherit</field>
+      <field name="model">stock.warehouse.orderpoint</field>
+      <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree_editable" />
+      <field name="arch" type="xml">
+          <field name="json_lead_days_popover" position="after">
+              <field name="lead_days_date" optional="show" />
+          </field>
+      </field>
+    </record>
+
+    <record id="view_warehouse_orderpoint_tree_editable_config" model="ir.ui.view">
+      <field name="name">stock.warehouse.orderpoint.tree.editable.config.inherit</field>
+      <field name="model">stock.warehouse.orderpoint</field>
+      <field
+            name="inherit_id"
+            ref="stock.view_warehouse_orderpoint_tree_editable_config"
+        />
+      <field name="arch" type="xml">
+          <field name="json_lead_days_popover" position="after">
+              <field name="lead_days_date" optional="show" />
+          </field>
+      </field>
+    </record>
+
+</odoo>
