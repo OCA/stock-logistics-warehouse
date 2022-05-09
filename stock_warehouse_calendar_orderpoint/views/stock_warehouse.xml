@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Camptocamp SA
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="view_warehouse" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.inherit</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock_warehouse_calendar.view_warehouse" />
+        <field name="arch" type="xml">
+            <group name="group_resupply" position="inside">
+                <field name="orderpoint_calendar_id" options="{'no_create': True}" />
+                <field
+                    name="orderpoint_on_workday"
+                    attrs="{'invisible': [('orderpoint_calendar_id', '=', False)]}"
+                />
+            </group>
+            <field name="calendar_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'required': [('orderpoint_on_workday', '=', True)]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
