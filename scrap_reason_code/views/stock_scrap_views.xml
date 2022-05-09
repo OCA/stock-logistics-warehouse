@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="stock.stock_scrap_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//group/group" position='inside'>
-                <field name="reason_code_id" />
+                <field name="reason_code_id" required="1" />
             </xpath>
         </field>
     </record>
@@ -27,7 +27,7 @@
         <field name="inherit_id" ref="stock.stock_scrap_form_view2" />
         <field name="arch" type="xml">
             <xpath expr="//group/group" position='inside'>
-                <field name="reason_code_id" />
+                <field name="reason_code_id" required="1" />
             </xpath>
         </field>
     </record>

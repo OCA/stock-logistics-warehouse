@@ -14,7 +14,7 @@
                     <field name="description" />
                 </group>
                 <group>
-                    <field name="location_id" />
+                    <field name="location_id" required="1" />
                 </group>
             </form>
         </field>
