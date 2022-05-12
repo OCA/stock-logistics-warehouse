@@ -100,3 +100,67 @@ class StockScrap(TransactionCase):
 
         scrapped_move.quantity_done = 8
         self.assertEqual(scrap.scrap_qty, 8, "Scrap quantity is not updated.")
+
+    def test_scrap_reason_code_write(self):
+        """Scrap the product of a picking2. Then modify the
+        done linked stock move and ensure the scrap quantity is also
+        updated and verify scrap reason code
+        """
+        self.env["stock.quant"]._update_available_quantity(
+            self.scrap_product, self.stock_location, 10
+        )
+        partner2 = self.env["res.partner"].create({"name": "BOdedra 2"})
+        picking2 = self.env["stock.picking"].create(
+            {
+                "name": "A single picking with one move to scrap 2",
+                "location_id": self.stock_location.id,
+                "location_dest_id": self.customer_location.id,
+                "partner_id": partner2.id,
+                "picking_type_id": self.env.ref("stock.picking_type_out").id,
+            }
+        )
+        move2 = self.env["stock.move"].create(
+            {
+                "name": "A move to confirm and scrap its product",
+                "location_id": self.stock_location.id,
+                "location_dest_id": self.customer_location.id,
+                "product_id": self.scrap_product.id,
+                "product_uom": self.uom_unit.id,
+                "product_uom_qty": 1.0,
+                "picking_id": picking2.id,
+            }
+        )
+        move2._action_confirm()
+
+        self.assertEqual(move2.state, "confirmed")
+        scrap2 = self.env["stock.scrap"].create(
+            {
+                "product_id": self.scrap_product.id,
+                "product_uom_id": self.scrap_product.uom_id.id,
+                "scrap_qty": 5,
+                "picking_id": picking2.id,
+            }
+        )
+        scrap2.write(
+            {
+                "reason_code_id": self.reason_code.id,
+            }
+        )
+        scrap2._onchange_reason_code_id()
+        scrap2.do_scrap()
+        self.assertEqual(len(picking2.move_lines), 2)
+        scrapped_move = picking2.move_lines.filtered(lambda m: m.state == "done")
+        self.assertTrue(scrapped_move, "No scrapped move created.")
+        self.assertEqual(
+            scrapped_move.scrap_ids.ids, [scrap2.id], "Wrong scrap linked to the move."
+        )
+        self.assertEqual(
+            scrap2.scrap_qty,
+            5,
+            "Scrap quantity has been modified and is not " "correct anymore.",
+        )
+        move = scrap2.move_id
+        self.assertEqual(move.reason_code_id.id, self.reason_code.id)
+
+        scrapped_move.quantity_done = 8
+        self.assertEqual(scrap2.scrap_qty, 8, "Scrap quantity is not updated.")
