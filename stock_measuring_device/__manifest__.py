@@ -3,7 +3,7 @@
 {
     "name": "Stock Measuring Device",
     "summary": "Implement a common interface for measuring and weighing devices",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Warehouse",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
