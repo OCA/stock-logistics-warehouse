@@ -47,7 +47,7 @@ class TestPick(VerticalLiftCase):
         return new_inventory
 
     def test_location_empty_is_empty(self):
-        """ Location is indicated as being empty, and it is"""
+        """Location is indicated as being empty, and it is"""
         operation = self._open_screen("pick")
         tray_location = operation.tray_location_id
         tray_product = operation.current_move_line_id.product_id
