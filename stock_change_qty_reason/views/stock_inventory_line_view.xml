@@ -14,6 +14,7 @@
         <field name="name">stock.inventory.line.tree.reason.code</field>
         <field name="model">stock.inventory.line</field>
         <field name="inherit_id" ref="reason_stock_inventory_line_tree" />
+        <field name="priority">99</field>
         <field
             name="groups_id"
             eval="[(4, ref('stock_change_qty_reason.group_qty_reason_preset'))]"
