@@ -80,7 +80,7 @@ class TestZippcubeWizard(SavepointComponentCase):
         fields = ["packaging_length", "width", "height", "max_weight", "volume"]
         for idx, line in enumerate(self.wizard.line_ids):
             return_value = TestZippcubeWizard.get_measure_result(
-                100 * 2 ** idx, 100, 100, 3 ** idx
+                100 * 2**idx, 100, 100, 3**idx
             )
             line.measuring_select_for_measure()
             self.device._update_packaging_measures(return_value)
@@ -90,11 +90,11 @@ class TestZippcubeWizard(SavepointComponentCase):
                 line.read(fields)[0],
                 {
                     "id": line.id,
-                    "packaging_length": (2 ** idx) * 1000,
+                    "packaging_length": (2**idx) * 1000,
                     "width": 1000,
                     "height": 1000,
-                    "max_weight": 3.0 ** idx,
-                    "volume": 2.0 ** idx,
+                    "max_weight": 3.0**idx,
+                    "volume": 2.0**idx,
                 },
             )
         self.wizard.action_save()
@@ -133,11 +133,11 @@ class TestZippcubeWizard(SavepointComponentCase):
                 )[0],
                 {
                     "id": packaging.id,
-                    "packaging_length": (2 ** idx) * 1000,
+                    "packaging_length": (2**idx) * 1000,
                     "width": 1000,
                     "height": 1000,
-                    "max_weight": 3.0 ** idx,
-                    "volume": 2.0 ** idx,
+                    "max_weight": 3.0**idx,
+                    "volume": 2.0**idx,
                 },
             )
 
