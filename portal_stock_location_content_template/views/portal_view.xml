@@ -1,0 +1,215 @@
+<odoo>
+    <template
+        id="portal_my_home_checkout"
+        name="Portal layout: Checkouts"
+        inherit_id="portal.portal_breadcrumbs"
+        priority="50"
+    >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-if="page_name == 'checkout'"
+                t-attf-class="breadcrumb-item #{'active ' if not checkout else ''}"
+            >
+                <t t-if="checkout">
+                    <a
+                        t-attf-href="/my/checkouts?{{ keep_query() }}"
+                        aria-label="Checkouts"
+                        title="Checkouts"
+                    >
+                        <span>Checkouts</span>
+                    </a>
+                </t>
+                <t t-else="0">
+                    <span>Checkouts</span>
+                </t>
+            </li>
+            <li t-if="checkout" class="breadcrumb-item">
+                <span t-esc="checkout.name" />
+            </li>
+        </xpath>
+    </template>
+    <template
+        id="portal_my_checkout"
+        name="Checkouts"
+        customize_show="True"
+        inherit_id="portal.portal_my_home"
+        priority="50"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Checkouts</t>
+                <t t-set="url" t-value="'/my/checkouts'" />
+                <t t-set="placeholder_count" t-value="'checkout_count'" />
+            </t>
+        </xpath>
+    </template>
+    <template id="checkout_portal" name="My Checkouts">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Checkouts</t>
+            </t>
+            <t t-if="not checkouts">
+                <p>There are currently no Checkout for your account.</p>
+            </t>
+            <t t-if="checkouts" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-left">Ref</th>
+                        <th class="text-left">Location</th>
+                        <th class="text-left">Date</th>
+                        <th class="text-left">User</th>
+                    </tr>
+                </thead>
+                <t t-foreach="checkouts" t-as="checkout">
+                    <tr>
+                        <td>
+                            <a
+                                t-att-href="checkout.get_portal_url()"
+                                t-att-title="checkout.id"
+                            >
+                                <t t-esc="checkout.name" />
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="checkout.location_id" />
+                        </td>
+                        <td>
+                            <span t-field="checkout.date" />
+                        </td>
+                        <td>
+                            <span t-field="checkout.user_id" />
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="checkout_tmaplate_view" name="Checkouts">
+        <t t-call="portal.portal_layout">
+            <t t-set="wrapwrap_classes" t-value="'o_portal_bg_dark'" />
+            <t t-set="o_portal_fullwidth_alert">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t
+                        t-set="backend_url"
+                        t-value="'/web#model=stock.location.content.check&amp;id=%s&amp;view_type=form' % (checkout.id)"
+                    />
+                </t>
+            </t>
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <div class="row no-gutters">
+                        <div class="col-md">
+                            <h5 class="d-flex mb-1 mb-md-0">
+                                <div class="col-10 text-truncate">
+                                    <span t-field="checkout.name" />
+                                    <small class="text-muted ">(#
+                                        <span t-field="checkout.id" />
+                                        )
+                                    </small>
+                                </div>
+                                <div class="col-2 text-right">
+                                    <a
+                                        href="/checkout/complete"
+                                        id="complete_checkout"
+                                        class="btn btn-primary btn-sm"
+                                    >Complete</a>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                </t>
+                <t t-set="card_body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Date:</strong>
+                            <span
+                                t-field="checkout.date"
+                                t-options='{"widget": "date"}'
+                            />
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Location:</strong>
+                            <span t-field="checkout.location_id" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>User:</strong>
+                            <span t-field="checkout.user_id" />
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Company:</strong>
+                            <span t-field="checkout.company_id" />
+                        </div>
+                    </div>
+                    <table
+                        id="checkout-table"
+                        t-att-data-checkout-id="checkout.id"
+                        class="table table-sm mt-5"
+                    >
+                        <thead class="bg-100">
+                            <tr>
+                                <th class="text-left">Product</th>
+                                <th class="text-right">Expected Qty.</th>
+                                <th class="text-right">Current Qty.</th>
+                                <th class="text-right">Counted Qty.</th>
+                                <th class="text-right">Replenished Qty.</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody checkout_lines">
+                            <t t-foreach="checkout.line_ids" t-as="line">
+                                <tr t-att-data-id="line.id">
+                                    <td class="text-left">
+                                        <span t-field="line.product_id" />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                            id="expected_qty"
+                                            t-field="line.expected_qty"
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                            id="current_qty"
+                                            t-field="line.current_qty"
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            t-attf-value="#{line.counted_qty or 0}"
+                                            name="counted_qty"
+                                            id="counted_qty"
+                                            style="width: 60px;"
+                                        />
+                                    </td>
+                                    <td class="text-right">
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            t-attf-value="#{line.replenished_qty or 0}"
+                                            name="replenished_qty"
+                                            id="replenished_qty"
+                                            style="width: 60px;"
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+            </t>
+            <div class="mt-4">
+                <h4><strong>Message and communication history</strong></h4>
+                <t t-call="portal.message_thread">
+                    <t t-set="object" t-value="checkout" />
+                    <t t-set="token" t-value="checkout.access_token" />
+                    <t t-set="pid" t-value="pid" />
+                    <t t-set="hash" t-value="hash" />
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

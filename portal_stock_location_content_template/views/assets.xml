@@ -1,0 +1,14 @@
+<odoo>
+    <template
+        id="assets_frontend"
+        name="Customer portal assets"
+        inherit_id="web.assets_frontend"
+    >
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/portal_stock_location_content_template/static/src/js/chekout_website_portal.js"
+            />
+            </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,3 @@
+"id","name","model_id/id","group_id/id","perm_read","perm_write","perm_create","perm_unlink"
+"access_stock_location_content_check_line_portal","stock_location_content_template.order.line.portal","stock_location_content_template.model_stock_location_content_check_line","base.group_portal",1,0,0,0
+"access_stock_location_content_check_portal","stock_location_content_template.order.portal","stock_location_content_template.model_stock_location_content_check","base.group_portal",1,1,0,0

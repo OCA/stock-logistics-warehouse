@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_location_content_check_form_inherit" model="ir.ui.view">
+        <field name="name">stock.location.content.check.form.inh</field>
+        <field name="model">stock.location.content.check</field>
+        <field
+            name="inherit_id"
+            ref="stock_location_content_template.stock_location_content_check_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="after">
+                <div class="oe_chatter">
+                    <field
+                        name="message_follower_ids"
+                        options="{'post_refresh':True}"
+                        groups="base.group_user"
+                    />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
