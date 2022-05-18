@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partial_picking_wizard" model="ir.ui.view">
+        <field name="model">stock.partial.picking</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="file_upload" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button type="object" name="action_import" string="Import" />
+                    <button type="special" string="Close" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_confirm']" position="before">
+                <button
+                    name="action_partial_wizard"
+                    type="object"
+                    string="Partial pickings"
+                    groups="sales_team.group_sale_manager"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
