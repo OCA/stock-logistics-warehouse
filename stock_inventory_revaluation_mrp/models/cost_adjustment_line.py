@@ -33,7 +33,7 @@ class CostAdjustmentLine(models.Model):
         for line in self:
             product = line.product_id
             if product:
-                # List MOs where Product is used as s raw material
+                # List MOs where Product is used as raw material
                 productions1_domain = [
                     ("state", "in", ["draft", "confirmed", "progress"]),
                     ("move_raw_ids.product_id", "=", product.id),
@@ -54,7 +54,7 @@ class CostAdjustmentLine(models.Model):
                 productions3_domain = [
                     ("state", "in", ["draft", "confirmed", "progress"]),
                     (
-                        "workorder_ids.workcenter_id.analytic_product_id.activity_cost_ids",
+                        "workorder_ids.workcenter_id.analytic_product_id.activity_cost_ids.product_id",
                         "=",
                         product.id,
                     ),
