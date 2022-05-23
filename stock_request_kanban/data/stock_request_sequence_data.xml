@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_stock_request_kanban" model="ir.sequence">
+            <field name="name">Stock Request Kanban</field>
+            <field name="code">stock.request.kanban</field>
+            <field name="prefix">KB</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False" />
+        </record>
+        <record id="seq_stock_inventory_kanban" model="ir.sequence">
+            <field name="name">Stock Inventory Kanban</field>
+            <field name="code">stock.inventory.kanban</field>
+            <field name="prefix">IKB</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False" />
+        </record>
+    </data>
+</odoo>

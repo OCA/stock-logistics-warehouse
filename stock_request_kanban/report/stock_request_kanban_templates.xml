@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017-2020 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <template id="report_simple_label">
+        <div class="col-3" style="padding:20;height:350px;">
+            <div class="container">
+                <div class="row">
+                    <div
+                        class="col-12"
+                        style="height:15%;border:2px solid black;text-align:center;vertical-align:middle;display:table;"
+                    >
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <strong t-field="o.location_id.name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row" t-if="o.product_id.default_code">
+                    <div
+                        class="col-12"
+                        style="height:15%;border:2px solid black;text-align:center;vertical-align:middle;display:table;"
+                    >
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <strong
+                                t-field="o.product_id.default_code"
+                                t-if="o.product_id.default_code"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div
+                        class="col-12 align-middle"
+                        style="height:40%;border:2px solid black;text-align:center;vertical-align:middle;display:table;"
+                    >
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <strong t-field="o.product_id.name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div
+                        class="col-6"
+                        style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;"
+                    >
+                        <div style="vertical-align: middle;">
+                            <span t-esc="float(o.product_qty)" />
+                            <span t-field="o.product_id.uom_id.name" />
+                        </div>
+                    </div>
+                    <div
+                        class="col-6"
+                        style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;"
+                    >
+                        <div style="vertical-align: middle;">
+                            <span t-esc="float(o.product_uom_qty)" />
+                            <span t-field="o.product_uom_id.name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div
+                        class="col-12"
+                        style="height:10%;border:2px solid black;text-align:center;vertical-align:middle;display:table;"
+                    >
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <span t-field="o.name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" style="height:10%;">
+                        <img
+                            t-att-src="'/report/barcode/%s/%s?width=%s&amp;height=%s' % (o.get_barcode_format(), o.name, 320, 20)"
+                            style="height:80%; width: 100%;"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="report_kanban_label">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <t t-call="stock_request_kanban.report_simple_label">
+                        <t t-set="o" t-value="o" />
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+    <record id="action_report_kanban" model="ir.actions.report">
+        <field name="name">Print kanban</field>
+        <field name="model">stock.request.kanban</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">stock_request_kanban.report_kanban_label</field>
+        <field name="report_file">stock_request_kanban.report_kanban_label</field>
+        <field name="paperformat_id" ref="stock_request_kanban.kanban_paper_format" />
+        <field name="binding_model_id" ref="model_stock_request_kanban" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

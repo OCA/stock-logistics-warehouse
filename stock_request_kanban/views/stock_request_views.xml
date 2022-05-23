@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <template
+        id="stock_request_kanban_assets_backend"
+        name="stock_request_kanban assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/stock_request_kanban/static/src/js/stock_request_kanban_scan_controller.js"
+            />
+            <script
+                type="text/javascript"
+                src="/stock_request_kanban/static/src/js/stock_request_kanban_scan_view.js"
+            />
+        </xpath>
+    </template>
+    <record id="view_stock_request_tree" model="ir.ui.view">
+        <field name="name">stock.request.tree</field>
+        <field name="model">stock.request</field>
+        <field name="inherit_id" ref="stock_request.view_stock_request_tree" />
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="js_class">stock_request_kanban_list</attribute>
+            </tree>
+        </field>
+    </record>
+</odoo>

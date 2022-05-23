@@ -1,0 +1,775 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_request_kanban
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2019-10-16 15:58+0000\n"
+"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.8\n"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_product__kanban_card_count
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_template__kanban_card_count
+#, fuzzy
+msgid "# Kanban Cards"
+msgstr "看板卡"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_needaction
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_needaction
+msgid "Action Needed"
+msgstr "需要采取行动"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__active
+msgid "Active"
+msgstr "有效"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_ids
+msgid "Activities"
+msgstr "活动"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_exception_decoration
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_state
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_state
+msgid "Activity State"
+msgstr "活动状态"
+
+#. module: stock_request_kanban
+#: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_inventory_kanban_action
+#: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_request_kanban_action
+#: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_request_order_kanban_action
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.wizard_stock_inventory_kanban_form
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.wizard_stock_request_kanban_form
+msgid "Add Kanban"
+msgstr "添加看板"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban.py:0
+#, python-format
+msgid "Added kanban %s for product %s"
+msgstr "为产品%s添加了看板%s"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__allow_virtual_location
+msgid "Allow Virtual locations on Stock Requests"
+msgstr "允许库存请求中的虚拟位置"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
+msgid "Archived"
+msgstr "已归档"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_attachment_count
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_attachment_count
+msgid "Attachment Count"
+msgstr "附件数量"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban_abstract.py:0
+#, python-format
+msgid ""
+"Barcode %s does not correspond to any Kanban. Try with another barcode or "
+"press Close to finish scanning."
+msgstr "条形码%s与任何看板都不对应。尝试使用其他条形码或按“关闭”完成扫描。"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_inventory_kanban.py:0
+#, python-format
+msgid "Barcode %s is already scanned"
+msgstr "条码%s已被扫描"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_inventory_kanban.py:0
+#, python-format
+msgid "Barcode %s is not in the inventory"
+msgstr "条码%s不在库存中"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
+#, python-format
+msgid "Barcode %s is on the order"
+msgstr "条码%s在订单上"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban___barcode_scanned
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban___barcode_scanned
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract___barcode_scanned
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban___barcode_scanned
+msgid "Barcode Scanned"
+msgstr "条码扫描"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/models/stock_request_kanban.py:0
+#, python-format
+msgid "CRC is not valid"
+msgstr "CRC无效"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Cancel"
+msgstr "取消"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__cancelled
+msgid "Cancelled"
+msgstr "已取消"
+
+#. module: stock_request_kanban
+#: model_terms:ir.actions.act_window,help:stock_request_kanban.stock_inventory_kanban_action
+msgid "Click to add a Stock Inventory Kanban."
+msgstr "点击添加库存看板。"
+
+#. module: stock_request_kanban
+#: model_terms:ir.actions.act_window,help:stock_request_kanban.stock_request_kanban_action
+msgid "Click to add a Stock Request Kanban."
+msgstr "点击添加库存请求看板。"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.wizard_stock_inventory_kanban_form
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.wizard_stock_request_kanban_form
+msgid "Close"
+msgstr "关闭"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__closed
+msgid "Closed"
+msgstr "已关闭"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__company_id
+msgid "Company"
+msgstr "公司"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
+#, python-format
+msgid "Company must be the same"
+msgstr "公司必须相同"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__create_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__create_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__create_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__create_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__create_uid
+msgid "Created by"
+msgstr "创建者"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__create_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__create_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__create_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__create_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__display_name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__display_name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__display_name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__display_name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__display_name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__draft
+msgid "Draft"
+msgstr "草稿"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Finish"
+msgstr "完成"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__finished
+msgid "Finished"
+msgstr "已完成"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_follower_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_follower_ids
+msgid "Followers"
+msgstr "关注者"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_channel_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "关注者(频道)"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_partner_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "关注者(业务伙伴)"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
+msgid "Group By"
+msgstr "分组"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_exception_icon
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_exception_icon
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_needaction
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_unread
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_needaction
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "如果勾选此项，将会收到新消息提醒。"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "如果勾选此项， 某些信息将会产生传递错误。"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__in_progress
+msgid "In progress"
+msgstr "进行中"
+
+#. module: stock_request_kanban
+#: model:ir.ui.menu,name:stock_request_kanban.menu_wizard_stock_inventory_kanban
+msgid "Inventory"
+msgstr "库存"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__inventory_kanban_id
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Inventory Kanban"
+msgstr "库存看板"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_stock_inventory_kanban
+msgid "Inventory for Kanban"
+msgstr "库存看板"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_is_follower
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_is_follower
+msgid "Is Follower"
+msgstr "是关注者"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__kanban_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request__kanban_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__kanban_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__kanban_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__kanban_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__kanban_id
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Kanban"
+msgstr "看板"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.product_product_form_view_kanban_card_button
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.product_template_form_view_bom_button
+#, fuzzy
+msgid "Kanban Cards"
+msgstr "看板卡"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_kanban_view
+msgid "Kanban Image"
+msgstr "看板图片"
+
+#. module: stock_request_kanban
+#: model:ir.ui.menu,name:stock_request_kanban.stock_request_kanban_menu
+msgid "Kanban cards"
+msgstr "看板卡"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban____last_update
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban____last_update
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban____last_update
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban____last_update
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract____last_update
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban____last_update
+msgid "Last Modified on"
+msgstr "最后修改时间"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__write_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__write_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__write_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__write_uid
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__write_uid
+msgid "Last Updated by"
+msgstr "最后更新者"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__write_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__write_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__write_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__write_date
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
+#, python-format
+msgid "Lines only can be added on orders with draft state"
+msgstr "只有处于草稿状态的订单才能添加行"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__location_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__location_id
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
+msgid "Location"
+msgstr "位置"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
+#, python-format
+msgid "Location must be the same"
+msgstr "位置必须相同"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_main_attachment_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "附件"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_error
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_error
+msgid "Message Delivery error"
+msgstr "消息递送错误"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_ids
+msgid "Messages"
+msgstr "消息"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Missing"
+msgstr "缺失"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__missing_kanban_ids
+msgid "Missing Kanban"
+msgstr "看板缺失"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__count_missing_kanbans
+msgid "Missing Kanbans"
+msgstr "看板缺失"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__procurement_group_id
+msgid ""
+"Moves created through this stock request will be put in this procurement "
+"group. If none is given, the moves generated by procurement rules will be "
+"grouped into one big picking."
+msgstr ""
+"通过此库存请求创建的移动将放入此采购组。如果没有给出，则由采购规则生成的移动"
+"将被分组为一个大拣货。"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__name
+msgid "Name"
+msgstr "名称"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "下一个活动截止日期"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_summary
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_summary
+msgid "Next Activity Summary"
+msgstr "下一个活动摘要"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_type_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_type_id
+msgid "Next Activity Type"
+msgstr "下一个活动类型"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_needaction_counter
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_needaction_counter
+msgid "Number of Actions"
+msgstr "操作次数"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_error_counter
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_error_counter
+#, fuzzy
+msgid "Number of errors"
+msgstr "错误数"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_needaction_counter
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "需要操作消息数量"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error_counter
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "传递错误的消息数量"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_unread_counter
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_unread_counter
+msgid "Number of unread messages"
+msgstr "未读消息的数量"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__order_id
+msgid "Order"
+msgstr "订单"
+
+#. module: stock_request_kanban
+#: model:ir.actions.report,name:stock_request_kanban.action_report_kanban
+msgid "Print kanban"
+msgstr "打印看板"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Print missing"
+msgstr "打印缺失"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__procurement_group_id
+msgid "Procurement Group"
+msgstr "补货组"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
+#, python-format
+msgid "Procurement group must be the same"
+msgstr "补货组必须相同"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_product_product
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_id
+msgid "Product"
+msgstr "产品"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_product_template
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_template_id
+#, fuzzy
+msgid "Product Template"
+msgstr "产品"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_uom_id
+msgid "Product Unit of Measure"
+msgstr "产品计量单位"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__product_ids
+msgid "Products"
+msgstr "产品"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_uom_qty
+msgid "Quantity"
+msgstr "数量"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__product_qty
+msgid "Quantity in the default UoM of the product"
+msgstr "产品的默认计量单位数量"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__product_uom_qty
+msgid "Quantity, specified in the unit of measure indicated in the request."
+msgstr "数量，以请求中指示的计量单位指定。"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_qty
+msgid "Real Quantity"
+msgstr "实际数量"
+
+#. module: stock_request_kanban
+#: model:ir.ui.menu,name:stock_request_kanban.menu_wizard_stock_request_kanban
+msgid "Request from Kanban cards"
+msgstr "来自看板卡的请求"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_user_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_user_id
+msgid "Responsible User"
+msgstr "责任用户"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__route_id
+msgid "Route"
+msgstr "路线"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__route_ids
+msgid "Routes"
+msgstr "路线"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
+#, fuzzy
+msgid "SMS Delivery error"
+msgstr "消息递送错误"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Scan"
+msgstr "扫描"
+
+#. module: stock_request_kanban
+#. openerp-web
+#: code:addons/stock_request_kanban/static/src/xml/stock_request_kanban_scan.xml:0
+#, fuzzy, python-format
+msgid "Scan Kanban"
+msgstr "已扫描看板"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Scanned"
+msgstr "已扫描"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__scanned_kanban_ids
+msgid "Scanned Kanban"
+msgstr "已扫描看板"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Set to draft"
+msgstr "设置为草稿"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+msgid "Start"
+msgstr "开始"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__state
+msgid "State"
+msgstr "状态"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__status
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__status
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__status
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__status
+msgid "Status"
+msgstr "状态"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__status_state
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__status_state
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__status_state
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__status_state
+msgid "Status State"
+msgstr "状态"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_state
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"基于活动的状态\n"
+"逾期：已经超过截止日期\n"
+"现今：活动日期是当天\n"
+"计划：未来的活动。"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_tree
+msgid "Stock Inventories"
+msgstr "库存存货"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_inventory_kanban
+#, fuzzy
+msgid "Stock Inventory Kanban Wizard"
+msgstr "库存存货看板"
+
+#. module: stock_request_kanban
+#: model:ir.actions.act_window,name:stock_request_kanban.stock_inventory_kanban_action
+msgid "Stock Inventory Kanbans"
+msgstr "库存存货看板"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_stock_request
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__stock_request_id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__stock_request_id
+msgid "Stock Request"
+msgstr "库存请求"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_form
+msgid "Stock Request Kanban"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban_abstract
+#, fuzzy
+msgid "Stock Request Kanban Abstract Wizard"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_kanban
+#, fuzzy
+msgid "Stock Request Kanban Wizard"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
+#: model:ir.actions.act_window,name:stock_request_kanban.stock_request_kanban_action
+msgid "Stock Request Kanbans"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
+#: model:ir.model,name:stock_request_kanban.model_wizard_stock_request_order_kanban
+#, fuzzy
+msgid "Stock Request Order Kanban Wizard"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_form
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_tree
+msgid "Stock Requests"
+msgstr "库存请求"
+
+#. module: stock_request_kanban
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
+msgid "Stock Requests Kanban"
+msgstr "库存请求看板"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_exception_decoration
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_unread
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_unread
+msgid "Unread Messages"
+msgstr "未读消息"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_unread_counter
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "未读消息计数器"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_wizard_stock_inventory_kanban___barcode_scanned
+#: model:ir.model.fields,help:stock_request_kanban.field_wizard_stock_request_kanban___barcode_scanned
+#: model:ir.model.fields,help:stock_request_kanban.field_wizard_stock_request_kanban_abstract___barcode_scanned
+#: model:ir.model.fields,help:stock_request_kanban.field_wizard_stock_request_order_kanban___barcode_scanned
+msgid "Value of the last barcode scanned."
+msgstr "最后扫描条形码的值。"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__warehouse_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__warehouse_id
+#: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
+msgid "Warehouse"
+msgstr "仓库"
+
+#. module: stock_request_kanban
+#: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
+#, python-format
+msgid "Warehouse must be the same"
+msgstr "仓库必须相同"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__website_message_ids
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__website_message_ids
+msgid "Website Messages"
+msgstr "网站消息"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__website_message_ids
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__website_message_ids
+msgid "Website communication history"
+msgstr "网站沟通记录"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr ".如果勾选此项，将会收到新消息提醒。"
+
+#~ msgid "Overdue"
+#~ msgstr "逾期"
+
+#~ msgid "Planned"
+#~ msgstr "计划"
+
+#~ msgid "Today"
+#~ msgstr "今天"
+
+#~ msgid "wizard.stock.inventory.kanban"
+#~ msgstr "wizard.stock.inventory.kanban"
+
+#~ msgid "wizard.stock.request.kanban"
+#~ msgstr "wizard.stock.request.kanban"
+
+#~ msgid "wizard.stock.request.kanban.abstract"
+#~ msgstr "wizard.stock.request.kanban.abstract"
+
+#~ msgid "wizard.stock.request.order.kanban"
+#~ msgstr "wizard.stock.request.order.kanban"
