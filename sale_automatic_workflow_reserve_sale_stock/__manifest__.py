@@ -7,7 +7,7 @@
     "category": "Sales Management",
     "license": "AGPL-3",
     "author": "FactorLibre, Tecnativa, Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/sale-workflow",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": ["sale_automatic_workflow", "stock_reserve_sale"],
     "data": ["views/sale_workflow_process_view.xml"],
     "maintainers": ["CarlosRoca13"],
