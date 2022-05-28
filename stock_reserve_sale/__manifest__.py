@@ -7,7 +7,7 @@
     "category": "Warehouse",
     "license": "AGPL-3",
     "complexity": "normal",
-    "website": "https://github.com/stock-logistics-warehouse",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": ["sale_stock", "stock_reserve"],
     "data": [
         "wizard/sale_stock_reserve_view.xml",
