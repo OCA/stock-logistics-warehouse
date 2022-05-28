@@ -27,7 +27,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
         customer_location = self.env.ref("stock.stock_location_customers")
         uom_unit = self.env.ref("uom.product_uom_unit")
 
-        size_attr = self.env["product.attribute"].create({"name": "Size"})
+        size_attr = self.env["product.attribute"].create({"name": "Size Test"})
         size_attr_value_s = self.env["product.attribute.value"].create(
             {"name": "S", "attribute_id": size_attr.id}
         )
