@@ -6,7 +6,7 @@
     "summary": "Add Stock Requests to the Inventory App",
     "version": "13.0.1.1.0",
     "license": "LGPL-3",
-    "website": "https://github.com/stock-logistics-warehouse",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "category": "Warehouse",
     "depends": ["stock_request"],

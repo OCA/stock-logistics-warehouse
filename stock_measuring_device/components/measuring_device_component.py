@@ -35,7 +35,6 @@ class MeasuringDevice(AbstractComponent):
         This method can be called to send notifications for instance.
 
         :return: None"""
-        pass
 
     def get_measure(self):
         """Get a measure from the device
