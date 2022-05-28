@@ -8,6 +8,7 @@
     "version": "13.0.1.1.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
+    "development_status": "Mature",
     "category": "Warehouse",
     "depends": ["stock"],
     "data": [
