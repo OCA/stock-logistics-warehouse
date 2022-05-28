@@ -41,7 +41,7 @@ addon | version | maintainers | summary
 [stock_account_change_qty_reason](stock_account_change_qty_reason/) | 13.0.1.0.0 |  | Stock Account Change Quantity Reason
 [stock_account_inventory_discrepancy](stock_account_inventory_discrepancy/) | 13.0.1.0.0 |  | Adds the capability to show the value discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_archive_constraint](stock_archive_constraint/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Stock archive constraint
-[stock_available](stock_available/) | 13.0.1.0.1 |  | Stock available to promise
+[stock_available](stock_available/) | 13.0.1.0.2 |  | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 13.0.1.0.0 |  | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 13.0.2.0.0 |  | Consider the production potential is available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 13.0.1.0.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
