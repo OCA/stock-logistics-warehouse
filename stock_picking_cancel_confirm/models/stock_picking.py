@@ -12,4 +12,9 @@ class StockPicking(models.Model):
     def action_cancel(self):
         if not self.filtered("cancel_confirm"):
             return self.open_cancel_confirm_wizard()
-        return super().action_cancel()
+        res = super().action_cancel()
+        # Ensure to cancel the picking w/o moves that wasn't cancelled by odoo core
+        self.filtered(lambda l: l.state != "cancel" and not l.move_lines).write(
+            {"state": "cancel"}
+        )
+        return res
