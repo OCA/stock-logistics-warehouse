@@ -108,18 +108,29 @@ class TestStockRequestOrder(TestStockRequest):
             )
         )
 
-        form = Form(self.env["stock.request.order"])
-        form.company_id = self.main_company
-        form.expected_date = expected_date
-        form.warehouse_id = self.warehouse
-        form.location_id = self.warehouse.lot_stock_id
-        form.save()
+        stock_request_order_obj = self.env["stock.request.order"]
+        vals = {
+            "company_id": self.main_company.id,
+            "expected_date": expected_date,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+        }
+        stock_request_order_new = stock_request_order_obj.new(vals)
 
         # Test onchange_warehouse_picking_id
-        form.warehouse_id = wh
-        form.save()
+        stock_request_order_new.onchange_warehouse_picking_id()
+        vals.update(
+            stock_request_order_new.sudo()._convert_to_write(
+                {
+                    name: stock_request_order_new[name]
+                    for name in stock_request_order_new._cache
+                }
+            )
+        )
+        vals.update({"warehouse_id": wh.id})
+        stock_request_order = stock_request_order_obj.create(vals)
 
-        self.assertEqual(form.picking_type_id, new_pick_type)
+        self.assertEqual(stock_request_order.picking_type_id, new_pick_type)
 
     def test_create(self):
         expected_date = fields.Datetime.now()
