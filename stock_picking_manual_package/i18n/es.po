@@ -1,0 +1,125 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_manual_package
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-09 07:22+0000\n"
+"PO-Revision-Date: 2022-06-09 09:25+0200\n"
+"Last-Translator: Sergio Teruel <sergio.teruel@tecnativa.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: stock_picking_manual_package
+#: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_picking_manual_package
+#: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__create_uid
+msgid "Created by"
+msgstr "Creado el"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,help:stock_picking_manual_package.field_stock_picking_manual_package_wiz__nbr_lines_into_package
+msgid ""
+"If set, the package will be assigned to the N reserved detailed operations"
+msgstr ""
+"Si está establecido se empaquetaran N líneas en el paquete seleccionado"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,help:stock_picking_manual_package.field_stock_picking_manual_package_wiz__package_id
+msgid ""
+"If this field is set, when you click on 'Put in pack' all done quantities "
+"will be include in this package"
+msgstr ""
+"Si este campo está establecido, cuando pulses sobre 'Poner en paquete' todas "
+"las cantidades serán incluidas en este paquete"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__nbr_lines_into_package
+msgid "Number lines to packaging"
+msgstr "Número de líneas a empaquetar"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__package_id
+msgid "Package"
+msgstr "Paquete"
+
+#. module: stock_picking_manual_package
+#: model:ir.model,name:stock_picking_manual_package.model_stock_quant_package
+msgid "Packages"
+msgstr "Paquetes"
+
+#. module: stock_picking_manual_package
+#: model:ir.model.fields,field_description:stock_picking_manual_package.field_stock_picking_manual_package_wiz__picking_id
+msgid "Picking"
+msgstr "Albarán"
+
+#. module: stock_picking_manual_package
+#: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
+msgid "Select or create a package to do 'Put in pack'"
+msgstr "Selecciona o crea un paquete para la acción \"Poner en paquete\""
+
+#. module: stock_picking_manual_package
+#: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
+msgid "Set how many lines you want to 'Put in pack'"
+msgstr "Establezca el número de lineas que quiere \"Poner en paquete\""
+
+#. module: stock_picking_manual_package
+#: model:ir.actions.act_window,name:stock_picking_manual_package.action_manual_package_wiz
+#: model_terms:ir.ui.view,arch_db:stock_picking_manual_package.view_manual_package_wizard_form
+msgid "Stock Picking Manual Package"
+msgstr "Empaquetado manual"
+
+#. module: stock_picking_manual_package
+#: model:ir.model,name:stock_picking_manual_package.model_stock_picking_manual_package_wiz
+msgid "Stock picking manual package wizard"
+msgstr "Asistente de empaquetado manual"
+
+#. module: stock_picking_manual_package
+#: model:ir.model,name:stock_picking_manual_package.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
