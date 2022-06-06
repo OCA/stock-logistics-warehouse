@@ -25,16 +25,6 @@ class StockRule(models.Model):
                         "No MTS or MTO rule configured on procurement " "rule: %s!"
                     ) % (rule.name,)
                     raise ValidationError(msg)
-                if (
-                    rule.mts_rule_id.location_src_id.id
-                    != rule.mto_rule_id.location_src_id.id
-                ):
-                    msg = _(
-                        "Inconsistency between the source locations of "
-                        "the mts and mto rules linked to the procurement "
-                        "rule: %s! It should be the same."
-                    ) % (rule.name,)
-                    raise ValidationError(msg)
 
     def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
         self.ensure_one()
