@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_putaway_method
+#
+# Translators:
+# Quentin THEURET <odoo@kerpeo.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-02 03:44+0000\n"
+"PO-Revision-Date: 2018-03-02 03:44+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_putaway_method
+#: model:ir.model.fields,field_description:stock_putaway_method.field_product_putaway__method
+msgid "Method"
+msgstr "Méthode"
+
+#. module: stock_putaway_method
+#: model:ir.model,name:stock_putaway_method.model_product_putaway
+msgid "Put Away Strategy"
+msgstr "Stratégie de rangement"
+
+#~ msgid "Fixed Locations Per Categories"
+#~ msgstr "Emplacement fixe par catégories"
+
+#~ msgid "Putaway"
+#~ msgstr "Rangement"
