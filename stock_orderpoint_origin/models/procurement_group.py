@@ -26,7 +26,13 @@ class ProcurementGroup(models.Model):
                 if not line["document_in"] and line["document_out"]:
                     source_docs.add(line["document_out"])
             if source_docs:
-                source_groups = [x.procurement_group_id for x in source_docs]
+                # stock.picking object doesn´t have field procurement_group_id
+                # so we check if the source document is a picking to use the
+                # correct field (group_id)
+                source_groups = source_groups = [
+                    x.procurement_group_id if x._name != "stock.picking" else x.group_id
+                    for x in source_docs
+                ]
                 source_names = ", ".join([x.name for x in source_docs])
                 new_origin = "%s (from %s)" % (source_names, procurement.origin)
                 new_procurement = procurement._replace(origin=new_origin)
