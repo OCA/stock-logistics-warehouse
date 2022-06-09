@@ -10,7 +10,10 @@ class StockQuant(models.Model):
 
     def action_view_reservations(self):
         self.ensure_one()
-        action = self.env.ref("stock.stock_move_line_action").read([])[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.stock_move_line_action"
+        )
+        action["domain"] = [("product_qty", ">", 0)]
         action.update(
             {
                 "context": {
