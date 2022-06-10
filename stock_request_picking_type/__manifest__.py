@@ -15,6 +15,6 @@
         "views/stock_request_order_views.xml",
         "views/stock_picking_views.xml",
     ],
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "maintainers": ["max3903"],
 }

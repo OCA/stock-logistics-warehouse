@@ -1,5 +1,6 @@
 <odoo>
-    <record model="ir.ui.view" id="stock_request_order_search">
+
+    <record id="stock_request_order_search" model="ir.ui.view">
         <field name="name">stock.request.order.search</field>
         <field name="model">stock.request.order</field>
         <field name="inherit_id" ref="stock_request.stock_request_order_search" />
@@ -14,6 +15,7 @@
             </xpath>
         </field>
     </record>
+
     <record id="stock_request_order_form_picking_type" model="ir.ui.view">
         <field name="name">stock.request.order.form.picking.type</field>
         <field name="model">stock.request.order</field>
@@ -29,6 +31,7 @@
             </xpath>
         </field>
     </record>
+
     <record id="action_picking_dashboard" model="ir.actions.act_window">
         <field name="name">Stock Request Orders</field>
         <field name="type">ir.actions.act_window</field>
@@ -37,14 +40,15 @@
         <field name="view_id" eval="False" />
         <field name="search_view_id" ref="stock_request_order_search" />
         <field name="domain">[('picking_type_id', '=', active_id)]</field>
-        <field name="context">{'default_picking_type_id': active_id}</field>
     </record>
+
     <record id="action_stock_request_order_form" model="ir.actions.act_window">
         <field name="name">Stock Request Orders</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.request.order</field>
         <field name="view_mode">form</field>
     </record>
+
     <menuitem
         id="menu_stock_request_order"
         action="stock_request.stock_request_order_action"
@@ -52,4 +56,5 @@
         parent="stock.menu_stock_warehouse_mgmt"
         sequence="30"
     />
+
 </odoo>
