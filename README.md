@@ -42,6 +42,7 @@ addon | version | maintainers | summary
 [stock_inventory_cost_info](stock_inventory_cost_info/) | 14.0.1.0.0 |  | Shows the cost of the inventory adjustments
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 14.0.1.1.0 |  | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 14.0.1.0.1 |  | Allow to perform inventories of a location without including its child locations.
+[stock_inventory_line_open](stock_inventory_line_open/) | 14.0.1.0.0 |  | Open inventory lines on validated inventory adjustments
 [stock_inventory_line_product_cost](stock_inventory_line_product_cost/) | 14.0.1.0.0 |  | Stock Adjustment Cost
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 14.0.1.0.1 |  | More filters for inventory adjustments
 [stock_inventory_preparation_filter_pos](stock_inventory_preparation_filter_pos/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Add POS category filter on inventory adjustments
