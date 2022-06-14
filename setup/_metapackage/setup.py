@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo14-addon-stock_inventory_cost_info',
         'odoo14-addon-stock_inventory_discrepancy',
         'odoo14-addon-stock_inventory_exclude_sublocation',
+        'odoo14-addon-stock_inventory_line_open',
         'odoo14-addon-stock_inventory_line_product_cost',
         'odoo14-addon-stock_inventory_preparation_filter',
         'odoo14-addon-stock_inventory_preparation_filter_pos',
