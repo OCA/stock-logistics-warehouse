@@ -1,7 +1,6 @@
 # Copyright 2022 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from datetime import datetime, time
 
 from dateutil import relativedelta
 
@@ -32,16 +31,11 @@ class StockWarehouseOrderpoint(models.Model):
             start_date = orderpoint._get_next_reordering_date()
             lead_days_date = start_date + relativedelta.relativedelta(days=lead_days)
             # Postpone to the next available workday if needed
-            if (
-                orderpoint.warehouse_id.orderpoint_on_workday
-                and orderpoint.warehouse_id.calendar_id
-            ):
-                lead_days_date = datetime.combine(lead_days_date.date(), time.min)
-                new_lead_days_date = orderpoint.warehouse_id.calendar_id.plan_days(
-                    1, lead_days_date
+            calendar = orderpoint.warehouse_id.calendar_id
+            if orderpoint.warehouse_id.orderpoint_on_workday and calendar:
+                lead_days_date = calendar.plan_hours(
+                    0, lead_days_date, compute_leaves=True
                 )
-                if new_lead_days_date.date() > lead_days_date.date():
-                    lead_days_date = new_lead_days_date
             orderpoint.lead_days_date = lead_days_date
 
     def _get_lead_days(self):
@@ -53,7 +47,9 @@ class StockWarehouseOrderpoint(models.Model):
         self.ensure_one()
         calendar = self.warehouse_id.orderpoint_calendar_id
         if calendar:
-            return calendar.plan_days(1, fields.Datetime.now())
+            # TODO: should we take into account days off or the reordering
+            # calendar with 'compute_leaves=True' here?
+            return calendar.plan_hours(0, fields.Datetime.now())
         return False
 
     @api.depends("rule_ids", "product_id.seller_ids", "product_id.seller_ids.delay")
