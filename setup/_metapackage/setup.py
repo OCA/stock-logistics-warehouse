@@ -63,7 +63,6 @@ setuptools.setup(
         'odoo13-addon-stock_packaging_calculator_packaging_type',
         'odoo13-addon-stock_picking_completion_info',
         'odoo13-addon-stock_picking_consolidation_priority',
-        'odoo13-addon-stock_picking_manual_package',
         'odoo13-addon-stock_picking_package_grouped',
         'odoo13-addon-stock_picking_procure_method',
         'odoo13-addon-stock_product_qty_by_packaging',
