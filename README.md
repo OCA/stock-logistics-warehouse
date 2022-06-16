@@ -86,6 +86,7 @@ addon | version | maintainers | summary
 [stock_packaging_calculator_packaging_type](stock_packaging_calculator_packaging_type/) | 13.0.1.1.0 |  | Glue module for packaging type
 [stock_picking_completion_info](stock_picking_completion_info/) | 13.0.1.1.0 |  | Display on current document completion information according to next operations
 [stock_picking_consolidation_priority](stock_picking_consolidation_priority/) | 13.0.1.0.0 |  | Raise priority of all transfers for a chain when started
+[stock_picking_manual_package](stock_picking_manual_package/) | 13.0.1.0.0 |  | Select or create a package to put in pack for a picking
 [stock_picking_package_grouped](stock_picking_package_grouped/) | 13.0.1.0.1 |  | Allow create package (put in pack) from pickings depending on grouping criteria.
 [stock_picking_procure_method](stock_picking_procure_method/) | 13.0.1.0.0 |  | Allows to force the procurement method from the picking
 [stock_product_qty_by_packaging](stock_product_qty_by_packaging/) | 13.0.1.1.0 |  | Compute product quantity to pick by packaging
