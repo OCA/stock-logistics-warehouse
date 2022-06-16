@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field name="name">stock.picking.form (in stock_picking_dest_moves)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+           <xpath expr="//div[hasclass('oe_button_box')]/button" position="before">
+                <button
+                    class="oe_stat_button"
+                    name="action_view_dest_picking_ids"
+                    type="object"
+                    icon="fa-truck"
+                    help="Destination Transfers"
+                    attrs="{'invisible': [('dest_picking_count', '=', 0)]}"
+                >
+                    <div class="o_field_widget o_stat_info">
+                       <span class="o_stat_value">
+                            <field
+                                name="dest_picking_count"
+                                widget="statinfo"
+                                nolabel="1"
+                                class="mr4"
+                            />
+                        </span>
+                        <span class="o_stat_text">Destination Transfers</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
