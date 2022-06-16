@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_manual_package_wizard_form" model="ir.ui.view">
+        <field name="name">stock.picking.manual.package.wiz.form</field>
+        <field name="model">stock.picking.manual.package.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Stock Picking Manual Package">
+                <p>Select or create a package to do 'Put in pack'</p>
+                <group>
+                    <field name="package_id" />
+                </group>
+                <p>Set how many lines you want to 'Put in pack'</p>
+                <group>
+                    <field name="nbr_lines_into_package" />
+                </group>
+                <footer>
+                    <button
+                        string="Confirm"
+                        class="oe_highlight"
+                        name="action_confirm"
+                        type="object"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_manual_package_wiz" model="ir.actions.act_window">
+        <field name="name">Stock Picking Manual Package</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.picking.manual.package.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
