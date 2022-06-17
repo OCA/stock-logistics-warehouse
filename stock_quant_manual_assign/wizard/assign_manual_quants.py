@@ -116,6 +116,7 @@ class AssignManualQuantsLines(models.TransientModel):
     _name = "assign.manual.quants.lines"
     _description = "Assign Manual Quants Lines"
     _rec_name = "quant_id"
+    _order = "location_id, lot_id, package_id"
 
     assign_wizard = fields.Many2one(
         comodel_name="assign.manual.quants",
@@ -134,24 +135,28 @@ class AssignManualQuantsLines(models.TransientModel):
         string="Location",
         related="quant_id.location_id",
         groups="stock.group_stock_multi_locations",
+        store=True,
     )
     lot_id = fields.Many2one(
         comodel_name="stock.production.lot",
         string="Lot",
         related="quant_id.lot_id",
         groups="stock.group_production_lot",
+        store=True,
     )
     package_id = fields.Many2one(
         comodel_name="stock.quant.package",
         string="Package",
         related="quant_id.package_id",
         groups="stock.group_tracking_lot",
+        store=True,
     )
     owner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Owner",
         related="quant_id.owner_id",
         groups="stock.group_tracking_owner",
+        store=True,
     )
     # This is not correctly shown as related or computed, so we make it regular
     on_hand = fields.Float(
