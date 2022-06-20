@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="stock_picking_show_linked_form_inherit" model="ir.ui.view">
+            <field name="name">stock_picking_show_linked.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <field name="dest_picking_count" invisible="1" />
+                    <field name="origin_picking_count" invisible="1" />
+                    <button
+                        class="oe_stat_button"
+                        type="object"
+                        name="action_stock_picking_destination"
+                        icon="fa-truck"
+                        attrs="{'invisible': [('dest_picking_count', '==', 0)]}"
+                    >
+                        <field
+                            string="Dest. Transfers"
+                            name="dest_picking_count"
+                            widget="statinfo"
+                        />
+                    </button>
+                    <button
+                        class="oe_stat_button"
+                        type="object"
+                        name="action_stock_picking_origin"
+                        icon="fa-truck"
+                        attrs="{'invisible': [('origin_picking_count', '==', 0)]}"
+                    >
+                        <field
+                            string="Origin Transfers"
+                            name="origin_picking_count"
+                            widget="statinfo"
+                        />
+                    </button>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>
