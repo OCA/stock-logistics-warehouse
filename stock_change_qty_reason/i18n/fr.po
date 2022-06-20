@@ -31,6 +31,11 @@ msgid "Change Qty Reasons"
 msgstr "Raisons de changement de quantité"
 
 #. module: stock_change_qty_reason
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_change_qty_reason
 #: model:ir.model,name:stock_change_qty_reason.model_res_config_settings
 msgid "Config Settings"
 msgstr "Configuration"
