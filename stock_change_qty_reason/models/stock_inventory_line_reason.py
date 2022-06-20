@@ -11,6 +11,7 @@ class StockInventoryLineReason(models.Model):
     name = fields.Char("Reason Name")
     description = fields.Text("Reason Description")
     active = fields.Boolean(default=True)
+    company_id = fields.Many2one("res.company", default=lambda c: c.env.company.id)
 
     _sql_constraints = [
         (

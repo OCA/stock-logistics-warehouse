@@ -22,7 +22,10 @@
         />
         <field name="arch" type="xml">
             <field name="reason" position="replace">
-                <field name="preset_reason_id" />
+                <field
+                    name="preset_reason_id"
+                    domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"
+                />
             </field>
         </field>
     </record>
