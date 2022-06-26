@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2020-08-11 10:59+0000\n"
-"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
+"PO-Revision-Date: 2022-06-26 11:05+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 3.10\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_inventory_chatter
 #: selection:stock.inventory,state:0
@@ -43,12 +43,12 @@ msgstr ""
 #. module: stock_inventory_chatter
 #: selection:stock.inventory,state:0
 msgid "In Progress"
-msgstr ""
+msgstr "V teku"
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__location_id
 msgid "Inventoried Location"
-msgstr ""
+msgstr "Lokacija inventure"
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__partner_id
@@ -63,17 +63,17 @@ msgstr "Inventar"
 #. module: stock_inventory_chatter
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_canceled
 msgid "Inventory Canceled"
-msgstr ""
+msgstr "Inventura preklicana"
 
 #. module: stock_inventory_chatter
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_confirmed
 msgid "Inventory Confirmed"
-msgstr ""
+msgstr "Inventura potrjena"
 
 #. module: stock_inventory_chatter
 #: model:mail.message.subtype,name:stock_inventory_chatter.mt_inventory_done
 msgid "Inventory Done"
-msgstr ""
+msgstr "Inventura opravljena"
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory__filter
@@ -83,12 +83,12 @@ msgstr "Inventar za"
 #. module: stock_inventory_chatter
 #: selection:stock.inventory,state:0
 msgid "Pending to Approve"
-msgstr ""
+msgstr "Čaka na odobritev"
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory__partner_id
 msgid "Specify Owner to focus your inventory on a particular Owner."
-msgstr ""
+msgstr "Določite lastnika za inventuro osredotočeno na določenega lastnika."
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory__state
@@ -109,4 +109,4 @@ msgstr "Status"
 #. module: stock_inventory_chatter
 #: selection:stock.inventory,state:0
 msgid "Validated"
-msgstr ""
+msgstr "Overjeno"
