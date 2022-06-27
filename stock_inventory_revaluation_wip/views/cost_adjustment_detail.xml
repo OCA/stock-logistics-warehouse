@@ -9,7 +9,7 @@
         />
         <field name="arch" type="xml">
             <field name="bom_id" position="after">
-                <field name="operation_id" />
+                <field name="operation_id" optional="show" />
             </field>
         </field>
     </record>
