@@ -26,13 +26,6 @@
                     icon="fa-bars"
                     string="BoM Details"
                 />
-                <button
-                    name="action_open_cost_adjustment_details_qty"
-                    type="object"
-                    class="oe_stat_button"
-                    icon="fa-bars"
-                    string="QTY on Hand Impact"
-                />
             </xpath>
         </field>
     </record>

@@ -4,15 +4,13 @@
         <field name="name">stock.cost.adjustment.detail.mrp.tree</field>
         <field name="model">stock.cost.adjustment.detail</field>
         <field name="arch" type="xml">
-            <tree
-                string="Details"
-                decoration-danger="product_original_cost != product_cost"
-            >
+            <tree>
                 <field name="cost_adjustment_id" invisible="1" />
                 <field name="company_id" invisible="1" />
                 <field name="currency_id" invisible="1" />
-                <field name="product_id" string="Component Product" />
-                <field name="bom_id" string="BoM Product" />
+                <field name="product_id" />
+                <field name="bom_id" />
+                <field name="bom_line_id" optional="show" />
                 <field name="quantity" />
                 <field
                     name="bom_product_qty_on_hand"
@@ -27,19 +25,10 @@
                     name="current_bom_cost"
                     options="{'currency_field': 'currency_id'}"
                     widget="monetary"
+                    optional="hide"
                 />
                 <field
-                    name="product_cost"
-                    options="{'currency_field': 'currency_id'}"
-                    widget="monetary"
-                />
-                <field
-                    name="future_bom_cost"
-                    options="{'currency_field': 'currency_id'}"
-                    widget="monetary"
-                />
-                <field
-                    name="difference_cost"
+                    name="cost_increase"
                     options="{'currency_field': 'currency_id'}"
                     widget="monetary"
                 />
@@ -53,10 +42,16 @@
         <field name="model">stock.cost.adjustment.detail</field>
         <field name="arch" type="xml">
             <search string="Cost Adjustment Details">
+                <field name="product_id" />
                 <field name="bom_id" />
                 <filter
+                    name="group_by_product_id"
+                    string="Impacted Product"
+                    context="{'group_by': 'product_id'}"
+                />
+                <filter
                     name="group_by_bom_id"
-                    string="Parent BoM"
+                    string="Impacted BoM"
                     context="{'group_by': 'bom_id'}"
                 />
             </search>

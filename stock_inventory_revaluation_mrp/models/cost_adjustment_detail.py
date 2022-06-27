@@ -7,39 +7,29 @@ from odoo import api, fields, models
 class CostAdjustmentDetail(models.Model):
     _name = "stock.cost.adjustment.detail"
     _description = "Cost Adjustment Detail"
-    _order = "cost_adjustment_id"
 
-    cost_adjustment_id = fields.Many2one(
-        "stock.cost.adjustment",
-        string="Cost Adjustment",
-        check_company=True,
+    cost_adjustment_line_id = fields.Many2one(
+        "stock.cost.adjustment.line",
         index=True,
         required=True,
     )
+    cost_adjustment_id = fields.Many2one(
+        "stock.cost.adjustment", related="cost_adjustment_line_id.cost_adjustment_id"
+    )
     product_id = fields.Many2one(
         "product.product",
-        string="Product",
+        string="Impacted Product",
         check_company=True,
         index=True,
         required=True,
     )
     product_original_cost = fields.Float(
         string="Current Cost",
-        # readonly=True,
-        default=0,
+        related="product_id.standard_price",
     )
-    product_cost = fields.Float(
-        string="Future Cost",
-        # readonly=True,
-        states={"confirm": [("readonly", False)]},
-        default=0,
-    )
-    difference_cost = fields.Float(
-        string="Difference",
-        compute="_compute_difference",
-        help="Indicates the gap between the product's original cost and its new cost.",
+    cost_increase = fields.Float(
         readonly=True,
-        store=True,
+        help="Indicates cost to add to the product's original cost.",
     )
     company_id = fields.Many2one(
         "res.company",
@@ -61,7 +51,7 @@ class CostAdjustmentDetail(models.Model):
     quantity = fields.Float("Quantity")
     bom_id = fields.Many2one(
         "mrp.bom",
-        string="BoM",
+        string="From Impacted BoM",
     )
     current_bom_cost = fields.Float(
         compute="_compute_current_bom_cost", string="Current BoM Cost", store=True
@@ -70,7 +60,7 @@ class CostAdjustmentDetail(models.Model):
         compute="_compute_future_bom_cost", string="Future BoM Cost", store=True
     )
     percent_difference = fields.Float(
-        compute="_compute_get_diff_percent",
+        compute="_compute_percent_difference",
         string="% Difference",
         store=True,
         group_operator="avg",
@@ -86,26 +76,16 @@ class CostAdjustmentDetail(models.Model):
                 line.bom_id.product_id and line.bom_id.product_id.qty_available
             ) or line.bom_id.product_tmpl_id.qty_available
 
-    @api.depends("current_bom_cost", "future_bom_cost")
-    def _compute_get_diff_percent(self):
+    @api.depends("current_bom_cost", "cost_increase")
+    def _compute_percent_difference(self):
         for line in self:
             line.percent_difference = 0.0
-            if line.current_bom_cost > 0.0 and line.future_bom_cost > 0.0:
+            if line.current_bom_cost > 0.0:
                 line.percent_difference = (
-                    line.difference_cost * 100
-                ) / line.current_bom_cost
+                    line.cost_increase * 100 / line.current_bom_cost
+                )
 
     @api.depends("quantity", "product_original_cost")
     def _compute_current_bom_cost(self):
         for line in self:
             line.current_bom_cost = line.quantity * line.product_original_cost
-
-    @api.depends("quantity", "product_cost")
-    def _compute_future_bom_cost(self):
-        for line in self:
-            line.future_bom_cost = line.quantity * line.product_cost
-
-    @api.depends("current_bom_cost", "future_bom_cost")
-    def _compute_difference(self):
-        for line in self:
-            line.difference_cost = line.future_bom_cost - line.current_bom_cost
