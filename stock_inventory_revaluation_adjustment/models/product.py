@@ -185,6 +185,7 @@ class ProductTemplate(models.Model):
             )
         return accounts
 
+    # FIXME: this field is never set; obsolete?
     proposed_cost = fields.Float(
         "Proposed Cost",
         company_dependent=True,

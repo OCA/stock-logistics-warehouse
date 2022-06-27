@@ -10,8 +10,15 @@ class CostAdjustmentLine(models.Model):
     _description = "Cost Adjustment Line"
     _order = "product_id, cost_adjustment_id"
 
+    @api.depends("state")
+    def _compute_is_editable(self):
+        for line in self:
+            line.is_editable = line.state == "draft"
+
     is_editable = fields.Boolean(
-        string="Editable?", help="Technical field to restrict editing."
+        string="Editable?",
+        compute="_compute_is_editable",
+        help="Technical field to restrict editing.",
     )
     cost_adjustment_id = fields.Many2one(
         "stock.cost.adjustment",
