@@ -7,7 +7,7 @@
        (in the case of chained routes) through a button
        in the parent picking view.
     """,
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
