@@ -60,6 +60,7 @@ setuptools.setup(
         'odoo14-addon-stock_packaging_calculator',
         'odoo14-addon-stock_packaging_calculator_packaging_type',
         'odoo14-addon-stock_picking_cancel_confirm',
+        'odoo14-addon-stock_picking_show_linked',
         'odoo14-addon-stock_product_qty_by_packaging',
         'odoo14-addon-stock_pull_list',
         'odoo14-addon-stock_putaway_method',
