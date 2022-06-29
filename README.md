@@ -39,6 +39,7 @@ addon | version | maintainers | summary
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 15.0.1.1.0 |  | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 15.0.1.0.0 |  | Internal request for stock
 [stock_request_purchase](stock_request_purchase/) | 15.0.1.0.1 |  | Internal request for stock
+[stock_secondary_unit](stock_secondary_unit/) | 15.0.1.0.0 |  | Get product quantities in a secondary unit
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 15.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds a calendar to the Warehouse
 
 [//]: # (end addons)
