@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_secondary_unit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-11 06:27+0000\n"
+"PO-Revision-Date: 2018-09-11 08:28+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: stock_secondary_unit
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.report_delivery_document
+msgid "<strong>Secondary Qty</strong>"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
+msgid "Done"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__product_uom_qty
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_reservation__product_uom_qty
+msgid "Initial Demand"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: stock_secondary_unit
+#: model:ir.model,name:stock_secondary_unit.model_product_product
+msgid "Product"
+msgstr "Producto"
+
+#. module: stock_secondary_unit
+#: model:ir.model,name:stock_secondary_unit.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model,name:stock_secondary_unit.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__secondary_unit_qty_available
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__secondary_unit_qty_available
+msgid "Quantity On Hand (2Unit)"
+msgstr "Cantidad a mano (2Ud.)"
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__stock_secondary_uom_id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__stock_secondary_uom_id
+msgid "Second unit for inventory"
+msgstr "Segunda unidad de medida para inventario"
+
+#. module: stock_secondary_unit
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.view_template_property_form
+msgid "Secondary unit"
+msgstr "Unidad Secundaria"
+
+#. module: stock_secondary_unit
+#: model:ir.model,name:stock_secondary_unit.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit
+#, fuzzy
+msgid "Stock Product Secondary Unit"
+msgstr "Unidad Secundaria"
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
+#: model:ir.model.fields,help:stock_secondary_unit.field_stock_reservation__product_uom_qty
+msgid ""
+"This is the quantity of products from an inventory point of view. For moves "
+"in the state 'done', this is the quantity of products that were actually "
+"moved. For other moves, this is the quantity of product that is planned to "
+"be moved. Lowering this quantity does not generate a backorder. Changing "
+"this quantity on assigned moves affects the product reservation, and should "
+"be done with care."
+msgstr ""
+
+#, fuzzy
+#~ msgid "Second unit"
+#~ msgstr "Unidad Secundaria"
+
+#, fuzzy
+#~ msgid "Secondary Qty"
+#~ msgstr "Unidad Secundaria"
+
+#, fuzzy
+#~ msgid "Stock Secondary Unit Mixin"
+#~ msgstr "Unidad Secundaria"
+
+#~ msgid "On Hand (2unit)"
+#~ msgstr "A mano (2Ud.)"
+
+#~ msgid "Second Unit Quantity On Hand"
+#~ msgstr "Segunda unidad de medida por defecto"
