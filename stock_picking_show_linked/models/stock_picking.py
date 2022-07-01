@@ -19,8 +19,8 @@ class StockPicking(models.Model):
             record.dest_picking_count = len(dest_pickings)
 
     def _get_action_link(self, pickings):
-        result = self.env["ir.actions.actions"]._for_xml_id(
-            "stock.action_picking_tree_all"
+        result = self.env["ir.actions.act_window"].for_xml_id(
+            "stock", "action_picking_tree_all"
         )
         # choose the view_mode accordingly
         if not pickings or len(pickings) > 1:
