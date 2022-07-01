@@ -11,9 +11,7 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "depends": [
-        "stock",
-    ],
+    "depends": ["stock",],
     "data": ["views/stock_picking.xml"],
     "license": "AGPL-3",
     "installable": True,
