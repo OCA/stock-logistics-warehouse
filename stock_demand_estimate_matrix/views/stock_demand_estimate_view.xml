@@ -12,8 +12,8 @@
                 <field name="date_range_id" />
             </field>
             <tree position="attributes">
-                <attribute name="editable">top</attribute>
-                <attribute name="create">false</attribute>
+                <attribute name="edit">1</attribute>
+                <attribute name="editable">bottom</attribute>
             </tree>
         </field>
     </record>
