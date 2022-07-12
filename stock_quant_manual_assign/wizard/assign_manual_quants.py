@@ -130,6 +130,11 @@ class AssignManualQuantsLines(models.TransientModel):
         required=True,
         ondelete="cascade",
     )
+    # Fields below are storable in order to be able to order by them. However,
+    # there is a side effect: It is not possible to directly read the related
+    # fields, e.g `self.lot_id`, because they are stored fields and have a group
+    # restriction, so an access error would raise. To work around it, we should
+    # access these fields from the quant: `self.quant_id.lot_id`.
     location_id = fields.Many2one(
         comodel_name="stock.location",
         string="Location",
@@ -224,10 +229,10 @@ class AssignManualQuantsLines(models.TransientModel):
         if float_compare(self.qty, 0.0, precision_digits=precision_digits) > 0:
             available_quantity = quant._get_available_quantity(
                 move.product_id,
-                self.location_id,
-                lot_id=self.lot_id,
-                package_id=self.package_id,
-                owner_id=self.owner_id,
+                self.quant_id.location_id,
+                lot_id=self.quant_id.lot_id,
+                package_id=self.quant_id.package_id,
+                owner_id=self.quant_id.owner_id,
             )
             if (
                 float_compare(
@@ -239,9 +244,9 @@ class AssignManualQuantsLines(models.TransientModel):
             move._update_reserved_quantity(
                 self.qty,
                 available_quantity,
-                self.location_id,
-                lot_id=self.lot_id,
-                package_id=self.package_id,
-                owner_id=self.owner_id,
+                self.quant_id.location_id,
+                lot_id=self.quant_id.lot_id,
+                package_id=self.quant_id.package_id,
+                owner_id=self.quant_id.owner_id,
                 strict=True,
             )
