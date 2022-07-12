@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Akretion (https://www.akretion.com).
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.rule" id="ir_rule_stock_inventory_user_manager">
+        <field name="name">Stock inventory user manager rule</field>
+        <field name="groups" eval="[(6, 0, [ref('stock.group_stock_manager')])]" />
+        <field name="model_id" ref="stock.model_stock_inventory" />
+        <field name="perm_read" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="False" />
+        <field name="domain_force">[(1, "=", 1)]</field>
+    </record>
+
+    <record model="ir.rule" id="ir_rule_stock_inventory_user">
+        <field name="name">Stock inventory user rule</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="model_id" ref="stock.model_stock_inventory" />
+        <field name="perm_read" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="False" />
+        <field
+            name="domain_force"
+        >[("user_id", "=", user.id), ("user_id", "!=", False)]</field>
+    </record>
+
+    <record model="ir.rule" id="ir_rule_stock_inventory_line_user_manager">
+        <field name="name">Stock inventory line user manager rule</field>
+        <field name="groups" eval="[(6, 0, [ref('stock.group_stock_manager')])]" />
+        <field name="model_id" ref="stock.model_stock_inventory_line" />
+        <field name="perm_read" eval="False" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="False" />
+        <field name="domain_force">[(1, "=", 1)]</field>
+    </record>
+
+    <record model="ir.rule" id="ir_rule_stock_inventory_line_user">
+        <field name="name">Stock inventory line user rule</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="model_id" ref="stock.model_stock_inventory_line" />
+        <field name="perm_read" eval="False" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="False" />
+        <field
+            name="domain_force"
+        >[("inventory_id.user_id", "=", user.id), ("inventory_id.user_id", "!=", False)]</field>
+    </record>
+
+</odoo>
