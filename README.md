@@ -49,7 +49,7 @@ addon | version | maintainers | summary
 [stock_cubiscan](stock_cubiscan/) | 13.0.1.1.1 |  | Implement inteface with Cubiscan devices for packaging
 [stock_cycle_count](stock_cycle_count/) | 13.0.1.2.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
 [stock_demand_estimate](stock_demand_estimate/) | 13.0.1.1.0 |  | Allows to create demand estimates.
-[stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 13.0.1.0.0 |  | Allows to create demand estimates.
+[stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 13.0.1.1.0 |  | Allows to create demand estimates.
 [stock_helper](stock_helper/) | 13.0.1.1.0 |  | Add methods shared between various stock modules
 [stock_inventory_chatter](stock_inventory_chatter/) | 13.0.1.0.0 |  | Log changes being done in Inventory Adjustments
 [stock_inventory_cost_info](stock_inventory_cost_info/) | 13.0.1.0.0 |  | Shows the cost of the inventory adjustments
