@@ -2,10 +2,10 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestLocationArchiveConstraint(SavepointCase):
+class TestLocationArchiveConstraint(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -24,7 +24,7 @@ class TestLocationArchiveConstraint(SavepointCase):
     def _create_product(self, name):
         product_form = Form(self.env["product.product"])
         product_form.name = name
-        product_form.type = "product"
+        product_form.detailed_type = "product"
         return product_form.save()
 
     def _create_stock_location(self, name):
