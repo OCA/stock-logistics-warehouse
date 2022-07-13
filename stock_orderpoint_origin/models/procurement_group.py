@@ -30,8 +30,8 @@ class ProcurementGroup(models.Model):
                 # so we check if the source document is a picking to use the
                 # correct field (group_id)
                 source_groups = source_groups = [
-                    x.procurement_group_id if x._name != "stock.picking"
-                    else x.group_id for x in source_docs
+                    x.procurement_group_id if x._name != "stock.picking" else x.group_id
+                    for x in source_docs
                 ]
                 source_names = ", ".join([x.name for x in source_docs])
                 new_origin = "%s (from %s)" % (source_names, procurement.origin)
