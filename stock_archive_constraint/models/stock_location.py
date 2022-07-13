@@ -23,9 +23,10 @@ class StockLocation(models.Model):
         if res:
             raise ValidationError(
                 _(
-                    "It is not possible to archive location '%s' which has "
-                    "associated stock quantities." % res[0].display_name
+                    "It is not possible to archive location '%(display_name)s' which has "
+                    "associated stock quantities."
                 )
+                % {"display_name": res.display_name}
             )
 
     @api.constrains("active")
@@ -43,9 +44,10 @@ class StockLocation(models.Model):
         if res:
             raise ValidationError(
                 _(
-                    "It is not possible to archive location '%s' which has "
-                    "associated picking lines." % res[0].display_name
+                    "It is not possible to archive location '%(display_name)s' which has "
+                    "associated picking lines."
                 )
+                % {"display_name": res.display_name}
             )
 
     @api.constrains("active")
@@ -63,7 +65,8 @@ class StockLocation(models.Model):
         if res:
             raise ValidationError(
                 _(
-                    "It is not possible to archive location '%s' which has "
-                    "associated stock reservations." % res[0].display_name
+                    "It is not possible to archive location '%(display_name)s' which has "
+                    "associated stock reservations."
                 )
+                % {"display_name": res.display_name}
             )
