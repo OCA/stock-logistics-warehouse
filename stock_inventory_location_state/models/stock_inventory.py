@@ -74,3 +74,20 @@ class StockInventoryLocation(models.Model):
         default="pending",
         required=True,
     )
+
+    _sql_constraints = [
+        (
+            "inventory_id, location_id",
+            "unique(inventory_id, location_id)",
+            "Location must be unique per inventory.",
+        )
+    ]
+
+    def action_start(self):
+        self.ensure_one()
+        self.state = "started"
+        # TODO refresh inventory line quantity and create missing inventory line
+
+    def action_done(self):
+        self.ensure_one()
+        self.state = "done"
