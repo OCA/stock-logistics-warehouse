@@ -9,37 +9,38 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
-"PO-Revision-Date: 2017-06-03 01:23+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2022-07-16 18:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Available</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Disponibile</span>"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Potential</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Potenziale</span>"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
 msgid "Available to Promise:"
-msgstr ""
+msgstr "Disponibile alla promessa:"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product__immediately_usable_qty
 #: model:ir.model.fields,field_description:stock_available.field_product_template__immediately_usable_qty
 msgid "Available to promise"
-msgstr ""
+msgstr "Disponibile alla promessa"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__stock_available_mrp_based_on
@@ -48,32 +49,36 @@ msgid ""
 "If empty, Quantity On Hand is used.\n"
 "Only the quantity fields have meaning for computing stock"
 msgstr ""
+"Scegliere il campo del prodotto che verrà utilizzato per calcolare il "
+"potenziale.\n"
+"Se vuoto, verrà usato Quantità disponibile.\n"
+"Solo i campi quantità hanno senso per calcolare la giacenza"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_sale
 msgid "Exclude goods already in sale quotations"
-msgstr ""
+msgstr "Esclude beni già nelle quaotazioni di vendita"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_immediately
 msgid "Exclude incoming goods"
-msgstr ""
+msgstr "Esclude merce in arrivo"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_mrp
 msgid "Include the production potential"
-msgstr ""
+msgstr "Include il potenziale del prodotto"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product__potential_qty
 #: model:ir.model.fields,field_description:stock_available.field_product_template__potential_qty
 msgid "Potential"
-msgstr ""
+msgstr "Potenziale"
 
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_product
@@ -83,7 +88,7 @@ msgstr "Prodotto"
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_template
 msgid "Product Template"
-msgstr "Template Prodotto"
+msgstr "Modello prodotto"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_product__potential_qty
@@ -91,6 +96,8 @@ msgid ""
 "Quantity of this Product that could be produced using the materials already "
 "at hand."
 msgstr ""
+"Quantità di questo prodotto che si può produrre utilizzando i materiali a "
+"disposizione."
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_template__potential_qty
@@ -99,11 +106,14 @@ msgid ""
 "at hand. If the product has several variants, this will be the biggest "
 "quantity that can be made for a any single variant."
 msgstr ""
+"Quantità di questo prodotto che si può produrre utilizzando i materiali a "
+"disposizione. Se il prodotto ha diverse varianti, questa sarà la massima "
+"quantità producibile per ogni singola variante."
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_configuration
 msgid "Stock available to promise"
-msgstr ""
+msgstr "Giagenza disponibile alla promessa"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_template__immediately_usable_qty
@@ -111,6 +121,10 @@ msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs"
 msgstr ""
+"Giacenza di questo prodotto che può essere proposta con certezza alla "
+"vendiata al cliente.\n"
+"La defnizione di questo valore può essere confgurata per adattarsi alle tue "
+"esgenze"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_product__immediately_usable_qty
@@ -118,6 +132,10 @@ msgid ""
 "Stock for this Product that can be safely proposed for sale to Customers.\n"
 "The definition of this value can be configured to suit your needs."
 msgstr ""
+"Giacenza di questo prodotto che può essere proposta con certezza alla "
+"vendiata al cliente.\n"
+"La defnizione di questo valore può essere confgurata per adattarsi alle tue "
+"esgenze."
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_mrp
@@ -127,6 +145,10 @@ msgid ""
 "This installs the module stock_available_mrp.\n"
 "If the module mrp is not installed, this will install it too"
 msgstr ""
+"Questo aggiungerà la quantità di merce che può essere immediatamente "
+"lavorata alla quantità disponibile alla promessa.\n"
+"Questo installa il modulo stock_available_mrp.\n"
+"Se il modulo MRP non è installato, questo lo installerà"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_immediately
@@ -135,6 +157,9 @@ msgid ""
 "promise.\n"
 "This installs the module stock_available_immediately."
 msgstr ""
+"Questo toglierà le quantità in arrivo alle quantità disponibile per le "
+"promesse.\n"
+"Questo installa il modulo stock_available_immediately."
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__module_stock_available_sale
@@ -145,8 +170,13 @@ msgid ""
 "If the modules sale and sale_delivery_date are not installed, this will "
 "install them too"
 msgstr ""
+"Questo toglierà le quantità delle quotazioni di vendita dalle quantità "
+"disponibili alle promesse.\n"
+"Questo installa il modulo stock_available_sale.\n"
+"Se i moduli sale e sale_delivery_date non sono installati, questo li "
+"installerà"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__stock_available_mrp_based_on
 msgid "based on"
-msgstr ""
+msgstr "basato su"
