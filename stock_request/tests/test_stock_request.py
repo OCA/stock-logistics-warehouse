@@ -355,7 +355,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_02(self):
-        """ Testing the discrepancy in location_id between
+        """Testing the discrepancy in location_id between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {
@@ -383,7 +383,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_03(self):
-        """ Testing the discrepancy in requested_by between
+        """Testing the discrepancy in requested_by between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {
@@ -413,7 +413,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_04(self):
-        """ Testing the discrepancy in procurement_group_id between
+        """Testing the discrepancy in procurement_group_id between
         stock request and order"""
         procurement_group = self.env["procurement.group"].create(
             {"name": "Procurement"}
@@ -445,7 +445,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_05(self):
-        """ Testing the discrepancy in company between
+        """Testing the discrepancy in company between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {
@@ -473,7 +473,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_validations_06(self):
-        """ Testing the discrepancy in expected dates between
+        """Testing the discrepancy in expected dates between
         stock request and order"""
         expected_date = fields.Datetime.now()
         child_expected_date = "2015-01-01"
@@ -502,7 +502,7 @@ class TestStockRequestBase(TestStockRequest):
             self.request_order.create(vals)
 
     def test_stock_request_order_validations_07(self):
-        """ Testing the discrepancy in picking policy between
+        """Testing the discrepancy in picking policy between
         stock request and order"""
         expected_date = fields.Datetime.now()
         vals = {
@@ -726,6 +726,83 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(stock_request_2.qty_done, 0)
         self.assertEqual(stock_request_2.qty_cancelled, 6)
         self.assertEqual(stock_request_2.state, "done")
+
+    def test_create_request_create_backorder(self):
+        """Multiple stock requests"""
+        vals = {
+            "product_id": self.product.id,
+            "product_uom_id": self.product.uom_id.id,
+            "product_uom_qty": 4.0,
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+        }
+
+        stock_request_1 = (
+            self.env["stock.request"].with_user(self.stock_request_user).create(vals)
+        )
+        stock_request_2 = (
+            self.env["stock.request"]
+            .with_user(self.stock_request_manager.id)
+            .create(vals)
+        )
+        stock_request_2.product_uom_qty = 6.0
+        self.product.route_ids = [(6, 0, self.route.ids)]
+        stock_request_1.sudo().action_confirm()
+        stock_request_2.sudo().action_confirm()
+        self.assertEqual(len(stock_request_1.sudo().picking_ids), 1)
+        self.assertEqual(
+            stock_request_1.sudo().picking_ids, stock_request_2.sudo().picking_ids
+        )
+        self.assertEqual(
+            stock_request_1.sudo().move_ids, stock_request_2.sudo().move_ids
+        )
+        self.env["stock.quant"].create(
+            {
+                "product_id": self.product.id,
+                "location_id": self.ressuply_loc.id,
+                "quantity": 10.0,
+            }
+        )
+        picking = stock_request_1.sudo().picking_ids[0]
+        picking.action_confirm()
+        picking.action_assign()
+        self.assertEqual(stock_request_1.qty_in_progress, 4)
+        self.assertEqual(stock_request_1.qty_done, 0)
+        self.assertEqual(stock_request_1.qty_cancelled, 0)
+        self.assertEqual(stock_request_2.qty_in_progress, 6)
+        self.assertEqual(stock_request_2.qty_done, 0)
+        self.assertEqual(stock_request_2.qty_cancelled, 0)
+        packout1 = picking.move_line_ids[0]
+        packout1.qty_done = 4
+        self.env["stock.backorder.confirmation"].create(
+            {"pick_ids": [(4, picking.id)]}
+        ).process()
+        self.assertEqual(stock_request_1.qty_in_progress, 0)
+        self.assertEqual(stock_request_1.qty_done, 4)
+        self.assertEqual(stock_request_1.qty_cancelled, 0)
+        self.assertEqual(stock_request_1.state, "done")
+        self.assertEqual(stock_request_2.qty_in_progress, 6)
+        self.assertEqual(stock_request_2.qty_done, 0)
+        self.assertEqual(stock_request_2.qty_cancelled, 0)
+        self.assertEqual(stock_request_2.state, "open")
+        picking = stock_request_2.sudo().picking_ids.filtered(
+            lambda r: r.id != picking.id
+        )
+        picking.action_confirm()
+        picking.action_assign()
+        packout1 = picking.move_line_ids[0]
+        packout1.qty_done = 4
+        self.env["stock.backorder.confirmation"].create(
+            {"pick_ids": [(4, picking.id)]}
+        ).process()
+        self.assertEqual(stock_request_1.qty_in_progress, 0)
+        self.assertEqual(stock_request_1.qty_done, 4)
+        self.assertEqual(stock_request_1.qty_cancelled, 0)
+        self.assertEqual(stock_request_2.qty_in_progress, 2)
+        self.assertEqual(stock_request_2.qty_done, 4)
+        self.assertEqual(stock_request_2.qty_cancelled, 0)
+        self.assertEqual(stock_request_2.state, "open")
 
     def test_cancel_request(self):
         expected_date = fields.Datetime.now()
