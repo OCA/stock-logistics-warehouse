@@ -6,7 +6,6 @@ from . import stock_request_order
 from . import stock_move
 from . import stock_picking
 from . import stock_rule
-from . import stock_move_line
 from . import res_config_settings
 from . import stock_warehouse
 from . import stock_location
