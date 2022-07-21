@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_stock_request_order_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=user.lang)" />
+
+                <div class="page" name="div_first_page">
+                    <h2>
+                        Stock Request Order <span t-field="o.name" />
+                    </h2>
+                    <div class="row mt32 mb32" name="div_info">
+                        <div class="col-auto" name="div_excpected_date">
+                            <strong>Expected Date:</strong>
+                            <p t-field="o.expected_date" />
+                        </div>
+                    </div>
+                    <table class="table table-sm" name="stock_request_table">
+                        <thead>
+                            <tr>
+                                <th name="th_sm_product"><strong>Product</strong></th>
+                                <th name="th_sm_quantity"><strong>Quantity</strong></th>
+                                <th name="th_sm_quantity_done"><strong
+                                    >Qty Done</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="lines" t-value="o.stock_request_ids" />
+                            <tr t-foreach="lines" t-as="request">
+                                <td>
+                                    <span t-field="request.product_id" />
+                                </td>
+                                <td>
+                                    <span t-field="request.product_uom_qty" />
+                                    <span t-field="request.product_uom_id" />
+                                </td>
+                                <td>
+                                    <span t-field="request.qty_done" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+         </t>
+    </template>
+
+    <template id="report_stock_request_order">
+        <t t-foreach="docs" t-as="o">
+            <t
+                t-call="stock_request.report_stock_request_order_document"
+                t-lang="user.lang"
+            />
+        </t>
+    </template>
+
+    <report
+        string="Stock Request Order"
+        id="action_report_stock_request_order"
+        model="stock.request.order"
+        report_type="qweb-pdf"
+        name="stock_request.report_stock_request_order"
+        file="stock_request.report_stock_request_order"
+        print_report_name="'Stock Request Order - %s' % (object.name)"
+    />
+
+</odoo>

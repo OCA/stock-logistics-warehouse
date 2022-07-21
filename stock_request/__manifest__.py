@@ -23,6 +23,7 @@
         "views/stock_request_menu.xml",
         "views/stock_request_report.xml",
         "data/stock_request_sequence_data.xml",
+        "report/report_stock_request_order.xml",
     ],
     "installable": True,
 }
