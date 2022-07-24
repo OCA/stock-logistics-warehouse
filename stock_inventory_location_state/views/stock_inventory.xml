@@ -9,15 +9,56 @@
         <field name="model">stock.inventory</field>
         <field name="inherit_id" ref="stock.view_inventory_form" />
         <field name="arch" type="xml">
-            <button name="action_open_inventory_lines" position="after">
+            <div class="oe_button_box" name="button_box">
                 <button
                     name="action_open_inventory_locations"
                     states="confirm"
                     string="Inventory Locations"
                     type="object"
                     groups="stock.group_stock_user"
-                />
-            </button>
+                    class="oe_stat_button"
+                >
+                    <field
+                        string="Remaining locations"
+                        name="location_count"
+                        widget="statinfo"
+                    />
+                </button>
+            </div>
         </field>
     </record>
+
+    <record id="view_stock_inventory_location_search" model="ir.ui.view">
+        <field name="name">stock.inventory.location.search</field>
+        <field name="model">stock.inventory.location</field>
+        <field name="arch" type="xml">
+            <search string="Inventory Location">
+                <field name="location_id" />
+                <field name="state" />
+            </search>
+        </field>
+    </record>
+    <record id="view_stock_inventory_location_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.location.tree</field>
+        <field name="model">stock.inventory.location</field>
+        <field name="arch" type="xml">
+            <tree string="Inventory Location">
+                <field name="location_id" />
+                <field name="state" />
+                <button
+                    type="object"
+                    name="action_start"
+                    string="Start"
+                    states="pending"
+                />
+                <button
+                    type="object"
+                    name="action_done"
+                    string="Done"
+                    states="started"
+                />
+            </tree>
+        </field>
+    </record>
+
 </odoo>

@@ -16,7 +16,7 @@ class TestStockInventoryLocationState(TransactionCase):
         )
         inventory.action_start()
         sub_locations = self.env["stock.location"].search(
-            [("id", "child_of", self.location.id)]
+            [("id", "child_of", self.location.id), ("child_ids", "=", False)]
         )
         self.assertEqual(
             inventory.sub_location_ids.mapped("location_id"), sub_locations
