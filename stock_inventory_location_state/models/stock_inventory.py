@@ -13,12 +13,21 @@ class Inventory(models.Model):
         inverse_name="inventory_id",
         string="Sub locations",
     )
+    location_count = fields.Integer(
+        compute="_compute_locaiton_count", string="Location count"
+    )
+
+    def _compute_location_count(self):
+        for inventory in self:
+            inventory.location_count = len(
+                inventory.sub_location_ids.filtered(lambda l: l.state != "done")
+            )
 
     def action_start(self):
         res = super().action_start()
         existing_locations = self.sub_location_ids.mapped("location_id")
         sub_locations = self.env["stock.location"].search(
-            [("id", "child_of", self.location_ids.ids)]
+            [("id", "child_of", self.location_ids.ids), ("child_ids", "=", False)]
         )
         sub_locations = sub_locations - existing_locations
         for location in sub_locations:
@@ -59,6 +68,10 @@ class StockInventoryLocation(models.Model):
     _name = "stock.inventory.location"
     _description = "Stock Inventory Location"
 
+    _rec_name = "location_id"
+
+    _order = "state desc"
+
     inventory_id = fields.Many2one(
         comodel_name="stock.inventory",
         string="Inventory",
@@ -77,8 +90,8 @@ class StockInventoryLocation(models.Model):
 
     _sql_constraints = [
         (
-            "inventory_id, location_id",
-            "unique(inventory_id, location_id)",
+            "inventory_location_unique",
+            "UNIQUE(inventory_id, location_id)",
             "Location must be unique per inventory.",
         )
     ]
