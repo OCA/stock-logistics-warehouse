@@ -45,6 +45,12 @@ class StockCycleCount(models.Model):
                     for product in group.product_ids:
                         if rec.cycle_count_rule_id.frequency == "weekly":
                             y = round(len(group.product_ids.ids) * group.count / 52)
+                        if rec.cycle_count_rule_id.frequency == "daily":
+                            y = round(len(group.product_ids.ids) * group.count / 365)
+                        if rec.cycle_count_rule_id.frequency == "monthly":
+                            y = round(len(group.product_ids.ids) * group.count / 12)
+                        if rec.cycle_count_rule_id.frequency == "quarterly":
+                            y = round(len(group.product_ids.ids) * group.count / 4)
                         if product not in all_done_products and len(product_list) < y:
                             if (
                                 not rec.company_id.count_all_products
