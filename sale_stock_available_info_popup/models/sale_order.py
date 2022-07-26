@@ -13,7 +13,13 @@ class SaleOrderLine(models.Model):
         compute="_compute_immediately_usable_qty_today"
     )
 
-    @api.depends("product_id", "product_uom_qty")
+    @api.depends(
+        "product_id",
+        "product_uom_qty",
+        "order_id.commitment_date",
+        "order_id.date_order",
+        "warehouse_id",
+    )
     def _compute_immediately_usable_qty_today(self):
         qty_processed_per_product = defaultdict(lambda: 0)
         self.immediately_usable_qty_today = False
