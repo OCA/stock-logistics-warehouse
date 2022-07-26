@@ -13,16 +13,26 @@
                 <button
                     name="action_open_inventory_locations"
                     states="confirm"
-                    string="Inventory Locations"
                     type="object"
                     groups="stock.group_stock_user"
+                    icon="fa-list"
                     class="oe_stat_button"
                 >
-                    <field
-                        string="Remaining locations"
-                        name="location_count"
-                        widget="statinfo"
-                    />
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field
+                                name="remaining_location_count"
+                                widget="statinfo"
+                                nolabel="1"
+                                class="mr4"
+                            /> / <field
+                                name="location_count"
+                                widget="statinfo"
+                                nolabel="1"
+                            />
+                        </span>
+                        <span class="o_stat_text">Locations</span>
+                    </div>
                 </button>
             </div>
         </field>

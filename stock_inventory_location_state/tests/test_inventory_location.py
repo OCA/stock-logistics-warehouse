@@ -22,6 +22,8 @@ class TestStockInventoryLocationState(TransactionCase):
             inventory.sub_location_ids.mapped("location_id"), sub_locations
         )
         inventory.sub_location_ids[0].state = "done"
+        self.assertEqual(inventory.location_count, len(sub_locations))
+        self.assertEqual(inventory.remaining_location_count, len(sub_locations) - 1)
         with self.assertRaises(UserError):
             inventory.action_validate()
         inventory.sub_location_ids.write({"state": "done"})
