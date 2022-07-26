@@ -14,12 +14,16 @@ class Inventory(models.Model):
         string="Sub locations",
     )
     location_count = fields.Integer(
-        compute="_compute_locaiton_count", string="Location count"
+        compute="_compute_location_count", string="Location count"
+    )
+    remaining_location_count = fields.Integer(
+        compute="_compute_location_count", string="Remaining location count"
     )
 
     def _compute_location_count(self):
         for inventory in self:
-            inventory.location_count = len(
+            inventory.location_count = len(inventory.sub_location_ids)
+            inventory.remaining_location_count = len(
                 inventory.sub_location_ids.filtered(lambda l: l.state != "done")
             )
 
@@ -29,6 +33,14 @@ class Inventory(models.Model):
         sub_locations = self.env["stock.location"].search(
             [("id", "child_of", self.location_ids.ids), ("child_ids", "=", False)]
         )
+        if self.product_ids:
+            quants = self.env["stock.quant"].search(
+                [
+                    ("location_id", "in", sub_locations.ids),
+                    ("product_id", "in", self.product_ids.ids),
+                ]
+            )
+            sub_locations = quants.mapped("location_id")
         sub_locations = sub_locations - existing_locations
         for location in sub_locations:
             self.env["stock.inventory.location"].create(
@@ -99,6 +111,13 @@ class StockInventoryLocation(models.Model):
     def action_start(self):
         self.ensure_one()
         self.state = "started"
+        lines = self.env["stock.inventory.line"].search(
+            [
+                ("inventory_id", "=", self.inventory_id.id),
+                ("location_id", "=", self.location_id.id),
+            ]
+        )
+        lines.action_refresh_quantity()
         # TODO refresh inventory line quantity and create missing inventory line
 
     def action_done(self):
