@@ -88,7 +88,7 @@ addon | version | maintainers | summary
 [stock_picking_consolidation_priority](stock_picking_consolidation_priority/) | 13.0.1.0.0 |  | Raise priority of all transfers for a chain when started
 [stock_picking_package_grouped](stock_picking_package_grouped/) | 13.0.1.0.1 |  | Allow create package (put in pack) from pickings depending on grouping criteria.
 [stock_picking_procure_method](stock_picking_procure_method/) | 13.0.1.0.0 |  | Allows to force the procurement method from the picking
-[stock_picking_show_linked](stock_picking_show_linked/) | 13.0.1.0.1 |  | This addon allows to easily access related pickings (in the case of chained routes) through a button in the parent picking view.
+[stock_picking_show_linked](stock_picking_show_linked/) | 13.0.1.0.2 |  | This addon allows to easily access related pickings (in the case of chained routes) through a button in the parent picking view.
 [stock_product_qty_by_packaging](stock_product_qty_by_packaging/) | 13.0.1.1.0 |  | Compute product quantity to pick by packaging
 [stock_production_lot_quantity_tree](stock_production_lot_quantity_tree/) | 13.0.1.0.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Allows to display product quantity field on production lot tree view
 [stock_pull_list](stock_pull_list/) | 13.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
