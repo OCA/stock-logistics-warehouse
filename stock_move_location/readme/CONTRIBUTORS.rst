@@ -11,3 +11,4 @@
 * Jacques-Etienne Baudoux <je@bcim.be>
 * Iryna Vyshnevska <i.vyshnevska@mobilunity.com>
 * Alexei Rivera <arivera@archeti.com>
+* Abraham Anes <abraham@studio73.es>
