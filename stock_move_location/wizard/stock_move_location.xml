@@ -76,6 +76,11 @@
                                     groups="stock.group_production_lot"
                                     options="{'no_create': True}"
                                 />
+                                <field
+                                    name="package_id"
+                                    domain="[('location_id', '=', origin_location_id)]"
+                                    options="{'no_create': True}"
+                                />
                                 <field name="move_quantity" />
                                 <field name="custom" invisible="1" />
                                 <field
