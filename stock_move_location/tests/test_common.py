@@ -69,6 +69,17 @@ class TestsCommon(common.TransactionCase):
                 "company_id": cls.company.id,
             }
         )
+        cls.lot4 = cls.env["stock.lot"].create(
+            {
+                "name": "lot4",
+                "product_id": cls.product_package.id,
+                "company_id": cls.company.id,
+            }
+        )
+        cls.product_package = product_obj.create(
+            {"name": "Orange", "type": "product", "tracking": "lot"}
+        )
+        cls.package = cls.env["stock.quant.package"].create({})
 
     def setup_product_amounts(self):
         self.set_product_amount(self.product_no_lots, self.internal_loc_1, 123)
@@ -81,16 +92,27 @@ class TestsCommon(common.TransactionCase):
         self.set_product_amount(
             self.product_lots, self.internal_loc_1, 1.0, lot_id=self.lot3
         )
-
-    def set_product_amount(self, product, location, amount, lot_id=None):
-        self.env["stock.quant"]._update_available_quantity(
-            product, location, amount, lot_id=lot_id
+        self.set_product_amount(
+            self.product_package,
+            self.internal_loc_1,
+            1.0,
+            lot_id=self.lot4,
+            package_id=self.package,
         )
 
-    def check_product_amount(self, product, location, amount, lot_id=None):
+    def set_product_amount(
+        self, product, location, amount, lot_id=None, package_id=None
+    ):
+        self.env["stock.quant"]._update_available_quantity(
+            product, location, amount, lot_id=lot_id, package_id=package_id
+        )
+
+    def check_product_amount(
+        self, product, location, amount, lot_id=None, package_id=None
+    ):
         self.assertEqual(
             self.env["stock.quant"]._get_available_quantity(
-                product, location, lot_id=lot_id
+                product, location, lot_id=lot_id, package_id=package_id
             ),
             amount,
         )
