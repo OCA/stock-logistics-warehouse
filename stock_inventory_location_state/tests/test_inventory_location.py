@@ -9,6 +9,15 @@ class TestStockInventoryLocationState(TransactionCase):
     def setUp(self):
         super(TestStockInventoryLocationState, self).setUp()
         self.location = self.env.ref("stock.warehouse0").lot_stock_id
+        self.child_loc = self.env["stock.location"].search(
+            [("id", "child_of", self.location.id), ("child_ids", "=", False)]
+        )[0]
+        self.product = self.env["product.product"].create(
+            {"name": "Test", "type": "product"}
+        )
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.child_loc, 1
+        )
 
     def test_inventory_location(self):
         inventory = self.env["stock.inventory"].create(
@@ -28,3 +37,22 @@ class TestStockInventoryLocationState(TransactionCase):
             inventory.action_validate()
         inventory.sub_location_ids.write({"state": "done"})
         inventory.action_validate()
+
+    def test_action_start(self):
+        inventory = self.env["stock.inventory"].create(
+            {"location_ids": [(6, 0, self.location.ids)]}
+        )
+        inventory.action_start()
+        self.env["stock.quant"]._update_available_quantity(
+            self.product, self.child_loc, 1
+        )
+        line = inventory.line_ids.filtered(
+            lambda l: l.product_id == self.product and l.location_id == self.child_loc
+        )
+        self.assertEqual(line.theoretical_qty, 1)
+        sub_location = inventory.sub_location_ids.filtered(
+            lambda l: l.location_id == self.child_loc
+        )
+        sub_location.action_start()
+        self.assertEqual(sub_location.state, "started")
+        self.assertEqual(line.theoretical_qty, 2)

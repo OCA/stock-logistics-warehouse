@@ -30,9 +30,17 @@ class Inventory(models.Model):
     def action_start(self):
         res = super().action_start()
         existing_locations = self.sub_location_ids.mapped("location_id")
-        sub_locations = self.env["stock.location"].search(
-            [("id", "child_of", self.location_ids.ids), ("child_ids", "=", False)]
-        )
+        if self.location_ids:
+            domain_loc = [
+                ("id", "child_of", self.location_ids.ids),
+                ("child_ids", "=", False),
+            ]
+        else:
+            domain_loc = [
+                ("company_id", "=", self.company_id.id),
+                ("usage", "in", ["internal", "transit"]),
+            ]
+        sub_locations = self.env["stock.location"].search(domain_loc)
         if self.product_ids:
             quants = self.env["stock.quant"].search(
                 [
