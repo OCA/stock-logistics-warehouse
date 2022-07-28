@@ -102,6 +102,7 @@ class StockMoveLocationWizard(models.TransientModel):
                         "max_quantity": quant.quantity,
                         "origin_location_id": quant.location_id.id,
                         "lot_id": quant.lot_id.id,
+                        "package_id": quant.package_id.id,
                         "product_uom_id": quant.product_uom_id.id,
                         "custom": False,
                     },
@@ -128,6 +129,7 @@ class StockMoveLocationWizard(models.TransientModel):
                                 "max_quantity": qty,
                                 "origin_location_id": quant.location_id.id,
                                 "lot_id": quant.lot_id.id,
+                                "package_id": quant.package_id.id,
                                 "product_uom_id": quant.product_uom_id.id,
                                 "custom": False,
                             },
@@ -229,7 +231,8 @@ class StockMoveLocationWizard(models.TransientModel):
                     ("product_id", "=", line.product_id.id),
                     ("location_id", "=", line.origin_location_id.id),
                     ("lot_id", "=", line.lot_id.id),
-                    ("qty_done", ">", 0.0),
+                    ("package_id", "=", line.package_id.id),
+                    ("product_uom_qty", ">", 0.0),
                 ]
             )
             moves_to_unreserve = move_lines.mapped("move_id")
@@ -255,11 +258,13 @@ class StockMoveLocationWizard(models.TransientModel):
         self.picking_id = picking
         return self._get_picking_action(picking.id)
 
-    def _get_picking_action(self, pickinig_id):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+    def _get_picking_action(self, picking_id):
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_picking_tree_all"
+        )
         form_view = self.env.ref("stock.view_picking_form").id
         action.update(
-            {"view_mode": "form", "views": [(form_view, "form")], "res_id": pickinig_id}
+            {"view_mode": "form", "views": [(form_view, "form")], "res_id": picking_id}
         )
         return action
 
@@ -268,11 +273,11 @@ class StockMoveLocationWizard(models.TransientModel):
         # Using sql as search_group doesn't support aggregation functions
         # leading to overhead in queries to DB
         query = """
-            SELECT product_id, lot_id, SUM(quantity) AS quantity,
+            SELECT product_id, lot_id, package_id, SUM(quantity) AS quantity,
                 SUM(reserved_quantity) AS reserved_quantity
             FROM stock_quant
             WHERE location_id = %s
-            GROUP BY product_id, lot_id
+            GROUP BY product_id, lot_id, package_id
         """
         self.env.cr.execute(query, (location_id.id,))
         return self.env.cr.dictfetchall()
@@ -298,6 +303,7 @@ class StockMoveLocationWizard(models.TransientModel):
                     "destination_location_id": location_dest_id,
                     # cursor returns None instead of False
                     "lot_id": group.get("lot_id") or False,
+                    "package_id": group.get("package_id") or False,
                     "product_uom_id": product.uom_id.id,
                     "custom": False,
                 }
