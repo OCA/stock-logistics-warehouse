@@ -13,19 +13,19 @@ Stock Location Route Description
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fproduct--attribute-lightgray.png?logo=github
-    :target: https://github.com/OCA/product-attribute/tree/13.0/product_category_code
-    :alt: OCA/product-attribute
+.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/13.0/stock_location_route_description
+    :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/product-attribute-13-0/product-attribute-13-0-product_category_code
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-13-0/stock-logistics-warehouse-13-0-stock_location_route_description
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/135/13.0
+    :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module adds a field 'description' on stock location route level.
+This module adds a field 'description' on stock location routes.
 
 **Table of contents**
 
@@ -67,14 +67,6 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
-
-.. |maintainer-judithalmono| image:: https://github.com/judithalmono.png?size=40px
-    :target: https://github.com/judithalmono
-    :alt: judithalmono
-
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
-
-|maintainer-judithalmono|
 
 This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/13.0/stock_location_route_description>`_ project on GitHub.
 
