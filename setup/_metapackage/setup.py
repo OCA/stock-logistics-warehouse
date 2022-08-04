@@ -42,6 +42,7 @@ setuptools.setup(
         'odoo13-addon-stock_location_last_inventory_date',
         'odoo13-addon-stock_location_lockdown',
         'odoo13-addon-stock_location_position',
+        'odoo13-addon-stock_location_route_description',
         'odoo13-addon-stock_location_tray',
         'odoo13-addon-stock_location_zone',
         'odoo13-addon-stock_lot_filter_available',
