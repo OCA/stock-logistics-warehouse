@@ -65,6 +65,7 @@ addon | version | maintainers | summary
 [stock_location_last_inventory_date](stock_location_last_inventory_date/) | 13.0.1.0.1 |  | Show the last inventory date for a leaf location
 [stock_location_lockdown](stock_location_lockdown/) | 13.0.1.0.1 |  | Prevent to add stock on locked locations
 [stock_location_position](stock_location_position/) | 13.0.1.0.0 |  | Add coordinate attributes on stock location.
+[stock_location_route_description](stock_location_route_description/) | 13.0.1.0.0 |  | Add description field on stock routes.
 [stock_location_tray](stock_location_tray/) | 13.0.1.0.2 |  | Organize a location as a matrix of cells
 [stock_location_zone](stock_location_zone/) | 13.0.1.0.0 |  | Classify locations with zones.
 [stock_lot_filter_available](stock_lot_filter_available/) | 13.0.2.0.0 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Allow to filter lots by available on stock
