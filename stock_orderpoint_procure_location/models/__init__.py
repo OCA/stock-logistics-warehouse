@@ -2,3 +2,4 @@
 
 from . import stock_warehouse_orderpoint
 from . import procurement_group
+from . import purchase_order_line
