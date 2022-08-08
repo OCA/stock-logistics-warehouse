@@ -14,8 +14,7 @@ class Orderpoint(models.Model):
     )
 
     def _prepare_procurement_values(self, product_qty, date=False, group=False):
-        """ Set the procure location
-        """
+        """Set the procure location"""
         res = super(Orderpoint, self)._prepare_procurement_values(
             product_qty, date, group
         )
