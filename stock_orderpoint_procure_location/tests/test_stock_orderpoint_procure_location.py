@@ -92,7 +92,7 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
         )
 
     def _create_purchase(self, line_products):
-        """ Create a purchase order.
+        """Create a purchase order.
 
         ``line_products`` is a list of tuple [(product, qty, orderpoint)]
         """
@@ -131,15 +131,15 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
         purchase_line = self.purchase_line_model.search(
             [("product_id", "=", self.productA.id)]
         )
-        self.assertEquals(len(purchase_line), 0)
+        self.assertEqual(len(purchase_line), 0)
 
         self.env["procurement.group"].run_scheduler()
         # As per route configuration, it will create Purchase order
         purchase_line = self.purchase_line_model.search(
             [("product_id", "=", self.productA.id)]
         )
-        self.assertEquals(len(purchase_line), 1)
-        self.assertEquals(purchase_line.product_qty, 24)
+        self.assertEqual(len(purchase_line), 1)
+        self.assertEqual(purchase_line.product_qty, 24)
         purchase_line.order_id.button_confirm()
         self.assertEqual(
             purchase_line.order_id.picking_ids[0].move_lines[0].location_dest_id.id,
@@ -166,11 +166,11 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
         purchase_line = self.purchase_line_model.search(
             [("product_id", "=", self.productB.id)]
         )
-        self.assertEquals(len(purchase_line), 0)
+        self.assertEqual(len(purchase_line), 0)
         # The scheduler should create demand for the extra
         self.env["procurement.group"].run_scheduler()
         # As per route configuration, it will create Purchase order
         purchase_line = self.purchase_line_model.search(
             [("product_id", "=", self.productB.id)]
         )
-        self.assertEquals(sum(purchase_line.mapped("product_qty")), 35)
+        self.assertEqual(sum(purchase_line.mapped("product_qty")), 35)
