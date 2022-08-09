@@ -7,7 +7,6 @@ from odoo.tests.common import TransactionCase
 class TestStockLocationRouteDescription(TransactionCase):
     def setUp(self, *args, **kwargs):
         super(TestStockLocationRouteDescription, self).setUp(*args, **kwargs)
-
         self.model_stock_location_route = self.env["stock.location.route"]
 
     def test_display_name_stock_location_route(self):
@@ -18,6 +17,6 @@ class TestStockLocationRouteDescription(TransactionCase):
             {"name": "Test Route", "description": "Test Description"}
         )
         self.assertEqual(route.display_name, route.name)
-        route.with_context(show_description=True).name_get()
         name_description = route.name + ": " + route.description
+        route.with_context(show_description=True)._compute_display_name()
         self.assertEqual(route.display_name, name_description)
