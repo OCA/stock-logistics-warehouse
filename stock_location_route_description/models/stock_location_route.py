@@ -10,16 +10,14 @@ class StockLocationRoute(models.Model):
     description = fields.Char(translate=True)
 
     def name_get(self):
-        result = []
         if self.env.context.get("show_description", False):
+            result = []
             for rec in self:
+                name = ""
                 if rec.description:
-                    rec.display_name = rec.name + ": " + rec.description
+                    name = rec.name + ": " + rec.description
                 else:
-                    rec.display_name = rec.name
-                result.append((rec.id, rec.display_name))
-        else:
-            for rec in self:
-                rec.display_name = rec.name
-            return super(StockLocationRoute, self).name_get()
-        return result
+                    name = rec.name
+                result.append((rec.id, name))
+            return result
+        return super().name_get()
