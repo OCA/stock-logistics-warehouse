@@ -53,11 +53,13 @@ Authors
 -------
 
 * Camptocamp
+* Michael Tietz (MT Software)
 
 Contributors
 ------------
 
 -  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  Michael Tietz (MT Software) <mtietz@mt-software.de>
 -  Christopher Ormaza <chris.ormaza@forgeflow.com>
 
 Maintainers
