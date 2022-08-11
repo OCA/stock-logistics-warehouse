@@ -51,8 +51,8 @@ class CostAdjustmentLine(models.Model):
                         "operation_id": ops_line.id,
                         "bom_id": ops_line.bom_id.id,
                         "product_id": impacted_product.id,
-                        "quantity": ops_line.product_qty,
-                        "additional_cost": self.difference_cost,
+                        "quantity": ops_line.time_cycle,
+                        "cost_increase": self.difference_cost,
                         "parent_product_id": product.id,
                     }
                 )
