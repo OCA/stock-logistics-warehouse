@@ -10,7 +10,7 @@
                     <group>
                         <field
                             name="product_ids"
-                            domain="[('bom_ids','=',False)]"
+                            domain="[('bom_ids','=',False), ('type', '!=', 'consu')]"
                             nolabel="1"
                         />
                     </group>

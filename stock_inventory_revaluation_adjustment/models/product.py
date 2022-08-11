@@ -31,7 +31,7 @@ class ProductProduct(models.Model):
 
         svl_vals_list = []
         company_id = self.env.company
-        for product in self:
+        for product in self.filtered(lambda x: x.type != "consu"):
             if product.cost_method not in ("standard", "average"):
                 continue
             quantity_svl = product.sudo().quantity_svl
@@ -162,6 +162,7 @@ class ProductProduct(models.Model):
         account_moves = self.env["account.move"].sudo().create(am_vals_list)
         if account_moves:
             account_moves._post()
+
         return super()._change_standard_price(new_price_round)
 
 

@@ -80,7 +80,7 @@ class CostAdjustment(models.Model):
         check_company=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
-        domain="[('bom_ids','=',False)]",
+        domain="[('bom_ids','=',False), ('type', '!=', 'consu')]",
         help="Specify Products to focus your cost adjustment on particular Products. ",
     )
     start_empty = fields.Boolean(
