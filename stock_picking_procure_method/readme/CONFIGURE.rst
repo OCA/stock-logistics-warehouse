@@ -24,14 +24,14 @@ Common steps to `mrp` and `purchase` procurements:
    - Propagate cancel and split: `True`
    - Warehouse to Propagate: *WH1*
 
-Now if you want to trigger a manufacture:
+Now, if you want to trigger a manufacture:
 
-   - Create a stockable product product with a BoM list.
+   - Create a stockable product with a BoM list.
    - In the product's *Inventory > Routes section* set *Make To Order* and
      *Manufacture* on.
 
 Or if you want to trigger a purchase:
 
-   - Create a stockable product product with a supplier.
+   - Create a stockable product with a vendor.
    - In the product's *Inventory > Routes section* set *Make To Order* and
      *Purchase* on.
