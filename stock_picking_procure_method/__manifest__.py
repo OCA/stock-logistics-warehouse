@@ -3,7 +3,7 @@
 {
     "name": "Stock Picking Procure Method",
     "summary": "Allows to force the procurement method from the picking",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Warehouse",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
