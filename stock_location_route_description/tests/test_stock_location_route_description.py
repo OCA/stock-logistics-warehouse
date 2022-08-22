@@ -11,7 +11,7 @@ class TestStockLocationRouteDescription(TransactionCase):
 
     def test_display_name_stock_location_route(self):
         """
-            Test to display the name of the route with and without a context.
+        Test to display the name of the route with and without a context.
         """
         route = self.model_stock_location_route.create(
             {"name": "Test Route", "description": "Test Description"}
