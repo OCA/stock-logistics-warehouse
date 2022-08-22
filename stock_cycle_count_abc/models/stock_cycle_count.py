@@ -82,6 +82,7 @@ class StockCycleCount(models.Model):
                 [
                     ("state", "=", "draft"),
                     ("cycle_count_id.cycle_count_rule_id.rule_type", "=", "abc"),
+                    ("cycle_count_id", "=", self.id),
                 ]
             )
             for inv in draft_inventory:
