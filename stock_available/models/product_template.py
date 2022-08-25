@@ -31,7 +31,8 @@ class ProductTemplate(models.Model):
                 [
                     variants_dict[p.id]["immediately_usable_qty"]
                     - variants_dict[p.id]["potential_qty"]
-                    for p in template.product_variant_ids if p.immediately_usable_qty > 0 #negative quantities should not have any impact on availability
+                    for p in template.product_variant_ids
+                    if p.immediately_usable_qty > 0 #negative quantities should not have any impact on availability
                 ]
             )
             potential_qty = max(
