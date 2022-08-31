@@ -36,7 +36,7 @@ addon | version | maintainers | summary
 [procurement_auto_create_group](procurement_auto_create_group/) | 13.0.1.2.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
 [product_quantity_update_force_inventory](product_quantity_update_force_inventory/) | 13.0.1.0.0 |  | Product Quantity Update Force Inventory
 [sale_automatic_workflow_reserve_sale_stock](sale_automatic_workflow_reserve_sale_stock/) | 13.0.1.0.0 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Sale Automatic Workflow: Reserve Sale stock
-[sale_stock_available_info_popup](sale_stock_available_info_popup/) | 13.0.1.0.2 |  | Adds an 'Available to promise' quantity to the popover shown in sale order line that display stock info of the product
+[sale_stock_available_info_popup](sale_stock_available_info_popup/) | 13.0.1.0.3 |  | Adds an 'Available to promise' quantity to the popover shown in sale order line that display stock info of the product
 [scrap_reason_code](scrap_reason_code/) | 13.0.1.1.1 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Reason code for scrapping
 [stock_account_change_qty_reason](stock_account_change_qty_reason/) | 13.0.1.0.0 |  | Stock Account Change Quantity Reason
 [stock_account_inventory_discrepancy](stock_account_inventory_discrepancy/) | 13.0.1.0.0 |  | Adds the capability to show the value discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
