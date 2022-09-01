@@ -39,20 +39,22 @@ class MrpProduction(models.Model):
             action["res_id"] = requests.id
         return action
 
-    def _get_finished_move_value(
+    def _get_move_finished_values(
         self,
         product_id,
         product_uom_qty,
         product_uom,
         operation_id=False,
         byproduct_id=False,
+        cost_share=0,
     ):
-        res = super()._get_finished_move_value(
+        res = super()._get_move_finished_values(
             product_id,
             product_uom_qty,
             product_uom,
             operation_id=operation_id,
             byproduct_id=byproduct_id,
+            cost_share=cost_share,
         )
         if self.stock_request_ids:
             res["allocation_ids"] = [

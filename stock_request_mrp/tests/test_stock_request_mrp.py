@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
 from odoo import fields
-from odoo.tests import Form, common
+from odoo.tests import common
 
 
 class TestStockRequestMrp(common.TransactionCase):
@@ -11,7 +11,6 @@ class TestStockRequestMrp(common.TransactionCase):
 
         # common models
         self.stock_request = self.env["stock.request"]
-        self.produce_wiz = self.env["mrp.product.produce"]
 
         # refs
         self.stock_request_user_group = self.env.ref(
@@ -68,7 +67,7 @@ class TestStockRequestMrp(common.TransactionCase):
     def _create_user(self, name, group_ids, company_ids):
         return (
             self.env["res.users"]
-            .with_context({"no_reset_password": True})
+            .with_context(no_reset_password=True)
             .create(
                 {
                     "name": name,
@@ -109,15 +108,6 @@ class TestStockRequestMrp(common.TransactionCase):
             )
 
         return bom
-
-    def _produce(self, mo, qty=0.0):
-        wiz = Form(
-            self.produce_wiz.with_context({"active_id": mo.id, "active_ids": [mo.id]})
-        )
-        wiz.qty_producing = qty or mo.product_qty
-        produce_wizard = wiz.save()
-        produce_wizard.do_produce()
-        return True
 
     def test_create_request_01(self):
         """Single Stock request with buy rule"""
@@ -164,12 +154,13 @@ class TestStockRequestMrp(common.TransactionCase):
         self.assertEqual(
             manufacturing_order.company_id, order.stock_request_ids[0].company_id
         )
+        manufacturing_order.action_confirm()
+        manufacturing_order.write(
+            {"qty_producing": manufacturing_order.product_uom_qty}
+        )
+        manufacturing_order._set_qty_producing()
 
-        self._produce(manufacturing_order, 5.0)
-        self.assertEqual(order.stock_request_ids.qty_in_progress, 5.0)
-        self.assertEqual(order.stock_request_ids.qty_done, 0.0)
-
-        manufacturing_order.button_mark_done()
+        manufacturing_order.with_context(skip_immediate=True).button_mark_done()
         self.assertEqual(order.stock_request_ids.qty_in_progress, 0.0)
         self.assertEqual(order.stock_request_ids.qty_done, 5.0)
 
