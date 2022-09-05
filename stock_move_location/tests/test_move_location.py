@@ -133,35 +133,74 @@ class TestMoveLocation(TestsCommon):
             putaway_line.destination_location_id, self.internal_loc_2_shelf
         )
 
-    def test_inmediate_transfer_reserved_quantity(self):
+    def test_delivery_order_assignation_after_transfer(self):
         """
-        Unreserve quantities in old location and reserve the same items on
-        new location
+        Make sure using the wizard doesn't break assignation on delivery orders
         """
+        delivery_order_type = self.env.ref("stock.picking_type_out")
+        internal_transfer_type = self.env.ref("stock.picking_type_internal")
+        wh_stock_shelf_1 = self.env.ref("stock.stock_location_components")
+        wh_stock_shelf_2 = self.env.ref("stock.stock_location_14")
+        wh_stock_shelf_3 = wh_stock_shelf_1.copy({"name": "Shelf 3"})
+
         # Create some quants
         self.set_product_amount(
-            self.product_lots, self.internal_loc_1, 100, lot_id=self.lot1
+            self.product_lots, wh_stock_shelf_1, 100, lot_id=self.lot1
         )
-        # Reserve some quantities
-        stock_move = self.env["stock.move"].create(
+
+        # Create and assign a delivery picking to reserve some quantities
+        delivery_picking = self._create_picking(delivery_order_type)
+        delivery_move = self.env["stock.move"].create(
             {
-                "name": "Move for test",
+                "name": "Delivery move",
                 "product_id": self.product_lots.id,
                 "product_uom_qty": 20.0,
                 "product_uom": self.product_lots.uom_id.id,
-                "location_id": self.internal_loc_1.id,
-                "location_dest_id": self.internal_loc_2.id,
+                "location_id": delivery_picking.location_id.id,
+                "location_dest_id": delivery_picking.location_dest_id.id,
+                "picking_id": delivery_picking.id,
             }
         )
-        stock_move._action_confirm()
-        stock_move._action_assign()
-        # Move all quantities to other location
-        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2_shelf)
+        delivery_picking.action_confirm()
+        self.assertEqual(delivery_picking.state, "assigned")
+
+        # Move all quantities to other location using module's wizard
+        wizard = self._create_wizard(wh_stock_shelf_1, wh_stock_shelf_2)
         wizard.onchange_origin_location()
         wizard.action_move_location()
-        # The old reserved quantities must be in new location after confirm wizard
-        self.assertEqual(len(stock_move.move_line_ids), 1)
-        self.assertEqual(stock_move.move_line_ids.product_uom_qty, 20.0)
-        self.assertEqual(
-            stock_move.move_line_ids.location_id, self.internal_loc_2_shelf
+        self.assertEqual(delivery_picking.state, "assigned")
+
+        # Do a planned transfer to move quantities to other location
+        #  without using module's wizard
+        internal_picking = self._create_picking(internal_transfer_type)
+        internal_picking.write(
+            {"location_id": wh_stock_shelf_2, "location_dest_id": wh_stock_shelf_3.id}
         )
+        self.env["stock.move"].create(
+            {
+                "name": "Internal move",
+                "product_id": self.product_lots.id,
+                "product_uom_qty": 100.0,
+                "product_uom": self.product_lots.uom_id.id,
+                "location_id": internal_picking.location_id.id,
+                "location_dest_id": internal_picking.location_dest_id.id,
+                "picking_id": internal_picking.id,
+            }
+        )
+        # Unreserve quantity on the delivery to allow moving the quantity
+        delivery_picking.do_unreserve()
+        self.assertEqual(delivery_picking.state, "confirmed")
+        internal_picking.action_confirm()
+        internal_picking.action_assign()
+        internal_picking.move_line_ids.qty_done = (
+            internal_picking.move_line_ids.product_uom_qty
+        )
+        internal_picking.button_validate()
+        self.assertEqual(internal_picking.state, "done")
+        # Assign the delivery must work
+        delivery_picking.action_assign()
+        self.assertEqual(delivery_picking.state, "assigned")
+        # The old reserved quantities must be in new location after confirm wizard
+        self.assertEqual(len(delivery_move.move_line_ids), 1)
+        self.assertEqual(delivery_move.move_line_ids.product_uom_qty, 20.0)
+        self.assertEqual(delivery_move.move_line_ids.location_id, wh_stock_shelf_3)
