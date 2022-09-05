@@ -8,7 +8,7 @@
 
 {
     "name": "Stock Warehouse Orderpoint Stock Info",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "depends": [
         "stock",
     ],
