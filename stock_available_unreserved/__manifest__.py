@@ -6,7 +6,7 @@
 {
     "name": "Stock Available Unreserved",
     "summary": "Quantity of stock available for immediate use",
-    "version": "10.0.1.0.1",
+    "version": "10.0.1.0.2",
     "author": "Eficent Business and IT Consulting Services S.L,"
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
