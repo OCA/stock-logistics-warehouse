@@ -5,7 +5,7 @@
 
 {
     "name": "Ignore planned receptions in quantity available to promise",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "depends": ["stock_available"],
     "author": "Camptocamp,Sodexis,Odoo Community Association (OCA)",
     "license": "AGPL-3",
