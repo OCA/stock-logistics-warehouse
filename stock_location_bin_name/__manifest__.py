@@ -12,6 +12,6 @@
     "depends": ["stock_location_zone", "stock_location_position"],
     "data": ["views/stock_location.xml"],
     "installable": True,
-    "development_status": "Beta",
+    "development_status": "Alpha",
     "license": "AGPL-3",
 }
