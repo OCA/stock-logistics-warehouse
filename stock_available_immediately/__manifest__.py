@@ -9,6 +9,7 @@
     "depends": ["stock_available"],
     "author": "Camptocamp,Sodexis,Odoo Community Association (OCA)",
     "license": "AGPL-3",
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     "category": "Hidden",
     'installable': True
 }

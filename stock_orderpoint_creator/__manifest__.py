@@ -28,7 +28,7 @@
  'depends': ['procurement'],
  'description': """
 Add a wizard to configure massively order points for multiple product""",
- 'website': 'http://www.openerp.com',
+ 'website': 'https://github.com/OCA/stock-logistics-warehouse',
  'init_xml': [],
  'update_xml': ["wizard/orderpoint_creator_view.xml", "security/ir.model.access.csv"],
  'demo_xml': [],

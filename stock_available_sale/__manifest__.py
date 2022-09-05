@@ -11,6 +11,7 @@
               'Tecnativa, '
               'Odoo Community Association (OCA)',
     'category': 'Stock',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'depends': [
         'stock_available',
         'sale_order_dates',

@@ -31,7 +31,7 @@ This module allows to move all stock in a stock location to an other one.
 And adds fields and buttons to advance in Physical Inventories.
 
 """,
-    "website" : "http://www.julius.fr",
+    "website" : "https://github.com/OCA/stock-logistics-warehouse",
     "depends" : [
         "stock",
         "stock_barcode_reader",

@@ -47,7 +47,7 @@ executed daily and will update the maximum quantity in the reordering rule
 This module doesn't need purchase module to work, but it's useful with that
 module.""",
     'author': "Sergio Corato,Odoo Community Association (OCA)",
-    'website': 'http://www.icstools.it',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'depends': ['procurement',
                 'sale',
                 ],

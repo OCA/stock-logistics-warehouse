@@ -9,7 +9,7 @@
     "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
-    "website": "https://acsone.eu/",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": ["stock"],
     "data": ["views/stock_location.xml"],
     "demo": [],

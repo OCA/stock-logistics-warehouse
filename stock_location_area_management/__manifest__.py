@@ -24,7 +24,7 @@
     'version': '8.0.0.1.0',
     'author': 'Savoir-faire Linux',
     'maintainer': 'Savoir-faire Linux',
-    'website': 'http://www.savoirfairelinux.com',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'license': 'AGPL-3',
     'category': 'Warehouse',
     'summary': "Enter a location's area based on different units of measure",

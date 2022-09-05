@@ -35,7 +35,7 @@ As for products, lots have 'cost' and 'costing method' fields. Also, a
 'Change Standard Price' wizard is available.
 """,
     'author': "Agile Business Group,Odoo Community Association (OCA)",
-    'website': 'http://www.agilebg.com',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'license': 'AGPL-3',
     "depends": ['stock'],
     "data": [

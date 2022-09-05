@@ -10,7 +10,7 @@
               "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "website": "http://www.odoomrp.com",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": [
         "procurement",
         "stock",

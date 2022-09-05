@@ -7,7 +7,7 @@
     "author": 'ACSONE SA/NV, '
               'Odoo Community Association (OCA)',
     "category": "Warehouse",
-    "website": "http://www.acsone.eu",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     'summary': "In purchase, use package",
     "depends": [
         "product",

@@ -45,7 +45,7 @@ The selected products are deactivated and a new one is created with :
 - All the one2many relations (invoices, sale_orders, ...) are updated in order to link to the new resource.
 
 """,
-    "website": "http://camptocamp.com",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends" : ['product'],
     "init_xml" : [],
     "demo_xml" : [],

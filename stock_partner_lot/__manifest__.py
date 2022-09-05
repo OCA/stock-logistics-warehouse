@@ -10,6 +10,7 @@
     'author': 'credativ ltd., '
               'Odoo Community Association (OCA)',
     'license': 'AGPL-3',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'depends': [
         'stock',
     ],

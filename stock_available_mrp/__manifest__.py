@@ -7,6 +7,7 @@
     "author": u"Numérigraphe,"
               u"Odoo Community Association (OCA)",
     'category': 'Hidden',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'depends': [
         'stock_available',
         'mrp'
