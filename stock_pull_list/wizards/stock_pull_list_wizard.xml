@@ -1,5 +1,5 @@
 <!-- Copyright 2020 ForgeFlow S.L.
-     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_run_stock_pull_list_wizard_wizard" model="ir.ui.view">
         <field name="name">stock.pull.list.wizard.form</field>
