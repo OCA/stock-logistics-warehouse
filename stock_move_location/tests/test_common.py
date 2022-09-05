@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo.tests import common
+from odoo.tests import Form, common
 
 
 class TestsCommon(common.TransactionCase):
@@ -103,6 +103,11 @@ class TestsCommon(common.TransactionCase):
                 "destination_location_id": destination_location.id,
             }
         )
+
+    def _create_picking(self, picking_type):
+        with Form(self.env["stock.picking"]) as picking_form:
+            picking_form.picking_type_id = picking_type
+        return picking_form.save()
 
     def _create_putaway_for_product(self, product, loc_in, loc_out):
         putaway = self.env["stock.putaway.rule"].create(
