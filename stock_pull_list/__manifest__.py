@@ -1,12 +1,12 @@
 # Copyright 2020 ForgeFlow, S.L.
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Stock Pull List",
     "summary": "The pull list checks the stock situation and calculates "
     "needed quantities.",
     "version": "14.0.1.1.1",
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "ForgeFlow, " "Odoo Community Association (OCA)",
     "maintainers": ["LoisRForgeFlow"],
