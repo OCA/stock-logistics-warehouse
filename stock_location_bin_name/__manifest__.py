@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 {
     "name": "Stock Location Bin Name",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "BCIM, Okia, Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "summary": "Compute bin stock location name automatically",
