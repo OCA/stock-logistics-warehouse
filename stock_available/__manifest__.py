@@ -5,7 +5,7 @@
 
 {
     'name': 'Stock available to promise',
-    'version': '10.0.1.0.1',
+    'version': '10.0.1.0.2',
     "author": "Numérigraphe, Sodexis, Odoo Community Association (OCA)",
     'category': 'Warehouse',
     'depends': ['stock'],
