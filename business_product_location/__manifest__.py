@@ -4,7 +4,7 @@
 
 {
     'name': 'Business Product Location',
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'author': 'ACSONE SA/NV, Odoo Community Association (OCA)',
     'category': 'Warehouse Management',
     'website': 'https://github.com/OCA/stock-logistics-warehouse',
