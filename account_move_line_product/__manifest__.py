@@ -8,7 +8,7 @@
     "version": "10.0.1.0.0",
     "summary": "Displays the product in the journal entries and items",
     "author": "Eficent, Odoo Community Association (OCA)",
-    "website": "http://www.eficent.com",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Generic",
     "depends": ["account"],
     "license": "AGPL-3",

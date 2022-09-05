@@ -4,7 +4,7 @@
 {'name': 'Stock MTS+MTO Rule',
  'version': '10.0.1.0.3',
  'author': 'Akretion,Odoo Community Association (OCA)',
- 'website': 'http://www.akretion.com',
+ 'website': 'https://github.com/OCA/stock-logistics-warehouse',
  'license': 'AGPL-3',
  'category': 'Warehouse',
  'summary': 'Add a MTS+MTO route',

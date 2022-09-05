@@ -16,7 +16,7 @@
               "AvanzOSC, "
               "Tecnativa, "
               "Odoo Community Association (OCA)",
-    "website": "http://www.odoomrp.com",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
     "license": "AGPL-3",
     "data": [

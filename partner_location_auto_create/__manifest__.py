@@ -28,7 +28,7 @@
     'license': 'AGPL-3',
     'complexity': 'normal',
     'images': [],
-    'website': 'http://www.savoirfairelinux.com',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'depends': [
         'sale_stock',
     ],

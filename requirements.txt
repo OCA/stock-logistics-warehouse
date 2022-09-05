@@ -1,2 +1,3 @@
-openupgradelib==2.0.0
-odoo-test-helper
+# generated from manifests external_dependencies
+numpy
+openupgradelib

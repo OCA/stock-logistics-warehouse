@@ -10,6 +10,7 @@
     'category': 'Warehouse',
     'depends': ['stock'],
     'license': 'AGPL-3',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'data': [
         'views/product_template_view.xml',
         'views/product_product_view.xml',

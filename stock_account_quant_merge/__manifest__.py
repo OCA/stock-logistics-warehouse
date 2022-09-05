@@ -13,7 +13,7 @@
     "auto_install": True,
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
-    "website": "http://www.eficent.com",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "installable": True,
     "license": "AGPL-3",

@@ -26,7 +26,7 @@
  'license': 'AGPL-3',
  'complexity': 'normal',
  'images': [],
- 'website': "http://www.camptocamp.com",
+ 'website': "https://github.com/OCA/stock-logistics-warehouse",
  'depends': ['stock',
              ],
  'demo': [],

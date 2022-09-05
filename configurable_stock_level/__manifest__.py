@@ -27,7 +27,7 @@
  'depends' : ['stock', 'product'],
  'description': """Allows to set a stock level composed by
  a configuration using the sum of stock location + product fields""",
- 'website': 'http://www.camptocamp.com',
+ 'website': 'https://github.com/OCA/stock-logistics-warehouse',
  'init_xml': [],
  'update_xml': ['stock_level_configuration_view.xml',
                 'product_view.xml',
