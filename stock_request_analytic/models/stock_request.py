@@ -1,6 +1,6 @@
 # Copyright 2017-2020 ForgeFlow, S.L. (https://www.forgeflow.com)
 # Copyright 2021 Tecnativa - João Marques
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
 
