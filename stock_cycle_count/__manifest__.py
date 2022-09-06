@@ -6,7 +6,6 @@
     "summary": "Adds the capability to schedule cycle counts in a "
                "warehouse through different rules defined by the user.",
     "version": "12.0.1.1.0",
-    "development_status": "Mature",
     "maintainers": ["lreficent"],
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
