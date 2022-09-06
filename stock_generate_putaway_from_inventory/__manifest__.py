@@ -4,7 +4,7 @@
 {
     "name": "Stock Generate Putaway from Inventory",
     "summary": "Generate Putaway locations per Product deduced from Inventory",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "author": "Akretion, Odoo Community Association (OCA)",
     "category": "Warehouse",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
