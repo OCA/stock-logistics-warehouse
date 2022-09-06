@@ -41,6 +41,7 @@ addon | version | maintainers | summary
 [stock_change_qty_reason](stock_change_qty_reason/) | 10.0.1.0.1 |  | Stock Quantity Change Reason
 [stock_cycle_count](stock_cycle_count/) | 10.0.1.0.0 |  | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
 [stock_demand_estimate](stock_demand_estimate/) | 10.0.1.1.1 |  | Allows to create demand estimates.
+[stock_helper](stock_helper/) | 10.0.1.1.0 |  | Add methods shared between various stock modules
 [stock_inventory_chatter](stock_inventory_chatter/) | 10.0.1.0.0 |  | Log changes being done in Inventory Adjustments
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 10.0.1.0.0 |  | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_inventory_exclude_sublocation](stock_inventory_exclude_sublocation/) | 10.0.1.0.0 |  | Allow to perform inventories of a location without including its child locations.
