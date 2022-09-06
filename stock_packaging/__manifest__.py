@@ -5,7 +5,7 @@
     'name': 'Stock Packaging',
     'summary': """
         Allows to propagate packaging through stock flows""",
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'license': 'AGPL-3',
     'development_status': 'Beta',
     'maintainers': ['rousseldenis'],
