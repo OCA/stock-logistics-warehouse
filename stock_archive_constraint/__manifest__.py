@@ -5,7 +5,7 @@
     "name": "Stock archive constraint",
     "version": "12.0.1.0.1",
     "license": "AGPL-3",
-    "website": "https://github.com/stock-logistics-warehouse",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "development_status": "Production/Stable",
     "category": "Warehouse",

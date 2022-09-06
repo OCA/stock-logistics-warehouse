@@ -1,1 +1,2 @@
-git+https://github.com/OCA/openupgradelib.git
+# generated from manifests external_dependencies
+openupgradelib
