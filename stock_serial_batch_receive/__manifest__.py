@@ -3,7 +3,7 @@
 {
     "name": "Stock Serial Number Batch",
     "summary": "Generate serial number automatically per batch",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "maintainer": "Camptocamp",
