@@ -4,7 +4,7 @@
 {
     'name': 'Stock Request Picking Type',
     'summary': 'Add Stock Requests to the Inventory App',
-    'version': '12.0.2.1.1',
+    'version': '12.0.2.1.2',
     'license': 'LGPL-3',
     'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'author': 'Open Source Integrators, '
