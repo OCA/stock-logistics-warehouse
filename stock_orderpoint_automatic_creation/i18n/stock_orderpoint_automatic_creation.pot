@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_orderpoint_automatic_creation
-#: model:ir.model.fields,help:stock_orderpoint_automatic_creation.field_res_company_create_orderpoints
+#: model:ir.model.fields,help:stock_orderpoint_automatic_creation.field_res_company__create_orderpoints
 msgid "Check this for automatic orderpoints"
 msgstr ""
 
@@ -24,30 +24,30 @@ msgid "Companies"
 msgstr ""
 
 #. module: stock_orderpoint_automatic_creation
-#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_product_product_create_orderpoint
-#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_product_template_create_orderpoint
+#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_product_product__create_orderpoint
+#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_product_template__create_orderpoint
 msgid "Create Orderpoint"
 msgstr ""
 
 #. module: stock_orderpoint_automatic_creation
-#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_product_category_create_orderpoints
-#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_res_company_create_orderpoints
+#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_product_category__create_orderpoints
+#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_res_company__create_orderpoints
 msgid "Create Orderpoints"
 msgstr ""
 
 #. module: stock_orderpoint_automatic_creation
-#: model:ir.model.fields,help:stock_orderpoint_automatic_creation.field_res_company_orderpoint_product_max_qty
-#: model:ir.model.fields,help:stock_orderpoint_automatic_creation.field_res_company_orderpoint_product_min_qty
+#: model:ir.model.fields,help:stock_orderpoint_automatic_creation.field_res_company__orderpoint_product_max_qty
+#: model:ir.model.fields,help:stock_orderpoint_automatic_creation.field_res_company__orderpoint_product_min_qty
 msgid "Default orderpoint Max. product quantity"
 msgstr ""
 
 #. module: stock_orderpoint_automatic_creation
-#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_res_company_orderpoint_product_max_qty
+#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_res_company__orderpoint_product_max_qty
 msgid "Max. product quantity"
 msgstr ""
 
 #. module: stock_orderpoint_automatic_creation
-#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_res_company_orderpoint_product_min_qty
+#: model:ir.model.fields,field_description:stock_orderpoint_automatic_creation.field_res_company__orderpoint_product_min_qty
 msgid "Min. product quantity"
 msgstr ""
 
