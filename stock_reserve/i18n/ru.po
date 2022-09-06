@@ -45,6 +45,13 @@ msgid "All returned moves"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation_common_dest_move_ids
+msgid ""
+"All the stock moves having a chained destination move sharing the same "
+"picking as the actual move's destination move"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_string_availability_info
 msgid "Availability"
 msgstr ""
@@ -83,6 +90,11 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
 msgid "Click to create a stock reservation."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_common_dest_move_ids
+msgid "Common dest move ids"
 msgstr ""
 
 #. module: stock_reserve
