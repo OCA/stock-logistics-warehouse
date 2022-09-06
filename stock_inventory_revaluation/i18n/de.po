@@ -498,7 +498,7 @@ msgstr ""
 msgid ""
 "Please add an Increase Account and a Decrease Account to the revaluation, or "
 "add them to product category %s"
-msgstr "Ergänzen Sie bitte Zunahme- und Abnahmekonten."
+msgstr "Ergänzen Sie bitte Zunahme- und Abnahmekonten. %s"
 
 #. module: stock_inventory_revaluation
 #: code:addons/stock_inventory_revaluation/models/stock_inventory_revaluation.py:285
