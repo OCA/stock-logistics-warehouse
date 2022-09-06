@@ -82,7 +82,7 @@ addon | version | maintainers | summary
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 14.0.1.2.1 |  | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 14.0.1.0.7 |  | Internal request for stock
 [stock_request_analytic](stock_request_analytic/) | 14.0.1.0.3 |  | Internal request for stock
-[stock_request_cancel_confirm](stock_request_cancel_confirm/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Stock Request Cancel Confirm
+[stock_request_cancel_confirm](stock_request_cancel_confirm/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Stock Request Cancel Confirm
 [stock_request_direction](stock_request_direction/) | 14.0.1.0.1 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | From or to your warehouse?
 [stock_request_kanban](stock_request_kanban/) | 14.0.1.0.0 |  | Adds a stock request order, and takes stock requests as lines
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add Stock Requests to the Inventory App
