@@ -6,7 +6,6 @@
     "summary": "Adds the capability to request a Slot Verification when "
                "a inventory is Pending to Approve",
     "version": "12.0.3.0.0",
-    "development_status": "Mature",
     "maintainers": ['LoisRForgeFlow'],
     "author": "ForgeFlow, "
               "Odoo Community Association (OCA)",
