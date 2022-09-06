@@ -54,7 +54,7 @@ addon | version | maintainers | summary
 [stock_location_restrict_procurement_group](stock_location_restrict_procurement_group/) | 10.0.1.1.1 |  | Allows to restrict location to a dedicated procurement group (e.g. : For orders waiting delivery)
 [stock_lot_note](stock_lot_note/) | 10.0.1.0.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Adds a field to fill in notes in lots
 [stock_lot_sale_tracking](stock_lot_sale_tracking/) | 10.0.1.0.1 |  | This addon allows to retrieve all customer deliveries impacted by a lot
-[stock_move_common_dest](stock_move_common_dest/) | 10.0.1.1.0 |  | Adds field for common destination moves
+[stock_move_common_dest](stock_move_common_dest/) | 10.0.1.1.1 |  | Adds field for common destination moves
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 10.0.1.0.4 |  | Add a MTS+MTO route
 [stock_operation_package_mandatory](stock_operation_package_mandatory/) | 10.0.1.0.1 |  | Makes destination package mandatory on stock pack operations
 [stock_orderpoint_automatic_creation](stock_orderpoint_automatic_creation/) | 10.0.1.0.1 |  | Stock Orderpoint Automatic Creation
