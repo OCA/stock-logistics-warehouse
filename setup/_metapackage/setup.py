@@ -41,6 +41,7 @@ setuptools.setup(
         'odoo10-addon-stock_location_restrict_procurement_group',
         'odoo10-addon-stock_lot_note',
         'odoo10-addon-stock_lot_sale_tracking',
+        'odoo10-addon-stock_move_common_dest',
         'odoo10-addon-stock_mts_mto_rule',
         'odoo10-addon-stock_operation_package_mandatory',
         'odoo10-addon-stock_orderpoint_automatic_creation',
