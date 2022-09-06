@@ -5,7 +5,7 @@
 
 {
     "name": "Stock Orderpoint Automatic Creation",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "author": "AvanzOSC, "
               "Tecnativa, "
               "Odoo Community Association (OCA)",
