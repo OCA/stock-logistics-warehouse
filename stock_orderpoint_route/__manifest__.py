@@ -4,7 +4,7 @@
     "name": "Stock Orderpoint Route",
     "summary": "Allows to force a route to be used when procuring from "
                "orderpoints",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Eficent, "
