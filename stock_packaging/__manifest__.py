@@ -9,7 +9,7 @@
     'license': 'AGPL-3',
     'development_status': 'Beta',
     'maintainers': ['rousseldenis'],
-    'website': 'https://github.com/OCA/stock-logistics-workflow',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'depends': [
         'stock',
