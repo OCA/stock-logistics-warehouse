@@ -48,6 +48,7 @@ setuptools.setup(
         'odoo10-addon-stock_orderpoint_manual_procurement',
         'odoo10-addon-stock_orderpoint_manual_procurement_uom',
         'odoo10-addon-stock_orderpoint_uom',
+        'odoo10-addon-stock_picking_completion_info',
         'odoo10-addon-stock_product_location_sorted_by_qty',
         'odoo10-addon-stock_putaway_product',
         'odoo10-addon-stock_quant_manual_assign',
