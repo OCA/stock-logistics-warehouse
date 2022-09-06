@@ -28,6 +28,7 @@ setuptools.setup(
         'odoo10-addon-stock_change_qty_reason',
         'odoo10-addon-stock_cycle_count',
         'odoo10-addon-stock_demand_estimate',
+        'odoo10-addon-stock_helper',
         'odoo10-addon-stock_inventory_chatter',
         'odoo10-addon-stock_inventory_discrepancy',
         'odoo10-addon-stock_inventory_exclude_sublocation',
