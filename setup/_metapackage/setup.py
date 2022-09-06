@@ -69,6 +69,7 @@ setuptools.setup(
         'odoo14-addon-stock_quant_manual_assign',
         'odoo14-addon-stock_request',
         'odoo14-addon-stock_request_analytic',
+        'odoo14-addon-stock_request_cancel_confirm',
         'odoo14-addon-stock_request_direction',
         'odoo14-addon-stock_request_kanban',
         'odoo14-addon-stock_request_picking_type',
