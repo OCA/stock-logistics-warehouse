@@ -16,7 +16,7 @@ class TestStockOrderpointProcureLocation(common.TransactionCase):
         self.warehouse = self.env.ref("stock.warehouse0")
         self.warehouse.reception_steps = "two_steps"
         self.location_stock = self.env.ref("stock.stock_location_stock")
-        self.uom_unit = self.env.ref("product.product_uom_unit")
+        self.uom_unit = self.env.ref('uom.product_uom_unit')
         self.location_input = self.env.ref("stock.stock_location_company")
 
         self.productA = productObj.create(

@@ -10,7 +10,7 @@ class Orderpoint(models.Model):
     procure_location_id = fields.Many2one(
         comodel_name="stock.location",
         string="Procurement Location",
-        domain="[('usage', '=', 'internal')]",
+        domain="[('usage', 'in', ['internal', 'transit'])]",
     )
 
     def _prepare_procurement_values(
