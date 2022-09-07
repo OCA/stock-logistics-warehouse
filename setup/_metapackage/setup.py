@@ -65,6 +65,7 @@ setuptools.setup(
         'odoo12-addon-stock_putaway_method',
         'odoo12-addon-stock_putaway_product_form',
         'odoo12-addon-stock_quant_manual_assign',
+        'odoo12-addon-stock_realign_move_and_quants',
         'odoo12-addon-stock_removal_location_by_priority',
         'odoo12-addon-stock_request',
         'odoo12-addon-stock_request_analytic',
