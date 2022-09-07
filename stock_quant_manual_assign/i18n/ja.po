@@ -178,16 +178,20 @@ msgstr "選択"
 msgid ""
 "Select this in case done quantity of the stock move line should be auto-"
 "filled when quants are manually assigned."
-msgstr "選択すると、保管ロットが手動割当されたときにプロダクト移動の完了数量が自動提案されます。"
+msgstr ""
+"選択すると、保管ロットが手動割当されたときにプロダクト移動の完了数量が自動提"
+"案されます。"
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:177
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:186
 #, python-format
 msgid ""
 "Selected line quantity is higher than the available one. Maybe an operation "
 "with this product has been done meanwhile or you have manually increased the "
 "suggested value."
-msgstr "利用可能数量より大きい数量が指定されました。(このプロダクトの在庫状況に変化があったか、提案数量が手動で大きい数量に変更されたようです。)"
+msgstr ""
+"利用可能数量より大きい数量が指定されました。(このプロダクトの在庫状況に変化が"
+"あったか、提案数量が手動で大きい数量に変更されたようです。)"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id

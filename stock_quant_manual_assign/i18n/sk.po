@@ -180,7 +180,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:177
+#: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:186
 #, python-format
 msgid ""
 "Selected line quantity is higher than the available one. Maybe an operation "
