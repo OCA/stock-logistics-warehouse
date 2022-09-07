@@ -5,7 +5,7 @@
 {
     "name": "Stock Available Unreserved",
     "summary": "Quantity of stock available for immediate use",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.1.1",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "development_status": "Production/Stable",
     "maintainers": ["LoisRForgeFlow"],
