@@ -77,7 +77,7 @@ addon | version | maintainers | summary
 [stock_pull_list](stock_pull_list/) | 12.0.1.0.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
 [stock_putaway_method](stock_putaway_method/) | 12.0.1.0.0 | [![asaunier](https://github.com/asaunier.png?size=30px)](https://github.com/asaunier) | Add the putaway strategy method back, removed from the stock module in Odoo 12
 [stock_putaway_product_form](stock_putaway_product_form/) | 12.0.1.0.1 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Edit putaway strategies directly from the product form view
-[stock_quant_manual_assign](stock_quant_manual_assign/) | 12.0.1.1.0 |  | Stock - Manual Quant Assignment
+[stock_quant_manual_assign](stock_quant_manual_assign/) | 12.0.1.2.0 |  | Stock - Manual Quant Assignment
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 12.0.1.0.0 |  | Establish a removal priority on stock locations.
 [stock_request](stock_request/) | 12.0.1.5.0 |  | Internal request for stock
 [stock_request_analytic](stock_request_analytic/) | 12.0.1.0.2 |  | Internal request for stock
