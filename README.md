@@ -75,6 +75,7 @@ addon | version | maintainers | summary
 [stock_packaging_calculator](stock_packaging_calculator/) | 14.0.1.2.0 |  | Compute product quantity to pick by packaging
 [stock_packaging_calculator_packaging_type](stock_packaging_calculator_packaging_type/) | 14.0.1.0.0 |  | Glue module for packaging type
 [stock_picking_cancel_confirm](stock_picking_cancel_confirm/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Stock Picking Cancel Confirm
+[stock_picking_procure_method](stock_picking_procure_method/) | 14.0.1.0.0 |  | Allows to force the procurement method from the picking
 [stock_picking_show_linked](stock_picking_show_linked/) | 14.0.1.0.1 |  | This addon allows to easily access related pickings (in the case of chained routes) through a button in the parent picking view.
 [stock_product_qty_by_packaging](stock_product_qty_by_packaging/) | 14.0.1.0.0 |  | Compute product quantity to pick by packaging
 [stock_pull_list](stock_pull_list/) | 14.0.1.1.2 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
