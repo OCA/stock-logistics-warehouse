@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     Copyright 2021 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_align_move_quant_wizard_view" model="ir.ui.view">
+        <field name="name">view_align_move_quant_wizard_view</field>
+        <field name="model">align.move.quant.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <label for="" string="todo doc" />
+                <group>
+                    <field name="start_date" />
+                </group>
+                <footer>
+                    <button
+                        name="align_move_quant"
+                        type="object"
+                        string="Align Stock Moves and Quants"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_align_move_quant_wizard" model="ir.actions.act_window">
+        <field name="name">Align Stock Moves and Quants</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">align.move.quant.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        name="Stock Fix Operations"
+        id="menu_inventory_stock_fix_operations"
+        parent="stock.menu_stock_config_settings"
+        groups="base.group_system"
+    />
+
+    <menuitem
+        action="action_align_move_quant_wizard"
+        id="menu_inventory_align_move_quant"
+        parent="menu_inventory_stock_fix_operations"
+        groups="base.group_system"
+    />
+</odoo>
