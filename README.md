@@ -73,7 +73,7 @@ addon | version | maintainers | summary
 [stock_measuring_device_zippcube](stock_measuring_device_zippcube/) | 13.0.1.1.0 | [![gurneyalex](https://github.com/gurneyalex.png?size=30px)](https://github.com/gurneyalex) | Implement interface with Bosche Zippcube devicesfor packaging measurement
 [stock_move_auto_assign](stock_move_auto_assign/) | 13.0.1.1.0 |  | Try to reserve moves when goods enter in a location
 [stock_move_common_dest](stock_move_common_dest/) | 13.0.1.1.0 |  | Adds field for common destination moves
-[stock_move_location](stock_move_location/) | 13.0.1.0.6 |  | This module allows to move all stock in a stock location to an other one.
+[stock_move_location](stock_move_location/) | 13.0.1.1.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_move_packaging_qty](stock_move_packaging_qty/) | 13.0.1.1.1 |  | Add packaging fields in the stock moves
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 13.0.1.3.0 |  | Add a MTS+MTO route
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 13.0.2.0.0 |  | Mass configuration of stock order points
