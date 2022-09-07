@@ -20,6 +20,8 @@ class StockQuant(models.Model):
                 ('lot_id', '=', self.lot_id.id),
                 ('package_id', '=', self.package_id.id),
                 ('location_id', '=', self.location_id.id),
+                ('owner_id', '=', self.owner_id.id or False),
+                ('company_id', '=', self.company_id.id),
                 ('reservation_id', '=', False),
                 ('propagated_from_id', '=', self.propagated_from_id.id)]
 
