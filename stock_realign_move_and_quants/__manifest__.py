@@ -7,7 +7,7 @@
         Align stock move lines and stock quants. This modules fixes the
         symptoms and not the root cause.
     """,
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "depends": ["stock"],
     "author": "Camptocamp,"
               "Coop IT Easy SCRLfs,"
