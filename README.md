@@ -65,7 +65,7 @@ addon | version | maintainers | summary
 [stock_product_location_sorted_by_qty](stock_product_location_sorted_by_qty/) | 10.0.1.0.0 | [![chafique-delli](https://github.com/chafique-delli.png?size=30px)](https://github.com/chafique-delli) | In the update wizard of quantities for a product, sort the stock location by quantity
 [stock_putaway_product](stock_putaway_product/) | 10.0.1.1.1 |  | Set a product location and put-away strategy per product
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 10.0.1.0.2 |  | Stock - Manual Quant Assignment
-[stock_quant_merge](stock_quant_merge/) | 10.0.1.0.1 |  | Stock - Quant merge
+[stock_quant_merge](stock_quant_merge/) | 10.0.1.1.0 |  | Stock - Quant merge
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 10.0.1.0.0 |  | Stock Quant Reserved Qty UoM
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 10.0.1.0.0 |  | Establish a removal priority on stock locations.
 [stock_reserve](stock_reserve/) | 10.0.1.0.1 |  | Stock reservations on products
