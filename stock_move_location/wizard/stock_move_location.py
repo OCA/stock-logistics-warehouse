@@ -138,6 +138,13 @@ class StockMoveLocationWizard(models.TransientModel):
                     )
         return res
 
+    @api.onchange("picking_type_id")
+    def _onchange_picking_type_id(self):
+        if self.picking_type_id.default_location_src_id:
+            self.origin_location_id = self.picking_type_id.default_location_src_id
+        if self.picking_type_id.default_location_dest_id:
+            self.destination_location_id = self.picking_type_id.default_location_dest_id
+
     @api.onchange("origin_location_id")
     def _onchange_origin_location_id(self):
         if not self.env.context.get("origin_location_disable", False):
