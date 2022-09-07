@@ -6,43 +6,44 @@ import odoo.tests.common as common
 from odoo import fields
 
 
-class TestProcurementOrder(common.TransactionCase):
+class TestProcurementOrder(common.SavepointCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         """ Create a packagings with uom  product_uom_dozen on
                 * product_product_3 (uom is product_uom_unit)
         """
-        super(TestProcurementOrder, self).setUp()
-        product_obj = self.env['product.product']
+        super(TestProcurementOrder, cls).setUpClass()
+        product_obj = cls.env['product.product']
         # Create new product
         vals = {
             'name': 'Product Purchase Pack Test',
-            'categ_id': self.env.ref('product.product_category_5').id,
+            'categ_id': cls.env.ref('product.product_category_5').id,
             'list_price': 30.0,
             'standard_price': 20.0,
             'type': 'product',
-            'uom_id': self.env.ref('product.product_uom_unit').id,
+            'uom_id': cls.env.ref('product.product_uom_unit').id,
 
         }
-        self.product_test = product_obj.create(vals)
-        self.product_packaging_3 = self.env['product.packaging'].create({
-            'product_tmpl_id': self.product_test.product_tmpl_id.id,
-            'uom_id': self.env.ref('product.product_uom_dozen').id,
+        cls.product_test = product_obj.create(vals)
+        cls.product_packaging_3 = cls.env['product.packaging'].create({
+            'product_tmpl_id': cls.product_test.product_tmpl_id.id,
+            'uom_id': cls.env.ref('product.product_uom_dozen').id,
             'name': 'Packaging Dozen'
         })
-        self.sp_30 = self.env.ref('product.product_supplierinfo_1')
-        self.sp_30.product_tmpl_id = self.product_packaging_3.product_tmpl_id
-        self.sp_30.currency_id = self.env.user.company_id.currency_id
-        self.sp_30.date_start = fields.Datetime.from_string(
+        cls.sp_30 = cls.env.ref('product.product_supplierinfo_1')
+        cls.sp_30.product_tmpl_id = cls.product_packaging_3.product_tmpl_id
+        cls.sp_30.currency_id = cls.env.user.company_id.currency_id
+        cls.sp_30.date_start = fields.Datetime.from_string(
             fields.Datetime.now()) - timedelta(days=10)
-        self.product_uom_8 = self.env['product.uom'].create({
-            'category_id': self.env.ref('product.product_uom_categ_unit').id,
+        cls.product_uom_8 = cls.env['product.uom'].create({
+            'category_id': cls.env.ref('product.product_uom_categ_unit').id,
             'name': 'COL8',
             'factor_inv': 8,
             'uom_type': 'bigger',
             'rounding': 1.0,
         })
-        self.env['purchase.order'].search([
+        cls.env['purchase.order'].search([
             ("state", "=", "draft")
         ]).button_cancel()
 
