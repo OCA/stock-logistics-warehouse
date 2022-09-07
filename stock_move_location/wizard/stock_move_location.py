@@ -12,7 +12,7 @@ class StockMoveLocationWizard(models.TransientModel):
     _description = "Wizard move location"
 
     def _get_default_picking_type_id(self):
-        company_id = self.env.context.get("company_id") or self.env.user.company_id.id
+        company_id = self.env.context.get("company_id") or self.env.company.id
         return (
             self.env["stock.picking.type"]
             .search(
@@ -119,7 +119,7 @@ class StockMoveLocationWizard(models.TransientModel):
     def _get_locations_domain(self):
         return [
             "|",
-            ("company_id", "=", self.env.user.company_id.id),
+            ("company_id", "=", self.env.company.id),
             ("company_id", "=", False),
         ]
 
