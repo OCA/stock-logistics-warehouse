@@ -103,9 +103,16 @@ class TestReserveRule(common.SavepointCase):
             )
         return picking
 
-    def _update_qty_in_location(self, location, product, quantity, in_date=None):
+    def _update_qty_in_location(
+        self, location, product, quantity, in_date=None, lot_id=None, owner_id=None
+    ):
         self.env["stock.quant"]._update_available_quantity(
-            product, location, quantity, in_date=in_date
+            product,
+            location,
+            quantity,
+            in_date=in_date,
+            lot_id=lot_id,
+            owner_id=owner_id,
         )
 
     def _create_rule(self, rule_values, removal_values):
@@ -328,6 +335,63 @@ class TestReserveRule(common.SavepointCase):
             [
                 {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
                 {"location_id": self.loc_zone3_bin1.id, "product_qty": 100},
+            ],
+        )
+        self.assertEqual(move.state, "assigned")
+
+    def test_quant_domain_lot_and_owner(self):
+        lot = self.env["stock.production.lot"].create(
+            {
+                "name": "P0001",
+                "product_id": self.product1.id,
+                "company_id": self.env.user.company_id.id,
+            }
+        )
+        owner = self.env["res.partner"].create({"name": "Owner", "ref": "C0001"})
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
+        self._update_qty_in_location(
+            self.loc_zone1_bin1, self.product1, 100, lot_id=lot
+        )
+        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 100)
+        self._update_qty_in_location(
+            self.loc_zone2_bin1, self.product1, 100, owner_id=owner
+        )
+        picking = self._create_picking(self.wh, [(self.product1, 200)])
+        picking.owner_id = owner
+
+        self._create_rule(
+            {},
+            [
+                {
+                    "location_id": self.loc_zone1.id,
+                    "sequence": 1,
+                    "quant_domain": [("lot_id.name", "ilike", "P%")],
+                },
+                {
+                    "location_id": self.loc_zone2.id,
+                    "sequence": 2,
+                    "quant_domain": [("owner_id.ref", "ilike", "C%")],
+                },
+            ],
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        ml = move.move_line_ids
+        self.assertRecordValues(
+            ml,
+            [
+                {
+                    "location_id": self.loc_zone1_bin1.id,
+                    "product_qty": 100,
+                    "lot_id": lot.id,
+                    "owner_id": False,
+                },
+                {
+                    "location_id": self.loc_zone2_bin1.id,
+                    "product_qty": 100,
+                    "lot_id": False,
+                    "owner_id": owner.id,
+                },
             ],
         )
         self.assertEqual(move.state, "assigned")
