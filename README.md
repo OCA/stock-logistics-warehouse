@@ -95,7 +95,7 @@ addon | version | maintainers | summary
 [stock_pull_list](stock_pull_list/) | 13.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
 [stock_putaway_product_template](stock_putaway_product_template/) | 13.0.1.1.0 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
 [stock_quant_expiration_date_tree](stock_quant_expiration_date_tree/) | 13.0.1.0.0 | [![Manuel Calero](https://github.com/Manuel Calero.png?size=30px)](https://github.com/Manuel Calero) | Allows to display expirations dates on stock quant tree view
-[stock_quant_manual_assign](stock_quant_manual_assign/) | 13.0.1.1.0 |  | Stock - Manual Quant Assignment
+[stock_quant_manual_assign](stock_quant_manual_assign/) | 13.0.1.2.0 |  | Stock - Manual Quant Assignment
 [stock_quant_view_reservation](stock_quant_view_reservation/) | 13.0.1.0.0 |  | Allows to see details of reservations on a quant
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 13.0.1.0.0 |  | Establish a removal priority on stock locations.
 [stock_request](stock_request/) | 13.0.1.7.1 |  | Internal request for stock
