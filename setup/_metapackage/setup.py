@@ -53,6 +53,7 @@ setuptools.setup(
         'odoo12-addon-stock_orderpoint_manual_procurement_uom',
         'odoo12-addon-stock_orderpoint_move_link',
         'odoo12-addon-stock_orderpoint_mrp_link',
+        'odoo12-addon-stock_orderpoint_procure_location',
         'odoo12-addon-stock_orderpoint_purchase_link',
         'odoo12-addon-stock_orderpoint_route',
         'odoo12-addon-stock_orderpoint_uom',
