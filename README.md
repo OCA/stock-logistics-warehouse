@@ -66,6 +66,7 @@ addon | version | maintainers | summary
 [stock_orderpoint_manual_procurement_uom](stock_orderpoint_manual_procurement_uom/) | 12.0.1.0.0 |  | Glue module for stock_orderpoint_uom and stock_orderpoint_manual_procurement
 [stock_orderpoint_move_link](stock_orderpoint_move_link/) | 12.0.1.1.1 |  | Link Reordering rules to stock moves
 [stock_orderpoint_mrp_link](stock_orderpoint_mrp_link/) | 12.0.1.0.0 |  | Link Reordering rules to purchase orders
+[stock_orderpoint_procure_location](stock_orderpoint_procure_location/) | 12.0.1.0.0 |  | Allows to create procurement orders in a different locationthe orderpoint
 [stock_orderpoint_purchase_link](stock_orderpoint_purchase_link/) | 12.0.1.0.0 |  | Link Reordering rules to purchase orders
 [stock_orderpoint_route](stock_orderpoint_route/) | 12.0.1.0.1 |  | Allows to force a route to be used when procuring from orderpoints
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 12.0.1.1.0 |  | Allows to create procurement orders in the UoM indicated in the orderpoint
