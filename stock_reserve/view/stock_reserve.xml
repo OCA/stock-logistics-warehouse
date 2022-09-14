@@ -81,7 +81,6 @@
         <field name="model">stock.reservation</field>
         <field name="arch" type="xml">
             <tree
-                string="Stock Reservations"
                 decoration-primary="state == 'draft'"
                 decoration-muted="state == 'cancel'"
             >

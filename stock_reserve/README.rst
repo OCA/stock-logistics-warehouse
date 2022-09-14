@@ -57,6 +57,11 @@ To make a stock reservation:
 
 You can release a reservation by clicking on the button *Release*
 
+Known issues / Roadmap
+======================
+
+* Review multicompany. Take a look of https://github.com/OCA/stock-logistics-warehouse/pull/1346 PR
+
 Bug Tracker
 ===========
 
