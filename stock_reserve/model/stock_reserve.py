@@ -7,7 +7,7 @@ from odoo.tools.translate import _
 
 
 class StockReservation(models.Model):
-    """ Allow to reserve products.
+    """Allow to reserve products.
 
     The fields mandatory for the creation of a reservation are:
 
@@ -45,15 +45,15 @@ class StockReservation(models.Model):
 
     @api.model
     def default_get(self, fields_list):
-        """ Fix default values
+        """Fix default values
 
-            - Ensure default value of computed field `product_qty` is not set
-              as it would raise an error
-            - Compute default `location_id` based on default `picking_type_id`.
-              Note: `default_picking_type_id` may be present in context,
-              so code that looks for default `location_id` is implemented here,
-              because it relies on already calculated default
-              `picking_type_id`.
+        - Ensure default value of computed field `product_qty` is not set
+          as it would raise an error
+        - Compute default `location_id` based on default `picking_type_id`.
+          Note: `default_picking_type_id` may be present in context,
+          so code that looks for default `location_id` is implemented here,
+          because it relies on already calculated default
+          `picking_type_id`.
         """
         # if there is 'location_id' field requested, ensure that
         # picking_type_id is also requested, because it is required
@@ -94,7 +94,7 @@ class StockReservation(models.Model):
 
     @api.model
     def get_location_from_ref(self, ref):
-        """ Get a location from a xmlid if allowed
+        """Get a location from a xmlid if allowed
         :param ref: tuple (module, xmlid)
         """
         try:
@@ -116,7 +116,7 @@ class StockReservation(models.Model):
         return self.get_location_from_ref(ref)
 
     def reserve(self):
-        """ Confirm reservations
+        """Confirm reservations
 
         The reservation is done using the default UOM of the product.
         A date until which the product is reserved can be specified.
@@ -144,7 +144,7 @@ class StockReservation(models.Model):
 
     @api.model
     def release_validity_exceeded(self, ids=None):
-        """ Release all the reservation having an exceeded validity date """
+        """Release all the reservation having an exceeded validity date"""
         domain = [
             ("date_validity", "<", fields.date.today()),
             ("state", "!=", "cancel"),
@@ -155,13 +155,13 @@ class StockReservation(models.Model):
         return True
 
     def unlink(self):
-        """ Release the reservation before the unlink """
+        """Release the reservation before the unlink"""
         self.release_reserve()
         return super().unlink()
 
     @api.onchange("product_id")
     def _onchange_product_id(self):
-        """ set product_uom and name from product onchange """
+        """set product_uom and name from product onchange"""
         # save value before reading of self.move_id as this last one erase
         # product_id value
         self.move_id.product_id = self.product_id
@@ -171,7 +171,7 @@ class StockReservation(models.Model):
 
     @api.onchange("product_uom_qty")
     def _onchange_quantity(self):
-        """ On change of product quantity avoid negative quantities """
+        """On change of product quantity avoid negative quantities"""
         if not self.product_id or self.product_uom_qty <= 0.0:
             self.product_uom_qty = 0.0
 
@@ -183,7 +183,8 @@ class StockReservation(models.Model):
         # open directly in the form view
         view_id = self.env.ref("stock.view_move_form").id
         action_dict.update(
-            views=[(view_id, "form")], res_id=self.move_id.id,
+            views=[(view_id, "form")],
+            res_id=self.move_id.id,
         )
         return action_dict
 
