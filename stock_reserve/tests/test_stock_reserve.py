@@ -30,16 +30,16 @@ class TestStockReserve(common.TransactionCase):
         form_reservation_1.location_id = self.warehouse.lot_stock_id
         reservation_1 = form_reservation_1.save()
         reservation_1.reserve()
-        self.assertEquals(self.product.virtual_available, 4)
+        self.assertEqual(self.product.virtual_available, 4)
         form_reservation_2 = Form(self.env["stock.reservation"])
         form_reservation_2.product_id = self.product
         form_reservation_2.product_uom_qty = 1
         form_reservation_2.location_id = self.warehouse.lot_stock_id
         reservation_2 = form_reservation_2.save()
         reservation_2.reserve()
-        self.assertEquals(self.product.virtual_available, 3)
+        self.assertEqual(self.product.virtual_available, 3)
         reservation_1.release_reserve()
-        self.assertEquals(self.product.virtual_available, 9)
+        self.assertEqual(self.product.virtual_available, 9)
 
     def test_cron_release(self):
         form_reservation_1 = Form(self.env["stock.reservation"])
@@ -49,10 +49,10 @@ class TestStockReserve(common.TransactionCase):
         form_reservation_1.date_validity = fields.Date.from_string("2021-01-01")
         reservation_1 = form_reservation_1.save()
         reservation_1.reserve()
-        self.assertEquals(self.product.virtual_available, 4)
+        self.assertEqual(self.product.virtual_available, 4)
         cron = self.env.ref("stock_reserve.ir_cron_release_stock_reservation")
         cron.method_direct_trigger()
-        self.assertEquals(self.product.virtual_available, 10)
+        self.assertEqual(self.product.virtual_available, 10)
 
     def test_cron_reserve(self):
         form_reservation_1 = Form(self.env["stock.reservation"])
@@ -61,7 +61,7 @@ class TestStockReserve(common.TransactionCase):
         form_reservation_1.location_id = self.warehouse.lot_stock_id
         reservation_1 = form_reservation_1.save()
         reservation_1.reserve()
-        self.assertEquals(reservation_1.state, "partially_available")
+        self.assertEqual(reservation_1.state, "partially_available")
         self.env["stock.quant"].create(
             {
                 "product_id": self.product.id,
@@ -71,5 +71,5 @@ class TestStockReserve(common.TransactionCase):
         )
         cron = self.env.ref("stock_reserve.ir_cron_reserve_waiting_confirmed")
         cron.method_direct_trigger()
-        self.assertEquals(reservation_1.state, "assigned")
-        self.assertEquals(self.product.virtual_available, 9)
+        self.assertEqual(reservation_1.state, "assigned")
+        self.assertEqual(self.product.virtual_available, 9)
