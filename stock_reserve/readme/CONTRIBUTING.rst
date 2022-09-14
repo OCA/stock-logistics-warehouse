@@ -6,3 +6,7 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Carlos Roca
+
+* `GreenIce <https://www.greenice.com>`_:
+
+  * Fernando La Chica <fernandolachica@gmail.com>
