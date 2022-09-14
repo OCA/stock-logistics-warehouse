@@ -33,6 +33,7 @@ class StockReservation(models.Model):
     _description = "Stock Reservation"
     _inherits = {"stock.move": "move_id"}
 
+    note = fields.Text(string="Notes")
     move_id = fields.Many2one(
         "stock.move",
         "Reservation Move",
@@ -84,7 +85,7 @@ class StockReservation(models.Model):
             picking = self.env["stock.picking"].new(
                 {"picking_type_id": picking_type_id}
             )
-            picking.onchange_picking_type()
+            picking._onchange_picking_type()
             res["location_id"] = picking.location_id.id
         if "location_dest_id" in fields_list:
             res["location_dest_id"] = self._default_location_dest_id()
@@ -121,7 +122,7 @@ class StockReservation(models.Model):
         The reservation is done using the default UOM of the product.
         A date until which the product is reserved can be specified.
         """
-        self.write({"date_expected": fields.Datetime.now()})
+        self.write({"date": fields.Datetime.now()})
         self.mapped("move_id")._action_confirm(merge=False)
         self.mapped("move_id.picking_id").action_assign()
         return True
@@ -165,7 +166,7 @@ class StockReservation(models.Model):
         # save value before reading of self.move_id as this last one erase
         # product_id value
         self.move_id.product_id = self.product_id
-        self.move_id.onchange_product_id()
+        self.move_id._onchange_product_id()
         self.name = self.move_id.name
         self.product_uom = self.move_id.product_uom
 
@@ -177,8 +178,9 @@ class StockReservation(models.Model):
 
     def open_move(self):
         self.ensure_one()
-        action = self.env.ref("stock.stock_move_action")
-        action_dict = action.read()[0]
+        action_dict = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.stock_move_action"
+        )
         action_dict["name"] = _("Reservation Move")
         # open directly in the form view
         view_id = self.env.ref("stock.view_move_form").id
