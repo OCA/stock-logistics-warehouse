@@ -14,4 +14,5 @@
         "views/account_move_line_view.xml",
         "views/stock_move_view.xml",
     ],
+    "post_init_hook": "post_init_hook",
 }
