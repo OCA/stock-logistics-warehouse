@@ -14,10 +14,10 @@ class Inventory(models.Model):
         string="Sub locations",
     )
     location_count = fields.Integer(
-        compute="_compute_location_count", string="Location count"
+        compute="_compute_location_count",
     )
     remaining_location_count = fields.Integer(
-        compute="_compute_location_count", string="Remaining location count"
+        compute="_compute_location_count",
     )
 
     def _compute_location_count(self):
@@ -64,9 +64,24 @@ class Inventory(models.Model):
         self.ensure_one()
         if any(loc.state != "done" for loc in self.sub_location_ids):
             raise UserError(
-                _("Not all location have been inventoried, please finalize.")
+                _(
+                    "The following locations have not been inventoried yet:\n%s\n"
+                    "You must finalize the corresponding sub-inventories."
+                )
+                % "\n".join(
+                    [
+                        "- " + loc.display_name
+                        for loc in self.sub_location_ids
+                        if loc.state != "done"
+                    ]
+                )
             )
         return super().action_validate()
+
+    def action_cancel_draft(self):
+        """Called by native button 'Cancel Inventory'"""
+        self.sub_location_ids.write({"state": "pending"})
+        return super().action_cancel_draft()
 
     def action_open_inventory_locations(self):
         self.ensure_one()
@@ -90,20 +105,20 @@ class StockInventoryLocation(models.Model):
 
     _rec_name = "location_id"
 
-    _order = "state desc"
+    _order = "inventory_id desc, id"
 
     inventory_id = fields.Many2one(
         comodel_name="stock.inventory",
-        string="Inventory",
         required=True,
         ondelete="cascade",
     )
-    location_id = fields.Many2one(
-        comodel_name="stock.location", string="Location", required=True
-    )
+    location_id = fields.Many2one(comodel_name="stock.location", required=True)
     state = fields.Selection(
-        selection=[("pending", "Pending"), ("started", "Started"), ("done", "Done")],
-        string="State",
+        selection=[
+            ("pending", "Pending"),
+            ("started", "Started"),
+            ("done", "Done"),
+        ],
         default="pending",
         required=True,
     )
@@ -112,13 +127,14 @@ class StockInventoryLocation(models.Model):
         (
             "inventory_location_unique",
             "UNIQUE(inventory_id, location_id)",
-            "Location must be unique per inventory.",
+            "Inventory location must be unique per inventory.",
         )
     ]
 
     def action_start(self):
         self.ensure_one()
-        self.state = "started"
+        assert self.state == "pending"
+        self.write({"state": "started"})
         lines = self.env["stock.inventory.line"].search(
             [
                 ("inventory_id", "=", self.inventory_id.id),
@@ -130,4 +146,16 @@ class StockInventoryLocation(models.Model):
 
     def action_done(self):
         self.ensure_one()
-        self.state = "done"
+        assert self.state == "started"
+        self.write({"state": "done"})
+
+    def action_open_inventory_lines(self):
+        self.ensure_one()
+        action = self.inventory_id.action_open_inventory_lines()
+        action["context"]["default_location_id"] = self.location_id.id
+        action["context"]["readonly_location_id"] = True
+        action["domain"] = [
+            ("inventory_id", "=", self.inventory_id.id),
+            ("location_id", "=", self.location_id.id),
+        ]
+        return action

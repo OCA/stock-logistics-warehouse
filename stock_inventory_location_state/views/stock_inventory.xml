@@ -12,7 +12,7 @@
             <div class="oe_button_box" name="button_box">
                 <button
                     name="action_open_inventory_locations"
-                    states="confirm"
+                    states="confirm,done"
                     type="object"
                     groups="stock.group_stock_user"
                     icon="fa-list"
@@ -42,9 +42,27 @@
         <field name="name">stock.inventory.location.search</field>
         <field name="model">stock.inventory.location</field>
         <field name="arch" type="xml">
-            <search string="Inventory Location">
+            <search>
                 <field name="location_id" />
-                <field name="state" />
+                <separator />
+                <filter
+                    name="pending"
+                    string="Pending"
+                    domain="[('state', '=', 'pending')]"
+                />
+                <filter
+                    name="started"
+                    string="Started"
+                    domain="[('state', '=', 'started')]"
+                />
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
+                <group name="groupby">
+                    <filter
+                        name="state_groupby"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
             </search>
         </field>
     </record>
@@ -52,20 +70,36 @@
         <field name="name">stock.inventory.location.tree</field>
         <field name="model">stock.inventory.location</field>
         <field name="arch" type="xml">
-            <tree string="Inventory Location">
+            <tree>
+                <field name="inventory_id" />
                 <field name="location_id" />
-                <field name="state" />
+                <button
+                    type="object"
+                    name="action_open_inventory_lines"
+                    string="Inventory Lines"
+                    states="started,done"
+                    icon="fa-eye"
+                />
                 <button
                     type="object"
                     name="action_start"
                     string="Start"
                     states="pending"
+                    icon="fa-play"
                 />
                 <button
                     type="object"
                     name="action_done"
                     string="Done"
                     states="started"
+                    icon="fa-check"
+                />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'pending'"
+                    decoration-warning="state == 'started'"
+                    decoration-success="state == 'done'"
                 />
             </tree>
         </field>
