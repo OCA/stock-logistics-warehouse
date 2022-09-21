@@ -292,8 +292,8 @@ class StockMoveLocationWizard(models.TransientModel):
             product_data.append(
                 {
                     "product_id": product.id,
-                    "move_quantity": group.get("quantity"),
-                    "max_quantity": group.get("quantity"),
+                    "move_quantity": group.get("quantity") or 0,
+                    "max_quantity": group.get("quantity") or 0,
                     "reserved_quantity": group.get("reserved_quantity"),
                     "origin_location_id": self.origin_location_id.id,
                     "destination_location_id": location_dest_id,
