@@ -64,6 +64,30 @@ class TestMoveLocation(TestsCommon):
         wizard._onchange_origin_location_id()
         self.assertEqual(len(wizard.stock_move_location_line_ids), 0)
 
+    def test_wizard_onchange_origin_location(self):
+        """Test a product that have existing quants with undefined quantity."""
+
+        product_not_available = self.env["product.product"].create(
+            {"name": "Mango", "type": "product", "tracking": "none"}
+        )
+        self.quant_obj.create(
+            {
+                "product_id": product_not_available.id,
+                "location_id": self.internal_loc_1.id,
+            }
+        )
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        # we check there is no line for product_not_available
+        self.assertEqual(
+            len(
+                wizard.stock_move_location_line_ids.filtered(
+                    lambda x: x.product_id.id == product_not_available.id
+                )
+            ),
+            0,
+        )
+
     def test_planned_transfer(self):
         """Test planned transfer."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
