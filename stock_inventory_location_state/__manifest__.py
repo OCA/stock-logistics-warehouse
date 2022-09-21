@@ -6,6 +6,7 @@
     "version": "14.0.1.0.1",
     "development_status": "Mature",
     "author": "Akretion, Odoo Community Association (OCA)",
+    "maintainers": ["bguillot"],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
     "depends": ["stock"],
