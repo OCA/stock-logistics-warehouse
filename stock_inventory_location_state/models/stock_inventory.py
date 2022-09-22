@@ -11,25 +11,27 @@ class Inventory(models.Model):
     sub_location_ids = fields.One2many(
         comodel_name="stock.inventory.location",
         inverse_name="inventory_id",
-        string="Sub locations",
+        string="Sub-Locations",
     )
     location_count = fields.Integer(
         compute="_compute_location_count",
+        string="Number of Sub-Locations",
     )
-    remaining_location_count = fields.Integer(
+    location_done_count = fields.Integer(
         compute="_compute_location_count",
+        string="Number of Done Sub-Locations",
     )
 
     def _compute_location_count(self):
         for inventory in self:
             inventory.location_count = len(inventory.sub_location_ids)
-            inventory.remaining_location_count = len(
-                inventory.sub_location_ids.filtered(lambda l: l.state != "done")
+            inventory.location_done_count = len(
+                inventory.sub_location_ids.filtered(lambda l: l.state == "done")
             )
 
     def action_start(self):
         res = super().action_start()
-        existing_locations = self.sub_location_ids.mapped("location_id")
+        existing_locations = self.sub_location_ids.location_id
         if self.location_ids:
             domain_loc = [
                 ("id", "child_of", self.location_ids.ids),
@@ -48,7 +50,7 @@ class Inventory(models.Model):
                     ("product_id", "in", self.product_ids.ids),
                 ]
             )
-            sub_locations = quants.mapped("location_id")
+            sub_locations = quants.location_id
         sub_locations = sub_locations - existing_locations
         for location in sub_locations:
             self.env["stock.inventory.location"].create(
@@ -66,7 +68,7 @@ class Inventory(models.Model):
             raise UserError(
                 _(
                     "The following locations have not been inventoried yet:\n%s\n"
-                    "You must finalize the corresponding sub-inventories."
+                    "You must finalize the corresponding sub-locations."
                 )
                 % "\n".join(
                     [
