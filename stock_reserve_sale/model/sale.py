@@ -157,7 +157,7 @@ class SaleOrderLine(models.Model):
             reservable = False
             if (
                 not (
-                    line.state != "draft"
+                    line.state not in ("draft", "sent")
                     or line._get_procure_method() == "make_to_order"
                     or not line.product_id
                     or line.product_id.type == "service"
