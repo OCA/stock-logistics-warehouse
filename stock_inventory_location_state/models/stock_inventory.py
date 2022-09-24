@@ -17,17 +17,22 @@ class Inventory(models.Model):
         compute="_compute_location_count",
         string="Number of Sub-Locations",
     )
-    location_done_count = fields.Integer(
+    done_location_count = fields.Integer(
         compute="_compute_location_count",
         string="Number of Done Sub-Locations",
+    )
+    remaining_location_count = fields.Integer(
+        compute="_compute_location_count",
+        string="Number of Remaining Sub-Locations",
     )
 
     def _compute_location_count(self):
         for inventory in self:
             inventory.location_count = len(inventory.sub_location_ids)
-            inventory.location_done_count = len(
+            inventory.done_location_count = len(
                 inventory.sub_location_ids.filtered(lambda l: l.state == "done")
             )
+            inventory.remaining_location_count = inventory.location_count - inventory.done_location_count
 
     def action_start(self):
         res = super().action_start()
