@@ -140,7 +140,7 @@ class StockInventoryLocation(models.Model):
 
     def action_start(self):
         self.ensure_one()
-        assert self.state == "pending"
+        assert self.state in ("pending", "started")
         self.write({"state": "started"})
         lines = self.env["stock.inventory.line"].search(
             [
