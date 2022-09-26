@@ -127,6 +127,7 @@
                         name="state"
                         widget="statusbar"
                         statusbar_visible="draft,confirm,done"
+                        options="{'clickable': True}"
                     />
             </header>
             <sheet>

@@ -181,9 +181,10 @@ class CostAdjustment(models.Model):
                 continue
             vals = {"state": "confirm", "date": fields.Datetime.now()}
             if not adjustment.line_ids and not adjustment.start_empty:
-                self.env["stock.cost.adjustment.line"].create(
-                    adjustment._get_cost_adjustment_lines_values()
-                )
+                AdjustmentLine = self.env["stock.cost.adjustment.line"]
+                new_vals = adjustment._get_cost_adjustment_lines_values()
+                for new_val in new_vals:
+                    AdjustmentLine.create(new_val)
             adjustment.write(vals)
 
     def _get_cost_adjustment_lines_values(self):
