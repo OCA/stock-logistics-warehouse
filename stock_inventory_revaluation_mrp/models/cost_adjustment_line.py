@@ -75,7 +75,8 @@ class CostAdjustmentLine(models.Model):
                 productions3_domain = [
                     ("state", "in", ["draft", "confirmed", "progress"]),
                     (
-                        "workorder_ids.workcenter_id.analytic_product_id.activity_cost_ids.product_id",
+                        "workorder_ids.workcenter_id.analytic_product_id"
+                        ".activity_cost_ids.product_id",
                         "=",
                         product.id,
                     ),
@@ -201,7 +202,8 @@ class CostAdjustmentLine(models.Model):
             obsolete_lines = self.filtered(lambda x: x.product_id in obsolete_products)
             obsolete_lines.unlink()
         # Add new lines and update existing ones
-        new_lines = self.env["stock.cost.adjustment.line"]
+        AdjustmentLine = self.env["stock.cost.adjustment.line"]
+        new_lines = AdjustmentLine
         for product in impacted_products:
             impact_details = self.bom_impact_ids.filtered(
                 lambda x: x.product_id == product
@@ -220,5 +222,5 @@ class CostAdjustmentLine(models.Model):
                     "product_cost": product_cost,
                     "is_automatically_added": True,
                 }
-                new_lines |= self.create(vals)
+                new_lines |= AdjustmentLine.create(vals)
         return new_lines
