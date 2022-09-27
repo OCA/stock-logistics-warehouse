@@ -54,10 +54,10 @@ class CostAdjustment(models.Model):
     state = fields.Selection(
         selection=[
             ("draft", "Draft"),
-            ("cancel", "Cancelled"),
+            ("computing", "Computing"),
             ("confirm", "In Progress"),
             ("done", "Validated"),
-            ("posted", "Posted"),
+            ("cancel", "Canceled"),
         ],
         copy=False,
         index=True,

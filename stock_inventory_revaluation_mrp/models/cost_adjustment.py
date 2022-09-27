@@ -38,7 +38,10 @@ class CostAdjustment(models.Model):
 
     def compute_impact(self):
         self.bom_impact_ids.unlink()
+        level = 0
         for line in self.line_ids.filtered(lambda x: not x.is_automatically_added):
+            level += 1
+            line.level = level
             line._populate_bom_impact_details(line.product_id)
         self.line_ids._populate_impacted_products()
         self.line_ids.action_refresh_quantity()

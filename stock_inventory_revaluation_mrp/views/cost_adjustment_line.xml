@@ -19,6 +19,7 @@
                     attrs="{'invisible': [('production_count', '=', 0)]}"
                 />
                 <field name="bom_count" optional="show" />
+                <field name="level" />
                 <button
                     name="action_view_bom"
                     type="object"

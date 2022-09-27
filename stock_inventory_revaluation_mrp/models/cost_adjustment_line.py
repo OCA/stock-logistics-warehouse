@@ -46,6 +46,8 @@ class CostAdjustmentLine(models.Model):
         compute="_compute_set_productions_boms",
         help="Bills of Materials this item is used on",
     )
+    level = fields.Integer(string="Level")
+
 
     @api.depends("product_id")
     def _compute_set_productions_boms(self):

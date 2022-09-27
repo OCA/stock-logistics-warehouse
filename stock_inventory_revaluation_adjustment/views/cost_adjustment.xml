@@ -143,11 +143,6 @@
                 <group>
                     <group>
                         <field name="type_id" options="{'no_create': True}" />
-                        <field
-                                name="product_ids"
-                                widget="many2many_tags"
-                                options="{'no_create': True}"
-                            />
                     </group>
                     <group>
                         <field
@@ -157,6 +152,17 @@
                             />
                     </group>
                 </group>
+                <div>
+                    <group string="Products">
+                        <field name="product_ids" nolabel="1" context="{'search_default_has_proposed_cost':1}">
+                            <tree create="false" edit="false" editable="bottom">
+                                <field name="name" />
+                                <field name="proposed_cost" />
+                                <field name="lst_price" readonly="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </div>
             </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" />

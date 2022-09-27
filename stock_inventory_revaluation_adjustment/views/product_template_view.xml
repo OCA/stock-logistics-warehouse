@@ -16,12 +16,10 @@
                 <label
                     for="proposed_cost"
                     groups="base.group_user"
-                    attrs="{'invisible': ['|',('bom_count','&gt;',0),'&amp;',('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"
                 />
                 <div
                     name="proposed_price_div"
                     groups="base.group_user"
-                    attrs="{'invisible': ['|',('bom_count','&gt;',0),'&amp;',('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"
                     class="o_row"
                 >
                     <field
