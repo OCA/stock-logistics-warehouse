@@ -21,6 +21,7 @@
         "views/cost_adjustment.xml",
         "views/res_config_settings.xml",
         "views/product_template.xml",
+        "views/mrp_report_bom_structure.xml",
         "report/report_mrp.xml",
     ],
     "maintainers": ["patrickrwilson"],

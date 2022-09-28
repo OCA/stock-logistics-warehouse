@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_mrp_bom_line_proposed_cost" inherit_id="mrp.report_mrp_bom_line">
+        <xpath expr="//tr/td[last()]" position="before">
+            <td t-if="l.get('proposed_cost', False)" class="o_mrp_bom_cost text-right">
+                <span>
+                    <a
+                        t-att-data-res-id="l['proposed_cost']"
+                        
+                    >
+                        <t t-esc="l['proposed_cost']" t-options='{"widget": "monetary", "display_currency": currency}' />
+                    </a>
+                </span>
+            </td>
+            <td t-else="">
+                <span>&#160;&#160;&#160;&#160;&#160;&#160;</span>
+            </td>
+        </xpath>
+    </template>
+    <template id="report_mrp_bom_proposed_cost" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//tr/th[7]" position="after">
+            <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">Proposed Cost</th>
+        </xpath>
+        <xpath expr="//tr/td[last()]" position="before">
+            <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
+                <span><t t-esc="data['proposed_cost']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
+            </td>
+        </xpath>
+        <xpath expr="//tfoot/tr/td[last()]" position="before">
+            <td t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right">
+                <span><t t-esc="data['proposed_cost']" t-options='{"widget": "monetary", "display_currency": currency}'/></span>
+            </td>
+        </xpath>
+    </template>
+</odoo>
