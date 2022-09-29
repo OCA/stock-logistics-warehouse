@@ -29,9 +29,6 @@ class ProductProduct(models.Model):
 
     def calculate_proposed_cost(self):
         self.ensure_one()
-        line_obj = self.env['mrp.bom']
-        aa = []
-        bo = []
         def _create_lines(bom):
             bom_ids = self.env['mrp.bom']
             bom_ids |= bom
@@ -43,9 +40,20 @@ class ProductProduct(models.Model):
                     bom_ids |= bom
             return bom_ids
 
-
         for bom_ids in self.bom_ids:
-            a = _create_lines(bom_ids)
+            boms = _create_lines(bom_ids)
+            total = 0.0
+            for bom in boms:
+                for bom_line in bom.bom_line_ids:
+                    if bom_line.product_id.standard_price:
+                        total += bom_line.product_id.standard_price
+                    else:
+                        total += bom_line.product_id.proposed_cost
+                    bom_line.product_id.calculate_proposed_cost()
+
+            if total != self.standard_price:
+                self.proposed_cost = total
+
 
     @api.model
     def search(
