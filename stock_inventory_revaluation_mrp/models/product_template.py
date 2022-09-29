@@ -26,9 +26,26 @@ class ProductProduct(models.Model):
 
     proposed_cost_ignore_bom = fields.Boolean()
 
+
     def calculate_proposed_cost(self):
-        print("Method Call")
-        return True
+        self.ensure_one()
+        line_obj = self.env['mrp.bom']
+        aa = []
+        bo = []
+        def _create_lines(bom):
+            bom_ids = self.env['mrp.bom']
+            bom_ids |= bom
+            for line in bom.bom_line_ids:
+                line_boms = line.product_id.bom_ids
+                if line_boms:
+                    bom_ids |= _create_lines(line_boms)
+                else:
+                    bom_ids |= bom
+            return bom_ids
+
+
+        for bom_ids in self.bom_ids:
+            a = _create_lines(bom_ids)
 
     @api.model
     def search(

@@ -37,6 +37,7 @@ class CostAdjustment(models.Model):
         self.compute_impact()
 
     def compute_impact(self):
+        self.state = "computing"
         self.bom_impact_ids.unlink()
         level = 0
         for line in self.line_ids.filtered(lambda x: not x.is_automatically_added):
@@ -45,6 +46,22 @@ class CostAdjustment(models.Model):
             line._populate_bom_impact_details(line.product_id)
         self.line_ids._populate_impacted_products()
         self.line_ids.action_refresh_quantity()
+        return {
+            "type": "ir.actions.act_window",
+            "view_mode": "tree",
+            "name": _("Cost Adjustment Detail"),
+            "res_model": "stock.cost.adjustment.detail",
+            "context": {
+                "default_is_editable": False,
+                "default_cost_adjustment_id": self.id,
+                "default_company_id": self.company_id.id,
+                "search_default_group_by_product_id": 1,
+            },
+            "domain": [("cost_adjustment_id", "=", self.id)],
+            "view_id": self.env.ref(
+                "stock_inventory_revaluation_mrp.cost_adjustment_detail_mrp_view_tree"
+            ).id,
+        }
 
     def action_post(self):
         res = super().action_post()

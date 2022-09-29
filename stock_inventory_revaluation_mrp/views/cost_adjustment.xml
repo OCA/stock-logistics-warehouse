@@ -15,7 +15,7 @@
                     string="Compute Impact"
                     class="oe_highlight"
                     groups="stock.group_stock_user"
-                    states="confirm"
+                    states="draft,confirm"
                 />
             </xpath>
             <xpath expr="//div[hasclass('oe_button_box')]" position="inside">

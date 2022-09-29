@@ -111,7 +111,7 @@
                     />
                 <button
                         name="action_cancel_draft"
-                        states="done"
+                        states="cancel,done"
                         string="Cancel Adjustment"
                         type="object"
                         confirm="If you cancel this cost adjustment, all its cost adjustment lines will be lost. Are you sure you want to discard it?"
@@ -126,7 +126,7 @@
                 <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,confirm,done"
+                        statusbar_visible="draft,computing,confirm,done"
                         options="{'clickable': True}"
                     />
             </header>
