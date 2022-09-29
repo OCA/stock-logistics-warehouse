@@ -69,11 +69,11 @@ class TestOrderpointPurchaseLink(common.TransactionCase):
                 "product_max_qty": 20.0,
             }
         )
+        self.group_obj.run_scheduler()
 
     def test_01_po_line_from_orderpoints(self):
         """Test that a PO line created/updated by two orderpoints keeps
         the link with both of them."""
-        self.group_obj.run_scheduler()
         po_line = self.env["purchase.order.line"].search(
             [("product_id", "=", self.tp1.id)]
         )
@@ -81,3 +81,12 @@ class TestOrderpointPurchaseLink(common.TransactionCase):
         # Each orderpoint must have required 20.0 units:
         self.assertEqual(po_line.product_qty, 40.0)
         self.assertEqual(len(po_line.orderpoint_ids), 2)
+
+    def test_02_button_view_purchases(self):
+        po_line = self.env["purchase.order.line"].search(
+            [("product_id", "=", self.tp1.id)]
+        )
+        self.assertEqual(self.op1.purchase_count, 1)
+        self.assertEqual(self.op2.purchase_count, 1)
+        action = self.op1.button_view_purchases()
+        self.assertEqual(action["domain"], [("id", "in", [po_line.order_id.id])])
