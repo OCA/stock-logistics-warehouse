@@ -69,6 +69,7 @@ setuptools.setup(
         'odoo14-addon-stock_putaway_method',
         'odoo14-addon-stock_putaway_product_template',
         'odoo14-addon-stock_quant_manual_assign',
+        'odoo14-addon-stock_quant_reservation_info',
         'odoo14-addon-stock_request',
         'odoo14-addon-stock_request_analytic',
         'odoo14-addon-stock_request_cancel_confirm',
