@@ -69,7 +69,7 @@ addon | version | maintainers | summary
 [stock_orderpoint_move_link](stock_orderpoint_move_link/) | 14.0.1.0.2 |  | Link Reordering rules to stock moves
 [stock_orderpoint_origin](stock_orderpoint_origin/) | 14.0.1.0.1 |  | Link Purchase Orders to the replenishment demand Sales Orders
 [stock_orderpoint_origin_mrp_link](stock_orderpoint_origin_mrp_link/) | 14.0.1.0.0 |  | Link Purchase Orders to the replenishment demand MOs
-[stock_orderpoint_purchase_link](stock_orderpoint_purchase_link/) | 14.0.1.0.0 |  | Link Reordering rules to purchase orders
+[stock_orderpoint_purchase_link](stock_orderpoint_purchase_link/) | 14.0.1.1.0 |  | Link Reordering rules to purchase orders
 [stock_orderpoint_route](stock_orderpoint_route/) | 14.0.1.1.1 |  | Allows to force a route to be used when procuring from orderpoints
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 14.0.1.0.0 |  | Allows to create procurement orders in the UoM indicated in the orderpoint
 [stock_packaging_calculator](stock_packaging_calculator/) | 14.0.1.3.0 |  | Compute product quantity to pick by packaging
