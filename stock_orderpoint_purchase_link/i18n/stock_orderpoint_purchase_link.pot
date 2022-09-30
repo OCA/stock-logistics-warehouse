@@ -21,6 +21,12 @@ msgid "Display Name"
 msgstr ""
 
 #. module: stock_orderpoint_purchase_link
+#: code:addons/stock_orderpoint_purchase_link/models/stock_warehouse_orderpoint.py:0
+#, python-format
+msgid "Generated purchases"
+msgstr ""
+
+#. module: stock_orderpoint_purchase_link
 #: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_purchase_order_line__id
 #: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_rule__id
 #: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint__id
@@ -47,6 +53,11 @@ msgid "Orderpoints"
 msgstr ""
 
 #. module: stock_orderpoint_purchase_link
+#: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint__purchase_count
+msgid "Purchase Count"
+msgstr ""
+
+#. module: stock_orderpoint_purchase_link
 #: model:ir.model,name:stock_orderpoint_purchase_link.model_purchase_order_line
 msgid "Purchase Order Line"
 msgstr ""
@@ -54,6 +65,11 @@ msgstr ""
 #. module: stock_orderpoint_purchase_link
 #: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint__purchase_line_ids
 msgid "Purchase Order Lines"
+msgstr ""
+
+#. module: stock_orderpoint_purchase_link
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_purchase_link.view_warehouse_orderpoint_move_form
+msgid "Purchases"
 msgstr ""
 
 #. module: stock_orderpoint_purchase_link
