@@ -10,7 +10,10 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": ["stock_orderpoint_move_link", "purchase_stock"],
-    "data": ["views/purchase_order_views.xml"],
+    "data": [
+        "views/purchase_order_views.xml",
+        "views/stock_warehouse_orderpoint_views.xml",
+    ],
     "installable": True,
     "auto_install": True,
 }

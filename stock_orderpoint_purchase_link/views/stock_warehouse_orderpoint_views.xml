@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2022 Tecnativa - Pedro M. Baeza
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_warehouse_orderpoint_move_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.form - PO smart-button</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field
+            name="inherit_id"
+            ref="stock_orderpoint_move_link.view_warehouse_orderpoint_move_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    type="object"
+                    name="button_view_purchases"
+                    class="oe_stat_button"
+                    icon="fa-shopping-cart"
+                    attrs="{'invisible': [('purchase_count', '=', 0)]}"
+                >
+                    <field string="Purchases" name="purchase_count" widget="statinfo" />
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
