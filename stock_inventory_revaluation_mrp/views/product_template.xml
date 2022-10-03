@@ -25,22 +25,27 @@
         />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='proposed_price_div']" position="after">
-                <field name="proposed_cost_ignore_bom" invisible="1"/>
+                <field
+                    name="proposed_cost_ignore_bom"
+                    attrs="{'invisible': [('bom_count', '=' , 0)]}"
+                />
             </xpath>
-            <field name="proposed_cost" position="after">
-                <button name="calculate_proposed_cost"
-                        string="Calculate Proposed Cost" type="object"
-                        attrs="{'invisible': ['|', ('bom_count', '=', 0), ('proposed_cost_ignore_bom', '=', True)]}"
-                        help="Calculate Proposed Cost."
-                        class="oe_link oe_read_only pt-0"/>
-            </field>
+            <span name="proposed_cost_uom" position="after">
+                <button
+                    name="calculate_proposed_cost"
+                    string="Calculate Proposed Cost"
+                    type="object"
+                    attrs="{'invisible': ['|', ('bom_count', '=', 0), ('proposed_cost_ignore_bom', '=', True)]}"
+                    help="Calculate Proposed Cost."
+                    class="oe_link oe_read_only pt-0"
+                />
+            </span>
 
             <field name="valuation" position="after">
                 <field name="allow_lock_cost" invisible="1" />
             </field>
             <button name="button_bom_cost" position="attributes">
-                <attribute
-                    name="attrs">{'invisible': True}</attribute>
+                <attribute name="attrs">{'invisible': True}</attribute>
             </button>
         </field>
     </record>
@@ -48,14 +53,10 @@
     <record id="product_template_common_form_mrp_inherit" model="ir.ui.view">
         <field name="name">product.template.common.mrp.inherit</field>
         <field name="model">product.template</field>
-        <field
-            name="inherit_id"
-            ref="mrp_account.product_product_ext_form_view2"
-        />
+        <field name="inherit_id" ref="mrp_account.product_product_ext_form_view2" />
         <field name="arch" type="xml">
             <button name="button_bom_cost" position="attributes">
-                <attribute
-                    name="attrs">{'invisible': True}</attribute>
+                <attribute name="attrs">{'invisible': True}</attribute>
             </button>
         </field>
     </record>
@@ -63,7 +64,10 @@
     <record model="ir.ui.view" id="product_template_form_view_proposed_cost_inherit">
         <field name="name">product.template.form.proposed.cost.inherit</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="purchase_request.product_template_form_view_inherit" />
+        <field
+            name="inherit_id"
+            ref="purchase_request.product_template_form_view_inherit"
+        />
         <field name="arch" type="xml">
             <field name="purchase_request" position="before">
                 <field name="proposed_cost_ignore_bom" />
@@ -74,12 +78,21 @@
     <record id="proposed_cost_product_search_form_view" model="ir.ui.view">
         <field name="name">proposed.cost.product.search.stock.form</field>
         <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="inherit_id" ref="product.product_search_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='inactive']" position="after">
-                <separator/>
-                <filter name="has_proposed_cost" string="Has Proposed Cost" context="{'has_proposed_cost': True}" domain="[('proposed_cost','&gt;',0)]"/>
-                <filter name="has_proposed_cost_child_of" string="Is Child Of" context="{'proposed_cost_child_of': True}" />
+                <separator />
+                <filter
+                    name="has_proposed_cost"
+                    string="Has Proposed Cost"
+                    context="{'has_proposed_cost': True}"
+                    domain="[('proposed_cost','&gt;',0)]"
+                />
+                <filter
+                    name="has_proposed_cost_child_of"
+                    string="Is Child Of"
+                    context="{'proposed_cost_child_of': True}"
+                />
 
             </xpath>
         </field>
