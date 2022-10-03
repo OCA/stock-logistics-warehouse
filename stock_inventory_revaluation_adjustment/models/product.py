@@ -9,7 +9,7 @@ from odoo.tools import float_is_zero
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    standard_price = fields.Float('Cost (Active)')
+    standard_price = fields.Float("Cost (Active)")
 
     @api.model
     def _change_standard_price(self, new_price, account=False):
@@ -188,7 +188,6 @@ class ProductTemplate(models.Model):
             )
         return accounts
 
-    # FIXME: this field is never set; obsolete?
     proposed_cost = fields.Float(
         "Proposed Cost",
         company_dependent=True,

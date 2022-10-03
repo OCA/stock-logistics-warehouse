@@ -13,22 +13,19 @@
                     invisible="1"
                     widget="statinfo"
                 />
-                <label
-                    for="proposed_cost"
-                    groups="base.group_user"
-                />
-                <div
-                    name="proposed_price_div"
-                    groups="base.group_user"
-                    class="o_row"
-                >
+                <label for="proposed_cost" groups="base.group_user" />
+                <div name="proposed_price_div" groups="base.group_user" class="o_row">
                     <field
                         name="proposed_cost"
                         widget="monetary"
                         options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
                     />
-                    <span groups="uom.group_uom" class="oe_read_only">per
-                        <field name="uom_name" />
+                    <span
+                        groups="uom.group_uom"
+                        class="oe_read_only"
+                        name="proposed_cost_uom"
+                    >
+                        per <field name="uom_name" />
                     </span>
                 </div>
             </div>

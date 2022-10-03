@@ -54,9 +54,10 @@ class CostAdjustment(models.Model):
     state = fields.Selection(
         selection=[
             ("draft", "Draft"),
-            ("computing", "Computing"),
             ("confirm", "In Progress"),
+            ("computing", "Computing"),
             ("done", "Validated"),
+            ("posted", "Posted"),
             ("cancel", "Canceled"),
         ],
         copy=False,
@@ -161,9 +162,15 @@ class CostAdjustment(models.Model):
         self.write({"state": "posted", "date": fields.Datetime.now()})
         return True
 
-    def action_cancel_draft(self):
-        self.line_ids.unlink()
-        self.write({"state": "draft"})
+    def action_cancel(self):
+        to_cancel = self.filtered(lambda x: x.state in ["draft"])
+        to_cancel.line_ids.unlink()
+        to_cancel.write({"state": "cancel"})
+
+    def action_draft(self):
+        to_draft = self.filtered(lambda x: x.state in ["confirm", "computing"])
+        to_draft.line_ids.unlink()
+        to_draft.write({"state": "draft"})
 
     def action_start(self):
         self.ensure_one()
