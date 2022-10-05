@@ -72,11 +72,12 @@
             <header>
                 <button
                         name="action_start"
+                        id="action_start"
                         states="draft"
                         string="Start Adjustment"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('product_ids', '=', False)]}"
+                        attrs="{'invisible': ['|', ('state', 'not in', ['draft']), ('product_ids', '=', False)]}"
                     />
                 <button
                         name="action_validate"
@@ -103,23 +104,25 @@
                         type="object"
                     />
                 <button
+                        name="action_start"
+                        id="action_start_recompute"
+                        states="confirm"
+                        string="Recompute Impact"
+                        type="object"
+                        attrs="{'invisible': ['|', ('state', 'not in', ['confirm']), ('product_ids', '=', False)]}"
+                    />
+                <button
                         name="action_draft"
                         string="Set to Draft"
                         type="object"
-                        states="cancel,confirm"
+                        states="cancel"
                     />
                 <button
                         name="action_cancel"
-                        states="draft"
+                        states="draft,confirm,computing"
                         string="Cancel"
                         type="object"
                         confirm="If you cancel this cost adjustment, all its cost adjustment lines will be lost. Are you sure you want to discard it?"
-                    />
-                <button
-                        name="action_open_cost_adjustment_lines"
-                        states="done,posted"
-                        string="View Lines"
-                        type="object"
                     />
                 <field
                         name="state"

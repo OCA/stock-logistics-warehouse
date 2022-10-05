@@ -84,9 +84,6 @@ class CostAdjustment(models.Model):
         domain="[('bom_ids','=',False), ('type', '!=', 'consu')]",
         help="Specify Products to focus your cost adjustment on particular Products. ",
     )
-    start_empty = fields.Boolean(
-        "Empty Cost Adjustment", help="Allows to start with an empty cost adjustment."
-    )
 
     def _check_negative(self):
         negative = next(
@@ -156,62 +153,56 @@ class CostAdjustment(models.Model):
         self._check_negative()
         self._remove_unchanged_lines()
         for line in self.line_ids:
-            line.product_id.write(
-                {"standard_price": line.product_cost, "proposed_cost": 0.0}
-            )
+            line.product_id.standard_price = line.product_cost
+            line.product_id.proposed_cost = 0.0
         self.write({"state": "posted", "date": fields.Datetime.now()})
         return True
 
     def action_cancel(self):
-        to_cancel = self.filtered(lambda x: x.state in ["draft"])
-        to_cancel.line_ids.unlink()
-        to_cancel.write({"state": "cancel"})
+        todo = self.filtered(lambda x: x.state not in ["posted"])
+        todo.line_ids.unlink()
+        todo.write({"state": "cancel"})
 
     def action_draft(self):
-        to_draft = self.filtered(lambda x: x.state in ["confirm", "computing"])
-        to_draft.line_ids.unlink()
-        to_draft.write({"state": "draft"})
+        todo = self.filtered(lambda x: x.state not in ["posted"])
+        todo.line_ids.unlink()
+        todo.write({"state": "draft"})
 
     def action_start(self):
         self.ensure_one()
+        self.state = "computing"
         self._action_start()
         self._check_company()
-        return self.action_open_cost_adjustment_lines()
+        return True
 
     def _action_start(self):
-        """Confirms the Cost Adjustment and generates its lines
-        if its state is draft and don't have already lines (can happen
-        with demo data or tests).
-        """
-        for adjustment in self:
-            if adjustment.state != "draft":
-                continue
-            vals = {"state": "confirm", "date": fields.Datetime.now()}
-            if not adjustment.line_ids and not adjustment.start_empty:
-                AdjustmentLine = self.env["stock.cost.adjustment.line"]
-                new_vals = adjustment._get_cost_adjustment_lines_values()
-                for new_val in new_vals:
-                    AdjustmentLine.create(new_val)
-            adjustment.write(vals)
+        # To use Job Queue, post this method to the Queue
+        todo = self.filtered(
+            lambda x: x.product_ids and x.state in ["draft", "computing", "confirm"]
+        )
+        for adjustment in todo:
+            adjustment.line_ids.unlink()
+            new_vals = adjustment._prepare_adjustment_line_values()
+            adjustment.line_ids.create(new_vals)
+            adjustment.date = fields.Datetime.now()
+        adjustment.write({"state": "confirm"})
 
-    def _get_cost_adjustment_lines_values(self):
-        """Return the values of the lines to create for this cost adjustment.
+    def _prepare_adjustment_line_values(self):
+        """
+        Return the values of the lines to create for this cost adjustment.
         :return: a list containing the `stock.cost.adjustment.line` values to create
         :rtype: list
         """
-        vals = []
-        for product in self.product_ids:
-            line_values = {
+        return [
+            {
                 "cost_adjustment_id": self.id,
                 "product_id": product.id,
                 "product_original_cost": product.standard_price,
-                "product_cost": product.proposed_cost
-                if product.proposed_cost > 0.0
-                else product.standard_price,
+                "product_cost": product.proposed_cost or product.standard_price,
                 "qty_on_hand": product.sudo().quantity_svl,
             }
-            vals.append(line_values)
-        return vals
+            for product in self.product_ids
+        ]
 
     def action_open_cost_adjustment_lines(self):
         self.ensure_one()
