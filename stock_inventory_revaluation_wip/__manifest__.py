@@ -9,10 +9,8 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Stock",
     "license": "AGPL-3",
-    "depends": ["stock_inventory_revaluation_mrp"],
-    "data": [
-        "views/cost_adjustment_detail.xml",
-    ],
+    "depends": ["stock_inventory_revaluation_mrp", "mrp_account_analytic_wip"],
+    "data": ["views/cost_adjustment_detail.xml"],
     "maintainers": ["patrickrwilson"],
     "application": False,
     "installable": True,
