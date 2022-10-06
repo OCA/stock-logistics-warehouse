@@ -98,18 +98,18 @@
                     /><!-- TODO: remove context key? -->
 
                 <button
-                        name="action_open_cost_adjustment_lines"
-                        states="confirm"
-                        string="View Adjustment"
-                        type="object"
-                    />
-                <button
                         name="action_start"
                         id="action_start_recompute"
                         states="confirm"
                         string="Recompute Impact"
                         type="object"
                         attrs="{'invisible': ['|', ('state', 'not in', ['confirm']), ('product_ids', '=', False)]}"
+                    />
+                <button
+                        name="action_open_cost_adjustment_lines"
+                        states="confirm"
+                        string="View Adjustment"
+                        type="object"
                     />
                 <button
                         name="action_draft"

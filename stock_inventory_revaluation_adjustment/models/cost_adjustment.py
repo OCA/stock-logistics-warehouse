@@ -182,44 +182,42 @@ class CostAdjustment(models.Model):
         )
         for adjustment in todo:
             adjustment.line_ids.unlink()
-            new_vals = adjustment._prepare_adjustment_line_values()
-            adjustment.line_ids.create(new_vals)
-            adjustment.date = fields.Datetime.now()
-        adjustment.write({"state": "confirm"})
+            adjustment._populate_adjustment_lines(adjustment.product_ids)
+            adjustment.write({"state": "confirm", "date": fields.Datetime.now()})
 
-    def _prepare_adjustment_line_values(self):
+    def _populate_adjustment_lines(self, products):
+        """
+        Given a list of Products
+        Creates Adjustment Lines for the ones missing
+        If a line aready exists, don't create a duplicate
+        """
+        self.ensure_one()
+        missing = products - self.line_ids.product_id
+        vals = [self._prepare_adjustment_line_values(x) for x in missing]
+        return vals and self.line_ids.create(vals) or []
+
+    def _prepare_adjustment_line_values(self, product):
         """
         Return the values of the lines to create for this cost adjustment.
         :return: a list containing the `stock.cost.adjustment.line` values to create
         :rtype: list
         """
-        return [
-            {
-                "cost_adjustment_id": self.id,
-                "product_id": product.id,
-                "product_original_cost": product.standard_price,
-                "product_cost": product.proposed_cost or product.standard_price,
-                "qty_on_hand": product.sudo().quantity_svl,
-            }
-            for product in self.product_ids
-        ]
+        self.ensure_one()
+        return {
+            "cost_adjustment_id": self.id,
+            "product_id": product.id,
+            "product_original_cost": product.standard_price,
+            "product_cost": product.proposed_cost or product.standard_price,
+            "qty_on_hand": product.sudo().quantity_svl,
+        }
 
     def action_open_cost_adjustment_lines(self):
         self.ensure_one()
-        ctx = dict(self._context) or {}
-        ctx.update(
-            {
-                "default_is_editable": True,
-                "default_cost_adjustment_id": self.id,
-                "default_company_id": self.company_id.id,
-            }
-        )
         action = {
             "type": "ir.actions.act_window",
             "view_mode": "tree",
             "name": _("Cost Adjustment Lines"),
             "res_model": "stock.cost.adjustment.line",
-            "context": ctx,
             "domain": [("cost_adjustment_id", "=", self.id)],
             "view_id": self.env.ref(
                 "stock_inventory_revaluation_adjustment.cost_adjustment_line_view_tree"
