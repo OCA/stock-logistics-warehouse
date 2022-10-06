@@ -1,0 +1,154 @@
+<odoo>
+
+    <record id="view_inventory_group_form" model="ir.ui.view">
+        <field name="name">stock.inventory.form.view</field>
+        <field name="model">stock.inventory</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        type="object"
+                        name="action_state_to_in_progress"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('state', 'in', ['in_progress', 'done'])]}"
+                        string="Begin Adjustments"
+                    />
+                    <button
+                        type="object"
+                        name="action_state_to_draft"
+                        attrs="{'invisible':['|',('state', 'in', ['draft', 'done']), ('count_stock_moves', '!=', 0)]}"
+                        string="Back to Draft"
+                    />
+                    <button
+                        type="object"
+                        name="action_state_to_done"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('state', 'in', ['draft', 'done'])]}"
+                        string="Set to Done"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,in_progress,done"
+                    />
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_view_inventory_adjustment"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible':['|', ('state', 'in', ['draft', 'done']), ('count_stock_quants', '=', 0)]}"
+                        >
+                            <field
+                                name="count_stock_quants_string"
+                                widget="statinfo"
+                                readonly="1"
+                            />
+                            <field invisible="True" name="count_stock_quants" />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_view_stock_moves"
+                            class="oe_stat_button"
+                            icon="fa-cubes"
+                            attrs="{'invisible':['|', ('state', '=', 'draft'), ('count_stock_moves', '=', 0)]}"
+                        >
+                            <field
+                                name="count_stock_moves"
+                                widget="statinfo"
+                                readonly="1"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title" name="title">
+                    <label for="name" class="oe_edit_only" />
+                    <h1><field name="name" placeholder="e.g. Annual inventory" /></h1>
+                </div>
+                    <group>
+                        <group>
+                            <field
+                                name="product_selection"
+                                widget="radio"
+                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])]}"
+                            />
+                            <field
+                                name="location_ids"
+                                string="Locations"
+                                widget="many2many_tags"
+                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])]}"
+                                required="1"
+                            />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field
+                                name="owner_id"
+                                attrs="{'readonly':[('state', '=', 'done')]}"
+                            />
+                            <field
+                                name="product_ids"
+                                widget="many2many_tags"
+                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])], 'required': [('product_selection', 'in', ['manual', 'lot'])],'invisible': [('product_selection', 'in', ['all', 'category', 'one'])]}"
+                            />
+                            <field
+                                name="product_ids"
+                                widget="many2many_tags"
+                                options="{'limit': 10}"
+                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])], 'required': [('product_selection', '=', 'one')],'invisible': [('product_selection', '!=', 'one')]}"
+                            />
+                            <field
+                                name="category_id"
+                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])], 'required': [('product_selection', '=', 'category')],'invisible': [('product_selection', '!=', 'category')]}"
+                            />
+                            <field
+                                name="lot_ids"
+                                widget="many2many_tags"
+                                domain="[('product_id', 'in', product_ids)]"
+                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])], 'required': [('product_selection', '=', 'lot')],'invisible': [('product_selection', '!=', 'lot')]}"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_inventory_group_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.tree.view</field>
+        <field name="model">stock.inventory</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state == 'done'"
+                    decoration-info="state not in ('done', 'draft')"
+                    decoration-muted="state == 'draft'"
+                />
+                <field name="date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_view_inventory_group_form" model="ir.actions.act_window">
+        <field name="name">Inventory Adjustment Group</field>
+        <field name="res_model">stock.inventory</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_inventory_group_tree" />
+    </record>
+
+    <menuitem
+        id="menu_action_inventory_tree"
+        name="Inventory Adjustments"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="30"
+        action="action_view_inventory_group_form"
+    />
+    <delete model="ir.ui.menu" id="stock.menu_action_inventory_tree" />
+</odoo>
