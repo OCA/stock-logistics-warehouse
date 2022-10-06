@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_stock_quant_search_not_done" model="ir.ui.view">
+            <field name="name">stock.quant.search.not.done</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.quant_search_view" />
+            <field name="arch" type="xml">
+                <filter name="to_apply" position="after">
+                    <filter
+                    name='to_do'
+                    string="To Do"
+                    domain="[('to_do', '=', 'True')]"
+                />
+                </filter>
+            </field>
+        </record>
+</odoo>
