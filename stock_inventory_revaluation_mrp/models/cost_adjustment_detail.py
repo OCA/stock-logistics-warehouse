@@ -12,6 +12,7 @@ class CostAdjustmentDetail(models.Model):
         "stock.cost.adjustment.line",
         index=True,
         required=True,
+        ondelete="cascade",
     )
     cost_adjustment_id = fields.Many2one(
         "stock.cost.adjustment", related="cost_adjustment_line_id.cost_adjustment_id"
@@ -68,6 +69,7 @@ class CostAdjustmentDetail(models.Model):
     bom_product_qty_on_hand = fields.Float(
         compute="_compute_bom_product_qty_on_hand", string="On Hand Qty", store=True
     )
+    level = fields.Integer()
 
     @api.depends("bom_id")
     def _compute_bom_product_qty_on_hand(self):

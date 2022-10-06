@@ -10,6 +10,7 @@
                 <field name="currency_id" invisible="1" />
                 <field name="product_id" />
                 <field name="bom_id" />
+                <field name="level" optional="show" />
                 <field name="bom_line_id" optional="show" />
                 <field name="quantity" />
                 <field
