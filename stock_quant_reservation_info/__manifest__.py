@@ -5,7 +5,7 @@
 {
     "name": "Stock Move Reservation Info",
     "summary": "Allows to see the reserved info of Products",
-    "version": "14.0.1.0.4",
+    "version": "14.0.1.0.5",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Generic",
