@@ -26,6 +26,7 @@ class StockQuant(models.Model):
             "domain": [
                 ("product_id", "=", self.product_id.id),
                 ("product_uom_qty", ">", 0),
+                ("location_id.usage", "=", "internal"),
             ],
         }
         return action
