@@ -36,8 +36,12 @@
                     string="Calculate Proposed Cost"
                     type="object"
                     attrs="{'invisible': ['|', ('bom_count', '=', 0), ('proposed_cost_ignore_bom', '=', True)]}"
-                    help="Calculate Proposed Cost."
                     class="oe_link oe_read_only pt-0"
+                    help="
+                    Recalculates the `Proposed Cost` for all BoM components.
+                    Then adds the costs for all Components and Operations,
+                    using the Active Cost is set,
+                    or the Proposed Cost otherwise (in the case of new products)."
                 />
             </span>
 
