@@ -10,6 +10,12 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     standard_price = fields.Float("Cost (Active)")
+    proposed_cost = fields.Float(
+        "Proposed Cost",
+        company_dependent=True,
+        digits="Product Price",
+        groups="base.group_user",
+    )
 
     @api.model
     def _change_standard_price(self, new_price, account=False):
@@ -171,6 +177,14 @@ class ProductProduct(models.Model):
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+    standard_price = fields.Float("Cost (Active)")
+    proposed_cost = fields.Float(
+        "Proposed Cost",
+        company_dependent=True,
+        digits="Product Price",
+        groups="base.group_user",
+    )
+
     def get_product_accounts(self, fiscal_pos=None):
         accounts = super(ProductTemplate, self).get_product_accounts(
             fiscal_pos=fiscal_pos
@@ -187,10 +201,3 @@ class ProductTemplate(models.Model):
                 }
             )
         return accounts
-
-    proposed_cost = fields.Float(
-        "Proposed Cost",
-        company_dependent=True,
-        digits="Product Price",
-        groups="base.group_user",
-    )
