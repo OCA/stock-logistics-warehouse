@@ -12,6 +12,10 @@ class CostAdjustmentLine(models.Model):
     _inherit = "stock.cost.adjustment.line"
     _order = "level,product_id"
 
+    def _compute_is_manually_selected(self):
+        for x in self:
+            x.is_manually_selected = x.product_id in x.cost_adjustment_id.product_ids
+
     bom_impact_ids = fields.One2many(
         "stock.cost.adjustment.detail",
         "cost_adjustment_line_id",
@@ -38,6 +42,7 @@ class CostAdjustmentLine(models.Model):
         help="Bills of Materials this item is used on",
     )
     level = fields.Integer()
+    is_manually_selected = fields.Boolean(compute="_compute_is_manually_selected")
 
     def _get_impacted_mos(self):
         """

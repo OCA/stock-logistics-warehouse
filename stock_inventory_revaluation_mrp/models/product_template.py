@@ -1,7 +1,7 @@
 # Copyright 2021 - Open Source Integrators
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ProductTemplate(models.Model):
@@ -34,7 +34,7 @@ class ProductProduct(models.Model):
     def calculate_proposed_cost(self):
         products = self.filtered(lambda x: x.bom_ids and not x.proposed_cost_ignore_bom)
         for product in products:
-            bom = product.bom_ids[:1]
+            bom = self.env["mrp.bom"]._bom_find(product=product)
             # First recompute "Proposed Cost" for the BoM components that also have a BoM
             bom.bom_line_ids.product_id.calculate_proposed_cost()
             # Add the costs for all Components and Operations,
@@ -57,30 +57,14 @@ class ProductProduct(models.Model):
             # TODO: only set Propsoed Cost if different from actual cost!
             product.proposed_cost = total_uom
 
-    @api.model
-    def search(
-        self,
-        args,
-        offset=0,
-        limit=None,
-        order=None,
-        count=False,
-    ):
-        res = super(ProductProduct, self).search(
-            args, offset, limit, order, count=count
+    def _get_bom_structure_products(self):
+        BOM = self.env["mrp.bom"]
+        assemblies = self.filtered(
+            lambda x: x.bom_ids and not x.proposed_cost_ignore_bom
         )
-        if any(i[0] == "proposed_cost" for i in args):
-            if self.env.context.get("proposed_cost_child_of"):
-                product_list = self
-                mrp_bom_rec = self.env["mrp.bom"].search([])  # FIXME: too greedy!
-                for rec in mrp_bom_rec:
-                    bom_line = self.env["mrp.bom.line"].search(
-                        [("bom_id", "=", rec.id)]
-                    )
-                    for line in bom_line:
-                        if line.bom_id.product_id.proposed_cost > 0.0:
-                            product_list |= line.product_id
-                            product_list |= line.bom_id.product_id
-                        break
-                res |= product_list
-        return res
+        bom_structure = assemblies
+        for product in assemblies:
+            bom = BOM._bom_find(product=product)
+            components = bom.bom_line_ids.product_id
+            bom_structure |= components._get_bom_structure_products()
+        return bom_structure

@@ -2,13 +2,18 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 import logging
 
-from odoo import _, models
+from odoo import _, fields, models
 
 _logger = logging.getLogger(__name__)
 
 
 class CostAdjustment(models.Model):
     _inherit = "stock.cost.adjustment"
+
+    explode_subassemblies = fields.Boolean(
+        help="Also adds subcomponents or components"
+        " that may have a Proposed Cost set.",
+    )
 
     def action_open_cost_adjustment_details(self):
         return {
@@ -23,11 +28,14 @@ class CostAdjustment(models.Model):
             ).id,
         }
 
-    def _populate_adjustment_lines(self, products, level=0):
+    def _populate_adjustment_lines(self, products, level=1):
         # Enhances adding Adjustment Line
         # To compute the impact where used in BoM
         # The impacted Products will be recursively added too
         self.ensure_one()
+        if self.explode_subassemblies and level == 1:
+            subcomponents = products._get_bom_structure_products()
+            products |= subcomponents.filtered("proposed_cost")
         lines = super()._populate_adjustment_lines(products)
         for line in lines:
             line.level = level

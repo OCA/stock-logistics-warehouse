@@ -92,12 +92,6 @@
                     context="{'has_proposed_cost': True}"
                     domain="[('proposed_cost','&gt;',0)]"
                 />
-                <filter
-                    name="has_proposed_cost_child_of"
-                    string="Is Child Of"
-                    context="{'proposed_cost_child_of': True}"
-                />
-
             </xpath>
         </field>
     </record>
