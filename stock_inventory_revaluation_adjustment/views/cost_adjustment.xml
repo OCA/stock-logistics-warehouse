@@ -107,19 +107,26 @@
                     />
                 <button
                         name="action_open_cost_adjustment_lines"
-                        states="confirm"
+                        states="confirm,done,posted"
                         string="View Adjustment"
                         type="object"
+                    />
+                <button
+                        name="action_reload"
+                        states="computing"
+                        string="Reload"
+                        type="object"
+                        class="oe_highlight"
                     />
                 <button
                         name="action_draft"
                         string="Set to Draft"
                         type="object"
-                        states="cancel"
+                        states="cancel,confirm,computing,done"
                     />
                 <button
                         name="action_cancel"
-                        states="draft,confirm,computing"
+                        states="draft"
                         string="Cancel"
                         type="object"
                         confirm="If you cancel this cost adjustment, all its cost adjustment lines will be lost. Are you sure you want to discard it?"

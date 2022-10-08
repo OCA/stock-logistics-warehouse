@@ -3,7 +3,7 @@
 
 from odoo import _, fields, models
 from odoo.exceptions import UserError
-from odoo.tools.float_utils import float_compare
+from odoo.tools.float_utils import float_is_zero
 
 from odoo.addons.base.models.ir_model import MODULE_UNINSTALL_FLAG
 
@@ -99,27 +99,21 @@ class CostAdjustment(models.Model):
                     negative.product_cost,
                 )
             )
-        return True
 
     def _remove_unchanged_lines(self):
+        precision = self.env["decimal.precision"].precision_get("Product Price")
         for line in self.line_ids:
-            precision = self.env["decimal.precision"].precision_get(
-                "Product Unit of Measure"
-            )
-            if (
-                float_compare(
-                    line.product_cost,
-                    line.product_original_cost,
-                    precision_digits=precision,
-                )
-                == 0
+            if float_is_zero(
+                line.difference_cost,
+                precision_digits=precision,
             ):
                 line.unlink()
-        return True
+        if not self.line_ids:
+            raise UserError(
+                _("Nothing to do! At least one product should have a proposed cost.")
+            )
 
     def action_validate(self):
-        if not self.exists():
-            return
         self.ensure_one()
         if not self.user_has_groups("stock.group_stock_manager"):
             raise UserError(_("Only a stock manager can validate a cost adjustment."))
@@ -137,8 +131,6 @@ class CostAdjustment(models.Model):
         return True
 
     def action_post(self):
-        if not self.exists():
-            return
         self.ensure_one()
         if not self.user_has_groups("stock.group_stock_manager"):
             raise UserError(_("Only a stock manager can post a cost adjustment."))
@@ -172,7 +164,9 @@ class CostAdjustment(models.Model):
         self.ensure_one()
         self.state = "computing"
         self._action_start()
-        self._check_company()
+        return True
+
+    def action_reload(self):
         return True
 
     def _action_start(self):
@@ -184,6 +178,7 @@ class CostAdjustment(models.Model):
             adjustment.line_ids.unlink()
             adjustment._populate_adjustment_lines(adjustment.product_ids)
             adjustment.write({"state": "confirm", "date": fields.Datetime.now()})
+        self._check_company()
 
     def _populate_adjustment_lines(self, products):
         """
