@@ -26,7 +26,9 @@ class StockRequestOrder(models.Model):
             req.production_count = len(req.production_ids)
 
     def action_view_mrp_production(self):
-        action = self.env.ref("mrp.mrp_production_action").read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "mrp.mrp_production_action"
+        )
         productions = self.mapped("production_ids")
         if len(productions) > 1:
             action["domain"] = [("id", "in", productions.ids)]

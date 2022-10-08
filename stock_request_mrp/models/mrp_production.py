@@ -1,4 +1,5 @@
 # Copyright 2020 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2022 Tecnativa - Pedro M. Baeza
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, fields, models
@@ -27,8 +28,9 @@ class MrpProduction(models.Model):
         """
         :return dict: dictionary value for created view
         """
-        action = self.env.ref("stock_request.action_stock_request_form").read()[0]
-
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock_request.action_stock_request_form"
+        )
         requests = self.mapped("stock_request_ids")
         if len(requests) > 1:
             action["domain"] = [("id", "in", requests.ids)]
@@ -39,7 +41,7 @@ class MrpProduction(models.Model):
             action["res_id"] = requests.id
         return action
 
-    def _get_finished_move_value(
+    def _get_move_finished_values(
         self,
         product_id,
         product_uom_qty,
@@ -47,7 +49,8 @@ class MrpProduction(models.Model):
         operation_id=False,
         byproduct_id=False,
     ):
-        res = super()._get_finished_move_value(
+        """Inject stock request allocations when creating the finished move."""
+        res = super()._get_move_finished_values(
             product_id,
             product_uom_qty,
             product_uom,
@@ -61,7 +64,7 @@ class MrpProduction(models.Model):
                     0,
                     {
                         "stock_request_id": request.id,
-                        "requested_product_uom_qty": request.product_qty,
+                        "requested_product_uom_qty": product_uom_qty,
                     },
                 )
                 for request in self.stock_request_ids

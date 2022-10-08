@@ -1,10 +1,11 @@
 # Copyright 2017-20 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2022 Tecnativa - Pedro M. Baeza
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "Stock Request MRP",
     "summary": "Manufacturing request for stock",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
