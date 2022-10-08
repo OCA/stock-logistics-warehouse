@@ -216,13 +216,13 @@
                 <group expand="0" string="Group By">
                     <filter
                         string="Status"
-                        name="status"
+                        name="groupby_status"
                         domain="[]"
                         context="{'group_by': 'state'}"
                     />
                     <filter
                         string="Cost Adjustment Date"
-                        name="cost_adjustments_month"
+                        name="groupby_cost_adjustments_month"
                         domain="[]"
                         context="{'group_by': 'date'}"
                         help="Cost Adjustments by Date"

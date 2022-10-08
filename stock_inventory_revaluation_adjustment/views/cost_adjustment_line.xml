@@ -96,13 +96,13 @@
                 <group expand='0' string='Group by...'>
                     <filter
                         string='Product'
-                        name="product"
+                        name="groupby_product"
                         domain="[]"
                         context="{'group_by' : 'product_id'}"
                     />
                     <filter
                         string='Product Category'
-                        name="product_category"
+                        name="groupby_product_category"
                         domain="[]"
                         context="{'group_by' : 'categ_id'}"
                     />
