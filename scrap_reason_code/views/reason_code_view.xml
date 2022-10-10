@@ -23,7 +23,7 @@
         <field name="name">scrap.reason.code.list</field>
         <field name="model">scrap.reason.code</field>
         <field name="arch" type="xml">
-            <tree string="Reason Codes">
+            <tree>
                 <field name="name" />
                 <field name="description" />
                 <field name="location_id" />

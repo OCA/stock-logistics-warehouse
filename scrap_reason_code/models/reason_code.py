@@ -10,7 +10,7 @@ class ScrapReasonCode(models.Model):
     _description = "Reason Code"
 
     name = fields.Char("Code", required=True)
-    description = fields.Text("Description")
+    description = fields.Text()
     location_id = fields.Many2one(
         "stock.location",
         string="Scrap Location",
