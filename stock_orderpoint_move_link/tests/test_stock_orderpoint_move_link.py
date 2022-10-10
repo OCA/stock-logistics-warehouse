@@ -9,11 +9,11 @@ class TestStockOrderpointMoveLink(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.product_obj = cls.env["product.product"]
         cls.orderpoint_obj = cls.env["stock.warehouse.orderpoint"]
         cls.loc_obj = cls.env["stock.location"]
-        cls.route_obj = cls.env["stock.location.route"]
+        cls.route_obj = cls.env["stock.route"]
         cls.group_obj = cls.env["procurement.group"]
         cls.move_obj = cls.env["stock.move"]
         cls.picking_obj = cls.env["stock.picking"]
@@ -40,7 +40,7 @@ class TestStockOrderpointMoveLink(TransactionCase):
                         {
                             "name": "stock to test",
                             "action": "pull",
-                            "location_id": cls.intermediate_loc.id,
+                            "location_dest_id": cls.intermediate_loc.id,
                             "location_src_id": cls.stock_loc.id,
                             "procure_method": "make_to_stock",
                             "picking_type_id": cls.env.ref(
@@ -69,7 +69,7 @@ class TestStockOrderpointMoveLink(TransactionCase):
                         {
                             "name": "Test 1 to Test 2",
                             "action": "pull",
-                            "location_id": cls.need_loc.id,
+                            "location_dest_id": cls.need_loc.id,
                             "location_src_id": cls.intermediate_loc.id,
                             "procure_method": "make_to_order",
                             "picking_type_id": cls.env.ref(
