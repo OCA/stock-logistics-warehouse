@@ -23,7 +23,7 @@ Scrap Reason Code
     :target: https://runbot.odoo-community.org/runbot/153/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 Adds a reason code for scrapping operations and an interface for the user
 to create scrap codes
@@ -44,7 +44,7 @@ Usage
 =====
 
 - Go to Inventory > Operations > Scrap
-- Create a scarp order and select reason code.
+- Create a scrap order and select reason code.
 - A scrap location will be readonly and auto fill based on selected reason
   code.
 
@@ -101,7 +101,7 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-bodedra| 
+|maintainer-bodedra|
 
 This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/14.0/scrap_reason_code>`_ project on GitHub.
 
