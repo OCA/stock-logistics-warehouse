@@ -65,7 +65,7 @@ class StockWarehouse(models.Model):
                         "name": self._format_rulename(
                             location_id, location_dest_id, "MTS+MTO"
                         ),
-                        "location_id": location_dest_id.id,
+                        "location_dest_id": location_dest_id.id,
                         "location_src_id": location_id.id,
                         "picking_type_id": picking_type_id.id,
                     },
@@ -88,7 +88,7 @@ class StockWarehouse(models.Model):
             # _get_global_route_rules_values
             rule = self.env["stock.rule"].search(
                 [
-                    ("location_id", "=", self.mts_mto_rule_id.location_id.id),
+                    ("location_dest_id", "=", self.mts_mto_rule_id.location_dest_id.id),
                     ("location_src_id", "=", self.mts_mto_rule_id.location_src_id.id),
                     ("route_id", "=", self.delivery_route_id.id),
                 ],
