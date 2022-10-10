@@ -186,7 +186,7 @@ class TestMtoMtsRoute(TransactionCase):
         mts_mto_route = self.warehouse.mts_mto_rule_id
         self.assertEqual(mts_mto_route.warehouse_id, self.warehouse)
         self.assertEqual(
-            mts_mto_route.location_id, self.warehouse.mto_pull_id.location_id
+            mts_mto_route.location_dest_id, self.warehouse.mto_pull_id.location_dest_id
         )
         self.assertEqual(
             mts_mto_route.picking_type_id, self.warehouse.mto_pull_id.picking_type_id
@@ -233,9 +233,9 @@ class TestMtoMtsRoute(TransactionCase):
             "warehouse_selectable": True,
             "name": "dummy route",
         }
-        self.dummy_route = self.env["stock.location.route"].create(route_vals)
+        self.dummy_route = self.env["stock.route"].create(route_vals)
         rule_vals = {
-            "location_id": self.env.ref("stock.stock_location_stock").id,
+            "location_dest_id": self.env.ref("stock.stock_location_stock").id,
             "location_src_id": self.env.ref("stock.stock_location_suppliers").id,
             "action": "pull",
             "warehouse_id": self.warehouse.id,
