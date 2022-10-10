@@ -30,9 +30,9 @@ class TestStockWarehouseCalendar(TransactionCase):
         )
 
         route_vals = {"name": "WH2 -> WH"}
-        self.transfer_route = self.env["stock.location.route"].create(route_vals)
+        self.transfer_route = self.env["stock.route"].create(route_vals)
         rule_vals = {
-            "location_id": self.warehouse.lot_stock_id.id,
+            "location_dest_id": self.warehouse.lot_stock_id.id,
             "location_src_id": self.warehouse_2.lot_stock_id.id,
             "action": "pull_push",
             "warehouse_id": self.warehouse.id,
