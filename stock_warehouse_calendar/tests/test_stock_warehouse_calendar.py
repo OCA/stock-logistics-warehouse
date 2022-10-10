@@ -6,44 +6,46 @@ from odoo.tests.common import TransactionCase
 
 
 class TestStockWarehouseCalendar(TransactionCase):
-    def setUp(self):
-        super(TestStockWarehouseCalendar, self).setUp()
-        self.wh_obj = self.env["stock.warehouse"]
-        self.move_obj = self.env["stock.move"]
-        self.pg_obj = self.env["procurement.group"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.wh_obj = cls.env["stock.warehouse"]
+        cls.move_obj = cls.env["stock.move"]
+        cls.pg_obj = cls.env["procurement.group"]
 
-        self.company = self.env.ref("base.main_company")
-        self.warehouse = self.env.ref("stock.warehouse0")
-        self.customer_loc = self.env.ref("stock.stock_location_customers")
-        self.company_partner = self.env.ref("base.main_partner")
-        self.calendar = self.env.ref("resource.resource_calendar_std")
-        self.warehouse.calendar_id = self.calendar
-        self.warehouse_2 = self.wh_obj.create(
-            {"code": "WH-T", "name": "Warehouse Test", "calendar_id": self.calendar.id}
+        cls.company = cls.env.ref("base.main_company")
+        cls.warehouse = cls.env.ref("stock.warehouse0")
+        cls.customer_loc = cls.env.ref("stock.stock_location_customers")
+        cls.company_partner = cls.env.ref("base.main_partner")
+        cls.calendar = cls.env.ref("resource.resource_calendar_std")
+        cls.warehouse.calendar_id = cls.calendar
+        cls.warehouse_2 = cls.wh_obj.create(
+            {"code": "WH-T", "name": "Warehouse Test", "calendar_id": cls.calendar.id}
         )
-        self.warehouse_3 = self.wh_obj.create(
+        cls.warehouse_3 = cls.wh_obj.create(
             {"code": "WH-no-calendar", "name": "Warehouse Test 2"}
         )
 
-        self.product = self.env["product.product"].create(
+        cls.product = cls.env["product.product"].create(
             {"name": "test product", "default_code": "PRD", "type": "product"}
         )
 
         route_vals = {"name": "WH2 -> WH"}
-        self.transfer_route = self.env["stock.route"].create(route_vals)
+        cls.transfer_route = cls.env["stock.route"].create(route_vals)
         rule_vals = {
-            "location_dest_id": self.warehouse.lot_stock_id.id,
-            "location_src_id": self.warehouse_2.lot_stock_id.id,
+            "location_dest_id": cls.warehouse.lot_stock_id.id,
+            "location_src_id": cls.warehouse_2.lot_stock_id.id,
             "action": "pull_push",
-            "warehouse_id": self.warehouse.id,
-            "propagate_warehouse_id": self.warehouse_2.id,
-            "picking_type_id": self.env.ref("stock.picking_type_internal").id,
+            "warehouse_id": cls.warehouse.id,
+            "propagate_warehouse_id": cls.warehouse_2.id,
+            "picking_type_id": cls.env.ref("stock.picking_type_internal").id,
             "name": "WH2->WH",
-            "route_id": self.transfer_route.id,
+            "route_id": cls.transfer_route.id,
             "delay": 1,
         }
-        self.transfer_rule = self.env["stock.rule"].create(rule_vals)
-        self.product.route_ids = [(6, 0, self.transfer_route.ids)]
+        cls.transfer_rule = cls.env["stock.rule"].create(rule_vals)
+        cls.product.route_ids = [(6, 0, cls.transfer_route.ids)]
 
     def test_01_procurement_with_calendar(self):
         values = {
