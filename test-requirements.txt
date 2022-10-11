@@ -1,0 +1,1 @@
+odoo-addon-stock_orderpoint_move_link @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1505/head#subdirectory=setup/stock_orderpoint_move_link
