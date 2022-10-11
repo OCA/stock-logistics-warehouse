@@ -4,7 +4,7 @@ from odoo.exceptions import UserError
 from odoo.tests import Form, common
 
 
-class TestStockReserveSale(common.SavepointCase):
+class TestStockReserveSale(common.TransactionCase):
     def setUp(self):
         super().setUp()
         partner_form = Form(self.env["res.partner"])
@@ -18,10 +18,12 @@ class TestStockReserveSale(common.SavepointCase):
         product_form = Form(self.env["product.product"])
         product_form.name = "Test Product 1"
         product_form.type = "product"
+        product_form.detailed_type = "product"
         self.product_1 = product_form.save()
         product_form = Form(self.env["product.product"])
         product_form.name = "Test Product 2"
         product_form.type = "product"
+        product_form.detailed_type = "product"
         self.product_2 = product_form.save()
         self.env["stock.quant"].create(
             {

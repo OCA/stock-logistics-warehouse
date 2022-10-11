@@ -237,7 +237,7 @@ class SaleOrderLine(models.Model):
             if line.reservation_ids:
                 raise UserError(
                     _(
-                        'Sale order line "[{}] {}}" has a related reservation.\n'
+                        'Sale order line "[{}] {}" has a related reservation.\n'
                         "Please unreserve this line before "
                         "delete the line"
                     ).format(line.order_id.name, line.name)
