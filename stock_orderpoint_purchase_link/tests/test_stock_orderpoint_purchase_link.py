@@ -13,7 +13,7 @@ class TestOrderpointPurchaseLink(common.TransactionCase):
         self.pol_obj = self.env["purchase.order.line"]
         self.location_obj = self.env["stock.location"]
         self.orderpoint_obj = self.env["stock.warehouse.orderpoint"]
-        self.route_obj = self.env["stock.location.route"]
+        self.route_obj = self.env["stock.route"]
         self.rule_obj = self.env["stock.rule"]
         self.group_obj = self.env["procurement.group"]
 
@@ -30,7 +30,7 @@ class TestOrderpointPurchaseLink(common.TransactionCase):
                 "name": "Stock to Test",
                 "action": "pull",
                 "procure_method": "make_to_order",
-                "location_id": self.test_location.id,
+                "location_dest_id": self.test_location.id,
                 "location_src_id": self.stock_location.id,
                 "route_id": route_test,
                 "picking_type_id": self.warehouse.int_type_id.id,
@@ -48,7 +48,7 @@ class TestOrderpointPurchaseLink(common.TransactionCase):
                 "type": "product",
                 "list_price": 150.0,
                 "route_ids": [(6, 0, [route_buy, route_test])],
-                "seller_ids": [(0, 0, {"name": vendor1.id, "price": 20.0})],
+                "seller_ids": [(0, 0, {"partner_id": vendor1.id, "price": 20.0})],
             }
         )
 
