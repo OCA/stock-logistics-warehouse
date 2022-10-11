@@ -13,8 +13,10 @@ class ResConfigSettings(models.TransientModel):
     @api.model
     def _get_stock_available_mrp_based_on(self):
         """Gets the available languages for the selection."""
-        pdct_fields = self.env["ir.model.fields"].search(
-            [("model", "=", "product.product"), ("ttype", "=", "float")]
+        pdct_fields = (
+            self.env["ir.model.fields"]
+            .sudo()
+            .search([("model", "=", "product.product"), ("ttype", "=", "float")])
         )
         return [
             (field.name, field.field_description)
