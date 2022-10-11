@@ -20,6 +20,7 @@ class ProductTemplate(models.Model):
         res = self._compute_quantities_dict()
         for template in self:
             template.free_qty = res[template.id]["free_qty"]
+        return
 
     def _search_free_qty(self, operator, value):
         return [("product_variant_ids.free_qty", operator, value)]

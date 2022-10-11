@@ -1,9 +1,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo.tests import common
+from odoo.tests.common import TransactionCase
 
 
-class TestTemplateFreeQty(common.SavepointCase):
+class TestTemplateFreeQty(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
