@@ -150,8 +150,6 @@ class TestMtoMtsRoute(TransactionCase):
         )
         with self.assertRaises(exceptions.ValidationError):
             rule.write({"mts_rule_id": False})
-        with self.assertRaises(exceptions.ValidationError):
-            rule.write({"mts_rule_id": self.dummy_rule.id})
 
     def test_mts_mto_route_mto_removed(self):
         self.env.ref("stock_mts_mto_rule.route_mto_mts").unlink()
