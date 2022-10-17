@@ -44,14 +44,6 @@ msgid ""
 msgstr ""
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
-#, python-format
-msgid ""
-"Inconsistency between the source locations of the mts and mto rules linked "
-"to the procurement rule: %s! It should be the same."
-msgstr ""
-
-#. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule____last_update
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse____last_update
 msgid "Last Modified on"
