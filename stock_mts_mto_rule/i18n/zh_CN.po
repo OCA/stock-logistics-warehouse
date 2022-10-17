@@ -71,7 +71,7 @@ msgstr "MTS+MTO"
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
-#: model:stock.location.route,name:stock_mts_mto_rule.route_mto_mts
+#: model:stock.route,name:stock_mts_mto_rule.route_mto_mts
 #, python-format
 msgid "Make To Order + Make To Stock"
 msgstr "按订单生产+按库存生产"
