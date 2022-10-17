@@ -30,6 +30,18 @@ msgid "Choose between MTS and MTO"
 msgstr "Scegliere tra MTS o MTO"
 
 #. module: stock_mts_mto_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__display_name
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__id
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_mts_mto_rule
 #: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_warehouse__mto_mts_management
 msgid ""
 "If this new route is selected on product form view, a purchase order will be "
@@ -41,14 +53,10 @@ msgstr ""
 "altrimenti il prodotto verrà prelevato dalle giacenze"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
-#, python-format
-msgid ""
-"Inconsistency between the source locations of the mts and mto rules linked "
-"to the procurement rule: %s! It should be the same."
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule____last_update
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse____last_update
+msgid "Last Modified on"
 msgstr ""
-"Inconsistena tra le ubicazioni di origine delle regole MTS e MTO collegata "
-"alla regola di approvvigionamento: %s! Deve essere la stessa."
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mto_rule_id
@@ -99,6 +107,14 @@ msgstr "Utilizza regole MTO+MTS"
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_warehouse
 msgid "Warehouse"
 msgstr "Magazzino"
+
+#, python-format
+#~ msgid ""
+#~ "Inconsistency between the source locations of the mts and mto rules "
+#~ "linked to the procurement rule: %s! It should be the same."
+#~ msgstr ""
+#~ "Inconsistena tra le ubicazioni di origine delle regole MTS e MTO "
+#~ "collegata alla regola di approvvigionamento: %s! Deve essere la stessa."
 
 #~ msgid "Procurement Rule"
 #~ msgstr "Regola d'Approvvigionamento"

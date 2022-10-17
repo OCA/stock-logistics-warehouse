@@ -31,6 +31,18 @@ msgid "Choose between MTS and MTO"
 msgstr "在MTS和MTO之间选择"
 
 #. module: stock_mts_mto_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__display_name
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__id
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_mts_mto_rule
 #: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_warehouse__mto_mts_management
 msgid ""
 "If this new route is selected on product form view, a purchase order will be "
@@ -41,12 +53,10 @@ msgstr ""
 "将从库存中提取产品"
 
 #. module: stock_mts_mto_rule
-#: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
-#, python-format
-msgid ""
-"Inconsistency between the source locations of the mts and mto rules linked "
-"to the procurement rule: %s! It should be the same."
-msgstr "链接到采购规则的MTS和MTO规则的源位置不一致：%s！应该是一样的。"
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule____last_update
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse____last_update
+msgid "Last Modified on"
+msgstr ""
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mto_rule_id
@@ -96,6 +106,12 @@ msgstr "使用MTO+MTS规则"
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_warehouse
 msgid "Warehouse"
 msgstr "仓库"
+
+#, python-format
+#~ msgid ""
+#~ "Inconsistency between the source locations of the mts and mto rules "
+#~ "linked to the procurement rule: %s! It should be the same."
+#~ msgstr "链接到采购规则的MTS和MTO规则的源位置不一致：%s！应该是一样的。"
 
 #~ msgid "Buy"
 #~ msgstr "购买"
