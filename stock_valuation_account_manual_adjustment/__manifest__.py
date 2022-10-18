@@ -6,7 +6,7 @@
     "name": "Stock Inventory Account Manual Adjustment",
     "summary": "Shows in the product inventory stock value and the accounting "
                "value and allows to reconcile them",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
