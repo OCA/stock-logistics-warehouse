@@ -90,6 +90,7 @@ addon | version | maintainers | summary
 [stock_request_cancel_confirm](stock_request_cancel_confirm/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Stock Request Cancel Confirm
 [stock_request_direction](stock_request_direction/) | 14.0.1.0.1 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | From or to your warehouse?
 [stock_request_kanban](stock_request_kanban/) | 14.0.1.0.0 |  | Adds a stock request order, and takes stock requests as lines
+[stock_request_partner](stock_request_partner/) | 14.0.1.0.0 |  | Allow to define partner in Stock Request
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.1.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add Stock Requests to the Inventory App
 [stock_request_purchase](stock_request_purchase/) | 14.0.1.0.0 |  | Internal request for stock
 [stock_request_submit](stock_request_submit/) | 14.0.1.0.0 |  | Add submit state on Stock Requests
