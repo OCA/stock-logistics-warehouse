@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2022 ACSONE SA/V
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_package_type_form">
+        <field
+            name="name"
+        >stock.package.type.form (in stock_package_type_button_box)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='name']" position="before">
+                <div class="oe_button_box" name="button_box" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
