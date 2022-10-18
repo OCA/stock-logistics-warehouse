@@ -4,7 +4,7 @@
 {
     "name": "Stock Request Partner",
     "summary": "Allow to define partner in Stock Request",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Jarsa, Odoo Community Association (OCA)",
