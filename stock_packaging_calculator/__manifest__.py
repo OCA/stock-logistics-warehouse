@@ -4,7 +4,7 @@
 {
     "name": "Stock packaging calculator",
     "summary": "Compute product quantity to pick by packaging",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "development_status": "Alpha",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
