@@ -69,7 +69,7 @@ addon | version | maintainers | summary
 [stock_quant_reserved_qty_uom](stock_quant_reserved_qty_uom/) | 10.0.1.0.0 |  | Stock Quant Reserved Qty UoM
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 10.0.1.0.0 |  | Establish a removal priority on stock locations.
 [stock_reserve](stock_reserve/) | 10.0.1.0.1 |  | Stock reservations on products
-[stock_valuation_account_manual_adjustment](stock_valuation_account_manual_adjustment/) | 10.0.1.0.0 |  | Shows in the product inventory stock value and the accounting value and allows to reconcile them
+[stock_valuation_account_manual_adjustment](stock_valuation_account_manual_adjustment/) | 10.0.1.1.0 |  | Shows in the product inventory stock value and the accounting value and allows to reconcile them
 [stock_warehouse_orderpoint_stock_info](stock_warehouse_orderpoint_stock_info/) | 10.0.1.0.1 |  | Stock Warehouse Orderpoint Stock Info
 [stock_warehouse_orderpoint_stock_info_unreserved](stock_warehouse_orderpoint_stock_info_unreserved/) | 10.0.1.0.0 |  | Stock Warehouse Orderpoint Stock Info Unreserved
 
