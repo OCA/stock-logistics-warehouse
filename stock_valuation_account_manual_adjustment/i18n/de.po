@@ -32,6 +32,7 @@ msgstr "Buchungs-IDs"
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_product_product_accounting_value
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_accounting_value
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
 msgid "Accounting Value"
 msgstr "Buchhaltungswert"
 
@@ -118,6 +119,7 @@ msgstr "Konto für manuelle Bestandswertberichtigungen"
 #. module: stock_valuation_account_manual_adjustment
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_product_product_inventory_value
 #: model:ir.model.fields,field_description:stock_valuation_account_manual_adjustment.field_stock_valuation_account_manual_adjustment_inventory_value
+#: model:ir.ui.view,arch_db:stock_valuation_account_manual_adjustment.view_product_inventory_valuation_tree
 msgid "Inventory Value"
 msgstr "Bestandswert"
 
