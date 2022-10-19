@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from collections import defaultdict
 
-from odoo import api, models, _
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
 
@@ -69,17 +68,11 @@ class StockMove(models.Model):
             location_dest_id,
             existing_product_ids,
         ) in existing_product_ids_by_location_id.items():
-            product_ids_to_move = product_ids_location_dest_id[
-                location_dest_id
-            ]
-            if set(existing_product_ids).symmetric_difference(
-                product_ids_to_move
-            ):
+            product_ids_to_move = product_ids_location_dest_id[location_dest_id]
+            if set(existing_product_ids).symmetric_difference(product_ids_to_move):
                 location = StockLocation.browse(location_dest_id)
                 existing_products = ProductProduct.browse(existing_product_ids)
-                to_move_products = ProductProduct.browse(
-                    list(product_ids_to_move)
-                )
+                to_move_products = ProductProduct.browse(list(product_ids_to_move))
                 error_msgs.append(
                     _(
                         "You plan to move the product %s to the location %s "

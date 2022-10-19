@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from collections import namedtuple
 
-from odoo.tests.common import SavepointCase
 from odoo.exceptions import ValidationError
+from odoo.tests.common import SavepointCase
 
-ShortMoveInfo = namedtuple(
-    "ShortMoveInfo", ["product", "location_dest", "qty"]
-)
+ShortMoveInfo = namedtuple("ShortMoveInfo", ["product", "location_dest", "qty"])
 
 
 class TestStockMove(SavepointCase):
@@ -29,12 +26,8 @@ class TestStockMove(SavepointCase):
         super(TestStockMove, cls).setUpClass()
         cls.uom_unit = cls.env.ref("product.product_uom_unit")
         Product = cls.env["product.product"]
-        cls.product_1 = Product.create(
-            {"name": "Wood", "uom_id": cls.uom_unit.id}
-        )
-        cls.product_2 = Product.create(
-            {"name": "Stone", "uom_id": cls.uom_unit.id}
-        )
+        cls.product_1 = Product.create({"name": "Wood", "uom_id": cls.uom_unit.id})
+        cls.product_2 = Product.create({"name": "Stone", "uom_id": cls.uom_unit.id})
 
         # Warehouses
         cls.warehouse_1 = cls.env["stock.warehouse"].create(
@@ -236,7 +229,8 @@ class TestStockMove(SavepointCase):
             We now have two product into the same location
         """
         self.assertEqual(
-            self.product_1, self._get_products_in_location(self.location_1),
+            self.product_1,
+            self._get_products_in_location(self.location_1),
         )
         self.location_1.specific_product_restriction = "any"
         picking = self._create_and_assign_picking(
@@ -272,7 +266,8 @@ class TestStockMove(SavepointCase):
         """
 
         self.assertEqual(
-            self.product_1, self._get_products_in_location(self.location_1),
+            self.product_1,
+            self._get_products_in_location(self.location_1),
         )
         self.location_1.specific_product_restriction = "same"
         picking = self._create_and_assign_picking(

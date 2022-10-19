@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 
 
@@ -107,9 +106,7 @@ class StockLocation(models.Model):
                     "product but it contains items of products %s"
                 ) % " | ".join(products.mapped("name"))
             record.has_restriction_violation = has_restriction_violation
-            record.restriction_violation_message = (
-                restriction_violation_message
-            )
+            record.restriction_violation_message = restriction_violation_message
 
     def _search_has_restriction_violation(self, operator, value):
         search_has_violation = (

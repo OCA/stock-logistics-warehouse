@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -30,12 +29,8 @@ class TestStockLocation(SavepointCase):
         # products
         Product = cls.env["product.product"]
         cls.uom_unit = cls.env.ref("product.product_uom_unit")
-        cls.product_1 = Product.create(
-            {"name": "Wood", "uom_id": cls.uom_unit.id}
-        )
-        cls.product_2 = Product.create(
-            {"name": "Stone", "uom_id": cls.uom_unit.id}
-        )
+        cls.product_1 = Product.create({"name": "Wood", "uom_id": cls.uom_unit.id})
+        cls.product_2 = Product.create({"name": "Stone", "uom_id": cls.uom_unit.id})
 
         # quants
         StockQuant = cls.env["stock.quant"]
@@ -109,7 +104,8 @@ class TestStockLocation(SavepointCase):
         """
         self.loc_lvl_1_1.specific_product_restriction = "same"
         self.assertEqual(
-            self.default_product_restriction, self.loc_lvl.product_restriction,
+            self.default_product_restriction,
+            self.loc_lvl.product_restriction,
         )
         self.assertEqual(
             self.default_product_restriction,
