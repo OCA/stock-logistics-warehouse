@@ -80,6 +80,13 @@
                         attrs="{'invisible': ['|', ('state', 'not in', ['draft']), ('product_ids', '=', False)]}"
                     />
                 <button
+                        name="action_open_cost_adjustment_lines"
+                        states="confirm,done,posted"
+                        class="oe_highlight"
+                        string="View Adjustment"
+                        type="object"
+                    />
+                <button
                         name="action_validate"
                         string="Validate"
                         type="object"
@@ -96,7 +103,6 @@
                         groups="stock.group_stock_manager"
                         context="{'cost_adjustment_type_id': type_id}"
                     /><!-- TODO: remove context key? -->
-
                 <button
                         name="action_start"
                         id="action_start_recompute"
@@ -104,12 +110,6 @@
                         string="Recompute Impact"
                         type="object"
                         attrs="{'invisible': ['|', ('state', 'not in', ['confirm']), ('product_ids', '=', False)]}"
-                    />
-                <button
-                        name="action_open_cost_adjustment_lines"
-                        states="confirm,done,posted"
-                        string="View Adjustment"
-                        type="object"
                     />
                 <button
                         name="action_reload"
