@@ -1,13 +1,14 @@
 # Copyright 2020 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockLocation(SavepointCase):
+class TestStockLocation(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockLocation, cls).setUpClass()
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.StockLocation = cls.env["stock.location"]
         cls.StockLocation._parent_store_compute()
         cls.loc_lvl = cls.env.ref("stock.stock_location_locations")
@@ -28,9 +29,13 @@ class TestStockLocation(SavepointCase):
 
         # products
         Product = cls.env["product.product"]
-        cls.uom_unit = cls.env.ref("product.product_uom_unit")
-        cls.product_1 = Product.create({"name": "Wood", "uom_id": cls.uom_unit.id})
-        cls.product_2 = Product.create({"name": "Stone", "uom_id": cls.uom_unit.id})
+        cls.uom_unit = cls.env.ref("uom.product_uom_unit")
+        cls.product_1 = Product.create(
+            {"name": "Wood", "type": "product", "uom_id": cls.uom_unit.id}
+        )
+        cls.product_2 = Product.create(
+            {"name": "Stone", "type": "product", "uom_id": cls.uom_unit.id}
+        )
 
         # quants
         StockQuant = cls.env["stock.quant"]
@@ -38,7 +43,7 @@ class TestStockLocation(SavepointCase):
             {
                 "product_id": cls.product_1.id,
                 "location_id": cls.loc_lvl_1_1_1.id,
-                "qty": 10.0,
+                "quantity": 10.0,
                 "owner_id": cls.env.user.id,
             }
         )
@@ -46,7 +51,7 @@ class TestStockLocation(SavepointCase):
             {
                 "product_id": cls.product_2.id,
                 "location_id": cls.loc_lvl_1_1_1.id,
-                "qty": 10.0,
+                "quantity": 10.0,
                 "owner_id": cls.env.user.id,
             }
         )
@@ -54,7 +59,7 @@ class TestStockLocation(SavepointCase):
             {
                 "product_id": cls.product_1.id,
                 "location_id": cls.loc_lvl_1_1_2.id,
-                "qty": 10.0,
+                "quantity": 10.0,
                 "owner_id": cls.env.user.id,
             }
         )
@@ -62,7 +67,7 @@ class TestStockLocation(SavepointCase):
             {
                 "product_id": cls.product_2.id,
                 "location_id": cls.loc_lvl_1_1_2.id,
-                "qty": 10.0,
+                "quantity": 10.0,
                 "owner_id": cls.env.user.id,
             }
         )
@@ -77,8 +82,8 @@ class TestStockLocation(SavepointCase):
         Expected result:
             The value at each level must modified.
         """
-        self.loc_lvl.specific_product_restriction = "same"
-        children = self.loc_lvl.child_ids
+        self.loc_lvl_1.specific_product_restriction = "same"
+        children = self.loc_lvl_1.child_ids
 
         def check_field(locs, name):
             for loc in locs:
@@ -103,6 +108,7 @@ class TestStockLocation(SavepointCase):
             The value at level_1_1 and level_1_1_1 is the new one
         """
         self.loc_lvl_1_1.specific_product_restriction = "same"
+        self.loc_lvl_1_1.flush_recordset()
         self.assertEqual(
             self.default_product_restriction,
             self.loc_lvl.product_restriction,
@@ -179,6 +185,7 @@ class TestStockLocation(SavepointCase):
         """
         self.loc_lvl_1_1_1.product_restriction = "any"
         self.loc_lvl_1_1_2.product_restriction = "same"
+        (self.loc_lvl_1_1_1 | self.loc_lvl_1_1_2).flush_recordset()
         # 1
         res = self.StockLocation.search(
             [
@@ -214,6 +221,7 @@ class TestStockLocation(SavepointCase):
         # 3
         self.loc_lvl_1_1_1.product_restriction = "same"
         self.loc_lvl_1_1_2.product_restriction = "same"
+        (self.loc_lvl_1_1_1 | self.loc_lvl_1_1_2).flush_recordset()
         # 4
         res = self.StockLocation.search(
             [
@@ -243,8 +251,10 @@ class TestStockLocation(SavepointCase):
             3. Retriction message
         """
         self.loc_lvl_1_1_1.product_restriction = "any"
+        self.loc_lvl_1_1_1.flush_recordset()
         self.assertFalse(self.loc_lvl_1_1_1.has_restriction_violation)
         self.assertFalse(self.loc_lvl_1_1_1.restriction_violation_message)
         self.loc_lvl_1_1_1.product_restriction = "same"
+        self.loc_lvl_1_1_1.flush_recordset()
         self.assertTrue(self.loc_lvl_1_1_1.has_restriction_violation)
         self.assertTrue(self.loc_lvl_1_1_1.restriction_violation_message)

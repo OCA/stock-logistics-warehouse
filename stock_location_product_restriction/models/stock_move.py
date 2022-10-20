@@ -1,9 +1,9 @@
 # Copyright 2020 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from collections import defaultdict
 
-from odoo import _, api, models
+from odoo import _, models
 from odoo.exceptions import ValidationError
 
 
@@ -11,7 +11,6 @@ class StockMove(models.Model):
 
     _inherit = "stock.move"
 
-    @api.multi
     def _check_location_product_restriction(self):
         """
         Check if the move can be executed according to potential restriction
@@ -39,11 +38,13 @@ class StockMove(models.Model):
                 products = ProductProduct.browse(list(product_ids))
                 error_msgs.append(
                     _(
-                        "The location %s can only contain items of the same "
+                        "The location {location} can only contain items of the same "
                         "product. You plan to move different products to "
-                        "this location. (%s)"
+                        "this location. ({products})"
+                    ).format(
+                        location=location.name,
+                        products=", ".join(products.mapped("name")),
                     )
-                    % (location.name, ", ".join(products.mapped("name")))
                 )
 
         # check dest locations by taking into account product already into the
@@ -75,22 +76,20 @@ class StockMove(models.Model):
                 to_move_products = ProductProduct.browse(list(product_ids_to_move))
                 error_msgs.append(
                     _(
-                        "You plan to move the product %s to the location %s "
+                        "You plan to move the product {product} to the location {location} "
                         "but the location must only contain items of same "
                         "product and already contains items of other "
                         "product(s) "
-                        "(%s)."
-                    )
-                    % (
-                        " | ".join(to_move_products.mapped("name")),
-                        location.name,
-                        " | ".join(existing_products.mapped("name")),
+                        "({existing_products})."
+                    ).format(
+                        product=" | ".join(to_move_products.mapped("name")),
+                        location=location.name,
+                        existing_products=" | ".join(existing_products.mapped("name")),
                     )
                 )
         if error_msgs:
             raise ValidationError("\n".join(error_msgs))
 
-    @api.multi
-    def action_done(self):
+    def _action_done(self, cancel_backorder=False):
         self._check_location_product_restriction()
-        return super(StockMove, self).action_done()
+        return super()._action_done(cancel_backorder=cancel_backorder)

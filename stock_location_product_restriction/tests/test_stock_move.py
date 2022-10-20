@@ -1,15 +1,15 @@
 # Copyright 2020 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from collections import namedtuple
 
 from odoo.exceptions import ValidationError
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 ShortMoveInfo = namedtuple("ShortMoveInfo", ["product", "location_dest", "qty"])
 
 
-class TestStockMove(SavepointCase):
+class TestStockMove(TransactionCase):
     @classmethod
     def setUpClass(cls):
         """
@@ -23,11 +23,16 @@ class TestStockMove(SavepointCase):
                 * 50 product_1 in location_1
                 * 0 product_2 en stock
         """
-        super(TestStockMove, cls).setUpClass()
-        cls.uom_unit = cls.env.ref("product.product_uom_unit")
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.uom_unit = cls.env.ref("uom.product_uom_unit")
         Product = cls.env["product.product"]
-        cls.product_1 = Product.create({"name": "Wood", "uom_id": cls.uom_unit.id})
-        cls.product_2 = Product.create({"name": "Stone", "uom_id": cls.uom_unit.id})
+        cls.product_1 = Product.create(
+            {"name": "Wood", "type": "product", "uom_id": cls.uom_unit.id}
+        )
+        cls.product_2 = Product.create(
+            {"name": "Stone", "type": "product", "uom_id": cls.uom_unit.id}
+        )
 
         # Warehouses
         cls.warehouse_1 = cls.env["stock.warehouse"].create(
@@ -73,14 +78,13 @@ class TestStockMove(SavepointCase):
 
     @classmethod
     def _change_product_qty(cls, product, location, qty):
-        inventory_wizard = cls.env["stock.change.product.qty"].create(
+        cls.env["stock.quant"].with_context(inventory_mode=True).create(
             {
                 "product_id": product.id,
-                "new_quantity": qty,
+                "inventory_quantity": qty,
                 "location_id": location.id,
             }
-        )
-        inventory_wizard.change_product_qty()
+        )._apply_inventory()
 
     def _get_products_in_location(self, location):
         return (
@@ -115,10 +119,10 @@ class TestStockMove(SavepointCase):
         return picking_in
 
     def _process_picking(self, picking):
-        picking.force_assign()
-        for pack in picking.pack_operation_product_ids:
-            pack.qty_done = pack.product_qty
-        picking.do_new_transfer()
+        picking.action_assign()
+        for line in picking.move_line_ids:
+            line.qty_done = line.reserved_qty
+        picking.button_validate()
 
     def test_00(self):
         """
@@ -153,6 +157,7 @@ class TestStockMove(SavepointCase):
             self.product_1, self._get_products_in_location(self.location_1)
         )
         self.location_1.specific_product_restriction = "same"
+        self.location_1.flush_recordset()
         with self.assertRaises(ValidationError):
             self._change_product_qty(self.product_2, self.location_1, 10)
 
@@ -198,6 +203,7 @@ class TestStockMove(SavepointCase):
             ValidationError
         """
         self.location_2.specific_product_restriction = "same"
+        self.location_2.flush_recordset()
         picking = self._create_and_assign_picking(
             [
                 ShortMoveInfo(
@@ -270,6 +276,7 @@ class TestStockMove(SavepointCase):
             self._get_products_in_location(self.location_1),
         )
         self.location_1.specific_product_restriction = "same"
+        self.location_1.invalidate_recordset()
         picking = self._create_and_assign_picking(
             [
                 ShortMoveInfo(

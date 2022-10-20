@@ -1,5 +1,5 @@
 # Copyright 2020 ACSONE SA/NV
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
 from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
@@ -10,8 +10,7 @@ class StockLocation(models.Model):
     _inherit = "stock.location"
 
     product_restriction = fields.Selection(
-        string="Product restriction",
-        selection="_selection_product_restriction",
+        selection=lambda self: self._selection_product_restriction(),
         help="If 'Same product' is selected the system will prevent to put "
         "items of different products into the same location.",
         index=True,
@@ -19,30 +18,33 @@ class StockLocation(models.Model):
         compute="_compute_product_restriction",
         store=True,
         default="any",
+        recursive=True,
     )
 
     specific_product_restriction = fields.Selection(
-        string="Specific product restriction",
-        selection="_selection_product_restriction",
+        selection=lambda self: self._selection_product_restriction(),
         help="If specified the restriction specified will apply to "
         "the current location and all its children",
         default=False,
     )
 
     parent_product_restriction = fields.Selection(
-        selection="_selection_product_restriction",
+        string="Parent Location Product Restriction",
         store=True,
         readonly=True,
         related="location_id.product_restriction",
+        recursive=True,
     )
 
     has_restriction_violation = fields.Boolean(
         compute="_compute_restriction_violation",
         search="_search_has_restriction_violation",
+        recursive=True,
     )
 
     restriction_violation_message = fields.Char(
-        compute="_compute_restriction_violation"
+        compute="_compute_restriction_violation",
+        recursive=True,
     )
 
     @api.model
@@ -68,11 +70,6 @@ class StockLocation(models.Model):
     @api.depends("product_restriction")
     def _compute_restriction_violation(self):
         records = self
-        if self.env.in_onchange:
-            records = self._origin
-        if not records:
-            # case where the compute is called from the create form
-            return
         ProductProduct = self.env["product.product"]
         SQL = """
            SELECT
@@ -93,8 +90,6 @@ class StockLocation(models.Model):
         product_ids_by_location_id = dict(self.env.cr.fetchall())
         for record in self:
             record_id = record.id
-            if self.env.in_onchange:
-                record_id = self._origin.id
             has_restriction_violation = False
             restriction_violation_message = False
             product_ids = product_ids_by_location_id.get(record_id)
@@ -103,8 +98,8 @@ class StockLocation(models.Model):
                 has_restriction_violation = True
                 restriction_violation_message = _(
                     "This location should only contain items of the same "
-                    "product but it contains items of products %s"
-                ) % " | ".join(products.mapped("name"))
+                    "product but it contains items of products {products}"
+                ).format(products=" | ".join(products.mapped("name")))
             record.has_restriction_violation = has_restriction_violation
             record.restriction_violation_message = restriction_violation_message
 
@@ -112,9 +107,8 @@ class StockLocation(models.Model):
         search_has_violation = (
             # has_restriction_violation != False
             (operator in NEGATIVE_TERM_OPERATORS and not value)
-            or
             # has_restriction_violation = True
-            (operator not in NEGATIVE_TERM_OPERATORS and value)
+            or (operator not in NEGATIVE_TERM_OPERATORS and value)
         )
         SQL = """
             SELECT
