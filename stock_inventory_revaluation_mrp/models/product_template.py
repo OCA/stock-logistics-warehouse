@@ -1,7 +1,7 @@
 # Copyright 2021 - Open Source Integrators
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
 from odoo import fields, models
+from odoo.tools.float_utils import float_compare
 
 
 class ProductTemplate(models.Model):
@@ -32,6 +32,7 @@ class ProductProduct(models.Model):
         return cost
 
     def calculate_proposed_cost(self):
+        DecimalPrecision = self.env["decimal.precision"]
         products = self.filtered(lambda x: x.bom_ids and not x.proposed_cost_ignore_bom)
         for product in products:
             bom = self.env["mrp.bom"]._bom_find(product=product)
@@ -54,8 +55,12 @@ class ProductProduct(models.Model):
             total_uom = bom.product_uom_id._compute_price(
                 total / bom.product_qty, product.uom_id
             )
-            # TODO: only set Propsoed Cost if different from actual cost!
-            product.proposed_cost = total_uom
+            # Set proposed cost if different from the actual cost
+            rounding = DecimalPrecision.precision_get("Product Price")
+            has_proposed_cost = float_compare(
+                product.standard_price, total_uom, precision_rounding=rounding
+            )
+            product.proposed_cost = total_uom if has_proposed_cost else 0.0
 
     def _get_bom_structure_products(self):
         BOM = self.env["mrp.bom"]
