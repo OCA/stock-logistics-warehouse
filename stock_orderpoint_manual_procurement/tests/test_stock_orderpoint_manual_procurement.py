@@ -147,11 +147,11 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         # As per route configuration, it will create Purchase order
         # Assert that Procurement is created with the desired quantity
         purchase = self.purchase_model.search([("origin", "ilike", self.reorder.name)])
-        self.assertEquals(len(purchase), 1)
+        self.assertEqual(len(purchase), 1)
         purchase_line = self.purchase_line_model.search(
             [("orderpoint_id", "=", self.reorder.id), ("order_id", "=", purchase.id)]
         )
-        self.assertEquals(len(purchase_line), 1)
+        self.assertEqual(len(purchase_line), 1)
         self.reorder._compute_procure_recommended()
         self.assertNotEqual(
             self.reorder.procure_recommended_qty, purchase_line.product_qty
@@ -167,9 +167,9 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         purchase_line = self.purchase_line_model.search(
             [("orderpoint_id", "=", self.reorder.id), ("order_id", "=", purchase.id)]
         )
-        self.assertEquals(len(purchase_line), 1)
+        self.assertEqual(len(purchase_line), 1)
         pol_date = fields.Date.from_string(purchase_line.date_planned)
-        self.assertEquals(pol_date, manual_date)
+        self.assertEqual(pol_date, manual_date)
 
     def test_compute_procure_recommended_with_newid(self):
         """'_compute_procure_recommended' method uses '_quantity_in_progress'
