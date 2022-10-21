@@ -998,6 +998,12 @@ msgstr "拣货策略必须等于订单"
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
+msgid "There should be at least one request item for confirming the order."
+msgstr ""
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
 msgid "This action only works in the context of products"
 msgstr "此操作仅在产品范围内有效"
 

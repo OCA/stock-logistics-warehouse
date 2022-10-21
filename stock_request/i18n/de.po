@@ -1014,6 +1014,12 @@ msgstr ""
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
+msgid "There should be at least one request item for confirming the order."
+msgstr ""
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
 msgid "This action only works in the context of products"
 msgstr "Diese Aktion kann nur im Kontext von Produkten ausgeführt werden"
 
