@@ -132,6 +132,9 @@ class StockRequestOrder(models.Model):
     stock_request_count = fields.Integer(
         string="Stock requests", compute="_compute_stock_request_count", readonly=True
     )
+    stock_request_confirm_user_permission = fields.Selection(
+        related="company_id.stock_request_confirm_user_permission"
+    )
 
     _sql_constraints = [
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")

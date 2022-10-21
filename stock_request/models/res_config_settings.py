@@ -33,6 +33,10 @@ class ResConfigSettings(models.TransientModel):
 
     module_stock_request_mrp = fields.Boolean(string="Stock Request for Manufacturing")
 
+    stock_request_confirm_user_permission = fields.Selection(
+        related="company_id.stock_request_confirm_user_permission", readonly=False
+    )
+
     # Dependencies
     @api.onchange("stock_request_allow_virtual_loc")
     def _onchange_stock_request_allow_virtual_loc(self):
