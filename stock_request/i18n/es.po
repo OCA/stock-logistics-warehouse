@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2021-05-26 18:47+0000\n"
+"POT-Creation-Date: 2022-10-21 09:10+0000\n"
+"PO-Revision-Date: 2022-10-21 11:11+0200\n"
 "Last-Translator: JrAdhoc <jr@adhoc.com.ar>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:0
@@ -50,7 +50,7 @@ msgstr "Actividades"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_exception_decoration
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Actividad Excepción Decoración"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_state
@@ -64,7 +64,7 @@ msgstr "Estado de Actividad"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_type_icon
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icono de tipo de actividad"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
@@ -181,7 +181,6 @@ msgstr "Creado el"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
-#, fuzzy
 msgid "Current requests"
 msgstr "Solicitudes de existencias"
 
@@ -272,7 +271,7 @@ msgstr "La fecha prevista debe ser la misma que la del pedido"
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Finished"
-msgstr ""
+msgstr "Terminado"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_follower_ids
@@ -300,7 +299,7 @@ msgstr "Seguidores (Socios)"
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_type_icon
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icono de Font Awesome ej. fa-tasks"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
@@ -336,14 +335,14 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_exception_icon
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icono"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__activity_exception_icon
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_exception_icon
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icono para indicar una actividad de excepción."
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_needaction
@@ -455,7 +454,7 @@ msgstr "Adjunto Principal"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Manufacturing"
-msgstr ""
+msgstr "Orden de producción"
 
 #. module: stock_request
 #: model:ir.ui.menu,name:stock_request.menu_stock_request_master_data
@@ -494,7 +493,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__my_activity_date_deadline
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Mi fecha de límite de actividad"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__name
@@ -540,16 +539,15 @@ msgstr "Numero de Acciones"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_error_counter
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_error_counter
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_error_counter
-#, fuzzy
 msgid "Number of errors"
-msgstr "Número de error"
+msgstr "Número de errores"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_needaction_counter
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_needaction_counter
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr "Número de mensajes que requieren una acción."
+msgstr "Número de mensajes que requieren una acción"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_has_error_counter
@@ -644,7 +642,7 @@ msgstr "Compras"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_cancelled
 msgid "Qty Cancelled"
-msgstr ""
+msgstr "Cant. cancelada"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__qty_done
@@ -665,7 +663,7 @@ msgstr "Cantidad"
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_cancelled
 msgid "Quantity cancelled"
-msgstr ""
+msgstr "Cantidad cancelada"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_done
@@ -784,9 +782,8 @@ msgstr "Rutas"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_sms_error
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_sms_error
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_sms_error
-#, fuzzy
 msgid "SMS Delivery error"
-msgstr "Mensaje de Entrega de error"
+msgstr "Error de entrega de SMS"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
@@ -942,7 +939,6 @@ msgstr "Integración de solicitudes de existencias con tarjetas Kanbans"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
-#, fuzzy
 msgid "Stock Requests Order Search"
 msgstr "Buscar solicitudes de existencias"
 
@@ -1009,6 +1005,12 @@ msgstr "La política de albaranes debe coincidir"
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
+msgid "There should be at least one request item for confirming the order."
+msgstr "Debe haber al menos un elemento de solicitud para confirmar el pedido."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
 msgid "This action only works in the context of products"
 msgstr "Esta acción solo funciona en el contexto de productos"
 
@@ -1028,7 +1030,7 @@ msgstr "Transferencias"
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__activity_exception_decoration
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo de actividad de excepción registrada."
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_order.py:0
@@ -1187,27 +1189,3 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
-
-#~ msgid "Archived"
-#~ msgstr "Archivado"
-
-#~ msgid "If checked new messages require your attention."
-#~ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
-
-#~ msgid "Overdue"
-#~ msgstr "Atrasado"
-
-#~ msgid "Planned"
-#~ msgstr "Planificado"
-
-#~ msgid "Today"
-#~ msgstr "Hoy"
-
-#~ msgid "Packing Operation"
-#~ msgstr "Operación de empaquetado"
-
-#~ msgid "Procurement Rule"
-#~ msgstr "Regla de abastecimiento"
-
-#~ msgid "Orders"
-#~ msgstr "Pedidos"
