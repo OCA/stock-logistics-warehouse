@@ -1,52 +1,26 @@
 # Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2022 Tecnativa - Pedro M. Baeza
+# Copyright 2022 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import Form
+
+from odoo.addons.stock_request.tests.test_stock_request import TestStockRequest
 
 
-class TestStockRequestMrp(common.TransactionCase):
+class TestStockRequestMrp(TestStockRequest):
     def setUp(self):
         super().setUp()
-
-        # common models
-        self.stock_request = self.env["stock.request"]
-
-        # refs
-        self.stock_request_user_group = self.env.ref(
-            "stock_request.group_stock_request_user"
-        )
-        self.stock_request_manager_group = self.env.ref(
-            "stock_request.group_stock_request_manager"
-        )
         self.mrp_user_group = self.env.ref("mrp.group_mrp_user")
-        self.main_company = self.env.ref("base.main_company")
-        self.warehouse = self.env.ref("stock.warehouse0")
-        self.categ_unit = self.env.ref("uom.product_uom_categ_unit")
-
         # common data
-        self.company_2 = self.env["res.company"].create({"name": "Comp2"})
-        self.wh2 = self.env["stock.warehouse"].search(
-            [("company_id", "=", self.company_2.id)], limit=1
-        )
-        self.stock_request_user = self._create_user(
-            "stock_request_user",
-            [self.stock_request_user_group.id, self.mrp_user_group.id],
-            [self.main_company.id, self.company_2.id],
-        )
-        self.stock_request_manager = self._create_user(
-            "stock_request_manager",
-            [self.stock_request_manager_group.id, self.mrp_user_group.id],
-            [self.main_company.id, self.company_2.id],
-        )
+        self.stock_request_user.write({"groups_id": [(4, self.mrp_user_group.id)]})
+        self.stock_request_manager.write({"groups_id": [(4, self.mrp_user_group.id)]})
         self.route_manufacture = self.warehouse.manufacture_pull_id.route_id
-        self.product = self._create_product(
-            "SH", "Shoes", False, self.route_manufacture.ids
-        )
-
-        self.raw_1 = self._create_product("SL", "Sole", False, [])
+        self.product.write({"route_ids": [(6, 0, self.route_manufacture.ids)]})
+        self.raw_1 = self._create_product("SL", "Sole", False)
         self._update_qty_in_location(self.warehouse.lot_stock_id, self.raw_1, 10)
-        self.raw_2 = self._create_product("LC", "Lace", False, [])
+        self.raw_2 = self._create_product("LC", "Lace", False)
         self._update_qty_in_location(self.warehouse.lot_stock_id, self.raw_2, 10)
 
         self.bom = self._create_mrp_bom(self.product, [self.raw_1, self.raw_2])
@@ -63,34 +37,6 @@ class TestStockRequestMrp(common.TransactionCase):
 
     def _update_qty_in_location(self, location, product, quantity):
         self.env["stock.quant"]._update_available_quantity(product, location, quantity)
-
-    def _create_user(self, name, group_ids, company_ids):
-        return (
-            self.env["res.users"]
-            .with_context(no_reset_password=True)
-            .create(
-                {
-                    "name": name,
-                    "password": "demo",
-                    "login": name,
-                    "email": str(name) + "@test.com",
-                    "groups_id": [(6, 0, group_ids)],
-                    "company_ids": [(6, 0, company_ids)],
-                }
-            )
-        )
-
-    def _create_product(self, default_code, name, company_id, route_ids):
-        return self.env["product.product"].create(
-            {
-                "name": name,
-                "default_code": default_code,
-                "uom_id": self.env.ref("uom.product_uom_unit").id,
-                "company_id": company_id,
-                "type": "product",
-                "route_ids": [(6, 0, route_ids)],
-            }
-        )
 
     def _create_mrp_bom(self, product_id, raw_materials):
         bom = self.env["mrp.bom"].create(
@@ -109,37 +55,29 @@ class TestStockRequestMrp(common.TransactionCase):
 
         return bom
 
+    def _produce(self, mo, qty=0.0):
+        mo_form = Form(mo)
+        mo_form.qty_producing = qty
+        mo_form.save()
+
+    def _create_stock_request(self, user, products):
+        order_form = Form(
+            self.request_order.with_user(user).with_context(
+                default_company_id=self.main_company.id,
+                default_warehouse_id=self.warehouse.id,
+                default_location_id=self.warehouse.lot_stock_id,
+            )
+        )
+        order_form.expected_date = fields.Datetime.now()
+        for product_data in products:
+            with order_form.stock_request_ids.new() as item_form:
+                item_form.product_id = product_data[0]
+                item_form.product_uom_qty = product_data[1]
+        return order_form.save()
+
     def test_create_request_01(self):
         """Single Stock request with buy rule"""
-        expected_date = fields.Datetime.now()
-        vals = {
-            "company_id": self.main_company.id,
-            "warehouse_id": self.warehouse.id,
-            "location_id": self.warehouse.lot_stock_id.id,
-            "expected_date": expected_date,
-            "stock_request_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
-                        "product_uom_qty": 5.0,
-                        "company_id": self.main_company.id,
-                        "warehouse_id": self.warehouse.id,
-                        "location_id": self.warehouse.lot_stock_id.id,
-                        "expected_date": expected_date,
-                    },
-                )
-            ],
-        }
-
-        order = (
-            self.env["stock.request.order"]
-            .with_user(self.stock_request_user)
-            .create(vals)
-        )
-
+        order = self._create_stock_request(self.stock_request_user, [(self.product, 5)])
         order.action_confirm()
         self.assertEqual(order.state, "open")
         self.assertEqual(order.stock_request_ids.state, "open")
@@ -167,31 +105,7 @@ class TestStockRequestMrp(common.TransactionCase):
         self.assertFalse(order2.production_ids)
 
     def test_view_actions(self):
-        expected_date = fields.Datetime.now()
-        vals = {
-            "company_id": self.main_company.id,
-            "warehouse_id": self.warehouse.id,
-            "location_id": self.warehouse.lot_stock_id.id,
-            "expected_date": expected_date,
-            "stock_request_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
-                        "product_uom_qty": 5.0,
-                        "company_id": self.main_company.id,
-                        "warehouse_id": self.warehouse.id,
-                        "location_id": self.warehouse.lot_stock_id.id,
-                        "expected_date": expected_date,
-                    },
-                )
-            ],
-        }
-
-        order = self.env["stock.request.order"].create(vals)
-
+        order = self._create_stock_request(self.stock_request_user, [(self.product, 5)])
         order.action_confirm()
 
         stock_request = order.stock_request_ids
