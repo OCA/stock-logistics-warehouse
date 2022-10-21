@@ -43,6 +43,11 @@ class StockRequest(models.Model):
                 )
             )
 
+    def action_cancel(self):
+        res = super().action_cancel()
+        self.mapped("production_ids").action_cancel()
+        return res
+
     def action_view_mrp_production(self):
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "mrp.mrp_production_action"
