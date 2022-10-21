@@ -10,7 +10,9 @@ class StockRequestOrder(models.Model):
     _has_cancel_reason = "optional"  # ["no", "optional", "required"]
 
     def action_cancel(self):
-        if not self.filtered("cancel_confirm"):
+        if not self.filtered("cancel_confirm") and not self.env.context.get(
+            "bypass_confirm_wizard"
+        ):
             return self.open_cancel_confirm_wizard()
         return super().action_cancel()
 
