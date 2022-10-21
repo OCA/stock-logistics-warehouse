@@ -1,4 +1,5 @@
 # Copyright 2017 ForgeFlow S.L.
+# Copyright 2022 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
 from collections import Counter
@@ -11,11 +12,9 @@ from odoo.tests import common, new_test_user
 class TestStockRequest(common.TransactionCase):
     def setUp(self):
         super().setUp()
-
         # common models
         self.stock_request = self.env["stock.request"]
         self.request_order = self.env["stock.request.order"]
-
         # refs
         self.stock_request_user_group = self.env.ref(
             "stock_request.group_stock_request_user"
@@ -24,7 +23,6 @@ class TestStockRequest(common.TransactionCase):
         self.warehouse = self.env.ref("stock.warehouse0")
         self.categ_unit = self.env.ref("uom.product_uom_categ_unit")
         self.virtual_loc = self.env.ref("stock.stock_location_customers")
-
         # common data
         self.company_2 = self.env["res.company"].create(
             {"name": "Comp2", "parent_id": self.main_company.id}
@@ -61,45 +59,22 @@ class TestStockRequest(common.TransactionCase):
         self.product_company_2 = self._create_product(
             "SH_2", "Shoes", self.company_2.id
         )
-
-        self.ressuply_loc = self.env["stock.location"].create(
-            {
-                "name": "Ressuply",
-                "location_id": self.warehouse.view_location_id.id,
-                "usage": "internal",
-                "company_id": self.main_company.id,
-            }
+        self.ressuply_loc = self._create_location(
+            name="Ressuply",
+            location_id=self.warehouse.view_location_id.id,
+            company_id=self.main_company.id,
         )
-
-        self.ressuply_loc_2 = self.env["stock.location"].create(
-            {
-                "name": "Ressuply",
-                "location_id": self.wh2.view_location_id.id,
-                "usage": "internal",
-                "company_id": self.company_2.id,
-            }
+        self.ressuply_loc_2 = self._create_location(
+            name="Ressuply",
+            location_id=self.wh2.view_location_id.id,
+            company_id=self.company_2.id,
         )
-
-        self.route = self.env["stock.location.route"].create(
-            {
-                "name": "Transfer",
-                "product_categ_selectable": False,
-                "product_selectable": True,
-                "company_id": self.main_company.id,
-                "sequence": 10,
-            }
+        self.route = self._create_location_route(
+            name="Transfer", company_id=self.main_company.id
         )
-
-        self.route_2 = self.env["stock.location.route"].create(
-            {
-                "name": "Transfer",
-                "product_categ_selectable": False,
-                "product_selectable": True,
-                "company_id": self.company_2.id,
-                "sequence": 10,
-            }
+        self.route_2 = self._create_location_route(
+            name="Transfer", company_id=self.company_2.id
         )
-
         self.uom_dozen = self.env["uom.uom"].create(
             {
                 "name": "Test-DozenA",
@@ -109,7 +84,6 @@ class TestStockRequest(common.TransactionCase):
                 "rounding": 0.001,
             }
         )
-
         self.env["stock.rule"].create(
             {
                 "name": "Transfer",
@@ -123,7 +97,6 @@ class TestStockRequest(common.TransactionCase):
                 "company_id": self.main_company.id,
             }
         )
-
         self.env["stock.rule"].create(
             {
                 "name": "Transfer",
@@ -137,7 +110,6 @@ class TestStockRequest(common.TransactionCase):
                 "company_id": self.company_2.id,
             }
         )
-
         self.env["ir.config_parameter"].sudo().set_param(
             "stock.no_auto_scheduler", "True"
         )
@@ -172,6 +144,19 @@ class TestStockRequest(common.TransactionCase):
 
     def _create_product_attribute(self, name):
         return self.env["product.attribute"].create({"name": name})
+
+    def _create_location(self, **vals):
+        return self.env["stock.location"].create(dict(usage="internal", **vals))
+
+    def _create_location_route(self, **vals):
+        return self.env["stock.location.route"].create(
+            dict(
+                product_categ_selectable=False,
+                product_selectable=True,
+                sequence=10,
+                **vals
+            )
+        )
 
 
 class TestStockRequestBase(TestStockRequest):
