@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_move_common_dest
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_move_common_dest
+#: model:ir.model.fields,help:stock_move_common_dest.field_stock_move__common_dest_move_ids
+msgid ""
+"All the stock moves having a chained destination move sharing the same "
+"picking as the actual move's destination move"
+msgstr ""
+
+#. module: stock_move_common_dest
+#: model:ir.model.fields,field_description:stock_move_common_dest.field_stock_move__common_dest_move_ids
+msgid "Common Dest Move"
+msgstr ""
+
+#. module: stock_move_common_dest
+#: model_terms:ir.ui.view,arch_db:stock_move_common_dest.view_move_form_inherit
+msgid "Common destination moves"
+msgstr ""
+
+#. module: stock_move_common_dest
+#: model:ir.model.fields,field_description:stock_move_common_dest.field_stock_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_move_common_dest
+#: model:ir.model.fields,field_description:stock_move_common_dest.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_move_common_dest
+#: model:ir.model.fields,field_description:stock_move_common_dest.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_move_common_dest
+#: model:ir.model,name:stock_move_common_dest.model_stock_move
+msgid "Stock Move"
+msgstr ""
