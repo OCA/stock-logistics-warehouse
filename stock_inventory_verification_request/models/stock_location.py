@@ -14,7 +14,6 @@ class StockLocation(models.Model):
         inverse_name="location_id",
     )
 
-    @api.multi
     def action_open_svr(self):
         """Open the corresponding Slot Verification Request directly from the
         Location."""

@@ -21,7 +21,6 @@ class StockInventory(models.Model):
         help="This Inventory adjustment was created from the specified SVR.",
     )
 
-    @api.multi
     def action_request_verification(self):
         self.ensure_one()
         self.requested_verification = True
@@ -51,7 +50,6 @@ class StockInventoryLine(models.Model):
         string="Slot Verification Request",
     )
 
-    @api.multi
     def action_open_svr(self):
         """Open the corresponding Slot Verification Request directly from the
         Inventory Lines."""

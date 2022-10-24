@@ -105,8 +105,7 @@
     <record id="action_inv_adj_line_tree" model="ir.actions.act_window">
         <field name="name">Open Inventory Adjustment Lines</field>
         <field name="res_model">stock.inventory.line</field>
-        <field name="view_type">form</field>
-        <field name="view_id" ref="stock.stock_inventory_line_tree"/>
+        <field name="view_id" ref="stock.stock_inventory_line_tree" />
     </record>
 
 </odoo>

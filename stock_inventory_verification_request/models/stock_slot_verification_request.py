@@ -24,17 +24,14 @@ class SlotVerificationRequest(models.Model):
             )
         return super(SlotVerificationRequest, self).create(vals)
 
-    @api.multi
     def _compute_involved_move_count(self):
         for rec in self:
             rec.involved_move_count = len(rec.involved_move_ids)
 
-    @api.multi
     def _compute_involved_inv_line_count(self):
         for rec in self:
             rec.involved_inv_line_count = len(rec.involved_inv_line_ids)
 
-    @api.multi
     def _compute_created_inventory_count(self):
         for rec in self:
             rec.created_inventory_count = len(rec.created_inventory_ids)
@@ -112,7 +109,6 @@ class SlotVerificationRequest(models.Model):
     )
     created_inventory_count = fields.Integer(compute="_compute_created_inventory_count")
 
-    @api.multi
     def _get_involved_moves_domain(self):
         domain = [
             "|",
@@ -123,14 +119,12 @@ class SlotVerificationRequest(models.Model):
             domain.append(("product_id", "=", self.product_id.id))
         return domain
 
-    @api.multi
     def _get_involved_lines_domain(self):
         domain = [("location_id", "=", self.location_id.id)]
         if self.product_id:
             domain.append(("product_id", "=", self.product_id.id))
         return domain
 
-    @api.multi
     def _get_involved_lines_and_locations(self):
         involved_moves = self.env["stock.move"].search(
             self._get_involved_moves_domain()
@@ -140,7 +134,6 @@ class SlotVerificationRequest(models.Model):
         )
         return involved_moves, involved_lines
 
-    @api.multi
     def action_confirm(self):
         self.write({"state": "open"})
         for rec in self:
@@ -149,17 +142,14 @@ class SlotVerificationRequest(models.Model):
             rec.involved_inv_line_ids = involved_lines
         return True
 
-    @api.multi
     def action_cancel(self):
         self.write({"state": "cancelled"})
         return True
 
-    @api.multi
     def action_solved(self):
         self.write({"state": "done"})
         return True
 
-    @api.multi
     def action_view_moves(self):
         action = self.env.ref("stock.stock_move_action")
         result = action.read()[0]
@@ -173,7 +163,6 @@ class SlotVerificationRequest(models.Model):
             result["res_id"] = moves_ids and moves_ids[0] or False
         return result
 
-    @api.multi
     def action_view_inv_lines(self):
         action = self.env.ref(
             "stock_inventory_verification_request.action_inv_adj_line_tree"
@@ -216,7 +205,6 @@ class SlotVerificationRequest(models.Model):
         result["res_id"] = inventory.id
         return result
 
-    @api.multi
     def action_view_inventories(self):
         action = self.env.ref("stock.action_inventory_form")
         result = action.read()[0]

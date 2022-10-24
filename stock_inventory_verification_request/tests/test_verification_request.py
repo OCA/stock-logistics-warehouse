@@ -22,10 +22,10 @@ class TestStockVerificationRequest(common.SavepointCase):
         cls.obj_move = cls.env["stock.move"]
 
         cls.product1 = cls.obj_product.create(
-            {"name": "Test Product 1", "type": "product", "default_code": "PROD1",}
+            {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
         )
         cls.product2 = cls.obj_product.create(
-            {"name": "Test Product 2", "type": "product", "default_code": "PROD2",}
+            {"name": "Test Product 2", "type": "product", "default_code": "PROD2"}
         )
         cls.test_loc = cls.obj_location.create(
             {
@@ -126,7 +126,7 @@ class TestStockVerificationRequest(common.SavepointCase):
             "Inventory Adjustment not changing to Pending to " "Approve.",
         )
         previous_count = len(self.obj_svr.search([]))
-        inventory.sudo(self.user).action_request_verification()
+        inventory.with_user(self.user).action_request_verification()
         current_count = len(self.obj_svr.search([]))
         self.assertEqual(
             current_count, previous_count + 2, "Slot Verification Request not created.",
@@ -149,16 +149,16 @@ class TestStockVerificationRequest(common.SavepointCase):
             "Slot Verification Request not created from scratch.",
         )
         with self.assertRaises(AccessError):
-            test_svr.sudo(self.user).action_confirm()
-        test_svr.sudo(self.manager).action_confirm()
+            test_svr.with_user(self.user).action_confirm()
+        test_svr.with_user(self.manager).action_confirm()
         self.assertEqual(
             test_svr.state, "open", "Slot Verification Request not confirmed properly.",
         )
-        test_svr.sudo(self.manager).action_solved()
+        test_svr.with_user(self.manager).action_solved()
         self.assertEqual(
             test_svr.state, "done", "Slot Verification Request not marked as solved.",
         )
-        test_svr.sudo(self.manager).action_cancel()
+        test_svr.with_user(self.manager).action_cancel()
         self.assertEqual(
             test_svr.state,
             "cancelled",
