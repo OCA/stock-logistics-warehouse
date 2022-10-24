@@ -236,8 +236,6 @@ class StockMoveLocationWizard(models.TransientModel):
             moves_to_unreserve = move_lines.mapped("move_id")
             # Unreserve in old location
             moves_to_unreserve._do_unreserve()
-            # Change location in move with the new one
-            moves_to_unreserve.write({"location_id": line.destination_location_id.id})
             moves_to_reassign |= moves_to_unreserve
         return moves_to_reassign
 
