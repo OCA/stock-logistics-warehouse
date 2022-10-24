@@ -6,46 +6,48 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-10-24 12:43+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_free_quantity
 #: model_terms:ir.ui.view,arch_db:stock_free_quantity.product_normal_form_view
 #: model_terms:ir.ui.view,arch_db:stock_free_quantity.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Free</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Libera</span>"
 
 #. module: stock_free_quantity
 #: model:ir.model.fields,field_description:stock_free_quantity.field_product_template__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_free_quantity
 #: model:ir.model.fields,field_description:stock_free_quantity.field_product_template__free_qty
 msgid "Free Quantity"
-msgstr ""
+msgstr "Quantità libera"
 
 #. module: stock_free_quantity
 #: model_terms:ir.ui.view,arch_db:stock_free_quantity.product_template_kanban_free_qty_view
 msgid "Free:"
-msgstr ""
+msgstr "Libera:"
 
 #. module: stock_free_quantity
 #: model:ir.model.fields,field_description:stock_free_quantity.field_product_template__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_free_quantity
 #: model:ir.model.fields,field_description:stock_free_quantity.field_product_template____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_free_quantity
 #: model:ir.model,name:stock_free_quantity.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Modello prodotto"
