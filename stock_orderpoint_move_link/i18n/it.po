@@ -6,56 +6,58 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-10-24 12:43+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_orderpoint_move_link
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_move__display_name
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_rule__display_name
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_warehouse_orderpoint__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_orderpoint_move_link
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_move__id
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_rule__id
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_warehouse_orderpoint__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_orderpoint_move_link
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_move____last_update
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_rule____last_update
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_warehouse_orderpoint____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_orderpoint_move_link
 #: model:ir.model.fields,field_description:stock_orderpoint_move_link.field_stock_move__orderpoint_ids
 msgid "Linked Reordering Rules"
-msgstr ""
+msgstr "Regole riordino collegate"
 
 #. module: stock_orderpoint_move_link
 #: model:ir.model,name:stock_orderpoint_move_link.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr ""
+msgstr "Regola giacenza minima"
 
 #. module: stock_orderpoint_move_link
 #: model:ir.model,name:stock_orderpoint_move_link.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_orderpoint_move_link
 #: model:ir.model,name:stock_orderpoint_move_link.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regola di magazzino"
 
 #. module: stock_orderpoint_move_link
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_move_link.view_warehouse_orderpoint_move_form
 msgid "Transfers"
-msgstr ""
+msgstr "Trasferimenti"
