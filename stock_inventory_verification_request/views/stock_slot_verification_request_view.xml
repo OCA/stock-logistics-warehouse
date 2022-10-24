@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2020 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
 
     <record id="stock_slot_verification_request_tree_view" model="ir.ui.view">
@@ -9,15 +8,15 @@
         <field name="model">stock.slot.verification.request</field>
         <field name="arch" type="xml">
             <tree string="Stock Slot Verification Request">
-                <field name="name"/>
-                <field name="location_id"/>
-                <field name="product_id"/>
-                <field name="create_uid" readonly="1"/>
-                <field name="create_date" readonly="1"/>
-                <field name="responsible_id"/>
-                <field name="inventory_id"/>
-                <field name="state"/>
-                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="name" />
+                <field name="location_id" />
+                <field name="product_id" />
+                <field name="create_uid" readonly="1" />
+                <field name="create_date" readonly="1" />
+                <field name="responsible_id" />
+                <field name="inventory_id" />
+                <field name="state" />
+                <field name="company_id" groups="base.group_multi_company" />
             </tree>
         </field>
     </record>
@@ -28,71 +27,110 @@
         <field name="arch" type="xml">
             <form string="Stock Slot Verification Request">
                 <header>
-                    <button name="action_create_inventory_adjustment"
-                            type="object" states="open" string="Create Inventory Adjustment"
-                            class="oe_highlight" />
-                    <button name="action_confirm"
-                            type="object" states="wait" string="Confirm"
-                            class="oe_highlight" />
-                    <button name="action_solved"
-                            type="object" states="open" string="Mark as Solved"/>
-                    <button name="action_cancel"
-                            type="object" states="open"
-                            string="Mark as Cancelled"/>
-                    <field name="state" widget="statusbar"
-                           statusbar_visible="wait,open,done"/>
+                    <button
+                        name="action_create_inventory_adjustment"
+                        type="object"
+                        states="open"
+                        string="Create Inventory Adjustment"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="action_confirm"
+                        type="object"
+                        states="wait"
+                        string="Confirm"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="action_solved"
+                        type="object"
+                        states="open"
+                        string="Mark as Solved"
+                    />
+                    <button
+                        name="action_cancel"
+                        type="object"
+                        states="open"
+                        string="Mark as Cancelled"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="wait,open,done"
+                    />
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box"
-                         attrs="{'invisible':
-                         [('state', 'not in', ('open'))]}">
-                          <button name="action_view_inventories"
-                                  type="object" class="oe_stat_button"
-                                  icon="fa-building-o">
-                              <field name="created_inventory_count"
-                                     widget="statinfo"
-                                     help="Inventory Adjustments created from this SVR."
-                                     modifiers="{'readonly': true}"
-                                     string="Inv. Adj. Created"/>
+                    <div
+                        class="oe_button_box"
+                        name="button_box"
+                        attrs="{'invisible':
+                         [('state', 'not in', ('open'))]}"
+                    >
+                          <button
+                            name="action_view_inventories"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-building-o"
+                        >
+                              <field
+                                name="created_inventory_count"
+                                widget="statinfo"
+                                help="Inventory Adjustments created from this SVR."
+                                modifiers="{'readonly': true}"
+                                string="Inv. Adj. Created"
+                            />
                           </button>
-                          <button name="action_view_moves"
-                                  type="object" class="oe_stat_button"
-                                  icon="fa-arrows-h">
-                              <field name="involved_move_count"
-                                     widget="statinfo"
-                                     help="Stock Moves related to the given location and product."
-                                     modifiers="{'readonly': true}"
-                                     string="Stock Moves Involved"/>
+                          <button
+                            name="action_view_moves"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-arrows-h"
+                        >
+                              <field
+                                name="involved_move_count"
+                                widget="statinfo"
+                                help="Stock Moves related to the given location and product."
+                                modifiers="{'readonly': true}"
+                                string="Stock Moves Involved"
+                            />
                           </button>
-                          <button name="action_view_inv_lines"
-                                  type="object" class="oe_stat_button"
-                                  icon="fa-list">
-                              <field name="involved_inv_line_count"
-                                     widget="statinfo"
-                                     help="Inventory Adjustment Lines related to the given location and product."
-                                     modifiers="{'readonly': true}"
-                                     string="Inv. Adj. Lines Involved"/>
+                          <button
+                            name="action_view_inv_lines"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-list"
+                        >
+                              <field
+                                name="involved_inv_line_count"
+                                widget="statinfo"
+                                help="Inventory Adjustment Lines related to the given location and product."
+                                modifiers="{'readonly': true}"
+                                string="Inv. Adj. Lines Involved"
+                            />
                           </button>
                     </div>
                     <div class="oe_title">
-                        <label string="Slot Verification Request" for="name"/>
+                        <label string="Slot Verification Request" for="name" />
                         <h1>
-                            <field name="name"/>
+                            <field name="name" />
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="location_id"/>
-                            <field name="product_id"/>
-                            <field name="company_id" groups="base.group_multi_company"/>
-                            <field name="create_uid" readonly="1"/>
-                            <field name="create_date" readonly="1"/>
-                            <field name="responsible_id"/>
-                            <field name="inventory_id"/>
-                            <field name="inventory_line_id"/>
+                            <field name="location_id" />
+                            <field name="product_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="create_uid" readonly="1" />
+                            <field name="create_date" readonly="1" />
+                            <field name="responsible_id" />
+                            <field name="inventory_id" />
+                            <field name="inventory_line_id" />
                         </group>
                         <group>
-                            <field name="notes"/>
+                            <field name="notes" />
                         </group>
                     </group>
                 </sheet>
@@ -109,36 +147,55 @@
         <field name="model">stock.slot.verification.request</field>
         <field name="arch" type="xml">
             <search string="Stock Slot Verification Request">
-                <field name="name"/>
-                <field name="location_id"/>
-                <field name="product_id"/>
-                <field name="company_id" groups="base.group_multi_company"/>
-                <field name="responsible_id"/>
-                <separator/>
-                <filter name="wait_state" string="Waiting Actions"
-                        domain="[('state','=', 'wait')]"/>
-                <filter name="open_state" string="In Progress"
-                        domain="[('state','=', 'open')]"/>
-                <filter name="done_state" string="Done"
-                        domain="[('state','=', 'done')]"/>
-                <filter name="cancelled_state" string="Cancelled"
-                        domain="[('state','=', 'cancelled')]"/>
-                <separator/>
-                <filter name="assigned_to_user" string="Assigned to me"
-                        domain="[('responsible_id','=', uid)]"/>
+                <field name="name" />
+                <field name="location_id" />
+                <field name="product_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="responsible_id" />
+                <separator />
+                <filter
+                    name="wait_state"
+                    string="Waiting Actions"
+                    domain="[('state','=', 'wait')]"
+                />
+                <filter
+                    name="open_state"
+                    string="In Progress"
+                    domain="[('state','=', 'open')]"
+                />
+                <filter
+                    name="done_state"
+                    string="Done"
+                    domain="[('state','=', 'done')]"
+                />
+                <filter
+                    name="cancelled_state"
+                    string="Cancelled"
+                    domain="[('state','=', 'cancelled')]"
+                />
+                <separator />
+                <filter
+                    name="assigned_to_user"
+                    string="Assigned to me"
+                    domain="[('responsible_id','=', uid)]"
+                />
             </search>
         </field>
     </record>
 
-    <act_window id="action_slot_verification_request"
-                name="Stock Slot Verification Request"
-                res_model="stock.slot.verification.request"
-                context="{'search_default_wait_state':1,'search_default_open_state':1}"
-                view_mode="tree,form" />
-    <menuitem id="menu_slot_verification_request"
-              name="Slot Verification Request"
-              parent="stock.menu_stock_warehouse_mgmt"
-              sequence="31"
-              action="action_slot_verification_request" />
+    <act_window
+        id="action_slot_verification_request"
+        name="Stock Slot Verification Request"
+        res_model="stock.slot.verification.request"
+        context="{'search_default_wait_state':1,'search_default_open_state':1}"
+        view_mode="tree,form"
+    />
+    <menuitem
+        id="menu_slot_verification_request"
+        name="Slot Verification Request"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="31"
+        action="action_slot_verification_request"
+    />
 
 </odoo>
