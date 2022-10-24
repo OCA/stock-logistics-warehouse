@@ -6,50 +6,53 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-10-24 12:43+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,help:stock_picking_cancel_confirm.field_stock_picking__cancel_confirm
 msgid "A flag signify that this document is confirmed for cancellation"
 msgstr ""
+"Una spunta indica che questo documento è confermato per la cancellazione"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,help:stock_picking_cancel_confirm.field_stock_picking__cancel_reason
 msgid "An optional cancel reason"
-msgstr ""
+msgstr "Un motivo di cancellazione opzionale"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,field_description:stock_picking_cancel_confirm.field_stock_picking__cancel_confirm
 msgid "Cancel Confirmed"
-msgstr ""
+msgstr "Cancellazione confermata"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,field_description:stock_picking_cancel_confirm.field_stock_picking__cancel_reason
 msgid "Cancel Reason"
-msgstr ""
+msgstr "Motivo cancellazione"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,field_description:stock_picking_cancel_confirm.field_stock_picking__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,field_description:stock_picking_cancel_confirm.field_stock_picking__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,field_description:stock_picking_cancel_confirm.field_stock_picking____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model,name:stock_picking_cancel_confirm.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
