@@ -7,18 +7,20 @@
         <field name="model">stock.request.order</field>
         <field name="inherit_id" ref="stock_request.stock_request_order_form" />
         <field name="arch" type="xml">
-            <button name="action_confirm" position="after">
-                <button
-                    name="action_submit"
-                    string="Submit"
-                    type="object"
-                    attrs="{'invisible': [('state', '!=', 'draft')]}"
-                />
-            </button>
             <button name="action_confirm" position="attributes">
+                <attribute name="name">action_submit</attribute>
                 <attribute
                     name="attrs"
-                >{'invisible': [('state', '!=', 'submitted')]}</attribute>
+                >{'invisible': [('state', '!=', 'draft')]}</attribute>
+            </button>
+            <button name="action_submit" position="after">
+                <button
+                    name="action_confirm"
+                    string="Submit"
+                    type="object"
+                    attrs="{'invisible': [('state', '!=', 'submitted')]}"
+                    groups="stock_request.group_stock_request_manager"
+                />
             </button>
             <button name="action_draft" position="attributes">
                 <attribute name="states">submitted,cancel</attribute>
