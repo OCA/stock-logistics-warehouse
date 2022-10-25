@@ -23,7 +23,6 @@
                         string="Confirm"
                         type="object"
                         attrs="{'invisible': [('state', 'not in', ['draft'])]}"
-                        groups="stock_request.group_stock_request_manager"
                     />
                     <button
                         name="action_cancel"
