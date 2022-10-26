@@ -23,8 +23,10 @@ msgstr ""
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:0
 #, python-format
-msgid "<li><b>%s</b>: Transferred quantity %s %s</li>"
-msgstr "<li><b>%s</b>: Cantidad transferida %s %s</li>"
+msgid ""
+"<li><b>%(product_name)s</b>: Transferred quantity %(product_qty)s"
+"%(product_uom)s</li>"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_needaction
@@ -197,20 +199,9 @@ msgid "Delivery Orders"
 msgstr "Pedidos de entrega"
 
 #. module: stock_request
-#: model:ir.model.fields,field_description:stock_request.field_procurement_group__display_name
-#: model:ir.model.fields,field_description:stock_request.field_res_company__display_name
-#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:stock_request.field_stock_location__display_name
-#: model:ir.model.fields,field_description:stock_request.field_stock_location_route__display_name
-#: model:ir.model.fields,field_description:stock_request.field_stock_move__display_name
-#: model:ir.model.fields,field_description:stock_request.field_stock_move_line__display_name
-#: model:ir.model.fields,field_description:stock_request.field_stock_picking__display_name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__display_name
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__display_name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__display_name
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__display_name
-#: model:ir.model.fields,field_description:stock_request.field_stock_rule__display_name
-#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -281,13 +272,6 @@ msgid "Followers"
 msgstr "Seguidores"
 
 #. module: stock_request
-#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_channel_ids
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_channel_ids
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Seguidores (Canales)"
-
-#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_partner_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_partner_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_partner_ids
@@ -313,20 +297,16 @@ msgid "Group Stock Request Order"
 msgstr "Agrupa las solicitudes en pedidos"
 
 #. module: stock_request
-#: model:ir.model.fields,field_description:stock_request.field_procurement_group__id
-#: model:ir.model.fields,field_description:stock_request.field_res_company__id
-#: model:ir.model.fields,field_description:stock_request.field_res_config_settings__id
-#: model:ir.model.fields,field_description:stock_request.field_stock_location__id
-#: model:ir.model.fields,field_description:stock_request.field_stock_location_route__id
-#: model:ir.model.fields,field_description:stock_request.field_stock_move__id
-#: model:ir.model.fields,field_description:stock_request.field_stock_move_line__id
-#: model:ir.model.fields,field_description:stock_request.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__has_message
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__has_message
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__id
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__id
-#: model:ir.model.fields,field_description:stock_request.field_stock_rule__id
-#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse__id
 msgid "ID"
 msgstr "ID"
 
@@ -398,20 +378,9 @@ msgid "Kanban"
 msgstr "Kanban"
 
 #. module: stock_request
-#: model:ir.model.fields,field_description:stock_request.field_procurement_group____last_update
-#: model:ir.model.fields,field_description:stock_request.field_res_company____last_update
-#: model:ir.model.fields,field_description:stock_request.field_res_config_settings____last_update
-#: model:ir.model.fields,field_description:stock_request.field_stock_location____last_update
-#: model:ir.model.fields,field_description:stock_request.field_stock_location_route____last_update
-#: model:ir.model.fields,field_description:stock_request.field_stock_move____last_update
-#: model:ir.model.fields,field_description:stock_request.field_stock_move_line____last_update
-#: model:ir.model.fields,field_description:stock_request.field_stock_picking____last_update
 #: model:ir.model.fields,field_description:stock_request.field_stock_request____last_update
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract____last_update
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation____last_update
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order____last_update
-#: model:ir.model.fields,field_description:stock_request.field_stock_rule____last_update
-#: model:ir.model.fields,field_description:stock_request.field_stock_warehouse____last_update
 msgid "Last Modified on"
 msgstr "Última Modificación el"
 
@@ -715,8 +684,8 @@ msgstr "Cantidad real"
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:0
 #, python-format
-msgid "Receipt confirmation %s for your Request %s"
-msgstr "Confirmación de la recepción %s de la solicitud %s"
+msgid "Receipt confirmation %(picking_name)s for your Request %(request_name)s"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields.selection,name:stock_request.selection__stock_request__picking_policy__one
@@ -737,6 +706,12 @@ msgid "Request Stock"
 msgstr "Solicitud de Existencias"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__requested_by
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__requested_by
+msgid "Requested By"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__requested_product_qty
 msgid "Requested Quantity"
 msgstr "Cantidad solicitada"
@@ -745,12 +720,6 @@ msgstr "Cantidad solicitada"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__requested_product_uom_qty
 msgid "Requested Quantity (UoM)"
 msgstr "Cantidad Solicitada (UdM)"
-
-#. module: stock_request
-#: model:ir.model.fields,field_description:stock_request.field_stock_request__requested_by
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__requested_by
-msgid "Requested by"
-msgstr "Solicitado por"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:0
@@ -862,7 +831,6 @@ msgstr "Asignación de solicitud de existencias"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.view_move_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_allocation_form
-#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_allocation_tree
 msgid "Stock Request Allocations"
 msgstr "Asignaciones de solicitud de existencias"
 
@@ -923,7 +891,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #: model_terms:ir.ui.view,arch_db:stock_request.view_picking_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
-#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_tree
 msgid "Stock Requests"
 msgstr "Solicitudes de existencias"
 
@@ -964,7 +931,6 @@ msgstr "Solicitud de existencias"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_count
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_tree
 msgid "Stock requests"
 msgstr "Solicitudes de existencias"
 
@@ -990,11 +956,9 @@ msgstr "La compañía de la solicitud debe coincidir con la del almacén."
 #: code:addons/stock_request/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"The following requested items from Stock Request %s have now been received "
-"in %s using Picking %s:"
+"The following requested items from Stock Request %(request_name)s have now "
+"been received in %(location_name)s using Picking %(picking_name)s:"
 msgstr ""
-"Los siguientes elementos de la solicitud %s se ha recibido en %s con el "
-"albarán %s:"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:0
@@ -1031,16 +995,6 @@ msgstr "Transferencias"
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr "Tipo de actividad de excepción registrada."
-
-#. module: stock_request
-#: code:addons/stock_request/models/stock_request_order.py:0
-#, python-format
-msgid ""
-"Unfortunately it seems you do not have the necessary rights for creating "
-"stock requests. Please contact your administrator."
-msgstr ""
-"No tiene los permisos necesarios para crear una solicitud de existencias. "
-"Por favor, contacte con su administrador."
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_unread
@@ -1189,3 +1143,33 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
+
+#, python-format
+#~ msgid "<li><b>%s</b>: Transferred quantity %s %s</li>"
+#~ msgstr "<li><b>%s</b>: Cantidad transferida %s %s</li>"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Seguidores (Canales)"
+
+#, python-format
+#~ msgid "Receipt confirmation %s for your Request %s"
+#~ msgstr "Confirmación de la recepción %s de la solicitud %s"
+
+#~ msgid "Requested by"
+#~ msgstr "Solicitado por"
+
+#, python-format
+#~ msgid ""
+#~ "The following requested items from Stock Request %s have now been "
+#~ "received in %s using Picking %s:"
+#~ msgstr ""
+#~ "Los siguientes elementos de la solicitud %s se ha recibido en %s con el "
+#~ "albarán %s:"
+
+#, python-format
+#~ msgid ""
+#~ "Unfortunately it seems you do not have the necessary rights for creating "
+#~ "stock requests. Please contact your administrator."
+#~ msgstr ""
+#~ "No tiene los permisos necesarios para crear una solicitud de existencias. "
+#~ "Por favor, contacte con su administrador."
