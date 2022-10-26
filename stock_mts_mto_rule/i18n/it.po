@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-28 02:58+0000\n"
-"PO-Revision-Date: 2022-07-16 18:06+0000\n"
+"PO-Revision-Date: 2022-10-26 17:43+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__action
@@ -33,13 +33,13 @@ msgstr "Scegliere tra MTS o MTO"
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__display_name
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__id
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_warehouse__mto_mts_management
@@ -56,7 +56,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule____last_update
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mto_rule_id
