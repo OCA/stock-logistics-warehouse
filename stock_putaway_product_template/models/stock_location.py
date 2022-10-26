@@ -7,7 +7,15 @@ from odoo import models
 class StockLocation(models.Model):
     _inherit = "stock.location"
 
-    def _get_putaway_strategy(self, product):
+    def _get_putaway_strategy(
+        self, product, quantity=0, package=None, packaging=None, additional_qty=None
+    ):
         return super(
             StockLocation, self.with_context(filter_putaway_rule=True)
-        )._get_putaway_strategy(product)
+        )._get_putaway_strategy(
+            product,
+            quantity=quantity,
+            package=package,
+            packaging=packaging,
+            additional_qty=additional_qty,
+        )
