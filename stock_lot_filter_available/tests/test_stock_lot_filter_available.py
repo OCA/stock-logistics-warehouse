@@ -1,10 +1,10 @@
 # Copyright 2021 Tecnativa - Carlos Roca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockLotFilterAvailable(SavepointCase):
+class TestStockLotFilterAvailable(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -12,7 +12,7 @@ class TestStockLotFilterAvailable(SavepointCase):
         cls.company = cls.env.ref("base.main_company")
         cls.loc = cls.env.ref("stock.stock_location_stock")
         cls.product = cls.env["product.product"].create(
-            {"name": "Test product", "type": "product", "tracking": "lot"}
+            {"name": "Test product", "detailed_type": "product", "tracking": "lot"}
         )
         cls.lot = cls.StockProductionLot.create(
             {
