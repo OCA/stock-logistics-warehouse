@@ -13,7 +13,7 @@
               "Tecnativa,"
               "Odoo Community Association (OCA)",
     "category": "Inventory, Logistic, Storage",
-    "website": "http://github.com/OCA/stock-logistics-warehouse",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "summary": "More filters for inventory adjustments",
     "data": [
         "views/stock_inventory_view.xml",
