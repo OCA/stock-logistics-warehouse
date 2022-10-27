@@ -122,7 +122,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
         more than exists."""
         self.ensure_one()
         if not self.product_id:
-            return 0
+            return 0, 0
         if self.env.context.get("planned"):
             # for planned transfer we don't care about the amounts at all
             return self.move_quantity, 0
@@ -139,10 +139,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
         if not available_qty:
             # if it is immediate transfer and product doesn't exist in that
             # location -> make the transfer of 0.
-            return 0
+            return 0, 0
         rounding = self.product_uom_id.rounding
         available_qty_lt_move_qty = self._compare(
             available_qty, self.move_quantity, rounding) == -1
         if available_qty_lt_move_qty:
-            return available_qty
+            return 0, available_qty
         return 0, self.move_quantity
