@@ -1,5 +1,5 @@
 # Copyright 2017-2019 Eficent Business and IT Consulting Services S.L.
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.addons.stock_request_purchase.tests \
     import test_stock_request_purchase
