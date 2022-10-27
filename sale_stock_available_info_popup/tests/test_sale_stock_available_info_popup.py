@@ -4,19 +4,21 @@
 from datetime import timedelta
 
 from odoo.fields import Datetime
-from odoo.tests import Form
-from odoo.tests.common import SavepointCase, users
+from odoo.tests import Form, common, new_test_user
+from odoo.tests.common import users
 
 
-class SaleStockAvailableInfoPopup(SavepointCase):
+class SaleStockAvailableInfoPopup(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Scratch some seconds from the tracking stuff that we won't need
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.env.ref("base.user_demo").groups_id += cls.env.ref("stock.group_stock_user")
+        cls.sale_user = new_test_user(
+            cls.env,
+            login="sale_user",
+            groups="sales_team.group_sale_salesman",
+        )
         cls.product = cls.env["product.product"].create(
-            {"name": "Storable product", "type": "product"}
+            {"name": "Storable product", "detailed_type": "product"}
         )
         cls.partner = cls.env["res.partner"].create({"name": "Mr. Odoo"})
         cls.env["stock.quant"].create(
@@ -26,22 +28,23 @@ class SaleStockAvailableInfoPopup(SavepointCase):
                 "quantity": 40.0,
             }
         )
-        picking_form = Form(cls.env["stock.picking"])
-        picking_form.picking_type_id = cls.env.ref("stock.picking_type_in")
+        picking_in = cls._create_picking(cls, cls.env.ref("stock.picking_type_in"), 5)
+        picking_in.action_assign()
+        picking_out = cls._create_picking(cls, cls.env.ref("stock.picking_type_out"), 3)
+        picking_out.action_assign()
+
+    def _create_picking(self, picking_type, qty):
+        picking_form = Form(self.env["stock.picking"])
+        picking_form.picking_type_id = picking_type
         with picking_form.move_ids_without_package.new() as move:
-            move.product_id = cls.product
-            move.product_uom_qty = 5
-        picking_form.save().action_assign()
-        picking_form = Form(cls.env["stock.picking"])
-        picking_form.picking_type_id = cls.env.ref("stock.picking_type_out")
-        with picking_form.move_ids_without_package.new() as move:
-            move.product_id = cls.product
-            move.product_uom_qty = 3
-        picking_form.save().action_assign()
+            move.product_id = self.product
+            move.product_uom_qty = qty
+        return picking_form.save()
 
     def _create_sale(self):
         sale_form = Form(self.env["sale.order"])
         sale_form.partner_id = self.partner
+        sale_form.user_id = self.sale_user
         return sale_form
 
     def _add_sale_line(self, sale_form, product, qty=1):
@@ -49,17 +52,15 @@ class SaleStockAvailableInfoPopup(SavepointCase):
             line.product_id = self.product
             line.product_uom_qty = qty
 
-    @users("admin", "demo")
+    @users("admin", "sale_user")
     def test_immediately_usable_qty_today(self):
         sale_form = self._create_sale()
         self._add_sale_line(sale_form, self.product)
         sale = sale_form.save()
-        self.assertAlmostEqual(
-            sale.order_line.immediately_usable_qty_today,
-            self.product.immediately_usable_qty,
-        )
+        # 42=40-1+3
+        self.assertAlmostEqual(sale.order_line.immediately_usable_qty_today, 42)
 
-    @users("admin", "demo")
+    @users("admin", "sale_user")
     def test_immediately_usable_qty_today_similar_solines(self):
         """Create a sale order containing three times the same product. The quantity
         available should be different for the 3 lines.

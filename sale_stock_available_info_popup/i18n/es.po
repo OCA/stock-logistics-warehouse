@@ -42,6 +42,3 @@ msgid ""
 "widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver and !"
 "widget.data.is_mto"
 msgstr ""
-
-#~ msgid "Product Template"
-#~ msgstr "Plantilla de producto"

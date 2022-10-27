@@ -16,7 +16,7 @@ class SaleOrderLine(models.Model):
     @api.depends(
         "product_id",
         "product_uom_qty",
-        "order_id.commitment_date",
+        "scheduled_date",
         "order_id.date_order",
         "warehouse_id",
     )
@@ -24,14 +24,10 @@ class SaleOrderLine(models.Model):
         qty_processed_per_product = defaultdict(lambda: 0)
         self.immediately_usable_qty_today = False
         for line in self.sorted(key=lambda r: r.sequence):
-            if line.order_id.commitment_date:
-                date = line.order_id.commitment_date
-            else:
-                date = line._expected_date()
             if not line.display_qty_widget:
                 continue
             product = line.product_id.with_context(
-                to_date=date, warehouse=line.warehouse_id.id
+                to_date=line.scheduled_date, warehouse=line.warehouse_id.id
             )
             qty_processed = qty_processed_per_product[product.id]
             line.immediately_usable_qty_today = (
