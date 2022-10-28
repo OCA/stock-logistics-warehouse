@@ -4,7 +4,7 @@
 
 {
     "name": "Account Move Line Product",
-    "version": "11.0.1.0.1",
+    "version": "11.0.1.0.2",
     "summary": "Displays the product in the journal entries and items",
     "author": "Eficent, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
