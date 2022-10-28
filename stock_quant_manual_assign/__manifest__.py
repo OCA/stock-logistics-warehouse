@@ -7,7 +7,7 @@
 
 {
     "name": "Stock - Manual Quant Assignment",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "category": "Warehouse Management",
     "license": "AGPL-3",
     "author": "AvanzOSC, "
@@ -15,7 +15,7 @@
               "Eficent, "
               "Fanha Giang, "
               "Odoo Community Association (OCA)",
-    "website": "https://odoo-community.org",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": [
         "stock",
     ],

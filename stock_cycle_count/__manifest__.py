@@ -5,8 +5,7 @@
     "name": "Stock Cycle Count",
     "summary": "Adds the capability to schedule cycle counts in a "
                "warehouse through different rules defined by the user.",
-    "version": "11.0.1.0.1",
-    "development_status": "Mature",
+    "version": "11.0.1.0.2",
     "maintainers": ["lreficent"],
     "author": "Eficent, "
               "Odoo Community Association (OCA)",

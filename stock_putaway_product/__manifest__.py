@@ -5,9 +5,9 @@
 {
     'name': 'Putaway strategy per product',
     'summary': 'Set a product location and put-away strategy per product',
-    'version': '11.0.1.0.2',
+    'version': '11.0.1.0.3',
     'category': 'Inventory',
-    'website': 'http://www.apertoso.be',
+    'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'author': 'Apertoso N.V., '
               'Tecnativa, '
               'Camptocamp SA, '

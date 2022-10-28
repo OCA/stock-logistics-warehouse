@@ -4,9 +4,9 @@
 {
     "name": "Stock Warehouse Calendar",
     "summary": "Adds a calendar to the Warehouse",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "license": "AGPL-3",
-    "website": "https://github.com/stock-logistics-warehouse",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "category": "Warehouse Management",

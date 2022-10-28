@@ -224,7 +224,7 @@ msgstr "Anforderungs-Anwender"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_id
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_6263
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order_id_6259
 msgid "ID"
 msgstr "ID"
 
