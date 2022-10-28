@@ -6,7 +6,7 @@
     "summary": "Internal request for stock",
     "version": "11.0.3.4.6",
     "license": "LGPL-3",
-    "website": "https://github.com/stock-logistics-warehouse",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Eficent, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "depends": [

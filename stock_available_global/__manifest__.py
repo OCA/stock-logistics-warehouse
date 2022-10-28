@@ -7,6 +7,7 @@
               'Odoo Community Association (OCA)',
     'category': 'Warehouse',
     'license': 'AGPL-3',
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     'depends': [
         'sale_stock',
     ],

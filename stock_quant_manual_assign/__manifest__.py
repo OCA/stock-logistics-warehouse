@@ -15,7 +15,7 @@
               "Eficent, "
               "Fanha Giang, "
               "Odoo Community Association (OCA)",
-    "website": "https://odoo-community.org",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": [
         "stock",
     ],

@@ -9,6 +9,7 @@
     "depends": ["stock"],
     "author": "Numérigraphe, Eficent, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "images": [
         "images/move_error.png",
         "images/location_locked.png",
