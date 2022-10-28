@@ -5,7 +5,7 @@
     "name": "Stock Request Purchase Analytic",
     "summary": "Passes the analytic account from the stock request to the "
                "purchase order",
-    "version": "11.0.1.0.1",
+    "version": "11.0.1.0.2",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Eficent, "
