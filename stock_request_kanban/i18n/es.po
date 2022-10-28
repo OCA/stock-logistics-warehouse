@@ -165,7 +165,7 @@ msgstr "Agrupar por"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban_id
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_id_6464
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban_id_6460
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract_id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_id
