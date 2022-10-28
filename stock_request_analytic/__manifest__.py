@@ -4,7 +4,7 @@
 {
     "name": "Stock Request Analytic",
     "summary": "Internal request for stock",
-    "version": "11.0.2.0.2",
+    "version": "11.0.2.0.3",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Eficent, "
