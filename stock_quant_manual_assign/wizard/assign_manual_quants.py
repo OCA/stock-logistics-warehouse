@@ -83,8 +83,8 @@ class AssignManualQuants(models.TransientModel):
         return self.env["stock.quant"].search(domain)
 
     @api.model
-    def default_get(self, fields):
-        res = super(AssignManualQuants, self).default_get(fields)
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
         move = self.env["stock.move"].browse(self.env.context["active_id"])
         available_quants = self._get_available_quants(move)
         q_lines = []
@@ -137,37 +137,28 @@ class AssignManualQuantsLines(models.TransientModel):
         required=True,
         ondelete="cascade",
     )
-    # Fields below are storable in order to be able to order by them. However,
-    # there is a side effect: It is not possible to directly read the related
-    # fields, e.g `self.lot_id`, because they are stored fields and have a group
-    # restriction, so an access error would raise. To work around it, we should
-    # access these fields from the quant: `self.quant_id.lot_id`.
     location_id = fields.Many2one(
         comodel_name="stock.location",
         string="Location",
         related="quant_id.location_id",
-        groups="stock.group_stock_multi_locations",
         store=True,
     )
     lot_id = fields.Many2one(
-        comodel_name="stock.production.lot",
+        comodel_name="stock.lot",
         string="Lot",
         related="quant_id.lot_id",
-        groups="stock.group_production_lot",
         store=True,
     )
     package_id = fields.Many2one(
         comodel_name="stock.quant.package",
         string="Package",
         related="quant_id.package_id",
-        groups="stock.group_tracking_lot",
         store=True,
     )
     owner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Owner",
         related="quant_id.owner_id",
-        groups="stock.group_tracking_owner",
         store=True,
     )
     # This is not correctly shown as related or computed, so we make it regular
