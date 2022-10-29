@@ -6,80 +6,82 @@ from odoo.tests.common import TransactionCase
 
 
 class TestStockQuantManualAssign(TransactionCase):
-    def setUp(self):
-        super(TestStockQuantManualAssign, self).setUp()
-        self.quant_model = self.env["stock.quant"]
-        self.picking_model = self.env["stock.picking"]
-        self.location_model = self.env["stock.location"]
-        self.move_model = self.env["stock.move"]
-        self.quant_assign_wizard = self.env["assign.manual.quants"]
-        self.ModelDataObj = self.env["ir.model.data"]
-        self.product = self.env["product.product"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.quant_model = cls.env["stock.quant"]
+        cls.picking_model = cls.env["stock.picking"]
+        cls.location_model = cls.env["stock.location"]
+        cls.move_model = cls.env["stock.move"]
+        cls.quant_assign_wizard = cls.env["assign.manual.quants"]
+        cls.ModelDataObj = cls.env["ir.model.data"]
+        cls.product = cls.env["product.product"].create(
             {"name": "Product 4 test", "type": "product"}
         )
-        self.location_src = self.env.ref("stock.stock_location_locations_virtual")
-        self.location_dst = self.env.ref("stock.stock_location_customers")
-        self.picking_type_out = self.ModelDataObj._xmlid_to_res_id(
+        cls.location_src = cls.env.ref("stock.stock_location_locations_virtual")
+        cls.location_dst = cls.env.ref("stock.stock_location_customers")
+        cls.picking_type_out = cls.ModelDataObj._xmlid_to_res_id(
             "stock.picking_type_out"
         )
-        self.env["stock.picking.type"].browse(
-            self.picking_type_out
+        cls.env["stock.picking.type"].browse(
+            cls.picking_type_out
         ).reservation_method = "manual"
-        self.location1 = self.location_model.create(
+        cls.location1 = cls.location_model.create(
             {
                 "name": "Location 1",
                 "usage": "internal",
-                "location_id": self.location_src.id,
+                "location_id": cls.location_src.id,
             }
         )
-        self.location2 = self.location_model.create(
+        cls.location2 = cls.location_model.create(
             {
                 "name": "Location 2",
                 "usage": "internal",
-                "location_id": self.location_src.id,
+                "location_id": cls.location_src.id,
             }
         )
-        self.location3 = self.location_model.create(
+        cls.location3 = cls.location_model.create(
             {
                 "name": "Location 3",
                 "usage": "internal",
-                "location_id": self.location_src.id,
+                "location_id": cls.location_src.id,
             }
         )
-        self.picking_type = self.env.ref("stock.picking_type_out")
-        self.quant1 = self.quant_model.sudo().create(
+        cls.picking_type = cls.env.ref("stock.picking_type_out")
+        cls.quant1 = cls.quant_model.sudo().create(
             {
-                "product_id": self.product.id,
+                "product_id": cls.product.id,
                 "quantity": 100.0,
-                "location_id": self.location1.id,
+                "location_id": cls.location1.id,
             }
         )
-        self.quant2 = self.quant_model.sudo().create(
+        cls.quant2 = cls.quant_model.sudo().create(
             {
-                "product_id": self.product.id,
+                "product_id": cls.product.id,
                 "quantity": 100.0,
-                "location_id": self.location2.id,
+                "location_id": cls.location2.id,
             }
         )
-        self.quant3 = self.quant_model.sudo().create(
+        cls.quant3 = cls.quant_model.sudo().create(
             {
-                "product_id": self.product.id,
+                "product_id": cls.product.id,
                 "quantity": 100.0,
-                "location_id": self.location3.id,
+                "location_id": cls.location3.id,
             }
         )
-        self.move = self.move_model.create(
+        cls.move = cls.move_model.create(
             {
-                "name": self.product.name,
-                "product_id": self.product.id,
+                "name": cls.product.name,
+                "product_id": cls.product.id,
                 "product_uom_qty": 400.0,
-                "product_uom": self.product.uom_id.id,
-                "location_id": self.location_src.id,
-                "location_dest_id": self.location_dst.id,
-                "picking_type_id": self.picking_type.id,
+                "product_uom": cls.product.uom_id.id,
+                "location_id": cls.location_src.id,
+                "location_dest_id": cls.location_dst.id,
+                "picking_type_id": cls.picking_type.id,
             }
         )
-        self.move._action_confirm()
+        cls.move._action_confirm()
 
     def test_quant_assign_wizard(self):
         wizard = self.quant_assign_wizard.with_context(active_id=self.move.id).create(
