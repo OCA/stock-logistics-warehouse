@@ -14,7 +14,7 @@
                         <field name="location_id" />
                         <field name="on_hand" />
                         <field name="reserved" />
-                        <field name="selected" />
+                        <field name="selected" widget="boolean_toggle" />
                         <field
                             name="qty"
                             attrs="{'readonly':[('selected', '=', False)]}"
