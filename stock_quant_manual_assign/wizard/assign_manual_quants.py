@@ -64,7 +64,7 @@ class AssignManualQuants(models.TransientModel):
         if move.picking_type_id.auto_fill_qty_done:
             # Auto-fill all lines as done
             for ml in move.move_line_ids:
-                ml.qty_done = ml.product_qty
+                ml.qty_done = ml.reserved_uom_qty
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
         return {}
@@ -83,8 +83,8 @@ class AssignManualQuants(models.TransientModel):
         return self.env["stock.quant"].search(domain)
 
     @api.model
-    def default_get(self, fields):
-        res = super(AssignManualQuants, self).default_get(fields)
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
         move = self.env["stock.move"].browse(self.env.context["active_id"])
         available_quants = self._get_available_quants(move)
         q_lines = []
@@ -113,7 +113,7 @@ class AssignManualQuants(models.TransientModel):
                 and ml.package_id == quant.package_id
             )
         )
-        line["qty"] = sum(move_lines.mapped("product_uom_qty"))
+        line["qty"] = sum(move_lines.mapped("reserved_uom_qty"))
         line["selected"] = bool(line["qty"])
         line["reserved"] = quant.reserved_quantity - line["qty"]
         return line
@@ -137,37 +137,28 @@ class AssignManualQuantsLines(models.TransientModel):
         required=True,
         ondelete="cascade",
     )
-    # Fields below are storable in order to be able to order by them. However,
-    # there is a side effect: It is not possible to directly read the related
-    # fields, e.g `self.lot_id`, because they are stored fields and have a group
-    # restriction, so an access error would raise. To work around it, we should
-    # access these fields from the quant: `self.quant_id.lot_id`.
     location_id = fields.Many2one(
         comodel_name="stock.location",
         string="Location",
         related="quant_id.location_id",
-        groups="stock.group_stock_multi_locations",
         store=True,
     )
     lot_id = fields.Many2one(
-        comodel_name="stock.production.lot",
+        comodel_name="stock.lot",
         string="Lot",
         related="quant_id.lot_id",
-        groups="stock.group_production_lot",
         store=True,
     )
     package_id = fields.Many2one(
         comodel_name="stock.quant.package",
         string="Package",
         related="quant_id.package_id",
-        groups="stock.group_tracking_lot",
         store=True,
     )
     owner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Owner",
         related="quant_id.owner_id",
-        groups="stock.group_tracking_owner",
         store=True,
     )
     # This is not correctly shown as related or computed, so we make it regular
@@ -175,7 +166,9 @@ class AssignManualQuantsLines(models.TransientModel):
         readonly=True,
         digits="Product Unit of Measure",
     )
-    reserved = fields.Float(string="Others Reserved", digits="Product Unit of Measure")
+    reserved = fields.Float(
+        string="Others Reserved", digits="Product Unit of Measure", readonly=True
+    )
     selected = fields.Boolean(string="Select")
     qty = fields.Float(string="QTY", digits="Product Unit of Measure")
 
@@ -207,7 +200,7 @@ class AssignManualQuantsLines(models.TransientModel):
                 )
             )
             reserved = quant.reserved_quantity - sum(
-                move_lines.mapped("product_uom_qty")
+                move_lines.mapped("reserved_uom_qty")
             )
             if (
                 float_compare(
