@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_stock_configuration" model="ir.ui.view">
+        <field name="name">res.config.settings.stock.available.portal</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock_available.view_stock_configuration" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='module_stock_available_immediately']/../../.."
+                position="inside"
+            >
+                <div class="col-xs-12 col-md-12 o_setting_box">
+                    <div class="o_setting_left_pane" />
+                    <div class="o_setting_right_pane">
+                        <label for="portal_visible_products_domain" />
+                        <field
+                            name="portal_visible_products_domain"
+                            widget="domain"
+                            options="{'model': 'product.product'}"
+                        />
+                    </div>
+                    <div class="o_setting_left_pane" />
+                    <div class="o_setting_right_pane">
+                        <label for="portal_visible_users" />
+                        <field
+                            name="portal_visible_users"
+                            widget="domain"
+                            options="{'model': 'res.users'}"
+                        />
+                    </div>
+                </div>
+
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
