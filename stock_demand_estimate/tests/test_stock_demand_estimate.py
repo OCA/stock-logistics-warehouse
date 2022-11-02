@@ -3,10 +3,10 @@
 
 from datetime import date, timedelta as td
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockDemandEstimate(SavepointCase):
+class TestStockDemandEstimate(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
