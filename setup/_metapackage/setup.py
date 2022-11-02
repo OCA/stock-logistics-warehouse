@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo-addon-account_move_line_product>=15.0dev,<15.1dev',
         'odoo-addon-account_move_line_stock_info>=15.0dev,<15.1dev',
         'odoo-addon-procurement_auto_create_group>=15.0dev,<15.1dev',
+        'odoo-addon-sale_stock_available_info_popup>=15.0dev,<15.1dev',
         'odoo-addon-stock_archive_constraint>=15.0dev,<15.1dev',
         'odoo-addon-stock_available>=15.0dev,<15.1dev',
         'odoo-addon-stock_available_mrp>=15.0dev,<15.1dev',
