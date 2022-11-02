@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2020 Tecnativa - Ernesto Tejeda
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.line.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']"
+                position="after"
+            >
+                <field name="immediately_usable_qty_today" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
