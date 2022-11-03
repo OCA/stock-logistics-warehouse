@@ -4,6 +4,7 @@
 from collections import defaultdict
 
 from odoo import _, models
+from odoo.tools import float_compare
 
 from odoo.addons.queue_job.job import identity_exact
 
@@ -13,10 +14,29 @@ class StockMove(models.Model):
 
     def _action_done(self, cancel_backorder=False):
         done_moves = super()._action_done(cancel_backorder=cancel_backorder)
-        done_moves._prepare_auto_assign()
+        done_moves._prepare_auto_assign(location_field="move_line_ids.location_dest_id")
         return done_moves
 
-    def _prepare_auto_assign(self):
+    def _action_cancel(self):
+        moves_with_reservation_to_cancel = self.filtered(
+            lambda m: m.state not in ("done", "cancel")
+            and float_compare(
+                m.reserved_availability, 0, precision_rounding=m.product_uom.rounding
+            )
+            > 0
+        )
+        res = super()._action_cancel()
+        moves_with_reservation_canceled = (
+            self.filtered(lambda m: m.state == "cancel")
+            & moves_with_reservation_to_cancel
+        )
+        if moves_with_reservation_canceled:
+            moves_with_reservation_canceled._prepare_auto_assign(
+                location_field="location_id"
+            )
+        return res
+
+    def _prepare_auto_assign(self, location_field):
         product_locs = defaultdict(set)
         for move in self:
             # select internal locations where we moved goods not for the
@@ -26,7 +46,7 @@ class StockMove(models.Model):
             product = move.product_id
             if product.type != "product":
                 continue
-            locations = move.mapped("move_line_ids.location_dest_id").filtered(
+            locations = move.mapped(location_field).filtered(
                 lambda l: l.usage == "internal"
             )
             product_locs[product.id].update(locations.ids)

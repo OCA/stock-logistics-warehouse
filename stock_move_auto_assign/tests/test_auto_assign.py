@@ -43,6 +43,35 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
             self.assertEqual(delay_args, (self.shelf1_loc | self.shelf2_loc,))
             self.assertDictEqual(delay_kwargs, {})
 
+    def test_move_canceled_with_reservation_enqueue_job(self):
+        """A canceled move with reservations enqueue a new job to assign other moves"""
+        move = self._create_move(self.product, self.out_type, qty=100)
+        # put stock in Stock/Shelf 1, the move has a source location in Stock
+        self._update_qty_in_location(self.shelf1_loc, self.product, 100)
+        move._action_assign()
+        with mock_with_delay() as (delayable_cls, delayable):
+            move._action_cancel()
+            # .with_delay() has been called once
+            self.assertEqual(delayable_cls.call_count, 1)
+            delay_args, delay_kwargs = delayable_cls.call_args
+            # .with_delay() is called on self.product
+            self.assertEqual(delay_args, (self.product,))
+            # .with_delay() with the following options
+            self.assertEqual(delay_kwargs.get("identity_key"), identity_exact)
+            # check what's passed to the job method 'moves_auto_assign'
+            self.assertEqual(delayable.moves_auto_assign.call_count, 1)
+            delay_args, delay_kwargs = delayable.moves_auto_assign.call_args
+            self.assertEqual(delay_args, (self.out_type.default_location_src_id,))
+            self.assertDictEqual(delay_kwargs, {})
+
+    def test_move_canceled_without_reservation_no_job(self):
+        move = self._create_move(self.product, self.out_type, qty=100)
+        move._action_assign()
+        with mock_with_delay() as (delayable_cls, delayable):
+            move._action_cancel()
+            # .with_delay() has not been called
+            self.assertEqual(delayable_cls.call_count, 0)
+
     def test_move_done_service_no_job(self):
         """Service products do not enqueue job"""
         self.product.type = "service"
