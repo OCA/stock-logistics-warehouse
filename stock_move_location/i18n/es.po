@@ -19,8 +19,8 @@ msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__apply_putaway_strategy
-msgid "Apply putaway strategy"
-msgstr "Aplicar estrategia de traslado"
+msgid "Apply Putaway Strategy"
+msgstr ""
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -78,6 +78,16 @@ msgid "Edit Locations"
 msgstr "(editar)"
 
 #. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_picking_form
+msgid "Fill with stock"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__owner_id
+msgid "From Owner"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
 msgid "ID"
@@ -87,11 +97,6 @@ msgstr "ID"
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Immediate Transfer"
 msgstr "Transferencia Inmediata"
-
-#. module: stock_move_location
-#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
-msgid "Inventory Details"
-msgstr "Detalles de Inventario"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location____last_update
@@ -143,6 +148,7 @@ msgid "Move location Wizard"
 msgstr "Asistente para mover desde ubicación"
 
 #. module: stock_move_location
+#. odoo-python
 #: code:addons/stock_move_location/wizard/stock_move_location_line.py:0
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
@@ -154,6 +160,13 @@ msgid "Move to location..."
 msgstr "Mover a ubicación..."
 
 #. module: stock_move_location
+#. odoo-python
+#: code:addons/stock_move_location/models/stock_picking.py:0
+#, python-format
+msgid "Moves lines already exists"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__origin_location_id
 msgid "Origin Location"
@@ -163,6 +176,11 @@ msgstr "Ubicación de origen"
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "Origin Location Disable"
 msgstr "Ubicación origen desactivada"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__package_id
+msgid "Package Number"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
@@ -181,6 +199,13 @@ msgid "Planned Transfer"
 msgstr "Transferencia Planificada"
 
 #. module: stock_move_location
+#. odoo-python
+#: code:addons/stock_move_location/models/stock_picking.py:0
+#, python-format
+msgid "Please choose a source end location"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
 msgid "Product"
 msgstr "Producto"
@@ -197,8 +222,8 @@ msgstr "Cantidad a mover"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__reserved_quantity
-msgid "Reserved quantity"
-msgstr "Cantidad Reservada"
+msgid "Reserved Quantity"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
@@ -216,6 +241,11 @@ msgstr ""
 #: model:ir.model,name:stock_move_location.model_stock_move
 msgid "Stock Move"
 msgstr "Movimiento de existencias"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_picking
+msgid "Transfer"
+msgstr ""
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -248,3 +278,12 @@ msgstr ""
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "technical field to disable the edition of origin location."
 msgstr ""
+
+#~ msgid "Apply putaway strategy"
+#~ msgstr "Aplicar estrategia de traslado"
+
+#~ msgid "Inventory Details"
+#~ msgstr "Detalles de Inventario"
+
+#~ msgid "Reserved quantity"
+#~ msgstr "Cantidad Reservada"

@@ -18,7 +18,7 @@ msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__apply_putaway_strategy
-msgid "Apply putaway strategy"
+msgid "Apply Putaway Strategy"
 msgstr ""
 
 #. module: stock_move_location
@@ -79,6 +79,16 @@ msgid "Edit Locations"
 msgstr "Quelllagerort"
 
 #. module: stock_move_location
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_picking_form
+msgid "Fill with stock"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__owner_id
+msgid "From Owner"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
 msgid "ID"
@@ -88,11 +98,6 @@ msgstr "ID"
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Immediate Transfer"
 msgstr "Sofortige Lieferung"
-
-#. module: stock_move_location
-#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
-msgid "Inventory Details"
-msgstr "Bestand Details"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location____last_update
@@ -144,6 +149,7 @@ msgid "Move location Wizard"
 msgstr "Umlagerungsassistent"
 
 #. module: stock_move_location
+#. odoo-python
 #: code:addons/stock_move_location/wizard/stock_move_location_line.py:0
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
@@ -153,6 +159,13 @@ msgstr "Die Menge darf nicht die Bestandsmenge überschreiten oder negativ sein"
 #: model:ir.actions.act_window,name:stock_move_location.wiz_stock_quant_location_action
 msgid "Move to location..."
 msgstr "Zu Lagerort bewegen..."
+
+#. module: stock_move_location
+#. odoo-python
+#: code:addons/stock_move_location/models/stock_picking.py:0
+#, python-format
+msgid "Moves lines already exists"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
@@ -165,6 +178,11 @@ msgstr "Quelllagerort"
 #, fuzzy
 msgid "Origin Location Disable"
 msgstr "Quelllagerort"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__package_id
+msgid "Package Number"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
@@ -183,6 +201,13 @@ msgid "Planned Transfer"
 msgstr "Geplante Bewegung"
 
 #. module: stock_move_location
+#. odoo-python
+#: code:addons/stock_move_location/models/stock_picking.py:0
+#, python-format
+msgid "Please choose a source end location"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
 msgid "Product"
 msgstr "Produkt"
@@ -199,7 +224,7 @@ msgstr "Anzahl"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__reserved_quantity
-msgid "Reserved quantity"
+msgid "Reserved Quantity"
 msgstr ""
 
 #. module: stock_move_location
@@ -218,6 +243,11 @@ msgstr ""
 #: model:ir.model,name:stock_move_location.model_stock_move
 msgid "Stock Move"
 msgstr "Lagerbewegung"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_picking
+msgid "Transfer"
+msgstr ""
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -250,6 +280,9 @@ msgstr ""
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "technical field to disable the edition of origin location."
 msgstr ""
+
+#~ msgid "Inventory Details"
+#~ msgstr "Bestand Details"
 
 #~ msgid "Add all"
 #~ msgstr "Alle hinzufügen"
