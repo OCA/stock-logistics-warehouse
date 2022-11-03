@@ -34,13 +34,10 @@ msgstr "Takoj razpoložljiva današnja kol"
 msgid "Sales Order Line"
 msgstr "Prodajna postavka"
 
-#. module: sale_stock_available_info_popup
-#. openerp-web
-#: code:addons/sale_stock_available_info_popup/static/src/xml/qty_at_date.xml:0
 #, python-format
-msgid ""
-"widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver and !"
-"widget.data.is_mto"
-msgstr ""
-"widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver and !"
-"widget.data.is_mto"
+#~ msgid ""
+#~ "widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver "
+#~ "and !widget.data.is_mto"
+#~ msgstr ""
+#~ "widget.data.immediately_usable_qty_today < widget.data.qty_to_deliver "
+#~ "and !widget.data.is_mto"
