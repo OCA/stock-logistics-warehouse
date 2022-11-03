@@ -105,6 +105,7 @@ class StockMoveLocationWizard(models.TransientModel):
                         "origin_location_id": quant.location_id.id,
                         "lot_id": quant.lot_id.id,
                         "package_id": quant.package_id.id,
+                        "owner_id": quant.owner_id.id,
                         "product_uom_id": quant.product_uom_id.id,
                         "custom": False,
                     },
@@ -133,6 +134,7 @@ class StockMoveLocationWizard(models.TransientModel):
                                 "origin_location_id": quant.location_id.id,
                                 "lot_id": quant.lot_id.id,
                                 "package_id": quant.package_id.id,
+                                "owner_id": quant.owner_id.id,
                                 "product_uom_id": quant.product_uom_id.id,
                                 "custom": False,
                             },
@@ -242,6 +244,7 @@ class StockMoveLocationWizard(models.TransientModel):
                     ("location_id", "=", line.origin_location_id.id),
                     ("lot_id", "=", line.lot_id.id),
                     ("package_id", "=", line.package_id.id),
+                    ("owner_id", "=", line.owner_id.id),
                     ("product_uom_qty", ">", 0.0),
                 ]
             )
@@ -283,11 +286,11 @@ class StockMoveLocationWizard(models.TransientModel):
         # Using sql as search_group doesn't support aggregation functions
         # leading to overhead in queries to DB
         query = """
-            SELECT product_id, lot_id, package_id, SUM(quantity) AS quantity,
+            SELECT product_id, lot_id, package_id, owner_id, SUM(quantity) AS quantity,
                 SUM(reserved_quantity) AS reserved_quantity
             FROM stock_quant
             WHERE location_id = %s
-            GROUP BY product_id, lot_id, package_id
+            GROUP BY product_id, lot_id, package_id, owner_id
         """
         self.env.cr.execute(query, (location_id.id,))
         return self.env.cr.dictfetchall()
@@ -314,6 +317,7 @@ class StockMoveLocationWizard(models.TransientModel):
                     # cursor returns None instead of False
                     "lot_id": group.get("lot_id") or False,
                     "package_id": group.get("package_id") or False,
+                    "owner_id": group.get("owner_id") or False,
                     "product_uom_id": product.uom_id.id,
                     "custom": False,
                 }

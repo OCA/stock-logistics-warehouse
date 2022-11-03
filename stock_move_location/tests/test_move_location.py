@@ -22,14 +22,30 @@ class TestMoveLocation(TestsCommon):
         self.check_product_amount(self.product_lots, self.internal_loc_1, 0, self.lot2)
         self.check_product_amount(self.product_lots, self.internal_loc_1, 0, self.lot3)
         self.check_product_amount(
-            self.product_package, self.internal_loc_1, 0, self.lot4, self.package
+            self.product_package, self.internal_loc_1, 0, self.lot4, self.package1
+        )
+        self.check_product_amount(
+            self.product_package,
+            self.internal_loc_1,
+            0,
+            self.lot5,
+            self.package2,
+            self.partner,
         )
         self.check_product_amount(self.product_no_lots, self.internal_loc_2, 123)
         self.check_product_amount(self.product_lots, self.internal_loc_2, 1, self.lot1)
         self.check_product_amount(self.product_lots, self.internal_loc_2, 1, self.lot2)
         self.check_product_amount(self.product_lots, self.internal_loc_2, 1, self.lot3)
         self.check_product_amount(
-            self.product_package, self.internal_loc_2, 1, self.lot4, self.package
+            self.product_package, self.internal_loc_2, 1, self.lot4, self.package1
+        )
+        self.check_product_amount(
+            self.product_package,
+            self.internal_loc_2,
+            1,
+            self.lot5,
+            self.package2,
+            self.partner,
         )
 
     def test_move_location_wizard_amount(self):
@@ -60,9 +76,9 @@ class TestMoveLocation(TestsCommon):
         """Test lines getting cleared properly."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
         wizard.onchange_origin_location()
-        self.assertEqual(len(wizard.stock_move_location_line_ids), 5)
+        self.assertEqual(len(wizard.stock_move_location_line_ids), 6)
         wizard._onchange_destination_location_id()
-        self.assertEqual(len(wizard.stock_move_location_line_ids), 5)
+        self.assertEqual(len(wizard.stock_move_location_line_ids), 6)
         dest_location_line = wizard.stock_move_location_line_ids.mapped(
             "destination_location_id"
         )
@@ -78,9 +94,10 @@ class TestMoveLocation(TestsCommon):
         wizard.action_move_location()
         picking = wizard.picking_id
         self.assertEqual(picking.state, "assigned")
-        self.assertEqual(len(picking.move_line_ids), 5)
+        self.assertEqual(len(picking.move_line_ids), 6)
         self.assertEqual(
-            sorted(picking.move_line_ids.mapped("product_uom_qty")), [1, 1, 1, 1, 123]
+            sorted(picking.move_line_ids.mapped("product_uom_qty")),
+            [1, 1, 1, 1, 1, 123],
         )
 
     def test_quant_transfer(self):
