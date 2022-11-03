@@ -37,6 +37,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
         comodel_name="stock.quant.package",
         domain="[('location_id', '=', origin_location_id)]",
     )
+    owner_id = fields.Many2one(comodel_name="res.partner", string="From Owner")
     move_quantity = fields.Float(
         string="Quantity to move", digits="Product Unit of Measure"
     )
@@ -77,6 +78,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
             search_args.append(("package_id", "=", self.package_id.id))
         else:
             search_args.append(("package_id", "=", False))
+        if self.owner_id:
+            search_args.append(("owner_id", "=", self.owner_id.id))
+        else:
+            search_args.append(("owner_id", "=", False))
         res = self.env["stock.quant"].read_group(search_args, ["quantity"], [])
         max_quantity = res[0]["quantity"]
         return max_quantity
@@ -102,6 +107,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
             "lot_id": self.lot_id.id,
             "package_id": self.package_id.id,
             "result_package_id": self.package_id.id,
+            "owner_id": self.owner_id.id,
             "location_id": self.origin_location_id.id,
             "location_dest_id": location_dest_id,
             "qty_done": qty_done,
@@ -133,6 +139,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
             search_args.append(("package_id", "=", self.package_id.id))
         else:
             search_args.append(("package_id", "=", False))
+        if self.owner_id:
+            search_args.append(("owner_id", "=", self.owner_id.id))
+        else:
+            search_args.append(("owner_id", "=", False))
         res = self.env["stock.quant"].read_group(search_args, ["quantity"], [])
         available_qty = res[0]["quantity"]
         if not available_qty:

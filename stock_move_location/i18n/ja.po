@@ -18,8 +18,8 @@ msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__apply_putaway_strategy
-msgid "Apply putaway strategy"
-msgstr "置場規則を適用する"
+msgid "Apply Putaway Strategy"
+msgstr ""
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -65,8 +65,6 @@ msgid "Destination Location Disable"
 msgstr "移動先ロケーション無効"
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move__display_name
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__display_name
 msgid "Display Name"
@@ -79,8 +77,16 @@ msgid "Edit Locations"
 msgstr "保管場所の編集"
 
 #. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move__id
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__id
+#: model_terms:ir.ui.view,arch_db:stock_move_location.view_picking_form
+msgid "Fill with stock"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__owner_id
+msgid "From Owner"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
 msgid "ID"
@@ -92,13 +98,6 @@ msgid "Immediate Transfer"
 msgstr "即時在庫移動"
 
 #. module: stock_move_location
-#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
-msgid "Inventory Details"
-msgstr "在庫詳細"
-
-#. module: stock_move_location
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_move____last_update
-#: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line____last_update
 msgid "Last Modified on"
@@ -148,6 +147,7 @@ msgid "Move location Wizard"
 msgstr "保管場所移動ウィザード"
 
 #. module: stock_move_location
+#. odoo-python
 #: code:addons/stock_move_location/wizard/stock_move_location_line.py:0
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
@@ -159,6 +159,13 @@ msgid "Move to location..."
 msgstr "保管場所への移動..."
 
 #. module: stock_move_location
+#. odoo-python
+#: code:addons/stock_move_location/models/stock_picking.py:0
+#, python-format
+msgid "Moves lines already exists"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__origin_location_id
 msgid "Origin Location"
@@ -168,6 +175,11 @@ msgstr "移動元"
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "Origin Location Disable"
 msgstr "移動元無効"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__package_id
+msgid "Package Number"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
@@ -186,6 +198,13 @@ msgid "Planned Transfer"
 msgstr "在庫移動伝票を作成"
 
 #. module: stock_move_location
+#. odoo-python
+#: code:addons/stock_move_location/models/stock_picking.py:0
+#, python-format
+msgid "Please choose a source end location"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
 msgid "Product"
 msgstr "プロダクト"
@@ -202,8 +221,8 @@ msgstr "数量"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__reserved_quantity
-msgid "Reserved quantity"
-msgstr "予約済数"
+msgid "Reserved Quantity"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
@@ -215,13 +234,19 @@ msgstr "手持在庫移動数を表示"
 msgid ""
 "Show a button 'Move On Hand' in the Inventory Dashboard to initiate the "
 "process to move the products in stock at the origin location."
-msgstr "在庫ダッシュボード内に'手持在庫移動'ボタンを表示し、移動元保管場所からの在庫"
+msgstr ""
+"在庫ダッシュボード内に'手持在庫移動'ボタンを表示し、移動元保管場所からの在庫"
 "移動を開始します。"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_move
 msgid "Stock Move"
 msgstr "在庫移動"
+
+#. module: stock_move_location
+#: model:ir.model,name:stock_move_location.model_stock_picking
+msgid "Transfer"
+msgstr ""
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -252,3 +277,12 @@ msgstr "移動先保管場所の編集を無効にする技術フィールド。
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "technical field to disable the edition of origin location."
 msgstr "移動元保管場所の編集を無効にする技術フィールド。"
+
+#~ msgid "Apply putaway strategy"
+#~ msgstr "置場規則を適用する"
+
+#~ msgid "Inventory Details"
+#~ msgstr "在庫詳細"
+
+#~ msgid "Reserved quantity"
+#~ msgstr "予約済数"
