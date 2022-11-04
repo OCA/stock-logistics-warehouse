@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[stock_move_auto_assign](stock_move_auto_assign/) | 16.0.1.0.0 |  | Try to reserve moves when goods enter in a location
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 16.0.1.0.0 |  | Add a MTS+MTO route
 
 
