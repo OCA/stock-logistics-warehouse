@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo-addon-stock_location_product_restriction>=16.0dev,<16.1dev',
         'odoo-addon-stock_move_auto_assign>=16.0dev,<16.1dev',
         'odoo-addon-stock_mts_mto_rule>=16.0dev,<16.1dev',
+        'odoo-addon-stock_warehouse_calendar>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
