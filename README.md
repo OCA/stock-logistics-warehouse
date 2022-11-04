@@ -22,7 +22,13 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 16.0.1.0.0 |  | Add a MTS+MTO route
-[stock_package_type_button_box](stock_package_type_button_box/) | 16.0.1.0.0 | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | This module is a technical module that allows to fill in a button box for Stock Package Type form view
+
+
+Unported addons
+---------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[stock_package_type_button_box](stock_package_type_button_box/) | 16.0.1.0.0 (unported) | [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | DEPRECATED - This module is a technical module that allows to fill in a button box for Stock Package Type form view
 
 [//]: # (end addons)
 
