@@ -17,24 +17,6 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_warehouse_calendar
-#: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_rule__display_name
-#: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_warehouse__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: stock_warehouse_calendar
-#: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_rule__id
-#: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_warehouse__id
-msgid "ID"
-msgstr ""
-
-#. module: stock_warehouse_calendar
-#: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_rule____last_update
-#: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_warehouse____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: stock_warehouse_calendar
 #: model:ir.model,name:stock_warehouse_calendar.model_stock_rule
 msgid "Stock Rule"
 msgstr ""
@@ -48,3 +30,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_warehouse__calendar_id
 msgid "Working Hours"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
