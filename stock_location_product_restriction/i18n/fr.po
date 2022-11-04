@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_location_product_restriction
-#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location_has_restriction_violation
-msgid "Has restriction violation"
-msgstr "Ne respecte pas les règles"
+#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__has_restriction_violation
+msgid "Has Restriction Violation"
+msgstr ""
 
 #. module: stock_location_product_restriction
-#: model:ir.model.fields,help:stock_location_product_restriction.field_stock_location_parent_product_restriction
-#: model:ir.model.fields,help:stock_location_product_restriction.field_stock_location_product_restriction
+#: model:ir.model.fields,help:stock_location_product_restriction.field_stock_location__parent_product_restriction
+#: model:ir.model.fields,help:stock_location_product_restriction.field_stock_location__product_restriction
 msgid ""
 "If 'Same product' is selected the system will prevent to put items of "
 "different products into the same location."
@@ -32,7 +32,7 @@ msgstr ""
 "produits différents dans le même emplacement."
 
 #. module: stock_location_product_restriction
-#: model:ir.model.fields,help:stock_location_product_restriction.field_stock_location_specific_product_restriction
+#: model:ir.model.fields,help:stock_location_product_restriction.field_stock_location__specific_product_restriction
 msgid ""
 "If specified the restriction specified will apply to the current location "
 "and all its children"
@@ -46,25 +46,29 @@ msgid "Inventory Locations"
 msgstr "Emplacements de stock"
 
 #. module: stock_location_product_restriction
-#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location_parent_product_restriction
-#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location_product_restriction
-msgid "Product restriction"
-msgstr "Restriction sur les articles"
+#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__parent_product_restriction
+msgid "Parent Location Product Restriction"
+msgstr ""
 
 #. module: stock_location_product_restriction
-#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location_restriction_violation_message
-msgid "Restriction violation message"
-msgstr "Restriction violation message"
+#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__product_restriction
+msgid "Product Restriction"
+msgstr ""
 
 #. module: stock_location_product_restriction
-#: model:ir.ui.view,arch_db:stock_location_product_restriction.stock_location_form_view
+#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__restriction_violation_message
+msgid "Restriction Violation Message"
+msgstr ""
+
+#. module: stock_location_product_restriction
+#: model_terms:ir.ui.view,arch_db:stock_location_product_restriction.stock_location_form_view
 msgid "Restrictions"
 msgstr "Restrictions"
 
 #. module: stock_location_product_restriction
-#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location_specific_product_restriction
-msgid "Specific product restriction"
-msgstr "Spécifique restriction sur les articles"
+#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__specific_product_restriction
+msgid "Specific Product Restriction"
+msgstr ""
 
 #. module: stock_location_product_restriction
 #: model:ir.model,name:stock_location_product_restriction.model_stock_move
@@ -72,37 +76,68 @@ msgid "Stock Move"
 msgstr "Mouvement de stock"
 
 #. module: stock_location_product_restriction
-#: code:addons/stock_location_product_restriction/models/stock_move.py:42
+#: code:addons/stock_location_product_restriction/models/stock_move.py:0
 #, python-format
 msgid ""
-"The location %s can only contain items of the same product. You plan to move "
-"different products to this location. (%s)"
+"The location {location} can only contain items of the same product. You plan "
+"to move different products to this location. ({products})"
 msgstr ""
-"Impossible d'effectuer le transfer. L'emplacement %s ne peut contenir que "
-"des articles identiques. (%s)"
 
 #. module: stock_location_product_restriction
-#: code:addons/stock_location_product_restriction/models/stock_location.py:105
+#: code:addons/stock_location_product_restriction/models/stock_location.py:0
 #, python-format
 msgid ""
 "This location should only contain items of the same product but it contains "
-"items of products %s"
+"items of products {products}"
 msgstr ""
-"Cet emplacement ne peut contenir que des articles identiques mais les "
-"articles %s y sont présents."
 
 #. module: stock_location_product_restriction
-#: model:ir.ui.view,arch_db:stock_location_product_restriction.stock_location_search_view
+#: model_terms:ir.ui.view,arch_db:stock_location_product_restriction.stock_location_search_view
 msgid "With restriction violation"
 msgstr "Ne respecte pas les règles"
 
 #. module: stock_location_product_restriction
-#: code:addons/stock_location_product_restriction/models/stock_move.py:84
+#: code:addons/stock_location_product_restriction/models/stock_move.py:0
 #, python-format
 msgid ""
-"You plan to move the product %s to the location %s but the location must "
-"only contain items of same product and already contains items of other "
-"product(s) (%s)."
+"You plan to move the product {product} to the location {location} but the "
+"location must only contain items of same product and already contains items "
+"of other product(s) ({existing_products})."
 msgstr ""
-"Impossible d'effectuer le transfer du produit %s. L'emplacement %s ne peut "
-"contenir que des articles identiques et il contient déjà: %s"
+
+#~ msgid "Has restriction violation"
+#~ msgstr "Ne respecte pas les règles"
+
+#~ msgid "Product restriction"
+#~ msgstr "Restriction sur les articles"
+
+#~ msgid "Restriction violation message"
+#~ msgstr "Restriction violation message"
+
+#~ msgid "Specific product restriction"
+#~ msgstr "Spécifique restriction sur les articles"
+
+#, python-format
+#~ msgid ""
+#~ "The location %s can only contain items of the same product. You plan to "
+#~ "move different products to this location. (%s)"
+#~ msgstr ""
+#~ "Impossible d'effectuer le transfer. L'emplacement %s ne peut contenir que "
+#~ "des articles identiques. (%s)"
+
+#, python-format
+#~ msgid ""
+#~ "This location should only contain items of the same product but it "
+#~ "contains items of products %s"
+#~ msgstr ""
+#~ "Cet emplacement ne peut contenir que des articles identiques mais les "
+#~ "articles %s y sont présents."
+
+#, python-format
+#~ msgid ""
+#~ "You plan to move the product %s to the location %s but the location must "
+#~ "only contain items of same product and already contains items of other "
+#~ "product(s) (%s)."
+#~ msgstr ""
+#~ "Impossible d'effectuer le transfer du produit %s. L'emplacement %s ne "
+#~ "peut contenir que des articles identiques et il contient déjà: %s"
