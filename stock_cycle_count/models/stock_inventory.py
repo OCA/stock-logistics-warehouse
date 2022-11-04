@@ -1,9 +1,9 @@
-# Copyright 2017 ForgeFlow S.L.
+# Copyright 2017-2022 ForgeFlow S.L.
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 PERCENT = 100.0
 
@@ -88,18 +88,45 @@ class StockInventory(models.Model):
             res._link_to_planned_cycle_count()
         return res
 
-    def write(self, vals):
-        for inventory in self:
-            if inventory._allow_write(vals):
-                raise UserError(
-                    _(
-                        "You cannot modify the configuration of an Inventory "
-                        "Adjustment related to a Cycle Count."
-                    )
-                )
-        return super(StockInventory, self).write(vals)
+    def _is_consistent_with_cycle_count(self):
+        self.ensure_one()
+        if (
+            not self.location_ids
+            or len(self.location_ids) > 1
+            or self.location_ids != self.cycle_count_id.location_id
+        ):
+            return False, _(
+                "The location in the inventory does not match with the cycle count."
+            )
+        if self.product_ids:
+            return False, _(
+                "The adjustment should be done for all products in the location."
+            )
+        if self.company_id != self.cycle_count_id.company_id:
+            return False, _(
+                "The company of the adjustment does not match with the "
+                "company in the cycle count."
+            )
+        if not self.exclude_sublocation:
+            return False, _(
+                "An adjustment linked to a cycle count should exclude the sublocations."
+            )
+        return True, ""
 
-    def _allow_write(self, vals):
-        return (
-            self.cycle_count_id and "state" not in vals.keys() and self.state == "draft"
-        )
+    @api.constrains(
+        "cycle_count_id",
+        "location_ids",
+        "product_ids",
+        "company_id",
+        "exclude_sublocation",
+    )
+    def _check_cycle_count_consistency(self):
+        for rec in self.filtered(lambda r: r.cycle_count_id):
+            is_consistent, msg = rec._is_consistent_with_cycle_count()
+            if not is_consistent:
+                raise ValidationError(
+                    _(
+                        "The Inventory Adjustment is inconsistent with the Cycle Count:\n%s"
+                    )
+                    % msg
+                )
