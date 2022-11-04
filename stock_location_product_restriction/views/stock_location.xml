@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_location_form_view">
+        <field
+            name="name"
+        >stock.location.form (in stock_location_product_restriction)</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="after">
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    attrs="{'invisible': [('restriction_violation_message','=',False)]}"
+                ><field name="restriction_violation_message" />
+                </div>
+            </div>
+            <xpath expr="//group[last()]">
+                <group name="restrictions" string="Restrictions">
+                    <field name="product_restriction" />
+                    <field name="specific_product_restriction" class="oe_edit_only" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_location_search_view">
+        <field
+            name="name"
+        >stock.location.search (in stock_location_product_restriction)</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search" />
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <filter
+                    string="With restriction violation"
+                    name="has_restriction_violation"
+                    domain="[('has_restriction_violation','=',True)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_location_tree_view">
+        <field
+            name="name"
+        >stock.location.tree (in stock_location_unique_product)</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field name="has_restriction_violation" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
