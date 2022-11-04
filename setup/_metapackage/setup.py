@@ -9,7 +9,6 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-stock_mts_mto_rule>=16.0dev,<16.1dev',
-        'odoo-addon-stock_package_type_button_box>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
