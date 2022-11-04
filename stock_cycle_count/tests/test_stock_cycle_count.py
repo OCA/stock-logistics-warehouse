@@ -316,3 +316,24 @@ class TestStockCycleCount(common.TransactionCase):
         )
         self.assertEqual(inventory.cycle_count_id, self.cycle_count_1)
         self.assertEqual(self.cycle_count_1.state, "open")
+
+    def test_cycle_count_contrains(self):
+        """Test the various constrains defined in the inventory adjustment."""
+        self.cycle_count_1.action_create_inventory_adjustment()
+        inventory = self.inventory_model.search(
+            [("cycle_count_id", "=", self.cycle_count_1.id)]
+        )
+        with self.assertRaises(ValidationError):
+            inventory.product_ids = self.product1
+        with self.assertRaises(ValidationError):
+            inventory.location_ids = False
+        loc = self.stock_location_model.create(
+            {"name": "Second Location", "usage": "internal"}
+        )
+        with self.assertRaises(ValidationError):
+            inventory.location_ids += loc
+        with self.assertRaises(ValidationError):
+            inventory.exclude_sublocation = False
+        company = self.env["res.company"].create({"name": "Test"})
+        with self.assertRaises(ValidationError):
+            inventory.company_id = company
