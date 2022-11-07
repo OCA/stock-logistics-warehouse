@@ -37,6 +37,14 @@ class StockInventory(models.Model):
         group_operator="avg",
     )
 
+    def _get_default_counted_quantitites(self):
+        company_id = self.env.context.get("default_company_id", self.env.company)
+        return company_id.inventory_adjustment_counted_quantities or "counted"
+
+    prefill_counted_quantity = fields.Selection(
+        default=_get_default_counted_quantitites
+    )
+
     def _update_cycle_state(self):
         for inv in self:
             if inv.cycle_count_id and inv.state == "done":
