@@ -73,6 +73,12 @@ msgid "Active"
 msgstr "Active"
 
 #. module: stock_cycle_count
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid "An adjustment linked to a cycle count should exclude the sublocations."
+msgstr ""
+
+#. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "Applied in:"
 msgstr ""
@@ -642,6 +648,34 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_cycle_count
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"The Inventory Adjustment is inconsistent with the Cycle Count:\n"
+"%s"
+msgstr ""
+
+#. module: stock_cycle_count
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid "The adjustment should be done for all products in the location."
+msgstr ""
+
+#. module: stock_cycle_count
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"The company of the adjustment does not match with the company in the cycle "
+"count."
+msgstr ""
+
+#. module: stock_cycle_count
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid "The location in the inventory does not match with the cycle count."
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__turnover_inventory_value_threshold
 msgid "Turnover Inventory Value Threshold"
 msgstr ""
@@ -719,14 +753,6 @@ msgstr ""
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You cannot define a negative period."
-msgstr ""
-
-#. module: stock_cycle_count
-#: code:addons/stock_cycle_count/models/stock_inventory.py:0
-#, python-format
-msgid ""
-"You cannot modify the configuration of an Inventory Adjustment related to a "
-"Cycle Count."
 msgstr ""
 
 #. module: stock_cycle_count
