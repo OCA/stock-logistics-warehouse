@@ -35,7 +35,7 @@ addon | version | maintainers | summary
 [stock_available_mrp](stock_available_mrp/) | 14.0.1.0.5 |  | Consider the production potential is available to promise
 [stock_available_unreserved](stock_available_unreserved/) | 14.0.1.1.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 14.0.1.0.2 |  | Stock Quantity Change Reason
-[stock_cycle_count](stock_cycle_count/) | 14.0.1.2.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
+[stock_cycle_count](stock_cycle_count/) | 14.0.1.2.2 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
 [stock_demand_estimate](stock_demand_estimate/) | 14.0.1.1.0 |  | Allows to create demand estimates.
 [stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 14.0.1.1.0 |  | Allows to create demand estimates.
 [stock_exception](stock_exception/) | 14.0.1.0.1 |  | Custom exceptions on stock picking
