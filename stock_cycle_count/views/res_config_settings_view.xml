@@ -1,0 +1,58 @@
+<odoo>
+    <record id="res_config_settings_view_form_cycle_adjustment" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.cycle.adjustment</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div name="barcode_setting_container" position="after">
+                <h2>Cycle Count</h2>
+                <div
+                    class="row mt16 o_settings_container"
+                    name="cycle_count_setting_container"
+                >
+                    <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        id="cycle_count_id"
+                        title="Cycle Count"
+                    >
+                        <div class="o_setting_left_pane">
+                            <field name="auto_start_inventory_from_cycle_count" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="auto_start_inventory_from_cycle_count" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                                role="img"
+                            />
+                            <div class="text-muted">
+                                If enabled, confirming a Cycle Count will start the related Inventory Adjustment.
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="col-lg-6 col-lg-6 o_setting_box"
+                        id="default_counted_quantities"
+                    >
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label
+                                for="inventory_adjustment_counted_quantities"
+                                string="Default Counted Quantity Mode"
+                            />
+                            <field name="inventory_adjustment_counted_quantities" />
+                            <div class="text-muted">
+                                Sets default counted quanities in Inventory Adjustments
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
