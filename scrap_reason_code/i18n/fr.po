@@ -38,22 +38,16 @@ msgstr "Description"
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__display_name
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__display_name
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__id
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__id
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__id
 msgid "ID"
 msgstr "ID"
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code____last_update
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move____last_update
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap____last_update
 msgid "Last Modified on"
 msgstr "Date de dernière modification"
 
@@ -74,11 +68,6 @@ msgstr "Date de dernière modification"
 #: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_scrap_reason_code_form
 msgid "Reason Code"
 msgstr "Motif"
-
-#. module: scrap_reason_code
-#: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_scrap_reason_code_list
-msgid "Reason Codes"
-msgstr "Motifs"
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__reason_code_id
@@ -106,3 +95,6 @@ msgstr "Motifs de Rebut"
 #: model:ir.model,name:scrap_reason_code.model_stock_move
 msgid "Stock Move"
 msgstr "Opération"
+
+#~ msgid "Reason Codes"
+#~ msgstr "Motifs"
