@@ -2,7 +2,7 @@
 
 {
     "name": "Scrap Reason Code",
-    "version": "15.0.1.0.1",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "summary": "Reason code for scrapping",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
