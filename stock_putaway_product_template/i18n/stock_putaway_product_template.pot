@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_putaway_product_template
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_putaway_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_product_template__display_name
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_putaway_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_product_template__id
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_putaway_product_template
+#: model:ir.model,name:stock_putaway_product_template.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_putaway_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_product_template____last_update
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_putaway_product_template
+#: model:ir.model,name:stock_putaway_product_template.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_putaway_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule__product_tmpl_id
+msgid "Product Tmpl"
+msgstr ""
+
+#. module: stock_putaway_product_template
+#: model:ir.model,name:stock_putaway_product_template.model_stock_putaway_rule
+msgid "Putaway Rule"
+msgstr ""
