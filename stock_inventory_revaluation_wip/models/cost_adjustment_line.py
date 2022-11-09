@@ -61,7 +61,8 @@ class CostAdjustmentLine(models.Model):
         return res | boms2 | boms3
 
     def _create_impacted_bom_lines(self):
-        details = super()._create_impacted_bom_lines()
+        AdjDetails = self.env["stock.cost.adjustment.detail"]
+        details = super()._create_impacted_bom_lines() or AdjDetails
         self and self.ensure_one()
         product = self.product_id
         level = self.level
@@ -73,7 +74,7 @@ class CostAdjustmentLine(models.Model):
                 add_cost = self.difference_cost * (ops_line.time_cycle / 60.0)
                 vals.append(
                     {
-                        "cost_adjustment_id": self.id,
+                        "cost_adjustment_line_id": self.id,
                         "operation_id": ops_line.id,
                         "bom_id": ops_line.bom_id.id,
                         "product_id": impacted_product.id,
@@ -84,7 +85,7 @@ class CostAdjustmentLine(models.Model):
                     }
                 )
         if vals:
-            add_details = self.env["stock.cost.adjustment.detail"].create(vals)
+            add_details = AdjDetails.create(vals)
             details |= add_details
         return details
 
