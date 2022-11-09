@@ -1,0 +1,20 @@
+<!-- Copyright 2019 Open Source Integrators
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_reason_code_form" model="ir.ui.view">
+        <field name="name">stock.reason.code.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='origin_grp']" position='after'>
+                <field name="scrapped" invisible="1" />
+                <group
+                    string="Reason Code"
+                    attrs="{'invisible': [('scrapped', '!=', True)]}"
+                >
+                    <field name="reason_code_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
