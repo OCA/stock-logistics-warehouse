@@ -9,7 +9,7 @@ class StockScrap(models.Model):
     _inherit = "stock.scrap"
 
     reason_code_id = fields.Many2one(
-        "scrap.reason.code", string="Reason Code", states={"done": [("readonly", True)]}
+        "scrap.reason.code", states={"done": [("readonly", True)]}
     )
     scrap_location_id = fields.Many2one(readonly=True)
 
@@ -37,7 +37,8 @@ class StockScrap(models.Model):
         self._update_scrap_reason_code_location(vals)
         return super(StockScrap, self).write(vals)
 
-    @api.model
-    def create(self, vals):
-        self._update_scrap_reason_code_location(vals)
-        return super(StockScrap, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            self._update_scrap_reason_code_location(vals)
+        return super().create(vals_list)

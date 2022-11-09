@@ -84,8 +84,8 @@ class StockScrap(TransactionCase):
         )
         scrap._onchange_reason_code_id()
         scrap.do_scrap()
-        self.assertEqual(len(picking.move_lines), 2)
-        scrapped_move = picking.move_lines.filtered(lambda m: m.state == "done")
+        self.assertEqual(len(picking.move_ids), 2)
+        scrapped_move = picking.move_ids.filtered(lambda m: m.state == "done")
         self.assertTrue(scrapped_move, "No scrapped move created.")
         self.assertEqual(
             scrapped_move.scrap_ids.ids, [scrap.id], "Wrong scrap linked to the move."
@@ -148,8 +148,8 @@ class StockScrap(TransactionCase):
         )
         scrap2._onchange_reason_code_id()
         scrap2.do_scrap()
-        self.assertEqual(len(picking2.move_lines), 2)
-        scrapped_move = picking2.move_lines.filtered(lambda m: m.state == "done")
+        self.assertEqual(len(picking2.move_ids), 2)
+        scrapped_move = picking2.move_ids.filtered(lambda m: m.state == "done")
         self.assertTrue(scrapped_move, "No scrapped move created.")
         self.assertEqual(
             scrapped_move.scrap_ids.ids, [scrap2.id], "Wrong scrap linked to the move."
