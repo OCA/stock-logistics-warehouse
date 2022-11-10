@@ -1,21 +1,15 @@
 # Copyright (C) 2019 Akretion
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+# Copyright 2022 Foodles (http://www.foodles.co).
+# @author Pierre Verkest <pierreverkest84@gmail.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, exceptions, _
+from odoo import fields, models
 
 
 class ResUsers(models.Model):
     _inherit = "res.users"
 
     warehouse_ids = fields.Many2many(
-        'stock.warehouse',
+        "stock.warehouse",
         string="Allowed Warehouses",
-        required=True)
-
-    @api.constrains('warehouse_id', 'warehouse_ids')
-    def _check_warehouse(self):
-        if any(user.company_ids and 
-               user.company_id not in user.company_ids for user in self):
-            raise exceptions.Warning(
-                _('The chosen warehouse is not in the allowed warehouses for \
-                   this user'))
+    )
