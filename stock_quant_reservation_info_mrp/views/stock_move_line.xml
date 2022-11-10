@@ -1,6 +1,6 @@
 <odoo>
     <record id="view_stock_move_line_reserved_info_tree" model="ir.ui.view">
-        <field name="name">stock.move.line.tree.reserved.info</field>
+        <field name="name">stock.move.line.tree.reserved.info.mrp</field>
         <field name="model">stock.move.line</field>
         <field
             name="inherit_id"
@@ -18,6 +18,21 @@
                     attrs="{'invisible': [('production_id', '=', False)]}"
                 />
             </button>
+        </field>
+    </record>
+
+    <record id="view_stock_move_line_reserved_info_form" model="ir.ui.view">
+        <field name="name">stock.move.line.form.reserved.info.mrp</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_form" />
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field
+                    name="production_id"
+                    string="Manufacturing Order"
+                    attrs="{'invisible': [('production_id', '=', False)]}"
+                />
+            </field>
         </field>
     </record>
 </odoo>
