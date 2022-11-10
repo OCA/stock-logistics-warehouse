@@ -27,6 +27,14 @@ msgid "(No description provided.)"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" groups="
+"\"base.group_multi_company\" role=\"img\"/>"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<span>Location:</span>"
 msgstr ""
@@ -74,6 +82,13 @@ msgid "Active"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__prefill_counted_quantity
+msgid ""
+"Allows to start with a pre-filled counted quantity for each lines or with "
+"all counted quantities set to zero."
+msgstr ""
+
+#. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "An adjustment linked to a cycle count should exclude the sublocations."
@@ -108,6 +123,12 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__auto_start_inventory_from_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__auto_start_inventory_from_cycle_count
+msgid "Auto Start Inventory Adjustment from Cycle Count"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 msgid "Cancel"
 msgstr "Atšaukti"
@@ -116,6 +137,11 @@ msgstr "Atšaukti"
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__cancelled
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Cancelled"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_res_company
+msgid "Companies"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -129,6 +155,11 @@ msgid "Compute Cycle Count Rules"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 msgid "Confirm"
 msgstr ""
@@ -136,6 +167,11 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.action_server_cycle_count_confirm
 msgid "Confirm Cycle Counts"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__prefill_counted_quantity
+msgid "Counted Quantities"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -162,6 +198,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.actions.report,name:stock_cycle_count.action_report_stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
@@ -266,6 +303,21 @@ msgid "Deadline Date"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+msgid "Default Counted Quantity Mode"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__res_company__inventory_adjustment_counted_quantities__counted
+msgid "Default to stock on hand"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__res_company__inventory_adjustment_counted_quantities__zero
+msgid "Default to zero"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_location__cycle_count_disabled
 msgid "Define whether the location is going to be cycle counted."
 msgstr ""
@@ -284,6 +336,8 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__display_name
@@ -352,6 +406,8 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__id
@@ -371,6 +427,17 @@ msgstr ""
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_res_company__auto_start_inventory_from_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_res_company__inventory_adjustment_counted_quantities
+#: model:ir.model.fields,help:stock_cycle_count.field_res_config_settings__auto_start_inventory_from_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_res_config_settings__inventory_adjustment_counted_quantities
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+msgid ""
+"If enabled, confirming a Cycle Count will start the related Inventory "
+"Adjustment."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -409,6 +476,12 @@ msgid "Inventory Adjustment"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__inventory_adjustment_counted_quantities
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__inventory_adjustment_counted_quantities
+msgid "Inventory Adjustment Counted quantities from Cycle Count"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 msgid "Inventory Adjustments"
 msgstr ""
@@ -435,6 +508,8 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory____last_update
@@ -601,6 +676,11 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count_rule__apply_in__warehouse
 msgid "Selected warehouses"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+msgid "Sets default counted quanities in Inventory Adjustments"
 msgstr ""
 
 #. module: stock_cycle_count
