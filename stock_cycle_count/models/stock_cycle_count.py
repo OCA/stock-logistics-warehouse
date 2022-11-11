@@ -82,6 +82,7 @@ class StockCycleCount(models.Model):
             "cycle_count_id": self.id,
             "location_ids": [(4, self.location_id.id)],
             "exclude_sublocation": True,
+            "responsible_id": self.responsible_id.id,
         }
 
     @api.model
