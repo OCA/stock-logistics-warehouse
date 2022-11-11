@@ -36,6 +36,11 @@ class StockInventory(models.Model):
         store=True,
         group_operator="avg",
     )
+    responsible_id = fields.Many2one(
+        comodel_name="res.users",
+        tracking=True,
+        help="Specific responsible of Inventory Adjustment.",
+    )
 
     def _get_default_counted_quantitites(self):
         company_id = self.env.context.get("default_company_id", self.env.company)
