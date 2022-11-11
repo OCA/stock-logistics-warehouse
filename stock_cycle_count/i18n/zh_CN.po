@@ -576,6 +576,11 @@ msgid "Minimum Accuracy Threshold"
 msgstr "最低准确性阈值"
 
 #. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_inventory_filter
+msgid "My Adjustments"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__name
 msgid "Name"
@@ -645,6 +650,11 @@ msgid "Required Date"
 msgstr "要求日期"
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__responsible_id
+msgid "Responsible"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__rule_description
 msgid "Rule Description"
 msgstr "规则说明"
@@ -690,6 +700,11 @@ msgstr "选定的仓库"
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 msgid "Sets default counted quanities in Inventory Adjustments"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__responsible_id
+msgid "Specific responsible of Inventory Adjustment."
 msgstr ""
 
 #. module: stock_cycle_count
