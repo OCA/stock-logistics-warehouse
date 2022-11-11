@@ -25,7 +25,8 @@ Stock Picking Supplier Reference
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds the field supplier reference in pickings.
+This module adds the field supplier reference in pickings. This field is only visible
+when the picking type code is incoming, so is only for receipt pickings.
 
 **Table of contents**
 
