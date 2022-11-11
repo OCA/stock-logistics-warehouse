@@ -9,6 +9,7 @@
         <field name="arch" type="xml">
             <field name="date" position="after">
                 <field name="location_ids" />
+                <field name="responsible_id" widget="many2one_avatar_employee" />
                 <field name="cycle_count_id" />
                 <field name="inventory_accuracy" />
             </field>
@@ -21,6 +22,7 @@
         <field name="arch" type="xml">
             <field name="company_id" position="after">
                 <field name="cycle_count_id" />
+                <field name="responsible_id" />
                 <label for="inventory_accuracy" />
                 <div>
                     <field name="inventory_accuracy" class="oe_inline" /> %
@@ -35,6 +37,12 @@
         <field name="arch" type="xml">
             <field name="product_ids" position="after">
                 <field name="location_ids" />
+                <field name="responsible_id" />
+                <filter
+                    string="My Adjustments"
+                    name="my_adjustments"
+                    domain="[('responsible_id', '=', uid)]"
+                />
             </field>
         </field>
     </record>
