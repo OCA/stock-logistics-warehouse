@@ -7,7 +7,6 @@ class StockPutawayRule(models.Model):
 
     method = fields.Selection(
         selection="_get_putaway_options",
-        string="Method",
         default="fixed",
         required=True,
     )
