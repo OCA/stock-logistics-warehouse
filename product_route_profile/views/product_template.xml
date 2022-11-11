@@ -20,11 +20,11 @@
             <xpath expr="//group[@name='operations']" position="inside">
                 <field
                     name="route_profile_id"
-                    invisible="type not in ['product', 'consu']"
+                    invisible="type not in ['product', 'consu'] and not route_ids"
                 />
                 <field
                     name="force_route_profile_id"
-                    invisible="type not in ['product', 'consu']"
+                    invisible="type not in ['product', 'consu'] and not route_ids"
                 />
             </xpath>
         </field>
