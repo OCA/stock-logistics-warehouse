@@ -1,0 +1,1 @@
+from . import test_stock_reception_dedicate_picking_type
