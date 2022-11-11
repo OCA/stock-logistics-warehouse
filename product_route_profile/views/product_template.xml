@@ -14,11 +14,11 @@
             <xpath expr="//group[@name='operations']" position="inside">
                 <field
                     name="route_profile_id"
-                    attrs="{'invisible': [('type', 'in', ['service', 'digital'])]}"
+                    attrs="{'invisible': [('type', 'in', ['service', 'digital']), ('route_ids','=',False)]}"
                 />
                 <field
                     name="force_route_profile_id"
-                    attrs="{'invisible': [('type', 'in', ['service', 'digital'])]}"
+                    attrs="{'invisible': [('type', 'in', ['service', 'digital']), ('route_ids','=',False)]}"
                 />
             </xpath>
         </field>
