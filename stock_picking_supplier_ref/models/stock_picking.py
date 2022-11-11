@@ -7,4 +7,7 @@ from odoo import fields, models
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    reference = fields.Char(string="Supplier Reference")
+    supplier_reference = fields.Char(
+        string="Supplier Reference Available in PO",
+        help="This field adds the supplier reference added in related purchase order",
+    )

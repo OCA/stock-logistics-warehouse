@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0+e\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-23 07:14+0000\n"
-"PO-Revision-Date: 2022-05-23 07:14+0000\n"
+"POT-Creation-Date: 2022-11-11 07:28+0000\n"
+"PO-Revision-Date: 2022-11-11 07:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,8 +31,13 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_picking_supplier_ref
-#: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__reference
-msgid "Supplier Reference"
+#: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__supplier_reference
+msgid "Supplier Reference Available in PO"
+msgstr ""
+
+#. module: stock_picking_supplier_ref
+#: model:ir.model.fields,help:stock_picking_supplier_ref.field_stock_picking__supplier_reference
+msgid "This field adds the supplier reference added in related purchase order"
 msgstr ""
 
 #. module: stock_picking_supplier_ref
