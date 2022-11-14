@@ -176,7 +176,9 @@ class AssignManualQuantsLines(models.TransientModel):
         string="On Hand",
         digits="Product Unit of Measure",
     )
-    reserved = fields.Float(string="Others Reserved", digits="Product Unit of Measure")
+    reserved = fields.Float(
+        string="Others Reserved", digits="Product Unit of Measure", readonly=True
+    )
     selected = fields.Boolean(string="Select")
     qty = fields.Float(string="QTY", digits="Product Unit of Measure")
 
