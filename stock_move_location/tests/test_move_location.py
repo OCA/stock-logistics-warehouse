@@ -98,7 +98,7 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(picking.state, "assigned")
         self.assertEqual(len(picking.move_line_ids), 4)
         self.assertEqual(
-            sorted(picking.move_line_ids.mapped("product_uom_qty")), [1, 1, 1, 123]
+            sorted(picking.move_line_ids.mapped("reserved_uom_qty")), [1, 1, 1, 123]
         )
 
     def test_quant_transfer(self):
@@ -192,7 +192,7 @@ class TestMoveLocation(TestsCommon):
         wizard = self._create_wizard(wh_stock_shelf_1, wh_stock_shelf_2)
         wizard.onchange_origin_location()
         wizard.action_move_location()
-        self.assertEqual(delivery_picking.state, "assigned")
+        self.assertEqual(delivery_picking.state, "confirmed")
 
         # Do a planned transfer to move quantities to other location
         #  without using module's wizard
@@ -217,7 +217,7 @@ class TestMoveLocation(TestsCommon):
         internal_picking.action_confirm()
         internal_picking.action_assign()
         internal_picking.move_line_ids.qty_done = (
-            internal_picking.move_line_ids.product_uom_qty
+            internal_picking.move_line_ids.reserved_uom_qty
         )
         internal_picking.button_validate()
         self.assertEqual(internal_picking.state, "done")
@@ -226,5 +226,5 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(delivery_picking.state, "assigned")
         # The old reserved quantities must be in new location after confirm wizard
         self.assertEqual(len(delivery_move.move_line_ids), 1)
-        self.assertEqual(delivery_move.move_line_ids.product_uom_qty, 20.0)
+        self.assertEqual(delivery_move.move_line_ids.reserved_uom_qty, 20.0)
         self.assertEqual(delivery_move.move_line_ids.location_id, wh_stock_shelf_3)

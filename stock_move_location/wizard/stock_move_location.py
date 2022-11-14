@@ -230,7 +230,7 @@ class StockMoveLocationWizard(models.TransientModel):
                     ("product_id", "=", line.product_id.id),
                     ("location_id", "=", line.origin_location_id.id),
                     ("lot_id", "=", line.lot_id.id),
-                    ("product_uom_qty", ">", 0.0),
+                    ("qty_done", ">", 0.0),
                 ]
             )
             moves_to_unreserve = move_lines.mapped("move_id")
