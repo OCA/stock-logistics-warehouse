@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[stock_helper](stock_helper/) | 16.0.1.0.0 |  | Add methods shared between various stock modules
+[stock_helper](stock_helper/) | 16.0.1.0.1 |  | Add methods shared between various stock modules
 [stock_location_product_restriction](stock_location_product_restriction/) | 16.0.1.0.0 | [![lmignon](https://github.com/lmignon.png?size=30px)](https://github.com/lmignon) [![rousseldenis](https://github.com/rousseldenis.png?size=30px)](https://github.com/rousseldenis) | Prevent to mix different products into the same stock location
 [stock_move_auto_assign](stock_move_auto_assign/) | 16.0.1.0.0 |  | Try to reserve moves when goods enter in a location
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 16.0.1.0.0 |  | Add a MTS+MTO route
