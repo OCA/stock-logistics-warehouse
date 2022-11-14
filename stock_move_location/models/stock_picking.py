@@ -39,7 +39,7 @@ class StockPicking(models.Model):
     def _validate_picking(self):
         if self.location_id.child_ids:
             raise UserError(_("Please choose a source end location"))
-        if self.move_lines:
+        if self.move_ids:
             raise UserError(_("Moves lines already exists"))
 
     def _get_movable_quants(self):
