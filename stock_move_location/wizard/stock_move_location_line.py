@@ -32,7 +32,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
     )
     lot_id = fields.Many2one(
         string="Lot/Serial Number",
-        comodel_name="stock.production.lot",
+        comodel_name="stock.lot",
         domain="[('product_id','=',product_id)]",
     )
     move_quantity = fields.Float(
@@ -96,7 +96,6 @@ class StockMoveLocationWizardLine(models.TransientModel):
             "lot_id": self.lot_id.id,
             "location_id": self.origin_location_id.id,
             "location_dest_id": location_dest_id,
-            "product_uom_qty": qty_todo,
             "qty_done": qty_done,
             "product_uom_id": self.product_uom_id.id,
             "picking_id": picking.id,
