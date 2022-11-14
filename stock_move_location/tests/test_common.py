@@ -48,21 +48,21 @@ class TestsCommon(common.TransactionCase):
         cls.product_lots = product_obj.create(
             {"name": "Apple", "type": "product", "tracking": "lot"}
         )
-        cls.lot1 = cls.env["stock.production.lot"].create(
+        cls.lot1 = cls.env["stock.lot"].create(
             {
                 "name": "lot1",
                 "product_id": cls.product_lots.id,
                 "company_id": cls.company.id,
             }
         )
-        cls.lot2 = cls.env["stock.production.lot"].create(
+        cls.lot2 = cls.env["stock.lot"].create(
             {
                 "name": "lot2",
                 "product_id": cls.product_lots.id,
                 "company_id": cls.company.id,
             }
         )
-        cls.lot3 = cls.env["stock.production.lot"].create(
+        cls.lot3 = cls.env["stock.lot"].create(
             {
                 "name": "lot3",
                 "product_id": cls.product_lots.id,
