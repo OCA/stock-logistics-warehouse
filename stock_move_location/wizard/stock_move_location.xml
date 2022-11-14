@@ -12,8 +12,8 @@
                     <div class="oe_button_box" name="button_box" />
                     <div>
                         <label for="edit_locations">
-                Edit Locations
-            </label>
+                            Edit Locations
+                        </label>
                         <field name="edit_locations" widget="boolean_toggle" />
                     </div>
                     <div groups="stock.group_stock_multi_locations">
@@ -43,6 +43,7 @@
                             nolabel="1"
                             widget="one2many_list"
                             mode="tree,kanban"
+                            colspan="2"
                         >
                             <tree
                                 editable="bottom"

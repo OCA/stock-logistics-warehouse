@@ -72,18 +72,18 @@ class TestFillwithStock(common.TransactionCase):
                 "picking_type_id": self.env.ref("stock.picking_type_internal").id,
             }
         )
-        self.assertFalse(picking_stock_pack.move_lines)
+        self.assertFalse(picking_stock_pack.move_ids)
         picking_stock_pack.button_fillwithstock()
         # picking filled with quants in bin
-        self.assertEqual(len(picking_stock_pack.move_lines), 2)
+        self.assertEqual(len(picking_stock_pack.move_ids), 2)
         self.assertEqual(
-            picking_stock_pack.move_lines.filtered(
+            picking_stock_pack.move_ids.filtered(
                 lambda m: m.product_id == self.product1
             ).product_uom_qty,
             10.0,
         )
         self.assertEqual(
-            picking_stock_pack.move_lines.filtered(
+            picking_stock_pack.move_ids.filtered(
                 lambda m: m.product_id == self.product2
             ).product_uom_qty,
             5.0,
