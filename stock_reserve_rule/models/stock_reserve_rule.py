@@ -219,11 +219,26 @@ class StockReserveRuleRemoval(models.Model):
         # Group by location (in this removal strategies, we want to consider
         # the total quantity held in a location).
         quants_per_bin = quants._group_by_location()
-
         # We take goods only if we empty the bin.
         # The original ordering (fefo, fifo, ...) must be kept.
-        rounding = fields.first(quants).product_id.uom_id.rounding
+        product = fields.first(quants).product_id
+        rounding = product.uom_id.rounding
+        locations_with_other_quants = [
+            group["location_id"][0]
+            for group in quants.read_group(
+                [
+                    ("location_id", "in", quants.location_id.ids),
+                    ("product_id", "not in", quants.product_id.ids),
+                    ("quantity", ">", 0),
+                ],
+                ["location_id"],
+                "location_id",
+            )
+        ]
         for location, location_quants in quants_per_bin:
+            if location.id in locations_with_other_quants:
+                continue
+
             location_quantity = sum(location_quants.mapped("quantity")) - sum(
                 location_quants.mapped("reserved_quantity")
             )
