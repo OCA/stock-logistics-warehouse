@@ -3,6 +3,7 @@
 
 from datetime import date, timedelta as td
 
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
 
@@ -165,3 +166,10 @@ class TestStockDemandEstimate(TransactionCase):
         estimate.manual_duration = 5
         estimate._onchange_manual_duration()
         self.assertEqual(estimate.manual_date_to, date_from + td(days=4))
+        estimate._compute_product_quantity()
+        self.assertEqual(estimate.product_qty, 500)
+        with self.assertRaises(UserError):
+            estimate._inverse_product_quantity()
+        estimate.product_uom = False
+        estimate._compute_product_quantity()
+        self.assertEqual(estimate.product_qty, 0)
