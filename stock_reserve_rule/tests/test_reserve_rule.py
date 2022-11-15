@@ -493,6 +493,37 @@ class TestReserveRule(common.SavepointCase):
         )
         self.assertEqual(move.state, "assigned")
 
+    def test_rule_empty_bin_multiple_allocation(self):
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 10)
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product2, 10)
+        self._update_qty_in_location(self.loc_zone2_bin1, self.product1, 10)
+        picking = self._create_picking(self.wh, [(self.product1, 10)])
+
+        self._create_rule(
+            {},
+            [
+                # This rule should be excluded for zone1 / bin1 because the
+                # bin would not be empty
+                {
+                    "location_id": self.loc_zone1.id,
+                    "sequence": 1,
+                    "removal_strategy": "empty_bin",
+                },
+                {"location_id": self.loc_zone2.id, "sequence": 2},
+            ],
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        ml = move.move_line_ids
+
+        self.assertRecordValues(
+            ml,
+            [
+                {"location_id": self.loc_zone2_bin1.id, "product_qty": 10.0},
+            ],
+        )
+        self.assertEqual(move.state, "assigned")
+
     def test_rule_packaging(self):
         self._setup_packagings(
             self.product1,
