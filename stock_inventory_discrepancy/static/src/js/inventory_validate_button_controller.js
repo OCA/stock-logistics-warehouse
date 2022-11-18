@@ -13,8 +13,10 @@ odoo.define("stock_inventory_discrepancy.InventoryValidationController", functio
          * @override
          * @see displayNotification
          */
-        do_notify: function (title, message, sticky, className) {
+        do_notify: function (ptitle, pmessage, sticky, className) {
             var self = this;
+            var title = ptitle;
+            var message = pmessage;
             if (this.modelName === "stock.inventory.line") {
                 this._rpc({
                     model: "stock.inventory",
