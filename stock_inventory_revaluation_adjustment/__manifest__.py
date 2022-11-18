@@ -18,7 +18,6 @@
         "views/cost_adjustment_type.xml",
         "views/cost_adjustment.xml",
         "views/product_template_view.xml",
-        "views/assets_backend.xml",
     ],
     "installable": True,
     "maintainers": ["patrickrwilson"],
