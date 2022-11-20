@@ -9,3 +9,5 @@
 
   * Víctor Martínez
   * David Vidal
+
+* Florent THOMAS <florent.thomas@mind-and-go.com>

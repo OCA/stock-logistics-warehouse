@@ -3,22 +3,34 @@
 
 from collections import Counter
 
-from odoo import api, models
+from odoo import api, models, fields
 from odoo.fields import first
 from odoo.tools import float_round
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
+    
+    def _compute_appropriate_bom_ids(self):
+        for prod in self:
+            variant_bom_ids = prod.variant_bom_ids
+            template_bom_ids = prod.bom_ids.filtered(lambda b: b.product_id == False)
+            appropriate_bom_ids = variant_bom_ids|template_bom_ids
+            prod.appropriate_bom_ids = appropriate_bom_ids
+    
+    appropriate_bom_ids = fields.One2many(
+        comodel_name="mrp.bom",
+        compute="_compute_appropriate_bom_ids"
+    )
 
-    @api.depends("virtual_available", "bom_ids", "bom_ids.product_qty")
+    @api.depends("virtual_available", "bom_ids", "bom_ids.product_qty", )
     def _compute_available_quantities(self):
         super()._compute_available_quantities()
 
     def _compute_available_quantities_dict(self):
         res, stock_dict = super()._compute_available_quantities_dict()
         # compute qty for product with bom
-        product_with_bom = self.filtered("bom_ids")
+        product_with_bom = self.filtered("appropriate_bom_ids")
 
         if not product_with_bom:
             return res, stock_dict
@@ -52,7 +64,7 @@ class ProductProduct(models.Model):
 
         for product in product_with_bom:
             # Need by product (same product can be in many BOM lines/levels)
-            bom_id = first(product.bom_ids)
+            bom_id = first(product.appropriate_bom_ids)
             exploded_components = exploded_boms[product.id]
             component_needs = product._get_components_needs(exploded_components)
             if not component_needs:
@@ -138,8 +150,8 @@ class ProductProduct(models.Model):
         for product in self:
             lines_done = []
             bom_lines = [
-                (first(product.bom_ids), bom_line, product, 1.0)
-                for bom_line in first(product.bom_ids).bom_line_ids
+                (first(product.appropriate_bom_ids), bom_line, product, 1.0)
+                for bom_line in first(product.appropriate_bom_ids).bom_line_ids
             ]
 
             while bom_lines:
@@ -151,7 +163,7 @@ class ProductProduct(models.Model):
 
                 line_quantity = current_qty * current_line.product_qty
 
-                sub_bom = first(current_line.product_id.bom_ids)
+                sub_bom = first(current_line.product_id.appropriate_bom_ids)
                 if sub_bom.type == "phantom":
                     product_uom = current_line.product_uom_id
                     converted_line_quantity = product_uom._compute_quantity(
