@@ -3,27 +3,30 @@
 
 from collections import Counter
 
-from odoo import api, models, fields
+from odoo import api, fields, models
 from odoo.fields import first
 from odoo.tools import float_round
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
-    
+
     def _compute_appropriate_bom_ids(self):
         for prod in self:
             variant_bom_ids = prod.variant_bom_ids
-            template_bom_ids = prod.bom_ids.filtered(lambda b: b.product_id == False)
-            appropriate_bom_ids = variant_bom_ids|template_bom_ids
+            template_bom_ids = prod.bom_ids.filtered(lambda b: b.product_id is False)
+            appropriate_bom_ids = variant_bom_ids | template_bom_ids
             prod.appropriate_bom_ids = appropriate_bom_ids
-    
+
     appropriate_bom_ids = fields.One2many(
-        comodel_name="mrp.bom",
-        compute="_compute_appropriate_bom_ids"
+        comodel_name="mrp.bom", compute="_compute_appropriate_bom_ids"
     )
 
-    @api.depends("virtual_available", "bom_ids", "bom_ids.product_qty", )
+    @api.depends(
+        "virtual_available",
+        "bom_ids",
+        "bom_ids.product_qty",
+    )
     def _compute_available_quantities(self):
         super()._compute_available_quantities()
 
