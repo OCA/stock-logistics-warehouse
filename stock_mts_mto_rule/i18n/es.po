@@ -41,6 +41,7 @@ msgstr ""
 "se cogerá el producto desde existencias."
 
 #. module: stock_mts_mto_rule
+#. odoo-python
 #: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
 #, python-format
 msgid ""
@@ -64,12 +65,14 @@ msgid "MTS Rule"
 msgstr "Regla \"bajo existencias\""
 
 #. module: stock_mts_mto_rule
+#. odoo-python
 #: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
 #, python-format
 msgid "MTS+MTO"
 msgstr "MTS+MTO"
 
 #. module: stock_mts_mto_rule
+#. odoo-python
 #: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
 #: model:stock.route,name:stock_mts_mto_rule.route_mto_mts
 #, python-format
@@ -77,6 +80,7 @@ msgid "Make To Order + Make To Stock"
 msgstr "Bajo pedido + bajo existencias"
 
 #. module: stock_mts_mto_rule
+#. odoo-python
 #: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
