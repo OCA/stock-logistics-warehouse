@@ -57,13 +57,15 @@ class StockMove(models.Model):
             self._enqueue_auto_assign(
                 self.env["product.product"].browse(product_id),
                 self.env["stock.location"].browse(location_ids),
-            )
+            ).delay()
 
     def _enqueue_auto_assign(self, product, locations, **job_options):
         """Enqueue a job ProductProduct.moves_auto_assign()
 
         Can be extended to pass different options to the job (priority, ...).
         The usage of `.setdefault` allows to override the options set by default.
+
+        return: a `Job` instance
         """
         job_options = job_options.copy()
         job_options.setdefault(
@@ -74,4 +76,6 @@ class StockMove(models.Model):
         )
         # do not enqueue 2 jobs for the same product and locations set
         job_options.setdefault("identity_key", identity_exact)
-        product.with_delay(**job_options).moves_auto_assign(locations)
+        delayable = product.delayable(**job_options)
+        job = delayable.moves_auto_assign(locations)
+        return job
