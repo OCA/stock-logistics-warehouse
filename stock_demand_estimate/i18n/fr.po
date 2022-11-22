@@ -156,6 +156,7 @@ msgid "Stock Demand Estimates"
 msgstr "Estimations de demande de stock"
 
 #. module: stock_demand_estimate
+#. odoo-python
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:0
 #, python-format
 msgid ""
