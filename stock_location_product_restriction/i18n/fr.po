@@ -76,6 +76,7 @@ msgid "Stock Move"
 msgstr "Mouvement de stock"
 
 #. module: stock_location_product_restriction
+#. odoo-python
 #: code:addons/stock_location_product_restriction/models/stock_move.py:0
 #, python-format
 msgid ""
@@ -84,6 +85,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_location_product_restriction
+#. odoo-python
 #: code:addons/stock_location_product_restriction/models/stock_location.py:0
 #, python-format
 msgid ""
@@ -97,6 +99,7 @@ msgid "With restriction violation"
 msgstr "Ne respecte pas les règles"
 
 #. module: stock_location_product_restriction
+#. odoo-python
 #: code:addons/stock_location_product_restriction/models/stock_move.py:0
 #, python-format
 msgid ""
