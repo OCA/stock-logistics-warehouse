@@ -46,6 +46,10 @@ class ProductProduct(models.Model):
         pickings = moves.picking_id
         if not pickings:
             return
+        self._lock_pickings_or_retry(pickings)
+        moves._action_assign()
+
+    def _lock_pickings_or_retry(self, pickings):
         try:
             self.env.cr.execute(
                 "SELECT id FROM stock_picking WHERE id IN %s FOR UPDATE NOWAIT",
@@ -62,4 +66,3 @@ class ProductProduct(models.Model):
                     "Could not obtain lock on transfers, will retry.", ignore_retry=True
                 ) from err
             raise
-        moves._action_assign()
