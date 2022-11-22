@@ -24,6 +24,7 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_move_auto_assign
+#. odoo-python
 #: code:addons/stock_move_auto_assign/models/stock_move.py:0
 #, python-format
 msgid "Try reserving \"{}\" for quantities added in: {}"
