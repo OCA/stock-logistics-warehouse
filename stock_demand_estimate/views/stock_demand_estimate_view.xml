@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="stock_demand_estimate_view_tree" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.tree</field>
+        <field name="model">stock.demand.estimate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_from" string="Date From" />
+                <field name="date_to" string="Date To" />
+                <field name="product_id" />
+                <field name="location_id" />
+                <field name="product_uom_qty" />
+                <field name="product_uom" />
+                <field name="product_qty" />
+                <field name="daily_qty" />
+            </tree>
+        </field>
+    </record>
+    <record id="stock_demand_estimate_view_form" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.form</field>
+        <field name="model">stock.demand.estimate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group name="dates_read" class="oe_read_only">
+                            <field name="date_from" string="Date From" />
+                            <field name="date_to" string="Date To" />
+                            <field name="duration" string="Duration" />
+                        </group>
+                        <group name="dates_edit" class="oe_edit_only">
+                            <field name="manual_date_from" string="Date From" />
+                            <field name="manual_date_to" string="Date To" />
+                            <field name="manual_duration" string="Duration" />
+                        </group>
+                        <group>
+                            <field name="product_id" />
+                            <field name="location_id" />
+                            <field name="product_uom_qty" />
+                            <field name="product_uom" />
+                            <field name="daily_qty" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="stock_demand_estimate_view_pivot" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.pivot</field>
+        <field name="model">stock.demand.estimate</field>
+        <field name="arch" type="xml">
+            <pivot string="Stock Demand Estimate">
+                <field name="product_qty" type="measure" />
+                <field name="product_id" type="row" />
+                <field name="date_from" type="col" />
+            </pivot>
+        </field>
+    </record>
+    <record id="stock_demand_estimate_view_search" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.search</field>
+        <field name="model">stock.demand.estimate</field>
+        <field name="arch" type="xml">
+            <search string="Search Stock Demand Estimates">
+                <field name="product_id" />
+                <field name="location_id" />
+            </search>
+        </field>
+    </record>
+    <record id="stock_demand_estimate_action" model="ir.actions.act_window">
+        <field name="name">Stock Demand Estimates</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.demand.estimate</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="search_view_id" ref="stock_demand_estimate_view_search" />
+    </record>
+    <menuitem
+        id="stock_demand_planning_menu"
+        name="Demand Planning"
+        parent="stock.menu_stock_root"
+        sequence="10"
+    />
+    <menuitem
+        id="stock_demand_estimate_menu"
+        parent="stock_demand_planning_menu"
+        action="stock_demand_estimate_action"
+    />
+</odoo>
