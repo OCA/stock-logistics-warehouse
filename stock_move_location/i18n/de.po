@@ -87,6 +87,11 @@ msgid "Fill with stock"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__owner_id
+msgid "From Owner"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__id
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking__id
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__id
@@ -185,6 +190,11 @@ msgstr "Quelllagerort"
 #, fuzzy
 msgid "Origin Location Disable"
 msgstr "Quelllagerort"
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__package_id
+msgid "Package Number"
+msgstr ""
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
