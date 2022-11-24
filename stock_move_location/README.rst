@@ -114,6 +114,7 @@ Contributors
   * João Marques
 * Jacques-Etienne Baudoux <je@bcim.be>
 * Iryna Vyshnevska <i.vyshnevska@mobilunity.com>
+* Abraham Anes <abraham@studio73.es>
 
 Maintainers
 ~~~~~~~~~~~
