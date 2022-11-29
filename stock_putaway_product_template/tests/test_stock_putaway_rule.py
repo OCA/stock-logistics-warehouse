@@ -5,7 +5,7 @@
 from odoo.tests import common
 
 
-class TestStockPutawayRule(common.SavepointCase):
+class TestStockPutawayRule(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
