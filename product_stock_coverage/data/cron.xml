@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     Copyright 2020 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="0">
+    <record id="product_sale_statistics_cron" model="ir.cron">
+        <field name="name">Product Stock Coverage - Update Article Sales Statistics</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="state">code</field>
+        <field name="model_id" ref="product.model_product_template" />
+        <field name="code">model.cron_compute_stock_coverage()</field>
+    </record>
+</odoo>

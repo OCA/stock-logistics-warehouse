@@ -1,0 +1,74 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_stock_coverage
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_stock_coverage
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_product__computation_range
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_template__computation_range
+msgid "Computation range (days)"
+msgstr ""
+
+#. module: product_stock_coverage
+#: code:addons/product_stock_coverage/models/product_template.py:17
+#, python-format
+msgid "Computation range must be greater than 0."
+msgstr ""
+
+#. module: product_stock_coverage
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_product__daily_sales
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_template__daily_sales
+msgid "Daily Sales"
+msgstr ""
+
+#. module: product_stock_coverage
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_product__effective_sale_price
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_template__effective_sale_price
+msgid "Effective Sale Price"
+msgstr ""
+
+#. module: product_stock_coverage
+#: model:ir.model,name:product_stock_coverage.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: product_stock_coverage
+#: model:ir.model.fields,help:product_stock_coverage.field_product_product__effective_sale_price
+#: model:ir.model.fields,help:product_stock_coverage.field_product_template__effective_sale_price
+msgid "SUM (unit_price * qty) / SUM (qty) over pos order lines"
+msgstr ""
+
+#. module: product_stock_coverage
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_product__range_sales
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_template__range_sales
+msgid "Sales over Range"
+msgstr ""
+
+#. module: product_stock_coverage
+#: model_terms:ir.ui.view,arch_db:product_stock_coverage.product_template_only_form_view
+msgid "Stock Coverage"
+msgstr ""
+
+#. module: product_stock_coverage
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_product__stock_coverage
+#: model:ir.model.fields,field_description:product_stock_coverage.field_product_template__stock_coverage
+msgid "Stock Coverage (days)"
+msgstr ""
+
+#. module: product_stock_coverage
+#: model:ir.actions.server,name:product_stock_coverage.product_sale_statistics_cron_ir_actions_server
+#: model:ir.cron,cron_name:product_stock_coverage.product_sale_statistics_cron
+#: model:ir.cron,name:product_stock_coverage.product_sale_statistics_cron
+msgid "Stock Coverage - Update Article Sales Statistics"
+msgstr ""
+
