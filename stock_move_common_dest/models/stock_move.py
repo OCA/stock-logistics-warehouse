@@ -18,7 +18,7 @@ class StockMove(models.Model):
 
     def _flush_common_dest_move_query(self):
         # flush is necessary before a SELECT
-        self.flush(["move_orig_ids", "move_dest_ids"])
+        self.flush_recordset(["move_orig_ids", "move_dest_ids"])
 
     def _common_dest_move_query(self):
         sql = """SELECT smmr.move_orig_id move_id
@@ -41,8 +41,8 @@ class StockMove(models.Model):
     @api.depends(
         "move_dest_ids",
         "move_dest_ids.picking_id",
-        "move_dest_ids.picking_id.move_lines",
-        "move_dest_ids.picking_id.move_lines.move_orig_ids",
+        "move_dest_ids.picking_id.move_ids",
+        "move_dest_ids.picking_id.move_ids.move_orig_ids",
     )
     def _compute_common_dest_move_ids(self):
         self._flush_common_dest_move_query()

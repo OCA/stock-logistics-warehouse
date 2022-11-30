@@ -1,9 +1,9 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class TestCommonMoveDest(SavepointCase):
+class TestCommonMoveDest(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -35,28 +35,20 @@ class TestCommonMoveDest(SavepointCase):
     def _init_inventory(self):
         # Product 1 on shelf 1
         # Product 2 on shelf 2
-        inventory = self.env["stock.inventory"].create({"name": "Test init"})
-        inventory.action_start()
-        product_location_list = [
-            (self.product_1, self.stock_shelf_location),
-            (self.product_2, self.stock_shelf_2_location),
+        vals_list = [
+            {
+                "product_id": self.product_1.id,
+                "inventory_quantity": 10.0,
+                "location_id": self.stock_shelf_location.id,
+            },
+            {
+                "product_id": self.product_2.id,
+                "inventory_quantity": 10.0,
+                "location_id": self.stock_shelf_2_location.id,
+            },
         ]
-        lines_vals = list()
-        for product, location in product_location_list:
-            lines_vals.append(
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": product.id,
-                        "product_uom_id": product.uom_id.id,
-                        "product_qty": 10.0,
-                        "location_id": location.id,
-                    },
-                )
-            )
-        inventory.write({"line_ids": lines_vals})
-        inventory.action_validate()
+        quants = self.env["stock.quant"].create(vals_list)
+        quants.action_apply_inventory()
 
     def _create_pickings(self):
         # Create delivery order
