@@ -3,7 +3,7 @@
 
 {
     "name": "Stock archive constraint",
-    "version": "15.0.1.0.0",
+    "version": "15.0.1.0.1",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Tecnativa, Odoo Community Association (OCA)",
