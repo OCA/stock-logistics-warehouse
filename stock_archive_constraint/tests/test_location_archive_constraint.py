@@ -9,6 +9,9 @@ class TestLocationArchiveConstraint(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(
+            context=dict(cls.env.context, test_stock_archive_constraint=True)
+        )
         cls.company = cls.env.ref("base.main_company")
         cls.product_1 = cls._create_product(cls, "Product 1")
         cls.product_2 = cls._create_product(cls, "Product 2")
