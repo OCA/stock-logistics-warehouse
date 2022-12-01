@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ForgeFlow
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_valuation_layer_form" model="ir.ui.view">
+        <field name="name">Stock Valuation Layer</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_form" />
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='remaining_qty']" position="after">
+                <field name="total_value_with_additional_costs" />
+                <field name="unit_price_with_extra_cost" />
+            </xpath>
+            <xpath expr="//page[@name='other_info']" position="after">
+                <page string="Child Layers" name="child_layers">
+                    <field name="stock_valuation_layer_ids" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_valuation_layer_tree" model="ir.ui.view">
+        <field name="name">Stock Valuation Layer</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='value']" position="after">
+                <field name="total_value_with_additional_costs" optional="True" />
+                <field name="unit_price_with_extra_cost" optional="True" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
