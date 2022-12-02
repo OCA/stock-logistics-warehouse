@@ -15,6 +15,7 @@
                         <field name="reserved"/>
                         <field name="selected"/>
                         <field name="qty" attrs="{'readonly':[('selected', '=', False)]}" sum="qty"/>
+                        <field name="uom_id" groups="uom.group_uom"/>
                     </tree>
                 </field>
                 <group col='4' colspan="4">

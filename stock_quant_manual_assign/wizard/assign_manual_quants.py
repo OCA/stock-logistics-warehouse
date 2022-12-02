@@ -55,7 +55,7 @@ class AssignManualQuants(models.TransientModel):
         if move.picking_type_id.auto_fill_qty_done:
             # Auto-fill all lines as done
             for ml in move.move_line_ids:
-                ml.qty_done = ml.product_qty
+                ml.qty_done = ml.product_uom_qty
         move._recompute_state()
         move.mapped('picking_id')._compute_state()
         return {}
@@ -88,13 +88,14 @@ class AssignManualQuants(models.TransientModel):
             line['package_id'] = quant.package_id.id
             line['owner_id'] = quant.owner_id.id
             line['selected'] = False
+            line['uom_id'] = quant.product_id.uom_id.id
             move_lines = move.move_line_ids.filtered(
                 lambda ml: (ml.location_id == quant.location_id and
                             ml.lot_id == quant.lot_id and
                             ml.owner_id == quant.owner_id and
                             ml.package_id == quant.package_id)
             )
-            line['qty'] = sum(move_lines.mapped('product_uom_qty'))
+            line['qty'] = sum(move_lines.mapped('product_qty'))
             line['selected'] = bool(line['qty'])
             line['reserved'] = quant.reserved_quantity - line['qty']
             quants_lines.append(line)
@@ -148,6 +149,7 @@ class AssignManualQuantsLines(models.TransientModel):
     selected = fields.Boolean(string='Select')
     qty = fields.Float(
         string='QTY', digits=dp.get_precision('Product Unit of Measure'))
+    uom_id = fields.Many2one('uom.uom', string='Unit of Measure')
 
     @api.onchange('selected')
     def _onchange_selected(self):
