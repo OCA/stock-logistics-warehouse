@@ -4,18 +4,19 @@
 from odoo.tests import common
 
 
-class LocationTrayTypeCase(common.SavepointCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.wh = cls.env.ref("stock.warehouse0")
-        cls.stock_location = cls.env.ref("stock.stock_location_stock")
-        cls.product = cls.env.ref("product.product_delivery_02")
-        cls.tray_location = cls.env.ref("stock_location_tray.stock_location_tray_demo")
-        cls.tray_type_small_8x = cls.env.ref(
+class LocationTrayTypeCase(common.TransactionCase):
+    def setUp(self):
+        super(LocationTrayTypeCase, self).setUp()
+        self.wh = self.env.ref("stock.warehouse0")
+        self.stock_location = self.env.ref("stock.stock_location_stock")
+        self.product = self.env.ref("product.product_delivery_02")
+        self.tray_location = self.env.ref(
+            "stock_location_tray.stock_location_tray_demo"
+        )
+        self.tray_type_small_8x = self.env.ref(
             "stock_location_tray.stock_location_tray_type_small_8x"
         )
-        cls.tray_type_small_32x = cls.env.ref(
+        self.tray_type_small_32x = self.env.ref(
             "stock_location_tray.stock_location_tray_type_small_32x"
         )
 

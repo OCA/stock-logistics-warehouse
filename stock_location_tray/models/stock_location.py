@@ -211,7 +211,7 @@ class StockLocation(models.Model):
 
         def has_ref(xmlid):
             ModelData = self.env["ir.model.data"]
-            __, res_id = ModelData.xmlid_to_res_model_res_id(xmlid)
+            __, res_id = ModelData._xmlid_to_res_model_res_id(xmlid)
             return bool(res_id)
 
         for location in self:
@@ -229,7 +229,9 @@ class StockLocation(models.Model):
             if module != namespace:
                 continue
             tray_external = self.env["ir.model.data"].browse(
-                self.env["ir.model.data"]._get_id(module, tray_name)
+                self.env["ir.model.data"]._xmlid_lookup("%s.%s" % (module, tray_name))[
+                    0
+                ]
             )
             cell_external_id = "{}_x{}y{}".format(
                 tray_name, location.posx, location.posy

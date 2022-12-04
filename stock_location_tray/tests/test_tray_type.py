@@ -7,13 +7,12 @@ from .common import LocationTrayTypeCase
 
 
 class TestLocationTrayType(LocationTrayTypeCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.used_tray_type = cls.env.ref(
+    def setUp(self):
+        super(TestLocationTrayType, self).setUp()
+        self.used_tray_type = self.env.ref(
             "stock_location_tray.stock_location_tray_type_large_16x"
         )
-        cls.unused_tray_type = cls.env.ref(
+        self.unused_tray_type = self.env.ref(
             "stock_location_tray.stock_location_tray_type_small_16x_3"
         )
 

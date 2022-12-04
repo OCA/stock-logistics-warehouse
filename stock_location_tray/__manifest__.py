@@ -3,7 +3,7 @@
 {
     "name": "Location Trays",
     "summary": "Organize a location as a matrix of cells",
-    "version": "14.0.1.1.2",
+    "version": "15.0.1.1.2",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
@@ -13,9 +13,14 @@
     "data": [
         "views/stock_location_views.xml",
         "views/stock_location_tray_type_views.xml",
-        "views/stock_location_tray_templates.xml",
         "views/stock_move_line_views.xml",
         "security/ir.model.access.csv",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "stock_location_tray/static/src/scss/stock_location_tray.scss",
+            "stock_location_tray/static/src/js/stock_location_tray.esm.js",
+        ],
+    },
     "installable": True,
 }
