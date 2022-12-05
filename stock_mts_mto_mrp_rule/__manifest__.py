@@ -1,7 +1,7 @@
 {
     "name": "Stock MTS+MTO MRP Rule",
     "summary": "Stock MTS+MTO MRP Rule",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Warehouse",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Cetmix, Odoo Community Association (OCA)",
