@@ -51,6 +51,7 @@ setuptools.setup(
         'odoo14-addon-stock_move_auto_assign',
         'odoo14-addon-stock_move_common_dest',
         'odoo14-addon-stock_move_location',
+        'odoo14-addon-stock_mts_mto_mrp_rule',
         'odoo14-addon-stock_mts_mto_rule',
         'odoo14-addon-stock_orderpoint_manual_procurement',
         'odoo14-addon-stock_orderpoint_manual_procurement_uom',
