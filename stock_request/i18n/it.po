@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2022-05-18 10:05+0000\n"
+"PO-Revision-Date: 2022-12-06 11:44+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:0
@@ -207,18 +207,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_rule__display_name
 #: model:ir.model.fields,field_description:stock_request.field_stock_warehouse__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Done"
-msgstr ""
+msgstr "Completato"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Draft"
-msgstr ""
+msgstr "Bozza"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
@@ -323,14 +323,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_rule__id
 #: model:ir.model.fields,field_description:stock_request.field_stock_warehouse__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_exception_icon
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__activity_exception_icon
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__activity_exception_icon
@@ -347,7 +347,7 @@ msgstr "Icona per indicare un'attività eccezione."
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_needaction
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_unread
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Se selezionato, i nuovi messaggi richiedono la tua attenzione."
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_has_error
@@ -357,7 +357,7 @@ msgstr ""
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
@@ -408,21 +408,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_rule____last_update
 #: model:ir.model.fields,field_description:stock_request.field_stock_warehouse____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__write_uid
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__write_uid
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__write_date
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__write_date
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__location_id
@@ -431,7 +431,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Location"
-msgstr ""
+msgstr "Ubicazione"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:0
@@ -814,7 +814,7 @@ msgstr ""
 #: model:ir.model,name:stock_request.model_stock_move
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__stock_move_id
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__move_ids
