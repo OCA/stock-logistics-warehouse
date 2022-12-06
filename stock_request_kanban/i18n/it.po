@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-12-06 11:44+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_product_product__kanban_card_count
@@ -198,12 +200,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "Bozza"
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
@@ -255,19 +257,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_exception_icon
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_exception_icon
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icona per indicare un'attività eccezione."
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_needaction
@@ -275,7 +277,7 @@ msgstr ""
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_needaction
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_unread
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Se selezionato, i nuovi messaggi richiedono la tua attenzione."
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error
@@ -283,7 +285,7 @@ msgstr ""
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
 
 #. module: stock_request_kanban
 #: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__in_progress
@@ -350,7 +352,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract____last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__write_uid
@@ -359,7 +361,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__write_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__write_date
@@ -368,7 +370,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__write_date
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_request_kanban
 #: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
@@ -381,7 +383,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__location_id
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
 msgid "Location"
-msgstr ""
+msgstr "Ubicazione"
 
 #. module: stock_request_kanban
 #: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
@@ -520,13 +522,13 @@ msgstr ""
 #: model:ir.model,name:stock_request_kanban.model_product_product
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_id
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: stock_request_kanban
 #: model:ir.model,name:stock_request_kanban.model_product_template
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_template_id
 msgid "Product Template"
-msgstr ""
+msgstr "Modello prodotto"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__product_uom_id
