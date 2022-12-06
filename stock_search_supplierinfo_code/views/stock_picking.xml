@@ -9,9 +9,9 @@
         <field name="arch" type="xml">
             <field name="product_id" position="after">
                 <field
-                    name="move_lines"
+                    name="move_ids"
                     string="Supplier Default Code"
-                    filter_domain="[('move_lines.product_id.seller_ids.product_code','ilike',self)]"
+                    filter_domain="[('move_ids.product_id.seller_ids.product_code','ilike',self)]"
                 />
             </field>
         </field>
