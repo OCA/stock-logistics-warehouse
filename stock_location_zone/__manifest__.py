@@ -4,14 +4,13 @@
 
 {
     "name": "Stock Location Zone",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "BCIM, Okia, Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "summary": "Classify locations with zones.",
-    "category": "Stock Management",
+    "category": "Warehouse",
     "depends": ["stock"],
     "data": ["views/stock_location.xml"],
     "installable": True,
-    "development_status": "Alpha",
     "license": "AGPL-3",
 }
