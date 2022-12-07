@@ -51,21 +51,26 @@ class StockLocation(models.Model):
         "is_zone", "location_id.zone_location_id", "location_id.area_location_id"
     )
     def _compute_zone_location_id(self):
+        self_browse = self.browse()
+        self.update({"zone_location_id": self_browse, "area_location_id": self_browse})
         for location in self:
-            location.zone_location_id = self.browse()
-            location.area_location_id = self.browse()
             if location.is_zone:
                 location.zone_location_id = location
                 continue
             parent = location.location_id
             if parent.zone_location_id:
-                location.zone_location_id = parent.zone_location_id
                 # If we have more than one level of area in a zone,
                 # the grouping is done by the first level
                 if parent.area_location_id:
-                    location.area_location_id = parent.area_location_id
+                    area_location_id = parent.area_location_id
                 else:
-                    location.area_location_id = location
+                    area_location_id = location
+                location.update(
+                    {
+                        "zone_location_id": parent.zone_location_id,
+                        "area_location_id": area_location_id,
+                    }
+                )
 
     @api.depends(
         "usage",
