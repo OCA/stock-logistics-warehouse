@@ -3,3 +3,4 @@
 * Guewen Baconnier (Camptocamp) <guewen.baconnier@camptocamp.com>
 * Akim Juillerat <akim.juillerat@camptocamp.com>
 * Phuc Tran Thanh <phuc@trobz.com>
+* Denis Roussel <denis.roussel@acsone.eu>

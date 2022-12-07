@@ -19,12 +19,14 @@ class StockLocation(models.Model):
         compute="_compute_zone_location_id",
         store=True,
         index=True,
+        recursive=True,
     )
     area_location_id = fields.Many2one(
         "stock.location",
         string="Location Area",
         compute="_compute_zone_location_id",
         store=True,
+        recursive=True,
     )
 
     location_kind = fields.Selection(
@@ -35,7 +37,6 @@ class StockLocation(models.Model):
             ("stock", "Main Stock"),
             ("other", "Other"),
         ],
-        string="Location Kind",
         compute="_compute_location_kind",
         store=True,
         help="Group location according to their kinds: "
