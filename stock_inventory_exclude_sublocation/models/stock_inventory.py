@@ -16,17 +16,57 @@ class Inventory(models.Model):
         states={"draft": [("readonly", False)]},
     )
 
-    def _get_inventory_lines_values(self):
-        """Discard inventory lines that are from sublocations if option
-        is enabled.
-
-        Done this way for maximizing inheritance compatibility.
-        """
-        vals = super()._get_inventory_lines_values()
+    def _get_all_quants(self, locations):
+        res = super()._get_all_quants(locations)
         if not self.exclude_sublocation:
-            return vals
-        new_vals = []
-        for val in vals:
-            if val["location_id"] in self.location_ids.ids:
-                new_vals.append(val)
-        return new_vals
+            return res
+        return self.env["stock.quant"].search(
+            [("location_id", "in", locations.mapped("id"))]
+        )
+
+    def _get_manual_quants(self, locations):
+        res = super()._get_manual_quants(locations)
+        if not self.exclude_sublocation:
+            return res
+        return self.env["stock.quant"].search(
+            [
+                ("product_id", "in", self.product_ids.ids),
+                ("location_id", "in", locations.mapped("id")),
+            ]
+        )
+
+    def _get_one_quant(self, locations):
+        res = super()._get_one_quant(locations)
+        if not self.exclude_sublocation:
+            return res
+        return self.env["stock.quant"].search(
+            [
+                ("product_id", "in", self.product_ids.ids),
+                ("location_id", "in", locations.mapped("id")),
+            ]
+        )
+
+    def _get_lot_quants(self, locations):
+        res = super()._get_lot_quants(locations)
+        if not self.exclude_sublocation:
+            return res
+        return self.env["stock.quant"].search(
+            [
+                ("product_id", "in", self.product_ids.ids),
+                ("lot_id", "in", self.lot_ids.ids),
+                ("location_id", "in", locations.mapped("id")),
+            ]
+        )
+
+    def _get_category_quants(self, locations):
+        res = super()._get_category_quants(locations)
+        if not self.exclude_sublocation:
+            return res
+        return self.env["stock.quant"].search(
+            [
+                ("location_id", "in", locations.mapped("id")),
+                "|",
+                ("product_id.categ_id", "=", self.category_id.id),
+                ("product_id.categ_id", "in", self.category_id.child_id.ids),
+            ]
+        )
