@@ -28,16 +28,37 @@ class StockInventory(models.Model):
         store=True,
     )
 
-    @api.depends("line_ids.product_qty", "line_ids.theoretical_qty")
+    def action_view_inventory_adjustment(self):
+        res = super().action_view_inventory_adjustment()
+        res.update(
+            {
+                "view_id": self.env.ref(
+                    "stock_inventory_discrepancy.stock_quant_discrepency_tree_view"
+                ).id
+            }
+        )
+        return res
+
+    @api.depends("stock_quant_ids.inventory_quantity", "stock_quant_ids.quantity")
     def _compute_over_discrepancy_line_count(self):
         for inventory in self:
-            lines = inventory.line_ids.filtered(
+            lines = inventory.stock_quant_ids.filtered(
                 lambda line: line._has_over_discrepancy()
             )
             inventory.over_discrepancy_line_count = len(lines)
 
     def action_over_discrepancies(self):
         self.write({"state": "pending"})
+        notification = {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("The inventory needs to be approved."),
+                "type": "warning",
+                "sticky": False,  # True/False will display for few seconds if false
+            },
+        }
+        return notification
 
     def _check_group_inventory_validation_always(self):
         grp_inv_val = self.env.ref(
@@ -54,7 +75,7 @@ class StockInventory(models.Model):
                 )
             )
 
-    def _action_done(self):
+    def action_state_to_done(self):
         for inventory in self:
             if inventory.over_discrepancy_line_count > 0.0:
                 if self.user_has_groups(
@@ -63,11 +84,10 @@ class StockInventory(models.Model):
                     "stock_inventory_discrepancy."
                     "group_stock_inventory_validation_always"
                 ):
-                    inventory.action_over_discrepancies()
-                    return True
+                    return inventory.action_over_discrepancies()
                 else:
                     inventory._check_group_inventory_validation_always()
-        return super(StockInventory, self)._action_done()
+        return super(StockInventory, self).action_state_to_done()
 
     def action_force_done(self):
-        return super(StockInventory, self)._action_done()
+        return super(StockInventory, self).action_state_to_done()

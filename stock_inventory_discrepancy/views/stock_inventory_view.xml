@@ -5,7 +5,7 @@
     <record id="view_inventory_form" model="ir.ui.view">
         <field name="name">Inventory form view - discrepancy extension </field>
         <field name="model">stock.inventory</field>
-        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="inherit_id" ref="stock_inventory.view_inventory_group_form" />
         <field name="arch" type="xml">
             <field name="state" position="attributes">
                 <attribute name="statusbar_visible">
@@ -15,12 +15,12 @@
                     {"pending":"red"}
                 </attribute>
             </field>
-            <xpath expr="//button[@name='action_validate']" position="attributes">
+            <xpath expr="//button[@name='action_state_to_done']" position="attributes">
                 <attribute
                     name="groups"
                 >stock_inventory_discrepancy.group_stock_inventory_validation</attribute>
             </xpath>
-            <xpath expr="//button[@name='action_validate']" position="after">
+            <xpath expr="//button[@name='action_state_to_done']" position="after">
                 <button
                     name="action_force_done"
                     string="Force Validation"
@@ -30,19 +30,16 @@
                     attrs="{'invisible': ['|',('state', '!=', 'pending'),('over_discrepancy_line_count', '=', 0)]}"
                 />
             </xpath>
-            <xpath
-                expr="//button[@name='action_open_inventory_lines']"
-                position="attributes"
-            >
+<!--            <xpath-->
+<!--                expr="//button[@name='action_open_inventory_lines']"-->
+<!--                position="attributes"-->
+<!--            >-->
+<!--                <attribute name="states">pending,confirm</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//button[@name='action_state_to_draft']" position="attributes">
                 <attribute name="states">pending,confirm</attribute>
             </xpath>
-            <xpath
-                expr="//button[@name='action_cancel_draft'][2]"
-                position="attributes"
-            >
-                <attribute name="states">pending,confirm</attribute>
-            </xpath>
-            <field name="company_id" position="before">
+            <field name="date" position="before">
                 <field
                     name="over_discrepancy_line_count"
                     attrs="{'invisible': [('state', '!=', 'pending')]}"
@@ -50,22 +47,155 @@
             </field>
         </field>
     </record>
-    <record id="stock_inventory_line_tree2" model="ir.ui.view">
-        <field name="name">stock.inventory.line.tree2</field>
-        <field name="model">stock.inventory.line</field>
-        <field name="inherit_id" ref="stock.stock_inventory_line_tree" />
+
+    <record id="stock_quant_discrepency_tree_view" model="ir.ui.view">
+        <field name="name">stock.quant.discrepency.tree.view</field>
+        <field name="model">stock.quant</field>
         <field name="arch" type="xml">
-            <field name="product_qty" position="after">
+            <tree
+                default_order="location_id, inventory_date, product_id, package_id, lot_id, owner_id"
+                decoration-warning="is_outdated"
+                decoration-danger="quantity &lt; 0 or has_over_discrepancy"
+                editable="bottom"
+                create="1"
+                edit="1"
+                import="1"
+                js_class="singleton_list"
+                sample="1"
+            >
+                <header>
+                    <button
+                        name="stock.action_stock_inventory_adjustement_name"
+                        groups="stock.group_stock_manager"
+                        type="action"
+                        string="Apply"
+                    />
+                    <button name="action_reset" type="object" string="Clear" />
+                    <button
+                        name="stock.action_stock_request_count"
+                        groups="stock.group_stock_manager"
+                        type="action"
+                        string="Request a Count"
+                    />
+                </header>
+                <field name="id" invisible="1" />
+                <field name="is_outdated" invisible="1" />
+                <field name="tracking" invisible="1" />
+                <field name="inventory_quantity_set" invisible="1" />
+                <field
+                    name="location_id"
+                    domain="[('usage', 'in', ['internal', 'transit'])]"
+                    attrs="{'readonly': [('id', '!=', False)]}"
+                    invisible="context.get('hide_location', False)"
+                    options="{'no_create': True}"
+                />
+                <field
+                    name="product_id"
+                    attrs="{'readonly': [('id', '!=', False)]}"
+                    readonly="context.get('single_product', False)"
+                    force_save="1"
+                    options="{'no_create': True}"
+                />
+                <field name="product_categ_id" optional="hide" />
+                <field
+                    name="lot_id"
+                    groups="stock.group_production_lot"
+                    attrs="{'readonly': ['|', ('id', '!=', False), ('tracking', 'not in', ['serial', 'lot'])]}"
+                    invisible="context.get('hide_lot', False)"
+                    context="{'default_product_id': product_id, 'default_company_id': company_id}"
+                />
+                <field
+                    name="package_id"
+                    groups="stock.group_tracking_lot"
+                    attrs="{'readonly': [('id', '!=', False)]}"
+                />
+                <field
+                    name="owner_id"
+                    groups="stock.group_tracking_owner"
+                    attrs="{'readonly': [('id', '!=', False)]}"
+                    options="{'no_create': True}"
+                />
+                <field
+                    name="available_quantity"
+                    string="Available Quantity"
+                    decoration-danger="available_quantity &lt; 0"
+                    optional="hidden"
+                />
+                <field name="quantity" optional="show" string="On Hand Quantity" />
+                <field name="product_uom_id" groups="uom.group_uom" string="UoM" />
+                <field name="inventory_quantity" widget="counted_quantity_widget" />
                 <field name="discrepancy_qty" optional="show" />
                 <field name="discrepancy_percent" optional="show" />
                 <field name="discrepancy_threshold" optional="show" />
                 <field name="has_over_discrepancy" invisible="1" />
-            </field>
-            <xpath expr="//tree" position="attributes">
-                <attribute
-                    name="decoration-danger"
-                >theoretical_qty &lt; 0 or has_over_discrepancy</attribute>
-            </xpath>
+                <field
+                    name="inventory_diff_quantity"
+                    string="Difference"
+                    attrs="{'invisible': [('inventory_quantity_set', '=', False)]}"
+                    decoration-muted="inventory_diff_quantity == 0"
+                    decoration-danger="inventory_diff_quantity &lt; 0"
+                    decoration-success="inventory_diff_quantity &gt; 0"
+                    decoration-bf="inventory_diff_quantity != 0"
+                />
+                <field name="inventory_date" optional="show" />
+                <field name="user_id" string="User" optional="show" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+                <button
+                    name="action_inventory_history"
+                    type="object"
+                    class="btn btn-link text-info"
+                    icon="fa-history"
+                    string="History"
+                />
+                <button
+                    name="action_apply_inventory"
+                    groups="stock.group_stock_manager"
+                    type="object"
+                    string="Apply"
+                    class="btn btn-link"
+                    icon="fa-save"
+                    attrs="{'invisible': [('inventory_quantity_set', '=', False)]}"
+                />
+                <button
+                    name="action_set_inventory_quantity"
+                    type="object"
+                    string="Set"
+                    class="btn btn-link"
+                    icon="fa-bullseye"
+                    attrs="{'invisible': [('inventory_quantity_set', '=', True)]}"
+                />
+                <button
+                    name="action_set_inventory_quantity_to_zero"
+                    type="object"
+                    string="Clear"
+                    class="btn text-warning"
+                    icon="fa-times"
+                    attrs="{'invisible': [('inventory_quantity_set', '=', False)]}"
+                />
+            </tree>
         </field>
     </record>
+
+<!--    <record id="stock_inventory_line_tree2" model="ir.ui.view">-->
+<!--        <field name="name">stock.inventory.line.tree2</field>-->
+<!--        <field name="model">stock.inventory.line</field>-->
+<!--        <field name="inherit_id" ref="stock.stock_inventory_line_tree" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <field name="product_qty" position="after">-->
+<!--                <field name="discrepancy_qty" optional="show" />-->
+<!--                <field name="discrepancy_percent" optional="show" />-->
+<!--                <field name="discrepancy_threshold" optional="show" />-->
+<!--                <field name="has_over_discrepancy" invisible="1" />-->
+<!--            </field>-->
+<!--            <xpath expr="//tree" position="attributes">-->
+<!--                <attribute-->
+<!--                    name="decoration-danger"-->
+<!--                >theoretical_qty &lt; 0 or has_over_discrepancy</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
 </odoo>

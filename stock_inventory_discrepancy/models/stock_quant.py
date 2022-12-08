@@ -4,8 +4,8 @@
 from odoo import api, fields, models
 
 
-class StockInventoryLine(models.Model):
-    _inherit = "stock.inventory.line"
+class StockQuant(models.Model):
+    _inherit = "stock.quant"
 
     discrepancy_qty = fields.Float(
         string="Discrepancy",
@@ -36,22 +36,22 @@ class StockInventoryLine(models.Model):
         compute="_compute_has_over_discrepancy",
     )
 
-    @api.depends("theoretical_qty", "product_qty")
+    @api.depends("quantity", "inventory_quantity")
     def _compute_discrepancy(self):
         for line in self:
-            line.discrepancy_qty = line.product_qty - line.theoretical_qty
-            if line.theoretical_qty:
+            line.discrepancy_qty = line.inventory_quantity - line.quantity
+            if line.quantity:
                 line.discrepancy_percent = 100 * abs(
-                    (line.product_qty - line.theoretical_qty) / line.theoretical_qty
+                    (line.inventory_quantity - line.quantity) / line.quantity
                 )
-            elif not line.theoretical_qty and line.product_qty:
+            elif not line.quantity and line.inventory_quantity:
                 line.discrepancy_percent = 100.0
             else:
                 line.discrepancy_percent = 0.0
 
     def _compute_discrepancy_threshold(self):
         for line in self:
-            whs = line.location_id.get_warehouse()
+            whs = line.location_id.warehouse_id
             if line.location_id.discrepancy_threshold > 0.0:
                 line.discrepancy_threshold = line.location_id.discrepancy_threshold
             elif whs.discrepancy_threshold > 0.0:

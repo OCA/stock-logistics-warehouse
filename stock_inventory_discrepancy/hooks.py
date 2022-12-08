@@ -6,7 +6,7 @@ from odoo import _
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 
-from odoo.addons.stock.models.stock_inventory import Inventory
+from odoo.addons.stock_inventory.models.stock_inventory import InventoryAdjustmentsGroup
 
 
 def post_load_hook():
@@ -29,7 +29,7 @@ def post_load_hook():
             raise UserError(
                 _("Only a stock manager can validate an inventory adjustment.")
             )
-        if self.state not in ["confirm", "pending"]:
+        if self.state not in ["in_progress", "pending"]:
             raise UserError(
                 _(
                     "You can't validate the inventory '%s', maybe this inventory "
@@ -38,18 +38,18 @@ def post_load_hook():
                 % (self.name)
             )
         # END HOOK
-        inventory_lines = self.line_ids.filtered(
+        inventory_lines = self.stock_quant_ids.filtered(
             lambda l: l.product_id.tracking in ["lot", "serial"]
-            and not l.prod_lot_id
-            and l.theoretical_qty != l.product_qty
+            and not l.lot_id
+            and l.quantity != l.inventory_quantity
         )
-        lines = self.line_ids.filtered(
+        lines = self.stock_quant_ids.filtered(
             lambda l: float_compare(
-                l.product_qty, 1, precision_rounding=l.product_uom_id.rounding
+                l.inventory_quantity, 1, precision_rounding=l.product_uom_id.rounding
             )
             > 0
             and l.product_id.tracking == "serial"
-            and l.prod_lot_id
+            and l.lot_id
         )
         if inventory_lines and not lines:
             wiz_lines = [
@@ -68,12 +68,13 @@ def post_load_hook():
                 "target": "new",
                 "res_id": wiz.id,
             }
-        self._action_done()
-        self.line_ids._check_company()
-        self._check_company()
         return True
 
-    if not hasattr(Inventory, "action_validate_original"):
-        Inventory.action_validate_original = Inventory.action_validate
+    if not hasattr(InventoryAdjustmentsGroup, "action_validate_original"):
+        InventoryAdjustmentsGroup.action_validate_original = (
+            InventoryAdjustmentsGroup.action_state_to_done
+        )
 
-    Inventory._patch_method("action_validate", action_validate_discrepancy)
+    InventoryAdjustmentsGroup._patch_method(
+        "action_state_to_done", action_validate_discrepancy
+    )
