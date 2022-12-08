@@ -12,7 +12,7 @@ class StockCycleCount(models.Model):
     _inherit = "mail.thread"
     _order = "id desc"
 
-    name = fields.Char(string="Name", readonly=True)
+    name = fields.Char(readonly=True)
     location_id = fields.Many2one(
         comodel_name="stock.location",
         string="Location",
@@ -48,7 +48,6 @@ class StockCycleCount(models.Model):
             ("cancelled", "Cancelled"),
             ("done", "Done"),
         ],
-        string="State",
         default="draft",
         tracking=True,
     )
@@ -100,20 +99,25 @@ class StockCycleCount(models.Model):
                 inv.prefill_counted_quantity = (
                     self.company_id.inventory_adjustment_counted_quantities
                 )
-                inv.action_start()
+                inv.action_state_to_in_progress()
+                if inv.prefill_counted_quantity == "zero":
+                    inv.stock_quant_ids.write({"inventory_quantity": 0})
+                else:
+                    for quant in inv.stock_quant_ids:
+                        quant.write({"inventory_quantity": quant.quantity})
         self.write({"state": "open"})
         return True
 
     def action_view_inventory(self):
-        action = self.env["ir.actions.act_window"]._for_xml_id(
-            "stock.action_inventory_form"
-        )
+        action = self.env.ref(
+            "stock_inventory.action_view_inventory_group_form"
+        ).read()[0]
         action["context"] = {}
         adjustment_ids = self.mapped("stock_adjustment_ids").ids
         if len(adjustment_ids) > 1:
             action["domain"] = [("id", "in", adjustment_ids)]
         elif len(adjustment_ids) == 1:
-            res = self.env.ref("stock.view_inventory_form", False)
+            res = self.env.ref("stock_inventory.view_inventory_group_form", False)
             action["views"] = [(res and res.id or False, "form")]
             action["res_id"] = adjustment_ids and adjustment_ids[0] or False
         return action
