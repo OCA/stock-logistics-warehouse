@@ -28,7 +28,7 @@ class StockLocation(models.Model):
                 order="write_date desc",
             )
             if history:
-                wh = rec.get_warehouse()
+                wh = rec.warehouse_id
                 if (
                     wh.counts_for_accuracy_qty
                     and len(history) > wh.counts_for_accuracy_qty
@@ -68,7 +68,7 @@ class StockLocation(models.Model):
     def check_zero_confirmation(self):
         for rec in self:
             if not rec.zero_confirmation_disabled:
-                wh = rec.get_warehouse()
+                wh = rec.warehouse_id
                 rule_model = self.env["stock.cycle.count.rule"]
                 zero_rule = rule_model.search(
                     [("rule_type", "=", "zero"), ("warehouse_ids", "=", wh.id)]
@@ -83,11 +83,9 @@ class StockLocation(models.Model):
     def create_zero_confirmation_cycle_count(self):
         self.ensure_one()
         date = datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        wh_id = self.get_warehouse().id
-        date_horizon = (
-            self.get_warehouse()
-            .get_horizon_date()
-            .strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        wh_id = self.warehouse_id.id
+        date_horizon = self.warehouse_id.get_horizon_date().strftime(
+            DEFAULT_SERVER_DATETIME_FORMAT
         )
         counts_planned = self.env["stock.cycle.count"].search(
             [

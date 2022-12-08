@@ -11,18 +11,39 @@ PERCENT = 100.0
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
-    @api.depends("state", "line_ids")
+    @api.depends("state", "stock_quant_ids")
     def _compute_inventory_accuracy(self):
         for inv in self:
-            theoretical = sum(inv.line_ids.mapped(lambda x: abs(x.theoretical_qty)))
-            abs_discrepancy = sum(inv.line_ids.mapped(lambda x: abs(x.discrepancy_qty)))
+            theoretical = sum(inv.stock_quant_ids.mapped(lambda x: abs(x.quantity)))
+            abs_discrepancy = sum(
+                inv.stock_quant_ids.mapped(lambda x: abs(x.inventory_diff_quantity))
+            )
             if theoretical:
                 inv.inventory_accuracy = max(
                     PERCENT * (theoretical - abs_discrepancy) / theoretical, 0.0
                 )
-            if not inv.line_ids and inv.state == "done":
+            if not inv.stock_quant_ids and inv.state == "done":
                 inv.inventory_accuracy = PERCENT
 
+    company_id = fields.Many2one(
+        "res.company",
+        "Company",
+        readonly=True,
+        index=True,
+        required=True,
+        states={"draft": [("readonly", False)]},
+        default=lambda self: self.env.company,
+    )
+    prefill_counted_quantity = fields.Selection(
+        string="Counted Quantities",
+        help="Allows to start with a pre-filled counted quantity for each lines or "
+        "with all counted quantities set to zero.",
+        default="counted",
+        selection=[
+            ("counted", "Default to stock on hand"),
+            ("zero", "Default to zero"),
+        ],
+    )
     cycle_count_id = fields.Many2one(
         comodel_name="stock.cycle.count",
         string="Stock Cycle Count",
@@ -47,7 +68,14 @@ class StockInventory(models.Model):
         return company_id.inventory_adjustment_counted_quantities or "counted"
 
     prefill_counted_quantity = fields.Selection(
-        default=_get_default_counted_quantitites
+        string="Counted Quantities",
+        help="Allows to start with a pre-filled counted quantity for each lines or "
+        "with all counted quantities set to zero.",
+        default=_get_default_counted_quantitites,
+        selection=[
+            ("counted", "Default to stock on hand"),
+            ("zero", "Default to zero"),
+        ],
     )
 
     def _update_cycle_state(self):
@@ -84,8 +112,8 @@ class StockInventory(models.Model):
             self.write({"cycle_count_id": candidate.id, "exclude_sublocation": True})
         return True
 
-    def action_validate(self):
-        res = super(StockInventory, self).action_validate()
+    def action_state_to_done(self):
+        res = super(StockInventory, self).action_state_to_done()
         self._update_cycle_state()
         return res
 

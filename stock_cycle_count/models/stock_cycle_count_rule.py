@@ -99,23 +99,20 @@ class StockCycleCountRule(models.Model):
         """Get the warehouses for the selected locations."""
         wh_ids = []
         for loc in self.location_ids:
-            wh_ids.append(loc.get_warehouse().id)
+            wh_ids.append(loc.warehouse_id.id)
         wh_ids = list(set(wh_ids))
+        wh_ids = [wh for wh in wh_ids if wh]
         self.warehouse_ids = self.env["stock.warehouse"].browse(wh_ids)
 
     name = fields.Char(required=True)
     rule_type = fields.Selection(
         selection="_selection_rule_types", string="Type of rule", required=True
     )
-    rule_description = fields.Char(
-        string="Rule Description", compute="_compute_rule_description"
-    )
+    rule_description = fields.Char(compute="_compute_rule_description")
     active = fields.Boolean(default=True)
     periodic_qty_per_period = fields.Integer(string="Counts per period", default=1)
     periodic_count_period = fields.Integer(string="Period in days")
-    turnover_inventory_value_threshold = fields.Float(
-        string="Turnover Inventory Value Threshold"
-    )
+    turnover_inventory_value_threshold = fields.Float()
     currency_id = fields.Many2one(
         comodel_name="res.currency", string="Currency", compute="_compute_currency_id"
     )
@@ -194,7 +191,7 @@ class StockCycleCountRule(models.Model):
                             "cycle count rule. %s"
                         )
                         % str(e)
-                    )
+                    ) from e
             else:
                 next_date = datetime.today()
             cycle_count = self._propose_cycle_count(next_date, loc)
@@ -254,7 +251,7 @@ class StockCycleCountRule(models.Model):
                                 "rule threshold. %s"
                             )
                             % str(e)
-                        )
+                        ) from e
             else:
                 next_date = datetime.today()
                 cycle_count = self._propose_cycle_count(next_date, loc)

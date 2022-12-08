@@ -5,11 +5,11 @@
     <record id="view_inventory_tree" model="ir.ui.view">
         <field name="name">Inventory tree view - cycle count extension</field>
         <field name="model">stock.inventory</field>
-        <field name="inherit_id" ref="stock.view_inventory_tree" />
+        <field name="inherit_id" ref="stock_inventory.view_inventory_group_tree" />
         <field name="arch" type="xml">
-            <field name="date" position="after">
+            <field name="name" position="after">
                 <field name="location_ids" />
-                <field name="responsible_id" widget="many2one_avatar_employee" />
+                <field name="responsible_id" />
                 <field name="cycle_count_id" />
                 <field name="inventory_accuracy" />
             </field>
@@ -18,9 +18,10 @@
     <record id="view_inventory_form" model="ir.ui.view">
         <field name="name">Inventory form view - cycle count extension </field>
         <field name="model">stock.inventory</field>
-        <field name="inherit_id" ref="stock.view_inventory_form" />
+        <field name="inherit_id" ref="stock_inventory.view_inventory_group_form" />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
+            <field name="date" position="after">
+                <field name="company_id" />
                 <field name="cycle_count_id" />
                 <field name="responsible_id" />
                 <label for="inventory_accuracy" />
@@ -33,9 +34,8 @@
     <record id="view_inventory_filter" model="ir.ui.view">
         <field name="name">stock.inventory.filter - stock_cycle_count</field>
         <field name="model">stock.inventory</field>
-        <field name="inherit_id" ref="stock.view_inventory_filter" />
         <field name="arch" type="xml">
-            <field name="product_ids" position="after">
+            <search>
                 <field name="location_ids" />
                 <field name="responsible_id" />
                 <filter
@@ -43,7 +43,7 @@
                     name="my_adjustments"
                     domain="[('responsible_id', '=', uid)]"
                 />
-            </field>
+            </search>
         </field>
     </record>
     <record id="view_inventory_graph" model="ir.ui.view">
