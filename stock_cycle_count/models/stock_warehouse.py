@@ -93,7 +93,7 @@ class StockWarehouse(models.Model):
                     proposed_for_loc = list(
                         filter(lambda x: x["location"] == loc, proposed_cycle_counts)
                     )
-                    earliest_date = min([d["date"] for d in proposed_for_loc])
+                    earliest_date = min(d["date"] for d in proposed_for_loc)
                     cycle_count_proposed = list(
                         filter(lambda x: x["date"] == earliest_date, proposed_for_loc)
                     )[0]
