@@ -23,13 +23,14 @@ class StockLocation(models.Model):
     def write(self, values):
         res = super().write(values)
         # Set the discrepancy threshold for all child locations
-        if values.get("discrepancy_threshold", False):
+        if values.get("propagate_discrepancy_threshold", False):
             for location in self.filtered(
                 lambda loc: loc.propagate_discrepancy_threshold and loc.child_ids
             ):
                 location.child_ids.write(
                     {
-                        "discrepancy_threshold": values["discrepancy_threshold"],
+                        "discrepancy_threshold": values.get("discrepancy_threshold")
+                        or location.discrepancy_threshold,
                         "propagate_discrepancy_threshold": True,
                     }
                 )
