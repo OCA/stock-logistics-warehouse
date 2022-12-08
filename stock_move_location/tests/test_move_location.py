@@ -156,6 +156,14 @@ class TestMoveLocation(TestsCommon):
             putaway_line.destination_location_id, self.internal_loc_2_shelf
         )
 
+        # Actually commit the wizard and check stock.move.line.location_dest_id
+        ret = wizard.action_move_location()
+        picking = self.env["stock.picking"].browse([ret["res_id"]])
+        putaway_move_line = picking.move_line_ids.filtered(
+            lambda l: l.product_id == self.product_no_lots
+        )[0]
+        self.assertEqual(putaway_move_line.location_dest_id, self.internal_loc_2_shelf)
+
     def test_delivery_order_assignation_after_transfer(self):
         """
         Make sure using the wizard doesn't break assignation on delivery orders
