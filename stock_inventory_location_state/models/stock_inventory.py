@@ -32,7 +32,9 @@ class Inventory(models.Model):
             inventory.done_location_count = len(
                 inventory.sub_location_ids.filtered(lambda l: l.state == "done")
             )
-            inventory.remaining_location_count = inventory.location_count - inventory.done_location_count
+            inventory.remaining_location_count = (
+                inventory.location_count - inventory.done_location_count
+            )
 
     def action_start(self):
         res = super().action_start()
@@ -166,3 +168,8 @@ class StockInventoryLocation(models.Model):
             ("location_id", "=", self.location_id.id),
         ]
         return action
+
+    def action_reopen(self):
+        self.ensure_one()
+        assert self.inventory_id.state != "done"
+        self.write({"state": "pending"})
