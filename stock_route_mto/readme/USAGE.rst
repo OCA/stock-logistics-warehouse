@@ -1,0 +1,2 @@
+* Go to Inventory > Settings > Warehouse Management > Routes
+* Check the MTO field on desired route(s)
