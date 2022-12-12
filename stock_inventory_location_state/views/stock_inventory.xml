@@ -94,6 +94,13 @@
                     states="started"
                     icon="fa-check"
                 />
+                <button
+                    type="object"
+                    name="action_reopen"
+                    string="Re-open"
+                    states="done"
+                    icon="fa-undo"
+                />
                 <field
                     name="state"
                     widget="badge"
