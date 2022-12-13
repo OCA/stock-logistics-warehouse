@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Location Zone",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "BCIM, Okia, Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "summary": "Classify locations with zones.",
