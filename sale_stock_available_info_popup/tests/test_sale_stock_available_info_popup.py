@@ -78,14 +78,14 @@ class SaleStockAvailableInfoPopup(common.TransactionCase):
             sale.order_line.mapped("immediately_usable_qty_today"),
             [qty, qty - 5, qty - 10],
         )
-        self.product.invalidate_cache()
+        self.product.invalidate_recordset()
         qty_yesterday = self.product.with_context(
             to_date=yesterday
         ).immediately_usable_qty
         self.assertFalse(qty == qty_yesterday)
         # Commitment date will affect the computation
         sale.commitment_date = yesterday
-        sale.order_line.invalidate_cache()
+        sale.order_line.invalidate_recordset()
         self.assertEqual(
             sale.order_line.mapped("immediately_usable_qty_today"),
             [qty_yesterday, qty_yesterday - 5, qty_yesterday - 10],

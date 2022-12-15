@@ -87,7 +87,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
             """
             # Refresh, because the function field is not recalculated between
             # transactions
-            product.refresh()
+            product.invalidate_recordset()
             self.assertEqual(product.immediately_usable_qty, value)
             # Now check search function
             domain = [("immediately_usable_qty", "=", value)]

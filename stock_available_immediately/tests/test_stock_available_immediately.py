@@ -72,7 +72,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
         def compare_product_usable_qty(product, value):
             # Refresh, because the function field is not recalculated between
             # transactions
-            product.refresh()
+            product.invalidate_recordset()
             self.assertEqual(product.immediately_usable_qty, value)
 
         compare_product_usable_qty(productA, 0)
