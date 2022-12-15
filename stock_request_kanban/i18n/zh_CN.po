@@ -53,6 +53,12 @@ msgid "Activity State"
 msgstr "活动状态"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_type_icon
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: stock_request_kanban
 #: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_inventory_kanban_action
 #: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_request_kanban_action
 #: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_request_order_kanban_action
@@ -64,8 +70,8 @@ msgstr "添加看板"
 #. module: stock_request_kanban
 #: code:addons/stock_request_kanban/wizard/wizard_stock_request_kanban.py:0
 #, python-format
-msgid "Added kanban %s for product %s"
-msgstr "为产品%s添加了看板%s"
+msgid "Added kanban %(kanban)s for product %(product)s"
+msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__allow_virtual_location
@@ -189,7 +195,6 @@ msgstr "创建时间"
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__display_name
-#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__display_name
 msgid "Display Name"
 msgstr "显示名称"
@@ -216,16 +221,16 @@ msgid "Followers"
 msgstr "关注者"
 
 #. module: stock_request_kanban
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_channel_ids
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "关注者(频道)"
-
-#. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_partner_ids
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "关注者(业务伙伴)"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_type_icon
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
@@ -233,11 +238,16 @@ msgid "Group By"
 msgstr "分组"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__has_message
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__id
-#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban__id
 msgid "ID"
 msgstr "ID"
@@ -330,7 +340,6 @@ msgstr "看板卡"
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban____last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban____last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban____last_update
-#: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban_abstract____last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_order_kanban____last_update
 msgid "Last Modified on"
 msgstr "最后修改时间"
@@ -414,6 +423,12 @@ msgid ""
 msgstr ""
 "通过此库存请求创建的移动将放入此采购组。如果没有给出，则由采购规则生成的移动"
 "将被分组为一个大拣货。"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__my_activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__name
@@ -637,7 +652,6 @@ msgstr ""
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
-#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_tree
 msgid "Stock Inventories"
 msgstr "库存存货"
 
@@ -690,7 +704,6 @@ msgstr "库存请求看板"
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_form
-#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_tree
 msgid "Stock Requests"
 msgstr "库存请求"
 
@@ -749,6 +762,13 @@ msgstr "网站消息"
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__website_message_ids
 msgid "Website communication history"
 msgstr "网站沟通记录"
+
+#, python-format
+#~ msgid "Added kanban %s for product %s"
+#~ msgstr "为产品%s添加了看板%s"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "关注者(频道)"
 
 #~ msgid "If checked new messages require your attention."
 #~ msgstr ".如果勾选此项，将会收到新消息提醒。"
