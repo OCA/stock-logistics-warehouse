@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="product_product_form_view_kanban_card_button" model="ir.ui.view">
+        <field name="name">product.product.stock.request.kanban</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_request.group_stock_request_user'))]"
+        />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    class="oe_stat_button"
+                    name="action_view_kanban_cards"
+                    type="object"
+                    attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                    icon="fa-barcode"
+                >
+                    <field
+                        string="Kanban Cards"
+                        name="kanban_card_count"
+                        widget="statinfo"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+    <record id="product_template_form_view_bom_button" model="ir.ui.view">
+        <field name="name">product.template.stock.request.kanban</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_request.group_stock_request_user'))]"
+        />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    class="oe_stat_button"
+                    name="action_view_kanban_cards"
+                    type="object"
+                    attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                    icon="fa-barcode"
+                >
+                    <field
+                        string="Kanban Cards"
+                        name="kanban_card_count"
+                        widget="statinfo"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

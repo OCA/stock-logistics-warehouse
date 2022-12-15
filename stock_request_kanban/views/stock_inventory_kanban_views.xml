@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_stock_inventory_kanban_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.kanban.tree</field>
+        <field name="model">stock.inventory.kanban</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="count_missing_kanbans" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_stock_inventory_kanban_form" model="ir.ui.view">
+        <field name="name">stock.inventory.kanban.form</field>
+        <field name="model">stock.inventory.kanban</field>
+        <field name="arch" type="xml">
+            <form string="Stock Inventories">
+                <header>
+                    <button
+                        name="start_inventory"
+                        type="object"
+                        string="Start"
+                        states="draft"
+                        class="btn-primary"
+                    />
+                    <button
+                        name="finish_inventory"
+                        type="object"
+                        string="Finish"
+                        states="in_progress"
+                        class="btn-primary"
+                    />
+                    <button
+                        name="print_missing_kanbans"
+                        type="object"
+                        string="Print missing"
+                        states="finished"
+                    />
+                    <button
+                        name="close_inventory"
+                        type="object"
+                        string="Close"
+                        states="finished"
+                        class="btn-primary"
+                    />
+                    <button
+                        name="cancel"
+                        type="object"
+                        string="Cancel"
+                        states="draft,in_progress,finished"
+                    />
+                    <button
+                        name="to_draft"
+                        type="object"
+                        string="Set to draft"
+                        states="cancelled"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="%(stock_request_kanban.wizard_stock_inventory_kanban_action)d"
+                            type="action"
+                            icon="fa-barcode"
+                            string="Scan"
+                            states="in_progress"
+                            class="oe_read_only"
+                        />
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Inventory Kanban" />
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field
+                            name="warehouse_ids"
+                            widget="many2many_tags"
+                            groups="stock.group_stock_multi_locations"
+                        />
+                        <field
+                            name="location_ids"
+                            widget="many2many_tags"
+                            groups="stock.group_stock_multi_locations"
+                        />
+                        <field name="product_ids" widget="many2many_tags" />
+                    </group>
+                    <notebook>
+                        <page string="Kanban" id="kanban">
+                            <field name="kanban_ids" />
+                        </page>
+                        <page string="Missing" id="missing">
+                            <field name="missing_kanban_ids" />
+                        </page>
+                        <page string="Scanned" id="scanned">
+                            <field name="scanned_kanban_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="stock_inventory_kanban_action" model="ir.actions.act_window">
+        <field name="name">Stock Inventory Kanbans</field>
+        <field name="res_model">stock.inventory.kanban</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            Click to add a Stock Inventory Kanban.
+          </p>
+        </field>
+    </record>
+</odoo>
