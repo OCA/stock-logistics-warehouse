@@ -38,6 +38,7 @@
         <field name="name">stock.request.search</field>
         <field name="model">stock.request</field>
         <field name="arch" type="xml">
+        <field name="company_id" invisible="1" />
             <search string="Stock Requests Search">
                 <field name="name" string="Stock Requests" />
                 <field name="warehouse_id" />
@@ -103,6 +104,7 @@
         <field name="model">stock.request</field>
         <field name="arch" type="xml">
             <form string="Stock Requests">
+                <field name="company_id" invisible="1" />
                 <header>
                     <button
                         name="action_confirm"

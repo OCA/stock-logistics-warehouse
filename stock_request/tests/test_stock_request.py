@@ -73,7 +73,7 @@ class TestStockRequest(common.TransactionCase):
             }
         )
 
-        self.route = self.env["stock.location.route"].create(
+        self.route = self.env["stock.route"].create(
             {
                 "name": "Transfer",
                 "product_categ_selectable": False,
@@ -83,7 +83,7 @@ class TestStockRequest(common.TransactionCase):
             }
         )
 
-        self.route_2 = self.env["stock.location.route"].create(
+        self.route_2 = self.env["stock.route"].create(
             {
                 "name": "Transfer",
                 "product_categ_selectable": False,
@@ -1115,9 +1115,9 @@ class TestStockRequestBase(TestStockRequest):
         self.env["stock.backorder.confirmation"].with_context(
             button_validate_picking_ids=[picking.id]
         ).create({"pick_ids": [(4, picking.id)]}).process()
-        sr1.refresh()
-        sr2.refresh()
-        sr3.refresh()
+        sr1.env.invalidate_all()
+        sr2.env.invalidate_all()
+        sr3.env.invalidate_all()
         self.assertNotEqual(sr1.state, "done")
         self.assertNotEqual(sr2.state, "done")
         self.assertNotEqual(sr3.state, "done")
@@ -1134,9 +1134,9 @@ class TestStockRequestBase(TestStockRequest):
         self.env["stock.backorder.confirmation"].with_context(
             button_validate_picking_ids=[picking.id]
         ).create({"pick_ids": [(4, picking.id)]}).process_cancel_backorder()
-        sr1.refresh()
-        sr2.refresh()
-        sr3.refresh()
+        sr1.env.invalidate_all()
+        sr2.env.invalidate_all()
+        sr3.env.invalidate_all()
         self.assertEqual(sr1.state, "done")
         self.assertEqual(sr1.qty_cancelled, 0)
         self.assertEqual(sr2.state, "done")
