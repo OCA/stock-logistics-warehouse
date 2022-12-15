@@ -10,7 +10,8 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     immediately_usable_qty_today = fields.Float(
-        compute="_compute_immediately_usable_qty_today",string='Immediately Usable Qty Today'
+        compute="_compute_immediately_usable_qty_today",
+        string='Immediately Usable Qty Today',
     )
 
     @api.depends(

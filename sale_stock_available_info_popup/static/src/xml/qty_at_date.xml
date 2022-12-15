@@ -2,14 +2,18 @@
 <!-- Copyright 2020 Tecnativa - Ernesto Tejeda
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <templates>
-    <t t-name="sale_stock_available_info_popup.QtyDetailPopOver" t-inherit="sale_stock.QtyDetailPopOver" t-inherit-mode="extension" owl="1">
+    <t t-name="sale_stock_available_info_popup.QtyDetailPopOver"
+       t-inherit="sale_stock.QtyDetailPopOver"
+       t-inherit-mode="extension"
+       owl="1">
         <xpath expr="//table/tbody/t[1]" position="before">
                     <tr>
                 <td>
                     <strong>Available to promise</strong>
                 </td>
                 <td>
-                    <b t-out='props.record.data.immediately_usable_qty_today'/> <t t-out="props.record.data.product_uom[1]"/>
+                    <b t-out='props.record.data.immediately_usable_qty_today'/> <t
+                    t-out="props.record.data.product_uom[1]"/>
                 </td>
             </tr>
 
