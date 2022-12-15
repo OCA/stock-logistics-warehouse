@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_free_quantity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_free_quantity
+#: model_terms:ir.ui.view,arch_db:stock_free_quantity.product_normal_form_view
+#: model_terms:ir.ui.view,arch_db:stock_free_quantity.view_stock_available_form
+msgid "<span class=\"o_stat_text\">Free</span>"
+msgstr ""
+
+#. module: stock_free_quantity
+#: model:ir.model.fields,field_description:stock_free_quantity.field_product_template__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_free_quantity
+#: model:ir.model.fields,field_description:stock_free_quantity.field_product_template__free_qty
+msgid "Free Quantity"
+msgstr ""
+
+#. module: stock_free_quantity
+#: model_terms:ir.ui.view,arch_db:stock_free_quantity.product_template_kanban_free_qty_view
+msgid "Free:"
+msgstr ""
+
+#. module: stock_free_quantity
+#: model:ir.model.fields,field_description:stock_free_quantity.field_product_template__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_free_quantity
+#: model:ir.model.fields,field_description:stock_free_quantity.field_product_template____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_free_quantity
+#: model:ir.model,name:stock_free_quantity.model_product_template
+msgid "Product Template"
+msgstr ""
