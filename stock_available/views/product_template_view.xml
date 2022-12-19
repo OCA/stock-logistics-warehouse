@@ -83,7 +83,7 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@name='product_lst_price']" position="after">
                 <div
-                    t-if="record.type.raw_value == 'product'"
+                    t-if="record.show_on_hand_qty_status_button.raw_value"
                 >Available to Promise: <field name="immediately_usable_qty" /> <field
                         name="uom_id"
                     /></div>
