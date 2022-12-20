@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2022 Simone Rubino - TAKOBI
+  ~ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+  -->
+<odoo>
+    <record id="view_warehouse_orderpoint_form" model="ir.ui.view">
+        <field name="name">Add Stock Orderpoint other availability fields to Minimum Inventory Rule form view</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//field[@name='product_id']" position="after">
+                <field name="is_other_availability"/>
+            </xpath>
+            <field name="product_min_qty" position="attributes">
+                <attribute name="attrs">
+                    {
+                        'invisible': [
+                            ('is_other_availability', '=', True),
+                        ],
+                    }
+                </attribute>
+            </field>
+            <xpath expr="//sheet/group[3]" position="inside">
+                <group name="other_availability"
+                       string="Other availability"
+                       attrs="{
+                           'invisible': [
+                               ('is_other_availability', '=', False),
+                           ],
+                       }"
+                >
+                    <field name="other_availability_product_id"
+                           attrs="{
+                               'required': [
+                                   ('is_other_availability', '!=', False),
+                               ],
+                           }"
+                    />
+                    <field name="other_availability_qty"
+                           attrs="{
+                               'required': [
+                                   ('is_other_availability', '!=', False),
+                               ],
+                           }"
+                    />
+                    <field name="other_availability_location_id"
+                           groups="stock.group_stock_multi_locations"
+                           attrs="{
+                               'required': [
+                                   ('is_other_availability', '!=', False),
+                               ],
+                           }"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

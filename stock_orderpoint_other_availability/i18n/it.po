@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_orderpoint_other_availability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-20 12:20+0000\n"
+"PO-Revision-Date: 2022-12-20 12:20+0000\n"
+"Last-Translator: Simone Rubino <sir@takobi.online>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model.fields,field_description:stock_orderpoint_other_availability.field_stock_warehouse_orderpoint__is_other_availability
+msgid "Check availability of another product"
+msgstr "Controllare la disponibilità di un altro prodotto"
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model.fields,field_description:stock_orderpoint_other_availability.field_stock_warehouse_orderpoint__other_availability_location_id
+msgid "Location for availability"
+msgstr "Ubicazione per disponibilità"
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model.fields,field_description:stock_orderpoint_other_availability.field_stock_warehouse_orderpoint__other_availability_qty
+msgid "Minimum Availability"
+msgstr "Disponibilità minima"
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model,name:stock_orderpoint_other_availability.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Regola di scorta minima"
+
+#. module: stock_orderpoint_other_availability
+#: model_terms:ir.ui.view,arch_db:stock_orderpoint_other_availability.view_warehouse_orderpoint_form
+msgid "Other availability"
+msgstr "Altra disponibilità"
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model,name:stock_orderpoint_other_availability.model_procurement_group
+msgid "Procurement Group"
+msgstr "Gruppo di approvvigionamento"
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model.fields,field_description:stock_orderpoint_other_availability.field_stock_warehouse_orderpoint__other_availability_product_id
+msgid "Product for availability"
+msgstr "Prodotto per disponibilità"
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model.fields,help:stock_orderpoint_other_availability.field_stock_warehouse_orderpoint__other_availability_location_id
+msgid "This inventory rule will also be triggered based on the availability in this location."
+msgstr "Questa regola di scorta sarà attivata anche in base alla disponibilità in questa ubicazione."
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model.fields,help:stock_orderpoint_other_availability.field_stock_warehouse_orderpoint__other_availability_product_id
+msgid "This inventory rule will also be triggered based on the availability of this product."
+msgstr "Questa regola di scorta sarà attivata anche in base alla disponibilità di questo prodotto."
+
+#. module: stock_orderpoint_other_availability
+#: model:ir.model.fields,help:stock_orderpoint_other_availability.field_stock_warehouse_orderpoint__other_availability_qty
+msgid "This inventory rule will also be triggered when the availability of 'Product for availability' is below this quantity."
+msgstr "Questa regola di scorta sarà attivata anche quando la disponibilità di 'Prodotto per disponibilità' è sotto questa quantità."
