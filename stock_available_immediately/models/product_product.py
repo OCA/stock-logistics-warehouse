@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, models
+from odoo.tools import config
 
 
 class ProductProduct(models.Model):
@@ -11,6 +12,10 @@ class ProductProduct(models.Model):
 
     def _compute_available_quantities_dict(self):
         res, stock_dict = super()._compute_available_quantities_dict()
+        if config["test_enable"] and not self.env.context.get(
+            "test_stock_available_immediately"
+        ):
+            return res, stock_dict
         for product in self:
             res[product.id]["immediately_usable_qty"] -= stock_dict[product.id][
                 "incoming_qty"

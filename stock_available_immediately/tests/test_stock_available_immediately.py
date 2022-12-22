@@ -24,6 +24,7 @@ class TestStockLogisticsWarehouse(TransactionCase):
         templateAB = templateObj.create(
             {"name": "templAB", "uom_id": uom_unit.id, "type": "product"}
         )
+        templateAB = templateAB.with_context(test_stock_available_immediately=True)
         self.env["product.template.attribute.line"].create(
             {
                 "product_tmpl_id": templateAB.id,
