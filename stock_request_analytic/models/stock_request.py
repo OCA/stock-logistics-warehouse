@@ -10,28 +10,30 @@ class StockRequest(models.Model):
     _check_company_auto = True
 
     analytic_account_id = fields.Many2one(
-        "account.analytic.account",
+        comodel_name="account.analytic.account",
         string="Analytic Account",
+        compute="_compute_analytic_id",
+        store=True,
+        readonly=False,
         check_company=True,
+        compute_sudo=True,
     )
     analytic_tag_ids = fields.Many2many(
-        "account.analytic.tag",
+        comodel_name="account.analytic.tag",
         string="Analytic Tags",
         check_company=True,
     )
 
-    @api.onchange("product_id")
-    def onchange_product_id(self):
+    @api.depends("order_id")
+    def _compute_analytic_id(self):
         """
         Set default analytic account on lines from order if defined.
         """
-        res = super().onchange_product_id()
-        if self.order_id and self.order_id.default_analytic_account_id:
-            self.analytic_account_id = self.order_id.default_analytic_account_id
-        return res
+        for req in self:
+            if req.order_id and req.order_id.default_analytic_account_id:
+                req.analytic_account_id = req.order_id.default_analytic_account_id
 
     def _prepare_procurement_values(self, group_id=False):
-
         """
         Add analytic account to procurement values
         """
