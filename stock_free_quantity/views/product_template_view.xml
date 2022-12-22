@@ -37,7 +37,7 @@
 
         <record model="ir.ui.view" id="product_template_kanban_free_qty_view">
             <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_kanban_view" />
+            <field name="inherit_id" ref="stock.product_template_kanban_stock_view" />
             <field name="priority" eval="15" />
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='product_lst_price']" position="after">
