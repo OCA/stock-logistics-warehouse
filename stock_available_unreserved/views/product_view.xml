@@ -35,9 +35,11 @@
         <field name="inherit_id" ref="stock.product_template_kanban_stock_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='qty_available']/parent::div" position="after">
-                <div t-if="record.type.raw_value == 'product'">Unreserved: <field
-                        name="qty_available_not_res"
-                    /> <field name="uom_id" /></div>
+                <div
+                    t-if="record.show_on_hand_qty_status_button.raw_value"
+                >Unreserved: <field name="qty_available_not_res" /> <field
+                        name="uom_id"
+                    /></div>
             </xpath>
         </field>
     </record>
