@@ -18,7 +18,7 @@ class ProcurementRule(models.Model):
         company_id,
         values,
     ):
-        res = super(ProcurementRule, self)._get_stock_move_values(
+        res = super()._get_stock_move_values(
             product_id,
             product_qty,
             product_uom,

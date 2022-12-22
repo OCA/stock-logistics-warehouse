@@ -21,19 +21,29 @@ MAP_VIEWS = {
 class StockRequestOrder(models.Model):
     _inherit = "stock.request.order"
 
-    analytic_count = fields.Integer(compute="_compute_analytic_ids", readonly=True)
-    analytic_tag_count = fields.Integer(compute="_compute_analytic_ids", readonly=True)
+    analytic_count = fields.Integer(
+        compute="_compute_analytic_ids",
+        readonly=True,
+        compute_sudo=True,
+    )
+    analytic_tag_count = fields.Integer(
+        compute="_compute_analytic_ids",
+        readonly=True,
+        compute_sudo=True,
+    )
     analytic_account_ids = fields.One2many(
         comodel_name="account.analytic.account",
         compute="_compute_analytic_ids",
         string="Analytic Accounts",
         readonly=True,
+        compute_sudo=True,
     )
     analytic_tag_ids = fields.One2many(
         comodel_name="account.analytic.tag",
         compute="_compute_analytic_ids",
         string="Analytic Tags",
         readonly=True,
+        compute_sudo=True,
     )
     default_analytic_account_id = fields.Many2one(
         comodel_name="account.analytic.account",
@@ -43,7 +53,7 @@ class StockRequestOrder(models.Model):
 
     @api.depends("stock_request_ids")
     def _compute_analytic_ids(self):
-        for req in self.sudo():
+        for req in self:
             req.analytic_account_ids = req.stock_request_ids.mapped(
                 "analytic_account_id"
             )
