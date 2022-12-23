@@ -178,7 +178,6 @@ class CostAdjustment(models.Model):
             adjustment.line_ids.unlink()
             adjustment._populate_adjustment_lines(adjustment.product_ids)
             adjustment.write({"state": "confirm", "date": fields.Datetime.now()})
-        self._check_company()
 
     def _populate_adjustment_lines(self, products):
         """
