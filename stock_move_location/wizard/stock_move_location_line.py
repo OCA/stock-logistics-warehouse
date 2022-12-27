@@ -11,12 +11,9 @@ class StockMoveLocationWizardLine(models.TransientModel):
     _name = "wiz.stock.move.location.line"
     _description = "Wizard move location line"
 
-    move_location_wizard_id = fields.Many2many(
+    move_location_wizard_id = fields.Many2one(
         string="Move location Wizard",
         comodel_name="wiz.stock.move.location",
-        column1="move_location_line_wiz_id",
-        column2="move_location_wiz_id",
-        readonly=True,
     )
     product_id = fields.Many2one(
         string="Product", comodel_name="product.product", required=True
