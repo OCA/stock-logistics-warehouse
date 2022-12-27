@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="name">stock.picking.search</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <filter name="late" position="before">
+                <filter
+                    name="actual_date"
+                    date="actual_date"
+                    default_period="this_month"
+                />
+                <separator />
+            </filter>
+            <filter name="expected_date" position="after">
+                <filter
+                    string="Actual Date"
+                    name="by_actual_date"
+                    domain="[]"
+                    context="{'group_by': 'actual_date'}"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='scheduled_date']" position="before">
+                <field name="is_editable_actual_date" invisible="1" />
+                <field
+                    name="actual_date"
+                    attrs="{'readonly': [('is_editable_actual_date', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_picking_tree" model="ir.ui.view">
+        <field name="name">stock.picking.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="before">
+                <field name="actual_date" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

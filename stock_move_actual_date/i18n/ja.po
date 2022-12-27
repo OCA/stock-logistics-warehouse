@@ -1,0 +1,79 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_move_actual_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-29 09:08+0000\n"
+"PO-Revision-Date: 2024-10-29 09:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_move_actual_date
+#: model:ir.model.fields,field_description:stock_move_actual_date.field_actual_date_mixin__actual_date
+#: model:ir.model.fields,field_description:stock_move_actual_date.field_stock_move__actual_date
+#: model:ir.model.fields,field_description:stock_move_actual_date.field_stock_move_line__actual_date
+#: model:ir.model.fields,field_description:stock_move_actual_date.field_stock_picking__actual_date
+#: model:ir.model.fields,field_description:stock_move_actual_date.field_stock_scrap__actual_date
+#: model_terms:ir.ui.view,arch_db:stock_move_actual_date.stock_move_line_view_search
+#: model_terms:ir.ui.view,arch_db:stock_move_actual_date.stock_scrap_search_view
+#: model_terms:ir.ui.view,arch_db:stock_move_actual_date.view_move_search
+#: model_terms:ir.ui.view,arch_db:stock_move_actual_date.view_picking_internal_search
+msgid "Actual Date"
+msgstr "実績日"
+
+#. module: stock_move_actual_date
+#: model:ir.model,name:stock_move_actual_date.model_res_currency
+msgid "Currency"
+msgstr "通貨"
+
+#. module: stock_move_actual_date
+#: model:ir.model.fields,help:stock_move_actual_date.field_actual_date_mixin__actual_date
+#: model:ir.model.fields,help:stock_move_actual_date.field_stock_picking__actual_date
+#: model:ir.model.fields,help:stock_move_actual_date.field_stock_scrap__actual_date
+msgid ""
+"If set, the value is propagated to the related journal entries as the date."
+msgstr ""
+
+#. module: stock_move_actual_date
+#: model:ir.model.fields,field_description:stock_move_actual_date.field_actual_date_mixin__is_editable_actual_date
+#: model:ir.model.fields,field_description:stock_move_actual_date.field_stock_picking__is_editable_actual_date
+#: model:ir.model.fields,field_description:stock_move_actual_date.field_stock_scrap__is_editable_actual_date
+msgid "Is Editable"
+msgstr ""
+
+#. module: stock_move_actual_date
+#: model:ir.model,name:stock_move_actual_date.model_account_move
+msgid "Journal Entry"
+msgstr "仕訳"
+
+#. module: stock_move_actual_date
+#: model:ir.model,name:stock_move_actual_date.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "製品の移動(在庫移動ライン)"
+
+#. module: stock_move_actual_date
+#: model:ir.model,name:stock_move_actual_date.model_stock_scrap
+msgid "Scrap"
+msgstr "廃棄"
+
+#. module: stock_move_actual_date
+#: model:ir.model,name:stock_move_actual_date.model_stock_move
+msgid "Stock Move"
+msgstr "在庫移動"
+
+#. module: stock_move_actual_date
+#: model:ir.model,name:stock_move_actual_date.model_stock_picking
+msgid "Transfer"
+msgstr "在庫転送"
+
+#. module: stock_move_actual_date
+#: model:ir.model,name:stock_move_actual_date.model_actual_date_mixin
+msgid "actual.date.mixin"
+msgstr ""

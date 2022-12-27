@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_search" model="ir.ui.view">
+        <field name="name">stock.move.search</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_search" />
+        <field name="arch" type="xml">
+            <filter name="today" position="after">
+                <filter
+                    name="actual_date"
+                    date="actual_date"
+                    default_period="this_month"
+                />
+            </filter>
+            <filter name="groupby_date" position="after">
+                <filter
+                    string="Actual Date"
+                    name="by_actual_date"
+                    domain="[]"
+                    context="{'group_by': 'actual_date'}"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="view_move_tree_acceptance_date_inherit" model="ir.ui.view">
+        <field name="name">stock.move.tree</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reference']" position="before">
+                <field name="actual_date" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
