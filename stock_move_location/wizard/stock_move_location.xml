@@ -41,7 +41,6 @@
                         <field
                             name="stock_move_location_line_ids"
                             nolabel="1"
-                            widget="one2many_list"
                             mode="tree,kanban"
                             colspan="2"
                         >
