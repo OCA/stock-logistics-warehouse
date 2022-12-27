@@ -47,11 +47,10 @@ class StockMoveLocationWizard(models.TransientModel):
         required=True,
         domain=lambda self: self._get_locations_domain(),
     )
-    stock_move_location_line_ids = fields.Many2many(
+    stock_move_location_line_ids = fields.One2many(
+        "wiz.stock.move.location.line",
+        "move_location_wizard_id",
         string="Move Location lines",
-        comodel_name="wiz.stock.move.location.line",
-        column1="move_location_wiz_id",
-        column2="move_location_line_wiz_id",
     )
     picking_type_id = fields.Many2one(
         comodel_name="stock.picking.type", default=_get_default_picking_type_id
