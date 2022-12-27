@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_quantity_history" model="ir.ui.view">
+        <field name="name">Inventory Report at Date</field>
+        <field name="model">stock.quantity.history</field>
+        <field name="inherit_id" ref="stock.view_stock_quantity_history" />
+        <field name="arch" type="xml">
+            <xpath expr="//footer/button[@name='open_at_date']" position="after">
+                <button
+                    name="open_at_accounting_date"
+                    string="Valuation as of Accounting Date"
+                    type="object"
+                    class="btn-primary"
+                    invisible="not context.get('active_model', 'stock.valuation.layer')"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
