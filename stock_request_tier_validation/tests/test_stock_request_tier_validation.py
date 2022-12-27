@@ -5,13 +5,14 @@ from odoo.tests import common
 
 
 class TestStockRequest(common.TransactionCase):
-    def setUp(self):
-        super(TestStockRequest, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
         # common models
-        self.stock_request = self.env["stock.request"]
-        self.request_order = self.env["stock.request.order"]
-        self.tier_definition = self.env["tier.definition"]
+        cls.stock_request = cls.env["stock.request"]
+        cls.request_order = cls.env["stock.request.order"]
+        cls.tier_definition = cls.env["tier.definition"]
 
     def test_get_under_validation_exceptions(self):
         self.assertIn("route_id", self.stock_request._get_under_validation_exceptions())

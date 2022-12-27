@@ -9,6 +9,8 @@ class StockRequest(models.Model):
     _state_from = ["draft"]
     _state_to = ["open"]
 
+    _tier_validation_manual_config = False
+
     @api.model
     def _get_under_validation_exceptions(self):
         res = super()._get_under_validation_exceptions()
