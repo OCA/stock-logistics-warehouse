@@ -60,13 +60,27 @@ class AssignManualQuants(models.TransientModel):
 
     def assign_quants(self):
         move = self.move_id
+        move_line = self.move_id.move_line_ids
+        # To save the initially filled quantity done for immidiate transfer
+        init_done_qty = move.quantity_done
+        # In immediate transfer, first we need to unlink the the line if it has qty done set
+        for line in move_line:
+            if line.qty_done:
+                line.unlink()
         move._do_unreserve()
         for line in self.quants_lines:
             line._assign_quant_line()
-        if move.picking_type_id.auto_fill_qty_done:
+        # In immediate transfer scenario, there's no reserved_uom_qty so that
+        # we separate the auto-fill into 2 conditions
+        if move.picking_type_id.auto_fill_qty_done and self.env.context.get("planned"):
             # Auto-fill all lines as done
             for ml in move.move_line_ids:
                 ml.qty_done = ml.reserved_uom_qty
+        if move.picking_type_id.auto_fill_qty_done and not self.env.context.get(
+            "planned"
+        ):
+            # To set back the initially filled quantity done after updating quant
+            move.quantity_done = init_done_qty
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
         return {}
