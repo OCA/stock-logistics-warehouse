@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-12-06 11:44+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2022-12-28 22:45+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -277,7 +277,7 @@ msgstr "Icona per indicare un'attività eccezione."
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_needaction
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_unread
 msgid "If checked, new messages require your attention."
-msgstr "Se selezionato, i nuovi messaggi richiedono la tua attenzione."
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error
@@ -285,7 +285,7 @@ msgstr "Se selezionato, i nuovi messaggi richiedono la tua attenzione."
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
 #. module: stock_request_kanban
 #: model:ir.model.fields.selection,name:stock_request_kanban.selection__stock_inventory_kanban__state__in_progress
