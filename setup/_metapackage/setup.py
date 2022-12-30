@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo-addon-scrap_reason_code>=15.0dev,<15.1dev',
         'odoo-addon-stock_archive_constraint>=15.0dev,<15.1dev',
         'odoo-addon-stock_available>=15.0dev,<15.1dev',
+        'odoo-addon-stock_available_immediately>=15.0dev,<15.1dev',
         'odoo-addon-stock_available_mrp>=15.0dev,<15.1dev',
         'odoo-addon-stock_available_unreserved>=15.0dev,<15.1dev',
         'odoo-addon-stock_demand_estimate>=15.0dev,<15.1dev',
