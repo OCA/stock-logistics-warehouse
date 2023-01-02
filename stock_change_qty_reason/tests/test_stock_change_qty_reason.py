@@ -51,21 +51,17 @@ class TestStockQuantityChangeReason(SavepointCase):
             }
         )
         inventory.preset_reason_id = self._create_reason("Test 1", "Description Test 1")
-        inventory.action_start()
-        self.assertEqual(len(inventory.line_ids), 1)
         inventory.reason = "Reason 2"
-        inventory.onchange_reason()
-        self.assertEqual(inventory.line_ids.reason, inventory.reason)
-        inventory.preset_reason_id = self._create_reason("Test 2", "Description Test 2")
-        inventory.onchange_preset_reason()
+        inventory.action_state_to_in_progress()
+        self.assertEqual(len(inventory.stock_quant_ids), 1)
         self.assertEqual(
-            inventory.line_ids.preset_reason_id, inventory.preset_reason_id
+            inventory.stock_quant_ids.preset_reason_id, inventory.preset_reason_id
         )
-        inventory.line_ids[0].write({"product_qty": 10})
-        inventory.action_validate()
+        self.assertEqual(inventory.stock_quant_ids.reason, inventory.reason)
+        inventory.stock_quant_ids[0].write({"inventory_quantity": 10})
+        inventory.stock_quant_ids[0]._apply_inventory()
         move = self.stock_move.search(
             [("product_id", "=", product2.id), ("preset_reason_id", "!=", False)]
         )
         self.assertEqual(len(move), 1)
         self.assertEqual(move.origin, inventory.preset_reason_id.name)
-        self.assertEqual(move.preset_reason_id, inventory.preset_reason_id)

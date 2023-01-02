@@ -2,22 +2,20 @@
 <!-- Copyright 2022 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <record id="view_inventory_form" model="ir.ui.view">
-        <field name="name">stock.inventory.form - stock_change_qty_reason</field>
-        <field name="model">stock.inventory</field>
-        <field name="inherit_id" ref="stock_inventory.view_inventory_group_form" />
+    <record id="view_stock_quant_tree_inventory_editable" model="ir.ui.view">
+        <field name="name">stock.quant.form - stock_change_qty_reason</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable" />
         <field name="arch" type="xml">
             <field name="owner_id" position="after">
                 <field name="reason" />
             </field>
         </field>
     </record>
-    <record id="view_inventory_form_inherit" model="ir.ui.view">
-        <field
-            name="name"
-        >stock.inventory.form.inherit - stock_change_qty_reason</field>
-        <field name="model">stock.inventory</field>
-        <field name="inherit_id" ref="view_inventory_form" />
+    <record id="view_stock_quant_tree_inventory_editable_inherit" model="ir.ui.view">
+        <field name="name">stock.quant.form.inherit - stock_change_qty_reason</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="view_stock_quant_tree_inventory_editable" />
         <field name="priority">99</field>
         <field
             name="groups_id"
