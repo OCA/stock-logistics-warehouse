@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-23 02:05+0000\n"
-"PO-Revision-Date: 2016-12-23 02:05+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2023-01-02 12:47+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_inventory_revaluation
 #: help:stock.inventory.revaluation,revaluation_type:0
@@ -434,7 +435,7 @@ msgstr "Quantità"
 #. module: stock_inventory_revaluation
 #: field:stock.inventory.revaluation.quant,qty:0
 msgid "Quantity"
-msgstr "Quantià"
+msgstr "Quantità"
 
 #. module: stock_inventory_revaluation
 #: field:stock.inventory.revaluation,qty_available:0
