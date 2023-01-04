@@ -10,7 +10,7 @@ class ProductTemplate(models.Model):
         prod_available = super()._compute_quantities_dict()
         for template in self:
             free_qty = 0
-            for p in template.with_context(active_test=False).product_variant_ids:
+            for p in template.product_variant_ids:
                 free_qty += p.free_qty
             prod_available[template.id]["free_qty"] = free_qty
         return prod_available
