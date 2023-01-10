@@ -14,13 +14,13 @@ Inventory Lock Down
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/13.0/stock_inventory_lockdown
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/14.0/stock_inventory_lockdown
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-13-0/stock-logistics-warehouse-13-0-stock_inventory_lockdown
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-14-0/stock-logistics-warehouse-14-0-stock_inventory_lockdown
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/153/13.0
+    :target: https://runbot.odoo-community.org/runbot/153/14.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -40,7 +40,7 @@ can be recorded in/out of the inventory's location: users will get an error
 message.
 Creating or modifying locations is also forbidden.
 
-.. figure:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/13.0/stock_inventory_lockdown/static/images/move_error.png
+.. figure:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/14.0/stock_inventory_lockdown/static/images/move_error.png
    :alt: Error message
 
 Bug Tracker
@@ -49,7 +49,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_inventory_lockdown%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_inventory_lockdown%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -87,6 +87,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/13.0/stock_inventory_lockdown>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/14.0/stock_inventory_lockdown>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
