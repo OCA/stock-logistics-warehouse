@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-11 01:34+0000\n"
+"PO-Revision-Date: 2023-01-11 08:23+0000\n"
 "Last-Translator: Wang-TKurata <takahiko.kurata@axelspace.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -89,7 +89,7 @@ msgstr "ID"
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Immediate Transfer"
-msgstr "即時転送"
+msgstr "即時在庫移動"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -183,7 +183,7 @@ msgstr "ピッキングタイプ"
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Planned Transfer"
-msgstr "計画された転送"
+msgstr "在庫移動伝票を作成"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
