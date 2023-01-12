@@ -22,6 +22,7 @@
                     groups="stock.group_stock_multi_locations"
                 />
                 <field name="product_id" />
+                <field name="allowed_uom_categ_id" invisible="1" />
                 <field
                     name="product_uom_id"
                     options="{'no_open': True, 'no_create': True}"
@@ -172,10 +173,10 @@
                                 widget="selection"
                                 groups="stock.group_stock_multi_locations"
                             />
+                            <field name="allow_virtual_location" invisible="1" />
                             <field
                                 name="location_id"
                                 groups="stock.group_stock_multi_locations"
-                                domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"
                             />
                             <field
                                 name="route_id"
@@ -197,6 +198,7 @@
                             <label for="product_uom_qty" />
                             <div>
                                 <field name="product_uom_qty" class="oe_inline" />
+                                <field name="allowed_uom_categ_id" invisible="1" />
                                 <field
                                     name="product_uom_id"
                                     class="oe_inline"
