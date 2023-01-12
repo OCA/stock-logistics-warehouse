@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2019 ForgeFlow S.L.
+<!-- Copyright 2019-2023 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_preset_reason" model="ir.ui.view">
         <field name="name">Preset Reason</field>
-        <field name="model">stock.inventory.line.reason</field>
+        <field name="model">stock.quant.reason</field>
         <field name="arch" type="xml">
             <form string="Preset Reason">
                 <header>
@@ -34,7 +34,7 @@
     </record>
     <record id="action_change_qty_reasons_list" model="ir.actions.act_window">
         <field name="name">Change Qty Reasons</field>
-        <field name="res_model">stock.inventory.line.reason</field>
+        <field name="res_model">stock.quant.reason</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">list,form</field>
     </record>

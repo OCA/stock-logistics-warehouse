@@ -1,14 +1,13 @@
-# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019-2023 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 
 
-class StockInventoryLineReason(models.Model):
+class StockQuantReason(models.Model):
+    _name = "stock.quant.reason"
+    _description = "Stock Quant Reason"
 
-    _name = "stock.inventory.line.reason"
-    _description = "Stock Inventory Line Reason"
-
-    name = fields.Char("Reason Name")
+    name = fields.Char("Reason Name", required=True)
     description = fields.Text("Reason Description")
     active = fields.Boolean(default=True)
 
