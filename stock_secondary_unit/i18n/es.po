@@ -23,6 +23,16 @@ msgid "<strong>Secondary Qty</strong>"
 msgstr ""
 
 #. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__product_uom_qty
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_reservation__product_uom_qty
+msgid "Demand"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__display_name
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__display_name
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__display_name
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__display_name
 msgid "Display Name"
 msgstr "Mostrar Nombre"
@@ -33,17 +43,19 @@ msgid "Done"
 msgstr ""
 
 #. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__id
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__id
 msgid "ID"
 msgstr "ID"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__product_uom_qty
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_reservation__product_uom_qty
-msgid "Initial Demand"
-msgstr ""
-
-#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product____last_update
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template____last_update
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line____last_update
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
@@ -71,10 +83,24 @@ msgid "Quantity On Hand (2Unit)"
 msgstr "Cantidad a mano (2Ud.)"
 
 #. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_id
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__secondary_uom_id
+#, fuzzy
+msgid "Second unit"
+msgstr "Unidad Secundaria"
+
+#. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__stock_secondary_uom_id
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__stock_secondary_uom_id
 msgid "Second unit for inventory"
 msgstr "Segunda unidad de medida para inventario"
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_qty
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__secondary_uom_qty
+#, fuzzy
+msgid "Secondary Qty"
+msgstr "Unidad Secundaria"
 
 #. module: stock_secondary_unit
 #: model_terms:ir.ui.view,arch_db:stock_secondary_unit.view_template_property_form
@@ -103,14 +129,6 @@ msgid ""
 "this quantity on assigned moves affects the product reservation, and should "
 "be done with care."
 msgstr ""
-
-#, fuzzy
-#~ msgid "Second unit"
-#~ msgstr "Unidad Secundaria"
-
-#, fuzzy
-#~ msgid "Secondary Qty"
-#~ msgstr "Unidad Secundaria"
 
 #, fuzzy
 #~ msgid "Stock Secondary Unit Mixin"
