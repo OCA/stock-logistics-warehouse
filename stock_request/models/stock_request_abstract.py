@@ -37,12 +37,17 @@ class StockRequest(models.AbstractModel):
 
     name = fields.Char(copy=False, required=True, readonly=True, default="/")
     warehouse_id = fields.Many2one(
-        "stock.warehouse", "Warehouse", ondelete="cascade", required=True
+        comodel_name="stock.warehouse",
+        string="Warehouse",
+        check_company=True,
+        ondelete="cascade",
+        required=True,
     )
     location_id = fields.Many2one(
-        "stock.location",
-        "Location",
-        domain=[("usage", "in", ["internal", "transit"])],
+        comodel_name="stock.location",
+        string="Location",
+        domain="not allow_virtual_location and "
+        "[('usage', 'in', ['internal', 'transit'])] or []",
         ondelete="cascade",
         required=True,
     )
@@ -56,9 +61,11 @@ class StockRequest(models.AbstractModel):
     allow_virtual_location = fields.Boolean(
         related="company_id.stock_request_allow_virtual_loc", readonly=True
     )
+    allowed_uom_categ_id = fields.Many2one(related="product_id.uom_id.category_id")
     product_uom_id = fields.Many2one(
-        "uom.uom",
-        "Product Unit of Measure",
+        comodel_name="uom.uom",
+        string="Product Unit of Measure",
+        domain="[('category_id', '=?', allowed_uom_categ_id)]",
         required=True,
         default=lambda self: self._context.get("product_uom_id", False),
     )
@@ -210,20 +217,18 @@ class StockRequest(models.AbstractModel):
     @api.onchange("warehouse_id")
     def onchange_warehouse_id(self):
         """Finds location id for changed warehouse."""
-        res = {"domain": {}}
         if self._name == "stock.request" and self.order_id:
             # When the stock request is created from an order the wh and
             # location are taken from the order and we rely on it to change
             # all request associated. Thus, no need to apply
             # the onchange, as it could lead to inconsistencies.
-            return res
+            return
         if self.warehouse_id:
             loc_wh = self.location_id.warehouse_id
             if self.warehouse_id != loc_wh:
                 self.location_id = self.warehouse_id.lot_stock_id.id
             if self.warehouse_id.company_id != self.company_id:
                 self.company_id = self.warehouse_id.company_id
-        return res
 
     @api.onchange("location_id")
     def onchange_location_id(self):
@@ -233,33 +238,23 @@ class StockRequest(models.AbstractModel):
                 self.warehouse_id = loc_wh
                 self.with_context(no_change_childs=True).onchange_warehouse_id()
 
-    @api.onchange("allow_virtual_location")
-    def onchange_allow_virtual_location(self):
-        if self.allow_virtual_location:
-            return {"domain": {"location_id": []}}
-
     @api.onchange("company_id")
     def onchange_company_id(self):
-        """Sets a default warehouse when the company is changed and limits
-        the user selection of warehouses."""
+        """Sets a default warehouse when the company is changed."""
         if self.company_id and (
             not self.warehouse_id or self.warehouse_id.company_id != self.company_id
         ):
             self.warehouse_id = self.env["stock.warehouse"].search(
-                [("company_id", "=", self.company_id.id)], limit=1
+                [
+                    "|",
+                    ("company_id", "=", False),
+                    ("company_id", "=", self.company_id.id),
+                ],
+                limit=1,
             )
             self.onchange_warehouse_id()
 
-        return {"domain": {"warehouse_id": [("company_id", "=", self.company_id.id)]}}
-
     @api.onchange("product_id")
     def onchange_product_id(self):
-        res = {"domain": {}}
         if self.product_id:
-            self.product_uom_id = self.product_id.uom_id.id
-            res["domain"]["product_uom_id"] = [
-                ("category_id", "=", self.product_id.uom_id.category_id.id)
-            ]
-            return res
-        res["domain"]["product_uom_id"] = []
-        return res
+            self.product_uom_id = self.product_id.uom_id

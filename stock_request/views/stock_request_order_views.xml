@@ -121,6 +121,7 @@
                                 <tree editable="bottom">
                                     <field name="name" readonly="1" />
                                     <field name="product_id" />
+                                    <field name="allowed_uom_categ_id" invisible="1" />
                                     <field
                                         name="product_uom_id"
                                         options="{'no_open': True, 'no_create': True}"
@@ -138,6 +139,10 @@
                                     <field name="expected_date" invisible="1" />
                                     <field name="picking_policy" invisible="1" />
                                     <field name="warehouse_id" invisible="1" />
+                                    <field
+                                        name="allow_virtual_location"
+                                        invisible="1"
+                                    />
                                     <field name="location_id" invisible="1" />
                                     <field name="procurement_group_id" invisible="1" />
                                     <field name="company_id" invisible="1" />
