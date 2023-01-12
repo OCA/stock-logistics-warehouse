@@ -84,6 +84,7 @@ setuptools.setup(
         'odoo14-addon-stock_request_purchase',
         'odoo14-addon-stock_request_submit',
         'odoo14-addon-stock_request_tier_validation',
+        'odoo14-addon-stock_reserve',
         'odoo14-addon-stock_reserve_rule',
         'odoo14-addon-stock_search_supplierinfo_code',
         'odoo14-addon-stock_secondary_unit',
