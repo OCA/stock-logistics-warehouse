@@ -12,7 +12,6 @@
                 <group string="Secondary unit">
                     <field
                         name="stock_secondary_uom_id"
-                        domain="[('product_tmpl_id', '=', id)]"
                         options="{'no_create': True}"
                     />
                 </group>

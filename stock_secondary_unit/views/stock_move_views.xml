@@ -12,7 +12,9 @@
                 <field name="secondary_uom_qty" />
                 <field
                     name="secondary_uom_id"
-                    domain="[('product_tmpl_id.product_variant_ids', 'in', [product_id])]"
+                    domain="['|', ('product_id', '=', product_id),
+                                '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
+                                         ('product_id', '=', False)]"
                     options="{'no_create': True}"
                 />
             </field>
@@ -31,7 +33,9 @@
                 <field name="secondary_uom_qty" />
                 <field
                     name="secondary_uom_id"
-                    domain="[('product_tmpl_id.product_variant_ids', 'in', [product_id])]"
+                    domain="['|', ('product_id', '=', product_id),
+                                '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
+                                         ('product_id', '=', False)]"
                     options="{'no_create': True}"
                 />
             </field>
