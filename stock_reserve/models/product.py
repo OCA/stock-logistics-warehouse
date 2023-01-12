@@ -20,7 +20,7 @@ class ProductTemplate(models.Model):
         self.ensure_one()
         ref = "stock_reserve.action_stock_reservation_tree"
         product_ids = self.mapped("product_variant_ids.id")
-        action_dict = self.env.ref(ref).read()[0]
+        action_dict = self.env["ir.actions.act_window"]._for_xml_id(ref)
         action_dict["domain"] = [("product_id", "in", product_ids)]
         action_dict["context"] = {
             "search_default_draft": 1,
@@ -49,7 +49,7 @@ class ProductProduct(models.Model):
     def action_view_reservations(self):
         self.ensure_one()
         ref = "stock_reserve.action_stock_reservation_tree"
-        action_dict = self.env.ref(ref).read()[0]
+        action_dict = self.env["ir.actions.act_window"]._for_xml_id(ref)
         action_dict["domain"] = [("product_id", "=", self.id)]
         action_dict["context"] = {
             "search_default_draft": 1,

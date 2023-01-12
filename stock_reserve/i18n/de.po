@@ -913,22 +913,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__workorder_id
 msgid "Work Order To Consume"
 msgstr ""
-
-#~ msgid "Picking Type"
-#~ msgstr "Kommissionsart"
-
-#~ msgid "Procurement"
-#~ msgstr "Beschaffung"
-
-#~ msgid "Procurement Rule"
-#~ msgstr "Beschaffungsregel"
-
-#~ msgid "Quantity"
-#~ msgstr "Menge"
-
-#, fuzzy
-#~ msgid "Quantity Available"
-#~ msgstr "Menge"
-
-#~ msgid "Reservation Stock"
-#~ msgstr "Reservierter Bestand"

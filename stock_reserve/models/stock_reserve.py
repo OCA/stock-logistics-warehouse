@@ -177,8 +177,9 @@ class StockReservation(models.Model):
 
     def open_move(self):
         self.ensure_one()
-        action = self.env.ref("stock.stock_move_action")
-        action_dict = action.read()[0]
+        action_dict = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.stock_move_action"
+        )
         action_dict["name"] = _("Reservation Move")
         # open directly in the form view
         view_id = self.env.ref("stock.view_move_form").id

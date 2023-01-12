@@ -915,16 +915,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__workorder_id
 msgid "Work Order To Consume"
 msgstr ""
-
-#~ msgid "Procurement"
-#~ msgstr "Nabava"
-
-#~ msgid "Procurement Rule"
-#~ msgstr "Pavilo nabave"
-
-#~ msgid "Quantity"
-#~ msgstr "Količina"
-
-#, fuzzy
-#~ msgid "Quantity Available"
-#~ msgstr "Količina"

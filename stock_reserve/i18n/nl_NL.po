@@ -915,10 +915,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__workorder_id
 msgid "Work Order To Consume"
 msgstr ""
-
-#~ msgid "Quantity"
-#~ msgstr "Aantal"
-
-#, fuzzy
-#~ msgid "Quantity Available"
-#~ msgstr "Aantal"

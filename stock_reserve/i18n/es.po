@@ -972,15 +972,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__workorder_id
 msgid "Work Order To Consume"
 msgstr ""
-
-#~ msgid "Picking Type"
-#~ msgstr "Tipo de albarán"
-
-#~ msgid "Procurement"
-#~ msgstr "Abastecimiento"
-
-#~ msgid "Procurement Rule"
-#~ msgstr "Regla de abastecimiento"
-
-#~ msgid "Reservation Stock"
-#~ msgstr "Reserva de existencias"
