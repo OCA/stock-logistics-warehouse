@@ -13,6 +13,7 @@
                 <field name="message_needaction" invisible="1" />
                 <field name="name" />
                 <field name="warehouse_id" groups="stock.group_stock_multi_locations" />
+                <field name="allow_virtual_location" invisible="1" />
                 <field name="location_id" groups="stock.group_stock_multi_locations" />
                 <field
                     name="route_id"
@@ -86,6 +87,7 @@
                                 widget="selection"
                                 groups="stock.group_stock_multi_locations"
                             />
+                            <field name="allow_virtual_location" invisible="1" />
                             <field
                                 name="location_id"
                                 groups="stock.group_stock_multi_locations"
@@ -110,6 +112,7 @@
                             <label for="product_uom_qty" />
                             <div>
                                 <field name="product_uom_qty" class="oe_inline" />
+                                <field name="allowed_uom_categ_id" invisible="1" />
                                 <field
                                     name="product_uom_id"
                                     class="oe_inline"

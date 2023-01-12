@@ -56,18 +56,20 @@ class StockRequestOrder(models.Model):
         default=lambda s: s._get_default_requested_by(),
     )
     warehouse_id = fields.Many2one(
-        "stock.warehouse",
-        "Warehouse",
+        comodel_name="stock.warehouse",
+        string="Warehouse",
+        check_company=True,
         readonly=True,
         ondelete="cascade",
         required=True,
         states={"draft": [("readonly", False)]},
     )
     location_id = fields.Many2one(
-        "stock.location",
-        "Location",
+        comodel_name="stock.location",
+        string="Location",
+        domain="not allow_virtual_location and "
+        "[('usage', 'in', ['internal', 'transit'])] or []",
         readonly=True,
-        domain=[("usage", "in", ["internal", "transit"])],
         ondelete="cascade",
         required=True,
         states={"draft": [("readonly", False)]},
@@ -174,11 +176,6 @@ class StockRequestOrder(models.Model):
                 self.with_context(no_change_childs=True).onchange_warehouse_id()
         self.change_childs()
 
-    @api.onchange("allow_virtual_location")
-    def onchange_allow_virtual_location(self):
-        if self.allow_virtual_location:
-            return {"domain": {"location_id": []}}
-
     @api.onchange("warehouse_id")
     def onchange_warehouse_id(self):
         if self.warehouse_id:
@@ -206,7 +203,6 @@ class StockRequestOrder(models.Model):
             )
             self.with_context(no_change_childs=True).onchange_warehouse_id()
         self.change_childs()
-        return {"domain": {"warehouse_id": [("company_id", "=", self.company_id.id)]}}
 
     def change_childs(self):
         if not self._context.get("no_change_childs", False):
