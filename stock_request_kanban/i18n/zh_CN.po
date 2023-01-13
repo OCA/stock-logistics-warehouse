@@ -53,6 +53,12 @@ msgid "Activity State"
 msgstr "活动状态"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__activity_type_icon
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: stock_request_kanban
 #: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_inventory_kanban_action
 #: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_request_kanban_action
 #: model:ir.actions.act_window,name:stock_request_kanban.wizard_stock_request_order_kanban_action
@@ -134,6 +140,11 @@ msgid "Cancelled"
 msgstr "已取消"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__allowed_uom_categ_id
+msgid "Category"
+msgstr ""
+
+#. module: stock_request_kanban
 #: model_terms:ir.actions.act_window,help:stock_request_kanban.stock_inventory_kanban_action
 msgid "Click to add a Stock Inventory Kanban."
 msgstr "点击添加库存看板。"
@@ -167,6 +178,13 @@ msgid "Company must be the same"
 msgstr "公司必须相同"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__allowed_uom_categ_id
+msgid ""
+"Conversion between Units of Measure can only occur if they belong to the "
+"same category. The conversion will be made based on the ratios."
+msgstr ""
+
+#. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__create_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__create_uid
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__create_uid
@@ -185,7 +203,10 @@ msgid "Created on"
 msgstr "创建时间"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_product__display_name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_template__display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__display_name
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request__display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__display_name
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__display_name
@@ -228,12 +249,21 @@ msgid "Followers (Partners)"
 msgstr "关注者(业务伙伴)"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__activity_type_icon
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_kanban_search
 msgid "Group By"
 msgstr "分组"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_product__id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_template__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__id
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban__id
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban__id
@@ -326,7 +356,10 @@ msgid "Kanban cards"
 msgstr "看板卡"
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_product____last_update
+#: model:ir.model.fields,field_description:stock_request_kanban.field_product_template____last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban____last_update
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request____last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban____last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_inventory_kanban____last_update
 #: model:ir.model.fields,field_description:stock_request_kanban.field_wizard_stock_request_kanban____last_update
@@ -414,6 +447,12 @@ msgid ""
 msgstr ""
 "通过此库存请求创建的移动将放入此采购组。如果没有给出，则由采购规则生成的移动"
 "将被分组为一个大拣货。"
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__my_activity_date_deadline
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__name
