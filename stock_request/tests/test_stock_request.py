@@ -5,12 +5,12 @@ from collections import Counter
 from datetime import datetime
 
 from odoo import exceptions, fields
-from odoo.tests import common
+from odoo.tests import common, new_test_user
 
 
 class TestStockRequest(common.TransactionCase):
     def setUp(self):
-        super(TestStockRequest, self).setUp()
+        super().setUp()
 
         # common models
         self.stock_request = self.env["stock.request"]
@@ -19,9 +19,6 @@ class TestStockRequest(common.TransactionCase):
         # refs
         self.stock_request_user_group = self.env.ref(
             "stock_request.group_stock_request_user"
-        )
-        self.stock_request_manager_group = self.env.ref(
-            "stock_request.group_stock_request_manager"
         )
         self.main_company = self.env.ref("base.main_company")
         self.warehouse = self.env.ref("stock.warehouse0")
@@ -40,15 +37,25 @@ class TestStockRequest(common.TransactionCase):
         self.wh2 = self.env["stock.warehouse"].search(
             [("company_id", "=", self.company_2.id)], limit=1
         )
-        self.stock_request_user = self._create_user(
-            "stock_request_user",
-            [self.stock_request_user_group.id],
-            [self.main_company.id, self.company_2.id],
+        ctx = {
+            "mail_create_nolog": True,
+            "mail_create_nosubscribe": True,
+            "mail_notrack": True,
+            "no_reset_password": True,
+        }
+        self.stock_request_user = new_test_user(
+            self.env,
+            login="stock_request_user",
+            groups="stock_request.group_stock_request_user",
+            company_ids=[(6, 0, [self.main_company.id, self.company_2.id])],
+            context=ctx,
         )
-        self.stock_request_manager = self._create_user(
-            "stock_request_manager",
-            [self.stock_request_manager_group.id],
-            [self.main_company.id, self.company_2.id],
+        self.stock_request_manager = new_test_user(
+            self.env,
+            login="stock_request_manager",
+            groups="stock_request.group_stock_request_manager",
+            company_ids=[(6, 0, [self.main_company.id, self.company_2.id])],
+            context=ctx,
         )
         self.product = self._create_product("SH", "Shoes", False)
         self.product_company_2 = self._create_product(
@@ -135,22 +142,6 @@ class TestStockRequest(common.TransactionCase):
             "stock.no_auto_scheduler", "True"
         )
 
-    def _create_user(self, name, group_ids, company_ids):
-        return (
-            self.env["res.users"]
-            .with_context(no_reset_password=True)
-            .create(
-                {
-                    "name": name,
-                    "password": "demo",
-                    "login": name,
-                    "email": "@".join([name, "test.com"]),
-                    "groups_id": [(6, 0, group_ids)],
-                    "company_ids": [(6, 0, company_ids)],
-                }
-            )
-        )
-
     def _create_product(self, default_code, name, company_id, **vals):
         return self.env["product.product"].create(
             dict(
@@ -185,7 +176,7 @@ class TestStockRequest(common.TransactionCase):
 
 class TestStockRequestBase(TestStockRequest):
     def setUp(self):
-        super(TestStockRequestBase, self).setUp()
+        super().setUp()
 
     def test_defaults(self):
         vals = {
@@ -309,20 +300,13 @@ class TestStockRequestBase(TestStockRequest):
 
         # Test onchange_product_id
         stock_request.product_id = product
-        res = stock_request.onchange_product_id()
+        stock_request.onchange_product_id()
 
-        self.assertEqual(
-            res["domain"]["product_uom_id"],
-            [("category_id", "=", product.uom_id.category_id.id)],
-        )
         self.assertEqual(
             stock_request.product_uom_id, self.env.ref("uom.product_uom_kgm")
         )
 
         stock_request.product_id = self.env["product.product"]
-        res = stock_request.onchange_product_id()
-
-        self.assertEqual(res["domain"]["product_uom_id"], [])
 
         # Test onchange_warehouse_id
         wh2_2 = (
@@ -1003,7 +987,6 @@ class TestStockRequestBase(TestStockRequest):
         stock_request = self.stock_request.with_user(self.stock_request_user).create(
             vals
         )
-        stock_request.onchange_allow_virtual_location()
         self.assertTrue(stock_request.allow_virtual_location)
         vals = {
             "company_id": self.main_company.id,
@@ -1011,7 +994,6 @@ class TestStockRequestBase(TestStockRequest):
             "location_id": self.virtual_loc.id,
         }
         order = self.request_order.with_user(self.stock_request_user).create(vals)
-        order.onchange_allow_virtual_location()
         self.assertTrue(order.allow_virtual_location)
 
     def test_onchange_wh_no_effect_from_order(self):
