@@ -133,6 +133,12 @@ msgid "Cancelled"
 msgstr "Cancelado"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__allowed_uom_categ_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__allowed_uom_categ_id
+msgid "Category"
+msgstr ""
+
+#. module: stock_request
 #: model_terms:ir.actions.act_window,help:stock_request.action_stock_request_form
 msgid "Click to add a Stock Request."
 msgstr "Pulse para añadir una solicitud de existencias."
@@ -166,6 +172,14 @@ msgstr "Configuración"
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Confirm"
 msgstr "Confirmar"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request__allowed_uom_categ_id
+#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__allowed_uom_categ_id
+msgid ""
+"Conversion between Units of Measure can only occur if they belong to the "
+"same category. The conversion will be made based on the ratios."
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__create_uid
