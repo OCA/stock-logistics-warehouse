@@ -136,6 +136,11 @@ msgid "Cancelled"
 msgstr ""
 
 #. module: stock_request_kanban
+#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__allowed_uom_categ_id
+msgid "Category"
+msgstr ""
+
+#. module: stock_request_kanban
 #: model_terms:ir.actions.act_window,help:stock_request_kanban.stock_inventory_kanban_action
 msgid "Click to add a Stock Inventory Kanban."
 msgstr ""
@@ -166,6 +171,13 @@ msgstr ""
 #: code:addons/stock_request_kanban/wizard/wizard_stock_request_order_kanban.py:0
 #, python-format
 msgid "Company must be the same"
+msgstr ""
+
+#. module: stock_request_kanban
+#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__allowed_uom_categ_id
+msgid ""
+"Conversion between Units of Measure can only occur if they belong to the "
+"same category. The conversion will be made based on the ratios."
 msgstr ""
 
 #. module: stock_request_kanban
