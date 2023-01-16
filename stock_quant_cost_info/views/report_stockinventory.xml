@@ -2,14 +2,17 @@
 <odoo>
     <template id="report_inventory_cost_info" inherit_id="stock.report_inventory">
         <xpath
-            expr="//table[.//span[@t-field='line.product_qty']]/thead/tr"
+            expr="//table[.//span[@t-field='line.inventory_quantity']]/thead/tr"
             position="inside"
         >
             <th class="text-right">
                 <strong>Adjustment cost</strong>
             </th>
         </xpath>
-        <xpath expr="//tr[.//span[@t-field='line.product_qty']]" position="inside">
+        <xpath
+            expr="//tr[.//span[@t-field='line.inventory_quantity']]"
+            position="inside"
+        >
             <td class="text-right">
                 <span t-field="line.adjustment_cost" />
             </td>
