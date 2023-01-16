@@ -18,7 +18,7 @@ class StockLocation(models.Model):
 
     @api.depends("warehouse_view_ids", "parent_path")
     def _compute_warehouse_id(self):
-        self.invalidate_cache(["parent_path", "warehouse_view_ids"])
+        self.invalidate_model(["parent_path", "warehouse_view_ids"])
         warehouses = (
             self.env["stock.warehouse"].with_context(active_test=False).search([])
         )
