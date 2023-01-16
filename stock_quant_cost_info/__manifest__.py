@@ -2,9 +2,9 @@
 # Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "Stock Inventory Cost Info",
-    "summary": "Shows the cost of the inventory adjustments",
-    "version": "14.0.1.0.0",
+    "name": "Stock Quant Cost Info",
+    "summary": "Shows the cost of the quants",
+    "version": "15.0.1.0.0",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
