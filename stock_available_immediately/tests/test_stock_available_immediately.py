@@ -120,5 +120,5 @@ class TestStockLogisticsWarehouse(TransactionCase):
         compare_product_usable_qty(templateAB, 4)
 
         # Potential Qty is set as 0.0 by default
-        self.assertEquals(templateAB.potential_qty, 0.0)
-        self.assertEquals(productA.potential_qty, 0.0)
+        self.assertEqual(templateAB.potential_qty, 0.0)
+        self.assertEqual(productA.potential_qty, 0.0)

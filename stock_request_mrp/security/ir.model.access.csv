@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_request_mrp_user,stock.request purchase user,stock_request.model_stock_request,mrp.group_mrp_user,1,0,0,0
+access_stock_request_allocation_mrp_user,stock request allocation purchase user,stock_request.model_stock_request_allocation,mrp.group_mrp_user,1,0,0,0
+access_stock_request_mrp_bom_user,stock request mrp bom user,mrp.model_mrp_bom,stock_request.group_stock_request_user,1,0,0,0

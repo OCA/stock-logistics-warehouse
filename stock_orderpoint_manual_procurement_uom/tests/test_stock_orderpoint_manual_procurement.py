@@ -142,11 +142,11 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         # As per route configuration, it will create Purchase order
         # Assert that Procurement is created with the desired quantity
         purchase = self.purchase_model.search([("origin", "ilike", self.reorder.name)])
-        self.assertEquals(len(purchase), 1)
+        self.assertEqual(len(purchase), 1)
         purchase_line = self.purchase_line_model.search(
             [("orderpoint_id", "=", self.reorder.id), ("order_id", "=", purchase.id)]
         )
-        self.assertEquals(len(purchase_line), 1)
+        self.assertEqual(len(purchase_line), 1)
         self.assertEqual(self.reorder.product_id.id, purchase_line.product_id.id)
         # it could be using an existing PO, thus there could be more origins.
         self.assertTrue(self.reorder.name in purchase.origin)
