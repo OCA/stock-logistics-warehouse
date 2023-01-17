@@ -85,9 +85,6 @@ class TestStockLogisticsWarehouse(TransactionCase):
             :param value: int
             :return:
             """
-            # Refresh, because the function field is not recalculated between
-            # transactions
-            product.refresh()
             self.assertEqual(product.immediately_usable_qty, value)
             # Now check search function
             domain = [("immediately_usable_qty", "=", value)]

@@ -17,3 +17,5 @@
 * `Ecosoft <http://ecosoft.co.th/>`_:
 
     * Pimolnat Suntian <pimolnats@ecosoft.co.th>
+
+* Hughes Damry <hughes.damry@acsone.eu>
