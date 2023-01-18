@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
-"PO-Revision-Date: 2022-07-16 18:06+0000\n"
+"PO-Revision-Date: 2023-01-18 18:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_move_line_stock_info
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move__account_move_line_ids
@@ -29,13 +29,13 @@ msgstr "Riga registrazione"
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: account_move_line_stock_info
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_account_move_line__id
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_line_stock_info
 #: model:ir.model,name:account_move_line_stock_info.model_account_move_line
@@ -52,7 +52,7 @@ msgstr "Movimenti contabili"
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_account_move_line____last_update
 #: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: account_move_line_stock_info
 #: model:ir.model,name:account_move_line_stock_info.model_stock_move
