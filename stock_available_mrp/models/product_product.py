@@ -11,21 +11,22 @@ from odoo.tools import float_round
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    def _compute_appropriate_bom_ids(self):
-        for prod in self:
-            variant_bom_ids = prod.variant_bom_ids
-            template_bom_ids = prod.bom_ids.filtered(lambda b: b.product_id is False)
-            appropriate_bom_ids = variant_bom_ids | template_bom_ids
-            prod.appropriate_bom_ids = appropriate_bom_ids
-
     appropriate_bom_ids = fields.One2many(
         comodel_name="mrp.bom", compute="_compute_appropriate_bom_ids"
     )
+
+    def _compute_appropriate_bom_ids(self):
+        for prod in self:
+            variant_bom_ids = prod.variant_bom_ids
+            template_bom_ids = prod.bom_ids.filtered(lambda b: not b.product_id)
+            appropriate_bom_ids = variant_bom_ids | template_bom_ids
+            prod.appropriate_bom_ids = appropriate_bom_ids
 
     @api.depends(
         "virtual_available",
         "bom_ids",
         "bom_ids.product_qty",
+        "appropriate_bom_ids",
     )
     def _compute_available_quantities(self):
         super()._compute_available_quantities()

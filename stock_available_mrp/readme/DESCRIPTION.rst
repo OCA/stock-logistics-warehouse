@@ -5,4 +5,4 @@ By configuration, the "Potential quantity" can be computed based on other produc
 For example, "Potential quantity" can be the quantity that can be manufactured
 with the components available to promise.
 The potential is based on bom associated to variant first.
-If no `appropriate_bom_ids` is found, `bom_ids` with no variant is used.  
+If no `appropriate_bom_ids` is found, `bom_ids` with no variant is used.
