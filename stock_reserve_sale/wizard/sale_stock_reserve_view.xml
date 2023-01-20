@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_sale_stock_reserve_form" model="ir.ui.view">
+        <field name="name">sale.stock.reserve.form</field>
+        <field name="model">sale.stock.reserve</field>
+        <field name="arch" type="xml">
+            <form string="Reserve Stock">
+                <p class="oe_grey">
+                    A stock reservation will be created for the products
+                    of the selected quotation lines. If a validity date is specified,
+                    the reservation will be released once the date has passed.
+                </p>
+                <group>
+                    <field name="location_id" />
+                    <field name="location_dest_id" />
+                    <field name="date_validity" />
+                    <field name="owner_id" groups="stock.group_tracking_owner" />
+                </group>
+                <group name="note" string="Notes">
+                    <field name="note" nolabel="1" />
+                </group>
+                <footer>
+                    <button
+                        string="Reserve"
+                        name="button_reserve"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button special="cancel" class="oe_link" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_sale_stock_reserve" model="ir.actions.act_window">
+        <field name="name">Reserve Stock for Quotation Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.stock.reserve</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
