@@ -100,7 +100,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
         self.ensure_one()
         location_dest_id = (
             self.move_location_wizard_id.apply_putaway_strategy
-            and self.destination_location_id.get_putaway_strategy(self.product_id).id
+            and self.destination_location_id._get_putaway_strategy(self.product_id).id
             or self.destination_location_id.id
         )
         qty_todo, qty_done = self._get_available_quantity()
@@ -126,7 +126,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
         more than exists."""
         self.ensure_one()
         if not self.product_id:
-            return 0
+            return 0, 0
         if self.env.context.get("planned"):
             # for planned transfer we don't care about the amounts at all
             return self.move_quantity, 0
@@ -151,7 +151,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
         if not available_qty:
             # if it is immediate transfer and product doesn't exist in that
             # location -> make the transfer of 0.
-            return 0
+            return 0, 0
         rounding = self.product_uom_id.rounding
         available_qty_lt_move_qty = (
             self._compare(available_qty, self.move_quantity, rounding) == -1

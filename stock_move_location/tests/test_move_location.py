@@ -156,6 +156,14 @@ class TestMoveLocation(TestsCommon):
             putaway_line.destination_location_id, self.internal_loc_2_shelf
         )
 
+        # Actually commit the wizard and check stock.move.line.location_dest_id
+        ret = wizard.action_move_location()
+        picking = self.env["stock.picking"].browse([ret["res_id"]])
+        putaway_move_line = picking.move_line_ids.filtered(
+            lambda l: l.product_id == self.product_no_lots
+        )[0]
+        self.assertEqual(putaway_move_line.location_dest_id, self.internal_loc_2_shelf)
+
     def test_delivery_order_assignation_after_transfer(self):
         """
         Make sure using the wizard doesn't break assignation on delivery orders
@@ -229,3 +237,24 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(len(delivery_move.move_line_ids), 1)
         self.assertEqual(delivery_move.move_line_ids.product_uom_qty, 20.0)
         self.assertEqual(delivery_move.move_line_ids.location_id, wh_stock_shelf_3)
+
+    def test_wizard_available_quantity_exeptions(self):
+        """
+        Make sure _get_available_quantity returns 0,0 on stock exceptions.
+        """
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        first_line = wizard.stock_move_location_line_ids[0]
+
+        # Check Product with no stock
+        self.set_product_amount(
+            product=first_line.product_id,
+            location=first_line.origin_location_id,
+            amount=0,
+        )
+        self.assertEqual(first_line._get_available_quantity(), (0, 0))
+
+        # Check Line without product
+        second_line = wizard.stock_move_location_line_ids[1]
+        second_line.product_id = False
+        self.assertEqual(second_line._get_available_quantity(), (0, 0))

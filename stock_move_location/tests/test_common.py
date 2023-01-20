@@ -120,10 +120,21 @@ class TestsCommon(common.SavepointCase):
     def set_product_amount(
         self, product, location, amount, lot_id=None, package_id=None, owner_id=None
     ):
+        """Set available stock Quantity to 'amount'"""
+        current_qty = self.env["stock.quant"]._get_available_quantity(
+            product,
+            location,
+            lot_id=lot_id,
+            package_id=package_id,
+            owner_id=owner_id,
+        )
+        # Since _update_available_quantity decreases or increases,
+        # we need to first get the current amount.
+        change_amount = amount - current_qty
         self.env["stock.quant"]._update_available_quantity(
             product,
             location,
-            amount,
+            change_amount,
             lot_id=lot_id,
             package_id=package_id,
             owner_id=owner_id,
