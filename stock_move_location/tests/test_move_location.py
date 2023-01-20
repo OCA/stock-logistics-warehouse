@@ -237,3 +237,24 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(len(delivery_move.move_line_ids), 1)
         self.assertEqual(delivery_move.move_line_ids.product_uom_qty, 20.0)
         self.assertEqual(delivery_move.move_line_ids.location_id, wh_stock_shelf_3)
+
+    def test_wizard_available_quantity_exeptions(self):
+        """
+        Make sure _get_available_quantity returns 0,0 on stock exceptions.
+        """
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        first_line = wizard.stock_move_location_line_ids[0]
+
+        # Check Product with no stock
+        self.set_product_amount(
+            product=first_line.product_id,
+            location=first_line.origin_location_id,
+            amount=0,
+        )
+        self.assertEqual(first_line._get_available_quantity(), (0, 0))
+
+        # Check Line without product
+        second_line = wizard.stock_move_location_line_ids[1]
+        second_line.product_id = False
+        self.assertEqual(second_line._get_available_quantity(), (0, 0))
