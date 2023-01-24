@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-01-24 12:44+0000\n"
+"Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_request_mrp
 #: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production__display_name
@@ -20,7 +22,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request_order__display_name
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_rule__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: stock_request_mrp
 #: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production__id
@@ -28,7 +30,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request_order__id
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_rule__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_request_mrp
 #: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production____last_update
@@ -36,7 +38,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request_order____last_update
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_rule____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación el"
 
 #. module: stock_request_mrp
 #: model_terms:ir.ui.view,arch_db:stock_request_mrp.stock_request_order_form
@@ -48,7 +50,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request__production_ids
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request_order__production_ids
 msgid "Manufacturing Orders"
-msgstr ""
+msgstr "Órdenes de producción"
 
 #. module: stock_request_mrp
 #: model:ir.model.fields,field_description:stock_request_mrp.field_stock_request__production_count
@@ -59,33 +61,33 @@ msgstr ""
 #. module: stock_request_mrp
 #: model:ir.model,name:stock_request_mrp.model_mrp_production
 msgid "Production Order"
-msgstr ""
+msgstr "Orden de producción"
 
 #. module: stock_request_mrp
 #: model:ir.model,name:stock_request_mrp.model_stock_request
 msgid "Stock Request"
-msgstr ""
+msgstr "Solicitud de existencias"
 
 #. module: stock_request_mrp
 #: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production__stock_request_count
 msgid "Stock Request #"
-msgstr ""
+msgstr "Solicitud de existencias #"
 
 #. module: stock_request_mrp
 #: model:ir.model,name:stock_request_mrp.model_stock_request_order
 msgid "Stock Request Order"
-msgstr ""
+msgstr "Pedido de existencias"
 
 #. module: stock_request_mrp
 #: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production__stock_request_ids
 #: model_terms:ir.ui.view,arch_db:stock_request_mrp.mrp_production_form_view
 msgid "Stock Requests"
-msgstr ""
+msgstr "Solicitudes de existencias"
 
 #. module: stock_request_mrp
 #: model:ir.model,name:stock_request_mrp.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regla de Inventario"
 
 #. module: stock_request_mrp
 #: code:addons/stock_request_mrp/models/stock_request.py:0
