@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo-addon-stock_demand_estimate_matrix>=15.0dev,<15.1dev',
         'odoo-addon-stock_free_quantity>=15.0dev,<15.1dev',
         'odoo-addon-stock_helper>=15.0dev,<15.1dev',
+        'odoo-addon-stock_inventory>=15.0dev,<15.1dev',
         'odoo-addon-stock_location_lockdown>=15.0dev,<15.1dev',
         'odoo-addon-stock_location_route_description>=15.0dev,<15.1dev',
         'odoo-addon-stock_lot_filter_available>=15.0dev,<15.1dev',
