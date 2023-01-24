@@ -6,25 +6,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-01-24 12:44+0000\n"
+"Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_request_analytic
 #: model:ir.model,name:stock_request_analytic.model_account_analytic_account
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request__analytic_account_id
 msgid "Analytic Account"
-msgstr ""
+msgstr "Cuenta analítica"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__analytic_account_ids
 #: model_terms:ir.ui.view,arch_db:stock_request_analytic.stock_request_order_form
 msgid "Analytic Accounts"
-msgstr ""
+msgstr "Cuentas analíticas"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__analytic_count
@@ -41,7 +43,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__analytic_tag_ids
 #: model_terms:ir.ui.view,arch_db:stock_request_analytic.stock_request_order_form
 msgid "Analytic Tags"
-msgstr ""
+msgstr "Etiquetas analíticas"
 
 #. module: stock_request_analytic
 #: code:addons/stock_request_analytic/models/stock_request_order.py:0
@@ -52,7 +54,7 @@ msgstr ""
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__default_analytic_account_id
 msgid "Default Analytic Account"
-msgstr ""
+msgstr "Cuenta Analítica por defecto"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_account_analytic_account__display_name
@@ -60,7 +62,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__display_name
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_rule__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_account_analytic_account__id
@@ -68,7 +70,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__id
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_rule__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_account_analytic_account____last_update
@@ -76,7 +78,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order____last_update
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_rule____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación el"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,help:stock_request_analytic.field_stock_request_order__default_analytic_account_id
@@ -86,20 +88,20 @@ msgstr ""
 #. module: stock_request_analytic
 #: model:ir.model,name:stock_request_analytic.model_stock_request
 msgid "Stock Request"
-msgstr ""
+msgstr "Solicitud de existencias"
 
 #. module: stock_request_analytic
 #: model:ir.model,name:stock_request_analytic.model_stock_request_order
 msgid "Stock Request Order"
-msgstr ""
+msgstr "Pedido de existencias"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_account_analytic_account__stock_request_ids
 #: model_terms:ir.ui.view,arch_db:stock_request_analytic.view_account_analytic_account_form
 msgid "Stock Requests"
-msgstr ""
+msgstr "Solicitudes de existencias"
 
 #. module: stock_request_analytic
 #: model:ir.model,name:stock_request_analytic.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regla de Inventario"
