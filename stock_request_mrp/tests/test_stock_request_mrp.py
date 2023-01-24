@@ -163,6 +163,8 @@ class TestStockRequestMrp(common.TransactionCase):
         manufacturing_order.with_context(skip_immediate=True).button_mark_done()
         self.assertEqual(order.stock_request_ids.qty_in_progress, 0.0)
         self.assertEqual(order.stock_request_ids.qty_done, 5.0)
+        order2 = order.copy()
+        self.assertFalse(order2.production_ids)
 
     def test_view_actions(self):
         expected_date = fields.Datetime.now()
