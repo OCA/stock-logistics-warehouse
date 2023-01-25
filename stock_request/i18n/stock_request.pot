@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-25 17:42+0000\n"
+"PO-Revision-Date: 2023-01-25 17:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -473,7 +475,6 @@ msgstr ""
 
 #. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
-#: model:ir.model.constraint,message:stock_request.constraint_stock_request_kanban_name_uniq
 msgid "Name must be unique"
 msgstr ""
 
@@ -805,7 +806,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__stock_request_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_ids
 #: model:ir.module.category,name:stock_request.module_category_stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Stock Request"
 msgstr ""
@@ -918,7 +918,12 @@ msgstr ""
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
-msgid "Stock request"
+msgid "Stock request Order"
+msgstr ""
+
+#. module: stock_request
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_tree
+msgid "Stock request Orders"
 msgstr ""
 
 #. module: stock_request
