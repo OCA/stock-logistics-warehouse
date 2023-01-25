@@ -16,7 +16,7 @@
         <field name="name">stock.request.order.form</field>
         <field name="model">stock.request.order</field>
         <field name="arch" type="xml">
-            <form string="Stock request">
+            <form>
                 <header>
                     <button
                         name="action_confirm"
@@ -71,7 +71,7 @@
                         </button>
                     </div>
                     <div class="oe_title">
-                        <label for="name" string="Stock Request" />
+                        <label for="name" string="Stock request Order" />
                         <h1>
                             <field name="name" readonly="1" />
                         </h1>
