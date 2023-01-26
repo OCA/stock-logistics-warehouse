@@ -40,6 +40,11 @@ msgid "Route"
 msgstr "路线"
 
 #. module: stock_request_submit
+#: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__state
+msgid "Status"
+msgstr ""
+
+#. module: stock_request_submit
 #: model:ir.model,name:stock_request_submit.model_stock_request
 msgid "Stock Request"
 msgstr "库存请求"
@@ -56,6 +61,11 @@ msgid "Submit"
 msgstr "提交"
 
 #. module: stock_request_submit
+#: model:ir.model.fields.selection,name:stock_request_submit.selection__stock_request__state__submitted
+msgid "Submitted"
+msgstr "已提交"
+
+#. module: stock_request_submit
 #: code:addons/stock_request_submit/models/stock_request_order.py:0
 #, python-format
 msgid "There should be at least one request item for submiting the order."
@@ -63,6 +73,3 @@ msgstr ""
 
 #~ msgid "Draft"
 #~ msgstr "草稿"
-
-#~ msgid "Submitted"
-#~ msgstr "已提交"
