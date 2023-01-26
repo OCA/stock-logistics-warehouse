@@ -863,7 +863,6 @@ msgstr "Bestandsbuchungen"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__stock_request_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_ids
 #: model:ir.module.category,name:stock_request.module_category_stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Stock Request"
 msgstr "Bestandsanforderung"
@@ -979,13 +978,11 @@ msgstr "Bestandsregel"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
-#, fuzzy
-msgid "Stock request"
-msgstr "Bestandsanforderung"
+msgid "Stock request Order"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_count
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_tree
 #, fuzzy
 msgid "Stock requests"
 msgstr "Bestandsanforderungen"
@@ -1200,6 +1197,10 @@ msgid ""
 msgstr ""
 "Sie müssen eine Produktmengeneinheit aus der gleichen Kategorie, wie die "
 "Basismengeneinheit des Produkts, verwenden"
+
+#, fuzzy
+#~ msgid "Stock request"
+#~ msgstr "Bestandsanforderung"
 
 #~ msgid "Archived"
 #~ msgstr "Archiviert"
