@@ -25,7 +25,9 @@ class StockRequestOrder(models.Model):
         return res
 
     def __get_request_order_states(self):
-        return self.env["stock.request"]._get_request_states()
+        return self.env["stock.request"].fields_get(allfields=["state"])["state"][
+            "selection"
+        ]
 
     def _get_request_order_states(self):
         return self.__get_request_order_states()

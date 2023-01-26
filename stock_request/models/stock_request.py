@@ -5,25 +5,12 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_compare
 
-REQUEST_STATES = [
-    ("draft", "Draft"),
-    ("open", "In progress"),
-    ("done", "Done"),
-    ("cancel", "Cancelled"),
-]
-
 
 class StockRequest(models.Model):
     _name = "stock.request"
     _description = "Stock Request"
     _inherit = "stock.request.abstract"
     _order = "id desc"
-
-    def __get_request_states(self):
-        return REQUEST_STATES
-
-    def _get_request_states(self):
-        return self.__get_request_states()
 
     def _get_default_requested_by(self):
         return self.env["res.users"].browse(self.env.uid)
@@ -34,7 +21,12 @@ class StockRequest(models.Model):
 
     name = fields.Char(states={"draft": [("readonly", False)]})
     state = fields.Selection(
-        selection=_get_request_states,
+        selection=[
+            ("draft", "Draft"),
+            ("open", "In progress"),
+            ("done", "Done"),
+            ("cancel", "Cancelled"),
+        ],
         string="Status",
         copy=False,
         default="draft",
