@@ -487,6 +487,7 @@ msgstr "Nombre"
 
 #. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_kanban_name_uniq
 msgid "Name must be unique"
 msgstr "El nombre debe ser único"
 
@@ -943,11 +944,6 @@ msgid "Stock request Order"
 msgstr "Pedido de existencias"
 
 #. module: stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_tree
-msgid "Stock request Orders"
-msgstr "Pedidos de existencias"
-
-#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_count
 msgid "Stock requests"
 msgstr "Solicitudes de existencias"
@@ -1161,6 +1157,9 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
+
+#~ msgid "Stock request Orders"
+#~ msgstr "Pedidos de existencias"
 
 #, python-format
 #~ msgid "<li><b>%s</b>: Transferred quantity %s %s</li>"
