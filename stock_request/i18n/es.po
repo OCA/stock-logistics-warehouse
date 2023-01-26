@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-25 17:42+0000\n"
-"PO-Revision-Date: 2023-01-25 18:42+0100\n"
+"POT-Creation-Date: 2023-01-26 16:12+0000\n"
+"PO-Revision-Date: 2023-01-26 17:12+0100\n"
 "Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
@@ -127,6 +127,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: stock_request
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request__state__cancel
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Cancelled"
@@ -220,11 +221,13 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: stock_request
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request__state__done
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Done"
 msgstr "Hecho"
 
 #. module: stock_request
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request__state__draft
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Draft"
@@ -365,6 +368,11 @@ msgid "In Progress"
 msgstr "En progreso"
 
 #. module: stock_request
+#: model:ir.model.fields.selection,name:stock_request.selection__stock_request__state__open
+msgid "In progress"
+msgstr "En progreso"
+
+#. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location
 msgid "Inventory Locations"
 msgstr "Localización de Inventarios"
@@ -487,7 +495,6 @@ msgstr "Nombre"
 
 #. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
-#: model:ir.model.constraint,message:stock_request.constraint_stock_request_kanban_name_uniq
 msgid "Name must be unique"
 msgstr "El nombre debe ser único"
 
@@ -1157,36 +1164,3 @@ msgid ""
 msgstr ""
 "Debe seleccionada una unidad de medida de producto de la misma categoría que "
 "la unidad de medida por defecto del producto"
-
-#~ msgid "Stock request Orders"
-#~ msgstr "Pedidos de existencias"
-
-#, python-format
-#~ msgid "<li><b>%s</b>: Transferred quantity %s %s</li>"
-#~ msgstr "<li><b>%s</b>: Cantidad transferida %s %s</li>"
-
-#~ msgid "Followers (Channels)"
-#~ msgstr "Seguidores (Canales)"
-
-#, python-format
-#~ msgid "Receipt confirmation %s for your Request %s"
-#~ msgstr "Confirmación de la recepción %s de la solicitud %s"
-
-#~ msgid "Requested by"
-#~ msgstr "Solicitado por"
-
-#, python-format
-#~ msgid ""
-#~ "The following requested items from Stock Request %s have now been "
-#~ "received in %s using Picking %s:"
-#~ msgstr ""
-#~ "Los siguientes elementos de la solicitud %s se ha recibido en %s con el "
-#~ "albarán %s:"
-
-#, python-format
-#~ msgid ""
-#~ "Unfortunately it seems you do not have the necessary rights for creating "
-#~ "stock requests. Please contact your administrator."
-#~ msgstr ""
-#~ "No tiene los permisos necesarios para crear una solicitud de existencias. "
-#~ "Por favor, contacte con su administrador."
