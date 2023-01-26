@@ -8,13 +8,7 @@ from odoo import fields, models
 class StockRequest(models.Model):
     _inherit = "stock.request"
 
-    def __get_request_states(self):
-        states = super().__get_request_states()
-        if not ("submitted", "Submitted") in states:
-            states.insert(
-                states.index(("draft", "Draft")) + 1, ("submitted", "Submitted")
-            )
-        return states
+    state = fields.Selection(selection_add=[("submitted", "Submitted"), ("open",)])
 
     route_id = fields.Many2one(
         states={"draft": [("readonly", False)], "submitted": [("readonly", False)]}

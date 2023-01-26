@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-21 09:12+0000\n"
-"PO-Revision-Date: 2023-01-24 12:44+0000\n"
+"POT-Creation-Date: 2023-01-26 16:20+0000\n"
+"PO-Revision-Date: 2023-01-26 17:20+0100\n"
 "Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: stock_request_submit
 #: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__display_name
@@ -41,6 +41,11 @@ msgid "Route"
 msgstr "Ruta"
 
 #. module: stock_request_submit
+#: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: stock_request_submit
 #: model:ir.model,name:stock_request_submit.model_stock_request
 msgid "Stock Request"
 msgstr "Solicitud de existencias"
@@ -55,6 +60,11 @@ msgstr "Pedido de existencias"
 #: model_terms:ir.ui.view,arch_db:stock_request_submit.view_stock_request_form
 msgid "Submit"
 msgstr "Enviar"
+
+#. module: stock_request_submit
+#: model:ir.model.fields.selection,name:stock_request_submit.selection__stock_request__state__submitted
+msgid "Submitted"
+msgstr "Enviado"
 
 #. module: stock_request_submit
 #: code:addons/stock_request_submit/models/stock_request_order.py:0
