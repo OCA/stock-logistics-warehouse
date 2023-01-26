@@ -821,7 +821,6 @@ msgstr "库存移动"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__stock_request_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_ids
 #: model:ir.module.category,name:stock_request.module_category_stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Stock Request"
 msgstr "库存请求"
@@ -935,8 +934,8 @@ msgstr "库存规则"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
-msgid "Stock request"
-msgstr "库存请求"
+msgid "Stock request Order"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__stock_request_count
@@ -1140,6 +1139,9 @@ msgid ""
 "You have to select a product unit of measure in the same category than the "
 "default unit of measure of the product"
 msgstr "您必须选择与产品默认计量单位相同类别的产品计量单位"
+
+#~ msgid "Stock request"
+#~ msgstr "库存请求"
 
 #, python-format
 #~ msgid "<li><b>%s</b>: Transferred quantity %s %s</li>"
