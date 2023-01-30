@@ -2,3 +2,4 @@
 * Lois Rilo <lois.rilo@forgeflow.com>
 * Pimolnat Suntian <pimolnats@ecosoft.co.th>
 * Joan Mateu <joan.mateu@forgeflow.com>
+* Ángel Tornero Hernández <angel.tornero@braintec.com>
