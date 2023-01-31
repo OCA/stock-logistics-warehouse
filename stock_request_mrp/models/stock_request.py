@@ -15,6 +15,7 @@ class StockRequest(models.Model):
         "mrp_production_id",
         string="Manufacturing Orders",
         readonly=True,
+        copy=False,
     )
     production_count = fields.Integer(
         string="Manufacturing Orders count",

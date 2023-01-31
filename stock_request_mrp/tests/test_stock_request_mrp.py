@@ -86,6 +86,8 @@ class TestStockRequestMrp(TestStockRequest):
         manufacturing_order.button_mark_done()
         self.assertEqual(order.stock_request_ids.qty_in_progress, 0.0)
         self.assertEqual(order.stock_request_ids.qty_done, 5.0)
+        order2 = order.copy()
+        self.assertFalse(order2.production_ids)
 
     def test_stock_request_order_action_cancel(self):
         order = self._create_stock_request(self.stock_request_user, [(self.product, 5)])
