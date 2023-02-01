@@ -2,8 +2,6 @@
 # Copyright 2019 David Vidal - Tecnativa
 # Copyright 2020 Víctor Martínez - Tecnativa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
-
 from statistics import mean, median_high
 
 from odoo import api, fields, models
@@ -36,7 +34,7 @@ class OrderpointTemplate(models.Model):
 
     auto_min_qty = fields.Boolean(
         string="Auto Minimum",
-        help="Auto compute minimum quantity " "per product for a given a date range",
+        help="Auto compute minimum quantity per product for a given a date range",
     )
     auto_min_date_start = fields.Datetime()
     auto_min_date_end = fields.Datetime()
@@ -53,7 +51,7 @@ class OrderpointTemplate(models.Model):
     )
     auto_max_qty = fields.Boolean(
         string="Auto Maximum",
-        help="Auto compute maximum quantity " "per product for a given a date range",
+        help="Auto compute maximum quantity per product for a given a date range",
     )
     auto_max_qty_criteria = fields.Selection(
         selection=[
@@ -98,12 +96,15 @@ class OrderpointTemplate(models.Model):
             "auto_max_qty",
         ]
 
-    def _disable_old_instances(self, products):
+    def _remove_old_instances(self, products):
         """Clean old instance by setting those inactives"""
-        orderpoints = self.env["stock.warehouse.orderpoint"].search(
-            [("product_id", "in", products.ids)]
-        )
-        orderpoints.write({"active": False})
+        self.env["stock.warehouse.orderpoint"].search(
+            [
+                ("product_id", "in", products.ids),
+                ("location_id", "=", self.location_id.id),
+                ("company_id", "=", self.company_id.id),
+            ]
+        ).unlink()
 
     @api.model
     def _get_criteria_methods(self):
@@ -184,8 +185,9 @@ class OrderpointTemplate(models.Model):
         """Create orderpoint for *products* based on these templates.
         :type products: recordset of products
         """
-        self._disable_old_instances(products)
-        self._create_instances(products)
+        for order_point in self:
+            order_point._remove_old_instances(products)
+            order_point._create_instances(products)
 
     def create_auto_orderpoints(self):
         for template in self:

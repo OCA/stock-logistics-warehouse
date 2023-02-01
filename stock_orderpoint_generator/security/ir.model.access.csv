@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_stock_warehouse_orderpoint_template,stock.warehouse.manage,model_stock_warehouse_orderpoint_template,stock.group_stock_manager,1,1,1,1
+stock_orderpoint_generator.access_stock_warehouse_orderpoint_generator,access_stock_warehouse_orderpoint_generator,stock_orderpoint_generator.model_stock_warehouse_orderpoint_generator,stock.group_stock_manager,1,1,1,1

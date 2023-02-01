@@ -4,10 +4,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import models
 from odoo.exceptions import UserError
-from odoo.tests.common import SavepointCase
+from odoo.tests import Form, TransactionCase
 
 
-class TestOrderpointGenerator(SavepointCase):
+class TestOrderpointGenerator(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -15,6 +15,13 @@ class TestOrderpointGenerator(SavepointCase):
         cls.orderpoint_model = cls.env["stock.warehouse.orderpoint"]
         cls.orderpoint_template_model = cls.env["stock.warehouse.orderpoint.template"]
         cls.product_model = cls.env["product.product"]
+        cls.attr = cls.env["product.attribute"].create({"name": "Size"})
+        cls.attr_value_a = cls.env["product.attribute.value"].create(
+            {"name": "A", "attribute_id": cls.attr.id}
+        )
+        cls.attr_value_b = cls.env["product.attribute.value"].create(
+            {"name": "B", "attribute_id": cls.attr.id}
+        )
         cls.p1 = cls.product_model.create({"name": "Unittest P1", "type": "product"})
         cls.p2 = cls.product_model.create({"name": "Unittest P2", "type": "product"})
         cls.wh1 = cls.env["stock.warehouse"].create(
@@ -303,12 +310,12 @@ class TestOrderpointGenerator(SavepointCase):
         self.check_orderpoint(products, self.template, self.orderpoint_fields_dict)
 
     def test_template_variants_orderpoint(self):
-        self.product_model.create(
-            {
-                "product_tmpl_id": self.p1.product_tmpl_id.id,
-                "name": "Unittest P1 variant",
-            }
-        )
+        product_form = Form(self.p1.product_tmpl_id)
+        with product_form.attribute_line_ids.new() as attribute:
+            attribute.attribute_id = self.attr
+            attribute.value_ids.add(self.attr_value_a)
+            attribute.value_ids.add(self.attr_value_b)
+        product_form.save()
         wizard = self.wizard_over_products(self.p1.product_tmpl_id, self.template)
         with self.assertRaises(UserError):
             wizard.action_configure()
