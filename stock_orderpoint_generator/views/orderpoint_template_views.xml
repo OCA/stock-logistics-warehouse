@@ -5,7 +5,7 @@
         <field name="model">stock.warehouse.orderpoint.template</field>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <tree string="Reordering Rule Templates">
+            <tree>
                 <field name="name" />
                 <field name="warehouse_id" groups="stock.group_stock_multi_locations" />
                 <field name="location_id" groups="stock.group_stock_multi_locations" />
@@ -104,11 +104,6 @@
                         <group string="Misc">
                             <field name="active" />
                             <field name="auto_generate" />
-                            <label for="lead_days" />
-                            <div class="o_row">
-                                <field name="lead_days" />
-                                <field name="lead_type" />
-                            </div>
                         </group>
                         <group
                             name="auto_minimum"

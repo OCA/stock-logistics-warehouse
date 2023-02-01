@@ -31,8 +31,7 @@ class ProductProduct(models.Model):
     def write(self, vals):
         result = super().write(vals)
         if vals.get("auto_orderpoint_template_ids"):
-            orderpoint_templates = self.mapped("auto_orderpoint_template_ids")
-            orderpoint_templates.create_orderpoints(self)
+            self.auto_orderpoint_template_ids.create_orderpoints(self)
         return result
 
     def _get_stock_move_domain(self, domain_move=False, from_date=False, to_date=False):
