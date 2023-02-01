@@ -10,7 +10,7 @@ from odoo import api, fields, models
 
 
 class OrderpointTemplate(models.Model):
-    """ Template for orderpoints
+    """Template for orderpoints
 
     Here we use same model as stock.warehouse.orderpoint but set product_id
     as non mandatory as we cannot remove it. This field will be ignored.
@@ -83,7 +83,7 @@ class OrderpointTemplate(models.Model):
 
     def _template_fields_to_discard(self):
         """In order to create every orderpoint we should pop this template
-           customization fields """
+        customization fields"""
         return [
             "auto_generate",
             "auto_product_ids",
@@ -120,9 +120,9 @@ class OrderpointTemplate(models.Model):
         self, products, location_id, from_date, to_date, criteria
     ):
         """Returns a dict with product ids as keys and the resulting
-           calculation of historic moves according to criteria. If the
-           creteria is delivered we just search how many items were
-           delivered in the given period of time"""
+        calculation of historic moves according to criteria. If the
+        creteria is delivered we just search how many items were
+        delivered in the given period of time"""
         if criteria == "delivered":
             return products._get_delivered_to_customer_dict(
                 location_id, from_date, to_date
@@ -138,7 +138,7 @@ class OrderpointTemplate(models.Model):
 
     def _create_instances(self, product_ids):
         """Create instances of model using template inherited model and
-           compute autovalues if needed"""
+        compute autovalues if needed"""
         orderpoint_model = self.env["stock.warehouse.orderpoint"]
         for record in self:
             # Flag equality so we compute the values just once
@@ -181,7 +181,7 @@ class OrderpointTemplate(models.Model):
             orderpoint_model.create(vals_list)
 
     def create_orderpoints(self, products):
-        """ Create orderpoint for *products* based on these templates.
+        """Create orderpoint for *products* based on these templates.
         :type products: recordset of products
         """
         self._disable_old_instances(products)
