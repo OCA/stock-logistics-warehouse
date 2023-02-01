@@ -285,7 +285,8 @@ class TestOrderpointGenerator(SavepointCase):
 
     def wizard_over_products(self, product, template):
         return self.wizard_model.with_context(
-            active_model=product._name, active_ids=product.ids,
+            active_model=product._name,
+            active_ids=product.ids,
         ).create({"orderpoint_template_id": [(6, 0, template.ids)]})
 
     def test_product_orderpoint(self):

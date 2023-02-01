@@ -9,7 +9,7 @@ _template_register = ["orderpoint_template_id"]
 
 
 class OrderpointGenerator(models.TransientModel):
-    """ Wizard defining stock.warehouse.orderpoint configurations for selected
+    """Wizard defining stock.warehouse.orderpoint configurations for selected
     products. Those configs are generated using templates
     """
 
