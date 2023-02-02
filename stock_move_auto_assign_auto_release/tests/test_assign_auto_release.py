@@ -40,7 +40,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         cls.shipping.release_available_to_promise()
         cls.picking = cls._prev_picking(cls.shipping)
         cls.picking.action_assign()
-        cls.unreleased_move = cls.shipping.move_ids.filtered("need_release")
+        cls.unreleased_move = cls.shipping.move_lines.filtered("need_release")
 
     def _create_move(
         self,
@@ -86,14 +86,14 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         """Test job method, update qty available and launch auto release on
         the product"""
         self.assertEqual(1, len(self.unreleased_move))
-        self.assertEqual(1, len(self.picking.move_ids))
-        self.assertEqual(5, self.picking.move_ids.product_qty)
+        self.assertEqual(1, len(self.picking.move_lines))
+        self.assertEqual(5, self.picking.move_lines.product_qty)
         # put stock in Stock/Shelf 1, the move has a source location in Stock
         self._update_qty_in_location(self.loc_bin1, self.product1, 100)
         self.product1.moves_auto_release()
         self.assertFalse(self.unreleased_move.need_release)
-        self.assertEqual(1, len(self.picking.move_ids))
-        self.assertEqual(10, self.picking.move_ids.product_qty)
+        self.assertEqual(1, len(self.picking.move_lines))
+        self.assertEqual(10, self.picking.move_lines.product_qty)
 
     def test_move_done_enqueue_job(self):
         """A move done enqueue 2 new jobs
@@ -138,7 +138,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
             self.assertTrue(self.env["stock.picking"].search(domain))
         self._receive_product(self.product1, 100)
         self.product1.moves_auto_assign(self.loc_bin1)
-        self.env.invalidate_all()
+        self.env["stock.move"].invalidate_cache()
         self.assertTrue(self.shipping.is_auto_release_allowed)
         for domain in RELEASABLE_DOMAINS:
             self.assertEqual(self.shipping, self.env["stock.picking"].search(domain))
@@ -146,7 +146,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
             self.assertNotIn(self.shipping, self.env["stock.picking"].search(domain))
 
     def test_move_field_is_auto_release_allowed(self):
-        moves = self.shipping.move_ids
+        moves = self.shipping.move_lines
         move_released = moves.filtered(lambda m: not m.need_release)
         move_not_released = moves.filtered("need_release")
         self.assertFalse(move_released.is_auto_release_allowed)
@@ -157,7 +157,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
             self.assertTrue(self.env["stock.move"].search(domain))
         self._receive_product(self.product1, 100)
         self.product1.moves_auto_assign(self.loc_bin1)
-        self.env.invalidate_all()
+        self.env["stock.move"].invalidate_cache()
         self.assertFalse(move_released.is_auto_release_allowed)
         self.assertTrue(move_not_released.is_auto_release_allowed)
         for domain in RELEASABLE_DOMAINS:
