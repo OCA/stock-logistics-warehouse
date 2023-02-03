@@ -42,14 +42,17 @@ class Inventory(models.Model):
         if self.location_ids:
             domain_loc = [
                 ("id", "child_of", self.location_ids.ids),
-                ("child_ids", "=", False),
             ]
         else:
             domain_loc = [
                 ("company_id", "=", self.company_id.id),
                 ("usage", "in", ["internal", "transit"]),
             ]
-        sub_locations = self.env["stock.location"].search(domain_loc)
+        sub_locations = (
+            self.env["stock.location"]
+            .search(domain_loc)
+            .filtered(lambda s: not s.child_ids)
+        )
         if self.product_ids:
             quants = self.env["stock.quant"].search(
                 [
