@@ -33,7 +33,7 @@ class TestStockInventoryLocationState(TransactionCase):
         inventory.sub_location_ids[0].action_start()
         inventory.sub_location_ids[0].action_done()
         self.assertEqual(inventory.location_count, len(sub_locations))
-        self.assertEqual(inventory.location_done_count + 1, len(sub_locations))
+        self.assertEqual(inventory.done_location_count + 1, len(sub_locations))
         with self.assertRaises(UserError):
             inventory.action_validate()
         inventory.sub_location_ids.write({"state": "done"})
@@ -57,3 +57,24 @@ class TestStockInventoryLocationState(TransactionCase):
         sub_location.action_start()
         self.assertEqual(sub_location.state, "started")
         self.assertEqual(line.theoretical_qty, 2)
+
+    def test_inactive_child(self):
+        location = self.env["stock.location"].create(
+            {
+                "name": "No more child",
+                "usage": "internal",
+            }
+        )
+        self.env["stock.location"].create(
+            {
+                "location_id": location.id,
+                "name": "Inactive Child",
+                "usage": "internal",
+                "active": False,
+            }
+        )
+        inventory = self.env["stock.inventory"].create(
+            {"location_ids": [(6, 0, location.ids)]}
+        )
+        inventory.action_start()
+        self.assertEqual(inventory.location_count, 1)
