@@ -19,9 +19,9 @@ class ProductTemplate(models.Model):
 
     def action_view_kanban_cards(self):
         self.ensure_one()
-        action = self.env.ref(
+        action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_request_kanban.stock_request_kanban_action"
-        ).read()[0]
+        )
         action["context"] = {"default_product_id": self.product_variant_id.id}
         action["domain"] = [
             ("active", "=", True),
@@ -45,9 +45,9 @@ class ProductProduct(models.Model):
 
     def action_view_kanban_cards(self):
         self.ensure_one()
-        action = self.env.ref(
+        action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_request_kanban.stock_request_kanban_action"
-        ).read()[0]
+        )
         action["context"] = {"default_product_id": self.id}
         action["domain"] = [("active", "=", True), ("product_id", "=", self.id)]
         return action
