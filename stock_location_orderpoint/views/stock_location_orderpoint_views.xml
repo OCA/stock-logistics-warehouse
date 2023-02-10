@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_location_orderpoint_tree_editable" model="ir.ui.view">
+        <field name="name">stock.location.orderpoint.tree.editable</field>
+        <field name="model">stock.location.orderpoint</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Location Oderpoints">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="location_id" options="{'no_create': True}" />
+                <field
+                    name="route_id"
+                    options="{'no_create': True}"
+                    attrs="{'readonly': [('location_id', '=', False)]}"
+                />
+                <field name="location_src_id" />
+                <field name="trigger" />
+                <field name="replenish_method" />
+                <field name="group_id" />
+                <field
+                    name="company_id"
+                    optional="hide"
+                    readonly="1"
+                    groups="base.group_multi_company"
+                />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="stock_location_orderpoint_form">
+        <field name="name">stock.location.orderpoint.form</field>
+        <field name="model">stock.location.orderpoint</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="run_replenishment"
+                        type="object"
+                        string="Run replenishment"
+                        attrs="{'invisible': ['|', ('active', '=', False), ('trigger', '!=', 'manual')]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="active_button_box">
+                        <button
+                            name="toggle_active"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                        >
+                            <field
+                                name="active"
+                                widget="boolean_button"
+                                options='{"terminology": "archive"}'
+                            />
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" force_save="1" />
+                        <field name="sequence" />
+                        <field name="trigger" />
+                        <field name="replenish_method" />
+                        <field
+                            name="company_id"
+                            readonly="1"
+                            groups="base.group_multi_company"
+                        />
+                    </group>
+                    <group>
+                        <field name="location_id" />
+                        <field name="location_src_id" />
+                        <field name="route_id" />
+                        <field name="group_id" />
+                        <field name="priority" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="stock_location_orderpoint_search">
+        <field name="name">stock.location.orderpoint.search</field>
+        <field name="model">stock.location.orderpoint</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="location_id" />
+                <field name="location_src_id" />
+                <field name="route_id" />
+                <field name="group_id" />
+                <field name="trigger" />
+                <field name="replenish_method" />
+            </search>
+        </field>
+    </record>
+</odoo>
