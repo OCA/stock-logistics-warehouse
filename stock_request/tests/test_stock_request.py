@@ -772,6 +772,68 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(stock_request_2.qty_cancelled, 6)
         self.assertEqual(stock_request_2.state, "cancel")
 
+    def test_create_request_with_different_dates(self):
+        self.product.route_ids = [(6, 0, self.route.ids)]
+        now = fields.Datetime.now()
+        stock_request_1 = (
+            self.env["stock.request"]
+            .with_user(self.stock_request_user)
+            .create(
+                {
+                    "product_id": self.product.id,
+                    "product_uom_id": self.product.uom_id.id,
+                    "product_uom_qty": 4.0,
+                    "company_id": self.main_company.id,
+                    "warehouse_id": self.warehouse.id,
+                    "location_id": self.warehouse.lot_stock_id.id,
+                    "expected_date": now + relativedelta(days=1),
+                }
+            )
+        )
+        stock_request_2 = (
+            self.env["stock.request"]
+            .with_user(self.stock_request_manager.id)
+            .create(
+                {
+                    "product_id": self.product.id,
+                    "product_uom_id": self.product.uom_id.id,
+                    "product_uom_qty": 6.0,
+                    "company_id": self.main_company.id,
+                    "warehouse_id": self.warehouse.id,
+                    "location_id": self.warehouse.lot_stock_id.id,
+                    "expected_date": now + relativedelta(days=2),
+                }
+            )
+        )
+        self.assertNotEqual(
+            stock_request_1.expected_date,
+            stock_request_2.expected_date,
+        )
+        stock_request_1.sudo().action_confirm()
+        stock_request_2.sudo().action_confirm()
+        # expected 2 moves on the same picking
+        self.assertEqual(
+            stock_request_1.sudo().picking_ids, stock_request_2.sudo().picking_ids
+        )
+        self.assertNotEqual(
+            stock_request_1.sudo().move_ids, stock_request_2.sudo().move_ids
+        )
+        self.assertEqual(len(stock_request_1.sudo().move_ids), 1)
+        self.assertEqual(len(stock_request_1.sudo().picking_ids.move_lines), 2)
+        self.assertEqual(
+            stock_request_1.sudo().move_ids.date_deadline, now + relativedelta(days=1)
+        )
+        self.assertEqual(
+            stock_request_1.sudo().move_ids.date, now + relativedelta(days=1)
+        )
+
+        self.assertEqual(
+            stock_request_2.sudo().move_ids.date_deadline, now + relativedelta(days=2)
+        )
+        self.assertEqual(
+            stock_request_2.sudo().move_ids.date, now + relativedelta(days=2)
+        )
+
     def test_cancel_request(self):
         expected_date = fields.Datetime.now()
         vals = {
