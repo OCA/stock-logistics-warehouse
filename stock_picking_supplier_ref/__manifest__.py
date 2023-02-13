@@ -3,7 +3,7 @@
 
 {
     "name": "Stock Picking Supplier Reference",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.1.1",
     "category": "Stock",
     "author": "Trey, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-workflow",
