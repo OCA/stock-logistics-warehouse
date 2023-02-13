@@ -1,9 +1,11 @@
 # Copyright 2017 ForgeFlow S.L.
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
-
 from collections import Counter
 from datetime import datetime
+
+from dateutil.relativedelta import relativedelta
+from freezegun import freeze_time
 
 from odoo import exceptions, fields
 from odoo.tests import common, new_test_user
@@ -517,6 +519,43 @@ class TestStockRequestBase(TestStockRequest):
         # date
         self.assertEqual(order.expected_date, expected_date)
         self.assertEqual(order.stock_request_ids.expected_date, expected_date)
+
+    def test_create_default_date(self):
+        with freeze_time("2022-06-15 12:24"):
+            stock_request = (
+                self.env["stock.request"]
+                .with_user(self.stock_request_user)
+                .create(
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 4.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                    }
+                )
+            )
+            self.assertEqual(stock_request.expected_date, fields.Datetime.now())
+
+    def test_create_with_given_date_wont_force_new_date(self):
+        expected_date = fields.Datetime.now() + relativedelta(days=1)
+        stock_request = (
+            self.env["stock.request"]
+            .with_user(self.stock_request_user)
+            .create(
+                {
+                    "product_id": self.product.id,
+                    "product_uom_id": self.product.uom_id.id,
+                    "product_uom_qty": 4.0,
+                    "company_id": self.main_company.id,
+                    "warehouse_id": self.warehouse.id,
+                    "location_id": self.warehouse.lot_stock_id.id,
+                    "expected_date": expected_date,
+                }
+            )
+        )
+        self.assertEqual(stock_request.expected_date, expected_date)
 
     def test_stock_request_order_validations_07(self):
         """Testing the discrepancy in picking policy between
