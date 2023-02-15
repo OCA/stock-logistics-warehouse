@@ -34,9 +34,11 @@ class TestStockReserve(common.TransactionCase):
     def test_reservation_and_reservation_release(self):
         reservation_1 = self._create_stock_reservation(6)
         reservation_1.reserve()
+        self.assertFalse(reservation_1.picking_id)
         self.assertEqual(self.product.virtual_available, 4)
         reservation_2 = self._create_stock_reservation(1)
         reservation_2.reserve()
+        self.assertFalse(reservation_2.picking_id)
         self.assertEqual(self.product.virtual_available, 3)
         reservation_1.release_reserve()
         self.assertEqual(self.product.virtual_available, 9)
@@ -45,6 +47,7 @@ class TestStockReserve(common.TransactionCase):
         reservation_1 = self._create_stock_reservation(6)
         reservation_1.date_validity = fields.Date.from_string("2021-01-01")
         reservation_1.reserve()
+        self.assertFalse(reservation_1.picking_id)
         self.assertEqual(self.product.virtual_available, 4)
         cron = self.env.ref("stock_reserve.ir_cron_release_stock_reservation")
         cron.method_direct_trigger()
@@ -53,6 +56,7 @@ class TestStockReserve(common.TransactionCase):
     def test_cron_reserve(self):
         reservation_1 = self._create_stock_reservation(11)
         reservation_1.reserve()
+        self.assertFalse(reservation_1.picking_id)
         self.assertEqual(reservation_1.state, "partially_available")
         self.env["stock.quant"].create(
             {
