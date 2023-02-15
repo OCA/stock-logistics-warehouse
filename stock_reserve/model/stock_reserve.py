@@ -123,8 +123,9 @@ class StockReservation(models.Model):
         A date until which the product is reserved can be specified.
         """
         self.write({"date": fields.Datetime.now()})
-        self.mapped("move_id")._action_confirm(merge=False)
-        self.mapped("move_id.picking_id").action_assign()
+        # Don't call _action_confirm() method to prevent assign picking
+        self.mapped("move_id").write({"state": "confirmed"})
+        self.mapped("move_id")._action_assign()
         return True
 
     def release_reserve(self):
@@ -133,8 +134,6 @@ class StockReservation(models.Model):
         """
         moves = self.mapped("move_id")
         moves._action_cancel()
-        # HACK: For avoiding to accumulate all reservations in the same picking
-        moves.write({"picking_id": False})
         return True
 
     def _get_state_domain_release_reserve(self, mode):
