@@ -99,7 +99,7 @@ addon | version | maintainers | summary
 [stock_request_purchase](stock_request_purchase/) | 14.0.1.0.0 |  | Internal request for stock
 [stock_request_submit](stock_request_submit/) | 14.0.1.3.0 |  | Add submit state on Stock Requests
 [stock_request_tier_validation](stock_request_tier_validation/) | 14.0.1.0.0 |  | Extends the functionality of Stock Requests to support a tier validation process.
-[stock_reserve](stock_reserve/) | 14.0.1.0.0 |  | Stock reservations on products
+[stock_reserve](stock_reserve/) | 14.0.2.0.0 |  | Stock reservations on products
 [stock_reserve_rule](stock_reserve_rule/) | 14.0.1.1.1 |  | Configure reservation rules by location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 14.0.1.0.0 |  | Allows to search for picking from supplierinfo code
 [stock_secondary_unit](stock_secondary_unit/) | 14.0.1.0.1 |  | Get product quantities in a secondary unit
