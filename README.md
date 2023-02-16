@@ -54,7 +54,7 @@ addon | version | maintainers | summary
 [stock_request_kanban](stock_request_kanban/) | 15.0.1.1.0 |  | Adds a stock request order, and takes stock requests as lines
 [stock_request_mrp](stock_request_mrp/) | 15.0.1.0.1 |  | Manufacturing request for stock
 [stock_request_purchase](stock_request_purchase/) | 15.0.1.0.1 |  | Internal request for stock
-[stock_reserve](stock_reserve/) | 15.0.1.0.1 |  | Stock reservations on products
+[stock_reserve](stock_reserve/) | 15.0.1.0.2 |  | Stock reservations on products
 [stock_secondary_unit](stock_secondary_unit/) | 15.0.1.0.0 |  | Get product quantities in a secondary unit
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 15.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds a calendar to the Warehouse
 
