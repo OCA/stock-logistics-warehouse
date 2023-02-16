@@ -5,10 +5,10 @@
 from datetime import timedelta
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import TransactionCase
 
 
-class TestStockWarehouseOrderpoint(common.TransactionCase):
+class TestStockWarehouseOrderpoint(TransactionCase):
     def setUp(self):
         super(TestStockWarehouseOrderpoint, self).setUp()
 
@@ -65,7 +65,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
     def _create_user(self, login, groups, company):
         """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.user_model.with_context({"no_reset_password": True}).create(
+        user = self.user_model.with_context(no_reset_password=True).create(
             {
                 "name": "Test User",
                 "login": login,
@@ -130,7 +130,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         }
         wizard = (
             self.make_procurement_orderpoint_model.with_user(self.user)
-            .with_context(context)
+            .with_context(**context)
             .create({})
         )
         if manual_date:

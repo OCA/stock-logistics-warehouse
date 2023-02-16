@@ -71,9 +71,7 @@ class MakeProcurementOrderpoint(models.TransientModel):
             if not item.orderpoint_id:
                 raise ValidationError(_("No reordering rule found!"))
             values = item.orderpoint_id._prepare_procurement_values()
-            values["date_planned"] = fields.Datetime.to_string(
-                fields.Date.from_string(item.date_planned)
-            )
+            values["date_planned"] = item.date_planned
             procurements.append(
                 pg_obj.Procurement(
                     item.orderpoint_id.product_id,
@@ -107,7 +105,7 @@ class MakeProcurementOrderpointItem(models.TransientModel):
         ondelete="cascade",
         readonly=True,
     )
-    qty = fields.Float(string="Qty")
+    qty = fields.Float()
     qty_without_security = fields.Float(string="Quantity")
     uom_id = fields.Many2one(string="Unit of Measure", comodel_name="uom.uom")
     date_planned = fields.Date(string="Planned Date", required=False)

@@ -12,8 +12,8 @@
     "depends": ["purchase_stock"],
     "demo": ["demo/product.xml"],
     "data": [
-        "security/ir.model.access.csv",
         "security/stock_orderpoint_manual_procurement_security.xml",
+        "security/ir.model.access.csv",
         "wizards/make_procurement_orderpoint_view.xml",
         "views/stock_warehouse_orderpoint_view.xml",
     ],
