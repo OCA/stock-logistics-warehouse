@@ -9,7 +9,6 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         super(TestAccountMoveLineStockInfo, self).setUp()
         self.product_model = self.env["product.product"]
         self.product_ctg_model = self.env["product.category"]
-        self.acc_type_model = self.env["account.account.type"]
         self.account_model = self.env["account.account"]
         self.stock_picking_model = self.env["stock.picking"]
         self.res_users_model = self.env["res.users"]
@@ -25,18 +24,18 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         self.group_account_manager = self.env.ref("account.group_account_manager")
 
         # Create account for Goods Received Not Invoiced
-        acc_type = self._create_account_type("equity", "other", "equity")
+        acc_type = "equity"
         name = "Goods Received Not Invoiced"
         code = "grni"
         self.account_grni = self._create_account(acc_type, name, code, self.company)
 
         # Create account for Cost of Goods Sold
-        acc_type = self._create_account_type("expense", "other", "expense")
+        acc_type = "expense"
         name = "Cost of Goods Sold"
         code = "cogs"
         self.account_cogs = self._create_account(acc_type, name, code, self.company)
         # Create account for Inventory
-        acc_type = self._create_account_type("asset", "other", "asset")
+        acc_type = "asset_current"
         name = "Inventory"
         code = "inventory"
         self.account_inventory = self._create_account(
@@ -74,19 +73,13 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         )
         return user.id
 
-    def _create_account_type(self, name, a_type, internal_group):
-        acc_type = self.acc_type_model.create(
-            {"name": name, "type": a_type, "internal_group": internal_group}
-        )
-        return acc_type
-
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
         account = self.account_model.create(
             {
                 "name": name,
                 "code": code,
-                "user_type_id": acc_type.id,
+                "account_type": acc_type,
                 "company_id": company.id,
             }
         )
@@ -121,7 +114,7 @@ class TestAccountMoveLineStockInfo(TransactionCase):
                 "picking_type_id": picking_type.id,
                 "location_id": location.id,
                 "location_dest_id": location_dest.id,
-                "move_lines": [
+                "move_ids": [
                     (
                         0,
                         0,
@@ -148,11 +141,11 @@ class TestAccountMoveLineStockInfo(TransactionCase):
             self.picking_type_in, self.location_supplier, self.location_stock
         )
         picking_in.action_confirm()
-        picking_in.move_lines.quantity_done = 1
+        picking_in.move_ids.quantity_done = 1
         picking_in._action_done()
 
         account_move_line = False
-        for move in picking_in.move_lines:
+        for move in picking_in.move_ids:
             self.assertEqual(len(move.account_move_line_ids), 2)
             for aml in move.account_move_line_ids:
                 account_move_line = aml
@@ -161,10 +154,10 @@ class TestAccountMoveLineStockInfo(TransactionCase):
             self.picking_type_out, self.location_supplier, self.location_stock
         )
         picking_out.action_confirm()
-        picking_out.move_lines.quantity_done = 1
+        picking_out.move_ids.quantity_done = 1
         picking_out._action_done()
 
-        for move in picking_out.move_lines:
+        for move in picking_out.move_ids:
             self.assertEqual(len(move.account_move_line_ids), 2)
 
         # Test that the account invoice user can access to the stock info
