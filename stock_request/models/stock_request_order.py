@@ -246,6 +246,12 @@ class StockRequestOrder(models.Model):
                 rec.action_done()
         return
 
+    def check_cancel(self):
+        for rec in self:
+            if not rec.stock_request_ids.filtered(lambda r: r.state != "cancel"):
+                rec.write({"state": "cancel"})
+        return
+
     def action_view_transfer(self):
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock.action_picking_tree_all"

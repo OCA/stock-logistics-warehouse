@@ -699,7 +699,7 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(stock_request_2.qty_in_progress, 0)
         self.assertEqual(stock_request_2.qty_done, 0)
         self.assertEqual(stock_request_2.qty_cancelled, 6)
-        self.assertEqual(stock_request_2.state, "done")
+        self.assertEqual(stock_request_2.state, "cancel")
 
     def test_cancel_request(self):
         expected_date = fields.Datetime.now()
@@ -1105,8 +1105,11 @@ class TestStockRequestBase(TestStockRequest):
         sr2.refresh()
         sr3.refresh()
         self.assertEqual(sr1.state, "done")
+        self.assertEqual(sr1.qty_done, 5)
         self.assertEqual(sr1.qty_cancelled, 0)
-        self.assertEqual(sr2.state, "done")
+        self.assertEqual(sr2.state, "cancel")
+        self.assertEqual(sr2.qty_done, 1)
         self.assertEqual(sr2.qty_cancelled, 4)
-        self.assertEqual(sr3.state, "done")
+        self.assertEqual(sr3.state, "cancel")
+        self.assertEqual(sr3.qty_done, 0)
         self.assertEqual(sr3.qty_cancelled, 5)
