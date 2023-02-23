@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_line, account.move.line,account.model_account_move_line,stock.group_stock_manager,1,0,0,0
+access_stock_move_account_invoice,stock.move account invoice,stock.model_stock_move,account.group_account_invoice,1,0,0,0
+access_stock_move_account_user,stock.move account user,stock.model_stock_move,account.group_account_user,1,0,0,0
+access_stock_move_account_manager,stock.move account user,stock.model_stock_move,account.group_account_manager,1,0,0,0

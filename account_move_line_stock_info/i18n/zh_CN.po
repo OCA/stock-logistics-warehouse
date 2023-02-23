@@ -1,0 +1,45 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_line_stock_info
+#
+# Translators:
+# Jeffery CHEN <jeffery9@gmail.com>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-21 02:12+0000\n"
+"PO-Revision-Date: 2019-09-19 16:33+0000\n"
+"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/oca/teams/23907/"
+"zh_CN/)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.8\n"
+
+#. module: account_move_line_stock_info
+#: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_move__account_move_line_ids
+#: model:ir.model.fields,field_description:account_move_line_stock_info.field_stock_reservation__account_move_line_ids
+msgid "Account Move Line"
+msgstr "会计凭证行"
+
+#. module: account_move_line_stock_info
+#: model:ir.model,name:account_move_line_stock_info.model_account_move_line
+msgid "Journal Item"
+msgstr "日记账项目"
+
+#. module: account_move_line_stock_info
+#: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_move_form
+#: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_picking_form
+msgid "Journal Items"
+msgstr "日记帐项目"
+
+#. module: account_move_line_stock_info
+#: model:ir.model,name:account_move_line_stock_info.model_stock_move
+#: model:ir.model.fields,field_description:account_move_line_stock_info.field_account_move_line__stock_move_id
+msgid "Stock Move"
+msgstr "库存移动"
