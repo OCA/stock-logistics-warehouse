@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_move_line_stock_info](account_move_line_stock_info/) | 16.0.1.0.0 |  | Account Move Line Stock Info
+[account_move_line_stock_info](account_move_line_stock_info/) | 16.0.1.0.1 |  | Account Move Line Stock Info
 [scrap_reason_code](scrap_reason_code/) | 16.0.1.0.2 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Reason code for scrapping
 [stock_demand_estimate](stock_demand_estimate/) | 16.0.1.0.1 |  | Allows to create demand estimates.
 [stock_helper](stock_helper/) | 16.0.1.0.1 |  | Add methods shared between various stock modules
