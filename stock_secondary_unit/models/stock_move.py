@@ -24,11 +24,6 @@ class StockMove(models.Model):
     def onchange_product_uom_for_secondary(self):
         self._onchange_helper_product_uom_for_secondary()
 
-    def _merge_moves_fields(self):
-        res = super()._merge_moves_fields()
-        res["secondary_uom_qty"] = sum(self.mapped("secondary_uom_qty"))
-        return res
-
     @api.model
     def _prepare_merge_moves_distinct_fields(self):
         """Don't merge moves with distinct secondary units"""
