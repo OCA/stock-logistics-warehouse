@@ -96,7 +96,9 @@ class TestProductSecondaryUnit(TransactionCase):
         secondary_unit = cls.env["product.secondary.unit"].search(
             [("product_tmpl_id", "=", cls.product_template.id)], limit=1
         )
-        cls.product_template.write({"stock_secondary_uom_id": secondary_unit.id})
+        cls.product_template.product_variant_ids.write(
+            {"stock_secondary_uom_id": secondary_unit.id}
+        )
         StockQuant = cls.env["stock.quant"]
         cls.quant_white = StockQuant.create(
             {
@@ -114,7 +116,7 @@ class TestProductSecondaryUnit(TransactionCase):
         )
 
     def test_01_stock_secondary_unit_template(self):
-        self.assertEqual(self.product_template.secondary_unit_qty_available, 40.0)
+        self.assertEqual(self.product_template.secondary_unit_qty_available, 0)
 
     def test_02_stock_secondary_unit_variant(self):
         for variant in self.product_template.product_variant_ids.filtered(
