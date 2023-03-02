@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-26 16:12+0000\n"
-"PO-Revision-Date: 2023-01-26 17:12+0100\n"
-"Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
+"PO-Revision-Date: 2023-03-03 09:06+0000\n"
+"Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:0
@@ -27,6 +27,8 @@ msgid ""
 "<li><b>%(product_name)s</b>: Transferred quantity %(product_qty)s"
 "%(product_uom)s</li>"
 msgstr ""
+"<li><b>%(product_name)s</b>: Cantidad transferida "
+"%(product_qty)s%(product_uom)s</li>"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_needaction
@@ -137,7 +139,7 @@ msgstr "Cancelado"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__allowed_uom_categ_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__allowed_uom_categ_id
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 #. module: stock_request
 #: model_terms:ir.actions.act_window,help:stock_request.action_stock_request_form
@@ -181,6 +183,9 @@ msgid ""
 "Conversion between Units of Measure can only occur if they belong to the "
 "same category. The conversion will be made based on the ratios."
 msgstr ""
+"La conversión entre las unidades de medidas sólo pueden ocurrir si "
+"pertenecen a la misma categoría. La conversión se basará en los ratios "
+"establecidos."
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__create_uid
@@ -251,7 +256,7 @@ msgstr "Permite usar tarjetas Kanban para las solicitudes de existencias"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Stock Requests for Manufacturing"
-msgstr ""
+msgstr "Habilitar solicitudes de stock para fabricación"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
@@ -318,7 +323,7 @@ msgstr "Agrupa las solicitudes en pedidos"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__has_message
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Tiene Mensaje"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__id
@@ -397,7 +402,7 @@ msgstr "Elementos"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Kanban"
-msgstr "Kanban"
+msgstr "Vista Kanban"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request____last_update
@@ -709,6 +714,7 @@ msgstr "Cantidad real"
 #, python-format
 msgid "Receipt confirmation %(picking_name)s for your Request %(request_name)s"
 msgstr ""
+"Confirmación de recibo %(picking_name)s para su Solicitud %(request_name)s"
 
 #. module: stock_request
 #: model:ir.model.fields.selection,name:stock_request.selection__stock_request__picking_policy__one
@@ -732,7 +738,7 @@ msgstr "Solicitud de Existencias"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__requested_by
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__requested_by
 msgid "Requested By"
-msgstr ""
+msgstr "Solicitado por"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__requested_product_qty
@@ -887,7 +893,7 @@ msgstr "Usuario de Solicitudes de Existencias"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings__module_stock_request_mrp
 msgid "Stock Request for Manufacturing"
-msgstr ""
+msgstr "Solicitud de stock para fabricación"
 
 #. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_name_uniq
@@ -981,6 +987,8 @@ msgid ""
 "The following requested items from Stock Request %(request_name)s have now "
 "been received in %(location_name)s using Picking %(picking_name)s:"
 msgstr ""
+"Los siguientes elementos solicitados de la solicitud de stock %(request_name)"
+"s ahora se han recibido en %(location_name)s usando Picking %(picking_name)s:"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:0
@@ -1045,7 +1053,7 @@ msgstr "Usar tarjetas Kanban para los consumibles"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Use Manufacturing Orders with Stock Requests"
-msgstr ""
+msgstr "Usar órdenes de fabricación con solicitudes de existencias"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
