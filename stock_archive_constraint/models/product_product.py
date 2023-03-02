@@ -22,8 +22,9 @@ class ProductProduct(models.Model):
             raise ValidationError(
                 _(
                     "It is not possible to archive product '%s' which has "
-                    "associated stock quantities." % res[0].product_id.display_name
+                    "associated stock quantities."
                 )
+                % res[0].product_id.display_name
             )
 
     @api.constrains("active")
@@ -39,8 +40,9 @@ class ProductProduct(models.Model):
             raise ValidationError(
                 _(
                     "It is not possible to archive product '%s' which has "
-                    "associated picking lines." % res[0].product_id.display_name
+                    "associated picking lines."
                 )
+                % res[0].product_id.display_name
             )
 
     @api.constrains("active")
@@ -56,6 +58,7 @@ class ProductProduct(models.Model):
             raise ValidationError(
                 _(
                     "It is not possible to archive product '%s' which has "
-                    "associated stock reservations." % res[0].product_id.display_name
+                    "associated stock reservations."
                 )
+                % res[0].product_id.display_name
             )
