@@ -51,7 +51,7 @@ addon | version | maintainers | summary
 [stock_quant_cost_info](stock_quant_cost_info/) | 15.0.1.0.0 |  | Shows the cost of the quants
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 15.0.1.2.1 |  | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 15.0.1.4.0 |  | Internal request for stock
-[stock_request_kanban](stock_request_kanban/) | 15.0.1.1.0 |  | Adds a stock request order, and takes stock requests as lines
+[stock_request_kanban](stock_request_kanban/) | 15.0.1.1.1 |  | Adds a stock request order, and takes stock requests as lines
 [stock_request_mrp](stock_request_mrp/) | 15.0.1.0.1 |  | Manufacturing request for stock
 [stock_request_purchase](stock_request_purchase/) | 15.0.1.0.1 |  | Internal request for stock
 [stock_reserve](stock_reserve/) | 15.0.1.0.2 |  | Stock reservations on products
