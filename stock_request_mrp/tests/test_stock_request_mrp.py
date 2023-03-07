@@ -97,6 +97,14 @@ class TestStockRequestMrp(TestStockRequest):
         order.with_context(bypass_confirm_wizard=True).action_cancel()
         self.assertEqual(production.state, "cancel")
 
+    def test_stock_request_order_production_action_cancel(self):
+        order = self._create_stock_request(self.stock_request_user, [(self.product, 5)])
+        order.action_confirm()
+        production = fields.first(order.stock_request_ids.production_ids)
+        self.assertEqual(production.state, "confirmed")
+        production.action_cancel()
+        self.assertEqual(order.state, "cancel")
+
     def test_view_actions(self):
         order = self._create_stock_request(self.stock_request_user, [(self.product, 5)])
         order.action_confirm()
