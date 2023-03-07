@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-04 01:47+0000\n"
-"PO-Revision-Date: 2023-01-18 11:55+0000\n"
+"PO-Revision-Date: 2023-03-07 19:27+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -121,7 +121,7 @@ msgstr ""
 #: field:stock.cycle.count,create_uid:0
 #: field:stock.cycle.count.rule,create_uid:0
 msgid "Created by"
-msgstr "Created by"
+msgstr "Creato da"
 
 #. module: stock_cycle_count
 #: field:stock.cycle.count,create_date:0
