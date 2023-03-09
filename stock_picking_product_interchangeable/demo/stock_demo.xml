@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+
+    <function model="stock.picking.type" name="write">
+        <value eval="[ref('stock.picking_type_out')]" />
+        <value eval="{'substitute_products_mode': 'all'}" />
+    </function>
+
+    <record id="stock_inventory_fork" model="stock.quant">
+        <field name="product_id" ref="product_product_fork" />
+        <field name="inventory_quantity">20.0</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+
+    <record id="stock_inventory_spoon" model="stock.quant">
+        <field name="product_id" ref="product_product_spoon" />
+        <field name="inventory_quantity">8.0</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+
+    <record id="stock_inventory_knife" model="stock.quant">
+        <field name="product_id" ref="product_product_knife" />
+        <field name="inventory_quantity">3.0</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+
+    <function model="stock.quant" name="action_apply_inventory">
+            <function
+            eval="[[('id', 'in', (ref('stock_inventory_fork'),
+                                            ref('stock_inventory_spoon'),
+                                            ref('stock_inventory_knife'),
+                                            ))]]"
+            model="stock.quant"
+            name="search"
+        />
+        </function>
+
+</odoo>

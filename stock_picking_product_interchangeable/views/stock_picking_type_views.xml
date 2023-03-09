@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="stock_picking_type" model="ir.ui.view">
+        <field name="name">stock.picking.type.substitute.products</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field
+                    name="substitute_products_mode"
+                    attrs="{'invisible': [('code', '!=', 'outgoing')]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
