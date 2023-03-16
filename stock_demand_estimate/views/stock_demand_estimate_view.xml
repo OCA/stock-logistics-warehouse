@@ -56,6 +56,19 @@
             </pivot>
         </field>
     </record>
+
+    <record id="stock_demand_estimate_view_graph" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.graph</field>
+        <field name="model">stock.demand.estimate</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="True">
+                <field name="product_qty" type="measure" />
+                <field name="date_from" />
+                <field name="product_id" />
+            </graph>
+        </field>
+    </record>
+
     <record id="stock_demand_estimate_view_search" model="ir.ui.view">
         <field name="name">stock.demand.estimate.search</field>
         <field name="model">stock.demand.estimate</field>
@@ -63,6 +76,38 @@
             <search string="Search Stock Demand Estimates">
                 <field name="product_id" />
                 <field name="location_id" />
+                <separator />
+                <filter
+                    name="expired"
+                    string="Expired"
+                    domain="[('date_to', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="not_expired"
+                    string="Not Expired"
+                    domain="['|', ('date_to', '=', False), ('date_to', '&gt;', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Product"
+                        name="groupby_product"
+                        domain="[]"
+                        context="{'group_by':'product_id'}"
+                    />
+                    <filter
+                        string="Location"
+                        name="groupby_location"
+                        domain="[]"
+                        context="{'group_by':'location_id'}"
+                    />
+                    <filter
+                        string="Date (From)"
+                        name="groupby_date_from"
+                        domain="[]"
+                        context="{'group_by':'date_from'}"
+                    />
+                </group>
             </search>
         </field>
     </record>
@@ -70,8 +115,9 @@
         <field name="name">Stock Demand Estimates</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.demand.estimate</field>
-        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
         <field name="search_view_id" ref="stock_demand_estimate_view_search" />
+        <field name="context">{"search_default_not_expired": 1}</field>
     </record>
     <menuitem
         id="stock_demand_planning_menu"
