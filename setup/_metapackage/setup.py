@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo14-addon-stock_available_base_exclude_location',
         'odoo14-addon-stock_available_immediately',
         'odoo14-addon-stock_available_mrp',
+        'odoo14-addon-stock_available_portal',
         'odoo14-addon-stock_available_unreserved',
         'odoo14-addon-stock_change_qty_reason',
         'odoo14-addon-stock_cycle_count',
