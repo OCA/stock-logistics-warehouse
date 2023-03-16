@@ -43,10 +43,5 @@
             </field>
         </field>
     </record>
-    <record
-        id="stock_demand_estimate.stock_demand_estimate_action"
-        model="ir.actions.act_window"
-    >
-        <field name="view_mode">tree,pivot</field>
-    </record>
+
 </odoo>
