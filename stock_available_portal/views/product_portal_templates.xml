@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template
+        id="portal_my_home_menu_product"
+        name="Portal layout : product menu entries"
+        inherit_id="portal.portal_breadcrumbs"
+        priority="30"
+    >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-if="page_name == 'product'"
+                t-attf-class="breadcrumb-item #{'active ' if not product else ''}"
+            >
+                <a
+                    t-if="product"
+                    t-attf-href="/my/products?{{ keep_query() }}"
+                >My Products
+                </a>
+                <t t-else="">My Products</t>
+            </li>
+            <li t-if="product" class="breadcrumb-item active">
+                <t t-esc="product.name" t-if="product.name != '/'" />
+                <t t-else="">
+                    <em>Draft Product</em>
+                </t>
+            </li>
+        </xpath>
+    </template>
+
+    <template
+        id="portal_my_home_product"
+        name="My Products"
+        inherit_id="portal.portal_my_home"
+        customize_show="True"
+        priority="30"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry" t-if="access_to_products">
+                <t t-set="title">My Products</t>
+                <t t-set="url" t-value="'/my/products'" />
+                <t t-set="placeholder_count" t-value="'product_count'" />
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_products" name="My Products">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Products</t>
+            </t>
+            <t t-if="not products or not access_to_products">
+                <div class="alert alert-warning mt8" role="alert">
+                    There are no products.
+                </div>
+            </t>
+            <t t-if="products and access_to_products" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Product</th>
+                        <th class="text-right">Immediately Usable Qty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="products" t-as="product">
+                        <td>
+                            <a
+                                t-attf-href="/my/products/#{product.id}?{{ keep_query() }}"
+                                t-field="product.display_name"
+                            />
+                        </td>
+                        <td class="text-right">
+                            <span t-esc="product.immediately_usable_qty" />
+                        </td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_product" name="My Product">
+        <t t-call="portal.portal_layout">
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <h5 class="mb-0">
+                        <span t-field="product.display_name" class="text-truncate" />
+                    </h5>
+                </t>
+                <t t-set="card_body">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <p>
+                                <strong>Immediately Usable Qty: </strong>
+                                <span t-field="product.immediately_usable_qty" />
+                            </p>
+                            <p>
+                                <strong>Sales Description:</strong>
+                                <br />
+                                <span t-field="product.description_sale" />
+                            </p>
+                        </div>
+                        <div
+                            t-if="product.image_128"
+                            class="col-12 col-md-6 mb-2 mb-md-0"
+                        >
+                            <img
+                                t-if="product.image_128"
+                                t-att-src="image_data_uri(product.image_128)"
+                                class="mr-3 text-center o_image_128_max float-right"
+                                alt="Product"
+                            />
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
