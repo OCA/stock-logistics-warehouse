@@ -36,6 +36,11 @@ msgid "Created on"
 msgstr "创建时间"
 
 #. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Date (From)"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_tree
 msgid "Date From"
@@ -75,6 +80,11 @@ msgid "Duration (in days)"
 msgstr ""
 
 #. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Expired"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
 #, fuzzy
 msgid "From"
@@ -83,6 +93,11 @@ msgstr "起始日期"
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_from
 msgid "From (computed)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Group By"
 msgstr ""
 
 #. module: stock_demand_estimate
@@ -107,11 +122,18 @@ msgstr "最后更新时间"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__location_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Location"
 msgstr "位置"
 
 #. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Not Expired"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Product"
 msgstr "产品"
 
@@ -119,6 +141,11 @@ msgstr "产品"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom_qty
 msgid "Quantity"
 msgstr "数量"
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
+msgid "Quantity (Product UoM)"
+msgstr ""
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__daily_qty
@@ -129,11 +156,6 @@ msgstr "数量/天"
 #: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Quantity in the default UoM of the product"
 msgstr "产品的默认计量单位数量"
-
-#. module: stock_demand_estimate
-#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
-msgid "Real Quantity"
-msgstr "实际数量"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
@@ -181,6 +203,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr "计量单位"
+
+#~ msgid "Real Quantity"
+#~ msgstr "实际数量"
 
 #~ msgid "Cancel"
 #~ msgstr "取消"
