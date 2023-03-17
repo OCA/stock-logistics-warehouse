@@ -3,7 +3,7 @@
 {
     "name": "Stock Demand Estimate",
     "summary": "Allows to create demand estimates.",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.1.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "development_status": "Production/Stable",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
