@@ -34,6 +34,11 @@ msgid "Created on"
 msgstr "Oluşturuldu"
 
 #. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Date (From)"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_tree
 msgid "Date From"
@@ -72,6 +77,11 @@ msgid "Duration (in days)"
 msgstr ""
 
 #. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Expired"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
 msgid "From"
 msgstr ""
@@ -79,6 +89,11 @@ msgstr ""
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_from
 msgid "From (computed)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Group By"
 msgstr ""
 
 #. module: stock_demand_estimate
@@ -103,17 +118,29 @@ msgstr "Son güncellenme"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__location_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Location"
 msgstr ""
 
 #. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Not Expired"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Product"
 msgstr "Ürün"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom_qty
 msgid "Quantity"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
+msgid "Quantity (Product UoM)"
 msgstr ""
 
 #. module: stock_demand_estimate
@@ -124,11 +151,6 @@ msgstr ""
 #. module: stock_demand_estimate
 #: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Quantity in the default UoM of the product"
-msgstr ""
-
-#. module: stock_demand_estimate
-#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
-msgid "Real Quantity"
 msgstr ""
 
 #. module: stock_demand_estimate
