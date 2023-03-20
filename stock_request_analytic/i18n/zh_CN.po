@@ -34,14 +34,35 @@ msgid "Analytic Count"
 msgstr "分析数量"
 
 #. module: stock_request_analytic
+#: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__analytic_tag_count
+msgid "Analytic Tag Count"
+msgstr ""
+
+#. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request__analytic_tag_ids
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__analytic_tag_ids
+#: model_terms:ir.ui.view,arch_db:stock_request_analytic.stock_request_order_form
 msgid "Analytic Tags"
 msgstr ""
 
 #. module: stock_request_analytic
+#: code:addons/stock_request_analytic/models/stock_request_order.py:0
+#, python-format
+msgid "Analytic type (analytic_type) not present in the context"
+msgstr ""
+
+#. module: stock_request_analytic
+#: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__default_analytic_account_id
+msgid "Default Analytic Account"
+msgstr ""
+
+#. module: stock_request_analytic
+#: model:ir.model.fields,help:stock_request_analytic.field_stock_request_order__default_analytic_account_id
+msgid "Set this if you want to define a default analytic account on requests"
+msgstr ""
+
+#. module: stock_request_analytic
 #: model:ir.model,name:stock_request_analytic.model_stock_request
-#: model_terms:ir.ui.view,arch_db:stock_request_analytic.view_account_analytic_account_form
 msgid "Stock Request"
 msgstr "库存请求"
 
@@ -52,6 +73,7 @@ msgstr "库存请求单"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_account_analytic_account__stock_request_ids
+#: model_terms:ir.ui.view,arch_db:stock_request_analytic.view_account_analytic_account_form
 msgid "Stock Requests"
 msgstr "库存请求"
 
@@ -60,10 +82,8 @@ msgstr "库存请求"
 msgid "Stock Rule"
 msgstr "库存规则"
 
-#. module: stock_request_analytic
-#: code:addons/stock_request_analytic/models/stock_request.py:21
 #, python-format
-msgid ""
-"You cannot link a analytic account to a stock request that belongs to "
-"another company."
-msgstr "您无法将分析帐户链接到属于另一家公司的库存请求。"
+#~ msgid ""
+#~ "You cannot link a analytic account to a stock request that belongs to "
+#~ "another company."
+#~ msgstr "您无法将分析帐户链接到属于另一家公司的库存请求。"
