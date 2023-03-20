@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [stock_move_common_dest](stock_move_common_dest/) | 16.0.1.0.1 |  | Adds field for common destination moves
 [stock_move_location](stock_move_location/) | 16.0.1.1.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 16.0.1.0.0 |  | Add a MTS+MTO route
+[stock_packaging_calculator](stock_packaging_calculator/) | 16.0.1.0.0 |  | Compute product quantity to pick by packaging
 [stock_picking_volume](stock_picking_volume/) | 16.0.1.0.0 | [![lmignon](https://github.com/lmignon.png?size=30px)](https://github.com/lmignon) | Compute volume information on stock moves and pickings
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 16.0.1.0.1 |  | Allows to search for picking from supplierinfo code
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 16.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds a calendar to the Warehouse
