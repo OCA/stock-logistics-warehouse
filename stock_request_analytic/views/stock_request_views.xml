@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017-2020 ForgeFlow, S.L. (https://www.forgeflow.com)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_stock_request_form" model="ir.ui.view">
+        <field name="name">stock.request.form</field>
+        <field name="model">stock.request</field>
+        <field name="inherit_id" ref="stock_request.view_stock_request_form" />
+        <field name="arch" type="xml">
+            <field name="procurement_group_id" position="after">
+                <field
+                    name="analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <field
+                    name="analytic_tag_ids"
+                    widget="many2many_tags"
+                    groups="analytic.group_analytic_tags"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

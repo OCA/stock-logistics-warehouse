@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017-2020 ForgeFlow, S.L. (https://www.forgeflow.com)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_request_order_form" model="ir.ui.view">
+        <field name="name">stock.request.order.form - stock_request_analytic</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <field name="analytic_account_ids" invisible="1" />
+                <field name="analytic_tag_ids" invisible="1" />
+                <button
+                    type="object"
+                    name="action_view_analytic"
+                    class="oe_stat_button"
+                    icon="fa-list"
+                    attrs="{'invisible': [('analytic_count', '=', 0)]}"
+                    context="{'analytic_type': 'analytic_account'}"
+                    groups="analytic.group_analytic_accounting"
+                >
+                    <field
+                        name="analytic_count"
+                        widget="statinfo"
+                        string="Analytic Accounts"
+                    />
+                </button>
+                <button
+                    type="object"
+                    name="action_view_analytic"
+                    class="oe_stat_button"
+                    icon="fa-list"
+                    attrs="{'invisible': [('analytic_tag_count', '=', 0)]}"
+                    context="{'analytic_type': 'analytic_tag'}"
+                    groups="analytic.group_analytic_tags"
+                >
+                    <field
+                        name="analytic_tag_count"
+                        widget="statinfo"
+                        string="Analytic Tags"
+                    />
+                </button>
+            </div>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field
+                    name="default_analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='stock_request_ids']/tree//field[@name='route_id']"
+                position="after"
+            >
+                <field
+                    name="analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <field
+                    name="analytic_tag_ids"
+                    widget="many2many_tags"
+                    groups="analytic.group_analytic_tags"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
