@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!--
+    Only users with this group can view the fields with this security group.
+    Add group to user_root to avoid errors when other modules install and
+    add fields to views with this group defined as field attribute.
+    -->
+    <record model="res.groups" id="group_product_cost">
+        <field name="name">Access to Product Cost Adjustments</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="users" eval="[(4, ref('base.user_root'))]" />
+    </record>
+</odoo>
