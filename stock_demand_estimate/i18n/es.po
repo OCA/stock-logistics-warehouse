@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:35+0000\n"
-"PO-Revision-Date: 2023-02-01 10:46+0000\n"
+"PO-Revision-Date: 2023-03-21 18:23+0000\n"
 "Last-Translator: FranciscoFactorLibre <francisco.santos@factorlibre.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
@@ -37,7 +37,7 @@ msgstr "Creado el"
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Date (From)"
-msgstr ""
+msgstr "Fecha (Desde)"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
@@ -54,7 +54,7 @@ msgstr "Fecha hasta"
 #. module: stock_demand_estimate
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_planning_menu
 msgid "Demand Planning"
-msgstr ""
+msgstr "Planificación de demanda"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__display_name
@@ -65,38 +65,37 @@ msgstr "Nombre mostrado"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_duration
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
 msgid "Duration"
-msgstr "Localización"
+msgstr "Duración"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__duration
 msgid "Duration (computed))"
-msgstr ""
+msgstr "Duración (Calculada)"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__manual_duration
 msgid "Duration (in days)"
-msgstr ""
+msgstr "Duración (en días)"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Expired"
-msgstr ""
+msgstr "Expiración"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
-#, fuzzy
 msgid "From"
-msgstr "Fecha desde"
+msgstr "Desde"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_from
 msgid "From (computed)"
-msgstr ""
+msgstr "Desde (Calculado)"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__id
@@ -127,7 +126,7 @@ msgstr "Localización"
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Not Expired"
-msgstr ""
+msgstr "No expirado"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_id
@@ -143,38 +142,38 @@ msgstr "Cantidad"
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Quantity (Product UoM)"
-msgstr ""
+msgstr "Cantidad (UdM del producto)"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__daily_qty
 msgid "Quantity / Day"
-msgstr ""
+msgstr "Cantidad / Día"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Quantity in the default UoM of the product"
-msgstr ""
+msgstr "Cantidad en UdM por defecto del producto"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Search Stock Demand Estimates"
-msgstr ""
+msgstr "Buscar demanda estimada de existencias"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_pivot
 msgid "Stock Demand Estimate"
-msgstr ""
+msgstr "Demanda estimada de existencias"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate
 msgid "Stock Demand Estimate Line"
-msgstr ""
+msgstr "Asistente en la demanda estimada de existencias"
 
 #. module: stock_demand_estimate
 #: model:ir.actions.act_window,name:stock_demand_estimate.stock_demand_estimate_action
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_menu
 msgid "Stock Demand Estimates"
-msgstr ""
+msgstr "Demanda estimada de existencias"
 
 #. module: stock_demand_estimate
 #. odoo-python
@@ -184,21 +183,24 @@ msgid ""
 "The requested operation cannot be processed because of a programming error "
 "setting the `product_qty` field instead of the `product_uom_qty`."
 msgstr ""
+"La operación solicitada no puede ser procesada debido a un error de "
+"programación estableciendo el campo 'product_qty' en lugar del campo "
+"'product_uom_qty'."
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_to
 msgid "To"
-msgstr ""
+msgstr "A"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_to
 msgid "To (computed)"
-msgstr ""
+msgstr "Hasta (calculado)"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
-msgstr ""
+msgstr "Unidad de medida"
 
 #~ msgid "Cancel"
 #~ msgstr "Cancelar"
