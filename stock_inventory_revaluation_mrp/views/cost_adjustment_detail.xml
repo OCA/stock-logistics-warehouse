@@ -1,0 +1,62 @@
+<odoo>
+
+    <record id="cost_adjustment_detail_mrp_view_tree" model="ir.ui.view">
+        <field name="name">stock.cost.adjustment.detail.mrp.tree</field>
+        <field name="model">stock.cost.adjustment.detail</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cost_adjustment_id" invisible="1" />
+                <field name="company_id" invisible="1" />
+                <field name="currency_id" invisible="1" />
+                <field name="product_id" />
+                <field name="bom_id" />
+                <field name="level" optional="show" />
+                <field name="bom_line_id" optional="show" />
+                <field name="quantity" />
+                <field
+                    name="bom_product_qty_on_hand"
+                    invisible="not context.get('qty_details')"
+                />
+                <field
+                    name="product_original_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                />
+                <field
+                    name="current_bom_cost"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                    optional="hide"
+                />
+                <field
+                    name="cost_increase"
+                    options="{'currency_field': 'currency_id'}"
+                    widget="monetary"
+                />
+                <field name="percent_difference" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="cost_adjustment_detail_view_search" model="ir.ui.view">
+        <field name="name">stock.cost.adjustment.detail.view.search</field>
+        <field name="model">stock.cost.adjustment.detail</field>
+        <field name="arch" type="xml">
+            <search string="Cost Adjustment Details">
+                <field name="product_id" />
+                <field name="bom_id" />
+                <filter
+                    name="group_by_product_id"
+                    string="Impacted Product"
+                    context="{'group_by': 'product_id'}"
+                />
+                <filter
+                    name="group_by_bom_id"
+                    string="Impacted BoM"
+                    context="{'group_by': 'bom_id'}"
+                />
+            </search>
+        </field>
+    </record>
+
+</odoo>

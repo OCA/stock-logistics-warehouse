@@ -1,0 +1,56 @@
+<odoo>
+
+    <record id="cost_adjustment_line_mrp_view_tree" model="ir.ui.view">
+        <field name="name">stock.cost.adjustment.line.mrp.tree</field>
+        <field name="model">stock.cost.adjustment.line</field>
+        <field
+            name="inherit_id"
+            ref="stock_inventory_revaluation_adjustment.cost_adjustment_line_view_tree"
+        />
+        <field name="arch" type="xml">
+
+            <tree position="attributes">
+                <attribute name="decoration-info">is_manually_selected</attribute>
+            </tree>
+            <field name="total_difference" position="after">
+                <field name="is_manually_selected" invisible="1" />
+                <field name="level" />
+                <field name="production_count" optional="show" />
+                <button
+                    name="action_view_production"
+                    type="object"
+                    icon="fa-list"
+                    attrs="{'invisible': [('production_count', '=', 0)]}"
+                />
+                <field name="bom_count" optional="show" />
+                <button
+                    name="action_view_bom"
+                    type="object"
+                    icon="fa-list"
+                    attrs="{'invisible': [('bom_count', '=', 0)]}"
+                />
+            </field>
+
+        </field>
+    </record>
+
+    <record id="cost_adjustment_line_search_ext" model="ir.ui.view">
+        <field name="model">stock.cost.adjustment.line</field>
+        <field
+            name="inherit_id"
+            ref="stock_inventory_revaluation_adjustment.cost_adjustment_line_search"
+        />
+        <field name="arch" type="xml">
+
+            <filter name="groupby_product" position="after">
+                <filter
+                    string="Level"
+                    name="groupby_level"
+                    context="{'group_by': 'level'}"
+                />
+            </filter>
+
+        </field>
+    </record>
+
+</odoo>
