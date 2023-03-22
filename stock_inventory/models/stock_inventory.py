@@ -44,7 +44,7 @@ class InventoryAdjustmentsGroup(models.Model):
     category_id = fields.Many2one("product.category", string="Product Category")
 
     lot_ids = fields.Many2many(
-        "stock.production.lot",
+        "stock.lot",
         string="Lot/Serial Numbers",
     )
 
