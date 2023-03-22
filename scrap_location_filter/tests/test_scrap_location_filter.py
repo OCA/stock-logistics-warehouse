@@ -1,17 +1,17 @@
 # Copyright (C) 2021 - TODAY, Open Source Integrators
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class StockScrapLocation(SavepointCase):
+class StockScrapLocation(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(StockScrapLocation, cls).setUpClass()
 
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.ProductObj = cls.env["product.product"]
-        cls.LotObj = cls.env["stock.production.lot"]
+        cls.LotObj = cls.env["stock.lot"]
         cls.productA = cls.ProductObj.create({"name": "Product A", "type": "product"})
         cls.productB = cls.ProductObj.create({"name": "Product B", "type": "product"})
         cls.lot_productA = cls.LotObj.create(
@@ -32,7 +32,7 @@ class StockScrapLocation(SavepointCase):
             }
         )
         self.env["stock.location"].with_context(
-            {"product_id": self.productA.id, "lot_id": self.lot_productA.id}
+            **{"product_id": self.productA.id, "lot_id": self.lot_productA.id}
         ).search([])
 
     def test_scrap_location2(self):
@@ -45,7 +45,7 @@ class StockScrapLocation(SavepointCase):
             }
         )
         self.env["stock.location"].with_context(
-            {"product_id": self.productA.id, "lot_id": self.lot_productA.id}
+            **{"product_id": self.productA.id, "lot_id": self.lot_productA.id}
         ).search([])
         scrap = self.env["stock.scrap"].create(
             {

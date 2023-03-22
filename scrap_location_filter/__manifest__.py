@@ -3,7 +3,7 @@
 
 {
     "name": "Scrap Location Filter",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Warehouse Management",
     "license": "AGPL-3",
     "depends": ["stock"],
