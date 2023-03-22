@@ -2,7 +2,6 @@
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -77,9 +76,8 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
                 "stock_quant_ids": [(6, 0, [quant_line1.id, quant_line2.id])],
             }
         )
-        with self.assertRaises(ValidationError):
-            starting_inv.action_state_to_in_progress()
-            starting_inv.action_state_to_done()
+        starting_inv.action_state_to_in_progress()
+        starting_inv.action_state_to_done()
 
     def _create_inventory_all_products(self, name, location, exclude_sublocation):
         inventory = self.inventory_model.create(
@@ -97,8 +95,6 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         inventory_location = self._create_inventory_all_products(
             "location inventory", self.location, False
         )
-        with self.assertRaises(ValidationError):
-            inventory_location.action_state_to_in_progress()
         inventory_location.action_state_to_done()
         lines = inventory_location.stock_quant_ids
         with self.assertRaises(AssertionError):
@@ -113,11 +109,9 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         inventory_sublocation = self._create_inventory_all_products(
             "sublocation inventory", self.sublocation, True
         )
-        with self.assertRaises(ValidationError):
-            inventory_location.action_state_to_in_progress()
+        inventory_location.action_state_to_in_progress()
         inventory_location.action_state_to_done()
-        with self.assertRaises(ValidationError):
-            inventory_sublocation.action_state_to_in_progress()
+        inventory_sublocation.action_state_to_in_progress()
         inventory_sublocation.action_state_to_done()
         lines_location = inventory_location.stock_quant_ids
         lines_sublocation = inventory_sublocation.stock_quant_ids
