@@ -8,7 +8,7 @@
         <field name="inherit_id" ref="stock.stock_scrap_form_view" />
         <field name="arch" type="xml">
             <field name="location_id" position="after">
-                <field name="lot_id"/>
+                <field name="lot_id" />
             </field>
             <xpath expr="//field[@name='location_id']" position="attributes">
                 <attribute
@@ -23,7 +23,7 @@
         <field name="inherit_id" ref="stock.stock_scrap_form_view2" />
         <field name="arch" type="xml">
             <field name="location_id" position="after">
-                <field name="lot_id"/>
+                <field name="lot_id" />
             </field>
             <xpath expr="//field[@name='location_id']" position="attributes">
                 <attribute
