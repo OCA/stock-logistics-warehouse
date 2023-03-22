@@ -139,11 +139,7 @@
                 />
                 <field name="inventory_date" optional="show" />
                 <field name="user_id" string="User" optional="show" />
-                <field
-                    name="company_id"
-                    groups="base.group_multi_company"
-                    optional="hide"
-                />
+                <field name="company_id" optional="hide" />
                 <button
                     name="action_inventory_history"
                     type="object"

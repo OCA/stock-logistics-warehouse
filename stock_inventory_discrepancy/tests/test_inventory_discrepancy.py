@@ -2,16 +2,16 @@
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo_test_helper import FakeModelLoader
+# from odoo_test_helper import FakeModelLoader
 
-from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.exceptions import AccessError, UserError
 from odoo.tests.common import TransactionCase
 
 
 class TestInventoryDiscrepancy(TransactionCase):
     def setUp(self, *args, **kwargs):
         super(TestInventoryDiscrepancy, self).setUp(*args, **kwargs)
-        self.loader = FakeModelLoader(self.env, self.__module__)
+        # self.loader = FakeModelLoader(self.env, self.__module__)
         self.obj_wh = self.env["stock.warehouse"]
         self.obj_location = self.env["stock.location"]
         self.obj_inventory = self.env["stock.inventory"]
@@ -165,7 +165,7 @@ class TestInventoryDiscrepancy(TransactionCase):
             0.1,
             "Threshold wrongly computed in Inventory Line.",
         )
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             inventory.with_user(self.user).action_state_to_in_progress()
         with self.assertRaises(AccessError):
             inventory.with_user(self.user).action_state_to_done()
@@ -216,7 +216,7 @@ class TestInventoryDiscrepancy(TransactionCase):
             0.1,
             "Threshold wrongly computed in Inventory Line.",
         )
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             inventory.with_user(self.user_2).action_state_to_in_progress()
         # User with no privileges can't validate a Inventory Adjustment.
         with self.assertRaises(UserError):
