@@ -27,21 +27,21 @@ class TestStockInventory(TransactionCase):
                 "categ_id": self.product_categ.id,
             }
         )
-        self.lot_1 = self.env["stock.production.lot"].create(
+        self.lot_1 = self.env["stock.lot"].create(
             {
                 "product_id": self.product.id,
                 "name": "Lot 1",
                 "company_id": self.env.company.id,
             }
         )
-        self.lot_2 = self.env["stock.production.lot"].create(
+        self.lot_2 = self.env["stock.lot"].create(
             {
                 "product_id": self.product.id,
                 "name": "Lot 2",
                 "company_id": self.env.company.id,
             }
         )
-        self.lot_3 = self.env["stock.production.lot"].create(
+        self.lot_3 = self.env["stock.lot"].create(
             {
                 "product_id": self.product.id,
                 "name": "Lot 3",
@@ -55,14 +55,14 @@ class TestStockInventory(TransactionCase):
             {
                 "name": "Location 1",
                 "usage": "internal",
-                "warehouse_id": self.location_src.id,
+                "location_id": self.location_src.id,
             }
         )
         self.location2 = self.location_model.create(
             {
                 "name": "Location 2",
                 "usage": "internal",
-                "location_id": self.location_src.id,
+                "location_id": self.location_dst.id,
             }
         )
         self.location3 = self.location_model.create(
