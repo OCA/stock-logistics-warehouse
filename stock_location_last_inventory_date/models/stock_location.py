@@ -18,9 +18,9 @@ class StockLocation(models.Model):
                 int(location_id)
                 for location_id in location.parent_path.rstrip("/").split("/")
             ]
-            last_inventory = self.env["stock.inventory"].search(
-                [("location_ids", "in", location_ids), ("state", "=", "done")],
-                order="date desc",
+            last_inventory = self.env["stock.quant"].search(
+                [("location_id", "in", location_ids)],
+                order="inventory_date desc",
                 limit=1,
             )
-            location.last_inventory_date = last_inventory.date
+            location.last_inventory_date = last_inventory.inventory_date
