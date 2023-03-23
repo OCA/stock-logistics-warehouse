@@ -23,14 +23,19 @@
             ref="reason_view_stock_quant_tree_inventory_editable"
         />
         <field name="priority">99</field>
-        <field
-            name="groups_id"
-            eval="[(4, ref('stock_change_qty_reason.group_qty_reason_preset'))]"
-        />
         <field name="arch" type="xml">
-            <field name="reason" position="replace">
-                <field name="preset_reason_id" string="Reason" />
+            <field name="reason" position="after">
+                <field
+                    name="preset_reason_id"
+                    string="Reason"
+                    groups="stock_change_qty_reason.group_qty_reason_preset"
+                />
             </field>
+            <xpath expr="//field[@name='reason']" position="attributes">
+                <t groups="stock_change_qty_reason.group_qty_reason_preset">
+                    <attribute name="invisible">True</attribute>
+                </t>
+            </xpath>
         </field>
     </record>
 </odoo>
