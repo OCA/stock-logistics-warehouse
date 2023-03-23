@@ -42,7 +42,6 @@ class TestStockLocationLockdown(TransactionCase):
                     0,
                     {
                         "product_id": self.product.id,
-                        "product_uom_qty": 0,
                         "product_uom_id": 1,
                         "qty_done": self.product.qty_available + 1,
                         "location_id": self.supplier_location.id,
@@ -74,7 +73,6 @@ class TestStockLocationLockdown(TransactionCase):
                     0,
                     {
                         "product_id": self.product.id,
-                        "product_uom_qty": 0,
                         "product_uom_id": 1,
                         "qty_done": self.product.qty_available + 1,
                         "location_id": self.supplier_location.id,
