@@ -16,7 +16,7 @@ class TestStockLocation(SavepointCase):
     def _create_user(self, name, groups):
         return (
             self.env["res.users"]
-            .with_context({"no_reset_password": True})
+            .with_context(**{"no_reset_password": True})
             .create(
                 {
                     "name": name.capitalize(),

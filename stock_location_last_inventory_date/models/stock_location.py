@@ -7,7 +7,6 @@ class StockLocation(models.Model):
     _inherit = "stock.location"
 
     last_inventory_date = fields.Datetime(
-        "Last Inventory Date",
         compute="_compute_last_inventory_date",
         help="Indicates the last inventory date for the location, "
         "including inventory done on parents location.",
