@@ -7,7 +7,7 @@
     "author": "Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "version": "15.0.1.0.1",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
