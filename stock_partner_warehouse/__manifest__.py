@@ -10,6 +10,6 @@
     "application": False,
     "installable": True,
     "auto_install": False,
-    "depends": ["base"],
+    "depends": ["base", "stock"],
     "data": ["views/res_partner.xml"],
 }

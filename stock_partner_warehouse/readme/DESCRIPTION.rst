@@ -3,5 +3,5 @@ If there is no warehouse set to the partner, it will take automatically the pare
 for example, in case of each customer should be supplied by specific warehouse.
 
 See also :
-- stock_automatic_sale_partner_warehouse (in https://github.com/OCA/stock-logistics-warehouse)
-- fieldservice_automatic_partner_warehouse (in https://github.com/OCA/field-service)
+- stock_sale_partner_warehouse (in https://github.com/OCA/stock-logistics-warehouse)
+- fieldservice_partner_warehouse (in https://github.com/OCA/field-service)
