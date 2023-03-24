@@ -19,3 +19,4 @@ Contributors
 ------------
 
 * Open Source Integrators <contact@opensourceintegrators.com>
+* Urvisha Desai <udesai@opensourceintegrators.com>

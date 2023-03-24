@@ -11,7 +11,7 @@
     "category": "Stock",
     "depends": ["stock"],
     "data": [
-        "views/stock_inventory_line_view.xml",
+        "views/stock_quant_view.xml",
     ],
     "installable": True,
 }

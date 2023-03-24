@@ -4,9 +4,9 @@
 from odoo import fields, models
 
 
-class StockInventoryLine(models.Model):
+class StockQuant(models.Model):
 
-    _inherit = "stock.inventory.line"
+    _inherit = "stock.quant"
 
     product_cost = fields.Float(
         related="product_id.standard_price", string="Product Cost"
