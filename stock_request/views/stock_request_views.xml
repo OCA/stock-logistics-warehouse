@@ -187,11 +187,7 @@
                                 name="procurement_group_id"
                                 groups="stock.group_adv_location"
                             />
-                            <field
-                                name="company_id"
-                                groups="base.group_multi_company"
-                                options="{'no_create': True}"
-                            />
+                            <field name="company_id" options="{'no_create': True}" />
                         </group>
                         <group name="quantities">
                             <label for="product_uom_qty" />
@@ -220,7 +216,9 @@
                         </group>
                     </group>
                     <notebook>
-                        <!--Empty notebook to inherit pages from other related modules-->
+                        <page>
+                            <!--Empty notebook to inherit pages from other related modules-->
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

@@ -356,6 +356,9 @@ class StockRequest(models.Model):
             upd_vals["expected_date"] = order_id.expected_date
         else:
             upd_vals["expected_date"] = self._get_expected_date()
+        if upd_vals.get("product_id") and "product_uom_id" not in upd_vals:
+            product = self.env["product.product"].browse(upd_vals.get("product_id"))
+            upd_vals["product_uom_id"] = product.uom_id.id
         return super().create(upd_vals)
 
     def unlink(self):

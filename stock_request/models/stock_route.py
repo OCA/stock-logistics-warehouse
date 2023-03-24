@@ -5,8 +5,8 @@ from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
 
-class StockLocationRoute(models.Model):
-    _inherit = "stock.location.route"
+class StockRoute(models.Model):
+    _inherit = "stock.route"
 
     @api.constrains("company_id")
     def _check_company_stock_request(self):

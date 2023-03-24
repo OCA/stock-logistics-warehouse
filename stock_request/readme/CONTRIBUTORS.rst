@@ -8,6 +8,7 @@
 
   * Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
   * Steve Campbell <scampbell@opensourceintegrators.com>
+  * Urvisha Desai <udesai@opensourceintegrators.com>
 
 * Héctor Villarreal <hector.villarreal@forgeflow.com>
 * Kitti U. <kittiu@ecosoft.co.th>
