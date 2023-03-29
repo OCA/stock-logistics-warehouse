@@ -5,7 +5,7 @@
     "name": "Stock Picking Volume",
     "summary": """
         Compute volume information on stock moves and pickings""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
@@ -19,7 +19,6 @@
         "views/stock_move.xml",
     ],
     "demo": [],
-    "post_init_hook": "post_init_hook",
     "pre_init_hook": "pre_init_hook",
     "development_status": "Beta",
 }
