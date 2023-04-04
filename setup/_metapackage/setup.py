@@ -51,6 +51,7 @@ setuptools.setup(
         'odoo14-addon-stock_measuring_device',
         'odoo14-addon-stock_measuring_device_zippcube',
         'odoo14-addon-stock_move_auto_assign',
+        'odoo14-addon-stock_move_auto_assign_auto_release',
         'odoo14-addon-stock_move_common_dest',
         'odoo14-addon-stock_move_location',
         'odoo14-addon-stock_mts_mto_mrp_rule',
