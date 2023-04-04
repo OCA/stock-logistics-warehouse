@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.addons.queue_job.job import identity_exact
-from odoo.addons.queue_job.tests.common import mock_with_delay
+from odoo.addons.queue_job.tests.common import trap_jobs
 
 from .common import StockMoveAutoAssignCase
 
@@ -28,20 +28,18 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         move.move_line_ids.copy(
             default={"qty_done": 50, "location_dest_id": self.shelf2_loc.id}
         )
-        with mock_with_delay() as (delayable_cls, delayable):
+        with trap_jobs() as trap:
             move._action_done()
             # .with_delay() has been called once
-            self.assertEqual(delayable_cls.call_count, 1)
-            delay_args, delay_kwargs = delayable_cls.call_args
-            # .with_delay() is called on self.product
-            self.assertEqual(delay_args, (self.product,))
-            # .with_delay() with the following options
-            self.assertEqual(delay_kwargs.get("identity_key"), identity_exact)
-            # check what's passed to the job method 'moves_auto_assign'
-            self.assertEqual(delayable.moves_auto_assign.call_count, 1)
-            delay_args, delay_kwargs = delayable.moves_auto_assign.call_args
-            self.assertEqual(delay_args, (self.shelf1_loc | self.shelf2_loc,))
-            self.assertDictEqual(delay_kwargs, {})
+            trap.assert_jobs_count(1)
+            trap.assert_enqueued_job(
+                self.product.moves_auto_assign,
+                args=(self.shelf1_loc | self.shelf2_loc,),
+                kwargs={},
+                properties=dict(
+                    identity_key=identity_exact,
+                ),
+            )
 
     def test_move_canceled_with_reservation_enqueue_job(self):
         """A canceled move with reservations enqueue a new job to assign other moves"""
@@ -49,28 +47,26 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         # put stock in Stock/Shelf 1, the move has a source location in Stock
         self._update_qty_in_location(self.shelf1_loc, self.product, 100)
         move._action_assign()
-        with mock_with_delay() as (delayable_cls, delayable):
+        with trap_jobs() as trap:
             move._action_cancel()
             # .with_delay() has been called once
-            self.assertEqual(delayable_cls.call_count, 1)
-            delay_args, delay_kwargs = delayable_cls.call_args
-            # .with_delay() is called on self.product
-            self.assertEqual(delay_args, (self.product,))
-            # .with_delay() with the following options
-            self.assertEqual(delay_kwargs.get("identity_key"), identity_exact)
-            # check what's passed to the job method 'moves_auto_assign'
-            self.assertEqual(delayable.moves_auto_assign.call_count, 1)
-            delay_args, delay_kwargs = delayable.moves_auto_assign.call_args
-            self.assertEqual(delay_args, (self.out_type.default_location_src_id,))
-            self.assertDictEqual(delay_kwargs, {})
+            trap.assert_jobs_count(1)
+            trap.assert_enqueued_job(
+                self.product.moves_auto_assign,
+                args=(self.out_type.default_location_src_id,),
+                kwargs={},
+                properties=dict(
+                    identity_key=identity_exact,
+                ),
+            )
 
     def test_move_canceled_without_reservation_no_job(self):
         move = self._create_move(self.product, self.out_type, qty=100)
         move._action_assign()
-        with mock_with_delay() as (delayable_cls, delayable):
+        with trap_jobs() as trap:
             move._action_cancel()
             # .with_delay() has not been called
-            self.assertEqual(delayable_cls.call_count, 0)
+            trap.assert_jobs_count(0)
 
     def test_move_done_service_no_job(self):
         """Service products do not enqueue job"""
@@ -79,10 +75,10 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         move._action_assign()
         move.move_line_ids.qty_done = 1
         move.move_line_ids.location_dest_id = self.shelf1_loc.id
-        with mock_with_delay() as (delayable_cls, delayable):
+        with trap_jobs() as trap:
             move._action_done()
             # .with_delay() has not been called
-            self.assertEqual(delayable_cls.call_count, 0)
+            trap.assert_jobs_count(0)
 
     def test_move_done_chained_no_job(self):
         """A move chained to another does not enqueue job"""
@@ -93,10 +89,10 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         move._action_assign()
         move.move_line_ids.qty_done = 1
         move.move_line_ids.location_dest_id = self.shelf1_loc.id
-        with mock_with_delay() as (delayable_cls, delayable):
+        with trap_jobs() as trap:
             move._action_done()
             # .with_delay() has not been called
-            self.assertEqual(delayable_cls.call_count, 0)
+            trap.assert_jobs_count(0)
 
     def test_move_done_customer_no_job(self):
         """A move with other destination than internal does not enqueue job"""
@@ -105,7 +101,7 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         move._action_assign()
         move.move_line_ids.qty_done = 1
         move.move_line_ids.location_dest_id = self.customer_loc
-        with mock_with_delay() as (delayable_cls, delayable):
+        with trap_jobs() as trap:
             move._action_done()
             # .with_delay() has not been called
-            self.assertEqual(delayable_cls.call_count, 0)
+            trap.assert_jobs_count(0)
