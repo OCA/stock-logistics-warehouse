@@ -54,11 +54,6 @@ msgid "Account Move"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__delay_alert
-msgid "Alert if Delay"
-msgstr ""
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__returned_move_ids
 msgid "All returned moves"
 msgstr ""
@@ -68,6 +63,11 @@ msgstr ""
 msgid ""
 "All the stock moves having a chained destination move sharing the same "
 "picking as the actual move's destination move"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__allowed_operation_ids
+msgid "Allowed Operation"
 msgstr ""
 
 #. module: stock_reserve
@@ -81,8 +81,17 @@ msgid "Analytic Tags"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__string_availability_info
-msgid "Availability"
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__ordered_available_to_promise_qty
+msgid ""
+"Available to Promise quantity minus quantities promised  to moves with "
+"higher priority (in default UoM of the product)."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__ordered_available_to_promise_uom_qty
+msgid ""
+"Available to Promise quantity minus quantities promised  to moves with "
+"higher priority (in initial demand's UoM)."
 msgstr ""
 
 #. module: stock_reserve
@@ -124,6 +133,11 @@ msgstr ""
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__scrapped
 msgid ""
 "Check this box to allow using this location to put scrapped/damaged goods."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__city
+msgid "City"
 msgstr ""
 
 #. module: stock_reserve
@@ -179,9 +193,36 @@ msgid "Created on"
 msgstr "Kreirano"
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date_deadline
+msgid "Date Promise to the customer on the top level document (SO/PO)"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date
-msgid "Date"
-msgstr "Datum"
+msgid "Date Scheduled"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date_priority
+msgid ""
+"Date/time used to sort moves to deliver first. Used to calculate the ordered "
+"available to promise."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date_deadline
+msgid "Deadline"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__delay_alert_date
+msgid "Delay Alert Date"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_uom_qty
+msgid "Demand"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__name
@@ -234,6 +275,8 @@ msgid "Display Assign Serial"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_product_product__display_name
+#: model:ir.model.fields,field_description:stock_reserve.field_product_template__display_name
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__display_name
 msgid "Display Name"
 msgstr "Naziv"
@@ -254,18 +297,23 @@ msgid "Ensure the traceability of a storable product in your warehouse."
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date_expected
-msgid "Expected Date"
-msgstr ""
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__finished_lots_exist
-msgid "Finished Lots Exist"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__order_finished_lot_ids
+msgid "Finished Lot/Serial Number"
 msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__next_serial
 msgid "First SN"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__forecast_availability
+msgid "Forecast Availability"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__forecast_expected_date
+msgid "Forecasted Expected date"
 msgstr ""
 
 #. module: stock_reserve
@@ -289,6 +337,8 @@ msgid "Has Move Lines"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_product_product__id
+#: model:ir.model.fields,field_description:stock_reserve.field_product_template__id
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__id
 msgid "ID"
 msgstr "ID"
@@ -319,8 +369,8 @@ msgid "If ticked, you will be able to select entire packages to move"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_uom_qty
-msgid "Initial Demand"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__ignore_exception
+msgid "Ignore Exceptions"
 msgstr ""
 
 #. module: stock_reserve
@@ -344,6 +394,8 @@ msgid "Is quantity done editable"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_product_product____last_update
+#: model:ir.model.fields,field_description:stock_reserve.field_product_template____last_update
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation____last_update
 msgid "Last Modified on"
 msgstr "Zadnje modificirano"
@@ -389,13 +441,6 @@ msgid "Move Line Nosuggest"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date
-msgid ""
-"Move date: scheduled date until move is done, then date of actual move "
-"processing"
-msgstr ""
-
-#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__origin_returned_move_id
 msgid "Move that created the return move"
 msgstr ""
@@ -408,6 +453,11 @@ msgstr ""
 #. module: stock_reserve
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Moves are reserved."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__need_release
+msgid "Need Release"
 msgstr ""
 
 #. module: stock_reserve
@@ -459,8 +509,13 @@ msgid "Optional: previous stock move when chaining them"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__order_finished_lot_ids
-msgid "Order Finished Lot"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__ordered_available_to_promise_uom_qty
+msgid "Ordered Available to Promise"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__ordered_available_to_promise_qty
+msgid "Ordered Available to Promise (Real Qty)"
 msgstr ""
 
 #. module: stock_reserve
@@ -474,23 +529,18 @@ msgid "Original Move"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__orderpoint_id
+msgid "Original Reordering Rule"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__restrict_partner_id
 msgid "Owner "
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging
-msgid "Package"
-msgstr ""
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__package_level_id
 msgid "Package Level"
-msgstr ""
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
-msgid "Package quantity"
 msgstr ""
 
 #. module: stock_reserve
@@ -511,6 +561,16 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__priority
 msgid "Priority"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date_priority
+msgid "Priority Date"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__delay_alert_date
+msgid "Process at this date to be on time"
 msgstr ""
 
 #. module: stock_reserve
@@ -557,11 +617,6 @@ msgid "Production Order for finished products"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__propagate_date
-msgid "Propagate Rescheduling"
-msgstr ""
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__propagate_cancel
 msgid "Propagate cancel and split"
 msgstr ""
@@ -577,13 +632,30 @@ msgid "Qty by packaging"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__previous_promised_qty
+msgid ""
+"Quantities promised to moves with higher priority than this move (in default "
+"UoM of the product)."
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__quantity_done
 msgid "Quantity Done"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__previous_promised_qty
+msgid "Quantity Promised before this move"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__reserved_availability
 msgid "Quantity Reserved"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__should_consume_qty
+msgid "Quantity To Consume"
 msgstr ""
 
 #. module: stock_reserve
@@ -623,6 +695,11 @@ msgid "Release"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__release_ready
+msgid "Release Ready"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.actions.server,name:stock_reserve.ir_cron_release_stock_reservation_ir_actions_server
 #: model:ir.cron,cron_name:stock_reserve.ir_cron_release_stock_reservation
 #: model:ir.cron,name:stock_reserve.ir_cron_release_stock_reservation
@@ -635,12 +712,7 @@ msgid "Released"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__propagate_date_minimum_delta
-msgid "Reschedule if Higher Than"
-msgstr ""
-
-#. module: stock_reserve
-#: code:addons/stock_reserve/model/stock_reserve.py:0
+#: code:addons/stock_reserve/models/stock_reserve.py:0
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__move_id
 #, python-format
 msgid "Reservation Move"
@@ -664,12 +736,12 @@ msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__sale_line_id
-msgid "Sale Order Line"
+msgid "Sale Line"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date_expected
-msgid "Scheduled date for the processing of this move"
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date
+msgid "Scheduled date until move is done, then date of actual move processing"
 msgstr ""
 
 #. module: stock_reserve
@@ -688,6 +760,11 @@ msgid "Sequence"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__lot_ids
+msgid "Serial Numbers"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_id
 msgid ""
 "Sets a location if you produce at a fixed location. This can be a partner "
@@ -697,11 +774,6 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_operations
 msgid "Show Detailed Operations"
-msgstr ""
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__string_availability_info
-msgid "Show various information on stock availability for this move"
 msgstr ""
 
 #. module: stock_reserve
@@ -802,16 +874,6 @@ msgid "Technical: used in views"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__propagate_date_minimum_delta
-msgid "The change must be higher than this value to be propagated"
-msgstr ""
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__propagate_date
-msgid "The rescheduling is propagated to the next move."
-msgstr ""
-
-#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__rule_id
 msgid "The stock rule that created this stock move"
 msgstr ""
@@ -840,18 +902,13 @@ msgid "Total"
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__needs_lots
-msgid "Tracking"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picking_id
+msgid "Transfer"
 msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picking_partner_id
 msgid "Transfer Destination Address"
-msgstr ""
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picking_id
-msgid "Transfer Reference"
 msgstr ""
 
 #. module: stock_reserve
@@ -880,6 +937,11 @@ msgstr "Jedinična cijena"
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_uom
 msgid "Unit of Measure"
 msgstr "Jedinica mjere"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__unrelease_allowed
+msgid "Unrelease Allowed"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__to_refund
@@ -915,3 +977,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__workorder_id
 msgid "Work Order To Consume"
 msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__zip_code
+msgid "Zip"
+msgstr ""
+
+#~ msgid "Date"
+#~ msgstr "Datum"
