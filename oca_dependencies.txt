@@ -2,3 +2,4 @@
 
 server-ux
 web
+wms
