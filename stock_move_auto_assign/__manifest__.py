@@ -4,7 +4,7 @@
 {
     "name": "Stock Move Auto Assign",
     "summary": "Try to reserve moves when goods enter in a location",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.1.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Stock Management",
