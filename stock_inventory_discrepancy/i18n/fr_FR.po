@@ -20,33 +20,63 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_qty
-msgid "Discrepancy"
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid "Apply"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_percent
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_confirm_discrepancy_wiz
+msgid "Confim discrepancy wizard"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.actions.act_window,name:stock_inventory_discrepancy.confirm_discrepancy_action
+msgid "Confirm discrepancy"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid "Dates does not match"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__discrepancy_quant_ids
+msgid "Discrepancy Quant"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_percent
 msgid "Discrepancy percent (%)"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_inventory_form
-msgid "Force Validation"
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__display_name
+msgid "Display Name"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__has_over_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__has_over_discrepancy
 msgid "Has Over Discrepancy"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model,name:stock_inventory_discrepancy.model_stock_inventory
-msgid "Inventory"
-msgstr ""
-
-#. module: stock_inventory_discrepancy
-#: model:ir.model,name:stock_inventory_discrepancy.model_stock_inventory_line
-msgid "Inventory Line"
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__id
+msgid "ID"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
@@ -55,9 +85,24 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
-#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_threshold
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
 msgid "Maximum Discrepancy Rate Threshold"
 msgstr ""
 
@@ -77,22 +122,9 @@ msgid ""
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory__over_discrepancy_line_count
-msgid "Number of Discrepancies Over Threshold"
-msgstr ""
-
-#. module: stock_inventory_discrepancy
 #: code:addons/stock_inventory_discrepancy/hooks.py:0
 #, python-format
 msgid "Only a stock manager can validate an inventory adjustment."
-msgstr ""
-
-#. module: stock_inventory_discrepancy
-#. openerp-web
-#: code:addons/stock_inventory_discrepancy/static/src/js/inventory_validate_button_controller.js:0
-#: model:ir.model.fields.selection,name:stock_inventory_discrepancy.selection__stock_inventory__state__pending
-#, python-format
-msgid "Pending to Approve"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
@@ -106,67 +138,35 @@ msgid "Propagate discrepancy threshold"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory__state
-msgid ""
-"States of the Inventory Adjustment:\n"
-"- Draft: Inventory not started.\n"
-"- In Progress: Inventory in execution.\n"
-"- Pending to Approve: Inventory have some discrepancies greater than the "
-"predefined threshold and it's waiting for the Control Manager approval.\n"
-"- Validated: Inventory Approved."
+#: model:ir.model,name:stock_inventory_discrepancy.model_stock_quant
+msgid "Quants"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory__state
-msgid "Status"
-msgstr ""
-
-#. module: stock_inventory_discrepancy
-#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:0
-#, python-format
-msgid ""
-"The Qty Update is over the Discrepancy Threshold.\n"
-" Please, contact a user with rights to perform this action."
-msgstr ""
-
-#. module: stock_inventory_discrepancy
-#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_qty
-msgid ""
-"The difference between the actual qty counted and the theoretical quantity "
-"on hand."
-msgstr ""
-
-#. module: stock_inventory_discrepancy
-#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_percent
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_percent
 msgid "The discrepancy expressed in percent with theoretical quantity as basis"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#. openerp-web
-#: code:addons/stock_inventory_discrepancy/static/src/js/inventory_validate_button_controller.js:0
-#, python-format
-msgid "The inventory needs to be approved"
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid ""
+"The following products have exceeded the discrepancy threshold.\n"
+"                    Are you sure you want to proceed?"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_threshold
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
 msgid "Threshold (%)"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: code:addons/stock_inventory_discrepancy/hooks.py:0
-#, python-format
-msgid "Tracked Products in Inventory Adjustment"
+#: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation
+msgid "Validate Inventory Adjustments"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation_always
-msgid "Validate All inventory Adjustments"
-msgstr ""
-
-#. module: stock_inventory_discrepancy
-#: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation
-msgid "Validate Inventory Adjustments Under Threshold"
+msgid "Validate Inventory Adjustments excceded threshold"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
@@ -175,9 +175,18 @@ msgid "Warehouse"
 msgstr "Entrepôt "
 
 #. module: stock_inventory_discrepancy
-#: code:addons/stock_inventory_discrepancy/hooks.py:0
+#: code:addons/stock_inventory_discrepancy/wizards/confirm_discrepancy_wiz.py:0
 #, python-format
 msgid ""
-"You can't validate the inventory '%s', maybe this inventory has been already "
-"validated or isn't ready."
+"You cannot apply inventory adjustments if there are products that exceed the "
+"discrepancy threshold. Only users with rights to apply them can proceed."
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid ""
+"You cannot confirm the inventory adjustment,\n"
+"                    the following products have exceeded the discrepancy "
+"threshold.\n"
+"                    Only users with permissions to apply them can proceed."
 msgstr ""
