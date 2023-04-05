@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="saar_view_stock_quant_tree_inventory_editable">
+        <field name="name">stock.quant.inventory.tree.editable</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="arch" type="xml">
+
+            <field name="available_quantity" position="attributes">
+                <attribute name="groups">stock.group_stock_manager</attribute>
+            </field>
+
+             <field name="quantity" position="attributes">
+                <attribute name="groups">stock.group_stock_manager</attribute>
+            </field>
+
+            <field name="inventory_diff_quantity" position="attributes">
+                <attribute name="groups">stock.group_stock_manager</attribute>
+            </field>
+
+            <button name="action_inventory_history" position="attributes">
+                <attribute name="groups">stock.group_stock_manager</attribute>
+            </button>
+
+            <button name="action_set_inventory_quantity" position="attributes">
+                <attribute name="groups">stock.group_stock_manager</attribute>
+            </button>
+
+        </field>
+    </record>
+</odoo>
