@@ -3,17 +3,17 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import UserError
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, tagged
 
 
+@tagged("post_install", "-at_install")
 class TestInventoryDiscrepancy(TransactionCase):
-    def setUp(self, *args, **kwargs):
-        super(TestInventoryDiscrepancy, self).setUp(*args, **kwargs)
-        self.obj_wh = self.env["stock.warehouse"]
+    def setUp(self):
+        super().setUp()
         self.obj_location = self.env["stock.location"]
-        self.obj_inventory = self.env["stock.inventory"]
         self.obj_product = self.env["product.product"]
         self.obj_warehouse = self.env["stock.warehouse"]
+        self.obj_quant = self.env["stock.quant"]
 
         self.product1 = self.obj_product.create(
             {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
@@ -22,10 +22,10 @@ class TestInventoryDiscrepancy(TransactionCase):
             {"name": "Test Product 2", "type": "product", "default_code": "PROD2"}
         )
         self.test_loc = self.obj_location.create(
-            {"name": "Test Location", "usage": "internal", "discrepancy_threshold": 0.1}
+            {"name": "Test Location", "usage": "internal", "discrepancy_threshold": 10}
         )
         self.test_wh = self.obj_warehouse.create(
-            {"name": "Test WH", "code": "T", "discrepancy_threshold": 0.2}
+            {"name": "Test WH", "code": "T", "discrepancy_threshold": 20}
         )
         self.obj_location._parent_store_compute()
 
@@ -45,12 +45,15 @@ class TestInventoryDiscrepancy(TransactionCase):
             }
         )
         group_stock_user = self.env.ref("stock.group_stock_user")
+        group_inventory = self.env.ref(
+            "stock_inventory_discrepancy.group_stock_inventory_validation"
+        )
         self.user = self.env["res.users"].create(
             {
                 "name": "Test User",
                 "login": "user",
                 "email": "test.user@example.com",
-                "groups_id": [(6, 0, [group_stock_user.id])],
+                "groups_id": [(6, 0, [group_stock_user.id, group_inventory.id])],
             }
         )
 
@@ -72,194 +75,136 @@ class TestInventoryDiscrepancy(TransactionCase):
             }
         )
 
-        starting_inv = self.obj_inventory.create(
+        self.quant_line1 = self.obj_quant.with_context(inventory_mode=True).create(
             {
-                "name": "Starting inventory",
-                "line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product1.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 2.0,
-                            "location_id": self.test_loc.id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product2.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 4.0,
-                            "location_id": self.test_loc.id,
-                        },
-                    ),
-                ],
+                "product_id": self.product1.id,
+                "quantity": 2.0,
+                "location_id": self.test_loc.id,
             }
         )
-        starting_inv.action_force_done()
+        self.quant_line2 = self.obj_quant.with_context(inventory_mode=True).create(
+            {
+                "product_id": self.product2.id,
+                "quantity": 4.0,
+                "location_id": self.test_loc.id,
+            }
+        )
 
-    def test_compute_discrepancy(self):
-        """Tests if the discrepancy is correctly computed."""
-        inventory = self.obj_inventory.create(
-            {
-                "name": "Test Discrepancy Computation",
-                "location_ids": [(4, self.test_loc.id)],
-                "line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product1.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 3.0,
-                            "location_id": self.test_loc.id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product2.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 3.0,
-                            "location_id": self.test_loc.id,
-                        },
-                    ),
-                ],
-            }
-        )
-        self.assertEqual(
-            inventory.line_ids[0].discrepancy_qty,
-            1.0,
-            "Wrong Discrepancy qty computation.",
-        )
-        self.assertEqual(
-            inventory.line_ids[1].discrepancy_qty,
-            -1.0,
-            "Wrong Discrepancy qty computation.",
-        )
+        # starting_inv = self.obj_inventory.create(
+        #     {
+        #         "name": "Starting inventory",
+        #         "line_ids": [
+        #             (
+        #                 0,
+        #                 0,
+        #                 {
+        #                     "product_id": self.product1.id,
+        #                     "product_uom_id": self.env.ref("uom.product_uom_unit").id,
+        #                     "product_qty": 2.0,
+        #                     "location_id": self.test_loc.id,
+        #                 },
+        #             ),
+        #             (
+        #                 0,
+        #                 0,
+        #                 {
+        #                     "product_id": self.product2.id,
+        #                     "product_uom_id": self.env.ref("uom.product_uom_unit").id,
+        #                     "product_qty": 4.0,
+        #                     "location_id": self.test_loc.id,
+        #                 },
+        #             ),
+        #         ],
+        #     }
+        # )
+        # starting_inv.action_force_done()
 
     def test_discrepancy_validation(self):
         """Tests the new workflow"""
-        inventory = self.obj_inventory.create(
+        # quant_line1 is over discrepancy but quant_line2 is not
+        self.quant_line1.write(
             {
-                "name": "Test Forcing Validation Method",
-                "location_ids": [(4, self.test_loc.id)],
-                "line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product1.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 3.0,
-                            "location_id": self.test_loc.id,
-                        },
-                    )
-                ],
+                "inventory_quantity": 3.0,
+                "inventory_quantity_set": True,
             }
         )
-        self.assertEqual(
-            inventory.state, "draft", "Testing Inventory wrongly configurated"
+        self.quant_line1._compute_discrepancy_threshold()
+        self.assertEqual(self.quant_line1.discrepancy_threshold, 10)
+        self.assertEqual(self.quant_line1.discrepancy_percent, 50)
+        self.assertTrue(self.quant_line1.has_over_discrepancy)
+        self.quant_line2.inventory_quantity = 4.1
+        self.quant_line2._compute_discrepancy_threshold()
+        self.assertEqual(self.quant_line1.discrepancy_threshold, 10)
+        self.assertEqual(self.quant_line2.discrepancy_percent, 2.5)
+        self.assertFalse(self.quant_line2.has_over_discrepancy)
+        # Select all quants and try to apply the quantity adjustment
+        all_quants = self.quant_line1 | self.quant_line2
+        action_dic = all_quants.with_user(self.user).action_apply_inventory()
+        model_wiz = action_dic["res_model"]
+        wiz = (
+            self.env[model_wiz]
+            .with_user(self.user)
+            .with_context(
+                action_dic["context"],
+                active_model="stock.quant",
+                active_ids=all_quants.ids,
+            )
+            .create({})
         )
-        self.assertEqual(
-            inventory.line_ids.discrepancy_threshold,
-            0.1,
-            "Threshold wrongly computed in Inventory Line.",
-        )
-        inventory.with_user(self.user).action_start()
-        inventory.with_user(self.user).action_validate()
-        self.assertTrue(inventory.line_ids.has_over_discrepancy)
-        self.assertEqual(
-            inventory.over_discrepancy_line_count,
-            1,
-            "Computation of over-discrepancies failed.",
-        )
-        self.assertEqual(
-            inventory.state,
-            "pending",
-            "Inventory Adjustment not changing to Pending to " "Approve.",
-        )
-        inventory.with_user(self.manager).action_force_done()
-        self.assertEqual(
-            inventory.state,
-            "done",
-            "Forcing the validation of the inventory adjustment "
-            "not working properly.",
-        )
+        # Apply the wizard with a stock user will get an error
+        self.assertEqual(wiz.discrepancy_quant_ids, self.quant_line1)
+        with self.assertRaises(UserError):
+            wiz.button_apply()
+        # Apply the wizard with a stock manager will apply the adjustment
+        wiz.with_user(self.manager).button_apply()
+        self.assertEqual(self.quant_line1.quantity, 3)
+        self.assertEqual(self.quant_line2.quantity, 4.1)
 
     def test_discrepancy_validation_always(self):
         """Tests the new workflow"""
-        inventory = self.obj_inventory.create(
-            {
-                "name": "Test Forcing Validation Method",
-                "location_ids": [(4, self.test_loc.id)],
-                "line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product1.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 3.0,
-                            "location_id": self.test_loc.id,
-                        },
-                    )
-                ],
-            }
+        self.quant_line1.inventory_quantity = 3.0
+        self.quant_line1._compute_discrepancy_threshold()
+        self.assertEqual(self.quant_line1.discrepancy_threshold, 10)
+        self.assertEqual(self.quant_line1.discrepancy_percent, 50)
+        self.assertTrue(self.quant_line1.has_over_discrepancy)
+        self.quant_line2.inventory_quantity = 4.1
+        self.quant_line2._compute_discrepancy_threshold()
+        self.assertEqual(self.quant_line1.discrepancy_threshold, 10)
+        self.assertEqual(self.quant_line2.discrepancy_percent, 2.5)
+        self.assertFalse(self.quant_line2.has_over_discrepancy)
+        # Select all quants and try to apply the quantity adjustment
+        all_quants = self.quant_line1 | self.quant_line2
+        action_dic = all_quants.with_user(self.user).action_apply_inventory()
+        model_wiz = action_dic["res_model"]
+        wiz = (
+            self.env[model_wiz]
+            .with_user(self.user)
+            .with_context(
+                action_dic["context"],
+                active_model="stock.quant",
+                active_ids=all_quants.ids,
+            )
+            .create({})
         )
-        self.assertEqual(
-            inventory.state, "draft", "Testing Inventory wrongly configurated"
-        )
-        self.assertEqual(
-            inventory.line_ids.discrepancy_threshold,
-            0.1,
-            "Threshold wrongly computed in Inventory Line.",
-        )
-        inventory.with_user(self.user_2).action_start()
-        # User with no privileges can't validate a Inventory Adjustment.
+        # Apply the wizard with a stock user will get an error
+        self.assertEqual(wiz.discrepancy_quant_ids, self.quant_line1)
         with self.assertRaises(UserError):
-            inventory.with_user(self.no_user).action_validate()
-        inventory.with_user(self.user_2).action_validate()
-        self.assertEqual(
-            inventory.over_discrepancy_line_count,
-            1,
-            "Computation of over-discrepancies failed.",
-        )
-        self.assertEqual(
-            inventory.state,
-            "done",
-            "Stock Managers belongs to group Validate All inventory Adjustments",
-        )
+            wiz.button_apply()
+        # Apply the wizard with a stock manager will apply the adjustment
+        wiz.with_user(self.user_2).button_apply()
+        self.assertEqual(self.quant_line1.quantity, 3)
+        self.assertEqual(self.quant_line2.quantity, 4.1)
 
     def test_warehouse_threshold(self):
         """Tests the behaviour if the threshold is set on the WH."""
-        inventory = self.obj_inventory.create(
+        quant_other_loc = self.obj_quant.with_context(inventory_mode=True).create(
             {
-                "name": "Test Threshold Defined in WH",
-                "location_ids": [(4, self.test_wh.view_location_id.id)],
-                "line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product1.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 3.0,
-                            "location_id": self.test_wh.lot_stock_id.id,
-                        },
-                    )
-                ],
+                "product_id": self.product1.id,
+                "inventory_quantity": 3.0,
+                "location_id": self.test_wh.lot_stock_id.id,
             }
         )
-        self.assertEqual(
-            inventory.line_ids.discrepancy_threshold,
-            0.2,
-            "Threshold wrongly computed in Inventory Line.",
-        )
+        self.assertEqual(quant_other_loc.discrepancy_threshold, 20)
 
     def test_propagate_discrepancy_threshold(self):
         view_test_loc = self.obj_location.create(

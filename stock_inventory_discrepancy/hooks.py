@@ -2,19 +2,17 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 
-from odoo import _
+from odoo import _, fields
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare
 
-from odoo.addons.stock.models.stock_inventory import Inventory
+from odoo.addons.stock.models.stock_quant import StockQuant
 
 
 def post_load_hook():
-    def action_validate_discrepancy(self):
+    def _apply_inventory_discrepancy(self):
         """Override method to avoid inline group validation"""
-        if not self.exists():
-            return
-        self.ensure_one()
+        move_vals = []
         # START HOOK: - Allow specific group to validate inventory
         #             - Allow validate on pending status
         if (
@@ -29,51 +27,50 @@ def post_load_hook():
             raise UserError(
                 _("Only a stock manager can validate an inventory adjustment.")
             )
-        if self.state not in ["confirm", "pending"]:
-            raise UserError(
-                _(
-                    "You can't validate the inventory '%s', maybe this inventory "
-                    + "has been already validated or isn't ready."
-                )
-                % (self.name)
-            )
+        # Allow to write last_inventory_date on stock.location
+        self = self.sudo()
         # END HOOK
-        inventory_lines = self.line_ids.filtered(
-            lambda l: l.product_id.tracking in ["lot", "serial"]
-            and not l.prod_lot_id
-            and l.theoretical_qty != l.product_qty
+        for quant in self:
+            # Create and validate a move so that the quant matches its `inventory_quantity`.
+            if (
+                float_compare(
+                    quant.inventory_diff_quantity,
+                    0,
+                    precision_rounding=quant.product_uom_id.rounding,
+                )
+                > 0
+            ):
+                move_vals.append(
+                    quant._get_inventory_move_values(
+                        quant.inventory_diff_quantity,
+                        quant.product_id.with_company(
+                            quant.company_id
+                        ).property_stock_inventory,
+                        quant.location_id,
+                    )
+                )
+            else:
+                move_vals.append(
+                    quant._get_inventory_move_values(
+                        -quant.inventory_diff_quantity,
+                        quant.location_id,
+                        quant.product_id.with_company(
+                            quant.company_id
+                        ).property_stock_inventory,
+                        out=True,
+                    )
+                )
+        moves = (
+            self.env["stock.move"].with_context(inventory_mode=False).create(move_vals)
         )
-        lines = self.line_ids.filtered(
-            lambda l: float_compare(
-                l.product_qty, 1, precision_rounding=l.product_uom_id.rounding
-            )
-            > 0
-            and l.product_id.tracking == "serial"
-            and l.prod_lot_id
-        )
-        if inventory_lines and not lines:
-            wiz_lines = [
-                (0, 0, {"product_id": product.id, "tracking": product.tracking})
-                for product in inventory_lines.mapped("product_id")
-            ]
-            wiz = self.env["stock.track.confirmation"].create(
-                {"inventory_id": self.id, "tracking_line_ids": wiz_lines}
-            )
-            return {
-                "name": _("Tracked Products in Inventory Adjustment"),
-                "type": "ir.actions.act_window",
-                "view_mode": "form",
-                "views": [(False, "form")],
-                "res_model": "stock.track.confirmation",
-                "target": "new",
-                "res_id": wiz.id,
-            }
-        self._action_done()
-        self.line_ids._check_company()
-        self._check_company()
-        return True
+        moves._action_done()
+        self.location_id.write({"last_inventory_date": fields.Date.today()})
+        date_by_location = {
+            loc: loc._get_next_inventory_date() for loc in self.mapped("location_id")
+        }
+        for quant in self:
+            quant.inventory_date = date_by_location[quant.location_id]
+        self.write({"inventory_quantity": 0, "user_id": False})
+        self.write({"inventory_diff_quantity": 0})
 
-    if not hasattr(Inventory, "action_validate_original"):
-        Inventory.action_validate_original = Inventory.action_validate
-
-    Inventory._patch_method("action_validate", action_validate_discrepancy)
+    StockQuant._patch_method("_apply_inventory", _apply_inventory_discrepancy)
