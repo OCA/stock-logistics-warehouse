@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Tecnativa - Ernesto Tejeda
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- There must be the possibility to have an inventory users who cannot
+    apply an inventory adjustment -->
+    <record model="res.groups" id="stock.group_stock_user">
+        <field
+            name="implied_ids"
+            eval="[(3, ref('stock_inventory_discrepancy.group_stock_inventory_validation'))]"
+        />
+    </record>
+</odoo>

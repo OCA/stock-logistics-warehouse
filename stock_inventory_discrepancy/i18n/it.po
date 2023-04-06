@@ -1,0 +1,183 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_discrepancy
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Paolo Valier <paolo.valier@hotmail.it>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-18 04:05+0000\n"
+"PO-Revision-Date: 2017-02-18 04:05+0000\n"
+"Last-Translator: Paolo Valier <paolo.valier@hotmail.it>, 2017\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_qty
+msgid "Discrepancy"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_percent
+msgid "Discrepancy percent (%)"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_inventory_form
+msgid "Force Validation"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__has_over_discrepancy
+msgid "Has Over Discrepancy"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventario"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Riga d'Inventario"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_threshold
+msgid "Maximum Discrepancy Rate Threshold"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
+msgid ""
+"Maximum Discrepancy Rate allowed for any product when doing an Inventory "
+"Adjustment. Threshold defined in involved Location has preference."
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
+msgid ""
+"Maximum Discrepancy Rate allowed for any product when doing an Inventory "
+"Adjustment. Thresholds defined in Locations have preference over Warehouse's "
+"ones."
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory__over_discrepancy_line_count
+msgid "Number of Discrepancies Over Threshold"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: code:addons/stock_inventory_discrepancy/hooks.py:0
+#, python-format
+msgid "Only a stock manager can validate an inventory adjustment."
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#. openerp-web
+#: code:addons/stock_inventory_discrepancy/static/src/js/inventory_validate_button_controller.js:0
+#: model:ir.model.fields.selection,name:stock_inventory_discrepancy.selection__stock_inventory__state__pending
+#, python-format
+msgid "Pending to Approve"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
+msgid "Propagate Maximum Discrepancy Rate Threshold to child locations"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
+msgid "Propagate discrepancy threshold"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory__state
+msgid ""
+"States of the Inventory Adjustment:\n"
+"- Draft: Inventory not started.\n"
+"- In Progress: Inventory in execution.\n"
+"- Pending to Approve: Inventory have some discrepancies greater than the "
+"predefined threshold and it's waiting for the Control Manager approval.\n"
+"- Validated: Inventory Approved."
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory__state
+msgid "Status"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: code:addons/stock_inventory_discrepancy/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"The Qty Update is over the Discrepancy Threshold.\n"
+" Please, contact a user with rights to perform this action."
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_qty
+msgid ""
+"The difference between the actual qty counted and the theoretical quantity "
+"on hand."
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_percent
+msgid "The discrepancy expressed in percent with theoretical quantity as basis"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#. openerp-web
+#: code:addons/stock_inventory_discrepancy/static/src/js/inventory_validate_button_controller.js:0
+#, python-format
+msgid "The inventory needs to be approved"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_inventory_line__discrepancy_threshold
+msgid "Threshold (%)"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: code:addons/stock_inventory_discrepancy/hooks.py:0
+#, python-format
+msgid "Tracked Products in Inventory Adjustment"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation_always
+msgid "Validate All inventory Adjustments"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation
+msgid "Validate Inventory Adjustments Under Threshold"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Magazzino"
+
+#. module: stock_inventory_discrepancy
+#: code:addons/stock_inventory_discrepancy/hooks.py:0
+#, python-format
+msgid ""
+"You can't validate the inventory '%s', maybe this inventory has been already "
+"validated or isn't ready."
+msgstr ""
