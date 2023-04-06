@@ -2,7 +2,7 @@
 
 {
     "name": "Stock Adjustment Access Right",
-    "version": "16.0.1.0.2",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "summary": "Access Right of Inventory Adjustment",
     "author": "Jumeldi, PT.SAI, Odoo Community Association (OCA)",
