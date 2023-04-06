@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record model="ir.ui.view" id="saar_view_stock_quant_tree_inventory_editable">
         <field name="name">stock.quant.inventory.tree.editable</field>
         <field name="model">stock.quant</field>
-        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable" />
         <field name="arch" type="xml">
 
             <field name="available_quantity" position="attributes">
