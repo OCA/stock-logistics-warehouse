@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2023-04-11 09:41+0000\n"
+"PO-Revision-Date: 2023-04-11 13:26+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -345,7 +345,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__display_name
 msgid "Display Name"
-msgstr "Prikazni naziv"
+msgstr "Prikazani naziv"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__done
@@ -421,7 +421,7 @@ msgstr "ID"
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread
 msgid "If checked, new messages require your attention."
-msgstr "Označeno pomeni, da nova sporočila zahtevajo vašo pozornost."
+msgstr "Če označeno pomeni, da nova sporočila zahtevajo vašo pozornost."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
