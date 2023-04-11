@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-04-02 16:29+0000\n"
+"PO-Revision-Date: 2023-04-11 22:59+0000\n"
 "Last-Translator: Jan Prokop <jprokop@jackie.sk>\n"
 "Language-Team: none\n"
 "Language: sk\n"
@@ -92,7 +92,7 @@ msgstr "Skupiny inventárnych úprav"
 #. module: stock_inventory
 #: model:ir.ui.menu,name:stock_inventory.menu_action_inventory_tree
 msgid "Inventory Adjustments"
-msgstr "Invetárne úpravy"
+msgstr "Inventárne úpravy"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_move_ids
