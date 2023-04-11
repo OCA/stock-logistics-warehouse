@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2020-09-16 10:00+0000\n"
-"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
+"PO-Revision-Date: 2023-04-11 09:41+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
 "%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:20
@@ -299,7 +299,9 @@ msgstr "Če označeno, zahtevajo nova sporočila vašo pozornost."
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_error
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Če označeno, zahtevajo nova sporočila vašo pozornost."
+msgstr ""
+"Če označeno pomeni, da je pri nekaterih sporočilih prišlo do napake pri "
+"dostavi."
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
@@ -459,14 +461,14 @@ msgstr "Število napak"
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_needaction_counter
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr "Število sporočil, ki zahtevajo ukrep"
+msgstr "Število sporočil, kjer je potrebno ukrepati"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_has_error_counter
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_error_counter
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr "Število sporočil z napako pri dostavi"
+msgstr "Število sporočil z napako ob dostavi"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_unread_counter
@@ -945,7 +947,7 @@ msgstr "Neprebrana sporočila"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_unread_counter
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr "Števec neprebranih sporočil"
+msgstr "Št. neprebranih sporočil"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__product_uom_id
@@ -983,7 +985,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__website_message_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__website_message_ids
 msgid "Website Messages"
-msgstr "Spletna sporočila"
+msgstr "Sporočila spletne strani"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__website_message_ids
