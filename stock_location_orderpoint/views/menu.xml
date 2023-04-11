@@ -1,0 +1,15 @@
+<odoo>
+    <record id="action_stock_location_orderpoint" model="ir.actions.act_window">
+        <field name="name">Stock Location Orderpoint</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.location.orderpoint</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="menu_stock_location_orderpoint"
+        action="action_stock_location_orderpoint"
+        name="Stock Location Orderpoint"
+        parent="stock.menu_product_in_config_stock"
+        sequence="50"
+    />
+</odoo>

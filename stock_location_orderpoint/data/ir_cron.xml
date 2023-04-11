@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <record forcecreate="True" id="ir_cron_location_replenishment" model="ir.cron">
+            <field name="name">Procurement: run location replenishment</field>
+            <field name="model_id" ref="model_stock_location_orderpoint" />
+            <field name="state">code</field>
+            <field name="code">
+                model.run_cron_replenishment()
+            </field>
+            <field eval="False" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall" />
+        </record>
+</odoo>
