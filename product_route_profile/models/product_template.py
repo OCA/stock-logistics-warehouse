@@ -48,6 +48,7 @@ class ProductTemplate(models.Model):
     def _inverse_route_ids(self):
         profiles = self.env["route.profile"].search([])
         for rec in self:
+            # if not rec.route_profile_id:
             for profile in profiles:
                 if rec.route_ids == profile.route_ids:
                     rec.route_profile_id = profile
