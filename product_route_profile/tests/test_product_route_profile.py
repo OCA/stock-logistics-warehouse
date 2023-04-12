@@ -70,3 +70,14 @@ class TestProductRouteProfile(SavepointCase):
             self.product.with_company(self.env.company).route_ids,
             self.route_profile_1.route_ids,
         )
+
+    def test_3_product_creation_with_route_profile(self):
+        product = self.env["product.template"].create(
+            {
+                "name": "Template 2",
+                "company_id": False,
+                "route_profile_id": self.route_profile_1.id,
+            }
+        )
+
+        self.assertEqual(product.route_profile_id.id, self.route_profile_1.id)
