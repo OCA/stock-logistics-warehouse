@@ -43,6 +43,7 @@ addon | version | maintainers | summary
 [stock_lot_filter_available](stock_lot_filter_available/) | 15.0.1.0.0 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Allow to filter lots by available on stock
 [stock_move_location](stock_move_location/) | 15.0.1.1.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 15.0.1.0.1 |  | Add a MTS+MTO route
+[stock_orderpoint_generator](stock_orderpoint_generator/) | 15.0.1.0.0 |  | Mass configuration of stock order points
 [stock_orderpoint_move_link](stock_orderpoint_move_link/) | 15.0.1.0.0 |  | Link Reordering rules to stock moves
 [stock_orderpoint_purchase_link](stock_orderpoint_purchase_link/) | 15.0.1.0.0 |  | Link Reordering rules to purchase orders
 [stock_orderpoint_uom](stock_orderpoint_uom/) | 15.0.1.0.0 |  | Allows to create procurement orders in the UoM indicated in the orderpoint
