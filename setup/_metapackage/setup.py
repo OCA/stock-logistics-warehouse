@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo-addon-stock_lot_filter_available>=15.0dev,<15.1dev',
         'odoo-addon-stock_move_location>=15.0dev,<15.1dev',
         'odoo-addon-stock_mts_mto_rule>=15.0dev,<15.1dev',
+        'odoo-addon-stock_orderpoint_generator>=15.0dev,<15.1dev',
         'odoo-addon-stock_orderpoint_move_link>=15.0dev,<15.1dev',
         'odoo-addon-stock_orderpoint_purchase_link>=15.0dev,<15.1dev',
         'odoo-addon-stock_orderpoint_uom>=15.0dev,<15.1dev',
