@@ -125,7 +125,7 @@ class StockRequest(models.AbstractModel):
                 )
                 routes_by_warehouse[warehouse.id] |= route
         for record in self:
-            routes = route_obj
+            routes = route_obj.search([("stock_request_selectable", "=", True)])
             if record.product_id:
                 routes += record.product_id.mapped(
                     "route_ids"

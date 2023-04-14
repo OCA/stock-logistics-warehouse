@@ -15,3 +15,9 @@ Request / Manager'.
 ## Group Stock Request / Manager
 
 * Can fully manage all Stock Requests
+
+## Configure routes to be selected in Stock Requests
+
+* Go to Inventory > Settings > Routes
+* Select the routes that you want to be available in Stock Requests
+* Allow the route to be selecable in Stock Requests Lines

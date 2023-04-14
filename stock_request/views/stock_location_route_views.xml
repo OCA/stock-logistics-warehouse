@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_location_route_view_form" model="ir.ui.view">
+        <field name="name">stock.location.route.view.form</field>
+        <field name="model">stock.location.route</field>
+        <field name="inherit_id" ref="stock.stock_location_route_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='packaging_selectable']/.." position="after">
+                <label for="stock_request_selectable" string="Stock Request Lines" />
+                <div>
+                    <field name="stock_request_selectable" class="oe_inline" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

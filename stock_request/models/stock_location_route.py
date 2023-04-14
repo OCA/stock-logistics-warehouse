@@ -1,12 +1,17 @@
 # Copyright 2018 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class StockLocationRoute(models.Model):
     _inherit = "stock.location.route"
+
+    stock_request_selectable = fields.Boolean(
+        string="Selectable on Stock Requests",
+        help="If checked, this route will be selectable on the stock request form view.",
+    )
 
     @api.constrains("company_id")
     def _check_company_stock_request(self):

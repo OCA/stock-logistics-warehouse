@@ -12,3 +12,4 @@
 * Héctor Villarreal <hector.villarreal@forgeflow.com>
 * Kitti U. <kittiu@ecosoft.co.th>
 * Bernat Puig <bernat.puig@forgeflow.com>
+* Alan Ramos <alan.ramos@jarsa.com>
