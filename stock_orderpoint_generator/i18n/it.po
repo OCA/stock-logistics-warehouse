@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-31 02:38+0000\n"
-"PO-Revision-Date: 2023-03-30 14:33+0000\n"
+"PO-Revision-Date: 2023-04-15 12:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-9-0/language/it/)\n"
@@ -115,7 +115,7 @@ msgstr ""
 #. module: stock_orderpoint_generator
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_generator.orderpoint_generator_view
 msgid "Cancel"
-msgstr "Cancella"
+msgstr "Annulla"
 
 #. module: stock_orderpoint_generator
 #: code:addons/stock_orderpoint_generator/wizard/orderpoint_generator.py:0
