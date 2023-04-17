@@ -154,3 +154,13 @@ class TestLocationOrderpoint(TestLocationOrderpointCommon):
             replenish_move_new = self._get_replenishment_move(orderpoint)
             self.assertEqual(replenish_move, replenish_move_new)
             self._check_replenishment_move(replenish_move, move_qty * 2, orderpoint)
+
+    def test_orderpoint_count(self):
+        """
+        One orderpoint has already been created in demo data.
+        Check after each creation that count is increasing.
+        """
+        _, _ = self._create_orderpoint_complete("Stock2", trigger="cron")
+        self.assertEqual(1, self.location_dest.location_orderpoint_count)
+        _, _ = self._create_orderpoint_complete("Stock3", trigger="cron")
+        self.assertEqual(2, self.location_dest.location_orderpoint_count)

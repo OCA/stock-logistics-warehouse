@@ -14,6 +14,7 @@
         "data/queue_job_channel.xml",
         "data/queue_job_function.xml",
         "views/stock_location_orderpoint_views.xml",
+        "views/stock_location.xml",
         "views/menu.xml",
     ],
     "depends": [
