@@ -1,5 +1,5 @@
 # Copyright 2020-2021 Camptocamp SA (http://www.camptocamp.com)
-# Copyright 2022 Michael Tietz (MT Software) <mtietz@mt-software.de>
+# Copyright 2022-2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 from odoo import models
@@ -42,3 +42,20 @@ class StockLocation(models.Model):
             if self.parent_path.startswith(warehouse.view_location_id.parent_path):
                 return warehouse
         return warehouses.browse()
+
+    def _get_source_location_from_route(self, route, procure_method):
+        self.ensure_one()
+        route.ensure_one()
+        values = {
+            "route_ids": route,
+        }
+        current_location = self
+        while current_location:
+            rule = self.env["procurement.group"]._get_rule(
+                self.env["product.product"], current_location, values
+            )
+            if not rule:
+                return self.browse()
+            if rule.procure_method == procure_method:
+                return rule.location_src_id
+            current_location = rule.location_src_id
