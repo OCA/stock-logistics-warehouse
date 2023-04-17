@@ -13,7 +13,6 @@ class TestStockReserve(common.TransactionCase):
         self.warehouse = warehouse_form.save()
         product_form = Form(self.env["product.product"])
         product_form.name = "Test Product"
-        product_form.type = "product"
         product_form.detailed_type = "product"
         self.product = product_form.save()
         self.env["stock.quant"].create(
