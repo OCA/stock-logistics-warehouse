@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="stock_location_replenish_view" model="stock.location">
+        <field name="name">Replenishment Zone</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.stock_location_stock').location_id"
+        />
+    </record>
+    <record id="stock_location_replenish" model="stock.location">
+        <field name="name">Replenishment Stock</field>
+        <field name="location_id" ref="stock_location_replenish_view" />
+    </record>
+</odoo>
