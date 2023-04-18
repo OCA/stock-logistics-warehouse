@@ -5,7 +5,7 @@
 {
     "name": "Product Route Profile",
     "summary": "Add Route profile concept on product",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "category": "Warehouse",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Akretion, Odoo Community Association (OCA)",
