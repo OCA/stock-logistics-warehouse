@@ -46,6 +46,8 @@ class ProductTemplate(models.Model):
         ]
 
     def _inverse_route_ids(self):
+        if self._context.get("skip_inverse_route_ids"):
+            return
         profiles = self.env["route.profile"].search([])
         for rec in self:
             for profile in profiles:
@@ -61,3 +63,12 @@ class ProductTemplate(models.Model):
             "name": " / ".join(self.route_ids.mapped("name")),
             "route_ids": [(6, 0, self.route_ids.ids)],
         }
+
+    @api.model
+    def create(self, vals):
+        route_profile_id = vals.get("route_profile_id", False)
+        if route_profile_id:
+            route_profile = self.env["route.profile"].browse(route_profile_id)
+            vals["route_ids"] = [(6, 0, route_profile.route_ids.ids)]
+            self = self.with_context(skip_inverse_route_ids=True)
+        return super(ProductTemplate, self).create(vals)
