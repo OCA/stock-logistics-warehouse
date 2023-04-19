@@ -43,9 +43,7 @@ class StockMove(models.Model):
         locations_products = defaultdict(set)
         location_ids = set()
         product_obj = self.env["product.product"]
-        for move in self:
-            if not move.filtered_domain(domain):
-                continue
+        for move in self.filtered_domain(domain):
             location = getattr(move, location_field)
             locations_products[location].add(move.product_id.id)
             location_ids.add(location.id)

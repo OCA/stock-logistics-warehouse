@@ -90,6 +90,15 @@ class TestLocationOrderpointCommon(SavepointCase):
         move._action_confirm()
         return move
 
+    def _create_scrap_move(self, qty, location):
+        scrap = self.env["stock.location"].search(
+            [("scrap_location", "=", True)], limit=1
+        )
+        move = self._create_move("Scrap", qty, location, scrap)
+        move.move_line_ids.write({"qty_done": qty})
+        move._action_done()
+        return move
+
     def _create_incoming_move(self, qty, location):
         move = self._create_move(
             "Receive", qty, self.env.ref("stock.stock_location_suppliers"), location

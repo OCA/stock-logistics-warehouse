@@ -155,6 +155,33 @@ class TestLocationOrderpoint(TestLocationOrderpointCommon):
             self.assertEqual(replenish_move, replenish_move_new)
             self._check_replenishment_move(replenish_move, move_qty * 2, orderpoint)
 
+    def test_auto_no_replenishment(self):
+        """
+        Create a stock move that should not create a replenishment:
+          - A move from a new stock location 'WH/Stock 2' to Scrap
+        """
+        job_func = self.env["stock.location.orderpoint"].run_auto_replenishment
+        with trap_jobs() as trap:
+            new_location = self.env["stock.location"].create(
+                {
+                    "name": "Other Stock",
+                    "location_id": self.location_dest.location_id.id,
+                }
+            )
+            _, _ = self._create_orderpoint_complete("Stock2", trigger="auto")
+            self.location_dest = new_location
+            self._create_quants(self.product, self.location_dest, 10.0)
+            move = self._create_scrap_move(10.0, self.location_dest)
+            trap.assert_jobs_count(0, only=job_func)
+            trap.perform_enqueued_jobs()
+            replenish_move = self.env["stock.move"].search(
+                [
+                    ("product_id", "=", move.product_id.id),
+                    ("location_dest_id", "=", move.location_id.id),
+                ]
+            )
+            self.assertFalse(replenish_move)
+
     def test_orderpoint_count(self):
         """
         One orderpoint has already been created in demo data.
