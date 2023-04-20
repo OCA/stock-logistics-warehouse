@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_route_form_view">
+        <field name="name">stock.route.form (in stock_route_mto)</field>
+        <field name="model">stock.route</field>
+        <field name="inherit_id" ref="stock.stock_location_route_form_view" />
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="is_mto" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_route_search_view">
+        <field name="name">stock.route.search (in stock_route_mto)</field>
+        <field name="model">stock.route</field>
+        <field name="inherit_id" ref="stock.stock_location_route_view_search" />
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <filter name="is_mto" string="MTO" domain="[('is_mto', '=', True)]" />
+            </filter>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_route_tree_view">
+        <field name="name">stock.route.tree (in stock_route_mto)</field>
+        <field name="model">stock.route</field>
+        <field name="inherit_id" ref="stock.stock_location_route_tree" />
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="is_mto" string="MTO" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
