@@ -1,10 +1,11 @@
 # Copyright 2023 ACSONE SA/NV
+# Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestStockPickingVolume(TransactionCase):
+class TestStockPickingVolume(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -19,17 +20,18 @@ class TestStockPickingVolume(TransactionCase):
         )
         cls.loc_stock = cls.wh.lot_stock_id
         cls.loc_customer = cls.env.ref("stock.stock_location_customers")
-        cls.product_template = cls.env["product.template"].create(
+        cls.product = cls.env["product.product"].create(
             {
                 "name": "Unittest P1",
                 "product_length": 10.0,
                 "product_width": 5.0,
                 "product_height": 3.0,
                 "uom_id": cls.env.ref("uom.product_uom_unit").id,
+                "dimensional_uom_id": cls.env.ref("uom.product_uom_meter").id,
                 "type": "product",
             }
         )
-        cls.product = cls.product_template.product_variant_ids
+        cls.product.onchange_calculate_volume()
         cls.picking_type_out = cls.env.ref("stock.picking_type_out")
         cls.picking = cls.env["stock.picking"].create(
             {
@@ -37,13 +39,14 @@ class TestStockPickingVolume(TransactionCase):
                 "location_id": cls.loc_stock.id,
                 "location_dest_id": cls.loc_customer.id,
                 "partner_id": cls.env.ref("base.res_partner_1").id,
-                "move_ids": [
+                "move_lines": [
                     (
                         0,
                         0,
                         {
                             "name": cls.product.name,
                             "product_id": cls.product.id,
+                            "product_uom": cls.product.uom_id.id,
                             "product_uom_qty": 5.0,
                             "location_id": cls.loc_stock.id,
                             "location_dest_id": cls.loc_customer.id,
@@ -82,6 +85,7 @@ class TestStockPickingVolume(TransactionCase):
         self._set_product_qty(self.product, 1)
         self.picking.action_confirm()
         self.picking.action_assign()
+        self.picking.invalidate_cache()
         self.assertEqual(self.picking.volume, 150)
 
     def test_picking_available_volume(self):
@@ -98,6 +102,7 @@ class TestStockPickingVolume(TransactionCase):
         self._set_product_qty(self.product, 5)
         self.picking.action_confirm()
         self.picking.action_assign()
+        self.picking.invalidate_cache()
         self.assertEqual(self.picking.volume, 750)
 
     def test_picking_done_volume(self):
