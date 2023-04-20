@@ -1,4 +1,5 @@
 # Copyright 2023 ACSONE SA/NV
+# Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -16,7 +17,7 @@ class StockMove(models.Model):
         string="Volume unit of measure label", compute="_compute_volume_uom_name"
     )
 
-    @api.depends("product_id", "product_uom_qty", "state", "move_line_ids.reserved_qty")
+    @api.depends("product_id", "product_uom_qty", "state", "move_line_ids.product_qty")
     def _compute_volume(self):
         for move in self:
             qty = move.product_uom_qty

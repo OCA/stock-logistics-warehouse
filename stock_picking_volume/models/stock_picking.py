@@ -1,4 +1,5 @@
 # Copyright 2023 ACSONE SA/NV
+# Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -15,10 +16,10 @@ class StockPicking(models.Model):
         string="Volume unit of measure label", compute="_compute_volume_uom_name"
     )
 
-    @api.depends("move_ids", "move_ids.volume")
+    @api.depends("move_lines", "move_lines.volume")
     def _compute_volume(self):
         for picking in self:
-            new_volume = sum(picking.move_ids.mapped("volume"))
+            new_volume = sum(picking.move_lines.mapped("volume"))
             if picking.volume != new_volume:
                 picking.volume = new_volume
 
