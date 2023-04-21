@@ -30,14 +30,12 @@ class SaleOrder(models.Model):
     has_stock_reservation = fields.Boolean(
         compute="_compute_stock_reservation",
         readonly=True,
-        multi="stock_reservation",
         store=True,
         string="Has Stock Reservations",
     )
     is_stock_reservable = fields.Boolean(
         compute="_compute_stock_reservation",
         readonly=True,
-        multi="stock_reservation",
         store=True,
         string="Can Have Stock Reservations",
     )
@@ -70,7 +68,7 @@ class SaleOrder(models.Model):
             for line in vals.get("order_line", []):
                 if line[0] == 1 and list(set(line[2].keys()).intersection(_LINE_KEYS)):
                     body += order.get_message(dict_old_lines.get(line[1]), line[2])
-            if body != "":
+            if body:
                 order.message_post(body=body)
         return res
 
@@ -102,9 +100,9 @@ class SaleOrder(models.Model):
                 raise UserError(
                     _(
                         "Sale Order %s has some reserved lines.\n"
-                        "Please unreserve this lines before delete the order."
+                        "Please unreserve this lines before delete the order.",
+                        order.name,
                     )
-                    % (order.name)
                 )
         return super().unlink()
 
@@ -237,10 +235,12 @@ class SaleOrderLine(models.Model):
             if line.reservation_ids:
                 raise UserError(
                     _(
-                        'Sale order line "[%s] %s" has a related reservation.\n'
+                        'Sale order line "[%(order_name)s] %(line_name)s" '
+                        "has a related reservation.\n"
                         "Please unreserve this line before "
-                        "delete the line"
+                        "delete the line",
+                        order_name=line.order_id.name,
+                        line_name=line.name,
                     )
-                    % (line.order_id.name, line.name)
                 )
         return super().unlink()

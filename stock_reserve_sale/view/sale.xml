@@ -47,14 +47,14 @@
                 <button
                     name="%(action_sale_stock_reserve)d"
                     type="action"
-                    string="Reserve Stock"
+                    title="Reserve Stock"
                     icon="fa-lock"
                     attrs="{'invisible': [('is_stock_reservable', '=', False)]}"
                 />
                 <button
                     name="release_stock_reservation"
                     type="object"
-                    string="Release Reservation"
+                    title="Release Reservation"
                     icon="fa-undo"
                     attrs="{'invisible': [('reservation_ids', '=', [])]}"
                 />
@@ -66,7 +66,7 @@
                 <div class="text-right">
                     <button
                         name="release_all_stock_reservation"
-                        string="Cancell all"
+                        string="Cancel all"
                         type="object"
                         attrs="{'invisible': [('has_stock_reservation', '=', False)]}"
                     />

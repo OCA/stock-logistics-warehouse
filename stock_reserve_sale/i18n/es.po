@@ -50,7 +50,7 @@ msgstr "Cancelar"
 
 #. module: stock_reserve_sale
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
-msgid "Cancell all"
+msgid "Cancel all"
 msgstr "Cancelar todo"
 
 #. module: stock_reserve_sale

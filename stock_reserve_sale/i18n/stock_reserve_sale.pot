@@ -62,7 +62,7 @@ msgstr ""
 
 #. module: stock_reserve_sale
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
-msgid "Cancell all"
+msgid "Cancel all"
 msgstr ""
 
 #. module: stock_reserve_sale
@@ -193,7 +193,7 @@ msgstr ""
 #: code:addons/stock_reserve_sale/model/sale.py:0
 #, python-format
 msgid ""
-"Sale order line \"[%s] %s\" has a related reservation.\n"
+"Sale order line \"[%(order_name)s] %(line_name)s\" has a related reservation.\n"
 "Please unreserve this line before delete the line"
 msgstr ""
 
