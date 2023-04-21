@@ -1,0 +1,1 @@
+odoo-addon-stock_reserve @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1693/head#subdirectory=setup/stock_reserve
