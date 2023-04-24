@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo-addon-stock_packaging_calculator>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_commercial_partner>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_volume>=16.0dev,<16.1dev',
+        'odoo-addon-stock_reserve>=16.0dev,<16.1dev',
         'odoo-addon-stock_route_mto>=16.0dev,<16.1dev',
         'odoo-addon-stock_search_supplierinfo_code>=16.0dev,<16.1dev',
         'odoo-addon-stock_storage_category_capacity_name>=16.0dev,<16.1dev',
