@@ -16,6 +16,7 @@ msgstr ""
 #. module: stock_move_auto_assign_auto_release
 #: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_stock_move__is_auto_release_allowed
 #: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_stock_picking__is_auto_release_allowed
+#: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_stock_reservation__is_auto_release_allowed
 msgid "Is Auto Release Allowed"
 msgstr ""
 
