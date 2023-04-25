@@ -43,6 +43,8 @@ setuptools.setup(
         'odoo14-addon-stock_location_empty',
         'odoo14-addon-stock_location_last_inventory_date',
         'odoo14-addon-stock_location_lockdown',
+        'odoo14-addon-stock_location_orderpoint',
+        'odoo14-addon-stock_location_orderpoint_source_relocate',
         'odoo14-addon-stock_location_position',
         'odoo14-addon-stock_location_route_description',
         'odoo14-addon-stock_location_tray',
