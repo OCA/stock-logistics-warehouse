@@ -56,8 +56,8 @@ addon | version | maintainers | summary
 [stock_location_empty](stock_location_empty/) | 14.0.1.0.0 |  | Adds a filter for empty stock location
 [stock_location_last_inventory_date](stock_location_last_inventory_date/) | 14.0.1.0.0 |  | Show the last inventory date for a leaf location
 [stock_location_lockdown](stock_location_lockdown/) | 14.0.1.0.0 |  | Prevent to add stock on locked locations
-[stock_location_orderpoint](stock_location_orderpoint/) | 14.0.1.0.0 | [![mt-software-de](https://github.com/mt-software-de.png?size=30px)](https://github.com/mt-software-de) | Declare orderpoint on a location allowing to replenish any product with the same criteria.
-[stock_location_orderpoint_source_relocate](stock_location_orderpoint_source_relocate/) | 14.0.1.0.0 | [![mt-software-de](https://github.com/mt-software-de.png?size=30px)](https://github.com/mt-software-de) | Run an auto location orderpoint replenishment also after a move gets relocated by Stock Move Source Relocate
+[stock_location_orderpoint](stock_location_orderpoint/) | 14.0.1.0.1 | [![mt-software-de](https://github.com/mt-software-de.png?size=30px)](https://github.com/mt-software-de) | Declare orderpoint on a location allowing to replenish any product with the same criteria.
+[stock_location_orderpoint_source_relocate](stock_location_orderpoint_source_relocate/) | 14.0.1.0.1 | [![mt-software-de](https://github.com/mt-software-de.png?size=30px)](https://github.com/mt-software-de) | Run an auto location orderpoint replenishment also after a move gets relocated by Stock Move Source Relocate
 [stock_location_position](stock_location_position/) | 14.0.1.0.0 |  | Add coordinate attributes on stock location.
 [stock_location_route_description](stock_location_route_description/) | 14.0.1.0.0 |  | Add description field on stock routes.
 [stock_location_tray](stock_location_tray/) | 14.0.1.1.2 |  | Organize a location as a matrix of cells
@@ -66,7 +66,7 @@ addon | version | maintainers | summary
 [stock_measuring_device](stock_measuring_device/) | 14.0.1.0.1 | [![gurneyalex](https://github.com/gurneyalex.png?size=30px)](https://github.com/gurneyalex) | Implement a common interface for measuring and weighing devices
 [stock_measuring_device_zippcube](stock_measuring_device_zippcube/) | 14.0.1.0.1 | [![gurneyalex](https://github.com/gurneyalex.png?size=30px)](https://github.com/gurneyalex) | Implement interface with Bosche Zippcube devicesfor packaging measurement
 [stock_move_auto_assign](stock_move_auto_assign/) | 14.0.1.2.0 |  | Try to reserve moves when goods enter in a location
-[stock_move_auto_assign_auto_release](stock_move_auto_assign_auto_release/) | 14.0.1.1.0 |  | Auto release moves after auto assign
+[stock_move_auto_assign_auto_release](stock_move_auto_assign_auto_release/) | 14.0.1.1.1 |  | Auto release moves after auto assign
 [stock_move_common_dest](stock_move_common_dest/) | 14.0.1.0.0 |  | Adds field for common destination moves
 [stock_move_location](stock_move_location/) | 14.0.1.4.1 |  | This module allows to move all stock in a stock location to an other one.
 [stock_mts_mto_mrp_rule](stock_mts_mto_mrp_rule/) | 14.0.1.0.1 | [![geomer198](https://github.com/geomer198.png?size=30px)](https://github.com/geomer198) [![CetmixGitDrone](https://github.com/CetmixGitDrone.png?size=30px)](https://github.com/CetmixGitDrone) | Stock MTS+MTO MRP Rule
