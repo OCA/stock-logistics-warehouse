@@ -28,14 +28,14 @@
                     type="action"
                     string="Reserve Stock"
                     attrs="{'invisible': ['|', ('reservation_ids', '!=', []),
-                                                ('state', '!=', 'draft')]}"
+                                                ('state', 'not in', ['draft', 'sent'])]}"
                 />
                 <button
                     name="release_stock_reservation"
                     type="object"
                     string="Release Reservation"
                     attrs="{'invisible': ['|', ('reservation_ids', '=', []),
-                                                ('state', '!=', 'draft')]}"
+                                                ('state', 'not in', ['draft', 'sent'])]}"
                 />
             </xpath>
             <xpath

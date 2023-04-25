@@ -1,7 +1,8 @@
 # Copyright 2013 Camptocamp SA - Guewen Baconnier
+# Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
-from odoo.exceptions import UserError, except_orm
+from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
 _LINE_KEYS = ["product_id", "product_uom_qty"]
@@ -30,14 +31,12 @@ class SaleOrder(models.Model):
     has_stock_reservation = fields.Boolean(
         compute="_compute_stock_reservation",
         readonly=True,
-        multi="stock_reservation",
         store=True,
         string="Has Stock Reservations",
     )
     is_stock_reservable = fields.Boolean(
         compute="_compute_stock_reservation",
         readonly=True,
-        multi="stock_reservation",
         store=True,
         string="Can Have Stock Reservations",
     )
@@ -47,6 +46,14 @@ class SaleOrder(models.Model):
         lines = self.env["sale.order.line"].browse(line_ids)
         lines.release_stock_reservation()
         return True
+
+    def action_reserve_all_lines(self):
+        RESERVE = self.env["sale.stock.reserve"]
+        for rec in self.filtered(lambda s: s.is_stock_reservable):
+            reserve = RESERVE.with_context(
+                active_model=self._name, active_id=rec.id, active_ids=rec.ids
+            ).create({})
+            reserve.stock_reserve(rec.order_line.ids)
 
     def action_confirm(self):
         self.release_all_stock_reservation()
@@ -199,8 +206,7 @@ class SaleOrderLine(models.Model):
             for line in self:
                 if not line.reservation_ids:
                     continue
-                raise except_orm(
-                    _("Error"),
+                raise UserError(
                     _(
                         "You cannot change the product or unit of measure "
                         "of lines with a stock reservation. "
@@ -214,8 +220,7 @@ class SaleOrderLine(models.Model):
                 if not line.reservation_ids:
                     continue
                 if len(line.reservation_ids) > 1:
-                    raise except_orm(
-                        _("Error"),
+                    raise UserError(
                         _(
                             "Several stock reservations are linked with the "
                             "line. Impossible to adjust their quantity. "

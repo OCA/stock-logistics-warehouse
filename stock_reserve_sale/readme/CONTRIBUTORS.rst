@@ -6,3 +6,4 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Carlos Roca
+* Michael Tietz (MT Software) <mtietz@mt-software.de>
