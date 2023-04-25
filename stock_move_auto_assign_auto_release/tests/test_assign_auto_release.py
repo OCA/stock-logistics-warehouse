@@ -100,12 +100,13 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         * 1 to assign other moves
         * 1 to release the other moves (This one depends on the first one)
         """
+        job_func = self.product1.moves_auto_assign
         with trap_jobs() as trap:
             self._receive_product(self.product1, 100)
             # .with_delay() has been called a first one to auto assigned
-            trap.assert_jobs_count(2)
+            trap.assert_jobs_count(1, only=job_func)
             trap.assert_enqueued_job(
-                self.product1.moves_auto_assign,
+                job_func,
                 args=(self.loc_bin1,),
                 kwargs={},
                 properties=dict(

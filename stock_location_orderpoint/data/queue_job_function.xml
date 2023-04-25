@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record
+        id="job_function_stock_location_orderpoint_moves_auto_replenish"
+        model="queue.job.function"
+    >
+        <field name="model_id" ref="model_stock_location_orderpoint" />
+        <field name="method">moves_auto_replenish</field>
+        <field
+            name="channel_id"
+            ref="channel_stock_location_orderpoint_auto_replenishment"
+        />
+        <field name="retry_pattern" eval="{1: 1, 5: 5, 10: 10, 15: 30}" />
+    </record>
+</odoo>

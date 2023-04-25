@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="stock_picking_type_replenish" model="stock.picking.type">
+        <field name="name">Replenishments</field>
+        <field name="code">internal</field>
+        <field name="default_location_dest_id" ref="stock.stock_location_stock" />
+        <field
+            name="default_location_src_id"
+            ref="stock_location_orderpoint.stock_location_replenish"
+        />
+        <field name="warehouse_id" ref="stock.warehouse0" />
+        <field name="sequence_code">SRE</field>
+    </record>
+</odoo>

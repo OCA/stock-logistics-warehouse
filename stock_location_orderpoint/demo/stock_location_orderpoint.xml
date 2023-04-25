@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="stock_location_orderpoint_1" model="stock.location.orderpoint">
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="route_id" ref="stock_route_replenish" />
+        <field name="trigger">auto</field>
+        <field name="replenish_method">fill_up</field>
+    </record>
+</odoo>
