@@ -1,0 +1,266 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_location_orderpoint
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__active
+msgid "Active"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields.selection,name:stock_location_orderpoint.selection__stock_location_orderpoint__trigger__auto
+msgid "Auto/realtime"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,help:stock_location_orderpoint.field_stock_location_orderpoint__trigger
+msgid ""
+"Auto/realtime orderpoints are triggered on new moves\n"
+"Manual orderpoints are triggered via the orderpoints' view\n"
+"Scheduled orderpoints are triggered via scheduled actions per location"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,help:stock_location_orderpoint.field_stock_location_orderpoint__replenish_method
+msgid ""
+"Defines how the qty to replenish gets computed\n"
+"Fill up = The replenishment will be triggered when a move is waiting availability and forecast quantity is negative at the location (i.e. min=0). The replenished quantity will bring back the forecast quantity to 0 (i.e. max=0) but will be limited to what is available at the source location to plan only reservable replenishment moves"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__display_name
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_rule__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields.selection,name:stock_location_orderpoint.selection__stock_location_orderpoint__replenish_method__fill_up
+msgid "Fill up"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__id
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_rule__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model,name:stock_location_orderpoint.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint____last_update
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_rule____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location__location_orderpoint_count
+msgid "Location Orderpoint Count"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location__location_orderpoint_ids
+msgid "Location Orderpoints"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,help:stock_location_orderpoint.field_stock_location__location_orderpoint_ids
+msgid ""
+"Location Orderpoints. Rules that allows this location to be replenished."
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__location_src_id
+msgid "Location Src"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields.selection,name:stock_location_orderpoint.selection__stock_location_orderpoint__trigger__manual
+msgid "Manual"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,help:stock_location_orderpoint.field_stock_location_orderpoint__group_id
+msgid ""
+"Moves created through this orderpoint will be put in this procurement group."
+" If none is given, the moves generated by stock rules will be grouped into "
+"one big picking."
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields.selection,name:stock_location_orderpoint.selection__stock_location_orderpoint__priority__0
+msgid "Normal"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model_terms:ir.ui.view,arch_db:stock_location_orderpoint.view_location_form
+msgid "Orderpoints"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__route_id
+msgid "Preferred Route"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__priority
+msgid "Priority"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__group_id
+msgid "Procurement Group"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.actions.server,name:stock_location_orderpoint.ir_cron_location_replenishment_ir_actions_server
+#: model:ir.cron,cron_name:stock_location_orderpoint.ir_cron_location_replenishment
+#: model:ir.cron,name:stock_location_orderpoint.ir_cron_location_replenishment
+msgid "Procurement: run location replenishment"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__replenish_method
+msgid "Replenish Method"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:stock.location.route,name:stock_location_orderpoint.stock_route_replenish
+msgid "Replenishment Route"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:stock.rule,name:stock_location_orderpoint.stock_rule_replenish
+msgid "Replenishment Rule"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:stock.picking.type,name:stock_location_orderpoint.stock_picking_type_replenish
+msgid "Replenishments"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model_terms:ir.ui.view,arch_db:stock_location_orderpoint.stock_location_orderpoint_form
+msgid "Run replenishment"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields.selection,name:stock_location_orderpoint.selection__stock_location_orderpoint__trigger__cron
+msgid "Scheduled"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model_terms:ir.ui.view,arch_db:stock_location_orderpoint.view_stock_location_orderpoint_tree_editable
+msgid "Stock Location Oderpoints"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.actions.act_window,name:stock_location_orderpoint.action_stock_location_orderpoint
+#: model:ir.ui.menu,name:stock_location_orderpoint.menu_stock_location_orderpoint
+msgid "Stock Location Orderpoint"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model,name:stock_location_orderpoint.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model,name:stock_location_orderpoint.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model,name:stock_location_orderpoint.model_stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_move__location_orderpoint_id
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_reservation__location_orderpoint_id
+msgid "Stock location orderpoint"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.constraint,message:stock_location_orderpoint.constraint_stock_location_orderpoint_location_route_unique
+msgid "The combination of Company, Location and Route must be unique"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: code:addons/stock_location_orderpoint/models/stock_location_orderpoint.py:0
+#, python-format
+msgid ""
+"The selected route {} must contain a rule where the Destination Location is "
+"{}"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields,field_description:stock_location_orderpoint.field_stock_location_orderpoint__trigger
+msgid "Trigger"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: code:addons/stock_location_orderpoint/models/stock_move.py:0
+#, python-format
+msgid "Try to replenish quantities for location {} and product {}"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: model:ir.model.fields.selection,name:stock_location_orderpoint.selection__stock_location_orderpoint__priority__1
+msgid "Urgent"
+msgstr ""
