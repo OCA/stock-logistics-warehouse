@@ -452,6 +452,11 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__lead_days_date
+msgid "Lead Days Date"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__location_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__location_id
@@ -800,6 +805,11 @@ msgstr "Ruta"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_ids
 msgid "Routes"
 msgstr "Rutas"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request__rule_ids
+msgid "Rules used"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_sms_error
