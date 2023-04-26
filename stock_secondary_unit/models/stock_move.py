@@ -13,7 +13,11 @@ class StockMove(models.Model):
     }
 
     product_uom_qty = fields.Float(
-        store=True, readonly=False, compute="_compute_product_uom_qty", copy=True
+        store=True,
+        readonly=False,
+        compute="_compute_product_uom_qty",
+        copy=True,
+        precompute=True,
     )
 
     @api.depends("secondary_uom_qty", "secondary_uom_id")
@@ -23,11 +27,6 @@ class StockMove(models.Model):
     @api.onchange("product_uom")
     def onchange_product_uom_for_secondary(self):
         self._onchange_helper_product_uom_for_secondary()
-
-    def _merge_moves_fields(self):
-        res = super()._merge_moves_fields()
-        res["secondary_uom_qty"] = sum(self.mapped("secondary_uom_qty"))
-        return res
 
     @api.model
     def _prepare_merge_moves_distinct_fields(self):
@@ -42,23 +41,29 @@ class StockMoveLine(models.Model):
     _name = "stock.move.line"
     _secondary_unit_fields = {"qty_field": "qty_done", "uom_field": "product_uom_id"}
 
-    qty_done = fields.Float(store=True, readonly=False, compute="_compute_qty_done")
+    qty_done = fields.Float(
+        store=True, readonly=False, compute="_compute_qty_done", precompute=True
+    )
 
-    @api.model
-    def create(self, vals):
-        move = self.env["stock.move"].browse(vals.get("move_id", False))
-        if move.secondary_uom_id:
-            uom = self.env["uom.uom"].browse(vals["product_uom_id"])
-            factor = move.secondary_uom_id.factor * uom.factor
-            move_line_qty = vals.get("product_uom_qty", vals.get("qty_done", 0.0))
-            qty = float_round(
-                move_line_qty / (factor or 1.0),
-                precision_rounding=move.secondary_uom_id.uom_id.rounding,
-            )
-            vals.update(
-                {"secondary_uom_qty": qty, "secondary_uom_id": move.secondary_uom_id.id}
-            )
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            move = self.env["stock.move"].browse(vals.get("move_id", False))
+            if move.secondary_uom_id:
+                uom = self.env["uom.uom"].browse(vals["product_uom_id"])
+                factor = move.secondary_uom_id.factor * uom.factor
+                move_line_qty = vals.get("product_uom_qty", vals.get("qty_done", 0.0))
+                qty = float_round(
+                    move_line_qty / (factor or 1.0),
+                    precision_rounding=move.secondary_uom_id.uom_id.rounding,
+                )
+                vals.update(
+                    {
+                        "secondary_uom_qty": qty,
+                        "secondary_uom_id": move.secondary_uom_id.id,
+                    }
+                )
+        return super().create(vals_list)
 
     @api.depends("secondary_uom_id", "secondary_uom_qty")
     def _compute_qty_done(self):
