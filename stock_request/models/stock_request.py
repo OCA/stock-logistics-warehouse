@@ -1,6 +1,10 @@
 # Copyright 2017-2020 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from datetime import datetime, time
+
+from dateutil import relativedelta
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_compare
@@ -125,10 +129,42 @@ class StockRequest(models.Model):
     )
     company_id = fields.Many2one(states={"draft": [("readonly", False)]}, readonly=True)
     route_id = fields.Many2one(states={"draft": [("readonly", False)]}, readonly=True)
-
+    rule_ids = fields.Many2many(
+        "stock.rule", string="Rules used", compute="_compute_rules"
+    )
+    lead_days_date = fields.Date(compute="_compute_lead_days")
     _sql_constraints = [
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")
     ]
+
+    @api.depends(
+        "route_id",
+        "product_id",
+        "location_id",
+        "company_id",
+        "warehouse_id",
+        "product_id.route_ids",
+    )
+    def _compute_rules(self):
+        for request in self:
+            if not request.product_id or not request.location_id:
+                request.rule_ids = False
+                continue
+            request.rule_ids = request.product_id._get_rules_from_location(
+                request.location_id, route_ids=request.route_id
+            )
+
+    @api.depends("rule_ids", "product_id.seller_ids", "product_id.seller_ids.delay")
+    def _compute_lead_days(self):
+        for request in self.with_context(bypass_delay_description=True):
+            if not request.product_id or not request.location_id:
+                request.lead_days_date = False
+                continue
+            lead_days, dummy = request.rule_ids._get_lead_days(request.product_id)
+            lead_days_date = fields.Date.today() + relativedelta.relativedelta(
+                days=lead_days
+            )
+            request.lead_days_date = lead_days_date
 
     @api.depends("allocation_ids", "allocation_ids.stock_move_id")
     def _compute_move_ids(self):
@@ -291,7 +327,9 @@ class StockRequest(models.Model):
         move/po creation.
         """
         return {
-            "date_planned": self.expected_date,
+            "date_planned": max(
+                [self.expected_date, datetime.combine(self.lead_days_date, time.min)]
+            ),
             "warehouse_id": self.warehouse_id,
             "stock_request_allocation_ids": self.id,
             "group_id": group_id or self.procurement_group_id.id or False,
