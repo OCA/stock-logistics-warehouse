@@ -69,7 +69,7 @@ class StockMove(models.Model):
 
     def _action_cancel(self):
         res = super()._action_cancel()
-        self.mapped("allocation_ids.stock_request_id").check_done()
+        self.mapped("allocation_ids.stock_request_id").check_cancel()
         return res
 
     def _action_done(self, cancel_backorder=False):
