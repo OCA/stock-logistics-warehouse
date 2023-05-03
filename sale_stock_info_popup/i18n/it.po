@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-04-07 16:33+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-05-03 15:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr "Qtà Libera Oggi"
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,field_description:sale_stock_info_popup.field_product_product__free_qty
 msgid "Free To Use Quantity "
-msgstr "Quantità libera da usare "
+msgstr "Quantità gratuita "
 
 #. module: sale_stock_info_popup
 #: code:addons/sale_stock_info_popup/models/product.py:48
