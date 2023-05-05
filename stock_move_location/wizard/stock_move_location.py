@@ -1,6 +1,7 @@
 # Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
 # Copyright 2018 Camptocamp SA
-# Copyright 2019 Sergio Teruel - Tecnativa <sergio.teruel@tecnativa.com>
+# Copyright 2019 Tecnativa - Sergio Teruel
+# Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from itertools import groupby
@@ -255,11 +256,13 @@ class StockMoveLocationWizard(models.TransientModel):
         self.picking_id = picking
         return self._get_picking_action(picking.id)
 
-    def _get_picking_action(self, pickinig_id):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
-        form_view = self.env.ref("stock.view_picking_form").id
+    def _get_picking_action(self, picking_id):
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_picking_tree_all"
+        )
+        view_id = self.env.ref("stock.view_picking_form").id
         action.update(
-            {"view_mode": "form", "views": [(form_view, "form")], "res_id": pickinig_id}
+            {"view_mode": "form", "views": [(view_id, "form")], "res_id": picking_id}
         )
         return action
 
