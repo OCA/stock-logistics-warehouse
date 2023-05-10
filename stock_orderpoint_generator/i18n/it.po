@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-31 02:38+0000\n"
-"PO-Revision-Date: 2023-04-15 10:52+0000\n"
+"PO-Revision-Date: 2023-05-10 13:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-9-0/language/it/)\n"
@@ -169,7 +169,7 @@ msgstr "Giorno(i) per acquistare"
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_uom
 msgid "Default unit of measure used for all stock operations."
-msgstr "Unita di misura predefinita usata per tutte le operazioni di magazzino."
+msgstr "Unità di misura predefinita per tutte le operazioni di magazzino."
 
 #. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_generator__display_name
