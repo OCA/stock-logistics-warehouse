@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-24 12:43+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-05-15 19:34+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "Movimento di magazzino"
 #. module: stock_orderpoint_move_link
 #: model:ir.model,name:stock_orderpoint_move_link.model_stock_rule
 msgid "Stock Rule"
-msgstr "Regola di magazzino"
+msgstr "Regola di giacenza"
 
 #. module: stock_orderpoint_move_link
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_move_link.view_warehouse_orderpoint_move_form
