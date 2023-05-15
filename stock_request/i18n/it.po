@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2023-05-12 12:54+0000\n"
+"PO-Revision-Date: 2023-05-15 19:36+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -66,7 +66,7 @@ msgstr "Quantità assegnata"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Allow All Locations Types"
-msgstr "Consenti tutti i tipi di posizioni"
+msgstr "Consenti tutti i tipi di ubicazioni"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_res_company__stock_request_allow_virtual_loc
@@ -75,7 +75,7 @@ msgstr "Consenti tutti i tipi di posizioni"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__allow_virtual_location
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__allow_virtual_location
 msgid "Allow Virtual locations on Stock Requests"
-msgstr "Consenti posizioni virtuali su richieste di magazzino"
+msgstr "Consenti ubicazioni virtuali su richieste di magazzino"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
@@ -85,7 +85,7 @@ msgstr "Analitico"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Analytic accounting in Stock Requests"
-msgstr "Contabilità analitica nelle Richieste di magazzino"
+msgstr "Contabilità analitica nelle richieste di magazzino"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_attachment_count
@@ -100,8 +100,8 @@ msgid ""
 "By default only internal and transit locations are allowed in Stock Request "
 "and Orders."
 msgstr ""
-"Per impostazione predefinita, solo le posizioni interne e di transito sono "
-"consentite nella richiesta e negli ordini di magazzino."
+"Per impostazione predefinita, solo le ubicazioni interne e di transito sono "
+"consentite nelle richieste e negli ordini richieste di magazzino."
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
@@ -119,7 +119,7 @@ msgstr "Annulla"
 #. module: stock_request
 #: model_terms:ir.actions.act_window,help:stock_request.action_stock_request_form
 msgid "Click to add a Stock Request."
-msgstr "Click per aggiungere Stock Request."
+msgstr "Clicca per aggiungere una richiesta di magazzino."
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_res_company
@@ -138,7 +138,7 @@ msgstr "Azienda"
 #: code:addons/stock_request/models/stock_request.py:199
 #, python-format
 msgid "Company must be equal to the order"
-msgstr "La società deve essere uguale all'ordine"
+msgstr "L'azienda deve essere la stessa dell'ordine"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_res_config_settings
@@ -777,7 +777,7 @@ msgstr "Richiesta di magazzino"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_picking__stock_request_count
 msgid "Stock Request #"
-msgstr "Richiesta stock #"
+msgstr "Richiesta di magazzino #"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_request_allocation
