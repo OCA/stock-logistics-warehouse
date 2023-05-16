@@ -64,7 +64,7 @@ class AssignManualQuants(models.TransientModel):
         if move.picking_type_id.auto_fill_qty_done:
             # Auto-fill all lines as done
             for ml in move.move_line_ids:
-                ml.qty_done = ml.product_qty
+                ml.qty_done = ml.reserved_uom_qty
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
         return {}
@@ -113,7 +113,7 @@ class AssignManualQuants(models.TransientModel):
                 and ml.package_id == quant.package_id
             )
         )
-        line["qty"] = sum(move_lines.mapped("product_uom_qty"))
+        line["qty"] = sum(move_lines.mapped("reserved_uom_qty"))
         line["selected"] = bool(line["qty"])
         line["reserved"] = quant.reserved_quantity - line["qty"]
         return line
@@ -198,7 +198,7 @@ class AssignManualQuantsLines(models.TransientModel):
                 )
             )
             reserved = quant.reserved_quantity - sum(
-                move_lines.mapped("product_uom_qty")
+                move_lines.mapped("reserved_uom_qty")
             )
             if (
                 float_compare(
