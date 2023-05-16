@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-04 10:11+0000\n"
-"PO-Revision-Date: 2022-07-16 18:06+0000\n"
+"PO-Revision-Date: 2023-05-17 03:48+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-9-0/language/it/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: stock_available_mrp
 #: model:ir.model.fields,field_description:stock_available_mrp.field_mrp_bom__add_potential_exception
@@ -27,7 +27,7 @@ msgstr "Impedisci di incrementare il potenziale alla promessa disponibile"
 #. module: stock_available_mrp
 #: model:ir.model,name:stock_available_mrp.model_mrp_bom
 msgid "Bill of Material"
-msgstr "Distinta materiali"
+msgstr "Distinta base"
 
 #. module: stock_available_mrp
 #: model:product.product,name:stock_available_mrp.product_computer_desk_bolt_white
