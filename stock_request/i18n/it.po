@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2023-05-15 19:36+0000\n"
+"PO-Revision-Date: 2023-05-17 04:08+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -214,12 +214,12 @@ msgstr "Abilita ordini"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Stock Requests Kanban cards"
-msgstr "Abilita le carte Kanban per le richieste di stock"
+msgstr "Abilita la kanban per le richieste di magazzino"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Enable Stock Requests for Purchases"
-msgstr "Abilita richieste di stock per gli acquisti"
+msgstr "Abilita richieste di magazzino per gli acquisti"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
@@ -230,7 +230,7 @@ msgstr "Abilita stato inviato"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__expected_date
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_order__expected_date
 msgid "Expected Date"
-msgstr "Data prevista"
+msgstr "Data attesa"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:206
@@ -320,7 +320,7 @@ msgstr "Ubicazioni di inventario"
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location_route
 msgid "Inventory Routes"
-msgstr "Rotte inventario"
+msgstr "Percorsi di inventario"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_is_follower
@@ -374,7 +374,7 @@ msgstr "Posizione"
 #: code:addons/stock_request/models/stock_request.py:182
 #, python-format
 msgid "Location must be equal to the order"
-msgstr "La posizione deve essere uguale all'ordine"
+msgstr "L'ubicazione deve essere la stessa dell'ordine"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_main_attachment_id
@@ -426,7 +426,7 @@ msgstr "Nome"
 #. module: stock_request
 #: sql_constraint:stock.request:0 sql_constraint:stock.request.abstract:0
 msgid "Name must be unique"
-msgstr "Il nome deve essere unico"
+msgstr "Il nome deve essere univoco"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_date_deadline
