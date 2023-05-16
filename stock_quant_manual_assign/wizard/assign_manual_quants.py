@@ -5,7 +5,7 @@
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.float_utils import float_compare
 
@@ -49,7 +49,9 @@ class AssignManualQuants(models.TransientModel):
         digits="Product Unit of Measure",
     )
     quants_lines = fields.One2many(
-        "assign.manual.quants.lines", "assign_wizard", string="Quants"
+        comodel_name="assign.manual.quants.lines",
+        inverse_name="assign_wizard",
+        string="Quants",
     )
     move_id = fields.Many2one(
         comodel_name="stock.move",
@@ -87,11 +89,11 @@ class AssignManualQuants(models.TransientModel):
         res = super().default_get(fields_list)
         move = self.env["stock.move"].browse(self.env.context["active_id"])
         available_quants = self._get_available_quants(move)
-        q_lines = []
+        quants_lines_commands = [Command.clear()]
         for quant in available_quants:
             line = self._prepare_wizard_line(move, quant)
-            q_lines.append(line)
-        res.update({"quants_lines": [(0, 0, x) for x in q_lines], "move_id": move.id})
+            quants_lines_commands.append(Command.create(line))
+        res.update({"quants_lines": quants_lines_commands, "move_id": move.id})
         return res
 
     @api.model
