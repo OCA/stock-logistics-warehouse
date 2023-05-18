@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_stock_picking_tree" model="ir.ui.view">
+            <field name="name">stock.picking.tree - stock_picking_orig_dest_link</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree" />
+            <field name="arch" type="xml">
+                <field name="activity_exception_decoration" position="after">
+                    <field
+                        name="orig_picking_ids"
+                        widget="many2many_tags"
+                        optional="hide"
+                    />
+                    <field
+                        name="dest_picking_ids"
+                        widget="many2many_tags"
+                        optional="hide"
+                    />
+                </field>
+            </field>
+        </record>
+        <record id="view_picking_internal_search" model="ir.ui.view">
+            <field
+                name="name"
+            >stock.picking.search - stock_picking_orig_dest_link</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search" />
+            <field name="arch" type="xml">
+                <field name="picking_type_id" position="after">
+                    <field name="orig_picking_ids" />
+                    <field name="dest_picking_ids" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
