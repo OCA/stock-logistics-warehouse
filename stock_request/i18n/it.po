@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2023-05-18 13:36+0000\n"
+"PO-Revision-Date: 2023-05-18 16:44+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -705,13 +705,13 @@ msgstr "Utente responsabile"
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__route_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_id
 msgid "Route"
-msgstr "Rotta"
+msgstr "Percorso"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__route_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_ids
 msgid "Routes"
-msgstr "Rotte"
+msgstr "Percorsi"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
