@@ -142,6 +142,7 @@ msgid "Quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
 msgid "Quantity is higher than the needed one"
@@ -175,6 +176,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
 msgid ""
