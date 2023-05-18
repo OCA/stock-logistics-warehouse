@@ -26,9 +26,6 @@
         <field name="name">Stock Request Order</field>
         <field name="category_id" ref="base.module_category_hidden" />
     </record>
-    <record id="stock.group_stock_user" model="res.groups">
-        <field name="implied_ids" eval="[(4, ref('group_stock_request_user'))]" />
-    </record>
     <data noupdate="1">
         <record model="ir.rule" id="stock_picking_rule">
             <field name="name">stock_request multi-company</field>
