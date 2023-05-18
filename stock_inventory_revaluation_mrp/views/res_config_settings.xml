@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_lock_product" model="ir.ui.view">
+        <field name="name">res.config.settings.lock</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="manage_product_packaging" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="lock_cost_products_id">
+                    <div class="o_setting_left_pane">
+                        <field name="lock_cost_products" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="lock_cost_products" />
+                        <div class="text-muted">
+                            When checked, the cost field and "Compute Price from BOM" link on products is readonly
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</odoo>

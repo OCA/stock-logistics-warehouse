@@ -1,0 +1,38 @@
+<odoo>
+
+    <record id="cost_adjustment_detail_view_form" model="ir.ui.view">
+        <field name="name">stock.cost.adjustment.detail.form</field>
+        <field name="model">stock.cost.adjustment</field>
+        <field
+            name="inherit_id"
+            ref="stock_inventory_revaluation_adjustment.cost_adjustment_view_form"
+        />
+        <field name="arch" type="xml">
+
+            <button name="action_open_cost_adjustment_lines" position="attributes">
+                <attribute
+                    name="context"
+                >{'search_default_groupby_level': 1}</attribute>
+            </button>
+
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button
+                    name="action_open_cost_adjustment_details"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-bars"
+                    string="BoM Details"
+                />
+            </xpath>
+
+            <field name="type_id" position="after">
+                <field
+                    name="explode_subassemblies"
+                    attrs="{'readonly': [('state', '!=', 'draft')]}"
+                />
+            </field>
+
+        </field>
+    </record>
+
+</odoo>
