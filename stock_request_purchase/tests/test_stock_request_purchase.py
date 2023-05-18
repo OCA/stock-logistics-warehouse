@@ -1,25 +1,27 @@
 # Copyright 2016-20 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2023 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import common, new_test_user
 
 
 class TestStockRequestPurchase(common.TransactionCase):
     def setUp(self):
-        super(TestStockRequestPurchase, self).setUp()
-
+        super().setUp()
+        self.env = self.env(
+            context=dict(
+                self.env.context,
+                mail_create_nolog=True,
+                mail_create_nosubscribe=True,
+                mail_notrack=True,
+                no_reset_password=True,
+            )
+        )
         # common models
         self.stock_request = self.env["stock.request"]
 
         # refs
-        self.stock_request_user_group = self.env.ref(
-            "stock_request.group_stock_request_user"
-        )
-        self.stock_request_manager_group = self.env.ref(
-            "stock_request.group_stock_request_manager"
-        )
-        self.inventory_user = self.env.ref("stock.group_stock_user")
         self.main_company = self.env.ref("base.main_company")
         self.warehouse = self.env.ref("stock.warehouse0")
         self.categ_unit = self.env.ref("uom.product_uom_categ_unit")
@@ -29,15 +31,17 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.wh2 = self.env["stock.warehouse"].search(
             [("company_id", "=", self.company_2.id)], limit=1
         )
-        self.stock_request_user = self._create_user(
-            "stock_request_user",
-            [self.stock_request_user_group.id, self.inventory_user.id],
-            [self.main_company.id, self.company_2.id],
+        self.stock_request_user = new_test_user(
+            self.env,
+            login="stock_request_user",
+            groups="stock_request.group_stock_request_user",
+            company_ids=[(6, 0, [self.main_company.id, self.company_2.id])],
         )
-        self.stock_request_manager = self._create_user(
-            "stock_request_manager",
-            [self.stock_request_manager_group.id],
-            [self.main_company.id, self.company_2.id],
+        self.stock_request_manager = new_test_user(
+            self.env,
+            login="stock_request_manager",
+            groups="stock_request.group_stock_request_manager",
+            company_ids=[(6, 0, [self.main_company.id, self.company_2.id])],
         )
         self.route_buy = self.warehouse.buy_pull_id.route_id
         self.supplier = self.env["res.partner"].create({"name": "Supplier"})
@@ -51,22 +55,6 @@ class TestStockRequestPurchase(common.TransactionCase):
                 "uom_type": "bigger",
                 "rounding": 0.001,
             }
-        )
-
-    def _create_user(self, name, group_ids, company_ids):
-        return (
-            self.env["res.users"]
-            .with_context(no_reset_password=True)
-            .create(
-                {
-                    "name": name,
-                    "password": "demo",
-                    "login": name,
-                    "email": str(name) + "@test.com",
-                    "groups_id": [(6, 0, group_ids)],
-                    "company_ids": [(6, 0, company_ids)],
-                }
-            )
         )
 
     def _create_product(self, default_code, name, company_id):
@@ -212,6 +200,23 @@ class TestStockRequestPurchase(common.TransactionCase):
 
         self.assertEqual(stock_request_2.qty_in_progress, 0.0)
         self.assertEqual(stock_request_2.qty_done, stock_request_2.product_uom_qty)
+
+    def test_create_request_cancel_purchase(self):
+        vals = {
+            "product_id": self.product.id,
+            "product_uom_id": self.product.uom_id.id,
+            "product_uom_qty": 5.0,
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+        }
+        stock_request = self.stock_request.with_user(self.stock_request_user).create(
+            vals
+        )
+        stock_request.action_confirm()
+        self.assertEqual(stock_request.purchase_ids.state, "draft")
+        stock_request.action_cancel()
+        self.assertEqual(stock_request.purchase_ids.state, "cancel")
 
     def test_view_actions(self):
         expected_date = fields.Datetime.now()

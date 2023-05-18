@@ -1,4 +1,5 @@
 # Copyright 2017-20 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2023 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import _, api, fields, models
@@ -37,6 +38,15 @@ class StockRequest(models.Model):
                     "that belongs to another company."
                 )
             )
+
+    def action_cancel(self):
+        """Propagate the cancellation to the generated purchase orders."""
+        res = super().action_cancel()
+        self.sudo().purchase_ids.filtered(
+            lambda x: x.state not in ("purchase", "done", "cancel")
+            and x.stock_request_ids == self
+        ).button_cancel()
+        return res
 
     def action_view_purchase(self):
         action = self.env["ir.actions.act_window"]._for_xml_id("purchase.purchase_rfq")
