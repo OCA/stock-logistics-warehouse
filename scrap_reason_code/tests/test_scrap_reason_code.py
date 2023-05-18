@@ -1,7 +1,9 @@
 # Copyright (C) 2019 IBM Corp.
 # Copyright (C) 2019 Open Source Integrators
+# Copyright 2023 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -11,6 +13,8 @@ class StockScrap(TransactionCase):
 
         self.stock_location = self.env.ref("stock.stock_location_stock")
         self.customer_location = self.env.ref("stock.stock_location_customers")
+        self.categ_1 = self.env.ref("product.product_category_all")
+        self.categ_2 = self.env["product.category"].create({"name": "Test category"})
         stock_location_locations_virtual = self.env["stock.location"].create(
             {"name": "Virtual Locations", "usage": "view", "posz": 1}
         )
@@ -27,7 +31,14 @@ class StockScrap(TransactionCase):
             {
                 "name": "Scrap Product A",
                 "type": "product",
-                "categ_id": self.env.ref("product.product_category_all").id,
+                "categ_id": self.categ_1.id,
+            }
+        )
+        self.scrap_product_2 = self.env["product.product"].create(
+            {
+                "name": "Scrap Product A",
+                "type": "product",
+                "categ_id": self.categ_2.id,
             }
         )
 
@@ -36,6 +47,13 @@ class StockScrap(TransactionCase):
                 "name": "DM300",
                 "description": "Product is damage",
                 "location_id": self.scrapped_location.id,
+            }
+        )
+        self.reason_code_only_categ_2 = self.env["scrap.reason.code"].create(
+            {
+                "name": "Test Code 2",
+                "description": "Test description",
+                "product_category_ids": [(6, 0, self.categ_2.ids)],
             }
         )
 
@@ -164,3 +182,40 @@ class StockScrap(TransactionCase):
 
         scrapped_move.quantity_done = 8
         self.assertEqual(scrap2.scrap_qty, 8, "Scrap quantity is not updated.")
+
+    def test_allowed_reason_codes(self):
+        with self.assertRaises(ValidationError):
+            self.env["stock.scrap"].create(
+                {
+                    "product_id": self.scrap_product.id,
+                    "product_uom_id": self.scrap_product_2.uom_id.id,
+                    "scrap_qty": 5,
+                    "reason_code_id": self.reason_code_only_categ_2.id,
+                }
+            )
+        scrap = self.env["stock.scrap"].create(
+            {
+                "product_id": self.scrap_product.id,
+                "product_uom_id": self.scrap_product.uom_id.id,
+                "scrap_qty": 5,
+                "reason_code_id": self.reason_code.id,
+            }
+        )
+        self.assertEqual(scrap.allowed_reason_code_ids, self.reason_code)
+        with self.assertRaises(ValidationError):
+            scrap.write({"reason_code_id": self.reason_code_only_categ_2.id})
+        scrap = self.env["stock.scrap"].create(
+            {
+                "product_id": self.scrap_product_2.id,
+                "product_uom_id": self.scrap_product_2.uom_id.id,
+                "scrap_qty": 5,
+                "reason_code_id": self.reason_code_only_categ_2.id,
+            }
+        )
+        with self.assertRaises(ValidationError):
+            scrap.write({"product_id": self.scrap_product.id})
+        self.assertEqual(
+            scrap.allowed_reason_code_ids,
+            (self.reason_code + self.reason_code_only_categ_2),
+        )
+        scrap.write({"reason_code_id": self.reason_code.id})
