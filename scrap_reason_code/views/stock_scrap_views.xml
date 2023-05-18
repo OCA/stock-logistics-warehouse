@@ -1,4 +1,5 @@
 <!-- Copyright 2019 Open Source Integrators
+     Copyright 2023 ForgeFlow S.L. (https://www.forgeflow.com)
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="stock_scrap_form_reason_code" model="ir.ui.view">
@@ -8,6 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group/group" position='inside'>
                 <field name="reason_code_id" />
+                <field name="allowed_reason_code_ids" invisible="1" />
             </xpath>
         </field>
     </record>
@@ -18,6 +20,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_uom_id']" position='after'>
                 <field name="reason_code_id" />
+                <field name="allowed_reason_code_ids" invisible="1" />
             </xpath>
         </field>
     </record>
@@ -28,6 +31,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group/group" position='inside'>
                 <field name="reason_code_id" />
+                <field name="allowed_reason_code_ids" invisible="1" />
             </xpath>
         </field>
     </record>
