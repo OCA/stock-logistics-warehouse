@@ -87,6 +87,7 @@ addon | version | maintainers | summary
 [stock_packaging_calculator_packaging_type](stock_packaging_calculator_packaging_type/) | 13.0.1.1.0 |  | Glue module for packaging type
 [stock_picking_completion_info](stock_picking_completion_info/) | 13.0.1.1.0 |  | Display on current document completion information according to next operations
 [stock_picking_consolidation_priority](stock_picking_consolidation_priority/) | 13.0.1.0.0 |  | Raise priority of all transfers for a chain when started
+[stock_picking_orig_dest_link](stock_picking_orig_dest_link/) | 13.0.1.0.0 |  | This addon link the pickings with their respective Origin and Destination Pickings.
 [stock_picking_package_grouped](stock_picking_package_grouped/) | 13.0.1.0.1 |  | Allow create package (put in pack) from pickings depending on grouping criteria.
 [stock_picking_procure_method](stock_picking_procure_method/) | 13.0.1.0.0 |  | Allows to force the procurement method from the picking
 [stock_picking_show_linked](stock_picking_show_linked/) | 13.0.1.0.2 |  | This addon allows to easily access related pickings (in the case of chained routes) through a button in the parent picking view.
