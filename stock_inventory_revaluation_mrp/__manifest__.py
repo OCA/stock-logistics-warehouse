@@ -20,11 +20,16 @@
         "views/cost_adjustment.xml",
         "views/res_config_settings.xml",
         "views/product_template.xml",
-        "views/mrp_report_bom_structure.xml",
         "report/report_mrp.xml",
+        "report/report_mrp_bom.xml"
     ],
     "maintainers": ["patrickrwilson"],
     "application": False,
     "installable": True,
     "development_status": "Beta",
+    "assets": {
+        "web.assets_backend": [
+            'stock_inventory_revaluation_mrp/static/src/xml/mrp_report_bom_structure.xml',
+        ],
+    }
 }

@@ -1,0 +1,30 @@
+<odoo>
+    <template id="report_mrp_bom_inherit_add_proposed_cost" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//th[@name='th_mrp_bom_h']/.." position="inside">
+            <th>Proposed Cost</th>
+        </xpath>
+        <xpath expr="//td[@name='td_mrp_bom']/.." position="inside">
+            <td>
+                <t t-if="data.get('proposed_cost')">
+                    <t t-esc="data.get('proposed_cost')" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                </t>
+                <t t-else="">
+                    <t t-esc="0.0" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                </t>
+            </td>
+        </xpath>
+    </template>
+
+    <template id="report_mrp_bom_pdf_line_inherit_add_proposed_cost" inherit_id="mrp.report_mrp_bom_pdf_line">
+        <xpath expr="//td[@name='td_mrp_code']/.." position="inside">
+            <td>
+                <t t-if="l.get('proposed_cost')">
+                    <span t-esc="l.get('proposed_cost')" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                </t>
+                <t t-else="">
+                    <span t-esc="0.0" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                </t>
+            </td>
+        </xpath>
+    </template>
+</odoo>
