@@ -26,14 +26,14 @@ class ProductProduct(models.Model):
     proposed_cost_ignore_bom = fields.Boolean()
 
     def _get_rollup_cost(self):
-        cost = self.standard_price or self.proposed_cost
+        cost = self.proposed_cost or self.standard_price
         return cost
 
     def calculate_proposed_cost(self):
         DecimalPrecision = self.env["decimal.precision"]
         products = self.filtered(lambda x: x.bom_ids and not x.proposed_cost_ignore_bom)
         for product in products:
-            bom = self.env["mrp.bom"]._bom_find(product=product)
+            bom = self.env["mrp.bom"]._bom_find(product)[product]
             # First recompute "Proposed Cost" for the BoM components that also have a BoM
             bom.bom_line_ids.product_id.calculate_proposed_cost()
             # Add the costs for all Components and Operations,
@@ -54,11 +54,10 @@ class ProductProduct(models.Model):
                 total / bom.product_qty, product.uom_id
             )
             # Set proposed cost if different from the actual cost
-            rounding = DecimalPrecision.precision_get("Product Price")
-            has_proposed_cost = float_compare(
-                product.standard_price, total_uom, precision_rounding=rounding
-            )
+            if product.standard_price != total_uom:
+                has_proposed_cost = True
             product.proposed_cost = total_uom if has_proposed_cost else 0.0
+
 
     def _get_bom_structure_products(self):
         BOM = self.env["mrp.bom"]
@@ -67,7 +66,7 @@ class ProductProduct(models.Model):
         )
         bom_structure = assemblies
         for product in assemblies:
-            bom = BOM._bom_find(products=product)
+            bom = BOM._bom_find(product)[product]
             product_bom = bom.get(product)
             components = product_bom.bom_line_ids.product_id
             bom_structure |= components._get_bom_structure_products()

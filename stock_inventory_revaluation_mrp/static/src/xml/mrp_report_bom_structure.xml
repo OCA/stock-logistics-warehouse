@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="stock_inventory_revaluation_mrp.BomOverviewTable" t-inherit="mrp.BomOverviewTable" t-inherit-mode="extension" owl="1">
+        <xpath expr="//th[@t-if='showCosts'][2]" position="after">
+            <th class="text-end">Proposed Cost</th>
+        </xpath>
+    </t>
+
+    <t t-name="stock_inventory_revaluation_mrp.BomOverviewLine" t-inherit="mrp.BomOverviewLine" t-inherit-mode="extension" owl="1">
+        <xpath expr="//td[@t-if='showCosts'][2]" position="after">
+            <td class="text-end">
+                <span t-if="data.hasOwnProperty('proposed_cost')" t-esc="formatMonetary(data.proposed_cost)"/>
+            </td>
+        </xpath>
+    </t>
+
+</templates>
