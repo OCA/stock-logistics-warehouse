@@ -31,11 +31,16 @@ class ProductProduct(models.Model):
 
     def calculate_proposed_cost(self):
         DecimalPrecision = self.env["decimal.precision"]
+        computed_products = {}
         products = self.filtered(lambda x: x.bom_ids and not x.proposed_cost_ignore_bom)
         for product in products:
             bom = self.env["mrp.bom"]._bom_find(product)[product]
             # First recompute "Proposed Cost" for the BoM components that also have a BoM
-            bom.bom_line_ids.product_id.calculate_proposed_cost()
+            components = bom.bom_line_ids.product_id
+            components = components.filtered(lambda pr: pr.id not in [*computed_products])
+            intermediates = components.calculate_proposed_cost()
+            computed_products.update(intermediates)
+            
             # Add the costs for all Components and Operations,
             # using the Active Cost when available, or the Proposed Cost otherwise
             cost_components = sum(
@@ -54,9 +59,13 @@ class ProductProduct(models.Model):
                 total / bom.product_qty, product.uom_id
             )
             # Set proposed cost if different from the actual cost
+            has_proposed_cost = False
             if product.standard_price != total_uom:
                 has_proposed_cost = True
             product.proposed_cost = total_uom if has_proposed_cost else 0.0
+            computed_products[product.id] = 1
+
+        return computed_products
 
 
     def _get_bom_structure_products(self):

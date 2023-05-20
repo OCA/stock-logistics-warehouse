@@ -196,6 +196,8 @@ class CostAdjustment(models.Model):
         :rtype: list
         """
         self.ensure_one()
+        if product.bom_ids:
+            product.calculate_proposed_cost()
         return {
             "cost_adjustment_id": self.id,
             "product_id": product.id,
