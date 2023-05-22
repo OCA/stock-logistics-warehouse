@@ -36,11 +36,9 @@ class ProductProduct(models.Model):
         for product in products:
             # cost type services
             if product.is_cost_type:
-                import pdb;pdb.set_trace()
                 total = total_uom = 0
                 for act_cost_rule in product.activity_cost_ids:
                     linetotal = act_cost_rule.product_id._get_rollup_cost()
-                    total += linetotal
                     total_uom += linetotal * act_cost_rule.factor
             # products
             else:
@@ -61,8 +59,13 @@ class ProductProduct(models.Model):
                     * x.product_qty
                     for x in bom.bom_line_ids
                 )
+                op_products = bom.operation_ids.mapped('workcenter_id').mapped('analytic_product_id')
+                op_products = op_products.filtered(lambda pr: pr.id not in [*computed_products])
+                op_cost_types = op_products.calculate_proposed_cost()
+                computed_products.update(op_cost_types)
+
                 cost_operations = sum(
-                    x.workcenter_id._get_rollup_cost() * (x.time_cycle / 60)
+                    x.workcenter_id.analytic_product_id._get_rollup_cost() * (x.time_cycle / 60)
                     for x in bom.operation_ids
                 )
                 total = cost_components + cost_operations

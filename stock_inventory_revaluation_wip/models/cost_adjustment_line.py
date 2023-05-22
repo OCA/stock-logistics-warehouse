@@ -66,7 +66,7 @@ class CostAdjustmentLine(models.Model):
         self and self.ensure_one()
         product = self.product_id
         level = self.level
-        ops_lines = self._get_impacted_bom_operations(product)
+        cost_types, ops_lines = self._get_impacted_bom_operations(product)
         vals = []
         for ops_line in ops_lines:
             impacted_products = ops_line.bom_id.get_produced_items()
@@ -87,6 +87,24 @@ class CostAdjustmentLine(models.Model):
         if vals:
             add_details = AdjDetails.create(vals)
             details |= add_details
+
+        # identify the cost type services that are impacted
+        vals = []
+        for cost_type in cost_types:
+            add_cost = self.difference_cost
+            vals.append(
+                {
+                    "cost_adjustment_line_id": self.id,
+                    "product_id": cost_type.id,
+                    "quantity": 1,
+                    "cost_increase": add_cost,
+                    "parent_product_id": product.id,
+                    "level": level,
+                }
+            )
+        if vals:
+            add_details = AdjDetails.create(vals)
+            details |= add_details
         return details
 
     @api.model
@@ -98,6 +116,6 @@ class CostAdjustmentLine(models.Model):
             ]
         )
         cost_types = products | impacted_cost_types
-        return self.env["mrp.routing.workcenter"].search(
+        return impacted_cost_types, self.env["mrp.routing.workcenter"].search(
             [("workcenter_id.analytic_product_id", "in", cost_types.ids)]
         )

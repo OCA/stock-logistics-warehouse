@@ -156,6 +156,8 @@ class CostAdjustment(models.Model):
 
     def action_draft(self):
         todo = self.filtered(lambda x: x.state not in ["posted"])
+        # clear the proposed cost saved on impacted products
+        todo.line_ids.mapped('product_id').proposed_cost = 0.0
         todo.line_ids.unlink()
         todo.write({"state": "draft"})
 
@@ -196,7 +198,7 @@ class CostAdjustment(models.Model):
         :rtype: list
         """
         self.ensure_one()
-        if product.bom_ids:
+        if product.bom_ids or product.is_cost_type:
             product.calculate_proposed_cost()
         return {
             "cost_adjustment_id": self.id,
