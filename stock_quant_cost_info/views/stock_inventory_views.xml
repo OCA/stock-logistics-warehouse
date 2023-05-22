@@ -6,7 +6,12 @@
         <field name="arch" type="xml">
             <field name="inventory_diff_quantity" position="after">
                 <field name="currency_id" invisible="1" />
-                <field name="adjustment_cost" sum="Total" optional="show" />
+                <field
+                    name="adjustment_cost"
+                    sum="Total"
+                    optional="show"
+                    attrs="{'invisible': [('inventory_quantity_set', '=', False)]}"
+                />
             </field>
         </field>
     </record>
