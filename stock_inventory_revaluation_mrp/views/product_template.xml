@@ -35,7 +35,7 @@
                     name="calculate_proposed_cost"
                     string="Calculate Proposed Cost"
                     type="object"
-                    attrs="{'invisible': ['|', ('bom_count', '=', 0), ('proposed_cost_ignore_bom', '=', True)]}"
+                    attrs="{'invisible': ['|', ('proposed_cost_ignore_bom', '=', True), '&amp;', ('bom_count', '=', 0), ('is_cost_type', '=', False)]}"
                     help="
                     Recalculates the `Proposed Cost` for all BoM components.
                     Then adds the costs for all Components and Operations,

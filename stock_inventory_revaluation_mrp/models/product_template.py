@@ -32,32 +32,45 @@ class ProductProduct(models.Model):
     def calculate_proposed_cost(self):
         DecimalPrecision = self.env["decimal.precision"]
         computed_products = {}
-        products = self.filtered(lambda x: x.bom_ids and not x.proposed_cost_ignore_bom)
+        products = self.filtered(lambda x: (x.bom_ids or x.is_cost_type) and not x.proposed_cost_ignore_bom)
         for product in products:
-            bom = self.env["mrp.bom"]._bom_find(product)[product]
-            # First recompute "Proposed Cost" for the BoM components that also have a BoM
-            components = bom.bom_line_ids.product_id
-            components = components.filtered(lambda pr: pr.id not in [*computed_products])
-            intermediates = components.calculate_proposed_cost()
-            computed_products.update(intermediates)
+            # cost type services
+            if product.is_cost_type:
+                import pdb;pdb.set_trace()
+                total = total_uom = 0
+                for act_cost_rule in product.activity_cost_ids:
+                    linetotal = act_cost_rule.product_id._get_rollup_cost()
+                    total += linetotal
+                    total_uom += linetotal * act_cost_rule.factor
+            # products
+            else:
+
+                bom = self.env["mrp.bom"]._bom_find(product)[product]
+                # First recompute "Proposed Cost" for the BoM components that also have a BoM
+                components = bom.bom_line_ids.product_id
+                components = components.filtered(lambda pr: pr.id not in [*computed_products])
+                intermediates = components.calculate_proposed_cost()
+                computed_products.update(intermediates)
             
-            # Add the costs for all Components and Operations,
-            # using the Active Cost when available, or the Proposed Cost otherwise
-            cost_components = sum(
-                x.product_id.uom_id._compute_price(
-                    x.product_id._get_rollup_cost(), x.product_uom_id
+                # Add the costs for all Components and Operations,
+                # using the Active Cost when available, or the Proposed Cost otherwise
+                cost_components = sum(
+                    x.product_id.uom_id._compute_price(
+                        x.product_id._get_rollup_cost(), x.product_uom_id
+                    )
+                    * x.product_qty
+                    for x in bom.bom_line_ids
                 )
-                * x.product_qty
-                for x in bom.bom_line_ids
-            )
-            cost_operations = sum(
-                x.workcenter_id._get_rollup_cost() * (x.time_cycle / 60)
-                for x in bom.operation_ids
-            )
-            total = cost_components + cost_operations
-            total_uom = bom.product_uom_id._compute_price(
-                total / bom.product_qty, product.uom_id
-            )
+                cost_operations = sum(
+                    x.workcenter_id._get_rollup_cost() * (x.time_cycle / 60)
+                    for x in bom.operation_ids
+                )
+                total = cost_components + cost_operations
+                total_uom = bom.product_uom_id._compute_price(
+                    total / bom.product_qty, product.uom_id
+                )
+
+
             # Set proposed cost if different from the actual cost
             has_proposed_cost = False
             if product.standard_price != total_uom:
