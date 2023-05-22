@@ -44,6 +44,7 @@ class StockRequest(models.Model):
         res = super().action_cancel()
         self.sudo().purchase_ids.filtered(
             lambda x: x.state not in ("purchase", "done", "cancel")
+            and x.stock_request_ids == self
         ).button_cancel()
         return res
 
