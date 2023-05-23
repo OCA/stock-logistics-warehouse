@@ -8,6 +8,11 @@ class ReportBomStructure(models.AbstractModel):
 
     def _get_bom_data(self, bom, warehouse, product=False, line_qty=False, bom_line=False, level=0, parent_bom=False, index=0, product_info=False, ignore_stock=False):
         res = super()._get_bom_data(bom, warehouse, product, line_qty, bom_line, level, parent_bom, index, product_info, ignore_stock)
+        operations = res.get('operations', False)
+        if "operations":
+            for operation in operations:
+                pcost = operation.get('operation').workcenter_id.analytic_product_id.proposed_cost
+                operation["proposed_cost"] = pcost
         res["proposed_cost"] = res["product"].proposed_cost * res["quantity"]
         return res
 
