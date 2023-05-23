@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <button name="do_unreserve" position="attributes">
+                <attribute name="attrs">{
+                'invisible': [
+                '|',
+                '|',
+                '|',
+                ('picking_type_code', '=', 'incoming'),
+                ('immediate_transfer', '=', True),
+                '&amp;',
+                '&amp;',
+                ('state', 'not in', ('assigned', 'partially_available')),
+                ('move_type', '!=', 'one'),
+                ('reserve_area_line_ids', '=', []),
+                '&amp;',
+                ('state', 'not in', ('assigned', 'partially_available', 'confirmed')),
+                ('move_type', '=', 'one')]}
+                </attribute>
+            </button>
+            <field name="reserved_availability" position="after">
+                <field
+                    name="area_reserved_availability"
+                    attrs="{'column_invisible': (['|', ('parent.state','=', 'done'), ('parent.reserve_area_line_ids', '=', [])])}"
+                />
+            </field>
+            <page name="extra" position="before">
+                <page
+                    name="reserve_area_lines"
+                    string="Area Reservations"
+                    attrs="{'invisible':['|', ('state','=', 'done'),('reserve_area_line_ids', '=', [])]}"
+                >
+                    <field name="reserve_area_line_ids">
+                        <tree>
+                            <field name="reserve_area_id" />
+                            <field name="reserved_availability" />
+                            <field name="product_id" />
+                        </tree>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>
