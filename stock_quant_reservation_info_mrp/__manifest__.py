@@ -13,5 +13,5 @@
     "license": "AGPL-3",
     "data": ["views/stock_move_line.xml"],
     "installable": True,
-    "auto-install": True,
+    "auto_install": True,
 }
