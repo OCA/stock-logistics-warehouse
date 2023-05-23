@@ -115,7 +115,7 @@ class CostAdjustmentLine(models.Model):
                 ("activity_cost_ids.product_id", "in", products.ids),
             ]
         )
-        cost_types = products | impacted_cost_types
-        return impacted_cost_types, self.env["mrp.routing.workcenter"].search(
-            [("workcenter_id.analytic_product_id", "in", cost_types.ids)]
-        )
+        cost_types = impacted_cost_types
+        operations = self.env["mrp.routing.workcenter"].search(
+            [("workcenter_id.analytic_product_id", "in", cost_types.ids),('active','=',True)])
+        return impacted_cost_types, operations

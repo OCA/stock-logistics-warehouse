@@ -104,6 +104,8 @@ class CostAdjustmentLine(models.Model):
         bom_lines = self.env["mrp.bom.line"].search([("product_id", "=", product.id)])
         vals = []
         for bom_line in bom_lines:
+            if not bom_line.bom_id.active:
+                continue
             impacted_products = bom_line.bom_id.get_produced_items()
             for impacted_product in impacted_products:
                 add_cost = self.difference_cost * bom_line.product_qty
