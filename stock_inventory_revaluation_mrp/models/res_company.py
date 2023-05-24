@@ -8,3 +8,6 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     lock_cost_products = fields.Boolean(string="Lock Costs on Products", copy=False)
+    no_of_bom_version = fields.Integer(
+        "Number of retained cost roll versions", default=1
+    )
