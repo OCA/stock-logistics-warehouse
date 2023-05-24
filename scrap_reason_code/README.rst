@@ -74,6 +74,7 @@ Contributors
 * Balaji Kannan <bkannan@opensourceintegrators.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * Chandresh Thakkar <cthakkar@opensourceintegrators.com>
+* Lois Rilo <lois.rilo@forgeflow.com>
 
 Other credits
 ~~~~~~~~~~~~~
