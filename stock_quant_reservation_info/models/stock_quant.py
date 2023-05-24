@@ -1,4 +1,4 @@
-# Copyright 2022 ForgeFlow <http://www.forgeflow.com>
+# Copyright 2023 ForgeFlow <http://www.forgeflow.com>
 
 from odoo import _, models
 
