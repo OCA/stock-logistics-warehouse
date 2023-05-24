@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-17 09:47+0000\n"
-"PO-Revision-Date: 2023-05-22 15:10+0000\n"
+"PO-Revision-Date: 2023-05-24 10:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -189,7 +189,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_mass_post_display_name
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_quant_display_name
 msgid "Display Name"
-msgstr "Nome da visualizzare"
+msgstr "Nome visualizzato"
 
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,help:stock_inventory_revaluation.field_stock_inventory_revaluation_remarks
