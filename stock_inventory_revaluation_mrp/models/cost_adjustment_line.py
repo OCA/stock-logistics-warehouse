@@ -101,7 +101,7 @@ class CostAdjustmentLine(models.Model):
         self and self.ensure_one()
         product = self.product_id
         level = self.level
-        bom_lines = self.env["mrp.bom.line"].search([("product_id", "=", product.id)])
+        bom_lines = self.env["mrp.bom.line"].search([("product_id", "=", product.id),('bom_id.active', '=', True)])
         vals = []
         for bom_line in bom_lines:
             if not bom_line.bom_id.active:

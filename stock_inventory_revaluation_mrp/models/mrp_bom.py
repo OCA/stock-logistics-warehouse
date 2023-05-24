@@ -1,6 +1,6 @@
 # Copyright 2021-2022 Open Source Integrators
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, models
+from odoo import api, models, fields
 
 
 class BoM(models.Model):
@@ -16,6 +16,24 @@ class BoM(models.Model):
         templates = template_boms.product_tmpl_id
         template_variants = templates.product_variant_ids
         return variants | template_variants
+
+    active_ref_bom = fields.Boolean(string="Active Reference BOM")
+    cost_roll_up_version = fields.Boolean(string="Cost Roll Version", default=False)
+
+
+class BomLine(models.Model):
+    _inherit = "mrp.bom.line"
+
+    unit_cost = fields.Float()
+
+    def _compute_line_subtotal(self):
+        for rec in self:
+            subtotal = 0.0
+            if rec.bom_id.cost_roll_up_version:
+                subtotal = rec.product_qty * rec.unit_cost
+            rec.subtotal = subtotal
+
+    subtotal = fields.Float(compute="_compute_line_subtotal")
 
 
 class ReportBomStructure(models.AbstractModel):

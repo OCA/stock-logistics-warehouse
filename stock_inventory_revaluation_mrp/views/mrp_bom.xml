@@ -1,0 +1,93 @@
+<odoo>
+	<record id="mrp_bom_form_view_inherit_revalution_mrp" model="ir.ui.view">
+        <field name="name">mrp.bom.detail.form</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//group/group[2]/field[@name='company_id']" position="after">
+        		<field name="cost_roll_up_version" readonly="1"/>
+        		<field name="active_ref_bom" readonly="1"/>
+        	</xpath>
+            <xpath expr="//group/group[1]" position="inside">
+                <field name="create_date"/>
+            </xpath>
+            <xpath expr="//field[@name='bom_line_ids']/tree/field[@name='product_qty']" position="after">
+                <field name="unit_cost" readonly="1" 
+                    attrs="{'column_invisible': [('parent.cost_roll_up_version', '=', False)]}"
+                    />
+            </xpath>
+            <xpath expr="//field[@name='bom_line_ids']/tree/field[@name='product_uom_id']" position="after">
+                <field name="subtotal" readonly="1" attrs="{'column_invisible': [('parent.cost_roll_up_version', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="mrp_bom_tree_view_inherit_revalution_mrp" model="ir.ui.view">
+        <field name="name">mrp.bom.detail.tree</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="create_date"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_mrp_bom_filter_inherit_revalution_mrp" model="ir.ui.view">
+        <field name="name">mrp.bom.detail.tree</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.view_mrp_bom_filter"/>
+        <field name="arch" type="xml">
+            <filter name="phantom" position="after">
+                <filter string="Cost Roll Version" name="cost_roll_up_version" domain="[('cost_roll_up_version', '=', True)]"/>
+                <filter string="Active Reference BOM" name="active_ref_bom" domain="[('active_ref_bom', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_bom_tree_view_revaluation" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.bom.tree</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="time_cycle" position="after">
+                <field name="unit_cost"/>
+                <field name="subtotal"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_form_view_view_revaluation" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.bom.form</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Activity Driven Costs">
+                    <field name="operation_info_ids" nolabel="1">
+                        <tree editable="bottom" create="0" edit="0">
+                            <field name="operation_id" invisible="1"/>
+                            <field name="analytic_product_id"/>
+                            <field name="product_id"/>
+                            <field name="standard_price"/>
+                            <field name="factor"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="operation_id" invisible="1"/>
+                                    <field name="analytic_product_id"/>
+                                    <field name="product_id"/>
+                                </group>
+                                <group>
+                                    <field name="factor"/>
+                                    <field name="standard_price"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

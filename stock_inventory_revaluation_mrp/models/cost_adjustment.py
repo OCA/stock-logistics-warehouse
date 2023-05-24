@@ -45,3 +45,15 @@ class CostAdjustment(models.Model):
                 new_products = details.product_id
                 self._populate_adjustment_lines(new_products, level=level + 1)
         return lines
+
+    def action_post(self):
+        res = super().action_post()
+        product_ids = self.product_ids
+        product_ids |= self.env["stock.cost.adjustment.detail"].search(
+            [
+                ("cost_adjustment_line_id.cost_adjustment_id", "=", self.id),
+            ]
+        ).mapped('product_id')
+        for product in product_ids:
+            product.with_context(adjustment_id=self.id).update_bom_version()
+        return res
