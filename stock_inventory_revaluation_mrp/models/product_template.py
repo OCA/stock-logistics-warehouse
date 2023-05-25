@@ -147,10 +147,9 @@ class ProductProduct(models.Model):
                         "cost_roll_up_version": True,
                     }
                 )
-                line_ids = new_bom.bom_line_ids.filtered(
-                    lambda l: l.product_id.id == product.id
-                )
-                line_ids.write({"unit_cost": product.standard_price})
+                for line in new_bom.bom_line_ids:
+                    line.write({"unit_cost": line.product_id.standard_price})
+
                 for operatine in new_bom.operation_ids.filtered(
                     lambda l: l.workcenter_id.analytic_product_id.activity_cost_ids
                 ):
