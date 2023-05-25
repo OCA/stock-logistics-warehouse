@@ -35,6 +35,7 @@ setuptools.setup(
         'odoo-addon-stock_orderpoint_purchase_link>=15.0dev,<15.1dev',
         'odoo-addon-stock_orderpoint_uom>=15.0dev,<15.1dev',
         'odoo-addon-stock_packaging_calculator>=15.0dev,<15.1dev',
+        'odoo-addon-stock_picking_orig_dest_link>=15.0dev,<15.1dev',
         'odoo-addon-stock_picking_show_linked>=15.0dev,<15.1dev',
         'odoo-addon-stock_putaway_product_template>=15.0dev,<15.1dev',
         'odoo-addon-stock_quant_cost_info>=15.0dev,<15.1dev',
