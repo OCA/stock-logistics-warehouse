@@ -1,4 +1,5 @@
 <!-- Copyright 2019 Open Source Integrators
+     Copyright 2023 ForgeFlow S.L. (https://www.forgeflow.com)
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <!-- Scrap Reason Code Type -->
@@ -7,15 +8,22 @@
         <field name="model">scrap.reason.code</field>
         <field name="arch" type="xml">
             <form string="Reason Code">
-                <group>
-                    <field name="name" />
-                </group>
-                <group>
-                    <field name="description" />
-                </group>
-                <group>
-                    <field name="location_id" />
-                </group>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" nolabel="1" /></h1>
+                    </div>
+                    <group>
+                        <field name="description" />
+                    </group>
+                    <group>
+                        <field name="location_id" />
+                        <field
+                            name="product_category_ids"
+                            widget="many2many_tags"
+                            options="{'no_create': True}"
+                        />
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
@@ -27,6 +35,7 @@
                 <field name="name" />
                 <field name="description" />
                 <field name="location_id" />
+                <field name="product_category_ids" widget="many2many_tags" />
             </tree>
         </field>
     </record>
