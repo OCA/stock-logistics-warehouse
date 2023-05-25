@@ -1,6 +1,7 @@
 # Copyright 2023 ForgeFlow, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
+from collections import deque
 
 from odoo import SUPERUSER_ID, api
 from odoo.tools import sql
@@ -13,7 +14,10 @@ def pre_init_hook(cr):
         "Create temporary table to avoid the automatic launch of the compute method"
     )
     if not sql.table_exists(cr, "stock_picking_orig_dest_rel"):
-        cr.execute("CREATE TABLE stock_picking_orig_dest_rel (temp INTEGER)")
+        cr.execute(
+            """CREATE TABLE stock_picking_orig_dest_rel
+            (dest_picking_id integer,orig_picking_id integer)"""
+        )
 
 
 def post_init_hook(cr, registry):
@@ -22,6 +26,7 @@ def post_init_hook(cr, registry):
     cr.execute("DROP TABLE stock_picking_orig_dest_rel")
     _logger.info("Creating new table via ORM")
     StockPicking = env["stock.picking"]
+    registry._post_init_queue = deque()
     StockPicking._fields["orig_picking_ids"].update_db(StockPicking, False)
     StockPicking._fields["dest_picking_ids"].update_db(StockPicking, False)
     _logger.info("Filling Origin and Destination Picking relation table")

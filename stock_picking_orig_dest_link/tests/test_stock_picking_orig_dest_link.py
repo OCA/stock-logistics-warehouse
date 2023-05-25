@@ -1,10 +1,10 @@
 # Copyright 2023 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestPickingOrigDestLink(SavepointCase):
+class TestPickingOrigDestLink(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
