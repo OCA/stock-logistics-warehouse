@@ -17,6 +17,16 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: scrap_reason_code
+#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__product_category_ids
+msgid "Allowed Product Categories"
+msgstr ""
+
+#. module: scrap_reason_code
+#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__allowed_reason_code_ids
+msgid "Allowed Reason Code"
+msgstr ""
+
+#. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__name
 msgid "Code"
 msgstr "Código"
@@ -38,22 +48,23 @@ msgstr "Descripción"
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__display_name
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__display_name
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__display_name
 msgid "Display Name"
 msgstr "Nombre a mostrar"
 
 #. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__id
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__id
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__id
 msgid "ID"
 msgstr "Id."
 
 #. module: scrap_reason_code
+#: model:ir.model.fields,help:scrap_reason_code.field_scrap_reason_code__product_category_ids
+msgid ""
+"Indicate the cateogories of products that can use this reason code when "
+"doing a scrap. If left empy, this reason code can be used with any product."
+msgstr ""
+
+#. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code____last_update
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move____last_update
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap____last_update
 msgid "Last Modified on"
 msgstr "Últ. modificación en"
 
@@ -69,21 +80,12 @@ msgstr "Últ. actualización en"
 
 #. module: scrap_reason_code
 #: model:ir.model,name:scrap_reason_code.model_scrap_reason_code
+#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__reason_code_id
 #: model:ir.model.fields,field_description:scrap_reason_code.field_stock_scrap__reason_code_id
 #: model_terms:ir.ui.view,arch_db:scrap_reason_code.stock_reason_code_form
 #: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_scrap_reason_code_form
 msgid "Reason Code"
 msgstr "Código del motivo"
-
-#. module: scrap_reason_code
-#: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_scrap_reason_code_list
-msgid "Reason Codes"
-msgstr "Códigos de motivo"
-
-#. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__reason_code_id
-msgid "Reason code"
-msgstr "Código de motivo"
 
 #. module: scrap_reason_code
 #: model:ir.model,name:scrap_reason_code.model_stock_scrap
@@ -106,3 +108,16 @@ msgstr "Códigos de motivo de desecho"
 #: model:ir.model,name:scrap_reason_code.model_stock_move
 msgid "Stock Move"
 msgstr "Movimiento de almacén"
+
+#. module: scrap_reason_code
+#. odoo-python
+#: code:addons/scrap_reason_code/models/stock_scrap.py:0
+#, python-format
+msgid "The selected reason code is not allowed for this product category."
+msgstr ""
+
+#~ msgid "Reason Codes"
+#~ msgstr "Códigos de motivo"
+
+#~ msgid "Reason code"
+#~ msgstr "Código de motivo"
