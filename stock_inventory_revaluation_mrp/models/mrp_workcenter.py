@@ -27,8 +27,9 @@ class MrpRoutingWorkcenter(models.Model):
 
     def create(self, vals):
         res = super().create(vals)
-        if res.workcenter_id.costs_hour:
-            res.write({"unit_cost": res.workcenter_id.costs_hour})
+        for rec in res:
+            if rec.workcenter_id.costs_hour:
+                rec.write({"unit_cost": rec.workcenter_id.costs_hour})
 
     def _compute_line_subtotal(self):
         for rec in self:
