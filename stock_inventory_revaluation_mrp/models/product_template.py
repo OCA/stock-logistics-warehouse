@@ -107,39 +107,22 @@ class ProductProduct(models.Model):
         bom_line_obj = self.env["mrp.bom.line"]
         bom_obj = self.env["mrp.bom"]
         no_of_bom_version = self.env.company.no_of_bom_version
-        adjustment_obj = self.env["stock.cost.adjustment.detail"]
-        adjustment_id = self._context.get("adjustment_id")
         for product in self:
-            bom_ids = adjustment_obj.search(
-                [
-                    ("parent_product_id", "=", product.id),
-                    ("cost_adjustment_line_id.cost_adjustment_id", "=", adjustment_id),
-                ]
-            ).mapped('bom_id')
+            bom_ids = product.bom_ids[0]
             for bom_id in bom_ids:
-                active_bom = bom_obj.search(
+                version_boms = bom_obj.search(
                     [
-                        ("product_id", "=", bom_id.product_id.id),
+                        ("product_tmpl_id", "=", bom_id.product_tmpl_id.id),
                         ("active", "=", False),
-                        ("cost_roll_up_version", "!=", False)
-                        # ("active_ref_bom", "=", True),
+                        ("cost_roll_up_version", "=", True)
                     ],
-                    order="id DESC",
+                    order="id ASC",
                 )
-                active_bom.write({"active_ref_bom": False})
-                if active_bom and len(active_bom) >= no_of_bom_version:
-                    limit = (len(active_bom) - no_of_bom_version) + 1
-                    unlink_bom = bom_obj.search(
-                        [
-                            ("product_id", "=", bom_id.product_id.id),
-                            ("active", "=", False),
-                            ("active_ref_bom", "=", False),
-                            ("cost_roll_up_version", "!=", False),
-                        ],
-                        order="id asc",
-                        limit=limit,
-                    )
-                    unlink_bom.unlink()
+                version_boms.filtered(lambda l: l.active_ref_bom == True).write({"active_ref_bom": False})
+                if version_boms and len(version_boms) >= no_of_bom_version:
+                    limit = (len(version_boms) - no_of_bom_version)
+                    unlink_boms = version_boms[0:limit+1]
+                    unlink_boms.unlink()
                 new_bom = bom_id.copy(
                     {
                         "active": False,

@@ -107,6 +107,9 @@ class CostAdjustmentLine(models.Model):
             if not bom_line.bom_id.active:
                 continue
             impacted_products = bom_line.bom_id.get_produced_items()
+            if bom_line.bom_id != impacted_products.bom_ids[0]:
+                continue
+
             for impacted_product in impacted_products:
                 add_cost = self.difference_cost * bom_line.product_qty
                 vals.append(
