@@ -15,10 +15,7 @@ class WorkCenter(models.Model):
 class MrpRoutingWorkcenter(models.Model):
     _inherit = "mrp.routing.workcenter"
 
-    currency_id = fields.Many2one(related="company_id.currency_id")
-    unit_cost = fields.Monetary(
-        related="workcenter_id.employee_costs_hour",
-        currency_field="currency_id",
+    unit_cost = fields.Float(
         string="Unit Cost",
     )
 
@@ -27,6 +24,11 @@ class MrpRoutingWorkcenter(models.Model):
         'operation_id',
         string='Operation Information',
     )
+
+    def create(self, vals):
+        res = super().create(vals)
+        if res.workcenter_id.costs_hour:
+            res.write({"unit_cost": res.workcenter_id.costs_hour})
 
     def _compute_line_subtotal(self):
         for rec in self:
