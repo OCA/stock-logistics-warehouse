@@ -20,6 +20,56 @@ class BoM(models.Model):
     active_ref_bom = fields.Boolean(string="Active Reference BOM")
     cost_roll_up_version = fields.Boolean(string="Cost Roll Version", default=False)
 
+    def update_bom_version(self):
+        import pdb;pdb.set_trace()
+        bom_obj = self.env["mrp.bom"]
+        no_of_bom_version = self.env.company.no_of_bom_version
+        for bom in self:
+            version_boms = bom_obj.search(
+                [
+                    ("product_tmpl_id", "=", bom.product_tmpl_id.id),
+                    ("active", "=", False),
+                    ("cost_roll_up_version", "=", True)
+                ],
+                order="id ASC",
+            )
+            version_boms.filtered(lambda l: l.active_ref_bom == True).write({"active_ref_bom": False})
+            if version_boms and len(version_boms) >= no_of_bom_version:
+                limit = (len(version_boms) - no_of_bom_version)
+                unlink_boms = version_boms[0:limit+1]
+                unlink_boms.unlink()
+            new_bom = bom.copy(
+                {
+                  "active": False,
+                  "active_ref_bom": True,
+                  "cost_roll_up_version": True,
+                }
+            )
+            for line in new_bom.bom_line_ids:
+                line.write({"unit_cost": line.product_id.standard_price})
+
+            for operatine in new_bom.operation_ids.filtered(
+                lambda l: l.workcenter_id.analytic_product_id.activity_cost_ids
+            ):
+                activity_cost_ids = []
+                for (
+                    activity
+                ) in operatine.workcenter_id.analytic_product_id.activity_cost_ids:
+                    activity_cost_ids.append(
+                        (
+                            0,
+                            0,
+                            {
+                                "analytic_product_id": operatine.workcenter_id.analytic_product_id.id,
+                                "product_id": activity.product_id.id,
+                                "standard_price": activity.standard_price,
+                                "factor": activity.factor,
+                            },
+                        )
+                    )
+                if activity_cost_ids:
+                    operatine.write({"operation_info_ids": activity_cost_ids})
+
 
 class BomLine(models.Model):
     _inherit = "mrp.bom.line"

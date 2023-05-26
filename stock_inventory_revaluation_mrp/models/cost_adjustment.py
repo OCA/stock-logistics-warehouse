@@ -48,11 +48,12 @@ class CostAdjustment(models.Model):
 
     def action_post(self):
         res = super().action_post()
-        product_ids = self.env["stock.cost.adjustment.detail"].search(
+        adjustment_lines = self.env["stock.cost.adjustment.detail"].search(
             [
                 ("cost_adjustment_line_id.cost_adjustment_id", "=", self.id),
             ]
-        ).mapped('product_id')
-        for product in product_ids:
-            product.update_bom_version()
+        )
+        boms = adjustment_lines.mapped('bom_id')
+        boms.update_bom_version()
+
         return res
