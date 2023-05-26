@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="stock_location_form_view">
+        <field
+            name="name"
+        >stock.location.form (in stock_location_package_restriction)</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[last()]">
+                <group name="restrictions" string="Restrictions">
+                    <field name="package_restriction" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="stock_location_tree_view">
+        <field
+            name="name"
+        >stock.location.tree (in stock_location_unique_product)</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field name="package_restriction" />
+            </field>
+        </field>
+    </record>
+</odoo>
