@@ -1,6 +1,7 @@
 # Copyright 2021-2022 Open Source Integrators
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, models, fields
+from odoo import _, api, models, fields
+from odoo.exceptions import ValidationError
 
 
 class BoM(models.Model):
@@ -20,6 +21,22 @@ class BoM(models.Model):
     active_ref_bom = fields.Boolean(string="Active Reference BOM")
     cost_roll_up_version = fields.Boolean(string="Cost Roll Version", default=False)
 
+    def _compute_operation_total_cost(self):
+        for rec in self:
+            rec.operation_total_cost = sum(opt.subtotal for opt in rec.operation_ids)
+
+    operation_total_cost = fields.Float(compute="_compute_operation_total_cost")
+
+    def write(self, vals):
+        res = super().write(vals)
+        for rec in self:
+            if rec.cost_roll_up_version and vals and not self._context.get('bypass_checks'):
+                raise ValidationError(_("You cannot update cost roll BOM"))
+
+            if vals.get("active") and rec.cost_roll_up_version:
+                raise ValidationError(_("You cannot active Cost Roll Version BOM"))
+        return res
+
     def update_bom_version(self):
         import pdb;pdb.set_trace()
         bom_obj = self.env["mrp.bom"]
@@ -33,7 +50,7 @@ class BoM(models.Model):
                 ],
                 order="id ASC",
             )
-            version_boms.filtered(lambda l: l.active_ref_bom == True).write({"active_ref_bom": False})
+            version_boms.filtered(lambda l: l.active_ref_bom == True).with_context(bypass_checks=True).write({"active_ref_bom": False})
             if version_boms and len(version_boms) >= no_of_bom_version:
                 limit = (len(version_boms) - no_of_bom_version)
                 unlink_boms = version_boms[0:limit+1]
@@ -47,7 +64,6 @@ class BoM(models.Model):
             )
             for line in new_bom.bom_line_ids:
                 line.write({"unit_cost": line.product_id.standard_price})
-
             for operatine in new_bom.operation_ids.filtered(
                 lambda l: l.workcenter_id.analytic_product_id.activity_cost_ids
             ):

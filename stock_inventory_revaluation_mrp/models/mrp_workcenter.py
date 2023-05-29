@@ -20,10 +20,11 @@ class MrpRoutingWorkcenter(models.Model):
     )
 
     operation_info_ids = fields.One2many(
-        'operation.information',
-        'operation_id',
-        string='Operation Information',
+        "operation.information",
+        "operation_id",
+        string="Operation Information",
     )
+    cost_roll_up_version = fields.Boolean(related="bom_id.cost_roll_up_version", store=True)
 
     def create(self, vals):
         res = super().create(vals)
@@ -33,7 +34,9 @@ class MrpRoutingWorkcenter(models.Model):
 
     def _compute_line_subtotal(self):
         for rec in self:
-            rec.subtotal = ((rec.time_cycle_manual and rec.time_cycle_manual / 60) * rec.unit_cost) or 0
+            rec.subtotal = (
+                (rec.time_cycle_manual and rec.time_cycle_manual / 60) * rec.unit_cost
+            ) or 0
 
     subtotal = fields.Float(compute="_compute_line_subtotal")
 
@@ -59,3 +62,9 @@ class OperationInformation(models.Model):
     factor = fields.Float(
         string="Qty factor",
     )
+
+    def _compute_subtotal(self):
+        for rec in self:
+            rec.subtotal = rec.standard_price * rec.factor
+
+    subtotal = fields.Float(compute="_compute_subtotal")
