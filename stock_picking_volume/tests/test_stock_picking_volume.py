@@ -20,18 +20,7 @@ class TestStockPickingVolume(SavepointCase):
         )
         cls.loc_stock = cls.wh.lot_stock_id
         cls.loc_customer = cls.env.ref("stock.stock_location_customers")
-        cls.product = cls.env["product.product"].create(
-            {
-                "name": "Unittest P1",
-                "product_length": 10.0,
-                "product_width": 5.0,
-                "product_height": 3.0,
-                "uom_id": cls.env.ref("uom.product_uom_unit").id,
-                "dimensional_uom_id": cls.env.ref("uom.product_uom_meter").id,
-                "type": "product",
-            }
-        )
-        cls.product.onchange_calculate_volume()
+        cls.product = cls._create_product("Unittest P1", 10.0, 5.0, 3.0)
         cls.picking_type_out = cls.env.ref("stock.picking_type_out")
         cls.picking = cls.env["stock.picking"].create(
             {
@@ -55,6 +44,22 @@ class TestStockPickingVolume(SavepointCase):
                 ],
             }
         )
+
+    @classmethod
+    def _create_product(cls, name, length, width, height):
+        product = cls.env["product.product"].create(
+            {
+                "name": name,
+                "product_length": length,
+                "product_width": width,
+                "product_height": height,
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
+                "dimensional_uom_id": cls.env.ref("uom.product_uom_meter").id,
+                "type": "product",
+            }
+        )
+        product.onchange_calculate_volume()
+        return product
 
     def _set_product_qty(self, product, qty):
         self.env["stock.quant"]._update_available_quantity(product, self.loc_stock, qty)
@@ -143,4 +148,44 @@ class TestStockPickingVolume(SavepointCase):
         self.picking.move_line_ids.qty_done = 1
         self.picking.button_validate()
         self.picking.action_cancel()
+        self.assertEqual(self.picking.volume, 750)
+
+    def test_picking_with_canceled_move(self):
+        """
+        Data:
+            one picking with two move lines with 5 units of product
+        Test Case:
+            set 5 unit of product as available
+            get the volume of the picking
+        Expected result:
+            volume is 5 * 10 * 5 * 3 = 750
+            The volume is computed from the expected quantity
+        """
+        product2 = self._create_product("Product2", 10.0, 5.0, 3.0)
+        self._set_product_qty(self.product, 5)
+        self._set_product_qty(product2, 5)
+        self.picking.write(
+            {
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": product2.name,
+                            "product_id": product2.id,
+                            "product_uom": product2.uom_id.id,
+                            "product_uom_qty": 5.0,
+                            "location_id": self.loc_stock.id,
+                            "location_dest_id": self.loc_customer.id,
+                        },
+                    )
+                ]
+            }
+        )
+        self.picking.action_confirm()
+        self.picking.action_assign()
+        self.picking.invalidate_cache()
+        self.assertEqual(self.picking.volume, 750 * 2)
+        self.picking.move_lines[1]._action_cancel()
+        self.picking.invalidate_cache()
         self.assertEqual(self.picking.volume, 750)
