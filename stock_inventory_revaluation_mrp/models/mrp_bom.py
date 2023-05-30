@@ -38,7 +38,6 @@ class BoM(models.Model):
         return res
 
     def update_bom_version(self):
-        import pdb;pdb.set_trace()
         bom_obj = self.env["mrp.bom"]
         no_of_bom_version = self.env.company.no_of_bom_version
         for bom in self:

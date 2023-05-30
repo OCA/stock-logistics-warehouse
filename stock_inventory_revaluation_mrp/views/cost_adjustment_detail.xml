@@ -31,6 +31,7 @@
                 />
                 <field
                     name="cost_increase"
+		    string="Cost Change"
                     options="{'currency_field': 'currency_id'}"
                     widget="monetary"
                 />
