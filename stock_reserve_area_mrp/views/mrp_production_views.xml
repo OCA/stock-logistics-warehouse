@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="reserve_area_mrp_production_form_view" model="ir.ui.view">
+        <field name="name">reserve.area.mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <field name="reserved_availability" position="before">
+                <field
+                    name="area_reserved_availability"
+                    attrs="{'column_invisible': [('parent.state', 'in', ['draft', 'done'])]}"
+                />
+            </field>
+            <xpath
+                expr="//page[@name='miscellaneous']/group/group/field[@name='location_dest_id']"
+                position="after"
+            >
+                <field name="reserve_area_id" options="{'no_create': True}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
