@@ -1,0 +1,17 @@
+<!-- Copyright 2020 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_run_stock_pull_list_wizard_wizard" model="ir.ui.view">
+        <field name="name">stock.pull.list.wizard.form</field>
+        <field name="model">stock.pull.list.wizard</field>
+        <field
+            name="inherit_id"
+            ref="stock_pull_list.view_run_stock_pull_list_wizard_wizard"
+        />
+        <field name="arch" type="xml">
+            <field name="consolidate_by_product" position="after">
+                <field name="only_reserved_in_area" />
+            </field>
+        </field>
+    </record>
+</odoo>
