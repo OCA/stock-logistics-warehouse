@@ -27,6 +27,20 @@ class BoM(models.Model):
 
     operation_total_cost = fields.Float(compute="_compute_operation_total_cost")
 
+    def copy(self, default=None):
+        # cost roll version, no copies allowed
+        if self.cost_rollup_version:
+            raise ValidationError(_("You cannot duplicate Cost Roll Version BOM"))
+        else:
+            return super().copy(default)
+
+    def unlink(self):
+        # cost roll version, deletion not allowed
+        if self.cost_rollup_version:
+            raise ValidationError(_("You cannot delete Cost Roll Version BOM"))
+        else:
+            return super().unlink()
+
     def write(self, vals):
         res = super().write(vals)
         for rec in self:
