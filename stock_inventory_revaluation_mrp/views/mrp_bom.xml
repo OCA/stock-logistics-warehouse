@@ -19,6 +19,13 @@
             <xpath expr="//field[@name='bom_line_ids']/tree/field[@name='product_uom_id']" position="after">
                 <field name="subtotal" readonly="1" attrs="{'column_invisible': [('parent.cost_roll_up_version', '=', False)]}"/>
             </xpath>
+            <field name="bom_line_ids"" position="after">
+                <group colspan="4">
+                    <group class="oe_subtotal_footer oe_right" attrs="{'invisible': [('cost_roll_up_version', '=', False)]}">
+                        <field name="material_total_cost" attrs="{'invisible': [('cost_roll_up_version', '=', False)]}"/>
+                    </group>
+                </group>
+            </field>
             <field name="operation_ids" position="after">
                 <group colspan="4">
                     <group class="oe_subtotal_footer oe_right" attrs="{'invisible': [('cost_roll_up_version', '=', False)]}">
