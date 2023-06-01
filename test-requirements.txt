@@ -1,1 +1,2 @@
 odoo_test_helper
+odoo14-addon-stock_reserve_area @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1720/head#subdirectory=setup/stock_reserve_area
