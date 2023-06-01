@@ -70,7 +70,8 @@ class CostAdjustmentLine(models.Model):
         vals = []
         for ops_line in ops_lines:
             impacted_products = ops_line.bom_id.get_produced_items()
-            if ops_line.bom_id != impacted_products.bom_ids[0]:
+            impacted_products = impacted_products.filtered(lambda x: x.proposed_cost_ignore_bom != True)
+            if impacted_products and ops_line.bom_id != impacted_products.bom_ids[0]:
                 continue
             for impacted_product in impacted_products:
                 add_cost = self.difference_cost * (ops_line.time_cycle / 60.0)

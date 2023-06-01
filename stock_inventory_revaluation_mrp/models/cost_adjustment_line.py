@@ -107,7 +107,8 @@ class CostAdjustmentLine(models.Model):
             if not bom_line.bom_id.active:
                 continue
             impacted_products = bom_line.bom_id.get_produced_items()
-            if bom_line.bom_id != impacted_products.bom_ids[0]:
+            impacted_products = impacted_products.filtered(lambda x: x.proposed_cost_ignore_bom != True)
+            if impacted_products and bom_line.bom_id != impacted_products.bom_ids[0]:
                 continue
 
             for impacted_product in impacted_products:
