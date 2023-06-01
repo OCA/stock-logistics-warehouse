@@ -35,14 +35,14 @@ class BoM(models.Model):
 
     def copy(self, default=None):
         # cost roll version, no copies allowed
-        if self.cost_rollup_version:
+        if self.cost_roll_up_version and not self.env.context.get('allow', False):
             raise ValidationError(_("You cannot duplicate Cost Roll Version BOM"))
         else:
             return super().copy(default)
 
     def unlink(self):
         # cost roll version, deletion not allowed
-        if self.cost_rollup_version:
+        if self.cost_roll_up_version and not self.env.context.get('allow', False):
             raise ValidationError(_("You cannot delete Cost Roll Version BOM"))
         else:
             return super().unlink()
@@ -73,7 +73,7 @@ class BoM(models.Model):
             if version_boms and len(version_boms) >= no_of_bom_version:
                 limit = (len(version_boms) - no_of_bom_version)
                 unlink_boms = version_boms[0:limit+1]
-                unlink_boms.unlink()
+                unlink_boms.with_context(allow=True).unlink()
             new_bom = bom.copy(
                 {
                   "active": False,
