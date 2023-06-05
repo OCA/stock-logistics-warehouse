@@ -12,3 +12,9 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.lock_cost_products",
         readonly=False,
     )
+
+    no_of_bom_version = fields.Integer(
+        "Number of retained cost roll versions",
+        related="company_id.no_of_bom_version",
+        readonly=False
+    )

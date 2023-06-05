@@ -45,3 +45,22 @@ class CostAdjustment(models.Model):
                 new_products = details.product_id
                 self._populate_adjustment_lines(new_products, level=level + 1)
         return lines
+
+    def action_post(self):
+        res = super().action_post()
+
+        # bom's that are impacted as a result of cost change
+        adjustment_details = self.env["stock.cost.adjustment.detail"].search(
+            [
+                ("cost_adjustment_line_id.cost_adjustment_id", "=", self.id),
+            ]
+        )
+        boms = adjustment_details.mapped('bom_id')
+        boms.update_bom_version()
+
+        #bom's that are input as changed
+        for product in self.product_ids:
+            if product.bom_ids and (product.bom_ids[0] not in boms):
+                product.bom_ids[0].update_bom_version()
+
+        return res

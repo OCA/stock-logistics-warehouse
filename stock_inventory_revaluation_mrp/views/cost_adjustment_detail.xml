@@ -8,6 +8,7 @@
                 <field name="cost_adjustment_id" invisible="1" />
                 <field name="company_id" invisible="1" />
                 <field name="currency_id" invisible="1" />
+		<field name="parent_product_id" string="Product" />
                 <field name="product_id" />
                 <field name="bom_id" />
                 <field name="level" optional="show" />
@@ -30,6 +31,7 @@
                 />
                 <field
                     name="cost_increase"
+		    string="Cost Change"
                     options="{'currency_field': 'currency_id'}"
                     widget="monetary"
                 />

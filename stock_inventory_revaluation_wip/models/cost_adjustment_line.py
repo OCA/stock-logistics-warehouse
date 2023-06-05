@@ -70,6 +70,9 @@ class CostAdjustmentLine(models.Model):
         vals = []
         for ops_line in ops_lines:
             impacted_products = ops_line.bom_id.get_produced_items()
+            impacted_products = impacted_products.filtered(lambda x: x.proposed_cost_ignore_bom != True)
+            if impacted_products and ops_line.bom_id != impacted_products.bom_ids[0]:
+                continue
             for impacted_product in impacted_products:
                 add_cost = self.difference_cost * (ops_line.time_cycle / 60.0)
                 vals.append(
@@ -115,7 +118,7 @@ class CostAdjustmentLine(models.Model):
                 ("activity_cost_ids.product_id", "in", products.ids),
             ]
         )
-        cost_types = products | impacted_cost_types
-        return impacted_cost_types, self.env["mrp.routing.workcenter"].search(
-            [("workcenter_id.analytic_product_id", "in", cost_types.ids)]
-        )
+        cost_types = impacted_cost_types
+        operations = self.env["mrp.routing.workcenter"].search(
+            [("workcenter_id.analytic_product_id", "in", cost_types.ids),('active','=',True)])
+        return impacted_cost_types, operations
