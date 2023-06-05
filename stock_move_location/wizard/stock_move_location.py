@@ -184,17 +184,19 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def _get_move_values(self, picking, lines):
         # locations are same for the products
-        location_from_id = lines[0].origin_location_id.id
-        location_to_id = lines[0].destination_location_id.id
+        location_from = lines[0].origin_location_id
+        location_to = (
+            lines[0].destination_location_id or picking.destination_location_id
+        )
         product = lines[0].product_id
-        product_uom_id = lines[0].product_uom_id.id
+        product_uom = lines[0].product_uom_id
         qty = sum(x.move_quantity for x in lines)
         return {
             "name": product.display_name,
-            "location_id": location_from_id,
-            "location_dest_id": location_to_id,
+            "location_id": location_from.id,
+            "location_dest_id": location_to.id,
             "product_id": product.id,
-            "product_uom": product_uom_id,
+            "product_uom": product_uom.id,
             "product_uom_qty": qty,
             "picking_id": picking.id,
             "location_move": True,
