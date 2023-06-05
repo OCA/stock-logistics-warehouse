@@ -21,7 +21,8 @@
         "views/res_config_settings.xml",
         "views/product_template.xml",
         "report/report_mrp.xml",
-        "report/report_mrp_bom.xml"
+        "report/report_mrp_bom.xml",
+        "views/mrp_bom.xml",
     ],
     "maintainers": ["patrickrwilson"],
     "application": False,

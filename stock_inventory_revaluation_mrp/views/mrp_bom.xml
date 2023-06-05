@@ -1,0 +1,15 @@
+<odoo>
+    <record id="mrp_bom_tree_view" model="ir.ui.view">
+        <field name="name">mrp.bom.tree.mrp.bom.detail</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order">create_date desc</attribute>
+            </xpath>
+            <field name="type" position="after">
+                <field name="create_date" />
+            </field>
+        </field>
+    </record>
+</odoo>
