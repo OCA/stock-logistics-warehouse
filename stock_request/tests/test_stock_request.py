@@ -1113,3 +1113,5 @@ class TestStockRequestBase(TestStockRequest):
         self.assertEqual(sr3.state, "cancel")
         self.assertEqual(sr3.qty_done, 0)
         self.assertEqual(sr3.qty_cancelled, 5)
+        # Set the request order to done if there are any delivered lines
+        self.assertEqual(order.state, "done")
