@@ -25,7 +25,7 @@
                 <field name="create_date"/>
             </xpath>
             <xpath expr="//field[@name='bom_line_ids']/tree/field[@name='product_qty']" position="after">
-                <field name="unit_cost" readonly="1" 
+                <field name="unit_cost" readonly="1"
                     attrs="{'column_invisible': [('parent.cost_roll_up_version', '=', False)]}"
                     />
             </xpath>
@@ -48,7 +48,7 @@
             </field>
         </field>
     </record>
-    
+
     <record id="mrp_bom_tree_view_inherit_revalution_mrp" model="ir.ui.view">
         <field name="name">mrp.bom.detail.tree</field>
         <field name="model">mrp.bom</field>
@@ -57,6 +57,9 @@
             <field name="type" position="after">
                 <field name="create_date"/>
             </field>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order">create_date desc</attribute>
+            </xpath>
         </field>
     </record>
 
