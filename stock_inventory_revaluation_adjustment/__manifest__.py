@@ -18,6 +18,7 @@
         "views/cost_adjustment_type.xml",
         "views/cost_adjustment.xml",
         "views/product_template_view.xml",
+        "views/product_template_hide_proposed_cost.xml"
     ],
     "installable": True,
     "maintainers": ["patrickrwilson"],

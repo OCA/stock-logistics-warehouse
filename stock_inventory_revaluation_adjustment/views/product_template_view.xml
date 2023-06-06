@@ -19,6 +19,7 @@
                         name="proposed_cost"
                         widget="monetary"
                         options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
+                        invisible="1"
                     />
                     <span
                         groups="uom.group_uom"
@@ -31,5 +32,36 @@
             </div>
         </field>
     </record>
+    <record id="product_product_tree_view_inherited" model="ir.ui.view">
+        <field name="name">product.product.oak.show.proposed.cost</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="standard_price" position="after">
+                <field name="proposed_cost" />
+            </field>
+        </field>
+    </record>
 
+    <record id="cost_adjustment_detail_view_form_inherit" model="ir.ui.view">
+    <field name="name">stock.cost.adjustment.cancel.detail.form</field>
+    <field name="model">stock.cost.adjustment</field>
+    <field
+            name="inherit_id"
+            ref="stock_inventory_revaluation_adjustment.cost_adjustment_view_form"
+        />
+    <field name="arch" type="xml">
+        <button name="action_cancel" position="attributes">
+            <attribute
+                    name="confirm"
+                >If you cancel this cost adjustment, all its cost adjustment lines including the proposed cost will be lost. Are you sure
+                you want to discard it?</attribute>
+        </button>
+        <button name="action_draft" position="attributes">
+            <attribute
+                    name="confirm"
+                >If you set this to draft, the cost adjustment lines will be lost. Are you sure you want to set this to draft?</attribute>
+        </button>
+    </field>
+    </record>
 </odoo>
