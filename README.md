@@ -32,7 +32,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_move_line_product](account_move_line_product/) | 13.0.1.0.0 |  | Displays the product in the journal entries and items
-[account_move_line_stock_info](account_move_line_stock_info/) | 13.0.1.1.0 |  | Account Move Line Stock Info
+[account_move_line_stock_info](account_move_line_stock_info/) | 13.0.1.2.0 |  | Account Move Line Stock Info
 [procurement_auto_create_group](procurement_auto_create_group/) | 13.0.1.3.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
 [product_quantity_update_force_inventory](product_quantity_update_force_inventory/) | 13.0.1.0.0 |  | Product Quantity Update Force Inventory
 [sale_automatic_workflow_reserve_sale_stock](sale_automatic_workflow_reserve_sale_stock/) | 13.0.1.0.0 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Sale Automatic Workflow: Reserve Sale stock
