@@ -130,7 +130,7 @@ class AssignManualQuantsLines(models.TransientModel):
     assign_wizard = fields.Many2one(
         comodel_name="assign.manual.quants",
         string="Move",
-        required=True,
+        required=False,
         ondelete="cascade",
     )
     quant_id = fields.Many2one(
