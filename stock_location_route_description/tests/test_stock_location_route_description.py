@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 class TestStockLocationRouteDescription(TransactionCase):
     def setUp(self, *args, **kwargs):
         super(TestStockLocationRouteDescription, self).setUp(*args, **kwargs)
-        self.model_stock_location_route = self.env["stock.location.route"]
+        self.model_stock_location_route = self.env["stock.route"]
 
     def test_display_name_stock_location_route(self):
         """
