@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-04 01:47+0000\n"
-"PO-Revision-Date: 2023-06-07 17:11+0000\n"
+"PO-Revision-Date: 2023-06-08 09:13+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -431,7 +431,7 @@ msgstr "Ultimo aggiornamento di"
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule_write_date
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_location_id
