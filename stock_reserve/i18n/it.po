@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2023-05-25 12:09+0000\n"
+"PO-Revision-Date: 2023-06-09 12:11+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -722,7 +722,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_price_unit
 msgid "Unit Price"
-msgstr "Prezzo Unitario"
+msgstr "Prezzo unitario"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation_product_uom
