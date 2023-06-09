@@ -80,7 +80,8 @@
         <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
         <field name="arch" type="xml">
             <notebook position="inside">
-                <page string="Activity Driven Costs" attrs="{'invisible': [('parent.cost_roll_up_version', '=', False)]}">
+                <page string="Activity Driven Costs" attrs="{'invisible': [('cost_roll_up_version', '=', False)]}">
+                    <field name="cost_roll_up_version" invisible="1"/>
                     <field name="operation_info_ids" nolabel="1">
                         <tree editable="bottom" create="0" edit="0">
                             <field name="operation_id" invisible="1"/>
