@@ -6,7 +6,7 @@
     "author": "MT Software, Odoo Community Association (OCA)",
     "summary": "Run an auto location orderpoint replenishment "
     "also after a move gets relocated by Stock Move Source Relocate",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "development_status": "Alpha",
     "data": [],
     "depends": [
