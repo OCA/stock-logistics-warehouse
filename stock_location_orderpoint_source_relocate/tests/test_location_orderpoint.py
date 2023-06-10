@@ -51,7 +51,7 @@ class TestLocationOrderpoint(TestLocationOrderpointCommon, SourceRelocateCommon)
             self.assertEqual(move.location_id, internal_location)
             trap.assert_jobs_count(1, only=job_func)
             trap.assert_enqueued_job(
-                orderpoint.run_auto_replenishment,
+                job_func,
                 args=(move.product_id, internal_location, "location_id"),
                 kwargs={},
                 properties=dict(
