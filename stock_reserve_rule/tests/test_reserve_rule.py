@@ -5,7 +5,7 @@ from odoo import exceptions, fields
 from odoo.tests import common
 
 
-class TestReserveRule(common.SavepointCase):
+class TestReserveRule(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
