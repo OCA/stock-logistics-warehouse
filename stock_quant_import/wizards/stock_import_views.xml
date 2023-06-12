@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_import_view_form" model="ir.ui.view">
+        <field name="name">stock.import.form</field>
+        <field name="model">stock.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="state" invisible="1" />
+                <group attrs="{'invisible': [('state', '=', 'error')]}">
+                    <field name="file_import" filename="file_name" />
+                    <field name="file_name" invisible="1" />
+                    <field name="location_id" />
+                    <field
+                        name="internal_ref_col_id"
+                        options="{'no_quick_create':True,'no_create_edit':True,'no_open':True}"
+                        attrs="{'invisible': [('state', '=', 'choose')]}"
+                    />
+                    <field
+                        name="quantity_col_id"
+                        options="{'no_quick_create':True,'no_create_edit':True,'no_open':True}"
+                        attrs="{'invisible': [('state', '=', 'choose')]}"
+                    />
+                    <field name="strict_mode" />
+                </group>
+                <group attrs="{'invisible': [('state', '!=', 'error')]}">
+                    <field name="error_message" />
+                </group>
+                <footer>
+                    <div attrs="{'invisible': [('state', '=', 'error')]}">
+                        <button
+                            type="object"
+                            name="button_analyze_csv"
+                            string="Analyze CSV"
+                        />
+                        <button
+                            type="object"
+                            name="button_load_csv_data"
+                            string="Load Data"
+                            attrs="{'invisible': [('state', '!=', 'import')]}"
+                        />
+                        <button
+                            special="cancel"
+                            class="btn_secondary"
+                            string="Cancel"
+                        />
+                    </div>
+                    <div attrs="{'invisible': [('state', '!=', 'error')]}">
+                        <button type="object" name="action_reload" string="OK" />
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_import_action" model="ir.actions.act_window">
+        <field name="name">Import stock quantities</field>
+        <field name="res_model">stock.import</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="stock_import_menu"
+        action="stock_import_action"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="50"
+    />
+
+</odoo>

@@ -1,0 +1,186 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_quant_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-11 10:18+0000\n"
+"PO-Revision-Date: 2023-05-11 10:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_quant_import
+#: model_terms:ir.ui.view,arch_db:stock_quant_import.stock_import_view_form
+msgid "Analyze CSV"
+msgstr "Analizza CSV"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__file_import
+msgid "CSV File"
+msgstr "File CSV"
+
+#. module: stock_quant_import
+#. odoo-python
+#: code:addons/stock_quant_import/wizards/stock_import.py:0
+#, python-format
+msgid "CSV file must have at least two columns"
+msgstr "Il file CSV deve avere almeno due colonne"
+
+#. module: stock_quant_import
+#: model_terms:ir.ui.view,arch_db:stock_quant_import.stock_import_view_form
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header__name
+msgid "Column Name"
+msgstr "Nome colonna"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__create_uid
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__create_date
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__display_name
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__file_name
+msgid "File Name"
+msgstr "Nome del file"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__id
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__import_headers
+msgid "Import Headers"
+msgstr "Intestazioni Importazione"
+
+#. module: stock_quant_import
+#. odoo-python
+#: code:addons/stock_quant_import/wizards/stock_import.py:0
+#: model:ir.actions.act_window,name:stock_quant_import.stock_import_action
+#: model:ir.ui.menu,name:stock_quant_import.stock_import_menu
+#, python-format
+msgid "Import stock quantities"
+msgstr "Importa quantità giacenze"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__internal_ref_col_id
+msgid "Internal Reference Column"
+msgstr "Colonna del Riferimento Interno"
+
+#. module: stock_quant_import
+#. odoo-python
+#: code:addons/stock_quant_import/wizards/stock_import.py:0
+#, python-format
+msgid ""
+"Invalid data in row %s:\n"
+"Internal Reference: '%s'\n"
+"Quantity: '%s'"
+msgstr ""
+"Dati non validi alla riga %s:\n"
+"Riferimento Interno: '%s'\n"
+"Quantità: '%s'"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import____last_update
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__write_uid
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header__write_uid
+msgid "Last Updated by"
+msgstr "Aggiornato l'ultima volta da"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__write_date
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header__write_date
+msgid "Last Updated on"
+msgstr "Aggiornato l'ultima volta il"
+
+#. module: stock_quant_import
+#: model_terms:ir.ui.view,arch_db:stock_quant_import.stock_import_view_form
+msgid "Load Data"
+msgstr "Carica Dati"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__location_id
+msgid "Location"
+msgstr "Ubicazione"
+
+#. module: stock_quant_import
+#. odoo-python
+#: code:addons/stock_quant_import/wizards/stock_import.py:0
+#, python-format
+msgid "Multiple products found with Internal Reference '%s'."
+msgstr "Trovati più prodotti con riferimento interno '%s'"
+
+#. module: stock_quant_import
+#. odoo-python
+#: code:addons/stock_quant_import/wizards/stock_import.py:0
+#, python-format
+msgid "Product with Internal Reference '%s' not found."
+msgstr "Prodotto con Riferimento Interno '%s' non trovato."
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__quantity_col_id
+msgid "Quantity Column"
+msgstr "Colonna delle quantità"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import__state
+msgid "State"
+msgstr "Stato"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,field_description:stock_quant_import.field_stock_import_header__stock_import_id
+msgid "Stock Import"
+msgstr "Importazione Giacenze"
+
+#. module: stock_quant_import
+#: model:ir.model,name:stock_quant_import.model_stock_import_header
+msgid "Stock Import Header"
+msgstr "Intestazione importazione giacenze"
+
+#. module: stock_quant_import
+#: model:ir.model,name:stock_quant_import.model_stock_import
+msgid "Update Stock Quantities from CSV File"
+msgstr "Aggiorna Giacenze da file CSV"
+
+#. module: stock_quant_import
+#: model:ir.model.fields,help:stock_quant_import.field_stock_import__location_id
+msgid "Update stock in this location"
+msgstr "Aggiorna giacenze in questa ubicazione"
+
+#. module: stock_quant_import
+#: model:ir.model.fields.selection,name:stock_quant_import.selection__stock_import__state__choose
+msgid "choose"
+msgstr "scelta"
+
+#. module: stock_quant_import
+#: model:ir.model.fields.selection,name:stock_quant_import.selection__stock_import__state__import
+msgid "import"
+msgstr "importazione"
