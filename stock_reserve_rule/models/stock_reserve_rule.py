@@ -57,7 +57,6 @@ class StockReserveRule(models.Model):
     )
 
     rule_domain = fields.Char(
-        string="Rule Domain",
         default=[],
         help="Domain based on Stock Moves, to define if the "
         "rule is applicable or not.",
