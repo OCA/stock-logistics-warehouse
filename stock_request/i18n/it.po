@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2023-06-12 11:10+0000\n"
+"PO-Revision-Date: 2023-06-14 14:12+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -387,12 +387,12 @@ msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "In Progress"
-msgstr "In lavorazione"
+msgstr "In corso"
 
 #. module: stock_request
 #: model:ir.model.fields.selection,name:stock_request.selection__stock_request__state__open
 msgid "In progress"
-msgstr "In lavorazione"
+msgstr "In corso"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_location
