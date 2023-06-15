@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-05 00:45+0000\n"
-"PO-Revision-Date: 2023-05-22 15:10+0000\n"
+"PO-Revision-Date: 2023-06-15 09:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -38,12 +38,12 @@ msgstr "Followers"
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_channel_ids
 msgid "Followers (Channels)"
-msgstr "Followers (Canali)"
+msgstr "Seguito da (canali)"
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Followers (Partners)"
+msgstr "Seguito da (partner)"
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,help:stock_inventory_chatter.field_stock_inventory_message_unread
@@ -78,7 +78,7 @@ msgstr ""
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_is_follower
 msgid "Is Follower"
-msgstr "È un follower"
+msgstr "Segue"
 
 #. module: stock_inventory_chatter
 #: model:ir.model.fields,field_description:stock_inventory_chatter.field_stock_inventory_message_last_post
