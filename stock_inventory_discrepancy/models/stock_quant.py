@@ -63,6 +63,7 @@ class StockQuant(models.Model):
             action["context"] = dict(
                 self._context.copy(),
                 discrepancy_quant_ids=over_discrepancy.ids,
+                active_ids=self.ids,
             )
             return action
         return super().action_apply_inventory()
