@@ -1,0 +1,86 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_available_unreserved
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2018-06-29 14:21+0000\n"
+"Last-Translator: Osoul <baruni@osoul.ly>\n"
+"Language-Team: none\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 3.0.1\n"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__contains_unreserved
+msgid "Contains unreserved products"
+msgstr "يحتوي على كميات غير محجوزة"
+
+#. module: stock_available_unreserved
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.quant_search_view
+msgid "Internal Unreserved"
+msgstr "الغير محجوز داخلياً"
+
+#. module: stock_available_unreserved
+#: code:addons/stock_available_unreserved/models/product.py:0
+#, python-format
+msgid "Invalid domain operator %s"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: code:addons/stock_available_unreserved/models/product.py:0
+#, python-format
+msgid "Invalid domain right operand %s"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: model:ir.model,name:stock_available_unreserved.model_product_product
+msgid "Product"
+msgstr "المنتج"
+
+#. module: stock_available_unreserved
+#: model:ir.model,name:stock_available_unreserved.model_product_template
+msgid "Product Template"
+msgstr "قالب المنتج"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_product_product__qty_available_not_res
+msgid "Qty Available Not Reserved"
+msgstr "الكمية المتوفرة الغير محجوزة"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template__qty_available_not_res
+msgid "Quantity On Hand Unreserved"
+msgstr "الكمية في متناول اليد الغير محجوزة"
+
+#. module: stock_available_unreserved
+#: model:ir.model,name:stock_available_unreserved.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_available_unreserved
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_search_form_view_stock
+msgid "Reservable Products"
+msgstr "المنتجات القابلة للحجز"
+
+#. module: stock_available_unreserved
+#: model:ir.actions.act_window,name:stock_available_unreserved.product_open_quants_unreserved
+msgid "Stock On Hand (Unreserved)"
+msgstr "الكمية في متناول اليد (غير محجوزة)"
+
+#. module: stock_available_unreserved
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_form_view_procurement_button
+msgid "Unreserved"
+msgstr "غير محجوز"
+
+#. module: stock_available_unreserved
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
+msgid "Unreserved:"
+msgstr "غير محجوز:"

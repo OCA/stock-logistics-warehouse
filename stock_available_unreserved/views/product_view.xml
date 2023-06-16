@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_product_template_tree" model="ir.ui.view">
+        <field name="name">product.template.stock.tree.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_stock_product_template_tree" />
+        <field name="arch" type="xml">
+            <field name="qty_available" position="after">
+                <field name="qty_available_not_res" />
+            </field>
+        </field>
+    </record>
+    <record id="product_template_search_form_view_stock" model="ir.ui.view">
+        <field name="name">product.template.search.stock.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_search_form_view_stock" />
+        <field name="arch" type="xml">
+            <filter name="real_stock_available" position="after">
+                <filter
+                    name="real_stock_unreserved"
+                    string="Reservable Products"
+                    domain="[('qty_available_not_res','&gt;',0)]"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="product_template_kanban_stock_view" model="ir.ui.view">
+        <field name="name">Product Template Kanban Stock</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_kanban_stock_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_available']/parent::div" position="after">
+                <div t-if="record.type.raw_value == 'product'">Unreserved: <field
+                        name="qty_available_not_res"
+                    /> <field name="uom_id" /></div>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_product_tree" model="ir.ui.view">
+        <field name="name">product.stock.tree.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.view_stock_product_tree" />
+        <field name="arch" type="xml">
+            <field name="qty_available" position="after">
+                <field name="qty_available_not_res" />
+            </field>
+        </field>
+    </record>
+    <record id="product_template_form_view_procurement_button" model="ir.ui.view">
+        <field name="name">product.template_procurement</field>
+        <field name="model">product.template</field>
+        <field
+            name="inherit_id"
+            ref="stock.product_template_form_view_procurement_button"
+        />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    type="object"
+                    name="action_open_quants_unreserved"
+                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    class="oe_stat_button"
+                    icon="fa-building-o"
+                >
+                    <field
+                        name="qty_available_not_res"
+                        widget="statinfo"
+                        string="Unreserved"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+    <record id="product_form_view_procurement_button" model="ir.ui.view">
+        <field name="name">product.product.procurement</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    class="oe_stat_button"
+                    name="%(product_open_quants_unreserved)d"
+                    icon="fa-building-o"
+                    type="action"
+                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                >
+                    <field
+                        name="qty_available_not_res"
+                        widget="statinfo"
+                        string="Unreserved"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

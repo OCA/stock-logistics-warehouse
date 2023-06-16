@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_available_unreserved
+#
+# Translators:
+# Jeffery CHEN <jeffery9@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-04 03:58+0000\n"
+"PO-Revision-Date: 2019-09-26 17:24+0000\n"
+"Last-Translator: 黎伟杰 <674416404@qq.com>\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/oca/teams/23907/"
+"zh_CN/)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.8\n"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__contains_unreserved
+msgid "Contains unreserved products"
+msgstr "包含未预留的产品"
+
+#. module: stock_available_unreserved
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.quant_search_view
+msgid "Internal Unreserved"
+msgstr "内部未预留"
+
+#. module: stock_available_unreserved
+#: code:addons/stock_available_unreserved/models/product.py:0
+#, python-format
+msgid "Invalid domain operator %s"
+msgstr "无效的域运算符%s"
+
+#. module: stock_available_unreserved
+#: code:addons/stock_available_unreserved/models/product.py:0
+#, python-format
+msgid "Invalid domain right operand %s"
+msgstr "无效的域权限操作数%s"
+
+#. module: stock_available_unreserved
+#: model:ir.model,name:stock_available_unreserved.model_product_product
+msgid "Product"
+msgstr "产品"
+
+#. module: stock_available_unreserved
+#: model:ir.model,name:stock_available_unreserved.model_product_template
+msgid "Product Template"
+msgstr "产品模板"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_product_product__qty_available_not_res
+msgid "Qty Available Not Reserved"
+msgstr "可用量未预留"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template__qty_available_not_res
+msgid "Quantity On Hand Unreserved"
+msgstr "未预留的在手数量"
+
+#. module: stock_available_unreserved
+#: model:ir.model,name:stock_available_unreserved.model_stock_quant
+msgid "Quants"
+msgstr "数量分析"
+
+#. module: stock_available_unreserved
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_search_form_view_stock
+msgid "Reservable Products"
+msgstr "可预订产品"
+
+#. module: stock_available_unreserved
+#: model:ir.actions.act_window,name:stock_available_unreserved.product_open_quants_unreserved
+msgid "Stock On Hand (Unreserved)"
+msgstr "现有库存（未预留）"
+
+#. module: stock_available_unreserved
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_form_view_procurement_button
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_form_view_procurement_button
+msgid "Unreserved"
+msgstr "未预留"
+
+#. module: stock_available_unreserved
+#: model_terms:ir.ui.view,arch_db:stock_available_unreserved.product_template_kanban_stock_view
+msgid "Unreserved:"
+msgstr "未预留："
