@@ -29,6 +29,7 @@
                     <group>
                         <field name="exclude_reserved" />
                         <field name="consolidate_by_product" />
+                        <field name="consider_date" />
                     </group>
                 </group>
                 <footer>

@@ -46,6 +46,10 @@ class PullListWizard(models.TransientModel):
         "disregarding date.",
     )
     procurement_group_ids = fields.Many2many(comodel_name="procurement.group")
+    consider_date = fields.Boolean(
+        help="Take into consideration the date in which the products "
+        "have to move to/from the location",
+    )
     # Step 2 - filtering options.
     select_all = fields.Boolean(default=True)
     rule_action = fields.Selection(
@@ -146,9 +150,15 @@ class PullListWizard(models.TransientModel):
         incoming_moves = self.env["stock.move"].search(domain, order="date asc")
         incoming_dict = {}
         for supply in incoming_moves:
-            move_for_date = demand_moves.filtered(
-                lambda m: m.product_id == supply.product_id and m.date >= supply.date
-            )
+            if self.consider_date:
+                move_for_date = demand_moves.filtered(
+                    lambda m: m.product_id == supply.product_id
+                    and m.date >= supply.date
+                )
+            else:
+                move_for_date = demand_moves.filtered(
+                    lambda m: m.product_id == supply.product_id
+                )
             if move_for_date:
                 date_selected = move_for_date[0].date if not force_date else force_date
             else:
