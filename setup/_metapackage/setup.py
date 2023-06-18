@@ -45,6 +45,7 @@ setuptools.setup(
         'odoo-addon-stock_request_kanban>=15.0dev,<15.1dev',
         'odoo-addon-stock_request_mrp>=15.0dev,<15.1dev',
         'odoo-addon-stock_request_purchase>=15.0dev,<15.1dev',
+        'odoo-addon-stock_request_separate_picking>=15.0dev,<15.1dev',
         'odoo-addon-stock_reserve>=15.0dev,<15.1dev',
         'odoo-addon-stock_secondary_unit>=15.0dev,<15.1dev',
         'odoo-addon-stock_warehouse_calendar>=15.0dev,<15.1dev',
