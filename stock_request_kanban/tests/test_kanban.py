@@ -30,7 +30,7 @@ class TestKanban(TestBaseKanban):
         self.ressuply_loc = self.env["stock.location"].create(
             {"name": "Ressuply", "location_id": self.warehouse.view_location_id.id}
         )
-        self.route = self.env["stock.location.route"].create(
+        self.route = self.env["stock.route"].create(
             {
                 "name": "Transfer",
                 "product_categ_selectable": False,
@@ -57,7 +57,7 @@ class TestKanban(TestBaseKanban):
                 "name": "Transfer",
                 "route_id": self.route.id,
                 "location_src_id": self.ressuply_loc.id,
-                "location_id": self.warehouse.lot_stock_id.id,
+                "location_dest_id": self.warehouse.lot_stock_id.id,
                 "action": "pull_push",
                 "picking_type_id": self.warehouse.int_type_id.id,
                 "procure_method": "make_to_stock",

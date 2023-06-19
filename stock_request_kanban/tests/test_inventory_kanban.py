@@ -9,7 +9,7 @@ class TestKanban(TestBaseKanban):
     def setUp(self):
         super().setUp()
         self.main_company = self.env.ref("base.main_company")
-        self.route = self.env["stock.location.route"].create(
+        self.route = self.env["stock.route"].create(
             {
                 "name": "Transfer",
                 "product_categ_selectable": False,

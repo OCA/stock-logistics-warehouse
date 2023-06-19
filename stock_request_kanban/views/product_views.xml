@@ -6,17 +6,13 @@
         <field name="name">product.product.stock.request.kanban</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view" />
-        <field
-            name="groups_id"
-            eval="[(4, ref('stock_request.group_stock_request_user'))]"
-        />
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <button
                     class="oe_stat_button"
                     name="action_view_kanban_cards"
                     type="object"
-                    attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                    attrs="{'invisible':[('type', 'not in', ['product', 'consu'])], 'groups': 'stock_request.group_stock_request_user'}"
                     icon="fa-barcode"
                 >
                     <field
@@ -32,17 +28,13 @@
         <field name="name">product.template.stock.request.kanban</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view" />
-        <field
-            name="groups_id"
-            eval="[(4, ref('stock_request.group_stock_request_user'))]"
-        />
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <button
                     class="oe_stat_button"
                     name="action_view_kanban_cards"
                     type="object"
-                    attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                    attrs="{'invisible':[('type', 'not in', ['product', 'consu'])], 'groups': 'stock_request.group_stock_request_user'}"
                     icon="fa-barcode"
                 >
                     <field
