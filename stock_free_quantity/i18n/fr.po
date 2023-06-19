@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-05-30 12:08+0000\n"
-"Last-Translator: apf-c2c <alex.pfandler@camptocamp.com>\n"
+"PO-Revision-Date: 2023-06-19 18:08+0000\n"
+"Last-Translator: yterrettaz <yael.terrettaz@camptocamp.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -20,17 +20,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_free_quantity.product_normal_form_view
 #: model_terms:ir.ui.view,arch_db:stock_free_quantity.view_stock_available_form
 msgid "<span class=\"o_stat_text\">Free</span>"
-msgstr "<span class=\"o_stat_text\">En stock</span>"
+msgstr "<span class=\"o_stat_text\">Disponible</span>"
 
 #. module: stock_free_quantity
 #: model:ir.model.fields,field_description:stock_free_quantity.field_product_template__free_qty
 msgid "Free Quantity"
-msgstr "Quantité en stock"
+msgstr "Quantité disponible"
 
 #. module: stock_free_quantity
 #: model_terms:ir.ui.view,arch_db:stock_free_quantity.product_template_kanban_free_qty_view
 msgid "Free:"
-msgstr "En stock :"
+msgstr "Disponible :"
 
 #. module: stock_free_quantity
 #: model:ir.model,name:stock_free_quantity.model_product_template
