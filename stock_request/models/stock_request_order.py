@@ -109,10 +109,42 @@ class StockRequestOrder(models.Model):
         readonly=True,
     )
 
+    route_id = fields.Many2one('stock.location.route', string='Route',
+                               domain="[('id', 'in', route_ids)]",
+                               ondelete='restrict')
+
+    route_ids = fields.Many2many(
+        'stock.location.route', string='Routes',
+        compute='_compute_route_ids',
+        readonly=True,
+    )
+
     _sql_constraints = [
         ('name_uniq', 'unique(name, company_id)',
          'Stock Request name must be unique'),
     ]
+
+    @api.depends('warehouse_id', 'location_id')
+    def _compute_route_ids(self):
+        route_obj = self.env['stock.location.route']
+        for wh in self.mapped('warehouse_id'):
+            wh_routes = route_obj.search(
+                [('warehouse_ids', '=', wh.id)])
+            for record in self.filtered(lambda r: r.warehouse_id == wh):
+                routes = route_obj
+                if record.warehouse_id:
+                    routes |= wh_routes
+                parents = record.get_parents().ids
+                record.route_ids = routes.filtered(lambda r: any(
+                    p.location_id.id in parents for p in r.rule_ids))
+
+    def get_parents(self):
+        location = self.location_id
+        result = location
+        while location.location_id:
+            location = location.location_id
+            result |= location
+        return result
 
     @api.depends('stock_request_ids.allocation_ids')
     def _compute_picking_ids(self):
