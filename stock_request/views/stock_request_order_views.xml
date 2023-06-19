@@ -110,10 +110,6 @@
                                 context="{
                             'default_expected_date':expected_date,
                             'default_picking_policy': picking_policy,
-                            'default_warehouse_id': warehouse_id,
-                            'default_location_id': location_id,
-                            'default_procurement_group_id': procurement_group_id,
-                            'default_company_id': company_id,
                             'default_state': state,
                             }"
                                 attrs="{'readonly': [('state', '!=', 'draft')]}"

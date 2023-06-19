@@ -60,7 +60,6 @@ class StockRequestOrder(models.Model):
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse",
         string="Warehouse",
-        check_company=True,
         readonly=True,
         ondelete="cascade",
         required=True,
