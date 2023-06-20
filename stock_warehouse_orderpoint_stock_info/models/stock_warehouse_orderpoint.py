@@ -27,7 +27,7 @@ class StockWarehouseOrderpoint(models.Model):
         string="Forecast On Location", compute="_compute_product_available_qty"
     )
     product_category = fields.Many2one(
-        string="Product Category", related="product_id.categ_id", store=True
+        string="Product Categorys", related="product_id.categ_id", store=True
     )
 
     def _compute_product_available_qty(self):

@@ -8,7 +8,7 @@
 
 {
     "name": "Stock Warehouse Orderpoint Stock Info",
-    "version": "13.0.1.0.0",
+    "version": "16.0.1.0.0",
     "depends": ["stock"],
     "author": "OdooMRP team, AvanzOSC, Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
