@@ -16,7 +16,7 @@ class StockWarehouseOrderpoint(models.Model):
     )
 
     def _compute_product_available_qty(self):
-        super()._compute_product_available_qty()
+        res = super()._compute_product_available_qty()
         op_by_loc = defaultdict(set)
         for order in self:
             op_by_loc[order.location_id].add(order.id)
@@ -32,3 +32,4 @@ class StockWarehouseOrderpoint(models.Model):
                 order.product_location_qty_available_not_res = product[
                     "qty_available_not_res"
                 ]
+        return res

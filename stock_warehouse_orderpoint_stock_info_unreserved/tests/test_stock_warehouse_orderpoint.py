@@ -2,10 +2,10 @@
 # Copyright 2016 ForgeFlow, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockWarehouseOrderpoint(SavepointCase):
+class TestStockWarehouseOrderpoint(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -84,7 +84,7 @@ class TestStockWarehouseOrderpoint(SavepointCase):
         # Create & process moves to test the product quantity
         move_in = self.create_move(self.location_supplier, self.location_stock)
         move_out = self.create_move(self.location_stock, self.location_customer)
-        self.reordering_record.refresh()
+        self.reordering_record.invalidate_recordset()
         self.assertEqual(
             self.reordering_record.product_location_qty_available_not_res,
             0.0,
@@ -97,7 +97,7 @@ class TestStockWarehouseOrderpoint(SavepointCase):
             "does not match with the product.",
         )
         move_in._action_done()
-        self.reordering_record.refresh()
+        self.reordering_record.invalidate_recordset()
         self.assertEqual(
             self.reordering_record.product_location_qty_available_not_res,
             10.0,
@@ -110,7 +110,7 @@ class TestStockWarehouseOrderpoint(SavepointCase):
             "does not match with the product.",
         )
         move_out._action_done()
-        self.reordering_record.refresh()
+        self.reordering_record.invalidate_recordset()
         self.assertEqual(
             self.reordering_record.product_location_qty_available_not_res,
             0.0,
