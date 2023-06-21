@@ -19,8 +19,6 @@ class TestReserveRule(common.TransactionCase):
                 "code": "WHTEST",
             }
         )
-        cls.rule = cls.env.ref("stock_reserve_rule.stock_reserve_rule_1_demo")
-        cls.rule.active = True
 
         cls.customer_loc = cls.env.ref("stock.stock_location_customers")
 
@@ -59,17 +57,15 @@ class TestReserveRule(common.TransactionCase):
             {"name": "Product 2", "type": "product"}
         )
 
-        cls.unit = cls.env["product.packaging.type"].create(
-            {"name": "Unit", "code": "UNIT", "sequence": 0}
+        cls.unit = cls.env["stock.package.type"].create({"name": "Unit", "sequence": 0})
+        cls.retail_box = cls.env["stock.package.type"].create(
+            {"name": "Retail Box", "sequence": 3}
         )
-        cls.retail_box = cls.env["product.packaging.type"].create(
-            {"name": "Retail Box", "code": "PACK", "sequence": 3}
+        cls.transport_box = cls.env["stock.package.type"].create(
+            {"name": "Transport Box", "sequence": 4}
         )
-        cls.transport_box = cls.env["product.packaging.type"].create(
-            {"name": "Transport Box", "code": "CASE", "sequence": 4}
-        )
-        cls.pallet = cls.env["product.packaging.type"].create(
-            {"name": "Pallet", "code": "PALLET", "sequence": 5}
+        cls.pallet = cls.env["stock.package.type"].create(
+            {"name": "Pallet", "sequence": 5}
         )
 
     def _create_picking(self, wh, products=None, location_src_id=None):
@@ -129,9 +125,9 @@ class TestReserveRule(common.TransactionCase):
             [
                 {
                     "name": name,
-                    "qty": qty,
+                    "qty": qty if qty else 1,
                     "product_id": product.id,
-                    "packaging_type_id": packaging_type.id,
+                    "package_type_id": packaging_type.id,
                 }
                 for name, qty, packaging_type in packagings
             ]
