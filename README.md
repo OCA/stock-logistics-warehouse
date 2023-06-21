@@ -99,7 +99,7 @@ addon | version | maintainers | summary
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 13.0.1.2.0 |  | Stock - Manual Quant Assignment
 [stock_quant_view_reservation](stock_quant_view_reservation/) | 13.0.1.0.0 |  | Allows to see details of reservations on a quant
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 13.0.1.0.0 |  | Establish a removal priority on stock locations.
-[stock_request](stock_request/) | 13.0.1.7.2 |  | Internal request for stock
+[stock_request](stock_request/) | 13.0.1.7.3 |  | Internal request for stock
 [stock_request_analytic](stock_request_analytic/) | 13.0.1.0.0 |  | Internal request for stock
 [stock_request_direction](stock_request_direction/) | 13.0.1.0.1 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | From or to your warehouse?
 [stock_request_kanban](stock_request_kanban/) | 13.0.1.0.1 |  | Adds a stock request order, and takes stock requests as lines
