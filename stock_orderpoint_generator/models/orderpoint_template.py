@@ -78,6 +78,9 @@ class OrderpointTemplate(models.Model):
         "scheduled action for every product in this list.",
     )
     auto_last_generation = fields.Datetime(string="Last Automatic Generation")
+    # Disable stock.warehouse.orderpoint which are useless for the template
+    qty_forecast = fields.Float(compute=False, store=False)
+    product_category_id = fields.Many2one(related=False, store=False)
 
     def _template_fields_to_discard(self):
         """In order to create every orderpoint we should pop this template
