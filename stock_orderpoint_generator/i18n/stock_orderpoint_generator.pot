@@ -412,11 +412,6 @@ msgid "Select a criteria to auto compute the minimum"
 msgstr ""
 
 #. module: stock_orderpoint_generator
-#: model:ir.model.fields,help:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__product_category_id
-msgid "Select category for the current product"
-msgstr ""
-
-#. module: stock_orderpoint_generator
 #: model:ir.model.fields,field_description:stock_orderpoint_generator.field_stock_warehouse_orderpoint_template__show_bom
 msgid "Show BoM column"
 msgstr ""
