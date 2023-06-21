@@ -23,7 +23,7 @@ Stock Request
     :target: https://runbot.odoo-community.org/runbot/153/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module was written to allow users to request products that are
 frequently stocked by the company, to be transferred to their chosen location.
@@ -116,6 +116,7 @@ Contributors
   * Steve Campbell <scampbell@opensourceintegrators.com>
 
 * Héctor Villarreal <hector.villarreal@forgeflow.com>
+* Oriol Miranda <oriol.miranda@forgeflow.com>
 
 Maintainers
 ~~~~~~~~~~~
