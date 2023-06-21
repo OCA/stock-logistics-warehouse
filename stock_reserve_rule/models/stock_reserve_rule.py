@@ -145,7 +145,7 @@ class StockReserveRuleRemoval(models.Model):
     )
 
     packaging_type_ids = fields.Many2many(
-        comodel_name="product.packaging.type",
+        comodel_name="stock.package.type",
         help="Optional packaging when using 'Full Packaging'.\n"
         "Only the quantities matching one of the packaging are removed.\n"
         "When empty, any packaging can be removed.",
@@ -265,7 +265,7 @@ class StockReserveRuleRemoval(models.Model):
                 lambda packaging: (
                     packaging.qty > 0
                     and (
-                        packaging.packaging_type_id in packaging_type_filter
+                        packaging.package_type_id in packaging_type_filter
                         if packaging_type_filter
                         else True
                     )
