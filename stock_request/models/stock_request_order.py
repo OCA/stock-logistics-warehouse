@@ -242,7 +242,9 @@ class StockRequestOrder(models.Model):
 
     def check_done(self):
         for rec in self:
-            if not rec.stock_request_ids.filtered(lambda r: r.state != "done"):
+            if not rec.stock_request_ids.filtered(
+                lambda r: r.state not in ["done", "cancel"]
+            ):
                 rec.action_done()
         return
 
