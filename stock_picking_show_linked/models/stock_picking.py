@@ -9,11 +9,11 @@ class StockPicking(models.Model):
     dest_picking_count = fields.Integer(compute="_compute_picking_count")
     origin_picking_count = fields.Integer(compute="_compute_picking_count")
 
-    @api.depends("move_lines")
+    @api.depends("move_ids")
     def _compute_picking_count(self):
         for record in self:
-            origin_pickings = record.mapped("move_lines.move_orig_ids.picking_id")
-            dest_pickings = record.mapped("move_lines.move_dest_ids.picking_id")
+            origin_pickings = record.mapped("move_ids.move_orig_ids.picking_id")
+            dest_pickings = record.mapped("move_ids.move_dest_ids.picking_id")
             record.origin_picking_count = len(origin_pickings)
             record.dest_picking_count = len(dest_pickings)
 
@@ -37,11 +37,11 @@ class StockPicking(models.Model):
         return result
 
     def action_stock_picking_origin(self):
-        pick_ids = self.mapped("move_lines.move_orig_ids.picking_id")
+        pick_ids = self.mapped("move_ids.move_orig_ids.picking_id")
         result = self._get_action_link(pick_ids.ids)
         return result
 
     def action_stock_picking_destination(self):
-        pick_ids = self.mapped("move_lines.move_dest_ids.picking_id")
+        pick_ids = self.mapped("move_ids.move_dest_ids.picking_id")
         result = self._get_action_link(pick_ids.ids)
         return result
