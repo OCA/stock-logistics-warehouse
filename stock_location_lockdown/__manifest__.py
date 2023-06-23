@@ -12,5 +12,9 @@
     "application": False,
     "installable": True,
     "depends": ["stock"],
-    "data": ["views/stock_location.xml"],
+    "data": [
+        "views/stock_location.xml",
+        "security/ir.model.access.csv",
+        "wizards/stock_location_lock_view.xml",
+    ],
 }

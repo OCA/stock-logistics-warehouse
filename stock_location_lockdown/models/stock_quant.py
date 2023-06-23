@@ -10,7 +10,7 @@ class StockQuant(models.Model):
 
     # Raise an error when trying to change a quant
     # which corresponding stock location is blocked
-    @api.constrains("location_id")
+    @api.constrains("location_id", "quantity")
     def check_location_blocked(self):
         for record in self:
             if record.location_id.block_stock_entrance:
