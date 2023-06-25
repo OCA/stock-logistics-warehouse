@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_location_lock_form_view" model="ir.ui.view">
+        <field name="name">stock.location.lock.form</field>
+        <field name="model">stock.location.lock</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group id="main">
+                        <field
+                            name="location_ids"
+                            widget="many2many_tags"
+                            options="{'no_create': True}"
+                        />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        string="Update"
+                        name="execute"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="stock_location_lock_act_window" model="ir.actions.act_window">
+        <field name="name">Update Stock Location Lock</field>
+        <field name="res_model">stock.location.lock</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="stock_location_lock_menu" model="ir.ui.menu">
+        <field name="name">Update Stock Location Lock</field>
+        <field name="parent_id" ref="stock.menu_stock_warehouse_mgmt" />
+        <field name="action" ref="stock_location_lock_act_window" />
+        <field name="sequence" eval="70" />
+    </record>
+</odoo>
