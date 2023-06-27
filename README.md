@@ -98,6 +98,7 @@ addon | version | maintainers | summary
 [stock_quant_expiration_date_tree](stock_quant_expiration_date_tree/) | 13.0.1.0.0 | [![Manuel Calero](https://github.com/Manuel Calero.png?size=30px)](https://github.com/Manuel Calero) | Allows to display expirations dates on stock quant tree view
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 13.0.1.2.0 |  | Stock - Manual Quant Assignment
 [stock_quant_reservation_info](stock_quant_reservation_info/) | 13.0.1.0.0 |  | Allows to see the reserved info of Products
+[stock_quant_reservation_info_mrp](stock_quant_reservation_info_mrp/) | 13.0.1.0.0 |  | Allows to see the manufacturing order related to the reserved info of Products
 [stock_quant_view_reservation](stock_quant_view_reservation/) | 13.0.1.0.0 |  | Allows to see details of reservations on a quant
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 13.0.1.0.0 |  | Establish a removal priority on stock locations.
 [stock_request](stock_request/) | 13.0.1.7.3 |  | Internal request for stock
