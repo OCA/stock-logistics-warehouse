@@ -7,7 +7,6 @@ from odoo import api, models
 class StockPicking(models.Model):
     _inherit = ["stock.picking", "base.exception"]
     _name = "stock.picking"
-    _order = "main_exception_id asc, priority desc, scheduled_date asc, id desc"
 
     @api.model
     def test_all_draft_pickings(self):
