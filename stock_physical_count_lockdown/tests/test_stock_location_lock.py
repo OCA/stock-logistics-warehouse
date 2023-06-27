@@ -17,6 +17,8 @@ class TestStockLocationLockdown(TransactionCase):
         self.supplier_location = self.env.ref("stock.stock_location_suppliers")
         self.customer_location = self.env.ref("stock.stock_location_customers")
 
+        self.update_location_lock_wizard = self.env["stock.location.lock"]
+
         # Call an existing product and force no Lot/Serial Number tracking
         self.product = self.env.ref("product.product_product_27")
         self.product.tracking = "none"
@@ -87,3 +89,12 @@ class TestStockLocationLockdown(TransactionCase):
 
         with self.assertRaises(ValidationError):
             stock_move._action_done()
+
+    def test_execute_button_wizard(self):
+        self.new_stock_location.is_physical_count_lockdown = False
+        self.update_location_lock_wizard.create(
+            {
+                "location_ids": self.new_stock_location,
+            }
+        ).execute()
+        self.assertEqual(self.new_stock_location.is_physical_count_lockdown, True)
