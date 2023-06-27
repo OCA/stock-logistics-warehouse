@@ -79,6 +79,11 @@ msgid "Fill with stock"
 msgstr ""
 
 #. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__owner_id
+msgid "From Owner"
+msgstr ""
+
+#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
 msgid "ID"
@@ -166,6 +171,11 @@ msgstr ""
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "Origin Location Disable"
+msgstr ""
+
+#. module: stock_move_location
+#: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__package_id
+msgid "Package Number"
 msgstr ""
 
 #. module: stock_move_location
