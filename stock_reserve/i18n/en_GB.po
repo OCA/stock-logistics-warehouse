@@ -125,11 +125,6 @@ msgid ""
 msgstr ""
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__city
-msgid "City"
-msgstr ""
-
-#. module: stock_reserve
 #: model_terms:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
 msgid "Click to create a stock reservation."
 msgstr ""
@@ -862,11 +857,6 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_move
 msgid "Whether this move is a part of stock_location moves"
-msgstr ""
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__zip_code
-msgid "Zip"
 msgstr ""
 
 #. module: stock_reserve
