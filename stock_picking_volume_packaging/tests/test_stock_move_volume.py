@@ -1,10 +1,10 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestStockMoveVolume(TransactionCase):
+class TestStockMoveVolume(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -19,6 +19,7 @@ class TestStockMoveVolume(TransactionCase):
                 "type": "product",
             }
         )
+        cls.product.onchange_calculate_volume()
         cls.pkg_box = cls.env["product.packaging"].create(
             {
                 "name": "Box",
