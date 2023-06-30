@@ -6,12 +6,16 @@ from odoo import api, fields, models
 
 class StockLocationLock(models.TransientModel):
     _name = "stock.location.lock"
-    _description = "Stock Transfer Lock Date"
+    _description = "Stock Transfer Lock"
 
     location_ids = fields.Many2many(
         comodel_name="stock.location",
         string="Locations",
         domain=[("usage", "=", "internal")],
+    )
+    has_clear_all = fields.Boolean(
+        string="Clear All Selected",
+        help="For clear all selected locations, just click this field and click Update button.",
     )
 
     @api.model
@@ -38,7 +42,7 @@ class StockLocationLock(models.TransientModel):
 
     def execute(self):
         self.ensure_one()
-        # raise UserError(self.location_ids)
         self._reset_physical_count_lockdown()
-        for rec in self.location_ids:
-            rec.sudo().write({"is_physical_count_lockdown": True})
+        if not self.has_clear_all:
+            for rec in self.location_ids:
+                rec.sudo().write({"is_physical_count_lockdown": True})

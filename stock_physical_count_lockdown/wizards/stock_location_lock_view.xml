@@ -12,6 +12,7 @@
                             widget="many2many_tags"
                             options="{'no_create': True}"
                         />
+                        <field name="has_clear_all" />
                     </group>
                 </sheet>
                 <footer>

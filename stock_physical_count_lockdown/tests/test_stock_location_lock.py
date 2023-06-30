@@ -98,3 +98,11 @@ class TestStockLocationLockdown(TransactionCase):
             }
         ).execute()
         self.assertEqual(self.new_stock_location.is_physical_count_lockdown, True)
+        # Test clear all selected stock locations
+        self.update_location_lock_wizard.create(
+            {
+                "location_ids": self.new_stock_location,
+                "has_clear_all": True,
+            }
+        ).execute()
+        self.assertEqual(self.new_stock_location.is_physical_count_lockdown, False)
