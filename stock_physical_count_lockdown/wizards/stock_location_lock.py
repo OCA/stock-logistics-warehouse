@@ -43,6 +43,10 @@ class StockLocationLock(models.TransientModel):
     def execute(self):
         self.ensure_one()
         self._reset_physical_count_lockdown()
-        if not self.has_clear_all:
-            for rec in self.location_ids:
-                rec.sudo().write({"is_physical_count_lockdown": True})
+        for rec in self.location_ids:
+            rec.sudo().write({"is_physical_count_lockdown": True})
+
+    @api.onchange("has_clear_all", "location_ids")
+    def onchange_selected_locations(self):
+        if self.has_clear_all:
+            self.location_ids = False

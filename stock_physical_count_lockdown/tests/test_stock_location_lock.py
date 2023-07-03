@@ -54,7 +54,6 @@ class TestStockLocationLockdown(TransactionCase):
             ],
         }
         stock_move = self.env["stock.move"].create(move_vals)
-
         with self.assertRaises(ValidationError):
             stock_move._action_done()
 
@@ -86,7 +85,6 @@ class TestStockLocationLockdown(TransactionCase):
             ],
         }
         stock_move = self.env["stock.move"].create(move_vals)
-
         with self.assertRaises(ValidationError):
             stock_move._action_done()
 
@@ -95,14 +93,20 @@ class TestStockLocationLockdown(TransactionCase):
         self.update_location_lock_wizard.create(
             {
                 "location_ids": self.new_stock_location,
+                "has_clear_all": False,
             }
         ).execute()
         self.assertEqual(self.new_stock_location.is_physical_count_lockdown, True)
+
+    def test_onchange_selected_locations(self):
         # Test clear all selected stock locations
-        self.update_location_lock_wizard.create(
+        self.new_stock_location.is_physical_count_lockdown = False
+        wizard = self.update_location_lock_wizard.create(
             {
                 "location_ids": self.new_stock_location,
                 "has_clear_all": True,
             }
-        ).execute()
+        )
+        wizard.onchange_selected_locations()
+        wizard.execute()
         self.assertEqual(self.new_stock_location.is_physical_count_lockdown, False)
