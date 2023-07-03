@@ -218,8 +218,8 @@ msgstr "Vykonať"
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid ""
-"When 'Product Selection: Lot Serial Number' is selected you are only able to"
-" add one product."
+"When 'Product Selection: Lot Serial Number' is selected you are only able to "
+"add one product."
 msgstr ""
 "Ak je zvolená možnosť 'výber produktov: šarža/sériové číslo',môžete pridať "
 "len jeden produkt."
@@ -233,6 +233,12 @@ msgid ""
 msgstr ""
 "Ak je zvolená možnosť 'výber produktov: jeden produkt',môžete pridať len "
 "jeden produkt."
+
+#. module: stock_inventory
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+#, python-format
+msgid "You can only delete inventory adjustments groups in draft state."
+msgstr ""
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
