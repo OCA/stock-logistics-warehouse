@@ -1,5 +1,5 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
 
 
@@ -214,3 +214,14 @@ class InventoryAdjustmentsGroup(models.Model):
                             " you are only able to add one product."
                         )
                     )
+
+    def unlink(self):
+        for adjustment in self:
+            if adjustment.state != "draft":
+                raise UserError(
+                    _(
+                        "You can only delete inventory adjustments groups in"
+                        " draft state."
+                    )
+                )
+        return super().unlink()
