@@ -228,6 +228,12 @@ msgid ""
 msgstr ""
 
 #. module: stock_inventory
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+#, python-format
+msgid "You can only delete inventory adjustments groups in draft state."
+msgstr ""
+
+#. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "e.g. Annual inventory"
 msgstr ""
