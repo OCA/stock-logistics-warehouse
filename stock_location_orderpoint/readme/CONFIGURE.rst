@@ -28,7 +28,7 @@ Location Orderpoint configuration
 =================================
 
 #. Go either by the stock location you want to replenish and click on 'Orderpoints'
-   or go to Inventory > Configuration > Settings > Warehouse > Stock Location Orderpoint
+   or go to Inventory > Configuration > Warehouse > Stock Location Orderpoint
 #. Click on 'Create'
 #. Set a sequence
 #. Choose if the rule will be applied:

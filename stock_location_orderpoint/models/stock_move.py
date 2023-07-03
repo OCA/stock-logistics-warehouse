@@ -12,7 +12,7 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     location_orderpoint_id = fields.Many2one(
-        "stock.location.orderpoint", "Stock location orderpoint"
+        "stock.location.orderpoint", "Stock location orderpoint", index=True
     )
 
     @ormcache("self", "product")
