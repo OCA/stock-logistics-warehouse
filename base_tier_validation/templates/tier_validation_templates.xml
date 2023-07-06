@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="tier_validation_buttons">
+        <div>
+            <button
+                name="request_validation"
+                string="Request Validation"
+                t-attf-attrs="{'invisible': ['|','|',('need_validation', '!=', True),('rejected','=',True),('#{state_field}', 'not in', [#{state_from}])]}"
+                type="object"
+            />
+            <button
+                name="restart_validation"
+                string="Restart Validation"
+                t-attf-attrs="{'invisible': ['|',('review_ids', '=', []),('#{state_field}', 'not in', [#{state_from}])]}"
+                type="object"
+            />
+        </div>
+    </template>
+    <template id="tier_validation_label">
+        <div>
+        <field name="need_validation" invisible="1" />
+        <field name="validated" invisible="1" />
+        <field name="rejected" invisible="1" />
+        <div
+                class="alert alert-warning"
+                role="alert"
+                t-attf-attrs="{'invisible': ['|', '|', '|',
+             ('validated', '=', True), ('#{state_field}', 'not in', [#{state_from}]),
+             ('rejected', '=', True), ('review_ids', '=', [])]}"
+                style="margin-bottom:0px;"
+            >
+            <p>
+                <i class="fa fa-info-circle" />
+                This Record needs to be
+                validated.
+                <field name="can_review" invisible="1" />
+                <button
+                        name="validate_tier"
+                        string="Validate"
+                        attrs="{'invisible': [('can_review', '=', False)]}"
+                        type="object"
+                        class="oe_inline oe_button btn-success"
+                        icon="fa-thumbs-up"
+                    />
+                <button
+                        name="reject_tier"
+                        string="Reject"
+                        attrs="{'invisible': [('can_review', '=', False)]}"
+                        type="object"
+                        class="btn-icon btn-danger"
+                        icon="fa-thumbs-down"
+                    />
+                <br /><field name="next_review" />
+            </p>
+        </div>
+        <div
+                class="alert alert-success"
+                role="alert"
+                t-attf-attrs="{'invisible': ['|', '|', ('validated', '!=', True), ('#{state_field}', 'not in', [#{state_from}]), ('review_ids', '=', [])]}"
+                style="margin-bottom:0px;"
+            >
+            <p>
+                <i class="fa fa-thumbs-up" />
+                Operation has been
+                <b>validated</b>
+                !
+            </p>
+        </div>
+        <div
+                class="alert alert-danger"
+                role="alert"
+                t-attf-attrs="{'invisible': ['|', '|', ('rejected', '!=', True), ('#{state_field}', 'not in', [#{state_from}]), ('review_ids', '=', [])]}"
+                style="margin-bottom:0px;"
+            >
+            <p>
+                <i class="fa fa-thumbs-down" />
+                Operation has been
+                <b>rejected</b>
+                .
+            </p>
+        </div>
+        </div>
+    </template>
+    <template id="tier_validation_reviews">
+        <field
+            name="review_ids"
+            widget="tier_validation"
+            attrs="{'invisible':[('review_ids', '=', [])]}"
+            style="width:100%%; margin-top: 10px;"
+        >
+        <tree>
+            <field name="id" />
+            <field name="name" />
+            <field name="sequence" />
+            <field name="requested_by" />
+            <field name="status" />
+            <field name="todo_by" />
+            <field name="done_by" />
+            <field name="reviewed_date" />
+            <field name="reviewed_formated_date" />
+            <field name="comment" />
+        </tree>
+            </field>
+    </template>
+</odoo>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="base_tier_validation.ReviewerMenuView" owl="1">
+        <div class="o_ActivityMenuView dropdown" t-ref="root">
+            <a
+                class="o_ActivityMenuView_dropdownToggle dropdown-toggle o-no-caret o-dropdown--narrow"
+                t-att-aria-expanded="reviewerMenuView.isOpen ? 'true' : 'false'"
+                title="Reviews"
+                href="#"
+                role="button"
+                t-on-click="reviewerMenuView.onClickDropdownToggle"
+            >
+                <i
+                    class="fa fa-pencil-square-o"
+                    role="img"
+                    aria-label="Reviews"
+                /> <span
+                    t-if="reviewerMenuView.counter > 0"
+                    class="o_ActivityMenuView_counter badge"
+                    t-esc="reviewerMenuView.counter"
+                />
+            </a>
+            <div
+                t-if="reviewerMenuView.isOpen"
+                class="o_ActivityMenuView_dropdownMenu o-dropdown-menu dropdown-menu-end show bg-view"
+                role="menu"
+            >
+                <div class="o_ActivityMenuView_activityGroups">
+                    <t t-if="reviewerMenuView.reviewGroupViews.length === 0">
+                        <div
+                            class="o_ActivityMenuView_noActivity dropdown-item-text text-center d-flex justify-content-center"
+                        >
+                            <span>No reviews to do.</span>
+                        </div>
+                    </t>
+                    <t
+                        t-foreach="reviewerMenuView.reviewGroupViews"
+                        t-as="reviewGroupView"
+                        t-key="reviewGroupView.localId"
+                        name="activityGroupLoop"
+                    >
+                        <div
+                            class="o_ActivityMenuView_activityGroup"
+                            t-att-data-res_model="reviewGroupView.reviewGroup.irModel.model"
+                            t-att-data-model_name="reviewGroupView.reviewGroup.irModel.name"
+                            t-att-data-active_field="reviewGroupView.reviewGroup.irModel.active_field"
+                            t-att-data-domain="reviewGroupView.reviewGroup.domain"
+                            data-filter='my'
+                            t-att-data-activity-group-view-local-id="reviewGroupView.localId"
+                            t-on-click="reviewGroupView.onClickFilterButton"
+                        >
+                            <div
+                                t-if="reviewGroupView.reviewGroup.irModel.iconUrl"
+                                class="o_ActivityMenuView_activityGroupIconContainer"
+                            >
+                                <img
+                                    t-att-src="reviewGroupView.reviewGroup.irModel.iconUrl"
+                                    alt="Activity"
+                                />
+                            </div>
+                            <div class="o_ActivityMenuView_activityGroupInfo">
+                                <div class="o_ActivityMenuView_activityGroupTitle">
+                                    <span class="o_ActivityMenuView_activityGroupName">
+                                        <t
+                                            t-esc="reviewGroupView.reviewGroup.irModel.name"
+                                        />
+                                    </span>
+                                </div>
+                                <div>
+                                    <button
+                                        t-if="reviewGroupView.reviewGroup.pending_count"
+                                        type="button"
+                                        class="btn btn-link o_activity_filter_button mr16"
+                                        t-att-data-res_model="reviewGroupView.reviewGroup.irModel.model"
+                                        t-att-data-model_name="reviewGroupView.reviewGroup.irModel.name"
+                                        data-filter="pending_count"
+                                    >
+                                        <t
+                                            t-esc="reviewGroupView.reviewGroup.pending_count"
+                                        />
+                                        Pending
+                                    </button>
+                                    <span
+                                        t-if="!reviewGroupView.reviewGroup.pending_count"
+                                        class="o_no_activity mr16"
+                                    >
+                                        0 Pending
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

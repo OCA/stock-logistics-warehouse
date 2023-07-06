@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="base_tier_validation.Collapse" owl="1">
+        <div class="o_form_sheet panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a
+                            class="o_info_btn"
+                            data-toggle="collapse"
+                            href="#"
+                            data-target="#collapse1"
+                            t-on-click="onToggleCollapse"
+                        >
+                            Reviews
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse active">
+                    <div class="panel-body o_review">
+                        <table class="oe_mt32 table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Sequence</th>
+                                    <th class="text-left">Requested by</th>
+                                    <th class="text-right">Description</th>
+                                    <th class="text-right">Status</th>
+                                    <th class="text-right">Todo by</th>
+                                    <th class="text-right">Done by</th>
+                                    <th class="text-right">Validation Date</th>
+                                    <th class="text-right">Comment</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
+                                <t
+                                    t-foreach="_getReviewData()"
+                                    t-as="review"
+                                    t-key="review.id"
+                                >
+                                    <t
+                                        t-if="review.status == 'pending'"
+                                        t-set="status_class"
+                                        t-value=""
+                                    />
+                                    <t
+                                        t-if="review.status == 'approved'"
+                                        t-set="status_class"
+                                        t-value="'alert-success'"
+                                    />
+                                    <t
+                                        t-if="review.status == 'rejected'"
+                                        t-set="status_class"
+                                        t-value="'alert-danger'"
+                                    />
+                                    <tr t-att-class="status_class">
+                                        <td class="text-center">
+                                            <span t-esc="review.sequence" />
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-esc="review.requested_by[1]" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="review.name" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="review.status" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="review.todo_by" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="review.done_by[1]" />
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-if="review.reviewed_formated_date">
+                                                <span
+                                                    t-esc="review.reviewed_formated_date"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-if="review.comment">
+                                                <span t-esc="review.comment" />
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,709 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_tier_validation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-03-16 11:46+0000\n"
+"Last-Translator: Ana Suárez <ana.suarez@qubiq.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/systray.xml:0
+#, python-format
+msgid "0 Pending"
+msgstr "0 Pendientes"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_label
+msgid ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                This Record needs to be\n"
+"                validated."
+msgstr ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                Este registro debe ser\n"
+"                validado."
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_label
+msgid ""
+"<i class=\"fa fa-thumbs-down\"/>\n"
+"                Operation has been\n"
+"                <b>rejected</b>\n"
+"                ."
+msgstr ""
+"<i class=\"fa fa-thumbs-down\"/>\n"
+"                La operación ha sido\n"
+"                <b>rechazada</b>\n"
+"                ."
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_label
+msgid ""
+"<i class=\"fa fa-thumbs-up\"/>\n"
+"                Operation has been\n"
+"                <b>validated</b>\n"
+"                !"
+msgstr ""
+"<i class=\"fa fa-thumbs-up\"/>\n"
+"                La operación ha sido\n"
+"                <b>validada</b>\n"
+"                !"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_form
+msgid "<span class=\"oe_edit_only\">Name</span>"
+msgstr "<span class=\"oe_edit_only\">Nombre</span>"
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "A review has been requested by %s."
+msgstr "Una revisión fue solicitada por %s."
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "A review was accepted"
+msgstr "Una revisión fue aceptada"
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "A review was accepted. (%s)"
+msgstr "Una revisión fue aceptada. (%s)"
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "A review was rejected by %(user)s. (%(comment)s)"
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "A review was rejected by %s."
+msgstr "Una revisión fue rechaza por %s."
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "A validation process is still open for at least one record."
+msgstr "Un proceso de validación está aún abierto para al menos un registro."
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/systray.xml:0
+#, python-format
+msgid "Activity"
+msgstr ""
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_search
+msgid "All"
+msgstr "Todos"
+
+#. module: base_tier_validation
+#: model:ir.model.fields.selection,name:base_tier_validation.selection__tier_definition__review_type__group
+msgid "Any user in a specific group"
+msgstr ""
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_form
+msgid "Apply On"
+msgstr "Aplicar en"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,help:base_tier_validation.field_tier_definition__approve_sequence
+#: model:ir.model.fields,help:base_tier_validation.field_tier_review__approve_sequence
+msgid "Approval order by the specified sequence number"
+msgstr "Orden de aprobación por el número de secuencia especificado"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__approve_sequence
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__approve_sequence
+msgid "Approve by sequence"
+msgstr "Aprobar por secuencia"
+
+#. module: base_tier_validation
+#: model:ir.model.fields.selection,name:base_tier_validation.selection__tier_review__status__approved
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__can_review
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__can_review
+msgid "Can Review"
+msgstr "Puede revisar"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,help:base_tier_validation.field_tier_review__can_review
+msgid ""
+"Can review will be marked if the review is pending and the\n"
+"        approve sequence has been achieved"
+msgstr ""
+"Puede revisar será establecido si la revisión está pendiente y la\n"
+"        secuencia de aprobación se ha alcanzado"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.view_comment_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: base_tier_validation
+#. odoo-python
+#. odoo-javascript
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__comment
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__has_comment
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__has_comment
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.view_comment_wizard
+#, python-format
+msgid "Comment"
+msgstr "Comentar"
+
+#. module: base_tier_validation
+#: model:ir.model,name:base_tier_validation.model_comment_wizard
+msgid "Comment Wizard"
+msgstr "Wizard Comentario"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__comment
+msgid "Comments"
+msgstr "Comentarios"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__company_id
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: base_tier_validation
+#: model:ir.model,name:base_tier_validation.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__create_uid
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__create_uid
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__create_date
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__create_date
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__definition_type
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__definition_id
+msgid "Definition"
+msgstr "Definición"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__definition_domain
+msgid "Definition Domain"
+msgstr "Dominio de definición"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__name
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__name
+#, python-format
+msgid "Description"
+msgstr "Descripción"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__display_name
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__display_name
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: base_tier_validation
+#: model:ir.model.fields.selection,name:base_tier_validation.selection__tier_definition__definition_type__domain
+msgid "Domain"
+msgstr "Dominio"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__done_by
+msgid "Done By"
+msgstr "Hecho Por"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#, python-format
+msgid "Done by"
+msgstr "Hecho Por"
+
+#. module: base_tier_validation
+#: model:ir.model.fields.selection,name:base_tier_validation.selection__tier_definition__review_type__field
+msgid "Field in related record"
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_review.py:0
+#, python-format
+msgid "Group %s"
+msgstr "Grupo %s"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__has_comment
+msgid "Has Comment"
+msgstr "Ha comentado"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__id
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__id
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,help:base_tier_validation.field_tier_definition__notify_on_create
+#, fuzzy
+msgid ""
+"If set, all possible reviewers will be notified by email when this "
+"definition is triggered."
+msgstr ""
+"Si está establecido, todos los posibles validadores serán notificados por "
+"email cuando esta definición se ejecute."
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard____last_update
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition____last_update
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__write_uid
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__write_uid
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__write_date
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__write_date
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__model
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_search
+msgid "Model"
+msgstr "Modelo"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_form
+msgid "More Options"
+msgstr "Más opciones"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__need_validation
+msgid "Need Validation"
+msgstr "Necesita validación"
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_definition.py:0
+#, python-format
+msgid "New Tier Validation"
+msgstr "Nueva Validación de Nivel"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__next_review
+msgid "Next Review"
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "Next: %s"
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/systray.xml:0
+#, python-format
+msgid "No reviews to do."
+msgstr "No hay revisiones a realizar."
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__notify_on_create
+#, fuzzy
+msgid "Notify Reviewers on Creation"
+msgstr "Notificar validadores en la creación"
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "Operation has been <b>rejected</b>."
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "Operation has been <b>validated</b>!"
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/systray.xml:0
+#: model:ir.model.fields.selection,name:base_tier_validation.selection__tier_review__status__pending
+#, python-format
+msgid "Pending"
+msgstr "Pendiente"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__model_id
+msgid "Referenced Model"
+msgstr "Modelo referenciado"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_label
+msgid "Reject"
+msgstr "Rechazar"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__rejected
+#: model:ir.model.fields.selection,name:base_tier_validation.selection__tier_review__status__rejected
+msgid "Rejected"
+msgstr "Rechazado"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__rejected_message
+msgid "Rejected Message"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__res_id
+msgid "Related Document ID"
+msgstr "ID del Documento Relacionado"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__model
+msgid "Related Document Model"
+msgstr "Modelo del Documento Relacionado"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_buttons
+msgid "Request Validation"
+msgstr "Solicitar validación"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__requested_by
+msgid "Requested By"
+msgstr "Solicitado Por"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#, python-format
+msgid "Requested by"
+msgstr "Solicitado Por"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__res_id
+#, fuzzy
+msgid "Res"
+msgstr "Revisiones"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__res_model
+#, fuzzy
+msgid "Res Model"
+msgstr "Modelo"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_buttons
+#, fuzzy
+msgid "Restart Validation"
+msgstr "Volver a empezar validación"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__review_ids
+msgid "Review"
+msgstr "Revisor"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__reviewer_id
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__reviewer_id
+msgid "Reviewer"
+msgstr "Revisor"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__reviewer_field_id
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__reviewer_field_id
+msgid "Reviewer field"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__reviewer_group_id
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__reviewer_group_id
+msgid "Reviewer group"
+msgstr "Grupo revisor"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__reviewer_ids
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__reviewer_ids
+msgid "Reviewers"
+msgstr "Revisores"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/systray.xml:0
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#: model:ir.model.fields,field_description:base_tier_validation.field_res_users__review_ids
+#, python-format
+msgid "Reviews"
+msgstr "Revisiones"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__sequence
+#, python-format
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: base_tier_validation
+#: model:ir.model.fields.selection,name:base_tier_validation.selection__tier_definition__review_type__individual
+msgid "Specific user"
+msgstr "Usuario específico"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__status
+#, python-format
+msgid "Status"
+msgstr "Estado"
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "The operation is under validation."
+msgstr "Esta operación está en proceso de validación."
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "The review has been reset by %s."
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_review.py:0
+#, python-format
+msgid "There are no res.users in the selected field"
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid "This %s needs to be validated"
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-python
+#: code:addons/base_tier_validation/models/tier_validation.py:0
+#, python-format
+msgid ""
+"This action needs to be validated for at least one record. \n"
+"Please request a validation."
+msgstr ""
+"Esta acción necesita ser validada para algún registro.\n"
+"Por favor, solicita una validación."
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__sequence
+msgid "Tier"
+msgstr "Nivel"
+
+#. module: base_tier_validation
+#: model:ir.actions.act_window,name:base_tier_validation.tier_definition_action
+#: model:ir.model,name:base_tier_validation.model_tier_definition
+#: model:ir.ui.menu,name:base_tier_validation.menu_tier_definition
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_form
+msgid "Tier Definition"
+msgstr "Definición de Nivel"
+
+#. module: base_tier_validation
+#: model:ir.model,name:base_tier_validation.model_tier_review
+msgid "Tier Review"
+msgstr "Revisión de Nivel"
+
+#. module: base_tier_validation
+#: model:ir.model,name:base_tier_validation.model_tier_validation
+msgid "Tier Validation (abstract)"
+msgstr "Validaciones de Nivel (abstracto)"
+
+#. module: base_tier_validation
+#: model:mail.message.subtype,name:base_tier_validation.mt_tier_validation_accepted
+#, fuzzy
+msgid "Tier Validation Accepted Notification"
+msgstr "Validaciones de Nivel (abstracto)"
+
+#. module: base_tier_validation
+#: model:mail.message.subtype,name:base_tier_validation.mt_tier_validation_rejected
+#, fuzzy
+msgid "Tier Validation Rejected Notification"
+msgstr "Validaciones de Nivel (abstracto)"
+
+#. module: base_tier_validation
+#: model:mail.message.subtype,name:base_tier_validation.mt_tier_validation_requested
+msgid "Tier Validation Requested"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:mail.message.subtype,name:base_tier_validation.mt_tier_validation_restarted
+msgid "Tier Validation Restarted"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.ui.menu,name:base_tier_validation.menu_tier_confirmation
+msgid "Tier Validations"
+msgstr "Validaciones de Nivel"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__to_validate_message
+msgid "To Validate Message"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__todo_by
+msgid "Todo By"
+msgstr ""
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#, python-format
+msgid "Todo by"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model,name:base_tier_validation.model_res_users
+msgid "User"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__valid_reviewer_field_ids
+msgid "Valid Reviewer Field"
+msgstr ""
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_label
+msgid "Validate"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_comment_wizard__validate_reject
+#, fuzzy
+msgid "Validate Reject"
+msgstr "Validado"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__validated
+msgid "Validated"
+msgstr "Validado"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__validated_message
+msgid "Validated Message"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_definition__review_type
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__review_type
+msgid "Validated by"
+msgstr "Validado por"
+
+#. module: base_tier_validation
+#. odoo-javascript
+#: code:addons/base_tier_validation/static/src/xml/tier_review_template.xml:0
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__reviewed_date
+#, python-format
+msgid "Validation Date"
+msgstr "Fecha de Validación"
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_review__reviewed_formated_date
+msgid "Validation Formated Date"
+msgstr ""
+
+#. module: base_tier_validation
+#: model:ir.model.fields,field_description:base_tier_validation.field_tier_validation__review_ids
+msgid "Validations"
+msgstr "Validaciones"
+
+#. module: base_tier_validation
+#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_definition_view_form
+msgid "e.g. Tier Validation for..."
+msgstr "ej. Validación de Nivel por..."
+
+#, python-format
+#~ msgid "Activities"
+#~ msgstr "Actividades"
+
+#~ msgid "Users"
+#~ msgstr "Usuarios"
+
+#~ msgid "A review was rejected by {}. ({})"
+#~ msgstr "Una revisión fue rechaza por {}. ({})"
+
+#~ msgid "Any user in a specific group."
+#~ msgstr "Cualquier usuario en el grupo especificado."
+
+#, fuzzy
+#~| msgid "Sequence"
+#~ msgid "Approve Sequence"
+#~ msgstr "Secuencia"
+
+#~ msgid "Formula"
+#~ msgstr "Fórmula"
+
+#~ msgid "Python Expression"
+#~ msgstr "Expresión Python"
