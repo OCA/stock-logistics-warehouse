@@ -1,0 +1,423 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_purchase_request_form" model="ir.ui.view">
+        <field name="name">purchase.request.form</field>
+        <field name="model">purchase.request</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Request">
+                <header>
+                    <button
+                        name="button_draft"
+                        states="to_approve,approved,rejected,done"
+                        string="Reset"
+                        type="object"
+                        groups="purchase_request.group_purchase_request_manager"
+                    />
+                    <button
+                        name="button_to_approve"
+                        string="Request approval"
+                        type="object"
+                        class="oe_highlight"
+                        groups="purchase_request.group_purchase_request_manager"
+                        attrs="{'invisible': [('show_approver_button', '=', False)]}"
+                    />
+                    <button
+                        name="button_approved"
+                        string="Approve"
+                        type="object"
+                        class="oe_highlight"
+                        groups="purchase_request.group_purchase_request_manager"
+                        attrs="{'invisible': [('show_approver_button', '=', False)]}"
+                    />
+                    <button
+                        name="%(action_purchase_request_line_make_purchase_order)d"
+                        states="approved"
+                        string="Create RFQ"
+                        type="action"
+                    />
+                    <button
+                        name="button_done"
+                        states="approved"
+                        string="Done"
+                        type="object"
+                        class="oe_highlight"
+                        groups="purchase_request.group_purchase_request_manager"
+                    />
+                    <button
+                        name="button_rejected"
+                        string="Reject"
+                        type="object"
+                        class="oe_highlight"
+                        groups="purchase_request.group_purchase_request_manager"
+                        attrs="{'invisible': [('show_approver_button', '=', False)]}"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,to_approve,approved,done,rejected"
+                        statusbar_colors='{"approved":"blue"}'
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_view_purchase_request_line"
+                            class="oe_stat_button"
+                            attrs="{'invisible':[('line_count', '=', 0)]}"
+                            icon="fa-list"
+                        >
+                            <field name="line_count" widget="statinfo" string="Lines" />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_view_purchase_order"
+                            class="oe_stat_button"
+                            attrs="{'invisible':[('purchase_count', '=', 0)]}"
+                            icon="fa-shopping-cart"
+                            string="Purchase Order"
+                        >
+                            <field
+                                name="purchase_count"
+                                widget="statinfo"
+                                string="Purchase Orders"
+                            />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_view_stock_picking"
+                            class="oe_stat_button"
+                            attrs="{'invisible':[('move_count', '=', 0)]}"
+                            groups="stock.group_stock_manager"
+                            icon="fa-truck"
+                            string="Picking"
+                        >
+                            <field
+                                name="move_count"
+                                widget="statinfo"
+                                string="Pickings"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_edit_only">
+                        <label for="name" class="oe_inline" />
+                    </div>
+                    <h1>
+                        <field name="is_editable" invisible="1" />
+                        <field name="is_name_editable" invisible="1" />
+                        <field name="is_approver" invisible="1" />
+                        <field name="show_approver_button" invisible="1" />
+                        <field
+                            name="name"
+                            class="oe_inline"
+                            attrs="{'readonly': [('is_name_editable','=', False)]}"
+                        />
+                    </h1>
+                    <group>
+                        <group>
+                            <field
+                                name="requested_by"
+                                attrs="{'readonly': True}"
+                            />
+                            <field
+                                name="assigned_to"
+                                attrs="{'readonly': True}"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="origin"
+                                class="oe_inline"
+                                attrs="{'readonly': [('is_editable','=', False)]}"
+                            />
+                            <field
+                                name="description"
+                                attrs="{'readonly': [('is_editable','=', False)]}"
+                            />
+                            <field
+                                name="group_id"
+                                attrs="{'readonly': [('is_editable','=', False)]}"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="date_start"
+                                attrs="{'readonly': [('is_editable','=', False)]}"
+                            />
+                            <field
+                                name="date_expected"
+                                attrs="{'readonly': [('is_editable', '=', False)]}"
+                            />
+                            <field
+                                name="picking_type_id"
+                                attrs="{'readonly': [('is_editable','=', False)]}"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                widget="selection"
+                                attrs="{'readonly': [('is_editable','=', False)]}"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="line_ids">
+                                <tree
+                                    decoration-muted="cancelled == True"
+                                    editable="bottom"
+                                >
+                                    <field name="product_id" />
+                                    <field name="name" />
+                                    <field name="product_qty" />
+                                    <field
+                                        name="product_uom_category_id"
+                                        invisible="1"
+                                    />
+                                    <field
+                                        name="product_uom_id"
+                                        invisible="1"
+                                        groups="!uom.group_uom"
+                                    />
+                                    <field
+                                        name="product_uom_id"
+                                        groups="uom.group_uom"
+                                    />
+                                    <field
+                                        name="analytic_distribution"
+                                        widget="analytic_distribution"
+                                        groups="analytic.group_analytic_accounting"
+                                        options="{'product_field': 'product_id', 'business_domain': 'purchase_order'}"
+                                    />
+                                    <field name="date_required" />
+                                    <field name="estimated_cost" widget="monetary" />
+                                    <field name="currency_id" invisible="1" />
+                                    <field
+                                        name="company_id"
+                                        groups="base.group_multi_company"
+                                        widget="selection"
+                                    />
+                                    <field name="cancelled" invisible="1" />
+                                    <field name="is_editable" invisible="1" />
+                                    <field name="purchased_qty" />
+                                    <field
+                                        name="purchase_state"
+                                        widget="badge"
+                                        decoration-success="purchase_state == ('done')"
+                                        decoration-muted="purchase_state == ('draft')"
+                                        decoration-info="purchase_state in ('sent', 'purchase')"
+                                        decoration-warning="purchase_state == ('to_approve')"
+                                        decoration-danger="purchase_state == 'cancelled'"
+                                    />
+                                    <button
+                                        name="action_show_details"
+                                        type="object"
+                                        icon="fa-list"
+                                        title="Show Details"
+                                        width="0.1"
+                                        options='{"warn": true}'
+                                    />
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="currency_id" invisible="1" />
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="estimated_cost" />
+                                </div>
+                                <field
+                                    name="estimated_cost"
+                                    nolabel="1"
+                                    class="oe_subtotal_footer_separator"
+                                    widget="monetary"
+                                    options="{'currency_field': 'currency_id'}"
+                                />
+                            </group>
+
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_purchase_request_tree" model="ir.ui.view">
+        <field name="name">purchase.request.tree</field>
+        <field name="model">purchase.request</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-bf="message_needaction==True"
+                decoration-info="state in ('draft','to_approve')"
+                decoration-muted="state in ('rejected')"
+                name="Purchase Request"
+            >
+                <field name="message_needaction" invisible="1" />
+                <field name="name" />
+                <field name="date_start" />
+                <field name="requested_by" widget="many2one_avatar_user" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    widget="selection"
+                />
+                <field name="activity_ids" widget="list_activity" optional="show" />
+                <field name="origin" />
+                <field name="currency_id" invisible="1" />
+                <field name="estimated_cost" optional="hide" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state in ('done', 'approved')"
+                    decoration-muted="state == 'draft'"
+                    decoration-warning="state == 'to_approve'"
+                    decoration-danger="state == 'rejected'"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="view_purchase_request_search" model="ir.ui.view">
+        <field name="name">purchase.request.list.select</field>
+        <field name="model">purchase.request</field>
+        <field name="arch" type="xml">
+            <search string="Search Purchase Request">
+                <field name="name" string="Purchase Request" />
+                <separator />
+                <field name="product_id" />
+                <field name="state" />
+                <filter
+                    name="unassigned"
+                    string="Unassigned"
+                    domain="[('assigned_to','=', False)]"
+                    help="Unassigned Request"
+                />
+                <separator />
+                <filter
+                    name="state_draft"
+                    string="Draft"
+                    domain="[('state','=','draft')]"
+                    help="Request is to be approved"
+                />
+                <filter
+                    name="state_to_approve"
+                    string="To Approve"
+                    domain="[('state','=','to_approve')]"
+                    help="Request is to be approved"
+                />
+                <filter
+                    name="state_approved"
+                    string="Approved"
+                    domain="[('state','=','approved')]"
+                    help="Request is approved"
+                />
+                <filter
+                    name="state_rejected"
+                    string="Rejected"
+                    domain="[('state','=','rejected')]"
+                    help="Request is rejected"
+                />
+                <filter
+                    name="state_done"
+                    string="Done"
+                    domain="[('state','=','done')]"
+                    help="Request is done"
+                />
+                <separator />
+                <filter
+                    string="Unread Messages"
+                    name="message_needaction"
+                    domain="[('message_needaction','=',True)]"
+                />
+                <filter
+                    name="assigned_to_me"
+                    domain="[('assigned_to','=', uid)]"
+                    help="Assigned to me"
+                />
+                <filter
+                    name="my_requests"
+                    domain="[('requested_by','=', uid)]"
+                    help="My requests"
+                />
+                <field name="requested_by" />
+                <field name="assigned_to" />
+                <field name="picking_type_id" />
+                <group expand="0" string="Group By...">
+                    <filter
+                        name="requested_by"
+                        string="Requested by"
+                        icon="fa-user"
+                        domain="[]"
+                        context="{'group_by':'requested_by'}"
+                    />
+                    <filter
+                        name="assigned_to"
+                        string="Assigned to"
+                        icon="fa-user"
+                        domain="[]"
+                        context="{'group_by':'assigned_to'}"
+                    />
+                    <filter
+                        name="source"
+                        string="Source"
+                        icon="fa-caret-square-o-left"
+                        domain="[]"
+                        context="{'group_by':'origin'}"
+                    />
+                    <filter
+                        name="start_date"
+                        string="Start Date"
+                        icon="fa-calendar"
+                        domain="[]"
+                        context="{'group_by':'date_start'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="purchase_request_form_action">
+        <field name="name">Purchase Requests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_requested_by":uid}</field>
+        <field name="search_view_id" ref="view_purchase_request_search" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to start a new purchase request process.
+            </p>
+            <p>
+                A purchase request is an instruction to Purchasing to procure
+            a certain quantity of materials services, so that they are
+            available at a certain point in time.
+            </p>
+        </field>
+    </record>
+    <menuitem
+        id="menu_purchase_request_pro_mgt"
+        parent="purchase.menu_procurement_management"
+        action="purchase_request_form_action"
+    />
+    <menuitem
+        id="parent_menu_purchase_request"
+        name="Purchase Requests"
+        sequence="22"
+        web_icon="purchase_request,static/description/icon.png"
+        groups="group_purchase_request_user,group_purchase_request_manager"
+    />
+    <menuitem
+        id="menu_purchase_request"
+        name="Purchase Requests"
+        parent="parent_menu_purchase_request"
+        groups="group_purchase_request_user,group_purchase_request_manager"
+    />
+    <menuitem
+        id="menu_purchase_request_act"
+        sequence="10"
+        parent="menu_purchase_request"
+        action="purchase_request_form_action"
+    />
+</odoo>

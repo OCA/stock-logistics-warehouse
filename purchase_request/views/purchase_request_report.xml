@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="action_report_purchase_requests" model="ir.actions.report">
+        <field name="name">Purchase Request</field>
+        <field name="binding_model_id" ref="model_purchase_request" />
+        <field name="model">purchase.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">purchase_request.report_purchase_request</field>
+        <field name="report_file">purchase_request.report_purchase_request</field>
+    </record>
+</odoo>

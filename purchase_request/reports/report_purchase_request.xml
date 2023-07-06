@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <template id="report_purchase_request">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure" />
+                        <h2>
+                            Purchase Request
+                            <span t-field="o.name" />
+                        </h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-auto">
+                                <strong>Request Reference:</strong>
+                                <br />
+                                <span t-field="o.name" />
+                            </div>
+                            <div class="col-auto">
+                                <strong>Creation Date:</strong>
+                                <br />
+                                <span t-field="o.date_start" />
+                            </div>
+                            <div class="col-auto">
+                                <strong>Source:</strong>
+                                <br />
+                                <span t-field="o.origin" />
+                            </div>
+                            <div class="col-auto">
+                                <strong>Description:</strong>
+                                <br />
+                                <span t-field="o.description" />
+                            </div>
+                            <div class="col-auto">
+                                <strong>Requested by:</strong>
+                                <br />
+                                <span t-field="o.requested_by" />
+                            </div>
+                            <div class="col-auto">
+                                <strong>Assigned to:</strong>
+                                <br />
+                                <span t-field="o.assigned_to" />
+                            </div>
+                            <div class="col-auto">
+                                <strong>Picking Type:</strong>
+                                <br />
+                                <span t-field="o.picking_type_id" />
+                            </div>
+                        </div>
+                        <t t-if="o.line_ids">
+                            <h3>Products</h3>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <strong>Description</strong>
+                                        </th>
+                                        <th groups="analytic.group_analytic_accounting">
+                                            <strong>Analytic Distribution</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Qty</strong>
+                                        </th>
+                                        <th class="text-center" groups="uom.group_uom">
+                                            <strong>Product UoM</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Estimated Cost</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Requested Date</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Specifications</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.line_ids" t-as="line_id">
+                                        <td>
+                                            <span t-field="line_id.name" />
+                                        </td>
+                                        <td groups="analytic.group_analytic_accounting">
+                                            <span
+                                                t-field="line_id.analytic_distribution"
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="line_id.product_qty" />
+                                        </td>
+                                        <t>
+                                            <td
+                                                class="text-center"
+                                                groups="uom.group_uom"
+                                            >
+                                                <span
+                                                    t-field="line_id.product_uom_id.category_id.name"
+                                                />
+                                            </td>
+                                        </t>
+                                        <td>
+                                            <span t-field="line_id.estimated_cost" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="line_id.date_required" />
+                                        </td>
+                                        <td>
+                                            <span t-field="line_id.specifications" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+                        <div class="oe_structure" />
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
