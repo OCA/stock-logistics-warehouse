@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_iso3166
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2020-12-13 03:55+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
+
+#. module: base_iso3166
+#: model:ir.model,name:base_iso3166.model_res_country
+msgid "Country"
+msgstr "Land"
+
+#. module: base_iso3166
+#: model:ir.model.fields,field_description:base_iso3166.field_res_country__code_alpha3
+msgid "Country Code (3-letter)"
+msgstr "Landcode (3-letterig)"
+
+#. module: base_iso3166
+#: model:ir.model.fields,field_description:base_iso3166.field_res_country__code_numeric
+msgid "Country Code (numeric)"
+msgstr "Landcode (nummeriek)"
+
+#. module: base_iso3166
+#: model:ir.model.fields,help:base_iso3166.field_res_country__code_alpha3
+msgid "ISO 3166-1 alpha-3 (three-letter) code for the country"
+msgstr "ISO 3166-1 alpha-3 (3-letter) code voor het land"
+
+#. module: base_iso3166
+#: model:ir.model.fields,help:base_iso3166.field_res_country__code_numeric
+msgid "ISO 3166-1 numeric code for the country"
+msgstr "ISO 3166-1 nummerieke code voor het land"
