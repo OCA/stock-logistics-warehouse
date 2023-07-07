@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class StockQuant(models.Model):
@@ -34,3 +34,14 @@ class StockQuant(models.Model):
             move.inventory_adjustment_id = adjustment
             rec.to_do = False
         return res
+
+    @api.model
+    def _unlink_zero_quants(self):
+        # Prevents unlinking of the quants until the inventory adjustments are completed
+        # inherit the method _unlink_zero_quants without totally overwrite is not
+        # possible witohut a hook.
+        to_do_quants = self.env["stock.quant"].search([("to_do", "=", True)])
+        if to_do_quants:
+            return True
+        else:
+            return super()._unlink_zero_quants()

@@ -98,6 +98,54 @@ class InventoryAdjustmentsGroup(models.Model):
             domain = self._get_domain_category_quants(base_domain)
         return self.env["stock.quant"].search(domain)
 
+    def create_zero_quants(self, products_wo_quant):
+        # TODO: influence the method _unlink_zero_quants or _quant_tasks to
+        # prevent automatic Odoo quant deletion when the to_do flag is added
+        zero_quants = self.env["stock.quant"]
+        for location in self.location_ids:
+            for product in products_wo_quant:
+                new_quant = self.env["stock.quant"].create(
+                    {
+                        "to_do": True,
+                        "quantity": 0,
+                        "product_id": product.id,
+                        "location_id": location.id,
+                        "lot_id": False,
+                    }
+                )
+                zero_quants += new_quant
+        return zero_quants
+
+    def _get_zero_quants(self, locations):
+        #  create zero quants for products wo quant in a location
+        #  Not implemented for lots, too many combinations
+        zero_quants = self.env["stock.quant"]
+        base_domain = [("type", "=", "product")]
+        if self.product_selection == "all":
+            all_products = self.env["product.product"].search(base_domain)
+            products_wo_quant = all_products - self.stock_quant_ids.mapped("product_id")
+            zero_quants = self.create_zero_quants(products_wo_quant)
+        elif self.product_selection == "manual" or self.product_selection == "one":
+            domain = expression.AND([base_domain, [("id", "in", self.product_ids.ids)]])
+            all_products = self.env["product.product"].search(domain)
+            products_wo_quant = all_products - self.stock_quant_ids.mapped("product_id")
+            zero_quants = self.create_zero_quants(products_wo_quant)
+        elif self.product_selection == "category":
+            domain = expression.AND(
+                [
+                    base_domain,
+                    [
+                        "|",
+                        ("categ_id", "=", self.category_id.id),
+                        ("categ_id", "in", self.category_id.child_id.ids),
+                    ],
+                ]
+            )
+            all_products = self.env["product.product"].search(domain)
+            products_wo_quant = all_products - self.stock_quant_ids.mapped("product_id")
+            zero_quants = self.create_zero_quants(products_wo_quant)
+        return zero_quants
+
     def _get_base_domain(self, locations):
         return [
             "|",
@@ -165,6 +213,7 @@ class InventoryAdjustmentsGroup(models.Model):
             )
         self.state = "in_progress"
         self.stock_quant_ids = self._get_quants(self.location_ids)
+        self.stock_quant_ids += self._get_zero_quants(self.location_ids)
         self.stock_quant_ids.update({"to_do": True})
         return
 
