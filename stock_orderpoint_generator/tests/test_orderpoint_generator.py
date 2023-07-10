@@ -15,7 +15,9 @@ class TestOrderpointGenerator(TransactionCase):
         cls.orderpoint_model = cls.env["stock.warehouse.orderpoint"]
         cls.orderpoint_template_model = cls.env["stock.warehouse.orderpoint.template"]
         cls.product_model = cls.env["product.product"]
-        cls.attr = cls.env["product.attribute"].create({"name": "Size"})
+        cls.attr = cls.env["product.attribute"].create(
+            {"name": "stock_orderpoint_generator attribute"}
+        )
         cls.attr_value_a = cls.env["product.attribute.value"].create(
             {"name": "A", "attribute_id": cls.attr.id}
         )
