@@ -184,3 +184,10 @@ class TestStockPickingVolume(TransactionCase):
         self.picking.move_ids[1]._action_cancel()
         self.picking.invalidate_cache()
         self.assertEqual(self.picking.volume, 750)
+
+    def test_product_volume(self):
+        self.assertEqual(self.product._get_volume_for_qty(5), 750)
+        from_uom = self.env.ref("uom.product_uom_dozen")
+        self.assertEqual(
+            self.product._get_volume_for_qty(5 * from_uom.factor, from_uom), 750
+        )
