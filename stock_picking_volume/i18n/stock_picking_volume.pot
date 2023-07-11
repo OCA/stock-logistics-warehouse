@@ -19,6 +19,11 @@ msgid "Logistics"
 msgstr ""
 
 #. module: stock_picking_volume
+#: model:ir.model,name:stock_picking_volume.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_picking_volume
 #: model:ir.model,name:stock_picking_volume.model_stock_move
 msgid "Stock Move"
 msgstr ""
