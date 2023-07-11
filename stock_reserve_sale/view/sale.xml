@@ -5,6 +5,28 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock" />
         <field name="arch" type="xml">
+            <xpath expr="//form//div[@name='button_box']" position="inside">
+                <button
+                    class="oe_stat_button"
+                    string="Reserves"
+                    type="object"
+                    name="action_view_reserves_products"
+                    icon="fa-lock"
+                    attrs="{'invisible': [('reserves_count', '=', 0)]}"
+                >
+                    <field string="Reserved" name="reserves_count" widget="statinfo" />
+                    <field name="reserves_count" invisible="1" />
+                    <field name="all_lines_reserved" invisible="1" />
+                </button>
+                <button
+                    class="oe_stat_button"
+                    string="Stock Picking Reserve"
+                    type="object"
+                    name="action_view_reserves_stock_picking"
+                    icon="fa-truck"
+                    attrs="{'invisible': ['|', ('reserves_count', '=', 0),('state', '!=', 'draft')]}"
+                />
+            </xpath>
             <button name="action_quotation_send" position="before">
                 <field name="is_stock_reservable" invisible="1" />
                 <button
@@ -12,7 +34,7 @@
                     type="action"
                     string="Reserve Stock"
                     help="Pre-book products from stock"
-                    attrs="{'invisible': [('is_stock_reservable', '=', False)]}"
+                    attrs="{'invisible': ['|', ('all_lines_reserved', '=', True), ('state', '!=', 'draft')]}"
                 />
             </button>
             <field name="order_line" position="attributes">
@@ -47,14 +69,12 @@
                 <button
                     name="%(action_sale_stock_reserve)d"
                     type="action"
-                    string="Reserve Stock"
                     icon="fa-lock"
                     attrs="{'invisible': [('is_stock_reservable', '=', False)]}"
                 />
                 <button
                     name="release_stock_reservation"
                     type="object"
-                    string="Release Reservation"
                     icon="fa-undo"
                     attrs="{'invisible': [('reservation_ids', '=', [])]}"
                 />
@@ -62,16 +82,14 @@
             <field name="user_id" position="before">
                 <field name="has_stock_reservation" invisible="1" />
             </field>
-            <field name="order_line" position="after">
-                <div class="text-right">
-                    <button
-                        name="release_all_stock_reservation"
-                        string="Cancell all"
-                        type="object"
-                        attrs="{'invisible': [('has_stock_reservation', '=', False)]}"
-                    />
-                </div>
-            </field>
+            <xpath expr="//button[@name='action_quotation_send']" position="before">
+                <button
+                    name="release_all_stock_reservation"
+                    string="Cancell all reserve"
+                    type="object"
+                    attrs="{'invisible': [('has_stock_reservation', '=', False)]}"
+                />
+            </xpath>
             <!-- Make readonly the fields quantity and product_id when they are reserved -->
             <xpath
                 expr="//field[@name='order_line']/form//field[@name='product_id']"

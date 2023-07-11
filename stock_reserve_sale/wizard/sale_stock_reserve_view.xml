@@ -16,9 +16,15 @@
                     <field name="date_validity" />
                     <field name="owner_id" groups="stock.group_tracking_owner" />
                 </group>
-                <group name="note" string="Notes">
-                    <field name="note" nolabel="1" />
-                </group>
+                <div name="note" class="text-break text-900">
+                    <div class="o_horizontal_separator">
+                        <label for="note" />
+                    </div>
+                    <div class="o_horizontal_separator" />
+                    <div>
+                        <field name="note" nolabel='1' />
+                    </div>
+                </div>
                 <footer>
                     <button
                         string="Reserve"

@@ -235,3 +235,43 @@ msgstr "o"
 #: model:ir.model,name:stock_reserve_sale.model_sale_stock_reserve
 msgid "sale.stock.reserve"
 msgstr ""
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Cancell all reserve"
+msgstr "Cancelar reservas"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Reserved"
+msgstr "Reservado"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Reserves"
+msgstr "Reservas"
+
+#. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_order__reserves_count
+msgid "Reserves Count"
+msgstr "Reservado"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Stock Picking Reserve"
+msgstr "Albarán de reserva"
+
+#. module: stock_reserve_sale
+#. odoo-python
+#: code:addons/stock_reserve_sale/model/sale_order_line.py:0
+#, python-format
+msgid ""
+"Sale order line '['%(order_name)s'] '%(line_name)s'' has a related reservation.\n"
+"Please unreserve this line before delete the line"
+msgstr "La línea de pedido de venta '['%(order_name)s'] '%(line_name)s'' tiene una reserva relacionada.\n"
+"Por favor, anule la reserva de esta línea antes de eliminar la línea"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_stock_reservation_form
+msgid "View Stock Picking"
+msgstr "Ver albarán relacionado"
