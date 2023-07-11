@@ -7,7 +7,7 @@
 
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.tools.float_utils import float_compare
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 class AssignManualQuants(models.TransientModel):
@@ -176,18 +176,20 @@ class AssignManualQuantsLines(models.TransientModel):
 
     @api.onchange("selected")
     def _onchange_selected(self):
-        for record in self:
-            if not record.selected:
-                record.qty = 0
-            elif not record.qty:
-                # This takes current "snapshot" situation, so that we don't
-                # have to compute each time if current reserved quantity is
-                # for this current move. If other operations change available
-                # quantity on quant, a constraint would be raised later on
-                # validation.
-                quant_qty = record.on_hand - record.reserved
-                remaining_qty = record.assign_wizard.move_qty
-                record.qty = min(quant_qty, remaining_qty)
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        if not self.selected:
+            self.qty = 0
+        elif float_is_zero(self.qty, precision):
+            # This takes current "snapshot" situation, so that we don't
+            # have to compute each time if current reserved quantity is
+            # for this current move. If other operations change available
+            # quantity on quant, a constraint would be raised later on
+            # validation.
+            quant_qty = self.on_hand - self.reserved
+            remaining_qty = self.assign_wizard.move_qty
+            self.qty = min(quant_qty, remaining_qty)
 
     @api.constrains("qty")
     def _check_qty(self):
