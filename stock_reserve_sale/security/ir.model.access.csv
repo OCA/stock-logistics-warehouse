@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+stock_reserve_sale.access_sale_stock_reserve,access_sale_stock_reserve,stock_reserve_sale.model_sale_stock_reserve,,1,1,1,1

@@ -29,7 +29,7 @@ class SaleStockReserve(models.TransientModel):
             lines = model.browse(self.env.context["active_ids"])
 
         try:
-            owners = {l.stock_owner_id for l in lines}
+            owners = {line.stock_owner_id for line in lines}
         except AttributeError:
             return self.env["res.partner"]
             # module sale_owner_stock_sourcing not installed, fine
@@ -66,6 +66,43 @@ class SaleStockReserve(models.TransientModel):
 
     def _prepare_stock_reservation(self, line):
         self.ensure_one()
+
+        picking_env = self.env["stock.picking"]
+        reservation_env = self.env["stock.reservation"]
+        picking_type_id = reservation_env.with_context(
+            warehouse_id=line.order_id.warehouse_id.id
+        )._default_picking_type_id()
+        location_id = (self.location_id.id,)
+        if picking_type_id and not location_id:
+            picking = self.env["stock.picking"].new(
+                {"picking_type_id": picking_type_id}
+            )
+            picking.onchange_picking_type()
+            location_id = picking.location_id.id
+        location_dest_id = (
+            self.location_dest_id.id or reservation_env._default_location_dest_id()
+        )
+        picking_id = picking_env.search(
+            [
+                ("sale_reserve_id", "=", line.order_id.id),
+                ("location_id", "=", location_id),
+                ("location_dest_id", "=", location_dest_id),
+                ("state", "not in", ["cancel", "done"]),
+            ],
+            limit=1,
+        )
+
+        if not picking_id:
+            picking_id = picking_env.create(
+                {
+                    "location_id": location_id,
+                    "location_dest_id": location_dest_id,
+                    "origin": line.order_id.name,
+                    "sale_reserve_id": line.order_id.id,
+                    "picking_type_id": picking_type_id,
+                    "company_id": line.order_id.company_id.id,
+                }
+            )
         return {
             "product_id": line.product_id.id,
             "product_uom": line.product_uom.id,
@@ -78,6 +115,7 @@ class SaleStockReserve(models.TransientModel):
             "price_unit": line.price_unit,
             "sale_line_id": line.id,
             "restrict_partner_id": self.owner_id.id,
+            "picking_id": picking_id.id,
         }
 
     def stock_reserve(self, line_ids):

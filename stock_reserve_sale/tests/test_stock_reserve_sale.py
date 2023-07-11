@@ -4,36 +4,35 @@ from odoo.exceptions import UserError
 from odoo.tests import Form, common
 
 
-class TestStockReserveSale(common.SavepointCase):
-    def setUp(self):
-        super().setUp()
-        partner_form = Form(self.env["res.partner"])
+class TestStockReserveSale(common.TransactionCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        partner_form = Form(cls.env["res.partner"])
         partner_form.name = "Test partner"
-        partner_form.country_id = self.env.ref("base.es")
-        self.partner = partner_form.save()
-        warehouse_form = Form(self.env["stock.warehouse"])
+        partner_form.country_id = cls.env.ref("base.es")
+        cls.partner = partner_form.save()
+        warehouse_form = Form(cls.env["stock.warehouse"])
         warehouse_form.name = "Test warehouse"
         warehouse_form.code = "TEST"
-        self.warehouse = warehouse_form.save()
-        product_form = Form(self.env["product.product"])
-        product_form.name = "Test Product 1"
-        product_form.type = "product"
-        self.product_1 = product_form.save()
-        product_form = Form(self.env["product.product"])
-        product_form.name = "Test Product 2"
-        product_form.type = "product"
-        self.product_2 = product_form.save()
-        self.env["stock.quant"].create(
+        cls.warehouse = warehouse_form.save()
+        cls.product_1 = cls.env["product.product"].create(
+            [{"name": "Test Product 1", "type": "product"}]
+        )
+        cls.product_2 = cls.env["product.product"].create(
+            [{"name": "Test Product 2", "type": "product"}]
+        )
+        cls.env["stock.quant"].create(
             {
-                "product_id": self.product_1.id,
-                "location_id": self.warehouse.lot_stock_id.id,
+                "product_id": cls.product_1.id,
+                "location_id": cls.warehouse.lot_stock_id.id,
                 "quantity": 10.0,
             }
         )
-        self.env["stock.quant"].create(
+        cls.env["stock.quant"].create(
             {
-                "product_id": self.product_2.id,
-                "location_id": self.warehouse.lot_stock_id.id,
+                "product_id": cls.product_2.id,
+                "location_id": cls.warehouse.lot_stock_id.id,
                 "quantity": 10.0,
             }
         )
