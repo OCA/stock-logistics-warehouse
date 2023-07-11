@@ -51,7 +51,7 @@ class TestStockMoveVolume(TransactionCase):
         move = self.env["stock.move"].new(
             {"product_id": self.product, "product_uom_qty": 16}
         )
-        self.assertEqual(move._get_volume_for_qty(16), 2400)
+        self.assertEqual(move.product_id._get_volume_for_qty(16), 2400)
 
     def test_move_volume_package_with_dimension(self):
         """
@@ -87,4 +87,4 @@ class TestStockMoveVolume(TransactionCase):
             {"product_id": self.product, "product_uom_qty": 16}
         )
 
-        self.assertEqual(move._get_volume_for_qty(16), 153)
+        self.assertEqual(move.product_id._get_volume_for_qty(16), 153)
