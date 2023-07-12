@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2023-05-25 12:09+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-07-12 14:10+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -101,7 +101,7 @@ msgstr "Ultimo aggiornamento il"
 #: model:ir.model.fields,field_description:stock_putaway_product.field_quick_add_product_location_fixed_location_id
 #: model:ir.model.fields,field_description:stock_putaway_product.field_stock_product_putaway_strategy_fixed_location_id
 msgid "Location"
-msgstr "Locazione"
+msgstr "Ubicazione"
 
 #. module: stock_putaway_product
 #: model:ir.model,name:stock_putaway_product.model_product_product
