@@ -194,7 +194,7 @@ class StockReserveRuleRemoval(models.Model):
         each time the strategy decides to take quantities in a location,
         it has to yield and retrieve the remaining needed using:
 
-            need = yield location, location_quantity, quantity_to_take
+            need = yield location, location_quantity, quantity_to_take, lot, owner
 
         See '_apply_strategy_default' for a short example.
 
@@ -211,6 +211,8 @@ class StockReserveRuleRemoval(models.Model):
                 quant.location_id,
                 quant.quantity - quant.reserved_quantity,
                 need,
+                quant.lot_id,
+                quant.owner_id,
             )
 
     def _apply_strategy_empty_bin(self, quants):
@@ -231,7 +233,7 @@ class StockReserveRuleRemoval(models.Model):
                 continue
 
             if float_compare(need, location_quantity, rounding) != -1:
-                need = yield location, location_quantity, need
+                need = yield location, location_quantity, need, None, None
 
     def _apply_strategy_packaging(self, quants):
         need = yield
@@ -277,4 +279,4 @@ class StockReserveRuleRemoval(models.Model):
                 if enough_for_packaging and asked_at_least_packaging_qty:
                     # compute how much packaging we can get
                     take = (need // pack_quantity) * pack_quantity
-                    need = yield location, location_quantity, take
+                    need = yield location, location_quantity, take, None, None
