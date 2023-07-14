@@ -38,7 +38,7 @@ class StockReserveRule(models.Model):
     sequence = fields.Integer(default=lambda s: _default_sequence(s))
     active = fields.Boolean(default=True)
     company_id = fields.Many2one(
-        comodel_name="res.company", default=lambda self: self.env.user.company_id.id
+        comodel_name="res.company", default=lambda self: self.env.company.id
     )
 
     location_id = fields.Many2one(
