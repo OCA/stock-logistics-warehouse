@@ -15,7 +15,6 @@
         "data/demo/product_demo.xml",
         "data/demo/stock_location_demo.xml",
         "data/demo/stock_reserve_rule_demo.xml",
-        "data/demo/stock_inventory_demo.xml",
         "data/demo/stock_picking_demo.xml",
     ],
     "data": [
