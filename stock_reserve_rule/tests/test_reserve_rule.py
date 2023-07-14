@@ -166,13 +166,13 @@ class TestReserveRule(common.TransactionCase):
         )
 
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone2_bin2.id, "product_qty": 100},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 100},
+                {"location_id": self.loc_zone2_bin2.id, "reserved_uom_qty": 100},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -203,13 +203,13 @@ class TestReserveRule(common.TransactionCase):
         )
 
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 100},
+                {"location_id": self.loc_zone1_bin1.id, "reserved_uom_qty": 100},
+                {"location_id": self.loc_zone1_bin2.id, "reserved_uom_qty": 100},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -230,13 +230,13 @@ class TestReserveRule(common.TransactionCase):
         )
 
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 50},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 100},
+                {"location_id": self.loc_zone3_bin1.id, "reserved_uom_qty": 50},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -257,14 +257,14 @@ class TestReserveRule(common.TransactionCase):
         )
 
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone1_bin1.id, "product_qty": 100},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 100},
+                {"location_id": self.loc_zone3_bin1.id, "reserved_uom_qty": 100},
+                {"location_id": self.loc_zone1_bin1.id, "reserved_uom_qty": 100},
             ],
         )
         self.assertEqual(move.state, "partially_available")
@@ -292,13 +292,13 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 100},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 100},
+                {"location_id": self.loc_zone3_bin1.id, "reserved_uom_qty": 100},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -323,13 +323,13 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 100},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 100},
+                {"location_id": self.loc_zone3_bin1.id, "reserved_uom_qty": 100},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -356,13 +356,13 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 100},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 100},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 100},
+                {"location_id": self.loc_zone3_bin1.id, "reserved_uom_qty": 100},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -394,15 +394,15 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
 
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 150.0},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 50.0},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 50.0},
+                {"location_id": self.loc_zone1_bin2.id, "reserved_uom_qty": 150.0},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 50.0},
+                {"location_id": self.loc_zone3_bin1.id, "reserved_uom_qty": 50.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -425,7 +425,7 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
 
         # We expect to take 50 in zone1/bin1 as it will empty a bin,
@@ -434,8 +434,8 @@ class TestReserveRule(common.TransactionCase):
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin1.id, "product_qty": 50.0},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 30.0},
+                {"location_id": self.loc_zone1_bin1.id, "reserved_uom_qty": 50.0},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 30.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -473,7 +473,7 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
 
         # We expect to take 60 in zone1/bin2 as it will empty a bin and
@@ -483,8 +483,8 @@ class TestReserveRule(common.TransactionCase):
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 60.0},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 20.0},
+                {"location_id": self.loc_zone1_bin2.id, "reserved_uom_qty": 60.0},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 20.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -509,13 +509,13 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
 
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 10.0},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 10.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -552,14 +552,14 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 500.0},
-                {"location_id": self.loc_zone2_bin1.id, "product_qty": 50.0},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 40.0},
+                {"location_id": self.loc_zone1_bin2.id, "reserved_uom_qty": 500.0},
+                {"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 50.0},
+                {"location_id": self.loc_zone3_bin1.id, "reserved_uom_qty": 40.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -596,14 +596,14 @@ class TestReserveRule(common.TransactionCase):
         picking = self._create_picking(self.wh, [(self.product1, 50)])
         picking.action_assign()
         self.assertRecordValues(
-            picking.move_lines.move_line_ids,
-            [{"location_id": self.loc_zone1_bin2.id, "product_qty": 50.0}],
+            picking.move_ids.move_line_ids,
+            [{"location_id": self.loc_zone1_bin2.id, "reserved_uom_qty": 50.0}],
         )
         picking2 = self._create_picking(self.wh, [(self.product1, 50)])
         picking2.action_assign()
         self.assertRecordValues(
-            picking2.move_lines.move_line_ids,
-            [{"location_id": self.loc_zone1_bin2.id, "product_qty": 50.0}],
+            picking2.move_ids.move_line_ids,
+            [{"location_id": self.loc_zone1_bin2.id, "reserved_uom_qty": 50.0}],
         )
 
     def test_rule_packaging_0_packaging(self):
@@ -677,14 +677,14 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
-        move = picking.move_lines
+        move = picking.move_ids
         ml = move.move_line_ids
         self.assertRecordValues(
             ml,
             [
-                {"location_id": self.loc_zone1_bin2.id, "product_qty": 500.0},
-                {"location_id": self.loc_zone2_bin2.id, "product_qty": 50.0},
-                {"location_id": self.loc_zone3_bin1.id, "product_qty": 10.0},
+                {"location_id": self.loc_zone1_bin2.id, "reserved_uom_qty": 500.0},
+                {"location_id": self.loc_zone2_bin2.id, "reserved_uom_qty": 50.0},
+                {"location_id": self.loc_zone3_bin1.id, "reserved_uom_qty": 10.0},
             ],
         )
         self.assertEqual(move.state, "assigned")
@@ -702,7 +702,7 @@ class TestReserveRule(common.TransactionCase):
                 {"location_id": self.loc_zone2.id, "sequence": 2},
             ],
         )
-        move = picking.move_lines
+        move = picking.move_ids
 
         move.location_id = self.loc_zone2
         picking.action_assign()
@@ -712,6 +712,6 @@ class TestReserveRule(common.TransactionCase):
         # never take any quantity in zone1.
 
         self.assertRecordValues(
-            ml, [{"location_id": self.loc_zone2_bin1.id, "product_qty": 80.0}]
+            ml, [{"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 80.0}]
         )
         self.assertEqual(move.state, "assigned")
