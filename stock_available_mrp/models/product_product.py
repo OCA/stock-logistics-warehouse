@@ -149,7 +149,14 @@ class ProductProduct(models.Model):
                 if current_line._skip_bom_line(current_product):
                     continue
 
-                line_quantity = current_qty * current_line.product_qty
+                line_quantity = (
+                    current_qty
+                    * current_line.product_uom_id._compute_quantity(
+                        current_line.product_qty,
+                        current_line.product_id.uom_id,
+                        rounding_method="DOWN",
+                    )
+                )
 
                 sub_bom = first(current_line.product_id.bom_ids)
                 if sub_bom.type == "phantom":
