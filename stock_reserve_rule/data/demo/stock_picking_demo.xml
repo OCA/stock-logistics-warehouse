@@ -8,7 +8,7 @@
         <field name="location_id" ref="stock.stock_location_stock" />
         <field name="location_dest_id" ref="stock.stock_location_customers" />
         <field
-            name="move_lines"
+            name="move_ids"
             model="stock.move"
             eval="[(0, 0, {
                      'name': obj().env.ref('stock_reserve_rule.product_funky_socks').name,
@@ -29,7 +29,7 @@
         <field name="location_id" ref="stock.stock_location_stock" />
         <field name="location_dest_id" ref="stock.stock_location_customers" />
         <field
-            name="move_lines"
+            name="move_ids"
             model="stock.move"
             eval="[(0, 0, {
                      'name': obj().env.ref('stock_reserve_rule.product_funky_socks').name,
