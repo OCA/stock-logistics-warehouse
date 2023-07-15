@@ -18,25 +18,26 @@
                         <field name="location_id" />
                     </group>
                 </group>
-                <div />
-                <group name="estimated_quantity" string="Estimated quantity">
-                    <field
-                        name="line_ids"
-                        nolabel="1"
-                        widget="x2many_2d_matrix"
-                        field_x_axis="value_x"
-                        field_y_axis="value_y"
-                        field_value="product_uom_qty"
-                        x_axis_clickable="0"
-                        y_axis_clickable="0"
-                    >
-                        <tree>
-                            <field name="value_x" />
-                            <field name="value_y" />
-                            <field name="product_uom_qty" />
-                        </tree>
-                    </field>
-                </group>
+                <notebook>
+                    <page name="estimated_quantity" string="Estimated quantity">
+                        <field
+                            name="line_ids"
+                            nolabel="1"
+                            widget="x2many_2d_matrix"
+                            field_x_axis="value_x"
+                            field_y_axis="value_y"
+                            field_value="product_uom_qty"
+                            x_axis_clickable="0"
+                            y_axis_clickable="0"
+                        >
+                            <tree>
+                                <field name="value_x" />
+                                <field name="value_y" />
+                                <field name="product_uom_qty" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
                 <footer>
                     <button
                         name="button_validate"
@@ -57,10 +58,11 @@
                 <sheet>
                     <group name="dates">
                         <label for="date_start" string="Period" />
-                        <div><field name="date_start" class="oe_inline" /> to <field
-                                name="date_end"
-                                class="oe_inline"
-                            /></div>
+                        <div>
+                            <field name="date_start" class="oe_inline" />
+                            to
+                            <field name="date_end" class="oe_inline" />
+                        </div>
                     </group>
                     <group>
                         <group name="attributes">
@@ -68,20 +70,21 @@
                             <field name="location_id" />
                         </group>
                     </group>
-                    <div />
-                    <group name="products" string="Products">
-                        <field name="product_ids" nolabel="1" />
-                    </group>
-                    <footer>
-                        <button
-                            name="create_sheet"
-                            string="Prepare"
-                            type="object"
-                            class="oe_highlight"
-                        /> or
-                        <button string="Cancel" class="oe_link" special="cancel" />
-                    </footer>
+                    <notebook>
+                        <page name="products" string="Products">
+                            <field name="product_ids" nolabel="1" />
+                        </page>
+                    </notebook>
                 </sheet>
+                <footer>
+                    <button
+                        name="create_sheet"
+                        string="Prepare"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
             </form>
         </field>
     </record>
