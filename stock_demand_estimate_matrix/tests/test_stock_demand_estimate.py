@@ -1,10 +1,12 @@
 # Copyright 2019 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+from datetime import datetime
+
 from dateutil.rrule import MONTHLY
 
 from odoo import fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -76,8 +78,7 @@ class TestStockDemandEstimate(TransactionCase):
     def test_01_demand_estimate_wizard(self):
         """Tests creation of demand estimates using wizard."""
         sheets = self.env["stock.demand.estimate.sheet"].search([])
-        for sheet in sheets:
-            sheet.unlink()
+        list(map(lambda sheet: sheet.unlink(), sheets))
         wiz = self.env["stock.demand.estimate.wizard"]
         wiz = wiz.create(
             {
@@ -199,3 +200,144 @@ class TestStockDemandEstimate(TransactionCase):
         expected_date_to = date_range.date_end
         self.assertEqual(estimate.date_from, expected_date_from)
         self.assertEqual(estimate.date_to, expected_date_to)
+
+    def test_04_name_get(self):
+        date_range = self.env["date.range"].create(
+            {
+                "name": "Test Date Range",
+                "type_id": self.drt_monthly.id,
+                "date_start": "2023-01-01",
+                "date_end": "2023-01-31",
+            }
+        )
+        estimate = self.estimate_model.create(
+            {
+                "product_id": self.product_1.id,
+                "location_id": self.location.id,
+                "date_range_id": date_range.id,
+                "product_uom_qty": 100.0,
+            }
+        )
+        estimate_name = "{} - {} - {}".format(
+            date_range.name,
+            self.product_1.name,
+            self.location.name,
+        )
+        estimate_name_get = estimate.name_get()
+        self.assertEqual(estimate_name_get, [(estimate.id, estimate_name)])
+
+    def test_05_onchange_date_range_type_id(self):
+        company = self.env["res.company"].create({"name": "Test Company"})
+        date_range_type = self.env["date.range.type"].create(
+            {
+                "name": "Test Date Range Type",
+                "allow_overlap": False,
+                "company_id": company.id,
+            }
+        )
+        wizard = self.env["stock.demand.estimate.wizard"].create(
+            {
+                "date_start": "1943-01-01",
+                "date_end": "1943-12-31",
+                "location_id": self.location.id,
+                "date_range_type_id": date_range_type.id,
+                "product_ids": [(6, 0, [self.product_1.id])],
+            }
+        )
+        result = wizard._onchange_date_range_type_id()
+        location_domain = result.get("domain", {}).get("location_id", [])
+        expected_domain = [
+            ("company_id", "=", company.id),
+        ]
+        self.assertEqual(location_domain, expected_domain)
+
+    def test_06_prepare_demand_estimate_sheet(self):
+        wizard = self.env["stock.demand.estimate.wizard"].create(
+            {
+                "date_start": "2023-01-01",
+                "date_end": "2023-12-31",
+                "location_id": self.location.id,
+                "date_range_type_id": self.drt_monthly.id,
+                "product_ids": [(6, 0, [self.product_1.id])],
+            }
+        )
+        sheet_values = wizard._prepare_demand_estimate_sheet()
+        expected_values = {
+            "date_start": datetime.strptime("2023-01-01", "%Y-%m-%d").date(),
+            "date_end": datetime.strptime("2023-12-31", "%Y-%m-%d").date(),
+            "date_range_type_id": self.drt_monthly.id,
+            "location_id": self.location.id,
+        }
+        self.assertEqual(sheet_values, expected_values)
+
+    def test_07_create_sheet(self):
+        wizard = self.env["stock.demand.estimate.wizard"].create(
+            {
+                "date_start": "2023-01-01",
+                "date_end": "2023-12-31",
+                "location_id": self.location.id,
+                "date_range_type_id": self.drt_monthly.id,
+                "product_ids": [],
+            }
+        )
+        with self.assertRaises(UserError):
+            wizard.create_sheet()
+
+    def test_08_button_validate(self):
+        sheet = self.env["stock.demand.estimate.sheet"].create(
+            {
+                "date_start": "2023-01-01",
+                "date_end": "2023-12-31",
+                "date_range_type_id": self.drt_monthly.id,
+                "location_id": self.location.id,
+            }
+        )
+        product = self.env["product.product"].create({"name": "Test Product"})
+        line1 = self.env["stock.demand.estimate.sheet.line"].create(
+            {
+                "product_id": product.id,
+                "product_uom_qty": 10,
+                "estimate_id": self.env["stock.demand.estimate"]
+                .create(
+                    {
+                        "product_id": product.id,
+                        "product_uom_qty": 10,
+                        "location_id": self.location.id,
+                    }
+                )
+                .id,
+            }
+        )
+        line2 = self.env["stock.demand.estimate.sheet.line"].create(
+            {
+                "product_id": product.id,
+                "product_uom_qty": 20,
+                "estimate_id": self.env["stock.demand.estimate"]
+                .create(
+                    {
+                        "product_id": product.id,
+                        "product_uom_qty": 100,
+                        "location_id": self.location.id,
+                    }
+                )
+                .id,
+            }
+        )
+        sheet.line_ids = [line1.id, line2.id]
+
+        res = sheet.button_validate()
+
+        self.assertEqual(line2.estimate_id.product_uom_qty, line2.product_uom_qty)
+
+        self.assertEqual(
+            res,
+            {
+                "domain": [("id", "in", [line1.estimate_id.id, line2.estimate_id.id])],
+                "name": "Stock Demand Estimates",
+                "src_model": "stock.demand.estimate.wizard",
+                "view_type": "form",
+                "view_mode": "tree",
+                "res_model": "stock.demand.estimate",
+                "type": "ir.actions.act_window",
+            },
+        )
