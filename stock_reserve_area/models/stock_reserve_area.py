@@ -24,6 +24,39 @@ class StockReserveArea(models.Model):
         ('company_id', '=', company_id)
         ]""",
     )
+    child_area_ids = fields.Many2many(
+        comodel_name="stock.reserve.area",
+        relation="stock_reserve_area_rel",
+        column1="stock_reserve_area_1",
+        column2="stock_reserve_area_2",
+        compute="_compute_child_area_ids",
+        store=True,
+    )
+
+    @api.depends("location_ids")
+    def _compute_child_area_ids(self):
+        computed_areas = self.env.context.get(
+            "computed_areas", self.env["stock.reserve.area"]
+        )
+        child_areas = self.env["stock.reserve.area"]
+        for area in self:
+            if isinstance(area.id, models.NewId):
+                continue
+            location_areas = area.location_ids.mapped("reserve_area_ids") - area
+            for location_area in location_areas:
+                if all(
+                    area.is_location_in_area(loc) for loc in location_area.location_ids
+                ):
+                    # All the locations in the location area are inside of our area.
+                    # Therefore this is a child area.
+                    child_areas |= location_area
+            area.child_area_ids = child_areas
+            computed_areas |= area
+            if computed_areas:
+                location_areas = location_areas - computed_areas
+            location_areas.with_context(
+                computed_areas=computed_areas
+            )._compute_child_area_ids()
 
     @api.constrains("location_ids")
     def check_location_ids(self):

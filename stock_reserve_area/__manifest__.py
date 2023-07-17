@@ -14,6 +14,7 @@
         "security/ir.model.access.csv",
         "security/stock_reserve_area_security.xml",
         "views/stock_reserve_area_views.xml",
+        "views/stock_move_reserve_area_line_views.xml",
         "views/stock_location_views.xml",
         "views/stock_move_views.xml",
         "views/stock_picking_views.xml",

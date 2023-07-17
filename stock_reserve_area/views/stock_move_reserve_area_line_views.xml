@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <record id="view_stock_move_reserve_area_line_form" model="ir.ui.view">
+            <field name="name">stock.move.reserve.area.line.form</field>
+            <field name="model">stock.move.reserve.area.line</field>
+            <field name="arch" type="xml">
+                <form string="Stock Move Reserve Area Line">
+                    <sheet>
+                        <div name="button_box" class="oe_button_box" />
+                        <group>
+                            <field name="move_id" />
+                            <field name="picking_id" />
+                            <field name="product_id" />
+                            <field name="reserve_area_id" />
+                            <field name="reserved_availability" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_stock_move_reserve_area_line_tree" model="ir.ui.view">
+            <field name="name">stock.move.reserve.area.line.tree</field>
+            <field name="model">stock.move.reserve.area.line</field>
+            <field name="arch" type="xml">
+                <tree delete="0" create="0" edit="0">
+                    <field name="move_id" />
+                    <field name="picking_id" />
+                    <field name="product_id" />
+                    <field name="reserve_area_id" />
+                    <field name="reserved_availability" />
+                </tree>
+            </field>
+        </record>
+
+    <record id="move_reserve_area_line_search" model="ir.ui.view">
+        <field name="name">move.reserve.area.line.search</field>
+        <field name="model">stock.move.reserve.area.line</field>
+        <field name="arch" type="xml">
+            <search string="Stock Move Reserve Area Line">
+                <field name="move_id" />
+                <field name="picking_id" />
+                <field name="product_id" />
+                <field name="reserve_area_id" />
+                <field name="not_reserved_in_child_areas" invisible="1" />
+                <filter
+                    string="Not Reserved in Child Areas"
+                    name="not_reserved_child"
+                    domain="[('not_reserved_in_child_areas','=',True)]"
+                />
+                 <filter
+                    string="Product"
+                    name="group_product_id"
+                    context="{'group_by':'product_id'}"
+                />
+            </search>
+        </field>
+    </record>
+
+        <record
+        id="action_stock_move_reserve_area_line_form"
+        model="ir.actions.act_window"
+    >
+            <field name="name">Stock Move Reserve Area Lines</field>
+            <field name="res_model">stock.move.reserve.area.line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_id" ref="view_stock_move_reserve_area_line_tree" />
+        </record>
+
+        <menuitem
+        action="action_stock_move_reserve_area_line_form"
+        id="menu_action_stock_move_reserve_area_line_form"
+        parent="stock.menu_warehouse_report"
+    />
+
+</odoo>

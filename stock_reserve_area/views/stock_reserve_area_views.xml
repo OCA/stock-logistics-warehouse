@@ -40,6 +40,9 @@
                             <group>
                                 <field name="location_ids" widget="many2many" />
                             </group>
+                            <group name="child_areas">
+                                <field name="child_area_ids" widget="many2many_tags" />
+                            </group>
                         </group>
 
                     </sheet>
@@ -63,7 +66,7 @@
             <field name="name">stock.reserve.area.search</field>
             <field name="model">stock.reserve.area</field>
             <field name="arch" type="xml">
-                <search string="reserve Area">
+                <search string="Reserve Area">
                     <field name="name" />
                     <filter
                     string="Archived"
@@ -93,32 +96,4 @@
         sequence="100"
     />
 
-    <record id="move_reserve_area_line_tree" model="ir.ui.view">
-            <field name="name">move.reserve.area.line.tree</field>
-            <field name="model">stock.move.reserve.area.line</field>
-            <field name="arch" type="xml">
-                <tree delete="0" create="0">
-                    <field name="reserve_area_id" />
-                    <field name="picking_id" string="Picking" />
-                    <field name="move_id" />
-                    <field name="reserved_availability" />
-                    <field name="product_id" />
-                </tree>
-            </field>
-    </record>
-
-    <record id="move_reserve_area_line_search" model="ir.ui.view">
-        <field name="name">move.reserve.area.line.search</field>
-        <field name="model">stock.move.reserve.area.line</field>
-        <field name="arch" type="xml">
-            <search string="Product">
-                 <field name="product_id" />
-                 <filter
-                    string="Product"
-                    name="group_product_id"
-                    context="{'group_by':'product_id'}"
-                />
-            </search>
-        </field>
-    </record>
 </odoo>

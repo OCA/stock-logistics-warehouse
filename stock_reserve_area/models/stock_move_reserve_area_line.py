@@ -1,7 +1,8 @@
 # Copyright 2023 ForgeFlow SL.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import _, fields, models
+from odoo.exceptions import UserError
 from odoo.tools import float_is_zero
 
 
@@ -17,6 +18,7 @@ class StockMoveReserveAreaLine(models.Model):
     reserved_availability = fields.Float(
         string="Reserved in this Area",
         digits="Product Unit of Measure",
+        default=0.0,
         readonly=True,
         copy=False,
         help="Quantity that has been reserved in the reserve"
@@ -30,6 +32,39 @@ class StockMoveReserveAreaLine(models.Model):
     product_id = fields.Many2one(
         "product.product", related="move_id.product_id", store=True
     )
+    not_reserved_in_child_areas = fields.Boolean(
+        compute="_compute_not_reserved_in_child_areas",
+        search="_search_not_reserved_in_child_areas",
+    )
+
+    def _compute_not_reserved_in_child_areas(self):
+        for rec in self:
+            # TODO: compute correctly, but in reality we don't need to...
+            rec.not_reserved_in_child_areas = True
+
+    def _search_not_reserved_in_child_areas(self, operator, value):
+        if operator not in ["=", "!="] or not isinstance(value, bool):
+            raise UserError(_("Operation not supported"))
+        if operator != "=":
+            value = not value
+        self._cr.execute(
+            """
+            SELECT smral1.id, smral1.move_id, smral1.reserve_area_id
+            FROM stock_move_reserve_area_line AS smral1
+            LEFT JOIN stock_reserve_area_rel AS rel
+            ON smral1.reserve_area_id = rel.stock_reserve_area_1
+            LEFT JOIN stock_move_reserve_area_line AS smral2
+            ON smral2.move_id = smral1.move_id
+            AND smral2.reserve_area_id = rel.stock_reserve_area_2
+            WHERE coalesce(smral1.reserved_availability,0.0) > 0.0
+            AND COALESCE(smral1.reserved_availability, 0.0) >
+            COALESCE(smral2.reserved_availability, 0.0)
+            GROUP BY smral1.id, smral1.move_id, smral1.reserve_area_id;
+        """
+        )
+        return [
+            ("id", "in" if value else "not in", [r[0] for r in self._cr.fetchall()])
+        ]
 
     def _action_area_assign(self):
         area_reserved_availability = {
