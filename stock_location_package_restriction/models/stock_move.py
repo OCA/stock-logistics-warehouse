@@ -31,8 +31,9 @@ class StockMove(models.Model):
         location_packages = {
             g["location_id"][0]: set(g["package_id"]) for g in quants_grouped
         }
+        lines_being_processed = self.move_line_ids.filtered(lambda line: line.qty_done)
         for location, move_lines in groupby(
-            self.move_line_ids, lambda m: m.location_dest_id
+            lines_being_processed, lambda m: m.location_dest_id
         ):
             if not location.package_restriction:
                 continue
