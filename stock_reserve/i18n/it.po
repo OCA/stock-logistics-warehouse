@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2023-06-09 12:10+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-07-17 17:12+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/it/)\n"
 "Language: it\n"
@@ -308,7 +308,7 @@ msgstr ""
 #. module: stock_reserve
 #: field:stock.reservation,picking_type_id:0
 msgid "Picking Type"
-msgstr "Tipo Picking"
+msgstr "Tipologia prelievo"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_packaging:0
@@ -351,7 +351,7 @@ msgstr "Prodotto"
 #: model:ir.model,name:stock_reserve.model_product_template
 #: field:stock.reservation,product_tmpl_id:0
 msgid "Product Template"
-msgstr "Template Prodotto"
+msgstr "Modello prodotto"
 
 #. module: stock_reserve
 #: field:stock.reservation,product_uos:0
