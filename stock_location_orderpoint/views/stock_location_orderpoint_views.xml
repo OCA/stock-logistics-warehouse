@@ -17,6 +17,7 @@
                 <field name="trigger" />
                 <field name="replenish_method" />
                 <field name="group_id" />
+                <field name="priority" optional="hide" />
                 <field
                     name="company_id"
                     optional="hide"
