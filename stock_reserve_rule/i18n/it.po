@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-07-12 16:11+0000\n"
+"PO-Revision-Date: 2023-07-17 11:10+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -78,7 +78,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__name
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__name
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_move__display_name
@@ -87,7 +87,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__display_name
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__rule_domain
@@ -115,7 +115,7 @@ msgstr ""
 #: model:product.product,name:stock_reserve_rule.product_funky_socks
 #: model:product.template,name:stock_reserve_rule.product_funky_socks_product_template
 msgid "Funky Socks"
-msgstr ""
+msgstr "Calzetti mattacchioni"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_move__id
@@ -156,7 +156,7 @@ msgstr "Ubicazione"
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
 msgid "Operation Types"
-msgstr ""
+msgstr "TIpi di operazione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__packaging_type_ids
@@ -169,22 +169,22 @@ msgstr ""
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__packaging_type_ids
 msgid "Packaging Type"
-msgstr ""
+msgstr "Tipo imballaggio"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipo di prelievo"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__quant_domain
 msgid "Quants Domain"
-msgstr ""
+msgstr "Dominio quanti"
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
@@ -208,13 +208,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_search
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_tree
 msgid "Reservation Rule"
-msgstr ""
+msgstr "Regola prenotazione"
 
 #. module: stock_reserve_rule
 #: model:ir.actions.act_window,name:stock_reserve_rule.action_stock_reserve_rule
 #: model:ir.ui.menu,name:stock_reserve_rule.menu_stock_reserve_rule
 msgid "Reservation Rules"
-msgstr ""
+msgstr "Regole prenotazione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_picking_type__reserve_rule_ids
@@ -224,17 +224,17 @@ msgstr ""
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__rule_id
 msgid "Rule"
-msgstr ""
+msgstr "Regola"
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
 msgid "Rule Applicability"
-msgstr ""
+msgstr "Applicabilità regola"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__rule_domain
 msgid "Rule Domain"
-msgstr ""
+msgstr "Dominio regola"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__rule_removal_ids
@@ -250,12 +250,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__sequence
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sequenza"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_reserve_rule
@@ -271,16 +271,16 @@ msgstr ""
 #: model:product.product,uom_name:stock_reserve_rule.product_funky_socks
 #: model:product.template,uom_name:stock_reserve_rule.product_funky_socks_product_template
 msgid "Units"
-msgstr ""
+msgstr "Unità"
 
 #. module: stock_reserve_rule
 #: model:product.product,weight_uom_name:stock_reserve_rule.product_funky_socks
 #: model:product.template,weight_uom_name:stock_reserve_rule.product_funky_socks_product_template
 msgid "kg"
-msgstr ""
+msgstr "kg"
 
 #. module: stock_reserve_rule
 #: model:product.product,volume_uom_name:stock_reserve_rule.product_funky_socks
 #: model:product.template,volume_uom_name:stock_reserve_rule.product_funky_socks_product_template
 msgid "m³"
-msgstr ""
+msgstr "m³"
