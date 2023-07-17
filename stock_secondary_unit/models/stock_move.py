@@ -31,6 +31,12 @@ class StockMove(models.Model):
         distinct_fields += ["secondary_uom_id"]
         return distinct_fields
 
+    def _prepare_extra_move_vals(self, qty):
+        vals = super()._prepare_extra_move_vals(qty)
+        if self.secondary_uom_id:
+            vals["secondary_uom_id"] = self.secondary_uom_id.id
+        return vals
+
 
 class StockMoveLine(models.Model):
     _inherit = ["stock.move.line", "product.secondary.unit.mixin"]
