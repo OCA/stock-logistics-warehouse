@@ -10,6 +10,7 @@
     "depends": [
         "stock",
         "stock_helper",
+        "product_packaging_level",
     ],
     "demo": [
         "data/demo/product_demo.xml",

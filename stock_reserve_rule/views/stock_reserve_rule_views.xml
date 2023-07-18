@@ -58,7 +58,7 @@
                                     />
                                     <field name="removal_strategy" />
                                     <field
-                                        name="packaging_type_ids"
+                                        name="packaging_level_ids"
                                         widget="many2many_tags"
                                         attrs="{'invisible': [('removal_strategy', '!=', 'packaging')]}"
                                     />

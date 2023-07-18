@@ -144,11 +144,9 @@ class StockReserveRuleRemoval(models.Model):
         "quantity matches a packaging quantity (do not open boxes).",
     )
 
-    packaging_type_ids = fields.Many2many(
-        comodel_name="stock.package.type",
-        help="Optional packaging when using 'Full Packaging'.\n"
-        "Only the quantities matching one of the packaging are removed.\n"
-        "When empty, any packaging can be removed.",
+    packaging_level_ids = fields.Many2many(
+        comodel_name="product.packaging.level",
+        help="Optional packaging level when using 'Full Packaging'.\n",
     )
 
     @api.constrains("location_id")
@@ -256,7 +254,7 @@ class StockReserveRuleRemoval(models.Model):
 
         product = fields.first(quants).product_id
 
-        packaging_type_filter = self.packaging_type_ids
+        packaging_type_filter = self.packaging_level_ids
 
         # we'll walk the packagings from largest to smallest to have the
         # largest containers as possible (1 pallet rather than 10 boxes)
@@ -265,7 +263,7 @@ class StockReserveRuleRemoval(models.Model):
                 lambda packaging: (
                     packaging.qty > 0
                     and (
-                        packaging.package_type_id in packaging_type_filter
+                        packaging.packaging_level_id in packaging_type_filter
                         if packaging_type_filter
                         else True
                     )
