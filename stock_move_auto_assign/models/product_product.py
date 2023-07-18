@@ -64,5 +64,5 @@ class ProductProduct(models.Model):
                 )
                 raise RetryableJobError(
                     "Could not obtain lock on transfers, will retry.", ignore_retry=True
-                )
+                ) from err
             raise
