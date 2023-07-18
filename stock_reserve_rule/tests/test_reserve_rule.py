@@ -57,15 +57,17 @@ class TestReserveRule(common.TransactionCase):
             {"name": "Product 2", "type": "product"}
         )
 
-        cls.unit = cls.env["stock.package.type"].create({"name": "Unit", "sequence": 0})
-        cls.retail_box = cls.env["stock.package.type"].create(
-            {"name": "Retail Box", "sequence": 3}
+        cls.unit = cls.env["product.packaging.level"].create(
+            {"name": "Unit", "code": "UNIT", "sequence": 0}
         )
-        cls.transport_box = cls.env["stock.package.type"].create(
-            {"name": "Transport Box", "sequence": 4}
+        cls.retail_box = cls.env["product.packaging.level"].create(
+            {"name": "Retail Box", "code": "RET", "sequence": 3}
         )
-        cls.pallet = cls.env["stock.package.type"].create(
-            {"name": "Pallet", "sequence": 5}
+        cls.transport_box = cls.env["product.packaging.level"].create(
+            {"name": "Transport Box", "code": "BOX", "sequence": 4}
+        )
+        cls.pallet = cls.env["product.packaging.level"].create(
+            {"name": "Pallet", "code": "PAL", "sequence": 5}
         )
 
     def _create_picking(self, wh, products=None, location_src_id=None):
@@ -127,9 +129,9 @@ class TestReserveRule(common.TransactionCase):
                     "name": name,
                     "qty": qty if qty else 1,
                     "product_id": product.id,
-                    "package_type_id": packaging_type.id,
+                    "packaging_level_id": packaging_level.id,
                 }
-                for name, qty, packaging_type in packagings
+                for name, qty, packaging_level in packagings
             ]
         )
 
@@ -634,7 +636,7 @@ class TestReserveRule(common.TransactionCase):
         # by zero
         picking.action_assign()
 
-    def test_rule_packaging_type(self):
+    def test_rule_packaging_level(self):
         # only take one kind of packaging
         self._setup_packagings(
             self.product1,
@@ -662,7 +664,7 @@ class TestReserveRule(common.TransactionCase):
                     "location_id": self.loc_zone1.id,
                     "sequence": 1,
                     "removal_strategy": "packaging",
-                    "packaging_type_ids": [(6, 0, self.pallet.ids)],
+                    "packaging_level_ids": [(6, 0, self.pallet.ids)],
                 },
                 # zone2/bin2 will match the second packaging size of 50,
                 # but won't take 60 because it doesn't take retail boxes
@@ -670,7 +672,7 @@ class TestReserveRule(common.TransactionCase):
                     "location_id": self.loc_zone2.id,
                     "sequence": 2,
                     "removal_strategy": "packaging",
-                    "packaging_type_ids": [(6, 0, self.transport_box.ids)],
+                    "packaging_level_ids": [(6, 0, self.transport_box.ids)],
                 },
                 # the rest should be taken here
                 {"location_id": self.loc_zone3.id, "sequence": 3},
