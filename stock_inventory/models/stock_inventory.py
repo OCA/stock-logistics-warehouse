@@ -55,7 +55,7 @@ class InventoryAdjustmentsGroup(models.Model):
     )
 
     count_stock_quants = fields.Integer(
-        compute="_compute_count_stock_quants", string="Adjustments"
+        compute="_compute_count_stock_quants", string="# Adjustments"
     )
 
     count_stock_quants_string = fields.Char(
