@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-30 01:25+0000\n"
-"PO-Revision-Date: 2023-07-03 16:10+0000\n"
+"PO-Revision-Date: 2023-07-19 17:12+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/it/)\n"
@@ -184,7 +184,7 @@ msgstr "Ordine di vendita"
 #. module: stock_reserve_sale
 #: model:ir.model,name:stock_reserve_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Linea d'ordine di vendita"
+msgstr "Riga ordine di vendita"
 
 #. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/model/sale.py:231
