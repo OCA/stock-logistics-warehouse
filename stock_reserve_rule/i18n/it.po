@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-07-18 10:09+0000\n"
+"PO-Revision-Date: 2023-07-24 11:10+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -176,6 +176,10 @@ msgid ""
 "Only the quantities matching one of the packaging are removed.\n"
 "When empty, any packaging can be removed."
 msgstr ""
+"Imballaggio opzionale quando si usa \"Imballaggio intero\".\n"
+"Solo le quantità che corrispondono ad uno degli imballaggi verranno rimosse."
+"\n"
+"Se vuoto, qualsiasi imballaggio può essere rimosso."
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__packaging_type_ids
@@ -213,6 +217,8 @@ msgstr "Regole di rimozione"
 msgid ""
 "Removal rule '{}' location has to be a child of the rule location '{}'."
 msgstr ""
+"L'ubicazione della regola di rimozione '{}' deve essere figlia "
+"dell'ubicazione della regola '{}'."
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
@@ -255,7 +261,7 @@ msgstr "Rimozione regola"
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__location_id
 msgid "Rule applied only in this location and sub-locations."
-msgstr ""
+msgstr "Regola applicata solo in questa ubicazione e figlie."
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__sequence
@@ -271,12 +277,12 @@ msgstr "Movimento di magazzino"
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_reserve_rule
 msgid "Stock Reservation Rule"
-msgstr ""
+msgstr "Regola prenotazione magazzino"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_reserve_rule_removal
 msgid "Stock Reservation Rule Removal"
-msgstr ""
+msgstr "Regola rimozione prenotazione magazzino"
 
 #. module: stock_reserve_rule
 #: model:product.product,uom_name:stock_reserve_rule.product_funky_socks
