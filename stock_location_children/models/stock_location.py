@@ -30,7 +30,7 @@ class StockLocation(models.Model):
             AND sub.id IN %s
             GROUP BY sub.id;
         """
-        self.flush(["location_id", "child_ids"])
+        self.flush_model(["location_id", "child_ids"])
         self.env.cr.execute(query, (tuple(self.ids),))
         rows = self.env.cr.dictfetchall()
         for loc in self:
