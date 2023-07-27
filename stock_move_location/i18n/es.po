@@ -7,20 +7,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-02 20:30+0000\n"
-"PO-Revision-Date: 2020-11-02 21:37+0100\n"
-"Last-Translator: Sergio Teruel <sergio.teruel@tecnativa.com>\n"
+"PO-Revision-Date: 2023-07-27 23:12+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__apply_putaway_strategy
 msgid "Apply Putaway Strategy"
-msgstr ""
+msgstr "Aplicar la estrategia de salida"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -80,12 +80,12 @@ msgstr "(editar)"
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_picking_form
 msgid "Fill with stock"
-msgstr ""
+msgstr "Rellenar con existencias"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__owner_id
 msgid "From Owner"
-msgstr ""
+msgstr "Desde el Propietario"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
@@ -164,7 +164,7 @@ msgstr "Mover a ubicación..."
 #: code:addons/stock_move_location/models/stock_picking.py:0
 #, python-format
 msgid "Moves lines already exists"
-msgstr ""
+msgstr "Desplaza las líneas ya existentes"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
@@ -180,7 +180,7 @@ msgstr "Ubicación origen desactivada"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__package_id
 msgid "Package Number"
-msgstr ""
+msgstr "Número del paquete"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
@@ -203,7 +203,7 @@ msgstr "Transferencia Planificada"
 #: code:addons/stock_move_location/models/stock_picking.py:0
 #, python-format
 msgid "Please choose a source end location"
-msgstr ""
+msgstr "Por favor elija una ubicación final de origen"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
@@ -223,7 +223,7 @@ msgstr "Cantidad a mover"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__reserved_quantity
 msgid "Reserved Quantity"
-msgstr ""
+msgstr "Cantidad Reservada"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
@@ -236,6 +236,9 @@ msgid ""
 "Show a button 'Move On Hand' in the Inventory Dashboard to initiate the "
 "process to move the products in stock at the origin location."
 msgstr ""
+"Muestre un botón \"Mover en existencias\" en el panel de control de "
+"inventario para iniciar el proceso de mover los productos en existencias en "
+"la ubicación de origen."
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_move
@@ -245,7 +248,7 @@ msgstr "Movimiento de existencias"
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transferencia"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -259,25 +262,23 @@ msgstr "Si este movimiento es parte de movimiento de ubicaciones"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_wiz_stock_move_location
-#, fuzzy
 msgid "Wizard move location"
-msgstr "Asistente para mover desde ubicación"
+msgstr "Asistente para mover ubicación"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_wiz_stock_move_location_line
-#, fuzzy
 msgid "Wizard move location line"
-msgstr "Asistente para mover desde ubicación"
+msgstr "Asistente para mover línea de ubicación"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__destination_location_disable
 msgid "technical field to disable the edition of destination location."
-msgstr ""
+msgstr "campo técnico para desactivar la edición de la ubicación de destino."
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "technical field to disable the edition of origin location."
-msgstr ""
+msgstr "campo técnico para desactivar la edición de la ubicación de origen."
 
 #~ msgid "Apply putaway strategy"
 #~ msgstr "Aplicar estrategia de traslado"
