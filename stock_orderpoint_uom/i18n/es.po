@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2018-01-16 14:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2023-07-27 11:14+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_orderpoint_uom
 #: code:addons/stock_orderpoint_uom/models/product_template.py:0
@@ -25,6 +26,8 @@ msgid ""
 "At least one reordering rule for this product has a different Procurement "
 "unit of measure category."
 msgstr ""
+"Al menos una regla de reordenación para este producto tiene una categoría de "
+"unidad de medida de aprovisionamiento diferente."
 
 #. module: stock_orderpoint_uom
 #: code:addons/stock_orderpoint_uom/models/stock_warehouse_orderpoint.py:0
@@ -33,6 +36,8 @@ msgid ""
 "Error: The product default Unit of Measure and the procurement Unit of "
 "Measure must be in the same category."
 msgstr ""
+"Error: La Unidad de Medida por defecto del producto y la Unidad de Medida de "
+"aprovisionamiento deben estar en la misma categoría."
 
 #. module: stock_orderpoint_uom
 #: model:ir.model,name:stock_orderpoint_uom.model_stock_warehouse_orderpoint
@@ -42,13 +47,13 @@ msgstr "Regla de inventario mínimo"
 #. module: stock_orderpoint_uom
 #: model:ir.model,name:stock_orderpoint_uom.model_procurement_group
 msgid "Procurement Group"
-msgstr ""
+msgstr "Grupo de Adquisiciones"
 
 #. module: stock_orderpoint_uom
 #: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint__procure_uom_id
 #: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint_template__procure_uom_id
 msgid "Procurement UoM"
-msgstr ""
+msgstr "UdM de abastecimiento"
 
 #. module: stock_orderpoint_uom
 #: model:ir.model,name:stock_orderpoint_uom.model_product_template
@@ -58,4 +63,4 @@ msgstr "Plantilla de producto"
 #. module: stock_orderpoint_uom
 #: model_terms:ir.ui.view,arch_db:stock_orderpoint_uom.view_warehouse_orderpoint_form
 msgid "Quantity Multiple is applied to the base UoM."
-msgstr ""
+msgstr "Cantidad Múltiple se aplica a la MdM base."
