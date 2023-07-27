@@ -26,11 +26,11 @@ class StockPicking(models.Model):
             "procure_method"
         ]["selection"]
 
-    @api.depends("move_lines.procure_method")
+    @api.depends("move_ids.procure_method")
     def _compute_procure_method(self):
         for picking in self:
             procure_method = False
-            for move in picking.move_lines:
+            for move in picking.move_ids:
                 if not procure_method:
                     procure_method = move.procure_method
                 elif procure_method != move.procure_method:
@@ -39,6 +39,6 @@ class StockPicking(models.Model):
             picking.procure_method = procure_method
 
     def _inverse_procure_method(self):
-        self.filtered("procure_method").mapped("move_lines").update(
+        self.filtered("procure_method").mapped("move_ids").update(
             {"procure_method": self.procure_method}
         )
