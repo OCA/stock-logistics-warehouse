@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_location_lockdown
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-07-27 23:12+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_location_lockdown
+#: model:ir.model.fields,field_description:stock_location_lockdown.field_stock_location__block_stock_entrance
+msgid "Block Stock Entrance"
+msgstr "Bloquear la entrada de existencias"
+
+#. module: stock_location_lockdown
+#: model:ir.model,name:stock_location_lockdown.model_stock_location
+msgid "Inventory Locations"
+msgstr "Localizaciones de Inventario"
+
+#. module: stock_location_lockdown
+#. odoo-python
+#: code:addons/stock_location_lockdown/models/stock_location.py:0
+#, python-format
+msgid ""
+"It is impossible to prohibit this location from                    receiving"
+" products as it already contains some."
+msgstr ""
+"Es imposible prohibir que este lugar "
+"reciba                                               productos, puesto que "
+"ya contiene algunos."
+
+#. module: stock_location_lockdown
+#: model:ir.model,name:stock_location_lockdown.model_stock_quant
+msgid "Quants"
+msgstr "Cantidades"
+
+#. module: stock_location_lockdown
+#. odoo-python
+#: code:addons/stock_location_lockdown/models/stock_quant.py:0
+#, python-format
+msgid ""
+"The location %(location)s is blocked and can not be used for moving the "
+"product %(product)s"
+msgstr ""
+"La ubicación %(location)s esta bloqueada, no puede ser usada para mover el "
+"producto %(product)s"
+
+#. module: stock_location_lockdown
+#: model:ir.model.fields,help:stock_location_lockdown.field_stock_location__block_stock_entrance
+msgid ""
+"if this box is checked, putting stock on this location won't be allowed. "
+"Usually used for a virtual location that has childrens."
+msgstr ""
+"si esta casilla está marcada, no se permitirá poner acciones en esta "
+"ubicación. Normalmente se utiliza para una ubicación virtual que tiene niños."
