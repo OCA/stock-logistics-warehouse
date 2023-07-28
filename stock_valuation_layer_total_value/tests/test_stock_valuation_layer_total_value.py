@@ -1,10 +1,13 @@
 # Copyright 2022 ForgeFlow
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo.tests import tagged
+
 from odoo.addons.stock_account.tests.test_anglo_saxon_valuation_reconciliation_common import (
     ValuationReconciliationTestCommon,
 )
 
 
+@tagged("-at_install", "post_install")
 class TestValuationLayerTotalValue(ValuationReconciliationTestCommon):
     @classmethod
     def setUpClass(cls):
@@ -72,11 +75,12 @@ class TestValuationLayerTotalValue(ValuationReconciliationTestCommon):
         move1 = self._make_in_move(self.product1, 10, unit_cost=10, create_picking=True)
         move2 = self._make_in_move(self.product1, 5, unit_cost=15, create_picking=True)
         original_svl = move1.stock_valuation_layer_ids
+        total_value_original = original_svl.total_value_with_additional_costs
         new_svl = move2.stock_valuation_layer_ids
         original_svl.write({"stock_valuation_layer_ids": [(4, new_svl.id)]})
         self.assertEqual(
             original_svl.total_value_with_additional_costs,
-            original_svl.total_value_with_additional_costs + new_svl.value,
+            total_value_original + new_svl.value,
         )
         self.assertEqual(
             original_svl.unit_price_with_extra_cost,
