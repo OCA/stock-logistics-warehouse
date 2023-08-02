@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_base_uom_merge_form">
+        <field name="name">base.uom.merge.form</field>
+        <field name="model">base.uom.merge</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Merge Product UOMs">
+                <sheet>
+                    <p class="oe_grey">
+                        The selected product UOMs will be merged together. All
+                        documents linking to one of these UOM will be
+                        redirected to the aggregated UOM. You can remove
+                        UOMs from this list to avoid merging them.
+                    </p>
+                    <group>
+                        <group>
+                            <field
+                                name="dst_uom_id"
+                                domain="[('id', 'in', uom_ids)]"
+                                options="{'no_create_edit': True, 'no_create': True}"
+                            />
+                        </group>
+                        <field name="uom_ids" nolabel="1" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_merge"
+                        string="Merge UOMs"
+                        class="oe_highlight"
+                        type="object"
+                    />
+                    <button special="cancel" string="Cancel" class="oe_link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_uom_merge" model="ir.actions.act_window">
+        <field name="name">Merge UOMs</field>
+        <field name="binding_model_id" ref="uom.model_uom_uom" />
+        <field name="binding_view_types">list</field>
+        <field name="res_model">base.uom.merge</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

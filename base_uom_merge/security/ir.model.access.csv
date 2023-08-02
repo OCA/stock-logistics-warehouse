@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+base_uom_merge.access_base_uom_merge,access_base_uom_merge,base_uom_merge.model_base_uom_merge,base_uom_merge.res_group_merge_duplicate_uom,1,1,1,1
