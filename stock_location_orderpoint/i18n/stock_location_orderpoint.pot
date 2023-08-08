@@ -238,7 +238,9 @@ msgstr ""
 
 #. module: stock_location_orderpoint
 #: model:ir.model.constraint,message:stock_location_orderpoint.constraint_stock_location_orderpoint_location_route_unique
-msgid "The combination of Company, Location and Route must be unique"
+msgid ""
+"The combination of Company, Location, Route and Replenish method must be "
+"unique"
 msgstr ""
 
 #. module: stock_location_orderpoint
@@ -257,10 +259,22 @@ msgstr ""
 #. module: stock_location_orderpoint
 #: code:addons/stock_location_orderpoint/models/stock_move.py:0
 #, python-format
-msgid "Try to replenish quantities for location {} and product {}"
+msgid "Try to replenish quantities {} location {} for product {}"
 msgstr ""
 
 #. module: stock_location_orderpoint
 #: model:ir.model.fields.selection,name:stock_location_orderpoint.selection__stock_location_orderpoint__priority__1
 msgid "Urgent"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: code:addons/stock_location_orderpoint/models/stock_move.py:0
+#, python-format
+msgid "from"
+msgstr ""
+
+#. module: stock_location_orderpoint
+#: code:addons/stock_location_orderpoint/models/stock_move.py:0
+#, python-format
+msgid "in"
 msgstr ""
