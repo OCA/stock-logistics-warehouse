@@ -76,8 +76,10 @@ class StockMove(models.Model):
         job_options = job_options.copy()
         job_options.setdefault(
             "description",
-            _("Try to replenish quantities for location {} and product {}").format(
-                location.display_name, product.display_name
+            _("Try to replenish quantities {} location {} for product {}").format(
+                location_field == "location_id" and _("in") or _("from"),
+                location.display_name,
+                product.display_name,
             ),
         )
         # do not enqueue 2 jobs for the same location and product set
