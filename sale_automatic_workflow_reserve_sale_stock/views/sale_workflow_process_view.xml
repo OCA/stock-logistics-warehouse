@@ -1,23 +1,70 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
-        <record id="sale_workflow_process_view_form" model="ir.ui.view">
-            <field name="name">sale.workflow.process.stock.reserve</field>
-            <field name="model">sale.workflow.process</field>
-            <field
-                name="inherit_id"
-                ref="sale_automatic_workflow.sale_workflow_process_view_form"
-            />
-            <field name="arch" type="xml">
-                <group name="invoice_options" position="after">
-                    <group name="reserve_options" string="Reserve Options">
-                        <field name="stock_reservation" />
-                        <field name="stock_reservation_validity" />
-                        <field name="stock_reservation_location_id" />
-                        <field name="stock_reservation_location_dest_id" />
-                    </group>
-                </group>
-            </field>
-        </record>
-    </data>
+    <record id="sale_workflow_process_view_form_inheritance" model="ir.ui.view">
+        <field name="name">sale.workflow.process.stock.reserve</field>
+        <field name="model">sale.workflow.process</field>
+        <field
+            name="inherit_id"
+            ref="sale_automatic_workflow.sale_workflow_process_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='invoice_options']" position="after">
+                <div class="container" name="reserve_options">
+                    <h3>
+                        <bold>Reserve Options</bold>
+                    </h3>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label
+                                for="stock_reservation"
+                                class="col-lg-7 o_light_label"
+                            />
+                            <span>
+                                <field name="stock_reservation" nolabel="1" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label
+                                for="stock_reservation_validity"
+                                class="col-lg-4 o_light_label"
+                            />
+                            <span>
+                                <field name="stock_reservation_validity" nolabel="1" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label
+                                for="stock_reservation_location_id"
+                                class="col-lg-4 o_light_label"
+                            />
+                            <span>
+                                <field
+                                    name="stock_reservation_location_id"
+                                    nolabel="1"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label
+                                for="stock_reservation_location_dest_id"
+                                class="col-lg-4 o_light_label"
+                            />
+                            <span>
+                                <field
+                                    name="stock_reservation_location_dest_id"
+                                    nolabel="1"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
 </odoo>

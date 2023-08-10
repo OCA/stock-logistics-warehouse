@@ -7,7 +7,6 @@ class SaleWorkflowProcess(models.Model):
     _inherit = "sale.workflow.process"
 
     stock_reservation = fields.Boolean(
-        string="Stock Reservation",
         help="Allows to make stock reservations before the confirm the sale quotation",
     )
     stock_reservation_validity = fields.Integer(

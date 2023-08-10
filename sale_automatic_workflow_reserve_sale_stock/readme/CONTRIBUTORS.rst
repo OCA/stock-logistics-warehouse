@@ -1,4 +1,7 @@
-* Hugo Santos <hugo.santos@factorlibre.com>
+* `FactorLibre <https://www.factorlibre.com>`_:
+
+    * Hugo Santos
+    * Hugo Córdoba
 
 * `Tecnativa <https://www.tecnativa.com>`_:
 
