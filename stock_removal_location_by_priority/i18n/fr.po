@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_removal_location_by_priority
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-31 02:38+0000\n"
+"PO-Revision-Date: 2019-08-06 14:44+0000\n"
+"Last-Translator: Alexandre Fayolle <alexandre.fayolle@camptocamp.com>\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.7.1\n"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model,name:stock_removal_location_by_priority.model_res_config_settings
+msgid "Config Settings"
+msgstr "Configuration"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model,name:stock_removal_location_by_priority.model_stock_location
+msgid "Inventory Locations"
+msgstr "Emplacements de stock"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model,name:stock_removal_location_by_priority.model_stock_quant
+msgid "Quants"
+msgstr "Quants"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_res_config_settings__group_removal_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_stock_location__removal_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_stock_quant__removal_priority
+#: model:res.groups,name:stock_removal_location_by_priority.group_removal_priority
+msgid "Removal Priority"
+msgstr "Priorité pour les sorties de stock"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_res_config_settings__group_removal_priority
+msgid ""
+"Removal priority that applies when the incoming dates are equal in both "
+"locations."
+msgstr ""
+"Priorité appliquée lors des dates d'entrée sont égales pour 2 emplacements."
+
+#. module: stock_removal_location_by_priority
+#: code:addons/stock_removal_location_by_priority/models/stock_quant.py:0
+#, python-format
+msgid "Removal strategy %s not implemented."
+msgstr "La stratégie d'enlèvement %s n'est pas codée."
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_location__removal_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_quant__removal_priority
+msgid "This priority applies when removing stock and incoming dates are equal."
+msgstr ""
+"Cette priorité s'applique lors de sorties de stock, lorsque les dates "
+"d'entrées des articles sont égales."
+
+#. module: stock_removal_location_by_priority
+#: model_terms:ir.ui.view,arch_db:stock_removal_location_by_priority.view_stock_config_settings
+msgid "Use <i>Removal Priority</i> in Locations"
+msgstr "Utiliser une <i>Priorité de sortie</i> sur les emplacements"
