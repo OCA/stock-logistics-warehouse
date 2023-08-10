@@ -83,6 +83,7 @@ setuptools.setup(
         'odoo14-addon-stock_quant_reservation_info',
         'odoo14-addon-stock_quant_reservation_info_mrp',
         'odoo14-addon-stock_quant_view_reservation',
+        'odoo14-addon-stock_removal_location_by_priority',
         'odoo14-addon-stock_request',
         'odoo14-addon-stock_request_analytic',
         'odoo14-addon-stock_request_cancel_confirm',
