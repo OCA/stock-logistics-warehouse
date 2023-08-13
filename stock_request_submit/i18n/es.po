@@ -18,24 +18,6 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. module: stock_request_submit
-#: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__display_name
-#: model:ir.model.fields,field_description:stock_request_submit.field_stock_request_order__display_name
-msgid "Display Name"
-msgstr "Nombre mostrado"
-
-#. module: stock_request_submit
-#: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__id
-#: model:ir.model.fields,field_description:stock_request_submit.field_stock_request_order__id
-msgid "ID"
-msgstr "ID"
-
-#. module: stock_request_submit
-#: model:ir.model.fields,field_description:stock_request_submit.field_stock_request____last_update
-#: model:ir.model.fields,field_description:stock_request_submit.field_stock_request_order____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
-
-#. module: stock_request_submit
 #: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__route_id
 msgid "Route"
 msgstr "Ruta"
@@ -71,3 +53,12 @@ msgstr "Enviado"
 #, python-format
 msgid "There should be at least one request item for submiting the order."
 msgstr "Debe haber al menos un elemento de solicitud para enviar el pedido."
+
+#~ msgid "Display Name"
+#~ msgstr "Nombre mostrado"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
