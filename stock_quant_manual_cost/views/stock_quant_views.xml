@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_stock_quant_tree_inherit">
+        <field name="name">stock.quant.tree.inherit</field>
+        <field name="model">stock.quant</field>
+        <field
+            name="inherit_id"
+            ref="stock_account.view_stock_quant_tree_inventory_editable_inherit_stock_account"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='inventory_diff_quantity']" position="after">
+                <field name="currency_id" invisible="1" />
+                <field name="manual_cost" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
