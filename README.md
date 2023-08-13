@@ -60,6 +60,7 @@ addon | version | maintainers | summary
 [stock_request_mrp](stock_request_mrp/) | 15.0.1.1.0 |  | Manufacturing request for stock
 [stock_request_purchase](stock_request_purchase/) | 15.0.1.0.2 |  | Internal request for stock
 [stock_request_separate_picking](stock_request_separate_picking/) | 15.0.1.0.0 |  | Separate one picking per one stock request
+[stock_request_submit](stock_request_submit/) | 15.0.1.0.0 |  | Add submit state on Stock Requests
 [stock_reserve](stock_reserve/) | 15.0.1.1.0 |  | Stock reservations on products
 [stock_reserve_rule](stock_reserve_rule/) | 15.0.1.0.0 |  | Configure reservation rules by location
 [stock_secondary_unit](stock_secondary_unit/) | 15.0.1.0.0 |  | Get product quantities in a secondary unit
