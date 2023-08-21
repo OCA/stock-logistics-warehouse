@@ -42,12 +42,12 @@ def post_load_hook():
             )
             if not rule:
                 error = _(
-                    'No rule has been found to replenish "%s" in "%s".\n'
+                    'No rule has been found to replenish "%(pidn)s" in "%(lidn)s".\n'
                     "Verify the routes configuration on the product."
-                ) % (
-                    procurement.product_id.display_name,
-                    procurement.location_id.display_name,
-                )
+                ) % {
+                    "pidn": procurement.product_id.display_name,
+                    "lidn": procurement.location_id.display_name,
+                }
                 procurement_errors.append((procurement, error))
             else:
                 action = "pull" if rule.action == "pull_push" else rule.action
