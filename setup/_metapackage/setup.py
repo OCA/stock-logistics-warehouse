@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo-addon-account_move_line_product>=16.0dev,<16.1dev',
         'odoo-addon-account_move_line_stock_info>=16.0dev,<16.1dev',
+        'odoo-addon-procurement_auto_create_group>=16.0dev,<16.1dev',
         'odoo-addon-scrap_reason_code>=16.0dev,<16.1dev',
         'odoo-addon-stock_demand_estimate>=16.0dev,<16.1dev',
         'odoo-addon-stock_helper>=16.0dev,<16.1dev',
