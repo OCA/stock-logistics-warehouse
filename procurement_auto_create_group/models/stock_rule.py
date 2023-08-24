@@ -16,15 +16,18 @@ class StockRule(models.Model):
         if self.group_propagation_option != "propagate":
             self.auto_create_group = False
 
+    def _get_auto_procurement_group(self, product):
+        group_data = self._prepare_auto_procurement_group_data(product)
+        return self.env["procurement.group"].create(group_data)
+
     def _push_prepare_move_copy_values(self, move_to_copy, new_date):
         new_move_vals = super()._push_prepare_move_copy_values(move_to_copy, new_date)
         if self.auto_create_group:
-            group_data = self._prepare_auto_procurement_group_data()
-            group = self.env["procurement.group"].create(group_data)
+            group = self._get_auto_procurement_group(move_to_copy.product_id)
             new_move_vals["group_id"] = group.id
         return new_move_vals
 
-    def _prepare_auto_procurement_group_data(self):
+    def _prepare_auto_procurement_group_data(self, product):
         name = self.env["ir.sequence"].next_by_code("procurement.group") or False
         if not name:
             raise UserError(_("No sequence defined for procurement group."))
