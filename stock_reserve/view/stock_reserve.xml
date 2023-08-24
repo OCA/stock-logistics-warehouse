@@ -69,8 +69,8 @@
                             <field name="location_id" />
                             <field name="location_dest_id" />
                         </group>
-                        <group name="note" string="Notes">
-                            <field name="note" nolabel="1" />
+                        <group name="note" colspan="2">
+                            <field name="note" />
                         </group>
                     </group>
                 </sheet>
