@@ -25,7 +25,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
 
         # Create rules and routes:
         pull_push_route_auto = self.route_obj.create({"name": "Auto Create Group"})
-        self.rule_1 = self.rule_obj.create(
+        self.pull_push_rule_auto = self.rule_obj.create(
             {
                 "name": "rule with autocreate",
                 "route_id": pull_push_route_auto.id,
@@ -54,7 +54,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             }
         )
         push_route_auto = self.route_obj.create({"name": "Auto Create Group"})
-        self.rule_1 = self.rule_obj.create(
+        self.push_rule_auto = self.rule_obj.create(
             {
                 "name": "route_auto",
                 "location_src_id": self.location.id,
@@ -189,7 +189,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
 
     def test_03_onchange_method(self):
         """Test onchange method for stock rule."""
-        proc_rule = self.rule_1
+        proc_rule = self.push_rule_auto
         self.assertTrue(proc_rule.auto_create_group)
         proc_rule.write({"group_propagation_option": "none"})
         proc_rule._onchange_group_propagation_option()
