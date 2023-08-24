@@ -19,7 +19,5 @@ class ProcurementGroup(models.Model):
             and rule.auto_create_group
             and values.get("date_planned")
         ):
-            group_data = rule._prepare_auto_procurement_group_data()
-            group = self.env["procurement.group"].create(group_data)
-            values["group_id"] = group
+            values["group_id"] = rule._get_auto_procurement_group(product_id)
         return rule
