@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_stock_rule_form">
+        <field
+            name="name"
+        >stock.rule.form - procurement_auto_create_group_by_product</field>
+        <field name="model">stock.rule</field>
+        <field
+            name="inherit_id"
+            ref="procurement_auto_create_group.view_stock_rule_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//group[@name='propagation_group']/field[@name='auto_create_group']"
+                position="after"
+            >
+                <field
+                    name="auto_create_group_by_product"
+                    attrs="{'invisible':['|', ('auto_create_group','!=',True),('group_propagation_option','!=','propagate')]}"
+                />
+            </xpath>
+            <xpath
+                expr="//group[field[@name='auto']]/field[@name='auto_create_group']"
+                position="after"
+            >
+                <field
+                    name="auto_create_group_by_product"
+                    attrs="{'invisible':['|',('auto_create_group','!=',True),('action','!=','push')]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
