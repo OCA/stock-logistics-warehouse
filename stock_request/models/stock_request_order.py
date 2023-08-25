@@ -50,6 +50,8 @@ class StockRequestOrder(models.Model):
         index=True,
         readonly=True,
         tracking=True,
+        compute="_compute_state",
+        store=True,
     )
     requested_by = fields.Many2one(
         "res.users",
@@ -141,6 +143,19 @@ class StockRequestOrder(models.Model):
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")
     ]
 
+    @api.depends("stock_request_ids.state")
+    def _compute_state(self):
+        for item in self:
+            states = item.stock_request_ids.mapped("state")
+            if not item.stock_request_ids or all(x == "draft" for x in states):
+                item.state = "draft"
+            elif all(x == "cancel" for x in states):
+                item.state = "cancel"
+            elif all(x in ("done", "cancel") for x in states):
+                item.state = "done"
+            else:
+                item.state = "open"
+
     @api.depends("stock_request_ids.allocation_ids")
     def _compute_picking_ids(self):
         for record in self:
@@ -223,36 +238,18 @@ class StockRequestOrder(models.Model):
                 _("There should be at least one request item for confirming the order.")
             )
         self.mapped("stock_request_ids").action_confirm()
-        self.write({"state": "open"})
         return True
 
     def action_draft(self):
         self.mapped("stock_request_ids").action_draft()
-        self.write({"state": "draft"})
         return True
 
     def action_cancel(self):
         self.mapped("stock_request_ids").action_cancel()
-        self.write({"state": "cancel"})
         return True
 
     def action_done(self):
-        self.write({"state": "done"})
         return True
-
-    def check_done(self):
-        for rec in self:
-            if not rec.stock_request_ids.filtered(
-                lambda r: r.state not in ["done", "cancel"]
-            ):
-                rec.action_done()
-        return
-
-    def check_cancel(self):
-        for rec in self:
-            if not rec.stock_request_ids.filtered(lambda r: r.state != "cancel"):
-                rec.write({"state": "cancel"})
-        return
 
     def action_view_transfer(self):
         action = self.env["ir.actions.act_window"]._for_xml_id(
