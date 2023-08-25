@@ -12,16 +12,25 @@ from .stock_location import SINGLEPACKAGE
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    def _check_location_package_restriction(self):
-        """
-        Check if the current stock.move can be executed
-        regarding a potential package restriction
+    def _check_location_package_restriction(
+        self, new_location=None, only_qty_done=True
+    ):
+        """Check if the moves can be done regarding potential package restrictions
+
+        By default will only check move lines with a quantity done and their set
+        destination location.
+
+        If `new_location` is set it will be use as destination location.
+        If `only_qty_done` is False the check is executed on all
+        related move lines.
+
         """
         Package = self.env["stock.quant.package"]
         error_msgs = []
+        dest_location = new_location or self.move_line_ids.location_dest_id
         quants_grouped = self.env["stock.quant"].read_group(
             [
-                ("location_id", "in", self.move_line_ids.location_dest_id.ids),
+                ("location_id", "in", dest_location.ids),
                 ("location_id.package_restriction", "!=", False),
                 ("quantity", ">", 0),
             ],
@@ -31,13 +40,19 @@ class StockMove(models.Model):
         location_packages = {
             g["location_id"][0]: set(g["package_id"]) for g in quants_grouped
         }
-        lines_being_processed = self.move_line_ids.filtered(lambda line: line.qty_done)
+        lines_being_processed = (
+            self.move_line_ids.filtered(lambda line: line.qty_done)
+            if only_qty_done
+            else self.move_line_ids
+        )
         for location, move_lines in groupby(
             lines_being_processed, lambda m: m.location_dest_id
         ):
             if not location.package_restriction:
                 continue
 
+            if new_location:
+                location = new_location
             existing_package_ids = location_packages.get(location.id, set())
             existing_packages = Package.browse(existing_package_ids).exists()
             new_packages = Package.browse()
