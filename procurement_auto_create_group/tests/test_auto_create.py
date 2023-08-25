@@ -119,6 +119,10 @@ class TestProcurementAutoCreateGroup(TransactionCase):
     @classmethod
     def _procure(cls, product):
         values = {}
+        cls.group = cls.group_obj.create({"name": "SO0001"})
+        values = {
+            "group_id": cls.group,
+        }
         cls.group_obj.run(
             [
                 cls.env["procurement.group"].Procurement(
@@ -175,8 +179,10 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             [("product_id", "=", self.prod_no_auto_pull_push.id)]
         )
         self.assertTrue(move)
-        self.assertFalse(
-            move.group_id, "Procurement Group should not have been assigned."
+        self.assertEqual(
+            move.group_id,
+            self.group,
+            "Procurement Group should not have been assigned.",
         )
 
     def test_02_pull_push_auto_create_group(self):
