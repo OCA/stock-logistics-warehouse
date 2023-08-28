@@ -17,7 +17,7 @@
                     name="action_view_stock_request"
                     class="oe_stat_button"
                     icon="fa-chain"
-                    attrs="{'invisible':[('stock_request_ids', '=', [])]}"
+                    attrs="{'invisible':[('stock_request_count', '=', 0)]}"
                 >
                     <field
                         name="stock_request_count"
