@@ -1,10 +1,11 @@
 # Copyright 2021 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests import SavepointCase
+from odoo.tests import Form, TransactionCase, tagged
 
 
-class TestStockMovePackagingQty(SavepointCase):
+@tagged("post_install", "-at_install")
+class TestStockMovePackagingQty(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -38,9 +39,22 @@ class TestStockMovePackagingQty(SavepointCase):
                 "price_unit": 10.0,
             }
         )
-        move.write({"product_packaging": self.packaging.id})
+        move.write({"product_packaging_id": self.packaging.id})
         move._onchange_product_packaging()
         self.assertEqual(move.product_uom_qty, 5.0)
         self.assertEqual(move.product_packaging_qty, 1.0)
         move.write({"product_packaging_qty": 3.0})
         self.assertEqual(move.product_uom_qty, 15.0)
+
+    def test_product_uom_qty_change(self):
+        picking_f = Form(self.env["stock.picking"])
+        picking_f.partner_id = self.partner
+        picking_f.picking_type_id = self.env.ref("stock.picking_type_out")
+        with picking_f.move_ids_without_package.new() as move_f:
+            move_f.product_id = self.product
+            self.assertEqual(move_f.product_uom_qty, 1)
+            self.assertEqual(move_f.product_packaging_qty, 0)
+            self.assertFalse(move_f.product_packaging_id)
+            move_f.product_packaging_id = self.packaging
+            self.assertEqual(move_f.product_uom_qty, 5)
+            self.assertEqual(move_f.product_packaging_qty, 1)
