@@ -22,6 +22,10 @@ class PurchaseOrder(models.Model):
             rec.stock_request_ids = rec.order_line.mapped("stock_request_ids")
             rec.stock_request_count = len(rec.stock_request_ids)
 
+    def _get_stock_requests(self):
+        """Get all stock requests from action (allows inheritance by other modules)."""
+        return self.mapped("stock_request_ids")
+
     def action_view_stock_request(self):
         """
         :return dict: dictionary value for created view
@@ -30,7 +34,7 @@ class PurchaseOrder(models.Model):
             "stock_request.action_stock_request_form"
         )
 
-        requests = self.mapped("stock_request_ids")
+        requests = self._get_stock_requests()
         if len(requests) > 1:
             action["domain"] = [("id", "in", requests.ids)]
         elif requests:
