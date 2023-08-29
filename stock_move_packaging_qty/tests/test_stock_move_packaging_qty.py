@@ -10,6 +10,7 @@ class TestStockMovePackagingQty(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env.user.groups_id |= cls.env.ref("product.group_stock_packaging")
         cls.partner = cls.env.ref("base.res_partner_12")
         cls.product = cls.env.ref("product.product_product_9")
         cls.packaging = cls.env["product.packaging"].create(
