@@ -1,0 +1,53 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_move_packaging_qty
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging
+msgid "Package"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty
+msgid "Package quantity"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: code:addons/stock_move_packaging_qty/models/stock_move.py:0
+#, python-format
+msgid "Please select a packaging with a quantity bigger than 0"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model,name:stock_move_packaging_qty.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: code:addons/stock_move_packaging_qty/models/stock_move.py:0
+#, python-format
+msgid "This product is packaged by %.2f %s. You should use %.2f %s."
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: code:addons/stock_move_packaging_qty/models/stock_move.py:0
+#, python-format
+msgid "Warning"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: code:addons/stock_move_packaging_qty/models/stock_move.py:0
+#, python-format
+msgid "You must define a package before setting a quantity of said package."
+msgstr ""
