@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo-addon-stock_move_auto_assign_auto_release>=16.0dev,<16.1dev',
         'odoo-addon-stock_move_common_dest>=16.0dev,<16.1dev',
         'odoo-addon-stock_move_location>=16.0dev,<16.1dev',
+        'odoo-addon-stock_move_packaging_qty>=16.0dev,<16.1dev',
         'odoo-addon-stock_mts_mto_rule>=16.0dev,<16.1dev',
         'odoo-addon-stock_packaging_calculator>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_commercial_partner>=16.0dev,<16.1dev',
