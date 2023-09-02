@@ -118,6 +118,11 @@ msgstr ""
 "movimiento real"
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_packaging_qty
+msgid "Amount of packages demanded."
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_account_line_id
 msgid "Analytic Account Line"
 msgstr "Línea de cuenta analítica"
@@ -151,8 +156,8 @@ msgid ""
 msgstr ""
 "Por defecto, el sistema cogerá las unidades desde las existencias en la "
 "ubicación fuente (o hijas) y esperará pasivamente a su disponibilidad. La "
-"otra posibilidad le permite crear un abastecimiento en la ubicación fuente ("
-"y por tanto, ignorar las existencias actuales) para obtener productos. Si "
+"otra posibilidad le permite crear un abastecimiento en la ubicación fuente "
+"(y por tanto, ignorar las existencias actuales) para obtener productos. Si "
 "quiere encadenar movimientos y tener éste para esperar al anterior, esta "
 "segunda opción es la que debe escogerse."
 
@@ -553,6 +558,11 @@ msgid "Package Level"
 msgstr "Nivel de paquete"
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
+msgid "Package quantity"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_id
 msgid "Packaging"
 msgstr "Embalaje"
@@ -630,8 +640,8 @@ msgid ""
 "Quantities promised to moves with higher priority than this move (in default "
 "UoM of the product)."
 msgstr ""
-"Cantidades prometidas a movimientos con mayor prioridad que este movimiento ("
-"en la UdM por defecto del producto)."
+"Cantidades prometidas a movimientos con mayor prioridad que este movimiento "
+"(en la UdM por defecto del producto)."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__quantity_done
@@ -932,7 +942,8 @@ msgstr "Si el movimiento se agregó después de la confirmación de la operació
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_move
 msgid "Whether this move is a part of stock_location moves"
-msgstr "Si este movimiento es parte de movimiento de ubicaciones de existencias"
+msgstr ""
+"Si este movimiento es parte de movimiento de ubicaciones de existencias"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__warehouse_id
