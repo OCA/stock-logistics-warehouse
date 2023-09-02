@@ -86,6 +86,11 @@ msgid ""
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_packaging_qty
+msgid "Amount of packages demanded."
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_account_line_id
 msgid "Analytic Account Line"
 msgstr ""
@@ -495,6 +500,11 @@ msgstr "Lastnik "
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__package_level_id
 msgid "Package Level"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
+msgid "Package quantity"
 msgstr ""
 
 #. module: stock_reserve
