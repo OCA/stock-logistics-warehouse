@@ -22,6 +22,7 @@ msgid "Auto-create Procurement Group"
 msgstr "Auto crear grup d'abastiment"
 
 #. module: procurement_auto_create_group
+#. odoo-python
 #: code:addons/procurement_auto_create_group/models/stock_rule.py:0
 #, python-format
 msgid "No sequence defined for procurement group."

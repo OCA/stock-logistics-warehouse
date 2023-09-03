@@ -25,24 +25,7 @@ msgid "Auto-create Procurement Group"
 msgstr "Auto-Anlage Beschaffungsgruppe"
 
 #. module: procurement_auto_create_group
-#: model:ir.model.fields,field_description:procurement_auto_create_group.field_procurement_group__display_name
-#: model:ir.model.fields,field_description:procurement_auto_create_group.field_stock_rule__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: procurement_auto_create_group
-#: model:ir.model.fields,field_description:procurement_auto_create_group.field_procurement_group__id
-#: model:ir.model.fields,field_description:procurement_auto_create_group.field_stock_rule__id
-msgid "ID"
-msgstr ""
-
-#. module: procurement_auto_create_group
-#: model:ir.model.fields,field_description:procurement_auto_create_group.field_procurement_group____last_update
-#: model:ir.model.fields,field_description:procurement_auto_create_group.field_stock_rule____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: procurement_auto_create_group
+#. odoo-python
 #: code:addons/procurement_auto_create_group/models/stock_rule.py:0
 #, fuzzy, python-format
 msgid "No sequence defined for procurement group."
