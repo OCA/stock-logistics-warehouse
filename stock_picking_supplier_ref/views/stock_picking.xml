@@ -20,7 +20,7 @@
         <field name="inherit_id" ref="stock.vpicktree" />
         <field name="arch" type="xml">
             <field name="origin" position="after">
-                <field name="supplier_reference" />
+                <field name="supplier_reference" optional="show" />
             </field>
         </field>
     </record>
