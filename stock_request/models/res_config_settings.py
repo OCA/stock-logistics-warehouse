@@ -19,6 +19,9 @@ class ResConfigSettings(models.TransientModel):
         string="Stock Requests Kanban integration"
     )
 
+    stock_request_check_available_first = fields.Boolean(
+        related="company_id.stock_request_check_available_first", readonly=False
+    )
     stock_request_allow_virtual_loc = fields.Boolean(
         related="company_id.stock_request_allow_virtual_loc", readonly=False
     )
