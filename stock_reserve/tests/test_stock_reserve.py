@@ -1,4 +1,5 @@
 # Copyright 2021 Tecnativa - Carlos Roca
+# Copyright 2023 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import fields
 from odoo.tests import Form, common
@@ -31,30 +32,48 @@ class TestStockReserve(common.TransactionCase):
         return form_reservation.save()
 
     def test_reservation_and_reservation_release(self):
+        self.assertEqual(self.product.qty_available, 10)
+        self.assertEqual(self.product.reserve_qty, 0)
         reservation_1 = self._create_stock_reservation(6)
         reservation_1.reserve()
         self.assertFalse(reservation_1.picking_id)
         self.assertEqual(self.product.virtual_available, 4)
+        self.assertEqual(self.product.qty_available, 4)
+        self.assertEqual(self.product.reserve_qty, 6)
         reservation_2 = self._create_stock_reservation(1)
         reservation_2.reserve()
         self.assertFalse(reservation_2.picking_id)
         self.assertEqual(self.product.virtual_available, 3)
+        self.assertEqual(self.product.qty_available, 3)
+        self.assertEqual(self.product.reserve_qty, 7)
         reservation_1.release_reserve()
         self.assertEqual(self.product.virtual_available, 9)
+        self.assertEqual(self.product.qty_available, 9)
+        self.assertEqual(self.product.reserve_qty, 1)
 
     def test_cron_release(self):
+        self.assertEqual(self.product.qty_available, 10)
+        self.assertEqual(self.product.reserve_qty, 0)
         reservation_1 = self._create_stock_reservation(6)
         reservation_1.date_validity = fields.Date.from_string("2021-01-01")
         reservation_1.reserve()
+        self.assertEqual(self.product.qty_available, 4)
+        self.assertEqual(self.product.reserve_qty, 6)
         self.assertFalse(reservation_1.picking_id)
         self.assertEqual(self.product.virtual_available, 4)
         cron = self.env.ref("stock_reserve.ir_cron_release_stock_reservation")
         cron.method_direct_trigger()
         self.assertEqual(self.product.virtual_available, 10)
+        self.assertEqual(self.product.qty_available, 10)
+        self.assertEqual(self.product.reserve_qty, 0)
 
     def test_cron_reserve(self):
+        self.assertEqual(self.product.qty_available, 10)
+        self.assertEqual(self.product.reserve_qty, 0)
         reservation_1 = self._create_stock_reservation(11)
         reservation_1.reserve()
+        self.assertEqual(self.product.qty_available, 10)
+        self.assertEqual(self.product.reserve_qty, 0)
         self.assertFalse(reservation_1.picking_id)
         self.assertEqual(reservation_1.state, "partially_available")
         self.env["stock.quant"].create(
@@ -68,3 +87,6 @@ class TestStockReserve(common.TransactionCase):
         cron.method_direct_trigger()
         self.assertEqual(reservation_1.state, "assigned")
         self.assertEqual(self.product.virtual_available, 9)
+        self.product.invalidate_cache()
+        self.assertEqual(self.product.qty_available, 9)
+        self.assertEqual(self.product.reserve_qty, 11)
