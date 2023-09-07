@@ -404,7 +404,7 @@ class StockRequest(models.Model):
                     float_compare(
                         request.product_id.sudo()
                         .with_context(location=request.location_id.id)
-                        .qty_available,
+                        .free_qty,
                         request.product_uom_qty,
                         precision_digits=precision,
                     )
