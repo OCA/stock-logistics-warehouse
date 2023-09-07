@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-03 06:29+0000\n"
+"PO-Revision-Date: 2023-09-07 17:36+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -37,7 +37,7 @@ msgstr "Applica filtro"
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__available_in_source_location
 msgid "Available In Source Location"
-msgstr ""
+msgstr "Disponibile nell'ubicazione di origine"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__available_qty
@@ -53,7 +53,7 @@ msgstr "Annulla"
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__consolidate_by_product
 msgid "Consolidate By Product"
-msgstr ""
+msgstr "Consolida per prodotto"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__create_uid
@@ -91,57 +91,57 @@ msgstr "Nome visualizzato"
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__exclude_reserved
 msgid "Exclude Reserved"
-msgstr ""
+msgstr "Escludi prenotati"
 
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
 msgid "Filter Selected"
-msgstr ""
+msgstr "Filtra selezionato"
 
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
 msgid "Filtering"
-msgstr ""
+msgstr "Filtro"
 
 #. module: stock_pull_list
 #: model:ir.actions.act_window,name:stock_pull_list.action_stock_pull_list_wizard
 #: model:ir.ui.menu,name:stock_pull_list.menu_stock_pull_list_wizard
 msgid "Generate Pull List"
-msgstr ""
+msgstr "Genera lista prelevamento"
 
 #. module: stock_pull_list
 #: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:0
 #, python-format
 msgid "Generated Procurement Groups"
-msgstr ""
+msgstr "Gruppi di approvvigionamento generati"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__group_by_rule
 msgid "Group By Rule"
-msgstr ""
+msgstr "Regola raggruppa per"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__id
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__incoming_qty
 msgid "Incoming Qty"
-msgstr ""
+msgstr "Qtà in entrata"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard____last_update
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__write_uid
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__write_date
@@ -199,7 +199,7 @@ msgstr "Prodotto"
 #: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:0
 #, python-format
 msgid "Pull List"
-msgstr ""
+msgstr "Lista prelevamento"
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__raw_demand_qty
@@ -222,6 +222,8 @@ msgid ""
 "Select only rules with enough available stock in source location. Applies "
 "for rules with a source location."
 msgstr ""
+"Seleziona solo regole con quantità disponibile sufficiente nell'ubicazione "
+"d'origine. Si applica alle regole con un'ubicazione di origine."
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__selected
