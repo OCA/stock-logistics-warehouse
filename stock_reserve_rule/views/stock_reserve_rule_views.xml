@@ -48,6 +48,7 @@
                                 <field name="name" />
                                 <field name="location_id" />
                                 <field name="removal_strategy" />
+                                <field name="tolerance_display" />
                             </tree>
                             <form string="Removal Rule">
                                 <group>
@@ -62,6 +63,19 @@
                                         widget="many2many_tags"
                                         attrs="{'invisible': [('removal_strategy', '!=', 'packaging')]}"
                                     />
+                                    <field
+                                        name="tolerance_requested_limit"
+                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')], 'required': [('removal_strategy', '=', 'single_lot')]}"
+                                    />
+                                    <field
+                                        name="tolerance_requested_computation"
+                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')], 'required': [('removal_strategy', '=', 'single_lot')], 'readonly': [('tolerance_requested_limit', '=', 'no_tolerance')]}"
+                                    />
+                                    <field
+                                        name="tolerance_requested_value"
+                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')], 'required': [('removal_strategy', '=', 'single_lot')], 'readonly': [('tolerance_requested_limit', '=', 'no_tolerance')]}"
+                                    />
+
                                     <field
                                         name="quant_domain"
                                         widget="domain"

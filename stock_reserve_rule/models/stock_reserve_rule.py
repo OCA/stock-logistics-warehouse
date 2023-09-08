@@ -134,6 +134,7 @@ class StockReserveRuleRemoval(models.Model):
             ("empty_bin", "Empty Bins"),
             ("packaging", "Full Packaging"),
             ("full_bin", "Full Bin"),
+            ("single_lot", "Single lot"),
         ],
         required=True,
         default="default",
@@ -145,6 +146,8 @@ class StockReserveRuleRemoval(models.Model):
         "Full Packaging: take goods from a location only if the location "
         "quantity matches a packaging quantity (do not open boxes).\n"
         "Full Bin: take goods from a location if it reserves all its content",
+        "quantity matches a packaging quantity (do not open boxes)."
+        "By lot: ",
     )
 
     packaging_type_ids = fields.Many2many(
@@ -153,6 +156,96 @@ class StockReserveRuleRemoval(models.Model):
         "Only the quantities matching one of the packaging are removed.\n"
         "When empty, any packaging can be removed.",
     )
+
+    TOLERANCE_LIMIT = [
+        ("no_tolerance", "No tolerance"),
+        ("upper_limit", "Upper Limit"),
+        ("lower_limit", "Lower Limit"),
+    ]
+
+    tolerance_requested_limit = fields.Selection(
+        selection=TOLERANCE_LIMIT,
+        string="Tolerance on",
+        help="Selecting a tolerance limit type"
+        "No tolerance: lot qty should be equal required"
+        "Upper Limit: lot with higher qty than required"
+        "Lower Limit: lot with lower qty than required",
+    )
+
+    tolerance_requested_computation = fields.Selection(
+        selection=[
+            ("percentage", "Percentage (%)"),
+            ("absolute", "Absolute Value"),
+        ],
+        string="Tolerance computation",
+    )
+
+    tolerance_requested_value = fields.Float(string="Tolerance value", default=0.0)
+
+    tolerance_display = fields.Char(
+        compute="_compute_tolerance_display", store=True, string="Tolerance"
+    )
+
+    @api.constrains("tolerance_requested_limit")
+    def _check_tolerance_requested_limit(self):
+        if self.filtered(
+            lambda r: (
+                r.tolerance_requested_limit == "no_tolerance"
+                and (
+                    r.tolerance_requested_computation != "percentage"
+                    or r.tolerance_requested_value != 0.0
+                )
+            )
+        ):
+            raise models.UserError(
+                _(
+                    '"No Tolerance" must be have values -'
+                    ' "Tolerance computation" with value Percentage (%)\' '
+                    "and \"Tolerance value\" with value '0.0'"
+                )
+            )
+
+    @api.onchange("tolerance_requested_limit")
+    def _onchange_tolerance_requested_limit(self):
+        if self.tolerance_requested_limit == "no_tolerance":
+            self.update(
+                {
+                    "tolerance_requested_computation": "percentage",
+                    "tolerance_requested_value": 0.0,
+                }
+            )
+
+    @api.depends(
+        "tolerance_requested_limit",
+        "tolerance_requested_computation",
+        "tolerance_requested_value",
+    )
+    def _compute_tolerance_display(self):
+        for rec in self:
+            tolerance_on = rec.tolerance_requested_limit
+            tolerance_computation = rec.tolerance_requested_computation
+            if not tolerance_computation or not tolerance_on:
+                rec.tolerance_display = ""
+                continue
+            value = rec.tolerance_requested_value
+            if value == 0.0:
+                rec.tolerance_display = "Requested Qty = Lot Qty"
+                continue
+            limit = "-" if tolerance_on == "lower_limit" else ""
+            computation = "%" if tolerance_computation == "percentage" else ""
+            tolerance_on_dict = dict(self.TOLERANCE_LIMIT)
+            rec.tolerance_display = "{} ({}{}{})".format(
+                tolerance_on_dict.get(tolerance_on), limit, value, computation
+            )
+
+    @api.onchange("tolerance_requested_value")
+    def _onchange_tolerance_limit(self):
+        if self.tolerance_requested_value < 0.0:
+            raise models.UserError(
+                _(
+                    "Tolerance from requested qty value must be more than or equal to 0.0"
+                )
+            )
 
     @api.constrains("location_id")
     def _constraint_location_id(self):
@@ -333,3 +426,66 @@ class StockReserveRuleRemoval(models.Model):
 
             if float_compare(need, location_quantity, rounding) != -1:
                 need = yield location, location_quantity, need, None, None
+
+    @api.model
+    def _get_requested_comparisons(self, rounding):
+        value = self.tolerance_requested_value
+        if value == 0.0:
+            return lambda product_qty, need: product_qty == need
+        computation = self.tolerance_requested_computation
+        if self.tolerance_requested_limit == "upper_limit":
+
+            def wrap(product_qty, need):
+                if computation == "percentage":
+                    return need + rounding < product_qty <= need * (100 + value) / 100
+                # computation == "absolute"
+                else:
+                    return need + rounding < product_qty <= need + value
+
+            return wrap
+
+        if self.tolerance_requested_limit == "lower_limit":
+
+            def wrap(product_qty, need):
+                if computation == "percentage":
+                    return need * (100 - value) / 100 <= product_qty < need - rounding
+                # computation == "absolute"
+                else:
+                    return need - value <= product_qty < need - rounding
+
+            return wrap
+
+    def _apply_strategy_single_lot(self, quants):
+        need = yield
+        # We take goods only if we empty the bin.
+        # The original ordering (fefo, fifo, ...) must be kept.
+        product = fields.first(quants).product_id
+        rounding = product.uom_id.rounding
+        comparison = self._get_requested_comparisons(rounding)
+        if product.tracking == "lot" or comparison is not None:
+            for location, location_quants in quants._group_by_location():
+                grouped_quants = self.env["stock.quant"].read_group(
+                    [
+                        ("lot_id", "!=", False),
+                        ("location_id", "in", location.ids),
+                        ("product_id", "=", product.id),
+                        ("quantity", ">", 0),
+                    ],
+                    ["lot_id", "quantity"],
+                    ["lot_id"],
+                    orderby="id",
+                )
+                lot_ids_with_quantity = {
+                    group["lot_id"][0]: group["quantity"] for group in grouped_quants
+                }
+                location_quantity = sum(location_quants.mapped("quantity")) - sum(
+                    location_quants.mapped("reserved_quantity")
+                )
+                lot_id = False
+                for rec_id, product_qty in lot_ids_with_quantity.items():
+                    if comparison(product_qty, need):
+                        lot_id = rec_id
+                        break
+                if location_quantity > 0 and lot_id:
+                    lot_id = self.env["stock.production.lot"].browse(lot_id)
+                    need = yield location, location_quantity, need, lot_id, None

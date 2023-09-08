@@ -21,6 +21,19 @@ The included advanced removal strategies are:
 * Full Packaging: tries to remove full packaging (configured on the products)
   first, by largest to smallest package or based on a pre-selected package
   (default removal strategy is then applied for equal quantities).
+* Single lot: tries to remove a single lot.
+  This strategy requires to select if a tolerance should be applied on lot selection,
+  allowing to select lots with qty higher or lower than qty requested in picking.
+  Rules can be applied in sequence, for example, to first check for exact lot qty,
+  then for a lot with qty 5% higher than requested, then for a lot with qty 10% higher
+  than requested, and so on.
+
+  If lot selected must have same qty as requested, set "Tolerance on = No tolerance";
+  otherwise it's possible to select a lot with higher qty (Tolerance on = Upper Limit")
+  or lower qty ("Lower Limit"), either in percentage of qty or absolute value.
+  Please note that both "Upper limit" or "Lower limit" rules
+  will not select a lot with qty = requested qty.
+
 
 Examples of scenario:
 

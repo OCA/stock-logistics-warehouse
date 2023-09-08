@@ -29,8 +29,7 @@ Scenario:
   and see the rules (by default in demo, the rules are created inactive)
 * Open Transfer: Outgoing shipment (reservation rules demo 1)
 * Check availability: it has 150 units, as it will not empty Zone A, it will not
-  take products there, it should take 100 in B and 50 in C (following the rules
-  order)
+  take products there, it should take 100 in B and 50 in C (following the rules order)
 * Unreserve this transfer (to test the second case)
 * Open Transfer: Outgoing shipment (reservation rules demo 2)
 * Check availability: it has 250 units, it can empty Zone A, it will take 200 in

@@ -25,4 +25,10 @@
         <field name="location_id" ref="stock_location_zone_c_demo" />
         <field name="removal_strategy">default</field>
     </record>
+    <record id="stock_reserve_rule_4_removal_demo" model="stock.reserve.rule.removal">
+        <field name="rule_id" ref="stock_reserve_rule_1_demo" />
+        <field name="sequence">4</field>
+        <field name="location_id" ref="stock_location_zone_d_demo" />
+        <field name="removal_strategy">single_lot</field>
+    </record>
 </odoo>
