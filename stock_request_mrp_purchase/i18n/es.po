@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_request_mrp_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-11 11:48+0000\n"
+"PO-Revision-Date: 2023-09-11 13:48+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: stock_request_mrp_purchase
+#: model:ir.model.fields,field_description:stock_request_mrp_purchase.field_purchase_order__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: stock_request_mrp_purchase
+#: model:ir.model.fields,field_description:stock_request_mrp_purchase.field_purchase_order__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_request_mrp_purchase
+#: model:ir.model.fields,field_description:stock_request_mrp_purchase.field_purchase_order____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: stock_request_mrp_purchase
+#: model:ir.model,name:stock_request_mrp_purchase.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
