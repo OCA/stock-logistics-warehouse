@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="exception_po_cancel">
+        <div class="alert alert-warning" role="alert">
+            <t t-if="stock_request_order">
+                Exception(s) occurred on the stock request order(s):
+                <a
+                    href="#"
+                    data-oe-model="stock.request.order"
+                    t-att-data-oe-id="stock_request_order.id"
+                ><t t-esc="stock_request_order.name" /></a>.
+            </t>
+            <t t-if="stock_request">
+                Exception(s) occurred on the stock request(s):
+                <a
+                    href="#"
+                    data-oe-model="stock.request"
+                    t-att-data-oe-id="stock_request.id"
+                ><t t-esc="stock_request.name" /></a>.
+            </t>
+            Manual actions may be needed.
+            <div class="mt16">
+                <p>Exception(s):</p>
+                <ul t-foreach="orders" t-as="order">
+                    <li>
+                        <a
+                            href="#"
+                            data-oe-model="purchase.order"
+                            t-att-data-oe-id="order.id"
+                        ><t t-esc="order.name" /></a>: cancelled
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </template>
+</odoo>

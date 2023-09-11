@@ -1,4 +1,5 @@
 # Copyright 2017-20 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2023 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
@@ -14,6 +15,7 @@
         "security/ir.model.access.csv",
         "views/stock_request_views.xml",
         "views/stock_request_order_views.xml",
+        "views/stock_request_templates.xml",
         "views/purchase_order_views.xml",
     ],
     "installable": True,
