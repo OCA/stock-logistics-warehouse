@@ -155,8 +155,11 @@ class StockMoveLocationWizard(models.TransientModel):
 
     @api.onchange("destination_location_id")
     def _onchange_destination_location_id(self):
-        for line in self.stock_move_location_line_ids:
-            line.destination_location_id = self.destination_location_id
+        if self.env.context.get("active_model", False) == "stock.quant":
+            for line in self.stock_move_location_line_ids:
+                line.destination_location_id = self.destination_location_id
+        else:
+            self.create_lines()
 
     def _clear_lines(self):
         self.stock_move_location_line_ids = False
@@ -332,18 +335,22 @@ class StockMoveLocationWizard(models.TransientModel):
             not self.env.context.get("origin_location_disable")
             and self.origin_location_id
         ):
-            lines = []
-            line_model = self.env["wiz.stock.move.location.line"]
-            for line_val in self._get_stock_move_location_lines_values():
-                if line_val.get("max_quantity") <= 0:
-                    continue
-                line = line_model.create(line_val)
-                line.max_quantity = line.get_max_quantity()
-                line.reserved_quantity = line.reserved_quantity
-                lines.append(line)
-            self.update(
-                {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}
-            )
+            self.create_lines()
+
+    def create_lines(self):
+        self._clear_lines()
+        lines = []
+        line_model = self.env["wiz.stock.move.location.line"]
+        for line_val in self._get_stock_move_location_lines_values():
+            if line_val.get("max_quantity") <= 0:
+                continue
+            line = line_model.create(line_val)
+            line.max_quantity = line.get_max_quantity()
+            line.reserved_quantity = line.reserved_quantity
+            lines.append(line)
+        self.update(
+            {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}
+        )
 
     def clear_lines(self):
         self._clear_lines()

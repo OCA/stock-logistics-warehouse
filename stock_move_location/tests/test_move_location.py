@@ -258,3 +258,17 @@ class TestMoveLocation(TestsCommon):
         second_line = wizard.stock_move_location_line_ids[1]
         second_line.product_id = False
         self.assertEqual(second_line._get_available_quantity(), (0, 0))
+
+    def test_wizard_different_destinations(self):
+        """
+        Create a picking whose line destinations are differents. The first line is sent
+        to the origin location.
+        """
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        wizard.stock_move_location_line_ids[0].write(
+            {"destination_location_id": self.internal_loc_1.id}
+        )
+        wizard.action_move_location()
+        locations = self.internal_loc_1 + self.internal_loc_2
+        self.assertEqual(wizard.picking_id.move_line_ids.location_dest_id, locations)
