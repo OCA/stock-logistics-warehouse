@@ -8,7 +8,11 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
     "depends": ["stock"],
-    "data": ["views/stock_picking_form_view.xml", "views/stock_move_tree_view.xml"],
+    "data": [
+        "views/report_stock_picking.xml",
+        "views/stock_move_tree_view.xml",
+        "views/stock_picking_form_view.xml",
+    ],
     "license": "LGPL-3",
     "installable": True,
     "maintainers": ["yajo"],
