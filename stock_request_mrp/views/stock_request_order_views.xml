@@ -14,7 +14,7 @@
                     type="object"
                     name="action_view_mrp_production"
                     class="oe_stat_button"
-                    icon="fa-truck"
+                    icon="fa-wrench"
                     attrs="{'invisible': [('production_count', '=', 0)]}"
                 >
                     <field name="production_count" widget="statinfo" string="MOs" />
