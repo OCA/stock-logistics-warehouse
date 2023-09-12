@@ -44,6 +44,9 @@ class StockMove(models.Model):
         "move_dest_ids.picking_id.move_ids.move_orig_ids",
     )
     def _compute_common_dest_move_ids(self):
+        if not self.ids:
+            self.common_dest_move_ids = [(5, 0, 0)]
+            return
         self._flush_common_dest_move_query()
         sql = self._common_dest_move_query()
         self.env.cr.execute(sql, (tuple(self.ids),))
