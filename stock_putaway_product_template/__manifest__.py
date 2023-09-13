@@ -1,8 +1,9 @@
+# Copyright 2023 Tecnativa - Carolina Fernandez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Product template in putaway strategies",
     "summary": "Add product template in putaway strategies from the product view",
-    "version": "15.0.1.0.1",
+    "version": "16.0.1.0.0",
     "category": "Inventory",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Akretion, Odoo Community Association (OCA)",
