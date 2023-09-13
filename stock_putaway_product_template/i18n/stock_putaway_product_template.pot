@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #. module: stock_putaway_product_template
 #: model:ir.model,name:stock_putaway_product_template.model_product_template
-msgid "Product Template"
+msgid "Product"
 msgstr ""
 
 #. module: stock_putaway_product_template

@@ -7,3 +7,4 @@
   * Sergio Teruel
   * Víctor Martínez
   * César A. Sánchez
+  * Carolina Fernandez
