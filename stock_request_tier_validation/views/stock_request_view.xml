@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019-2020 ForgeFlow S.L. (https://www.forgeflow.com)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_stock_request_filter" model="ir.ui.view">
+        <field name="name">stock.request.select - stock_request_tier_validation</field>
+        <field name="model">stock.request</field>
+        <field name="inherit_id" ref="stock_request.stock_request_search" />
+        <field name="arch" type="xml">
+            <search position="inside">
+                <group expand="0" string="Need actions">
+                    <filter
+                        name="needs_review"
+                        string="Needs my Review"
+                        domain="[('reviewer_ids','in',uid), ('state', 'not in', ['done', 'cancel'])]"
+                        help="My Stock Requests to review"
+                    />
+                    <filter
+                        name="tier_validated"
+                        string="Validated"
+                        domain="[('validated', '=', True)]"
+                        help="Stock Requests validated and ready to be confirmed"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
