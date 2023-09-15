@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_putaway_product_template
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-11 09:02+0000\n"
+"PO-Revision-Date: 2023-07-27 11:14+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_putaway_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_product_template__display_name
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: stock_putaway_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_product_template__id
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: stock_putaway_product_template
+#: model:ir.model,name:stock_putaway_product_template.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicaciones de inventario"
+
+#. module: stock_putaway_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_product_template____last_update
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: stock_putaway_product_template
+#: model:ir.model,name:stock_putaway_product_template.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: stock_putaway_product_template
+#: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule__product_tmpl_id
+msgid "Product Tmpl"
+msgstr "Plantilla de producto"
+
+#. module: stock_putaway_product_template
+#: model:ir.model,name:stock_putaway_product_template.model_stock_putaway_rule
+msgid "Putaway Rule"
+msgstr "Regla de Estrategia de Traslado"
