@@ -63,11 +63,7 @@
                                     readonly="1"
                                     force_save="1"
                                 />
-                                <field
-                                    name="destination_location_id"
-                                    readonly="1"
-                                    force_save="1"
-                                />
+                                <field name="destination_location_id" />
                                 <field
                                     name="lot_id"
                                     domain="[('product_id', '=', product_id)]"
