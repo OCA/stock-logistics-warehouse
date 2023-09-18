@@ -75,49 +75,20 @@ class TestInventoryDiscrepancy(TransactionCase):
             }
         )
 
-        self.quant_line1 = self.obj_quant.with_context(inventory_mode=True).create(
+        self.quant_line1 = self.obj_quant.with_context(inventory_mode=False).create(
             {
                 "product_id": self.product1.id,
                 "quantity": 2.0,
                 "location_id": self.test_loc.id,
             }
         )
-        self.quant_line2 = self.obj_quant.with_context(inventory_mode=True).create(
+        self.quant_line2 = self.obj_quant.with_context(inventory_mode=False).create(
             {
                 "product_id": self.product2.id,
                 "quantity": 4.0,
                 "location_id": self.test_loc.id,
             }
         )
-
-        # starting_inv = self.obj_inventory.create(
-        #     {
-        #         "name": "Starting inventory",
-        #         "line_ids": [
-        #             (
-        #                 0,
-        #                 0,
-        #                 {
-        #                     "product_id": self.product1.id,
-        #                     "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-        #                     "product_qty": 2.0,
-        #                     "location_id": self.test_loc.id,
-        #                 },
-        #             ),
-        #             (
-        #                 0,
-        #                 0,
-        #                 {
-        #                     "product_id": self.product2.id,
-        #                     "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-        #                     "product_qty": 4.0,
-        #                     "location_id": self.test_loc.id,
-        #                 },
-        #             ),
-        #         ],
-        #     }
-        # )
-        # starting_inv.action_force_done()
 
     def test_discrepancy_validation(self):
         """Tests the new workflow"""
@@ -197,7 +168,7 @@ class TestInventoryDiscrepancy(TransactionCase):
 
     def test_warehouse_threshold(self):
         """Tests the behaviour if the threshold is set on the WH."""
-        quant_other_loc = self.obj_quant.with_context(inventory_mode=True).create(
+        quant_other_loc = self.obj_quant.with_context(inventory_mode=False).create(
             {
                 "product_id": self.product1.id,
                 "inventory_quantity": 3.0,
