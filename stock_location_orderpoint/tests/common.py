@@ -117,12 +117,13 @@ class TestLocationOrderpointCommon(SavepointCase):
         return move
 
     @classmethod
-    def _create_outgoing_move(cls, qty, location=None):
+    def _create_outgoing_move(cls, qty, location=None, defaults=None):
         move = cls._create_move(
             "Delivery",
             qty,
             location or cls.location_dest,
             cls.env.ref("stock.stock_location_customers"),
+            defaults=defaults,
         )
         move._action_assign()
         return move
