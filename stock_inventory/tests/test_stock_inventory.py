@@ -292,6 +292,8 @@ class TestStockInventory(TransactionCase):
             }
         )
         inventory1.action_state_to_in_progress()
+        # Remove company_id from stock-quant to test it works as expected
+        inventory1.stock_quant_ids.write({"company_id": False})
         self.assertEqual(inventory1.stock_quant_ids.ids, [self.quant4.id])
         inventory1.action_state_to_draft()
         self.assertEqual(inventory1.stock_quant_ids.ids, [])
