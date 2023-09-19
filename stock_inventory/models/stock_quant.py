@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import _, fields, models
 
 
 class StockQuant(models.Model):
@@ -22,13 +22,18 @@ class StockQuant(models.Model):
                 [
                     ("product_id", "=", rec.product_id.id),
                     ("lot_id", "=", rec.lot_id.id),
-                    ("company_id", "=", rec.company_id.id),
                     "|",
                     ("location_id", "=", rec.location_id.id),
                     ("location_dest_id", "=", rec.location_id.id),
                 ],
                 order="create_date asc",
+            ).filtered(
+                lambda x: not x.company_id.id
+                or not rec.company_id.id
+                or rec.company_id.id == x.company_id.id
             )
+            if len(moves) == 0:
+                raise ValueError(_("No move lines have been created"))
             move = moves[len(moves) - 1]
             adjustment.stock_move_ids |= move
             move.inventory_adjustment_id = adjustment
