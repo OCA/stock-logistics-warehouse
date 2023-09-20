@@ -34,3 +34,6 @@ class StockQuant(models.Model):
             move.inventory_adjustment_id = adjustment
             rec.to_do = False
         return res
+
+    def _get_inventory_fields_write(self):
+        return super()._get_inventory_fields_write() + ["to_do"]
