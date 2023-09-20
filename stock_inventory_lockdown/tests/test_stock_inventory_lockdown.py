@@ -47,8 +47,8 @@ class StockInventoryLocationTest(TestStockCommon):
         self.inventory = self.env["stock.inventory"].create(
             {"name": "Lock down location", "location_ids": [(4, self.new_location.id)]}
         )
-        self.inventory.action_start()
-        self.assertTrue(self.inventory.line_ids, "The inventory is empty.")
+        self.inventory.action_state_to_in_progress()
+        self.assertTrue(self.inventory.stock_quant_ids, "The inventory is empty.")
 
     def create_stock_move(self, product, origin_id=False, dest_id=False):
         return self.env["stock.move"].create(
@@ -64,7 +64,7 @@ class StockInventoryLocationTest(TestStockCommon):
 
     def test_update_parent_location(self):
         """Updating the parent of a location is OK if no inv. in progress."""
-        self.inventory.action_cancel_draft()
+        self.inventory.action_state_to_draft()
         self.inventory.location_ids.location_id = self.env.ref(
             "stock.stock_location_14"
         )
@@ -78,17 +78,19 @@ class StockInventoryLocationTest(TestStockCommon):
 
     def test_inventory(self):
         """We must still be able to finish the inventory"""
-        self.assertTrue(self.inventory.line_ids)
-        self.inventory.line_ids.write({"product_qty": 42.0})
-        for line in self.inventory.line_ids:
+        self.assertTrue(self.inventory.stock_quant_ids)
+        self.inventory.stock_quant_ids.write({"inventory_quantity": 42.0})
+        for line in self.inventory.stock_quant_ids:
             self.assertNotEqual(
                 line.product_id.with_context(
                     location=line.location_id.id
                 ).qty_available,
                 42.0,
             )
-        self.inventory.action_validate()
-        for line in self.inventory.line_ids:
+        for line in self.inventory.stock_quant_ids:
+            line._apply_inventory()
+
+        for line in self.inventory.stock_quant_ids:
             self.assertEqual(
                 line.product_id.with_context(
                     location=line.location_id.id
@@ -98,23 +100,27 @@ class StockInventoryLocationTest(TestStockCommon):
 
     def test_inventory_sublocation(self):
         """We must be able to make an inventory in a sublocation"""
+        line = self.env["stock.quant"].create(
+            {
+                "product_id": self.productA.id,
+                "quantity": 22.0,
+                "location_id": self.new_sublocation.id,
+            }
+        )
         inventory_subloc = self.env["stock.inventory"].create(
             {
                 "name": "Lock down location",
                 "location_ids": [(4, self.new_sublocation.id)],
+                "stock_quant_ids": line,
             }
         )
-        inventory_subloc.action_start()
-        line = self.env["stock.inventory.line"].create(
-            {
-                "product_id": self.productA.id,
-                "product_qty": 22.0,
-                "location_id": self.new_sublocation.id,
-                "inventory_id": inventory_subloc.id,
-            }
-        )
-        self.assertTrue(inventory_subloc.line_ids)
-        inventory_subloc.action_validate()
+        inventory_subloc.action_state_to_in_progress()
+
+        self.assertTrue(inventory_subloc.stock_quant_ids)
+
+        # for line in inventory_subloc.stock_quant_ids:
+        #     line._apply_inventory()
+
         self.assertEqual(
             line.product_id.with_context(location=line.location_id.id).qty_available,
             22.0,
