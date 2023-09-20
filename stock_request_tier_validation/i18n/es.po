@@ -17,58 +17,15 @@ msgstr ""
 "X-Generator: Weblate 3.6.1\n"
 
 #. module: stock_request_tier_validation
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid ""
-"<i class=\"fa fa-info-circle\"/>This Stock Request needs to be\n"
-"                        validated."
-msgstr ""
-"<i class=\"fa fa-info-circle\"/>Esta Solicitud de existencias debe ser\n"
-"                        validada."
-
-#. module: stock_request_tier_validation
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid "<i class=\"fa fa-thumbs-down\"/> Operation has been <b>rejected</b>."
-msgstr "<i class=\"fa fa-thumbs-down\"/>La operación ha sido <b>rechazada</b>."
-
-#. module: stock_request_tier_validation
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid "<i class=\"fa fa-thumbs-up\"/> Operation has been <b>validated</b>!"
-msgstr "<i class=\"fa fa-thumbs-up\"/>La operación ha sido <b>validada</b>!"
-
-#. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__can_review
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__can_review
 msgid "Can Review"
 msgstr ""
 
 #. module: stock_request_tier_validation
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__display_name
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__display_name
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_tier_definition__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__has_comment
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__has_comment
 msgid "Has Comment"
-msgstr ""
-
-#. module: stock_request_tier_validation
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__id
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__id
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_tier_definition__id
-msgid "ID"
-msgstr ""
-
-#. module: stock_request_tier_validation
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request____last_update
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order____last_update
-#: model:ir.model.fields,field_description:stock_request_tier_validation.field_tier_definition____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_request_tier_validation
@@ -98,7 +55,6 @@ msgstr ""
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Need actions"
 msgstr "Acción necesaria"
 
@@ -115,12 +71,6 @@ msgid "Next Review"
 msgstr ""
 
 #. module: stock_request_tier_validation
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid "Reject"
-msgstr "Rechazar"
-
-#. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__rejected
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__rejected
 msgid "Rejected"
@@ -131,18 +81,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__rejected_message
 msgid "Rejected Message"
 msgstr ""
-
-#. module: stock_request_tier_validation
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid "Request Validation"
-msgstr "Solicitar Validación"
-
-#. module: stock_request_tier_validation
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid "Restart Validation"
-msgstr "Reiniciar Validación"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__reviewer_ids
@@ -179,12 +117,6 @@ msgid "To Validate Message"
 msgstr ""
 
 #. module: stock_request_tier_validation
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
-#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid "Validate"
-msgstr "Validar"
-
-#. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validated
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__validated
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
@@ -203,6 +135,32 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__review_ids
 msgid "Validations"
 msgstr ""
+
+#~ msgid ""
+#~ "<i class=\"fa fa-info-circle\"/>This Stock Request needs to be\n"
+#~ "                        validated."
+#~ msgstr ""
+#~ "<i class=\"fa fa-info-circle\"/>Esta Solicitud de existencias debe ser\n"
+#~ "                        validada."
+
+#~ msgid "<i class=\"fa fa-thumbs-down\"/> Operation has been <b>rejected</b>."
+#~ msgstr ""
+#~ "<i class=\"fa fa-thumbs-down\"/>La operación ha sido <b>rechazada</b>."
+
+#~ msgid "<i class=\"fa fa-thumbs-up\"/> Operation has been <b>validated</b>!"
+#~ msgstr "<i class=\"fa fa-thumbs-up\"/>La operación ha sido <b>validada</b>!"
+
+#~ msgid "Reject"
+#~ msgstr "Rechazar"
+
+#~ msgid "Request Validation"
+#~ msgstr "Solicitar Validación"
+
+#~ msgid "Restart Validation"
+#~ msgstr "Reiniciar Validación"
+
+#~ msgid "Validate"
+#~ msgstr "Validar"
 
 #~ msgid "Dismiss"
 #~ msgstr "Descartar"
