@@ -4,9 +4,9 @@
 {
     "name": "Inventory Lock Down",
     "summary": "Lock down stock locations during inventories.",
-    "version": "14.0.1.0.0",
-    "development_status": "Mature",
-    "depends": ["stock"],
+    "version": "16.0.1.0.0",
+    "development_status": "Beta",
+    "depends": ["stock", "stock_inventory"],
     "author": "Numérigraphe, ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
