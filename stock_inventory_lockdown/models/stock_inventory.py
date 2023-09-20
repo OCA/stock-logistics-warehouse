@@ -12,7 +12,7 @@ class StockInventory(models.Model):
     @api.model
     def _get_locations_open_inventories(self, locations_ids=None):
         """IDs of locations in open exhaustive inventories, with children"""
-        inventory_domain = [("state", "=", "confirm")]
+        inventory_domain = [("state", "=", "in_progress")]
         if locations_ids:
             inventory_domain.append(("location_ids", "child_of", locations_ids))
         inventories = self.search(inventory_domain)
