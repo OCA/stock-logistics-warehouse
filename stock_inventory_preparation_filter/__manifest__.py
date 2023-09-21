@@ -5,8 +5,8 @@
 
 {
     "name": "Extended Inventory Preparation Filters",
-    "version": "14.0.1.0.1",
-    "depends": ["stock"],
+    "version": "16.0.1.0.0",
+    "depends": ["stock", "stock_inventory"],
     "author": "AvanzOSC," "Tecnativa," "Odoo Community Association (OCA)",
     "category": "Inventory, Logistic, Storage",
     "website": "https://github.com/OCA/stock-logistics-warehouse",

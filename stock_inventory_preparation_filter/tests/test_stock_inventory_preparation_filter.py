@@ -49,7 +49,7 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
                 "categ_id": self.category2.id,
             }
         )
-        self.lot = self.env["stock.production.lot"].create(
+        self.lot = self.env["stock.lot"].create(
             {
                 "name": "Lot test",
                 "product_id": self.product_lot.id,
@@ -99,33 +99,49 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
     def test_inventory_filter(self):
         # Filter all products
         inventory = self.inventory_model.create(
-            {"name": "Inventory test", "filter": "products"}
+            {
+                "name": "Inventory test",
+                "product_selection": "all",
+                "location_ids": self.env.ref("stock.stock_location_stock"),
+            }
         )
-        inventory.action_start()
-        self.assertTrue(self.test_products <= inventory.line_ids.mapped("product_id"))
+        inventory.action_state_to_in_progress()
+        self.assertTrue(
+            self.test_products <= inventory.stock_quant_ids.mapped("product_id")
+        )
         # Filter by categories
-        inventory.action_cancel_draft()
+        inventory.action_state_to_draft()
         inventory.update(
-            {"filter": "categories", "categ_ids": [(6, 0, [self.category.id])]}
+            {
+                "product_selection": "category",
+                "category_id": self.category.id,
+            }
         )
-        inventory.action_start()
-        self.assertEqual(len(inventory.line_ids), 3)
+        inventory.action_state_to_in_progress()
+        self.assertEqual(len(inventory.stock_quant_ids), 3)
         # Filter by lots
-        inventory.action_cancel_draft()
-        inventory.update({"filter": "lots", "lot_ids": [(6, 0, self.lot.ids)]})
-        inventory.action_start()
-        self.assertEqual(len(inventory.line_ids), 1)
+        inventory.action_state_to_draft()
+        inventory.update(
+            {
+                "product_selection": "lot",
+                "lot_ids": self.lot.ids,
+                "product_ids": self.product_lot,
+            }
+        )
+        inventory.action_state_to_in_progress()
+        self.assertEqual(len(inventory.stock_quant_ids), 1)
 
     def test_inventory_domain_filter(self):
         inventory = self.inventory_model.create(
             {
                 "name": "Domain inventory",
-                "filter": "domain",
+                "product_selection": "domain",
                 "product_domain": [("id", "=", self.product1.id)],
+                "location_ids": self.env.ref("stock.stock_location_stock"),
             }
         )
-        inventory.action_start()
-        self.assertEqual(len(inventory.line_ids), 1)
-        line1 = inventory.line_ids[0]
+        inventory.action_state_to_in_progress()
+        self.assertEqual(len(inventory.stock_quant_ids), 1)
+        line1 = inventory.stock_quant_ids[0]
         self.assertEqual(line1.product_id, self.product1)
-        self.assertEqual(line1.theoretical_qty, 2.0)
+        self.assertEqual(line1.quantity, 2.0)
