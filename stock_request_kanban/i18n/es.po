@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-04 19:36+0000\n"
+"PO-Revision-Date: 2023-10-09 07:58+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -770,7 +770,7 @@ msgstr "Mensajes de la página web"
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__website_message_ids
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__website_message_ids
 msgid "Website communication history"
-msgstr "Historial de la comunicación en lapágina web"
+msgstr "Historial de la comunicación en la página web"
 
 #, python-format
 #~ msgid "Added kanban %s for product %s"
