@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
-"PO-Revision-Date: 2023-01-30 13:47+0000\n"
+"PO-Revision-Date: 2023-10-09 07:42+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
@@ -87,7 +87,7 @@ msgstr "Prodotto"
 #. module: stock_available
 #: model:ir.model,name:stock_available.model_product_template
 msgid "Product Template"
-msgstr "Modello Prodotto"
+msgstr "Modello prodotto"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_product_product__potential_qty
