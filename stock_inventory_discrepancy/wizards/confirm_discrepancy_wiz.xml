@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_quant_confirm_discrepancy" model="ir.ui.view">
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable" />
+        <field name="mode">primary</field>
+        <field name="priority">999</field>
+        <field name="arch" type="xml">
+            <button name="action_apply_inventory" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </button>
+            <button name="action_set_inventory_quantity_to_zero" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </button>
+        </field>
+    </record>
+    <record id="confirm_discrepancy_wizard" model="ir.ui.view">
+        <field name="name">confirm.discrepancy.wiz.form</field>
+        <field name="model">confirm.discrepancy.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Dates does not match">
+                <p
+                    groups="!stock_inventory_discrepancy.group_stock_inventory_validation_always"
+                >
+                    You cannot confirm the inventory adjustment,
+                    the following products have exceeded the discrepancy threshold.
+                    Only users with permissions to apply them can proceed.
+                </p>
+                <p
+                    groups="stock_inventory_discrepancy.group_stock_inventory_validation_always"
+                >
+                    The following products have exceeded the discrepancy threshold.
+                    Are you sure you want to proceed?
+                </p>
+                <field
+                    name="discrepancy_quant_ids"
+                    context="{'tree_view_ref':'stock_inventory_discrepancy.stock_quant_confirm_discrepancy'}"
+                    options="{'no_create': True}"
+                />
+                <footer>
+                    <button
+                        string="Apply"
+                        class="oe_highlight"
+                        name="button_apply"
+                        type="object"
+                        groups="stock_inventory_discrepancy.group_stock_inventory_validation_always"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="confirm_discrepancy_action" model="ir.actions.act_window">
+        <field name="name">Confirm discrepancy</field>
+        <field name="res_model">confirm.discrepancy.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
