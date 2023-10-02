@@ -61,6 +61,8 @@ class StockReserveArea(models.Model):
         )
 
     def update_reserve_area_lines(self, moves, locs_to_add, locs_to_delete):
+        if self.env.context.get("init_hook", False):
+            return
         for move in moves:
             reserve_area_line = self.env["stock.move.reserve.area.line"].search(
                 [("move_id", "=", move.id), ("reserve_area_id", "=", self.id)]

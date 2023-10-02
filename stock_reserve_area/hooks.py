@@ -49,6 +49,51 @@ def assign_reserve_area_ids_to_stock_move_query(cr):
     cr.execute(query)
 
 
+def create_reservation_data(cr):
+    cr.execute(
+        """
+insert into stock_move_reserve_area_line
+  (
+  create_uid,
+  create_date,
+  move_id,
+  product_id,
+  reserve_area_id,
+  reserved_availability
+  )
+
+select
+  1 as create_uid,
+  current_timestamp as create_date,
+  sm.id as move_id,
+  sm.product_id as product_id,
+  rel.stock_reserve_area_id as reserve_area_id,
+  coalesce(sum(sml.product_uom_qty), 0) as reserved_availability
+from stock_move as sm
+inner join stock_move_stock_reserve_area_rel as rel on rel.stock_move_id = sm.id
+left join stock_move_line as sml on sml.move_id = sm.id
+where sm.state in ('assigned', 'partially_assigned')
+and sm.id not in (
+  select move_id from stock_move_reserve_area_line group by move_id
+)
+group by sm.id, rel.stock_reserve_area_id, sm.picking_id, sm.product_id
+having coalesce(sum(sml.product_uom_qty), 0) > 0
+"""
+    )
+
+    cr.execute(
+        """
+update stock_move as sm set area_reserved_availability = q.reserved_availability
+from (
+  select move_id, min(reserved_availability) as reserved_availability
+  from stock_move_reserve_area_line
+  group by move_id
+  ) as q
+where q.move_id = sm.id
+    """
+    )
+
+
 def post_init_hook(cr, registry):
     """
     This post-init-hook will create a Reserve Area for each existing WH.
@@ -67,7 +112,7 @@ def post_init_hook(cr, registry):
             [("id", "child_of", warehouse.view_location_id.id)]
         )
 
-        reserve_area_obj.create(
+        reserve_area_obj.with_context(init_hook=True).create(
             {
                 "name": warehouse.name,
                 "location_ids": [(6, 0, all_locations.ids)],
@@ -78,3 +123,6 @@ def post_init_hook(cr, registry):
     _logger.info("Starting assign_reserve_area_ids_to_stock_move_query")
 
     assign_reserve_area_ids_to_stock_move_query(cr)
+
+    _logger.info("Create reservation data for current moves")
+    create_reservation_data(cr)
