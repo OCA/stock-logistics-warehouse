@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_picking_type_form" model="ir.ui.view">
+        <field name="name">view.picking.type.form</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='show_reserved']" position="after">
+                <field name="allow_pull_list_server_action" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
