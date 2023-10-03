@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-11 09:02+0000\n"
-"PO-Revision-Date: 2023-07-27 11:14+0000\n"
+"PO-Revision-Date: 2023-10-09 08:09+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -25,7 +25,7 @@ msgstr "Ubicaciones de inventario"
 #. module: stock_putaway_product_template
 #: model:ir.model,name:stock_putaway_product_template.model_product_template
 msgid "Product"
-msgstr ""
+msgstr "Producto"
 
 #. module: stock_putaway_product_template
 #: model:ir.model.fields,field_description:stock_putaway_product_template.field_stock_putaway_rule__product_tmpl_id
