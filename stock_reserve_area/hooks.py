@@ -76,6 +76,10 @@ where sm.state in ('assigned', 'partially_assigned')
 and sm.id not in (
   select move_id from stock_move_reserve_area_line group by move_id
 )
+and sm.location_dest_id not in (
+    select location_id from stock_reserve_area_stock_location_rel
+    where reserve_area_id = rel.stock_reserve_area_id
+    )
 group by sm.id, rel.stock_reserve_area_id, sm.picking_id, sm.product_id
 having coalesce(sum(sml.product_uom_qty), 0) > 0
 """

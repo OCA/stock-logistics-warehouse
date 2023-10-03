@@ -10,7 +10,7 @@ class StockMoveReserveAreaLine(models.Model):
 
     _name = "stock.move.reserve.area.line"
 
-    move_id = fields.Many2one("stock.move")
+    move_id = fields.Many2one("stock.move", index=True)
 
     picking_id = fields.Many2one("stock.picking", related="move_id.picking_id")
 
@@ -23,7 +23,9 @@ class StockMoveReserveAreaLine(models.Model):
         " Area of the source location.",
     )
 
-    reserve_area_id = fields.Many2one("stock.reserve.area", ondelete="cascade")
+    reserve_area_id = fields.Many2one(
+        "stock.reserve.area", ondelete="cascade", index=True
+    )
 
     product_id = fields.Many2one(
         "product.product", related="move_id.product_id", store=True

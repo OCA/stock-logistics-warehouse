@@ -48,10 +48,7 @@ class StockReserveArea(models.Model):
                     raise UserError(_("All Areas must be concentric"))
 
     def is_location_in_area(self, location):
-        location_in = self.env["stock.location"].search(
-            [("id", "in", self.location_ids.ids), ("id", "=", location.id)]
-        )
-        return bool(location_in)
+        return bool(location in self.location_ids)
 
     @api.onchange("location_ids")
     def _onchange_location_ids(self):
@@ -79,34 +76,37 @@ class StockReserveArea(models.Model):
                 # and now is out move the move didn't impact this area but now the
                 # source location is inside of it and it's out move
                 move.reserve_area_ids |= self
-                move._do_unreserve()
-                move._action_assign()  # will create new reserve_area_line and reserve
-            elif (
-                not move._is_out_area(self)
-                and reserve_area_line
-                and (
-                    move.location_dest_id in locs_to_add
-                    or move.location_id in locs_to_delete
-                )
+                if move.state not in ("confirmed", "waiting"):
+                    # TODO don't unreserve and reserve, reserve in area the locally reserved qty
+                    move._do_unreserve()
+                    move._action_assign()  # will create new reserve_area_line and reserve
+            elif not move._is_out_area(self) and (
+                move.location_dest_id in locs_to_add
+                or move.location_id in locs_to_delete
             ):
                 # 1. the move was out of the area but we dest loc is added in area so it
                 # is not out move anymore.
                 # 2. the move was out of the area but we remove source location from
                 # area so this area doesn't apply for reservation.
                 move.reserve_area_ids -= self
-                reserve_area_line.unlink()
-                move._do_unreserve()
-                move._action_assign()
+                if reserve_area_line:
+                    # TODO don't unreserve and reserve, recalculate area_reserved_availability
+                    reserve_area_line.unlink()
+                    move._do_unreserve()
+                    move._action_assign()
 
     @api.model
     def create(self, vals):
         res = super().create(vals)
         moves_impacted = self.env["stock.move"].search(
             [
-                "|",
                 ("location_id", "in", res.location_ids.ids),
-                ("location_dest_id", "in", res.location_ids.ids),
-                ("state", "in", ("confirmed", "waiting", "partially_available")),
+                ("location_dest_id", "not in", res.location_ids.ids),
+                (
+                    "state",
+                    "in",
+                    ("confirmed", "waiting", "assigned", "partially_available"),
+                ),
             ]
         )
         res.update_reserve_area_lines(moves_impacted, res.location_ids, [])
@@ -126,7 +126,11 @@ class StockReserveArea(models.Model):
                     "|",
                     ("location_id", "in", to_add.ids + to_delete.ids),
                     ("location_dest_id", "in", to_add.ids + to_delete.ids),
-                    ("state", "in", ("confirmed", "waiting", "partially_available")),
+                    (
+                        "state",
+                        "in",
+                        ("confirmed", "waiting", "partially_available", "assigned"),
+                    ),
                 ]
             )
             self.update_reserve_area_lines(moves_impacted, to_add, to_delete)
@@ -138,7 +142,11 @@ class StockReserveArea(models.Model):
         moves_impacted = self.env["stock.move"].search(
             [
                 ("location_id", "in", locations.ids),
-                ("state", "in", ("confirmed", "waiting", "partially_available")),
+                (
+                    "state",
+                    "in",
+                    ("confirmed", "waiting", "partially_available", "assigned"),
+                ),
             ]
         )
         moves_impacted._compute_area_reserved_availability()
