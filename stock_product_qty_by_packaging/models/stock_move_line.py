@@ -10,4 +10,4 @@ class StockMoveLine(models.Model):
     _name = "stock.move.line"
     _inherit = ["stock.move.line", "product.qty_by_packaging.mixin"]
 
-    _qty_by_pkg__qty_field_name = "product_qty"
+    _qty_by_pkg__qty_field_name = "reserved_qty"

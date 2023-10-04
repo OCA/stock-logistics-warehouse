@@ -35,7 +35,7 @@ class TestStock(TestCommon):
         cls.move._assign_picking()
         cls.move._action_assign()
         cls.move_line = cls.move.move_line_ids[0]
-        cls.move_line.product_uom_qty = 1470
+        cls.move_line.reserved_uom_qty = 1470
         cls.quant = cls.env["stock.quant"].create(
             {
                 "location_id": cls.stock_location.id,
