@@ -6,7 +6,7 @@ from odoo import _, models
 from odoo.exceptions import ValidationError
 from odoo.tools import groupby
 
-from .stock_location import NORESTRICTION, SINGLEPACKAGE
+from .stock_location import SINGLEPACKAGE
 
 
 class StockMove(models.Model):
@@ -22,7 +22,7 @@ class StockMove(models.Model):
         quants_grouped = self.env["stock.quant"].read_group(
             [
                 ("location_id", "in", self.move_line_ids.location_dest_id.ids),
-                ("location_id.package_restriction", "!=", NORESTRICTION),
+                ("location_id.package_restriction", "!=", False),
                 ("quantity", ">", 0),
             ],
             ["location_id", "package_id:array_agg"],
@@ -34,7 +34,7 @@ class StockMove(models.Model):
         for location, move_lines in groupby(
             self.move_line_ids, lambda m: m.location_dest_id
         ):
-            if location.package_restriction == NORESTRICTION:
+            if not location.package_restriction:
                 continue
 
             existing_package_ids = location_packages.get(location.id, set())

@@ -5,7 +5,7 @@
     "name": "Stock Location Package Restriction",
     "summary": """
         Control if the location can contain products not in a package""",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "category": "Warehouse Management",
     "author": "Raumschmiede.de, BCIM, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
