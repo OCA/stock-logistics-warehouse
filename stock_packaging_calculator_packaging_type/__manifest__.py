@@ -12,5 +12,5 @@
     "application": False,
     "installable": True,
     "auto_install": True,
-    "depends": ["stock_packaging_calculator", "product_packaging_type"],
+    "depends": ["stock_packaging_calculator", "product_packaging_level"],
 }
