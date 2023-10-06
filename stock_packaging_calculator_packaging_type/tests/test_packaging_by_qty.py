@@ -8,32 +8,36 @@ class TestCalc(TestCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.type_retail_box = cls.env["product.packaging.type"].create(
+        cls.level_retail_box = cls.env["product.packaging.level"].create(
             {"name": "Retail Box", "code": "PACK", "sequence": 3}
         )
-        cls.type_transport_box = cls.env["product.packaging.type"].create(
+        cls.level_transport_box = cls.env["product.packaging.level"].create(
             {"name": "Transport Box", "code": "CASE", "sequence": 4}
         )
-        cls.type_pallet = cls.env["product.packaging.type"].create(
+        cls.level_pallet = cls.env["product.packaging.level"].create(
             {"name": "Pallet", "code": "PALLET", "sequence": 5}
         )
-        cls.pkg_box.packaging_type_id = cls.type_retail_box
-        cls.pkg_big_box.packaging_type_id = cls.type_transport_box
-        cls.pkg_pallet.packaging_type_id = cls.type_pallet
+        cls.pkg_box.packaging_level_id = cls.level_retail_box
+        cls.pkg_big_box.packaging_level_id = cls.level_transport_box
+        cls.pkg_pallet.packaging_level_id = cls.level_pallet
 
     def test_calc_1(self):
         expected = [
-            make_pkg_values(self.pkg_pallet, qty=1, name=self.type_pallet.name),
-            make_pkg_values(self.pkg_big_box, qty=3, name=self.type_transport_box.name),
-            make_pkg_values(self.pkg_box, qty=1, name=self.type_retail_box.name),
+            make_pkg_values(self.pkg_pallet, qty=1, name=self.level_pallet.name),
+            make_pkg_values(
+                self.pkg_big_box, qty=3, name=self.level_transport_box.name
+            ),
+            make_pkg_values(self.pkg_box, qty=1, name=self.level_retail_box.name),
             make_pkg_values(self.uom_unit, qty=5),
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(2655), expected)
 
     def test_calc_2(self):
         expected = [
-            make_pkg_values(self.pkg_big_box, qty=1, name=self.type_transport_box.name),
-            make_pkg_values(self.pkg_box, qty=3, name=self.type_retail_box.name),
+            make_pkg_values(
+                self.pkg_big_box, qty=1, name=self.level_transport_box.name
+            ),
+            make_pkg_values(self.pkg_box, qty=3, name=self.level_retail_box.name),
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(350), expected)
 

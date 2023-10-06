@@ -19,4 +19,4 @@ class ProductQtyByPackagingMixin(models.AbstractModel):
         "qty_by_packaging_type_compact",
     )
     def _compute_product_qty_by_packaging_display(self):
-        super()._compute_product_qty_by_packaging_display()
+        return super()._compute_product_qty_by_packaging_display()
