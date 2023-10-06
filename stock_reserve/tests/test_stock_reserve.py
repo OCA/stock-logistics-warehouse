@@ -15,11 +15,14 @@ class TestStockReserve(common.TransactionCase):
         product_form.name = "Test Product"
         product_form.type = "product"
         self.product = product_form.save()
+        self._create_stock_quant(10)
+
+    def _create_stock_quant(self, qty):
         self.env["stock.quant"].create(
             {
                 "product_id": self.product.id,
                 "location_id": self.warehouse.lot_stock_id.id,
-                "quantity": 10.0,
+                "quantity": qty,
             }
         )
 
@@ -29,6 +32,28 @@ class TestStockReserve(common.TransactionCase):
         form_reservation.product_uom_qty = qty
         form_reservation.location_id = self.warehouse.lot_stock_id
         return form_reservation.save()
+
+    def test_reservation_not_substract(self):
+        self.env.company.stock_reserve_substract_forecasted_quantity = False
+        self.assertEqual(self.product.virtual_available, 10)
+        picking_form = Form(
+            self.env["stock.picking"].with_context(
+                default_picking_type_id=self.env.ref("stock.picking_type_out").id
+            )
+        )
+        with picking_form.move_ids_without_package.new() as line_form:
+            line_form.product_id = self.product
+        picking = picking_form.save()
+        picking.move_ids_without_package.product_uom_qty = 10
+        picking.action_confirm()
+        self.assertEqual(self.product.virtual_available, 0)
+        reservation_1 = self._create_stock_reservation(10)
+        reservation_1.reserve()
+        self.assertEqual(self.product.virtual_available, 0)
+        reservation_1.release_reserve()
+        self.assertEqual(self.product.virtual_available, 0)
+        picking.action_cancel()
+        self.assertEqual(self.product.virtual_available, 10)
 
     def test_reservation_and_reservation_release(self):
         reservation_1 = self._create_stock_reservation(6)
@@ -57,13 +82,7 @@ class TestStockReserve(common.TransactionCase):
         reservation_1.reserve()
         self.assertFalse(reservation_1.picking_id)
         self.assertEqual(reservation_1.state, "partially_available")
-        self.env["stock.quant"].create(
-            {
-                "product_id": self.product.id,
-                "location_id": self.warehouse.lot_stock_id.id,
-                "quantity": 10.0,
-            }
-        )
+        self._create_stock_quant(10)
         cron = self.env.ref("stock_reserve.ir_cron_reserve_waiting_confirmed")
         cron.method_direct_trigger()
         self.assertEqual(reservation_1.state, "assigned")

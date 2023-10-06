@@ -13,6 +13,7 @@
     "data": [
         "view/stock_reserve.xml",
         "view/product.xml",
+        "view/res_config_settings_views.xml",
         "data/stock_data.xml",
         "security/ir.model.access.csv",
         "data/cron.xml",

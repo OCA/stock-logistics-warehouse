@@ -46,6 +46,23 @@ class ProductProduct(models.Model):
             reservations = self.env["stock.reservation"].search(domain)
             product.reservation_count = sum(reservations.mapped("product_qty"))
 
+    def _get_domain_locations_new(
+        self, location_ids, company_id=False, compute_child=True
+    ):
+        """Add location reservation for avoiding reservations to be substracted on
+        the forecasted quantity.
+        """
+        company = self.company_id or self.env.company
+        if not company.stock_reserve_substract_forecasted_quantity:
+            location_ids = location_ids.union(
+                set(self.env.ref("stock_reserve.stock_location_reservation").ids)
+            )
+        return super()._get_domain_locations_new(
+            location_ids=location_ids,
+            company_id=company_id,
+            compute_child=compute_child,
+        )
+
     def action_view_reservations(self):
         self.ensure_one()
         ref = "stock_reserve.action_stock_reservation_tree"
