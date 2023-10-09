@@ -138,6 +138,12 @@ msgid "Manual Selection"
 msgstr ""
 
 #. module: stock_inventory
+#: code:addons/stock_inventory/models/stock_quant.py:0
+#, python-format
+msgid "No move lines have been created"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__one
 msgid "One Product"
 msgstr ""
