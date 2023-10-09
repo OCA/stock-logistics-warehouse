@@ -32,6 +32,11 @@ msgid "Bin"
 msgstr "箱子"
 
 #. module: stock_location_zone
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: stock_location_zone
 #: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
 msgid "Group By"
 msgstr ""
@@ -46,6 +51,11 @@ msgid ""
 msgstr ""
 
 #. module: stock_location_zone
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_location_zone
 #: model:ir.model,name:stock_location_zone.model_stock_location
 msgid "Inventory Locations"
 msgstr "库存位置"
@@ -55,6 +65,11 @@ msgstr "库存位置"
 #, fuzzy
 msgid "Is a Zone Location?"
 msgstr "库存位置"
+
+#. module: stock_location_zone
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location____last_update
+msgid "Last Modified on"
+msgstr "最后修改时间"
 
 #. module: stock_location_zone
 #: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__area_location_id
@@ -124,9 +139,6 @@ msgstr "库存位置"
 #~ msgid "Define the picking zones of your warehouses"
 #~ msgstr "定义仓库的拣货区域"
 
-#~ msgid "Display Name"
-#~ msgstr "显示名称"
-
 #~ msgid ""
 #~ "Format string that will compute the name of the location. Use location "
 #~ "fields. Example: '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'"
@@ -140,14 +152,8 @@ msgstr "库存位置"
 #~ msgid "House number"
 #~ msgstr "门牌号码"
 
-#~ msgid "ID"
-#~ msgstr "ID"
-
 #~ msgid "Kind"
 #~ msgstr "种类"
-
-#~ msgid "Last Modified on"
-#~ msgstr "最后修改时间"
 
 #~ msgid "Last Updated by"
 #~ msgstr "最后更新者"
