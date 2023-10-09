@@ -19,7 +19,8 @@ msgstr ""
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
 msgid ""
-"All existing Stock moves moving outside of the location specified will be considered demand.\n"
+"All existing Stock moves moving outside of the location specified will be "
+"considered demand.\n"
 "                You can filter these moves in the section below."
 msgstr ""
 
@@ -27,6 +28,11 @@ msgstr ""
 #: model:ir.model.fields,help:stock_pull_list.field_stock_pull_list_wizard__consolidate_by_product
 msgid ""
 "All needs for each product will be grouped in one line, disregarding date."
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__allow_pull_list_server_action
+msgid "Allow pull list server action"
 msgstr ""
 
 #. module: stock_pull_list
@@ -49,6 +55,12 @@ msgstr "Qtà disponibile"
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
 msgid "Cancel"
 msgstr "Annulla"
+
+#. module: stock_pull_list
+#: code:addons/stock_pull_list/models/stock_picking.py:0
+#, python-format
+msgid "Choose transfers with same source location"
+msgstr ""
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__consolidate_by_product
@@ -83,6 +95,8 @@ msgid "Destination Location"
 msgstr "Ubicazione di destinazione"
 
 #. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__display_name
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__display_name
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__display_name
 msgid "Display Name"
@@ -105,6 +119,7 @@ msgstr "Filtro"
 
 #. module: stock_pull_list
 #: model:ir.actions.act_window,name:stock_pull_list.action_stock_pull_list_wizard
+#: model:ir.actions.server,name:stock_pull_list.stock_generate_pull_list
 #: model:ir.ui.menu,name:stock_pull_list.menu_stock_pull_list_wizard
 msgid "Generate Pull List"
 msgstr "Genera lista prelevamento"
@@ -121,6 +136,8 @@ msgid "Group By Rule"
 msgstr "Regola raggruppa per"
 
 #. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__id
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__id
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__id
 msgid "ID"
@@ -132,6 +149,8 @@ msgid "Incoming Qty"
 msgstr "Qtà in entrata"
 
 #. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type____last_update
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard____last_update
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line____last_update
 msgid "Last Modified on"
@@ -174,6 +193,11 @@ msgstr "Qtà necessaria"
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
 msgid "Needs"
 msgstr "Necessario"
+
+#. module: stock_pull_list
+#: model:ir.model,name:stock_pull_list.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
 
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
@@ -253,8 +277,15 @@ msgstr "Regola di giacenza"
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
 msgid ""
-"The pull list checks the stock situation at the given location and calculates\n"
-"                the shortfall quantities (quantity needed to cover all needs) for products."
+"The pull list checks the stock situation at the given location and "
+"calculates\n"
+"                the shortfall quantities (quantity needed to cover all "
+"needs) for products."
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model,name:stock_pull_list.model_stock_picking
+msgid "Transfer"
 msgstr ""
 
 #. module: stock_pull_list
