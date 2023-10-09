@@ -128,6 +128,7 @@ msgstr ""
 "preferencia sobre los del Almacén."
 
 #. module: stock_inventory_discrepancy
+#. odoo-python
 #: code:addons/stock_inventory_discrepancy/hooks.py:0
 #, python-format
 msgid "Only a stock manager can validate an inventory adjustment."
@@ -186,6 +187,7 @@ msgid "Warehouse"
 msgstr "Almacén"
 
 #. module: stock_inventory_discrepancy
+#. odoo-python
 #: code:addons/stock_inventory_discrepancy/wizards/confirm_discrepancy_wiz.py:0
 #, python-format
 msgid ""
