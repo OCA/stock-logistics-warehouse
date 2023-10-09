@@ -27,6 +27,13 @@ class TestStockInventory(TransactionCase):
                 "categ_id": self.product_categ.id,
             }
         )
+        self.product_no_quant = self.env["product.product"].create(
+            {
+                "name": "Product no stock",
+                "type": "product",
+                "categ_id": self.product_categ.id,
+            }
+        )
         self.lot_1 = self.env["stock.production.lot"].create(
             {
                 "product_id": self.product.id,
@@ -123,24 +130,34 @@ class TestStockInventory(TransactionCase):
         with self.assertRaises(ValidationError), self.cr.savepoint():
             inventory2.action_state_to_in_progress()
         self.assertEqual(inventory1.state, "in_progress")
-        self.assertEqual(
-            inventory1.stock_quant_ids.ids,
-            [self.quant1.id, self.quant3.id, self.quant4.id],
-        )
+        for quant_id in [self.quant1.id, self.quant3.id, self.quant4.id]:
+            self.assertIn(
+                quant_id,
+                inventory1.stock_quant_ids.ids,
+            )
         inventory1.action_state_to_draft()
         self.assertEqual(inventory1.stock_quant_ids.ids, [])
         inventory1.action_state_to_in_progress()
+        zero_quants_count = len(
+            inventory1.stock_quant_ids.filtered(lambda l: l.quantity == 0.0)
+        )
         self.assertEqual(inventory1.count_stock_moves, 0)
-        self.assertEqual(inventory1.count_stock_quants, 3)
-        self.assertEqual(inventory1.count_stock_quants_string, "3 / 3")
+        self.assertEqual(inventory1.count_stock_quants, 3 + zero_quants_count)
+        self.assertEqual(
+            inventory1.count_stock_quants_string,
+            "%s / %s" % (str(3 + zero_quants_count), str(3 + zero_quants_count)),
+        )
         inventory1.action_view_inventory_adjustment()
         self.quant1.inventory_quantity = 92
         self.quant1.action_apply_inventory()
         inventory1._compute_count_stock_quants()
         inventory1.action_view_stock_moves()
         self.assertEqual(inventory1.count_stock_moves, 1)
-        self.assertEqual(inventory1.count_stock_quants, 3)
-        self.assertEqual(inventory1.count_stock_quants_string, "2 / 3")
+        self.assertEqual(inventory1.count_stock_quants, 3 + zero_quants_count)
+        self.assertEqual(
+            inventory1.count_stock_quants_string,
+            "%s / %s" % (str(2 + zero_quants_count), str(3 + zero_quants_count)),
+        )
         self.assertEqual(inventory1.stock_move_ids.qty_done, 8)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product.id)
         self.assertEqual(inventory1.stock_move_ids.lot_id.id, self.lot_1.id)
@@ -292,23 +309,48 @@ class TestStockInventory(TransactionCase):
             }
         )
         inventory1.action_state_to_in_progress()
-        self.assertEqual(inventory1.stock_quant_ids.ids, [self.quant4.id])
+        self.assertIn(self.quant4.id, inventory1.stock_quant_ids.ids)
         inventory1.action_state_to_draft()
         self.assertEqual(inventory1.stock_quant_ids.ids, [])
         inventory1.action_state_to_in_progress()
+        zero_quants_count = len(
+            inventory1.stock_quant_ids.filtered(lambda l: l.quantity == 0.0)
+        )
         self.assertEqual(inventory1.state, "in_progress")
         self.assertEqual(inventory1.count_stock_moves, 0)
-        self.assertEqual(inventory1.count_stock_quants, 1)
-        self.assertEqual(inventory1.count_stock_quants_string, "1 / 1")
+        self.assertEqual(inventory1.count_stock_quants, 1 + zero_quants_count)
+        self.assertEqual(
+            inventory1.count_stock_quants_string,
+            "%s / %s" % (str(1 + zero_quants_count), str(1 + zero_quants_count)),
+        )
         inventory1.action_view_inventory_adjustment()
         self.quant4.inventory_quantity = 74
         self.quant4.action_apply_inventory()
         inventory1._compute_count_stock_quants()
         inventory1.action_view_stock_moves()
         self.assertEqual(inventory1.count_stock_moves, 1)
-        self.assertEqual(inventory1.count_stock_quants, 1)
-        self.assertEqual(inventory1.count_stock_quants_string, "0 / 1")
+        self.assertEqual(inventory1.count_stock_quants, 1 + zero_quants_count)
+        self.assertEqual(
+            inventory1.count_stock_quants_string,
+            "%s / %s" % (str(zero_quants_count), str(1 + zero_quants_count)),
+        )
         self.assertEqual(inventory1.stock_move_ids.qty_done, 26)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product2.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location3.id)
         inventory1.action_state_to_done()
+
+    def test_06_zero_quant_addition(self):
+        # check products wo quant are added
+        inventory6 = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_6",
+                "product_selection": "manual",
+                "location_ids": [self.location1.id],
+                "product_ids": [self.product.id, self.product_no_quant.id],
+            }
+        )
+        inventory6.action_state_to_in_progress()
+        no_quant_quantity = inventory6.stock_quant_ids.filtered(
+            lambda l: l.product_id == self.product_no_quant
+        ).quantity
+        self.assertEqual(no_quant_quantity, 0)
