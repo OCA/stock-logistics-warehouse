@@ -39,8 +39,9 @@ msgid ""
 "system won't propose anything.  You can also let the system propose for a "
 "single product / lot /... "
 msgstr ""
-"如果你做一个完整的库存，你可以选择“所有的产品”，它会用当前的库存预先填充库存。如果你只做一些产品(如周期盘点)，你可以选择“手动选择产品”，系统不会给出"
-"任何建议。您还可以让系统为单个产品/批次/… "
+"如果你做一个完整的库存，你可以选择“所有的产品”，它会用当前的库存预先填充库"
+"存。如果你只做一些产品(如周期盘点)，你可以选择“手动选择产品”，系统不会给出任"
+"何建议。您还可以让系统为单个产品/批次/… "
 
 #. module: stock_inventory_chatter
 #: selection:stock.inventory,state:0
