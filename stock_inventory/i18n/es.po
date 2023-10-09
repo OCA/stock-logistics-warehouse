@@ -141,6 +141,12 @@ msgid "Manual Selection"
 msgstr "Selección manual"
 
 #. module: stock_inventory
+#: code:addons/stock_inventory/models/stock_quant.py:0
+#, python-format
+msgid "No move lines have been created"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__one
 msgid "One Product"
 msgstr "Un producto"
@@ -218,8 +224,8 @@ msgstr "Para hacer"
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid ""
-"When 'Product Selection: Lot Serial Number' is selected you are only able to"
-" add one product."
+"When 'Product Selection: Lot Serial Number' is selected you are only able to "
+"add one product."
 msgstr ""
 "Si selecciona 'Selección de productos: Número de serie del lote' sólo puede "
 "añadir un producto."
@@ -238,7 +244,8 @@ msgstr ""
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid "You can only delete inventory adjustments groups in draft state."
-msgstr "Sólo puede eliminar grupos de ajustes de inventario en estado borrador."
+msgstr ""
+"Sólo puede eliminar grupos de ajustes de inventario en estado borrador."
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
