@@ -69,9 +69,11 @@ msgstr "Strategia di rimozione predefinita"
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__removal_strategy
 msgid ""
-"Defines if and how goods are taken from locations.Default: take the first ones with the configured Removal Strategy(FIFO, FEFO, ...).\n"
+"Defines if and how goods are taken from locations.Default: take the first "
+"ones with the configured Removal Strategy(FIFO, FEFO, ...).\n"
 "Empty Bins: take goods from a location only if the bin is empty afterwards.\n"
-"Full Packaging: take goods from a location only if the location quantity matches a packaging quantity (do not open boxes)."
+"Full Packaging: take goods from a location only if the location quantity "
+"matches a packaging quantity (do not open boxes)."
 msgstr ""
 "Definisce se e come la merce è prelevata dalle ubicazioni. Predefinito: "
 "preleva seguendo la strategia di rimozione configurata (FIFO, FEFO, ...).\n"
@@ -177,8 +179,8 @@ msgid ""
 "When empty, any packaging can be removed."
 msgstr ""
 "Imballaggio opzionale quando si usa \"Imballaggio intero\".\n"
-"Solo le quantità che corrispondono ad uno degli imballaggi verranno rimosse."
-"\n"
+"Solo le quantità che corrispondono ad uno degli imballaggi verranno "
+"rimosse.\n"
 "Se vuoto, qualsiasi imballaggio può essere rimosso."
 
 #. module: stock_reserve_rule
@@ -214,8 +216,7 @@ msgstr "Regole di rimozione"
 #. module: stock_reserve_rule
 #: code:addons/stock_reserve_rule/models/stock_reserve_rule.py:0
 #, python-format
-msgid ""
-"Removal rule '{}' location has to be a child of the rule location '{}'."
+msgid "Removal rule '{}' location has to be a child of the rule location '{}'."
 msgstr ""
 "L'ubicazione della regola di rimozione '{}' deve essere figlia "
 "dell'ubicazione della regola '{}'."
