@@ -27,6 +27,11 @@ msgid ""
 msgstr ""
 
 #. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__allow_pull_list_server_action
+msgid "Allow pull list server action"
+msgstr ""
+
+#. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
 msgid "Apply Filter"
 msgstr ""
@@ -45,6 +50,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
 msgid "Cancel"
+msgstr ""
+
+#. module: stock_pull_list
+#: code:addons/stock_pull_list/models/stock_picking.py:0
+#, python-format
+msgid "Choose transfers with same source location"
 msgstr ""
 
 #. module: stock_pull_list
@@ -80,6 +91,8 @@ msgid "Destination Location"
 msgstr ""
 
 #. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__display_name
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__display_name
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__display_name
 msgid "Display Name"
@@ -102,6 +115,7 @@ msgstr ""
 
 #. module: stock_pull_list
 #: model:ir.actions.act_window,name:stock_pull_list.action_stock_pull_list_wizard
+#: model:ir.actions.server,name:stock_pull_list.stock_generate_pull_list
 #: model:ir.ui.menu,name:stock_pull_list.menu_stock_pull_list_wizard
 msgid "Generate Pull List"
 msgstr ""
@@ -118,6 +132,8 @@ msgid "Group By Rule"
 msgstr ""
 
 #. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__id
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__id
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__id
 msgid "ID"
@@ -129,6 +145,8 @@ msgid "Incoming Qty"
 msgstr ""
 
 #. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type____last_update
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard____last_update
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line____last_update
 msgid "Last Modified on"
@@ -170,6 +188,11 @@ msgstr ""
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
 msgid "Needs"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model,name:stock_pull_list.model_stock_picking_type
+msgid "Picking Type"
 msgstr ""
 
 #. module: stock_pull_list
@@ -250,6 +273,11 @@ msgstr ""
 msgid ""
 "The pull list checks the stock situation at the given location and calculates\n"
 "                the shortfall quantities (quantity needed to cover all needs) for products."
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model,name:stock_pull_list.model_stock_picking
+msgid "Transfer"
 msgstr ""
 
 #. module: stock_pull_list
