@@ -32,6 +32,11 @@ msgid "Categories"
 msgstr "分类"
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr ""
@@ -41,6 +46,11 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Filtered Products"
 msgstr "已选定产品"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__id
+msgid "ID"
+msgstr "ID"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -63,6 +73,11 @@ msgstr "库存"
 #, fuzzy
 msgid "Inventory of"
 msgstr "库存"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory____last_update
+msgid "Last Modified on"
+msgstr "最后修改时间"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
@@ -90,20 +105,11 @@ msgstr "已选定批次"
 #~ msgid "Created on"
 #~ msgstr "创建时间"
 
-#~ msgid "Display Name"
-#~ msgstr "显示名称"
-
 #~ msgid "Empty list"
 #~ msgstr "空列表"
 
-#~ msgid "ID"
-#~ msgstr "ID"
-
 #~ msgid "Inventory Line Empty"
 #~ msgstr "库存行空"
-
-#~ msgid "Last Modified on"
-#~ msgstr "最后修改时间"
 
 #~ msgid "Last Updated by"
 #~ msgstr "最后更新者"

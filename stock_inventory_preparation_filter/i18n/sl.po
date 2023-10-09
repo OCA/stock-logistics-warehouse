@@ -31,6 +31,11 @@ msgid "Categories"
 msgstr "Kategorije"
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr ""
@@ -40,6 +45,11 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Filtered Products"
 msgstr "Izbrani proizvodi"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__id
+msgid "ID"
+msgstr "ID"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -62,6 +72,11 @@ msgstr "Inventar"
 #, fuzzy
 msgid "Inventory of"
 msgstr "Inventar"
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory____last_update
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
@@ -89,22 +104,13 @@ msgstr "Izbrani loti"
 #~ msgid "Created on"
 #~ msgstr "Ustvarjeno"
 
-#~ msgid "Display Name"
-#~ msgstr "Prikazni naziv"
-
 #~ msgid "Empty list"
 #~ msgstr "Prazen seznam"
-
-#~ msgid "ID"
-#~ msgstr "ID"
 
 #, fuzzy
 #~| msgid "Inventory"
 #~ msgid "Inventory Line Empty"
 #~ msgstr "Inventar"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Zadnjič spremenjeno"
 
 #~ msgid "Last Updated by"
 #~ msgstr "Zadnji posodobil"

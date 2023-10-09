@@ -30,6 +30,11 @@ msgid "Categories"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "ชื่อที่ใช้แสดง"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr ""
@@ -39,6 +44,11 @@ msgstr ""
 #, python-format
 msgid "Filtered Products"
 msgstr ""
+
+#. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__id
+msgid "ID"
+msgstr "รหัส"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
@@ -62,6 +72,11 @@ msgid "Inventory of"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory____last_update
+msgid "Last Modified on"
+msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
+
+#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
 msgid "Lots"
 msgstr ""
@@ -83,15 +98,6 @@ msgstr ""
 
 #~ msgid "Created on"
 #~ msgstr "สร้างเมื่อ"
-
-#~ msgid "Display Name"
-#~ msgstr "ชื่อที่ใช้แสดง"
-
-#~ msgid "ID"
-#~ msgstr "รหัส"
-
-#~ msgid "Last Modified on"
-#~ msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
 
 #~ msgid "Last Updated by"
 #~ msgstr "อัพเดทครั้งสุดท้ายโดย"
