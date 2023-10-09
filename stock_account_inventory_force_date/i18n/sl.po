@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_account_inventory_force_date
+# 	* stock_account_inventory_force_date
 #
 msgid ""
 msgstr ""
@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_account_inventory_force_date
@@ -39,14 +39,17 @@ msgstr "Vsili datum zaklepanja inventure"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model.fields,help:stock_account_inventory_force_date.field_stock_inventory__force_inventory_date
-msgid "Force the inventory moves and accounting entries to a given datein the past."
+msgid ""
+"Force the inventory moves and accounting entries to a given datein the past."
 msgstr ""
 "Vsili premike inventarja in knjigovodske vnose na določen datum v "
 "preteklosti."
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model.fields,help:stock_account_inventory_force_date.field_res_company__force_inventory_lock_date
-msgid "If set, it won't be possible for any user to force an inventory,adjustment using a date earlier than this one."
+msgid ""
+"If set, it won't be possible for any user to force an inventory,adjustment "
+"using a date earlier than this one."
 msgstr ""
 "Če nastavljeno, ne bo več mogoče vsiliti popravka inventarja pred tem "
 "datumom za nobenega uporabnika."
@@ -77,7 +80,9 @@ msgstr "Opcija %s ni na voljo pri vsiljevanju datuma inventure."
 #. module: stock_account_inventory_force_date
 #: code:addons/stock_account_inventory_force_date/models/stock_move.py:35
 #, python-format
-msgid "Please define a Standard Cost Change Offsetting Account in the company settings."
+msgid ""
+"Please define a Standard Cost Change Offsetting Account in the company "
+"settings."
 msgstr ""
 "Določite konto spremembe standardne cene oz. razlik v ceni v nastavitvah "
 "družbe."
