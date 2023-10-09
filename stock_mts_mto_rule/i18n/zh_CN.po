@@ -41,7 +41,9 @@ msgid ""
 "If this new route is selected on product form view, a purchase order will be "
 "created only if the virtual stock is less than 0 else, the product will be "
 "taken from stocks"
-msgstr "如果在产品表单视图中选择了此新路线，则仅当虚拟库存小于0时才创建采购订单，否则将从库存中提取产品"
+msgstr ""
+"如果在产品表单视图中选择了此新路线，则仅当虚拟库存小于0时才创建采购订单，否则"
+"将从库存中提取产品"
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/models/stock_rule.py:28
