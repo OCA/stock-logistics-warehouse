@@ -40,8 +40,7 @@ msgstr "Ajustes de Configuración"
 #. module: stock_request_separate_picking
 #: model_terms:ir.ui.view,arch_db:stock_request_separate_picking.res_config_settings_view_form
 msgid ""
-"If checked, separate one picking per one Stock Request / Stock Request "
-"Order."
+"If checked, separate one picking per one Stock Request / Stock Request Order."
 msgstr ""
 "Si está marcada, separa una recogida por una Solicitud de Existencias / "
 "Pedido de Existencias."
