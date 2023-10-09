@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_account_internal_move
+# 	* stock_account_internal_move
 #
 msgid ""
 msgstr ""
@@ -40,5 +40,7 @@ msgstr "您不能在非内部位置强制执行会计分录。"
 #. module: stock_account_internal_move
 #: code:addons/stock_account_internal_move/models/stock_location.py:37
 #, python-format
-msgid "You must provide a valuation in/out account in order to force accounting entries."
+msgid ""
+"You must provide a valuation in/out account in order to force accounting "
+"entries."
 msgstr "您必须提供一个估价输入/输出帐户，以便强制会计分录。"
