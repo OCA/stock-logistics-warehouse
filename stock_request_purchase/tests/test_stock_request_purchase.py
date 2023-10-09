@@ -217,6 +217,10 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.assertEqual(stock_request.purchase_ids.state, "draft")
         stock_request.action_cancel()
         self.assertEqual(stock_request.purchase_ids.state, "cancel")
+        self.assertIn(
+            self.env.ref("mail.mail_activity_data_warning"),
+            stock_request.activity_ids.mapped("activity_type_id"),
+        )
 
     def test_view_actions(self):
         expected_date = fields.Datetime.now()
@@ -263,3 +267,8 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.assertEqual(action["domain"], "[]")
         self.assertEqual("views" in action.keys(), True)
         self.assertEqual(action["res_id"], order.purchase_ids[0].id)
+        order.action_cancel()
+        self.assertIn(
+            self.env.ref("mail.mail_activity_data_warning"),
+            order.activity_ids.mapped("activity_type_id"),
+        )
