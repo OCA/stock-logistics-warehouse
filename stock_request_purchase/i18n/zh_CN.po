@@ -17,10 +17,43 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order__display_name
+#: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order_line__display_name
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__display_name
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__display_name
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_rule__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order__id
+#: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order_line__id
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__id
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__id
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_rule__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order____last_update
+#: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order_line____last_update
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request____last_update
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order____last_update
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_rule____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_request_purchase
 #: model_terms:ir.ui.view,arch_db:stock_request_purchase.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request_purchase.view_stock_request_form
 msgid "Purchase"
 msgstr "采购"
+
+#. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_count
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_count
+msgid "Purchase Count"
+msgstr ""
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_purchase_order
@@ -43,12 +76,6 @@ msgstr "采购订单行"
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_ids
 msgid "Purchase Orders"
 msgstr "采购订单"
-
-#. module: stock_request_purchase
-#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_count
-#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_count
-msgid "Purchase count"
-msgstr "采购数量"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_stock_request
@@ -92,3 +119,6 @@ msgstr "您无法将采购订单行链接到属于另一家公司的库存请求
 msgid ""
 "You have linked to a purchase order line that belongs to another company."
 msgstr "您已链接到属于另一家公司的采购订单行。"
+
+#~ msgid "Purchase count"
+#~ msgstr "采购数量"
