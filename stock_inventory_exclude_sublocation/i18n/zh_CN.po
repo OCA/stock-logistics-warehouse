@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_inventory_exclude_sublocation
+# 	* stock_inventory_exclude_sublocation
 #
 msgid ""
 msgstr ""
