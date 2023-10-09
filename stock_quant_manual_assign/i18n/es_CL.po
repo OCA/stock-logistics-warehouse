@@ -59,21 +59,18 @@ msgstr "Creado en"
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__display_name
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__display_name
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__id
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__id
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__id
 msgid "ID"
 msgstr "ID (identificación)"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants____last_update
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines____last_update
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
@@ -151,6 +148,7 @@ msgid "Quant"
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
 msgid "Quantity is higher than the needed one"
@@ -184,6 +182,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
 msgid ""
