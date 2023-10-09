@@ -172,8 +172,8 @@ msgstr ""
 "Això restarà les quantitats dels pressupostos de venda de les quantitats "
 "disponibles per a prometre.\n"
 "Això instala el mòdul stock_available_sale.\n"
-"Si els mòduls sale i sale_delivery_date no estan instal·lats, els instal·"
-"larà també"
+"Si els mòduls sale i sale_delivery_date no estan instal·lats, els "
+"instal·larà també"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__stock_available_mrp_based_on
