@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2016-07-03 20:56+0000\n"
 "PO-Revision-Date: 2019-08-30 14:23+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
-"OCA-stock-logistics-warehouse-9-0/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-"
+"logistics-warehouse-9-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,6 +60,13 @@ msgid "Config Settings"
 msgstr "Definições de configuração"
 
 #. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_product_product__display_name
+#: model:ir.model.fields,field_description:stock_available.field_product_template__display_name
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_sale
 msgid "Exclude goods already in sale quotations"
 msgstr "Excluir mercadorias já em cotações de venda"
@@ -70,9 +77,23 @@ msgid "Exclude incoming goods"
 msgstr "Excluir entrada de mercadorias"
 
 #. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_product_product__id
+#: model:ir.model.fields,field_description:stock_available.field_product_template__id
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_mrp
 msgid "Include the production potential"
 msgstr "Incluir o potencial de produção"
+
+#. module: stock_available
+#: model:ir.model.fields,field_description:stock_available.field_product_product____last_update
+#: model:ir.model.fields,field_description:stock_available.field_product_template____last_update
+#: model:ir.model.fields,field_description:stock_available.field_res_config_settings____last_update
+msgid "Last Modified on"
+msgstr ""
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product__potential_qty
