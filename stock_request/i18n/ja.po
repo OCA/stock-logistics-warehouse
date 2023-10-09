@@ -18,8 +18,8 @@ msgstr ""
 #: code:addons/stock_request/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"<li><b>%(product_name)s</b>: Transferred quantity "
-"%(product_qty)s%(product_uom)s</li>"
+"<li><b>%(product_name)s</b>: Transferred quantity %(product_qty)s"
+"%(product_uom)s</li>"
 msgstr ""
 
 #. module: stock_request
@@ -663,8 +663,8 @@ msgstr ""
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request_allocation__requested_product_uom_qty
 msgid ""
-"Quantity of the stock request allocated to the stock move, in the UoM of the"
-" Stock Request"
+"Quantity of the stock request allocated to the stock move, in the UoM of the "
+"Stock Request"
 msgstr ""
 
 #. module: stock_request
@@ -690,8 +690,7 @@ msgstr ""
 #. module: stock_request
 #: code:addons/stock_request/models/stock_move_line.py:0
 #, python-format
-msgid ""
-"Receipt confirmation %(picking_name)s for your Request %(request_name)s"
+msgid "Receipt confirmation %(picking_name)s for your Request %(request_name)s"
 msgstr ""
 
 #. module: stock_request
@@ -949,8 +948,7 @@ msgstr ""
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_order.py:0
 #, python-format
-msgid ""
-"The company of the stock request must match with that of the warehouse."
+msgid "The company of the stock request must match with that of the warehouse."
 msgstr ""
 
 #. module: stock_request
@@ -1089,16 +1087,16 @@ msgstr ""
 #: code:addons/stock_request/models/stock_warehouse.py:0
 #, python-format
 msgid ""
-"You cannot change the company of the warehouse, as it is already assigned to"
-" stock request orders that belong to another company."
+"You cannot change the company of the warehouse, as it is already assigned to "
+"stock request orders that belong to another company."
 msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_warehouse.py:0
 #, python-format
 msgid ""
-"You cannot change the company of the warehouse, as it is already assigned to"
-" stock requests that belong to another company."
+"You cannot change the company of the warehouse, as it is already assigned to "
+"stock requests that belong to another company."
 msgstr ""
 
 #. module: stock_request

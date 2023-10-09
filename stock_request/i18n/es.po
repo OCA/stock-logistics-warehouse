@@ -27,8 +27,8 @@ msgid ""
 "<li><b>%(product_name)s</b>: Transferred quantity %(product_qty)s"
 "%(product_uom)s</li>"
 msgstr ""
-"<li><b>%(product_name)s</b>: Cantidad transferida "
-"%(product_qty)s%(product_uom)s</li>"
+"<li><b>%(product_name)s</b>: Cantidad transferida %(product_qty)s"
+"%(product_uom)s</li>"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_needaction
@@ -987,8 +987,9 @@ msgid ""
 "The following requested items from Stock Request %(request_name)s have now "
 "been received in %(location_name)s using Picking %(picking_name)s:"
 msgstr ""
-"Los siguientes elementos solicitados de la solicitud de stock %(request_name)"
-"s ahora se han recibido en %(location_name)s usando Picking %(picking_name)s:"
+"Los siguientes elementos solicitados de la solicitud de stock "
+"%(request_name)s ahora se han recibido en %(location_name)s usando Picking "
+"%(picking_name)s:"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:0
